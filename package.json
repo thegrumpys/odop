@@ -4,7 +4,11 @@
   "description": "Piston-Cylinder problem - Web Interface",
   "main": "app.js",
   "scripts": {
-    "test": "./app.js < test/in.txt > test/actual_out.txt",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "test_app": "./app.js < test/in.txt > test/actual_out.txt",
     "coverage": "istanbul cover app.js < test/in.txt > test/actual_out.txt",
     "showcoverage": "open coverage/lcov-report/index.html"
   },
@@ -17,15 +21,20 @@
   "bugs": {
     "url": "https://github.com/thegrumpys/pcyl-web/issues"
   },
-  "homepage": "https://github.com/thegrumpys/pcyl-web#readme",
+  "homepage": "https://github.com/",
   "devDependencies": {
+    "react-scripts": "1.1.4",
     "chai": "^4.1.2",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "sinon": "^6.0.0"
   },
   "dependencies": {
+    "compression": "^1.7.2",
     "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "sprintf-js": "^1.1.1"
   }
 }
