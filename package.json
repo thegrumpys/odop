@@ -1,0 +1,30 @@
+{
+  "name": "pcyl-web",
+  "version": "0.1.0",
+  "description": "Piston-Cylinder problem - Web Interface",
+  "main": "app.js",
+  "scripts": {
+    "test": "./app.js < test/in.txt > test/actual_out.txt",
+    "coverage": "istanbul cover app.js < test/in.txt > test/actual_out.txt",
+    "showcoverage": "open coverage/lcov-report/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thegrumpys/pcyl-web.git"
+  },
+  "author": "thegrumpys",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thegrumpys/pcyl-web/issues"
+  },
+  "homepage": "https://github.com/thegrumpys/pcyl-web#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "sinon": "^6.0.0"
+  },
+  "dependencies": {
+    "sprintf-js": "^1.1.1"
+  }
+}

@@ -59,3 +59,14 @@ typings/
 
 # next.js build output
 .next
+
+# eclipse files
+.project
+.settings/
+
+# test output file
+test/actual_out.txt
+
+# ignore .DSN files
+*.DSN
+!STARTUP.DSN
