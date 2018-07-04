@@ -20,5 +20,5 @@ var server = createServer(app);
 
 server.listen(process.env.PORT || 5000, function(err) {
     if (err) throw err;
-    console.log('Server started');
+    console.log('Server started!');
 });
