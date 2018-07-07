@@ -30,11 +30,16 @@
     "sinon": "^6.0.0"
   },
   "dependencies": {
+    "ajv": "^6.5.2",
+    "bootstrap": "^4.1.1",
     "compression": "^1.7.2",
     "express": "^4.16.3",
+    "jquery": "^3.3.1",
     "morgan": "^1.9.0",
+    "popper.js": "^1.14.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "reactstrap": "^6.2.0",
     "sprintf-js": "^1.1.1"
   }
 }
