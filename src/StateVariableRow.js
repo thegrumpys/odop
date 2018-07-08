@@ -3,8 +3,8 @@ import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 
 export class StateVariableRow extends React.Component {
     render() {
-        var vmin = this.props.state_variable.vmin > 0.0 ? 'bg-danger align-middle' : '';
-        var vmax = this.props.state_variable.vmax > 0.0 ? 'bg-danger align-middle' : '';
+        var vmin = this.props.state_variable.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
+        var vmax = this.props.state_variable.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var fixed = this.props.state_variable.lmin === global.FIXEDSTAT ? 'checked' : '';
        return (
                 <tr>
