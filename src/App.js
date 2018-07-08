@@ -13,8 +13,9 @@ import {
     Jumbotron,
     Button
 } from 'reactstrap';
+import { DesignTable } from './DesignTable';
 
-class App extends Component {
+export class App extends Component {
     constructor(props) {
         super(props);
 
@@ -32,7 +33,7 @@ class App extends Component {
         return (
             <div>
                 <Navbar color="inverse" light expand="md">
-                    <NavbarBrand href="/">reactstrap</NavbarBrand>
+                    <NavbarBrand href="/">PCyl-Web</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
@@ -40,7 +41,7 @@ class App extends Component {
                                 <NavLink href="/components/">Components</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">Github</NavLink>
+                                <NavLink href="https://github.com/thegrumpys/pcyl-web">Github</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>
@@ -49,18 +50,8 @@ class App extends Component {
                     <Container>
                         <Row>
                             <Col>
-                                <h1>Welcome to React</h1>
-                                <p>
-                                    <Button
-                                        tag="a"
-                                        color="success"
-                                        size="large"
-                                        href="http://reactstrap.github.io"
-                                        target="_blank"
-                                    >
-                                        View Reactstrap Docs
-                                    </Button>
-                                </p>
+                                <h1>{this.props.design.name} Design - Version {this.props.design.version}</h1>
+                                <DesignTable design={this.props.design} />
                             </Col>
                         </Row>
                     </Container>
@@ -69,5 +60,3 @@ class App extends Component {
         );
     }
 }
-
-export default App;

@@ -39,7 +39,9 @@
     "popper.js": "^1.14.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
     "reactstrap": "^6.2.0",
+    "redux": "^4.0.0",
     "sprintf-js": "^1.1.1"
   }
 }
