@@ -4,6 +4,10 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { App } from './App';
 
+global.FREESTAT = 0; // free             status in lmin & lmax
+global.SETSTAT = 1; // constrained      status in lmin & lmax
+global.FIXEDSTAT = 2; // fixed            status in lmin & lmax
+
 const DESIGN = {
         "constants": [
             {

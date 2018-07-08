@@ -10,8 +10,7 @@ import {
     Container,
     Row,
     Col,
-    Jumbotron,
-    Button
+    Jumbotron
 } from 'reactstrap';
 import { DesignTable } from './DesignTable';
 
