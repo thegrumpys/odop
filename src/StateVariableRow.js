@@ -9,7 +9,7 @@ export class StateVariableRow extends React.Component {
        return (
                 <tr>
                 <td className="align-middle">{this.props.state_variable.name}</td>
-                <td className="text-right align-middle"><Input type="number" value={this.props.state_variable.value} /></td>
+                <td className="pull-right align-middle"><Input type="number" value={this.props.state_variable.value} /></td>
                 <td className="text-nowrap align-middle">{this.props.state_variable.units}</td>
 
                 <td className="text-center align-middle">
@@ -23,7 +23,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input type="number" value={this.props.state_variable.cmin} />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmin} />
                 </InputGroup>
                 </td>
                 
@@ -34,7 +34,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for maximum value" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input type="number" value={this.props.state_variable.cmax} />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmax} />
                 </InputGroup>
                 </td>
                 </tr>

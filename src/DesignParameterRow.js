@@ -9,7 +9,7 @@ export class DesignParameterRow extends React.Component {
         return (
                 <tr>
                 <td className="align-middle">{this.props.design_parameter.name}</td>
-                <td className="text-right align-middle"><Input type="number" value={this.props.design_parameter.value} /></td>
+                <td className="pull-right align-middle"><Input type="number" value={this.props.design_parameter.value} /></td>
                 <td className="text-nowrap align-middle">{this.props.design_parameter.units}</td>
 
                 <td className="text-center align-middle">
@@ -23,7 +23,7 @@ export class DesignParameterRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input type="number" value={this.props.design_parameter.cmin} />
+                <Input className="pull-right" type="number" value={this.props.design_parameter.cmin} />
                 </InputGroup>
                 </td>
                 
@@ -34,7 +34,7 @@ export class DesignParameterRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for maximum value" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input type="number" value={this.props.design_parameter.cmax} />
+                <Input className="pull-right" type="number" value={this.props.design_parameter.cmax} />
                 </InputGroup>
                 </td>
                 </tr>
