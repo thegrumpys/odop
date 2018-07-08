@@ -5,7 +5,7 @@ export class DesignParameterRow extends React.Component {
     render() {
         var vmin = this.props.design_parameter.vmin > 0.0 ? 'bg-danger align-middle' : '';
         var vmax = this.props.design_parameter.vmax > 0.0 ? 'bg-danger align-middle' : '';
-        var fixed = this.props.design_parameter.lmin == global.FIXEDSTAT ? 'checked' : '';
+        var fixed = this.props.design_parameter.lmin === global.FIXEDSTAT ? 'checked' : '';
         return (
                 <tr>
                 <td className="align-middle">{this.props.design_parameter.name}</td>
