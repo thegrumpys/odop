@@ -12,6 +12,7 @@ if (!dev) {
     app.use(compression());
     app.use(morgan('common'));
 
+    console.log('public url: ', process.env.PUBLIC_URL)
     var staticPath = path.resolve(__dirname, 'build');
     console.log('production staticPath='+staticPath);
     app.use(express.static(staticPath));

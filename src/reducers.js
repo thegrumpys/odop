@@ -1,18 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { App } from './App';
-import { createStore } from 'redux';
-import { pcylWebApp } from './reducers.js';
-import { changeDesignParameter } from './actionCreators.js';
-import { Provider } from 'react-redux'
+import { CHANGE_DESIGN_PARAMETER } from './actionTypes.js';
 
-global.FREESTAT = 0; // free             status in lmin & lmax
-global.SETSTAT = 1; // constrained      status in lmin & lmax
-global.FIXEDSTAT = 2; // fixed            status in lmin & lmax
-
-const DESIGN = {
+export const initialState = {
         "constants": [
             {
                 "name": "PI",
@@ -166,27 +154,21 @@ const DESIGN = {
         "version": "1.2"
     };
 
-const store = createStore(pcylWebApp);
-
-// Log the initial state
-console.log(store.getState());
-
-// Every time the state changes, log it
-// Note that subscribe() returns a function for unregistering the listener
-const unsubscribe = store.subscribe(() =>
-    console.log(store.getState())
-);
-
-// Dispatch some actions
-store.dispatch(changeDesignParameter('radius', 1.0));
-store.dispatch(changeDesignParameter('thickness', 2.0));
-
-// Stop listening to state updates
-unsubscribe();
-
-ReactDOM.render(
-        <Provider store={store}>
-        <App design={DESIGN} />
-        </Provider>, 
-        document.getElementById('root')
-        );
+export function pcylWebApp(state = initialState, action) {
+    switch (action.type) {
+    case CHANGE_DESIGN_PARAMETER:
+        return Object.assign({}, state, {
+            // lookup name, copy entry and set value
+            design_parameters: state.design_parameters.map((design_parameter, index) => {
+                if (design_parameter.name === action.payload.name) {
+                    return Object.assign({}, design_parameter, {
+                        value: action.payload.value
+                    });
+                }
+                return design_parameter;
+            })
+        });
+    default:
+        return state
+    }
+}

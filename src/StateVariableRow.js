@@ -5,16 +5,14 @@ export class StateVariableRow extends React.Component {
     render() {
         var vmin = this.props.state_variable.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var vmax = this.props.state_variable.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
-        var fixed = this.props.state_variable.lmin === global.FIXEDSTAT ? 'checked' : '';
+        var fixed = this.props.state_variable.lmin === global.FIXEDSTAT ? <Input type="checkbox" aria-label="Checkbox for fixed value" checked/> : <Input type="checkbox" aria-label="Checkbox for fixed value"/>;
        return (
                 <tr>
                 <td className="align-middle">{this.props.state_variable.name}</td>
                 <td className="pull-right align-middle"><Input type="number" value={this.props.state_variable.value} /></td>
                 <td className="text-nowrap align-middle">{this.props.state_variable.units}</td>
 
-                <td className="text-center align-middle">
-                <Input type="checkbox" aria-label="Checkbox for fixed value" checked={fixed}/>
-                </td>
+                <td className="text-center align-middle">{fixed}</td>
 
                 <td className={vmin}>
                 <InputGroup>

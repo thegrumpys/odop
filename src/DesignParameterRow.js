@@ -5,16 +5,14 @@ export class DesignParameterRow extends React.Component {
     render() {
         var vmin = this.props.design_parameter.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var vmax = this.props.design_parameter.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
-        var fixed = this.props.design_parameter.lmin === global.FIXEDSTAT ? 'checked' : '';
+        var fixed = this.props.design_parameter.lmin === global.FIXEDSTAT ? <Input type="checkbox" aria-label="Checkbox for fixed value" checked/> : <Input type="checkbox" aria-label="Checkbox for fixed value"/>;
         return (
                 <tr>
                 <td className="align-middle">{this.props.design_parameter.name}</td>
                 <td className="pull-right align-middle"><Input type="number" value={this.props.design_parameter.value} /></td>
                 <td className="text-nowrap align-middle">{this.props.design_parameter.units}</td>
 
-                <td className="text-center align-middle">
-                <Input type="checkbox" aria-label="Checkbox for fixed value" checked={fixed}/>
-                </td>
+                <td className="text-center align-middle">{fixed}</td>
 
                 <td className={vmin}>
                 <InputGroup>
