@@ -17,7 +17,7 @@ import { DesignTable } from './DesignTable';
 export class App extends Component {
     constructor(props) {
         super(props);
-
+        console.log("In App constructor");
         this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false
