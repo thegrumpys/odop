@@ -178,8 +178,8 @@ const unsubscribe = store.subscribe(() =>
 );
 
 // Dispatch some actions
-store.dispatch(changeDesignParameter('radius', 1.0));
-store.dispatch(changeDesignParameter('thickness', 2.0));
+store.dispatch(changeDesignParameter('RADIUS', 1.0));
+store.dispatch(changeDesignParameter('THICKNESS', 2.0));
 
 // Stop listening to state updates
 unsubscribe();

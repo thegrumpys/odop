@@ -12,7 +12,7 @@ if (!dev) {
     app.use(compression());
     app.use(morgan('common'));
 
-    console.log('public url: ', process.env.PUBLIC_URL)
+    console.log('production public url: ', process.env.PUBLIC_URL)
     var staticPath = path.resolve(__dirname, 'build');
     console.log('production staticPath='+staticPath);
     app.use(express.static(staticPath));
@@ -23,7 +23,7 @@ if (!dev) {
 } else {
     app.use(morgan('dev'));
 
-    console.log('public url: ', process.env.PUBLIC_URL)
+    console.log('development public url: ', process.env.PUBLIC_URL)
     var staticPath = path.join(__dirname, '/');
     console.log('development staticPath='+staticPath);
     app.use(express.static(staticPath));
