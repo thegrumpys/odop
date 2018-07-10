@@ -4,6 +4,7 @@ import { DesignParametersSection } from './DesignParametersSection.js';
 import { StateVariablesSection } from './StateVariablesSection.js';
 
 export class DesignTable extends React.Component {
+    
     render() {
         return (
                 <Table>
@@ -24,4 +25,5 @@ export class DesignTable extends React.Component {
                 </Table>
         );
     }
+    
 }

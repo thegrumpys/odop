@@ -2,6 +2,7 @@ import React from 'react';
 import { StateVariableRow } from './StateVariableRow.js';
 
 export class StateVariablesSection extends React.Component {
+    
     render() {
         var rows = [];
         rows.push(
@@ -14,4 +15,5 @@ export class StateVariablesSection extends React.Component {
         });
         return rows;
     }
+    
 }

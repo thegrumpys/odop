@@ -2,6 +2,7 @@ import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 
 export class DesignParameterRow extends React.Component {
+    
     render() {
         var vmin = this.props.design_parameter.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var vmax = this.props.design_parameter.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
@@ -38,4 +39,5 @@ export class DesignParameterRow extends React.Component {
                 </tr>
         );
     }
+    
 }

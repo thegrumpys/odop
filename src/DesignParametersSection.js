@@ -2,6 +2,7 @@ import React from 'react';
 import { DesignParameterRow } from './DesignParameterRow.js';
 
 export class DesignParametersSection extends React.Component {
+    
     render() {
         var rows = [];
         rows.push(
@@ -14,4 +15,5 @@ export class DesignParametersSection extends React.Component {
         });
         return rows;
     }
+    
 }

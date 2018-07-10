@@ -15,6 +15,7 @@ import {
 import { DesignTable } from './DesignTable';
 
 export class App extends Component {
+    
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -22,11 +23,13 @@ export class App extends Component {
             isOpen: false
         };
     }
+    
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
+    
     render() {
         return (
             <div>
@@ -57,4 +60,5 @@ export class App extends Component {
             </div>
         );
     }
+    
 }
