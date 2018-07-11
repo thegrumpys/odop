@@ -1,9 +1,21 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { connect } from 'react-redux';
+import { changeDesignParameter } from './actionCreators';
 
 export class DesignParameterRow extends React.Component {
     
+    constructor(props) {
+        super(props);
+        this.onChangeDesignParameterValue = this.onChangeDesignParameterValue.bind(this);
+    }
+    
+    onChangeDesignParameterValue(event) {
+        this.props.changeDesignParameter(this.props.design_parameter.name, parseFloat(event.target.value));
+    }
+    
     render() {
+        console.log('In DesignParameterRow.render '+this.props.design_parameter.name+'='+this.props.design_parameter.value);
         var vmin = this.props.design_parameter.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var vmax = this.props.design_parameter.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var fixed;
@@ -63,7 +75,7 @@ export class DesignParameterRow extends React.Component {
         return (
                 <tr key={this.props.design_parameter.name}>
                   <td className="align-middle">{this.props.design_parameter.name}</td>
-                  <td className="pull-right align-middle"><Input type="number" defaultValue={this.props.design_parameter.value} /></td>
+                  <td className="pull-right align-middle"><Input type="number" defaultValue={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} /></td>
                   <td className="text-nowrap align-middle">{this.props.design_parameter.units}</td>
                   <td className="text-center align-middle">{fixed}</td>
                   <td className={vmin}>{cmin}</td>
@@ -73,3 +85,9 @@ export class DesignParameterRow extends React.Component {
     }
     
 }
+
+const mapDispatchToProps = {
+        changeDesignParameter: changeDesignParameter
+};
+
+export default connect(null, mapDispatchToProps)(DesignParameterRow);

@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { pcylWebApp } from './reducers.js';
+import { CHANGE_DESIGN_PARAMETER } from './actionTypes.js';
+import { changeStateVariable } from './actionCreators';
 
 global.FREESTAT = 0; // free             status in lmin & lmax
 global.SETSTAT = 1; // constrained      status in lmin & lmax
@@ -165,10 +167,67 @@ export const initialState = {
         "version": "1.2"
     };
 
+//function loggerMiddleware({ getState }) {
+//    return next => action => {
+//      console.log('will dispatch', action)
+//      
+//      // Call the next dispatch method in the middleware chain.
+//      const returnValue = next(action)
+//      
+//      console.log('state after dispatch', getState())
+//      
+//      // This will likely be the action itself, unless
+//      // a middleware further in chain changed it.
+//      return returnValue
+//    }
+//  }
+
+const equationsMiddleware = store => next => action => {
+    const returnValue = next(action);
+    var design;
+    var pi = 0;
+    var pressure = 0;
+    var radius = 1;
+    var thickness = 2;
+    var force = 0;
+    var area = 1;
+    var stress = 2;
+    if (action.type === CHANGE_DESIGN_PARAMETER) {
+        // Compute and dispatch state variable changes
+        /* eslint-disable no-fallthrough */
+        switch (action.payload.name) {
+        case "RADIUS":
+            design = store.getState();
+            var a = design.constants[pi].value * design.design_parameters[radius].value * design.design_parameters[radius].value;
+//            console.log("a="+a);
+            store.dispatch(changeStateVariable("AREA", a));
+        case "PRESSURE":
+            design = store.getState();
+            var f = design.design_parameters[pressure].value * design.state_variables[area].value;
+//            console.log("f="+f);
+            store.dispatch(changeStateVariable("FORCE", f));
+        case "THICKNESS":
+            design = store.getState();
+            var t = (design.design_parameters[pressure].value * design.design_parameters[radius].value) / (2.0 * design.design_parameters[thickness].value);
+//            console.log("t="+t);
+            store.dispatch(changeStateVariable("STRESS", t));
+        default:
+        }
+        /* eslint-enable */
+    }
+    return returnValue;
+}
+
+/* eslint-disable no-underscore-dangle */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+/* eslint-enable */
+
+const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/equationsMiddleware));
+
 const store = createStore(
         pcylWebApp,
         initialState,
-        window.devToolsExtension && window.devToolsExtension()
+        middleware
         );
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

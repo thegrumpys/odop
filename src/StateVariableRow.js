@@ -4,6 +4,7 @@ import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 export class StateVariableRow extends React.Component {
     
     render() {
+        console.log('In StateVariableRow.render '+this.props.state_variable.name+'='+this.props.state_variable.value);
         var vmin = this.props.state_variable.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var vmax = this.props.state_variable.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var fixed;
