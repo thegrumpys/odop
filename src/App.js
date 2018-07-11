@@ -13,6 +13,7 @@ import {
     Jumbotron
 } from 'reactstrap';
 import { DesignTable } from './DesignTable';
+import { connect } from 'react-redux';
 
 export class App extends Component {
     
@@ -51,8 +52,8 @@ export class App extends Component {
                     <Container>
                         <Row>
                             <Col>
-                                <h1>{this.props.design.name} Design - Version {this.props.design.version}</h1>
-                                <DesignTable design={this.props.design} />
+                                <h1>{this.props.name} Design - Version {this.props.version}</h1>
+                                <DesignTable />
                             </Col>
                         </Row>
                     </Container>
@@ -62,3 +63,10 @@ export class App extends Component {
     }
     
 }
+
+const mapStateToProps = state => ({
+    name: state.name,
+    version: state.version,
+});
+
+export default connect(mapStateToProps)(App);

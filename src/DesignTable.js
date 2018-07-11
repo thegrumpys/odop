@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'reactstrap';
-import { DesignParametersSection } from './DesignParametersSection.js';
-import { StateVariablesSection } from './StateVariablesSection.js';
+import DesignParametersSection from './DesignParametersSection.js';
+import StateVariablesSection from './StateVariablesSection.js';
 
 export class DesignTable extends React.Component {
     
@@ -19,8 +19,8 @@ export class DesignTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <DesignParametersSection design_parameters={this.props.design.design_parameters} />
-                        <StateVariablesSection state_variables={this.props.design.state_variables} />
+                        <DesignParametersSection />
+                        <StateVariablesSection />
                     </tbody>
                 </Table>
         );

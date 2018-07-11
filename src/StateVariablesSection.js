@@ -1,5 +1,6 @@
 import React from 'react';
 import { StateVariableRow } from './StateVariableRow.js';
+import { connect } from 'react-redux';
 
 export class StateVariablesSection extends React.Component {
     
@@ -17,3 +18,10 @@ export class StateVariablesSection extends React.Component {
     }
     
 }
+
+
+const mapStateToProps = state => ({
+    state_variables: state.state_variables,
+});
+
+export default connect(mapStateToProps)(StateVariablesSection);

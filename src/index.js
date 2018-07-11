@@ -2,17 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { App } from './App';
+import App from './App';
 import { createStore } from 'redux';
-import { pcylWebApp } from './reducers.js';
-import { changeDesignParameter } from './actionCreators.js';
 import { Provider } from 'react-redux'
+import { pcylWebApp } from './reducers.js';
 
 global.FREESTAT = 0; // free             status in lmin & lmax
 global.SETSTAT = 1; // constrained      status in lmin & lmax
 global.FIXEDSTAT = 2; // fixed            status in lmin & lmax
 
-const DESIGN = {
+export const initialState = {
         "constants": [
             {
                 "name": "PI",
@@ -166,27 +165,10 @@ const DESIGN = {
         "version": "1.2"
     };
 
-const store = createStore(pcylWebApp);
-
-// Log the initial state
-console.log(store.getState());
-
-// Every time the state changes, log it
-// Note that subscribe() returns a function for unregistering the listener
-const unsubscribe = store.subscribe(() =>
-    console.log(store.getState())
-);
-
-// Dispatch some actions
-store.dispatch(changeDesignParameter('RADIUS', 1.0));
-store.dispatch(changeDesignParameter('THICKNESS', 2.0));
-
-// Stop listening to state updates
-unsubscribe();
-
-ReactDOM.render(
-        <Provider store={store}>
-        <App design={DESIGN} />
-        </Provider>, 
-        document.getElementById('root')
+const store = createStore(
+        pcylWebApp,
+        initialState,
+        window.devToolsExtension && window.devToolsExtension()
         );
+
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

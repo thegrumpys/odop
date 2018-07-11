@@ -1,5 +1,6 @@
 import React from 'react';
 import { DesignParameterRow } from './DesignParameterRow.js';
+import { connect } from 'react-redux';
 
 export class DesignParametersSection extends React.Component {
     
@@ -17,3 +18,9 @@ export class DesignParametersSection extends React.Component {
     }
     
 }
+
+const mapStateToProps = state => ({
+    design_parameters: state.design_parameters,
+});
+
+export default connect(mapStateToProps)(DesignParametersSection);
