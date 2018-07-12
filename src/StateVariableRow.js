@@ -2,9 +2,8 @@ import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 
 export class StateVariableRow extends React.Component {
-    
+
     render() {
-        console.log('In StateVariableRow.render '+this.props.state_variable.name+'='+this.props.state_variable.value);
         var vmin = this.props.state_variable.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var vmax = this.props.state_variable.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var fixed;
@@ -22,7 +21,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" defaultValue={this.props.state_variable.cmin} />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmin} />
               </InputGroup>
             );
         } else {
@@ -33,7 +32,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" defaultValue={this.props.state_variable.cmin} disabled />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmin} disabled />
               </InputGroup>
             );
         }
@@ -46,7 +45,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" defaultValue={this.props.state_variable.cmax} />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmax} />
               </InputGroup>
             );
         } else {
@@ -57,14 +56,14 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" defaultValue={this.props.state_variable.cmax} disabled />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmax} disabled />
               </InputGroup>
             );
         }
         return (
                 <tr key={this.props.state_variable.name}>
                   <td className="align-middle">{this.props.state_variable.name}</td>
-                  <td className="pull-right align-middle"><Input type="number" defaultValue={this.props.state_variable.value} disabled /></td>
+                  <td className="pull-right align-middle"><span>{this.props.state_variable.value}</span></td>
                   <td className="text-nowrap align-middle">{this.props.state_variable.units}</td>
                   <td className="text-center align-middle">{fixed}</td>
                   <td className={vmin}>{cmin}</td>

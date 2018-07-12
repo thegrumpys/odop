@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 export class DesignParametersSection extends React.Component {
     
     render() {
-        console.log('In DesignParametersSection.render');
         var rows = [];
         rows.push(
                 <tr key="Design Parameters">

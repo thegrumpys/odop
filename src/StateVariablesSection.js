@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 export class StateVariablesSection extends React.Component {
     
     render() {
-        console.log('In StateVariablesSection.render');
         var rows = [];
         rows.push(
                 <tr key="State Variables">

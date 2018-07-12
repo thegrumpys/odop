@@ -1,8 +1,8 @@
 import { CHANGE_DESIGN_PARAMETER, CHANGE_STATE_VARIABLE } from './actionTypes.js';
 
 export function pcylWebApp(state, action) {
-    console.log('In pcylWebApp');
-    console.log(action);
+//    console.log('In pcylWebApp');
+//    console.log(action);
     switch (action.type) {
     case CHANGE_DESIGN_PARAMETER:
         return Object.assign({}, state, {
