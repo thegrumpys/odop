@@ -5,8 +5,6 @@ import {
     NavbarToggler,
     NavbarBrand,
     Nav,
-    NavItem,
-    NavLink,
     Container,
     Row,
     Col,
