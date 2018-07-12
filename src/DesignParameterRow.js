@@ -2,6 +2,7 @@ import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeDesignParameter } from './actionCreators';
+import { FIXEDSTAT, SETSTAT } from './globals';
 
 export class DesignParameterRow extends React.Component {
     
@@ -18,13 +19,13 @@ export class DesignParameterRow extends React.Component {
         var vmin = this.props.design_parameter.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var vmax = this.props.design_parameter.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var fixed;
-        if (this.props.design_parameter.lmin === global.FIXEDSTAT) {
+        if (this.props.design_parameter.lmin === FIXEDSTAT) {
             fixed = (<Input type="checkbox" aria-label="Checkbox for fixed value" checked />);
         } else {
             fixed = (<Input type="checkbox" aria-label="Checkbox for fixed value" />);
         }
         var cmin;
-        if (this.props.design_parameter.lmin === global.SETSTAT) {
+        if (this.props.design_parameter.lmin === SETSTAT) {
             cmin = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
@@ -48,7 +49,7 @@ export class DesignParameterRow extends React.Component {
             );
         }
         var cmax;
-        if (this.props.design_parameter.lmax === global.SETSTAT) {
+        if (this.props.design_parameter.lmax === SETSTAT) {
             cmax = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">

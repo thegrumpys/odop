@@ -6,12 +6,8 @@ import App from './App';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { pcylWebApp } from './reducers.js';
-import { CHANGE_DESIGN_PARAMETER } from './actionTypes.js';
-import { changeStateVariable } from './actionCreators';
-
-global.FREESTAT = 0; // free             status in lmin & lmax
-global.SETSTAT = 1; // constrained      status in lmin & lmax
-global.FIXEDSTAT = 2; // fixed            status in lmin & lmax
+import { equationsMiddleware } from './equationsMiddleware';
+import { noop } from './actionCreators';
 
 export const initialState = {
         "constants": [
@@ -123,48 +119,13 @@ export const initialState = {
         ],
         "labels": [
             {
-                "name": "CONTACT_PERSON",
-                "value": ""
-            },
-            {
-                "name": "COMPANY_NAME",
-                "value": ""
-            },
-            {
-                "name": "STREET",
-                "value": ""
-            },
-            {
-                "name": "CITY",
-                "value": ""
-            },
-            {
-                "name": "STATE_&_ZIP",
-                "value": ""
-            },
-            {
-                "name": "PHONE",
-                "value": ""
-            },
-            {
-                "name": "DATE",
-                "value": ""
-            },
-            {
-                "name": "PART_NUMBER",
-                "value": ""
-            },
-            {
-                "name": "FINISH",
-                "value": ""
-            },
-            {
                 "name": "COMMENT",
                 "value": ""
             }
         ],
         "name": "Piston-Cylinder",
-        "version": "1.2"
+        "version": "1.2",
+        "objective_value": 0.5621
     };
 
 //function loggerMiddleware({ getState }) {
@@ -182,44 +143,6 @@ export const initialState = {
 //    }
 //  }
 
-const equationsMiddleware = store => next => action => {
-    const returnValue = next(action);
-    var design;
-    /* eslint-disable no-unused-vars */
-    var pi = 0;
-    var pressure = 0;
-    var radius = 1;
-    var thickness = 2;
-    var force = 0;
-    var area = 1;
-    var stress = 2;
-    /* eslint-enable */
-    if (action.type === CHANGE_DESIGN_PARAMETER) {
-        // Compute and dispatch state variable changes
-        /* eslint-disable no-fallthrough */
-        switch (action.payload.name) {
-        case "RADIUS":
-            design = store.getState();
-            var a = design.constants[pi].value * design.design_parameters[radius].value * design.design_parameters[radius].value;
-//            console.log("a="+a);
-            store.dispatch(changeStateVariable("AREA", a));
-        case "PRESSURE":
-            design = store.getState();
-            var f = design.design_parameters[pressure].value * design.state_variables[area].value;
-//            console.log("f="+f);
-            store.dispatch(changeStateVariable("FORCE", f));
-        case "THICKNESS":
-            design = store.getState();
-            var t = (design.design_parameters[pressure].value * design.design_parameters[radius].value) / (2.0 * design.design_parameters[thickness].value);
-//            console.log("t="+t);
-            store.dispatch(changeStateVariable("STRESS", t));
-        default:
-        }
-        /* eslint-enable */
-    }
-    return returnValue;
-}
-
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
@@ -231,5 +154,7 @@ const store = createStore(
         initialState,
         middleware
         );
+
+store.dispatch(noop());
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

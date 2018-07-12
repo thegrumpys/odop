@@ -14,7 +14,7 @@ import {
     DropdownMenu,
     DropdownItem
 } from 'reactstrap';
-import { DesignTable } from './DesignTable';
+import DesignTable from './DesignTable';
 import { connect } from 'react-redux';
 
 export class App extends Component {

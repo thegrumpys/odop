@@ -1,9 +1,11 @@
-import { CHANGE_DESIGN_PARAMETER, CHANGE_STATE_VARIABLE } from './actionTypes.js';
+import { NOOP, CHANGE_DESIGN_PARAMETER, CHANGE_STATE_VARIABLE, CHANGE_OBJECTIVE_VALUE } from './actionTypes.js';
 
 export function pcylWebApp(state, action) {
 //    console.log('In pcylWebApp');
 //    console.log(action);
     switch (action.type) {
+    case NOOP:
+        return state;
     case CHANGE_DESIGN_PARAMETER:
         return Object.assign({}, state, {
             // lookup name, copy entry and set value
@@ -27,6 +29,10 @@ export function pcylWebApp(state, action) {
                 }
                 return state_variable;
             })
+        });
+    case CHANGE_OBJECTIVE_VALUE:
+        return Object.assign({}, state, {
+            objective_value: action.payload.value
         });
     default:
         return state
