@@ -185,6 +185,7 @@ export const initialState = {
 const equationsMiddleware = store => next => action => {
     const returnValue = next(action);
     var design;
+    /* eslint-disable no-unused-vars */
     var pi = 0;
     var pressure = 0;
     var radius = 1;
@@ -192,6 +193,7 @@ const equationsMiddleware = store => next => action => {
     var force = 0;
     var area = 1;
     var stress = 2;
+    /* eslint-enable */
     if (action.type === CHANGE_DESIGN_PARAMETER) {
         // Compute and dispatch state variable changes
         /* eslint-disable no-fallthrough */
