@@ -137,8 +137,9 @@ const mapStateToProps = state => ({
     version: state.version,
     comment: state.labels.reduce(function(output, label) {
         if (label.name === 'COMMENT') {
-            return output + label.value;
+            output += label.value;
         }
+        return output;
     },'')
 });
 
