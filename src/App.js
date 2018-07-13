@@ -49,31 +49,42 @@ export class App extends Component {
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                     <DropdownItem>
-                                       Option 1
+                                        Open
                                     </DropdownItem>
                                     <DropdownItem>
-                                        Option 2
+                                        Save
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        Save As
                                     </DropdownItem>
                                     <DropdownItem divider />
                                     <DropdownItem>
-                                        Reset
+                                        Preferences
                                     </DropdownItem>
                                </DropdownMenu>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav>
-                                    Edit
+                                    Action
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                     <DropdownItem>
-                                       Option 1
+                                        Execute
                                     </DropdownItem>
                                     <DropdownItem>
-                                        Option 2
+                                        Search
                                     </DropdownItem>
-                                    <DropdownItem divider />
                                     <DropdownItem>
-                                        Reset
+                                        Seek
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        Select Size
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        Select Catalog
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        Trade
                                     </DropdownItem>
                                </DropdownMenu>
                             </UncontrolledDropdown>
@@ -83,14 +94,19 @@ export class App extends Component {
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                     <DropdownItem>
-                                       Option 1
+                                        Define Classes
                                     </DropdownItem>
                                     <DropdownItem>
-                                        Option 2
+                                        Display Classes
                                     </DropdownItem>
-                                    <DropdownItem divider />
                                     <DropdownItem>
-                                        Reset
+                                        Static Quantities
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        Violations
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        Report
                                     </DropdownItem>
                                </DropdownMenu>
                             </UncontrolledDropdown>
@@ -100,14 +116,19 @@ export class App extends Component {
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                     <DropdownItem>
-                                       Option 1
+                                        Context Help
                                     </DropdownItem>
                                     <DropdownItem>
-                                        Option 2
+                                        Help Index
                                     </DropdownItem>
-                                    <DropdownItem divider />
                                     <DropdownItem>
-                                        Reset
+                                        Tutorial
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        Tutorial
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        About
                                     </DropdownItem>
                                </DropdownMenu>
                             </UncontrolledDropdown>
