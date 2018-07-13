@@ -5,8 +5,8 @@ import { FIXEDSTAT, SETSTAT } from './globals';
 export class StateVariableRow extends React.Component {
 
     render() {
-        var cmin_class = this.props.state_variable.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
-        var cmax_class = this.props.state_variable.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
+        var cmin_class = (this.props.state_variable.lmin === SETSTAT && this.props.state_variable.vmin > 0.0) ? 'bg-danger align-middle' : 'align-middle';
+        var cmax_class = (this.props.state_variable.lmax === SETSTAT && this.props.state_variable.vmax > 0.0) ? 'bg-danger align-middle' : 'align-middle';
         var fixed;
         if (this.props.state_variable.lmin === FIXEDSTAT) {
             fixed = (
@@ -51,6 +51,8 @@ export class StateVariableRow extends React.Component {
                 <Input className="pull-right" type="number" value={this.props.state_variable.cmin} />
               </InputGroup>
             );
+        } else if (this.props.state_variable.lmin === FIXEDSTAT) {
+            cmin = <div/>;
         } else {
             cmin = (
               <InputGroup>
@@ -75,6 +77,8 @@ export class StateVariableRow extends React.Component {
                 <Input className="pull-right" type="number" value={this.props.state_variable.cmax} />
               </InputGroup>
             );
+        } else if (this.props.state_variable.lmax === FIXEDSTAT) {
+            cmax = <div />;
         } else {
             cmax = (
               <InputGroup>

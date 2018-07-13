@@ -54,6 +54,8 @@ export class DesignParameterRow extends React.Component {
                 <Input className="pull-right" type="number" value={this.props.design_parameter.cmin} />
               </InputGroup>
             );
+        } else if (this.props.design_parameter.lmin === FIXEDSTAT) {
+            cmin = <div/>;
         } else {
             cmin = (
               <InputGroup>
@@ -78,6 +80,8 @@ export class DesignParameterRow extends React.Component {
                 <Input className="pull-right" type="number" value={this.props.design_parameter.cmax} />
               </InputGroup>
             );
+        } else if (this.props.design_parameter.lmax === FIXEDSTAT) {
+            cmax = <div />;
         } else {
             cmax = (
               <InputGroup>
