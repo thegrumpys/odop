@@ -8,7 +8,7 @@ export class DesignParametersSection extends React.Component {
         var rows = [];
         rows.push(
                 <tr key="Design Parameters">
-                    <th colSpan="8">Design Parameters</th>
+                    <th colSpan="8">Independent Variables</th>
                 </tr>
                 );
         this.props.design_parameters.forEach((design_parameter) => {
