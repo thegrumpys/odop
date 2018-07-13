@@ -91,13 +91,13 @@ export class StateVariableRow extends React.Component {
         if (this.props.state_variable.lmin === SETSTAT) {
             vmin = (this.props.state_variable.vmin*100.0).toFixed(1) + '%';
         } else {
-            vmin == '';
+            vmin = '';
         }
         var vmax;
         if (this.props.state_variable.lmax === SETSTAT) {
             vmax = (this.props.state_variable.vmax*100.0).toFixed(1) + '%';
         } else {
-            vmax == '';
+            vmax = '';
         }
         return (
                 <tr key={this.props.state_variable.name}>

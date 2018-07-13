@@ -94,13 +94,13 @@ export class DesignParameterRow extends React.Component {
         if (this.props.design_parameter.lmin === SETSTAT) {
             vmin = (this.props.design_parameter.vmin*100.0).toFixed(1) + '%';
         } else {
-            vmin == '';
+            vmin = '';
         }
         var vmax;
         if (this.props.design_parameter.lmax === SETSTAT) {
             vmax = (this.props.design_parameter.vmax*100.0).toFixed(1) + '%';
         } else {
-            vmax == '';
+            vmax = '';
         }
         return (
                 <tr key={this.props.design_parameter.name}>
