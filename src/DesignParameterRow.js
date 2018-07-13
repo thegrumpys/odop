@@ -20,9 +20,27 @@ export class DesignParameterRow extends React.Component {
         var vmax = this.props.design_parameter.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var fixed;
         if (this.props.design_parameter.lmin === FIXEDSTAT) {
-            fixed = (<Input type="checkbox" aria-label="Checkbox for fixed value" checked />);
+            fixed = (
+              <InputGroup>
+                <Input className="pull-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
+                <InputGroupAddon addonType="append">
+                  <InputGroupText>
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked />
+                  </InputGroupText>
+                </InputGroupAddon>
+              </InputGroup>
+            );
         } else {
-            fixed = (<Input type="checkbox" aria-label="Checkbox for fixed value" />);
+            fixed = (
+              <InputGroup>
+                <Input className="pull-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
+                <InputGroupAddon addonType="append">
+                  <InputGroupText>
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" />
+                  </InputGroupText>
+                </InputGroupAddon>
+              </InputGroup>
+            );
         }
         var cmin;
         if (this.props.design_parameter.lmin === SETSTAT) {
@@ -75,11 +93,10 @@ export class DesignParameterRow extends React.Component {
         return (
                 <tr key={this.props.design_parameter.name}>
                   <td className="align-middle">{this.props.design_parameter.name}</td>
-                  <td className="pull-right align-middle"><Input type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} /></td>
+                  <td className="align-middle" colSpan="2">{fixed}</td>
                   <td className="text-nowrap align-middle">{this.props.design_parameter.units}</td>
-                  <td className="text-center align-middle">{fixed}</td>
-                  <td className={vmin}>{cmin}</td>
-                  <td className={vmax}>{cmax}</td>
+                  <td className={vmin} colSpan="2">{cmin}</td>
+                  <td className={vmax} colSpan="2">{cmax}</td>
                 </tr>
         );
     }

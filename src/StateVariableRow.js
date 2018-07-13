@@ -9,9 +9,35 @@ export class StateVariableRow extends React.Component {
         var vmax = this.props.state_variable.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var fixed;
         if (this.props.state_variable.lmin === FIXEDSTAT) {
-            fixed = (<Input type="checkbox" aria-label="Checkbox for fixed value" checked />);
+            fixed = (
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <span className="pull-right">{this.props.state_variable.value}</span>
+                  </InputGroupText>
+                </InputGroupAddon>
+                <InputGroupAddon addonType="append">
+                  <InputGroupText>
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked />
+                  </InputGroupText>
+                </InputGroupAddon>
+              </InputGroup>
+            );
         } else {
-            fixed = (<Input type="checkbox" aria-label="Checkbox for fixed value" />);
+            fixed = (
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <span className="pull-right">{this.props.state_variable.value}</span>
+                  </InputGroupText>
+                </InputGroupAddon>
+                <InputGroupAddon addonType="append">
+                  <InputGroupText>
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" />
+                  </InputGroupText>
+                </InputGroupAddon>
+              </InputGroup>
+            );
         }
         var cmin;
         if (this.props.state_variable.lmin === SETSTAT) {
@@ -64,11 +90,10 @@ export class StateVariableRow extends React.Component {
         return (
                 <tr key={this.props.state_variable.name}>
                   <td className="align-middle">{this.props.state_variable.name}</td>
-                  <td className="pull-right align-middle"><span>{this.props.state_variable.value}</span></td>
+                  <td className="pull-right align-middle" colSpan="2">{fixed}</td>
                   <td className="text-nowrap align-middle">{this.props.state_variable.units}</td>
-                  <td className="text-center align-middle">{fixed}</td>
-                  <td className={vmin}>{cmin}</td>
-                  <td className={vmax}>{cmax}</td>
+                  <td className={vmin} colSpan="2">{cmin}</td>
+                  <td className={vmax} colSpan="2">{cmax}</td>
                 </tr>
         );
     }

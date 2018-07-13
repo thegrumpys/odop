@@ -8,7 +8,7 @@ export class StateVariablesSection extends React.Component {
         var rows = [];
         rows.push(
                 <tr key="State Variables">
-                    <th colSpan="6">State Variables</th>
+                    <th colSpan="8">State Variables</th>
                 </tr>
                 );
         this.props.state_variables.forEach((state_variable) => {

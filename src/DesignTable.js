@@ -8,16 +8,25 @@ export class DesignTable extends React.Component {
     
     render() {
         return (
-                <Table>
+                <Table responsive>
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th className="text-center">Value</th>
+                            <th className="text-center" colSpan="2">Value</th>
                             <th>Units</th>
-                            <th className="text-center">Fixed</th>
-                            <th className="text-center">Min</th>
-                            <th className="text-center">Max</th>
+                            <th className="text-center" colSpan="2">Min</th>
+                            <th className="text-center" colSpan="2">Max</th>
                         </tr>
+                        <tr>
+                          <th></th>
+                          <th className="text-left">&nbsp;</th>
+                          <th className="text-right">Fix</th>
+                          <th></th>
+                          <th className="text-left">Constrain</th>
+                          <th className="text-right">Value</th>
+                          <th className="text-left">Constrain</th>
+                          <th className="text-right">Value</th>
+                      </tr>
                     </thead>
                     <tbody>
                         <DesignParametersSection />
@@ -25,7 +34,7 @@ export class DesignTable extends React.Component {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colSpan="4"></th>
+                            <th colSpan="6"></th>
                             <th>Objective Value</th>
                             <td>{this.props.objective_value}</td>
                         </tr>
