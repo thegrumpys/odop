@@ -96,7 +96,9 @@ export class DesignParameterRow extends React.Component {
                   <td className="align-middle" colSpan="2">{fixed}</td>
                   <td className="text-nowrap align-middle">{this.props.design_parameter.units}</td>
                   <td className={vmin} colSpan="2">{cmin}</td>
+                  <td className="align-middle">{this.props.design_parameter.vmin*100.0}%</td>
                   <td className={vmax} colSpan="2">{cmax}</td>
+                  <td className="align-middle">{this.props.design_parameter.vmax*100.0}%</td>
                 </tr>
         );
     }

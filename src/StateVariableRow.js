@@ -93,7 +93,9 @@ export class StateVariableRow extends React.Component {
                   <td className="pull-right align-middle" colSpan="2">{fixed}</td>
                   <td className="text-nowrap align-middle">{this.props.state_variable.units}</td>
                   <td className={vmin} colSpan="2">{cmin}</td>
+                  <td className="align-middle">{this.props.state_variable.vmin*100.0}%</td>
                   <td className={vmax} colSpan="2">{cmax}</td>
+                  <td className="align-middle">{this.props.state_variable.vmax*100.0}%</td>
                 </tr>
         );
     }

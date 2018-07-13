@@ -125,7 +125,7 @@ export const initialState = {
         ],
         "name": "Piston-Cylinder",
         "version": "1.2",
-        "objective_value": 0.5621
+        "objective_value": 0.5605106435926049
     };
 
 //function loggerMiddleware({ getState }) {

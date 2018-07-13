@@ -1,6 +1,9 @@
 import { NOOP, CHANGE_DESIGN_PARAMETER } from './actionTypes.js';
-import { changeStateVariable, changeObjectiveValue } from './actionCreators';
-import { FREESTAT, SETSTAT, FIXEDSTAT, SOUGHT, SDIR, M_NUM, M_DEN, NSTF, VIOL_WT } from './globals';
+import { changeStateVariable, 
+    changeDesignParameterViolationMin, changeDesignParameterViolationMax,
+    changeStateVariableViolationMin, changeStateVariableViolationMax,
+    changeObjectiveValue } from './actionCreators';
+import { FREESTAT, SETSTAT, FIXEDSTAT, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT } from './globals';
 
 export const equationsMiddleware = store => next => action => {
     const returnValue = next(action);
@@ -65,61 +68,38 @@ export const equationsMiddleware = store => next => action => {
         /* Constraint Violations */
         var dp;
         var sv;
+        var vmin;
+        var vmax;
         var m_funct;
         var obj;
-        for (let i = 0; i < design.design_parameters.length; i++) {
-            dp = design.design_parameters[i];
-            dp.vmin = 0.0;
-            dp.vmax = 0.0;
-            if (dp.lmin === SETSTAT || dp.lmin < FREESTAT)
-                dp.vmin = (-dp.value + dp.cmin) / dp.smin;
-            if (dp.lmax === SETSTAT || dp.lmax < FREESTAT)
-                dp.vmax = (dp.value - dp.cmax) / dp.smax;
-        }
-        for (let i = 0; i < design.state_variables.length; i++) {
-            sv = design.state_variables[i];
-            sv.vmin = 0.0;
-            sv.vmax = 0.0;
-            if (sv.lmin === SETSTAT || sv.lmin < FREESTAT)
-                sv.vmin = (-sv.value + sv.cmin) / sv.smin;
-            if (sv.lmax === SETSTAT || sv.lmax < FREESTAT)
-                sv.vmax = (sv.value - sv.cmax) / sv.smax;
-        }
         var viol_sum = 0.0;
         for (let i = 0; i < design.design_parameters.length; i++) {
             dp = design.design_parameters[i];
-            if (dp.vmin > 0.0)
-                viol_sum = viol_sum + dp.vmin * dp.vmin;
-            if (dp.vmax > 0.0)
-                viol_sum = viol_sum + dp.vmax * dp.vmax;
+            vmin = 0.0;
+            vmax = 0.0;
+            if (dp.lmin === SETSTAT || dp.lmin < FREESTAT) {
+                vmin = (-dp.value + dp.cmin) / dp.smin;
+                store.dispatch(changeDesignParameterViolationMin(dp.name, vmin))
+            }
+            if (dp.lmax === SETSTAT || dp.lmax < FREESTAT) {
+                vmax = (dp.value - dp.cmax) / dp.smax;
+                store.dispatch(changeDesignParameterViolationMax(dp.name, vmax))
+            }
+            if (vmin > 0.0) {
+                viol_sum = viol_sum + vmin * vmin;
+            }
+            if (vmax > 0.0) {
+                viol_sum = viol_sum + vmax * vmax;
+            }
         }
         for (let i = 0; i < design.state_variables.length; i++) {
             sv = design.state_variables[i];
-            if (sv.vmin > 0.0)
-                viol_sum = viol_sum + sv.vmin * sv.vmin;
-            if (sv.vmax > 0.0)
-                viol_sum = viol_sum + sv.vmax * sv.vmax;
-        }
-        /* Merit Function */
-        if (SOUGHT === 0)
-            m_funct = 0.0;
-        else if (SOUGHT > 0) {
-            dp = design.design_parameters[SOUGHT - 1];
-            if (SDIR < 0)
-                m_funct = (dp.value - M_NUM) / M_DEN;
-            else
-                m_funct = (-dp.value + M_NUM) / M_DEN;
-        } else {
-            sv = design.state_variables[-SOUGHT - 1];
-            if (SDIR < 0)
-                m_funct = (sv.value - M_NUM) / M_DEN;
-            else
-                m_funct = (-sv.value + M_NUM) / M_DEN;
-        }
-        /* Weighting and Summation */
-        if (NSTF === 0) {
-            obj = VIOL_WT * viol_sum + m_funct;
-        } else {
+            vmin = 0.0;
+            vmax = 0.0;
+            if (sv.lmin === SETSTAT || sv.lmin < FREESTAT) {
+                vmin = (-sv.value + sv.cmin) / sv.smin;
+                store.dispatch(changeStateVariableViolationMin(sv.name, vmin))
+            } else
             /* State variable fix levels. */
             /*
              * The fix_wt's are automatically incorporated in the scaling denominators
@@ -127,22 +107,50 @@ export const equationsMiddleware = store => next => action => {
              * 
              * This version reduces penalty of large fix violations.
              */
-            for (let i = 0; i < design.state_variables.length; i++) {
-                sv = design.state_variables[i];
-                if (sv.lmin === FIXEDSTAT) {
-                    sv.vmin = (-sv.value + sv.cmin) / sv.smin;
-                    sv.vmax = -sv.vmin;
-                    if (sv.vmin > 1.0) {
-                        viol_sum = viol_sum + sv.vmin;
-                    } else if (sv.vmin < -1.0) {
-                        viol_sum = viol_sum - sv.vmin;
-                    } else {
-                        viol_sum = viol_sum + sv.vmin * sv.vmin;
-                    }
+            if (sv.lmin === FIXEDSTAT) {
+                vmin = (-sv.value + sv.cmin) / sv.smin;
+                store.dispatch(changeStateVariableViolationMin(sv.name, vmin))
+                vmax = -vmin;
+                store.dispatch(changeStateVariableViolationMax(sv.name, vmax))
+                if (vmin > 1.0) {
+                    viol_sum = viol_sum + vmin;
+                } else if (vmin < -1.0) {
+                    viol_sum = viol_sum - vmin;
+                } else {
+                    viol_sum = viol_sum + vmin * vmin;
                 }
             }
-            obj = VIOL_WT * viol_sum + m_funct;
+            if (sv.lmax === SETSTAT || sv.lmax < FREESTAT) {
+                vmax = (sv.value - sv.cmax) / sv.smax;
+                store.dispatch(changeStateVariableViolationMax(sv.name, vmax))
+            }
+            if (vmin > 0.0) {
+                viol_sum = viol_sum + vmin * vmin;
+            }
+            if (vmax > 0.0) {
+                viol_sum = viol_sum + vmax * vmax;
+            }
         }
+        /* Merit Function */
+        if (SOUGHT === 0) {
+            m_funct = 0.0;
+        } else if (SOUGHT > 0) {
+            dp = design.design_parameters[SOUGHT - 1];
+            if (SDIR < 0) {
+                m_funct = (dp.value - M_NUM) / M_DEN;
+            } else {
+                m_funct = (-dp.value + M_NUM) / M_DEN;
+            }
+        } else {
+            sv = design.state_variables[-SOUGHT - 1];
+            if (SDIR < 0) {
+                m_funct = (sv.value - M_NUM) / M_DEN;
+            } else {
+                m_funct = (-sv.value + M_NUM) / M_DEN;
+            }
+        }
+        /* Weighting and Summation */
+        obj = VIOL_WT * viol_sum + m_funct;
         store.dispatch(changeObjectiveValue(obj));
     }
     return returnValue;

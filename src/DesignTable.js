@@ -14,8 +14,8 @@ export class DesignTable extends React.Component {
                             <th>Name</th>
                             <th className="text-center" colSpan="2">Value</th>
                             <th>Units</th>
-                            <th className="text-center" colSpan="2">Min</th>
-                            <th className="text-center" colSpan="2">Max</th>
+                            <th className="text-center" colSpan="3">Min</th>
+                            <th className="text-center" colSpan="3">Max</th>
                         </tr>
                         <tr>
                           <th></th>
@@ -24,8 +24,10 @@ export class DesignTable extends React.Component {
                           <th></th>
                           <th className="text-left">Constrain</th>
                           <th className="text-right">Value</th>
+                          <th className="text-center">Violation</th>
                           <th className="text-left">Constrain</th>
                           <th className="text-right">Value</th>
+                          <th className="text-center">Violation</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -34,8 +36,8 @@ export class DesignTable extends React.Component {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colSpan="6"></th>
-                            <th>Objective Value</th>
+                            <th colSpan="7"></th>
+                            <th colSpan="2">Objective Value</th>
                             <td>{this.props.objective_value}</td>
                         </tr>
                     </tfoot>
