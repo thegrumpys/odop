@@ -119,6 +119,7 @@ export class App extends Component {
                         <Row>
                             <Col>
                                 <h1>{this.props.name} Design</h1>
+                                <h2>{this.props.comment}</h2>
                                 <DesignTable />
                                 <div className="text-center">Software Release {softwareReleaseVersion}, Design Model Version {this.props.version}</div>
                             </Col>
@@ -134,6 +135,11 @@ export class App extends Component {
 const mapStateToProps = state => ({
     name: state.name,
     version: state.version,
+    comment: state.labels.reduce(function(output, label) {
+        if (label.name === 'COMMENT') {
+            return output + label.value;
+        }
+    },'')
 });
 
 export default connect(mapStateToProps)(App);

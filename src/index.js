@@ -120,7 +120,7 @@ export const initialState = {
         "labels": [
             {
                 "name": "COMMENT",
-                "value": ""
+                "value": "PCYL Default startup file ..."
             }
         ],
         "name": "Piston-Cylinder",
