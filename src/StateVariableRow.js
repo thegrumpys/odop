@@ -48,7 +48,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.state_variable.cmin.toFixed(4)} />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmin} />
               </InputGroup>
             );
         } else {
@@ -72,7 +72,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.state_variable.cmax.toFixed(4)} />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmax} />
               </InputGroup>
             );
         } else {
