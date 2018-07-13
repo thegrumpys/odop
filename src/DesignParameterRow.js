@@ -22,7 +22,7 @@ export class DesignParameterRow extends React.Component {
         if (this.props.design_parameter.lmin === FIXEDSTAT) {
             fixed = (
               <InputGroup>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.value.toFixed(4)} onChange={this.onChangeDesignParameterValue} />
+                <Input className="pull-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked />
@@ -33,7 +33,7 @@ export class DesignParameterRow extends React.Component {
         } else {
             fixed = (
               <InputGroup>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.value.toFixed(4)} onChange={this.onChangeDesignParameterValue} />
+                <Input className="pull-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <Input addon type="checkbox" aria-label="Checkbox for fixed value" />
@@ -51,7 +51,7 @@ export class DesignParameterRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.cmin.toFixed(4)} />
+                <Input className="pull-right" type="number" value={this.props.design_parameter.cmin} />
               </InputGroup>
             );
         } else {
@@ -62,7 +62,7 @@ export class DesignParameterRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.cmin.toFixed(4)} disabled />
+                <Input className="pull-right" type="number" value={this.props.design_parameter.cmin} disabled />
               </InputGroup>
             );
         }
@@ -75,7 +75,7 @@ export class DesignParameterRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.cmax.toFixed(4)} />
+                <Input className="pull-right" type="number" value={this.props.design_parameter.cmax} />
               </InputGroup>
             );
         } else {
@@ -86,7 +86,7 @@ export class DesignParameterRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.cmax.toFixed(4)} disabled />
+                <Input className="pull-right" type="number" value={this.props.design_parameter.cmax} disabled />
               </InputGroup>
             );
         }
@@ -96,9 +96,9 @@ export class DesignParameterRow extends React.Component {
                   <td className="align-middle" colSpan="2">{fixed}</td>
                   <td className="text-nowrap align-middle">{this.props.design_parameter.units}</td>
                   <td className={vmin} colSpan="2">{cmin}</td>
-                  <td className="align-middle">{(this.props.design_parameter.vmin*100.0).toFixed(4)}%</td>
+                  <td className="align-middle">{(this.props.design_parameter.vmin*100.0).toFixed(1)}%</td>
                   <td className={vmax} colSpan="2">{cmax}</td>
-                  <td className="align-middle">{(this.props.design_parameter.vmax*100.0).toFixed(4)}%</td>
+                  <td className="align-middle">{(this.props.design_parameter.vmax*100.0).toFixed(1)}%</td>
                 </tr>
         );
     }

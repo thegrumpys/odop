@@ -48,7 +48,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.state_variable.cmin.toFixed(4)} />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmin} />
               </InputGroup>
             );
         } else {
@@ -59,7 +59,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.state_variable.cmin.toFixed(4)} disabled />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmin} disabled />
               </InputGroup>
             );
         }
@@ -72,7 +72,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.state_variable.cmax.toFixed(4)} />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmax} />
               </InputGroup>
             );
         } else {
@@ -83,7 +83,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.state_variable.cmax.toFixed(4)} disabled />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmax} disabled />
               </InputGroup>
             );
         }
@@ -93,9 +93,9 @@ export class StateVariableRow extends React.Component {
                   <td className="pull-right align-middle" colSpan="2">{fixed}</td>
                   <td className="text-nowrap align-middle">{this.props.state_variable.units}</td>
                   <td className={vmin} colSpan="2">{cmin}</td>
-                  <td className="align-middle">{(this.props.state_variable.vmin*100.0).toFixed(4)}%</td>
+                  <td className="align-middle">{(this.props.state_variable.vmin*100.0).toFixed(1)}%</td>
                   <td className={vmax} colSpan="2">{cmax}</td>
-                  <td className="align-middle">{(this.props.state_variable.vmax*100.0).toFixed(4)}%</td>
+                  <td className="align-middle">{(this.props.state_variable.vmax*100.0).toFixed(1)}%</td>
                 </tr>
         );
     }
