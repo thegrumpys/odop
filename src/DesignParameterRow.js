@@ -16,8 +16,8 @@ export class DesignParameterRow extends React.Component {
     }
     
     render() {
-        var vmin = this.props.design_parameter.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
-        var vmax = this.props.design_parameter.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
++        var cmin_class = this.props.design_parameter.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
+        var cmax_class = this.props.design_parameter.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var fixed;
         if (this.props.design_parameter.lmin === FIXEDSTAT) {
             fixed = (
@@ -62,7 +62,7 @@ export class DesignParameterRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.cmin.toFixed(4)} disabled />
+                <div/>
               </InputGroup>
             );
         }
@@ -86,19 +86,31 @@ export class DesignParameterRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.cmax.toFixed(4)} disabled />
+                <div />
               </InputGroup>
             );
+        }
+        var vmin;
+        if (this.props.design_parameter.lmin === SETSTAT) {
+            vmin = (this.props.design_parameter.vmin*100.0).toFixed(1) + '%';
+        } else {
+            vmin == '';
+        }
+        var vmax;
+        if (this.props.design_parameter.lmax === SETSTAT) {
+            vmax = (this.props.design_parameter.vmax*100.0).toFixed(1) + '%';
+        } else {
+            vmax == '';
         }
         return (
                 <tr key={this.props.design_parameter.name}>
                   <td className="align-middle">{this.props.design_parameter.name}</td>
                   <td className="align-middle" colSpan="2">{fixed}</td>
                   <td className="text-nowrap align-middle">{this.props.design_parameter.units}</td>
-                  <td className={vmin} colSpan="2">{cmin}</td>
-                  <td className="align-middle">{(this.props.design_parameter.vmin*100.0).toFixed(4)}%</td>
-                  <td className={vmax} colSpan="2">{cmax}</td>
-                  <td className="align-middle">{(this.props.design_parameter.vmax*100.0).toFixed(4)}%</td>
+                  <td className={cmin_class} colSpan="2">{cmin}</td>
+                  <td className="text-right align-middle">{vmin}</td>
+                  <td className={cmax_class} colSpan="2">{cmax}</td>
+                  <td className="text-right align-middle">{vmax}</td>
                 </tr>
         );
     }
