@@ -16,7 +16,7 @@ export class DesignParameterRow extends React.Component {
     }
     
     render() {
-+        var cmin_class = this.props.design_parameter.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
+        var cmin_class = this.props.design_parameter.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var cmax_class = this.props.design_parameter.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
         var fixed;
         if (this.props.design_parameter.lmin === FIXEDSTAT) {
