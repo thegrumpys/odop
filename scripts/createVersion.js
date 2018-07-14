@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-console.error('Entering createVersion');
-const { spawn } = require('child_process');
-const child = spawn('git', ['describe']);
-child.stdout.on('data', (chunk) => {
-    line = chunk.toString().trim();
-    console.error(line);
-    console.log('export function version() {');
-    console.log('    return "'+line+'";');
-    console.log('}');
+const { exec } = require('child_process');
+exec('git describe', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  line = stdout.toString().trim();
+  console.log('export function version() {');
+  console.log('    return "'+line+'";');
+  console.log('}');
 });
-console.error('Exiting createVersion');
