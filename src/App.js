@@ -16,7 +16,6 @@ import {
 } from 'reactstrap';
 import DesignTable from './DesignTable';
 import { connect } from 'react-redux';
-import { version } from './version';
 
 export class App extends Component {
     
@@ -35,7 +34,6 @@ export class App extends Component {
     }
     
     render() {
-        var softwareReleaseVersion = version();
         return (
             <div>
                 <Navbar color="inverse" light expand="md">
@@ -142,7 +140,7 @@ export class App extends Component {
                                 <h1>{this.props.name} Design</h1>
                                 <h2>{this.props.comment}</h2>
                                 <DesignTable />
-                                <div className="text-center">Software Release {softwareReleaseVersion}, Design Model Version {this.props.version}</div>
+                                <div className="text-center">Design Model Version {this.props.version}</div>
                             </Col>
                         </Row>
                     </Container>
