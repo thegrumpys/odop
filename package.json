@@ -10,7 +10,7 @@
     "eject": "react-scripts eject",
     "test_app": "./app.js < test/in.txt > test/actual_out.txt",
     "coverage": "istanbul cover app.js < test/in.txt > test/actual_out.txt",
-    "showcoverage": "open coverage/lcov-report/index.html",
+    "showcoverage": "open coverage/lcov-report/index.html"
   },
   "repository": {
     "type": "git",
