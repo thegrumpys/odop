@@ -1,5 +1,5 @@
 import React from 'react';
-import DesignParameterRow from './DesignParameterRow.js';
+import DesignParameterRow from './DesignParameterRow';
 import { connect } from 'react-redux';
 
 export class DesignParametersSection extends React.Component {

@@ -5,9 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
-import { pcylWebApp } from './reducers.js';
+import { pcylWebApp } from './reducers';
 import { equationsMiddleware } from './equationsMiddleware';
-import { noop } from './actionCreators';
+import { startup } from './actionCreators';
 
 export const initialState = {
         "constants": [
@@ -155,6 +155,6 @@ const store = createStore(
         middleware
         );
 
-store.dispatch(noop());
+store.dispatch(startup());
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

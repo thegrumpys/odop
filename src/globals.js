@@ -1,6 +1,5 @@
-export const FREESTAT = 0; // free             status in lmin & lmax
-export const SETSTAT = 1; // constrained      status in lmin & lmax
-export const FIXEDSTAT = 2; // fixed            status in lmin & lmax
+export const CONSTRAINED = 1; // status in lmin & lmax
+export const FIXED = 2; // status in lmin (lmax is never set)
 export const WEAPON = 1;
 export const NMERIT = 1;
 export const NSRCH = 0;

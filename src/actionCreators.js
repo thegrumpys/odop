@@ -1,19 +1,17 @@
-import { NOOP, 
-    CHANGE_DESIGN_PARAMETER, CHANGE_DESIGN_PARAMETER_VIOLATION_MIN, CHANGE_DESIGN_PARAMETER_VIOLATION_MAX, 
-    CHANGE_STATE_VARIABLE, CHANGE_STATE_VARIABLE_VIOLATION_MIN, CHANGE_STATE_VARIABLE_VIOLATION_MAX, 
-    CHANGE_OBJECTIVE_VALUE } from './actionTypes.js';
+import { STARTUP, 
+    CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_VIOLATION, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
+    CHANGE_STATE_VARIABLE_VALUE, CHANGE_STATE_VARIABLE_VIOLATION, CHANGE_STATE_VARIABLE_CONSTRAINT, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
+    CHANGE_OBJECTIVE_VALUE } from './actionTypes';
 
-export function noop() {
-//    console.log("In noop");
+export function startup() {
   return {
-      type: NOOP
+      type: STARTUP
   }
 }
 
-export function changeDesignParameter(name, value) {
-//    console.log("In changeDesignParameter name="+name+" value="+value);
+export function changeDesignParameterValue(name, value) {
     return {
-        type: CHANGE_DESIGN_PARAMETER,
+        type: CHANGE_DESIGN_PARAMETER_VALUE,
         payload: {
             name,
             value
@@ -21,32 +19,53 @@ export function changeDesignParameter(name, value) {
     }
 }
 
-export function changeDesignParameterViolationMin(name, vmin) {
-//  console.log("In changeDesignParameterViolationMin name="+name+" vmin="+vmin);
+export function changeDesignParameterViolation(name, minmax, value) {
   return {
-      type: CHANGE_DESIGN_PARAMETER_VIOLATION_MIN,
+      type: CHANGE_DESIGN_PARAMETER_VIOLATION,
       payload: {
           name,
-          vmin
+          minmax,
+          value
       }
   }
 }
 
-export function changeDesignParameterViolationMax(name, vmax) {
-//  console.log("In changeDesignParameterViolationMax name="+name+" vavmaxlue="+vmax);
-  return {
-      type: CHANGE_DESIGN_PARAMETER_VIOLATION_MAX,
-      payload: {
-          name,
-          vmax
-      }
-  }
-}
-
-export function changeStateVariable(name, value) {
-//    console.log("In changeStateVariable name="+name+" value="+value);
+export function changeDesignParameterConstraint(name, minmax, value) {
     return {
-        type: CHANGE_STATE_VARIABLE,
+        type: CHANGE_DESIGN_PARAMETER_CONSTRAINT,
+        payload: {
+            name,
+            minmax,
+            value
+        }
+    }
+  }
+
+export function setDesignParameterFlag(name, type, mask) {
+    return {
+        type: SET_DESIGN_PARAMETER_FLAG,
+        payload: {
+            name,
+            type,
+            mask
+        }
+    }
+  }
+
+export function resetDesignParameterFlag(name, type, mask) {
+    return {
+        type: RESET_DESIGN_PARAMETER_FLAG,
+        payload: {
+            name,
+            type,
+            mask
+        }
+    }
+  }
+
+export function changeStateVariableValue(name, value) {
+    return {
+        type: CHANGE_STATE_VARIABLE_VALUE,
         payload: {
             name,
             value
@@ -54,30 +73,51 @@ export function changeStateVariable(name, value) {
     }
 }
 
-export function changeStateVariableViolationMin(name, vmin) {
-//  console.log("In changeStateVariableViolationMin name="+name+" vmin="+vmin);
+export function changeStateVariableViolation(name, minmax, value) {
   return {
-      type: CHANGE_STATE_VARIABLE_VIOLATION_MIN,
+      type: CHANGE_STATE_VARIABLE_VIOLATION,
       payload: {
           name,
-          vmin
+          minmax,
+          value
       }
   }
 }
 
-export function changeStateVariableViolationMax(name, vmax) {
-//  console.log("In changeStateVariableViolationMax name="+name+" vmax="+vmax);
-  return {
-      type: CHANGE_STATE_VARIABLE_VIOLATION_MAX,
-      payload: {
-          name,
-          vmax
-      }
+export function changeStateVariableConstraint(name, minmax, value) {
+    return {
+        type: CHANGE_STATE_VARIABLE_CONSTRAINT,
+        payload: {
+            name,
+            minmax,
+            value
+        }
+    }
   }
-}
+
+export function setStateVariableFlag(name, minmax, mask) {
+    return {
+        type: SET_STATE_VARIABLE_FLAG,
+        payload: {
+            name,
+            minmax,
+            mask
+        }
+    }
+  }
+
+export function resetStateVariableFlag(name, minmax, mask) {
+    return {
+        type: RESET_STATE_VARIABLE_FLAG,
+        payload: {
+            name,
+            minmax,
+            mask
+        }
+    }
+  }
 
 export function changeObjectiveValue(value) {
-//    console.log("In changeObjectiveValue value="+value);
     return {
         type: CHANGE_OBJECTIVE_VALUE,
         payload: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StateVariableRow } from './StateVariableRow.js';
+import { StateVariableRow } from './StateVariableRow';
 import { connect } from 'react-redux';
 
 export class StateVariablesSection extends React.Component {

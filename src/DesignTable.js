@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'reactstrap';
-import DesignParametersSection from './DesignParametersSection.js';
-import StateVariablesSection from './StateVariablesSection.js';
+import DesignParametersSection from './DesignParametersSection';
+import StateVariablesSection from './StateVariablesSection';
 import { connect } from 'react-redux';
 
 export class DesignTable extends React.Component {

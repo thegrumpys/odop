@@ -1,13 +1,13 @@
-import { NOOP, CHANGE_DESIGN_PARAMETER } from './actionTypes.js';
-import { changeStateVariable, 
-    changeDesignParameterViolationMin, changeDesignParameterViolationMax,
-    changeStateVariableViolationMin, changeStateVariableViolationMax,
+import { STARTUP, CHANGE_DESIGN_PARAMETER_VALUE, MIN, MAX } from './actionTypes';
+import { 
+    changeDesignParameterViolation, changeDesignParameterConstraint, 
+    changeStateVariableValue, changeStateVariableViolation, changeStateVariableConstraint, 
     changeObjectiveValue } from './actionCreators';
-import { FREESTAT, SETSTAT, FIXEDSTAT, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT } from './globals';
+import { CONSTRAINED, FIXED, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT } from './globals';
 
 export const equationsMiddleware = store => next => action => {
     const returnValue = next(action);
-    var design;
+    var design = store.getState();
     var changed = false;
     
     /* eslint-disable no-unused-vars */
@@ -20,29 +20,35 @@ export const equationsMiddleware = store => next => action => {
     var stress = 2;
     /* eslint-enable */
     switch (action.type) {
-    case NOOP:
+    case STARTUP:
         changed = true;
+        // Set smin/smax by changing constraints to their current values
+        design.design_parameters.forEach((design_parameter) => {
+            store.dispatch(changeDesignParameterConstraint(design_parameter.name, MIN, design_parameter.cmin));
+            store.dispatch(changeDesignParameterConstraint(design_parameter.name, MAX, design_parameter.cmax));
+        });
+        design.state_variables.forEach((state_variable) => {
+            store.dispatch(changeStateVariableConstraint(state_variable.name, MIN, state_variable.cmin));
+            store.dispatch(changeStateVariableConstraint(state_variable.name, MAX, state_variable.cmax));
+        });
         break;
-    case CHANGE_DESIGN_PARAMETER:
-        // Compute and dispatch state variable changes
+    case CHANGE_DESIGN_PARAMETER_VALUE:
         changed = true;
+        // Compute and dispatch state variable changes
         /* eslint-disable no-fallthrough */
         switch (action.payload.name) {
         case "RADIUS":
-            design = store.getState();
             var a = design.constants[pi].value * design.design_parameters[radius].value * design.design_parameters[radius].value;
 //            console.log("a="+a);
-            store.dispatch(changeStateVariable("AREA", a));
+            store.dispatch(changeStateVariableValue("AREA", a));
         case "PRESSURE":
-            design = store.getState();
             var f = design.design_parameters[pressure].value * design.state_variables[area].value;
 //            console.log("f="+f);
-            store.dispatch(changeStateVariable("FORCE", f));
+            store.dispatch(changeStateVariableValue("FORCE", f));
         case "THICKNESS":
-            design = store.getState();
             var t = (design.design_parameters[pressure].value * design.design_parameters[radius].value) / (2.0 * design.design_parameters[thickness].value);
 //            console.log("t="+t);
-            store.dispatch(changeStateVariable("STRESS", t));
+            store.dispatch(changeStateVariableValue("STRESS", t));
         default:
             // Common calculations
         }
@@ -53,7 +59,6 @@ export const equationsMiddleware = store => next => action => {
     }
     
     if (changed) {
-        design = store.getState();
         // TODO: code the following for release 0.6
         /** ***************************************************************** */
         /*
@@ -77,13 +82,13 @@ export const equationsMiddleware = store => next => action => {
             dp = design.design_parameters[i];
             vmin = 0.0;
             vmax = 0.0;
-            if (dp.lmin === SETSTAT || dp.lmin < FREESTAT) {
+            if (dp.lmin & CONSTRAINED ) { // TODO: || dp.lmin < FREESTAT) {
                 vmin = (-dp.value + dp.cmin) / dp.smin;
-                store.dispatch(changeDesignParameterViolationMin(dp.name, vmin))
+                store.dispatch(changeDesignParameterViolation(dp.name, MIN, vmin))
             }
-            if (dp.lmax === SETSTAT || dp.lmax < FREESTAT) {
+            if (dp.lmax & CONSTRAINED ) { // TODO: || dp.lmax < FREESTAT) {
                 vmax = (dp.value - dp.cmax) / dp.smax;
-                store.dispatch(changeDesignParameterViolationMax(dp.name, vmax))
+                store.dispatch(changeDesignParameterViolation(dp.name, MAX, vmax))
             }
             if (vmin > 0.0) {
                 viol_sum = viol_sum + vmin * vmin;
@@ -96,9 +101,9 @@ export const equationsMiddleware = store => next => action => {
             sv = design.state_variables[i];
             vmin = 0.0;
             vmax = 0.0;
-            if (sv.lmin === SETSTAT || sv.lmin < FREESTAT) {
+            if (sv.lmin & CONSTRAINED ) { // TODO: || sv.lmin < FREESTAT) {
                 vmin = (-sv.value + sv.cmin) / sv.smin;
-                store.dispatch(changeStateVariableViolationMin(sv.name, vmin))
+                store.dispatch(changeStateVariableViolation(sv.name, MIN, vmin))
             } else
             /* State variable fix levels. */
             /*
@@ -107,11 +112,11 @@ export const equationsMiddleware = store => next => action => {
              * 
              * This version reduces penalty of large fix violations.
              */
-            if (sv.lmin === FIXEDSTAT) {
+            if (sv.lmin & FIXED) {
                 vmin = (-sv.value + sv.cmin) / sv.smin;
-                store.dispatch(changeStateVariableViolationMin(sv.name, vmin))
+                store.dispatch(changeStateVariableViolation(sv.name, MIN, vmin))
                 vmax = -vmin;
-                store.dispatch(changeStateVariableViolationMax(sv.name, vmax))
+                store.dispatch(changeStateVariableViolation(sv.name, MAX, vmax))
                 if (vmin > 1.0) {
                     viol_sum = viol_sum + vmin;
                 } else if (vmin < -1.0) {
@@ -120,9 +125,9 @@ export const equationsMiddleware = store => next => action => {
                     viol_sum = viol_sum + vmin * vmin;
                 }
             }
-            if (sv.lmax === SETSTAT || sv.lmax < FREESTAT) {
+            if (sv.lmax & CONSTRAINED ) { // TODO: || sv.lmax < FREESTAT) {
                 vmax = (sv.value - sv.cmax) / sv.smax;
-                store.dispatch(changeStateVariableViolationMax(sv.name, vmax))
+                store.dispatch(changeStateVariableViolation(sv.name, MAX, vmax))
             }
             if (vmin > 0.0) {
                 viol_sum = viol_sum + vmin * vmin;

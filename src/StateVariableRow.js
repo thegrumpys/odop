@@ -1,14 +1,14 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
-import { FIXEDSTAT, SETSTAT } from './globals';
+import { FIXED, CONSTRAINED } from './globals';
 
 export class StateVariableRow extends React.Component {
 
     render() {
-        var cmin_class = (this.props.state_variable.lmin === SETSTAT && this.props.state_variable.vmin > 0.0) ? 'bg-danger align-middle' : 'align-middle';
-        var cmax_class = (this.props.state_variable.lmax === SETSTAT && this.props.state_variable.vmax > 0.0) ? 'bg-danger align-middle' : 'align-middle';
+        var cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'bg-danger align-middle' : 'align-middle';
+        var cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'bg-danger align-middle' : 'align-middle';
         var fixed;
-        if (this.props.state_variable.lmin === FIXEDSTAT) {
+        if (this.props.state_variable.lmin & FIXED) {
             fixed = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
@@ -40,7 +40,7 @@ export class StateVariableRow extends React.Component {
             );
         }
         var cmin;
-        if (this.props.state_variable.lmin === SETSTAT) {
+        if (this.props.state_variable.lmin & CONSTRAINED) {
             cmin = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
@@ -51,7 +51,7 @@ export class StateVariableRow extends React.Component {
                 <Input className="pull-right" type="number" value={this.props.state_variable.cmin} />
               </InputGroup>
             );
-        } else if (this.props.state_variable.lmin === FIXEDSTAT) {
+        } else if (this.props.state_variable.lmin & FIXED) {
             cmin = <div/>;
         } else {
             cmin = (
@@ -66,7 +66,7 @@ export class StateVariableRow extends React.Component {
             );
         }
         var cmax;
-        if (this.props.state_variable.lmax === SETSTAT) {
+        if (this.props.state_variable.lmax & CONSTRAINED) {
             cmax = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
@@ -77,7 +77,7 @@ export class StateVariableRow extends React.Component {
                 <Input className="pull-right" type="number" value={this.props.state_variable.cmax} />
               </InputGroup>
             );
-        } else if (this.props.state_variable.lmax === FIXEDSTAT) {
+        } else if (this.props.state_variable.lmin & FIXED) {
             cmax = <div />;
         } else {
             cmax = (
@@ -92,13 +92,13 @@ export class StateVariableRow extends React.Component {
             );
         }
         var vmin;
-        if (this.props.state_variable.lmin === SETSTAT) {
+        if (this.props.state_variable.lmin & CONSTRAINED) {
             vmin = (this.props.state_variable.vmin*100.0).toFixed(1) + '%';
         } else {
             vmin = '';
         }
         var vmax;
-        if (this.props.state_variable.lmax === SETSTAT) {
+        if (this.props.state_variable.lmax & CONSTRAINED) {
             vmax = (this.props.state_variable.vmax*100.0).toFixed(1) + '%';
         } else {
             vmax = '';
