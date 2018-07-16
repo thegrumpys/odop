@@ -41,23 +41,23 @@ export function changeDesignParameterConstraint(name, minmax, value) {
     }
   }
 
-export function setDesignParameterFlag(name, type, mask) {
+export function setDesignParameterFlag(name, minmax, mask) {
     return {
         type: SET_DESIGN_PARAMETER_FLAG,
         payload: {
             name,
-            type,
+            minmax,
             mask
         }
     }
   }
 
-export function resetDesignParameterFlag(name, type, mask) {
+export function resetDesignParameterFlag(name, minmax, mask) {
     return {
         type: RESET_DESIGN_PARAMETER_FLAG,
         payload: {
             name,
-            type,
+            minmax,
             mask
         }
     }

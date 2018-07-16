@@ -7,6 +7,8 @@ import { CONSTRAINED, FIXED, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT } from './globa
 
 export const equationsMiddleware = store => next => action => {
     const returnValue = next(action);
+//    console.log('In equationsMiddleware');
+//    console.log(action);
     var design = store.getState();
     var changed = false;
     
