@@ -50,7 +50,7 @@ export function pcylWebApp(state, action) {
                     } else {
                         return Object.assign({}, design_parameter, {
                             cmax: action.payload.value,
-                            smax: sclden(design_parameter.value, design_parameter.cmax, design_parameter.sdlim, design_parameter.lmin)
+                            smax: sclden(design_parameter.value, design_parameter.cmax, design_parameter.sdlim, design_parameter.lmax)
                         });
                     }
                 }
@@ -131,7 +131,7 @@ export function pcylWebApp(state, action) {
                     } else {
                         return Object.assign({}, state_variable, {
                             cmax: action.payload.value,
-                            smax: sclden(state_variable.value, state_variable.cmax, state_variable.sdlim, state_variable.lmin)
+                            smax: sclden(state_variable.value, state_variable.cmax, state_variable.sdlim, state_variable.lmax)
                         });
                     }
                 }
