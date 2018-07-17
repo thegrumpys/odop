@@ -1,7 +1,7 @@
 # Ideas for a web page menu structure
-## July 13, 2018    -   Updated July 17, 2018   
+## July 13, 2018    -   Updated July 17, 2018
 
-## Menu Bar:   
+## Menu Bar:
  Current thinking has a conventional horizontal menu bar located at the top of the
 page.  Five main menu items should look like:
 
@@ -10,8 +10,8 @@ Sys-Name | File | Action | View | Help |
 
 ---
 
-## Menu Items:   
-   
+## Menu Items:
+
 * Sys-Name
   * Link to web site
 * File
@@ -21,7 +21,7 @@ Sys-Name | File | Action | View | Help |
 #### ------------------
   * System Preferences
 #### ------------------
-  * {4 most recently opened designs}   
+  * {4 most recently opened designs}
 * Action
   * Execute
   * Search
@@ -43,8 +43,8 @@ Sys-Name | File | Action | View | Help |
 
  ---
 
-## Menu Item Descriptions:   
- 
+## Menu Item Descriptions:
+
 ### Sys-Name : Web site
 This menu item is a link to the public-facing web site. The linked page will open in a new
 browser tab.
@@ -63,7 +63,7 @@ This menu item is similar to the PCyl-CLI Save command. It creates a new design 
 ### ---------------------------------------
 ### File : System Preferences
 This is a feature to set system-specific values, including much of what is done by the
-PCyl-CLI SET command.  Other web-specific items, for example, auto re-calc and auto-search preferences, may be included.  
+PCyl-CLI SET command.  Other web-specific items, for example, auto re-calc and auto-search preferences, may be included.
 
 Web page layout control should be handled in the View menu.
 ### -------------------------------------
@@ -78,7 +78,7 @@ sequence. Some mechanism, for example, user supplied pauses will likely be
 necessary to allow the user to control the pace so as to observe what is happening.
 Annotations / comments are probably necessary.
 The process of creating play-back sequences (files?) is not required to be user
-accessible.   
+accessible.
 If necessary, generic third party tools can be used to create and annotate play-back
 recordings.
 
@@ -113,8 +113,8 @@ dependent variables plus "static quantities".
 ### View : Display Sub-Problems
 This menu item allows the user to specify a group of IOCLASSes be displayed. This
 frequently requested feature can allow complex design problems to be "partitioned"
-into sub-problems that map to sub-systems of the real world.  Notably, selecting 
-(check in checkbox?) classes 2, 4 & 6 would display those variables / quantities 
+into sub-problems that map to sub-systems of the real world.  Notably, selecting
+(check in checkbox?) classes 2, 4 & 6 would display those variables / quantities
 and suppress the display of all others.
 
 ### View : Report
