@@ -1,5 +1,5 @@
-# This is a test
+# Piston-Cylinder Problem
 
-This is only a test.
-
-[I'm an inline-style link](design/menu)
+* [Ideas for a web page menu structure](design/menu)
+* [Investigate third party alternatives that might assist implementation of the EXECUTE feature](ExecuteCapability/menu)
+* [Ideas for "responsive" page design](ResponsivePageDesign/menu)

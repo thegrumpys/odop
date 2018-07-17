@@ -1,5 +1,4 @@
-## Investigate third party alternatives that might
-## assist implementation of the EXECUTE feature.
+## Investigate third party alternatives that might assist implementation of the EXECUTE feature
 
 The Execute feature is the basis of demo and tutorial sessions in the CLI software.
 The CLI EXECUTE command has provisions for:
