@@ -1,6 +1,6 @@
 ## Ideas for "responsive" page design
 
-Just a few thoughts …  points for future discussion.   
+Just a few thoughts - points for future discussion.   
 
 Perhaps as the screen / window gets smaller, the web page presenting the design problem could progressively display fewer and fewer columns.
 The left-most column containing the variable names should stay at the left. 
