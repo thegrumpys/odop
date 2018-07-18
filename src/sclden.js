@@ -22,5 +22,6 @@ export function sclden(value, level, sdlimit, flags) {
     if (result < sdlimit) {
         result = sdlimit
     }
+//    console.log('value=' + value + ', level=' + level + ', sdlimit=' + sdlimit + ', flags=' + flags + ', result=' + result);
     return result;
 }

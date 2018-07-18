@@ -45,12 +45,12 @@ export function pcylWebApp(state, action) {
                     if (action.payload.minmax === MIN) {
                         return Object.assign({}, design_parameter, {
                             cmin: action.payload.value,
-                            smin: sclden(design_parameter.value, design_parameter.cmin, design_parameter.sdlim, design_parameter.lmin)
+                            smin: sclden(design_parameter.value, action.payload.value, design_parameter.sdlim, design_parameter.lmin)
                         });
                     } else {
                         return Object.assign({}, design_parameter, {
                             cmax: action.payload.value,
-                            smax: sclden(design_parameter.value, design_parameter.cmax, design_parameter.sdlim, design_parameter.lmin)
+                            smax: sclden(design_parameter.value, action.payload.value, design_parameter.sdlim, design_parameter.lmax)
                         });
                     }
                 }
@@ -126,12 +126,12 @@ export function pcylWebApp(state, action) {
                     if (action.payload.minmax === MIN) {
                         return Object.assign({}, state_variable, {
                             cmin: action.payload.value,
-                            smin: sclden(state_variable.value, state_variable.cmin, state_variable.sdlim, state_variable.lmin)
+                            smin: sclden(state_variable.value, action.payload.value, state_variable.sdlim, state_variable.lmin)
                         });
                     } else {
                         return Object.assign({}, state_variable, {
                             cmax: action.payload.value,
-                            smax: sclden(state_variable.value, state_variable.cmax, state_variable.sdlim, state_variable.lmin)
+                            smax: sclden(state_variable.value, action.payload.value, state_variable.sdlim, state_variable.lmax)
                         });
                     }
                 }
