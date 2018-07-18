@@ -103,10 +103,6 @@ export const equationsMiddleware = store => next => action => {
             sv = design.state_variables[i];
             vmin = 0.0;
             vmax = 0.0;
-            if (sv.lmin & CONSTRAINED ) { // TODO: || sv.lmin < FREESTAT) {
-                vmin = (-sv.value + sv.cmin) / sv.smin;
-                store.dispatch(changeStateVariableViolation(sv.name, MIN, vmin))
-            } else
             /* State variable fix levels. */
             /*
              * The fix_wt's are automatically incorporated in the scaling denominators
@@ -126,16 +122,21 @@ export const equationsMiddleware = store => next => action => {
                 } else {
                     viol_sum = viol_sum + vmin * vmin;
                 }
-            }
-            if (sv.lmax & CONSTRAINED ) { // TODO: || sv.lmax < FREESTAT) {
-                vmax = (sv.value - sv.cmax) / sv.smax;
-                store.dispatch(changeStateVariableViolation(sv.name, MAX, vmax))
-            }
-            if (vmin > 0.0) {
-                viol_sum = viol_sum + vmin * vmin;
-            }
-            if (vmax > 0.0) {
-                viol_sum = viol_sum + vmax * vmax;
+            } else {
+                if (sv.lmin & CONSTRAINED ) { // TODO: || sv.lmin < FREESTAT) {
+                    vmin = (-sv.value + sv.cmin) / sv.smin;
+                    store.dispatch(changeStateVariableViolation(sv.name, MIN, vmin))
+                }
+                if (sv.lmax & CONSTRAINED ) { // TODO: || sv.lmax < FREESTAT) {
+                    vmax = (sv.value - sv.cmax) / sv.smax;
+                    store.dispatch(changeStateVariableViolation(sv.name, MAX, vmax))
+                }
+                if (vmin > 0.0) {
+                    viol_sum = viol_sum + vmin * vmin;
+                }
+                if (vmax > 0.0) {
+                    viol_sum = viol_sum + vmax * vmax;
+                }
             }
         }
         /* Merit Function */
