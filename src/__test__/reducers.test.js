@@ -18,8 +18,7 @@ import { CONSTRAINED, FIXED } from '../globals';
 it('without startup', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     // Nothing changed, subscribe not possible, so just use the store directly
     var design = store.getState();
@@ -34,8 +33,7 @@ it('without startup', () => {
 it('with startup', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     // Nothing changed, subscribe not possible, so just use the store directly
     var design = store.getState();
@@ -64,8 +62,7 @@ it('with startup', () => {
 it('change design parameter value', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.design_parameters[1].name).toEqual("RADIUS");
@@ -79,14 +76,13 @@ it('change design parameter value', () => {
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.5); // after
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.7853981633974483);
+    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
 });
 
 it('change design parameter constraint min', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.design_parameters[1].name).toEqual("RADIUS");
@@ -104,8 +100,7 @@ it('change design parameter constraint min', () => {
 it('change design parameter constraint max', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
@@ -123,8 +118,7 @@ it('change design parameter constraint max', () => {
 it('set design parameter flag min', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.design_parameters[1].name).toEqual("RADIUS");
@@ -140,8 +134,7 @@ it('set design parameter flag min', () => {
 it('reset design parameter flag min', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.design_parameters[1].name).toEqual("RADIUS");
@@ -157,8 +150,7 @@ it('reset design parameter flag min', () => {
 it('set design parameter flag max', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
@@ -174,8 +166,7 @@ it('set design parameter flag max', () => {
 it('reset design parameter flag max', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
@@ -195,8 +186,7 @@ it('reset design parameter flag max', () => {
 it('change state variable value', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.state_variables[1].name).toEqual("AREA");
@@ -212,8 +202,7 @@ it('change state variable value', () => {
 it('change state variable constraint min', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.state_variables[0].name).toEqual("FORCE");
@@ -231,8 +220,7 @@ it('change state variable constraint min', () => {
 it('change state variable constraint max', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.state_variables[2].name).toEqual("STRESS");
@@ -250,8 +238,7 @@ it('change state variable constraint max', () => {
 it('set state variable flag min', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.state_variables[0].name).toEqual("FORCE");
@@ -267,8 +254,7 @@ it('set state variable flag min', () => {
 it('reset state variable flag min', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.state_variables[0].name).toEqual("FORCE");
@@ -284,8 +270,7 @@ it('reset state variable flag min', () => {
 it('set state variable flag max', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.state_variables[2].name).toEqual("STRESS");
@@ -301,8 +286,7 @@ it('set state variable flag max', () => {
 it('reset state variable flag max', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.state_variables[2].name).toEqual("STRESS");
@@ -322,8 +306,7 @@ it('reset state variable flag max', () => {
 it('change objective value', () => {
     const store = createStore(
         pcylWebApp,
-        initialState,
-        applyMiddleware(equationsMiddleware));
+        initialState);
     
     var design = store.getState();
     expect(design.objective_value).toEqual(0.5605106435926049);
