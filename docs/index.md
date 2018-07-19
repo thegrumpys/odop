@@ -5,3 +5,4 @@
 * [Ideas for "responsive" page design](design/ResponsivePageDesign)
 * [Ideas regarding the web user-interface for FIX of State Variables](design/WebUI_SV_Fix)
 * [Warn user if conflicting constraints are established](design/WarnConflictingConstraints)
+* [Proposed names for quantities previously called "constants"](design/StaticQuantities)
