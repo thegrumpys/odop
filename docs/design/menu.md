@@ -18,10 +18,11 @@ Sys-Name | File | Action | View | Help |
   * Open
   * Save
   * Save As   
-#### ------------------   
+#### ------------------
   * Recent Designs
-#### ------------------   
+#### ------------------
   * System Preferences
+#### ------------------   
 * Action
   * Execute
   * Search
@@ -61,6 +62,9 @@ recently opened design file (.DSN) or database entry.
 This menu item is similar to the PCyl-CLI Save command. It creates a new design file
 (.DSN) or database entry.
 
+### -------------------------------------
+### File : Recent designs}
+These menu entries are provided for user convenience in selecting recent designs for review or additional work.
 ### ---------------------------------------
 ### File : System Preferences
 This is a feature to set system-specific values, including much of what is done by the
@@ -68,9 +72,6 @@ PCyl-CLI SET command.  Other web-specific items, for example, auto re-calc and a
 
 Web page layout control should be handled in the View menu.
 ### -------------------------------------
-
-### File : {4 most recently opened designs}
-These menu entries are provided for user convenience.
 
 ### Action : Execute
 This menu item will trigger the play-back of a previously recorded sequence. A popup
