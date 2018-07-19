@@ -1,5 +1,5 @@
 # Ideas for a web page menu structure
-## July 13, 2018    -   Updated July 18, 2018
+## July 13, 2018    -   Updated July 19, 2018
 
 ## Menu Bar:
  Current thinking has a conventional horizontal menu bar located at the top of the
@@ -63,7 +63,7 @@ This menu item is similar to the PCyl-CLI Save command. It creates a new design 
 (.DSN) or database entry.
 
 ### -------------------------------------
-### File : Recent designs}
+### File : Recent designs
 These menu entries are provided for user convenience in selecting recent designs for review or additional work.
 ### ---------------------------------------
 ### File : System Preferences
