@@ -57,9 +57,13 @@ export class App extends Component {
                                     </DropdownItem>
                                     <DropdownItem divider />
                                     <DropdownItem>
-                                        Preferences
+                                        Recent Designs
                                     </DropdownItem>
-                               </DropdownMenu>
+                                    <DropdownItem divider />
+                                    <DropdownItem>
+                                    Preferences
+                                    </DropdownItem>
+                                </DropdownMenu>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav>
@@ -92,10 +96,10 @@ export class App extends Component {
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                     <DropdownItem>
-                                        Define Classes
+                                        Define  Sub-Problems
                                     </DropdownItem>
                                     <DropdownItem>
-                                        Display Classes
+                                        Display Sub-Problems
                                     </DropdownItem>
                                     <DropdownItem>
                                         Static Quantities
@@ -120,7 +124,7 @@ export class App extends Component {
                                         Help Index
                                     </DropdownItem>
                                     <DropdownItem>
-                                        Tutorial
+                                        Demo
                                     </DropdownItem>
                                     <DropdownItem>
                                         Tutorial

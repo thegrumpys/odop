@@ -1,11 +1,11 @@
 # Ideas for a web page menu structure
-## July 13, 2018    -   Updated July 17, 2018
+## July 13, 2018    -   Updated July 18, 2018
 
 ## Menu Bar:
  Current thinking has a conventional horizontal menu bar located at the top of the
 page.  Five main menu items should look like:
 
-Sys-Name | File | Action | View | Help |
+Sys-Name | File | Action | View | Help |   
 --- | --- | --- | --- | ---
 
 ---
@@ -17,11 +17,11 @@ Sys-Name | File | Action | View | Help |
 * File
   * Open
   * Save
-  * Save As
-#### ------------------
+  * Save As   
+#### ------------------   
+  * Recent Designs
+#### ------------------   
   * System Preferences
-#### ------------------
-  * {4 most recently opened designs}
 * Action
   * Execute
   * Search
@@ -30,14 +30,15 @@ Sys-Name | File | Action | View | Help |
   * Select Catalog
   * Trade
 * View
-  * Define Sub-Problem
-  * Display Sub-Problem
+  * Define Sub-Problems
+  * Display Sub-Problems
   * Report
   *  Static Quantities
   *  Violations
 * Help
   * Context Help F1
   * Help Index
+  * Demo
   * Tutorial
   * About
 
@@ -140,6 +141,12 @@ produces the same result.
 ### Help : Help Index
 This menu item opens a new browser tab containing the index page for the Help subsystem.
 All Help topics should be reachable through links on the index page.
+
+### Help : Demo
+This menu item provides the ability to select from a list of demo sessions which play
+back similarly to the Action : Execute menu item.  
+The demo sessions may include solutions to textbook problems in order to illustrate that the
+program closely matches published results.
 
 ### Help : Tutorial
 This menu item provides the ability to select from a list of tutorial sessions which play
