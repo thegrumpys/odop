@@ -1,4 +1,7 @@
-import { STARTUP, CHANGE_DESIGN_PARAMETER_VALUE, MIN, MAX } from './actionTypes';
+import { STARTUP, 
+    CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
+    CHANGE_STATE_VARIABLE_CONSTRAINT, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
+    MIN, MAX } from './actionTypes';
 import { 
     changeDesignParameterViolation, changeDesignParameterConstraint, 
     changeStateVariableValue, changeStateVariableViolation, changeStateVariableConstraint, 
@@ -55,6 +58,24 @@ export const equationsMiddleware = store => next => action => {
             // Common calculations
         }
         /* eslint-enable */
+        break;
+    case CHANGE_DESIGN_PARAMETER_CONSTRAINT:
+        changed = true;
+        break;
+    case SET_DESIGN_PARAMETER_FLAG:
+        changed = true;
+        break;
+    case RESET_DESIGN_PARAMETER_FLAG:
+        changed = true;
+        break;
+    case CHANGE_STATE_VARIABLE_CONSTRAINT:
+        changed = true;
+        break;
+    case SET_STATE_VARIABLE_FLAG:
+        changed = true;
+        break;
+    case RESET_STATE_VARIABLE_FLAG:
+        changed = true;
         break;
     default:
         break;
@@ -135,7 +156,7 @@ export const equationsMiddleware = store => next => action => {
                     viol_sum = viol_sum + vmin * vmin;
                 }
                 if (vmax > 0.0) {
-                    viol_sum = viol_sum + vmax * vmax;
+                viol_sum = viol_sum + vmax * vmax;
                 }
             }
         }
