@@ -29,8 +29,8 @@ export class DesignParameterRow extends React.Component {
     }
     
     render() {
-        var cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'text-danger text-right' : 'text-right';
-        var cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'text-danger text-right' : 'text-right';
+        var cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
+        var cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
         var fixed;
         if (this.props.design_parameter.lmin & FIXED) {
             fixed = (
