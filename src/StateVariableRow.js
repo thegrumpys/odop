@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeStateVariableValue, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
+import { changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
 import { MIN, MAX } from './actionTypes';
 import { FIXED, CONSTRAINED } from './globals';
 
@@ -19,8 +19,10 @@ class StateVariableRow extends React.Component {
     }
     
     onSetStateVariableFlag(event) {
-        this.props.setStateVariableFlag(this.props.state_variable.name, MIN, FIXED);
-        this.props.setStateVariableFlag(this.props.state_variable.name, MAX, FIXED);
+        this.props.setStateVariableFlag(this.props.state_variable.name, MIN, FIXED|CONSTRAINED);
+        this.props.setStateVariableFlag(this.props.state_variable.name, MAX, FIXED|CONSTRAINED);
+        this.props.changeStateVariableConstraint(this.props.state_variable.name, MIN, this.props.state_variable.value);
+        this.props.changeStateVariableConstraint(this.props.state_variable.name, MAX, this.props.state_variable.value);
     }
     
     onResetStateVariableFlag(event) {
@@ -29,8 +31,15 @@ class StateVariableRow extends React.Component {
     }
     
     render() {
-        var cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
-        var cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
+        var cmin_class;
+        var cmax_class;
+        if (this.props.state_variable.lmin & FIXED) {
+            cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-info text-right font-weight-bold border border-info' : 'text-right';
+            cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-info text-right font-weight-bold border border-info' : 'text-right';
+        } else {
+            cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
+            cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
+        }
         var fixed;
         if (this.props.state_variable.lmin & FIXED) {
             fixed = (
@@ -56,9 +65,7 @@ class StateVariableRow extends React.Component {
             );
         }
         var cmin;
-        if (this.props.state_variable.lmin & FIXED) {
-            cmin = <div/>;
-        } else if (this.props.state_variable.lmin & CONSTRAINED) {
+        if (this.props.state_variable.lmin & FIXED || this.props.state_variable.lmin & CONSTRAINED) {
             cmin = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
@@ -81,10 +88,14 @@ class StateVariableRow extends React.Component {
               </InputGroup>
             );
         }
+        var vmin;
+        if (this.props.state_variable.lmin & FIXED || this.props.state_variable.lmin & CONSTRAINED) {
+            vmin = (this.props.state_variable.vmin*100.0).toFixed(1) + '%';
+        } else {
+            vmin = '';
+        }
         var cmax;
-        if (this.props.state_variable.lmax & FIXED) {
-            cmax = <div />;
-        } else if (this.props.state_variable.lmax & CONSTRAINED) {
+        if (this.props.state_variable.lmax & FIXED || this.props.state_variable.lmax & CONSTRAINED) {
             cmax = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
@@ -107,18 +118,8 @@ class StateVariableRow extends React.Component {
               </InputGroup>
             );
         }
-        var vmin;
-        if (this.props.state_variable.lmin & FIXED) {
-            vmin = '';
-        } else if (this.props.state_variable.lmin & CONSTRAINED) {
-            vmin = (this.props.state_variable.vmin*100.0).toFixed(1) + '%';
-        } else {
-            vmin = '';
-        }
         var vmax;
-        if (this.props.state_variable.lmax & FIXED) {
-            vmax = '';
-        } else if (this.props.state_variable.lmax & CONSTRAINED) {
+        if (this.props.state_variable.lmax & FIXED || this.props.state_variable.lmax & CONSTRAINED) {
             vmax = (this.props.state_variable.vmax*100.0).toFixed(1) + '%';
         } else {
             vmax = '';
@@ -140,6 +141,7 @@ class StateVariableRow extends React.Component {
 
 const mapDispatchToStateVariableProps = {
         changeStateVariableValue: changeStateVariableValue,
+        changeStateVariableConstraint: changeStateVariableConstraint,
         setStateVariableFlag: setStateVariableFlag,
         resetStateVariableFlag: resetStateVariableFlag
 };

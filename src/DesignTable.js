@@ -38,7 +38,7 @@ class DesignTable extends React.Component {
                         <tr>
                             <th colSpan="7"></th>
                             <th colSpan="2">Objective Value</th>
-                            <td>{this.props.objective_value.toFixed(4)}</td>
+                            <td className="text-right">{this.props.objective_value.toFixed(4)}</td>
                         </tr>
                     </tfoot>
                 </Table>
