@@ -8,11 +8,11 @@ This approach will avoid the need any dedicated FIX value entry columns on the m
 When a state variable FIX checkbox is active (checked):
  * Both constraint level entry boxes (labeled Min or Max "Value") will become enabled.
  * The previous state of the constraint level entries will be remembered so that they can be re-established later.
- * The associated constraint checkboxes will become unchecked (or perhaps both will be checked).
+ * The associated constraint checkboxes will both  be checked.
  * The current value of the state variable will populate both associated constraint level entry boxes.
  * The user will be able to enter a new value in either constraint level entry box.
- * - In real-time, the value of the other constraint level entry box will update to match the user's entry.
+    -  In real-time, the value of the other constraint level entry box will update to match the user's entry.
  * The violation values will update to reflect the weighted values.
- * Constraint violation highlights will appear, but have a different aspect (color, boldness, dashed, etc) than for violated constraints.
+ * Constraint violation highlights will appear, but may have a different aspect (color, boldness, dashed, etc) than for violated constraints.
  
  
