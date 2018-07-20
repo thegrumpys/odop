@@ -1,7 +1,8 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeDesignParameterValue } from './actionCreators';
+import { changeDesignParameterValue, setDesignParameterFlag, resetDesignParameterFlag } from './actionCreators';
+import { MIN, MAX } from './actionTypes';
 import { FIXED, CONSTRAINED } from './globals';
 
 export class DesignParameterRow extends React.Component {
@@ -9,10 +10,22 @@ export class DesignParameterRow extends React.Component {
     constructor(props) {
         super(props);
         this.onChangeDesignParameterValue = this.onChangeDesignParameterValue.bind(this);
+        this.onSetDesignParameterFlag = this.onSetDesignParameterFlag.bind(this);
+        this.onResetDesignParameterFlag = this.onResetDesignParameterFlag.bind(this);
     }
     
     onChangeDesignParameterValue(event) {
         this.props.changeDesignParameterValue(this.props.design_parameter.name, parseFloat(event.target.value));
+    }
+    
+    onSetDesignParameterFlag(event) {
+        this.props.setDesignParameterFlag(this.props.design_parameter.name, MIN, FIXED);
+        this.props.setDesignParameterFlag(this.props.design_parameter.name, MAX, FIXED);
+    }
+    
+    onResetDesignParameterFlag(event) {
+        this.props.resetDesignParameterFlag(this.props.design_parameter.name, MIN, FIXED);
+        this.props.resetDesignParameterFlag(this.props.design_parameter.name, MAX, FIXED);
     }
     
     render() {
@@ -25,7 +38,7 @@ export class DesignParameterRow extends React.Component {
                 <Input className="pull-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked />
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked onChange={this.onResetDesignParameterFlag} />
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
@@ -36,14 +49,16 @@ export class DesignParameterRow extends React.Component {
                 <Input className="pull-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" />
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" onChange={this.onSetDesignParameterFlag} />
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
             );
         }
         var cmin;
-        if (this.props.design_parameter.lmin & CONSTRAINED) {
+        if (this.props.design_parameter.lmin & FIXED) {
+            cmin = <div/>;
+        } else if (this.props.design_parameter.lmin & CONSTRAINED) {
             cmin = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
@@ -54,8 +69,6 @@ export class DesignParameterRow extends React.Component {
                 <Input className="pull-right" type="number" value={this.props.design_parameter.cmin} />
               </InputGroup>
             );
-        } else if (this.props.design_parameter.lmin & FIXED) {
-            cmin = <div/>;
         } else {
             cmin = (
               <InputGroup>
@@ -69,7 +82,9 @@ export class DesignParameterRow extends React.Component {
             );
         }
         var cmax;
-        if (this.props.design_parameter.lmax & CONSTRAINED) {
+        if (this.props.design_parameter.lmin & FIXED) {
+            cmax = <div />;
+        } else if (this.props.design_parameter.lmax & CONSTRAINED) {
             cmax = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
@@ -80,8 +95,6 @@ export class DesignParameterRow extends React.Component {
                 <Input className="pull-right" type="number" value={this.props.design_parameter.cmax} />
               </InputGroup>
             );
-        } else if (this.props.design_parameter.lmin & FIXED) {
-            cmax = <div />;
         } else {
             cmax = (
               <InputGroup>
@@ -95,13 +108,17 @@ export class DesignParameterRow extends React.Component {
             );
         }
         var vmin;
-        if (this.props.design_parameter.lmin & CONSTRAINED) {
+        if (this.props.design_parameter.lmin & FIXED) {
+            vmin = '';
+        } else if (this.props.design_parameter.lmin & CONSTRAINED) {
             vmin = (this.props.design_parameter.vmin*100.0).toFixed(1) + '%';
         } else {
             vmin = '';
         }
         var vmax;
-        if (this.props.design_parameter.lmax & CONSTRAINED) {
+        if (this.props.design_parameter.lmax & FIXED) {
+            vmax = '';
+        } else if (this.props.design_parameter.lmax & CONSTRAINED) {
             vmax = (this.props.design_parameter.vmax*100.0).toFixed(1) + '%';
         } else {
             vmax = '';
@@ -122,7 +139,9 @@ export class DesignParameterRow extends React.Component {
 }
 
 const mapDispatchToProps = {
-        changeDesignParameterValue: changeDesignParameterValue
+        changeDesignParameterValue: changeDesignParameterValue,
+        setDesignParameterFlag: setDesignParameterFlag,
+        resetDesignParameterFlag: resetDesignParameterFlag
 };
 
 export default connect(null, mapDispatchToProps)(DesignParameterRow);

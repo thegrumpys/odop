@@ -1,9 +1,33 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { connect } from 'react-redux';
+import { changeStateVariableValue, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
+import { MIN, MAX } from './actionTypes';
 import { FIXED, CONSTRAINED } from './globals';
 
 export class StateVariableRow extends React.Component {
-
+    
+    constructor(props) {
+        super(props);
+        this.onChangeStateVariableValue = this.onChangeStateVariableValue.bind(this);
+        this.onSetStateVariableFlag = this.onSetStateVariableFlag.bind(this);
+        this.onResetStateVariableFlag = this.onResetStateVariableFlag.bind(this);
+    }
+    
+    onChangeStateVariableValue(event) {
+        this.props.changeStateVariableValue(this.props.state_variable.name, parseFloat(event.target.value));
+    }
+    
+    onSetStateVariableFlag(event) {
+        this.props.setStateVariableFlag(this.props.state_variable.name, MIN, FIXED);
+        this.props.setStateVariableFlag(this.props.state_variable.name, MAX, FIXED);
+    }
+    
+    onResetStateVariableFlag(event) {
+        this.props.resetStateVariableFlag(this.props.state_variable.name, MIN, FIXED);
+        this.props.resetStateVariableFlag(this.props.state_variable.name, MAX, FIXED);
+    }
+    
     render() {
         var cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'bg-danger align-middle' : 'align-middle';
         var cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'bg-danger align-middle' : 'align-middle';
@@ -11,14 +35,10 @@ export class StateVariableRow extends React.Component {
         if (this.props.state_variable.lmin & FIXED) {
             fixed = (
               <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <span className="pull-right">{this.props.state_variable.value.toFixed(4)}</span>
-                  </InputGroupText>
-                </InputGroupAddon>
+                <Input className="pull-right" type="number" value={this.props.state_variable.value} onChange={this.onChangeStateVariableValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked />
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked onChange={this.onResetStateVariableFlag} />
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
@@ -33,7 +53,7 @@ export class StateVariableRow extends React.Component {
                 </InputGroupAddon>
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" />
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" onChange={this.onSetStateVariableFlag} />
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
@@ -92,13 +112,17 @@ export class StateVariableRow extends React.Component {
             );
         }
         var vmin;
-        if (this.props.state_variable.lmin & CONSTRAINED) {
+        if (this.props.state_variable.lmin & FIXED) {
+            vmin = '';
+        } else if (this.props.state_variable.lmin & CONSTRAINED) {
             vmin = (this.props.state_variable.vmin*100.0).toFixed(1) + '%';
         } else {
             vmin = '';
         }
         var vmax;
-        if (this.props.state_variable.lmax & CONSTRAINED) {
+        if (this.props.state_variable.lmax & FIXED) {
+            vmax = '';
+        } else if (this.props.state_variable.lmax & CONSTRAINED) {
             vmax = (this.props.state_variable.vmax*100.0).toFixed(1) + '%';
         } else {
             vmax = '';
@@ -115,5 +139,13 @@ export class StateVariableRow extends React.Component {
                 </tr>
         );
     }
-    
 }
+
+
+const mapDispatchToProps = {
+        changeStateVariableValue: changeStateVariableValue,
+        setStateVariableFlag: setStateVariableFlag,
+        resetStateVariableFlag: resetStateVariableFlag
+};
+
+export default connect(null, mapDispatchToProps)(StateVariableRow);

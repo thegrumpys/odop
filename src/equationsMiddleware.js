@@ -12,8 +12,8 @@ export const equationsMiddleware = store => next => action => {
     const returnValue = next(action);
 //    console.log('In equationsMiddleware');
 //    console.log(action);
-    var design = store.getState();
     var changed = false;
+	var design;
     
     /* eslint-disable no-unused-vars */
     var pi = 0;
@@ -28,6 +28,7 @@ export const equationsMiddleware = store => next => action => {
     case STARTUP:
         changed = true;
         // Set smin/smax by changing constraints to their current values
+        design = store.getState();
         design.design_parameters.forEach((design_parameter) => {
             store.dispatch(changeDesignParameterConstraint(design_parameter.name, MIN, design_parameter.cmin));
             store.dispatch(changeDesignParameterConstraint(design_parameter.name, MAX, design_parameter.cmax));
@@ -43,16 +44,16 @@ export const equationsMiddleware = store => next => action => {
         /* eslint-disable no-fallthrough */
         switch (action.payload.name) {
         case "RADIUS":
+            design = store.getState();
             var a = design.constants[pi].value * design.design_parameters[radius].value * design.design_parameters[radius].value;
-//            console.log("a="+a);
             store.dispatch(changeStateVariableValue("AREA", a));
         case "PRESSURE":
+            design = store.getState();
             var f = design.design_parameters[pressure].value * design.state_variables[area].value;
-//            console.log("f="+f);
             store.dispatch(changeStateVariableValue("FORCE", f));
         case "THICKNESS":
+            design = store.getState();
             var t = (design.design_parameters[pressure].value * design.design_parameters[radius].value) / (2.0 * design.design_parameters[thickness].value);
-//            console.log("t="+t);
             store.dispatch(changeStateVariableValue("STRESS", t));
         default:
             // Common calculations
@@ -101,6 +102,7 @@ export const equationsMiddleware = store => next => action => {
         var m_funct;
         var obj;
         var viol_sum = 0.0;
+        design = store.getState();
         for (let i = 0; i < design.design_parameters.length; i++) {
             dp = design.design_parameters[i];
             vmin = 0.0;
@@ -156,7 +158,7 @@ export const equationsMiddleware = store => next => action => {
                     viol_sum = viol_sum + vmin * vmin;
                 }
                 if (vmax > 0.0) {
-                viol_sum = viol_sum + vmax * vmax;
+                    viol_sum = viol_sum + vmax * vmax;
                 }
             }
         }
