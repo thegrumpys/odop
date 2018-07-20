@@ -1,5 +1,5 @@
 # Ideas for a web page menu structure
-## July 13, 2018    -   Updated July 19, 2018
+## July 13, 2018    -   Updated July 20, 2018
 
 ## Menu Bar:
  Current thinking has a conventional horizontal menu bar located at the top of the
@@ -155,6 +155,6 @@ back similarly to the Action : Execute menu item.
 
 ### Help : About
 This menu item provides software release and design model version information. It
-also includes a link to the publicly-facing web site (a repeat of the sys-name link).
+also includes a link to the home page of publicly-facing web site (a repeat of the sys-name link).
 The linked page will open in a new browser tab.
 

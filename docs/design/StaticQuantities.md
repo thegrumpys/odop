@@ -10,6 +10,24 @@ Instead of using the term "constants", other possibilities include:
  * static variables
  * static quantities
  * problem quantities
+ * calculation inputs
+ 
+ Per discussion, the best approach may be to adopt an inheritance model where both
+ the old "constants" and design parameters are a proper subset of a broader class.   
+ Possibilities include: 
+
+Independent Variables
+ * Searchable Independent Variables      (previously Design Parameters)
+ * Non-Searchable Independent Variables  (previously Constants)
+
+Independent Variables
+ * Design Parameters
+ * Calculation Variables  (previously Constants)
+
+Independent Variables
+ * Design Parameters
+ * Calculation Inputs  (previously Constants)   
+
 
 Instead of naming the procedure / function CONTNT, it could be named:
  * problem_init
