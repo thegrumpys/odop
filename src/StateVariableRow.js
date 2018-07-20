@@ -35,7 +35,7 @@ export class StateVariableRow extends React.Component {
         if (this.props.state_variable.lmin & FIXED) {
             fixed = (
               <InputGroup>
-                <Input className="pull-right" type="number" value={this.props.state_variable.value} onChange={this.onChangeStateVariableValue} />
+                <Input className="text-right" type="number" value={this.props.state_variable.value} onChange={this.onChangeStateVariableValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked onChange={this.onResetStateVariableFlag} />
@@ -46,11 +46,7 @@ export class StateVariableRow extends React.Component {
         } else {
             fixed = (
               <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <span className="pull-right">{this.props.state_variable.value.toFixed(4)}</span>
-                  </InputGroupText>
-                </InputGroupAddon>
+                <span className="text-right form-control bg-light">{this.props.state_variable.value.toFixed(4)}</span>
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <Input addon type="checkbox" aria-label="Checkbox for fixed value" onChange={this.onSetStateVariableFlag} />
@@ -70,7 +66,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.state_variable.cmin} style={{color:cmin_color}} />
+                <Input className="text-right" type="number" value={this.props.state_variable.cmin} style={{color:cmin_color}} />
               </InputGroup>
             );
         } else {
@@ -96,7 +92,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.state_variable.cmax} style={{color:cmax_color}} />
+                <Input className="text-right" type="number" value={this.props.state_variable.cmax} style={{color:cmax_color}} />
               </InputGroup>
             );
         } else {
@@ -130,7 +126,7 @@ export class StateVariableRow extends React.Component {
         return (
                 <tr key={this.props.state_variable.name}>
                   <td className="align-middle">{this.props.state_variable.name}</td>
-                  <td className="pull-right align-middle" colSpan="2">{fixed}</td>
+                  <td className="align-middle" colSpan="2">{fixed}</td>
                   <td className="text-nowrap align-middle">{this.props.state_variable.units}</td>
                   <td className="align-middle" colSpan="2">{cmin}</td>
                   <td className="text-right align-middle">{vmin}</td>

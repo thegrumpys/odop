@@ -35,7 +35,7 @@ export class DesignParameterRow extends React.Component {
         if (this.props.design_parameter.lmin & FIXED) {
             fixed = (
               <InputGroup>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
+                <Input className="text-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked onChange={this.onResetDesignParameterFlag} />
@@ -46,7 +46,7 @@ export class DesignParameterRow extends React.Component {
         } else {
             fixed = (
               <InputGroup>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
+                <Input className="text-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <Input addon type="checkbox" aria-label="Checkbox for fixed value" onChange={this.onSetDesignParameterFlag} />
@@ -66,7 +66,7 @@ export class DesignParameterRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.cmin} style={{color:cmin_color}} />
+                <Input className="text-right" type="number" value={this.props.design_parameter.cmin} style={{color:cmin_color}} />
               </InputGroup>
             );
         } else {
@@ -92,7 +92,7 @@ export class DesignParameterRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.cmax} style={{color:cmax_color}} />
+                <Input className="text-right" type="number" value={this.props.design_parameter.cmax} style={{color:cmax_color}} />
               </InputGroup>
             );
         } else {
