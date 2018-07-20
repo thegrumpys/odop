@@ -12,6 +12,12 @@ class StateVariableRow extends React.Component {
         this.onChangeStateVariableValue = this.onChangeStateVariableValue.bind(this);
         this.onSetStateVariableFlag = this.onSetStateVariableFlag.bind(this);
         this.onResetStateVariableFlag = this.onResetStateVariableFlag.bind(this);
+        this.onChangeStateVariableConstraintMin = this.onChangeStateVariableConstraintMin.bind(this);
+        this.onSetStateVariableFlagConstrainedMin = this.onSetStateVariableFlagConstrainedMin.bind(this)
+        this.onResetStateVariableFlagConstrainedMin = this.onResetStateVariableFlagConstrainedMin.bind(this)
+        this.onChangeStateVariableConstraintMax = this.onChangeStateVariableConstraintMax.bind(this);
+        this.onSetStateVariableFlagConstrainedMax = this.onSetStateVariableFlagConstrainedMax.bind(this)
+        this.onResetStateVariableFlagConstrainedMax = this.onResetStateVariableFlagConstrainedMax.bind(this)
     }
     
     onChangeStateVariableValue(event) {
@@ -30,16 +36,34 @@ class StateVariableRow extends React.Component {
         this.props.restoreStateVariableConstraints(this.props.state_variable.name);
     }
     
+    onSetStateVariableFlagConstrainedMin(event) {
+        this.props.setStateVariableFlag(this.props.state_variable.name, MIN, CONSTRAINED);
+    }
+    
+    onResetStateVariableFlagConstrainedMin(event) {
+        this.props.resetStateVariableFlag(this.props.state_variable.name, MIN, CONSTRAINED);
+    }
+    
+    onChangeStateVariableConstraintMin(event) {
+        this.props.changeStateVariableConstraint(this.props.state_variable.name, MIN, parseFloat(event.target.value));
+    }
+    
+    onSetStateVariableFlagConstrainedMax(event) {
+        this.props.setStateVariableFlag(this.props.state_variable.name, MAX, CONSTRAINED);
+    }
+    
+    onResetStateVariableFlagConstrainedMax(event) {
+        this.props.resetStateVariableFlag(this.props.state_variable.name, MAX, CONSTRAINED);
+    }
+    
+    onChangeStateVariableConstraintMax(event) {
+        this.props.changeStateVariableConstraint(this.props.state_variable.name, MAX, parseFloat(event.target.value));
+    }
+    
     render() {
-        var cmin_class;
-        var cmax_class;
-        if (this.props.state_variable.lmin & FIXED) {
-            cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-info text-right font-weight-bold border border-info' : 'text-right';
-            cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-info text-right font-weight-bold border border-info' : 'text-right';
-        } else {
-            cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
-            cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
-        }
+        // =======================================
+        // Value and Fixed Column
+        // =======================================
         var fixed;
         if (this.props.state_variable.lmin & FIXED) {
             fixed = (
@@ -64,16 +88,25 @@ class StateVariableRow extends React.Component {
               </InputGroup>
             );
         }
+        // =======================================
+        // Constraint Minimum Column
+        // =======================================
+        var cmin_class;
+        if (this.props.state_variable.lmin & FIXED) {
+            cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-info text-right font-weight-bold border border-info' : 'text-right';
+        } else {
+            cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
+        }
         var cmin;
         if (this.props.state_variable.lmin & FIXED || this.props.state_variable.lmin & CONSTRAINED) {
             cmin = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
+                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked onChange={this.onResetStateVariableFlagConstrainedMin} />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className={cmin_class} type="number" value={this.props.state_variable.cmin} />
+                <Input className={cmin_class} type="number" value={this.props.state_variable.cmin} onChange={this.onChangeStateVariableConstraintMin} />
               </InputGroup>
             );
         } else {
@@ -81,18 +114,30 @@ class StateVariableRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
+                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" onChange={this.onSetStateVariableFlagConstrainedMin} />
                   </InputGroupText>
                 </InputGroupAddon>
                 <div/>
               </InputGroup>
             );
         }
+        // =======================================
+        // Constraint Violation Minimum Column
+        // =======================================
         var vmin;
         if (this.props.state_variable.lmin & FIXED || this.props.state_variable.lmin & CONSTRAINED) {
             vmin = (this.props.state_variable.vmin*100.0).toFixed(1) + '%';
         } else {
             vmin = '';
+        }
+        // =======================================
+        // Constraint Maximum Column
+        // =======================================
+        var cmax_class;
+        if (this.props.state_variable.lmin & FIXED) {
+            cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-info text-right font-weight-bold border border-info' : 'text-right';
+        } else {
+            cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
         }
         var cmax;
         if (this.props.state_variable.lmax & FIXED || this.props.state_variable.lmax & CONSTRAINED) {
@@ -100,10 +145,10 @@ class StateVariableRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked />
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked onChange={this.onResetStateVariableFlagConstrainedMax} />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className={cmax_class} type="number" value={this.props.state_variable.cmax} />
+                <Input className={cmax_class} type="number" value={this.props.state_variable.cmax} onChange={this.onChangeStateVariableConstraintMax} />
               </InputGroup>
             );
         } else {
@@ -111,19 +156,25 @@ class StateVariableRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" />
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value"  onChange={this.onSetStateVariableFlagConstrainedMax} />
                   </InputGroupText>
                 </InputGroupAddon>
                 <div />
               </InputGroup>
             );
         }
+        // =======================================
+        // Constraint Violation Maximum Column
+        // =======================================
         var vmax;
         if (this.props.state_variable.lmax & FIXED || this.props.state_variable.lmax & CONSTRAINED) {
             vmax = (this.props.state_variable.vmax*100.0).toFixed(1) + '%';
         } else {
             vmax = '';
         }
+        // =======================================
+        // Table Row
+        // =======================================
         return (
                 <tr key={this.props.state_variable.name}>
                   <td className="align-middle">{this.props.state_variable.name}</td>

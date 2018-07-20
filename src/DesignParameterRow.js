@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeDesignParameterValue, setDesignParameterFlag, resetDesignParameterFlag } from './actionCreators';
+import { changeDesignParameterValue, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag } from './actionCreators';
 import { MIN, MAX } from './actionTypes';
 import { FIXED, CONSTRAINED } from './globals';
 
@@ -10,27 +10,58 @@ class DesignParameterRow extends React.Component {
     constructor(props) {
         super(props);
         this.onChangeDesignParameterValue = this.onChangeDesignParameterValue.bind(this);
-        this.onSetDesignParameterFlag = this.onSetDesignParameterFlag.bind(this);
-        this.onResetDesignParameterFlag = this.onResetDesignParameterFlag.bind(this);
+        this.onSetDesignParameterFlagFixed = this.onSetDesignParameterFlagFixed.bind(this);
+        this.onResetDesignParameterFlagFixed = this.onResetDesignParameterFlagFixed.bind(this);
+        this.onChangeDesignParameterConstraintMin = this.onChangeDesignParameterConstraintMin.bind(this);
+        this.onSetDesignParameterFlagConstrainedMin = this.onSetDesignParameterFlagConstrainedMin.bind(this)
+        this.onResetDesignParameterFlagConstrainedMin = this.onResetDesignParameterFlagConstrainedMin.bind(this)
+        this.onChangeDesignParameterConstraintMax = this.onChangeDesignParameterConstraintMax.bind(this);
+        this.onSetDesignParameterFlagConstrainedMax = this.onSetDesignParameterFlagConstrainedMax.bind(this)
+        this.onResetDesignParameterFlagConstrainedMax = this.onResetDesignParameterFlagConstrainedMax.bind(this)
     }
     
     onChangeDesignParameterValue(event) {
         this.props.changeDesignParameterValue(this.props.design_parameter.name, parseFloat(event.target.value));
     }
     
-    onSetDesignParameterFlag(event) {
+    onSetDesignParameterFlagFixed(event) {
         this.props.setDesignParameterFlag(this.props.design_parameter.name, MIN, FIXED);
         this.props.setDesignParameterFlag(this.props.design_parameter.name, MAX, FIXED);
     }
     
-    onResetDesignParameterFlag(event) {
+    onResetDesignParameterFlagFixed(event) {
         this.props.resetDesignParameterFlag(this.props.design_parameter.name, MIN, FIXED);
         this.props.resetDesignParameterFlag(this.props.design_parameter.name, MAX, FIXED);
     }
     
+    onSetDesignParameterFlagConstrainedMin(event) {
+        this.props.setDesignParameterFlag(this.props.design_parameter.name, MIN, CONSTRAINED);
+    }
+    
+    onResetDesignParameterFlagConstrainedMin(event) {
+        this.props.resetDesignParameterFlag(this.props.design_parameter.name, MIN, CONSTRAINED);
+    }
+    
+    onChangeDesignParameterConstraintMin(event) {
+        this.props.changeDesignParameterConstraint(this.props.design_parameter.name, MIN, parseFloat(event.target.value));
+    }
+    
+    onSetDesignParameterFlagConstrainedMax(event) {
+        this.props.setDesignParameterFlag(this.props.design_parameter.name, MAX, CONSTRAINED);
+    }
+    
+    onResetDesignParameterFlagConstrainedMax(event) {
+        this.props.resetDesignParameterFlag(this.props.design_parameter.name, MAX, CONSTRAINED);
+    }
+    
+    onChangeDesignParameterConstraintMax(event) {
+        this.props.changeDesignParameterConstraint(this.props.design_parameter.name, MAX, parseFloat(event.target.value));
+    }
+    
     render() {
-        var cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
-        var cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
+        // =======================================
+        // Value and Fixed Column
+        // =======================================
         var fixed;
         if (this.props.design_parameter.lmin & FIXED) {
             fixed = (
@@ -38,7 +69,7 @@ class DesignParameterRow extends React.Component {
                 <Input className="text-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked onChange={this.onResetDesignParameterFlag} />
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked onChange={this.onResetDesignParameterFlagFixed} />
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
@@ -49,12 +80,16 @@ class DesignParameterRow extends React.Component {
                 <Input className="text-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" onChange={this.onSetDesignParameterFlag} />
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" onChange={this.onSetDesignParameterFlagFixed} />
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
             );
         }
+        // =======================================
+        // Constraint Minimum Column
+        // =======================================
+        var cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
         var cmin;
         if (this.props.design_parameter.lmin & FIXED) {
             cmin = <div/>;
@@ -63,10 +98,10 @@ class DesignParameterRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
+                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked onChange={this.onResetDesignParameterFlagConstrainedMin} />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className={cmin_class} type="number" value={this.props.design_parameter.cmin} />
+                <Input className={cmin_class} type="number" value={this.props.design_parameter.cmin} onChange={this.onChangeDesignParameterConstraintMin} />
               </InputGroup>
             );
         } else {
@@ -74,39 +109,16 @@ class DesignParameterRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
+                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" onChange={this.onSetDesignParameterFlagConstrainedMin} />
                   </InputGroupText>
                 </InputGroupAddon>
                 <div/>
               </InputGroup>
             );
         }
-        var cmax;
-        if (this.props.design_parameter.lmax & FIXED) {
-            cmax = <div />;
-        } else if (this.props.design_parameter.lmax & CONSTRAINED) {
-            cmax = (
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input className={cmax_class} type="number" value={this.props.design_parameter.cmax} />
-              </InputGroup>
-            );
-        } else {
-            cmax = (
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <div />
-              </InputGroup>
-            );
-        }
+        // =======================================
+        // Constraint Violation Minimum Column
+        // =======================================
         var vmin;
         if (this.props.design_parameter.lmin & FIXED) {
             vmin = '';
@@ -115,6 +127,39 @@ class DesignParameterRow extends React.Component {
         } else {
             vmin = '';
         }
+        // =======================================
+        // Constraint Maximum Column
+        // =======================================
+        var cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
+        var cmax;
+        if (this.props.design_parameter.lmax & FIXED) {
+            cmax = <div />;
+        } else if (this.props.design_parameter.lmax & CONSTRAINED) {
+            cmax = (
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked onChange={this.onResetDesignParameterFlagConstrainedMax} />
+                  </InputGroupText>
+                </InputGroupAddon>
+                <Input className={cmax_class} type="number" value={this.props.design_parameter.cmax} onChange={this.onChangeDesignParameterConstraintMax} />
+              </InputGroup>
+            );
+        } else {
+            cmax = (
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" onChange={this.onSetDesignParameterFlagConstrainedMax} />
+                  </InputGroupText>
+                </InputGroupAddon>
+                <div />
+              </InputGroup>
+            );
+        }
+        // =======================================
+        // Constraint Violation Maximum Column
+        // =======================================
         var vmax;
         if (this.props.design_parameter.lmax & FIXED) {
             vmax = '';
@@ -123,6 +168,9 @@ class DesignParameterRow extends React.Component {
         } else {
             vmax = '';
         }
+        // =======================================
+        // Table Row
+        // =======================================
         return (
                 <tr key={this.props.design_parameter.name}>
                   <td className="align-middle">{this.props.design_parameter.name}</td>
@@ -139,6 +187,7 @@ class DesignParameterRow extends React.Component {
 
 const mapDispatchToDesignParameterProps = {
         changeDesignParameterValue: changeDesignParameterValue,
+        changeDesignParameterConstraint: changeDesignParameterConstraint,
         setDesignParameterFlag: setDesignParameterFlag,
         resetDesignParameterFlag: resetDesignParameterFlag
 };
