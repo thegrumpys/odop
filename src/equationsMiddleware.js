@@ -1,6 +1,6 @@
 import { STARTUP, 
     CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
-    CHANGE_STATE_VARIABLE_CONSTRAINT, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
+    CHANGE_STATE_VARIABLE_CONSTRAINT, SAVE_STATE_VARIABLE_CONSTRAINTS, RESTORE_STATE_VARIABLE_CONSTRAINTS, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
     MIN, MAX } from './actionTypes';
 import { 
     changeDesignParameterViolation, changeDesignParameterConstraint, 
@@ -70,6 +70,12 @@ export const equationsMiddleware = store => next => action => {
         changed = true;
         break;
     case CHANGE_STATE_VARIABLE_CONSTRAINT:
+        changed = true;
+        break;
+    case SAVE_STATE_VARIABLE_CONSTRAINTS:
+        changed = true;
+        break;
+    case RESTORE_STATE_VARIABLE_CONSTRAINTS:
         changed = true;
         break;
     case SET_STATE_VARIABLE_FLAG:

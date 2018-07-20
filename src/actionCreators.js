@@ -1,6 +1,6 @@
 import { STARTUP, 
     CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_VIOLATION, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
-    CHANGE_STATE_VARIABLE_VALUE, CHANGE_STATE_VARIABLE_VIOLATION, CHANGE_STATE_VARIABLE_CONSTRAINT, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
+    CHANGE_STATE_VARIABLE_VALUE, CHANGE_STATE_VARIABLE_VIOLATION, CHANGE_STATE_VARIABLE_CONSTRAINT, SAVE_STATE_VARIABLE_CONSTRAINTS, RESTORE_STATE_VARIABLE_CONSTRAINTS, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
     CHANGE_OBJECTIVE_VALUE } from './actionTypes';
 
 export function startup() {
@@ -91,6 +91,24 @@ export function changeStateVariableConstraint(name, minmax, value) {
             name,
             minmax,
             value
+        }
+    }
+  }
+
+export function saveStateVariableConstraints(name) {
+    return {
+        type: SAVE_STATE_VARIABLE_CONSTRAINTS,
+        payload: {
+            name
+        }
+    }
+  }
+
+export function restoreStateVariableConstraints(name) {
+    return {
+        type: RESTORE_STATE_VARIABLE_CONSTRAINTS,
+        payload: {
+            name
         }
     }
   }

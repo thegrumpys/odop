@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
+import { changeStateVariableValue, changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
 import { MIN, MAX } from './actionTypes';
 import { FIXED, CONSTRAINED } from './globals';
 
@@ -19,6 +19,7 @@ class StateVariableRow extends React.Component {
     }
     
     onSetStateVariableFlag(event) {
+        this.props.saveStateVariableConstraints(this.props.state_variable.name);
         this.props.setStateVariableFlag(this.props.state_variable.name, MIN, FIXED|CONSTRAINED);
         this.props.setStateVariableFlag(this.props.state_variable.name, MAX, FIXED|CONSTRAINED);
         this.props.changeStateVariableConstraint(this.props.state_variable.name, MIN, this.props.state_variable.value);
@@ -26,8 +27,7 @@ class StateVariableRow extends React.Component {
     }
     
     onResetStateVariableFlag(event) {
-        this.props.resetStateVariableFlag(this.props.state_variable.name, MIN, FIXED);
-        this.props.resetStateVariableFlag(this.props.state_variable.name, MAX, FIXED);
+        this.props.restoreStateVariableConstraints(this.props.state_variable.name);
     }
     
     render() {
@@ -142,6 +142,8 @@ class StateVariableRow extends React.Component {
 const mapDispatchToStateVariableProps = {
         changeStateVariableValue: changeStateVariableValue,
         changeStateVariableConstraint: changeStateVariableConstraint,
+        saveStateVariableConstraints: saveStateVariableConstraints,
+        restoreStateVariableConstraints: restoreStateVariableConstraints,
         setStateVariableFlag: setStateVariableFlag,
         resetStateVariableFlag: resetStateVariableFlag
 };
