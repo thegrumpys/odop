@@ -29,8 +29,8 @@ export class StateVariableRow extends React.Component {
     }
     
     render() {
-        var cmin_color = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'red' : 'black';
-        var cmax_color = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'red' : 'black';
+        var cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-danger text-right' : 'text-right';
+        var cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-danger text-right' : 'text-right';
         var fixed;
         if (this.props.state_variable.lmin & FIXED) {
             fixed = (
@@ -66,7 +66,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="text-right" type="number" value={this.props.state_variable.cmin} style={{color:cmin_color}} />
+                <Input className={cmin_class} type="number" value={this.props.state_variable.cmin} />
               </InputGroup>
             );
         } else {
@@ -92,7 +92,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="text-right" type="number" value={this.props.state_variable.cmax} style={{color:cmax_color}} />
+                <Input className={cmax_class} type="number" value={this.props.state_variable.cmax} />
               </InputGroup>
             );
         } else {
