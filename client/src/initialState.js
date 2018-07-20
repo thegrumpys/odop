@@ -1,4 +1,4 @@
-export const initialState = {
+const initialState = {
         "constants": [
             {
                 "name": "PI",
@@ -116,3 +116,5 @@ export const initialState = {
         "version": "1.2",
         "objective_value": 0.5605106435926049
     };
+
+module.exports = { initialState };

@@ -1,37 +1,28 @@
-var {createServer} = require('http'); 
-var express = require('express');
-var compression = require('compression');
-var morgan = require('morgan');
-var path = require('path');
+//const express = require('express');
+//const { initialState } = require('./client/src/initialState');
+//
+//const app = express();
+//
+//app.get('/api/designs/pcyl/models/startup', (req, res) => {
+//    console.log("In server /api/designs/pcyl/models/startup");
+//    res.json(initialState);
+//});
+//
+//const port = 5000;
+//
+//app.listen(port, () => `Server running on port ${port}`);
 
-var app = express();
-var dev = app.get('env') !== 'production';
 
-if (!dev) {
-    app.disable('x-powered-by');
-    app.use(compression());
-    app.use(morgan('common'));
 
-    console.log('production public url: ', process.env.PUBLIC_URL)
-    var staticPath = path.resolve(__dirname, 'build');
-    console.log('production staticPath='+staticPath);
-    app.use(express.static(staticPath));
-    
-    app.get('*', function(req,res){
-        res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-    });
-} else {
-    app.use(morgan('dev'));
 
-    console.log('development public url: ', process.env.PUBLIC_URL)
-    var staticPath = path.join(__dirname, '/');
-    console.log('development staticPath='+staticPath);
-    app.use(express.static(staticPath));
-}
+const express = require('express');
+const path = require('path');
+const app = express();
 
-var server = createServer(app);
+app.use(express.static(path.join(__dirname, 'build')));
 
-server.listen(process.env.PORT || 3000, function(err) {
-    if (err) throw err;
-    console.log('Server started!');
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+app.listen(5000);

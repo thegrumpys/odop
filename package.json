@@ -1,14 +1,13 @@
 {
   "name": "pcyl-web",
   "version": "0.1.0",
-  "description": "Piston-Cylinder problem - Web Interface",
-  "main": "app.js",
+  "description": "Piston-Cylinder problem - Web Interface Server",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "coverage": "react-scripts test --env=jsdom --coverage",
-    "eject": "react-scripts eject"
+    "client-install": "cd client && npm install",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client"
   },
   "repository": {
     "type": "git",
@@ -21,25 +20,13 @@
   },
   "homepage": "https://pcyl-web.heroku.com/",
   "devDependencies": {
-    "react-scripts": "1.1.4",
     "chai": "^4.1.2",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "sinon": "^6.0.0"
   },
   "dependencies": {
-    "ajv": "^6.5.2",
-    "bootstrap": "^4.1.1",
-    "compression": "^1.7.2",
-    "express": "^4.16.3",
-    "jquery": "^3.3.1",
-    "morgan": "^1.9.0",
-    "popper.js": "^1.14.3",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-redux": "^5.0.7",
-    "reactstrap": "^6.2.0",
-    "redux": "^4.0.0",
-    "sprintf-js": "^1.1.1"
+    "express": "^4.16.2",
+    "nodemon": "^1.14.7"
   }
 }
