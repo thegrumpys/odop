@@ -60,7 +60,9 @@ export class StateVariableRow extends React.Component {
             );
         }
         var cmin;
-        if (this.props.state_variable.lmin & CONSTRAINED) {
+        if (this.props.state_variable.lmin & FIXED) {
+            cmin = <div/>;
+        } else if (this.props.state_variable.lmin & CONSTRAINED) {
             cmin = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
@@ -71,8 +73,6 @@ export class StateVariableRow extends React.Component {
                 <Input className="pull-right" type="number" value={this.props.state_variable.cmin} />
               </InputGroup>
             );
-        } else if (this.props.state_variable.lmin & FIXED) {
-            cmin = <div/>;
         } else {
             cmin = (
               <InputGroup>
@@ -86,25 +86,25 @@ export class StateVariableRow extends React.Component {
             );
         }
         var cmax;
-        if (this.props.state_variable.lmax & CONSTRAINED) {
+        if (this.props.state_variable.lmax & FIXED) {
+            cmax = <div />;
+        } else if (this.props.state_variable.lmax & CONSTRAINED) {
             cmax = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input className="pull-right" type="number" value={this.props.state_variable.cmax} />
               </InputGroup>
             );
-        } else if (this.props.state_variable.lmin & FIXED) {
-            cmax = <div />;
         } else {
             cmax = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" />
                   </InputGroupText>
                 </InputGroupAddon>
                 <div />
@@ -142,10 +142,10 @@ export class StateVariableRow extends React.Component {
 }
 
 
-const mapDispatchToProps = {
+const mapDispatchToStateVariableProps = {
         changeStateVariableValue: changeStateVariableValue,
         setStateVariableFlag: setStateVariableFlag,
         resetStateVariableFlag: resetStateVariableFlag
 };
 
-export default connect(null, mapDispatchToProps)(StateVariableRow);
+export default connect(null, mapDispatchToStateVariableProps)(StateVariableRow);

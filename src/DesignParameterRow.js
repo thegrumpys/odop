@@ -29,8 +29,8 @@ export class DesignParameterRow extends React.Component {
     }
     
     render() {
-        var cmin_class = this.props.design_parameter.vmin > 0.0 ? 'bg-danger align-middle' : 'align-middle';
-        var cmax_class = this.props.design_parameter.vmax > 0.0 ? 'bg-danger align-middle' : 'align-middle';
+        var cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'bg-danger align-middle' : 'align-middle';
+        var cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'bg-danger align-middle' : 'align-middle';
         var fixed;
         if (this.props.design_parameter.lmin & FIXED) {
             fixed = (
@@ -82,14 +82,14 @@ export class DesignParameterRow extends React.Component {
             );
         }
         var cmax;
-        if (this.props.design_parameter.lmin & FIXED) {
+        if (this.props.design_parameter.lmax & FIXED) {
             cmax = <div />;
         } else if (this.props.design_parameter.lmax & CONSTRAINED) {
             cmax = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input className="pull-right" type="number" value={this.props.design_parameter.cmax} />
@@ -100,7 +100,7 @@ export class DesignParameterRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" />
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" />
                   </InputGroupText>
                 </InputGroupAddon>
                 <div />
@@ -135,13 +135,12 @@ export class DesignParameterRow extends React.Component {
                 </tr>
         );
     }
-    
 }
 
-const mapDispatchToProps = {
+const mapDispatchToDesignParameterProps = {
         changeDesignParameterValue: changeDesignParameterValue,
         setDesignParameterFlag: setDesignParameterFlag,
         resetDesignParameterFlag: resetDesignParameterFlag
 };
 
-export default connect(null, mapDispatchToProps)(DesignParameterRow);
+export default connect(null, mapDispatchToDesignParameterProps)(DesignParameterRow);
