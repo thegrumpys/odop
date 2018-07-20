@@ -4,7 +4,7 @@ import DesignParametersSection from './DesignParametersSection';
 import StateVariablesSection from './StateVariablesSection';
 import { connect } from 'react-redux';
 
-export class DesignTable extends React.Component {
+class DesignTable extends React.Component {
     
     render() {
         return (

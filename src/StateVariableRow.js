@@ -5,7 +5,7 @@ import { changeStateVariableValue, setStateVariableFlag, resetStateVariableFlag 
 import { MIN, MAX } from './actionTypes';
 import { FIXED, CONSTRAINED } from './globals';
 
-export class StateVariableRow extends React.Component {
+class StateVariableRow extends React.Component {
     
     constructor(props) {
         super(props);
@@ -29,13 +29,13 @@ export class StateVariableRow extends React.Component {
     }
     
     render() {
-        var cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'bg-danger align-middle' : 'align-middle';
-        var cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'bg-danger align-middle' : 'align-middle';
+        var cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
+        var cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
         var fixed;
         if (this.props.state_variable.lmin & FIXED) {
             fixed = (
               <InputGroup>
-                <Input className="pull-right" type="number" value={this.props.state_variable.value} onChange={this.onChangeStateVariableValue} />
+                <Input className="text-right" type="number" value={this.props.state_variable.value} onChange={this.onChangeStateVariableValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked onChange={this.onResetStateVariableFlag} />
@@ -46,11 +46,7 @@ export class StateVariableRow extends React.Component {
         } else {
             fixed = (
               <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <span className="pull-right">{this.props.state_variable.value.toFixed(4)}</span>
-                  </InputGroupText>
-                </InputGroupAddon>
+                <span className="text-right form-control bg-light">{this.props.state_variable.value.toFixed(4)}</span>
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <Input addon type="checkbox" aria-label="Checkbox for fixed value" onChange={this.onSetStateVariableFlag} />
@@ -70,7 +66,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.state_variable.cmin} />
+                <Input className={cmin_class} type="number" value={this.props.state_variable.cmin} />
               </InputGroup>
             );
         } else {
@@ -96,7 +92,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.state_variable.cmax} />
+                <Input className={cmax_class} type="number" value={this.props.state_variable.cmax} />
               </InputGroup>
             );
         } else {
@@ -130,11 +126,11 @@ export class StateVariableRow extends React.Component {
         return (
                 <tr key={this.props.state_variable.name}>
                   <td className="align-middle">{this.props.state_variable.name}</td>
-                  <td className="pull-right align-middle" colSpan="2">{fixed}</td>
+                  <td className="align-middle" colSpan="2">{fixed}</td>
                   <td className="text-nowrap align-middle">{this.props.state_variable.units}</td>
-                  <td className={cmin_class} colSpan="2">{cmin}</td>
+                  <td className="align-middle" colSpan="2">{cmin}</td>
                   <td className="text-right align-middle">{vmin}</td>
-                  <td className={cmax_class} colSpan="2">{cmax}</td>
+                  <td className="align-middle" colSpan="2">{cmax}</td>
                   <td className="text-right align-middle">{vmax}</td>
                 </tr>
         );

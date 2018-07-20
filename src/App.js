@@ -17,7 +17,7 @@ import {
 import DesignTable from './DesignTable';
 import { connect } from 'react-redux';
 
-export class App extends Component {
+class App extends Component {
     
     constructor(props) {
         super(props);
