@@ -29,8 +29,8 @@ export class DesignParameterRow extends React.Component {
     }
     
     render() {
-        var cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'bg-danger align-middle' : 'align-middle';
-        var cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'bg-danger align-middle' : 'align-middle';
+        var cmin_color = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'red' : 'black';
+        var cmax_color = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'red' : 'black';
         var fixed;
         if (this.props.design_parameter.lmin & FIXED) {
             fixed = (
@@ -66,7 +66,7 @@ export class DesignParameterRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.cmin} />
+                <Input className="pull-right" type="number" value={this.props.design_parameter.cmin} style={{color:cmin_color}} />
               </InputGroup>
             );
         } else {
@@ -92,7 +92,7 @@ export class DesignParameterRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.design_parameter.cmax} />
+                <Input className="pull-right" type="number" value={this.props.design_parameter.cmax} style={{color:cmax_color}} />
               </InputGroup>
             );
         } else {
@@ -128,9 +128,9 @@ export class DesignParameterRow extends React.Component {
                   <td className="align-middle">{this.props.design_parameter.name}</td>
                   <td className="align-middle" colSpan="2">{fixed}</td>
                   <td className="text-nowrap align-middle">{this.props.design_parameter.units}</td>
-                  <td className={cmin_class} colSpan="2">{cmin}</td>
+                  <td className="align-middle" colSpan="2">{cmin}</td>
                   <td className="text-right align-middle">{vmin}</td>
-                  <td className={cmax_class} colSpan="2">{cmax}</td>
+                  <td className="align-middle" colSpan="2">{cmax}</td>
                   <td className="text-right align-middle">{vmax}</td>
                 </tr>
         );

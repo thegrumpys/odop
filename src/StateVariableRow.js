@@ -29,8 +29,8 @@ export class StateVariableRow extends React.Component {
     }
     
     render() {
-        var cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'bg-danger align-middle' : 'align-middle';
-        var cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'bg-danger align-middle' : 'align-middle';
+        var cmin_color = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'red' : 'black';
+        var cmax_color = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'red' : 'black';
         var fixed;
         if (this.props.state_variable.lmin & FIXED) {
             fixed = (
@@ -70,7 +70,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.state_variable.cmin} />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmin} style={{color:cmin_color}} />
               </InputGroup>
             );
         } else {
@@ -96,7 +96,7 @@ export class StateVariableRow extends React.Component {
                     <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className="pull-right" type="number" value={this.props.state_variable.cmax} />
+                <Input className="pull-right" type="number" value={this.props.state_variable.cmax} style={{color:cmax_color}} />
               </InputGroup>
             );
         } else {
@@ -132,9 +132,9 @@ export class StateVariableRow extends React.Component {
                   <td className="align-middle">{this.props.state_variable.name}</td>
                   <td className="pull-right align-middle" colSpan="2">{fixed}</td>
                   <td className="text-nowrap align-middle">{this.props.state_variable.units}</td>
-                  <td className={cmin_class} colSpan="2">{cmin}</td>
+                  <td className="align-middle" colSpan="2">{cmin}</td>
                   <td className="text-right align-middle">{vmin}</td>
-                  <td className={cmax_class} colSpan="2">{cmax}</td>
+                  <td className="align-middle" colSpan="2">{cmax}</td>
                   <td className="text-right align-middle">{vmax}</td>
                 </tr>
         );
