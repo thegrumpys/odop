@@ -13,8 +13,8 @@ class DesignTable extends React.Component {
                     <Col className="font-weight-bold" xs="2">Name</Col>
                     <Col className="font-weight-bold text-center" xs="2">Value</Col>
                     <Col className="font-weight-bold" xs="1">Units</Col>
-                    <Col className="font-weight-bold text-center" xs="3">Min</Col>
-                    <Col className="font-weight-bold text-center" xs="3">Max</Col>
+                    <Col className="font-weight-bold text-center" xs="3">Min Constraint</Col>
+                    <Col className="font-weight-bold text-center" xs="3">Max Constraint</Col>
                 </Row>
                 <Row>
                     <Col className="font-weight-bold" xs="2"></Col>
@@ -22,11 +22,11 @@ class DesignTable extends React.Component {
                     <Col className="font-weight-bold text-right" xs="1">Fix</Col>
                     <Col className="font-weight-bold" xs="1"></Col>
                     <Col className="font-weight-bold text-left" xs="1">Constrain</Col>
-                    <Col className="font-weight-bold text-right" xs="1">Value</Col>
-                    <Col className="font-weight-bold text-center" xs="1">Violation</Col>
+                    <Col className="font-weight-bold text-center" xs="1">Value</Col>
+                    <Col className="font-weight-bold text-right" xs="1">Violation</Col>
                     <Col className="font-weight-bold text-left" xs="1">Constrain</Col>
-                    <Col className="font-weight-bold text-right" xs="1">Value</Col>
-                    <Col className="font-weight-bold text-center" xs="1">Violation</Col>
+                    <Col className="font-weight-bold text-center" xs="1">Value</Col>
+                    <Col className="font-weight-bold text-right" xs="1">Violation</Col>
                 </Row>
                 <DesignParametersSection />
                 <StateVariablesSection />

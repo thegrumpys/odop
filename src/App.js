@@ -5,6 +5,7 @@ import {
     NavbarToggler,
     NavbarBrand,
     Nav,
+    Container,
     NavItem,
     NavLink,
     TabContent,
@@ -150,7 +151,9 @@ class App extends Component {
                 <Jumbotron>
                     <TabContent activeTab={this.state.activeTab}>
                         <TabPane tabId="1">
-                            <DesignTable />
+                            <Container fluid>
+                                <DesignTable />
+                            </Container>
                         </TabPane>
                     </TabContent>
                 </Jumbotron>
