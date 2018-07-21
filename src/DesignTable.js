@@ -31,7 +31,7 @@ class DesignTable extends React.Component {
                 <DesignParametersSection />
                 <StateVariablesSection />
                 <Row>
-                    <Col>&nbsp;</Col>
+                    <Col xs="12">&nbsp;</Col>
                 </Row>
                 <Row>
                     <Col xs="8"></Col>
