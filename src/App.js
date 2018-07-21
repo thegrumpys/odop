@@ -19,6 +19,7 @@ import {
 import classnames from 'classnames';
 import DesignTable from './DesignTable';
 import { connect } from 'react-redux';
+import HelpAbout from './menus/Help/HelpAbout';
 
 class App extends Component {
     
@@ -106,7 +107,7 @@ class App extends Component {
                                         Display Sub-Problems
                                     </DropdownItem>
                                     <DropdownItem>
-                                        Static Quantities
+                                        Calculation Inputs
                                     </DropdownItem>
                                     <DropdownItem>
                                         Violations
@@ -133,9 +134,7 @@ class App extends Component {
                                     <DropdownItem>
                                         Tutorial
                                     </DropdownItem>
-                                    <DropdownItem>
-                                        About
-                                    </DropdownItem>
+                                    <HelpAbout />
                                </DropdownMenu>
                             </UncontrolledDropdown>
                         </Nav>
