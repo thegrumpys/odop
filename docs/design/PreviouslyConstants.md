@@ -12,8 +12,8 @@ Instead of using the term "constants", other possibilities include:
  * problem quantities
  * calculation inputs
  
- Per discussion, the best approach may be to adopt an inheritance model where both
- the old "constants" and design parameters are a proper subset of a broader class.   
+ Per discussion, the best approach may be to adopt an inheritance model where both the
+ old "constants" and design parameters are a proper subset of a broader class such as "Independent Variables".   
  Possibilities include: 
 
 Independent Variables

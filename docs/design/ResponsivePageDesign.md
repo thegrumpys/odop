@@ -11,7 +11,7 @@ A preference setting (or View menu setting) could reduce the number of columns d
 Specifically, columns displaying constraint violations could get dropped.
 
 See  ideas for a View menu and related discussion of IOCLASS for Sub-Problems in [menu.md](https://github.com/thegrumpys/pcyl-web/blob/master/docs/design/menu.md "link to menu.md").
-These include the idea of a checkbox for dropping display of "Static Quantities".
+These include the idea of a checkbox for dropping display of "Calculation Inputs" (a.k.a Constants).
 
 If possible with modest effort, it would be nice if the "Name | Value | Units | Fixed | Min | Max"
 heading would stay on screen when scrolling vertically.

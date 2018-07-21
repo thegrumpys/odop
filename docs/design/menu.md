@@ -34,7 +34,7 @@ Sys-Name | File | Action | View | Help |
   * Define Sub-Problems
   * Display Sub-Problems
   * Report
-  *  Static Quantities
+  *  Calculation Inputs
   *  Violations
 * Help
   * Context Help F1
@@ -126,8 +126,8 @@ as well as problem-specific data in problem-specific formats can be included in 
 report. The user can use the features of the system .PDF utility in order to save the
 file into the browser's local file system.
 
-### View : Static Quantities
-A check in the checkbox will cause "static quantities" (previously known as
+### View : Calculation Inputs
+A check in the checkbox will cause "calculation inputs" (previously known as
 "constants") to be displayed.
 
 ### View : Violations
