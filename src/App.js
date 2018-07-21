@@ -19,7 +19,7 @@ import {
 import classnames from 'classnames';
 import DesignTable from './DesignTable';
 import { connect } from 'react-redux';
-import HelpAboutModal from './menus/Help/HelpAboutModal';
+import HelpAbout from './menus/Help/HelpAbout';
 
 class App extends Component {
     
@@ -134,7 +134,7 @@ class App extends Component {
                                     <DropdownItem>
                                         Tutorial
                                     </DropdownItem>
-                                    <HelpAboutModal />
+                                    <HelpAbout />
                                </DropdownMenu>
                             </UncontrolledDropdown>
                         </Nav>

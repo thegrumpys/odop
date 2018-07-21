@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 
-class HelpAboutModal extends React.Component {
+class HelpAbout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,4 +45,4 @@ const mapStateToProps = state => ({
     version: state.version
   });
 
-export default connect(mapStateToProps)(HelpAboutModal);
+export default connect(mapStateToProps)(HelpAbout);
