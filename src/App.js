@@ -19,6 +19,7 @@ import {
 import classnames from 'classnames';
 import DesignTable from './DesignTable';
 import { connect } from 'react-redux';
+import HelpAboutModal from './menus/Help/HelpAboutModal';
 
 class App extends Component {
     
@@ -106,7 +107,7 @@ class App extends Component {
                                         Display Sub-Problems
                                     </DropdownItem>
                                     <DropdownItem>
-                                        Static Quantities
+                                        Calculation Inputs
                                     </DropdownItem>
                                     <DropdownItem>
                                         Violations
@@ -135,6 +136,7 @@ class App extends Component {
                                     </DropdownItem>
                                     <DropdownItem>
                                         About
+                                        <DropdownItem onClick={this.HelpAboutModal} />
                                     </DropdownItem>
                                </DropdownMenu>
                             </UncontrolledDropdown>
@@ -159,6 +161,7 @@ class App extends Component {
                 </Jumbotron>
             </div>
         );
+        <HelpAboutModal />
     }
     
 }
