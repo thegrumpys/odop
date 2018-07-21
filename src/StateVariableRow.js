@@ -71,7 +71,7 @@ class StateVariableRow extends React.Component {
                 <Input className="text-right" type="number" value={this.props.state_variable.value} onChange={this.onChangeStateVariableValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked onChange={this.onResetStateVariableFlag} />
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.state_variable.lmin & FIXED} onChange={this.onResetStateVariableFlag} />
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
@@ -82,7 +82,7 @@ class StateVariableRow extends React.Component {
                 <span className="text-right form-control bg-light">{this.props.state_variable.value.toFixed(4)}</span>
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" onChange={this.onSetStateVariableFlag} />
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.state_variable.lmin & FIXED} onChange={this.onSetStateVariableFlag} />
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
@@ -103,7 +103,7 @@ class StateVariableRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked onChange={this.onResetStateVariableFlagConstrainedMin} />
+                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.state_variable.lmin & CONSTRAINED} onChange={this.onResetStateVariableFlagConstrainedMin} />
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input className={cmin_class} type="number" value={this.props.state_variable.cmin} onChange={this.onChangeStateVariableConstraintMin} />
@@ -114,7 +114,7 @@ class StateVariableRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" onChange={this.onSetStateVariableFlagConstrainedMin} />
+                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.state_variable.lmin & CONSTRAINED} onChange={this.onSetStateVariableFlagConstrainedMin} />
                   </InputGroupText>
                 </InputGroupAddon>
                 <div/>
@@ -145,7 +145,7 @@ class StateVariableRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked onChange={this.onResetStateVariableFlagConstrainedMax} />
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.state_variable.lmax & CONSTRAINED} onChange={this.onResetStateVariableFlagConstrainedMax} />
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input className={cmax_class} type="number" value={this.props.state_variable.cmax} onChange={this.onChangeStateVariableConstraintMax} />
@@ -156,7 +156,7 @@ class StateVariableRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for maximum value"  onChange={this.onSetStateVariableFlagConstrainedMax} />
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.state_variable.lmax & CONSTRAINED} onChange={this.onSetStateVariableFlagConstrainedMax} />
                   </InputGroupText>
                 </InputGroupAddon>
                 <div />

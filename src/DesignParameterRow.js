@@ -69,7 +69,7 @@ class DesignParameterRow extends React.Component {
                 <Input className="text-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked onChange={this.onResetDesignParameterFlagFixed} />
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.design_parameter.lmin & FIXED} onChange={this.onResetDesignParameterFlagFixed} />
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
@@ -80,7 +80,7 @@ class DesignParameterRow extends React.Component {
                 <Input className="text-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" onChange={this.onSetDesignParameterFlagFixed} />
+                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.design_parameter.lmin & FIXED} onChange={this.onSetDesignParameterFlagFixed} />
                   </InputGroupText>
                 </InputGroupAddon>
               </InputGroup>
@@ -98,7 +98,7 @@ class DesignParameterRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked onChange={this.onResetDesignParameterFlagConstrainedMin} />
+                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.design_parameter.lmin & CONSTRAINED} onChange={this.onResetDesignParameterFlagConstrainedMin} />
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input className={cmin_class} type="number" value={this.props.design_parameter.cmin} onChange={this.onChangeDesignParameterConstraintMin} />
@@ -109,7 +109,7 @@ class DesignParameterRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" onChange={this.onSetDesignParameterFlagConstrainedMin} />
+                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.design_parameter.lmin & CONSTRAINED} onChange={this.onSetDesignParameterFlagConstrainedMin} />
                   </InputGroupText>
                 </InputGroupAddon>
                 <div/>
@@ -139,7 +139,7 @@ class DesignParameterRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked onChange={this.onResetDesignParameterFlagConstrainedMax} />
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.design_parameter.lmax & CONSTRAINED} onChange={this.onResetDesignParameterFlagConstrainedMax} />
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input className={cmax_class} type="number" value={this.props.design_parameter.cmax} onChange={this.onChangeDesignParameterConstraintMax} />
@@ -150,7 +150,7 @@ class DesignParameterRow extends React.Component {
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" onChange={this.onSetDesignParameterFlagConstrainedMax} />
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.design_parameter.lmax & CONSTRAINED} onChange={this.onSetDesignParameterFlagConstrainedMax} />
                   </InputGroupText>
                 </InputGroupAddon>
                 <div />
