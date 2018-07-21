@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
+import { connect } from 'react-redux';
 
 class HelpAboutModal extends React.Component {
   constructor(props) {
@@ -24,12 +25,10 @@ class HelpAboutModal extends React.Component {
                 About
             </DropdownItem>
           <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>About PCyl-Web</ModalHeader>
+          <ModalHeader toggle={this.toggle}>About {this.props.name}</ModalHeader>
           <ModalBody>
-            Software version 
-            {this.state.version} 
-            <br />
-            Design Model version 1.2<br />
+            Software version &nbsp; 0.2.0  <br />
+            Design Model version &nbsp; 1.2<br />
             <a href="https://github.com/thegrumpys/pcyl-web">Link to website home page</a>
           </ModalBody>
           <ModalFooter>
@@ -42,13 +41,8 @@ class HelpAboutModal extends React.Component {
 }  
 
 const mapStateToProps = state => ({
-    version: state.version,
-        if (label.name === 'COMMENT') {
-            output += label.value;
-        }
-        return output;
-    },'')
-});
+    name: state.name, 
+    version: state.version
+  });
 
-// export default HelpAboutModal;
 export default connect(mapStateToProps)(HelpAboutModal);
