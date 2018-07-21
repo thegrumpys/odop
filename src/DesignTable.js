@@ -32,8 +32,8 @@ class DesignTable extends React.Component {
                 <StateVariablesSection />
                 <Row>
                     <Col xs="8"></Col>
-                    <Col xs="2">Objective Value</Col>
-                    <Col className="font-weight-bold text-right" xs="1">{this.props.objective_value.toFixed(4)}</Col>
+                    <Col className="font-weight-bold" xs="2">Objective Value</Col>
+                    <Col className="text-right" xs="1">{this.props.objective_value.toFixed(4)}</Col>
                 </Row>
                 </React.Fragment>
         );

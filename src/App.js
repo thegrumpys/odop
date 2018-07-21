@@ -5,14 +5,17 @@ import {
     NavbarToggler,
     NavbarBrand,
     Nav,
-    Row,
-    Col,
+    NavItem,
+    NavLink,
+    TabContent,
+    TabPane,
     Jumbotron,
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
     DropdownItem
 } from 'reactstrap';
+import classnames from 'classnames';
 import DesignTable from './DesignTable';
 import { connect } from 'react-redux';
 
@@ -22,7 +25,8 @@ class App extends Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            activeTab: '1'
         };
     }
     
@@ -36,7 +40,7 @@ class App extends Component {
         return (
             <div>
                 <Navbar color="inverse" light expand="md">
-                    <NavbarBrand href="/">PCyl-Web</NavbarBrand>
+                    <NavbarBrand href="/"><img src="favicon.ico" alt="The Grumpys"/> PCyl-Web</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
@@ -134,25 +138,21 @@ class App extends Component {
                                </DropdownMenu>
                             </UncontrolledDropdown>
                         </Nav>
+                        <Nav tabs>
+                            <NavItem>
+                                <NavLink className={classnames({ active: this.state.activeTab === '1' })}>
+                                    {this.props.comment}
+                                </NavLink>
+                            </NavItem>
+                        </Nav>
                     </Collapse>
                 </Navbar>
                 <Jumbotron>
-                    <Row>
-                        <Col xs="12">
-                            <h1>{this.props.name} Design</h1>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col xs="12">
-                            <h2>{this.props.comment}</h2>
-                        </Col>
-                    </Row>
-                    <DesignTable />
-                    <Row>
-                        <Col>
-                            <div className="text-center" xs="12">Design Model Version {this.props.version}</div>
-                        </Col>
-                    </Row>
+                    <TabContent activeTab={this.state.activeTab}>
+                        <TabPane tabId="1">
+                            <DesignTable />
+                        </TabPane>
+                    </TabContent>
                 </Jumbotron>
             </div>
         );
