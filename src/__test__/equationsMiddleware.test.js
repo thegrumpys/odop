@@ -151,7 +151,7 @@ it('middleware change radius design parameter value without startup', () => {
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.5);
     expect(design.state_variables[0].name).toEqual("FORCE");
-    expect(design.state_variables[0].value).toEqual(251.32741228718348);
+    expect(design.state_variables[0].value).toEqual(392.6990816987241);
     expect(design.state_variables[1].name).toEqual("AREA");
     expect(design.state_variables[1].value).toEqual(0.7853981633974483);
     expect(design.state_variables[2].name).toEqual("STRESS");
