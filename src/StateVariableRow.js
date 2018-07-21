@@ -46,6 +46,9 @@ class StateVariableRow extends React.Component {
     
     onChangeStateVariableConstraintMin(event) {
         this.props.changeStateVariableConstraint(this.props.state_variable.name, MIN, parseFloat(event.target.value));
+        if (this.props.state_variable.lmin & FIXED) {
+            this.props.changeStateVariableConstraint(this.props.state_variable.name, MAX, parseFloat(event.target.value));
+        }
     }
     
     onSetStateVariableFlagConstrainedMax(event) {
@@ -58,6 +61,9 @@ class StateVariableRow extends React.Component {
     
     onChangeStateVariableConstraintMax(event) {
         this.props.changeStateVariableConstraint(this.props.state_variable.name, MAX, parseFloat(event.target.value));
+        if (this.props.state_variable.lmin & FIXED) {
+            this.props.changeStateVariableConstraint(this.props.state_variable.name, MIN, parseFloat(event.target.value));
+        }
     }
     
     render() {
@@ -68,7 +74,7 @@ class StateVariableRow extends React.Component {
         if (this.props.state_variable.lmin & FIXED) {
             fixed = (
               <InputGroup>
-                <Input className="text-right" type="number" value={this.props.state_variable.value} onChange={this.onChangeStateVariableValue} />
+                <span className="text-right form-control bg-light">{this.props.state_variable.value.toFixed(4)}</span>
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.state_variable.lmin & FIXED} onChange={this.onResetStateVariableFlag} />
