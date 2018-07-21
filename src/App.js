@@ -140,11 +140,19 @@ class App extends Component {
                 <Jumbotron>
                     <Container>
                         <Row>
-                            <Col>
+                            <Col xs="12">
                                 <h1>{this.props.name} Design</h1>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs="12">
                                 <h2>{this.props.comment}</h2>
-                                <DesignTable />
-                                <div className="text-center">Design Model Version {this.props.version}</div>
+                            </Col>
+                        </Row>
+                        <DesignTable />
+                        <Row>
+                            <Col>
+                                <div className="text-center" xs="12">Design Model Version {this.props.version}</div>
                             </Col>
                         </Row>
                     </Container>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { Row, Col, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeDesignParameterValue, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag } from './actionCreators';
 import { MIN, MAX } from './actionTypes';
@@ -172,15 +172,15 @@ class DesignParameterRow extends React.Component {
         // Table Row
         // =======================================
         return (
-                <tr key={this.props.design_parameter.name}>
-                  <td className="align-middle">{this.props.design_parameter.name}</td>
-                  <td className="align-middle" colSpan="2">{fixed}</td>
-                  <td className="text-nowrap align-middle">{this.props.design_parameter.units}</td>
-                  <td className="align-middle" colSpan="2">{cmin}</td>
-                  <td className="text-right align-middle">{vmin}</td>
-                  <td className="align-middle" colSpan="2">{cmax}</td>
-                  <td className="text-right align-middle">{vmax}</td>
-                </tr>
+                <Row key={this.props.design_parameter.name}>
+                    <Col className="align-middle" xs="2">{this.props.design_parameter.name}</Col>
+                    <Col className="align-middle" xs="2">{fixed}</Col>
+                    <Col className="text-nowrap align-middle" xs="1">{this.props.design_parameter.units}</Col>
+                    <Col className="align-middle" xs="2">{cmin}</Col>
+                    <Col className="text-right align-middle" xs="1">{vmin}</Col>
+                    <Col className="align-middle" xs="2">{cmax}</Col>
+                    <Col className="text-right align-middle" xs="1">{vmax}</Col>
+                </Row>
         );
     }
 }
