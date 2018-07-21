@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import DesignParametersSection from './DesignParametersSection';
 import StateVariablesSection from './StateVariablesSection';
 import { connect } from 'react-redux';
@@ -8,40 +8,34 @@ class DesignTable extends React.Component {
     
     render() {
         return (
-                <Table responsive>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th className="text-center" colSpan="2">Value</th>
-                            <th>Units</th>
-                            <th className="text-center" colSpan="3">Min</th>
-                            <th className="text-center" colSpan="3">Max</th>
-                        </tr>
-                        <tr>
-                          <th></th>
-                          <th className="text-left">&nbsp;</th>
-                          <th className="text-right">Fix</th>
-                          <th></th>
-                          <th className="text-left">Constrain</th>
-                          <th className="text-right">Value</th>
-                          <th className="text-center">Violation</th>
-                          <th className="text-left">Constrain</th>
-                          <th className="text-right">Value</th>
-                          <th className="text-center">Violation</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <DesignParametersSection />
-                        <StateVariablesSection />
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colSpan="7"></th>
-                            <th colSpan="2">Objective Value</th>
-                            <td className="text-right">{this.props.objective_value.toFixed(4)}</td>
-                        </tr>
-                    </tfoot>
-                </Table>
+                <React.Fragment>
+                <Row>
+                    <Col className="font-weight-bold" xs="2">Name</Col>
+                    <Col className="font-weight-bold text-center" xs="2">Value</Col>
+                    <Col className="font-weight-bold" xs="1">Units</Col>
+                    <Col className="font-weight-bold text-center" xs="3">Min</Col>
+                    <Col className="font-weight-bold text-center" xs="3">Max</Col>
+                </Row>
+                <Row>
+                    <Col className="font-weight-bold" xs="2"></Col>
+                    <Col className="font-weight-bold text-left" xs="1">&nbsp;</Col>
+                    <Col className="font-weight-bold text-right" xs="1">Fix</Col>
+                    <Col className="font-weight-bold" xs="1"></Col>
+                    <Col className="font-weight-bold text-left" xs="1">Constrain</Col>
+                    <Col className="font-weight-bold text-right" xs="1">Value</Col>
+                    <Col className="font-weight-bold text-center" xs="1">Violation</Col>
+                    <Col className="font-weight-bold text-left" xs="1">Constrain</Col>
+                    <Col className="font-weight-bold text-right" xs="1">Value</Col>
+                    <Col className="font-weight-bold text-center" xs="1">Violation</Col>
+                </Row>
+                <DesignParametersSection />
+                <StateVariablesSection />
+                <Row>
+                    <Col xs="8"></Col>
+                    <Col xs="2">Objective Value</Col>
+                    <Col className="font-weight-bold text-right" xs="1">{this.props.objective_value.toFixed(4)}</Col>
+                </Row>
+                </React.Fragment>
         );
     }
     

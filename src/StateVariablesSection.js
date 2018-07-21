@@ -1,20 +1,19 @@
 import React from 'react';
+import { Row, Col } from 'reactstrap';
 import StateVariableRow from './StateVariableRow';
 import { connect } from 'react-redux';
 
 class StateVariablesSection extends React.Component {
     
     render() {
-        var rows = [];
-        rows.push(
-                <tr key="State Variables">
-                    <th colSpan="8">Dependent Variables</th>
-                </tr>
-                );
-        this.props.state_variables.forEach((state_variable) => {
-            rows.push(<StateVariableRow key={state_variable.name} state_variable={state_variable} />);
-        });
-        return rows;
+        return (
+            <React.Fragment>
+                <Row key="State Variables">
+                    <Col className="font-weight-bold" xs="12">Dependent Variables</Col>
+                </Row>
+                {this.props.state_variables.map((state_variable) => <StateVariableRow key={state_variable.name} state_variable={state_variable} />)}
+            </React.Fragment>
+        );
     }
     
 }

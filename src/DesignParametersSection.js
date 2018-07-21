@@ -1,20 +1,19 @@
 import React from 'react';
+import { Row, Col } from 'reactstrap';
 import DesignParameterRow from './DesignParameterRow';
 import { connect } from 'react-redux';
 
 class DesignParametersSection extends React.Component {
     
     render() {
-        var rows = [];
-        rows.push(
-                <tr key="Design Parameters">
-                    <th colSpan="8">Independent Variables</th>
-                </tr>
-                );
-        this.props.design_parameters.forEach((design_parameter) => {
-            rows.push(<DesignParameterRow key={design_parameter.name} design_parameter={design_parameter} />);
-        });
-        return rows;
+        return (
+            <React.Fragment>
+                <Row key="Design Parameters">
+                    <Col className="font-weight-bold" xs="12">Independent Variables</Col>
+                </Row>
+                {this.props.design_parameters.map((design_parameter) => <DesignParameterRow key={design_parameter.name} design_parameter={design_parameter} />)}
+            </React.Fragment>
+        );
     }
     
 }
