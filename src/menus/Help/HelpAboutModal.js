@@ -26,7 +26,9 @@ class HelpAboutModal extends React.Component {
           <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>About PCyl-Web</ModalHeader>
           <ModalBody>
-            Software version 0.2 <br />
+            Software version 
+            {this.state.version} 
+            <br />
             Design Model version 1.2<br />
             <a href="https://github.com/thegrumpys/pcyl-web">Link to website home page</a>
           </ModalBody>
@@ -37,6 +39,16 @@ class HelpAboutModal extends React.Component {
         </React.Fragment>
     );
   }
-}
+}  
 
-export default HelpAboutModal;
+const mapStateToProps = state => ({
+    version: state.version,
+        if (label.name === 'COMMENT') {
+            output += label.value;
+        }
+        return output;
+    },'')
+});
+
+// export default HelpAboutModal;
+export default connect(mapStateToProps)(HelpAboutModal);

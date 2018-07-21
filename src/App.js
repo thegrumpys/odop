@@ -134,9 +134,7 @@ class App extends Component {
                                     <DropdownItem>
                                         Tutorial
                                     </DropdownItem>
-                                    <DropdownItem>
                                     <HelpAboutModal />
-                                    </DropdownItem>
                                </DropdownMenu>
                             </UncontrolledDropdown>
                         </Nav>
