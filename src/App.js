@@ -135,8 +135,7 @@ class App extends Component {
                                         Tutorial
                                     </DropdownItem>
                                     <DropdownItem>
-                                        About
-                                        <DropdownItem onClick={this.HelpAboutModal} />
+                                    <HelpAboutModal />
                                     </DropdownItem>
                                </DropdownMenu>
                             </UncontrolledDropdown>
@@ -161,7 +160,6 @@ class App extends Component {
                 </Jumbotron>
             </div>
         );
-        <HelpAboutModal />
     }
     
 }

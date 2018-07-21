@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 
 class HelpAboutModal extends React.Component {
   constructor(props) {
@@ -19,18 +19,22 @@ class HelpAboutModal extends React.Component {
 
   render() {
     return (
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+            <React.Fragment>
+            <DropdownItem onClick={this.toggle}>
+                About
+            </DropdownItem>
+          <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalHeader toggle={this.toggle}>About PCyl-Web</ModalHeader>
           <ModalBody>
             Software version 0.2 <br />
             Design Model version 1.2<br />
             <a href="https://github.com/thegrumpys/pcyl-web">Link to website home page</a>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Done</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button color="primary" onClick={this.toggle}>Close</Button>
           </ModalFooter>
         </Modal>
+        </React.Fragment>
     );
   }
 }
