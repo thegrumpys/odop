@@ -67,7 +67,7 @@ class App extends Component {
                                     </DropdownItem>
                                     <DropdownItem divider />
                                     <DropdownItem>
-                                    Preferences
+                                        Preferences
                                     </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
@@ -79,7 +79,7 @@ class App extends Component {
                                     <DropdownItem>
                                         Execute
                                     </DropdownItem>
-                                    <ActionSearch />
+                                    <ActionSearch store={this.props.store}/>
                                     <DropdownItem>
                                         Seek
                                     </DropdownItem>

@@ -10,13 +10,13 @@ class SearchResultsSection extends React.Component {
         switch (this.props.feasibility) {
         default:
         case "FEASIBLE":
-            feasibility_class = "";
+            feasibility_class = "text-right";
             break;
         case "MARGINALLY FEASIBLE":
-            feasibility_class = "text-low-danger border-low-danger";
+            feasibility_class = "text-right text-low-danger border-low-danger";
             break;
         case "NOT FEASIBLE":
-            feasibility_class = "text-danger font-weight-bold border-danger";
+            feasibility_class = "text-right text-danger font-weight-bold border-danger";
             break;
         }
         return (
@@ -26,7 +26,7 @@ class SearchResultsSection extends React.Component {
                 </Row>
                 <Row>
                     <Col className="font-italic" xs="1">Objective Value</Col>
-                    <Col className="text-right" xs="1" className={feasibility_class}>{this.props.objective_value.toFixed(5)}</Col>
+                    <Col xs="1" className={feasibility_class}>{this.props.objective_value.toFixed(5)}</Col>
                     <Col className="font-italic" xs="1">OBJMIN</Col>
                     <Col xs="1" className="text-right">{OBJMIN.toFixed(5)}</Col>
                     <Col className="font-italic" xs="1">Termination Condition</Col>
