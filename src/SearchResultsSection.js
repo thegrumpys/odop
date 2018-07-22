@@ -13,9 +13,9 @@ class SearchResultsSection extends React.Component {
                 </Row>
                 <Row>
                     <Col className="font-italic" xs="1">Objective Value</Col>
-                    <Col className="text-right" xs="1">{this.props.objective_value.toFixed(4)}</Col>
+                    <Col className="text-right" xs="1">{this.props.objective_value.toFixed(5)}</Col>
                     <Col className="font-italic" xs="1">OBJMIN</Col>
-                    <Col xs="1">{OBJMIN}</Col>
+                    <Col xs="1">{OBJMIN.toFixed(5)}</Col>
                     <Col className="font-italic" xs="1">Termination Condition</Col>
                     <Col xs="1">{this.props.termination_condition}</Col>
                     <Col className="font-italic" xs="1">Iteration Number</Col>

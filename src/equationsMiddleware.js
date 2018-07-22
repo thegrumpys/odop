@@ -5,8 +5,8 @@ import { STARTUP,
 import { 
     changeDesignParameterViolation, changeDesignParameterConstraint, 
     changeStateVariableValue, changeStateVariableViolation, changeStateVariableConstraint, 
-    changeSearchResultsObjectiveValue } from './actionCreators';
-import { CONSTRAINED, FIXED, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT } from './globals';
+    changeSearchResultsObjectiveValue, changeSearchResultsFeasibility } from './actionCreators';
+import { CONSTRAINED, FIXED, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT, OBJMIN } from './globals';
 
 export const equationsMiddleware = store => next => action => {
     const returnValue = next(action);
@@ -108,7 +108,7 @@ export const equationsMiddleware = store => next => action => {
         var m_funct;
         var obj;
         var viol_sum = 0.0;
-        design = store.getState();
+        design = store.getState(); // Re-access store to get latest dp and sv values
         for (let i = 0; i < design.design_parameters.length; i++) {
             dp = design.design_parameters[i];
             vmin = 0.0;
@@ -189,6 +189,38 @@ export const equationsMiddleware = store => next => action => {
         /* Weighting and Summation */
         obj = VIOL_WT * viol_sum + m_funct;
         store.dispatch(changeSearchResultsObjectiveValue(obj));
+        
+        // Feasibility
+        design = store.getState(); // Re-access store to get latest vmin and vmax
+        var output = '';
+        if (obj > OBJMIN)
+            output += 'NOT';
+        else {
+            var j = 0;
+            for (let i = 0; i < design.design_parameters.length; i++) {
+                dp = design.design_parameters[i];
+                if (dp.lmin & CONSTRAINED)
+                    if (dp.vmin > 0.0)
+                        j++;
+                if (dp.lmax & CONSTRAINED)
+                    if (dp.vmax > 0.0)
+                        j++;
+            }
+            for (let i = 0; i < design.state_variables.length; i++) {
+                sv = design.state_variables[i];
+                if (sv.lmin & CONSTRAINED)
+                    if (sv.vmin > 0.0)
+                        j++;
+                if (sv.lmax & CONSTRAINED)
+                    if (sv.vmax > 0.0)
+                        j++;
+            }
+            if (j > 0)
+                output += 'MARGINALLY';
+        }
+        output += ' FEASIBLE';
+        store.dispatch(changeSearchResultsFeasibility(output));
+
     }
     return returnValue;
 }
