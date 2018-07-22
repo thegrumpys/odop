@@ -1,7 +1,7 @@
 import { STARTUP, 
     CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_VIOLATION, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
     CHANGE_STATE_VARIABLE_VALUE, CHANGE_STATE_VARIABLE_VIOLATION, CHANGE_STATE_VARIABLE_CONSTRAINT, SAVE_STATE_VARIABLE_CONSTRAINTS, RESTORE_STATE_VARIABLE_CONSTRAINTS, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
-    CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE } from './actionTypes';
+    CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE, CHANGE_SEARCH_RESULTS_TERMINATION_CONDITION, CHANGE_SEARCH_RESULTS_FEASIBILITY } from './actionTypes';
 
 export function startup() {
   return {
@@ -135,11 +135,30 @@ export function resetStateVariableFlag(name, minmax, mask) {
     }
   }
 
-export function changeSearchResultsObjectiveValue(value) {
+export function changeSearchResultsObjectiveValue(objective_value) {
     return {
         type: CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE,
         payload: {
-            value
+            objective_value
+        }
+    }
+}
+
+export function changeSearchResultsTerminationCondition(termination_condition, iteration_number) {
+    return {
+        type: CHANGE_SEARCH_RESULTS_TERMINATION_CONDITION,
+        payload: {
+            termination_condition,
+            iteration_number
+        }
+    }
+}
+
+export function changeSearchResultsFeasibility(feasibility) {
+    return {
+        type: CHANGE_SEARCH_RESULTS_FEASIBILITY,
+        payload: {
+            feasibility
         }
     }
 }

@@ -185,11 +185,11 @@ class DesignParameterRow extends React.Component {
     }
 }
 
-const mapDispatchToDesignParameterProps = {
+const mapDispatchToProps = {
         changeDesignParameterValue: changeDesignParameterValue,
         changeDesignParameterConstraint: changeDesignParameterConstraint,
         setDesignParameterFlag: setDesignParameterFlag,
         resetDesignParameterFlag: resetDesignParameterFlag
 };
 
-export default connect(null, mapDispatchToDesignParameterProps)(DesignParameterRow);
+export default connect(null, mapDispatchToProps)(DesignParameterRow);

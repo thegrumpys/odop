@@ -1,7 +1,8 @@
 import { STARTUP, 
     CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_VIOLATION, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
     CHANGE_STATE_VARIABLE_VALUE, CHANGE_STATE_VARIABLE_VIOLATION, CHANGE_STATE_VARIABLE_CONSTRAINT, SAVE_STATE_VARIABLE_CONSTRAINTS, RESTORE_STATE_VARIABLE_CONSTRAINTS, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
-    CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE, MIN } from './actionTypes';
+    CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE, CHANGE_SEARCH_RESULTS_TERMINATION_CONDITION, CHANGE_SEARCH_RESULTS_FEASIBILITY, 
+    MIN } from './actionTypes';
 import { sclden } from './sclden';
 
 export function pcylWebApp(state, action) {
@@ -207,7 +208,24 @@ export function pcylWebApp(state, action) {
             ...state,
             search_results : {
                 ...state.search_results,
-                objective_value: action.payload.value
+                objective_value: action.payload.objective_value
+            }
+        }
+    case CHANGE_SEARCH_RESULTS_TERMINATION_CONDITION:
+        return {
+            ...state,
+            search_results : {
+                ...state.search_results,
+                termination_condition: action.payload.termination_condition,
+                iteration_number: action.payload.iteration_number
+            }
+        }
+    case CHANGE_SEARCH_RESULTS_FEASIBILITY:
+        return {
+            ...state,
+            search_results : {
+                ...state.search_results,
+                feasibility: action.payload.feasibility
             }
         }
     default:

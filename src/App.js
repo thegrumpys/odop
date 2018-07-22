@@ -20,6 +20,7 @@ import classnames from 'classnames';
 import { DesignTable } from './DesignTable';
 import { connect } from 'react-redux';
 import HelpAbout from './menus/Help/HelpAbout';
+import ActionSearch from './menus/Action/ActionSearch';
 
 class App extends Component {
     
@@ -78,9 +79,7 @@ class App extends Component {
                                     <DropdownItem>
                                         Execute
                                     </DropdownItem>
-                                    <DropdownItem>
-                                        Search
-                                    </DropdownItem>
+                                    <ActionSearch />
                                     <DropdownItem>
                                         Seek
                                     </DropdownItem>
