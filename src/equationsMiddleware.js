@@ -196,26 +196,26 @@ export const equationsMiddleware = store => next => action => {
         if (obj > OBJMIN)
             output += 'NOT';
         else {
-            var j = 0;
+            var violated_constraint_count = 0;
             for (let i = 0; i < design.design_parameters.length; i++) {
                 dp = design.design_parameters[i];
                 if (dp.lmin & CONSTRAINED)
                     if (dp.vmin > 0.0)
-                        j++;
+                        violated_constraint_count++;
                 if (dp.lmax & CONSTRAINED)
                     if (dp.vmax > 0.0)
-                        j++;
+                        violated_constraint_count++;
             }
             for (let i = 0; i < design.state_variables.length; i++) {
                 sv = design.state_variables[i];
                 if (sv.lmin & CONSTRAINED)
                     if (sv.vmin > 0.0)
-                        j++;
+                        violated_constraint_count++;
                 if (sv.lmax & CONSTRAINED)
                     if (sv.vmax > 0.0)
-                        j++;
+                        violated_constraint_count++;
             }
-            if (j > 0)
+            if (violated_constraint_count > 0)
                 output += 'MARGINALLY';
         }
         output += ' FEASIBLE';
