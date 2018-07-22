@@ -26,12 +26,18 @@
   From: https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box
   -->
   <style>
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-      /* display: none; <- Crashes Chrome on hover */
-      -webkit-appearance: none;
-      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-  }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+.text-low-danger {
+  color: #fd7e14 !important;
+}
+.border-low-danger {
+  border-color: #fd7e14 !important;
+}
   </style>
   <body>
     <noscript>

@@ -11,7 +11,7 @@ class StateVariablesSection extends React.Component {
                 <Row key="Dependent Variables">
                     <Col className="font-weight-bold" xs="12">Dependent Variables</Col>
                 </Row>
-                {this.props.state_variables.map((state_variable) => <StateVariableRow key={state_variable.name} state_variable={state_variable} />)}
+                {this.props.state_variables.map((state_variable) => <StateVariableRow key={state_variable.name} state_variable={state_variable} objective_value={this.props.objective_value} />)}
             </React.Fragment>
         );
     }
@@ -20,7 +20,8 @@ class StateVariablesSection extends React.Component {
 
 
 const mapStateToProps = state => ({
-    state_variables: state.state_variables
+    state_variables: state.state_variables,
+    objective_value: state.search_results.objective_value
 });
 
 export default connect(mapStateToProps)(StateVariablesSection);

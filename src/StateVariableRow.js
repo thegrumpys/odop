@@ -3,7 +3,7 @@ import { Row, Col, InputGroup, InputGroupAddon, InputGroupText, Input } from 're
 import { connect } from 'react-redux';
 import { changeStateVariableValue, changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
 import { MIN, MAX } from './actionTypes';
-import { FIXED, CONSTRAINED } from './globals';
+import { FIXED, CONSTRAINED, OBJMIN } from './globals';
 
 class StateVariableRow extends React.Component {
     
@@ -99,9 +99,13 @@ class StateVariableRow extends React.Component {
         // =======================================
         var cmin_class;
         if (this.props.state_variable.lmin & FIXED) {
-            cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-info text-right font-weight-bold border border-info' : 'text-right';
+            cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-info text-right font-weight-bold border-info' : 'text-right';
         } else {
-            cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
+            if (this.props.objective_value < OBJMIN) {
+                cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-low-danger text-right font-weight-bold border-low-danger' : 'text-right';
+            } else {
+                cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
+            }
         }
         var cmin;
         if (this.props.state_variable.lmin & FIXED || this.props.state_variable.lmin & CONSTRAINED) {
@@ -143,7 +147,11 @@ class StateVariableRow extends React.Component {
         if (this.props.state_variable.lmin & FIXED) {
             cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-info text-right font-weight-bold border border-info' : 'text-right';
         } else {
-            cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
+            if (this.props.objective_value < OBJMIN) {
+                cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-low-danger text-right font-weight-bold border-low-danger' : 'text-right';
+            } else {
+                cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
+            }
         }
         var cmax;
         if (this.props.state_variable.lmax & FIXED || this.props.state_variable.lmax & CONSTRAINED) {

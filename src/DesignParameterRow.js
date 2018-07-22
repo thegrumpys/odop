@@ -3,7 +3,7 @@ import { Row, Col, InputGroup, InputGroupAddon, InputGroupText, Input } from 're
 import { connect } from 'react-redux';
 import { changeDesignParameterValue, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag } from './actionCreators';
 import { MIN, MAX } from './actionTypes';
-import { FIXED, CONSTRAINED } from './globals';
+import { FIXED, CONSTRAINED, OBJMIN } from './globals';
 
 class DesignParameterRow extends React.Component {
     
@@ -89,7 +89,12 @@ class DesignParameterRow extends React.Component {
         // =======================================
         // Constraint Minimum Column
         // =======================================
-        var cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
+        var cmin_class;
+        if (this.props.objective_value < OBJMIN) {
+            cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'text-low-danger text-right font-weight-bold border-low-danger' : 'text-right';
+        } else {
+            cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
+        }
         var cmin;
         if (this.props.design_parameter.lmin & FIXED) {
             cmin = <div/>;
@@ -130,7 +135,12 @@ class DesignParameterRow extends React.Component {
         // =======================================
         // Constraint Maximum Column
         // =======================================
-        var cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'text-danger text-right font-weight-bold border border-danger' : 'text-right';
+        var cmax_class;
+        if (this.props.objective_value < OBJMIN) {
+            cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'text-low-danger text-right font-weight-bold border-low-danger' : 'text-right';
+        } else {
+            cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
+        }
         var cmax;
         if (this.props.design_parameter.lmax & FIXED) {
             cmax = <div />;
