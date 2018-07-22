@@ -26,7 +26,7 @@ class SearchResultsSection extends React.Component {
                 </Row>
                 <Row>
                     <Col className="font-italic" xs="1">Objective Value</Col>
-                    <Col className="text-right" xs="1" className={this.props.objective_value < OBJMIN ? "text-right" : "text-danger text-right font-weight-bold border-danger"}>{this.props.objective_value.toFixed(5)}</Col>
+                    <Col className="text-right" xs="1" className={feasibility_class}>{this.props.objective_value.toFixed(5)}</Col>
                     <Col className="font-italic" xs="1">OBJMIN</Col>
                     <Col xs="1" className="text-right">{OBJMIN.toFixed(5)}</Col>
                     <Col className="font-italic" xs="1">Termination Condition</Col>
