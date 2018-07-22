@@ -8,7 +8,7 @@ class HelpAbout extends React.Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {
-        modal: false
+            modal: false
         };
     }
 
