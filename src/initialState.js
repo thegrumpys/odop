@@ -114,5 +114,7 @@ export const initialState = {
         ],
         "name": "Piston-Cylinder",
         "version": "1.2",
-        "objective_value": 0.5605106435926049
+        "search_results": {
+            "objective_value": 0.5605106435926049
+        }
     };

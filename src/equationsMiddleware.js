@@ -5,7 +5,7 @@ import { STARTUP,
 import { 
     changeDesignParameterViolation, changeDesignParameterConstraint, 
     changeStateVariableValue, changeStateVariableViolation, changeStateVariableConstraint, 
-    changeObjectiveValue } from './actionCreators';
+    changeSearchResultsObjectiveValue } from './actionCreators';
 import { CONSTRAINED, FIXED, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT } from './globals';
 
 export const equationsMiddleware = store => next => action => {
@@ -188,7 +188,7 @@ export const equationsMiddleware = store => next => action => {
         }
         /* Weighting and Summation */
         obj = VIOL_WT * viol_sum + m_funct;
-        store.dispatch(changeObjectiveValue(obj));
+        store.dispatch(changeSearchResultsObjectiveValue(obj));
     }
     return returnValue;
 }

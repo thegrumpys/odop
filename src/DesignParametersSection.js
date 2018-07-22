@@ -8,7 +8,7 @@ class DesignParametersSection extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Row key="Design Parameters">
+                <Row key="Independent Variables">
                     <Col className="font-weight-bold" xs="12">Independent Variables</Col>
                 </Row>
                 {this.props.design_parameters.map((design_parameter) => <DesignParameterRow key={design_parameter.name} design_parameter={design_parameter} />)}

@@ -8,7 +8,7 @@ class StateVariablesSection extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Row key="State Variables">
+                <Row key="Dependent Variables">
                     <Col className="font-weight-bold" xs="12">Dependent Variables</Col>
                 </Row>
                 {this.props.state_variables.map((state_variable) => <StateVariableRow key={state_variable.name} state_variable={state_variable} />)}

@@ -1,7 +1,7 @@
 import { STARTUP, 
     CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_VIOLATION, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
     CHANGE_STATE_VARIABLE_VALUE, CHANGE_STATE_VARIABLE_VIOLATION, CHANGE_STATE_VARIABLE_CONSTRAINT, SAVE_STATE_VARIABLE_CONSTRAINTS, RESTORE_STATE_VARIABLE_CONSTRAINTS, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
-    CHANGE_OBJECTIVE_VALUE } from './actionTypes';
+    CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE } from './actionTypes';
 
 export function startup() {
   return {
@@ -135,9 +135,9 @@ export function resetStateVariableFlag(name, minmax, mask) {
     }
   }
 
-export function changeObjectiveValue(value) {
+export function changeSearchResultsObjectiveValue(value) {
     return {
-        type: CHANGE_OBJECTIVE_VALUE,
+        type: CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE,
         payload: {
             value
         }

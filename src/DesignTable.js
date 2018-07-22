@@ -2,13 +2,13 @@ import React from 'react';
 import { Row, Col } from 'reactstrap';
 import DesignParametersSection from './DesignParametersSection';
 import StateVariablesSection from './StateVariablesSection';
-import { connect } from 'react-redux';
+import SearchResultsSection from './SearchResultsSection';
 
-class DesignTable extends React.Component {
+export class DesignTable extends React.Component {
     
     render() {
         return (
-                <React.Fragment>
+            <React.Fragment>
                 <Row>
                     <Col className="font-weight-bold" xs="2">Name</Col>
                     <Col className="font-weight-bold text-center" xs="2">Value</Col>
@@ -30,23 +30,9 @@ class DesignTable extends React.Component {
                 </Row>
                 <DesignParametersSection />
                 <StateVariablesSection />
-                <Row>
-                    <Col xs="12">&nbsp;</Col>
-                </Row>
-                <Row>
-                    <Col xs="8"></Col>
-                    <Col className="font-weight-bold" xs="2">Objective Value</Col>
-                    <Col className="text-right" xs="1">{this.props.objective_value.toFixed(4)}</Col>
-                </Row>
-                </React.Fragment>
+                <SearchResultsSection />
+            </React.Fragment>
         );
     }
     
 }
-
-
-const mapStateToProps = state => ({
-    objective_value: state.objective_value
-});
-
-export default connect(mapStateToProps)(DesignTable);

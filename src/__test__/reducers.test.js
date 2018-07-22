@@ -6,7 +6,7 @@ import {
     startup,
     changeDesignParameterValue, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag, 
     changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag, 
-    changeObjectiveValue
+    changeSearchResultsObjectiveValue
     } from '../actionCreators';
 import { MIN, MAX } from '../actionTypes';
 import { CONSTRAINED, FIXED } from '../globals';
@@ -301,16 +301,16 @@ it('reducers reset state variable flag max', () => {
 // OBJECTIVE FUNCTION
 //=====================================================================
 
-it('reducers change objective value', () => {
+it('reducers change search results objective value', () => {
     const store = createStore(
         pcylWebApp,
         initialState);
     
     var design = store.getState(); // before
-    expect(design.objective_value).toEqual(0.5605106435926049);
+    expect(design.search_results.objective_value).toEqual(0.5605106435926049);
 
-    store.dispatch(changeObjectiveValue(0.987654321));
+    store.dispatch(changeSearchResultsObjectiveValue(0.987654321));
     
     design = store.getState(); // after
-    expect(design.objective_value).toEqual(0.987654321);
+    expect(design.search_results.objective_value).toEqual(0.987654321);
 });

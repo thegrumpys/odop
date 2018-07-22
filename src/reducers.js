@@ -1,7 +1,7 @@
 import { STARTUP, 
     CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_VIOLATION, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
     CHANGE_STATE_VARIABLE_VALUE, CHANGE_STATE_VARIABLE_VIOLATION, CHANGE_STATE_VARIABLE_CONSTRAINT, SAVE_STATE_VARIABLE_CONSTRAINTS, RESTORE_STATE_VARIABLE_CONSTRAINTS, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
-    CHANGE_OBJECTIVE_VALUE, MIN } from './actionTypes';
+    CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE, MIN } from './actionTypes';
 import { sclden } from './sclden';
 
 export function pcylWebApp(state, action) {
@@ -202,11 +202,15 @@ export function pcylWebApp(state, action) {
                 return state_variable;
             })
         });
-    case CHANGE_OBJECTIVE_VALUE:
-        return Object.assign({}, state, {
-            objective_value: action.payload.value
-        });
+    case CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE:
+        return {
+            ...state,
+            search_results : {
+                ...state.search_results,
+                objective_value: action.payload.value
+            }
+        }
     default:
-        return state
+        return state;
     }
 }

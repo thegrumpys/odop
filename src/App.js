@@ -17,7 +17,7 @@ import {
     DropdownItem
 } from 'reactstrap';
 import classnames from 'classnames';
-import DesignTable from './DesignTable';
+import { DesignTable } from './DesignTable';
 import { connect } from 'react-redux';
 import HelpAbout from './menus/Help/HelpAbout';
 
