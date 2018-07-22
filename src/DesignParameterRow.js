@@ -91,7 +91,7 @@ class DesignParameterRow extends React.Component {
         // =======================================
         var cmin_class;
         if (this.props.objective_value < OBJMIN) {
-            cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'text-low-danger text-right font-weight-bold border-low-danger' : 'text-right';
+            cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'text-low-danger text-right border-low-danger' : 'text-right';
         } else {
             cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
         }
@@ -137,7 +137,7 @@ class DesignParameterRow extends React.Component {
         // =======================================
         var cmax_class;
         if (this.props.objective_value < OBJMIN) {
-            cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'text-low-danger text-right font-weight-bold border-low-danger' : 'text-right';
+            cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'text-low-danger text-right border-low-danger' : 'text-right';
         } else {
             cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
         }
