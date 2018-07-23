@@ -76,21 +76,23 @@ class App extends Component {
                                     Action
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    <DropdownItem>
-                                        Execute
-                                    </DropdownItem>
                                     <ActionSearch store={this.props.store}/>
                                     <DropdownItem>
                                         Seek
                                     </DropdownItem>
+                                    <DropdownItem>
+                                        Trade
+                                    </DropdownItem>
+                                        <DropdownItem divider />
                                     <DropdownItem>
                                         Select Size
                                     </DropdownItem>
                                     <DropdownItem>
                                         Select Catalog
                                     </DropdownItem>
+                                        <DropdownItem divider />
                                     <DropdownItem>
-                                        Trade
+                                        Execute
                                     </DropdownItem>
                                </DropdownMenu>
                             </UncontrolledDropdown>
@@ -105,14 +107,16 @@ class App extends Component {
                                     <DropdownItem>
                                         Display Sub-Problems
                                     </DropdownItem>
+                                        <DropdownItem divider />
+                                    <DropdownItem>
+                                        Report
+                                    </DropdownItem>
+                                        <DropdownItem divider />
                                     <DropdownItem>
                                         Calculation Inputs
                                     </DropdownItem>
                                     <DropdownItem>
                                         Violations
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        Report
                                     </DropdownItem>
                                </DropdownMenu>
                             </UncontrolledDropdown>
