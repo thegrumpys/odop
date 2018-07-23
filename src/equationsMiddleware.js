@@ -5,7 +5,7 @@ import { STARTUP,
 import { 
     changeDesignParameterViolation, changeDesignParameterConstraint, 
     changeStateVariableValue, changeStateVariableViolation, changeStateVariableConstraint, 
-    changeSearchResultsObjectiveValue, changeSearchResultsFeasibility } from './actionCreators';
+    changeSearchResultsObjectiveValue, changeSearchResultsViolatedConstraintCount } from './actionCreators';
 import { CONSTRAINED, FIXED, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT, OBJMIN } from './globals';
 
 export const equationsMiddleware = store => next => action => {
@@ -192,34 +192,26 @@ export const equationsMiddleware = store => next => action => {
         
         // Feasibility
         design = store.getState(); // Re-access store to get latest vmin and vmax
-        var output = '';
-        if (obj > OBJMIN)
-            output += 'NOT';
-        else {
-            var violated_constraint_count = 0;
-            for (let i = 0; i < design.design_parameters.length; i++) {
-                dp = design.design_parameters[i];
-                if (dp.lmin & CONSTRAINED)
-                    if (dp.vmin > 0.0)
-                        violated_constraint_count++;
-                if (dp.lmax & CONSTRAINED)
-                    if (dp.vmax > 0.0)
-                        violated_constraint_count++;
-            }
-            for (let i = 0; i < design.state_variables.length; i++) {
-                sv = design.state_variables[i];
-                if (sv.lmin & CONSTRAINED)
-                    if (sv.vmin > 0.0)
-                        violated_constraint_count++;
-                if (sv.lmax & CONSTRAINED)
-                    if (sv.vmax > 0.0)
-                        violated_constraint_count++;
-            }
-            if (violated_constraint_count > 0)
-                output += 'MARGINALLY';
+        var violated_constraint_count = 0;
+        for (let i = 0; i < design.design_parameters.length; i++) {
+            dp = design.design_parameters[i];
+            if (dp.lmin & CONSTRAINED)
+                if (dp.vmin > 0.0)
+                    violated_constraint_count++;
+            if (dp.lmax & CONSTRAINED)
+                if (dp.vmax > 0.0)
+                    violated_constraint_count++;
         }
-        output += ' FEASIBLE';
-        store.dispatch(changeSearchResultsFeasibility(output));
+        for (let i = 0; i < design.state_variables.length; i++) {
+            sv = design.state_variables[i];
+            if (sv.lmin & CONSTRAINED)
+                if (sv.vmin > 0.0)
+                    violated_constraint_count++;
+            if (sv.lmax & CONSTRAINED)
+                if (sv.vmax > 0.0)
+                    violated_constraint_count++;
+        }
+        store.dispatch(changeSearchResultsViolatedConstraintCount(violated_constraint_count));
 
     }
     return returnValue;

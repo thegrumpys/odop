@@ -6,18 +6,19 @@ import { OBJMIN } from './globals';
 class SearchResultsSection extends React.Component {
     
     render() {
+        var feasibility_string;
         var feasibility_class;
-        switch (this.props.feasibility) {
-        default:
-        case "FEASIBLE":
-            feasibility_class = "text-right";
-            break;
-        case "MARGINALLY FEASIBLE":
-            feasibility_class = "text-right text-low-danger border-low-danger";
-            break;
-        case "NOT FEASIBLE":
+        if (this.props.objective_value > OBJMIN) {
+            feasibility_string = "NOT FEASIBLE";
             feasibility_class = "text-right text-danger font-weight-bold border-danger";
-            break;
+        } else {
+            if (this.props.violated_constraint_count > 0) {
+                feasibility_string = "MARGINALLY FEASIBLE";
+                feasibility_class = "text-right text-low-danger border-low-danger";
+            } else {
+                feasibility_string = "FEASIBLE";
+                feasibility_class = "text-right";
+            }
         }
         return (
             <React.Fragment>
@@ -31,11 +32,9 @@ class SearchResultsSection extends React.Component {
                     <Col xs="1" className="text-right">{OBJMIN.toFixed(5)}</Col>
                     <Col className="font-italic" xs="1">Termination Condition</Col>
                     <Col xs="1">{this.props.termination_condition}</Col>
-                    <Col className="font-italic" xs="1">Iteration Number</Col>
-                    <Col xs="1" className="text-right">{this.props.iteration_number}</Col>
                     <Col className="font-italic" xs="1">Feasibility</Col>
-                    <Col xs="1" className={feasibility_class}>{this.props.feasibility}</Col>
-                    <Col xs="1"></Col>
+                    <Col xs="1" className={feasibility_class}>{feasibility_string}</Col>
+                    <Col xs="3"></Col>
                 </Row>
             </React.Fragment>
         );
@@ -46,8 +45,7 @@ class SearchResultsSection extends React.Component {
 const mapStateToProps = state => ({
     objective_value: state.search_results.objective_value,
     termination_condition: state.search_results.termination_condition,
-    iteration_number: state.search_results.iteration_number,
-    feasibility: state.search_results.feasibility
+    violated_constraint_count: state.search_results.violated_constraint_count
 });
 
 export default connect(mapStateToProps)(SearchResultsSection);

@@ -116,8 +116,7 @@ export const initialState = {
         "version": "1.2",
         "search_results": {
             "objective_value": 0.5605106435926049,
-            "termination_condition": "Mike wants to see something here",
-            "iteration_number": 0,
-            "feasibility": "Brian want to see something here too"
+            "termination_condition": "None",
+            "violated_constraint_count": 0
         }
     };

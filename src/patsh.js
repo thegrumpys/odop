@@ -49,8 +49,8 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, state, change
             if (s >= objmin) {
                 itno++;
                 if (itno > maxit) {
-                    NCODE = 'MAXIT ';
-                    NCODE += itno;
+                    NCODE = 'MAXIT';
+                    NCODE += ' '+itno+' ITER.';
                     return NCODE;
                 }
                 var tht = [];
@@ -68,9 +68,9 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, state, change
             if (del < delmin) {
                 NCODE = 'DELMIN';
                 if (itno <= 2)
-                    NCODE += ' - SHORT SEARCH ';
+                    NCODE += ' - SHORT SEARCH';
                 else
-                    NCODE += itno;
+                    NCODE += ' '+itno+' ITER.';
                 return NCODE;
             }
             del = del / 1.9;
@@ -79,9 +79,9 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, state, change
     }
     NCODE = 'OBJMIN';
     if (itno <= 2)
-        NCODE += ' - SHORT SEARCH ';
+        NCODE += ' - SHORT SEARCH';
     else
-        NCODE += itno;
+        NCODE += ' '+itno+' ITER.';
     for (let i = 0; i < psi.length; i++)
         psi[i] = phi[i];
     return NCODE;

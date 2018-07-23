@@ -32,7 +32,7 @@ class ActionSearch extends React.Component {
                 this.props.changeDesignParameterValue(dp.name, pc[kd++]);
             }
         }
-        this.props.changeSearchResultsTerminationCondition(ncode, 0);
+        this.props.changeSearchResultsTerminationCondition(ncode);
     }
 
     render() {
