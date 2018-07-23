@@ -1,5 +1,5 @@
 # Ideas for a web page menu structure
-## July 13, 2018    -   Updated July 20, 2018
+## July 13, 2018    -   Updated July 23, 2018
 
 ## Menu Bar:
  Current thinking has a conventional horizontal menu bar located at the top of the
@@ -24,16 +24,21 @@ Sys-Name | File | Action | View | Help |
   * System Preferences
 #### ------------------   
 * Action
-  * Execute
   * Search
   * Seek
+  * Trade
+#### ----------------
   * Select Size
   * Select Catalog
-  * Trade
+#### ----------------
+  * Execute
+#### ----------------
 * View
   * Define Sub-Problems
   * Display Sub-Problems
+  #### ----------------
   * Report
+ #### ----------------
   *  Calculation Inputs
   *  Violations
 * Help
@@ -62,27 +67,16 @@ recently opened design file (.DSN) or database entry.
 This menu item is similar to the PCyl-CLI Save command. It creates a new design file
 (.DSN) or database entry.
 
-### -------------------------------------
+#### -------------------------------------
 ### File : Recent designs
 These menu entries are provided for user convenience in selecting recent designs for review or additional work.
-### ---------------------------------------
+#### -------------------------------------
 ### File : System Preferences
 This is a feature to set system-specific values, including much of what is done by the
 PCyl-CLI SET command.  Other web-specific items, for example, auto re-calc and auto-search preferences, may be included.
 
 Web page layout control should be handled in the View menu.
-### -------------------------------------
-
-### Action : Execute
-This menu item will trigger the play-back of a previously recorded sequence. A popup
-(?) can provide the user an opportunity to supply a (file?) name to specify the
-sequence. Some mechanism, for example, user supplied pauses will likely be
-necessary to allow the user to control the pace so as to observe what is happening.
-Annotations / comments are probably necessary.
-The process of creating play-back sequences (files?) is not required to be user
-accessible.
-If necessary, generic third party tools can be used to create and annotate play-back
-recordings.
+#### -------------------------------------
 
 ### Action : Search
 This menu item invokes the Search - directly equivalent to the PCyl-CLI Search
@@ -94,6 +88,13 @@ This menu item invokes Seek - directly equivalent to the PCyl-CLI Seek command.
 There may also be Seek button(s) on the main page. This menu item is provided
 primarily to maintain consistency.
 
+### Action : Trade
+This menu item provides a similar feature to the PCyl-CLI Trade command. One
+possible implementation is to pop up a form where the user can specify a strategy
+(radio buttons similar to the current 0 – 3), over-ride step size and decide to keep the
+result or not.
+
+#### -------------------------------------
 ### Action : Select Size
 This menu item allows a table look-up for a standard size of a specific Independent
 Variable. It is similar to the PCyl-CLI SELECT command.
@@ -102,11 +103,18 @@ Variable. It is similar to the PCyl-CLI SELECT command.
 This menu item allows the selection of the "nearest" design from a catalog of
 standard designs. It is similar to the PCyl-CLI SELECT CATALOG command.
 
-### Action : Trade
-This menu item provides a similar feature to the PCyl-CLI Trade command. One
-possible implementation is to pop up a form where the user can specify a strategy
-(radio buttons similar to the current 0 – 3), over-ride step size and decide to keep the
-result or not.
+#### -------------------------------------
+### Action : Execute
+This menu item will trigger the play-back of a previously recorded sequence. A popup
+(?) can provide the user an opportunity to supply a (file?) name to specify the
+sequence. Some mechanism, for example, user supplied pauses will likely be
+necessary to allow the user to control the pace so as to observe what is happening.
+Annotations / comments are probably necessary.
+The process of creating play-back sequences (files?) is not required to be user
+accessible.
+If necessary, generic third party tools can be used to create and annotate play-back
+recordings.
+#### -------------------------------------
 
 ### View : Define Sub-Problems
 This menu item provides a user interface to control "IOCLASS" for independent and
@@ -119,6 +127,7 @@ into sub-problems that map to sub-systems of the real world.  Notably, selecting
 (check in checkbox?) classes 2, 4 & 6 would display those variables / quantities
 and suppress the display of all others.
 
+#### -------------------------------------
 ### View : Report
 This menu item creates a .PDF file and invokes the system .PDF utility to display it.
 Both generic (Independent & Dependent variables, constraint levels & violations, etc.)
@@ -126,6 +135,7 @@ as well as problem-specific data in problem-specific formats can be included in 
 report. The user can use the features of the system .PDF utility in order to save the
 file into the browser's local file system.
 
+#### -------------------------------------
 ### View : Calculation Inputs
 A check in the checkbox will cause "calculation inputs" (previously known as
 "constants") to be displayed.
