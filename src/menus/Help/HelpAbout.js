@@ -25,13 +25,13 @@ class HelpAbout extends React.Component {
                     About
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" /> &nbsp; About {this.props.name}</ModalHeader>
+                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; About {this.props.name}</ModalHeader>
                     <ModalBody>
-                        This is <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank">Open Source </a> software. &nbsp; 
-                        <a href="https://github.com/thegrumpys/pcyl-web/blob/master/LICENSE" target="_blank">MIT License.</a> <br />
+                        This is <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank" rel="noopener noreferrer">Open Source </a> software. &nbsp; 
+                        <a href="https://github.com/thegrumpys/pcyl-web/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT License.</a> <br />
                         Software version &nbsp; {version()}  <br />
                         Design Model version &nbsp; {this.props.version}<br />
-                        <a href="https://thegrumpys.github.io/pcyl-web/About/" target="_blank">Link to website home page</a>
+                        Link to <a href="https://thegrumpys.github.io/pcyl-web/About/" target="_blank" rel="noopener noreferrer">website home page</a>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.toggle}>Close</Button>
