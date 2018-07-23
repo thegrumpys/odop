@@ -29,7 +29,7 @@ class HelpAbout extends React.Component {
                     <ModalBody>
                         Software version &nbsp; {version()}  <br />
                         Design Model version &nbsp; {this.props.version}<br />
-                        <a href="https://github.com/thegrumpys/pcyl-web">Link to website home page</a>
+                        <a href="https://thegrumpys.github.io/pcyl-web/About/">Link to website home page</a>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.toggle}>Close</Button>
