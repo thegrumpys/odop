@@ -6,7 +6,7 @@ import {
     changeDesignParameterViolation, changeDesignParameterConstraint, 
     changeStateVariableValue, changeStateVariableViolation, changeStateVariableConstraint, 
     changeSearchResultsObjectiveValue, changeSearchResultsViolatedConstraintCount } from './actionCreators';
-import { CONSTRAINED, FIXED, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT, OBJMIN } from './globals';
+import { CONSTRAINED, FIXED, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT } from './globals';
 
 export const equationsMiddleware = store => next => action => {
     const returnValue = next(action);

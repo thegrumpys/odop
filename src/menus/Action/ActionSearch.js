@@ -23,7 +23,7 @@ class ActionSearch extends React.Component {
         }
         // Do the pattern search
         var delarg = DEL;
-        var ncode = patsh(pc, delarg, DELMIN, OBJMIN, MAXIT, TOL, this.props.store, this.props.state, this.props.changeDesignParameterValue);
+        var ncode = patsh(pc, delarg, DELMIN, OBJMIN, MAXIT, TOL, this.props.store);
         // Expand PC back into store change actions
         var kd = 0;
         for (let i = 0; i < this.props.state.design_parameters.length; i++) {

@@ -2,7 +2,7 @@ import { despak } from './despak';
 /**
  * Hooke & Jeeves Pattern Search - find minimum of objective function.
  */
-export function patsh(psi, del, delmin, objmin, maxit, tol, store, state, changeDesignParameterValue) {
+export function patsh(psi, del, delmin, objmin, maxit, tol, store) {
     var NCODE;
     var spi;
     var xflag = [];
@@ -13,14 +13,14 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, state, change
             if (eps[k] === 0.0)
                 eps[k] = 0.05;
             phi[k] = phi[k] + eps[k] * del * xflag[k];
-            spi = despak(phi, store, state, changeDesignParameterValue);
+            spi = despak(phi, store);
             if (spi < s) {
                 s = spi;
             }
             else {
                 xflag[k] = -xflag[k];
                 phi[k] = phi[k] + 2.0 * eps[k] * del * xflag[k];
-                spi = despak(phi, store, state, changeDesignParameterValue);
+                spi = despak(phi, store);
                 if (spi < s) {
                     s = spi;
                 } else {
@@ -37,7 +37,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, state, change
     var phi = [];
     for (let i = 0; i < psi.length; i++)
         phi[i] = psi[i];
-    var ssi = despak(phi, store, state, changeDesignParameterValue);
+    var ssi = despak(phi, store);
     while (ssi >= objmin) {
         var s = ssi;
         phi = [];
@@ -59,7 +59,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, state, change
                     psi[i] = phi[i];
                     phi[i] = phi[i] + alpha * (phi[i] - tht[i]);
                 }
-                spi = despak(phi, store, state, changeDesignParameterValue);
+                spi = despak(phi, store);
                 s = spi;
                 s = patsh_explore(phi, s, del);
             }
