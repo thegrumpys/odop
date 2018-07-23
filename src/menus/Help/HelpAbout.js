@@ -27,9 +27,11 @@ class HelpAbout extends React.Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>About {this.props.name}</ModalHeader>
                     <ModalBody>
+                        This is <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank">Open Source </a> software. &nbsp; 
+                        <a href="https://github.com/thegrumpys/pcyl-web/blob/master/LICENSE" target="_blank">MIT License.</a> <br />
                         Software version &nbsp; {version()}  <br />
                         Design Model version &nbsp; {this.props.version}<br />
-                        <a href="https://thegrumpys.github.io/pcyl-web/About/">Link to website home page</a>
+                        <a href="https://thegrumpys.github.io/pcyl-web/About/" target="_blank">Link to website home page</a>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.toggle}>Close</Button>
