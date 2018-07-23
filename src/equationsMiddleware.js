@@ -7,6 +7,7 @@ import {
     changeStateVariableValue, changeStateVariableViolation, changeStateVariableConstraint, 
     changeSearchResultsObjectiveValue, changeSearchResultsViolatedConstraintCount } from './actionCreators';
 import { CONSTRAINED, FIXED, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT } from './globals';
+import { eqnset1 } from './eqnset1';
 
 export const equationsMiddleware = store => next => action => {
     const returnValue = next(action);
@@ -14,16 +15,10 @@ export const equationsMiddleware = store => next => action => {
 //    console.log(action);
     var changed = false;
 	var design;
+    var c;
+    var dp;
+    var sv;
     
-    /* eslint-disable no-unused-vars */
-    var pi = 0;
-    var pressure = 0;
-    var radius = 1;
-    var thickness = 2;
-    var force = 0;
-    var area = 1;
-    var stress = 2;
-    /* eslint-enable */
     switch (action.type) {
     case STARTUP:
         changed = true;
@@ -40,25 +35,26 @@ export const equationsMiddleware = store => next => action => {
         break;
     case CHANGE_DESIGN_PARAMETER_VALUE:
         changed = true;
-        // Compute and dispatch state variable changes
-        /* eslint-disable no-fallthrough */
-        switch (action.payload.name) {
-        case "RADIUS":
-            design = store.getState();
-            var a = design.constants[pi].value * design.design_parameters[radius].value * design.design_parameters[radius].value;
-            store.dispatch(changeStateVariableValue("AREA", a));
-        case "PRESSURE":
-            design = store.getState();
-            var f = design.design_parameters[pressure].value * design.state_variables[area].value;
-            store.dispatch(changeStateVariableValue("FORCE", f));
-        case "THICKNESS":
-            design = store.getState();
-            var t = (design.design_parameters[pressure].value * design.design_parameters[radius].value) / (2.0 * design.design_parameters[thickness].value);
-            store.dispatch(changeStateVariableValue("STRESS", t));
-        default:
-            // Common calculations
+        design = store.getState();
+        // Loop to create d from constants
+        var d = [];
+        for (let i = 0; i < design.constants.length; i++) {
+            c = design.constants[i];
+            d[i] = c.value;
         }
-        /* eslint-enable */
+        // Loop to create p from design_parameters
+        var p = [];
+        for (let i = 0; i < design.design_parameters.length; i++) {
+            dp = design.design_parameters[i];
+            p[i] = dp.value;
+        }
+        var x = eqnset1(d, p);
+        // Compute and dispatch state variable changes
+        for (let i = 0; i < design.state_variables.length; i++) {
+            sv = design.state_variables[i];
+            design = store.getState();
+            store.dispatch(changeStateVariableValue(sv.name, x[i]));
+        }
         break;
     case CHANGE_DESIGN_PARAMETER_CONSTRAINT:
         changed = true;
@@ -101,8 +97,6 @@ export const equationsMiddleware = store => next => action => {
          * It is not problem dependent.
          */
         /* Constraint Violations */
-        var dp;
-        var sv;
         var vmin;
         var vmax;
         var m_funct;
