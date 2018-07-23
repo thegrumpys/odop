@@ -72,8 +72,9 @@ This menu item is similar to the PCyl-CLI Save command. It creates a new design 
 These menu entries are provided for user convenience in selecting recent designs for review or additional work.
 #### -------------------------------------
 ### File : System Preferences
-This is a feature to set system-specific values, including much of what is done by the
-PCyl-CLI SET command.  Other web-specific items, for example, auto re-calc and auto-search preferences, may be included.
+This item provides a user interface to set system-specific values, including much of what is done by the PCyl-CLI SET command.
+For example, system internal variables such as IOOPT, OBJMIN, FIX_WT, etc.
+Other web-specific items, for example, auto re-calc and auto-search preferences, may be included.
 
 Web page layout control should be handled in the View menu.
 #### -------------------------------------

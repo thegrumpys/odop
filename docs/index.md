@@ -1,9 +1,12 @@
-# PCyl-Web <br /> Piston-Cylinder Problem - Web Interface
+# PCyl-Web <br /> Piston-Cylinder Problem <br /> - Web Interface
 
 ## About
-[Introduction](About/Intro)
-[Notice](About/Legal/Disclaimer)
-[Restrictions](About/Legal/Restrictions)
+* [Introduction](About/Intro)
+* [Notice](About/Legal/Disclaimer)
+* [Restrictions](About/Legal/Restrictions)
+* [Terms of Service](About/Legal/TermsOfService)
+* [Privacy Statement](About/Legal/PrivacyStatement)
+
 
 ## Design
 * [Ideas for a web page menu structure](design/menu)
