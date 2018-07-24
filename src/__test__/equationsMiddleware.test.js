@@ -6,8 +6,8 @@ import {
     startup,
     changeDesignParameterValue, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag, 
     changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag, 
-    changeSearchResultsObjectiveValue
-    } from '../actionCreators';
+    changeSearchResultsObjectiveValue, 
+    search } from '../actionCreators';
 import { MIN, MAX } from '../actionTypes';
 import { CONSTRAINED, FIXED } from '../globals';
 
@@ -272,4 +272,34 @@ it('middleware change constraints to force all violations', () => {
     store.dispatch(setStateVariableFlag("FORCE", MAX, FIXED|CONSTRAINED));
     store.dispatch(setStateVariableFlag("AREA", MAX, FIXED|CONSTRAINED));
     store.dispatch(setStateVariableFlag("STRESS", MAX, FIXED|CONSTRAINED));
+});
+
+//=====================================================================
+// SEARCH
+//=====================================================================
+
+it('middleware search from initial state', () => {
+    const store = createStore(
+        pcylWebApp,
+        initialState,
+        applyMiddleware(equationsMiddleware));
+    
+    store.dispatch(search());
+    
+    var design = store.getState(); // after
+    expect(design.design_parameters[0].name).toEqual("PRESSURE");
+    expect(design.design_parameters[0].value).toEqual(697.2108757363197);
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].value).toEqual(0.5825642374486647);
+    expect(design.design_parameters[2].name).toEqual("THICKNESS");
+    expect(design.design_parameters[2].value).toEqual(0.05814850143495808);
+    expect(design.state_variables[0].name).toEqual("FORCE");
+    expect(design.state_variables[0].value).toEqual(743.3642427191874);
+    expect(design.state_variables[1].name).toEqual("AREA");
+    expect(design.state_variables[1].value).toEqual(1.0661971414805103);
+    expect(design.state_variables[2].name).toEqual("STRESS");
+    expect(design.state_variables[2].value).toEqual(3492.524417147412);
+    expect(design.search_results.objective_value).toEqual(0.14664192222304165);
+    expect(design.search_results.termination_condition).toEqual("DELMIN 12 ITER.");
+    expect(design.search_results.violated_constraint_count).toEqual(4);
 });
