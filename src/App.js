@@ -19,8 +19,11 @@ import {
 import classnames from 'classnames';
 import { DesignTable } from './DesignTable';
 import { connect } from 'react-redux';
-import HelpAbout from './menus/Help/HelpAbout';
+import FileOpen from './menus/File/FileOpen';
+import FileSave from './menus/File/FileSave';
+import FileSaveAs from './menus/File/FileSaveAs';
 import ActionSearch from './menus/Action/ActionSearch';
+import HelpAbout from './menus/Help/HelpAbout';
 
 class App extends Component {
     
@@ -52,15 +55,9 @@ class App extends Component {
                                     File
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    <DropdownItem>
-                                        Open
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        Save
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        Save As
-                                    </DropdownItem>
+                                    <FileOpen />
+                                    <FileSave />
+                                    <FileSaveAs />
                                     <DropdownItem divider />
                                     <DropdownItem>
                                         Recent Designs
