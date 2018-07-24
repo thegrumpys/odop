@@ -22,6 +22,7 @@ import { connect } from 'react-redux';
 import FileOpen from './menus/File/FileOpen';
 import FileSave from './menus/File/FileSave';
 import FileSaveAs from './menus/File/FileSaveAs';
+import FileDelete from './menus/File/FileDelete';
 import ActionSearch from './menus/Action/ActionSearch';
 import HelpAbout from './menus/Help/HelpAbout';
 
@@ -58,6 +59,7 @@ class App extends Component {
                                     <FileOpen />
                                     <FileSave />
                                     <FileSaveAs />
+                                    <FileDelete />
                                     <DropdownItem divider />
                                     <DropdownItem>
                                         Recent Designs
