@@ -19,4 +19,4 @@
 
 ## Procedures
 
-* [Release Process](procesures/release)
+* [Release Process](procedures/release)
