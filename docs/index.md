@@ -16,3 +16,7 @@
 * [Investigate third party alternatives that might assist implementation of the EXECUTE feature](design/ExecuteCapability)
 * [Warn user if conflicting constraints are established](design/WarnConflictingConstraints)
 * [Consider an UnDo / ReDo feature](design/UnDo_ReDo)
+
+## Procedures
+
+* [Release Process](procesures/release)
