@@ -37,10 +37,6 @@ const store = createStore(
         middleware
         );
 
-//store.subscribe(() => {
-//    console.log('In store.subscribe objective_value='+store.getState().search_results.objective_value)
-//    });
-
 store.dispatch(startup());
 
 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root'));
