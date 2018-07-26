@@ -21,7 +21,6 @@
   },
   "homepage": "https://pcyl-web.heroku.com/",
   "devDependencies": {
-    "react-scripts": "1.1.4",
     "istanbul": "^0.4.5"
   },
   "dependencies": {
@@ -30,6 +29,7 @@
     "popper.js": "^1.14.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-scripts": "1.1.4",
     "react-redux": "^5.0.7",
     "reactstrap": "^6.2.0",
     "redux": "^4.0.0"
