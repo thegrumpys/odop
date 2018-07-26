@@ -278,7 +278,7 @@ it('middleware change constraints to force all violations', () => {
 // SEARCH
 //=====================================================================
 
-it('middleware search from initial state', () => {
+it('middleware search1 from initial state', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
@@ -301,5 +301,186 @@ it('middleware search from initial state', () => {
     expect(design.state_variables[2].value).toEqual(3492.524417147412);
     expect(design.search_results.objective_value).toEqual(0.14664192222304165);
     expect(design.search_results.termination_condition).toEqual("DELMIN 12 ITER.");
+    expect(design.search_results.violated_constraint_count).toEqual(4);
+});
+
+it('middleware search2 from modified initial state', () => {
+    const store = createStore(
+        pcylWebApp,
+        initialState,
+        applyMiddleware(equationsMiddleware));
+
+    store.dispatch(changeStateVariableConstraint("STRESS", MAX, 10000));
+    
+    store.dispatch(search());
+    
+    var design = store.getState(); // after
+    expect(design.design_parameters[0].name).toEqual("PRESSURE");
+    expect(design.design_parameters[0].value).toEqual(1389.1186225065448);
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].value).toEqual(0.4877369775989805);
+    expect(design.design_parameters[2].name).toEqual("THICKNESS");
+    expect(design.design_parameters[2].value).toEqual(0.040000000000000056);
+    expect(design.state_variables[0].name).toEqual("FORCE");
+    expect(design.state_variables[0].value).toEqual(1038.1511075527435);
+    expect(design.state_variables[1].name).toEqual("AREA");
+    expect(design.state_variables[1].value).toEqual(0.7473451804133828);
+    expect(design.state_variables[2].name).toEqual("STRESS");
+    expect(design.state_variables[2].value).toEqual(8469.056480847505);
+    expect(design.search_results.objective_value).toEqual(0.0);
+    expect(design.search_results.termination_condition).toEqual("OBJMIN 7 ITER.");
+    expect(design.search_results.violated_constraint_count).toEqual(0);
+});
+
+it('middleware search3 from modified initial state', () => {
+    const store = createStore(
+        pcylWebApp,
+        initialState,
+        applyMiddleware(equationsMiddleware));
+
+    store.dispatch(changeDesignParameterValue("RADIUS", 0.444));
+    store.dispatch(setDesignParameterFlag("RADIUS", MIN, FIXED));
+    
+    store.dispatch(search());
+    
+    var design = store.getState(); // after
+    expect(design.design_parameters[0].name).toEqual("PRESSURE");
+    expect(design.design_parameters[0].value).toEqual(972.4279315207291);
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].value).toEqual(0.444);
+    expect(design.design_parameters[2].name).toEqual("THICKNESS");
+    expect(design.design_parameters[2].value).toEqual(0.06000128769964651);
+    expect(design.state_variables[0].name).toEqual("FORCE");
+    expect(design.state_variables[0].value).toEqual(602.2450480774055);
+    expect(design.state_variables[1].name).toEqual("AREA");
+    expect(design.state_variables[1].value).toEqual(0.6193210093580775);
+    expect(design.state_variables[2].name).toEqual("STRESS");
+    expect(design.state_variables[2].value).toEqual(3597.9061295858437);
+    expect(design.search_results.objective_value).toEqual(0.2379406084611994);
+    expect(design.search_results.termination_condition).toEqual("DELMIN 9 ITER.");
+    expect(design.search_results.violated_constraint_count).toEqual(3);
+});
+
+it('middleware search4 from modified initial state', () => {
+    const store = createStore(
+        pcylWebApp,
+        initialState,
+        applyMiddleware(equationsMiddleware));
+
+    store.dispatch(changeStateVariableConstraint("STRESS", MIN, 3500));
+    store.dispatch(changeStateVariableConstraint("STRESS", MAX, 3500));
+    store.dispatch(setStateVariableFlag("STRESS", MIN, FIXED));
+    store.dispatch(setStateVariableFlag("STRESS", MAX, FIXED));
+    
+    store.dispatch(search());
+    
+    var design = store.getState(); // after
+    expect(design.design_parameters[0].name).toEqual("PRESSURE");
+    expect(design.design_parameters[0].value).toEqual(750.4968399919907);
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].value).toEqual(0.5744582590062994);
+    expect(design.design_parameters[2].name).toEqual("THICKNESS");
+    expect(design.design_parameters[2].value).toEqual(0.05745198212666806);
+    expect(design.state_variables[0].name).toEqual("FORCE");
+    expect(design.state_variables[0].value).toEqual(778.0647);
+    expect(design.state_variables[1].name).toEqual("AREA");
+    expect(design.state_variables[1].value).toEqual(1.0367);
+    expect(design.state_variables[2].name).toEqual("STRESS");
+    expect(design.state_variables[2].value).toEqual(3752.0821);
+    expect(design.search_results.objective_value).toEqual(0.0);
+    expect(design.search_results.termination_condition).toEqual("DELMIN 15 ITER.");
+    expect(design.search_results.violated_constraint_count).toEqual(3);
+});
+
+it('middleware search5 from modified initial state', () => {
+    const store = createStore(
+        pcylWebApp,
+        initialState,
+        applyMiddleware(equationsMiddleware));
+
+    store.dispatch(changeStateVariableConstraint("FORCE", MIN, 1200));
+    store.dispatch(changeDesignParameterConstraint("RADIUS", MAX, 0.4));
+    store.dispatch(changeStateVariableConstraint("STRESS", MAX, 3200));
+    
+    store.dispatch(search());
+    
+    var design = store.getState(); // after
+    expect(design.design_parameters[0].name).toEqual("PRESSURE");
+    expect(design.design_parameters[0].value).toEqual(962.044187410488);
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].value).toEqual(0.47955021080064064);
+    expect(design.design_parameters[2].name).toEqual("THICKNESS");
+    expect(design.design_parameters[2].value).toEqual(0.05993925712603883);
+    expect(design.state_variables[0].name).toEqual("FORCE");
+    expect(design.state_variables[0].value).toEqual(695.0452267187616);
+    expect(design.state_variables[1].name).toEqual("AREA");
+    expect(design.state_variables[1].value).toEqual(0.7224670506971189);
+    expect(design.state_variables[2].name).toEqual("STRESS");
+    expect(design.state_variables[2].value).toEqual(3848.4668895888885);
+    expect(design.search_results.objective_value).toEqual(0.29720134447532803);
+    expect(design.search_results.termination_condition).toEqual("DELMIN 8 ITER.");
+    expect(design.search_results.violated_constraint_count).toEqual(4);
+});
+
+it('middleware search6 from modified initial state', () => {
+    const store = createStore(
+        pcylWebApp,
+        initialState,
+        applyMiddleware(equationsMiddleware));
+
+    store.dispatch(changeStateVariableConstraint("FORCE", MIN, 2500));
+    store.dispatch(changeDesignParameterConstraint("RADIUS", MAX, 0.55));
+    store.dispatch(changeStateVariableConstraint("STRESS", MAX, 3400));
+    
+    store.dispatch(search());
+    
+    var design = store.getState(); // after
+    expect(design.design_parameters[0].name).toEqual("PRESSURE");
+    expect(design.design_parameters[0].value).toEqual(747.1742312566108);
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].value).toEqual(0.6601769508494637);
+    expect(design.design_parameters[2].name).toEqual("THICKNESS");
+    expect(design.design_parameters[2].value).toEqual(0.06031483281717521);
+    expect(design.state_variables[0].name).toEqual("FORCE");
+    expect(design.state_variables[0].value).toEqual(1023.0396666167936);
+    expect(design.state_variables[1].name).toEqual("AREA");
+    expect(design.state_variables[1].value).toEqual(1.3692116561571288);
+    expect(design.state_variables[2].name).toEqual("STRESS");
+    expect(design.state_variables[2].value).toEqual(4089.103647517854);
+    expect(design.search_results.objective_value).toEqual(0.47279118427044764);
+    expect(design.search_results.termination_condition).toEqual("DELMIN 13 ITER.");
+    expect(design.search_results.violated_constraint_count).toEqual(4);
+});
+
+it('middleware search7 from modified initial state', () => {
+    const store = createStore(
+        pcylWebApp,
+        initialState,
+        applyMiddleware(equationsMiddleware));
+
+    store.dispatch(changeStateVariableConstraint("FORCE", MIN, 2500));
+    store.dispatch(changeDesignParameterConstraint("RADIUS", MAX, 0.55));
+    store.dispatch(changeStateVariableConstraint("STRESS", MIN, 3800));
+    store.dispatch(changeStateVariableConstraint("STRESS", MAX, 3800));
+    store.dispatch(setStateVariableFlag("STRESS", MIN, FIXED));
+    store.dispatch(setStateVariableFlag("STRESS", MAX, FIXED));
+    
+    store.dispatch(search());
+    
+    var design = store.getState(); // after
+    expect(design.design_parameters[0].name).toEqual("PRESSURE");
+    expect(design.design_parameters[0].value).toEqual(766.5319070212193);
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].value).toEqual(0.6599935713499682);
+    expect(design.design_parameters[2].name).toEqual("THICKNESS");
+    expect(design.design_parameters[2].value).toEqual(0.06041228804212965);
+    expect(design.state_variables[0].name).toEqual("FORCE");
+    expect(design.state_variables[0].value).toEqual(1048.9614);
+    expect(design.state_variables[1].name).toEqual("AREA");
+    expect(design.state_variables[1].value).toEqual(1.3685);
+    expect(design.state_variables[2].name).toEqual("STRESS");
+    expect(design.state_variables[2].value).toEqual(4187.1128);
+    expect(design.search_results.objective_value).toEqual(0.443594);
+    expect(design.search_results.termination_condition).toEqual("DELMIN 16 ITER.");
     expect(design.search_results.violated_constraint_count).toEqual(4);
 });
