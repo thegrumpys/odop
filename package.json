@@ -16,10 +16,10 @@
     "url": "https://github.com/thegrumpys/pcyl-web/issues"
   },
   "homepage": "https://pcyl-web.herokuapp.com/",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "express": "^4.16.3",
+    "node-mysql": "^0.4.2",
     "nodemon": "^1.18.3"
   }
 }
