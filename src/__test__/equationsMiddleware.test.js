@@ -304,7 +304,7 @@ it('middleware search1 from initial state', () => {
     expect(design.search_results.violated_constraint_count).toEqual(4);
 });
 
-it('middleware search2 from modified initial state', () => {
+it('middleware search2: initial state w/ single SV constraint modified', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
@@ -332,7 +332,7 @@ it('middleware search2 from modified initial state', () => {
     expect(design.search_results.violated_constraint_count).toEqual(0);
 });
 
-it('middleware search3 from modified initial state', () => {
+it('middleware search3: initial state w/ single DP FIXed', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
@@ -361,7 +361,7 @@ it('middleware search3 from modified initial state', () => {
     expect(design.search_results.violated_constraint_count).toEqual(3);
 });
 
-it('middleware search4 from modified initial state', () => {
+it('middleware search4: initial state w/ single SV FIXed', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
@@ -392,7 +392,7 @@ it('middleware search4 from modified initial state', () => {
     expect(design.search_results.violated_constraint_count).toEqual(3);
 });
 
-it('middleware search5 from modified initial state', () => {
+it('middleware search5: initial state w/ 3 constraints modified', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
@@ -422,7 +422,7 @@ it('middleware search5 from modified initial state', () => {
     expect(design.search_results.violated_constraint_count).toEqual(4);
 });
 
-it('middleware search6 from modified initial state', () => {
+it('middleware search6: initial state w/ 3 constraints modified further', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
@@ -452,7 +452,7 @@ it('middleware search6 from modified initial state', () => {
     expect(design.search_results.violated_constraint_count).toEqual(4);
 });
 
-it('middleware search7 from modified initial state', () => {
+it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
