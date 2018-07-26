@@ -369,8 +369,8 @@ it('middleware search4 from modified initial state', () => {
 
     store.dispatch(changeStateVariableConstraint("STRESS", MIN, 3500));
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 3500));
-    store.dispatch(setStateVariableFlag("STRESS", MIN, FIXED|CONSTRAINED));
-    store.dispatch(setStateVariableFlag("STRESS", MAX, FIXED|CONSTRAINED));
+    store.dispatch(setStateVariableFlag("STRESS", MIN, FIXED));
+    store.dispatch(setStateVariableFlag("STRESS", MAX, FIXED));
     
     store.dispatch(search());
     

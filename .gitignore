@@ -69,10 +69,3 @@ typings/
 # eclipse files
 .project
 .settings/
-
-# test output file
-test/actual_out.txt
-
-# ignore .DSN files
-*.DSN
-!STARTUP.DSN
