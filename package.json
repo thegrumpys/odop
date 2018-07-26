@@ -4,7 +4,8 @@
   "description": "Piston-Cylinder problem - Web Interface Server",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",

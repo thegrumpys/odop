@@ -1,15 +1,14 @@
 {
-  "name": "pcyl-web",
+  "name": "pcyl-web-client",
   "version": "0.1.0",
-  "description": "Piston-Cylinder problem - Web Interface",
-  "main": "app.js",
+  "description": "Piston-Cylinder problem - Web Interface Client",
+  "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "coverage": "react-scripts test --env=jsdom --coverage",
-    "eject": "react-scripts eject",
-    "server": "node server.js"
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
@@ -34,4 +33,6 @@
     "react-redux": "^5.0.7",
     "reactstrap": "^6.2.0",
     "redux": "^4.0.0"
+  },
+  "proxy": "http://localhost:5000"
 }
