@@ -9,11 +9,18 @@ app.use(bodyParser.json({ type: 'application/json' }));
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+var connection;
+//console.log('process.env.NODE_ENV=', process.env.NODE_ENV);
+if (process.env.NODE_ENV !== 'test') {
+    connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+    connection = mysql.createConnection(process.env.JAWSDB_TEAL_URL);
+}
+
 // Put all API endpoints under '/api'
 app.get('/api/v1/designs', (req, res) => {
     console.log('===========================================================');
     console.log('In GET /api/v1/designs');
-    var connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
     connection.query('SELECT name FROM design', function(err, rows, fields) {
 //        console.log(err);
@@ -30,7 +37,6 @@ app.get('/api/v1/designs/:name', (req, res) => {
     console.log('In GET /api/v1/designs/:name');
     var name = req.params['name'];
     console.log('name='+name);
-    var connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
     connection.query('SELECT value FROM design where name = \''+name+'\'', function(err, rows, fields) {
 //        console.log(err);
@@ -49,7 +55,6 @@ app.post('/api/v1/designs/:name', (req, res) => {
     var name = req.params['name'];
     var value = JSON.stringify(req.body.value);
     console.log('name='+name+' value='+value);
-    var connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
 //    INSERT INTO table_name (column1, column2, column3, ...)
 //    VALUES (value1, value2, value3, ...);
@@ -69,7 +74,6 @@ app.put('/api/v1/designs/:name', (req, res) => {
     var name = req.params['name'];
     var value = req.params['value'];
     console.log('name='+name+' value='+value);
-    var connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
 //    UPDATE table_name
 //    SET column1 = value1, column2 = value2, ...
@@ -89,7 +93,6 @@ app.delete('/api/v1/designs/:name', (req, res) => {
     console.log('In DELETE /api/v1/designs/:name');
     var name = req.params['name'];
     console.log('name='+name);
-    var connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
 //    DELETE FROM table_name
 //    WHERE condition;
@@ -113,7 +116,9 @@ app.get('*', (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-console.log('Server NODE_ENV='+process.env.NODE_ENV+' starting on port '+port);
-app.listen(port);
+if (!module.parent) { // If not in a testcase then start listening
+    console.log('Server NODE_ENV='+process.env.NODE_ENV+' starting on port '+port);
+    app.listen(port);
+}
 
 module.exports = app; // for testing
