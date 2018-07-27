@@ -50,11 +50,9 @@ class FileOpen extends React.Component {
         });
         console.log(this.state.choice);
         // Load the model
-        // Step 1 - Get design blob (this.state.choice)
-        this.getDesign(this.state.choice);
-        // Step 2 - Put blob in store
-        
-        
+        var name = this.state.choice;
+        if (name === undefined) name = 'startup';
+        this.getDesign(name);
     }
     
     onCancel() {
