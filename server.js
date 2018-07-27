@@ -1,13 +1,15 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.json({ type: 'application/json' }));
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Put all API endpoints under '/api'
-app.get('/api/designs', (req, res) => {
+app.get('/api/v1/designs', (req, res) => {
     console.log('===========================================================');
     console.log('In GET /api/designs');
     var mysql = require('mysql');
@@ -23,7 +25,7 @@ app.get('/api/designs', (req, res) => {
     connection.end();
 });
 
-app.get('/api/designs/:name', (req, res) => {
+app.get('/api/v1/designs/:name', (req, res) => {
     console.log('===========================================================');
     console.log('In GET /api/designs/:name');
     var name = req.params['name'];
@@ -42,11 +44,11 @@ app.get('/api/designs/:name', (req, res) => {
 });
 
 
-app.put('/api/designs/:name', (req, res) => {
+app.post('/api/v1/designs/:name', (req, res) => {
     console.log('===========================================================');
-    console.log('In PUT /api/designs/:name');
+    console.log('In POST /api/v1/designs/:name');
     var name = req.params['name'];
-    var value = req.params['value'];
+    var value = JSON.stringify(req.body.value);
     console.log('name='+name+' value='+value);
     var mysql = require('mysql');
     var connection = mysql.createConnection(process.env.JAWSDB_URL);
@@ -63,9 +65,9 @@ app.put('/api/designs/:name', (req, res) => {
     connection.end();
 });
 
-app.post('/api/designs/:name', (req, res) => {
+app.put('/api/v1/designs/:name', (req, res) => {
     console.log('===========================================================');
-    console.log('In PUT /api/designs/:name');
+    console.log('In PUT /api/v1/designs/:name');
     var name = req.params['name'];
     var value = req.params['value'];
     console.log('name='+name+' value='+value);
@@ -85,11 +87,11 @@ app.post('/api/designs/:name', (req, res) => {
     connection.end();
 });
 
-app.delete('/api/designs/:name', (req, res) => {
+app.delete('/api/v1/designs/:name', (req, res) => {
     console.log('===========================================================');
-    console.log('In DELETE /api/designs/:name');
+    console.log('In DELETE /api/v1/designs/:name');
     var name = req.params['name'];
-    console.log('name='+name+' value='+value);
+    console.log('name='+name);
     var mysql = require('mysql');
     var connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
