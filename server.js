@@ -113,5 +113,7 @@ app.get('*', (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-console.log('Server starting on port '+port);
+console.log('Server NODE_ENV='+process.env.NODE_ENV+' starting on port '+port);
 app.listen(port);
+
+module.exports = app; // for testing
