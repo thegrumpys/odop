@@ -12,7 +12,7 @@ export function pcylWebApp(state, action) {
     case STARTUP:
         return state;
     case LOAD:
-        return Object.assign({}, state, action.payload.design );
+        return action.payload.design;
     case CHANGE_DESIGN_PARAMETER_VALUE:
         return Object.assign({}, state, {
             design_parameters: state.design_parameters.map((design_parameter) => {

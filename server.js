@@ -38,7 +38,7 @@ app.get('/api/v1/designs/:name', (req, res) => {
         console.log(rows);
         console.log(fields);
         if (err) throw err;
-        if (rows.length == 1) res.json(rows[0].value);
+        if (rows.length == 1) res.json(JSON.parse(rows[0].value));
     });
     connection.end();
 });

@@ -27,7 +27,7 @@ class FileOpen extends React.Component {
     getDesign(name) {
         fetch('/api/v1/designs/' + name)
         .then(res => res.json())
-        .then(design => this.setState({ design }));
+        .then(design => this.props.load(design));
     }
     
     toggle() {
@@ -53,7 +53,7 @@ class FileOpen extends React.Component {
         // Step 1 - Get design blob (this.state.choice)
         this.getDesign(this.state.choice);
         // Step 2 - Put blob in store
-        this.props.load(this.state.design);
+        
         
     }
     
