@@ -1,7 +1,7 @@
 import { STARTUP, 
     CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
     CHANGE_STATE_VARIABLE_CONSTRAINT, SAVE_STATE_VARIABLE_CONSTRAINTS, RESTORE_STATE_VARIABLE_CONSTRAINTS, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
-    SEARCH, 
+    SEARCH, SEEK, 
     MIN, MAX } from './actionTypes';
 import { 
     changeDesignParameterValue, changeDesignParameterViolation, changeDesignParameterConstraint, 
@@ -84,6 +84,9 @@ export const equationsMiddleware = store => next => action => {
     case SEARCH:
         search(store);
         break;
+    case SEEK:
+        seek(store);
+        break;
     default:
         break;
     }
@@ -119,6 +122,11 @@ function search(store) {
     }
     store.dispatch(changeSearchResultsTerminationCondition(ncode));
     
+}
+
+// Seek
+function seek(store) {
+    console.log("In equationsMiddleware seek");
 }
 
 // Update Violations and Objective Value
