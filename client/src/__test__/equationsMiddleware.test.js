@@ -303,7 +303,7 @@ it('middleware search1 from initial state', () => {
     expect(design.search_results.violated_constraint_count).toEqual(4);
 });
 
-it('middleware search2 from modified initial state', () => {
+it('middleware search2: initial state w/ single SV constraint modified', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
@@ -331,7 +331,7 @@ it('middleware search2 from modified initial state', () => {
     expect(design.search_results.violated_constraint_count).toEqual(0);
 });
 
-it('middleware search3 from modified initial state', () => {
+it('middleware search3: initial state w/ single DP FIXed', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
@@ -360,16 +360,16 @@ it('middleware search3 from modified initial state', () => {
     expect(design.search_results.violated_constraint_count).toEqual(3);
 });
 
-it('middleware search4 from modified initial state', () => {
+it('middleware search4: initial state w/ single SV FIXed', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
         applyMiddleware(equationsMiddleware));
 
+    store.dispatch(setStateVariableFlag("STRESS", MIN, FIXED|CONSTRAINED));
+    store.dispatch(setStateVariableFlag("STRESS", MAX, FIXED|CONSTRAINED));
     store.dispatch(changeStateVariableConstraint("STRESS", MIN, 3500));
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 3500));
-    store.dispatch(setStateVariableFlag("STRESS", MIN, FIXED));
-    store.dispatch(setStateVariableFlag("STRESS", MAX, FIXED));
     
     store.dispatch(search());
     
@@ -381,17 +381,17 @@ it('middleware search4 from modified initial state', () => {
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
     expect(design.design_parameters[2].value).toEqual(0.05745198212666806);
     expect(design.state_variables[0].name).toEqual("FORCE");
-    expect(design.state_variables[0].value).toEqual(778.0647);
+    expect(design.state_variables[0].value).toEqual(778.0646709106514);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(1.0367);
+    expect(design.state_variables[1].value).toEqual(1.0367327741432661);
     expect(design.state_variables[2].name).toEqual("STRESS");
-    expect(design.state_variables[2].value).toEqual(3752.0821);
-    expect(design.search_results.objective_value).toEqual(0.0);
+    expect(design.state_variables[2].value).toEqual(3752.0821052003944);
+    expect(design.search_results.objective_value).toEqual(0.10531583651535117);
     expect(design.search_results.termination_condition).toEqual("DELMIN 15 ITER.");
-    expect(design.search_results.violated_constraint_count).toEqual(3);
+    expect(design.search_results.violated_constraint_count).toEqual(4);
 });
 
-it('middleware search5 from modified initial state', () => {
+it('middleware search5: initial state w/ 3 constraints modified', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
@@ -421,7 +421,7 @@ it('middleware search5 from modified initial state', () => {
     expect(design.search_results.violated_constraint_count).toEqual(4);
 });
 
-it('middleware search6 from modified initial state', () => {
+it('middleware search6: initial state w/ 3 constraints modified further', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
@@ -451,7 +451,7 @@ it('middleware search6 from modified initial state', () => {
     expect(design.search_results.violated_constraint_count).toEqual(4);
 });
 
-it('middleware search7 from modified initial state', () => {
+it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
@@ -459,10 +459,10 @@ it('middleware search7 from modified initial state', () => {
 
     store.dispatch(changeStateVariableConstraint("FORCE", MIN, 2500));
     store.dispatch(changeDesignParameterConstraint("RADIUS", MAX, 0.55));
+    store.dispatch(setStateVariableFlag("STRESS", MIN, FIXED|CONSTRAINED));
+    store.dispatch(setStateVariableFlag("STRESS", MAX, FIXED|CONSTRAINED));
     store.dispatch(changeStateVariableConstraint("STRESS", MIN, 3800));
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 3800));
-    store.dispatch(setStateVariableFlag("STRESS", MIN, FIXED));
-    store.dispatch(setStateVariableFlag("STRESS", MAX, FIXED));
     
     store.dispatch(search());
     
@@ -474,12 +474,12 @@ it('middleware search7 from modified initial state', () => {
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
     expect(design.design_parameters[2].value).toEqual(0.06041228804212965);
     expect(design.state_variables[0].name).toEqual("FORCE");
-    expect(design.state_variables[0].value).toEqual(1048.9614);
+    expect(design.state_variables[0].value).toEqual(1048.9614321530885);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(1.3685);
+    expect(design.state_variables[1].value).toEqual(1.3684511010499278);
     expect(design.state_variables[2].name).toEqual("STRESS");
-    expect(design.state_variables[2].value).toEqual(4187.1128);
-    expect(design.search_results.objective_value).toEqual(0.443594);
+    expect(design.state_variables[2].value).toEqual(4187.112814828608);
+    expect(design.search_results.objective_value).toEqual(0.44359387986703586);
     expect(design.search_results.termination_condition).toEqual("DELMIN 16 ITER.");
     expect(design.search_results.violated_constraint_count).toEqual(4);
 });
