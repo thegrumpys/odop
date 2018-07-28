@@ -77,7 +77,7 @@ class FileOpen extends React.Component {
                         Implementation in progress for software version 0.4. <br />
                         <br />
                         <Label for="fileOpenSelect">Select design to open:</Label>
-                        <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
+                        <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.props.name}>
                             {designs.map((design, index) =>
                                 <option key={index} value={design}>{design}</option>
                             )}
