@@ -69,3 +69,6 @@ typings/
 # eclipse files
 .project
 .settings/
+
+$ package dotenv file
+.env

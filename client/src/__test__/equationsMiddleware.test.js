@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import { pcylWebApp } from '../reducers';
-import { initialState } from '../initialState';
+import { initialState } from './initialState';
 import { equationsMiddleware } from '../equationsMiddleware';
 import { 
     startup,
@@ -54,7 +54,6 @@ it('middleware with startup', () => {
     expect(design.state_variables[2].smax).toEqual(3000);
     
     store.dispatch(startup());
-    
     
     var design = store.getState(); // after
 //  value=500, level=1500, sdlimit=0, status=1, stemp=1500

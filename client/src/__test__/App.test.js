@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import { pcylWebApp } from '../reducers';
 import { startup, changeDesignParameterValue } from '../actionCreators';
-import { initialState } from '../initialState';
+import { initialState } from './initialState';
 
 it('renders without crashing', () => {
     const store = createStore(
