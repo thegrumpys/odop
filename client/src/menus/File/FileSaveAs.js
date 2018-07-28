@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { unload } from '../../actionCreators';
 
 class FileSaveAs extends React.Component {
     constructor(props) {
@@ -10,15 +9,22 @@ class FileSaveAs extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onSaveAs = this.onSaveAs.bind(this);
+        this.onTextInput = this.onTextInput.bind(this);
         this.state = {
             modal: false
         };
     }
     
-    putDesign(name) {
-//        fetch('/api/v1/designs/' + name)
-//        .then(res => res.json())
-//        .then(design => this.props.post(design));
+    postDesign(name) {
+//        console.log("In postDesign name=", name);
+        fetch('/api/v1/designs/'+name, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ "value": this.props.state })
+        })
     }
 
     toggle() {
@@ -26,17 +32,23 @@ class FileSaveAs extends React.Component {
             modal: !this.state.modal
         });
     }
-        
+
+    onTextInput(event) {
+//        console.log(event.target.value)
+        this.setState({
+            name: event.target.value 
+        });
+    }
+    
     onSaveAs() {
         this.setState({
             modal: !this.state.modal
         });
+//        console.log(this.state.name);
         // Save the model
-        var name;
-//      var name = inputText;
-        console.log("name=", name);
-        if (name === undefined) name = 'undef_startup';
-        this.putDesign(name);
+        var name = this.state.name;
+        if (name === undefined) name = 'checkpt';
+        this.postDesign(name);
     }
     
     onCancel() {
@@ -55,15 +67,14 @@ class FileSaveAs extends React.Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; File : Save As </ModalHeader>
                     <ModalBody>
-                    Implementation in progress for software version 0.4. <br />
-                    <br />
-                    <Label for="fileSaveAsText">Save As:</Label>
-                    <Input type="text" name="inputText" id="fileSaveAsText" placeholder="Enter design name here" >
-                    </Input>
+                        Implementation in progress for software version 0.4. <br />
+                        <br />
+                        <Label for="fileSaveAsText">Save As:</Label>
+                        <Input type="text" id="fileSaveAsText" placeholder="Enter design name here" onChange={this.onTextInput}/>
                     </ModalBody>
                     <ModalFooter>
-                    <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                    <Button color="primary" onClick={this.onSaveAs}>Save As</Button>
+                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                        <Button color="primary" onClick={this.onSaveAs}>Save As</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
@@ -71,8 +82,9 @@ class FileSaveAs extends React.Component {
     }
 }  
 
-    const mapDispatchToProps = {
-            unload: unload
-    };
 
-    export default connect(null, mapDispatchToProps)(FileSaveAs);
+const mapStateToProps = state => ({
+    state: state 
+});
+
+export default connect(mapStateToProps)(FileSaveAs);

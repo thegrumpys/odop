@@ -38,9 +38,9 @@ class FileOpen extends React.Component {
     }
     
     onSelect(event) {
-        console.log(event.target.value)
+//        console.log(event.target.value)
         this.setState({
-            choice: event.target.value 
+            name: event.target.value 
         });
     }
     
@@ -48,9 +48,9 @@ class FileOpen extends React.Component {
         this.setState({
             modal: !this.state.modal
         });
-        console.log(this.state.choice);
+//        console.log(this.state.name);
         // Load the model
-        var name = this.state.choice;
+        var name = this.state.name;
         if (name === undefined) name = 'startup';
         this.getDesign(name);
     }
