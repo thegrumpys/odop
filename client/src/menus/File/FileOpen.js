@@ -13,7 +13,8 @@ class FileOpen extends React.Component {
         this.onSelect = this.onSelect.bind(this);
         this.state = {
             modal: false,
-            designs: []
+            designs: [],
+            name: this.props.name
         };
     }
 
@@ -76,9 +77,9 @@ class FileOpen extends React.Component {
                         Implementation in progress for software version 0.4. <br />
                         <br />
                         <Label for="fileOpenSelect">Select design to open:</Label>
-                        <Input type="select" id="fileOpenSelect" onChange={this.onSelect}>
+                        <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
                             {designs.map((design, index) =>
-                                <option key={index}>{design}</option>
+                                <option key={index} value={design}>{design}</option>
                             )}
                         </Input>
                     </ModalBody>
@@ -92,8 +93,12 @@ class FileOpen extends React.Component {
     }
 }  
 
+const mapStateToProps = state => ({
+    name: state.name, 
+});
+
 const mapDispatchToProps = {
     load: load
 };
 
-export default connect(null, mapDispatchToProps)(FileOpen);
+export default connect(mapStateToProps, mapDispatchToProps)(FileOpen);

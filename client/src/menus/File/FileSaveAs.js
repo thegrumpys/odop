@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
+import { changeName } from '../../actionCreators';
 
 class FileSaveAs extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class FileSaveAs extends React.Component {
     
     postDesign(name) {
 //        console.log("In postDesign name=", name);
+        this.props.changeName(name);
         fetch('/api/v1/designs/'+name, {
             method: 'POST',
             headers: {
@@ -24,7 +26,7 @@ class FileSaveAs extends React.Component {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(this.props.state)
-        })
+        });
     }
 
     toggle() {
@@ -87,4 +89,8 @@ const mapStateToProps = state => ({
     state: state 
 });
 
-export default connect(mapStateToProps)(FileSaveAs);
+const mapDispatchToProps = {
+        changeName: changeName
+    };
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileSaveAs);

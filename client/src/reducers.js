@@ -1,4 +1,4 @@
-import { STARTUP, LOAD, 
+import { STARTUP, LOAD, CHANGE_NAME, 
     CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_VIOLATION, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
     CHANGE_STATE_VARIABLE_VALUE, CHANGE_STATE_VARIABLE_VIOLATION, CHANGE_STATE_VARIABLE_CONSTRAINT, SAVE_STATE_VARIABLE_CONSTRAINTS, RESTORE_STATE_VARIABLE_CONSTRAINTS, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
     CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE, CHANGE_SEARCH_RESULTS_TERMINATION_CONDITION, CHANGE_SEARCH_RESULTS_VIOLATED_CONSTRAINT_COUNT, 
@@ -13,6 +13,11 @@ export function pcylWebApp(state, action) {
         return state;
     case LOAD:
         return action.payload.design;
+    case CHANGE_NAME:
+        console.log(action.payload.name);
+        return Object.assign({}, state, {
+            name: action.payload.name
+        });
     case CHANGE_DESIGN_PARAMETER_VALUE:
         return Object.assign({}, state, {
             design_parameters: state.design_parameters.map((design_parameter) => {
