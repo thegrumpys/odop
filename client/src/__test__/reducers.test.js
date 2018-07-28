@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import { pcylWebApp } from '../reducers';
-import { initialState } from '../initialState';
+import { initialState } from './initialState';
 import { equationsMiddleware } from '../equationsMiddleware';
 import { 
     startup,

@@ -143,7 +143,7 @@ class App extends Component {
                         <Nav tabs>
                             <NavItem>
                                 <NavLink className={classnames({ active: this.state.activeTab === '1' })}>
-                                    {this.props.comment}
+                                    {this.props.name}
                                 </NavLink>
                             </NavItem>
                         </Nav>
@@ -165,14 +165,9 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
+    name: state.name,
     type: state.type,
-    version: state.version,
-    comment: state.labels.reduce(function(output, label) {
-        if (label.name === 'COMMENT') {
-            output += label.value;
-        }
-        return output;
-    },'')
+    version: state.version
 });
 
 export default connect(mapStateToProps)(App);

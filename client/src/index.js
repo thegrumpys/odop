@@ -7,8 +7,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { pcylWebApp } from './reducers';
 import { equationsMiddleware } from './equationsMiddleware';
-import { startup } from './actionCreators';
-import { initialState } from './initialState';
 
 //function loggerMiddleware({ getState }) {
 //    return next => action => {
@@ -31,12 +29,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/equationsMiddleware));
 
-const store = createStore(
-        pcylWebApp,
-        initialState,
-        middleware
-        );
-
-store.dispatch(startup());
-
-ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root'));
+fetch('/api/v1/designs/startup')
+    .then(res => res.json())
+    .then(design => {
+        const store = createStore(pcylWebApp, design, middleware);
+        ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root'));
+    });

@@ -27,8 +27,8 @@ class FileOpen extends React.Component {
     getDesign(name) {
 //        console.log('In getDesign name=', name);
         fetch('/api/v1/designs/' + name)
-        .then(res => res.json())
-        .then(design => this.props.load(design));
+            .then(res => res.json())
+            .then(design => this.props.load(design));
     }
     
     toggle() {

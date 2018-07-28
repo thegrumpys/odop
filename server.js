@@ -45,13 +45,17 @@ app.get('/api/v1/designs/:name', (req, res) => {
         res.status(400).end();
     } else {
         var connection = startConnection();
+        // The name column is defined as UNIQUE. You can only get 0 or 1 rows at most.
         connection.query('SELECT value FROM design where name = \''+name+'\'', function(err, rows, fields) {
 //            console.log('err=', err, ' rows=', rows);
             if (err) throw err;
             if (rows.length === 0) {
                 res.status(404).end();
             } else {
-                res.json(JSON.parse(rows[0].value));
+                var value = JSON.parse(rows[0].value);
+                value.name = name; // Insert name into value
+//                console.log('value=', value);
+                res.json(value);
             }
         });
         endConnection(connection);
@@ -64,6 +68,7 @@ app.post('/api/v1/designs/:name', (req, res) => {
     var name = req.params['name'];
     console.log('In POST /api/v1/designs/'+name);
     var value = JSON.stringify(req.body);
+    delete value.name; // Do not save the value with the old name
 //    console.log('value=', value);
     var connection = startConnection();
     connection.query('INSERT INTO design (name, value) VALUES (\''+name+'\',\''+value+'\')', function(err, rows, fields) {
@@ -79,6 +84,7 @@ app.put('/api/v1/designs/:name', (req, res) => {
     var name = req.params['name'];
     console.log('In PUT /api/v1/designs/'+name);
     var value = req.params['value'];
+    delete value.name; // Do not save the value with the old name
 //    console.log('value=', value);
     var connection = startConnection();
     connection.query('UPDATE design SET value = \''+value+'\' WHERE name = \''+name+'\'', (err, rows, fields) => {
