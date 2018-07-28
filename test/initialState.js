@@ -1,4 +1,4 @@
-initialState = {
+var initialState = {
         "constants": [
             {
                 "name": "PI",
@@ -112,6 +112,7 @@ initialState = {
                 "value": "PCYL Default startup file ..."
             }
         ],
+        "name": "initialState",
         "type": "Piston-Cylinder",
         "version": "1.2",
         "search_results": {
@@ -121,4 +122,4 @@ initialState = {
         }
     };
 
-module.export = initialState;
+module.exports = initialState;

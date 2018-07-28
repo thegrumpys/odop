@@ -112,6 +112,7 @@ export const initialState = {
                 "value": "PCYL Default startup file ..."
             }
         ],
+        "name": "initialState",
         "type": "Piston-Cylinder",
         "version": "1.2",
         "search_results": {
