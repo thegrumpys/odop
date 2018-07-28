@@ -165,7 +165,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-    name: state.name,
+    type: state.type,
     version: state.version,
     comment: state.labels.reduce(function(output, label) {
         if (label.name === 'COMMENT') {

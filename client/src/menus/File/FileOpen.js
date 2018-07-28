@@ -25,6 +25,7 @@ class FileOpen extends React.Component {
     }
     
     getDesign(name) {
+//        console.log('In getDesign name=', name);
         fetch('/api/v1/designs/' + name)
         .then(res => res.json())
         .then(design => this.props.load(design));
@@ -75,7 +76,7 @@ class FileOpen extends React.Component {
                         Implementation in progress for software version 0.4. <br />
                         <br />
                         <Label for="fileOpenSelect">Select design to open:</Label>
-                        <Input type="select" name="select" id="fileOpenSelect" onClick={this.onSelect}>
+                        <Input type="select" id="fileOpenSelect" onChange={this.onSelect}>
                             {designs.map((design, index) =>
                                 <option key={index}>{design}</option>
                             )}
@@ -92,7 +93,7 @@ class FileOpen extends React.Component {
 }  
 
 const mapDispatchToProps = {
-        load: load
+    load: load
 };
 
 export default connect(null, mapDispatchToProps)(FileOpen);

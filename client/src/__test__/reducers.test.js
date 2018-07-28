@@ -21,7 +21,7 @@ it('reducers without startup', () => {
         initialState);
     
     var design = store.getState(); // after
-    expect(design.name).toEqual("Piston-Cylinder");
+    expect(design.type).toEqual("Piston-Cylinder");
     expect(design.version).toEqual("1.2");
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
@@ -35,7 +35,7 @@ it('reducers with startup', () => {
         initialState);
     
     var design = store.getState(); // before
-    expect(design.name).toEqual("Piston-Cylinder");
+    expect(design.type).toEqual("Piston-Cylinder");
     expect(design.version).toEqual("1.2");
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
@@ -45,7 +45,7 @@ it('reducers with startup', () => {
     store.dispatch(startup());
     
     var design = store.getState(); // after
-    expect(design.name).toEqual("Piston-Cylinder");
+    expect(design.type).toEqual("Piston-Cylinder");
     expect(design.version).toEqual("1.2");
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);

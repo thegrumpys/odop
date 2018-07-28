@@ -38,7 +38,7 @@ class FileDelete extends React.Component {
 }  
 
 const mapStateToProps = state => ({
-    name: state.name, 
+    type: state.type, 
     version: state.version
   });
 

@@ -39,9 +39,8 @@ app.get('/api/v1/designs', (req, res) => {
 
 app.get('/api/v1/designs/:name', (req, res) => {
     console.log('===========================================================');
-    console.log('In GET /api/v1/designs/:name');
     var name = req.params['name'];
-//    console.log('name=', name);
+    console.log('In GET /api/v1/designs/'+name);
     if (name === undefined || name.length === 0) {
         res.status(400).end();
     } else {
@@ -62,10 +61,10 @@ app.get('/api/v1/designs/:name', (req, res) => {
 
 app.post('/api/v1/designs/:name', (req, res) => {
     console.log('===========================================================');
-    console.log('In POST /api/v1/designs/:name');
     var name = req.params['name'];
+    console.log('In POST /api/v1/designs/'+name);
     var value = JSON.stringify(req.body);
-//    console.log('name=', name, ' value=', value);
+//    console.log('value=', value);
     var connection = startConnection();
     connection.query('INSERT INTO design (name, value) VALUES (\''+name+'\',\''+value+'\')', function(err, rows, fields) {
 //        console.log('err=', err, ' rows=', rows);
@@ -77,10 +76,10 @@ app.post('/api/v1/designs/:name', (req, res) => {
 
 app.put('/api/v1/designs/:name', (req, res) => {
     console.log('===========================================================');
-    console.log('In PUT /api/v1/designs/:name');
     var name = req.params['name'];
+    console.log('In PUT /api/v1/designs/'+name);
     var value = req.params['value'];
-//    console.log('name=', name, ' value=', value);
+//    console.log('value=', value);
     var connection = startConnection();
     connection.query('UPDATE design SET value = \''+value+'\' WHERE name = \''+name+'\'', (err, rows, fields) => {
 //        console.log('err=', err, ' rows=', rows);
@@ -92,9 +91,8 @@ app.put('/api/v1/designs/:name', (req, res) => {
 
 app.delete('/api/v1/designs/:name', (req, res) => {
     console.log('===========================================================');
-    console.log('In DELETE /api/v1/designs/:name');
     var name = req.params['name'];
-//    console.log('name=', name);
+    console.log('In DELETE /api/v1/designs/'+name);
     if (name === undefined || name.length === 0) {
         res.status(400).end();
     } else {

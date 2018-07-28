@@ -25,7 +25,7 @@ class HelpAbout extends React.Component {
                     About
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; About {this.props.name}</ModalHeader>
+                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; About {this.props.type}</ModalHeader>
                     <ModalBody>
                         This is <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank" rel="noopener noreferrer">Open Source </a> software. &nbsp; 
                         <a href="https://github.com/thegrumpys/pcyl-web/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT License.</a> <br />
@@ -43,7 +43,7 @@ class HelpAbout extends React.Component {
 }  
 
 const mapStateToProps = state => ({
-    name: state.name, 
+    type: state.type, 
     version: state.version
   });
 

@@ -65,7 +65,7 @@ describe('Designs', () => {
     });
     
     describe('DELETE /api/v1/designs/:name', () => {
-        it('it should fail DELETE file not found, because name missing', (done) => {
+        it('it should fail DELETE with file not found, because name missing', (done) => {
             chai.request(server)
                 .delete('/api/v1/designs/test')
                 .end((err, res) => {
