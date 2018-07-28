@@ -1,7 +1,6 @@
 import React from 'react';
 import { DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeName } from '../../actionCreators';
 
 class FileSave extends React.Component {
     constructor(props) {
@@ -15,8 +14,7 @@ class FileSave extends React.Component {
     }
     
     putDesign(name) {
-        console.log("In putDesign name=", name);
-        this.props.changeName(name);
+//        console.log("In putDesign name=", name);
         fetch('/api/v1/designs/'+name, {
             method: 'PUT',
             headers: {
@@ -37,7 +35,7 @@ class FileSave extends React.Component {
         this.setState({
             modal: !this.state.modal
         });
-    console.log(this.props.state.name);
+//    console.log(this.props.state.name);
         // Save the model
         var name = this.props.state.name;
         if (name === undefined) name = 'checkpt';
@@ -55,13 +53,8 @@ class FileSave extends React.Component {
     }
 }  
 
-
 const mapStateToProps = state => ({
     state: state 
 });
 
-const mapDispatchToProps = {
-        changeName: changeName
-    };
-
-export default connect(mapStateToProps, mapDispatchToProps)(FileSave);
+export default connect(mapStateToProps)(FileSave);

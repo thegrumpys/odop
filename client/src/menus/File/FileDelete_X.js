@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 
-class FileSave extends React.Component {
+class FileDelete extends React.Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -21,10 +21,10 @@ class FileSave extends React.Component {
         return (
             <React.Fragment>
                 <DropdownItem onClick={this.toggle}>
-                    Save
+                    Delete
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; File : Save </ModalHeader>
+                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; File : Delete </ModalHeader>
                     <ModalBody>
                         This menu item will be implemented in software version 0.4.
                     </ModalBody>
@@ -42,4 +42,4 @@ const mapStateToProps = state => ({
     version: state.version
   });
 
-export default connect(mapStateToProps)(FileSave);
+export default connect(mapStateToProps)(FileDelete);
