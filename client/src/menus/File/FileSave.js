@@ -37,9 +37,9 @@ class FileSave extends React.Component {
         this.setState({
             modal: !this.state.modal
         });
-    console.log(this.state.name);
+    console.log(this.props.state.name);
         // Save the model
-        var name = this.state.name;
+        var name = this.props.state.name;
         if (name === undefined) name = 'checkpt';
         this.putDesign(name);
     }
