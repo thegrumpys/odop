@@ -80,40 +80,80 @@ app.post('/api/v1/designs/:name', (req, res) => {
     console.log('SERVER: ===========================================================');
     var name = req.params['name'];
     console.log('SERVER: In POST /api/v1/designs/'+name);
-    var value = JSON.stringify(req.body);
-    delete value.name; // Do not save the value with the old name
-//    console.log('SERVER: In POST /api/v1/designs/'+name+' value=', value);
-    var connection = startConnection();
-    connection.query('INSERT INTO design (name, value) VALUES (\''+name+'\',\''+value+'\')', function(err, rows, fields) {
-//        console.log('SERVER: After INSERT err=', err, ' rows=', rows);
-        if (err) {
-            res.status(500).end();
-            connection.end();
+    if (name === undefined || name.length === 0) {
+        res.status(400).end();
+    } else {
+        if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
+            res.status(400).end();
         } else {
-            res.end();
-            connection.end();
+            var value = JSON.stringify(req.body);
+            var connection = startConnection();
+            // The name column is defined as UNIQUE. You can only get 0 or 1 rows at most.
+            connection.query('SELECT COUNT(*) AS count FROM design WHERE name = \''+name+'\'', (err, rows, fields) => {
+//                    console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+                if (err) {
+                    res.status(500).end();
+                    connection.end();
+                } else if (rows[0].count === 1) {
+                    res.status(400).end();
+                    connection.end();
+                } else {
+                    delete value.name; // Do not save the old name
+//                        console.log('SERVER: In POST /api/v1/designs/'+name+' value=', value);
+                    connection.query('INSERT INTO design (name, value) VALUES (\''+name+'\',\''+value+'\')', function(err, rows, fields) {
+//                            console.log('SERVER: After INSERT err=', err, ' rows=', rows);
+                        if (err) {
+                            res.status(500).end();
+                            connection.end();
+                        } else {
+                            res.end();
+                            connection.end();
+                        }
+                    });
+                }
+            });
         }
-    });
+    }
 });
 
 app.put('/api/v1/designs/:name', (req, res) => {
     console.log('SERVER: ===========================================================');
     var name = req.params['name'];
     console.log('SERVER: In PUT /api/v1/designs/'+name);
-    var value = req.params['value'];
-    delete value.name; // Do not save the value with the old name
-//    console.log('SERVER: In PUT /api/v1/designs/'+name+' value=', value);
-    var connection = startConnection();
-    connection.query('UPDATE design SET value = \''+value+'\' WHERE name = \''+name+'\'', (err, rows, fields) => {
-//        console.log('SERVER: After UPDATE err=', err, ' rows=', rows);
-        if (err) {
-            res.status(500).end();
-            connection.end();
+    if (name === undefined || name.length === 0) {
+        res.status(400).end();
+    } else {
+        if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
+            res.status(400).end();
         } else {
-            res.end();
-            connection.end();
+            var value = JSON.stringify(req.body);
+            var connection = startConnection();
+            // The name column is defined as UNIQUE. You can only get 0 or 1 rows at most.
+            connection.query('SELECT COUNT(*) AS count FROM design WHERE name = \''+name+'\'', (err, rows, fields) => {
+//                console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+                if (err) {
+                    res.status(500).end();
+                    connection.end();
+                } else if (rows[0].count === 0) {
+                    res.status(404).end();
+                    connection.end();
+                } else {
+                    delete value.name; // Do not save the old name
+//                    console.log('SERVER: In PUT /api/v1/designs/'+name+' value=', value);
+                    connection.query('UPDATE design SET value = \''+value+'\' WHERE name = \''+name+'\'', (err, rows, fields) => {
+//                        console.log('SERVER: After UPDATE err=', err, ' rows=', rows);
+                        if (err) {
+                            res.status(500).end();
+                            connection.end();
+                        } else {
+                            res.end();
+                            connection.end();
+                        }
+                    });
+                }
+            });
         }
-    });
+    }
 });
 
 app.delete('/api/v1/designs/:name', (req, res) => {

@@ -1,4 +1,5 @@
 require('dotenv').config();
+const initialState = require('./initialState');
 
 process.env.NODE_ENV = 'test';
 
@@ -52,6 +53,32 @@ describe('Designs with empty DB', () => {
         });
     });
     
+    describe('POST /api/v1/designs/test with empty DB', () => {
+        it('it should POST one design by name', (done) => {
+            chai.request(server)
+                .post('/api/v1/designs/test')
+                .send(initialState)
+                .end((err, res) => {
+//                    console.log('err=', err);
+                    res.should.have.status(200);
+                    done(err);
+                });
+        });
+    });
+    
+    describe('PUT /api/v1/designs/test with empty DB', () => {
+        it('it should fail PUT with not found, because name does not exist', (done) => {
+            chai.request(server)
+                .put('/api/v1/designs/test')
+                .send(initialState)
+                .end((err, res) => {
+//                    console.log('err=', err);
+                    res.should.have.status(404);
+                    done(err);
+                });
+        });
+    });
+    
     describe('DELETE /api/v1/designs/test with empty DB', () => {
         it('it should fail DELETE with not found, because name does not exist', (done) => {
             chai.request(server)
@@ -75,7 +102,7 @@ describe('Designs with non-empty DB', () => {
 //            console.log('After DELETE err=', err, ' rows=', rows);
             if (err) throw err;
             var name = 'test';
-            var value = JSON.stringify(require('./initialState'));
+            var value = JSON.stringify(initialState);
 //            console.log('In beforeEach value=', value);
             connection.query('INSERT INTO design (name, value) VALUES (\''+name+'\',\''+value+'\')', function(err, rows, fields) {
 //                console.log('After INSERT err=', err, ' rows=', rows);
@@ -111,6 +138,32 @@ describe('Designs with non-empty DB', () => {
                     res.body.should.have.property('name').eql('test');
                     res.body.should.have.property('type').eql('Piston-Cylinder');
                     res.body.should.have.property('version').eql('1.2');
+                    done(err);
+                });
+        });
+    });
+    
+    describe('POST /api/v1/designs/test with non-empty DB', () => {
+        it('it should fail POST with invalid request, because name already exists', (done) => {
+            chai.request(server)
+                .post('/api/v1/designs/test')
+                .send(initialState)
+                .end((err, res) => {
+//                    console.log('err=', err);
+                    res.should.have.status(400);
+                    done(err);
+                });
+        });
+    });
+    
+    describe('PUT /api/v1/designs/test with non-empty DB', () => {
+        it('it should PUT one design by name', (done) => {
+            chai.request(server)
+                .put('/api/v1/designs/test')
+                .send(initialState)
+                .end((err, res) => {
+//                    console.log('err=', err);
+                    res.should.have.status(200);
                     done(err);
                 });
         });
