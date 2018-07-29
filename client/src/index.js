@@ -7,6 +7,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { pcylWebApp } from './reducers';
 import { equationsMiddleware } from './equationsMiddleware';
+import { ErrorModal, displayError } from './ErrorModal';
 
 //function loggerMiddleware({ getState }) {
 //    return next => action => {
@@ -30,8 +31,17 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/equationsMiddleware));
 
 fetch('/api/v1/designs/startup')
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw Error(res.statusText);
+        }
+        return res.json()
+    })
     .then(design => {
         const store = createStore(pcylWebApp, design, middleware);
         ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root'));
+    })
+    .catch(error => {
+        ReactDOM.render(<ErrorModal />, document.getElementById('root'));
+        displayError('Fetch of \'startup\' design failed: '+error.message);
     });
