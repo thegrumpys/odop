@@ -298,9 +298,9 @@ it('middleware search1 from initial state', () => {
     expect(design.state_variables[1].value).toEqual(1.0661971414805103);
     expect(design.state_variables[2].name).toEqual("STRESS");
     expect(design.state_variables[2].value).toEqual(3492.524417147412);
-    expect(design.search_results.objective_value).toEqual(0.14664192222304165);
-    expect(design.search_results.termination_condition).toEqual("DELMIN 12 ITER.");
-    expect(design.search_results.violated_constraint_count).toEqual(4);
+    expect(design.results.objective_value).toEqual(0.14664192222304165);
+    expect(design.results.termination_condition).toEqual("DELMIN 12 ITER.");
+    expect(design.results.violated_constraint_count).toEqual(4);
 });
 
 it('middleware search2: initial state w/ single SV constraint modified', () => {
@@ -326,9 +326,9 @@ it('middleware search2: initial state w/ single SV constraint modified', () => {
     expect(design.state_variables[1].value).toEqual(0.7473451804133828);
     expect(design.state_variables[2].name).toEqual("STRESS");
     expect(design.state_variables[2].value).toEqual(8469.056480847505);
-    expect(design.search_results.objective_value).toEqual(0.0);
-    expect(design.search_results.termination_condition).toEqual("OBJMIN 7 ITER.");
-    expect(design.search_results.violated_constraint_count).toEqual(0);
+    expect(design.results.objective_value).toEqual(0.0);
+    expect(design.results.termination_condition).toEqual("OBJMIN 7 ITER.");
+    expect(design.results.violated_constraint_count).toEqual(0);
 });
 
 it('middleware search3: initial state w/ single DP FIXed', () => {
@@ -355,9 +355,9 @@ it('middleware search3: initial state w/ single DP FIXed', () => {
     expect(design.state_variables[1].value).toEqual(0.6193210093580775);
     expect(design.state_variables[2].name).toEqual("STRESS");
     expect(design.state_variables[2].value).toEqual(3597.9061295858437);
-    expect(design.search_results.objective_value).toEqual(0.2379406084611994);
-    expect(design.search_results.termination_condition).toEqual("DELMIN 9 ITER.");
-    expect(design.search_results.violated_constraint_count).toEqual(3);
+    expect(design.results.objective_value).toEqual(0.2379406084611994);
+    expect(design.results.termination_condition).toEqual("DELMIN 9 ITER.");
+    expect(design.results.violated_constraint_count).toEqual(3);
 });
 
 it('middleware search4: initial state w/ single SV FIXed', () => {
@@ -386,9 +386,9 @@ it('middleware search4: initial state w/ single SV FIXed', () => {
     expect(design.state_variables[1].value).toEqual(1.0367327741432661);
     expect(design.state_variables[2].name).toEqual("STRESS");
     expect(design.state_variables[2].value).toEqual(3752.0821052003944);
-    expect(design.search_results.objective_value).toEqual(0.10531583651535117);
-    expect(design.search_results.termination_condition).toEqual("DELMIN 15 ITER.");
-    expect(design.search_results.violated_constraint_count).toEqual(4);
+    expect(design.results.objective_value).toEqual(0.10531583651535117);
+    expect(design.results.termination_condition).toEqual("DELMIN 15 ITER.");
+    expect(design.results.violated_constraint_count).toEqual(4);
 });
 
 it('middleware search5: initial state w/ 3 constraints modified', () => {
@@ -416,9 +416,9 @@ it('middleware search5: initial state w/ 3 constraints modified', () => {
     expect(design.state_variables[1].value).toEqual(0.7224670506971189);
     expect(design.state_variables[2].name).toEqual("STRESS");
     expect(design.state_variables[2].value).toEqual(3848.4668895888885);
-    expect(design.search_results.objective_value).toEqual(0.29720134447532803);
-    expect(design.search_results.termination_condition).toEqual("DELMIN 8 ITER.");
-    expect(design.search_results.violated_constraint_count).toEqual(4);
+    expect(design.results.objective_value).toEqual(0.29720134447532803);
+    expect(design.results.termination_condition).toEqual("DELMIN 8 ITER.");
+    expect(design.results.violated_constraint_count).toEqual(4);
 });
 
 it('middleware search6: initial state w/ 3 constraints modified further', () => {
@@ -446,9 +446,9 @@ it('middleware search6: initial state w/ 3 constraints modified further', () => 
     expect(design.state_variables[1].value).toEqual(1.3692116561571288);
     expect(design.state_variables[2].name).toEqual("STRESS");
     expect(design.state_variables[2].value).toEqual(4089.103647517854);
-    expect(design.search_results.objective_value).toEqual(0.47279118427044764);
-    expect(design.search_results.termination_condition).toEqual("DELMIN 13 ITER.");
-    expect(design.search_results.violated_constraint_count).toEqual(4);
+    expect(design.results.objective_value).toEqual(0.47279118427044764);
+    expect(design.results.termination_condition).toEqual("DELMIN 13 ITER.");
+    expect(design.results.violated_constraint_count).toEqual(4);
 });
 
 it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', () => {
@@ -479,7 +479,7 @@ it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', ()
     expect(design.state_variables[1].value).toEqual(1.3684511010499278);
     expect(design.state_variables[2].name).toEqual("STRESS");
     expect(design.state_variables[2].value).toEqual(4187.112814828608);
-    expect(design.search_results.objective_value).toEqual(0.44359387986703586);
-    expect(design.search_results.termination_condition).toEqual("DELMIN 16 ITER.");
-    expect(design.search_results.violated_constraint_count).toEqual(4);
+    expect(design.results.objective_value).toEqual(0.44359387986703586);
+    expect(design.results.termination_condition).toEqual("DELMIN 16 ITER.");
+    expect(design.results.violated_constraint_count).toEqual(4);
 });

@@ -43,9 +43,9 @@ class SearchResultsSection extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    objective_value: state.search_results.objective_value,
-    termination_condition: state.search_results.termination_condition,
-    violated_constraint_count: state.search_results.violated_constraint_count
+    objective_value: state.results.objective_value,
+    termination_condition: state.results.termination_condition,
+    violated_constraint_count: state.results.violated_constraint_count
 });
 
 export default connect(mapStateToProps)(SearchResultsSection);

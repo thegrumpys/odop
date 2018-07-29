@@ -307,10 +307,10 @@ it('reducers change search results objective value', () => {
         initialState);
     
     var design = store.getState(); // before
-    expect(design.search_results.objective_value).toEqual(0.5605106435926049);
+    expect(design.results.objective_value).toEqual(0.5605106435926049);
 
     store.dispatch(changeSearchResultsObjectiveValue(0.987654321));
     
     design = store.getState(); // after
-    expect(design.search_results.objective_value).toEqual(0.987654321);
+    expect(design.results.objective_value).toEqual(0.987654321);
 });

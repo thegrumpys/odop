@@ -21,7 +21,7 @@ class StateVariablesSection extends React.Component {
 
 const mapStateToProps = state => ({
     state_variables: state.state_variables,
-    objective_value: state.search_results.objective_value
+    objective_value: state.results.objective_value
 });
 
 export default connect(mapStateToProps)(StateVariablesSection);

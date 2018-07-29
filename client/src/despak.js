@@ -14,6 +14,6 @@ export function despak(pc, store) {
         }
     }
     design = store.getState();
-    var obj = design.search_results.objective_value;
+    var obj = design.results.objective_value;
     return obj;
 }

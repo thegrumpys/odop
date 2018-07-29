@@ -20,7 +20,7 @@ class DesignParametersSection extends React.Component {
 
 const mapStateToProps = state => ({
     design_parameters: state.design_parameters,
-    objective_value: state.search_results.objective_value
+    objective_value: state.results.objective_value
 });
 
 export default connect(mapStateToProps)(DesignParametersSection);

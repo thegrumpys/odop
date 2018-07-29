@@ -212,24 +212,24 @@ export function pcylWebApp(state, action) {
     case CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE:
         return {
             ...state,
-            search_results : {
-                ...state.search_results,
+            results : {
+                ...state.results,
                 objective_value: action.payload.objective_value
             }
         }
     case CHANGE_SEARCH_RESULTS_TERMINATION_CONDITION:
         return {
             ...state,
-            search_results : {
-                ...state.search_results,
+            results : {
+                ...state.results,
                 termination_condition: action.payload.termination_condition
             }
         }
     case CHANGE_SEARCH_RESULTS_VIOLATED_CONSTRAINT_COUNT:
         return {
             ...state,
-            search_results : {
-                ...state.search_results,
+            results : {
+                ...state.results,
                 violated_constraint_count: action.payload.violated_constraint_count
             }
         }
