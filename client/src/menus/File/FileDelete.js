@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-//import { load } from '../../actionCreators';
 
 class FileDelete extends React.Component {
     constructor(props) {
@@ -26,14 +25,13 @@ class FileDelete extends React.Component {
     }
     
     deleteDesign(name) {
-        console.log("In deleteDesign name=", name);
+//        console.log("In deleteDesign name=", name);
         fetch('/api/v1/designs/'+name, {
             method: 'DELETE',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(this.props.name)
         });
     }
     
@@ -46,7 +44,7 @@ class FileDelete extends React.Component {
     }
     
     onSelect(event) {
-        console.log(event.target.value)
+//        console.log(event.target.value)
         this.setState({
             name: event.target.value 
         });
@@ -56,7 +54,7 @@ class FileDelete extends React.Component {
         this.setState({
             modal: !this.state.modal
         });
-        console.log(this.state.name);
+//        console.log(this.state.name);
         // Delete the database entry
         this.deleteDesign(this.state.name);
     }
@@ -101,9 +99,4 @@ const mapStateToProps = state => ({
     name: state.name, 
 });
 
-//const mapDispatchToProps = {
-//    load: load
-//};
-
-//export default connect(mapStateToProps, mapDispatchToProps)(FileDelete);
 export default connect(mapStateToProps)(FileDelete);
