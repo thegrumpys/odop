@@ -1,6 +1,7 @@
 import React from 'react';
 import { DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
+import { displayError } from '../../ErrorModal';
 
 class FileSave extends React.Component {
     constructor(props) {
@@ -16,13 +17,22 @@ class FileSave extends React.Component {
     putDesign(name) {
 //        console.log("In putDesign name=", name);
         fetch('/api/v1/designs/'+name, {
-            method: 'PUT',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.props.state)
-        });
+                method: 'PUT',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(this.props.state)
+            })
+            .then(res => {
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+                return res.json()
+            })
+            .catch(error => {
+                displayError('PUT of \''+name+'\' design failed: '+error.message);
+            });
     }
 
     toggle() {

@@ -14,7 +14,6 @@ export function pcylWebApp(state, action) {
     case LOAD:
         return action.payload.design;
     case CHANGE_NAME:
-        console.log(action.payload.name);
         return Object.assign({}, state, {
             name: action.payload.name
         });

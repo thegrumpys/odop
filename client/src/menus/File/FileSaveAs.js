@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from
 import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeName } from '../../actionCreators';
+import { displayError } from '../../ErrorModal';
 
 class FileSaveAs extends React.Component {
     constructor(props) {
@@ -20,13 +21,22 @@ class FileSaveAs extends React.Component {
 //        console.log("In postDesign name=", name);
         this.props.changeName(name);
         fetch('/api/v1/designs/'+name, {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.props.state)
-        });
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(this.props.state)
+            })
+            .then(res => {
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+                return res.json()
+            })
+            .catch(error => {
+                displayError('POST of \''+name+'\' design failed: '+error.message);
+            });
     }
 
     toggle() {

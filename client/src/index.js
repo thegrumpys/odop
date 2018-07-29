@@ -43,5 +43,5 @@ fetch('/api/v1/designs/startup')
     })
     .catch(error => {
         ReactDOM.render(<ErrorModal />, document.getElementById('root'));
-        displayError('Fetch of \'startup\' design failed: '+error.message);
+        displayError('GET of \'startup\' design failed: '+error.message);
     });

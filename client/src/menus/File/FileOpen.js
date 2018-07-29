@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from
 import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { load } from '../../actionCreators';
+import { displayError } from '../../ErrorModal';
 
 class FileOpen extends React.Component {
     constructor(props) {
@@ -21,15 +22,31 @@ class FileOpen extends React.Component {
     getDesigns() {
         // Get the designs and store them in state
         fetch('/api/v1/designs')
-          .then(res => res.json())
-          .then(designs => this.setState({ designs }));
+            .then(res => {
+                if (!res.ok) {
+                   throw Error(res.statusText);
+                }
+                return res.json()
+            })
+            .then(designs => this.setState({ designs }))
+            .catch(error => {
+                displayError('GET of design names failed: '+error.message);
+            });
     }
     
     getDesign(name) {
 //        console.log('In getDesign name=', name);
         fetch('/api/v1/designs/' + name)
-            .then(res => res.json())
-            .then(design => this.props.load(design));
+            .then(res => {
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+                return res.json()
+            })
+            .then(design => this.props.load(design))
+            .catch(error => {
+                displayError('GET of \''+name+'\' design failed: '+error.message);
+            });
     }
     
     toggle() {

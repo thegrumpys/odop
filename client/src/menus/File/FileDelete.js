@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
+import { displayError } from '../../ErrorModal';
 
 class FileDelete extends React.Component {
     constructor(props) {
@@ -20,19 +21,36 @@ class FileDelete extends React.Component {
     getDesigns() {
         // Get the designs and store them in state
         fetch('/api/v1/designs')
-          .then(res => res.json())
-          .then(designs => this.setState({ designs }));
+            .then(res => {
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+                return res.json()
+            })
+           .then(designs => this.setState({ designs }))
+           .catch(error => {
+               displayError('GET of design names failed: '+error.message);
+           });
     }
     
     deleteDesign(name) {
 //        console.log("In deleteDesign name=", name);
         fetch('/api/v1/designs/'+name, {
-            method: 'DELETE',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-        });
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(res => {
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+                return res.json()
+            })
+            .catch(error => {
+                displayError('DELETE of \''+name+'\' design failed: '+error.message);
+            });
     }
     
     toggle() {
