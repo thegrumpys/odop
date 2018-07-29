@@ -81,7 +81,7 @@ class FileDelete extends React.Component {
                         <Input type="select" id="fileDeleteSelect" onChange={this.onSelect} value={this.state.name}>
                             {designs.map((design, index) =>
                                 {
-                                    if (design !== this.props.name) {
+                                    if (design !== this.props.name && design !== 'startup') {
                                         return <option key={index} value={design}>{design}</option>
                                     } else {
                                         return '';
