@@ -2,14 +2,14 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { load } from '../../actionCreators';
+//import { load } from '../../actionCreators';
 
-class FileOpen extends React.Component {
+class FileDelete extends React.Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
-        this.onOpen = this.onOpen.bind(this);
+        this.onDelete = this.onDelete.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.state = {
             modal: false,
@@ -25,11 +25,16 @@ class FileOpen extends React.Component {
           .then(designs => this.setState({ designs }));
     }
     
-    getDesign(name) {
-//        console.log('In getDesign name=', name);
-        fetch('/api/v1/designs/' + name)
-            .then(res => res.json())
-            .then(design => this.props.load(design));
+    deleteDesign(name) {
+        console.log("In deleteDesign name=", name);
+        fetch('/api/v1/designs/'+name, {
+            method: 'DELETE',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.props.name)
+        });
     }
     
     toggle() {
@@ -41,21 +46,19 @@ class FileOpen extends React.Component {
     }
     
     onSelect(event) {
-//        console.log(event.target.value)
+        console.log(event.target.value)
         this.setState({
             name: event.target.value 
         });
     }
     
-    onOpen() {
+    onDelete() {
         this.setState({
             modal: !this.state.modal
         });
-//        console.log(this.state.name);
-        // Load the model
-        var name = this.state.name;
-        if (name === undefined) name = 'startup';
-        this.getDesign(name);
+        console.log(this.state.name);
+        // Delete the database entry
+        this.deleteDesign(this.state.name);
     }
     
     onCancel() {
@@ -70,15 +73,15 @@ class FileOpen extends React.Component {
         return (
             <React.Fragment>
                 <DropdownItem onClick={this.toggle}>
-                    Open
+                    Delete
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; File : Open </ModalHeader>
+                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; File : Delete </ModalHeader>
                     <ModalBody>
                         Implementation in progress for software version 0.4. <br />
                         <br />
-                        <Label for="fileOpenSelect">Select design to open:</Label>
-                        <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
+                        <Label for="fileDeleteSelect">Select design to delete:</Label>
+                        <Input type="select" id="fileDeleteSelect" onChange={this.onSelect} value={this.state.name}>
                             {designs.map((design, index) =>
                                 <option key={index} value={design}>{design}</option>
                             )}
@@ -86,7 +89,7 @@ class FileOpen extends React.Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onOpen}>Open</Button>
+                        <Button color="primary" onClick={this.onDelete}>Delete</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
@@ -98,8 +101,9 @@ const mapStateToProps = state => ({
     name: state.name, 
 });
 
-const mapDispatchToProps = {
-    load: load
-};
+//const mapDispatchToProps = {
+//    load: load
+//};
 
-export default connect(mapStateToProps, mapDispatchToProps)(FileOpen);
+//export default connect(mapStateToProps, mapDispatchToProps)(FileDelete);
+export default connect(mapStateToProps)(FileDelete);
