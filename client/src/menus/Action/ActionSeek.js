@@ -2,6 +2,7 @@ import React from 'react';
 import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { seek } from '../../actionCreators';
+import { MIN, MAX } from '../../actionTypes';
 
 class ActionSeek extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class ActionSeek extends React.Component {
         this.state = {
             modal: false,
             name: this.props.design_parameters[0].name, // TODO: A fudge
-            minmax: 'MIN' // TODO: A fudge
+            minmax: MIN // TODO: A fudge
         };
     }
     
@@ -62,8 +63,8 @@ class ActionSeek extends React.Component {
                     <ModalBody>
                         <InputGroup>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => this.onMinMax('MIN')} active={this.state.minmax === 'MIN'}>Min</Button>
-                                <Button color="primary" onClick={() => this.onMinMax('MAX')} active={this.state.minmax === 'MAX'}>Max</Button>
+                                <Button color="primary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
+                                <Button color="primary" onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}>Max</Button>
                             </ButtonGroup>
                             &nbsp;
                             <InputGroupAddon addonType="prepend">

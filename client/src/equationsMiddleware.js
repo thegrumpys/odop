@@ -10,6 +10,7 @@ import {
 import { CONSTRAINED, FIXED, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT, DEL, DELMIN, OBJMIN, MAXIT, TOL } from './globals';
 import { eqnset1 } from './eqnset1';
 import { patsh } from './patsh';
+import { seek } from './seek';
 
 export const equationsMiddleware = store => next => action => {
     const returnValue = next(action);
@@ -122,11 +123,6 @@ function search(store) {
     }
     store.dispatch(changeSearchResultsTerminationCondition(ncode));
     
-}
-
-// Seek
-function seek(store, action) {
-    console.log("In equationsMiddleware seek", action);
 }
 
 // Update Violations and Objective Value

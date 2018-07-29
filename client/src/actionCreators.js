@@ -190,8 +190,10 @@ export function search() {
 export function seek(name, minmax) {
     return {
         type: SEEK,
-        name,
-        minmax
+        payload: {
+            name,
+            minmax
+        }
     }
 }
 
