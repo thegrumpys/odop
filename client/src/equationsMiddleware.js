@@ -85,7 +85,7 @@ export const equationsMiddleware = store => next => action => {
         search(store);
         break;
     case SEEK:
-        seek(store);
+        seek(store, action);
         break;
     default:
         break;
@@ -125,8 +125,8 @@ function search(store) {
 }
 
 // Seek
-function seek(store) {
-    console.log("In equationsMiddleware seek");
+function seek(store, action) {
+    console.log("In equationsMiddleware seek", action);
 }
 
 // Update Violations and Objective Value

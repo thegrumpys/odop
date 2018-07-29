@@ -187,9 +187,11 @@ export function search() {
     }
 }
 
-export function seek() {
+export function seek(name, minmax) {
     return {
-        type: SEEK
+        type: SEEK,
+        name,
+        minmax
     }
 }
 
