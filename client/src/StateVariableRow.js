@@ -1,7 +1,7 @@
 import React from 'react';
-import { Row, Col, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { Row, Col, InputGroup, InputGroupAddon, InputGroupText, Input, Badge } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeStateVariableValue, changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
+import { seek, changeStateVariableValue, changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
 import { MIN, MAX } from './actionTypes';
 import { FIXED, CONSTRAINED, OBJMIN } from './globals';
 
@@ -18,6 +18,7 @@ class StateVariableRow extends React.Component {
         this.onChangeStateVariableConstraintMax = this.onChangeStateVariableConstraintMax.bind(this);
         this.onSetStateVariableFlagConstrainedMax = this.onSetStateVariableFlagConstrainedMax.bind(this)
         this.onResetStateVariableFlagConstrainedMax = this.onResetStateVariableFlagConstrainedMax.bind(this)
+        this.onSeek = this.onSeek.bind(this)
     }
     
     onChangeStateVariableValue(event) {
@@ -64,6 +65,10 @@ class StateVariableRow extends React.Component {
         if (this.props.state_variable.lmin & FIXED) {
             this.props.changeStateVariableConstraint(this.props.state_variable.name, MIN, parseFloat(event.target.value));
         }
+    }
+    
+    onSeek(name, minmax) {
+        this.props.seek(name, minmax);
     }
     
     render() {
@@ -117,6 +122,11 @@ class StateVariableRow extends React.Component {
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input className={cmin_class} type="number" value={this.props.state_variable.cmin} onChange={this.onChangeStateVariableConstraintMin} />
+                <InputGroupAddon addonType="append">
+                  <InputGroupText>
+                     <Badge color="secondary" onClick={() => this.onSeek(this.props.state_variable.name, MIN)}>Seek</Badge>
+                  </InputGroupText>
+                </InputGroupAddon>
               </InputGroup>
             );
         } else {
@@ -163,6 +173,11 @@ class StateVariableRow extends React.Component {
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input className={cmax_class} type="number" value={this.props.state_variable.cmax} onChange={this.onChangeStateVariableConstraintMax} />
+                <InputGroupAddon addonType="append">
+                  <InputGroupText>
+                     <Badge color="secondary" onClick={() => this.onSeek(this.props.state_variable.name, MAX)}>Seek</Badge>
+                  </InputGroupText>
+                </InputGroupAddon>
               </InputGroup>
             );
         } else {
@@ -210,7 +225,8 @@ const mapDispatchToStateVariableProps = {
         saveStateVariableConstraints: saveStateVariableConstraints,
         restoreStateVariableConstraints: restoreStateVariableConstraints,
         setStateVariableFlag: setStateVariableFlag,
-        resetStateVariableFlag: resetStateVariableFlag
+        resetStateVariableFlag: resetStateVariableFlag,
+        seek: seek
 };
 
 export default connect(null, mapDispatchToStateVariableProps)(StateVariableRow);

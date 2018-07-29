@@ -1,7 +1,7 @@
 import React from 'react';
-import { Row, Col, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { Row, Col, InputGroup, InputGroupAddon, InputGroupText, Input, Badge } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeDesignParameterValue, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag } from './actionCreators';
+import { seek, changeDesignParameterValue, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag } from './actionCreators';
 import { MIN, MAX } from './actionTypes';
 import { FIXED, CONSTRAINED, OBJMIN } from './globals';
 
@@ -18,7 +18,8 @@ class DesignParameterRow extends React.Component {
         this.onChangeDesignParameterConstraintMax = this.onChangeDesignParameterConstraintMax.bind(this);
         this.onSetDesignParameterFlagConstrainedMax = this.onSetDesignParameterFlagConstrainedMax.bind(this)
         this.onResetDesignParameterFlagConstrainedMax = this.onResetDesignParameterFlagConstrainedMax.bind(this)
-    }
+        this.onSeek = this.onSeek.bind(this)
+           }
     
     onChangeDesignParameterValue(event) {
         this.props.changeDesignParameterValue(this.props.design_parameter.name, parseFloat(event.target.value));
@@ -56,6 +57,10 @@ class DesignParameterRow extends React.Component {
     
     onChangeDesignParameterConstraintMax(event) {
         this.props.changeDesignParameterConstraint(this.props.design_parameter.name, MAX, parseFloat(event.target.value));
+    }
+    
+    onSeek(name, minmax) {
+        this.props.seek(name, minmax);
     }
     
     render() {
@@ -107,7 +112,12 @@ class DesignParameterRow extends React.Component {
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input className={cmin_class} type="number" value={this.props.design_parameter.cmin} onChange={this.onChangeDesignParameterConstraintMin} />
-              </InputGroup>
+                <InputGroupAddon addonType="append">
+                  <InputGroupText>
+                     <Badge color="secondary" onClick={() => this.onSeek(this.props.design_parameter.name, MIN)}>Seek</Badge>
+                  </InputGroupText>
+                </InputGroupAddon>
+                </InputGroup>
             );
         } else {
             cmin = (
@@ -153,6 +163,11 @@ class DesignParameterRow extends React.Component {
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input className={cmax_class} type="number" value={this.props.design_parameter.cmax} onChange={this.onChangeDesignParameterConstraintMax} />
+                <InputGroupAddon addonType="append">
+                  <InputGroupText>
+                     <Badge color="secondary" onClick={() => this.onSeek(this.props.design_parameter.name, MAX)}>Seek</Badge>
+                  </InputGroupText>
+                </InputGroupAddon>
               </InputGroup>
             );
         } else {
@@ -199,7 +214,8 @@ const mapDispatchToProps = {
         changeDesignParameterValue: changeDesignParameterValue,
         changeDesignParameterConstraint: changeDesignParameterConstraint,
         setDesignParameterFlag: setDesignParameterFlag,
-        resetDesignParameterFlag: resetDesignParameterFlag
+        resetDesignParameterFlag: resetDesignParameterFlag,
+        seek: seek
 };
 
 export default connect(null, mapDispatchToProps)(DesignParameterRow);
