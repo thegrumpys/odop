@@ -1,5 +1,5 @@
 import React from 'react';
-import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, InputGroup, InputGroupAddon, InputGroupText, Label, Input, ButtonGroup, Button } from 'reactstrap';
+import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { seek } from '../../actionCreators';
 
