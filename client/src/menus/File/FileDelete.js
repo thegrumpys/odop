@@ -80,7 +80,13 @@ class FileDelete extends React.Component {
                         <Label for="fileDeleteSelect">Select design to delete:</Label>
                         <Input type="select" id="fileDeleteSelect" onChange={this.onSelect} value={this.state.name}>
                             {designs.map((design, index) =>
-                                <option key={index} value={design}>{design}</option>
+                                {
+                                    if (design !== this.props.name) {
+                                        return <option key={index} value={design}>{design}</option>
+                                    } else {
+                                        return '';
+                                    }
+                                }
                             )}
                         </Input>
                     </ModalBody>
