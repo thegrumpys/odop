@@ -1,14 +1,28 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
+import { DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 
 class FileSave extends React.Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.onSave = this.onSave.bind(this);
+
         this.state = {
             modal: false
         };
+    }
+    
+    putDesign(name) {
+//        console.log("In putDesign name=", name);
+        fetch('/api/v1/designs/'+name, {
+            method: 'PUT',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.props.state)
+        });
     }
 
     toggle() {
@@ -17,29 +31,30 @@ class FileSave extends React.Component {
         });
     }
 
+    onSave() {
+        this.setState({
+            modal: !this.state.modal
+        });
+//    console.log(this.props.state.name);
+        // Save the model
+        var name = this.props.state.name;
+        if (name === undefined) name = 'checkpt';
+        this.putDesign(name);
+    }
+
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <DropdownItem onClick={this.onSave}>
                     Save
                 </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; File : Save </ModalHeader>
-                    <ModalBody>
-                        This menu item will be implemented in software version 0.4.
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.toggle}>Close</Button>
-                    </ModalFooter>
-                </Modal>
             </React.Fragment>
         );
     }
 }  
 
 const mapStateToProps = state => ({
-    type: state.type, 
-    version: state.version
-  });
+    state: state 
+});
 
 export default connect(mapStateToProps)(FileSave);
