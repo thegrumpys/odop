@@ -69,7 +69,6 @@ class FileSaveAs extends React.Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; File : Save As </ModalHeader>
                     <ModalBody>
-                        Implementation in progress for software version 0.4. <br />
                         <br />
                         <Label for="fileSaveAsText">Save As:</Label>
                         <Input type="text" id="fileSaveAsText" placeholder="Enter design name here" onChange={this.onTextInput}/>

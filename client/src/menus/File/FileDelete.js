@@ -76,7 +76,6 @@ class FileDelete extends React.Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; File : Delete </ModalHeader>
                     <ModalBody>
-                        Implementation in progress for software version 0.4. <br />
                         <br />
                         <Label for="fileDeleteSelect">Select design to delete:</Label>
                         <Input type="select" id="fileDeleteSelect" onChange={this.onSelect} value={this.state.name}>
