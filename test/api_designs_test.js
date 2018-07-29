@@ -27,6 +27,20 @@ describe('Designs with empty DB', () => {
         });
     });
     
+    describe('GET / with empty DB', () => {
+        it('it should GET *', (done) => {
+            chai.request(server)
+                .get('/')
+                .end((err, res) => {
+//                    console.log('err=', err);
+                    res.should.have.status(200);
+                    should.exist(res.body);
+                    res.body.should.be.a('object');
+                    done(err);
+                });
+        });
+    });
+    
     describe('GET /api/v1/designs with empty DB', () => {
         it('it should GET no design names', (done) => {
             chai.request(server)
@@ -54,6 +68,18 @@ describe('Designs with empty DB', () => {
     });
     
     describe('POST /api/v1/designs/test with empty DB', () => {
+        it('it should fail POST with invalid request, because body is empty', (done) => {
+            chai.request(server)
+                .post('/api/v1/designs/test')
+                .end((err, res) => {
+//                    console.log('err=', err);
+                    res.should.have.status(400);
+                    done(err);
+                });
+        });
+    });
+    
+    describe('POST /api/v1/designs/test with empty DB', () => {
         it('it should POST one design by name', (done) => {
             chai.request(server)
                 .post('/api/v1/designs/test')
@@ -61,6 +87,18 @@ describe('Designs with empty DB', () => {
                 .end((err, res) => {
 //                    console.log('err=', err);
                     res.should.have.status(200);
+                    done(err);
+                });
+        });
+    });
+    
+    describe('PUT /api/v1/designs/test with empty DB', () => {
+        it('it should fail PUT with invalid request, because body is empty', (done) => {
+            chai.request(server)
+                .put('/api/v1/designs/test')
+                .end((err, res) => {
+//                    console.log('err=', err);
+                    res.should.have.status(400);
                     done(err);
                 });
         });
