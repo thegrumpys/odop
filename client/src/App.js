@@ -17,8 +17,8 @@ import {
     DropdownItem
 } from 'reactstrap';
 import classnames from 'classnames';
-import { DesignTable } from './DesignTable';
 import { ErrorModal } from './ErrorModal';
+import { DesignTable } from './DesignTable';
 import { connect } from 'react-redux';
 import FileOpen from './menus/File/FileOpen';
 import FileSave from './menus/File/FileSave';
@@ -48,6 +48,7 @@ class App extends Component {
     render() {
         return (
             <React.Fragment>
+                <ErrorModal/>
                 <Navbar color="inverse" light expand="md">
                     <NavbarBrand href="/"><img src="favicon.ico" alt="The Grumpys"/> PCyl-Web</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
@@ -149,7 +150,6 @@ class App extends Component {
                         </Nav>
                     </Collapse>
                 </Navbar>
-                <ErrorModal/>
                 <Jumbotron>
                     <TabContent activeTab={this.state.activeTab}>
                         <TabPane tabId="1">
