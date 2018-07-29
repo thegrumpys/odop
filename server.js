@@ -148,33 +148,29 @@ app.delete('/api/v1/designs/:name', (req, res) => {
     console.log('SERVER: ===========================================================');
     var name = req.params['name'];
     console.log('SERVER: In DELETE /api/v1/designs/'+name);
-    if (name === undefined || name.length === 0) {
-        res.status(400).end();
-    } else {
-        var connection = startConnection();
-        // The name column is defined as UNIQUE. You can only get 0 or 1 rows at most.
-        connection.query('SELECT COUNT(*) AS count FROM design WHERE name = \''+name+'\'', (err, rows, fields) => {
+    var connection = startConnection();
+    // The name column is defined as UNIQUE. You can only get 0 or 1 rows at most.
+    connection.query('SELECT COUNT(*) AS count FROM design WHERE name = \''+name+'\'', (err, rows, fields) => {
 //            console.log('SERVER: After SELECT err=', err, ' rows=', rows);
-            if (err) {
-                res.status(500).end();
-                connection.end();
-            } else if (rows[0].count === 0) {
-                res.status(404).end();
-                connection.end();
-            } else {
-                connection.query('DELETE FROM design WHERE name = \''+name+'\'', (err, rows, fields) => {
+        if (err) {
+            res.status(500).end();
+            connection.end();
+        } else if (rows[0].count === 0) {
+            res.status(404).end();
+            connection.end();
+        } else {
+            connection.query('DELETE FROM design WHERE name = \''+name+'\'', (err, rows, fields) => {
 //                    console.log('SERVER: After DELETE err=', err, ' rows=', rows);
-                    if (err) {
-                        res.status(500).end();
-                        connection.end();
-                    } else {
-                        res.status(200).end();
-                        connection.end();
-                    }
-                });
-            }
-        });
-    }
+                if (err) {
+                    res.status(500).end();
+                    connection.end();
+                } else {
+                    res.status(200).end();
+                    connection.end();
+                }
+            });
+        }
+    });
 });
 
 // The "catchall" handler: for any request that doesn't
