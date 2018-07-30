@@ -91,7 +91,7 @@ export function seek(store, action) {
         dp = design.design_parameters[i];
         p[i] = dp.value;
     }
-    despak(p, store, ()=>{});
+    despak(p, store);
     // End ftest
     // update
     for (let i = 0; i < design.design_parameters.length; i++) {
@@ -128,7 +128,7 @@ export function seek(store, action) {
         dp = design.design_parameters[i];
         p[i] = dp.value;
     }
-    despak(p, store, ()=>{});
+    despak(p, store);
     // End ftest
     // End estopt
     if (design.results.objective_value < OBJMIN) {
@@ -141,7 +141,7 @@ export function seek(store, action) {
         if (IOOPT > 2) {
             console.log('SEARCHING FOR A FEASIBLE START POINT ...');
         }
-        search(store, OBJMIN, ()=>{});
+        search(store, OBJMIN);
         // putest
         if (SOUGHT > 0) {
             temp = design.design_parameters[SOUGHT - 1].value;
@@ -164,7 +164,7 @@ export function seek(store, action) {
         dp = design.design_parameters[i];
         p[i] = dp.value;
     }
-    despak(p, store, ()=>{});
+    despak(p, store);
     // End ftest
     // update
     for (let i = 0; i < design.design_parameters.length; i++) {

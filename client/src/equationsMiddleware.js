@@ -33,7 +33,7 @@ export const equationsMiddleware = store => next => action => {
             store.dispatch(changeStateVariableConstraint(state_variable.name, MIN, state_variable.cmin));
             store.dispatch(changeStateVariableConstraint(state_variable.name, MAX, state_variable.cmax));
         });
-        updateViolationsAndObjectiveValue(store, ()=>{});
+        updateViolationsAndObjectiveValue(store);
         break;
     case CHANGE_DESIGN_PARAMETER_VALUE:
         design = store.getState();
@@ -59,31 +59,31 @@ export const equationsMiddleware = store => next => action => {
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
     case CHANGE_DESIGN_PARAMETER_CONSTRAINT:
-        updateViolationsAndObjectiveValue(store, ()=>{});
+        updateViolationsAndObjectiveValue(store);
         break;
     case SET_DESIGN_PARAMETER_FLAG:
-        updateViolationsAndObjectiveValue(store, ()=>{});
+        updateViolationsAndObjectiveValue(store);
         break;
     case RESET_DESIGN_PARAMETER_FLAG:
-        updateViolationsAndObjectiveValue(store, ()=>{});
+        updateViolationsAndObjectiveValue(store);
         break;
     case CHANGE_STATE_VARIABLE_CONSTRAINT:
-        updateViolationsAndObjectiveValue(store, ()=>{});
+        updateViolationsAndObjectiveValue(store);
         break;
     case SAVE_STATE_VARIABLE_CONSTRAINTS:
-        updateViolationsAndObjectiveValue(store, ()=>{});
+        updateViolationsAndObjectiveValue(store);
         break;
     case RESTORE_STATE_VARIABLE_CONSTRAINTS:
-        updateViolationsAndObjectiveValue(store, ()=>{});
+        updateViolationsAndObjectiveValue(store);
         break;
     case SET_STATE_VARIABLE_FLAG:
-        updateViolationsAndObjectiveValue(store, ()=>{});
+        updateViolationsAndObjectiveValue(store);
         break;
     case RESET_STATE_VARIABLE_FLAG:
-        updateViolationsAndObjectiveValue(store, ()=>{});
+        updateViolationsAndObjectiveValue(store);
         break;
     case SEARCH:
-        search(store, OBJMIN, ()=>{});
+        search(store, OBJMIN);
         break;
     case SEEK:
         seek(store, action);
@@ -203,7 +203,11 @@ function updateViolationsAndObjectiveValue(store, merit) {
     }
     
     /* Merit Function */
-    m_funct = merit(design);
+    if (merit && typeof merit === 'function') {
+        m_funct = merit(design);
+    } else {
+        m_funct = 0;
+    }
     
     // Update Objective Value
     obj = VIOL_WT * viol_sum + m_funct;
