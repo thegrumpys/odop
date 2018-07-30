@@ -120,7 +120,7 @@ initialState = {
             "termination_condition": "None",
             "violated_constraint_count": 0
         },
-        "controls": {
+        "system_controls": {
             "ioopt": 3,
             "maxit": 100,
             "weapon": 1,
