@@ -1,7 +1,7 @@
 import { STARTUP, LOAD, CHANGE_NAME, 
     CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_VIOLATION, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
     CHANGE_STATE_VARIABLE_VALUE, CHANGE_STATE_VARIABLE_VIOLATION, CHANGE_STATE_VARIABLE_CONSTRAINT, SAVE_STATE_VARIABLE_CONSTRAINTS, RESTORE_STATE_VARIABLE_CONSTRAINTS, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
-    CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE, CHANGE_SEARCH_RESULTS_TERMINATION_CONDITION, CHANGE_SEARCH_RESULTS_VIOLATED_CONSTRAINT_COUNT, 
+    CHANGE_RESULTS_OBJECTIVE_VALUE, CHANGE_RESULTS_TERMINATION_CONDITION, CHANGE_RESULTS_VIOLATED_CONSTRAINT_COUNT, 
     SEARCH, SEEK, MIN } from './actionTypes';
 import { sclden } from './sclden';
 
@@ -209,7 +209,7 @@ export function pcylWebApp(state, action) {
                 return state_variable;
             })
         });
-    case CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE:
+    case CHANGE_RESULTS_OBJECTIVE_VALUE:
         return {
             ...state,
             results : {
@@ -217,7 +217,7 @@ export function pcylWebApp(state, action) {
                 objective_value: action.payload.objective_value
             }
         }
-    case CHANGE_SEARCH_RESULTS_TERMINATION_CONDITION:
+    case CHANGE_RESULTS_TERMINATION_CONDITION:
         return {
             ...state,
             results : {
@@ -225,7 +225,7 @@ export function pcylWebApp(state, action) {
                 termination_condition: action.payload.termination_condition
             }
         }
-    case CHANGE_SEARCH_RESULTS_VIOLATED_CONSTRAINT_COUNT:
+    case CHANGE_RESULTS_VIOLATED_CONSTRAINT_COUNT:
         return {
             ...state,
             results : {
