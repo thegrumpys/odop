@@ -22,8 +22,8 @@ class ResultsSection extends React.Component {
         }
         return (
             <React.Fragment>
-                <Row key="Search Results">
-                    <Col className="font-weight-bold" xs="12">Search Results</Col>
+                <Row key="Results">
+                    <Col className="font-weight-bold" xs="12">Results</Col>
                 </Row>
                 <Row>
                     <Col className="font-italic" xs="1">Objective Value</Col>
