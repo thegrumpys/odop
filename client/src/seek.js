@@ -1,6 +1,6 @@
 import { FIXED, OBJMIN, IOOPT, SMALLNUM, MFN_WT } from './globals';
 import { MAX } from './actionTypes';
-import { changeResultsTerminationCondition } from './actionCreators';
+import { saveDesignParameterValues, restoreDesignParameterValues, changeResultsTerminationCondition } from './actionCreators';
 import { search } from './equationsMiddleware';
 import { despak } from './despak';
 
@@ -41,8 +41,10 @@ export function seek(store, action) {
             if (dp.lmin & FIXED) {
                 ncode = dname+' IS FIXED.   USE OF SEEK IS NOT APPROPRIATE.';
                 store.dispatch(changeResultsTerminationCondition(ncode));
-                SOUGHT = 0;
-                SDIR = 0;
+// ===========================================================================
+//                SOUGHT = 0;
+//                SDIR = 0;
+// ===========================================================================
                 return;
             }
             SOUGHT = (i + 1);
@@ -58,8 +60,10 @@ export function seek(store, action) {
             if (sv.lmin & FIXED) {
                 ncode = dname+' IS FIXED.   USE OF SEEK IS NOT APPROPRIATE.';
                 store.dispatch(changeResultsTerminationCondition(ncode));
-                SOUGHT = 0;
-                SDIR = 0;
+// ===========================================================================
+//                SOUGHT = 0;
+//                SDIR = 0;
+// ===========================================================================
                 return;
             }
             SOUGHT = -(i + 1);
@@ -94,14 +98,17 @@ export function seek(store, action) {
     despak(p, store);
     // End ftest
     // update
-    for (let i = 0; i < design.design_parameters.length; i++) {
-        dp = design.design_parameters[i];
-        dp.oldvalue = dp.value; // TODO: Set Store
-    }
-    for (let i = 0; i < design.state_variables.length; i++) {
-        sv = design.state_variables[i];
-        sv.oldvalue = sv.value; // TODO: Set Store
-    }
+// ===========================================================================
+//    for (let i = 0; i < design.design_parameters.length; i++) {
+//        dp = design.design_parameters[i];
+//        dp.oldvalue = dp.value; // TODO: Set Store
+//    }
+    store.dispatch(saveDesignParameterValues());
+//    for (let i = 0; i < design.state_variables.length; i++) {
+//        sv = design.state_variables[i];
+//        sv.oldvalue = sv.value; // TODO: Set Store
+//    }
+// ===========================================================================
     // End update
     search(store, -1.0, merit);
     if (SOUGHT > 0) {
@@ -132,10 +139,13 @@ export function seek(store, action) {
     // End ftest
     // End estopt
     if (design.results.objective_value < OBJMIN) {
-        for (let i = 0; i < design.design_parameters.length; i++) {
-            dp = design.design_parameters[i];
-            dp.value = dp.oldvalue; // TODO: Set Store
-        }
+// ===========================================================================
+//        for (let i = 0; i < design.design_parameters.length; i++) {
+//            dp = design.design_parameters[i];
+//            dp.value = dp.oldvalue; // TODO: Set Store
+//        }
+        store.dispatch(restoreDesignParameterValues(merit));
+// ===========================================================================
     } else {
         // findfeas
         if (IOOPT > 2) {
@@ -167,14 +177,17 @@ export function seek(store, action) {
     despak(p, store);
     // End ftest
     // update
-    for (let i = 0; i < design.design_parameters.length; i++) {
-        dp = design.design_parameters[i];
-        dp.oldvalue = dp.value; // TODO: Set Store
-    }
-    for (let i = 0; i < design.state_variables.length; i++) {
-        sv = design.state_variables[i];
-        sv.oldvalue = sv.value; // TODO: Set Store
-    }
+// ===========================================================================
+//    for (let i = 0; i < design.design_parameters.length; i++) {
+//        dp = design.design_parameters[i];
+//        dp.oldvalue = dp.value; // TODO: Set Store
+//    }
+    store.dispatch(saveDesignParameterValues());
+//    for (let i = 0; i < design.state_variables.length; i++) {
+//        sv = design.state_variables[i];
+//        sv.oldvalue = sv.value; // TODO: Set Store
+//    }
+// ===========================================================================
     // End update
     search(store, OBJMIN, merit);
     if (IOOPT > 0) {
@@ -190,8 +203,10 @@ export function seek(store, action) {
     if (design.results.objective_value < 0.0) {
         console.log('SEEK SHOULD BE RE-EXECUTED WITH A NEW ESTIMATE OF THE OPTIMUM.');
     }
-    SOUGHT = 0;
-    SDIR = 0;
+// ===========================================================================
+//    SOUGHT = 0;
+//    SDIR = 0;
+// ===========================================================================
     
     function merit(design) {
         console.log('In merit');
