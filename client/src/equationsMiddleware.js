@@ -235,7 +235,7 @@ function updateViolationsAndObjectiveValue(store, merit) {
     if (merit && typeof merit === 'function') {
         m_funct = merit(design);
     } else {
-        m_funct = 0;
+        m_funct = 0.0;
     }
     
     // Update Objective Value

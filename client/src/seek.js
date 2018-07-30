@@ -17,7 +17,7 @@ export function seek(store, action) {
     var M_NUM;
     var design = store.getState(); // Re-access store to get latest dp and sv values
     console.log('SEEK:    OBJ =', design.results.objective_value);
-    if (design.results.objective_value > OBJMIN && design.state_variables.length === 0) {
+    if (design.results.objective_value > OBJMIN && design.state_variables.reduce((total, state_variable)=>{return state_variable.lmin&FIXED ? total+1 : total+0}, 0) === 0) {
         console.log('NOTE:  THE SEEK PROCESS MAY PRODUCE BETTER RESULTS WITH A FEASIBLE START POINT.');
     }
     if (action.payload.minmax === MAX) {
@@ -41,10 +41,6 @@ export function seek(store, action) {
             if (dp.lmin & FIXED) {
                 ncode = dname+' IS FIXED.   USE OF SEEK IS NOT APPROPRIATE.';
                 store.dispatch(changeResultsTerminationCondition(ncode));
-// ===========================================================================
-//                SOUGHT = 0;
-//                SDIR = 0;
-// ===========================================================================
                 return;
             }
             SOUGHT = (i + 1);
@@ -60,10 +56,6 @@ export function seek(store, action) {
             if (sv.lmin & FIXED) {
                 ncode = dname+' IS FIXED.   USE OF SEEK IS NOT APPROPRIATE.';
                 store.dispatch(changeResultsTerminationCondition(ncode));
-// ===========================================================================
-//                SOUGHT = 0;
-//                SDIR = 0;
-// ===========================================================================
                 return;
             }
             SOUGHT = -(i + 1);
@@ -98,19 +90,10 @@ export function seek(store, action) {
     despak(p, store);
     // End ftest
     // update
-// ===========================================================================
-//    for (let i = 0; i < design.design_parameters.length; i++) {
-//        dp = design.design_parameters[i];
-//        dp.oldvalue = dp.value; // TODO: Set Store
-//    }
     store.dispatch(saveDesignParameterValues());
-//    for (let i = 0; i < design.state_variables.length; i++) {
-//        sv = design.state_variables[i];
-//        sv.oldvalue = sv.value; // TODO: Set Store
-//    }
-// ===========================================================================
     // End update
     search(store, -1.0, merit);
+    design = store.getState(); // Re-access store to get latest dp and sv values
     if (SOUGHT > 0) {
         M_NUM = design.design_parameters[SOUGHT - 1].value;
     } else {
@@ -136,22 +119,19 @@ export function seek(store, action) {
         p[i] = dp.value;
     }
     despak(p, store);
+    design = store.getState(); // Re-access store to get latest dp and sv values
     // End ftest
     // End estopt
     if (design.results.objective_value < OBJMIN) {
-// ===========================================================================
-//        for (let i = 0; i < design.design_parameters.length; i++) {
-//            dp = design.design_parameters[i];
-//            dp.value = dp.oldvalue; // TODO: Set Store
-//        }
-        store.dispatch(restoreDesignParameterValues(merit));
-// ===========================================================================
+        store.dispatch(restoreDesignParameterValues()); // TODO: Go back and check need for merit
+        design = store.getState(); // Re-access store to get latest dp and sv values
     } else {
         // findfeas
         if (IOOPT > 2) {
             console.log('SEARCHING FOR A FEASIBLE START POINT ...');
         }
         search(store, OBJMIN);
+        design = store.getState(); // Re-access store to get latest dp and sv values
         // putest
         if (SOUGHT > 0) {
             temp = design.design_parameters[SOUGHT - 1].value;
@@ -177,19 +157,10 @@ export function seek(store, action) {
     despak(p, store);
     // End ftest
     // update
-// ===========================================================================
-//    for (let i = 0; i < design.design_parameters.length; i++) {
-//        dp = design.design_parameters[i];
-//        dp.oldvalue = dp.value; // TODO: Set Store
-//    }
     store.dispatch(saveDesignParameterValues());
-//    for (let i = 0; i < design.state_variables.length; i++) {
-//        sv = design.state_variables[i];
-//        sv.oldvalue = sv.value; // TODO: Set Store
-//    }
-// ===========================================================================
     // End update
     search(store, OBJMIN, merit);
+    design = store.getState(); // Re-access store to get latest dp and sv values
     if (IOOPT > 0) {
         console.log('RETURN ON: '+design.results.termination_condition+'     OBJ ='+design.results.objective_value);
     }
@@ -203,30 +174,28 @@ export function seek(store, action) {
     if (design.results.objective_value < 0.0) {
         console.log('SEEK SHOULD BE RE-EXECUTED WITH A NEW ESTIMATE OF THE OPTIMUM.');
     }
-// ===========================================================================
-//    SOUGHT = 0;
-//    SDIR = 0;
-// ===========================================================================
     
     function merit(design) {
-        console.log('In merit');
+        var m_funct;
         if (SOUGHT === 0) {
-            return 0.0;
+            m_funct = 0.0;
         } else if (SOUGHT > 0) { // DP
             dp = design.design_parameters[SOUGHT - 1];
             if (SDIR < 0) {
-                return (dp.value - M_NUM) / M_DEN;
+                m_funct = (dp.value - M_NUM) / M_DEN;
             } else {
-                return (-dp.value + M_NUM) / M_DEN;
+                m_funct = (-dp.value + M_NUM) / M_DEN;
             }
         } else { // SV
             sv = design.state_variables[-SOUGHT - 1];
             if (SDIR < 0) {
-                return (sv.value - M_NUM) / M_DEN;
+                m_funct = (sv.value - M_NUM) / M_DEN;
             } else {
-                return (-sv.value + M_NUM) / M_DEN;
+                m_funct = (-sv.value + M_NUM) / M_DEN;
             }
         }
+//        console.log('In merit ', m_funct);
+        return m_funct;
     }
 
 }
