@@ -41,7 +41,8 @@ app.get('/api/v1/designs', (req, res) => {
             res.status(500).end();
             connection.end();
         } else {
-            res.json(rows.map((row,index) => {return row.name}));
+            var value = rows.map((row,index) => {return row.name});
+            res.status(200).json(value);
             connection.end();
         }
     });
@@ -65,7 +66,7 @@ app.get('/api/v1/designs/:name', (req, res) => {
             var value = JSON.parse(rows[0].value);
             value.name = name; // Insert name into value
 //                console.log('SERVER: After SELECT value=', value);
-            res.json(value);
+            res.status(200).json(value);
             connection.end();
         }
     });
@@ -99,7 +100,8 @@ app.post('/api/v1/designs/:name', (req, res) => {
                         res.status(500).end();
                         connection.end();
                     } else {
-                        res.end();
+                        var value = {};
+                        res.status(200).json(value);
                         connection.end();
                     }
                 });
@@ -135,7 +137,8 @@ app.put('/api/v1/designs/:name', (req, res) => {
                         res.status(500).end();
                         connection.end();
                     } else {
-                        res.end();
+                        var value = {};
+                        res.status(200).json(value);
                         connection.end();
                     }
                 });
@@ -165,7 +168,8 @@ app.delete('/api/v1/designs/:name', (req, res) => {
                     res.status(500).end();
                     connection.end();
                 } else {
-                    res.status(200).end();
+                    var value = {};
+                    res.status(200).json(value);
                     connection.end();
                 }
             });
