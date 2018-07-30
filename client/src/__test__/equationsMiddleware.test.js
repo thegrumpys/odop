@@ -6,7 +6,7 @@ import {
     startup,
     changeDesignParameterValue, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag, 
     changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag, 
-    changeSearchResultsObjectiveValue, 
+    changeResultsObjectiveValue, 
     search } from '../actionCreators';
 import { MIN, MAX } from '../actionTypes';
 import { CONSTRAINED, FIXED } from '../globals';

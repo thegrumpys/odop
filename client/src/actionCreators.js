@@ -1,7 +1,7 @@
 import { STARTUP, LOAD, CHANGE_NAME, 
     CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_VIOLATION, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
     CHANGE_STATE_VARIABLE_VALUE, CHANGE_STATE_VARIABLE_VIOLATION, CHANGE_STATE_VARIABLE_CONSTRAINT, SAVE_STATE_VARIABLE_CONSTRAINTS, RESTORE_STATE_VARIABLE_CONSTRAINTS, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
-    CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE, CHANGE_SEARCH_RESULTS_TERMINATION_CONDITION, CHANGE_SEARCH_RESULTS_VIOLATED_CONSTRAINT_COUNT,
+    CHANGE_RESULTS_OBJECTIVE_VALUE, CHANGE_RESULTS_TERMINATION_CONDITION, CHANGE_RESULTS_VIOLATED_CONSTRAINT_COUNT,
     SEARCH, SEEK } from './actionTypes';
 
 export function startup() {
@@ -154,27 +154,27 @@ export function resetStateVariableFlag(name, minmax, mask) {
     }
   }
 
-export function changeSearchResultsObjectiveValue(objective_value) {
+export function changeResultsObjectiveValue(objective_value) {
     return {
-        type: CHANGE_SEARCH_RESULTS_OBJECTIVE_VALUE,
+        type: CHANGE_RESULTS_OBJECTIVE_VALUE,
         payload: {
             objective_value
         }
     }
 }
 
-export function changeSearchResultsTerminationCondition(termination_condition) {
+export function changeResultsTerminationCondition(termination_condition) {
     return {
-        type: CHANGE_SEARCH_RESULTS_TERMINATION_CONDITION,
+        type: CHANGE_RESULTS_TERMINATION_CONDITION,
         payload: {
             termination_condition
         }
     }
 }
 
-export function changeSearchResultsViolatedConstraintCount(violated_constraint_count) {
+export function changeResultsViolatedConstraintCount(violated_constraint_count) {
     return {
-        type: CHANGE_SEARCH_RESULTS_VIOLATED_CONSTRAINT_COUNT,
+        type: CHANGE_RESULTS_VIOLATED_CONSTRAINT_COUNT,
         payload: {
             violated_constraint_count
         }

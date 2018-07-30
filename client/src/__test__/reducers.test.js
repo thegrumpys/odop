@@ -6,7 +6,7 @@ import {
     startup,
     changeDesignParameterValue, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag, 
     changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag, 
-    changeSearchResultsObjectiveValue
+    changeResultsObjectiveValue
     } from '../actionCreators';
 import { MIN, MAX } from '../actionTypes';
 import { CONSTRAINED, FIXED } from '../globals';
@@ -309,7 +309,7 @@ it('reducers change search results objective value', () => {
     var design = store.getState(); // before
     expect(design.results.objective_value).toEqual(0.5605106435926049);
 
-    store.dispatch(changeSearchResultsObjectiveValue(0.987654321));
+    store.dispatch(changeResultsObjectiveValue(0.987654321));
     
     design = store.getState(); // after
     expect(design.results.objective_value).toEqual(0.987654321);
