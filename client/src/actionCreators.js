@@ -29,12 +29,13 @@ export function changeName(name) {
     }
   }
 
-export function changeDesignParameterValue(name, value) {
+export function changeDesignParameterValue(name, value, merit) {
     return {
         type: CHANGE_DESIGN_PARAMETER_VALUE,
         payload: {
             name,
-            value
+            value,
+            merit
         }
     }
 }

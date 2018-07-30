@@ -1,5 +1,5 @@
 import { FIXED, OBJMIN, IOOPT, SMALLNUM, MFN_WT } from './globals';
-import { MIN, MAX } from './actionTypes';
+import { MAX } from './actionTypes';
 import { changeResultsTerminationCondition } from './actionCreators';
 import { search } from './equationsMiddleware';
 import { despak } from './despak';
@@ -13,6 +13,8 @@ export function seek(store, action) {
      **************************************************************************/
     var SOUGHT = 0;
     var SDIR = 0;
+    var M_DEN;
+    var M_NUM;
     var design = store.getState(); // Re-access store to get latest dp and sv values
     console.log('SEEK:    OBJ =', design.results.objective_value);
     if (design.results.objective_value > OBJMIN && design.state_variables.length === 0) {
@@ -28,8 +30,10 @@ export function seek(store, action) {
     var dname;
     var input;
     var ncode;
+    var dp;
+    var sv;
     for (let i = 0; !found && i < design.design_parameters.length; i++) {
-        var dp = design.design_parameters[i];
+        dp = design.design_parameters[i];
         if (dp.name.startsWith(action.payload.name)) {
             temp = dp.value;
             dname = dp.name;
@@ -46,7 +50,7 @@ export function seek(store, action) {
         }
     }
     for (let i = 0; !found && i < design.state_variables.length; i++) {
-        var sv = design.state_variables[i];
+        sv = design.state_variables[i];
         if (sv.name.startsWith(action.payload.name)) {
             temp = sv.value;
             dname = sv.name;
@@ -84,22 +88,22 @@ export function seek(store, action) {
     }
     var p = [];
     for (let i = 0; i < design.design_parameters.length; i++) {
-        var dp = design.design_parameters[i];
+        dp = design.design_parameters[i];
         p[i] = dp.value;
     }
-    var obj = despak(p);
+    despak(p, store, ()=>{});
     // End ftest
     // update
     for (let i = 0; i < design.design_parameters.length; i++) {
-        var dp = design.design_parameters[i];
+        dp = design.design_parameters[i];
         dp.oldvalue = dp.value; // TODO: Set Store
     }
     for (let i = 0; i < design.state_variables.length; i++) {
-        var sv = design.state_variables[i];
+        sv = design.state_variables[i];
         sv.oldvalue = sv.value; // TODO: Set Store
     }
     // End update
-    search(store, -1.0);
+    search(store, -1.0, merit);
     if (SOUGHT > 0) {
         M_NUM = design.design_parameters[SOUGHT - 1].value;
     } else {
@@ -119,17 +123,17 @@ export function seek(store, action) {
     if (M_DEN < SMALLNUM) {
         M_DEN = 1.0;
     }
-    var p = [];
+    p = [];
     for (let i = 0; i < design.design_parameters.length; i++) {
-        var dp = design.design_parameters[i];
+        dp = design.design_parameters[i];
         p[i] = dp.value;
     }
-    var obj = despak(p);
+    despak(p, store, ()=>{});
     // End ftest
     // End estopt
     if (design.results.objective_value < OBJMIN) {
         for (let i = 0; i < design.design_parameters.length; i++) {
-            var dp = design.design_parameters[i];
+            dp = design.design_parameters[i];
             dp.value = dp.oldvalue; // TODO: Set Store
         }
     } else {
@@ -137,10 +141,7 @@ export function seek(store, action) {
         if (IOOPT > 2) {
             console.log('SEARCHING FOR A FEASIBLE START POINT ...');
         }
-        var j = SOUGHT;
-        SOUGHT = 0;
-        search(store, OBJMIN);
-        SOUGHT = j;
+        search(store, OBJMIN, ()=>{});
         // putest
         if (SOUGHT > 0) {
             temp = design.design_parameters[SOUGHT - 1].value;
@@ -158,32 +159,32 @@ export function seek(store, action) {
     if (M_DEN < SMALLNUM) {
         M_DEN = 1.0;
     }
-    var p = [];
+    p = [];
     for (let i = 0; i < design.design_parameters.length; i++) {
-        var dp = design.design_parameters[i];
+        dp = design.design_parameters[i];
         p[i] = dp.value;
     }
-    var obj = despak(p);
+    despak(p, store, ()=>{});
     // End ftest
     // update
     for (let i = 0; i < design.design_parameters.length; i++) {
-        var dp = design.design_parameters[i];
+        dp = design.design_parameters[i];
         dp.oldvalue = dp.value; // TODO: Set Store
     }
     for (let i = 0; i < design.state_variables.length; i++) {
-        var sv = design.state_variables[i];
+        sv = design.state_variables[i];
         sv.oldvalue = sv.value; // TODO: Set Store
     }
     // End update
-    search(store, OBJMIN);
+    search(store, OBJMIN, merit);
     if (IOOPT > 0) {
-        ncode = 'Termination Condtion'; // TODO: Get Termination Condition from Store
-        console.log('RETURN ON: '+ncode+'     OBJ ='+design.results.objective_value);
+        console.log('RETURN ON: '+design.results.termination_condition+'     OBJ ='+design.results.objective_value);
     }
+    var temp1;
     if (SOUGHT > 0) {
-        var temp1 = design.design_parameters[SOUGHT - 1].value;
+        temp1 = design.design_parameters[SOUGHT - 1].value;
     } else {
-        var temp1 = design.state_variables[-SOUGHT - 1].value;
+        temp1 = design.state_variables[-SOUGHT - 1].value;
     }
     console.log('CURRENT VALUE OF '+dname+' IS '+temp1+' '+input);
     if (design.results.objective_value < 0.0) {
@@ -191,4 +192,26 @@ export function seek(store, action) {
     }
     SOUGHT = 0;
     SDIR = 0;
+    
+    function merit(design) {
+        console.log('In merit');
+        if (SOUGHT === 0) {
+            return 0.0;
+        } else if (SOUGHT > 0) { // DP
+            dp = design.design_parameters[SOUGHT - 1];
+            if (SDIR < 0) {
+                return (dp.value - M_NUM) / M_DEN;
+            } else {
+                return (-dp.value + M_NUM) / M_DEN;
+            }
+        } else { // SV
+            sv = design.state_variables[-SOUGHT - 1];
+            if (SDIR < 0) {
+                return (sv.value - M_NUM) / M_DEN;
+            } else {
+                return (-sv.value + M_NUM) / M_DEN;
+            }
+        }
+    }
+
 }

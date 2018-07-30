@@ -3,14 +3,14 @@ import { FIXED } from './globals';
 /**
  * despak - Expand any compressed design parameters and call the equation set.
  */
-export function despak(pc, store) {
+export function despak(pc, store, merit) {
     var design = store.getState();
     var kd = 0;
     for (let i = 0; i < design.design_parameters.length; i++) {
         var dp = design.design_parameters[i];
         if (!(dp.lmin & FIXED)) {
             var value = pc[kd++];
-            store.dispatch(changeDesignParameterValue(dp.name, value));
+            store.dispatch(changeDesignParameterValue(dp.name, value, merit));
         }
     }
     design = store.getState();

@@ -7,7 +7,7 @@ import {
     changeDesignParameterValue, changeDesignParameterViolation, changeDesignParameterConstraint, 
     changeStateVariableValue, changeStateVariableViolation, changeStateVariableConstraint, 
     changeResultsObjectiveValue, changeResultsTerminationCondition, changeResultsViolatedConstraintCount } from './actionCreators';
-import { CONSTRAINED, FIXED, SOUGHT, SDIR, M_NUM, M_DEN, VIOL_WT, DEL, DELMIN, OBJMIN, MAXIT, TOL } from './globals';
+import { CONSTRAINED, FIXED, VIOL_WT, DEL, DELMIN, OBJMIN, MAXIT, TOL } from './globals';
 import { eqnset1 } from './eqnset1';
 import { patsh } from './patsh';
 import { seek } from './seek';
@@ -33,7 +33,7 @@ export const equationsMiddleware = store => next => action => {
             store.dispatch(changeStateVariableConstraint(state_variable.name, MIN, state_variable.cmin));
             store.dispatch(changeStateVariableConstraint(state_variable.name, MAX, state_variable.cmax));
         });
-        updateViolationsAndObjectiveValue(store);
+        updateViolationsAndObjectiveValue(store, ()=>{});
         break;
     case CHANGE_DESIGN_PARAMETER_VALUE:
         design = store.getState();
@@ -56,34 +56,34 @@ export const equationsMiddleware = store => next => action => {
             design = store.getState();
             store.dispatch(changeStateVariableValue(sv.name, x[i]));
         }
-        updateViolationsAndObjectiveValue(store);
+        updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
     case CHANGE_DESIGN_PARAMETER_CONSTRAINT:
-        updateViolationsAndObjectiveValue(store);
+        updateViolationsAndObjectiveValue(store, ()=>{});
         break;
     case SET_DESIGN_PARAMETER_FLAG:
-        updateViolationsAndObjectiveValue(store);
+        updateViolationsAndObjectiveValue(store, ()=>{});
         break;
     case RESET_DESIGN_PARAMETER_FLAG:
-        updateViolationsAndObjectiveValue(store);
+        updateViolationsAndObjectiveValue(store, ()=>{});
         break;
     case CHANGE_STATE_VARIABLE_CONSTRAINT:
-        updateViolationsAndObjectiveValue(store);
+        updateViolationsAndObjectiveValue(store, ()=>{});
         break;
     case SAVE_STATE_VARIABLE_CONSTRAINTS:
-        updateViolationsAndObjectiveValue(store);
+        updateViolationsAndObjectiveValue(store, ()=>{});
         break;
     case RESTORE_STATE_VARIABLE_CONSTRAINTS:
-        updateViolationsAndObjectiveValue(store);
+        updateViolationsAndObjectiveValue(store, ()=>{});
         break;
     case SET_STATE_VARIABLE_FLAG:
-        updateViolationsAndObjectiveValue(store);
+        updateViolationsAndObjectiveValue(store, ()=>{});
         break;
     case RESET_STATE_VARIABLE_FLAG:
-        updateViolationsAndObjectiveValue(store);
+        updateViolationsAndObjectiveValue(store, ()=>{});
         break;
     case SEARCH:
-        search(store, OBJMIN);
+        search(store, OBJMIN, ()=>{});
         break;
     case SEEK:
         seek(store, action);
@@ -95,7 +95,7 @@ export const equationsMiddleware = store => next => action => {
 }
 
 // Search
-export function search(store, objmin) {
+export function search(store, objmin, merit) {
     
     var design = store.getState();
     
@@ -111,14 +111,14 @@ export function search(store, objmin) {
     
     // Do the pattern search
     var delarg = DEL;
-    var ncode = patsh(pc, delarg, DELMIN, objmin, MAXIT, TOL, store);
+    var ncode = patsh(pc, delarg, DELMIN, objmin, MAXIT, TOL, store, merit);
     
     // Expand PC back into store change actions
     var kd = 0;
     for (let i = 0; i < design.design_parameters.length; i++) {
         dp = design.design_parameters[i];
         if (!(dp.lmin & FIXED)) {
-            store.dispatch(changeDesignParameterValue(dp.name, pc[kd++]));
+            store.dispatch(changeDesignParameterValue(dp.name, pc[kd++], merit));
         }
     }
     store.dispatch(changeResultsTerminationCondition(ncode));
@@ -126,7 +126,7 @@ export function search(store, objmin) {
 }
 
 // Update Violations and Objective Value
-function updateViolationsAndObjectiveValue(store) {
+function updateViolationsAndObjectiveValue(store, merit) {
     
     // Update Constraint Violations
     /*
@@ -201,24 +201,9 @@ function updateViolationsAndObjectiveValue(store) {
             }
         }
     }
+    
     /* Merit Function */
-    if (SOUGHT === 0) {
-        m_funct = 0.0;
-    } else if (SOUGHT > 0) { // DP
-        dp = design.design_parameters[SOUGHT - 1];
-        if (SDIR < 0) {
-            m_funct = (dp.value - M_NUM) / M_DEN;
-        } else {
-            m_funct = (-dp.value + M_NUM) / M_DEN;
-        }
-    } else { // SV
-        sv = design.state_variables[-SOUGHT - 1];
-        if (SDIR < 0) {
-            m_funct = (sv.value - M_NUM) / M_DEN;
-        } else {
-            m_funct = (-sv.value + M_NUM) / M_DEN;
-        }
-    }
+    m_funct = merit(design);
     
     // Update Objective Value
     obj = VIOL_WT * viol_sum + m_funct;
