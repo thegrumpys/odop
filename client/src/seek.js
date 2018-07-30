@@ -1,6 +1,6 @@
 import { FIXED, OBJMIN, IOOPT, SMALLNUM, MFN_WT } from './globals';
 import { MIN, MAX } from './actionTypes';
-import { changeSearchResultsTerminationCondition } from './actionCreators';
+import { changeResultsTerminationCondition } from './actionCreators';
 import { search } from './equationsMiddleware';
 import { despak } from './despak';
 
@@ -36,7 +36,7 @@ export function seek(store, action) {
             input = dp.units;
             if (dp.lmin & FIXED) {
                 ncode = dname+' IS FIXED.   USE OF SEEK IS NOT APPROPRIATE.';
-                store.dispatch(changeSearchResultsTerminationCondition(ncode));
+                store.dispatch(changeResultsTerminationCondition(ncode));
                 SOUGHT = 0;
                 SDIR = 0;
                 return;
@@ -53,7 +53,7 @@ export function seek(store, action) {
             input = sv.units;
             if (sv.lmin & FIXED) {
                 ncode = dname+' IS FIXED.   USE OF SEEK IS NOT APPROPRIATE.';
-                store.dispatch(changeSearchResultsTerminationCondition(ncode));
+                store.dispatch(changeResultsTerminationCondition(ncode));
                 SOUGHT = 0;
                 SDIR = 0;
                 return;
