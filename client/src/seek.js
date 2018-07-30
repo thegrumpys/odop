@@ -1,6 +1,9 @@
-import { FIXED, OBJMIN } from './globals';
+import { FIXED, OBJMIN, IOOPT, SMALLNUM, MFN_WT } from './globals';
 import { MIN, MAX } from './actionTypes';
 import { changeSearchResultsTerminationCondition } from './actionCreators';
+import { search } from './equationsMiddleware';
+import { despak } from './despak';
+
 // Seek
 export function seek(store, action) {
     console.log("In seek", action);
@@ -86,8 +89,6 @@ export function seek(store, action) {
     }
     var obj = despak(p);
     // End ftest
-    var value = OBJMIN;
-    OBJMIN = -1.0;
     // update
     for (let i = 0; i < design.design_parameters.length; i++) {
         var dp = design.design_parameters[i];
@@ -98,8 +99,7 @@ export function seek(store, action) {
         sv.oldvalue = sv.value; // TODO: Set Store
     }
     // End update
-    var obj = search(store);
-    OBJMIN = value;
+    search(store, -1.0);
     if (SOUGHT > 0) {
         M_NUM = design.design_parameters[SOUGHT - 1].value;
     } else {
@@ -139,7 +139,7 @@ export function seek(store, action) {
         }
         var j = SOUGHT;
         SOUGHT = 0;
-        var obj = search(store);
+        search(store, OBJMIN);
         SOUGHT = j;
         // putest
         if (SOUGHT > 0) {
@@ -175,7 +175,7 @@ export function seek(store, action) {
         sv.oldvalue = sv.value; // TODO: Set Store
     }
     // End update
-    var obj = search(store);
+    search(store, OBJMIN);
     if (IOOPT > 0) {
         ncode = 'Termination Condtion'; // TODO: Get Termination Condition from Store
         console.log('RETURN ON: '+ncode+'     OBJ ='+design.results.objective_value);

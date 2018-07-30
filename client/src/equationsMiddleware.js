@@ -83,7 +83,7 @@ export const equationsMiddleware = store => next => action => {
         updateViolationsAndObjectiveValue(store);
         break;
     case SEARCH:
-        search(store);
+        search(store, OBJMIN);
         break;
     case SEEK:
         seek(store, action);
@@ -95,7 +95,7 @@ export const equationsMiddleware = store => next => action => {
 }
 
 // Search
-function search(store) {
+export function search(store, objmin) {
     
     var design = store.getState();
     
@@ -111,7 +111,7 @@ function search(store) {
     
     // Do the pattern search
     var delarg = DEL;
-    var ncode = patsh(pc, delarg, DELMIN, OBJMIN, MAXIT, TOL, store);
+    var ncode = patsh(pc, delarg, DELMIN, objmin, MAXIT, TOL, store);
     
     // Expand PC back into store change actions
     var kd = 0;
@@ -204,14 +204,14 @@ function updateViolationsAndObjectiveValue(store) {
     /* Merit Function */
     if (SOUGHT === 0) {
         m_funct = 0.0;
-    } else if (SOUGHT > 0) {
+    } else if (SOUGHT > 0) { // DP
         dp = design.design_parameters[SOUGHT - 1];
         if (SDIR < 0) {
             m_funct = (dp.value - M_NUM) / M_DEN;
         } else {
             m_funct = (-dp.value + M_NUM) / M_DEN;
         }
-    } else {
+    } else { // SV
         sv = design.state_variables[-SOUGHT - 1];
         if (SDIR < 0) {
             m_funct = (sv.value - M_NUM) / M_DEN;
