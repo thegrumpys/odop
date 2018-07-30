@@ -32,6 +32,7 @@ function startConnection() {
 // 400 — BAD REQUEST, The request was malformed or invalid
 // 500 — INTERNAL SERVER ERROR, Unknown server error has occurred
 app.get('/api/v1/designs', (req, res) => {
+    var value;
     console.log('SERVER: ===========================================================');
     console.log('SERVER: In GET /api/v1/designs');
     var connection = startConnection();
@@ -40,15 +41,18 @@ app.get('/api/v1/designs', (req, res) => {
         if (err) {
             res.status(500).end();
             connection.end();
+            console.log('SERVER: 500 - INTERNAL SERVER ERROR');
         } else {
-            var value = rows.map((row,index) => {return row.name});
+            value = rows.map((row,index) => {return row.name});
             res.status(200).json(value);
             connection.end();
+            console.log('SERVER: 200 - OK');
         }
     });
 });
 
 app.get('/api/v1/designs/:name', (req, res) => {
+    var value;
     console.log('SERVER: ===========================================================');
     var name = req.params['name'];
     console.log('SERVER: In GET /api/v1/designs/'+name);
@@ -59,28 +63,33 @@ app.get('/api/v1/designs/:name', (req, res) => {
         if (err) {
             res.status(500).end();
             connection.end();
+            console.log('SERVER: 500 - INTERNAL SERVER ERROR');
         } else if (rows.length === 0) {
             res.status(404).end();
             connection.end();
+            console.log('SERVER: 404 - NOT FOUND');
         } else {
-            var value = JSON.parse(rows[0].value);
+            value = JSON.parse(rows[0].value);
             value.name = name; // Insert name into value
 //                console.log('SERVER: After SELECT value=', value);
             res.status(200).json(value);
             connection.end();
+            console.log('SERVER: 200 - OK');
         }
     });
 });
 
 
 app.post('/api/v1/designs/:name', (req, res) => {
+    var value;
     console.log('SERVER: ===========================================================');
     var name = req.params['name'];
     console.log('SERVER: In POST /api/v1/designs/'+name);
     if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
         res.status(400).end();
+        console.log('SERVER: 400 - BAD REQUEST');
     } else {
-        var value = JSON.stringify(req.body);
+        value = JSON.stringify(req.body);
         var connection = startConnection();
         // The name column is defined as UNIQUE. You can only get 0 or 1 rows at most.
         connection.query('SELECT COUNT(*) AS count FROM design WHERE name = \''+name+'\'', (err, rows, fields) => {
@@ -88,9 +97,11 @@ app.post('/api/v1/designs/:name', (req, res) => {
             if (err) {
                 res.status(500).end();
                 connection.end();
+                console.log('SERVER: 500 - INTERNAL SERVER ERROR');
             } else if (rows[0].count === 1) {
                 res.status(400).end();
                 connection.end();
+                console.log('SERVER: 400 - BAD REQUEST');
             } else {
                 delete value.name; // Do not save the old name
 //                        console.log('SERVER: In POST /api/v1/designs/'+name+' value=', value);
@@ -99,10 +110,12 @@ app.post('/api/v1/designs/:name', (req, res) => {
                     if (err) {
                         res.status(500).end();
                         connection.end();
+                        console.log('SERVER: 500 - INTERNAL SERVER ERROR');
                     } else {
-                        var value = {};
+                        value = {};
                         res.status(200).json(value);
                         connection.end();
+                        console.log('SERVER: 200 - OK');
                     }
                 });
             }
@@ -111,13 +124,15 @@ app.post('/api/v1/designs/:name', (req, res) => {
 });
 
 app.put('/api/v1/designs/:name', (req, res) => {
+    var value;
     console.log('SERVER: ===========================================================');
     var name = req.params['name'];
     console.log('SERVER: In PUT /api/v1/designs/'+name);
     if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
         res.status(400).end();
+        console.log('SERVER: 400 - BAD REQUEST');
     } else {
-        var value = JSON.stringify(req.body);
+        value = JSON.stringify(req.body);
         var connection = startConnection();
         // The name column is defined as UNIQUE. You can only get 0 or 1 rows at most.
         connection.query('SELECT COUNT(*) AS count FROM design WHERE name = \''+name+'\'', (err, rows, fields) => {
@@ -125,9 +140,11 @@ app.put('/api/v1/designs/:name', (req, res) => {
             if (err) {
                 res.status(500).end();
                 connection.end();
+                console.log('SERVER: 500 - INTERNAL SERVER ERROR');
             } else if (rows[0].count === 0) {
                 res.status(404).end();
                 connection.end();
+                console.log('SERVER: 404 - NOT FOUND');
             } else {
                 delete value.name; // Do not save the old name
 //                    console.log('SERVER: In PUT /api/v1/designs/'+name+' value=', value);
@@ -136,10 +153,12 @@ app.put('/api/v1/designs/:name', (req, res) => {
                     if (err) {
                         res.status(500).end();
                         connection.end();
+                        console.log('SERVER: 500 - INTERNAL SERVER ERROR');
                     } else {
-                        var value = {};
+                        value = {};
                         res.status(200).json(value);
                         connection.end();
+                        console.log('SERVER: 200 - OK');
                     }
                 });
             }
@@ -148,6 +167,7 @@ app.put('/api/v1/designs/:name', (req, res) => {
 });
 
 app.delete('/api/v1/designs/:name', (req, res) => {
+    var value;
     console.log('SERVER: ===========================================================');
     var name = req.params['name'];
     console.log('SERVER: In DELETE /api/v1/designs/'+name);
@@ -158,19 +178,23 @@ app.delete('/api/v1/designs/:name', (req, res) => {
         if (err) {
             res.status(500).end();
             connection.end();
+            console.log('SERVER: 500 - INTERNAL SERVER ERROR');
         } else if (rows[0].count === 0) {
             res.status(404).end();
             connection.end();
+            console.log('SERVER: 404 - NOT FOUND');
         } else {
             connection.query('DELETE FROM design WHERE name = \''+name+'\'', (err, rows, fields) => {
 //                    console.log('SERVER: After DELETE err=', err, ' rows=', rows);
                 if (err) {
                     res.status(500).end();
                     connection.end();
+                    console.log('SERVER: 500 - INTERNAL SERVER ERROR');
                 } else {
-                    var value = {};
+                    value = {};
                     res.status(200).json(value);
                     connection.end();
+                    console.log('SERVER: 200 - OK');
                 }
             });
         }
@@ -183,7 +207,8 @@ app.get('*', (req, res) => {
     console.log('SERVER: ===========================================================');
     console.log('SERVER: In *');
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
-    res.end();
+    res.status(200).end();
+    console.log('SERVER: 200 - OK');
 });
 
 const port = process.env.PORT || 5000;

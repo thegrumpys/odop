@@ -28,7 +28,7 @@ describe('Designs with empty DB', () => {
     });
     
     describe('GET / with empty DB', () => {
-        it('it should GET *', (done) => {
+        it('it should GET with 200 OK *', (done) => {
             chai.request(server)
                 .get('/')
                 .end((err, res) => {
@@ -42,7 +42,7 @@ describe('Designs with empty DB', () => {
     });
     
     describe('GET /api/v1/designs with empty DB', () => {
-        it('it should GET no design names', (done) => {
+        it('it should GET with 200 OK no design names', (done) => {
             chai.request(server)
                 .get('/api/v1/designs')
                 .end((err, res) => {
@@ -56,7 +56,7 @@ describe('Designs with empty DB', () => {
     });
     
     describe('GET /api/v1/designs/test with empty DB', () => {
-        it('it should fail GET with not found, because name does not exist', (done) => {
+        it('it should fail GET with 404 NOT FOUND, because name does not exist', (done) => {
             chai.request(server)
                 .get('/api/v1/designs/test')
                 .end((err, res) => {
@@ -68,7 +68,7 @@ describe('Designs with empty DB', () => {
     });
     
     describe('POST /api/v1/designs/test with empty DB', () => {
-        it('it should fail POST with invalid request, because body is empty', (done) => {
+        it('it should fail POST with 400 BAD REQUEST, because body is empty', (done) => {
             chai.request(server)
                 .post('/api/v1/designs/test')
                 .end((err, res) => {
@@ -80,7 +80,7 @@ describe('Designs with empty DB', () => {
     });
     
     describe('POST /api/v1/designs/test with empty DB', () => {
-        it('it should POST one design by name', (done) => {
+        it('it should POST with 200 OK one design by name', (done) => {
             chai.request(server)
                 .post('/api/v1/designs/test')
                 .send(initialState)
@@ -93,7 +93,7 @@ describe('Designs with empty DB', () => {
     });
     
     describe('PUT /api/v1/designs/test with empty DB', () => {
-        it('it should fail PUT with invalid request, because body is empty', (done) => {
+        it('it should fail PUT with 400 BAD REQUEST, because body is empty', (done) => {
             chai.request(server)
                 .put('/api/v1/designs/test')
                 .end((err, res) => {
@@ -105,7 +105,7 @@ describe('Designs with empty DB', () => {
     });
     
     describe('PUT /api/v1/designs/test with empty DB', () => {
-        it('it should fail PUT with not found, because name does not exist', (done) => {
+        it('it should fail PUT with 404 NOT FOUND, because name does not exist', (done) => {
             chai.request(server)
                 .put('/api/v1/designs/test')
                 .send(initialState)
@@ -118,7 +118,7 @@ describe('Designs with empty DB', () => {
     });
     
     describe('DELETE /api/v1/designs/test with empty DB', () => {
-        it('it should fail DELETE with not found, because name does not exist', (done) => {
+        it('it should fail DELETE with 404 NOT FOUND, because name does not exist', (done) => {
             chai.request(server)
                 .delete('/api/v1/designs/test')
                 .end((err, res) => {
@@ -152,7 +152,7 @@ describe('Designs with non-empty DB', () => {
     });
     
     describe('GET /api/v1/designs with non-empty DB', () => {
-        it('it should GET one design name', (done) => {
+        it('it should GET with 200 OK one design name', (done) => {
             chai.request(server)
                 .get('/api/v1/designs')
                 .end((err, res) => {
@@ -166,7 +166,7 @@ describe('Designs with non-empty DB', () => {
     });
     
     describe('GET /api/v1/designs/test with non-empty DB', () => {
-        it('it should GET one design by name', (done) => {
+        it('it should GET with 200 OK one design by name', (done) => {
             chai.request(server)
                 .get('/api/v1/designs/test')
                 .end((err, res) => {
@@ -182,7 +182,7 @@ describe('Designs with non-empty DB', () => {
     });
     
     describe('POST /api/v1/designs/test with non-empty DB', () => {
-        it('it should fail POST with invalid request, because name already exists', (done) => {
+        it('it should fail POST with 400 BAD REQUEST, because name already exists', (done) => {
             chai.request(server)
                 .post('/api/v1/designs/test')
                 .send(initialState)
@@ -195,7 +195,7 @@ describe('Designs with non-empty DB', () => {
     });
     
     describe('PUT /api/v1/designs/test with non-empty DB', () => {
-        it('it should PUT one design by name', (done) => {
+        it('it should PUT with 200 OK one design by name', (done) => {
             chai.request(server)
                 .put('/api/v1/designs/test')
                 .send(initialState)
@@ -208,7 +208,7 @@ describe('Designs with non-empty DB', () => {
     });
     
     describe('DELETE /api/v1/designs/test with non-empty DB', () => {
-        it('it should DELETE one design by name', (done) => {
+        it('it should DELETE with 200 OK one design by name', (done) => {
             var name = 'test';
             chai.request(server)
                 .delete('/api/v1/designs/'+name)
