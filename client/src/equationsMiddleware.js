@@ -1,8 +1,21 @@
 import { STARTUP, 
-    CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
-    CHANGE_STATE_VARIABLE_CONSTRAINT, SAVE_STATE_VARIABLE_CONSTRAINTS, RESTORE_STATE_VARIABLE_CONSTRAINTS, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
-    SEARCH, SEEK, 
-    MIN, MAX } from './actionTypes';
+    
+    CHANGE_DESIGN_PARAMETER_VALUE, 
+    RESTORE_DESIGN_PARAMETER_VALUES, 
+    CHANGE_DESIGN_PARAMETER_CONSTRAINT, 
+    SET_DESIGN_PARAMETER_FLAG, 
+    RESET_DESIGN_PARAMETER_FLAG, 
+    
+    CHANGE_STATE_VARIABLE_CONSTRAINT, 
+    RESTORE_STATE_VARIABLE_CONSTRAINTS, 
+    SET_STATE_VARIABLE_FLAG, 
+    RESET_STATE_VARIABLE_FLAG, 
+    
+    SEARCH, 
+    SEEK, 
+    
+    MIN, 
+    MAX } from './actionTypes';
 import { 
     changeDesignParameterValue, changeDesignParameterViolation, changeDesignParameterConstraint, 
     changeStateVariableValue, changeStateVariableViolation, changeStateVariableConstraint, 
@@ -13,13 +26,13 @@ import { patsh } from './patsh';
 import { seek } from './seek';
 
 export const equationsMiddleware = store => next => action => {
+    
     const returnValue = next(action);
+
 //    console.log('In equationsMiddleware');
 //    console.log(action);
-	var design;
-    var c;
-    var dp;
-    var sv;
+
+    var design;
     
     switch (action.type) {
     case STARTUP:
@@ -36,26 +49,11 @@ export const equationsMiddleware = store => next => action => {
         updateViolationsAndObjectiveValue(store);
         break;
     case CHANGE_DESIGN_PARAMETER_VALUE:
-        design = store.getState();
-        // Loop to create d from constants
-        var d = [];
-        for (let i = 0; i < design.constants.length; i++) {
-            c = design.constants[i];
-            d[i] = c.value;
-        }
-        // Loop to create p from design_parameters
-        var p = [];
-        for (let i = 0; i < design.design_parameters.length; i++) {
-            dp = design.design_parameters[i];
-            p[i] = dp.value;
-        }
-        var x = eqnset1(d, p);
-        // Compute and dispatch state variable changes
-        for (let i = 0; i < design.state_variables.length; i++) {
-            sv = design.state_variables[i];
-            design = store.getState();
-            store.dispatch(changeStateVariableValue(sv.name, x[i]));
-        }
+        updateStateVariables(store);
+        updateViolationsAndObjectiveValue(store, action.payload.merit);
+        break;
+    case RESTORE_DESIGN_PARAMETER_VALUES:
+        updateStateVariables(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
     case CHANGE_DESIGN_PARAMETER_CONSTRAINT:
@@ -68,9 +66,6 @@ export const equationsMiddleware = store => next => action => {
         updateViolationsAndObjectiveValue(store);
         break;
     case CHANGE_STATE_VARIABLE_CONSTRAINT:
-        updateViolationsAndObjectiveValue(store);
-        break;
-    case SAVE_STATE_VARIABLE_CONSTRAINTS:
         updateViolationsAndObjectiveValue(store);
         break;
     case RESTORE_STATE_VARIABLE_CONSTRAINTS:
@@ -122,6 +117,40 @@ export function search(store, objmin, merit) {
         }
     }
     store.dispatch(changeResultsTerminationCondition(ncode));
+    
+}
+
+// Update State Variable Values
+function updateStateVariables(store) {
+    
+    var c;
+    var dp;
+    var sv;
+
+    var design = store.getState();
+    
+    // Loop to create d from constants
+    var d = [];
+    for (let i = 0; i < design.constants.length; i++) {
+        c = design.constants[i];
+        d[i] = c.value;
+    }
+    // Loop to create p from design_parameters
+    var p = [];
+    for (let i = 0; i < design.design_parameters.length; i++) {
+        dp = design.design_parameters[i];
+        p[i] = dp.value;
+    }
+
+    // Compute state_variables x from d and p using equations
+    var x = eqnset1(d, p);
+
+    // Compute and dispatch state variable changes
+    for (let i = 0; i < design.state_variables.length; i++) {
+        sv = design.state_variables[i];
+        design = store.getState();
+        store.dispatch(changeStateVariableValue(sv.name, x[i]));
+    }
     
 }
 

@@ -1,8 +1,31 @@
-import { STARTUP, LOAD, CHANGE_NAME, 
-    CHANGE_DESIGN_PARAMETER_VALUE, CHANGE_DESIGN_PARAMETER_VIOLATION, CHANGE_DESIGN_PARAMETER_CONSTRAINT, SET_DESIGN_PARAMETER_FLAG, RESET_DESIGN_PARAMETER_FLAG, 
-    CHANGE_STATE_VARIABLE_VALUE, CHANGE_STATE_VARIABLE_VIOLATION, CHANGE_STATE_VARIABLE_CONSTRAINT, SAVE_STATE_VARIABLE_CONSTRAINTS, RESTORE_STATE_VARIABLE_CONSTRAINTS, SET_STATE_VARIABLE_FLAG, RESET_STATE_VARIABLE_FLAG, 
-    CHANGE_RESULTS_OBJECTIVE_VALUE, CHANGE_RESULTS_TERMINATION_CONDITION, CHANGE_RESULTS_VIOLATED_CONSTRAINT_COUNT, 
-    SEARCH, SEEK, MIN } from './actionTypes';
+import { STARTUP, 
+    LOAD, 
+    CHANGE_NAME, 
+    
+    CHANGE_DESIGN_PARAMETER_VALUE, 
+    SAVE_DESIGN_PARAMETER_VALUES, 
+    RESTORE_DESIGN_PARAMETER_VALUES, 
+    CHANGE_DESIGN_PARAMETER_VIOLATION, 
+    CHANGE_DESIGN_PARAMETER_CONSTRAINT, 
+    SET_DESIGN_PARAMETER_FLAG, 
+    RESET_DESIGN_PARAMETER_FLAG, 
+    
+    CHANGE_STATE_VARIABLE_VALUE, 
+    CHANGE_STATE_VARIABLE_VIOLATION, 
+    CHANGE_STATE_VARIABLE_CONSTRAINT, 
+    SAVE_STATE_VARIABLE_CONSTRAINTS, 
+    RESTORE_STATE_VARIABLE_CONSTRAINTS, 
+    SET_STATE_VARIABLE_FLAG, 
+    RESET_STATE_VARIABLE_FLAG, 
+    
+    CHANGE_RESULTS_OBJECTIVE_VALUE, 
+    CHANGE_RESULTS_TERMINATION_CONDITION, 
+    CHANGE_RESULTS_VIOLATED_CONSTRAINT_COUNT, 
+    
+    SEARCH, 
+    SEEK, 
+    
+    MIN } from './actionTypes';
 import { sclden } from './sclden';
 
 export function pcylWebApp(state, action) {
@@ -26,6 +49,22 @@ export function pcylWebApp(state, action) {
                     });
                 }
                 return design_parameter;
+            })
+        });
+    case SAVE_DESIGN_PARAMETER_VALUES:
+        return Object.assign({}, state, {
+            design_parameters: state.design_parameters.map((design_parameter) => {
+                return Object.assign({}, design_parameter, {
+                    oldvalue: design_parameter.value
+                });
+            })
+        });
+    case RESTORE_DESIGN_PARAMETER_VALUES:
+        return Object.assign({}, state, {
+            design_parameters: state.design_parameters.map((design_parameter) => {
+                return Object.assign({}, design_parameter, {
+                    value: design_parameter.oldvalue,
+                });
             })
         });
     case CHANGE_DESIGN_PARAMETER_VIOLATION:
