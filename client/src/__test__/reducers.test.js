@@ -301,7 +301,7 @@ it('reducers reset state variable flag max', () => {
 // OBJECTIVE FUNCTION
 //=====================================================================
 
-it('reducers change search results objective value', () => {
+it('reducers change results objective value', () => {
     const store = createStore(
         pcylWebApp,
         initialState);
