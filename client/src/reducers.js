@@ -18,9 +18,9 @@ import { STARTUP,
     SET_STATE_VARIABLE_FLAG, 
     RESET_STATE_VARIABLE_FLAG, 
     
-    CHANGE_RESULTS_OBJECTIVE_VALUE, 
-    CHANGE_RESULTS_TERMINATION_CONDITION, 
-    CHANGE_RESULTS_VIOLATED_CONSTRAINT_COUNT, 
+    CHANGE_RESULT_OBJECTIVE_VALUE, 
+    CHANGE_RESULT_TERMINATION_CONDITION, 
+    CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT, 
     
     SEARCH, 
     SEEK, 
@@ -248,27 +248,27 @@ export function pcylWebApp(state, action) {
                 return state_variable;
             })
         });
-    case CHANGE_RESULTS_OBJECTIVE_VALUE:
+    case CHANGE_RESULT_OBJECTIVE_VALUE:
         return {
             ...state,
-            results : {
-                ...state.results,
+            result : {
+                ...state.result,
                 objective_value: action.payload.objective_value
             }
         }
-    case CHANGE_RESULTS_TERMINATION_CONDITION:
+    case CHANGE_RESULT_TERMINATION_CONDITION:
         return {
             ...state,
-            results : {
-                ...state.results,
+            result : {
+                ...state.result,
                 termination_condition: action.payload.termination_condition
             }
         }
-    case CHANGE_RESULTS_VIOLATED_CONSTRAINT_COUNT:
+    case CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT:
         return {
             ...state,
-            results : {
-                ...state.results,
+            result : {
+                ...state.result,
                 violated_constraint_count: action.payload.violated_constraint_count
             }
         }

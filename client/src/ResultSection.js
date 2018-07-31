@@ -3,7 +3,7 @@ import { Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import { OBJMIN } from './globals';
 
-class ResultsSection extends React.Component {
+class ResultSection extends React.Component {
     
     render() {
         var feasibility_string;
@@ -22,8 +22,8 @@ class ResultsSection extends React.Component {
         }
         return (
             <React.Fragment>
-                <Row key="Results">
-                    <Col className="font-weight-bold" xs="12">Results</Col>
+                <Row key="Resul">
+                    <Col className="font-weight-bold" xs="12">Resul</Col>
                 </Row>
                 <Row>
                     <Col className="font-italic" xs="1">Objective Value</Col>
@@ -43,9 +43,9 @@ class ResultsSection extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    objective_value: state.results.objective_value,
-    termination_condition: state.results.termination_condition,
-    violated_constraint_count: state.results.violated_constraint_count
+    objective_value: state.result.objective_value,
+    termination_condition: state.result.termination_condition,
+    violated_constraint_count: state.result.violated_constraint_count
 });
 
-export default connect(mapStateToProps)(ResultsSection);
+export default connect(mapStateToProps)(ResultSection);

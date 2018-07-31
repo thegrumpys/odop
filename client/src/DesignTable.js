@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'reactstrap';
 import DesignParametersSection from './DesignParametersSection';
 import StateVariablesSection from './StateVariablesSection';
-import ResultsSection from './ResultsSection';
+import ResultSection from './ResultSection';
 
 export class DesignTable extends React.Component {
     
@@ -30,7 +30,7 @@ export class DesignTable extends React.Component {
                 </Row>
                 <DesignParametersSection />
                 <StateVariablesSection />
-                <ResultsSection />
+                <ResultSection />
             </React.Fragment>
         );
     }

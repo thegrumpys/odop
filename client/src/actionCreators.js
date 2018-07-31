@@ -18,9 +18,9 @@ import { STARTUP,
     SET_STATE_VARIABLE_FLAG, 
     RESET_STATE_VARIABLE_FLAG, 
     
-    CHANGE_RESULTS_OBJECTIVE_VALUE, 
-    CHANGE_RESULTS_TERMINATION_CONDITION, 
-    CHANGE_RESULTS_VIOLATED_CONSTRAINT_COUNT,
+    CHANGE_RESULT_OBJECTIVE_VALUE, 
+    CHANGE_RESULT_TERMINATION_CONDITION, 
+    CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT,
     
     CHANGE_SYSTEM_CONTROL_VALUE, 
     SEARCH, 
@@ -192,27 +192,27 @@ export function resetStateVariableFlag(name, minmax, mask) {
     }
   }
 
-export function changeResultsObjectiveValue(objective_value) {
+export function changeResultObjectiveValue(objective_value) {
     return {
-        type: CHANGE_RESULTS_OBJECTIVE_VALUE,
+        type: CHANGE_RESULT_OBJECTIVE_VALUE,
         payload: {
             objective_value
         }
     }
 }
 
-export function changeResultsTerminationCondition(termination_condition) {
+export function changeResultTerminationCondition(termination_condition) {
     return {
-        type: CHANGE_RESULTS_TERMINATION_CONDITION,
+        type: CHANGE_RESULT_TERMINATION_CONDITION,
         payload: {
             termination_condition
         }
     }
 }
 
-export function changeResultsViolatedConstraintCount(violated_constraint_count) {
+export function changeResultViolatedConstraintCount(violated_constraint_count) {
     return {
-        type: CHANGE_RESULTS_VIOLATED_CONSTRAINT_COUNT,
+        type: CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT,
         payload: {
             violated_constraint_count
         }
