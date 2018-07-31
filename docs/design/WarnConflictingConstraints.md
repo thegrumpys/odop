@@ -6,4 +6,5 @@ For example:
  -  change force min 1000   
  -  change force max 900   
    
-and visa versa.
+Note:  At the conclusion of a search with conflicting constraints, it is likely that **both** max and min constraints will be violated and highlighted.
+
