@@ -115,7 +115,7 @@ var initialState = {
         "name": "initialState",
         "type": "Piston-Cylinder",
         "version": "1.2",
-        "results": {
+        "result": {
             "objective_value": 0.5605106435926049,
             "termination_condition": "None",
             "violated_constraint_count": 0

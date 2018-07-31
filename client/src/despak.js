@@ -14,6 +14,6 @@ export function despak(pc, store, merit) {
         }
     }
     design = store.getState();
-    var obj = design.results.objective_value;
+    var obj = design.result.objective_value;
     return obj;
 }

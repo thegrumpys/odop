@@ -19,7 +19,7 @@ import { STARTUP,
 import { 
     changeDesignParameterValue, changeDesignParameterViolation, changeDesignParameterConstraint, 
     changeStateVariableValue, changeStateVariableViolation, changeStateVariableConstraint, 
-    changeResultsObjectiveValue, changeResultsTerminationCondition, changeResultsViolatedConstraintCount } from './actionCreators';
+    changeResultObjectiveValue, changeResultTerminationCondition, changeResultViolatedConstraintCount } from './actionCreators';
 import { CONSTRAINED, FIXED, VIOL_WT, DEL, DELMIN, OBJMIN, MAXIT, TOL } from './globals';
 import { eqnset1 } from './eqnset1';
 import { patsh } from './patsh';
@@ -116,7 +116,7 @@ export function search(store, objmin, merit) {
             store.dispatch(changeDesignParameterValue(dp.name, pc[kd++], merit));
         }
     }
-    store.dispatch(changeResultsTerminationCondition(ncode));
+    store.dispatch(changeResultTerminationCondition(ncode));
     
 }
 
@@ -240,7 +240,7 @@ function updateViolationsAndObjectiveValue(store, merit) {
     
     // Update Objective Value
     obj = VIOL_WT * viol_sum + m_funct;
-    store.dispatch(changeResultsObjectiveValue(obj));
+    store.dispatch(changeResultObjectiveValue(obj));
     
     // Update Violated Constraint Count, which becomes Feasibility on the UI
     design = store.getState(); // Re-access store to get latest vmin and vmax
@@ -263,6 +263,6 @@ function updateViolationsAndObjectiveValue(store, merit) {
             if (sv.vmax > 0.0)
                 violated_constraint_count++;
     }
-    store.dispatch(changeResultsViolatedConstraintCount(violated_constraint_count));
+    store.dispatch(changeResultViolatedConstraintCount(violated_constraint_count));
     
 }
