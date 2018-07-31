@@ -18,6 +18,7 @@
 * [Warn user if conflicting constraints are established](design/WarnConflictingConstraints)
 * [Consider an UnDo / ReDo feature](design/UnDo_ReDo)
 * [Proposed names for the (problem independent) system](design/SysName)
+* [System Control variables and multi-user operation](design/SysControls)
 
 
 ## Procedures

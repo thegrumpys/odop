@@ -15,7 +15,11 @@ Current proposals include:
 * ODO/System
 * ODO:System
 * ODO : System
+* OpenDesOpt:System
 
 #### Open Design Optimization Platform
 * ODO:Platform
 * ODO : Platform
+* OpenDesOpt:Platform
+* OpenDesignOpt:Platform
+
