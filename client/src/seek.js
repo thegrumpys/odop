@@ -1,6 +1,6 @@
 import { FIXED, OBJMIN, /* IOOPT,*/ SMALLNUM, MFN_WT } from './globals';
 import { MAX } from './actionTypes';
-import { saveDesignParameterValues, restoreDesignParameterValues, changeResultsTerminationCondition } from './actionCreators';
+import { saveDesignParameterValues, restoreDesignParameterValues, changeResultTerminationCondition } from './actionCreators';
 import { search } from './equationsMiddleware';
 import { despak } from './despak';
 
@@ -16,8 +16,8 @@ export function seek(store, action) {
     var M_DEN;
     var M_NUM;
     var design = store.getState(); // Re-access store to get latest dp and sv values
-//    console.log('SEEK:    OBJ =', design.results.objective_value);
-//    if (design.results.objective_value > OBJMIN && design.state_variables.reduce((total, state_variable)=>{return state_variable.lmin&FIXED ? total+1 : total+0}, 0) === 0) {
+//    console.log('SEEK:    OBJ =', design.result.objective_value);
+//    if (design.result.objective_value > OBJMIN && design.state_variables.reduce((total, state_variable)=>{return state_variable.lmin&FIXED ? total+1 : total+0}, 0) === 0) {
 //        console.log('NOTE:  THE SEEK PROCESS MAY PRODUCE BETTER RESULTS WITH A FEASIBLE START POINT.');
 //    }
     if (action.payload.minmax === MAX) {
@@ -41,7 +41,7 @@ export function seek(store, action) {
 //            input = dp.units;
             if (dp.lmin & FIXED) {
                 ncode = dname+' IS FIXED.   USE OF SEEK IS NOT APPROPRIATE.';
-                store.dispatch(changeResultsTerminationCondition(ncode));
+                store.dispatch(changeResultTerminationCondition(ncode));
                 return;
             }
             SOUGHT = (i + 1);
@@ -56,7 +56,7 @@ export function seek(store, action) {
 //            input = sv.units;
             if (sv.lmin & FIXED) {
                 ncode = dname+' IS FIXED.   USE OF SEEK IS NOT APPROPRIATE.';
-                store.dispatch(changeResultsTerminationCondition(ncode));
+                store.dispatch(changeResultTerminationCondition(ncode));
                 return;
             }
             SOUGHT = -(i + 1);
@@ -123,7 +123,7 @@ export function seek(store, action) {
     design = store.getState(); // Re-access store to get latest dp and sv values
     // End ftest
     // End estopt
-    if (design.results.objective_value < OBJMIN) {
+    if (design.result.objective_value < OBJMIN) {
         store.dispatch(restoreDesignParameterValues()); // TODO: Go back and check need for merit
         design = store.getState(); // Re-access store to get latest dp and sv values
     } else {
@@ -163,7 +163,7 @@ export function seek(store, action) {
     search(store, OBJMIN, merit);
     design = store.getState(); // Re-access store to get latest dp and sv values
 //    if (IOOPT > 0) {
-//        console.log('RETURN ON: '+design.results.termination_condition+'     OBJ ='+design.results.objective_value);
+//        console.log('RETURN ON: '+design.result.termination_condition+'     OBJ ='+design.result.objective_value);
 //    }
 //    var temp1;
 //    if (SOUGHT > 0) {
@@ -172,13 +172,13 @@ export function seek(store, action) {
 //        temp1 = design.state_variables[-SOUGHT - 1].value;
 //    }
 //    console.log('CURRENT VALUE OF '+dname+' IS '+temp1+' '+input);
-    if (design.results.objective_value < 0.0) {
+    if (design.result.objective_value < 0.0) {
 //        console.log('SEEK SHOULD BE RE-EXECUTED WITH A NEW ESTIMATE OF THE OPTIMUM.');
         ncode = 'SEEK SHOULD BE RE-EXECUTED WITH A NEW ESTIMATE OF THE OPTIMUM.';
-        store.dispatch(changeResultsTerminationCondition(ncode));
+        store.dispatch(changeResultTerminationCondition(ncode));
     } else {
         ncode = 'SEEK COMPLETED.';
-        store.dispatch(changeResultsTerminationCondition(ncode));
+        store.dispatch(changeResultTerminationCondition(ncode));
     }
     
     function merit(design) {
