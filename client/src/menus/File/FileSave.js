@@ -2,6 +2,7 @@ import React from 'react';
 import { DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 import { displayError } from '../../ErrorModal';
+import { displaySpinner } from '../../Spinner';
 
 class FileSave extends React.Component {
     constructor(props) {
@@ -16,6 +17,7 @@ class FileSave extends React.Component {
     
     putDesign(name) {
 //        console.log("In putDesign name=", name);
+        displaySpinner(true);
         fetch('/api/v1/designs/'+name, {
                 method: 'PUT',
                 headers: {
@@ -25,6 +27,7 @@ class FileSave extends React.Component {
                 body: JSON.stringify(this.props.state)
             })
             .then(res => {
+                displaySpinner(false);
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }

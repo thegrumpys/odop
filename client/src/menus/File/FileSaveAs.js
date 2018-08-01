@@ -4,6 +4,7 @@ import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeName } from '../../actionCreators';
 import { displayError } from '../../ErrorModal';
+import { displaySpinner } from '../../Spinner';
 
 class FileSaveAs extends React.Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class FileSaveAs extends React.Component {
     postDesign(name) {
 //        console.log("In postDesign name=", name);
         this.props.changeName(name);
+        displaySpinner(true);
         fetch('/api/v1/designs/'+name, {
                 method: 'POST',
                 headers: {
@@ -29,6 +31,7 @@ class FileSaveAs extends React.Component {
                 body: JSON.stringify(this.props.state)
             })
             .then(res => {
+                displaySpinner(false);
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }

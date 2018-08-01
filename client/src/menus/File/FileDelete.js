@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from
 import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { displayError } from '../../ErrorModal';
+import { displaySpinner } from '../../Spinner';
 
 class FileDelete extends React.Component {
     constructor(props) {
@@ -20,8 +21,10 @@ class FileDelete extends React.Component {
 
     getDesigns() {
         // Get the designs and store them in state
+        displaySpinner(true);
         fetch('/api/v1/designs')
             .then(res => {
+                displaySpinner(false);
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
@@ -35,6 +38,7 @@ class FileDelete extends React.Component {
     
     deleteDesign(name) {
 //        console.log("In deleteDesign name=", name);
+        displaySpinner(true);
         fetch('/api/v1/designs/'+name, {
                 method: 'DELETE',
                 headers: {
@@ -43,6 +47,7 @@ class FileDelete extends React.Component {
                 },
             })
             .then(res => {
+                displaySpinner(false);
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }

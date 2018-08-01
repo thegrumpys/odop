@@ -7,6 +7,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { pcylWebApp } from './reducers';
 import { equationsMiddleware } from './equationsMiddleware';
+import { Spinner, displaySpinner } from './Spinner';
 import { ErrorModal, displayError } from './ErrorModal';
 
 //function loggerMiddleware({ getState }) {
@@ -30,8 +31,11 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/equationsMiddleware));
 
+ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /></div>, document.getElementById('root'));
+displaySpinner(true);
 fetch('/api/v1/designs/startup')
     .then(res => {
+        displaySpinner(false);
         if (!res.ok) {
             throw Error(res.statusText);
         }
@@ -39,9 +43,8 @@ fetch('/api/v1/designs/startup')
     })
     .then(design => {
         const store = createStore(pcylWebApp, design, middleware);
-        ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root'));
+        ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
     })
     .catch(error => {
-        ReactDOM.render(<ErrorModal />, document.getElementById('root'));
         displayError('GET of \'startup\' design failed: '+error.message);
     });

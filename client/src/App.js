@@ -17,7 +17,6 @@ import {
     DropdownItem
 } from 'reactstrap';
 import classnames from 'classnames';
-import { ErrorModal } from './ErrorModal';
 import { DesignTable } from './DesignTable';
 import { connect } from 'react-redux';
 import FileOpen from './menus/File/FileOpen';
@@ -48,7 +47,6 @@ class App extends Component {
     render() {
         return (
             <React.Fragment>
-                <ErrorModal/>
                 <Navbar color="inverse" light expand="md">
                     <NavbarBrand href="/"><img src="favicon.ico" alt="The Grumpys"/> PCyl-Web</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />

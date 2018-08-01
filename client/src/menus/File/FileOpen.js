@@ -4,6 +4,7 @@ import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { load } from '../../actionCreators';
 import { displayError } from '../../ErrorModal';
+import { displaySpinner } from '../../Spinner';
 
 class FileOpen extends React.Component {
     constructor(props) {
@@ -21,8 +22,10 @@ class FileOpen extends React.Component {
 
     getDesigns() {
         // Get the designs and store them in state
+        displaySpinner(true);
         fetch('/api/v1/designs')
             .then(res => {
+                displaySpinner(false);
                 if (!res.ok) {
                    throw Error(res.statusText);
                 }
@@ -36,8 +39,10 @@ class FileOpen extends React.Component {
     
     getDesign(name) {
 //        console.log('In getDesign name=', name);
+        displaySpinner(true);
         fetch('/api/v1/designs/' + name)
             .then(res => {
+                displaySpinner(false);
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
