@@ -9,6 +9,7 @@ import { pcylWebApp } from './reducers';
 import { equationsMiddleware } from './equationsMiddleware';
 import { Spinner, displaySpinner } from './Spinner';
 import { ErrorModal, displayError } from './ErrorModal';
+import { initialState } from './initialState';
 
 //function loggerMiddleware({ getState }) {
 //    return next => action => {
@@ -46,5 +47,7 @@ fetch('/api/v1/designs/startup')
         ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
     })
     .catch(error => {
-        displayError('GET of \'startup\' design failed: '+error.message);
+        displayError('GET of \'startup\' design failed with message: \''+error.message+'\', using builtin initialState instead');
+        const store = createStore(pcylWebApp, initialState, middleware);
+        ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
     });
