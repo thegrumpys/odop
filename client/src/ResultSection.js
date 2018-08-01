@@ -22,7 +22,7 @@ class ResultSection extends React.Component {
         }
         return (
             <React.Fragment>
-                <Row key="Resul">
+                <Row key="Result">
                     <Col className="font-weight-bold" xs="12">Resul</Col>
                 </Row>
                 <Row>
