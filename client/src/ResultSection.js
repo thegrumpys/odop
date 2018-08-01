@@ -10,46 +10,42 @@ class ResultSection extends React.Component {
         var feasibility_class;
         if (this.props.objective_value > OBJMIN) {
             feasibility_string = "NOT FEASIBLE";
-            feasibility_class = "text-right text-danger font-weight-bold";
+            feasibility_class = "text-left text-danger font-weight-bold";
         } else {
             if (this.props.violated_constraint_count > 0) {
                 feasibility_string = "MARGINALLY FEASIBLE";
-                feasibility_class = "text-right text-low-danger";
+                feasibility_class = "text-left text-low-danger";
             } else {
                 feasibility_string = "FEASIBLE";
-                feasibility_class = "text-right";
+                feasibility_class = "text-left";
             }
         }
         return (
             <React.Fragment>
                 <Row>
-                    <Col className="col-md-3">
-                        <th className="text-left" colSpan="3">Result</th>
+                    <Col className="col-md-12">
+                        <span className="font-weight-bold">Result</span>
                     </Col>
                 </Row>
                 <Row>
                     <Table className="col-md-2">
                         <tr>
-                            <td className="font-italic">Objective Value:</td>
-                            <td className={feasibility_class}>{this.props.objective_value.toFixed(5)}</td>
+                            <td className="text-left">OBJMIN:</td>
+                            <td className="text-left">{OBJMIN.toFixed(6)}</td>
+                        </tr>
+                        <tr>
+                            <td className={feasibility_class}>Objective Value:</td>
+                            <td className={feasibility_class}>{this.props.objective_value.toFixed(6)}</td>
                         </tr>
                     </Table>
-                    <Table className="col-md-2">
+                    <Table className="col-md-4">
                         <tr>
-                            <td className="font-italic">OBJMIN:</td>
-                            <td>{OBJMIN.toFixed(5)}</td>
+                            <td className="text-left">Termination Condition:</td>
+                            <td className="text-left">{this.props.termination_condition}</td>
                         </tr>
-                    </Table>
-                    <Table className="col-md-3">
                         <tr>
-                            <td className="font-italic">Termination Condition:</td>
-                            <td colSpan="2">{this.props.termination_condition}</td>
-                        </tr>
-                    </Table>
-                    <Table className="col-md-3">
-                        <tr>
-                            <td className="font-italic">Feasibility:</td>
-                            <td className={feasibility_class} colSpan="2">{feasibility_string}</td>
+                            <td className={feasibility_class}>Feasibility:</td>
+                            <td className={feasibility_class}>{feasibility_string}</td>
                         </tr>
                     </Table>
                 </Row>
