@@ -20,6 +20,7 @@
 * [Proposed names for the (problem independent) system](design/SysName)
 * [System Control variables and multi-user operation](design/SysControls)
 * [Idea for a simple showcase problem](design/RectangularBoxProblem)
+* [Idea for a Refine Search feature](design/RefineSearchFeature)
 
 
 ## Procedures
