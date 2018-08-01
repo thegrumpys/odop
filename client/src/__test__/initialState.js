@@ -1,4 +1,4 @@
-initialState = {
+export const initialState = {
         "constants": [
             {
                 "name": "PI",
