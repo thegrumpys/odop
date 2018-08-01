@@ -1,39 +1,20 @@
 import React from 'react';
-import { Row, Col, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeStateVariableValue, changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
+import { changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
 import { MIN, MAX } from './actionTypes';
 import { FIXED, CONSTRAINED, OBJMIN } from './globals';
 
-class StateVariableRow extends React.Component {
+class ConstraintsMinRowStateVariable extends React.Component {
     
     constructor(props) {
         super(props);
-        this.onChangeStateVariableValue = this.onChangeStateVariableValue.bind(this);
-        this.onSetStateVariableFlag = this.onSetStateVariableFlag.bind(this);
-        this.onResetStateVariableFlag = this.onResetStateVariableFlag.bind(this);
         this.onChangeStateVariableConstraintMin = this.onChangeStateVariableConstraintMin.bind(this);
         this.onSetStateVariableFlagConstrainedMin = this.onSetStateVariableFlagConstrainedMin.bind(this)
         this.onResetStateVariableFlagConstrainedMin = this.onResetStateVariableFlagConstrainedMin.bind(this)
         this.onChangeStateVariableConstraintMax = this.onChangeStateVariableConstraintMax.bind(this);
         this.onSetStateVariableFlagConstrainedMax = this.onSetStateVariableFlagConstrainedMax.bind(this)
         this.onResetStateVariableFlagConstrainedMax = this.onResetStateVariableFlagConstrainedMax.bind(this)
-    }
-    
-    onChangeStateVariableValue(event) {
-        this.props.changeStateVariableValue(this.props.state_variable.name, parseFloat(event.target.value));
-    }
-    
-    onSetStateVariableFlag(event) {
-        this.props.saveStateVariableConstraints(this.props.state_variable.name);
-        this.props.setStateVariableFlag(this.props.state_variable.name, MIN, FIXED|CONSTRAINED);
-        this.props.setStateVariableFlag(this.props.state_variable.name, MAX, FIXED|CONSTRAINED);
-        this.props.changeStateVariableConstraint(this.props.state_variable.name, MIN, this.props.state_variable.value);
-        this.props.changeStateVariableConstraint(this.props.state_variable.name, MAX, this.props.state_variable.value);
-    }
-    
-    onResetStateVariableFlag(event) {
-        this.props.restoreStateVariableConstraints(this.props.state_variable.name);
     }
     
     onSetStateVariableFlagConstrainedMin(event) {
@@ -67,33 +48,6 @@ class StateVariableRow extends React.Component {
     }
     
     render() {
-        // =======================================
-        // Value and Fixed Column
-        // =======================================
-        var fixed;
-        if (this.props.state_variable.lmin & FIXED) {
-            fixed = (
-              <InputGroup>
-                <span className="text-right form-control bg-light">{this.props.state_variable.value.toFixed(4)}</span>
-                <InputGroupAddon addonType="append">
-                  <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.state_variable.lmin & FIXED} onChange={this.onResetStateVariableFlag} />
-                  </InputGroupText>
-                </InputGroupAddon>
-              </InputGroup>
-            );
-        } else {
-            fixed = (
-              <InputGroup>
-                <span className="text-right form-control bg-light">{this.props.state_variable.value.toFixed(4)}</span>
-                <InputGroupAddon addonType="append">
-                  <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.state_variable.lmin & FIXED} onChange={this.onSetStateVariableFlag} />
-                  </InputGroupText>
-                </InputGroupAddon>
-              </InputGroup>
-            );
-        }
         // =======================================
         // Constraint Minimum Column
         // =======================================
@@ -190,22 +144,16 @@ class StateVariableRow extends React.Component {
         // Table Row
         // =======================================
         return (
-                <Row key={this.props.state_variable.name}>
-                    <Col className="align-middle" xs="2">{this.props.state_variable.name}</Col>
-                    <Col className="align-middle" xs="2">{fixed}</Col>
-                    <Col className="text-nowrap align-middle" xs="1">{this.props.state_variable.units}</Col>
-                    <Col className="align-middle" xs="2">{cmin}</Col>
-                    <Col className="text-right align-middle" xs="1">{vmin}</Col>
-                    <Col className="align-middle" xs="2">{cmax}</Col>
-                    <Col className="text-right align-middle" xs="1">{vmax}</Col>
-                </Row>
+                <tr key={this.props.state_variable.name}>
+                    <td className="align-middle" colSpan="2">{cmin}</td>
+                    <td className="text-right align-middle" colSpan="1">{vmin}</td>
+                </tr>
         );
     }
 }
 
 
 const mapDispatchToStateVariableProps = {
-        changeStateVariableValue: changeStateVariableValue,
         changeStateVariableConstraint: changeStateVariableConstraint,
         saveStateVariableConstraints: saveStateVariableConstraints,
         restoreStateVariableConstraints: restoreStateVariableConstraints,
@@ -213,4 +161,4 @@ const mapDispatchToStateVariableProps = {
         resetStateVariableFlag: resetStateVariableFlag
 };
 
-export default connect(null, mapDispatchToStateVariableProps)(StateVariableRow);
+export default connect(null, mapDispatchToStateVariableProps)(ConstraintsMinRowStateVariable);
