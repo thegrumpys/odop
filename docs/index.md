@@ -8,6 +8,11 @@
 * [Privacy Statement](About/Legal/PrivacyStatement)
 
 
+## Help
+* [Introduction](Help/introduction)
+* [Terminology](Help/terminology)
+
+
 ## Design
 * [Ideas for a web page menu structure](design/menu)
 * [Proposed names for quantities previously called "constants"](design/PreviouslyConstants)
