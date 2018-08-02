@@ -36,16 +36,7 @@ export const equationsMiddleware = store => next => action => {
     
     switch (action.type) {
     case STARTUP:
-        // Set smin/smax by changing constraints to their current values
-        design = store.getState();
-        design.design_parameters.forEach((design_parameter) => {
-            store.dispatch(changeDesignParameterConstraint(design_parameter.name, MIN, design_parameter.cmin));
-            store.dispatch(changeDesignParameterConstraint(design_parameter.name, MAX, design_parameter.cmax));
-        });
-        design.state_variables.forEach((state_variable) => {
-            store.dispatch(changeStateVariableConstraint(state_variable.name, MIN, state_variable.cmin));
-            store.dispatch(changeStateVariableConstraint(state_variable.name, MAX, state_variable.cmax));
-        });
+        startup(store);
         updateViolationsAndObjectiveValue(store);
         break;
     case CHANGE_DESIGN_PARAMETER_VALUE:
@@ -87,6 +78,20 @@ export const equationsMiddleware = store => next => action => {
         break;
     }
     return returnValue;
+}
+
+// Startup
+export function startup(store) {
+    // Set smin/smax by changing constraints to their current values
+    design = store.getState();
+    design.design_parameters.forEach((design_parameter) => {
+        store.dispatch(changeDesignParameterConstraint(design_parameter.name, MIN, design_parameter.cmin));
+        store.dispatch(changeDesignParameterConstraint(design_parameter.name, MAX, design_parameter.cmax));
+    });
+    design.state_variables.forEach((state_variable) => {
+        store.dispatch(changeStateVariableConstraint(state_variable.name, MIN, state_variable.cmin));
+        store.dispatch(changeStateVariableConstraint(state_variable.name, MAX, state_variable.cmax));
+    });
 }
 
 // Search

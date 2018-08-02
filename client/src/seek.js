@@ -174,10 +174,10 @@ export function seek(store, action) {
 //    console.log('CURRENT VALUE OF '+dname+' IS '+temp1+' '+input);
     if (design.result.objective_value < 0.0) {
 //        console.log('SEEK SHOULD BE RE-EXECUTED WITH A NEW ESTIMATE OF THE OPTIMUM.');
-        ncode = 'SEEK SHOULD BE RE-EXECUTED WITH A NEW ESTIMATE OF THE OPTIMUM.';
+        ncode = 'SEEK SHOULD BE RE-EXECUTED WITH A NEW ESTIMATE OF THE OPTIMUM';
         store.dispatch(changeResultTerminationCondition(ncode));
     } else {
-        ncode = 'SEEK COMPLETED.';
+        ncode = 'SEEK COMPLETED';
         store.dispatch(changeResultTerminationCondition(ncode));
     }
     
