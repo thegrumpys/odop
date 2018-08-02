@@ -32,8 +32,6 @@ export const equationsMiddleware = store => next => action => {
 //    console.log('In equationsMiddleware');
 //    console.log(action);
 
-    var design;
-    
     switch (action.type) {
     case STARTUP:
         startup(store);
@@ -82,8 +80,10 @@ export const equationsMiddleware = store => next => action => {
 
 // Startup
 export function startup(store) {
-    // Set smin/smax by changing constraints to their current values
+
     var design = store.getState();
+
+    // Set smin/smax by changing constraints to their current values
     design.design_parameters.forEach((design_parameter) => {
         store.dispatch(changeDesignParameterConstraint(design_parameter.name, MIN, design_parameter.cmin));
         store.dispatch(changeDesignParameterConstraint(design_parameter.name, MAX, design_parameter.cmax));
@@ -92,6 +92,7 @@ export function startup(store) {
         store.dispatch(changeStateVariableConstraint(state_variable.name, MIN, state_variable.cmin));
         store.dispatch(changeStateVariableConstraint(state_variable.name, MAX, state_variable.cmax));
     });
+
 }
 
 // Search
@@ -175,7 +176,9 @@ function updateViolationsAndObjectiveValue(store, merit) {
     var m_funct;
     var obj;
     var viol_sum = 0.0;
+
     var design = store.getState(); // Re-access store to get latest dp and sv values
+
     for (let i = 0; i < design.design_parameters.length; i++) {
         dp = design.design_parameters[i];
         vmin = 0.0;
