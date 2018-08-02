@@ -25,6 +25,7 @@ import FileSaveAs from '../menus/File/FileSaveAs';
 import FileDelete from '../menus/File/FileDelete';
 import ActionSearch from '../menus/Action/ActionSearch';
 import ActionSeek from '../menus/Action/ActionSeek';
+import HelpIndex from '../menus/Help/HelpIndex';
 import HelpAbout from '../menus/Help/HelpAbout';
 
 class App extends Component {
@@ -126,9 +127,7 @@ class App extends Component {
                                     <DropdownItem>
                                         Context Help
                                     </DropdownItem>
-                                    <DropdownItem>
-                                        Help Index
-                                    </DropdownItem>
+                                    <HelpIndex />
                                     <DropdownItem>
                                         Demo
                                     </DropdownItem>
