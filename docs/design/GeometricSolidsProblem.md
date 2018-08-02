@@ -1,8 +1,9 @@
-## Idea for a simple showcase problem
+## Idea for simple showcase problems
 
-In the interest of providing a simple demonstration problem that even non-technical users can relate to, a rectangular box 
-(a.k.a. brick, cuboid, rectangular cuboid, right cuboid, rectangular hexahedron, right rectangular prism, or rectangular parallelepiped)
-might be an interesting case.
+In the interest of providing simple demonstration problems that even non-technical users can relate to, 
+classic geometric solids might provide a good starting point.
+Perhaps most interesting is the rectangular box 
+(a.k.a. brick, cuboid, rectangular cuboid, right cuboid, rectangular hexahedron, right rectangular prism, or rectangular parallelepiped).
 
 Design parameters would be:
 * Length
@@ -38,11 +39,12 @@ The user can be offered selections like:
 * Gold
 * Kryptonite  (Density (g cm-3) 0.003425  )
 
-where the appropriate density value will be used as the calculation input.
+where the density value associated with the user selected material will be used as the calculation input.
 
-A second calculation input can be used to convert the density values to other unit systems.
+Optionally, a second calculation input can be used to convert the density values to other unit systems.
 
 Given success with the rectangular box problem, there may be interest in other solid shapes.
-
+For example, cylinder, sphere and wire.
+The wire case can be used as a step towards spring design materials tables.
 
 
