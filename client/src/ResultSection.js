@@ -29,24 +29,28 @@ class ResultSection extends React.Component {
                 </Row>
                 <Row>
                     <Table className="col-md-2">
-                        <tr>
-                            <td className="text-left">OBJMIN:</td>
-                            <td className="text-left">{OBJMIN.toFixed(6)}</td>
-                        </tr>
-                        <tr>
-                            <td className={feasibility_class}>Objective Value:</td>
-                            <td className={feasibility_class}>{this.props.objective_value.toFixed(6)}</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <th>OBJMIN:</th>
+                                <td className="text-right">{OBJMIN.toFixed(6)}</td>
+                            </tr>
+                            <tr>
+                                <th>Objective Value:</th>
+                                <td className={feasibility_class}>{this.props.objective_value.toFixed(6)}</td>
+                            </tr>
+                        </tbody>
                     </Table>
                     <Table className="col-md-4">
-                        <tr>
-                            <td className="text-left">Termination Condition:</td>
-                            <td className="text-left">{this.props.termination_condition}</td>
-                        </tr>
-                        <tr>
-                            <td className={feasibility_class}>Feasibility:</td>
-                            <td className={feasibility_class}>{feasibility_string}</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <th>Termination Condition:</th>
+                                <td className="text-right" colSpan="2">{this.props.termination_condition}</td>
+                            </tr>
+                            <tr>
+                                <th>Feasibility:</th>
+                                <td className={feasibility_class} colSpan="2">{feasibility_string}</td>
+                            </tr>
+                        </tbody>
                     </Table>
                 </Row>
             </React.Fragment>

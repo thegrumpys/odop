@@ -10,22 +10,24 @@ export class ConstraintsMinTable extends React.Component {
         return (
             <React.Fragment>
                 <Table className="col-md-3" bordered>
-                    <tr>
-                        <th colSpan="3">&nbsp;</th>
-                    </tr>
-                    <tr>
-                        <th className="text-center" colSpan="3">Min Constraint</th>
-                    </tr>
-                    <tr>
-                        <th className="text-left">Constrain</th>
-                        <th className="text-center">Value</th>
-                        <th className="text-right">Violation</th>
-                    </tr>
-                    {this.props.design_parameters.map((design_parameter) => <ConstraintsMinRowDesignParameter key={design_parameter.name} design_parameter={design_parameter} objective_value={this.props.objective_value} />)}
-                    <tr>
-                        <th className="text-left" colSpan="3">&nbsp;</th>
-                    </tr>
-                    {this.props.state_variables.map((state_variable) => <ConstraintsMinRowStateVariable key={state_variable.name} state_variable={state_variable} objective_value={this.props.objective_value} />)}
+                    <tbody>
+                        <tr>
+                            <th colSpan="3">&nbsp;</th>
+                        </tr>
+                        <tr>
+                            <th className="text-center" colSpan="3">Min Constraint</th>
+                        </tr>
+                        <tr>
+                            <th className="text-left">Constrain</th>
+                            <th className="text-center">Value</th>
+                            <th className="text-right">Violation</th>
+                        </tr>
+                        {this.props.design_parameters.map((design_parameter) => <ConstraintsMinRowDesignParameter key={design_parameter.name} design_parameter={design_parameter} objective_value={this.props.objective_value} />)}
+                        <tr>
+                            <th className="text-left" colSpan="3">&nbsp;</th>
+                        </tr>
+                        {this.props.state_variables.map((state_variable) => <ConstraintsMinRowStateVariable key={state_variable.name} state_variable={state_variable} objective_value={this.props.objective_value} />)}
+                    </tbody>
                 </Table>
             </React.Fragment>
         );

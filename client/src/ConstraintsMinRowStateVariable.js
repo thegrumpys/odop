@@ -95,52 +95,6 @@ class ConstraintsMinRowStateVariable extends React.Component {
             vmin = '';
         }
         // =======================================
-        // Constraint Maximum Column
-        // =======================================
-        var cmax_class;
-        if (this.props.state_variable.lmin & FIXED) {
-            cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-info text-right font-weight-bold border border-info' : 'text-right';
-        } else {
-            if (this.props.objective_value < OBJMIN) {
-                cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-low-danger text-right border-low-danger' : 'text-right';
-            } else {
-                cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
-            }
-        }
-        var cmax;
-        if (this.props.state_variable.lmax & FIXED || this.props.state_variable.lmax & CONSTRAINED) {
-            cmax = (
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.state_variable.lmax & CONSTRAINED} onChange={this.onResetStateVariableFlagConstrainedMax} />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input className={cmax_class} type="number" value={this.props.state_variable.cmax} onChange={this.onChangeStateVariableConstraintMax} />
-              </InputGroup>
-            );
-        } else {
-            cmax = (
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.state_variable.lmax & CONSTRAINED} onChange={this.onSetStateVariableFlagConstrainedMax} />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <div />
-              </InputGroup>
-            );
-        }
-        // =======================================
-        // Constraint Violation Maximum Column
-        // =======================================
-        var vmax;
-        if (this.props.state_variable.lmax & FIXED || this.props.state_variable.lmax & CONSTRAINED) {
-            vmax = (this.props.state_variable.vmax*100.0).toFixed(1) + '%';
-        } else {
-            vmax = '';
-        }
-        // =======================================
         // Table Row
         // =======================================
         return (
