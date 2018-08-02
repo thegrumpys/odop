@@ -2,8 +2,8 @@ import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
-import { MIN, MAX } from './actionTypes';
-import { FIXED, CONSTRAINED, OBJMIN } from './globals';
+import { MIN, MAX, FIXED, CONSTRAINED } from './actionTypes';
+import { OBJMIN } from './globals';
 
 class ConstraintsMaxRowStateVariable extends React.Component {
     

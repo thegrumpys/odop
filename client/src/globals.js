@@ -1,7 +1,3 @@
-// System Constants
-export const CONSTRAINED = 1; // status in lmin & lmax
-export const FIXED = 2; // status in lmin (lmax is never set)
-
 // User settable variables
 export const IOOPT = 3;
 export const MAXIT = 100;

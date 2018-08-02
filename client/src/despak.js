@@ -1,5 +1,5 @@
 import { changeDesignParameterValue } from './actionCreators';
-import { FIXED } from './globals';
+import { FIXED } from './actionTypes';
 /**
  * despak - Expand any compressed design parameters and call the equation set.
  */
