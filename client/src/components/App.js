@@ -25,6 +25,8 @@ import FileSaveAs from '../menus/File/FileSaveAs';
 import FileDelete from '../menus/File/FileDelete';
 import ActionSearch from '../menus/Action/ActionSearch';
 import ActionSeek from '../menus/Action/ActionSeek';
+import ActionSelectSize from '../menus/Action/ActionSelectSize';
+import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import HelpIndex from '../menus/Help/HelpIndex';
 import HelpAbout from '../menus/Help/HelpAbout';
 
@@ -82,14 +84,10 @@ class App extends Component {
                                     <DropdownItem>
                                         Trade
                                     </DropdownItem>
-                                        <DropdownItem divider />
-                                    <DropdownItem>
-                                        Select Size
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        Select Catalog
-                                    </DropdownItem>
-                                        <DropdownItem divider />
+                                    <DropdownItem divider />
+                                    <ActionSelectSize />
+                                    <ActionSelectCatalog />
+                                    <DropdownItem divider />
                                     <DropdownItem>
                                         Execute
                                     </DropdownItem>
