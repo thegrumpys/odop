@@ -23,6 +23,7 @@ import FileOpen from '../menus/File/FileOpen';
 import FileSave from '../menus/File/FileSave';
 import FileSaveAs from '../menus/File/FileSaveAs';
 import FileDelete from '../menus/File/FileDelete';
+import FilePreferences from '../menus/File/FilePreferences';
 import ActionSearch from '../menus/Action/ActionSearch';
 import ActionSeek from '../menus/Action/ActionSeek';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
@@ -69,9 +70,7 @@ class App extends Component {
                                         Recent Designs
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem>
-                                        Preferences
-                                    </DropdownItem>
+                                    <FilePreferences />
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav inNavbar>
