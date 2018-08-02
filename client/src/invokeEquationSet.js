@@ -1,8 +1,8 @@
 import { changeStateVariableValue } from './actionCreators';
 import { eqnset1 } from './eqnset1';
 
-// Update State Variable Values
-export function updateStateVariables(store) {
+// Invoke Equation Set
+export function invokeEquationSet(store) {
     
     var c;
     var dp;

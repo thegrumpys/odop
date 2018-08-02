@@ -17,7 +17,7 @@ import { OBJMIN } from './globals';
 import { startup } from './startup';
 import { search } from './search';
 import { seek } from './seek';
-import { updateStateVariables } from './updateStateVariables';
+import { invokeEquationSet } from './invokeEquationSet';
 import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
 
 export const equationsMiddleware = store => next => action => {
@@ -33,11 +33,11 @@ export const equationsMiddleware = store => next => action => {
         updateViolationsAndObjectiveValue(store);
         break;
     case CHANGE_DESIGN_PARAMETER_VALUE:
-        updateStateVariables(store);
+        invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
     case RESTORE_DESIGN_PARAMETER_VALUES:
-        updateStateVariables(store);
+        invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
     case CHANGE_DESIGN_PARAMETER_CONSTRAINT:
