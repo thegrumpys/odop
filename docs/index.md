@@ -24,7 +24,7 @@
 * [Consider an UnDo / ReDo feature](design/UnDo_ReDo)
 * [Proposed names for the (problem independent) system](design/SysName)
 * [System Control variables and multi-user operation](design/SysControls)
-* [Idea for a simple showcase problem](design/RectangularBoxProblem)
+* [Idea for a simple showcase problem](design/GeometricSolidsProblem)
 * [Idea for a Refine Search feature](design/RefineSearchFeature)
 
 
