@@ -1,7 +1,7 @@
 import { FIXED, OBJMIN, SMALLNUM, MFN_WT } from './globals';
 import { MAX } from './actionTypes';
 import { saveDesignParameterValues, restoreDesignParameterValues, changeResultTerminationCondition } from './actionCreators';
-import { search } from './equationsMiddleware';
+import { search } from './search';
 import { despak } from './despak';
 
 // Seek
