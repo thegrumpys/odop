@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'reactstrap';
+import { Row } from 'reactstrap';
 import NameValueUnitsTable from './NameValueUnitsTable';
 import ConstraintsMinTable from './ConstraintsMinTable';
 import ConstraintsMaxTable from './ConstraintsMaxTable';

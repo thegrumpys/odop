@@ -3,7 +3,7 @@ import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeDesignParameterValue, setDesignParameterFlag, resetDesignParameterFlag } from './actionCreators';
 import { MIN, MAX } from './actionTypes';
-import { FIXED, CONSTRAINED, OBJMIN } from './globals';
+import { FIXED } from './globals';
 
 class NameValueUnitsRowDesignParameter extends React.Component {
     
