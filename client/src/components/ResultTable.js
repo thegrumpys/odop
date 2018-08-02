@@ -3,7 +3,7 @@ import { Row, Col, Table } from 'reactstrap';
 import { connect } from 'react-redux';
 import { OBJMIN } from '../store/globals';
 
-class ResultSection extends React.Component {
+class ResultTable extends React.Component {
     
     render() {
         var feasibility_string;
@@ -65,4 +65,4 @@ const mapStateToProps = state => ({
     violated_constraint_count: state.result.violated_constraint_count
 });
 
-export default connect(mapStateToProps)(ResultSection);
+export default connect(mapStateToProps)(ResultTable);

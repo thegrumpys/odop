@@ -3,7 +3,7 @@ import { Row } from 'reactstrap';
 import NameValueUnitsTable from './NameValueUnitsTable';
 import ConstraintsMinTable from './ConstraintsMinTable';
 import ConstraintsMaxTable from './ConstraintsMaxTable';
-import ResultSection from './ResultSection';
+import ResultTable from './ResultTable';
 
 export class DesignTable extends React.Component {
     
@@ -15,7 +15,7 @@ export class DesignTable extends React.Component {
                     <ConstraintsMinTable />
                     <ConstraintsMaxTable />
                 </Row>
-                <ResultSection />
+                <ResultTable />
             </React.Fragment>
         );
     }
