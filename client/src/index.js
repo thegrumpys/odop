@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './components/App';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
-import { pcylWebApp } from './reducers';
+import { pcylWebApp } from './store/reducers';
 import { equationsMiddleware } from './equationsMiddleware';
 import { Spinner, displaySpinner } from './components/Spinner';
 import { ErrorModal, displayError } from './components/ErrorModal';

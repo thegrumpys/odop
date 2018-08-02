@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { load } from '../../actionCreators';
+import { load } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 

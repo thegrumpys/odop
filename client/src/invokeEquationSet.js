@@ -1,4 +1,4 @@
-import { changeStateVariableValue } from './actionCreators';
+import { changeStateVariableValue } from './store/actionCreators';
 import { eqnset as pcyl_eqnset } from './problems/Piston-Cylinder/eqnset';
 import { eqnset as solid_eqnset } from './problems/Solid/eqnset';
 import { eqnset as spring_eqnset } from './problems/Spring/eqnset';

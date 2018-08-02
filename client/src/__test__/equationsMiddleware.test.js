@@ -1,14 +1,14 @@
 import { createStore, applyMiddleware } from 'redux';
-import { pcylWebApp } from '../reducers';
+import { pcylWebApp } from '../store/reducers';
 import { initialState } from '../initialState';
 import { equationsMiddleware } from '../equationsMiddleware';
+import { MIN, MAX, CONSTRAINED, FIXED } from '../store/actionTypes';
 import { 
     startup,
     changeDesignParameterValue, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag, 
     changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag, 
     changeResultObjectiveValue, 
-    search, seek } from '../actionCreators';
-import { MIN, MAX, CONSTRAINED, FIXED } from '../actionTypes';
+    search, seek } from '../store/actionCreators';
 
 //=====================================================================
 // STARTUP

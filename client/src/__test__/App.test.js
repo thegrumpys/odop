@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import App from '../components/App';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
-import { pcylWebApp } from '../reducers';
-import { startup, changeDesignParameterValue } from '../actionCreators';
+import { pcylWebApp } from '../store/reducers';
+import { startup, changeDesignParameterValue } from '../store/actionCreators';
 import { initialState } from '../initialState';
 
 it('renders without crashing', () => {

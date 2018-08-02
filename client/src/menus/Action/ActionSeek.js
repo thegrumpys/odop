@@ -1,8 +1,8 @@
 import React from 'react';
 import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import { seek } from '../../actionCreators';
-import { MIN, MAX } from '../../actionTypes';
+import { MIN, MAX } from '../../store/actionTypes';
+import { seek } from '../../store/actionCreators';
 
 class ActionSeek extends React.Component {
     constructor(props) {

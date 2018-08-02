@@ -12,7 +12,7 @@ import { STARTUP,
     RESET_STATE_VARIABLE_FLAG, 
     
     SEARCH, 
-    SEEK } from './actionTypes';
+    SEEK } from './store/actionTypes';
 import { OBJMIN } from './globals';
 import { startup } from './startup';
 import { search } from './search';
