@@ -2,8 +2,7 @@ import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeStateVariableValue, changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
-import { MIN, MAX } from './actionTypes';
-import { FIXED, CONSTRAINED } from './globals';
+import { MIN, MAX, FIXED, CONSTRAINED } from './actionTypes';
 
 class NameValueUnitsRowStateVariable extends React.Component {
     

@@ -30,6 +30,9 @@ export const SEEK = 'SEEK';
 export const MIN = 'MIN';
 export const MAX = 'MAX';
 
+export const CONSTRAINED = 1;
+export const FIXED = 2;
+
 export const IOOPT = 'IOOPT';
 export const MAXIT = 'MAXIT';
 export const WEAPON = 'WEAPON';

@@ -1,5 +1,6 @@
 import { changeDesignParameterValue, changeResultTerminationCondition } from './actionCreators';
-import { FIXED, DEL, DELMIN, MAXIT, TOL } from './globals';
+import { FIXED } from './actionTypes';
+import { DEL, DELMIN, MAXIT, TOL } from './globals';
 import { patsh } from './patsh';
 
 // Search
