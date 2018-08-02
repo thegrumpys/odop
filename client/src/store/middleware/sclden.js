@@ -1,5 +1,5 @@
-import { FIXED } from './store/actionTypes';
-import { FIX_WT, CON_WT, ZERO_WT, SMALLNUM } from './globals';
+import { FIXED } from '../actionTypes';
+import { FIX_WT, CON_WT, ZERO_WT, SMALLNUM } from '../globals';
 
 export function sclden(value, level, sdlimit, flags) {
     var result;

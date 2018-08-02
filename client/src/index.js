@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import App from './components/App';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
-import { pcylWebApp } from './store/reducers';
-import { equationsMiddleware } from './equationsMiddleware';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { initialState } from './initialState';
+import App from './components/App';
 import { Spinner, displaySpinner } from './components/Spinner';
 import { ErrorModal, displayError } from './components/ErrorModal';
-import { initialState } from './initialState';
+import { pcylWebApp } from './store/reducers';
+import { dispatcher } from './store/middleware/dispatcher';
 
 //function loggerMiddleware({ getState }) {
 //    return next => action => {
@@ -29,7 +29,7 @@ import { initialState } from './initialState';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
 
-const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/equationsMiddleware));
+const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/dispatcher));
 
 ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /></div>, document.getElementById('root'));
 displaySpinner(true);

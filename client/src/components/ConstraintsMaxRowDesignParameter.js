@@ -3,7 +3,7 @@ import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
 import { changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag } from '../store/actionCreators';
-import { OBJMIN } from '../globals';
+import { OBJMIN } from '../store/globals';
 
 class ConstraintMaxRowDesignParameter extends React.Component {
     

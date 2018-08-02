@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from '../components/App';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
-import { pcylWebApp } from '../store/reducers';
-import { startup, changeDesignParameterValue } from '../store/actionCreators';
 import { initialState } from '../initialState';
+import App from '../components/App';
+import { startup, changeDesignParameterValue } from '../store/actionCreators';
+import { pcylWebApp } from '../store/reducers';
 
 it('renders without crashing', () => {
     const store = createStore(

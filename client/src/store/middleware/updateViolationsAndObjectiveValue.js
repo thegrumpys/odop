@@ -1,8 +1,8 @@
-import { MIN, MAX, CONSTRAINED, FIXED } from './store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED } from '../actionTypes';
 import { changeDesignParameterViolation,
     changeStateVariableViolation, 
-    changeResultObjectiveValue, changeResultViolatedConstraintCount } from './store/actionCreators';
-import { VIOL_WT } from './globals';
+    changeResultObjectiveValue, changeResultViolatedConstraintCount } from '../actionCreators';
+import { VIOL_WT } from '../globals';
 
 // Update Violations and Objective Value
 export function updateViolationsAndObjectiveValue(store, merit) {

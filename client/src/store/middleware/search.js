@@ -1,6 +1,6 @@
-import { FIXED } from './store/actionTypes';
-import { changeDesignParameterValue, changeResultTerminationCondition } from './store/actionCreators';
-import { DEL, DELMIN, MAXIT, TOL } from './globals';
+import { FIXED } from '../actionTypes';
+import { changeDesignParameterValue, changeResultTerminationCondition } from '../actionCreators';
+import { DEL, DELMIN, MAXIT, TOL } from '../globals';
 import { patsh } from './patsh';
 
 // Search

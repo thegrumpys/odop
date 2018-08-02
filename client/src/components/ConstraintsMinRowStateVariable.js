@@ -3,7 +3,7 @@ import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
 import { changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from '../store/actionCreators';
-import { OBJMIN } from '../globals';
+import { OBJMIN } from '../store/globals';
 
 class ConstraintsMinRowStateVariable extends React.Component {
     

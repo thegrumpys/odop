@@ -26,7 +26,7 @@ import { STARTUP,
     SEEK, 
     
     MIN } from './actionTypes';
-import { sclden } from '../sclden';
+import { sclden } from './middleware/sclden';
 
 export function pcylWebApp(state, action) {
 //    console.log('In pcylWebApp');

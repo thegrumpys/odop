@@ -1,7 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { pcylWebApp } from '../store/reducers';
 import { initialState } from '../initialState';
-import { equationsMiddleware } from '../equationsMiddleware';
 import { MIN, MAX, CONSTRAINED, FIXED } from '../store/actionTypes';
 import { 
     startup,
@@ -9,6 +7,8 @@ import {
     changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag, 
     changeResultObjectiveValue, 
     search, seek } from '../store/actionCreators';
+import { pcylWebApp } from '../store/reducers';
+import { dispatcher } from '../store/middleware/dispatcher';
 
 //=====================================================================
 // STARTUP
@@ -18,7 +18,7 @@ it('middleware with startup', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
     
     var design = store.getState(); // before
     expect(design.design_parameters[0].name).toEqual("PRESSURE");
@@ -102,7 +102,7 @@ it('middleware change pressure design parameter value without startup', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
     
     var design = store.getState(); // before
     expect(design.design_parameters[0].name).toEqual("PRESSURE");
@@ -131,7 +131,7 @@ it('middleware change radius design parameter value without startup', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
     
     var design = store.getState(); // before
     expect(design.design_parameters[1].name).toEqual("RADIUS");
@@ -160,7 +160,7 @@ it('middleware change thickness design parameter value without startup', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
     
     var design = store.getState(); // before
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
@@ -192,7 +192,7 @@ it('middleware change constraints to force all violations', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
     
     var design = store.getState(); // before
     expect(design.design_parameters[0].name).toEqual("PRESSURE");
@@ -280,7 +280,7 @@ it('middleware search1 from initial state', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
     
     store.dispatch(search());
     
@@ -306,7 +306,7 @@ it('middleware search2: initial state w/ single SV constraint modified', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
 
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 10000));
     
@@ -334,7 +334,7 @@ it('middleware search3: initial state w/ single DP FIXed', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
 
     store.dispatch(changeDesignParameterValue("RADIUS", 0.444));
     store.dispatch(setDesignParameterFlag("RADIUS", MIN, FIXED));
@@ -363,7 +363,7 @@ it('middleware search4: initial state w/ single SV FIXed', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
 
     store.dispatch(setStateVariableFlag("STRESS", MIN, FIXED|CONSTRAINED));
     store.dispatch(setStateVariableFlag("STRESS", MAX, FIXED|CONSTRAINED));
@@ -394,7 +394,7 @@ it('middleware search5: initial state w/ 3 constraints modified', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
 
     store.dispatch(changeStateVariableConstraint("FORCE", MIN, 1200));
     store.dispatch(changeDesignParameterConstraint("RADIUS", MAX, 0.4));
@@ -424,7 +424,7 @@ it('middleware search6: initial state w/ 3 constraints modified further', () => 
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
 
     store.dispatch(changeStateVariableConstraint("FORCE", MIN, 2500));
     store.dispatch(changeDesignParameterConstraint("RADIUS", MAX, 0.55));
@@ -454,7 +454,7 @@ it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', ()
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
 
     store.dispatch(changeStateVariableConstraint("FORCE", MIN, 2500));
     store.dispatch(changeDesignParameterConstraint("RADIUS", MAX, 0.55));
@@ -490,7 +490,7 @@ it('middleware seek1 min stress; feasible start; no fixed', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
 
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 10000));
     
@@ -519,7 +519,7 @@ it('middleware seek2 min stress; alt start pt, opened constraints, feasible star
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
 
     store.dispatch(changeDesignParameterValue("PRESSURE", 888));
     store.dispatch(changeDesignParameterValue("RADIUS", 0.63));
@@ -553,7 +553,7 @@ it('middleware seek3 min stress; infeasible start; no fixed', () => {
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
     
     store.dispatch(search());
     store.dispatch(seek("STRESS", MIN));
@@ -580,7 +580,7 @@ it('middleware seek4 min pressure; alt start pt, opened constraints, feasible st
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
 
     store.dispatch(changeDesignParameterValue("PRESSURE", 888));
     store.dispatch(changeDesignParameterValue("RADIUS", 0.63));
@@ -615,7 +615,7 @@ it('middleware seek5 max force; alt start pt, opened constraints, feasible start
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
 
     store.dispatch(changeDesignParameterValue("PRESSURE", 888));
     store.dispatch(changeDesignParameterValue("RADIUS", 0.63));
@@ -649,7 +649,7 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
     const store = createStore(
         pcylWebApp,
         initialState,
-        applyMiddleware(equationsMiddleware));
+        applyMiddleware(dispatcher));
 
     var design = store.getState(); // after
     store.dispatch(changeDesignParameterValue("PRESSURE", 888));

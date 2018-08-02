@@ -12,19 +12,19 @@ import { STARTUP,
     RESET_STATE_VARIABLE_FLAG, 
     
     SEARCH, 
-    SEEK } from './store/actionTypes';
-import { OBJMIN } from './globals';
+    SEEK } from '../actionTypes';
+import { OBJMIN } from '../globals';
 import { startup } from './startup';
 import { search } from './search';
 import { seek } from './seek';
 import { invokeEquationSet } from './invokeEquationSet';
 import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
 
-export const equationsMiddleware = store => next => action => {
+export const dispatcher = store => next => action => {
     
     const returnValue = next(action);
 
-//    console.log('In equationsMiddleware');
+//    console.log('In dispatcher');
 //    console.log(action);
 
     switch (action.type) {

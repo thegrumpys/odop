@@ -1,6 +1,6 @@
-import { OBJMIN, SMALLNUM, MFN_WT } from './globals';
-import { MAX, FIXED } from './store/actionTypes';
-import { saveDesignParameterValues, restoreDesignParameterValues, changeResultTerminationCondition } from './store/actionCreators';
+import { OBJMIN, SMALLNUM, MFN_WT } from '../globals';
+import { MAX, FIXED } from '../actionTypes';
+import { saveDesignParameterValues, restoreDesignParameterValues, changeResultTerminationCondition } from '../actionCreators';
 import { search } from './search';
 import { despak } from './despak';
 

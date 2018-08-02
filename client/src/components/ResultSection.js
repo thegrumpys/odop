@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Table } from 'reactstrap';
 import { connect } from 'react-redux';
-import { OBJMIN } from '../globals';
+import { OBJMIN } from '../store/globals';
 
 class ResultSection extends React.Component {
     

@@ -1,7 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { pcylWebApp } from '../store/reducers';
 import { initialState } from '../initialState';
-import { equationsMiddleware } from '../equationsMiddleware';
 import { MIN, MAX, CONSTRAINED, FIXED } from '../store/actionTypes';
 import { 
     startup,
@@ -9,6 +7,8 @@ import {
     changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag, 
     changeResultObjectiveValue
     } from '../store/actionCreators';
+import { pcylWebApp } from '../store/reducers';
+import { dispatcher } from '../store/middleware/dispatcher';
 
 //=====================================================================
 // STARTUP

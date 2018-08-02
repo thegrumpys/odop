@@ -1,5 +1,5 @@
-import { MIN, MAX } from './store/actionTypes';
-import { changeDesignParameterConstraint, changeStateVariableConstraint } from './store/actionCreators';
+import { MIN, MAX } from '../actionTypes';
+import { changeDesignParameterConstraint, changeStateVariableConstraint } from '../actionCreators';
 
 // Startup
 export function startup(store) {
