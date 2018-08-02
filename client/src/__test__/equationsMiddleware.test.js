@@ -8,8 +8,7 @@ import {
     changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag, 
     changeResultObjectiveValue, 
     search, seek } from '../actionCreators';
-import { MIN, MAX } from '../actionTypes';
-import { CONSTRAINED, FIXED } from '../globals';
+import { MIN, MAX, CONSTRAINED, FIXED } from '../actionTypes';
 
 //=====================================================================
 // STARTUP
