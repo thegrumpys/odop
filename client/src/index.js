@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import App from './App';
+import App from './components/App';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { pcylWebApp } from './reducers';
 import { equationsMiddleware } from './equationsMiddleware';
-import { Spinner, displaySpinner } from './Spinner';
-import { ErrorModal, displayError } from './ErrorModal';
+import { Spinner, displaySpinner } from './components/Spinner';
+import { ErrorModal, displayError } from './components/ErrorModal';
 import { initialState } from './initialState';
 
 //function loggerMiddleware({ getState }) {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeDesignParameterValue, setDesignParameterFlag, resetDesignParameterFlag } from './actionCreators';
-import { MIN, MAX, FIXED } from './actionTypes';
+import { changeDesignParameterValue, setDesignParameterFlag, resetDesignParameterFlag } from '../actionCreators';
+import { MIN, MAX, FIXED } from '../actionTypes';
 
 class NameValueUnitsRowDesignParameter extends React.Component {
     

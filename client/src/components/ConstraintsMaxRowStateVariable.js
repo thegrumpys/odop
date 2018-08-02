@@ -1,11 +1,11 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from './actionCreators';
-import { MIN, MAX, FIXED, CONSTRAINED } from './actionTypes';
-import { OBJMIN } from './globals';
+import { changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from '../actionCreators';
+import { MIN, MAX, FIXED, CONSTRAINED } from '../actionTypes';
+import { OBJMIN } from '../globals';
 
-class ConstraintsMinRowStateVariable extends React.Component {
+class ConstraintsMaxRowStateVariable extends React.Component {
     
     constructor(props) {
         super(props);
@@ -49,58 +49,58 @@ class ConstraintsMinRowStateVariable extends React.Component {
     
     render() {
         // =======================================
-        // Constraint Minimum Column
+        // Constraint Maximum Column
         // =======================================
-        var cmin_class;
+        var cmax_class;
         if (this.props.state_variable.lmin & FIXED) {
-            cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-info text-right font-weight-bold border-info' : 'text-right';
+            cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-info text-right font-weight-bold border border-info' : 'text-right';
         } else {
             if (this.props.objective_value < OBJMIN) {
-                cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-low-danger text-right border-low-danger' : 'text-right';
+                cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-low-danger text-right border-low-danger' : 'text-right';
             } else {
-                cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
+                cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
             }
         }
-        var cmin;
-        if (this.props.state_variable.lmin & FIXED || this.props.state_variable.lmin & CONSTRAINED) {
-            cmin = (
+        var cmax;
+        if (this.props.state_variable.lmax & FIXED || this.props.state_variable.lmax & CONSTRAINED) {
+            cmax = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.state_variable.lmin & CONSTRAINED} onChange={this.onResetStateVariableFlagConstrainedMin} />
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.state_variable.lmax & CONSTRAINED} onChange={this.onResetStateVariableFlagConstrainedMax} />
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input className={cmin_class} type="number" value={this.props.state_variable.cmin} onChange={this.onChangeStateVariableConstraintMin} />
+                <Input className={cmax_class} type="number" value={this.props.state_variable.cmax} onChange={this.onChangeStateVariableConstraintMax} />
               </InputGroup>
             );
         } else {
-            cmin = (
+            cmax = (
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.state_variable.lmin & CONSTRAINED} onChange={this.onSetStateVariableFlagConstrainedMin} />
+                    <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.state_variable.lmax & CONSTRAINED} onChange={this.onSetStateVariableFlagConstrainedMax} />
                   </InputGroupText>
                 </InputGroupAddon>
-                <div/>
+                <div />
               </InputGroup>
             );
         }
         // =======================================
-        // Constraint Violation Minimum Column
+        // Constraint Violation Maximum Column
         // =======================================
-        var vmin;
-        if (this.props.state_variable.lmin & FIXED || this.props.state_variable.lmin & CONSTRAINED) {
-            vmin = (this.props.state_variable.vmin*100.0).toFixed(1) + '%';
+        var vmax;
+        if (this.props.state_variable.lmax & FIXED || this.props.state_variable.lmax & CONSTRAINED) {
+            vmax = (this.props.state_variable.vmax*100.0).toFixed(1) + '%';
         } else {
-            vmin = '';
+            vmax = '';
         }
         // =======================================
         // Table Row
         // =======================================
         return (
                 <tr key={this.props.state_variable.name}>
-                    <td className="align-middle" colSpan="2">{cmin}</td>
-                    <td className="text-right align-middle" colSpan="1">{vmin}</td>
+                    <td className="align-middle" colSpan="2">{cmax}</td>
+                    <td className="text-right align-middle" colSpan="1">{vmax}</td>
                 </tr>
         );
     }
@@ -115,4 +115,4 @@ const mapDispatchToStateVariableProps = {
         resetStateVariableFlag: resetStateVariableFlag
 };
 
-export default connect(null, mapDispatchToStateVariableProps)(ConstraintsMinRowStateVariable);
+export default connect(null, mapDispatchToStateVariableProps)(ConstraintsMaxRowStateVariable);

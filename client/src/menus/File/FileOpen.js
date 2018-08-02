@@ -3,8 +3,8 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from
 import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { load } from '../../actionCreators';
-import { displayError } from '../../ErrorModal';
-import { displaySpinner } from '../../Spinner';
+import { displayError } from '../../components/ErrorModal';
+import { displaySpinner } from '../../components/Spinner';
 
 class FileOpen extends React.Component {
     constructor(props) {
