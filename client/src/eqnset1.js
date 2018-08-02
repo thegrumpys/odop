@@ -16,13 +16,13 @@ export function eqnset1(d, p) {
      * m_flag = 0 if call is from search, no console I/O permitted. m_flag > 0
      * if "special" call requesting direct output.
      */
-    var pi = 0;
-    var pressure = 0;
-    var radius = 1;
-    var thickness = 2;
-    var force = 0;
-    var area = 1;
-    var stress = 2;
+    const pi = 0;
+    const pressure = 0;
+    const radius = 1;
+    const thickness = 2;
+    const force = 0;
+    const area = 1;
+    const stress = 2;
     var x = [];
     x[area] = d[pi] * p[radius] * p[radius];
     x[force] = p[pressure] * x[area];
