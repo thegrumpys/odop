@@ -1,4 +1,4 @@
-export function eqnset1(d, p) {
+export function eqnset(d, p) {
     /** ***************************************************************** */
     /*
      * EQNSET contains an equation set providing a math model of the design

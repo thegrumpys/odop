@@ -1,5 +1,7 @@
 import { changeStateVariableValue } from './actionCreators';
-import { eqnset1 } from './eqnset1';
+import { eqnset as pcyl_eqnset } from './problem/Piston-Cylinder/eqnset';
+import { eqnset as solid_eqnset } from './problem/Solid/eqnset';
+import { eqnset as spring_eqnset } from './problem/Spring/eqnset';
 
 // Invoke Equation Set
 export function invokeEquationSet(store) {
@@ -24,7 +26,19 @@ export function invokeEquationSet(store) {
     }
 
     // Compute state_variables x from d and p using equations
-    var x = eqnset1(d, p);
+    var x;
+    switch(design.type) {
+    default:
+    case 'Piston-Cylinder':
+        x = pcyl_eqnset(d, p);
+        break;
+    case 'Solid':
+        x = solid_eqnset(d, p);
+        break;
+    case 'Spring':
+        x = spring_eqnset(d, p);
+        break;
+    }
 
     // Compute and dispatch state variable changes
     for (let i = 0; i < design.state_variables.length; i++) {
