@@ -9,3 +9,5 @@
 * Push to Heroku (command: git push heroku master) and verify that http://pcyl-web.herokuapp.com website is operational and version X.Y.Z displays.
 * Create X.Y.Z tag (for example, 0.4). Commit "Release X.Y.Z" and push to origin.
 * In Github mark Milestone X.Y.Z closed.
+
+* Discuss next release. what work needs to be done, who does it. IN other words, set the direction for the upcoming milestone.
