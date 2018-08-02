@@ -83,7 +83,7 @@ export const equationsMiddleware = store => next => action => {
 // Startup
 export function startup(store) {
     // Set smin/smax by changing constraints to their current values
-    design = store.getState();
+    var design = store.getState();
     design.design_parameters.forEach((design_parameter) => {
         store.dispatch(changeDesignParameterConstraint(design_parameter.name, MIN, design_parameter.cmin));
         store.dispatch(changeDesignParameterConstraint(design_parameter.name, MAX, design_parameter.cmax));
