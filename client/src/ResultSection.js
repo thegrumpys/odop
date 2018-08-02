@@ -10,14 +10,14 @@ class ResultSection extends React.Component {
         var feasibility_class;
         if (this.props.objective_value > OBJMIN) {
             feasibility_string = "NOT FEASIBLE";
-            feasibility_class = "text-left text-danger font-weight-bold";
+            feasibility_class = "text-right text-danger font-weight-bold";
         } else {
             if (this.props.violated_constraint_count > 0) {
                 feasibility_string = "MARGINALLY FEASIBLE";
-                feasibility_class = "text-left text-low-danger";
+                feasibility_class = "text-right text-low-danger";
             } else {
                 feasibility_string = "FEASIBLE";
-                feasibility_class = "text-left";
+                feasibility_class = "text-right";
             }
         }
         return (
