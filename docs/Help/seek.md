@@ -1,3 +1,5 @@
+## Seek
+
  When SEARCH terminates with a strictly feasible solution (i.e.  OBJ = 0.0),
  the resulting solution point is only one of many possible solution points.
  The entire collection of feasible solution points is referred to as a
@@ -22,10 +24,10 @@
  availability of a region of feasible solutions.
 
  EXAMPLES:
-       SEEK  MIN  WEIGHT
-       SEEK  MAX  CYCLE_LIFE
-       SEEK  MIN  RATE
-       SEEK  MIN  L_SOLID
+*       SEEK  MIN  WEIGHT
+*       SEEK  MAX  CYCLE_LIFE
+*       SEEK  MIN  RATE
+*       SEEK  MIN  L_SOLID
 
  SEEK functions by forming a "merit function" from the indicated variable
  and adding that into the "objective function" that the search process

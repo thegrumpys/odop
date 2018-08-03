@@ -67,7 +67,14 @@ to drive the objective function to the lowest value possible.
 PREFERENCES &nbsp; (Internal Variables)   
 Preference settings control the operation of the program.  They have no
 direct meaning to the design problem.  For further information, refer to 
-Context Help on the File:Preferences menu.
+the Help sections on Preferences and Search.
+
+PROPERTIES
+It is possible to store a series of text strings with a design in order 
+to carry descriptive information. 
+The File : Properties menu is used to establish a set of label - value 
+pairs where both the text of the label and the text of the value are set 
+by the user.
 
 EQUATION SETS   
 The ODO:Platform software allows for multiple sets of design equations named
