@@ -46,7 +46,7 @@ fetch('/api/v1/designs/startup')
         ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
     })
     .catch(error => {
-        displayError('GET of \'startup\' design failed with message: \''+error.message+'\', using builtin initialState instead');
+        displayError('GET of \'startup\' design failed with message: \''+error.message+'\'. Using builtin initialState instead. You may continue in "demo mode" but you will be unable to save your work.');
         const store = createStore(pcylWebApp, initialState, middleware);
         ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
     });
