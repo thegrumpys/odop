@@ -1,4 +1,4 @@
- SEARCH
+## Search
 
  SEARCH will alter the values of any free independent variables to find a
  design that satisfies all constraints while also achieving the desired
