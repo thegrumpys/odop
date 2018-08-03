@@ -24,7 +24,7 @@ class ActionSelectCatalog extends React.Component {
                     Select Catalog
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; Select Catalog</ModalHeader>
+                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; Action : Select Catalog</ModalHeader>
                     <ModalBody>
                         Not implemented.
                     </ModalBody>
