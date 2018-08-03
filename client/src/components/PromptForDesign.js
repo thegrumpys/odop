@@ -2,10 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
-//import { connect } from 'react-redux';
-//import { load } from '../store/actionCreators';
-//import { displayError } from './ErrorModal';
-//import { displaySpinner } from './Spinner';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { initialState } from '../initialState';
@@ -18,12 +14,10 @@ import { dispatcher } from '../store/middleware/dispatcher';
 export class PromptForDesign extends React.Component {
     constructor(props) {
         super(props);
-//        this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onOpen = this.onOpen.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.state = {
-//            modal: false,
             modal: true,
             designs: [],
             name: "startup"
@@ -48,40 +42,8 @@ export class PromptForDesign extends React.Component {
             });
     }
     
-//    getDesign(name) {
-////        console.log('In getDesign name=', name);
-//        displaySpinner(true);
-//        fetch('/api/v1/designs/' + name)
-//            .then(res => {
-//                displaySpinner(false);
-//                if (!res.ok) {
-//                    throw Error(res.statusText);
-//                }
-//                return res.json()
-//            })
-//            .then(design => this.props.load(design))
-//            .catch(error => {
-//                displayError('GET of \''+name+'\' design failed: '+error.message);
-//            });
-//    }
-    
     getDesign(name) {
         
-//    function loggerMiddleware({ getState }) {
-//      return next => action => {
-//        console.log('will dispatch', action)
-//        
-//        // Call the next dispatch method in the middleware chain.
-//        const returnValue = next(action)
-//        
-//        console.log('state after dispatch', getState())
-//        
-//        // This will likely be the action itself, unless
-//        // a middleware further in chain changed it.
-//        return returnValue
-//      }
-//    }
-
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
         /* eslint-enable */
@@ -107,15 +69,7 @@ export class PromptForDesign extends React.Component {
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
             });
     }
-//    
-//    toggle() {
-//        this.getDesigns();
-//        this.setState({
-//            modal: !this.state.modal,
-//            name: this.props.name
-//        });
-//    }
-//    
+
     onSelect(event) {
 //        console.log(event.target.value)
         this.setState({
@@ -146,10 +100,11 @@ export class PromptForDesign extends React.Component {
         return (
             <React.Fragment>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; Select starting design </ModalHeader>
+                    <ModalHeader toggle={this.toggle}>
+                    <img src="favicon.ico" alt="The Grumpys"/> &nbsp; Open Design Optimization : Platform<br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Piston - Cylinder Design Problem</ModalHeader>
                     <ModalBody>
                         <br />
-                        <Label for="fileOpenSelect">Select design to open:</Label>
+                        <Label for="fileOpenSelect">PCyl-Web is experimental software.<br />See the Help : About menu for details.<br /><br />Select design to open:</Label>
                         <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
                             {designs.map((design, index) =>
                                 <option key={index} value={design}>{design}</option>
@@ -166,12 +121,3 @@ export class PromptForDesign extends React.Component {
     }
 }  
 
-//const mapStateToProps = state => ({
-//    name: state.name, 
-//});
-//
-//const mapDispatchToProps = {
-//    load: load
-//};
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(PromptForDesign);
