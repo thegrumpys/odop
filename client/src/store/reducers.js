@@ -22,6 +22,7 @@ import { STARTUP,
     CHANGE_RESULT_TERMINATION_CONDITION, 
     CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT, 
     
+    CHANGE_SYSTEM_CONTROL_VALUES, 
     SEARCH, 
     SEEK, 
     
@@ -251,7 +252,7 @@ export function pcylWebApp(state, action) {
     case CHANGE_RESULT_OBJECTIVE_VALUE:
         return {
             ...state,
-            result : {
+            result: {
                 ...state.result,
                 objective_value: action.payload.objective_value
             }
@@ -259,7 +260,7 @@ export function pcylWebApp(state, action) {
     case CHANGE_RESULT_TERMINATION_CONDITION:
         return {
             ...state,
-            result : {
+            result: {
                 ...state.result,
                 termination_condition: action.payload.termination_condition
             }
@@ -267,10 +268,15 @@ export function pcylWebApp(state, action) {
     case CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT:
         return {
             ...state,
-            result : {
+            result: {
                 ...state.result,
                 violated_constraint_count: action.payload.violated_constraint_count
             }
+        }
+    case CHANGE_SYSTEM_CONTROL_VALUES:
+        return {
+            ...state,
+            system_controls: action.payload.system_controls
         }
     case SEARCH:
         return state;
