@@ -70,7 +70,7 @@ class App extends Component {
                                         Recent Designs
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <FilePreferences />
+                                    <FilePreferences/>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav inNavbar>
@@ -78,8 +78,8 @@ class App extends Component {
                                     Action
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    <ActionSearch store={this.props.store}/>
-                                    <ActionSeek store={this.props.store}/>
+                                    <ActionSearch/>
+                                    <ActionSeek/>
                                     <DropdownItem>
                                         Trade
                                     </DropdownItem>

@@ -43,10 +43,10 @@ fetch('/api/v1/designs/startup')
     })
     .then(design => {
         const store = createStore(pcylWebApp, design, middleware);
-        ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
+        ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root2'));
     })
     .catch(error => {
         displayError('GET of \'startup\' design failed with message: \''+error.message+'\', using builtin initialState instead');
         const store = createStore(pcylWebApp, initialState, middleware);
-        ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
+        ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root2'));
     });
