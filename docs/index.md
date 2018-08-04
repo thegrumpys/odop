@@ -10,6 +10,7 @@
 
 ## Help
 * [Introduction](Help/introduction)
+* [Features](Help/features)
 * [Terminology](Help/terminology)
 * [Search](search)
 * [Seek](seek)
@@ -28,7 +29,7 @@
 * [System Control variables and multi-user operation](design/SysControls)
 * [Idea for a simple showcase problem](design/GeometricSolidsProblem)
 * [Idea for a Refine Search feature](design/RefineSearchFeature)
-* [AutoSave feature](About/AutoSaveFeature)
+* [AutoSave feature](design/AutoSaveFeature)
 
 
 ## Procedures
