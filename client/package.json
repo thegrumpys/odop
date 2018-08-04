@@ -1,7 +1,7 @@
 {
-  "name": "pcyl-web-client",
+  "name": "odop-client",
   "version": "0.1.0",
-  "description": "Piston-Cylinder problem - Web Interface Client",
+  "description": "Open Design Optimization Platform (ODOP) Client",
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",

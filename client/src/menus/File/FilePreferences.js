@@ -70,7 +70,7 @@ class FilePreferences extends React.Component {
                     Preferences
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; File : Preferences</ModalHeader>
+                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Preferences</ModalHeader>
                     <ModalBody>
                         <Container>
                             <Row>

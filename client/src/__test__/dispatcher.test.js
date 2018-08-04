@@ -7,7 +7,7 @@ import {
     changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag, 
     changeResultObjectiveValue, 
     search, seek } from '../store/actionCreators';
-import { pcylWebApp } from '../store/reducers';
+import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 
 //=====================================================================
@@ -16,7 +16,7 @@ import { dispatcher } from '../store/middleware/dispatcher';
 
 it('middleware with startup', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
     
@@ -100,7 +100,7 @@ it('middleware with startup', () => {
 
 it('middleware change pressure design parameter value without startup', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
     
@@ -129,7 +129,7 @@ it('middleware change pressure design parameter value without startup', () => {
 
 it('middleware change radius design parameter value without startup', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
     
@@ -158,7 +158,7 @@ it('middleware change radius design parameter value without startup', () => {
 
 it('middleware change thickness design parameter value without startup', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
     
@@ -190,7 +190,7 @@ it('middleware change thickness design parameter value without startup', () => {
 
 it('middleware change constraints to force all violations', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
     
@@ -278,7 +278,7 @@ it('middleware change constraints to force all violations', () => {
 
 it('middleware search1 from initial state', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
     
@@ -304,7 +304,7 @@ it('middleware search1 from initial state', () => {
 
 it('middleware search2: initial state w/ single SV constraint modified', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
 
@@ -332,7 +332,7 @@ it('middleware search2: initial state w/ single SV constraint modified', () => {
 
 it('middleware search3: initial state w/ single DP FIXed', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
 
@@ -361,7 +361,7 @@ it('middleware search3: initial state w/ single DP FIXed', () => {
 
 it('middleware search4: initial state w/ single SV FIXed', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
 
@@ -392,7 +392,7 @@ it('middleware search4: initial state w/ single SV FIXed', () => {
 
 it('middleware search5: initial state w/ 3 constraints modified', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
 
@@ -422,7 +422,7 @@ it('middleware search5: initial state w/ 3 constraints modified', () => {
 
 it('middleware search6: initial state w/ 3 constraints modified further', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
 
@@ -452,7 +452,7 @@ it('middleware search6: initial state w/ 3 constraints modified further', () => 
 
 it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
 
@@ -488,7 +488,7 @@ it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', ()
 
 it('middleware seek1 min stress; feasible start; no fixed', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
 
@@ -517,7 +517,7 @@ it('middleware seek1 min stress; feasible start; no fixed', () => {
 
 it('middleware seek2 min stress; alt start pt, opened constraints, feasible start; no fixed', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
 
@@ -551,7 +551,7 @@ it('middleware seek2 min stress; alt start pt, opened constraints, feasible star
 
 it('middleware seek3 min stress; infeasible start; no fixed', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
     
@@ -578,7 +578,7 @@ it('middleware seek3 min stress; infeasible start; no fixed', () => {
 
 it('middleware seek4 min pressure; alt start pt, opened constraints, feasible start; THICKNESS fixed', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
 
@@ -613,7 +613,7 @@ it('middleware seek4 min pressure; alt start pt, opened constraints, feasible st
 
 it('middleware seek5 max force; alt start pt, opened constraints, feasible start; no fixed', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
 
@@ -647,7 +647,7 @@ it('middleware seek5 max force; alt start pt, opened constraints, feasible start
 
 it('middleware seek6 min stress; alt start pt, opened constraints, feasible start; force fixed', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState,
         applyMiddleware(dispatcher));
 

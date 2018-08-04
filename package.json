@@ -1,7 +1,7 @@
 {
-  "name": "pcyl-web-server",
+  "name": "odop-server",
   "version": "0.0.0",
-  "description": "Piston-Cylinder problem - Web Interface Server",
+  "description": "Open Design Optimization Platform (ODOP) Server",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

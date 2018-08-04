@@ -24,7 +24,7 @@ class ActionSelectSize extends React.Component {
                     Select Size
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="The Grumpys"/> &nbsp; Action : Select Size</ModalHeader>
+                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Size</ModalHeader>
                     <ModalBody>
                         Not implemented.
                     </ModalBody>

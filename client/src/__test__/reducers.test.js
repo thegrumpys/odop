@@ -7,7 +7,7 @@ import {
     changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag, 
     changeResultObjectiveValue
     } from '../store/actionCreators';
-import { pcylWebApp } from '../store/reducers';
+import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 
 //=====================================================================
@@ -16,7 +16,7 @@ import { dispatcher } from '../store/middleware/dispatcher';
 
 it('reducers without startup', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // after
@@ -30,7 +30,7 @@ it('reducers without startup', () => {
 
 it('reducers with startup', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -58,7 +58,7 @@ it('reducers with startup', () => {
 
 it('reducers change design parameter value', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -78,7 +78,7 @@ it('reducers change design parameter value', () => {
 
 it('reducers change design parameter constraint min', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -96,7 +96,7 @@ it('reducers change design parameter constraint min', () => {
 
 it('reducers change design parameter constraint max', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -114,7 +114,7 @@ it('reducers change design parameter constraint max', () => {
 
 it('reducers set design parameter flag min', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -130,7 +130,7 @@ it('reducers set design parameter flag min', () => {
 
 it('reducers reset design parameter flag min', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -146,7 +146,7 @@ it('reducers reset design parameter flag min', () => {
 
 it('reducers set design parameter flag max', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -162,7 +162,7 @@ it('reducers set design parameter flag max', () => {
 
 it('reducers reset design parameter flag max', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -182,7 +182,7 @@ it('reducers reset design parameter flag max', () => {
 
 it('reducers change state variable value', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -198,7 +198,7 @@ it('reducers change state variable value', () => {
 
 it('reducers change state variable constraint min', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -216,7 +216,7 @@ it('reducers change state variable constraint min', () => {
 
 it('reducers change state variable constraint max', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -234,7 +234,7 @@ it('reducers change state variable constraint max', () => {
 
 it('reducers set state variable flag min', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -250,7 +250,7 @@ it('reducers set state variable flag min', () => {
 
 it('reducers reset state variable flag min', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -266,7 +266,7 @@ it('reducers reset state variable flag min', () => {
 
 it('reducers set state variable flag max', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -282,7 +282,7 @@ it('reducers set state variable flag max', () => {
 
 it('reducers reset state variable flag max', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before
@@ -302,7 +302,7 @@ it('reducers reset state variable flag max', () => {
 
 it('reducers change result objective value', () => {
     const store = createStore(
-        pcylWebApp,
+        reducers,
         initialState);
     
     var design = store.getState(); // before

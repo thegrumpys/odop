@@ -29,8 +29,8 @@ import { STARTUP,
     MIN } from './actionTypes';
 import { sclden } from './middleware/sclden';
 
-export function pcylWebApp(state, action) {
-//    console.log('In pcylWebApp');
+export function reducers(state, action) {
+//    console.log('In reducers');
 //    console.log(action);
     switch (action.type) {
     case STARTUP:

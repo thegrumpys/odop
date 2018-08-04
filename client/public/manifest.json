@@ -1,6 +1,6 @@
 {
-  "short_name": "PCyl",
-  "name": "Piston-Cylinder problem - Web Interface Client",
+  "short_name": "ODOP",
+  "name": "Open Design Optimization Platform (ODOP) Client",
   "icons": [
     {
       "src": "favicon.ico",

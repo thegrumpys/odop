@@ -5,11 +5,11 @@ import { Provider } from 'react-redux'
 import { initialState } from '../problems/Piston-Cylinder/initialState';
 import App from '../components/App';
 import { startup, changeDesignParameterValue } from '../store/actionCreators';
-import { pcylWebApp } from '../store/reducers';
+import { reducers } from '../store/reducers';
 
 it('renders without crashing', () => {
     const store = createStore(
-            pcylWebApp,
+            reducers,
             initialState
             );
     store.dispatch(startup());
@@ -21,7 +21,7 @@ it('renders without crashing', () => {
 
 it('renders with different design parameter and state variable constraint violations', () => {
     const store = createStore(
-            pcylWebApp,
+            reducers,
             initialState
             );
     store.dispatch(startup());

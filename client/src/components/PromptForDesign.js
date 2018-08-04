@@ -8,7 +8,7 @@ import { initialState } from '../problems/Piston-Cylinder/initialState';
 import App from './App';
 import { displaySpinner } from './Spinner';
 import { displayError } from './ErrorModal';
-import { pcylWebApp } from '../store/reducers';
+import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 
 export class PromptForDesign extends React.Component {
@@ -50,7 +50,7 @@ export class PromptForDesign extends React.Component {
                     modal: !this.state.modal
                 });
                 displayError('GET of design names failed with message: \''+error.message+'\'. Using builtin initialState instead. You may continue in "demo mode" but you will be unable to save your work.');
-                const store = createStore(pcylWebApp, initialState, middleware);
+                const store = createStore(reducers, initialState, middleware);
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
             });
     }
@@ -73,12 +73,12 @@ export class PromptForDesign extends React.Component {
                 return res.json()
             })
             .then(design => {
-                const store = createStore(pcylWebApp, design, middleware);
+                const store = createStore(reducers, design, middleware);
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
             })
             .catch(error => {
                 displayError('GET of \'startup\' design failed with message: \''+error.message+'\'. Using builtin initialState instead. You may continue in "demo mode" but you will be unable to save your work.');
-                const store = createStore(pcylWebApp, initialState, middleware);
+                const store = createStore(reducers, initialState, middleware);
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
             });
     }
@@ -114,7 +114,7 @@ export class PromptForDesign extends React.Component {
             <React.Fragment>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>
-                    <img src="favicon.ico" alt="The Grumpys"/>
+                    <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>
                       Open Design Optimization Platform
                     </ModalHeader>
                     <ModalBody>
