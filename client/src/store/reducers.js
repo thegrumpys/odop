@@ -92,12 +92,12 @@ export function pcylWebApp(state, action) {
                     if (action.payload.minmax === MIN) {
                         return Object.assign({}, design_parameter, {
                             cmin: action.payload.value,
-                            smin: sclden(state.system_contols, design_parameter.value, action.payload.value, design_parameter.sdlim, design_parameter.lmin)
+                            smin: sclden(state.system_controls, design_parameter.value, action.payload.value, design_parameter.sdlim, design_parameter.lmin)
                         });
                     } else {
                         return Object.assign({}, design_parameter, {
                             cmax: action.payload.value,
-                            smax: sclden(state.system_contols, design_parameter.value, action.payload.value, design_parameter.sdlim, design_parameter.lmax)
+                            smax: sclden(state.system_controls, design_parameter.value, action.payload.value, design_parameter.sdlim, design_parameter.lmax)
                         });
                     }
                 }
@@ -173,12 +173,12 @@ export function pcylWebApp(state, action) {
                     if (action.payload.minmax === MIN) {
                         return Object.assign({}, state_variable, {
                             cmin: action.payload.value,
-                            smin: sclden(state.system_contols, state_variable.value, action.payload.value, state_variable.sdlim, state_variable.lmin)
+                            smin: sclden(state.system_controls, state_variable.value, action.payload.value, state_variable.sdlim, state_variable.lmin)
                         });
                     } else {
                         return Object.assign({}, state_variable, {
                             cmax: action.payload.value,
-                            smax: sclden(state.system_contols, state_variable.value, action.payload.value, state_variable.sdlim, state_variable.lmax)
+                            smax: sclden(state.system_controls, state_variable.value, action.payload.value, state_variable.sdlim, state_variable.lmax)
                         });
                     }
                 }
@@ -206,10 +206,10 @@ export function pcylWebApp(state, action) {
                     return Object.assign({}, state_variable, {
                         lmin: state_variable.oldlmin,
                         cmin: state_variable.oldcmin,
-                        smin: sclden(state.system_contols, state_variable.value, state_variable.oldcmin, state_variable.sdlim, state_variable.oldlmin),
+                        smin: sclden(state.system_controls, state_variable.value, state_variable.oldcmin, state_variable.sdlim, state_variable.oldlmin),
                         lmax: state_variable.oldlmax,
                         cmax: state_variable.oldcmax,
-                        smax: sclden(state.system_contols, state_variable.value, state_variable.oldcmax, state_variable.sdlim, state_variable.oldlmax)
+                        smax: sclden(state.system_controls, state_variable.value, state_variable.oldcmax, state_variable.sdlim, state_variable.oldlmax)
                     });
                 }
                 return state_variable;
