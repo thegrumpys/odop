@@ -11,6 +11,8 @@
 ## Help
 * [Introduction](Help/introduction)
 * [Terminology](Help/terminology)
+* [Search](search)
+* [Seek](seek)
 
 
 ## Design
