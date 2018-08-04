@@ -115,7 +115,7 @@ export class PromptForDesign extends React.Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>
                     <img src="favicon.ico" alt="The Grumpys"/>
-                      Open Design Optimization Software
+                      Open Design Optimization Platform
                     </ModalHeader>
                     <ModalBody>
                         Experimental software: <a href="https://thegrumpys.github.io/pcyl-web/About/" target="_blank" rel="noopener noreferrer">See details</a>
