@@ -26,6 +26,13 @@ export class PromptForDesign extends React.Component {
     }
 
     getDesigns() {
+        
+        /* eslint-disable no-underscore-dangle */
+        const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+        /* eslint-enable */
+
+        const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/dispatcher));
+
         // Get the designs and store them in state
         displaySpinner(true);
         fetch('/api/v1/designs')
@@ -38,7 +45,13 @@ export class PromptForDesign extends React.Component {
             })
             .then(designs => this.setState({ designs }))
             .catch(error => {
-                displayError('GET of design names failed: '+error.message);
+//                displayError('GET of design names failed: '+error.message);
+                this.setState({
+                    modal: !this.state.modal
+                });
+                displayError('GET of design names failed with message: \''+error.message+'\'. Using builtin initialState instead. You may continue in "demo mode" but you will be unable to save your work.');
+                const store = createStore(pcylWebApp, initialState, middleware);
+                ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
             });
     }
     
