@@ -3,7 +3,7 @@ import { changeDesignParameterValue, changeResultTerminationCondition } from '..
 import { patsh } from './patsh';
 
 // Search
-export function search(store, merit) {
+export function search(store, objmin, merit) {
     
     var design = store.getState();
     
@@ -19,7 +19,7 @@ export function search(store, merit) {
     
     // Do the pattern search
     var delarg = design.system_controls.del;
-    var ncode = patsh(pc, delarg, design.system_controls.delmin, design.system_controls.objmin, design.system_controls.maxit, design.system_controls.tol, store, merit);
+    var ncode = patsh(pc, delarg, design.system_controls.delmin, objmin, design.system_controls.maxit, design.system_controls.tol, store, merit);
     
     // Expand PC back into store change actions
     var kd = 0;

@@ -61,7 +61,8 @@ export const dispatcher = store => next => action => {
         updateViolationsAndObjectiveValue(store);
         break;
     case SEARCH:
-        search(store);
+        var design = store.getState();
+        search(store, design.system_controls.objmin);
         break;
     case SEEK:
         seek(store, action);
