@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Container, Row, Col, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { initialState } from '../../problems/Piston-Cylinder/initialState';
-import { changeSystemControlsValues } from '../../store/actionCreators';
+import { changeSystemControlsValue } from '../../store/actionCreators';
 
 class FilePreferences extends React.Component {
     
@@ -60,7 +60,7 @@ class FilePreferences extends React.Component {
             copy[key] = parseFloat(value);
         });
         // Copy the updated local copy into the props.system_controls
-        this.props.changeSystemControlsValues(copy);
+        this.props.changeSystemControlsValue(copy);
     }
 
     render() {
@@ -70,7 +70,7 @@ class FilePreferences extends React.Component {
                     Preferences
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Preferences</ModalHeader>
+                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Preferences </ModalHeader>
                     <ModalBody>
                         <Container>
                             <Row>
@@ -108,7 +108,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    changeSystemControlsValues: changeSystemControlsValues
+    changeSystemControlsValue: changeSystemControlsValue
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilePreferences);

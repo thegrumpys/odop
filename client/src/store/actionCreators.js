@@ -22,7 +22,8 @@ import { STARTUP,
     CHANGE_RESULT_TERMINATION_CONDITION, 
     CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT,
     
-    CHANGE_SYSTEM_CONTROL_VALUES, 
+    CHANGE_SYSTEM_CONTROLS_VALUE, 
+    CHANGE_LABELS_VALUE, 
     SEARCH, 
     SEEK } from './actionTypes';
 
@@ -219,11 +220,20 @@ export function changeResultViolatedConstraintCount(violated_constraint_count) {
     }
 }
 
-export function changeSystemControlsValues(system_controls) {
+export function changeSystemControlsValue(system_controls) {
     return {
-        type: CHANGE_SYSTEM_CONTROL_VALUES,
+        type: CHANGE_SYSTEM_CONTROLS_VALUE,
         payload: {
             system_controls
+        }
+    }
+}
+
+export function changeLabelsValue(labels) {
+    return {
+        type: CHANGE_LABELS_VALUE,
+        payload: {
+            labels
         }
     }
 }

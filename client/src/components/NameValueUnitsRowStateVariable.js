@@ -32,41 +32,23 @@ class NameValueUnitsRowStateVariable extends React.Component {
     
     render() {
         // =======================================
-        // Value and Fixed Column
-        // =======================================
-        var fixed;
-        if (this.props.state_variable.lmin & FIXED) {
-            fixed = (
-              <InputGroup>
-                <span className="text-right form-control bg-light">{this.props.state_variable.value.toFixed(4)}</span>
-                <InputGroupAddon addonType="append">
-                  <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.state_variable.lmin & FIXED} onChange={this.onResetStateVariableFlag} />
-                  </InputGroupText>
-                </InputGroupAddon>
-              </InputGroup>
-            );
-        } else {
-            fixed = (
-              <InputGroup>
-                <span className="text-right form-control bg-light">{this.props.state_variable.value.toFixed(4)}</span>
-                <InputGroupAddon addonType="append">
-                  <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.state_variable.lmin & FIXED} onChange={this.onSetStateVariableFlag} />
-                  </InputGroupText>
-                </InputGroupAddon>
-              </InputGroup>
-            );
-        }
-        // =======================================
         // Table Row
         // =======================================
         return (
-                <tr key={this.props.state_variable.name}>
-                    <td className="align-middle" colSpan="2">{this.props.state_variable.name}</td>
-                    <td className="align-middle" colSpan="2">{fixed}</td>
-                    <td className="text-nowrap align-middle" colSpan="1">{this.props.state_variable.units}</td>
-                </tr>
+            <tr key={this.props.state_variable.name}>
+                <td className="align-middle" colSpan="2">{this.props.state_variable.name}</td>
+                <td className="align-middle" colSpan="2">
+                    <InputGroup>
+                        <span className="text-right form-control bg-light">{this.props.state_variable.value.toFixed(4)}</span>
+                        <InputGroupAddon addonType="append">
+                            <InputGroupText>
+                                <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.state_variable.lmin & FIXED} onChange={this.props.state_variable.lmin & FIXED ? this.onResetStateVariableFlag : this.onSetStateVariableFlag} />
+                            </InputGroupText>
+                        </InputGroupAddon>
+                    </InputGroup>
+                </td>
+                <td className="text-nowrap align-middle" colSpan="1">{this.props.state_variable.units}</td>
+            </tr>
         );
     }
 }
