@@ -120,64 +120,22 @@ const initialState = {
             "termination_condition": "None",
             "violated_constraint_count": 0
         },
-        "system_controls": [
-            {
-                "name": "ioopt",
-                "value": 3
-            },
-            {
-                "name": "maxit",
-                "value": 100
-            },
-            {
-                "name": "weapon",
-                "value": 1
-            },
-            {
-                "name": "nmerit",
-                "value": 1
-            },
-            {
-                "name": "fix_wt",
-                "value": 1.5
-            },
-            {
-                "name": "con_wt",
-                "value": 1.0
-            },
-            {
-                "name": "zero_wt",
-                "value": 10.0
-            },
-            {
-                "name": "viol_wt",
-                "value": 1.0
-            },
-            {
-                "name": "mfn_wt",
-                "value": 0.01
-            },
-            {
-                "name": "objmin",
-                "value": 0.00005
-            },
-            {
-                "name": "del",
-                "value": 1.0
-            },
-            {
-                "name": "delmin",
-                "value": 0.0001
-            },
-            {
-                "name": "tol",
-                "value": 0.0001
-            },
-            {
-                "name": "smallnum",
-                "value": 1.0e-07
-            }
-        ]
+        "system_controls": {
+            "ioopt": 3,
+            "maxit": 100,
+            "weapon": 1,
+            "nmerit": 1,
+            "fix_wt": 1.5,
+            "con_wt": 1.0,
+            "zero_wt": 10.0,
+            "viol_wt": 1.0,
+            "mfn_wt": 0.01,
+            "objmin": 0.00005,
+            "del": 1.0,
+            "delmin": 0.0001,
+            "tol": 0.0001,
+            "smallnum": 1.0e-07
+        }
     };
 
 module.exports = initialState;

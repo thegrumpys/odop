@@ -12,7 +12,8 @@ class FilePreferences extends React.Component {
         this.onChange = this.onChange.bind(this);
         this.onRestoreDefaults = this.onRestoreDefaults.bind(this);
         this.onApplyandClose = this.onApplyandClose.bind(this);
-        // Initialze modal flag off and initialize the props.system_controls to either the state.system_controls or the initialState
+        // Initialze modal flag off 
+        // Initialize the state.system_controls to the props.system_controls
         this.state = {
             modal: false,
             system_controls: this.props.system_controls
@@ -20,7 +21,8 @@ class FilePreferences extends React.Component {
     }
     
     toggle() {
-        // Update modal flag and copy the props.system_controls into the state.system_controls
+        // Open the modal
+        // Copy the props.system_controls into the state.system_controls
         this.setState({
             modal: !this.state.modal,
             system_controls: this.props.system_controls
@@ -29,20 +31,12 @@ class FilePreferences extends React.Component {
     
     onChange(name, value) {
         // Save the value into the state.system_controls
-        this.state.system_controls.forEach((system_control, index) => {
-            if (system_control.name === name) {
-                this.setState(
-                    Object.assign({}, this.state.system_controls, {
-                        system_controls: this.state.system_controls.map((system_control) => {
-                            if (system_control.name === name) {
-                                return Object.assign({}, system_control, {
-                                    value: value
-                                });
-                            }
-                            return system_control;
-                        })
-                    })
-                );
+        // You cannot convert to floating point here, 
+        // because exponent without a following value causes a parse error, e.g., '1.2e'
+        this.setState({
+            system_controls: {
+                ...this.state.system_controls,
+                [name] : value
             }
         });
     }
@@ -55,12 +49,18 @@ class FilePreferences extends React.Component {
     }
     
     onApplyandClose() {
-        // Close modal
+        // Close the modal
         this.setState({
             modal: !this.state.modal
         });
-        // Copy the state.system_controls into the props.system_controls
-        this.props.changeSystemControlsValues(this.state.system_controls);
+        // Make local copy and convert all string values to floating point values
+        // We assume that all values are to be converted to floating point values
+        var copy = Object.assign({}, this.state.system_controls);
+        Object.entries(copy).forEach(([key,value]) => {
+            copy[key] = parseFloat(value);
+        });
+        // Copy the updated local copy into the props.system_controls
+        this.props.changeSystemControlsValues(copy);
     }
 
     render() {
@@ -78,17 +78,16 @@ class FilePreferences extends React.Component {
                                 <Col className="text-right font-weight-bold">Value</Col>
                             </Row>
                             {
-                                this.state.system_controls.map(
-                                    (system_control) => {
-                                        return (
-                                            <Row key={system_control.name}>
-                                                <Col className="align-middle text-left">{system_control.name}</Col>
-                                                <Col className="align-middle text-right">
-                                                    <Input className="text-right" type="number" value={system_control.value} onChange={(event) => {this.onChange(system_control.name, event.target.value)}}/>
-                                                </Col>
-                                            </Row>
-                                        );
-                                    })
+                                Object.keys(this.state.system_controls).map((property_name) => {
+                                    return (
+                                        <Row key={property_name}>
+                                            <Col className="align-middle text-left">{property_name}</Col>
+                                            <Col className="align-middle text-right">
+                                                <Input className="text-right" type="number" value={this.state.system_controls[property_name]} onChange={(event) => {this.onChange(property_name, event.target.value)}}/>
+                                            </Col>
+                                        </Row>
+                                    );
+                                })
                             }
                         </Container>
                     </ModalBody>

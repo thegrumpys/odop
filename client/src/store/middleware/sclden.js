@@ -1,23 +1,22 @@
 import { FIXED } from '../actionTypes';
-import { FIX_WT, CON_WT, ZERO_WT, SMALLNUM } from '../globals';
 
-export function sclden(value, level, sdlimit, flags) {
+export function sclden(system_controls, value, level, sdlimit, flags) {
     var result;
     if (flags & FIXED) {
-        result = (1.0 / FIX_WT) * Math.abs(level);
-        if (result < SMALLNUM) {
-            result = (1.0 / FIX_WT) * Math.abs(value);
+        result = (1.0 / system_controls.fix_wt) * Math.abs(level);
+        if (result < system_controls.smallnum) {
+            result = (1.0 / system_controls.fix_wt) * Math.abs(value);
         }
-        if (result < SMALLNUM) {
-            result = 1.0 / (FIX_WT * ZERO_WT);
+        if (result < system_controls.smallnum) {
+            result = 1.0 / (system_controls.fix_wt * system_controls.zero_wt);
         }
     } else {
-        result = (1.0 / CON_WT) * Math.abs(level);
-        if (result < SMALLNUM) {
-            result = (1.0 / CON_WT) * Math.abs(value);
+        result = (1.0 / system_controls.con_wt) * Math.abs(level);
+        if (result < system_controls.smallnum) {
+            result = (1.0 / system_controls.con_wt) * Math.abs(value);
         }
-        if (result < SMALLNUM) {
-            result = 1.0 / ZERO_WT;
+        if (result < system_controls.smallnum) {
+            result = 1.0 / system_controls.con_wt;
         }
     }
     if (result < sdlimit) {
