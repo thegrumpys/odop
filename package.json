@@ -4,14 +4,11 @@
   "description": "Piston-Cylinder problem - Web Interface Server",
   "main": "server.js",
   "scripts": {
-    "start": "npm run build && node ./build/server.js",
-    "server": "nodemon ./src/server.js --exec babel-node",
-    "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build ./src -s",
-    "build": "npm run clean && npm run build-babel",
+    "start": "node server.js",
+    "server": "nodemon server.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "test": "npm run build && mocha --timeout 10000 --recursive ./build",
-    "coverage": "npm run build && istanbul cover node_modules/mocha/bin/_mocha --- --timeout 10000 --recursive ./build",
+    "test": "mocha --timeout 10000",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha --- --timeout 10000",
     "showcoverage": "open coverage/lcov-report/index.html"
   },
   "repository": {
@@ -25,7 +22,6 @@
   },
   "homepage": "https://pcyl-web.herokuapp.com/",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "istanbul": "^0.4.5",
@@ -33,7 +29,6 @@
     "nodemon": "^1.18.3"
   },
   "dependencies": {
-    "babel-preset-env": "^1.7.0",
     "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",

@@ -174,8 +174,8 @@ describe('Designs with non-empty DB', () => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.have.property('name').eql('test');
-                    res.body.should.have.property('type').eql('Piston-Cylinder');
-                    res.body.should.have.property('version').eql('1.2');
+                    res.body.should.have.property('type').eql('Test-Design');
+                    res.body.should.have.property('version').eql('0.0');
                     done(err);
                 });
         });
