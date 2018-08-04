@@ -2,7 +2,6 @@ import { MIN, MAX, CONSTRAINED, FIXED } from '../actionTypes';
 import { changeDesignParameterViolation,
     changeStateVariableViolation, 
     changeResultObjectiveValue, changeResultViolatedConstraintCount } from '../actionCreators';
-import { VIOL_WT } from '../globals';
 
 // Update Violations and Objective Value
 export function updateViolationsAndObjectiveValue(store, merit) {
@@ -79,8 +78,8 @@ export function updateViolationsAndObjectiveValue(store, merit) {
             }
             if (vmax > 0.0) {
                 viol_sum = viol_sum + vmax * vmax;
-            }
         }
+    }
     }
     
     /* Merit Function */
@@ -91,7 +90,7 @@ export function updateViolationsAndObjectiveValue(store, merit) {
     }
     
     // Update Objective Value
-    obj = VIOL_WT * viol_sum + m_funct;
+    obj = design.system_controls.viol_wt * viol_sum + m_funct;
     store.dispatch(changeResultObjectiveValue(obj));
     
     // Update Violated Constraint Count, which becomes Feasibility on the UI

@@ -1,14 +1,13 @@
 import React from 'react';
 import { Row, Col, Table } from 'reactstrap';
 import { connect } from 'react-redux';
-import { OBJMIN } from '../store/globals';
 
 class ResultTable extends React.Component {
     
     render() {
         var feasibility_string;
         var feasibility_class;
-        if (this.props.objective_value > OBJMIN) {
+        if (this.props.objective_value > this.props.system_controls.objmin) {
             feasibility_string = "NOT FEASIBLE";
             feasibility_class = "text-right text-danger font-weight-bold";
         } else {
@@ -32,7 +31,7 @@ class ResultTable extends React.Component {
                         <tbody>
                             <tr>
                                 <th>OBJMIN:</th>
-                                <td className="text-right">{OBJMIN.toFixed(6)}</td>
+                                <td className="text-right">{this.props.system_controls.objmin.toFixed(6)}</td>
                             </tr>
                             <tr>
                                 <th>Objective Value:</th>
@@ -60,6 +59,7 @@ class ResultTable extends React.Component {
 }
 
 const mapStateToProps = state => ({
+    system_controls: state.system_controls,
     objective_value: state.result.objective_value,
     termination_condition: state.result.termination_condition,
     violated_constraint_count: state.result.violated_constraint_count

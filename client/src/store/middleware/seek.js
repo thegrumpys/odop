@@ -1,4 +1,3 @@
-import { OBJMIN, SMALLNUM, MFN_WT } from '../globals';
 import { MAX, FIXED } from '../actionTypes';
 import { saveDesignParameterValues, restoreDesignParameterValues, changeResultTerminationCondition } from '../actionCreators';
 import { search } from './search';
@@ -56,8 +55,8 @@ export function seek(store, action) {
         }
     }
     M_NUM = temp + 0.1 * SDIR * temp;
-    M_DEN = Math.abs(M_NUM) / MFN_WT;
-    if (M_DEN < SMALLNUM) {
+    M_DEN = Math.abs(M_NUM) / design.system_controls.mfn_wt;
+    if (M_DEN < design.system_controls.smallnum) {
         M_DEN = 1.0;
     }
     store.dispatch(saveDesignParameterValues());
@@ -68,8 +67,8 @@ export function seek(store, action) {
     } else {
         M_NUM = design.state_variables[-SOUGHT - 1].value;
     }
-    M_DEN = Math.abs(M_NUM) / MFN_WT;
-    if (M_DEN < SMALLNUM) {
+    M_DEN = Math.abs(M_NUM) / design.system_controls.mfn_wt;
+    if (M_DEN < design.system_controls.smallnum) {
         M_DEN = 1.0;
     }
     p = [];
@@ -79,18 +78,18 @@ export function seek(store, action) {
     }
     despak(p, store);
     design = store.getState(); // Re-access store to get latest dp and sv values
-    if (design.result.objective_value < OBJMIN) {
+    if (design.result.objective_value < design.system_controls.objmin) {
         store.dispatch(restoreDesignParameterValues());
         design = store.getState(); // Re-access store to get latest dp and sv values
     } else {
-        search(store, OBJMIN);
+        search(store, design.system_controls.objmin);
         design = store.getState(); // Re-access store to get latest dp and sv values
     }
-    M_DEN = Math.abs(M_NUM) / MFN_WT;
-    if (M_DEN < SMALLNUM) {
+    M_DEN = Math.abs(M_NUM) / design.system_controls.mfn_wt;
+    if (M_DEN < design.system_controls.smallnum) {
         M_DEN = 1.0;
     }
-    search(store, OBJMIN, merit);
+    search(store, design.system_controls.objmin, merit);
     design = store.getState(); // Re-access store to get latest dp and sv values
     if (design.result.objective_value < 0.0) {
         ncode = 'SEEK SHOULD BE RE-EXECUTED WITH A NEW ESTIMATE OF THE OPTIMUM';
