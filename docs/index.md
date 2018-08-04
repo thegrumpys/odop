@@ -2,6 +2,7 @@
 
 ## About
 * [Introduction](About/Intro)
+* [Experimental Software](About/experimental)
 * [Notice](About/Legal/Disclaimer)
 * [Restrictions](About/Legal/Restrictions)
 * [Terms of Service](About/Legal/TermsOfService)
@@ -12,8 +13,8 @@
 * [Introduction](Help/introduction)
 * [Features](Help/features)
 * [Terminology](Help/terminology)
-* [Search](search)
-* [Seek](seek)
+* [Search](Help/search)
+* [Seek](Help/seek)
 
 
 ## Design
