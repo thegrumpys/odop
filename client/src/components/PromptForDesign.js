@@ -114,10 +114,11 @@ export class PromptForDesign extends React.Component {
             <React.Fragment>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>
-                    <img src="favicon.ico" alt="The Grumpys"/> &nbsp; Open Design Optimization : Platform<br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Piston - Cylinder Design Problem</ModalHeader>
+                    <img src="favicon.ico" alt="The Grumpys"/> &nbsp; Open Design Optimization Platform<br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Piston - Cylinder Design Problem</ModalHeader>
                     <ModalBody>
-                        <br />
-                        <Label for="fileOpenSelect">PCyl-Web is experimental software.<br />See the Help : About menu for details.<br /><br />Select design to open:</Label>
+                        Experimental software: <a href="https://thegrumpys.github.io/pcyl-web/About/" target="_blank" rel="noopener noreferrer">See details</a>
+                        <br /><br />
+                        <Label for="fileOpenSelect">Select design to open:</Label>
                         <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
                             {designs.map((design, index) =>
                                 <option key={index} value={design}>{design}</option>
