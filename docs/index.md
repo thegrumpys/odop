@@ -26,6 +26,7 @@
 * [System Control variables and multi-user operation](design/SysControls)
 * [Idea for a simple showcase problem](design/GeometricSolidsProblem)
 * [Idea for a Refine Search feature](design/RefineSearchFeature)
+* [AutoSave feature](About/AutoSaveFeature)
 
 
 ## Procedures
