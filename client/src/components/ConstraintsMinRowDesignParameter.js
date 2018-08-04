@@ -1,43 +1,28 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
+import { MIN, FIXED, CONSTRAINED } from '../store/actionTypes';
 import { changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag } from '../store/actionCreators';
 
 class ConstraintMinRowDesignParameter extends React.Component {
     
     constructor(props) {
         super(props);
-        this.onChangeDesignParameterConstraintMin = this.onChangeDesignParameterConstraintMin.bind(this);
-        this.onSetDesignParameterFlagConstrainedMin = this.onSetDesignParameterFlagConstrainedMin.bind(this)
-        this.onResetDesignParameterFlagConstrainedMin = this.onResetDesignParameterFlagConstrainedMin.bind(this)
-        this.onChangeDesignParameterConstraintMax = this.onChangeDesignParameterConstraintMax.bind(this);
-        this.onSetDesignParameterFlagConstrainedMax = this.onSetDesignParameterFlagConstrainedMax.bind(this)
-        this.onResetDesignParameterFlagConstrainedMax = this.onResetDesignParameterFlagConstrainedMax.bind(this)
+        this.onChangeDesignParameterConstraint = this.onChangeDesignParameterConstraint.bind(this);
+        this.onSetDesignParameterFlagConstrained = this.onSetDesignParameterFlagConstrained.bind(this)
+        this.onResetDesignParameterFlagConstrained = this.onResetDesignParameterFlagConstrained.bind(this)
     }
     
-    onSetDesignParameterFlagConstrainedMin(event) {
+    onSetDesignParameterFlagConstrained(event) {
         this.props.setDesignParameterFlag(this.props.design_parameter.name, MIN, CONSTRAINED);
     }
     
-    onResetDesignParameterFlagConstrainedMin(event) {
+    onResetDesignParameterFlagConstrained(event) {
         this.props.resetDesignParameterFlag(this.props.design_parameter.name, MIN, CONSTRAINED);
     }
     
-    onChangeDesignParameterConstraintMin(event) {
+    onChangeDesignParameterConstraint(event) {
         this.props.changeDesignParameterConstraint(this.props.design_parameter.name, MIN, parseFloat(event.target.value));
-    }
-    
-    onSetDesignParameterFlagConstrainedMax(event) {
-        this.props.setDesignParameterFlag(this.props.design_parameter.name, MAX, CONSTRAINED);
-    }
-    
-    onResetDesignParameterFlagConstrainedMax(event) {
-        this.props.resetDesignParameterFlag(this.props.design_parameter.name, MAX, CONSTRAINED);
-    }
-    
-    onChangeDesignParameterConstraintMax(event) {
-        this.props.changeDesignParameterConstraint(this.props.design_parameter.name, MAX, parseFloat(event.target.value));
     }
     
     render() {
@@ -50,51 +35,25 @@ class ConstraintMinRowDesignParameter extends React.Component {
         } else {
             cmin_class = (this.props.design_parameter.lmin & CONSTRAINED && this.props.design_parameter.vmin > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
         }
-        var cmin;
-        if (this.props.design_parameter.lmin & FIXED) {
-            cmin = <div/>;
-        } else if (this.props.design_parameter.lmin & CONSTRAINED) {
-            cmin = (
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.design_parameter.lmin & CONSTRAINED} onChange={this.onResetDesignParameterFlagConstrainedMin} />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input className={cmin_class} type="number" value={this.props.design_parameter.cmin} onChange={this.onChangeDesignParameterConstraintMin} />
-              </InputGroup>
-            );
-        } else {
-            cmin = (
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.design_parameter.lmin & CONSTRAINED} onChange={this.onSetDesignParameterFlagConstrainedMin} />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <div/>
-              </InputGroup>
-            );
-        }
-        // =======================================
-        // Constraint Violation Minimum Column
-        // =======================================
-        var vmin;
-        if (this.props.design_parameter.lmin & FIXED) {
-            vmin = '';
-        } else if (this.props.design_parameter.lmin & CONSTRAINED) {
-            vmin = (this.props.design_parameter.vmin*100.0).toFixed(1) + '%';
-        } else {
-            vmin = '';
-        }
         // =======================================
         // Table Row
         // =======================================
         return (
-                <tr key={this.props.design_parameter.name}>
-                    <td className="align-middle" colSpan="2">{cmin}</td>
-                    <td className="text-right align-middle" colSpan="1">{vmin}</td>
-                </tr>
+            <tr key={this.props.design_parameter.name}>
+                <td className="align-middle" colSpan="2">
+                    <InputGroup>
+                        <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                                <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.design_parameter.lmin & CONSTRAINED} onChange={this.props.design_parameter.lmin & CONSTRAINED ? this.onResetDesignParameterFlagConstrained : this.onSetDesignParameterFlagConstrained} disabled={this.props.design_parameter.lmin & FIXED ? true : false} />
+                            </InputGroupText>
+                        </InputGroupAddon>
+                        <Input className={cmin_class} type="number" value={this.props.design_parameter.cmin} onChange={this.onChangeDesignParameterConstraint} disabled={this.props.design_parameter.lmin & FIXED ? true : (this.props.design_parameter.lmin & CONSTRAINED ? false : true)} />
+                    </InputGroup>
+                </td>
+                <td className="text-right align-middle" colSpan="1">
+                    {this.props.design_parameter.lmin & FIXED ? '' : (this.props.design_parameter.lmin & CONSTRAINED ? (this.props.design_parameter.vmin*100.0).toFixed(1) + '%' : '')}
+                </td>
+            </tr>
         );
     }
 }
