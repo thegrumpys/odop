@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Container, Row, Col, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { initialState } from '../../initialState';
+import { initialState } from '../../problems/Piston-Cylinder/initialState';
 import { changeSystemControlsValues } from '../../store/actionCreators';
 
 class FilePreferences extends React.Component {

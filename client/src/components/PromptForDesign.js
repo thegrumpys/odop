@@ -4,7 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
-import { initialState } from '../initialState';
+import { initialState } from '../problems/Piston-Cylinder/initialState';
 import App from './App';
 import { displaySpinner } from './Spinner';
 import { displayError } from './ErrorModal';

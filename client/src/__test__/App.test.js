@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
-import { initialState } from '../initialState';
+import { initialState } from '../problems/Piston-Cylinder/initialState';
 import App from '../components/App';
 import { startup, changeDesignParameterValue } from '../store/actionCreators';
 import { pcylWebApp } from '../store/reducers';
