@@ -8,41 +8,23 @@ class ConstraintsMinRowStateVariable extends React.Component {
     
     constructor(props) {
         super(props);
-        this.onChangeStateVariableConstraintMin = this.onChangeStateVariableConstraintMin.bind(this);
-        this.onSetStateVariableFlagConstrainedMin = this.onSetStateVariableFlagConstrainedMin.bind(this)
-        this.onResetStateVariableFlagConstrainedMin = this.onResetStateVariableFlagConstrainedMin.bind(this)
-        this.onChangeStateVariableConstraintMax = this.onChangeStateVariableConstraintMax.bind(this);
-        this.onSetStateVariableFlagConstrainedMax = this.onSetStateVariableFlagConstrainedMax.bind(this)
-        this.onResetStateVariableFlagConstrainedMax = this.onResetStateVariableFlagConstrainedMax.bind(this)
+        this.onChangeStateVariableConstraint = this.onChangeStateVariableConstraint.bind(this);
+        this.onSetStateVariableFlagConstrained = this.onSetStateVariableFlagConstrained.bind(this)
+        this.onResetStateVariableFlagConstrained = this.onResetStateVariableFlagConstrained.bind(this)
     }
     
-    onSetStateVariableFlagConstrainedMin(event) {
+    onSetStateVariableFlagConstrained(event) {
         this.props.setStateVariableFlag(this.props.state_variable.name, MIN, CONSTRAINED);
     }
     
-    onResetStateVariableFlagConstrainedMin(event) {
+    onResetStateVariableFlagConstrained(event) {
         this.props.resetStateVariableFlag(this.props.state_variable.name, MIN, CONSTRAINED);
     }
     
-    onChangeStateVariableConstraintMin(event) {
+    onChangeStateVariableConstraint(event) {
         this.props.changeStateVariableConstraint(this.props.state_variable.name, MIN, parseFloat(event.target.value));
         if (this.props.state_variable.lmin & FIXED) {
             this.props.changeStateVariableConstraint(this.props.state_variable.name, MAX, parseFloat(event.target.value));
-        }
-    }
-    
-    onSetStateVariableFlagConstrainedMax(event) {
-        this.props.setStateVariableFlag(this.props.state_variable.name, MAX, CONSTRAINED);
-    }
-    
-    onResetStateVariableFlagConstrainedMax(event) {
-        this.props.resetStateVariableFlag(this.props.state_variable.name, MAX, CONSTRAINED);
-    }
-    
-    onChangeStateVariableConstraintMax(event) {
-        this.props.changeStateVariableConstraint(this.props.state_variable.name, MAX, parseFloat(event.target.value));
-        if (this.props.state_variable.lmin & FIXED) {
-            this.props.changeStateVariableConstraint(this.props.state_variable.name, MIN, parseFloat(event.target.value));
         }
     }
     
@@ -60,47 +42,25 @@ class ConstraintsMinRowStateVariable extends React.Component {
                 cmin_class = (this.props.state_variable.lmin & CONSTRAINED && this.props.state_variable.vmin > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
             }
         }
-        var cmin;
-        if (this.props.state_variable.lmin & FIXED || this.props.state_variable.lmin & CONSTRAINED) {
-            cmin = (
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.state_variable.lmin & CONSTRAINED} onChange={this.onResetStateVariableFlagConstrainedMin} />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input className={cmin_class} type="number" value={this.props.state_variable.cmin} onChange={this.onChangeStateVariableConstraintMin} />
-              </InputGroup>
-            );
-        } else {
-            cmin = (
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.state_variable.lmin & CONSTRAINED} onChange={this.onSetStateVariableFlagConstrainedMin} />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <div/>
-              </InputGroup>
-            );
-        }
-        // =======================================
-        // Constraint Violation Minimum Column
-        // =======================================
-        var vmin;
-        if (this.props.state_variable.lmin & FIXED || this.props.state_variable.lmin & CONSTRAINED) {
-            vmin = (this.props.state_variable.vmin*100.0).toFixed(1) + '%';
-        } else {
-            vmin = '';
-        }
         // =======================================
         // Table Row
         // =======================================
         return (
-                <tr key={this.props.state_variable.name}>
-                    <td className="align-middle" colSpan="2">{cmin}</td>
-                    <td className="text-right align-middle" colSpan="1">{vmin}</td>
-                </tr>
+            <tr key={this.props.state_variable.name}>
+                <td className="align-middle" colSpan="2">
+                    <InputGroup>
+                        <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                                <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.state_variable.lmin & CONSTRAINED} onChange={this.props.state_variable.lmin & CONSTRAINED ? this.onResetStateVariableFlagConstrained : this.onSetStateVariableFlagConstrained} disabled={this.props.state_variable.lmin & FIXED ? true : false} />
+                            </InputGroupText>
+                        </InputGroupAddon>
+                        <Input className={cmin_class} type="number" value={this.props.state_variable.cmin} onChange={this.onChangeStateVariableConstraint} disabled={this.props.state_variable.lmin & FIXED ? true : (this.props.state_variable.lmin & CONSTRAINED ? false : true)} />
+                    </InputGroup>
+                </td>
+                <td className="text-right align-middle" colSpan="1">
+                    {this.props.state_variable.lmin & FIXED ? '' : (this.props.state_variable.lmin & CONSTRAINED ? (this.props.state_variable.vmin*100.0).toFixed(1) + '%' : '')}
+                </td>
+            </tr>
         );
     }
 }
