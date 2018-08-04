@@ -24,6 +24,7 @@ import FileSave from '../menus/File/FileSave';
 import FileSaveAs from '../menus/File/FileSaveAs';
 import FileDelete from '../menus/File/FileDelete';
 import FilePreferences from '../menus/File/FilePreferences';
+import FileProperties from '../menus/File/FileProperties';
 import ActionSearch from '../menus/Action/ActionSearch';
 import ActionSeek from '../menus/Action/ActionSeek';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
@@ -71,6 +72,7 @@ class App extends Component {
                                     </DropdownItem>
                                     <DropdownItem divider />
                                     <FilePreferences/>
+                                    <FileProperties/>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav inNavbar>

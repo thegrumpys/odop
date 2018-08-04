@@ -22,7 +22,8 @@ import { STARTUP,
     CHANGE_RESULT_TERMINATION_CONDITION, 
     CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT, 
     
-    CHANGE_SYSTEM_CONTROL_VALUES, 
+    CHANGE_SYSTEM_CONTROLS_VALUE, 
+    CHANGE_LABELS_VALUE, 
     SEARCH, 
     SEEK, 
     
@@ -273,10 +274,15 @@ export function reducers(state, action) {
                 violated_constraint_count: action.payload.violated_constraint_count
             }
         }
-    case CHANGE_SYSTEM_CONTROL_VALUES:
+    case CHANGE_SYSTEM_CONTROLS_VALUE:
         return {
             ...state,
             system_controls: action.payload.system_controls
+        }
+    case CHANGE_LABELS_VALUE:
+        return {
+            ...state,
+            labels: action.payload.labels
         }
     case SEARCH:
         return state;
