@@ -32,18 +32,3 @@ export const MAX = 'MAX';
 
 export const CONSTRAINED = 1;
 export const FIXED = 2;
-
-export const IOOPT = 'IOOPT';
-export const MAXIT = 'MAXIT';
-export const WEAPON = 'WEAPON';
-export const NMERIT = 'NMERIT';
-export const FIX_WT = 'FIX_WT';
-export const CON_WT = 'CON_WT';
-export const ZERO_WT = 'ZERO_WT';
-export const VIOL_WT = 'VIOL_WT';
-export const MFN_WT = 'MFN_WT';
-export const OBJMIN = 'OBJMIN';
-export const DEL = 'DEL';
-export const DELMIN = 'DELMIN';
-export const TOL = 'TOL';
-export const SMALLNUM = 'SMALLNUM';

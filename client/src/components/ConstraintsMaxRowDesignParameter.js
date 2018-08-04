@@ -3,7 +3,6 @@ import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
 import { changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag } from '../store/actionCreators';
-import { OBJMIN } from '../store/globals';
 
 class ConstraintMaxRowDesignParameter extends React.Component {
     
@@ -46,7 +45,7 @@ class ConstraintMaxRowDesignParameter extends React.Component {
         // Constraint Maximum Column
         // =======================================
         var cmax_class;
-        if (this.props.objective_value < OBJMIN) {
+        if (this.props.objective_value < this.props.system_controls.objmin) {
             cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'text-low-danger text-right border-low-danger' : 'text-right';
         } else {
             cmax_class = (this.props.design_parameter.lmax & CONSTRAINED && this.props.design_parameter.vmax > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
@@ -100,10 +99,14 @@ class ConstraintMaxRowDesignParameter extends React.Component {
     }
 }
 
+const mapStateToProps = state => ({
+    system_controls: state.system_controls
+});
+
 const mapDispatchToProps = {
-        changeDesignParameterConstraint: changeDesignParameterConstraint,
-        setDesignParameterFlag: setDesignParameterFlag,
-        resetDesignParameterFlag: resetDesignParameterFlag
+    changeDesignParameterConstraint: changeDesignParameterConstraint,
+    setDesignParameterFlag: setDesignParameterFlag,
+    resetDesignParameterFlag: resetDesignParameterFlag
 };
 
-export default connect(null, mapDispatchToProps)(ConstraintMaxRowDesignParameter);
+export default connect(mapStateToProps, mapDispatchToProps)(ConstraintMaxRowDesignParameter);

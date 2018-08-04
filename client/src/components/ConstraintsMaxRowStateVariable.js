@@ -3,7 +3,6 @@ import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
 import { changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from '../store/actionCreators';
-import { OBJMIN } from '../store/globals';
 
 class ConstraintsMaxRowStateVariable extends React.Component {
     
@@ -55,7 +54,7 @@ class ConstraintsMaxRowStateVariable extends React.Component {
         if (this.props.state_variable.lmin & FIXED) {
             cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-info text-right font-weight-bold border border-info' : 'text-right';
         } else {
-            if (this.props.objective_value < OBJMIN) {
+            if (this.props.objective_value < this.props.system_controls.objmin) {
                 cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-low-danger text-right border-low-danger' : 'text-right';
             } else {
                 cmax_class = (this.props.state_variable.lmax & CONSTRAINED && this.props.state_variable.vmax > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
@@ -106,13 +105,16 @@ class ConstraintsMaxRowStateVariable extends React.Component {
     }
 }
 
+const mapStateToProps = state => ({
+    system_controls: state.system_controls
+});
 
 const mapDispatchToStateVariableProps = {
-        changeStateVariableConstraint: changeStateVariableConstraint,
-        saveStateVariableConstraints: saveStateVariableConstraints,
-        restoreStateVariableConstraints: restoreStateVariableConstraints,
-        setStateVariableFlag: setStateVariableFlag,
-        resetStateVariableFlag: resetStateVariableFlag
+    changeStateVariableConstraint: changeStateVariableConstraint,
+    saveStateVariableConstraints: saveStateVariableConstraints,
+    restoreStateVariableConstraints: restoreStateVariableConstraints,
+    setStateVariableFlag: setStateVariableFlag,
+    resetStateVariableFlag: resetStateVariableFlag
 };
 
-export default connect(null, mapDispatchToStateVariableProps)(ConstraintsMaxRowStateVariable);
+export default connect(mapStateToProps, mapDispatchToStateVariableProps)(ConstraintsMaxRowStateVariable);

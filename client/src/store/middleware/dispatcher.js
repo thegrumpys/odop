@@ -13,7 +13,6 @@ import { STARTUP,
     
     SEARCH, 
     SEEK } from '../actionTypes';
-import { OBJMIN } from '../globals';
 import { startup } from './startup';
 import { search } from './search';
 import { seek } from './seek';
@@ -62,7 +61,8 @@ export const dispatcher = store => next => action => {
         updateViolationsAndObjectiveValue(store);
         break;
     case SEARCH:
-        search(store, OBJMIN);
+        var design = store.getState();
+        search(store, design.system_controls.objmin);
         break;
     case SEEK:
         seek(store, action);
