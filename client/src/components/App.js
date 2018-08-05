@@ -23,6 +23,7 @@ import FileOpen from '../menus/File/FileOpen';
 import FileSave from '../menus/File/FileSave';
 import FileSaveAs from '../menus/File/FileSaveAs';
 import FileDelete from '../menus/File/FileDelete';
+import FileRecent from '../menus/File/FileRecent';
 import FilePreferences from '../menus/File/FilePreferences';
 import FileProperties from '../menus/File/FileProperties';
 import ActionSearch from '../menus/Action/ActionSearch';
@@ -67,12 +68,10 @@ class App extends Component {
                                     <FileSaveAs />
                                     <FileDelete />
                                     <DropdownItem divider />
-                                    <DropdownItem>
-                                        Recent Designs
-                                    </DropdownItem>
+                                    <FileRecent />
                                     <DropdownItem divider />
-                                    <FilePreferences/>
-                                    <FileProperties/>
+                                    <FilePreferences />
+                                    <FileProperties />
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav inNavbar>
@@ -80,8 +79,8 @@ class App extends Component {
                                     Action
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    <ActionSearch/>
-                                    <ActionSeek/>
+                                    <ActionSearch />
+                                    <ActionSeek />
                                     <DropdownItem>
                                         Trade
                                     </DropdownItem>
