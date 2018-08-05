@@ -1,5 +1,5 @@
 const initialState = {
-        "name": "initialState",
+        "name": "test",
         "type": "Test-Design",
         "version": "0.0"
     };
