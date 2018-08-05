@@ -115,7 +115,7 @@ class FileDelete extends React.Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onDelete}>Delete</Button>
+                        <Button color="primary" onClick={this.onDelete} disabled={designs.length === 1 && designs[0] === 'startup' ? true : false}>Delete</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
