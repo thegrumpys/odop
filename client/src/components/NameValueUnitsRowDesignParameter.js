@@ -36,7 +36,7 @@ class NameValueUnitsRowDesignParameter extends React.Component {
                 <td className="align-middle" colSpan="2">{this.props.design_parameter.name}</td>
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
-                        <span className="text-right form-control bg-light">{this.props.design_parameter.value.toFixed(4)}</span>
+                        <Input className="text-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />
                         <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.design_parameter.lmin & FIXED} onChange={this.props.design_parameter.lmin & FIXED ? this.onResetDesignParameterFlag : this.onSetDesignParameterFlag} />

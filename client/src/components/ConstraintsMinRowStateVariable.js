@@ -54,7 +54,7 @@ class ConstraintsMinRowStateVariable extends React.Component {
                                 <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.state_variable.lmin & CONSTRAINED} onChange={this.props.state_variable.lmin & CONSTRAINED ? this.onResetStateVariableFlagConstrained : this.onSetStateVariableFlagConstrained} disabled={this.props.state_variable.lmin & FIXED ? true : false} />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <Input className={cmin_class} type="number" value={this.props.state_variable.cmin} onChange={this.onChangeStateVariableConstraint} disabled={this.props.state_variable.lmin & FIXED ? true : (this.props.state_variable.lmin & CONSTRAINED ? false : true)} />
+                        <Input className={cmin_class} type="number" value={this.props.state_variable.cmin} onChange={this.onChangeStateVariableConstraint} disabled={this.props.state_variable.lmin & FIXED || this.props.state_variable.lmin & CONSTRAINED ? false : true} />
                     </InputGroup>
                 </td>
                 <td className="text-right align-middle" colSpan="1">

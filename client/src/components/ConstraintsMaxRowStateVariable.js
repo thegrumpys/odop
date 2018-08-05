@@ -54,7 +54,7 @@ class ConstraintsMaxRowStateVariable extends React.Component {
                                 <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.state_variable.lmax & CONSTRAINED} onChange={this.props.state_variable.lmax & CONSTRAINED ? this.onResetStateVariableFlagConstrained : this.onSetStateVariableFlagConstrained} disabled={this.props.state_variable.lmax & FIXED ? true : false} />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <Input className={cmax_class} type="number" value={this.props.state_variable.cmax} onChange={this.onChangeStateVariableConstraint} disabled={this.props.state_variable.lmax & FIXED ? true : (this.props.state_variable.lmax & CONSTRAINED ? false : true)} />
+                        <Input className={cmax_class} type="number" value={this.props.state_variable.cmax} onChange={this.onChangeStateVariableConstraint} disabled={this.props.state_variable.lmin & FIXED || this.props.state_variable.lmax & CONSTRAINED ? false : true} />
                     </InputGroup>
                 </td>
                 <td className="text-right align-middle" colSpan="1">
