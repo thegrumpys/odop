@@ -77,9 +77,7 @@ export class PromptForDesign extends React.Component {
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
             })
             .catch(error => {
-                displayError('GET of \'startup\' design failed with message: \''+error.message+'\'. Using builtin initialState instead. You may continue in "demo mode" but you will be unable to save your work.');
-                const store = createStore(reducers, initialState, middleware);
-                ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
+                displayError('GET of \''+name+'\' design failed: '+error.message);
             });
     }
 
