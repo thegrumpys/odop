@@ -79,7 +79,7 @@ class FileProperties extends React.Component {
                                             <Row key={label.name}>
                                                 <Col className="align-middle text-left">{label.name}</Col>
                                                 <Col className="align-middle text-left">
-                                                    <Input type="text" value={label.value} onChange={(event) => {this.onChange(label.name, event.target.value)}}/>
+                                                    <Input className="input-group-lg" type="textarea" value={label.value} onChange={(event) => {this.onChange(label.name, event.target.value)}}/>
                                                 </Col>
                                             </Row>
                                         );
