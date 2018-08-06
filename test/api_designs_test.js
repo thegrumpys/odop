@@ -145,6 +145,19 @@ describe('Designs with empty DB', () => {
         });
     });
     
+    describe('DELETE /api/v1/designs/startup with non-empty DB', () => {
+        it('it should fail DELETE with 400 BAD REQUEST, because name is startup', (done) => {
+            var name = 'startup';
+            chai.request(server)
+                .delete('/api/v1/designs/'+name)
+                .end((err, res) => {
+//                    console.log('TEST: err=', err);
+                    res.should.have.status(400);
+                    done(err);
+                });
+        });
+    });
+    
 });
 
 describe('Designs with non-empty DB', () => {
@@ -255,6 +268,19 @@ describe('Designs with non-empty DB', () => {
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
+                    done(err);
+                });
+        });
+    });
+    
+    describe('DELETE /api/v1/designs/startup with non-empty DB', () => {
+        it('it should fail DELETE with 400 BAD REQUEST, because name is startup', (done) => {
+            var name = 'startup';
+            chai.request(server)
+                .delete('/api/v1/designs/'+name)
+                .end((err, res) => {
+//                    console.log('TEST: err=', err);
+                    res.should.have.status(400);
                     done(err);
                 });
         });
