@@ -1,5 +1,12 @@
 require('dotenv').config();
-const initialState = require('./initialState');
+
+// Load testDesign into the design table with name='test' and type='Test-Design'
+// Model this after the deisgn/model used by the client, but without content
+const testDesign = {
+        "name": "test",
+        "type": "Test-Design",
+        "version": "0.0"
+    };
 
 process.env.NODE_ENV = 'test';
 
@@ -99,7 +106,7 @@ describe('Designs with empty DB', () => {
         it('it should POST with 200 OK one design by name', (done) => {
             chai.request(server)
                 .post('/api/v1/designs/test')
-                .send(initialState)
+                .send(testDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
@@ -124,7 +131,7 @@ describe('Designs with empty DB', () => {
         it('it should fail PUT with 404 NOT FOUND, because name does not exist', (done) => {
             chai.request(server)
                 .put('/api/v1/designs/test')
-                .send(initialState)
+                .send(testDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(404);
@@ -170,7 +177,7 @@ describe('Designs with non-empty DB', () => {
         connection.query(stmt, function(err, rows, fields) {
 //            console.log('TEST: After DELETE err=', err, ' rows=', rows);
             if (err) throw err;
-            var copy = Object.assign({},initialState); // Make a copy
+            var copy = Object.assign({},testDesign); // Make a copy
             var name = copy.name; // Get the name from the blob
             var type = copy.type; // Get the type from the blob
             delete copy.name; // Delete the name from the blob
@@ -238,7 +245,7 @@ describe('Designs with non-empty DB', () => {
         it('it should fail POST with 400 BAD REQUEST, because name already exists', (done) => {
             chai.request(server)
                 .post('/api/v1/designs/test')
-                .send(initialState)
+                .send(testDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(400);
@@ -251,7 +258,7 @@ describe('Designs with non-empty DB', () => {
         it('it should PUT with 200 OK one design by name', (done) => {
             chai.request(server)
                 .put('/api/v1/designs/test')
-                .send(initialState)
+                .send(testDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
