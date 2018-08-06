@@ -31,6 +31,7 @@
 * [Idea for a simple showcase problem](design/GeometricSolidsProblem)
 * [Idea for a Refine Search feature](design/RefineSearchFeature)
 * [AutoSave feature](design/AutoSaveFeature)
+* [Idea for a Compare Designs feature](design/CompareDesignsFeature)
 
 
 ## Procedures

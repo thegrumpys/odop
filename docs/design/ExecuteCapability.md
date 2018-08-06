@@ -14,4 +14,4 @@ See:
 Other possibilities include YouTube videos and open source and commercial software.
 See:
 * [iorad the tutorial builder](https://www.iorad.com/ "link to iorad.com")
-* [Candidate React Turorial generator](https://github.com/uptick/react-interactive-tutorials "link to React tutorials on GitHub")
+* [Candidate React Tutorial generator](https://github.com/uptick/react-interactive-tutorials "link to React tutorials on GitHub")
