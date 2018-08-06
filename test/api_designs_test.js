@@ -43,6 +43,20 @@ describe('Designs with empty DB', () => {
         });
     });
     
+    describe('GET /api/v1/designtypes with empty DB', () => {
+        it('it should GET with 200 OK no design types', (done) => {
+            chai.request(server)
+                .get('/api/v1/designtypes')
+                .end((err, res) => {
+//                    console.log('TEST: err=', err);
+                    res.should.have.status(200);
+                    res.body.should.be.a('array');
+                    res.body.length.should.be.eql(0);
+                    done(err);
+                });
+        });
+    });
+    
     describe('GET /api/v1/designs with empty DB', () => {
         it('it should GET with 200 OK no design names', (done) => {
             chai.request(server)
@@ -161,6 +175,21 @@ describe('Designs with non-empty DB', () => {
         });
     });
     
+    describe('GET /api/v1/designtypes with non-empty DB', () => {
+        it('it should GET with 200 OK one design type', (done) => {
+            chai.request(server)
+                .get('/api/v1/designtypes')
+                .end((err, res) => {
+//                    console.log('TEST: err=', err);
+                    res.should.have.status(200);
+                    res.body.should.be.a('array');
+                    res.body.length.should.be.eql(1);
+                    res.body[0].should.be.eql('Test-Design');
+                    done(err);
+                });
+        });
+    });
+    
     describe('GET /api/v1/designs with non-empty DB', () => {
         it('it should GET with 200 OK one design name', (done) => {
             chai.request(server)
@@ -170,6 +199,7 @@ describe('Designs with non-empty DB', () => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
                     res.body.length.should.be.eql(1);
+                    res.body[0].should.be.eql('test');
                     done(err);
                 });
         });

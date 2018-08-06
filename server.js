@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -31,6 +32,29 @@ function startConnection() {
 // 404 — NOT FOUND, The requested resource could not be found
 // 400 — BAD REQUEST, The request was malformed or invalid
 // 500 — INTERNAL SERVER ERROR, Unknown server error has occurred
+
+app.get('/api/v1/designtypes', (req, res) => {
+    var value;
+    console.log('SERVER: ===========================================================');
+    console.log('SERVER: In GET /api/v1/designtypes');
+    var connection = startConnection();
+    var stmt = 'SELECT DISTINCT type FROM design';
+//    console.log('SERVER: stmt='+stmt);
+    connection.query(stmt, function(err, rows, fields) {
+//        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+        if (err) {
+            res.status(500).end();
+            connection.end();
+            console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+        } else {
+            value = rows.map((row) => {return row.type});
+            res.status(200).json(value);
+            connection.end();
+            console.log('SERVER: 200 - OK');
+        }
+    });
+});
+
 app.get('/api/v1/designs', (req, res) => {
     var value;
     console.log('SERVER: ===========================================================');
@@ -199,9 +223,9 @@ app.delete('/api/v1/designs/:name', (req, res) => {
         var connection = startConnection();
         // The name column is defined as UNIQUE. You can only get 0 or 1 rows at most.
         var stmt = 'SELECT COUNT(*) AS count FROM design WHERE name = \''+name+'\'';
-    //    console.log('SERVER: stmt='+stmt);
+//        console.log('SERVER: stmt='+stmt);
         connection.query(stmt, (err, rows, fields) => {
-    //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+//            console.log('SERVER: After SELECT err=', err, ' rows=', rows);
             if (err) {
                 res.status(500).end();
                 connection.end();
@@ -212,9 +236,9 @@ app.delete('/api/v1/designs/:name', (req, res) => {
                 console.log('SERVER: 404 - NOT FOUND');
             } else {
                 var stmt = 'DELETE FROM design WHERE name = \''+name+'\'';
-    //            console.log('SERVER: stmt='+stmt);
+//                console.log('SERVER: stmt='+stmt);
                 connection.query(stmt, (err, rows, fields) => {
-    //                console.log('SERVER: After DELETE err=', err, ' rows=', rows);
+//                    console.log('SERVER: After DELETE err=', err, ' rows=', rows);
                     if (err) {
                         res.status(500).end();
                         connection.end();
