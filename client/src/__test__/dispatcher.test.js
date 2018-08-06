@@ -528,7 +528,6 @@ it('middleware seek2 min stress; alt start pt, opened constraints, feasible star
     store.dispatch(changeDesignParameterConstraint("THICKNESS", MAX, 0.065));
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 10000));
     
-    store.dispatch(search());
     store.dispatch(seek("STRESS", MIN));
     
     var design = store.getState(); // after
@@ -590,7 +589,6 @@ it('middleware seek4 min pressure; alt start pt, opened constraints, feasible st
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 10000));
     store.dispatch(setDesignParameterFlag("THICKNESS", MIN, FIXED|CONSTRAINED));
     
-    store.dispatch(search());
     store.dispatch(seek("PRESSURE", MIN));
     
     var design = store.getState(); // after
@@ -624,7 +622,6 @@ it('middleware seek5 max force; alt start pt, opened constraints, feasible start
     store.dispatch(changeDesignParameterConstraint("THICKNESS", MAX, 0.065));
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 10000));
     
-    store.dispatch(search());
     store.dispatch(seek("FORCE", MAX));
     
     var design = store.getState(); // after
@@ -658,33 +655,32 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
     store.dispatch(changeDesignParameterConstraint("RADIUS", MAX, 0.75));
     store.dispatch(changeDesignParameterConstraint("THICKNESS", MAX, 0.065));
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 10000));
+    design = store.getState(); 
     store.dispatch(setStateVariableFlag("FORCE", MIN, FIXED|CONSTRAINED));
     store.dispatch(setStateVariableFlag("FORCE", MAX, FIXED|CONSTRAINED));
-//    store.dispatch(changeStateVariableConstraint("FORCE", MIN, 251.3274));
-//    store.dispatch(changeStateVariableConstraint("FORCE", MAX, 251.3274));
     store.dispatch(changeStateVariableConstraint("FORCE", MIN, design.state_variables[0].value));
     store.dispatch(changeStateVariableConstraint("FORCE", MAX, design.state_variables[0].value));
     
-    design = store.getState(); // after
-    store.dispatch(search());
-    design = store.getState(); // after
+//    design = store.getState(); 
+//    store.dispatch(search());
+    design = store.getState(); 
     store.dispatch(seek("STRESS", MIN));
     
     design = store.getState(); // after
     expect(design.design_parameters[0].name).toEqual("PRESSURE");
-    expect(design.design_parameters[0].value).toEqual(197.9329182855682);
+    expect(design.design_parameters[0].value).toEqual(620.288526225231);
     expect(design.design_parameters[1].name).toEqual("RADIUS");
-    expect(design.design_parameters[1].value).toEqual(0.6360239141847509);
+    expect(design.design_parameters[1].value).toEqual(0.7529224268036674);
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
-    expect(design.design_parameters[2].value).toEqual(0.06534692753711843);
+    expect(design.design_parameters[2].value).toEqual(0.06530453483860871);
     expect(design.state_variables[0].name).toEqual("FORCE");
-    expect(design.state_variables[0].value).toEqual(251.54447974691448);
+    expect(design.state_variables[0].value).toEqual(1104.699321666792);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(1.2708572274168062);
+    expect(design.state_variables[1].value).toEqual(1.7809443105282723);
     expect(design.state_variables[2].name).toEqual("STRESS");
-    expect(design.state_variables[2].value).toEqual(963.2439823776668);
-    expect(design.result.objective_value).toEqual(0.00004392264816269272);
+    expect(design.state_variables[2].value).toEqual(3575.778800340361);
+    expect(design.result.objective_value).toEqual(0.00001908478702508192);
     expect(design.result.termination_condition).toEqual("SEEK COMPLETED");
-    expect(design.result.violated_constraint_count).toEqual(2);
+    expect(design.result.violated_constraint_count).toEqual(3);
 });
 
