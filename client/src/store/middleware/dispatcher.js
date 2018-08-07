@@ -12,10 +12,13 @@ import { STARTUP,
     RESET_STATE_VARIABLE_FLAG, 
     
     SEARCH, 
-    SEEK } from '../actionTypes';
+    SEEK,
+    TRADE
+    } from '../actionTypes';
 import { startup } from './startup';
 import { search } from './search';
 import { seek } from './seek';
+import { trade } from './trade';
 import { invokeEquationSet } from './invokeEquationSet';
 import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
 
@@ -66,6 +69,9 @@ export const dispatcher = store => next => action => {
         break;
     case SEEK:
         seek(store, action);
+        break;
+    case TRADE:
+        trade(store, action);
         break;
     default:
         break;

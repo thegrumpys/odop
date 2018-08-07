@@ -28,6 +28,7 @@ import FilePreferences from '../menus/File/FilePreferences';
 import FileProperties from '../menus/File/FileProperties';
 import ActionSearch from '../menus/Action/ActionSearch';
 import ActionSeek from '../menus/Action/ActionSeek';
+import ActionTrade from '../menus/Action/ActionTrade';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import HelpIndex from '../menus/Help/HelpIndex';
@@ -81,9 +82,7 @@ class App extends Component {
                                 <DropdownMenu right>
                                     <ActionSearch />
                                     <ActionSeek />
-                                    <DropdownItem>
-                                        Trade
-                                    </DropdownItem>
+                                    <ActionTrade />
                                     <DropdownItem divider />
                                     <ActionSelectSize />
                                     <ActionSelectCatalog />

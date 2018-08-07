@@ -24,8 +24,6 @@ import { STARTUP,
     
     CHANGE_SYSTEM_CONTROLS_VALUE, 
     CHANGE_LABELS_VALUE, 
-    SEARCH, 
-    SEEK, 
     
     MIN } from './actionTypes';
 import { sclden } from './middleware/sclden';
@@ -284,10 +282,6 @@ export function reducers(state, action) {
             ...state,
             labels: action.payload.labels
         }
-    case SEARCH:
-        return state;
-    case SEEK:
-        return state;
     default:
         return state;
     }

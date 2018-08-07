@@ -27,6 +27,7 @@ export const CHANGE_SYSTEM_CONTROLS_VALUE = 'CHANGE_SYSTEM_CONTROLS_VALUE';
 
 export const SEARCH = 'SEARCH';
 export const SEEK = 'SEEK';
+export const TRADE = 'TRADE';
 
 export const MIN = 'MIN';
 export const MAX = 'MAX';
