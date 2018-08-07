@@ -3,10 +3,11 @@ import { initialState } from '../problems/Piston-Cylinder/initialState';
 import { initialSystemControls } from '../initialSystemControls';
 import { MIN, MAX, CONSTRAINED, FIXED } from '../store/actionTypes';
 import { 
-    startup,
-    changeDesignParameterValue, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag, 
-    changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag, 
-    changeResultObjectiveValue
+    startup, load, changeName, 
+    changeDesignParameterValue, changeDesignParameterViolation, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag, 
+    changeStateVariableValue, changeStateVariableViolation, changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag, 
+    changeResultObjectiveValue, changeResultTerminationCondition, changeResultViolatedConstraintCount, 
+    changeSystemControlsValue, changeLabelsValue, search, seek 
     } from '../store/actionCreators';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
@@ -37,6 +38,7 @@ it('reducers with startup', () => {
         state);
     
     var design = store.getState(); // before
+    expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
     expect(design.version).toEqual("1.2");
     expect(design.design_parameters[1].name).toEqual("RADIUS");
@@ -47,12 +49,55 @@ it('reducers with startup', () => {
     store.dispatch(startup());
     
     var design = store.getState(); // after
+    expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
     expect(design.version).toEqual("1.2");
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
     expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+});
+
+it('reducers load', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+
+    var design = store.getState(); // before
+    expect(design.name).toEqual("initialState");
+    expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.version).toEqual("1.2");
+
+    store.dispatch(load({
+        "name": "test",
+        "type": "Test-Design",
+        "version": "0.0"
+    }));
+    
+    var design = store.getState(); // after
+    expect(design.name).toEqual("test");
+    expect(design.type).toEqual("Test-Design");
+    expect(design.version).toEqual("0.0");
+});
+
+it('reducers change name', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+
+    var design = store.getState(); // before
+    expect(design.name).toEqual("initialState");
+    expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.version).toEqual("1.2");
+
+    store.dispatch(changeName('startup'));
+    
+    var design = store.getState(); // after
+    expect(design.name).toEqual("startup");
+    expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.version).toEqual("1.2");
 });
 
 //=====================================================================
@@ -78,6 +123,40 @@ it('reducers change design parameter value', () => {
     expect(design.design_parameters[1].value).toEqual(0.5);
     expect(design.state_variables[1].name).toEqual("AREA");
     expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+});
+
+it('reducers change design parameter violation min', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    var design = store.getState(); // before
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].vmin).toEqual(-17);
+
+    store.dispatch(changeDesignParameterViolation("RADIUS", MIN, -1234));
+    
+    design = store.getState(); // after
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].vmin).toEqual(-1234);
+});
+
+it('reducers change design parameter violation max', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    var design = store.getState(); // before
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].vmax).toEqual(-0.19999999999999996);
+
+    store.dispatch(changeDesignParameterViolation("RADIUS", MAX, 1234));
+    
+    design = store.getState(); // after
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].vmax).toEqual(1234);
 });
 
 it('reducers change design parameter constraint min', () => {
@@ -207,6 +286,40 @@ it('reducers change state variable value', () => {
     expect(design.state_variables[1].value).toEqual(0.7853981633974483);
 });
 
+it('reducers change state variable violation min', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    var design = store.getState(); // before
+    expect(design.state_variables[0].name).toEqual("FORCE");
+    expect(design.state_variables[0].vmin).toEqual(0.7486725877128165);
+
+    store.dispatch(changeStateVariableViolation("FORCE", MIN, -1234));
+    
+    design = store.getState(); // after
+    expect(design.state_variables[0].name).toEqual("FORCE");
+    expect(design.state_variables[0].vmin).toEqual(-1234);
+});
+
+it('reducers change state variable violation max', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    var design = store.getState(); // before
+    expect(design.state_variables[2].name).toEqual("STRESS");
+    expect(design.state_variables[2].vmin).toEqual(0);
+
+    store.dispatch(changeStateVariableViolation("STRESS", MIN, 1234));
+    
+    design = store.getState(); // after
+    expect(design.state_variables[2].name).toEqual("STRESS");
+    expect(design.state_variables[2].vmin).toEqual(1234);
+});
+
 it('reducers change state variable constraint min', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
@@ -243,6 +356,66 @@ it('reducers change state variable constraint max', () => {
     expect(design.state_variables[2].name).toEqual("STRESS");
     expect(design.state_variables[2].cmax).toEqual(4000);
     expect(design.state_variables[2].smax).toEqual(4000);
+});
+
+it('reducers save state variable constraints', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    var design = store.getState(); // before
+    expect(design.state_variables[0].name).toEqual("FORCE");
+    expect(design.state_variables[0].lmin).toEqual(1);
+    expect(design.state_variables[0].cmin).toEqual(1000);
+    expect(design.state_variables[0].lmax).toEqual(0);
+    expect(design.state_variables[0].cmax).toEqual(0);
+    expect(design.state_variables[0].oldlmin).toEqual(undefined);
+    expect(design.state_variables[0].oldcmin).toEqual(undefined);
+    expect(design.state_variables[0].oldlmax).toEqual(undefined);
+    expect(design.state_variables[0].oldcmax).toEqual(undefined);
+
+    store.dispatch(saveStateVariableConstraints("FORCE"));
+    
+    design = store.getState(); // after
+    expect(design.state_variables[0].lmin).toEqual(1);
+    expect(design.state_variables[0].cmin).toEqual(1000);
+    expect(design.state_variables[0].lmax).toEqual(0);
+    expect(design.state_variables[0].cmax).toEqual(0);
+    expect(design.state_variables[0].oldlmin).toEqual(1);
+    expect(design.state_variables[0].oldcmin).toEqual(1000);
+    expect(design.state_variables[0].oldlmax).toEqual(0);
+    expect(design.state_variables[0].oldcmax).toEqual(0);
+});
+
+it('reducers restore state variable constraints', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    var design = store.getState(); // before
+    expect(design.state_variables[0].name).toEqual("FORCE");
+    expect(design.state_variables[0].lmin).toEqual(1);
+    expect(design.state_variables[0].cmin).toEqual(1000);
+    expect(design.state_variables[0].lmax).toEqual(0);
+    expect(design.state_variables[0].cmax).toEqual(0);
+    expect(design.state_variables[0].oldlmin).toEqual(undefined);
+    expect(design.state_variables[0].oldcmin).toEqual(undefined);
+    expect(design.state_variables[0].oldlmax).toEqual(undefined);
+    expect(design.state_variables[0].oldcmax).toEqual(undefined);
+
+    store.dispatch(restoreStateVariableConstraints("FORCE"));
+    
+    design = store.getState(); // after
+    expect(design.state_variables[0].lmin).toEqual(undefined);
+    expect(design.state_variables[0].cmin).toEqual(undefined);
+    expect(design.state_variables[0].lmax).toEqual(undefined);
+    expect(design.state_variables[0].cmax).toEqual(undefined);
+    expect(design.state_variables[0].oldlmin).toEqual(undefined);
+    expect(design.state_variables[0].oldcmin).toEqual(undefined);
+    expect(design.state_variables[0].oldlmax).toEqual(undefined);
+    expect(design.state_variables[0].oldcmax).toEqual(undefined);
 });
 
 it('reducers set state variable flag min', () => {
@@ -314,7 +487,7 @@ it('reducers reset state variable flag max', () => {
 });
 
 //=====================================================================
-// OBJECTIVE FUNCTION
+// RESULT
 //=====================================================================
 
 it('reducers change result objective value', () => {
@@ -331,3 +504,128 @@ it('reducers change result objective value', () => {
     design = store.getState(); // after
     expect(design.result.objective_value).toEqual(0.987654321);
 });
+
+it('reducers change result termination condition', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    var design = store.getState(); // before
+    expect(design.result.termination_condition).toEqual('None');
+
+    store.dispatch(changeResultTerminationCondition('Test'));
+    
+    design = store.getState(); // after
+    expect(design.result.termination_condition).toEqual('Test');
+});
+
+it('reducers change result violated constaint count', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    var design = store.getState(); // before
+    expect(design.result.violated_constraint_count).toEqual(0);
+
+    store.dispatch(changeResultViolatedConstraintCount(3));
+    
+    design = store.getState(); // after
+    expect(design.result.violated_constraint_count).toEqual(3);
+});
+
+//=====================================================================
+// OTHER
+//=====================================================================
+
+it('reducers change system controls value', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    var design = store.getState(); // before
+    expect(design.system_controls.ioopt).toEqual(3);
+
+    store.dispatch(changeSystemControlsValue({ioopt: 5}));
+    
+    design = store.getState(); // after
+    expect(design.system_controls.ioopt).toEqual(5);
+});
+
+it('reducers change label value', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    var design = store.getState(); // before
+    expect(design.labels[0].name).toEqual('COMMENT');
+    expect(design.labels[0].value).toEqual('PCYL Default startup file ...');
+
+    store.dispatch(changeLabelsValue([{name: 'COMMENT', value: 'Test'}]));
+    
+    design = store.getState(); // after
+    expect(design.labels[0].name).toEqual('COMMENT');
+    expect(design.labels[0].value).toEqual('Test');
+});
+
+//=====================================================================
+// NO-OP
+//=====================================================================
+
+it('reducers search', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    // Without middleware this should do nothing
+    store.dispatch(search());
+    
+    var design = store.getState(); // after
+    expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.version).toEqual("1.2");
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].value).toEqual(0.4);
+    expect(design.state_variables[1].name).toEqual("AREA");
+    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+});
+
+it('reducers seek stress min', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    // Without middleware this should do nothing
+    store.dispatch(seek("STRESS", MIN));
+    
+    var design = store.getState(); // after
+    expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.version).toEqual("1.2");
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].value).toEqual(0.4);
+    expect(design.state_variables[1].name).toEqual("AREA");
+    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+});
+
+it('reducers seek stress max', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    
+    // Without middleware this should do nothing
+    store.dispatch(seek("STRESS", MAX));
+    
+    var design = store.getState(); // after
+    expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.version).toEqual("1.2");
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].value).toEqual(0.4);
+    expect(design.state_variables[1].name).toEqual("AREA");
+    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+});
+
