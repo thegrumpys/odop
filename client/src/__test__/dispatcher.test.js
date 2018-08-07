@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../problems/Piston-Cylinder/initialState';
+import { initialSystemControls } from '../initialSystemControls';
 import { MIN, MAX, CONSTRAINED, FIXED } from '../store/actionTypes';
 import { 
     startup,
@@ -15,9 +16,10 @@ import { dispatcher } from '../store/middleware/dispatcher';
 //=====================================================================
 
 it('middleware with startup', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
     
     var design = store.getState(); // before
@@ -99,9 +101,10 @@ it('middleware with startup', () => {
 //=====================================================================
 
 it('middleware change pressure design parameter value without startup', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
     
     var design = store.getState(); // before
@@ -128,9 +131,10 @@ it('middleware change pressure design parameter value without startup', () => {
 });
 
 it('middleware change radius design parameter value without startup', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
     
     var design = store.getState(); // before
@@ -157,9 +161,10 @@ it('middleware change radius design parameter value without startup', () => {
 });
 
 it('middleware change thickness design parameter value without startup', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
     
     var design = store.getState(); // before
@@ -189,9 +194,10 @@ it('middleware change thickness design parameter value without startup', () => {
 //=====================================================================
 
 it('middleware change constraints to force all violations', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
     
     var design = store.getState(); // before
@@ -277,9 +283,10 @@ it('middleware change constraints to force all violations', () => {
 //=====================================================================
 
 it('middleware search1 from initial state', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
     
     store.dispatch(search());
@@ -303,9 +310,10 @@ it('middleware search1 from initial state', () => {
 });
 
 it('middleware search2: initial state w/ single SV constraint modified', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
 
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 10000));
@@ -331,9 +339,10 @@ it('middleware search2: initial state w/ single SV constraint modified', () => {
 });
 
 it('middleware search3: initial state w/ single DP FIXed', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
 
     store.dispatch(changeDesignParameterValue("RADIUS", 0.444));
@@ -360,9 +369,10 @@ it('middleware search3: initial state w/ single DP FIXed', () => {
 });
 
 it('middleware search4: initial state w/ single SV FIXed', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
 
     store.dispatch(setStateVariableFlag("STRESS", MIN, FIXED|CONSTRAINED));
@@ -391,9 +401,10 @@ it('middleware search4: initial state w/ single SV FIXed', () => {
 });
 
 it('middleware search5: initial state w/ 3 constraints modified', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
 
     store.dispatch(changeStateVariableConstraint("FORCE", MIN, 1200));
@@ -421,9 +432,10 @@ it('middleware search5: initial state w/ 3 constraints modified', () => {
 });
 
 it('middleware search6: initial state w/ 3 constraints modified further', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
 
     store.dispatch(changeStateVariableConstraint("FORCE", MIN, 2500));
@@ -451,9 +463,10 @@ it('middleware search6: initial state w/ 3 constraints modified further', () => 
 });
 
 it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
 
     store.dispatch(changeStateVariableConstraint("FORCE", MIN, 2500));
@@ -487,9 +500,10 @@ it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', ()
 //=====================================================================
 
 it('middleware seek1 min stress; feasible start; no fixed', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
 
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 10000));
@@ -516,9 +530,10 @@ it('middleware seek1 min stress; feasible start; no fixed', () => {
 });
 
 it('middleware seek2 min stress; alt start pt, opened constraints, feasible start; no fixed', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
 
     store.dispatch(changeDesignParameterValue("PRESSURE", 888));
@@ -549,9 +564,10 @@ it('middleware seek2 min stress; alt start pt, opened constraints, feasible star
 });
 
 it('middleware seek3 min stress; infeasible start; no fixed', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
     
     store.dispatch(search());
@@ -576,9 +592,10 @@ it('middleware seek3 min stress; infeasible start; no fixed', () => {
 });
 
 it('middleware seek4 min pressure; alt start pt, opened constraints, feasible start; THICKNESS fixed', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
 
     store.dispatch(changeDesignParameterValue("PRESSURE", 888));
@@ -610,9 +627,10 @@ it('middleware seek4 min pressure; alt start pt, opened constraints, feasible st
 });
 
 it('middleware seek5 max force; alt start pt, opened constraints, feasible start; no fixed', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
 
     store.dispatch(changeDesignParameterValue("PRESSURE", 888));
@@ -643,9 +661,10 @@ it('middleware seek5 max force; alt start pt, opened constraints, feasible start
 });
 
 it('middleware seek6 min stress; alt start pt, opened constraints, feasible start; force fixed', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState,
+        state,
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // after

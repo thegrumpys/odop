@@ -5,6 +5,7 @@ import { Label, Input } from 'reactstrap';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { initialState } from '../problems/Piston-Cylinder/initialState';
+import { initialSystemControls } from '../initialSystemControls';
 import App from './App';
 import { displaySpinner } from './Spinner';
 import { displayError } from './ErrorModal';
@@ -49,8 +50,9 @@ export class PromptForDesign extends React.Component {
                 this.setState({
                     modal: !this.state.modal
                 });
-                displayError('GET of design names failed with message: \''+error.message+'\'. Using builtin initialState instead. You may continue in "demo mode" but you will be unable to save your work.');
-                const store = createStore(reducers, initialState, middleware);
+                displayError('GET of design names failed with message: \''+error.message+'\'. Using builtin initial state instead. You may continue in "demo mode" but you will be unable to save your work.');
+                var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+                const store = createStore(reducers, state, middleware);
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
             });
     }

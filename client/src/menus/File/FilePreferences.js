@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Container, Row, Col, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { initialState } from '../../problems/Piston-Cylinder/initialState';
+import { initialSystemControls } from '../../initialSystemControls';
 import { changeSystemControlsValue } from '../../store/actionCreators';
 
 class FilePreferences extends React.Component {
@@ -44,7 +44,7 @@ class FilePreferences extends React.Component {
     onRestoreDefaults() {
         // Copy the default values into the state.system_controls
         this.setState({
-            system_controls: initialState.system_controls
+            system_controls: initialSystemControls
         });
     }
     

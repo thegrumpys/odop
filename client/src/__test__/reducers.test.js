@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../problems/Piston-Cylinder/initialState';
+import { initialSystemControls } from '../initialSystemControls';
 import { MIN, MAX, CONSTRAINED, FIXED } from '../store/actionTypes';
 import { 
     startup,
@@ -15,9 +16,10 @@ import { dispatcher } from '../store/middleware/dispatcher';
 //=====================================================================
 
 it('reducers without startup', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // after
     expect(design.type).toEqual("Piston-Cylinder");
@@ -29,9 +31,10 @@ it('reducers without startup', () => {
 });
 
 it('reducers with startup', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.type).toEqual("Piston-Cylinder");
@@ -57,9 +60,10 @@ it('reducers with startup', () => {
 //=====================================================================
 
 it('reducers change design parameter value', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.design_parameters[1].name).toEqual("RADIUS");
@@ -77,9 +81,10 @@ it('reducers change design parameter value', () => {
 });
 
 it('reducers change design parameter constraint min', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.design_parameters[1].name).toEqual("RADIUS");
@@ -95,9 +100,10 @@ it('reducers change design parameter constraint min', () => {
 });
 
 it('reducers change design parameter constraint max', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
@@ -113,9 +119,10 @@ it('reducers change design parameter constraint max', () => {
 });
 
 it('reducers set design parameter flag min', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.design_parameters[1].name).toEqual("RADIUS");
@@ -129,9 +136,10 @@ it('reducers set design parameter flag min', () => {
 });
 
 it('reducers reset design parameter flag min', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.design_parameters[1].name).toEqual("RADIUS");
@@ -145,9 +153,10 @@ it('reducers reset design parameter flag min', () => {
 });
 
 it('reducers set design parameter flag max', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
@@ -161,9 +170,10 @@ it('reducers set design parameter flag max', () => {
 });
 
 it('reducers reset design parameter flag max', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
@@ -181,9 +191,10 @@ it('reducers reset design parameter flag max', () => {
 //=====================================================================
 
 it('reducers change state variable value', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.state_variables[1].name).toEqual("AREA");
@@ -197,9 +208,10 @@ it('reducers change state variable value', () => {
 });
 
 it('reducers change state variable constraint min', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.state_variables[0].name).toEqual("FORCE");
@@ -215,9 +227,10 @@ it('reducers change state variable constraint min', () => {
 });
 
 it('reducers change state variable constraint max', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.state_variables[2].name).toEqual("STRESS");
@@ -233,9 +246,10 @@ it('reducers change state variable constraint max', () => {
 });
 
 it('reducers set state variable flag min', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.state_variables[0].name).toEqual("FORCE");
@@ -249,9 +263,10 @@ it('reducers set state variable flag min', () => {
 });
 
 it('reducers reset state variable flag min', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.state_variables[0].name).toEqual("FORCE");
@@ -265,9 +280,10 @@ it('reducers reset state variable flag min', () => {
 });
 
 it('reducers set state variable flag max', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.state_variables[2].name).toEqual("STRESS");
@@ -281,9 +297,10 @@ it('reducers set state variable flag max', () => {
 });
 
 it('reducers reset state variable flag max', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.state_variables[2].name).toEqual("STRESS");
@@ -301,9 +318,10 @@ it('reducers reset state variable flag max', () => {
 //=====================================================================
 
 it('reducers change result objective value', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        initialState);
+        state);
     
     var design = store.getState(); // before
     expect(design.result.objective_value).toEqual(0.5605106435926049);

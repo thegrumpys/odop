@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import { initialState } from '../problems/Piston-Cylinder/initialState';
+import { initialSystemControls } from '../initialSystemControls';
 import App from '../components/App';
 import { startup, changeDesignParameterValue } from '../store/actionCreators';
 import { reducers } from '../store/reducers';
 
 it('renders without crashing', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
             reducers,
-            initialState
+            state
             );
     store.dispatch(startup());
     const div = document.createElement('div');
@@ -20,9 +22,10 @@ it('renders without crashing', () => {
 });
 
 it('renders with different design parameter and state variable constraint violations', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
             reducers,
-            initialState
+            state
             );
     store.dispatch(startup());
     const div = document.createElement('div');
