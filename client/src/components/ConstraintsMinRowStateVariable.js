@@ -2,7 +2,7 @@ import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
-import { changeStateVariableConstraint, saveStateVariableConstraints, restoreStateVariableConstraints, setStateVariableFlag, resetStateVariableFlag } from '../store/actionCreators';
+import { changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag } from '../store/actionCreators';
 
 class ConstraintsMinRowStateVariable extends React.Component {
     
@@ -71,8 +71,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToStateVariableProps = {
     changeStateVariableConstraint: changeStateVariableConstraint,
-    saveStateVariableConstraints: saveStateVariableConstraints,
-    restoreStateVariableConstraints: restoreStateVariableConstraints,
     setStateVariableFlag: setStateVariableFlag,
     resetStateVariableFlag: resetStateVariableFlag
 };
