@@ -1,7 +1,10 @@
 import React from 'react';
-import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, Button } from 'reactstrap';
+import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeResultTerminationCondition, 
+import { CONSTRAINED, MIN, MAX } from '../../store/actionTypes';
+import { changeDesignParameterConstraint,
+    changeStateVariableConstraint, 
+    changeResultTerminationCondition, 
     trade } from '../../store/actionCreators';
 
 class ActionTrade extends React.Component {
@@ -18,37 +21,49 @@ class ActionTrade extends React.Component {
     }
     
     strategyToggle() {
-//        this.setState({ nviol: 0 });
-//        for (let i = 0; i < this.props.design.design_parameters.length; i++) {
-//            dp = this.props.design.design_parameters[i];
-//            if (dp.lmin & CONSTRAINED && dp.vmin > 0.0) {
-//                nviol++
-//                vflag[nviol - 1] = i;
-//                ldir[nviol - 1] = -1;
-//            } else if (dp.lmax & CONSTRAINED && dp.vmax > 0.0) {
-//                nviol++
-//                vflag[nviol - 1] = i;
-//                ldir[nviol - 1] = +1;
-//            }
-//        }
-//        for (let i = 0; i < this.props.design.state_variables.length; i++) {
-//            sv = this.props.design.state_variables[i];
-//            if (sv.lmin & CONSTRAINED && sv.vmin > 0.0) {
-//                nviol++
-//                vflag[nviol - 1] = i + this.props.design.design_parameters.length;
-//                ldir[nviol - 1] = -1;
-//            } else if (sv.lmax & CONSTRAINED && sv.vmax > 0.0) {
-//                nviol++
-//                vflag[nviol - 1] = i + this.props.design.design_parameters.length;
-//                ldir[nviol - 1] = +1;
-//            }
-//        }
-        if (this.props.design.result.objective_value <= this.props.design.system_controls.objmin /* || this.state.nviol === 0 */) {
+        console.log('In strategyToggle');
+        console.log('state=',this.state);
+        var dp;
+        var sv;
+        var nviol = 0;
+        var ldir = [];
+        var vflag = [];
+        for (let i = 0; i < this.props.design.design_parameters.length; i++) {
+            dp = this.props.design.design_parameters[i];
+            if (dp.lmin & CONSTRAINED && dp.vmin > 0.0) {
+                nviol++
+                vflag[nviol - 1] = i;
+                ldir[nviol - 1] = -1;
+            } else if (dp.lmax & CONSTRAINED && dp.vmax > 0.0) {
+                nviol++
+                vflag[nviol - 1] = i;
+                ldir[nviol - 1] = +1;
+            }
+        }
+        for (let i = 0; i < this.props.design.state_variables.length; i++) {
+            sv = this.props.design.state_variables[i];
+            if (sv.lmin & CONSTRAINED && sv.vmin > 0.0) {
+                nviol++
+                vflag[nviol - 1] = i + this.props.design.design_parameters.length;
+                ldir[nviol - 1] = -1;
+            } else if (sv.lmax & CONSTRAINED && sv.vmax > 0.0) {
+                nviol++
+                vflag[nviol - 1] = i + this.props.design.design_parameters.length;
+                ldir[nviol - 1] = +1;
+            }
+        }
+        console.log('nviol=',nviol);
+        console.log('vflag=',vflag);
+        console.log('ldir=',ldir);
+        if (this.props.design.result.objective_value <= this.props.design.system_controls.objmin || nviol === 0) {
             var ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE';
             this.props.changeResultTerminationCondition(ncode);
         } else {
             this.setState({
-                strategyModal: !this.state.strategyModal
+                strategyModal: !this.state.strategyModal,
+                nviol: nviol,
+                vflag: vflag,
+                ldir: ldir
             });
         }
     }
@@ -64,9 +79,35 @@ class ActionTrade extends React.Component {
 
     onStrategyExisting() {
         console.log('In onStrategyExisting');
+        console.log('state=',this.state);
         this.setState({
             strategyModal: !this.state.strategyModal
         });
+        var dp;
+        var sv;
+        var value;
+        for (let i = 0; i < this.state.nviol; i++) {
+            let j = this.state.vflag[i];
+            if (j < this.props.design.design_parameters.length) {
+                dp = this.props.design.design_parameters[j];
+                if (this.state.ldir[i] < 0) {
+                    value = dp.cmin + dp.vmin * dp.smin * this.state.ldir[i];
+                    this.props.changeDesignParameterConstraint(dp.name, MIN, value);
+                } else {
+                    value = dp.cmax + dp.vmax * dp.smax * this.state.ldir[i];
+                    this.props.changeDesignParameterConstraint(dp.name, MAX, value);
+                }
+            } else {
+                sv = this.props.design.state_variables[j - this.props.design.design_parameters.length];
+                if (this.state.ldir[i] < 0) {
+                    value = sv.cmin + sv.vmin * sv.smin * this.state.ldir[i];
+                    this.props.changeStateVariableConstraint(sv.name, MIN, value);
+                } else {
+                    value = sv.cmax + sv.vmax * sv.smax * this.state.ldir[i];
+                    this.props.changeStateVariableConstraint(sv.name, MAX, value);
+                }
+            }
+        }
         var ncode = 'CONSTRAINT LEVELS RELAXED TO EXISTING VIOLATIONS';
         this.props.changeResultTerminationCondition(ncode);
     }
@@ -91,7 +132,7 @@ class ActionTrade extends React.Component {
                 <DropdownItem onClick={this.strategyToggle}>
                     Trade
                 </DropdownItem>
-                <Modal isOpen={this.state.strategyModal} className={this.props.className}>
+                <Modal isOpen={this.state.strategyModal} className={this.props.className} size="lg">
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy </ModalHeader>
                     <ModalBody>
                         Specify your trade strategy ...  relax constraints:<br/>
@@ -117,6 +158,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+    changeDesignParameterConstraint: changeDesignParameterConstraint,
+    changeStateVariableConstraint: changeStateVariableConstraint,
     changeResultTerminationCondition: changeResultTerminationCondition,
     trade: trade
 };
