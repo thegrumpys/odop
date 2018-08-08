@@ -7,7 +7,7 @@ import {
     changeDesignParameterValue, changeDesignParameterConstraint, setDesignParameterFlag, resetDesignParameterFlag, 
     changeStateVariableValue, changeStateVariableConstraint, setStateVariableFlag, resetStateVariableFlag, 
     changeResultObjectiveValue, 
-    search, seek } from '../store/actionCreators';
+    search, seek, trade } from '../store/actionCreators';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 
@@ -495,6 +495,7 @@ it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', ()
     expect(design.result.termination_condition).toEqual("DELMIN 16 ITER.");
     expect(design.result.violated_constraint_count).toEqual(4);
 });
+
 //=====================================================================
 //SEEK
 //=====================================================================
@@ -701,5 +702,39 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
     expect(design.result.objective_value).toEqual(0.00001908478702508192);
     expect(design.result.termination_condition).toEqual("SEEK COMPLETED");
     expect(design.result.violated_constraint_count).toEqual(3);
+});
+
+//=====================================================================
+//TRADE
+//=====================================================================
+
+it('middleware trade1', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state,
+        applyMiddleware(dispatcher));
+
+    var design = store.getState(); 
+    store.dispatch(search());
+    design = store.getState(); 
+    store.dispatch(trade());
+    
+    var design = store.getState(); // after
+    expect(design.design_parameters[0].name).toEqual("PRESSURE");
+    expect(design.design_parameters[0].value).toEqual(697.2108757363197);
+    expect(design.design_parameters[1].name).toEqual("RADIUS");
+    expect(design.design_parameters[1].value).toEqual(0.5825642374486647);
+    expect(design.design_parameters[2].name).toEqual("THICKNESS");
+    expect(design.design_parameters[2].value).toEqual(0.05814850143495808);
+    expect(design.state_variables[0].name).toEqual("FORCE");
+    expect(design.state_variables[0].value).toEqual(743.3642427191874);
+    expect(design.state_variables[1].name).toEqual("AREA");
+    expect(design.state_variables[1].value).toEqual(1.0661971414805103);
+    expect(design.state_variables[2].name).toEqual("STRESS");
+    expect(design.state_variables[2].value).toEqual(3492.524417147412);
+    expect(design.result.objective_value).toEqual(0.14664192222304165);
+    expect(design.result.termination_condition).toEqual("DELMIN 9 ITER.");
+    expect(design.result.violated_constraint_count).toEqual(4);
 });
 
