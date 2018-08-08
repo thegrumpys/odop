@@ -3,6 +3,7 @@ import { STARTUP,
     CHANGE_NAME, 
     
     CHANGE_DESIGN_PARAMETER_VALUE, 
+    CHANGE_DESIGN_PARAMETER_VALUES, 
     SAVE_DESIGN_PARAMETER_VALUES, 
     RESTORE_DESIGN_PARAMETER_VALUES, 
     CHANGE_DESIGN_PARAMETER_VIOLATION, 
@@ -11,6 +12,7 @@ import { STARTUP,
     RESET_DESIGN_PARAMETER_FLAG, 
     
     CHANGE_STATE_VARIABLE_VALUE, 
+    CHANGE_STATE_VARIABLE_VALUES, 
     CHANGE_STATE_VARIABLE_VIOLATION, 
     CHANGE_STATE_VARIABLE_CONSTRAINT, 
     SAVE_STATE_VARIABLE_CONSTRAINTS, 
@@ -58,6 +60,16 @@ export function changeDesignParameterValue(name, value, merit) {
         payload: {
             name,
             value,
+            merit
+        }
+    }
+}
+
+export function changeDesignParameterValues(values, merit) {
+    return {
+        type: CHANGE_DESIGN_PARAMETER_VALUES,
+        payload: {
+            values,
             merit
         }
     }
@@ -128,6 +140,15 @@ export function changeStateVariableValue(name, value) {
         payload: {
             name,
             value
+        }
+    }
+}
+
+export function changeStateVariableValues(values) {
+    return {
+        type: CHANGE_STATE_VARIABLE_VALUES,
+        payload: {
+            values
         }
     }
 }

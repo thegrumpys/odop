@@ -1,4 +1,4 @@
-import { changeStateVariableValue } from '../actionCreators';
+import { changeStateVariableValues } from '../actionCreators';
 import { eqnset as pcyl_eqnset } from '../../problems/Piston-Cylinder/eqnset';
 import { eqnset as solid_eqnset } from '../../problems/Solid/eqnset';
 import { eqnset as spring_eqnset } from '../../problems/Spring/eqnset';
@@ -8,7 +8,6 @@ export function invokeEquationSet(store) {
     
     var c;
     var dp;
-    var sv;
 
     var design = store.getState();
     
@@ -41,10 +40,6 @@ export function invokeEquationSet(store) {
     }
 
     // Compute and dispatch state variable changes
-    for (let i = 0; i < design.state_variables.length; i++) {
-        sv = design.state_variables[i];
-        design = store.getState();
-        store.dispatch(changeStateVariableValue(sv.name, x[i]));
-    }
+    store.dispatch(changeStateVariableValues(x));
     
 }
