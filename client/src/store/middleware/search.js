@@ -31,4 +31,7 @@ export function search(store, objmin, merit) {
     }
     store.dispatch(changeResultTerminationCondition(ncode));
     
+    design = store.getState();
+    var obj = design.result.objective_value;
+    return obj;
 }

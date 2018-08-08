@@ -1,8 +1,9 @@
-import { CONSTRAINED } from '../actionTypes';
-import { saveDesignParameterValues, restoreDesignParameterValues, changeResultTerminationCondition } from '../actionCreators';
+import { CONSTRAINED, MIN, MAX } from '../actionTypes';
+import { saveDesignParameterValues, restoreDesignParameterValues, changeDesignParameterConstraint, 
+    changeStateVariableConstraint, 
+    changeResultTerminationCondition } from '../actionCreators';
 import { search } from './search';
 import { despak } from './despak';
-import { sclden } from './sclden';
 
 // Trade
 export function trade(store, action) {
@@ -44,8 +45,8 @@ export function trade(store, action) {
     var choice;
     var value_string;
     var tagain;
-
-    var design = store.getState(); // Re-access store to get latest dp and sv values
+    var ncode;
+    var design;
     
     /*
      * TRADE works with constant level constraints only.
@@ -60,6 +61,9 @@ export function trade(store, action) {
     console.log('TRADE: ');
     var top = true;
     while (top) {
+
+        design = store.getState(); // Re-access store to get latest dp and sv values
+        
         top = false;
         p = [];
         for (let i = 0; i < design.design_parameters.length; i++) {
@@ -67,21 +71,27 @@ export function trade(store, action) {
             p[i] = dp.value;
         }
         obj = despak(p, store);
-        // Begin update
-        /** ***************************************************************** */
-        /* THIS PROCEDURE SETS THE TP, TX AND TV VECTORS EQUAL TO THE */
-        /* THE CURRENT VALUES OF THE P, X, AND V VECTORS SO THAT THEY MAY */
-        /* BE ALTERED FOR (POSSIBLY) TEMPORARY EXPLORATIONS */
-        /** ***************************************************************** */
-        for (let i = 0; i < design.design_parameters.length; i++) {
-            dp = design.design_parameters[i];
-            dp.oldvalue = dp.value;
-        }
-        for (let i = 0; i < design.state_variables.length; i++) {
-            sv = design.state_variables[i];
-            sv.oldvalue = sv.value;
-        }
-        // End update
+        console.log('obj1=',obj);
+        
+        design = store.getState(); // Re-access store to get latest dp and sv values
+        
+//        // Begin update
+//        /** ***************************************************************** */
+//        /* THIS PROCEDURE SETS THE TP, TX AND TV VECTORS EQUAL TO THE */
+//        /* THE CURRENT VALUES OF THE P, X, AND V VECTORS SO THAT THEY MAY */
+//        /* BE ALTERED FOR (POSSIBLY) TEMPORARY EXPLORATIONS */
+//        /** ***************************************************************** */
+//        for (let i = 0; i < design.design_parameters.length; i++) {
+//            dp = design.design_parameters[i];
+//            dp.oldvalue = dp.value;
+//        }
+//        for (let i = 0; i < design.state_variables.length; i++) {
+//            sv = design.state_variables[i];
+//            sv.oldvalue = sv.value;
+//        }
+//        // End update
+        store.dispatch(saveDesignParameterValues());
+
         nviol = 0;
         for (let i = 0; i < design.design_parameters.length; i++) {
             dp = design.design_parameters[i];
@@ -108,7 +118,9 @@ export function trade(store, action) {
             }
         }
         if (obj <= design.system_controls.objmin || nviol === 0) {
-            console.log('OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE.');
+            console.log('OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE.'); // @@@
+            ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE.';
+            store.dispatch(changeResultTerminationCondition(ncode));
         } else {
             console.log('EXISTING CONSTRAINTS:');
             clister();
@@ -155,20 +167,28 @@ export function trade(store, action) {
                         if (j < design.design_parameters.length) {
                             dp = design.design_parameters[j];
                             if (ldir[i] < 0) {
-                                dp.cmin = dp.cmin + dp.vmin * dp.smin * ldir[i];
-                                dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+//                                dp.cmin = dp.cmin + dp.vmin * dp.smin * ldir[i];
+//                                dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+                                value = dp.cmin + dp.vmin * dp.smin * ldir[i];
+                                store.dispatch(changeDesignParameterConstraint(dp.name, MIN, value));
                             } else {
-                                dp.cmax = dp.cmax + dp.vmax * dp.smax * ldir[i];
-                                dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+//                                dp.cmax = dp.cmax + dp.vmax * dp.smax * ldir[i];
+//                                dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+                                value = dp.cmax + dp.vmax * dp.smax * ldir[i];
+                                store.dispatch(changeDesignParameterConstraint(dp.name, MAX, value));
                             }
                         } else {
                             sv = design.state_variables[j - design.design_parameters.length];
                             if (ldir[i] < 0) {
-                                sv.cmin = sv.cmin + sv.vmin * sv.smin * ldir[i];
-                                sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+//                                sv.cmin = sv.cmin + sv.vmin * sv.smin * ldir[i];
+//                                sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+                                value = sv.cmin + sv.vmin * sv.smin * ldir[i];
+                                store.dispatch(changeStateVariableConstraint(sv.name, MIN, value));
                             } else {
-                                sv.cmax = sv.cmax + sv.vmax * sv.smax * ldir[i];
-                                sv.smax = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+//                                sv.cmax = sv.cmax + sv.vmax * sv.smax * ldir[i];
+//                                sv.smax = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+                                value = sv.cmax + sv.vmax * sv.smax * ldir[i];
+                                store.dispatch(changeStateVariableConstraint(sv.name, MAX, value));
                             }
                         }
                     }
@@ -179,6 +199,7 @@ export function trade(store, action) {
                         p[i] = dp.value;
                     }
                     obj = despak(p, store);
+                    console.log('obj2=',obj);
                     return;
                 }
                 /* return to command level */
@@ -189,10 +210,11 @@ export function trade(store, action) {
                         p[i] = dp.value;
                     }
                     obj = despak(p, store);
+                    console.log('obj3=',obj);
                     return;
                 }
                 /* in proportion to existing violation */
-                else {
+                else { // Option 0
                     for (let i = 0; i < nviol; i++) {
                         j = vflag[i];
                         if (j < design.design_parameters.length) {
@@ -319,20 +341,28 @@ export function trade(store, action) {
                     if (j < design.design_parameters.length) {
                         dp = design.design_parameters[j];
                         if (ldir[i] < 0) {
-                            dp.cmin = dp.cmin + dir[i] * dp.cmin * c3;
-                            dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+//                            dp.cmin = dp.cmin + dir[i] * dp.cmin * c3;
+//                            dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+                            value = dp.cmin + dir[i] * dp.cmin * c3;
+                            store.dispatch(changeDesignParameterConstraint(dp.name, MIN, value));
                         } else {
-                            dp.cmax = dp.cmax + dir[i] * dp.cmax * c3;
-                            dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+//                            dp.cmax = dp.cmax + dir[i] * dp.cmax * c3;
+//                            dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+                            value = dp.cmax + dir[i] * dp.cmax * c3;
+                            store.dispatch(changeDesignParameterConstraint(dp.name, MAX, value));
                         }
                     } else {
                         sv = design.state_variables[j - design.design_parameters.length];
                         if (ldir[i] < 0) {
-                            sv.cmin = sv.cmin + dir[i] * sv.cmin * c3;
-                            sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+//                            sv.cmin = sv.cmin + dir[i] * sv.cmin * c3;
+//                            sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+                            value = sv.cmin + dir[i] * sv.cmin * c3;
+                            store.dispatch(changeStateVariableConstraint(sv.name, MIN, value));
                         } else {
-                            sv.cmax = sv.cmax + dir[i] * sv.cmax * c3;
-                            sv.smax = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+//                            sv.cmax = sv.cmax + dir[i] * sv.cmax * c3;
+//                            sv.smax = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+                            value = sv.cmax + dir[i] * sv.cmax * c3;
+                            store.dispatch(changeStateVariableConstraint(sv.name, MAX, value));
                         }
                     }
                 }
@@ -342,8 +372,12 @@ export function trade(store, action) {
                     p[i] = dp.value;
                 }
                 obj = despak(p, store);
-                if (obj > design.system_controls.objmin)
+                console.log('obj4=',obj);
+                if (obj > design.system_controls.objmin) {
                     obj = search(store, design.system_controls.objmin);
+                    console.log('obj5=',obj);
+                }
+                design = store.getState(); // Re-access store to get latest dp and sv values
                 var notpos = true;
                 while (notpos) {
                     notpos = false;
@@ -365,6 +399,7 @@ export function trade(store, action) {
                                 p[i] = dp.value;
                             }
                             obj = despak(p, store);
+                            console.log('obj6=',obj);
                             return;
                         }
                         for (let i = 0; i < nviol; i++) {
@@ -372,38 +407,43 @@ export function trade(store, action) {
                             if (j < design.design_parameters.length) {
                                 dp = design.design_parameters[j];
                                 if (ldir[i] < 0) {
-                                    dp.cmin = tc[i];
-                                    dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+//                                    dp.cmin = tc[i];
+//                                    dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+                                    store.dispatch(changeDesignParameterConstraint(dp.name, MIN, tc[i]));
                                 } else {
-                                    dp.cmax = tc[i];
-                                    dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+//                                    dp.cmax = tc[i];
+//                                    dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+                                    store.dispatch(changeDesignParameterConstraint(dp.name, MAX, tc[i]));
                                 }
                             } else {
                                 sv = design.state_variables[j - design.design_parameters.length];
                                 if (ldir[i] < 0) {
-                                    sv.cmin = tc[i];
-                                    sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+//                                    sv.cmin = tc[i];
+//                                    sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+                                    store.dispatch(changeStateVariableConstraint(sv.name, MIN, tc[i]));
                                 } else {
-                                    sv.cmax = tc[i];
-                                    sv.smax = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+//                                    sv.cmax = tc[i];
+//                                    sv.smax = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+                                    store.dispatch(changeStateVariableConstraint(sv.name, MAX, tc[i]));
                                 }
                             }
                         }
                         /* call to despak here ??? */
-                        // Begin reset
-                        /** ***************************************************************** */
-                        /* THIS PROCEDURE RESTORES THE FORMER VALUES TO THE P, X, AND V */
-                        /* VECTORS WHEN THE TEMPORARY EXPLORATION IS COMPLETED. */
-                        /** ***************************************************************** */
-                        for (let i = 0; i < design.design_parameters.length; i++) {
-                            dp = design.design_parameters[i];
-                            dp.value = dp.oldvalue;
-                        }
-                        for (let i = 0; i < design.state_variables.length; i++) {
-                            sv = design.state_variables[i];
-                            sv.value = sv.oldvalue;
-                        }
-                        // End reset
+//                        // Begin reset
+//                        /** ***************************************************************** */
+//                        /* THIS PROCEDURE RESTORES THE FORMER VALUES TO THE P, X, AND V */
+//                        /* VECTORS WHEN THE TEMPORARY EXPLORATION IS COMPLETED. */
+//                        /** ***************************************************************** */
+//                        for (let i = 0; i < design.design_parameters.length; i++) {
+//                            dp = design.design_parameters[i];
+//                            dp.value = dp.oldvalue;
+//                        }
+//                        for (let i = 0; i < design.state_variables.length; i++) {
+//                            sv = design.state_variables[i];
+//                            sv.value = sv.oldvalue;
+//                        }
+//                        // End reset
+                        store.dispatch(restoreDesignParameterValues());
                         tagain = true;
                     } else {
                         if (design.system_controls.ioopt > 1) {
@@ -421,38 +461,49 @@ export function trade(store, action) {
                             if (j < design.design_parameters.length) {
                                 dp = design.design_parameters[j];
                                 if (ldir[i] < 0) {
-                                    dp.cmin = tc[i] + dir[i] * tc[i] * c2;
-                                    dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+//                                    dp.cmin = tc[i] + dir[i] * tc[i] * c2;
+//                                    dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+                                    value = tc[i] + dir[i] * tc[i] * c2;
+                                    store.dispatch(changeDesignParameterConstraint(dp.name, MIN, value));
                                 } else {
-                                    dp.cmax = tc[i] + dir[i] * tc[i] * c2;
-                                    dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+//                                    dp.cmax = tc[i] + dir[i] * tc[i] * c2;
+//                                    dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+                                    value = tc[i] + dir[i] * tc[i] * c2;
+                                    store.dispatch(changeDesignParameterConstraint(dp.name, MAX, value));
                                 }
                             } else {
                                 sv = design.state_variables[j - design.design_parameters.length];
                                 if (ldir[i] < 0) {
-                                    sv.cmin = tc[i] + dir[i] * tc[i] * c2;
-                                    sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+//                                    sv.cmin = tc[i] + dir[i] * tc[i] * c2;
+//                                    sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+                                    value = tc[i] + dir[i] * tc[i] * c2;
+                                    store.dispatch(changeStateVariableConstraint(sv.name, MIN, value));
                                 } else {
-                                    sv.cmax = tc[i] + dir[i] * tc[i] * c2;
-                                    sv.smin = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+//                                    sv.cmax = tc[i] + dir[i] * tc[i] * c2;
+//                                    sv.smin = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+                                    value = tc[i] + dir[i] * tc[i] * c2;
+                                    store.dispatch(changeStateVariableConstraint(sv.name, MAX, value));
                                 }
                             }
                         }
-                        // Begin reset
-                        /** ***************************************************************** */
-                        /* THIS PROCEDURE RESTORES THE FORMER VALUES TO THE P, X, AND V */
-                        /* VECTORS WHEN THE TEMPORARY EXPLORATION IS COMPLETED. */
-                        /** ***************************************************************** */
-                        for (let i = 0; i < design.design_parameters.length; i++) {
-                            dp = design.design_parameters[i];
-                            dp.value = dp.oldvalue;
-                        }
-                        for (let i = 0; i < design.state_variables.length; i++) {
-                            sv = design.state_variables[i];
-                            sv.value = sv.oldvalue;
-                        }
-                        // End reset
+//                        // Begin reset
+//                        /** ***************************************************************** */
+//                        /* THIS PROCEDURE RESTORES THE FORMER VALUES TO THE P, X, AND V */
+//                        /* VECTORS WHEN THE TEMPORARY EXPLORATION IS COMPLETED. */
+//                        /** ***************************************************************** */
+//                        for (let i = 0; i < design.design_parameters.length; i++) {
+//                            dp = design.design_parameters[i];
+//                            dp.value = dp.oldvalue;
+//                        }
+//                        for (let i = 0; i < design.state_variables.length; i++) {
+//                            sv = design.state_variables[i];
+//                            sv.value = sv.oldvalue;
+//                        }
+//                        // End reset
+                        store.dispatch(restoreDesignParameterValues());
                         obj = search(store, design.system_controls.objmin);
+                        console.log('obj7=',obj);
+                        design = store.getState(); // Re-access store to get latest dp and sv values
                         if (obj <= design.system_controls.objmin)
                             notpos = true;
                     }
@@ -463,6 +514,7 @@ export function trade(store, action) {
                 clister();
             }
             rk2 = obj;
+//            console.log('rk2=',rk2);
             /** ******** QUADRATIC EXTRAPOLATION ****************************** */
             /* REFER TO THESIS FIGURE 4-2 */
             /* FOR THE CASE THAT C1 ^= 0 : */
@@ -474,13 +526,17 @@ export function trade(store, action) {
             a = -c2;
             b = c2 - c3;
             smc = -c3;
+//            console.log('a=',a,' b=',b,' smc=',smc);
             rk1ac = rk1 / (a * smc);
             rk2ab = rk2 / (a * b);
             rk3bc = rk3 / (b * smc);
+//            console.log('rk1ac=',rk1ac,' rk2ab=',rk2ab,' rk3bc=',rk3bc);
             capa = rk1ac - rk2ab + rk3bc;
             capb = -c2 * (rk1ac + rk3bc) + c3 * (rk2ab - rk1ac);
             capc = rk1;
+//            console.log('capa=',capa,' capb=',capb,' capc=',capc);
             arg = capb * capb - 4.0 * capa * capc;
+//            console.log('arg=',arg);
             if (arg < 0.0) {
                 console.log('THERE MAY BE NO FEASIBLE SOLUTION IN THIS DIRECTION.');
                 console.log('PARABOLA AXIS OF SYMMETRY:');
@@ -495,25 +551,34 @@ export function trade(store, action) {
                 j = vflag[i];
                 if (j < design.design_parameters.length) {
                     dp = design.design_parameters[j];
+//                    console.log('i=',i,' j=',j,' ldir[i]=',ldir[i],' tc[i]=',tc[i],' dir[i]=',dir[i],' c0=',c0);
                     if (ldir[i] < 0) {
-                        dp.cmin = tc[i] + dir[i] * tc[i] * c0;
-                        dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
-                        console.log(dp.name + ' MIN ' + dp.cmin + ' ' + dp.units);
+//                        dp.cmin = tc[i] + dir[i] * tc[i] * c0;
+//                        dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+                        value = tc[i] + dir[i] * tc[i] * c0;
+                        store.dispatch(changeDesignParameterConstraint(dp.name, MIN, value));
+                        console.log(dp.name + ' MIN ' + value + ' ' + dp.units);
                     } else {
-                        dp.cmax = tc[i] + dir[i] * tc[i] * c0;
-                        dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
-                        console.log(dp.name + ' MAX ' + dp.cmax + ' ' + dp.units);
+//                        dp.cmax = tc[i] + dir[i] * tc[i] * c0;
+//                        dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+                        value = tc[i] + dir[i] * tc[i] * c0;
+                        store.dispatch(changeDesignParameterConstraint(dp.name, MAX, value));
+                        console.log(dp.name + ' MAX ' + value + ' ' + dp.units);
                     }
                 } else {
                     sv = design.state_variables[j - design.design_parameters.length];
                     if (ldir[i] < 0) {
-                        sv.cmin = tc[i] + dir[i] * tc[i] * c0;
-                        sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
-                        console.log(sv.name + ' MIN ' + sv.cmin + ' ' + sv.units);
+//                        sv.cmin = tc[i] + dir[i] * tc[i] * c0;
+//                        sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+                        value = tc[i] + dir[i] * tc[i] * c0;
+                        store.dispatch(changeStateVariableConstraint(sv.name, MIN, value));
+                        console.log(sv.name + ' MIN ' + value + ' ' + sv.units);
                     } else {
-                        sv.cmax = tc[i] + dir[i] * tc[i] * c0;
-                        sv.smax = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
-                        console.log(sv.name + ' MAX ' + sv.cmax + ' ' + sv.units);
+//                        sv.cmax = tc[i] + dir[i] * tc[i] * c0;
+//                        sv.smax = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+                        value = tc[i] + dir[i] * tc[i] * c0;
+                        store.dispatch(changeStateVariableConstraint(sv.name, MAX, value));
+                        console.log(sv.name + ' MAX ' + value + ' ' + sv.units);
                     }
                 }
             }
@@ -523,6 +588,8 @@ export function trade(store, action) {
             console.log(yn);
             if (yn !== undefined && 'YES'.startsWith(yn)) {
                 obj = search(store, design.system_controls.objmin);
+                console.log('obj8=',obj);
+                design = store.getState(); // Re-access store to get latest dp and sv values
                 if (obj <= design.system_controls.objmin) {
                     console.log('THE RESULT IS FEASIBLE.');
                     p = [];
@@ -531,6 +598,7 @@ export function trade(store, action) {
                         p[i] = dp.value;
                     }
                     obj = despak(p, store);
+                    console.log('obj9=',obj);
                     return;
                 }
                 while (!top) {
@@ -550,6 +618,7 @@ export function trade(store, action) {
                             p[i] = dp.value;
                         }
                         obj = despak(p, store);
+                        console.log('obj10=',obj);
                         return;
                     }
                     if (choice === '1') {
@@ -558,37 +627,42 @@ export function trade(store, action) {
                             if (j < design.design_parameters.length) {
                                 dp = design.design_parameters[j];
                                 if (ldir[i] < 0) {
-                                    dp.cmin = tc[i];
-                                    dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+//                                    dp.cmin = tc[i];
+//                                    dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+                                    store.dispatch(changeDesignParameterConstraint(dp.name, MIN, tc[i]));
                                 } else {
-                                    dp.cmax = tc[i];
-                                    dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+//                                    dp.cmax = tc[i];
+//                                    dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+                                    store.dispatch(changeDesignParameterConstraint(dp.name, MAX, tc[i]));
                                 }
                             } else {
                                 sv = design.state_variables[j - design.design_parameters.length];
                                 if (ldir[i] < 0) {
-                                    sv.cmin = tc[i];
-                                    sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+//                                    sv.cmin = tc[i];
+//                                    sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+                                    store.dispatch(changeStateVariableConstraint(sv.name, MIN, tc[i]));
                                 } else {
-                                    sv.cmax = tc[i];
-                                    sv.smax = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+//                                    sv.cmax = tc[i];
+//                                    sv.smax = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+                                    store.dispatch(changeStateVariableConstraint(sv.name, MAX, tc[i]));
                                 }
                             }
                         }
-                        // Begin reset
-                        /** ***************************************************************** */
-                        /* THIS PROCEDURE RESTORES THE FORMER VALUES TO THE P, X, AND V */
-                        /* VECTORS WHEN THE TEMPORARY EXPLORATION IS COMPLETED. */
-                        /** ***************************************************************** */
-                        for (let i = 0; i < design.design_parameters.length; i++) {
-                            dp = design.design_parameters[i];
-                            dp.value = dp.oldvalue;
-                        }
-                        for (let i = 0; i < design.state_variables.length; i++) {
-                            sv = design.state_variables[i];
-                            sv.value = sv.oldvalue;
-                        }
-                        // End reset
+//                        // Begin reset
+//                        /** ***************************************************************** */
+//                        /* THIS PROCEDURE RESTORES THE FORMER VALUES TO THE P, X, AND V */
+//                        /* VECTORS WHEN THE TEMPORARY EXPLORATION IS COMPLETED. */
+//                        /** ***************************************************************** */
+//                        for (let i = 0; i < design.design_parameters.length; i++) {
+//                            dp = design.design_parameters[i];
+//                            dp.value = dp.oldvalue;
+//                        }
+//                        for (let i = 0; i < design.state_variables.length; i++) {
+//                            sv = design.state_variables[i];
+//                            sv.value = sv.oldvalue;
+//                        }
+//                        // End reset
+                        store.dispatch(restoreDesignParameterValues());
                         top = true;
                     }
                     if (choice === undefined || choice === '0')
@@ -601,44 +675,52 @@ export function trade(store, action) {
             if (j < design.design_parameters.length) {
                 dp = design.design_parameters[j];
                 if (ldir[i] < 0) {
-                    dp.cmin = tc[i];
-                    dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+//                    dp.cmin = tc[i];
+//                    dp.smin = sclden(design.system_controls, dp.value, dp.cmin, dp.sdlim, dp.lmin);
+                    store.dispatch(changeDesignParameterConstraint(dp.name, MIN, tc[i]));
                 } else {
-                    dp.cmax = tc[i];
-                    dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+//                    dp.cmax = tc[i];
+//                    dp.smax = sclden(design.system_controls, dp.value, dp.cmax, dp.sdlim, dp.lmax);
+                    store.dispatch(changeDesignParameterConstraint(dp.name, MAX, tc[i]));
                 }
             } else {
                 sv = design.state_variables[j - design.design_parameters.length];
                 if (ldir[i] < 0) {
-                    sv.cmin = tc[i];
-                    sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+//                    sv.cmin = tc[i];
+//                    sv.smin = sclden(design.system_controls, sv.value, sv.cmin, sv.sdlim, sv.lmin);
+                    store.dispatch(changeStateVariableConstraint(sv.name, MIN, tc[i]));
                 } else {
-                    sv.cmax = tc[i];
-                    sv.smax = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+//                    sv.cmax = tc[i];
+//                    sv.smax = sclden(design.system_controls, sv.value, sv.cmax, sv.sdlim, sv.lmax);
+                    store.dispatch(changeStateVariableConstraint(sv.name, MAX, tc[i]));
                 }
             }
         }
-        // Begin reset
-        /** ***************************************************************** */
-        /* THIS PROCEDURE RESTORES THE FORMER VALUES TO THE P, X, AND V */
-        /* VECTORS WHEN THE TEMPORARY EXPLORATION IS COMPLETED. */
-        /** ***************************************************************** */
-        for (let i = 0; i < design.design_parameters.length; i++) {
-            dp = design.design_parameters[i];
-            dp.value = dp.oldvalue;
-        }
-        for (let i = 0; i < design.state_variables.length; i++) {
-            sv = design.state_variables[i];
-            sv.value = sv.oldvalue;
-        }
-        // End reset
+//        // Begin reset
+//        /** ***************************************************************** */
+//        /* THIS PROCEDURE RESTORES THE FORMER VALUES TO THE P, X, AND V */
+//        /* VECTORS WHEN THE TEMPORARY EXPLORATION IS COMPLETED. */
+//        /** ***************************************************************** */
+//        for (let i = 0; i < design.design_parameters.length; i++) {
+//            dp = design.design_parameters[i];
+//            dp.value = dp.oldvalue;
+//        }
+//        for (let i = 0; i < design.state_variables.length; i++) {
+//            sv = design.state_variables[i];
+//            sv.value = sv.oldvalue;
+//        }
+//        // End reset
+        store.dispatch(restoreDesignParameterValues());
     }
+    design = store.getState(); // Re-access store to get latest dp and sv values
     p = [];
     for (let i = 0; i < design.design_parameters.length; i++) {
         dp = design.design_parameters[i];
         p[i] = dp.value;
     }
     obj = despak(p, store);
+    console.log('obj11=',obj);
+
     function clister() {
         console.log('CONSTRAINT                % VIOLATION           LEVEL');
         for (let i = 0; i < nviol; i++) {
@@ -660,4 +742,5 @@ export function trade(store, action) {
             }
         }
     }
+
 }
