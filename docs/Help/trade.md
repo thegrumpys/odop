@@ -3,13 +3,13 @@
  design to meet the stated constraints will be determined.  If the result is
  not feasible, it is necessary for the designer to restructure the design in
  some way.  One approach is to change the design in some qualitative way,
- for example, to select stronger (and probably more expensive) materials.  A
- more likely approach is to seek a compromise where one or more of the
+ for example, to select stronger (and probably more expensive) materials. 
+ But first, it makes sense to investigate any available compromise where one or more of the
  original objectives is sacrificed in order to maintain the others.
 
  The TRADE feature may be used to identify those constraints that
  are most leveraged and guide the designer to restructure his goals in a way
- that is most consistent with his original objectives.
+ that is most consistent with the original objectives.
 
  TRADE is similar to SEEK in that it automatically uses the capabilities
  of FIX and SEARCH and some math on the constraint violations to guide a
@@ -26,7 +26,7 @@
  interaction of his objectives with the physics of the problem and thus to
  achieve a design that best meets the problem requirements.
    
- TRADE will ask for "weights" to apply to each of the violated
+ TRADE can ask for "weights" to apply to each of the violated
  constraints.  These weights define the direction that TRADE will
  investigate for constraint relaxation.  Only the relative size of the
  weights matters.  TRADE will normalize the input to unit value.
@@ -43,12 +43,13 @@
  should be larger than the largest percentage constraint violation.
  Perhaps even larger than the sum of all the constraint violations.
 
+
 ## TRADE
 
  TRADE provides decision support for relaxation of constraints.  TRADE
  functions to help locate the "nearest" feasible point when a feasible
  solution is not available with the existing set of constraints.  "Nearest"
- in this case means the feasible point reached with the least total (rms)
+ in this case means the feasible point reached with the least total 
  relaxation of constraints.
 
  TRADE uses a quadratic extrapolation scheme to take steps in the
@@ -63,7 +64,7 @@
  First, the principle axes of the space (i.e.  the currently active
  constraint set) will be listed and the user will be asked to select a
  strategy.  The default "proportional" option should produce the least
- total (rms) motion of the constraint levels and thus produce an answer that
+ total motion of the constraint levels and thus produce an answer that
  is mathematically closest to the original constraint set.  However, because
  the average designer is likely to have very strong feelings about the
  relative priorities of his constraints, the "arbitrary" option should
@@ -76,13 +77,13 @@
 
 * ARBITRARY - accept user weights for each of the violated constraints to determine the relaxation direction.
 
-    The weights assigned may be either positive or negative.  A positive
-    weight implies relaxation of a constraint, while a negative weight
-    implies the movement of a constraint in a more restrictive direction.
-    However, the final extrapolation will always be in the direction of
-    feasibility.  that is, the point reached by trade will always have less
-    restrictive constraints than the starting point, even if all the weights
-    assigned are negative.
+The weights assigned may be either positive or negative.  A positive
+weight implies relaxation of a constraint, while a negative weight
+implies the movement of a constraint in a more restrictive direction.
+However, the final extrapolation will always be in the direction of
+feasibility.  that is, the point reached by trade will always have less
+restrictive constraints than the starting point, even if all the weights
+assigned are negative.
 
 * Relax the violated constraints to their existing violations.
 
@@ -103,11 +104,8 @@
  If the extrapolation fails, this may be an indication that there is no
  feasible solution available in that direction.  In this case, TRADE will
  list information about and then ask to adopt the constraint levels
- corresponding to the parabola symmetry axis.  If IOOPT > 3, TRADE will also
- list information about the result of a linear extrapolation between the
- last two points (probably short of feasibility).
+ corresponding to the parabola symmetry axis. 
 
-   
  A "YES" reply to the opportunity to "adopt these constraints" will invoke
  another search and then allow the user to refine the result by returning to
  the strategy selection phase of the process.

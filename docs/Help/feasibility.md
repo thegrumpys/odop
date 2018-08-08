@@ -7,37 +7,36 @@
 
  Look at the violations.  Adjust constraint levels.  Repeat the search.
 
-
-ZM
  When SEARCH terminates without a feasible solution, it generally means that
  two or more constraints are in conflict.  This is not a hopeless situation.
  There is a good possibility that one or more of those constraints is
- needlessly restrictive.  If they are CHANGEd to a less restrictive value, a
- second SEARCH will likely find a feasible solution.
+ needlessly restrictive.  If they are changed to a less restrictive value, a
+ second SEARCH may find a feasible solution.
 
- Use the LIST VIOLATIONS command to determine which constraints are active.
- Examine the requirements of the application and determine if the constraint
- levels associated with any of the active constraint may be relaxed.  Review
- the section titled WHAT_TO_DO_IF.  It describes a number of possible
- (probable) constraint conflicts and recommends a few solutions.  Use the
- LIST FIXED command to review the list of fixed variables.
+ Active constraints are highlighted in the program user interface (main page). 
+ Examine the associated constraint violations to determine which constraints are dominating the situation.
+ Evaluate the requirements of the application and determine if the constraint
+ levels associated with any of the active constraints may be relaxed. 
+ Alter the values of the active constraint levels to more appropriate values by making
+ entries in the "value" column under "Min Constraint" or Max Constraint".  
+ 
+ The Help section titled WHAT_TO_DO_IF describes a number of possible
+ (probable) constraint conflicts and recommends a few solutions. 
+ For example, confirm that any variables in fixed status (check boxes in the "Fix" column) 
+ really need to be fixed.
 
- Use the CHANGE command to alter the values of the active constraint levels
- to more appropriate values.  Use the FREE command to allow SEARCH to alter
- the value of any variables that are not absolutely determined by the
- application.
+ Uncheck those boxes to allow SEARCH to alter the value of any variables 
+ that are not absolutely determined by the application.
 
  Repeat the SEARCH command.
-ZM
+
  The TRADE command is designed to assist the process of finding a feasible
  design when the designer is faced with two or more conflicting constraints.
  TRADE will use an extrapolation technique to predict the "nearest" feasible
  point from the result of a series of searches.
 
- You may wish to review the sections titled TRADE_OVERVIEW and TRADE before
- using the TRADE command.
+ You may wish to review the Help section on Trade before  using the TRADE feature.
 
-ZM
  To complete the discussion of feasibility, it is appropriate to cover a few
  points about the other side of the coin ...  the situation where a feasible
  solution is available.
@@ -48,10 +47,9 @@ ZM
  amount.  The search is programmed to stop when very close to a feasible
  solution because it is possible for it to move ever closer to feasibility
  without actually achieving it for an unreasonable amount of time.  The
- OBJMIN internal variable controls the stop  vs.  continue decision.  Use
- LIST INTERNAL and SET OBJMIN xxxxx to control it.
+ OBJMIN preference setting  controls the stop  vs.  continue decision.  Use
+ the File : Preferences menu item to control it.
 
-ZM
  When search terminates with a strictly feasible solution (i.e.  OBJ = 0.0),
  the resulting solution point is only one of many possible solution points.
  The entire collection of feasible solution points is referred to as a

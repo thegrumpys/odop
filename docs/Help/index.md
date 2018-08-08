@@ -5,3 +5,4 @@
 * [Feasibility](feasibility)
 * [Search](search)
 * [Seek](seek)
+* [Trade](trade)
