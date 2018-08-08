@@ -494,20 +494,6 @@ export function trade(store, action) {
                                 }
                             }
                         }
-//                        // Begin reset
-//                        /** ***************************************************************** */
-//                        /* THIS PROCEDURE RESTORES THE FORMER VALUES TO THE P, X, AND V */
-//                        /* VECTORS WHEN THE TEMPORARY EXPLORATION IS COMPLETED. */
-//                        /** ***************************************************************** */
-//                        for (let i = 0; i < design.design_parameters.length; i++) {
-//                            dp = design.design_parameters[i];
-//                            dp.value = dp.oldvalue;
-//                        }
-//                        for (let i = 0; i < design.state_variables.length; i++) {
-//                            sv = design.state_variables[i];
-//                            sv.value = sv.oldvalue;
-//                        }
-//                        // End reset
 //                        p = [];
 //                        for (let i = 0; i < design.design_parameters.length; i++) {
 //                            dp = design.design_parameters[i];
@@ -515,6 +501,20 @@ export function trade(store, action) {
 //                        }
 //                        obj = despak(p, store);
 //                        console.log('obj6a=',obj);
+//                      // Begin reset
+//                      /** ***************************************************************** */
+//                      /* THIS PROCEDURE RESTORES THE FORMER VALUES TO THE P, X, AND V */
+//                      /* VECTORS WHEN THE TEMPORARY EXPLORATION IS COMPLETED. */
+//                      /** ***************************************************************** */
+//                      for (let i = 0; i < design.design_parameters.length; i++) {
+//                          dp = design.design_parameters[i];
+//                          dp.value = dp.oldvalue;
+//                      }
+//                      for (let i = 0; i < design.state_variables.length; i++) {
+//                          sv = design.state_variables[i];
+//                          sv.value = sv.oldvalue;
+//                      }
+//                      // End reset
                         store.dispatch(restoreDesignParameterValues());
                         obj = search(store, design.system_controls.objmin);
 //                        console.log('obj7=',obj);

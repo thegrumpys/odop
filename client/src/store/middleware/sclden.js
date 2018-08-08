@@ -16,7 +16,7 @@ export function sclden(system_controls, value, level, sdlimit, flags) {
             result = (1.0 / system_controls.con_wt) * Math.abs(value);
         }
         if (result < system_controls.smallnum) {
-            result = 1.0 / system_controls.con_wt;
+            result = 1.0 / system_controls.zero_wt;
         }
     }
     if (result < sdlimit) {

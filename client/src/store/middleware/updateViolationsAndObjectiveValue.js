@@ -67,10 +67,12 @@ export function updateViolationsAndObjectiveValue(store, merit) {
         } else {
             if (sv.lmin & CONSTRAINED ) { // TODO: || sv.lmin < FREESTAT) {
                 vmin = (-sv.value + sv.cmin) / sv.smin;
+//                console.log('name=',sv.name,' vmin=',vmin,' value=',sv.value,' cmin=',sv.cmin,' smin=',sv.smin);
                 store.dispatch(changeStateVariableViolation(sv.name, MIN, vmin))
             }
             if (sv.lmax & CONSTRAINED ) { // TODO: || sv.lmax < FREESTAT) {
                 vmax = (sv.value - sv.cmax) / sv.smax;
+//                console.log('name=',sv.name,' vmax=',vmax,' value=',sv.value,' cmax=',sv.cmax,' smax=',sv.smax);
                 store.dispatch(changeStateVariableViolation(sv.name, MAX, vmax))
             }
             if (vmin > 0.0) {
