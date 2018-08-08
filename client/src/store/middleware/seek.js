@@ -26,6 +26,7 @@ export function seek(store, action) {
     var dp;
     var sv;
     var p;
+    var obj;
     for (let i = 0; !found && i < design.design_parameters.length; i++) {
         dp = design.design_parameters[i];
         if (dp.name.startsWith(action.payload.name)) {
@@ -60,7 +61,7 @@ export function seek(store, action) {
         M_DEN = 1.0;
     }
     store.dispatch(saveDesignParameterValues());
-    search(store, -1.0, merit);
+    obj = search(store, -1.0, merit);
     design = store.getState(); // Re-access store to get latest dp and sv values
     if (SOUGHT > 0) {
         M_NUM = design.design_parameters[SOUGHT - 1].value;
@@ -76,22 +77,18 @@ export function seek(store, action) {
         dp = design.design_parameters[i];
         p[i] = dp.value;
     }
-    despak(p, store);
-    design = store.getState(); // Re-access store to get latest dp and sv values
-    if (design.result.objective_value < design.system_controls.objmin) {
+    obj = despak(p, store);
+    if (obj < design.system_controls.objmin) {
         store.dispatch(restoreDesignParameterValues());
-        design = store.getState(); // Re-access store to get latest dp and sv values
     } else {
-        search(store, design.system_controls.objmin);
-        design = store.getState(); // Re-access store to get latest dp and sv values
+        obj = search(store, design.system_controls.objmin);
     }
     M_DEN = Math.abs(M_NUM) / design.system_controls.mfn_wt;
     if (M_DEN < design.system_controls.smallnum) {
         M_DEN = 1.0;
     }
-    search(store, design.system_controls.objmin, merit);
-    design = store.getState(); // Re-access store to get latest dp and sv values
-    if (design.result.objective_value < 0.0) {
+    obj = search(store, design.system_controls.objmin, merit);
+    if (obj < 0.0) {
         ncode = 'SEEK SHOULD BE RE-EXECUTED WITH A NEW ESTIMATE OF THE OPTIMUM';
         store.dispatch(changeResultTerminationCondition(ncode));
     } else {
