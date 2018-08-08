@@ -3,6 +3,7 @@ import { STARTUP,
     CHANGE_NAME, 
     
     CHANGE_DESIGN_PARAMETER_VALUE, 
+    CHANGE_DESIGN_PARAMETER_VALUES, 
     SAVE_DESIGN_PARAMETER_VALUES, 
     RESTORE_DESIGN_PARAMETER_VALUES, 
     CHANGE_DESIGN_PARAMETER_VIOLATION, 
@@ -11,6 +12,7 @@ import { STARTUP,
     RESET_DESIGN_PARAMETER_FLAG, 
     
     CHANGE_STATE_VARIABLE_VALUE, 
+    CHANGE_STATE_VARIABLE_VALUES, 
     CHANGE_STATE_VARIABLE_VIOLATION, 
     CHANGE_STATE_VARIABLE_CONSTRAINT, 
     SAVE_STATE_VARIABLE_CONSTRAINTS, 
@@ -51,6 +53,14 @@ export function reducers(state, action) {
                 return design_parameter;
             })
         });
+    case CHANGE_DESIGN_PARAMETER_VALUES:
+        return Object.assign({}, state, {
+            design_parameters: state.design_parameters.map((design_parameter, index) => {
+                return Object.assign({}, design_parameter, {
+                    value: action.payload.values[index]
+                });
+            })
+        });
     case SAVE_DESIGN_PARAMETER_VALUES:
         return Object.assign({}, state, {
             design_parameters: state.design_parameters.map((design_parameter) => {
@@ -63,7 +73,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             design_parameters: state.design_parameters.map((design_parameter) => {
                 return Object.assign({}, design_parameter, {
-                    value: design_parameter.oldvalue,
+                    value: design_parameter.oldvalue
                 });
             })
         });
@@ -146,6 +156,14 @@ export function reducers(state, action) {
                     });
                 }
                 return state_variable;
+            })
+        });
+    case CHANGE_STATE_VARIABLE_VALUES:
+        return Object.assign({}, state, {
+            state_variables: state.state_variables.map((state_variable, index) => {
+                return Object.assign({}, state_variable, {
+                    value: action.payload.values[index]
+                });
             })
         });
     case CHANGE_STATE_VARIABLE_VIOLATION:

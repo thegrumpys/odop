@@ -71,7 +71,7 @@ export function trade(store, action) {
             p[i] = dp.value;
         }
         obj = despak(p, store);
-        console.log('obj1=',obj);
+//        console.log('obj1=',obj);
         
         design = store.getState(); // Re-access store to get latest dp and sv values
         
@@ -199,7 +199,7 @@ export function trade(store, action) {
                         p[i] = dp.value;
                     }
                     obj = despak(p, store);
-                    console.log('obj2=',obj);
+//                    console.log('obj2=',obj);
                     return;
                 }
                 /* return to command level */
@@ -210,7 +210,7 @@ export function trade(store, action) {
                         p[i] = dp.value;
                     }
                     obj = despak(p, store);
-                    console.log('obj3=',obj);
+//                    console.log('obj3=',obj);
                     return;
                 }
                 /* in proportion to existing violation */
@@ -372,10 +372,10 @@ export function trade(store, action) {
                     p[i] = dp.value;
                 }
                 obj = despak(p, store);
-                console.log('obj4=',obj);
+//                console.log('obj4=',obj);
                 if (obj > design.system_controls.objmin) {
                     obj = search(store, design.system_controls.objmin);
-                    console.log('obj5=',obj);
+//                    console.log('obj5=',obj);
                 }
                 design = store.getState(); // Re-access store to get latest dp and sv values
                 var notpos = true;
@@ -399,7 +399,7 @@ export function trade(store, action) {
                                 p[i] = dp.value;
                             }
                             obj = despak(p, store);
-                            console.log('obj6=',obj);
+//                            console.log('obj6=',obj);
                             return;
                         }
                         for (let i = 0; i < nviol; i++) {
@@ -456,8 +456,16 @@ export function trade(store, action) {
                          * FIRST ONE ***
                          */
                         c2 = c3 / 2.0;
+//                        p = [];
+//                        for (let i = 0; i < design.design_parameters.length; i++) {
+//                            dp = design.design_parameters[i];
+//                            p[i] = dp.value;
+//                        }
+//                        obj = despak(p, store);
+//                        console.log('obj6b=',obj);
                         for (let i = 0; i < nviol; i++) {
                             j = vflag[i];
+//                            console.log('i=',i,' j=',j,' ldir[i]=',ldir[i],' tc[i]=',tc[i],' dir[i]=',dir[i],' c2=',c2);
                             if (j < design.design_parameters.length) {
                                 dp = design.design_parameters[j];
                                 if (ldir[i] < 0) {
@@ -500,9 +508,16 @@ export function trade(store, action) {
 //                            sv.value = sv.oldvalue;
 //                        }
 //                        // End reset
+//                        p = [];
+//                        for (let i = 0; i < design.design_parameters.length; i++) {
+//                            dp = design.design_parameters[i];
+//                            p[i] = dp.value;
+//                        }
+//                        obj = despak(p, store);
+//                        console.log('obj6a=',obj);
                         store.dispatch(restoreDesignParameterValues());
                         obj = search(store, design.system_controls.objmin);
-                        console.log('obj7=',obj);
+//                        console.log('obj7=',obj);
                         design = store.getState(); // Re-access store to get latest dp and sv values
                         if (obj <= design.system_controls.objmin)
                             notpos = true;
@@ -588,7 +603,7 @@ export function trade(store, action) {
             console.log(yn);
             if (yn !== undefined && 'YES'.startsWith(yn)) {
                 obj = search(store, design.system_controls.objmin);
-                console.log('obj8=',obj);
+//                console.log('obj8=',obj);
                 design = store.getState(); // Re-access store to get latest dp and sv values
                 if (obj <= design.system_controls.objmin) {
                     console.log('THE RESULT IS FEASIBLE.');
@@ -598,7 +613,7 @@ export function trade(store, action) {
                         p[i] = dp.value;
                     }
                     obj = despak(p, store);
-                    console.log('obj9=',obj);
+//                    console.log('obj9=',obj);
                     return;
                 }
                 while (!top) {
@@ -618,7 +633,7 @@ export function trade(store, action) {
                             p[i] = dp.value;
                         }
                         obj = despak(p, store);
-                        console.log('obj10=',obj);
+//                        console.log('obj10=',obj);
                         return;
                     }
                     if (choice === '1') {
@@ -719,8 +734,7 @@ export function trade(store, action) {
         p[i] = dp.value;
     }
     obj = despak(p, store);
-    console.log('obj11=',obj);
-
+//    console.log('obj11=',obj);
     function clister() {
         console.log('CONSTRAINT                % VIOLATION           LEVEL');
         for (let i = 0; i < nviol; i++) {

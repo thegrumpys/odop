@@ -1,5 +1,5 @@
 import { FIXED } from '../actionTypes';
-import { changeDesignParameterValue, changeResultTerminationCondition } from '../actionCreators';
+import { changeDesignParameterValues, changeResultTerminationCondition } from '../actionCreators';
 import { patsh } from './patsh';
 
 // Search
@@ -23,12 +23,16 @@ export function search(store, objmin, merit) {
     
     // Expand PC back into store change actions
     var kd = 0;
+    var p = [];
     for (let i = 0; i < design.design_parameters.length; i++) {
         dp = design.design_parameters[i];
         if (!(dp.lmin & FIXED)) {
-            store.dispatch(changeDesignParameterValue(dp.name, pc[kd++], merit));
+            p[i] = pc[kd++];
+        } else {
+            p[i] = dp.value;
         }
     }
+    store.dispatch(changeDesignParameterValues(p, merit));
     store.dispatch(changeResultTerminationCondition(ncode));
     
     design = store.getState();
