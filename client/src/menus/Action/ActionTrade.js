@@ -14,19 +14,29 @@ import { changeDesignParameterConstraint,
 class ActionTrade extends React.Component {
     constructor(props) {
         super(props);
+        
         this.strategyToggle = this.strategyToggle.bind(this);
+        
         this.onStrategyCancel = this.onStrategyCancel.bind(this);
         this.onStrategyExisting = this.onStrategyExisting.bind(this);
         this.onStrategyArbitrary = this.onStrategyArbitrary.bind(this);
         this.onStrategyProportional = this.onStrategyProportional.bind(this);
+        
         this.onProportionalCancel = this.onProportionalCancel.bind(this);
         this.onProportionalContinue = this.onProportionalContinue.bind(this);
+        
         this.onEstablishNo = this.onEstablishNo.bind(this);
         this.onEstablishYes = this.onEstablishYes.bind(this);
+        
+        this.onNotFeasibleRepeat = this.onNotFeasibleRepeat.bind(this);
+        this.onNotFeasibleRestart = this.onNotFeasibleRestart.bind(this);
+        this.onNotFeasibleDone = this.onNotFeasibleDone.bind(this);
+        
         this.state = {
                 strategyModal: false,
                 proportionalModal: false,
-                establishModal: false
+                establishModal: false,
+                notFeasibleModal: false
             };
     }
     
@@ -37,6 +47,23 @@ class ActionTrade extends React.Component {
     strategyToggle() {
         console.log('In strategyToggle');
         console.log('state=',this.state);
+        const { store } = this.context;
+        console.log('store=',store);
+        var design = store.getState();
+        this.commonViolationSetup();
+        console.log('nviol2=',this.state.nviol); // Check for stale
+        if (design.result.objective_value <= design.system_controls.objmin || this.state.nviol === 0) {
+            var ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE';
+            this.props.changeResultTerminationCondition(ncode);
+            return;
+        } else {
+            this.setState({
+                strategyModal: !this.state.strategyModal,
+            });
+        }
+    }
+    
+    commonViolationSetup() {
         const { store } = this.context;
         console.log('store=',store);
         var design = store.getState();
@@ -73,17 +100,11 @@ class ActionTrade extends React.Component {
         console.log('nviol=',nviol);
         console.log('vflag=',vflag);
         console.log('ldir=',ldir);
-        if (design.result.objective_value <= design.system_controls.objmin || nviol === 0) {
-            var ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE';
-            this.props.changeResultTerminationCondition(ncode);
-        } else {
-            this.setState({
-                strategyModal: !this.state.strategyModal,
-                nviol: nviol,
-                vflag: vflag,
-                ldir: ldir
-            });
-        }
+        this.setState({
+            nviol: nviol,
+            vflag: vflag,
+            ldir: ldir
+        });
     }
 
     //===========================================================
@@ -96,11 +117,12 @@ class ActionTrade extends React.Component {
 //        const { store } = this.context;
 //        console.log('store=',store);
 //        var design = store.getState();
-        var ncode = 'NO ACTION REQUESTED';
+        var ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
         this.setState({
             strategyModal: !this.state.strategyModal
         });
+        return;
     }
 
     onStrategyExisting() { // Option 2
@@ -139,6 +161,7 @@ class ActionTrade extends React.Component {
         this.setState({
             strategyModal: !this.state.strategyModal
         });
+        return;
     }
 
     onStrategyArbitrary() { // Option 1
@@ -249,13 +272,13 @@ class ActionTrade extends React.Component {
                 sv = design.state_variables[j - design.design_parameters.length];
                 if (this.state.ldir[i] < 0)
                     if (temp2 > design.system_controls.smallnum)
-                        temp = dp.vmin / temp2;
+                        temp = sv.vmin / temp2;
                     else
-                        temp = dp.vmin;
+                        temp = sv.vmin;
                 else if (temp2 > design.system_controls.smallnum)
-                    temp = dp.vmax / temp2;
+                    temp = sv.vmax / temp2;
                 else
-                    temp = dp.vmax;
+                    temp = sv.vmax;
             }
             if (temp > design.system_controls.smallnum && temp < smallest)
                 smallest = temp;
@@ -300,11 +323,12 @@ class ActionTrade extends React.Component {
 //        const { store } = this.context;
 //        console.log('store=',store);
 //        var design = store.getState();
+        var ncode = 'NO ACTION REQUESTED';
+        this.props.changeResultTerminationCondition(ncode);
         this.setState({
             proportionalModal: !this.state.proportionalModal
         });
-        var ncode = 'NO ACTION REQUESTED';
-        this.props.changeResultTerminationCondition(ncode);
+        return;
     }
     
     onProportionalContinue() {
@@ -359,7 +383,7 @@ class ActionTrade extends React.Component {
         }
         design = store.getState();
         if (design.result.objective_value <= design.system_controls.objmin) {
-            // TODO: Feasible found
+            // TODO: Feasible found: yesFeasible Modal
             this.setState({
                 proportionalModal: !this.state.proportionalModal
             });
@@ -509,11 +533,12 @@ class ActionTrade extends React.Component {
             }
         }
         this.props.restoreDesignParameterValues();
+        var ncode = 'DECLINED TRADE RESULT';
+        this.props.changeResultTerminationCondition(ncode);
         this.setState({
             establishModal: !this.state.establishModal
         });
-        var ncode = 'DECLINED TRADE RESULT';
-        this.props.changeResultTerminationCondition(ncode);
+        return;
     }
     
     onEstablishYes() {
@@ -522,11 +547,81 @@ class ActionTrade extends React.Component {
         const { store } = this.context;
         console.log('store=',store);
         var design = store.getState();
+        search(store, design.system_controls.objmin);
+        design = store.getState(); // Re-access store to get latest dp and sv values
+        if (design.result.objective_value <= design.system_controls.objmin) {
+            var ncode = 'THE RESULT IS FEASIBLE';
+            this.props.changeResultTerminationCondition(ncode);
+            this.setState({
+                establishModal: !this.state.establishModal
+            });
+            return;
+        }
         this.setState({
-            establishModal: !this.state.establishModal
+            establishModal: !this.state.establishModal,
+            notFeasibleModal: !this.state.notFeasibleModal
         });
-        var ncode = 'DECLINED TRADE RESULT';
+    }
+    
+    //===========================================================
+    // Not Feasible Modal 
+    //===========================================================
+    
+    onNotFeasibleRepeat() {
+        console.log('In onNotFeasibleRepeat');
+        console.log('state=',this.state);
+        this.commonViolationSetup()
+        this.setState({
+            notFeasibleModal: !this.state.notFeasibleModal,
+            strategyModal: !this.state.strategyModal
+        });
+    }
+    
+    onNotFeasibleRestart() {
+        console.log('In onNotFeasibleRestart');
+        console.log('state=',this.state);
+        const { store } = this.context;
+        console.log('store=',store);
+        var design = store.getState();
+        var dp;
+        var sv;
+        for (let i = 0; i < this.state.nviol; i++) {
+            let j = this.state.vflag[i];
+            if (j < design.design_parameters.length) {
+                dp = design.design_parameters[j];
+                if (this.state.ldir[i] < 0) {
+                    this.props.changeDesignParameterConstraint(dp.name, MIN, this.state.tc[i]);
+                } else {
+                    this.props.changeDesignParameterConstraint(dp.name, MAX, this.state.tc[i]);
+                }
+            } else {
+                sv = design.state_variables[j - design.design_parameters.length];
+                if (this.state.ldir[i] < 0) {
+                    this.props.changeStateVariableConstraint(sv.name, MIN, this.state.tc[i]);
+                } else {
+                    this.props.changeStateVariableConstraint(sv.name, MAX, this.state.tc[i]);
+                }
+            }
+        }
+        this.props.restoreDesignParameterValues();
+        this.commonViolationSetup()
+        this.setState({
+            notFeasibleModal: !this.state.notFeasibleModal,
+            strategyModal: !this.state.strategyModal
+        });
+    }
+    
+    onNotFeasibleDone() {
+        console.log('In onNotFeasibleDone');
+        console.log('state=',this.state);
+//        const { store } = this.context;
+//        console.log('store=',store);
+//        var design = store.getState();
+        var ncode = 'ACCEPTED TRADE RESULT';
         this.props.changeResultTerminationCondition(ncode);
+        this.setState({
+            notFeasibleModal: !this.state.notFeasibleModal
+        });
     }
     
     //===========================================================
@@ -539,7 +634,7 @@ class ActionTrade extends React.Component {
                 <DropdownItem onClick={this.strategyToggle}>
                     Trade
                 </DropdownItem>
-                <Modal isOpen={this.state.strategyModal} className={this.props.className} size="lg">
+                <Modal isOpen={this.state.strategyModal} className={this.props.className}>
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy </ModalHeader>
                     <ModalBody>
                         Specify your trade strategy ...  relax constraints:<br/>
@@ -555,7 +650,7 @@ class ActionTrade extends React.Component {
                         <Button color="primary" onClick={this.onStrategyProportional}>Proportional</Button>
                     </ModalFooter>
                 </Modal>
-                <Modal isOpen={this.state.proportionalModal} className={this.props.className} size="lg">
+                <Modal isOpen={this.state.proportionalModal} className={this.props.className}>
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Proportional </ModalHeader>
                     <ModalBody>
                         Enter local exploration size  (%)<br/>
@@ -567,7 +662,7 @@ class ActionTrade extends React.Component {
                         <Button color="primary" onClick={this.onProportionalContinue}>Continue</Button>
                     </ModalFooter>
                 </Modal>
-                <Modal isOpen={this.state.establishModal} className={this.props.className} size="lg">
+                <Modal isOpen={this.state.establishModal} className={this.props.className}>
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Proportional </ModalHeader>
                     <ModalBody>
                         Do you wish to establish this set of constraints?
@@ -575,6 +670,20 @@ class ActionTrade extends React.Component {
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onEstablishYes}>Yes</Button>{' '}
                         <Button color="primary" onClick={this.onEstablishNo}>No</Button>
+                    </ModalFooter>
+                </Modal>
+                <Modal isOpen={this.state.notFeasibleModal} className={this.props.className}>
+                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Not Feasible </ModalHeader>
+                    <ModalBody>
+                        The result is not feasible: obj = {this.props.design.result.objective_value }<br/>
+                        Repeat - To make another extrapolation series<br/>
+                        Restart - To restart from the beginning of this series<br/>
+                        Done - To return with these constraints
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="secondary" onClick={this.onNotFeasibleRepeat}>Repeat</Button>{' '}
+                        <Button color="secondary" onClick={this.onNotFeasibleRestart}>Restart</Button>{' '}
+                        <Button color="primary" onClick={this.onNotFeasibleDone}>Done</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
