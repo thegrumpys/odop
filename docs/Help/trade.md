@@ -71,7 +71,7 @@
  be of greater interest.
 
    
- #### The strategy options:
+#### The strategy options:
 
 * PROPORTIONAL - move constraint levels in a proportion determined by their existing violations (as a measure of their influence).
 
