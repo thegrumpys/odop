@@ -13,8 +13,10 @@
 * [Introduction](Help/introduction)
 * [Features](Help/features)
 * [Terminology](Help/terminology)
+* [Feasibility](Help/feasibility)
 * [Search](Help/search)
 * [Seek](Help/seek)
+* [Trade](Help/trade)
 
 
 ## Design
