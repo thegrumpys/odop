@@ -289,13 +289,13 @@ export function trade(store, action) {
                         sv = design.state_variables[j - design.design_parameters.length];
                         if (ldir[i] < 0)
                             if (temp2 > design.system_controls.smallnum)
-                                temp = dp.vmin / temp2;
+                                temp = sv.vmin / temp2;
                             else
-                                temp = dp.vmin;
+                                temp = sv.vmin;
                         else if (temp2 > design.system_controls.smallnum)
-                            temp = dp.vmax / temp2;
+                            temp = sv.vmax / temp2;
                         else
-                            temp = dp.vmax;
+                            temp = sv.vmax;
                     }
                     if (temp > design.system_controls.smallnum && temp < smalest)
                         smalest = temp;
