@@ -2,34 +2,55 @@
 
 #### Open Design Optimzation : Platform &nbsp; (ODO:P)   
 
-ODO:P is a web software application currently under development.
+ODO:P is a web software application (web app) currently under development.
 It provides a number of features and capabilities to facilitate the analysis 
-and design of a broad range of problems where a mathematical model is available. 
+and design of a broad range of problems that have a mathematical model available. 
 
 #### ODO:P is:
 
-Open Source   
+* Open Source Software  
 
-Browser Based   
+The ODO:P software is being developed as open source software. 
+ The source code is freely available under the (permissive) MIT License.
+ There are no fees associated with use or resdistribution of the software.
+ You are free to modify or customise the software to suit your needs.
+ It is expected that various organizations may host the software on their servers
+ and allow free use of the software by the general public.
 
-Responsive to different screen sizes   
+* Browser Based   
 
-Capable of directly producing the desired solution   
+The ODO:P software is expected to run on most modern web browsers.
+A very broad range of hardware and operating systems will be able to utilize the software.
+This includes Microsoft Windows and Apple MacOS, Linux systems plus many iOS and Android based mobile devices.
+As browser-based software, there is no "app" to be downloaded and installed. 
+
+* Responsive to different screen sizes   
+
+Developed as a "responsive" web app as the software will change its
+screen layout and input behavior in response to the capabilities of the user's device.
+Note that while operation on a cell phone may be possible, 
+the scrolling necessary to accomodate screen size limitations may impact productivity.  
+
+* Capable of directly producing the desired solution.
+
 The ODO:P software can eliminate the iterative analysis process that is common with more conventional
 approaches to design.  While certainly capable of analyzing the
 performance of an existing design, ODO:P is at its best when used to
 develop solutions to difficult and highly constrained original design problems.
  
-Analysis  is just the beginning ...   
+* Analysis  is just the beginning ...   
 
- >>> Insert blather here. <<< 
+ The user's ability to enter independent variables and compute dependent variables 
+ is the most basic of the software's capabilities.
+ In situations where that is the only capability, the designer is forced to iterate,
+ basically guess values for inputs in order to produce the desired values of outputs.
  
 Inversion of design equations
 
  ODO:P is very versatile in its approach to design because it has
  the capability to invert the dependent-independent relationships of the
  design equations.  This means that the designer can enter his design
- problem in exactly the terms that it is specified.  
+ problem in exactly the terms that it is specified. 
  For example, when designing a spring, if force and deflection
  at two points are specified, the program can solve the problem without
  explicitly using spring rate.  If spring rate and maximum load are
@@ -38,7 +59,7 @@ Inversion of design equations
  consistent combination of specifications on the problem.
 
 
-Selection of design parameters within constraints
+* Selection of design parameters within constraints
 
  ODO:P selects values for independent variables (design parameters).
  In the spring design example, these might include selecting quantities such as wire
