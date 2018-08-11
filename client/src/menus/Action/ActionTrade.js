@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button, Container, Row, Col, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, MIN, MAX } from '../../store/actionTypes';
 import { changeDesignParameterConstraint,
@@ -36,7 +36,11 @@ class ActionTrade extends React.Component {
                 strategyModal: false,
                 proportionalModal: false,
                 establishModal: false,
-                notFeasibleModal: false
+                notFeasibleModal: false,
+                nviol:  0,
+                vflag: [],
+                ldir: [],
+                dir: []
             };
     }
     
@@ -314,6 +318,44 @@ class ActionTrade extends React.Component {
     }
 
     //===========================================================
+    // Arbitrary Modal
+    //===========================================================
+    
+    onArbitraryCancel() {
+        console.log('In onArbitraryCancel');
+        console.log('state=',this.state);
+//        const { store } = this.context;
+//        console.log('store=',store);
+//        var design = store.getState();
+        var ncode = 'TRADE CANCELLED';
+        this.props.changeResultTerminationCondition(ncode);
+        this.setState({
+            arbitraryModal: !this.state.arbitraryModal
+        });
+        return;
+    }
+    
+    onArbitraryChange(i, event) {
+        console.log('i=',i,' event=',event.target.value);
+        // dir[i] = this.state.ldir[i] * parseFloat(event.target.value);
+//        this.setState({
+//            dir: dir
+//        });
+    }
+    
+    onArbitraryContinue() {
+        console.log('In onArbitraryContinue');
+        console.log('state=',this.state);
+//        const { store } = this.context;
+//        console.log('store=',store);
+//        var design = store.getState();
+        this.setState({
+            arbitraryModal: !this.state.arbitraryModal,
+            proportionalModal: !this.state.proportionalModal,
+        });
+    }
+    
+    //===========================================================
     // Proportional Modal
     //===========================================================
     
@@ -323,7 +365,7 @@ class ActionTrade extends React.Component {
 //        const { store } = this.context;
 //        console.log('store=',store);
 //        var design = store.getState();
-        var ncode = 'NO ACTION REQUESTED';
+        var ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
         this.setState({
             proportionalModal: !this.state.proportionalModal
@@ -547,7 +589,7 @@ class ActionTrade extends React.Component {
         const { store } = this.context;
         console.log('store=',store);
         var design = store.getState();
-        search(store, design.system_controls.objmin);
+        this.props.search();
         design = store.getState(); // Re-access store to get latest dp and sv values
         if (design.result.objective_value <= design.system_controls.objmin) {
             var ncode = 'THE RESULT IS FEASIBLE';
@@ -634,7 +676,7 @@ class ActionTrade extends React.Component {
                 <DropdownItem onClick={this.strategyToggle}>
                     Trade
                 </DropdownItem>
-                <Modal isOpen={this.state.strategyModal} className={this.props.className}>
+                <Modal isOpen={this.state.strategyModal} className={this.props.className} size="lg'">
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy </ModalHeader>
                     <ModalBody>
                         Specify your trade strategy ...  relax constraints:<br/>
@@ -650,6 +692,46 @@ class ActionTrade extends React.Component {
                         <Button color="primary" onClick={this.onStrategyProportional}>Proportional</Button>
                     </ModalFooter>
                 </Modal>
+                <Modal isOpen={this.state.arbitraryModal} className={this.props.className}>
+                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Arbitrary </ModalHeader>
+                    <ModalBody>
+                        <Container>
+                            <Row>
+                                <Col className="text-left font-weight-bold">Name</Col>
+                                <Col className="text-right font-weight-bold">Weight</Col>
+                            </Row>
+                            {
+                                this.state.vflag.map((j,i) => {
+                                    const { store } = this.context;
+                                    console.log('store=',store);
+                                    var design = store.getState();
+                                    var dp;
+                                    var sv;
+                                    var dname;
+                                    if (j < design.design_parameters.length) {
+                                        dp = design.design_parameters[j];
+                                        dname = dp.name;
+                                    } else {
+                                        sv = design.state_variables[j - design.design_parameters.length];
+                                        dname = sv.name;
+                                    }
+                                    return (
+                                        <Row key={dname}>
+                                            <Col className="align-middle text-left">{dname}</Col>
+                                            <Col className="align-middle text-right">
+                                                <Input className="text-right" type="number" value={this.state.dir[i]} onChange={(event) => {this.onArbitraryChange(i, event.target.value)}}/>
+                                            </Col>
+                                        </Row>
+                                    );
+                                })
+                            }
+                        </Container>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="secondary" onClick={this.onArbitraryCancel}>Cancel</Button>{' '}
+                        <Button color="primary" onClick={this.onArbitraryContinue}>Continue</Button>
+                    </ModalFooter>
+                </Modal>
                 <Modal isOpen={this.state.proportionalModal} className={this.props.className}>
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Proportional </ModalHeader>
                     <ModalBody>
@@ -663,7 +745,7 @@ class ActionTrade extends React.Component {
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.state.establishModal} className={this.props.className}>
-                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Proportional </ModalHeader>
+                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Establish </ModalHeader>
                     <ModalBody>
                         Do you wish to establish this set of constraints?
                     </ModalBody>
