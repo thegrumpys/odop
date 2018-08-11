@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button, Container, Row, Col, Input } from 'reactstrap';
+import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button, Container, Row, Col, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, MIN, MAX } from '../../store/actionTypes';
 import { changeDesignParameterConstraint,
@@ -10,6 +10,15 @@ import { changeDesignParameterConstraint,
     changeResultTerminationCondition,
     search,
     trade } from '../../store/actionCreators';
+    
+// Things to do:
+// * Fixed Loop TODO first!!!
+// * Add clister to modal mostly
+// * Research ERROR-### line
+// * Scan for TODOs
+// * Improved wording, layout of modals and button labels
+// * Testing
+// * Reimplement as middleware
 
 class ActionTrade extends React.Component {
     constructor(props) {
@@ -20,10 +29,18 @@ class ActionTrade extends React.Component {
         this.onStrategyCancel = this.onStrategyCancel.bind(this);
         this.onStrategyExisting = this.onStrategyExisting.bind(this);
         this.onStrategyArbitrary = this.onStrategyArbitrary.bind(this);
-        this.onStrategyProportional = this.onStrategyProportional.bind(this);
+        this.onStrategySize = this.onStrategySize.bind(this);
         
-        this.onProportionalCancel = this.onProportionalCancel.bind(this);
-        this.onProportionalContinue = this.onProportionalContinue.bind(this);
+        this.onArbitraryCancel = this.onArbitraryCancel.bind(this);
+        this.onArbitraryContinue = this.onArbitraryContinue.bind(this);
+        this.onArbitraryChange = this.onArbitraryChange.bind(this);
+
+        this.onSizeCancel = this.onSizeCancel.bind(this);
+        this.onSizeContinue = this.onSizeContinue.bind(this);
+        this.onSizeChange = this.onSizeChange.bind(this);
+        
+        this.onFeasibleRestart = this.onFeasibleRestart.bind(this);
+        this.onFeasibleDone = this.onFeasibleDone.bind(this);
         
         this.onEstablishNo = this.onEstablishNo.bind(this);
         this.onEstablishYes = this.onEstablishYes.bind(this);
@@ -34,7 +51,9 @@ class ActionTrade extends React.Component {
         
         this.state = {
                 strategyModal: false,
-                proportionalModal: false,
+                arbitraryModal: false,
+                sizeModal: false,
+                feasibleModal: false,
                 establishModal: false,
                 notFeasibleModal: false,
                 nviol:  0,
@@ -52,11 +71,10 @@ class ActionTrade extends React.Component {
         console.log('In strategyToggle');
         console.log('state=',this.state);
         const { store } = this.context;
-        console.log('store=',store);
         var design = store.getState();
-        this.commonViolationSetup();
+        var nviol = this.commonViolationSetup();
         console.log('nviol2=',this.state.nviol); // Check for stale
-        if (design.result.objective_value <= design.system_controls.objmin || this.state.nviol === 0) {
+        if (design.result.objective_value <= design.system_controls.objmin || nviol === 0) {
             var ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE';
             this.props.changeResultTerminationCondition(ncode);
             return;
@@ -69,7 +87,6 @@ class ActionTrade extends React.Component {
     
     commonViolationSetup() {
         const { store } = this.context;
-        console.log('store=',store);
         var design = store.getState();
         var dp;
         var sv;
@@ -109,6 +126,7 @@ class ActionTrade extends React.Component {
             vflag: vflag,
             ldir: ldir
         });
+        return nviol;
     }
 
     //===========================================================
@@ -118,9 +136,6 @@ class ActionTrade extends React.Component {
     onStrategyCancel() { // Option 3
         console.log('In onStrategyCancel');
         console.log('state=',this.state);
-//        const { store } = this.context;
-//        console.log('store=',store);
-//        var design = store.getState();
         var ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
         this.setState({
@@ -133,7 +148,6 @@ class ActionTrade extends React.Component {
         console.log('In onStrategyExisting');
         console.log('state=',this.state);
         const { store } = this.context;
-        console.log('store=',store);
         var design = store.getState();
         var dp;
         var sv;
@@ -171,18 +185,21 @@ class ActionTrade extends React.Component {
     onStrategyArbitrary() { // Option 1
         console.log('In onStrategyArbitrary');
         console.log('state=',this.state);
-//        const { store } = this.context;
-//        console.log('store=',store);
-//        var design = store.getState();
         var dir = [];
-        this.commonProportionalOrArbitrary(dir);
+        for (let i=0; i<this.state.nviol; i++) {
+            dir[i] = 1.0;
+        }
+        this.commonSizeOrArbitrary(dir);
+        this.setState({
+            strategyModal: !this.state.strategyModal,
+            arbitraryModal: !this.state.arbitraryModal
+        });
     }
 
-    onStrategyProportional() { // Option 0
-        console.log('In onStrategyProportional');
+    onStrategySize() { // Option 0
+        console.log('In onStrategySize');
         console.log('state=',this.state);
         const { store } = this.context;
-        console.log('store=',store);
         var design = store.getState();
         var dp;
         var sv;
@@ -203,16 +220,19 @@ class ActionTrade extends React.Component {
                     dir[i] = this.state.ldir[i] * sv.vmax;
             }
         }
-        this.commonProportionalOrArbitrary(dir);
+        this.commonSizeOrArbitrary(dir);
+        this.setState({
+            strategyModal: !this.state.strategyModal,
+            sizeModal: !this.state.sizeModal,
+        });
     }
     
-    commonProportionalOrArbitrary(dir) {
+    commonSizeOrArbitrary(dir) {
         /**
          * **** CREATE normalized VECTOR IN VIOLATED CONSTRAINT SPACE
          * *****
          */
         const { store } = this.context;
-        console.log('store=',store);
         var design = store.getState();
         var dp;
         var sv;
@@ -228,7 +248,10 @@ class ActionTrade extends React.Component {
             }
         }
         if (value < design.system_controls.smallnum) {
-            // TODO: output failure message and keep strategy modal visible
+            var ncode = 'Error: value < design.system_controls.smallnum';
+            this.props.changeResultTerminationCondition(ncode);
+            // TODO: This just returns and doesn't stop the TRADE
+            console.log('@@@ ERROR-253 @@@');
             return;
         }
         var tc = [];
@@ -306,8 +329,6 @@ class ActionTrade extends React.Component {
         if (defaultest < 0.01)
             defaultest = 0.01;
         this.setState({
-            strategyModal: !this.state.strategyModal,
-            proportionalModal: !this.state.proportionalModal,
             dir: dir,
             tc: tc,
             rk1: rk1,
@@ -324,9 +345,6 @@ class ActionTrade extends React.Component {
     onArbitraryCancel() {
         console.log('In onArbitraryCancel');
         console.log('state=',this.state);
-//        const { store } = this.context;
-//        console.log('store=',store);
-//        var design = store.getState();
         var ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
         this.setState({
@@ -335,49 +353,52 @@ class ActionTrade extends React.Component {
         return;
     }
     
-    onArbitraryChange(i, event) {
-        console.log('i=',i,' event=',event.target.value);
-        // dir[i] = this.state.ldir[i] * parseFloat(event.target.value);
-//        this.setState({
-//            dir: dir
-//        });
-    }
-    
     onArbitraryContinue() {
         console.log('In onArbitraryContinue');
         console.log('state=',this.state);
-//        const { store } = this.context;
-//        console.log('store=',store);
-//        var design = store.getState();
         this.setState({
             arbitraryModal: !this.state.arbitraryModal,
-            proportionalModal: !this.state.proportionalModal,
+            sizeModal: !this.state.sizeModal,
+        });
+    }
+    
+    onArbitraryChange(i, event) {
+        console.log('i=',i,' event=',event.target.value);
+        console.log('state=',this.state);
+        this.setState({
+            dir: this.state.ldir.map((entry,index)=>{
+                var value;
+                if (index === i) {
+                    value = entry * parseFloat(event.target.value);
+                    console.log('i1=',i,' entry=',entry,' index=',index,' value=',value);
+                    return value;
+                }
+                value = this.state.dir[index];
+                console.log('i2=',i,' entry=',entry,' index=',index,' value=',value);
+                return value;
+            })
         });
     }
     
     //===========================================================
-    // Proportional Modal
+    // Size Modal
     //===========================================================
     
-    onProportionalCancel() {
-        console.log('In onProportionalCancel');
+    onSizeCancel() {
+        console.log('In onSizeCancel');
         console.log('state=',this.state);
-//        const { store } = this.context;
-//        console.log('store=',store);
-//        var design = store.getState();
         var ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
         this.setState({
-            proportionalModal: !this.state.proportionalModal
+            sizeModal: !this.state.sizeModal
         });
         return;
     }
     
-    onProportionalContinue() {
-        console.log('In onProportionalContinue');
+    onSizeContinue() {
+        console.log('In onSizeContinue');
         console.log('state=',this.state);
         const { store } = this.context;
-        console.log('store=',store);
         var design = store.getState();
         var dp;
         var sv;
@@ -392,7 +413,9 @@ class ActionTrade extends React.Component {
             c3 = parseFloat(expSize);
         }
         if (c3 < design.system_controls.smallnum) {
-            // TODO: output failure message and keep proportional modal visible
+            var ncode = 'Error: c3 < design.system_controls.smallnum';
+            this.props.changeResultTerminationCondition(ncode);
+            console.log('@@@ ERROR-417 @@@');
             return;
         }
         c3 = c3 / 100.0;
@@ -425,10 +448,11 @@ class ActionTrade extends React.Component {
         }
         design = store.getState();
         if (design.result.objective_value <= design.system_controls.objmin) {
-            // TODO: Feasible found: yesFeasible Modal
             this.setState({
-                proportionalModal: !this.state.proportionalModal
+                sizeModal: !this.state.sizeModal,
+                feasibleModal: !this.state.feasibleModal
             });
+            return;
         } else {
             if (design.system_controls.ioopt > 1) {
                 console.log('TRIAL (FULL STEP) CONSTRAINTS:');
@@ -463,7 +487,8 @@ class ActionTrade extends React.Component {
             this.props.search();
             design = store.getState();
             if (design.result.objective_value <= design.system_controls.objmin) {
-                // TODO: Loop
+                // TODO: Loop!!!
+                console.log('@@@ ERROR-490 @@@');
                 return;
             }
             var c0;
@@ -539,9 +564,63 @@ class ActionTrade extends React.Component {
             }
         }
         this.setState({
-            proportionalModal: !this.state.proportionalModal,
+            sizeModal: !this.state.sizeModal,
             establishModal: !this.state.establishModal
         });
+    }
+
+    onSizeChange(event) {
+        console.log('In onSizeChange');
+        console.log('state=',this.state);
+        this.setState({
+            defaultest: parseFloat(event.target.value) / 100.0
+        });
+    }
+    
+    //===========================================================
+    // Feasible Modal
+    //===========================================================
+    
+    onFeasibleRestart() {
+        console.log('In onFeasibleRestart');
+        console.log('state=',this.state);
+        const { store } = this.context;
+        var design = store.getState();
+        var dp;
+        var sv;
+        for (let i = 0; i < this.state.nviol; i++) {
+            let j = this.state.vflag[i];
+            if (j < design.design_parameters.length) {
+                dp = design.design_parameters[j];
+                if (this.state.ldir[i] < 0) {
+                    this.props.changeDesignParameterConstraint(dp.name, MIN, this.state.tc[i]);
+                } else {
+                    this.props.changeDesignParameterConstraint(dp.name, MAX, this.state.tc[i]);
+                }
+            } else {
+                sv = design.state_variables[j - design.design_parameters.length];
+                if (this.state.ldir[i] < 0) {
+                    this.props.changeStateVariableConstraint(sv.name, MIN, this.state.tc[i]);
+                } else {
+                    this.props.changeStateVariableConstraint(sv.name, MAX, this.state.tc[i]);
+                }
+            }
+        }
+        this.props.restoreDesignParameterValues();
+        this.commonSizeOrArbitrary(this.state.dir);
+        this.setState({
+            feasibleModal: !this.state.feasibleModal,
+            sizeModal: !this.state.sizeModal
+        });
+    }
+
+    onFeasibleDone() {
+        console.log('In onFeasibleDone');
+        console.log('state=',this.state);
+        this.setState({
+            feasibleModal: !this.state.feasibleModal
+        });
+        return;
     }
 
     //===========================================================
@@ -552,7 +631,6 @@ class ActionTrade extends React.Component {
         console.log('In onEstablishNo');
         console.log('state=',this.state);
         const { store } = this.context;
-        console.log('store=',store);
         var dp;
         var sv;
         var design = store.getState();
@@ -587,7 +665,6 @@ class ActionTrade extends React.Component {
         console.log('In onEstablishYes');
         console.log('state=',this.state);
         const { store } = this.context;
-        console.log('store=',store);
         var design = store.getState();
         this.props.search();
         design = store.getState(); // Re-access store to get latest dp and sv values
@@ -623,7 +700,6 @@ class ActionTrade extends React.Component {
         console.log('In onNotFeasibleRestart');
         console.log('state=',this.state);
         const { store } = this.context;
-        console.log('store=',store);
         var design = store.getState();
         var dp;
         var sv;
@@ -656,9 +732,6 @@ class ActionTrade extends React.Component {
     onNotFeasibleDone() {
         console.log('In onNotFeasibleDone');
         console.log('state=',this.state);
-//        const { store } = this.context;
-//        console.log('store=',store);
-//        var design = store.getState();
         var ncode = 'ACCEPTED TRADE RESULT';
         this.props.changeResultTerminationCondition(ncode);
         this.setState({
@@ -676,11 +749,11 @@ class ActionTrade extends React.Component {
                 <DropdownItem onClick={this.strategyToggle}>
                     Trade
                 </DropdownItem>
-                <Modal isOpen={this.state.strategyModal} className={this.props.className} size="lg'">
+                <Modal isOpen={this.state.strategyModal} className={this.props.className} size="lg">
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy </ModalHeader>
                     <ModalBody>
                         Specify your trade strategy ...  relax constraints:<br/>
-                        Proportional - in proportion to their current violation<br/>
+                        Size - in proportion to their current violation<br/>
                         Arbitrary - in an arbitrary ratio<br/>
                         Existing - to the point of the existing violations<br/>
                         Cancel - return<br/>
@@ -689,7 +762,7 @@ class ActionTrade extends React.Component {
                         <Button color="secondary" onClick={this.onStrategyCancel}>Cancel</Button>{' '}
                         <Button color="secondary" onClick={this.onStrategyExisting}>Existing</Button>{' '}
                         <Button color="secondary" onClick={this.onStrategyArbitrary}>Arbitrary</Button>{' '}
-                        <Button color="primary" onClick={this.onStrategyProportional}>Proportional</Button>
+                        <Button color="primary" onClick={this.onStrategySize}>Proportional</Button>
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.state.arbitraryModal} className={this.props.className}>
@@ -697,13 +770,12 @@ class ActionTrade extends React.Component {
                     <ModalBody>
                         <Container>
                             <Row>
-                                <Col className="text-left font-weight-bold">Name</Col>
-                                <Col className="text-right font-weight-bold">Weight</Col>
+                                <Col className="text-left font-weight-bold align-middle">Name</Col>
+                                <Col className="text-right font-weight-bold align-middle">Weight</Col>
                             </Row>
                             {
                                 this.state.vflag.map((j,i) => {
                                     const { store } = this.context;
-                                    console.log('store=',store);
                                     var design = store.getState();
                                     var dp;
                                     var sv;
@@ -719,7 +791,7 @@ class ActionTrade extends React.Component {
                                         <Row key={dname}>
                                             <Col className="align-middle text-left">{dname}</Col>
                                             <Col className="align-middle text-right">
-                                                <Input className="text-right" type="number" value={this.state.dir[i]} onChange={(event) => {this.onArbitraryChange(i, event.target.value)}}/>
+                                                <Input className="text-right" type="number" value={this.state.dir[i]} onChange={(event) => {this.onArbitraryChange(i, event)}}/>
                                             </Col>
                                         </Row>
                                     );
@@ -732,16 +804,35 @@ class ActionTrade extends React.Component {
                         <Button color="primary" onClick={this.onArbitraryContinue}>Continue</Button>
                     </ModalFooter>
                 </Modal>
-                <Modal isOpen={this.state.proportionalModal} className={this.props.className}>
-                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Proportional </ModalHeader>
+                <Modal isOpen={this.state.sizeModal} className={this.props.className}>
+                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Size </ModalHeader>
                     <ModalBody>
                         Enter local exploration size  (%)<br/>
                         Possibilities range from {90.0 * this.state.smallest} to {100.0 * this.state.bigest}<br/>
-                        (default = {this.state.defaultest * 100.0})<br/>
+                        <InputGroup>
+                            <InputGroupAddon addonType="prepend">
+                                <InputGroupText>
+                                    Default
+                                </InputGroupText>
+                            </InputGroupAddon>
+                            <Input className="text-right" type="number" value={this.state.defaultest * 100.0} onChange={this.onSizeChange}/>
+                        </InputGroup>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="secondary" onClick={this.onProportionalCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onProportionalContinue}>Continue</Button>
+                        <Button color="secondary" onClick={this.onSizeCancel}>Cancel</Button>{' '}
+                        <Button color="primary" onClick={this.onSizeContinue}>Continue</Button>
+                    </ModalFooter>
+                </Modal>
+                <Modal isOpen={this.state.feasibleModal} className={this.props.className}>
+                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Feasible </ModalHeader>
+                    <ModalBody>
+                        A feasible point has been established.<br/>
+                        Restart - Restart with a smaller step size<br/>
+                        Done - To return with these constraints
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="secondary" onClick={this.onFeasibleRestart}>Restart</Button>{' '}
+                        <Button color="primary" onClick={this.onFeasibleDone}>Done</Button>
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.state.establishModal} className={this.props.className}>
@@ -774,7 +865,6 @@ class ActionTrade extends React.Component {
 
     clister() {
         const { store } = this.context;
-        console.log('store=',store);
         var design = store.getState();
         var dp;
         var sv;
