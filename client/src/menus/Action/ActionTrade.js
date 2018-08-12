@@ -26,7 +26,7 @@ class ActionTrade extends React.Component {
         
         this.strategyToggle = this.strategyToggle.bind(this);
         
-        this.onStrategyCancel = this.onStrategyCancel.bind(this);
+        this.onStrategyDone = this.onStrategyDone.bind(this);
         this.onStrategyExisting = this.onStrategyExisting.bind(this);
         this.onStrategyArbitrary = this.onStrategyArbitrary.bind(this);
         this.onStrategySize = this.onStrategySize.bind(this);
@@ -133,8 +133,8 @@ class ActionTrade extends React.Component {
     // Strategy Modal
     //===========================================================
     
-    onStrategyCancel() { // Option 3
-        console.log('In onStrategyCancel');
+    onStrategyDone() { // Option 3
+        console.log('In onStrategyDone');
         console.log('state=',this.state);
         var ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
@@ -759,7 +759,7 @@ class ActionTrade extends React.Component {
                         Cancel - return<br/>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="secondary" onClick={this.onStrategyCancel}>Cancel</Button>{' '}
+                        <Button color="secondary" onClick={this.onStrategyDone}>Done</Button>{' '}
                         <Button color="secondary" onClick={this.onStrategyExisting}>Existing</Button>{' '}
                         <Button color="secondary" onClick={this.onStrategyArbitrary}>Arbitrary</Button>{' '}
                         <Button color="primary" onClick={this.onStrategySize}>Proportional</Button>
