@@ -34,6 +34,7 @@
 * [Idea for a Refine Search feature](design/RefineSearchFeature)
 * [AutoSave feature](design/AutoSaveFeature)
 * [Idea for a Compare Designs feature](design/CompareDesignsFeature)
+* [Consider adding a search at the beginning of trade](design/SearchBeforeTrade)
 
 
 ## Procedures
