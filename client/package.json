@@ -21,7 +21,8 @@
   },
   "homepage": "https://pcyl-web.heroku.com/",
   "devDependencies": {
-    "istanbul": "^0.4.5"
+    "istanbul": "^0.4.5",
+    "react-test-renderer": "^16.4.2"
   },
   "dependencies": {
     "ajv": "^6.5.2",
