@@ -787,15 +787,17 @@ class ActionTrade extends React.Component {
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy </ModalHeader>
                     <ModalBody>
                         Specify your trade strategy ...  relax constraints:<br/>
-                        Size - in proportion to their current violation<br/>
-                        Arbitrary - in an arbitrary ratio<br/>
-                        Existing - to the point of the existing violations<br/>
-                        Cancel - return<br/>
+                          <ul>
+                            <li>Proportional - in proportion to their current violation</li>
+                            <li>Arbitrary - in a specified ratio</li>
+                            <li>Existing - to the point of the existing violations</li>
+                            <li>Done - return to main page</li>
+                          </ul>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="secondary" onClick={this.onStrategyDone}>Done</Button>{' '}
+                        <Button color="secondary" onClick={this.onStrategyDone}> &nbsp; Done &nbsp; </Button>{' '}
                         <Button color="secondary" onClick={this.onStrategyExisting}>Existing</Button>{' '}
-                        <Button color="secondary" onClick={this.onStrategyArbitrary}>Arbitrary</Button>{' '}
+                        <Button color="info" onClick={this.onStrategyArbitrary}>Arbitrary</Button>{' '}
                         <Button color="primary" onClick={this.onStrategyProportional}>Proportional</Button>
                     </ModalFooter>
                 </Modal>
@@ -843,7 +845,7 @@ class ActionTrade extends React.Component {
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Size </ModalHeader>
                     <ModalBody>
                         Enter local exploration size  (%)<br/>
-                        Possibilities range from {90.0 * this.state.smallest} to {100.0 * this.state.bigest}<br/>
+                        Possibilities range from {parseFloat(90.0 * this.state.smallest).toFixed(2)} to {parseFloat(100.0 * this.state.bigest).toFixed(2)}<br/>
                         <InputGroup>
                             <InputGroupAddon addonType="prepend">
                                 <InputGroupText>
@@ -862,12 +864,14 @@ class ActionTrade extends React.Component {
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Feasible </ModalHeader>
                     <ModalBody>
                         A feasible point has been established.<br/>
-                        Restart - Restart with a smaller step size<br/>
-                        Done - To return with these constraints
+                          <ul>
+                            <li>Restart - Restart with a smaller step size</li>
+                            <li>Done - To return with these constraints</li>
+                          </ul>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onFeasibleRestart}>Restart</Button>{' '}
-                        <Button color="primary" onClick={this.onFeasibleDone}>Done</Button>
+                        <Button color="primary" onClick={this.onFeasibleDone}> &nbsp; Done &nbsp; </Button>
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.state.establishModal} className={this.props.className}>
@@ -876,22 +880,24 @@ class ActionTrade extends React.Component {
                         Do you wish to establish this set of constraints?
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="secondary" onClick={this.onEstablishYes}>Yes</Button>{' '}
-                        <Button color="primary" onClick={this.onEstablishNo}>No</Button>
+                        <Button color="secondary" onClick={this.onEstablishYes}> &nbsp; Yes &nbsp; </Button>{' '}
+                        <Button color="primary" onClick={this.onEstablishNo}> &nbsp; No &nbsp; </Button>
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.state.notFeasibleModal} className={this.props.className}>
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Not Feasible </ModalHeader>
                     <ModalBody>
-                        The result is not feasible: obj = {this.props.design.result.objective_value }<br/>
-                        Repeat - To make another extrapolation series<br/>
-                        Restart - To restart from the beginning of this series<br/>
-                        Done - To return with these constraints
+                        The result is not feasible: obj = { parseFloat(this.props.design.result.objective_value).toFixed(6) }<br/>
+                          <ul>
+                            <li>Repeat - To make another extrapolation series</li>
+                            <li>Restart - To restart from the beginning of this series</li>
+                            <li>Done &nbsp; - To return to the main page with these constraints</li>
+                          </ul>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onNotFeasibleRepeat}>Repeat</Button>{' '}
                         <Button color="secondary" onClick={this.onNotFeasibleRestart}>Restart</Button>{' '}
-                        <Button color="primary" onClick={this.onNotFeasibleDone}>Done</Button>
+                        <Button color="primary" onClick={this.onNotFeasibleDone}> &nbsp; Done &nbsp; </Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
