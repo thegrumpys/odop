@@ -27,8 +27,7 @@ import { STARTUP,
     CHANGE_SYSTEM_CONTROLS_VALUE, 
     CHANGE_LABELS_VALUE, 
     SEARCH, 
-    SEEK,
-    TRADE } from './actionTypes';
+    SEEK } from './actionTypes';
 
 export function startup() {
   return {
@@ -273,11 +272,5 @@ export function seek(name, minmax) {
             name,
             minmax
         }
-    }
-}
-
-export function trade() {
-    return {
-        type: TRADE
     }
 }
