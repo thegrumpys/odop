@@ -33,8 +33,8 @@ class ActionTrade extends React.Component {
         this.onFeasibleRestart = this.onFeasibleRestart.bind(this);
         this.onFeasibleDone = this.onFeasibleDone.bind(this);
         
-        this.onEstablishNo = this.onEstablishNo.bind(this);
-        this.onEstablishYes = this.onEstablishYes.bind(this);
+        this.onEstablishDone = this.onEstablishDone.bind(this);
+        this.onEstablishAccept = this.onEstablishAccept.bind(this);
         
         this.onNotFeasibleRepeat = this.onNotFeasibleRepeat.bind(this);
         this.onNotFeasibleRestart = this.onNotFeasibleRestart.bind(this);
@@ -657,45 +657,8 @@ class ActionTrade extends React.Component {
     // Establish Modal
     //===========================================================
     
-    onEstablishNo() {
-//        console.log('In onEstablishNo');
-//        console.log('state=',this.state);
-        this.props.restoreDesignParameterValues();
-        var design;
-        var dp;
-        var sv;
-        var ncode;
-        const { store } = this.context;
-        design = store.getState();
-        for (let i = 0; i < this.state.nviol; i++) {
-            let j = this.state.vflag[i];
-            if (j < design.design_parameters.length) {
-                dp = design.design_parameters[j];
-                if (this.state.ldir[i] < 0) {
-                    this.props.changeDesignParameterConstraint(dp.name, MIN, this.state.tc[i]);
-                } else {
-                    this.props.changeDesignParameterConstraint(dp.name, MAX, this.state.tc[i]);
-                }
-            } else {
-                sv = design.state_variables[j - design.design_parameters.length];
-                if (this.state.ldir[i] < 0) {
-                    this.props.changeStateVariableConstraint(sv.name, MIN, this.state.tc[i]);
-                } else {
-                    this.props.changeStateVariableConstraint(sv.name, MAX, this.state.tc[i]);
-                }
-            }
-        }
-        this.props.restoreDesignParameterValues();
-        ncode = 'DECLINED TRADE RESULT';
-        this.props.changeResultTerminationCondition(ncode);
-        this.setState({
-            establishModal: !this.state.establishModal
-        });
-        return;
-    }
-    
-    onEstablishYes() {
-//        console.log('In onEstablishYes');
+    onEstablishAccept() {
+//        console.log('In onEstablishAccept');
 //        console.log('state=',this.state);
         var design;
         var ncode;
@@ -717,6 +680,43 @@ class ActionTrade extends React.Component {
         });
     }
     
+    onEstablishDone() {
+//      console.log('In onEstablishDone');
+//      console.log('state=',this.state);
+      this.props.restoreDesignParameterValues();
+      var design;
+      var dp;
+      var sv;
+      var ncode;
+      const { store } = this.context;
+      design = store.getState();
+      for (let i = 0; i < this.state.nviol; i++) {
+          let j = this.state.vflag[i];
+          if (j < design.design_parameters.length) {
+              dp = design.design_parameters[j];
+              if (this.state.ldir[i] < 0) {
+                  this.props.changeDesignParameterConstraint(dp.name, MIN, this.state.tc[i]);
+              } else {
+                  this.props.changeDesignParameterConstraint(dp.name, MAX, this.state.tc[i]);
+              }
+          } else {
+              sv = design.state_variables[j - design.design_parameters.length];
+              if (this.state.ldir[i] < 0) {
+                  this.props.changeStateVariableConstraint(sv.name, MIN, this.state.tc[i]);
+              } else {
+                  this.props.changeStateVariableConstraint(sv.name, MAX, this.state.tc[i]);
+              }
+          }
+      }
+      this.props.restoreDesignParameterValues();
+      ncode = 'DECLINED TRADE RESULT';
+      this.props.changeResultTerminationCondition(ncode);
+      this.setState({
+          establishModal: !this.state.establishModal
+      });
+      return;
+  }
+  
     //===========================================================
     // Not Feasible Modal 
     //===========================================================
@@ -871,8 +871,8 @@ class ActionTrade extends React.Component {
                     <ModalBody>
                         A feasible point has been established.<br/>
                         <ul>
-                            <li>Resize - Enter a smaller local exploration step size</li>
                             <li>Done - To return with these constraints</li>
+                            <li>Resize - Enter a smaller local exploration step size</li>
                         </ul>
                         {this.list_constraints()}
                     </ModalBody>
@@ -885,11 +885,15 @@ class ActionTrade extends React.Component {
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Establish </ModalHeader>
                     <ModalBody>
                         Do you wish to establish this set of constraints?
+                        <ul>
+                            <li>Accept - establish this set of constraints</li>
+                            <li>Done - Return to the main page with previously established constraints</li>
+                        </ul>
                         {this.list_constraints()}
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="secondary" onClick={this.onEstablishYes}> &nbsp; Yes &nbsp; </Button>{' '}
-                        <Button color="primary" onClick={this.onEstablishNo}> &nbsp; No &nbsp; </Button>
+                        <Button color="secondary" onClick={this.onEstablishDone}> &nbsp; Done &nbsp; </Button>{' '}
+                        <Button color="primary" onClick={this.onEstablishAccept}>Accept</Button>
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.state.notFeasibleModal} className={this.props.className}>
@@ -897,9 +901,9 @@ class ActionTrade extends React.Component {
                     <ModalBody>
                         The result is not feasible: obj = { parseFloat(this.props.design.result.objective_value).toFixed(6) }<br/>
                         <ul>
-                            <li>Restart - To restart Trade with the original constraints</li>
-                            <li>Repeat - To repeat Trade with these constraints</li>
                             <li>Done &nbsp; - To return to the main page with these constraints</li>
+                            <li>Repeat - To repeat Trade with these constraints</li>
+                            <li>Restart - To restart Trade with the previously established constraints</li>
                         </ul>
                         {this.list_constraints()}
                     </ModalBody>
