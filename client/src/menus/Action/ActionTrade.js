@@ -297,9 +297,7 @@ class ActionTrade extends React.Component {
         smallest = Number.MAX_VALUE;
         bigest = Number.MIN_VALUE;
         for (let i = 0; i < this.state.nviol; i++) {
-//            console.log('i=',i);
             temp2 = Math.abs(dir[i]);
-//            console.log('temp2=',temp2);
             let j = this.state.vflag[i];
             if (j < design.design_parameters.length) {
                 dp = design.design_parameters[j];
@@ -332,14 +330,11 @@ class ActionTrade extends React.Component {
                     }
                 }
             }
-//            console.log('temp=',temp);
             if (temp > design.system_controls.smallnum && temp < smallest) {
                 smallest = temp;
-//                console.log('temp=',temp,' smallest=',smallest);
             }
             if (temp > bigest) {
                 bigest = temp;
-//                console.log('temp=',temp,' bigest=',bigest);
             }
         }
         let j = this.state.vflag[itemp];
