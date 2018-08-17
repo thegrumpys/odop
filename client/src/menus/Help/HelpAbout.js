@@ -28,10 +28,10 @@ class HelpAbout extends React.Component {
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; About {this.props.type}</ModalHeader>
                     <ModalBody>
                         This is <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank" rel="noopener noreferrer">Open Source </a> software. &nbsp; 
-                        <a href="https://github.com/thegrumpys/pcyl-web/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT License.</a> <br />
+                        <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT License.</a> <br />
                         Software version &nbsp; {version()}  <br />
                         Design Model version &nbsp; {this.props.version}<br />
-                        Link to <a href="https://thegrumpys.github.io/pcyl-web/About/" target="_blank" rel="noopener noreferrer">website home page</a>
+                        Link to <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">website home page</a>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.toggle}>Close</Button>

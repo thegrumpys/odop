@@ -9,7 +9,7 @@ class HelpIndex extends React.Component {
     }
 
     onHelp() {
-        window.open('https://thegrumpys.github.io/pcyl-web/Help', '_blank');
+        window.open('https://thegrumpys.github.io/odop/Help', '_blank');
     }
 
     render() {

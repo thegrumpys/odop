@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thegrumpys/pcyl-web.git"
+    "url": "git+https://github.com/thegrumpys/odop.git"
   },
   "author": "thegrumpys",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thegrumpys/pcyl-web/issues"
+    "url": "https://github.com/thegrumpys/odop/issues"
   },
-  "homepage": "https://pcyl-web.herokuapp.com/",
+  "homepage": "https://odop.herokuapp.com/",
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",

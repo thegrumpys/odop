@@ -118,7 +118,7 @@ export class PromptForDesign extends React.Component {
                       Open Design Optimization Platform
                     </ModalHeader>
                     <ModalBody>
-                        Experimental software: <a href="https://thegrumpys.github.io/pcyl-web/About/" target="_blank" rel="noopener noreferrer">See details</a>
+                        Experimental software: <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">See details</a>
                         <br /><br />
                         <Label for="fileOpenSelect">Select design to open:</Label>
                         <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>

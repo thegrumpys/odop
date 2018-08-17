@@ -6,7 +6,7 @@
 * In server and then client run "npm test" and verify test cases executed successfully.
 * Update version.js file to X.Y.Z (for example, 0.4). Commit with message "Update version.js to X.Y.Z" and push to origin.
 * Bring up under Google Chrome and Microsoft Edge and verify Help About Software Version is X.Y.Z.
-* Push to Heroku (command: git push heroku master) and verify that http://pcyl-web.herokuapp.com website is operational and version X.Y.Z displays.
+* Push to Heroku (command: git push heroku master) and verify that http://odop.herokuapp.com website is operational and version X.Y.Z displays.
 * Create X.Y.Z tag (for example, 0.4). Commit "Release X.Y.Z" and push to origin.
 * In Eclipse do a pull, Team > Show in History and verify tag is 0.5.
 * In Github mark Milestone X.Y.Z closed.
