@@ -294,38 +294,53 @@ class ActionTrade extends React.Component {
 //          c1 = 0.0
         rk1 = design.result.objective_value;
         /* estimate best step size */
-        smallest = 1.0;
-        bigest = 0.0;
+        smallest = Number.MAX_VALUE;
+        bigest = Number.MIN_VALUE;
         for (let i = 0; i < this.state.nviol; i++) {
+//            console.log('i=',i);
             temp2 = Math.abs(dir[i]);
+//            console.log('temp2=',temp2);
             let j = this.state.vflag[i];
             if (j < design.design_parameters.length) {
                 dp = design.design_parameters[j];
-                if (this.state.ldir[i] < 0)
-                    if (temp2 > design.system_controls.smallnum)
+                if (this.state.ldir[i] < 0) {
+                    if (temp2 > design.system_controls.smallnum) {
                         temp = dp.vmin / temp2;
-                    else
+                    } else {
                         temp = dp.vmin;
-                else if (temp2 > design.system_controls.smallnum)
-                    temp = dp.vmax / temp2;
-                else
-                    temp = dp.vmax;
+                    }
+                } else {
+                    if (temp2 > design.system_controls.smallnum) {
+                        temp = dp.vmax / temp2;
+                    } else {
+                        temp = dp.vmax;
+                    }
+                }
             } else {
                 sv = design.state_variables[j - design.design_parameters.length];
-                if (this.state.ldir[i] < 0)
-                    if (temp2 > design.system_controls.smallnum)
+                if (this.state.ldir[i] < 0) {
+                    if (temp2 > design.system_controls.smallnum) {
                         temp = sv.vmin / temp2;
-                    else
+                    } else {
                         temp = sv.vmin;
-                else if (temp2 > design.system_controls.smallnum)
-                    temp = sv.vmax / temp2;
-                else
-                    temp = sv.vmax;
+                    }
+                } else {
+                    if (temp2 > design.system_controls.smallnum) {
+                        temp = sv.vmax / temp2;
+                    } else {
+                        temp = sv.vmax;
+                    }
+                }
             }
-            if (temp > design.system_controls.smallnum && temp < smallest)
+//            console.log('temp=',temp);
+            if (temp > design.system_controls.smallnum && temp < smallest) {
                 smallest = temp;
-            if (temp > bigest)
+//                console.log('temp=',temp,' smallest=',smallest);
+            }
+            if (temp > bigest) {
                 bigest = temp;
+//                console.log('temp=',temp,' bigest=',bigest);
+            }
         }
         let j = this.state.vflag[itemp];
         if (j < design.design_parameters.length) {
@@ -341,8 +356,8 @@ class ActionTrade extends React.Component {
             else
                 defaultest = 0.90 * sv.vmax;
         }
-        if (defaultest < 0.01)
-            defaultest = 0.01;
+        if (defaultest < design.system_controls.smallnum)
+            defaultest = design.system_controls.smallnum;
         this.setState({
             dir: dir,
             tc: tc,
