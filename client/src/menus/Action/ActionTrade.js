@@ -8,8 +8,7 @@ import { changeDesignParameterConstraint,
     restoreDesignParameterValues,
     changeStateVariableConstraint, 
     changeResultTerminationCondition,
-    search,
-    trade } from '../../store/actionCreators';
+    search } from '../../store/actionCreators';
     
 class ActionTrade extends React.Component {
     constructor(props) {
@@ -1065,8 +1064,7 @@ const mapDispatchToProps = {
     restoreDesignParameterValues: restoreDesignParameterValues,
     changeStateVariableConstraint: changeStateVariableConstraint,
     changeResultTerminationCondition: changeResultTerminationCondition,
-    search: search,
-    trade: trade
+    search: search
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionTrade);
