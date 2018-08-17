@@ -11,14 +11,6 @@ import { changeDesignParameterConstraint,
     search,
     trade } from '../../store/actionCreators';
     
-// Things to do:
-// * Research ERROR-### line
-// * Scan for TODOs
-// * Improved wording, layout of modals and button labels
-// * Testing
-// * Reimplement as middleware
-// * Remove/comment-out debug I/O
-
 class ActionTrade extends React.Component {
     constructor(props) {
         super(props);
@@ -55,6 +47,7 @@ class ActionTrade extends React.Component {
                 feasibleModal: false,
                 establishModal: false,
                 notFeasibleModal: false,
+                arbitraryContinueDisabled: false,
                 nviol:  0,
                 vflag: [],
                 ldir: [],
@@ -141,6 +134,7 @@ class ActionTrade extends React.Component {
     onStrategyDone() { // Option 3
 //        console.log('In onStrategyDone');
 //        console.log('state=',this.state);
+        this.props.restoreDesignParameterValues();
         var ncode;
         ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
@@ -266,7 +260,6 @@ class ActionTrade extends React.Component {
         var value = 0.0;
         var itemp = 0;
         var temp;
-        var ncode;
         const { store } = this.context;
         design = store.getState();
         for (let i = 0; i < this.state.nviol; i++) {
@@ -275,13 +268,6 @@ class ActionTrade extends React.Component {
                 value = temp2;
                 itemp = i;
             }
-        }
-        if (value < design.system_controls.smallnum) {
-            ncode = 'Error: value < design.system_controls.smallnum';
-            this.props.changeResultTerminationCondition(ncode);
-            // TODO: This just returns and doesn't stop the TRADE
-            console.log('!!! ERROR !!!');
-            return;
         }
         var tc = [];
         for (let i = 0; i < this.state.nviol; i++) {
@@ -374,6 +360,7 @@ class ActionTrade extends React.Component {
     onArbitraryCancel() {
 //        console.log('In onArbitraryCancel');
 //        console.log('state=',this.state);
+        this.props.restoreDesignParameterValues();
         var ncode;
         ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
@@ -394,20 +381,31 @@ class ActionTrade extends React.Component {
     }
     
     onArbitraryChange(i, event) {
-//        console.log('i=',i,' event=',event.target.value);
+//        console.log('=========================== i=',i,' event=',event.target.value);
 //        console.log('state=',this.state);
-        this.setState({
-            dir: this.state.ldir.map((entry,index)=>{
-                var value;
-                if (index === i) {
-                    value = entry * parseFloat(event.target.value);
-//                     console.log('i1=',i,' entry=',entry,' index=',index,' value=',value);
-                    return value;
-                }
-                value = this.state.dir[index];
-//                 console.log('i2=',i,' entry=',entry,' index=',index,' value=',value);
+        var design;
+        const { store } = this.context;
+        design = store.getState();
+        var dir = [];
+        var value;
+        dir = this.state.ldir.map((entry,index)=>{
+            var value;
+            if (index === i) {
+                value = entry * parseFloat(event.target.value);
+                value = isNaN(value) ? this.state.dir[index] : value;
+//                console.log('i1=',i,' entry=',entry,' index=',index,' value=',value);
                 return value;
-            })
+            }
+            value = this.state.dir[index];
+//            console.log('i2=',i,' entry=',entry,' index=',index,' value=',value);
+            return value;
+        })
+//        console.log('dir=',dir);
+        value = dir.reduce((value,dir) => {return Math.abs(dir) > value ? Math.abs(dir) : value}, 0.0);
+//        console.log('value=',value);
+        this.setState({
+            dir: dir,
+            arbitraryContinueDisabled: value < design.system_controls.smallnum
         });
     }
     
@@ -418,6 +416,7 @@ class ActionTrade extends React.Component {
     onSizeCancel() {
 //        console.log('In onSizeCancel');
 //        console.log('state=',this.state);
+        this.props.restoreDesignParameterValues();
         var ncode;
         ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
@@ -437,16 +436,9 @@ class ActionTrade extends React.Component {
         var c3;
         var rk3;
         var value;
-        var ncode;
         const { store } = this.context;
         design = store.getState();
         c3 = this.state.defaultest;
-        if (c3 < design.system_controls.smallnum) {
-            ncode = 'Error: c3 < design.system_controls.smallnum';
-            this.props.changeResultTerminationCondition(ncode);
-            console.log('!!! ERROR !!!');
-            return;
-        }
         // TAKE FIRST EXPLORATORY RELAXATION STEP
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
@@ -606,8 +598,10 @@ class ActionTrade extends React.Component {
     onSizeChange(event) {
 //        console.log('In onSizeChange');
 //        console.log('state=',this.state);
+        var value;
+        value = parseFloat(event.target.value) / 100.0;
         this.setState({
-            defaultest: parseFloat(event.target.value) / 100.0
+            defaultest: isNaN(value) ? this.state.defaultest : value
         });
     }
     
@@ -642,6 +636,7 @@ class ActionTrade extends React.Component {
             }
         }
         this.props.restoreDesignParameterValues();
+        this.commonViolationSetup();
         this.commonArbitraryOrProportional(this.state.dir);
         this.setState({
             feasibleModal: !this.state.feasibleModal,
@@ -665,6 +660,7 @@ class ActionTrade extends React.Component {
     onEstablishNo() {
 //        console.log('In onEstablishNo');
 //        console.log('state=',this.state);
+        this.props.restoreDesignParameterValues();
         var design;
         var dp;
         var sv;
@@ -725,17 +721,6 @@ class ActionTrade extends React.Component {
     // Not Feasible Modal 
     //===========================================================
     
-    onNotFeasibleRepeat() {
-//        console.log('In onNotFeasibleRepeat');
-//        console.log('state=',this.state);
-//        this.props.saveDesignParameterValues(); // @@@
-        this.commonViolationSetup()
-        this.setState({
-            notFeasibleModal: !this.state.notFeasibleModal,
-            strategyModal: !this.state.strategyModal
-        });
-    }
-    
     onNotFeasibleRestart() {
 //        console.log('In onNotFeasibleRestart');
 //        console.log('state=',this.state);
@@ -770,6 +755,17 @@ class ActionTrade extends React.Component {
         });
     }
     
+    onNotFeasibleRepeat() {
+//      console.log('In onNotFeasibleRepeat');
+//      console.log('state=',this.state);
+//      this.props.saveDesignParameterValues(); // @@@
+      this.commonViolationSetup()
+      this.setState({
+          notFeasibleModal: !this.state.notFeasibleModal,
+          strategyModal: !this.state.strategyModal
+      });
+  }
+  
     onNotFeasibleDone() {
 //        console.log('In onNotFeasibleDone');
 //        console.log('state=',this.state);
@@ -848,13 +844,13 @@ class ActionTrade extends React.Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onArbitraryCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onArbitraryContinue}>Continue</Button>
+                        <Button color="primary" onClick={this.onArbitraryContinue} disabled={this.state.arbitraryContinueDisabled}>Continue</Button>
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.state.sizeModal} className={this.props.className}>
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Size </ModalHeader>
                     <ModalBody>
-                        Enter local exploration size  (%)<br/>
+                        Enter local exploration step size (%)<br/>
                         Possibilities range from {(90.0 * this.state.smallest).toFixed(2)} to {(100.0 * this.state.bigest).toFixed(2)}<br/>
                         <InputGroup>
                             <InputGroupAddon addonType="prepend">
@@ -875,13 +871,13 @@ class ActionTrade extends React.Component {
                     <ModalBody>
                         A feasible point has been established.<br/>
                         <ul>
-                            <li>Restart - Restart with a smaller step size</li>
+                            <li>Resize - Enter a smaller local exploration step size</li>
                             <li>Done - To return with these constraints</li>
                         </ul>
                         {this.list_constraints()}
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="secondary" onClick={this.onFeasibleRestart}>Restart</Button>{' '}
+                        <Button color="secondary" onClick={this.onFeasibleRestart}>Resize</Button>{' '}
                         <Button color="primary" onClick={this.onFeasibleDone}> &nbsp; Done &nbsp; </Button>
                     </ModalFooter>
                 </Modal>
@@ -901,15 +897,15 @@ class ActionTrade extends React.Component {
                     <ModalBody>
                         The result is not feasible: obj = { parseFloat(this.props.design.result.objective_value).toFixed(6) }<br/>
                         <ul>
-                            <li>Repeat - To repeat Trade with these constraints</li>
                             <li>Restart - To restart Trade with the original constraints</li>
+                            <li>Repeat - To repeat Trade with these constraints</li>
                             <li>Done &nbsp; - To return to the main page with these constraints</li>
                         </ul>
                         {this.list_constraints()}
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="secondary" onClick={this.onNotFeasibleRepeat}>Repeat</Button>{' '}
                         <Button color="secondary" onClick={this.onNotFeasibleRestart}>Restart</Button>{' '}
+                        <Button color="secondary" onClick={this.onNotFeasibleRepeat}>Repeat</Button>{' '}
                         <Button color="primary" onClick={this.onNotFeasibleDone}> &nbsp; Done &nbsp; </Button>
                     </ModalFooter>
                 </Modal>
