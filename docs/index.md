@@ -1,4 +1,4 @@
-# PCyl-Web <br /> Piston-Cylinder Problem <br /> - Web Interface
+# ODOP <br /> Open Design Optimization Platform
 
 ## About
 * [Introduction](About/Intro)
