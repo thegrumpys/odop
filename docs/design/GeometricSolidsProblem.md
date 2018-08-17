@@ -13,6 +13,7 @@ Design parameters would be:
 State Variables might be:
 * Volume
 * Surface Area
+* Volume to Surface Area Ratio
 * Girth
 * Length+Girth
 * Diagonal
