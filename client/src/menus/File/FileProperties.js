@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Container, Row, Col, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { initialState } from '../../problems/Piston-Cylinder/initialState';
+import { initialState as pcyl_initialState } from '../../problems/Piston-Cylinder/initialState';
+import { initialState as solid_initialState } from '../../problems/Solid/initialState';
+import { initialState as spring_initialState } from '../../problems/Spring/initialState';
 import { changeLabelsValue } from '../../store/actionCreators';
 
 class FileProperties extends React.Component {
@@ -44,9 +46,24 @@ class FileProperties extends React.Component {
     
     onRestoreDefaults() {
         // Copy the default values into the state.labels
-        this.setState({
-            labels: initialState.labels
-        });
+        switch(this.props.type) {
+        default:
+        case 'Piston-Cylinder':
+            this.setState({
+                labels: pcyl_initialState.labels
+            });
+            break;
+        case 'Solid':
+            this.setState({
+                labels: solid_initialState.labels
+            });
+            break;
+        case 'Spring':
+            this.setState({
+                labels: spring_initialState.labels
+            });
+            break;
+        }
     }
     
     onApplyandClose() {
@@ -99,6 +116,7 @@ class FileProperties extends React.Component {
 }  
 
 const mapStateToProps = state => ({
+    type: state.type,
     labels: state.labels
 });
 
