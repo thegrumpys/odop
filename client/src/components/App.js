@@ -87,7 +87,7 @@ class App extends Component {
                                     <ActionSelectSize />
                                     <ActionSelectCatalog />
                                     <DropdownItem divider />
-                                    <DropdownItem>
+                                    <DropdownItem disabled>
                                         Execute
                                     </DropdownItem>
                                </DropdownMenu>
@@ -97,21 +97,21 @@ class App extends Component {
                                     View
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    <DropdownItem>
+                                    <DropdownItem disabled>
                                         Define  Sub-Problems
                                     </DropdownItem>
-                                    <DropdownItem>
+                                    <DropdownItem disabled>
                                         Display Sub-Problems
                                     </DropdownItem>
                                         <DropdownItem divider />
-                                    <DropdownItem>
+                                    <DropdownItem disabled>
                                         Report
                                     </DropdownItem>
                                         <DropdownItem divider />
-                                    <DropdownItem>
+                                    <DropdownItem disabled>
                                         Calculation Inputs
                                     </DropdownItem>
-                                    <DropdownItem>
+                                    <DropdownItem disabled>
                                         Violations
                                     </DropdownItem>
                                </DropdownMenu>
@@ -121,14 +121,14 @@ class App extends Component {
                                     Help
                                 </DropdownToggle>
                                 <DropdownMenu right>
-                                    <DropdownItem>
+                                    <DropdownItem disabled>
                                         Context Help
                                     </DropdownItem>
                                     <HelpIndex />
-                                    <DropdownItem>
+                                    <DropdownItem disabled>
                                         Demo
                                     </DropdownItem>
-                                    <DropdownItem>
+                                    <DropdownItem disabled>
                                         Tutorial
                                     </DropdownItem>
                                     <HelpAbout />

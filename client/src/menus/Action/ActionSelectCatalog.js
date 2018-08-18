@@ -20,7 +20,7 @@ class ActionSelectCatalog extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <DropdownItem onClick={this.toggle} disabled>
                     Select Catalog
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
