@@ -7,18 +7,16 @@ import { displaySpinner } from '../../components/Spinner';
 class FileSave extends React.Component {
     constructor(props) {
         super(props);
-        this.toggle = this.toggle.bind(this);
         this.onSave = this.onSave.bind(this);
-
         this.state = {
             modal: false
         };
     }
     
-    putDesign(name) {
-//        console.log("In putDesign name=", name);
+    putDesign(type,name) {
+//        console.log('In FileSave.putDesign type=', type,' name=', name);
         displaySpinner(true);
-        fetch('/api/v1/designs/'+name, {
+        fetch('/api/v1/designtypes/'+type+'/designs/'+name, {
                 method: 'PUT',
                 headers: {
                   'Accept': 'application/json',
@@ -34,25 +32,21 @@ class FileSave extends React.Component {
                 return res.json()
             })
             .catch(error => {
-                displayError('PUT of \''+name+'\' design failed: '+error.message);
+                displayError('PUT of \''+name+'\' \''+type+'\' design failed with message: \''+error.message+'\'');
             });
     }
 
-    toggle() {
-        this.setState({
-            modal: !this.state.modal
-        });
-    }
-
     onSave() {
+//        console.log('In FileSave.toggle this.props.state.type=',this.props.state.type, ' this.props.state.name=',this.props.state.name);
         this.setState({
             modal: !this.state.modal
         });
-//    console.log(this.props.state.name);
         // Save the model
+        var type = this.props.state.type;
+        if (type === undefined) type = 'Piston-Cylinder';
         var name = this.props.state.name;
         if (name === undefined) name = 'checkpt';
-        this.putDesign(name);
+        this.putDesign(type,name);
     }
 
     render() {

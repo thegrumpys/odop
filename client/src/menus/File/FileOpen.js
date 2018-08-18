@@ -16,14 +16,16 @@ class FileOpen extends React.Component {
         this.state = {
             modal: false,
             designs: [],
+            type: this.props.type,
             name: this.props.name
         };
     }
 
-    getDesigns() {
+    getDesigns(type) {
+//        console.log('In FileOpen.getDesigns type=', type);
         // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designs')
+        fetch('/api/v1/designtypes/'+type+'/designs')
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -33,14 +35,14 @@ class FileOpen extends React.Component {
             })
             .then(designs => this.setState({ designs }))
             .catch(error => {
-                displayError('GET of design names failed: '+error.message);
+                displayError('GET of design names failed with message: \''+error.message+'\'');
             });
     }
     
-    getDesign(name) {
-//        console.log('In getDesign name=', name);
+    getDesign(type,name) {
+//        console.log('In FileOpen.getDesign type=', type, ' name=', name);
         displaySpinner(true);
-        fetch('/api/v1/designs/' + name)
+        fetch('/api/v1/designtypes/'+type+'/designs/' + name)
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -50,37 +52,42 @@ class FileOpen extends React.Component {
             })
             .then(design => this.props.load(design))
             .catch(error => {
-                displayError('GET of \''+name+'\' design failed: '+error.message);
+                displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
             });
     }
     
     toggle() {
-        this.getDesigns();
+//        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
+        this.getDesigns(this.props.type);
         this.setState({
             modal: !this.state.modal,
+            type: this.props.type,
             name: this.props.name
         });
     }
     
     onSelect(event) {
-//        console.log(event.target.value)
+//        console.log('In FileOpen.onSelect event.target.value=',event.target.value);
         this.setState({
             name: event.target.value 
         });
     }
     
     onOpen() {
+//        console.log('In FileOpen.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
         this.setState({
             modal: !this.state.modal
         });
-//        console.log(this.state.name);
         // Load the model
+        var type = this.state.type;
+        if (type === undefined) type = 'Piston-Cylinder';
         var name = this.state.name;
         if (name === undefined) name = 'startup';
-        this.getDesign(name);
+        this.getDesign(type,name);
     }
     
     onCancel() {
+//        console.log('In FileOpen.onCancel');
         this.setState({
             modal: !this.state.modal
         });
@@ -88,7 +95,6 @@ class FileOpen extends React.Component {
     }
 
     render() {
-        const { designs } = this.state;
         return (
             <React.Fragment>
                 <DropdownItem onClick={this.toggle}>
@@ -100,7 +106,7 @@ class FileOpen extends React.Component {
                         <br />
                         <Label for="fileOpenSelect">Select design to open:</Label>
                         <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
-                            {designs.map((design, index) =>
+                            {this.state.designs.map((design, index) =>
                                 <option key={index} value={design}>{design}</option>
                             )}
                         </Input>
@@ -116,6 +122,7 @@ class FileOpen extends React.Component {
 }  
 
 const mapStateToProps = state => ({
+    type: state.type, 
     name: state.name, 
 });
 
