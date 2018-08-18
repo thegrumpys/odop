@@ -118,7 +118,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', (req, res) => {
     console.log('SERVER: ===========================================================');
     var type = req.params['type'];
     var name = req.params['name'];
-    console.log('SERVER: In POST /api/v1/designtypes/'+type,'/designs/'+name,' req.body=',req.body);
+    console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
     if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
@@ -167,7 +167,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', (req, res) => {
     console.log('SERVER: ===========================================================');
     var type = req.params['type'];
     var name = req.params['name'];
-    console.log('SERVER: In PUT /api/v1/designtypes/'+type,'/designs/'+name,' req.body=',req.body);
+    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
     if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
