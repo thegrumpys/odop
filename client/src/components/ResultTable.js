@@ -39,6 +39,14 @@ class ResultTable extends React.Component {
                             </tr>
                         </tbody>
                     </Table>
+                    <Table className="col-md-2">
+                    <tbody>
+                        <tr>
+                        </tr>
+                        <tr>
+                        </tr>
+                    </tbody>
+                </Table>
                     <Table className="col-md-4">
                         <tbody>
                             <tr>
