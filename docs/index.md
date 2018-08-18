@@ -25,7 +25,7 @@
 * [Ideas regarding the web user-interface for FIX](design/WebUI_for_Fix)
 * [Ideas for "responsive" page design](design/ResponsivePageDesign)
 * [Auto-Search feature and preferences](design/AutoSearch)
-* [Investigate third party alternatives that might assist implementation of the EXECUTE feature](design/ExecuteCapability)
+* [Investigate alternatives to assist implementation of the Execute, Demo and Tutorial features](design/ExecuteCapability)
 * [Warn user if conflicting constraints are established](design/WarnConflictingConstraints)
 * [Consider an UnDo / ReDo feature](design/UnDo_ReDo)
 * [Proposed names for the (problem independent) system](design/SysName)
@@ -41,3 +41,4 @@
 ## Procedures
 
 * [Release Process](procedures/release)
+* [Procedure to implement new design types](procedures/NewDesignType)
