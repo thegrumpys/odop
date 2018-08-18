@@ -52,6 +52,24 @@ class App extends Component {
     }
     
     render() {
+        var src;
+        var alt;
+        switch(this.props.type) {
+        default:
+        case 'Piston-Cylinder':
+            src = 'problems/Piston-Cylinder/favicon.ico';
+            alt = 'Piston-Cylinder icon';
+            break;
+        case 'Solid':
+            src = 'problems/Solid/favicon.ico';
+            alt = 'Solid icon';
+            break;
+        case 'Spring':
+            src = 'problems/Spring/favicon.ico';
+            alt = 'Spring icon';
+            break;
+        }
+//        console.log('src=',src,' alt=',alt);
         return (
             <React.Fragment>
                 <Navbar color="inverse" light expand="md">
@@ -138,7 +156,7 @@ class App extends Component {
                         <Nav tabs>
                             <NavItem>
                                 <NavLink className={classnames({ active: this.state.activeTab === '1' })}>
-                                    {this.props.name}
+                                    <img src={src} alt={alt}/>{this.props.name}
                                 </NavLink>
                             </NavItem>
                         </Nav>
