@@ -64,10 +64,10 @@ describe('Designs with empty DB', () => {
         });
     });
     
-    describe('GET /api/v1/designtypes/Test-Design with empty DB', () => {
+    describe('GET /api/v1/designtypes/Test-Design/designs with empty DB', () => {
         it('it should GET with 200 OK no design names', (done) => {
             chai.request(server)
-                .get('/api/v1/designtypes/Test-Design')
+                .get('/api/v1/designtypes/Test-Design/designs')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
@@ -78,10 +78,10 @@ describe('Designs with empty DB', () => {
         });
     });
     
-    describe('GET /api/v1/designs/test with empty DB', () => {
+    describe('GET /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
         it('it should fail GET with 404 NOT FOUND, because name does not exist', (done) => {
             chai.request(server)
-                .get('/api/v1/designs/test')
+                .get('/api/v1/designtypes/Test-Design/designs/test')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(404);
@@ -90,10 +90,10 @@ describe('Designs with empty DB', () => {
         });
     });
     
-    describe('POST /api/v1/designs/test with empty DB', () => {
+    describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
         it('it should fail POST with 400 BAD REQUEST, because body is empty', (done) => {
             chai.request(server)
-                .post('/api/v1/designs/test')
+                .post('/api/v1/designtypes/Test-Design/designs/test')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(400);
@@ -102,10 +102,10 @@ describe('Designs with empty DB', () => {
         });
     });
     
-    describe('POST /api/v1/designs/test with empty DB', () => {
+    describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
         it('it should POST with 200 OK one design by name', (done) => {
             chai.request(server)
-                .post('/api/v1/designs/test')
+                .post('/api/v1/designtypes/Test-Design/designs/test')
                 .send(testDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
@@ -115,10 +115,10 @@ describe('Designs with empty DB', () => {
         });
     });
     
-    describe('PUT /api/v1/designs/test with empty DB', () => {
+    describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
         it('it should fail PUT with 400 BAD REQUEST, because body is empty', (done) => {
             chai.request(server)
-                .put('/api/v1/designs/test')
+                .put('/api/v1/designtypes/Test-Design/designs/test')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(400);
@@ -127,10 +127,10 @@ describe('Designs with empty DB', () => {
         });
     });
     
-    describe('PUT /api/v1/designs/test with empty DB', () => {
+    describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
         it('it should fail PUT with 404 NOT FOUND, because name does not exist', (done) => {
             chai.request(server)
-                .put('/api/v1/designs/test')
+                .put('/api/v1/designtypes/Test-Design/designs/test')
                 .send(testDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
@@ -140,10 +140,10 @@ describe('Designs with empty DB', () => {
         });
     });
     
-    describe('DELETE /api/v1/designs/test with empty DB', () => {
+    describe('DELETE /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
         it('it should fail DELETE with 404 NOT FOUND, because name does not exist', (done) => {
             chai.request(server)
-                .delete('/api/v1/designs/test')
+                .delete('/api/v1/designtypes/Test-Design/designs/test')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(404);
@@ -152,11 +152,11 @@ describe('Designs with empty DB', () => {
         });
     });
     
-    describe('DELETE /api/v1/designs/startup with non-empty DB', () => {
+    describe('DELETE /api/v1/designtypes/Test-Design/designs/startup with non-empty DB', () => {
         it('it should fail DELETE with 400 BAD REQUEST, because name is startup', (done) => {
             var name = 'startup';
             chai.request(server)
-                .delete('/api/v1/designs/'+name)
+                .delete('/api/v1/designtypes/Test-Design/designs/'+name)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(400);
@@ -210,10 +210,10 @@ describe('Designs with non-empty DB', () => {
         });
     });
     
-    describe('GET /api/v1/designtypes/Test-Design with non-empty DB', () => {
+    describe('GET /api/v1/designtypes/Test-Design/designs with non-empty DB', () => {
         it('it should GET with 200 OK one design name', (done) => {
             chai.request(server)
-                .get('/api/v1/designtypes/Test-Design')
+                .get('/api/v1/designtypes/Test-Design/designs')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
@@ -225,10 +225,10 @@ describe('Designs with non-empty DB', () => {
         });
     });
     
-    describe('GET /api/v1/designs/test with non-empty DB', () => {
+    describe('GET /api/v1/designtypes/Test-Design/designs/test with non-empty DB', () => {
         it('it should GET with 200 OK one design by name', (done) => {
             chai.request(server)
-                .get('/api/v1/designs/test')
+                .get('/api/v1/designtypes/Test-Design/designs/test')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
@@ -241,10 +241,10 @@ describe('Designs with non-empty DB', () => {
         });
     });
     
-    describe('POST /api/v1/designs/test with non-empty DB', () => {
+    describe('POST /api/v1/designtypes/Test-Design/designs/test with non-empty DB', () => {
         it('it should fail POST with 400 BAD REQUEST, because name already exists', (done) => {
             chai.request(server)
-                .post('/api/v1/designs/test')
+                .post('/api/v1/designtypes/Test-Design/designs/test')
                 .send(testDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
@@ -254,10 +254,10 @@ describe('Designs with non-empty DB', () => {
         });
     });
     
-    describe('PUT /api/v1/designs/test with non-empty DB', () => {
+    describe('PUT /api/v1/designtypes/Test-Design/designs/test with non-empty DB', () => {
         it('it should PUT with 200 OK one design by name', (done) => {
             chai.request(server)
-                .put('/api/v1/designs/test')
+                .put('/api/v1/designtypes/Test-Design/designs/test')
                 .send(testDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
@@ -267,11 +267,11 @@ describe('Designs with non-empty DB', () => {
         });
     });
     
-    describe('DELETE /api/v1/designs/test with non-empty DB', () => {
+    describe('DELETE /api/v1/designtypes/Test-Design/designs/test with non-empty DB', () => {
         it('it should DELETE with 200 OK one design by name', (done) => {
             var name = 'test';
             chai.request(server)
-                .delete('/api/v1/designs/'+name)
+                .delete('/api/v1/designtypes/Test-Design/designs/'+name)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
@@ -280,11 +280,11 @@ describe('Designs with non-empty DB', () => {
         });
     });
     
-    describe('DELETE /api/v1/designs/startup with non-empty DB', () => {
+    describe('DELETE /api/v1/designtypes/Test-Design/designs/startup with non-empty DB', () => {
         it('it should fail DELETE with 400 BAD REQUEST, because name is startup', (done) => {
             var name = 'startup';
             chai.request(server)
-                .delete('/api/v1/designs/'+name)
+                .delete('/api/v1/designtypes/Test-Design/designs/'+name)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(400);

@@ -14,16 +14,41 @@ class FileSaveAs extends React.Component {
         this.onSaveAs = this.onSaveAs.bind(this);
         this.onTextInput = this.onTextInput.bind(this);
         this.state = {
-            modal: false
+            modal: false,
+            designs: [],
+            type: this.props.state.type,
+            name: this.props.state.name
         };
     }
     
-    postDesign(name) {
-//        console.log("In postDesign name=", name);
-        this.props.changeName(name);
+    getDesigns(type) {
+//        console.log('In FileOpen.getDesigns type=', type);
+        // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designs/'+name, {
-                method: 'POST',
+        fetch('/api/v1/designtypes/'+type+'/designs')
+            .then(res => {
+                displaySpinner(false);
+                if (!res.ok) {
+                   throw Error(res.statusText);
+                }
+                return res.json()
+            })
+            .then(designs => this.setState({ designs }))
+            .catch(error => {
+                displayError('GET of design names failed with message: \''+error.message+'\'');
+            });
+    }
+    
+    postDesign(type,name) {
+//        console.log('In FileSaveAs.postDesign type=', type,' name=', name);
+        this.props.changeName(name);
+        var method = 'POST'; // Create it
+        if (this.state.designs.indexOf(name) > -1) { // Does it already exist?
+            method = 'PUT'; // Update it
+        }
+        displaySpinner(true);
+        fetch('/api/v1/designtypes/'+type+'/designs/'+name, {
+                method: method,
                 headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
@@ -38,35 +63,42 @@ class FileSaveAs extends React.Component {
                 return res.json()
             })
             .catch(error => {
-                displayError('POST of \''+name+'\' design failed: '+error.message);
+                displayError('POST of \''+name+'\' \''+type+'\' design failed with message: \''+error.message+'\'');
             });
     }
 
     toggle() {
+//        console.log('In FileSaveAs.toggle this.props.state.type=',this.props.state.type, ' this.props.state.name=',this.props.state.name);
+        this.getDesigns(this.props.state.type);
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
+            type: this.props.state.type,
+            name: this.props.state.name
         });
     }
 
     onTextInput(event) {
-//        console.log(event.target.value)
+//        console.log('In FileSaveAs.onTextInput event.target.value=',event.target.value);
         this.setState({
             name: event.target.value 
         });
     }
     
     onSaveAs() {
+//        console.log('In FileSaveAs.onSaveAs this.state.type=',this.state.type,' this.state.name=',this.state.name);
         this.setState({
             modal: !this.state.modal
         });
-//        console.log(this.state.name);
         // Save the model
+        var type = this.state.type;
+        if (type === undefined) type = 'Piston-Cylinder';
         var name = this.state.name;
         if (name === undefined) name = 'checkpt';
-        this.postDesign(name);
+        this.postDesign(type,name);
     }
     
     onCancel() {
+//        console.log('In FileSaveAs.onCancel');
         this.setState({
             modal: !this.state.modal
         });
@@ -102,7 +134,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-        changeName: changeName
-    };
+    changeName: changeName
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileSaveAs);

@@ -22,14 +22,15 @@ export class PromptForDesign extends React.Component {
         this.state = {
             modal: true,
             designtypes: [],
-            type: "Piston-Cylinder",
             designs: [],
+            type: "Piston-Cylinder",
             name: "startup"
         };
         this.getDesigns();
     }
 
     getDesigns() {
+        console.log('In PromptForDesign.getDesigns');
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -48,11 +49,11 @@ export class PromptForDesign extends React.Component {
                 return res.json()
             })
             .then(designtypes => {
-                console.log('In getDesigns designtypes',designtypes)
+                console.log('In PromptForDesign.getDesigns designtypes=',designtypes)
                 this.setState({ 
                     designtypes: designtypes
                 })
-                fetch('/api/v1/designtypes/'+this.state.type)
+                fetch('/api/v1/designtypes/'+this.state.type+'/designs')
                 .then(res => {
                     displaySpinner(false);
                     if (!res.ok) {
@@ -61,35 +62,34 @@ export class PromptForDesign extends React.Component {
                     return res.json()
                 })
                 .then(designs => {
-                    console.log('In getDesigns designs',designs)
+                    console.log('In PromptForDesign.getDesigns designs=',designs)
                     this.setState({ 
                         designs: designs
                     })
                 })
                 .catch(error => {
-//                    displayError('GET of design names failed: '+error.message);
                     this.setState({
                         modal: !this.state.modal
                     });
-                    displayError('GET of design names failed with message: \''+error.message+'\'. Using builtin initial state instead. You may continue in "demo mode" but you will be unable to save your work.');
+                    displayError('GET of design names for design types failed with message: \''+error.message+'\'. Using builtin initial state instead. You may continue in "demo mode" but you will be unable to save your work.');
                     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
                     const store = createStore(reducers, state, middleware);
                     ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
                 });
             })
             .catch(error => {
-//                displayError('GET of design names failed: '+error.message);
                 this.setState({
                     modal: !this.state.modal
                 });
-                displayError('GET of design names failed with message: \''+error.message+'\'. Using builtin initial state instead. You may continue in "demo mode" but you will be unable to save your work.');
+                displayError('GET of design types failed with message: \''+error.message+'\'. Using builtin initial state instead. You may continue in "demo mode" but you will be unable to save your work.');
                 var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
                 const store = createStore(reducers, state, middleware);
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
             });
     }
     
-    getDesign(name) {
+    getDesign(type,name) {
+        console.log('In PromptForDesign.getDesigns type=', type, ' name=', name);
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -98,7 +98,7 @@ export class PromptForDesign extends React.Component {
         const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/dispatcher));
 
         displaySpinner(true);
-        fetch('/api/v1/designs/'+name)
+        fetch('/api/v1/designtypes/'+type+'/designs/'+name)
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -111,36 +111,40 @@ export class PromptForDesign extends React.Component {
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
             })
             .catch(error => {
-                displayError('GET of \''+name+'\' design failed: '+error.message);
+                displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
             });
     }
 
     onSelectType(event) {
-        console.log('In onSelectType',event.target.value)
+        console.log('In PromptForDesign.onSelectType event.target.value=',event.target.value);
         this.setState({
             type: event.target.value 
         });
     }
     
     onSelectName(event) {
-      console.log('In onSelectName',event.target.value)
+      console.log('In PromptForDesign.onSelectName event.target.value=',event.target.value);
       this.setState({
           name: event.target.value 
       });
-  }
-  
+    }
+    
     onOpen() {
+        console.log('In PromptForDesign.onOpen');
         this.setState({
             modal: !this.state.modal
         });
-//        console.log(this.state.name);
         // Load the model
+        console.log('In PromptForDesign.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
+        var type = this.state.type;
+        if (type === undefined) type = 'Piston-Cylinder';
         var name = this.state.name;
         if (name === undefined) name = 'startup';
-        this.getDesign(name);
+        this.getDesign(type,name);
     }
     
     onCancel() {
+        console.log('In PromptForDesign.onCancel');
         this.setState({
             modal: !this.state.modal
         });
@@ -157,6 +161,7 @@ export class PromptForDesign extends React.Component {
                     </ModalHeader>
                     <ModalBody>
                         Experimental software: <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">See details</a>
+                        <br /><br />
                         <Label for="fileOpenSelectType">Select design type to open:</Label>
                         <Input type="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
                             {this.state.designtypes.map((designtype, index) =>

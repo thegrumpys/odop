@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: ofcmikjy9x4lroa2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306
--- Generation Time: Aug 06, 2018 at 11:50 PM
+-- Generation Time: Aug 18, 2018 at 02:52 PM
 -- Server version: 5.7.19-log
 -- PHP Version: 5.6.31
 
@@ -41,8 +41,7 @@ CREATE TABLE IF NOT EXISTS `design` (
 -- Indexes for table `design`
 --
 ALTER TABLE `design`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
