@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Container, Row, Col, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { initialState as pcyl_initialState } from '../../problems/Piston-Cylinder/initialState';
-import { initialState as solid_initialState } from '../../problems/Solid/initialState';
-import { initialState as spring_initialState } from '../../problems/Spring/initialState';
+import { initialState as pcyl_initialState } from '../../designtypes/Piston-Cylinder/initialState';
+import { initialState as solid_initialState } from '../../designtypes/Solid/initialState';
+import { initialState as spring_initialState } from '../../designtypes/Spring/initialState';
 import { changeLabelsValue } from '../../store/actionCreators';
 
 class FileProperties extends React.Component {

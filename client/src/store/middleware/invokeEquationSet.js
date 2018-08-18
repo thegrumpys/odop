@@ -1,7 +1,7 @@
 import { changeStateVariableValues } from '../actionCreators';
-import { eqnset as pcyl_eqnset } from '../../problems/Piston-Cylinder/eqnset';
-import { eqnset as solid_eqnset } from '../../problems/Solid/eqnset';
-import { eqnset as spring_eqnset } from '../../problems/Spring/eqnset';
+import { eqnset as pcyl_eqnset } from '../../designtypes/Piston-Cylinder/eqnset';
+import { eqnset as solid_eqnset } from '../../designtypes/Solid/eqnset';
+import { eqnset as spring_eqnset } from '../../designtypes/Spring/eqnset';
 
 // Invoke Equation Set
 export function invokeEquationSet(store) {

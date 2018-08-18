@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { initialState } from '../problems/Piston-Cylinder/initialState';
+import { initialState } from '../designtypes/Piston-Cylinder/initialState';
 import { initialSystemControls } from '../initialSystemControls';
 import { MIN, MAX, CONSTRAINED, FIXED } from '../store/actionTypes';
 import { 

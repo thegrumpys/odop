@@ -57,15 +57,15 @@ class App extends Component {
         switch(this.props.type) {
         default:
         case 'Piston-Cylinder':
-            src = 'problems/Piston-Cylinder/favicon.ico';
+            src = 'designtypes/Piston-Cylinder/favicon.ico';
             alt = 'Piston-Cylinder icon';
             break;
         case 'Solid':
-            src = 'problems/Solid/favicon.ico';
+            src = 'designtypes/Solid/favicon.ico';
             alt = 'Solid icon';
             break;
         case 'Spring':
-            src = 'problems/Spring/favicon.ico';
+            src = 'designtypes/Spring/favicon.ico';
             alt = 'Spring icon';
             break;
         }
