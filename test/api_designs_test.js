@@ -64,10 +64,10 @@ describe('Designs with empty DB', () => {
         });
     });
     
-    describe('GET /api/v1/designs with empty DB', () => {
+    describe('GET /api/v1/designtypes/Test-Design with empty DB', () => {
         it('it should GET with 200 OK no design names', (done) => {
             chai.request(server)
-                .get('/api/v1/designs')
+                .get('/api/v1/designtypes/Test-Design')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
@@ -210,10 +210,10 @@ describe('Designs with non-empty DB', () => {
         });
     });
     
-    describe('GET /api/v1/designs with non-empty DB', () => {
+    describe('GET /api/v1/designtypes/Test-Design with non-empty DB', () => {
         it('it should GET with 200 OK one design name', (done) => {
             chai.request(server)
-                .get('/api/v1/designs')
+                .get('/api/v1/designtypes/Test-Design')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);

@@ -23,7 +23,7 @@ class FileOpen extends React.Component {
     getDesigns() {
         // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designs')
+        fetch('/api/v1/designtypes/Piston-Cylinder')
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {

@@ -15,6 +15,7 @@ class FileDelete extends React.Component {
         this.state = {
             modal: false,
             designs: [],
+            type: this.props.type,
             name: this.props.name
         };
     }
@@ -22,7 +23,7 @@ class FileDelete extends React.Component {
     getDesigns() {
         // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designs')
+        fetch('/api/v1/designtypes/'+this.state.type)
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -125,6 +126,7 @@ class FileDelete extends React.Component {
 
 const mapStateToProps = state => ({
     name: state.name, 
+    type: state.type, 
 });
 
 export default connect(mapStateToProps)(FileDelete);

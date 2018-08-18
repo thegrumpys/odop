@@ -55,12 +55,13 @@ app.get('/api/v1/designtypes', (req, res) => {
     });
 });
 
-app.get('/api/v1/designs', (req, res) => {
+app.get('/api/v1/designtypes/:type', (req, res) => {
     var value;
     console.log('SERVER: ===========================================================');
-    console.log('SERVER: In GET /api/v1/designs');
+    var type = req.params['type'];
+    console.log('SERVER: In GET /api/v1/designtypes/'+type);
     var connection = startConnection();
-    var stmt = 'SELECT name FROM design';
+    var stmt = 'SELECT name FROM design WHERE type = \''+type+'\'';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -85,7 +86,7 @@ app.get('/api/v1/designs/:name', (req, res) => {
     console.log('SERVER: In GET /api/v1/designs/'+name);
     var connection = startConnection();
     // The name column is defined as UNIQUE. You can only get 0 or 1 rows at most.
-    var stmt = 'SELECT * FROM design where name = \''+name+'\'';
+    var stmt = 'SELECT * FROM design WHERE name = \''+name+'\'';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
