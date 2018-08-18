@@ -35,6 +35,7 @@
 * [AutoSave feature](design/AutoSaveFeature)
 * [Idea for a Compare Designs feature](design/CompareDesignsFeature)
 * [Consider adding a search at the beginning of trade](design/SearchBeforeTrade)
+* [Sub-Problems feature](design/SubProblems)
 
 
 ## Procedures
