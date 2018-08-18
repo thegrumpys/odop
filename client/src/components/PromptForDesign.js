@@ -30,7 +30,7 @@ export class PromptForDesign extends React.Component {
     }
 
     getDesigns() {
-        console.log('In PromptForDesign.getDesigns');
+//        console.log('In PromptForDesign.getDesigns');
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -49,7 +49,7 @@ export class PromptForDesign extends React.Component {
                 return res.json()
             })
             .then(designtypes => {
-                console.log('In PromptForDesign.getDesigns designtypes=',designtypes)
+//                console.log('In PromptForDesign.getDesigns designtypes=',designtypes)
                 this.setState({ 
                     designtypes: designtypes
                 })
@@ -62,7 +62,7 @@ export class PromptForDesign extends React.Component {
                     return res.json()
                 })
                 .then(designs => {
-                    console.log('In PromptForDesign.getDesigns designs=',designs)
+//                    console.log('In PromptForDesign.getDesigns designs=',designs)
                     this.setState({ 
                         designs: designs
                     })
@@ -89,7 +89,7 @@ export class PromptForDesign extends React.Component {
     }
     
     getDesign(type,name) {
-        console.log('In PromptForDesign.getDesigns type=', type, ' name=', name);
+//        console.log('In PromptForDesign.getDesigns type=', type, ' name=', name);
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -116,26 +116,25 @@ export class PromptForDesign extends React.Component {
     }
 
     onSelectType(event) {
-        console.log('In PromptForDesign.onSelectType event.target.value=',event.target.value);
+//        console.log('In PromptForDesign.onSelectType event.target.value=',event.target.value);
         this.setState({
             type: event.target.value 
         });
     }
     
     onSelectName(event) {
-      console.log('In PromptForDesign.onSelectName event.target.value=',event.target.value);
+//      console.log('In PromptForDesign.onSelectName event.target.value=',event.target.value);
       this.setState({
           name: event.target.value 
       });
     }
     
     onOpen() {
-        console.log('In PromptForDesign.onOpen');
+//        console.log('In PromptForDesign.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
         this.setState({
             modal: !this.state.modal
         });
         // Load the model
-        console.log('In PromptForDesign.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
         var type = this.state.type;
         if (type === undefined) type = 'Piston-Cylinder';
         var name = this.state.name;
@@ -144,7 +143,7 @@ export class PromptForDesign extends React.Component {
     }
     
     onCancel() {
-        console.log('In PromptForDesign.onCancel');
+//        console.log('In PromptForDesign.onCancel');
         this.setState({
             modal: !this.state.modal
         });
