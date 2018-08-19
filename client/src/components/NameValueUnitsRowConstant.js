@@ -12,12 +12,13 @@ class NameValueUnitsRowConstant extends React.Component {
     }
     
     onChangeConstantValue(event) {
+        console.log('In NameValueUnitsRowConstant.onChangeConstantValue event.target.value=',event.target.value);
         this.props.changeConstantValue(this.props.constant.name, parseFloat(event.target.value));
     }
     
     onSelect(event) {
-        console.log('In NameValueUnitsRowConstant event.target.value=',event.target.value);
-//        this.props.changeConstantValue(this.props.constant.name, parseFloat(event.target.value));
+        console.log('In NameValueUnitsRowConstant.onSelect event.target.value=',event.target.value);
+        this.props.changeConstantValue(this.props.constant.name, parseFloat(event.target.value));
     }
     
     render() {
@@ -29,16 +30,13 @@ class NameValueUnitsRowConstant extends React.Component {
                 <td className="align-middle" colSpan="2">{this.props.constant.name}</td>
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
-                        { typeof this.props.constant.value === 'number' ? (
-                            <Input className="text-right" type="number" value={this.props.constant.value} onChange={this.onChangeConstantValue} />
-                        ) : (
-                            <React.Fragment>
-                                <Input type="select" id="valueSelect" onChange={this.onSelect}>
-                                    {this.props.constant.value.map((value, index) =>
-                                        <option key={index} value={value.value} selected={value.selected}>{value.name}@{value.value}</option>
-                                    )}
-                                </Input>
-                            </React.Fragment>
+                        <Input className="text-right" type="number" value={this.props.constant.value} onChange={this.onChangeConstantValue} />
+                        { this.props.constant.table !== undefined && (
+                            <Input type="select" value={this.props.constant.table.reduce((accum,value)=>{return this.props.constant.value === value.value ? value.value : accum},'')} onChange={this.onSelect}>
+                                {this.props.constant.table.map((value, index) =>
+                                    <option key={index} value={value.value}>{value.name}@{value.value}</option>
+                                )}
+                            </Input>
                         )}
                         <InputGroupAddon addonType="append">
                             <InputGroupText>

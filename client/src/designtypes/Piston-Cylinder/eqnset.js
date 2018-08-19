@@ -23,7 +23,7 @@ export function eqnset(d, p) {
     const area = 1;
     const stress = 2;
     var x = [];
-    x[area] = 3.141592653589793 * p[radius] * p[radius];
+    x[area] = Math.PI * p[radius] * p[radius];
     x[force] = p[pressure] * x[area];
     x[stress] = (p[pressure] * p[radius]) / (2.0 * p[thickness]);
 //    if (M_FLAG)

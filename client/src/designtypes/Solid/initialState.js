@@ -2,23 +2,23 @@ export const initialState = {
     "constants": [
         {
             "name": "Density",
-            "value": [
-                { "name": "Hydrogen", "value": 1.0/(1728.0*192.0), "selected": false },
-                { "name": "Helium", "value": 0.0103/1728.0, "selected": false },
-                { "name": "Air", "value": 0.074887/1728.0, "selected": false },
-                { "name": "Gasoline", "value": 0.026, "selected": false },
-                { "name": "Water", "value": 0.036, "selected": true },
-                { "name": "Aluminium", "value": 0.098, "selected": false },
-                { "name": "Iron", "value": 0.284, "selected": false },
-                { "name": "Copper", "value": 0.324, "selected": false },
-                { "name": "Silver", "value": 0.379, "selected": false },
-                { "name": "Lead", "value": 0.410, "selected": false },
-                { "name": "Gold", "value": 0.698, "selected": false },
-                { "name": "UnObtainium", "value": 1.0, "selected": false },
-                { "name": "Kryptonite", "value": 0.003425*0.036127292, "selected": false }
-            ],
+            "value": 0.036,
             "units": "lb/cu-in",
-            "type": "table"
+            "table": [
+                { "name": "Hydrogen", "value": 1.0/(1728.0*192.0) },
+                { "name": "Helium", "value": 0.0103/1728.0 },
+                { "name": "Air", "value": 0.074887/1728.0 },
+                { "name": "Gasoline", "value": 0.026 },
+                { "name": "Water", "value": 0.036 },
+                { "name": "Aluminium", "value": 0.098 },
+                { "name": "Iron", "value": 0.284 },
+                { "name": "Copper", "value": 0.324 },
+                { "name": "Silver", "value": 0.379 },
+                { "name": "Lead", "value": 0.410 },
+                { "name": "Gold", "value": 0.698 },
+                { "name": "UnObtainium", "value": 1.0 },
+                { "name": "Kryptonite", "value": 0.003425*0.036127292 }
+            ]
         }
     ],
     "design_parameters": [
