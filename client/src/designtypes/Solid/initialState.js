@@ -5,19 +5,20 @@ export const initialState = {
             "value": 0.036,
             "units": "lb/cu-in",
             "table": [
-                { "name": "Hydrogen", "value": 1.0/(1728.0*192.0) },
-                { "name": "Helium", "value": 0.0103/1728.0 },
-                { "name": "Air", "value": 0.074887/1728.0 },
+                { "name": "Hydrogen", "value": 0.000003014 },
+                { "name": "Helium", "value": 0.000005961 },
+                { "name": "Air", "value": 0.00004334 },
+                { "name": "Kryptonite", "value": 0.0001237 },
                 { "name": "Gasoline", "value": 0.026 },
                 { "name": "Water", "value": 0.036 },
                 { "name": "Aluminium", "value": 0.098 },
                 { "name": "Iron", "value": 0.284 },
+                { "name": "Steel", "value": 0.290 },
                 { "name": "Copper", "value": 0.324 },
                 { "name": "Silver", "value": 0.379 },
                 { "name": "Lead", "value": 0.410 },
                 { "name": "Gold", "value": 0.698 },
-                { "name": "UnObtainium", "value": 1.0 },
-                { "name": "Kryptonite", "value": 0.003425*0.036127292 }
+                { "name": "UnObtainium", "value": 1.0 }
             ]
         }
     ],
