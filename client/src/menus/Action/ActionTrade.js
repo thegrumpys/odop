@@ -794,7 +794,7 @@ class ActionTrade extends React.Component {
         return (
             <React.Fragment>
                 <DropdownItem onClick={this.strategyToggle}>
-                    Trade
+                    Trade&hellip;
                 </DropdownItem>
                 <Modal isOpen={this.state.strategyModal} className={this.props.className} size="lg">
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy </ModalHeader>

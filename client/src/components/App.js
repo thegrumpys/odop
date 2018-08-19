@@ -107,7 +107,7 @@ class App extends Component {
                                     <ActionSelectCatalog />
                                     <DropdownItem divider />
                                     <DropdownItem disabled>
-                                        Execute
+                                        Execute&hellip;
                                     </DropdownItem>
                                </DropdownMenu>
                             </UncontrolledDropdown>
@@ -117,14 +117,14 @@ class App extends Component {
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                     <DropdownItem disabled>
-                                        Define  Sub-Problems
+                                        Define  Sub-Problems&hellip;
                                     </DropdownItem>
                                     <DropdownItem disabled>
-                                        Display Sub-Problems
+                                        Display Sub-Problems&hellip;
                                     </DropdownItem>
                                     <DropdownItem divider />
                                     <DropdownItem disabled>
-                                        Report
+                                        Report&hellip;
                                     </DropdownItem>
                                     <DropdownItem divider />
                                     <ViewViolations />
@@ -140,10 +140,10 @@ class App extends Component {
                                     </DropdownItem>
                                     <HelpIndex />
                                     <DropdownItem disabled>
-                                        Demo
+                                        Demo&hellip;
                                     </DropdownItem>
                                     <DropdownItem disabled>
-                                        Tutorial
+                                        Tutorial&hellip;
                                     </DropdownItem>
                                     <HelpAbout />
                                </DropdownMenu>
