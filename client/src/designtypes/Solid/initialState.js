@@ -2,8 +2,12 @@ export const initialState = {
     "constants": [
         {
             "name": "Density",
-            "value": 0.036,
-            "units": "lb/cu-in"
+            "value": [
+                { "name": "Water", "value": 0.036, "selected": true },
+                { "name": "Gasoline", "value": 0.026, "selected": false }
+            ],
+            "units": "lb/cu-in",
+            "type": "table"
         }
     ],
     "design_parameters": [
