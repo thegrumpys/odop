@@ -4,7 +4,9 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
-import { initialState } from '../designtypes/Piston-Cylinder/initialState';
+import { initialState as pcyl_initialState } from '../designtypes/Piston-Cylinder/initialState';
+import { initialState as solid_initialState } from '../designtypes/Solid/initialState';
+import { initialState as spring_initialState } from '../designtypes/Spring/initialState';
 import { initialSystemControls } from '../initialSystemControls';
 import App from './App';
 import { displaySpinner } from './Spinner';
@@ -23,7 +25,7 @@ export class PromptForDesign extends React.Component {
             modal: true,
             designtypes: [],
             designs: [],
-            type: "Piston-Cylinder",
+            type: "Solid",
             name: "startup"
         };
         this.getDesigns();
@@ -72,6 +74,19 @@ export class PromptForDesign extends React.Component {
                         modal: !this.state.modal
                     });
                     displayError('GET of design names for design types failed with message: \''+error.message+'\'. Using builtin initial state instead. You may continue in "demo mode" but you will be unable to save your work.');
+                    var initialState;
+                    switch(this.state.type) {
+                    default:
+                    case 'Piston-Cylinder':
+                        initialState = pcyl_initialState;
+                        break;
+                    case 'Solid':
+                        initialState = solid_initialState;
+                        break;
+                    case 'Spring':
+                        initialState = spring_initialState;
+                        break;
+                    }
                     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
                     const store = createStore(reducers, state, middleware);
                     ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
@@ -82,6 +97,19 @@ export class PromptForDesign extends React.Component {
                     modal: !this.state.modal
                 });
                 displayError('GET of design types failed with message: \''+error.message+'\'. Using builtin initial state instead. You may continue in "demo mode" but you will be unable to save your work.');
+                var initialState;
+                switch(this.state.type) {
+                default:
+                case 'Piston-Cylinder':
+                    initialState = pcyl_initialState;
+                    break;
+                case 'Solid':
+                    initialState = solid_initialState;
+                    break;
+                case 'Spring':
+                    initialState = spring_initialState;
+                    break;
+                }
                 var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
                 const store = createStore(reducers, state, middleware);
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
