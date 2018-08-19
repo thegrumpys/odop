@@ -1,25 +1,30 @@
 export const initialState = {
     "constants": [
         {
+            "name": "Material",
+            "value": [
+                [ "Material", "Density" ],
+                [ "Hydrogen", 0.000003014 ],
+                [ "Helium", 0.000005961 ],
+                [ "Air", 0.00004334 ],
+                [ "Kryptonite", 0.0001237 ],
+                [ "Gasoline", 0.026 ],
+                [ "Water", 0.036 ],
+                [ "Aluminium", 0.098 ],
+                [ "Iron", 0.284 ],
+                [ "Steel", 0.290 ],
+                [ "Copper", 0.324 ],
+                [ "Silver", 0.379 ],
+                [ "Lead", 0.410 ],
+                [ "Gold", 0.698 ],
+                [ "UnObtainium", 1.0 ]
+            ],
+            "units": "",
+        },
+        {
             "name": "Density",
             "value": 0.036,
-            "units": "lb/cu-in",
-            "table": [
-                { "name": "Hydrogen", "value": 0.000003014 },
-                { "name": "Helium", "value": 0.000005961 },
-                { "name": "Air", "value": 0.00004334 },
-                { "name": "Kryptonite", "value": 0.0001237 },
-                { "name": "Gasoline", "value": 0.026 },
-                { "name": "Water", "value": 0.036 },
-                { "name": "Aluminium", "value": 0.098 },
-                { "name": "Iron", "value": 0.284 },
-                { "name": "Steel", "value": 0.290 },
-                { "name": "Copper", "value": 0.324 },
-                { "name": "Silver", "value": 0.379 },
-                { "name": "Lead", "value": 0.410 },
-                { "name": "Gold", "value": 0.698 },
-                { "name": "UnObtainium", "value": 1.0 }
-            ]
+            "units": "lb/cu-in"
         }
     ],
     "design_parameters": [
