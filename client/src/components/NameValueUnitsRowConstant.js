@@ -38,7 +38,7 @@ class NameValueUnitsRowConstant extends React.Component {
 }
 
 const mapDispatchToProps = {
-        changeConstantValue: changeConstantValue
+    changeConstantValue: changeConstantValue
 };
 
 export default connect(null, mapDispatchToProps)(NameValueUnitsRowConstant);

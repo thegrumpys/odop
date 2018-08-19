@@ -55,12 +55,12 @@ class NameValueUnitsRowStateVariable extends React.Component {
 
 
 const mapDispatchToStateVariableProps = {
-        changeStateVariableValue: changeStateVariableValue,
-        changeStateVariableConstraint: changeStateVariableConstraint,
-        saveStateVariableConstraints: saveStateVariableConstraints,
-        restoreStateVariableConstraints: restoreStateVariableConstraints,
-        setStateVariableFlag: setStateVariableFlag,
-        resetStateVariableFlag: resetStateVariableFlag
+    changeStateVariableValue: changeStateVariableValue,
+    changeStateVariableConstraint: changeStateVariableConstraint,
+    saveStateVariableConstraints: saveStateVariableConstraints,
+    restoreStateVariableConstraints: restoreStateVariableConstraints,
+    setStateVariableFlag: setStateVariableFlag,
+    resetStateVariableFlag: resetStateVariableFlag
 };
 
 export default connect(null, mapDispatchToStateVariableProps)(NameValueUnitsRowStateVariable);
