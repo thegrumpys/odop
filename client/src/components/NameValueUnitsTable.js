@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table  } from 'reactstrap';
+import NameValueUnitsRowConstant from './NameValueUnitsRowConstant';
 import NameValueUnitsRowDesignParameter from './NameValueUnitsRowDesignParameter';
 import NameValueUnitsRowStateVariable from './NameValueUnitsRowStateVariable';
 import { connect } from 'react-redux';
@@ -12,7 +13,7 @@ export class NameValueUnitsTable extends React.Component {
                 <Table className="col-md-5" bordered>
                     <tbody>
                         <tr>
-                            <th className="text-left" colSpan="5">Independent Variables</th>
+                        <th className="text-left" colSpan="5">Independent Variables</th>
                         </tr>
                         <tr>
                             <th className="text-left" colSpan="2">Name</th>
@@ -29,6 +30,10 @@ export class NameValueUnitsTable extends React.Component {
                             <th className="text-left" colSpan="5">Dependent Variables</th>
                         </tr>
                         {this.props.state_variables.map((state_variable) => <NameValueUnitsRowStateVariable key={state_variable.name} state_variable={state_variable} objective_value={this.props.objective_value} />)}
+                        <tr>
+                            <th className="text-left" colSpan="5">Calculation Inputs</th>
+                        </tr>
+                        {this.props.constants.map((constant) => <NameValueUnitsRowConstant key={constant.name} constant={constant} objective_value={this.props.objective_value} />)}
                     </tbody>
                 </Table>
             </React.Fragment>
@@ -38,6 +43,7 @@ export class NameValueUnitsTable extends React.Component {
 }
 
 const mapStateToProps = state => ({
+    constants: state.constants,
     design_parameters: state.design_parameters,
     state_variables: state.state_variables,
     objective_value: state.result.objective_value
