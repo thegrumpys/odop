@@ -1,5 +1,6 @@
 import { displayError } from '../../components/ErrorModal';
 import { initialState } from './initialState';
+import { initialSystemControls } from '../../initialSystemControls';
 
 export function migrate(design) {
     /*
@@ -21,7 +22,7 @@ export function migrate(design) {
         break;
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
-        migrated_design = initialState;
+        migrated_design = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     }
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
