@@ -1,5 +1,7 @@
 import { STARTUP, 
     
+    CHANGE_CONSTANT_VALUE, 
+    
     CHANGE_DESIGN_PARAMETER_VALUE, 
     CHANGE_DESIGN_PARAMETER_VALUES, 
     RESTORE_DESIGN_PARAMETER_VALUES, 
@@ -33,6 +35,10 @@ export const dispatcher = store => next => action => {
         invokeEquationSet(store);
         setSclDen(store);
         updateViolationsAndObjectiveValue(store);
+        break;
+    case CHANGE_CONSTANT_VALUE:
+        invokeEquationSet(store);
+        updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
     case CHANGE_DESIGN_PARAMETER_VALUE:
         invokeEquationSet(store);
