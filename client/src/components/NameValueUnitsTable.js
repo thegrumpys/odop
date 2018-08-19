@@ -30,9 +30,11 @@ export class NameValueUnitsTable extends React.Component {
                             <th className="text-left" colSpan="5">Dependent Variables</th>
                         </tr>
                         {this.props.state_variables.map((state_variable) => <NameValueUnitsRowStateVariable key={state_variable.name} state_variable={state_variable} objective_value={this.props.objective_value} />)}
-                        <tr>
-                            <th className="text-left" colSpan="5">Calculation Inputs</th>
-                        </tr>
+                        { this.props.constants.length > 0 &&
+                            (<tr>
+                                <th className="text-left" colSpan="5">Calculation Inputs</th>
+                            </tr>)
+                        }
                         {this.props.constants.map((constant) => <NameValueUnitsRowConstant key={constant.name} constant={constant} objective_value={this.props.objective_value} />)}
                     </tbody>
                 </Table>

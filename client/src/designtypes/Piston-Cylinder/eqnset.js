@@ -16,7 +16,6 @@ export function eqnset(d, p) {
      * m_flag = 0 if call is from search, no console I/O permitted. m_flag > 0
      * if "special" call requesting direct output.
      */
-    const pi = 0;
     const pressure = 0;
     const radius = 1;
     const thickness = 2;
@@ -24,7 +23,7 @@ export function eqnset(d, p) {
     const area = 1;
     const stress = 2;
     var x = [];
-    x[area] = d[pi] * p[radius] * p[radius];
+    x[area] = 3.141592653589793 * p[radius] * p[radius];
     x[force] = p[pressure] * x[area];
     x[stress] = (p[pressure] * p[radius]) / (2.0 * p[thickness]);
 //    if (M_FLAG)

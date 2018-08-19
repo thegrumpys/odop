@@ -1,10 +1,5 @@
 export const initialState = {
     "constants": [
-        {
-            "name": "PI",
-            "value": 3.141592653589793,
-            "units": "_"
-        }
     ],
     "design_parameters": [
         {
@@ -114,7 +109,7 @@ export const initialState = {
     ],
     "name": "initialState",
     "type": "Piston-Cylinder",
-    "version": "1.2",
+    "version": "1",
     "result": {
         "objective_value": 0.5605106435926049,
         "termination_condition": "None",

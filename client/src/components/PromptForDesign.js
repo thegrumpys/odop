@@ -14,6 +14,9 @@ import { displaySpinner } from './Spinner';
 import { displayError } from './ErrorModal';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
+import { migrate as pcyl_migrate } from '../designtypes/Piston-Cylinder/migrate';
+import { migrate as solid_migrate } from '../designtypes/Solid/migrate';
+import { migrate as spring_migrate } from '../designtypes/Spring/migrate';
 
 export class PromptForDesign extends React.Component {
     constructor(props) {
@@ -138,7 +141,20 @@ export class PromptForDesign extends React.Component {
                 return res.json()
             })
             .then(design => {
-                const store = createStore(reducers, design, middleware);
+                var migrated_design;
+                switch(design.type) {
+                default:
+                case 'Piston-Cylinder':
+                    migrated_design = pcyl_migrate(design);
+                    break;
+                case 'Solid':
+                    migrated_design = solid_migrate(design);
+                    break;
+                case 'Spring':
+                    migrated_design= spring_migrate(design);
+                    break;
+                }
+                const store = createStore(reducers, migrated_design, middleware);
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
             })
             .catch(error => {
