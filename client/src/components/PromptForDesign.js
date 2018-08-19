@@ -169,6 +169,7 @@ export class PromptForDesign extends React.Component {
                     break;
                 }
                 const store = createStore(reducers, migrated_design, middleware);
+                store.dispatch(startup());
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
             })
             .catch(error => {
