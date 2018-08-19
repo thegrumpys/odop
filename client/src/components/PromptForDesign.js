@@ -9,6 +9,7 @@ import { initialState as solid_initialState } from '../designtypes/Solid/initial
 import { initialState as spring_initialState } from '../designtypes/Spring/initialState';
 import { initialSystemControls } from '../initialSystemControls';
 import App from './App';
+import { startup } from '../store/actionCreators';
 import { displaySpinner } from './Spinner';
 import { displayError } from './ErrorModal';
 import { reducers } from '../store/reducers';
@@ -89,6 +90,7 @@ export class PromptForDesign extends React.Component {
                     }
                     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
                     const store = createStore(reducers, state, middleware);
+                    store.dispatch(startup());
                     ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
                 });
             })
@@ -112,6 +114,7 @@ export class PromptForDesign extends React.Component {
                 }
                 var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
                 const store = createStore(reducers, state, middleware);
+                store.dispatch(startup());
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
             });
     }

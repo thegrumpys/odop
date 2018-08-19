@@ -2,7 +2,7 @@ import { MIN, MAX } from '../actionTypes';
 import { changeDesignParameterConstraint, changeStateVariableConstraint } from '../actionCreators';
 
 // Startup
-export function startup(store) {
+export function setSclDen(store) {
 
     var design = store.getState();
 

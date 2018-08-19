@@ -15,7 +15,7 @@ import { STARTUP,
     SEARCH, 
     SEEK
     } from '../actionTypes';
-import { startup } from './startup';
+import { setSclDen } from './setSclDen';
 import { search } from './search';
 import { seek } from './seek';
 import { invokeEquationSet } from './invokeEquationSet';
@@ -30,7 +30,8 @@ export const dispatcher = store => next => action => {
 
     switch (action.type) {
     case STARTUP:
-        startup(store);
+        invokeEquationSet(store);
+        setSclDen(store);
         updateViolationsAndObjectiveValue(store);
         break;
     case CHANGE_DESIGN_PARAMETER_VALUE:
