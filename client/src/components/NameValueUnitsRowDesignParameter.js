@@ -51,9 +51,9 @@ class NameValueUnitsRowDesignParameter extends React.Component {
 }
 
 const mapDispatchToProps = {
-        changeDesignParameterValue: changeDesignParameterValue,
-        setDesignParameterFlag: setDesignParameterFlag,
-        resetDesignParameterFlag: resetDesignParameterFlag
+    changeDesignParameterValue: changeDesignParameterValue,
+    setDesignParameterFlag: setDesignParameterFlag,
+    resetDesignParameterFlag: resetDesignParameterFlag
 };
 
 export default connect(null, mapDispatchToProps)(NameValueUnitsRowDesignParameter);
