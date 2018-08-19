@@ -1,7 +1,8 @@
 export function eqnset(d, p) {
     var x = [];
 
-    const Density = 0;
+    const Material = 0;
+    const Density = 1;
     const Length = 0;
     const Width = 1;
     const Height = 2;
