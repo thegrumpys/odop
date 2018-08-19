@@ -1,4 +1,8 @@
 export function migrate(design) {
+    /*
+     * When doing a migration also update client's initialState and set it's version to the new one.
+     * Also update server's load.sql and set it's version to the new one.
+     */
 //    console.log('In migrate design=',design);
 
     var migrated_design = design; // Assume no-op as default 
