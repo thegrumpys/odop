@@ -20,7 +20,7 @@ class FileRecent extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <DropdownItem onClick={this.toggle} disabled>
                     Recent
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>

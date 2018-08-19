@@ -105,7 +105,7 @@ class FileProperties extends React.Component {
                         </Container>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="Secondary" onClick={this.toggle}>Cancel</Button>
+                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                         <Button color="primary" onClick={this.onRestoreDefaults}>Restore Defaults</Button>
                         <Button color="primary" onClick={this.onApplyandClose}>Apply and Close</Button>
                     </ModalFooter>
