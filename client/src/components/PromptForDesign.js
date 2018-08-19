@@ -36,7 +36,7 @@ export class PromptForDesign extends React.Component {
     }
 
     getDesignTypes() {
-        console.log('In PromptForDesign.getDesignTypes');
+//        console.log('In PromptForDesign.getDesignTypes');
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -87,7 +87,7 @@ export class PromptForDesign extends React.Component {
     }
     
     getDesignNames(type) {
-        console.log('In PromptForDesign.getDesignNames');
+//        console.log('In PromptForDesign.getDesignNames');
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
