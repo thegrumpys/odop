@@ -2,6 +2,8 @@ import { STARTUP,
     LOAD, 
     CHANGE_NAME, 
     
+    CHANGE_CONSTANT_VALUE, 
+    
     CHANGE_DESIGN_PARAMETER_VALUE, 
     CHANGE_DESIGN_PARAMETER_VALUES, 
     SAVE_DESIGN_PARAMETER_VALUES, 
@@ -52,6 +54,16 @@ export function changeName(name) {
         } 
     }
   }
+
+export function changeConstantValue(name, value) {
+    return {
+        type: CHANGE_CONSTANT_VALUE,
+        payload: {
+            name,
+            value
+        }
+    }
+}
 
 export function changeDesignParameterValue(name, value, merit) {
     return {
