@@ -23,6 +23,7 @@ Modify template files:
  ---- Disable access to database server   
  ---- Launch client - observe error message   
  ---- Respond to error message.  initialState will load.   
+ ---- Re-enable database access
  ---- Optionally, make modifications.  SaveAs startup.   
 
 * Create a load.sql file   
