@@ -26,33 +26,33 @@ it('middleware with startup', () => {
     expect(design.design_parameters[0].name).toEqual("PRESSURE");
     expect(design.design_parameters[0].cmin).toEqual(0);
     expect(design.design_parameters[0].cmax).toEqual(1500);
-    expect(design.design_parameters[0].smin).toEqual(0.06666666666666667);
-    expect(design.design_parameters[0].smax).toEqual(1500);
+    expect(design.design_parameters[0].smin).toEqual(undefined);
+    expect(design.design_parameters[0].smax).toEqual(undefined);
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].cmin).toEqual(0);
     expect(design.design_parameters[1].cmax).toEqual(0.5);
-    expect(design.design_parameters[1].smin).toEqual(0.4);
-    expect(design.design_parameters[1].smax).toEqual(0.5);
+    expect(design.design_parameters[1].smin).toEqual(undefined);
+    expect(design.design_parameters[1].smax).toEqual(undefined);
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
     expect(design.design_parameters[2].cmin).toEqual(0.0);
     expect(design.design_parameters[2].cmax).toEqual(0.05);
-    expect(design.design_parameters[2].smin).toEqual(0.04);
-    expect(design.design_parameters[2].smax).toEqual(0.05);
+    expect(design.design_parameters[2].smin).toEqual(undefined);
+    expect(design.design_parameters[2].smax).toEqual(undefined);
     expect(design.state_variables[0].name).toEqual("FORCE");
     expect(design.state_variables[0].cmin).toEqual(1000);
     expect(design.state_variables[0].cmax).toEqual(0);
-    expect(design.state_variables[0].smin).toEqual(1000);
-    expect(design.state_variables[0].smax).toEqual(0.06666666666666667);
+    expect(design.state_variables[0].smin).toEqual(undefined);
+    expect(design.state_variables[0].smax).toEqual(undefined);
     expect(design.state_variables[1].name).toEqual("AREA");
     expect(design.state_variables[1].cmin).toEqual(0);
     expect(design.state_variables[1].cmax).toEqual(0);
-    expect(design.state_variables[1].smin).toEqual(0.06666666666666667);
-    expect(design.state_variables[1].smax).toEqual(0.06666666666666667);
+    expect(design.state_variables[1].smin).toEqual(undefined);
+    expect(design.state_variables[1].smax).toEqual(undefined);
     expect(design.state_variables[2].name).toEqual("STRESS");
     expect(design.state_variables[2].cmin).toEqual(0);
     expect(design.state_variables[2].cmax).toEqual(3000);
-    expect(design.state_variables[2].smin).toEqual(0.06666666666666667);
-    expect(design.state_variables[2].smax).toEqual(3000);
+    expect(design.state_variables[2].smin).toEqual(undefined);
+    expect(design.state_variables[2].smax).toEqual(undefined);
     
     store.dispatch(startup());
     
@@ -111,11 +111,11 @@ it('middleware change pressure design parameter value without startup', () => {
     expect(design.design_parameters[0].name).toEqual("PRESSURE");
     expect(design.design_parameters[0].value).toEqual(500);
     expect(design.state_variables[0].name).toEqual("FORCE");
-    expect(design.state_variables[0].value).toEqual(251.32741228718348);
+    expect(design.state_variables[0].value).toEqual(0);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+    expect(design.state_variables[1].value).toEqual(0);
     expect(design.state_variables[2].name).toEqual("STRESS");
-    expect(design.state_variables[2].value).toEqual(2500);
+    expect(design.state_variables[2].value).toEqual(0);
 
     store.dispatch(changeDesignParameterValue("PRESSURE", 5000));
     
@@ -141,11 +141,11 @@ it('middleware change radius design parameter value without startup', () => {
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[0].name).toEqual("FORCE");
-    expect(design.state_variables[0].value).toEqual(251.32741228718348);
+    expect(design.state_variables[0].value).toEqual(0);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+    expect(design.state_variables[1].value).toEqual(0);
     expect(design.state_variables[2].name).toEqual("STRESS");
-    expect(design.state_variables[2].value).toEqual(2500);
+    expect(design.state_variables[2].value).toEqual(0);
 
     store.dispatch(changeDesignParameterValue("RADIUS", 0.5));
     
@@ -171,11 +171,11 @@ it('middleware change thickness design parameter value without startup', () => {
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
     expect(design.design_parameters[2].value).toEqual(0.04);
     expect(design.state_variables[0].name).toEqual("FORCE");
-    expect(design.state_variables[0].value).toEqual(251.32741228718348);
+    expect(design.state_variables[0].value).toEqual(0);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+    expect(design.state_variables[1].value).toEqual(0);
     expect(design.state_variables[2].name).toEqual("STRESS");
-    expect(design.state_variables[2].value).toEqual(2500);
+    expect(design.state_variables[2].value).toEqual(0);
 
     store.dispatch(changeDesignParameterValue("THICKNESS", 0.05));
     
@@ -204,33 +204,33 @@ it('middleware change constraints to force all violations', () => {
     expect(design.design_parameters[0].name).toEqual("PRESSURE");
     expect(design.design_parameters[0].cmin).toEqual(0);
     expect(design.design_parameters[0].cmax).toEqual(1500);
-    expect(design.design_parameters[0].smin).toEqual(0.06666666666666667);
-    expect(design.design_parameters[0].smax).toEqual(1500);
+    expect(design.design_parameters[0].smin).toEqual(undefined);
+    expect(design.design_parameters[0].smax).toEqual(undefined);
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].cmin).toEqual(0);
     expect(design.design_parameters[1].cmax).toEqual(0.5);
-    expect(design.design_parameters[1].smin).toEqual(0.4);
-    expect(design.design_parameters[1].smax).toEqual(0.5);
+    expect(design.design_parameters[1].smin).toEqual(undefined);
+    expect(design.design_parameters[1].smax).toEqual(undefined);
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
     expect(design.design_parameters[2].cmin).toEqual(0.0);
     expect(design.design_parameters[2].cmax).toEqual(0.05);
-    expect(design.design_parameters[2].smin).toEqual(0.04);
-    expect(design.design_parameters[2].smax).toEqual(0.05);
+    expect(design.design_parameters[2].smin).toEqual(undefined);
+    expect(design.design_parameters[2].smax).toEqual(undefined);
     expect(design.state_variables[0].name).toEqual("FORCE");
     expect(design.state_variables[0].cmin).toEqual(1000);
     expect(design.state_variables[0].cmax).toEqual(0);
-    expect(design.state_variables[0].smin).toEqual(1000);
-    expect(design.state_variables[0].smax).toEqual(0.06666666666666667);
+    expect(design.state_variables[0].smin).toEqual(undefined);
+    expect(design.state_variables[0].smax).toEqual(undefined);
     expect(design.state_variables[1].name).toEqual("AREA");
     expect(design.state_variables[1].cmin).toEqual(0);
     expect(design.state_variables[1].cmax).toEqual(0);
-    expect(design.state_variables[1].smin).toEqual(0.06666666666666667);
-    expect(design.state_variables[1].smax).toEqual(0.06666666666666667);
+    expect(design.state_variables[1].smin).toEqual(undefined);
+    expect(design.state_variables[1].smax).toEqual(undefined);
     expect(design.state_variables[2].name).toEqual("STRESS");
     expect(design.state_variables[2].cmin).toEqual(0);
     expect(design.state_variables[2].cmax).toEqual(3000);
-    expect(design.state_variables[2].smin).toEqual(0.06666666666666667);
-    expect(design.state_variables[2].smax).toEqual(3000);
+    expect(design.state_variables[2].smin).toEqual(undefined);
+    expect(design.state_variables[2].smax).toEqual(undefined);
     
     // Set all constraints to cause violations
     store.dispatch(changeDesignParameterConstraint("PRESSURE", MIN,600));
