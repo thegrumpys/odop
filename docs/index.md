@@ -41,4 +41,4 @@
 ## Procedures
 
 * [Release Process](procedures/release)
-* [Procedure to implement new design types](procedures/NewDesignType)
+* [New Design Type](procedures/NewDesignType)

@@ -25,6 +25,8 @@ The ODO:P software is expected to run on most modern web browsers.
 A very broad range of hardware and operating systems will be able to utilize the software.
 This includes Microsoft Windows and Apple MacOS, Linux systems plus many iOS and Android based mobile devices.
 As browser-based software, there is no "app" to be downloaded and installed. 
+Responsibility for managing updates lies with the person or organization managing the server.
+End users will never need to be concerned with installing ODOP software updates.
 
 
 * Responsive to different screen sizes   
