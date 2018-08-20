@@ -27,7 +27,7 @@ it('reducers without startup', () => {
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+    expect(design.state_variables[1].value).toEqual(0);
 });
 
 it('reducers with startup', () => {
@@ -42,7 +42,7 @@ it('reducers with startup', () => {
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+    expect(design.state_variables[1].value).toEqual(0);
     
     store.dispatch(startup());
     
@@ -52,7 +52,7 @@ it('reducers with startup', () => {
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+    expect(design.state_variables[1].value).toEqual(0);
 });
 
 it('reducers load', () => {
@@ -106,7 +106,7 @@ it('reducers change design parameter value', () => {
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+    expect(design.state_variables[1].value).toEqual(0);
 
     store.dispatch(changeDesignParameterValue("RADIUS", 0.5));
     
@@ -114,7 +114,7 @@ it('reducers change design parameter value', () => {
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.5);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+    expect(design.state_variables[1].value).toEqual(0);
 });
 
 it('reducers change design parameter violation min', () => {
@@ -125,7 +125,7 @@ it('reducers change design parameter violation min', () => {
     
     var design = store.getState(); // before
     expect(design.design_parameters[1].name).toEqual("RADIUS");
-    expect(design.design_parameters[1].vmin).toEqual(-17);
+    expect(design.design_parameters[1].vmin).toEqual(undefined);
 
     store.dispatch(changeDesignParameterViolation("RADIUS", MIN, -1234));
     
@@ -142,7 +142,7 @@ it('reducers change design parameter violation max', () => {
     
     var design = store.getState(); // before
     expect(design.design_parameters[1].name).toEqual("RADIUS");
-    expect(design.design_parameters[1].vmax).toEqual(-0.19999999999999996);
+    expect(design.design_parameters[1].vmax).toEqual(undefined);
 
     store.dispatch(changeDesignParameterViolation("RADIUS", MAX, 1234));
     
@@ -160,7 +160,7 @@ it('reducers change design parameter constraint min', () => {
     var design = store.getState(); // before
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].cmin).toEqual(0.0);
-    expect(design.design_parameters[1].smin).toEqual(0.4);
+    expect(design.design_parameters[1].smin).toEqual(undefined);
 
     store.dispatch(changeDesignParameterConstraint("RADIUS", MIN, 0.1));
     
@@ -179,7 +179,7 @@ it('reducers change design parameter constraint max', () => {
     var design = store.getState(); // before
     expect(design.design_parameters[2].name).toEqual("THICKNESS");
     expect(design.design_parameters[2].cmax).toEqual(0.05);
-    expect(design.design_parameters[2].smax).toEqual(0.05);
+    expect(design.design_parameters[2].smax).toEqual(undefined);
 
     store.dispatch(changeDesignParameterConstraint("THICKNESS", MAX, 0.06));
     
@@ -269,7 +269,7 @@ it('reducers change state variable value', () => {
     
     var design = store.getState(); // before
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+    expect(design.state_variables[1].value).toEqual(0);
 
     store.dispatch(changeStateVariableValue("AREA", 0.7853981633974483));
     
@@ -286,7 +286,7 @@ it('reducers change state variable violation min', () => {
     
     var design = store.getState(); // before
     expect(design.state_variables[0].name).toEqual("FORCE");
-    expect(design.state_variables[0].vmin).toEqual(0.7486725877128165);
+    expect(design.state_variables[0].vmin).toEqual(undefined);
 
     store.dispatch(changeStateVariableViolation("FORCE", MIN, -1234));
     
@@ -303,7 +303,7 @@ it('reducers change state variable violation max', () => {
     
     var design = store.getState(); // before
     expect(design.state_variables[2].name).toEqual("STRESS");
-    expect(design.state_variables[2].vmin).toEqual(0);
+    expect(design.state_variables[2].vmin).toEqual(undefined);
 
     store.dispatch(changeStateVariableViolation("STRESS", MIN, 1234));
     
@@ -321,7 +321,7 @@ it('reducers change state variable constraint min', () => {
     var design = store.getState(); // before
     expect(design.state_variables[0].name).toEqual("FORCE");
     expect(design.state_variables[0].cmin).toEqual(1000);
-    expect(design.state_variables[0].smin).toEqual(1000);
+    expect(design.state_variables[0].smin).toEqual(undefined);
 
     store.dispatch(changeStateVariableConstraint("FORCE", MIN, 10000));
     
@@ -340,7 +340,7 @@ it('reducers change state variable constraint max', () => {
     var design = store.getState(); // before
     expect(design.state_variables[2].name).toEqual("STRESS");
     expect(design.state_variables[2].cmax).toEqual(3000);
-    expect(design.state_variables[2].smax).toEqual(3000);
+    expect(design.state_variables[2].smax).toEqual(undefined);
 
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 4000));
     
@@ -493,7 +493,7 @@ it('reducers change result objective value', () => {
         state);
     
     var design = store.getState(); // before
-    expect(design.result.objective_value).toEqual(0.5605106435926049);
+    expect(design.result.objective_value).toEqual(0);
 
     store.dispatch(changeResultObjectiveValue(0.987654321));
     
@@ -585,7 +585,7 @@ it('reducers search', () => {
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+    expect(design.state_variables[1].value).toEqual(0);
 });
 
 it('reducers seek stress min', () => {
@@ -602,7 +602,7 @@ it('reducers seek stress min', () => {
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+    expect(design.state_variables[1].value).toEqual(0);
 });
 
 it('reducers seek stress max', () => {
@@ -619,6 +619,6 @@ it('reducers seek stress max', () => {
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
-    expect(design.state_variables[1].value).toEqual(0.5026548245743669);
+    expect(design.state_variables[1].value).toEqual(0);
 });
 
