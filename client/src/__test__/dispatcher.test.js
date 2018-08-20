@@ -288,6 +288,7 @@ it('middleware search1 from initial state', () => {
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
     
     store.dispatch(search());
     
@@ -315,6 +316,7 @@ it('middleware search2: initial state w/ single SV constraint modified', () => {
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
 
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 10000));
     
@@ -344,6 +346,7 @@ it('middleware search3: initial state w/ single DP FIXed', () => {
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
 
     store.dispatch(changeDesignParameterValue("RADIUS", 0.444));
     store.dispatch(setDesignParameterFlag("RADIUS", MIN, FIXED));
@@ -374,6 +377,7 @@ it('middleware search4: initial state w/ single SV FIXed', () => {
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
 
     store.dispatch(setStateVariableFlag("STRESS", MIN, FIXED|CONSTRAINED));
     store.dispatch(setStateVariableFlag("STRESS", MAX, FIXED|CONSTRAINED));
@@ -406,6 +410,7 @@ it('middleware search5: initial state w/ 3 constraints modified', () => {
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
 
     store.dispatch(changeStateVariableConstraint("FORCE", MIN, 1200));
     store.dispatch(changeDesignParameterConstraint("RADIUS", MAX, 0.4));
@@ -437,6 +442,7 @@ it('middleware search6: initial state w/ 3 constraints modified further', () => 
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
 
     store.dispatch(changeStateVariableConstraint("FORCE", MIN, 2500));
     store.dispatch(changeDesignParameterConstraint("RADIUS", MAX, 0.55));
@@ -468,6 +474,7 @@ it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', ()
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
 
     store.dispatch(changeStateVariableConstraint("FORCE", MIN, 2500));
     store.dispatch(changeDesignParameterConstraint("RADIUS", MAX, 0.55));
@@ -506,6 +513,7 @@ it('middleware seek1 min stress; feasible start; no fixed', () => {
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
 
     store.dispatch(changeStateVariableConstraint("STRESS", MAX, 10000));
     
@@ -536,6 +544,7 @@ it('middleware seek2 min stress; alt start pt, opened constraints, feasible star
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
 
     store.dispatch(changeDesignParameterValue("PRESSURE", 888));
     store.dispatch(changeDesignParameterValue("RADIUS", 0.63));
@@ -570,6 +579,7 @@ it('middleware seek3 min stress; infeasible start; no fixed', () => {
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
     
     store.dispatch(search());
     store.dispatch(seek("STRESS", MIN));
@@ -598,6 +608,7 @@ it('middleware seek4 min pressure; alt start pt, opened constraints, feasible st
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
 
     store.dispatch(changeDesignParameterValue("PRESSURE", 888));
     store.dispatch(changeDesignParameterValue("RADIUS", 0.63));
@@ -633,6 +644,7 @@ it('middleware seek5 max force; alt start pt, opened constraints, feasible start
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
 
     store.dispatch(changeDesignParameterValue("PRESSURE", 888));
     store.dispatch(changeDesignParameterValue("RADIUS", 0.63));
@@ -667,6 +679,7 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
         reducers,
         state,
         applyMiddleware(dispatcher));
+    store.dispatch(startup());
 
     var design = store.getState(); // after
     store.dispatch(changeDesignParameterValue("PRESSURE", 888));
