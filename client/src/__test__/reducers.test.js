@@ -24,7 +24,6 @@ it('reducers without startup', () => {
     
     var design = store.getState(); // after
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.version).toEqual("1.2");
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
@@ -40,7 +39,6 @@ it('reducers with startup', () => {
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.version).toEqual("1.2");
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
@@ -51,7 +49,6 @@ it('reducers with startup', () => {
     var design = store.getState(); // after
     expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.version).toEqual("1.2");
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
@@ -67,18 +64,15 @@ it('reducers load', () => {
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.version).toEqual("1.2");
 
     store.dispatch(load({
         "name": "test",
-        "type": "Test-Design",
-        "version": "0.0"
+        "type": "Test-Design"
     }));
     
     var design = store.getState(); // after
     expect(design.name).toEqual("test");
     expect(design.type).toEqual("Test-Design");
-    expect(design.version).toEqual("0.0");
 });
 
 it('reducers change name', () => {
@@ -90,14 +84,12 @@ it('reducers change name', () => {
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.version).toEqual("1.2");
 
     store.dispatch(changeName('startup'));
     
     var design = store.getState(); // after
     expect(design.name).toEqual("startup");
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.version).toEqual("1.2");
 });
 
 //=====================================================================
@@ -487,6 +479,10 @@ it('reducers reset state variable flag max', () => {
 });
 
 //=====================================================================
+//CONSTANTS
+//=====================================================================
+
+//=====================================================================
 // RESULT
 //=====================================================================
 
@@ -512,7 +508,7 @@ it('reducers change result termination condition', () => {
         state);
     
     var design = store.getState(); // before
-    expect(design.result.termination_condition).toEqual('None');
+    expect(design.result.termination_condition).toEqual('');
 
     store.dispatch(changeResultTerminationCondition('Test'));
     
@@ -586,7 +582,6 @@ it('reducers search', () => {
     
     var design = store.getState(); // after
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.version).toEqual("1.2");
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
@@ -604,7 +599,6 @@ it('reducers seek stress min', () => {
     
     var design = store.getState(); // after
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.version).toEqual("1.2");
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
@@ -622,7 +616,6 @@ it('reducers seek stress max', () => {
     
     var design = store.getState(); // after
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.version).toEqual("1.2");
     expect(design.design_parameters[1].name).toEqual("RADIUS");
     expect(design.design_parameters[1].value).toEqual(0.4);
     expect(design.state_variables[1].name).toEqual("AREA");
