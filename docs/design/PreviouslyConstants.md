@@ -11,6 +11,9 @@ Instead of using the term "constants", other possibilities include:
  * static quantities
  * problem quantities
  * calculation inputs
+ * unconstrained variables
+ * other variables
+ * other terms
  
  Per discussion, the best approach may be to adopt an inheritance model where both the
  old "constants" and design parameters are a proper subset of a broader class such as "Independent Variables".   
@@ -34,5 +37,6 @@ Instead of naming the procedure / function CONTNT, it could be named:
  * designProblemInit
  * designProblemInit  (with embedded underscores)
  * desProbInit
+ * designTypeInit
  
   
