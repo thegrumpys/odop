@@ -105,15 +105,17 @@ export function eqnset(d, p) {        /*    Compression  Spring  */
     x[Stress_Solid] = s_f * x[Force_Solid];
 
       if (d[Prop_Calc_Method] === 1) {
-          x[Tensile] = d[slope_term] * (Math.log10(p[Wire_Dia]) - d[const_term]) + d[tensile_010];
+          d[Tensile] = d[slope_term] * (Math.log10(p[Wire_Dia]) - d[const_term]) + d[tensile_010];
+//          console.log("Tensile = ", d[Tensile]);
       }
       if (d[Prop_Calc_Method] <= 2) {
-          d[Stress_Lim_Endur] = x[Tensile] * d[PC_Tensile_Endur] / 100.0;
-          d[Stress_Lim_Stat]  = x[Tensile] * d[PC_Tensile_Stat]  / 100.0;
+          d[Stress_Lim_Endur] = d[Tensile] * d[PC_Tensile_Endur] / 100.0;
+          d[Stress_Lim_Stat]  = d[Tensile] * d[PC_Tensile_Stat]  / 100.0;
       }
 
     if (x[Stress_2] > zero) {
         x[FactorSafety_2] = d[Stress_Lim_Stat] / x[Stress_2];
+//        console.log("FactorSafety_2 = ", x[FactorSafety_2]);
     }
        else x[FactorSafety_2] = 1.0;
 
