@@ -42,7 +42,7 @@ class NameValueUnitsRowConstant extends React.Component {
                 <td className="align-middle" colSpan="2">{this.props.constant.name}</td>
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
-                        { typeof this.props.constant.value === 'number' ? (
+                        { typeof this.props.constant.value === 'number' || typeof this.props.constant.value === 'string' ? (
                             <Input className="text-right" type="number" value={this.props.constant.value} onChange={this.onChangeConstantValue} />
                         ) : ( // Array
                             <Input type="select" value={this.state.selectedIndex} onChange={this.onSelect}>
