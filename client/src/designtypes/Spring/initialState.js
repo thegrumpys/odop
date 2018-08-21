@@ -72,6 +72,11 @@ export const initialState = {
             "units": "index"
         },
         {
+            "name": "material_index",
+            "value": 1,
+            "units": "index"
+        },
+        {
             "name": "Inactive_Coils",
             "value": 2.0,
             "units": "coils"
@@ -144,7 +149,7 @@ export const initialState = {
     ],
     "design_parameters": [
         {
-            "name": "OD_free",
+            "name": "OD_Free",
             "value": 1.1,
             "units": "inches",
             "lmin": 0,
@@ -166,7 +171,7 @@ export const initialState = {
             "sdlim": 1.0
         },
         {
-            "name": "L_free",
+            "name": "L_Free",
             "value": 3.25,
             "units": "inches",
             "lmin": 0,
@@ -322,7 +327,7 @@ export const initialState = {
             "sdlim": 1.0
         },
         {
-            "name": "ID_free",
+            "name": "ID_Free",
             "value": 0.8890,
             "units": "inches",
             "lmin": 1,
