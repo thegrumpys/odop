@@ -42,15 +42,18 @@ class NameValueUnitsRowConstant extends React.Component {
                 <td className="align-middle" colSpan="2">{this.props.constant.name}</td>
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
-                        { typeof this.props.constant.value === 'number' || typeof this.props.constant.value === 'string' ? (
-                            <Input className="text-right" type="number" value={this.props.constant.value} onChange={this.onChangeConstantValue} />
-                        ) : ( // Array
+                        { typeof this.props.constant.value === 'number' ?
+                            <Input className="text-right" type="number" value={this.props.constant.value} onChange={this.onChangeConstantValue} /> : '' }
+                        { typeof this.props.constant.value === 'string' ?
+                            <Input className="text-right" type="text" value={this.props.constant.value} onChange={this.onChangeConstantValue} /> : '' }
+                        { (typeof this.props.constant.value !== 'number' && typeof this.props.constant.value !== 'string') ? // array
+                        (
                             <Input type="select" value={this.state.selectedIndex} onChange={this.onSelect}>
                                 {this.props.constant.value.map((value, index) =>
                                     index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
                                 )}
                             </Input>
-                        )}
+                        ) : '' }
                         <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 &nbsp;&nbsp;
