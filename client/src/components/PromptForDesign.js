@@ -29,7 +29,7 @@ export class PromptForDesign extends React.Component {
             modal: true,
             designtypes: [],
             designs: [],
-            type: "Solid",
+            type: "Spring",
             name: "startup"
         };
         this.getDesignTypes();
