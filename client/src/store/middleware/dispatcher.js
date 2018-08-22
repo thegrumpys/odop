@@ -1,6 +1,8 @@
 import { STARTUP, 
+    LOAD,
     
     CHANGE_CONSTANT_VALUE, 
+    CHANGE_CONSTANT_VALUES, 
     
     CHANGE_DESIGN_PARAMETER_VALUE, 
     CHANGE_DESIGN_PARAMETER_VALUES, 
@@ -20,6 +22,7 @@ import { STARTUP,
 import { setSclDen } from './setSclDen';
 import { search } from './search';
 import { seek } from './seek';
+import { invokeInit } from './invokeInit';
 import { invokeEquationSet } from './invokeEquationSet';
 import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
 
@@ -32,11 +35,24 @@ export const dispatcher = store => next => action => {
 
     switch (action.type) {
     case STARTUP:
+        invokeInit(store);
+        invokeEquationSet(store);
+        setSclDen(store);
+        updateViolationsAndObjectiveValue(store);
+        break;
+    case LOAD:
+        invokeInit(store);
         invokeEquationSet(store);
         setSclDen(store);
         updateViolationsAndObjectiveValue(store);
         break;
     case CHANGE_CONSTANT_VALUE:
+        invokeInit(store);
+        invokeEquationSet(store);
+        updateViolationsAndObjectiveValue(store, action.payload.merit);
+        break;
+    case CHANGE_CONSTANT_VALUES:
+        // DO NOT INVOKE BECAUSE OF RECURSION: invokeInit(store);
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;

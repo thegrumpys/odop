@@ -3,6 +3,7 @@ import { STARTUP,
     CHANGE_NAME, 
     
     CHANGE_CONSTANT_VALUE, 
+    CHANGE_CONSTANT_VALUES, 
     
     CHANGE_DESIGN_PARAMETER_VALUE, 
     CHANGE_DESIGN_PARAMETER_VALUES, 
@@ -53,6 +54,14 @@ export function reducers(state, action) {
                     });
                 }
                 return constant;
+            })
+        });
+    case CHANGE_CONSTANT_VALUES:
+        return Object.assign({}, state, {
+            constants: state.constants.map((constant, index) => {
+                return Object.assign({}, constant, {
+                    value: action.payload.values[index]
+                });
             })
         });
     case CHANGE_DESIGN_PARAMETER_VALUE:
