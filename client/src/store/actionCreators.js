@@ -3,6 +3,7 @@ import { STARTUP,
     CHANGE_NAME, 
     
     CHANGE_CONSTANT_VALUE, 
+    CHANGE_CONSTANT_VALUES, 
     
     CHANGE_DESIGN_PARAMETER_VALUE, 
     CHANGE_DESIGN_PARAMETER_VALUES, 
@@ -61,6 +62,15 @@ export function changeConstantValue(name, value) {
         payload: {
             name,
             value
+        }
+    }
+}
+
+export function changeConstantValues(values) {
+    return {
+        type: CHANGE_CONSTANT_VALUES,
+        payload: {
+            values
         }
     }
 }
