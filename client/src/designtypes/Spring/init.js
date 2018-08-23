@@ -47,7 +47,11 @@ export function init(d) {
 
      Cross check values of PROP_CALC_METHOD and END_CALC_METHOD.
   */
- var mtab = [["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","AA","AB","AC"],
+ const matnam = 0;
+ const astm = 1;
+ const fedspec = 2;
+ 
+ var mtab = [["matnam","astm","fedspec","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","AA","AB","AC"],
  ["HARD_DRAWN_WIRE", "A227", "", .284, 30000., 11500., 1.0, 310., 165., 50., 36., 33., 30., 42., 39., 36., 75., 51., 47., 45., 0., 0., 0., 27400., 45000., 58000., "DEF_HD.SIZ", 1, "Hard Drawn MB spring wire   - Class II           ASTM A-227 "],
  ["MUSIC_WIRE", "A228", "QQW-470", .284, 30000., 11500., 1.0, 370., 200., 50., 36., 33., 30., 42., 39., 36., 75., 51., 47., 45., 0., 0., 0., 27400., 45000., 58000., "DEF_MW.SIZ", 1, "Music Wire  (all coatings) -                     ASTM A-228 "],
  ["OIL_TEMPERED_MB", "A229", "QQW-428", .284, 30000., 11500., 1.0, 320., 185., 50., 36., 33., 30., 42., 39., 36., 75., 51., 47., 45., 0., 0., 0., 27400., 45000., 58000., "DEF_OT.SIZ", 1, "Oil Tempered MB spring wire - Class II           ASTM A-229 "],
@@ -70,21 +74,21 @@ export function init(d) {
     d[Material_Index] = 0;
 //  j=length(material_type);
     j = d[Material_Type].length;
-    i = 0;
+    i = 1;
 //  do i=1 to tabl_max while(m_tab(i).gg ^= 0.0);
     do {
 //  if material_type = substr(m_tab(i).matnam,kone,j) then
-        if (m_tab(i).matnam.startsWith(Material_Type)) {
+        if (m_tab[i][matnam].startsWith(Material_Type)) {
 //      do;
 //      material_type=m_tab(i).matnam;
-            d[material_type] = m_tab(i).matnam;
+            d[Material_Type] = m_tab(i).matnam;
 //      material_index=i;
             d[Material_Index] = i;
 //      if prop_calc_method ^= 1 then
             if (d[Prop_Calc_Method] ^= 1) {
 //          do;
 //          prop_calc_method=1;
-                d{prop_calc_method] = 1;
+                d{Prop_Calc_Method] = 1;
 //          put skip list('PROP_CALC_METHOD  SET TO 1');
                 console.log('PROP_CALC_METHOD  SET TO 1');
 //          end;
@@ -136,20 +140,20 @@ export function init(d) {
 
                /*  copy from material table to constants  */
 // i=material_index;
-    i = d[material_index];
+    i = d[Material_Index];
 // if i > 0 then
     if (i > 0) {
 //    do;
 //    if prop_calc_method ^= 1 then             /*   debug  */
-      if (d[prop_calc_method] ^= 1 {
+      if (d[Prop_Calc_Method] ^= 1 {
 //           put skip list('TAB2D:   PROP_CALC_METHOD SET TO 1.');
           console.log('TAB2D:   PROP_CALC_METHOD SET TO 1.');
 //    prop_calc_method = 1;
-          d[prop_calc_method] = 1;
+          d[Prop_Calc_Method] = 1;
       }
 //
 //    material_type    = m_tab(material_index).matnam;
-//    astm_fed_spec    = m_tab(i).astm_fs;
+    astm_fed_spec    = m_tab[i][astm_fs];
 //    if m_tab(i).kh < 1.0 then process = 'HOT_WOUND';
 //             else process = 'COLD_COILED';
 //    density      = m_tab(i).dens;
