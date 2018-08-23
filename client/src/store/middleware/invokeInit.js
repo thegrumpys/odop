@@ -8,6 +8,7 @@ export function invokeInit(store) {
     
 //    console.log('Entering invokeInit');
     
+    var dp;
     var c;
 
     var design = store.getState();
