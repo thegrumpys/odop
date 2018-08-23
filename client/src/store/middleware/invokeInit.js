@@ -19,17 +19,24 @@ export function invokeInit(store) {
         d[i] = c.value;
     }
 
+    // Loop to create p from design_parameters
+    var p = [];
+    for (let i = 0; i < design.design_parameters.length; i++) {
+        dp = design.design_parameters[i];
+        p[i] = dp.value;
+    }
+
     // Update constants from d to d
     switch(design.type) {
     default:
     case 'Piston-Cylinder':
-        d = pcyl_init(d);
+        d = pcyl_init(d, p);
         break;
     case 'Solid':
-        d = solid_init(d);
+        d = solid_init(d, p);
         break;
     case 'Spring':
-        d = spring_init(d);
+        d = spring_init(d, p);
         break;
     }
 
