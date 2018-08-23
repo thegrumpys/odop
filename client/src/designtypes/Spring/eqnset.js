@@ -12,21 +12,22 @@ export function eqnset(d, p) {        /*    Compression  Spring  */
     const Prop_Calc_Method = 8;
 //    const End_Calc_Method = 9;
 //    const Life_Category = 10;
-    const material_index = 11;
-    const Inactive_Coils = 12;
-    const Add_Coils_Solid = 13;
-    const Density = 14;
-    const Torsion_Modulus = 15;
-    const Hot_Factor_Kh = 16;
-    const Tensile = 17;
-    const PC_Tensile_Endur = 18;
-    const PC_Tensile_Stat = 19;
-//    const unused = 20;
-    const Stress_Lim_Endur = 21;
-    const Stress_Lim_Stat = 22;
-    const const_term = 23;
-    const slope_term = 24;
-    const tensile_010 = 25;
+    const Material_Index = 11;
+    const End_Type_Index = 12;
+    const Inactive_Coils = 13;
+    const Add_Coils_Solid = 14;
+    const Density = 15;
+    const Torsion_Modulus = 16;
+    const Hot_Factor_Kh = 17;
+    const Tensile = 18;
+    const PC_Tensile_Endur = 19;
+    const PC_Tensile_Stat = 20;
+//    const unused = 21;
+    const Stress_Lim_Endur = 22;
+    const Stress_Lim_Stat = 23;
+    const const_term = 24;
+    const slope_term = 25;
+    const tensile_010 = 26;
 
     const OD_Free = 0;
     const Wire_Dia = 1;
@@ -140,7 +141,7 @@ export function eqnset(d, p) {        /*    Compression  Spring  */
          (kc * stress_rng * (d[Stress_Lim_Stat] - se2) / se2 + stress_avg);
 
              /*  modified Goodman cycle life calculation  */
-    if (d[Prop_Calc_Method] === 1 && d[material_index] !== 0) {
+    if (d[Prop_Calc_Method] === 1 && d[Material_Index] !== 0) {
 //        x[Cycle_Life] = cl_calc(material_index,life_catagory,1,tensile,stress_1,stress_2);
         x[Cycle_Life] = 0.0;    // TODO:  enable cl_calc, remove this
     }

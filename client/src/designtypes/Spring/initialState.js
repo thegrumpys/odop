@@ -72,7 +72,12 @@ export const initialState = {
             "units": "index"
         },
         {
-            "name": "material_index",
+            "name": "Material_Index",
+            "value": 1,
+            "units": "index"
+        },
+        {
+            "name": "End_Type_Index",
             "value": 1,
             "units": "index"
         },

@@ -1,6 +1,37 @@
 export function init(d) {
    console.log('In init d=',d);
-   
+
+// const Spring_Type = 0;
+ const Material_Type = 1;
+// const ASTM_Fed_Spec = 2;
+// const End_Type = 3;
+// const Catalog_Number = 4;
+// const Process = 5;
+// const Material_File = 6;
+// const Dialog_Switch = 7;
+ const Prop_Calc_Method = 8;
+// const End_Calc_Method = 9;
+// const Life_Category = 10;
+ const Material_Index = 11;
+ const End_Type_Index = 12;
+ const Inactive_Coils = 13;
+ const Add_Coils_Solid = 14;
+ const Density = 15;
+ const Torsion_Modulus = 16;
+ const Hot_Factor_Kh = 17;
+ const Tensile = 18;
+ const PC_Tensile_Endur = 19;
+ const PC_Tensile_Stat = 20;
+// const unused = 21;
+ const Stress_Lim_Endur = 22;
+ const Stress_Lim_Stat = 23;
+ const const_term = 24;
+ const slope_term = 25;
+ const tensile_010 = 26;
+ 
+ var i;
+ var j;
+
    /*  reads material properties file  */
 //   if material_file ^= oldmfil then
 //       do;
@@ -18,20 +49,37 @@ export function init(d) {
   */
 
 //  material_index=0;
+    d[Material_Index] = 0;
 //  j=length(material_type);
+    j = d[Material_Type].length;
+    i = 0;
 //  do i=1 to tabl_max while(m_tab(i).gg ^= 0.0);
+    do {
 //  if material_type = substr(m_tab(i).matnam,kone,j) then
-//     do;
-//     material_type=m_tab(i).matnam;
-//     material_index=i;
-//     if prop_calc_method ^= 1 then
-//        do;
-//        prop_calc_method=1;
-//        console.log('PROP_CALC_METHOD  SET TO 1');
-//        end;
+        if (m_tab(i).matnam.startsWith(Material_Type)) {
+//      do;
+//      material_type=m_tab(i).matnam;
+            d[material_type] = m_tab(i).matnam;
+//      material_index=i;
+            d[Material_Index] = i;
+//      if prop_calc_method ^= 1 then
+            if (d[Prop_Calc_Method] ^= 1) {
+//          do;
+//          prop_calc_method=1;
+                d{prop_calc_method] = 1;
+//          put skip list('PROP_CALC_METHOD  SET TO 1');
+                console.log('PROP_CALC_METHOD  SET TO 1');
+//          end;
+                }
+        }
 //     go to nomore;
+            break;
 //     end;
+        }
+        i++;
 //  end;
+    }
+    while (m_tab[i].gg ^= 0.0);
 //
 // NOMORE:
 //  end_type_index=0;
@@ -70,11 +118,17 @@ export function init(d) {
 
                /*  copy from material table to constants  */
 // i=material_index;
+    i = d[material_index];
 // if i > 0 then
+    if (i > 0) {
 //    do;
 //    if prop_calc_method ^= 1 then             /*   debug  */
-//           console.log('TAB2D:   PROP_CALC_METHOD SET TO 1.');
+      if (d[prop_calc_method] ^= 1 {
+//           put skip list('TAB2D:   PROP_CALC_METHOD SET TO 1.');
+          console.log('TAB2D:   PROP_CALC_METHOD SET TO 1.');
 //    prop_calc_method = 1;
+          d[prop_calc_method] = 1;
+      }
 //
 //    material_type    = m_tab(material_index).matnam;
 //    astm_fed_spec    = m_tab(i).astm_fs;
@@ -104,6 +158,7 @@ export function init(d) {
 //    stress_lim_endur=tensile*pc_tensile_endur/100.0;
 //    stress_lim_stat =tensile*pc_tensile_stat /100.0;
 //    end;
+        }
 
                /*  copy from end type table to constants  */
          /*  check these values.     See AS Design Hdbk. p52  */
@@ -111,7 +166,7 @@ export function init(d) {
 // if end_type_index > 0 & nmerit ^= 3 then
 //    do;
 //    if end_calc_method ^= 1 then              /*   debug  */
-//            console.log('TAB2D:  END_CALC_METHOD SET TO 1.');
+//            put skip list('TAB2D:  END_CALC_METHOD SET TO 1.');
 //    end_calc_method=1;
 //
 //    end_type        = end_name(end_type_index);
