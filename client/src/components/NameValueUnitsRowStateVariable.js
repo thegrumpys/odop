@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
 import { changeStateVariableValue, changeStateVariableConstraint, saveStateVariableConstraints, 
@@ -36,7 +36,8 @@ class NameValueUnitsRowStateVariable extends React.Component {
         // =======================================
         return (
             <tr key={this.props.state_variable.name}>
-                <td className="align-middle" colSpan="2">{this.props.state_variable.name}</td>
+                <td className="align-middle" colSpan="2" id={'state_variable_'+this.props.index}>{this.props.state_variable.name}</td>
+                { this.props.state_variable.tooltip !== undefined && <UncontrolledTooltip placement="left" target={'state_variable_'+this.props.index}>{this.props.state_variable.tooltip}</UncontrolledTooltip>}
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         <span className="text-right form-control bg-light">{this.props.state_variable.value.toFixed(4)}</span>

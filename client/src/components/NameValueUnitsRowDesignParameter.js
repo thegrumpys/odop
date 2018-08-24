@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../store/actionTypes';
 import { changeDesignParameterValue, setDesignParameterFlag, resetDesignParameterFlag } from '../store/actionCreators';
@@ -33,7 +33,8 @@ class NameValueUnitsRowDesignParameter extends React.Component {
         // =======================================
         return (
             <tr key={this.props.design_parameter.name}>
-                <td className="align-middle" colSpan="2">{this.props.design_parameter.name}</td>
+                <td className="align-middle" colSpan="2" id={'design_parameter_'+this.props.index}>{this.props.design_parameter.name}</td>
+                { this.props.design_parameter.tooltip !== undefined && <UncontrolledTooltip placement="left" target={'design_parameter_'+this.props.index}>{this.props.design_parameter.tooltip}</UncontrolledTooltip>}
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         <Input className="text-right" type="number" value={this.props.design_parameter.value} onChange={this.onChangeDesignParameterValue} />

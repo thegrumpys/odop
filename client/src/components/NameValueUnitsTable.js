@@ -23,7 +23,7 @@ export class NameValueUnitsTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.design_parameters.map((design_parameter) => <NameValueUnitsRowDesignParameter key={design_parameter.name} design_parameter={design_parameter} />)}
+                        {this.props.design_parameters.map((design_parameter,index) => <NameValueUnitsRowDesignParameter key={design_parameter.name} design_parameter={design_parameter} index={index} />)}
                     </tbody>
                     <thead>
                         <tr>
@@ -31,7 +31,7 @@ export class NameValueUnitsTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.state_variables.map((state_variable) => <NameValueUnitsRowStateVariable key={state_variable.name} state_variable={state_variable} />)}
+                        {this.props.state_variables.map((state_variable,index) => <NameValueUnitsRowStateVariable key={state_variable.name} state_variable={state_variable} index={index} />)}
                     </tbody>
                     <thead>
                         { this.props.constants.length > 0 &&
@@ -41,7 +41,7 @@ export class NameValueUnitsTable extends React.Component {
                         }
                     </thead>
                     <tbody>
-                        {this.props.constants.map((constant) => <NameValueUnitsRowConstant key={constant.name} constant={constant} />)}
+                        {this.props.constants.map((constant,index) => <NameValueUnitsRowConstant key={constant.name} constant={constant} index={index} />)}
                     </tbody>
                 </Table>
                 <UncontrolledTooltip placement="top" target="IVTitle">Independent Variables Title ToolTip</UncontrolledTooltip>
