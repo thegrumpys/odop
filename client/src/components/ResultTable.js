@@ -27,26 +27,6 @@ class ResultTable extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Table className="col-md-2">
-                        <tbody>
-                            <tr>
-                                <th>OBJMIN:</th>
-                                <td className="text-right">{this.props.system_controls.objmin.toFixed(6)}</td>
-                            </tr>
-                            <tr>
-                                <th>Objective Value:</th>
-                                <td className={feasibility_class}>{this.props.objective_value.toFixed(6)}</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                    <Table className="col-md-2">
-                    <tbody>
-                        <tr>
-                        </tr>
-                        <tr>
-                        </tr>
-                    </tbody>
-                </Table>
                     <Table className="col-md-4">
                         <tbody>
                             <tr>
@@ -56,6 +36,26 @@ class ResultTable extends React.Component {
                             <tr>
                                 <th>Feasibility:</th>
                                 <td className={feasibility_class} colSpan="2">{feasibility_string}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                    <Table className="col-md-2">
+                        <tbody>
+                            <tr>
+                            </tr>
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </Table>
+                    <Table className="col-md-2">
+                        <tbody>
+                            <tr>
+                                <th>OBJMIN:</th>
+                                <td className="text-right">{this.props.system_controls.objmin.toFixed(6)}</td>
+                            </tr>
+                            <tr>
+                                <th>Objective Value:</th>
+                                <td className={feasibility_class}>{this.props.objective_value.toFixed(6)}</td>
                             </tr>
                         </tbody>
                     </Table>
