@@ -72,7 +72,7 @@ class App extends Component {
 //        console.log('src=',src,' alt=',alt);
         return (
             <React.Fragment>
-                <Navbar color="inverse" light expand="md">
+                <Navbar color="white" light expand="md" fixed="top">
                     <NavbarBrand><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
@@ -157,7 +157,7 @@ class App extends Component {
                         </Nav>
                     </Collapse>
                 </Navbar>
-                <Container style={{backgroundColor: '#eee'}}>
+                <Container style={{backgroundColor: '#eee', marginTop: '110px'}}>
                     <TabContent activeTab={this.state.activeTab}>
                         <TabPane tabId="1">
                             <Container fluid>
