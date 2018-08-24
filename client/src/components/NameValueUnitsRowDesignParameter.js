@@ -45,6 +45,7 @@ class NameValueUnitsRowDesignParameter extends React.Component {
                     </InputGroup>
                 </td>
                 <td className="text-nowrap align-middle" colSpan="1">{this.props.design_parameter.units}</td>
+                <td></td>
             </tr>
         );
     }

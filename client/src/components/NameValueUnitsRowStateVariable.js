@@ -48,6 +48,7 @@ class NameValueUnitsRowStateVariable extends React.Component {
                     </InputGroup>
                 </td>
                 <td className="text-nowrap align-middle" colSpan="1">{this.props.state_variable.units}</td>
+                <td></td>
             </tr>
         );
     }

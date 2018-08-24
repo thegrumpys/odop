@@ -10,7 +10,6 @@ import {
     NavLink,
     TabContent,
     TabPane,
-    Jumbotron,
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
@@ -158,7 +157,7 @@ class App extends Component {
                         </Nav>
                     </Collapse>
                 </Navbar>
-                <Jumbotron>
+                <Container style={{backgroundColor: '#eee'}}>
                     <TabContent activeTab={this.state.activeTab}>
                         <TabPane tabId="1">
                             <Container fluid>
@@ -166,7 +165,7 @@ class App extends Component {
                             </Container>
                         </TabPane>
                     </TabContent>
-                </Jumbotron>
+                </Container>
             </React.Fragment>
         );
     }

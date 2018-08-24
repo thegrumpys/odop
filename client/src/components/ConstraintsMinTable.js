@@ -9,23 +9,26 @@ export class ConstraintsMinTable extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Table className="col-md-3" bordered>
-                    <tbody>
+                <Table className="col-md-3 border border-secondary" size="sm">
+                    <thead>
                         <tr>
-                            <th colSpan="3">&nbsp;</th>
-                        </tr>
-                        <tr>
-                            <th className="text-center" colSpan="3">Min Constraint</th>
+                            <th className="text-center bg-dark text-white" colSpan="3">IV Min Constraint</th>
                         </tr>
                         <tr>
                             <th className="text-left">Constrain</th>
                             <th className="text-center">Value</th>
                             <th className="text-right">Violation</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         {this.props.design_parameters.map((design_parameter) => <ConstraintsMinRowDesignParameter key={design_parameter.name} design_parameter={design_parameter} />)}
+                    </tbody>
+                    <thead>
                         <tr>
-                            <th className="text-left" colSpan="3">&nbsp;</th>
+                            <th className="text-center bg-dark text-white" colSpan="3">DV Min Constraint</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         {this.props.state_variables.map((state_variable) => <ConstraintsMinRowStateVariable key={state_variable.name} state_variable={state_variable} />)}
                     </tbody>
                 </Table>
