@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeConstantValue } from '../store/actionCreators';
 
@@ -46,7 +46,8 @@ class NameValueUnitsRowConstant extends React.Component {
         // =======================================
         return (
             <tr key={this.props.constant.name}>
-                <td className="align-middle" colSpan="2">{this.props.constant.name}</td>
+                <td className="align-middle" colSpan="2" id={'constant_'+this.props.index}>{this.props.constant.name}</td>
+                { this.props.constant.tooltip !== undefined && <UncontrolledTooltip placement="left" target={'constant_'+this.props.index}>{this.props.constant.tooltip}</UncontrolledTooltip>}
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.constant.type === undefined && typeof this.props.constant.value === 'number' ?

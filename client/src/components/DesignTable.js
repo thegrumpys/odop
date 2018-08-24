@@ -10,7 +10,9 @@ export class DesignTable extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <ResultTable />
+                <Row>
+                    <ResultTable />
+                </Row>
                 <Row>
                     <NameValueUnitsTable />
                     <ConstraintsMinTable />

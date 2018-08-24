@@ -3,7 +3,8 @@ export const initialState = {
         {
             "name": "Spring_Type",
             "value": "Compression",
-            "units": ""
+            "units": "",
+            "tooltip": "Spring_Type Tooltip"
         },
         {
             "name": "Material_Type",
@@ -148,7 +149,8 @@ export const initialState = {
             "cmin": 0,
             "cmax": 2.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "OD_Free Tooltip"
         },
         {
             "name": "Wire_Dia",
@@ -216,7 +218,8 @@ export const initialState = {
             "cmin": 0.1,
             "cmax": 10.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Mean_Dia Tooltip"
         },
         {
             "name": "Coils_A",
