@@ -66,7 +66,8 @@ class ConstraintsMaxRowStateVariable extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    system_controls: state.system_controls
+    system_controls: state.system_controls,
+    objective_value: state.result.objective_value
 });
 
 const mapDispatchToStateVariableProps = {
