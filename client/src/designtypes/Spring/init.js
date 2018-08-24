@@ -76,28 +76,6 @@ export function init(d, p) {
  var m_tab = require('./mat_ips.json');
      console.log("m_tab=", m_tab);
  
-    i = 2;
-     
- /*  taken from READMAT.PLI
-  * 
-  * Initial manipulations of material array
-  */
-// temp = 1000.0;
-    temp = 1000.0;
-// m_tab(i).astm_fs=m_tab(i).astm_fs || '/' || fedspec;
-//    m_tab[i][astm_fs] = m_tab[i][astm_fs] + '/' + m_tab[i][fedspec];
-// m_tab(i).ee =    temp*m_tab(i).ee;
-    m_tab[i][ee] = temp * m_tab[i][ee];
-// m_tab(i).gg =    temp*m_tab(i).gg;
-    m_tab[i][gg] = temp * m_tab[i][gg];
-// m_tab(i).t010 =  temp*m_tab(i).t010;
-    m_tab[i][t010] = temp * m_tab[i][t010];
-// m_tab(i).t400 =  temp*m_tab(i).t400;
-    m_tab[i][t400] = temp * m_tab[i][t400];
-// m_tab(i).fy =    m_tab(i).pte(1);             /*  remove  */
-// m_tab(i).pte(5) =m_tab(i).fy;
-// m_tab(i).ptb(5) =m_tab(i).ptb(1);
-// temp1=m_tab(i).gg;
 
  /*  taken from SETIDX.PLI
  
@@ -139,6 +117,10 @@ export function init(d, p) {
 //    }
 //    while (m_tab[i].gg ^= 0.0);
 //
+//     For (i = 1, i < m_tab.length, i++) {
+//         if ()
+//     }
+     
 // NOMORE:
 //  end_type_index=0;
 //  do i=1 to end_num while(end_type_index = 0);
@@ -167,6 +149,27 @@ export function init(d, p) {
 //     console.log('END_CALC_METHOD  SET TO 2');
 //     end;
 
+
+     /*  taken from READMAT.PLI
+      * 
+      * Initial manipulations of material array
+      */
+    // temp = 1000.0;
+        temp = 1000.0;
+    // m_tab(i).astm_fs=m_tab(i).astm_fs || '/' || fedspec;
+//        m_tab[i][astm_fs] = m_tab[i][astm_fs] + '/' + m_tab[i][fedspec];
+    // m_tab(i).ee =    temp*m_tab(i).ee;
+        m_tab[i][ee] = temp * m_tab[i][ee];
+    // m_tab(i).gg =    temp*m_tab(i).gg;
+        m_tab[i][gg] = temp * m_tab[i][gg];
+    // m_tab(i).t010 =  temp*m_tab(i).t010;
+        m_tab[i][t010] = temp * m_tab[i][t010];
+    // m_tab(i).t400 =  temp*m_tab(i).t400;
+        m_tab[i][t400] = temp * m_tab[i][t400];
+    // m_tab(i).fy =    m_tab(i).pte(1);             /*  remove  */
+    // m_tab(i).pte(5) =m_tab(i).fy;
+    // m_tab(i).ptb(5) =m_tab(i).ptb(1);
+    // temp1=m_tab(i).gg;
 
  /*  taken from TAB2D.PLI
   
