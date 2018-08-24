@@ -1,3 +1,4 @@
+import { CONSTRAINED } from '../../store/actionTypes';
 export const initialState = {
     "constants": [
         {
@@ -18,7 +19,7 @@ export const initialState = {
             "name": "Length",
             "value": 12.0,
             "units": "inches",
-            "lmin": 1,
+            "lmin": CONSTRAINED,
             "lmax": 0,
             "cmin": 0,
             "cmax": 100.00,
@@ -29,7 +30,7 @@ export const initialState = {
             "name": "Width",
             "value": 10.0,
             "units": "inches",
-            "lmin": 1,
+            "lmin": CONSTRAINED,
             "lmax": 0,
             "cmin": 0.0,
             "cmax": 80.0,
@@ -40,7 +41,7 @@ export const initialState = {
             "name": "Height",
             "value": 8.0,
             "units": "inches",
-            "lmin": 1,
+            "lmin": CONSTRAINED,
             "lmax": 0,
             "cmin": 0.0,
             "cmax": 60.0,
@@ -98,7 +99,7 @@ export const initialState = {
             "value": 0,
             "units": "inches",
             "lmin": 0,
-            "lmax": 1,
+            "lmax": CONSTRAINED,
             "cmin": 0,
             "cmax": 108.0,
             "ioclass": 0,
@@ -120,7 +121,7 @@ export const initialState = {
             "value": 0,
             "units": "lb",
             "lmin": 0,
-            "lmax": 1,
+            "lmax": CONSTRAINED,
             "cmin": 0,
             "cmax": 70.0,
             "ioclass": 0,
