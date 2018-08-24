@@ -10,7 +10,7 @@ export const initialState = {
             "value": 1,
             "units": "",
             "type": "table",
-            "table": "materials"
+            "table": "mat_ips"
         },
         {
             "name": "ASTM/Fed_Spec",
