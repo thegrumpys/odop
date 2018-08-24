@@ -58,7 +58,7 @@ class ConstraintsMinRowStateVariable extends React.Component {
                     </InputGroup>
                 </td>
                 <td className="text-right align-middle" colSpan="1">
-                    {this.props.state_variable.lmin & FIXED ? '' : (this.props.state_variable.lmin & CONSTRAINED ? (this.props.state_variable.vmin*100.0).toFixed(1) + '%' : '')}
+                    {this.props.state_variable.lmin & FIXED ? (this.props.state_variable.vmin*100.0).toFixed(1) : (this.props.state_variable.lmin & CONSTRAINED ? (this.props.state_variable.vmin*100.0).toFixed(1) + '%' : '')}
                 </td>
             </tr>
         );
