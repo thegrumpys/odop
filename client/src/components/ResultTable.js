@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'reactstrap';
+import { Table, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
 
 class ResultTable extends React.Component {
@@ -24,12 +24,12 @@ class ResultTable extends React.Component {
                 <Table className="col-md-6" size="sm">
                     <tbody>
                         <tr>
-                            <th className="col-md-1">Feasibility:</th>
+                            <th className="col-md-1" id="Feasibility">Feasibility:</th>
                             <td className={feasibility_class} colSpan="2">{feasibility_string}</td>
                             <td className="col-md-2"></td>
                         </tr>
                         <tr>
-                            <th className="col-md-1">Termination Condition:</th>
+                            <th className="col-md-1" id="TerminationCondition">Termination Condition:</th>
                             <td className="col-md-3 text-right" colSpan="2">{this.props.termination_condition}</td>
                             <td className="col-md-2"></td>
                         </tr>
@@ -38,15 +38,19 @@ class ResultTable extends React.Component {
                 <Table className="col-md-2" size="sm">
                     <tbody>
                         <tr>
-                            <th>Objective Value:</th>
+                            <th id="ObjectiveValue">Objective Value:</th>
                             <td className={feasibility_class}>{this.props.objective_value.toFixed(6)}</td>
                         </tr>
                         <tr>
-                            <th>OBJMIN:</th>
+                            <th id="OBJMIN">OBJMIN:</th>
                             <td className="text-right">{this.props.system_controls.objmin.toFixed(6)}</td>
                         </tr>
                     </tbody>
                 </Table>
+                <UncontrolledTooltip placement="top" target="Feasibility">Feasibility Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="TerminationCondition">Termination Condition Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="ObjectiveValue">Objective Value Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="OBJMIN">OBJMIN Title ToolTip</UncontrolledTooltip>
             </React.Fragment>
         );
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table  } from 'reactstrap';
+import { Table, UncontrolledTooltip  } from 'reactstrap';
 import NameValueUnitsRowConstant from './NameValueUnitsRowConstant';
 import NameValueUnitsRowDesignParameter from './NameValueUnitsRowDesignParameter';
 import NameValueUnitsRowStateVariable from './NameValueUnitsRowStateVariable';
@@ -13,12 +13,12 @@ export class NameValueUnitsTable extends React.Component {
                 <Table className="col-md-6 border border-secondary" size="sm">
                     <thead>
                         <tr>
-                            <th className="text-center bg-dark text-white" colSpan="6">Independent Variables</th>
+                            <th className="text-center bg-dark text-white" colSpan="6" id="IVTitle">Independent Variables</th>
                         </tr>
                         <tr>
-                            <th className="text-left" colSpan="2">Name</th>
-                            <th className="text-center" colSpan="2">Value (Fix)</th>
-                            <th className="text-left">Units</th>
+                            <th className="text-left" colSpan="2" id="NameTitle">Name</th>
+                            <th className="text-center" colSpan="2" id="ValueTitle">Value (Fix)</th>
+                            <th className="text-left" id="UnitsTitle">Units</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -27,7 +27,7 @@ export class NameValueUnitsTable extends React.Component {
                     </tbody>
                     <thead>
                         <tr>
-                            <th className="text-center bg-dark text-white" colSpan="6">Dependent Variables</th>
+                            <th className="text-center bg-dark text-white" colSpan="6" id="DVTitle">Dependent Variables</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,7 +36,7 @@ export class NameValueUnitsTable extends React.Component {
                     <thead>
                         { this.props.constants.length > 0 &&
                             (<tr>
-                                <th className="text-center bg-dark text-white" colSpan="6">Calculation Inputs</th>
+                                <th className="text-center bg-dark text-white" colSpan="6" id="CITitle">Calculation Inputs</th>
                             </tr>)
                         }
                     </thead>
@@ -44,6 +44,12 @@ export class NameValueUnitsTable extends React.Component {
                         {this.props.constants.map((constant) => <NameValueUnitsRowConstant key={constant.name} constant={constant} />)}
                     </tbody>
                 </Table>
+                <UncontrolledTooltip placement="top" target="IVTitle">Independent Variables Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="NameTitle">Name Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="ValueTitle">Value(Fix) Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="UnitsTitle">Units Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="DVTitle">Dependent Variables Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="CITitle">Calculation Inputs Title ToolTip</UncontrolledTooltip>
             </React.Fragment>
         );
     }

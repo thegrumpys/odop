@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'reactstrap';
+import { Table, UncontrolledTooltip } from 'reactstrap';
 import ConstraintsMaxRowDesignParameter from './ConstraintsMaxRowDesignParameter';
 import ConstraintsMaxRowStateVariable from './ConstraintsMaxRowStateVariable';
 import { connect } from 'react-redux';
@@ -12,12 +12,12 @@ export class ConstraintsMaxTable extends React.Component {
                 <Table className="col-md-3 border border-secondary" size="sm">
                     <thead>
                         <tr>
-                            <th className="text-center bg-dark text-white" colSpan="3">IV Max Constraint</th>
+                            <th className="text-center bg-dark text-white" colSpan="3" id="IVMaxConstraintTitle">IV Max Constraint</th>
                         </tr>
                         <tr>
-                            <th className="text-left">Constrain</th>
-                            <th className="text-center">Value</th>
-                            <th className="text-right">Violation</th>
+                            <th className="text-left" id="MaxConstraintConstrainTitle">Constrain</th>
+                            <th className="text-center" id="MaxConstraintValueTitle">Value</th>
+                            <th className="text-right" id="MaxConstraintViolationTitle">Violation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,13 +25,18 @@ export class ConstraintsMaxTable extends React.Component {
                     </tbody>
                     <thead>
                         <tr>
-                            <th className="text-center bg-dark text-white" colSpan="3">DV Max Constraint</th>
+                            <th className="text-center bg-dark text-white" colSpan="3" id="DVMaxConstraintTitle">DV Max Constraint</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.state_variables.map((state_variable) => <ConstraintsMaxRowStateVariable key={state_variable.name} state_variable={state_variable} />)}
                     </tbody>
                 </Table>
+                <UncontrolledTooltip placement="top" target="IVMaxConstraintTitle">IV Max Constraint Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="MaxConstraintConstrainTitle">Max Constraint Constrain Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="MaxConstraintValueTitle">Max Constraint Value Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="MaxConstraintViolationTitle">Max Constraint Violation Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="DVMaxConstraintTitle">DV Max Constraint Title ToolTip</UncontrolledTooltip>
             </React.Fragment>
         );
     }
