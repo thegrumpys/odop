@@ -59,7 +59,7 @@ export const initialState = {
         },
         {
             "name": "Material_Index",
-            "value": 1,
+            "value": 2,
             "units": "index"
         },
         {
