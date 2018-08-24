@@ -22,11 +22,11 @@ export class ConstraintsMinTable extends React.Component {
                             <th className="text-center">Value</th>
                             <th className="text-right">Violation</th>
                         </tr>
-                        {this.props.design_parameters.map((design_parameter) => <ConstraintsMinRowDesignParameter key={design_parameter.name} design_parameter={design_parameter} objective_value={this.props.objective_value} />)}
+                        {this.props.design_parameters.map((design_parameter) => <ConstraintsMinRowDesignParameter key={design_parameter.name} design_parameter={design_parameter} />)}
                         <tr>
                             <th className="text-left" colSpan="3">&nbsp;</th>
                         </tr>
-                        {this.props.state_variables.map((state_variable) => <ConstraintsMinRowStateVariable key={state_variable.name} state_variable={state_variable} objective_value={this.props.objective_value} />)}
+                        {this.props.state_variables.map((state_variable) => <ConstraintsMinRowStateVariable key={state_variable.name} state_variable={state_variable} />)}
                     </tbody>
                 </Table>
             </React.Fragment>
@@ -37,8 +37,7 @@ export class ConstraintsMinTable extends React.Component {
 
 const mapStateToProps = state => ({
     design_parameters: state.design_parameters,
-    state_variables: state.state_variables,
-    objective_value: state.result.objective_value
+    state_variables: state.state_variables
 });
 
 export default connect(mapStateToProps)(ConstraintsMinTable);

@@ -9,9 +9,15 @@ class NameValueUnitsRowConstant extends React.Component {
         super(props);
         this.onChangeConstantValue = this.onChangeConstantValue.bind(this);
         this.onSelect = this.onSelect.bind(this);
-        this.state = {
-            selectedIndex: 6 // Default to Water
-        };
+//        console.log('this.props.constant.name=',this.props.constant.name,' this.props.constant.type=',this.props.constant.type,' this.props.constant.table=',this.props.constant.table)
+        if (this.props.constant.type === 'table') {
+//            console.log('file = ../designtypes/'+this.props.type+'/'+this.props.constant.table+'.json');
+            var table = require('../designtypes/'+this.props.type+'/'+this.props.constant.table+'.json');
+//            console.log('table=',table);
+            this.state = {
+                table: table
+            };
+        }
     }
     
     onChangeConstantValue(event) {
@@ -21,15 +27,16 @@ class NameValueUnitsRowConstant extends React.Component {
     
     onSelect(event) {
 //        console.log('In NameValueUnitsRowConstant.onSelect event.target.value=',event.target.value);
-        var selectedIndex = event.target.value;
-        this.props.constant.value[selectedIndex].forEach((value, index) => {
+        var selectedIndex = parseFloat(event.target.value);
+        this.props.changeConstantValue(this.props.constant.name,selectedIndex);
+        this.state.table[selectedIndex].forEach((value, index) => {
             if (index > 0) { // Skip the first column
-                var name = this.props.constant.value[0][index];
-                this.props.changeConstantValue(name,value);
+                var name = this.state.table[0][index];
+//                console.log('name=',name,' this.props.constants=',this.props.constants,' check=',this.props.constants.find(entry => entry.name === name));
+                if (this.props.constants.find(entry => entry.name === name) !== undefined) {
+                    this.props.changeConstantValue(name,value);
+                }
             }
-        })
-        this.setState({
-            selectedIndex: selectedIndex
         })
     }
     
@@ -42,18 +49,19 @@ class NameValueUnitsRowConstant extends React.Component {
                 <td className="align-middle" colSpan="2">{this.props.constant.name}</td>
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
-                        { typeof this.props.constant.value === 'number' ?
+                        { this.props.constant.type === undefined && typeof this.props.constant.value === 'number' ?
                             <Input className="text-right" type="number" value={this.props.constant.value} onChange={this.onChangeConstantValue} /> : '' }
-                        { typeof this.props.constant.value === 'string' ?
+                        { this.props.constant.type === undefined && typeof this.props.constant.value === 'string' ?
                             <Input className="text-right" type="text" value={this.props.constant.value} onChange={this.onChangeConstantValue} /> : '' }
-                        { (typeof this.props.constant.value !== 'number' && typeof this.props.constant.value !== 'string') ? // array
+                        { this.props.constant.type === 'table' &&
                         (
-                            <Input type="select" value={this.state.selectedIndex} onChange={this.onSelect}>
-                                {this.props.constant.value.map((value, index) =>
+                            <Input type="select" value={this.props.constant.value} onChange={this.onSelect}>
+                                {this.state.table.map((value, index) =>
                                     index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
                                 )}
                             </Input>
-                        ) : '' }
+                        )
+                        }
                         <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 &nbsp;&nbsp;
@@ -67,8 +75,13 @@ class NameValueUnitsRowConstant extends React.Component {
     }
 }
 
+const mapStateToProps = state => ({
+    type: state.type,
+    constants: state.constants
+});
+
 const mapDispatchToProps = {
     changeConstantValue: changeConstantValue
 };
 
-export default connect(null, mapDispatchToProps)(NameValueUnitsRowConstant);
+export default connect(mapStateToProps, mapDispatchToProps)(NameValueUnitsRowConstant);
