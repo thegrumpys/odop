@@ -3,10 +3,10 @@ export function init(d, p) {
 
 // const Spring_Type = 0;
  const Material_Type = 1;
-// const ASTM_Fed_Spec = 2;
+ const ASTM_Fed_Spec = 2;
 // const End_Type = 3;
 // const Catalog_Number = 4;
-// const Process = 5;
+ const Process = 5;
 // const Material_File = 6;
 // const Dialog_Switch = 7;
  const Prop_Calc_Method = 8;
@@ -31,6 +31,7 @@ export function init(d, p) {
  
  var i;
  var j;
+ var temp;
 
    /*  reads material properties file  */
 //   if material_file ^= oldmfil then
@@ -53,6 +54,7 @@ export function init(d, p) {
  const pte2 = 10;
  const pte3 = 11;
  const pte4 = 12;
+ //    pte5 
  const pte6 = 13;
  const pte7 = 14;
  const pte8 = 15;
@@ -60,6 +62,7 @@ export function init(d, p) {
  const ptb2 = 17;
  const ptb3 = 18;
  const ptb4 = 19;
+ //    ptb5
  const ptb6 = 20;
  const ptb7 = 21;
  const ptb8 = 22;
@@ -70,9 +73,8 @@ export function init(d, p) {
  const dumyc = 27;
  const longnam = 28;
  
- 
  var mtab = [
-     ["matnam",    "astm_fs",   "fedspec", "dens", "ee", "gg", "kh","t010","t400","pte1","pte2","pte3","pte4","pte6","pte7","pte8","ptb1","ptb2","ptb3","ptb4","ptb6","ptb7","ptb8","silf", "sihf",  "sisr", "siznam",   "dumyc","longnam"],
+ [    "matnam",    "astm_fs",   "fedspec", "dens", "ee", "gg", "kh","t010","t400","pte1","pte2","pte3","pte4","pte6","pte7","pte8","ptb1","ptb2","ptb3","ptb4","ptb6","ptb7","ptb8","silf", "sihf",  "sisr", "siznam",   "dumyc","longnam"],
  ["HARD_DRAWN_WIRE", "A227",    "",         .284, 30000., 11500., 1.0, 310., 165.,  50.,   36.,   33.,   30.,   42.,   39.,   36.,   75.,   51.,   47.,   45.,   0.,   0.,    0.,    27400., 45000., 58000., "DEF_HD.SIZ",  1,   "Hard Drawn MB spring wire   - Class II           ASTM A-227 "],
  ["MUSIC_WIRE",      "A228",    "QQW-470",  .284, 30000., 11500., 1.0, 370., 200.,  50.,   36.,   33.,   30.,   42.,   39.,   36.,   75.,   51.,   47.,   45.,   0.,   0.,    0.,    27400., 45000., 58000., "DEF_MW.SIZ",  1,   "Music Wire  (all coatings) -                     ASTM A-228 "],
  ["OIL_TEMPERED_MB", "A229",    "QQW-428",  .284, 30000., 11500., 1.0, 320., 185.,  50.,   36.,   33.,   30.,   42.,   39.,   36.,   75.,   51.,   47.,   45.,   0.,   0.,    0.,    27400., 45000., 58000., "DEF_OT.SIZ",  1,   "Oil Tempered MB spring wire - Class II           ASTM A-229 "],
@@ -89,18 +91,26 @@ export function init(d, p) {
  ["BERYLLIUM-COPPER", "B197",   "QQW-530",  .298, 18500.,  6500., 1.0, 180., 170.,  45.,   36.,   33.,   30.,   42.,   39.,   36.,   55.,   50.,   45.,   40.,   0.,   0.,    0.,        0.,     0.,     0., "SIZES.SIZ",    2,  "Beryllium Copper -                               ASTM B-197 "],
  ["TITANIUM",        "BetaC",  "(AMS4917)", .175, 16500.,  6100., 1.0, 197., 170.,  40.,   36.,   33.,   30.,   40.,   39.,   36.,   50.,   50.,   45.,   40.,   0.,   0.,    0.,        0.,     0.,     0., "SIZES.SIZ", "8?",  "Ti-13V-11Cr-3Al  Beta C Titanium -               AMS  4917 "],
  ["5160H",           "A125-52", "",         .284, 30000., 11500., .91, 250., 230.,  50.,   40.,   38.,   35.,   48.,   46.,   43.,   75.,   51.,   47.,   45.,   0.,   0.,    0.,    27400., 45000., 58000., "SIZES.SIZ",   71,  "5160H Chromium steel:       not ground:hot wound:ASTM A-125"],
- ["5160H-CG",        "A125-52", "CL-GND",   .284, 30000., 11500., .96, 250., 230.,  50.,   40.,   38.,   35.,   48.,   46.,   43.,   75.,   51.,   47.,   45.,   0.,   0.,    0.,    27400., 45000., 58000., "SIZES.SIZ",   71,  "5160H Chromium steel:centerless ground:hot wound:ASTM A-125"]];
+ ["5160H-CG",        "A125-52", "CL-GND",   .284, 30000., 11500., .96, 250., 230.,  50.,   40.,   38.,   35.,   48.,   46.,   43.,   75.,   51.,   47.,   45.,   0.,   0.,    0.,    27400., 45000., 58000., "SIZES.SIZ",   71,  "5160H Chromium steel:centerless ground:hot wound:ASTM A-125"]
+ ["STOP-HERE",       "",        "",        0.0,       0.,     0.,  0.,   0.,   0.,   0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.,    0.,   0.,   0.,    0.,        0.,     0.,     0.,    "",         0,   ""]
+     ];
 
  /*  taken from READMAT.PLI
   * 
   * Initial manipulations of material array
   */
 // temp = 1000.0;
+    temp = 1000.0;
 // m_tab(i).astm_fs=m_tab(i).astm_fs || '/' || fedspec;
+    m_tab[i][astm_fs] = m_tab[i][astm_fs] + '/' + m_tab[i][fedspec];
 // m_tab(i).ee =    temp*m_tab(i).ee;
+    m_tab[i][ee] = temp * m_tab[i][ee];
 // m_tab(i).gg =    temp*m_tab(i).gg;
+    m_tab[i][gg] = temp * m_tab[i][gg];
 // m_tab(i).t010 =  temp*m_tab(i).t010;
+    m_tab[i][t010] = temp * m_tab[i][t010];
 // m_tab(i).t400 =  temp*m_tab(i).t400;
+    m_tab[i][t400] = temp * m_tab[i][t400];
 // m_tab(i).fy =    m_tab(i).pte(1);             /*  remove  */
 // m_tab(i).pte(5) =m_tab(i).fy;
 // m_tab(i).ptb(5) =m_tab(i).ptb(1);
@@ -157,7 +167,7 @@ export function init(d, p) {
 //     if end_calc_method ^= 1 then
 //        do;
 //        end_calc_method=1;
-//        console.log('END_CALC_METHOD  SET TO 1');
+//        put skip list('END_CALC_METHOD  SET TO 1');
 //        end;
 //     end;
 //  end;
@@ -165,7 +175,7 @@ export function init(d, p) {
 //  if material_index = 0 & prop_calc_method = 1 then
 //     do;
 //     prop_calc_method=2;
-//     console.log('PROP_CALC_METHOD  SET TO 2');
+//     put skip list('PROP_CALC_METHOD  SET TO 2');
 //     end;
 //
 //  if end_type_index = 0 & end_calc_method = 1 then
@@ -196,9 +206,16 @@ export function init(d, p) {
       }
 //
 //    material_type    = m_tab(material_index).matnam;
-    astm_fed_spec    = m_tab[i][astm_fs];
+//    astm_fed_spec    = m_tab(i).astm_fs;
+      d[ASTM_Fed_Spec] = m_tab[i][astm_fs];
 //    if m_tab(i).kh < 1.0 then process = 'HOT_WOUND';
+      if (mtab[i][kh] < 1.0) {
+          d[Process] = "Hot_Wound";
+      }
 //             else process = 'COLD_COILED';
+      else {
+          d[Process] = "Cold_Coiled";
+      }
 //    density      = m_tab(i).dens;
 //    torsion_modulus  = m_tab(i).gg;
 //
