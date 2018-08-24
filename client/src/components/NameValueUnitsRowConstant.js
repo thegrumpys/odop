@@ -9,11 +9,11 @@ class NameValueUnitsRowConstant extends React.Component {
         super(props);
         this.onChangeConstantValue = this.onChangeConstantValue.bind(this);
         this.onSelect = this.onSelect.bind(this);
-//        console.log('this.props.constant.name=',this.props.constant.name,' this.props.constant.type=',this.props.constant.type,' this.props.constant.table=',this.props.constant.table)
+        console.log('this.props.constant.name=',this.props.constant.name,' this.props.constant.type=',this.props.constant.type,' this.props.constant.table=',this.props.constant.table)
         if (this.props.constant.type === 'table') {
-//            console.log('file = ../designtypes/'+this.props.type+'/'+this.props.constant.table+'.json');
+            console.log('file = ../designtypes/'+this.props.type+'/'+this.props.constant.table+'.json');
             var table = require('../designtypes/'+this.props.type+'/'+this.props.constant.table+'.json');
-//            console.log('table=',table);
+            console.log('table=',table);
             this.state = {
                 table: table
             };
