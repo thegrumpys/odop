@@ -12,7 +12,7 @@ export class ConstraintsMinTable extends React.Component {
                 <Table className="col-md-3 border border-secondary" size="sm">
                     <thead>
                         <tr>
-                            <th className="text-center bg-dark text-white" colSpan="3" id="IVMinConstraintTitle">IV Min Constraint</th>
+                            <th className="text-center bg-secondary text-white" colSpan="3" id="IVMinConstraintTitle">IV Min Constraint</th>
                         </tr>
                         <tr>
                             <th className="text-left" id="MinConstraintConstrainTitle">Constrain</th>
@@ -25,7 +25,7 @@ export class ConstraintsMinTable extends React.Component {
                     </tbody>
                     <thead>
                         <tr>
-                            <th className="text-center bg-dark text-white" colSpan="3" id="DVMinConstraintTitle">DV Min Constraint</th>
+                            <th className="text-center bg-secondary text-white" colSpan="3" id="DVMinConstraintTitle">DV Min Constraint</th>
                         </tr>
                     </thead>
                     <tbody>
