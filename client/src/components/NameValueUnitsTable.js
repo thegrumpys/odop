@@ -13,7 +13,7 @@ export class NameValueUnitsTable extends React.Component {
                 <Table className="col-md-6 border border-secondary" size="sm">
                     <thead>
                         <tr>
-                            <th className="text-center bg-dark text-white" colSpan="6" id="IVTitle">Independent Variables</th>
+                            <th className="text-center bg-secondary text-white" colSpan="6" id="IVTitle">Independent Variables</th>
                         </tr>
                         <tr>
                             <th className="text-left" colSpan="2" id="NameTitle">Name</th>
@@ -27,7 +27,7 @@ export class NameValueUnitsTable extends React.Component {
                     </tbody>
                     <thead>
                         <tr>
-                            <th className="text-center bg-dark text-white" colSpan="6" id="DVTitle">Dependent Variables</th>
+                            <th className="text-center bg-secondary text-white" colSpan="6" id="DVTitle">Dependent Variables</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,7 +36,7 @@ export class NameValueUnitsTable extends React.Component {
                     <thead>
                         { this.props.constants.length > 0 &&
                             (<tr>
-                                <th className="text-center bg-dark text-white" colSpan="6" id="CITitle">Calculation Inputs</th>
+                                <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">Calculation Inputs</th>
                                 <UncontrolledTooltip placement="top" target="CITitle">Calculation Inputs Title ToolTip</UncontrolledTooltip>
                             </tr>)
                         }

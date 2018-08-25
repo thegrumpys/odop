@@ -12,7 +12,7 @@ export class ConstraintsMaxTable extends React.Component {
                 <Table className="col-md-3 border border-secondary" size="sm">
                     <thead>
                         <tr>
-                            <th className="text-center bg-dark text-white" colSpan="3" id="IVMaxConstraintTitle">IV Max Constraint</th>
+                            <th className="text-center bg-secondary text-white" colSpan="3" id="IVMaxConstraintTitle">IV Max Constraint</th>
                         </tr>
                         <tr>
                             <th className="text-left" id="MaxConstraintConstrainTitle">Constrain</th>
@@ -25,7 +25,7 @@ export class ConstraintsMaxTable extends React.Component {
                     </tbody>
                     <thead>
                         <tr>
-                            <th className="text-center bg-dark text-white" colSpan="3" id="DVMaxConstraintTitle">DV Max Constraint</th>
+                            <th className="text-center bg-secondary text-white" colSpan="3" id="DVMaxConstraintTitle">DV Max Constraint</th>
                         </tr>
                     </thead>
                     <tbody>
