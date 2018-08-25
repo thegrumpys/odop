@@ -58,7 +58,7 @@ class ConstraintsMaxRowStateVariable extends React.Component {
                     </InputGroup>
                 </td>
                 <td className="text-right align-middle" colSpan="1">
-                    {this.props.state_variable.lmax & FIXED ? '' : (this.props.state_variable.lmax & CONSTRAINED ? (this.props.state_variable.vmax*100.0).toFixed(1) + '%' : '')}
+                    {this.props.state_variable.lmax & FIXED ? (this.props.state_variable.vmax*100.0).toFixed(1) : (this.props.state_variable.lmax & CONSTRAINED ? (this.props.state_variable.vmax*100.0).toFixed(1) + '%' : '')}
                 </td>
             </tr>
         );

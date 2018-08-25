@@ -40,12 +40,12 @@ class FileSaveAs extends React.Component {
     }
     
     postDesign(type,name) {
-//        console.log('In FileSaveAs.postDesign type=', type,' name=', name);
         this.props.changeName(name);
         var method = 'POST'; // Create it
         if (this.state.designs.indexOf(name) > -1) { // Does it already exist?
             method = 'PUT'; // Update it
         }
+        console.log('In FileSaveAs.postDesign type=', type,' name=', name,' method=', method);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+type+'/designs/'+name, {
                 method: method,

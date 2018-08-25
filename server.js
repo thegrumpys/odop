@@ -118,7 +118,8 @@ app.post('/api/v1/designtypes/:type/designs/:name', (req, res) => {
     console.log('SERVER: ===========================================================');
     var type = req.params['type'];
     var name = req.params['name'];
-    console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
+    console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name);
+//    console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
     if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
@@ -167,7 +168,8 @@ app.put('/api/v1/designtypes/:type/designs/:name', (req, res) => {
     console.log('SERVER: ===========================================================');
     var type = req.params['type'];
     var name = req.params['name'];
-    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
+    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name);
+//    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
     if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
@@ -190,7 +192,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', (req, res) => {
                 console.log('SERVER: 404 - NOT FOUND');
             } else {
 //                console.log('SERVER: In PUT /api/v1/designs/'+name,' type=', type,' value=', value);
-                var stmt = 'UPDATE design SET type = \''+type+'\', value = \''+value+'\' WHERE name = \''+name+'\'';
+                var stmt = 'UPDATE design SET value = \''+value+'\' WHERE type = \''+type+'\' AND name = \''+name+'\'';
 //                console.log('SERVER: stmt='+stmt);
                 connection.query(stmt, (err, rows, fields) => {
 //                    console.log('SERVER: After UPDATE err=', err, ' rows=', rows);
@@ -234,7 +236,7 @@ app.delete('/api/v1/designtypes/:type/designs/:name', (req, res) => {
                 connection.end();
                 console.log('SERVER: 404 - NOT FOUND');
             } else {
-                var stmt = 'DELETE FROM design WHERE name = \''+name+'\'';
+                var stmt = 'DELETE FROM design WHERE type = \''+type+'\' AND name = \''+name+'\'';
 //                console.log('SERVER: stmt='+stmt);
                 connection.query(stmt, (err, rows, fields) => {
 //                    console.log('SERVER: After DELETE err=', err, ' rows=', rows);

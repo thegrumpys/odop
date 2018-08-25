@@ -37,6 +37,7 @@ export class NameValueUnitsTable extends React.Component {
                         { this.props.constants.length > 0 &&
                             (<tr>
                                 <th className="text-center bg-dark text-white" colSpan="6" id="CITitle">Calculation Inputs</th>
+                                <UncontrolledTooltip placement="top" target="CITitle">Calculation Inputs Title ToolTip</UncontrolledTooltip>
                             </tr>)
                         }
                     </thead>
@@ -49,7 +50,6 @@ export class NameValueUnitsTable extends React.Component {
                 <UncontrolledTooltip placement="bottom" target="ValueTitle">Value(Fix) Title ToolTip</UncontrolledTooltip>
                 <UncontrolledTooltip placement="bottom" target="UnitsTitle">Units Title ToolTip</UncontrolledTooltip>
                 <UncontrolledTooltip placement="top" target="DVTitle">Dependent Variables Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="CITitle">Calculation Inputs Title ToolTip</UncontrolledTooltip>
             </React.Fragment>
         );
     }
