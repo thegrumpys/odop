@@ -25,9 +25,11 @@ export function eqnset(d, p) {        /*    Compression  Spring  */
 //    const unused = 21;
     const Stress_Lim_Endur = 22;
     const Stress_Lim_Stat = 23;
-    const const_term = 24;
-    const slope_term = 25;
-    const tensile_010 = 26;
+//    const tbase010 = 24;
+//    const tbase400 = 25;
+    const const_term = 26;
+    const slope_term = 27;
+    const tensile_010 = 28;
 
     const OD_Free = 0;
     const Wire_Dia = 1;
@@ -107,7 +109,7 @@ export function eqnset(d, p) {        /*    Compression  Spring  */
 
       if (d[Prop_Calc_Method] === 1) {
           d[Tensile] = d[slope_term] * (Math.log10(p[Wire_Dia]) - d[const_term]) + d[tensile_010];
-//          console.log("Tensile = ", d[Tensile]);
+//          console.log("eqnset Tensile = ", d[Tensile]);
       }
       if (d[Prop_Calc_Method] <= 2) {
           d[Stress_Lim_Endur] = d[Tensile] * d[PC_Tensile_Endur] / 100.0;
@@ -116,7 +118,7 @@ export function eqnset(d, p) {        /*    Compression  Spring  */
 
     if (x[Stress_2] > zero) {
         x[FactorSafety_2] = d[Stress_Lim_Stat] / x[Stress_2];
-//        console.log("FactorSafety_2 = ", x[FactorSafety_2]);
+//        console.log("eqnset FactorSafety_2 = ", x[FactorSafety_2]);
     }
        else x[FactorSafety_2] = 1.0;
 

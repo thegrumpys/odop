@@ -35,7 +35,7 @@ export const initialState = {
         },
         {
             "name": "Material_File",
-            "value": "unused",
+            "value": "pass in mat_ips.json?",
             "units": ""
         },
         {
@@ -122,6 +122,16 @@ export const initialState = {
             "name": "Stress_Lim_Stat",
             "value": 130709.6,
             "units": "PSI"
+        },
+        {
+            "name": "tbase010",
+            "value": 0.010,
+            "units": ""
+        },
+        {
+            "name": "tbase400",
+            "value": 0.400,
+            "units": ""
         },
         {
             "name": "const_term",
