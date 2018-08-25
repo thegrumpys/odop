@@ -47,10 +47,10 @@ class ResultTable extends React.Component {
                         </tr>
                     </tbody>
                 </Table>
-                <UncontrolledTooltip placement="top" target="Feasibility">Feasibility Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="TerminationCondition">Termination Condition Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="ObjectiveValue">Objective Value Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="OBJMIN">OBJMIN Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="Feasibility">Feasible:<br /> no constraints violated<br />Marginally Feasible:<br />OBJ less than OBJMIN<br />Not Feasible:<br />constraints violated</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="TerminationCondition">Status feedback from solution process</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="ObjectiveValue">Search works to minimize Objective Function value <br /> See Help for details</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="OBJMIN">Stop Search if OBJ is lower than this value</UncontrolledTooltip>
             </React.Fragment>
         );
     }

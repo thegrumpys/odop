@@ -37,7 +37,7 @@ export class NameValueUnitsTable extends React.Component {
                         { this.props.constants.length > 0 &&
                             (<tr>
                                 <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">Calculation Inputs</th>
-                                <UncontrolledTooltip placement="top" target="CITitle">Calculation Inputs Title ToolTip</UncontrolledTooltip>
+                                <UncontrolledTooltip placement="top" target="CITitle">Calculation Inputs <br /> (pending restructure)</UncontrolledTooltip>
                             </tr>)
                         }
                     </thead>
@@ -45,11 +45,11 @@ export class NameValueUnitsTable extends React.Component {
                         {this.props.constants.map((constant,index) => <NameValueUnitsRowConstant key={constant.name} constant={constant} index={index} />)}
                     </tbody>
                 </Table>
-                <UncontrolledTooltip placement="top" target="IVTitle">Independent Variables Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="NameTitle">Name Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="ValueTitle">Value(Fix) Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="UnitsTitle">Units Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="DVTitle">Dependent Variables Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="IVTitle">Inputs to design equations</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="NameTitle">Variable names</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="ValueTitle">Current values <br /> (Check box at right to FIX)</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="UnitsTitle">Units (information only)</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="DVTitle">Outputs from design equations</UncontrolledTooltip>
             </React.Fragment>
         );
     }

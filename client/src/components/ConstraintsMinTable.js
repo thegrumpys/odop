@@ -32,11 +32,11 @@ export class ConstraintsMinTable extends React.Component {
                         {this.props.state_variables.map((state_variable) => <ConstraintsMinRowStateVariable key={state_variable.name} state_variable={state_variable} />)}
                     </tbody>
                 </Table>
-                <UncontrolledTooltip placement="top" target="IVMinConstraintTitle">IV Min Constraint Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="MinConstraintConstrainTitle">Min Constraint Constrain Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="MinConstraintValueTitle">Min Constraint Value Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="MinConstraintViolationTitle">Min Constraint Violation Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="DVMinConstraintTitle">DV Min Constraint Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="IVMinConstraintTitle">Lower limits on Independent Variables</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="MinConstraintConstrainTitle">Check box to establish lower limit</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="MinConstraintValueTitle">Enter value for lower limit</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="MinConstraintViolationTitle">Measure of constraint <br />satisfaction (-) or violation (+)</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="DVMinConstraintTitle">Lower limits on Dependent Variables</UncontrolledTooltip>
             </React.Fragment>
         );
     }

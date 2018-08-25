@@ -32,11 +32,11 @@ export class ConstraintsMaxTable extends React.Component {
                         {this.props.state_variables.map((state_variable) => <ConstraintsMaxRowStateVariable key={state_variable.name} state_variable={state_variable} />)}
                     </tbody>
                 </Table>
-                <UncontrolledTooltip placement="top" target="IVMaxConstraintTitle">IV Max Constraint Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="MaxConstraintConstrainTitle">Max Constraint Constrain Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="MaxConstraintValueTitle">Max Constraint Value Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="MaxConstraintViolationTitle">Max Constraint Violation Title ToolTip</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="DVMaxConstraintTitle">DV Max Constraint Title ToolTip</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="IVMaxConstraintTitle">Upper limits on Independent Variables</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="MaxConstraintConstrainTitle">Check box to establish upper limit</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="MaxConstraintValueTitle">Enter value for upper limit</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="MaxConstraintViolationTitle">Measure of constraint <br />satisfaction (-) or violation (+)</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="DVMaxConstraintTitle">Upper limits on Dependent Variables</UncontrolledTooltip>
             </React.Fragment>
         );
     }
