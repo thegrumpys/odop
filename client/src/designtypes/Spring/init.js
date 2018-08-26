@@ -92,7 +92,7 @@ export function init(d, p) {
  //
     i = p[offsets.Material_Type];
 //    console.log("i_1= ", i);
-    p[offsets.offsets.Material_Index] = i;
+    p[offsets.Material_Index] = i;
     
 // NOMORE:
 //  end_type_index=0;

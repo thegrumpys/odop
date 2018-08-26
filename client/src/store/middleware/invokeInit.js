@@ -19,7 +19,7 @@ export function invokeInit(store) {
         p[i] = dp.value;
     }
 
-    // Update constants from p to p
+    // Update design_parameter from p to p
     switch(design.type) {
     default:
     case 'Piston-Cylinder':
@@ -33,8 +33,8 @@ export function invokeInit(store) {
         break;
     }
 
-    // Compute and dispatch constant changes
-    store.dispatch(changeDesignParameterValues(p, true));
+    // Compute and dispatch design_parameter changes
+    store.dispatch(changeDesignParameterValues(p));
     
 //    console.log('Exiting invokeInit');
 }
