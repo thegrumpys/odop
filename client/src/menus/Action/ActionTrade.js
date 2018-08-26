@@ -397,16 +397,16 @@ class ActionTrade extends React.Component {
         design = store.getState();
         var dir = [];
         var value;
-        dir = this.state.ldir.map((entry,index)=>{
+        dir = this.state.ldir.map((element,index)=>{
             var value;
             if (index === i) {
-                value = entry * parseFloat(event.target.value);
+                value = element * parseFloat(event.target.value);
                 value = isNaN(value) ? this.state.dir[index] : value;
-//                console.log('i1=',i,' entry=',entry,' index=',index,' value=',value);
+//                console.log('i1=',i,' element=',element,' index=',index,' value=',value);
                 return value;
             }
             value = this.state.dir[index];
-//            console.log('i2=',i,' entry=',entry,' index=',index,' value=',value);
+//            console.log('i2=',i,' element=',element,' index=',index,' value=',value);
             return value;
         })
 //        console.log('dir=',dir);

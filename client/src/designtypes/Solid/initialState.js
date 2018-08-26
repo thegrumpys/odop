@@ -1,28 +1,12 @@
-import { CONSTRAINED } from '../../store/actionTypes';
+import { CONSTRAINED, EQUATIONSET } from '../../store/actionTypes';
 export const initialState = {
-    "constants": [
-        {
-            "name": "Material",
-            "value": 6,
-            "units": "",
-            "type": "table",
-            "table": "materials",
-            "tooltip": "Select from list"
-        },
-        {
-            "name": "Density",
-            "value": 0.036,
-            "units": "lb/cu-in",
-            "tooltip": "Weight per unit volume of the selected material"
-        }
-    ],
     "design_parameters": [
         {
             "name": "Length",
             "value": 12.0,
             "units": "inches",
-            "lmin": CONSTRAINED,
-            "lmax": 0,
+            "lmin": EQUATIONSET|CONSTRAINED,
+            "lmax": EQUATIONSET,
             "cmin": 0,
             "cmax": 100.00,
             "ioclass": 0,
@@ -33,8 +17,8 @@ export const initialState = {
             "name": "Width",
             "value": 10.0,
             "units": "inches",
-            "lmin": CONSTRAINED,
-            "lmax": 0,
+            "lmin": EQUATIONSET|CONSTRAINED,
+            "lmax": EQUATIONSET,
             "cmin": 0.0,
             "cmax": 80.0,
             "ioclass": 0,
@@ -45,13 +29,39 @@ export const initialState = {
             "name": "Height",
             "value": 8.0,
             "units": "inches",
-            "lmin": CONSTRAINED,
-            "lmax": 0,
+            "lmin": EQUATIONSET|CONSTRAINED,
+            "lmax": EQUATIONSET,
             "cmin": 0.0,
             "cmax": 60.0,
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Shortest dimension"
+        },
+        {
+            "name": "Material",
+            "value": 6,
+            "units": "",
+            "type": "table",
+            "table": "materials",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "ioclass": 0,
+            "sdlim": 0,
+            "tooltip": "Select from list"
+        },
+        {
+            "name": "Density",
+            "value": 0.036,
+            "units": "lb/cu-in",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "ioclass": 0,
+            "sdlim": 0,
+            "tooltip": "Weight per unit volume of the selected material"
         }
     ],
     "state_variables": [

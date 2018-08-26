@@ -1,9 +1,6 @@
 import { STARTUP, 
     LOAD,
     
-    CHANGE_CONSTANT_VALUE, 
-    CHANGE_CONSTANT_VALUES, 
-    
     CHANGE_DESIGN_PARAMETER_VALUE, 
     CHANGE_DESIGN_PARAMETER_VALUES, 
     RESTORE_DESIGN_PARAMETER_VALUES, 
@@ -46,21 +43,22 @@ export const dispatcher = store => next => action => {
         setSclDen(store);
         updateViolationsAndObjectiveValue(store);
         break;
-    case CHANGE_CONSTANT_VALUE:
-        invokeInit(store);
-        invokeEquationSet(store);
-        updateViolationsAndObjectiveValue(store, action.payload.merit);
-        break;
-    case CHANGE_CONSTANT_VALUES:
-        // DO NOT INVOKE BECAUSE OF RECURSION: invokeInit(store);
-        invokeEquationSet(store);
-        updateViolationsAndObjectiveValue(store, action.payload.merit);
-        break;
     case CHANGE_DESIGN_PARAMETER_VALUE:
+        var design = store.getState();
+        design.design_parameters.find((element) => {
+            if (element.name === action.payload.name) {
+                !(element.lmin & EQUATIONSET) && invokeInit(store);
+                return true;
+            } else {
+                return false;
+            }
+        });
+        if (action.payload.name) invokeInit(store);
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
     case CHANGE_DESIGN_PARAMETER_VALUES:
+        // DO NOT INVOKE BECAUSE OF RECURSION: invokeInit(store);
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;

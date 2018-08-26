@@ -2,9 +2,6 @@ import { STARTUP,
     LOAD, 
     CHANGE_NAME, 
     
-    CHANGE_CONSTANT_VALUE, 
-    CHANGE_CONSTANT_VALUES, 
-    
     CHANGE_DESIGN_PARAMETER_VALUE, 
     CHANGE_DESIGN_PARAMETER_VALUES, 
     SAVE_DESIGN_PARAMETER_VALUES, 
@@ -44,25 +41,6 @@ export function reducers(state, action) {
     case CHANGE_NAME:
         return Object.assign({}, state, {
             name: action.payload.name
-        });
-    case CHANGE_CONSTANT_VALUE:
-        return Object.assign({}, state, {
-            constants: state.constants.map((constant) => {
-                if (constant.name === action.payload.name) {
-                    return Object.assign({}, constant, {
-                        value: action.payload.value
-                    });
-                }
-                return constant;
-            })
-        });
-    case CHANGE_CONSTANT_VALUES:
-        return Object.assign({}, state, {
-            constants: state.constants.map((constant, index) => {
-                return Object.assign({}, constant, {
-                    value: action.payload.values[index]
-                });
-            })
         });
     case CHANGE_DESIGN_PARAMETER_VALUE:
         return Object.assign({}, state, {

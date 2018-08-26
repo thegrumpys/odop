@@ -32,8 +32,8 @@ class NameValueUnitsRowConstant extends React.Component {
         this.state.table[selectedIndex].forEach((value, index) => {
             if (index > 0) { // Skip the first column
                 var name = this.state.table[0][index];
-//                console.log('name=',name,' this.props.constants=',this.props.constants,' check=',this.props.constants.find(entry => entry.name === name));
-                if (this.props.constants.find(entry => entry.name === name) !== undefined) {
+//                console.log('name=',name,' this.props.constants=',this.props.constants,' check=',this.props.constants.find(element => element.name === name));
+                if (this.props.constants.find(element => element.name === name) !== undefined) {
                     this.props.changeConstantValue(name,value);
                 }
             }

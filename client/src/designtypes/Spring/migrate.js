@@ -19,7 +19,7 @@ export function migrate(design) {
         // console.log('Convert from 1 to 2');
         // To be defined - presently do nothing
         // migrated_design.version = "2"; // last thing... set the migrated model version
-        break;
+        break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
         migrated_design = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls

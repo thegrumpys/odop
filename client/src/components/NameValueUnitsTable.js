@@ -23,7 +23,7 @@ export class NameValueUnitsTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.design_parameters.map((design_parameter,index) => <NameValueUnitsRowDesignParameter key={design_parameter.name} design_parameter={design_parameter} index={index} />)}
+                        {this.props.design_parameters.map((design_parameter,index) => {design_parameter.lmin & EQUATIONSET && <NameValueUnitsRowDesignParameter key={design_parameter.name} design_parameter={design_parameter} index={index} />})}
                     </tbody>
                     <thead>
                         <tr>
@@ -31,18 +31,20 @@ export class NameValueUnitsTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.state_variables.map((state_variable,index) => <NameValueUnitsRowStateVariable key={state_variable.name} state_variable={state_variable} index={index} />)}
+                        {this.props.state_variables.map((state_variable,index) => {state_variable.lmin & EQUATIONSET && <NameValueUnitsRowStateVariable key={state_variable.name} state_variable={state_variable} index={index} />})}
                     </tbody>
                     <thead>
-                        { this.props.constants.length > 0 &&
+                        { (this.props.design_parameters.reduce((accum,design_parameter)=>{!(design_parameter.lmin & EQUATIONSET) ? return accum+1 : return accum}, 0) > 0 || 
+                           this.props.state_variables.reduce((accum,state_variable)=>{!(state_variable.lmin & EQUATIONSET) ? return accum+1 : return accum}, 0) > 0) &&
                             (<tr>
                                 <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">Calculation Inputs</th>
-                                <UncontrolledTooltip placement="top" target="CITitle">Calculation Inputs <br /> (pending restructure)</UncontrolledTooltip>
+                                <UncontrolledTooltip placement="top" target="CITitle">Calculation Inputs Title ToolTip</UncontrolledTooltip>
                             </tr>)
                         }
                     </thead>
                     <tbody>
-                        {this.props.constants.map((constant,index) => <NameValueUnitsRowConstant key={constant.name} constant={constant} index={index} />)}
+                        {this.props.design_parameters.map((design_parameter,index) => {!(design_parameter.lmin & EQUATIONSET) && <NameValueUnitsRowConstant key={design_parameter.name} constant={design_parameter} index={index} />})}
+                        {this.props.state_variables.map((state_variable,index) => {!(state_variable.lmin & EQUATIONSET) && <NameValueUnitsRowConstant key={state_variable.name} constant={state_variable} index={index} />})}
                     </tbody>
                 </Table>
                 <UncontrolledTooltip placement="top" target="IVTitle">Inputs to design equations</UncontrolledTooltip>
@@ -57,7 +59,6 @@ export class NameValueUnitsTable extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    constants: state.constants,
     design_parameters: state.design_parameters,
     state_variables: state.state_variables
 });

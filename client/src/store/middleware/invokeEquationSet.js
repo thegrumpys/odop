@@ -6,18 +6,10 @@ import { eqnset as spring_eqnset } from '../../designtypes/Spring/eqnset';
 // Invoke Equation Set
 export function invokeEquationSet(store) {
     
-    var c;
     var dp;
 
     var design = store.getState();
     
-    // Loop to create d from constants
-    var d = [];
-    for (let i = 0; i < design.constants.length; i++) {
-        c = design.constants[i];
-        d[i] = c.value;
-    }
-
     // Loop to create p from design_parameters
     var p = [];
     for (let i = 0; i < design.design_parameters.length; i++) {
@@ -30,13 +22,13 @@ export function invokeEquationSet(store) {
     switch(design.type) {
     default:
     case 'Piston-Cylinder':
-        x = pcyl_eqnset(d, p);
+        x = pcyl_eqnset(p);
         break;
     case 'Solid':
-        x = solid_eqnset(d, p);
+        x = solid_eqnset(p);
         break;
     case 'Spring':
-        x = spring_eqnset(d, p);
+        x = spring_eqnset(p);
         break;
     }
 

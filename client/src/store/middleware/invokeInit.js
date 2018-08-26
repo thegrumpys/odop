@@ -9,17 +9,9 @@ export function invokeInit(store) {
 //    console.log('Entering invokeInit');
     
     var dp;
-    var c;
 
     var design = store.getState();
     
-    // Loop to create d from constants
-    var d = [];
-    for (let i = 0; i < design.constants.length; i++) {
-        c = design.constants[i];
-        d[i] = c.value;
-    }
-
     // Loop to create p from design_parameters
     var p = [];
     for (let i = 0; i < design.design_parameters.length; i++) {
@@ -27,22 +19,22 @@ export function invokeInit(store) {
         p[i] = dp.value;
     }
 
-    // Update constants from d to d
+    // Update constants from p to p
     switch(design.type) {
     default:
     case 'Piston-Cylinder':
-        d = pcyl_init(d, p);
+        p = pcyl_init(p);
         break;
     case 'Solid':
-        d = solid_init(d, p);
+        p = solid_init(p);
         break;
     case 'Spring':
-        d = spring_init(d, p);
+        p = spring_init(p);
         break;
     }
 
     // Compute and dispatch constant changes
-    store.dispatch(changeConstantValues(d, true));
+    store.dispatch(changeDesignParameterValues(p, true));
     
 //    console.log('Exiting invokeInit');
 }

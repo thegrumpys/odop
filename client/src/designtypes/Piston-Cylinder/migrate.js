@@ -20,10 +20,15 @@ export function migrate(design) {
     	migrated_design.version = "1"; // last thing... set the migrated model version
     case "1":
         // Current model version
-        // console.log('Convert from 1 to 2');
+        console.log('Convert from 1 to 2');
+        delete design.constants; // Remove constants entirely
+        migrated_design.version = "2"; // last thing... set the migrated model version
+    case "2":
+        // Current model version
+        // console.log('Convert from 2 to 3');
         // To be defined - presently do nothing
-        // migrated_design.version = "2"; // last thing... set the migrated model version
-        break;
+        // migrated_design.version = "3"; // last thing... set the migrated model version
+        break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
         migrated_design = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls

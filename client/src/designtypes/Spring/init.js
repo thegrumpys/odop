@@ -1,3 +1,4 @@
+import * as offsets from './offsets';
 export function init(d, p) {
     console.log('In init d=',d,' p=',p);
 
@@ -89,9 +90,9 @@ export function init(d, p) {
  Cross check values of PROP_CALC_METHOD and END_CALC_METHOD.
 */
  //
-    i = d[Material_Type];
+    i = p[offsets.Material_Type];
 //    console.log("i_1= ", i);
-    d[Material_Index] = i;
+    p[offsets.offsets.Material_Index] = i;
     
 // NOMORE:
 //  end_type_index=0;
@@ -149,47 +150,47 @@ export function init(d, p) {
 
                /*  copy from material table to constants  */
 // i=material_index;
-    i = d[Material_Index];
+    i = p[offsets.Material_Index];
 //    console.log("i_2= ", i);
 // if i > 0 then
     if (i > 0) {
 //    do;
 //    if prop_calc_method ^= 1 then             /*   debug  */
-    if (d[Prop_Calc_Method] !== 1) {
+    if (p[offsets.Prop_Calc_Method] !== 1) {
 //           put skip list('TAB2D:   PROP_CALC_METHOD SET TO 1.');
         console.log('TAB2D:   PROP_CALC_METHOD SET TO 1.');
 //    prop_calc_method = 1;
-        d[Prop_Calc_Method] = 1;
+        p[offsets.Prop_Calc_Method] = 1;
     }
 //
 //    material_type    = m_tab(material_index).matnam;
 //    astm_fed_spec    = m_tab(i).astm_fs;
-    d[ASTM_Fed_Spec] = m_tab[i][astm_fs] + '/' + m_tab[i][fedspec];
+    p[offsets.ASTM_Fed_Spec] = m_tab[i][offsets.astm_fs] + '/' + m_tab[i][offsets.fedspec];
 //    if m_tab(i).kh < 1.0 then process = 'HOT_WOUND';
-    if (m_tab[i][kh] < 1.0) {
-        d[Process] = "Hot_Wound";
+    if (m_tab[i][offsets.kh] < 1.0) {
+        p[offsets.Process] = "Hot_Wound";
     }
 //             else process = 'COLD_COILED';
     else {
-        d[Process] = "Cold_Coiled";
+        p[offsets.Process] = "Cold_Coiled";
     }
 //    density      = m_tab(i).dens;
-    d[Density]      = m_tab[i][dens];
+    p[offsets.Density]      = m_tab[i][offsets.dens];
 //    torsion_modulus  = m_tab(i).gg;
-    d[Torsion_Modulus]  = ten3 * m_tab[i][gg];
+    p[offsets.Torsion_Modulus]  = ten3 * m_tab[i][offsets.gg];
 //
 //    hot_factor_kh    = m_tab(i).kh;
-    d[Hot_Factor_Kh]    = m_tab[i][kh];
+    p[offsets.Hot_Factor_Kh]    = m_tab[i][offsets.kh];
 //    tensile_010      = m_tab(i).t010;
-    d[tensile_010]      = ten3 * m_tab[i][t010];
+    p[offsets.tensile_010]      = ten3 * m_tab[i][offsets.t010];
 //    tensile_400      = m_tab(i).t400;
-    tensile_400         = ten3 * m_tab[i][t400];
+    tensile_400         = ten3 * m_tab[i][offsets.t400];
     
-    var life_category = d[Life_Category];
+    var life_category = p[offsets.Life_Category];
 //    pc_tensile_endur = m_tab(i).pte(life_catagory);
-    d[PC_Tensile_Endur] = m_tab[i][pte1+life_category-1];
+    p[offsets.PC_Tensile_Endur] = m_tab[i][offsets.pte1+life_category-1];
 //    pc_tensile_stat  = m_tab(i).fy;
-    d[PC_Tensile_Stat]  = m_tab[i][pte1];
+    p[offsets.PC_Tensile_Stat]  = m_tab[i][offsets.pte1];
 //    pc_tensile_bend  = m_tab(i).ptb(life_catagory);
 
     //                         /*  Kludge for torsion  */
@@ -200,19 +201,19 @@ export function init(d, p) {
 //    end;
 //
 //    wire_dia=p(2);
-//    console.log("wire_dia = ", p[Wire_Dia]);
+//    console.log("wire_dia = ", p[offsets.Wire_Dia]);
 //    const_term=log10(tbase010);
-    d[const_term] = Math.log10(d[tbase010]);
+    p[offsets.const_term] = Math.log10(p[offsets.tbase010]);
 //    slope_term=(tensile_400 - tensile_010) /
 //           (log10(tbase400) - const_term);
 //    console.log("tensile_400 = ", tensile_400);
-    d[slope_term] = (tensile_400 - d[tensile_010]) / (Math.log10(d[tbase400]) - d[const_term]);
-//    tensile=slope_term*(log10(p[Wire_Dia])-const_term) + tensile_010;
-    d[Tensile] = d[slope_term] * (Math.log10(p[Wire_Dia]) - d[const_term]) + d[tensile_010];
+    p[offsets.slope_term] = (tensile_400 - p[offsets.tensile_010]) / (Math.log10(p[offsets.tbase400]) - p[offsets.const_term]);
+//    tensile=slope_term*(log10(p[offsets.Wire_Dia])-const_term) + tensile_010;
+    p[offsets.Tensile] = p[offsets.slope_term] * (Math.log10(p[offsets.Wire_Dia]) - p[offsets.const_term]) + p[offsets.tensile_010];
 //    stress_lim_endur=tensile*pc_tensile_endur/100.0;
-    d[Stress_Lim_Endur] = d[Tensile] * d[PC_Tensile_Endur] / 100.0;
+    p[offsets.Stress_Lim_Endur] = p[offsets.Tensile] * p[offsets.PC_Tensile_Endur] / 100.0;
 //    stress_lim_stat =tensile*pc_tensile_stat /100.0;
-    d[Stress_Lim_Stat]  = d[Tensile] * d[PC_Tensile_Stat]  / 100.0;
+    p[offsets.Stress_Lim_Stat]  = p[offsets.Tensile] * p[offsets.PC_Tensile_Stat]  / 100.0;
 //    end;
         }
 

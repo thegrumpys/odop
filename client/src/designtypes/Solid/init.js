@@ -1,4 +1,5 @@
-export function init(d, p) {
-    console.log('In init d=',d,' p=',p);
-    return d;
+import * as offsets from './offsets';
+export function init(p) {
+    console.log('In init p=',p);
+    return p;
 }

@@ -82,7 +82,7 @@ class FileDelete extends React.Component {
         this.setState({
             modal: !this.state.modal
         });
-        // Delete the database entry
+        // Delete the database element
         this.deleteDesign(this.state.type,this.state.name);
     }
     
