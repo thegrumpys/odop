@@ -9,7 +9,7 @@ class NameValueUnitsRowCalcInput extends React.Component {
         super(props);
         this.onChangeCalcInputValue = this.onChangeCalcInputValue.bind(this);
         this.onSelect = this.onSelect.bind(this);
-//        console.log('this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table)
+        console.log('this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table)
         if (this.props.element.type === 'table') {
 //            console.log('file = ../designtypes/'+this.props.type+'/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.type+'/'+this.props.element.table+'.json');

@@ -23,7 +23,7 @@ export class NameValueUnitsTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.forEach((element,index) => element.input && element.equationset && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
+                        {this.props.symbol_table.map((element,index) => element.input && element.equationset && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                     <thead>
                         <tr>
@@ -31,7 +31,7 @@ export class NameValueUnitsTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.forEach((element,index) => !element.input && element.equationset && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
+                        {this.props.symbol_table.map((element,index) => !element.input && element.equationset && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                     <thead>
                         { (this.props.symbol_table.reduce((accum,element)=>{if (!element.equationset) return accum+1; else return accum;}, 0) > 0) &&
@@ -42,7 +42,7 @@ export class NameValueUnitsTable extends React.Component {
                         }
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.forEach((element,index) => !element.equationset && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} /> : '')}
+                        {this.props.symbol_table.map((element,index) => !element.equationset && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
                     </tbody>
                 </Table>
                 <UncontrolledTooltip placement="top" target="IVTitle">Inputs to design equations</UncontrolledTooltip>
