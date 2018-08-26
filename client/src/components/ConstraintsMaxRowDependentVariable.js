@@ -54,7 +54,7 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
                                 <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <Input className={cmax_class} type="number" value={this.props.element.cmax} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} />
+                        <Input className={cmax_class} type="number" value={this.props.element.lmax & CONSTRAINED ? this.props.element.cmax : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} />
                     </InputGroup>
                 </td>
                 <td className="text-right align-middle" colSpan="1">
