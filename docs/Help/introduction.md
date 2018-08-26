@@ -1,10 +1,10 @@
 ## Introduction
 
-As an introduction to the ODO:Platform software, you should first read the section titled FEATURES. 
+As an introduction to the ODOP software, you should first read the section titled FEATURES. 
 This section will build on some of the concepts introduced there. 
 Also, you may wish to refer the section titled TERMINOLOGY as part of reading this section.
 
-After developing an understanding of a few conceptual issues, the ODO:Platform
+After developing an understanding of a few conceptual issues, the ODOP
 program can be very simple to use.  In particular, at any time after the
 program has been started, the state of the program represents a single, unique design. 
 The current values of the various independent variables completely specify the design. 
@@ -47,10 +47,11 @@ violated the most, have the most influence.  A small amount of motion there
 will have the greatest effect.  The TRADE feature (Action:Trade menu)  has an extrapolation
 algorithm that will locate the nearest feasible point with a minimal amount of effort.
 
-ODO:Platform is structured to permit the use of multiple search algorithms and
-multiple equation sets.  For example, EQNSET1 can handle compression springs while EQNSET2
-handles extension springs and EQNSET3 handles torsion springs. 
-While the default equation set may be changed with Preferences (File:Preferences menu), 
-it is usually most convenient to allow the user startup sequence to select it.
+ODOP is structured to permit multiple design types to be available concurrently.
+At the time that the program first initializes, the user can specify a design type
+and then select from a list of existing designs of that type in order to begin work.
+A default starting point named "startup" should always be availabe.
+
+As of this writing, design types available include a simple piston-
 
 
