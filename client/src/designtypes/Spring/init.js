@@ -146,11 +146,11 @@ export function init(p) {
 //    console.log("tensile_400 = ", tensile_400);
     p[o.slope_term] = (tensile_400 - p[o.tensile_010]) / (Math.log10(p[o.tbase400]) - p[o.const_term]);
 //    tensile=slope_term*(log10(p[o.Wire_Dia])-const_term) + tensile_010;
-    p[o.Tensile] = p[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - p[o.const_term]) + p[o.tensile_010];
+    x[o.Tensile] = p[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - p[o.const_term]) + p[o.tensile_010];
 //    stress_lim_endur=tensile*pc_tensile_endur/100.0;
-    p[o.Stress_Lim_Endur] = p[o.Tensile] * p[o.PC_Tensile_Endur] / 100.0;
+    x[o.Stress_Lim_Endur] = p[o.Tensile] * p[o.PC_Tensile_Endur] / 100.0;
 //    stress_lim_stat =tensile*pc_tensile_stat /100.0;
-    p[o.Stress_Lim_Stat]  = p[o.Tensile] * p[o.PC_Tensile_Stat]  / 100.0;
+    x[o.Stress_Lim_Stat]  = p[o.Tensile] * p[o.PC_Tensile_Stat]  / 100.0;
 //    end;
         }
 
