@@ -5,24 +5,27 @@ export const initialState = {
             "name": "Spring_Type",
             "value": "Compression",
             "units": "",
-            "tooltip": "Spring_Type Tooltip"
+            "tooltip": "Compression spring design"
         },
         {
             "name": "Material_Type",
             "value": 1,
             "units": "",
             "type": "table",
-            "table": "mat_ips"
+            "table": "mat_ips",
+            "tooltip": "Select wire material"
         },
         {
             "name": "ASTM/Fed_Spec",
             "value": "A228/QQW-470",
-            "units": ""
+            "units": "",
+            "tooltip": "Wire specification"
         },
         {
             "name": "End_Type",
             "value": "Closed&Ground",
-            "units": ""
+            "units": "",
+            "tooltip": "Select end type"
         },
         {
             "name": "Catalog_Number",
@@ -32,7 +35,8 @@ export const initialState = {
         {
             "name": "Process",
             "value": "Cold_Coiled",
-            "units": ""
+            "units": "",
+            "tooltip": "Spring winding process temperature"
         },
         {
             "name": "Material_File",
@@ -57,7 +61,8 @@ export const initialState = {
         {
             "name": "Life_Category",
             "value": 1,
-            "units": "index"
+            "units": "index",
+            "tooltip": "Select cycle life target. Controls allowable stresses"
         },
         {
             "name": "Material_Index",
@@ -72,42 +77,50 @@ export const initialState = {
         {
             "name": "Inactive_Coils",
             "value": 2.0,
-            "units": "coils"
+            "units": "coils",
+            "tooltip": "Number of coils not contributing to deflection based on end type"
         },
         {
             "name": "Add_Coils@Solid",
             "value": 0.0,
-            "units": "coils"
+            "units": "coils",
+            "tooltip": "Additional coils not contributing to deflection"
         },
         {
             "name": "Density",
             "value": 0.036,
             "units": "lb/cu-in",
+            "tooltip": "Wire material density"
         },
         {
             "name": "Torsion_Modulus",
             "value": 11500000.0,
-            "units": "PSI"
+            "units": "PSI",
+            "tooltip": "Wire torsion modulus (G)"
         },
         {
             "name": "Hot_Factor_Kh",
             "value": 1.0,
-            "units": "ratio"
+            "units": "ratio",
+            "tooltip": "Reduction factor applied to modulus of hot-wound materials"
         },
         {
             "name": "Tensile",
             "value": 261000.0,
-            "units": "PSI"
+            "units": "PSI",
+            "tooltip": "Wire tensile strength (computed as a function of wire diameter)"
         },
         {
             "name": "%_Tensile_Endur",
             "value": 50.0,
-            "units": "%"
+            "units": "%",
+            "tooltip": "Allowable percent of tensile strength for selected life cycle category"
         },
         {
             "name": "%_Tensile_Stat",
             "value": 50.0,
-            "units": "%"
+            "units": "%",
+            "tooltip": "Allowable percent of tensile strength for static applications"
         },
         {
             "name": "unused",
@@ -117,12 +130,14 @@ export const initialState = {
         {
             "name": "Stress_Lim_Endur",
             "value": 130709.6,
-            "units": "PSI"
+            "units": "PSI",
+            "tooltip": "Allowable stress for selected life cycle category"
         },
         {
             "name": "Stress_Lim_Stat",
             "value": 130709.6,
-            "units": "PSI"
+            "units": "PSI",
+            "tooltip": "Allowable stress for static applications"
         },
         {
             "name": "tbase010",
@@ -161,7 +176,7 @@ export const initialState = {
             "cmax": 2.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "OD_Free Tooltip"
+            "tooltip": "Outside diameter in free (no load) condition"
         },
         {
             "name": "Wire_Dia",
@@ -172,7 +187,8 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0.5,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Wire diameter"
         },
         {
             "name": "L_Free",
@@ -183,7 +199,8 @@ export const initialState = {
             "cmin": 0,
             "cmax": 5.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Length in free (no load) condition"
         },
         {
             "name": "Coils_T",
@@ -194,7 +211,8 @@ export const initialState = {
             "cmin": 0,
             "cmax": 20,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Total number of coils"
         },
         {
             "name": "Force_1",
@@ -205,7 +223,8 @@ export const initialState = {
             "cmin": 0,
             "cmax": 50,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Working load at point 1 (Length L_1)"
         },
         {
             "name": "Force_2",
@@ -216,7 +235,8 @@ export const initialState = {
             "cmin": 0,
             "cmax": 50,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Working load at point 2 (Length L_2)"
         }
     ],
     "state_variables": [
@@ -230,7 +250,7 @@ export const initialState = {
             "cmax": 10.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Mean_Dia Tooltip"
+            "tooltip": "Average of inside and outside diameters"
         },
         {
             "name": "Coils_A",
@@ -241,7 +261,8 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 40.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Number of Active coils"
         },
         {
             "name": "Rate",
@@ -252,7 +273,8 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 200.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Spring rate (spring constant); slope of force-deflection curve"
         },
         {
             "name": "Deflect_1",
@@ -263,7 +285,8 @@ export const initialState = {
             "cmin": 0.0,
             "cmax": 20.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Deflection from free to load point 1"
         },
         {
             "name": "Deflect_2",
@@ -274,7 +297,8 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 20.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Deflection from free to load point 2"
         },
         {
             "name": "L_1",
@@ -285,7 +309,8 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 200.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Spring length at load point 1"
         },
         {
             "name": "L_2",
@@ -296,7 +321,8 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 100.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Spring length at load point 2"
         },
         {
             "name": "L_Stroke",
@@ -307,7 +333,8 @@ export const initialState = {
             "cmin": 0.050,
             "cmax": 100.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Length of stroke from point 1 to point 2"
         },
         {
             "name": "L_Solid",
@@ -318,7 +345,8 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 10.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Spring length when fully compressed"
         },
         {
             "name": "Slenderness",
@@ -329,7 +357,8 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 10.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Ratio of free length (L_Free) to mean diameter (Mean_Dia)"
         },
         {
             "name": "ID_Free",
@@ -340,7 +369,8 @@ export const initialState = {
             "cmin": 0.1,
             "cmax": 10.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Inside diameter in free (no load) condition"
         },
         {
             "name": "Weight",
@@ -351,7 +381,8 @@ export const initialState = {
             "cmin": 0.01,
             "cmax": 10.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Weight of one spring"
         },
         {
             "name": "Spring_Index",
@@ -362,7 +393,8 @@ export const initialState = {
             "cmin": 4.0,
             "cmax": 10.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Ratio of mean coil diameter (Mean_Dia) to wire diameter (Wire_Dia)"
         },
         {
             "name": "Force_Solid",
@@ -373,7 +405,8 @@ export const initialState = {
             "cmin": 4.0,
             "cmax": 100.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Load required to fully compress the spring"
         },
         {
             "name": "Stress_1",
@@ -384,7 +417,8 @@ export const initialState = {
             "cmin": 100.0,
             "cmax": 10000.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Torsion stress in wire at load point 1"
         },
         {
             "name": "Stress_2",
@@ -395,7 +429,8 @@ export const initialState = {
             "cmin": 100.0,
             "cmax": 10000.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Torsion stress in wire at load point 2"
         },
         {
             "name": "Stress_Solid",
@@ -406,10 +441,11 @@ export const initialState = {
             "cmin": 100.0,
             "cmax": 10000.0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Torsion stress in wire when spring is fully compressed"
         },
         {
-            "name": "FactorSafety_2",
+            "name": "FS_2",
             "value": 1.3127,
             "units": "ratio",
             "lmin": CONSTRAINED,
@@ -417,10 +453,11 @@ export const initialState = {
             "cmin": 1.02,
             "cmax": 1.5,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Factor of safety at load point 2"
         },
         {
-            "name": "FactorSafety_Solid",
+            "name": "FS_Solid",
             "value": 1.057,
             "units": "ratio",
             "lmin": CONSTRAINED,
@@ -428,7 +465,8 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 1.5,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Factor of safety when the spring is fully compressed"
         },
         {
             "name": "FS_CycleLife",
@@ -439,7 +477,8 @@ export const initialState = {
             "cmin": 1.02,
             "cmax": 1.5,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Factor of safety to achieve the target cycle life category"
         },
         {
             "name": "Cycle_Life",
@@ -450,7 +489,8 @@ export const initialState = {
             "cmin": 1.02,
             "cmax": 1.5,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "tooltip": "Rough estimate of the average number of cycles to failure"
         },
         {
             "name": "%_Avail_Deflect",
@@ -461,7 +501,8 @@ export const initialState = {
             "cmin": 0,
             "cmax": 90.0,
             "ioclass": 0,
-            "sdlim": 0
+            "sdlim": 0,
+            "tooltip": "Deflection of load point 2 as a percent of total available deflection"
         }
     ],
     "labels": [
