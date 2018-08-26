@@ -3,10 +3,9 @@ import React from 'react';
 import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button, Container, Row, Col, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, MIN, MAX } from '../../store/actionTypes';
-import { changeDesignParameterConstraint,
-    saveDesignParameterValues,
-    restoreDesignParameterValues,
-    changeStateVariableConstraint, 
+import { changeSymbolConstraint,
+    saveInputSymbolValues,
+    restoreInputSymbolValues,
     changeResultTerminationCondition,
     search } from '../../store/actionCreators';
     
@@ -64,12 +63,12 @@ class ActionTrade extends React.Component {
         var design;
         var ncode;
         const { store } = this.context;
-//        this.props.saveDesignParameterValues(); // @@@
+//        this.props.saveInputSymbolValues(); // @@@
 //        this.props.search(); // @@@
         design = store.getState();
         var nviol = this.commonViolationSetup();
         if (design.result.objective_value <= design.system_controls.objmin || nviol === 0) {
-            this.props.restoreDesignParameterValues();
+            this.props.restoreInputSymbolValues();
             ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE';
             this.props.changeResultTerminationCondition(ncode);
             return;
@@ -82,36 +81,23 @@ class ActionTrade extends React.Component {
     
     commonViolationSetup() {
         var design;
-        var dp;
-        var sv;
+        var element;
         var nviol = 0;
         var ldir = [];
         var vflag = [];
         const { store } = this.context;
-        this.props.saveDesignParameterValues();
+        this.props.saveInputSymbolValues();
         this.props.search(); // @@@
         design = store.getState();
-        for (let i = 0; i < design.design_parameters.length; i++) {
-            dp = design.design_parameters[i];
-            if (dp.lmin & CONSTRAINED && dp.vmin > 0.0) {
+        for (let i = 0; i < design.symbol_table.length; i++) {
+            element = design.symbol_table[i];
+            if (element.lmin & CONSTRAINED && element.vmin > 0.0) {
                 nviol++
                 vflag[nviol - 1] = i;
                 ldir[nviol - 1] = -1;
-            } else if (dp.lmax & CONSTRAINED && dp.vmax > 0.0) {
+            } else if (element.lmax & CONSTRAINED && element.vmax > 0.0) {
                 nviol++
                 vflag[nviol - 1] = i;
-                ldir[nviol - 1] = +1;
-            }
-        }
-        for (let i = 0; i < design.state_variables.length; i++) {
-            sv = design.state_variables[i];
-            if (sv.lmin & CONSTRAINED && sv.vmin > 0.0) {
-                nviol++
-                vflag[nviol - 1] = i + design.design_parameters.length;
-                ldir[nviol - 1] = -1;
-            } else if (sv.lmax & CONSTRAINED && sv.vmax > 0.0) {
-                nviol++
-                vflag[nviol - 1] = i + design.design_parameters.length;
                 ldir[nviol - 1] = +1;
             }
         }
@@ -133,7 +119,7 @@ class ActionTrade extends React.Component {
     onStrategyDone() { // Option 3
 //        console.log('In onStrategyDone');
 //        console.log('state=',this.state);
-        this.props.restoreDesignParameterValues();
+        this.props.restoreInputSymbolValues();
         var ncode;
         ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
@@ -147,32 +133,20 @@ class ActionTrade extends React.Component {
 //        console.log('In onStrategyExisting');
 //        console.log('state=',this.state);
         var design;
-        var dp;
-        var sv;
+        var element;
         var value;
         var ncode;
         const { store } = this.context;
         design = store.getState();
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
-            if (j < design.design_parameters.length) {
-                dp = design.design_parameters[j];
-                if (this.state.ldir[i] < 0) {
-                    value = dp.cmin + dp.vmin * dp.smin * this.state.ldir[i];
-                    this.props.changeDesignParameterConstraint(dp.name, MIN, value);
-                } else {
-                    value = dp.cmax + dp.vmax * dp.smax * this.state.ldir[i];
-                    this.props.changeDesignParameterConstraint(dp.name, MAX, value);
-                }
+            element = design.symbol_table[j];
+            if (this.state.ldir[i] < 0) {
+                value = element.cmin + element.vmin * element.smin * this.state.ldir[i];
+                this.props.changeSymbolConstraint(element.name, MIN, value);
             } else {
-                sv = design.state_variables[j - design.design_parameters.length];
-                if (this.state.ldir[i] < 0) {
-                    value = sv.cmin + sv.vmin * sv.smin * this.state.ldir[i];
-                    this.props.changeStateVariableConstraint(sv.name, MIN, value);
-                } else {
-                    value = sv.cmax + sv.vmax * sv.smax * this.state.ldir[i];
-                    this.props.changeStateVariableConstraint(sv.name, MAX, value);
-                }
+                value = element.cmax + element.vmax * element.smax * this.state.ldir[i];
+                this.props.changeSymbolConstraint(element.name, MAX, value);
             }
         }
         ncode = 'CONSTRAINT LEVELS RELAXED TO EXISTING VIOLATIONS';
@@ -187,26 +161,17 @@ class ActionTrade extends React.Component {
 //        console.log('In onStrategyArbitrary');
 //        console.log('state=',this.state);
         var design;
-        var dp;
-        var sv;
+        var element;
         var dir = [];
         const { store } = this.context;
         design = store.getState();
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
-            if (j < design.design_parameters.length) {
-                dp = design.design_parameters[j];
-                if (this.state.ldir[i] < 0)
-                    dir[i] = this.state.ldir[i] * dp.vmin;
-                else
-                    dir[i] = this.state.ldir[i] * dp.vmax;
-            } else {
-                sv = design.state_variables[j - design.design_parameters.length];
-                if (this.state.ldir[i] < 0)
-                    dir[i] = this.state.ldir[i] * sv.vmin;
-                else
-                    dir[i] = this.state.ldir[i] * sv.vmax;
-            }
+            element = design.symbol_table[j];
+            if (this.state.ldir[i] < 0)
+                dir[i] = this.state.ldir[i] * element.vmin;
+            else
+                dir[i] = this.state.ldir[i] * element.vmax;
         }
         this.setState({
             dir: dir,
@@ -219,26 +184,17 @@ class ActionTrade extends React.Component {
 //        console.log('In onStrategyProportional');
 //        console.log('state=',this.state);
         var design;
-        var dp;
-        var sv;
+        var element;
         var dir = [];
         const { store } = this.context;
         design = store.getState();
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
-            if (j < design.design_parameters.length) {
-                dp = design.design_parameters[j];
-                if (this.state.ldir[i] < 0)
-                    dir[i] = this.state.ldir[i] * dp.vmin;
-                else
-                    dir[i] = this.state.ldir[i] * dp.vmax;
-            } else {
-                sv = design.state_variables[j - design.design_parameters.length];
-                if (this.state.ldir[i] < 0)
-                    dir[i] = this.state.ldir[i] * sv.vmin;
-                else
-                    dir[i] = this.state.ldir[i] * sv.vmax;
-            }
+            element = design.symbol_table[j];
+            if (this.state.ldir[i] < 0)
+                dir[i] = this.state.ldir[i] * element.vmin;
+            else
+                dir[i] = this.state.ldir[i] * element.vmax;
         }
         this.commonArbitraryOrProportional(dir);
         this.setState({
@@ -253,8 +209,7 @@ class ActionTrade extends React.Component {
          * *****
          */
         var design;
-        var dp;
-        var sv;
+        var element;
         var temp2;
         var value = 0.0;
         var itemp = 0;
@@ -272,19 +227,11 @@ class ActionTrade extends React.Component {
         for (let i = 0; i < this.state.nviol; i++) {
             dir[i] = dir[i] / value;
             let j = this.state.vflag[i];
-            if (j < design.design_parameters.length) {
-                dp = design.design_parameters[j];
-                if (this.state.ldir[i] < 0)
-                    tc[i] = dp.cmin;
-                else
-                    tc[i] = dp.cmax;
-            } else {
-                sv = design.state_variables[j - design.design_parameters.length];
-                if (this.state.ldir[i] < 0)
-                    tc[i] = sv.cmin;
-                else
-                    tc[i] = sv.cmax;
-            }
+            element = design.symbol_table[j];
+            if (this.state.ldir[i] < 0)
+                tc[i] = element.cmin;
+            else
+                tc[i] = element.cmax;
         }
         var rk1;
         var smallest;
@@ -298,35 +245,18 @@ class ActionTrade extends React.Component {
         for (let i = 0; i < this.state.nviol; i++) {
             temp2 = Math.abs(dir[i]);
             let j = this.state.vflag[i];
-            if (j < design.design_parameters.length) {
-                dp = design.design_parameters[j];
-                if (this.state.ldir[i] < 0) {
-                    if (temp2 > design.system_controls.smallnum) {
-                        temp = dp.vmin / temp2;
-                    } else {
-                        temp = dp.vmin;
-                    }
+            element = design.symbol_table[j];
+            if (this.state.ldir[i] < 0) {
+                if (temp2 > design.system_controls.smallnum) {
+                    temp = element.vmin / temp2;
                 } else {
-                    if (temp2 > design.system_controls.smallnum) {
-                        temp = dp.vmax / temp2;
-                    } else {
-                        temp = dp.vmax;
-                    }
+                    temp = element.vmin;
                 }
             } else {
-                sv = design.state_variables[j - design.design_parameters.length];
-                if (this.state.ldir[i] < 0) {
-                    if (temp2 > design.system_controls.smallnum) {
-                        temp = sv.vmin / temp2;
-                    } else {
-                        temp = sv.vmin;
-                    }
+                if (temp2 > design.system_controls.smallnum) {
+                    temp = element.vmax / temp2;
                 } else {
-                    if (temp2 > design.system_controls.smallnum) {
-                        temp = sv.vmax / temp2;
-                    } else {
-                        temp = sv.vmax;
-                    }
+                    temp = element.vmax;
                 }
             }
             if (temp > design.system_controls.smallnum && temp < smallest) {
@@ -337,19 +267,11 @@ class ActionTrade extends React.Component {
             }
         }
         let j = this.state.vflag[itemp];
-        if (j < design.design_parameters.length) {
-            dp = design.design_parameters[j];
-            if (this.state.ldir[itemp] < 0)
-                defaultest = 0.90 * dp.vmin;
-            else
-                defaultest = 0.90 * dp.vmax;
-        } else {
-            sv = design.state_variables[j - design.design_parameters.length];
-            if (this.state.ldir[itemp] < 0)
-                defaultest = 0.90 * sv.vmin;
-            else
-                defaultest = 0.90 * sv.vmax;
-        }
+        element = design.symbol_table[j];
+        if (this.state.ldir[itemp] < 0)
+            defaultest = 0.90 * element.vmin;
+        else
+            defaultest = 0.90 * element.vmax;
         if (defaultest < design.system_controls.smallnum)
             defaultest = design.system_controls.smallnum;
         this.setState({
@@ -369,7 +291,7 @@ class ActionTrade extends React.Component {
     onArbitraryCancel() {
 //        console.log('In onArbitraryCancel');
 //        console.log('state=',this.state);
-        this.props.restoreDesignParameterValues();
+        this.props.restoreInputSymbolValues();
         var ncode;
         ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
@@ -425,7 +347,7 @@ class ActionTrade extends React.Component {
     onSizeCancel() {
 //        console.log('In onSizeCancel');
 //        console.log('state=',this.state);
-        this.props.restoreDesignParameterValues();
+        this.props.restoreInputSymbolValues();
         var ncode;
         ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
@@ -439,8 +361,7 @@ class ActionTrade extends React.Component {
 //        console.log('In onSizeContinue');
 //        console.log('state=',this.state);
         var design;
-        var dp;
-        var sv;
+        var element;
         var c2;
         var c3;
         var rk3;
@@ -451,24 +372,13 @@ class ActionTrade extends React.Component {
         // TAKE FIRST EXPLORATORY RELAXATION STEP
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
-            if (j < design.design_parameters.length) {
-                dp = design.design_parameters[j];
-                if (this.state.ldir[i] < 0) {
-                    value = dp.cmin + this.state.dir[i] * dp.cmin * c3;
-                    this.props.changeDesignParameterConstraint(dp.name, MIN, value);
-                } else {
-                    value = dp.cmax + this.state.dir[i] * dp.cmax * c3;
-                    this.props.changeDesignParameterConstraint(dp.name, MAX, value);
-                }
+            element = design.symbol_table[j];
+            if (this.state.ldir[i] < 0) {
+                value = element.cmin + this.state.dir[i] * element.cmin * c3;
+                this.props.changeSymbolConstraint(element.name, MIN, value);
             } else {
-                sv = design.state_variables[j - design.design_parameters.length];
-                if (this.state.ldir[i] < 0) {
-                    value = sv.cmin + this.state.dir[i] * sv.cmin * c3;
-                    this.props.changeStateVariableConstraint(sv.name, MIN, value);
-                } else {
-                    value = sv.cmax + this.state.dir[i] * sv.cmax * c3;
-                    this.props.changeStateVariableConstraint(sv.name, MAX, value);
-                }
+                value = element.cmax + this.state.dir[i] * element.cmax * c3;
+                this.props.changeSymbolConstraint(element.name, MAX, value);
             }
         }
         design = store.getState();
@@ -493,27 +403,16 @@ class ActionTrade extends React.Component {
             c2 = c3 / 2.0;
             for (let i = 0; i < this.state.nviol; i++) {
                 let j = this.state.vflag[i];
-                if (j < design.design_parameters.length) {
-                    dp = design.design_parameters[j];
-                    if (this.state.ldir[i] < 0) {
-                        value = this.state.tc[i] + this.state.dir[i] * this.state.tc[i] * c2;
-                        this.props.changeDesignParameterConstraint(dp.name, MIN, value);
-                    } else {
-                        value = this.state.tc[i] + this.state.dir[i] * this.state.tc[i] * c2;
-                        this.props.changeDesignParameterConstraint(dp.name, MAX, value);
-                    }
+                element = design.symbol_table[j];
+                if (this.state.ldir[i] < 0) {
+                    value = this.state.tc[i] + this.state.dir[i] * this.state.tc[i] * c2;
+                    this.props.changeSymbolConstraint(element.name, MIN, value);
                 } else {
-                    sv = design.state_variables[j - design.design_parameters.length];
-                    if (this.state.ldir[i] < 0) {
-                        value = this.state.tc[i] + this.state.dir[i] * this.state.tc[i] * c2;
-                        this.props.changeStateVariableConstraint(sv.name, MIN, value);
-                    } else {
-                        value = this.state.tc[i] + this.state.dir[i] * this.state.tc[i] * c2;
-                        this.props.changeStateVariableConstraint(sv.name, MAX, value);
-                    }
+                    value = this.state.tc[i] + this.state.dir[i] * this.state.tc[i] * c2;
+                    this.props.changeSymbolConstraint(element.name, MAX, value);
                 }
             }
-            this.props.restoreDesignParameterValues();
+            this.props.restoreInputSymbolValues();
             this.props.search();
             design = store.getState();
             if (design.result.objective_value <= design.system_controls.objmin) {
@@ -571,28 +470,15 @@ class ActionTrade extends React.Component {
             }
             for (let i = 0; i < this.state.nviol; i++) {
                 let j = this.state.vflag[i];
-                if (j < design.design_parameters.length) {
-                    dp = design.design_parameters[j];
-                    if (this.state.ldir[i] < 0) {
-                        value = this.state.tc[i] + this.state.dir[i] * this.state.tc[i] * c0;
-                        this.props.changeDesignParameterConstraint(dp.name, MIN, value);
-//                        console.log(dp.name + ' MIN ' + value + ' ' + dp.units);
-                    } else {
-                        value = this.state.tc[i] + this.state.dir[i] * this.state.tc[i] * c0;
-                        this.props.changeDesignParameterConstraint(dp.name, MAX, value);
-//                        console.log(dp.name + ' MAX ' + value + ' ' + dp.units);
-                    }
+                element = design.symbol_table[j];
+                if (this.state.ldir[i] < 0) {
+                    value = this.state.tc[i] + this.state.dir[i] * this.state.tc[i] * c0;
+                    this.props.changeSymbolConstraint(element.name, MIN, value);
+//                        console.log(element.name + ' MIN ' + value + ' ' + element.units);
                 } else {
-                    sv = design.state_variables[j - design.design_parameters.length];
-                    if (this.state.ldir[i] < 0) {
-                        value = this.state.tc[i] + this.state.dir[i] * this.state.tc[i] * c0;
-                        this.props.changeStateVariableConstraint(sv.name, MIN, value);
-//                        console.log(sv.name + ' MIN ' + value + ' ' + sv.units);
-                    } else {
-                        value = this.state.tc[i] + this.state.dir[i] * this.state.tc[i] * c0;
-                        this.props.changeStateVariableConstraint(sv.name, MAX, value);
-//                        console.log(sv.name + ' MAX ' + value + ' ' + sv.units);
-                    }
+                    value = this.state.tc[i] + this.state.dir[i] * this.state.tc[i] * c0;
+                    this.props.changeSymbolConstraint(element.name, MAX, value);
+//                        console.log(element.name + ' MAX ' + value + ' ' + element.units);
                 }
             }
             design = store.getState(); // @@@
@@ -622,29 +508,19 @@ class ActionTrade extends React.Component {
 //        console.log('In onFeasibleRestart');
 //        console.log('state=',this.state);
         var design;
-        var dp;
-        var sv;
+        var element;
         const { store } = this.context;
         design = store.getState();
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
-            if (j < design.design_parameters.length) {
-                dp = design.design_parameters[j];
-                if (this.state.ldir[i] < 0) {
-                    this.props.changeDesignParameterConstraint(dp.name, MIN, this.state.tc[i]);
-                } else {
-                    this.props.changeDesignParameterConstraint(dp.name, MAX, this.state.tc[i]);
-                }
+            element = design.symbol_table[j];
+            if (this.state.ldir[i] < 0) {
+                this.props.changeSymbolConstraint(element.name, MIN, this.state.tc[i]);
             } else {
-                sv = design.state_variables[j - design.design_parameters.length];
-                if (this.state.ldir[i] < 0) {
-                    this.props.changeStateVariableConstraint(sv.name, MIN, this.state.tc[i]);
-                } else {
-                    this.props.changeStateVariableConstraint(sv.name, MAX, this.state.tc[i]);
-                }
+                this.props.changeSymbolConstraint(element.name, MAX, this.state.tc[i]);
             }
         }
-        this.props.restoreDesignParameterValues();
+        this.props.restoreInputSymbolValues();
         this.commonViolationSetup();
         this.commonArbitraryOrProportional(this.state.dir);
         this.setState({
@@ -674,7 +550,7 @@ class ActionTrade extends React.Component {
         const { store } = this.context;
 //        design = store.getState(); // @@@
 //        this.props.search(); // @@@
-        design = store.getState(); // Re-access store to get latest dp and sv values
+        design = store.getState(); // Re-access store to get latest element values
         if (design.result.objective_value <= design.system_controls.objmin) {
             ncode = 'ACCEPTED TRADE RESULT';
             this.props.changeResultTerminationCondition(ncode);
@@ -692,32 +568,22 @@ class ActionTrade extends React.Component {
     onEstablishDone() {
 //      console.log('In onEstablishDone');
 //      console.log('state=',this.state);
-      this.props.restoreDesignParameterValues();
+      this.props.restoreInputSymbolValues();
       var design;
-      var dp;
-      var sv;
+      var element;
       var ncode;
       const { store } = this.context;
       design = store.getState();
       for (let i = 0; i < this.state.nviol; i++) {
           let j = this.state.vflag[i];
-          if (j < design.design_parameters.length) {
-              dp = design.design_parameters[j];
-              if (this.state.ldir[i] < 0) {
-                  this.props.changeDesignParameterConstraint(dp.name, MIN, this.state.tc[i]);
-              } else {
-                  this.props.changeDesignParameterConstraint(dp.name, MAX, this.state.tc[i]);
-              }
+          element = design.symbol_table[j];
+          if (this.state.ldir[i] < 0) {
+              this.props.changeSymbolConstraint(element.name, MIN, this.state.tc[i]);
           } else {
-              sv = design.state_variables[j - design.design_parameters.length];
-              if (this.state.ldir[i] < 0) {
-                  this.props.changeStateVariableConstraint(sv.name, MIN, this.state.tc[i]);
-              } else {
-                  this.props.changeStateVariableConstraint(sv.name, MAX, this.state.tc[i]);
-              }
+              this.props.changeSymbolConstraint(element.name, MAX, this.state.tc[i]);
           }
       }
-      this.props.restoreDesignParameterValues();
+      this.props.restoreInputSymbolValues();
       ncode = 'DECLINED TRADE RESULT';
       this.props.changeResultTerminationCondition(ncode);
       this.setState({
@@ -736,27 +602,17 @@ class ActionTrade extends React.Component {
         var design;
         const { store } = this.context;
         design = store.getState();
-        var dp;
-        var sv;
+        var element;
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
-            if (j < design.design_parameters.length) {
-                dp = design.design_parameters[j];
-                if (this.state.ldir[i] < 0) {
-                    this.props.changeDesignParameterConstraint(dp.name, MIN, this.state.tc[i]);
-                } else {
-                    this.props.changeDesignParameterConstraint(dp.name, MAX, this.state.tc[i]);
-                }
+            element = design.symbol_table[j];
+            if (this.state.ldir[i] < 0) {
+                this.props.changeSymbolConstraint(element.name, MIN, this.state.tc[i]);
             } else {
-                sv = design.state_variables[j - design.design_parameters.length];
-                if (this.state.ldir[i] < 0) {
-                    this.props.changeStateVariableConstraint(sv.name, MIN, this.state.tc[i]);
-                } else {
-                    this.props.changeStateVariableConstraint(sv.name, MAX, this.state.tc[i]);
-                }
+                this.props.changeSymbolConstraint(element.name, MAX, this.state.tc[i]);
             }
         }
-        this.props.restoreDesignParameterValues();
+        this.props.restoreInputSymbolValues();
         this.commonViolationSetup()
         this.setState({
             notFeasibleModal: !this.state.notFeasibleModal,
@@ -767,7 +623,7 @@ class ActionTrade extends React.Component {
     onNotFeasibleRepeat() {
 //      console.log('In onNotFeasibleRepeat');
 //      console.log('state=',this.state);
-//      this.props.saveDesignParameterValues(); // @@@
+//      this.props.saveInputSymbolValues(); // @@@
       this.commonViolationSetup()
       this.setState({
           notFeasibleModal: !this.state.notFeasibleModal,
@@ -826,18 +682,12 @@ class ActionTrade extends React.Component {
                             {
                                 this.state.vflag.map((j,i) => {
                                     var design;
-                                    var dp;
-                                    var sv;
+                                    var element;
                                     var dname;
                                     const { store } = this.context;
                                     design = store.getState();
-                                    if (j < design.design_parameters.length) {
-                                        dp = design.design_parameters[j];
-                                        dname = dp.name;
-                                    } else {
-                                        sv = design.state_variables[j - design.design_parameters.length];
-                                        dname = sv.name;
-                                    }
+                                    element = design.symbol_table[j];
+                                    dname = element.name;
                                     return (
                                         <Row key={dname}>
                                             <Col className="align-middle text-left" xs="4">{dname}</Col>
@@ -928,27 +778,17 @@ class ActionTrade extends React.Component {
 
 //    clister() {
 //        var design;
-//        var dp;
-//        var sv;
+//        var element;
 //        const { store } = this.context;
 //        design = store.getState();
 //        console.log('CONSTRAINT                % VIOLATION           LEVEL');
 //        for (let i = 0; i < this.state.nviol; i++) {
 //            let j = this.state.vflag[i];
-//            if (j < design.design_parameters.length) {
-//                dp = design.design_parameters[j];
-//                if (this.state.ldir[i] < 0) {
-//                    console.log(dp.name + ' MIN ' + dp.vmin * 100.0 + ' ' + dp.cmin + ' ' + dp.units);
-//                } else {
-//                    console.log(dp.name + ' MAX ' + dp.vmax * 100.0 + ' ' + dp.cmax + ' ' + dp.units);
-//                }
+//            element = design.symbol_table[j];
+//            if (this.state.ldir[i] < 0) {
+//                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
 //            } else {
-//                sv = design.state_variables[j - design.design_parameters.length];
-//                if (this.state.ldir[i] < 0) {
-//                    console.log(sv.name + ' MIN ' + sv.vmin * 100.0 + ' ' + sv.cmin + ' ' + sv.units);
-//                } else {
-//                    console.log(sv.name + ' MAX ' + sv.vmax * 100.0 + ' ' + sv.cmax + ' ' + sv.units);
-//                }
+//                console.log(element.name + ' MAX ' + element.vmax * 100.0 + ' ' + element.cmax + ' ' + element.units);
 //            }
 //        }
 //    }
@@ -966,81 +806,43 @@ class ActionTrade extends React.Component {
                 {
                     this.state.vflag.map((j,i) => {
                         var design;
-                        var dp;
-                        var sv;
+                        var element;
                         var constraint_class;
                         const { store } = this.context;
                         design = store.getState();
-                        if (j < design.design_parameters.length) {
-                            dp = design.design_parameters[j];
-                            if (this.state.ldir[i] < 0) {
-//                                console.log(dp.name + ' MIN ' + dp.vmin * 100.0 + ' ' + dp.cmin + ' ' + dp.units);
-                                if (design.result.objective_value < design.system_controls.objmin) {
-                                    constraint_class = (dp.lmin & CONSTRAINED && dp.vmin > 0.0) ? 'text-low-danger align-middle text-right' : 'text-right';
-                                } else {
-                                    constraint_class = (dp.lmin & CONSTRAINED && dp.vmin > 0.0) ? 'text-danger align-middle text-right font-weight-bold' : 'text-right';
-                                }
-                                return (
-                                        <Row key={dp.name}>
-                                            <Col className="align-middle text-left" xs="3">{dp.name}</Col>
-                                            <Col className="align-middle text-left" xs="1">MIN</Col>
-                                            <Col className="align-middle text-right" xs="3">{(dp.vmin * 100.0).toFixed(1)}%</Col>
-                                            <Col className={constraint_class} xs="3">{dp.cmin.toFixed(4)}</Col>
-                                            <Col className="align-middle text-right" xs="2">{dp.units}</Col>
-                                        </Row>
-                                    );
+                        element = design.symbol_table[j];
+                        if (this.state.ldir[i] < 0) {
+//                                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
+                            if (design.result.objective_value < design.system_controls.objmin) {
+                                constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-low-danger align-middle text-right' : 'text-right';
                             } else {
-//                                console.log(dp.name + ' MAX ' + dp.vmax * 100.0 + ' ' + dp.cmax + ' ' + dp.units);
-                                if (design.result.objective_value < design.system_controls.objmin) {
-                                    constraint_class = (dp.lmax & CONSTRAINED && dp.vmax > 0.0) ? 'text-low-danger align-middle text-right' : 'text-right';
-                                } else {
-                                    constraint_class = (dp.lmax & CONSTRAINED && dp.vmax > 0.0) ? 'text-danger align-middle text-right font-weight-bold' : 'text-right';
-                                }
-                                return (
-                                        <Row key={dp.name}>
-                                            <Col className="align-middle text-left" xs="3">{dp.name}</Col>
-                                            <Col className="align-middle text-left" xs="1">MAX</Col>
-                                            <Col className="align-middle text-right" xs="3">{(dp.vmax * 100.0).toFixed(1)}%</Col>
-                                            <Col className={constraint_class} xs="3">{dp.cmax.toFixed(4)}</Col>
-                                            <Col className="align-middle text-right" xs="2">{dp.units}</Col>
-                                        </Row>
-                                    );
+                                constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-danger align-middle text-right font-weight-bold' : 'text-right';
                             }
+                            return (
+                                    <Row key={element.name}>
+                                        <Col className="align-middle text-left" xs="3">{element.name}</Col>
+                                        <Col className="align-middle text-left" xs="1">MIN</Col>
+                                        <Col className="align-middle text-right" xs="3">{(element.vmin * 100.0).toFixed(1)}%</Col>
+                                        <Col className={constraint_class} xs="3">{element.cmin.toFixed(4)}</Col>
+                                        <Col className="align-middle text-right" xs="2">{element.units}</Col>
+                                    </Row>
+                                );
                         } else {
-                            sv = design.state_variables[j - design.design_parameters.length];
-                            if (this.state.ldir[i] < 0) {
-//                                console.log(sv.name + ' MIN ' + sv.vmin * 100.0 + ' ' + sv.cmin + ' ' + sv.units);
-                                if (design.result.objective_value < design.system_controls.objmin) {
-                                    constraint_class = (sv.lmin & CONSTRAINED && sv.vmin > 0.0) ? 'text-low-danger align-middle text-right' : 'text-right';
-                                } else {
-                                    constraint_class = (sv.lmin & CONSTRAINED && sv.vmin > 0.0) ? 'text-danger align-middle text-right font-weight-bold' : 'text-right';
-                                }
-                                return (
-                                        <Row key={sv.name}>
-                                            <Col className="align-middle text-left" xs="3">{sv.name}</Col>
-                                            <Col className="align-middle text-left" xs="1">MIN</Col>
-                                            <Col className="align-middle text-right" xs="3">{(sv.vmin * 100.0).toFixed(1)}%</Col>
-                                            <Col className={constraint_class} xs="3">{sv.cmin.toFixed(4)}</Col>
-                                            <Col className="align-middle text-right" xs="2">{sv.units}</Col>
-                                        </Row>
-                                    );
+//                                console.log(element.name + ' MAX ' + element.vmax * 100.0 + ' ' + element.cmax + ' ' + element.units);
+                            if (design.result.objective_value < design.system_controls.objmin) {
+                                constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-low-danger align-middle text-right' : 'text-right';
                             } else {
-//                                console.log(sv.name + ' MAX ' + sv.vmax * 100.0 + ' ' + sv.cmax + ' ' + sv.units);
-                                if (design.result.objective_value < design.system_controls.objmin) {
-                                    constraint_class = (sv.lmax & CONSTRAINED && sv.vmax > 0.0) ? 'text-low-danger align-middle text-right' : 'text-right';
-                                } else {
-                                    constraint_class = (sv.lmax & CONSTRAINED && sv.vmax > 0.0) ? 'text-danger align-middle text-right font-weight-bold' : 'text-right';
-                                }
-                                return (
-                                        <Row key={sv.name}>
-                                            <Col className="align-middle text-left" xs="3">{sv.name}</Col>
-                                            <Col className="align-middle text-left" xs="1">MAX</Col>
-                                            <Col className="align-middle text-right" xs="3">{(sv.vmax * 100.0).toFixed(1)}%</Col>
-                                            <Col className={constraint_class} xs="3">{sv.cmax.toFixed(4)}</Col>
-                                            <Col className="align-middle text-right" xs="2">{sv.units}</Col>
-                                        </Row>
-                                    );
+                                constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-danger align-middle text-right font-weight-bold' : 'text-right';
                             }
+                            return (
+                                    <Row key={element.name}>
+                                        <Col className="align-middle text-left" xs="3">{element.name}</Col>
+                                        <Col className="align-middle text-left" xs="1">MAX</Col>
+                                        <Col className="align-middle text-right" xs="3">{(element.vmax * 100.0).toFixed(1)}%</Col>
+                                        <Col className={constraint_class} xs="3">{element.cmax.toFixed(4)}</Col>
+                                        <Col className="align-middle text-right" xs="2">{element.units}</Col>
+                                    </Row>
+                                );
                         }
                     })
                 }
@@ -1059,10 +861,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    changeDesignParameterConstraint: changeDesignParameterConstraint,
-    saveDesignParameterValues: saveDesignParameterValues,
-    restoreDesignParameterValues: restoreDesignParameterValues,
-    changeStateVariableConstraint: changeStateVariableConstraint,
+    changeSymbolConstraint: changeSymbolConstraint,
+    saveInputSymbolValues: saveInputSymbolValues,
+    restoreInputSymbolValues: restoreInputSymbolValues,
     changeResultTerminationCondition: changeResultTerminationCondition,
     search: search
 };

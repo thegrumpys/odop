@@ -1,12 +1,12 @@
-import * as offsets from './offsets';
+import * as o from './offsets';
 export function eqnset(p) {
     var x = [];
-    x[offsets.Volume] = p[offsets.Length] * p[offsets.Width] * p[offsets.Height];
-    x[offsets.SurfaceArea] = 2.0 * p[offsets.Length] * p[offsets.Width] + 2.0 * p[offsets.Length] * p[offsets.Height] + 2.0 * p[offsets.Width] * p[offsets.Height];
-    x[offsets.VolToSurfArea] = x[offsets.Volume] / x[offsets.SurfaceArea];
-    x[offsets.Girth] = 2.0 * p[offsets.Width] + 2.0 * p[offsets.Height];
-    x[offsets.LengthPlusGirth] = p[offsets.Length] + x[offsets.Girth];
-    x[offsets.Diagonal] = Math.sqrt(p[offsets.Length] * p[offsets.Length] + p[offsets.Width] * p[offsets.Width] + p[offsets.Height] * p[offsets.Height]);
-    x[offsets.Weight] = x[offsets.Volume] * p[offsets.Density];
+    x[o.Volume] = p[o.Length] * p[o.Width] * p[o.Height];
+    x[o.SurfaceArea] = 2.0 * p[o.Length] * p[o.Width] + 2.0 * p[o.Length] * p[o.Height] + 2.0 * p[o.Width] * p[o.Height];
+    x[o.VolToSurfArea] = x[o.Volume] / x[o.SurfaceArea];
+    x[o.Girth] = 2.0 * p[o.Width] + 2.0 * p[o.Height];
+    x[o.LengthPlusGirth] = p[o.Length] + x[o.Girth];
+    x[o.Diagonal] = Math.sqrt(p[o.Length] * p[o.Length] + p[o.Width] * p[o.Width] + p[o.Height] * p[o.Height]);
+    x[o.Weight] = x[o.Volume] * p[o.Density];
     return x;
 }

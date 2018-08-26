@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, UncontrolledTooltip } from 'reactstrap';
-import ConstraintsMaxRowDesignParameter from './ConstraintsMaxRowDesignParameter';
-import ConstraintsMaxRowStateVariable from './ConstraintsMaxRowStateVariable';
+import ConstraintsMaxRowIndependentVariable from './ConstraintsMaxRowIndependentVariable';
+import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
 import { connect } from 'react-redux';
 
 export class ConstraintsMaxTable extends React.Component {
@@ -21,7 +21,7 @@ export class ConstraintsMaxTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.design_parameters.map((design_parameter) => <ConstraintsMaxRowDesignParameter key={design_parameter.name} design_parameter={design_parameter} />)}
+                        {this.props.symbol_table.map((element) => element.input && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} />)}
                     </tbody>
                     <thead>
                         <tr>
@@ -29,7 +29,7 @@ export class ConstraintsMaxTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.state_variables.map((state_variable) => <ConstraintsMaxRowStateVariable key={state_variable.name} state_variable={state_variable} />)}
+                        {this.props.symbol_table.map((element) => !element.input && <ConstraintsMaxRowDependentVariable key={element.name} element={element} />)}
                     </tbody>
                 </Table>
                 <UncontrolledTooltip placement="top" target="IVMaxConstraintTitle">Upper limits on Independent Variables</UncontrolledTooltip>
@@ -44,8 +44,7 @@ export class ConstraintsMaxTable extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    design_parameters: state.design_parameters,
-    state_variables: state.state_variables,
+    symbol_table: state.symbol_table,
     objective_value: state.result.objective_value
 });
 

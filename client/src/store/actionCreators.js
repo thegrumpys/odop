@@ -2,23 +2,19 @@ import { STARTUP,
     LOAD, 
     CHANGE_NAME, 
     
-    CHANGE_DESIGN_PARAMETER_VALUE, 
-    CHANGE_DESIGN_PARAMETER_VALUES, 
-    SAVE_DESIGN_PARAMETER_VALUES, 
-    RESTORE_DESIGN_PARAMETER_VALUES, 
-    CHANGE_DESIGN_PARAMETER_VIOLATION, 
-    CHANGE_DESIGN_PARAMETER_CONSTRAINT, 
-    SET_DESIGN_PARAMETER_FLAG, 
-    RESET_DESIGN_PARAMETER_FLAG, 
+    CHANGE_SYMBOL_VALUE, 
+    CHANGE_SYMBOL_VIOLATION, 
+    CHANGE_SYMBOL_CONSTRAINT, 
+    SET_SYMBOL_FLAG, 
+    RESET_SYMBOL_FLAG, 
     
-    CHANGE_STATE_VARIABLE_VALUE, 
-    CHANGE_STATE_VARIABLE_VALUES, 
-    CHANGE_STATE_VARIABLE_VIOLATION, 
-    CHANGE_STATE_VARIABLE_CONSTRAINT, 
-    SAVE_STATE_VARIABLE_CONSTRAINTS, 
-    RESTORE_STATE_VARIABLE_CONSTRAINTS, 
-    SET_STATE_VARIABLE_FLAG, 
-    RESET_STATE_VARIABLE_FLAG, 
+    CHANGE_INPUT_SYMBOL_VALUES, 
+    SAVE_INPUT_SYMBOL_VALUES, 
+    RESTORE_INPUT_SYMBOL_VALUES, 
+
+    CHANGE_OUTPUT_SYMBOL_VALUES, 
+    SAVE_SYMBOL_CONSTRAINTS, 
+    RESTORE_SYMBOL_CONSTRAINTS, 
     
     CHANGE_RESULT_OBJECTIVE_VALUE, 
     CHANGE_RESULT_TERMINATION_CONDITION, 
@@ -53,9 +49,9 @@ export function changeName(name) {
     }
   }
 
-export function changeDesignParameterValue(name, value, merit) {
+export function changeSymbolValue(name, value, merit) {
     return {
-        type: CHANGE_DESIGN_PARAMETER_VALUE,
+        type: CHANGE_SYMBOL_VALUE,
         payload: {
             name,
             value,
@@ -64,9 +60,53 @@ export function changeDesignParameterValue(name, value, merit) {
     }
 }
 
-export function changeDesignParameterValues(values, merit) {
+export function changeSymbolViolation(name, minmax, value) {
+  return {
+      type: CHANGE_SYMBOL_VIOLATION,
+      payload: {
+          name,
+          minmax,
+          value
+      }
+  }
+}
+
+export function changeSymbolConstraint(name, minmax, value) {
     return {
-        type: CHANGE_DESIGN_PARAMETER_VALUES,
+        type: CHANGE_SYMBOL_CONSTRAINT,
+        payload: {
+            name,
+            minmax,
+            value
+        }
+    }
+  }
+
+export function setSymbolFlag(name, minmax, mask) {
+    return {
+        type: SET_SYMBOL_FLAG,
+        payload: {
+            name,
+            minmax,
+            mask
+        }
+    }
+  }
+
+export function resetSymbolFlag(name, minmax, mask) {
+    return {
+        type: RESET_SYMBOL_FLAG,
+        payload: {
+            name,
+            minmax,
+            mask
+        }
+    }
+  }
+
+export function changeInputSymbolValues(values, merit) {
+    return {
+        type: CHANGE_INPUT_SYMBOL_VALUES,
         payload: {
             values,
             merit
@@ -74,142 +114,44 @@ export function changeDesignParameterValues(values, merit) {
     }
 }
 
-export function saveDesignParameterValues() {
+export function saveInputSymbolValues() {
     return {
-        type: SAVE_DESIGN_PARAMETER_VALUES
+        type: SAVE_INPUT_SYMBOL_VALUES
     }
 }
 
-export function restoreDesignParameterValues(merit) {
+export function restoreInputSymbolValues(merit) {
     return {
-        type: RESTORE_DESIGN_PARAMETER_VALUES,
+        type: RESTORE_INPUT_SYMBOL_VALUES,
         payload: {
             merit
         }
     }
 }
 
-export function changeDesignParameterViolation(name, minmax, value) {
-  return {
-      type: CHANGE_DESIGN_PARAMETER_VIOLATION,
-      payload: {
-          name,
-          minmax,
-          value
-      }
-  }
-}
-
-export function changeDesignParameterConstraint(name, minmax, value) {
+export function changeOutputSymbolValues(values) {
     return {
-        type: CHANGE_DESIGN_PARAMETER_CONSTRAINT,
-        payload: {
-            name,
-            minmax,
-            value
-        }
-    }
-  }
-
-export function setDesignParameterFlag(name, minmax, mask) {
-    return {
-        type: SET_DESIGN_PARAMETER_FLAG,
-        payload: {
-            name,
-            minmax,
-            mask
-        }
-    }
-  }
-
-export function resetDesignParameterFlag(name, minmax, mask) {
-    return {
-        type: RESET_DESIGN_PARAMETER_FLAG,
-        payload: {
-            name,
-            minmax,
-            mask
-        }
-    }
-  }
-
-export function changeStateVariableValue(name, value) {
-    return {
-        type: CHANGE_STATE_VARIABLE_VALUE,
-        payload: {
-            name,
-            value
-        }
-    }
-}
-
-export function changeStateVariableValues(values) {
-    return {
-        type: CHANGE_STATE_VARIABLE_VALUES,
+        type: CHANGE_OUTPUT_SYMBOL_VALUES,
         payload: {
             values
         }
     }
 }
 
-export function changeStateVariableViolation(name, minmax, value) {
-  return {
-      type: CHANGE_STATE_VARIABLE_VIOLATION,
-      payload: {
-          name,
-          minmax,
-          value
-      }
-  }
-}
-
-export function changeStateVariableConstraint(name, minmax, value) {
+export function saveOutputSymbolConstraints(name) {
     return {
-        type: CHANGE_STATE_VARIABLE_CONSTRAINT,
-        payload: {
-            name,
-            minmax,
-            value
-        }
-    }
-  }
-
-export function saveStateVariableConstraints(name) {
-    return {
-        type: SAVE_STATE_VARIABLE_CONSTRAINTS,
+        type: SAVE_SYMBOL_CONSTRAINTS,
         payload: {
             name
         }
     }
   }
 
-export function restoreStateVariableConstraints(name) {
+export function restoreOutputSymbolConstraints(name) {
     return {
-        type: RESTORE_STATE_VARIABLE_CONSTRAINTS,
+        type: RESTORE_SYMBOL_CONSTRAINTS,
         payload: {
             name
-        }
-    }
-  }
-
-export function setStateVariableFlag(name, minmax, mask) {
-    return {
-        type: SET_STATE_VARIABLE_FLAG,
-        payload: {
-            name,
-            minmax,
-            mask
-        }
-    }
-  }
-
-export function resetStateVariableFlag(name, minmax, mask) {
-    return {
-        type: RESET_STATE_VARIABLE_FLAG,
-        payload: {
-            name,
-            minmax,
-            mask
         }
     }
   }

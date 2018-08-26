@@ -1,4 +1,4 @@
-import { changeStateVariableValues } from '../actionCreators';
+import { changeOutputSymbolValues } from '../actionCreators';
 import { eqnset as pcyl_eqnset } from '../../designtypes/Piston-Cylinder/eqnset';
 import { eqnset as solid_eqnset } from '../../designtypes/Solid/eqnset';
 import { eqnset as spring_eqnset } from '../../designtypes/Spring/eqnset';
@@ -6,18 +6,20 @@ import { eqnset as spring_eqnset } from '../../designtypes/Spring/eqnset';
 // Invoke Equation Set
 export function invokeEquationSet(store) {
     
-    var dp;
+    var element;
 
     var design = store.getState();
     
-    // Loop to create p from design_parameters
+    // Loop to create p from symbol_table
     var p = [];
-    for (let i = 0; i < design.design_parameters.length; i++) {
-        dp = design.design_parameters[i];
-        p[i] = dp.value;
+    for (let i = 0; i < design.symbol_table.length; i++) {
+        element = design.symbol_table[i];
+        if (element.input) {
+            p[i] = element.value;
+        }
     }
 
-    // Compute state_variables x from d and p using equations
+    // Compute outputs x from inputs p using equations
     var x;
     switch(design.type) {
     default:
@@ -33,6 +35,6 @@ export function invokeEquationSet(store) {
     }
 
     // Compute and dispatch state variable changes
-    store.dispatch(changeStateVariableValues(x));
+    store.dispatch(changeOutputSymbolValues(x));
     
 }

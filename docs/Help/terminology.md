@@ -21,7 +21,7 @@ independent variables to produce the desired value of a FIXed dependent
 variable.  A FIX operation on a dependent variable increases the
 computational demand of the numerical search problem.
 
-CALCULATION INPUTS &nbsp;  (Constants)   
+CALCULATION INPUTS &nbsp;  (constants)   
 Referred to as "constants" in earlier versions of the software, 
 Calculation Inputs are inputs to the design equations and are adjustable by the
 user, but are not manipulated by the search algorithm or subject to FIX or constraints. 

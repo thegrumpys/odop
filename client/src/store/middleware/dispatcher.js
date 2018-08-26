@@ -1,17 +1,15 @@
 import { STARTUP, 
     LOAD,
     
-    CHANGE_DESIGN_PARAMETER_VALUE, 
-    CHANGE_DESIGN_PARAMETER_VALUES, 
-    RESTORE_DESIGN_PARAMETER_VALUES, 
-    CHANGE_DESIGN_PARAMETER_CONSTRAINT, 
-    SET_DESIGN_PARAMETER_FLAG, 
-    RESET_DESIGN_PARAMETER_FLAG, 
+    CHANGE_SYMBOL_VALUE, 
+    CHANGE_SYMBOL_CONSTRAINT, 
+    SET_SYMBOL_FLAG, 
+    RESET_SYMBOL_FLAG, 
     
-    CHANGE_STATE_VARIABLE_CONSTRAINT, 
-    RESTORE_STATE_VARIABLE_CONSTRAINTS, 
-    SET_STATE_VARIABLE_FLAG, 
-    RESET_STATE_VARIABLE_FLAG, 
+    CHANGE_INPUT_SYMBOL_VALUES, 
+    RESTORE_INPUT_SYMBOL_VALUES, 
+    
+    RESTORE_SYMBOL_CONSTRAINTS, 
     
     SEARCH, 
     SEEK
@@ -25,6 +23,8 @@ import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiv
 
 export const dispatcher = store => next => action => {
     
+    var design;
+
     const returnValue = next(action);
 
 //    console.log('In dispatcher');
@@ -43,52 +43,45 @@ export const dispatcher = store => next => action => {
         setSclDen(store);
         updateViolationsAndObjectiveValue(store);
         break;
-    case CHANGE_DESIGN_PARAMETER_VALUE:
-        var design = store.getState();
-        design.design_parameters.find((element) => {
+
+    case CHANGE_SYMBOL_VALUE:
+        design = store.getState();
+        design.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
-                !(element.lmin & EQUATIONSET) && invokeInit(store);
+                !element.equationset && invokeInit(store);
                 return true;
             } else {
                 return false;
             }
         });
-        if (action.payload.name) invokeInit(store);
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
-    case CHANGE_DESIGN_PARAMETER_VALUES:
-        // DO NOT INVOKE BECAUSE OF RECURSION: invokeInit(store);
+    case CHANGE_SYMBOL_CONSTRAINT:
+        updateViolationsAndObjectiveValue(store);
+        break;
+    case RESTORE_SYMBOL_CONSTRAINTS:
+        updateViolationsAndObjectiveValue(store);
+        break;
+    case SET_SYMBOL_FLAG:
+        updateViolationsAndObjectiveValue(store);
+        break;
+    case RESET_SYMBOL_FLAG:
+        updateViolationsAndObjectiveValue(store);
+        break;
+
+    case CHANGE_INPUT_SYMBOL_VALUES:
+        // DO NOT INVOKE invokeInit(store) BECAUSE OF RECURSION
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
-    case RESTORE_DESIGN_PARAMETER_VALUES:
+    case RESTORE_INPUT_SYMBOL_VALUES:
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
-    case CHANGE_DESIGN_PARAMETER_CONSTRAINT:
-        updateViolationsAndObjectiveValue(store);
-        break;
-    case SET_DESIGN_PARAMETER_FLAG:
-        updateViolationsAndObjectiveValue(store);
-        break;
-    case RESET_DESIGN_PARAMETER_FLAG:
-        updateViolationsAndObjectiveValue(store);
-        break;
-    case CHANGE_STATE_VARIABLE_CONSTRAINT:
-        updateViolationsAndObjectiveValue(store);
-        break;
-    case RESTORE_STATE_VARIABLE_CONSTRAINTS:
-        updateViolationsAndObjectiveValue(store);
-        break;
-    case SET_STATE_VARIABLE_FLAG:
-        updateViolationsAndObjectiveValue(store);
-        break;
-    case RESET_STATE_VARIABLE_FLAG:
-        updateViolationsAndObjectiveValue(store);
-        break;
+
     case SEARCH:
-        var design = store.getState();
+        design = store.getState();
         search(store, design.system_controls.objmin);
         break;
     case SEEK:
@@ -97,5 +90,6 @@ export const dispatcher = store => next => action => {
     default:
         break;
     }
+
     return returnValue;
 }

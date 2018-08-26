@@ -1,4 +1,4 @@
-import * as offsets from './offsets';
+import * as o from './offsets';
 export function eqnset(p) {
     /** ***************************************************************** */
     /*
@@ -18,9 +18,9 @@ export function eqnset(p) {
      * if "special" call requesting direct output.
      */
     var x = [];
-    x[offsets.area] = Math.PI * p[offsets.radius] * p[offsets.radius];
-    x[offsets.force] = p[offsets.pressure] * x[offsets.area];
-    x[offsets.stress] = (p[offsets.pressure] * p[offsets.radius]) / (2.0 * p[offsets.thickness]);
+    x[o.area] = Math.PI * p[o.radius] * p[o.radius];
+    x[o.force] = p[o.pressure] * x[o.area];
+    x[o.stress] = (p[o.pressure] * p[o.radius]) / (2.0 * p[o.thickness]);
 //    if (M_FLAG)
 //        console.log('No report available.');
     return x;

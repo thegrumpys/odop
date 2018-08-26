@@ -1,5 +1,5 @@
 import { MAX, FIXED } from '../actionTypes';
-import { saveDesignParameterValues, restoreDesignParameterValues, changeResultTerminationCondition } from '../actionCreators';
+import { saveInputSymbolValues, restoreInputSymbolValues, changeResultTerminationCondition } from '../actionCreators';
 import { search } from './search';
 import { despak } from './despak';
 
@@ -13,7 +13,7 @@ export function seek(store, action) {
     var SDIR = 0;
     var M_DEN;
     var M_NUM;
-    var design = store.getState(); // Re-access store to get latest dp and sv values
+    var design = store.getState(); // Re-access store to get latest element values
     if (action.payload.minmax === MAX) {
         SDIR = +1;
     } else {
@@ -23,35 +23,20 @@ export function seek(store, action) {
     var temp;
     var dname;
     var ncode;
-    var dp;
-    var sv;
+    var element;
     var p;
     var obj;
-    for (let i = 0; !found && i < design.design_parameters.length; i++) {
-        dp = design.design_parameters[i];
-        if (dp.name.startsWith(action.payload.name)) {
-            temp = dp.value;
-            dname = dp.name;
-            if (dp.lmin & FIXED) {
+    for (let i = 0; !found && i < design.symbol_table.length; i++) {
+        element = design.symbol_table[i];
+        if (element.name.startsWith(action.payload.name)) {
+            temp = element.value;
+            dname = element.name;
+            if (element.lmin & FIXED) {
                 ncode = dname+' IS FIXED.   USE OF SEEK IS NOT APPROPRIATE.';
                 store.dispatch(changeResultTerminationCondition(ncode));
                 return;
             }
-            SOUGHT = (i + 1);
-            found = true;
-        }
-    }
-    for (let i = 0; !found && i < design.state_variables.length; i++) {
-        sv = design.state_variables[i];
-        if (sv.name.startsWith(action.payload.name)) {
-            temp = sv.value;
-            dname = sv.name;
-            if (sv.lmin & FIXED) {
-                ncode = dname+' IS FIXED.   USE OF SEEK IS NOT APPROPRIATE.';
-                store.dispatch(changeResultTerminationCondition(ncode));
-                return;
-            }
-            SOUGHT = -(i + 1);
+            SOUGHT = i + 1; // Skip 0 value which is special
             found = true;
         }
     }
@@ -60,26 +45,24 @@ export function seek(store, action) {
     if (M_DEN < design.system_controls.smallnum) {
         M_DEN = 1.0;
     }
-    store.dispatch(saveDesignParameterValues());
+    store.dispatch(saveInputSymbolValues());
     obj = search(store, -1.0, merit);
-    design = store.getState(); // Re-access store to get latest dp and sv values
-    if (SOUGHT > 0) {
-        M_NUM = design.design_parameters[SOUGHT - 1].value;
-    } else {
-        M_NUM = design.state_variables[-SOUGHT - 1].value;
-    }
+    design = store.getState(); // Re-access store to get latest element values
+    M_NUM = design.symbol_table[SOUGHT - 1].value;
     M_DEN = Math.abs(M_NUM) / design.system_controls.mfn_wt;
     if (M_DEN < design.system_controls.smallnum) {
         M_DEN = 1.0;
     }
     p = [];
-    for (let i = 0; i < design.design_parameters.length; i++) {
-        dp = design.design_parameters[i];
-        p[i] = dp.value;
+    for (let i = 0; i < design.symbol_table.length; i++) {
+        element = design.symbol_table[i];
+        if (element.input) {
+            p[i] = element.value;
+        }
     }
     obj = despak(p, store);
     if (obj < design.system_controls.objmin) {
-        store.dispatch(restoreDesignParameterValues());
+        store.dispatch(restoreInputSymbolValues());
     } else {
         obj = search(store, design.system_controls.objmin);
     }
@@ -100,19 +83,12 @@ export function seek(store, action) {
         var m_funct;
         if (SOUGHT === 0) {
             m_funct = 0.0;
-        } else if (SOUGHT > 0) { // DP
-            dp = design.design_parameters[SOUGHT - 1];
+        } else { // DP
+            element = design.symbol_table[SOUGHT - 1];
             if (SDIR < 0) {
-                m_funct = (dp.value - M_NUM) / M_DEN;
+                m_funct = (element.value - M_NUM) / M_DEN;
             } else {
-                m_funct = (-dp.value + M_NUM) / M_DEN;
-            }
-        } else { // SV
-            sv = design.state_variables[-SOUGHT - 1];
-            if (SDIR < 0) {
-                m_funct = (sv.value - M_NUM) / M_DEN;
-            } else {
-                m_funct = (-sv.value + M_NUM) / M_DEN;
+                m_funct = (-element.value + M_NUM) / M_DEN;
             }
         }
         return m_funct;

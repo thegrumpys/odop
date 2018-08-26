@@ -2,23 +2,19 @@ import { STARTUP,
     LOAD, 
     CHANGE_NAME, 
     
-    CHANGE_DESIGN_PARAMETER_VALUE, 
-    CHANGE_DESIGN_PARAMETER_VALUES, 
-    SAVE_DESIGN_PARAMETER_VALUES, 
-    RESTORE_DESIGN_PARAMETER_VALUES, 
-    CHANGE_DESIGN_PARAMETER_VIOLATION, 
-    CHANGE_DESIGN_PARAMETER_CONSTRAINT, 
-    SET_DESIGN_PARAMETER_FLAG, 
-    RESET_DESIGN_PARAMETER_FLAG, 
+    CHANGE_SYMBOL_VALUE, 
+    CHANGE_SYMBOL_VIOLATION, 
+    CHANGE_SYMBOL_CONSTRAINT, 
+    SAVE_SYMBOL_CONSTRAINTS, 
+    RESTORE_SYMBOL_CONSTRAINTS, 
+    SET_SYMBOL_FLAG, 
+    RESET_SYMBOL_FLAG, 
     
-    CHANGE_STATE_VARIABLE_VALUE, 
-    CHANGE_STATE_VARIABLE_VALUES, 
-    CHANGE_STATE_VARIABLE_VIOLATION, 
-    CHANGE_STATE_VARIABLE_CONSTRAINT, 
-    SAVE_STATE_VARIABLE_CONSTRAINTS, 
-    RESTORE_STATE_VARIABLE_CONSTRAINTS, 
-    SET_STATE_VARIABLE_FLAG, 
-    RESET_STATE_VARIABLE_FLAG, 
+    CHANGE_INPUT_SYMBOL_VALUES, 
+    SAVE_INPUT_SYMBOL_VALUES, 
+    RESTORE_INPUT_SYMBOL_VALUES, 
+    
+    CHANGE_OUTPUT_SYMBOL_VALUES, 
     
     CHANGE_RESULT_OBJECTIVE_VALUE, 
     CHANGE_RESULT_TERMINATION_CONDITION, 
@@ -31,6 +27,7 @@ import { STARTUP,
 import { sclden } from './middleware/sclden';
 
 export function reducers(state, action) {
+    var i=0;
 //    console.log('In reducers');
 //    console.log(action);
     switch (action.type) {
@@ -42,230 +39,179 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             name: action.payload.name
         });
-    case CHANGE_DESIGN_PARAMETER_VALUE:
+        
+// SYMBOL
+        
+    case CHANGE_SYMBOL_VALUE:
         return Object.assign({}, state, {
-            design_parameters: state.design_parameters.map((design_parameter) => {
-                if (design_parameter.name === action.payload.name) {
-                    return Object.assign({}, design_parameter, {
+            symbol_table: state.symbol_table.map((element) => {
+                if (element.name === action.payload.name) {
+                    return Object.assign({}, element, {
                         value: action.payload.value
                     });
                 }
-                return design_parameter;
+                return element;
             })
         });
-    case CHANGE_DESIGN_PARAMETER_VALUES:
+    case CHANGE_SYMBOL_VIOLATION:
         return Object.assign({}, state, {
-            design_parameters: state.design_parameters.map((design_parameter, index) => {
-                return Object.assign({}, design_parameter, {
-                    value: action.payload.values[index]
-                });
-            })
-        });
-    case SAVE_DESIGN_PARAMETER_VALUES:
-        return Object.assign({}, state, {
-            design_parameters: state.design_parameters.map((design_parameter) => {
-                return Object.assign({}, design_parameter, {
-                    oldvalue: design_parameter.value
-        });
-            })
-        });
-    case RESTORE_DESIGN_PARAMETER_VALUES:
-        return Object.assign({}, state, {
-            design_parameters: state.design_parameters.map((design_parameter) => {
-                return Object.assign({}, design_parameter, {
-                    value: design_parameter.oldvalue
-                });
-            })
-        });
-    case CHANGE_DESIGN_PARAMETER_VIOLATION:
-        return Object.assign({}, state, {
-            design_parameters: state.design_parameters.map((design_parameter) => {
-                if (design_parameter.name === action.payload.name) {
+            symbol_table: state.symbol_table.map((element) => {
+                if (element.name === action.payload.name) {
                     if (action.payload.minmax === MIN) {
-                        return Object.assign({}, design_parameter, {
+                        return Object.assign({}, element, {
                             vmin: action.payload.value
                         });
                     } else {
-                        return Object.assign({}, design_parameter, {
+                        return Object.assign({}, element, {
                             vmax: action.payload.value
                         });
                     }
                 }
-                return design_parameter;
+                return element;
             })
         });
-    case CHANGE_DESIGN_PARAMETER_CONSTRAINT:
+    case CHANGE_SYMBOL_CONSTRAINT:
         return Object.assign({}, state, {
-            design_parameters: state.design_parameters.map((design_parameter) => {
-                if (design_parameter.name === action.payload.name) {
+            symbol_table: state.symbol_table.map((element) => {
+                if (element.name === action.payload.name) {
                     if (action.payload.minmax === MIN) {
-                        return Object.assign({}, design_parameter, {
+                        return Object.assign({}, element, {
                             cmin: action.payload.value,
-                            smin: sclden(state.system_controls, design_parameter.value, action.payload.value, design_parameter.sdlim, design_parameter.lmin)
+                            smin: sclden(state.system_controls, element.value, action.payload.value, element.sdlim, element.lmin)
                         });
                     } else {
-                        return Object.assign({}, design_parameter, {
+                        return Object.assign({}, element, {
                             cmax: action.payload.value,
-                            smax: sclden(state.system_controls, design_parameter.value, action.payload.value, design_parameter.sdlim, design_parameter.lmax)
+                            smax: sclden(state.system_controls, element.value, action.payload.value, element.sdlim, element.lmax)
                         });
                     }
                 }
-                return design_parameter;
+                return element;
             })
         });
-    case SET_DESIGN_PARAMETER_FLAG:
+    case SAVE_SYMBOL_CONSTRAINTS:
         return Object.assign({}, state, {
-            design_parameters: state.design_parameters.map((design_parameter) => {
-                if (design_parameter.name === action.payload.name) {
-                    if (action.payload.minmax === MIN) {
-                        return Object.assign({}, design_parameter, {
-                            lmin: design_parameter.lmin | action.payload.mask
-                        });
-                    } else {
-                        return Object.assign({}, design_parameter, {
-                            lmax: design_parameter.lmax | action.payload.mask
-                        });
-                    }
-                }
-                return design_parameter;
-            })
-        });
-    case RESET_DESIGN_PARAMETER_FLAG:
-        return Object.assign({}, state, {
-            design_parameters: state.design_parameters.map((design_parameter) => {
-                if (design_parameter.name === action.payload.name) {
-                    if (action.payload.minmax === MIN) {
-                        return Object.assign({}, design_parameter, {
-                            lmin: design_parameter.lmin & ~action.payload.mask
-                        });
-                    } else {
-                        return Object.assign({}, design_parameter, {
-                            lmax: design_parameter.lmax & ~action.payload.mask
-                        });
-                    }
-                }
-                return design_parameter;
-            })
-        });
-    case CHANGE_STATE_VARIABLE_VALUE:
-        return Object.assign({}, state, {
-            state_variables: state.state_variables.map((state_variable) => {
-                if (state_variable.name === action.payload.name) {
-                    return Object.assign({}, state_variable, {
-                        value: action.payload.value
+            symbol_table: state.symbol_table.map((element) => {
+                if (element.name === action.payload.name) {
+                    return Object.assign({}, element, {
+                        oldlmin: element.lmin,
+                        oldcmin: element.cmin,
+                        oldlmax: element.lmax,
+                        oldcmax: element.cmax
                     });
                 }
-                return state_variable;
+                return element;
             })
         });
-    case CHANGE_STATE_VARIABLE_VALUES:
+    case RESTORE_SYMBOL_CONSTRAINTS:
         return Object.assign({}, state, {
-            state_variables: state.state_variables.map((state_variable, index) => {
-                return Object.assign({}, state_variable, {
-                    value: action.payload.values[index]
-                });
-            })
-        });
-    case CHANGE_STATE_VARIABLE_VIOLATION:
-        return Object.assign({}, state, {
-            state_variables: state.state_variables.map((state_variable) => {
-                if (state_variable.name === action.payload.name) {
-                    if (action.payload.minmax === MIN) {
-                        return Object.assign({}, state_variable, {
-                            vmin: action.payload.value
-                        });
-                    } else {
-                        return Object.assign({}, state_variable, {
-                            vmax: action.payload.value
-                        });
-                    }
-                }
-                return state_variable;
-            })
-        });
-    case CHANGE_STATE_VARIABLE_CONSTRAINT:
-        return Object.assign({}, state, {
-            state_variables: state.state_variables.map((state_variable) => {
-                if (state_variable.name === action.payload.name) {
-                    if (action.payload.minmax === MIN) {
-                        return Object.assign({}, state_variable, {
-                            cmin: action.payload.value,
-                            smin: sclden(state.system_controls, state_variable.value, action.payload.value, state_variable.sdlim, state_variable.lmin)
-                        });
-                    } else {
-                        return Object.assign({}, state_variable, {
-                            cmax: action.payload.value,
-                            smax: sclden(state.system_controls, state_variable.value, action.payload.value, state_variable.sdlim, state_variable.lmax)
-                        });
-                    }
-                }
-                return state_variable;
-            })
-        });
-    case SAVE_STATE_VARIABLE_CONSTRAINTS:
-        return Object.assign({}, state, {
-            state_variables: state.state_variables.map((state_variable) => {
-                if (state_variable.name === action.payload.name) {
-                    return Object.assign({}, state_variable, {
-                        oldlmin: state_variable.lmin,
-                        oldcmin: state_variable.cmin,
-                        oldlmax: state_variable.lmax,
-                        oldcmax: state_variable.cmax
+            symbol_table: state.symbol_table.map((element) => {
+                if (element.name === action.payload.name) {
+                    return Object.assign({}, element, {
+                        lmin: element.oldlmin,
+                        cmin: element.oldcmin,
+                        smin: sclden(state.system_controls, element.value, element.oldcmin, element.sdlim, element.oldlmin),
+                        lmax: element.oldlmax,
+                        cmax: element.oldcmax,
+                        smax: sclden(state.system_controls, element.value, element.oldcmax, element.sdlim, element.oldlmax)
                     });
                 }
-                return state_variable;
+                return element;
             })
         });
-    case RESTORE_STATE_VARIABLE_CONSTRAINTS:
+    case SET_SYMBOL_FLAG:
         return Object.assign({}, state, {
-            state_variables: state.state_variables.map((state_variable) => {
-                if (state_variable.name === action.payload.name) {
-                    return Object.assign({}, state_variable, {
-                        lmin: state_variable.oldlmin,
-                        cmin: state_variable.oldcmin,
-                        smin: sclden(state.system_controls, state_variable.value, state_variable.oldcmin, state_variable.sdlim, state_variable.oldlmin),
-                        lmax: state_variable.oldlmax,
-                        cmax: state_variable.oldcmax,
-                        smax: sclden(state.system_controls, state_variable.value, state_variable.oldcmax, state_variable.sdlim, state_variable.oldlmax)
+            symbol_table: state.symbol_table.map((element) => {
+                if (element.name === action.payload.name) {
+                    if (action.payload.minmax === MIN) {
+                        return Object.assign({}, element, {
+                            lmin: element.lmin | action.payload.mask
+                        });
+                    } else {
+                        return Object.assign({}, element, {
+                            lmax: element.lmax | action.payload.mask
+                        });
+                    }
+                }
+                return element;
+            })
+        });
+    case RESET_SYMBOL_FLAG:
+        return Object.assign({}, state, {
+            symbol_table: state.symbol_table.map((element) => {
+                if (element.name === action.payload.name) {
+                    if (action.payload.minmax === MIN) {
+                        return Object.assign({}, element, {
+                            lmin: element.lmin & ~action.payload.mask
+                        });
+                    } else {
+                        return Object.assign({}, element, {
+                            lmax: element.lmax & ~action.payload.mask
+                        });
+                    }
+                }
+                return element;
+            })
+        });
+        
+// INPUT SYMBOL
+        
+    case CHANGE_INPUT_SYMBOL_VALUES:
+        i=0;
+        return Object.assign({}, state, {
+            symbol_table: state.symbol_table.map((element, index) => {
+                if (element.input) {
+                    return Object.assign({}, element, {
+                        value: action.payload.values[i++]
                     });
+                } else {
+                    return element;
                 }
-                return state_variable;
             })
         });
-    case SET_STATE_VARIABLE_FLAG:
+    case SAVE_INPUT_SYMBOL_VALUES:
         return Object.assign({}, state, {
-            state_variables: state.state_variables.map((state_variable) => {
-                if (state_variable.name === action.payload.name) {
-                    if (action.payload.minmax === MIN) {
-                        return Object.assign({}, state_variable, {
-                            lmin: state_variable.lmin | action.payload.mask
-                        });
-                    } else {
-                        return Object.assign({}, state_variable, {
-                            lmax: state_variable.lmax | action.payload.mask
-                        });
-                    }
+            symbol_table: state.symbol_table.map((element) => {
+                if (element.input) {
+                    return Object.assign({}, element, {
+                        oldvalue: element.value
+                    });
+                } else {
+                    return element;
                 }
-                return state_variable;
             })
         });
-    case RESET_STATE_VARIABLE_FLAG:
+    case RESTORE_INPUT_SYMBOL_VALUES:
         return Object.assign({}, state, {
-            state_variables: state.state_variables.map((state_variable) => {
-                if (state_variable.name === action.payload.name) {
-                    if (action.payload.minmax === MIN) {
-                        return Object.assign({}, state_variable, {
-                            lmin: state_variable.lmin & ~action.payload.mask
-                        });
-                    } else {
-                        return Object.assign({}, state_variable, {
-                            lmax: state_variable.lmax & ~action.payload.mask
-                        });
-                    }
+            symbol_table: state.symbol_table.map((element) => {
+                if (element.input) {
+                    return Object.assign({}, element, {
+                        value: element.oldvalue
+                    });
+                } else {
+                    return element;
                 }
-                return state_variable;
             })
         });
+        
+// OUTPUT SYMBOL
+        
+    case CHANGE_OUTPUT_SYMBOL_VALUES:
+        i=0;
+        return Object.assign({}, state, {
+            symbol_table: state.symbol_table.map((element, index) => {
+                if (!element.input) {
+                    return Object.assign({}, element, {
+                        value: action.payload.values[i++]
+                    });
+                } else {
+                    return element;
+                }
+            })
+        });
+        
+// RESULT
+         
     case CHANGE_RESULT_OBJECTIVE_VALUE:
         return {
             ...state,
@@ -290,11 +236,17 @@ export function reducers(state, action) {
                 violated_constraint_count: action.payload.violated_constraint_count
             }
         }
+        
+// SYMTEM CONTROL
+        
     case CHANGE_SYSTEM_CONTROLS_VALUE:
         return {
             ...state,
             system_controls: action.payload.system_controls
         }
+        
+// LABELS
+        
     case CHANGE_LABELS_VALUE:
         return {
             ...state,

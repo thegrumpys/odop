@@ -1,5 +1,5 @@
 import { MIN, MAX } from '../actionTypes';
-import { changeDesignParameterConstraint, changeStateVariableConstraint } from '../actionCreators';
+import { changeSymbolConstraint } from '../actionCreators';
 
 // Startup
 export function setSclDen(store) {
@@ -7,13 +7,9 @@ export function setSclDen(store) {
     var design = store.getState();
 
     // Set smin/smax by changing constraints to their current values
-    design.design_parameters.forEach((design_parameter) => {
-        store.dispatch(changeDesignParameterConstraint(design_parameter.name, MIN, design_parameter.cmin));
-        store.dispatch(changeDesignParameterConstraint(design_parameter.name, MAX, design_parameter.cmax));
-    });
-    design.state_variables.forEach((state_variable) => {
-        store.dispatch(changeStateVariableConstraint(state_variable.name, MIN, state_variable.cmin));
-        store.dispatch(changeStateVariableConstraint(state_variable.name, MAX, state_variable.cmax));
+    design.symbol_table.forEach((element) => {
+        store.dispatch(changeSymbolConstraint(element.name, MIN, element.cmin));
+        store.dispatch(changeSymbolConstraint(element.name, MAX, element.cmax));
     });
 
 }

@@ -1,4 +1,4 @@
-import { changeConstantValues } from '../actionCreators';
+import { changeInputSymbolValues } from '../actionCreators';
 import { init as pcyl_init } from '../../designtypes/Piston-Cylinder/init';
 import { init as solid_init } from '../../designtypes/Solid/init';
 import { init as spring_init } from '../../designtypes/Spring/init';
@@ -8,18 +8,20 @@ export function invokeInit(store) {
     
 //    console.log('Entering invokeInit');
     
-    var dp;
+    var element;
 
     var design = store.getState();
     
-    // Loop to create p from design_parameters
+    // Loop to create p from symbol_table
     var p = [];
-    for (let i = 0; i < design.design_parameters.length; i++) {
-        dp = design.design_parameters[i];
-        p[i] = dp.value;
+    for (let i = 0; i < design.symbol_table.length; i++) {
+        element = design.symbol_table[i];
+        if (element.input) {
+            p[i] = element.value;
+        }
     }
 
-    // Update design_parameter from p to p
+    // Update inputs from p to p
     switch(design.type) {
     default:
     case 'Piston-Cylinder':
@@ -33,8 +35,8 @@ export function invokeInit(store) {
         break;
     }
 
-    // Compute and dispatch design_parameter changes
-    store.dispatch(changeDesignParameterValues(p));
+    // Compute and dispatch input changes
+    store.dispatch(changeInputSymbolValues(p));
     
 //    console.log('Exiting invokeInit');
 }

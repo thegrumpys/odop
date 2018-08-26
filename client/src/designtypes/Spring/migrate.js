@@ -14,11 +14,11 @@ export function migrate(design) {
     /* eslint-disable no-fallthrough */
 //    console.log('In migrate design.version=',design.version);
     switch(design.version) {
-    case "1":
+    case '1':
         // Current model version
         // console.log('Convert from 1 to 2');
         // To be defined - presently do nothing
-        // migrated_design.version = "2"; // last thing... set the migrated model version
+        // migrated_design.version = '2'; // last thing... set the migrated model version
         break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');

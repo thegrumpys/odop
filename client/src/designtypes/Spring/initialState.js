@@ -1,79 +1,98 @@
-import { CONSTRAINED, EQUATIONSET, HIDDEN } from '../../store/actionTypes';
+import { CONSTRAINED } from '../../store/actionTypes';
 export const initialState = {
-    "design_parameters": [
+    "symbol_table": [
         {
+            "input": true,
             "name": "OD_Free",
             "value": 1.1,
             "units": "inches",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0,
             "cmax": 2.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Outside diameter in free (no load) condition"
+            "tooltip": "Outside diameter in free (no load) condition",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Wire_Dia",
             "value": 0.1055,
             "units": "inch",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0,
             "cmax": 0.5,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Wire diameter"
+            "tooltip": "Wire diameter",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "L_Free",
             "value": 3.25,
             "units": "inches",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0,
             "cmax": 5.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Length in free (no load) condition"
+            "tooltip": "Length in free (no load) condition",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Coils_T",
             "value": 10.0,
             "units": "coils",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0,
             "cmax": 20,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Total number of coils"
+            "tooltip": "Total number of coils",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Force_1",
             "value": 1.0,
             "units": "pounds",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0,
             "cmax": 50,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Working load at point 1 (Length L_1)"
+            "tooltip": "Working load at point 1 (Length L_1)",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Force_2",
             "value": 40.0,
             "units": "pounds",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0,
             "cmax": 50,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Working load at point 2 (Length L_2)"
+            "tooltip": "Working load at point 2 (Length L_2)",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Spring_Type",
             "value": "Compression",
             "units": "",
@@ -83,9 +102,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Compression spring design"
+            "tooltip": "Compression spring design",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Material_Type",
             "value": 1,
             "units": "",
@@ -97,9 +119,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Select wire material"
+            "tooltip": "Select wire material",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "ASTM/Fed_Spec",
             "value": "A228/QQW-470",
             "units": "",
@@ -109,9 +134,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Wire specification"
+            "tooltip": "Wire specification",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "End_Type",
             "value": "Closed&Ground",
             "units": "",
@@ -121,9 +149,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Select end type"
+            "tooltip": "Select end type",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Catalog_Number",
             "value": "undefined",
             "units": "",
@@ -132,9 +163,12 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Process",
             "value": "Cold_Coiled",
             "units": "",
@@ -144,9 +178,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Spring winding process temperature"
+            "tooltip": "Spring winding process temperature",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Material_File",
             "value": "pass in mat_ips.json?",
             "units": "",
@@ -155,9 +192,12 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Dialog_Switch",
             "value": 0,
             "units": "switch",
@@ -166,9 +206,12 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Prop_Calc_Method",
             "value": 1,
             "units": "switch",
@@ -177,9 +220,12 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "End_Calc_Method",
             "value": 1,
             "units": "switch",
@@ -188,9 +234,12 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Life_Category",
             "value": 1,
             "units": "index",
@@ -200,9 +249,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Select cycle life target. Controls allowable stresses"
+            "tooltip": "Select cycle life target. Controls allowable stresses",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Material_Index",
             "value": 2,
             "units": "index",
@@ -211,9 +263,12 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "End_Type_Index",
             "value": 1,
             "units": "index",
@@ -222,9 +277,12 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Inactive_Coils",
             "value": 2.0,
             "units": "coils",
@@ -234,9 +292,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Number of coils not contributing to deflection based on end type"
+            "tooltip": "Number of coils not contributing to deflection based on end type",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Add_Coils@Solid",
             "value": 0.0,
             "units": "coils",
@@ -246,9 +307,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Additional coils not contributing to deflection"
+            "tooltip": "Additional coils not contributing to deflection",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Density",
             "value": 0.036,
             "units": "lb/cu-in",
@@ -258,9 +322,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Wire material density"
+            "tooltip": "Wire material density",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Torsion_Modulus",
             "value": 11500000.0,
             "units": "PSI",
@@ -270,9 +337,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Wire torsion modulus (G)"
+            "tooltip": "Wire torsion modulus (G)",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "Hot_Factor_Kh",
             "value": 1.0,
             "units": "ratio",
@@ -282,9 +352,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Reduction factor applied to modulus of hot-wound materials"
+            "tooltip": "Reduction factor applied to modulus of hot-wound materials",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "%_Tensile_Endur",
             "value": 50.0,
             "units": "%",
@@ -294,9 +367,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Allowable percent of tensile strength for selected life cycle category"
+            "tooltip": "Allowable percent of tensile strength for selected life cycle category",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "%_Tensile_Stat",
             "value": 50.0,
             "units": "%",
@@ -306,9 +382,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Allowable percent of tensile strength for static applications"
+            "tooltip": "Allowable percent of tensile strength for static applications",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "unused",
             "value": 75.0,
             "units": "",
@@ -317,71 +396,87 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": true,
             "name": "tbase010",
             "value": 0.010,
             "units": "",
-            "lmin": HIDDEN,
-            "lmax": HIDDEN,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": true
         },
         {
+            "input": true,
             "name": "tbase400",
             "value": 0.400,
             "units": "",
-            "lmin": HIDDEN,
-            "lmax": HIDDEN,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": true
         },
         {
+            "input": true,
             "name": "const_term",
             "value": 1.0,
             "units": "",
-            "lmin": HIDDEN,
-            "lmax": HIDDEN,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": true
         },
         {
+            "input": true,
             "name": "slope_term",
             "value": 1.0,
             "units": "",
-            "lmin": HIDDEN,
-            "lmax": HIDDEN,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": true
         },
         {
+            "input": true,
             "name": "tensile_010",
             "value": 100000.0,
             "units": "PSI",
-            "lmin": HIDDEN,
-            "lmax": HIDDEN,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0
-        }
-    ],
-    "state_variables": [
+            "sdlim": 1.0,
+            "equationset": false,
+            "hidden": true
+        },
         {
+            "input": false,
             "name": "Mean_Dia",
             "value": 0.9945,
             "units": "inches",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0.1,
             "cmax": 10.0,
             "ioclass": 0,
@@ -389,258 +484,322 @@ export const initialState = {
             "tooltip": "Average of inside and outside diameters"
         },
         {
+            "input": false,
             "name": "Coils_A",
             "value": 8.0,
             "units": "coils",
-            "lmin": EQUATIONSET|CONSTRAINED,
-            "lmax": EQUATIONSET|CONSTRAINED,
+            "lmin": CONSTRAINED,
+            "lmax": CONSTRAINED,
             "cmin": 1.0,
             "cmax": 40.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Number of Active coils"
+            "tooltip": "Number of Active coils",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Rate",
             "value": 22.6315,
             "units": "Lb/In",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 1.0,
             "cmax": 200.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Spring rate (spring constant); slope of force-deflection curve"
+            "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Deflect_1",
             "value": 0.04,
             "units": "inches",
-            "lmin": EQUATIONSET|CONSTRAINED,
-            "lmax": EQUATIONSET,
+            "lmin": CONSTRAINED,
+            "lmax": 0,
             "cmin": 0.0,
             "cmax": 20.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Deflection from free to load point 1"
+            "tooltip": "Deflection from free to load point 1",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Deflect_2",
             "value": 1.7674,
             "units": "inches",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 1.0,
             "cmax": 20.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Deflection from free to load point 2"
+            "tooltip": "Deflection from free to load point 2",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "L_1",
             "value": 3.2058,
             "units": "inches",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 1.0,
             "cmax": 200.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Spring length at load point 1"
+            "tooltip": "Spring length at load point 1",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "L_2",
             "value": 1.4826,
             "units": "inches",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 1.0,
             "cmax": 100.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Spring length at load point 2"
+            "tooltip": "Spring length at load point 2",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "L_Stroke",
             "value": 1.7233,
             "units": "inches",
-            "lmin": EQUATIONSET|CONSTRAINED,
-            "lmax": EQUATIONSET,
+            "lmin": CONSTRAINED,
+            "lmax": 0,
             "cmin": 0.050,
             "cmax": 100.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Length of stroke from point 1 to point 2"
+            "tooltip": "Length of stroke from point 1 to point 2",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "L_Solid",
             "value": 1.0550,
             "units": "inches",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 1.0,
             "cmax": 10.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Spring length when fully compressed"
+            "tooltip": "Spring length when fully compressed",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Slenderness",
             "value": 3.2680,
             "units": "ratio",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 1.0,
             "cmax": 10.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Ratio of free length (L_Free) to mean diameter (Mean_Dia)"
+            "tooltip": "Ratio of free length (L_Free) to mean diameter (Mean_Dia)",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "ID_Free",
             "value": 0.8890,
             "units": "inches",
-            "lmin": EQUATIONSET|CONSTRAINED,
-            "lmax": EQUATIONSET,
+            "lmin": CONSTRAINED,
+            "lmax": 0,
             "cmin": 0.1,
             "cmax": 10.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Inside diameter in free (no load) condition"
+            "tooltip": "Inside diameter in free (no load) condition",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Weight",
             "value": 0.0776,
             "units": "pounds",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 0.01,
             "cmax": 10.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Weight of one spring"
+            "tooltip": "Weight of one spring",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Spring_Index",
             "value": 9.426,
             "units": "ratio",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 4.0,
             "cmax": 10.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Ratio of mean coil diameter (Mean_Dia) to wire diameter (Wire_Dia)"
+            "tooltip": "Ratio of mean coil diameter (Mean_Dia) to wire diameter (Wire_Dia)",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Force_Solid",
             "value": 49.67,
             "units": "pounds",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 4.0,
             "cmax": 100.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Load required to fully compress the spring"
+            "tooltip": "Load required to fully compress the spring",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Stress_1",
             "value": 2489.3,
             "units": "PSI",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 100.0,
             "cmax": 10000.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Torsion stress in wire at load point 1"
+            "tooltip": "Torsion stress in wire at load point 1",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Stress_2",
             "value": 99573.98,
             "units": "PSI",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 100.0,
             "cmax": 10000.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Torsion stress in wire at load point 2"
+            "tooltip": "Torsion stress in wire at load point 2",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Stress_Solid",
             "value": 123661.2,
             "units": "PSI",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 100.0,
             "cmax": 10000.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Torsion stress in wire when spring is fully compressed"
+            "tooltip": "Torsion stress in wire when spring is fully compressed",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "FS_2",
             "value": 1.3127,
             "units": "ratio",
-            "lmin": EQUATIONSET|CONSTRAINED,
-            "lmax": EQUATIONSET|CONSTRAINED,
+            "lmin": CONSTRAINED,
+            "lmax": CONSTRAINED,
             "cmin": 1.02,
             "cmax": 1.5,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Factor of safety at load point 2"
+            "tooltip": "Factor of safety at load point 2",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "FS_Solid",
             "value": 1.057,
             "units": "ratio",
-            "lmin": EQUATIONSET|CONSTRAINED,
-            "lmax": EQUATIONSET,
+            "lmin": CONSTRAINED,
+            "lmax": 0,
             "cmin": 1.0,
             "cmax": 1.5,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Factor of safety when the spring is fully compressed"
+            "tooltip": "Factor of safety when the spring is fully compressed",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "FS_CycleLife",
             "value": 1.2581,
             "units": "ratio",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 1.02,
             "cmax": 1.5,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Factor of safety to achieve the target cycle life category"
+            "tooltip": "Factor of safety to achieve the target cycle life category",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Cycle_Life",
             "value": 33266.8,
             "units": "ratio",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET,
+            "lmin": 0,
+            "lmax": 0,
             "cmin": 1.02,
             "cmax": 1.5,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Rough estimate of the average number of cycles to failure"
+            "tooltip": "Rough estimate of the average number of cycles to failure",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "%_Avail_Deflect",
             "value": 80.52,
             "units": "%",
-            "lmin": EQUATIONSET,
-            "lmax": EQUATIONSET|CONSTRAINED,
+            "lmin": 0,
+            "lmax": CONSTRAINED,
             "cmin": 0,
             "cmax": 90.0,
             "ioclass": 0,
             "sdlim": 0,
-            "tooltip": "Deflection of load point 2 as a percent of total available deflection"
+            "tooltip": "Deflection of load point 2 as a percent of total available deflection",
+            "equationset": true,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Tensile",
             "value": 261000.0,
             "units": "PSI",
@@ -650,9 +809,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Wire tensile strength (computed as a function of wire diameter)"
+            "tooltip": "Wire tensile strength (computed as a function of wire diameter)",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Stress_Lim_Endur",
             "value": 130709.6,
             "units": "PSI",
@@ -662,9 +824,12 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Allowable stress for selected life cycle category"
+            "tooltip": "Allowable stress for selected life cycle category",
+            "equationset": false,
+            "hidden": false
         },
         {
+            "input": false,
             "name": "Stress_Lim_Stat",
             "value": 130709.6,
             "units": "PSI",
@@ -674,7 +839,9 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Allowable stress for static applications"
+            "tooltip": "Allowable stress for static applications",
+            "equationset": false,
+            "hidden": false
         }
     ],
     "labels": [

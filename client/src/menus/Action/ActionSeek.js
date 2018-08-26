@@ -14,7 +14,7 @@ class ActionSeek extends React.Component {
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
-            name: this.props.design_parameters[0].name, // TODO: A fudge
+            name: this.props.symbol_table[0].name, // TODO: A fudge
             minmax: MIN // TODO: A fudge
         };
     }
@@ -71,11 +71,8 @@ class ActionSeek extends React.Component {
                                <InputGroupText>Name: </InputGroupText>
                             </InputGroupAddon>
                             <Input className="align-middle" type="select" onChange={this.onNameSelect} value={this.state.name}>
-                                {this.props.design_parameters.map((design_parameter, index) =>
-                                    <option key={index} value={design_parameter.name}>{design_parameter.name}</option>
-                                )}
-                                {this.props.state_variables.map((state_variable, index) =>
-                                    <option key={index} value={state_variable.name}>{state_variable.name}</option>
+                                {this.props.symbol_table.map((element, index) =>
+                                    !element.hidden ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
                             </Input>
                         </InputGroup>
@@ -91,8 +88,7 @@ class ActionSeek extends React.Component {
 }  
 
 const mapStateToProps = state => ({
-    design_parameters: state.design_parameters, 
-    state_variables: state.state_variables
+    symbol_table: state.symbol_table
 });
 
 const mapDispatchToProps = {
