@@ -175,7 +175,7 @@ export function init(p) {
 //       hook_deflect_all=0.0;
 //    end;
 
-  console.log('In init x=',x);
+//  console.log('In init x=',x);
 
   return x;
 
