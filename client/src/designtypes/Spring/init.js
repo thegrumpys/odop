@@ -2,7 +2,7 @@ import * as o from './offsets';
 import * as mo from './mat_ips_offsets';
 export function init(p) {
 //    console.log('In init p=',p);
-
+ var x = [];
  var i;
  const ten3 = 1000.0;
  var tensile_400;
@@ -175,8 +175,8 @@ export function init(p) {
 //       hook_deflect_all=0.0;
 //    end;
 
-  console.log('In init p=',p);
+  console.log('In init x=',x);
 
-  return p;
+  return x;
 
 }

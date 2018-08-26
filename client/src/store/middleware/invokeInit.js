@@ -1,4 +1,4 @@
-import { changeInputSymbolValues } from '../actionCreators';
+import { changeOutputSymbolValues } from '../actionCreators';
 import { init as pcyl_init } from '../../designtypes/Piston-Cylinder/init';
 import { init as solid_init } from '../../designtypes/Solid/init';
 import { init as spring_init } from '../../designtypes/Spring/init';
@@ -21,22 +21,23 @@ export function invokeInit(store) {
         }
     }
 
-    // Update inputs from p to p
+    // Update inputs from p to x
+    var x = [];
     switch(design.type) {
     default:
     case 'Piston-Cylinder':
-        p = pcyl_init(p);
+        x = pcyl_init(p);
         break;
     case 'Solid':
-        p = solid_init(p);
+        x = solid_init(p);
         break;
     case 'Spring':
-        p = spring_init(p);
+        x = spring_init(p);
         break;
     }
 
     // Compute and dispatch input changes
-    store.dispatch(changeInputSymbolValues(p));
+    store.dispatch(changeOutputSymbolValues(x));
     
 //    console.log('Exiting invokeInit');
 }
