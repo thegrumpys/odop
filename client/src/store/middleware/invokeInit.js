@@ -21,8 +21,8 @@ export function invokeInit(store) {
         }
     }
 
-    // Update inputs from p to x
-    var x = [];
+    // Compute outputs x from inputs p using equations
+    var x;
     switch(design.type) {
     default:
     case 'Piston-Cylinder':
@@ -36,7 +36,7 @@ export function invokeInit(store) {
         break;
     }
 
-    // Compute and dispatch input changes
+    // Compute and dispatch output changes
     store.dispatch(changeOutputSymbolValues(x));
     
 //    console.log('Exiting invokeInit');

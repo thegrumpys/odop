@@ -23,7 +23,7 @@ export class NameValueUnitsTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.map((element,index) => element.input && element.equationset && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
+                        {this.props.symbol_table.map((element,index) => element.input && element.equationset && !element.hidden && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                     <thead>
                         <tr>
@@ -31,10 +31,10 @@ export class NameValueUnitsTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.map((element,index) => !element.input && element.equationset && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
+                        {this.props.symbol_table.map((element,index) => !element.input && element.equationset && !element.hidden && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                     <thead>
-                        { (this.props.symbol_table.reduce((accum,element)=>{if (!element.equationset) return accum+1; else return accum;}, 0) > 0) &&
+                        { (this.props.symbol_table.reduce((accum,element)=>{if (!element.equationset && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
                             (<tr>
                                 <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">Calculation Inputs</th>
                                 <UncontrolledTooltip placement="top" target="CITitle">Calculation Inputs Title ToolTip</UncontrolledTooltip>
@@ -42,7 +42,7 @@ export class NameValueUnitsTable extends React.Component {
                         }
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.map((element,index) => !element.equationset && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
+                        {this.props.symbol_table.map((element,index) => !element.equationset && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
                     </tbody>
                 </Table>
                 <UncontrolledTooltip placement="top" target="IVTitle">Inputs to design equations</UncontrolledTooltip>

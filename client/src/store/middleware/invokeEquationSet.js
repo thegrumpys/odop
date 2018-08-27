@@ -6,6 +6,8 @@ import { eqnset as spring_eqnset } from '../../designtypes/Spring/eqnset';
 // Invoke Equation Set
 export function invokeEquationSet(store) {
     
+//    console.log('Entering invokeEquationSet');
+    
     var element;
 
     var design = store.getState();
@@ -34,7 +36,8 @@ export function invokeEquationSet(store) {
         break;
     }
 
-    // Compute and dispatch state variable changes
+    // Compute and dispatch output changes
     store.dispatch(changeOutputSymbolValues(x));
     
+//    console.log('Exiting invokeEquationSet');
 }
