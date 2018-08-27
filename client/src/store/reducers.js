@@ -209,6 +209,7 @@ export function reducers(state, action) {
                 if (!element.input) {
                     value = action.payload.values[i++]
                     if (value !== undefined) {
+                        console.log('i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
                         return Object.assign({}, element, {
                             value: value
                         });

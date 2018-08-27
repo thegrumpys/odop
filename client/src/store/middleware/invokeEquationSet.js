@@ -14,15 +14,11 @@ export function invokeEquationSet(store) {
     
     // Loop to create p and x_in from symbol_table
     var p = [];
-    var x_in = [];
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (element.input) {
 //            console.log('p element=',element);
             p.push(element.value);
-        } else {
-//            console.log('x element=',element);
-            x_in.push(element.value);
         }
     }
 
@@ -31,13 +27,13 @@ export function invokeEquationSet(store) {
     switch(design.type) {
     default:
     case 'Piston-Cylinder':
-        x = pcyl_eqnset(p, x_in);
+        x = pcyl_eqnset(p);
         break;
     case 'Solid':
-        x = solid_eqnset(p, x_in);
+        x = solid_eqnset(p);
         break;
     case 'Spring':
-        x = spring_eqnset(p, x_in);
+        x = spring_eqnset(p);
         break;
     }
 

@@ -1,4 +1,4 @@
-// Independent Variables
+// Independent Variables (Input)
 export const OD_Free = 0;
 export const Wire_Dia = 1;
 export const L_Free = 2;
@@ -7,9 +7,25 @@ export const Force_1 = 4;
 export const Force_2 = 5;
 export const Spring_Type = 6;
 export const Material_Type = 7;
-export const Prop_Calc_Method = 8;
+export const Material_Index = 8;
+export const Prop_Calc_Method = 9;
+export const End_Type = 10;
+export const Catalog_Number = 11;
+export const Material_File = 12;
+export const Dialog_Switch = 13;
+export const End_Calc_Method = 14;
+export const Life_Category = 15;
+export const End_Type_Index = 16;
+export const Inactive_Coils = 17;
+export const Add_Coils_Solid = 18;
+export const Density = 19;
+export const Torsion_Modulus = 20;
+export const Hot_Factor_Kh = 21;
+export const tbase010 = 22; // Hidden
+export const tbase400 = 23; // Hidden
+export const unused = 24;
 
-// Dependent Variables
+// Dependent Variables (output)
 export const Mean_Dia = 0;
 export const Coils_A = 1;
 export const Rate = 2;
@@ -32,30 +48,13 @@ export const FactorSafety_Solid = 18;
 export const FS_CycleLife = 19;
 export const Cycle_Life = 20;
 export const PC_Avail_Deflect = 21;
-
-export const ASTM_Fed_Spec = 24;
-export const End_Type = 25;
-export const Catalog_Number = 26;
-export const Process = 27;
-export const Material_File = 28;
-export const Dialog_Switch = 29;
-export const End_Calc_Method = 31;
-export const Life_Category = 32;
-export const Material_Index = 33;
-export const End_Type_Index = 34;
-export const Inactive_Coils = 35;
-export const Add_Coils_Solid = 36;
-export const Density = 37;
-export const Torsion_Modulus = 38;
-export const Hot_Factor_Kh = 39;
-export const Tensile = 40;
-export const PC_Tensile_Endur = 41;
-export const PC_Tensile_Stat = 42;
-export const unused = 43;
-export const Stress_Lim_Endur = 44;
-export const Stress_Lim_Stat = 45;
-export const tbase010 = 46; // Hidden
-export const tbase400 = 47; // Hidden
-export const const_term = 48; // Hidden
-export const slope_term = 49; // Hidden
-export const tensile_010 = 50; // Hidden
+export const ASTM_Fed_Spec = 22;
+export const Process = 23;
+export const Tensile = 24;
+export const PC_Tensile_Endur = 25;
+export const PC_Tensile_Stat = 26;
+export const Stress_Lim_Endur = 27;
+export const Stress_Lim_Stat = 28;
+export const const_term = 29; // Hidden
+export const slope_term = 30; // Hidden
+export const tensile_010 = 31; // Hidden

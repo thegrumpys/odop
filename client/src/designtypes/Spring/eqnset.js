@@ -27,6 +27,13 @@ export function eqnset(p) {        /*    Compression  Spring  */
     temp = x[o.Spring_Index] * x[o.Spring_Index];
     x[o.Rate] = p[o.Hot_Factor_Kh] * p[o.Torsion_Modulus] * x[o.Mean_Dia] /
            (8.0 * x[o.Coils_A] * temp * temp);
+//    console.log('x=',x);
+//    console.log('x[o.Spring_Index]=',x[o.Spring_Index]);
+//    console.log('p[o.Hot_Factor_Kh]=',p[o.Hot_Factor_Kh]);
+//    console.log('p[o.Torsion_Modulus]=',p[o.Torsion_Modulus]);
+//    console.log('x[o.Mean_Dia]=',x[o.Mean_Dia]);
+//    console.log('x[o.Coils_A]=',x[o.Coils_A]);
+//    console.log('x[o.Rate]=',x[o.Rate]);
 
     x[o.Deflect_1] = p[o.Force_1] / x[o.Rate];
     x[o.Deflect_2] = p[o.Force_2] / x[o.Rate];
@@ -50,15 +57,15 @@ export function eqnset(p) {        /*    Compression  Spring  */
 
       if (p[o.Prop_Calc_Method] === 1) {
           x[o.Tensile] = p[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - p[o.const_term]) + p[o.tensile_010];
-//          console.log("eqnset Tensile = ", p[o.Tensile]);
+//          console.log("eqnset Tensile = ", x[o.Tensile]);
       }
       if (p[o.Prop_Calc_Method] <= 2) {
-          x[o.Stress_Lim_Endur] = p[o.Tensile] * p[o.PC_Tensile_Endur] / 100.0;
-          x[o.Stress_Lim_Stat]  = p[o.Tensile] * p[o.PC_Tensile_Stat]  / 100.0;
+          x[o.Stress_Lim_Endur] = x[o.Tensile] * p[o.PC_Tensile_Endur] / 100.0; // TODO Fixed trying to access x[o.Tensile] when Prop_Calc_Method == 2
+          x[o.Stress_Lim_Stat]  = x[o.Tensile] * p[o.PC_Tensile_Stat]  / 100.0; // TODO Fixed trying to access x[o.Tensile] when Prop_Calc_Method == 2
       }
 
     if (x[o.Stress_2] > zero) {
-        x[o.FactorSafety_2] = p[o.Stress_Lim_Stat] / x[o.Stress_2];
+        x[o.FactorSafety_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2]; // TODO Fixed trying to access x[o.Stress_Lim_Stat] when Prop_Calc_Method == 3
 //        console.log("eqnset FactorSafety_2 = ", x[o.FactorSafety_2]);
     }
        else x[o.FactorSafety_2] = 1.0;
@@ -79,9 +86,9 @@ export function eqnset(p) {        /*    Compression  Spring  */
         */
       stress_avg = (x[o.Stress_1] + x[o.Stress_2]) / 2.0;
       stress_rng = (x[o.Stress_2] - x[o.Stress_1]) / 2.0;
-      se2 = p[o.Stress_Lim_Endur] / 2.0;
-    x[o.FS_CycleLife] =  p[o.Stress_Lim_Stat] /
-         (kc * stress_rng * (p[o.Stress_Lim_Stat] - se2) / se2 + stress_avg);
+      se2 = x[o.Stress_Lim_Endur] / 2.0; // TODO Fixed trying to access x[o.Stress_Lim_Endur] when Prop_Calc_Method == 3
+    x[o.FS_CycleLife] =  x[o.Stress_Lim_Stat] / // TODO Fixed trying to access x[o.Stress_Lim_Stat] when Prop_Calc_Method == 3
+         (kc * stress_rng * (x[o.Stress_Lim_Stat] - se2) / se2 + stress_avg); // TODO Fixed trying to access x[o.Stress_Lim_Stat] when Prop_Calc_Method == 3
 
              /*  modified Goodman cycle life calculation  */
     if (p[o.Prop_Calc_Method] === 1 && p[o.Material_Index] !== 0) {
