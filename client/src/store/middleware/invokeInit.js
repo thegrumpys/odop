@@ -14,15 +14,20 @@ export function invokeInit(store) {
     
     // Loop to create p and x_in from symbol_table
     var p = [];
-    var x = [];
-    var j = 0;
+    var ip = 0;
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (element.input) {
-            console.log('export const ',element.name,' = ',j++,' // p');
+            console.log('export const',element.name,'=',ip++,';');
             p.push(element.value);
-        } else {
-            console.log('export const ',element.name,' = ',j++.' // x');
+        }
+    }
+    var x = [];
+    var ix = 0;
+    for (let i = 0; i < design.symbol_table.length; i++) {
+        element = design.symbol_table[i];
+        if (!element.input) {
+            console.log('export const',element.name,'=',ix++,';');
             x.push(element.value);
         }
     }

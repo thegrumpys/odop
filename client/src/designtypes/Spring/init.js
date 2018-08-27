@@ -1,5 +1,6 @@
 import * as o from './offsets';
 import * as mo from './mat_ips_offsets';
+
 export function init(p, x) {
 //    console.log('In init p=',p);
  var i;
@@ -26,8 +27,8 @@ export function init(p, x) {
  Cross check values of PROP_CALC_METHOD and END_CALC_METHOD.
 */
  //
-    i = p[o.Material_Type];
-//    console.log("i_1= ", i);
+    i = x[o.Material_Type];
+    console.log("i=", i);
 //    x[o.Material_Index] = i;
     
 // NOMORE:
@@ -92,12 +93,12 @@ export function init(p, x) {
 //    if (i > 0) {
 //    do;
 //    if prop_calc_method ^= 1 then             /*   debug  */
-//    if (p[o.Prop_Calc_Method] !== 1) {
+    if (x[o.Prop_Calc_Method] !== 1) {
 //           put skip list('TAB2D:   PROP_CALC_METHOD SET TO 1.');
-//        console.log('TAB2D:   PROP_CALC_METHOD SET TO 1.');
+        console.log('TAB2D:   PROP_CALC_METHOD SET TO 1.');
 //    prop_calc_method = 1;
-//        p[o.Prop_Calc_Method] = 1;
-//    }
+        x[o.Prop_Calc_Method] = 1;
+    }
 //
 //    material_type    = m_tab(material_index).matnam;
 //    astm_fed_spec    = m_tab(i).astm_fs;
@@ -122,7 +123,7 @@ export function init(p, x) {
 //    tensile_400      = m_tab(i).t400;
     tensile_400         = ten3 * m_tab[i][mo.t400];
     
-    var life_category = p[o.Life_Category];
+    var life_category = x[o.Life_Category];
 //    pc_tensile_endur = m_tab(i).pte(life_catagory);
     x[o.PC_Tensile_Endur] = m_tab[i][mo.pte1+life_category-1];
 //    pc_tensile_stat  = m_tab(i).fy;
@@ -139,11 +140,11 @@ export function init(p, x) {
 //    wire_dia=p(2);
 //    console.log("wire_dia = ", x[o.Wire_Dia]);
 //    const_term=log10(tbase010);
-    x[o.const_term] = Math.log10(p[o.tbase010]);
+    x[o.const_term] = Math.log10(x[o.tbase010]);
 //    slope_term=(tensile_400 - tensile_010) /
 //           (log10(tbase400) - const_term);
 //    console.log("tensile_400 = ", tensile_400);
-    x[o.slope_term] = (tensile_400 - x[o.tensile_010]) / (Math.log10(p[o.tbase400]) - x[o.const_term]);
+    x[o.slope_term] = (tensile_400 - x[o.tensile_010]) / (Math.log10(x[o.tbase400]) - x[o.const_term]);
 //    tensile=slope_term*(log10(x[o.Wire_Dia])-const_term) + tensile_010;
     x[o.Tensile] = x[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - x[o.const_term]) + x[o.tensile_010];
 //    stress_lim_endur=tensile*pc_tensile_endur/100.0;

@@ -20,15 +20,15 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 
     ks = kc + 0.615 / x[o.Spring_Index];
 
-    x[o.Coils_A] = p[o.Coils_T] - p[o.Inactive_Coils];
+    x[o.Coils_A] = p[o.Coils_T] - x[o.Inactive_Coils];
 
     temp = x[o.Spring_Index] * x[o.Spring_Index];
-    x[o.Rate] = p[o.Hot_Factor_Kh] * p[o.Torsion_Modulus] * x[o.Mean_Dia] /
+    x[o.Rate] = x[o.Hot_Factor_Kh] * x[o.Torsion_Modulus] * x[o.Mean_Dia] /
            (8.0 * x[o.Coils_A] * temp * temp);
 //    console.log('x=',x);
 //    console.log('x[o.Spring_Index]=',x[o.Spring_Index]);
-//    console.log('p[o.Hot_Factor_Kh]=',p[o.Hot_Factor_Kh]);
-//    console.log('p[o.Torsion_Modulus]=',p[o.Torsion_Modulus]);
+//    console.log('x[o.Hot_Factor_Kh]=',x[o.Hot_Factor_Kh]);
+//    console.log('x[o.Torsion_Modulus]=',x[o.Torsion_Modulus]);
 //    console.log('x[o.Mean_Dia]=',x[o.Mean_Dia]);
 //    console.log('x[o.Coils_A]=',x[o.Coils_A]);
 //    console.log('x[o.Rate]=',x[o.Rate]);
@@ -43,7 +43,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 
     x[o.Slenderness] = p[o.L_Free] / x[o.Mean_Dia];
 
-    x[o.L_Solid] = p[o.Wire_Dia] * (p[o.Coils_T] + p[o.Add_Coils_Solid]);
+    x[o.L_Solid] = p[o.Wire_Dia] * (p[o.Coils_T] + x[o.Add_Coils_Solid]);
 
     x[o.Force_Solid] = x[o.Rate] * (p[o.L_Free] - x[o.L_Solid]);
 
@@ -53,25 +53,25 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
     x[o.Stress_2] = s_f * p[o.Force_2];
     x[o.Stress_Solid] = s_f * x[o.Force_Solid];
 
-      if (p[o.Prop_Calc_Method] === 1) {
-          x[o.Tensile] = p[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - p[o.const_term]) + p[o.tensile_010];
+      if (x[o.Prop_Calc_Method] === 1) {
+          x[o.Tensile] = x[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - x[o.const_term]) + x[o.tensile_010];
 //          console.log("eqnset Tensile = ", x[o.Tensile]);
       }
-      if (p[o.Prop_Calc_Method] <= 2) {
-          x[o.Stress_Lim_Endur] = x[o.Tensile] * p[o.PC_Tensile_Endur] / 100.0; // TODO Fixed trying to access x[o.Tensile] when Prop_Calc_Method == 2
-          x[o.Stress_Lim_Stat]  = x[o.Tensile] * p[o.PC_Tensile_Stat]  / 100.0; // TODO Fixed trying to access x[o.Tensile] when Prop_Calc_Method == 2
+      if (x[o.Prop_Calc_Method] <= 2) {
+          x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0; // TODO Fixed trying to access x[o.Tensile] when Prop_Calc_Method == 2
+          x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0; // TODO Fixed trying to access x[o.Tensile] when Prop_Calc_Method == 2
       }
 
     if (x[o.Stress_2] > zero) {
-        x[o.FactorSafety_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2]; // TODO Fixed trying to access x[o.Stress_Lim_Stat] when Prop_Calc_Method == 3
-//        console.log("eqnset FactorSafety_2 = ", x[o.FactorSafety_2]);
+        x[o.FS_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2]; // TODO Fixed trying to access x[o.Stress_Lim_Stat] when Prop_Calc_Method == 3
+//        console.log("eqnset FS_2 = ", x[o.FS_2]);
     }
-       else x[o.FactorSafety_2] = 1.0;
+       else x[o.FS_2] = 1.0;
 
     if (x[o.Stress_Solid] > zero) {
-        x[o.FactorSafety_Solid] = p[o.Stress_Lim_Stat] / x[o.Stress_Solid];
+        x[o.FS_Solid] = x[o.Stress_Lim_Stat] / x[o.Stress_Solid];
     }
-           else x[o.FactorSafety_Solid] = 1.0;
+           else x[o.FS_Solid] = 1.0;
 
         /*
             Soderberg triangle approach to mixed steady and
@@ -89,14 +89,14 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
          (kc * stress_rng * (x[o.Stress_Lim_Stat] - se2) / se2 + stress_avg); // TODO Fixed trying to access x[o.Stress_Lim_Stat] when Prop_Calc_Method == 3
 
              /*  modified Goodman cycle life calculation  */
-    if (p[o.Prop_Calc_Method] === 1 && p[o.Material_Index] !== 0) {
+    if (x[o.Prop_Calc_Method] === 1 && x[o.Material_Index] !== 0) {
 //        x[o.Cycle_Life] = cl_calc(material_index,life_catagory,1,tensile,stress_1,stress_2);
         x[o.Cycle_Life] = 0.0;    // TODO:  enable cl_calc, remove this
     }
        else x[o.Cycle_Life] = 0.0;
 
                            /*  crude approximation  ... better available on web  */
-    x[o.Weight] = p[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * (Math.PI * x[o.Mean_Dia] * p[o.Coils_T]);
+    x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * (Math.PI * x[o.Mean_Dia] * p[o.Coils_T]);
 
     if (p[o.L_Free] > x[o.L_Solid]) {
         x[o.PC_Avail_Deflect] = 100.0 * x[o.Deflect_2] / (p[o.L_Free] - x[o.L_Solid]);

@@ -18,7 +18,6 @@ export function invokeEquationSet(store) {
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (element.input) {
-//            console.log('p element=',element);
             p.push(element.value);
         } else {
             x.push(element.value);
@@ -26,7 +25,6 @@ export function invokeEquationSet(store) {
     }
 
     // Compute outputs x from inputs p using equations
-    var x;
     switch(design.type) {
     default:
     case 'Piston-Cylinder':
