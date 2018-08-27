@@ -1,7 +1,5 @@
 import * as o from './offsets';
-export function eqnset(p) {        /*    Compression  Spring  */
-    var x = [];
-
+export function eqnset(p, x) {        /*    Compression  Spring  */
     const zero = 0.0;
     var ks;
     var kc;

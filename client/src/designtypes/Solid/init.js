@@ -1,5 +1,4 @@
-export function init(p) {
-    var x = [];
+export function init(p, x) {
 //    console.log('In init p=',p,' x=',x);
     return x;
 }

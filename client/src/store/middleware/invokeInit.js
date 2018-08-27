@@ -14,35 +14,30 @@ export function invokeInit(store) {
     
     // Loop to create p and x_in from symbol_table
     var p = [];
-//    var j = 0;
+    var x = [];
+    var j = 0;
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (element.input) {
-//            console.log('p element=',element.name,' j=',j++);
+            console.log('export const ',element.name,' = ',j++,' // p');
             p.push(element.value);
+        } else {
+            console.log('export const ',element.name,' = ',j++.' // x');
+            x.push(element.value);
         }
     }
 
-//    j = 0;
-//    for (let i = 0; i < design.symbol_table.length; i++) {
-//        element = design.symbol_table[i];
-//        if (!element.input) {
-//            console.log('x element=',element.name,' j=',j++);
-//        }
-//    }
-
     // Compute outputs x from inputs p using equations
-    var x;
     switch(design.type) {
     default:
     case 'Piston-Cylinder':
-        x = pcyl_init(p);
+        x = pcyl_init(p, x);
         break;
     case 'Solid':
-        x = solid_init(p);
+        x = solid_init(p, x);
         break;
     case 'Spring':
-        x = spring_init(p);
+        x = spring_init(p, x);
         break;
     }
 

@@ -57,7 +57,7 @@ export function seek(store, action) {
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (element.input) {
-            p[i] = element.value;
+            p.push(element.value);
         }
     }
     obj = despak(p, store);

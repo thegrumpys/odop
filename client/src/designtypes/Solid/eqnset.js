@@ -1,6 +1,5 @@
 import * as o from './offsets';
-export function eqnset(p) {
-    var x = [];
+export function eqnset(p, x) {
     x[o.Volume] = p[o.Length] * p[o.Width] * p[o.Height];
     x[o.SurfaceArea] = 2.0 * p[o.Length] * p[o.Width] + 2.0 * p[o.Length] * p[o.Height] + 2.0 * p[o.Width] * p[o.Height];
     x[o.VolToSurfArea] = x[o.Volume] / x[o.SurfaceArea];

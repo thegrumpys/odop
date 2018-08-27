@@ -30,9 +30,9 @@ export function search(store, objmin, merit) {
         element = design.symbol_table[i];
         if (element.input) {
             if (!(element.lmin & FIXED)) {
-                p[i] = pc[kd++];
+                p.push(pc[kd++]);
             } else {
-                p[i] = element.value;
+                p.push(element.value);
             }
         }
     }

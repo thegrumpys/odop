@@ -1,5 +1,5 @@
 import * as o from './offsets';
-export function eqnset(p) {
+export function eqnset(p, x) {
     /** ***************************************************************** */
     /*
      * EQNSET contains an equation set providing a math model of the design
@@ -17,7 +17,6 @@ export function eqnset(p) {
      * m_flag = 0 if call is from search, no console I/O permitted. m_flag > 0
      * if "special" call requesting direct output.
      */
-    var x = [];
     x[o.area] = Math.PI * p[o.radius] * p[o.radius];
     x[o.force] = p[o.pressure] * x[o.area];
     x[o.stress] = (p[o.pressure] * p[o.radius]) / (2.0 * p[o.thickness]);

@@ -1,8 +1,7 @@
 import * as o from './offsets';
 import * as mo from './mat_ips_offsets';
-export function init(p) {
+export function init(p, x) {
 //    console.log('In init p=',p);
- var x = [];
  var i;
  const ten3 = 1000.0;
  var tensile_400;
