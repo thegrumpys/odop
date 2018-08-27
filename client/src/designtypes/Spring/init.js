@@ -28,7 +28,7 @@ export function init(p, x) {
 */
  //
     i = x[o.Material_Type];
-    console.log("i=", i);
+//    console.log("i=", i);
 //    x[o.Material_Index] = i;
     
 // NOMORE:
@@ -95,7 +95,7 @@ export function init(p, x) {
 //    if prop_calc_method ^= 1 then             /*   debug  */
     if (x[o.Prop_Calc_Method] !== 1) {
 //           put skip list('TAB2D:   PROP_CALC_METHOD SET TO 1.');
-        console.log('TAB2D:   PROP_CALC_METHOD SET TO 1.');
+//        console.log('TAB2D:   PROP_CALC_METHOD SET TO 1.');
 //    prop_calc_method = 1;
         x[o.Prop_Calc_Method] = 1;
     }
@@ -175,7 +175,7 @@ export function init(p, x) {
 //       hook_deflect_all=0.0;
 //    end;
 
-    console.log('In init p=',p,' x=',x);
+//    console.log('In init p=',p,' x=',x);
     return x;
 
 }
