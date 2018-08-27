@@ -33,7 +33,7 @@ export function migrate(design) {
          // Mark all constants with equationset: false
          design.constants.forEach((constant) => {
 //             console.log('constant=',constant);
-             constant['input'] = true; // Assume this
+             constant['input'] = false; // Assume this
              constant['lmin'] = 0;
              constant['lmax'] = 0;
              constant['cmin'] = 0;

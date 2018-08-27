@@ -23,6 +23,7 @@ export function eqnset(p) {
     x[o.stress] = (p[o.pressure] * p[o.radius]) / (2.0 * p[o.thickness]);
 //    if (M_FLAG)
 //        console.log('No report available.');
+//    console.log('In eqnset p=',p,' x=',x);
     return x;
 }
 

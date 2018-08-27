@@ -92,6 +92,23 @@ export const initialState = {
             "hidden": false
         },
         {
+            "input": true,
+            "name": "Material_Type",
+            "value": 1,
+            "units": "",
+            "type": "table",
+            "table": "mat_ips",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "ioclass": 0,
+            "sdlim": 1.0,
+            "tooltip": "Select wire material",
+            "equationset": false,
+            "hidden": false
+        },,
+        {
             "input": false,
             "name": "Mean_Dia",
             "value": 0.9945,
@@ -433,24 +450,7 @@ export const initialState = {
             "tooltip": "Compression spring design",
             "equationset": false,
             "hidden": false
-        },
-        {
-            "input": false,
-            "name": "Material_Type",
-            "value": 1,
-            "units": "",
-            "type": "table",
-            "table": "mat_ips",
-            "lmin": 0,
-            "lmax": 0,
-            "cmin": 0,
-            "cmax": 0,
-            "ioclass": 0,
-            "sdlim": 1.0,
-            "tooltip": "Select wire material",
-            "equationset": false,
-            "hidden": false
-        },
+        }
         {
             "input": false,
             "name": "ASTM/Fed_Spec",

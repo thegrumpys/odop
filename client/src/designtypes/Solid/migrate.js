@@ -48,7 +48,7 @@ export function migrate(design) {
          // Mark all constants with equationset: false
          design.constants.forEach((constant) => {
 //             console.log('constant=',constant);
-             constant['input'] = true; // Assume this
+             constant['input'] = true; // All constants are inputs
              constant['lmin'] = 0;
              constant['lmax'] = 0;
              constant['cmin'] = 0;
@@ -82,6 +82,6 @@ export function migrate(design) {
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
     
-    console.log('In migrate migrated_design=',migrated_design);
+//    console.log('In migrate migrated_design=',migrated_design);
     return migrated_design;
 }

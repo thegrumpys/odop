@@ -27,7 +27,7 @@ export function init(p) {
  Cross check values of PROP_CALC_METHOD and END_CALC_METHOD.
 */
  //
-    i = x[o.Material_Type];
+    i = p[o.Material_Type];
 //    console.log("i_1= ", i);
     x[o.Material_Index] = i;
     
@@ -93,11 +93,11 @@ export function init(p) {
     if (i > 0) {
 //    do;
 //    if prop_calc_method ^= 1 then             /*   debug  */
-    if (x[o.Prop_Calc_Method] !== 1) {
+    if (p[o.Prop_Calc_Method] !== 1) {
 //           put skip list('TAB2D:   PROP_CALC_METHOD SET TO 1.');
 //        console.log('TAB2D:   PROP_CALC_METHOD SET TO 1.');
 //    prop_calc_method = 1;
-        x[o.Prop_Calc_Method] = 1;
+        p[o.Prop_Calc_Method] = 1;
     }
 //
 //    material_type    = m_tab(material_index).matnam;
@@ -175,7 +175,7 @@ export function init(p) {
 //       hook_deflect_all=0.0;
 //    end;
 
-    console.log('In init p=',p,' x=',x);
+//    console.log('In init p=',p,' x=',x);
     return x;
 
 }

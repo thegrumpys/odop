@@ -27,7 +27,8 @@ import { STARTUP,
 import { sclden } from './middleware/sclden';
 
 export function reducers(state, action) {
-    var i=0;
+    var i;
+    var value;
 //    console.log('In reducers');
 //    console.log(action);
     switch (action.type) {
@@ -161,9 +162,14 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element, index) => {
                 if (element.input) {
-                    return Object.assign({}, element, {
-                        value: action.payload.values[i++]
-                    });
+                    value = action.payload.values[i++]
+                    if (value !== undefined) {
+                        return Object.assign({}, element, {
+                            value: value
+                        });
+                    } else {
+                        return element;
+                    }
                 } else {
                     return element;
                 }
@@ -201,9 +207,14 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element, index) => {
                 if (!element.input) {
-                    return Object.assign({}, element, {
-                        value: action.payload.values[i++]
-                    });
+                    value = action.payload.values[i++]
+                    if (value !== undefined) {
+                        return Object.assign({}, element, {
+                            value: value
+                        });
+                    } else {
+                        return element;
+                    }
                 } else {
                     return element;
                 }

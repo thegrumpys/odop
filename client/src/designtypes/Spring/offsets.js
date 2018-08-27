@@ -5,6 +5,9 @@ export const L_Free = 2;
 export const Coils_T = 3;
 export const Force_1 = 4;
 export const Force_2 = 5;
+export const Spring_Type = 6;
+export const Material_Type = 7;
+export const Prop_Calc_Method = 8;
 
 // Dependent Variables
 export const Mean_Dia = 0;
@@ -29,15 +32,13 @@ export const FactorSafety_Solid = 18;
 export const FS_CycleLife = 19;
 export const Cycle_Life = 20;
 export const PC_Avail_Deflect = 21;
-export const Spring_Type = 22;
-export const Material_Type = 23;
+
 export const ASTM_Fed_Spec = 24;
 export const End_Type = 25;
 export const Catalog_Number = 26;
 export const Process = 27;
 export const Material_File = 28;
 export const Dialog_Switch = 29;
-export const Prop_Calc_Method = 30;
 export const End_Calc_Method = 31;
 export const Life_Category = 32;
 export const Material_Index = 33;

@@ -8,5 +8,6 @@ export function eqnset(p) {
     x[o.LengthPlusGirth] = p[o.Length] + x[o.Girth];
     x[o.Diagonal] = Math.sqrt(p[o.Length] * p[o.Length] + p[o.Width] * p[o.Width] + p[o.Height] * p[o.Height]);
     x[o.Weight] = x[o.Volume] * p[o.Density];
+//    console.log('In eqnset p=',p,' x=',x);
     return x;
 }
