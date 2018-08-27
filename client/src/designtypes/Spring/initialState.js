@@ -133,7 +133,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 1.0,
             "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
-            "equationset": false,
+            "equationset": true,
             "hidden": false
         },
         {
