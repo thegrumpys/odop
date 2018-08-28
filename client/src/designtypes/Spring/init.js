@@ -7,18 +7,10 @@ export function init(p, x) {
  const ten3 = 1000.0;
  var tensile_400;
 
-   /*  reads material properties file  */
-//   if material_file ^= oldmfil then
-//       do;
-//       i=0;
-//       call read_mat(material_file,i);
-//       oldmfil=material_file;
-//       end;
-
+   /*  Bring in material properties table  */
  var m_tab = require('./mat_ips.json');
 //    console.log("m_tab=", m_tab);
  
-
  /*  taken from SETIDX.PLI
  
  Establish values for MATERIAL_INDEX and END_TYPE_INDEX
@@ -28,8 +20,9 @@ export function init(p, x) {
 */
  //
     i = x[o.Material_Type];
-//    console.log("i=", i);
 //    x[o.Material_Index] = i;
+//    console.log("Material_Index = x[o.Material_Type] =", x[o.Material_Type]);
+//    console.log("Material_Index = x[o.Material_Index] =", x[o.Material_Index]);
     
 // NOMORE:
 //  end_type_index=0;
@@ -95,7 +88,7 @@ export function init(p, x) {
 //    if prop_calc_method ^= 1 then             /*   debug  */
     if (x[o.Prop_Calc_Method] !== 1) {
 //           put skip list('TAB2D:   PROP_CALC_METHOD SET TO 1.');
-//        console.log('TAB2D:   PROP_CALC_METHOD SET TO 1.');
+    console.log('TAB2D:   PROP_CALC_METHOD SET TO 1.');
 //    prop_calc_method = 1;
         x[o.Prop_Calc_Method] = 1;
     }

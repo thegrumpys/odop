@@ -439,7 +439,7 @@ export const initialState = {
         {
             "input": false,
             "name": "Material_Type",
-            "value": 1,
+            "value": 2,
             "units": "",
             "type": "table",
             "table": "mat_ips",
@@ -456,7 +456,7 @@ export const initialState = {
         {
             "input": false,
             "name": "ASTM/Fed_Spec",
-            "value": "A228/QQW-470",
+            "value": "Defined in initialState",
             "units": "",
             "lmin": 0,
             "lmax": 0,
@@ -471,8 +471,10 @@ export const initialState = {
         {
             "input": false,
             "name": "End_Type",
-            "value": "Closed&Ground",
+            "value": 4,
             "units": "",
+            "type": "table",
+            "table": "all_endtypes",
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
@@ -486,7 +488,7 @@ export const initialState = {
         {
             "input": false,
             "name": "Catalog_Number",
-            "value": "undefined",
+            "value": "Defined in initialState",
             "units": "",
             "lmin": 0,
             "lmax": 0,
@@ -515,7 +517,7 @@ export const initialState = {
         {
             "input": false,
             "name": "Material_File",
-            "value": "pass in mat_ips.json?",
+            "value": "pass in name: mat_ips.json?",
             "units": "",
             "lmin": 0,
             "lmax": 0,
@@ -586,7 +588,7 @@ export const initialState = {
         {
             "input": false,
             "name": "Material_Index",
-            "value": 2,
+            "value": -1,
             "units": "index",
             "lmin": 0,
             "lmax": 0,
@@ -600,7 +602,7 @@ export const initialState = {
         {
             "input": false,
             "name": "End_Type_Index",
-            "value": 1,
+            "value": -1,
             "units": "index",
             "lmin": 0,
             "lmax": 0,
@@ -614,7 +616,7 @@ export const initialState = {
         {
             "input": false,
             "name": "Inactive_Coils",
-            "value": 2.0,
+            "value": -1.0,
             "units": "coils",
             "lmin": 0,
             "lmax": 0,
