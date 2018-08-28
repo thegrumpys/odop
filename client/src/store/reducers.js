@@ -47,7 +47,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
                 if (element.name === action.payload.name) {
-                    console.log('CHANGE_SYMBOL_VALUE element=',element.name,' old value=',element.value,' new value=',action.payload.value);
+//                    console.log('CHANGE_SYMBOL_VALUE element=',element.name,' old value=',element.value,' new value=',action.payload.value);
                     return Object.assign({}, element, {
                         value: action.payload.value
                     });
@@ -165,7 +165,7 @@ export function reducers(state, action) {
                 if (element.input) {
                     value = action.payload.values[i++]
                     if (value !== undefined) {
-                        console.log('CHANGE_INPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
+//                        console.log('CHANGE_INPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
                         return Object.assign({}, element, {
                             value: value
                         });
@@ -211,7 +211,7 @@ export function reducers(state, action) {
                 if (!element.input) {
                     value = action.payload.values[i++]
                     if (value !== undefined) {
-                        console.log('CHANGE_OUTPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
+//                        console.log('CHANGE_OUTPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
                         return Object.assign({}, element, {
                             value: value
                         });
