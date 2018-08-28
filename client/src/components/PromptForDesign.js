@@ -38,7 +38,7 @@ export class PromptForDesign extends React.Component {
     }
 
     getDesignTypes() {
-        console.log('In PromptForDesign.getDesignTypes');
+//        console.log('In PromptForDesign.getDesignTypes');
 
         // Get the designs and store them in state
         displaySpinner(true);
@@ -67,7 +67,7 @@ export class PromptForDesign extends React.Component {
     }
     
     getDesignNames(type) {
-        console.log('In PromptForDesign.getDesignNames type=', type);
+//        console.log('In PromptForDesign.getDesignNames type=', type);
 
         // Get the designs and store them in state
         displaySpinner(true);
@@ -95,7 +95,7 @@ export class PromptForDesign extends React.Component {
     }
     
     getDesign(type,name) {
-        console.log('In PromptForDesign.getDesigns type=', type, ' name=', name);
+//        console.log('In PromptForDesign.getDesigns type=', type, ' name=', name);
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -137,7 +137,7 @@ export class PromptForDesign extends React.Component {
     }
     
     loadInitialState(type) {
-        console.log('In PromptForDesign.loadInitialState type=', type);
+//        console.log('In PromptForDesign.loadInitialState type=', type);
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -165,7 +165,7 @@ export class PromptForDesign extends React.Component {
     }
 
     onSelectType(event) {
-        console.log('In PromptForDesign.onSelectType event.target.value=',event.target.value);
+//        console.log('In PromptForDesign.onSelectType event.target.value=',event.target.value);
         this.setState({
             type: event.target.value
         });
@@ -173,14 +173,14 @@ export class PromptForDesign extends React.Component {
     }
     
     onSelectName(event) {
-        console.log('In PromptForDesign.onSelectName event.target.value=',event.target.value);
+//        console.log('In PromptForDesign.onSelectName event.target.value=',event.target.value);
         this.setState({
             name: event.target.value 
         });
     }
     
     onOpen() {
-        console.log('In PromptForDesign.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
+//        console.log('In PromptForDesign.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
         this.setState({
             modal: !this.state.modal
         });
@@ -189,7 +189,7 @@ export class PromptForDesign extends React.Component {
     }
     
     onLoadInitialState() {
-        console.log('In PromptForDesign.onLoadInitialState this.state.type=',this.state.type);
+//        console.log('In PromptForDesign.onLoadInitialState this.state.type=',this.state.type);
         this.setState({
             modal: !this.state.modal
         });
@@ -198,7 +198,7 @@ export class PromptForDesign extends React.Component {
 
     
     onCancel() {
-        console.log('In PromptForDesign.onCancel');
+//        console.log('In PromptForDesign.onCancel');
         this.setState({
             modal: !this.state.modal
         });
