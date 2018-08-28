@@ -9,7 +9,7 @@ export function invokeInit(store) {
 //    console.log('Entering invokeInit');
     
     var element;
-    const output_offest_flag = false;
+    const output_offest_flag = true;
 
     var design = store.getState();
     

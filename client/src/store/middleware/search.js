@@ -13,7 +13,7 @@ export function search(store, objmin, merit) {
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (element.input) {
-            if (!(element.lmin & FIXED)) {
+            if (element.equationset && !(element.lmin & FIXED)) {
                 pc.push(element.value);
             }
         }
@@ -29,7 +29,7 @@ export function search(store, objmin, merit) {
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (element.input) {
-            if (!(element.lmin & FIXED)) {
+            if (element.equationset && !(element.lmin & FIXED)) {
                 p.push(pc[kd++]);
             } else {
                 p.push(element.value);
