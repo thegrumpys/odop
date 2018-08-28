@@ -56,7 +56,7 @@ export function seek(store, action) {
     p = [];
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
-        if (element.input) {
+        if (element.input && element.equationset) {
             p.push(element.value);
         }
     }
