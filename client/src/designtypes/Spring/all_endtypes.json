@@ -1,14 +1,14 @@
 [
-    [ "End_Type","Inactive_Coils" ],
-    [ "Open",             0.0],
-    [ "Open&Ground",      1.0],
-    [ "Closed",           2.0],
-    [ "Closed&Ground",    2.0],
-    [ "Tapered_C&G",      2.0],
-    [ "Pig-tail",         2.0],
-    [ "Full_Loop",        0.0],
-    [ "75%_Loop",         0.0],
-    [ "Full_Hook",        0.0],
-    [ "75%_Hook",         0.0],
-    [ "Close_Wound_Coil", 0.0]
+    [ "End_Type","Inactive_Coils","Add_Coils@Solid" ],
+    [ "Open",             0.0,     1.0],
+    [ "Open&Ground",      1.0,     0.0],
+    [ "Closed",           2.0,     1.0],
+    [ "Closed&Ground",    2.0,     0.0],
+    [ "Tapered_C&G",      2.0,    -0.5],
+    [ "Pig-tail",         2.0,     0.0],
+    [ "Full_Loop",        0.0,     0.0],
+    [ "75%_Loop",         0.0,     0.0],
+    [ "Full_Hook",        0.0,     0.0],
+    [ "75%_Hook",         0.0,     0.0],
+    [ "Close_Wound_Coil", 0.0,     0.0]
 ]

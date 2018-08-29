@@ -531,7 +531,7 @@ export const initialState = {
         {
             "input": false,
             "name": "Dialog_Switch",
-            "value": 0,
+            "value": -1,
             "units": "switch",
             "lmin": 0,
             "lmax": 0,
@@ -574,7 +574,9 @@ export const initialState = {
             "input": false,
             "name": "Life_Category",
             "value": 1,
-            "units": "index",
+            "units": "",
+            "type": "table",
+            "table": "lifetarget",
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
@@ -616,7 +618,7 @@ export const initialState = {
         {
             "input": false,
             "name": "Inactive_Coils",
-            "value": -1.0,
+            "value": 2.0,
             "units": "coils",
             "lmin": 0,
             "lmax": 0,
@@ -736,7 +738,7 @@ export const initialState = {
         {
             "input": false,
             "name": "unused",
-            "value": 75.0,
+            "value": -1.0,
             "units": "",
             "lmin": 0,
             "lmax": 0,

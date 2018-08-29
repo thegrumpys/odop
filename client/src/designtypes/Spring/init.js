@@ -12,10 +12,8 @@ export function init(p, x) {
 //    console.log("m_tab=", m_tab);
  
  /*  taken from SETIDX.PLI
- 
  Establish values for MATERIAL_INDEX and END_TYPE_INDEX
  based on MATERIAL_TYPE and END_TYPE.
-
  Cross check values of PROP_CALC_METHOD and END_CALC_METHOD.
 */
  //
@@ -23,35 +21,6 @@ export function init(p, x) {
 //    x[o.Material_Index] = i;
 //    console.log("Material_Index = x[o.Material_Type] =", x[o.Material_Type]);
 //    console.log("Material_Index = x[o.Material_Index] =", x[o.Material_Index]);
-    
-// NOMORE:
-//  end_type_index=0;
-//  do i=1 to end_num while(end_type_index = 0);
-//  j=length(end_type);
-//  if end_type = substr(end_name(i),kone,j) then
-//     do;
-//     end_type=end_name(i);
-//     end_type_index=i;
-//     if end_calc_method ^= 1 then
-//        do;
-//        end_calc_method=1;
-//        put skip list('END_CALC_METHOD  SET TO 1');
-//        end;
-//     end;
-//  end;
-//
-//  if material_index = 0 & prop_calc_method = 1 then
-//     do;
-//     prop_calc_method=2;
-//     put skip list('PROP_CALC_METHOD  SET TO 2');
-//     end;
-//
-//  if end_type_index = 0 & end_calc_method = 1 then
-//     do;
-//     end_calc_method=2;
-//     console.log('END_CALC_METHOD  SET TO 2');
-//     end;
-
 
      /*  taken from READMAT.PLI
       *  Initial manipulations of material array
@@ -138,7 +107,7 @@ export function init(p, x) {
 //           (log10(tbase400) - const_term);
 //    console.log("tensile_400 = ", tensile_400);
     x[o.slope_term] = (tensile_400 - x[o.tensile_010]) / (Math.log10(x[o.tbase400]) - x[o.const_term]);
-//    tensile=slope_term*(log10(x[o.Wire_Dia])-const_term) + tensile_010;
+//    tensile=slope_term*(log10(wire_dia)-const_term) + tensile_010;
     x[o.Tensile] = x[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - x[o.const_term]) + x[o.tensile_010];
 //    stress_lim_endur=tensile*pc_tensile_endur/100.0;
     x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0;
