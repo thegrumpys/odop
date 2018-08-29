@@ -16,7 +16,7 @@ class FileDelete extends React.Component {
             modal: false,
             designs: [],
             type: this.props.type,
-            name: this.props.name
+            name: ''
         };
     }
 
@@ -32,7 +32,10 @@ class FileDelete extends React.Component {
                 }
                 return res.json()
             })
-           .then(designs => this.setState({ designs }))
+           .then(designs => this.setState({ 
+               designs: designs.filter((design) => {return design !== this.props.name && design !== 'startup'}),
+               name: designs.filter((design) => {return design !== this.props.name && design !== 'startup'})[0]
+           }))
            .catch(error => {
                displayError('GET of design names failed with message: \''+error.message+'\'');
            });
@@ -62,12 +65,11 @@ class FileDelete extends React.Component {
     
     toggle() {
 //        console.log('In FileDelete.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
-        this.getDesigns(this.state.type);
         this.setState({
             modal: !this.state.modal,
-            type: this.props.type,
-            name: this.props.name
+            type: this.props.type
         });
+        this.getDesigns(this.state.type);
     }
     
     onSelect(event) {
@@ -79,10 +81,14 @@ class FileDelete extends React.Component {
     
     onDelete() {
 //        console.log('In FileDelete.onDelete this.state.type=',this.state.type,' this.state.name=',this.state.name);
+        // Validate name, and delete the database element
+        if (this.state.name === '') {
+            displayError("Select design to delete.");
+            return;
+        }
         this.setState({
             modal: !this.state.modal
         });
-        // Delete the database element
         this.deleteDesign(this.state.type,this.state.name);
     }
     
@@ -95,6 +101,7 @@ class FileDelete extends React.Component {
     }
 
     render() {
+//        console.log('In FileDelete.render this.state.type=',this.state.type,' this.state.name=',this.state.name);
         return (
             <React.Fragment>
                 <DropdownItem onClick={this.toggle}>
@@ -105,19 +112,15 @@ class FileDelete extends React.Component {
                     <ModalBody>
                         <br />
                         <Label for="fileDeleteSelect">Select design to delete:</Label>
-                        <Input type="select" id="fileDeleteSelect" onChange={this.onSelect} value={this.state.name}>
+                        <Input type="select" id="fileDeleteSelect" onChange={this.onSelect}>
                             {this.state.designs.map((design, index) => {
-                                if (design !== this.props.name && design !== 'startup') {
-                                    return <option key={index} value={design}>{design}</option>
-                                } else {
-                                    return '';
-                                }
+                                return <option key={index} value={design}>{design}</option>
                             })}
                         </Input>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onDelete} disabled={this.state.designs.length === 1 && this.state.designs[0] === 'startup' ? true : false}>Delete</Button>
+                        <Button color="primary" onClick={this.onDelete} disabled={this.state.designs.length === 0 ? true : false}>Delete</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
