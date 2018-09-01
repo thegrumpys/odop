@@ -85,9 +85,34 @@ export function init(p, x) {
 //    tensile_400      = m_tab(i).t400;
     tensile_400         = ten3 * m_tab[i][mo.t400];
     
-    var life_category = x[o.Life_Category];
+//    var life_category = x[o.Life_Category];
 //    pc_tensile_endur = m_tab(i).pte(life_catagory);
-    x[o.PC_Tensile_Endur] = m_tab[i][mo.pte1+life_category-1];
+//    x[o.PC_Tensile_Endur] = m_tab[i][mo.pte1+life_category-1];
+    switch(x[o.Life_Category]){
+        default:
+        case 1:
+        case 5:
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte1];
+        break;
+        case 2:
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte2];
+        break;
+        case 3:
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte3];
+        break;
+        case 4:
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte4];
+        break;
+        case 6:
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte6];
+        break;
+        case 7:
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte7];
+        break;
+        case 8:
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte8];
+    }
+    
 //    pc_tensile_stat  = m_tab(i).fy;
     x[o.PC_Tensile_Stat]  = m_tab[i][mo.pte1];
 //    pc_tensile_bend  = m_tab(i).ptb(life_catagory);
