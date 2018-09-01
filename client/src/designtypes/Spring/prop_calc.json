@@ -1,0 +1,6 @@
+[
+    [ "Prop_Calc_Method" ],
+    [ "Use values from material table" ],
+    [ "Specify Tensile, %_Tensile_Stat & %_Tensile_Endur" ],
+    [ "Specify Stress_Lim_Stat & Stress_Lim_Endur" ]
+]
