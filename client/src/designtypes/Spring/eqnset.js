@@ -59,12 +59,12 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 //          console.log("eqnset Tensile = ", x[o.Tensile]);
       }
       if (x[o.Prop_Calc_Method] <= 2) {
-          x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0; // TODO Fixed trying to access x[o.Tensile] when Prop_Calc_Method == 2
-          x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0; // TODO Fixed trying to access x[o.Tensile] when Prop_Calc_Method == 2
+          x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0; 
+          x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0; 
       }
 
     if (x[o.Stress_2] > zero) {
-        x[o.FS_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2]; // TODO Fixed trying to access x[o.Stress_Lim_Stat] when Prop_Calc_Method == 3
+        x[o.FS_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2]; 
 //        console.log("eqnset FS_2 = ", x[o.FS_2]);
     }
        else x[o.FS_2] = 1.0;
@@ -85,16 +85,16 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
         */
       stress_avg = (x[o.Stress_1] + x[o.Stress_2]) / 2.0;
       stress_rng = (x[o.Stress_2] - x[o.Stress_1]) / 2.0;
-      se2 = x[o.Stress_Lim_Endur] / 2.0; // TODO Fixed trying to access x[o.Stress_Lim_Endur] when Prop_Calc_Method == 3
-    x[o.FS_CycleLife] =  x[o.Stress_Lim_Stat] / // TODO Fixed trying to access x[o.Stress_Lim_Stat] when Prop_Calc_Method == 3
-         (kc * stress_rng * (x[o.Stress_Lim_Stat] - se2) / se2 + stress_avg); // TODO Fixed trying to access x[o.Stress_Lim_Stat] when Prop_Calc_Method == 3
+      se2 = x[o.Stress_Lim_Endur] / 2.0; 
+    x[o.FS_CycleLife] =  x[o.Stress_Lim_Stat] / 
+         (kc * stress_rng * (x[o.Stress_Lim_Stat] - se2) / se2 + stress_avg); 
 
              /*  modified Goodman cycle life calculation  */
     if (x[o.Prop_Calc_Method] === 1 && x[o.Material_Type] !== 0) {
 //        cycle_life = cl_calc(material_index,life_catagory,1,tensile,stress_1,stress_2);
         x[o.Cycle_Life] = cl_calc(x[o.Material_Type], x[o.Life_Category], 1, x[o.Tensile], x[o.Stress_1], x[o.Stress_2]);
     }
-       else x[o.Cycle_Life] = 0.0;
+       else x[o.Cycle_Life] = NaN;
 
                            /*  crude approximation  ... better available on web  */
     x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * (Math.PI * x[o.Mean_Dia] * p[o.Coils_T]);
