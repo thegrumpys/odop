@@ -72,7 +72,7 @@ export const initialState = {
             "cmax": 50,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Working load at point 1 (Length L_1)",
+            "tooltip": "Minimum operating load (Length L_1)",
             "equationset": true,
             "hidden": false
         },
@@ -87,7 +87,7 @@ export const initialState = {
             "cmax": 50,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Working load at point 2 (Length L_2)",
+            "tooltip": "Maximum operating load (Length L_2)",
             "equationset": true,
             "hidden": false
         },
@@ -474,7 +474,7 @@ export const initialState = {
             "value": 4,
             "units": "",
             "type": "table",
-            "table": "all_endtypes",
+            "table": "c_endtypes",
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
@@ -629,7 +629,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Number of coils not contributing to deflection based on end type",
+            "tooltip": "Number of coils not contributing to deflection. Depends on End_Type.",
             "equationset": false,
             "hidden": false
         },

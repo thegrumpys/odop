@@ -11,6 +11,8 @@ export function init(p, x) {
  var m_tab = require('./mat_ips.json');
 //    console.log("m_tab=", m_tab);
  
+     x[o.Spring_Type] = "Compression";
+ 
  switch(x[o.Prop_Calc_Method]){
  default:
  case 1:      // Prop_Calc_Method = 1 - Use values from material table
@@ -118,29 +120,6 @@ export function init(p, x) {
      x[o.PC_Tensile_Endur] = "unused";
      x[o.PC_Tensile_Stat]  = "unused";
  }
-    
-    
-               /*  copy from end type table to constants  */
-         /*  check these values.     See AS Design Hdbk. p52  */
-         /*    VVVVVVVVVVVVV          Kludge for Torsion  */
-// if end_type_index > 0 & nmerit ^= 3 then
-//    do;
-//    if end_calc_method ^= 1 then              /*   debug  */
-//            put skip list('TAB2D:  END_CALC_METHOD SET TO 1.');
-//    end_calc_method=1;
-//
-//    end_type        = end_name(end_type_index);
-//    inactive_coils  = inact_coil_tbl(end_type_index);
-//    if end_type_index <= c_end_num then
-//       add_coils_solid=acs_tbl(end_type_index);
-//    else
-//       add_coils_solid=0.0;
-//    if end_type_index > c_end_num then
-//       hook_deflect_all=hda_tbl(end_type_index-c_end_num);
-//    else
-//       hook_deflect_all=0.0;
-//    end;
-
 //    console.log('In init p=',p,' x=',x);
     return x;
 
