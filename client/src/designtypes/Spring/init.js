@@ -12,7 +12,7 @@ export function init(p, x) {
 //    console.log("m_tab=", m_tab);
  
      x[o.Spring_Type] = "Compression";
-     if (x[o.Tensile] === "unused") x[o.Prop_Calc_Method] = 1;
+     if (x[o.Prop_Calc_Method] === 2 && x[o.Tensile] === "unused") x[o.Prop_Calc_Method] = 1;
  
  switch(x[o.Prop_Calc_Method]){
  default:
