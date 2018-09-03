@@ -149,7 +149,7 @@ export const initialState = {
             "cmax": 108.0,
             "ioclass": 0,
             "sdlim": 0,
-            "tooltip": "Sum of length and girth dimensions",
+            "tooltip": "Sum of length and girth dimensions. Shippers limit to 108 in.",
             "equationset": true,
             "hidden": false
         },
@@ -179,7 +179,7 @@ export const initialState = {
             "cmax": 70.0,
             "ioclass": 0,
             "sdlim": 0,
-            "tooltip": "Volume times Density of the selected material",
+            "tooltip": "Volume times Density of the selected material. Shippers limit to 70 Lb.",
             "equationset": true,
             "hidden": false
         }
