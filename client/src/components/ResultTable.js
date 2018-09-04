@@ -47,7 +47,7 @@ class ResultTable extends React.Component {
                     <tbody>
                         <tr>
                             <th id="ObjectiveValue">Objective_Value:</th>
-                            <td className={feasibility_class && " text-right"}>{this.props.objective_value.toFixed(6)}</td>
+                            <td className={feasibility_class + " text-right"}>{this.props.objective_value.toFixed(6)}</td>
                         </tr>
                         <tr>
                             <th id="OBJMIN">OBJMIN:</th>
