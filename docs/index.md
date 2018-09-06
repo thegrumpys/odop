@@ -33,10 +33,9 @@
 * [Idea for a simple showcase problem](design/GeometricSolidsProblem)
 * [Idea for a Refine Search feature](design/RefineSearchFeature)
 * [AutoSave feature](design/AutoSaveFeature)
-* [Idea for a Compare Designs feature](design/CompareDesignsFeature)
 * [Consider adding a search at the beginning of trade](design/SearchBeforeTrade)
 * [Sub-Problems feature](design/SubProblems)
-* [Side-by-Side Comparison](design/SideBySideCompare)
+* [Side-by-Side comparison of designs](design/SideBySideCompare)
 * [Idea for a virtual annunciator panel](design/AnnunciatorPanel)
 
 

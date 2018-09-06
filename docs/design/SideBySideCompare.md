@@ -1,4 +1,4 @@
-## Side-by-Side Comparisons
+## Side-by-Side comparison of designs
 
 The ability to compare designs in a side-by-side presentation can be quite useful.   
 
@@ -20,9 +20,9 @@ Specifically:
 * Improve utilization of screen real estate; better response to limitations of narrow screen formats
 
 Perhaps it is possible to use the Redux "immutable store" capability in order to have one side of the comparison
-"travel back in time" similar to an "UnDo" feature.  
+"travel back in time" similar to an "UnDo" feature. 
 For example, the left side of the display could present the current design 
-(screen real estate limitations make make it necessary to suppress constraint and violation information).
+(screen real estate limitations may make it necessary to suppress constraint and violation information).
 The right side of the display could present a previous design from the current session.
 Perhaps it would be possible to have the user click on forward and back buttons that take the right window
 through the history of the current session.

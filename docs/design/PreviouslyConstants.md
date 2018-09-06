@@ -73,12 +73,13 @@ The current implementation for the compression spring design type has essentiall
 former members of the d vector appearing as elements in x.
 This is partially for simplicity.
 Note that changes to the p vector are not saved into the state of the design. 
-Thus unexpected results (stale data) can occur if elements are moved into p (as opoposed to x) and they later change.
+Thus unexpected results (stale data) can occur if elements are moved into p and they later change.
+This stale data issue is not a concern for elements of x.
 
 Elements with the property "equationset": true, are fixable and constrainable ("unrestricted" in the terminology above).
 Elements with the property "equationset": false, are members of the previous d vector ("restricted" in the terminology above).
 
-Elements with the property "hidden": false are not visible in the user interface.
+Elements with the property "hidden": true are not visible in the user interface.
 
 **The rules** for defining elements (entries, members, variables) in initialState.js:   
 
