@@ -36,6 +36,8 @@
 * [Idea for a Compare Designs feature](design/CompareDesignsFeature)
 * [Consider adding a search at the beginning of trade](design/SearchBeforeTrade)
 * [Sub-Problems feature](design/SubProblems)
+* [Side-by-Side Comparison](design/SideBySideCompare)
+* [Idea for a virtual annunciator panel](design/AnnunciatorPanel)
 
 
 ## Procedures

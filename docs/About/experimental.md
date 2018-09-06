@@ -4,7 +4,6 @@ The ODOP software is experimental and under development.
 You should expect to encounter operational issues and problems of varying severity.
 
 Specifically, multi-user support and user authentication are not yet implemented.
-
 As a result, any user of the program will be able to see the information saved by any other user.
 So, for the duration, DO NOT SAVE PRIVATE INFORMATION !
 
