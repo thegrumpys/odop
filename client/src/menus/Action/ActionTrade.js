@@ -19,6 +19,7 @@ class ActionTrade extends React.Component {
         this.onStrategyExisting = this.onStrategyExisting.bind(this);
         this.onStrategyArbitrary = this.onStrategyArbitrary.bind(this);
         this.onStrategyProportional = this.onStrategyProportional.bind(this);
+        this.onStrategyContextHelp = this.onStrategyContextHelp.bind(this);
         
         this.onArbitraryCancel = this.onArbitraryCancel.bind(this);
         this.onArbitraryContinue = this.onArbitraryContinue.bind(this);
@@ -201,6 +202,13 @@ class ActionTrade extends React.Component {
             strategyModal: !this.state.strategyModal,
             sizeModal: !this.state.sizeModal,
         });
+    }
+    
+    onStrategyContextHelp() {
+        this.setState({
+            modal: !this.state.modal
+        });
+        window.open('https://thegrumpys.github.io/odop/Help/trade', '_blank');
     }
     
     commonArbitraryOrProportional(dir) {
@@ -657,6 +665,7 @@ class ActionTrade extends React.Component {
                     <ModalBody>
                         Specify your trade strategy:<br/>
                         <ul>
+                            <li>Help - View Trade information in a new tab</li>
                             <li>Proportional - relax constraints in proportion to their current violation</li>
                             <li>Arbitrary - relax constraints in a specified ratio</li>
                             <li>Existing - relax constraints to the point of the existing violations</li>
@@ -668,6 +677,7 @@ class ActionTrade extends React.Component {
                         <Button color="secondary" onClick={this.onStrategyExisting}>Existing</Button>{' '}
                         <Button color="info" onClick={this.onStrategyArbitrary}>Arbitrary</Button>{' '}
                         <Button color="primary" onClick={this.onStrategyProportional}>Proportional</Button>
+                        <Button outline color="info" onClick={this.onStrategyContextHelp}>Help</Button>
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.state.arbitraryModal} className={this.props.className}>
