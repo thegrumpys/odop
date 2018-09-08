@@ -80,7 +80,7 @@ class ActionSeek extends React.Component {
                             </InputGroupAddon>
                             <Input className="align-middle" type="select" onChange={this.onNameSelect} value={this.state.name}>
                                 {this.props.symbol_table.map((element, index) =>
-                                    !element.hidden ? <option key={index} value={element.name}>{element.name}</option> : ''
+                                    (element.equationset && !element.hidden) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
                             </Input>
                         </InputGroup>
