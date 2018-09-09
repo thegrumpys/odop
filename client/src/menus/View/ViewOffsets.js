@@ -33,9 +33,9 @@ class ViewOffsets extends React.Component {
                     <ModalBody>
                         <pre>
                         {'// Independent Variables (input-only)\n'}
-                        {this.props.symbol_table.map((element) => {return element.input ? 'export const ' + element.name.replace('%','PC').replace('/','_').replace('@','_') + ' = ' + (ip++) + ';\n' : ''})}
+                        {this.props.symbol_table.map((element) => {return element.input ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n' : ''})}
                         {'\n// Dependent Variables (input-output)\n'}
-                        {this.props.symbol_table.map((element) => {return !element.input ? 'export const ' + element.name.replace('%','PC').replace('/','_').replace('@','_') + ' = ' + (ix++) + ';\n' : ''})}
+                        {this.props.symbol_table.map((element) => {return !element.input ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ix++) + ';\n' : ''})}
                         </pre>
                     </ModalBody>
                     <ModalFooter>
