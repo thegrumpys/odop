@@ -14,7 +14,6 @@ export function invokeInit(store) {
     
     // Loop to create p and x_in from symbol_table
     var p = [];
-    var ip = 0;
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (element.input) {
@@ -22,7 +21,6 @@ export function invokeInit(store) {
         }
     }
     var x = [];
-    var ix = 0;
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (!element.input) {
