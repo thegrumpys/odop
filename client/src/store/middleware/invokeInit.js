@@ -9,7 +9,6 @@ export function invokeInit(store) {
 //    console.log('Entering invokeInit');
     
     var element;
-    const output_offest_flag = false;
 
     var design = store.getState();
     
@@ -19,7 +18,6 @@ export function invokeInit(store) {
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (element.input) {
-            output_offest_flag && console.log('export const',element.name,'=',ip++,';');
             p.push(element.value);
         }
     }
@@ -28,7 +26,6 @@ export function invokeInit(store) {
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (!element.input) {
-            output_offest_flag && console.log('export const',element.name,'=',ix++,';');
             x.push(element.value);
         }
     }
