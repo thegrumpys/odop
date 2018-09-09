@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 class ViewOffsets extends React.Component {
     constructor(props) {
-        console.log('In ViewOffsets.constructor');
+//        console.log('In ViewOffsets.constructor');
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {
@@ -13,33 +13,14 @@ class ViewOffsets extends React.Component {
     }
     
     toggle() {
-        console.log('In ViewOffsets.toggle');
+//        console.log('In ViewOffsets.toggle');
         this.setState({
             modal: !this.state.modal
         });
     }
 
-//    var p = [];
-//    var ip = 0;
-//    for (let i = 0; i < design.symbol_table.length; i++) {
-//        element = design.symbol_table[i];
-//        if (element.input) {
-//            output_offest_flag && console.log('export const',element.name,'=',ip++,';');
-//            p.push(element.value);
-//        }
-//    }
-//    var x = [];
-//    var ix = 0;
-//    for (let i = 0; i < design.symbol_table.length; i++) {
-//        element = design.symbol_table[i];
-//        if (!element.input) {
-//            output_offest_flag && console.log('export const',element.name,'=',ix++,';');
-//            x.push(element.value);
-//        }
-//    }
-    
     render() {
-        console.log('In ViewOffsets.render');
+//        console.log('In ViewOffsets.render');
         var ip = 0;
         var ix = 0;
         return (
