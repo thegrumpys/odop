@@ -497,7 +497,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 1.0,
             "equationset": false,
-            "hidden": false
+            "hidden": true
         },
         {
             "input": false,
@@ -526,7 +526,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 1.0,
             "equationset": false,
-            "hidden": false
+            "hidden": true
         },
         {
             "input": false,
