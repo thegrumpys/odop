@@ -17,6 +17,7 @@
 * [Search](Help/search)
 * [Seek](Help/seek)
 * [Trade](Help/trade)
+* [Available Design Types](Help/DesignTypes)
 
 
 ## Design
