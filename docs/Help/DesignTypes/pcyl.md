@@ -1,3 +1,10 @@
 #### Piston-Cylinder Design Type
 
-This is a place-holder for the description of the Piston-Cylinder design type.
+The Piston Cylinder design type is a small demonstration problem.
+As a design problem, it is interesting because it illustrates competing objectives.
+It can be used to show all the main features of the software including Search, Seek and Trade.  
+
+This diagram illustrates the basic design variables:
+
+< link to graphic goes here >
+
