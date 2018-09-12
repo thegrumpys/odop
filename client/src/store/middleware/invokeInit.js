@@ -9,26 +9,21 @@ export function invokeInit(store) {
 //    console.log('Entering invokeInit');
     
     var element;
-    const output_offest_flag = false;
 
     var design = store.getState();
     
     // Loop to create p and x_in from symbol_table
     var p = [];
-    var ip = 0;
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (element.input) {
-            output_offest_flag && console.log('export const',element.name,'=',ip++,';');
             p.push(element.value);
         }
     }
     var x = [];
-    var ix = 0;
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (!element.input) {
-            output_offest_flag && console.log('export const',element.name,'=',ix++,';');
             x.push(element.value);
         }
     }

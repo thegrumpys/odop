@@ -214,7 +214,9 @@ export class PromptForDesign extends React.Component {
                       Open Design Optimization Platform
                     </ModalHeader>
                     <ModalBody>
-                        Experimental software: <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">See details</a>
+                        Experimental software: <a href="https://thegrumpys.github.io/odop/About/experimental" target="_blank" rel="noopener noreferrer">See details</a>
+                        <br />
+                        Learn <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">About</a> ODOP
                         <br /><br />
                         <Label for="fileOpenSelectType">Select design type to open:</Label>
                         <Input type="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
@@ -222,6 +224,7 @@ export class PromptForDesign extends React.Component {
                                 <option key={index} value={designtype}>{designtype}</option>
                             )}
                         </Input>
+                        <br />
                         <Label for="fileOpenSelectName">Select design to open:</Label>
                         <Input type="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
                             {this.state.designs.map((design, index) =>

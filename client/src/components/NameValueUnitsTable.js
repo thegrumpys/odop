@@ -37,7 +37,7 @@ export class NameValueUnitsTable extends React.Component {
                         { (this.props.symbol_table.reduce((accum,element)=>{if (!element.equationset && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
                             (<tr>
                                 <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">Calculation Inputs</th>
-                                <UncontrolledTooltip placement="top" target="CITitle">Calculation Inputs Title ToolTip</UncontrolledTooltip>
+                                <UncontrolledTooltip placement="top" target="CITitle">Variables that are not subject to constraints, FIX or Search</UncontrolledTooltip>
                             </tr>)
                         }
                     </thead>

@@ -12,6 +12,7 @@ class ActionSeek extends React.Component {
         this.onNameSelect = this.onNameSelect.bind(this);
         this.onSeek = this.onSeek.bind(this);
         this.onCancel = this.onCancel.bind(this);
+        this.onContextHelp = this.onContextHelp.bind(this);
         this.state = {
             modal: false,
             name: this.props.symbol_table[0].name, // TODO: A fudge
@@ -51,6 +52,13 @@ class ActionSeek extends React.Component {
         });
         // Noop - all done
     }
+    
+    onContextHelp() {
+        this.setState({
+            modal: !this.state.modal
+        });
+        window.open('https://thegrumpys.github.io/odop/Help/seek', '_blank');
+    }
 
     render() {
         return (
@@ -72,7 +80,7 @@ class ActionSeek extends React.Component {
                             </InputGroupAddon>
                             <Input className="align-middle" type="select" onChange={this.onNameSelect} value={this.state.name}>
                                 {this.props.symbol_table.map((element, index) =>
-                                    !element.hidden ? <option key={index} value={element.name}>{element.name}</option> : ''
+                                    (element.equationset && !element.hidden) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
                             </Input>
                         </InputGroup>
@@ -80,6 +88,7 @@ class ActionSeek extends React.Component {
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button color="primary" onClick={this.onSeek}>Seek</Button>
+                        <Button outline color="info" onClick={this.onContextHelp}>Help</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>

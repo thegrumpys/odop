@@ -9,37 +9,45 @@ class ResultTable extends React.Component {
         var feasibility_class;
         if (this.props.objective_value > this.props.system_controls.objmin) {
             feasibility_string = "NOT FEASIBLE";
-            feasibility_class = "col-md-3 text-right text-danger font-weight-bold";
+            feasibility_class = "col-md-3 text-danger font-weight-bold";
         } else {
             if (this.props.violated_constraint_count > 0) {
                 feasibility_string = "MARGINALLY FEASIBLE";
-                feasibility_class = "col-md-3 text-right text-low-danger";
+                feasibility_class = "col-md-3 text-low-danger";
             } else {
                 feasibility_string = "FEASIBLE";
-                feasibility_class = "col-md-3 text-right";
+                feasibility_class = "col-md-3";
             }
         }
         return (
             <React.Fragment>
-                <Table className="col-md-6" size="sm">
+                <Table className="col-md-8" size="sm">
                     <tbody>
                         <tr>
-                            <th className="col-md-1" id="Feasibility">Feasibility:</th>
-                            <td className={feasibility_class} colSpan="2">{feasibility_string}</td>
+                            <th className="col-md-2" id="Feasibility">Feasibility:</th>
+                            <td className="col-md-2"></td>
+                            <td className="col-md-2"></td>
                             <td className="col-md-2"></td>
                         </tr>
                         <tr>
-                            <th className="col-md-1" id="TerminationCondition">Termination Condition:</th>
-                            <td className="col-md-3 text-right" colSpan="2">{this.props.termination_condition}</td>
+                            <td className={feasibility_class}>{feasibility_string}</td>
+                        </tr>
+                        <tr>
+                            <th className="col-md-2" id="TerminationCondition">Termination Message:</th>
                             <td className="col-md-2"></td>
+                            <td className="col-md-2"></td>
+                            <td className="col-md-2"></td>
+                        </tr>
+                        <tr>
+                            <td> {this.props.termination_condition}</td>
                         </tr>
                     </tbody>
                 </Table>
                 <Table className="col-md-2" size="sm">
                     <tbody>
                         <tr>
-                            <th id="ObjectiveValue">Objective Value:</th>
-                            <td className={feasibility_class}>{this.props.objective_value.toFixed(6)}</td>
+                            <th id="ObjectiveValue">Objective_Value:</th>
+                            <td className={feasibility_class + " text-right"}>{this.props.objective_value.toFixed(6)}</td>
                         </tr>
                         <tr>
                             <th id="OBJMIN">OBJMIN:</th>
@@ -47,7 +55,7 @@ class ResultTable extends React.Component {
                         </tr>
                     </tbody>
                 </Table>
-                <UncontrolledTooltip placement="top" target="Feasibility">Feasible:<br /> no constraints violated<br />Marginally Feasible:<br />OBJ less than OBJMIN<br />Not Feasible:<br />constraints violated</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="Feasibility">Not Feasible:<br /> OBJ greater than OBJMIN<br /><br />Marginally Feasible:<br />constraint(s) slightly violated<br /><br />Feasible:<br />no constraints violated</UncontrolledTooltip>
                 <UncontrolledTooltip placement="bottom" target="TerminationCondition">Status feedback from solution process</UncontrolledTooltip>
                 <UncontrolledTooltip placement="top" target="ObjectiveValue">Search works to minimize Objective Function value <br /> See Help for details</UncontrolledTooltip>
                 <UncontrolledTooltip placement="bottom" target="OBJMIN">Stop Search if OBJ is lower than this value</UncontrolledTooltip>
