@@ -7,7 +7,7 @@ import { report as spring_report } from '../../designtypes/Spring/report';
 
 class ViewReport extends React.Component {
     constructor(props) {
-        console.log('In ViewReport.constructor');
+//        console.log('In ViewReport.constructor');
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {
@@ -16,14 +16,14 @@ class ViewReport extends React.Component {
     }
     
     toggle() {
-        console.log('In ViewReport.toggle');
+//        console.log('In ViewReport.toggle');
         this.setState({
             modal: !this.state.modal
         });
     }
 
     report() {
-        console.log('In ViewReport.report');
+//        console.log('In ViewReport.report');
 
         // Loop to create p and x_in from symbol_table
         var element;
@@ -55,7 +55,7 @@ class ViewReport extends React.Component {
     }
     
     render() {
-      console.log('In ViewReport.render');
+//      console.log('In ViewReport.render');
       return (
           <React.Fragment>
               <DropdownItem onClick={this.toggle}>
