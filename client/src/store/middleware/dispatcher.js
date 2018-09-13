@@ -32,11 +32,6 @@ export const dispatcher = store => next => action => {
 
     switch (action.type) {
     case STARTUP:
-        invokeInit(store);
-        invokeEquationSet(store);
-        setSclDen(store);
-        updateViolationsAndObjectiveValue(store);
-        break;
     case LOAD:
         invokeInit(store);
         invokeEquationSet(store);

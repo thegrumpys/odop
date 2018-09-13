@@ -5,6 +5,7 @@ import { STARTUP,
     CHANGE_SYMBOL_VALUE, 
     CHANGE_SYMBOL_VIOLATION, 
     CHANGE_SYMBOL_CONSTRAINT, 
+    CHANGE_SYMBOL_CONSTRAINTS, 
     SAVE_SYMBOL_CONSTRAINTS, 
     RESTORE_SYMBOL_CONSTRAINTS, 
     SET_SYMBOL_FLAG, 
@@ -92,6 +93,28 @@ export function reducers(state, action) {
                 return element;
             })
         });
+    case CHANGE_SYMBOL_CONSTRAINTS:
+        i=0;
+        return Object.assign({}, state, {
+            symbol_table: state.symbol_table.map((element) => {
+                value = action.payload.values[i++];
+                if (value !== undefined) {
+                    if (action.payload.minmax === MIN) {
+                        return Object.assign({}, element, {
+                            cmin: value,
+                            smin: sclden(state.system_controls, element.value, value, element.sdlim, element.lmin)
+                        });
+                    } else {
+                        return Object.assign({}, element, {
+                            cmax: value,
+                            smax: sclden(state.system_controls, element.value, value, element.sdlim, element.lmax)
+                        });
+                    }
+                } else {
+                    return element;
+                }
+            })
+        });
     case SAVE_SYMBOL_CONSTRAINTS:
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
@@ -162,7 +185,7 @@ export function reducers(state, action) {
     case CHANGE_INPUT_SYMBOL_VALUES:
         i=0;
         return Object.assign({}, state, {
-            symbol_table: state.symbol_table.map((element, index) => {
+            symbol_table: state.symbol_table.map((element) => {
                 if (element.input) {
                     value = action.payload.values[i++]
                     if (value !== undefined) {
@@ -209,7 +232,7 @@ export function reducers(state, action) {
     case CHANGE_OUTPUT_SYMBOL_VALUES:
         i=0;
         return Object.assign({}, state, {
-            symbol_table: state.symbol_table.map((element, index) => {
+            symbol_table: state.symbol_table.map((element) => {
                 if (!element.input) {
                     value = action.payload.values[i++]
                     if (value !== undefined) {
