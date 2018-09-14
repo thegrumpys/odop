@@ -1,5 +1,6 @@
 import React from 'react';
 import * as o from './offsets';
+import * as mo from './mat_ips_offsets';
 
 export function report(p, x) {
 //    console.log('In report p=',p,' x=',x);
@@ -11,7 +12,11 @@ export function report(p, x) {
     od_1, od_2, od_solid, id_1, id_2,
     wgt1000, fs_1, kw2fs_1, kw2fs_2, kw2fs_s,
     kw1, kw2, kw2str1, kw2str2, kw2strs;
-    
+
+    /*  Bring in material properties table  */
+    var m_tab = require('./mat_ips.json');
+    var et_tab = require('./c_endtypes.json');
+
     len_lbl = "Wire Length";
     
 //    et=end_type_index;
@@ -188,7 +193,7 @@ export function report(p, x) {
                         <td> &nbsp; </td>
                         <td>{x[o.Material_Type].name}</td>
                         <td>=</td>
-                        <td>{x[o.Material_Type].value}</td>
+                        <td>{m_tab[x[o.Material_Type].value][mo.matnam]}</td>
                         <td>{x[o.Material_Type].units}</td>
                     </tr>
                     <tr>
@@ -200,8 +205,8 @@ export function report(p, x) {
                         <td> &nbsp; </td>
                         <td>{x[o.End_Type].name}</td>
                         <td>=</td>
-                        <td>{x[o.End_Type].value}</td>
-                        <td>{x[o.End_Type].units}</td>
+                        <td>{et_tab[x[o.End_Type].value][0]}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>{x[o.Spring_Index].name}</td>
