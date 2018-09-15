@@ -30,6 +30,7 @@ import ActionSeek from '../menus/Action/ActionSeek';
 import ActionTrade from '../menus/Action/ActionTrade';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
+import ActionExecute from '../menus/Action/ActionExecute';
 import ViewViolations from '../menus/View/ViewViolations';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import HelpIndex from '../menus/Help/HelpIndex';
@@ -106,9 +107,7 @@ class App extends Component {
                                     <ActionSelectSize />
                                     <ActionSelectCatalog />
                                     <DropdownItem divider />
-                                    <DropdownItem disabled>
-                                        Execute&hellip;
-                                    </DropdownItem>
+                                    <ActionExecute />
                                </DropdownMenu>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav inNavbar>
