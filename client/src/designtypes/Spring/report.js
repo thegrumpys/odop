@@ -80,9 +80,12 @@ export function report(p, x) {
 //    wire_len_a=sq1*sq1+sq2*sq2;
     wire_len_a = Math.sqrt(sq1 * sq1 + sq2 * sq2);
 //
+    dhat = def_dia(p[o.L_Free].value);   // debug code
+    console.log("dhat:L_Free = ", dhat, "Mean_Dia = ", x[o.Mean_Dia].value);
+
 //    dhat=def_dia(l_1);
     dhat = def_dia(x[o.L_1].value);
-    console.log("dhat = ", dhat);
+    console.log("dhat:L_1 = ", dhat);
 //    OD_1=DHAT+WIRE_DIA;
     od_1 = dhat + p[o.Wire_Dia].value;
 //    ID_1=DHAT-WIRE_DIA;
@@ -112,6 +115,18 @@ export function report(p, x) {
 //    end def_dia;
     }
 
+    /* From: https://www.acxesspring.com/spring-diameter-change.html  */
+     /* From: http://springipedia.com/compression-general-design.asp   */
+    var dm2 = x[o.Mean_Dia].value * x[o.Mean_Dia].value;
+    var p2 = pitch * pitch;
+    var d2 = p[o.Wire_Dia].value * p[o.Wire_Dia].value;
+    var pi2 = Math.PI * Math.PI;
+    var odcalc = Math.sqrt(dm2 + (p2 - d2) / pi2) + p[o.Wire_Dia].value;
+    console.log("odcalc = ", odcalc);
+    console.log("- - - - - - - -");
+    /* From: http://springipedia.com/compression-general-design.asp   */
+    /* From: https://www.acxesspring.com/spring-diameter-change.html  */
+    
     /* converts to % tensile value */
 //    if tensile <= 0.0 then
     if (x[o.Tensile].value <= 0.0) {
