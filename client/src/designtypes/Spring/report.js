@@ -5,7 +5,11 @@ import * as mo from './mat_ips_offsets';
 export function report(p, x) {
 //    console.log('In report p=',p,' x=',x);
     
-    var kc, ks, temp, s_f, len_lbl, safe_load_u, wgt1000_u, cycle_life_u,
+    const smallnum = 1.0e-07;  // TODO:  replace this after passing in Preferences values
+    
+    var kc, ks, temp, s_f, len_lbl, 
+    safe_load_u, wgt1000_u, cycle_life_u, 
+    pcadmsg, errmsg, errmsg1, errmsg2, errmsg3,
     sq1, sq2,
     dhat, wire_len_a, wire_len_t, safe_load, def_max,
     pitch, hlx_ang,
@@ -180,6 +184,44 @@ export function report(p, x) {
 
     cycle_life_u = x[o.Cycle_Life].units + " (est)";
     
+    if (x[o.PC_Avail_Deflect].value > 80.0) pcadmsg = "Coil to coil contact may cause inaccuracy in point 2.";
+    else  pcadmsg = "";
+    
+//    temp=deflect_2/l_free;
+    temp = x[o.Deflect_2].value / p[o.L_Free].value;
+//    sq1=1.4*slenderness-4.0;
+    sq1 = 1.4 * x[o.Slenderness].value - 4.0;
+//    if sq1 > smallnum then
+    if (sq1 > smallnum) {  //  TODO: update after passing in preference values
+//      do;                 /* structured to avoid div by 0 */
+//      if temp > 0.76/sq1 then
+            if (temp > 0.76 / sq1) {
+//     do;
+//     errmsg = '';
+//     put file(targfile) skip(2) edit
+//          ('GIVEN A DEFLECTION RATIO OF', temp,
+                errmsg1 = "Given a deflection ratio of " + temp.toFixed(3) + 
+//              '  AND A SLENDERNESS RATIO OF', slenderness,
+                "  and a Slenderness ratio of " + x[o.Slenderness].value.toFixed(1) + ",";
+//              'THE SPRING WILL', errmsg,
+//              ' TEND TO BUCKLE WITH FIXED/FREE  ENDS.')
+                 errmsg2 = "the spring will tend to buckle with fixed/free  ends.";
+//          (a, f(8,3), a, f(7,1), skip, a, a, a);
+//     sq1=2.0*slenderness-8.0;
+                 sq1 = 2.0 * x[o.Slenderness].value - 8.0;
+//     if sq1 <= zero | temp < 1.6/sq1 then errmsg = ' NOT';
+                 if (sq1 <= 0.0 || temp < 1.6 / sq1) errmsg = " not";
+//                     else errmsg = '';
+                 else errmsg = "";
+//     put file(targfile) skip edit
+//          ('THE SPRING WILL', errmsg,
+//           ' TEND TO BUCKLE WITH FIXED/FIXED ENDS.')
+//          (a);
+                 errmsg = "The spring will" + errmsg + " tend to buckle with fixed/fixed ends.";
+//     end;
+            }
+    }
+    
     return (
         <React.Fragment>
             <table>
@@ -332,6 +374,11 @@ export function report(p, x) {
                     </tr>
                 </tbody>
             </table>
+            <br />
+            Deflection at load point 2 is {x[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.
+            <br />{pcadmsg}
+            <br />{errmsg1}<br />{errmsg2}<br />{errmsg3}{errmsg}
+            <br />
         </React.Fragment>
     );
 }
