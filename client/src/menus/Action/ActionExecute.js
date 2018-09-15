@@ -1,6 +1,9 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
+import interactiveTutorials from 'react-interactive-tutorials'
+import { startTutorial } from 'react-interactive-tutorials';
+import { TUTORIALS } from '../../tutorials/demo.js';
 
 class ActionExecute extends React.Component {
     constructor(props) {
@@ -35,6 +38,7 @@ class ActionExecute extends React.Component {
             modal: !this.state.modal
         });
         // Do execute
+        startTutorial('demo'); // hardcoded for the time being
     }
     
     onCancel() {
