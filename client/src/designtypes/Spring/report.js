@@ -78,7 +78,7 @@ export function report(p, x) {
 //    sq2=coils_a*pi*mean_dia;
     sq2 = x[o.Coils_A].value * Math.PI * x[o.Mean_Dia].value;
 //    wire_len_a=sq1*sq1+sq2*sq2;
-    wire_len_a = Math.sqrt(sq1 * sq1 + sq2 * sq2);
+    wire_len_a = sq1 * sq1 + sq2 * sq2;
 //
     dhat = def_dia(p[o.L_Free].value);   // debug code
     console.log("dhat:L_Free = ", dhat, "Mean_Dia = ", x[o.Mean_Dia].value);
