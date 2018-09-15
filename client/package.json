@@ -30,8 +30,9 @@
     "popper.js": "^1.14.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4",
+    "react-interactive-tutorials": "^0.1.11",
     "react-redux": "^5.0.7",
+    "react-scripts": "1.1.4",
     "reactstrap": "^6.2.0",
     "redux": "^4.0.0"
   },
