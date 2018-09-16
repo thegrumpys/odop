@@ -3,10 +3,11 @@ import * as o from './offsets';
 import * as mo from './mat_ips_offsets';
 
 export function getReportNames() {
+    // Note: report names must match cases in switch statement below
     return [
-      'Report 1',
-      'Report 2',
-      'Report 3'
+      'Report 1 (mini)',
+      'Report 2 (pre-set)',
+      'Report 3 (maxi)'
     ];
 }
 
@@ -16,6 +17,7 @@ export function report(report_name, prefs, p, x, labels) {
     var kc, ks, temp, s_f, len_lbl, 
     safe_load_u, wgt1000_u, cycle_life_u, 
     pcadmsg, errmsg, errmsg1, errmsg2, errmsg3,
+    safe_travel,
     sq1, sq2,
     dhat, wire_len_a, wire_len_t, safe_load, def_max,
     pitch, hlx_ang,
@@ -229,8 +231,13 @@ export function report(report_name, prefs, p, x, labels) {
             }
     }
 
+//    def_max=l_free-l_solid;
+    def_max = p[o.L_Free].value - x[o.L_Solid].value;
+//    temp=min(safe_load/rate,def_max);
+    safe_travel = Math.min(safe_load / x[o.Rate].value, def_max);
+
     switch(report_name) {
-    case "Report 1":
+    case "Report 1 (mini)":
     default:
 
     return (
@@ -393,7 +400,7 @@ export function report(report_name, prefs, p, x, labels) {
             {errmsg3}{errmsg}
         </React.Fragment>
     );
-    case "Report 2":
+    case "Report 2 (pre-set)":
         return (
                 <React.Fragment>
                     <table>
@@ -537,10 +544,168 @@ export function report(report_name, prefs, p, x, labels) {
             </table>
         </React.Fragment>
     );
-    case "Report 3":
+    case "Report 3 (maxi)":
     return (
         <React.Fragment>
-            <span>Not Implemented</span>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Contact Person:</td>
+                        <td> &nbsp; </td>
+                        <td>{labels[1]}</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>Phone: </td>
+                        <td> &nbsp; </td>
+                        <td>{labels[6]}</td>
+                    </tr>
+                    <tr>
+                        <td>Company Name: </td>
+                        <td> &nbsp; </td>
+                        <td>{labels[2]}</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>Date: </td>
+                        <td> &nbsp; </td>
+                        <td>{labels[7]}</td>
+                    </tr>
+                    <tr>
+                        <td>Street: </td>
+                        <td> &nbsp; </td>
+                        <td>{labels[3]}</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>Part Number: </td>
+                        <td> &nbsp; </td>
+                        <td>{labels[8]}</td>
+                    </tr>
+                    <tr>
+                        <td>City: </td>
+                        <td> &nbsp; </td>
+                        <td>{labels[4]}</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>Finish: </td>
+                        <td> &nbsp; </td>
+                        <td>{labels[9]}</td>
+                    </tr>
+                    <tr>
+                        <td>State & Zip: </td>
+                        <td> &nbsp; </td>
+                        <td>{labels[5]}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <b>Comment: &nbsp; </b> {labels[0]} <br/>
+            <br/>
+            <table>
+                <tbody>
+                    <tr>
+                    <td>{x[o.Spring_Type].name}</td>
+                    <td>=</td>
+                    <td>{x[o.Spring_Type].value}</td>
+                    <td>{x[o.Spring_Type].units}</td>
+                    <td/>
+                    <td> &nbsp; </td>
+                    <td>{x[o.Material_Type].name}</td>
+                    <td>=</td>
+                    <td>{m_tab[x[o.Material_Type].value][mo.matnam]}</td>
+                    <td>{x[o.Material_Type].units}</td>
+                </tr>
+                <tr>
+                    <td>{p[o.Wire_Dia].name}</td>
+                    <td>=</td>
+                    <td>{p[o.Wire_Dia].value.toFixed(4)}</td>
+                    <td>{p[o.Wire_Dia].units}</td>
+                    <td/>
+                    <td> &nbsp; </td>
+                    <td>{x[o.ASTM_Fed_Spec].name}</td>
+                    <td>=</td>
+                    <td>{x[o.ASTM_Fed_Spec].value}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>{x[o.Mean_Dia].name}</td>
+                    <td>=</td>
+                    <td>{x[o.Mean_Dia].value.toFixed(3)}</td>
+                    <td>{x[o.Mean_Dia].units}</td>
+                    <td/>
+                    <td> &nbsp; </td>
+                    <td>{x[o.Tensile].name}</td>
+                    <td>=</td>
+                    <td>{x[o.Tensile].value.toFixed(0)}</td>
+                    <td>{x[o.Tensile].units}</td>
+                </tr>
+                <tr>
+                    <td>{x[o.Spring_Index].name}</td>
+                    <td>=</td>
+                    <td>{x[o.Spring_Index].value.toFixed(3)}</td>
+                    <td>{x[o.Spring_Index].units}</td>
+                    <td/>
+                    <td> &nbsp; </td>
+                    <td>{x[o.End_Type].name}</td>
+                    <td>=</td>
+                    <td>{et_tab[x[o.End_Type].value][0]}</td>
+                </tr>
+                <tr>
+                    <td>{p[o.Coils_T].name}</td>
+                    <td>=</td>
+                    <td>{p[o.Coils_T].value.toFixed(3)}</td>
+                    <td>{"Total " + p[o.Coils_T].units}</td>
+                    <td/>
+                    <td> &nbsp; </td>
+                    <td>Pitch</td>
+                    <td>=</td>
+                    <td>{pitch.toFixed(3)}</td>
+                    <td>{p[o.L_Free].units}</td>
+                </tr>
+                <tr>
+                    <td>{x[o.Coils_A].name}</td>
+                    <td>=</td>
+                    <td>{x[o.Coils_A].value.toFixed(3)}</td>
+                    <td>{"Active " + x[o.Coils_A].units}</td>
+                    <td/>
+                    <td> &nbsp; </td>
+                    <td>Helix Angle</td>
+                    <td>=</td>
+                    <td>{hlx_ang.toFixed(2)}</td>
+                    <td>degrees</td>
+                </tr>
+                <tr>
+                    <td>{len_lbl}</td>
+                    <td>=</td>
+                    <td>{wire_len_t.toFixed(3)}</td>
+                    <td>{p[o.L_Free].units}</td>
+                    <td/>
+                    <td> &nbsp; </td>
+                    <td>{x[o.Weight].name}</td>
+                    <td>=</td>
+                    <td>{wgt1000.toFixed(3)}</td>
+                    <td>{wgt1000_u}</td>
+                </tr>
+                <tr>
+                    <td>Safe Load</td>
+                    <td>=</td>
+                    <td>{safe_load.toFixed(3)}</td>
+                    <td>{safe_load_u}</td>
+                    <td/>
+                    <td> &nbsp; </td>
+                    <td>{x[o.Rate].name}</td>
+                    <td>=</td>
+                    <td>{x[o.Rate].value.toFixed(3)}</td>
+                    <td>{x[o.Rate].units}</td>
+                </tr>
+                <tr>
+                    <td>Safe Travel</td>
+                    <td>=</td>
+                    <td>{safe_travel.toFixed(3)}</td>
+                    <td>{p[o.L_Free].units}</td>
+                    <td/>
+                    <td> &nbsp; </td>
+                    <td>{x[o.Cycle_Life].name}</td>
+                    <td>=</td>
+                    <td>{x[o.Cycle_Life].value.toFixed(0)}</td>
+                    <td>{cycle_life_u}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br/>
         </React.Fragment>
     );
     }
