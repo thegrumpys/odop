@@ -20,7 +20,7 @@ export const TUTORIALS = {
     ],
     complete: {
       on: 'checkpointReached',
-      checkpoint: 'complete',
+      checkpoint: 'start',
       title: 'Demo Complete!',
       message: 'That concludes the demo.',
     },
