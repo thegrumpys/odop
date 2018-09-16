@@ -6,6 +6,7 @@ export function report(p, x) {
 //    console.log('In report p=',p,' x=',x);
     
     const smallnum = 1.0e-07;  // TODO:  replace this after passing in Preferences values
+    const rptname = "report1";
     
     var kc, ks, temp, s_f, len_lbl, 
     safe_load_u, wgt1000_u, cycle_life_u, 
@@ -61,10 +62,10 @@ export function report(p, x) {
     sq2 = p[o.Coils_T].value * Math.PI * x[o.Mean_Dia].value;
 //    wire_len_t=sqrt(sq1*sq1+sq2*sq2);
     wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
-            /*
-           calculate developed length of tapered ends based on
-           2 ends * pi * wire diameter * 0.625
-            */
+         /*
+            calculate developed length of tapered ends based on
+            2 ends * pi * wire diameter * 0.625
+          */
 //    if end_type_index = 5 then wire_len_t=wire_len_t-3.926*wire_dia;
     if (x[o.End_Type].value === 5 ) wire_len_t = wire_len_t - 3.926 * p[o.Wire_Dia].value;
                            /*  more accurate weight  */
@@ -80,12 +81,8 @@ export function report(p, x) {
 //    wire_len_a=sq1*sq1+sq2*sq2;
     wire_len_a = sq1 * sq1 + sq2 * sq2;
 //
-    dhat = def_dia(p[o.L_Free].value);   // debug code
-    console.log("dhat:L_Free = ", dhat, "Mean_Dia = ", x[o.Mean_Dia].value);
-
 //    dhat=def_dia(l_1);
     dhat = def_dia(x[o.L_1].value);
-    console.log("dhat:L_1 = ", dhat);
 //    OD_1=DHAT+WIRE_DIA;
     od_1 = dhat + p[o.Wire_Dia].value;
 //    ID_1=DHAT-WIRE_DIA;
@@ -107,25 +104,15 @@ export function report(p, x) {
     function def_dia(def_len) {
                /*  calculates mean diameter of deflected spring.  */
 //      declare def_len float;
-        console.log("def_len = ", def_len);
-        console.log("wire_len_a = ", wire_len_a);
-        console.log("x[o.Coils_A].value = ", x[o.Coils_A].value)
 //      return(sqrt(wire_len_a-def_len*def_len)/(coils_a*pi));
         return(Math.sqrt(wire_len_a - def_len * def_len) / (x[o.Coils_A].value * Math.PI));
 //    end def_dia;
     }
-
-    /* From: https://www.acxesspring.com/spring-diameter-change.html  */
-     /* From: http://springipedia.com/compression-general-design.asp   */
-    var dm2 = x[o.Mean_Dia].value * x[o.Mean_Dia].value;
-    var p2 = pitch * pitch;
-    var d2 = p[o.Wire_Dia].value * p[o.Wire_Dia].value;
-    var pi2 = Math.PI * Math.PI;
-    var odcalc = Math.sqrt(dm2 + (p2 - d2) / pi2) + p[o.Wire_Dia].value;
-    console.log("odcalc = ", odcalc);
-    console.log("- - - - - - - -");
-    /* From: http://springipedia.com/compression-general-design.asp   */
-    /* From: https://www.acxesspring.com/spring-diameter-change.html  */
+    /*
+     * Alternative deflected diameter calculation formula:
+     * From: https://www.acxesspring.com/spring-diameter-change.html
+     * From: http://springipedia.com/compression-general-design.asp 
+     */
     
     /* converts to % tensile value */
 //    if tensile <= 0.0 then
@@ -275,7 +262,7 @@ export function report(p, x) {
                         <td>{p[o.Coils_T].name}</td>
                         <td>=</td>
                         <td>{p[o.Coils_T].value.toFixed(3)}</td>
-                        <td>{p[o.Coils_T].units}</td>
+                        <td>{"Total " + p[o.Coils_T].units}</td>
                     </tr>
                     <tr>
                         <td>{x[o.Rate].name}</td>
@@ -287,7 +274,7 @@ export function report(p, x) {
                         <td>{x[o.Coils_A].name}</td>
                         <td>=</td>
                         <td>{x[o.Coils_A].value.toFixed(3)}</td>
-                        <td>{x[o.Coils_A].units}</td>
+                        <td>{"Active " + x[o.Coils_A].units}</td>
                     </tr>
                 </tbody>
             </table>
