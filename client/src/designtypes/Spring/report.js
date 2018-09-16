@@ -1,6 +1,5 @@
 import React from 'react';
 import * as o from './offsets';
-import * as osc from '../../offsetSystemControls';
 import * as mo from './mat_ips_offsets';
 
 export function getReportNames() {
@@ -200,7 +199,7 @@ export function report(report_name, prefs, p, x) {
 //    sq1=1.4*slenderness-4.0;
     sq1 = 1.4 * x[o.Slenderness].value - 4.0;
 //    if sq1 > smallnum then
-    if (sq1 > prefs[osc.smallnum]) {  //  TODO: update after passing in preference values
+    if (sq1 > prefs[o.smallnum]) {  //  TODO: update after passing in preference values
 //      do;                 /* structured to avoid div by 0 */
 //      if temp > 0.76/sq1 then
             if (temp > 0.76 / sq1) {
