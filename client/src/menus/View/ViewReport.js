@@ -75,18 +75,25 @@ class ViewReport extends React.Component {
             }
         }
 
+        // Loop to create p and x from symbol_table
+        var labels = [];
+        for (let i = 0; i < this.props.labels.length; i++) {
+            element = this.props.labels[i];
+            labels.push(element.value);
+        }
+
         // Generate design-type specific report
         var output;
         switch(this.props.type) {
         default:
         case 'Piston-Cylinder':
-            output = pcyl_report(this.state.report_name, prefs, p, x);
+            output = pcyl_report(this.state.report_name, prefs, p, x, labels);
             break;
         case 'Solid':
-            output = solid_report(this.state.report_name, prefs, p, x);
+            output = solid_report(this.state.report_name, prefs, p, x, labels);
             break;
         case 'Spring':
-            output = spring_report(this.state.report_name, prefs, p, x);
+            output = spring_report(this.state.report_name, prefs, p, x, labels);
             break;
         }
         return output;
@@ -120,6 +127,7 @@ const mapStateToProps = state => ({
     type: state.type,
     symbol_table: state.symbol_table,
     system_controls: state.system_controls,
+    labels: state.labels,
 });
 
 export default connect(mapStateToProps)(ViewReport);
