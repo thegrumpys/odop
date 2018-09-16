@@ -1,12 +1,18 @@
 import React from 'react';
 import * as o from './offsets';
+import * as osc from '../../offsetSystemControls';
 import * as mo from './mat_ips_offsets';
 
-export function report(p, x) {
-//    console.log('In report p=',p,' x=',x);
-    
-    const smallnum = 1.0e-07;  // TODO:  replace this after passing in Preferences values
-    const rptname = "report2";
+export function getReportNames() {
+    return [
+      'Report 1',
+      'Report 2',
+      'Report 3'
+    ];
+}
+
+export function report(report_name, prefs, p, x) {
+//    console.log('In report report_name=',report_name,' prefs=',prefs,' p=',p,' x=',x);
     
     var kc, ks, temp, s_f, len_lbl, 
     safe_load_u, wgt1000_u, cycle_life_u, 
@@ -188,14 +194,13 @@ export function report(p, x) {
     cycle_life_u = x[o.Cycle_Life].units + " (est)";
     
     if (x[o.PC_Avail_Deflect].value > 80.0) pcadmsg = "Coil to coil contact may cause inaccuracy in point 2.";
-    else  pcadmsg = "";
     
 //    temp=deflect_2/l_free;
     temp = x[o.Deflect_2].value / p[o.L_Free].value;
 //    sq1=1.4*slenderness-4.0;
     sq1 = 1.4 * x[o.Slenderness].value - 4.0;
 //    if sq1 > smallnum then
-    if (sq1 > smallnum) {  //  TODO: update after passing in preference values
+    if (sq1 > prefs[osc.smallnum]) {  //  TODO: update after passing in preference values
 //      do;                 /* structured to avoid div by 0 */
 //      if temp > 0.76/sq1 then
             if (temp > 0.76 / sq1) {
@@ -225,8 +230,8 @@ export function report(p, x) {
             }
     }
 
-    switch(rptname) {
-    case "report1":
+    switch(report_name) {
+    case "Report 1":
     default:
 
     return (
@@ -382,14 +387,14 @@ export function report(p, x) {
                 </tbody>
             </table>
             <br />
-            Deflection at load point 2 is {x[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.
-            <br />{pcadmsg}
-            <br />{errmsg1}<br />{errmsg2}<br />{errmsg3}{errmsg}
-            <br />
+            Deflection at load point 2 is {x[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
+            {pcadmsg}{pcadmsg !== undefined && <br />}
+            {errmsg1}{errmsg1 !== undefined && <br />}
+            {errmsg2}{errmsg2 !== undefined && <br />}
+            {errmsg3}{errmsg}
         </React.Fragment>
     );
-    break;
-    case "report2":
+    case "Report 2":
         return (
                 <React.Fragment>
                     <table>
@@ -531,8 +536,13 @@ export function report(p, x) {
                         </tr>
                 </tbody>
             </table>
-            <br />
-                </React.Fragment>
-        );
+        </React.Fragment>
+    );
+    case "Report 3":
+    return (
+        <React.Fragment>
+            <span>Not Implemented</span>
+        </React.Fragment>
+    );
     }
 }
