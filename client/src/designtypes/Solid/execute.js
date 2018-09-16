@@ -1,6 +1,7 @@
 export function getExecuteNames() {
-    console.log('In getExecuteNames');
-    return [];
+    var result = [];
+    console.log('In getExecuteNames result=',result);
+    return result;
 }
 
 export function execute(execute_name) {
