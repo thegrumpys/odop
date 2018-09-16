@@ -6,7 +6,7 @@ export function report(p, x) {
 //    console.log('In report p=',p,' x=',x);
     
     const smallnum = 1.0e-07;  // TODO:  replace this after passing in Preferences values
-    const rptname = "report1";
+    const rptname = "report2";
     
     var kc, ks, temp, s_f, len_lbl, 
     safe_load_u, wgt1000_u, cycle_life_u, 
@@ -55,8 +55,9 @@ export function report(p, x) {
         break;
     default:
         pitch = 0.0;
-}     
-//    sq1=l_free;
+    }     
+
+    //    sq1=l_free;
     sq1 = p[o.L_Free].value;
 //    sq2=coils_t*pi*mean_dia;
     sq2 = p[o.Coils_T].value * Math.PI * x[o.Mean_Dia].value;
@@ -146,7 +147,7 @@ export function report(p, x) {
 //    kw2str1=temp*force_1;
     kw2str1 = temp * p[o.Force_1].value;
 //    kw2str2=temp*force_2;
-    kw2str2 = temp = p[o.Force_2].value;
+    kw2str2 = temp * p[o.Force_2].value;
 //    kw2strs=temp*force_solid;
     kw2strs = temp * x[o.Force_Solid].value;
 //
@@ -223,7 +224,11 @@ export function report(p, x) {
 //     end;
             }
     }
-    
+
+    switch(rptname) {
+    case "report1":
+    default:
+
     return (
         <React.Fragment>
             <table>
@@ -383,4 +388,151 @@ export function report(p, x) {
             <br />
         </React.Fragment>
     );
+    break;
+    case "report2":
+        return (
+                <React.Fragment>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>{x[o.Spring_Type].name}</td>
+                                <td>=</td>
+                                <td>{x[o.Spring_Type].value}</td>
+                                <td>{x[o.Spring_Type].units}</td>
+                                <td/>
+                                <td> &nbsp; </td>
+                                <td>{x[o.Material_Type].name}</td>
+                                <td>=</td>
+                                <td>{m_tab[x[o.Material_Type].value][mo.matnam]}</td>
+                                <td>{x[o.Material_Type].units}</td>
+                            </tr>
+                            <tr>
+                                <td>{p[o.Wire_Dia].name}</td>
+                                <td>=</td>
+                                <td>{p[o.Wire_Dia].value.toFixed(4)}</td>
+                                <td>{p[o.Wire_Dia].units}</td>
+                                <td/>
+                                <td> &nbsp; </td>
+                                <td>{x[o.Tensile].name}</td>
+                                <td>=</td>
+                                <td>{x[o.Tensile].value.toFixed(0)}</td>
+                                <td>{x[o.Tensile].units}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>{x[o.Spring_Index].name}</td>
+                                <td>=</td>
+                                <td>{x[o.Spring_Index].value.toFixed(3)}</td>
+                                <td>{x[o.Spring_Index].units}</td>
+                                <td/>
+                                <td> &nbsp; </td>
+                                <td>Stress Ratio</td>
+                                <td>=</td>
+                                <td>{(x[o.Stress_1].value / x[o.Stress_2].value).toFixed(3)}</td>
+                                <td>{x[o.Stress_1].units}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    kw1 = {kw1.toFixed(3)} &nbsp; &nbsp; (Applies before set removal)
+                    <br/>
+                    kw2 = {kw2.toFixed(3)} &nbsp; &nbsp; (Applies &nbsp;after &nbsp; set removal)
+                    <br/><br/>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                    ---- kw2 ----- &nbsp; &nbsp; ---- kw1 ----
+                    <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Length &nbsp; </th>
+                            <th>Deflect &nbsp;</th>
+                            <th>Force &nbsp; &nbsp;</th>
+                            <th>Stress &nbsp; &nbsp; </th>
+                            <th>%TS &nbsp;</th>
+                            <th>Stress &nbsp; &nbsp; </th>
+                            <th>%TS &nbsp;</th>
+                            <th>Static FS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Free</b></td>
+                            <td>{p[o.L_Free].value.toFixed(3)}</td>
+                            <td>{(0.0).toFixed(4)}</td>
+                            <td>{(0.0).toFixed(2)}</td>
+                            <td>{(0.0).toFixed(0)}</td>
+                            <td>{(0.0).toFixed(1)}</td>
+                            <td>{(0.0).toFixed(0)}</td>
+                            <td>{(0.0).toFixed(1)}</td>
+                            <td>infinite</td>
+                        </tr>
+                        <tr>
+                            <td><b>1</b></td>
+                            <td>{x[o.L_1].value.toFixed(3)}</td>
+                            <td>{x[o.Deflect_1].value.toFixed(4)}</td>
+                            <td>{p[o.Force_1].value.toFixed(2)}</td>
+                            <td>{kw2str1.toFixed(0)}</td>
+                            <td>{(kw2str1 / dhat).toFixed(1)}</td>
+                            <td>{x[o.Stress_1].value.toFixed(0)}</td>
+                            <td>{(x[o.Stress_1].value / dhat).toFixed(1)}</td>
+                            <td>{fs_1.toFixed(3)}</td>
+                        </tr>
+                        <tr>
+                            <td><b>2</b></td>
+                            <td>{x[o.L_2].value.toFixed(3)}</td>
+                            <td>{x[o.Deflect_2].value.toFixed(4)}</td>
+                            <td>{p[o.Force_2].value.toFixed(2)}</td>
+                            <td>{kw2str2.toFixed(0)}</td>
+                            <td>{(kw2str2 / dhat).toFixed(1)}</td>
+                            <td>{x[o.Stress_2].value.toFixed(0)}</td>
+                            <td>{(x[o.Stress_2].value / dhat).toFixed(1)}</td>
+                            <td>{x[o.FS_2].value.toFixed(3)}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Solid</b></td>
+                            <td>{x[o.L_Solid].value.toFixed(3)}</td>
+                            <td>{(p[o.L_Free].value - x[o.L_Solid].value).toFixed(4)}</td>
+                            <td>{x[o.Force_Solid].value.toFixed(2)}</td>
+                            <td>{kw2strs.toFixed(0)}</td>
+                            <td>{(kw2strs / dhat).toFixed(1)}</td>
+                            <td>{x[o.Stress_Solid].value.toFixed(0)}</td>
+                            <td>{(x[o.Stress_Solid].value / dhat).toFixed(1)}</td>
+                            <td>{x[o.FS_Solid].value.toFixed(3)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>{x[o.FS_CycleLife].name}</td>
+                            <td>=</td>
+                            <td>{x[o.FS_CycleLife].value.toFixed(3)}</td>
+                            <td>{x[o.FS_CycleLife].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{x[o.Cycle_Life].name}</td>
+                            <td>=</td>
+                            <td>{x[o.Cycle_Life].value.toFixed(0)}</td>
+                            <td>{cycle_life_u}</td>
+                        </tr>
+                        <tr>
+                            <td>Helix Angle</td>
+                            <td>=</td>
+                            <td>{hlx_ang.toFixed(2)}</td>
+                            <td>degrees</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                </tbody>
+            </table>
+            <br />
+                </React.Fragment>
+        );
+    }
 }
