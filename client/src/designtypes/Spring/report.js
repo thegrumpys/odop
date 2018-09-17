@@ -22,7 +22,7 @@ export function report(report_name, prefs, p, x, labels) {
     dhat, wire_len_a, wire_len_t, safe_load, def_max,
     pitch, hlx_ang,
     od_1, od_2, od_solid, id_1, id_2,
-    wgt1000, fs_1, kw2fs_1, kw2fs_2, kw2fs_s,
+    wgt1000, fs_1,  //   kw2fs_1, kw2fs_2, kw2fs_s,   (unused)
     kw1, kw2, kw2str1, kw2str2, kw2strs;
 
     /*  Bring in material properties table  */
@@ -164,18 +164,16 @@ export function report(report_name, prefs, p, x, labels) {
     if (x[o.Stress_1] !== 0.0) fs_1 = Math.abs(x[o.Stress_Lim_Stat].value / x[o.Stress_1].value);
 //        else fs_1=zero;
     else fs_1 = 0.0;
-//    if kw2str1  ^= zero then kw2fs_1=abs(temp/kw2str1);
-    if (kw2str1 !== 0.0) kw2fs_1 = Math.abs(temp / kw2str1);
-//        else kw2fs_1=zero;
-    else kw2fs_1 = 0.0;
-//    if kw2str2  ^= zero then kw2fs_2=temp/kw2str2;
-    if (kw2str2 !== 0.0) kw2fs_2 = temp / kw2str2;
-//        else kw2fs_2=zero;
-    else kw2str2 = 0.0;
-//    if kw2strs  ^= zero then kw2fs_s=temp/kw2strs;
-    if (kw2strs !== 0.0) kw2fs_s = temp / kw2strs;
-//        else kw2fs_s=zero;
-    else kw2fs_s = 0.0;
+
+    /*  unused
+     *  if (kw2str1 !== 0.0) kw2fs_1 = Math.abs(temp / kw2str1);
+     *  else kw2fs_1 = 0.0;
+     *  if (kw2str2 !== 0.0) kw2fs_2 = temp / kw2str2;
+     *  else kw2str2 = 0.0;
+     *  if (kw2strs !== 0.0) kw2fs_s = temp / kw2strs;
+     *  else kw2fs_s = 0.0;
+     *  unused
+     */
 //
 //    safe_load=stress_lim_stat/s_f;
     safe_load = x[o.Stress_Lim_Stat].value / s_f;
@@ -201,7 +199,7 @@ export function report(report_name, prefs, p, x, labels) {
 //    sq1=1.4*slenderness-4.0;
     sq1 = 1.4 * x[o.Slenderness].value - 4.0;
 //    if sq1 > smallnum then
-    if (sq1 > prefs[o.smallnum]) {  //  TODO: update after passing in preference values
+    if (sq1 > prefs[o.smallnum]) {  
 //      do;                 /* structured to avoid div by 0 */
 //      if temp > 0.76/sq1 then
             if (temp > 0.76 / sq1) {
@@ -758,7 +756,6 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{(od_solid - 2.0 * p[o.Wire_Dia].value).toFixed(3)}</td>
                     <td>{x[o.ID_Free].units}</td>
                 </tr>
-                    
                 <tr>
                     <td>w/o set &nbsp; kw = </td>
                     <td>{kw1.toFixed(3)}</td>
@@ -793,7 +790,75 @@ export function report(report_name, prefs, p, x, labels) {
                 </tr>
             </tbody>
         </table>
-        <br/>
+        <hr/>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Wind: </td>
+                    <td> &nbsp; </td>
+                    <td>rh</td>
+                    <td> &nbsp; &nbsp; </td>
+                    <td>lh</td>
+                    <td>opt</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Data source: </td>
+                    <td> &nbsp; </td>
+                    <td>print </td>
+                    <td> &nbsp; &nbsp; </td>
+                    <td>sample </td>
+                    <td>verbal &nbsp; &nbsp; </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Mandrel: </td>
+                    <td> &nbsp; </td>
+                    <td> &nbsp; </td>
+                    <td> &nbsp; &nbsp; </td>
+                    <td>Fits in: </td>
+                    <td> &nbsp; </td>
+                    <td>Works over:</td>
+                </tr>
+                <tr>
+                    <td>Stress relieve</td>
+                    <td>/HT: </td>
+                    <td> &nbsp; </td>
+                    <td> &nbsp; &nbsp; </td>
+                    <td>Squareness </td>
+                    <td> (deg): </td>
+                    <td> &nbsp; </td>
+                </tr>
+                <tr>
+                    <td>Shot peen: </td>
+                    <td> &nbsp; </td>
+                    <td> yes </td>
+                    <td> &nbsp; </td>
+                    <td> no </td>
+                    <td> &nbsp; &nbsp; </td>
+                    <td> Operating temp: </td>
+                </tr>
+                <tr>
+                    <td>Special notes</td>
+                    <td>& tolerances: </td>
+                    <td> &nbsp; </td>
+                    <td> &nbsp; </td>
+                    <td> &nbsp; </td>
+                    <td> &nbsp; &nbsp; </td>
+                    <td> End use: </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr/>
+        Deflection at load point 2 is {x[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
+        {pcadmsg}{pcadmsg !== undefined && <br />}
+        {errmsg1}{errmsg1 !== undefined && <br />}
+        {errmsg2}{errmsg2 !== undefined && <br />}
+        {errmsg3}{errmsg}
+        <hr/>
+        &nbsp; &nbsp; &nbsp; approved for mfg.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+        approved for mfg.<br/>
+        by _____________________ &nbsp; date _____ &nbsp; by ________________________ &nbsp; date _____
         <br/>
         </React.Fragment>
     );
