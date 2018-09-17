@@ -548,49 +548,49 @@ export function report(report_name, prefs, p, x, labels) {
             <table>
                 <tbody>
                     <tr>
-                        <td>Contact Person:</td>
+                        <td>{labels[o.Contact_person].name}:</td>
                         <td> &nbsp; </td>
-                        <td>{labels[1]}</td>
+                        <td>{labels[o.Contact_person].value}</td>
                         <td> &nbsp; &nbsp; </td>
-                        <td>Phone: </td>
+                        <td>{labels[o.Phone].name}: </td>
                         <td> &nbsp; </td>
-                        <td>{labels[6]}</td>
+                        <td>{labels[o.Phone].value}</td>
                     </tr>
                     <tr>
-                        <td>Company Name: </td>
+                        <td>{labels[o.Company_name].name}: </td>
                         <td> &nbsp; </td>
-                        <td>{labels[2]}</td>
+                        <td>{labels[o.Company_name].value}</td>
                         <td> &nbsp; &nbsp; </td>
-                        <td>Date: </td>
+                        <td>{labels[o.Date].name}: </td>
                         <td> &nbsp; </td>
-                        <td>{labels[7]}</td>
+                        <td>{labels[o.Date].value}</td>
                     </tr>
                     <tr>
-                        <td>Street: </td>
+                        <td>{labels[o.Street].name}: </td>
                         <td> &nbsp; </td>
-                        <td>{labels[3]}</td>
+                        <td>{labels[o.Street].value}</td>
                         <td> &nbsp; &nbsp; </td>
-                        <td>Part Number: </td>
+                        <td>{labels[o.Part_Number].name}: </td>
                         <td> &nbsp; </td>
-                        <td>{labels[8]}</td>
+                        <td>{labels[o.Part_Number].value}</td>
                     </tr>
                     <tr>
-                        <td>City: </td>
+                        <td>{labels[o.City].name}: </td>
                         <td> &nbsp; </td>
-                        <td>{labels[4]}</td>
+                        <td>{labels[o.City].value}</td>
                         <td> &nbsp; &nbsp; </td>
-                        <td>Finish: </td>
+                        <td>{labels[o.Finish].name}: </td>
                         <td> &nbsp; </td>
-                        <td>{labels[9]}</td>
+                        <td>{labels[o.Finish].value}</td>
                     </tr>
                     <tr>
-                        <td>State & Zip: </td>
+                        <td>{labels[o.State___Zip].name}: </td>
                         <td> &nbsp; </td>
-                        <td>{labels[5]}</td>
+                        <td>{labels[o.State___Zip].value}</td>
                     </tr>
                 </tbody>
             </table>
-            <b>Comment: &nbsp; </b> {labels[0]} <br/>
+            <b>Comment: &nbsp; </b> {labels[o.COMMENT].value} <br/>
             <br/>
             <table>
                 <tbody>

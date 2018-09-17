@@ -79,7 +79,7 @@ class ViewReport extends React.Component {
         var labels = [];
         for (let i = 0; i < this.props.labels.length; i++) {
             element = this.props.labels[i];
-            labels.push(element.value);
+            labels.push(Object.assign({},element));
         }
 
         // Generate design-type specific report
@@ -111,7 +111,7 @@ class ViewReport extends React.Component {
               })}
               <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
                   <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : {this.state.report_name} </ModalHeader>
-                  <ModalBody>
+                  <ModalBody id="report">
                       {this.report()}
                   </ModalBody>
                   <ModalFooter>
