@@ -706,6 +706,95 @@ export function report(report_name, prefs, p, x, labels) {
             </tbody>
         </table>
         <br/>
+        <table>
+            <thead>
+                <tr>
+                    <th> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </th>
+                    <th>Free &nbsp; &nbsp; &nbsp; </th>
+                    <th>1st Load &nbsp;</th>
+                    <th>2nd Load &nbsp; &nbsp;</th>
+                    <th>Solid &nbsp;</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Force</b></td>
+                    <td>{(0.0).toFixed(2)}</td>
+                    <td>{p[o.Force_1].value.toFixed(2)}</td>
+                    <td>{p[o.Force_2].value.toFixed(2)}</td>
+                    <td>{x[o.Force_Solid].value.toFixed(2)}</td>
+                    <td>{p[o.Force_1].units}</td>
+                </tr>
+                <tr>
+                    <td><b>Length</b></td>
+                    <td>{p[o.L_Free].value.toFixed(3)}</td>
+                    <td>{x[o.L_1].value.toFixed(3)}</td>
+                    <td>{x[o.L_2].value.toFixed(3)}</td>
+                    <td>{x[o.L_Solid].value.toFixed(3)}</td>
+                    <td>{x[o.L_1].units}</td>
+                </tr>
+                <tr>
+                    <td><b>Deflection</b></td>
+                    <td>{(0.0).toFixed(3)}</td>
+                    <td>{x[o.Deflect_1].value.toFixed(3)}</td>
+                    <td>{x[o.Deflect_2].value.toFixed(3)}</td>
+                    <td>{(p[o.L_Free].value - x[o.L_Solid].value).toFixed(3)}</td>
+                    <td>{x[o.Deflect_2].units}</td>
+                </tr>
+                <tr>
+                    <td><b>Outside Dia.</b></td>
+                    <td>{p[o.OD_Free].value.toFixed(3)}</td>
+                    <td>{od_1.toFixed(3)}</td>
+                    <td>{od_2.toFixed(3)}</td>
+                    <td>{od_solid.toFixed(3)}</td>
+                    <td>{p[o.OD_Free].units}</td>
+                </tr>
+                <tr>
+                    <td><b>Inside Dia.</b></td>
+                    <td>{x[o.ID_Free].value.toFixed(3)}</td>
+                    <td>{id_1.toFixed(3)}</td>
+                    <td>{id_2.toFixed(3)}</td>
+                    <td>{(od_solid - 2.0 * p[o.Wire_Dia].value).toFixed(3)}</td>
+                    <td>{x[o.ID_Free].units}</td>
+                </tr>
+                    
+                <tr>
+                    <td>w/o set &nbsp; kw = </td>
+                    <td>{kw1.toFixed(3)}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td> ... <b>Stress</b></td>
+                    <td></td>
+                    <td>{x[o.Stress_1].value.toFixed(0)}</td>
+                    <td>{x[o.Stress_2].value.toFixed(0)}</td>
+                    <td>{x[o.Stress_Solid].value.toFixed(0)}</td>
+                    <td>{x[o.Stress_1].units}</td>
+                </tr>
+                <tr>
+                    <td> ... <b>% Tensile</b></td>
+                    <td></td>
+                    <td>{(x[o.Stress_1].value / dhat).toFixed(1)}</td>
+                    <td>{(x[o.Stress_2].value / dhat).toFixed(1)}</td>
+                    <td>{(x[o.Stress_Solid].value / dhat).toFixed(1)}</td>
+                    <td>%</td>
+                </tr>
+                <tr>
+                    <td> ... <b>Static F.S.</b></td>
+                    <td></td>
+                    <td>{fs_1.toFixed(2)}</td>
+                    <td>{x[o.FS_2].value.toFixed(2)}</td>
+                    <td>{x[o.FS_Solid].value.toFixed(2)}</td>
+                    <td>{x[o.FS_Solid].units}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br/>
+        <br/>
         </React.Fragment>
     );
     }
