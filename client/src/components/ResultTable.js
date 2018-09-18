@@ -46,7 +46,7 @@ class ResultTable extends React.Component {
                 <Table className="col-md-2" size="sm">
                     <tbody>
                         <tr>
-                            <th id="ObjectiveValue">Objective_Value:</th>
+                            <th id="ObjectiveValue">Objective&nbsp;Value:</th>
                             <td className={feasibility_class + " text-right"}>{this.props.objective_value.toFixed(6)}</td>
                         </tr>
                         <tr>
@@ -58,7 +58,7 @@ class ResultTable extends React.Component {
                 <UncontrolledTooltip placement="top" target="Feasibility">Not Feasible:<br /> OBJ greater than OBJMIN<br /><br />Marginally Feasible:<br />constraint(s) slightly violated<br /><br />Feasible:<br />no constraints violated</UncontrolledTooltip>
                 <UncontrolledTooltip placement="bottom" target="TerminationCondition">Status feedback from solution process</UncontrolledTooltip>
                 <UncontrolledTooltip placement="top" target="ObjectiveValue">Search works to minimize Objective Function value <br /> See Help for details</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="OBJMIN">Stop Search if OBJ is lower than this value</UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="OBJMIN">Stop Search if Objective&nbsp;Value gets lower than {this.props.system_controls.objmin.toFixed(6)}</UncontrolledTooltip>
             </React.Fragment>
         );
     }
