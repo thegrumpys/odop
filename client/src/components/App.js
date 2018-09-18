@@ -30,6 +30,7 @@ import ActionSeek from '../menus/Action/ActionSeek';
 import ActionTrade from '../menus/Action/ActionTrade';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
+import ViewReport from '../menus/View/ViewReport';
 import ViewViolations from '../menus/View/ViewViolations';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import HelpIndex from '../menus/Help/HelpIndex';
@@ -123,9 +124,7 @@ class App extends Component {
                                         Display Sub-Problems&hellip;
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <DropdownItem disabled>
-                                        Report&hellip;
-                                    </DropdownItem>
+                                    <ViewReport />
                                     <DropdownItem divider />
                                     <ViewViolations />
                                     {process.env.NODE_ENV !== "production" && <ViewOffsets />}

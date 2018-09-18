@@ -23,6 +23,8 @@ class ViewOffsets extends React.Component {
 //        console.log('In ViewOffsets.render');
         var ip = 0;
         var ix = 0;
+        var isc = 0;
+        var il = 0;
         return (
             <React.Fragment>
                 <DropdownItem onClick={this.toggle}>
@@ -36,6 +38,10 @@ class ViewOffsets extends React.Component {
                         {this.props.symbol_table.map((element) => {return element.input ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n' : ''})}
                         {'\n// Dependent Variables (input-output)\n'}
                         {this.props.symbol_table.map((element) => {return !element.input ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ix++) + ';\n' : ''})}
+                        {'\n// System Controls (Preferences)\n'}
+                        {Object.keys(this.props.system_controls).map((element) => { return 'export const ' + element.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (isc++) + ';\n'})}
+                        {'\n// Labels (Properties)\n'}
+                        {this.props.labels.map((element) => {return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (il++) + ';\n'})}
                         </pre>
                     </ModalBody>
                     <ModalFooter>
@@ -49,6 +55,8 @@ class ViewOffsets extends React.Component {
 
 const mapStateToProps = state => ({
     symbol_table: state.symbol_table,
+    system_controls: state.system_controls,
+    labels: state.labels
 });
 
 export default connect(mapStateToProps)(ViewOffsets);
