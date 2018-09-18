@@ -97,18 +97,23 @@ export function reducers(state, action) {
         i=0;
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
-                value = action.payload.values[i++];
-                if (value !== undefined) {
-                    if (action.payload.minmax === MIN) {
-                        return Object.assign({}, element, {
-                            cmin: value,
-                            smin: sclden(state.system_controls, element.value, value, element.sdlim, element.lmin)
-                        });
+                // Only do it from independent and dependent variables, but not for calculation inputs
+                if (element.equationset) {
+                    value = action.payload.values[i++];
+                    if (value !== undefined) {
+                        if (action.payload.minmax === MIN) {
+                            return Object.assign({}, element, {
+                                cmin: value,
+                                smin: sclden(state.system_controls, element.value, value, element.sdlim, element.lmin)
+                            });
+                        } else {
+                            return Object.assign({}, element, {
+                                cmax: value,
+                                smax: sclden(state.system_controls, element.value, value, element.sdlim, element.lmax)
+                            });
+                        }
                     } else {
-                        return Object.assign({}, element, {
-                            cmax: value,
-                            smax: sclden(state.system_controls, element.value, value, element.sdlim, element.lmax)
-                        });
+                        return element;
                     }
                 } else {
                     return element;
