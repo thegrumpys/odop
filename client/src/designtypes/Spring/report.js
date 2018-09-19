@@ -5,9 +5,9 @@ import * as mo from './mat_ips_offsets';
 export function getReportNames() {
     // Note: report names must match cases in switch statement below
     return [
-      'Report 1 (mini)',
-      'Report 2 (pre-set)',
-      'Report 3 (maxi)'
+      '1 (mini)',
+      '2 (pre-set)',
+      '3 (maxi)'
     ];
 }
 
@@ -162,7 +162,7 @@ export function report(report_name, prefs, p, x, labels) {
     safe_travel = Math.min(safe_load / x[o.Rate].value, def_max);
 
     switch(report_name) {
-    case "Report 1 (mini)":
+    case "1 (mini)":
     default:
 
     return (
@@ -360,7 +360,7 @@ export function report(report_name, prefs, p, x, labels) {
             {errmsg3}{errmsg}
         </React.Fragment>
     );
-    case "Report 2 (pre-set)":
+    case "2 (pre-set)":
         return (
                 <React.Fragment>
                     <table>
@@ -518,7 +518,7 @@ export function report(report_name, prefs, p, x, labels) {
             </table>
         </React.Fragment>
     );
-    case "Report 3 (maxi)":
+    case "3 (maxi)":
     return (
         <React.Fragment>
             <table>
