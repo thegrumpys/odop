@@ -144,7 +144,7 @@ intended application.  It is possible that some applications will
 require a spring to operate at stress levels that would make it totally
 unsuitable for other, only slightly different applications.
 
-The REPORT menu items present crucial information about the performance of
+The REPORT tabs present crucial information about the performance of
 a design in a specialized, compact format.
 
 In general, a finished design should not have significant remaining
@@ -156,7 +156,7 @@ linear in the range of 20 to 80 % of available deflection.  Outside this
 range, effects of end coils and nonuniform coil pitch influence the
 accuracy of analytical predictions.
 
-For compression springs, the REPORT 2 menu item will produce an
+For compression springs, the REPORT 2 tab will produce an
 informational message any time that more than 80 % of available
 deflection (%\_AVAIL\_DEFLECT) is used at the second load point.  Note
 that the default start point (startup) supplied with ODOP:Spring has
@@ -190,7 +190,7 @@ is usually provided by operation in a sleeve or over a post.  The
 constraint SLENDERNESS MAX can be used to restrict the search to designs
 that will not tend to buckle.  Note that the value of SLENDERNESS is not
 constrained in the default start point (startup) and thus the search may produce
-designs that are prone to buckling.  The REPORT 1 menu item will provide an
+designs that are prone to buckling.  The REPORT 1 tab will provide an
 indication as to the possibility of bucking for your specific design and
 loading condition.
 
@@ -211,7 +211,7 @@ reaching the main page, a complete spring design is already
 defined.  Use the numeric entry fields plus FIX checkboxess to alter that existing
 design to reflect what is known about the problem at hand.
 
-The main page and REPORT menu items can be used to
+The main page and REPORT tabs can be used to
 view the current state of the design.  The main page will show which
 constraints are violated.  Use the SEARCH menu item to have ODOP:Spring
 select values for the free independent variables that reduce (and
@@ -288,7 +288,8 @@ REFERENCES
    
 RESTRICTIONS   
 This section covers a few restrictions and limitations of the ODOP:Spring
-program.  Please review the About : Disclaimer section for liability limitations.
+program.  Please review the About : Notice and About : Restrictions sections
+ for liability limitations.
 
 The current release of ODOP:Spring is valid only for helical coil compression,
 extension and torsion springs that have the properties of uniform pitch,
@@ -296,7 +297,7 @@ cylindrical shape, & round wire.  The design equations consider only static
 and cyclic applications.  Do not apply the program to designs where spring
 dynamics ("surge" effects) are important.
 
-Compression spring stress values produced by the REPORT 2 feature include a
+Compression spring stress values produced by the REPORT 2 tab include a
 stress correction factor (Kw2) that is appropriate for use after set
 removal.  Otherwise, the current release of ODOP:Spring does not take into
 consideration any kind of pre-stressing or "set-removal" operations.
@@ -359,7 +360,7 @@ NAMES
  force - deflection curve.  Three points are analyzed for an extension
  spring.  This information includes length, deflection, force, outside
  diameter, inside diameter, stress and static factor of safety.  This
- information is listed in a compressed format by the REPORT menu items.  The
+ information is listed in a compressed format by the REPORT tabs.  The
  equations assume that the spring will operate between two points, named 1
  and 2, somewhere in the spring's elastic region.  It is entirely possible
  for point 1 to correspond with the spring's free state, or for a
@@ -371,426 +372,18 @@ NAMES
  search will attempt to resolve the conflict.
    
  Names that apply to the design of a compression spring are covered in the
- documentation section COMPRESSION SPRING NAMES.   
+ documentation section on Compression Springs.   
 
  Names that apply to the design of an extension spring are covered in the
- documentation section EXTENSION SPRING NAMES.   
+ documentation section on Extension Springs.   
 
    
-COMPRESSION SPRING NAMES   
-               Compression spring names   
-
- The force deflection points and associated names are:
-
-         length    force        outside  inside    stress        factor of
-                    diameter diameter            safety
-         ______    ______       ________ ________  ______        ________
-
- free:       L_FREE         OD_FREE  ID_FREE
-
- point 1:    L_1      FORCE_1                  STRESS_1
-
- point 2:    L_2      FORCE_2                  STRESS_2      FS_2
-
- solid:      L_SOLID  FORCE_SOLID              STRESS_SOLID  FS_SOLID
-
-
- point 1 = minimum operating load;     point 2 = maximum operating load
-
-   
- Independent Variable names:
-
-    WIRE_DIA         -  wire diameter
-
-    OD_FREE      -  outside diameter in the free condition
-
-    COILS_T      -  total number of coils, including inactive coils
-
-    L_FREE       -  free length
-
-    FORCE_1      -  load at point 1  (minimum operating load)
-
-    FORCE_2      -  load at point 2  (maximum operating load)
-   
- Calculation Input names  (character strings):
-
-    SPRING_TYPE      -  character string used only as label
-
-    MATERIAL_TYPE    -  character string that is used to determine which
-            entry in the material table is used to determine
-            allowable stresses when PROP_CALC_METHOD is 1.
-            Otherwise is ignored.
-
-    ASTM/FED-SPEC    -  character string used only as a label to further
-            identify the origin of material property data
-
-    END_TYPE         -  character string that is used to determine
-            calculations for INACTIVE_COILS and L_SOLID & pitch.
-            Refer to documentation section on END_CALC_METHOD.
-
-    CATALOG_NUMBER   -  character string that contains the catalog number of
-            the most recent catalog selection.  Otherwise is
-            ignored.
-   
-    PROCESS      -  character string used to identify the
-            manufacturing process.  It is normally controlled
-            by the material selected from the material table.
-            Values are usually COLD_COILED or HOT_WOUND.
-            Refer to discussion under HOT_FACTOR_KH.
-
-    MATERIAL_FILE    -  character string containing the material table name.
-            It is normally established by the initialState.js file.
-
-   
- Constant names  (integer constants):
-
-    PROP_CALC_METHOD -  This value controls how material properties and
-            and allowable stresses are determined.
-            1 indicates values come from materials table;
-            allowable stresses will be calculated as a function
-            of WIRE_DIA.
-            2 indicates tensile and allowable % are supplied
-            by the user; allowable stresses are calculated.
-            3 indicates allowable stresses are supplied directly
-            by the user.
-            Refer to documentation section on MATERIALS.
-   
-    LIFE_CATEGORY    -  This value reflects the user's input about shot
-            peening and required cycle life.  It is related
-            to the calculation of FS_CYCLE_LIFE.
-            Refer to documentation section on CYCLE_LIFE.
-
-   
- Calculation Input names  (floating point constants):
-
-    INACTIVE_COILS   -  number of inactive coils (depends on end type)
-    ADD_COILS@SOLID  -  extra coils included in solid height calculation
-            refer to END_TYPES for additional information
-    DENSITY      -  wire density; weight per unit volume
-    TORSION_MODULUS  -  torsional modulus (G)
-    HOT_FACTOR_KH    -  empirical correction factor for hot wound modulus
-    TENSILE      -  tensile strength in PSI
-    %_TENSILE_ENDUR  -  fraction of tensile strength for torsion endurance
-    %_TENSILE_STAT   -  fraction of tensile strength for torsion static load
-    STRESS_LIM_ENDUR -  allowable stress limit; cyclic application (torsion)
-    STRESS_LIM_STAT  -  allowable stress limit; static application (torsion)
-
-   
- Dependent Variable names:
-
-    MEAN_DIA         -  mean diameter of spring coil in free condition
-            (OD_free + ID_FREE)/2
-    COILS_A      -  number of active coils (turns)
-    RATE         -  spring constant - force per unit deflection
-    DEFLECT_1        -  deflection at FORCE_1
-    DEFLECT_2        -  deflection at FORCE_2
-    L_1          -  spring length at minimum operating load  (FORCE_1)
-    L_2          -  spring length at maximum operating load  (FORCE_2)
-    L_STROKE         -  net deflection between point 1 and point 2
-    L_SOLID      -  solid height
-    SLENDERNESS      -  ratio of L_FREE to COIL_DIA.  The "form factor"
-            that governs a spring's tendency to buckle
-    ID_FREE      -  inside  diameter in free condition
-    WEIGHT       -  weight of spring; wire density * wire volume
-    SPRING_INDEX     -  spring index;  the ratio COIL_DIA/WIRE_DIA
-   
-    FORCE_SOLID      -  force produced in solid condition
-    STRESS_1         -  torsional stress at point 1
-    STRESS_2         -  torsional stress at point 2
-    STRESS_SOLID     -  torsional stress in the solid condition
-    FS_2         -  static factor of safety at point 2
-            This is the ratio of allowable stress at point 2
-            to the calculated stress induced by the load at
-            point 2  (STRESS_LIM_STAT/STRESS_2).
-    FS_SOLID         -  static factor of safety at solid condition
-            (STRESS_LIM_STAT/STRESS_SOLID)
-    FS_CYCLE_LIFE    -  factor of safety based on the Soderberg endurance
-            limit calculation.  This figure uses the allowable
-            endurance stress (STRESS_LIM_ENDUR) to include
-            fatigue considerations.  Refer to additional
-            discussion in the CYCLE_LIFE section.
-   
-    CYCLE_LIFE       -  expected cycle life based on a calculation
-            using the "modified Goodman method".  This value is
-            approximate.  Refer to additional discussion in the
-            CYCLE_LIFE section.
-    %_AVAIL_DEFLECT  -  the percentage of available deflection consumed at
-            load point 2.
-
-   
- Other values are calculated and displayed by the REPORT menu items.  These
- include:
-
-    wire length      -  total length of wire required to manufacture the
-            spring, not including any waste.
-
-    safe load        -  The load supported by the spring in the solid
-            condition or at a stress equal to the
-            STRESS_LIM_STAT value, whichever is lower.
-
-    pitch        -  coil to coil spacing in the free state
-
-    weight       -  weight of spring including a term due to
-            free length
-
-    buckling         -  indication of tendency to buckle given the current
-            design and loading conditions.
-   
-    stress ratio     -  ratio of minimum stress to maximum stress
-            (STRESS_1/STRESS_2)
-
-    Kw1, Kw2         -  stress correction factors due to curvature.
-
-    helix angle      -  angle, in degrees, of the spring helix relative
-            to a perpendicular to the spring axis
-
-   
-EXTENSION SPRING NAMES   
-               Extension spring names   
-
- The force deflection points and associated names are:   
-
-         length    force        outside  inside    stress        factor of
-                    diameter diameter            safety
-         ______    ______       ________ ________  ______        ________
-
- free:       L_FREE_(W/ENDS)        OD_FREE  ID_FREE
-
- point 1:    L_1      FORCE_1                  STRESS_1
-
- point 2:    L_2      FORCE_2                  STRESS_2      FS_2
-
-
- point 1 = minimum operating load;     point 2 = maximum operating load
-
-   
- Independent Variable names:
-
-    WIRE_DIA         -  wire diameter
-
-    OD_FREE      -  outside diameter in the free condition
-
-    COILS_T      -  total number of coils, including inactive coils
-
-    INITIAL_TENSION  -  initial tension of extension spring (free condition)
-
-    END_EXTENSION    -  Length added to the spring by a straight wire
-            extension between the body of the spring and
-            the ends.  The value of END_EXTENSION is the sum
-            for both ends of the spring.
-
-    FORCE_1      -  load at point 1    (minimum operating load)
-
-    FORCE_2      -  load at point 2    (maximum operating load)
-   
- Calculation Input names  (character strings):
-
-    SPRING_TYPE      -  character string used only as label
-
-    MATERIAL_TYPE    -  character string that is used to determine which
-            entry in the material table is used to determine
-            allowable stresses when PROP_CALC_METHOD is 1.
-            Otherwise is ignored.
-
-    ASTM/FED-SPEC    -  character string used only as a label to further
-            identify the origin of material property data
-
-    END_TYPE         -  character string that is used to determine
-            calculations for INACTIVE_COILS, HOOK_DEFLECT_ALL,
-            and end dimensions.  Refer to END_CALC_METHOD.
-
-    CATALOG_NUMBER   -  character string that contains the catalog number of
-            the most recent catalog selection.  Otherwise is
-            ignored.
-   
-    PROCESS      -  character string used to identify the
-            manufacturing process.  It is normally controlled
-            by the material selected from the material table.
-            Values are usually COLD_COILED or HOT_WOUND.
-            Refer to discussion under HOT_FACTOR_KH.
-
-    MATERIAL_FILE    -  character string containing the material table name.
-            It is normally established by the initialState.js file.
-
-   
- Calculation Input names  (integer constants):
-
-    PROP_CALC_METHOD -  This value controls how material properties and
-            and allowable stresses are determined.
-            1 indicates values come from materials table;
-            allowable stresses will be calculated as a function
-            of WIRE_DIA.
-            2 indicates tensile and allowable % are supplied
-            by the user; allowable stresses are calculated.
-            3 indicates allowable stresses are supplied directly
-            by the user.
-            Refer to documentation section on MATERIALS.
-   
-    LIFE_CATEGORY    -  This value reflects the user's input about shot
-            peening and required cycle life.  It is related
-            to the calculation of FS_CYCLE_LIFE.
-            Refer to documentation section on CYCLE_LIFE.
-
-   
- Calculation Input names  (floating point constants):
-
-    INACTIVE_COILS   -  number of inactive coils (depends on end type)
-    DENSITY      -  wire density; weight per unit volume
-    TORSION_MODULUS  -  torsional modulus (G)
-    HOT_FACTOR_KH    -  empirical correction factor for hot wound modulus
-    TENSILE      -  tensile strength in PSI
-    %_TENSILE_ENDUR  -  fraction of tensile strength for torsion endurance
-    %_TENSILE_STAT   -  fraction of tensile strength for torsion static load
-    %_TENSILE_BEND   -  fraction of tensile strength for bending in end
-    STRESS_LIM_ENDUR -  allowable stress limit; cyclic application (torsion)
-    STRESS_LIM_STAT  -  allowable stress limit; static application (torsion)
-    STRESS_LIM_BEND  -  allowable stress limit; static application (bending)
-    SI_LO_FACTOR     -  used in calculation of minimum initial stress
-    SI_HI_FACTOR     -  used in calculation of maximum initial stress
-    END_ID       -  inside diameter of hook or loop
-    EXTENDED_END_ID  -  inside diameter of hook or loop at other end
-    L_END        -  distance from body to inside of hook
-    L_EXTENDED_END   -  distance from body to inside of hook at other end
-    HOOK_DEFLECT_ALL -  number of coils allowed for hook deflection
-   
- Dependent Variable names:
-
-    MEAN_DIA         -  mean diameter of spring coil in free condition
-            (OD_free + ID_FREE)/2
-    ID_FREE      -  inside  diameter in free condition
-    COILS_A      -  number of active coils (turns)
-    RATE         -  spring constant - force per unit deflection
-    DEFLECT_1        -  deflection at FORCE_1
-    DEFLECT_2        -  deflection at FORCE_2
-    L_BODY_(FREE)    -  length of body in free condition (without ends)
-    L_FREE_(W/ENDS)  -  length of the entire spring, in free condition
-    L_1          -  spring length at minimum operating load  (FORCE_1)
-    L_2          -  spring length at maximum operating load  (FORCE_2)
-    L_STROKE         -  net deflection between point 1 and point 2
-    WEIGHT       -  weight of spring; wire density * wire volume
-    SPRING_INDEX     -  spring index;  the ratio COIL_DIA/WIRE_DIA
-   
-    STRESS_INITIAL   -  stress produced by initial tension
-    STRESS_1         -  torsional stress at point 1
-    STRESS_2         -  torsional stress at point 2
-    STRESS_HOOK      -  bending stress in the hook at point 2
-    FS_2         -  static factor of safety at point 2
-            This is the ratio of allowable stress at point 2
-            to the calculated stress induced by the load at
-            point 2  (STRESS_LIM_STAT/STRESS_2).
-    FS_CYCLE_LIFE    -  factor of safety based on the Soderberg endurance
-            limit calculation.  This figure uses the allowable
-            endurance stress (STRESS_LIM_ENDUR) to include
-            fatigue considerations.  Refer to additional
-            discussion in the CYCLE_LIFE section.
-    FS_HOOK      -  factor of safety in hook based on STRESS_HOOK
-            and STRESS_LIM_BEND
-    CYCLE_LIFE       -  expected cycle life based on a calculation
-            using the "modified Goodman method".  This value is
-            approximate.  Refer to additional discussion in the
-            CYCLE_LIFE section.
-   
-    STRESS_INIT_LO   -  lower limit of initial stress for proper
-            manufacturability.
-    STRESS_INIT_HI   -  upper limit of initial stress for proper
-            manufacturability
-    FS_SI_LO         -  factor of safety on lower limit of initial stress
-    FS_SI_HI         -  factor of safety on upper limit of initial stress
-    F_1>IT_MARGIN    -  amount by which FORCE_1 exceeds INITIAL_TENSION
-   
- Other values are calculated and displayed by the REPORT menu items.  These
- include:   
-
-    wire_length      -  total length of wire required to manufacture the
-            spring, not including any waste.
-
-    safe_load        -  load supported by the spring at a stress of
-            STRESS_LIM_STAT
-
-    stress ratio     -  ratio of minimum stress to maximum stress
-            (STRESS_1/STRESS_2)
-
-    Kw1          -  stress correction factor due to curvature.
-
-    torsion stress at end  - stress in hook or loop
-    bending stress at end  - stress in hook or loop  (STRESS_HOOK)
-
-
- The following diagram may be of some assistance in interpreting the various
- dimensions of an extension spring.
-
-   
-              Extension Spring Names   
-
-
-    |<-----------  L_FREE  -------------->|   
-
-         |<----  L_BODY  ---->|   
-
-                                |
-       .  ____________________     .           _v_
-     /'  |                    |         `\
-    |    |            |       |       OD_FREE
-     \   |            |      /
-      `._|____________________|________.'              ___
-                                ^
-                                |
-
-                 ---->|    |<---- END_EXTENSION   
-
-     -->|    |<--- L_END   
-
-                     ---->|   |<---- L_EXTENDED_END   
 
    
 FORCE-DEFLECTION DIAGRAMS   
 
-
-    FORCE_SOLID -|---------------/.
-                 |              / .
-     FORCE_2 ----|-------------/  .
-                 |            /:  .      ODOP:Spring
-           F     |           / :  .        Names
-                 |          /  :  .
-           O     |         /   :  .       compression
-                 |        /    :  .         spring
-           R     |       /     :  .
-                 |      /      :  .
-    FORCE_1 -----|-----/       :  .
-                 |    /:       :  .
-           C     |   / :<----->:------- L_STROKE
-                 |  /  :       :  .
-           E     | /   :       :  .
-                 |/____:_______:__._______
-            L_FREE     :       :  L_SOLID
-                      L_1     L_2
-                 DEFLECT_1    DEFLECT_2
-
-                 D E F L E C T I O N
-   
-
-            |         /
-        FORCE_2 ----|------------/
-            |       /:         ODOP:Spring Names
-      F         |      / :
-            |     /  :            extension
-      O         |    /   :             spring
-            |   /    :
-      R         |      /     :
-            |     /      :
-      C     FORCE_1 ----|----/       :
-            |   /:       :
-      E         |  / :<----->:------- L_STROKE
-            | /  :       :
-        INITIAL_ _ _|/   :       :
-        TENSION |    :       :
-            |____:_______:________
-           L_FREE    :       :
-                 L_1     L_2
-               DEFLECT_1     DEFLECT_2
-
-              D E F L E C T I O N
-   
+Force-Deflection diagrams are contained in the individual 
+Compression Spring, Extension Spring and Torsion Spring sections.
 
  The remaining names used by ODOP:Spring are described in the NAMES section of
  the documentation.
@@ -846,39 +439,6 @@ FS\_CYCLE\_LIFE MIN is a lower constraint level associated with
 FS\_CYCLE\_LIFE.  A value less than 1.0 will permit designs that risk
 failure in high cycle applications.
    
-Constraints unique to compression springs:   
-
-SLENDERNESS is a compression spring's ratio of free length (L\_FREE) to
-mean coil diameter (COIL\_DIA).  If this ratio exceeds 4 for a
-compression spring, that spring will have a tendency to buckle under
-load.  In that case, the spring will usually need support in the form of
-a sleeve or post.  In order to restrain the search to select designs
-that do not have a tendency to buckle, set the value of SLENDERNESS MAX
-to a value of 4.0 or less.
-
-%\_AVAIL\_DEFLECT is the percentage of available deflection consumed at
-load point 2.  %\_AVAIL\_DEFLECT is usually constrained to be less than 85
-to 98 percent.  Thus it requires the search to select designs that
-provide a small margin between load point 2 and the solid condition.
-
-   
-Constraints unique to extension springs:
-
-These constraints are slightly different than the other constraints.
-Rather than having levels that are expressed as simple constants, they
-express a desired relationship between selected variables.  Refer to the
-documentation sections named "FUNCTION" and "LIST LEVELS" for additional
-information.
-
-In the default extension spring start point (startup), FORCE\_1 MIN is
-a "function" of INITIAL\_TENSION.  This says that the force at the first
-load point should be greater than the value of INITIAL\_TENSION.
-
-STRESS\_INITIAL MIN and STRESS\_INITIAL MAX are also defined as functions.
-These constraints say that the stress produced by INITIAL\_TENSION should
-be within the limits specified in the initial selection specifying
-extension spring Calculation Inputs.  The selection values are
-"readily obtainable" or "special request".
 
    
 FACTOR OF SAFETY
@@ -1027,8 +587,8 @@ current values of %\_TENSILE\_STAT and %\_TENSILE\_ENDUR whether established by
 the user or carried over from the values established in the materials table
 or startup.  The order in which these menu items are entered is significant.
 
-    CHANGE  MATERIAL\_TYPE   USER\_DEFINED
-    CHANGE  TORSION\_MODULUS  xxxxxxxx
+    CHANGE  MATERIAL_TYPE   USER_DEFINED
+    CHANGE  TORSION_MODULUS  xxxxxxxx
 
 The program will issue a confirming message after each menu item.
    
@@ -1040,8 +600,8 @@ STRESS\_LIM\_STAT and STRESS\_LIM\_ENDUR will continue to be based on the new
 value of %\_TENSILE\_STAT and existing value of %\_TENSILE\_ENDUR.  The order
 in which these menu items are entered is significant.
 
-    CHANGE  MATERIAL\_TYPE   USER\_DEFINED
-    CHANGE  %\_TENSILE\_STAT  xxxxxxxx
+    CHANGE  MATERIAL_TYPE   USER_DEFINED
+    CHANGE  %_TENSILE_STAT  xxxxxxxx
 
 The program will issue a confirming message after each menu item.
 
@@ -1051,11 +611,11 @@ The program will issue a confirming message after each menu item.
  dependence on the WIRE\_DIA or any values from the materials table.  The
  order in which these menu items are entered is significant.
 
-    CHANGE  MATERIAL\_TYPE  USER\_DEFINED
-    CHANGE  PROP\_CALC\_METHOD  3
-    CHANGE  TORSION\_MODULUS   xxxxxxxx
-    CHANGE  STRESS\_LIM\_STAT   yyyyyy
-    CHANGE  STRESS\_LIM\_ENDUR  zzzzzz
+    CHANGE  MATERIAL_TYPE  USER_DEFINED
+    CHANGE  PROP_CALC_METHOD  3
+    CHANGE  TORSION_MODULUS   xxxxxxxx
+    CHANGE  STRESS_LIM_STAT   yyyyyy
+    CHANGE  STRESS_LIM_ENDUR  zzzzzz
 
    
 The SAVE menu item will capture the complete status of the design including
@@ -1076,14 +636,14 @@ has the following possible values:
 
           Compression           Extension
 
-    1     OPEN              1   FULL\_LOOP
-    2     OPEN&GROUND       2   75%\_LOOP
-    3     CLOSED            3   FULL\_HOOK
-    4     CLOSED&GROUND     4   75%\_HOOK
-    5     TAPERED\_C&G       5   CLOSE\_WOUND\_COIL
+    1     OPEN              1   FULL_LOOP
+    2     OPEN&GROUND       2   75%_LOOP
+    3     CLOSED            3   FULL_HOOK
+    4     CLOSED&GROUND     4   75%_HOOK
+    5     TAPERED_C&G       5   CLOSE_WOUND_COIL
     6     PIG-TAIL
 
-    7     USER\_SPECIFIED        6   USER\_SPECIFIED
+    7     USER_SPECIFIED    6   USER_SPECIFIED
 
 For a compression spring, the end type directly impacts calculation of
 INACTIVE\_COILS.  L\_SOLID, pitch and other variables are affected
@@ -1139,22 +699,24 @@ INACTIVE\_COILS and/or ADD\_COILS@SOLID directly, first select a value of
 END\_TYPE of USER_SPECIFIED.  For example to represent a
 spring with one end CLOSED with the other end CLOSED&GROUND:
 
-    CHANGE  END\_TYPE  USER\_SPECIFIED
-    CHANGE  INACTIVE\_COILS   2.0
-    CHANGE  ADD\_COILS@SOLID  0.5
+    CHANGE  END_TYPE  USER_SPECIFIED
+    CHANGE  INACTIVE_COILS   2.0
+    CHANGE  ADD_COILS@SOLID  0.5
 
 To represent a spring with ten active coils, two dead coils and closed
 ends:
-    CHANGE  END\_TYPE  USER\_SPECIFIED
-    FIX COILS\_T     14.0
+
+    CHANGE  END_TYPE  USER_SPECIFIED
+    FIX COILS_T     14.0
     CHANGE  INACTIVE COILS   4.0
-    CHANGE  ADD\_COILS@SOLID  1.0
+    CHANGE  ADD_COILS@SOLID  1.0
 
    
 BUCKLING
-                     free length          L\_FREE
+
+                     free length          L_FREE
     SLENDERNESS = ----------------  =  -------------
-                    coil diameter        MEAN\_DIA
+                    coil diameter        MEAN_DIA
 
 If a compression spring is intended for operation without lateral support
 it should have a ratio of free length to coil diameter (SLENDERNESS) less
@@ -1166,7 +728,7 @@ designs that will not tend to buckle.  Note that SLENDERNESS is not
 constrained in the default startup.  Thus, unless this constraint is
 established, a search may produce designs that are subject to buckling.
 
-The REPORT menu items will provide an indication as to the possibility of
+The REPORT tabs will provide an indication as to the possibility of
 bucking for each specific design and loading condition.  Both the
 fixed-free and fixed-fixed end conditions are covered.
 
@@ -1177,8 +739,8 @@ in the REFERENCES section of the documentation.
 CYCLE LIFE   
 This section presents a discussion of cycle life considerations and
 describes the Soderberg calculation and the ODOP:Spring interpretation of
-FS\_CYCLE\_LIFE.  A discussion of hook stresses in extension springs is
-included.
+FS\_CYCLE\_LIFE.  A discussion of hook stresses in extension springs appears in
+the Extension Spring section.
 
 ODOP:Spring provides two different approaches to the cycle life issue.  For
 materials contained in the materials table (PROP\_CALC\_METHOD=1), ODOP:Spring
@@ -1210,8 +772,8 @@ is not enough to have ODOP:Spring search for designs with a long cycle life.
 To have ODOP:Spring search for designs with a long cycle life, use menu items
 such as:
 
-    CHANGE  CYCLE\_LIFE  MIN  nnnnnn
-    CHANGE  FS\_CYCLE\_LIFE  MIN  1.0
+    CHANGE  CYCLE_LIFE  MIN  nnnnnn
+    CHANGE  FS_CYCLE_LIFE  MIN  1.0
 
    
 FS\_CYCLE\_LIFE is the factor of safety produced in a calculation originally
@@ -1233,31 +795,6 @@ Additional information on the cycle life calculation is available in
 tutorial session TUTOR4, in the documentation on EQNSET 
 and also in the sources listed in the REFERENCES section.
    
-Hook or loop ends on an extension spring are loaded in both bending and
-torsion.  Depending on the radius of the bend that tilts the last coil
-upward to form the hook or loop, either the bending or torsional stresses
-may be the first to induce failure.  Note that fatigue failure in the end
-of an extension spring may also be induced by stress concentration caused
-by tooling marks.  Refer to the sources listed in the REFERENCES section
-for additional details.
-
-ODOP:Spring uses bending stresses in the calculation of FS\_HOOK.   FS\_HOOK is
-not constrained in the default extension spring start point (startup).
-In order to establish such a constraint, use the numeric entry fields.  For
-example:
-        CHANGE  FS\_HOOK  MIN  1.0
-        CHANGE  STRESS\_HOOK  MAX  STRESS\_LIM\_BEND
-
-STRESS\_LIM\_BEND is based on %\_TENSILE\_BEND, a percentage of the selected
-material's tensile strength.  This percentage is determined based on the
-desired cycle life conditions established by LIFE\_CATEGORY.
-
-   
-Torsional stresses in the end of an extension spring are calculated and
-listed with the menu item REPORT 2.  The REPORT 2 menu item will flag these
-stresses if they exceed the value of STRESS\_LIM\_ENDUR.  Note that the value
-listed for CYCLE\_LIFE is based on stresses in the body coils; it does not
-apply to the hooks, loops or other forms of attachment.
 
    
 WHAT TO DO IF   
