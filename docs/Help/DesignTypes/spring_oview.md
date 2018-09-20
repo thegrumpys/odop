@@ -240,7 +240,8 @@ REFERENCES
  in alphabetical order by title.
 
     Design Handbook - Engineering Guide to Spring Design
-    Form no. 515  Copyright 1981,  Library of Congress Number 81-67959
+    Form no. 515  
+    Copyright 1981,  Library of Congress Number 81-67959
     Associated Spring - Barnes Group Inc.
     18 Main St.
     Bristol, Ct.   06010
@@ -252,13 +253,16 @@ REFERENCES
 
     Handbook of Spring Design
     Copyright 1981   ISBN 00-9604120-0-8
-    Spring Manufacturer's Institute Inc.             312-520-3290
+    Spring Manufacturer's Institute Inc.   
     380 West Palatine Rd.
     Wheeling, IL.  60090
+    312-520-3290
    
     Machinery's Handbook
     ISBN  0-8311-1155-0
-    Industrial Press Inc.  200 Madison Ave., New York, NY  10157
+    Industrial Press Inc.   
+    200 Madison Ave.,   
+    New York, NY  10157  
 
     Mark's Standard Handbook for Mechanical Engineers
     ISBN  0-07-004123-7
@@ -266,8 +270,10 @@ REFERENCES
 
     Mechanical Design Analysis
     M. F. Spotts
-    Prentice-Hall, Inc.  Englewood Cliffs, N.J.
-    Copyright 1964, Library of Congress Number 64-18626
+    Prentice-Hall, Inc.  
+    Englewood Cliffs, N.J.
+    Copyright 1964, 
+    Library of Congress Number 64-18626
 
     Mechanical Springs    (second edition, 1963)
     A. M. Wahl
@@ -277,14 +283,18 @@ REFERENCES
    
     Spring Designer's Handbook
     Harold Carlson
-    Marcel Dekker, Inc.  270 Madison Ave., New York, NY  10016
-    Copyright 1978,  Library of Congress Number 77-27436  TJ210.C37
+    Marcel Dekker, Inc.  
+    270 Madison Ave., New York, NY  10016
+    Copyright 1978,  
+    Library of Congress Number 77-27436  TJ210.C37
 
  A list of "Useful Publications for Spring Makers" appears in the May 1985
  issue of "Springs, The Magazine of Spring Technology" published by:
 
     Spring Manufacturer's Institute Inc.
-    380 West Palatine Rd.    Wheeling, IL.  60090    312-520-3290
+    380 West Palatine Rd.    
+    Wheeling, IL.  60090    
+    312-520-3290
    
 RESTRICTIONS   
 This section covers a few restrictions and limitations of the ODOP:Spring
@@ -589,8 +599,6 @@ or startup.  The order in which these menu items are entered is significant.
 
     CHANGE  MATERIAL_TYPE   USER_DEFINED
     CHANGE  TORSION_MODULUS  xxxxxxxx
-
-The program will issue a confirming message after each menu item.
    
 The same process applies to values for %\_TENSILE\_STAT and %\_TENSILE\_ENDUR.
 
@@ -602,8 +610,6 @@ in which these menu items are entered is significant.
 
     CHANGE  MATERIAL_TYPE   USER_DEFINED
     CHANGE  %_TENSILE_STAT  xxxxxxxx
-
-The program will issue a confirming message after each menu item.
 
    
  The following example illustrates how to establish values of
@@ -851,7 +857,7 @@ ODOP:Spring is constantly undergoing improvement.  In spite of years of
 field experience and a considerable amount of testing and verification,
 there is always a possibility of error.  Please review the RESTRICTIONS
 section of documentation.  Review the material properties.  Check the
-inconsistency with another design method (slide rule, manual
-calculation, etc).  If the problem remains unresolved, please report it
+inconsistency with another design method (hand calculator, spreadsheet
+calculation, etc.).  If the problem remains unresolved, please report it
 via the procedures for opening an issue on GitHub.
 
