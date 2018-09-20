@@ -6,4 +6,5 @@
 * [Search](search)
 * [Seek](seek)
 * [Trade](trade)
+* [Reports](reports)
 * [Available Design Types](DesignTypes)
