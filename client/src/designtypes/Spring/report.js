@@ -1,6 +1,7 @@
 import React from 'react';
 import * as o from './offsets';
 import * as mo from './mat_ips_offsets';
+import { displayError } from '../../components/ErrorModal';
 
 export function getReportNames() {
     // Note: report names must match cases in switch statement below
@@ -16,7 +17,7 @@ export function report(report_name, prefs, p, x, labels) {
     
     var kc, ks, temp, s_f, len_lbl, 
     safe_load_u, wgt1000_u, cycle_life_u, 
-    pcadmsg, errmsg, errmsg1, errmsg2, errmsg3,
+    pcadmsg, errmsg, errmsg0, errmsg1, errmsg2, errmsg3, hits,
     safe_travel, tensileFixed0,
     sq1, sq2,
     dhat, wire_len_a, wire_len_t, safe_load, def_max,
@@ -29,6 +30,41 @@ export function report(report_name, prefs, p, x, labels) {
     var m_tab = require('./mat_ips.json');
     var et_tab = require('./c_endtypes.json');
 
+    hits = 0;
+    errmsg = "";
+    if (p[o.L_Free].value < x[o.L_Solid].value) {
+        hits++;
+        errmsg = errmsg + ": " + p[o.L_Free].name + " < " + x[o.L_Solid].name;
+    }
+    if (x[o.L_2].value < x[o.L_Solid].value) {
+        hits++;
+        errmsg = errmsg + ": " + x[o.L_2].name + " < " + x[o.L_Solid].name;
+    }
+    if (x[o.ID_Free].value < 0.0) {
+        hits++;
+        errmsg = errmsg + ": " + x[o.ID_Free].name + " < zero";
+    }
+    if (x[o.Coils_A].value < 1.0) {
+        hits++;
+        errmsg = errmsg + ": " + x[o.Coils_A].name + " < 1.0";
+    }
+    if (p[o.Wire_Dia].value < 0.5 * x[o.tbase010].value) {
+        hits++;
+        errmsg = errmsg + ": " + p[o.Wire_Dia].name + " < reasonable";
+    }
+    if (p[o.Wire_Dia].value > 5.0 * x[o.tbase400].value) {
+        hits++;
+        errmsg = errmsg + ": " + p[o.Wire_Dia].name + " > reasonable";
+    }
+    if (x[o.Tensile].value <= prefs[o.smallnum]) {
+        hits++;
+        errmsg = errmsg + ": " + x[o.Tensile].name + " < reasonable";
+    }
+    
+    if (hits && report_name === '1 (mini)') {
+        displayError(" Warning" + errmsg + ' ... YOU MAY WISH TO CHOOSE A MORE REASONABLE START POINT BEFORE CONTINUING.');
+    }
+    
     len_lbl = "Wire Length";
     
     switch(x[o.End_Type].value) {
@@ -158,9 +194,9 @@ export function report(report_name, prefs, p, x, labels) {
                 "  and a Slenderness ratio of " + x[o.Slenderness].value.toFixed(1) + ",";
                  errmsg2 = "the spring will tend to buckle with fixed/free  ends.";
                  sq1 = 2.0 * x[o.Slenderness].value - 8.0;
-                 if (sq1 <= 0.0 || temp < 1.6 / sq1) errmsg = " not";
-                 else errmsg = "";
-                 errmsg = "The spring will" + errmsg + " tend to buckle with fixed/fixed ends.";
+                 if (sq1 <= 0.0 || temp < 1.6 / sq1) errmsg0 = " not";
+                 else errmsg0 = "";
+                 errmsg0 = "The spring will" + errmsg0 + " tend to buckle with fixed/fixed ends.";
             }
     }
 
@@ -365,7 +401,7 @@ export function report(report_name, prefs, p, x, labels) {
             {pcadmsg}{pcadmsg !== undefined && <br />}
             {errmsg1}{errmsg1 !== undefined && <br />}
             {errmsg2}{errmsg2 !== undefined && <br />}
-            {errmsg3}{errmsg}
+            {errmsg3}{errmsg0}
         </React.Fragment>
     );
     case "2 (pre-set)":
@@ -872,7 +908,7 @@ export function report(report_name, prefs, p, x, labels) {
         {pcadmsg}{pcadmsg !== undefined && <br />}
         {errmsg1}{errmsg1 !== undefined && <br />}
         {errmsg2}{errmsg2 !== undefined && <br />}
-        {errmsg3}{errmsg}
+        {errmsg3}{errmsg0}
         <hr/>
         &nbsp; &nbsp; &nbsp; approved for mfg.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
         approved for mfg.<br/>
