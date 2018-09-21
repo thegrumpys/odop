@@ -17,7 +17,7 @@ export function report(report_name, prefs, p, x, labels) {
     var kc, ks, temp, s_f, len_lbl, 
     safe_load_u, wgt1000_u, cycle_life_u, 
     pcadmsg, errmsg, errmsg1, errmsg2, errmsg3,
-    safe_travel,
+    safe_travel, tensileFixed0,
     sq1, sq2,
     dhat, wire_len_a, wire_len_t, safe_load, def_max,
     pitch, hlx_ang,
@@ -95,11 +95,17 @@ export function report(report_name, prefs, p, x, labels) {
      * From: https://www.acxesspring.com/spring-diameter-change.html
      * From: http://springipedia.com/compression-general-design.asp 
      */
-    
-    /* converts to % tensile value */
-    if (x[o.Tensile].value <= 0.0) {
-        console.log("YOU MUST SUPPLY TENSILE STRENGTH VALUES TO COMPLETE THESE CALCULATIONS.");
-        return;
+
+    if(x[o.Prop_Calc_Method].value === 1 || x[o.Prop_Calc_Method].value === 2) tensileFixed0 = x[o.Tensile].value.toFixed(0);
+     else tensileFixed0 = "unused";
+     
+    /* used to compute % tensile values */
+    if (x[o.Tensile].value <= prefs[o.smallnum]) {
+        return (
+                <React.Fragment>
+                YOU MUST SUPPLY A VALUE FOR TENSILE STRENGTH IN ORDER TO COMPLETE THESE CALCULATIONS.
+                </React.Fragment>
+    );
     }
 
     dhat = x[o.Tensile].value / 100.0;
@@ -167,6 +173,8 @@ export function report(report_name, prefs, p, x, labels) {
 
     return (
         <React.Fragment>
+            <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
+            <br />
             <table>
                 <tbody>
                     <tr>
@@ -363,6 +371,8 @@ export function report(report_name, prefs, p, x, labels) {
     case "2 (pre-set)":
         return (
                 <React.Fragment>
+                <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
+                    <br />
                     <table>
                         <tbody>
                             <tr>
@@ -385,7 +395,7 @@ export function report(report_name, prefs, p, x, labels) {
                                 <td> &nbsp; &nbsp; </td>
                                 <td>{x[o.Tensile].name}</td>
                                 <td>=</td>
-                                <td>{x[o.Tensile].value.toFixed(0)}</td>
+                                <td>{tensileFixed0}</td>
                                 <td>{x[o.Tensile].units}</td>
                                 <td></td>
                             </tr>
@@ -521,6 +531,8 @@ export function report(report_name, prefs, p, x, labels) {
     case "3 (maxi)":
     return (
         <React.Fragment>
+            <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
+            <br />
             <table>
                 <tbody>
                     <tr>
@@ -603,7 +615,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td> &nbsp; </td>
                     <td>{x[o.Tensile].name}</td>
                     <td>=</td>
-                    <td>{x[o.Tensile].value.toFixed(0)}</td>
+                    <td>{tensileFixed0}</td>
                     <td>{x[o.Tensile].units}</td>
                 </tr>
                 <tr>
