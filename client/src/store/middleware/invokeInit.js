@@ -1,7 +1,4 @@
 import { changeOutputSymbolValues } from '../actionCreators';
-import { init as pcyl_init } from '../../designtypes/Piston-Cylinder/init';
-import { init as solid_init } from '../../designtypes/Solid/init';
-import { init as spring_init } from '../../designtypes/Spring/init';
 
 // Invoke Init
 export function invokeInit(store) {
@@ -29,18 +26,8 @@ export function invokeInit(store) {
     }
 
     // Compute outputs x from inputs p using equations
-    switch(design.type) {
-    default:
-    case 'Piston-Cylinder':
-        x = pcyl_init(p, x);
-        break;
-    case 'Solid':
-        x = solid_init(p, x);
-        break;
-    case 'Spring':
-        x = spring_init(p, x);
-        break;
-    }
+    var { init } = require('../../designtypes/'+design.type+'/init.js'); // Dynamically load init
+    x = init(p, x);
 
     // Compute and dispatch output changes
     store.dispatch(changeOutputSymbolValues(x));

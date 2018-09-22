@@ -5,9 +5,6 @@ import { connect } from 'react-redux';
 import { load } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
-import { migrate as pcyl_migrate } from '../../designtypes/Piston-Cylinder/migrate';
-import { migrate as solid_migrate } from '../../designtypes/Solid/migrate';
-import { migrate as spring_migrate } from '../../designtypes/Spring/migrate';
 
 class FileOpen extends React.Component {
     constructor(props) {
@@ -54,19 +51,8 @@ class FileOpen extends React.Component {
                 return res.json()
             })
             .then((design) => {
-                var migrated_design;
-                switch(design.type) {
-                default:
-                case 'Piston-Cylinder':
-                    migrated_design = pcyl_migrate(design);
-                    break;
-                case 'Solid':
-                    migrated_design = solid_migrate(design);
-                    break;
-                case 'Spring':
-                    migrated_design= spring_migrate(design);
-                    break;
-                }
+                var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
+                var migrated_design = migrate(design);
                 this.props.load(migrated_design)
             })
             .catch(error => {

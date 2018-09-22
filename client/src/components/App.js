@@ -34,12 +34,6 @@ import ViewViolations from '../menus/View/ViewViolations';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import HelpIndex from '../menus/Help/HelpIndex';
 import HelpAbout from '../menus/Help/HelpAbout';
-import { getReportNames as pcyl_getReportNames } from '../designtypes/Piston-Cylinder/report';
-import { getReportNames as solid_getReportNames } from '../designtypes/Solid/report';
-import { getReportNames as spring_getReportNames } from '../designtypes/Spring/report';
-import { report as pcyl_report } from '../designtypes/Piston-Cylinder/report';
-import { report as solid_report } from '../designtypes/Solid/report';
-import { report as spring_report } from '../designtypes/Spring/report';
 
 class App extends Component {
     
@@ -48,19 +42,8 @@ class App extends Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.toggleTab = this.toggleTab.bind(this);
-        var report_names;
-        switch(this.props.type) {
-        default:
-        case 'Piston-Cylinder':
-            report_names = pcyl_getReportNames();
-            break;
-        case 'Solid':
-            report_names = solid_getReportNames();
-            break;
-        case 'Spring':
-            report_names = spring_getReportNames();
-            break;
-        }
+        var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
+        var report_names = getReportNames();
         this.state = {
             isOpen: false,
             activeTab: "1",
@@ -115,41 +98,15 @@ class App extends Component {
         }
 
         // Generate design-type specific report
-        var output;
-        switch(this.props.type) {
-        default:
-        case 'Piston-Cylinder':
-            output = pcyl_report(report_name, prefs, p, x, labels);
-            break;
-        case 'Solid':
-            output = solid_report(report_name, prefs, p, x, labels);
-            break;
-        case 'Spring':
-            output = spring_report(report_name, prefs, p, x, labels);
-            break;
-        }
+        var { report } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load report
+        var output = report(report_name, prefs, p, x, labels);
         return output;
     }
   
     render() {
 //        console.log('In App.render');
-        var src;
-        var alt;
-        switch(this.props.type) {
-        default:
-        case 'Piston-Cylinder':
-            src = 'designtypes/Piston-Cylinder/favicon.ico';
-            alt = 'Piston-Cylinder icon';
-            break;
-        case 'Solid':
-            src = 'designtypes/Solid/favicon.ico';
-            alt = 'Solid icon';
-            break;
-        case 'Spring':
-            src = 'designtypes/Spring/favicon.ico';
-            alt = 'Spring icon';
-            break;
-        }
+        var src = 'designtypes/'+this.props.type+'/favicon.ico';
+        var alt = this.props.type+' icon';
 //        console.log('src=',src,' alt=',alt);
         return (
             <React.Fragment>
