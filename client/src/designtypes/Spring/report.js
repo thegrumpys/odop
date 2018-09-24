@@ -1,6 +1,7 @@
 import React from 'react';
 import * as o from './offsets';
 import * as mo from './mat_ips_offsets';
+//import { displayError } from '../../components/ErrorModal';
 
 export function getReportNames() {
     // Note: report names must match cases in switch statement below
@@ -16,8 +17,8 @@ export function report(report_name, prefs, p, x, labels) {
     
     var kc, ks, temp, s_f, len_lbl, 
     safe_load_u, wgt1000_u, cycle_life_u, 
-    pcadmsg, errmsg, errmsg1, errmsg2, errmsg3,
-    safe_travel,
+    pcadmsg, errmsg, errmsg0, errmsg1, errmsg2, errmsg3, hits,
+    safe_travel, tensileFixed0,
     sq1, sq2,
     dhat, wire_len_a, wire_len_t, safe_load, def_max,
     pitch, hlx_ang,
@@ -29,6 +30,44 @@ export function report(report_name, prefs, p, x, labels) {
     var m_tab = require('./mat_ips.json');
     var et_tab = require('./c_endtypes.json');
 
+    hits = 0;
+    errmsg = "";
+    if (p[o.L_Free].value < x[o.L_Solid].value) {
+        hits++;
+        errmsg = errmsg + ": " + p[o.L_Free].name + " < " + x[o.L_Solid].name;
+    }
+    if (x[o.L_2].value < x[o.L_Solid].value) {
+        hits++;
+        errmsg = errmsg + ": " + x[o.L_2].name + " < " + x[o.L_Solid].name;
+    }
+    if (x[o.ID_Free].value < 0.0) {
+        hits++;
+        errmsg = errmsg + ": " + x[o.ID_Free].name + " < zero";
+    }
+    if (x[o.Coils_A].value < 1.0) {
+        hits++;
+        errmsg = errmsg + ": " + x[o.Coils_A].name + " < 1.0";
+    }
+    if (p[o.Wire_Dia].value < 0.5 * x[o.tbase010].value) {
+        hits++;
+        errmsg = errmsg + ": " + p[o.Wire_Dia].name + " < reasonable";
+    }
+    if (p[o.Wire_Dia].value > 5.0 * x[o.tbase400].value) {
+        hits++;
+        errmsg = errmsg + ": " + p[o.Wire_Dia].name + " > reasonable";
+    }
+    if (x[o.Tensile].value <= prefs[o.smallnum]) {
+        hits++;
+        errmsg = errmsg + ": " + x[o.Tensile].name + " < reasonable";
+    }
+    if (hits) errmsg = "Warning" + errmsg;
+    const startpntmsg = "YOU MAY WISH TO CHOOSE A MORE REASONABLE START POINT BEFORE CONTINUING WITH SEARCH, SEEK OR TRADE.";
+    const NaNmsg = 'Any "NaN" values are "Not a Number".';
+//    
+//    if (hits && report_name === '1 (mini)') {
+//        displayError(errmsg + ' ... ' + startpntmsg + " " + NaNmsg);
+//    }
+    
     len_lbl = "Wire Length";
     
     switch(x[o.End_Type].value) {
@@ -95,12 +134,18 @@ export function report(report_name, prefs, p, x, labels) {
      * From: https://www.acxesspring.com/spring-diameter-change.html
      * From: http://springipedia.com/compression-general-design.asp 
      */
-    
-    /* converts to % tensile value */
-    if (x[o.Tensile].value <= 0.0) {
-        console.log("YOU MUST SUPPLY TENSILE STRENGTH VALUES TO COMPLETE THESE CALCULATIONS.");
-        return;
-    }
+
+    if(x[o.Prop_Calc_Method].value === 1 || x[o.Prop_Calc_Method].value === 2) tensileFixed0 = x[o.Tensile].value.toFixed(0);
+     else tensileFixed0 = "unused";
+     
+    /* used to compute % tensile values */
+//    if (x[o.Tensile].value <= prefs[o.smallnum]) {
+//        return (
+//                <React.Fragment>
+//                YOU MUST SUPPLY A VALUE FOR TENSILE STRENGTH IN ORDER TO COMPLETE THESE CALCULATIONS.
+//                </React.Fragment>
+//    );
+//    }
 
     dhat = x[o.Tensile].value / 100.0;
     kc = (4.0 * x[o.Spring_Index].value - 1.0) / (4.0 * x[o.Spring_Index].value - 4.0);
@@ -152,9 +197,9 @@ export function report(report_name, prefs, p, x, labels) {
                 "  and a Slenderness ratio of " + x[o.Slenderness].value.toFixed(1) + ",";
                  errmsg2 = "the spring will tend to buckle with fixed/free  ends.";
                  sq1 = 2.0 * x[o.Slenderness].value - 8.0;
-                 if (sq1 <= 0.0 || temp < 1.6 / sq1) errmsg = " not";
-                 else errmsg = "";
-                 errmsg = "The spring will" + errmsg + " tend to buckle with fixed/fixed ends.";
+                 if (sq1 <= 0.0 || temp < 1.6 / sq1) errmsg0 = " not";
+                 else errmsg0 = "";
+                 errmsg0 = "The spring will" + errmsg0 + " tend to buckle with fixed/fixed ends.";
             }
     }
 
@@ -167,6 +212,13 @@ export function report(report_name, prefs, p, x, labels) {
 
     return (
         <React.Fragment>
+            <h4>ODOP:Spring &nbsp; Compression Spring Report</h4><br />
+            <b>
+            {hits > 0 && errmsg}{hits > 0 && <br />}
+            {hits > 0 && startpntmsg}{hits > 0 && <br />}
+            </b>
+            {hits > 0 && NaNmsg}{hits > 0 && <br />}
+            {hits > 0 && <br />}
             <table>
                 <tbody>
                     <tr>
@@ -202,7 +254,7 @@ export function report(report_name, prefs, p, x, labels) {
                         <td>{p[o.Coils_T].name}</td>
                         <td>=</td>
                         <td>{p[o.Coils_T].value.toFixed(3)}</td>
-                        <td>{"Total " + p[o.Coils_T].units}</td>
+                        <td>{"total " + p[o.Coils_T].units}</td>
                     </tr>
                     <tr>
                         <td>{x[o.Rate].name}</td>
@@ -214,7 +266,7 @@ export function report(report_name, prefs, p, x, labels) {
                         <td>{x[o.Coils_A].name}</td>
                         <td>=</td>
                         <td>{x[o.Coils_A].value.toFixed(3)}</td>
-                        <td>{"Active " + x[o.Coils_A].units}</td>
+                        <td>{"active " + x[o.Coils_A].units}</td>
                     </tr>
                 </tbody>
             </table>
@@ -357,12 +409,14 @@ export function report(report_name, prefs, p, x, labels) {
             {pcadmsg}{pcadmsg !== undefined && <br />}
             {errmsg1}{errmsg1 !== undefined && <br />}
             {errmsg2}{errmsg2 !== undefined && <br />}
-            {errmsg3}{errmsg}
+            {errmsg3}{errmsg0}
         </React.Fragment>
     );
     case "2 (pre-set)":
         return (
                 <React.Fragment>
+                <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
+                    <br />
                     <table>
                         <tbody>
                             <tr>
@@ -385,7 +439,7 @@ export function report(report_name, prefs, p, x, labels) {
                                 <td> &nbsp; &nbsp; </td>
                                 <td>{x[o.Tensile].name}</td>
                                 <td>=</td>
-                                <td>{x[o.Tensile].value.toFixed(0)}</td>
+                                <td>{tensileFixed0}</td>
                                 <td>{x[o.Tensile].units}</td>
                                 <td></td>
                             </tr>
@@ -521,6 +575,8 @@ export function report(report_name, prefs, p, x, labels) {
     case "3 (maxi)":
     return (
         <React.Fragment>
+            <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
+            <br />
             <table>
                 <tbody>
                     <tr>
@@ -603,7 +659,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td> &nbsp; </td>
                     <td>{x[o.Tensile].name}</td>
                     <td>=</td>
-                    <td>{x[o.Tensile].value.toFixed(0)}</td>
+                    <td>{tensileFixed0}</td>
                     <td>{x[o.Tensile].units}</td>
                 </tr>
                 <tr>
@@ -621,7 +677,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{p[o.Coils_T].name}</td>
                     <td>=</td>
                     <td>{p[o.Coils_T].value.toFixed(3)}</td>
-                    <td>{"Total " + p[o.Coils_T].units}</td>
+                    <td>{"total " + p[o.Coils_T].units}</td>
                     <td/>
                     <td> &nbsp; </td>
                     <td>Pitch</td>
@@ -633,7 +689,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{x[o.Coils_A].name}</td>
                     <td>=</td>
                     <td>{x[o.Coils_A].value.toFixed(3)}</td>
-                    <td>{"Active " + x[o.Coils_A].units}</td>
+                    <td>{"active " + x[o.Coils_A].units}</td>
                     <td/>
                     <td> &nbsp; </td>
                     <td>Helix Angle</td>
@@ -860,12 +916,28 @@ export function report(report_name, prefs, p, x, labels) {
         {pcadmsg}{pcadmsg !== undefined && <br />}
         {errmsg1}{errmsg1 !== undefined && <br />}
         {errmsg2}{errmsg2 !== undefined && <br />}
-        {errmsg3}{errmsg}
+        {errmsg3}{errmsg0}
         <hr/>
-        &nbsp; &nbsp; &nbsp; approved for mfg.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-        approved for mfg.<br/>
-        by _____________________ &nbsp; date _____ &nbsp; by ________________________ &nbsp; date _____
-        <br/>
+        <table>
+            <tbody>
+                <tr>
+                <td> &nbsp; approved for mfg.&nbsp; </td>
+                <td> &nbsp; </td>
+                <td> &nbsp; </td>
+                <td> &nbsp; approved for mfg.&nbsp; </td>
+                </tr>
+                <tr>
+                <td> &nbsp; </td>
+                </tr>
+                <tr>
+                <td> by _______________________ &nbsp; </td>
+                <td> &nbsp; date _______ &nbsp; </td>
+                <td> &nbsp; </td>
+                <td> by _______________________ &nbsp; </td>
+                <td> &nbsp; date _______ &nbsp; </td>
+                </tr>
+            </tbody>
+        </table>
         </React.Fragment>
     );
     }
