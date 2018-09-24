@@ -1,7 +1,7 @@
 import React from 'react';
 import * as o from './offsets';
 import * as mo from './mat_ips_offsets';
-import { displayError } from '../../components/ErrorModal';
+//import { displayError } from '../../components/ErrorModal';
 
 export function getReportNames() {
     // Note: report names must match cases in switch statement below
@@ -60,10 +60,13 @@ export function report(report_name, prefs, p, x, labels) {
         hits++;
         errmsg = errmsg + ": " + x[o.Tensile].name + " < reasonable";
     }
-    
-    if (hits && report_name === '1 (mini)') {
-        displayError(" Warning" + errmsg + ' ... YOU MAY WISH TO CHOOSE A MORE REASONABLE START POINT BEFORE CONTINUING.');
-    }
+    if (hits) errmsg = "Warning" + errmsg;
+    const startpntmsg = "YOU MAY WISH TO CHOOSE A MORE REASONABLE START POINT BEFORE CONTINUING WITH SEARCH, SEEK OR TRADE.";
+    const NaNmsg = 'Any "NaN" values are "Not a Number".';
+//    
+//    if (hits && report_name === '1 (mini)') {
+//        displayError(errmsg + ' ... ' + startpntmsg + " " + NaNmsg);
+//    }
     
     len_lbl = "Wire Length";
     
@@ -136,13 +139,13 @@ export function report(report_name, prefs, p, x, labels) {
      else tensileFixed0 = "unused";
      
     /* used to compute % tensile values */
-    if (x[o.Tensile].value <= prefs[o.smallnum]) {
-        return (
-                <React.Fragment>
-                YOU MUST SUPPLY A VALUE FOR TENSILE STRENGTH IN ORDER TO COMPLETE THESE CALCULATIONS.
-                </React.Fragment>
-    );
-    }
+//    if (x[o.Tensile].value <= prefs[o.smallnum]) {
+//        return (
+//                <React.Fragment>
+//                YOU MUST SUPPLY A VALUE FOR TENSILE STRENGTH IN ORDER TO COMPLETE THESE CALCULATIONS.
+//                </React.Fragment>
+//    );
+//    }
 
     dhat = x[o.Tensile].value / 100.0;
     kc = (4.0 * x[o.Spring_Index].value - 1.0) / (4.0 * x[o.Spring_Index].value - 4.0);
@@ -209,8 +212,13 @@ export function report(report_name, prefs, p, x, labels) {
 
     return (
         <React.Fragment>
-            <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
-            <br />
+            <h4>ODOP:Spring &nbsp; Compression Spring Report</h4><br />
+            <b>
+            {hits > 0 && errmsg}{hits > 0 && <br />}
+            {hits > 0 && startpntmsg}{hits > 0 && <br />}
+            </b>
+            {hits > 0 && NaNmsg}{hits > 0 && <br />}
+            {hits > 0 && <br />}
             <table>
                 <tbody>
                     <tr>
@@ -246,7 +254,7 @@ export function report(report_name, prefs, p, x, labels) {
                         <td>{p[o.Coils_T].name}</td>
                         <td>=</td>
                         <td>{p[o.Coils_T].value.toFixed(3)}</td>
-                        <td>{"Total " + p[o.Coils_T].units}</td>
+                        <td>{"total " + p[o.Coils_T].units}</td>
                     </tr>
                     <tr>
                         <td>{x[o.Rate].name}</td>
@@ -258,7 +266,7 @@ export function report(report_name, prefs, p, x, labels) {
                         <td>{x[o.Coils_A].name}</td>
                         <td>=</td>
                         <td>{x[o.Coils_A].value.toFixed(3)}</td>
-                        <td>{"Active " + x[o.Coils_A].units}</td>
+                        <td>{"active " + x[o.Coils_A].units}</td>
                     </tr>
                 </tbody>
             </table>
@@ -669,7 +677,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{p[o.Coils_T].name}</td>
                     <td>=</td>
                     <td>{p[o.Coils_T].value.toFixed(3)}</td>
-                    <td>{"Total " + p[o.Coils_T].units}</td>
+                    <td>{"total " + p[o.Coils_T].units}</td>
                     <td/>
                     <td> &nbsp; </td>
                     <td>Pitch</td>
@@ -681,7 +689,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{x[o.Coils_A].name}</td>
                     <td>=</td>
                     <td>{x[o.Coils_A].value.toFixed(3)}</td>
-                    <td>{"Active " + x[o.Coils_A].units}</td>
+                    <td>{"active " + x[o.Coils_A].units}</td>
                     <td/>
                     <td> &nbsp; </td>
                     <td>Helix Angle</td>
@@ -910,10 +918,26 @@ export function report(report_name, prefs, p, x, labels) {
         {errmsg2}{errmsg2 !== undefined && <br />}
         {errmsg3}{errmsg0}
         <hr/>
-        &nbsp; &nbsp; &nbsp; approved for mfg.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-        approved for mfg.<br/>
-        by _____________________ &nbsp; date _____ &nbsp; by ________________________ &nbsp; date _____
-        <br/>
+        <table>
+            <tbody>
+                <tr>
+                <td> &nbsp; approved for mfg.&nbsp; </td>
+                <td> &nbsp; </td>
+                <td> &nbsp; </td>
+                <td> &nbsp; approved for mfg.&nbsp; </td>
+                </tr>
+                <tr>
+                <td> &nbsp; </td>
+                </tr>
+                <tr>
+                <td> by _______________________ &nbsp; </td>
+                <td> &nbsp; date _______ &nbsp; </td>
+                <td> &nbsp; </td>
+                <td> by _______________________ &nbsp; </td>
+                <td> &nbsp; date _______ &nbsp; </td>
+                </tr>
+            </tbody>
+        </table>
         </React.Fragment>
     );
     }
