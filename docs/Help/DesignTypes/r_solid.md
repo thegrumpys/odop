@@ -6,12 +6,11 @@ This problem will be used as a starting point for introducing concepts and basic
 
 The Rectangular Solid is a simple box defined by Length, Width and Height.
 
-
-< link to graphic goes here >
+[Rectangular Solid Design Type](./png/RectangularSolidDiagram.png)
 
 One interesting feature of the Rectangular Solid implementation is a materials table that 
 provides density values for a range of materials (both real and mythical). 
-The default starting point supplied with the Rectangular Solid problem includes USPS 
-and much of the shipping industry, constraints on weight (70 pounds) and length + girth
+The default starting point supplied with the Rectangular Solid problem includes US Postal Service 
+(and much of the shipping industry) constraints on weight (70 pounds) and length + girth
 (108 inches). 
 Thus, the user can experiment with various materials to see what will fit within USPS regulations.
