@@ -20,7 +20,7 @@ for parameters that can be controlled in order to achieve the desired performanc
 of an engineering system.
 A mathematical model of the system under investigation is required.
 While this is "computer aided design", computer graphics in the form of
-drafted drawings or 3D models are not involved.
+drafted drawings or 3D models are not central to this design process.
    
 
 * OPTIMIZATION
@@ -46,11 +46,11 @@ Specific design types may offer easy selection from tables of material propertie
 or the ability to select from catalogs of standard component sizes or even
 catalogs of stock designs.
 
-A high level overview of the program's modular structure is available.  See:
+A high level overview of the ODOP program's modular structure is available.  See:
 [ODOP Structure](png/ODOP_StructureDiagram.png)   
    
-
-A more detailed explanation of these concepts is available in the HELP : Index menu item.
+A more detailed explanation of these concepts is available in HELP. 
+See: [Help Index](../Help/index)
 
 A high level overview of the ODOP Design Process Flow is available.  See:   
 [ODOP Design Process Flow Diagram](./png/DesignProcessFlowDiagram.png)

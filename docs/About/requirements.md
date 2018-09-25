@@ -9,11 +9,12 @@ desktop or laptop computer with a relatively large and relatively high resolutio
 The hardware environment "responsive" nature of the ODOP software allows 
 it to function on many mobile devices.
 When operating on a small screen mobile device like a cell phone, 
-the various sections on the right of the main page will automatically move downward on the page.
+the various sections on the right of the main page Design tab will automatically 
+move downward on the page.
 Thus, a mobile device user can scroll vertically to see all the content in 
 a legible manner.
-Unfortunately, the necessary degree of scrolling may impact productivity and 
-general satisfaction with operation on that platform.
+Unfortunately, the necessary amount of scrolling may negatively impact productivity and 
+general satisfaction with operation on small screen hardware.
 
 ODOP is developed using the current version Google Chrome and routinely tested 
 using current versions of other browsers including Microsoft Edge.  
