@@ -10,7 +10,7 @@ COMPRESSION SPRING NAMES
                                     diameter diameter                safety
              ______    ______       ________ ________  ______        ________
 
-    free:    L_FREE               OD_FREE  ID_FREE
+    free:    L_FREE                 OD_FREE  ID_FREE
 
     point 1: L_1      FORCE_1                       STRESS_1
 
@@ -207,9 +207,118 @@ a sleeve or post.  In order to restrain the search to select designs
 that do not have a tendency to buckle, set the value of SLENDERNESS MAX
 to a value of 4.0 or less.
 
+   
+If a compression spring is intended for operation without lateral
+support it should have a ratio of free length to coil diameter
+(SLENDERNESS) below approximately 4 to avoid buckling.  Lateral support
+is usually provided by operation in a sleeve or over a post.  The
+constraint SLENDERNESS MAX can be used to restrict the search to designs
+that will not tend to buckle.  Note that the value of SLENDERNESS is not
+constrained in the default start point (startup) and thus the search may produce
+designs that are prone to buckling. 
+The compression spring REPORT 1 tab will provide an
+indication as to the possibility of bucking for your specific design and
+loading condition.
+
+
 %\_AVAIL\_DEFLECT is the percentage of available deflection consumed at
 load point 2.  %\_AVAIL\_DEFLECT is usually constrained to be less than 85
 to 98 percent.  Thus it requires the search to select designs that
 provide a small margin between load point 2 and the solid condition.
+
+
+**END TYPES**   
+The current version of the ODOP:Spring program implements six spring end
+types for compression springs. 
+In addition, the user can define specialized end conditions.
+These end types are represented by the Calculation Input END\_TYPE which
+for compression springs has the following possible values:
+
+          Compression 
+
+    1     OPEN    
+    2     OPEN&GROUND   
+    3     CLOSED   
+    4     CLOSED&GROUND  
+    5     TAPERED_C&G  
+    6     PIG-TAIL
+    7     USER_SPECIFIED  
+
+For a compression spring, the end type directly impacts calculation of
+INACTIVE\_COILS.  L\_SOLID, pitch and other variables are affected
+indirectly.  Other variables are impacted indirectly.
+
+Additional information may be found in the documentation sections for
+EQNSET. 
+   
+When END\_TYPE is set to one of the standard (non USER_SPECIFIED) selections, the quantities
+described above as "directly impacted" will be set by the program from
+values contained in internal tables.  If the user attempts to alter one of
+the "directly impacted" values without first
+changing the value of END\_TYPE to USER_SPECIFIED, the attempt will be immediately
+over-written with the value from the internal table.
+
+When the value of END\_TYPE is
+USER\_SPECIFIED, the constants described above as "directly impacted"
+may be set by the user with the numeric entry field.
+   
+In order to facilitate the treatment of unusual compression spring end
+types such as the "tapered, closed and ground" configuration common to hot
+wound springs, ODOP:Spring has added an extra term into the solid height
+calculation.  ADD\_COILS@SOLID is a constant that is normally determined by
+the value of the character string END\_TYPE.  It is used to separate the
+solid height calculation from the rate equation which is dependent on the
+value of INACTIVE\_COILS.  ADD\_COILS@SOLID represents the number of wire
+diameters added into the solid height beyond COILS\_T.  For OPEN and CLOSED
+end types, it has a value of +1.0.  For OPEN&GROUND and CLOSED&GROUND end
+types, it has a value of 0.0.  For the TAPERED\_C&G end type,
+ADD\_COILS@SOLID has a value of -0.5.
+
+Note that the ADD\_COILS@SOLID term is not included in COILS\_T or the wire
+length and weight calculations.  It is only an adjustment for the solid
+height calculation and not the correct way to represent dead coils.
+   
+Users that understand the impact of the ADD\_COILS@SOLID term may control it
+directly to represent unusual end configurations; for example, springs that
+have a different end type at each end.  To establish the value of
+INACTIVE\_COILS and/or ADD\_COILS@SOLID directly, first select a value of
+END\_TYPE of USER_SPECIFIED.  For example to represent a
+spring with one end CLOSED with the other end CLOSED&GROUND:
+
+    CHANGE  END_TYPE  USER_SPECIFIED
+    CHANGE  INACTIVE_COILS   2.0
+    CHANGE  ADD_COILS@SOLID  0.5
+
+To represent a spring with ten active coils, two dead coils and closed
+ends:
+
+    CHANGE  END_TYPE  USER_SPECIFIED
+    FIX COILS_T     14.0
+    CHANGE  INACTIVE COILS   4.0
+    CHANGE  ADD_COILS@SOLID  1.0
+
+   
+**BUCKLING**   
+
+                     free length          L_FREE
+    SLENDERNESS = ----------------  =  -------------
+                    coil diameter        MEAN_DIA
+
+If a compression spring is intended for operation without lateral support
+it should have a ratio of free length to coil diameter (SLENDERNESS) less
+than approximately 4 to avoid buckling.  Lateral support is usually
+provided by operation in a sleeve or over a post.
+
+The constraint SLENDERNESS MAX can be used to restrict the search to
+designs that will not tend to buckle.  Note that SLENDERNESS is not
+constrained in the default startup.  Thus, unless this constraint is
+established, a search may produce designs that are subject to buckling.
+
+The REPORT tabs will provide an indication as to the possibility of
+bucking for each specific design and loading condition.  Both the
+fixed-free and fixed-fixed end conditions are covered.
+
+More precise treatments of this subject are available in the sources listed
+in the REFERENCES section of the documentation.
 
 

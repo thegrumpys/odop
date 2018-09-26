@@ -1,6 +1,6 @@
 ## Help
-* [Introduction](introduction)
 * [Features](features)
+* [Introduction](introduction)
 * [Terminology](terminology)
 * [Feasibility](feasibility)
 * [Search](search)

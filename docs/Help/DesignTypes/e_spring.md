@@ -279,3 +279,50 @@ listed for CYCLE\_LIFE is based on stresses in the body coils; it does not
 apply to the hooks, loops or other forms of attachment.
 
 
+**END TYPES**   
+The current version of the ODOP:Spring program implements five different end types for extension
+springs.  In addition, the user can define specialized end conditions.
+These end types are represented by the Calculation Input END\_TYPE which
+has the following possible values:
+
+          Extension
+
+    1   FULL_LOOP
+    2   75%_LOOP
+    3   FULL_HOOK
+    4   75%_HOOK
+    5   CLOSE_WOUND_COIL
+    6   USER_SPECIFIED
+
+For an extension spring, the end type directly impacts
+calculation of HOOK\_DEFLECT\_ALL, END\_ID, EXTENDED\_END\_ID, L\_END and
+L\_EXTENDED\_END.  Other variables are impacted indirectly.
+   
+FULL\_LOOP implies a loop matching the diameter of the coil body.  The
+distance from the last body coil to the inside of each hook (loop) is equal
+to the inside diameter of the body.
+
+75%\_LOOP implies a shortened hook (loop) where the inside of the hook
+(loop) falls 75% of an inside diameter from the end of the body.  Hook
+stresses are calculated based on body diameter in the hook (loop).
+
+Additional information may be found in the documentation sections for
+EQNSET.  The EXTENSION NAMES section contains a diagram illustrating
+extension spring end dimensions.
+   
+When END\_TYPE is set to one of the standard (non USER_SPECIFIED) selections, the quantities
+described above as "directly impacted" will be set by the program from
+values contained in internal tables.  If the user attempts to alter one of
+the "directly impacted" values without first
+changing the value of END\_TYPE to USER_SPECIFIED, the attempt will be immediately
+over-written with the value from the internal table.
+
+When the value of END\_TYPE is
+USER\_SPECIFIED, the constants described above as "directly impacted"
+may be set by the user with the numeric entry field.
+   
+More precise treatments of this subject are available in the sources listed
+in the REFERENCES section of the documentation.
+
+
+

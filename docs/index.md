@@ -11,8 +11,8 @@
 
 
 ## Help
-* [Introduction](Help/introduction)
 * [Features](Help/features)
+* [Introduction](Help/introduction)
 * [Terminology](Help/terminology)
 * [Feasibility](Help/feasibility)
 * [Search](Help/search)
