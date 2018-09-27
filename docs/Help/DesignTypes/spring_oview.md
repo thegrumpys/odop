@@ -639,7 +639,7 @@ in practice to vary widely from the cycle life value predicted.
 For materials not contained in the materials table (Prop\_Calc\_Method=2 or
 3), ODOP:Spring does not have enough information available to directly
 calculate cycle life and so the Cycle\_Life variable is set to "NaN", 
-an abbreviation for "Not a Number".  
+an abbreviation for "Not a Number". 
 In this case, the FS\_CycleLife variable described here can be used to get
 some indication of a design's life in a specific cyclic application.
    
