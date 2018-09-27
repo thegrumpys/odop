@@ -19,7 +19,7 @@ For specifics, see:
  reference works that cover spring design.  This section should be read in
  conjunction with other sections of the ODOP:Spring documentation.  In
  particular, refer to the specific spring type sections for additional details on
- variable NAMES and FORCE-DEFLECTION DIAGRAMS.
+ variable NAMES and Force-Deflection Diagrams.
 
 **The essential challenge of spring design:**   
 The challenge of any design problem is to select values for those
@@ -86,9 +86,9 @@ the names that ODOP:Spring uses in order to specify a design problem.
 
 The vertical axis in each diagram is force.  The horizontal axis is
 distance; either deflection or spring length.  The force-deflection
-relationship of a cylindric coil spring of uniform pitch (refer to the
-RESTRICTIONS section) is linear.  The slope of the line is the spring
-RATE measured in force per unit deflection.
+relationship of a cylindric coil spring of uniform pitch 
+(refer to [Restrictions](../../About/Legal/Restrictions) ) is linear. 
+The slope of the line is the spring RATE measured in force per unit deflection.
 
 ODOP:Spring produces information about
 four points on the force-deflection curve.  As described in the
@@ -108,9 +108,9 @@ MATERIALS.  The included table of material properties contains
 values for tensile strength at two wire diameters, (.010 inch and .400
 inch) plus conversion factors to produce estimates of allowable stresses
 for both static and cyclic (endurance) applications.  The allowable
-shear stresses (STRESS\_LIM\_ENDUR and STRESS\_LIM\_STAT) are calculated
+shear stresses (Stress\_Lim\_Endur and Stress\_Lim\_Stat) are calculated
 from the tabulated values of tensile strength and the conversion factors
-(%\_TENSILE\_ENDUR and %\_TENSILE\_STAT) for each new wire diameter.
+(%\_Tensile\_Endur and %\_Tensile\_Stat) for each new wire diameter.
 
 Because allowable stresses change for each new wire diameter considered,
 ODOP:Spring works in terms of a "factor of safety".  A factor of safety
@@ -121,8 +121,8 @@ allowable stress of 100,000 psi, when that spring supports a load that
 generates 50,000 psi of stress, the factor of safety is 2.00.
    
 The factor of safety concept applies to both static loads and cycle
-life.  The calculation of FS\_CYCLE\_LIFE includes the material's
-endurance limit (STRESS\_LIM\_ENDUR), static load and fluctuating
+life.  The calculation of FS\_CycleLife includes the material's
+endurance limit (Stress\_Lim\_Endur), static load and fluctuating
 component of stress in a calculation originally developed by Soderberg.
 Additional information on this calculation is available in the sources
 listed in the REFERENCES section.
@@ -144,7 +144,7 @@ The REPORT tabs present crucial information about the performance of
 a design in a specialized, compact format.
 
 In general, a finished design should not have significant remaining
-constraint violations.  In particular, L\_2 below L\_SOLID in a
+constraint violations.  In particular, L\_2 below L\_Solid in a
 compression spring is a sign of problems that need to be resolved.
    
 The force-deflection characteristics of a coil spring are approximately
@@ -154,9 +154,9 @@ accuracy of analytical predictions.
 
 For compression springs, the REPORT 2 tab will produce an
 informational message any time that more than 80 % of available
-deflection (%\_AVAIL\_DEFLECT) is used at the second load point.  Note
+deflection (%\_Avail_Deflect) is used at the second load point.  Note
 that the default start point (startup) supplied with ODOP:Spring has
-%\_AVAIL\_DEFLECT constrained to be less than 90.0, thus in the "as
+%\_Avail_Deflect constrained to be less than 90.0, thus in the "as
 supplied" condition, ODOP:Spring will frequently select designs that
 produce this informational message.
    
@@ -170,34 +170,34 @@ If minimum weight is desired, the spring needs to operate at relatively
 high stresses.  Unless the design of a compression spring is constrained
 by rate or solid height considerations, the factor of safety at point 2,
 solid and cycle life should all be close to 1.0.  If a long cycle life
-is not necessary, the FS\_CYCLE\_LIFE may actually be less than 1.0.  A
-minimum weight design should have the value of %\_AVAIL\_DEFLECT close to
+is not necessary, the FS\_CycleLife may actually be less than 1.0.  A
+minimum weight design should have the value of %\_Avail_Deflect close to
 the maximum value for allowable for the application.
 
 If low risk of failure or a long cycle life is desired, the spring
 should operate at relatively low stresses.  The spring should have
-factors of safety, including FS\_CYCLE\_LIFE, that are significantly
+factors of safety, including FS\_CycleLife, that are significantly
 greater than 1.0.
    
 If a compression spring is intended for operation without lateral
 support it should have a ratio of free length to coil diameter
-(SLENDERNESS) below approximately 4 to avoid buckling.  Lateral support
+(Slenderness) below approximately 4 to avoid buckling.  Lateral support
 is usually provided by operation in a sleeve or over a post.  The
-constraint SLENDERNESS MAX can be used to restrict the search to designs
-that will not tend to buckle.  Note that the value of SLENDERNESS is not
+constraint Slenderness MAX can be used to restrict the search to designs
+that will not tend to buckle.  Note that the value of Slenderness is not
 constrained in the default start point (startup) and thus the search may produce
 designs that are prone to buckling. 
 The compression spring REPORT 1 tab will provide an
 indication as to the possibility of bucking for your specific design and
 loading condition.
 
-Please review the discussion in the RESTRICTIONS section of the
-documentation to insure that you apply ODOP:Spring appropriately.  The
-design equations in the current release of ODOP:Spring do NOT cover all
+Please review the discussion in the [Restrictions](../../About/Legal/Restrictions) 
+section of the documentation to insure that you apply ODOP:Spring appropriately. 
+The design equations in the current release of ODOP:Spring do NOT cover all
 possible spring applications.
 
 More precise treatments of this subject are available in the sources
-listed in the REFERENCES section of the documentation.
+listed in the REFERENCES section of the documentation (below).
 
    
 **Technique:**   
@@ -216,17 +216,17 @@ hopefully eliminate) constraint violations thus achieving a feasible
 design.
 
 Typically, the process of designing a completely new spring should start
-with (at least) WIRE\_DIA and COILS\_T in free status.  Once a feasible
+with (at least) Wire\_Dia and Coils\_T in free status.  Once a feasible
 design is established, the SELECT SIZE menu item can be used to select
 the nearest standard wire size from the appropriate standard sizes
 table.  After the selection, an additional search should be executed to
 adjust values of the remaining independent variables to compensate for
-the change in WIRE\_DIA.
+the change in Wire\_Dia.
    
 Additional information on operating techniques is presented in the
-documentation sections INTRODUCTION and GETTING STARTED.  The demo and
-tutorial sessions supplied with ODOP:Spring provide detailed commentary on
-how to solve a variety of problems.
+documentation sections [Introduction](../introduction) and GETTING STARTED. 
+The demo and tutorial sessions supplied with ODOP:Spring provide detailed 
+commentary on how to solve a variety of problems.
 
    
 **REFERENCES**   
@@ -294,52 +294,8 @@ how to solve a variety of problems.
     312-520-3290
    
 **RESTRICTIONS**   
-This section covers a few restrictions and limitations of the ODOP:Spring
-program.  Please review the About : Notice and About : Restrictions sections
- for liability limitations.
 
-The current release of ODOP:Spring is valid only for helical coil compression,
-extension and torsion springs that have the properties of uniform pitch,
-cylindrical shape, & round wire.  The design equations consider only static
-and cyclic applications.  Do not apply the program to designs where spring
-dynamics ("surge" effects) are important.
-
-Compression spring stress values produced by the REPORT 2 tab include a
-stress correction factor (Kw2) that is appropriate for use after set
-removal.  Otherwise, the current release of ODOP:Spring does not take into
-consideration any kind of pre-stressing or "set-removal" operations.
-
-The current release of ODOP:Spring does not take into consideration any
-effects of stress relaxation or creep.  Do not apply the program to designs
-that are sensitive to reduction of load capacity over time, and/or operate
-at high temperatures and high stress.
-   
-Accurate material property information is extremely important for
-satisfactory results.  The material property values supplied with ODOP:Spring
-are approximate and are not suitable for a high precision design
-application, or one with a small factor of safety.  Consider these values
-to be a starting point at best.  The material property tables are intended
-for modification by the user so that values appropriate to available
-materials and applications can be included.
-
-The current release of ODOP:Spring does not take manufacturing tolerances
-into consideration.  All values are "nominal" and should be taken to
-represent the average of a statistically large number of samples.  When
-dealing with design specifications that place a specific limit on a
-value such as outside diameter, inside diameter, solid height, etc.,
-the user is expected to offset the value entered as a constraint level by
-the anticipated manufacturing tolerance.
-   
-The standard size tables supplied with the current release of ODOP:Spring do
-not represent the product offerings of any single manufacturer.  These
-tables are samples, intended for modification by the end user to represent
-the material size spectrum locally available.  Please review the operation
-of the SELECT SIZE menu entry for a better understanding of how to use these
-tables.
-
-The spring catalogs supplied with the current release of ODOP:Spring are
-intended for demonstration purposes only.  They do not necessarily
-represent the current offering of any single manufacturer.
+Refer to: [Restrictions](../../About/Legal/Restrictions)
    
 **NAMES**   
  ODOP:Spring contains many kinds of names.  Menu item names are discussed
@@ -351,8 +307,8 @@ represent the current offering of any single manufacturer.
  In general, the names are constructed for consistency and to have common
  prefixes.  Names frequently have multiple words,
  or abbreviations hooked together with the underscore (_) character.  For
- example, the free length is named L\_FREE to be consistent with other length
- names (L\_SOLID, L\_1, and L\_2). 
+ example, the free length is named L\_Free to be consistent with other length
+ names (L\_Solid, L\_1, and L\_2). 
 
  The names for parameters, variables, constants, etc. are defined in the
  initialState.js file.  By editing this file, the user can change these names to any
@@ -375,7 +331,7 @@ represent the current offering of any single manufacturer.
  In fact, because the force-deflection equations don't know anything about
  the spring's solid condition, point 2 can be set to represent an impossible
  situation requiring the spring to be compressed beyond solid.  In this
- situation, the constraint on %\_AVAIL\_DEFLECT will be violated.  The
+ situation, the constraint on %\_Avail_Deflect will be violated.  The
  search will attempt to resolve the conflict.
    
 For specifics on names associated with each spring type, see:   
@@ -391,20 +347,20 @@ For specifics on names associated with each spring type, see:
  constraints on any variable, dependent or independent.  
  Unchecking a checkbox will eliminate any constraints, including the default constraints
  established by the start point (startup).  Further information is available in the
- documentation sections named TERMINOLOGY, CONSTRAINT OVERVIEW, SPRING BASICS
- and NAMES.
- 
- This discussion is accessed by the tutorial section covering constraints.
+ documentation sections SPRING BASICS (above), the
+ NAMES sections of each of the specific spring types and
+ [Terminology](../terminology).
 
+ This discussion is accessed by the tutorial section covering constraints.
    
 **Constraints common to both compression and extension springs:**
 
-L\_STROKE MIN is a lower constraint on L\_STROKE, the length difference
+L\_Stroke MIN is a lower constraint on L\_Stroke, the length difference
 between point 1 and point 2.  Refer to the force-deflection diagram in
-the documentation section named FORCE-DEFLECTION DIAGRAMS for an illustration of
-L\_STROKE.
+the documentation section for each specific spring type for an illustration of
+L\_Stroke.
 
-ID\_FREE MIN is established by default start point (startup) because it
+ID\_Free MIN is established by default start point (startup) because it
 discourages the search from investigating designs with a zero or
 negative inside diameter, and there by encountering numerical
 difficulties.
@@ -414,23 +370,23 @@ range of working stress.  FS\_2 MIN works to keep the design from being
 overstressed.  FS\_2 MAX works to keep the design from being
 understressed and overweight.
    
-FS\_CYCLE\_LIFE is the factor of safety produced by the Soderberg cycle life
-calculation.  If a design has FS\_CYCLE\_LIFE greater than 1.0, then the
+FS\_CycleLife is the factor of safety produced by the Soderberg cycle life
+calculation.  If a design has FS\_CycleLife greater than 1.0, then the
 combination of average stress and the fluctuating component of stress for
 that design is reasonably small compared to the endurance limit.  In this
 situation, an application cycling between point 1 and point 2 may expect a
-life that exceeds the value selected for LIFE\_CATEGORY.  Remember that
+life that exceeds the value selected for Life\_Category.  Remember that
 the endurance limit will vary as a function of the material selected, the
 surface treatment (shot peening), and the selected cycle life.
 
-As described in the documentation section on CYCLE\_LIFE, ODOP:Spring is
-capable of directly calculating CYCLE\_LIFE only for materials contained in
-the materials table.  The FS\_CYCLE\_LIFE variable is the only way of
-gaging cycle life for user defined material properties (PROP\_CALC\_METHOD =
+As described in the documentation section on Cycle Life (below), ODOP:Spring is
+capable of directly calculating Cycle\_Life only for materials contained in
+the materials table.  The FS\_CycleLife variable is the only way of
+gaging cycle life for user defined material properties (Prop\_Calc\_Method =
 2 and 3).
 
-FS\_CYCLE\_LIFE MIN is a lower constraint level associated with
-FS\_CYCLE\_LIFE.  A value less than 1.0 will permit designs that risk
+FS\_CycleLife MIN is a lower constraint level associated with
+FS\_CycleLife.  A value less than 1.0 will permit designs that risk
 failure in high cycle applications.
    
 
@@ -458,22 +414,23 @@ were imposed on a design, it would not be possible to automatically adjust
 to higher allowable stresses whenever smaller wire diameters were
 considered by the SEARCH process.  Because many designers are accustomed to
 designing to specific stress limits, ODOP:Spring has been programmed to
-permit this approach.  Refer to the section titled DESIGN TO STRESS for
-additional information.
+also permit this approach.  
+Refer to [Design to Stress](./advancedSpringOperations) for additional information.
 
 The factor of safety concept applies to both static loads and cycle life.
-The calculation of FS\_CYCLE\_LIFE includes the material's endurance limit
-(STRESS\_LIM\_ENDUR), plus static and fluctuating components of stress in a
-calculation originally developed by Soderberg.  STRESS\_LIM\_ENDUR is
+The calculation of FS\_CycleLife includes the material's endurance limit
+(Stress\_Lim\_Endur), plus static and fluctuating components of stress in a
+calculation originally developed by Soderberg.  Stress\_Lim\_Endur is
 normally determined by the materials table and the user's selection of
-cycle life and surface treatment (shot peening) with LIFE\_CATEGORY.  
+cycle life and surface treatment (shot peening) with Life\_Category.  
 Additional information on the cycle life calculation is
-available in the documentation sections EQNSET and also in the
-sources listed in the REFERENCES section.
+available in the documentation sections for the specific spring types
+and also in the sources listed in the REFERENCES section (above).
    
-Refer to additional discussion in the sections titled SPRING BASICS, NAMES
-and CYCLE LIFE.  Selection of materials (and corresponding material
-properties) from the ODOP:Spring materials table is covered in the MATERIALS
+Refer to additional discussion in the sections titled SPRING BASICS (above), 
+NAMES (above and specific spring type sections) and CYCLE LIFE (below).  
+Selection of materials (and corresponding material properties) 
+from the ODOP:Spring materials table is covered in the MATERIALS
 section and in the tutorial.
 
    
@@ -520,129 +477,121 @@ The corresponding "long names" not currently displayed in the ODOP:Spring user i
     Ti-13V-11Cr-3Al  Beta C Titanium -               AMS  4917
 
    
-ODOP:Spring normally gets material property data from the materials table. 
-This table may be altered by the user to contain material
+By default, ODOP:Spring gets material property data from the materials table. 
+Alternate material tables may be provided to contain material
 property values that match locally available materials or individual
 experience and preferences.  Thus the currently active materials table may
-not match the default table described above.  Refer to the RESTRICTIONS
+not match the default table described above. 
+Refer to the [Restrictions](../../About/Legal/Restrictions)
 section of the documentation for additional information.
 
 The way that ODOP:Spring handles material property data is dependent on the
-user specified settings of the constants:  MATERIAL\_TYPE and
-PROP\_CALC\_METHOD.  In general, the user may ignore these details and use
+user specified settings of the constants:  Material\_Type and
+Prop\_Calc\_Method. 
+Refer to [Prop_Calc_Method](./advancedSpringOperations) for additional details.
+In general, the user may ignore these details and use
 the defaults built into the program. 
-Also, by selecting a MATERIAL\_TYPE, the user can establish 
-material property values without too much concern for the following
-discussion.  However, in the case that more control of material property
-data entering the calculations is desired, the following discussion may be
-useful.  Examples of these procedures are presented in tutorial section
-TUTOR5.
-
+The user can establish material property values simply by selecting a 
+Material\_Type without too much concern for the following discussion. 
+However, in the case that more control of material property
+data entering the calculations is desired, 
+the following details may be useful. 
+Examples of these procedures are presented in tutorial sectionTUTOR5.
    
-The MATERIAL\_TYPE constant is a character string indicating which entry in
+The Material\_Type constant is a character string indicating which entry in
 the material table should be used to determine material
 properties and allowable stress limits.  Specifically, the term "material
-properties" includes the values for DENSITY, TORSION\_MODULUS, and TENSILE.
-The term "allowable stress limits" includes values for STRESS\_LIM\_STAT and
-STRESS\_LIM\_ENDUR which are normally calculated based on the material
-properties plus the current value of WIRE\_DIA combined with %\_TENSILE\_STAT
-and %\_TENSILE\_ENDUR.
-
-If ODOP:Spring finds a match for the current value of MATERIAL\_TYPE in the
-material table, then material properties from the table will be used to
-determine allowable stress limits.  If ODOP:Spring does not find a match for
-MATERIAL\_TYPE, then the currently existing values for material properties
-(as established by the user or default start point) will be used to
-determine allowable stress limits.
+properties" includes the values for Density, Torsion\_Modulus, and Tensile.
+The term "allowable stress limits" includes values for Stress\_Lim\_Stat and
+Stress\_Lim\_Endur which are normally calculated based on the material
+properties plus the current value of Wire\_Dia combined with %\_Tensile\_Stat
+and %\_Tensile\_Endur.
    
 To use a material that is not in the material table, or to use
 material property values that are different than those contained in the
-table, it is necessary to select an alternate setting for PROP\_CALC\_METHOD. 
+table, it is necessary to select an alternate setting for Prop\_Calc\_Method. 
 After this is done, enter
-any new values for TORSION\_MODULUS, TENSILE, %\_TENSILE\_STAT or
-%\_TENSILE\_ENDUR.  These new values will be used calculate the allowable
-stresses; STRESS\_LIM\_STAT and STRESS\_LIM\_ENDUR.
-
+any new values for Torsion\_Modulus, Tensile, %\_Tensile\_Stat or
+%\_Tensile\_Endur.  These new values will be used calculate the allowable
+stresses; Stress\_Lim\_Stat and Stress\_Lim\_Endur.
    
 ODOP:Spring will treat material properties in one of three different ways
-depending on the value of the constant PROP\_CALC\_METHOD.
+depending on the value of the constant Prop\_Calc\_Method.
 
-If PROP\_CALC\_METHOD has a value of 1 (the normal default), then the
+If Prop\_Calc\_Method has a value of 1 - Use values from material table
+(the normal default), then the
 material properties are selected and allowable stresses calculated as
-previously described.  Specifically, if PROP\_CALC\_METHOD has a value of 1,
-ODOP:Spring will calculate the allowable stresses as a function of WIRE\_DIA.
-A log-linear interpolation scheme will use the values of WIRE\_DIA, plus the
+previously described.  Specifically, if Prop\_Calc\_Method has a value of 1,
+ODOP:Spring will calculate the allowable stresses as a function of Wire\_Dia.
+A log-linear interpolation scheme will use the values of Wire\_Dia, plus the
 table supplied values of tensile at 0.010, tensile at 0.400,
-%\_TENSILE\_STAT, and %\_TENSILE\_ENDUR to calculate new values for TENSILE,
-STRESS\_LIM\_STAT and STRESS\_LIM\_ENDUR at each step in the SEARCH process.
+%\_Tensile\_Stat, and %\_Tensile\_Endur to calculate new values for Tensile,
+Stress\_Lim\_Stat and Stress\_Lim\_Endur at each step in the SEARCH process.
 This insures that the allowable stresses used in the factor of safety
-calculations exactly match the trial values of WIRE\_DIA selected by SEARCH.
-
+calculations exactly match the trial values of Wire\_Dia selected by SEARCH.
    
-PROP\_CALC\_METHOD  2.  In this
-situation, the user supplied values of TENSILE, %\_TENSILE\_STAT and
-%\_TENSILE\_ENDUR are used to calculate the allowable stresses
-STRESS\_LIM\_STAT and STRESS\_LIM\_ENDUR.
+If Prop\_Calc\_Method has a value of 2 - Specify Tensile, %\_Tensile_Stat & %\_Tensile_Endur, 
+the user supplied values of Tensile, %\_Tensile\_Stat and
+%\_Tensile\_Endur are used to calculate the allowable stresses
+Stress\_Lim\_Stat and Stress\_Lim\_Endur.
 
-If the user selects a material that is not in the material table, 
-and PROP\_CALC\_METHOD is CHANGEd to 3, then ODOP:Spring will not
-modify the values of STRESS\_LIM\_STAT and STRESS\_LIM\_ENDUR in any way.
+If Prop\_Calc\_Method is set to a value of 3 - Specify Stress\_Lim\_Stat & Stress\_Lim\_Endur, 
+then ODOP:Spring will not
+modify the values of Stress\_Lim\_Stat and Stress\_Lim\_Endur in any way.
 These values will remain as established in the initial start point (startup) or as set by
-the user on the main page.  The values of MATERIAL\_TYPE, TENSILE,
-%\_TENSILE\_STAT and %\_TENSILE\_ENDUR will be ignored.
+the user on the main page.  The values of Material\_Type, Tensile,
+%\_Tensile\_Stat and %\_Tensile\_Endur will be ignored.
 
 In most cases, the user does not need to be concerned with these details.
 They are necessary only to use material properties or allowable stresses
 that are different from those determined by the materials table.
    
 The following example illustrates how to establish a value of
-TORSION\_MODULUS that is different from the value in the material table.
-STRESS\_LIM\_STAT and STRESS\_LIM\_ENDUR will continue to be based on the
-current values of %\_TENSILE\_STAT and %\_TENSILE\_ENDUR whether established by
+Torsion\_Modulus that is different from the value in the material table.
+Stress\_Lim\_Stat and Stress\_Lim\_Endur will continue to be based on the
+current values of %\_Tensile\_Stat and %\_Tensile\_Endur whether established by
 the user or carried over from the values established in the materials table
 or startup.  The order in which these menu items are entered is significant.
 
-    CHANGE  MATERIAL_TYPE   USER_DEFINED
-    CHANGE  TORSION_MODULUS  xxxxxxxx
+    CHANGE  Prop_Calc_Method  2 Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
+    CHANGE  Torsion_Modulus  xxxxxxxx
    
-The same process applies to values for %\_TENSILE\_STAT and %\_TENSILE\_ENDUR.
+The same process applies to changing values for %\_Tensile\_Stat and %\_Tensile\_Endur.
 
 The following example illustrates how to establish a value of
-%\_TENSILE\_STAT that is different from the value in the material table.
-STRESS\_LIM\_STAT and STRESS\_LIM\_ENDUR will continue to be based on the new
-value of %\_TENSILE\_STAT and existing value of %\_TENSILE\_ENDUR.  The order
+%\_Tensile\_Stat that is different from the value in the material table.
+Stress\_Lim\_Stat and Stress\_Lim\_Endur will continue to be based on the new
+value of %\_Tensile\_Stat and existing value of %\_Tensile\_Endur.  The order
 in which these menu items are entered is significant.
 
-    CHANGE  MATERIAL_TYPE   USER_DEFINED
-    CHANGE  %_TENSILE_STAT  xxxxxxxx
+    CHANGE  Prop_Calc_Method  2 Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
+    CHANGE  %_Tensile_STAT  xxxxxxxx
 
    
  The following example illustrates how to establish values of
- TORSION\_MODULUS, STRESS\_LIM\_STAT and STRESS\_LIM\_ENDUR.  There will be no
- dependence on the WIRE\_DIA or any values from the materials table.  The
+ Torsion\_Modulus, Stress\_Lim\_Stat and Stress\_Lim\_Endur.  There will be no
+ dependence on the Wire\_Dia or any values from the materials table.  The
  order in which these menu items are entered is significant.
 
-    CHANGE  MATERIAL_TYPE  USER_DEFINED
-    CHANGE  PROP_CALC_METHOD  3
-    CHANGE  TORSION_MODULUS   xxxxxxxx
-    CHANGE  STRESS_LIM_STAT   yyyyyy
-    CHANGE  STRESS_LIM_ENDUR  zzzzzz
+    CHANGE  Prop_Calc_Method  3 Specify Stress\_Lim\_Stat & Stress\_Lim\_Endur
+    CHANGE  Torsion_Modulus   xxxxxxxx
+    CHANGE  Stress_Lim_Stat   yyyyyy
+    CHANGE  Stress_Lim_Endur  zzzzzz
 
    
 The SAVE menu item will capture the complete status of the design including
-the material property information.  After using the START menu item to read a
-previously SAVEd design, the complete status of the design will be
-restored.
+the material property information.  After using the File : Open... menu item to read a
+previously saved design, the complete status of the design will be restored.
 
 Additional information on controlling the way material property data is
-used in the calculations is presented in the section DESIGN TO STRESS.
+used in the calculations is presented in the section [Design to Stress](./advancedSpringOperations).
 
    
 **END TYPES**   
 The current version of the ODOP:Spring program implements six spring end
 types for compression springs and five different end types for extension
 springs.  In addition, the user can define specialized end conditions.
-These end types are represented by the Calculation Input END\_TYPE which
+These end types are represented by the Calculation Input End\_Type which
 has the following possible values:
 
           Compression           Extension
@@ -657,31 +606,29 @@ has the following possible values:
     7     USER_SPECIFIED    6   USER_SPECIFIED
 
 For a compression spring, the end type directly impacts calculation of
-INACTIVE\_COILS.  L\_SOLID, pitch and other variables are affected
+Inactive\_Coils.  L\_Solid, pitch and other variables are affected
 indirectly.  For an extension spring, the end type directly impacts
-calculation of HOOK\_DEFLECT\_ALL, END\_ID, EXTENDED\_END\_ID, L\_END and
-L\_EXTENDED\_END.  Other variables are impacted indirectly.
+calculation of Hook\_Deflect\_All, End\_ID, Extended\_End\_ID, L\_End and
+L\_Extended\_End.  Other variables are impacted indirectly.
 
-More detail on how to handle end types of a compression spring is provided in the
-documentation section on Compression Springs.   
-See: [Compression Spring](./c_spring).
+More detail on how to handle end types is provided in the
+documentation sections on the specific spring types:   
+[Compression Spring](./c_spring).
+[Extension Spring](./e_spring).
+[Torsion Spring](./t_spring).
 
-More detail on how to handle end types of an extension spring are covered in the
- documentation section on Extension Springs.   
- See: [Extension Spring](./e_spring).
-
-More precise treatments of this subject are available in the sources listed
-in the REFERENCES section of the documentation.
+Additional information on spring end types is available in the sources listed
+in the REFERENCES section of the documentation (above).
 
    
 **CYCLE LIFE**   
 This section presents a discussion of cycle life considerations and
 describes the Soderberg calculation and the ODOP:Spring interpretation of
-FS\_CYCLE\_LIFE.  A discussion of hook stresses in extension springs appears in
+FS\_CycleLife.  A discussion of hook stresses in extension springs appears in
 the Extension Spring section.
 
 ODOP:Spring provides two different approaches to the cycle life issue.  For
-materials contained in the materials table (PROP\_CALC\_METHOD=1), ODOP:Spring
+materials contained in the materials table (Prop\_Calc\_Method=1), ODOP:Spring
 will calculate cycle life directly.  This calculation is based on the
 "modified Goodman method".  Note that the value produced by this
 calculation applies only to body coils and is only approximate.  It is
@@ -689,41 +636,40 @@ useful in comparing the relative effect of different loading conditions,
 or relative performance of different designs, but you should expect results
 in practice to vary widely from the cycle life value predicted.
 
-For materials not contained in the materials table (PROP\_CALC\_METHOD=2 or
+For materials not contained in the materials table (Prop\_Calc\_Method=2 or
 3), ODOP:Spring does not have enough information available to directly
-calculate cycle life and so the CYCLE\_LIFE variable is set to "NaN", 
+calculate cycle life and so the Cycle\_Life variable is set to "NaN", 
 an abbreviation for "Not a Number".  
-In this case, the FS\_CYCLE\_LIFE variable described here can be used to get
+In this case, the FS\_CycleLife variable described here can be used to get
 some indication of a design's life in a specific cyclic application.
    
-The user may select 
+The user may user the Calculation Input Life\_Category to select 
 one of eight possible combinations of "cycle life conditions" and
 surface treatments (shot peening) expected in the application of the spring
-being designed.  The selection is used to determine a value for %\_TENSILE\_ENDUR
+being designed.  The selection is used to determine a value for %\_Tensile\_Endur
 from the materials table which then is applied to the
 interpolated value of tensile strength for that material and wire diameter
-to produce a value for the material's endurance limit (STRESS\_LIM\_ENDUR).
+to produce a value for the material's endurance limit (Stress\_Lim\_Endur).
 
 As illustrated in the tutorial section TUTOR4, the default start point (startup)
-supplied with ODOP:Spring does not provide default constraints for CYCLE\_LIFE
-or FS\_CYCLE\_LIFE.  Simply designating a LIFE\_CATEGORY 
+supplied with ODOP:Spring does not provide default constraints for Cycle\_Life
+or FS\_CycleLife.  Simply designating a Life\_Category 
 is not enough to have ODOP:Spring search for designs with a long cycle life.
-To have ODOP:Spring search for designs with a long cycle life, use menu items
-such as:
+To have ODOP:Spring search for designs with a long cycle life, 
+alter constraint values such as:
 
-    CHANGE  CYCLE_LIFE  MIN  nnnnnn
-    CHANGE  FS_CYCLE_LIFE  MIN  1.0
-
+    CHANGE  Cycle_Life  MIN  nnnnnn
+    CHANGE  FS_CycleLife  MIN  1.0
    
-FS\_CYCLE\_LIFE is the factor of safety produced in a calculation originally
-developed by Soderberg.  The calculation of FS\_CYCLE\_LIFE includes the
-material's endurance limit (STRESS\_LIM\_ENDUR), plus static and fluctuating
+FS\_CycleLife is the factor of safety produced in a calculation originally
+developed by Soderberg.  The calculation of FS\_CycleLife includes the
+material's endurance limit (Stress\_Lim\_Endur), plus static and fluctuating
 components of stress.
 
-If a design has FS\_CYCLE\_LIFE greater than 1.0, then the combination of
+If a design has FS\_CycleLife greater than 1.0, then the combination of
 average stress and the fluctuating component of stress for that design is
 reasonably small compared to the endurance limit.  A life that exceeds
-the value selected in LIFE\_CATEGORY may be expected in an application
+the value selected in Life\_Category may be expected in an application
 cycling between point 1 and point 2.
 
 Remember that the endurance limit will vary as a function of the material
@@ -731,10 +677,9 @@ selected, the surface treatment (shot peening), and the selected cycle
 life category.
 
 Additional information on the cycle life calculation is available in
-tutorial session TUTOR4, in the documentation on EQNSET 
-and also in the sources listed in the REFERENCES section.
+tutorial session TUTOR4, in the documentation on the specific spring types 
+and also in the sources listed in the REFERENCES section (above).
    
-
    
 **WHAT TO DO IF**   
 This section is intended to anticipate some of the more common user
@@ -744,18 +689,19 @@ If constraints are violated without apparent reason:
 Check for an over specified problem.  Considering that coil springs of
 uniform pitch and cylindric shape are linear devices, specifying both
 force and deflection at any two points will determine the spring
-constant.  An additional "fix" on RATE or an active L\_STROKE MIN
+constant.  An additional "fix" on RATE or an active L\_Stroke MIN
 constraint will then cause the problem to be over specified and it may
 be impossible to find any set of independent variables that will not
 violate the constraints.  There are numerous ways to over specify the
 problem.  Have you found one ?
 
-Check the buckling constraint, SLENDERNESS MAX.  If it is violated,
-are you really concerned about buckling ?  The feasible region will be
+Check the buckling constraint, Slenderness MAX.   
+If it is violated, are you really concerned about buckling ? 
+The feasible region will be
 substantially greater if you are willing to accept a spring that
 would buckle without additional support.
    
-Check fatigue life constraints, CYCLE\_LIFE and FS\_CYCLE\_LIFE.  If either
+Check fatigue life constraints, Cycle\_Life and FS\_CycleLife.  If either
 is violated, are you really concerned about fatigue life ?  The feasible
 region will be somewhat larger if you are willing to accept a spring
 that does not have a great cycle life.
@@ -774,12 +720,14 @@ Confirm that you have executed a SEARCH after establishing the FIX.
 Use of the SEARCH menu item is always necessary to find the appropriate
 values of the independent variables so that the dependent variables take
 on their FIXed values.  You may wish to review material contained in the
-documentation sections named INTRO, FIX, and TERMINOLOGY.  In the case that
+documentation sections  [Introduction](../introduction), and 
+[Terminology](../terminology). 
+In the case that
 one or more constraints are also violated, SEARCH will find a compromise
 between violations of the constraints and failure to achieve the desired
 value for FIXed state variables.  The nature of this compromise is
-influenced the values of the internal variables FIX\_WT, CON\_WT, and
-ZERO\_WT.
+influenced the values of the internal variables (File : Preferences) 
+FIX\_WT, CON\_WT, and ZERO\_WT.
    
 If the program terminates abnormally:   
 If you can repeat the problem, please report it via the procedures
@@ -789,7 +737,8 @@ If the results appear to be wrong:
 ODOP:Spring is constantly undergoing improvement.  In spite of years of
 field experience with the underlying solution techniques and 
 a considerable amount of testing and verification,
-there is always a possibility of error.  Please review the RESTRICTIONS
+there is always a possibility of error.  
+Please review the [Restrictions](../../About/Legal/Restrictions)
 section of documentation.  Review the material properties.  Check the
 inconsistency with another design method (hand calculator, spreadsheet
 calculation, etc.).  If the problem remains unresolved, please report it
