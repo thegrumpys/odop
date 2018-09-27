@@ -1,18 +1,18 @@
 #### Spring Design Overview
 
-This section presents information that is common to each of the
-coil spring design types supported by ODOP:Spring.
+This section presents design process information that is common to each of the
+coil spring types supported by ODOP:Spring.
 
 For specifics, see:   
-[Compression Spring](./c_spring).
-[Extension Spring](./e_spring).
-[Torsion Spring](./t_spring).
+* [Compression Spring](./c_spring)   
+* [Extension Spring](./e_spring)   
+* [Torsion Spring](./t_spring)   
 
 **SPRING BASICS**   
- This section presents a limited amount of introductory material on spring
+ This section provides a limited amount of introductory material on spring
  design in the context of the ODOP:Spring program.
 
- It is not the function of the ODOP:Spring documentation to teach spring
+ It is not the intent of the ODOP:Spring documentation to teach spring
  design.  The ODOP:Spring program is aimed at experienced spring designers and
  engineers who have some background in strength of materials and failure
  theories.  The REFERENCES documentation section (below) contains a list of
@@ -79,7 +79,7 @@ the designer.
 
    
 **Force-Deflection relationships:**   
-Each of the spring type specific sections presents a FORCE-DEFLECTION DIAGRAM. 
+Each of the spring type specific sections presents a Force-Deflection Diagram. 
 Most of a spring design problem can be stated in terms of those diagrams. 
 New users need to understand the diagram and understand
 the names that ODOP:Spring uses in order to specify a design problem.
@@ -335,9 +335,9 @@ Refer to: [Restrictions](../../About/Legal/Restrictions)
  search will attempt to resolve the conflict.
    
 For specifics on names associated with each spring type, see:   
-[Compression Spring](./c_spring).
-[Extension Spring](./e_spring).
-[Torsion Spring](./t_spring).
+* [Compression Spring](./c_spring)   
+* [Extension Spring](./e_spring)   
+* [Torsion Spring](./t_spring)   
    
 **SPRING CONSTRAINTS**   
  While most of ODOP:Spring constraints are obvious, a few need a bit of
@@ -414,7 +414,7 @@ were imposed on a design, it would not be possible to automatically adjust
 to higher allowable stresses whenever smaller wire diameters were
 considered by the SEARCH process.  Because many designers are accustomed to
 designing to specific stress limits, ODOP:Spring has been programmed to
-also permit this approach.  
+also permit this approach. 
 Refer to [Design to Stress](./advancedSpringOperations) for additional information.
 
 The factor of safety concept applies to both static loads and cycle life.
@@ -613,9 +613,9 @@ L\_Extended\_End.  Other variables are impacted indirectly.
 
 More detail on how to handle end types is provided in the
 documentation sections on the specific spring types:   
-[Compression Spring](./c_spring).
-[Extension Spring](./e_spring).
-[Torsion Spring](./t_spring).
+* [Compression Spring](./c_spring)   
+* [Extension Spring](./e_spring)   
+* [Torsion Spring](./t_spring)   
 
 Additional information on spring end types is available in the sources listed
 in the REFERENCES section of the documentation (above).
