@@ -91,7 +91,7 @@ When faced with the situation where no feasible solution is available,
 the designer must restructure the problem or his goals in some way to
 permit the desired solution.  Perhaps the solution is to use a stronger
 material.  This can be represented by changing a material constant and
-re-executing the search.  
+re-executing the search. 
 Perhaps use of the TRADE feature is appropriate.
 For more information, see: [Trade](./trade).
 
@@ -124,13 +124,13 @@ The design equations for a specific design type are contained in a source code
 file named eqnset.js.
 Each design type gets its own sub-directory within the source code.
 For example, currently implemented design types include:
-* [Rectangular Solid](./DesignTypes/r-solid)
+* [Rectangular Solid](./DesignTypes/r_solid)
 * [Piston-Cylinder](./DesignTypes/pcyl) 
 * [Compression Spring](./DesignTypes/c_spring)   
 
 Design types planned for implementation in the future include:
-* [Extension Spring](./DesignTypes/e_spring)
-* [Torsion Spring]()./DesignTypes/t_spring)   
+* [Extension Spring](./DesignTypes/e_spring)   
+* [Torsion Spring](./DesignTypes/t_spring)   
 
 The simplest way to use a different design type and equation set is to select an
 existing design (typically called "startup") that uses the desired equation set 

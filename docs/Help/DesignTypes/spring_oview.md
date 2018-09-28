@@ -5,6 +5,7 @@ coil spring types supported by ODOP:Spring.
 
 For specifics, see:   
 * [Advanced Spring Operations](./advancedSpringOperations)   
+* [Spring Materials](./materials)   
 * [Compression Spring](./c_spring)   
 * [Extension Spring](./e_spring)   
 * [Torsion Spring](./t_spring)   
@@ -226,7 +227,7 @@ the change in Wire\_Dia.
    
 Additional information on operating techniques is presented in the
 documentation sections [Introduction](../introduction) and 
-[GETTING STARTED](../gettingStarted). 
+[Getting Started](../gettingStarted). 
 The demo and tutorial sessions supplied with ODOP:Spring provide detailed 
 commentary on how to solve a variety of problems.
 
@@ -421,7 +422,7 @@ The calculation of FS\_CycleLife includes the material's endurance limit
 (Stress\_Lim\_Endur), plus static and fluctuating components of stress in a
 calculation originally developed by Soderberg.  Stress\_Lim\_Endur is
 normally determined by the materials table and the user's selection of
-cycle life and surface treatment (shot peening) with Life\_Category.  
+cycle life and surface treatment (shot peening) with Life\_Category. 
 Additional information on the cycle life calculation is
 available in the documentation sections for the specific spring types
 and also in the sources listed in the REFERENCES section (above).
@@ -465,13 +466,12 @@ Refer to the [Restrictions](../../About/Legal/Restrictions)
 section of the documentation for additional information.
 
 The way that ODOP:Spring handles material property data is dependent on the
-user specified settings of the Calculation Inputs:  Material\_Type and
+user specified settings of the Calculation Inputs Material\_Type and
 Prop\_Calc\_Method. 
 Note that by default, when using a material selected from the materials table,
 allowable stresses are calculated as a function of wire diameter.
-In general, the user may ignore these details and use
-the defaults built into the program. 
-Establish material property values simply by selecting a Material\_Type. 
+In general, the user may ignore these details and simply
+establish material property values by selecting a Material\_Type. 
 In the case that more control of material property data entering 
 the calculations is desired, the details provided in 
 [Prop_Calc_Method](./advancedSpringOperations) and 

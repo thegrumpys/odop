@@ -47,10 +47,12 @@ The corresponding "long names" not currently displayed in the ODOP:Spring user i
 By default, ODOP:Spring gets material property data from the materials table. 
 Alternate material tables may be provided to contain material
 property values that match locally available materials or individual
-experience and preferences.  Thus the currently active materials table may
+experience and preferences. 
+Thus the currently active materials table may
 not match the default table described above. 
-Refer to the [Restrictions](../../About/Legal/Restrictions)
-section of the documentation for additional information.
+For additional information, refer to:
+* [Restrictions](../../About/Legal/Restrictions)
+* [NewDesignType](../../procedures/NewDesignType)
 
 The way that ODOP:Spring handles material property data is dependent on the
 user specified settings of the Calculation Inputs:  Material\_Type and
