@@ -1,6 +1,6 @@
 ## Features
 
-#### Open Design Optimization : Platform &nbsp; (ODOP)   
+#### Open Design Optimization Platform &nbsp; (ODOP)   
 
 ODOP is a web software application (web app) currently under development.
 It provides a number of features and capabilities to facilitate the analysis 
@@ -133,7 +133,7 @@ Inversion of design equations
 
  In addition to tables of commonly available sizes, ODOP may contain
  tables of material properties for many commonly used materials.
- These tables may be altered or supplemented by the user.  
+ These tables may be altered or supplemented by the user. 
  In the spring design example, with most spring materials, 
  allowable stress varies significantly as a function of wire
  diameter.  For this reason, ODOP recalculates allowable stress and
@@ -169,4 +169,4 @@ Inversion of design equations
  his own pace and return to the design process as soon as the desired
  information is obtained.
 
- 
+[Help](./)
