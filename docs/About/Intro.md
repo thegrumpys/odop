@@ -55,4 +55,12 @@ See: [Help Index](../Help/index)
 A high level overview of the ODOP Design Process Flow is available.  See:   
 [ODOP Design Process Flow Diagram](./png/DesignProcessFlowDiagram.png)
 
+
+* AVAILABLE DESIGN TYPES
+   
+Three [Design Types](../Help/DesignTypes) are currently available.
+The [Rectangular Solid](../Help/DesignTypes/r_solid) Design Type is intended as an 
+easy to understand demonstration problem.
+
+
 [About](./)

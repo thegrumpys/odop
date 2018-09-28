@@ -4,6 +4,7 @@ This section presents design process information that is common to each of the
 coil spring types supported by ODOP:Spring.
 
 For specifics, see:   
+* [Advanced Spring Operations](./advancedSpringOperations)   
 * [Compression Spring](./c_spring)   
 * [Extension Spring](./e_spring)   
 * [Torsion Spring](./t_spring)   
@@ -92,9 +93,9 @@ The slope of the line is the spring RATE measured in force per unit deflection.
 
 ODOP:Spring produces information about
 four points on the force-deflection curve.  As described in the
-WHAT TO DO IF section, specifying both force and deflection for any two
-points will completely specify the force-deflection line.  Any
-additional specification on RATE or one of the other points will over
+WHAT TO DO IF section (below), specifying both force and deflection 
+for any two points will completely specify the force-deflection line. 
+Any additional specification on RATE or one of the other points will over
 specify the problem.  Unless the redundant specification is exactly in
 line with the other values, the conflict will keep ODOP:Spring from
 finding a feasible solution.  Consistent specification of constraints
@@ -202,15 +203,15 @@ listed in the REFERENCES section of the documentation (below).
    
 **Technique:**   
 A typical spring design process should start by entering what is known
-about the problem.  As described in more detail in the INTRODUCTION
+about the problem.  As described in more detail in the [INTRODUCTION](../introduction) 
 section of the documentation, any time after starting ODOP:Spring and
-reaching the main page, a complete spring design is already
-defined.  Use the numeric entry fields plus FIX checkboxess to alter that existing
+reaching the main page, a complete spring design is already defined.  
+Use the numeric entry fields plus FIX checkboxess to alter that existing
 design to reflect what is known about the problem at hand.
 
 The main page and REPORT tabs can be used to
 view the current state of the design.  The main page will show which
-constraints are violated.  Use the SEARCH menu item to have ODOP:Spring
+constraints are violated.  Use the [SEARCH](../search) menu item to have ODOP:Spring
 select values for the free independent variables that reduce (and
 hopefully eliminate) constraint violations thus achieving a feasible
 design.
@@ -224,7 +225,8 @@ adjust values of the remaining independent variables to compensate for
 the change in Wire\_Dia.
    
 Additional information on operating techniques is presented in the
-documentation sections [Introduction](../introduction) and GETTING STARTED. 
+documentation sections [Introduction](../introduction) and 
+[GETTING STARTED](../gettingStarted). 
 The demo and tutorial sessions supplied with ODOP:Spring provide detailed 
 commentary on how to solve a variety of problems.
 
@@ -310,10 +312,9 @@ Refer to: [Restrictions](../../About/Legal/Restrictions)
  example, the free length is named L\_Free to be consistent with other length
  names (L\_Solid, L\_1, and L\_2). 
 
- The names for parameters, variables, constants, etc. are defined in the
- initialState.js file.  By editing this file, the user can change these names to any
- character string of his preference.  Additional information may be found in
- the sections named START and STARTUP.
+ The names for Independent Variables, Dependent Variables, Calculation Inputs 
+ and Properties are defined in the initialState.js file.  
+ Changes in this file can change names for all future designs based on it. 
    
  The force deflection diagrams contained in the specific spring type sections 
  may assist understanding of the following discussion.  Additional
@@ -350,8 +351,6 @@ For specifics on names associated with each spring type, see:
  documentation sections SPRING BASICS (above), the
  NAMES sections of each of the specific spring types and
  [Terminology](../terminology).
-
- This discussion is accessed by the tutorial section covering constraints.
    
 **Constraints common to both compression and extension springs:**
 
@@ -360,7 +359,7 @@ between point 1 and point 2.  Refer to the force-deflection diagram in
 the documentation section for each specific spring type for an illustration of
 L\_Stroke.
 
-ID\_Free MIN is established by default start point (startup) because it
+ID\_Free MIN is established by the default start point (startup) because it
 discourages the search from investigating designs with a zero or
 negative inside diameter, and there by encountering numerical
 difficulties.
@@ -379,7 +378,7 @@ life that exceeds the value selected for Life\_Category.  Remember that
 the endurance limit will vary as a function of the material selected, the
 surface treatment (shot peening), and the selected cycle life.
 
-As described in the documentation section on Cycle Life (below), ODOP:Spring is
+As described in the documentation section on CYCLE LIFE (below), ODOP:Spring is
 capable of directly calculating Cycle\_Life only for materials contained in
 the materials table.  The FS\_CycleLife variable is the only way of
 gaging cycle life for user defined material properties (Prop\_Calc\_Method =
@@ -431,12 +430,12 @@ Refer to additional discussion in the sections titled SPRING BASICS (above),
 NAMES (above and specific spring type sections) and CYCLE LIFE (below).  
 Selection of materials (and corresponding material properties) 
 from the ODOP:Spring materials table is covered in the MATERIALS
-section and in the tutorial.
+section (next, below) and in the tutorial.
 
    
 **MATERIALS**   
-Materials available in the default material table supplied with ODOP:Spring
-include:
+Spring wire and bar materials available in the default material table supplied 
+with ODOP:Spring include:
 
       Common Name    ASTM     FED_SPEC    Notes
 
@@ -456,26 +455,6 @@ include:
     5160H            A125-52
     5160H-CG         A125-52          centerless ground
 
-The corresponding "long names" not currently displayed in the ODOP:Spring user interface are:
-
-    17Cr 7Ni Stainless wire: condition CH -          ASTM A-313 
-    Type 302 Stainless Steel spring wire -           ASTM A-313 
-    Type 316 Stainless Steel spring wire -           ASTM A-313
-    5160H Chromium steel:       not ground:hot wound:ASTM A-125
-    5160H Chromium steel:centerless ground:hot wound:ASTM A-125
-    Beryllium Copper -                               ASTM B-197 
-    Oil Temp Chrome Silicon spring wire -            ASTM A-401
-    Oil Temp Chrome Vanadium valve spring wire -     ASTM A-232
-    Hard Drawn MB spring wire   - Class II           ASTM A-227 
-    Inconel X-750  Spring Temper                     AMS  5698 
-    Monel  Alloy 400                                 AMS  7233 
-    Music Wire  (all coatings) -                     ASTM A-228 
-    Oil Tempered MB spring wire - Class II           ASTM A-229 
-    Phosphor Bronze spring wire -                    ASTM B-159 
-    Oil Temp Chrome Silicon valve spring wire -      ASTM A-401
-    70/30 Brass spring wire -                        ASTM B-134 
-    Ti-13V-11Cr-3Al  Beta C Titanium -               AMS  4917
-
    
 By default, ODOP:Spring gets material property data from the materials table. 
 Alternate material tables may be provided to contain material
@@ -486,105 +465,19 @@ Refer to the [Restrictions](../../About/Legal/Restrictions)
 section of the documentation for additional information.
 
 The way that ODOP:Spring handles material property data is dependent on the
-user specified settings of the constants:  Material\_Type and
+user specified settings of the Calculation Inputs:  Material\_Type and
 Prop\_Calc\_Method. 
-Refer to [Prop_Calc_Method](./advancedSpringOperations) for additional details.
+Note that by default, when using a material selected from the materials table,
+allowable stresses are calculated as a function of wire diameter.
 In general, the user may ignore these details and use
 the defaults built into the program. 
-The user can establish material property values simply by selecting a 
-Material\_Type without too much concern for the following discussion. 
-However, in the case that more control of material property
-data entering the calculations is desired, 
-the following details may be useful. 
-Examples of these procedures are presented in tutorial sectionTUTOR5.
-   
-The Material\_Type constant is a character string indicating which entry in
-the material table should be used to determine material
-properties and allowable stress limits.  Specifically, the term "material
-properties" includes the values for Density, Torsion\_Modulus, and Tensile.
-The term "allowable stress limits" includes values for Stress\_Lim\_Stat and
-Stress\_Lim\_Endur which are normally calculated based on the material
-properties plus the current value of Wire\_Dia combined with %\_Tensile\_Stat
-and %\_Tensile\_Endur.
-   
-To use a material that is not in the material table, or to use
-material property values that are different than those contained in the
-table, it is necessary to select an alternate setting for Prop\_Calc\_Method. 
-After this is done, enter
-any new values for Torsion\_Modulus, Tensile, %\_Tensile\_Stat or
-%\_Tensile\_Endur.  These new values will be used calculate the allowable
-stresses; Stress\_Lim\_Stat and Stress\_Lim\_Endur.
-   
-ODOP:Spring will treat material properties in one of three different ways
-depending on the value of the constant Prop\_Calc\_Method.
+Establish material property values simply by selecting a Material\_Type. 
+In the case that more control of material property data entering 
+the calculations is desired, the details provided in 
+[Prop_Calc_Method](./advancedSpringOperations) and 
+[Materials](./materials) may be useful. 
 
-If Prop\_Calc\_Method has a value of 1 - Use values from material table
-(the normal default), then the
-material properties are selected and allowable stresses calculated as
-previously described.  Specifically, if Prop\_Calc\_Method has a value of 1,
-ODOP:Spring will calculate the allowable stresses as a function of Wire\_Dia.
-A log-linear interpolation scheme will use the values of Wire\_Dia, plus the
-table supplied values of tensile at 0.010, tensile at 0.400,
-%\_Tensile\_Stat, and %\_Tensile\_Endur to calculate new values for Tensile,
-Stress\_Lim\_Stat and Stress\_Lim\_Endur at each step in the SEARCH process.
-This insures that the allowable stresses used in the factor of safety
-calculations exactly match the trial values of Wire\_Dia selected by SEARCH.
-   
-If Prop\_Calc\_Method has a value of 2 - Specify Tensile, %\_Tensile_Stat & %\_Tensile_Endur, 
-the user supplied values of Tensile, %\_Tensile\_Stat and
-%\_Tensile\_Endur are used to calculate the allowable stresses
-Stress\_Lim\_Stat and Stress\_Lim\_Endur.
-
-If Prop\_Calc\_Method is set to a value of 3 - Specify Stress\_Lim\_Stat & Stress\_Lim\_Endur, 
-then ODOP:Spring will not
-modify the values of Stress\_Lim\_Stat and Stress\_Lim\_Endur in any way.
-These values will remain as established in the initial start point (startup) or as set by
-the user on the main page.  The values of Material\_Type, Tensile,
-%\_Tensile\_Stat and %\_Tensile\_Endur will be ignored.
-
-In most cases, the user does not need to be concerned with these details.
-They are necessary only to use material properties or allowable stresses
-that are different from those determined by the materials table.
-   
-The following example illustrates how to establish a value of
-Torsion\_Modulus that is different from the value in the material table.
-Stress\_Lim\_Stat and Stress\_Lim\_Endur will continue to be based on the
-current values of %\_Tensile\_Stat and %\_Tensile\_Endur whether established by
-the user or carried over from the values established in the materials table
-or startup.  The order in which these menu items are entered is significant.
-
-    CHANGE  Prop_Calc_Method  2 Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
-    CHANGE  Torsion_Modulus  xxxxxxxx
-   
-The same process applies to changing values for %\_Tensile\_Stat and %\_Tensile\_Endur.
-
-The following example illustrates how to establish a value of
-%\_Tensile\_Stat that is different from the value in the material table.
-Stress\_Lim\_Stat and Stress\_Lim\_Endur will continue to be based on the new
-value of %\_Tensile\_Stat and existing value of %\_Tensile\_Endur.  The order
-in which these menu items are entered is significant.
-
-    CHANGE  Prop_Calc_Method  2 Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
-    CHANGE  %_Tensile_STAT  xxxxxxxx
-
-   
- The following example illustrates how to establish values of
- Torsion\_Modulus, Stress\_Lim\_Stat and Stress\_Lim\_Endur.  There will be no
- dependence on the Wire\_Dia or any values from the materials table.  The
- order in which these menu items are entered is significant.
-
-    CHANGE  Prop_Calc_Method  3 Specify Stress\_Lim\_Stat & Stress\_Lim\_Endur
-    CHANGE  Torsion_Modulus   xxxxxxxx
-    CHANGE  Stress_Lim_Stat   yyyyyy
-    CHANGE  Stress_Lim_Endur  zzzzzz
-
-   
-The SAVE menu item will capture the complete status of the design including
-the material property information.  After using the File : Open... menu item to read a
-previously saved design, the complete status of the design will be restored.
-
-Additional information on controlling the way material property data is
-used in the calculations is presented in the section [Design to Stress](./advancedSpringOperations).
+Examples of these procedures are presented in tutorial section TUTOR5.
 
    
 **END TYPES**   

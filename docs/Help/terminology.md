@@ -2,7 +2,15 @@
 
 The following terms have special meanings used in the context of this program.
 
-INDEPENDENT VARIABLES &nbsp;  (inputs, design parameters)   
+**Mathematical Model**   
+A set of equations that describes the behavior a real world problem of interest.
+Within the context of the ODOP software, the terms "mathematical model" and
+"Design Type" are roughly equivalent.
+Each design type has a mathematical model at its core.
+For examples, see: [Piston-Cylinder](./DesignTypes/png/PCylDiagram.png) and 
+[Rectangular Solid](./DesignTypes/png/RectangularSolidDiagram.png).
+
+**INDEPENDENT VARIABLES** &nbsp;  (inputs, design parameters)   
 The independent variables are the inputs of the design equations.
 They are the quantities on the right hand side of the equals sign that
 can be arbitrarily selected by the designer or search routine. 
@@ -12,7 +20,7 @@ For independent variables, a FIX operation reduces the computational demand
 of the numerical search problem.
 See the FIX entry below for more details.
 
-DEPENDENT VARIABLES &nbsp;  (outputs, state variables)   
+**DEPENDENT VARIABLES** &nbsp;  (outputs, state variables)   
 The dependent variables are the outputs of the design equations.
 They are the quantities on the left hand side of the equal sign.
 Frequently, dependent variables are measures of the performance of a given
@@ -23,13 +31,13 @@ variable.  A FIX operation on a dependent variable increases the
 computational demand of the numerical search problem.
 See the FIX entry below for more details.
 
-CALCULATION INPUTS &nbsp;  (constants)   
+**CALCULATION INPUTS** &nbsp;  (constants)   
 Referred to as "constants" in earlier versions of the software, 
 Calculation Inputs are inputs to the design equations and are adjustable by the
 user, but are not manipulated by the search algorithm or subject to FIX or constraints. 
 Calculation Inputs frequently represent material properties or other physical constants.
 
-CONSTRAINTS   
+**CONSTRAINTS**   
 Constraints are one sided boundaries that represent goals for the design
 problem.  Either dependent or independent variables may be constrained to
 be greater than or less than a simple constant or a functionally
@@ -41,16 +49,16 @@ In order to establish a constraint, it is necessary to check the corresponding
 Minimum or Maximum constraint checkbox and enter a value for the desired 
 constraint level in the corresponding entry field.
 
-A SEARCH operation is required to establish appropriate values of the
+A [SEARCH](search) operation is required to establish appropriate values of the
 (not FIXed) Independent Variables to meet the specified constraint levels.
 
-CONSTRAINT VIOLATIONS   
+**CONSTRAINT VIOLATIONS**   
 A constraint violation represents the difference between the current
 value of a given variable and its corresponding constraint level.  By
 convention, negative values represent constraint satisfaction, positive
 values represent constraint violation.
 
-FIX   
+**FIX**   
 The user can establish (i.e. FIX) the value of any variable, independent or dependent.
 FIXed status is designated by checking the checkbox immediately to the right
 of the variable's value.
@@ -69,7 +77,7 @@ Once the appropriate FIX checkbox is checked, the user will be able to enter
 a target value in either the Minimum or Maximum constraint level entry field.
 A Search (menu Action : Search) will be required to establish the desired values.
 
-FEASIBLE REGION   
+**FEASIBLE REGION**   
 A feasible region may be formed within the boundaries represented by the
 various constraints on the design problem.  If a given design satisfies
 all the constraints, it is said to be "feasible" or in the "feasible
@@ -87,20 +95,20 @@ re-executing the search.
 Perhaps use of the TRADE feature is appropriate.
 For more information, see: [Trade](./trade).
 
-OBJECTIVE FUNCTION   
+**OBJECTIVE FUNCTION**   
 The objective function constitutes the numerical search problem.  It is
 formed as a blend of violated constraints, dependent variable FIX
-violations and in the case of the SEEK feature, a "merit function" that
+violations and in the case of the [SEEK](seek) feature, a "merit function" that
 represents the variable under investigation.  The search algorithm works
 to drive the objective function to the lowest value possible.
 For more detail, see the Search entry below.
 
-PREFERENCES &nbsp; (Internal Variables)   
+**PREFERENCES** &nbsp; (Internal Variables &nbsp; File : Preferences menu item)   
 Preference settings control the operation of the program.  They have no
 direct meaning to the design problem.  For further information, refer to 
 the Help sections on Preferences and Search.
 
-PROPERTIES   
+**PROPERTIES** &nbsp; (File : Properties menu item)   
 It is possible to store a series of text strings with a design in order 
 to carry descriptive information. 
 The File : Properties menu is used to establish a set of label - value 
@@ -108,7 +116,7 @@ pairs where the text of the value is set by the user.
 The number of labels and the text of the label is established in the design type 
 source code in the initialState.js file.
 
-EQUATION SETS   
+**EQUATION SETS**   
 The ODOP software allows for multiple design types and thus multiple sets of 
 design equations (mathematical models of a specific design problem) 
 to be concurrently available. 
@@ -116,13 +124,13 @@ The design equations for a specific design type are contained in a source code
 file named eqnset.js.
 Each design type gets its own sub-directory within the source code.
 For example, currently implemented design types include:
-* Rectangular Solid
-* Piston_Cylinder 
-* Compression Spring   
+* [Rectangular Solid](./DesignTypes/r-solid)
+* [Piston-Cylinder](./DesignTypes/pcyl) 
+* [Compression Spring](./DesignTypes/c_spring)   
 
 Design types planned for implementation in the future include:
-* Extension Spring
-* Torsion Spring   
+* [Extension Spring](./DesignTypes/e_spring)
+* [Torsion Spring]()./DesignTypes/t_spring)   
 
 The simplest way to use a different design type and equation set is to select an
 existing design (typically called "startup") that uses the desired equation set 
@@ -131,9 +139,9 @@ at the time that the ODOP software first starts.
 Additional information on how to implement new ODOP design types is available
 in the [NewDesignType](../procedures/NewDesignType) documentation.
 
-SEARCH    
-The search algorithm manipulates the values of independent variables so as to 
-determine a minimum value of the objective function. 
+**SEARCH**    
+The [Search](search) algorithm manipulates the values of independent variables 
+so as to determine a minimum value of the objective function. 
 For more detail, see Objective Function entry above.
 The objective function is constructed such that 
 (within the limits of the physical reality represented by the design equations)
