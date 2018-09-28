@@ -1,7 +1,8 @@
 ## Restrictions
 
 This section covers a few restrictions and limitations of the ODOP:Spring
-program.  Please review the About : Disclaimer section for liability limitations.
+program.  Please review the [Disclaimer](Disclaimer) section for 
+liability limitations.
 
 The current release of ODOP:Spring is valid only for helical coil compression,
 extension and torsion springs that have the properties of uniform pitch,
@@ -46,4 +47,4 @@ The spring catalogs supplied with the current release of ODOP:Spring are
 intended for demonstration purposes only.  They do not necessarily
 represent the current offering of any single manufacturer.
    
-
+[About](../)

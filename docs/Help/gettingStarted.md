@@ -9,13 +9,13 @@ Work in progress !
  usually goes a long way.  In the worst case, you'll come away from the
  experience with a little more motivation to read more of the on-line documentation.
 
-** USING HELP**   
+**USING HELP**   
 
  A good place to go from here is to try HELP INTRO.  After that, perhaps
  HELP TERMINOLOGY.
 
 
-** USING THE TUTORIAL AND DEMO FACILITY**   
+**USING THE TUTORIAL AND DEMO FACILITY**   
 
  The tutorial is designed to introduce new users to ODOP:Spring commands and
  concepts.  It is recommended for new users as the most effective and

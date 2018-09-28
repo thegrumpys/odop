@@ -5,7 +5,7 @@ This entry is a work in progress.
 Material that is more detailed than appropriate
 for the Spring Overview section should go here.
 Some material from other sections including Spring Overview (Cycle Life) and 
-perhaps including Hot Wound will be moved here.
+perhaps including metric will be moved here.
 Information regarding the standard size tables and 
 stock spring catalog tables can go here.
 
@@ -65,8 +65,54 @@ stock spring catalog tables can go here.
  are supplied directly by the user.
  There is no dependence on wire diameter.
 
-
  Refer to additional discussion in the [MATERIALS](./materials) section.
+ 
+**HOT WOUND**   
+ The easiest way to design a hot wound spring is to load a start point
+ that is already set up for hot wound. 
+ Sample hot wound startup files  supplied with ODOP:Spring are:
+
+    HOT_WND -    compression spring, inch-pound-second units
+    HOT_CGS -    compression spring, metric units
+    SMI_HW  -    compression spring, SMI material properties
+
+ Each of these files are pre-configured for a material type (Eg.  5160H)
+ that carries an appropriate value of HOT_FACTOR_KH, an end type of
+ TAPERED_C&G, and starting values that are closer to the solution point of a
+ typical hot large wound spring than the values in STARTUP.DSN.
+
+ Alternately, select a material from the table that indicates it is "hot wound", 
+ select an appropriate end type (Eg.  TAPERED\_C&G) 
+ and then adjust Wire\_Dia, OD\_Free and Force\_2 to start
+ with a realistic approximation of the desired result.
+
+ The value of HOT\_FACTOR\_KH is used to reduce the effective modulus of
+ elasticity and torsional modulus in the design equations.
+
+ For normal cold coiled materials the value of HOT\_FACTOR\_KH is 1.00.
+ Thus, it has no effect on the modulus.  For materials designated as
+ "hot wound" in the materials table, the value of HOT\_FACTOR\_KH is
+ automatically established as appropriate (generally 0.96 for centerless
+ ground materials, and 0.91 for not centerless ground materials).
+
+       PROCESS           MATERIAL         HOT_FACTOR_KH
+
+     COLD_COILED                               1.00
+     HOT_WOUND       CENTERLESS GROUND         0.96
+     HOT_WOUND       NOT   CL   GROUND         0.91
+
+ It is possible to set a different value for HOT\_FACTOR\_KH by 
+ using PROP\_CALC\_METHOD = 2 or 3. 
+ This will permit any desired
+ value of HOT\_FACTOR\_KH to be entered into the main page
+ Calculation Input entry field.
+
+ Make permanent changes in these values by altering the appropriate
+ materials file. 
+ For additional information, refer to:
+* [MATERIALS](materials)   
+* [Restrictions](../../About/Legal/Restrictions)   
+* [NewDesignType](../../procedures/NewDesignType)   
  
 
 [Help](../)
