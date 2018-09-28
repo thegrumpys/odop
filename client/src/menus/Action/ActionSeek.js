@@ -1,7 +1,7 @@
 import React from 'react';
 import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX } from '../../store/actionTypes';
+import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek } from '../../store/actionCreators';
 
 class ActionSeek extends React.Component {
@@ -80,7 +80,7 @@ class ActionSeek extends React.Component {
                             </InputGroupAddon>
                             <Input className="align-middle" type="select" onChange={this.onNameSelect} value={this.state.name}>
                                 {this.props.symbol_table.map((element, index) =>
-                                    (element.equationset && !element.hidden) ? <option key={index} value={element.name}>{element.name}</option> : ''
+                                    (element.equationset && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
                             </Input>
                         </InputGroup>

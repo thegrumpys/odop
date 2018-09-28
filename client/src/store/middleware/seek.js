@@ -42,11 +42,6 @@ export function seek(store, action) {
             temp = element.value;
             dname = element.name;
             input = element.units;
-            if (element.lmin & FIXED) {
-                ncode = dname+' IS FIXED.   USE OF SEEK IS NOT APPROPRIATE.';
-                store.dispatch(changeResultTerminationCondition(ncode));
-                return;
-            }
             SOUGHT = i + 1; // Skip 0 value which is special
             found = true;
         }
