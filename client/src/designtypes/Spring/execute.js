@@ -11,4 +11,6 @@ export function getExecuteNames() {
 
 export function execute(execute_name) {
     console.log('In execute execute_name=',execute_name);
+    var { execute } = require('../designtypes/execute/'+execute_name+'.json'); // Dynamically load execute file
+    console.log('In execute execute=',execute);
 }
