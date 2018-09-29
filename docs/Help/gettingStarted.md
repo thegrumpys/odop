@@ -14,7 +14,8 @@ This page is still a work in progress !
 
 As noted in the [introduction](../About/intro), OPOP currently offers three
 design types to work with: Piston-Cylinder, Rectangular Solid and Compression Spring. 
-If you are interested in learning about capabilities and concepts,
+If you are interested in learning about capabilities, concepts, and basic
+mechanics of how to operate the program,
 the Rectangular Solid design type is intended as an easy to understand 
 demonstration problem and is a good place to start.
 
@@ -27,20 +28,31 @@ helpful with some of the terms utilized here.
 While it is possible to use the ODOP software from a mobile device,
 establishing initial impressions with a full size monitor, keyboard and mouse
 is recommended.
+It should be possible to operate with this material in one
+browser tab while the ODOP main page is in another browser tab.
+This will permit rapid switching from this material to view the
+corresponding part of the program user interface.
+In the best of all worlds, if a wide screen monitor is in use, 
+it should be possible to configure two independent browser sessions.
+Put this material in one browser window such that it
+takes up roughly one third of the screen width.
+Put the ODOP main page in a separate browser window such that it takes up 
+the remaining two thirds of the screen width.
+It will then be possible to see both this discussion and the program
+user interface at the same time.
+
 When first launching the program, 
 you will be presented with the opportunity to select a design type.
 Within each design type, you will have the opportunity to select an existing design.
 Each design type will have a default design with the name "startup".
 
+So, if you haven't started ODOP already, 
+open a new browser session (or tab) and follow this link:   
+[Demonstration version of ODOP](https://odop.herokuapp.com/)
+
 This screen capture illustrates selecting the Solid design type 
 and its default design called startup.   
-[Start with Rectangular Solid](./png/SelectSolid.png)
-
-It should be possible to operate with this material in one
-browser tab while the ODOP main page is in another browser tab.
-So, if you haven't started ODOP already, 
-open a new browser tab and follow this link:   
-[Demonstration version of ODOP](https://odop.herokuapp.com/)
+![Start with Rectangular Solid](./png/SelectSolid.png "Start with Rectangular Solid")
 
 
 **A Quick Tour of the Main Page**
@@ -48,50 +60,51 @@ open a new browser tab and follow this link:
 Have a look at the main menu (**File &nbsp; Action &nbsp; View &nbsp; Help**) 
 highlighted inside the red oval.
 Select one of the main menu entries and a drop-down with sub-items will appear.   
-* [The Menus](./png/MainMenu.png)   
+![Main Menu](./png/MainMenu.png "Main Menu")   
 
 Here is an example of how each main menu item will drop down to provide 
 specific menu items.
 Note that menu entries associated with not yet implemented features are disabled (grey).
 This screen clip illustrates how to get to the index of Help pages.   
-* [Help Index](./png/HelpIndex.png)   
+![Help Index](./png/HelpIndex.png "Help Index")   
 
 At the upper right of the main page you see a "tab" with the name "Design:",
 an icon associated with the design type (a rectangular box in this case) and
 the name of the specific design that is currently open.
-As illustrated below, Spring designs will each have 
-three additional tabs providing Reports.
-* [Tab Icon Name](./png/TabIconName.png)   
+As illustrated later in this section, Spring designs will each have 
+three additional tabs providing Reports.   
+![Tab - Icon - Name](./png/TabIconName.png "Tab - Icon - Name")   
 
 The Result section is positioned near the top of the main page.
-This area provides feedback about the solution process.
+This area provides feedback about the solution process.   
+![Result Section](./png/ResultSection.png "Result Section")   
+
 If you hover the cursor over a heading, a tool-tip will pop up to
-provide more information regarding each item.
-* [Result Section](./png/ResultSection.png)   
-* [Result Section ToolTip](./png/ResultSectionToolTip.png)   
+provide more information regarding each item.   
+![Result Section ToolTip](./png/ResultSectionToolTip.png "Result Section ToolTip")   
 
 There are numeric entry fields for each of the variables.
 The user can change the value of Independent Variables by positioning
 the cursor in the field and over-writing the existing value.
 Recalculation will happen immediately.
 The Dependent Variables abd Objective Function will immediately
-reflect the result of the new value for that Independent Variable.
-* [Independent Variables](./png/Independent.png)   
+reflect the result of the new value for that Independent Variable.   
+![Independent Variables](./png/Independent.png "Independent Variables")   
 
 In order change the value of a Dependent Variable, it is necessary
 to FIX (see below) its value and then execute the Search function
-(menu Action : Search).
-* [Dependent Variables](./png/Dependent.png)   
+(menu Action : Search).   
+![Dependent Variables](./png/Dependent.png "Dependent Variables")   
 
 Calculation Inputs are quantities that can be modified by the user
-but are not subject to Constraints, FIX or manipulation by the Search process.
-* [Calculation Inputs](./png/CalcInput.png)   
+but are not subject to Constraints, FIX or manipulation by the Search process.   
+![Calculation Inputs](./png/CalcInput.png "Calculation Inputs")   
 
 This clip illustrates how a Calculation Input can expand into a table 
 that the user can select from.
 In this case, the user selects a material and the appropriate value of
-density is provided to the calculations.
-* [Calculation Input Table](./png/CalcInputTable.png)   
+density is provided to the calculations.   
+![Calculation Input Table](./png/CalcInputTable.png "Calculation Input Table")   
 
 Constraints are single sided (MAX or MIN) limits imposed on the 
 selected Variable. 
@@ -101,21 +114,21 @@ a positive value if violated or a negative value if satisfied.
 The value of the Objective Function will immediately reflect the 
 impact of a violated constraint.
 This example illustrates the 108 inch limit on Length+Girth
-and the 70 pound limit on weight.
-* [Constraint](./png/Constraint.png)   
+and the 70 pound limit on weight.   
+![Constraints](./png/Constraint.png "Constraints")   
 
 In order to FIX the value of an Independent Variable, put a check
 in the box immediately to the right of its value.
-Note the checkboxes highlighted by the red oval in  this example.
-* [FIX an Independent Variable](./png/IV_Fix.png)   
+Note the checkboxes highlighted by the red oval in  this example.   
+![FIX an Independent Variable](./png/IV_Fix.png "FIX an Independent Variable")   
 
 In order to FIX the value of a Dependent Variable, put a check 
 in the box immediately to the right of its value.
 This will cause both associated constraints to be check and the 
 corresponding constraint entry fields to become available for input.
 Enter the FIX value into either entry field.
-Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.
-* [FIX a Dependent Variable](./png/DV_Fix.png)   
+Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.   
+![FIX a Dependent Variable](./png/DV_Fix.png "FIX a Dependent Variable")   
 
 
 **USING HELP**   
@@ -160,8 +173,8 @@ For the compression spring design type, those include
   Wire\_Dia, OD_Free, Coils\_T, L\_Free, Force\_1, or Force\_2.
  Observe that recalculations happen immediately.
  
- Look at Reports contained in the three report tabs.
- * [Spring Report Tabs](./png/SpringReportTabs.png)   
+ Look at Reports contained in the three report tabs.   
+ ![Spring Report Tabs](./png/SpringReportTabs.png "Spring Report Tabs")   
  
  Try the SEARCH command to see if it can find a "feasible" solution that
  does not violate any constraints. 
