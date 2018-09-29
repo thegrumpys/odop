@@ -78,7 +78,7 @@ export class ExecutePanel extends React.Component {
 //        console.log('In ExecutePanel render this.state.text=',this.state.text);
         return this.state.modal && (
             <Alert style={{marginTop: '10px'}}>
-                <div dangerouslySetInnerHTML={{__html: this.state.text}} />
+                {this.state.text}
                 <div className="text-right align-middle">
                     <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                     <Button color="primary" onClick={this.onNext}>Next</Button>
