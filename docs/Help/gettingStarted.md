@@ -1,6 +1,6 @@
 #### Getting Started   
 
-**Under Construction**
+**Under Construction**   
 This page is still a work in progress !
 
 **Getting Started**   
@@ -17,6 +17,9 @@ design types to work with: Piston-Cylinder, Rectangular Solid and Compression Sp
 If you are interested in learning about capabilities and concepts,
 the Rectangular Solid design type is intended as an easy to understand 
 demonstration problem and is a good place to start.
+
+Note that the [Terminology](terminology) page of the on-line documentation may be 
+helpful with some of the terms utilized here.
 
 
 **Launching the program**   
@@ -65,6 +68,7 @@ This area provides feedback about the solution process.
 If you hover the cursor over a heading, a tool-tip will pop up to
 provide more information regarding each item.
 * [Result Section](./png/ResultSection.png)   
+* [Result Section ToolTip](./png/ResultSectionToolTip.png)   
 
 There are numeric entry fields for each of the variables.
 The user can change the value of Independent Variables by positioning
@@ -87,7 +91,7 @@ This clip illustrates how a Calculation Input can expand into a table
 that the user can select from.
 In this case, the user selects a material and the appropriate value of
 density is provided to the calculations.
-* [CalcInputTable](./png/CalcInputTable.png)   
+* [Calculation Input Table](./png/CalcInputTable.png)   
 
 Constraints are single sided (MAX or MIN) limits imposed on the 
 selected Variable. 
@@ -103,7 +107,7 @@ and the 70 pound limit on weight.
 In order to FIX the value of an Independent Variable, put a check
 in the box immediately to the right of its value.
 Note the checkboxes highlighted by the red oval in  this example.
-* [IV_Fix](./png/IV_Fix.png)   
+* [FIX an Independent Variable](./png/IV_Fix.png)   
 
 In order to FIX the value of a Dependent Variable, put a check 
 in the box immediately to the right of its value.
@@ -111,16 +115,17 @@ This will cause both associated constraints to be check and the
 corresponding constraint entry fields to become available for input.
 Enter the FIX value into either entry field.
 Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.
-* [DV_Fix](./png/DV_Fix.png)   
+* [FIX a Dependent Variable](./png/DV_Fix.png)   
 
 
 **USING HELP**   
 
- A good place to go from here is to get a good look at what is available 
+ Now that you have completed a tour of the main page,
+ it would be good to get a look at what is available 
  in the on-line documentation. 
  The various entries that are available after selecting the Help : Index menu item
  cover the generic features and capabilities of the ODOP software.
- If time is available, work through those entries from top to bottom.
+ If time is available, read through those entries from top to bottom.
  
  On-line documentation for ODOP:Spring appears in the Available Design Types section.
 
@@ -144,7 +149,7 @@ design examples and sample problems.
 The focus is on solving the problem, not explaining the operation of the software.
 
 
-**Spring Design Process**
+**Spring Design Process**   
 The remainder of this discussion will use examples from
 the compression spring design type.
 
