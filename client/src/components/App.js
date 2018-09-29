@@ -16,6 +16,7 @@ import {
     DropdownItem
 } from 'reactstrap';
 import classnames from 'classnames';
+import { ExecutePanel } from './ExecutePanel';
 import { DesignTable } from './DesignTable';
 import { connect } from 'react-redux';
 import FileOpen from '../menus/File/FileOpen';
@@ -200,6 +201,7 @@ class App extends Component {
                     </Collapse>
                 </Navbar>
                 <Container style={{backgroundColor: '#eee', paddingTop: '100px'}}>
+                    <ExecutePanel />
                     <TabContent activeTab={this.state.activeTab}>
                         <TabPane tabId="1">
                             <Container fluid>

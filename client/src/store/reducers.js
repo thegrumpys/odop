@@ -30,8 +30,7 @@ import { sclden } from './middleware/sclden';
 export function reducers(state, action) {
     var i;
     var value;
-//    console.log('In reducers');
-//    console.log(action);
+//    console.log('In reducers', action);
     switch (action.type) {
     case STARTUP:
         return state;

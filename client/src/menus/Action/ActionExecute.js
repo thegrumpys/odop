@@ -1,31 +1,17 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { startTutorial } from 'react-interactive-tutorials';
-import { getExecuteNames as pcyl_getExecuteNames } from '../../designtypes/Piston-Cylinder/execute';
-import { getExecuteNames as solid_getExecuteNames } from '../../designtypes/Solid/execute';
-import { getExecuteNames as spring_getExecuteNames } from '../../designtypes/Spring/execute';
 
 class ActionExecute extends React.Component {
     constructor(props) {
-        console.log('In ActionExecute.constructor');
+//        console.log('In ActionExecute.constructor');
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.onSelect = this.onSelect.bind(this);
         this.onExecute = this.onExecute.bind(this);
         this.onCancel = this.onCancel.bind(this);
-        var execute_names;
-        switch(this.props.type) {
-        default:
-        case 'Piston-Cylinder':
-            execute_names = pcyl_getExecuteNames();
-            break;
-        case 'Solid':
-            execute_names = solid_getExecuteNames();
-            break;
-        case 'Spring':
-            execute_names = spring_getExecuteNames();
-            break;
-        }
+        var { getExecuteNames } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load getExecuteNames
+        var execute_names = getExecuteNames();
         var execute_name;
         if (execute_names.length > 0)
             execute_name = execute_names[0]; // Default to first name
@@ -37,31 +23,32 @@ class ActionExecute extends React.Component {
     }
 
     toggle() {
-        console.log('In ActionExecute.toggle');
+//        console.log('In ActionExecute.toggle');
         this.setState({
             modal: !this.state.modal
         });
     }
 
     onSelect(event) {
-      console.log('In ActionExecute.onSelect event.target.value=',event.target.value);
+//      console.log('In ActionExecute.onSelect event.target.value=',event.target.value);
       this.setState({
           execute_name: event.target.value 
       });
   }
   
     onExecute() {
-        console.log('In ActionExecute.onExecute');
+//        console.log('In ActionExecute.onExecute');
         this.setState({
             modal: !this.state.modal
         });
         // Do execute
-        console.log('In ActionExecute.onExecute startTutorial(',this.state.execute_name,')');
-        startTutorial(this.state.execute_name); // hardcoded for the time being
+//        console.log('In ActionExecute.onExecute startTutorial(',this.state.execute_name,')');
+        var { execute } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load execute
+        execute(this.state.execute_name);
     }
     
     onCancel() {
-        console.log('In ActionExecute.onCancel');
+//        console.log('In ActionExecute.onCancel');
         this.setState({
             modal: !this.state.modal
         });
@@ -69,7 +56,7 @@ class ActionExecute extends React.Component {
     }
     
     render() {
-        console.log('In ActionExecute.render');
+//        console.log('In ActionExecute.render');
         return (
             <React.Fragment>
                 <DropdownItem onClick={this.toggle}>

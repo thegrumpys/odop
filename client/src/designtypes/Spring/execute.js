@@ -1,16 +1,16 @@
-import { TUTORIALS } from './execute/demo.js';
-import interactiveTutorials from 'react-interactive-tutorials'
-
+import { startExecute } from "../../components/ExecutePanel";
 export function getExecuteNames() {
     var result = [
-        'demo'
+        'demo',
+        'demo1',
+        'demo2'
     ];
-    console.log('In getExecuteNames result=',result);
+//    console.log('In getExecuteNames result=',result);
     return result;
 }
 
 export function execute(execute_name) {
-    console.log('In execute execute_name=',execute_name);
-    var { execute } = require('../designtypes/execute/'+execute_name+'.json'); // Dynamically load execute file
-    console.log('In execute execute=',execute);
+//    console.log('In execute execute_name=',execute_name);
+    var { execute } = require('./'+execute_name+'.js'); // Dynamically load execute
+    startExecute(execute.steps);
 }
