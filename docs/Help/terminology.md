@@ -3,21 +3,26 @@
 The following terms have special meanings used in the context of this program.
 
 **MATHEMATICAL MODEL**   
-A set of equations that describes the behavior a real world problem of interest.
-Within the context of the ODOP software, the terms "mathematical model" and
-"Design Type" are closely related.
-Each design type has a mathematical model at its core.
-For examples, see: [Piston-Cylinder](./DesignTypes/png/PCylDiagram.png) and 
-[Rectangular Solid](./DesignTypes/png/RectangularSolidDiagram.png).
+A mathematical model is a set of equations that describes the behavior of 
+a real world problem of interest.
+Within the context of the ODOP software, the terms "mathematical model",
+"Design Type" and "Equation Set" are closely related.
+Each Design Type has a mathematical model at its core.
 
-** DESIGN TYPES**
+For examples, see:   
+* [Piston-Cylinder](./DesignTypes/png/PCylDiagram.png) 
+* [Rectangular Solid](./DesignTypes/png/RectangularSolidDiagram.png).   
+
+See "Design Types" and "Equation Set" below for more detail.
+
+**DESIGN TYPES**   
 A Design Type is a specific design problem.  As noted above, each 
 Design Type has a mathematical model of some aspect of the real world
 at its core.  Examples included with the ODOP software include a 
 Piston-Cylinder design, a Rectangular Solid and a Compression Spring.
-A "design" is a specific instance of a Design Type.  The ODOP software
-will store multiple designs of each Design Type in its database 
-(a.k.a. design library).
+A "design" is a specific and unique instance of a Design Type. 
+The ODOP software will store multiple designs of each Design Type in 
+its database (a.k.a. design library).
 
 **INDEPENDENT VARIABLES** &nbsp;  (inputs, design parameters)   
 The independent variables are the inputs of the design equations.
@@ -143,8 +148,9 @@ Design types planned for implementation in the future include:
 * [Torsion Spring](./DesignTypes/t_spring)   
 
 The simplest way to use a different design type and equation set is to select an
-existing design (typically called "startup") that uses the desired equation set 
-at the time that the ODOP software first starts. 
+existing design that uses the desired equation set at the time that the ODOP 
+software first starts. 
+A default design is typically called "startup".
 
 Additional information on how to implement new ODOP design types is available
 in the [NewDesignType](../procedures/NewDesignType) documentation.
