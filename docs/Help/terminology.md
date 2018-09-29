@@ -2,13 +2,22 @@
 
 The following terms have special meanings used in the context of this program.
 
-**Mathematical Model**   
+**MATHEMATICAL MODEL**   
 A set of equations that describes the behavior a real world problem of interest.
 Within the context of the ODOP software, the terms "mathematical model" and
-"Design Type" are roughly equivalent.
+"Design Type" are closely related.
 Each design type has a mathematical model at its core.
 For examples, see: [Piston-Cylinder](./DesignTypes/png/PCylDiagram.png) and 
 [Rectangular Solid](./DesignTypes/png/RectangularSolidDiagram.png).
+
+** DESIGN TYPES**
+A Design Type is a specific design problem.  As noted above, each 
+Design Type has a mathematical model of some aspect of the real world
+at its core.  Examples included with the ODOP software include a 
+Piston-Cylinder design, a Rectangular Solid and a Compression Spring.
+A "design" is a specific instance of a Design Type.  The ODOP software
+will store multiple designs of each Design Type in its database 
+(a.k.a. design library).
 
 **INDEPENDENT VARIABLES** &nbsp;  (inputs, design parameters)   
 The independent variables are the inputs of the design equations.
@@ -35,7 +44,8 @@ See the FIX entry below for more details.
 Referred to as "constants" in earlier versions of the software, 
 Calculation Inputs are inputs to the design equations and are adjustable by the
 user, but are not manipulated by the search algorithm or subject to FIX or constraints. 
-Calculation Inputs frequently represent material properties or other physical constants.
+Calculation Inputs frequently represent material properties or other 
+physical parameters.
 
 **CONSTRAINTS**   
 Constraints are one sided boundaries that represent goals for the design

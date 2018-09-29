@@ -65,8 +65,8 @@ easy to understand demonstration problem.
 
 * GETTING STARTED   
 
-If you got to this point without already running the ODOP software, 
-there is a page to help you get started.  See:...
+If you have arrived at this point without already running the ODOP software, 
+there is a page to help you get started.  See:   
 [Getting Started](../Help/gettingStarted)
 
 
