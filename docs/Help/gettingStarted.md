@@ -50,10 +50,13 @@ So, if you haven't started ODOP already,
 open a new browser session (or tab) and follow this link:   
 [Demonstration version of ODOP](https://odop.herokuapp.com/)
 
+&nbsp;
+
 This screen capture illustrates selecting the Solid design type 
 and its default design called startup.   
 ![Start with Rectangular Solid](./png/SelectSolid.png "Start with Rectangular Solid")
 
+&nbsp;
 
 **A Quick Tour of the Main Page**
 
@@ -62,11 +65,15 @@ highlighted inside the red oval.
 Select one of the main menu entries and a drop-down with sub-items will appear.   
 ![Main Menu](./png/MainMenu.png "Main Menu")   
 
+&nbsp;
+
 Here is an example of how each main menu item will drop down to provide 
 specific menu items.
 Note that menu entries associated with not yet implemented features are disabled (grey).
 This screen clip illustrates how to get to the index of Help pages.   
 ![Help Index](./png/HelpIndex.png "Help Index")   
+
+&nbsp;
 
 At the upper right of the main page you see a "tab" with the name "Design:",
 an icon associated with the design type (a rectangular box in this case) and
@@ -75,13 +82,19 @@ As illustrated later in this section, Spring designs will each have
 three additional tabs providing Reports.   
 ![Tab - Icon - Name](./png/TabIconName.png "Tab - Icon - Name")   
 
+&nbsp;
+
 The Result section is positioned near the top of the main page.
 This area provides feedback about the solution process.   
 ![Result Section](./png/ResultSection.png "Result Section")   
 
+&nbsp;
+
 If you hover the cursor over a heading, a tool-tip will pop up to
 provide more information regarding each item.   
 ![Result Section ToolTip](./png/ResultSectionToolTip.png "Result Section ToolTip")   
+
+&nbsp;
 
 There are numeric entry fields for each of the variables.
 The user can change the value of Independent Variables by positioning
@@ -91,20 +104,28 @@ The Dependent Variables abd Objective Function will immediately
 reflect the result of the new value for that Independent Variable.   
 ![Independent Variables](./png/Independent.png "Independent Variables")   
 
+&nbsp;
+
 In order change the value of a Dependent Variable, it is necessary
 to FIX (see below) its value and then execute the Search function
 (menu Action : Search).   
 ![Dependent Variables](./png/Dependent.png "Dependent Variables")   
 
+&nbsp;
+
 Calculation Inputs are quantities that can be modified by the user
 but are not subject to Constraints, FIX or manipulation by the Search process.   
 ![Calculation Inputs](./png/CalcInput.png "Calculation Inputs")   
+
+&nbsp;
 
 This clip illustrates how a Calculation Input can expand into a table 
 that the user can select from.
 In this case, the user selects a material and the appropriate value of
 density is provided to the calculations.   
 ![Calculation Input Table](./png/CalcInputTable.png "Calculation Input Table")   
+
+&nbsp;
 
 Constraints are single sided (MAX or MIN) limits imposed on the 
 selected Variable. 
@@ -117,10 +138,14 @@ This example illustrates the 108 inch limit on Length+Girth
 and the 70 pound limit on weight.   
 ![Constraints](./png/Constraint.png "Constraints")   
 
+&nbsp;
+
 In order to FIX the value of an Independent Variable, put a check
 in the box immediately to the right of its value.
 Note the checkboxes highlighted by the red oval in  this example.   
 ![FIX an Independent Variable](./png/IV_Fix.png "FIX an Independent Variable")   
+
+&nbsp;
 
 In order to FIX the value of a Dependent Variable, put a check 
 in the box immediately to the right of its value.
@@ -129,6 +154,8 @@ corresponding constraint entry fields to become available for input.
 Enter the FIX value into either entry field.
 Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.   
 ![FIX a Dependent Variable](./png/DV_Fix.png "FIX a Dependent Variable")   
+
+&nbsp;
 
 
 **USING HELP**   
@@ -173,9 +200,13 @@ For the compression spring design type, those include
   Wire\_Dia, OD_Free, Coils\_T, L\_Free, Force\_1, or Force\_2.
  Observe that recalculations happen immediately.
  
+&nbsp;
+
  Look at Reports contained in the three report tabs.   
  ![Spring Report Tabs](./png/SpringReportTabs.png "Spring Report Tabs")   
  
+&nbsp;
+
  Try the SEARCH command to see if it can find a "feasible" solution that
  does not violate any constraints. 
  Establish or change the value of constraint levels; 
