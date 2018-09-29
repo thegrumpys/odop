@@ -3,6 +3,7 @@
 ## About
 * [Introduction](About/Intro)
 * [Experimental Software](About/experimental)
+* [Requirements](About/requirements)
 * [Notice](About/Legal/Disclaimer)
 * [Restrictions](About/Legal/Restrictions)
 * [Terms of Service](About/Legal/TermsOfService)
@@ -10,13 +11,16 @@
 
 
 ## Help
-* [Introduction](Help/introduction)
 * [Features](Help/features)
+* [Introduction](Help/introduction)
 * [Terminology](Help/terminology)
 * [Feasibility](Help/feasibility)
 * [Search](Help/search)
 * [Seek](Help/seek)
 * [Trade](Help/trade)
+* [Reports](Help/reports)
+* [Getting Started](Help/gettingStarted)
+* [Available Design Types](Help/DesignTypes)
 
 
 ## Design

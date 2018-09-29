@@ -12,7 +12,7 @@ export function init(p, x) {
 //    console.log("m_tab=", m_tab);
  
      x[o.Spring_Type] = "Compression";
-     if (x[o.Prop_Calc_Method] === 2 && x[o.Tensile] === "unused") x[o.Prop_Calc_Method] = 1;
+     if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Tensile_Endur] === "unused") x[o.Prop_Calc_Method] = 1;
  
  switch(x[o.Prop_Calc_Method]){
  default:
@@ -117,7 +117,6 @@ export function init(p, x) {
      x[o.ASTM_Fed_Spec] = "unused";
      x[o.Material_File] = "unused";
      x[o.Process] = "unused";
-     x[o.Tensile] = "unused";
      x[o.PC_Tensile_Endur] = "unused";
      x[o.PC_Tensile_Stat]  = "unused";
  }

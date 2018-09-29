@@ -4,9 +4,6 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
-import { initialState as pcyl_initialState } from '../designtypes/Piston-Cylinder/initialState';
-import { initialState as solid_initialState } from '../designtypes/Solid/initialState';
-import { initialState as spring_initialState } from '../designtypes/Spring/initialState';
 import { initialSystemControls } from '../initialSystemControls';
 import App from './App';
 import { startup } from '../store/actionCreators';
@@ -14,9 +11,6 @@ import { displaySpinner } from './Spinner';
 import { displayError } from './ErrorModal';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
-import { migrate as pcyl_migrate } from '../designtypes/Piston-Cylinder/migrate';
-import { migrate as solid_migrate } from '../designtypes/Solid/migrate';
-import { migrate as spring_migrate } from '../designtypes/Spring/migrate';
 
 export class PromptForDesign extends React.Component {
     
@@ -113,19 +107,8 @@ export class PromptForDesign extends React.Component {
                 return res.json()
             })
             .then(design => {
-                var migrated_design;
-                switch(design.type) {
-                default:
-                case 'Piston-Cylinder':
-                    migrated_design = pcyl_migrate(design);
-                    break;
-                case 'Solid':
-                    migrated_design = solid_migrate(design);
-                    break;
-                case 'Spring':
-                    migrated_design= spring_migrate(design);
-                    break;
-                }
+                var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
+                var migrated_design = migrate(design);
                 const store = createStore(reducers, migrated_design, middleware);
                 store.dispatch(startup());
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
@@ -145,19 +128,7 @@ export class PromptForDesign extends React.Component {
 
         const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/dispatcher));
 
-        var initialState;
-        switch(type) {
-        default:
-        case 'Piston-Cylinder':
-            initialState = pcyl_initialState;
-            break;
-        case 'Solid':
-            initialState = solid_initialState;
-            break;
-        case 'Spring':
-            initialState = spring_initialState;
-            break;
-        }
+        var { initialState } = require('../designtypes/'+type+'/initialState.js'); // Dynamically load initialState
         var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
         const store = createStore(reducers, state, middleware);
         store.dispatch(startup());

@@ -12,7 +12,7 @@ class NameValueUnitsRowCalcInput extends React.Component {
 //        console.log('this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table)
         if (this.props.element.type === 'table') {
 //            console.log('file = ../designtypes/'+this.props.type+'/'+this.props.element.table+'.json');
-            var table = require('../designtypes/'+this.props.type+'/'+this.props.element.table+'.json');
+            var table = require('../designtypes/'+this.props.type+'/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('table=',table);
             this.state = {
                 table: table

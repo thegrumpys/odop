@@ -7,7 +7,7 @@
 
  Look at the violations.  Adjust constraint levels.  Repeat the search.
 
- When SEARCH terminates without a feasible solution, it generally means that
+ When [SEARCH](search) terminates without a feasible solution, it generally means that
  two or more constraints are in conflict.  This is not a hopeless situation.
  There is a good possibility that one or more of those constraints is
  needlessly restrictive.  If they are changed to a less restrictive value, a
@@ -20,7 +20,7 @@
  Alter the values of the active constraint levels to more appropriate values by making
  entries in the "value" column under "Min Constraint" or Max Constraint".  
  
- The Help section titled WHAT_TO_DO_IF describes a number of possible
+ The Help section titled WHAT TO DO IF in [Spring Overview](./DesignTypes/spring_oview) describes a number of possible
  (probable) constraint conflicts and recommends a few solutions. 
  For example, confirm that any variables in fixed status (check boxes in the "Fix" column) 
  really need to be fixed.
@@ -30,7 +30,7 @@
 
  Repeat the SEARCH command.
 
- The TRADE command is designed to assist the process of finding a feasible
+ The [TRADE](trade) command is designed to assist the process of finding a feasible
  design when the designer is faced with two or more conflicting constraints.
  TRADE will use an extrapolation technique to predict the "nearest" feasible
  point from the result of a series of searches.
@@ -47,8 +47,8 @@
  amount.  The search is programmed to stop when very close to a feasible
  solution because it is possible for it to move ever closer to feasibility
  without actually achieving it for an unreasonable amount of time.  The
- OBJMIN preference setting  controls the stop  vs.  continue decision.  Use
- the File : Preferences menu item to control it.
+ OBJMIN preference setting  controls the stop  vs. continue decision. 
+ Use the File : Preferences menu item to control it.
 
  When search terminates with a strictly feasible solution (i.e.  OBJ = 0.0),
  the resulting solution point is only one of many possible solution points.
@@ -57,7 +57,7 @@
  constraints.
 
  SEARCH will terminate when it finds its first feasible solution.  Since
- we have not asked the search to "optimize" anything (refer to SEEK for
+ we have not asked the search to "optimize" anything (refer to [SEEK](seek) for
  that), it does not have any way to determine that one specific feasible
  design is better than any other feasible design.  The search will simply
  stop and allow the user to examine the results.  This is the reason why the
@@ -66,3 +66,6 @@
 
  The SEEK command is designed to assist in evaluating various
  design possibilities within a feasible region.
+
+ [Help](./)
+ 

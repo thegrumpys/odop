@@ -1,8 +1,11 @@
 ## Help
-* [Introduction](introduction)
 * [Features](features)
+* [Introduction](introduction)
 * [Terminology](terminology)
 * [Feasibility](feasibility)
 * [Search](search)
 * [Seek](seek)
 * [Trade](trade)
+* [Reports](reports)
+* [Getting Started](gettingStarted)
+* [Available Design Types](DesignTypes)

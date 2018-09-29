@@ -50,15 +50,18 @@
 * OBJMIN - convergence criterion for minimum objective function value
       (default=5.0E-05)
 
-* TOL - pattern break and step cut criterion.  If each new objective
-       function value is not at least (TOL*100) %  better than the
-       previous one, then a pattern break or step cut occurs.  i.e.:
-       if NEW_OBJ+TOL*OLD_OBJ < OLD_OBJ then (continue with pattern).  The
-       default value is TOL=1.0E-04 (i.e. TOL=0.0001).  In general, larger
-       values of TOL will cause a shorter, less accurate search.  Smaller r
-       values of TOL will cause a longer search.  Values of TOL less than
-       1.0E-07 will cause the comparison to fall off the computer's word
-       length.  The result is effectively TOL=0.0.  Values of TOL greater
-       than 1.0E-02 may result in searches that are too inaccurate to be
-       used effectively by SEEK, and TRADE.
+* TOL - pattern break and step cut criterion.   
+       If each new objective function value is not at least (TOL*100) % 
+       better than the previous one, 
+       then a pattern break or step cut occurs.  i.e.:
+       if NEW_OBJ+TOL*OLD_OBJ < OLD_OBJ then (continue with pattern). 
+       The default value is TOL=1.0E-04 (i.e. TOL=0.0001).  
+       In general, larger values of TOL will cause a shorter, less accurate search. 
+       Smaller values of TOL will cause a longer search.  
+       Extremely small values of TOL (less than 1.0E-08) 
+       risk causing the comparison to fall off the computer's word length. 
+       The result is effectively TOL=0.0.  
+       Values of TOL greater than 1.0E-02 may result in searches 
+       that are too inaccurate to be used effectively by SEEK, and TRADE.
  
+ [Help](./)

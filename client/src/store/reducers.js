@@ -5,6 +5,7 @@ import { STARTUP,
     CHANGE_SYMBOL_VALUE, 
     CHANGE_SYMBOL_VIOLATION, 
     CHANGE_SYMBOL_CONSTRAINT, 
+    CHANGE_SYMBOL_CONSTRAINTS, 
     SAVE_SYMBOL_CONSTRAINTS, 
     RESTORE_SYMBOL_CONSTRAINTS, 
     SET_SYMBOL_FLAG, 
@@ -47,7 +48,8 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
                 if (element.name === action.payload.name) {
-//                    console.log('CHANGE_SYMBOL_VALUE element=',element.name,' old value=',element.value,' new value=',action.payload.value);
+//                    if (element.name === 'Force_2')
+//                        console.log('CHANGE_SYMBOL_VALUE element=',element.name,' old value=',element.value,' new value=',action.payload.value);
                     return Object.assign({}, element, {
                         value: action.payload.value
                     });
@@ -89,6 +91,33 @@ export function reducers(state, action) {
                     }
                 }
                 return element;
+            })
+        });
+    case CHANGE_SYMBOL_CONSTRAINTS:
+        i=0;
+        return Object.assign({}, state, {
+            symbol_table: state.symbol_table.map((element) => {
+                // Only do it from independent and dependent variables, but not for calculation inputs
+                if (element.equationset) {
+                    value = action.payload.values[i++];
+                    if (value !== undefined) {
+                        if (action.payload.minmax === MIN) {
+                            return Object.assign({}, element, {
+                                cmin: value,
+                                smin: sclden(state.system_controls, element.value, value, element.sdlim, element.lmin)
+                            });
+                        } else {
+                            return Object.assign({}, element, {
+                                cmax: value,
+                                smax: sclden(state.system_controls, element.value, value, element.sdlim, element.lmax)
+                            });
+                        }
+                    } else {
+                        return element;
+                    }
+                } else {
+                    return element;
+                }
             })
         });
     case SAVE_SYMBOL_CONSTRAINTS:
@@ -161,11 +190,12 @@ export function reducers(state, action) {
     case CHANGE_INPUT_SYMBOL_VALUES:
         i=0;
         return Object.assign({}, state, {
-            symbol_table: state.symbol_table.map((element, index) => {
+            symbol_table: state.symbol_table.map((element) => {
                 if (element.input) {
                     value = action.payload.values[i++]
                     if (value !== undefined) {
-//                        console.log('CHANGE_INPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
+//                        if (element.name === 'Force_2')
+//                            console.log('CHANGE_INPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
                         return Object.assign({}, element, {
                             value: value
                         });
@@ -207,7 +237,7 @@ export function reducers(state, action) {
     case CHANGE_OUTPUT_SYMBOL_VALUES:
         i=0;
         return Object.assign({}, state, {
-            symbol_table: state.symbol_table.map((element, index) => {
+            symbol_table: state.symbol_table.map((element) => {
                 if (!element.input) {
                     value = action.payload.values[i++]
                     if (value !== undefined) {

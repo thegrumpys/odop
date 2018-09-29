@@ -1,6 +1,6 @@
 ## Seek
 
- When SEARCH terminates with a strictly feasible solution (i.e.  OBJ = 0.0),
+ When [SEARCH](search) terminates with a strictly feasible solution (i.e.  OBJ = 0.0),
  the resulting solution point is only one of many possible solution points.
  The entire collection of feasible solution points is referred to as a
  "feasible region".  The boundaries of this region are formed by the various
@@ -24,10 +24,10 @@
  availability of a region of feasible solutions.
 
  EXAMPLES:
-*       SEEK  MIN  WEIGHT
-*       SEEK  MAX  CYCLE_LIFE
-*       SEEK  MIN  RATE
-*       SEEK  MIN  L_SOLID
+*       SEEK  MIN  Weight
+*       SEEK  MAX  Cycle\_Life
+*       SEEK  MIN  Rate
+*       SEEK  MIN  L\_Solid
 
  SEEK functions by forming a "merit function" from the indicated variable
  and adding that into the "objective function" that the search process
@@ -39,3 +39,5 @@
  The value of the internal variable MFN_WT will have some impact on the
  results produced by SEEK.  Refer to the documentation on the File:Preferences menu item
  for additional information.
+
+ [Help](./)

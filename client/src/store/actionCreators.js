@@ -5,6 +5,7 @@ import { STARTUP,
     CHANGE_SYMBOL_VALUE, 
     CHANGE_SYMBOL_VIOLATION, 
     CHANGE_SYMBOL_CONSTRAINT, 
+    CHANGE_SYMBOL_CONSTRAINTS, 
     SET_SYMBOL_FLAG, 
     RESET_SYMBOL_FLAG, 
     
@@ -78,6 +79,16 @@ export function changeSymbolConstraint(name, minmax, value) {
             name,
             minmax,
             value
+        }
+    }
+  }
+
+export function changeSymbolConstraints(values, minmax) {
+    return {
+        type: CHANGE_SYMBOL_CONSTRAINTS,
+        payload: {
+            values,
+            minmax
         }
     }
   }
