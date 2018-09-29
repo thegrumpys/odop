@@ -34,7 +34,7 @@ Once a feasible solution is known to exist, the software can seek an "optimal" s
 that provides the best solution available within the established constraints. 
    
 
-* PLATFORM
+* PLATFORM   
 
 The ODOP software consists of a problem independent core ... the "platform" on which
 any number of mathematical models (a.k.a. "Design Types") can be built.
@@ -46,21 +46,28 @@ Specific design types may offer easy selection from tables of material propertie
 or the ability to select from catalogs of standard component sizes or even
 catalogs of stock designs.
 
-A high level overview of the ODOP program's modular structure is available.  See:
+A high level overview of the ODOP program's modular structure is available.  See:   
 [ODOP Structure](png/ODOP_StructureDiagram.png)   
-   
-A more detailed explanation of these concepts is available in HELP. 
-See: [Help Index](../Help/index)
 
 A high level overview of the ODOP Design Process Flow is available.  See:   
 [ODOP Design Process Flow Diagram](./png/DesignProcessFlowDiagram.png)
+   
+A more detailed explanation of these concepts is available in the on-line documentation. 
+See: [Help Index](../Help/index)
 
 
-* AVAILABLE DESIGN TYPES
+* AVAILABLE DESIGN TYPES   
    
 Three [Design Types](../Help/DesignTypes) are currently available.
 The [Rectangular Solid](../Help/DesignTypes/r_solid) Design Type is intended as an 
 easy to understand demonstration problem.
+
+
+* GETTING STARTED   
+
+If you got to this point without already running the ODOP software, 
+there is a page to help you get started.  See:...
+[Getting Started](../Help/gettingStarted)
 
 
 [About](./)
