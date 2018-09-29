@@ -27,8 +27,7 @@ export const dispatcher = store => next => action => {
 
     const returnValue = next(action);
 
-//    console.log('In dispatcher');
-//    console.log(action);
+//    console.log('In dispatcher',action);
 
     switch (action.type) {
     case STARTUP:
