@@ -7,4 +7,5 @@
 * [Seek](seek)
 * [Trade](trade)
 * [Reports](reports)
+* [Getting Started](gettingStarted)
 * [Available Design Types](DesignTypes)

@@ -19,6 +19,7 @@
 * [Seek](Help/seek)
 * [Trade](Help/trade)
 * [Reports](Help/reports)
+* [Getting Started](Help/gettingStarted)
 * [Available Design Types](Help/DesignTypes)
 
 
