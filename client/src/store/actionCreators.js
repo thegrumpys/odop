@@ -14,8 +14,8 @@ import { STARTUP,
     RESTORE_INPUT_SYMBOL_VALUES, 
 
     CHANGE_OUTPUT_SYMBOL_VALUES, 
-    SAVE_SYMBOL_CONSTRAINTS, 
-    RESTORE_SYMBOL_CONSTRAINTS, 
+    SAVE_OUTPUT_SYMBOL_CONSTRAINTS, 
+    RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, 
     
     CHANGE_RESULT_OBJECTIVE_VALUE, 
     CHANGE_RESULT_TERMINATION_CONDITION, 
@@ -151,7 +151,7 @@ export function changeOutputSymbolValues(values) {
 
 export function saveOutputSymbolConstraints(name) {
     return {
-        type: SAVE_SYMBOL_CONSTRAINTS,
+        type: SAVE_OUTPUT_SYMBOL_CONSTRAINTS,
         payload: {
             name
         }
@@ -160,7 +160,7 @@ export function saveOutputSymbolConstraints(name) {
 
 export function restoreOutputSymbolConstraints(name) {
     return {
-        type: RESTORE_SYMBOL_CONSTRAINTS,
+        type: RESTORE_OUTPUT_SYMBOL_CONSTRAINTS,
         payload: {
             name
         }

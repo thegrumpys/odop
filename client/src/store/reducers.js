@@ -6,8 +6,8 @@ import { STARTUP,
     CHANGE_SYMBOL_VIOLATION, 
     CHANGE_SYMBOL_CONSTRAINT, 
     CHANGE_SYMBOL_CONSTRAINTS, 
-    SAVE_SYMBOL_CONSTRAINTS, 
-    RESTORE_SYMBOL_CONSTRAINTS, 
+    SAVE_OUTPUT_SYMBOL_CONSTRAINTS, 
+    RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, 
     SET_SYMBOL_FLAG, 
     RESET_SYMBOL_FLAG, 
     
@@ -30,7 +30,7 @@ import { sclden } from './middleware/sclden';
 export function reducers(state, action) {
     var i;
     var value;
-//    console.log('In reducers', action);
+    console.log('In reducers', action);
     switch (action.type) {
     case STARTUP:
         return state;
@@ -119,7 +119,7 @@ export function reducers(state, action) {
                 }
             })
         });
-    case SAVE_SYMBOL_CONSTRAINTS:
+    case SAVE_OUTPUT_SYMBOL_CONSTRAINTS:
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
                 if (element.name === action.payload.name) {
@@ -133,7 +133,7 @@ export function reducers(state, action) {
                 return element;
             })
         });
-    case RESTORE_SYMBOL_CONSTRAINTS:
+    case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS:
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
                 if (element.name === action.payload.name) {
