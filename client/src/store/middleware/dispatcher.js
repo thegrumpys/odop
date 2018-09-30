@@ -9,7 +9,7 @@ import { STARTUP,
     CHANGE_INPUT_SYMBOL_VALUES, 
     RESTORE_INPUT_SYMBOL_VALUES, 
     
-    RESTORE_SYMBOL_CONSTRAINTS, 
+    RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, 
     
     SEARCH, 
     SEEK
@@ -54,7 +54,7 @@ export const dispatcher = store => next => action => {
     case CHANGE_SYMBOL_CONSTRAINT:
         updateViolationsAndObjectiveValue(store);
         break;
-    case RESTORE_SYMBOL_CONSTRAINTS:
+    case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS:
         updateViolationsAndObjectiveValue(store);
         break;
     case SET_SYMBOL_FLAG:
