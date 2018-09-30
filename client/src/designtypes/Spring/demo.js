@@ -21,11 +21,7 @@ export const execute = {
                     of a typewriter and may be marked with a down and left arrow that looks
                     like:   &lt;--'</p>
                 </React.Fragment>
-            ),
-            actions: [
-                changeSymbolValue('OD_Free', 2.0),
-                changeSymbolValue('Wire_Dia', 0.2)
-            ]
+            )
         },
         {
             text: (
@@ -86,29 +82,7 @@ export const execute = {
         {
             text: (
                 <React.Fragment>
-                    <pre>
-|            FORCE_SOLID -|---------------/.<br/>
-|                         |              / .<br/>
-|             FORCE_2 ----|-------------/  .<br/>
-|                         |            /:  .          SpringSys Names<br/>
-|       F                 |           / :  .<br/>
-|                         |          /  :  .            compression<br/>
-|       O                 |         /   :  .              spring<br/>
-|                         |        /    :  .<br/>
-|       R                 |       /     :  .<br/>
-|                         |      /      :  .<br/>
-|       C     FORCE_1 ----|-----/       :  .<br/>
-|                         |    /:       :  .<br/>
-|       E                 |   / :&lt;-----&gt;:------- L_STROKE<br/>
-|                         |  /  :       :  .<br/>
-|                         | /   :       :  .<br/>
-|                         |/____:_______:__._______<br/>
-|                    L_FREE     :       :  L_SOLID<br/>
-|                               L_1     L_2<br/>
-|                         DEFLECT_1     DEFLECT_2<br/>
-|                         <br/>
-|                           D E F L E C T I O N<br/>
-                   </pre>
+                   <img src="designtypes/Spring/ForceVsDeflection.png"/>
                 </React.Fragment>
             )
         },

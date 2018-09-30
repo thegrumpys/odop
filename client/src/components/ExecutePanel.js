@@ -79,7 +79,7 @@ export class ExecutePanel extends React.Component {
         return this.state.modal && (
             <Alert style={{marginTop: '10px'}}>
                 {this.state.text}
-                <div className="text-right align-middle">
+                <div className="text-right align-middle" style={{marginTop: '10px'}}>
                     <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                     <Button color="primary" onClick={this.onNext}>Next</Button>
                 </div>
