@@ -35,6 +35,8 @@ import ActionExecute from '../menus/Action/ActionExecute';
 import ViewViolations from '../menus/View/ViewViolations';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import HelpIndex from '../menus/Help/HelpIndex';
+import HelpDemo from '../menus/Help/HelpDemo';
+import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
 
 class App extends Component {
@@ -173,12 +175,8 @@ class App extends Component {
                                         Context Help
                                     </DropdownItem>
                                     <HelpIndex />
-                                    <DropdownItem disabled>
-                                        Demo&hellip;
-                                    </DropdownItem>
-                                    <DropdownItem disabled>
-                                        Tutorial&hellip;
-                                    </DropdownItem>
+                                    <HelpDemo />
+                                    <HelpTutorial />
                                     <HelpAbout />
                                </DropdownMenu>
                             </UncontrolledDropdown>

@@ -5,6 +5,18 @@ export function getExecuteNames() {
     return result;
 }
 
+export function getDemoNames() {
+    var result = [];
+//    console.log('In getDemoNames result=',result);
+    return result;
+}
+
+export function getTutorialNames() {
+    var result = [];
+//    console.log('In getTutorialNames result=',result);
+    return result;
+}
+
 export function execute(execute_name) {
 //  console.log('In execute execute_name=',execute_name);
     var { execute } = require('./'+execute_name+'.js'); // Dynamically load execute
