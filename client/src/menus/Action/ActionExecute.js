@@ -59,7 +59,7 @@ class ActionExecute extends React.Component {
 //        console.log('In ActionExecute.render');
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <DropdownItem onClick={this.toggle} disabled={this.state.execute_names.length === 0}>
                     Execute&hellip;
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>

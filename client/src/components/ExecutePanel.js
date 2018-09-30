@@ -4,7 +4,7 @@ import { Alert, Button } from 'reactstrap';
 
 export var startExecute = function(steps) {
 //    console.log('In startExecute steps=',steps);
-    if (steps[0] !== undefined) {
+    if (steps !== undefined && steps[0] !== undefined) {
         this.setState({
             modal: true, // Default: do display
             steps: steps,
