@@ -31,13 +31,15 @@ export const execute = {
                     stress levels, tendency to buckle, and other figures of merit for the
                     design.</p>
                     
-                    wire diameter      = 0.0395 inches     Music wire  ASTM A228<br/>
-                    outside diameter   = 0.357  inches     closed & ground ends<br/>
-                    free length        = 0.807  inches<br/>
-                    total coils        = 8.0    turns<br/>
-                    <br/>
-                    first load height  = 0.689 inches<br/>
-                    second load height = 0.394 inches
+                    <table>
+                        <tr><th>wire diameter</th>      <td>=</td> <td>0.0395</td> <td>inches</td> <td width="5%"></td> <td>Music wire  ASTM A228</td></tr>
+                        <tr><th>outside diameter</th>   <td>=</td> <td>0.357</td>  <td>inches</td> <td></td> <td>closed & ground ends</td></tr>
+                        <tr><th>free length</th>        <td>=</td> <td>0.807</td>  <td>inches</td></tr>
+                        <tr><th>total coils</th>        <td>=</td> <td>8.0</td>    <td>turns</td></tr>
+                        <tr><td>&nbsp;</td></tr>
+                        <tr><th>first load height</th>  <td>=</td> <td>0.689</td>  <td>inches</td></tr>
+                        <tr><th>second load height</th> <td>=</td> <td>0.394</td>  <td>inches</td></tr>
+                    </table>
                 </React.Fragment>
             )
         },
