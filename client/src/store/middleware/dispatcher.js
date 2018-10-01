@@ -2,6 +2,8 @@ import { STARTUP,
     LOAD,
     
     CHANGE_SYMBOL_VALUE, 
+    FIX_SYMBOL_VALUE, 
+    FREE_SYMBOL_VALUE, 
     CHANGE_SYMBOL_CONSTRAINT, 
     SET_SYMBOL_FLAG, 
     RESET_SYMBOL_FLAG, 
@@ -12,7 +14,9 @@ import { STARTUP,
     RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, 
     
     SEARCH, 
-    SEEK
+    SEEK,
+    
+    MIN, MAX, FIXED, CONSTRAINED
     } from '../actionTypes';
 import { setSclDen } from './setSclDen';
 import { search } from './search';
@@ -20,6 +24,7 @@ import { seek } from './seek';
 import { invokeInit } from './invokeInit';
 import { invokeEquationSet } from './invokeEquationSet';
 import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
+import { changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, restoreOutputSymbolConstraints } from '../actionCreators';
 
 export const dispatcher = store => next => action => {
     
@@ -50,6 +55,58 @@ export const dispatcher = store => next => action => {
         });
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
+        break;
+    case FIX_SYMBOL_VALUE:
+        design = store.getState();
+        design.symbol_table.find((element) => {
+            if (element.name === action.payload.name) {
+                if (element.input) {
+                    // Independent
+                    if (action.payload.value !== undefined) {
+                        store.dispatch(changeSymbolValue(element.name, action.payload.value));
+                    }
+                    store.dispatch(setSymbolFlag(element.name, MIN, FIXED));
+                    store.dispatch(setSymbolFlag(element.name, MAX, FIXED));
+                } else {
+                    // Dependent
+                    store.dispatch(saveOutputSymbolConstraints(element.name));
+                    store.dispatch(setSymbolFlag(element.name, MIN, FIXED|CONSTRAINED));
+                    store.dispatch(setSymbolFlag(element.name, MAX, FIXED|CONSTRAINED));
+                    if (action.payload.value !== undefined) {
+                        store.dispatch(changeSymbolConstraint(element.name, MIN, action.payload.value));
+                        store.dispatch(changeSymbolConstraint(element.name, MAX, action.payload.value));
+                    } else {
+                        store.dispatch(changeSymbolConstraint(element.name, MIN, element.value));
+                        store.dispatch(changeSymbolConstraint(element.name, MAX, element.value));
+                    }
+                }
+                return true;
+            } else {
+                return false;
+            }
+        });
+        invokeEquationSet(store);
+        updateViolationsAndObjectiveValue(store);
+        break;
+    case FREE_SYMBOL_VALUE:
+        design = store.getState();
+        design.symbol_table.find((element) => {
+            if (element.name === action.payload.name) {
+                if (element.input) {
+                    // Independent
+                    store.dispatch(resetSymbolFlag(element.name, MIN, FIXED));
+                    store.dispatch(resetSymbolFlag(element.name, MAX, FIXED));
+                } else {
+                    // Dependent
+                    store.dispatch(restoreOutputSymbolConstraints(element.name));
+                }
+                return true;
+            } else {
+                return false;
+            }
+        });
+        invokeEquationSet(store);
+        updateViolationsAndObjectiveValue(store);
         break;
     case CHANGE_SYMBOL_CONSTRAINT:
         updateViolationsAndObjectiveValue(store);

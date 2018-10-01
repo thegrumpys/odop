@@ -3,6 +3,8 @@ import { STARTUP,
     CHANGE_NAME, 
     
     CHANGE_SYMBOL_VALUE, 
+    FIX_SYMBOL_VALUE, 
+    FREE_SYMBOL_VALUE, 
     CHANGE_SYMBOL_VIOLATION, 
     CHANGE_SYMBOL_CONSTRAINT, 
     CHANGE_SYMBOL_CONSTRAINTS, 
@@ -57,6 +59,25 @@ export function changeSymbolValue(name, value, merit) {
             name,
             value,
             merit
+        }
+    }
+}
+
+export function fixSymbolValue(name, value) {
+    return {
+        type: FIX_SYMBOL_VALUE,
+        payload: {
+            name,
+            value
+        }
+    }
+}
+
+export function freeSymbolValue(name) {
+    return {
+        type: FREE_SYMBOL_VALUE,
+        payload: {
+            name
         }
     }
 }

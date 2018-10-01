@@ -1,6 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../store/actionCreators';
-import { MIN, MAX, FIXED, CONSTRAINED } from '../../store/actionTypes';
+import { fixSymbolValue, search } from '../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -31,13 +30,15 @@ export const execute = {
                     design.</p>
                     
                     <table>
-                        <tr><th>wire diameter</th>      <td>=</td> <td>0.0395</td> <td>inches</td> <td width="5%"></td> <td>Music wire  ASTM A228</td></tr>
-                        <tr><th>outside diameter</th>   <td>=</td> <td>0.357</td>  <td>inches</td> <td></td> <td>closed & ground ends</td></tr>
-                        <tr><th>free length</th>        <td>=</td> <td>0.807</td>  <td>inches</td></tr>
-                        <tr><th>total coils</th>        <td>=</td> <td>8.0</td>    <td>turns</td></tr>
-                        <tr><td>&nbsp;</td></tr>
-                        <tr><th>first load height</th>  <td>=</td> <td>0.689</td>  <td>inches</td></tr>
-                        <tr><th>second load height</th> <td>=</td> <td>0.394</td>  <td>inches</td></tr>
+                        <tbody>
+                            <tr><th>wire diameter</th><td>=</td><td>0.0395</td><td>inches</td><td width="5%"></td><td>Music wire  ASTM A228</td></tr>
+                            <tr><th>outside diameter</th><td>=</td><td>0.357</td><td>inches</td><td></td><td>closed & ground ends</td></tr>
+                            <tr><th>free length</th><td>=</td><td>0.807</td><td>inches</td></tr>
+                            <tr><th>total coils</th><td>=</td><td>8.0</td><td>turns</td></tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr><th>first load height</th><td>=</td><td>0.689</td><td>inches</td></tr>
+                            <tr><th>second load height</th><td>=</td><td>0.394</td><td>inches</td></tr>
+                        </tbody>
                     </table>
                 </React.Fragment>
             )
@@ -75,7 +76,7 @@ export const execute = {
             title: "Page05",
             text: (
                 <React.Fragment>
-                   <img src="designtypes/Spring/ForceVsDeflection.png"/>
+                   <img src="designtypes/Spring/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
                 </React.Fragment>
             )
         },
@@ -104,28 +105,12 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                changeSymbolValue('Wire_Dia', 0.0395),
-                setSymbolFlag('Wire_Dia', MIN, FIXED),
-                setSymbolFlag('Wire_Dia', MAX, FIXED),
-                changeSymbolValue('OD_Free', 0.357),
-                setSymbolFlag('OD_Free', MIN, FIXED),
-                setSymbolFlag('OD_Free', MAX, FIXED),
-                changeSymbolValue('L_Free', 0.807),
-                setSymbolFlag('L_Free', MIN, FIXED),
-                setSymbolFlag('L_Free', MAX, FIXED),
-                changeSymbolValue('Coils_T', 8),
-                setSymbolFlag('Coils_T', MIN, FIXED),
-                setSymbolFlag('Coils_T', MAX, FIXED),
-                saveOutputSymbolConstraints('L_1'),
-                setSymbolFlag('L_1', MIN, FIXED|CONSTRAINED),
-                setSymbolFlag('L_1', MAX, FIXED|CONSTRAINED),
-                changeSymbolConstraint('L_1', MIN, 0.689),
-                changeSymbolConstraint('L_1', MAX, 0.689),
-                saveOutputSymbolConstraints('L_2'),
-                setSymbolFlag('L_2', MIN, FIXED|CONSTRAINED),
-                setSymbolFlag('L_2', MAX, FIXED|CONSTRAINED),
-                changeSymbolConstraint('L_2', MIN, 0.394),
-                changeSymbolConstraint('L_2', MAX, 0.394)
+                fixSymbolValue('Wire_Dia', 0.0395),
+                fixSymbolValue('OD_Free', 0.357),
+                fixSymbolValue('L_Free', 0.807),
+                fixSymbolValue('Coils_T', 8),
+                fixSymbolValue('L_1', 0.689),
+                fixSymbolValue('L_2', 0.394),
             ]
         },
         {
