@@ -44,7 +44,7 @@ class HelpTutorial extends React.Component {
         // Do execute
 //        console.log('In ActionExecute.onExecute startTutorial(',this.state.execute_name,')');
         var { execute } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load execute
-        execute(this.state.execute_name);
+        execute("Help : Tutorial",this.state.execute_name);
     }
     
     onCancel() {
