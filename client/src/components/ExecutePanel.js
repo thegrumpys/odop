@@ -24,6 +24,7 @@ export class ExecutePanel extends React.Component {
         super(props);
 //        console.log('In ExecutePanel constructor props=',props);
         this.onNext = this.onNext.bind(this);
+        this.onBack = this.onBack.bind(this);
         this.onCancel = this.onCancel.bind(this);
         startExecute = startExecute.bind(this); // Bind external function - no 'this'
         this.state = {
@@ -83,6 +84,21 @@ export class ExecutePanel extends React.Component {
         }
     }
 
+    onBack() {
+//      console.log('In ExecutePanel onBack');
+        var prev = this.state.step-1;
+        if (prev < 0) prev = 0;
+        this.setState({
+            step: prev,
+            title: this.state.steps[prev].title,
+            text: this.state.steps[prev].text
+        });
+        this.props.load(this.state.steps[prev].design);
+        if (this.state.steps[prev].actions !== undefined) {
+            this.state.steps[prev].actions.forEach((action) => { this.state.store.dispatch(action); })
+        }
+    }
+    
     render() {
 //        console.log('In ExecutePanel render this.state.text=',this.state.text);
         return this.state.modal && (
@@ -90,6 +106,8 @@ export class ExecutePanel extends React.Component {
                 <div className="text-left align-middle">
                     <b>{this.state.prefix}{this.state.title !== undefined && this.state.title.length > 0 ? ' - ' + this.state.title : ''}</b>
                     <Button className="float-right" color="primary" onClick={this.onNext}>Next</Button>
+                    <span className="float-right">&nbsp;</span>
+                    <Button className="float-right" color="secondary" onClick={this.onBack}>Back</Button>
                     <span className="float-right">&nbsp;</span>
                     <Button className="float-right" color="secondary" onClick={this.onCancel}>Cancel</Button>
                 </div>
@@ -104,6 +122,5 @@ export class ExecutePanel extends React.Component {
 }
 
 ExecutePanel.contextTypes = {
-        store: PropTypes.object
-    };
-
+    store: PropTypes.object
+};

@@ -1,5 +1,5 @@
 import React from 'react';
-import { fixSymbolValue, search } from '../../store/actionCreators';
+import { loadInitialState, fixSymbolValue, search } from '../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -20,7 +20,10 @@ export const execute = {
                     of a typewriter and may be marked with a down and left arrow that looks
                     like:   &lt;--'</p>
                 </React.Fragment>
-            )
+            ),
+            actions: [
+                loadInitialState('Spring', 'startup')
+            ]
         },
         {
             title: "Page02",
