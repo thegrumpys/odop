@@ -21,11 +21,11 @@ export const execute = {
             )
         },
         {
-            title: "Page02",
+            title: "Page 02 of 15",
             text: (
                 <React.Fragment>
                     <p>Estimate the life of a compression spring of the specified dimensions
-                    when subjected the given working lengths; determine corresponding forces,
+                    when subjected to the given working lengths; determine corresponding forces,
                     stress levels, tendency to buckle, and other figures of merit for the
                     design.</p>
                     
@@ -44,7 +44,7 @@ export const execute = {
             )
         },
         {
-            title: "Page03",
+            title: "Page 03 of 15",
             text: (
                 <React.Fragment>
                     <p>In general, the easiest way to begin is to modify an existing design. </p>
@@ -55,25 +55,24 @@ export const execute = {
                     design named "<b>startup</b>". </p>
 
                     <p>Each entry in the Library contains all the information necessary to describe a
-                    single spring design.  
-                    We will modify this design until it meets the requirements of the current design problem.</p>
-
-                    <p>The following sequence will illustrate this process.</p>
+                    single design.  
+                    We will modify this design until it meets the requirements of the current design problem.
+                    The following sequence will illustrate this process.</p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page04",
+            title: "Page 04 of 15",
             text: (
                 <React.Fragment>
-                    <p>Since you are probably not familiar with the names of SpringSys variables,
-                    the next screen will illustrate several SpringSys variable names in the
+                    <p>Since you are probably not familiar with the names of ODOP:Spring variables,
+                    the next screen will illustrate several variable names in the
                     context of a force-deflection diagram.</p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page05",
+            title: "Page 05 of 15",
             text: (
                 <React.Fragment>
                    <img src="designtypes/Spring/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
@@ -81,27 +80,36 @@ export const execute = {
             )
         },
         {
-            title: "Page06",
+            title: "Page 06 of 15",
             text: (
                 <React.Fragment>
-                    <p>Next we enter everything we know about the problem.  Because we are
-                    simply checking the performance of an existing design, we will primarily
-                    use the SpringSys FIX command.  Other demo and tutorial sessions
-                    that illustrate the use of SpringSys in an original design situation
+                    <p>Next, we enter everything we know about the problem. </p>
+                    
+                    <p>Because this session is simply checking the performance of an existing design, 
+                    we will primarily use the ODOP capability to FIX the value of Independent 
+                    and Dependent variables.  
+                    Other demo and tutorial sessions
+                    that illustrate the use of ODOP:Spring in an original design situation
                     will introduce additional commands.</p>
+                    
+                    <p>This is a good time to take a good look at the existing values.
+                    Most of these values will update immediately as the demo process enters the changes.</p>
+                    
+                    <p>You can scroll the page down to view the complete set of values. 
+                    Scroll back up in order to use the Next button to continue.</p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page07",
+            title: "Page 07 of 15",
             text: (
                 <React.Fragment>
-                    fix  wire_dia  0.0395<br/>
-                    fix  od        0.357<br/>
-                    fix  l_free    0.807<br/>
-                    fix  coils_t   8<br/>
-                    fix  l_1       0.689<br/>
-                    fix  l_2       0.394<br/>
+                    fix  Wire_Dia   0.0395<br/>
+                    fix  OD &nbsp;  0.357<br/>
+                    fix  L_Free     0.807<br/>
+                    fix  Coils_T    8<br/>
+                    fix  L_1 &nbsp; 0.689<br/>
+                    fix  L_2 &nbsp; 0.394<br/>
                 </React.Fragment>
             ),
             actions: [
@@ -114,41 +122,36 @@ export const execute = {
             ]
         },
         {
-            title: "Page08",
+            title: "Page 08 of 15",
             text: (
                 <React.Fragment>
-                    <p>The LIST INDEPENDENT command (abbreviated L I) shows the current values of
-                    the independent variables.  When a variable is FIXed at a value, the
-                    program gives it upper and lower constraints at that value.</p>
+                    <p>You can now see the changes created by entering what is known about the problem.</p>
 
-                    <p>The current values for FORCE_1 and FORCE_2 were established as defaults by
-                    the STARTUP.DSN file.  Next, we will ask SpringSys to solve for the force
+                    <p>The current values for Force_1 and Force_2 were established as defaults by <b>startup</b>. 
+                    Next, we will ask ODOP:Spring to solve for the Force_1 and Force_2 
                     values that correspond to the FIXes that have just been established.</p>
-
-                    l  i
                 </React.Fragment>
             )
         },
         {
-            title: "Page09",
+            title: "Page 09 of 15",
             text: (
                 <React.Fragment>
                     <p>Now that we have expressed what we want the design to accomplish,
-                    we ask SpringSys to "search" for a solution.</p>
+                    we will ask "Search" for a solution.</p>
 
                     <p>If the program can find a solution that satisfies all the constraints,
-                    it will announce that "THE RESULT IS FEASIBLE".  If a satisfactory
-                    solution is found, but one or more constraints remain violated by a
-                    trivial amount, the program will announce that "THE RESULT IS MARGINALLY
-                    FEASIBLE".</p>
+                    it will display "<b>FEASIBLE</b>" in the Result section (immediately below these words).  
+                    If a satisfactory solution is found, but one or more constraints remain violated by a
+                    trivial amount, the program will display "<b>MARGINALLY FEASIBLE</b>" in the Result section.</p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page10",
+            title: "Page 10 of 15",
             text: (
                 <React.Fragment>
-                    <p>We have a solution.</p>
+                    <p>We have a solution. Take a moment to scroll through and view the values.</p>
                 </React.Fragment>
             ),
             actions: [
@@ -156,86 +159,61 @@ export const execute = {
             ]
         },
         {
-            title: "Page11",
+            title: "Page 11 of 15",
             text: (
                 <React.Fragment>
                     <p>Note that cycle life as well as other figures of merit such as weight and
                     percentage of available deflection utilized at load point 2 are given in
-                    the following report.  The message "COIL TO COIL CONTACT MAY PRODUCE
-                    INACCURACY IN POINT 2" is produced any time that the second load uses more
+                    Report 1 (mini).  
+                    Simply select (click on) that tab to view the report.</p>
+                    <p>The message: 
+                    "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
+                    is produced any time that the second load uses more
                     than 80 % of available deflection.</p>
-
-                    <p>The SpringSys  REPORT  and  LIST  commands will give the details of the
-                    solution.</p>
+                    <p>There is no warning about buckling so that is not an issue of concern.</p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page12",
+            title: "Page 12 of 15",
             text: (
                 <React.Fragment>
-                    report
+                    Don't forget to switch back to the tab containing the main page ("Design:").
                 </React.Fragment>
             )
         },
         {
-            title: "Page13",
+            title: "Page 13 of 15",
             text: (
                 <React.Fragment>
-                    <p>The SpringSys LIST command will produce specific values in case you missed
-                    them on the previous screen.</p>
-
-                    list  cycle_life  %_avail_deflect  weight<br/>
-
-                    <p>The next screen will review the values of various "constants" used in the
-                    solution of this problem.  Some of these values were established by when
-                    the initial design point was read at the beginning of the session.  The
-                    material property values were established by selecting MUSIC_WIRE from the
-                    table.</p>
+                    <p>Just in case you missed them on the previous screen,
+                    scroll down to view the values of <b>Cycle_Life, %_Avail_Deflect</b> and <b>Weight</b>.</p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page14",
+            title: "Page 14 of 15",
             text: (
                 <React.Fragment>
-                    list constants
+                    <p>This completes the first ODOP:Spring demonstration problem.</p>
+                    
+                    <p>Several more demo problems are available. 
+                    They are named DEMO1, DEMO2, ... etc. 
+                    Refer to the documentation section (Help entry) named  TUTORIAL  
+                    for a list of the Tutorial and DEMO topics.</p>
+                    
+                    <p>If you do not wish to continue with more demonstration problems, 
+                    you can experiment with the various ODOP:Spring features, menus and reports. 
+                    The HELP menu is a good place to start. </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page15",
+            title: "Page 15 (last page)",
             text: (
                 <React.Fragment>
-                    <p>This completes the first SpringSys demo problem.</p>
-                    
-                    <p>Several more demo problems are available.  They are named DEMO1, DEMO2,
-                    through DEMO9.  Refer to the documentation section (User's Manual or help
-                    file) named  TUTORIAL  for a list of the DEMO topics.</p>
-                    
-                    <p>If you do not wish to continue with more demonstration problems, you can
-                    experiment with the various SpringSys commands.  Start by asking for
-                    HELP.  When you wish to return to the operating system, use the QUIT
-                    command.</p>
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page16",
-            text: (
-                <React.Fragment>
-                    <p>In order to resume with the next demonstration problem, type
-                    the command  "EXECUTE LONGDEMO"  followed by a carriage return at
-                    the  SpringSys:  prompt.</p>
-                    
-                    <p>No, you don't need the quotes !</p>
-                    
-                    <p>If you have SpringSys installed such that the tutorial is on a different
-                    disk than the main program, you need to precede the file name with the
-                    name of that disk and a colon.  Additional information is in the
-                    INSTALLATION section of the documentation.</p>
-                    
-                    <p>For example:   EXECUTE  B:LONGDEMO</p>
+                    <p>In order to resume with the next demonstration problem,
+                    select "LONGDEMO" from the <b>Help : Demo...</b> menu item.</p>
                 </React.Fragment>
             )
         }
