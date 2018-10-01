@@ -2,13 +2,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Alert, Button } from 'reactstrap';
 
-export var startExecute = function(steps) {
+export var startExecute = function(prefix,steps) {
 //    console.log('In startExecute steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
         this.setState({
             modal: true, // Default: do display
+            prefix: prefix,
             steps: steps,
             step: 0,
+            title: steps[0].title,
             text: steps[0].text, // Default: first text
         });
         if (steps[0].actions !== undefined) {
@@ -26,8 +28,10 @@ export class ExecutePanel extends React.Component {
         startExecute = startExecute.bind(this); // Bind external function - no 'this'
         this.state = {
             modal: false, // Default: do not display
+            prefix: '',
             steps: null,
             step: 0,
+            title: '',
             text: '', // Default: no text
         };
     }
@@ -47,8 +51,10 @@ export class ExecutePanel extends React.Component {
 //        console.log('In ExecutePanel onCancel');
         this.setState({
             modal: !this.state.modal,
+            prefix: '',
             steps: null,
             step: 0,
+            title: '',
             text: ''
         });
     }
@@ -59,6 +65,7 @@ export class ExecutePanel extends React.Component {
         if (this.state.steps[next] !== undefined) {
             this.setState({
                 step: next,
+                title: this.state.steps[next].title,
                 text: this.state.steps[next].text
             });
             if (this.state.steps[next].actions !== undefined) {
@@ -67,8 +74,10 @@ export class ExecutePanel extends React.Component {
        } else {
             this.setState({
                 modal: !this.state.modal,
+                prefix: '',
                 steps: null,
                 step: 0,
+                title: '',
                 text: ''
             });
         }
@@ -78,11 +87,16 @@ export class ExecutePanel extends React.Component {
 //        console.log('In ExecutePanel render this.state.text=',this.state.text);
         return this.state.modal && (
             <Alert style={{marginTop: '10px'}}>
-                <div className="text-right align-middle">
-                    <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                    <Button color="primary" onClick={this.onNext}>Next</Button>
+                <div className="text-left align-middle">
+                    <b>{this.state.prefix}{this.state.title !== undefined && this.state.title.length > 0 ? ' - ' + this.state.title : ''}</b>
+                    <Button className="float-right" color="primary" onClick={this.onNext}>Next</Button>
+                    <span className="float-right">&nbsp;</span>
+                    <Button className="float-right" color="secondary" onClick={this.onCancel}>Cancel</Button>
                 </div>
-                <div style={{marginTop: '10px'}}>{this.state.text}</div>
+                <hr/>
+                <div style={{marginTop: '10px'}}>
+                    {this.state.text}
+                </div>
             </Alert>
         );
     }

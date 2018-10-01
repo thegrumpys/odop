@@ -20,6 +20,7 @@ export const execute = {
             )
         },
         {
+            title: "Page02",
             text: (
                 <React.Fragment>
                     <p>Estimate the life of a compression spring of the specified dimensions
@@ -40,6 +41,7 @@ export const execute = {
             )
         },
         {
+            title: "Page03",
             text: (
                 <React.Fragment>
                     <p>To begin solving this problem, we invoke the SpringSys START command.</p>
@@ -59,6 +61,7 @@ export const execute = {
             )
         },
         {
+            title: "Page04",
             text: (
                 <React.Fragment>
                     start  startup  no<br/>
@@ -78,6 +81,7 @@ export const execute = {
             )
         },
         {
+            title: "Page05",
             text: (
                 <React.Fragment>
                    <img src="designtypes/Spring/ForceVsDeflection.png"/>
@@ -85,6 +89,7 @@ export const execute = {
             )
         },
         {
+            title: "Page06",
             text: (
                 <React.Fragment>
                     <p>Next we enter everything we know about the problem.  Because we are
@@ -96,6 +101,7 @@ export const execute = {
             )
         },
         {
+            title: "Page07",
             text: (
                 <React.Fragment>
                     fix  wire_dia  0.0395<br/>
@@ -132,6 +138,7 @@ export const execute = {
             ]
         },
         {
+            title: "Page08",
             text: (
                 <React.Fragment>
                     <p>The LIST INDEPENDENT command (abbreviated L I) shows the current values of
@@ -147,6 +154,7 @@ export const execute = {
             )
         },
         {
+            title: "Page09",
             text: (
                 <React.Fragment>
                     <p>Now that we have expressed what we want the design to accomplish,
@@ -161,6 +169,7 @@ export const execute = {
             )
         },
         {
+            title: "Page10",
             text: (
                 <React.Fragment>
                     <p>We have a solution.</p>
@@ -171,6 +180,7 @@ export const execute = {
             ]
         },
         {
+            title: "Page11",
             text: (
                 <React.Fragment>
                     <p>Note that cycle life as well as other figures of merit such as weight and
@@ -185,6 +195,7 @@ export const execute = {
             )
         },
         {
+            title: "Page12",
             text: (
                 <React.Fragment>
                     report
@@ -192,6 +203,7 @@ export const execute = {
             )
         },
         {
+            title: "Page13",
             text: (
                 <React.Fragment>
                     <p>The SpringSys LIST command will produce specific values in case you missed
@@ -208,6 +220,7 @@ export const execute = {
             )
         },
         {
+            title: "Page14",
             text: (
                 <React.Fragment>
                     list constants
@@ -215,6 +228,7 @@ export const execute = {
             )
         },
         {
+            title: "Page15",
             text: (
                 <React.Fragment>
                     <p>This completes the first SpringSys demo problem.</p>
@@ -231,6 +245,7 @@ export const execute = {
             )
         },
         {
+            title: "Page16",
             text: (
                 <React.Fragment>
                     <p>In order to resume with the next demonstration problem, type
