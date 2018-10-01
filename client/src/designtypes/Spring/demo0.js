@@ -6,16 +6,20 @@ export const execute = {
         {
             text: (
                 <React.Fragment>
-                    <p>The following example briefly illustrates the use of ODOP:Spring to check
-                    the design of a compression spring. </p>
+                    <p>The following example briefly illustrates the use of SpringSys to check
+                    the design of a compression spring.  This example also appears in the
+                    appendix to the SpringSys User's Manual.</p>
                     
-                    <p>Refer to the session named LONGDEMO for a more detailed example of spring design
+                    <p>Refer to the session named LONGDEMO for a more detailed example of design
                     from original specifications.  DEMO6, DEMO7 and DEMO8 present examples of 
-                    extension spring design.  Tutorial sessions, TUTOR1, TUTOR2, ...  provide instructions
-                    on how to use the software.</p>
+                    extension spring design.  Refer to the User's Manual and the various
+                    tutorial sessions, TUTOR1, TUTOR2, ...  TUTOR9 for detailed instructions
+                    on how to use SpringSys.</p>
                     
-                    <p>To continue with this example, just click the "Next" button as you finish
-                    reading each step. </p>
+                    <p>To continue with this example, just strike the "Enter" key as you finish
+                    reading each frame.  This key corresponds to the "carriage return" key
+                    of a typewriter and may be marked with a down and left arrow that looks
+                    like:   &lt;--'</p>
                 </React.Fragment>
             )
         },
