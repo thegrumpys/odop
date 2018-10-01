@@ -4,18 +4,20 @@ import { MIN, MAX, FIXED, CONSTRAINED } from '../../store/actionTypes';
 export const execute = {
     steps: [
         {
+            title: "Session Now In Progress",
             text: (
                 <React.Fragment>
                     <p>The following example briefly illustrates the use of ODOP:Spring to check
                     the design of a compression spring. </p>
                     
-                    <p>Refer to the session named LONGDEMO for a more detailed example of spring design
-                    from original specifications.  DEMO6, DEMO7 and DEMO8 present examples of 
-                    extension spring design.  Tutorial sessions, TUTOR1, TUTOR2, ...  provide instructions
-                    on how to use the software.</p>
+                    <p>Additional demonstration sessions are available. 
+                    Refer to the session named LONGDEMO for a more detailed example of spring design
+                    from original specifications.  
+                    DEMO6, DEMO7 and DEMO8 present examples of extension spring design.
+                    Tutorial sessions, TUTOR1, TUTOR2, ... etc. provide instructions on how to use the software.</p>
                     
                     <p>To continue with this example, just click the "Next" button as you finish
-                    reading each step. </p>
+                    reading each page (step). </p>
                 </React.Fragment>
             )
         },
@@ -44,19 +46,18 @@ export const execute = {
             title: "Page03",
             text: (
                 <React.Fragment>
-                    <p>To begin solving this problem, we invoke the SpringSys START command.</p>
+                    <p>In general, the easiest way to begin is to modify an existing design. </p>
+                    
+                    <p>Reminder:  Demo and Tutorial sessions depend on initial conditions. 
+                    Review the Help topic on <b>Action : Execute</b> for more details. 
+                    If necessary, save your work and then use the <b>File : Open</b> menu item to load the compression spring
+                    design named "<b>startup</b>". </p>
 
-                    <p>This command will read a file (named STARTUP.DSN) from the disk
-                    and then begin a brief dialog about materials, end type, and cycle life
-                    requirements.  When this sequence is complete, the program will go to
-                    its "command level" as indicated by the prompt "SpringSys".</p>
+                    <p>Each entry in the Library contains all the information necessary to describe a
+                    single spring design.  
+                    We will modify this design until it meets the requirements of the current design problem.</p>
 
-                    <p>The startup file contains all the information necessary to describe a
-                    single spring design.  Once at command level, the SpringSys commands may
-                    be used to modify this design until it meets the requirements of the
-                    current design problem.</p>
-
-                    <p>The following sequence will illustrate this process</p>
+                    <p>The following sequence will illustrate this process.</p>
                 </React.Fragment>
             )
         },
@@ -64,16 +65,6 @@ export const execute = {
             title: "Page04",
             text: (
                 <React.Fragment>
-                    start  startup  no<br/>
-                    3    &lt;--- review list of available material types ...<br/>
-                    1    &lt;--- select from table ...<br/>
-                    1    &lt;--- select from list of material descriptions ...<br/>
-                    music_wire     ...<br/>
-                    0    &lt;--- continue to command level ...<br/>
-
-                    <p>We have completed the startup dialog and have reached the SpringSys
-                    command level.</p>
-
                     <p>Since you are probably not familiar with the names of SpringSys variables,
                     the next screen will illustrate several SpringSys variable names in the
                     context of a force-deflection diagram.</p>
