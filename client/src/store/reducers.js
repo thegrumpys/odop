@@ -60,6 +60,7 @@ export function reducers(state, action) {
             .catch(error => {
                 displayError('GET of \''+action.payload.name+'\' design failed with message: \''+error.message+'\'');
             });
+        return state;
     case LOAD_INITIAL_STATE:
 //        console.log('In LOAD_INITIAL_STATE');
         var { initialState } = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState
