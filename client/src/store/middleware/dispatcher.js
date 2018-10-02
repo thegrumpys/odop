@@ -1,5 +1,7 @@
 import { STARTUP, 
     LOAD,
+    LOAD_DESIGN,
+    LOAD_INITIAL_STATE,
     
     CHANGE_SYMBOL_VALUE, 
     FIX_SYMBOL_VALUE, 
@@ -37,6 +39,8 @@ export const dispatcher = store => next => action => {
     switch (action.type) {
     case STARTUP:
     case LOAD:
+    case LOAD_DESIGN:
+    case LOAD_INITIAL_STATE:
         invokeInit(store);
         invokeEquationSet(store);
         setSclDen(store);

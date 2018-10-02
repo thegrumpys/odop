@@ -1,5 +1,5 @@
 import React from 'react';
-import { fixSymbolValue, search } from '../../store/actionCreators';
+import { loadInitialState, fixSymbolValue, search } from '../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -18,7 +18,10 @@ export const execute = {
                     <p>To continue with this example, just click the "Next" button as you finish
                     reading each page (step). </p>
                 </React.Fragment>
-            )
+            ),
+            actions: [
+                loadInitialState('Spring')
+            ]
         },
         {
             title: "Page 02 of 15",

@@ -1,5 +1,7 @@
 import { STARTUP, 
     LOAD, 
+    LOAD_DESIGN, 
+    LOAD_INITIAL_STATE, 
     CHANGE_NAME, 
     
     CHANGE_SYMBOL_VALUE, 
@@ -29,18 +31,37 @@ import { STARTUP,
     SEEK } from './actionTypes';
 
 export function startup() {
-  return {
-      type: STARTUP
-  }
+    return {
+       type: STARTUP
+    }
 }
 
 export function load(design) {
-  return {
-      type: LOAD,
-      payload: {
-          design
-      } 
-  }
+    return {
+        type: LOAD,
+        payload: {
+            design
+        } 
+    }
+}
+
+export function loadDesign(type, name) {
+    return {
+        type: LOAD_DESIGN,
+        payload: {
+            type,
+            name
+        } 
+    }
+}
+
+export function loadInitialState(type) {
+    return {
+        type: LOAD_INITIAL_STATE,
+        payload: {
+            type
+        } 
+    }
 }
 
 export function changeName(name) {
@@ -50,7 +71,7 @@ export function changeName(name) {
             name
         } 
     }
-  }
+}
 
 export function changeSymbolValue(name, value, merit) {
     return {
@@ -83,14 +104,14 @@ export function freeSymbolValue(name) {
 }
 
 export function changeSymbolViolation(name, minmax, value) {
-  return {
-      type: CHANGE_SYMBOL_VIOLATION,
-      payload: {
-          name,
-          minmax,
-          value
-      }
-  }
+    return {
+        type: CHANGE_SYMBOL_VIOLATION,
+        payload: {
+            name,
+            minmax,
+            value
+        }
+    }
 }
 
 export function changeSymbolConstraint(name, minmax, value) {
@@ -112,7 +133,7 @@ export function changeSymbolConstraints(values, minmax) {
             minmax
         }
     }
-  }
+}
 
 export function setSymbolFlag(name, minmax, mask) {
     return {
@@ -123,7 +144,7 @@ export function setSymbolFlag(name, minmax, mask) {
             mask
         }
     }
-  }
+}
 
 export function resetSymbolFlag(name, minmax, mask) {
     return {
@@ -134,7 +155,7 @@ export function resetSymbolFlag(name, minmax, mask) {
             mask
         }
     }
-  }
+}
 
 export function changeInputSymbolValues(values, merit) {
     return {
@@ -177,7 +198,7 @@ export function saveOutputSymbolConstraints(name) {
             name
         }
     }
-  }
+}
 
 export function restoreOutputSymbolConstraints(name) {
     return {
@@ -186,7 +207,7 @@ export function restoreOutputSymbolConstraints(name) {
             name
         }
     }
-  }
+}
 
 export function changeResultObjectiveValue(objective_value) {
     return {
