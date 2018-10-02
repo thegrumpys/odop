@@ -1,7 +1,6 @@
 import React from 'react';
-import { fixSymbolValue } from '../../store/actionCreators';
-import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../store/actionCreators';
-import { MIN, MAX, FIXED, CONSTRAINED } from '../../store/actionTypes';
+import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../store/actionCreators';
+import { MAX, CONSTRAINED } from '../../store/actionTypes';
 export const execute = {
     "name": "demo1",
     "steps": [
@@ -193,13 +192,15 @@ export const execute = {
                 <React.Fragment>
                     The handbook solution produced:
                         <table>
-                            <tr><th>spring rate</th>      <td>=&nbsp;</td> <td>&nbsp; 115</td> <td>lb. per in.</td></tr>
-                            <tr><th>load at solid</th>    <td>=&nbsp;</td> <td>&nbsp;&nbsp; 75.1</td> <td>lb.</td></tr>
-                            <tr><th>wire diameter</th>    <td>=&nbsp;</td> <td>&nbsp; &nbsp; 0.125</td> <td>in.</td></tr>
-                            <tr><th>mean diameter</th>    <td>=&nbsp;</td> <td>&nbsp; &nbsp; 0.80</td> <td>in.</td></tr>
-                            <tr><th>active coils</th>     <td>=&nbsp;</td> <td>&nbsp; &nbsp; 6</td> <td>coils</td></tr>
-                            <tr><th>solid height</th>     <td>=&nbsp;</td> <td>&nbsp; &nbsp; 1.00</td> <td>in.</td></tr>
-                            <tr><th>stress at solid</th>  <td>=</td> <td>97,092</td>  <td>psi &nbsp; (corrected)</td></tr>
+                            <tbody>
+                                <tr><th>spring rate</th><td>=&nbsp;</td><td>&nbsp; 115</td><td>lb. per in.</td></tr>
+                                <tr><th>load at solid</th><td>=&nbsp;</td><td>&nbsp;&nbsp; 75.1</td><td>lb.</td></tr>
+                                <tr><th>wire diameter</th><td>=&nbsp;</td><td>&nbsp; &nbsp; 0.125</td><td>in.</td></tr>
+                                <tr><th>mean diameter</th><td>=&nbsp;</td><td>&nbsp; &nbsp; 0.80</td><td>in.</td></tr>
+                                <tr><th>active coils</th><td>=&nbsp;</td><td>&nbsp; &nbsp; 6</td><td>coils</td></tr>
+                                <tr><th>solid height</th><td>=&nbsp;</td><td>&nbsp; &nbsp; 1.00</td><td>in.</td></tr>
+                                <tr><th>stress at solid</th><td>=</td><td>97,092</td><td>psi &nbsp; (corrected)</td></tr>
+                            </tbody>
                         </table>
                     <br />
                     <p>
