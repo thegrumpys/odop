@@ -144,28 +144,26 @@ export const execute = {
                     </p>
 
                     <p>
-                    change  fs_solid min  .7
+                    change  fs_solid min  .6
                     </p>
                     
                     <p>
-                    After the click on Next, the demo will run Search and compare results
-                    with the handbook solution.
+                    After the click on Next, the demo will run Search.
                     </p>
                 </React.Fragment>
             ),
             actions: [
-                changeSymbolConstraint('FS_Solid', MIN, 0.7)
+                changeSymbolConstraint('FS_Solid', MIN, 0.6)
             ]
         },
         {
-            title: "Page 07 of 08",
+            title: "Page 07 of 08 (last page)",
             text: (
                 <React.Fragment>
                     <p>
                     Now see what the search has turned up.
-                    Don't forget to review the Report(s).
+                    The two solutions are in reasonable agreement.
                     </p>
-                    
                     <p>
                     The handbook solution produced:<br />
                           spring rate     = 80     lb. per in.<br />
@@ -174,32 +172,12 @@ export const execute = {
                           solid height    =   .333 in.<br />
                           stress (7.2 lb) = 90,000 psi.
                     </p>
-                </React.Fragment>
-            ),
-            actions: [
-                search()
-            ]
-        },
-        {
-            title: "Page 08 of 08 (last page)",
-            text: (
-                <React.Fragment>
                     <p>
-                    Once we impose the wire diameter of the handbook solution and search again,
-                    the two solutions are in reasonable agreement.
-                    </p>
-                    <p>
-                    From the previous page, the handbook solution produced:<br />
-                          spring rate     = 80     lb. per in.<br />
-                          mean diameter   =   .153 in.<br />
-                          active coils    =  6.6   coils<br />
-                          solid height    =   .333 in.<br />
-                          stress (7.2 lb) = 90,000 psi.
+                    Don't forget to review the Report(s).
                     </p>
                 </React.Fragment>
             ),
             actions: [
-                fixSymbolValue('Wire_Dia', 0.035),
                 search()
             ]
         }
