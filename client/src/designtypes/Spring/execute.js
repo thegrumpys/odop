@@ -9,7 +9,8 @@ export function getDemoNames() {
     var result = [
         'demo',
         'demo1',
-        'demo2'
+        'demo2',
+        'longdemo'
     ];
 //    console.log('In getDemoNames result=',result);
     return result;
