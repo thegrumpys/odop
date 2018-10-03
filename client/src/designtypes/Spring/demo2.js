@@ -8,21 +8,21 @@ export const execute = {
             title: "Session Now In Progress",
             "name": "page0x",
             text: (
-                    <React.Fragment>
-                        <p>Welcome back !</p>
-                        
-                        <p>
-                        As with the other  of the tutorial and demo sessions, 
-                        this session needs to start from a known state.  
-                        So, if you have entered any work of value that is not yet SAVEd,
-                        use the <b>File : Save</b> menu item to save your work before continuing.
-                        </p>
+                <React.Fragment>
+                    <p>Welcome back !</p>
+                    
+                    <p>
+                    As with the other tutorial and demo sessions, 
+                    this session needs to start from a known state.  
+                    So, if you have entered any work of value that is not yet saved,
+                    use the <b>File : Save</b> menu item to save your work before continuing.
+                    </p>
 
-                        <p>
-                        Click Next to establish the necessary initialState.
-                        </p>
-                    </React.Fragment>
-                )
+                    <p>
+                    Click Next to establish the necessary initialState.
+                    </p>
+                </React.Fragment>
+            )
         },
         {
             title: "Page 02 of 08",
@@ -69,7 +69,7 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Example 2 may be restated:  Design a compression spring such that
+                    Before making any changes, Example 2 may be restated:  Design a compression spring such that
                     </p>
                     <table>
                         <tbody>
@@ -102,21 +102,22 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    The demo has entered what is known about the problem:<br />
+                    The demo has now entered what is known about the problem. 
+                    In summary, the changes were:<br />
                     <br />
-                    change  material_type  302_stainless<br />
-                    change  end_type  closed<br />
+                    CHANGE  Material_Type  302_STAINLESS<br />
+                    CHANGE  End_Type  Closed<br />
                     <br />
-                    fix     od_free  .188<br />
-                    change  l_solid max  .340<br />
+                    FIX     ID_Free  0.188<br />
+                    CHANGE  L_Solid MAX  0.340<br />
                     <br />
-                    fix  l_2  .385<br />
-                    fix  force_2  7.2<br />
-                    fix  l_free  .475<br />
+                    FIX  L_2  0.385<br />
+                    FIX  Force_2  7.2<br />
+                    FIX  L_Free  0.475<br />
                     <br />
                     We'll leave wire diameter free, but start at the suggested value of 0.035 inch.
                     <br />
-                    change  wire  0.035<br />
+                    CHANGE  Wire_Dia  0.035<br />
                     </p>
                 </React.Fragment>
             ),
@@ -144,7 +145,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    change  fs_solid min  .6
+                    CHANGE  FS_Solid MIN  0.6
                     </p>
                     
                     <p>
@@ -166,11 +167,11 @@ export const execute = {
                     </p>
                     <p>
                     The handbook solution produced:<br />
-                          spring rate     = 80     lb. per in.<br />
-                          mean diameter   =   .153 in.<br />
-                          active coils    =  6.6   coils<br />
-                          solid height    =   .333 in.<br />
-                          stress (7.2 lb) = 90,000 psi.
+                         &nbsp; spring rate     = 80     lb. per in.<br />
+                         &nbsp; mean diameter   =   .153 in.<br />
+                         &nbsp; active coils    =  6.6   coils<br />
+                         &nbsp; solid height    =   .333 in.<br />
+                         &nbsp; stress (7.2 lb) = 90,000 psi.
                     </p>
                     <p>
                     Don't forget to review the Report(s).

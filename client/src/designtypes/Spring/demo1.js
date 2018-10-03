@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../store/actionCreators';
 import { MAX, CONSTRAINED } from '../../store/actionTypes';
 export const execute = {
     "name": "demo1",
@@ -9,21 +9,49 @@ export const execute = {
             "name": "page0x",
             text: (
                     <React.Fragment>
-                        <p>In general, the easiest way to begin is to modify an existing design. </p>
+                        <p>
+                        The following example illustrates the use of ODOP:Spring in
+                        the design of a compression spring. 
+                        </p>
+                        <p>
+                        As with the other tutorial and demo sessions, 
+                        this session needs to start from a known state.  
+                        So, if you have entered any work of value that is not yet saved,
+                        use the <b>File : Save</b> menu item to save your work before continuing.
+                        Moving to the next page will establish the necessary initialState.
+                        </p>
                         
-                        <p>Reminder:  Demo and Tutorial sessions depend on initial conditions. 
-                        Review the Help topic on <b>Action : Execute</b> for more details. 
-                        If necessary, save your work and then use the <b>File : Open</b> menu item to load 
-                        the compression spring design named "<b>startup</b>". </p>
-
-                        <p>Each entry in the Library contains all the information necessary to describe a single design.  
-                        We will modify this design until it meets the requirements of the current design problem.
-                        The following sequence will illustrate this process.</p>
+                        <p>
+                        To continue with this example, just click the "Next" button as you finish
+                        reading each page (step). 
+                        </p>
                     </React.Fragment>
                 )
         },
         {
-            title: "Page 02 of 10",
+            title: "Page 02 of 11",
+            text: (
+                <React.Fragment>
+                    <p>
+                    The initial conditions expected by this demo session are now established.
+                    </p>
+
+                    <p>
+                    In general, the easiest way to begin is to modify an existing design.
+                    This demo session will modify this design until it meets the requirements 
+                    of the current design problem.
+                    The following sequence will illustrate this process.
+                    </p>
+                    
+                    <br /><br />
+                </React.Fragment>
+            ),
+            actions: [
+                loadInitialState('Spring')
+            ]
+        },
+        {
+            title: "Page 03 of 11",
             text: (
                 <React.Fragment>
                     <p>This problem appears in the  HANDBOOK of SPRING DESIGN  published by:<br />
@@ -41,10 +69,11 @@ export const execute = {
             )
         },
         {
-            title: "Page 03 of 10",
+            title: "Page 04 of 11",
             text: (
                 <React.Fragment>
                     <p>
+                    Before making any additional changes, 
                     Example 1 may be restated: &nbsp; Design a compression spring such that<br />
                     <br />
                     outside diameter =  0.925 in.<br />
@@ -56,7 +85,7 @@ export const execute = {
                     </p>
                     
                     <p>This is a good time to take a good look at the existing values.
-                    Most of these values will update immediately as the demo process enters changes
+                    Many values will update immediately as the demo process enters changes
                     to match the problem specifications.
                     You can scroll the page down to view the complete set of values. 
                     Scroll back up in order to use the Next button to continue.
@@ -66,17 +95,25 @@ export const execute = {
             )
         },
         {
-            title: "Page 04 of 10",
+            title: "Page 05 of 11",
             text: (
                 <React.Fragment>
                     <p>
                     Now, the demo session has entered everything we know about the problem
                     exactly as stated.
-                    All the numbers (Dependent Variable values, constraint violation, etc.) 
+                    All the numbers (Dependent Variable values, Constraint Violations, etc.) 
                     updated immediately as the demo process entered changes to match the 
                     problem specifications.
                     </p>
                     
+                    In summary, the changes were:<br />
+                    FIX OD_Free 0.925<br />
+                    FIX L_Free 1.713<br />
+                    FIX Force_2 50.0<br />
+                    FIX L_2 1.278<br />
+                    CHANGE L_Solid MAX 1.060<br />
+                    CHANGE Material_Type OIL_TEMPERED_MB<br />
+                    <br />
                     <p>
                     Again, you can scroll the page down to view the complete set of values. 
                     </p>
@@ -94,7 +131,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 05 of 10",
+            title: "Page 06 of 11",
             text: (
                 <React.Fragment>
                     <p>
@@ -105,7 +142,7 @@ export const execute = {
                     <p>
                     But first, we have made a small change that will allow ODOP:Spring to
                     consider designs with a larger than normal factor of safety.
-                    Specifically, 
+                    Specifically, <br />
                     CHANGE  FS_2  MAX  2.0
                     </p>
                     <p>
@@ -119,7 +156,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 06 of 10",
+            title: "Page 07 of 11",
             text: (
                 <React.Fragment>
                     <p>
@@ -133,6 +170,7 @@ export const execute = {
                     </p>
                     <p>You can scroll the page down to view the complete set of values. 
                     Scroll back up in order to use the Next button to continue.</p>
+                    <br />
                 </React.Fragment>
             ),
             actions: [
@@ -140,7 +178,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 07 of 10",
+            title: "Page 08 of 11",
             text: (
                 <React.Fragment>
                     <p>
@@ -154,7 +192,8 @@ export const execute = {
                     </p>
                     <p>
                     Oops ! That feature is not implemented yet.
-                    We will have to settle for:  FIX Wire_Dia 0.125
+                    We will have to settle for: <br />
+                    FIX Wire_Dia 0.125
                     </p>
                     <p>
                     That value is now in place.
@@ -168,7 +207,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 08 of 10",
+            title: "Page 09 of 11",
             text: (
                 <React.Fragment>
                     <p>
@@ -176,8 +215,7 @@ export const execute = {
                     The changes were quite small.
                     </p>
                     <p>
-                    Again, this is a good time to take a good look at the existing values,
-                    including values in the Reports.
+                    The next page will provide the handbook solution.
                     </p>
                     <br />
                 </React.Fragment>
@@ -187,7 +225,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 09 of 10",
+            title: "Page 10 of 11",
             text: (
                 <React.Fragment>
                     The handbook solution produced:
@@ -216,12 +254,13 @@ export const execute = {
             )
         },
         {
-            title: "Page 10 of 10 (last page)",
+            title: "Page 11 of 11 (last page)",
             text: (
                 <React.Fragment>
                     <p>
                     We can quickly confirm this notion by setting FORCE_2 to the handbook's value.
-                    Basically, CHANGE  Force_2  75.1
+                    Basically, <br />
+                    CHANGE  Force_2  75.1
                     <br />
                     So, now that the new value for Force_2 is in place,
                     the value of STRESS_2 is a reasonable match for the corresponding
