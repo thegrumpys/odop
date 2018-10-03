@@ -10,7 +10,7 @@ export var startExecute = function(prefix,steps) {
             modal: true, // Default: do display
             prefix: prefix,
             // Put current store state into steps[0].state - remember this for "back" time travel
-            steps: Object.assign([...steps], {[0]: Object.assign({}, steps[0], {state: this.state.store.getState()})}),
+            steps: Object.assign([...steps], {0: Object.assign({}, steps[0], {state: this.state.store.getState()})}),
             step: 0,
             title: steps[0].title,
             text: steps[0].text, // Default: first text
