@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Alert, Button } from 'reactstrap';
+import { load } from '../store/actionCreators';
 
 export var startExecute = function(prefix,steps) {
 //    console.log('In startExecute steps=',steps);
@@ -8,7 +9,8 @@ export var startExecute = function(prefix,steps) {
         this.setState({
             modal: true, // Default: do display
             prefix: prefix,
-            steps: steps,
+            // Put current store state into steps[0].state - remember this for "back" time travel
+            steps: Object.assign([...steps], {[0]: Object.assign({}, steps[0], {state: this.state.store.getState()})}),
             step: 0,
             title: steps[0].title,
             text: steps[0].text, // Default: first text
@@ -61,10 +63,12 @@ export class ExecutePanel extends React.Component {
     }
 
     onNext() {
-//        console.log('In ExecutePanel onNext');
+//        console.log('In ExecutePanel onNext steps=',this.state.steps);
         var next = this.state.step+1;
         if (this.state.steps[next] !== undefined) {
             this.setState({
+                // Put current store state into steps[next].state - remember this for "back" time travel
+                steps: Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: this.state.store.getState()})}),
                 step: next,
                 title: this.state.steps[next].title,
                 text: this.state.steps[next].text
@@ -85,9 +89,11 @@ export class ExecutePanel extends React.Component {
     }
 
     onBack() {
-//      console.log('In ExecutePanel onBack');
+//        console.log('In ExecutePanel onBack steps=',this.state.steps);
         var prev = this.state.step-1;
-        if (prev < 0) prev = 0;
+        if (prev < 0) prev = 0; // Stop going backwards if it is on the first step
+        // Put steps[prev].state into current store state - that is, time travel back
+        this.state.store.dispatch(load(this.state.steps[prev].state));
         this.setState({
             step: prev,
             title: this.state.steps[prev].title,
