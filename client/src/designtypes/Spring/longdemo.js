@@ -151,10 +151,9 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     Now that we have expressed what we want the design to accomplish,
-                    we will ask the Search algorithm (menu Action : Search) for a solution.
-                    Specifically, to find values of the free Independent Variables
-                    that cause the Constraints and FIXes that have just been established
-                    to be satisfied.
+                    we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
+                    Specifically, Search will find values of the free Independent Variables
+                    that cause the newly established Constraints and FIXes to be satisfied.
                     </p>
 
                     <p>
@@ -171,12 +170,14 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
-                    <p>Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
-                    Simply select (click on) that tab to view the report.</p>
-                    <p>The message: 
+                    <p>
+                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
+                    Simply select (click on) that tab to view the report.
+                    The message: 
                     "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
                     is produced any time that the second load uses more
-                    than 80 % of available deflection.</p>
+                    than 80 % of available deflection.
+                    </p>
                     <p>There is no warning about buckling so that is not a concern for this design.</p>
                 </React.Fragment>
             ),
@@ -199,7 +200,7 @@ export const execute = {
                     Now we'll use the ODOP SELECT SIZE feature 
                     (<b>Action : Select Size...</b> menu item)
                     to chose the nearest standard wire diameter.
-                    <br />
+                    <br /><br />
                     SELECT  Wire_Dia<br />
                     <br />
                     Wait! until the SELECT SIZE feature is implemented, 
@@ -251,8 +252,8 @@ export const execute = {
                     This is a good time to think about saving the design for potential access in the future.
                     You can use the <b>File : Save As...</b> menu item to save the design into the Design Library.  
                     Alternatively, it should be possibile to use the print features of the browser to
-                    send one of the Reports to a local printer or perhaps save it to a .PDF file.
-                    The browser documentation should provide more details.
+                    send one or more of the Reports to a local printer or perhaps save to a .PDF file.
+                    Your browser documentation should provide more details.
                     </p>
                 </React.Fragment>
             ),
@@ -276,9 +277,10 @@ export const execute = {
                     We'll chose the design that is closest to the current (custom) design, 
                     then evaluate it.
                     <br /><br />
-                    select  catalog
+                    SELECT  Catalog
                     </p>
                     Oops !  this will have to wait until the Select Catalog feature is implemented.
+                    <br />
                 </React.Fragment>
             )
         },
@@ -288,12 +290,13 @@ export const execute = {
                 <React.Fragment>
                     <p>Several more demo problems are available. 
                     They are named DEMO1, DEMO2, ... etc. 
-                    Refer to the documentation section (Help entry) named  TUTORIAL  
+                    Refer to the documentation section (Help entry) covering the Tutorial 
                     for a list of the Tutorial and DEMO topics.</p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP:Spring features, menus and reports. 
                     The HELP menu is a good place to start. </p>
+                    <br />
                 </React.Fragment>
             )
         }
