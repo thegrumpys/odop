@@ -29,7 +29,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of xx",
+            title: "Page 02 of 13",
             text: (
                 <React.Fragment>
                     <p>
@@ -50,9 +50,9 @@ export const execute = {
                     &nbsp; &nbsp; an initial load of 30 pounds and<br />
                     &nbsp; &nbsp; a  final   load of 60 pounds<br />
                     <br />
-                    Determine free length, wire diameter and number of coils.<br />
-                    Use a standard wire size.<br />
-                    Determine if a similar spring is available in the catalog.<br />
+                    Determine free length, wire diameter and number of coils.
+                    Use a standard wire size.
+                    Determine if a similar spring is available in the catalog.
                     </p>
                 </React.Fragment>
             ),
@@ -61,7 +61,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of xx",
+            title: "Page 03 of 13",
             text: (
                 <React.Fragment>
                     <p>
@@ -81,7 +81,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 04 of xx",
+            title: "Page 04 of 13",
             text: (
                 <React.Fragment>
                    <img src="designtypes/Spring/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
@@ -89,28 +89,30 @@ export const execute = {
             )
         },
         {
-            title: "Page 05 of xx",
+            title: "Page 05 of 13",
             text: (
                 <React.Fragment>
                     <p>Next, the demo session will enter everything we know about the problem. </p>
                     
                     <p>This is a good time to take a good look at the existing values.
-                    Many values will update immediately as the demo session enters the changes.</p>
+                    Affected values will update immediately as the demo session enters the changes.</p>
                     
                     <p>You can scroll the page down to view the complete set of values. 
                     Scroll back up in order to use the Next button to continue.</p>
+                    <br /><br />
                 </React.Fragment>
             )
         },
         {
-            title: "Page 06 of xx",
+            title: "Page 06 of 13",
             text: (
                 <React.Fragment>
                     <p>
                     The demo has now entered what is known about the problem. 
                     In summary, the changes were:<br />
                     </p>
-                    CHANGE Material_Type OIL_TEMPERED_MB<br />
+                    CHANGE  Material_Type OIL_TEMPERED_MB<br />
+                    CHANGE  Life_Category 10 Million cycles - Not peened<br />
                     CHANGE  Cycle_Life  MIN  1000000<br />
                     CHANGE  OD_Free   MAX  1.25<br />
                     CHANGE  L_Solid   MAX  1.30<br />
@@ -125,6 +127,7 @@ export const execute = {
             ),
             actions: [
                 changeSymbolValue("Material_Type",3),
+                changeSymbolValue("Life_Category",4),
                 changeSymbolValue("End_Type",4),
                 saveOutputSymbolConstraints('Cycle_Life'),
                 setSymbolFlag('Cycle_Life', MIN, CONSTRAINED),
@@ -139,11 +142,11 @@ export const execute = {
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 0.65),
                 fixSymbolValue('Force_1', 30.0),
-                fixSymbolValue('Force_2', 60.0),
+                fixSymbolValue('Force_2', 60.0)
             ]
         },
         {
-            title: "Page 07 of xx",
+            title: "Page 07 of 13",
             text: (
                 <React.Fragment>
                     <p>
@@ -164,7 +167,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 08 of xx",
+            title: "Page 08 of 13",
             text: (
                 <React.Fragment>
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
@@ -182,24 +185,107 @@ export const execute = {
             ]
         },
         {
-            title: "Page 09 of xx",
+            title: "Page 09 of 13",
             text: (
                 <React.Fragment>
                     <p>
-                    Don't forget to switch back to the tab containing the main page ("Design:").
-                    <br /><br />
-                    Just in case you missed them on the previous screen,
-                    scroll down to view the values of <b>Cycle_Life, %_Avail_Deflect</b> and <b>Weight</b>.
+                    If you are still on the Report tab,
+                    don't forget to switch back to the tab containing the main page ("Design:").
+                    </p>
+                    
+                    <p>
+                    As a general rule, in the first approach to a new problem, 
+                    we let the calculations use an arbitrary (non-standard) wire diameter. 
+                    Now we'll use the ODOP SELECT SIZE feature 
+                    (<b>Action : Select Size...</b> menu item)
+                    to chose the nearest standard wire diameter.
+                    <br />
+                    SELECT  Wire_Dia<br />
+                    <br />
+                    Wait! until the SELECT SIZE feature is implemented, 
+                    it will be necessary to use a FIX to impose the correct value of Wire_Dia.
+                    Look for the new value of Wire_Dia on the next page.
                     </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 10 of xx",
+            title: "Page 10 of 13",
             text: (
                 <React.Fragment>
-                    <p>This completes the first ODOP:Spring demonstration problem.</p>
+                    <p>
+                    Now that there has been a slight change in wire diameter, another search
+                    will be required to make corresponding adjustments in the other
+                    parameters such as number of coils, outside diameter and free length.
+                    </p>
                     
+                    <p>
+                    Look for the results on the next page.
+                    <br /><br />
+                    </p>
+                    
+                    <p>
+                    <br /><br />
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                fixSymbolValue('Wire_Dia', 0.120)
+            ]
+        },
+        {
+            title: "Page 11 of 13",
+            text: (
+                <React.Fragment>
+                    <p>
+                    We have a solution. Please take a moment to scroll through and view the values.
+                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
+                    Simply select (click on) that tab to view the report.
+                    </p>
+                    
+                    <p>
+                    The design is complete.
+                    </p>
+                    
+                    <p>
+                    This is a good time to think about saving the design for potential access in the future.
+                    You can use the <b>File : Save As...</b> menu item to save the design into the Design Library.  
+                    Alternatively, it should be possibile to use the print features of the browser to
+                    send one of the Reports to a local printer or perhaps save it to a .PDF file.
+                    The browser documentation should provide more details.
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                search()
+            ]
+        },
+        {
+            title: "Page 12 of 13",
+            text: (
+                <React.Fragment>
+                    <p>
+                    If you are still on a Report tab,
+                    don't forget to switch back to the tab containing the main page ("Design:").
+                    </p>
+                    
+                    <p>
+                    Finally, we'll use the SELECT CATALOG feature 
+                    (<b>Action : Select Catalog...</b> menu item) 
+                    to determine if a similar design is available in the built-in catalog. 
+                    We'll chose the design that is closest to the current (custom) design, 
+                    then evaluate it.
+                    <br /><br />
+                    select  catalog
+                    </p>
+                    Oops !  this will have to wait until the Select Catalog feature is implemented.
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 13 of 13 (last page)",
+            text: (
+                <React.Fragment>
                     <p>Several more demo problems are available. 
                     They are named DEMO1, DEMO2, ... etc. 
                     Refer to the documentation section (Help entry) named  TUTORIAL  
@@ -208,26 +294,6 @@ export const execute = {
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP:Spring features, menus and reports. 
                     The HELP menu is a good place to start. </p>
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 11 of xx (last page)",
-            text: (
-                <React.Fragment>
-                    <p>
-                    The next demonstration problem provides a more 
-                    detailed example of spring design from original specifications.  
-                    Select "LONGDEMO" from the <b>Help : Demo...</b> menu item.
-                    </p>
-                    
-                    <p>
-                    Additional demonstration sessions are available. 
-                    For example,
-                    DEMO6, DEMO7 and DEMO8 present examples of extension spring design.
-                    Tutorial sessions, TUTOR1, TUTOR2, ... etc. provide instructions on how to use 
-                    the ODOP software.
-                    </p>
                 </React.Fragment>
             )
         }
