@@ -112,7 +112,8 @@ export const execute = {
                     In summary, the changes were:<br />
                     </p>
                     CHANGE  Material_Type OIL_TEMPERED_MB<br />
-                    CHANGE  Life_Category 10 Million cycles - Not peened<br />
+                    CHANGE  Life_Category 1 Million cycles - Not peened<br />
+                    CHANGE  FS_CycleLife 1.0<br />
                     CHANGE  Cycle_Life  MIN  1000000<br />
                     CHANGE  OD_Free   MAX  1.25<br />
                     CHANGE  L_Solid   MAX  1.30<br />
@@ -127,8 +128,11 @@ export const execute = {
             ),
             actions: [
                 changeSymbolValue("Material_Type",3),
-                changeSymbolValue("Life_Category",4),
+                changeSymbolValue("Life_Category",3),
                 changeSymbolValue("End_Type",4),
+                saveOutputSymbolConstraints('FS_CycleLife'),
+                setSymbolFlag('FS_CycleLife', MIN, CONSTRAINED),
+                changeSymbolConstraint('FS_CycleLife', MIN, 1.0),
                 saveOutputSymbolConstraints('Cycle_Life'),
                 setSymbolFlag('Cycle_Life', MIN, CONSTRAINED),
                 changeSymbolConstraint('Cycle_Life', MIN, 1000000),
@@ -231,7 +235,7 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                fixSymbolValue('Wire_Dia', 0.120)
+                fixSymbolValue('Wire_Dia', 0.135)
             ]
         },
         {
