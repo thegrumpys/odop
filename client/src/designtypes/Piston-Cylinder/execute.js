@@ -20,5 +20,5 @@ export function getTutorialNames() {
 export function execute(execute_menu, execute_name) {
 //  console.log('In execute execute_name=',execute_name);
     var { execute } = require('./'+execute_name+'.js'); // Dynamically load execute
-    startExecute(execute_menu + ' ' + execute_name, execute.steps);
+    startExecute(execute_menu + ' : ' + execute_name, execute.steps);
 }

@@ -1,6 +1,5 @@
 import { STARTUP, 
     LOAD, 
-    LOAD_DESIGN, 
     LOAD_INITIAL_STATE, 
     CHANGE_NAME, 
     
@@ -40,27 +39,6 @@ export function reducers(state, action) {
         return state;
     case LOAD:
         return action.payload.design;
-    case LOAD_DESIGN:
-//        console.log('In LOAD_DESIGN action.payload.type=',action.payload.type,' action.payload.name=',action.payload.name);
-        fetch('/api/v1/designtypes/'+action.payload.type+'/designs/' + action.payload.name)
-            .then(res => {
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-                var result = res.json();
-//                console.log('In LOAD_DESIGN result=',result);
-                return result;
-            })
-            .then((design) => {
-                var { migrate } = require('../designtypes/'+action.payload.type+'/migrate.js'); // Dynamically load migrate
-                var migrated_design = migrate(design);
-//                console.log('In LOAD_DESIGN migrated_design=',migrated_design);
-                return Object.assign({}, state, migrated_design);
-            })
-            .catch(error => {
-                displayError('GET of \''+action.payload.name+'\' design failed with message: \''+error.message+'\'');
-            });
-        return state;
     case LOAD_INITIAL_STATE:
 //        console.log('In LOAD_INITIAL_STATE');
         var { initialState } = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState
