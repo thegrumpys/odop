@@ -1,6 +1,5 @@
 import { STARTUP, 
     LOAD, 
-    LOAD_DESIGN, 
     LOAD_INITIAL_STATE, 
     CHANGE_NAME, 
     
@@ -41,16 +40,6 @@ export function load(design) {
         type: LOAD,
         payload: {
             design
-        } 
-    }
-}
-
-export function loadDesign(type, name) {
-    return {
-        type: LOAD_DESIGN,
-        payload: {
-            type,
-            name
         } 
     }
 }

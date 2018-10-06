@@ -1,6 +1,5 @@
 export const STARTUP = 'STARTUP';
 export const LOAD = 'LOAD';
-export const LOAD_DESIGN = 'LOAD_DESIGN';
 export const LOAD_INITIAL_STATE = 'LOAD_INITIAL_STATE';
 export const CHANGE_NAME = 'CHANGE_NAME';
 
