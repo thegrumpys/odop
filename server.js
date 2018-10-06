@@ -273,7 +273,8 @@ app.post('/api/v1/usage_log', (req, res) => {
             connection.end();
             console.log('SERVER: 500 - INTERNAL SERVER ERROR');
         } else {
-            res.status(200).end();
+            var value = {};
+            res.status(200).json(value);
             connection.end();
             console.log('SERVER: 200 - OK');
         }

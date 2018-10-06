@@ -11,6 +11,7 @@ import { displaySpinner } from './Spinner';
 import { displayError } from './ErrorModal';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
+import { logUsage } from '../logUsage';
 
 export class PromptForDesign extends React.Component {
     
@@ -112,6 +113,7 @@ export class PromptForDesign extends React.Component {
                 const store = createStore(reducers, migrated_design, middleware);
                 store.dispatch(startup());
                 ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
+                logUsage('function=PromptForDesign,type='+type+',name='+name);
             })
             .catch(error => {
                 displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');

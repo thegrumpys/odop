@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { load } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
+import { logUsage } from '../../logUsage';
 
 class FileOpen extends React.Component {
     constructor(props) {
@@ -54,6 +55,7 @@ class FileOpen extends React.Component {
                 var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
                 this.props.load(migrated_design)
+                logUsage('function=FileOpen,type='+type+',name='+name);
             })
             .catch(error => {
                 displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');

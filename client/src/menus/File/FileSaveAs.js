@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { changeName } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
+import { logUsage } from '../../logUsage';
 
 class FileSaveAs extends React.Component {
     constructor(props) {
@@ -60,6 +61,7 @@ class FileSaveAs extends React.Component {
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
+                logUsage('function=FileSaveAs,type='+type+',name='+name);
                 return res.json()
             })
             .catch(error => {

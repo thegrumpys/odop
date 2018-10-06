@@ -4,6 +4,7 @@ import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
+import { logUsage } from '../../logUsage';
 
 class FileDelete extends React.Component {
     constructor(props) {
@@ -56,6 +57,7 @@ class FileDelete extends React.Component {
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
+                logUsage('function=FileDelete,type='+type+',name='+name);
                 return res.json()
             })
             .catch(error => {

@@ -3,6 +3,7 @@ import { DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
+import { logUsage } from '../../logUsage';
 
 class FileSave extends React.Component {
     constructor(props) {
@@ -29,6 +30,7 @@ class FileSave extends React.Component {
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
+                logUsage('function=FileSave,type='+type+',name='+name);
                 return res.json()
             })
             .catch(error => {

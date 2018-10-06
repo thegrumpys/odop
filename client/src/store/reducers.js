@@ -27,7 +27,6 @@ import { STARTUP,
     
     MIN } from './actionTypes';
 import { sclden } from './middleware/sclden';
-import { displayError } from '../components/ErrorModal';
 import { initialSystemControls } from '../initialSystemControls';
 
 export function reducers(state, action) {
