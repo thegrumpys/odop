@@ -28,6 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `design` (
   `id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `value` mediumtext COLLATE utf8_unicode_ci
