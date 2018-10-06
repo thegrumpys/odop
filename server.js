@@ -256,6 +256,30 @@ app.delete('/api/v1/designtypes/:type/designs/:name', (req, res) => {
     }
 });
 
+app.post('/api/v1/usage_log', (req, res) => {
+    var ip_address;
+    var note;
+    console.log('SERVER: ===========================================================');
+    ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log('SERVER: In POST /api/v1/usage_log ip_address='+ip_address+' req.body=',req.body);
+    note = JSON.stringify(req.body); // Convert blob to string
+    var connection = startConnection();
+    var stmt = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address+'\',\''+note+'\')';
+//    console.log('SERVER: stmt='+stmt);
+    connection.query(stmt, function(err, rows, fields) {
+//        console.log('SERVER: After INSERT err=', err, ' rows=', rows);
+        if (err) {
+            res.status(500).end();
+            connection.end();
+            console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+        } else {
+            res.status(200).end();
+            connection.end();
+            console.log('SERVER: 200 - OK');
+        }
+    });
+});
+
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {

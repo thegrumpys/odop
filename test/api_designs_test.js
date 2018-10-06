@@ -39,13 +39,19 @@ describe('Designs with empty DB', () => {
     beforeEach((done) => { // Before each test we empty the database
         var connection = mysql.createConnection(process.env.JAWSDB_TEAL_URL);
         connection.connect();
-        var stmt = 'DELETE FROM design WHERE 1'; // Empty test DB
+        var stmt = 'DELETE FROM design WHERE 1'; // Empty test design table
 //        console.log('TEST: stmt='+stmt);
         connection.query(stmt, function(err, rows, fields) {
-//            console.log('TEST: After DELETE err=', err, ' rows=', rows);
+//            console.log('TEST: After DELETE FROM design err=', err, ' rows=', rows);
             if (err) throw err;
-            done();
-            connection.end();
+            stmt = 'DELETE FROM usage_log WHERE 1'; // Empty test usage_log table
+//            console.log('TEST: stmt='+stmt);
+            connection.query(stmt, function(err, rows, fields) {
+//                console.log('TEST: After DELETE FROM usage_log err=', err, ' rows=', rows);
+                if (err) throw err;
+                done();
+                connection.end();
+            });
         });
     });
     
@@ -188,6 +194,19 @@ describe('Designs with empty DB', () => {
         });
     });
     
+    describe('POST /api/v1/usage_log/ip_address/66.68.47.92 with empty DB', () => {
+        it('it should POST with 200 OK with note=test', (done) => {
+            chai.request(server)
+                .post('/api/v1/usage_log')
+                .send({ note: 'test'})
+                .end((err, res) => {
+//                    console.log('TEST: err=', err);
+                    res.should.have.status(200);
+                    done(err);
+                });
+        });
+    });
+    
 });
 
 //========================================================================================
@@ -200,7 +219,7 @@ describe('Designs with non-empty DB', () => {
         var stmt = 'DELETE FROM design WHERE 1'; // Empty test DB
 //        console.log('TEST: stmt='+stmt);
         connection.query(stmt, function(err, rows, fields) {
-//            console.log('TEST: After DELETE err=', err, ' rows=', rows);
+//            console.log('TEST: After DELETE FROM design err=', err, ' rows=', rows);
             if (err) throw err;
             var copy = Object.assign({},testTestDesign); // Make a copy
             var name = copy.name; // Get the name from the blob
@@ -212,10 +231,18 @@ describe('Designs with non-empty DB', () => {
             var stmt = 'INSERT INTO design (name, type, value) VALUES (\''+name+'\',\''+type+'\',\''+value+'\')';
 //            console.log('TEST: stmt='+stmt);
             connection.query(stmt, function(err, rows, fields) {
-//                console.log('TEST: After INSERT err=', err, ' rows=', rows);
+//                console.log('TEST: After INSERT INTO design err=', err, ' rows=', rows);
                 if (err) throw err;
-                done();
-                connection.end();
+                var ip_address = '::ffff:127.0.0.1';
+                var note = JSON.stringify({ note: 'fill'});
+                var stmt = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address+'\',\''+note+'\')';
+//                console.log('TEST: stmt='+stmt);
+                connection.query(stmt, function(err, rows, fields) {
+//                    console.log('TEST: After INSERT INTO usage_log err=', err, ' rows=', rows);
+                    if (err) throw err;
+                    done();
+                    connection.end();
+                });
             });
         });
     });
@@ -328,6 +355,19 @@ describe('Designs with non-empty DB', () => {
         });
     });
     
+    describe('POST /api/v1/usage_log with non-empty DB', () => {
+        it('it should POST with 200 OK with note=test', (done) => {
+            chai.request(server)
+                .post('/api/v1/usage_log')
+                .send({ note: 'test'})
+                .end((err, res) => {
+//                    console.log('TEST: err=', err);
+                    res.should.have.status(200);
+                    done(err);
+                });
+        });
+    });
+    
 });
 
 // ========================================================================================
@@ -378,8 +418,24 @@ describe('Designs with multiple DB entries', () => {
                     connection.query(stmt3, function(err3, rows3, fields3) {
 //                        console.log('TEST: After INSERT err3=', err3, ' rows3=', rows3);
                         if (err3) throw err3;
-                        done();
-                        connection.end();
+                        var ip_address4 = '::ffff:127.0.0.1';
+                        var note4 = JSON.stringify({ note: 'fill'});
+                        var stmt4 = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address4+'\',\''+note4+'\')';
+//                        console.log('TEST: stmt4='+stmt4);
+                        connection.query(stmt4, function(err4, rows4, fields4) {
+//                            console.log('TEST: After INSERT err4=', err4, ' rows4=', rows4);
+                            if (err4) throw err4;
+                            var ip_address5 = '::ffff:127.0.0.1';
+                            var note5 = JSON.stringify({ note: 'fill'});
+                            var stmt5 = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address5+'\',\''+note5+'\')';
+//                            console.log('TEST: stmt5='+stmt5);
+                            connection.query(stmt5, function(err5, rows5, fields5) {
+//                                console.log('TEST: After INSERT err5=', err5, ' rows5=', rows5);
+                                if (err5) throw err5;
+                                done();
+                                connection.end();
+                            });
+                        });
                     });
                 });
             });
@@ -501,6 +557,19 @@ describe('Designs with multiple DB entries', () => {
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(400);
+                    done(err);
+                });
+        });
+    });
+    
+    describe('POST /api/v1/usage_log with multiple DB entries', () => {
+        it('it should POST with 200 OK with note=test', (done) => {
+            chai.request(server)
+                .post('/api/v1/usage_log')
+                .send({ note: 'test'})
+                .end((err, res) => {
+//                    console.log('TEST: err=', err);
+                    res.should.have.status(200);
                     done(err);
                 });
         });
