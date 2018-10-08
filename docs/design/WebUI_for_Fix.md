@@ -37,14 +37,18 @@ As noted in the discussion above, there are multiple ways to achieve the stated 
 This section of the discussion simply introduces a few alternatives.   
 
 Note that there is some overlap between this discussion and existing open issues, including: 
- * #131 (System-wide input validation) 
- *  #25 (Handle state variables when FIXED: Auto-Search)   
+ * #131 System-wide input validation 
+ *  #31 Allow input of full floating point numbers with exponents such as "1.345e+5"
+ *  #25 Handle state variables when FIXED: Auto-Search   
 
 Today's discussion started off with the notion of using InputGroups inside ReactStrap Popovers
 to enter values for Independent Variables, Dependent Variables and potentially, Calculation Inputs as well.
 In this idea, for IV & DV, the Popover inputGroup has a checkbox used to indicate FIXed status.
 An entry to the InputGroup collects all keystrokes and is subject to validation before the value is passed to the 
 rest of the system at the time that the Popover clears.
+Values displayed on the main page are presented with the format of the toPrecision(4) method.
+Values displayed in the InputGroup show the full precision (the current approach for Independent Variables).   
+
 In the case of a change (or FIX) to an Independent Variable, 
 there are few differences with the current implementation.
 Notably, recalculation of design state via the design equations, violations and Objective Function 
