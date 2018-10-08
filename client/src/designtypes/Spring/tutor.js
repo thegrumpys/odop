@@ -8,19 +8,9 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    <b>***  Under Construction  ***</b> <br />
+                    ***  Under Construction  *** <br />
                     This session is still a work in progress. <br /><br />
                     Welcome to the first ODOP tutorial session.
-                    This session will provide an introduction to ODOP features and concepts.
-                    </p>
-                    
-                    <p>
-                    If you are here as a "tourist" and are interested in picking up a "flavor" 
-                    for ODOP:Spring as opposed to walking through the underlying
-                    concepts and each of the features at the disposal of a serious
-                    spring designer, you may want to skip forward to the sample problems. 
-                    You may do this by Canceling this session and selecting one of the Demo
-                    sessions from the <b>Help : Demo...</b> menu.
                     </p>
                     
                     <p>
@@ -60,6 +50,13 @@ export const execute = {
                     The spring design content assumes that the user is familiar with the
                     concepts of stress, factor of safety, yield point, endurance limit, etc.
                     </p>
+                    
+                    <p>
+                    In general, the easiest way to begin is to modify an existing design.
+                    This tutorial session will modify this design until it meets the requirements 
+                    of the current design problem.
+                    The following sequence of pages will illustrate this process.
+                    </p>
                 </React.Fragment>
             ),
             actions: [
@@ -71,45 +68,15 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    So, as you are reading, please click the Help menu above.
-                    It will drop down to provide a list of entries (topics) to choose from.
-                    Selecting <b>Index</b> on this list will bring up a new browser tab with the
-                    list of available Help entries. You can switch back and forth between the tabs.
                     </p>
                     
                     <p>
-                    Several of these entries are designed to bring new users up to speed
-                    as quickly as possible.<br />
-                    <br />
-                    <b>Features</b> and <b>Introduction</b> cover a few of the concepts 
-                    behind the program.<br />
-                    <br />
-                    <b>Terminology</b> explains some of the unique terms that the program
-                    and its supporting documentation insist on using. 
-                    ODOP is structured to be general and extensible to new kinds of designs.
-                    The expectation is that this generality will pay off in the program's 
-                    ability to solve the really hard problems.<br />
-                    <br />
-                    <b>Getting Started</b>  provides a tour of the main page plus
-                    makes a few suggestions on how new users should attack the program.<br />
                     </p>
                 </React.Fragment>
             )
         },
         {
             title: "Page 04 of xx",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 04a of xx",
             text: (
                 <React.Fragment>
                    <img src="designtypes/Solid/RectangularSolidDiagram.png" alt="Rectangular Solid diagram"/>
@@ -120,13 +87,6 @@ export const execute = {
             title: "Page 05 of xx",
             text: (
                 <React.Fragment>
-                    <p>
-                    In general, the easiest way to begin is to modify an existing design.
-                    This tutorial session will modify this design until it meets the requirements 
-                    of the current design problem.
-                    The following sequence of pages will illustrate this process.
-                    </p>
-                
                     <p>Next, the demo session will enter everything we know about the problem. </p>
                     
                     <p>This is a good time to take a good look at the existing values.
@@ -305,18 +265,6 @@ export const execute = {
             title: "Page 13 of xx (last page)",
             text: (
                 <React.Fragment>
-                    <p>
-                    Remember that it is always possible to restart a given session of
-                    the demo / tutorial. 
-                    If at any point you become curious about "Why does
-                    the tutorial do it that way ?", finish that tutorial section
-                    normally, then return to the point in question later.  
-                    Cancel out of the tutorial session at the point of your question, 
-                    and then take the existing state of the program and try it your way. 
-                    You are encouraged to experiment with the program. 
-                    You are not likely to break it or wear it out !
-                    </p>
-                    
                     <p>Several more tutorial sessions are planned. 
                     They will have names like tutor1, tutor2, ... etc. 
                     Refer to the documentation section (Help entry) covering the Tutorial 
