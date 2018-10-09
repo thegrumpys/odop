@@ -1,6 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../store/actionCreators';
-import { MIN, MAX, CONSTRAINED } from '../../store/actionTypes';
+import { changeSymbolValue, fixSymbolValue, loadInitialState, search } from '../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -8,17 +7,15 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    <b>***  Under Construction  ***</b> <br />
-                    This session is still a work in progress. <br /><br />
                     Welcome to the first ODOP tutorial session.
-                    This session will provide an introduction to ODOP features and concepts.
+                    This session will provide an introduction to basic ODOP features and concepts.
                     </p>
                     
                     <p>
-                    If you are here as a "tourist" and are interested in picking up a "flavor" 
+                    If you are here simply as a "tourist" and are only interested in picking up a "flavor" 
                     for ODOP:Spring as opposed to walking through the underlying
-                    concepts and major features at the disposal of a serious
-                    spring designer, you may want to skip forward to the sample problems. 
+                    concepts and major features at the disposal of a serious spring designer, 
+                    you may want to skip forward to the sample problems. 
                     You may do this by Canceling this session and selecting one of the spring 
                     design Demo sessions available from the <b>Help : Demo...</b> menu
                     when a Spring design type is loaded.
@@ -41,7 +38,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of xx",
+            title: "Page 02 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -68,7 +65,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of xx",
+            title: "Page 03 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -82,7 +79,7 @@ export const execute = {
                     Several of these entries are designed to bring new users up to speed
                     as quickly as possible.<br />
                     <br />
-                    <b>Features</b> and <b>Introduction</b> cover a few of the concepts 
+                    <b>Features</b> and <b>Introduction</b> cover many of the concepts 
                     behind the program.<br />
                     <br />
                     <b>Terminology</b> explains some of the unique terms that the program
@@ -98,7 +95,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 04 of xx",
+            title: "Page 04 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -119,7 +116,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 05 of xx",
+            title: "Page 05 of 15",
             text: (
                 <React.Fragment>
                    <img src="designtypes/Solid/RectangularSolidDiagram.png" alt="Rectangular Solid diagram"/>
@@ -127,7 +124,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 06 of xx",
+            title: "Page 06 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -153,13 +150,13 @@ export const execute = {
             )
         },
         {
-            title: "Page 07 of xx",
+            title: "Page 07 of 15",
             text: (
                 <React.Fragment>
                     <p>
                     The tutorial has now entered a value of 20 inches for Length. 
                     In the shorthand summary that will be used in the remaining tutorial 
-                    and demo sessions, the change was:
+                    and demo sessions, the action was:
                     </p>
                     
                     <p>
@@ -179,7 +176,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 08 of xx",
+            title: "Page 08 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -205,11 +202,14 @@ export const execute = {
             )
         },
         {
-            title: "Page 09 of xx",
+            title: "Page 09 of 15",
             text: (
                 <React.Fragment>
                     <p>
                     Well, that brought a little color into the ODOP world !
+                    </p>
+                    
+                    <p>
                     The design now exceeds the 70 pound constraint on Weight.
                     Since a constraint is violated, this design is considered to be
                     "Not Feasible".
@@ -233,7 +233,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 10 of xx",
+            title: "Page 10 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -247,7 +247,7 @@ export const execute = {
                     Of course, the entire collection of Dependent Variables will respond 
                     to any changes in the Independent Variables.
                     </p>
-                    <br />
+                    <br /><br />
                 </React.Fragment>
             ),
             actions: [
@@ -255,7 +255,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 11 of xx",
+            title: "Page 11 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -275,7 +275,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 12 of xx",
+            title: "Page 12 of 15",
             text: (
                 <React.Fragment>
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
@@ -284,6 +284,13 @@ export const execute = {
                     Indeed, the design now weighs less than 70 pounds.
                     Also, Length has remained at 20 inches as specified. 
                     </p>
+                    
+                    <p>
+                    Finally, to wrap up this session,
+                    the next page will demonstrate how it is possible to specify
+                    the value of Girth, a Dependent Variable.
+                    </p>
+                    <br /><br />
                 </React.Fragment>
             ),
             actions: [
@@ -291,43 +298,26 @@ export const execute = {
             ]
         },
         {
-            title: "Page 13 of xx",
+            title: "Page 13 of 15",
             text: (
                 <React.Fragment>
                     <p>
-                    Finally, this session will demonstrate how it is possible to specify
-                    the value of Girth, a Dependent Variable.
+                    The tutorial has imposed:<br /><br />
+                    FIX Girth 35.0
                     </p>
                     
                     <p>
-                    While the tutorial has imposed:<br /><br />
-                    FIX Girth 35
-                    </p>
-                    <p>
-                    Again a Search will be required to establish values for the Independent Variables
-                    such that the FIXed value of Girth is established while simultaneously keeping Weight 
-                    below the 70 pound maximum.
-                    </p>
-                    
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 10 of xx",
-            text: (
-                <React.Fragment>
-                    <p>
-                    Girth is now FIXed at a value of 35.
                     The FIX is implemented as a weighted double-sided constraint.
                     </p>
                     
                     <p>
-                    Look for the results on the next page.
-                    <br /><br />
+                    Again, a Search will be required to establish values for the free Independent Variables
+                    such that the FIXed value of Girth is established while simultaneously keeping Weight 
+                    below the 70 pound maximum.
                     </p>
                     
                     <p>
-                    <br /><br />
+                    Look for the results on the next page.
                     </p>
                 </React.Fragment>
             ),
@@ -336,7 +326,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 11 of xx",
+            title: "Page 14 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -344,16 +334,37 @@ export const execute = {
                     </p>
                     
                     <p>
-                    The design is complete.
+                    This session has touched on a few of the most basic concepts of ODOP operation.
                     </p>
                     
-                    <p>
-                    This is a good time to think about saving the design for potential access in the future.
-                    You can use the <b>File : Save As...</b> menu item to save the design into the Design Library.  
-                    Alternatively, it should be possibile to use the print features of the browser to
-                    send one or more of the Reports to a local printer or perhaps save to a .PDF file.
-                    Your browser documentation should provide more details.
-                    </p>
+                    <ul>
+                        <li>
+                        It is possible to impose a value on any Independent Variable
+                            <ul>
+                                <li>
+                                    Dependent Variables will immediately recalculate to reflect that value.
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                        If constraints are violated, a Search can manipulate values of free
+                        Independent Variables in order to achieve a feasible solution
+                        (if one exists).
+                        </li>
+                        
+                        <li>
+                        It is possible to FIX the value of any Variable.
+                            <ul>
+                                <li>
+                                    FIXed Independent Variables are not altered by the Search process.
+                                </li>
+                                <li>
+                                    FIXed Dependent Variables require a Search to establish their value.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </React.Fragment>
             ),
             actions: [
@@ -361,19 +372,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 12 of xx",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 13 of xx (last page)",
+            title: "Page 15 of 15 (last page)",
             text: (
                 <React.Fragment>
                     <p>
@@ -394,7 +393,7 @@ export const execute = {
                     for a list of the Tutorial and DEMO topics.</p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
-                    you can experiment with the various ODOP:Spring features, menus and reports. 
+                    you can experiment with the various ODOP features, menus and reports. 
                     The HELP menu is a good place to start. </p>
                     <br />
                 </React.Fragment>

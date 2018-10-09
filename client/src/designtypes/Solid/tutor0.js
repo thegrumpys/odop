@@ -8,7 +8,7 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    ***  Under Construction  *** <br />
+                    <b>***  Under Construction  ***</b> <br />
                     This session is still a work in progress. <br /><br />
                     Welcome to the second ODOP tutorial session.
                     </p>
