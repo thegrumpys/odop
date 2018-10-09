@@ -17,10 +17,11 @@ export const execute = {
                     <p>
                     If you are here as a "tourist" and are interested in picking up a "flavor" 
                     for ODOP:Spring as opposed to walking through the underlying
-                    concepts and each of the features at the disposal of a serious
+                    concepts and major features at the disposal of a serious
                     spring designer, you may want to skip forward to the sample problems. 
-                    You may do this by Canceling this session and selecting one of the Demo
-                    sessions from the <b>Help : Demo...</b> menu.
+                    You may do this by Canceling this session and selecting one of the spring 
+                    design Demo sessions available from the <b>Help : Demo...</b> menu
+                    when a Spring design type is loaded.
                     </p>
                     
                     <p>
@@ -49,12 +50,12 @@ export const execute = {
                     
                     <p>
                     ODOP contains an "on-line" help facility.
-                    It includes an overview of the program, helpful hints and detailed explanations of
-                    major features.  
-                    First, a few words about what <b>not</b> to expect ...
+                    It includes an overview of the program, a Getting Started section plus
+                    helpful hints and detailed explanations of major features.  
+                    But first, a few words about what <b>not</b> to expect ...
                     The on-line help facility is not intended to replace the documentation that comes 
                     with your browser or computer system.  
-                    The help facility is not intended to teach spring design. 
+                    Also, the Help facility is not intended to teach spring design. 
                     The spring design user is expected to know the
                     basic physics of springs and strength of materials. 
                     The spring design content assumes that the user is familiar with the
@@ -101,18 +102,19 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
+                    In the rest of this section of the tutorial we will cover the basic analysis
+                    and solution features offered by ODOP. 
+                    First, we will see how the Independent Variables
+                    (inputs <b>TO</b> the design equations) can be changed and how these changes
+                    are immediately reflected in the values of the Dependent Variables
+                    (outputs <b>FROM</b> the design equations). 
                     </p>
                     
                     <p>
+                    We'll work with the Rectangular Solid (simple box) design type that 
+                    is illustrated on the next page.
                     </p>
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 04a of xx",
-            text: (
-                <React.Fragment>
-                   <img src="designtypes/Solid/RectangularSolidDiagram.png" alt="Rectangular Solid diagram"/>
+                    <br />
                 </React.Fragment>
             )
         },
@@ -120,21 +122,7 @@ export const execute = {
             title: "Page 05 of xx",
             text: (
                 <React.Fragment>
-                    <p>
-                    In general, the easiest way to begin is to modify an existing design.
-                    This tutorial session will modify this design until it meets the requirements 
-                    of the current design problem.
-                    The following sequence of pages will illustrate this process.
-                    </p>
-                
-                    <p>Next, the demo session will enter everything we know about the problem. </p>
-                    
-                    <p>This is a good time to take a good look at the existing values.
-                    Affected values will update immediately as the demo session enters the changes.</p>
-                    
-                    <p>You can scroll the page down to view the complete set of values. 
-                    Scroll back up in order to use the Next button to continue.</p>
-                    <br /><br />
+                   <img src="designtypes/Solid/RectangularSolidDiagram.png" alt="Rectangular Solid diagram"/>
                 </React.Fragment>
             )
         },
@@ -143,56 +131,138 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    The demo has now entered what is known about the problem. 
-                    In summary, the changes were:<br />
+                    This is a good time to take a close look at existing values.
+                    You may need to scroll down to see everything.
+                    The 70 pound maximum constraint on Weight and the 108 inch
+                    maximum on Length+Girth are values that the US Postal Service
+                    and many other participants in the package shipping industry impose 
+                    on items that they will accept.
                     </p>
-                    CHANGE  Material_Type OIL_TEMPERED_MB<br />
-                    CHANGE  Life_Category 1 Million cycles - Not peened<br />
-                    CHANGE  FS_CycleLife 1.0<br />
-                    CHANGE  Cycle_Life  MIN  1000000<br />
-                    CHANGE  OD_Free   MAX  1.25<br />
-                    CHANGE  L_Solid   MAX  1.30<br />
-                    CHANGE  L_Stroke  MIN  0.65<br />
-                    FIX  Force_1  30.0<br />
-                    FIX  Force_2  60.0<br />
-                    <br />
+                    
                     <p>
-                    The remaining Independent Variable values remain as established by the initialState. 
+                    In the process of moving to the next page, the tutorial will impose a new value 
+                    for an input (Independent Variable) ... the Length dimension of our rectangular solid. 
+                    Take note of the current value of Volume or Weight so that you can see the 
+                    impact of the change.
+                    </p>
+                    
+                    <p>
+                    When you click on Next, the tutorial will impose a value of 20 inches on Length.
                     </p>
                 </React.Fragment>
-            ),
-            actions: [
-                changeSymbolValue("Material_Type",3),
-                changeSymbolValue("Life_Category",3),
-                changeSymbolValue("End_Type",4),
-                saveOutputSymbolConstraints('FS_CycleLife'),
-                setSymbolFlag('FS_CycleLife', MIN, CONSTRAINED),
-                changeSymbolConstraint('FS_CycleLife', MIN, 1.0),
-                saveOutputSymbolConstraints('Cycle_Life'),
-                setSymbolFlag('Cycle_Life', MIN, CONSTRAINED),
-                changeSymbolConstraint('Cycle_Life', MIN, 1000000),
-                saveOutputSymbolConstraints('OD_Free'),
-                setSymbolFlag('OD_Free', MAX, CONSTRAINED),
-                changeSymbolConstraint('OD_Free', MAX, 1.25),
-                saveOutputSymbolConstraints('L_Solid'),
-                setSymbolFlag('L_Solid', MAX, CONSTRAINED),
-                changeSymbolConstraint('L_Solid', MAX, 1.30),
-                saveOutputSymbolConstraints('L_Stroke'),
-                setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
-                changeSymbolConstraint('L_Stroke', MIN, 0.65),
-                fixSymbolValue('Force_1', 30.0),
-                fixSymbolValue('Force_2', 60.0)
-            ]
+            )
         },
         {
             title: "Page 07 of xx",
             text: (
                 <React.Fragment>
                     <p>
+                    The tutorial has now entered a value of 20 inches for Length. 
+                    In the shorthand summary that will be used in the remaining tutorial 
+                    and demo sessions, the change was:
+                    </p>
+                    
+                    <p>
+                    CHANGE  Length  20.0<br />
+                    </p>
+                    
+                    <p>
+                    Notice how the outputs (Dependent Variables) have immediately updated to reflect
+                    the change.
+                    The remaining Independent Variable values remain as established by the initialState
+                    that was imposed at the start of this session. 
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                changeSymbolValue("Length",20)
+            ]
+        },
+        {
+            title: "Page 08 of xx",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Okay, that wasn't really very exciting. 
+                    The objective here is to illustrate how ODOP can do simple analysis. 
+                    Given the physical description of the object under consideration, 
+                    ODOP can use the mathematical model to predict aspects of its performance.
+                    For the rectangular solid, that is things like Volume, Weight, etc.
+                    For a spring, we will be speaking in terms of spring Rate, stresses, 
+                    factor of safety, cycle life, etc.
+                    </p>
+                    
+                    <p>
+                    Ready for another example ?
+                    </p>
+                    
+                    <p>
+                    When you click on Next, the tutorial will impose a value of 12 inches on Height.<br />
+                    <br />
+                    CHANGE Height 12
+                    </p>
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 09 of xx",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Well, that brought a little color into the ODOP world !
+                    The design now exceeds the 70 pound constraint on Weight.
+                    Since a constraint is violated, this design is considered to be
+                    "Not Feasible".
+                    A Search (<b>Action : Search</b> menu) will be required to
+                    find values of free (not FIXed) Independent Variables such that 
+                    constraints are not violated.
+                    </p>
+                    
+                    <p>
+                    Before we get into Search, let's suppose that we really don't 
+                    want the Search process to change the 20 inch value for Length that 
+                    we established earlier.
+                    When you click Next, the tutorial will check the checkbox 
+                    (to the right of the Value entry field) 
+                    to put Length into FIXed status.
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                changeSymbolValue("Height",12)
+            ]
+        },
+        {
+            title: "Page 10 of xx",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Now, the FIX checkbox for Length is checked.
+                    </p>
+                    
+                    <p>
+                    By having Length in FIXed status, the search will be able to adjust
+                    only the values of Width and Height to find a design that does not 
+                    exceed the 70 pound maximum weight.
+                    Of course, the entire collection of Dependent Variables will respond 
+                    to any changes in the Independent Variables.
+                    </p>
+                    <br />
+                </React.Fragment>
+            ),
+            actions: [
+                fixSymbolValue('Length')
+            ]
+        },
+        {
+            title: "Page 11 of xx",
+            text: (
+                <React.Fragment>
+                    <p>
                     Now that we have expressed what we want the design to accomplish,
                     we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
                     Specifically, Search will find values of the free Independent Variables
-                    that cause the newly established Constraints and FIXes to be satisfied.
+                    that cause the Constraints and FIXes to be satisfied.
                     </p>
 
                     <p>
@@ -202,14 +272,17 @@ export const execute = {
                     trivial amount, the program will display "<b>MARGINALLY FEASIBLE</b>" in the Result section.
                     </p>
                 </React.Fragment>
-            )
+            ),
         },
         {
-            title: "Page 08 of xx",
+            title: "Page 12 of xx",
             text: (
                 <React.Fragment>
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
+                    
                     <p>
+                    Indeed, the design now weighs less than 70 pounds.
+                    Also, Length has remained at 20 inches as specified. 
                     </p>
                 </React.Fragment>
             ),
@@ -218,25 +291,24 @@ export const execute = {
             ]
         },
         {
-            title: "Page 09 of xx",
+            title: "Page 13 of xx",
             text: (
                 <React.Fragment>
                     <p>
+                    Finally, this session will demonstrate how it is possible to specify
+                    the value of Girth, a Dependent Variable.
                     </p>
                     
                     <p>
-                    As a general rule, in the first approach to a new problem, 
-                    we let the calculations use an arbitrary (non-standard) wire diameter. 
-                    Now we'll use the ODOP SELECT SIZE feature 
-                    (<b>Action : Select Size...</b> menu item)
-                    to chose the nearest standard wire diameter.
-                    <br /><br />
-                    SELECT  Wire_Dia<br />
-                    <br />
-                    Wait! until the SELECT SIZE feature is implemented, 
-                    it will be necessary to use a FIX to impose the correct value of Wire_Dia.
-                    Look for the new value of Wire_Dia on the next page.
+                    While the tutorial has imposed:<br /><br />
+                    FIX Girth 35
                     </p>
+                    <p>
+                    Again a Search will be required to establish values for the Independent Variables
+                    such that the FIXed value of Girth is established while simultaneously keeping Weight 
+                    below the 70 pound maximum.
+                    </p>
+                    
                 </React.Fragment>
             )
         },
@@ -245,9 +317,8 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Now that there has been a slight change in wire diameter, another search
-                    will be required to make corresponding adjustments in the other
-                    parameters such as number of coils, outside diameter and free length.
+                    Girth is now FIXed at a value of 35.
+                    The FIX is implemented as a weighted double-sided constraint.
                     </p>
                     
                     <p>
@@ -261,7 +332,7 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                fixSymbolValue('Wire_Dia', 0.135)
+                fixSymbolValue('Girth', 35)
             ]
         },
         {
@@ -307,7 +378,7 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     Remember that it is always possible to restart a given session of
-                    the demo / tutorial. 
+                    the ODOP demo / tutorial. 
                     If at any point you become curious about "Why does
                     the tutorial do it that way ?", finish that tutorial section
                     normally, then return to the point in question later.  
