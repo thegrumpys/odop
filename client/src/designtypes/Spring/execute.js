@@ -1,6 +1,8 @@
 import { startExecute } from "../../components/ExecutePanel";
 export function getExecuteNames() {
-    var result = [];
+    var result = [
+        'tweakPrefs'
+    ];
 //    console.log('In getExecuteNames result=',result);
     return result;
 }
