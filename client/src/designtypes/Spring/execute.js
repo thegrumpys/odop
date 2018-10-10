@@ -1,6 +1,8 @@
 import { startExecute } from "../../components/ExecutePanel";
 export function getExecuteNames() {
-    var result = [];
+    var result = [
+        'tweakPrefs'
+    ];
 //    console.log('In getExecuteNames result=',result);
     return result;
 }
@@ -18,7 +20,9 @@ export function getDemoNames() {
 }
 
 export function getTutorialNames() {
-    var result = [];
+    var result = [
+        'tutor'
+    ];
 //    console.log('In getTutorialNames result=',result);
     return result;
 }

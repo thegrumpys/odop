@@ -293,7 +293,10 @@ export function reducers(state, action) {
     case CHANGE_SYSTEM_CONTROLS_VALUE:
         return {
             ...state,
-            system_controls: action.payload.system_controls
+            system_controls: {
+                ...state.system_controls,
+                ...action.payload.system_controls
+            }
         }
         
 // LABELS
