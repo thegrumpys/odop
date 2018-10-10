@@ -2,7 +2,7 @@ import { displayError } from './components/ErrorModal';
 
 export function logUsage(note) {
     var body = JSON.stringify({note: note});
-    console.log('body=',body);
+//    console.log('body=',body);
     fetch('/api/v1/usage_log', {
             method: 'POST',
             headers: {
@@ -12,14 +12,14 @@ export function logUsage(note) {
             body: body
         })
         .then(res => {
-            console.log('res=',res);
+//            console.log('res=',res);
             if (!res.ok) {
                 throw Error(res.statusText);
             }
             return res.json()
         })
         .catch(error => {
-            console.log('error=',error);
+//            console.log('error=',error);
             displayError('POST of usage_log of note \''+note+'\' failed with message: \''+error.message+'\'');
         });
 }
