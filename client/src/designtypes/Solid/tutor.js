@@ -38,7 +38,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 15",
+            title: "Page 02 of 16",
             text: (
                 <React.Fragment>
                     <p>
@@ -47,7 +47,7 @@ export const execute = {
                     
                     <p>
                     ODOP contains an "on-line" help facility.
-                    It includes an overview of the program, a Getting Started section plus
+                    It includes an overview of the program, a <b>Getting Started</b> section plus
                     helpful hints and detailed explanations of major features.  
                     But first, a few words about what <b>not</b> to expect ...
                     The on-line help facility is not intended to replace the documentation that comes 
@@ -65,7 +65,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 15",
+            title: "Page 03 of 16",
             text: (
                 <React.Fragment>
                     <p>
@@ -95,13 +95,36 @@ export const execute = {
             )
         },
         {
-            title: "Page 04 of 15",
+            title: "Page 04 of 16",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Perhaps you have already discovered that ODOP provides a "tooltip" feature.
+                    If using a touchpad or mouse, simply hover the cursor over any of the 
+                    titles or Variable names on the main page. 
+                    A tooltip will pop-up with additional information about that portion of
+                    the screen or variable.
+                    If you are using a touch screen device, it will be necessary to tap the
+                    item of interest in order to see the tooltip.
+                    </p>
+                    
+                    <p>
+                    This is a good time to explore the page and those tool tips.
+                    When you are ready,
+                    just click the Next button to continue with this session of the tutorial.
+                    </p>
+                    <br />
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 05 of 16",
             text: (
                 <React.Fragment>
                     <p>
                     In the rest of this section of the tutorial we will cover the basic analysis
                     and solution features offered by ODOP. 
-                    First, we will see how the Independent Variables
+                    First, you will see how the Independent Variables
                     (inputs <b>TO</b> the design equations) can be changed and how these changes
                     are immediately reflected in the values of the Dependent Variables
                     (outputs <b>FROM</b> the design equations). 
@@ -116,7 +139,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 05 of 15",
+            title: "Page 06 of 16",
             text: (
                 <React.Fragment>
                    <img src="designtypes/Solid/RectangularSolidDiagram.png" alt="Rectangular Solid diagram"/>
@@ -124,7 +147,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 06 of 15",
+            title: "Page 07 of 16",
             text: (
                 <React.Fragment>
                     <p>
@@ -150,7 +173,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 07 of 15",
+            title: "Page 08 of 16",
             text: (
                 <React.Fragment>
                     <p>
@@ -176,7 +199,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 08 of 15",
+            title: "Page 09 of 16",
             text: (
                 <React.Fragment>
                     <p>
@@ -202,7 +225,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 09 of 15",
+            title: "Page 10 of 16",
             text: (
                 <React.Fragment>
                     <p>
@@ -223,7 +246,7 @@ export const execute = {
                     want the Search process to change the 20 inch value for Length that 
                     we established earlier.
                     When you click Next, the tutorial will check the checkbox 
-                    (to the right of the Value entry field) 
+                    (positioned between the Value entry field and the Units field) 
                     to put Length into FIXed status.
                     </p>
                 </React.Fragment>
@@ -233,7 +256,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 10 of 15",
+            title: "Page 11 of 16",
             text: (
                 <React.Fragment>
                     <p>
@@ -255,7 +278,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 11 of 15",
+            title: "Page 12 of 16",
             text: (
                 <React.Fragment>
                     <p>
@@ -275,7 +298,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 12 of 15",
+            title: "Page 13 of 16",
             text: (
                 <React.Fragment>
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
@@ -298,7 +321,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 13 of 15",
+            title: "Page 14 of 16",
             text: (
                 <React.Fragment>
                     <p>
@@ -326,7 +349,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 14 of 15",
+            title: "Page 15 of 16",
             text: (
                 <React.Fragment>
                     <p>
@@ -339,7 +362,7 @@ export const execute = {
                     
                     <ul>
                         <li>
-                        It is possible to impose a value on any Independent Variable
+                        It is possible to set the value of any Independent Variable
                             <ul>
                                 <li>
                                     Dependent Variables will immediately recalculate to reflect that value.
@@ -372,30 +395,31 @@ export const execute = {
             ]
         },
         {
-            title: "Page 15 of 15 (last page)",
+            title: "Page 16 of 16 (last page)",
             text: (
                 <React.Fragment>
                     <p>
                     Remember that it is always possible to restart a given session of
                     the ODOP demo / tutorial. 
-                    If at any point you become curious about "Why does
-                    the tutorial do it that way ?", finish that tutorial section
-                    normally, then return to the point in question later.  
-                    Cancel out of the tutorial session at the point of your question, 
-                    and then take the existing state of the program and try it your way. 
+                    If at any point you become curious about 
+                    "Why does the tutorial do it that way ?",
+                    you can finish that tutorial section normally, 
+                    then return to the point in question later. 
+                    Alternatively, it is possible to make a sequence of changes in mid-tutorial 
+                    to explore your ideas and then use the "Back" button to get back on
+                    track with the tutorial.
                     You are encouraged to experiment with the program. 
                     You are not likely to break it or wear it out !
                     </p>
                     
                     <p>Several more tutorial sessions are planned. 
                     They will have names like tutor1, tutor2, ... etc. 
-                    Refer to the documentation section (Help entry) covering the Tutorial 
+                    Refer to the documentation section (Help entry) covering the tutorial 
                     for a list of the Tutorial and DEMO topics.</p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP features, menus and reports. 
                     The HELP menu is a good place to start. </p>
-                    <br />
                 </React.Fragment>
             )
         }

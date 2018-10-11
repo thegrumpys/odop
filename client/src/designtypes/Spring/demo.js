@@ -196,9 +196,9 @@ export const execute = {
                     <p>This completes the first ODOP:Spring demonstration problem.</p>
                     
                     <p>Several more demo problems are available. 
-                    They are named DEMO1, DEMO2, ... etc. 
-                    Refer to the documentation section (Help entry) named  TUTORIAL  
-                    for a list of the Tutorial and DEMO topics.</p>
+                    They are named demo1, demo2, ... etc. 
+                    Refer to the documentation section (Help entry) named  Tutorial  
+                    for a list of the tutorial and demo topics.</p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP:Spring features, menus and reports. 
@@ -213,14 +213,14 @@ export const execute = {
                     <p>
                     The next demonstration problem provides a more 
                     detailed example of spring design from original specifications.  
-                    Select "LONGDEMO" from the <b>Help : Demo...</b> menu item.
+                    Select "longdemo" from the <b>Help : Demo...</b> menu item.
                     </p>
                     
                     <p>
-                    Additional demonstration sessions are available. 
+                    Additional demonstration sessions are planned. 
                     For example,
-                    DEMO6, DEMO7 and DEMO8 present examples of extension spring design.
-                    Tutorial sessions, TUTOR1, TUTOR2, ... etc. provide instructions on how to use 
+                    demo6, demo7 and demo8 will present examples of extension spring design.
+                    Tutorial sessions, tutor1, tutor2, ... etc. provide instructions on how to use 
                     the ODOP software.
                     </p>
                 </React.Fragment>
