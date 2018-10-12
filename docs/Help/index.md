@@ -10,3 +10,4 @@
 * [Trade](trade)
 * [Reports](reports)
 * [Available Design Types](DesignTypes)
+* [Spring Design](SpringDesign)

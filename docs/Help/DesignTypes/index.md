@@ -3,9 +3,7 @@
 * [Piston-Cylinder](pcyl)   
 * [Rectangular Solid](r_solid)   
 
-  &nbsp; &nbsp; [Spring Overview](spring_oview)   
-  &nbsp; &nbsp; [Advanced Spring Operations](advancedSpringOperations)   
-  &nbsp; &nbsp; [Spring Materials](materials)
+  &nbsp; &nbsp; [Spring Design Topics](../SpringDesign)   
   
 * [Compression Spring](c_spring)   
 * [Extension Spring  (future)](e_spring)   

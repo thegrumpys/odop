@@ -22,6 +22,7 @@
 * [Trade](Help/trade)
 * [Reports](Help/reports)
 * [Available Design Types](Help/DesignTypes)
+* [Spring Design](Help/SpringDesign)
 
 
 ## Design
