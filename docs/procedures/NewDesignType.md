@@ -1,12 +1,14 @@
 #### Procedure to implement a new design type 
 
-This entry is a placeholder for documentation on how to implement a new ODOP design type (previously "design problem").
-Much work remains before this entry can be considered complete.
+**Under Construction**   
+This page is still a work in progress !
+
+This entry describes how to implement a new ODOP design type 
+(a.k.a. "design problem").
 
 Files required for all design types:
 * client/src/designtypes/_designName_/initialState.js
 * client/src/designtypes/_designName_/eqnset.js
-* client/src/designtypes/offsets.js  (optional)
 * client/src/designtypes/_designName_/migrate.js
 * client/public/designtypes/_designName_/favicon.icon
 * designtypes/load.sql
@@ -14,7 +16,13 @@ Files required for all design types:
    
 * startup entry in database  (typically created from initialState.js)
    
-Additional files may be utilized by coil spring design types:
+Additional files may (optionally) be utilized by some design types. 
+For example, coil spring design types utilize:
+* client/src/designtypes/_designName_/offsets.js 
+* client/src/designtypes/_designName_/init.js
+* client/src/designtypes/_designName_/report.js
+* client/src/designtypes/_designName_/tutorxx.js
+* client/src/designtypes/_designName_/demoxx.js
 * mat\_ips.json, mat\_ips\_offsets.js, mat\_cgs.json, mat\_cgs\_offsets.js, etc.
 * x\_endtypes.json
 * lifetarget.json

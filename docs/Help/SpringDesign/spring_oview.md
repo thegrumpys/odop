@@ -6,9 +6,9 @@ coil spring types supported by ODOP:Spring.
 For specifics, see:   
 * [Advanced Spring Operations](./advancedSpringOperations)   
 * [Spring Materials](./materials)   
-* [Compression Spring](./c_spring)   
-* [Extension Spring](./e_spring)   
-* [Torsion Spring](./t_spring)   
+* [Compression Spring](../DesignTypes/c_spring)   
+* [Extension Spring](../DesignTypes/e_spring)   
+* [Torsion Spring](../DesignTypes/t_spring)   
 
 **SPRING BASICS**   
  This section provides a limited amount of introductory material on spring
@@ -233,69 +233,9 @@ commentary on how to solve a variety of problems.
 
    
 **REFERENCES**   
- There are many excellent sources of information on spring design.  Several
- on the following list were consulted in the development of the ODOP:Spring
- program.  No single source contains a comprehensive set of equations and/or
- material property values found in ODOP:Spring.  The references are presented
- in alphabetical order by title.
 
-    Design Handbook - Engineering Guide to Spring Design
-    Form no. 515  
-    Copyright 1981,  Library of Congress Number 81-67959
-    Associated Spring - Barnes Group Inc.
-    18 Main St.
-    Bristol, Ct.   06010
-    203-582-9581
+Refer to: [Spring Design References](./references)
 
-    Design of Machine Elements   (sixth edition, 1985)
-    M. F. Spotts
-    Prentice-Hall, Inc.  Englewood Cliffs, N.J.
-
-    Handbook of Spring Design
-    Copyright 1981   ISBN 00-9604120-0-8
-    Spring Manufacturer's Institute Inc.   
-    380 West Palatine Rd.
-    Wheeling, IL.  60090
-    312-520-3290
-   
-    Machinery's Handbook
-    ISBN  0-8311-1155-0
-    Industrial Press Inc.   
-    200 Madison Ave.,   
-    New York, NY  10157  
-
-    Mark's Standard Handbook for Mechanical Engineers
-    ISBN  0-07-004123-7
-    McGraw-Hill Book Co, Inc.   New York, N.Y.
-
-    Mechanical Design Analysis
-    M. F. Spotts
-    Prentice-Hall, Inc.  
-    Englewood Cliffs, N.J.
-    Copyright 1964, 
-    Library of Congress Number 64-18626
-
-    Mechanical Springs    (second edition, 1963)
-    A. M. Wahl
-    McGraw-Hill Book Co, Inc.   New York, N.Y.
-
-    Roark's Formulas for Stress and Strain
-   
-    Spring Designer's Handbook
-    Harold Carlson
-    Marcel Dekker, Inc.  
-    270 Madison Ave., New York, NY  10016
-    Copyright 1978,  
-    Library of Congress Number 77-27436  TJ210.C37
-
- A list of "Useful Publications for Spring Makers" appears in the May 1985
- issue of "Springs, The Magazine of Spring Technology" published by:
-
-    Spring Manufacturer's Institute Inc.
-    380 West Palatine Rd.    
-    Wheeling, IL.  60090    
-    312-520-3290
-   
 **RESTRICTIONS**   
 
 Refer to: [Restrictions](../../About/Legal/Restrictions)
@@ -337,9 +277,9 @@ Refer to: [Restrictions](../../About/Legal/Restrictions)
  search will attempt to resolve the conflict.
    
 For specifics on names associated with each spring type, see:   
-* [Compression Spring](./c_spring)   
-* [Extension Spring](./e_spring)   
-* [Torsion Spring](./t_spring)   
+* [Compression Spring](../DesignTypes/c_spring)   
+* [Extension Spring](../DesignTypes/e_spring)   
+* [Torsion Spring](../DesignTypes/t_spring)   
    
 **SPRING CONSTRAINTS**   
  While most of ODOP:Spring constraints are obvious, a few need a bit of
@@ -636,4 +576,7 @@ section of documentation.  Review the material properties.  Check the
 inconsistency with another design method (hand calculator, spreadsheet
 calculation, etc.).  If the problem remains unresolved, please report it
 via the procedures for opening an issue on GitHub.
+
+[Spring Design Topics](../)
+[Help](../../)
 

@@ -24,3 +24,4 @@ into .PDF format.
 Refer to the documentation on the browser's print function for
 additional information.
 
+[Help](./)

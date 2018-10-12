@@ -1,4 +1,4 @@
-## TRADE_OVERVIEW
+## TRADE OVERVIEW
  When a design problem is first submitted to the search, the ability of the
  design to meet the stated constraints will be determined.  If the result is
  not feasible, it is necessary for the designer to restructure the design in
@@ -112,4 +112,4 @@ assigned are negative.
 
  Additional information on TRADE is available in the tutorial and demo features. 
 
- 
+[Help](./)

@@ -50,7 +50,7 @@ learn a different approach to spring design.
  * On the scale of the cost of the UTS ASD software, this group is not particulary price sensitive.
  * The UTS ASD software supports a much broader range of spring types than ODOP:Spring.
  * The UTS ASD software provides features like CAD graphics and CAD data interfaces that are not
- provided by ODOP:Spring.
+ currently provided by ODOP:Spring.
  
  It is possible that ODOP:Spring is better at solving design problems starting from original 
  specifications than UTS ASD. 

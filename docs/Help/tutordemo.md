@@ -1,8 +1,8 @@
 #### Tutorial and Demo
 
-The ODOP tutorial / demo feature is intended to to help the new user 
+The ODOP tutorial / demo feature is intended to to help new users 
 get started quickly.
-Specially constructed "sessions" provide multiple pages, 
+Specially constructed tutorial and demonstration "sessions" provide multiple pages, 
 where each page consists of a few paragraphs of text positioned
 above the normal ODOP page.
 The sessions provide input values and control of ODOP solution functions 
@@ -11,7 +11,8 @@ Thus, the user can step through the annotated design sessions at a desired pace
 simply by reading and clicking the "Next" button.
 While not technically a record / playback situation, the tutorial and demo
 feature can be thought of as playing back pre-recorded design sessions.
-In fact, the underlying software is always "live" and will respond to user input.
+In fact, the underlying software is always "live" and will respond to user input
+in addition to responding to input from the tutorial / demo session.
 
 A "Back" button is provided so that the user can step to previous pages in order 
 to re-read or refer to something that may have been missed on the first pass.
@@ -46,7 +47,7 @@ Topics covered (or planned) in the various sections of the tutorial include:
  reference book problems where the ODOP:Spring results are compared to 
  the reference book results in order to validate results from the program.  
  
- Examples available (or planned) include:
+ Demonstration examples available (or planned) include:
 
  demo   - Introduction, simple design check problem    
  demo1  - Spring Mfgrs. Inst. Handbook        compression spring example 1   
@@ -63,3 +64,6 @@ Topics covered (or planned) in the various sections of the tutorial include:
  demo12 - Carlson, Spring Designer's Handbook fatigue life comparison   
  demo13 - Factor of safety and cycle life illustration   
  &nbsp;
+ 
+ [Help](./)
+ 
