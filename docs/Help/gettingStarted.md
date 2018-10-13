@@ -21,7 +21,7 @@ If you would like to skip the Rectangular Solid presentation and instead
 jump ahead to work with the spring design materials,
 read through the next paragraphs about launching the program 
 and then come back and follow this link:
-[Spring design tutorial and demo](GettingStartedSpring)
+[Spring design tutorial and demo](gettingStartedSpring)
 
 Note that the [Terminology](terminology) page of the on-line documentation may be 
 helpful with some of the terms utilized here.
@@ -57,14 +57,17 @@ This is a technical issue related to web hosting during program development.
 A production web hosting arrangement will not have this delay.
 
 In order to start the ODOP software, 
-copy and paste the following URL into the address field of your browser:   
+copy and paste this address (URL):   
 
 **https://odop.herokuapp.com**
 
+ into the address field of your browser.   
+ 
 If you are using the side-by-side  browser configuration, paste the URL into 
 the address line of each browser.
 In each browser, follow the link to bring up the ODOP starting dialog.
 In the smaller window, click the "About" link.   
+
 ![ODOP starting dialog](./png/StartDialog.png "ODOP starting dialog")
 
 &nbsp;
@@ -215,7 +218,7 @@ illustrate problem solving techniques as well as provide sample solutions
 to several generally available reference book problems.
 The focus is on solving the problem, not explaining the operation of the software.
 
-See: [Spring design tutorial and demo](GettingStartedSpring)
+See: [Spring design tutorial and demo](gettingStartedSpring)
 
  
 [Help](./)
