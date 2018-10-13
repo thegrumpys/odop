@@ -6,5 +6,9 @@ It can be used to show all the main features of the ODOP software including Sear
 
 This diagram illustrates the Piston-Cylinder design variables:
 
-[Piston-Cylinder Design Type](./png/PCylDiagram.png)
+![Piston-Cylinder Design Type](./png/PCylDiagram.png "Piston-Cylinder Design Type")
+
+
+[Design Types](./)   
+[Help](../)   
 

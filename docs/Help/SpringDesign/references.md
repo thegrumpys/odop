@@ -66,7 +66,7 @@
     telephone: 630-495-8588
    
 
-[Spring Design Topics](../)
-[Help](../../)
+[Spring Design Topics](./)   
+[Help](../)   
 
 

@@ -1,5 +1,8 @@
 #### Extension Spring Design Type
 
+**Under Construction**   
+This page is still a work in progress !   
+
 This section presents material unique to the Extension Spring design type.
 
    
@@ -324,5 +327,8 @@ may be set by the user with the numeric entry field.
 More precise treatments of this subject are available in the sources listed
 in the REFERENCES section of the documentation.
 
+
+[Design Types](./)   
+[Help](../)   
 
 

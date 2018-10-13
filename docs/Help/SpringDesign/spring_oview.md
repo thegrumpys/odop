@@ -6,6 +6,7 @@ coil spring types supported by ODOP:Spring.
 For specifics, see:   
 * [Advanced Spring Operations](./advancedSpringOperations)   
 * [Spring Materials](./materials)   
+* [Spring Design References](./references)   
 * [Compression Spring](../DesignTypes/c_spring)   
 * [Extension Spring](../DesignTypes/e_spring)   
 * [Torsion Spring](../DesignTypes/t_spring)   
@@ -577,6 +578,6 @@ inconsistency with another design method (hand calculator, spreadsheet
 calculation, etc.).  If the problem remains unresolved, please report it
 via the procedures for opening an issue on GitHub.
 
-[Spring Design Topics](../)
-[Help](../../)
+[Spring Design Topics](./)   
+[Help](../)   
 

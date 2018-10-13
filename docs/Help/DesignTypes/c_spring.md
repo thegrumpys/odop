@@ -322,3 +322,6 @@ More precise treatments of this subject are available in the sources listed
 in the REFERENCES section of the documentation.
 
 
+[Design Types](./)   
+[Help](../)   
+

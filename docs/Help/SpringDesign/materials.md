@@ -158,4 +158,6 @@ Additional information on controlling the way material property data is
 used in the calculations is presented in the section 
 [Design to Stress](./advancedSpringOperations).
 
-[Help](../)
+
+[Spring Design Topics](./)   
+[Help](../)   

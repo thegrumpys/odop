@@ -115,4 +115,5 @@ stock spring catalog tables can go here.
 * [NewDesignType](../../procedures/NewDesignType)   
  
 
-[Help](../)
+[Spring Design Topics](./)   
+[Help](../)   
