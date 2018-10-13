@@ -75,7 +75,7 @@ class ActionExecute extends React.Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
-                       <Button color="primary" onClick={this.onExecute}>Execute</Button>
+                        <Button color="primary" onClick={this.onExecute}>Execute</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>

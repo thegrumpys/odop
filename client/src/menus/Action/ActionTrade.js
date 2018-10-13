@@ -673,11 +673,11 @@ class ActionTrade extends React.Component {
                         </ul>
                     </ModalBody>
                     <ModalFooter>
+                        <Button outline color="info" onClick={this.onStrategyContextHelp}>Help</Button>{' '}
                         <Button color="secondary" onClick={this.onStrategyDone}> &nbsp; Done &nbsp; </Button>{' '}
                         <Button color="secondary" onClick={this.onStrategyExisting}>Existing</Button>{' '}
                         <Button color="info" onClick={this.onStrategyArbitrary}>Arbitrary</Button>{' '}
                         <Button color="primary" onClick={this.onStrategyProportional}>Proportional</Button>
-                        <Button outline color="info" onClick={this.onStrategyContextHelp}>Help</Button>
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.state.arbitraryModal} className={this.props.className}>

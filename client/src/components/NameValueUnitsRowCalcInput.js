@@ -6,22 +6,23 @@ import { changeSymbolValue } from '../store/actionCreators';
 class NameValueUnitsRowCalcInput extends React.Component {
     
     constructor(props) {
+//        console.log('In NameValueUnitsRowCalcInput.constructor');
         super(props);
-        this.onChangeCalcInputValue = this.onChangeCalcInputValue.bind(this);
+        this.onChange = this.onChange.bind(this);
         this.onSelect = this.onSelect.bind(this);
-//        console.log('this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table)
+//        console.log('In NameValueUnitsRowCalcInput.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table)
         if (this.props.element.type === 'table') {
-//            console.log('file = ../designtypes/'+this.props.type+'/'+this.props.element.table+'.json');
+//            console.log('In NameValueUnitsRowCalcInput.constructor file = ../designtypes/'+this.props.type+'/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.type+'/'+this.props.element.table+'.json'); // Dynamically load table
-//            console.log('table=',table);
+//            console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
             this.state = {
                 table: table
             };
         }
     }
     
-    onChangeCalcInputValue(event) {
-//        console.log('In NameValueUnitsRowCalcInput.onChangeCalcInputValue event.target.value=',event.target.value);
+    onChange(event) {
+//        console.log('In NameValueUnitsRowCalcInput.onChange event.target.value=',event.target.value);
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
     }
     
@@ -41,6 +42,7 @@ class NameValueUnitsRowCalcInput extends React.Component {
     }
     
     render() {
+//        console.log('In NameValueUnitsRowCalcInput.render');
         // =======================================
         // Table Row
         // =======================================
@@ -51,9 +53,9 @@ class NameValueUnitsRowCalcInput extends React.Component {
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
-                            <Input className="text-right" type="number" value={this.props.element.value} onChange={this.onChangeCalcInputValue} /> : '' }
+                            <Input className="text-right" type="number" value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.type === undefined && typeof this.props.element.value === 'string' ?
-                            <Input className="text-right" type="text" value={this.props.element.value} onChange={this.onChangeCalcInputValue} /> : '' }
+                            <Input className="text-right" type="text" value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.type === 'table' &&
                         (
                             <Input type="select" value={this.props.element.value} onChange={this.onSelect}>

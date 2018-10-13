@@ -20,7 +20,7 @@ class ActionSelectSize extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle} disabled>
+                <DropdownItem onClick={this.toggle}>
                     Select Size&hellip;
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
