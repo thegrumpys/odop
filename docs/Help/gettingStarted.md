@@ -3,7 +3,6 @@
 **Under Construction**   
 This page is still a work in progress !
 
-**Getting Started**   
  Getting started with any computer program, ODOP included, 
  is usually a matter of ...  Try it.  You'll like it !   
  
@@ -12,12 +11,17 @@ This page is still a work in progress !
  usually goes a long way.  In the worst case, you'll come away from the
  experience with a little more motivation to read more of the on-line documentation.
 
-As noted in the [introduction](../About/intro), OPOP currently offers three
+As noted in the [Introduction](../About/Intro), OPOP currently offers three
 design types to work with: Piston-Cylinder, Rectangular Solid and Compression Spring. 
 If you are interested in learning about capabilities, concepts, and basic
 mechanics of how to operate the program,
 the Rectangular Solid design type is intended as an easy to understand 
 demonstration problem and is a good place to start.
+If you would like to skip the Rectangular Solid presentation and instead 
+jump ahead to work with the spring design materials,
+read through the next paragraphs about launching the program 
+and then come back and follow this link:
+[Spring design tutorial and demo](GettingStartedSpring)
 
 Note that the [Terminology](terminology) page of the on-line documentation may be 
 helpful with some of the terms utilized here.
@@ -27,28 +31,51 @@ helpful with some of the terms utilized here.
 
 While it is possible to use the ODOP software from a mobile device,
 establishing initial impressions with a full size monitor, keyboard and mouse
-is recommended.
-It should be possible to operate with this material in one
-browser tab while the ODOP main page is in another browser tab.
-This will permit rapid switching from this material to view the
-corresponding part of the program user interface.
-In the best of all worlds, if a wide screen monitor is in use, 
-it should be possible to configure two independent browser sessions.
-Put this material in one browser window such that it
+is recommended.   
+
+The remainder of this Getting Started topic will present several screen captures
+that refer to the ODOP main page.
+In the best of all configuration possibilities, if a wide screen monitor is in use, 
+it should be possible to configure two independent browser sessions in a 
+side-by-side configuration.
+Note that this is different than two tabs in one browser session.
+Put this Help content in one browser window such that it
 takes up roughly one third of the screen width.
 Put the ODOP main page in a separate browser window such that it takes up 
 the remaining two thirds of the screen width.
-It will then be possible to see both this discussion and the program
-user interface at the same time.
+It will then be possible to see both the screen captures in this discussion and 
+the referenced program features on the main page at the same time.
 
-When first launching the program, 
-you will be presented with the opportunity to select a design type.
+Alternatively, if a wide screen monitor is not available, 
+you can operate with this Help content in one
+browser tab while the ODOP main page is in another browser tab.
+This approach will permit rapid switching from this Help content in order
+to view the corresponding part of the program user interface.
+
+Note that loading the ODOP software the first time may take 20 seconds or longer.
+This is a technical issue related to web hosting during program development.
+A production web hosting arrangement will not have this delay.
+
+In order to start the ODOP software, 
+copy and paste the following URL into the address field of your browser:   
+
+**https://odop.herokuapp.com**
+
+If you are using the side-by-side  browser configuration, paste the URL into 
+the address line of each browser.
+In each browser, follow the link to bring up the ODOP starting dialog.
+In the smaller window, click the "About" link.   
+![ODOP starting dialog](./png/StartDialog.png "ODOP starting dialog")
+
+&nbsp;
+
+That link will take you to the Introduction page and from there you can return 
+to this page and continue with these instructions while viewing ODOP program 
+operation in the larger window.
+
+The ODOP starting dialog provides the opportunity to select a design type.
 Within each design type, you will have the opportunity to select an existing design.
-Each design type will have a default design with the name "startup".
-
-So, if you haven't started ODOP already, 
-open a new browser session (or tab) and follow this link:   
-[Demonstration version of ODOP](https://odop.herokuapp.com/)
+At a minimum, each design type will have a default design with the name "startup".
 
 &nbsp;
 
@@ -167,16 +194,15 @@ Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.
  cover the generic features and capabilities of the ODOP software.
  If time is available, read through those entries from top to bottom.
  
- On-line documentation for ODOP:Spring appears in the Available Design Types section.
+ On-line documentation for ODOP:Spring appears in the Spring Design topic.
 
 
 **USING THE TUTORIAL AND DEMO FACILITY**   
 
- The tutorial is designed to introduce new users to ODOP:Spring commands and concepts. 
+ The tutorial is designed to introduce new users to ODOP concepts, 
+ features and menus. 
  It is recommended for new users as the most effective and
  organized way of learning the program.  
- 
-Go to the Help : Tutorial menu item and select a tutorial session to work with.
 
 Tutorial sessions are fairly brief.
 The user is not required to do anything more complicated than
@@ -184,61 +210,13 @@ read and hit the Next button.
 Each tutorial session covers a specific operation or capability of the software.
 It is possible to stop a tutorial / demo session at any point.
 
-Demo sessions generally provide solutions to widely available spring
-design examples and sample problems.
+Demonstration sessions are available for the spring design types and 
+illustrate problem solving techniques as well as provide sample solutions 
+to several generally available reference book problems.
 The focus is on solving the problem, not explaining the operation of the software.
 
-
-**Spring Design Process**   
-The remainder of this discussion will use examples from
-the compression spring design type.
-
-Start from an existing design.
-
-CHANGE independent variables.
-For the compression spring design type, those include
-  Wire\_Dia, OD_Free, Coils\_T, L\_Free, Force\_1, or Force\_2.
- Observe that recalculations happen immediately.
- 
-&nbsp;
-
- Look at Reports contained in the three report tabs.   
- ![Spring Report Tabs](./png/SpringReportTabs.png "Spring Report Tabs")   
- 
-&nbsp;
-
- Try the SEARCH command to see if it can find a "feasible" solution that
- does not violate any constraints. 
- Establish or change the value of constraint levels; 
- for example,  OD\_Free MAX, L\_Stroke MIN and/or L\_Solid MAX. 
- Repeat the  search and observe how the design is adjusted to accommodate 
- your objectives. 
- To observe how ODOP:Spring reacts to a request to achieve the impossible, 
- increase Force\_2 MIN until SEARCH can no longer find a feasible solution. 
- Move a different constraint, perhaps OD\_Free MAX or another
- constraint that shows up as violated, until SEARCH finds a feasible
- solution again.
- 
- Use the FIX capability on one or more dependent variables like 
- RATE, L\_1 or L\_2. 
- Remember that a SEARCH must be performed to establish the desired
- values when you FIX a dependent variable.
-
- Finally, try to design a spring from scratch. 
- Use the main page entry fields to enter constraints
- associated with a hypothesized design.  Try designing the spring in a ball
- point pen, or perhaps a suspension spring for an automobile or a diesel
- locomotive.  Use the File : SAVE menu item to save the results of your work in 
- the design library.
- 
- You can master the advanced features like SEEK and TRADE with the same technique. 
- Dive in and try it. 
- 
- Also,  detailed example sessions using SEEK and TRADE are contained in the later
- sections of the tutorial.
- 
- Once you have already saved any work that you wish to keep, you can exit the program by
- simply closing the browser tab.
+See: [Spring design tutorial and demo](GettingStartedSpring)
 
  
 [Help](./)
+ 

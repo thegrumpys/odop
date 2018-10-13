@@ -16,7 +16,7 @@ a legible manner.
 Unfortunately, the necessary amount of scrolling may negatively impact productivity and 
 general satisfaction with operation on small screen hardware.
 
-ODOP is developed using the current version Google Chrome and routinely tested 
+ODOP is developed using the current version of Google Chrome and is routinely tested 
 using current versions of other browsers including Microsoft Edge. 
 Depending on screen size and resolution, 
 Firefox users may find it desirable to adjust font size in order to optimize the on-screen presentation.
