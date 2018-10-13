@@ -7,17 +7,17 @@ import { changeSymbolValue, setSymbolFlag, resetSymbolFlag } from '../store/acti
 class NameValueUnitsRowIndependentVariable extends React.Component {
     
     constructor(props) {
-        console.log('In NameValueUnitsRowIndependentVariable.constructor props=',props);
+//        console.log('In NameValueUnitsRowIndependentVariable.constructor props=',props);
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onSet = this.onSet.bind(this);
         this.onReset = this.onReset.bind(this);
-        console.log('In NameValueUnitsRowIndependentVariable.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table)
+//        console.log('In NameValueUnitsRowIndependentVariable.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table)
         if (this.props.element.type === 'table') {
-            console.log('In NameValueUnitsRowIndependentVariable.constructor file = ../designtypes/'+this.props.type+'/'+this.props.element.table+'.json');
+//            console.log('In NameValueUnitsRowIndependentVariable.constructor file = ../designtypes/'+this.props.type+'/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.type+'/'+this.props.element.table+'.json'); // Dynamically load table
-            console.log('In NameValueUnitsRowIndependentVariable.constructor table=',table);
+//            console.log('In NameValueUnitsRowIndependentVariable.constructor table=',table);
             this.state = {
                 table: table
             };
@@ -25,18 +25,18 @@ class NameValueUnitsRowIndependentVariable extends React.Component {
     }
     
     onChange(event) {
-        console.log('In NameValueUnitsRowIndependentVariable.onChange event.target.value=',event.target.value);
+//        console.log('In NameValueUnitsRowIndependentVariable.onChange event.target.value=',event.target.value);
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
     }
     
     onSelect(event) {
-        console.log('In NameValueUnitsRowIndependentVariable.onSelect event.target.value=',event.target.value);
+//        console.log('In NameValueUnitsRowIndependentVariable.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex);
         this.state.table[selectedIndex].forEach((value, index) => {
             if (index > 0) { // Skip the first column
                 var name = this.state.table[0][index];
-                console.log('In NameValueUnitsRowIndependentVariable.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',this.props.symbol_table.find(element => element.name === name));
+//                console.log('In NameValueUnitsRowIndependentVariable.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',this.props.symbol_table.find(element => element.name === name));
                 if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
                     this.props.changeSymbolValue(name,value);
                 }
@@ -45,13 +45,13 @@ class NameValueUnitsRowIndependentVariable extends React.Component {
     }
     
     onSet() {
-        console.log('In NameValueUnitsRowIndependentVariable.onSet');
+//        console.log('In NameValueUnitsRowIndependentVariable.onSet');
         this.props.setSymbolFlag(this.props.element.name, MIN, FIXED);
         this.props.setSymbolFlag(this.props.element.name, MAX, FIXED);
     }
     
     onReset() {
-        console.log('In NameValueUnitsRowIndependentVariable.onReset');
+//        console.log('In NameValueUnitsRowIndependentVariable.onReset');
         this.props.resetSymbolFlag(this.props.element.name, MIN, FIXED);
         this.props.resetSymbolFlag(this.props.element.name, MAX, FIXED);
     }
