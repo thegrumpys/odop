@@ -61,8 +61,20 @@ See: [Help Index](../Help/index)
 &nbsp;
 
 **AVAILABLE DESIGN TYPES**   
-   
+
 Three [Design Types](../Help/DesignTypes) are currently available.
+   
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="../../client/public/designtypes/Spring/favicon.ico"> 
+<b>[Helical coil compression spring design](../Help/DesignTypes/c_spring)</b> - a full-featured app    
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="../../client/public/designtypes/Solid/favicon.ico"> 
+<b>[Rectangular Solid](../Help/DesignTypes/r_solid)</b> - a familiar to everyone demonstration case   
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="../../client/public/designtypes/Piston-Cylinder/favicon.ico"> 
+<b>[Piston-Cylinder design](../Help/DesignTypes/pcyl)</b> - A simple demonstration case   
+
+&nbsp;
+
 The [Rectangular Solid](../Help/DesignTypes/r_solid) design type is intended as an 
 easy to understand demonstration problem.
 
