@@ -4,7 +4,7 @@
 [Try ODOP on Heroku](https://odop.herokuapp.com/)   
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Spring/favicon.ico"> 
-<b>Helical coil compression spring design</b> - a fully-featured app    
+<b>Helical coil compression spring design</b> - a full-featured app    
 <br />
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Solid/favicon.ico"> 
 <b>Rectangular Solid</b> - a familiar to everyone demonstration case   
@@ -17,7 +17,7 @@
 ODOP provides features and capabilities to facilitate the analysis and design 
 of a broad range of problems that have a mathematical model available. 
 
-[Read the introduction and Getting Started pages](https://thegrumpys.github.io/odop/About/Intro)   
+[Read the Introduction and Getting Started pages](https://thegrumpys.github.io/odop/About/Intro)   
 
 [More detail is available in the on-line Help facility](https://thegrumpys.github.io/odop/Help)   
 
