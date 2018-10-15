@@ -1,6 +1,5 @@
-## Introduction
+## ODOP is:   
 
-ODOP is:   
 
 **OPEN**   
 
@@ -17,12 +16,17 @@ and
 
 The ODOP software approaches "design" from an engineering perspective.
 Specifically, this notion of design is all about selecting appropriate values 
-for parameters that can be controlled in order to achieve the desired performance 
-of an engineering system.
+for those parameters that can be controlled in order to achieve the desired 
+performance of an engineering system.
 A mathematical model of the system under investigation is required.
-While this is "computer aided design", computer graphics in the form of
-drafted drawings or 3D models are not central to this design process.
-   
+While this is "computer-aided engineering design", 
+computer graphics in the form of drafted drawings or 3D models are 
+not central to this design process.
+
+While certainly capable of analyzing the performance of an existing design,
+ODOP is at its best when used to develop solutions to difficult and 
+highly constrained original design problems.
+
 &nbsp;
 
 **OPTIMIZATION**   
@@ -32,17 +36,17 @@ that model may be manipulated by numerical search and mathermatical optimization
 The process is sometimes referred to as "goal seeking".
 If a designer's goals are expressed in terms of one-sided constraints
 or two-sided "FIXes", the software can search for and find a "feasible" solution, if one exists.
-Once a feasible solution is known to exist, the software can seek an "optimal" solution
+Once a feasible solution is established, the software can seek an "optimal" solution
 that provides the best solution available within the established constraints. 
    
 &nbsp;
 
 **PLATFORM**   
 
-The ODOP software consists of a problem independent core ... the "platform" on which
+The ODOP software is based on a problem independent core ... the "platform" on which
 any number of mathematical models (a.k.a. "Design Types") can be built.
-The core solution techniques (SEARCH, SEEK and TRADE) may then be applied to
-those mathematical models in order to create specific designs.
+The core solution techniques (Search, Seek and Trade) may then be applied to
+those mathematical models in order to evolve specific designs.
 Designs may be stored in a design library for later re-use.
 Specific design types may offer problem-specific reports that may be saved or printed.
 Specific design types may offer easy selection from tables of material properties
@@ -64,19 +68,17 @@ See: [Help Index](../Help/index)
 
 Three [Design Types](../Help/DesignTypes) are currently available.
    
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="../../client/public/designtypes/Spring/favicon.ico"> 
-<b>[Helical coil compression spring design](../Help/DesignTypes/c_spring)</b> - a full-featured app    
-<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="../../client/public/designtypes/Solid/favicon.ico"> 
-<b>[Rectangular Solid](../Help/DesignTypes/r_solid)</b> - a familiar to everyone demonstration case   
-<br />
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="../../client/public/designtypes/Piston-Cylinder/favicon.ico"> 
-<b>[Piston-Cylinder design](../Help/DesignTypes/pcyl)</b> - A simple demonstration case   
+![Compression Spring Design Type](../../client/public/designtypes/Spring/favicon.ico "Compression Spring Design Type") 
+The [Compression Spring](../Help/DesignTypes/c_spring) design type is a full-featured app 
+enabling the engineering design of helical coil compression springs.
 
-&nbsp;
-
+![Rectangular Solid Design Type](../../client/public/designtypes/Solid/favicon.ico "Rectangular Solid Design Type") 
 The [Rectangular Solid](../Help/DesignTypes/r_solid) design type is intended as an 
 easy to understand demonstration problem.
+
+![Piston-Cylinder Design Type](../../client/public/designtypes/Piston-Cylinder/favicon.ico "Piston-Cylinder Design Type") 
+The [Piston-Cylinder](../Help/DesignTypes/pcyl) design type is a simple demonstration problem 
+that illustrates competing objectives.
 
 &nbsp;
 

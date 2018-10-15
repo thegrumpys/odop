@@ -29,8 +29,11 @@ So, if you have entered any work of value that is not yet saved,
 use the <b>File : Save</b> or <b>File : Save As</b>
 menu item to save your work before starting a session.
  
- Follow this link for details on starting the 
- [Spring design tutorial and demo](GettingStartedSpring)
+See: 
+[Spring design tutorial and demo](gettingStartedSpring)
+for details on starting the spring design tutorial and demo sessions.
+  
+ &nbsp; 
   
 Topics covered (or planned) in the various sections of the tutorial include:
 
