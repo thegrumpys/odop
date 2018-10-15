@@ -68,15 +68,15 @@ See: [Help Index](../Help/index)
 
 Three [Design Types](../Help/DesignTypes) are currently available.
    
-![Compression Spring Design Type](../../client/public/designtypes/Spring/favicon.ico "Compression Spring Design Type") 
+![Compression Spring Design Type icon](../../client/public/designtypes/Spring/favicon.ico "Compression Spring Design Type") 
 The [Compression Spring](../Help/DesignTypes/c_spring) design type is a full-featured app 
 enabling the engineering design of helical coil compression springs.
 
-![Rectangular Solid Design Type](../../client/public/designtypes/Solid/favicon.ico "Rectangular Solid Design Type") 
+![Rectangular Solid Design Type icon](../../client/public/designtypes/Solid/favicon.ico "Rectangular Solid Design Type") 
 The [Rectangular Solid](../Help/DesignTypes/r_solid) design type is intended as an 
 easy to understand demonstration problem.
 
-![Piston-Cylinder Design Type](../../client/public/designtypes/Piston-Cylinder/favicon.ico "Piston-Cylinder Design Type") 
+![Piston-Cylinder Design Type icon](../../client/public/designtypes/Piston-Cylinder/favicon.ico "Piston-Cylinder Design Type") 
 The [Piston-Cylinder](../Help/DesignTypes/pcyl) design type is a simple demonstration problem 
 that illustrates competing objectives.
 

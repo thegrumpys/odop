@@ -10,7 +10,7 @@ ___
 
 This section presents material unique to the Compression Spring design type.
 In conjunction with reading the material below, please be sure to review the material 
-available at [Spring Design Topics](./SpringDesign).   
+available at [Spring Design Topics](../SpringDesign).   
 
 **COMPRESSION SPRING NAMES**   
 
