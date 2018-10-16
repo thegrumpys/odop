@@ -12,10 +12,15 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 function startConnection() {
     var connection;
-    if (process.env.NODE_ENV !== 'test') {
+    if (process.env.NODE_ENV === 'production') {
+//        console.log('SERVER: connecting to process.env.JAWSDB_URL');
         connection = mysql.createConnection(process.env.JAWSDB_URL);
-    } else {
+    } else if (process.env.NODE_ENV === 'test') {
+//        console.log('SERVER: connecting to process.env.JAWSDB_TEAL_URL');
         connection = mysql.createConnection(process.env.JAWSDB_TEAL_URL);
+    } else { // undefined or other - treat as development
+//        console.log('SERVER: connecting to process.env.JAWSDB_CYAN_URL');
+        connection = mysql.createConnection(process.env.JAWSDB_CYAN_URL);
     }
     connection.connect();
     return connection;
