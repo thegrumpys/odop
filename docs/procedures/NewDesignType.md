@@ -47,6 +47,7 @@ Modify template files:
 * Create a load.sql file   
  ---- Using an existing load.sql file as an example, overwrite the initialState section with the new initial state json.   
  ---- {need more detail here} ...   
+ ---- See also: [Making changes to initialState.js](initialStateChanges)
 
 Test.
   
