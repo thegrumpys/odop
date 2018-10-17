@@ -51,3 +51,6 @@
 * [Release Process](procedures/release)
 * [New Design Type](procedures/NewDesignType)
 * [Making changes to initialState.js](procedures/initialStateChanges)
+* [Install a new system.js](procedures/NewSystem)
+
+

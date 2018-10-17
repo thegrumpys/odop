@@ -1,8 +1,13 @@
 #### Making changes to initialState.js
 
-1. Change initialState.js
+These steps apply to the situation where the database has already been initialized
+for the design type in question.
+Refer to other procedures articles for information on configuring new design types
+or installing new ODOP systems or initializing new databases.
+
+1. Make the desired changes to initialState.js
 2. Make a corresponding entry in migrate.js
-3. Click the "Use initialState" button when launching the program;   
+3. Click the "Use initialState" button (available in development environment only) when launching the program;   
 **File : Save As** on top of the "startup" entry in the database
 4. Dump SQL to create startup from scratch if starting with an empty DB   
  \- MySQL workbench should be able to export the table   
