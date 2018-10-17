@@ -15,4 +15,7 @@ While an AutoSave feature may be implemented in a future release, this would be 
 So for the duration, 
 save frequently and use the browser Refresh and Back functions with the understanding that work since your last save will likely be lost.   
 
+Note:   
+The on-line documentation pages (Help) are not subject to the same concerns about browser refresh and browser back / forward.
+
 [About](./)
