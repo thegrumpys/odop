@@ -449,7 +449,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Property Calculation Method - Controls how material properties are determined and used",
+            "tooltip": "Property Calculation Method - Controls how material properties are determined and used.  1-Use values from material table  2-Specify Tensile, %_Tensile_Stat & %_Tensile_Endur  3-Specify allowable stresses: Stress_Lim_Stat & Stress_Lim_Endur",
             "equationset": false,
             "hidden": false
         },
@@ -648,7 +648,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Wire tensile strength (computed as a function of wire diameter)",
+            "tooltip": "Wire tensile strength (computed as a function of wire diameter when Prop_Calc_Method=1; See Help for details)",
             "equationset": false,
             "hidden": false
         },

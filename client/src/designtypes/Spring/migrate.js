@@ -73,10 +73,15 @@ export function migrate(design) {
          design.symbol_table[34].hidden = true;
          migrated_design.version = '3'; // last thing... set the migrated model version
     case '3':
-        // Current model version
         // console.log('Convert from 3 to 4');
+         design.symbol_table[29].tooltip = "Property Calculation Method - Controls how material properties are determined and used.  1-Use values from material table  2-Specify Tensile, %_Tensile_Stat & %_Tensile_Endur  3-Specify allowable stresses: Stress_Lim_Stat & Stress_Lim_Endur"
+         design.symbol_table[42].tooltip = "Wire tensile strength (computed as a function of wire diameter when Prop_Calc_Method=1; See Help for details)"
+         migrated_design.version = '4'; // last thing... set the migrated model version
+    case '4':
+        // Current model version
+        // console.log('Convert from 4 to 5');
         // To be defined - presently do nothing
-        // migrated_design.version = '4'; // last thing... set the migrated model version
+        // migrated_design.version = '5'; // last thing... set the migrated model version
         break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
