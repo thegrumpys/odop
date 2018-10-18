@@ -9,6 +9,6 @@
 * [Seek](seek)
 * [Trade](trade)
 * [Reports](reports)
-* [Hints, Tips and Tricks](hintsTipsTricks)
+* [Hints, Tips and Tricks](htt)
 * [Available Design Types](DesignTypes)
 * [Spring Design](SpringDesign)
