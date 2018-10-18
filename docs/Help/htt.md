@@ -34,10 +34,10 @@ spring designs that may be the source of NaN and other computational difficulty.
 So, if you encounter NaN where you expect a numeric value, check Report 1 for additional messages.
 
 **Browser refresh and back / forward**   
-Unfortunately, using the browser “Refresh” function with a single page web app such as ODOP 
-will likely result in a complete reset of the main page and potential loss of a user’s work 
+Unfortunately, using the browser "Refresh" function with a single page web app such as ODOP 
+will likely result in a complete reset of the main page and potential loss of a user's work 
 since the last Save operation. 
-Similarly, use of the browser “Back” function followed by “Forward” will likely result in 
+Similarly, use of the browser "Back" function followed by "Forward" will likely result in 
 reset of the main page.   
 
 Note: 
@@ -50,8 +50,8 @@ This is a technical issue related to web hosting during program development.
 A production web hosting arrangement will not have this delay.
 
 **Responsive design**   
-Developed as a “responsive” web app, the ODOP software will change its screen layout and 
-input behavior in response to the capabilities of the user’s device. 
+Developed as a "responsive" web app, the ODOP software will change its screen layout and 
+input behavior in response to the capabilities of the user's device. 
 Specifically, as available screen width diminishes,
 sections on the right of the main page will reposition to the bottom of the page.
 This means that more vertical scrolling will be required but font sizes will remain legible,
