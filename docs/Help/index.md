@@ -8,7 +8,7 @@
 * [Search](search)
 * [Seek](seek)
 * [Trade](trade)
-* [Hints, Tips and Tricks](hints_tips_tricks)
 * [Reports](reports)
+* [Hints, Tips and Tricks](hintsTipsTricks)
 * [Available Design Types](DesignTypes)
 * [Spring Design](SpringDesign)
