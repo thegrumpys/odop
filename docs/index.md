@@ -21,6 +21,7 @@
 * [Seek](Help/seek)
 * [Trade](Help/trade)
 * [Reports](Help/reports)
+* [Hints, Tips and Tricks](Help/hints_tips_tricks)
 * [Available Design Types](Help/DesignTypes)
 * [Spring Design](Help/SpringDesign)
 
@@ -51,7 +52,7 @@
 * [Release Process](procedures/release)
 * [New Design Type](procedures/NewDesignType)
 * [Changes to initialState.js](procedures/initialStateChanges)
-* [Install a new system.js](procedures/NewSystem)
+* [Install a new system](procedures/NewSystem)
 * [New database](procedures/NewDB)
 
 
