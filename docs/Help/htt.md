@@ -72,4 +72,3 @@ Please search for your issue and review known issues on
 In order to comment on an existing issue or to open a new issue, a (free) GitHub account is required.
 Follow the "Sign up" link at the top right.
 Open a new issue by clicking the green "New issue" button (upper right).
-
