@@ -59,7 +59,11 @@ even on a cell phone.
 Note that while operation on a cell phone may be possible, 
 the scrolling necessary to accommodate screen size limitations may impact productivity.
 Similarly, while it is possible to use the ODOP software from a mobile device, 
-establishing initial impressions with a full size monitor, keyboard and mouse is recommended.
+establishing initial impressions with a full size monitor, keyboard and mouse is recommended.   
+
+**How to pronounce ODOP**   
+The preferred pronounciation is the individual letters O-D-O-P, 
+not a word like O-dop.
 
 **Reporting problems with the ODOP software**   
 Your feedback is greatly appreciated.
