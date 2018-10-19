@@ -2,8 +2,15 @@
 
 This page describes how to launch the first sessions of the spring design 
 Tutorial and the spring design Demo.
-Also, a few suggestions on how to explore ODOP:Spring after completing the
-tutorial and demo sessions are provided.   
+A few suggestions on how to explore ODOP:Spring after completing the
+tutorial and demo sessions are also provided.   
+
+Before continuing, please confirm that the Compression Spring design type is loaded.
+You should see Independent Variables like OD\_Free, Wire\_Dia and L\_Free.
+If you see the Independent Variables of the Rectangular Solid design type 
+(Length, Width and Height),
+simply click your browser's refresh button and then click the **Open** button to 
+switch to the Spring design type.
 
 Tutorial sessions teach operation of the program.
 Use the <b>Help : Tutorial...</b> menu item to select the desired tutorial session.   
@@ -49,7 +56,7 @@ For the compression spring design type, those include
 &nbsp;
 
  After introducing enough changes to violate a few constraints,
- run a Search (Action : Search menu) to see if it can find a "feasible" 
+ run a Search (**Action : Search** menu) to see if it can find a "feasible" 
  solution that  does not violate any constraints. 
  Establish or change the value of constraint levels; 
  for example,  OD\_Free MAX, L\_Stroke MIN and/or L\_Solid MAX. 
@@ -71,7 +78,7 @@ For the compression spring design type, those include
  associated with a hypothesized design. 
  Try designing the spring in a ball  point pen, 
  or perhaps a suspension spring for an automobile or a diesel locomotive. 
- Use the File : SAVE menu item to save the results of your work in 
+ Use the **File : SAVE** menu item to save the results of your work in 
  the design library.
  
  SEEK and TRADE are covered in later sections of the tutorial.
