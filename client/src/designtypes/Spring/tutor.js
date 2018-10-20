@@ -334,8 +334,7 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    The tutorial has imposed:<br /><br />
-                    FIX L_Stroke 1.725.0
+                    The tutorial has imposed: FIX L_Stroke 1.725
                     </p>
                     
                     <p>
