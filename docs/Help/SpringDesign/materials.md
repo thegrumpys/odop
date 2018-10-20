@@ -141,7 +141,7 @@ in which these changes are entered is significant.
  There will be no  dependence on the Wire\_Dia or any values from the materials table. 
  The  order in which these changes are entered is significant.
 
-    CHANGE  Prop_Calc_Method  3 - Use Stress\_Lim\_...
+    CHANGE  Prop_Calc_Method  3 - Use Stress_Lim_...
     CHANGE  Torsion_Modulus   xxxxxxxx
     CHANGE  Stress_Lim_Stat   yyyyyy
     CHANGE  Stress_Lim_Endur  zzzzzz
