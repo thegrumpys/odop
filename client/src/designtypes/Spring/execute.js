@@ -13,6 +13,7 @@ export function getDemoNames() {
         'demo1',
         'demo2',
         'demo3',
+        'demo5',
         'longdemo'
     ];
 //    console.log('In getDemoNames result=',result);
