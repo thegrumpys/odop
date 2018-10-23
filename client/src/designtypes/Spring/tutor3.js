@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../store/actionCreators';
+import { changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../store/actionCreators';
 import { MAX, CONSTRAINED } from '../../store/actionTypes';
 export const execute = {
     steps: [
@@ -25,7 +25,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    To continue with this example, just click the "Next" button as you finish
+                    To continue with this session, just click the "Next" button as you finish
                     reading each page (step). 
                     </p>
                     <br />
@@ -33,16 +33,22 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 13",
+            title: "Page 02 of 15",
             text: (
                 <React.Fragment>
                     <p>
-                    The initial conditions expected by this demo session are now established.<br />
-                    <br />
+                    The initial conditions expected by this demo session are now established.
+                    </p>
+                    
+                    <p>
                     It's time to take a look at the set of constraint levels. 
-                    Note that the default set of constraint levels are set to allow a broad range
-                    of springs to be feasible.<br />
-                    <br />
+                    Note that the default set of constraint levels imposed in the initialState 
+                    are set to allow a broad range of springs to be feasible.
+                    More information about the constraints of spring design is provided in the
+                    on-line documentation section (Help entry) titled Spring Design Overview.
+                    </p>
+                    
+                    <p>
                     Each constraint has a corresponding constraint violation that represents
                     the difference between the current value of the quantity being
                     constrained and the constraint level.  The "Violation"
@@ -59,7 +65,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 13",
+            title: "Page 03 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -74,11 +80,12 @@ export const execute = {
                     Take a look at the current values of outside diameter in the free condition and
                     its associated constraint.
                     </p>
+                    <br />
                 </React.Fragment>
             )
         },
         {
-            title: "Page 04 of 13",
+            title: "Page 04 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -94,21 +101,24 @@ export const execute = {
                     <br />
                     Shall we see if Search can find a design with a smaller (less than
                     0.9 inch OD) spring that can still support the designated load ?
+                    Note that the tutorial has also put Force_2 in FIXed status so that 
+                    designated load will not be changed by the search process.
                     </p>
                     
                     <p>You can scroll the page down to view the complete set of values. 
                     Scroll back up in order to use the Next button to continue.</p>
-                    <br /><br />
                 </React.Fragment>
             ),
             actions: [
                 saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
-                changeSymbolConstraint('OD_Free', MAX, 0.9)
+                changeSymbolConstraint('OD_Free', MAX, 0.9),
+                fixSymbolValue('Force_2')
+
             ]
         },
         {
-            title: "Page 06 of 13",
+            title: "Page 05 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -119,14 +129,14 @@ export const execute = {
                     </p>
 
                     <p>
-                    &nbsp;
+                    The search will take place during the transition to the Next page.
                     <br />
                     </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 07 of 13",
+            title: "Page 06 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -153,7 +163,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 05 of 13",
+            title: "Page 07 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -164,7 +174,7 @@ export const execute = {
                     <p>
                     Now that we have covered the concept of constraints, we can describe
                     the use of FIX on a state variable in more precise terms.  The FIX
-                    of a state variable is the creation of a two sided constraint that
+                    of a Dependent Variable is the creation of a two sided constraint that
                     is more heavily weighted than a normal constraint.  Thus when we
                     used FIX to establish a specific deflection in the earlier section
                     of the tutorial, we were actually using the search to solve a two
@@ -182,7 +192,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 08 of 13",
+            title: "Page 08 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -212,28 +222,32 @@ export const execute = {
             ]
         },
         {
-            title: "Page 09 of 13",
+            title: "Page 09 of 15",
             text: (
                 <React.Fragment>
                     <p>
-                    Now that there has been a slight change in wire diameter, another search
-                    will be required to make corresponding adjustments in the other parameters.
-                    For this problem, only the number of coils remains to be determined.
+                    Note the warning message on Report 1.
+                    </p>
+                    <p>
+                    While it normally doesn't make much difference where we start a search,
+                    applying a 280 pound load to a spring that was designed to support a
+                    40 pound load will (mathematically) drive that spring far below its
+                    solid condition.  The search process will generally cope with such a
+                    poor starting point, but in some cases, you may wish to save a bit of
+                    time by entering  values that are a little closer to the final solution.
                     </p>
                     
                     <p>
+                    OK, the tutorial will let Search do its thing. 
                     Look for the results on the next page.
                     <br /><br />
                     </p>
                     
                 </React.Fragment>
-            ),
-            actions: [
-                fixSymbolValue('Wire_Dia', 0.120)
-            ]
+            )
         },
         {
-            title: "Page 10 of 13",
+            title: "Page 10 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -243,17 +257,12 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Note that this design is very close to delivering 1.75 inches
-                    compressed height at 60 pounds force.
-                    <br /><br />
+                    So far so good,  OD is less than 2.0.
+                    Yes, deflection is close to 5.5 inches.
                     </p>
                     
                     <p>
-                    Next we'll make a detailed comparison with the handbook results.
-                    Click Next to see the handbook inputs entered into the appropriate ODOP:Spring variables.
-                    </p>
-                    
-                    <p>
+                    Looks fine here. It is time to move on.
                     </p>
                 </React.Fragment>
             ),
@@ -262,7 +271,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 11 of 13",
+            title: "Page 11 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -271,46 +280,106 @@ export const execute = {
                     </p>
                     
                     <p>
-                    The demo session has now imposed the values:<br />
+                    Before we take a break, let's try just one more design.<br />
                     <br />
-                    CHANGE  Wire_Dia  .1205<br />
-                    CHANGE  Coils_T  13
+                    To get started, the tutorial has already reset everything to the wide open 
+                    conditions in the initialState starting point.
                     </p>
                     <br />
                 </React.Fragment>
             ),
             actions: [
-                changeSymbolValue("Wire_Dia",0.1205),
-                changeSymbolValue("Coils_T", 13),
+                loadInitialState('Spring')
             ]
         },
         {
-            title: "Page 12 of 13",
+            title: "Page 12 of 15",
             text: (
                 <React.Fragment>
                     <p>
-                    The handbook results:<br />
-                    &nbsp; &nbsp;  solid height = 1.57 in.<br />
-                    &nbsp; &nbsp;  stress correction factor = 1.21 &nbsp; (see Report 2)<br />
-                    &nbsp; &nbsp;  stress at solid      = 104000  psi  (corrected)<br />
-                    &nbsp; &nbsp;  stress at 60 lb load =  92900  psi  (corrected)<br />
-                    &nbsp; &nbsp;  spring index = 7.3
+                    This time, let's see if we can handle a design that has both force and
+                    length specified at each of two points.
                     </p>
                     
                     <p>
-                    The results are in very good agreement.
+                    Suppose we want a spring that delivers 15 pounds force at a length
+                    of 2 inches, and 65 pounds force at a length of 1.25 inches.
+                    </p>
+                    
+                    <p>
+                    Again, the tutorial has already imposed the changes ...<br />
+                    FIX  Force_1  15<br />
+                    FIX  L_1       2<br />
+                    FIX  Force_2  65<br />
+                    FIX  L_2    1.25<br />
+                    </p>
+                    
+                    <p>
+                    Search will do its thing during the transition to the Next page.
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                fixSymbolValue('Force_1', 15.),
+                fixSymbolValue('L_1', 2.),
+                fixSymbolValue('Force_2', 65.),
+                fixSymbolValue('L_2', 1.25)
+            ]
+        },
+        {
+            title: "Page 13 of 15",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Now for a look at the results ...
+                    One would expect a bit more wire diameter to support that extra load.
+                    </p>
+                    
+                    <p>
+                    The lengths are essentially as requested.  This design is satisfactory.
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                search()
+            ]
+        },
+        {
+            title: "Page 14 of 15",
+            text: (
+                <React.Fragment>
+                    <p>
+                    This section of the tutorial has covered a lot of important ground.
+                    We have seen how constraints can express one sided goals for the
+                    design.  By manipulating the constraint levels 
+                    and establishing target values for the Dependent Variables with FIX,
+                    we set up a design problem to solve with Search.
+                    By selecting different combinations of constraints and FIXes, we can express
+                    a great variety of different spring design problems.  Take a few minutes
+                    before starting the next section of the tutorial to try a few.
+                    </p>
+                    
+                    <p>
+                    The next section of the tutorial will cover the techniques necessary
+                    to Save or print the information about a design. 
+                    Once saved, this information can be picked up for further work in a later session.
+                    
+                    After that, another section of the tutorial will introduce the
+                    techniques for selecting spring wire materials (with their associated
+                    allowable stresses) and selecting spring end types.
                     </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 13 of 13 (last page)",
+            title: "Page 15 of 15 (last page)",
             text: (
                 <React.Fragment>
-                    <p>Several more demo problems are available. 
-                    They are named DEMO1, DEMO2, ... etc. 
+                    <p>
+                    More tutorial and demo problems are available. 
+                    They are named: tutor4, tutor5, demo1, demo2, ... etc. 
                     Refer to the documentation section (on-line Help entry) covering the Tutorial 
-                    for a list of the Tutorial and DEMO topics.</p>
+                    for a list of the Tutorial and Demo topics.</p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP:Spring features, menus and reports. 

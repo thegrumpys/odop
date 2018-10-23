@@ -22,7 +22,8 @@ export function getDemoNames() {
 
 export function getTutorialNames() {
     var result = [
-        'tutor'
+        'tutor',
+        'tutor3'
     ];
 //    console.log('In getTutorialNames result=',result);
     return result;
