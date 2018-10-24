@@ -114,7 +114,6 @@ export const execute = {
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 0.9),
                 fixSymbolValue('Force_2')
-
             ]
         },
         {
