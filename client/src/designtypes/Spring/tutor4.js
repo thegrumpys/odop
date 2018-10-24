@@ -144,19 +144,19 @@ export const execute = {
                     <p>
                     In "Tutorial shorthand", the changes just imposed by the tutorial are:<br />
                     <br />
-                        CHANGE Life_Category "1,000,000 cycles; Not-Peened" &nbsp; &#60;--- request nearest cycle life category<br />
+                        CHANGE Life_Category "1 million cycles - Not Peened" &nbsp; &#60;--- request nearest cycle life category<br />
                         CHANGE  FS_CycleLife MIN  1.0<br />
                         CHANGE  OD_Free MAX  1.950 &nbsp; &#60;--- 0.050 margin for hole<br />
                         CHANGE  L_Solid MAX  1.2<br />
-                        CHANGE  L_Stroke MAX 1.0<br />
+                        CHANGE  L_Stroke MIN 1.0<br />
                         FIX  Force_1  0<br />
                         FIX  Force_2  250<br />
                     </p>
                     
                     <p>
                     Now we're set up to consider designs that will have a long cycle life.
-                    Look for warnings on Report 1.
                     The 250 pound load has given us an unreasonable start point. 
+                    Look for warnings on Report 1.
                     In this case, we'll ignore the warning.
                     Moving to the next page will execute a search.
                     </p>
@@ -174,8 +174,8 @@ export const execute = {
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
                 changeSymbolConstraint('L_Solid', MAX, 1.2),
                 saveOutputSymbolConstraints('L_Stroke'),
-                setSymbolFlag('L_Stroke', MAX, CONSTRAINED),
-                changeSymbolConstraint('L_Stroke', MAX, 1.0),
+                setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
+                changeSymbolConstraint('L_Stroke', MIN, 1.0),
                 fixSymbolValue('Force_1', 0.0),
                 fixSymbolValue('Force_2', 250.0)
             ]
@@ -345,7 +345,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Indeed, simply relaxing one constraint provided enough "room" in
+                    Indeed, simply relaxing these two constraints provided enough "room" in
                     the design so that it was possible for the search to resolve
                     violations on all the constraints.
                     </p>
