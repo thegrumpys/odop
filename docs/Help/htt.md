@@ -62,7 +62,7 @@ the scrolling necessary to accommodate screen size limitations may impact produc
 Similarly, while it is possible to use the ODOP software from a mobile device, 
 establishing initial impressions with a full size monitor, keyboard and mouse is recommended.   
 
-**Printing**
+**Printing**   
 Use the print features of the browser.
 Depending on the browser and operating system, it may be possible to
 "print" into a .PDF file.
