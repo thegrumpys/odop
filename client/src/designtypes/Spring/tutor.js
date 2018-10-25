@@ -420,10 +420,10 @@ export const execute = {
                     You are not likely to break it or wear it out !
                     </p>
                     
-                    <p>Several more tutorial sessions are planned. 
-                    They will have names like tutor1, tutor2, ... etc. 
+                    <p>More tutorial sessions are available. 
+                    They will have names like tutor3, tutor4, ... etc. 
                     Refer to the documentation section (Help entry) covering the tutorial 
-                    for a list of the Tutorial and DEMO topics.</p>
+                    for a list of the Tutorial and Demo topics.</p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP features, menus and reports. 
