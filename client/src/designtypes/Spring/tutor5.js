@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, fixSymbolValue, loadInitialState, search } from '../../store/actionCreators';
+import { loadInitialState } from '../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -28,11 +28,12 @@ export const execute = {
                     To continue with this session, just click the "Next" button as you finish
                     reading each page (step). 
                     </p>
+                    <br />
                 </React.Fragment>
             )
         },
         {
-            title: "Page 02 of 16",
+            title: "Page 02 of 09",
             text: (
                 <React.Fragment>
                     <p>
@@ -54,9 +55,9 @@ export const execute = {
                     detailed definition for each of the Calculation Inputs.  It would make the
                     tutorial too long (and boring !) to review each quantity here.
                     However, it is important to make sure that you understand that
-                    STRESS_LIM_STAT and STRESS_LIM_ENDUR are the allowable
+                    Stress_Lim_Stat and Stress_Lim_Endur are the allowable
                     stress limits for static load and endurance respectively.  The factor of
-                    safety numbers are calculated directly from STRESS_LIM_STAT and STRESS_LIM_ENDUR.
+                    safety numbers are calculated directly from Stress_Lim_Stat and Stress_Lim_Endur.
                    </p>
                 </React.Fragment>
             ),
@@ -65,7 +66,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 16",
+            title: "Page 03 of 09",
             text: (
                 <React.Fragment>
                     <p>
@@ -75,12 +76,12 @@ export const execute = {
                     
                     <ul>
                         <li>
-                        By default, the selected MATERIAL_TYPE is used to get values from 
+                        By default, the selected Material_Type is used to get values from 
                         an internal table. These values
-                        are combined with the current WIRE_DIA and cycle life conditions to
-                        calculate the values of the allowable stresses STRESS_LIM_ENDUR and
-                        STRESS_LIM_STAT.  Thus, every time the user or the search changes the
-                        value of WIRE_DIA, a new set of allowable stresses is calculated,
+                        are combined with the current Wire_Dia and the cycle life target to
+                        calculate the values of the allowable stresses Stress_Lim_Endur and
+                        Stress_Lim_Stat.  Thus, every time the user or the search changes the
+                        value of Wire_Dia, a new set of allowable stresses is calculated,
                         resulting in new factor of safety values.
                         </li>
                         <li>
@@ -90,27 +91,35 @@ export const execute = {
                         <li>
                         Finally, it is possible to directly specify the allowable stresses
                         to be used.  The later two options eliminate the dependence on
-                        WIRE_DIA.
+                        Wire_Dia.
                         </li>
                     </ul>
+                    <br /><br />
                 </React.Fragment>
             )
         },
         {
-            title: "Page 04 of 16",
+            title: "Page 04 of 09",
             text: (
                 <React.Fragment>
                     <p>
                     We will examine each of these capabilities in detail, starting with the
-                    easy, most frequently used case.
+                    default case.
                     </p>
                     
                     <p>
                     Take a moment to scroll down to the Calculation Inputs section.
                     Locate Material_Type.
                     Click on the downward pointing triangle to drop down the selection list.
+                    The on-line documentation (Help entry) on Spring Materials provides
+                    additional descriptive information on each of the entries in this table.
+                    </p>
+                    
+                    <p>
                     Observe how selecting different materials changes the values of 
                     Torsion_Modulus, Tensile, %_Tensile_Stat and %_Tensile_Endur.
+                    Observe how changes in Wire_Dia impact the values of 
+                    the allowable stresses Stress_Lim_Endur and Stress_Lim_Stat.
                     </p>
                     
                     <p>
@@ -119,11 +128,11 @@ export const execute = {
                     %_Tensile_Stat and %_Tensile_Endur are identical.
                     When a longer target life Life_Category is selected, the value of
                     %_Tensile_Endur is reduced.
-                    In summary ... by default, MATERIAL_TYPE is used
-                    to get the values of TORSION_MODULUS, TENSILE,
-                    %_TENSILE_ENDUR and %_TENSILE_STAT from the material table.  These
-                    values are combined with the current WIRE_DIA to calculate the values of
-                    the allowable stresses STRESS_LIM_ENDUR and STRESS_LIM_STAT.
+                    In summary ... by default, Material_Type is used
+                    to get the values of Torsion_Modulus, Tensile,
+                    %_Tensile_Endur and %_Tensile_Stat from the material table.  These
+                    values are combined with the current Wire_Dia to calculate the values of
+                    the allowable stresses Stress_Lim_Endur and Stress_Lim_Stat.
                     In turn, those allowable stress values are used to calculate the
                     Factor of Safety numbers that can be used as constraints on the design.
                     </p>
@@ -131,67 +140,101 @@ export const execute = {
             )
         },
         {
-            title: "Page 05 of 16",
+            title: "Page 05 of 09",
             text: (
                 <React.Fragment>
                     <p>
+                    This is a good time for a bit of experimentation.
                     </p>
                     
                     <p>
+                    Notice that currently it it not possible to change any 
+                    of the values that are determined by the materials table.
+                    Specifically, these include
+                    Torsion_Modulus, Tensile, %_Tensile_Endur, %_Tensile_Stat
+                    Stress_Lim_Endur and Stress_Lim_Stat.
+                    </p>
+                    <br /><br />
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 06 of 09",
+            text: (
+                <React.Fragment>
+                    <p>
+                    For the case where there is a desire to specify a material that is
+                    not in the material table, or to specify values that do not match those in
+                    the table, change Prop_Calc_Method to indicate that the 
+                    material table should no longer be used.
+                    Specifically, setting Prop_Calc_Method to <b>"2-Use Tensile & %_Tensile_..."</b>
+                    will allow the user to establish arbitrary values for
+                    Torsion_Modulus, Tensile, %_Tensile_Endur and %_Tensile_Stat.
+                    Wire_Dia will no longer be a factor in the calculation of allowable stresses
+                    Stress_Lim_Endur and Stress_Lim_Stat.
+                    </p>
+                
+                    <p>
+                    Please take this opportunity to change the value of 
+                    Prop_Calc_Method to "2-Use Tensile & %_Tensile_...".
+                    Experiment with changing the values listed above.
+                    Observe that Stress_Lim_Endur and Stress_Lim_Stat are now determined by the 
+                    user specified values of Tensile, %_Tensile_Endur and %_Tensile_Stat
+                    and are no longer dependent on Wire_Dia.
                     </p>
                     <br />
                 </React.Fragment>
             )
         },
         {
-            title: "Page 06 of 16",
-            text: (
-                <React.Fragment>
-                <p>
-                </p>
-                
-                <p>
-                </p>
-                <br />
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 07 of 16",
+            title: "Page 07 of 09",
             text: (
                 <React.Fragment>
                     <p>
-                    This is a good time to take a close look at existing values.
-                    You may need to scroll down to see everything.
+                    Finally, the user may directly establish values of the allowable stresses. 
+                    This is accomplished by changing the value of Prop_Calc_Method to
+                    <b>"3-Use Stress_Lim_..."</b>.
                     </p>
                     
                     <p>
-                    In the process of moving to the following page, the tutorial will impose a new value 
-                    for an input (Independent Variable) ... the Wire_Dia of our compression spring. 
-                    Take note of the current value of Rate or %_Avail_Deflect so that you can see the 
-                    impact of the change.
+                    In the case that Prop_Calc_Method is set to "3-Use Stress_Lim_..."
+                    ODOP:Spring will assume that the allowable stresses 
+                    (Stress_Lim_Endur and Stress_Lim_Stat) are directly set by the user. 
+                    There is no relationship to Wire_Dia. 
                     </p>
                     
                     <p>
-                    When you click on Next, the tutorial will set the value of Wire_Dia to 0.110 inches.
+                    Please take this opportunity to change the value of 
+                    Prop_Calc_Method to "3-Use Stress_Lim_...".
+                    Experiment with changing the values listed above.
+                    Observe that Stress_Lim_Endur and Stress_Lim_Stat are now directly determined by the 
+                    user specified values and are no longer dependent on Wire_Dia.
                     </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 08 of 16",
+            title: "Page 08 of 09",
             text: (
                 <React.Fragment>
                     <p>
-                    The tutorial has now entered a value of 0.110 inches for Wire_Dia. 
-                    In the shorthand summary that will be used in the remaining tutorial 
-                    and demo sessions, the action was:
+                    It is time to move on to a discussion of End_Types
                     </p>
                     
                     <p>
+                    Locate End_Type.
+                    Click to drop down the selection list.
+                    Make a few changes and observe the effect on
+                    the number of inactive coils.  Of course, changes in the number
+                    of active coils changes Rate and many other aspects of the spring.
                     </p>
                     
                     <p>
+                    Note the "Tapered, Closed & Ground" and "Pig-tail" end types that
+                    are common in hot-wound springs.
+                    Refer to the discussion in the on-line documentation (Help entry)
+                    on Compression Spring for information on Add_Coils@Solid and the 
+                    calculation of solid height for these end types
                     </p>
                 </React.Fragment>
             ),
@@ -199,172 +242,26 @@ export const execute = {
             ]
         },
         {
-            title: "Page 09 of 16",
+            title: "Page 09 of 09 (last page)",
             text: (
                 <React.Fragment>
                     <p>
+                    Congratulations, you've finished another section of the tutorial.
+                    You should feel confident about selecting materials and changing
+                    end types. 
+                    Take a few minutes at this point to experiment on your own. 
                     </p>
                     
                     <p>
+                    Also, look in the on-line documentation section (Help entry) titled Materials. 
                     </p>
                     
                     <p>
+                    More tutorial sessions are available. 
+                    They have names like tutor3, tutor4, ... etc. 
+                    Refer to the on-line documentation section (Help entry) covering the 
+                    tutorial for a list of the Tutorial and Demo topics.
                     </p>
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 10 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                </React.Fragment>
-            ),
-            actions: [
-            ]
-        },
-        {
-            title: "Page 11 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    <br /><br />
-                </React.Fragment>
-            ),
-            actions: [
-            ]
-        },
-        {
-            title: "Page 12 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    Now that we have expressed what we want the design to accomplish,
-                    we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
-                    Specifically, Search will find values of the free Independent Variables
-                    that cause the Constraints and FIXes to be satisfied.
-                    </p>
-
-                    <p>
-                    If the program can find a solution that satisfies all the constraints,
-                    it will display "<b>FEASIBLE</b>" in the Result section (immediately below these words).  
-                    If a satisfactory solution is found, but one or more constraints remain violated by a
-                    trivial amount, the program will display "<b>MARGINALLY FEASIBLE</b>" in the Result section.
-                    </p>
-                </React.Fragment>
-            ),
-        },
-        {
-            title: "Page 13 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    We have a solution. Please take a moment to scroll through and view the values.
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    <br /><br />
-                </React.Fragment>
-            ),
-            actions: [
-                search()
-            ]
-        },
-        {
-            title: "Page 14 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                </React.Fragment>
-            ),
-            actions: [
-            ]
-        },
-        {
-            title: "Page 15 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    We have a solution. Please take a moment to scroll through and view the values.
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <ul>
-                        <li>
-                        It is possible to set a value on any Independent Variable
-                            <ul>
-                                <li>
-                                    Dependent Variables will immediately recalculate to reflect that value.
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        <li>
-                        If constraints are violated, a Search can manipulate values of free
-                        Independent Variables in order to achieve a feasible solution
-                        (if one exists).
-                        </li>
-                        
-                        <li>
-                        It is possible to FIX the value of any Variable.
-                            <ul>
-                                <li>
-                                    FIXed Independent Variables are not altered by the Search process.
-                                </li>
-                                <li>
-                                    FIXed Dependent Variables require a Search to establish their value.
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </React.Fragment>
-            ),
-            actions: [
-                search()
-            ]
-        },
-        {
-            title: "Page 16 of 16 (last page)",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>Several more tutorial sessions are planned. 
-                    They will have names like tutor1, tutor2, ... etc. 
-                    Refer to the documentation section (Help entry) covering the tutorial 
-                    for a list of the Tutorial and DEMO topics.</p>
-                    
-                    <p>If you do not wish to continue with more demonstration problems, 
-                    you can experiment with the various ODOP features, menus and reports. 
-                    The HELP menu is a good place to start. </p>
                 </React.Fragment>
             )
         }

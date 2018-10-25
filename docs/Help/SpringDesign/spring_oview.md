@@ -439,9 +439,9 @@ L\_Extended\_End.  Other variables are impacted indirectly.
 
 More detail on how to handle end types is provided in the
 documentation sections on the specific spring types:   
-* [Compression Spring](./c_spring)   
-* [Extension Spring](./e_spring)   
-* [Torsion Spring](./t_spring)   
+* [Compression Spring](../DesignTypes/c_spring)   
+* [Extension Spring](../DesignTypes/e_spring)   
+* [Torsion Spring](../DesignTypes/t_spring)   
 
 Additional information on spring end types is available in the sources listed
 in the REFERENCES section of the documentation (above).
