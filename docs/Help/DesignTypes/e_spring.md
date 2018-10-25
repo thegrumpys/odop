@@ -1,79 +1,76 @@
 #### Extension Spring Design Type
 
-**Under Construction**   
-This page is still a work in progress !   
-
 This section presents material unique to the Extension Spring design type.
 
    
-EXTENSION SPRING NAMES   
+**EXTENSION SPRING NAMES**   
 
  The force deflection points and associated names are:   
 
              length    force        outside  inside    stress    factor of
                                     diameter diameter            safety
              ______    ______       ________ ________  ______    ________
-
+    
     free:    L_FREE_(W/ENDS)        OD_FREE  ID_FREE
-
+    
     point 1:    L_1    FORCE_1                        STRESS_1
-
+    
     point 2:    L_2    FORCE_2                        STRESS_2    FS_2
 
 
  point 1 = minimum operating load;     point 2 = maximum operating load
 
    
- Independent Variable names:
+ **Independent Variable names:**   
 
     WIRE_DIA         -  wire diameter
-
+    
     OD_FREE      -  outside diameter in the free condition
-
+    
     COILS_T      -  total number of coils, including inactive coils
-
+    
     INITIAL_TENSION  -  initial tension of extension spring (free condition)
-
+    
     END_EXTENSION    -  Length added to the spring by a straight wire
             extension between the body of the spring and
             the ends.  The value of END_EXTENSION is the sum
             for both ends of the spring.
-
+    
     FORCE_1      -  load at point 1    (minimum operating load)
-
+    
     FORCE_2      -  load at point 2    (maximum operating load)
    
- Calculation Input names  (character strings):
+**Calculation Input names**  (character strings):
 
     SPRING_TYPE      -  character string used only as label
-
+    
     MATERIAL_TYPE    -  character string that is used to determine which
             entry in the material table is used to determine
             allowable stresses when PROP_CALC_METHOD is 1.
             Otherwise is ignored.
-
+    
     ASTM/FED-SPEC    -  character string used only as a label to further
             identify the origin of material property data
-
+    
     END_TYPE         -  character string that is used to determine
             calculations for INACTIVE_COILS, HOOK_DEFLECT_ALL,
             and end dimensions.  Refer to END_CALC_METHOD.
-
+    
     CATALOG_NUMBER   -  character string that contains the catalog number of
             the most recent catalog selection.  Otherwise is
             ignored.
-   
+    
     PROCESS      -  character string used to identify the
             manufacturing process.  It is normally controlled
             by the material selected from the material table.
             Values are usually COLD_COILED or HOT_WOUND.
             Refer to discussion under HOT_FACTOR_KH.
-
+    
     MATERIAL_FILE    -  character string containing the material table name.
             It is normally established by the initialState.js file.
 
    
- Calculation Input names  (integer constants):
+**Calculation Input names**  (integer constants):
 
     PROP_CALC_METHOD -  This value controls how material properties and
             and allowable stresses are determined.
@@ -85,14 +82,14 @@ EXTENSION SPRING NAMES
             3 indicates allowable stresses are supplied directly
             by the user.
             Refer to documentation section on MATERIALS.
-   
+    
     LIFE_CATEGORY    -  This value reflects the user's input about shot
             peening and required cycle life.  It is related
             to the calculation of FS_CYCLE_LIFE.
             Refer to documentation section on CYCLE_LIFE.
 
    
- Calculation Input names  (floating point constants):
+**Calculation Input names**  (floating point constants):
 
     INACTIVE_COILS   -  number of inactive coils (depends on end type)
     DENSITY      -  wire density; weight per unit volume
@@ -113,7 +110,7 @@ EXTENSION SPRING NAMES
     L_EXTENDED_END   -  distance from body to inside of hook at other end
     HOOK_DEFLECT_ALL -  number of coils allowed for hook deflection
    
- Dependent Variable names:
+**Dependent Variable names:**   
 
     MEAN_DIA         -  mean diameter of spring coil in free condition
             (OD_free + ID_FREE)/2
@@ -129,7 +126,7 @@ EXTENSION SPRING NAMES
     L_STROKE         -  net deflection between point 1 and point 2
     WEIGHT       -  weight of spring; wire density * wire volume
     SPRING_INDEX     -  spring index;  the ratio COIL_DIA/WIRE_DIA
-   
+    
     STRESS_INITIAL   -  stress produced by initial tension
     STRESS_1         -  torsional stress at point 1
     STRESS_2         -  torsional stress at point 2
@@ -149,7 +146,7 @@ EXTENSION SPRING NAMES
             using the "modified Goodman method".  This value is
             approximate.  Refer to additional discussion in the
             CYCLE_LIFE section.
-   
+    
     STRESS_INIT_LO   -  lower limit of initial stress for proper
             manufacturability.
     STRESS_INIT_HI   -  upper limit of initial stress for proper
@@ -158,20 +155,20 @@ EXTENSION SPRING NAMES
     FS_SI_HI         -  factor of safety on upper limit of initial stress
     F_1>IT_MARGIN    -  amount by which FORCE_1 exceeds INITIAL_TENSION
    
- Other values are calculated and displayed by the REPORT menu items.  These
+**Other values** are calculated and displayed by the REPORT menu items.  These
  include:   
 
     wire_length      -  total length of wire required to manufacture the
             spring, not including any waste.
-
+    
     safe_load        -  load supported by the spring at a stress of
             STRESS_LIM_STAT
-
+    
     stress ratio     -  ratio of minimum stress to maximum stress
             (STRESS_1/STRESS_2)
-
+    
     Kw1          -  stress correction factor due to curvature.
-
+    
     torsion stress at end  - stress in hook or loop
     bending stress at end  - stress in hook or loop  (STRESS_HOOK)
 
@@ -181,59 +178,54 @@ EXTENSION SPRING NAMES
 
    
               Extension Spring Names   
-
-
+    
+    
     |<-----------  L_FREE  -------------->|   
-
+    
          |<----  L_BODY  ---->|   
-
-                                |
-       .  ____________________     .           _v_
+    
+                                                |
+       .  ____________________         .       _v_
      /'  |                    |         `\
-    |    |            |       |       OD_FREE
-     \   |            |      /
-      `._|____________________|________.'              ___
-                                ^
-                                |
-
-                 ---->|    |<---- END_EXTENSION   
-
-     -->|    |<--- L_END   
-
-                     ---->|   |<---- L_EXTENDED_END   
+    |    |                    |          |    OD_FREE
+     \   |                    |          /
+      `._|____________________|________.'      ___
+                                                ^
+                                                |
+    
+                         ---->|        |<---- END_EXTENSION   
+    ->|   |<--- L_END   
+                                  ---->|   |<---- L_EXTENDED_END   
 
                      
    
-FORCE-DEFLECTION DIAGRAMS   
-
+**FORCE-DEFLECTION DIAGRAM**   
                      
-   
-
-            |         /
-        FORCE_2 ----|------------/
-            |       /:         ODOP:Spring Names
-      F         |      / :
-            |     /  :            extension
-      O         |    /   :             spring
-            |   /    :
-      R         |      /     :
-            |     /      :
+    
+    
+                        |             /
+            FORCE_2 ----|------------/
+                        |           /:         ODOP:Spring Names
+      F                 |          / :
+                        |         /  :            extension
+      O                 |        /   :             spring
+                        |       /    :
+      R                 |      /     :
+                        |     /      :
       C     FORCE_1 ----|----/       :
-            |   /:       :
-      E         |  / :<----->:------- L_STROKE
-            | /  :       :
-        INITIAL_ _ _|/   :       :
-        TENSION |    :       :
-            |____:_______:________
-           L_FREE    :       :
-                 L_1     L_2
-               DEFLECT_1     DEFLECT_2
-
-              D E F L E C T I O N
-   
-               
-   
-Constraints unique to extension springs:
+                        |   /:       :
+      E                 |  / :<----->:------- L_STROKE
+                        | /  :       :
+            INITIAL_ _ _|/   :       :
+            TENSION     |    :       :
+                        |____:_______:________
+                   L_FREE    :       :
+                             L_1     L_2
+                       DEFLECT_1     DEFLECT_2
+    
+                          D E F L E C T I O N
+    
+**Constraints unique to extension springs:**
 
 These constraints are slightly different than the other constraints.
 Rather than having levels that are expressed as simple constants, they
@@ -331,4 +323,12 @@ in the REFERENCES section of the documentation.
 [Design Types](./)   
 [Help](../)   
 
+<!---
+Comment must be the last thing in the file.
+Eclipse MD Preview suppresses display of everything after the comment header.
+
+**Under Construction**   
+This page is still a work in progress !   
+
+-->
 
