@@ -210,6 +210,7 @@ export const execute = {
                     Observe that Stress_Lim_Endur and Stress_Lim_Stat are now directly determined by the 
                     user specified values and are no longer dependent on Wire_Dia.
                     </p>
+                    <br />
                 </React.Fragment>
             )
         },
@@ -236,10 +237,18 @@ export const execute = {
                     on Compression Spring for information on Add_Coils@Solid and the 
                     calculation of solid height for these end types
                     </p>
+                    
+                    <p>
+                    Note the "User Specified" end type.
+                    This entry is provided in order to label unusual end configurations
+                    (for example, a spring with extra dead coils or with two different end types)
+                    where the designer has provided custom values for Inactive_Coils and
+                    Add_Coils@Solid.
+                    Additional information is available in the on-line documentation for
+                    the Compression Spring design type.
+                    </p>
                 </React.Fragment>
-            ),
-            actions: [
-            ]
+            )
         },
         {
             title: "Page 09 of 09 (last page)",
