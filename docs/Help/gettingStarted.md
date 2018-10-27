@@ -1,8 +1,5 @@
 #### Getting Started   
 
-**Under Construction**   
-This page is still a work in progress !
-
  Getting started with any computer program, ODOP included, 
  is usually a matter of ...  Try it.  You'll like it !   
  
@@ -11,7 +8,10 @@ This page is still a work in progress !
  usually goes a long way.  In the worst case, you'll come away from the
  experience with a little more motivation to read more of the on-line documentation.
 
-As noted in the [Introduction](../About/Intro), OPOP currently offers three
+The remainder of this Getting Started topic will describe several screen captures 
+that refer to the ODOP main page.
+
+As noted in the [Introduction](../About/Intro), ODOP currently offers three
 design types to work with: Piston-Cylinder, Rectangular Solid and Compression Spring. 
 If you are interested in learning about capabilities, concepts, and basic
 mechanics of how to operate the program,
@@ -26,55 +26,11 @@ and then come back and follow this link:
 Note that the [Terminology](terminology) page of the on-line documentation may be 
 helpful with some of the terms utilized here.
 
-
-**Launching the program**   
-
-While it is possible to use the ODOP software from a mobile device,
-establishing initial impressions with a full size monitor, keyboard and mouse
-is recommended.   
-
-The remainder of this Getting Started topic will present several screen captures
-that refer to the ODOP main page.
-In the best of all configuration possibilities, if a wide screen monitor is in use, 
-it should be possible to configure two independent browser sessions in a 
-side-by-side configuration.
-Note that this is different than two tabs in one browser session.
-Put this Help content in one browser window such that it
-takes up roughly one third of the screen width.
-Put the ODOP main page in a separate browser window such that it takes up 
-the remaining two thirds of the screen width.
-It will then be possible to see both the screen captures in this discussion and 
-the referenced program features on the main page at the same time.
-
-Alternatively, if a wide screen monitor is not available, 
-you can operate with this Help content in one
-browser tab while the ODOP main page is in another browser tab.
-This approach will permit rapid switching from this Help content in order
-to view the corresponding part of the program user interface.
-
-Note that loading the ODOP software the first time may take 20 seconds or longer.
-This is a technical issue related to web hosting during program development.
-A production web hosting arrangement will not have this delay.
-
-In order to start the ODOP software, 
-copy and paste this address (URL):   
-
-**https://odop.herokuapp.com**
-
- into the address field of your browser.   
- 
-If you are using the side-by-side  browser configuration, paste the URL into 
-the address line of each browser.
-In each browser, follow the link to bring up the ODOP starting dialog.
-In the smaller window, click the "About" link.   
-
-![ODOP starting dialog](./png/StartDialog.png "ODOP starting dialog")
-
-&nbsp;
-
-That link will take you to the Introduction page and from there you can return 
-to this page and continue with these instructions while viewing ODOP program 
-operation in the larger window.
+If you have reached this point from the initial "About" link without previously 
+starting the program, more detail on configuring browser windows and 
+launching the ODOP program is available [here](launchODOP).
+You will need to use your browser's Back button to return to this page
+in order to continue with these instructions. 
 
 The ODOP starting dialog provides the opportunity to select a design type.
 Within each design type, you will have the opportunity to select an existing design.
@@ -82,9 +38,13 @@ At a minimum, each design type will have a default design with the name "startup
 
 &nbsp;
 
-This screen capture illustrates selecting the Solid design type 
-and its default design called startup.   
+This screen capture illustrates selecting the **Solid** design type 
+and its default design called **startup**.   
 ![Start with Rectangular Solid](./png/SelectSolid.png "Start with Rectangular Solid")
+
+&nbsp;   
+So, if you have not already selected the **Solid** design type,
+please do it now and proceed with the tour.
 
 &nbsp;
 
@@ -108,7 +68,7 @@ This screen clip illustrates how to get to the index of Help pages.
 At the upper right of the main page you see a "tab" with the name "Design:",
 an icon associated with the design type (a rectangular box in this case) and
 the name of the specific design that is currently open.
-As illustrated later in this section, Spring designs will each have 
+As illustrated later, Spring designs will each have 
 three additional tabs providing Reports.   
 ![Tab - Icon - Name](./png/TabIconName.png "Tab - Icon - Name")   
 
@@ -120,8 +80,8 @@ This area provides feedback about the solution process.
 
 &nbsp;
 
-If you hover the cursor over a heading, a tool-tip will pop up to
-provide more information regarding each item.   
+If you hover the cursor over a heading or a variable name, 
+a tool-tip will pop up to provide more information regarding each item.   
 ![Result Section ToolTip](./png/ResultSectionToolTip.png "Result Section ToolTip")   
 
 &nbsp;
@@ -130,7 +90,7 @@ There are numeric entry fields for each of the variables.
 The user can change the value of Independent Variables by positioning
 the cursor in the field and over-writing the existing value.
 Recalculation will happen immediately.
-The Dependent Variables abd Objective Function will immediately
+The Dependent Variables and Objective Function will immediately
 reflect the result of the new value for that Independent Variable.   
 ![Independent Variables](./png/Independent.png "Independent Variables")   
 
@@ -138,7 +98,7 @@ reflect the result of the new value for that Independent Variable.
 
 In order change the value of a Dependent Variable, it is necessary
 to FIX (see below) its value and then execute the Search function
-(menu Action : Search).   
+(Action : Search menu).   
 ![Dependent Variables](./png/Dependent.png "Dependent Variables")   
 
 &nbsp;
@@ -149,23 +109,24 @@ but are not subject to Constraints, FIX or manipulation by the Search process.
 
 &nbsp;
 
-This clip illustrates how a Calculation Input can expand into a table 
-that the user can select from.
+This clip illustrates how a Calculation Input with a drop-down arrow 
+can expand into a table that the user can select from.
 In this case, the user selects a material and the appropriate value of
 density is provided to the calculations.   
 ![Calculation Input Table](./png/CalcInputTable.png "Calculation Input Table")   
 
 &nbsp;
 
-Constraints are single sided (MAX or MIN) limits imposed on the 
+Constraints are single sided (Max or Min) limits imposed on the 
 selected Variable. 
 First, mark the checkbox and then enter a value in the entry field.
 The amount of constraint violation will be immediate recalculated;
 a positive value if violated or a negative value if satisfied.
 The value of the Objective Function will immediately reflect the 
 impact of a violated constraint.
-This example illustrates the 108 inch limit on Length+Girth
-and the 70 pound limit on weight.   
+This example illustrates the 108 inch Max limit on Length+Girth
+and the 70 pound Max limit on weight that is common to many
+carriers in the package shipping industry.   
 ![Constraints](./png/Constraint.png "Constraints")   
 
 &nbsp;
@@ -179,7 +140,7 @@ Note the checkboxes highlighted by the red oval in  this example.
 
 In order to FIX the value of a Dependent Variable, put a check 
 in the box immediately to the right of its value.
-This will cause both associated constraints to be check and the 
+This will cause both associated constraints to be checked and the 
 corresponding constraint entry fields to become available for input.
 Enter the FIX value into either entry field.
 Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.   

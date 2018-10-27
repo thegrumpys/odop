@@ -233,14 +233,6 @@ The demo and tutorial sessions supplied with ODOP:Spring provide detailed
 commentary on how to solve a variety of problems.
 
    
-**REFERENCES**   
-
-Refer to: [Spring Design References](./references)
-
-**RESTRICTIONS**   
-
-Refer to: [Restrictions](../../About/Legal/Restrictions)
-   
 **NAMES**   
  ODOP:Spring contains many kinds of names.  Menu item names are discussed
  individually in the later sections of the documentation.  Names for independent
@@ -447,9 +439,9 @@ L\_Extended\_End.  Other variables are impacted indirectly.
 
 More detail on how to handle end types is provided in the
 documentation sections on the specific spring types:   
-* [Compression Spring](./c_spring)   
-* [Extension Spring](./e_spring)   
-* [Torsion Spring](./t_spring)   
+* [Compression Spring](../DesignTypes/c_spring)   
+* [Extension Spring](../DesignTypes/e_spring)   
+* [Torsion Spring](../DesignTypes/t_spring)   
 
 Additional information on spring end types is available in the sources listed
 in the REFERENCES section of the documentation (above).
@@ -576,7 +568,16 @@ Please review the [Restrictions](../../About/Legal/Restrictions)
 section of documentation.  Review the material properties.  Check the
 inconsistency with another design method (hand calculator, spreadsheet
 calculation, etc.).  If the problem remains unresolved, please report it
-via the procedures for opening an issue on GitHub.
+via the procedures for opening an issue on GitHub.   
+
+
+**REFERENCES**   
+
+Refer to: [Spring Design References](./references)
+
+**RESTRICTIONS**   
+
+Refer to: [Restrictions](../../About/Legal/Restrictions)
 
 [Spring Design Topics](./)   
 [Help](../)   

@@ -1,12 +1,21 @@
 ## Design Types
 
+See [terminology](../terminology) for more detail on ODOP usage of the term "Design Types".   
+
+See [Spring Design Topics](../SpringDesign) for more detail on spring design with ODOP.   
+&nbsp;
+
+Currently available Design Types include:   
+
+* [Compression Spring](c_spring)   
 * [Piston-Cylinder](pcyl)   
 * [Rectangular Solid](r_solid)   
+&nbsp;
 
-  &nbsp; &nbsp; [Spring Design Topics](../SpringDesign)   
-  
-* [Compression Spring](c_spring)   
-* [Extension Spring  (future)](e_spring)   
-* [Torsion Spring  (future)](t_spring)   
+Planned Design Types include:   
+
+* [Extension Spring](e_spring)   
+* [Torsion Spring](t_spring)   
+&nbsp;
 
 [Help](../)

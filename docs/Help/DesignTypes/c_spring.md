@@ -1,73 +1,82 @@
 #### Compression Spring Design Type
 
-This section presents material unique to the Compression Spring design type.
+The compression spring design type is a full-featured app enabling the engineering 
+design of helical coil compression springs.
+While certainly capable of analyzing the performance of an existing spring design,
+ODOP:Spring is at its best when used to develop solutions to difficult and 
+highly constrained original design problems.
 
-COMPRESSION SPRING NAMES   
+___
+
+This section presents material unique to the Compression Spring design type.
+In conjunction with reading the material below, please be sure to review the material 
+available at [Spring Design Topics](../SpringDesign).   
+
+**COMPRESSION SPRING NAMES**   
 
  The force deflection points and associated names are:
 
              length    force        outside  inside    stress        factor of
                                     diameter diameter                safety
              ______    ______       ________ ________  ______        ________
-
+    
     free:    L_FREE                 OD_FREE  ID_FREE
-
+    
     point 1: L_1      FORCE_1                       STRESS_1
-
+    
     point 2: L_2      FORCE_2                       STRESS_2       FS_2
-
+    
     solid:   L_SOLID  FORCE_SOLID                   STRESS_SOLID   FS_SOLID
 
 
- point 1 = minimum operating load;     point 2 = maximum operating load
+ point 1 = minimum operating load &nbsp; point 2 = maximum operating load   
 
    
- Independent Variable names:
+**Independent Variable names:**   
 
     WIRE_DIA     -  wire diameter
-
+    
     OD_FREE      -  outside diameter in the free condition
-
+    
     COILS_T      -  total number of coils, including inactive coils
-
+    
     L_FREE       -  free length
-
+    
     FORCE_1      -  load at point 1  (minimum operating load)
-
+    
     FORCE_2      -  load at point 2  (maximum operating load)
    
    
- Calculation Input names  (character strings):   
+**Calculation Input names**  (character strings):   
 
     SPRING_TYPE      -  character string used only as label
-
+    
     MATERIAL_TYPE    -  character string that is used to determine which
             entry in the material table is used to determine
             allowable stresses when PROP_CALC_METHOD is 1.
             Otherwise is ignored.
-
+    
     ASTM/FED-SPEC    -  character string used only as a label to further
             identify the origin of material property data
-
+    
     END_TYPE         -  character string that is used to determine
             calculations for INACTIVE_COILS and L_SOLID & pitch.
-            Refer to documentation section on END_CALC_METHOD.
-
+    
     CATALOG_NUMBER   -  character string that contains the catalog number of
             the most recent catalog selection.  Otherwise is
             ignored.
-   
+    
     PROCESS      -  character string used to identify the
             manufacturing process.  It is normally controlled
             by the material selected from the material table.
             Values are usually COLD_COILED or HOT_WOUND.
             Refer to discussion under HOT_FACTOR_KH.
-
+    
     MATERIAL_FILE    -  character string containing the material table name.
             It is normally established by the initialState.js file.
 
    
- Calculation Input names  (integer constants):
+**Calculation Input names**  (integer constants):
 
     PROP_CALC_METHOD -  This value controls how material properties and
             and allowable stresses are determined.
@@ -79,14 +88,14 @@ COMPRESSION SPRING NAMES
             3 indicates allowable stresses are supplied directly
             by the user.
             Refer to documentation section on MATERIALS.
-   
+    
     LIFE_CATEGORY    -  This value reflects the user's input about shot
             peening and required cycle life.  It is related
             to the calculation of FS_CYCLE_LIFE.
             Refer to documentation section on CYCLE_LIFE.
 
    
- Calculation Input names  (floating point constants):
+**Calculation Input names**  (floating point constants):
 
     INACTIVE_COILS   -  number of inactive coils (depends on end type)
     ADD_COILS@SOLID  -  extra coils included in solid height calculation
@@ -101,7 +110,7 @@ COMPRESSION SPRING NAMES
     STRESS_LIM_STAT  -  allowable stress limit; static application (torsion)
 
    
- Dependent Variable names:
+**Dependent Variable names**:
 
     MEAN_DIA         -  mean diameter of spring coil in free condition
                        (OD_free + ID_FREE)/2
@@ -118,7 +127,6 @@ COMPRESSION SPRING NAMES
     ID_FREE      -  inside  diameter in free condition
     WEIGHT       -  weight of spring; wire density * wire volume
     SPRING_INDEX     -  spring index;  the ratio COIL_DIA/WIRE_DIA
-   
     FORCE_SOLID      -  force produced in solid condition
     STRESS_1         -  torsional stress at point 1
     STRESS_2         -  torsional stress at point 2
@@ -134,7 +142,6 @@ COMPRESSION SPRING NAMES
             endurance stress (STRESS_LIM_ENDUR) to include
             fatigue considerations.  Refer to additional
             discussion in the CYCLE_LIFE section.
-   
     CYCLE_LIFE       -  expected cycle life based on a calculation
             using the "modified Goodman method".  This value is
             approximate.  Refer to additional discussion in the
@@ -142,36 +149,36 @@ COMPRESSION SPRING NAMES
     %_AVAIL_DEFLECT  -  the percentage of available deflection consumed at
             load point 2.
 
-   
- Other values are calculated and displayed by the REPORT menu items.  These
- include:
+**Other Values**   
+
+Other values are calculated and displayed by the REPORT menu items. 
+These include:
 
     wire length      -  total length of wire required to manufacture the
             spring, not including any waste.
-
+    
     safe load        -  The load supported by the spring in the solid
             condition or at a stress equal to the
             STRESS_LIM_STAT value, whichever is lower.
-
+    
     pitch        -  coil to coil spacing in the free state
-
+    
     weight       -  weight of spring including a term due to
             free length
-
+    
     buckling         -  indication of tendency to buckle given the current
             design and loading conditions.
-   
+    
     stress ratio     -  ratio of minimum stress to maximum stress
             (STRESS_1/STRESS_2)
-
+    
     Kw1, Kw2         -  stress correction factors due to curvature.
-
+    
     helix angle      -  angle, in degrees, of the spring helix relative
             to a perpendicular to the spring axis
 
 
-   
-FORCE-DEFLECTION DIAGRAMS   
+**COMPRESSION SPRING FORCE-DEFLECTION DIAGRAM**   
 
     FORCE_SOLID -|---------------/.
                  |              / .
@@ -192,12 +199,12 @@ FORCE-DEFLECTION DIAGRAMS
             L_FREE     :       :  L_SOLID
                       L_1     L_2
                  DEFLECT_1    DEFLECT_2
-
+     
                  D E F L E C T I O N
 
+&nbsp;
 
-
-Constraints unique to compression springs:   
+**Constraints unique to compression springs:**   
 
 SLENDERNESS is a compression spring's ratio of free length (L\_FREE) to
 mean coil diameter (COIL\_DIA).  If this ratio exceeds 4 for a
@@ -235,7 +242,7 @@ These end types are represented by the Calculation Input END\_TYPE which
 for compression springs has the following possible values:
 
           Compression 
-
+    
     1     OPEN    
     2     OPEN&GROUND   
     3     CLOSED   

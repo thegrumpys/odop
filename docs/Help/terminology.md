@@ -65,7 +65,11 @@ Minimum or Maximum constraint checkbox and enter a value for the desired
 constraint level in the corresponding entry field.
 
 A [SEARCH](search) operation is required to establish appropriate values of the
-(not FIXed) Independent Variables to meet the specified constraint levels.
+free (not FIXed) Independent Variables to meet the specified constraint levels.
+In order to save time and provide more predictable operation,
+ODOP will stop the search process if it gets very close to a feasible design 
+but still violates one or more constraints by a fraction of a percent. 
+In this case, the design is referred to as "marginally feasible".
 
 **CONSTRAINT VIOLATIONS**   
 A constraint violation represents the difference between the current
@@ -128,7 +132,7 @@ It is possible to store a series of text strings with a design in order
 to carry descriptive information. 
 The File : Properties menu is used to establish a set of label - value 
 pairs where the text of the value is set by the user.
-The number of labels and the text of the label is established in the design type 
+The number of labels and the text of the label are established in the design type 
 source code in the initialState.js file.
 
 **EQUATION SETS**   

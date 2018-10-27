@@ -334,8 +334,7 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    The tutorial has imposed:<br /><br />
-                    FIX L_Stroke 1.725.0
+                    The tutorial has imposed: FIX L_Stroke 1.725
                     </p>
                     
                     <p>
@@ -421,10 +420,12 @@ export const execute = {
                     You are not likely to break it or wear it out !
                     </p>
                     
-                    <p>Several more tutorial sessions are planned. 
-                    They will have names like tutor1, tutor2, ... etc. 
-                    Refer to the documentation section (Help entry) covering the tutorial 
-                    for a list of the Tutorial and DEMO topics.</p>
+                    <p>
+                    More tutorial sessions are available. 
+                    They have names like tutor3, tutor4, ... etc. 
+                    Refer to the on-line documentation section (Help entry) covering the 
+                    tutorial for a list of the Tutorial and Demo topics.
+                    </p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP features, menus and reports. 

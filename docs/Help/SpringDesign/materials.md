@@ -6,7 +6,7 @@ Spring wire and bar materials available in the default material table supplied w
 include:
 
       Common Name    ASTM     FED_SPEC    Notes
-
+    
     HARD_DRAWN_WIRE  A227                Class II
     MUSIC_WIRE       A228     QQW-470
     OIL_TEMPERED_MB  A229     QQW-428    Class II
@@ -48,7 +48,7 @@ By default, ODOP:Spring gets material property data from the materials table.
 Alternate material tables may be provided to contain material
 property values that match locally available materials or individual
 experience and preferences. 
-Thus the currently active materials table may
+Thus, the currently active materials table may
 not match the default table described above. 
 For additional information, refer to:
 * [Restrictions](../../About/Legal/Restrictions)
@@ -63,9 +63,8 @@ In general, the user may ignore these details and use
 the defaults built into the program. 
 Establish material property values simply by selecting a Material\_Type. 
 In the case that more control of material property data entering 
-the calculations is desired, the details provided in 
-[Prop_Calc_Method](./advancedSpringOperations) and 
-[Materials](./materials) may be useful. 
+the calculations is desired, the details provided below and in 
+[Prop_Calc_Method](./advancedSpringOperations) may be useful. 
 
 Examples of these procedures are presented in tutorial section TUTOR5.
    
@@ -81,15 +80,11 @@ and %\_Tensile\_Endur.
 To use a material that is not in the material table, or to use
 material property values that are different than those contained in the
 table, it is necessary to select an alternate setting for Prop\_Calc\_Method. 
-After this is done, enter
-any new values for Torsion\_Modulus, Tensile, %\_Tensile\_Stat or
-%\_Tensile\_Endur.  These new values will be used calculate the allowable
-stresses; Stress\_Lim\_Stat and Stress\_Lim\_Endur.
-   
+
 ODOP:Spring will treat material properties in one of three different ways
 depending on the value of the constant Prop\_Calc\_Method.
 
-If Prop\_Calc\_Method has a value of 1 - Use values from material table
+If Prop\_Calc\_Method has a value of **1 - Use values from material table**
 (the normal default), then the
 material properties are selected and allowable stresses calculated as
 previously described.  Specifically, if Prop\_Calc\_Method has a value of 1,
@@ -97,21 +92,22 @@ ODOP:Spring will calculate the allowable stresses as a function of Wire\_Dia.
 A log-linear interpolation scheme will use the values of Wire\_Dia, plus the
 table supplied values of tensile at 0.010, tensile at 0.400,
 %\_Tensile\_Stat, and %\_Tensile\_Endur to calculate new values for Tensile,
-Stress\_Lim\_Stat and Stress\_Lim\_Endur at each step in the SEARCH process.
+Stress\_Lim\_Stat and Stress\_Lim\_Endur at each step in the Search process.
 This insures that the allowable stresses used in the factor of safety
-calculations exactly match the trial values of Wire\_Dia selected by SEARCH.
+calculations exactly match the trial values of Wire\_Dia selected by Search.
    
-If Prop\_Calc\_Method has a value of 2 - Specify Tensile, %\_Tensile_Stat & %\_Tensile_Endur, 
+If Prop\_Calc\_Method has a value of **2 - Use Tensile & %_Tensile_...**, 
 the user supplied values of Tensile, %\_Tensile\_Stat and
 %\_Tensile\_Endur are used to calculate the allowable stresses
 Stress\_Lim\_Stat and Stress\_Lim\_Endur.
 
-If Prop\_Calc\_Method is set to a value of 3 - Specify Stress\_Lim\_Stat & Stress\_Lim\_Endur, 
+If Prop\_Calc\_Method is set to a value of **3 - Use Stress_Lim_...**, 
 then ODOP:Spring will not
 modify the values of Stress\_Lim\_Stat and Stress\_Lim\_Endur in any way.
-These values will remain as established in the initial start point (startup) or as set by
-the user on the main page.  The values of Material\_Type, Tensile,
-%\_Tensile\_Stat and %\_Tensile\_Endur will be ignored.
+These values will remain as established in the initial start point (startup) 
+or as set by the user on the main page. 
+The values of Material\_Type, Tensile, %\_Tensile\_Stat and %\_Tensile\_Endur 
+will be ignored.
 
 In most cases, the user does not need to be concerned with these details.
 They are necessary only to use material properties or allowable stresses
@@ -120,11 +116,12 @@ that are different from those determined by the materials table.
 The following example illustrates how to establish a value of
 Torsion\_Modulus that is different from the value in the material table.
 Stress\_Lim\_Stat and Stress\_Lim\_Endur will continue to be based on the
-current values of %\_Tensile\_Stat and %\_Tensile\_Endur whether established by
-the user or carried over from the values established in the materials table
-or startup.  The order in which these changes are entered is significant.
+current values of Tensile plus
+%\_Tensile\_Stat and %\_Tensile\_Endur whether established by the user or 
+carried over from the values established in the materials table or startup. 
+The order in which these changes are entered is significant.
 
-    CHANGE  Prop_Calc_Method  2 Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
+    CHANGE  Prop_Calc_Method  2 - Use Tensile & %_Tensile_...
     CHANGE  Torsion_Modulus  xxxxxxxx
    
 The same process applies to changing values for %\_Tensile\_Stat and %\_Tensile\_Endur.
@@ -133,25 +130,25 @@ The following example illustrates how to establish a value of
 %\_Tensile\_Stat that is different from the value in the material table.
 Stress\_Lim\_Stat and Stress\_Lim\_Endur will continue to be based on the new
 value of %\_Tensile\_Stat and existing value of %\_Tensile\_Endur.  The order
-in which these menu items are entered is significant.
+in which these changes are entered is significant.
 
-    CHANGE  Prop_Calc_Method  2 Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
+    CHANGE  Prop_Calc_Method  2 - Use Tensile & %_Tensile_...
     CHANGE  %_Tensile_STAT  xxxxxxxx
 
    
  The following example illustrates how to establish values of
- Torsion\_Modulus, Stress\_Lim\_Stat and Stress\_Lim\_Endur.  There will be no
- dependence on the Wire\_Dia or any values from the materials table.  The
- order in which these menu items are entered is significant.
+ Torsion\_Modulus, Stress\_Lim\_Stat and Stress\_Lim\_Endur. 
+ There will be no  dependence on the Wire\_Dia or any values from the materials table. 
+ The  order in which these changes are entered is significant.
 
-    CHANGE  Prop_Calc_Method  3 Specify Stress\_Lim\_Stat & Stress\_Lim\_Endur
+    CHANGE  Prop_Calc_Method  3 - Use Stress_Lim_...
     CHANGE  Torsion_Modulus   xxxxxxxx
     CHANGE  Stress_Lim_Stat   yyyyyy
     CHANGE  Stress_Lim_Endur  zzzzzz
 
    
-The File : Save menu item will capture the complete status of the design including
-the material property information.  After using the File : Open... menu item to read a
+The **File : Save** menu item will capture the complete status of the design including
+the material property information.  After using the **File : Open...** menu item to read a
 previously saved design, the complete status of the design will be restored.
 
 Additional information on controlling the way material property data is

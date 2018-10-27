@@ -453,7 +453,7 @@ export function report(report_name, prefs, p, x, labels) {
                                 <td>Stress Ratio</td>
                                 <td>=</td>
                                 <td>{(x[o.Stress_1].value / x[o.Stress_2].value).toFixed(3)}</td>
-                                <td>{x[o.Stress_1].units}</td>
+                                <td>{x[o.Spring_Index].units}</td>
                             </tr>
                         </tbody>
                     </table>
