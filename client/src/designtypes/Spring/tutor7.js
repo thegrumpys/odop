@@ -8,9 +8,11 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    This section of the tutorial will introduce the concept of optimization
-                    and use of the SEEK command to find a design of minimum weight (material
-                    volume).  As a bonus, this section will also cover the use of the
+                    This section of the tutorial will introduce the concept of optimization.
+                    The ODOP Seek feature (<b>Action : Seek</b> menu) will be used to find 
+                    a design optimized for of minimum weight (material volume) and again
+                    to find a design optimized to produce maximum force within constraints. 
+                    As a bonus, this section will also cover the use of the
                     ODOP internal variables and the <b>File : Preferences</b> menu item.
                     </p>
                     
@@ -31,7 +33,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 16",
+            title: "Page 02 of 12",
             text: (
                 <React.Fragment>
                     <p>
@@ -39,7 +41,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    First, the subject of optimization ...
+                    First, a few words on the subject of optimization ...
                     </p>
 
                     <p>
@@ -79,7 +81,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 16",
+            title: "Page 03 of 12",
             text: (
                 <React.Fragment>
                     <p>
@@ -103,6 +105,12 @@ export const execute = {
                     CHANGE  Stress_Lim_Stat  80000<br />
                     CHANGE  FS_2  MIN  1.0  &nbsp;  &#60;--- more details on next page<br />
                     </p>
+                    
+                    <p>
+                    Temporary: (remove after loading from Demo rather than initialState)
+                    <br />
+                    CHANGE %_Avail_Deflect MAX 98.0
+                    </p>
                 </React.Fragment>
             ),
             actions: [
@@ -115,15 +123,18 @@ export const execute = {
                 changeSymbolValue("Stress_Lim_Stat", 80000.0),
                 saveOutputSymbolConstraints('FS_2'),
                 setSymbolFlag('FS_2', MIN, CONSTRAINED),
-                changeSymbolConstraint('FS_2', MIN, 1.0)
+                changeSymbolConstraint('FS_2', MIN, 1.0),
+                saveOutputSymbolConstraints('%_Avail_Deflect'),
+                setSymbolFlag('%_Avail_Deflect', MAX, CONSTRAINED),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.0)
                 ]
         },
         {
-            title: "Page 04 of 16",
+            title: "Page 04 of 12",
             text: (
                 <React.Fragment>
                     <p>
-                    If the use of PROP_CALC_METHOD seems a bit unfamiliar, you may wish to
+                    If the use of Prop_Calc_Method seems a bit unfamiliar, you may wish to
                     review the on-line documentation sections (HELP entries) on Names, Materials, 
                     and Advanced Spring Operations. 
                     Also, an earlier tutorial section (tutor5) and one of the demo problems (demo4)
@@ -131,7 +142,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Changing FS_2 MIN to be 1.0 causes the value of STRESS_LIM_STAT
+                    Changing FS_2 MIN to be 1.0 causes the value of Stress_Lim_Stat
                     (80,000 PSI) to apply at point 2.
                     There will be no additional margin in the factor of safety.
                     </p>
@@ -150,7 +161,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 05 of 16",
+            title: "Page 05 of 12",
             text: (
                 <React.Fragment>
                     <p>
@@ -180,7 +191,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 06 of 16",
+            title: "Page 06 of 12",
             text: (
                 <React.Fragment>
                 <p>
@@ -195,7 +206,7 @@ export const execute = {
                 In spring design, a common
                 requirement is to find the spring of least weight that satisfies a
                 specific set of requirements.  
-                In other situations the designer may need to determine
+                In other situations, the designer may need to determine
                 the greatest load, greatest factor of safety or lowest spring rate that
                 may be produced within the space constraints of a specific outside
                 diameter and solid height.
@@ -214,16 +225,25 @@ export const execute = {
             )
         },
         {
-            title: "Page 07 of 16",
+            title: "Page 07 of 12",
             text: (
                 <React.Fragment>
                     <p>
+                    We have a solution.
+                    While not far away from feasible, this solution "bends" the constraints just a bit
+                    in order to get a better (lower) value of weight.
                     </p>
                     
                     <p>
+                    Note that we achieved something very close to the desired 80,000 PSI at point 2.
                     </p>
                     
                     <p>
+                    If you previously saved the starting point (tutor7StartPoint) into the Design Library, 
+                    you can now set up a second design session in another browser window,
+                    retrieve that optimization starting point and then arrange a side-by-side 
+                    comparison between the current design and the one that that existed before 
+                    minimizing weight.
                     </p>
                     <br />
                 </React.Fragment>
@@ -233,171 +253,130 @@ export const execute = {
                 ]
         },
         {
-            title: "Page 08 of 16",
+            title: "Page 08 of 12",
             text: (
                 <React.Fragment>
                     <p>
-                    Stop !
+                    Next we'll use the Seek feature to find a design that supports the
+                    greatest possible load within specific limits on outside diameter and
+                    solid height.
                     </p>
                     
                     <p>
+                    Moving to the next page will reestablish the initialState
+                    for the ODOP <b>Compression Spring</b> design model
+                    and immediately add new constraints on diameter, solid height and deflection.
                     </p>
                     
                     <p>
-                    </p>
-                </React.Fragment>
-            ),
-            actions: [
-            ]
-        },
-        {
-            title: "Page 09 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    <br />
                     </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 10 of 16",
+            title: "Page 09 of 12",
             text: (
                 <React.Fragment>
                     <p>
+                    In "Tutorial Speak" those changes are:<br />
+                    <br />
+                    CHANGE  OD_Free MAX  1.5<br />
+                    CHANGE  L_Solid MAX  1.5<br />
+                    CHANGE  L_Stroke MIN 1.0<br />
+                    FIX  Force_1 0
                     </p>
                     
                     <p>
+                    Temporary: (remove after loading from Demo rather than initialState)
+                    <br />
+                    CHANGE %_Avail_Deflect MAX 98.0
                     </p>
                     
                     <p>
+                    Even after the changes, this design is feasible.
+                    There is no need to run a new search to insure that at
+                    least one feasible design is available.
+                    Next, we'll ask Seek (<b>Action : Seek</b> menu) to 
+                    find a design that maximizes force at point 2.
                     </p>
                 </React.Fragment>
             ),
             actions: [
+                loadInitialState('Spring'),
+                saveOutputSymbolConstraints('OD_Free'),
+                setSymbolFlag('OD_Free', MAX, CONSTRAINED),
+                changeSymbolConstraint('OD_Free', MAX, 1.5),
+                saveOutputSymbolConstraints('L_Solid'),
+                setSymbolFlag('L_Solid', MAX, CONSTRAINED),
+                changeSymbolConstraint('L_Solid', MAX, 1.5),
+                saveOutputSymbolConstraints('L_Stroke'),
+                setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
+                changeSymbolConstraint('L_Stroke', MIN, 1.0),
+                fixSymbolValue('Force_1', 0.0),
+                saveOutputSymbolConstraints('%_Avail_Deflect'),
+                setSymbolFlag('%_Avail_Deflect', MAX, CONSTRAINED),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.0)
             ]
         },
         {
-            title: "Page 11 of 16",
+            title: "Page 10 of 12",
             text: (
                 <React.Fragment>
                     <p>
+                    Take a moment to browse through the results that Seek MAX Force_2 produced.
                     </p>
                     
                     <p>
+                    This completes our overview of the SpringSys SEEK command.
+                    </p>
+                    
+                    <p>
+                    Onward to the subject of internal variables ...
                     </p>
                     <br /><br />
                 </React.Fragment>
             ),
             actions: [
+                seek("Force_2", MAX)
             ]
         },
         {
-            title: "Page 12 of 16",
+            title: "Page 11 of 12",
             text: (
                 <React.Fragment>
                     <p>
-                    </p>
-
-                    <p>
-                    </p>
-                </React.Fragment>
-            ),
-        },
-        {
-            title: "Page 13 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
+                    ODOP contains a number of quantities that you can think of as "internal
+                    variables".  They are variables and switches that are used to
+                    control the operation of the program.
+                    These quantities are not specifically related to spring design.
                     </p>
                     
                     <p>
+                    Go to the <b>File : Preferences</b> menu to see the list.
                     </p>
                     
                     <p>
+                    Many of the Preferances quantities are related to control of the search
+                    process.  Others are weighting factors that have some influence on
+                    search results.
+                    Refer to the on-line documentation section (Help entry) for Search
+                    for additional details.
                     </p>
                     <br /><br />
                 </React.Fragment>
-            ),
-            actions: [
-            ]
+            )
         },
         {
-            title: "Page 14 of 16",
+            title: "Page 12 of 12 (last page)",
             text: (
                 <React.Fragment>
                     <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                </React.Fragment>
-            ),
-            actions: [
-            ]
-        },
-        {
-            title: "Page 15 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    We have a solution. Please take a moment to scroll through and view the values.
-                    </p>
-                    
-                    <p>
-                    This session has touched on a few of the most basic concepts of ODOP operation.
-                    </p>
-                    
-                    <ul>
-                        <li>
-                        It is possible to set a value on any Independent Variable
-                            <ul>
-                                <li>
-                                    Dependent Variables will immediately recalculate to reflect that value.
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        <li>
-                        If constraints are violated, a Search can manipulate values of free
-                        Independent Variables in order to achieve a feasible solution
-                        (if one exists).
-                        </li>
-                        
-                        <li>
-                        It is possible to FIX the value of any Variable.
-                            <ul>
-                                <li>
-                                    FIXed Independent Variables are not altered by the Search process.
-                                </li>
-                                <li>
-                                    FIXed Dependent Variables require a Search to establish their value.
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </React.Fragment>
-            ),
-            actions: [
-            ]
-        },
-        {
-            title: "Page 16 of 16 (last page)",
-            text: (
-                <React.Fragment>
-                    <p>
+                    This completes our overview of the ODOP Seek feature
+                    and a quick look at the internal variables found in the 
+                    <b>File : Preferences</b> menu item.
+                    Additional examples of  Seek  MIN  Weight  are presented in the
+                    TODO: demoxxx example problem. 
+                    Use the <b>Help Demo...</b> menu to find that demo session.
                     </p>
                     
                     <p>
