@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { changeLabelsValue } from '../../store/actionCreators';
 
 class FileProperties extends React.Component {
+
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);

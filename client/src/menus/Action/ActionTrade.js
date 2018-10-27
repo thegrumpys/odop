@@ -10,6 +10,7 @@ import { changeSymbolConstraint,
     search } from '../../store/actionCreators';
     
 class ActionTrade extends React.Component {
+
     constructor(props) {
         super(props);
         

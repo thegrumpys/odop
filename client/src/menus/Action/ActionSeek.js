@@ -5,6 +5,7 @@ import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek } from '../../store/actionCreators';
 
 class ActionSeek extends React.Component {
+
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);

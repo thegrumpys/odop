@@ -6,6 +6,7 @@ import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 
 class FileSave extends React.Component {
+
     constructor(props) {
         super(props);
         this.onSave = this.onSave.bind(this);

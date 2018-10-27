@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { changeSymbolValue } from '../../store/actionCreators';
 
 class ActionSelectSize extends React.Component {
+
     constructor(props) {
 //        console.log('In ActionSelectSize.constructor props=',props);
         super(props);

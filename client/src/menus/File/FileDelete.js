@@ -7,6 +7,7 @@ import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 
 class FileDelete extends React.Component {
+
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);

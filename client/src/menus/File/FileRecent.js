@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from
 import { connect } from 'react-redux';
 
 class FileRecent extends React.Component {
+
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
