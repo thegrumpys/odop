@@ -10,11 +10,11 @@ export function getExecuteNames() {
 export function getDemoNames() {
     var result = [
         'demo',
+        'longdemo',
         'demo1',
         'demo2',
         'demo3',
-        'demo5',
-        'longdemo'
+        'demo5'
     ];
 //    console.log('In getDemoNames result=',result);
     return result;
