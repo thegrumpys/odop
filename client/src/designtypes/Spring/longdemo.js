@@ -201,15 +201,22 @@ export const execute = {
                     <p>
                     As a general rule, in the first approach to a new problem, 
                     we let the calculations use an arbitrary (non-standard) wire diameter. 
-                    Now we'll use the ODOP SELECT SIZE feature 
-                    (<b>Action : Select Size...</b> menu item)
+                    As a last step, we select a standard wire diameter,
+                    put it in FIXed status and then execute a Search to make any necessary 
+                    adjustments in the remaining free Independent Variables.
+                    </p>
+                    
+                    <p>
+                    Now it is time for a bit of audience participation.
+                    Since the ODOP demo feature is not yet capable of directly controlling menus,
+                    you need to go to the <b>Action : Select Size...</b> menu item
                     to chose the nearest standard wire diameter.
                     <br /><br />
-                    SELECT  Wire_Dia<br />
+                    In Demo / Tutorial Speak:<br />
+                    Select  Wire_Dia  0.135<br />
                     <br />
-                    Wait! until the SELECT SIZE feature is implemented, 
-                    it will be necessary to use a FIX to impose the correct value of Wire_Dia.
-                    Look for the new value of Wire_Dia on the next page.
+                    Please confirm that Wire_Dia is FIXed at 0.135 and then click Next 
+                    to move to the next page.
                     </p>
                 </React.Fragment>
             )
@@ -235,7 +242,6 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                fixSymbolValue('Wire_Dia', 0.135)
             ]
         },
         {
@@ -275,16 +281,17 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Finally, we'll use the SELECT CATALOG feature 
+                    Finally, we'll use the Select Catalog feature 
                     (<b>Action : Select Catalog...</b> menu item) 
                     to determine if a similar design is available in the built-in catalog. 
                     We'll chose the design that is closest to the current (custom) design, 
                     then evaluate it.
+                    Again, the demo session will need your participation.
                     <br /><br />
-                    SELECT  Catalog
+                    In Demo / Tutorial Speak:<br />
+                    Select  Catalog
                     </p>
                     Oops !  this will have to wait until the Select Catalog feature is implemented.
-                    <br />
                 </React.Fragment>
             )
         },
@@ -293,13 +300,13 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>Several more demo problems are available. 
-                    They are named DEMO1, DEMO2, ... etc. 
-                    Refer to the documentation section (Help entry) covering the Tutorial 
-                    for a list of the Tutorial and DEMO topics.</p>
+                    They are named demo1, demo2, ... etc. 
+                    Refer to the on-line documentation section (Help entry) covering the Tutorial 
+                    for a list of the Tutorial and Demo topics.</p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP:Spring features, menus and reports. 
-                    The HELP menu is a good place to start. </p>
+                    The Help menu is a good place to start. </p>
                     <br />
                 </React.Fragment>
             )
