@@ -184,26 +184,29 @@ export const execute = {
                     <p>
                     The handbook solution did a bit of hand waving and used  0.125 inch
                     for wire diameter.
-                    <br />
-                    Let's see what ODOP:Spring says is a standard size for wire diameter ...<br />
-                    <br />
-                    select wire<br />
-                    1<br />
+                    Let's see what ODOP:Spring says is a standard size for wire diameter ...
                     </p>
+                    
                     <p>
-                    Oops ! That feature is not implemented yet.
-                    We will have to settle for: <br />
-                    FIX Wire_Dia 0.125
+                    Now it is time for a bit of audience participation.
+                    Since the ODOP demo feature is not yet capable of directly controlling menus,
+                    you need to go to the <b>Action : Select Size...</b> menu item
+                    to chose the nearest standard wire diameter.
                     </p>
+                    
                     <p>
-                    That value is now in place.
+                    In Demo / Tutorial Speak:<br />
+                    SELECT  Wire_Dia  0.125
+                    </p>
+                    
+                    <p>
+                    Please confirm that Wire_Dia is FIXed at 0.125 inch. 
                     We will need to Search one more time to bring all the numbers into alignment.
                     That Search will happen when you click the Next button.
                     </p>
                 </React.Fragment>
             ),
             actions: [
-                fixSymbolValue('Wire_Dia', 0.125),
             ]
         },
         {
@@ -259,9 +262,10 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     We can quickly confirm this notion by setting FORCE_2 to the handbook's value.
-                    Basically, <br />
+                    Basically, 
+                    <br /><br />
                     CHANGE  Force_2  75.1
-                    <br />
+                    <br /><br />
                     So, now that the new value for Force_2 is in place,
                     the value of STRESS_2 is a reasonable match for the corresponding
                     stress value in the handbook example.
