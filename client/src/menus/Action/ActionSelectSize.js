@@ -52,7 +52,6 @@ class ActionSelectSize extends React.Component {
         else // if (sizes.length == 3)
             size = sizes[1]; // Default to middle size
         this.setState({
-            modal: false,
             types: types,
             type: type,
             sizes: sizes,
@@ -62,8 +61,38 @@ class ActionSelectSize extends React.Component {
 
     toggle() {
 //        console.log('In ActionSelectSize.toggle');
+        var { getSizeTypes, getSizes } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeTypes & getSizes
+        var types = getSizeTypes();
+        var type;
+        if (types.length > 0)
+            type = types[0]; // Default to first type
+        // Loop to create p and x from symbol_table
+        var p = [];
+        this.props.symbol_table.forEach((element) => {
+            if (element.input) {
+                p.push(element.value);
+            }
+        });
+        var x = [];
+        this.props.symbol_table.forEach((element) => {
+            if (!element.input) {
+                x.push(element.value);
+            }
+        });
+        var sizes = getSizes(type, p, x);
+        var size;
+        if (sizes.length === 1)
+            size = sizes[0]; // Default to first size
+        else if (sizes.length === 2)
+            size = sizes[1]; // Default to middle size
+        else // if (sizes.length == 3)
+            size = sizes[1]; // Default to middle size
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
+            types: types,
+            type: type,
+            sizes: sizes,
+            size: size
         });
     }
 
