@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../store/actionCreators';
 import { MAX, CONSTRAINED } from '../../store/actionTypes';
 export const execute = {
     steps: [
@@ -22,6 +22,7 @@ export const execute = {
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState.
+                    for the ODOP <b>Compression Spring</b> design type.
                     </p>
                     
                     <p>
@@ -61,7 +62,9 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState('Spring')
+                loadInitialState('Spring'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.)
             ]
         },
         {
@@ -129,8 +132,8 @@ export const execute = {
 
                     <p>
                     The search will take place during the transition to the Next page.
-                    <br />
                     </p>
+                    <br />
                 </React.Fragment>
             )
         },
@@ -183,7 +186,7 @@ export const execute = {
                     <p>
                     Once that you've made it this far through the tutorial, you know
                     enough to be really dangerous.  Most spring design can be accomplished
-                    with the commands that have been covered already.  Let's run through
+                    with the capabilities that have been covered already.  Let's run through
                     one quick example that combines a few FIXes and a few modified
                     constraint levels, then turn you loose for some more practice.
                     </p>
@@ -288,7 +291,9 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState('Spring')
+                loadInitialState('Spring'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.)
             ]
         },
         {
@@ -337,6 +342,7 @@ export const execute = {
                     <p>
                     The lengths are essentially as requested.  This design is satisfactory.
                     </p>
+                    <br />
                 </React.Fragment>
             ),
             actions: [

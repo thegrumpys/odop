@@ -1,5 +1,6 @@
 import React from 'react';
-import { loadInitialState } from '../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, loadInitialState } from '../../store/actionCreators';
+import { MAX } from '../../store/actionTypes';
 export const execute = {
     steps: [
         {
@@ -21,7 +22,7 @@ export const execute = {
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState
-                    for the ODOP <b>Compression Spring</b> design model.
+                    for the ODOP <b>Compression Spring</b> design type.
                     </p>
                     
                     <p>
@@ -62,7 +63,9 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState('Spring')
+                loadInitialState('Spring'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.)
             ]
         },
         {
@@ -74,12 +77,12 @@ export const execute = {
                     There are three different capabilities:
                     </p>
                     
-                    <ul>
+                    <ol>
                         <li>
                         By default, the selected Material_Type is used to get values from 
                         an internal table. These values
                         are combined with the current Wire_Dia and the cycle life target to
-                        calculate the values of the allowable stresses Stress_Lim_Endur and
+                        calculate the values of the allowable stresses: Stress_Lim_Endur and
                         Stress_Lim_Stat.  Thus, every time the user or the search changes the
                         value of Wire_Dia, a new set of allowable stresses is calculated,
                         resulting in new factor of safety values.
@@ -89,11 +92,12 @@ export const execute = {
                         or to use values that are different than those in the table.
                         </li>
                         <li>
-                        Finally, it is possible to directly specify the allowable stresses
-                        to be used.  The later two options eliminate the dependence on
-                        Wire_Dia.
+                        It is possible to directly specify the allowable stresses to be used. 
                         </li>
-                    </ul>
+                    </ol>
+                    <p>
+                    The later two options eliminate the dependence on Wire_Dia.
+                    </p>
                     <br /><br />
                 </React.Fragment>
             )
@@ -235,7 +239,7 @@ export const execute = {
                     are common in hot-wound springs.
                     Refer to the discussion in the on-line documentation (Help entry)
                     on Compression Spring for information on Add_Coils@Solid and the 
-                    calculation of solid height for these end types
+                    calculation of solid height for these end types.
                     </p>
                     
                     <p>

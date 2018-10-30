@@ -1,5 +1,6 @@
 import React from 'react';
-import { changeSymbolValue, fixSymbolValue, loadInitialState, search } from '../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, search } from '../../store/actionCreators';
+import { MAX } from '../../store/actionTypes';
 export const execute = {
     steps: [
         {
@@ -27,7 +28,7 @@ export const execute = {
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState
-                    for the ODOP <b>Compression Spring</b> design model.
+                    for the ODOP <b>Compression Spring</b> design type.
                     </p>
                     
                     <p>
@@ -61,7 +62,9 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState('Spring')
+                loadInitialState('Spring'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.)
             ]
         },
         {
@@ -271,7 +274,7 @@ export const execute = {
                     <p>
                     By having Wire_Dia and Force_2 in FIXed status, the search will be able to adjust
                     only the values of OD_Free, Wire_Dia, L_Free and Coils_T to find a design that does not 
-                    exceed the 90 per cent maximum on %_Avail_Deflect.
+                    exceed the 98 per cent maximum on %_Avail_Deflect.
                     Of course, the entire collection of Dependent Variables will respond 
                     to any changes in the Independent Variables.
                     </p>
@@ -310,7 +313,7 @@ export const execute = {
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
                     
                     <p>
-                    Indeed, the design now utilizes less than 90 percent of its available deflection.
+                    Indeed, the design now utilizes less than 98 percent of its available deflection.
                     Also, Wire_Dia has remained at 0.110 inches 
                     and Force_2 at 40 poinds as specified. 
                     </p>
@@ -344,7 +347,7 @@ export const execute = {
                     <p>
                     Again, a Search will be required to establish values for the free Independent Variables
                     such that the FIXed value of L_Stroke is established while simultaneously keeping %_Avail_Deflect 
-                    below the 90 percent maximum.
+                    below the 98 percent maximum.
                     </p>
                     
                     <p>
