@@ -43,7 +43,9 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState('Spring')
+                loadInitialState('Spring'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.)
             ]
         },
         {
@@ -108,7 +110,7 @@ export const execute = {
                     CHANGE  Material_Type  302_STAINLESS<br />
                     CHANGE  End_Type  Closed<br />
                     <br />
-                    FIX     ID_Free  0.188<br />
+                    FIX     OD_Free  0.188<br />
                     CHANGE  L_Solid MAX  0.340<br />
                     <br />
                     FIX  L_2  0.385<br />
@@ -145,7 +147,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    CHANGE  FS_Solid MIN  0.6
+                    CHANGE  FS_Solid MIN  0.5
                     </p>
                     
                     <p>
@@ -154,7 +156,7 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                changeSymbolConstraint('FS_Solid', MIN, 0.6)
+                changeSymbolConstraint('FS_Solid', MIN, 0.5)
             ]
         },
         {
@@ -162,8 +164,8 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Now see what the search has turned up.
-                    The two solutions are in reasonable agreement.
+                    Now let's see what the search has achieved.
+                    Don't forget to review the Report(s).
                     </p>
                     <p>
                     The handbook solution produced:<br />
@@ -174,7 +176,7 @@ export const execute = {
                          &nbsp; stress (7.2 lb) = 90,000 psi.
                     </p>
                     <p>
-                    Don't forget to review the Report(s).
+                    The two solutions are in reasonable agreement.
                     </p>
                 </React.Fragment>
             ),

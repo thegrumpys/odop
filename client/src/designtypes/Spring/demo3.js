@@ -269,9 +269,9 @@ export const execute = {
                     </p>
                     
                     <p>Several more demo problems are available. 
-                    They are named DEMO1, DEMO2, ... etc. 
-                    Refer to the documentation section (Help entry) covering the Tutorial 
-                    for a list of the Tutorial and DEMO topics.</p>
+                    They are named demo1, demo2, ... etc. 
+                    Refer to the on-line documentation section (Help entry) covering the Tutorial 
+                    for a list of the Tutorial and Demo topics.</p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP:Spring features, menus and reports. 

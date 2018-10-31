@@ -22,7 +22,7 @@ export const execute = {
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState
-                    for the ODOP <b>Compression Spring</b> design model.
+                    for the ODOP <b>Compression Spring</b> design type.
                     </p>
                     
                     <p>
@@ -72,12 +72,14 @@ export const execute = {
                     When asking to optimize a design, you must understand that the software will
                     find such trivial (also called "degenerate") cases.  It is necessary to
                     impose realistic constraints and when the process does something unexpected,
-                    make compensating changes and start over.
+                    make compensating changes and run through the calculation process again.
                     </p>
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState('Spring')
+                loadInitialState('Spring'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.)
             ]
         },
         {
@@ -105,12 +107,7 @@ export const execute = {
                     CHANGE  Stress_Lim_Stat  80000<br />
                     CHANGE  FS_2  MIN  1.0  &nbsp;  &#60;--- more details on next page<br />
                     </p>
-                    
-                    <p>
-                    Temporary: (remove after loading from Demo rather than initialState)
                     <br />
-                    CHANGE %_Avail_Deflect MAX 98.0
-                    </p>
                 </React.Fragment>
             ),
             actions: [
@@ -123,10 +120,7 @@ export const execute = {
                 changeSymbolValue("Stress_Lim_Stat", 80000.0),
                 saveOutputSymbolConstraints('FS_2'),
                 setSymbolFlag('FS_2', MIN, CONSTRAINED),
-                changeSymbolConstraint('FS_2', MIN, 1.0),
-                saveOutputSymbolConstraints('%_Avail_Deflect'),
-                setSymbolFlag('%_Avail_Deflect', MAX, CONSTRAINED),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.0)
+                changeSymbolConstraint('FS_2', MIN, 1.0)
                 ]
         },
         {
@@ -287,12 +281,6 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Temporary: (remove after loading from Demo rather than initialState)
-                    <br />
-                    CHANGE %_Avail_Deflect MAX 98.0
-                    </p>
-                    
-                    <p>
                     Even after the changes, this design is feasible.
                     There is no need to run a new search to insure that at
                     least one feasible design is available.
@@ -303,6 +291,8 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 1.5),
@@ -312,10 +302,7 @@ export const execute = {
                 saveOutputSymbolConstraints('L_Stroke'),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 1.0),
-                fixSymbolValue('Force_1', 0.0),
-                saveOutputSymbolConstraints('%_Avail_Deflect'),
-                setSymbolFlag('%_Avail_Deflect', MAX, CONSTRAINED),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.0)
+                fixSymbolValue('Force_1', 0.0)
             ]
         },
         {
