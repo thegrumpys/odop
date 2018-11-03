@@ -18,7 +18,7 @@ class ActionSelectCatalog extends React.Component {
             names: [],
             name: undefined,
             entries: [],
-            entry: undefined
+            entry: 0
         };
     }
 
@@ -45,11 +45,11 @@ class ActionSelectCatalog extends React.Component {
         var entries = getCatalogEntries(name, p, x);
         var entry;
         if (entries.length === 1)
-            entry = entries[0]; // Default to first entry
+            entry = 0; // Default to first entry
         else if (entries.length === 2)
-            entry = entries[1]; // Default to middle entry
+            entry = 1; // Default to middle entry
         else // if (entries.length == 3)
-            entry = entries[1]; // Default to middle entry
+            entry = 1; // Default to middle entry
         this.setState({
             names: names,
             name: name,
@@ -81,11 +81,11 @@ class ActionSelectCatalog extends React.Component {
         var entries = getCatalogEntries(name, p, x);
         var entry;
         if (entries.length === 1)
-            entry = entries[0]; // Default to first entry
+            entry = 0; // Default to first entry
         else if (entries.length === 2)
-            entry = entries[1]; // Default to middle entry
+            entry = 1; // Default to middle entry
         else // if (entries.length == 3)
-            entry = entries[1]; // Default to middle entry
+            entry = 1; // Default to middle entry
         this.setState({
             modal: !this.state.modal,
             names: names,
@@ -115,11 +115,11 @@ class ActionSelectCatalog extends React.Component {
         var entries = getCatalogEntries(name, p, x);
         var entry;
         if (entries.length === 1)
-            entry = entries[0]; // Default to first entry
+            entry = 0; // Default to first entry
         else if (entries.length === 2)
-            entry = entries[1]; // Default to middle entry
+            entry = 1; // Default to middle entry
         else // if (entries.length == 3)
-            entry = entries[1]; // Default to middle entry
+            entry = 1; // Default to middle entry
         this.setState({
             name: name,
             entries: entries,
@@ -144,8 +144,10 @@ class ActionSelectCatalog extends React.Component {
         this.props.changeSymbolValue('Wire_Dia',this.state.entries[this.state.entry][2]);
         this.props.changeSymbolValue('L_Free',this.state.entries[this.state.entry][3]);
         this.props.changeSymbolValue('Coils_T',this.state.entries[this.state.entry][4]);
-        // Given Material Name [5] look up material type index
-        this.props.changeSymbolValue('Material_Type',2); // TODO: 2 is Fudge
+        // Given Material Name, this.state.entries[this.state.entry][5], look up material type index
+        this.props.changeSymbolValue('Material_Type',2); // TODO: 2 (MUSIC_WIRE) is Fudge
+        // Given End Type, this.state.entries[this.state.entry][6], look up end type index
+        this.props.changeSymbolValue('End_Type',4); // TODO: 4 (Closed&Ground) is Fudge
     }
 
     onCancel() {
@@ -157,7 +159,7 @@ class ActionSelectCatalog extends React.Component {
     }
 
     render() {
-        console.log('In ActionSelectCatalog.render');
+        console.log('In ActionSelectCatalog.render this.state=',this.state);
         return (
             <React.Fragment>
                 <DropdownItem onClick={this.toggle} disabled={this.state.names.length === 0}>
@@ -176,7 +178,7 @@ class ActionSelectCatalog extends React.Component {
                         <Label for="catalogEntrySelect">Select entry:</Label>
                         <Input type="select" id="catalogEntrySelect" onChange={this.onSelectCatalogEntry} value={this.state.entry}>
                             {this.state.entries.map((element, index) => (
-                                <option key={index} value={index}>{element}</option>
+                                <option key={index} value={index}>{element[0]}: [OD_Free: {element[1]}, Wire_Dia: {element[2]}, L_Free: {element[3]}, Coils_T: {element[4]}, Material_Type: {element[5]}, End_Type: {element[6]}]</option>
                             ))}
                         </Input>
                     </ModalBody>

@@ -12,7 +12,7 @@ export function getSizeTypes() {
 
 export function getSizeEntries(type, p, x) {
 //    console.log('In getSizeEntries type=',type,' p=',p,' x=',x);
-    var size_name, size_table, element;
+    var size_name, size_table, entry;
     var wire_dia, od_free;
     var size0, size1, size2;
     var result = [];
@@ -30,12 +30,12 @@ export function getSizeEntries(type, p, x) {
         // Select one below value less than Wire_Dia and two value greater than Wire_Dia
         for (let i = 0; i < size_table.length; i++) {
             if (i > 0) {
-                element = size_table[i];
+                entry = size_table[i];
                 size0 = size1;
                 size1 = size2;
-                size2 = element[0];
+                size2 = entry[0];
                 if (size1 !== undefined && wire_dia <= size1) {
-//                    console.log('In getSizeEntries element[0]=',element[0]);
+//                    console.log('In getSizeEntries entry[0]=',entry[0]);
                     break;
                 }
             }
@@ -60,12 +60,12 @@ export function getSizeEntries(type, p, x) {
         // Select one below value less than OD_Free and two value greater than OD_Free
         for (let i = 0; i < size_table.length; i++) {
             if (i > 0) {
-                element = size_table[i];
+                entry = size_table[i];
                 size0 = size1;
                 size1 = size2;
-                size2 = element[0];
+                size2 = entry[0];
                 if (size1 !== undefined && od_free <= size1) {
-//                    console.log('In getSizeEntries element[0]=',element[0]);
+//                    console.log('In getSizeEntries entry[0]=',entry[0]);
                     break;
                 }
             }
