@@ -11,7 +11,7 @@ class ActionSelectSize extends React.Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onSelectSizeType = this.onSelectSizeType.bind(this);
-        this.onSelectSize = this.onSelectSize.bind(this);
+        this.onSelectSizeEntry = this.onSelectSizeEntry.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.state = {
@@ -25,7 +25,7 @@ class ActionSelectSize extends React.Component {
 
     componentDidMount() {
 //        console.log('In ActionSelectSize componentDidMount this.state=',this.state);
-        var { getSizeTypes, getSizes } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeTypes & getSizes
+        var { getSizeTypes, getSizeEntries } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeTypes & getSizeEntries
         var types = getSizeTypes();
         var type;
         if (types.length > 0)
@@ -43,7 +43,7 @@ class ActionSelectSize extends React.Component {
                 x.push(element.value);
             }
         });
-        var sizes = getSizes(type, p, x);
+        var sizes = getSizeEntries(type, p, x);
         var size;
         if (sizes.length === 1)
             size = sizes[0]; // Default to first size
@@ -61,7 +61,7 @@ class ActionSelectSize extends React.Component {
 
     toggle() {
 //        console.log('In ActionSelectSize.toggle');
-        var { getSizeTypes, getSizes } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeTypes & getSizes
+        var { getSizeTypes, getSizeEntries } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeTypes & getSizeEntries
         var types = getSizeTypes();
         var type;
         if (types.length > 0)
@@ -79,7 +79,7 @@ class ActionSelectSize extends React.Component {
                 x.push(element.value);
             }
         });
-        var sizes = getSizes(type, p, x);
+        var sizes = getSizeEntries(type, p, x);
         var size;
         if (sizes.length === 1)
             size = sizes[0]; // Default to first size
@@ -99,7 +99,7 @@ class ActionSelectSize extends React.Component {
     onSelectSizeType(event) {
 //        console.log('In ActionSelectSize.onSelectSizeType event.target.value=',event.target.value);
         var type = event.target.value;
-        var { getSizes } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizes
+        var { getSizeEntries } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeEntries
         // Loop to create p and x from symbol_table
         var p = [];
         this.props.symbol_table.forEach((element) => {
@@ -113,7 +113,7 @@ class ActionSelectSize extends React.Component {
                 x.push(element.value);
             }
         });
-        var sizes = getSizes(type, p, x);
+        var sizes = getSizeEntries(type, p, x);
         var size;
         if (sizes.length === 1)
             size = sizes[0]; // Default to first size
@@ -128,8 +128,8 @@ class ActionSelectSize extends React.Component {
         });
     }
 
-    onSelectSize(event) {
-//      console.log('In ActionSelectSize.onSelectSize event.target.value=',event.target.value);
+    onSelectSizeEntry(event) {
+//      console.log('In ActionSelectSizeEntry.onSelectSizeEntry event.target.value=',event.target.value);
       this.setState({
           size: parseFloat(event.target.value) 
       });
@@ -140,7 +140,7 @@ class ActionSelectSize extends React.Component {
         this.setState({
             modal: !this.state.modal
         });
-        // Do select size
+        // Do select size entry
         this.props.changeSymbolValue(this.state.type,this.state.size);
         this.props.setSymbolFlag(this.state.type, MIN, FIXED);
         this.props.setSymbolFlag(this.state.type, MAX, FIXED);
@@ -171,8 +171,8 @@ class ActionSelectSize extends React.Component {
                             )}
                         </Input>
                         <br />
-                        <Label for="sizeSelect">Select size:</Label>
-                        <Input type="select" id="sizeSelect" onChange={this.onSelectSize} value={this.state.size}>
+                        <Label for="sizeEntrySelect">Select size:</Label>
+                        <Input type="select" id="sizeEntrySelect" onChange={this.onSelectSizeEntry} value={this.state.size}>
                             {this.state.sizes.map((element, index) => (
                                 <option key={index} value={element}>{element}</option>
                             ))}
