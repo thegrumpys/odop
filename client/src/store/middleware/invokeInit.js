@@ -9,18 +9,14 @@ export function invokeInit(store) {
 
     var design = store.getState();
     
-    // Loop to create p and x_in from symbol_table
+    // Loop to create p and x from symbol_table
     var p = [];
+    var x = [];
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
         if (element.input) {
             p.push(element.value);
-        }
-    }
-    var x = [];
-    for (let i = 0; i < design.symbol_table.length; i++) {
-        element = design.symbol_table[i];
-        if (!element.input) {
+        } else {
             x.push(element.value);
         }
     }

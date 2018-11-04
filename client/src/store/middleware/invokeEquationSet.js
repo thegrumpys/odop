@@ -9,7 +9,7 @@ export function invokeEquationSet(store) {
 
     var design = store.getState();
     
-    // Loop to create p and x_in from symbol_table
+    // Loop to create p and x from symbol_table
     var p = [];
     var x = [];
     for (let i = 0; i < design.symbol_table.length; i++) {

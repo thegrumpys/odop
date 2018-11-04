@@ -31,14 +31,11 @@ class ActionSelectCatalog extends React.Component {
             name = names[0]; // Default to first name
         // Loop to create p and x from symbol_table
         var p = [];
+        var x = [];
         this.props.symbol_table.forEach((element) => {
             if (element.input) {
                 p.push(element.value);
-            }
-        });
-        var x = [];
-        this.props.symbol_table.forEach((element) => {
-            if (!element.input) {
+            } else {
                 x.push(element.value);
             }
         });
@@ -67,14 +64,11 @@ class ActionSelectCatalog extends React.Component {
             name = names[0]; // Default to first name
         // Loop to create p and x from symbol_table
         var p = [];
+        var x = [];
         this.props.symbol_table.forEach((element) => {
             if (element.input) {
                 p.push(element.value);
-            }
-        });
-        var x = [];
-        this.props.symbol_table.forEach((element) => {
-            if (!element.input) {
+            } else {
                 x.push(element.value);
             }
         });
@@ -101,14 +95,11 @@ class ActionSelectCatalog extends React.Component {
         var { getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogEntries
         // Loop to create p and x from symbol_table
         var p = [];
+        var x = [];
         this.props.symbol_table.forEach((element) => {
             if (element.input) {
                 p.push(element.value);
-            }
-        });
-        var x = [];
-        this.props.symbol_table.forEach((element) => {
-            if (!element.input) {
+            } else {
                 x.push(element.value);
             }
         });
