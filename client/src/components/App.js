@@ -72,10 +72,8 @@ class App extends Component {
     }
     
     report(report_name) {
-//        console.log('In App.report');
+//        console.log('In App.report report_name=',report_name);
         
-        var element;
-
         // Loop to create prefs from system_controls
         var prefs = [];
         for(var key in this.props.system_controls) {
@@ -85,21 +83,19 @@ class App extends Component {
         // Loop to create p and x from symbol_table
         var p = [];
         var x = [];
-        for (let i = 0; i < this.props.symbol_table.length; i++) {
-            element = this.props.symbol_table[i];
+        this.props.symbol_table.forEach((element) => {
             if (element.input) {
                 p.push(Object.assign({},element));
             } else {
                 x.push(Object.assign({},element));
             }
-        }
+        });
 
         // Loop to create p and x from symbol_table
         var labels = [];
-        for (let i = 0; i < this.props.labels.length; i++) {
-            element = this.props.labels[i];
+        this.props.labels.forEach((element) => {
             labels.push(Object.assign({},element));
-        }
+        });
 
         // Generate design-type specific report
         var { report } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load report
