@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, search } from '../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, changeLabelsValue, search } from '../../store/actionCreators';
 import { MAX } from '../../store/actionTypes';
 export const execute = {
     steps: [
@@ -64,7 +64,8 @@ export const execute = {
             actions: [
                 loadInitialState('Spring'),
                 changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.)
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
+                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
         {
