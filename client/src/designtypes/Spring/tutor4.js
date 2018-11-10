@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../store/actionTypes';
 export const execute = {
     steps: [
@@ -24,7 +24,7 @@ export const execute = {
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState
-                    for the ODOP <b>Compression Spring</b> design model.
+                    for the ODOP <b>Compression Spring</b> design type.
                     </p>
                     
                     <p>
@@ -78,7 +78,10 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState('Spring')
+                loadInitialState('Spring'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
+                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
         {
@@ -319,7 +322,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    The transition to the next page will perform a search
+                    The transition to the next page will perform a search.
                     </p>
                     
                     <p>

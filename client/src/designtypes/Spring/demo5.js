@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../store/actionCreators';
 import { MAX, CONSTRAINED } from '../../store/actionTypes';
 export const execute = {
     steps: [
@@ -45,7 +45,10 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState('Spring')
+                loadInitialState('Spring'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
+                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
         {
@@ -168,18 +171,20 @@ export const execute = {
                     
                     <p>
                     As a general rule, in the first approach to a new problem, 
-                    we let the calculations use an arbitrary (non-standard) wire diameter.<br />
-                    <br />
-                    The handbook selected 0.120 inch wire diameter.<br />
-                    <br />
-                    Now we'll use the ODOP SELECT SIZE feature 
-                    (<b>Action : Select Size...</b> menu item)
-                    to chose the nearest standard wire diameter.
+                    we let the calculations use an arbitrary (non-standard) wire diameter.
+                    </p>
+                    
+                    <p>
+                    Now, in order to conclude this problem,
+                    we want to demonstrate the ODOP SELECT SIZE feature. 
+                    Go to the <b>Action : Select Size...</b> menu item
+                    and chose the nearest standard wire diameter.
+                    In summary:
                     <br /><br />
-                    SELECT  Wire_Dia<br />
+                    SELECT  Wire_Dia 0.120<br />
                     <br />
-                    Wait! until the SELECT SIZE feature is implemented, 
-                    it will be necessary to use a FIX to impose the correct value of Wire_Dia.
+                    In any case, to guarantee the expected outcome, the demo session will
+                    to use a FIX to impose the expected value of Wire_Dia.
                     Look for the new value of Wire_Dia on the next page.
                     </p>
                 </React.Fragment>
@@ -282,9 +287,9 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>Several more demo problems are available. 
-                    They are named DEMO1, DEMO2, ... etc. 
-                    Refer to the documentation section (on-line Help entry) covering the Tutorial 
-                    for a list of the Tutorial and DEMO topics.</p>
+                    They are named demo1, demo2, ... etc. 
+                    Refer to the on-line documentation section (Help entry) covering the Tutorial 
+                    for a list of the Tutorial and Demo topics.</p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP:Spring features, menus and reports. 

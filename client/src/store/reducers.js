@@ -302,10 +302,18 @@ export function reducers(state, action) {
 // LABELS
         
     case CHANGE_LABELS_VALUE:
-        return {
-            ...state,
-            labels: action.payload.labels
-        }
+        return Object.assign({}, state, {
+            labels: state.labels.map((element) => {
+                let i = action.payload.labels.findIndex(label => element.name === label.name)
+                if (i !== -1) {
+                    return Object.assign({}, element, {
+                        value: action.payload.labels[i].value
+                    });
+                } else {
+                    return element;
+                }
+            })
+        });
     default:
         return state;
     }

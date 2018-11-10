@@ -1,5 +1,6 @@
 import React from 'react';
-import { loadInitialState, fixSymbolValue, search } from '../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, loadInitialState, fixSymbolValue, changeLabelsValue, search } from '../../store/actionCreators';
+import { MAX } from '../../store/actionTypes';
 export const execute = {
     steps: [
         {
@@ -16,7 +17,8 @@ export const execute = {
                     this session needs to start from a known state.  
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
-                    Moving to the next page will establish the necessary initialState.
+                    Moving to the next page will establish the necessary initialState
+                    for the ODOP <b>Compression Spring</b> design type.
                     </p>
                     
                     <p>
@@ -28,7 +30,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 11",
+            title: "Page 02 of 10",
             text: (
                 <React.Fragment>
                     <p>
@@ -56,11 +58,14 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState('Spring')
+                loadInitialState('Spring'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
+                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
         {
-            title: "Page 03 of 11",
+            title: "Page 03 of 10",
             text: (
                 <React.Fragment>
                     <p>
@@ -79,7 +84,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 04 of 11",
+            title: "Page 04 of 10",
             text: (
                 <React.Fragment>
                    <img src="designtypes/Spring/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
@@ -87,7 +92,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 05 of 11",
+            title: "Page 05 of 10",
             text: (
                 <React.Fragment>
                     <p>Next, we enter everything we know about the problem. </p>
@@ -108,7 +113,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 06 of 11",
+            title: "Page 06 of 10",
             text: (
                 <React.Fragment>
                     <p>
@@ -137,7 +142,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 07 of 11",
+            title: "Page 07 of 10",
             text: (
                 <React.Fragment>
                     <p>
@@ -157,7 +162,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 08 of 11",
+            title: "Page 08 of 10",
             text: (
                 <React.Fragment>
                     <p>We have a solution. Take a moment to scroll through and view the values.</p>
@@ -177,7 +182,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 09 of 11",
+            title: "Page 09 of 10",
             text: (
                 <React.Fragment>
                     <p>
@@ -190,26 +195,13 @@ export const execute = {
             )
         },
         {
-            title: "Page 10 of 11",
+            title: "Page 10 of 10 (last page)",
             text: (
                 <React.Fragment>
-                    <p>This completes the first ODOP:Spring demonstration problem.</p>
+                    <p>
+                    This completes the first ODOP:Spring demonstration problem.
+                    </p>
                     
-                    <p>Several more demo problems are available. 
-                    They are named demo1, demo2, ... etc. 
-                    Refer to the documentation section (Help entry) named  Tutorial  
-                    for a list of the tutorial and demo topics.</p>
-                    
-                    <p>If you do not wish to continue with more demonstration problems, 
-                    you can experiment with the various ODOP:Spring features, menus and reports. 
-                    The HELP menu is a good place to start. </p>
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 11 of 11 (last page)",
-            text: (
-                <React.Fragment>
                     <p>
                     The next demonstration problem provides a more 
                     detailed example of spring design from original specifications.  
@@ -217,11 +209,18 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Additional demonstration sessions are planned. 
-                    For example,
-                    demo6, demo7 and demo8 will present examples of extension spring design.
-                    Tutorial sessions, tutor1, tutor2, ... etc. provide instructions on how to use 
+                    Several more demo problems are available. 
+                    They are named demo1, demo2, ... etc. 
+                    Tutorial sessions named tutor3, tutor4, ... etc. provide instructions on how to use 
                     the ODOP software.
+                    Refer to the on-line documentation section (Help entry) named "Tutorial and Demo" 
+                    for a complete list of the tutorial and demo topics.
+                    </p>
+                    
+                    <p>
+                    If you do not wish to continue with more demonstration problems, 
+                    you can experiment with the various ODOP:Spring features, menus and reports. 
+                    The HELP menu is a good place to start. 
                     </p>
                 </React.Fragment>
             )
