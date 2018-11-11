@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Label, Input, Table } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../../store/actionCreators';
 
@@ -145,16 +145,49 @@ class ActionSelectCatalog extends React.Component {
                             )}
                         </Input>
                         <br />
-                        {this.state.entries.length === 0 ? 
-                        <Label for="catalogEntrySelect">No matching catalog entries found</Label> :
-                        <React.Fragment>
-                            <Label for="catalogEntrySelect">Select entry:</Label>
-                            <Input type="select" id="catalogEntrySelect" onChange={this.onSelectCatalogEntry} value={this.state.entry}>
-                                {this.state.entries.length === 0 ? <option>None</option> : '' || this.state.entries.map((element, index) => (
-                                    <option key={index} value={index}>{element[0]}</option>
+                        <Table className="border border-secondary" size="sm">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>OD_Free</th>
+                                    <th>Wire_Dia</th>
+                                    <th>L_Free</th>
+                                    <th>Coils_T</th>
+                                    <th>Material_Type</th>
+                                    <th>End_Type</th>
+                                    <th>Obj</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.entries.length === 0 ? <tr><td colSpan="9">None</td></tr> : '' ||
+                                 this.state.entries.map((element, index) => (
+                                    <tr key={index}>
+                                        <td><Button size="sm"></Button></td>
+                                        <td>{element[0]}</td>
+                                        <td>{element[1]}</td>
+                                        <td>{element[2]}</td>
+                                        <td>{element[3]}</td>
+                                        <td>{element[4]}</td>
+                                        <td>{element[5]}</td>
+                                        <td>{element[6]}</td>
+                                        <td>{element[9]}</td>
+                                    </tr>
                                 ))}
-                            </Input>
-                        </React.Fragment>
+                            </tbody>
+                        </Table>
+                        <br />
+                        {this.state.entries.length === 0 ? 
+                            <Label for="catalogEntrySelect">No matching catalog entries found</Label>
+                        :
+                            <React.Fragment>
+                                <Label for="catalogEntrySelect">Select entry:</Label>
+                                <Input type="select" id="catalogEntrySelect" onChange={this.onSelectCatalogEntry} value={this.state.entry}>
+                                    {this.state.entries.length === 0 ? <option>None</option> : '' || this.state.entries.map((element, index) => (
+                                        <option key={index} value={index}>{element[0]}</option>
+                                    ))}
+                                </Input>
+                            </React.Fragment>
                         }
                     </ModalBody>
                     <ModalFooter>
