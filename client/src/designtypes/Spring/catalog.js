@@ -86,6 +86,19 @@ function getObjectiveValue(p, x, viol_wt) {
     return viol_wt * viol_sum;
 }
 
+function converToResultArray(entry) {
+    var entry_string = `${entry[0]} OD_Free:${entry[1]} Wire_Dia:${entry[2]} L_Free:${entry[3]} Coils_T:${entry[4]} Material_Type:${entry[5]} End_Type:${entry[6]} Obj:${entry[9]}`;
+    // Convert to changeSymbolValue array
+    var entry_symbol_values = [];
+    entry_symbol_values.push(['OD_Free',entry[1]]);
+    entry_symbol_values.push(['Wire_Dia',entry[2]]);
+    entry_symbol_values.push(['L_Free',entry[3]]);
+    entry_symbol_values.push(['Coils_T',entry[4]]);
+    entry_symbol_values.push(['Material_Type',entry[7]]);
+    entry_symbol_values.push(['End_Type',entry[8]]);
+    return [entry_string, entry_symbol_values];
+}
+
 export function getCatalogEntries(name, symbol_table_p, symbol_table_x, viol_wt) {
 //    console.log('In getCatalogEntries name=',name,' symbol_table_p=',symbol_table_p,' symbol_table_x=',symbol_table_x,' viol_wt=',viol_wt);
     var catalog, entry;
@@ -110,68 +123,84 @@ export function getCatalogEntries(name, symbol_table_p, symbol_table_x, viol_wt)
     function xPull(element, index) {
         element.value = x[index];
     }
+    
+    // Create implied constraints between half and twice
+    var cmin_OD_Free = symbol_table_p[o.OD_Free].value/2;
+    var cmax_OD_Free = symbol_table_p[o.OD_Free].value*2;
+    var cmin_Wire_Dia = symbol_table_p[o.Wire_Dia].value/2;
+    var cmax_Wire_Dia = symbol_table_p[o.Wire_Dia].value*2;
+    var cmin_L_Free = symbol_table_p[o.L_Free].value/2;
+    var cmax_L_Free = symbol_table_p[o.L_Free].value*2;
+    var cmin_Coils_T = symbol_table_p[o.Coils_T].value/2;
+    var cmax_Coils_T = symbol_table_p[o.Coils_T].value*2;
 
     // Load catalog table
     catalog = require('./'+name+'.json');
 //    console.log('In getCatalogEntries catalog=',catalog);
     // scan through catalog
-    for (let i = 0; i < catalog.length; i++) {
-        if (i > 0) {
-            entry = Object.assign({},catalog[i]); // Make copy
-            entry[5] = m_tab.findIndex(findMaterialTypeIndex); // Get matching Material Type index
-            entry[6] = et_tab.findIndex(findEndTypeIndex); // Get matching End Type index
-            
-            // Update with catalog entries
-            symbol_table_p[o.OD_Free].value = entry[1];
-            symbol_table_p[o.Wire_Dia].value = entry[2];
-            symbol_table_p[o.L_Free].value = entry[3];
-            symbol_table_p[o.Coils_T].value = entry[4];
-            symbol_table_x[o.Material_Type].value = entry[5];
-            symbol_table_x[o.End_Type].value = entry[6];
-//            console.log('In getCatalogEntries 0 symbol_table_p=',symbol_table_p,' symbol_table_x=',symbol_table_x);
-    
-            // Invoke init function
-            p = [];
-            symbol_table_p.forEach(pPush);
-            x = [];
-            symbol_table_x.forEach(xPush);
-            x = init(p, x);
-            symbol_table_x.forEach(xPull);
-//            console.log('In getCatalogEntries 1 symbol_table_p=',symbol_table_p,' symbol_table_x=',symbol_table_x);
-            
-            // Invoke eqnset function
-            p = [];
-            symbol_table_p.forEach(pPush);
-            x = [];
-            symbol_table_x.forEach(xPush);
-            x = eqnset(p, x);
-            symbol_table_x.forEach(xPull);
-//            console.log('In getCatalogEntries 2 symbol_table_p=',symbol_table_p,' symbol_table_x=',symbol_table_x);
-            
-            // Invoke violations & objective value function
-            objective_value = getObjectiveValue(symbol_table_p, symbol_table_x, viol_wt);
-//            console.log('In getCatalogEntries 3 objective_value=',objective_value);
-            
-            entry[7] = objective_value;
-            
-            // get four lowest objective values as candidate entries
-            if (cat0 === undefined || entry[7] < cat0[7]) { cat1 = cat0; cat2 = cat1; cat3 = cat2; cat0 = entry; }
-            else if (cat1 === undefined || entry[7] < cat1[7]) { cat2 = cat1; cat3 = cat2; cat1 = entry; }
-            else if (cat2 === undefined || entry[7] < cat2[7]) { cat3 = cat2; cat2 = entry; }
-            else if (cat3 === undefined || entry[7] < cat3[7]) { cat3 = entry; }
-        }
+    for (let i = 1; i < catalog.length; i++) { // Skip column headers at zeroth entry
+        entry = Object.assign({},catalog[i]); // Make copy so we can modify it without affecting catalog
+        
+        // Skip catalog entry if it's less than half the constraint value or greater than twice the constraint value
+        if (entry[1] < cmin_OD_Free  || entry[1] > cmax_OD_Free ) continue;
+        if (entry[2] < cmin_Wire_Dia || entry[2] > cmax_Wire_Dia) continue;
+        if (entry[3] < cmin_L_Free   || entry[3] > cmax_L_Free  ) continue;
+        if (entry[4] < cmin_Coils_T  || entry[4] > cmax_Coils_T ) continue;
+        
+        entry[7] = m_tab.findIndex(findMaterialTypeIndex); // Set matching Material Type index
+        entry[8] = et_tab.findIndex(findEndTypeIndex); // Set matching End Type index
+        
+        // Update with catalog entries
+        symbol_table_p[o.OD_Free].value = entry[1];
+        symbol_table_p[o.Wire_Dia].value = entry[2];
+        symbol_table_p[o.L_Free].value = entry[3];
+        symbol_table_p[o.Coils_T].value = entry[4];
+        symbol_table_x[o.Material_Type].value = entry[7]; // Use Material Type index
+        symbol_table_x[o.End_Type].value = entry[8]; // Use End Type index
+//        console.log('In getCatalogEntries 0 symbol_table_p=',symbol_table_p,' symbol_table_x=',symbol_table_x);
+
+        // Invoke init function
+        p = [];
+        symbol_table_p.forEach(pPush);
+        x = [];
+        symbol_table_x.forEach(xPush);
+        x = init(p, x);
+        symbol_table_x.forEach(xPull);
+//        console.log('In getCatalogEntries 1 symbol_table_p=',symbol_table_p,' symbol_table_x=',symbol_table_x);
+        
+        // Invoke eqnset function
+        p = [];
+        symbol_table_p.forEach(pPush);
+        x = [];
+        symbol_table_x.forEach(xPush);
+        x = eqnset(p, x);
+        symbol_table_x.forEach(xPull);
+//        console.log('In getCatalogEntries 2 symbol_table_p=',symbol_table_p,' symbol_table_x=',symbol_table_x);
+        
+        // Invoke violations & objective value function
+        objective_value = getObjectiveValue(symbol_table_p, symbol_table_x, viol_wt);
+//        console.log('In getCatalogEntries 3 objective_value=',objective_value);
+        
+        entry[9] = objective_value.toFixed(6); // Set Objective Value
+        
+        // get four lowest objective values as candidate entries
+        if (cat0 === undefined || entry[9] < cat0[9]) { cat3 = cat2; cat2 = cat1; cat1 = cat0; cat0 = entry; }
+        else if (cat1 === undefined || entry[9] < cat1[9]) { cat3 = cat2; cat2 = cat1; cat1 = entry; }
+        else if (cat2 === undefined || entry[9] < cat2[9]) { cat3 = cat2; cat2 = entry; }
+        else if (cat3 === undefined || entry[9] < cat3[9]) { cat3 = entry; }
+//        console.log('In getCatalogEntries 4 cat0=',cat0,' cat1=',cat1,' cat2=',cat2,' cat3=',cat3);
     }
     if (cat0 !== undefined) {
-        result.push(cat0);
+        result.push(converToResultArray(cat0));
     }
     if (cat1 !== undefined) {
-        result.push(cat1);
+        result.push(converToResultArray(cat1));
     }
     if (cat2 !== undefined) {
-        result.push(cat2);
+        result.push(converToResultArray(cat2));
     }
     if (cat3 !== undefined) {
-        result.push(cat3);
+        result.push(converToResultArray(cat3));
     }
 //    console.log('In getCatalogEntries result=',result);
     return result;

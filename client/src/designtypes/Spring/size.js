@@ -28,16 +28,14 @@ export function getSizeEntries(type, p, x) {
 //        console.log('In getSizeEntries size_table=',size_table);
 //        console.log('In getSizeEntries wire_dia=',wire_dia);
         // Select one below value less than Wire_Dia and two value greater than Wire_Dia
-        for (let i = 0; i < size_table.length; i++) {
-            if (i > 0) {
-                entry = size_table[i];
-                size0 = size1;
-                size1 = size2;
-                size2 = entry[0];
-                if (size1 !== undefined && wire_dia <= size1) {
-//                    console.log('In getSizeEntries entry[0]=',entry[0]);
-                    break;
-                }
+        for (let i = 1; i < size_table.length; i++) { // Skip column headers at zeroth entry
+            entry = size_table[i];
+            size0 = size1;
+            size1 = size2;
+            size2 = entry[0];
+            if (size1 !== undefined && wire_dia <= size1) {
+//                console.log('In getSizeEntries entry[0]=',entry[0]);
+                break;
             }
         };
         if (size0 !== undefined) {
@@ -58,16 +56,14 @@ export function getSizeEntries(type, p, x) {
 //        console.log('In getSizeEntries size_table=',size_table);
 //        console.log('In getSizeEntries od_free=',od_free);
         // Select one below value less than OD_Free and two value greater than OD_Free
-        for (let i = 0; i < size_table.length; i++) {
-            if (i > 0) {
-                entry = size_table[i];
-                size0 = size1;
-                size1 = size2;
-                size2 = entry[0];
-                if (size1 !== undefined && od_free <= size1) {
-//                    console.log('In getSizeEntries entry[0]=',entry[0]);
-                    break;
-                }
+        for (let i = 1; i < size_table.length; i++) { // Skip column headers at zeroth entry
+            entry = size_table[i];
+            size0 = size1;
+            size1 = size2;
+            size2 = entry[0];
+            if (size1 !== undefined && od_free <= size1) {
+//                console.log('In getSizeEntries entry[0]=',entry[0]);
+                break;
             }
         };
         if (size0 !== undefined) {
