@@ -135,7 +135,7 @@ class ActionSelectCatalog extends React.Component {
                 <DropdownItem onClick={this.toggle} disabled={this.state.names.length === 0}>
                     Select Catalog&hellip;
                 </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Catalog</ModalHeader>
                     <ModalBody>
                         <Label for="catalogNameSelect">Select catalog name:</Label>
@@ -145,33 +145,13 @@ class ActionSelectCatalog extends React.Component {
                             )}
                         </Input>
                         <br />
+                        <Label for="catalogEntrySelect">Closest catalog entries:</Label>
                         <Table className="border border-secondary" size="sm">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Name</th>
-                                    <th>OD_Free</th>
-                                    <th>Wire_Dia</th>
-                                    <th>L_Free</th>
-                                    <th>Coils_T</th>
-                                    <th>Material_Type</th>
-                                    <th>End_Type</th>
-                                    <th>Obj</th>
-                                </tr>
-                            </thead>
                             <tbody>
                                 {this.state.entries.length === 0 ? <tr><td colSpan="9">None</td></tr> : '' ||
                                  this.state.entries.map((element, index) => (
                                     <tr key={index}>
-                                        <td><Button size="sm"></Button></td>
-                                        <td>{element[0]}</td>
                                         <td>{element[1]}</td>
-                                        <td>{element[2]}</td>
-                                        <td>{element[3]}</td>
-                                        <td>{element[4]}</td>
-                                        <td>{element[5]}</td>
-                                        <td>{element[6]}</td>
-                                        <td>{element[9]}</td>
                                     </tr>
                                 ))}
                             </tbody>

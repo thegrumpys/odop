@@ -87,7 +87,8 @@ function getObjectiveValue(p, x, viol_wt) {
 }
 
 function converToResultArray(entry) {
-    var entry_string = `${entry[0]} OD_Free:${entry[1]} Wire_Dia:${entry[2]} L_Free:${entry[3]} Coils_T:${entry[4]} Material_Type:${entry[5]} End_Type:${entry[6]} Obj:${entry[9]}`;
+    var entry_select = entry[0];
+    var entry_table = `${entry[0]} OD_Free:${entry[1]} Wire_Dia:${entry[2]} L_Free:${entry[3]} Coils_T:${entry[4]} Material_Type:${entry[5]} End_Type:${entry[6]} Obj:${entry[9]}`;
     // Convert to changeSymbolValue array
     var entry_symbol_values = [];
     entry_symbol_values.push(['OD_Free',entry[1]]);
@@ -96,7 +97,7 @@ function converToResultArray(entry) {
     entry_symbol_values.push(['Coils_T',entry[4]]);
     entry_symbol_values.push(['Material_Type',entry[7]]);
     entry_symbol_values.push(['End_Type',entry[8]]);
-    return [entry_string, entry_symbol_values];
+    return [entry_select, entry_table, entry_symbol_values];
 }
 
 export function getCatalogEntries(name, symbol_table_p, symbol_table_x, viol_wt) {
