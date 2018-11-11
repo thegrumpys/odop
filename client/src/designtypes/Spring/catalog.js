@@ -88,7 +88,7 @@ function getObjectiveValue(p, x, viol_wt) {
 
 function converToResultArray(entry) {
     var entry_select = entry[0].replace('-', '\u2011');
-    var entry_table = `OD_Free:${entry[1]} Wire_Dia:${entry[2]} L_Free:${entry[3]} Coils_T:${entry[4]} Material_Type:${entry[5]} End_Type:${entry[6]} Obj:${entry[9]}`;
+    var entry_table = `OD_Free:\u00A0${entry[1]}, Wire_Dia:\u00A0${entry[2]}, L_Free:\u00A0${entry[3]}, Coils_T:\u00A0${entry[4]}, Material_Type:\u00A0${entry[5]}, End_Type:\u00A0${entry[6]}, Obj:\u00A0${entry[9]}`;
     // Convert to changeSymbolValue array
     var entry_symbol_values = [];
     entry_symbol_values.push(['OD_Free',entry[1]]);

@@ -135,7 +135,7 @@ class ActionSelectCatalog extends React.Component {
                 <DropdownItem onClick={this.toggle} disabled={this.state.names.length === 0}>
                     Select Catalog&hellip;
                 </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Catalog</ModalHeader>
                     <ModalBody>
                         <Label for="catalogNameSelect">Select catalog name:</Label>
