@@ -145,12 +145,17 @@ class ActionSelectCatalog extends React.Component {
                             )}
                         </Input>
                         <br />
-                        <Label for="catalogEntrySelect">Select entry:</Label>
-                        <Input type="select" id="catalogEntrySelect" onChange={this.onSelectCatalogEntry} value={this.state.entry}>
-                            {this.state.entries.map((element, index) => (
-                                <option key={index} value={index}>{element[0]}</option>
-                            ))}
-                        </Input>
+                        {this.state.entries.length === 0 ? 
+                        <Label for="catalogEntrySelect">No matching catalog entries found</Label> :
+                        <React.Fragment>
+                            <Label for="catalogEntrySelect">Select entry:</Label>
+                            <Input type="select" id="catalogEntrySelect" onChange={this.onSelectCatalogEntry} value={this.state.entry}>
+                                {this.state.entries.length === 0 ? <option>None</option> : '' || this.state.entries.map((element, index) => (
+                                    <option key={index} value={index}>{element[0]}</option>
+                                ))}
+                            </Input>
+                        </React.Fragment>
+                        }
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
