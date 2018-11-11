@@ -145,29 +145,29 @@ class ActionSelectCatalog extends React.Component {
                             )}
                         </Input>
                         <br />
-                        <Label for="catalogEntrySelect">Closest catalog entries:</Label>
-                        <Table className="border border-secondary" size="sm">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Values</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.state.entries.length === 0 ? <tr><td colSpan="9">None</td></tr> : '' ||
-                                 this.state.entries.map((element, index) => (
-                                    <tr key={index}>
-                                        <td>{element[0]}</td>
-                                        <td>{element[1]}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-                        <br />
                         {this.state.entries.length === 0 ? 
-                            <Label for="catalogEntrySelect">No matching catalog entries found</Label>
+                            <Label for="catalogEntrySelect">No acceptable entries were found in this catalog</Label>
                         :
                             <React.Fragment>
+                                <Label for="catalogEntrySelect">Closest catalog entries:</Label>
+                                <Table className="border border-secondary" size="sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Values</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.entries.length === 0 ? <tr><td colSpan="9">None</td></tr> : '' ||
+                                         this.state.entries.map((element, index) => (
+                                            <tr key={index}>
+                                                <td>{element[0]}</td>
+                                                <td>{element[1]}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                                <br />
                                 <Label for="catalogEntrySelect">Select entry:</Label>
                                 <Input type="select" id="catalogEntrySelect" onChange={this.onSelectCatalogEntry} value={this.state.entry}>
                                     {this.state.entries.length === 0 ? <option>None</option> : '' || this.state.entries.map((element, index) => (
@@ -179,7 +179,7 @@ class ActionSelectCatalog extends React.Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
-                        <Button color="primary" onClick={this.onSelect}>Select</Button>
+                        <Button color="primary" onClick={this.onSelect} disabled={this.state.entries.length === 0}>Select</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
