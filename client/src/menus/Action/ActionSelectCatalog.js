@@ -114,7 +114,7 @@ class ActionSelectCatalog extends React.Component {
         });
         // Do select catalog entry
 //        console.log('In ActionSelectCatalog.onSelect this.state.entries=',this.state.entries);
-        this.state.entries[this.state.entry][1].forEach((element) => { 
+        this.state.entries[this.state.entry][2].forEach((element) => { 
 //            console.log('In ActionSelectCatalog.onSelect element=',element);
             this.props.changeSymbolValue(element[0],element[1]);
         });
@@ -147,10 +147,17 @@ class ActionSelectCatalog extends React.Component {
                         <br />
                         <Label for="catalogEntrySelect">Closest catalog entries:</Label>
                         <Table className="border border-secondary" size="sm">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Values</th>
+                                </tr>
+                            </thead>
                             <tbody>
                                 {this.state.entries.length === 0 ? <tr><td colSpan="9">None</td></tr> : '' ||
                                  this.state.entries.map((element, index) => (
                                     <tr key={index}>
+                                        <td>{element[0]}</td>
                                         <td>{element[1]}</td>
                                     </tr>
                                 ))}
