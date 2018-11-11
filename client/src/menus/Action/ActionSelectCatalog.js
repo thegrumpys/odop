@@ -6,7 +6,7 @@ import { changeSymbolValue } from '../../store/actionCreators';
 class ActionSelectCatalog extends React.Component {
 
     constructor(props) {
-        console.log('In ActionSelectCatalog.constructor props=',props);
+//        console.log('In ActionSelectCatalog.constructor props=',props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onSelectCatalogName = this.onSelectCatalogName.bind(this);
@@ -23,7 +23,7 @@ class ActionSelectCatalog extends React.Component {
     }
 
     componentDidMount() {
-        console.log('In ActionSelectCatalog componentDidMount this.state=',this.state);
+//        console.log('In ActionSelectCatalog componentDidMount this.state=',this.state);
         var { getCatalogNames, getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
         var names = getCatalogNames();
         var name;
@@ -34,12 +34,12 @@ class ActionSelectCatalog extends React.Component {
         var x = [];
         this.props.symbol_table.forEach((element) => {
             if (element.input) {
-                p.push(element.value);
+                p.push(Object.assign({},element));
             } else {
-                x.push(element.value);
+                x.push(Object.assign({},element));
             }
         });
-        var entries = getCatalogEntries(name, p, x);
+        var entries = getCatalogEntries(name, p, x, this.props.system_controls.viol_wt);
         var entry;
         if (entries.length === 1)
             entry = 0; // Default to first entry
@@ -56,7 +56,7 @@ class ActionSelectCatalog extends React.Component {
     }
 
     toggle() {
-        console.log('In ActionSelectCatalog.toggle');
+//        console.log('In ActionSelectCatalog.toggle');
         var { getCatalogNames, getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
         var names = getCatalogNames();
         var name;
@@ -67,12 +67,12 @@ class ActionSelectCatalog extends React.Component {
         var x = [];
         this.props.symbol_table.forEach((element) => {
             if (element.input) {
-                p.push(element.value);
+                p.push(Object.assign({},element));
             } else {
-                x.push(element.value);
+                x.push(Object.assign({},element));
             }
         });
-        var entries = getCatalogEntries(name, p, x);
+        var entries = getCatalogEntries(name, p, x, this.props.system_controls.viol_wt);
         var entry;
         if (entries.length === 1)
             entry = 0; // Default to first entry
@@ -90,7 +90,7 @@ class ActionSelectCatalog extends React.Component {
     }
 
     onSelectCatalogName(event) {
-        console.log('In ActionSelectCatalog.onSelectCatalogName event.target.value=',event.target.value);
+//        console.log('In ActionSelectCatalog.onSelectCatalogName event.target.value=',event.target.value);
         var name = event.target.value;
         var { getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogEntries
         // Loop to create p and x from symbol_table
@@ -98,12 +98,12 @@ class ActionSelectCatalog extends React.Component {
         var x = [];
         this.props.symbol_table.forEach((element) => {
             if (element.input) {
-                p.push(element.value);
+                p.push(Object.assign({},element));
             } else {
-                x.push(element.value);
+                x.push(Object.assign({},element));
             }
         });
-        var entries = getCatalogEntries(name, p, x);
+        var entries = getCatalogEntries(name, p, x, this.props.system_controls.viol_wt);
         var entry;
         if (entries.length === 1)
             entry = 0; // Default to first entry
@@ -119,14 +119,14 @@ class ActionSelectCatalog extends React.Component {
     }
 
     onSelectCatalogEntry(event) {
-      console.log('In ActionSelectCatalog.onSelectCatalogEntry event.target.value=',event.target.value);
+//      console.log('In ActionSelectCatalog.onSelectCatalogEntry event.target.value=',event.target.value);
       this.setState({
           entry: parseFloat(event.target.value) 
       });
   }
 
     onSelect() {
-        console.log('In ActionSelectCatalog.onSelect this.state=',this.state);
+//        console.log('In ActionSelectCatalog.onSelect this.state=',this.state);
         this.setState({
             modal: !this.state.modal
         });
@@ -135,14 +135,12 @@ class ActionSelectCatalog extends React.Component {
         this.props.changeSymbolValue('Wire_Dia',this.state.entries[this.state.entry][2]);
         this.props.changeSymbolValue('L_Free',this.state.entries[this.state.entry][3]);
         this.props.changeSymbolValue('Coils_T',this.state.entries[this.state.entry][4]);
-        // Given Material Name, this.state.entries[this.state.entry][5], look up material type index
-        this.props.changeSymbolValue('Material_Type',2); // TODO: 2 (MUSIC_WIRE) is Fudge
-        // Given End Type, this.state.entries[this.state.entry][6], look up end type index
-        this.props.changeSymbolValue('End_Type',4); // TODO: 4 (Closed&Ground) is Fudge
+        this.props.changeSymbolValue('Material_Type',this.state.entries[this.state.entry][5]);
+        this.props.changeSymbolValue('End_Type',this.state.entries[this.state.entry][6]);
     }
 
     onCancel() {
-        console.log('In ActionSelectCatalog.onCancel');
+//        console.log('In ActionSelectCatalog.onCancel');
         this.setState({
             modal: !this.state.modal
         });
@@ -150,7 +148,7 @@ class ActionSelectCatalog extends React.Component {
     }
 
     render() {
-        console.log('In ActionSelectCatalog.render this.state=',this.state);
+//        console.log('In ActionSelectCatalog.render this.state=',this.state);
         return (
             <React.Fragment>
                 <DropdownItem onClick={this.toggle} disabled={this.state.names.length === 0}>
@@ -169,7 +167,7 @@ class ActionSelectCatalog extends React.Component {
                         <Label for="catalogEntrySelect">Select entry:</Label>
                         <Input type="select" id="catalogEntrySelect" onChange={this.onSelectCatalogEntry} value={this.state.entry}>
                             {this.state.entries.map((element, index) => (
-                                <option key={index} value={index}>{element[0]}: [OD_Free: {element[1]}, Wire_Dia: {element[2]}, L_Free: {element[3]}, Coils_T: {element[4]}, Material_Type: {element[5]}, End_Type: {element[6]}]</option>
+                                <option key={index} value={index}>{element[0]}: [Obj: {element[7]}]</option>
                             ))}
                         </Input>
                     </ModalBody>
@@ -185,7 +183,8 @@ class ActionSelectCatalog extends React.Component {
 
 const mapStateToProps = state => ({
     type: state.type,
-    symbol_table: state.symbol_table
+    symbol_table: state.symbol_table,
+    system_controls: state.system_controls
 });
 
 const mapDispatchToProps = {

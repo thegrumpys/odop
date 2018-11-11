@@ -4,8 +4,8 @@ export function getCatalogNames() {
     return result;
 }
 
-export function getCatalogEntries(type, p, x) {
-//    console.log('In getCatalogEntries type=',type,' p=',p,' x=',x);
+export function getCatalogEntries(name, p, x, viol_wt) {
+//    console.log('In getCatalogEntries name=',name,' p=',p,' x=',x,' viol_wt=',viol_wt);
     var result = [];
 //    console.log('In getCatalogEntries result=',result);
     return result;

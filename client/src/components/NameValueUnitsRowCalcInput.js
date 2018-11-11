@@ -38,7 +38,7 @@ class NameValueUnitsRowCalcInput extends React.Component {
                     this.props.changeSymbolValue(name,value);
                 }
             }
-        })
+        });
     }
     
     render() {
