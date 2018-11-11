@@ -167,7 +167,7 @@ class ActionSelectCatalog extends React.Component {
                         <Label for="catalogEntrySelect">Select entry:</Label>
                         <Input type="select" id="catalogEntrySelect" onChange={this.onSelectCatalogEntry} value={this.state.entry}>
                             {this.state.entries.map((element, index) => (
-                                <option key={index} value={index}>{element[0]}: [OD_Free: {element[1]}, Wire_Dia: {element[2]}, L_Free: {element[3]}, \nCoils_T: {element[4]}, Material_Type: {element[5]}, End_Type: {element[6]}, Obj: {element[7]}]</option>
+                                <option key={index} value={index}>{element[0]}: [OD_Free: {element[1]}, Wire_Dia: {element[2]}, L_Free: {element[3]}, Coils_T: {element[4]}, Material_Type: {element[5]}, End_Type: {element[6]}, Obj: {element[7]}]</option>
                             ))}
                         </Input>
                     </ModalBody>
