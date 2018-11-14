@@ -5,6 +5,7 @@ This topic covers a few points that may allow a better user experience with the 
 **Side-by-Side comparison of designs**   
 Depending on available screen size, 
 it may be possible to open two browser sessions with an ODOP design session in each.
+Adjustments the browser's font size or "zoom" scale may be necessary for best results.
 A non-overlapping side-by-side positioning of the windows will then 
 facilitate comparison of two designs.   
 
@@ -16,7 +17,7 @@ The side-by-side aspect of the screen layout can help quickly identify the prefe
 
 **Maximizing content visible in Help**   
 The on-line documentation (Help) is based on a "theme" that is responsive to the available
-width on the window.
+width of the window.
 If the window is sufficiently wide, the header and trailer information appears on the left.
 As the width of the window is reduced, the header and trailer information will move to top and bottom.
 While somewhat counter-intuitive, a reduced width window actually allows greater width for the content. 
@@ -61,8 +62,14 @@ the scrolling necessary to accommodate screen size limitations may impact produc
 Similarly, while it is possible to use the ODOP software from a mobile device, 
 establishing initial impressions with a full size monitor, keyboard and mouse is recommended.   
 
+**Printing**   
+Use the print features of the browser.
+Depending on the browser and operating system, it may be possible to
+"print" into a .PDF file.
+The Reports of the Spring design type are formatted for printing.
+
 **How to pronounce ODOP**   
-The preferred pronounciation is the individual letters O-D-O-P, 
+The preferred pronunciation is the individual letters O-D-O-P, 
 not a word like O-dop.
 
 **Reporting problems with the ODOP software**   

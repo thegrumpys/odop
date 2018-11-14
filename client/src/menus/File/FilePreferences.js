@@ -5,7 +5,7 @@ import { initialSystemControls } from '../../initialSystemControls';
 import { changeSystemControlsValue } from '../../store/actionCreators';
 
 class FilePreferences extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);

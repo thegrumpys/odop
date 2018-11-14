@@ -1,15 +1,19 @@
 import * as o from './offsets';
 import * as mo from './mat_ips_offsets';
+import * as eto from './c_endtypes_offsets';
 
 export function init(p, x) {
 //    console.log('In init p=',p);
- var i;
+ var i, j;
  const ten3 = 1000.0;
  var tensile_400;
 
    /*  Bring in material properties table  */
  var m_tab = require('./mat_ips.json');
 //    console.log("m_tab=", m_tab);
+ var et_tab = require('./c_endtypes.json');
+//    console.log("et_tab=", et_tab);
+
  
      x[o.Spring_Type] = "Compression";
      if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Tensile_Endur] === "unused") x[o.Prop_Calc_Method] = 1;
@@ -24,6 +28,7 @@ export function init(p, x) {
 //    x[o.Material_Index] = i;
 //    console.log("Material_Index = x[o.Material_Type] =", x[o.Material_Type]);
 //    console.log("Material_Index = x[o.Material_Index] =", x[o.Material_Index]);
+    j = x[o.End_Type];
 
      /*  taken from READMAT.PLI
       *  Initial manipulations of material array
@@ -103,6 +108,27 @@ export function init(p, x) {
     x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0;
 //    stress_lim_stat =tensile*pc_tensile_stat /100.0;
     x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0;
+//    /*  copy from end type table to constants  */
+//    /*  check these values.     See AS Design Hdbk. p52  */
+//    /*    VVVVVVVVVVVVV          Kludge for Torsion  */
+//if end_type_index > 0 & nmerit ^= 3 then
+//do;
+//if end_calc_method ^= 1 then              /*   debug  */
+//       put skip list('TAB2D:  END_CALC_METHOD SET TO 1.');
+//end_calc_method=1;
+//
+//end_type        = end_name(end_type_index);
+//inactive_coils  = inact_coil_tbl(end_type_index);
+    x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
+//if end_type_index <= c_end_num then
+//  add_coils_solid=acs_tbl(end_type_index);
+    x[o.Add_Coils_Solid] = et_tab[j][eto.add_coils_solid];
+//else
+//  add_coils_solid=0.0;
+//if end_type_index > c_end_num then
+//  hook_deflect_all=hda_tbl(end_type_index-c_end_num);
+//else
+//  hook_deflect_all=0.0;
     break;
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur

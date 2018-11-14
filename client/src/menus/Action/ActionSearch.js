@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { search } from '../../store/actionCreators';
 
 class ActionSearch extends React.Component {
+
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);

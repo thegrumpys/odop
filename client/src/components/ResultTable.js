@@ -32,15 +32,15 @@ class ResultTable extends React.Component {
                     </tbody>
                 </Table>
                 <Table className="col-md-6" size="sm">
-                <tbody>
-                    <tr>
-                        <td className={feasibility_class}>{feasibility_string}</td>
-                    </tr>
-                    <tr>
-                        <td> {this.props.termination_condition}</td>
-                    </tr>
-                </tbody>
-            </Table>
+                    <tbody>
+                        <tr>
+                            <td className={feasibility_class}>{feasibility_string}</td>
+                        </tr>
+                        <tr>
+                            <td> {this.props.termination_condition}</td>
+                        </tr>
+                    </tbody>
+                </Table>
                 <Table className="col-md-2" size="sm">
                     <tbody>
                         <tr>

@@ -3,6 +3,7 @@ import { DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 
 class ViewViolations extends React.Component {
+
     constructor(props) {
         super(props);
         this.onChange = this.onChange.bind(this);

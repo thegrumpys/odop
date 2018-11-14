@@ -7,27 +7,57 @@ import { changeSymbolValue, setSymbolFlag, resetSymbolFlag } from '../store/acti
 class NameValueUnitsRowIndependentVariable extends React.Component {
     
     constructor(props) {
+//        console.log('In NameValueUnitsRowIndependentVariable.constructor props=',props);
         super(props);
-        this.onChangeIndependentVariableValue = this.onChangeIndependentVariableValue.bind(this);
-        this.onSetIndependentVariableFlag = this.onSetIndependentVariableFlag.bind(this);
-        this.onResetIndependentVariableFlag = this.onResetIndependentVariableFlag.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onSelect = this.onSelect.bind(this);
+        this.onSet = this.onSet.bind(this);
+        this.onReset = this.onReset.bind(this);
+//        console.log('In NameValueUnitsRowIndependentVariable.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table)
+        if (this.props.element.type === 'table') {
+//            console.log('In NameValueUnitsRowIndependentVariable.constructor file = ../designtypes/'+this.props.type+'/'+this.props.element.table+'.json');
+            var table = require('../designtypes/'+this.props.type+'/'+this.props.element.table+'.json'); // Dynamically load table
+//            console.log('In NameValueUnitsRowIndependentVariable.constructor table=',table);
+            this.state = {
+                table: table
+            };
+        }
     }
     
-    onChangeIndependentVariableValue(event) {
+    onChange(event) {
+//        console.log('In NameValueUnitsRowIndependentVariable.onChange event.target.value=',event.target.value);
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
     }
     
-    onSetIndependentVariableFlag(event) {
+    onSelect(event) {
+//        console.log('In NameValueUnitsRowIndependentVariable.onSelect event.target.value=',event.target.value);
+        var selectedIndex = parseFloat(event.target.value);
+        this.props.changeSymbolValue(this.props.element.name,selectedIndex);
+        this.state.table[selectedIndex].forEach((value, index) => {
+            if (index > 0) { // Skip the first column
+                var name = this.state.table[0][index];
+//                console.log('In NameValueUnitsRowIndependentVariable.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',this.props.symbol_table.find(element => element.name === name));
+                if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
+                    this.props.changeSymbolValue(name,value);
+                }
+            }
+        })
+    }
+    
+    onSet() {
+//        console.log('In NameValueUnitsRowIndependentVariable.onSet');
         this.props.setSymbolFlag(this.props.element.name, MIN, FIXED);
         this.props.setSymbolFlag(this.props.element.name, MAX, FIXED);
     }
     
-    onResetIndependentVariableFlag(event) {
+    onReset() {
+//        console.log('In NameValueUnitsRowIndependentVariable.onReset');
         this.props.resetSymbolFlag(this.props.element.name, MIN, FIXED);
         this.props.resetSymbolFlag(this.props.element.name, MAX, FIXED);
     }
     
     render() {
+//        console.log('In NameValueUnitsRowIndependentVariable.render');
         // =======================================
         // Table Row
         // =======================================
@@ -37,10 +67,22 @@ class NameValueUnitsRowIndependentVariable extends React.Component {
                 { this.props.element.tooltip !== undefined && <UncontrolledTooltip placement="left" target={'independent_variable_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
-                        <Input className="text-right" type="number" value={this.props.element.value} onChange={this.onChangeIndependentVariableValue} />
+                        { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
+                            <Input className="text-right" type="number" value={this.props.element.value} onChange={this.onChange} /> : '' }
+                        { this.props.element.type === undefined && typeof this.props.element.value === 'string' ?
+                            <Input className="text-right" type="text" value={this.props.element.value} onChange={this.onChange} /> : '' }
+                        { this.props.element.type === 'table' &&
+                        (
+                            <Input type="select" value={this.props.element.value} onChange={this.onSelect}>
+                                {this.state.table.map((value, index) =>
+                                    index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
+                                )}
+                            </Input>
+                        )
+                        }
                         <InputGroupAddon addonType="append">
                             <InputGroupText>
-                                <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onResetIndependentVariableFlag : this.onSetIndependentVariableFlag} />
+                                <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
                             </InputGroupText>
                         </InputGroupAddon>
                     </InputGroup>
@@ -52,10 +94,15 @@ class NameValueUnitsRowIndependentVariable extends React.Component {
     }
 }
 
+const mapStateToProps = state => ({
+    type: state.type,
+    symbol_table: state.symbol_table
+});
+
 const mapDispatchToProps = {
     changeSymbolValue: changeSymbolValue,
     setSymbolFlag: setSymbolFlag,
     resetSymbolFlag: resetSymbolFlag
 };
 
-export default connect(null, mapDispatchToProps)(NameValueUnitsRowIndependentVariable);
+export default connect(mapStateToProps, mapDispatchToProps)(NameValueUnitsRowIndependentVariable);

@@ -3,6 +3,7 @@ import { DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 
 class HelpIndex extends React.Component {
+
     constructor(props) {
         super(props);
         this.onHelp = this.onHelp.bind(this);

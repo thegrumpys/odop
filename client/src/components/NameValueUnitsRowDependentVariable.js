@@ -8,17 +8,14 @@ import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFl
 class NameValueUnitsRowDependentVariable extends React.Component {
     
     constructor(props) {
+//        console.log('In NameValueUnitsRowDependentVariable.constructor');
         super(props);
-        this.onChangeDependentVariableValue = this.onChangeDependentVariableValue.bind(this);
-        this.onSetDependentVariableFlag = this.onSetDependentVariableFlag.bind(this);
-        this.onResetSymbolFlag = this.onResetSymbolFlag.bind(this);
+        this.onSet = this.onSet.bind(this);
+        this.onReset = this.onReset.bind(this);
     }
     
-    onChangeDependentVariableValue(event) {
-        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
-    }
-    
-    onSetDependentVariableFlag(event) {
+    onSet() {
+//        console.log('In NameValueUnitsRowDependentVariable.onSet');
         this.props.saveOutputSymbolConstraints(this.props.element.name);
         this.props.setSymbolFlag(this.props.element.name, MIN, FIXED|CONSTRAINED);
         this.props.setSymbolFlag(this.props.element.name, MAX, FIXED|CONSTRAINED);
@@ -26,11 +23,13 @@ class NameValueUnitsRowDependentVariable extends React.Component {
         this.props.changeSymbolConstraint(this.props.element.name, MAX, this.props.element.value);
     }
     
-    onResetSymbolFlag(event) {
+    onReset() {
+//        console.log('In NameValueUnitsRowDependentVariable.onReset');
         this.props.restoreOutputSymbolConstraints(this.props.element.name);
     }
     
     render() {
+//        console.log('In NameValueUnitsRowDependentVariable.render');
         // =======================================
         // Table Row
         // =======================================
@@ -43,7 +42,7 @@ class NameValueUnitsRowDependentVariable extends React.Component {
                         <span className="text-right form-control bg-light">{this.props.element.value.toFixed(4)}</span>
                         <InputGroupAddon addonType="append">
                             <InputGroupText>
-                                <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onResetSymbolFlag : this.onSetDependentVariableFlag} />
+                                <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
                             </InputGroupText>
                         </InputGroupAddon>
                     </InputGroup>

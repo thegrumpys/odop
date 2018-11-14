@@ -3,6 +3,7 @@ import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button } from
 import { connect } from 'react-redux';
 
 class ViewOffsets extends React.Component {
+
     constructor(props) {
 //        console.log('In ViewOffsets.constructor');
         super(props);

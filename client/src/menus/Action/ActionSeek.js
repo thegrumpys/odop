@@ -5,6 +5,7 @@ import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek } from '../../store/actionCreators';
 
 class ActionSeek extends React.Component {
+
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -86,9 +87,9 @@ class ActionSeek extends React.Component {
                         </InputGroup>
                     </ModalBody>
                     <ModalFooter>
+                        <Button outline color="info" onClick={this.onContextHelp}>Help</Button>{' '}
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button color="primary" onClick={this.onSeek}>Seek</Button>
-                        <Button outline color="info" onClick={this.onContextHelp}>Help</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
