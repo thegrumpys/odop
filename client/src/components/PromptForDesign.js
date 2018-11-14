@@ -108,6 +108,7 @@ export class PromptForDesign extends React.Component {
                 return res.json()
             })
             .then(design => {
+//                console.log('In PromptForDesign.getDesigns design=', design);
                 var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
                 const store = createStore(reducers, migrated_design, middleware);
@@ -179,6 +180,7 @@ export class PromptForDesign extends React.Component {
     }
 
     render() {
+//        console.log('In PromptForDesign.render');
         return (
             <React.Fragment>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>

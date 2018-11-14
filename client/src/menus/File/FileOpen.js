@@ -1,10 +1,13 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { connect } from 'react-redux';
-import { load } from '../../store/actionCreators';
+import { startup } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
+import { reducers } from '../../store/reducers';
+import { dispatcher } from '../../store/middleware/dispatcher';
 import { logUsage } from '../../logUsage';
 
 class FileOpen extends React.Component {
@@ -43,6 +46,13 @@ class FileOpen extends React.Component {
     
     getDesign(type,name) {
 //        console.log('In FileOpen.getDesign type=', type, ' name=', name);
+        
+        /* eslint-disable no-underscore-dangle */
+        const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+        /* eslint-enable */
+
+        const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/dispatcher));
+
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+type+'/designs/' + name)
             .then(res => {
@@ -53,9 +63,11 @@ class FileOpen extends React.Component {
                 return res.json()
             })
             .then((design) => {
+//                console.log('In FileOpen.getDesigns design=', design);
                 var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
-                this.props.load(migrated_design)
+                const store = createStore(reducers, migrated_design, middleware);
+                store.dispatch(startup());
                 logUsage('function=FileOpen,type='+type+',name='+name);
             })
             .catch(error => {
@@ -102,6 +114,7 @@ class FileOpen extends React.Component {
     }
 
     render() {
+//        console.log('In FileOpen.render');
         return (
             <React.Fragment>
                 <DropdownItem onClick={this.toggle}>
@@ -134,7 +147,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    load: load
+    startup: startup
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileOpen);
