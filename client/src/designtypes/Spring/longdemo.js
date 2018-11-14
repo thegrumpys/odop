@@ -160,7 +160,7 @@ export const execute = {
                     <p>
                     Now that we have expressed what we want the design to accomplish,
                     we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
-                    Specifically, Search will find values of the free Independent Variables
+                    Specifically, Search will attempt to find values of the free Independent Variables
                     that cause the newly established Constraints and FIXes to be satisfied.
                     </p>
 
@@ -169,6 +169,7 @@ export const execute = {
                     it will display "<b>FEASIBLE</b>" in the Result section (immediately below these words).  
                     If a satisfactory solution is found, but one or more constraints remain violated by a
                     trivial amount, the program will display "<b>MARGINALLY FEASIBLE</b>" in the Result section.
+                    If the search process is unable to find a solution, the red "<b>NOT FEASIBLE</b>" will persist.
                     </p>
                 </React.Fragment>
             )
@@ -180,7 +181,7 @@ export const execute = {
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
                     <p>
                     Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
-                    Simply select (click on) that tab to view the report.
+                    Simply select (click on) that tab (above the words) to view the report.
                     The message: 
                     "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
                     is produced any time that the second load uses more
@@ -204,20 +205,20 @@ export const execute = {
                     
                     <p>
                     As a general rule, in the first approach to a new problem, 
-                    we let the calculations use an arbitrary (non-standard) wire diameter. 
-                    As a last step, we select a standard wire diameter,
-                    put it in FIXed status and then execute a Search to make any necessary 
+                    let the calculations use an arbitrary (non-standard) wire diameter. 
+                    As a last step, select a standard wire diameter,
+                    put it in FIXed status and then execute a search to make any necessary 
                     adjustments in the remaining free Independent Variables.
                     </p>
                     
                     <p>
                     Now it is time for a bit of audience participation.
                     Since the ODOP demo feature is not yet capable of directly controlling menus,
-                    you need to go to the <b>Action : Select Size...</b> menu item
+                    go to the <b>Action : Select Size...</b> menu item
                     to chose the nearest standard wire diameter.
                     <br /><br />
-                    In Demo / Tutorial Speak:<br />
-                    Select  Wire_Dia  0.135<br />
+                    In Demo / Tutorial speak:<br />
+                    Select  Size  Wire_Dia  0.135<br />
                     <br />
                     Please confirm that Wire_Dia is FIXed at 0.135 and then click Next 
                     to move to the next page.
@@ -264,10 +265,16 @@ export const execute = {
                     
                     <p>
                     This is a good time to think about saving the design for potential access in the future.
-                    You can use the <b>File : Save As...</b> menu item to save the design into the Design Library.  
+                    Use the <b>File : Save As...</b> menu item to save the design into the Design Library.  
                     Alternatively, it should be possibile to use the print features of the browser to
                     send one or more of the Reports to a local printer or perhaps save to a .PDF file.
-                    Your browser documentation should provide more details.
+                    Your browser documentation should provide more details about printing.
+                    </p>
+                    
+                    <p>
+                    The next page covers use of the catalog.
+                    Selecting a catalog entry will replace the current design.
+                    So, it is advisable to save your work before proceding.
                     </p>
                 </React.Fragment>
             ),
@@ -290,12 +297,22 @@ export const execute = {
                     to determine if a similar design is available in the built-in catalog. 
                     We'll chose the design that is closest to the current (custom) design, 
                     then evaluate it.
-                    Again, the demo session will need your participation.
+                    Again, the demo session will need your participation on 
+                    the Action menu ...
                     <br /><br />
-                    In Demo / Tutorial Speak:<br />
+                    In Demo / Tutorial speak:<br />
                     Select  Catalog
                     </p>
-                    Oops !  this will have to wait until the Select Catalog feature is implemented.
+                    
+                    <p>
+                    You will have the opportunity to specify a catalog. 
+                    Details on up to four entries from that catalog will be displayed.
+                    Finally, if any of those entries appears to be worth further investigation, 
+                    select that entry by name in the lower selection drop-down box.
+                    The selected entry will become the current design providing an opportunity
+                    to compare its performance to the previously established constraints.
+                    </p>
+                    
                 </React.Fragment>
             )
         },
