@@ -53,6 +53,7 @@ class FileOpen extends React.Component {
                 return res.json()
             })
             .then((design) => {
+//                console.log('In FileOpen.getDesigns design=', design);
                 var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
                 this.props.load(migrated_design)
@@ -102,6 +103,7 @@ class FileOpen extends React.Component {
     }
 
     render() {
+//        console.log('In FileOpen.render');
         return (
             <React.Fragment>
                 <DropdownItem onClick={this.toggle}>

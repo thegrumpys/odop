@@ -27,16 +27,16 @@ function startConnection() {
 }
 
 // Put all API endpoints under '/api'
-// GET — retrieve a particular resource’s object or list all objects
-// POST — create a new resource’s object
-// PATCH — make a partial update to a particular resource’s object
-// PUT — completely overwrite a particular resource’s object
-// DELETE — remove a particular resource’s object
-// 200 — OK, The request was successful
-// 201 — CREATED, A new resource object was successfully created
-// 404 — NOT FOUND, The requested resource could not be found
-// 400 — BAD REQUEST, The request was malformed or invalid
-// 500 — INTERNAL SERVER ERROR, Unknown server error has occurred
+// GET - retrieve a particular resource's object or list all objects
+// POST - create a new resource's object
+// PATCH - make a partial update to a particular resource's object
+// PUT - completely overwrite a particular resource's object
+// DELETE - remove a particular resource's object
+// 200 - OK, The request was successful
+// 201 - CREATED, A new resource object was successfully created
+// 404 - NOT FOUND, The requested resource could not be found
+// 400 - BAD REQUEST, The request was malformed or invalid
+// 500 - INTERNAL SERVER ERROR, Unknown server error has occurred
 
 app.get('/api/v1/designtypes', (req, res) => {
     var value;

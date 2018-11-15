@@ -94,7 +94,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 //        cycle_life = cl_calc(material_index,life_catagory,1,tensile,stress_1,stress_2);
         x[o.Cycle_Life] = cl_calc(x[o.Material_Type], x[o.Life_Category], 1, x[o.Tensile], x[o.Stress_1], x[o.Stress_2]);
     }
-       else x[o.Cycle_Life] = NaN;
+       else x[o.Cycle_Life] = 0.0;   // Setting to NaN causes problems with File : Open.  See issue 232
 
                            /*  crude approximation  ... better available on web  */
     x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * (Math.PI * x[o.Mean_Dia] * p[o.Coils_T]);

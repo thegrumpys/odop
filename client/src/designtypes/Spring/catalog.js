@@ -140,7 +140,7 @@ export function getCatalogEntries(name, symbol_table_p, symbol_table_x, viol_wt)
 //    console.log('In getCatalogEntries catalog=',catalog);
     // scan through catalog
     for (let i = 1; i < catalog.length; i++) { // Skip column headers at zeroth entry
-        entry = Object.assign({},catalog[i]); // Make copy so we can modify it without affecting catalog
+        entry = Object.assign({},catalog[i]); // Make copy so we can modify it without affecting catalog
         
         // Skip catalog entry if it's less than half the constraint value or greater than twice the constraint value
         if (entry[1] < cmin_OD_Free  || entry[1] > cmax_OD_Free ) continue;
