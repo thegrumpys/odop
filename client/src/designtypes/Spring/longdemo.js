@@ -274,7 +274,8 @@ export const execute = {
                     <p>
                     The next page covers use of the catalog.
                     Selecting a catalog entry will replace the current design.
-                    So, it is advisable to save your work before proceding.
+                    So again, if this were a real design situation as opposed to a tutorial session,
+                    this would be a good time to save your work before proceding.
                     </p>
                 </React.Fragment>
             ),
@@ -313,6 +314,9 @@ export const execute = {
                     to compare its performance to the previously established constraints.
                     </p>
                     
+                    <p>
+                    Please take this opportunity to select a spring from the catalog.
+                    </p>
                 </React.Fragment>
             )
         },
