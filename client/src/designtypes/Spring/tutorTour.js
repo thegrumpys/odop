@@ -244,8 +244,8 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     In order change the value of a Dependent Variable, it is necessary
-                    to FIX (see below) its value and then execute the Search function
-                    (Action : Search menu).   
+                    to FIX (see below) its value and then execute the Search function: 
+                    (<b>Action : Search</b> menu).   
                     </p>
                     
                     <img src="https://raw.githubusercontent.com/thegrumpys/odop/master/docs/Help/png/DependentSpring.png" alt="Dependent Variable Entry Fields"/>
@@ -261,13 +261,16 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     Calculation Inputs are quantities that can be modified by the user
-                    but are not subject to Constraints, FIX or manipulation by the Search process.   
-                    ![Calculation Inputs](./png/CalcInput.png "Calculation Inputs")   
+                    but are not subject to constraints, FIX or manipulation by the Search process. 
                     </p>
                     
                     <img src="https://raw.githubusercontent.com/thegrumpys/odop/master/docs/Help/png/CalcInputSpring.png" alt="Calculation Input Entry Fields"/>
                     
                     <p>
+                    <br />
+                    You will likely need to scroll down to see the section of the main page containing
+                    Calculation Inputs.
+                    Scroll back up and click "Next" when ready to continue.
                     </p>
                 </React.Fragment>
             ),
@@ -279,8 +282,8 @@ export const execute = {
                     <p>
                     This clip illustrates how a Calculation Input with a drop-down arrow 
                     can expand into a table that the user can select from.
-                    In this case, the user selects a material and the appropriate value of
-                    density is provided to the calculations.   
+                    In this case, the user selects a material and the appropriate 
+                    material property values are provided to the calculations. 
                     </p>
                     
                     <img src="https://raw.githubusercontent.com/thegrumpys/odop/master/docs/Help/png/CalcInputTableSpring.png" alt="Calculation Input Selection Table"/>
@@ -297,12 +300,12 @@ export const execute = {
                     <p>
                     Constraints are single sided (Max or Min) limits imposed on the 
                     selected Variable. 
-                    First, mark the checkbox and then enter a value in the entry field.
-                    The amount of constraint violation will be immediate recalculated;
+                    First, mark the constraint checkbox and then enter a value in the entry field.
+                    The amount of constraint violation will be recalculated immediately;
                     a positive value if violated or a negative value if satisfied.
-                    The value of the Objective Function will immediately reflect the 
+                    The value of the Objective Function will reflect the 
                     impact of a violated constraint.
-                    This example illustrates a few of the  constraints provided with 
+                    This example illustrates a few of the constraints provided with 
                     the default design named "startup".
                     </p>
                     
