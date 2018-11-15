@@ -92,7 +92,7 @@ primarily to maintain consistency.
 ### Action : Trade
 This menu item provides a similar feature to the PCyl-CLI Trade command. One
 possible implementation is to pop up a form where the user can specify a strategy
-(radio buttons similar to the current 0 – 3), over-ride step size and decide to keep the
+(radio buttons similar to the current 0 - 3), over-ride step size and decide to keep the
 result or not.
 
 #### -------------------------------------
