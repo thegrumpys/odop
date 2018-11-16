@@ -16,7 +16,7 @@ export const execute = {
                     for ODOP:Spring as opposed to walking through the underlying
                     concepts and major features at the disposal of a serious spring designer, 
                     you may want to skip forward to the sample problems. 
-                    You may do this by Canceling this session and selecting one of the spring 
+                    You may do this by canceling this session and selecting one of the spring 
                     design Demo sessions available from the <b>Help : Demo...</b> menu
                     when a Spring design type is loaded.
                     </p>
@@ -27,7 +27,7 @@ export const execute = {
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState
-                    for the ODOP <b>Rectangular Solid</b> design model.
+                    for the ODOP <b>Rectangular Solid</b> design type.
                     </p>
                     
                     <p>
@@ -49,14 +49,14 @@ export const execute = {
                     ODOP contains an "on-line" help facility.
                     It includes an overview of the program, a <b>Getting Started</b> section plus
                     helpful hints and detailed explanations of major features.  
-                    But first, a few words about what <b>not</b> to expect ...
+                    But first, a few words about what <b>not</b> to expect.
                     The on-line help facility is not intended to replace the documentation that comes 
-                    with your browser or computer system.  
-                    Also, the Help facility is not intended to teach spring design. 
-                    The spring design user is expected to know the
-                    basic physics of springs and strength of materials. 
-                    The spring design content assumes that the user is familiar with the
-                    concepts of stress, factor of safety, yield point, endurance limit, etc.
+                    with your browser or computer system. 
+                    Also, the Help facility is not intended to teach the fundamentals of an application 
+                    like spring design. 
+                    Rather, the Help facility will show someone that already understands the basics of
+                    strength of materials and the basics of spring design how to operate the program 
+                    to create new spring designs.
                     </p>
                 </React.Fragment>
             ),
