@@ -73,11 +73,11 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    The value of the "Objective Function" is the thing that the search procedure
+                    The "Objective Value" is the thing that the search procedure
                     uses to measure how close a given design is to being feasible.
                     It is formed by adding a contribution from all the violated constraints.
                     Thus, as in this case, if all the constraints are satisfied, the
-                    objective function is zero and we have a feasible design.<br />
+                    objective value is zero and we have a feasible design.<br />
                     <br />
                     Let's find out what a violated constraint looks like.<br />
                     <br />
@@ -100,7 +100,7 @@ export const execute = {
                     
                     <p>
                     It should be pretty hard to miss the violation of OD_FREE MAX.
-                    Also, the objective function value is greater than zero. 
+                    Also, the Objective Value is greater than zero. 
                     This is a good clue that there is work for the search procedure to do.<br />
                     <br />
                     Shall we see if Search can find a design with a smaller (less than

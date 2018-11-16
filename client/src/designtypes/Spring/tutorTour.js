@@ -32,7 +32,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 16",
+            title: "Page 02 of 20",
             text: (
                 <React.Fragment>
                     <p>
@@ -60,11 +60,11 @@ export const execute = {
                 loadInitialState('Spring'),
                 changeSymbolValue("L_Free", 3.0),
                 changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
-                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
+                changeLabelsValue([{name: 'COMMENT', value: 'tutorTour - Compression Spring tutorial session'}])
             ]
         },
         {
-            title: "Page 03 of 16",
+            title: "Page 03 of 20",
             text: (
                 <React.Fragment>
                     <p>
@@ -89,7 +89,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 04 of 16",
+            title: "Page 04 of 20",
             text: (
                 <React.Fragment>
                     
@@ -111,12 +111,13 @@ export const execute = {
                    </p>
                     
                     <p>
+                    <br />
                     </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 05 of 16",
+            title: "Page 05 of 20",
             text: (
                 <React.Fragment>
                     <p>
@@ -131,19 +132,11 @@ export const execute = {
                     <p>
                     <br />
                     </p>
-                    
-                    <p>
-                    So, as you are reading, please click the Help menu above.
-                    It will drop down to provide a list of entries (topics) to choose from.
-                    Selecting <b>Index</b> on this list will bring up a new browser tab with the
-                    list of available Help entries. 
-                    You can switch back and forth between the browser tabs.
-                    </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 06 of 16",
+            title: "Page 06 of 20",
             text: (
                 <React.Fragment>
                     <p>
@@ -169,7 +162,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 07 of 16",
+            title: "Page 07 of 20",
             text: (
                 <React.Fragment>
                     <p>
@@ -192,7 +185,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 08 of 16",
+            title: "Page 08 of 20",
             text: (
                 <React.Fragment>
                     <p>
@@ -219,7 +212,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 09 of 16",
+            title: "Page 09 of 20",
             text: (
                 <React.Fragment>
                     <p>
@@ -227,7 +220,7 @@ export const execute = {
                     The user can change the value of Independent Variables by positioning
                     the cursor in the field and over-writing the existing value.
                     Recalculation will happen immediately.
-                    The Dependent Variables and Objective Function will immediately
+                    The Dependent Variables, constraint violations and Objective Value will immediately
                     reflect the result of the new value for that Independent Variable.   
                     </p>
                     
@@ -239,12 +232,12 @@ export const execute = {
             )
         },
         {
-            title: "Page 10 of 16",
+            title: "Page 10 of 20",
             text: (
                 <React.Fragment>
                     <p>
                     In order change the value of a Dependent Variable, it is necessary
-                    to FIX (see below) its value and then execute the Search function: 
+                    to FIX its value (more about FIX coming soon) and then execute the Search feature 
                     (<b>Action : Search</b> menu).   
                     </p>
                     
@@ -256,7 +249,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 11 of 16",
+            title: "Page 11 of 20",
             text: (
                 <React.Fragment>
                     <p>
@@ -276,7 +269,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 12 of 16",
+            title: "Page 12 of 20",
             text: (
                 <React.Fragment>
                     <p>
@@ -294,7 +287,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 13 of 16",
+            title: "Page 13 of 20",
             text: (
                 <React.Fragment>
                     <p>
@@ -303,8 +296,7 @@ export const execute = {
                     First, mark the constraint checkbox and then enter a value in the entry field.
                     The amount of constraint violation will be recalculated immediately;
                     a positive value if violated or a negative value if satisfied.
-                    The value of the Objective Function will reflect the 
-                    impact of a violated constraint.
+                    The Objective Value will reflect the aggregate impact of all violated constraints.
                     This example illustrates a few of the constraints provided with 
                     the default design named "startup".
                     </p>
@@ -317,7 +309,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 14 of 16",
+            title: "Page 14 of 20",
             text: (
                 <React.Fragment>
                     <p>
@@ -334,7 +326,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 15 of 16",
+            title: "Page 15 of 20",
             text: (
                 <React.Fragment>
                     <p>
@@ -354,117 +346,14 @@ export const execute = {
             ),
         },
         {
-            title: "Page xx of 16",
+            title: "Page 15 of 20",
             text: (
                 <React.Fragment>
                     <p>
                     </p>
                     
                     <p>
-                    Since you may not be familiar with the names of ODOP:Spring variables,
-                    the next screen will illustrate several variable names in the
-                    context of a force-deflection diagram.
-                    </p>
-                    <br />
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page xx of 16",
-            text: (
-                <React.Fragment>
-                <img src="designtypes/Spring/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page xx of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                </React.Fragment>
-            ),
-            actions: [
-            ]
-        },
-        {
-            title: "Page xx of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    <br /><br />
-                </React.Fragment>
-            ),
-            actions: [
-            ]
-        },
-        {
-            title: "Page 12 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-
-                    <p>
-                    </p>
-                </React.Fragment>
-            ),
-        },
-        {
-            title: "Page 13 of 16",
-            text: (
-                <React.Fragment>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    <br /><br />
-                </React.Fragment>
-            ),
-            actions: [
-            ]
-        },
-        {
-            title: "Page 14 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                </React.Fragment>
-            ),
-            actions: [
-            ]
-        },
-        {
-            title: "Page 15 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>
+                    To summarize:
                     </p>
                     
                     <ul>
@@ -496,12 +385,85 @@ export const execute = {
                         </li>
                     </ul>
                 </React.Fragment>
-            ),
-            actions: [
-            ]
+            )
         },
         {
-            title: "Page 16 of 16 (last page)",
+            title: "Page 16 of 20",
+            text: (
+                <React.Fragment>
+                    <p>
+                    The quick tour of the main page is now complete.
+                    This is a good time good to get a better look at what is available 
+                    in the on-line documentation. 
+                    Most of the entries that are available after selecting the Help : Index menu item
+                    cover the generic features and capabilities of the ODOP software.
+                    So, as you are reading, please click the Help menu above.
+                    It will drop down to provide a list of entries (topics) to choose from.
+                    Selecting <b>Index</b> on this list will bring up a new browser tab with the
+                    list of available Help entries. 
+                    You can switch back and forth between the browser tabs.
+                    </p>
+                    
+                    <p>
+                    On-line documentation specific to ODOP:Spring appears in the Spring Design topic.
+                    </p>
+                    
+                    <img src="https://raw.githubusercontent.com/thegrumpys/odop/master/docs/Help/png/HelpIndex.png" alt="Help Index"/>
+                    
+                    <p>
+                    <br />
+                    After completing this tutorial session, if time is available, read through those entries from top to bottom.
+                    </p>
+                </React.Fragment>
+            ),
+        },
+        {
+            title: "Page 17 of 20",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Spring design demonstration sessions illustrate problem solving techniques as well as provide
+                    sample solutions to several generally available reference book problems.
+                    Use the <b>Help : Demo...</b> menu item to select the desired demo session.   
+                    </p>
+                    
+                    <img src="https://raw.githubusercontent.com/thegrumpys/odop/master/docs/Help/png/HelpDemo.png" alt="Help Demo"/>
+                    <br />
+                    <img src="https://raw.githubusercontent.com/thegrumpys/odop/master/docs/Help/png/SelectSpringDemo.png" alt="Select Spring Demo"/>
+                    
+                    <p>
+                    </p>
+                </React.Fragment>
+            ),
+        },
+        {
+            title: "Page 18 of 20",
+            text: (
+                <React.Fragment>
+                    <p>
+                    This tutorial session will now wrap up with a few bits of 
+                    general information.
+                    </p>
+                    
+                    <p>
+                    Since you may not be familiar with the names of ODOP:Spring variables,
+                    the next screen will illustrate several variable names in the
+                    context of a force-deflection diagram.
+                    </p>
+                    <br />
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 19 of 20",
+            text: (
+                <React.Fragment>
+                <img src="designtypes/Spring/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 20 of 20 (last page)",
             text: (
                 <React.Fragment>
                     <p>
@@ -525,7 +487,7 @@ export const execute = {
                     tutorial for a list of the Tutorial and Demo topics.
                     </p>
                     
-                    <p>If you do not wish to continue with more demonstration problems, 
+                    <p>If you do not wish to continue with more tutorial sessions or demonstration problems, 
                     you can experiment with the various ODOP features, menus and reports. 
                     The HELP menu is a good place to start. </p>
                 </React.Fragment>
