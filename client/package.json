@@ -24,17 +24,20 @@
     "istanbul": "^0.4.5"
   },
   "dependencies": {
-    "ajv": "^6.5.2",
-    "bootstrap": "^4.1.1",
+    "bootstrap": "^4.1.3",
     "jquery": "^3.3.1",
-    "popper.js": "^1.14.3",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-interactive-tutorials": "^0.1.11",
-    "react-redux": "^5.0.7",
-    "react-scripts": "1.1.4",
-    "reactstrap": "^6.2.0",
-    "redux": "^4.0.0"
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-redux": "^5.1.1",
+    "react-scripts": "^2.1.1",
+    "reactstrap": "^6.5.0",
+    "redux": "^4.0.1"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
