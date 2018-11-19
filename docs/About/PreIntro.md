@@ -7,7 +7,7 @@ and design of a broad range of problems that have a mathematical model available
 The Rectangular Solid design type is provided as an easy to understand demonstration
 of basic capabilities.
 [ODOP Introduction](ODOPintro) starts with basic concepts and then leads to a
-less technical getting started explanation based on the Rectangular Solid.
+less technical Getting Started explanation based on the Rectangular Solid.
 
 **ODOP:Spring** is a full-featured app enabling the engineering 
 design of helical coil compression springs.

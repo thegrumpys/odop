@@ -19,18 +19,12 @@ the Rectangular Solid design type is intended as an easy to understand
 demonstration problem and is a good place to start.
 If you would like to skip the Rectangular Solid presentation and instead 
 jump ahead to work with the spring design materials,
-read through the next paragraphs about launching the program 
+read about [launching the program](launchODOP) 
 and then come back and follow this link:
 [Spring design tutorial and demo](gettingStartedSpring)
 
 Note that the [Terminology](terminology) page of the on-line documentation may be 
 helpful with some of the terms utilized here.
-
-If you have reached this point from the initial "About" link without previously 
-starting the program, more detail on configuring browser windows and 
-launching the ODOP program is available [here](launchODOP).
-You will need to use your browser's Back button to return to this page
-in order to continue with these instructions. 
 
 The ODOP starting dialog provides the opportunity to select a design type.
 Within each design type, you will have the opportunity to select an existing design.
@@ -44,7 +38,8 @@ and its default design called **startup**.
 
 &nbsp;   
 So, if you have not already selected the **Solid** design type,
-please do it now and proceed with the tour.
+please do it now.
+You will need to return to this point and proceed with the tour.
 
 &nbsp;
 
@@ -59,7 +54,7 @@ Select one of the main menu entries and a drop-down with sub-items will appear.
 
 Here is an example of how each main menu item will drop down to provide 
 specific menu items.
-Note that menu entries associated with not yet implemented features are disabled (grey).
+Note that menu entries associated with not yet implemented features are disabled (gray).
 This screen clip illustrates how to get to the index of Help pages.   
 ![Help Index](./png/HelpIndex.png "Help Index")   
 
@@ -90,8 +85,8 @@ There are numeric entry fields for each of the variables.
 The user can change the value of Independent Variables by positioning
 the cursor in the field and over-writing the existing value.
 Recalculation will happen immediately.
-The Dependent Variables and Objective Function will immediately
-reflect the result of the new value for that Independent Variable.   
+The Dependent Variables, constraint violations and Objective Function will 
+immediately reflect the result of the new value for that Independent Variable.   
 ![Independent Variables](./png/Independent.png "Independent Variables")   
 
 &nbsp;
@@ -104,15 +99,17 @@ to FIX (see below) its value and then execute the Search function
 &nbsp;
 
 Calculation Inputs are quantities that can be modified by the user
-but are not subject to Constraints, FIX or manipulation by the Search process.   
+but are not subject to Constraints, FIX or manipulation by the Search process. 
+You will likely need to scroll down to see the section of the main page 
+containing Calculation Inputs.   
 ![Calculation Inputs](./png/CalcInput.png "Calculation Inputs")   
 
 &nbsp;
 
 This clip illustrates how a Calculation Input with a drop-down arrow 
 can expand into a table that the user can select from.
-In this case, the user selects a material and the appropriate value of
-density is provided to the calculations.   
+In this case, the user selects a material and the appropriate 
+material property values (density in this case) are provided to the calculations.   
 ![Calculation Input Table](./png/CalcInputTable.png "Calculation Input Table")   
 
 &nbsp;
@@ -122,8 +119,7 @@ selected Variable.
 First, mark the checkbox and then enter a value in the entry field.
 The amount of constraint violation will be immediate recalculated;
 a positive value if violated or a negative value if satisfied.
-The value of the Objective Function will immediately reflect the 
-impact of a violated constraint.
+The Objective Value will reflect the aggregate impact of all violated constraints.
 This example illustrates the 108 inch Max limit on Length+Girth
 and the 70 pound Max limit on weight that is common to many
 carriers in the package shipping industry.   
@@ -148,18 +144,24 @@ Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.
 
 &nbsp;
 
-
 **USING HELP**   
 
- Now that you have completed a tour of the main page,
- it would be good to get a look at what is available 
- in the on-line documentation. 
- The various entries that are available after selecting the Help : Index menu item
- cover the generic features and capabilities of the ODOP software.
- If time is available, read through those entries from top to bottom.
- 
+The quick tour of the main page is now complete.
+This is a good time good to get a better look at what is available 
+in the on-line documentation. 
+Most of the entries that are available after selecting the **Help : Index** menu 
+item cover the generic features and capabilities of the ODOP software.
+So, as you are reading, please click the Help menu.
+It will drop down to provide a list of entries (topics) to choose from.
+Selecting <b>Index</b> on this list will bring up a new browser tab with the
+list of available Help entries. 
+You can switch back and forth between the browser tabs.
+ If time is available, read through those entries from top to bottom.   
+ ![Help Index](./png/HelpIndex.png "Help Index")   
+  
  On-line documentation for ODOP:Spring appears in the Spring Design topic.
 
+&nbsp;
 
 **USING THE TUTORIAL AND DEMO FACILITY**   
 
@@ -169,8 +171,8 @@ Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.
  organized way of learning the program.  
 
 Tutorial sessions are fairly brief.
-The user is not required to do anything more complicated than
-read and hit the Next button.
+In most cases, the user is not required to do anything more complicated than
+read and hit the **Next** button.
 Each tutorial session covers a specific operation or capability of the software.
 It is possible to stop a tutorial / demo session at any point.
 
@@ -179,8 +181,9 @@ illustrate problem solving techniques as well as provide sample solutions
 to several generally available reference book problems.
 The focus is on solving the problem, not explaining the operation of the software.
 
-See: [Spring design tutorial and demo](gettingStartedSpring)
+See: &nbsp; [Spring design tutorial and demo](gettingStartedSpring)
 
+&nbsp;
  
 [Help](./)
  

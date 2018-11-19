@@ -19,7 +19,8 @@ Alternatively, if a wide screen monitor is not available,
 you can operate with this Help content in one
 browser tab while the ODOP main page is in another browser tab.
 This approach will permit rapid switching from this Help content in order
-to view the corresponding part of the program user interface.
+to view the corresponding part of the program user interface
+(ODOP main page).
 
 In order to start the ODOP software, 
 copy this address (URL):   
@@ -33,13 +34,32 @@ the address line of each browser.
 In each browser, follow the link to bring up the ODOP starting dialog.
 In the smaller window, click the "About" link.   
 
-![ODOP starting dialog](./png/StartDialog.png "ODOP starting dialog")
+![ODOP starting dialog](./png/StartDialog.png "ODOP starting dialog")   
+
+That "About" link will take you to the ODOP Introduction page. From there you can 
+procede to the Getting Started page and continue with those instructions while 
+viewing ODOP program operation in the larger window.   
 
 &nbsp;
 
-That "About" link will take you to the Introduction page and from there you can 
-procede to the Getting Started page and continue with these instructions while 
-viewing ODOP program operation in the larger window.
+In the larger window, select the design type and starting file that you 
+wish to work with.
+This screen capture illustrates selecting the Rectangular **Solid** design type
+which is used in the Getting Started instructions.   
 
-Use your browser's Back button to return to that discussion now.
+![Start with Rectangular Solid](./png/SelectSolid.png "Start with Rectangular Solid")
+ 
+&nbsp;
 
+The resulting configuration of two browser sessions on a wide-screen monitor 
+should look something like:   
+
+![Side by side browsers](./png/SideBySideBrowsers.png "Side by side browsers")   
+ 
+&nbsp;
+
+Use your browser's **Back** button to return to the previous page now.
+
+&nbsp;
+
+[About](./)

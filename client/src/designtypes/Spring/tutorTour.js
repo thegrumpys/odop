@@ -123,7 +123,7 @@ export const execute = {
                     <p>
                     Here is an example of how each main menu item will drop down to provide 
                     specific menu items.
-                    Note that menu entries associated with not yet implemented features are disabled (grey).
+                    Note that menu entries associated with not yet implemented features are disabled (gray).
                     This screen clip illustrates how to get to the index of Help pages.   
                     </p>
                     
