@@ -2,6 +2,14 @@
 
 This topic covers a few points that may allow a better user experience with the ODOP software.
 
+**Use File : Save As** and **File : Save**  
+A design investigation may evolve through a sequence of preliminary or candidate designs.
+As each candidate design is established, it can be marked with a **File : Properties** comment
+and saved into the design library with **File : Save As**.
+In particular, it may be desirable to save the current design before selecting a 
+new standard size or catalog item.
+
+
 **Side-by-Side comparison of designs**   
 Depending on available screen size, 
 it may be possible to open two browser sessions with an ODOP design session in each.
@@ -9,8 +17,6 @@ Adjustments the browser's font size or "zoom" scale may be necessary for best re
 A non-overlapping side-by-side positioning of the windows will then 
 facilitate comparison of two designs.   
 
-A design investigation may evolve through a sequence of preliminary or candidate designs.
-As each candidate design is established, it can be saved with the **File : Save As** menu item.
 One of the two browser sessions can keep the current most desirable design.
 The other browser session can continue forward with additional trial designs.
 The side-by-side aspect of the screen layout can help quickly identify the preferred design.

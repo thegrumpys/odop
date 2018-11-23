@@ -142,11 +142,18 @@ Inversion of design equations
  refer to tables and charts of material properties.  
 
 
-* Selection from a catalog of stock designs
+* Selection from standard size tables or catalogs of stock designs
 
- Once a designer has established a custom design that satisfies his
- objectives, ODOP can select the closest or otherwise most
- appropriate spring from a catalog of stock designs.  
+ Once a designer has established a custom design that satisfies the objectives, 
+ ODOP has a feature that can select from a table of standard sizes.
+ In the spring design example, 
+ the material file allows for a table of standard wire diameters 
+ specific to each different material type. 
+ Similarly, a feature is provided to select the closest or otherwise 
+ most appropriate design from a catalog of stock designs. 
+ The spring design example provides multiple sample compression 
+ spring catalogs, including U.S. Military Standard 24585
+ (SAE-AS24585).
  
  
 * Save and recovery of designs
@@ -159,6 +166,7 @@ Inversion of design equations
  the risk of introducing errors.  Detailed reference information,
  including names and phone numbers, may be saved with each design.
 
+
 * On-line help
 
  ODOP maintains its complete user's manual on-line and
@@ -168,5 +176,17 @@ Inversion of design equations
  more detailed answers to his questions.  The user can read information at
  his own pace and return to the design process as soon as the desired
  information is obtained.
+
+
+* Tutorial
+
+ The spring design example comes with carefully structured lessons to help 
+ a new user get started quickly. 
+ The tutorial will "re-play" any of several pre-arranged
+ sessions that are designed to illustrate program capabilities and features.
+ Other sessions illustrate problem solving techniques as well as provide
+ sample solutions to several generally available reference book problems.
+ Detailed comments are imbedded to explain the solution process.
+
 
 [Help](./)
