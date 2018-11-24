@@ -6,23 +6,25 @@ coil spring types supported by ODOP:Spring.
 For specifics, see:   
 * [Advanced Spring Operations](./advancedSpringOperations)   
 * [Spring Materials](./materials)   
+* [Select Size and Select Catalog](./selectSizeCatalog)
 * [Spring Design References](./references)   
 * [Compression Spring](../DesignTypes/c_spring)   
 * [Extension Spring](../DesignTypes/e_spring)   
 * [Torsion Spring](../DesignTypes/t_spring)   
 
-**SPRING BASICS**   
+**Spring Basics**   
  This section provides a limited amount of introductory material on spring
  design in the context of the ODOP:Spring program.
 
- It is not the intent of the ODOP:Spring documentation to teach spring
- design.  The ODOP:Spring program is aimed at experienced spring designers and
- engineers who have some background in strength of materials and failure
- theories.  The REFERENCES documentation section (below) contains a list of
- reference works that cover spring design.  This section should be read in
- conjunction with other sections of the ODOP:Spring documentation.  In
- particular, refer to the specific spring type sections for additional details on
- variable NAMES and Force-Deflection Diagrams.
+ It is not the intent of the ODOP:Spring documentation to teach spring design. 
+ The ODOP:Spring program is aimed at experienced spring designers and
+ engineers who have some background in strength of materials and failure theories. 
+ The [Spring Design References](./references) documentation section contains 
+ a list of  reference works that cover spring design. 
+ This section should be read in conjunction with other sections of the 
+ ODOP:Spring documentation. 
+ In  particular, refer to the specific spring type sections for additional details on
+ variable Names and Force-Deflection Diagrams.
 
 **The essential challenge of spring design:**   
 The challenge of any design problem is to select values for those
@@ -128,13 +130,13 @@ life.  The calculation of FS\_CycleLife includes the material's
 endurance limit (Stress\_Lim\_Endur), static load and fluctuating
 component of stress in a calculation originally developed by Soderberg.
 Additional information on this calculation is available in the sources
-listed in the REFERENCES section.
+listed in [Spring Design References](./references).
 
 Additional discussion on these topics is available in the sections
-below titled FACTOR OF SAFETY and CYCLE LIFE.
+below titled Factor Of Safety and Cycle Life.
 
 Selection of materials from the ODOP:Spring materials table is covered 
-below in the MATERIALS section and in the tutorial.
+below in the Materials section and in the tutorial.
 
    
 **How to judge a good spring design:**   
@@ -143,8 +145,8 @@ intended application.  It is possible that some applications will
 require a spring to operate at stress levels that would make it totally
 unsuitable for other, only slightly different applications.
 
-The REPORT tabs present crucial information about the performance of
-a design in a specialized, compact format.
+The [Report](../report) tabs present crucial information about the 
+performance of a design in a specialized, compact format.
 
 In general, a finished design should not have significant remaining
 constraint violations.  In particular, L\_2 below L\_Solid in a
@@ -155,7 +157,7 @@ linear in the range of 20 to 80 % of available deflection.  Outside this
 range, effects of end coils and nonuniform coil pitch influence the
 accuracy of analytical predictions.
 
-For compression springs, the REPORT 2 tab will produce an
+For compression springs, the Report tabs will produce an
 informational message any time that more than 80 % of available
 deflection (%\_Avail_Deflect) is used at the second load point.  Note
 that the default start point (startup) supplied with ODOP:Spring has
@@ -199,44 +201,48 @@ section of the documentation to insure that you apply ODOP:Spring appropriately.
 The design equations in the current release of ODOP:Spring do NOT cover all
 possible spring applications.
 
-More precise treatments of this subject are available in the sources
-listed in the REFERENCES section of the documentation (below).
+More precise treatments of this subject are available in the sources listed 
+in the [Spring Design References](./references) section of the documentation.
 
    
 **Technique:**   
 A typical spring design process should start by entering what is known
-about the problem.  As described in more detail in the [INTRODUCTION](../introduction) 
+about the problem. 
+As described in more detail in the [Introduction](../introduction) 
 section of the documentation, any time after starting ODOP:Spring and
 reaching the main page, a complete spring design is already defined.  
-Use the numeric entry fields plus FIX checkboxess to alter that existing
+Use the numeric entry fields plus FIX checkboxes to alter that existing
 design to reflect what is known about the problem at hand.
 
-The main page and REPORT tabs can be used to
-view the current state of the design.  The main page will show which
-constraints are violated.  Use the [SEARCH](../search) menu item to have ODOP:Spring
-select values for the free independent variables that reduce (and
-hopefully eliminate) constraint violations thus achieving a feasible
+The main page and [Report](../report) tabs can be used to
+view the current state of the design. 
+The main page will show which constraints are violated. 
+Use the **Action : [Search](../search)** menu item 
+to have ODOP:Spring select values for the free Independent Variables that reduce 
+(and hopefully eliminate) constraint violations thus achieving a feasible
 design.
 
 Typically, the process of designing a completely new spring should start
-with (at least) Wire\_Dia and Coils\_T in free status.  Once a feasible
-design is established, the SELECT SIZE menu item can be used to select
+with (at least) Wire\_Dia and Coils\_T in free status. 
+Once a feasible design is established, 
+the **Action : Select Size** menu item can be used to select
 the nearest standard wire size from the appropriate standard sizes
 table.  After the selection, an additional search should be executed to
-adjust values of the remaining independent variables to compensate for
+adjust values of the remaining Independent Variables to compensate for
 the change in Wire\_Dia.
    
 Additional information on operating techniques is presented in the
-documentation sections [Introduction](../introduction) and 
-[Getting Started](../gettingStarted). 
-The demo and tutorial sessions supplied with ODOP:Spring provide detailed 
-commentary on how to solve a variety of problems.
+documentation sections [Introduction](../introduction), 
+[Getting Started](../gettingStarted) and 
+[Select Size and Select Catalog](selectSizeCatalog). 
+The [demo and tutorial sessions](../gettingStartedSpring) supplied with 
+ODOP:Spring provide detailed commentary on how to solve a variety of problems.
 
    
-**NAMES**   
+**Names**   
  ODOP:Spring contains many kinds of names.  Menu item names are discussed
- individually in the later sections of the documentation.  Names for independent
- variables, dependent variables, constants and constraints are discussed
+ individually in the later sections of the documentation.  Names for Independent
+ Variables, Dependent Variables, Calculation Inputs and Constraints are discussed
  in this section and in the specific sections on compression, extension and torsion
  springs.
 
@@ -252,17 +258,18 @@ commentary on how to solve a variety of problems.
    
  The force deflection diagrams contained in the specific spring type sections 
  may assist understanding of the following discussion.  Additional
- information is contained in the section (above) titled SPRING BASICS.
+ information is contained in the section (above) titled Spring Basics.
 
  ODOP:Spring produces information about four points on a compression spring's
  force - deflection curve.  Three points are analyzed for an extension
  spring.  This information includes length, deflection, force, outside
  diameter, inside diameter, stress and static factor of safety.  This
- information is listed in a compressed format by the REPORT tabs.  The
- equations assume that the spring will operate between two load points, named 1
- and 2, somewhere in the spring's elastic region.  It is entirely possible
- for point 1 to correspond with the spring's free state, or for a
- compression spring, point 2 can correspond to the spring's solid condition.
+ information is listed in a compressed format by the [Report](../report) tabs. 
+ The  equations assume that the spring will operate between two load points, 
+ named 1  and 2, somewhere in the spring's elastic region. 
+ It is entirely possible for point 1 to correspond with the spring's free state, 
+ or for a  compression spring, 
+ point 2 can correspond to the spring's solid condition.
  In fact, because the force-deflection equations don't know anything about
  the spring's solid condition, point 2 can be set to represent an impossible
  situation requiring the spring to be compressed beyond solid.  In this
@@ -274,7 +281,7 @@ For specifics on names associated with each spring type, see:
 * [Extension Spring](../DesignTypes/e_spring)   
 * [Torsion Spring](../DesignTypes/t_spring)   
    
-**SPRING CONSTRAINTS**   
+**Spring Constraints**   
  While most of ODOP:Spring constraints are obvious, a few need a bit of
  additional explanation.  This section primarily covers constraints that are
  established in the default start point (startup).
@@ -282,7 +289,7 @@ For specifics on names associated with each spring type, see:
  constraints on any variable, dependent or independent.  
  Unchecking a checkbox will eliminate any constraints, including the default constraints
  established by the start point (startup).  Further information is available in the
- documentation sections SPRING BASICS (above), the
+ documentation sections Spring Basics (above), the
  NAMES sections of each of the specific spring types and
  [Terminology](../terminology).
    
@@ -312,7 +319,7 @@ life that exceeds the value selected for Life\_Category.  Remember that
 the endurance limit will vary as a function of the material selected, the
 surface treatment (shot peening), and the selected cycle life.
 
-As described in the documentation section on CYCLE LIFE (below), ODOP:Spring is
+As described in the documentation section on Cycle Life (below), ODOP:Spring is
 capable of directly calculating Cycle\_Life only for materials contained in
 the materials table.  The FS\_CycleLife variable is the only way of
 gaging cycle life for user defined material properties (Prop\_Calc\_Method =
@@ -324,7 +331,7 @@ failure in high cycle applications.
    
 
    
-**FACTOR OF SAFETY**
+**Factor Of Safety**
 
                          allowable stress
     factor of safety =  ------------------
@@ -345,7 +352,7 @@ ODOP:Spring works in terms of a "factor of safety" because allowable stresses
 change for each new wire diameter considered.  If specific stress limits
 were imposed on a design, it would not be possible to automatically adjust
 to higher allowable stresses whenever smaller wire diameters were
-considered by the SEARCH process.  Because many designers are accustomed to
+considered by the Search process.  Because many designers are accustomed to
 designing to specific stress limits, ODOP:Spring has been programmed to
 also permit this approach. 
 Refer to [Design to Stress](./advancedSpringOperations) for additional information.
@@ -360,14 +367,14 @@ Additional information on the cycle life calculation is
 available in the documentation sections for the specific spring types
 and also in the sources listed in the REFERENCES section (above).
    
-Refer to additional discussion in the sections titled SPRING BASICS (above), 
-NAMES (above and specific spring type sections) and CYCLE LIFE (below).  
+Refer to additional discussion in the sections titled Spring Basics (above), 
+NAMES (above and specific spring type sections) and Cycle Life (below).  
 Selection of materials (and corresponding material properties) 
-from the ODOP:Spring materials table is covered in the MATERIALS
+from the ODOP:Spring materials table is covered in the Materials
 section (next, below) and in the tutorial.
 
    
-**MATERIALS**   
+**Materials**   
 Spring wire and bar materials available in the default material table supplied 
 with ODOP:Spring include:
 
@@ -413,7 +420,7 @@ the calculations is desired, the details provided in
 Examples of these procedures are presented in tutorial section TUTOR5.
 
    
-**END TYPES**   
+**End Types**   
 The current version of the ODOP:Spring program implements six spring end
 types for compression springs and five different end types for extension
 springs.  In addition, the user can define specialized end conditions.
@@ -447,7 +454,7 @@ Additional information on spring end types is available in the sources listed
 in the REFERENCES section of the documentation (above).
 
    
-**CYCLE LIFE**   
+**Cycle Life**   
 This section presents a discussion of cycle life considerations and
 describes the Soderberg calculation and the ODOP:Spring interpretation of
 FS\_CycleLife.  A discussion of hook stresses in extension springs appears in
@@ -507,7 +514,7 @@ tutorial session TUTOR4, in the documentation on the specific spring types
 and also in the sources listed in the REFERENCES section (above).
    
    
-**WHAT TO DO IF**   
+**What To Do If**   
 This section is intended to anticipate some of the more common user
 problems and suggest solutions.
 
@@ -533,7 +540,7 @@ region will be somewhat larger if you are willing to accept a spring
 that does not have a great cycle life.
 
 Check for a conflict between FS\_2 MAX and another constraint such as
-FS\_SOLID MIN.  The FS\_2 MAX constraint is intended to prevent the search
+FS\_Solid MIN.  The FS\_2 MAX constraint is intended to prevent the search
 from stopping at an overly conservative design.  However, in some cases,
 particularly where force and deflection are specified at two points, it
 is not possible to find a feasible solution without increasing the value
@@ -542,17 +549,17 @@ to other constraints, and you are willing to accept a more conservative
 design, use the numeric entry field item to increase the value of FS\_2 MAX.
    
 If FIXed variables do not take on the proper values:   
-Confirm that you have executed a SEARCH after establishing the FIX.
-Use of the SEARCH menu item is always necessary to find the appropriate
+Confirm that you have executed a Search after establishing the FIX.
+Use of the Search menu item is always necessary to find the appropriate
 values of the independent variables so that the dependent variables take
 on their FIXed values.  You may wish to review material contained in the
 documentation sections  [Introduction](../introduction), and 
 [Terminology](../terminology). 
 In the case that
-one or more constraints are also violated, SEARCH will find a compromise
+one or more constraints are also violated, Search will find a compromise
 between violations of the constraints and failure to achieve the desired
 value for FIXed state variables.  The nature of this compromise is
-influenced the values of the internal variables (File : Preferences) 
+influenced the values of the internal variables **(File : Preferences)** 
 FIX\_WT, CON\_WT, and ZERO\_WT.
    
 If the program terminates abnormally:   
@@ -571,11 +578,11 @@ calculation, etc.).  If the problem remains unresolved, please report it
 via the procedures for opening an issue on GitHub.   
 
 
-**REFERENCES**   
+**References**   
 
 Refer to: [Spring Design References](./references)
 
-**RESTRICTIONS**   
+**Restrictions**   
 
 Refer to: [Restrictions](../../About/Legal/Restrictions)
 
