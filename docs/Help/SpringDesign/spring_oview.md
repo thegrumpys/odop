@@ -93,13 +93,13 @@ The vertical axis in each diagram is force.  The horizontal axis is
 distance; either deflection or spring length.  The force-deflection
 relationship of a cylindric coil spring of uniform pitch 
 (refer to [Restrictions](../../About/Legal/Restrictions) ) is linear. 
-The slope of the line is the spring RATE measured in force per unit deflection.
+The slope of the line is the spring Rate measured in force per unit deflection.
 
 ODOP:Spring produces information about
 four points on the force-deflection curve.  As described in the
-WHAT TO DO IF section (below), specifying both force and deflection 
+What To Do If section (below), specifying both force and deflection 
 for any two points will completely specify the force-deflection line. 
-Any additional specification on RATE or one of the other points will over
+Any additional specification on Rate or one of the other points will over
 specify the problem.  Unless the redundant specification is exactly in
 line with the other values, the conflict will keep ODOP:Spring from
 finding a feasible solution.  Consistent specification of constraints
@@ -145,7 +145,7 @@ intended application.  It is possible that some applications will
 require a spring to operate at stress levels that would make it totally
 unsuitable for other, only slightly different applications.
 
-The [Report](../report) tabs present crucial information about the 
+The [Report](../reports) tabs present crucial information about the 
 performance of a design in a specialized, compact format.
 
 In general, a finished design should not have significant remaining
@@ -214,7 +214,7 @@ reaching the main page, a complete spring design is already defined.
 Use the numeric entry fields plus FIX checkboxes to alter that existing
 design to reflect what is known about the problem at hand.
 
-The main page and [Report](../report) tabs can be used to
+The main page and [Report](../reports) tabs can be used to
 view the current state of the design. 
 The main page will show which constraints are violated. 
 Use the **Action : [Search](../search)** menu item 
@@ -264,7 +264,7 @@ ODOP:Spring provide detailed commentary on how to solve a variety of problems.
  force - deflection curve.  Three points are analyzed for an extension
  spring.  This information includes length, deflection, force, outside
  diameter, inside diameter, stress and static factor of safety.  This
- information is listed in a compressed format by the [Report](../report) tabs. 
+ information is listed in a compressed format by the [Report](../reports) tabs. 
  The  equations assume that the spring will operate between two load points, 
  named 1  and 2, somewhere in the spring's elastic region. 
  It is entirely possible for point 1 to correspond with the spring's free state, 
@@ -365,7 +365,7 @@ normally determined by the materials table and the user's selection of
 cycle life and surface treatment (shot peening) with Life\_Category. 
 Additional information on the cycle life calculation is
 available in the documentation sections for the specific spring types
-and also in the sources listed in the REFERENCES section (above).
+and also in the sources listed in [Spring Design References](./references).
    
 Refer to additional discussion in the sections titled Spring Basics (above), 
 NAMES (above and specific spring type sections) and Cycle Life (below).  
@@ -451,7 +451,7 @@ documentation sections on the specific spring types:
 * [Torsion Spring](../DesignTypes/t_spring)   
 
 Additional information on spring end types is available in the sources listed
-in the REFERENCES section of the documentation (above).
+in [Spring Design References](./references).
 
    
 **Cycle Life**   
@@ -511,7 +511,7 @@ life category.
 
 Additional information on the cycle life calculation is available in
 tutorial session TUTOR4, in the documentation on the specific spring types 
-and also in the sources listed in the REFERENCES section (above).
+and also in the sources listed in [Spring Design References](./references).
    
    
 **What To Do If**   
