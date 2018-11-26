@@ -45,6 +45,7 @@
 * [Side-by-Side comparison of designs](design/SideBySideCompare)
 * [Idea for a virtual annunciator panel](design/AnnunciatorPanel)
 * [Description of ODOP users](design/UserDescription)
+* [Ideas for Simplified Design Check UI](design/SimplifiedUI)
 
 
 ## Procedures
