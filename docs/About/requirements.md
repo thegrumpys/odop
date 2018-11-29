@@ -26,4 +26,6 @@ The default configuration of some ad blocker browser extensions may interfere wi
 of ODOP user interface graphic elements such as checkboxes. 
 It may be necessary to adjust adjust the ad blocker configuration or temporarily disable it.   
 
+Offline operation is not currently supported.
+
 [About](./)

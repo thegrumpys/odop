@@ -49,14 +49,20 @@ reset of the main page.
 
 Note: 
 The on-line documentation pages (Help) are not subject to the same concerns about browser refresh 
-and browser back / forward.
+and browser back / forward.   
+
+**Off-line Operation**
+Off-line operation is not currently supported. 
+If a design session is in progress when network connectivity is lost, 
+it is possible that operation can continue but it will not be possible to
+save or open new designs until network connectivity is restored.   
 
 **Unexpected delay when first opening the software**   
 Note that loading the ODOP software the first time may take 20 seconds or longer. 
 This is a technical issue related to web hosting during program development. 
 A production web hosting arrangement will not have this delay.
 
-**Responsive design**   
+**Responsive software design**   
 Developed as a "responsive" web app, the ODOP software will change its screen layout and 
 input behavior in response to the capabilities of the user's device. 
 Specifically, as available screen width diminishes,

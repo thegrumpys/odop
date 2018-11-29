@@ -8,6 +8,7 @@
 * [Restrictions](About/Legal/Restrictions)
 * [Terms of Service](About/Legal/TermsOfService)
 * [Privacy Statement](About/Legal/PrivacyStatement)
+* [Contact Us](About/ContactUs)
 
 
 ## Help
