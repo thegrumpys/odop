@@ -51,7 +51,7 @@ Note:
 The on-line documentation pages (Help) are not subject to the same concerns about browser refresh 
 and browser back / forward.   
 
-**Off-line Operation**
+**Off-line Operation**   
 Off-line operation is not currently supported. 
 If a design session is in progress when network connectivity is lost, 
 it is possible that operation can continue but it will not be possible to

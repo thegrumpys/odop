@@ -8,7 +8,7 @@ Additional information is available in the other **About** topics, including:
 * [Notice](Disclaimer)
 * [Restrictions](Restrictions)
 
-See also: [ODOP software LICENSE](../../../LICENSE)
+See also: [ODOP software LICENSE](https://github.com/thegrumpys/odop/blob/master/LICENSE)
    
    &nbsp;
    

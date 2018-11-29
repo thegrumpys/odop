@@ -6,9 +6,9 @@ It will notify you of the following:
 * What personally identifiable information is collected from you through the website, how it is used and with whom it may be shared.
 * What choices are available to you regarding the use of your data.
 * The security procedures in place to protect the misuse of your information.
-* How you can correct any inaccuracies in the information.
+* How you can correct any inaccuracies in the information.   
    
-**Information Collection, Use, and Sharing **   
+**Information Collection, Use, and Sharing**   
 We are the sole owners of the information collected on this site. 
 We only have access to/collect information that you voluntarily give us via email or other direct contact from you. 
 We will not sell or rent this information to anyone.
@@ -44,7 +44,7 @@ We encourage our users to be aware when they leave our site and to read the priv
 
 **Cookies**   
 We do not use "cookies" on this site. 
-A cookie is a piece of data stored on a site visitor's local storage to help improve your access to that site and identify repeat visitors. 
+A cookie is a piece of data stored on a site visitor's local storage to help improve the visitors access to that site and identify repeat visitors. 
 For instance, by using a cookie to identify you, you would not have to log in a password more than once, thereby saving time and effort. 
 Cookies can also enable a site to track and target the interests of its users to enhance the experience on the site. 
 Usage of a cookie is in no way linked to any personally identifiable information on our site.   
