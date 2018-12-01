@@ -18,7 +18,7 @@ class FileSave extends React.Component {
     putDesign(type,name) {
 //        console.log('In FileSave.putDesign type=', type,' name=', name);
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+type+'/designs/'+name, {
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
                 method: 'PUT', // Update it
                 headers: {
                   'Accept': 'application/json',

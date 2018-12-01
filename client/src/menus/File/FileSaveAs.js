@@ -27,7 +27,7 @@ class FileSaveAs extends React.Component {
 //        console.log('In FileOpen.getDesigns type=', type);
         // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+type+'/designs')
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs')
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -49,7 +49,7 @@ class FileSaveAs extends React.Component {
         }
 //        console.log('In FileSaveAs.postDesign type=', type,' name=', name,' method=', method);
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+type+'/designs/'+name, {
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
                 method: method,
                 headers: {
                   'Accept': 'application/json',

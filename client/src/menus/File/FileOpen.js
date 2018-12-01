@@ -27,7 +27,7 @@ class FileOpen extends React.Component {
 //        console.log('In FileOpen.getDesigns type=', type);
         // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+type+'/designs')
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs')
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -44,7 +44,7 @@ class FileOpen extends React.Component {
     getDesign(type,name) {
 //        console.log('In FileOpen.getDesign type=', type, ' name=', name);
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+type+'/designs/' + name)
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name))
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {

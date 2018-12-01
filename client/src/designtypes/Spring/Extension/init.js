@@ -1,5 +1,5 @@
 import * as o from './offsets';
-import * as mo from '../mat_ips_offsets';
+import * as mo from './mat_ips_offsets';
 import * as eto from './c_endtypes_offsets';
 
 export function init(p, x) {
