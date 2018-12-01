@@ -1,34 +1,18 @@
-import { startExecute } from "../../components/ExecutePanel";
+import { startExecute } from "../../../components/ExecutePanel";
 export function getExecuteNames() {
-    var result = [
-        'tweakPrefs'
-    ];
+    var result = [];
 //    console.log('In getExecuteNames result=',result);
     return result;
 }
 
 export function getDemoNames() {
-    var result = [
-        'demo',
-        'longdemo',
-        'demo1',
-        'demo2',
-        'demo3',
-        'demo5'
-    ];
+    var result = [];
 //    console.log('In getDemoNames result=',result);
     return result;
 }
 
 export function getTutorialNames() {
-    var result = [
-        'tutorTour',
-        'tutor',
-        'tutor3',
-        'tutor4',
-        'tutor5',
-        'tutor7'
-    ];
+    var result = [];
 //    console.log('In getTutorialNames result=',result);
     return result;
 }

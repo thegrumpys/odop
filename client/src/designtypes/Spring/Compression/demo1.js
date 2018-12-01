@@ -1,6 +1,6 @@
 import React from 'react';
-import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../store/actionCreators';
-import { MAX, CONSTRAINED } from '../../store/actionTypes';
+import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     "name": "demo1",
     "steps": [

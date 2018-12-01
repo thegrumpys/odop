@@ -1,5 +1,5 @@
 import * as o from './offsets';
-import * as mo from './mat_ips_offsets';
+import * as mo from '../mat_ips_offsets';
 
 export function getSizeTypes() {
     var result = [

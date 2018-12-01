@@ -1,6 +1,6 @@
 import React from 'react';
 import * as o from './offsets';
-import * as mo from './mat_ips_offsets';
+import * as mo from '../mat_ips_offsets';
 //import { displayError } from '../../components/ErrorModal';
 
 export function getReportNames() {

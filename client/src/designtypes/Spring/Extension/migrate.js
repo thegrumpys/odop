@@ -1,6 +1,6 @@
-import { displayError } from '../../components/ErrorModal';
+import { displayError } from '../../../components/ErrorModal';
 import { initialState } from './initialState';
-import { initialSystemControls } from '../../initialSystemControls';
+import { initialSystemControls } from '../../../initialSystemControls';
 
 export function migrate(design) {
     /*

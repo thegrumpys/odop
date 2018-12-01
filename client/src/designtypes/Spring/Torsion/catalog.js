@@ -1,8 +1,8 @@
 import { init } from './init';
 import { eqnset } from './eqnset';
 import * as o from './offsets';
-import m_tab from './mat_ips';
-import * as mo from './mat_ips_offsets';
+import m_tab from '../mat_ips';
+import * as mo from '../mat_ips_offsets';
 import et_tab from './c_endtypes.json';
 import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 
