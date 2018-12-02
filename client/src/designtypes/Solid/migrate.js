@@ -31,44 +31,44 @@ export function migrate(design) {
         migrated_design.version = '2'; // last thing... set the migrated model version
     case '2':
         // Current model version
-//         console.log('Convert from 2 to 3');
-         // Mark all design_parameters and state_varaibles with equationset: true, 
-         design.design_parameters.forEach((design_parameter) => {
-//             console.log('design_parameter=',design_parameter);
-             design_parameter['input'] = true; 
-             design_parameter['equationset'] = true; 
-             design_parameter['hidden'] = false; 
-         });
-         design.state_variables.forEach((state_variable) => {
-//             console.log('state_variable=',state_variable);
-             state_variable['input'] = false; 
-             state_variable['equationset'] = true;
-             state_variable['hidden'] = false; 
-         });
-         // Mark all constants with equationset: false
-         design.constants.forEach((constant) => {
-//             console.log('constant=',constant);
-             constant['input'] = true; // All constants are inputs
-             constant['lmin'] = 0;
-             constant['lmax'] = 0;
-             constant['cmin'] = 0;
-             constant['cmax'] = 0;
-             constant['ioclass'] = 0;
-             constant['sdlim'] = 1.0;
-             constant['equationset'] = false;
-             constant['hidden'] = false; 
-         });
-         // Create symbol table
-         design['symbol_table'] = [];
-         // Copy design_parameters, state_variables, and constants onto end of symbol_table
-         design.symbol_table.push(...design.design_parameters);
-         design.symbol_table.push(...design.state_variables);
-         design.symbol_table.push(...design.constants);
-         // Delete design_parameters, state_variables, and constants
-         delete design.design_parameters;
-         delete design.state_variables;
-         delete design.constants;
-         migrated_design.version = '3'; // last thing... set the migrated model version
+//        console.log('Convert from 2 to 3');
+        // Mark all design_parameters and state_varaibles with equationset: true, 
+        design.design_parameters.forEach((design_parameter) => {
+//            console.log('design_parameter=',design_parameter);
+            design_parameter['input'] = true; 
+            design_parameter['equationset'] = true; 
+            design_parameter['hidden'] = false; 
+        });
+        design.state_variables.forEach((state_variable) => {
+//            console.log('state_variable=',state_variable);
+            state_variable['input'] = false; 
+            state_variable['equationset'] = true;
+            state_variable['hidden'] = false; 
+        });
+        // Mark all constants with equationset: false
+        design.constants.forEach((constant) => {
+//            console.log('constant=',constant);
+            constant['input'] = true; // All constants are inputs
+            constant['lmin'] = 0;
+            constant['lmax'] = 0;
+            constant['cmin'] = 0;
+            constant['cmax'] = 0;
+            constant['ioclass'] = 0;
+            constant['sdlim'] = 1.0;
+            constant['equationset'] = false;
+            constant['hidden'] = false; 
+        });
+        // Create symbol table
+        design['symbol_table'] = [];
+        // Copy design_parameters, state_variables, and constants onto end of symbol_table
+        design.symbol_table.push(...design.design_parameters);
+        design.symbol_table.push(...design.state_variables);
+        design.symbol_table.push(...design.constants);
+        // Delete design_parameters, state_variables, and constants
+        delete design.design_parameters;
+        delete design.state_variables;
+        delete design.constants;
+        migrated_design.version = '3'; // last thing... set the migrated model version
     case '3':
         // console.log('Convert from 3 to 4');
         // Convert type table to fully qualified name
@@ -77,7 +77,7 @@ export function migrate(design) {
                 element.table = "Solid/" + element.table;
             }
         });
-         migrated_design.version = '4'; // last thing... set the migrated model version
+        migrated_design.version = '4'; // last thing... set the migrated model version
         break; // Do not copy this break
     case '4':
         // Current model version
