@@ -84,7 +84,7 @@ export const execute = {
         {
             text: (
                 <React.Fragment>
-                   <img src="designtypes/Spring/ForceVsDeflection.png" alt="ForceVsDeflection diagram"/>
+                   <img src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="ForceVsDeflection diagram"/>
                 </React.Fragment>
             )
         },

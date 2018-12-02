@@ -151,7 +151,7 @@ export const execute = {
             title: "Page 06 of 16",
             text: (
                 <React.Fragment>
-                <img src="designtypes/Spring/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
+                <img src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
                 </React.Fragment>
             )
         },
