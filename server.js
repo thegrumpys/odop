@@ -44,9 +44,9 @@ app.get('/api/v1/designtypes', (req, res) => {
     console.log('SERVER: In GET /api/v1/designtypes');
     var connection = startConnection();
     var stmt = 'SELECT DISTINCT type FROM design';
-    console.log('SERVER: stmt='+stmt);
+//    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
-        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+//        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
         if (err) {
             res.status(500).end();
             connection.end();
@@ -67,9 +67,9 @@ app.get('/api/v1/designtypes/:type/designs', (req, res) => {
     console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs');
     var connection = startConnection();
     var stmt = 'SELECT name FROM design WHERE type = \''+type+'\'';
-    console.log('SERVER: stmt='+stmt);
+//    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
-        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+//        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
         if (err) {
             res.status(500).end();
             connection.end();
@@ -92,9 +92,9 @@ app.get('/api/v1/designtypes/:type/designs/:name', (req, res) => {
     console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs/'+name);
     var connection = startConnection();
     var stmt = 'SELECT * FROM design WHERE type = \''+type+'\' AND name = \''+name+'\'';
-    console.log('SERVER: stmt='+stmt);
+//    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
-        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+//        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
         if (err) {
             res.status(500).end();
             connection.end();
@@ -108,7 +108,7 @@ app.get('/api/v1/designtypes/:type/designs/:name', (req, res) => {
             value = JSON.parse(rows[0].value); // Get value from the JSON blob
             value.name = name; // Insert name into blob
             value.type = type; // Insert type into blob
-            console.log('SERVER: After SELECT type=', type, ' value=', value);
+//            console.log('SERVER: After SELECT type=', type, ' value=', value);
             res.status(200).json(value);
             connection.end();
             console.log('SERVER: 200 - OK');
