@@ -26,7 +26,7 @@ class FileDelete extends React.Component {
         // Get the designs and store them in state
 //        console.log('In FileDelete.getDesigns type=', type);
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+type+'/designs')
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs')
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -46,7 +46,7 @@ class FileDelete extends React.Component {
     deleteDesign(type,name) {
 //        console.log('In FileDelete.deleteDesign type=', type, ' name=', name);
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+type+'/designs/'+name, {
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',

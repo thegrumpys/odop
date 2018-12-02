@@ -26,7 +26,7 @@ export class PromptForDesign extends React.Component {
             modal: true,
             designtypes: [],
             designs: [],
-            type: "Spring",
+            type: "Spring/Compression",
             name: "startup"
         };
         this.getDesignTypes();
@@ -66,7 +66,7 @@ export class PromptForDesign extends React.Component {
 
         // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+type+'/designs')
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs')
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -75,7 +75,7 @@ export class PromptForDesign extends React.Component {
                 return res.json()
             })
             .then(designs => {
-    //            console.log('In PromptForDesign.getDesigns designs=',designs)
+//                console.log('In PromptForDesign.getDesigns designs=',designs)
                 this.setState({ 
                     designs: designs
                 })
@@ -90,7 +90,7 @@ export class PromptForDesign extends React.Component {
     }
     
     getDesign(type,name) {
-//        console.log('In PromptForDesign.getDesigns type=', type, ' name=', name);
+//        console.log('In PromptForDesign.getDesign type=', type, ' name=', name);
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -99,7 +99,7 @@ export class PromptForDesign extends React.Component {
         const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/dispatcher));
 
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+type+'/designs/'+name)
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name))
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {

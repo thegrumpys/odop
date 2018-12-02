@@ -15,8 +15,8 @@ class NameValueUnitsRowIndependentVariable extends React.Component {
         this.onReset = this.onReset.bind(this);
 //        console.log('In NameValueUnitsRowIndependentVariable.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table)
         if (this.props.element.type === 'table') {
-//            console.log('In NameValueUnitsRowIndependentVariable.constructor file = ../designtypes/'+this.props.type+'/'+this.props.element.table+'.json');
-            var table = require('../designtypes/'+this.props.type+'/'+this.props.element.table+'.json'); // Dynamically load table
+//            console.log('In NameValueUnitsRowIndependentVariable.constructor file = ../designtypes/'+this.props.element.table+'.json');
+            var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowIndependentVariable.constructor table=',table);
             this.state = {
                 table: table
