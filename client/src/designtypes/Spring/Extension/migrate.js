@@ -80,6 +80,15 @@ export function migrate(design) {
     case '4':
         // console.log('Convert from 4 to 5');
         // Convert type table to fully qualified name
+        design.symbol_table.forEach((element) => {
+            if (element.type === "table") {
+                if (element.table === "mat_ips") {
+                    element.table = "Spring/" + element.table;
+                } else {
+                    element.table = "Spring/Compression/" + element.table;
+                }
+            }
+        });
         // migrated_design.version = '5'; // last thing... set the migrated model version
         break; // Do not copy this break
     case '5':

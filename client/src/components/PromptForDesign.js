@@ -90,7 +90,7 @@ export class PromptForDesign extends React.Component {
     }
     
     getDesign(type,name) {
-//        console.log('In PromptForDesign.getDesigns type=', type, ' name=', name);
+//        console.log('In PromptForDesign.getDesign type=', type, ' name=', name);
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
