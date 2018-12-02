@@ -78,10 +78,15 @@ export function migrate(design) {
          design.symbol_table[42].tooltip = "Wire tensile strength (computed as a function of wire diameter when Prop_Calc_Method=1; See Help for details)"
          migrated_design.version = '4'; // last thing... set the migrated model version
     case '4':
-        // Current model version
         // console.log('Convert from 4 to 5');
-        // To be defined - presently do nothing
+        // Convert type table to fully qualified name
         // migrated_design.version = '5'; // last thing... set the migrated model version
+        break; // Do not copy this break
+    case '5':
+        // Current model version
+        // console.log('Convert from 5 to 6');
+        // To be defined - presently do nothing
+        // migrated_design.version = '6'; // last thing... set the migrated model version
         break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
