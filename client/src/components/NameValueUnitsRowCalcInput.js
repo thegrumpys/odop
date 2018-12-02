@@ -12,8 +12,8 @@ class NameValueUnitsRowCalcInput extends React.Component {
         this.onSelect = this.onSelect.bind(this);
 //        console.log('In NameValueUnitsRowCalcInput.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table)
         if (this.props.element.type === 'table') {
-//            console.log('In NameValueUnitsRowCalcInput.constructor file = ../designtypes/'+this.props.type+'/'+this.props.element.table+'.json');
-            var table = require('../designtypes/'+this.props.type+'/'+this.props.element.table+'.json'); // Dynamically load table
+//            console.log('In NameValueUnitsRowCalcInput.constructor file = ../designtypes/'+this.props.element.table+'.json');
+            var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
             this.state = {
                 table: table

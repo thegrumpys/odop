@@ -1,6 +1,6 @@
 import React from 'react';
 import * as o from './offsets';
-import * as mo from './mat_ips_offsets';
+import * as mo from '../mat_ips_offsets';
 //import { displayError } from '../../components/ErrorModal';
 
 export function getReportNames() {
@@ -27,7 +27,7 @@ export function report(report_name, prefs, p, x, labels) {
     kw1, kw2, kw2str1, kw2str2, kw2strs;
 
     /*  Bring in material properties table  */
-    var m_tab = require('./mat_ips.json');
+    var m_tab = require('../mat_ips.json');
     var et_tab = require('./c_endtypes.json');
 
     hits = 0;

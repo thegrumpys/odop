@@ -1,5 +1,5 @@
 import * as o from './offsets';
-import * as mo from './mat_ips_offsets';
+import * as mo from '../mat_ips_offsets';
 import * as eto from './c_endtypes_offsets';
 
 export function init(p, x) {
@@ -9,7 +9,7 @@ export function init(p, x) {
  var tensile_400;
 
    /*  Bring in material properties table  */
- var m_tab = require('./mat_ips.json');
+ var m_tab = require('../mat_ips.json');
 //    console.log("m_tab=", m_tab);
  var et_tab = require('./c_endtypes.json');
 //    console.log("et_tab=", et_tab);
