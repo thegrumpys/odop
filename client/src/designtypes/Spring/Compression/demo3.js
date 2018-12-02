@@ -55,7 +55,7 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState('Spring')
+                loadInitialState('Spring/Compression')
             ]
         },
         {

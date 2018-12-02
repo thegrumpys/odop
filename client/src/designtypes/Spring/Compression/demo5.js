@@ -45,7 +45,7 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState('Spring'),
+                loadInitialState('Spring/Compression'),
                 changeSymbolValue("L_Free", 3.0),
                 changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
