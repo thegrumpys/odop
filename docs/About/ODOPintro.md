@@ -68,7 +68,7 @@ See: [Help Index](../Help/index)
 
 Three [Design Types](../Help/DesignTypes) are currently available.
    
-![Compression Spring Design Type icon](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/favicon.ico "Compression Spring Design Type") 
+![Compression Spring Design Type icon](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Compression/favicon.ico "Compression Spring Design Type") 
 The [Compression Spring](../Help/DesignTypes/c_spring) design type is a full-featured app 
 enabling the engineering design of helical coil compression springs.
 
