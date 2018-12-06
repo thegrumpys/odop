@@ -140,7 +140,7 @@ export const initialState = {
             "input": false,
             "name": "Rate",
             "value": 0.019995,
-            "units": "in#/deg,
+            "units": "in#/deg",
             "lmin": 0,
             "lmax": 0,
             "cmin": 0.001,
@@ -183,7 +183,7 @@ export const initialState = {
         },
         {
             "input": false,
-            "name": "L_Body_(free)",
+            "name": "L_Body",
             "value": 0.506520,
             "units": "inches",
             "lmin": 0,
@@ -228,7 +228,7 @@ export const initialState = {
         },
         {
             "input": false,
-            "name": "End_Angle(free)",
+            "name": "End_Angle_Free)",
             "value": 0.0,
             "units": "deg",
             "lmin": 0,
@@ -393,7 +393,7 @@ export const initialState = {
         },
         {
             "input": false,
-            "name": "Force@Arm_2",
+            "name": "Force_Arm_2",
             "value": 1.0,
             "units": "pounds",
             "lmin": 0,
@@ -487,7 +487,7 @@ export const initialState = {
         },
         {
             "input": false,
-            "name": "HT Process",
+            "name": "HT_Process",
             "value": "No Stress Relieve",
             "units": "",
             "lmin": 0,

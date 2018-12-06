@@ -3,8 +3,8 @@ export const OD_Free = 0;
 export const Wire_Dia = 1;
 export const L_Free = 2;
 export const Coils_T = 3;
-export const Force_1 = 4;
-export const Force_2 = 5;
+export const M_1 = 4;
+export const M_2 = 5;
 
 // Dependent Variables (input-output)
 export const Mean_Dia = 0;
@@ -53,6 +53,26 @@ export const tbase400 = 42;
 export const const_term = 43;
 export const slope_term = 44;
 export const tensile_010 = 45;
+
+export const Arm_2 = 46;
+export const Coil_Spacing = 47;
+export const Elastic_Modulus = 48;
+export const End_Angle_Free = 49;
+export const End_Deflect_All = 50;
+export const Force_Arm_2 = 51;
+export const HT_Process = 52;
+export const L_Body = 53;
+export const L_End_1 = 54;
+export const L_End_2 = 55;
+export const PC_Ten_Bnd_Endur = 56;
+export const PC_Ten_Bnd_Stat = 57;
+export const Stress_End = 58;
+export const Stress_Lim_Bnd_Endur = 59;
+export const Stress_Lim_Bnd_Stat = 60;
+export const Xlen_1 = 61;
+export const Xlen_2 = 62;
+export const Force_1 = 63;
+export const Force_2 = 64;
 
 // System Controls (Preferences)
 export const ioopt = 0;
