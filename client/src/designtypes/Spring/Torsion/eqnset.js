@@ -61,7 +61,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
 
 //    if arm_2 ^= zero then force_arm_2=m_2/arm_2;
 //    else force_arm_2=zero;
-    if (x[o.Arm_2] != zero) {
+    if (x[o.Arm_2] !== zero) {
         x[o.Force_Arm_2] = p[o.M_2] / x[o.Arm_2];
     }
     else {
