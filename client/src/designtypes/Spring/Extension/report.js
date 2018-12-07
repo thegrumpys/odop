@@ -28,7 +28,7 @@ export function report(report_name, prefs, p, x, labels) {
 
     /*  Bring in material properties table  */
     var m_tab = require('../mat_ips.json');
-    var et_tab = require('./c_endtypes.json');
+    var et_tab = require('./endtypes.json');
 
     hits = 0;
     errmsg = "";
