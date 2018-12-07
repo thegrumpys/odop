@@ -52,7 +52,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     x[o.L_1] = Math.max( x[o.L_Body], p[o.Wire_Dia] * (ctp1 + x[o.Deflect_1] / Deg_Per_Turn) );
     x[o.L_2] = Math.max( x[o.L_Body], p[o.Wire_Dia] * (ctp1 + x[o.Deflect_2] / Deg_Per_Turn) );
 
-    x[o.L_Stroke] = x[o.Deflect_2] - x[o.Deflect_1];
+    x[o.Stroke] = x[o.Deflect_2] - x[o.Deflect_1];
 
       s_f = 32.0 * kb / (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] * p[o.Wire_Dia]);
 
@@ -84,7 +84,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
       }
 
     if (x[o.Stress_2] > zero) {
-        x[o.FS_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2]; 
+        x[o.FS_2] = x[o.Stress_Lim_Bnd_Stat] / x[o.Stress_2]; 
 //        console.log("eqnset FS_2 = ", x[o.FS_2]);
     }
        else x[o.FS_2] = 1.0;
@@ -100,7 +100,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
         */
       stress_avg = (x[o.Stress_1] + x[o.Stress_2]) / 2.0;
       stress_rng = (x[o.Stress_2] - x[o.Stress_1]) / 2.0;
-      se2 = x[o.Stress_Lim_Endur] / 2.0; 
+      se2 = x[o.Stress_Lim_Bnd_Endur] / 2.0; 
     x[o.FS_CycleLife] =  x[o.Stress_Lim_Bnd_Stat] / 
          (kb * stress_rng * (x[o.Stress_Lim_Bnd_Stat] - se2) / se2 + stress_avg); 
 
