@@ -51,7 +51,7 @@ Select the Solid design type before continuing with those instructions.
 
 At a minimum, each design type is supplied with a default design by the name of "startup".
 Leave this startup design selected in order to continue with the 
-ODOP Instructions and Getting Started instructions.   
+ODOP Introduction and Getting Started instructions.   
 
 ![Start with Rectangular Solid](./png/SelectSolid.png "Start with Rectangular Solid")
  

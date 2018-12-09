@@ -90,7 +90,7 @@ To work with the Rectangular Solid design type go to:
    
 Also, ODOP  provides a demo / tutorial feature. 
 To use tutorial and demo sessions with the  compression spring design type 
-go to: [Spring design tutorial and demo](gettingStartedSpring)
+go to: [Spring design tutorial and demo](../Help/gettingStartedSpring)
 
 &nbsp;
 
