@@ -65,6 +65,10 @@ Note that loading the ODOP software the first time may take 20 seconds or longer
 This is a technical issue related to web hosting during program development. 
 A production web hosting arrangement will not have this delay.
 
+**Closing or exiting the software**
+If information that you wish to keep has already been saved,
+simply close the browser tab or browser window containing the ODOP app.
+
 **Responsive software design**   
 Developed as a "responsive" web app, the ODOP software will change its screen layout and 
 input behavior in response to the capabilities of the user's device. 

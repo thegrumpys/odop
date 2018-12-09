@@ -9,8 +9,9 @@ may be constructed.
 
 The Rectangular Solid design type is provided as an easy to understand demonstration
 of basic capabilities.
-The discussion in "ODOP Introduction" starts with basic concepts and then leads to a
-less technical Getting Started explanation based on the Rectangular Solid.
+The discussion in "ODOP Introduction" (link provided below) starts with basic concepts 
+and then leads to a less technical Getting Started explanation based on the 
+Rectangular Solid.
 
 **ODOP:Spring** is a full-featured app enabling the engineering design 
 of helical coil springs.
@@ -18,7 +19,7 @@ While certainly capable of analyzing the performance of an existing spring desig
 ODOP:Spring is at its best when used to develop solutions to difficult and 
 highly constrained original design problems.
 
-The discussion in "Spring design tutorial and demo" provides instructions
+The discussion in "Spring design tutorial and demo" (link provided below) provides instructions
 on how to launch the demo and tutorial sessions using the compression spring design type.
 The spring design tutorial session named **tutorTour** is a good starting point for those
 interested in the shortest possible path to designing springs.

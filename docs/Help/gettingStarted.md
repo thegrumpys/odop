@@ -8,20 +8,14 @@
  usually goes a long way.  In the worst case, you'll come away from the
  experience with a little more motivation to read more of the on-line documentation.
 
-The remainder of this Getting Started topic will describe several screen captures 
-that refer to the ODOP main page.
-
-As noted in the [Introduction](../About/Intro), ODOP currently offers three
-design types to work with: Piston-Cylinder, Rectangular Solid and Compression Spring. 
+As noted in the discussion on other Help pages, ODOP currently offers three
+design types to work with: Compression Spring, Rectangular Solid and Piston-Cylinder. 
 If you are interested in learning about capabilities, concepts, and basic
 mechanics of how to operate the program,
 the Rectangular Solid design type is intended as an easy to understand 
-demonstration problem and is a good place to start.
-If you would like to skip the Rectangular Solid presentation and instead 
-jump ahead to work with the spring design materials,
-read about [launching the program](launchODOP) 
-and then come back and follow this link:
-[Spring design tutorial and demo](gettingStartedSpring)
+demonstration problem and is a good place to start. 
+The remainder of this Getting Started topic will use the Rectangular Solid design type
+to describe several screen captures that refer to the ODOP main page.
 
 Note that the [Terminology](terminology) page of the on-line documentation may be 
 helpful with some of the terms utilized here.
@@ -147,7 +141,7 @@ Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.
 **USING HELP**   
 
 The quick tour of the main page is now complete.
-This is a good time good to get a better look at what is available 
+This is a good time to get a better look at what is available 
 in the on-line documentation. 
 Most of the entries that are available after selecting the **Help : Index** menu 
 item cover the generic features and capabilities of the ODOP software.

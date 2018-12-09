@@ -16,10 +16,12 @@ Tutorial sessions teach operation of the program.
 Use the <b>Help : Tutorial...</b> menu item to select the desired tutorial session.   
 
 ![Help Tutorial](./png/HelpTutorial.png "Help Tutorial")   
-
-&nbsp;
+   
 
 ![Select Spring Tutorial](./png/SelectSpringTutor.png "[Select Spring Tutorial")   
+   
+The spring tutorial session named **tutorTour** is recommended as a good starting point
+for users that have not completed the tour provided in the Help : Getting Started topic.   
 
 &nbsp;
 
@@ -28,10 +30,12 @@ sample solutions to several generally available reference book problems.
 Use the <b>Help : Demo...</b> menu item to select the desired demo session.   
 
 ![Help Demo](./png/HelpDemo.png "Help Demo")   
-
-&nbsp;
+   
 
 ![Select Spring Demo](./png/SelectSpringDemo.png "[Select Spring Demo")   
+   
+The spring demo sessions named **demo** and **longdemo** are recommended as a good
+starting point for new users.   
 
 &nbsp;
 
