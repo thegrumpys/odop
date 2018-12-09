@@ -117,7 +117,7 @@ material property values (density in this case) are provided to the calculations
 Constraints are single sided (Max or Min) limits imposed on the 
 selected Variable. 
 First, mark the checkbox and then enter a value in the entry field.
-The amount of constraint violation will be immediate recalculated;
+The amount of constraint violation will be immediately recalculated;
 a positive value if violated or a negative value if satisfied.
 The Objective Value will reflect the aggregate impact of all violated constraints.
 This example illustrates the 108 inch Max limit on Length+Girth

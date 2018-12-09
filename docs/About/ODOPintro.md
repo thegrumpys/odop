@@ -69,7 +69,7 @@ See: [Help Index](../Help/index)
 Three [Design Types](../Help/DesignTypes) are currently available.
    
 ![Compression Spring Design Type icon](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Compression/favicon.ico "Compression Spring Design Type") 
-The [Compression Spring](../Help/DesignTypes/c_spring) design type is a full-featured app 
+The **Compression Spring** design type is a full-featured app 
 enabling the engineering design of helical coil compression springs.
 
 ![Rectangular Solid Design Type icon](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Solid/favicon.ico "Rectangular Solid Design Type") 
@@ -84,10 +84,13 @@ that illustrates competing objectives.
 
 **GETTING STARTED**   
 
-The ODOP software provides a demo / tutorial feature. 
-Also, there are Help facility pages to help you get started. 
-Start with: 
+The ODOP software provides Help facility pages to help you get started. 
+To work with the Rectangular Solid design type go to: 
 [Getting Started](../Help/gettingStarted)
+   
+Also, ODOP  provides a demo / tutorial feature. 
+To use tutorial and demo sessions with the  compression spring design type 
+go to: [Spring design tutorial and demo](gettingStartedSpring)
 
 &nbsp;
 

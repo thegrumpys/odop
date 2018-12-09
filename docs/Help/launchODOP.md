@@ -4,7 +4,7 @@ While it is possible to use the ODOP software from a mobile device,
 establishing initial impressions with a full size monitor, keyboard and mouse
 is recommended.   
 
-In the best of all configuration possibilities, where a wide screen monitor is in use, 
+Where a wide screen monitor is in use, 
 it should be possible to configure two independent browser sessions in a 
 side-by-side configuration.
 Note that this is different than two tabs in one browser session.
@@ -36,16 +36,22 @@ In the smaller window, click the "About" link.
 
 ![ODOP starting dialog](./png/StartDialog.png "ODOP starting dialog")   
 
-That "About" link will take you to the ODOP Introduction page. From there you can 
-procede to the Getting Started page and continue with those instructions while 
-viewing ODOP program operation in the larger window.   
+That "About" link will take you to the ODOP Introduction page. 
+From there you can procede to the Getting Started page and 
+continue with those instructions while viewing ODOP program operation 
+in the larger window.   
 
 &nbsp;
 
-In the larger window, select the design type and starting file that you 
+In the larger window, select the design type and specific design that you 
 wish to work with.
-This screen capture illustrates selecting the Rectangular **Solid** design type
-which is used in the Getting Started instructions.   
+The screen capture below illustrates selecting the Rectangular **Solid** design type
+which is used in the ODOP Introduction and Getting Started instructions. 
+Select the Solid design type before continuing with those instructions.   
+
+At a minimum, each design type is supplied with a default design by the name of "startup".
+Leave this startup design selected in order to continue with the 
+ODOP Instructions and Getting Started instructions.   
 
 ![Start with Rectangular Solid](./png/SelectSolid.png "Start with Rectangular Solid")
  
@@ -58,7 +64,7 @@ should look something like:
  
 &nbsp;
 
-Use your browser's **Back** button to return to the previous page now.
+To continue, use your browser's **Back** button to return to the previous page now.
 
 &nbsp;
 

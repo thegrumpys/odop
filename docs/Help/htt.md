@@ -9,6 +9,9 @@ and saved into the design library with **File : Save As**.
 In particular, it may be desirable to save the current design before selecting a 
 new standard size or catalog item.
 
+Note that the design library is a database physically located on an Internet server,
+a.k.a "in the cloud". 
+Design information stored in the design library does not appear on the local storage of your computer.
 
 **Side-by-Side comparison of designs**   
 Depending on available screen size, 

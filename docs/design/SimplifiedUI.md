@@ -35,6 +35,11 @@ The following image illustrates what things might look like after clicking the "
 
 &nbsp;
 
-Note:  It might be desirable to have the Sub-Problems feature implemented
-in order to keep spring design users out of trouble with things like Prop\_Calc_Method.   
+Notes:  
+* It might be desirable to have the Sub-Problems feature implemented
+in order to keep spring design users out of trouble with things like Prop\_Calc_Method.
+* In order to implement a spring design calculator, relaxed constraints as compared to those
+defaulted in initialState / startup are likely desirable.
+In turn, if the user simply switches from Design Check to Design mode, 
+these relaxed constraints could lead to less desirable results than the default constraints.
 
