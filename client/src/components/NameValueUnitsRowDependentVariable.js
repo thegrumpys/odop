@@ -5,14 +5,14 @@ import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
 import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
     saveOutputSymbolConstraints, restoreOutputSymbolConstraints } from '../store/actionCreators';
 
-    Number.prototype.toODOPPrecision = function() {
-        var value = this.valueOf();
-        var odopValue;
-        if (value < 10000.0 || value >= 1000000.0)
-             odopValue = value.toPrecision(4);
-        else odopValue = value.toFixed(0);
-        return odopValue;
-     };
+Number.prototype.toODOPPrecision = function() {
+    var value = this.valueOf();
+    var odopValue;
+    if (value < 10000.0 || value >= 1000000.0)
+         odopValue = value.toPrecision(4);
+    else odopValue = value.toFixed(0);
+    return odopValue;
+ };
      
 class NameValueUnitsRowDependentVariable extends React.Component {
     
