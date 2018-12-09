@@ -5,6 +5,15 @@ import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
 import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
     saveOutputSymbolConstraints, restoreOutputSymbolConstraints } from '../store/actionCreators';
 
+    Number.prototype.toODOPPrecision = function() {
+        var value = this.valueOf();
+        var odopValue;
+        if (value < 10000.0 || value >= 1000000.0)
+             odopValue = value.toPrecision(4);
+        else odopValue = value.toFixed(0);
+        return odopValue;
+     };
+     
 class NameValueUnitsRowDependentVariable extends React.Component {
     
     constructor(props) {
@@ -39,7 +48,7 @@ class NameValueUnitsRowDependentVariable extends React.Component {
                 { this.props.element.tooltip !== undefined && <UncontrolledTooltip placement="left" target={'dependent_variable_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
-                        <span className="text-right form-control bg-light">{this.props.element.value.toFixed(4)}</span>
+                        <span className="text-right form-control bg-light">{this.props.element.value.toODOPPrecision()}</span>
                         <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
