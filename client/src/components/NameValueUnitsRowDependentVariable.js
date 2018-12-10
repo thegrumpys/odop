@@ -5,6 +5,7 @@ import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
 import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
     saveOutputSymbolConstraints, restoreOutputSymbolConstraints } from '../store/actionCreators';
 
+/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
     var value = this.valueOf();
     var odopValue;
@@ -12,7 +13,7 @@ Number.prototype.toODOPPrecision = function() {
          odopValue = value.toPrecision(4);
     else odopValue = value.toFixed(0);
     return odopValue;
- };
+};
      
 class NameValueUnitsRowDependentVariable extends React.Component {
     
