@@ -16,12 +16,14 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
 
     x[o.Spring_Index] = x[o.Mean_Dia] / p[o.Wire_Dia];
 
-    if (x[o.HT_Process] === "Stress_Relieve"){
+    if (x[o.Heat_Treat] === 2){     //  Stress Relieve
         kb = (4.0 * x[o.Spring_Index] - 1.0) / (4.0 * x[o.Spring_Index] - 4.0);
     }
-    else {
+    else {                          //  No Stress Relieve
         kb = 1.0;
     }
+//    console.log("x[o.Heat_Treat] =", x[o.Heat_Treat]);
+//    console.log("kb = ", kb);
 
 //  end_deflect_all=(l_end_1+l_end_2)/(3.0*pi*mean_dia);
     x[o.End_Deflect_All] = (x[o.L_End_1] + x[o.L_End_2]) / (3.0 * Math.PI * x[o.Mean_Dia]);
@@ -106,8 +108,9 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
 
              /*  modified Goodman cycle life calculation  */
     if (x[o.Prop_Calc_Method] === 1 && x[o.Material_Type] !== 0) {
-//        cycle_life = cl_calc(material_index,life_catagory,1,tensile,stress_1,stress_2);
-        x[o.Cycle_Life] = cl_calc(x[o.Material_Type], x[o.Life_Category], 1, x[o.Tensile], x[o.Stress_1], x[o.Stress_2]);
+//        for torsion springs: spring type (st_code) = 3 
+//        cycle_life = cl_calc(material_index,life_catagory,3,tensile,stress_1,stress_2);
+        x[o.Cycle_Life] = cl_calc(x[o.Material_Type], x[o.Life_Category], 3, x[o.Tensile], x[o.Stress_1], x[o.Stress_2]);
     }
        else x[o.Cycle_Life] = zero;   // Setting to NaN causes problems with File : Open.  See issue #232
 

@@ -15,8 +15,8 @@ export function init(p, x) {
 //    console.log("et_tab=", et_tab);
 
  
-     x[o.Spring_Type] = "Compression";
-     if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Tensile_Endur] === "unused") x[o.Prop_Calc_Method] = 1;
+     x[o.Spring_Type] = "Torsion";
+     if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Ten_Bnd_Endur] === "unused") x[o.Prop_Calc_Method] = 1;
  
  switch(x[o.Prop_Calc_Method]){
  default:
@@ -58,7 +58,7 @@ export function init(p, x) {
 //    density      = m_tab(i).dens;
     x[o.Density]      = m_tab[i][mo.dens];
 //    torsion_modulus  = m_tab(i).gg;
-    x[o.Torsion_Modulus] = ten3 * m_tab[i][mo.gg];
+    x[o.Elastic_Modulus] = ten3 * m_tab[i][mo.ee];
 //
 //    hot_factor_kh    = m_tab(i).kh;
     x[o.Hot_Factor_Kh] = m_tab[i][mo.kh];
@@ -71,29 +71,29 @@ export function init(p, x) {
         default:
         case 1:
         case 5:
-            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte1];
+            x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb1];
         break;
         case 2:
-            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte2];
+            x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb2];
         break;
         case 3:
-            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte3];
+            x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb3];
         break;
         case 4:
-            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte4];
+            x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb4];
         break;
         case 6:
-            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte6];
+            x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb6];
         break;
         case 7:
-            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte7];
+            x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb7];
         break;
         case 8:
-            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte8];
+            x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb8];
     }
     
 //    pc_tensile_stat  = m_tab(i).fy;
-    x[o.PC_Tensile_Stat]  = m_tab[i][mo.pte1];
+    x[o.PC_Ten_Bnd_Stat]  = m_tab[i][mo.ptb1];
 //    pc_tensile_bend  = m_tab(i).ptb(life_catagory);
 //
 //    wire_dia=p(2);
@@ -105,9 +105,9 @@ export function init(p, x) {
 //    tensile=slope_term*(log10(wire_dia)-const_term) + tensile_010;
     x[o.Tensile] = x[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - x[o.const_term]) + x[o.tensile_010];
 //    stress_lim_endur=tensile*pc_tensile_endur/100.0;
-    x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0;
+    x[o.Stress_Lim_Bnd_Endur] = x[o.Tensile] * x[o.PC_Ten_Bnd_Endur] / 100.0;
 //    stress_lim_stat =tensile*pc_tensile_stat /100.0;
-    x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0;
+    x[o.Stress_Lim_Bnd_Stat]  = x[o.Tensile] * x[o.PC_Ten_Bnd_Stat]  / 100.0;
 //    /*  copy from end type table to constants  */
 //    /*  check these values.     See AS Design Hdbk. p52  */
 //    /*    VVVVVVVVVVVVV          Kludge for Torsion  */
@@ -122,7 +122,6 @@ export function init(p, x) {
     x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
 //if end_type_index <= c_end_num then
 //  add_coils_solid=acs_tbl(end_type_index);
-    x[o.Add_Coils_Solid] = et_tab[j][eto.add_coils_solid];
 //else
 //  add_coils_solid=0.0;
 //if end_type_index > c_end_num then
@@ -143,8 +142,8 @@ export function init(p, x) {
      x[o.ASTM_Fed_Spec] = "unused";
      x[o.Material_File] = "unused";
      x[o.Process] = "unused";
-     x[o.PC_Tensile_Endur] = "unused";
-     x[o.PC_Tensile_Stat]  = "unused";
+     x[o.PC_Ten_Bnd_Endur] = "unused";
+     x[o.PC_Ten_Bnd_Stat]  = "unused";
  }
 //    console.log('In init p=',p,' x=',x);
     return x;
