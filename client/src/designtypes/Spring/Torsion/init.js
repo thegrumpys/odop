@@ -3,7 +3,7 @@ import * as mo from '../mat_ips_offsets';
 import * as eto from './endtypes_offsets';
 
 export function init(p, x) {
-//    console.log('In init p=',p);
+//    console.log('Entering init p=',p);
  var i, j;
  const ten3 = 1000.0;
  var tensile_400;
@@ -145,7 +145,7 @@ export function init(p, x) {
      x[o.PC_Ten_Bnd_Endur] = "unused";
      x[o.PC_Ten_Bnd_Stat]  = "unused";
  }
-//    console.log('In init p=',p,' x=',x);
+//    console.log('Exiting init p=',p,' x=',x);
     return x;
 
 }

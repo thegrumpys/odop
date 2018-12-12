@@ -1,6 +1,9 @@
 import * as o from './offsets';
 import * as mo from '../mat_ips_offsets';
 export function eqnset(p, x) {        /*    Torsion  Spring  */
+    
+//    console.log('Entering eqnset p=',p);
+    
     const zero = 0.0;
     const Deg_Per_Turn = 360.0;
     var kb;
@@ -118,7 +121,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * 
         (Math.PI * x[o.Mean_Dia] * p[o.Coils_T] + x[o.Xlen_1] + x[o.Xlen_2]);
     
-//    console.log('In eqnset p=',p,' x=',x);
+//    console.log('Exiting eqnset p=',p,' x=',x);
     return x;
     
 function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
