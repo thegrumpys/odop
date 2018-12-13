@@ -341,10 +341,37 @@ export function report(report_name, prefs, p, x, labels) {
                         <td>{x[o.L_Body].units}</td>
                         <td/>
                         <td> &nbsp; &nbsp; </td>
+                        <td>{x[o.End_Angle_Free].name}</td>
+                        <td>=</td>
+                        <td>{x[o.End_Angle_Free].value.toFixed(2)}</td>
+                        <td>{x[o.End_Angle_Free].units}</td>
+                        </tr>
+                        <tr>
+                        <td>{x[o.Arm_2].name}</td>
+                        <td>=</td>
+                        <td>{x[o.Arm_2].value.toFixed(3)}</td>
+                        <td>{x[o.Arm_2].units}</td>
+                        <td/>
+                        <td> &nbsp; &nbsp; </td>
                         <td>{x[o.Cycle_Life].name}</td>
                         <td>=</td>
                         <td>{x[o.Cycle_Life].value.toFixed(0)}</td>
-                        <td>{cycle_life_u}</td>
+                        <td>{x[o.Cycle_Life].units}</td>
+                        <td> (est.)</td>
+                    </tr>
+                    <tr>
+                        <td>{x[o.Force_Arm_2].name}</td>
+                        <td>=</td>
+                        <td>{x[o.Force_Arm_2].value.toFixed(3)}</td>
+                        <td>{x[o.Force_Arm_2].units}</td>
+                        <td/>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>({x[o.Cycle_Life].name}</td>
+                        <td>&nbsp;</td>
+                        <td>applies</td>
+                        <td> to body</td>
+                        <td> coils </td>
+                        <td>only.)</td>
                     </tr>
                 </tbody>
             </table>
