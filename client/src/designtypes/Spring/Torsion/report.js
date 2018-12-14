@@ -368,10 +368,7 @@ export function report(report_name, prefs, p, x, labels) {
                         <td> &nbsp; &nbsp; </td>
                         <td>({x[o.Cycle_Life].name}</td>
                         <td>&nbsp;</td>
-                        <td>applies</td>
-                        <td> to body</td>
-                        <td> coils </td>
-                        <td>only.)</td>
+                        <td className="text-left" colSpan="3">applies to body coils only.)</td>
                     </tr>
                 </tbody>
             </table>
@@ -596,7 +593,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <tr>
                     <td>{x[o.Spring_Type].name}</td>
                     <td>=</td>
-                    <td className="" colSpan="2">{x[o.Spring_Type].value}</td>
+                    <td className="text-left" colSpan="2">{x[o.Spring_Type].value}</td>
                     <td/>
                     <td> &nbsp; &nbsp; </td>
                     <td>{x[o.Material_Type].name}</td>
@@ -606,10 +603,9 @@ export function report(report_name, prefs, p, x, labels) {
                     <td></td>
                 </tr>
                 <tr>
-                    <td>{p[o.Wire_Dia].name}</td>
+                    <td>{x[o.End_Type].name}</td>
                     <td>=</td>
-                    <td>{p[o.Wire_Dia].value.toFixed(4)}</td>
-                    <td>{p[o.Wire_Dia].units}</td>
+                    <td className="text-left" colSpan="2">{et_tab[x[o.End_Type].value][0]}</td>
                     <td/>
                     <td> &nbsp; </td>
                     <td>{x[o.ASTM_Fed_Spec].name}</td>
@@ -617,11 +613,11 @@ export function report(report_name, prefs, p, x, labels) {
                     <td className="text-left" colSpan="2">{x[o.ASTM_Fed_Spec].value}</td>
                     <td></td>
                 </tr>
-                <tr>
-                    <td>{x[o.Mean_Dia].name}</td>
+                    <tr>
+                    <td>{p[o.Wire_Dia].name}</td>
                     <td>=</td>
-                    <td>{x[o.Mean_Dia].value.toFixed(3)}</td>
-                    <td>{x[o.Mean_Dia].units}</td>
+                    <td>{p[o.Wire_Dia].value.toFixed(4)}</td>
+                    <td>{p[o.Wire_Dia].units}</td>
                     <td/>
                     <td> &nbsp; </td>
                     <td>{x[o.Tensile].name}</td>
@@ -630,45 +626,22 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{x[o.Tensile].units}</td>
                 </tr>
                 <tr>
-                    <td>{x[o.Spring_Index].name}</td>
+                    <td>{x[o.Mean_Dia].name}</td>
                     <td>=</td>
-                    <td>{x[o.Spring_Index].value.toFixed(3)}</td>
-                    <td>{x[o.Spring_Index].units}</td>
+                    <td>{x[o.Mean_Dia].value.toFixed(3)}</td>
+                    <td>{x[o.Mean_Dia].units}</td>
                     <td/>
                     <td> &nbsp; </td>
-                    <td>{x[o.End_Type].name}</td>
-                    <td>=</td>
-                    <td className="text-left" colSpan="2">{et_tab[x[o.End_Type].value][0]}</td>
-                </tr>
-                <tr>
-                    <td>{p[o.Coils_T].name}</td>
-                    <td>=</td>
-                    <td>{p[o.Coils_T].value.toFixed(3)}</td>
-                    <td>{"total " + p[o.Coils_T].units}</td>
-                    <td/>
-                    <td> &nbsp; </td>
-                    <td>Pitch</td>
-                    <td>=</td>
-                    <td>{pitch.toFixed(3)}</td>
-                    <td>{x[o.L_Body].units}</td>
-                </tr>
-                <tr>
-                    <td>{x[o.Coils_A].name}</td>
-                    <td>=</td>
-                    <td>{x[o.Coils_A].value.toFixed(3)}</td>
-                    <td>{"active " + x[o.Coils_A].units}</td>
-                    <td/>
-                    <td> &nbsp; </td>
-                    <td>Helix Angle</td>
-                    <td>=</td>
-                    <td>{hlx_ang.toFixed(2)}</td>
-                    <td>degrees</td>
-                </tr>
-                <tr>
                     <td>{len_lbl}</td>
                     <td>=</td>
                     <td>{wire_len_t.toFixed(3)}</td>
                     <td>{x[o.L_Body].units}</td>
+                </tr>
+                <tr>
+                    <td>{x[o.Spring_Index].name}</td>
+                    <td>=</td>
+                    <td>{x[o.Spring_Index].value.toFixed(3)}</td>
+                    <td>{x[o.Spring_Index].units}</td>
                     <td/>
                     <td> &nbsp; </td>
                     <td>{x[o.Weight].name}</td>
@@ -678,10 +651,22 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{wgt1000_u}</td>
                 </tr>
                 <tr>
-                    <td>Safe Load</td>
+                    <td>{p[o.Coils_T].name}</td>
                     <td>=</td>
-                    <td>{safe_load.toFixed(3)}</td>
-                    <td>{safe_load_u}</td>
+                    <td>{p[o.Coils_T].value.toFixed(3)}</td>
+                    <td>{"total " + p[o.Coils_T].units}</td>
+                    <td/>
+                    <td> &nbsp; </td>
+                    <td>{x[o.End_Angle_Free].name}</td>
+                    <td>=</td>
+                    <td>{x[o.End_Angle_Free].value.toFixed(2)}</td>
+                    <td>{x[o.End_Angle_Free].units}</td>
+                </tr>
+                <tr>
+                    <td>{x[o.Coils_A].name}</td>
+                    <td>=</td>
+                    <td>{x[o.Coils_A].value.toFixed(3)}</td>
+                    <td>{"active " + x[o.Coils_A].units}</td>
                     <td/>
                     <td> &nbsp; </td>
                     <td>{x[o.Rate].name}</td>
@@ -690,10 +675,34 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{x[o.Rate].units}</td>
                 </tr>
                 <tr>
+                    <td>Pitch</td>
+                    <td>=</td>
+                    <td>{pitch.toFixed(3)}</td>
+                    <td>{x[o.L_Body].units}</td>
+                    <td/>
+                    <td> &nbsp; </td>
+                    <td>Helix Angle</td>
+                    <td>=</td>
+                    <td>{hlx_ang.toFixed(2)}</td>
+                    <td>degrees</td>
+                </tr>
+                <tr>
+                    <td>Safe Load</td>
+                    <td>=</td>
+                    <td>{safe_load.toFixed(3)}</td>
+                    <td>{safe_load_u}</td>
+                    <td/>
+                    <td> &nbsp; </td>
                     <td>Safe Travel</td>
                     <td>=</td>
                     <td>{safe_travel.toFixed(3)}</td>
-                    <td>{x[o.L_Body].units}</td>
+                    <td>{x[o.Deflect_2].units}</td>
+                </tr>
+                <tr>
+                    <td>{x[o.Arm_2].name}</td>
+                    <td>=</td>
+                    <td>{x[o.Arm_2].value.toFixed(3)}</td>
+                    <td>{x[o.Arm_2].units}</td>
                     <td/>
                     <td> &nbsp; </td>
                     <td>{x[o.Cycle_Life].name}</td>
@@ -701,6 +710,17 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{x[o.Cycle_Life].value.toFixed(0)}</td>
                     <td className="text-left" colSpan="2">{cycle_life_u}</td>
                     <td></td>
+                </tr>
+                <tr>
+                    <td>{x[o.Force_Arm_2].name}</td>
+                    <td>=</td>
+                    <td>{x[o.Force_Arm_2].value.toFixed(3)}</td>
+                    <td>{x[o.Force_Arm_2].units}</td>
+                    <td/>
+                    <td> &nbsp; &nbsp; </td>
+                    <td>({x[o.Cycle_Life].name}</td>
+                    <td>&nbsp;</td>
+                    <td className="text-left" colSpan="3">applies to body coils only.)</td>
                 </tr>
             </tbody>
         </table>
@@ -714,7 +734,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <th>1st Load</th>
                     <th>&nbsp; 2nd Load</th>
                     <td></td>
-                    <th> &nbsp; &nbsp; Max Safe</th>
+                    <th> &nbsp; Max Safe</th>
                     <th></th>
                     <th> &nbsp; &nbsp; </th>
                 </tr>
@@ -723,11 +743,11 @@ export function report(report_name, prefs, p, x, labels) {
                 <tr>
                     <td><b>Moment</b></td>
                     <td> &nbsp; &nbsp; </td>
-                    <td>{(0.0).toFixed(2)}</td>
-                    <td>{p[o.M_1].value.toFixed(2)}</td>
-                    <td>{p[o.M_2].value.toFixed(2)}</td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{x[o.L_End_2].value.toFixed(2)}</td>
+                    <td>{(0.0).toFixed(3)}</td>
+                    <td>{p[o.M_1].value.toFixed(3)}</td>
+                    <td>{p[o.M_2].value.toFixed(3)}</td>
+                    <td> &nbsp; </td>
+                    <td>{safe_load.toFixed(3)}</td>
                     <td className="text-left" colSpan="2">{p[o.M_1].units}</td>
                     <td/>
                 </tr>
@@ -737,8 +757,8 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{x[o.L_Body].value.toFixed(3)}</td>
                     <td>{x[o.L_1].value.toFixed(3)}</td>
                     <td>{x[o.L_2].value.toFixed(3)}</td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{x[o.L_End_2].value.toFixed(3)}</td>
+                    <td> &nbsp; </td>
+                    <td>{l_max.toFixed(3)}</td>
                     <td>{x[o.L_1].units}</td>
                 </tr>
                 <tr>
@@ -747,8 +767,8 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{(0.0).toFixed(3)}</td>
                     <td>{x[o.Deflect_1].value.toFixed(3)}</td>
                     <td>{x[o.Deflect_2].value.toFixed(3)}</td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{(x[o.L_Body].value - x[o.L_End_2].value).toFixed(3)}</td>
+                    <td> &nbsp; </td>
+                    <td>{def_max.toFixed(3)}</td>
                     <td>{x[o.Deflect_2].units}</td>
                 </tr>
                 <tr>
@@ -757,7 +777,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{p[o.OD_Free].value.toFixed(3)}</td>
                     <td>{od_1.toFixed(3)}</td>
                     <td>{od_2.toFixed(3)}</td>
-                    <td> &nbsp; &nbsp; </td>
+                    <td> &nbsp; </td>
                     <td>{od_max.toFixed(3)}</td>
                     <td>{p[o.OD_Free].units}</td>
                 </tr>
@@ -767,7 +787,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{x[o.ID_Free].value.toFixed(3)}</td>
                     <td>{id_1.toFixed(3)}</td>
                     <td>{id_2.toFixed(3)}</td>
-                    <td> &nbsp; &nbsp; </td>
+                    <td> &nbsp; </td>
                     <td>{(od_max - 2.0 * p[o.Wire_Dia].value).toFixed(3)}</td>
                     <td>{x[o.ID_Free].units}</td>
                 </tr>
@@ -788,7 +808,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{x[o.Stress_1].value.toFixed(0)}</td>
                     <td>{x[o.Stress_2].value.toFixed(0)}</td>
                     <td> &nbsp; &nbsp; </td>
-                    <td>{x[o.L_End_2].value.toFixed(0)}</td>
+                    <td>{x[o.Stress_Lim_Bnd_Stat].value.toFixed(0)}</td>
                     <td>{x[o.Stress_1].units}</td>
                 </tr>
                 <tr>
@@ -798,7 +818,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{(x[o.Stress_1].value / dhat).toFixed(1)}</td>
                     <td>{(x[o.Stress_2].value / dhat).toFixed(1)}</td>
                     <td> &nbsp; &nbsp; </td>
-                    <td>{(x[o.L_End_2].value / dhat).toFixed(1)}</td>
+                    <td>{(x[o.Stress_Lim_Bnd_Stat].value / dhat).toFixed(1)}</td>
                     <td>% &nbsp; &nbsp; </td>
                 </tr>
                 <tr>
@@ -808,8 +828,8 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{fs_1.toFixed(2)}</td>
                     <td>{x[o.FS_2].value.toFixed(2)}</td>
                     <td> &nbsp; &nbsp; </td>
-                    <td>{x[o.L_End_2].value.toFixed(2)}</td>
-                    <td>{x[o.L_End_2].units}</td>
+                    <td>{1.0.toFixed(2)}</td>
+                    <td>{x[o.FS_2].units}</td>
                 </tr>
             </tbody>
         </table>
@@ -879,7 +899,7 @@ export function report(report_name, prefs, p, x, labels) {
             </tbody>
         </table>
         <hr/>
-        Deflection at load point 2 is {x[o.L_End_2].value.toFixed(0)}% of total available deflection.<br />
+        Deflection at load point 2 is {(100.0 * x[o.Deflect_2].value / def_max).toFixed(0)}% of total safe deflection.<br />
         <hr/>
         <table>
             <tbody>
