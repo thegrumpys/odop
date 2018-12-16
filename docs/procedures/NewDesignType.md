@@ -106,8 +106,8 @@ When in doubt, it is generally safe (safer) to assign an element as ("input": fa
 
 
 <!---
-Comment must be the last thing in the file.
-Eclipse MD Preview suppresses display of everything after the comment header.
+While single line comments work as expected, a multi-line comment must be the last thing in the file.
+Eclipse .md Preview suppresses display of everything after the comment header.
 
 **Under Construction**   
 This page is still a work in progress !   
