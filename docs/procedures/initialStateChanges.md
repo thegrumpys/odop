@@ -24,6 +24,6 @@ the release (Heroku) version of the system would see a future version
 of startup and respond by using initialState.   
 
 When operating in the development environment,
-the **View : Offsets ** menu item is enabled.
-Start with initialState and then use **View : Offsets ** as a copy / paste source for the contents of offsets.js.   
+the **View : Offsets** menu item is enabled.
+Start with initialState and then use **View : Offsets** as a copy / paste source for the contents of offsets.js.   
 

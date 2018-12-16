@@ -3,7 +3,7 @@
 This is a place-holder for the description of the Torsion Spring design type.
 
 **Torsion Spring Names**   
-<img src="../../../public/designtypes/Spring/Torsion/TorsionNames.png" alt="Torsion Spring Names"/>
+<img src="../../public/designtypes/Spring/Torsion/TorsionNames.png" alt="Torsion Spring Names"/>
 
 [Design Types](./)   
 [Help](../)   
