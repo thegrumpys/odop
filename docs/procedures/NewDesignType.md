@@ -1,64 +1,83 @@
 #### Procedure to implement a new design type 
 
-**Under Construction**   
-This page is still a work in progress !
-
 This entry describes how to implement a new ODOP design type 
 (a.k.a. "design problem").
 
-Files required for all design types:
-* client/src/designtypes/_designName_/initialState.js
-* client/src/designtypes/_designName_/eqnset.js
-* client/src/designtypes/_designName_/migrate.js
+**Files required for all design types:**   
+ &nbsp; (<sup> * </sup> = may be stub)   
+* client/src/designtypes/_designName_/
+    * initialState.js
+    * offsets.js 
+    * eqnset.js
+    * init.js<sup> * </sup>
+    * report.js<sup> * </sup>
+    * size.js<sup> * </sup>
+    * catalog.js<sup> * </sup>
+    * execute.js<sup> * </sup>
+    * migrate.js
 * client/public/designtypes/_designName_/favicon.icon
-* designtypes/load.sql
+* designtypes/_designName_/load.sql
 * docs/Help/DesignTypes/_designName_.md 
    
 * startup entry in database  (typically created from initialState.js)
    
-Additional files may (optionally) be utilized by some design types. 
-For example, coil spring design types utilize:
-* client/src/designtypes/_designName_/offsets.js 
-* client/src/designtypes/_designName_/init.js
-* client/src/designtypes/_designName_/report.js
-* client/src/designtypes/_designName_/tutorxx.js
-* client/src/designtypes/_designName_/demoxx.js
-* mat\_ips.json, mat\_ips\_offsets.js, mat\_cgs.json, mat\_cgs\_offsets.js, etc.
-* x\_endtypes.json
-* lifetarget.json
-* prop_calc.json
-* (standard wire sizes table)
-* (stock springs catalog)
+**Additional (or non-stub) files may (optionally) be utilized by some design types.**    
+For example, coil spring design types utilize:   
+ &nbsp; (<sup> ** </sup> = non stub)   
+* client/src/designtypes/Spring/
+    * mat\_ips.json,  mat\_cgs.json, etc.
+    * mat\_ips\_offsets.js, mat\_cgs\_offsets.js, etc.
+    * sizes_xx.json &nbsp; (standard wire sizes tables)
+* client/src/designtypes/Spring/_designName_/
+    * init.js<sup> ** </sup>
+    * report.js<sup> ** </sup>
+    * size.js<sup> ** </sup>
+    * catalog.js<sup> ** </sup>
+    * execute.js<sup> ** </sup> &nbsp;  (references exec, tutor & demo)
+        * execxx.js &nbsp; (e.g. tweakPrefs.js)
+        * tutorxx.js
+        * demoxx.js
+    * endtypes.json
+    * lifetarget.json
+    * heattreat.json
+    * prop_calc.json
+    * catalog.json (stock springs catalog)
 
-   
-Build a new GitHub repository ?
-* plug-ins ?
 
-Modify template files:
+**Modify template files:**   
 * Using an existing initialState.js file as an example, modify it to reflect the variables of the new design type.
+* Start with initialState and then use the **View : Offsets ** menu item as a copy / paste source for the contents of offsets.js.   
+    * expect issues as this requires ability to get past compile time and run-time errors
 * Using an existing eqnset.js file as an example, replace equations with the design equations of the new design type.
+* Use stub versions of init, report, size, catalog, execute and migrate to get started.
 * Add an icon with the name favicon.icon to client/public/designtypes
 * Create a startup entry in the database   
- ---- When in developer mode, and database access is enables
- ---- Start from initialState   
- ---- Optionally, make modifications.  
- ---- SaveAs startup.   
+    * When in developer mode, and database access is enabled   
+        * Start from initialState   
+        * Optionally, make modifications. 
+        * Save As startup.   
 
 * Create a load.sql file   
  ---- Using an existing load.sql file as an example, overwrite the initialState section with the new initial state json.   
  ---- {need more detail here} ...   
  ---- See also: [Making changes to initialState.js](initialStateChanges)
+   
+**Build a new GitHub repository ?**   
+* plug-ins ?
 
-Test.
+**Test.**   
   
-Notes as of early September, 2018 ...
+  &nbsp;
+  
+**Notes as of early September, 2018 ...**
 
-The replacement for CONTNT is named init.js.  It is called on every change to a "Calculation Input" (every keystroke).
+The replacement for CONTNT is named init.js. 
+It is called on every change to (any variable?, not just) a "Calculation Input" (every keystroke).
 
-Regarding properties of Elements (entries, members, variables) in initialState.js:
-"input": true,   
-"equationset": true,   
-"hidden": false   
+Regarding properties of Elements (entries, members, variables) in initialState.js:   
+* "input": true,   
+* "equationset": true,   
+* "hidden": false   
 
 Elements with the property ("input": true) are inputs to the design equations and go into the p vector. 
 Fixed elements are compressed out and not operated on by Search.
@@ -76,7 +95,7 @@ Elements with the property ("equationset": false), are members of the previous d
 
 Elements with the property ("hidden": true) are not visible in the user interface.
 
-**The rules** for defining elements (entries, members, variables) in initialState.js:   
+**The rules for defining elements (entries, members, variables) in initialState.js:**   
 
 Any variable on the left of an equals sign in either init.js or eqnset.js **must** be ("input": false) ... in the x vector.
 
@@ -85,5 +104,13 @@ Note that x variables may also appear on the right of an equals sign.
 This has no relevance to their assignment as ("input": false).
 When in doubt, it is generally safe (safer) to assign an element as ("input": false).   
 
-  
+
+<!---
+Comment must be the last thing in the file.
+Eclipse MD Preview suppresses display of everything after the comment header.
+
+**Under Construction**   
+This page is still a work in progress !   
+
+-->
   
