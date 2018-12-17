@@ -108,6 +108,7 @@ export function init(p, x) {
     x[o.Stress_Lim_Bnd_Endur] = x[o.Tensile] * x[o.PC_Ten_Bnd_Endur] / 100.0;
 //    stress_lim_stat =tensile*pc_tensile_stat /100.0;
     x[o.Stress_Lim_Bnd_Stat]  = x[o.Tensile] * x[o.PC_Ten_Bnd_Stat]  / 100.0;
+
 //    /*  copy from end type table to constants  */
 //    /*  check these values.     See AS Design Hdbk. p52  */
 //    /*    VVVVVVVVVVVVV          Kludge for Torsion  */
@@ -117,17 +118,16 @@ export function init(p, x) {
 //       put skip list('TAB2D:  END_CALC_METHOD SET TO 1.');
 //end_calc_method=1;
 //
+    // Notes: 
+    // Inactive_Coils does not appear in Torsion spring eqnset.js.
+    // In order to facilitate possible future developments: 
+    //     Inactive_Coils is marked "hidden" in initial_state.js
+    //     The following line is carried forward 
+    // Lower case for the eto subscript is established in endtypes_offsets.js
+//
 //end_type        = end_name(end_type_index);
 //inactive_coils  = inact_coil_tbl(end_type_index);
     x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
-//if end_type_index <= c_end_num then
-//  add_coils_solid=acs_tbl(end_type_index);
-//else
-//  add_coils_solid=0.0;
-//if end_type_index > c_end_num then
-//  hook_deflect_all=hda_tbl(end_type_index-c_end_num);
-//else
-//  hook_deflect_all=0.0;
     break;
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur

@@ -577,7 +577,7 @@ export const initialState = {
             "sdlim": 1.0,
             "tooltip": "Number of coils not contributing to deflection. Depends on End_Type.",
             "equationset": false,
-            "hidden": false
+            "hidden": true
         },
         {
             "input": false,
