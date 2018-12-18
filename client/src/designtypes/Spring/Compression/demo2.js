@@ -25,7 +25,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 08",
+            title: "Page 02 of 07",
             text: (
                 <React.Fragment>
                     <p>
@@ -50,7 +50,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 08",
+            title: "Page 03 of 07",
             text: (
                 <React.Fragment>
                     <p>This problem appears in the  HANDBOOK of SPRING DESIGN  published by:<br />
@@ -68,7 +68,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 04 of 08",
+            title: "Page 04 of 07",
             text: (
                 <React.Fragment>
                     <p>
@@ -101,7 +101,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 05 of 08",
+            title: "Page 05 of 07",
             text: (
                 <React.Fragment>
                     <p>
@@ -138,7 +138,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 06 of 08",
+            title: "Page 06 of 07",
             text: (
                 <React.Fragment>
                     <p>
@@ -161,7 +161,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 07 of 08 (last page)",
+            title: "Page 07 of 07 (last page)",
             text: (
                 <React.Fragment>
                     <p>
