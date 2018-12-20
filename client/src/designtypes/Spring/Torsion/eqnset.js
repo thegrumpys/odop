@@ -52,7 +52,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     x[o.ID_Free] = x[o.Mean_Dia] - p[o.Wire_Dia];
 
     ctp1 = p[o.Coils_T] + 1.0;
-    x[o.L_Body] = p[o.Wire_Dia] * ctp1 + p[o.Coil_Spacing] * p[o.Coils_T];
+    x[o.L_Body] = p[o.Wire_Dia] * ctp1 + p[o.Coil_Spacing] * (p[o.Coils_T] - 1.0);
 //      l_1 = max(l_body, wire_dia*(ctp1+deflect_1/deg_per_turn) );
     x[o.L_1] = Math.max( x[o.L_Body], p[o.Wire_Dia] * (ctp1 + x[o.Deflect_1] / Deg_Per_Turn) );
     x[o.L_2] = Math.max( x[o.L_Body], p[o.Wire_Dia] * (ctp1 + x[o.Deflect_2] / Deg_Per_Turn) );
