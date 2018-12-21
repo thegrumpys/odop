@@ -147,6 +147,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', (req, res) => {
                 console.log('SERVER: 400 - BAD REQUEST');
             } else {
 //                console.log('SERVER: In POST /api/v1/designs/'+name,' type=', type,' value=', value);
+                value = value.replace("'","''"); // replace one single quote with an two single quotes throughout
                 var stmt = 'INSERT INTO design (name, type, value) VALUES (\''+name+'\',\''+type+'\',\''+value+'\')';
 //                console.log('SERVER: stmt='+stmt);
                 connection.query(stmt, function(err, rows, fields) {
@@ -270,6 +271,7 @@ app.post('/api/v1/usage_log', (req, res) => {
     console.log('SERVER: In POST /api/v1/usage_log ip_address='+ip_address+' req.body=',req.body);
     note = JSON.stringify(req.body); // Convert blob to string
     var connection = startConnection();
+    note = note.replace("'","''"); // replace one single quote with an two single quotes throughout
     var stmt = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address+'\',\''+note+'\')';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
