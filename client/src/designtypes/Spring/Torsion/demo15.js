@@ -10,16 +10,8 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    This demo session compares torsion spring results produced by ODOP:Spring
-                    to results published in a handbook. 
-                    
                     This demo session works through a handbook design example and confirms that the 
-                    </p>
-                    
-                    <p>
-                    As opposed to a complete design exercise, 
-                    this demo session is primarily a simple validation that the values produced by ODOP:Spring's torsion spring
-                    calculations are in reasonable agreement with results published in a handbook.
+                    results are in reasonable agreement with results published in the handbook. 
                     </p>
                     
                     <p>
@@ -44,7 +36,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    This case appears in the
+                    This example appears in the
                     &nbsp; &nbsp; <b>SPRING DESIGNER'S HANDBOOK</b> &nbsp; &nbsp; by  Harold Carlson<br />
                     Published by  Marcel Dekker, Inc. &nbsp; &nbsp; 270 Madison Avenue &nbsp; &nbsp; New York, &nbsp; NY &nbsp; &nbsp; 10016<br />
                     <br />
@@ -65,7 +57,7 @@ export const execute = {
                 Problem 4 may be restated in a simplified form:<br/>
                 Determine a standard wire diameter, working stress, number of coils and 
                 other dimensions for a torsion spring 
-                with appropriate clearance for working over a 21/32 (0.656) inch diameter rod
+                with appropriate clearance for working over a 21/32 (0.656) inch diameter rod. 
                 A suggestion of a 0.75 inch inside diameter in the free condition is provided.
                 </p>
                 
@@ -135,7 +127,8 @@ export const execute = {
                     As expected, the design has achieved or come very close to the previously stated requirements for 
                     ID_Free, M_2 and Deflect_2.
                     The (uncorrected) value of stress is a good match to the handbook's value of 162,800 psi.
-                    The value of Coils_T is slightly higher than the handbook's value of 7.04 coils.
+                    In order to achieve the specified deflection, 
+                    the value of Coils_T is slightly higher than the handbook's value of 7.04 coils.
                     Thus, the value of L_Body is also a bit higher than the handbook's value of 0.504 inch.
                     &nbsp;
                     <br />
@@ -167,7 +160,7 @@ export const execute = {
                     adjust the value of Coil_Spacing,
                     change Heat_Treat to "Stress Relieve" in order to utilize a curvature correction factor
                     and then
-                    run another search to re-establish corresponding values for all the other problem variables.
+                    run another search to re-establish corresponding values for the two remaining free Independent Variables.
                     </p>
                 </React.Fragment>
             )
@@ -180,7 +173,7 @@ export const execute = {
                     The demo session has now imposed the values:<br /> 
                     FIX Wire_Dia 0.063<br /> 
                     CHANGE Coil_Spacing 0.015<br /> 
-                    Change Heat_Treat "Stress Relieve"<br /> 
+                    CHANGE Heat_Treat "Stress Relieve"<br /> 
                     and executed another search.
                     </p>
                     <br />
@@ -191,13 +184,12 @@ export const execute = {
                          &nbsp; total coils    =  7.04   coils<br />
                          &nbsp; deflected inside diameter   = 0.6948 in.<br />
                          &nbsp; undeflected body length   = 0.594 in.<br />
-                         &nbsp; stress (@ 4.0 lb-in) = 172,568 psi.
+                         &nbsp; curvature corrected stress (@ 4.0 lb-in) = 172,568 psi.
                     </p>
                     <p>
-                    The two solutions are in reasonable agreement.
-                    </p>
-                   
-                    <p>
+                    While the two solutions are in reasonable agreement,
+                    the demo session will take one more step and 
+                    impose the handbook's values for OD_Free and Coils_T.
                     </p>
                 </React.Fragment>
             ),
@@ -213,12 +205,24 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    To see an exact comparison, 
-                    the demo session will impose the handbook's values for all the Independent Variables.
+                    Now, the values for L_Body (free) and deflected ID are a close match for
+                    those in the handbook.
+                    However, this comes at the price of no longer achieving the original specification 
+                    of 200 degrees of deflection for a 4.0 lb-in load.
+                    </p>
+                    
+                    <p>
+                    Further investigation suggests that part of the difference is due to different assumptions 
+                    about modulus of elasticity for MUSIC_WIRE of 0.063 inch diameter.  
+                    The ODOP:Spring materials table provides a value for E of 30,000,000 psi.
+                    The handbook's method 1 (page 212) uses a value for E of 29,000,000 psi from Fig. 134 (page 214).
+                    The handbook's method 2 (page 213) uses a value for E of 28,700,000 psi from Fig. 112 (page 161).
                     </p>
                 </React.Fragment>
             ),
             actions: [
+                changeSymbolValue("OD_Free",0.876),
+                changeSymbolValue("Coils_T",7.0),
             ]
         }
     ]
