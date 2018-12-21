@@ -197,6 +197,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', (req, res) => {
                 console.log('SERVER: 404 - NOT FOUND');
             } else {
 //                console.log('SERVER: In PUT /api/v1/designs/'+name,' type=', type,' value=', value);
+                value = value.replace("'","''"); // replace one single quote with an two single quotes throughout
                 var stmt = 'UPDATE design SET value = \''+value+'\' WHERE type = \''+type+'\' AND name = \''+name+'\'';
 //                console.log('SERVER: stmt='+stmt);
                 connection.query(stmt, (err, rows, fields) => {
