@@ -21,7 +21,7 @@ export class ConstraintsMinTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.map((element) => element.input && element.equationset && <ConstraintsMinRowIndependentVariable key={element.name} element={element} />)}
+                        {this.props.symbol_table.map((element) => element.input && element.equationset && !element.hidden && <ConstraintsMinRowIndependentVariable key={element.name} element={element} />)}
                     </tbody>
                     <thead>
                         <tr>
@@ -29,7 +29,7 @@ export class ConstraintsMinTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.map((element) => !element.input && element.equationset && <ConstraintsMinRowDependentVariable key={element.name} element={element} />)}
+                        {this.props.symbol_table.map((element) => !element.input && element.equationset && !element.hidden && <ConstraintsMinRowDependentVariable key={element.name} element={element} />)}
                     </tbody>
                 </Table>
                 <UncontrolledTooltip placement="top" target="IVMinConstraintTitle">Lower limits on Independent Variables</UncontrolledTooltip>

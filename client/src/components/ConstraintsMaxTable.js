@@ -21,7 +21,7 @@ export class ConstraintsMaxTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.map((element) => element.input && element.equationset && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} />)}
+                        {this.props.symbol_table.map((element) => element.input && element.equationset && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} />)}
                     </tbody>
                     <thead>
                         <tr>
@@ -29,7 +29,7 @@ export class ConstraintsMaxTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.map((element) => !element.input && element.equationset && <ConstraintsMaxRowDependentVariable key={element.name} element={element} />)}
+                        {this.props.symbol_table.map((element) => !element.input && element.equationset && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} />)}
                     </tbody>
                 </Table>
                 <UncontrolledTooltip placement="top" target="IVMaxConstraintTitle">Upper limits on Independent Variables</UncontrolledTooltip>
