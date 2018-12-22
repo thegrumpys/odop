@@ -1,6 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
-import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
+import { changeSymbolValue, fixSymbolValue, loadInitialState, changeLabelsValue, search } from '../../../store/actionCreators';
 export const execute = {
     "name": "demo14",
     "steps": [
@@ -28,7 +27,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 08",
+            title: "Page 02 of 09",
             text: (
                 <React.Fragment>
                     <p>
@@ -42,6 +41,7 @@ export const execute = {
                     <br />
                     Refer to  Problem 4  on page 212  of the 10th printing  (1978).
                     </p>
+                    <br/>
                 </React.Fragment>
             ),
             actions: [
@@ -50,22 +50,21 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 08",
+            title: "Page 03 of 09",
             text: (
                 <React.Fragment>
                 <p>
                 Problem 4 may be restated in a simplified form:<br/>
                 Determine a standard wire diameter, working stress, number of coils and 
                 other dimensions for a torsion spring 
-                with appropriate clearance for working over a 21/32 (0.656) inch diameter rod. 
+                with appropriate clearance for operation over a 21/32 (0.656) inch diameter rod. 
                 A suggestion of a 0.75 inch inside diameter in the free condition is provided.
                 </p>
                 
                 <table>
                     <tbody>
-                        <tr><th>material</th><td>&nbsp;=</td><td>&nbsp;</td><td>music wire</td><td>&nbsp;</td></tr>
-                        <tr><th>ends</th><td>&nbsp;=</td><td>&nbsp;</td><td>tangent</td><td>&nbsp;</td></tr>
-                        <tr><th>inside diameter</th><td>~=</td><td>&nbsp;0.75</td><td>in.</td><td>(0.656 rod plus approx. 10% clearance)</td></tr>
+                        <tr><th>material</th><td>&nbsp;=</td><td>&nbsp;</td><td>music wire</td><td> &nbsp; (E = 28,700,000 psi)</td></tr>
+                        <tr><th>inside diameter</th><td>~=</td><td>&nbsp;0.75</td><td>in.</td><td> &nbsp; (0.656 rod plus approx. 10% clearance)</td></tr>
                         <tr><th>Moment in loaded position</th><td>&nbsp;=</td><td>4.0</td><td>lb-in.</td><td>&nbsp;</td></tr>
                         <tr><th>Deflection to loaded position</th><td>&nbsp;=</td><td>200</td><td>degrees</td><td>&nbsp;</td></tr>
                         <tr><th>Coil Spacing</th><td>&nbsp;=</td><td>0.015</td><td>inches</td><td>&nbsp;</td></tr>
@@ -74,17 +73,51 @@ export const execute = {
                 <br />
                
                 <p>
-                No information about arm length is provided.
+                No information about ends or arm length is provided.
                 </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 04 of 08",
+            title: "Page 04 of 09",
             text: (
                 <React.Fragment>
                     <p>
-                    The demo session has now entered a set of initial specifications for the problem. 
+                    Considering that the objective here is to illustrate how ODOP:Spring produces the same results as the handbook,
+                    it will be necessary to use the same value of Modulus of Elasticity (E).
+                    The ODOP:Spring materials table provides a value for E of 30,000,000 psi. 
+                    </p>
+                    
+                    For MUSIC_WIRE of 0.063 inch diameter:
+                        <ul>
+                            <li>The handbook's method 1 (page 212) uses a value for E of 29,000,000 psi from Fig. 134 (page 214).</li>
+                            <li>The handbook's method 2 (page 213) uses a value for E of 28,700,000 psi from Fig. 112 (page 161).</li>
+                        </ul>
+                   
+                    <p>
+                    As described in the on-line Help section on Materials 
+                    and also in the compression spring tutorial sessions tutor5 and tutor7,
+                    changing Prop_Calc_Method will allow the use of different material property values.
+                    </p>
+                    
+                    <p>
+                    The demo session has now entered:<br/>
+                    CHANGE Prop_Calc_Method 3 <br/>
+                    CHANGE Elastic_Modulus 28700000.0 <br/>
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                changeSymbolValue("Prop_Calc_Method",3),
+                changeSymbolValue('Elastic_Modulus', 28700000.0)
+            ]
+        },
+        {
+            title: "Page 05 of 09",
+            text: (
+                <React.Fragment>
+                    <p>
+                    The demo session has now entered the remaining initial specifications for the problem. 
                     In summary, the changes were:<br />
                     <br />
                     CHANGE  Material_Type  MUSIC_WIRE<br />
@@ -115,7 +148,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 05 of 08",
+            title: "Page 06 of 09",
             text: (
                 <React.Fragment>
                     <p>
@@ -130,6 +163,7 @@ export const execute = {
                     In order to achieve the specified deflection, 
                     the value of Coils_T is slightly higher than the handbook's value of 7.04 coils.
                     Thus, the value of L_Body is also a bit higher than the handbook's value of 0.504 inch.
+                    <br />
                     &nbsp;
                     <br />
                     </p>
@@ -140,7 +174,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 06 of 08",
+            title: "Page 07 of 09",
             text: (
                 <React.Fragment>
                     <p>
@@ -166,7 +200,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 07 of 08",
+            title: "Page 08 of 09",
             text: (
                 <React.Fragment>
                     <p>
@@ -176,7 +210,6 @@ export const execute = {
                     CHANGE Heat_Treat "Stress Relieve"<br /> 
                     and executed another search.
                     </p>
-                    <br />
 
                     <p>
                     The handbook solution produced:<br />
@@ -186,6 +219,7 @@ export const execute = {
                          &nbsp; undeflected body length   = 0.594 in.<br />
                          &nbsp; curvature corrected stress (@ 4.0 lb-in) = 172,568 psi.
                     </p>
+                    
                     <p>
                     While the two solutions are in reasonable agreement,
                     the demo session will take one more step and 
@@ -201,22 +235,23 @@ export const execute = {
             ]
         },
         {
-            title: "Page 08 of 08 (last page)",
+            title: "Page 09 of 09 (last page)",
             text: (
                 <React.Fragment>
                     <p>
-                    Now, the values for L_Body (free) and deflected ID are a close match for
+                    Now, the values for deflected ID and L_Body (free) are a closer match for
                     those in the handbook.
-                    However, this comes at the price of no longer achieving the original specification 
-                    of 200 degrees of deflection for a 4.0 lb-in load.
+                    </p>
+
+                    <p>
+                    To repeat, the handbook solution produced:<br />
+                         &nbsp; deflected inside diameter   = 0.6948 in.<br />
+                         &nbsp; undeflected body length   = 0.594 in.<br />
                     </p>
                     
                     <p>
-                    Further investigation suggests that part of the difference is due to different assumptions 
-                    about modulus of elasticity for MUSIC_WIRE of 0.063 inch diameter.  
-                    The ODOP:Spring materials table provides a value for E of 30,000,000 psi.
-                    The handbook's method 1 (page 212) uses a value for E of 29,000,000 psi from Fig. 134 (page 214).
-                    The handbook's method 2 (page 213) uses a value for E of 28,700,000 psi from Fig. 112 (page 161).
+                    The shift in OD_Free and Coils_T have resulted in a small change in deflection at point 2.
+                    Even so, the two solutions are still in reasonable agreement.
                     </p>
                 </React.Fragment>
             ),
