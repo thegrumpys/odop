@@ -1,10 +1,7 @@
 #### Compression Spring Design Type
 
-The compression spring design type is a full-featured app enabling the engineering 
+The Compression Spring design type is a full-featured app enabling the engineering 
 design of helical coil compression springs.
-While certainly capable of analyzing the performance of an existing spring design,
-ODOP:Spring is at its best when used to develop solutions to difficult and 
-highly constrained original design problems.
 
 ___
 
@@ -12,9 +9,9 @@ This section presents material unique to the Compression Spring design type.
 In conjunction with reading the material below, please be sure to review the material 
 available at [Spring Design Topics](../SpringDesign).   
 
-**COMPRESSION SPRING NAMES**   
+**Compression Spring Names**   
 
- The force deflection points and associated names are:
+ The force-deflection points and associated names are:
 
              length    force        outside  inside    stress        factor of
                                     diameter diameter                safety
@@ -151,7 +148,7 @@ available at [Spring Design Topics](../SpringDesign).
 
 **Other Values**   
 
-Other values are calculated and displayed by the REPORT menu items. 
+Other values are calculated and displayed by the REPORT tabs. 
 These include:
 
     wire length      -  total length of wire required to manufacture the
