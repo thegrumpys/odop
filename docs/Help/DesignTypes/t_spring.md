@@ -117,6 +117,7 @@ available at [Spring Design Topics](../SpringDesign).
     
     Heat_Treat     -  Selects heat treatment process.
                       Controls use of Kb - stress correction factor
+    
 <!---  -->
 <!---    CATALOG_NUMBER  -  character string that contains the catalog number of -->
 <!---            the most recent catalog selection.   -->
