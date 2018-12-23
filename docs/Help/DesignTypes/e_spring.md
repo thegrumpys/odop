@@ -1,11 +1,18 @@
 #### Extension Spring Design Type
 
+The Extension Spring design type is a full-featured app enabling the engineering 
+design of helical coil extension springs.
+
+___
+
 This section presents material unique to the Extension Spring design type.
+In conjunction with reading the material below, please be sure to review the material 
+available at [Spring Design Topics](../SpringDesign).   
 
    
 **EXTENSION SPRING NAMES**   
 
- The force deflection points and associated names are:   
+ The force-deflection points and associated names are:   
 
              length    force        outside  inside    stress    factor of
                                     diameter diameter            safety
