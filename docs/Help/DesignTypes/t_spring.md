@@ -68,8 +68,8 @@ available at [Spring Design Topics](../SpringDesign).
     Weight         -  weight of one spring; wire density * wire volume
     Spring_Index   -  spring index;  the ratio Coil_Dia/Wire_Dia
     End_Deflect_All - End deflection allowance  (equivalent coils)
-    Stress_1       -  torsional stress at point 1
-    Stress_2       -  torsional stress at point 2
+    Stress_1       -  bending stress at point 1
+    Stress_2       -  bending stress at point 2
     FS_2           -  static factor of safety at point 2
                      (This is the ratio of allowable stress at point 2
                       to the calculated stress induced by the load at
@@ -192,9 +192,8 @@ In the current version of ODOP:Spring, no calculations depend on these End_Type 
 They are for display only.   
 
 Separately, the values of Arm\_1, Arm\_2, L\_End\_1, L\_End\_2, XLen\_1 and XLen_2 are available to
-describe end conditions.   
-
-
+describe end conditions. 
+Refer to the diagram above for more details.   
 
 &nbsp;
 
