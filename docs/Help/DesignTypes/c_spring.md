@@ -249,18 +249,19 @@ for compression springs has the following possible values:
     7     USER_SPECIFIED  
 
 For a compression spring, the end type directly impacts calculation of
-INACTIVE\_COILS.  L\_SOLID, pitch and other variables are affected
-indirectly.  Other variables are impacted indirectly.
+INACTIVE\_COILS.  L\_SOLID, pitch and other variables are impacted
+indirectly. 
 
 Additional information may be found in the documentation sections for
 EQNSET. 
    
-When END\_TYPE is set to one of the standard (non USER_SPECIFIED) selections, the quantities
-described above as "directly impacted" will be set by the program from
-values contained in internal tables.  If the user attempts to alter one of
-the "directly impacted" values without first
-changing the value of END\_TYPE to USER_SPECIFIED, the attempt will be immediately
-over-written with the value from the internal table.
+When END\_TYPE is set to one of the standard (non USER_SPECIFIED) selections, 
+the quantities described above as "directly impacted" will be set by the 
+program from values contained in internal tables. 
+If the user attempts to alter one of the "directly impacted" values without 
+first changing the value of END\_TYPE to USER_SPECIFIED, 
+the attempt will be immediately over-written with the value from 
+the internal table.
 
 When the value of END\_TYPE is
 USER\_SPECIFIED, the constants described above as "directly impacted"

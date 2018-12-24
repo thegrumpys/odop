@@ -140,7 +140,7 @@ available at [Spring Design Topics](../SpringDesign).
     
     Density          -  wire density; weight per unit volume
     Elastic_Modulus  -  Modulus of Elasticity modulus (E)
-    HOT_FACTOR_Kh    -  empirical correction factor for hot wound modulus
+    Hot_Factor_Kh    -  empirical correction factor for hot wound modulus
     Tensile          -  selected material tensile strength 
     %_Ten_Bnd_Endur  -  fraction of tensile strength for bending endurance
     %_Ten_Bnd_Stat   -  fraction of tensile strength for bending static load
@@ -158,36 +158,43 @@ available at [Spring Design Topics](../SpringDesign).
 Other values are calculated and displayed by the Report tabs. 
 These include:
 
-    wire length      -  total length of wire required to manufacture the
+    Wire Length      -  total length of wire required to manufacture the
                         spring, not including any waste.
     
-    safe load        -  The load supported by the spring at maximum 
+    Safe Load        -  The load supported by the spring at maximum 
                         allowable stress (Stress_Lim_Bnd_Stat).
     
-    pitch            -  coil to coil spacing in the free state
+    Pitch            -  coil to coil spacing in the free state
     
-    weight/1000      -  weight per 1000 springs 
+    Weight/1000      -  weight per 1000 springs 
     
-    stress ratio     -  ratio of minimum stress to maximum stress
+    Stress Ratio     -  ratio of minimum stress to maximum stress
                        (STRESS_1/STRESS_2)
     
     Kb               -  stress correction factor
                        (see: Heat_Treat)
     
-    helix angle      -  angle, in degrees, of the spring helix relative
+    Helix Angle      -  angle, in degrees, of the spring helix relative
                         to a perpendicular to the spring axis
-
-&nbsp;
-
-**Constraints unique to torsion springs:**   
-
-(work in progress)
 
 &nbsp;
 
 **End Types**   
 
-(work in progress)
+For torsion springs, the Calculation Input End_Type has the following possible values:
+
+         Torsion   
+         
+    1    Tangent
+    2    User_Specified
+
+In the current version of ODOP:Spring, no calculations depend on these End_Type settings.
+They are for display only.   
+
+Separately, the values of Arm\_1, Arm\_2, L\_End\_1, L\_End\_2, XLen\_1 and XLen_2 are available to
+describe end conditions.   
+
+
 
 &nbsp;
 
