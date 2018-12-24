@@ -641,7 +641,7 @@ export const initialState = {
         },
         {
             "input": false,
-            "name": "PC_Ten_Bnd_Endur",
+            "name": "%_Ten_Bnd_Endur",
             "value": 50.0,
             "units": "%",
             "lmin": 0,
@@ -656,7 +656,7 @@ export const initialState = {
         },
         {
             "input": false,
-            "name": "PC_Ten_Bnd_Stat",
+            "name": "%_Ten_Bnd_Stat",
             "value": 75.0,
             "units": "%",
             "lmin": 0,
