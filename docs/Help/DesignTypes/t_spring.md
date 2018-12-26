@@ -53,35 +53,54 @@ available at [Spring Design Topics](../SpringDesign).
 **Dependent Variable names**:
 
     Mean_Dia       -  mean diameter of spring coil in free condition
-                     (OD_free + ID_Free)/2
+                     (OD_free + ID_Free)/2 
+     
     ID_Free        -  inside diameter of spring coil in free condition
+    
     Coils_A        -  number of active coils (turns)
                       (includes arm deflection)
-    Rate           -  spring constant - force per unit deflection
+                      
+    Rate           -  spring constant - force per unit deflection 
+    
     Deflect_1      -  deflection caused by M_1
+    
     Deflect_2      -  deflection caused by M_2
-    L_Body         -  spring body length in free condition
-    L_1            -  spring body length at minimum operating load  (M_1)
-    L_2            -  spring body length at maximum operating load  (M_2)
-    End_Angle_Free -  relative angle between arms in free condition
-    Stroke         -  angular displacement from point 1 to point 2
-    Weight         -  weight of one spring; wire density * wire volume
-    Spring_Index   -  spring index;  the ratio Coil_Dia/Wire_Dia
-    End_Deflect_All - End deflection allowance  (equivalent coils)
-    Stress_1       -  bending stress at point 1
-    Stress_2       -  bending stress at point 2
+    
+    L_Body         -  spring body length in free condition 
+    
+    L_1            -  spring body length at minimum operating load  (M_1) 
+    
+    L_2            -  spring body length at maximum operating load  (M_2) 
+    
+    End_Angle_Free -  relative angle between arms in free condition 
+    
+    Stroke         -  angular displacement from point 1 to point 2 
+    
+    Weight         -  weight of one spring; wire density * wire volume 
+    
+    Spring_Index   -  spring index;  the ratio Coil_Dia/Wire_Dia 
+    
+    End_Deflect_All - End deflection allowance  (equivalent coils) 
+    
+    Stress_1       -  bending stress at point 1 
+    
+    Stress_2       -  bending stress at point 2 
+    
     FS_2           -  static factor of safety at point 2
-                     (This is the ratio of allowable stress at point 2
+                      The ratio of allowable stress at point 2
                       to the calculated stress induced by the load at
-                      point 2  [Stress_Lim_Bnd_Stat/Stress_2]. )
+                      point 2  (Stress_Lim_Bnd_Stat/Stress_2). 
+                      
     FS_Cycle_Life  -  factor of safety based on the Soderberg endurance
                       limit calculation.  This figure uses the allowable
                       endurance stress (Stress_Lim_Bnd_Endur) to include
                       fatigue considerations.  
                       Refer to additional discussion in the Cycle_Life section.
+                      
     Cycle_Life     -  expected cycle life based on a calculation using the 
                       "modified Goodman method".  This value is approximate.  
                       Refer to additional discussion in the Cycle_Life section.
+                      
     Force_Arm_2    -  Force produced at distance of Arm_2
 
 &nbsp;
@@ -138,16 +157,26 @@ available at [Spring Design Topics](../SpringDesign).
 <!---     INACTIVE_COILS   -  number of inactive coils (depends on end type)  -->
 <!---  -->
     
-    Density          -  wire density; weight per unit volume
-    Elastic_Modulus  -  Modulus of Elasticity modulus (E)
-    Hot_Factor_Kh    -  empirical correction factor for hot wound modulus
+    Density          -  wire density; weight per unit volume 
+    
+    Elastic_Modulus  -  Modulus of Elasticity modulus (E) 
+                         (a.k.a. Young's Modulus)
+                         
+    Hot_Factor_Kh    -  empirical correction factor for hot wound modulus 
+    
     Tensile          -  selected material tensile strength 
-    %_Ten_Bnd_Endur  -  fraction of tensile strength for bending endurance
-    %_Ten_Bnd_Stat   -  fraction of tensile strength for bending static load
-    Stress_Lim_Bnd_Endur -  allowable stress limit; cyclic application (bending)
+    
+    %_Ten_Bnd_Endur  -  fraction of tensile strength for bending endurance 
+    
+    %_Ten_Bnd_Stat   -  fraction of tensile strength for bending static load 
+    
+    Stress_Lim_Bnd_Endur -  allowable stress limit; cyclic application (bending) 
+    
     Stress_Lim_Bnd_Stat  -  allowable stress limit; static application (bending)
     
     Arm_1, etc.      -  refer to the diagram below
+
+&nbsp;
 
 <img src="../../../client/public/designtypes/Spring/Torsion/TorsionNames.png" alt="Torsion Spring Names"/>
 
