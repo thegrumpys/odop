@@ -344,7 +344,7 @@ export const initialState = {
             "sdlim": 1.0,
             "tooltip": "Placeholder for future calculation of bending stress in end arms",
             "equationset": true,
-            "hidden": false
+            "hidden": true
         },
         {
             "input": false,
