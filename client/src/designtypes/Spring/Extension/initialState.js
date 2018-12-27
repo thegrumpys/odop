@@ -551,7 +551,7 @@ export const initialState = {
             "value": 4,
             "units": "",
             "type": "table",
-            "table": "Spring/Extension/c_endtypes",
+            "table": "Spring/Extension/endtypes",
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
