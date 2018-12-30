@@ -198,7 +198,7 @@ export const initialState = {
         },
         {
             "input": false,
-            "name": "L_Body_(free)",
+            "name": "L_Body",
             "value": 1.160499,
             "units": "inches",
             "lmin": 0,
@@ -213,7 +213,7 @@ export const initialState = {
         },
         {
             "input": false,
-            "name": "L_Free_(W/Ends)",
+            "name": "L_Free",
             "value": 2.938500,
             "units": "inches",
             "lmin": 0,
@@ -222,7 +222,7 @@ export const initialState = {
             "cmax": 20.0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Free length (see diagram in on-line Help)",
+            "tooltip": "Free length including ends (see diagram in on-line Help)",
             "equationset": true,
             "hidden": false
         },
@@ -498,7 +498,7 @@ export const initialState = {
         },
         {
             "input": false,
-            "name": "F_1_GT_IT_MARGIN",
+            "name": "F1_IT_Margin",
             "value": 4.00,
             "units": "pounds",
             "lmin": 0,
@@ -759,6 +759,21 @@ export const initialState = {
         },
         {
             "input": false,
+            "name": "%_Tensile_Bend",
+            "value": 75.0,
+            "units": "%",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "ioclass": 0,
+            "sdlim": 1.0,
+            "tooltip": "Allowable percent of tensile strength for bending",
+            "equationset": false,
+            "hidden": false
+        },
+        {
+            "input": false,
             "name": "Stress_Lim_Endur",
             "value": 130709.6,
             "units": "PSI",
@@ -784,6 +799,21 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 1.0,
             "tooltip": "Allowable stress for static applications",
+            "equationset": false,
+            "hidden": false
+        },
+        {
+            "input": false,
+            "name": "Stress_Lim_Bend",
+            "value": 199999.9,
+            "units": "PSI",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "ioclass": 0,
+            "sdlim": 1.0,
+            "tooltip": "Allowable stress for bending",
             "equationset": false,
             "hidden": false
         },

@@ -122,7 +122,7 @@ export function init(p, x) {
     x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
 //if end_type_index <= c_end_num then
 //  add_coils_solid=acs_tbl(end_type_index);
-    x[o.Add_Coils_Solid] = et_tab[j][eto.add_coils_solid];
+//    x[o.Add_Coils_Solid] = et_tab[j][eto.add_coils_solid];
 //else
 //  add_coils_solid=0.0;
 //if end_type_index > c_end_num then
