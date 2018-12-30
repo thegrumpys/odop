@@ -41,6 +41,7 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
     x[o.L_Body] = p[o.Wire_Dia] * (p[o.Coils_T] + 1.0);
     
     // TODO: End_ID, Extended_End_ID, L_End, L_Extended_End
+    console.log('x[o.End_Type] = ', x[o.End_Type]);
     
     x[o.L_Free] = x[o.L_End] + x[o.L_Body] + p[o.End_Extension] + x[o.L_Extended_End];
 
@@ -71,7 +72,7 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
       if (x[o.Prop_Calc_Method] <= 2) {
           x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0; 
           x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0; 
-          x[o.Stress_Lim_Bend]  = x[o.Tensile] * x[o.PC_Tensile_Bend]  / 100.0;   //  TODO:  add to initialState
+          x[o.Stress_Lim_Bend]  = x[o.Tensile] * x[o.PC_Tensile_Bend]  / 100.0; 
       }
 
     if (x[o.Stress_2] > zero) {
