@@ -19,7 +19,7 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 
     ks = kc + 0.615 / x[o.Spring_Index];
 
-    x[o.Coils_A] = p[o.Coils_T] + x[o.Hook_Deflect_Allow] - x[o.Inactive_Coils];
+    x[o.Coils_A] = p[o.Coils_T] + x[o.Hook_Deflect_All] - x[o.Inactive_Coils];
 
     temp = x[o.Spring_Index] * x[o.Spring_Index];
     x[o.Rate] = x[o.Hot_Factor_Kh] * x[o.Torsion_Modulus] * x[o.Mean_Dia] /
@@ -40,8 +40,14 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 
     x[o.L_Body] = p[o.Wire_Dia] * (p[o.Coils_T] + 1.0);
     
-    // TODO: End_ID, Extended_End_ID, L_End, L_Extended_End
-    console.log('x[o.End_Type] = ', x[o.End_Type]);
+// TODO: Should End_ID, Extended_End_ID, L_End and L_Extended_End be calculated in eqnset or init ?
+//    if (x[o.End_Type] > 0 && x[o.End_Type] <= 5) {
+//        console.log('eqnset: x[o.End_Type] = ', x[o.End_Type]);
+//        console.log('    x[o.End_ID] = ', x[o.End_ID]);
+//        console.log('    x[o.Extended_End_ID] = ', x[o.Extended_End_ID]);
+//        console.log('    x[o.L_End] = ', x[o.L_End]);
+//        console.log('    x[o.L_Extended_End] = ', x[o.L_Extended_End]);
+//    }
     
     x[o.L_Free] = x[o.L_End] + x[o.L_Body] + p[o.End_Extension] + x[o.L_Extended_End];
 
@@ -154,7 +160,10 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 //    weight=density*(pi*wire_dia*wire_dia/4.0)*wire_len_t;
     x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * wire_len_t;
 
-    //  TODO:  PC_Safe_Deflect
+//    safe_load=stress_lim_stat/s_f;
+//    safe_deflect=(safe_load-initial_tension)/rate;
+//    %_safe_deflect=deflect_2/safe_deflect*100.0;
+    x[o.PC_Safe_Deflect] = 100.0 * x[o.Deflect_2] / (((x[o.Stress_Lim_Stat] / s_f)- p[o.Initial_Tension]) / x[o.Rate]);
 //    
 //    temp=exp(0.105*spring_index);
 //    stress_init_lo=si_lo_factor/temp;

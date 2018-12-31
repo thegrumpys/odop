@@ -6,7 +6,9 @@ export function init(p, x) {
 //    console.log('In init p=',p);
  var i, j;
  const ten3 = 1000.0;
+ const e_end_num = 5;
  var tensile_400;
+ const unused = "unused";
 
    /*  Bring in material properties table  */
  var m_tab = require('../mat_ips.json');
@@ -15,8 +17,8 @@ export function init(p, x) {
 //    console.log("et_tab=", et_tab);
 
  
-     x[o.Spring_Type] = "Compression";
-     if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Tensile_Endur] === "unused") x[o.Prop_Calc_Method] = 1;
+     x[o.Spring_Type] = "Extension";
+     if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Tensile_Endur] === unused) x[o.Prop_Calc_Method] = 1;
  
  switch(x[o.Prop_Calc_Method]){
  default:
@@ -72,24 +74,31 @@ export function init(p, x) {
         case 1:
         case 5:
             x[o.PC_Tensile_Endur] = m_tab[i][mo.pte1];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb1];
         break;
         case 2:
             x[o.PC_Tensile_Endur] = m_tab[i][mo.pte2];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb2];
         break;
         case 3:
             x[o.PC_Tensile_Endur] = m_tab[i][mo.pte3];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb3];
         break;
         case 4:
             x[o.PC_Tensile_Endur] = m_tab[i][mo.pte4];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb4];
         break;
         case 6:
             x[o.PC_Tensile_Endur] = m_tab[i][mo.pte6];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb6];
         break;
         case 7:
             x[o.PC_Tensile_Endur] = m_tab[i][mo.pte7];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb7];
         break;
         case 8:
             x[o.PC_Tensile_Endur] = m_tab[i][mo.pte8];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb8];
     }
     
 //    pc_tensile_stat  = m_tab(i).fy;
@@ -108,43 +117,53 @@ export function init(p, x) {
     x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0;
 //    stress_lim_stat =tensile*pc_tensile_stat /100.0;
     x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0;
-//    /*  copy from end type table to constants  */
+    x[o.Stress_Lim_Bend]  = x[o.Tensile] * x[o.PC_Tensile_Bend]  / 100.0;
+    
+    //    /*  copy from end type table to constants  */
 //    /*  check these values.     See AS Design Hdbk. p52  */
-//    /*    VVVVVVVVVVVVV          Kludge for Torsion  */
-//if end_type_index > 0 & nmerit ^= 3 then
-//do;
-//if end_calc_method ^= 1 then              /*   debug  */
-//       put skip list('TAB2D:  END_CALC_METHOD SET TO 1.');
-//end_calc_method=1;
 //
 //end_type        = end_name(end_type_index);
 //inactive_coils  = inact_coil_tbl(end_type_index);
     x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
-//if end_type_index <= c_end_num then
-//  add_coils_solid=acs_tbl(end_type_index);
-//    x[o.Add_Coils_Solid] = et_tab[j][eto.add_coils_solid];
-//else
-//  add_coils_solid=0.0;
-//if end_type_index > c_end_num then
+
+    //if end_type_index > c_end_num then
 //  hook_deflect_all=hda_tbl(end_type_index-c_end_num);
 //else
 //  hook_deflect_all=0.0;
+    if (x[o.End_Type] <= e_end_num) {
+        x[o.Hook_Deflect_All] = et_tab[j][eto.HookDefAll];
+    }
+    
+// TODO:  Is there any reason to move this stuff into eqnset ?
+    if (x[o.End_Type] <= e_end_num) {
+        console.log('init: x[o.End_Type] = ', x[o.End_Type]);
+        x[o.End_ID] = x[o.ID_Free];
+        console.log('    x[o.End_ID] = ', x[o.End_ID]);
+        x[o.Extended_End_ID] = x[o.ID_Free];
+        console.log('    x[o.Extended_End_ID] = ', x[o.Extended_End_ID]);
+        x[o.L_End] = x[o.ID_Free] * et_tab[j][eto.End_Dia];
+        console.log('    x[o.L_End] = ', x[o.L_End]);
+        x[o.L_Extended_End] = x[o.L_End];
+        console.log('    x[o.L_Extended_End] = ', x[o.L_Extended_End]);
+    }
+    
     break;
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
 //     console.log("case 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur");
-     x[o.ASTM_Fed_Spec] = "unused";
-     x[o.Material_File] = "unused";
-     x[o.Process] = "unused";
+     x[o.ASTM_Fed_Spec] = unused;
+     x[o.Material_File] = unused;
+     x[o.Process] = unused;
      break;
 
  case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
 //     console.log("case 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur");
-     x[o.ASTM_Fed_Spec] = "unused";
-     x[o.Material_File] = "unused";
-     x[o.Process] = "unused";
-     x[o.PC_Tensile_Endur] = "unused";
-     x[o.PC_Tensile_Stat]  = "unused";
+     x[o.ASTM_Fed_Spec] = unused;
+     x[o.Material_File] = unused;
+     x[o.Process] = unused;
+     x[o.PC_Tensile_Endur] = unused;
+     x[o.PC_Tensile_Stat]  = unused;
+     x[o.PC_Tensile_Bend]  = unused;
  }
 //    console.log('In init p=',p,' x=',x);
     return x;

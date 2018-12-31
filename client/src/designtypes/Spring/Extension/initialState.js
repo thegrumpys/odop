@@ -447,7 +447,7 @@ export const initialState = {
             "cmax": 10000.0,
             "ioclass": 0,
             "sdlim": 0,
-            "tooltip": "Stress Initial range low point",
+            "tooltip": "Stress Initial range low point - sets lower limit for Initial_Tension",
             "equationset": true,
             "hidden": false
         },
@@ -462,7 +462,7 @@ export const initialState = {
             "cmax": 10000.0,
             "ioclass": 0,
             "sdlim": 0,
-            "tooltip": "Stress Initial range high point",
+            "tooltip": "Stress Initial range high point - sets upper limit for Initial_Tension",
             "equationset": true,
             "hidden": false
         },
@@ -828,7 +828,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Stress Initial Low Factor",
+            "tooltip": "Stress Initial Low Factor - used with Spring_Index to determine Stress_Init_Lo",
             "equationset": false,
             "hidden": false
         },
@@ -843,7 +843,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Stress Initial High Factor",
+            "tooltip": "Stress Initial High Factor - used with Spring_Index to determine Stress_Init_Hi",
             "equationset": false,
             "hidden": false
         },
@@ -909,16 +909,16 @@ export const initialState = {
         },
         {
             "input": false,
-            "name": "Hook_Deflect_Allow",
+            "name": "Hook_Deflect_All",
             "value": 0.40,
-            "units": "coils.",
+            "units": "coils",
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Hook Deflection Allowance",
+            "tooltip": "Hook Deflection Allowance - adds to Coils_A",
             "equationset": false,
             "hidden": false
         },
