@@ -16,7 +16,6 @@ export function init(p, x) {
  var et_tab = require('./endtypes.json');
 //    console.log("et_tab=", et_tab);
 
- 
      x[o.Spring_Type] = "Extension";
      if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Tensile_Endur] === unused) x[o.Prop_Calc_Method] = 1;
  
@@ -134,17 +133,28 @@ export function init(p, x) {
         x[o.Hook_Deflect_All] = et_tab[j][eto.HookDefAll];
     }
     
-// TODO:  Is there any reason to move this stuff into eqnset ?
+// TODO:  Is there any reason to move this stuff into eqnset?
     if (x[o.End_Type] <= e_end_num) {
-        console.log('init: x[o.End_Type] = ', x[o.End_Type]);
         x[o.End_ID] = x[o.ID_Free];
-        console.log('    x[o.End_ID] = ', x[o.End_ID]);
         x[o.Extended_End_ID] = x[o.ID_Free];
-        console.log('    x[o.Extended_End_ID] = ', x[o.Extended_End_ID]);
         x[o.L_End] = x[o.ID_Free] * et_tab[j][eto.End_Dia];
-        console.log('    x[o.L_End] = ', x[o.L_End]);
         x[o.L_Extended_End] = x[o.L_End];
-        console.log('    x[o.L_Extended_End] = ', x[o.L_Extended_End]);
+//        console.log('init: x[o.End_Type] = ', x[o.End_Type]);
+//        console.log('    x[o.End_ID] = ', x[o.End_ID]);
+//        console.log('    x[o.Extended_End_ID] = ', x[o.Extended_End_ID]);
+//        console.log('    x[o.L_End] = ', x[o.L_End]);
+//        console.log('    x[o.L_Extended_End] = ', x[o.L_Extended_End]);
+    }
+    
+//    console.log('init: x[o.SI_Range] = ', x[o.SI_Range]);
+    if (x[o.SI_Range] <= 2 ) {
+        x[o.SI_Lo_Factor] = m_tab[i][mo.silf];
+        if (x[o.SI_Range] === 2) {
+            x[o.SI_Hi_Factor] = m_tab[i][mo.sisr];
+        }
+        else {
+            x[o.SI_Hi_Factor] = m_tab[i][mo.sihf];
+        }
     }
     
     break;
