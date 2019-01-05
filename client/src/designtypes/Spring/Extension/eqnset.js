@@ -7,6 +7,7 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
     var s_f, stress_avg, stress_rng, se2;
     var wire_len_t, wd3;
     var Dend, K1, C1;
+    var sq1, sq2;
     
     /*  *******  DESIGN EQUATIONS  *******                  */
     x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
@@ -151,9 +152,10 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 //            +end_id+wire_dia
 //            +extended_end_id+wire_dia)
 //         +end_extension;
-                           /*  crude approximation  ... better available on web  */
-    wire_len_t = Math.PI * (x[o.Mean_Dia] * p[o.Coils_T]
-        + x[o.End_ID] +  p[o.Wire_Dia]
+    sq1 = p[o.L_Free];
+    sq2 = p[o.Coils_T] * Math.PI * x[o.Mean_Dia];
+    wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2)
+        + Math.PI * (x[o.End_ID] +  p[o.Wire_Dia]
         + x[o.Extended_End_ID] +  p[o.Wire_Dia])
         + x[o.End_Extension];
     
