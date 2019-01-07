@@ -152,7 +152,7 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 //            +end_id+wire_dia
 //            +extended_end_id+wire_dia)
 //         +end_extension;
-    sq1 = p[o.L_Free];
+    sq1 = p[o.Wire_Dia] * p[o.Coils_T];
     sq2 = p[o.Coils_T] * Math.PI * x[o.Mean_Dia];
     wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2)
         + Math.PI * (x[o.End_ID] +  p[o.Wire_Dia]

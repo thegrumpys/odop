@@ -399,40 +399,42 @@ export function report(report_name, prefs, p, x, labels) {
                         </tbody>
                     </table>
                     <hr/>
+                    kw1 = {kw1.toFixed(3)} 
+                    <br/>
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -- kw1 = {kw1.toFixed(3)} --
+                    -------------- &nbsp; &nbsp; ---- kw1 -----
                     <table>
                     <thead>
                         <tr>
                             <th></th>
-                            <th>&nbsp; Length </th>
-                            <th>&nbsp;Deflect</th>
-                            <th>&nbsp;Force</th>
-                            <td> &nbsp; &nbsp; </td>
-                            <th> &nbsp; </th>
-                            <th> &nbsp; </th>
+                            <th>Length &nbsp; </th>
+                            <th>Deflect</th>
+                            <th>Force</th>
                             <td> &nbsp; &nbsp; </td>
                             <th>Stress</th>
-                            <th>&nbsp;%TS </th>
+                            <th>%TS &nbsp;</th>
+                            <td> &nbsp; &nbsp; </td>
+                            <th>Stress</th>
+                            <th>%TS &nbsp;</th>
                             <td> &nbsp; &nbsp; </td>
                             <th>Static FS</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><b>Initial</b></td>
+                            <td><b>Free</b></td>
                             <td>{x[o.L_Free].value.toFixed(3)}</td>
                             <td>{(0.0).toFixed(4)}</td>
-                            <td>{p[o.Initial_Tension].value.toFixed(2)}</td>
+                            <td>{(0.0).toFixed(2)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
+                            <td>{(0.0).toFixed(0)}</td>
+                            <td>{(0.0).toFixed(1)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td>{x[o.Stress_Initial].value.toFixed(0)}</td>
-                            <td>{(x[o.Stress_Initial].value / dhat).toFixed(1)}</td>
+                            <td>{(0.0).toFixed(0)}</td>
+                            <td>{(0.0).toFixed(1)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td>{(x[o.Stress_Lim_Stat].value / x[o.Stress_Initial].value).toFixed(3)}</td>
+                            <td>infinite</td>
                         </tr>
                         <tr>
                             <td><b>1</b></td>
@@ -440,8 +442,8 @@ export function report(report_name, prefs, p, x, labels) {
                             <td>{x[o.Deflect_1].value.toFixed(4)}</td>
                             <td>{p[o.Force_1].value.toFixed(2)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
+                            <td>{(0.0).toFixed(0)}</td>
+                            <td>{(0.0).toFixed(1)}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td>{x[o.Stress_1].value.toFixed(0)}</td>
                             <td>{(x[o.Stress_1].value / dhat).toFixed(1)}</td>
@@ -454,8 +456,8 @@ export function report(report_name, prefs, p, x, labels) {
                             <td>{x[o.Deflect_2].value.toFixed(4)}</td>
                             <td>{p[o.Force_2].value.toFixed(2)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
+                            <td>{(0.0).toFixed(0)}</td>
+                            <td>{(0.0).toFixed(1)}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td>{x[o.Stress_2].value.toFixed(0)}</td>
                             <td>{(x[o.Stress_2].value / dhat).toFixed(1)}</td>
@@ -464,17 +466,17 @@ export function report(report_name, prefs, p, x, labels) {
                         </tr>
                         <tr>
                             <td><b>MaxSafe</b></td>
-                            <td>{(x[o.L_Free].value + safe_travel).toFixed(3)}</td>
-                            <td>{safe_travel.toFixed(4)}</td>
-                            <td>{safe_load.toFixed(2)}</td>
+                            <td>{(0.0).toFixed(3)}</td>
+                            <td>{(0.0).toFixed(4)}</td>
+                            <td>{(0.0).toFixed(2)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
+                            <td>{(0.0).toFixed(0)}</td>
+                            <td>{(0.0).toFixed(1)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td>{x[o.Stress_Lim_Stat].value.toFixed(0)}</td>
-                            <td>{(x[o.Stress_Lim_Stat].value / dhat).toFixed(1)}</td>
+                            <td>{(0.0).toFixed(0)}</td>
+                            <td>{(0.0).toFixed(1)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td>{(1.0).toFixed(3)}</td>
+                            <td>{(0.0).toFixed(3)}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -493,20 +495,20 @@ export function report(report_name, prefs, p, x, labels) {
                             <td>{x[o.Cycle_Life].value.toFixed(0)}</td>
                             <td>{cycle_life_u}</td>
                         </tr>
-                            <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        <tr>
+                            <td>Helix Angle</td>
+                            <td>=</td>
+                            <td>{hlx_ang.toFixed(2)}</td>
+                            <td>degrees</td>
                             <td/>
                             <td> &nbsp; &nbsp; </td>
-                            <td>({x[o.Cycle_Life].name}</td>
-                            <td>&nbsp;</td>
-                            <td className="text-left" colSpan="3">applies to body coils only.)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
-                    </tbody>
-                </table>
-                <br /> &nbsp;
+                </tbody>
+            </table>
         </React.Fragment>
     );
     case "3 (maxi)":
