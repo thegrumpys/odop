@@ -482,27 +482,84 @@ export function report(report_name, prefs, p, x, labels) {
                 <table>
                     <tbody>
                         <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
                             <td>{x[o.FS_CycleLife].name}</td>
                             <td>=</td>
                             <td>{x[o.FS_CycleLife].value.toFixed(3)}</td>
-                            <td>{x[o.FS_CycleLife].units}</td>
+                            <td className="text-left">&nbsp;{x[o.FS_CycleLife].units}</td>
+                        </tr>
+                        <tr>
+                            <td>{x[o.Stress_Init_Lo].name}</td>
+                            <td>=</td>
+                            <td>{x[o.Stress_Init_Lo].value.toFixed(0)}</td>
+                            <td>{x[o.Stress_Init_Lo].units}</td>
                             <td/>
                             <td> &nbsp; &nbsp; </td>
                             <td>{x[o.Cycle_Life].name}</td>
                             <td>=</td>
                             <td>{x[o.Cycle_Life].value.toFixed(0)}</td>
-                            <td>{cycle_life_u}</td>
+                            <td className="text-left">&nbsp;{cycle_life_u}</td>
                         </tr>
-                            <tr>
+                        <tr>
+                            <td>{x[o.Stress_Init_Hi].name}</td>
+                            <td>=</td>
+                            <td>{x[o.Stress_Init_Hi].value.toFixed(0)}</td>
+                            <td>{x[o.Stress_Init_Hi].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>({x[o.Cycle_Life].name}</td>
+                            <td className="text-left" colSpan="3">&nbsp; applies to body coils only.)</td>
+                        </tr>
+                        <tr>
+                            <td> &nbsp; </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
+                        <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td/>
                             <td> &nbsp; &nbsp; </td>
-                            <td>({x[o.Cycle_Life].name}</td>
-                            <td>&nbsp;</td>
-                            <td className="text-left" colSpan="3">applies to body coils only.)</td>
+                            <td>{x[o.Stress_Lim_Stat].name}</td>
+                            <td>=</td>
+                            <td>{x[o.Stress_Lim_Stat].value.toFixed(0)}</td>
+                            <td className="text-left">&nbsp;{x[o.Stress_Lim_Stat].units}</td>
+                        </tr>
+                        <tr>
+                            <td>{x[o.Stress_Lim_Bend].name}</td>
+                            <td>=</td>
+                            <td>{x[o.Stress_Lim_Bend].value.toFixed(0)}</td>
+                            <td className="text-left">&nbsp;{x[o.Stress_Lim_Bend].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{x[o.Stress_Lim_Endur].name}</td>
+                            <td>=</td>
+                            <td>{x[o.Stress_Lim_Endur].value.toFixed(0)}</td>
+                            <td className="text-left">&nbsp;{x[o.Stress_Lim_Endur].units}</td>
+                        </tr>
+                        <tr>
+                            <td>Bending Str @End (Sa)</td>
+                            <td>=</td>
+                            <td>{x[o.Stress_Hook].value.toFixed(0)}</td>
+                            <td className="text-left">&nbsp;{x[o.Stress_Hook].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>Torsion Str @End (Sb)</td>
+                            <td>=</td>
+                            <td>{sb.toFixed(0)}</td>
+                            <td className="text-left">&nbsp;{x[o.Stress_Hook].units}</td>
+                        </tr>
+                        <tr>
+                            <td className="text-left" colSpan="10">(Torsion value assumes a vertical bend radius (R2) equal twice wire diameter.)</td>
                         </tr>
                     </tbody>
                 </table>
