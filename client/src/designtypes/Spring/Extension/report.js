@@ -15,16 +15,15 @@ export function getReportNames() {
 export function report(report_name, prefs, p, x, labels) {
 //    console.log('In report report_name=',report_name,' prefs=',prefs,' p=',p,' x=',x,' labels=',labels);
     
-    var kc, ks, temp, s_f, len_lbl, 
+    var kc, ks, s_f, len_lbl, 
     safe_load_u, wgt1000_u, cycle_life_u, 
     errmsg, hits,
-    safe_travel, tensileFixed0, pc_avail_deflect,
+    safe_travel, pc_avail_deflect,
     sq1, sq2, sb, wd3,
     dhat, wire_len_a, wire_len_t, safe_load,
-    pitch, hlx_ang,
     od_1, od_2, id_1, id_2, od_maxsafe, id_maxsafe,
     wgt1000, fs_1,  
-    kw1, kw2, kw2str1, kw2str2, kw2strs;
+    kw1;
 
     /*  Bring in material properties table  */
     var m_tab = require('../mat_ips.json');
@@ -88,48 +87,26 @@ export function report(report_name, prefs, p, x, labels) {
         return(Math.sqrt(wire_len_a - def_len * def_len) / (x[o.Coils_T].value * Math.PI));
     }
 
-    if(x[o.Prop_Calc_Method].value === 1 || x[o.Prop_Calc_Method].value === 2) tensileFixed0 = x[o.Tensile].value.toFixed(0);
-     else tensileFixed0 = "unused";
-
     kc = (4.0 * x[o.Spring_Index].value - 1.0) / (4.0 * x[o.Spring_Index].value - 4.0);
     ks = kc + 0.615 / x[o.Spring_Index].value;
     wd3 = p[o.Wire_Dia].value * p[o.Wire_Dia].value * p[o.Wire_Dia].value;
     s_f = ks * 8.0 * x[o.Mean_Dia].value / (Math.PI * wd3);
 
     kw1 = ks;
-// Remove as part of clean-up
-//    kw2 = 1.0 + 0.5 / x[o.Spring_Index].value;
-//    temp = kw2 * s_f / ks;
-//    kw2str1 = temp * p[o.Force_1].value;
-//    kw2str2 = temp * p[o.Force_2].value;
-//    kw2strs = temp * x[o.Force_Solid].value;
-//    temp = 0.7 * x[o.Tensile].value;  // allowable stress for preset
     
     if (x[o.Stress_1] !== 0.0) fs_1 = Math.abs(x[o.Stress_Lim_Stat].value / x[o.Stress_1].value);
     else fs_1 = 0.0;
 
-    /*  unused
-     *  if (kw2str1 !== 0.0) kw2fs_1 = Math.abs(temp / kw2str1);
-     *  else kw2fs_1 = 0.0;
-     *  if (kw2str2 !== 0.0) kw2fs_2 = temp / kw2str2;
-     *  else kw2str2 = 0.0;
-     *  if (kw2strs !== 0.0) kw2fs_s = temp / kw2strs;
-     *  else kw2fs_s = 0.0;
-     *  unused
-     */
-
     safe_load = x[o.Stress_Lim_Stat].value / s_f;
     safe_load_u = p[o.Force_2].units;
+
     /*
+     * pitch and helix angle are not used for extension spring
      * Angle across coil cross section
      * hlx_ang=atan(0.5*pitch/mean_dia)*(180.0/pi);
      */
-    pitch = 0.0;    // TODO: Do we really need pitch * hlx_ang for extension spring ?
-    if (pitch > 0.0) hlx_ang = Math.atan(pitch / (Math.PI * x[o.Mean_Dia].value)) * (180.0 / Math.PI);
-    else hlx_ang = 0.0;
 
     cycle_life_u = x[o.Cycle_Life].units + " (est)";
-    
 
     /*  ref. pg 51 Associated Spring Design Handbook  */
     /*  assume C2=4; i.e. R2=twice wire dia       */
@@ -380,7 +357,7 @@ export function report(report_name, prefs, p, x, labels) {
                                 <td> &nbsp; &nbsp; </td>
                                 <td>{x[o.Tensile].name}</td>
                                 <td>=</td>
-                                <td>{tensileFixed0}</td>
+                                <td>{x[o.Tensile].value.toFixed(0)}</td>
                                 <td>{x[o.Tensile].units}</td>
                                 <td></td>
                             </tr>
@@ -413,8 +390,8 @@ export function report(report_name, prefs, p, x, labels) {
                             <th> &nbsp; </th>
                             <th> &nbsp; </th>
                             <td> &nbsp; &nbsp; </td>
-                            <th>Stress</th>
-                            <th>&nbsp;%TS </th>
+                            <th>&nbsp;Stress</th>
+                            <th>&nbsp; %TS </th>
                             <td> &nbsp; &nbsp; </td>
                             <th>Static FS</th>
                         </tr>
@@ -653,7 +630,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td> &nbsp; </td>
                     <td>{x[o.Tensile].name}</td>
                     <td>=</td>
-                    <td>{tensileFixed0}</td>
+                    <td>{x[o.Tensile].value.toFixed(0)}</td>
                     <td className="text-left">{x[o.Tensile].units}</td>
                 </tr>
                 <tr>
@@ -822,7 +799,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>{(x[o.Stress_1].value / dhat).toFixed(1)}</td>
                     <td>{(x[o.Stress_2].value / dhat).toFixed(1)}</td>
                     <td> &nbsp; &nbsp; </td>
-                    <td>{x[o.PC_Tensile_Stat].value.toFixed(1)}</td>
+                    <td>{(x[o.Stress_Lim_Stat].value / dhat).toFixed(1)}</td>
                     <td>% &nbsp; &nbsp; </td>
                 </tr>
                 <tr>
