@@ -675,7 +675,7 @@ export function report(report_name, prefs, p, x, labels) {
                     <td>=</td>
                     <td>{wgt1000.toFixed(3)}</td>
                     <td>{x[o.Weight].units}</td>
-                    <td>{wgt1000_u}</td>
+                    <td className="text-left">{wgt1000_u}</td>
                 </tr>
                 <tr>
                     <td>{p[o.Coils_T].name}</td>
@@ -861,6 +861,8 @@ export function report(report_name, prefs, p, x, labels) {
             </tbody>
         </table>
         <hr/>
+        Deflection at load point 2 is {(100.0 * x[o.Deflect_2].value / def_max).toFixed(0)}% of total safe deflection.<br />
+        <hr/>
         <table>
             <tbody>
                 <tr>
@@ -895,20 +897,30 @@ export function report(report_name, prefs, p, x, labels) {
                 </tr>
                 <tr>
                     <td>Stress relieve</td>
-                    <td>/ HT: </td>
+                    <td className="text-left">/ HT: </td>
                     <td> &nbsp; </td>
                     <td> &nbsp; &nbsp; </td>
                     <td> &nbsp; </td>
                     <td> &nbsp; </td>
-                    <td>Squareness</td>
-                    <td className="text-left">(deg): </td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td>Shot peen: </td>
+                    <td>Relative end</td>
+                    <td className="text-left">&nbsp;position:</td>
+                    <td></td>
                     <td> &nbsp; </td>
-                    <td> yes </td>
+                    <td></td>
+                    <td> &nbsp; &nbsp; </td>
                     <td> &nbsp; </td>
-                    <td> no </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td> &nbsp; </td>
+                    <td>tolerance:</td>
+                    <td></td>
+                    <td> &nbsp; </td>
+                    <td></td>
                     <td> &nbsp; &nbsp; </td>
                     <td> &nbsp; </td>
                     <td> Operating temp: </td>
@@ -923,15 +935,18 @@ export function report(report_name, prefs, p, x, labels) {
                     <td> End use: </td>
                     <td> &nbsp; </td>
                 </tr>
+                <tr>
+                    <td> &nbsp; </td>
+                </tr>
             </tbody>
         </table>
-        <hr/>
-        Deflection at load point 2 is {(100.0 * x[o.Deflect_2].value / def_max).toFixed(0)}% of total safe deflection.<br />
+        <br />
         <hr/>
         <table>
             <tbody>
                 <tr>
                 <td> &nbsp; approved for mfg.&nbsp; </td>
+                <td> &nbsp; </td>
                 <td> &nbsp; </td>
                 <td> &nbsp; </td>
                 <td> &nbsp; approved for mfg.&nbsp; </td>
@@ -942,6 +957,7 @@ export function report(report_name, prefs, p, x, labels) {
                 <tr>
                 <td> by _______________________ &nbsp; </td>
                 <td> &nbsp; date _______ &nbsp; </td>
+                <td> &nbsp; </td>
                 <td> &nbsp; </td>
                 <td> by _______________________ &nbsp; </td>
                 <td> &nbsp; date _______ &nbsp; </td>
