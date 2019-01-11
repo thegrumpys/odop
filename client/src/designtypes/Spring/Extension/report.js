@@ -17,7 +17,7 @@ export function report(report_name, prefs, p, x, labels) {
     
     var kc, ks, s_f, len_lbl, 
     safe_load_u, wgt1000_u, cycle_life_u, 
-    errmsg, hits,
+    errmsg, hits, warnmsg,
     safe_travel, pc_avail_deflect,
     sq1, sq2, sb, wd3,
     dhat, wire_len_a, wire_len_t, safe_load,
@@ -121,6 +121,11 @@ export function report(report_name, prefs, p, x, labels) {
 
     dhat = x[o.Tensile].value / 100.0;
 
+    if (sb > x[o.Stress_Lim_Endur].value || x[o.Stress_Hook].value > x[o.Stress_Lim_Bend].value) {
+        warnmsg = "Fatigue failure at end is possible.";
+    }
+    else warnmsg = "";
+    
     switch(report_name) {
     case "1 (mini)":
     default:
@@ -535,12 +540,11 @@ export function report(report_name, prefs, p, x, labels) {
                             <td>{sb.toFixed(0)}</td>
                             <td className="text-left">&nbsp;{x[o.Stress_Hook].units}</td>
                         </tr>
-                        <tr>
-                            <td className="text-left" colSpan="10">(Torsion value assumes a vertical bend radius (R2) equal twice wire diameter.)</td>
-                        </tr>
                     </tbody>
                 </table>
-                <br /> &nbsp;
+            (Torsion value assumes a vertical bend radius (R2) equal twice wire diameter.)<br />
+            {warnmsg}
+            <br /> &nbsp;
         </React.Fragment>
     );
     case "3 (maxi)":
@@ -816,6 +820,7 @@ export function report(report_name, prefs, p, x, labels) {
         </table>
         <hr/>
         Deflection at load point 2 is {pc_avail_deflect.toFixed(0)}% of total safe deflection.<br />
+        {warnmsg}{warnmsg !== "" && <br />}
         <br />
         ------------------------------- {x[o.L_Free].name} (w/ends) = {x[o.L_Free].value.toFixed(3)} ----------------------------<br />
         ---- {x[o.L_End].name} ---- ---- {x[o.L_Body].name} ---- ---- {p[o.End_Extension].name} ---- ---- {x[o.L_Extended_End].name} ----<br />
@@ -916,7 +921,7 @@ export function report(report_name, prefs, p, x, labels) {
                 <tr>
                 <td> by _______________________ &nbsp; </td>
                 <td> &nbsp; date _______ &nbsp; </td>
-                <td> &nbsp; </td>
+                <td> &nbsp; &nbsp; </td>
                 <td> by _______________________ &nbsp; </td>
                 <td> &nbsp; date _______ &nbsp; </td>
                 </tr>
