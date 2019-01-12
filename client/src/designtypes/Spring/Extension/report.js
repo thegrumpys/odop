@@ -84,7 +84,7 @@ export function report(report_name, prefs, p, x, labels) {
          * intermediate dia. calcs. assume no wire stretch
          * note that value of wire_len_a is actually square of active wire length
          */
-        return(Math.sqrt(wire_len_a - def_len * def_len) / (x[o.Coils_T].value * Math.PI));
+        return(Math.sqrt(wire_len_a - def_len * def_len) / (p[o.Coils_T].value * Math.PI));
     }
 
     kc = (4.0 * x[o.Spring_Index].value - 1.0) / (4.0 * x[o.Spring_Index].value - 4.0);
