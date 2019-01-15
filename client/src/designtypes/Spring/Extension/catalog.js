@@ -138,9 +138,28 @@ export function getCatalogEntries(name, symbol_table_p, symbol_table_x, viol_wt)
     // Load catalog table
     catalog = require('./'+name+'.json');
 //    console.log('In getCatalogEntries catalog=',catalog);
+    
+    entry = Object.assign({},catalog[0]);
+    var L_FreeStyle;
+    var temp;
+    const END_DIAMETERS = 1.75;  // TODO:  this is a kludge.  Needs better.
+    if (entry[3] === "L_Free") {
+        L_FreeStyle = true;
+    }
+    else {
+        L_FreeStyle = false;
+    }
+    
     // scan through catalog
     for (let i = 1; i < catalog.length; i++) { // Skip column headers at zeroth entry
         entry = Object.assign({},catalog[i]); // Make copy so we can modify it without affecting catalog
+        
+        if (L_FreeStyle) {
+            temp = entry[1] - 2.0 * entry[2];   //   inside diameter
+            temp = END_DIAMETERS * temp;        //   total hook allowance
+            entry[3] = (entry[3] - temp) / entry[2];  //  corrected value of Coils_T
+//            console.log("corrected Coils_T = ", entry[0], entry[3]);
+        }
         
         // Skip catalog entry if it's less than half the constraint value or greater than twice the constraint value
         if (entry[1] < cmin_OD_Free         || entry[1] > cmax_OD_Free        ) continue;
