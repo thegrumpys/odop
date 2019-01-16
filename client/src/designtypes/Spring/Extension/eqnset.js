@@ -1,14 +1,20 @@
 import * as o from './offsets';
 import * as mo from '../mat_ips_offsets';
+import * as eto from './endtypes_offsets';
 export function eqnset(p, x) {        /*    Extension  Spring  */
     const zero = 0.0;
+    const e_end_num = 5;
     var ks, kc;
     var temp;
     var s_f, stress_avg, stress_rng, se2;
     var wire_len_t, wd3;
     var Dend, K1, C1;
     var sq1, sq2;
+    var j;
     
+    var et_tab = require('./endtypes.json');
+//  console.log("et_tab=", et_tab);
+
     /*  *******  DESIGN EQUATIONS  *******                  */
     x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
 
@@ -41,14 +47,22 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 
     x[o.L_Body] = p[o.Wire_Dia] * (p[o.Coils_T] + 1.0);
     
-// TODO: Should End_ID, Extended_End_ID, L_End and L_Extended_End be calculated in eqnset or init ?
-//    if (x[o.End_Type] > 0 && x[o.End_Type] <= 5) {
-//        console.log('eqnset: x[o.End_Type] = ', x[o.End_Type]);
-//        console.log('    x[o.End_ID] = ', x[o.End_ID]);
-//        console.log('    x[o.Extended_End_ID] = ', x[o.Extended_End_ID]);
-//        console.log('    x[o.L_End] = ', x[o.L_End]);
-//        console.log('    x[o.L_Extended_End] = ', x[o.L_Extended_End]);
-//    }
+    /*
+     * End_ID, Extended_End_ID, L_End and L_Extended_End are also calculated in init.
+     * They need to be calculated in eqnset because OD_Free will be changed during Search when init is not called.
+     */
+    j = x[o.End_Type];
+    if (x[o.End_Type] <= e_end_num) {
+         x[o.End_ID] = x[o.ID_Free];
+         x[o.Extended_End_ID] = x[o.ID_Free];
+         x[o.L_End] = x[o.ID_Free] * et_tab[j][eto.End_Dia];
+         x[o.L_Extended_End] = x[o.L_End];
+//         console.log('eqnset: x[o.End_Type] = ', x[o.End_Type]);
+//         console.log('    x[o.End_ID] = ', x[o.End_ID]);
+//         console.log('    x[o.Extended_End_ID] = ', x[o.Extended_End_ID]);
+//         console.log('    x[o.L_End] = ', x[o.L_End]);
+//         console.log('    x[o.L_Extended_End] = ', x[o.L_Extended_End]);
+    }
     
     x[o.L_Free] = x[o.L_End] + x[o.L_Body] + p[o.End_Extension] + x[o.L_Extended_End];
 

@@ -24,6 +24,8 @@ export function report(report_name, prefs, p, x, labels) {
     od_1, od_2, id_1, id_2, od_maxsafe, id_maxsafe,
     wgt1000, fs_1,  
     kw1;
+    
+    const Close_Wound_Coil = 5;
 
     /*  Bring in material properties table  */
     var m_tab = require('../mat_ips.json');
@@ -121,7 +123,7 @@ export function report(report_name, prefs, p, x, labels) {
 
     dhat = x[o.Tensile].value / 100.0;
 
-    if (sb > x[o.Stress_Lim_Endur].value || x[o.Stress_Hook].value > x[o.Stress_Lim_Bend].value) {
+    if (x[o.End_Type].value !== Close_Wound_Coil && (sb > x[o.Stress_Lim_Endur].value || x[o.Stress_Hook].value > x[o.Stress_Lim_Bend].value)) {
         warnmsg = "Fatigue failure at end is possible.";
     }
     else warnmsg = "";

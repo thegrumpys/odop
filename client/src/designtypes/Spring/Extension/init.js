@@ -118,8 +118,10 @@ export function init(p, x) {
     x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0;
     x[o.Stress_Lim_Bend]  = x[o.Tensile] * x[o.PC_Tensile_Bend]  / 100.0;
     
-    //    /*  copy from end type table to constants  */
-//    /*  check these values.     See AS Design Hdbk. p52  */
+      /*
+       *  copy from end type table to Calculation Inputs  
+       *  check these values.     See AS Design Hdbk. p52  
+       */
 //
 //end_type        = end_name(end_type_index);
 //inactive_coils  = inact_coil_tbl(end_type_index);
@@ -133,7 +135,7 @@ export function init(p, x) {
         x[o.Hook_Deflect_All] = et_tab[j][eto.HookDefAll];
     }
     
-// TODO:  Is there any reason to move this stuff into eqnset?
+// End_ID, Extended_End_ID, L_End and L_Extended_End are also calculated in eqnset
     if (x[o.End_Type] <= e_end_num) {
         x[o.End_ID] = x[o.ID_Free];
         x[o.Extended_End_ID] = x[o.ID_Free];

@@ -875,7 +875,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "End Inside Diameter",
+            "tooltip": "End Inside Diameter. Used in calculation of stress at end.",
             "equationset": false,
             "hidden": false
         },
@@ -890,7 +890,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Extended End Inside Diameter",
+            "tooltip": "Extended End Inside Diameter. Used in calculation of stress at end.",
             "equationset": false,
             "hidden": false
         },
@@ -905,7 +905,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Length of End (see diagram in on-line Help)",
+            "tooltip": "Length of End (see diagram in on-line Help). Used in calculation of L_Free.",
             "equationset": false,
             "hidden": false
         },
@@ -920,7 +920,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 1.0,
-            "tooltip": "Length of Extended End (see diagram in on-line Help)",
+            "tooltip": "Length of Extended End (see diagram in on-line Help). Used in calculation of L_Free.",
             "equationset": false,
             "hidden": false
         },
