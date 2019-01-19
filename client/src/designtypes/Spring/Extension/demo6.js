@@ -71,10 +71,10 @@ export const execute = {
                 
                 <table>
                     <tbody>
-                        <tr><th>material</th><td>&nbsp;=</td><td>&nbsp;</td><td>oil-tempered wire</td><td>&nbsp;</td></tr>
-                        <tr><th>ends</th><td>&nbsp;=</td><td>&nbsp;</td><td>loops</td><td>&nbsp;</td></tr>
-                        <tr><th>outside diameter</th><td>&nbsp;=</td><td>&nbsp;1.250</td><td>in.</td><td> (max)</td></tr>
-                        <tr><th>inside diameter</th><td>&nbsp;=</td><td>&nbsp;0.750</td><td>in.</td><td> (min; loops to fit over pin)</td></tr>
+                        <tr><th>Material</th><td>&nbsp;=</td><td>&nbsp;</td><td>oil-tempered wire</td><td>&nbsp;</td></tr>
+                        <tr><th>Ends</th><td>&nbsp;=</td><td>&nbsp;</td><td>loops</td><td>&nbsp;</td></tr>
+                        <tr><th>Outside diameter</th><td>&nbsp;=</td><td>&nbsp;1.250</td><td>in.</td><td> (max)</td></tr>
+                        <tr><th>Inside diameter</th><td>&nbsp;=</td><td>&nbsp;0.750</td><td>in.</td><td> (min; loops to fit over pin)</td></tr>
                         <tr><th>Load 1</th><td>&nbsp;=</td><td>25</td><td>lb.</td><td>&nbsp;</td></tr>
                         <tr><th>Length 1</th><td>&nbsp;=</td><td>&nbsp;5.6</td><td>in.</td><td>&nbsp;</td></tr>
                         <tr><th>Load 2</th><td>&nbsp;=</td><td>35</td><td>lb.</td><td>&nbsp;</td></tr>

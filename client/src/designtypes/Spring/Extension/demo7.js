@@ -1,6 +1,7 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, freeSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
+import { changeSystemControlsValue } from '../../../store/actionCreators';
 export const execute = {
     "name": "demo7",
     "steps": [
@@ -10,7 +11,7 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    The following example briefly illustrates the use of ODOP:Spring in
+                    The following example illustrates the use of ODOP:Spring in
                     the design of an extension spring. 
                     </p>
                     
@@ -28,7 +29,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 08",
+            title: "Page 02 of 11",
             text: (
                 <React.Fragment>
                     <p>
@@ -43,7 +44,7 @@ export const execute = {
                     <br />
                     telephone: 630-495-8588<br />
                     <br />
-                    Refer to page 25 of the 1991 edition.<br />
+                    Refer to page 19 of the second printing (1983)<br />
                     ***  Used with permission of Spring Manufacturers Institute, Inc.  ***<br />
                     </p>
                 </React.Fragment>
@@ -54,151 +55,290 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 08",
+            title: "Page 03 of 11",
             text: (
                 <React.Fragment>
                 <p>
                 Before making any changes to our initialState, the Design Example may be restated in a simplified form:<br />
                 <br />
-                Design an extension spring to xxx.
-                </p>
-                
-                <p>
-                Determine xxx for an extension spring 
-                with 
-                (a suggestion of xxx is provided).
+                Example 2: Design an extension spring to meet the following requirements:
                 </p>
                 
                 <table>
                     <tbody>
-                        <tr><th>material</th><td>&nbsp;=</td><td>&nbsp;</td><td>oil-tempered wire</td><td>&nbsp;</td></tr>
-                        <tr><th>ends</th><td>&nbsp;=</td><td>&nbsp;</td><td>tangent</td><td>&nbsp;</td></tr>
-                        <tr><th>inside diameter</th><td>~=</td><td>&nbsp;1.20</td><td>in.</td><td>(1.1 shaft plus approx. 10% clearance)</td></tr>
-                        <tr><th>length of Arm 2</th><td>&nbsp;=</td><td>9.0</td><td>in.</td><td>&nbsp;</td></tr>
-                        <tr><th>Force @ Arm 2</th><td>&nbsp;=</td><td>18.0</td><td>lb.</td><td>&nbsp;</td></tr>
-                        <tr><th>Moment in open position</th><td>&nbsp;=</td><td>10.0</td><td>lb-in.</td><td>&nbsp;</td></tr>
-                        <tr><th>Stroke</th><td>&nbsp;=</td><td>110</td><td>degrees</td><td>&nbsp;</td></tr>
+                    <tr><th>Material</th><td>&nbsp;=</td><td>&nbsp;</td><td>music wire</td><td>&nbsp;</td></tr>
+                    <tr><th>Ends</th><td>&nbsp;=</td><td>&nbsp;</td><td>hooks</td><td>&nbsp;(.725 min hook extension)</td></tr>
+                    <tr><th>Outside diameter</th><td>&nbsp;=</td><td>&nbsp;0.655</td><td>in.</td><td> (max)</td></tr>
+                    <tr><th>Free length</th><td>&nbsp;=</td><td>&nbsp;5.125</td><td>in.</td><td>&nbsp;</td></tr>
+                    <tr><th>Load 1</th><td>&nbsp;=</td><td>50</td><td>lb.</td><td>&nbsp;(+/- 5 lb.)</td></tr>
+                    <tr><th>Length 1</th><td>&nbsp;=</td><td>&nbsp;5.625</td><td>in.</td><td>&nbsp;</td></tr>
+                    <tr><th>Load 2</th><td>&nbsp;=</td><td>105</td><td>lb.</td><td>&nbsp;</td></tr>
+                    <tr><th>Length 2</th><td>&nbsp;=</td><td>&nbsp;6.25</td><td>in.</td><td>&nbsp;</td></tr>
                     </tbody>
                 </table>
                 <br />
                
                 <p>
-                The handbook example uses allowable stresses appropriate for a static load and 
+                The handbook example uses allowable stress appropriate for a static load (105,000 psi corrected) and 
                 does not state a requirement for cycle life.
                 </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 04 of 08",
+            title: "Page 04 of 11",
             text: (
                 <React.Fragment>
                     <p>
-                    The demo has now entered what is known about the problem. 
-                    In summary, the changes were:<br />
-                    <br />
-                    CHANGE  Material_Type  OIL_TEMPERED_MB<br />
-                    <br />
-                    FIX     M_1  10.0<br />
-                    CHANGE  ID_Free MIN  1.20<br />
-                    CHANGE  ID_Free MAX  1.25<br />
-                    <br />
-                    FIX  Stroke  110.0<br />
-                    </p>
-                    
-                    <p>
-                    This is a good time to scroll down and confirm these changes are now in place.
-                    </p>
-                </React.Fragment>
-            ),
-            actions: [
-                changeSymbolValue("Material_Type",3),
-                fixSymbolValue('M_1', 10.0),
-                saveOutputSymbolConstraints('ID_Free'),
-                setSymbolFlag('ID_Free', MIN, CONSTRAINED),
-                changeSymbolConstraint('ID_Free', MIN, 1.20),
-                setSymbolFlag('ID_Free', MAX, CONSTRAINED),
-                changeSymbolConstraint('ID_Free', MAX, 1.25),
-                fixSymbolValue('Stroke', 110.0),
-                fixSymbolValue('Force_Arm_2', 18.0)
-            ]
-        },
-        {
-            title: "Page 05 of 08",
-            text: (
-                <React.Fragment>
-                    <p>
-                    Note that the Handbook solution was required to calculate moment in the closed position (180 lb-in).
-                    ODOP:Spring was able to accept the specifications for Force_Arm_2 and length of Arm_2 directly and
-                    thus eliminated the need for that side calculation.
-                    </p>
-                    
-                    <p>
-                    After the click on Next, the demo will run Search.
-                    </p>
-                </React.Fragment>
-            ),
-            actions: [
-            ]
-        },
-        {
-            title: "Page 06 of 08",
-            text: (
-                <React.Fragment>
-                    <p>
-                    Now let's see what the search has achieved.
-                    Don't forget to review the Report(s).
+                    It is important to notice that the handbook has given us three points to
+                    define the rate (slope of the linear force-deflection curve) of a coil
+                    spring.  Thus, there is a good chance that the problem is overspecified.
+                    We are allowed a small tolerant region around load 1,  (+/-5 pounds).
+                    Also, later in the problem the handbook indicates that load 2 may also
+                    vary by 10%  (94.5 to 105 pounds).
                     </p>
 
                     <p>
-                    &nbsp;
-                    <br />
-                    </p>
-                </React.Fragment>
-            ),
-            actions: [
-                search()
-            ]
-        },
-        {
-            title: "Page 07 of 08",
-            text: (
-                <React.Fragment>
-                    <p>
-                    The handbook solution used a standard wire diameter.
-                    </p>
-
-                    <p>
-                    The <b>Action : Select Size</b> menu item can be used to select the nearest standard wire diameter.
-                    You can experiment with that now.
+                    An important point should be restated here.  The current version of
+                    ODOP:Spring does not incorporate spring manufacturing tolerances.
+                    Therefore if a design is not mathematically very close to the design
+                    requirements as specified, the program will likely declare it to be
+                    unacceptable (infeasible).  If we enter the design as specified in the
+                    handbook, putting performance characteristics in a "FIXed" state,
+                    ODOP:Spring, will be unable to find a solution due to the fact that, in
+                    this case, the three points:  1, 2, and FREE are not on the same
+                    straight line.
                     </p>
                    
                     <p>
-                    In the process of transitioning to the next page, the demo session will
-                    FIX a value of 0.225 inch on Wire_Dia and then
-                    run another search to re-establish corresponding values for all the other problem variables.
+                    To avoid this problem, we'll specify forces as MAX and MIN values.
                     </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 08 of 08 (last page)",
+            title: "Page 05 of 11",
             text: (
                 <React.Fragment>
                     <p>
+                    The demo session has now entered what is known about the problem. 
+                    </p>
+                    
+                    <p>
+                    In summary, the changes were:<br />
+                    &nbsp; CHANGE  Material_Type  MUSIC_WIRE<br />
+                    &nbsp; CHANGE  End_Type  Full_Hook<br />
+                    &nbsp; CHANGE  OD_Free MAX  0.645 &nbsp; (includes a 0.010 margin)<br />
+                    &nbsp; FIX  L_Free   5.125<br />
+                    &nbsp; CHANGE  Force_1  MIN  45 &nbsp; (50 minus 5 pounds)<br />
+                    &nbsp; CHANGE  Force_1  MAX  55 &nbsp; (50 plus&nbsp; 5 pounds)<br />
+                    &nbsp; FIX  L_1    5.625<br />
+                    &nbsp; CHANGE  Force_2  MIN  94.5 &nbsp; (105 minus 10%)<br />
+                    &nbsp; CHANGE  Force_2  MAX  105 &nbsp; (stated maximum)<br />
+                    &nbsp; FIX  L_2    6.25
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                changeSymbolValue("Material_Type",2),
+                changeSymbolValue("End_Type",3),
+                saveOutputSymbolConstraints('OD_Free'),
+                setSymbolFlag('OD_Free', MAX, CONSTRAINED),
+                changeSymbolConstraint('OD_Free', MAX, 0.645),
+                fixSymbolValue('L_Free', 5.125),
+                setSymbolFlag('Force_1', MIN, CONSTRAINED),
+                changeSymbolConstraint('Force_1', MIN, 45.0),
+                setSymbolFlag('Force_1', MAX, CONSTRAINED),
+                changeSymbolConstraint('Force_1', MAX, 55.0),
+                fixSymbolValue('L_1', 5.625),
+                setSymbolFlag('Force_2', MIN, CONSTRAINED),
+                changeSymbolConstraint('Force_2', MIN, 94.5),
+                setSymbolFlag('Force_2', MAX, CONSTRAINED),
+                changeSymbolConstraint('Force_2', MAX, 105.0),
+                fixSymbolValue('L_2', 6.25)
+            ]
+        },
+        {
+            title: "Page 06 of 11",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Note that previously initialState had End_Extension FIXed at a value of 0.0 in. 
+                    </p>
+                    
+                    <p>
+                    For now, we'll let the solution process select any value of end extension that
+                    assists the solution:<br />
+                    FREE  End_Extension
+                    </p>
+                    
+                    <p>
+                    Pending implementation of FDCL, set constraint FS_SI_Lo MIN; tweakPrefs.
+                    </p>
+
+                    <p>
+                    This is a good time to scroll down and confirm these changes are now in place.
+                    After the click on Next, the demo session will run Search.
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                freeSymbolValue('End_Extension'),
+                setSymbolFlag('FS_SI_Lo', MIN, CONSTRAINED),
+                changeSystemControlsValue({maxit: 190, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
+            ]
+        },
+        {
+            title: "Page 07 of 11",
+            text: (
+                <React.Fragment>
+                    <p>
+                    While ODOP:Spring is able to find a solution that satisfies the design
+                    criteria, it is quite different from the handbook solution.  The
+                    remainder of this session will look at the differences in detail.<br />
+                    <br />
+                    Recall that the handbook requested a spring which has a "minimum hook
+                    extension" of 0.725 inch.  
+                    The handbook definition of this quantity appears to be: 
+                    (free length - body length)/2  
+                    </p>
+
+                    <p>
+                    As illustrated on the Report 1 and Report 3 tabs,
+                    ODOP:Spring calculates length between hooks as body length plus 75% or
+                    100% (depending on End_Type) of a coil inside diameter for each end.
+                    End_Extension is an offset in addition to this allowance for the ends.
+                    
+                    Specifically, the ODOP:Spring Calculation Inputs L_End and L_Extended_End 
+                    are determined by End_Type.
+                    Typically, these quantities will represent the 75% or 100% of a coil
+                    inside diameter that is added to L_Body in order to establish L_Free.
+                    <br /><br />
+                    For a spring with "Full" hook or loop ends, ODOP:Spring's End_Extension 
+                    would be:
+                    free length - (body length + 2 coil inside diameters)
+                    </p>
+
+                    <p>
+                    For the handbook solution:<br />
+                    5.125   - (3.600 + 2 * 0.405)  =  0.715   inches<br />
+                    We will use this value shortly in a ODOP:Spring analysis of the handbook
+                    solution.
+                    </p>
+
+                    <p>
+                    However, for our current situation, if the handbook wants to maintain at
+                    least (2 * 0.725) in the ends and the coil inside diameter is 0.405, we
+                    should specify a ODOP:Spring End_Extension  MIN  of 1.450 - 0.810 = 0.640
+                    inches.
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                search()
+            ]
+        },
+        {
+            title: "Page 08 of 11",
+            text: (
+                <React.Fragment>
+                    <p>
+                    The demo session has now imposed:
+                    CHANGE  End_Extension MIN  0.640
+                    </p>
+
+                    <p>
+                    The handbook solution used a standard wire diameter.
+                    The <b>Action : Select Size</b> menu item can be used to select the nearest standard wire diameter.
+                    You can experiment with that now.
+                    </p>
+                   
+                    <p>
+                    While it appears that a smaller standard wire diameter would be possible, 
+                    in order to be consistent with the handbook,
+                    the demo session will impose a Wire_Dia value of 0.120 
+                    in the process of transitioning to the next page.
+                    Another search will re-establish corresponding values for all the other problem variables.
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                setSymbolFlag('End_Extension', MIN, CONSTRAINED),
+                changeSymbolConstraint('End_Extension', MIN, 0.640)
+            ]
+        },
+        {
+            title: "Page 09 of 11",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Note that even though the ODOP:Spring value for initial tension is
+                    significantly higher than the handbook's value (14.4 lb.),  it is still
+                    at the lower boundary of the range that is considered "readily obtainable" for
+                    0.120 wire and a Spring_Index near 4.4.
                     </p>
                     <br />
 
                     <p>
                     The handbook solution produced:<br />
-                         &nbsp; wire diameter  =  0.225 in.<br />
-                         &nbsp; total coils    =  9.6   coils<br />
-                         &nbsp; deflected inside diameter   = 1.233 in.<br />
-                         &nbsp; deflected body length   = 2.458 in.<br />
-                         &nbsp; stress (152 lb-in) = 142,000 psi.
+                    &nbsp; Force 1  &nbsp; &nbsp; 50    pounds &nbsp; &nbsp; &nbsp; &nbsp;  Length 1  &nbsp; 5.625  inches<br />
+                    &nbsp; Force 2  &nbsp;  94.5  pounds &nbsp; &nbsp; &nbsp; Length 2   &nbsp;   6.250  inches<br />
+                    &nbsp; Init. tens. &nbsp; 14.4  pounds &nbsp; &nbsp;  Length free &nbsp;  5.125  inches
                     </p>
                     <p>
-                    The two solutions are in reasonable agreement.
+                    &nbsp; OD free  &nbsp; &nbsp;  0.645  inches  &nbsp; &nbsp;  Wire dia &nbsp;  0.120  inches<br />
+                    &nbsp; Act. coils &nbsp; &nbsp;  29.   Coils &nbsp; &nbsp; &nbsp; &nbsp; Rate &nbsp;    71.2    lb/in<br />
+                    &nbsp; Body length &nbsp;  3.60   inches &nbsp; &nbsp;  Stress &nbsp;    99000      psi
+                    </p>
+                   
+                    <p>
+                    This is a good time to scroll through the ODOP:Spring design to compare results.
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                fixSymbolValue('Wire_Dia', 0.120),
+                search()
+            ]
+        },
+        {
+            title: "Page 10 of 11",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Now that we've seen how ODOP:Spring can derive a design that's close to
+                    the handbook design, 
+                    the demo session has entered the handbook solution 
+                    so that we can see what ODOP:Spring thinks of it.
+                    </p>
+
+                    <p>
+                    ODOP:Spring normally makes an allowance for deflection in the hooks.
+                    The handbook calculation did not make any such allowance.  
+                    Our comparison will be closer if set the ODOP:Spring allowance to zero.
+                    Because the hook deflection allowance is determined from a table based
+                    on end type, it will be necessary to "switch off" this table look up
+                    process first.  
+                    That is accomplished by selecting the "User_Specified" end type.
+                    </p>
+                    
+                    <p>
+                    CHANGE  End_Type  User_Specified<br />
+                    CHANGE  Hook_Deflect_All  0.0
+                    </p>
+                    
+                    <p>
+                    Now we'll enter the values produced by the handbook solution and compare
+                    the results.
+                    </p>
+                    
+                    <p>
+                    CHANGE  OD_Free   0.645   (0.010 margin)<br />
+                    CHANGE  Coils_T  29.0    (no allowance for hook deflection)<br />
+                    CHANGE  Initial_Tension  14.4<br />
+                    CHANGE  End_Extension  0.715   (per earlier calculation)<br />
+                    CHANGE  Force_1  50.0<br />
+                    CHANGE  Force_2  94.5
                     </p>
                    
                     <p>
@@ -206,9 +346,60 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                fixSymbolValue('Wire_Dia', 0.225),
-                search()
+                changeSymbolValue('OD_Free', 0.645),
+                changeSymbolValue('Coils_T', 29.0),
+                changeSymbolValue('Initial_Tension', 14.4),
+                changeSymbolValue('End_Extension', 0.715),
+                changeSymbolValue('Force_1', 50.0),
+                changeSymbolValue('Force_2', 94.5),
+                changeSymbolValue("End_Type",6),
+                changeSymbolValue("Hook_Deflect_All",0.0)
             ]
+        },
+        {
+            title: "Page 11 of 11 (last page)",
+            text: (
+                <React.Fragment>
+                    <p>
+                    To repeat, the handbook solution produced:<br />
+                    &nbsp; Force 1  &nbsp; &nbsp; 50    pounds &nbsp; &nbsp; &nbsp; &nbsp;  Length 1  &nbsp; 5.625  inches<br />
+                    &nbsp; Force 2  &nbsp;  94.5  pounds &nbsp; &nbsp; &nbsp; Length 2   &nbsp;   6.250  inches<br />
+                    &nbsp; Init. tens. &nbsp; 14.4  pounds &nbsp; &nbsp;  Length free &nbsp;  5.125  inches
+                    </p>
+                    <p>
+                    &nbsp; OD free  &nbsp; &nbsp;  0.645  inches  &nbsp; &nbsp;  Wire dia &nbsp;  0.120  inches<br />
+                    &nbsp; Act. coils &nbsp; &nbsp;  29.   Coils &nbsp; &nbsp; &nbsp; &nbsp; Rate &nbsp;    71.2    lb/in<br />
+                    &nbsp; Body length &nbsp;  3.60   inches &nbsp; &nbsp;  Stress &nbsp;    99000      psi
+                    </p>
+
+                    <p>
+                    ODOP:Spring thinks that this design has one small problem ...
+                    
+                    The desired initial tension is in the region that the handbook describes
+                    as "difficult to maintain with accurate and uniform results".
+
+                    The handbook never explicitly calculates the stress induced by the 14.4
+                    pound initial tension.  It indicates that since 14.4 pounds is less than
+                    the 28.4 pounds "attainable" with 22,000 psi initial stress (taken from
+                    the chart), the situation is acceptable.
+                    </p>
+                   
+                    <p>
+                    This completes our analysis of this problem.
+                    If this example seemed a bit long and drawn out ...  it was.
+                    </p>
+                    
+                    <p>
+                    Note that simply because the design specification and ODOP:Spring use the
+                    same or similar names for a variable doesn't mean they are truly the same.  In
+                    this case, End_Extension MIN and minimum hook extension had different meanings.
+                    
+                    While once again we found that there can be several solutions to the
+                    same spring problem, overall the ODOP:Spring calculations compare well to the
+                    handbook results.
+                    </p>
+                </React.Fragment>
+            )
         }
     ]
 }
