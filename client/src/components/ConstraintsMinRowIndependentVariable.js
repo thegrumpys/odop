@@ -1,8 +1,9 @@
 import React from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
-import { MIN, FIXED, CONSTRAINED } from '../store/actionTypes';
+import { MIN, FIXED, CONSTRAINED, FUNCTION } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
+import { evaluateConstraintName, evaluateConstraintValue } from '../store/middleware/evaluateConstraint';
 
 class ConstraintMinRowIndependentVariable extends React.Component {
     
@@ -47,7 +48,8 @@ class ConstraintMinRowIndependentVariable extends React.Component {
                                 <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetIndependentVariableFlagConstrained : this.onSetIndependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <Input className={cmin_class} type="number" value={this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} />
+                        <Input id={this.props.element.name + "_cmin"} className={cmin_class} type="number" value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} />
+                        {this.props.element.lmin & FUNCTION ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmin"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</UncontrolledTooltip> : ''}
                     </InputGroup>
                 </td>
                 <td className="text-right align-middle" colSpan="1">
@@ -59,6 +61,7 @@ class ConstraintMinRowIndependentVariable extends React.Component {
 }
 
 const mapStateToProps = state => ({
+    symbol_table: state.symbol_table,
     system_controls: state.system_controls,
     objective_value: state.result.objective_value
 });

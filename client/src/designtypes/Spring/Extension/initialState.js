@@ -1,4 +1,4 @@
-import { CONSTRAINED, FIXED } from '../../../store/actionTypes';
+import { CONSTRAINED, FIXED, FUNCTION } from '../../../store/actionTypes';
 export const initialState = {
     "symbol_table": [
         {
@@ -81,15 +81,17 @@ export const initialState = {
             "name": "Force_1",
             "value": 10.0,
             "units": "pounds",
-            "lmin": CONSTRAINED,
+            "lmin": CONSTRAINED|FUNCTION,
             "lmax": 0,
-            "cmin": 6.0,
+            "cmin": 3,
             "cmax": 6.0,
             "ioclass": 0,
             "sdlim": 1.0,
             "tooltip": "Minimum operating load (Length L_1) (FDCL)",
             "equationset": true,
-            "hidden": false
+            "hidden": false,
+            "cminchoices": [ "Initial_Tension" ],
+            "cmaxchoices": [ "Initial_Tension" ]
         },
         {
             "input": true,
@@ -306,15 +308,17 @@ export const initialState = {
             "name": "Stress_Initial",
             "value": 12940.1,
             "units": "PSI",
-            "lmin": 0,
-            "lmax": 0,
-            "cmin": 50.0,
-            "cmax": 1000.0,
+            "lmin": CONSTRAINED|FUNCTION,
+            "lmax": CONSTRAINED|FUNCTION,
+            "cmin": 29,
+            "cmax": 30,
             "ioclass": 0,
             "sdlim": 1.0,
             "tooltip": "Stress resulting from Initial_Tension (FDCL)",
             "equationset": true,
-            "hidden": false
+            "hidden": false,
+            "cminchoices": [ "Stress_Init_Lo" ],
+            "cmaxchoices": [ "Stress_Init_Hi" ]
         },
         {
             "input": false,

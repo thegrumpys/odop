@@ -22,6 +22,6 @@ export function sclden(system_controls, value, level, sdlimit, flags) {
     if (result < sdlimit) {
         result = sdlimit
     }
-//    console.log('system_controls=',system_controls,' value=',value,' level=',level,' sdlimit=',sdlimit,' flags=',flags,' result=',result);
+    console.log('system_controls=',system_controls,' value=',value,' level=',level,' sdlimit=',sdlimit,' flags=',flags,' result=',result);
     return result;
 }

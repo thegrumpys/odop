@@ -1,8 +1,9 @@
 import React from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
+import { MIN, MAX, FIXED, CONSTRAINED, FUNCTION } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
+import { evaluateConstraintName, evaluateConstraintValue } from '../store/middleware/evaluateConstraint';
 
 class ConstraintsMaxRowDependentVariable extends React.Component {
     
@@ -22,10 +23,10 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
     }
     
     onChangeDependentVariableConstraint(event) {
-        this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(event.target.value));
-        if (this.props.element.lmin & FIXED) {
+        if (this.props.element.lmax & FIXED) {
             this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(event.target.value));
         }
+        this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(event.target.value));
     }
     
     render() {
@@ -33,7 +34,7 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
         // Constraint Maximum Column
         // =======================================
         var cmax_class;
-        if (this.props.element.lmin & FIXED) {
+        if (this.props.element.lmax & FIXED) {
             cmax_class = (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) ? 'text-info text-right font-weight-bold border border-info' : 'text-right';
         } else {
             if (this.props.objective_value < this.props.system_controls.objmin) {
@@ -54,7 +55,8 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
                                 <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <Input className={cmax_class} type="number" value={this.props.element.lmax & CONSTRAINED ? this.props.element.cmax : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} />
+                        <Input id={this.props.element.name + "_cmax"} className={cmax_class} type="number" value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} />
+                        {this.props.element.lmax & FUNCTION ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</UncontrolledTooltip> : ''}
                     </InputGroup>
                 </td>
                 <td className="text-right align-middle" colSpan="1">
@@ -66,6 +68,7 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
 }
 
 const mapStateToProps = state => ({
+    symbol_table: state.symbol_table,
     system_controls: state.system_controls,
     objective_value: state.result.objective_value
 });
