@@ -56,7 +56,7 @@ class ActionSelectCatalog extends React.Component {
         this.props.symbol_table.forEach((element) => {
             st.push(Object.assign({},element));
         });
-        var entries = getCatalogEntries(name, p, x, this.props.system_controls.viol_wt);
+        var entries = getCatalogEntries(name, st, this.props.system_controls.viol_wt);
         var entry = 0; // Default to first entry
         this.setState({
             modal: !this.state.modal,

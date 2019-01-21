@@ -16,14 +16,14 @@ export function getCatalogNames() {
     return result;
 }
 
-function getObjectiveValue(p, x, viol_wt) {
+function getObjectiveValue(st, viol_wt) {
     var element;
     var vmin;
     var vmax;
     var viol_sum = 0.0;
 
-    for (let i = 0; i < p.length; i++) {
-        element = p[i];
+    for (let i = 0; i < st.length; i++) {
+        element = st[i];
         if (element.input) {
             vmin = 0.0;
             vmax = 0.0;
@@ -41,8 +41,8 @@ function getObjectiveValue(p, x, viol_wt) {
             }
         }
     }
-    for (let i = 0; i < x.length; i++) {
-        element = x[i];
+    for (let i = 0; i < st.length; i++) {
+        element = st[i];
         if (!element.input) {
             vmin = 0.0;
             vmax = 0.0;
@@ -116,24 +116,30 @@ export function getCatalogEntries(name, st, viol_wt) {
         return index > 0 && element[0] === entry[6];
     }
     function pPush(element) {
-        p.push(element.value)
+        if (element.input) {
+            p.push(element.value);
+        }
     }
     function xPush(element) {
-        x.push(element.value)
+        if (!element.input) {
+            x.push(element.value)
+        }
     }
     function xPull(element, index) {
-        element.value = x[index];
+        if (!element.input) {
+            element.value = x[index];
+        }
     }
     
     // Create implied constraints between half and twice
-    var cmin_OD_Free = symbol_table_p[o.OD_Free].value/2;
-    var cmax_OD_Free = symbol_table_p[o.OD_Free].value*2;
-    var cmin_Wire_Dia = symbol_table_p[o.Wire_Dia].value/2;
-    var cmax_Wire_Dia = symbol_table_p[o.Wire_Dia].value*2;
-    var cmin_Coils_T = symbol_table_p[o.Coils_T].value/2;
-    var cmax_Coils_T = symbol_table_p[o.Coils_T].value*2;
-    var cmin_Initial_Tension = symbol_table_p[o.Initial_Tension].value/2;
-    var cmax_Initial_Tension = symbol_table_p[o.Initial_Tension].value*2;
+    var cmin_OD_Free = st[o.OD_Free].value/2;
+    var cmax_OD_Free = st[o.OD_Free].value*2;
+    var cmin_Wire_Dia = st[o.Wire_Dia].value/2;
+    var cmax_Wire_Dia = st[o.Wire_Dia].value*2;
+    var cmin_Coils_T = st[o.Coils_T].value/2;
+    var cmax_Coils_T = st[o.Coils_T].value*2;
+    var cmin_Initial_Tension = st[o.Initial_Tension].value/2;
+    var cmax_Initial_Tension = st[o.Initial_Tension].value*2;
 
     // Load catalog table
     catalog = require('./'+name+'.json');
@@ -171,34 +177,34 @@ export function getCatalogEntries(name, st, viol_wt) {
         entry[8] = et_tab.findIndex(findEndTypeIndex); // Set matching End Type index
         
         // Update with catalog entries
-        symbol_table_p[o.OD_Free].value = entry[1];
-        symbol_table_p[o.Wire_Dia].value = entry[2];
-        symbol_table_p[o.Coils_T].value = entry[3];
-        symbol_table_p[o.Initial_Tension].value = entry[4];
-        symbol_table_x[o.Material_Type].value = entry[7]; // Use Material Type index
-        symbol_table_x[o.End_Type].value = entry[8]; // Use End Type index
-//        console.log('In getCatalogEntries 0 symbol_table_p=',symbol_table_p,' symbol_table_x=',symbol_table_x);
+        st[o.OD_Free].value = entry[1];
+        st[o.Wire_Dia].value = entry[2];
+        st[o.Coils_T].value = entry[3];
+        st[o.Initial_Tension].value = entry[4];
+        st[o.Material_Type].value = entry[7]; // Use Material Type index
+        st[o.End_Type].value = entry[8]; // Use End Type index
+//        console.log('In getCatalogEntries 0 st=',st);
 
         // Invoke init function
         p = [];
-        symbol_table_p.forEach(pPush);
+        st.forEach(pPush);
         x = [];
-        symbol_table_x.forEach(xPush);
+        st.forEach(xPush);
         x = init(p, x);
-        symbol_table_x.forEach(xPull);
-//        console.log('In getCatalogEntries 1 symbol_table_p=',symbol_table_p,' symbol_table_x=',symbol_table_x);
+        st.forEach(xPull);
+//        console.log('In getCatalogEntries 1 st=',st);
         
         // Invoke eqnset function
         p = [];
-        symbol_table_p.forEach(pPush);
+        st.forEach(pPush);
         x = [];
-        symbol_table_x.forEach(xPush);
+        st.forEach(xPush);
         x = eqnset(p, x);
-        symbol_table_x.forEach(xPull);
-//        console.log('In getCatalogEntries 2 symbol_table_p=',symbol_table_p,' symbol_table_x=',symbol_table_x);
+        st.forEach(xPull);
+//        console.log('In getCatalogEntries 2 st=',st);
         
         // Invoke violations & objective value function
-        objective_value = getObjectiveValue(symbol_table_p, symbol_table_x, viol_wt);
+        objective_value = getObjectiveValue(st, viol_wt);
 //        console.log('In getCatalogEntries 3 objective_value=',objective_value);
         
         entry[9] = objective_value.toFixed(6); // Set Objective Value
