@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
+import { MIN, MAX, FIXED, CONSTRAINED, FUNCTION } from '../store/actionTypes';
 import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
     saveOutputSymbolConstraints, restoreOutputSymbolConstraints } from '../store/actionCreators';
 
@@ -27,6 +27,8 @@ class NameValueUnitsRowDependentVariable extends React.Component {
     onSet() {
 //        console.log('In NameValueUnitsRowDependentVariable.onSet');
         this.props.saveOutputSymbolConstraints(this.props.element.name);
+        this.props.resetSymbolFlag(this.props.element.name, MIN, FUNCTION);
+        this.props.resetSymbolFlag(this.props.element.name, MAX, FUNCTION);
         this.props.setSymbolFlag(this.props.element.name, MIN, FIXED|CONSTRAINED);
         this.props.setSymbolFlag(this.props.element.name, MAX, FIXED|CONSTRAINED);
         this.props.changeSymbolConstraint(this.props.element.name, MIN, this.props.element.value);

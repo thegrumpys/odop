@@ -4,7 +4,11 @@ export function evaluateConstraintName(symbol_table, flags, value) {
     var result;
     
     if (flags & FUNCTION) {
-        result = symbol_table[value].name;
+        if (symbol_table[value] !== undefined) {
+            result = symbol_table[value].name;
+        } else {
+            result = "undefined";
+        }
     } else {
         result = value.toString(); // Convert number to string
     }
@@ -17,7 +21,11 @@ export function evaluateConstraintValue(symbol_table, flags, value) {
     var result;
     
     if (flags & FUNCTION) {
-        result = symbol_table[value].value;
+        if (symbol_table[value] !== undefined) {
+            result = symbol_table[value].value;
+        } else {
+            result = undefined;
+        }
     } else {
         result = value;
     }

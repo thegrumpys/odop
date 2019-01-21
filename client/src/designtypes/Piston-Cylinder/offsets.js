@@ -1,12 +1,10 @@
-// Independent Variables (input-only)
+// Variables
 export const PRESSURE = 0;
 export const RADIUS = 1;
 export const THICKNESS = 2;
-
-// Dependent Variables (input-output)
-export const FORCE = 0;
-export const AREA = 1;
-export const STRESS = 2;
+export const FORCE = 3;
+export const AREA = 4;
+export const STRESS = 5;
 
 // System Controls (Preferences)
 export const ioopt = 0;

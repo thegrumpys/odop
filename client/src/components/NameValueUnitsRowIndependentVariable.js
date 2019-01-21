@@ -1,8 +1,9 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED } from '../store/actionTypes';
-import { changeSymbolValue, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
+import { MIN, MAX, FIXED, CONSTRAINED, FUNCTION } from '../store/actionTypes';
+import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
+    saveOutputSymbolConstraints, restoreOutputSymbolConstraints } from '../store/actionCreators';
 
 class NameValueUnitsRowIndependentVariable extends React.Component {
     
@@ -46,14 +47,18 @@ class NameValueUnitsRowIndependentVariable extends React.Component {
     
     onSet() {
 //        console.log('In NameValueUnitsRowIndependentVariable.onSet');
+        this.props.saveOutputSymbolConstraints(this.props.element.name);
+        this.props.resetSymbolFlag(this.props.element.name, MIN, CONSTRAINED|FUNCTION);
+        this.props.resetSymbolFlag(this.props.element.name, MAX, CONSTRAINED|FUNCTION);
         this.props.setSymbolFlag(this.props.element.name, MIN, FIXED);
         this.props.setSymbolFlag(this.props.element.name, MAX, FIXED);
+        this.props.changeSymbolConstraint(this.props.element.name, MIN, undefined);
+        this.props.changeSymbolConstraint(this.props.element.name, MAX, undefined);
     }
     
     onReset() {
 //        console.log('In NameValueUnitsRowIndependentVariable.onReset');
-        this.props.resetSymbolFlag(this.props.element.name, MIN, FIXED);
-        this.props.resetSymbolFlag(this.props.element.name, MAX, FIXED);
+        this.props.restoreOutputSymbolConstraints(this.props.element.name);
     }
     
     render() {
@@ -101,6 +106,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     changeSymbolValue: changeSymbolValue,
+    changeSymbolConstraint: changeSymbolConstraint,
+    saveOutputSymbolConstraints: saveOutputSymbolConstraints,
+    restoreOutputSymbolConstraints: restoreOutputSymbolConstraints,
     setSymbolFlag: setSymbolFlag,
     resetSymbolFlag: resetSymbolFlag
 };

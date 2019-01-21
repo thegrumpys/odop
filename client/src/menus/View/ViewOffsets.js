@@ -35,10 +35,8 @@ class ViewOffsets extends React.Component {
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : Offsets </ModalHeader>
                     <ModalBody>
                         <pre>
-                        {'// Independent Variables (input-only)\n'}
-                        {this.props.symbol_table.map((element) => {return element.input ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n' : ''})}
-                        {'\n// Dependent Variables (input-output)\n'}
-                        {this.props.symbol_table.map((element) => {return !element.input ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ix++) + ';\n' : ''})}
+                        {'// Variables\n'}
+                        {this.props.symbol_table.map((element) => {return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n'})}
                         {'\n// System Controls (Preferences)\n'}
                         {Object.keys(this.props.system_controls).map((element) => { return 'export const ' + element.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (isc++) + ';\n'})}
                         {'\n// Labels (Properties)\n'}

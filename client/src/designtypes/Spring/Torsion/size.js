@@ -10,8 +10,8 @@ export function getSizeTypes() {
     return result;
 }
 
-export function getSizeEntries(type, p, x) {
-//    console.log('In getSizeEntries type=',type,' p=',p,' x=',x);
+export function getSizeEntries(type, st) {
+//    console.log('In getSizeEntries type=',type,' st=',st);
     var size_name, size_table, entry;
     var wire_dia, od_free;
     var size0, size1, size2;
@@ -20,10 +20,10 @@ export function getSizeEntries(type, p, x) {
     case "Wire_Dia":
         // Find size name, load size table, and get wire diameter value
         var m_tab = require('../mat_ips.json');
-        var i = x[o.Material_Type];
+        var i = st[o.Material_Type].value;
         size_name = m_tab[i][mo.siznam];
         size_table = require('../'+size_name+'.json'); // Dynamically load table
-        wire_dia = p[o.Wire_Dia];
+        wire_dia = st[o.Wire_Dia].value;
 //        console.log('In getSizeEntries size_name=',size_name);
 //        console.log('In getSizeEntries size_table=',size_table);
 //        console.log('In getSizeEntries wire_dia=',wire_dia);
@@ -51,7 +51,7 @@ export function getSizeEntries(type, p, x) {
     case "OD_Free":
         size_name = 'sizes_od_free';
         size_table = require('../'+size_name+'.json'); // Dynamically load table
-        od_free = p[o.OD_Free];
+        od_free = st[o.OD_Free].value;
 //        console.log('In getSizeEntries size_name=',size_name);
 //        console.log('In getSizeEntries size_table=',size_table);
 //        console.log('In getSizeEntries od_free=',od_free);
