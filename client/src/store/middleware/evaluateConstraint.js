@@ -13,7 +13,7 @@ export function evaluateConstraintName(symbol_table, flags, value) {
         result = value.toString(); // Convert number to string
     }
     
-    console.log('In evaluateConstraintName',' symbol_table=',symbol_table,' flags=',flags,' value=',value,' result=',result);
+//    console.log('In evaluateConstraintName',' symbol_table=',symbol_table,' flags=',flags,' value=',value,' result=',result);
     return result;
 }
 
@@ -30,6 +30,6 @@ export function evaluateConstraintValue(symbol_table, flags, value) {
         result = value;
     }
     
-    console.log('In evaluateConstraintValue',' symbol_table=',symbol_table,' flags=',flags,' value=',value,' result=',result);
+//    console.log('In evaluateConstraintValue',' symbol_table=',symbol_table,' flags=',flags,' value=',value,' result=',result);
     return result;
 }

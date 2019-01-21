@@ -2,8 +2,8 @@ import * as o from './offsets';
 import * as mo from '../mat_ips_offsets';
 import * as eto from './endtypes_offsets';
 
-export function init(st) {
-//    console.log('Entering init st=',st);
+export function init(p, x) {
+//    console.log('In init p=',p);
  var i, j;
  const ten3 = 1000.0;
  const e_end_num = 5;
@@ -16,20 +16,20 @@ export function init(st) {
  var et_tab = require('./endtypes.json');
 //    console.log("et_tab=", et_tab);
 
-     st[o.Spring_Type].value = "Extension";
-     if (st[o.Prop_Calc_Method].value === 2 && st[o.PC_Tensile_Endur].value === unused) st[o.Prop_Calc_Method].value = 1;
+     x[o.Spring_Type] = "Extension";
+     if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Tensile_Endur] === unused) x[o.Prop_Calc_Method] = 1;
  
- switch(st[o.Prop_Calc_Method].value){
+ switch(x[o.Prop_Calc_Method]){
  default:
  case 1:      // Prop_Calc_Method = 1 - Use values from material table
 //     console.log("case 1 - Use values from material table");
  /*   Refer to SETIDX.PLI, READMAT.PLI and TAB2D.PLI    */
  //
-    i = st[o.Material_Type].value;
-//    st[o.Material_Index].value = i;
-//    console.log("Material_Index = st[o.Material_Type].value =", st[o.Material_Type].value);
-//    console.log("Material_Index = st[o.Material_Index].value =", st[o.Material_Index].value);
-    j = st[o.End_Type].value;
+    i = x[o.Material_Type];
+//    x[o.Material_Index] = i;
+//    console.log("Material_Index = x[o.Material_Type] =", x[o.Material_Type]);
+//    console.log("Material_Index = x[o.Material_Index] =", x[o.Material_Index]);
+    j = x[o.End_Type];
 
      /*  taken from READMAT.PLI
       *  Initial manipulations of material array
@@ -47,76 +47,76 @@ export function init(st) {
 //
 //    material_type    = m_tab(material_index).matnam;
 //    astm_fed_spec    = m_tab(i).astm_fs;
-    st[o.ASTM_Fed_Spec].value = m_tab[i][mo.astm_fs] + '/' + m_tab[i][mo.fedspec];
+    x[o.ASTM_Fed_Spec] = m_tab[i][mo.astm_fs] + '/' + m_tab[i][mo.fedspec];
 //    if m_tab(i).kh < 1.0 then process = 'HOT_WOUND';
     if (m_tab[i][mo.kh] < 1.0) {
-        st[o.Process].value = "Hot_Wound";
+        x[o.Process] = "Hot_Wound";
     }
 //             else process = 'COLD_COILED';
     else {
-        st[o.Process].value = "Cold_Coiled";
+        x[o.Process] = "Cold_Coiled";
     }
 //    density      = m_tab(i).dens;
-    st[o.Density].value      = m_tab[i][mo.dens];
+    x[o.Density]      = m_tab[i][mo.dens];
 //    torsion_modulus  = m_tab(i).gg;
-    st[o.Torsion_Modulus].value = ten3 * m_tab[i][mo.gg];
+    x[o.Torsion_Modulus] = ten3 * m_tab[i][mo.gg];
 //
 //    hot_factor_kh    = m_tab(i).kh;
-    st[o.Hot_Factor_Kh].value = m_tab[i][mo.kh];
+    x[o.Hot_Factor_Kh] = m_tab[i][mo.kh];
 //    tensile_010      = m_tab(i).t010;
-    st[o.tensile_010].value   = ten3 * m_tab[i][mo.t010];
+    x[o.tensile_010]   = ten3 * m_tab[i][mo.t010];
 //    tensile_400      = m_tab(i).t400;
     tensile_400        = ten3 * m_tab[i][mo.t400];
     
-    switch(st[o.Life_Category].value){
+    switch(x[o.Life_Category]){
         default:
         case 1:
         case 5:
-            st[o.PC_Tensile_Endur].value = m_tab[i][mo.pte1];
-            st[o.PC_Tensile_Bend].value  = m_tab[i][mo.ptb1];
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte1];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb1];
         break;
         case 2:
-            st[o.PC_Tensile_Endur].value = m_tab[i][mo.pte2];
-            st[o.PC_Tensile_Bend].value  = m_tab[i][mo.ptb2];
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte2];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb2];
         break;
         case 3:
-            st[o.PC_Tensile_Endur].value = m_tab[i][mo.pte3];
-            st[o.PC_Tensile_Bend].value  = m_tab[i][mo.ptb3];
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte3];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb3];
         break;
         case 4:
-            st[o.PC_Tensile_Endur].value = m_tab[i][mo.pte4];
-            st[o.PC_Tensile_Bend].value  = m_tab[i][mo.ptb4];
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte4];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb4];
         break;
         case 6:
-            st[o.PC_Tensile_Endur].value = m_tab[i][mo.pte6];
-            st[o.PC_Tensile_Bend].value  = m_tab[i][mo.ptb6];
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte6];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb6];
         break;
         case 7:
-            st[o.PC_Tensile_Endur].value = m_tab[i][mo.pte7];
-            st[o.PC_Tensile_Bend].value  = m_tab[i][mo.ptb7];
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte7];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb7];
         break;
         case 8:
-            st[o.PC_Tensile_Endur].value = m_tab[i][mo.pte8];
-            st[o.PC_Tensile_Bend].value  = m_tab[i][mo.ptb8];
+            x[o.PC_Tensile_Endur] = m_tab[i][mo.pte8];
+            x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb8];
     }
     
 //    pc_tensile_stat  = m_tab(i).fy;
-    st[o.PC_Tensile_Stat].value  = m_tab[i][mo.pte1];
+    x[o.PC_Tensile_Stat]  = m_tab[i][mo.pte1];
 //    pc_tensile_bend  = m_tab(i).ptb(life_catagory);
 //
 //    wire_dia=p(2);
 //    const_term=log10(tbase010);
-    st[o.const_term].value = Math.log10(st[o.tbase010].value);
+    x[o.const_term] = Math.log10(x[o.tbase010]);
 //    slope_term=(tensile_400 - tensile_010) /
 //           (log10(tbase400) - const_term);
-    st[o.slope_term].value = (tensile_400 - st[o.tensile_010].value) / (Math.log10(st[o.tbase400].value) - st[o.const_term].value);
+    x[o.slope_term] = (tensile_400 - x[o.tensile_010]) / (Math.log10(x[o.tbase400]) - x[o.const_term]);
 //    tensile=slope_term*(log10(wire_dia)-const_term) + tensile_010;
-    st[o.Tensile].value = st[o.slope_term].value * (Math.log10(st[o.Wire_Dia].value) - st[o.const_term].value) + st[o.tensile_010].value;
+    x[o.Tensile] = x[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - x[o.const_term]) + x[o.tensile_010];
 //    stress_lim_endur=tensile*pc_tensile_endur/100.0;
-    st[o.Stress_Lim_Endur].value = st[o.Tensile].value * st[o.PC_Tensile_Endur].value / 100.0;
+    x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0;
 //    stress_lim_stat =tensile*pc_tensile_stat /100.0;
-    st[o.Stress_Lim_Stat].value  = st[o.Tensile].value * st[o.PC_Tensile_Stat].value  / 100.0;
-    st[o.Stress_Lim_Bend].value  = st[o.Tensile].value * st[o.PC_Tensile_Bend].value  / 100.0;
+    x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0;
+    x[o.Stress_Lim_Bend]  = x[o.Tensile] * x[o.PC_Tensile_Bend]  / 100.0;
     
       /*
        *  copy from end type table to Calculation Inputs  
@@ -125,37 +125,37 @@ export function init(st) {
 //
 //end_type        = end_name(end_type_index);
 //inactive_coils  = inact_coil_tbl(end_type_index);
-    st[o.Inactive_Coils].value = et_tab[j][eto.inactive_coils];
+    x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
 
-//if end_type_index > c_end_num then
+    //if end_type_index > c_end_num then
 //  hook_deflect_all=hda_tbl(end_type_index-c_end_num);
 //else
 //  hook_deflect_all=0.0;
-    if (st[o.End_Type].value <= e_end_num) {
-        st[o.Hook_Deflect_All].value = et_tab[j][eto.HookDefAll];
+    if (x[o.End_Type] <= e_end_num) {
+        x[o.Hook_Deflect_All] = et_tab[j][eto.HookDefAll];
     }
     
 // End_ID, Extended_End_ID, L_End and L_Extended_End are also calculated in eqnset
-    if (st[o.End_Type].value <= e_end_num) {
-        st[o.End_ID].value = st[o.ID_Free].value;
-        st[o.Extended_End_ID].value = st[o.ID_Free].value;
-        st[o.L_End].value = st[o.ID_Free].value * et_tab[j][eto.End_Dia];
-        st[o.L_Extended_End].value = st[o.L_End].value;
-//        console.log('init: st[o.End_Type].value = ', st[o.End_Type].value);
-//        console.log('    st[o.End_ID].value = ', st[o.End_ID].value);
-//        console.log('    st[o.Extended_End_ID].value = ', st[o.Extended_End_ID].value);
-//        console.log('    st[o.L_End].value = ', st[o.L_End].value);
-//        console.log('    st[o.L_Extended_End].value = ', st[o.L_Extended_End].value);
+    if (x[o.End_Type] <= e_end_num) {
+        x[o.End_ID] = x[o.ID_Free];
+        x[o.Extended_End_ID] = x[o.ID_Free];
+        x[o.L_End] = x[o.ID_Free] * et_tab[j][eto.End_Dia];
+        x[o.L_Extended_End] = x[o.L_End];
+//        console.log('init: x[o.End_Type] = ', x[o.End_Type]);
+//        console.log('    x[o.End_ID] = ', x[o.End_ID]);
+//        console.log('    x[o.Extended_End_ID] = ', x[o.Extended_End_ID]);
+//        console.log('    x[o.L_End] = ', x[o.L_End]);
+//        console.log('    x[o.L_Extended_End] = ', x[o.L_Extended_End]);
     }
     
-//    console.log('init: st[o.SI_Range].value = ', st[o.SI_Range].value);
-    if (st[o.SI_Range].value <= 2 ) {
-        st[o.SI_Lo_Factor].value = m_tab[i][mo.silf];
-        if (st[o.SI_Range].value === 2) {
-            st[o.SI_Hi_Factor].value = m_tab[i][mo.sisr];
+//    console.log('init: x[o.SI_Range] = ', x[o.SI_Range]);
+    if (x[o.SI_Range] <= 2 ) {
+        x[o.SI_Lo_Factor] = m_tab[i][mo.silf];
+        if (x[o.SI_Range] === 2) {
+            x[o.SI_Hi_Factor] = m_tab[i][mo.sisr];
         }
         else {
-            st[o.SI_Hi_Factor].value = m_tab[i][mo.sihf];
+            x[o.SI_Hi_Factor] = m_tab[i][mo.sihf];
         }
     }
     
@@ -163,21 +163,21 @@ export function init(st) {
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
 //     console.log("case 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur");
-     st[o.ASTM_Fed_Spec].value = unused;
-     st[o.Material_File].value = unused;
-     st[o.Process].value = unused;
+     x[o.ASTM_Fed_Spec] = unused;
+     x[o.Material_File] = unused;
+     x[o.Process] = unused;
      break;
 
  case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
 //     console.log("case 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur");
-     st[o.ASTM_Fed_Spec].value = unused;
-     st[o.Material_File].value = unused;
-     st[o.Process].value = unused;
-     st[o.PC_Tensile_Endur].value = unused;
-     st[o.PC_Tensile_Stat].value  = unused;
-     st[o.PC_Tensile_Bend].value  = unused;
+     x[o.ASTM_Fed_Spec] = unused;
+     x[o.Material_File] = unused;
+     x[o.Process] = unused;
+     x[o.PC_Tensile_Endur] = unused;
+     x[o.PC_Tensile_Stat]  = unused;
+     x[o.PC_Tensile_Bend]  = unused;
  }
-//    console.log('Exiting init st=',st);
-    return st;
+//    console.log('In init p=',p,' x=',x);
+    return x;
 
 }

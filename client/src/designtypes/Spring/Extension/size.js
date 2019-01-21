@@ -1,4 +1,4 @@
-import * as o from './offsets';
+import * as o from './symbol_table_offsets';
 import * as mo from '../mat_ips_offsets';
 
 export function getSizeTypes() {

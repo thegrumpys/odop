@@ -2,10 +2,10 @@ import React from 'react';
 import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 
-class ViewOffsets extends React.Component {
+class ViewSymbolTableOffsets extends React.Component {
 
     constructor(props) {
-//        console.log('In ViewOffsets.constructor');
+//        console.log('In ViewSymbolTableOffsets.constructor');
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {
@@ -14,16 +14,15 @@ class ViewOffsets extends React.Component {
     }
     
     toggle() {
-//        console.log('In ViewOffsets.toggle');
+//        console.log('In ViewSymbolTableOffsets.toggle');
         this.setState({
             modal: !this.state.modal
         });
     }
 
     render() {
-//        console.log('In ViewOffsets.render');
-        var ip = 0;
-        var ix = 0;
+//        console.log('In ViewSymbolTableOffsets.render');
+        var ist = 0;
         var isc = 0;
         var il = 0;
         return (
@@ -35,10 +34,8 @@ class ViewOffsets extends React.Component {
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : Offsets </ModalHeader>
                     <ModalBody>
                         <pre>
-                        {'// Independent Variables (input-only)\n'}
-                        {this.props.symbol_table.map((element) => {return element.input ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n' : ''})}
-                        {'\n// Dependent Variables (input-output)\n'}
-                        {this.props.symbol_table.map((element) => {return !element.input ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ix++) + ';\n' : ''})}
+                        {'// Variables\n'}
+                        {this.props.symbol_table.map((element) => {return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ist++) + ';\n'})}
                         {'\n// System Controls (Preferences)\n'}
                         {Object.keys(this.props.system_controls).map((element) => { return 'export const ' + element.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (isc++) + ';\n'})}
                         {'\n// Labels (Properties)\n'}
@@ -60,4 +57,4 @@ const mapStateToProps = state => ({
     labels: state.labels
 });
 
-export default connect(mapStateToProps)(ViewOffsets);
+export default connect(mapStateToProps)(ViewSymbolTableOffsets);

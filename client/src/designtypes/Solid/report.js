@@ -1,5 +1,4 @@
 import React from 'react';
-//import * as o from './offsets';
 
 export function getReportNames() {
     return []; // No report names

@@ -69,12 +69,12 @@ export function updateViolationsAndObjectiveValue(store, merit) {
             } else {
                 if (element.lmin & CONSTRAINED ) {
                     vmin = (-element.value + evaluateConstraintValue(design.symbol_table, element.lmin, element.cmin)) / element.smin;
-                    console.log('name=',element.name,' vmin=',vmin,' value=',element.value,' cmin=',evaluateConstraintValue(design.symbol_table, element.lmin, element.cmin),' smin=',element.smin);
+//                    console.log('name=',element.name,' vmin=',vmin,' value=',element.value,' cmin=',evaluateConstraintValue(design.symbol_table, element.lmin, element.cmin),' smin=',element.smin);
                     store.dispatch(changeSymbolViolation(element.name, MIN, vmin))
                 }
                 if (element.lmax & CONSTRAINED ) {
                     vmax = (element.value - evaluateConstraintValue(design.symbol_table, element.lmax, element.cmax)) / element.smax;
-                    console.log('name=',element.name,' vmax=',vmax,' value=',element.value,' cmax=',evaluateConstraintValue(design.symbol_table, element.lmax, element.cmax),' smax=',element.smax);
+//                    console.log('name=',element.name,' vmax=',vmax,' value=',element.value,' cmax=',evaluateConstraintValue(design.symbol_table, element.lmax, element.cmax),' smax=',element.smax);
                     store.dispatch(changeSymbolViolation(element.name, MAX, vmax))
                 }
                 if (vmin > 0.0) {

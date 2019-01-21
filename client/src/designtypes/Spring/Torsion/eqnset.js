@@ -1,8 +1,8 @@
 import * as o from './offsets';
 import * as mo from '../mat_ips_offsets';
-export function eqnset(st) {        /*    Torsion  Spring  */
+export function eqnset(p, x) {        /*    Torsion  Spring  */
     
-//    console.log('Entering eqnset st=',st);
+//    console.log('Entering eqnset p=',p);
     
     const zero = 0.0;
     const Deg_Per_Turn = 360.0;
@@ -15,84 +15,84 @@ export function eqnset(st) {        /*    Torsion  Spring  */
     var ctp1;
     
     /*  *******  DESIGN EQUATIONS  *******                  */
-    st[o.Mean_Dia].value = st[o.OD_Free].value - st[o.Wire_Dia].value;
+    x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
 
-    st[o.Spring_Index].value = st[o.Mean_Dia].value / st[o.Wire_Dia].value;
+    x[o.Spring_Index] = x[o.Mean_Dia] / p[o.Wire_Dia];
 
-    if (st[o.Heat_Treat].value === 2){     //  Stress Relieve
-        kb = (4.0 * st[o.Spring_Index].value - 1.0) / (4.0 * st[o.Spring_Index].value - 4.0);
+    if (x[o.Heat_Treat] === 2){     //  Stress Relieve
+        kb = (4.0 * x[o.Spring_Index] - 1.0) / (4.0 * x[o.Spring_Index] - 4.0);
     }
     else {                          //  No Stress Relieve
         kb = 1.0;
     }
-//    console.log("st[o.Heat_Treat].value =", st[o.Heat_Treat].value);
+//    console.log("x[o.Heat_Treat] =", x[o.Heat_Treat]);
 //    console.log("kb = ", kb);
 
 //  end_deflect_all=(l_end_1+l_end_2)/(3.0*pi*mean_dia);
-    st[o.End_Deflect_All].value = (st[o.L_End_1].value + st[o.L_End_2].value) / (3.0 * Math.PI * st[o.Mean_Dia].value);
+    x[o.End_Deflect_All] = (x[o.L_End_1] + x[o.L_End_2]) / (3.0 * Math.PI * x[o.Mean_Dia]);
 
-    st[o.Coils_A].value = st[o.Coils_T].value + st[o.End_Deflect_All].value;
+    x[o.Coils_A] = p[o.Coils_T] + x[o.End_Deflect_All];
 
-    temp = st[o.Wire_Dia].value * st[o.Wire_Dia].value;
-    st[o.Rate].value = st[o.Hot_Factor_Kh].value * st[o.Elastic_Modulus].value * temp * temp /
-           (10.8 * st[o.Mean_Dia].value * st[o.Coils_A].value);
-//    console.log('st=',st);
-//    console.log('st[o.Spring_Index].value=',st[o.Spring_Index].value);
-//    console.log('st[o.Hot_Factor_Kh].value=',st[o.Hot_Factor_Kh].value);
-//    console.log('st[o.Elastic_Modulus].value=',st[o.Elastic_Modulus].value);
-//    console.log('st[o.Mean_Dia].value=',st[o.Mean_Dia].value);
-//    console.log('st[o.Coils_A].value=',st[o.Coils_A].value);
-//    console.log('st[o.Rate].value=',st[o.Rate].value);
+    temp = p[o.Wire_Dia] * p[o.Wire_Dia];
+    x[o.Rate] = x[o.Hot_Factor_Kh] * x[o.Elastic_Modulus] * temp * temp /
+           (10.8 * x[o.Mean_Dia] * x[o.Coils_A]);
+//    console.log('x=',x);
+//    console.log('x[o.Spring_Index]=',x[o.Spring_Index]);
+//    console.log('x[o.Hot_Factor_Kh]=',x[o.Hot_Factor_Kh]);
+//    console.log('x[o.Elastic_Modulus]=',x[o.Elastic_Modulus]);
+//    console.log('x[o.Mean_Dia]=',x[o.Mean_Dia]);
+//    console.log('x[o.Coils_A]=',x[o.Coils_A]);
+//    console.log('x[o.Rate]=',x[o.Rate]);
 
-    st[o.Rate].value = st[o.Rate].value / Deg_Per_Turn;
+    x[o.Rate] = x[o.Rate] / Deg_Per_Turn;
     
-    st[o.Deflect_1].value = st[o.M_1].value / st[o.Rate].value;
-    st[o.Deflect_2].value = st[o.M_2].value / st[o.Rate].value;
+    x[o.Deflect_1] = p[o.M_1] / x[o.Rate];
+    x[o.Deflect_2] = p[o.M_2] / x[o.Rate];
 
-    st[o.ID_Free].value = st[o.Mean_Dia].value - st[o.Wire_Dia].value;
+    x[o.ID_Free] = x[o.Mean_Dia] - p[o.Wire_Dia];
 
-    ctp1 = st[o.Coils_T].value + 1.0;
-    st[o.L_Body].value = st[o.Wire_Dia].value * ctp1 + st[o.Coil_Spacing].value * (st[o.Coils_T].value - 1.0);
+    ctp1 = p[o.Coils_T] + 1.0;
+    x[o.L_Body] = p[o.Wire_Dia] * ctp1 + p[o.Coil_Spacing] * (p[o.Coils_T] - 1.0);
 //      l_1 = max(l_body, wire_dia*(ctp1+deflect_1/deg_per_turn) );
-    st[o.L_1].value = Math.max( st[o.L_Body].value, st[o.Wire_Dia].value * (ctp1 + st[o.Deflect_1].value / Deg_Per_Turn) );
-    st[o.L_2].value = Math.max( st[o.L_Body].value, st[o.Wire_Dia].value * (ctp1 + st[o.Deflect_2].value / Deg_Per_Turn) );
+    x[o.L_1] = Math.max( x[o.L_Body], p[o.Wire_Dia] * (ctp1 + x[o.Deflect_1] / Deg_Per_Turn) );
+    x[o.L_2] = Math.max( x[o.L_Body], p[o.Wire_Dia] * (ctp1 + x[o.Deflect_2] / Deg_Per_Turn) );
 
-    st[o.Stroke].value = st[o.Deflect_2].value - st[o.Deflect_1].value;
+    x[o.Stroke] = x[o.Deflect_2] - x[o.Deflect_1];
 
-    s_f = 32.0 * kb / (Math.PI * st[o.Wire_Dia].value * st[o.Wire_Dia].value * st[o.Wire_Dia].value);
+      s_f = 32.0 * kb / (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] * p[o.Wire_Dia]);
 
-    st[o.Stress_1].value = s_f * st[o.M_1].value;
-    st[o.Stress_2].value = s_f * st[o.M_2].value;
+    x[o.Stress_1] = s_f * p[o.M_1];
+    x[o.Stress_2] = s_f * p[o.M_2];
 
 //    if arm_2 ^= zero then force_arm_2=m_2/arm_2;
 //    else force_arm_2=zero;
-    if (st[o.Arm_2].value !== zero) {
-        st[o.Force_Arm_2].value = st[o.M_2].value / st[o.Arm_2].value;
+    if (x[o.Arm_2] !== zero) {
+        x[o.Force_Arm_2] = p[o.M_2] / x[o.Arm_2];
     }
     else {
-        st[o.Force_Arm_2].value = zero;
+        x[o.Force_Arm_2] = zero;
     }
     
 //    end_angle_free=deg_per_turn*(coils_t-trunc(coils_t));
-    st[o.End_Angle_Free].value = Deg_Per_Turn * (st[o.Coils_T].value - Math.trunc(st[o.Coils_T].value));
+    x[o.End_Angle_Free] = Deg_Per_Turn * (p[o.Coils_T] - Math.trunc(p[o.Coils_T]));
 
 //    stress_end = 0.0;         /*  stresses in ends;       */
-    st[o.Stress_End].value = zero;
+    x[o.Stress_End] = zero;
 
-    if (st[o.Prop_Calc_Method].value === 1) {
-        st[o.Tensile].value = st[o.slope_term].value * (Math.log10(st[o.Wire_Dia].value) - st[o.const_term].value) + st[o.tensile_010].value;
-//        console.log("eqnset Tensile = ", st[o.Tensile].value);
-    }
-    if (st[o.Prop_Calc_Method].value <= 2) {
-        st[o.Stress_Lim_Bnd_Endur].value = st[o.Tensile].value * st[o.PC_Ten_Bnd_Endur].value / 100.0; 
-        st[o.Stress_Lim_Bnd_Stat].value  = st[o.Tensile].value * st[o.PC_Ten_Bnd_Stat].value  / 100.0; 
-    }
+      if (x[o.Prop_Calc_Method] === 1) {
+          x[o.Tensile] = x[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - x[o.const_term]) + x[o.tensile_010];
+//          console.log("eqnset Tensile = ", x[o.Tensile]);
+      }
+      if (x[o.Prop_Calc_Method] <= 2) {
+          x[o.Stress_Lim_Bnd_Endur] = x[o.Tensile] * x[o.PC_Ten_Bnd_Endur] / 100.0; 
+          x[o.Stress_Lim_Bnd_Stat]  = x[o.Tensile] * x[o.PC_Ten_Bnd_Stat]  / 100.0; 
+      }
 
-    if (st[o.Stress_2].value > zero) {
-        st[o.FS_2].value = st[o.Stress_Lim_Bnd_Stat].value / st[o.Stress_2].value; 
-//        console.log("eqnset FS_2 = ", st[o.FS_2].value);
+    if (x[o.Stress_2] > zero) {
+        x[o.FS_2] = x[o.Stress_Lim_Bnd_Stat] / x[o.Stress_2]; 
+//        console.log("eqnset FS_2 = ", x[o.FS_2]);
     }
-    else st[o.FS_2].value = 1.0;
+       else x[o.FS_2] = 1.0;
 
         /*
             Soderberg triangle approach to mixed steady and
@@ -103,34 +103,34 @@ export function eqnset(st) {        /*    Torsion  Spring  */
             may be overly conservative by a factor of kb or
             more.
         */
-    stress_avg = (st[o.Stress_1].value + st[o.Stress_2].value) / 2.0;
-    stress_rng = (st[o.Stress_2].value - st[o.Stress_1].value) / 2.0;
-    se2 = st[o.Stress_Lim_Bnd_Endur].value / 2.0; 
-    st[o.FS_CycleLife].value =  st[o.Stress_Lim_Bnd_Stat].value / 
-        (kb * stress_rng * (st[o.Stress_Lim_Bnd_Stat].value - se2) / se2 + stress_avg); 
+      stress_avg = (x[o.Stress_1] + x[o.Stress_2]) / 2.0;
+      stress_rng = (x[o.Stress_2] - x[o.Stress_1]) / 2.0;
+      se2 = x[o.Stress_Lim_Bnd_Endur] / 2.0; 
+    x[o.FS_CycleLife] =  x[o.Stress_Lim_Bnd_Stat] / 
+         (kb * stress_rng * (x[o.Stress_Lim_Bnd_Stat] - se2) / se2 + stress_avg); 
 
              /*  modified Goodman cycle life calculation  */
-    if (st[o.Prop_Calc_Method].value === 1 && st[o.Material_Type].value !== 0) {
+    if (x[o.Prop_Calc_Method] === 1 && x[o.Material_Type] !== 0) {
 //        for torsion springs: spring type (st_code) = 3 
 //        cycle_life = cl_calc(material_index,life_catagory,3,tensile,stress_1,stress_2);
-        st[o.Cycle_Life].value = cl_calc(st[o.Material_Type].value, st[o.Life_Category].value, 3, st[o.Tensile].value, st[o.Stress_1].value, st[o.Stress_2].value);
+        x[o.Cycle_Life] = cl_calc(x[o.Material_Type], x[o.Life_Category], 3, x[o.Tensile], x[o.Stress_1], x[o.Stress_2]);
     }
-    else st[o.Cycle_Life].value = zero;   // Setting to NaN causes problems with File : Open.  See issue #232
+       else x[o.Cycle_Life] = zero;   // Setting to NaN causes problems with File : Open.  See issue #232
 
                            /*  crude approximation  ... better available on web  */
-    st[o.Weight].value = st[o.Density].value * (Math.PI * st[o.Wire_Dia].value * st[o.Wire_Dia].value / 4.0) * 
-        (Math.PI * st[o.Mean_Dia].value * st[o.Coils_T].value + st[o.Xlen_1].value + st[o.Xlen_2].value);
+    x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * 
+        (Math.PI * x[o.Mean_Dia] * p[o.Coils_T] + x[o.Xlen_1] + x[o.Xlen_2]);
     
-//    console.log('Exiting eqnset st=',st);
-    return st;
+//    console.log('Exiting eqnset p=',p,' x=',x);
+    return x;
     
 function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 //    console.log("In cl_calc:");
-//    console.log("Material_Index = st[o.Material_Type].value = mat_idx =", mat_idx);
-//    console.log("life_category =  st[o.Life_Category].value = cl_idx  =", cl_idx);
-//    console.log("st_code =", st_code, " st[o.Tensile].value = tensile =", tensile);
-//    console.log("Stress1 = st[o.Stress_1].value =", stress_1);
-//    console.log("Stress2 = st[o.Stress_2].value =", stress_2);
+//    console.log("Material_Index = x[o.Material_Type] = mat_idx =", mat_idx);
+//    console.log("life_category =  x[o.Life_Category] = cl_idx  =", cl_idx);
+//    console.log("st_code =", st_code, " x[o.Tensile] = tensile =", tensile);
+//    console.log("Stress1 = x[o.Stress_1] =", stress_1);
+//    console.log("Stress2 = x[o.Stress_2] =", stress_2);
     
     var i;
     var j;

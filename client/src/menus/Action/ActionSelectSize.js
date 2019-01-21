@@ -30,20 +30,12 @@ class ActionSelectSize extends React.Component {
         var type;
         if (types.length > 0)
             type = types[0]; // Default to first type
-        // Loop to create p and x from symbol_table
-        var p = [];
+        // Loop to create st from symbol_table
+        var st = [];
         this.props.symbol_table.forEach((element) => {
-            if (element.input) {
-                p.push(element.value);
-            }
+            st.push(element);
         });
-        var x = [];
-        this.props.symbol_table.forEach((element) => {
-            if (!element.input) {
-                x.push(element.value);
-            }
-        });
-        var sizes = getSizeEntries(type, p, x);
+        var sizes = getSizeEntries(type, st);
         var size;
         if (sizes.length === 1)
             size = sizes[0]; // Default to first size
@@ -66,20 +58,12 @@ class ActionSelectSize extends React.Component {
         var type;
         if (types.length > 0)
             type = types[0]; // Default to first type
-        // Loop to create p and x from symbol_table
-        var p = [];
+        // Loop to create st from symbol_table
+        var st = [];
         this.props.symbol_table.forEach((element) => {
-            if (element.input) {
-                p.push(element.value);
-            }
+            st.push(element);
         });
-        var x = [];
-        this.props.symbol_table.forEach((element) => {
-            if (!element.input) {
-                x.push(element.value);
-            }
-        });
-        var sizes = getSizeEntries(type, p, x);
+        var sizes = getSizeEntries(type, st);
         var size;
         if (sizes.length === 1)
             size = sizes[0]; // Default to first size
@@ -101,19 +85,11 @@ class ActionSelectSize extends React.Component {
         var type = event.target.value;
         var { getSizeEntries } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeEntries
         // Loop to create p and x from symbol_table
-        var p = [];
+        var st = [];
         this.props.symbol_table.forEach((element) => {
-            if (element.input) {
-                p.push(element.value);
-            }
+            st.push(element);
         });
-        var x = [];
-        this.props.symbol_table.forEach((element) => {
-            if (!element.input) {
-                x.push(element.value);
-            }
-        });
-        var sizes = getSizeEntries(type, p, x);
+        var sizes = getSizeEntries(type, st);
         var size;
         if (sizes.length === 1)
             size = sizes[0]; // Default to first size

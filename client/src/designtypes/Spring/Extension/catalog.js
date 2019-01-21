@@ -1,6 +1,6 @@
 import { init } from './init';
 import { eqnset } from './eqnset';
-import * as o from './offsets';
+import * as o from './symbol_table_offsets';
 import m_tab from '../mat_ips';
 import * as mo from '../mat_ips_offsets';
 import et_tab from './endtypes.json';

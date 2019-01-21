@@ -1,12 +1,12 @@
 import * as o from './offsets';
-export function eqnset(st) {
-    st[o.Volume].value = st[o.Length].value * st[o.Width].value * st[o.Height].value;
-    st[o.Surface_Area].value = 2.0 * st[o.Length].value * st[o.Width].value + 2.0 * st[o.Length].value * st[o.Height].value + 2.0 * st[o.Width].value * st[o.Height].value;
-    st[o.VolToSurfArea].value = st[o.Volume].value / st[o.Surface_Area].value;
-    st[o.Girth].value = 2.0 * st[o.Width].value + 2.0 * st[o.Height].value;
-    st[o.Length_Girth].value = st[o.Length].value + st[o.Girth].value;
-    st[o.Diagonal].value = Math.sqrt(st[o.Length].value * st[o.Length].value + st[o.Width].value * st[o.Width].value + st[o.Height].value * st[o.Height].value);
-    st[o.Weight].value = st[o.Volume].value * st[o.Density].value;
-//    console.log('In eqnset st=',st);
-    return st;
+export function eqnset(p, x) {
+    x[o.Volume] = p[o.Length] * p[o.Width] * p[o.Height];
+    x[o.Surface_Area] = 2.0 * p[o.Length] * p[o.Width] + 2.0 * p[o.Length] * p[o.Height] + 2.0 * p[o.Width] * p[o.Height];
+    x[o.VolToSurfArea] = x[o.Volume] / x[o.Surface_Area];
+    x[o.Girth] = 2.0 * p[o.Width] + 2.0 * p[o.Height];
+    x[o.Length_Girth] = p[o.Length] + x[o.Girth];
+    x[o.Diagonal] = Math.sqrt(p[o.Length] * p[o.Length] + p[o.Width] * p[o.Width] + p[o.Height] * p[o.Height]);
+    x[o.Weight] = x[o.Volume] * p[o.Density];
+//    console.log('In eqnset p=',p,' x=',x);
+    return x;
 }
