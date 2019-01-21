@@ -77,6 +77,21 @@ value of a given variable and its corresponding constraint level.  By
 convention, negative values represent constraint satisfaction, positive
 values represent constraint violation.
 
+**FUNCTION CONSTRAINTS**
+When a constraint level is determined as the value of another Independent Variable,
+Dependent Variable of Calculation Input (as opposed to being a simple constant),
+it is referred to as a "Functionally Determined Constraint Level".
+Such constraint levels can be configured by clicking into the (MIN or MAX)
+constraint value field of eligible variables.
+After clicking, the user will be able to select from a list of variable names available 
+to be used as constraint levels.
+The variables that can be constrained this way and the variables that are eligible
+as choices to be selected as constraints are configured in the design type's
+initialState.   
+
+More specific information is available in the on-line help section covering 
+extension springs.
+
 **FIX**   
 The user can establish (i.e. FIX) the value of any variable, independent or dependent.
 FIXed status is designated by checking the checkbox immediately to the right
