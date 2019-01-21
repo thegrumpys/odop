@@ -100,8 +100,8 @@ function converToResultArray(entry) {
     return [entry_select, entry_table, entry_symbol_values];
 }
 
-export function getCatalogEntries(name, symbol_table_p, symbol_table_x, viol_wt) {
-//    console.log('In getCatalogEntries name=',name,' symbol_table_p=',symbol_table_p,' symbol_table_x=',symbol_table_x,' viol_wt=',viol_wt);
+export function getCatalogEntries(name, st, viol_wt) {
+//    console.log('In getCatalogEntries name=',name,' st=',st,' viol_wt=',viol_wt);
     var catalog, entry;
     var result = [];
     var p, x;
