@@ -5,6 +5,7 @@ import m_tab from '../mat_ips';
 import * as mo from '../mat_ips_offsets';
 import et_tab from './endtypes.json';
 import { CONSTRAINED, FIXED } from '../../../store/actionTypes';
+import { evaluateConstraintValue } from '../../../store/middleware/evaluateConstraint';
 
 export function getCatalogNames() {
     var result = [
@@ -28,10 +29,10 @@ function getObjectiveValue(st, viol_wt) {
             vmin = 0.0;
             vmax = 0.0;
             if (element.lmin & CONSTRAINED ) { // TODO: || element.lmin < FREESTAT) {
-                vmin = (-element.value + element.cmin) / element.smin;
+                vmin = (-element.value + evaluateConstraintValue(st,element.lmin,element.cmin)) / element.smin;
             }
             if (element.lmax & CONSTRAINED ) { // TODO: || element.lmax < FREESTAT) {
-                vmax = (element.value - element.cmax) / element.smax;
+                vmax = ( element.value - evaluateConstraintValue(st,element.lmax,element.cmax)) / element.smax;
             }
             if (vmin > 0.0) {
                 viol_sum = viol_sum + vmin * vmin;
@@ -54,7 +55,7 @@ function getObjectiveValue(st, viol_wt) {
              * This version reduces penalty of large fix violations.
              */
             if (element.lmin & FIXED) {
-                vmin = (-element.value + element.cmin) / element.smin;
+                vmin = (-element.value + evaluateConstraintValue(st,element.lmin,element.cmin)) / element.smin;
                 vmax = -vmin;
                 if (vmin > 1.0) {
                     viol_sum = viol_sum + vmin;
@@ -64,13 +65,13 @@ function getObjectiveValue(st, viol_wt) {
                     viol_sum = viol_sum + vmin * vmin;
                 }
             } else {
-                if (element.lmin & CONSTRAINED ) { // TODO: || element.lmin < FREESTAT) {
-                    vmin = (-element.value + element.cmin) / element.smin;
-    //                console.log('name=',element.name,' vmin=',vmin,' value=',element.value,' cmin=',element.cmin,' smin=',element.smin);
+                if (element.lmin & CONSTRAINED ) {
+                    vmin = (-element.value + evaluateConstraintValue(st,element.lmin,element.cmin)) / element.smin;
+    //                console.log('name=',element.name,' vmin=',vmin,' value=',element.value,' cmin=',evaluateConstraintValue(st,element.lmin,element.cmin),' smin=',element.smin);
                 }
-                if (element.lmax & CONSTRAINED ) { // TODO: || element.lmax < FREESTAT) {
-                    vmax = (element.value - element.cmax) / element.smax;
-    //                console.log('name=',element.name,' vmax=',vmax,' value=',element.value,' cmax=',element.cmax,' smax=',element.smax);
+                if (element.lmax & CONSTRAINED ) {
+                    vmax = ( element.value - evaluateConstraintValue(st,element.lmax,element.cmax)) / element.smax;
+    //                console.log('name=',element.name,' vmax=',vmax,' value=',element.value,' cmax=',evaluateConstraintValue(st,element.lmax,element.cmax),' smax=',element.smax);
                 }
                 if (vmin > 0.0) {
                     viol_sum = viol_sum + vmin * vmin;
