@@ -55,18 +55,18 @@ At the time that the program first initializes, the user can specify a design ty
 and then select from a list of existing designs of that type in order to begin work.
 For each design type, a default starting point named "startup" should always be availabe.
 
-As of this writing, three design types are included with the ODOP software.
-The [Piston-Cylinder](./DesignTypes/pcyl) design type is a small demonstration problem. 
-As a design problem, it is interesting because it illustrates competing objectives.
-The [Rectangular Solid](./DesignTypes/r_solid) design type is also a small demonstration problem. 
-It consists of a mathematical model of a rectangular solid (cube, box)
+As of this writing, five design types are included with the ODOP software.
+The [Rectangular Solid](./DesignTypes/r_solid) design type is a small demonstration problem 
+based on a mathematical model of a rectangular solid (cube, box)
 and is intended to act as an easy to understand showcase of ODOP program capabilities. 
 It is a design situation that most people will be familiar and comfortable with.
-Work to develop capabilities for designing coil springs is currently in progress.
-Support for compression springs is complete.
-Support for extension and torsion springs is planned. 
-Additional information is available at:
+
+Additional information on ODOP design types is available at:
 [Design Types](./DesignTypes/index).
+An explanation of how to select a design type and open a design of that type is provided in:
+[Getting Started](gettingStarted). 
+
+&nbsp;
 
 [Help](./)
 

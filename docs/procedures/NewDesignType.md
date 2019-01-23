@@ -3,6 +3,10 @@
 This entry describes how to implement a new ODOP design type 
 (a.k.a. "design problem").
 
+Each design type gets its own sub-directory within the source code.
+The design equations for a specific design type are contained in a source code
+file named eqnset.js.
+
 **Files required for all design types:**   
  &nbsp; (<sup> * </sup> = may be stub)   
 * client/src/designtypes/_designName_/
