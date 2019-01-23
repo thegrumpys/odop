@@ -6,8 +6,8 @@ The following terms have special meanings used in the context of this program.
 A mathematical model is a set of equations that describes the behavior of 
 a real world problem of interest.
 Within the context of the ODOP software, the terms "mathematical model",
-"Design Type" and "Equation Set" are closely related.
-Each Design Type has a mathematical model at its core.
+"design type" and "equation set" are closely related.
+Each design type has a mathematical model at its core.
 
 For examples, see:   
 * [Piston-Cylinder](./DesignTypes/png/PCylDiagram.png) 
@@ -16,12 +16,16 @@ For examples, see:
 See "Design Types" and "Equation Set" below for more detail.
 
 **DESIGN TYPES**   
-A Design Type is a specific design problem.  As noted above, each 
-Design Type has a mathematical model of some aspect of the real world
-at its core.  Examples included with the ODOP software include a 
-Piston-Cylinder design, a Rectangular Solid and a Compression Spring.
+A Design Type is a specific design problem. 
+As noted above, each Design Type has a mathematical model of 
+some aspect of the real world at its core. 
+Examples included with the ODOP software include
+compression, extension and torsion springs,
+a Rectangular Solid and a Piston-Cylinder.
 A "design" is a specific and unique instance of a Design Type. 
-The ODOP software will store multiple designs of each Design Type in 
+These designs can be opened, edited and saved in a way similar to the way that
+word processing documents, spreadsheets and graphic presentations operate.
+The ODOP software stores multiple designs of each Design Type in 
 its database (a.k.a. design library).
 
 **INDEPENDENT VARIABLES** &nbsp;  (inputs, design parameters)   
@@ -77,13 +81,14 @@ value of a given variable and its corresponding constraint level.  By
 convention, negative values represent constraint satisfaction, positive
 values represent constraint violation.
 
-**FUNCTION CONSTRAINTS**
+**FUNCTION CONSTRAINTS**   
 When a constraint level is determined as the value of another Independent Variable,
 Dependent Variable of Calculation Input (as opposed to being a simple constant),
 it is referred to as a "Functionally Determined Constraint Level".
-Such constraint levels can be configured by clicking into the (MIN or MAX)
+Such constraint levels can be configured by selecting (clicking into) the (MIN or MAX)
 constraint value field of eligible variables.
-After clicking, the user will be able to select from a list of variable names available 
+After clicking a constraint field of an eligible variable, 
+the user will be able to select from a list of variable names available 
 to be used as constraint levels.
 The variables that can be constrained this way and the variables that are eligible
 as choices to be selected as constraints are configured in the design type's
@@ -154,22 +159,19 @@ source code in the initialState.js file.
 The ODOP software allows for multiple design types and thus multiple sets of 
 design equations (mathematical models of a specific design problem) 
 to be concurrently available. 
-The design equations for a specific design type are contained in a source code
-file named eqnset.js.
-Each design type gets its own sub-directory within the source code.
-For example, currently implemented design types include:
-* [Rectangular Solid](./DesignTypes/r_solid)
-* [Piston-Cylinder](./DesignTypes/pcyl) 
+Currently implemented Design Types include:
 * [Compression Spring](./DesignTypes/c_spring)   
-
-Design types planned for implementation in the future include:
 * [Extension Spring](./DesignTypes/e_spring)   
 * [Torsion Spring](./DesignTypes/t_spring)   
+* [Rectangular Solid](./DesignTypes/r_solid)
+* [Piston-Cylinder](./DesignTypes/pcyl) 
 
-The simplest way to use a different design type and equation set is to select an
-existing design that uses the desired equation set at the time that the ODOP 
+The simplest way to use a different design type and equation set is to select a 
+design type that uses the desired equation set at the time that the ODOP 
 software first starts. 
-A default design is typically called "startup".
+A default design named "startup" should be available for each design type.
+An explanation of how to select a design type and open a design of that type 
+is provided in: [Getting Started](gettingStarted).   
 
 Additional information on how to implement new ODOP design types is available
 in the [NewDesignType](../procedures/NewDesignType) documentation.

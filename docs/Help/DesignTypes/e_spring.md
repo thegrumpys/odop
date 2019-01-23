@@ -66,17 +66,17 @@ available at [Spring Design Topics](../SpringDesign).
             calculations for Inactive_Coils, Hook_Deflect_All,
             and end dimensions.   
     
-    Catalog_Number   -  character string that contains the catalog number of
-            the most recent catalog selection.  Otherwise is ignored.
-    
     Process      -  character string used to identify the
             manufacturing process.  It is normally controlled
             by the material selected from the material table.
             Values are usually Cold_Coiled or Hot_Wound.
             Refer to discussion under Hot_Factor_KH.
     
-    Material_File    -  character string containing the material table name.
-            It is normally established by the initialState.js file.
+<!---     Catalog_Number -  character string that contains the catalog number of -->
+<!---                       the most recent catalog selection.   -->
+<!---                       Otherwise is ignored. -->
+<!---     Material_File -  character string containing the material table name. -->
+<!---                      It is normally established by the initialState.js file. -->
     
     Prop_Calc_Method -  This value controls how material properties and
             and allowable stresses are determined.
@@ -192,27 +192,27 @@ dimensions of an extension spring.
               Extension Spring Names   
     
     
-    |<-----------  L_Free  -------------->|   
+     |<-----------  L_Free  -------------->|   
     
-         |<----  L_Body  ---->|   
+          |<----  L_Body  ---->|   
     
-                                                |
-       .  ____________________         .       _v_
-     /'  |                    |         `\
-    |    |                    |          |    OD_Free
-     \   |                    |          /
-      `._|____________________|________.'      ___
-                                                ^
-                                                |
+                                                 |
+        .  ____________________         .       _v_
+      /   |                    |         `\
+     |    |                    |          |    OD_Free
+      \   |                    |          /
+       `._|____________________|________.'      ___
+                                                 ^
+                                                 |
     
-                         ---->|       |<---- End_Extension   
+                          ---->|       |<---- End_Extension   
     ->|   |<--- L_End   
-                                 ---->|   |<---- L_Extended_End   
+                                  ---->|   |<--- L_Extended_End   
 
 &nbsp;
                      
-    |<--------------------------------------- L_Free -------------------------------->|
-    |<--- L_End --->|<--- L_Body --->|<--- End_Extension --->|<--- L_Extended_End --->|                    
+    |<--------------------------------- L_Free ------------------------------>|
+    |<-- L_End -->|<-- L_Body -->|<-- End_Extension -->|<-- L_Extended_End -->|                    
                      
 &nbsp;
    
