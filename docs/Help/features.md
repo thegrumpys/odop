@@ -151,9 +151,9 @@ Inversion of design equations
  specific to each different material type. 
  Similarly, a feature is provided to select the closest or otherwise 
  most appropriate design from a catalog of stock designs. 
- The spring design example provides multiple sample compression 
- spring catalogs, including U.S. Military Standard 24585
- (SAE-AS24585).
+ The default stock spring catalogs supplied with ODOP:Spring include
+ U.S. Military Standard 24585 (SAE-AS24585) for compression springs and
+ MS24586 (SAE-AS24586) for extension springs.
  
  
 * Save and recovery of designs
