@@ -83,7 +83,7 @@ values represent constraint violation.
 
 **FUNCTION CONSTRAINTS**   
 When a constraint level is determined as the value of another Independent Variable,
-Dependent Variable of Calculation Input (as opposed to being a simple constant),
+Dependent Variable or Calculation Input (as opposed to being a simple constant),
 it is referred to as a "Functionally Determined Constraint Level".
 Such constraint levels can be configured by selecting (clicking into) the (MIN or MAX)
 constraint value field of eligible variables.
