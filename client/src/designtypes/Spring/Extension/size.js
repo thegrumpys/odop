@@ -21,12 +21,13 @@ export function getSizeEntries(type, st) {
         // Find size name, load size table, and get wire diameter value
         var m_tab = require('../mat_ips.json');
         var i = st[o.Material_Type].value;
+//        console.log('In getSizeEntries Wire_Dia i=',i);
         size_name = m_tab[i][mo.siznam];
+//        console.log('In getSizeEntries Wire_Dia size_name=',size_name);
         size_table = require('../'+size_name+'.json'); // Dynamically load table
+//        console.log('In getSizeEntries Wire_Dia size_table=',size_table);
         wire_dia = st[o.Wire_Dia].value;
-//        console.log('In getSizeEntries size_name=',size_name);
-//        console.log('In getSizeEntries size_table=',size_table);
-//        console.log('In getSizeEntries wire_dia=',wire_dia);
+//        console.log('In getSizeEntries Wire_Dia wire_dia=',wire_dia);
         // Select one below value less than Wire_Dia and two value greater than Wire_Dia
         for (let i = 1; i < size_table.length; i++) { // Skip column headers at zeroth entry
             entry = size_table[i];
@@ -34,7 +35,7 @@ export function getSizeEntries(type, st) {
             size1 = size2;
             size2 = entry[0];
             if (size1 !== undefined && wire_dia <= size1) {
-//                console.log('In getSizeEntries entry[0]=',entry[0]);
+//                console.log('In getSizeEntries Wire_Dia entry[0]=',entry[0]);
                 break;
             }
         };
@@ -50,11 +51,11 @@ export function getSizeEntries(type, st) {
         break;
     case "OD_Free":
         size_name = 'sizes_od_free';
+//        console.log('In getSizeEntries OD_Free size_name=',size_name);
         size_table = require('../'+size_name+'.json'); // Dynamically load table
+//        console.log('In getSizeEntries OD_Free size_table=',size_table);
         od_free = st[o.OD_Free].value;
-//        console.log('In getSizeEntries size_name=',size_name);
-//        console.log('In getSizeEntries size_table=',size_table);
-//        console.log('In getSizeEntries od_free=',od_free);
+//        console.log('In getSizeEntries OD_Free od_free=',od_free);
         // Select one below value less than OD_Free and two value greater than OD_Free
         for (let i = 1; i < size_table.length; i++) { // Skip column headers at zeroth entry
             entry = size_table[i];
@@ -62,7 +63,7 @@ export function getSizeEntries(type, st) {
             size1 = size2;
             size2 = entry[0];
             if (size1 !== undefined && od_free <= size1) {
-//                console.log('In getSizeEntries entry[0]=',entry[0]);
+//                console.log('In getSizeEntries OD_Free entry[0]=',entry[0]);
                 break;
             }
         };
