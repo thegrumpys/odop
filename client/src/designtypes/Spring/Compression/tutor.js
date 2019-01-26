@@ -10,11 +10,12 @@ export const execute = {
                     <p>
                     Welcome to the first ODOP tutorial session.
                     This session will provide an introduction to basic ODOP features and concepts.
+                    in the context of the <b>compression spring</b> design type.
                     </p>
                     
                     <p>
                     If you are here simply as a "tourist" and are only interested in picking up a "flavor" 
-                    for ODOP:Spring as opposed to walking through the underlying
+                    for ODOP:Spring as opposed to learning the underlying
                     concepts and major features at the disposal of a serious spring designer, 
                     you may want to skip forward to the sample problems. 
                     You may do this by Canceling this session and selecting one of the spring 
@@ -44,6 +45,14 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     The initial conditions expected by this tutorial session are now established.
+                    </p>
+                    
+                    <p>
+                    It will be helpful for you to understand that this tutorial session is "live" and not
+                    a simple playback of a previous recording.  
+                    The ODOP main page has simply been displaced downward by the text in this light green 
+                    section.
+                    All the menus and other inputs to the program remain available.
                     </p>
                     
                     <p>
@@ -374,7 +383,7 @@ export const execute = {
                     
                     <ul>
                         <li>
-                        It is possible to set a value on any Independent Variable
+                        It is possible to set the value of any Independent Variable
                             <ul>
                                 <li>
                                     Dependent Variables will immediately recalculate to reflect that value.
