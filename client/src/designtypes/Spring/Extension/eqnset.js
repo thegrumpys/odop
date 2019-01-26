@@ -215,73 +215,73 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 //    console.log('In eqnset p=',p,' x=',x);
     return x;
     
-function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
-//    console.log("In cl_calc:");
-//    console.log("Material_Index = x[o.Material_Type] = mat_idx =", mat_idx);
-//    console.log("life_category =  x[o.Life_Category] = cl_idx  =", cl_idx);
-//    console.log("st_code =", st_code, " x[o.Tensile] = tensile =", tensile);
-//    console.log("Stress1 = x[o.Stress_1] =", stress_1);
-//    console.log("Stress2 = x[o.Stress_2] =", stress_2);
+    function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
+    //    console.log("In cl_calc:");
+    //    console.log("Material_Index = x[o.Material_Type] = mat_idx =", mat_idx);
+    //    console.log("life_category =  x[o.Life_Category] = cl_idx  =", cl_idx);
+    //    console.log("st_code =", st_code, " x[o.Tensile] = tensile =", tensile);
+    //    console.log("Stress1 = x[o.Stress_1] =", stress_1);
+    //    console.log("Stress2 = x[o.Stress_2] =", stress_2);
+        
+        var i;
+        var j;
+        var pntc;
+        var sterm;
+        var temp;
+        var idxoffset;
+        var snx = [];
+        var sny = [7.0, 6.0, 5.0, 1.0];
     
-    var i;
-    var j;
-    var pntc;
-    var sterm;
-    var temp;
-    var idxoffset;
-    var snx = [];
-    var sny = [7.0, 6.0, 5.0, 1.0];
-
-    /*  Bring in material properties table  */
-    var m_tab = require('../mat_ips.json');
-
-//    if st_code = 3 then temp=tensile;
-    if (st_code === 3) temp = tensile;
-//        else temp=0.67*tensile;
-    else temp = 0.67 * tensile;
-//    pntc=stress_2-stress_1*((temp-stress_2)/(temp-stress_1));
-    pntc=stress_2-stress_1*((temp-stress_2)/(temp-stress_1));
-//    if cl_idx < 5 then j=0;
-    if (cl_idx < 5) j = 0;
-//        else j=4;
-    else j = 3;
-//    do i = 1 to 4;
-    for (i=0; i < 4; i++) {
-        idxoffset = 3 - i + j;
-        if (j > 0 && idxoffset === 3) idxoffset = 0;
-//    if st_code = 3 then snx(i)=0.01*m_tab(mat_idx).ptb(5-i+j)*tensile;
-        if (st_code === 3 ) snx[i] = 0.01 * m_tab[mat_idx][mo.ptb1+idxoffset] * tensile;
-//    else snx(i)=0.01*m_tab(mat_idx).pte(5-i+j)*tensile;
-        else {
-            snx[i] = 0.01 * m_tab[mat_idx][mo.pte1+idxoffset] * tensile;
-//            console.log("i =", i, " j =", j, "ixoffset =", idxoffset, "m_tab[mat_idx][mo.pte1+idexoffset]", m_tab[mat_idx][mo.pte1+idxoffset]);
+        /*  Bring in material properties table  */
+        var m_tab = require('../mat_ips.json');
+    
+    //    if st_code = 3 then temp=tensile;
+        if (st_code === 3) temp = tensile;
+    //        else temp=0.67*tensile;
+        else temp = 0.67 * tensile;
+    //    pntc=stress_2-stress_1*((temp-stress_2)/(temp-stress_1));
+        pntc=stress_2-stress_1*((temp-stress_2)/(temp-stress_1));
+    //    if cl_idx < 5 then j=0;
+        if (cl_idx < 5) j = 0;
+    //        else j=4;
+        else j = 3;
+    //    do i = 1 to 4;
+        for (i=0; i < 4; i++) {
+            idxoffset = 3 - i + j;
+            if (j > 0 && idxoffset === 3) idxoffset = 0;
+    //    if st_code = 3 then snx(i)=0.01*m_tab(mat_idx).ptb(5-i+j)*tensile;
+            if (st_code === 3 ) snx[i] = 0.01 * m_tab[mat_idx][mo.ptb1+idxoffset] * tensile;
+    //    else snx(i)=0.01*m_tab(mat_idx).pte(5-i+j)*tensile;
+            else {
+                snx[i] = 0.01 * m_tab[mat_idx][mo.pte1+idxoffset] * tensile;
+    //            console.log("i =", i, " j =", j, "ixoffset =", idxoffset, "m_tab[mat_idx][mo.pte1+idexoffset]", m_tab[mat_idx][mo.pte1+idxoffset]);
+            }
+    //    end;
         }
-//    end;
-    }
-//
-//    if pntc < snx(1) then return(1.0e+07);
-    if (pntc < snx[1]) return(1.0e+07);
-//
-//    do i = 2 to 4;
-    for (i=1; i<4; i++) {
-//    if pntc < snx(i) then
-        if (pntc < snx[i]) {
-//        do;
-//        j=i-1;
-            j = i - 1;
-//        sterm=(sny(i)-sny(j))/(snx(i)-snx(j));
-            sterm = (sny[i] - sny[j]) / (snx[i] - snx[j]);
-//        temp=sterm*(pntc-snx(j))+sny(j);
-            temp = sterm * (pntc - snx[j]) +sny[j];
-//        return(10.0**temp);
-            return(Math.pow(10.0, temp));
-//        end;
+    //
+    //    if pntc < snx(1) then return(1.0e+07);
+        if (pntc < snx[1]) return(1.0e+07);
+    //
+    //    do i = 2 to 4;
+        for (i=1; i<4; i++) {
+    //    if pntc < snx(i) then
+            if (pntc < snx[i]) {
+    //        do;
+    //        j=i-1;
+                j = i - 1;
+    //        sterm=(sny(i)-sny(j))/(snx(i)-snx(j));
+                sterm = (sny[i] - sny[j]) / (snx[i] - snx[j]);
+    //        temp=sterm*(pntc-snx(j))+sny(j);
+                temp = sterm * (pntc - snx[j]) +sny[j];
+    //        return(10.0**temp);
+                return(Math.pow(10.0, temp));
+    //        end;
+            }
+    //    end;
         }
-//    end;
+    
+        return(1.0);
+    
     }
-
-return(1.0);
-
-}
     
 }

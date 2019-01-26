@@ -105,7 +105,7 @@ export function getCatalogEntries(name, st, viol_wt) {
 //    console.log('In getCatalogEntries name=',name,' st=',st,' viol_wt=',viol_wt);
     var catalog, entry;
     var result = [];
-    var p, x;
+    var p, x, offset;
     var objective_value;
     var cat0, cat1, cat2, cat3;
     function findMaterialTypeIndex(element, index) {
@@ -126,9 +126,9 @@ export function getCatalogEntries(name, st, viol_wt) {
             x.push(element.value)
         }
     }
-    function xPull(element, index) {
+    function xPull(element) {
         if (!element.input) {
-            element.value = x[index];
+            element.value = x[offset++];
         }
     }
     
@@ -173,6 +173,7 @@ export function getCatalogEntries(name, st, viol_wt) {
         x = [];
         st.forEach(xPush);
         x = init(p, x);
+        offset = 0;
         st.forEach(xPull);
 //        console.log('In getCatalogEntries 1 st=',st);
         
@@ -182,6 +183,7 @@ export function getCatalogEntries(name, st, viol_wt) {
         x = [];
         st.forEach(xPush);
         x = eqnset(p, x);
+        offset = 0;
         st.forEach(xPull);
 //        console.log('In getCatalogEntries 2 st=',st);
         
