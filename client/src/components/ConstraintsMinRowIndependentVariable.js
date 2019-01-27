@@ -115,10 +115,10 @@ class ConstraintMinRowIndependentVariable extends React.Component {
                 </tr>
                 <Modal isOpen={this.state.modal} className={this.props.className}>
                     <ModalBody>
-                       <Input id={this.props.element.name + "_cmin"} className={cmin_class} type="number" value={this.state.cmin} onChange={this.onChangeValue} />
                        {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 && this.props.element.cminchoices.map((e) => {return (
                            <Button key={e} color="primary" onClick={(event) => {this.onApplyFDCL(event,e)}}>{e}</Button>
                        );})}
+                       <Input id={this.props.element.name + "_cmin"} className="text-right" type="number" value={this.state.cmin} onChange={this.onChangeValue} />
                     </ModalBody>
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
