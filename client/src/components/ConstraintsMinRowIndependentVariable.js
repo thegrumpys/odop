@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip, Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MIN, FIXED, CONSTRAINED, FUNCTION } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
@@ -12,6 +12,14 @@ class ConstraintMinRowIndependentVariable extends React.Component {
         this.onChangeIndependentVariableConstraint = this.onChangeIndependentVariableConstraint.bind(this);
         this.onSetIndependentVariableFlagConstrained = this.onSetIndependentVariableFlagConstrained.bind(this)
         this.onResetIndependentVariableFlagConstrained = this.onResetIndependentVariableFlagConstrained.bind(this)
+        this.onClick = this.onClick.bind(this);
+        this.onChangeValue = this.onChangeValue.bind(this);
+        this.onApplyValue = this.onApplyValue.bind(this);
+        this.onApplyFDCL = this.onApplyFDCL.bind(this);
+        this.onCancel = this.onCancel.bind(this);
+        this.state = {
+            modal: false, // Default: do not display
+        };
     }
     
     onSetIndependentVariableFlagConstrained(event) {
@@ -26,6 +34,54 @@ class ConstraintMinRowIndependentVariable extends React.Component {
         this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(event.target.value));
     }
     
+    onClick(event) {
+        console.log("In onClick event=",event);
+        // Shiow modal only if there are cminchoices
+        if (this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0) {
+            this.setState({
+                modal: !this.state.modal,
+                cmin: this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : 0
+            });
+        }
+    }
+    
+    onChangeValue(event) {
+      console.log("In onChangeValue event=",event);
+      this.setState({
+          cmin: event.target.value
+      });
+    }
+    
+    onApplyValue(event) {
+        console.log("In onApplyValue event=",event);
+        this.setState({
+            modal: !this.state.modal
+        });
+        this.props.resetSymbolFlag(this.props.element.name, MIN, FUNCTION);
+        this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(this.state.cmin));
+    }
+      
+    onApplyFDCL(event, name) {
+        console.log("In onApplyFDCL event=",event," name=",name);
+        this.setState({
+            modal: !this.state.modal
+        });
+        this.props.setSymbolFlag(this.props.element.name, MIN, FUNCTION);
+        this.props.symbol_table.forEach((element, i) => {
+            if (element.name === name) {
+                console.log('@@@ element=',element,' i=',i);
+                this.props.changeSymbolConstraint(this.props.element.name, MIN, i);
+            }
+        })
+    }
+    
+    onCancel(event) {
+        console.log("In onCancel event=",event);
+        this.setState({
+            modal: !this.state.modal
+        });
+    }
+
     render() {
         // =======================================
         // Constraint Minimum Column
@@ -40,22 +96,36 @@ class ConstraintMinRowIndependentVariable extends React.Component {
         // Table Row
         // =======================================
         return (
-            <tr key={this.props.element.name}>
-                <td className="align-middle" colSpan="2">
-                    <InputGroup>
-                        <InputGroupAddon addonType="prepend">
-                            <InputGroupText>
-                                <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetIndependentVariableFlagConstrained : this.onSetIndependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
-                            </InputGroupText>
-                        </InputGroupAddon>
-                        <Input id={this.props.element.name + "_cmin"} className={cmin_class} type="number" value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} />
-                        {this.props.element.lmin & FUNCTION ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmin"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</UncontrolledTooltip> : ''}
-                    </InputGroup>
-                </td>
-                <td className="text-right align-middle" colSpan="1">
-                    {this.props.element.lmin & FIXED ? '' : (this.props.element.lmin & CONSTRAINED ? (this.props.element.vmin*100.0).toFixed(1) + '%' : '')}
-                </td>
-            </tr>
+            <React.Fragment>
+                <tr key={this.props.element.name}>
+                    <td className="align-middle" colSpan="2">
+                        <InputGroup>
+                            <InputGroupAddon addonType="prepend">
+                                <InputGroupText>
+                                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetIndependentVariableFlagConstrained : this.onSetIndependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
+                                </InputGroupText>
+                            </InputGroupAddon>
+                            <Input id={this.props.element.name + "_cmin"} className={cmin_class} type="number" value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} onClick={this.onClick} />
+                            {this.props.element.lmin & FUNCTION ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmin"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</UncontrolledTooltip> : ''}
+                        </InputGroup>
+                    </td>
+                    <td className="text-right align-middle" colSpan="1">
+                        {this.props.element.lmin & FIXED ? '' : (this.props.element.lmin & CONSTRAINED ? (this.props.element.vmin*100.0).toFixed(1) + '%' : '')}
+                    </td>
+                </tr>
+                <Modal isOpen={this.state.modal} className={this.props.className}>
+                    <ModalBody>
+                       <Input id={this.props.element.name + "_cmin"} className={cmin_class} type="number" value={this.state.cmin} onChange={this.onChangeValue} />
+                       {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 && this.props.element.cminchoices.map((e) => {return (
+                           <Button key={e} color="primary" onClick={(event) => {this.onApplyFDCL(event,e)}}>{e}</Button>
+                       );})}
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                        <Button color="primary" onClick={this.onApplyValue}>Apply</Button>
+                    </ModalFooter>
+                </Modal>
+            </React.Fragment>
         );
     }
 }
