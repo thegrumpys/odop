@@ -384,10 +384,10 @@ class ActionTrade extends React.Component {
             let j = this.state.vflag[i];
             element = design.symbol_table[j];
             if (this.state.ldir[i] < 0) {
-                value = evaluateConstraintValue(design.symbol_table,element.lmin,element.cmin) + this.state.dir[i] * element.cmin * c3;
+                value = evaluateConstraintValue(design.symbol_table,element.lmin,element.cmin) + this.state.dir[i] * evaluateConstraintValue(design.symbol_table,element.lmin,element.cmin) * c3;
                 this.props.changeSymbolConstraint(element.name, MIN, value);
             } else {
-                value = evaluateConstraintValue(design.symbol_table,element.lmax,element.cmax) + this.state.dir[i] * element.cmax * c3;
+                value = evaluateConstraintValue(design.symbol_table,element.lmax,element.cmax) + this.state.dir[i] * evaluateConstraintValue(design.symbol_table,element.lmax,element.cmax) * c3;
                 this.props.changeSymbolConstraint(element.name, MAX, value);
             }
         }
@@ -851,7 +851,7 @@ class ActionTrade extends React.Component {
                                         <Col className="align-middle text-left" xs="3">{element.name}</Col>
                                         <Col className="align-middle text-left" xs="1">MAX</Col>
                                         <Col className="align-middle text-right" xs="3">{(element.vmax * 100.0).toFixed(1)}%</Col>
-                                        <Col className={constraint_class} xs="3">{element.cmax.toFixed(4)}</Col>
+                                        <Col className={constraint_class} xs="3">{evaluateConstraintValue(design.symbol_table,element.lmax,element.cmax).toFixed(4)}</Col>
                                         <Col className="align-middle text-right" xs="2">{element.units}</Col>
                                     </Row>
                                 );
