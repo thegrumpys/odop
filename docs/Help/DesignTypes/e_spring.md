@@ -248,7 +248,7 @@ dimensions of an extension spring.
 
 While most extension spring constraints have constant levels,
 a few are of the "Functionally Determined Constraint Level" variety.
-As described in the "Function Constraints" section of the on-line Help 
+As described in the "Function Constraints" section of the On-line Help 
 entry on "Terminology", rather than having constraint levels that are expressed 
 as simple constants, these express a desired relationship between 
 selected variables.   

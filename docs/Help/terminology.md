@@ -61,15 +61,16 @@ Constraints are one sided boundaries that represent goals for the design
 problem.  Either dependent or independent variables may be constrained to
 be greater than or less than a simple constant or a functionally
 determined quantity such as a different dependent or independent
-variable.  The documentation section titled "FUNCTION" provides more
-information on this subject.
+variable or Calculation Input. 
+The section below on "FUNCTION CONSTRAINTS" provides more information on this subject.
 
 In order to establish a constraint, it is necessary to check the corresponding
 Minimum or Maximum constraint checkbox and enter a value for the desired 
 constraint level in the corresponding entry field.
 
-A [SEARCH](search) operation is required to establish appropriate values of the
-free (not FIXed) Independent Variables to meet the specified constraint levels.
+If any constraint is violated, a [SEARCH](search) operation is 
+required to establish appropriate values of the free (not FIXed) 
+Independent Variables to meet the specified constraint levels.
 In order to save time and provide more predictable operation,
 ODOP will stop the search process if it gets very close to a feasible design 
 but still violates one or more constraints by a fraction of a percent. 
@@ -94,7 +95,7 @@ The variables that can be constrained this way and the variables that are eligib
 as choices to be selected as constraints are configured in the design type's
 initialState.   
 
-More specific information is available in the on-line help section covering 
+More specific information is available in the On-line Help section covering 
 extension springs.
 
 **FIX**   
