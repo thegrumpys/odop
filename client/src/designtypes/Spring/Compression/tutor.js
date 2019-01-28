@@ -102,7 +102,7 @@ export const execute = {
                     ability to solve the really hard problems.<br />
                     <br />
                     <b>Getting Started</b> provides a tour of the main page (below) plus
-                    makes a few suggestions on how new users should attack the program.
+                    makes a few suggestions on how new users should approach learning the program.
                     Note that for the compression spring design type, 
                     the "main page" is actually the first of four "tabs" and 
                     has the name "Design:" plus a coil spring icon and the name of the current design. 
@@ -325,7 +325,7 @@ export const execute = {
                     <p>
                     Indeed, the design now utilizes less than 98 percent of its available deflection.
                     Also, Wire_Dia has remained at 0.110 inches 
-                    and Force_2 at 40 poinds as specified. 
+                    and Force_2 at 40 pounds as specified. 
                     </p>
                     
                     <p>
@@ -434,8 +434,8 @@ export const execute = {
                     </p>
                     
                     <p>
-                    More tutorial sessions are available. 
-                    They have names like tutor3, tutor4, ... etc. 
+                    More compression spring tutorial sessions are available. 
+                    They have names like tutorTour, tutor3, tutor4, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the 
                     tutorial for a list of the Tutorial and Demo topics.
                     </p>
