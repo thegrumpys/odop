@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, freeSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, freeSymbolValue, loadInitialState, setSymbolFlag, resetSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 import { changeSystemControlsValue } from '../../../store/actionCreators';
 export const execute = {
@@ -98,7 +98,7 @@ export const execute = {
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 0.261),
                 changeSymbolConstraint('Force_1', MIN, 3.929),
-                setSymbolFlag('Force_1', MIN, !CONSTRAINED),
+                resetSymbolFlag('Force_1', MIN, CONSTRAINED),
                 fixSymbolValue('Force_1', 3.93),
                 fixSymbolValue('L_1', 0.984),
                 fixSymbolValue('Force_2', 6.74),
@@ -266,7 +266,7 @@ export const execute = {
                     <p>
                     The handbook results will be repeated on the next page in order to provide
                     a more convenient comparison.
-                    This will be a good time to scroll through the ODOP:Spring design to compare results.
+                    Wait for the next page to scroll through the ODOP:Spring design to compare results.
                     </p>
                 </React.Fragment>
             ),
@@ -308,7 +308,7 @@ export const execute = {
                     
                     <p>
                     While once again we found that there can be several solutions to the
-                    same spring problem, overall the ODOP:Spring calculations compare well to the
+                    same set of specifications, overall the ODOP:Spring calculations compare well to the
                     handbook results.
                     </p>
                 </React.Fragment>
