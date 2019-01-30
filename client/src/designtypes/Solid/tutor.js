@@ -8,17 +8,20 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     Welcome to the first ODOP tutorial session.
-                    This session will provide an introduction to basic ODOP features and concepts.
+                    This session will provide an introduction to basic ODOP features and concepts
+                    in the context of the <b>Rectangular Solid</b> design type.
                     </p>
                     
                     <p>
                     If you are here simply as a "tourist" and are only interested in picking up a "flavor" 
-                    for ODOP:Spring as opposed to walking through the underlying
-                    concepts and major features at the disposal of a serious spring designer, 
-                    you may want to skip forward to the sample problems. 
+                    for ODOP:Spring as opposed to learning the underlying
+                    concepts and major features provided by the ODOP software, 
+                    you may want to skip forward to the spring design sample problems. 
                     You may do this by canceling this session and selecting one of the spring 
                     design Demo sessions available from the <b>Help : Demo...</b> menu
                     when a Spring design type is loaded.
+                    You can use your web browser's refresh button to restart with the desired
+                    spring design type.
                     </p>
                     
                     <p>
@@ -46,17 +49,25 @@ export const execute = {
                     </p>
                     
                     <p>
-                    ODOP contains an "on-line" help facility.
+                    It will be helpful for you to understand that this tutorial session is "live" and not
+                    a simple playback of a previous recording.  
+                    The ODOP main page has simply been displaced downward by the text in this light green 
+                    section.
+                    All the menus and other inputs to the program remain available.
+                    </p>
+                    
+                    <p>
+                    ODOP contains an On-line Help facility.
                     It includes an overview of the program, a <b>Getting Started</b> section plus
                     helpful hints and detailed explanations of major features.  
                     But first, a few words about what <b>not</b> to expect.
                     The on-line help facility is not intended to replace the documentation that comes 
                     with your browser or computer system. 
                     Also, the Help facility is not intended to teach the fundamentals of an application 
-                    like spring design. 
+                    like rectangular boxes or spring design. 
                     Rather, the Help facility will show someone that already understands the basics of
                     strength of materials and the basics of spring design how to operate the program 
-                    to create new spring designs.
+                    to create new designs.
                     </p>
                 </React.Fragment>
             ),
@@ -88,8 +99,8 @@ export const execute = {
                     The expectation is that this generality will pay off in the program's 
                     ability to solve the really hard problems.<br />
                     <br />
-                    <b>Getting Started</b>  provides a tour of the main page plus
-                    makes a few suggestions on how new users should attack the program.<br />
+                    <b>Getting Started</b>  provides a tour of the main page plus makes 
+                    a few suggestions on how new users should approach learning the program.<br />
                     </p>
                 </React.Fragment>
             )
@@ -153,10 +164,10 @@ export const execute = {
                     <p>
                     This is a good time to take a close look at existing values.
                     You may need to scroll down to see everything.
-                    The 70 pound maximum constraint on Weight and the 108 inch
-                    maximum on Length+Girth are values that the US Postal Service
-                    and many other participants in the package shipping industry impose 
-                    on items that they will accept.
+                    Pay special attention to the 70 pound maximum constraint on Weight 
+                    and the 108 inch maximum on Length+Girth.
+                    These are limits that the US Postal Service and many other participants 
+                    in the package shipping industry impose on items that they will accept.
                     </p>
                     
                     <p>
@@ -311,7 +322,8 @@ export const execute = {
                     <p>
                     Finally, to wrap up this session,
                     the next page will demonstrate how it is possible to specify
-                    the value of Girth, a Dependent Variable.
+                    the value of Girth, a Dependent Variable
+                    (output from the design equations).
                     </p>
                     <br /><br />
                 </React.Fragment>
@@ -412,9 +424,10 @@ export const execute = {
                     You are not likely to break it or wear it out !
                     </p>
                     
-                    <p>Several more tutorial sessions are planned. 
-                    They will have names like tutor1, tutor2, ... etc. 
-                    Refer to the documentation section (Help entry) covering the tutorial 
+                    <p>Several more tutorial sessions are available for the compression spring
+                    design type. 
+                    They have names like tutor1, tutor2, ... etc. 
+                    Refer to the documentation section (On-line Help entry) covering the tutorial 
                     for a list of the Tutorial and DEMO topics.</p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
