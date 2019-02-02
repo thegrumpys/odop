@@ -35,48 +35,48 @@ class ConstraintMinRowIndependentVariable extends React.Component {
     }
     
     onClick(event) {
-        console.log("In onClick event=",event);
-        // Shiow modal only if there are cminchoices
+//        console.log("In onClick event=",event);
+        // Show modal only if there are cminchoices
         if (this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0) {
             this.setState({
                 modal: !this.state.modal,
-                cmin: this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : 0
+                value: this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : 0
             });
         }
     }
     
     onChangeValue(event) {
-      console.log("In onChangeValue event=",event);
+//      console.log("In onChangeValue event=",event);
       this.setState({
-          cmin: event.target.value
+          value: event.target.value
       });
     }
     
     onEnterValue(event) {
-        console.log("In onEnterValue event=",event);
+//        console.log("In onEnterValue event=",event);
         this.setState({
             modal: !this.state.modal
         });
         this.props.resetSymbolFlag(this.props.element.name, MIN, FUNCTION);
-        this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(this.state.cmin));
+        this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(this.state.value));
     }
       
     onSelectVariable(event, name) {
-        console.log("In onSelectVariable event=",event," name=",name);
+//        console.log("In onSelectVariable event=",event," name=",name);
         this.setState({
             modal: !this.state.modal
         });
         this.props.setSymbolFlag(this.props.element.name, MIN, FUNCTION);
         this.props.symbol_table.forEach((element, i) => {
             if (element.name === name) {
-                console.log('@@@ element=',element,' i=',i);
+//                console.log('@@@ element=',element,' i=',i);
                 this.props.changeSymbolConstraint(this.props.element.name, MIN, i);
             }
         })
     }
     
     onCancel(event) {
-        console.log("In onCancel event=",event);
+//        console.log("In onCancel event=",event);
         this.setState({
             modal: !this.state.modal
         });
@@ -113,7 +113,7 @@ class ConstraintMinRowIndependentVariable extends React.Component {
                         {this.props.element.lmin & FIXED ? '' : (this.props.element.lmin & CONSTRAINED ? (this.props.element.vmin*100.0).toFixed(1) + '%' : '')}
                     </td>
                 </tr>
-                <Modal isOpen={this.state.modal} className={this.props.className} size="lg">
+                {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ? <Modal isOpen={this.state.modal} className={this.props.className} size="lg">
                     <ModalHeader>
                         Set {this.props.element.name} Min Constraint
                     </ModalHeader>
@@ -125,7 +125,7 @@ class ConstraintMinRowIndependentVariable extends React.Component {
                                 <td>
                                     <InputGroup>
                                         <ButtonGroup>
-                                            {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 && this.props.element.cminchoices.map((e) => {return (
+                                            {this.props.element.cminchoices.map((e) => {return (
                                                 <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) == e}>{e}</Button>
                                             );})}
                                         </ButtonGroup>
@@ -136,7 +136,7 @@ class ConstraintMinRowIndependentVariable extends React.Component {
                                 <td>Value:&nbsp;</td>
                                 <td>
                                     <InputGroup>
-                                        <Input id={this.props.element.name + "_cmin"} className="text-right" type="number" value={this.state.cmin} onChange={this.onChangeValue} />
+                                        <Input id={this.props.element.name + "_cmin"} className="text-right" type="number" value={this.state.value} onChange={this.onChangeValue} />
                                         <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
                                     </InputGroup>
                                 </td>
@@ -146,7 +146,7 @@ class ConstraintMinRowIndependentVariable extends React.Component {
                     <ModalFooter>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
                     </ModalFooter>
-                </Modal>
+                </Modal> : ''}
             </React.Fragment>
         );
     }
