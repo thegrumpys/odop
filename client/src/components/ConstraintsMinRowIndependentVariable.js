@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip, Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, UncontrolledTooltip, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MIN, FIXED, CONSTRAINED, FUNCTION } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
@@ -14,8 +14,8 @@ class ConstraintMinRowIndependentVariable extends React.Component {
         this.onResetIndependentVariableFlagConstrained = this.onResetIndependentVariableFlagConstrained.bind(this)
         this.onClick = this.onClick.bind(this);
         this.onChangeValue = this.onChangeValue.bind(this);
-        this.onApplyValue = this.onApplyValue.bind(this);
-        this.onApplyFDCL = this.onApplyFDCL.bind(this);
+        this.onEnterValue = this.onEnterValue.bind(this);
+        this.onSelectVariable = this.onSelectVariable.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false, // Default: do not display
@@ -52,8 +52,8 @@ class ConstraintMinRowIndependentVariable extends React.Component {
       });
     }
     
-    onApplyValue(event) {
-        console.log("In onApplyValue event=",event);
+    onEnterValue(event) {
+        console.log("In onEnterValue event=",event);
         this.setState({
             modal: !this.state.modal
         });
@@ -61,8 +61,8 @@ class ConstraintMinRowIndependentVariable extends React.Component {
         this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(this.state.cmin));
     }
       
-    onApplyFDCL(event, name) {
-        console.log("In onApplyFDCL event=",event," name=",name);
+    onSelectVariable(event, name) {
+        console.log("In onSelectVariable event=",event," name=",name);
         this.setState({
             modal: !this.state.modal
         });
@@ -113,16 +113,38 @@ class ConstraintMinRowIndependentVariable extends React.Component {
                         {this.props.element.lmin & FIXED ? '' : (this.props.element.lmin & CONSTRAINED ? (this.props.element.vmin*100.0).toFixed(1) + '%' : '')}
                     </td>
                 </tr>
-                <Modal isOpen={this.state.modal} className={this.props.className}>
+                <Modal isOpen={this.state.modal} className={this.props.className} size="lg">
+                    <ModalHeader>
+                        Set {this.props.element.name} Min Constraint
+                    </ModalHeader>
                     <ModalBody>
-                       {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 && this.props.element.cminchoices.map((e) => {return (
-                           <Button key={e} color="primary" onClick={(event) => {this.onApplyFDCL(event,e)}}>{e}</Button>
-                       );})}
-                       <Input id={this.props.element.name + "_cmin"} className="text-right" type="number" value={this.state.cmin} onChange={this.onChangeValue} />
+                        Select constraint variable or enter constraint value.
+                        <table>
+                            <tr>
+                                <td>Variable:&nbsp;</td>
+                                <td>
+                                    <InputGroup>
+                                        <ButtonGroup>
+                                            {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 && this.props.element.cminchoices.map((e) => {return (
+                                                <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) == e}>{e}</Button>
+                                            );})}
+                                        </ButtonGroup>
+                                    </InputGroup>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Value:&nbsp;</td>
+                                <td>
+                                    <InputGroup>
+                                        <Input id={this.props.element.name + "_cmin"} className="text-right" type="number" value={this.state.cmin} onChange={this.onChangeValue} />
+                                        <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
+                                    </InputGroup>
+                                </td>
+                            </tr>
+                        </table>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onApplyValue}>Apply</Button>
+                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>

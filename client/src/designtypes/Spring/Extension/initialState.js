@@ -90,8 +90,7 @@ export const initialState = {
             "tooltip": "Minimum operating load (Length L_1) (FDCL)",
             "equationset": true,
             "hidden": false,
-            "cminchoices": [ "Initial_Tension" ],
-            "cmaxchoices": [ "Initial_Tension" ]
+            "cminchoices": [ "Initial_Tension" ]
         },
         {
             "input": true,
@@ -363,7 +362,8 @@ export const initialState = {
             "sdlim": 1.0,
             "tooltip": "Bending stress in hooks",
             "equationset": true,
-            "hidden": false
+            "hidden": false,
+            "cmaxchoices": [ "Stress_Lim_Bend" ]
         },
         {
             "input": false,
