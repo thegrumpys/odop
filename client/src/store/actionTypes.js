@@ -35,4 +35,4 @@ export const MAX = 'MAX';
 
 export const CONSTRAINED = 1;
 export const FIXED = 2;
-export const FUNCTION = 4;
+export const VARIABLE = 4;

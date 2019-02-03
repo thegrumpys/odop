@@ -1,4 +1,4 @@
-import { CONSTRAINED, FIXED, FUNCTION } from '../../../store/actionTypes';
+import { CONSTRAINED, FIXED, VARIABLE } from '../../../store/actionTypes';
 export const initialState = {
     "symbol_table": [
         {
@@ -81,7 +81,7 @@ export const initialState = {
             "name": "Force_1",
             "value": 10.0,
             "units": "pounds",
-            "lmin": CONSTRAINED|FUNCTION,
+            "lmin": CONSTRAINED|VARIABLE,
             "lmax": 0,
             "cmin": 3,
             "cmax": 6.0,
@@ -307,8 +307,8 @@ export const initialState = {
             "name": "Stress_Initial",
             "value": 12940.1,
             "units": "PSI",
-            "lmin": CONSTRAINED|FUNCTION,
-            "lmax": CONSTRAINED|FUNCTION,
+            "lmin": CONSTRAINED|VARIABLE,
+            "lmax": CONSTRAINED|VARIABLE,
             "cmin": 29,
             "cmax": 30,
             "ioclass": 0,
