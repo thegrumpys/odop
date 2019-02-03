@@ -1,9 +1,10 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED, CONSTRAINED, VARIABLE } from '../store/actionTypes';
+import { FIXED } from '../store/actionTypes';
 import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
-    saveOutputSymbolConstraints, restoreOutputSymbolConstraints } from '../store/actionCreators';
+    saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
+    fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 
 class NameValueUnitsRowIndependentVariable extends React.Component {
     
@@ -47,18 +48,12 @@ class NameValueUnitsRowIndependentVariable extends React.Component {
     
     onSet() {
 //        console.log('In NameValueUnitsRowIndependentVariable.onSet');
-        this.props.saveOutputSymbolConstraints(this.props.element.name);
-        this.props.resetSymbolFlag(this.props.element.name, MIN, CONSTRAINED | VARIABLE);
-        this.props.resetSymbolFlag(this.props.element.name, MAX, CONSTRAINED | VARIABLE);
-        this.props.setSymbolFlag(this.props.element.name, MIN, FIXED);
-        this.props.setSymbolFlag(this.props.element.name, MAX, FIXED);
-        this.props.changeSymbolConstraint(this.props.element.name, MIN, undefined);
-        this.props.changeSymbolConstraint(this.props.element.name, MAX, undefined);
+        this.props.fixSymbolValue(this.props.element.name);
     }
     
     onReset() {
 //        console.log('In NameValueUnitsRowIndependentVariable.onReset');
-        this.props.restoreOutputSymbolConstraints(this.props.element.name);
+        this.props.freeSymbolValue(this.props.element.name);
     }
     
     render() {
@@ -110,7 +105,9 @@ const mapDispatchToProps = {
     saveOutputSymbolConstraints: saveOutputSymbolConstraints,
     restoreOutputSymbolConstraints: restoreOutputSymbolConstraints,
     setSymbolFlag: setSymbolFlag,
-    resetSymbolFlag: resetSymbolFlag
+    resetSymbolFlag: resetSymbolFlag,
+    fixSymbolValue: fixSymbolValue,
+    freeSymbolValue: freeSymbolValue
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NameValueUnitsRowIndependentVariable);

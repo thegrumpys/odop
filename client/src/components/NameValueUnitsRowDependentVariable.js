@@ -1,9 +1,10 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED, CONSTRAINED, VARIABLE } from '../store/actionTypes';
+import { FIXED } from '../store/actionTypes';
 import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
-    saveOutputSymbolConstraints, restoreOutputSymbolConstraints } from '../store/actionCreators';
+    saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
+    fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -27,17 +28,12 @@ class NameValueUnitsRowDependentVariable extends React.Component {
     onSet() {
 //        console.log('In NameValueUnitsRowDependentVariable.onSet');
         this.props.saveOutputSymbolConstraints(this.props.element.name);
-        this.props.resetSymbolFlag(this.props.element.name, MIN, VARIABLE);
-        this.props.resetSymbolFlag(this.props.element.name, MAX, VARIABLE);
-        this.props.setSymbolFlag(this.props.element.name, MIN, FIXED | CONSTRAINED);
-        this.props.setSymbolFlag(this.props.element.name, MAX, FIXED | CONSTRAINED);
-        this.props.changeSymbolConstraint(this.props.element.name, MIN, this.props.element.value);
-        this.props.changeSymbolConstraint(this.props.element.name, MAX, this.props.element.value);
+        this.props.fixSymbolValue(this.props.element.name);
     }
     
     onReset() {
 //        console.log('In NameValueUnitsRowDependentVariable.onReset');
-        this.props.restoreOutputSymbolConstraints(this.props.element.name);
+        this.props.freeSymbolValue(this.props.element.name);
     }
     
     render() {
@@ -73,7 +69,9 @@ const mapDispatchToDependentVariableProps = {
     saveOutputSymbolConstraints: saveOutputSymbolConstraints,
     restoreOutputSymbolConstraints: restoreOutputSymbolConstraints,
     setSymbolFlag: setSymbolFlag,
-    resetSymbolFlag: resetSymbolFlag
+    resetSymbolFlag: resetSymbolFlag,
+    fixSymbolValue: fixSymbolValue,
+    freeSymbolValue: freeSymbolValue
 };
 
 export default connect(null, mapDispatchToDependentVariableProps)(NameValueUnitsRowDependentVariable);
