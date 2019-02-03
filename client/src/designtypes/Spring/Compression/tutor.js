@@ -10,11 +10,12 @@ export const execute = {
                     <p>
                     Welcome to the first ODOP tutorial session.
                     This session will provide an introduction to basic ODOP features and concepts.
+                    in the context of the <b>compression spring</b> design type.
                     </p>
                     
                     <p>
                     If you are here simply as a "tourist" and are only interested in picking up a "flavor" 
-                    for ODOP:Spring as opposed to walking through the underlying
+                    for ODOP:Spring as opposed to learning the underlying
                     concepts and major features at the disposal of a serious spring designer, 
                     you may want to skip forward to the sample problems. 
                     You may do this by Canceling this session and selecting one of the spring 
@@ -44,6 +45,14 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     The initial conditions expected by this tutorial session are now established.
+                    </p>
+                    
+                    <p>
+                    It will be helpful for you to understand that this tutorial session is "live" and not
+                    a simple playback of a previous recording.  
+                    The ODOP main page has simply been displaced downward by the text in this light green 
+                    section.
+                    All the menus and other inputs to the program remain available.
                     </p>
                     
                     <p>
@@ -93,7 +102,7 @@ export const execute = {
                     ability to solve the really hard problems.<br />
                     <br />
                     <b>Getting Started</b> provides a tour of the main page (below) plus
-                    makes a few suggestions on how new users should attack the program.
+                    makes a few suggestions on how new users should approach learning the program.
                     Note that for the compression spring design type, 
                     the "main page" is actually the first of four "tabs" and 
                     has the name "Design:" plus a coil spring icon and the name of the current design. 
@@ -316,7 +325,7 @@ export const execute = {
                     <p>
                     Indeed, the design now utilizes less than 98 percent of its available deflection.
                     Also, Wire_Dia has remained at 0.110 inches 
-                    and Force_2 at 40 poinds as specified. 
+                    and Force_2 at 40 pounds as specified. 
                     </p>
                     
                     <p>
@@ -374,7 +383,7 @@ export const execute = {
                     
                     <ul>
                         <li>
-                        It is possible to set a value on any Independent Variable
+                        It is possible to set the value of any Independent Variable
                             <ul>
                                 <li>
                                     Dependent Variables will immediately recalculate to reflect that value.
@@ -425,8 +434,8 @@ export const execute = {
                     </p>
                     
                     <p>
-                    More tutorial sessions are available. 
-                    They have names like tutor3, tutor4, ... etc. 
+                    More compression spring tutorial sessions are available. 
+                    They have names like tutorTour, tutor3, tutor4, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the 
                     tutorial for a list of the Tutorial and Demo topics.
                     </p>
