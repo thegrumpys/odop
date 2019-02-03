@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button, Container, Row, Col, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import { connect } from 'react-redux';
-import { CONSTRAINED, MIN, MAX } from '../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FDCL } from '../../store/actionTypes';
 import { changeSymbolConstraint,
     saveInputSymbolValues,
     restoreInputSymbolValues,
@@ -94,11 +94,11 @@ class ActionTrade extends React.Component {
         design = store.getState();
         for (let i = 0; i < design.symbol_table.length; i++) {
             element = design.symbol_table[i];
-            if (element.lmin & CONSTRAINED && element.vmin > 0.0) {
+            if (element.lmin & CONSTRAINED && !(element.lmin & FDCL) && element.vmin > 0.0) {
                 nviol++
                 vflag[nviol - 1] = i;
                 ldir[nviol - 1] = -1;
-            } else if (element.lmax & CONSTRAINED && element.vmax > 0.0) {
+            } else if (element.lmax & CONSTRAINED && !(element.lmax & FDCL) && element.vmax > 0.0) {
                 nviol++
                 vflag[nviol - 1] = i;
                 ldir[nviol - 1] = +1;
