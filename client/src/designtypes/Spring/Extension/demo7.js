@@ -1,6 +1,6 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, freeSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
-import { MIN, MAX, CONSTRAINED, VARIABLE } from '../../../store/actionTypes';
+import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, freeSymbolValue, loadInitialState, setSymbolFlag, resetSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { MIN, MAX, CONSTRAINED, FDCL } from '../../../store/actionTypes';
 import { changeSystemControlsValue } from '../../../store/actionCreators';
 export const execute = {
     "name": "demo7",
@@ -146,7 +146,7 @@ export const execute = {
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 0.645),
                 fixSymbolValue('L_Free', 5.125),
-                resetSymbolFlag('Force_1', MIN, VARIABLE),
+                resetSymbolFlag('Force_1', MIN, FDCL),
                 setSymbolFlag('Force_1', MIN, CONSTRAINED),
                 changeSymbolConstraint('Force_1', MIN, 45.0),
                 setSymbolFlag('Force_1', MAX, CONSTRAINED),

@@ -17,7 +17,7 @@ import { STARTUP,
     SEARCH, 
     SEEK,
     
-    MIN, MAX, FIXED, CONSTRAINED, VARIABLE
+    MIN, MAX, FIXED, CONSTRAINED, FDCL
     } from '../actionTypes';
 import { setSclDen } from './setSclDen';
 import { search } from './search';
@@ -65,8 +65,8 @@ export const dispatcher = store => next => action => {
                 if (element.input) {
                     // Independent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
-                    store.dispatch(resetSymbolFlag(element.name, MIN, CONSTRAINED | VARIABLE));
-                    store.dispatch(resetSymbolFlag(element.name, MAX, CONSTRAINED | VARIABLE));
+                    store.dispatch(resetSymbolFlag(element.name, MIN, CONSTRAINED | FDCL));
+                    store.dispatch(resetSymbolFlag(element.name, MAX, CONSTRAINED | FDCL));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED));
                     store.dispatch(changeSymbolConstraint(element.name, MIN, undefined));
@@ -77,8 +77,8 @@ export const dispatcher = store => next => action => {
                 } else {
                     // Dependent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
-                    store.dispatch(resetSymbolFlag(element.name, MIN, VARIABLE));
-                    store.dispatch(resetSymbolFlag(element.name, MAX, VARIABLE));
+                    store.dispatch(resetSymbolFlag(element.name, MIN, FDCL));
+                    store.dispatch(resetSymbolFlag(element.name, MAX, FDCL));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED|CONSTRAINED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED|CONSTRAINED));
                     if (action.payload.value !== undefined) {

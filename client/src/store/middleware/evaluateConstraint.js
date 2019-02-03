@@ -1,9 +1,9 @@
-import { VARIABLE } from '../actionTypes';
+import { FDCL } from '../actionTypes';
 
 export function evaluateConstraintName(symbol_table, flags, value) {
     var result;
     
-    if (flags & VARIABLE) {
+    if (flags & FDCL) {
         if (symbol_table[value] !== undefined) {
             result = symbol_table[value].name;
         } else {
@@ -24,7 +24,7 @@ export function evaluateConstraintName(symbol_table, flags, value) {
 export function evaluateConstraintValue(symbol_table, flags, value) {
     var result;
     
-    if (flags & VARIABLE) {
+    if (flags & FDCL) {
         if (symbol_table[value] !== undefined) {
             result = symbol_table[value].value;
         } else {

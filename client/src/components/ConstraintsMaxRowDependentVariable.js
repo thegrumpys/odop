@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, UncontrolledTooltip, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED, CONSTRAINED, VARIABLE } from '../store/actionTypes';
+import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
 import { evaluateConstraintName, evaluateConstraintValue } from '../store/middleware/evaluateConstraint';
 
@@ -61,10 +61,10 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
             modal: !this.state.modal
         });
         if (this.props.element.lmax & FIXED) {
-            this.props.resetSymbolFlag(this.props.element.name, MIN, VARIABLE);
+            this.props.resetSymbolFlag(this.props.element.name, MIN, FDCL);
             this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(this.state.value));            
         }
-        this.props.resetSymbolFlag(this.props.element.name, MAX, VARIABLE);
+        this.props.resetSymbolFlag(this.props.element.name, MAX, FDCL);
         this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(this.state.value));
     }
       
@@ -74,7 +74,7 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
             modal: !this.state.modal
         });
         if (this.props.element.lmax & FIXED) {
-            this.props.setSymbolFlag(this.props.element.name, MIN, VARIABLE);
+            this.props.setSymbolFlag(this.props.element.name, MIN, FDCL);
             this.props.symbol_table.forEach((element, i) => {
                 if (element.name === name) {
 //                    console.log('@In onSelectVariable element=',element,' i=',i);
@@ -82,7 +82,7 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
                 }
             })
         }
-        this.props.setSymbolFlag(this.props.element.name, MAX, VARIABLE);
+        this.props.setSymbolFlag(this.props.element.name, MAX, FDCL);
         this.props.symbol_table.forEach((element, i) => {
             if (element.name === name) {
 //                console.log('In onSelectVariable element=',element,' i=',i);
@@ -126,7 +126,7 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
                                 </InputGroupText>
                             </InputGroupAddon>
                             <Input id={this.props.element.name + "_cmax"} className={cmax_class} type="number" value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} onClick={this.onClick} />
-                            {this.props.element.lmax & VARIABLE ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</UncontrolledTooltip> : ''}
+                            {this.props.element.lmax & FDCL ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</UncontrolledTooltip> : ''}
                         </InputGroup>
                     </td>
                     <td className="text-right align-middle" colSpan="1">

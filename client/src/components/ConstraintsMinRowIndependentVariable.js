@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, UncontrolledTooltip, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import { MIN, FIXED, CONSTRAINED, VARIABLE } from '../store/actionTypes';
+import { MIN, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
 import { evaluateConstraintName, evaluateConstraintValue } from '../store/middleware/evaluateConstraint';
 
@@ -57,7 +57,7 @@ class ConstraintMinRowIndependentVariable extends React.Component {
         this.setState({
             modal: !this.state.modal
         });
-        this.props.resetSymbolFlag(this.props.element.name, MIN, VARIABLE);
+        this.props.resetSymbolFlag(this.props.element.name, MIN, FDCL);
         this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(this.state.value));
     }
       
@@ -66,7 +66,7 @@ class ConstraintMinRowIndependentVariable extends React.Component {
         this.setState({
             modal: !this.state.modal
         });
-        this.props.setSymbolFlag(this.props.element.name, MIN, VARIABLE);
+        this.props.setSymbolFlag(this.props.element.name, MIN, FDCL);
         this.props.symbol_table.forEach((element, i) => {
             if (element.name === name) {
 //                console.log('@@@ element=',element,' i=',i);
@@ -106,7 +106,7 @@ class ConstraintMinRowIndependentVariable extends React.Component {
                                 </InputGroupText>
                             </InputGroupAddon>
                             <Input id={this.props.element.name + "_cmin"} className={cmin_class} type="number" value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} onClick={this.onClick} />
-                            {this.props.element.lmin & VARIABLE ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmin"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</UncontrolledTooltip> : ''}
+                            {this.props.element.lmin & FDCL ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmin"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</UncontrolledTooltip> : ''}
                         </InputGroup>
                     </td>
                     <td className="text-right align-middle" colSpan="1">
