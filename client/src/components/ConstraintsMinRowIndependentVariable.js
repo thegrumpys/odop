@@ -46,10 +46,10 @@ class ConstraintMinRowIndependentVariable extends React.Component {
     }
     
     onChangeValue(event) {
-//      console.log("In onChangeValue event=",event);
-      this.setState({
-          value: event.target.value
-      });
+//        console.log("In onChangeValue event=",event);
+        this.setState({
+            value: event.target.value
+        });
     }
     
     onEnterValue(event) {
@@ -120,27 +120,29 @@ class ConstraintMinRowIndependentVariable extends React.Component {
                     <ModalBody>
                         Select constraint variable or enter constraint value.
                         <table>
-                            <tr>
-                                <td>Variable:&nbsp;</td>
-                                <td>
-                                    <InputGroup>
-                                        <ButtonGroup>
-                                            {this.props.element.cminchoices.map((e) => {return (
-                                                <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) == e}>{e}</Button>
-                                            );})}
-                                        </ButtonGroup>
-                                    </InputGroup>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Value:&nbsp;</td>
-                                <td>
-                                    <InputGroup>
-                                        <Input id={this.props.element.name + "_cmin"} className="text-right" type="number" value={this.state.value} onChange={this.onChangeValue} />
-                                        <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
-                                    </InputGroup>
-                                </td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td>Variable:&nbsp;</td>
+                                    <td>
+                                        <InputGroup>
+                                            <ButtonGroup>
+                                                {this.props.element.cminchoices.map((e) => {return (
+                                                    <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) === e}>{e}</Button>
+                                                );})}
+                                            </ButtonGroup>
+                                        </InputGroup>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Value:&nbsp;</td>
+                                    <td>
+                                        <InputGroup>
+                                            <Input id={this.props.element.name + "_cmin"} className="text-right" type="number" value={this.state.value} onChange={this.onChangeValue} />
+                                            <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
+                                        </InputGroup>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </ModalBody>
                     <ModalFooter>

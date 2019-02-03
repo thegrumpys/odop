@@ -46,10 +46,10 @@ class ConstraintMaxRowIndependentVariable extends React.Component {
     }
     
     onChangeValue(event) {
-//      console.log("In onChangeValue event=",event);
-      this.setState({
-          value: event.target.value
-      });
+//        console.log("In onChangeValue event=",event);
+        this.setState({
+            value: event.target.value
+        });
     }
     
     onEnterValue(event) {
@@ -105,7 +105,7 @@ class ConstraintMaxRowIndependentVariable extends React.Component {
                                     <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetIndependentVariableFlagConstrained : this.onSetIndependentVariableFlagConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input id={this.props.element.name + "_cmax"} className={cmax_class} type="number" value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} />
+                            <Input id={this.props.element.name + "_cmax"} className={cmax_class} type="number" value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
                             {this.props.element.lmax & FUNCTION ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</UncontrolledTooltip> : ''}
                         </InputGroup>
                     </td>
@@ -120,27 +120,29 @@ class ConstraintMaxRowIndependentVariable extends React.Component {
                     <ModalBody>
                         Select constraint variable or enter constraint value.
                         <table>
-                            <tr>
-                                <td>Variable:&nbsp;</td>
-                                <td>
-                                    <InputGroup>
-                                        <ButtonGroup>
-                                            {this.props.element.cmaxchoices.map((e) => {return (
-                                                <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) == e}>{e}</Button>
-                                            );})}
-                                        </ButtonGroup>
-                                    </InputGroup>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Value:&nbsp;</td>
-                                <td>
-                                    <InputGroup>
-                                        <Input id={this.props.element.name + "_cmax"} className="text-right" type="number" value={this.state.value} onChange={this.onChangeValue} />
-                                        <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
-                                    </InputGroup>
-                                </td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td>Variable:&nbsp;</td>
+                                    <td>
+                                        <InputGroup>
+                                            <ButtonGroup>
+                                                {this.props.element.cmaxchoices.map((e) => {return (
+                                                    <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) === e}>{e}</Button>
+                                                );})}
+                                            </ButtonGroup>
+                                        </InputGroup>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Value:&nbsp;</td>
+                                    <td>
+                                        <InputGroup>
+                                            <Input id={this.props.element.name + "_cmax"} className="text-right" type="number" value={this.state.value} onChange={this.onChangeValue} />
+                                            <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
+                                        </InputGroup>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </ModalBody>
                     <ModalFooter>

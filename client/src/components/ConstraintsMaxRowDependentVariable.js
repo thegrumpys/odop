@@ -38,25 +38,25 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
     }
     
     onClick(event) {
-//        console.log("In onClick event=",event);
-        // Show modal only if there are cminchoices
-        if (this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0) {
+        console.log("In onClick event=",event);
+        // Show modal only if there are cmaxchoices
+        if (this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0) {
             this.setState({
                 modal: !this.state.modal,
-                value: this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : 0
+                value: this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : 0
             });
         }
     }
     
     onChangeValue(event) {
-//      console.log("In onChangeValue event=",event);
-      this.setState({
-          value: event.target.value
-      });
+        console.log("In onChangeValue event=",event);
+        this.setState({
+            value: event.target.value
+        });
     }
     
     onEnterValue(event) {
-//        console.log("In onEnterValue event=",event);
+        console.log("In onEnterValue event=",event);
         this.setState({
             modal: !this.state.modal
         });
@@ -69,7 +69,7 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
     }
       
     onSelectVariable(event, name) {
-//        console.log("In onSelectVariable event=",event," name=",name);
+        console.log("In onSelectVariable event=",event," name=",name);
         this.setState({
             modal: !this.state.modal
         });
@@ -77,7 +77,7 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
             this.props.setSymbolFlag(this.props.element.name, MIN, FUNCTION);
             this.props.symbol_table.forEach((element, i) => {
                 if (element.name === name) {
-//                    console.log('@@@ element=',element,' i=',i);
+                    console.log('@@@ element=',element,' i=',i);
                     this.props.changeSymbolConstraint(this.props.element.name, MIN, i);
                 }
             })
@@ -85,14 +85,14 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
         this.props.setSymbolFlag(this.props.element.name, MAX, FUNCTION);
         this.props.symbol_table.forEach((element, i) => {
             if (element.name === name) {
-//                console.log('@@@ element=',element,' i=',i);
+                console.log('@@@ element=',element,' i=',i);
                 this.props.changeSymbolConstraint(this.props.element.name, MAX, i);
             }
         })
     }
     
     onCancel(event) {
-//        console.log("In onCancel event=",event);
+        console.log("In onCancel event=",event);
         this.setState({
             modal: !this.state.modal
         });
@@ -125,7 +125,7 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
                                     <Input addon type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input id={this.props.element.name + "_cmax"} className={cmax_class} type="number" value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} />
+                            <Input id={this.props.element.name + "_cmax"} className={cmax_class} type="number" value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} onClick={this.onClick} />
                             {this.props.element.lmax & FUNCTION ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</UncontrolledTooltip> : ''}
                         </InputGroup>
                     </td>
@@ -140,27 +140,29 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
                     <ModalBody>
                         Select constraint variable or enter constraint value.
                         <table>
-                            <tr>
-                                <td>Variable:&nbsp;</td>
-                                <td>
-                                    <InputGroup>
-                                        <ButtonGroup>
-                                            {this.props.element.cmaxchoices.map((e) => {return (
-                                                <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) == e}>{e}</Button>
-                                            );})}
-                                        </ButtonGroup>
-                                    </InputGroup>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Value:&nbsp;</td>
-                                <td>
-                                    <InputGroup>
-                                        <Input id={this.props.element.name + "_cmax"} className="text-right" type="number" value={this.state.value} onChange={this.onChangeValue} />
-                                        <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
-                                    </InputGroup>
-                                </td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td>Variable:&nbsp;</td>
+                                    <td>
+                                        <InputGroup>
+                                            <ButtonGroup>
+                                                {this.props.element.cmaxchoices.map((e) => {return (
+                                                    <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) === e}>{e}</Button>
+                                                );})}
+                                            </ButtonGroup>
+                                        </InputGroup>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Value:&nbsp;</td>
+                                    <td>
+                                        <InputGroup>
+                                            <Input id={this.props.element.name + "_cmax"} className="text-right" type="number" value={this.state.value} onChange={this.onChangeValue} />
+                                            <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
+                                        </InputGroup>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </ModalBody>
                     <ModalFooter>
