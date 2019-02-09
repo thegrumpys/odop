@@ -34,7 +34,7 @@ class FileProperties extends React.Component {
             labels: this.state.labels.map((label) => {
                 if (label.name === name) {
                     return Object.assign({}, label, {
-                        value: value
+                        value: value.replace(/["\\/]/ig, '') // replace invalid JSON characters with nothing throughout
                     });
                 }
                 return label;
