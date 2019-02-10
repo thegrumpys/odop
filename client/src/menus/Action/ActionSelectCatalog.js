@@ -29,17 +29,12 @@ class ActionSelectCatalog extends React.Component {
         var name;
         if (names.length > 0)
             name = names[0]; // Default to first name
-        // Loop to create p and x from symbol_table
-        var p = [];
-        var x = [];
+        // Loop to create st from symbol_table
+        var st = [];
         this.props.symbol_table.forEach((element) => {
-            if (element.input) {
-                p.push(Object.assign({},element));
-            } else {
-                x.push(Object.assign({},element));
-            }
+            st.push(Object.assign({},element));
         });
-        var entries = getCatalogEntries(name, p, x, this.props.system_controls.viol_wt);
+        var entries = getCatalogEntries(name, st, this.props.system_controls.viol_wt);
         var entry = 0; // Default to first entry
         this.setState({
             names: names,
@@ -56,17 +51,12 @@ class ActionSelectCatalog extends React.Component {
         var name;
         if (names.length > 0)
             name = names[0]; // Default to first name
-        // Loop to create p and x from symbol_table
-        var p = [];
-        var x = [];
+        // Loop to create st from symbol_table
+        var st = [];
         this.props.symbol_table.forEach((element) => {
-            if (element.input) {
-                p.push(Object.assign({},element));
-            } else {
-                x.push(Object.assign({},element));
-            }
+            st.push(Object.assign({},element));
         });
-        var entries = getCatalogEntries(name, p, x, this.props.system_controls.viol_wt);
+        var entries = getCatalogEntries(name, st, this.props.system_controls.viol_wt);
         var entry = 0; // Default to first entry
         this.setState({
             modal: !this.state.modal,
@@ -82,16 +72,11 @@ class ActionSelectCatalog extends React.Component {
         var name = event.target.value;
         var { getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogEntries
         // Loop to create p and x from symbol_table
-        var p = [];
-        var x = [];
+        var st = [];
         this.props.symbol_table.forEach((element) => {
-            if (element.input) {
-                p.push(Object.assign({},element));
-            } else {
-                x.push(Object.assign({},element));
-            }
+            st.push(Object.assign({},element));
         });
-        var entries = getCatalogEntries(name, p, x, this.props.system_controls.viol_wt);
+        var entries = getCatalogEntries(name, st, this.props.system_controls.viol_wt);
         var entry = 0; // Default to first entry
         this.setState({
             name: name,

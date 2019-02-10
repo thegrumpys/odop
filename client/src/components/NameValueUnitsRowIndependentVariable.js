@@ -1,8 +1,10 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED } from '../store/actionTypes';
-import { changeSymbolValue, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
+import { FIXED } from '../store/actionTypes';
+import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
+    saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
+    fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 
 class NameValueUnitsRowIndependentVariable extends React.Component {
     
@@ -46,14 +48,12 @@ class NameValueUnitsRowIndependentVariable extends React.Component {
     
     onSet() {
 //        console.log('In NameValueUnitsRowIndependentVariable.onSet');
-        this.props.setSymbolFlag(this.props.element.name, MIN, FIXED);
-        this.props.setSymbolFlag(this.props.element.name, MAX, FIXED);
+        this.props.fixSymbolValue(this.props.element.name);
     }
     
     onReset() {
 //        console.log('In NameValueUnitsRowIndependentVariable.onReset');
-        this.props.resetSymbolFlag(this.props.element.name, MIN, FIXED);
-        this.props.resetSymbolFlag(this.props.element.name, MAX, FIXED);
+        this.props.freeSymbolValue(this.props.element.name);
     }
     
     render() {
@@ -101,8 +101,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     changeSymbolValue: changeSymbolValue,
+    changeSymbolConstraint: changeSymbolConstraint,
+    saveOutputSymbolConstraints: saveOutputSymbolConstraints,
+    restoreOutputSymbolConstraints: restoreOutputSymbolConstraints,
     setSymbolFlag: setSymbolFlag,
-    resetSymbolFlag: resetSymbolFlag
+    resetSymbolFlag: resetSymbolFlag,
+    fixSymbolValue: fixSymbolValue,
+    freeSymbolValue: freeSymbolValue
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NameValueUnitsRowIndependentVariable);

@@ -4,8 +4,8 @@ export function getSizeTypes() {
     return result;
 }
 
-export function getSizeEntries(type, p, x) {
-//    console.log('In getSizeEntries type=',type,' p=',p,' x=',x);
+export function getSizeEntries(type, st) {
+//    console.log('In getSizeEntries type=',type,' st=',st);
     var result = [];
 //    console.log('In getSizeEntries result=',result);
     return result;

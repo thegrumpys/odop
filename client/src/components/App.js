@@ -33,6 +33,7 @@ import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
 import ViewViolations from '../menus/View/ViewViolations';
+import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
@@ -80,18 +81,13 @@ class App extends Component {
             prefs.push(this.props.system_controls[key]);
         }
 
-        // Loop to create p and x from symbol_table
-        var p = [];
-        var x = [];
+        // Loop to create symbol_table
+        var st = [];
         this.props.symbol_table.forEach((element) => {
-            if (element.input) {
-                p.push(Object.assign({},element));
-            } else {
-                x.push(Object.assign({},element));
-            }
+            st.push(Object.assign({},element));
         });
 
-        // Loop to create p and x from symbol_table
+        // Loop to create labels
         var labels = [];
         this.props.labels.forEach((element) => {
             labels.push(Object.assign({},element));
@@ -99,7 +95,7 @@ class App extends Component {
 
         // Generate design-type specific report
         var { report } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load report
-        var output = report(report_name, prefs, p, x, labels);
+        var output = report(report_name, prefs, st, labels);
         return output;
     }
   
@@ -159,6 +155,7 @@ class App extends Component {
                                     </DropdownItem>
                                     <DropdownItem divider />
                                     <ViewViolations />
+                                    {process.env.NODE_ENV !== "production" && <ViewSymbolTableOffsets />}
                                     {process.env.NODE_ENV !== "production" && <ViewOffsets />}
                                </DropdownMenu>
                             </UncontrolledDropdown>

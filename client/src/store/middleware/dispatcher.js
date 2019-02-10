@@ -17,7 +17,7 @@ import { STARTUP,
     SEARCH, 
     SEEK,
     
-    MIN, MAX, FIXED, CONSTRAINED
+    MIN, MAX, FIXED, CONSTRAINED, FDCL
     } from '../actionTypes';
 import { setSclDen } from './setSclDen';
 import { search } from './search';
@@ -64,14 +64,21 @@ export const dispatcher = store => next => action => {
             if (element.name === action.payload.name) {
                 if (element.input) {
                     // Independent
+                    store.dispatch(saveOutputSymbolConstraints(element.name));
+                    store.dispatch(resetSymbolFlag(element.name, MIN, CONSTRAINED | FDCL));
+                    store.dispatch(resetSymbolFlag(element.name, MAX, CONSTRAINED | FDCL));
+                    store.dispatch(setSymbolFlag(element.name, MIN, FIXED));
+                    store.dispatch(setSymbolFlag(element.name, MAX, FIXED));
+                    store.dispatch(changeSymbolConstraint(element.name, MIN, undefined));
+                    store.dispatch(changeSymbolConstraint(element.name, MAX, undefined));
                     if (action.payload.value !== undefined) {
                         store.dispatch(changeSymbolValue(element.name, action.payload.value));
                     }
-                    store.dispatch(setSymbolFlag(element.name, MIN, FIXED));
-                    store.dispatch(setSymbolFlag(element.name, MAX, FIXED));
                 } else {
                     // Dependent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
+                    store.dispatch(resetSymbolFlag(element.name, MIN, FDCL));
+                    store.dispatch(resetSymbolFlag(element.name, MAX, FDCL));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED|CONSTRAINED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED|CONSTRAINED));
                     if (action.payload.value !== undefined) {
@@ -94,14 +101,7 @@ export const dispatcher = store => next => action => {
         design = store.getState();
         design.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
-                if (element.input) {
-                    // Independent
-                    store.dispatch(resetSymbolFlag(element.name, MIN, FIXED));
-                    store.dispatch(resetSymbolFlag(element.name, MAX, FIXED));
-                } else {
-                    // Dependent
-                    store.dispatch(restoreOutputSymbolConstraints(element.name));
-                }
+                store.dispatch(restoreOutputSymbolConstraints(element.name));
                 return true;
             } else {
                 return false;

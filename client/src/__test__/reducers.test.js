@@ -221,7 +221,7 @@ it('reducers reset symbol flag min', () => {
     
     design = store.getState(); // after
     expect(design.symbol_table[1].name).toEqual("RADIUS");
-    expect(design.symbol_table[1].lmin).toEqual(0);
+    expect(design.symbol_table[1].lmin).toEqual(0); // No flags
 });
 
 it('reducers set symbol flag max', () => {
@@ -255,7 +255,7 @@ it('reducers reset symbol flag max', () => {
     
     design = store.getState(); // after
     expect(design.symbol_table[2].name).toEqual("THICKNESS");
-    expect(design.symbol_table[2].lmax).toEqual(0);
+    expect(design.symbol_table[2].lmax).toEqual(0); // No flags
 });
 
 //=====================================================================
@@ -386,9 +386,9 @@ it('reducers save output symbol constraints', () => {
     
     var design = store.getState(); // before
     expect(design.symbol_table[3].name).toEqual("FORCE");
-    expect(design.symbol_table[3].lmin).toEqual(1);
+    expect(design.symbol_table[3].lmin).toEqual(1); // CONSTRAINED flag
     expect(design.symbol_table[3].cmin).toEqual(1000);
-    expect(design.symbol_table[3].lmax).toEqual(0);
+    expect(design.symbol_table[3].lmax).toEqual(0); // No flags
     expect(design.symbol_table[3].cmax).toEqual(0);
     expect(design.symbol_table[3].oldlmin).toEqual(undefined);
     expect(design.symbol_table[3].oldcmin).toEqual(undefined);
@@ -398,9 +398,9 @@ it('reducers save output symbol constraints', () => {
     store.dispatch(saveOutputSymbolConstraints("FORCE"));
     
     design = store.getState(); // after
-    expect(design.symbol_table[3].lmin).toEqual(1);
+    expect(design.symbol_table[3].lmin).toEqual(1); // CONSTRAINED flag
     expect(design.symbol_table[3].cmin).toEqual(1000);
-    expect(design.symbol_table[3].lmax).toEqual(0);
+    expect(design.symbol_table[3].lmax).toEqual(0); // No flags
     expect(design.symbol_table[3].cmax).toEqual(0);
     expect(design.symbol_table[3].oldlmin).toEqual(1);
     expect(design.symbol_table[3].oldcmin).toEqual(1000);
@@ -416,9 +416,9 @@ it('reducers restore output symbol constraints', () => {
     
     var design = store.getState(); // before
     expect(design.symbol_table[3].name).toEqual("FORCE");
-    expect(design.symbol_table[3].lmin).toEqual(1);
+    expect(design.symbol_table[3].lmin).toEqual(1); // CONSTRAINED flag
     expect(design.symbol_table[3].cmin).toEqual(1000);
-    expect(design.symbol_table[3].lmax).toEqual(0);
+    expect(design.symbol_table[3].lmax).toEqual(0); // No flags
     expect(design.symbol_table[3].cmax).toEqual(0);
     expect(design.symbol_table[3].oldlmin).toEqual(undefined);
     expect(design.symbol_table[3].oldcmin).toEqual(undefined);

@@ -28,6 +28,7 @@ import { STARTUP,
     MIN } from './actionTypes';
 import { sclden } from './middleware/sclden';
 import { initialSystemControls } from '../initialSystemControls';
+import { evaluateConstraintValue } from './middleware/evaluateConstraint';
 
 export function reducers(state, action) {
     var i;
@@ -88,12 +89,12 @@ export function reducers(state, action) {
                     if (action.payload.minmax === MIN) {
                         return Object.assign({}, element, {
                             cmin: action.payload.value,
-                            smin: sclden(state.system_controls, element.value, action.payload.value, element.sdlim, element.lmin)
+                            smin: sclden(state.system_controls, element.value, evaluateConstraintValue(state.symbol_table,element.lmin,action.payload.value), element.sdlim, element.lmin)
                         });
                     } else {
                         return Object.assign({}, element, {
                             cmax: action.payload.value,
-                            smax: sclden(state.system_controls, element.value, action.payload.value, element.sdlim, element.lmax)
+                            smax: sclden(state.system_controls, element.value, evaluateConstraintValue(state.symbol_table,element.lmax,action.payload.value), element.sdlim, element.lmax)
                         });
                     }
                 }
@@ -111,12 +112,12 @@ export function reducers(state, action) {
                         if (action.payload.minmax === MIN) {
                             return Object.assign({}, element, {
                                 cmin: value,
-                                smin: sclden(state.system_controls, element.value, value, element.sdlim, element.lmin)
+                                smin: sclden(state.system_controls, element.value, evaluateConstraintValue(state.symbol_table,element.lmin,value), element.sdlim, element.lmin)
                             });
                         } else {
                             return Object.assign({}, element, {
                                 cmax: value,
-                                smax: sclden(state.system_controls, element.value, value, element.sdlim, element.lmax)
+                                smax: sclden(state.system_controls, element.value, evaluateConstraintValue(state.symbol_table,element.lmax,value), element.sdlim, element.lmax)
                             });
                         }
                     } else {
@@ -148,10 +149,10 @@ export function reducers(state, action) {
                     return Object.assign({}, element, {
                         lmin: element.oldlmin,
                         cmin: element.oldcmin,
-                        smin: sclden(state.system_controls, element.value, element.oldcmin, element.sdlim, element.oldlmin),
+                        smin: sclden(state.system_controls, element.value, evaluateConstraintValue(state.symbol_table,element.oldlmin,element.oldcmin), element.sdlim, element.oldlmin),
                         lmax: element.oldlmax,
                         cmax: element.oldcmax,
-                        smax: sclden(state.system_controls, element.value, element.oldcmax, element.sdlim, element.oldlmax)
+                        smax: sclden(state.system_controls, element.value, evaluateConstraintValue(state.symbol_table,element.oldlmax,element.oldcmax), element.sdlim, element.oldlmax)
                     });
                 }
                 return element;
