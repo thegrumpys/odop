@@ -254,7 +254,7 @@ as simple constants, these express a desired relationship between
 selected variables.   
 
 In the default extension spring start point (startup), Force\_1 MIN is
-a "function" of Initial\_Tension.  
+a "function" of Initial\_Tension. 
 The constraint relationship says that Force\_1, the force at the first
 load point, should be greater than the value of Initial\_Tension.
 
