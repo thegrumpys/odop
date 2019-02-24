@@ -128,47 +128,47 @@ class ConstraintsMaxRowDependentVariable extends React.Component {
                             <Input id={this.props.element.name + "_cmax"} className={cmax_class} type="number" value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} onClick={this.onClick} />
                             {this.props.element.lmax & FDCL ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</UncontrolledTooltip> : ''}
                         </InputGroup>
+                        {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal isOpen={this.state.modal} className={this.props.className} size="lg">
+                            <ModalHeader>
+                                Set {this.props.element.name} Max Constraint
+                            </ModalHeader>
+                            <ModalBody>
+                                Select constraint variable or enter constraint value.
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Variable:&nbsp;</td>
+                                            <td>
+                                                <InputGroup>
+                                                    <ButtonGroup>
+                                                        {this.props.element.cmaxchoices.map((e) => {return (
+                                                            <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) === e}>{e}</Button>
+                                                        );})}
+                                                    </ButtonGroup>
+                                                </InputGroup>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Value:&nbsp;</td>
+                                            <td>
+                                                <InputGroup>
+                                                    <Input id={this.props.element.name + "_cmax"} className="text-right" type="number" value={this.state.value} onChange={this.onChangeValue} />
+                                                    <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
+                                                </InputGroup>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
+                            </ModalFooter>
+                        </Modal> : ''}
                     </td>
                     <td className="text-right align-middle" colSpan="1">
                         {this.props.element.lmax & FIXED ? (this.props.element.vmax*100.0).toFixed(1) : (this.props.element.lmax & CONSTRAINED ? (this.props.element.vmax*100.0).toFixed(1) + '%' : '')}
                     </td>
                 </tr>
-                {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal isOpen={this.state.modal} className={this.props.className} size="lg">
-                    <ModalHeader>
-                        Set {this.props.element.name} Max Constraint
-                    </ModalHeader>
-                    <ModalBody>
-                        Select constraint variable or enter constraint value.
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>Variable:&nbsp;</td>
-                                    <td>
-                                        <InputGroup>
-                                            <ButtonGroup>
-                                                {this.props.element.cmaxchoices.map((e) => {return (
-                                                    <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) === e}>{e}</Button>
-                                                );})}
-                                            </ButtonGroup>
-                                        </InputGroup>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Value:&nbsp;</td>
-                                    <td>
-                                        <InputGroup>
-                                            <Input id={this.props.element.name + "_cmax"} className="text-right" type="number" value={this.state.value} onChange={this.onChangeValue} />
-                                            <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
-                                        </InputGroup>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
-                    </ModalFooter>
-                </Modal> : ''}
             </React.Fragment>
         );
     }
