@@ -178,7 +178,7 @@ available at [Spring Design Topics](../SpringDesign).
 
 &nbsp;
 
-<img src="../../../client/public/designtypes/Spring/Torsion/TorsionNames.png" alt="Torsion Spring Names"/>
+![Torsion Spring Names](../../../client/public/designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names")   
 
 &nbsp;
 
@@ -230,15 +230,8 @@ Refer to the diagram above for more details.
 [Help](../)   
 
 
-<!--- The following lines are alternate syntax for in-line image links  -->
-
 &nbsp;
 
-The following lines are alternate syntax for in-line image links   
-
-<img src="https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Torsion/TorsionNames.png" alt="Torsion Spring Names"/>   
-
-![Torsion Spring Names](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names")   
 
 <!---
 While single line comments work as expected, a multi-line comment must be the last thing in the file.
@@ -246,6 +239,14 @@ Eclipse .md Preview suppresses display of everything after the comment header.
 
 **Under Construction**   
 This page is still a work in progress !   
+
+The following lines are alternate syntax for in-line image links   
+
+<img src="../../../client/public/designtypes/Spring/Torsion/TorsionNames.png" alt="Torsion Spring Names"/>
+
+<img src="https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Torsion/TorsionNames.png" alt="Torsion Spring Names"/>   
+
+![Torsion Spring Names](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names")   
 
 -->
 
