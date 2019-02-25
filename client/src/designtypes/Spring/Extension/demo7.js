@@ -1,7 +1,6 @@
 import React from 'react';
 import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, freeSymbolValue, loadInitialState, setSymbolFlag, resetSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED, FDCL } from '../../../store/actionTypes';
-import { changeSystemControlsValue } from '../../../store/actionCreators';
 export const execute = {
     "name": "demo7",
     "steps": [
@@ -165,16 +164,9 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     Note that previously initialState had End_Extension FIXed at a value of 0.0 in. 
-                    </p>
-                    
-                    <p>
-                    For now, we'll let the solution process select any value of end extension that
+                    &nbsp;For now, we'll let the solution process select any value of end extension that
                     assists the solution:<br />
-                    FREE  End_Extension
-                    </p>
-                    
-                    <p>
-                    Pending implementation of FDCL, set constraint FS_SI_Lo MIN; tweakPrefs.
+                    &nbsp; FREE  End_Extension
                     </p>
 
                     <p>
@@ -185,8 +177,6 @@ export const execute = {
             ),
             actions: [
                 freeSymbolValue('End_Extension'),
-                setSymbolFlag('FS_SI_Lo', MIN, CONSTRAINED),
-                changeSystemControlsValue({maxit: 190, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
             ]
         },
         {

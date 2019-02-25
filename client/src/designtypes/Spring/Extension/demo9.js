@@ -1,6 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, fixSymbolValue, loadInitialState, setSymbolFlag, resetSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
-import { MIN, CONSTRAINED } from '../../../store/actionTypes';
+import { changeSymbolValue, fixSymbolValue, loadInitialState, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
 import { changeSystemControlsValue } from '../../../store/actionCreators';
 export const execute = {
     "name": "demo9",
@@ -117,6 +116,9 @@ export const execute = {
                     
                     <p>
                     This is a good time to scroll down and confirm these changes are now in place.
+                    Also, the next page will adjust values found in the <b>File : Preferences</b> menu.
+                    You may want to take this opportunity to look at the default values before 
+                    those adjustments are made.
                     </p>
                 </React.Fragment>
             ),
@@ -135,11 +137,11 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Pending implementation of FDCL: <br />
-                    &nbsp; &nbsp; remove constraint on Force_1 <br />
-                    &nbsp; &nbsp; set constraint FS_SI_Lo MIN; <br />
-                    &nbsp; &nbsp; set constraint FS_SI_Hi MIN; <br />
-                    &nbsp; &nbsp; tweakPrefs.
+                    While not necessary for the solution of this problem, 
+                    new preference values have been imposed to illustrate how it is done in a Demo session.
+                    Look at the <b>File : Preferences</b> menu to see the details.
+                    The values are the same as provided by running the <b>Action : Execute : tweakPrefs</b> 
+                    &nbsp; menu item.
                     </p>
                     
                     <p>
@@ -148,9 +150,6 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                resetSymbolFlag('Force_1', MIN, CONSTRAINED),
-                setSymbolFlag('FS_SI_Lo', MIN, CONSTRAINED),
-                setSymbolFlag('FS_SI_Hi', MIN, CONSTRAINED),
                 changeSystemControlsValue({maxit: 190, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
             ]
         },

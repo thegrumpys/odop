@@ -1,7 +1,6 @@
 import React from 'react';
 import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, freeSymbolValue, loadInitialState, setSymbolFlag, resetSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
-import { changeSystemControlsValue } from '../../../store/actionCreators';
 export const execute = {
     "name": "demo8",
     "steps": [
@@ -118,10 +117,6 @@ export const execute = {
                     assists the solution:<br />
                     &nbsp; FREE  End_Extension
                     </p>
-                    
-                    <p>
-                    Pending implementation of FDCL, set constraint FS_SI_Lo MIN; tweakPrefs.
-                    </p>
 
                     <p>
                     This is a good time to scroll down and confirm these changes are now in place.
@@ -131,8 +126,6 @@ export const execute = {
             ),
             actions: [
                 freeSymbolValue('End_Extension'),
-                setSymbolFlag('FS_SI_Lo', MIN, CONSTRAINED),
-                changeSystemControlsValue({maxit: 190, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
             ]
         },
         {
