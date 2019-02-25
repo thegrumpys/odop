@@ -1,7 +1,6 @@
 import React from 'react';
 import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
-import { changeSystemControlsValue } from '../../../store/actionCreators';
 export const execute = {
     "name": "demo6",
     "steps": [
@@ -135,17 +134,15 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Pending implementation of FDCL, set constraint FS_SI_Lo MIN; tweakPrefs.
+                    In the process of transitioning to the next page, the demo session will run Search.
                     </p>
                     
                     <p>
-                    In the process of transitioning to the next page, the demo session will run Search.
+                    <br /><br />
                     </p>
                 </React.Fragment>
             ),
             actions: [
-                setSymbolFlag('FS_SI_Lo', MIN, CONSTRAINED),
-                changeSystemControlsValue({maxit: 190, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
             ]
         },
         {

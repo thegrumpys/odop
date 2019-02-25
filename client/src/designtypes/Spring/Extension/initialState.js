@@ -11,7 +11,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 2.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Outside diameter in free (no load) condition",
             "equationset": true,
             "hidden": false
@@ -26,7 +26,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0.5,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Wire diameter",
             "equationset": true,
             "hidden": false
@@ -41,7 +41,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 20,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Total number of coils",
             "equationset": true,
             "hidden": false
@@ -56,7 +56,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Minimum force required to separate coils",
             "equationset": true,
             "hidden": false
@@ -71,7 +71,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "End Extension (see diagram in on-line Help)",
             "equationset": true,
             "hidden": false
@@ -86,7 +86,7 @@ export const initialState = {
             "cmin": 3,
             "cmax": 6.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Minimum operating load (Length L_1) (FDCL)",
             "equationset": true,
             "hidden": false,
@@ -102,7 +102,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 50,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Maximum operating load (Length L_2)",
             "equationset": true,
             "hidden": false
@@ -117,7 +117,7 @@ export const initialState = {
             "cmin": 0.1,
             "cmax": 10.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Average of inside and outside coil diameters",
             "equationset": true,
             "hidden": false
@@ -132,7 +132,7 @@ export const initialState = {
             "cmin": 0.1,
             "cmax": 10.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Coil inside diameter in free (no load) condition",
             "equationset": true,
             "hidden": false
@@ -145,9 +145,9 @@ export const initialState = {
             "lmin": CONSTRAINED,
             "lmax": CONSTRAINED,
             "cmin": 1.0,
-            "cmax": 50.0,
+            "cmax": 90.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Number of Active coils; includes End_Deflect_Allow",
             "equationset": true,
             "hidden": false
@@ -162,7 +162,7 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 200.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
             "equationset": true,
             "hidden": false
@@ -177,7 +177,7 @@ export const initialState = {
             "cmin": 0.0,
             "cmax": 20.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Deflection from free to load point 1",
             "equationset": true,
             "hidden": false
@@ -192,7 +192,7 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 20.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Deflection from free to load point 2",
             "equationset": true,
             "hidden": false
@@ -207,7 +207,7 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 20.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Length of body in free condition (see diagram in on-line Help)",
             "equationset": true,
             "hidden": false
@@ -222,7 +222,7 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 20.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Free length including ends (see diagram in on-line Help)",
             "equationset": true,
             "hidden": false
@@ -237,7 +237,7 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 100.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Spring length at load point 1",
             "equationset": true,
             "hidden": false
@@ -252,7 +252,7 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 200.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Spring length at load point 2",
             "equationset": true,
             "hidden": false
@@ -267,7 +267,7 @@ export const initialState = {
             "cmin": 0.050,
             "cmax": 100.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.1,
             "tooltip": "Length of stroke from point 1 to point 2",
             "equationset": true,
             "hidden": false
@@ -282,7 +282,7 @@ export const initialState = {
             "cmin": 0.01,
             "cmax": 10.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Weight of one spring",
             "equationset": true,
             "hidden": false
@@ -297,7 +297,7 @@ export const initialState = {
             "cmin": 4.0,
             "cmax": 10.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Ratio of mean coil diameter (Mean_Dia) to wire diameter (Wire_Dia)",
             "equationset": true,
             "hidden": false
@@ -312,7 +312,7 @@ export const initialState = {
             "cmin": 29,
             "cmax": 30,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 2000.0,
             "tooltip": "Stress resulting from Initial_Tension (FDCL)",
             "equationset": true,
             "hidden": false,
@@ -329,7 +329,7 @@ export const initialState = {
             "cmin": 100.0,
             "cmax": 10000.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Torsion stress in wire at load point 1",
             "equationset": true,
             "hidden": false
@@ -344,7 +344,7 @@ export const initialState = {
             "cmin": 100.0,
             "cmax": 10000.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Torsion stress in wire at load point 2",
             "equationset": true,
             "hidden": false
@@ -359,7 +359,7 @@ export const initialState = {
             "cmin": 100.0,
             "cmax": 10000.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Bending stress in hooks",
             "equationset": true,
             "hidden": false,
@@ -375,7 +375,7 @@ export const initialState = {
             "cmin": 1.1,
             "cmax": 1.6,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Factor of safety at load point 2",
             "equationset": true,
             "hidden": false
@@ -390,7 +390,7 @@ export const initialState = {
             "cmin": 1.02,
             "cmax": 1.5,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Factor of safety to achieve the target cycle life category",
             "equationset": true,
             "hidden": false
@@ -405,7 +405,7 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 1.5,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Factor of safety in the hooks",
             "equationset": true,
             "hidden": false
@@ -420,7 +420,7 @@ export const initialState = {
             "cmin": 2.0,
             "cmax": 1000000.0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 1000.0,
             "tooltip": "Rough estimate of the average number of cycles to failure",
             "equationset": true,
             "hidden": false
@@ -480,10 +480,10 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 1.5,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Factor of safety for Stress Initial range low point",
             "equationset": true,
-            "hidden": false
+            "hidden": true
         },
         {
             "input": false,
@@ -495,10 +495,10 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 1.5,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Factor of safety for Stress Initial range high point",
             "equationset": true,
-            "hidden": false
+            "hidden": true
         },
         {
             "input": false,
@@ -510,10 +510,10 @@ export const initialState = {
             "cmin": 1.0,
             "cmax": 20,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 10.0,
             "tooltip": "Force_1 > Initial_Tension margin",
             "equationset": true,
-            "hidden": false
+            "hidden": true
         },
         {
             "input": false,
