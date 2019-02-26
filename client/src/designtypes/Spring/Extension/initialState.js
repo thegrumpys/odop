@@ -525,7 +525,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Extension spring design",
             "equationset": false,
             "hidden": false
@@ -542,7 +542,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Property Calculation Method - Controls how material properties are determined and used.  1-Use values from material table  2-Specify Tensile, %_Tensile_Stat & %_Tensile_Endur  3-Specify allowable stresses: Stress_Lim_Stat & Stress_Lim_Endur",
             "equationset": false,
             "hidden": false
@@ -559,7 +559,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Select wire material",
             "equationset": false,
             "hidden": false
@@ -574,7 +574,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Wire specification",
             "equationset": false,
             "hidden": false
@@ -589,7 +589,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Coil winding process temperature - Cold coiled vs. Hot wound",
             "equationset": false,
             "hidden": false
@@ -604,7 +604,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "equationset": false,
             "hidden": true
         },
@@ -618,7 +618,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "equationset": false,
             "hidden": true
         },
@@ -634,7 +634,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Select cycle life target. Selects %_Tensile_Endur from material table.",
             "equationset": false,
             "hidden": false
@@ -651,7 +651,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Select end type",
             "equationset": false,
             "hidden": false
@@ -666,7 +666,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Number of coils not contributing to deflection. Depends on End_Type.",
             "equationset": false,
             "hidden": false
@@ -681,7 +681,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Wire material density",
             "equationset": false,
             "hidden": false
@@ -696,7 +696,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Wire torsion modulus (G)",
             "equationset": false,
             "hidden": false
@@ -711,7 +711,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Reduction factor applied to modulus of hot-wound materials",
             "equationset": false,
             "hidden": false
@@ -726,7 +726,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Wire tensile strength (computed as a function of wire diameter when Prop_Calc_Method=1; See Help for details)",
             "equationset": false,
             "hidden": false
@@ -741,7 +741,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Allowable percent of tensile strength for selected life cycle category",
             "equationset": false,
             "hidden": false
@@ -756,7 +756,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Allowable percent of tensile strength for static applications",
             "equationset": false,
             "hidden": false
@@ -771,7 +771,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Allowable percent of tensile strength for bending",
             "equationset": false,
             "hidden": false
@@ -786,7 +786,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Allowable stress for selected life cycle category",
             "equationset": false,
             "hidden": false
@@ -801,7 +801,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Allowable stress for static applications",
             "equationset": false,
             "hidden": false
@@ -816,7 +816,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Allowable stress for bending",
             "equationset": false,
             "hidden": false
@@ -833,7 +833,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Select desired range of stress created by Initial_Tension. See on-line Help for details.",
             "equationset": false,
             "hidden": false
@@ -848,7 +848,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Stress Initial Low Factor from material table - used with Spring_Index to determine Stress_Init_Lo",
             "equationset": false,
             "hidden": false
@@ -863,7 +863,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Stress Initial High Factor from material table - used with Spring_Index to determine Stress_Init_Hi",
             "equationset": false,
             "hidden": false
@@ -878,7 +878,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "End Inside Diameter. Used in calculation of stress at end.",
             "equationset": false,
             "hidden": false
@@ -893,7 +893,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Extended End Inside Diameter. Used in calculation of stress at end.",
             "equationset": false,
             "hidden": false
@@ -908,7 +908,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Length of End (see diagram in on-line Help). Used in calculation of L_Free.",
             "equationset": false,
             "hidden": false
@@ -923,7 +923,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Length of Extended End (see diagram in on-line Help). Used in calculation of L_Free.",
             "equationset": false,
             "hidden": false
@@ -938,7 +938,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "tooltip": "Hook Deflection Allowance - adds to Coils_A",
             "equationset": false,
             "hidden": false
@@ -953,7 +953,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "equationset": false,
             "hidden": true
         },
@@ -967,7 +967,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "equationset": false,
             "hidden": true
         },
@@ -981,7 +981,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "equationset": false,
             "hidden": true
         },
@@ -995,7 +995,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "equationset": false,
             "hidden": true
         },
@@ -1009,7 +1009,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "ioclass": 0,
-            "sdlim": 1.0,
+            "sdlim": 0.0,
             "equationset": false,
             "hidden": true
         }
@@ -1017,7 +1017,7 @@ export const initialState = {
     "labels": [
         {
             "name": "COMMENT",
-            "value": "Extension Spring default startup file ..."
+            "value": "Extension Spring default start point ..."
         },
         {
             "name": "Contact person",
