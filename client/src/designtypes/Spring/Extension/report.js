@@ -328,12 +328,12 @@ export function report(report_name, prefs, st, labels) {
             <br />
             Deflection at load point 2 is {pc_avail_deflect.toFixed(0)}% of total safe deflection.<br />
             <br />
-            ------------------------------- {st[o.L_Free].name} (w/ends) = {st[o.L_Free].value.toFixed(3)} ----------------------------<br />
-            ---- {st[o.L_End].name} ---- ---- {st[o.L_Body].name} ---- ---- {st[o.End_Extension].name} ---- ---- {st[o.L_Extended_End].name} ----<br />
-            &nbsp; &nbsp; &nbsp; &nbsp; {st[o.L_End].value.toFixed(3)} &nbsp; &nbsp; &nbsp; &nbsp; 
+            |&lt;------------------------------- {st[o.L_Free].name} (w/ends) = {st[o.L_Free].value.toFixed(3)} -------------------------------&gt;|<br />
+            |&lt;--- {st[o.L_End].name} ---&gt;|&lt;--- {st[o.L_Body].name} ---&gt;|&lt;--- {st[o.End_Extension].name} ---&gt;|&lt;--- {st[o.L_Extended_End].name} ---&gt;|<br />
+            &nbsp; &nbsp; &nbsp; &nbsp; {st[o.L_End].value.toFixed(3)} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
             &nbsp; &nbsp; &nbsp; {st[o.L_Body].value.toFixed(3)} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {st[o.End_Extension].value.toFixed(3)} &nbsp; &nbsp; &nbsp; &nbsp; 
-            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {st[o.L_Extended_End].value.toFixed(3)} 
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {st[o.L_Extended_End].value.toFixed(3)} 
             <br /> &nbsp;
         </React.Fragment>
     );
@@ -824,12 +824,12 @@ export function report(report_name, prefs, st, labels) {
         Deflection at load point 2 is {pc_avail_deflect.toFixed(0)}% of total safe deflection.<br />
         {warnmsg}{warnmsg !== "" && <br />}
         <br />
-        ------------------------------- {st[o.L_Free].name} (w/ends) = {st[o.L_Free].value.toFixed(3)} ----------------------------<br />
-        ---- {st[o.L_End].name} ---- ---- {st[o.L_Body].name} ---- ---- {st[o.End_Extension].name} ---- ---- {st[o.L_Extended_End].name} ----<br />
-        &nbsp; &nbsp; &nbsp; &nbsp; {st[o.L_End].value.toFixed(3)} &nbsp; &nbsp; &nbsp; &nbsp; 
+        |&lt;------------------------------- {st[o.L_Free].name} (w/ends) = {st[o.L_Free].value.toFixed(3)} -------------------------------&gt;|<br />
+        |&lt;--- {st[o.L_End].name} ---&gt;|&lt;--- {st[o.L_Body].name} ---&gt;|&lt;--- {st[o.End_Extension].name} ---&gt;|&lt;--- {st[o.L_Extended_End].name} ---&gt;|<br />
+        &nbsp; &nbsp; &nbsp; &nbsp; {st[o.L_End].value.toFixed(3)} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
         &nbsp; &nbsp; &nbsp; {st[o.L_Body].value.toFixed(3)} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {st[o.End_Extension].value.toFixed(3)} &nbsp; &nbsp; &nbsp; &nbsp; 
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {st[o.L_Extended_End].value.toFixed(3)} 
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {st[o.L_Extended_End].value.toFixed(3)} 
         <hr/>
         <table>
             <tbody>
