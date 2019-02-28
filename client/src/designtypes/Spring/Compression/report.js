@@ -135,8 +135,7 @@ export function report(report_name, prefs, st, labels) {
      * From: http://springipedia.com/compression-general-design.asp 
      */
 
-    if(st[o.Prop_Calc_Method].value === 1 || st[o.Prop_Calc_Method].value === 2) tensileFixed0 = st[o.Tensile].value.toFixed(0);
-     else tensileFixed0 = "unused";
+    tensileFixed0 = st[o.Tensile].value.toFixed(0);
      
     /* used to compute % tensile values */
 //    if (st[o.Tensile].value <= prefs[o.smallnum]) {

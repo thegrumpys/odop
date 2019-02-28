@@ -96,8 +96,7 @@ export function report(report_name, prefs, st, labels) {
         return((st[o.Mean_Dia].value * st[o.Coils_A].value) / (st[o.Coils_A].value + def / Deg_Per_Turn));
     }
 
-    if(st[o.Prop_Calc_Method].value === 1 || st[o.Prop_Calc_Method].value === 2) tensileFixed0 = st[o.Tensile].value.toFixed(0);
-     else tensileFixed0 = "unused";
+    tensileFixed0 = st[o.Tensile].value.toFixed(0);
 
     dhat = st[o.Tensile].value / 100.0;
 
