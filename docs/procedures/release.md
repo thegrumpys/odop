@@ -1,10 +1,11 @@
 # Release Process:
 
+DEVELOPMENT ENVIRONMENT
 * Verify Github Milestone issues are completed.
 * Ask "Have we done everything on our milestone list?", "Is there anything else we need to do?", and "Are we ready for release?"
-
-DEVELOPMENT ENVIRONMENT
 * Make sure your development environment is on branch master.
+* Assume development database has been created by running create.sql.
+* If the initial state has changed significantly and the startup files need to be purged, then create load.sql files for each design type.
 * Start server and client under your development environment. 
 * Bring up Google Chrome and enable View Debugger and verify no unexpected console.log output. Test various input and menu functions.
 * Shutdown server and client under your development environment. In server run "npm test" and verify test cases executed successfully. Then in client run "npm test" and verify test cases executed successfully.
@@ -13,7 +14,7 @@ DEVELOPMENT ENVIRONMENT
 
 PRODUCTION
 * If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) to create and format the database tables.
-* If the database already exists, but no the entries exist or must be recreated, then run all load.sql file into the database.
+* If the database already exists, but no the entries exist or must be recreated, then run all load.sql files to create startup files in the database.
 * In git/odop push to Heroku (command: git push heroku master). Verify no error messages during build on heroku.
 * On http://odop.herokuapp.com website is operational and version X.Y.Z displays.
 * Create X.Y.Z tag (for example, 0.4). Commit "Release X.Y.Z" and push to origin.
