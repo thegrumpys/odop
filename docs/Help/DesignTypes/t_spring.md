@@ -180,7 +180,7 @@ available at [Spring Design Topics](../SpringDesign).
 
 ![Torsion Spring Names](designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names")   
 
-![Torsion Spring Names](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names x")   
 
 &nbsp;
 
