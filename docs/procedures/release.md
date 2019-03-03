@@ -14,7 +14,7 @@ DEVELOPMENT ENVIRONMENT
 
 PRODUCTION
 * If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) to create and format the database tables.
-* If the database already exists, but no the entries exist or must be recreated, then run all load.sql files to create "startup" files in the database.
+* If the database already exists, but no the entries exist or must be recreated, then run all affected load.sql files to create "startup" files in the database.
 * In git/odop push to Heroku (command: git push heroku master). Verify no error messages during build on heroku.
 * On http://odop.herokuapp.com website is operational and version X.Y.Z displays.
 * Create X.Y.Z tag (for example, 0.4). Commit "Release X.Y.Z" and push to origin.
