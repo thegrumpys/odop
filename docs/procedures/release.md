@@ -5,8 +5,8 @@ DEVELOPMENT ENVIRONMENT
 * Ask "Have we done everything on our milestone list?", "Is there anything else we need to do?", and "Are we ready for release?"
 * Make sure your development environment is on branch master.
 * Assume development database has been created by running create.sql.
-* If the initial state has changed significantly and the startup files need to be purged, then create load.sql files for each design type.
 * Start server and client under your development environment. 
+* If the initial state has changed significantly or the startup files need to be purged, then create load.sql files for each affected design type. Do a "Load Initial State" followed by a File > Save "startup". Then using mysqldump dump the affected entries into load.sql file. Finally manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). Commit these changes.
 * Bring up Google Chrome and enable View Debugger and verify no unexpected console.log output. Test various input and menu functions.
 * Shutdown server and client under your development environment. In server run "npm test" and verify test cases executed successfully. Then in client run "npm test" and verify test cases executed successfully.
 * Update client/src/version.js file to X.Y.Z (for example, 0.4). Commit with message "Update version.js to X.Y.Z" and push to origin. Do a pull to get latest version on all systems. Restart server then client under your development environment.
