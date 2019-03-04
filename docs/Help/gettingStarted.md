@@ -8,8 +8,10 @@
  usually goes a long way.  In the worst case, you'll come away from the
  experience with a little more motivation to read more of the on-line documentation.
 
-As noted in the discussion on other Help pages, ODOP currently offers three
-design types to work with: Compression Spring, Rectangular Solid and Piston-Cylinder. 
+As noted in the discussion on other Help pages, ODOP currently offers five
+design types to work with.
+These include full-featured apps for compression, extension and torsion spring design 
+plus the Rectangular Solid and Piston-Cylinder demonstration cases. 
 If you are interested in learning about capabilities, concepts, and basic
 mechanics of how to operate the program,
 the Rectangular Solid design type is intended as an easy to understand 

@@ -51,7 +51,9 @@ Designs may be stored in a design library for later re-use.
 Specific design types may offer problem-specific reports that may be saved or printed.
 Specific design types may offer easy selection from tables of material properties
 or the ability to select from catalogs of standard component sizes or even
-catalogs of stock designs.
+catalogs of stock designs.   
+
+&nbsp;
 
 See [ODOP Structure](png/ODOP_StructureDiagram.png) 
 for a high level overview of the ODOP program's structure as a platform.
@@ -66,10 +68,10 @@ See: [Help Index](../Help/index)
 
 **AVAILABLE DESIGN TYPES**   
 
-Three [Design Types](../Help/DesignTypes) are currently available.
+Five [Design Types](../Help/DesignTypes) are currently available.
    
 ![Compression Spring Design Type icon](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Compression/favicon.ico "Compression Spring Design Type") 
-The **Compression Spring** design type is a full-featured app 
+The **Compression, Extension and Torsion Spring** design types are full-featured apps 
 enabling the engineering design of helical coil compression springs.
 While best saved for a time after your initial introduction to ODOP is complete,
 a comprehensive introduction to coil spring design with ODOP is available at
