@@ -7,15 +7,7 @@ of a broad range of problems that have a mathematical model available.
 [Try ODOP on Heroku](https://odop.herokuapp.com/)   
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Spring/Compression/favicon.ico"> 
-<b>Helical coil compression spring design</b> - a full-featured app    
-<br />
-
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Spring/Extension/favicon.ico"> 
-<b>Helical coil extension spring design</b> - a full-featured app    
-<br />
-
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Spring/Torsion/favicon.ico"> 
-<b>Helical coil torsion spring design</b> - a full-featured app    
+<b>Helical coil spring design</b> - full-featured apps for design of compression, extension and torsion springs    
 <br />
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Solid/favicon.ico"> 
