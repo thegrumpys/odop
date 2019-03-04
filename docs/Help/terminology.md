@@ -11,7 +11,7 @@ Each design type has a mathematical model at its core.
 
 For examples, see:   
 * [Piston-Cylinder](./DesignTypes/png/PCylDiagram.png) 
-* [Rectangular Solid](./DesignTypes/png/RectangularSolidDiagram.png).   
+* [Rectangular Solid](designyypes/Solid/RectangularSolidDiagram.png).   
 
 See "Design Types" and "Equation Set" below for more detail.
 
