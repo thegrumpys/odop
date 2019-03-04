@@ -57,5 +57,6 @@
 * [Changes to initialState.js](procedures/initialStateChanges)
 * [Install a new system](procedures/NewSystem)
 * [New database](procedures/NewDB)
+* [Image locations](procedures/ImageLocations)
 
 
