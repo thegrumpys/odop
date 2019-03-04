@@ -178,9 +178,7 @@ available at [Spring Design Topics](../SpringDesign).
 
 &nbsp;
 
-![Torsion Spring Names](designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names")   
-
-![Torsion Spring Names](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names x")   
+![Torsion Spring Names](./png/TorsionNames.png "Torsion Spring Names")   
 
 &nbsp;
 
@@ -243,6 +241,9 @@ Eclipse .md Preview suppresses display of everything after the comment header.
 This page is still a work in progress !   
 
 The following lines are alternate syntax for in-line image links   
+See docs/procedures/ImageLocations for preferred approach on image path.   
+
+![Torsion Spring Names](./png/TorsionNames.png "Torsion Spring Names")   
 
 <img src="../../../client/public/designtypes/Spring/Torsion/TorsionNames.png" alt="Torsion Spring Names"/>
 
