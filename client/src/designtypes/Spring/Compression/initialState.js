@@ -517,7 +517,7 @@ export const initialState = {
         {
             "input": false,
             "name": "Material_File",
-            "value": "pass in name: mat_ips.json? ... -1?",
+            "value": "../mat_SI.json",
             "units": "",
             "lmin": 0,
             "lmax": 0,
@@ -526,7 +526,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0.0,
             "equationset": false,
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
