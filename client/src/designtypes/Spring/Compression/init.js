@@ -10,8 +10,8 @@ export function init(p, x) {
  var tensile_400;
 
    /*  Bring in material properties table  */
- if (x[o.Material_File] === "../mat_ips.json") m_tab = require('../mat_ips.json');
-    else m_tab = require('../mat_SI.json');
+ if (x[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
+    else m_tab = require('../mat_ips.json');
 //    console.log("m_tab=", m_tab);
  var et_tab = require('./endtypes.json');
 //    console.log("et_tab=", et_tab);

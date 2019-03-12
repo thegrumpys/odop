@@ -517,7 +517,7 @@ export const initialState = {
         {
             "input": false,
             "name": "Material_File",
-            "value": "../mat_ips.json",
+            "value": "mat_ips.json",
             "units": "",
             "lmin": 0,
             "lmax": 0,
