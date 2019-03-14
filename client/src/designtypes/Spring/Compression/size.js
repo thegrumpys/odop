@@ -16,10 +16,12 @@ export function getSizeEntries(type, st) {
     var wire_dia, od_free;
     var size0, size1, size2;
     var result = [];
+    var m_tab;
     switch(type) {
     case "Wire_Dia":
         // Find size name, load size table, and get wire diameter value
-        var m_tab = require('../mat_ips.json');
+        if (st[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
+            else m_tab = require('../mat_ips.json');
         var i = st[o.Material_Type].value;
 //        console.log('In getSizeEntries Wire_Dia i=',i);
         size_name = m_tab[i][mo.siznam];

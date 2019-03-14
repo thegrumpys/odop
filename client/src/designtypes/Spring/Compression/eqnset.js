@@ -127,9 +127,11 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
     var idxoffset;
     var snx = [];
     var sny = [7.0, 6.0, 5.0, 1.0];
+    var m_tab;
 
     /*  Bring in material properties table  */
-    var m_tab = require('../mat_ips.json');
+    if (x[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
+    else m_tab = require('../mat_ips.json');
 
 //    if st_code = 3 then temp=tensile;
     if (st_code === 3) temp = tensile;

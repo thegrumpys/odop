@@ -25,9 +25,11 @@ export function report(report_name, prefs, st, labels) {
     od_1, od_2, od_solid, id_1, id_2,
     wgt1000, fs_1,  //   kw2fs_1, kw2fs_2, kw2fs_s,   (unused)
     kw1, kw2, kw2str1, kw2str2, kw2strs;
+    var m_tab;
 
     /*  Bring in material properties table  */
-    var m_tab = require('../mat_ips.json');
+    if (st[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
+        else m_tab = require('../mat_ips.json');
     var et_tab = require('./endtypes.json');
 
     hits = 0;
