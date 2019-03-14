@@ -716,7 +716,7 @@ export const initialState = {
         {
             "input": false,
             "name": "tbase010",
-            "value": 0.010,
+            "value": 0.254,
             "units": "",
             "lmin": 0,
             "lmax": 0,
@@ -730,7 +730,7 @@ export const initialState = {
         {
             "input": false,
             "name": "tbase400",
-            "value": 0.400,
+            "value": 10.160,
             "units": "",
             "lmin": 0,
             "lmax": 0,
