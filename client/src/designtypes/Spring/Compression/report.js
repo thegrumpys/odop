@@ -28,7 +28,7 @@ export function report(report_name, prefs, st, labels) {
     var m_tab;
 
     /*  Bring in material properties table  */
-    if (st[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
+    if (st[o.Material_File].value === "mat_SI.json") m_tab = require('../mat_SI.json');
         else m_tab = require('../mat_ips.json');
     var et_tab = require('./endtypes.json');
 
