@@ -24,11 +24,13 @@ export function report(report_name, prefs, st, labels) {
     od_1, od_2, id_1, id_2, od_maxsafe, id_maxsafe,
     wgt1000, fs_1,  
     kw1;
+    var m_tab;
     
     const Close_Wound_Coil = 5;
 
     /*  Bring in material properties table  */
-    var m_tab = require('../mat_ips.json');
+    if (st[o.Material_File].value === "mat_SI.json") m_tab = require('../mat_SI.json');
+        else m_tab = require('../mat_ips.json');
     var et_tab = require('./endtypes.json');
 
     hits = 0;

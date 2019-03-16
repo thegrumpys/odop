@@ -459,7 +459,7 @@ export const initialState = {
             "value": 2,
             "units": "",
             "type": "table",
-            "table": "Spring/mat_ips",
+            "table": "Spring/mat_SI",
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
@@ -772,8 +772,8 @@ export const initialState = {
         {
             "input": false,
             "name": "tensile_010",
-            "value": 100000.0,
-            "units": "PSI",
+            "value": 1000.0,
+            "units": "MPa",
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
@@ -787,7 +787,7 @@ export const initialState = {
     "labels": [
         {
             "name": "COMMENT",
-            "value": "Compression Spring default start point ..."
+            "value": "Compression Spring default start point ... metric units"
         },
         {
             "name": "Contact person",
