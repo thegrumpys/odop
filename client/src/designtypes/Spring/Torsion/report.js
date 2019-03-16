@@ -26,9 +26,11 @@ export function report(report_name, prefs, st, labels) {
     pitch, hlx_ang,
     od_1, od_2, id_1, id_2,
     wgt1000, fs_1, ctp1, l_max, od_max;
+    var m_tab;
 
     /*  Bring in material properties table  */
-    var m_tab = require('../mat_ips.json');
+    if (st[o.Material_File].value === "mat_SI.json") m_tab = require('../mat_SI.json');
+        else m_tab = require('../mat_ips.json');
     var et_tab = require('./endtypes.json');
 
     hits = 0;

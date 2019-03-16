@@ -131,7 +131,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 
     /*  Bring in material properties table  */
     if (x[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
-    else m_tab = require('../mat_ips.json');
+        else m_tab = require('../mat_ips.json');
 
 //    if st_code = 3 then temp=tensile;
     if (st_code === 3) temp = tensile;
