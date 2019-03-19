@@ -33,7 +33,7 @@ import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
 import ViewViolations from '../menus/View/ViewViolations';
-import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
+import ViewOffsets from '../menus/View/ViewOffsets';
 import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
@@ -154,7 +154,7 @@ class App extends Component {
                                     </DropdownItem>
                                     <DropdownItem divider />
                                     <ViewViolations />
-                                    {process.env.NODE_ENV !== "production" && <ViewSymbolTableOffsets />}
+                                    {process.env.NODE_ENV !== "production" && <ViewOffsets />}
                                </DropdownMenu>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav inNavbar>
