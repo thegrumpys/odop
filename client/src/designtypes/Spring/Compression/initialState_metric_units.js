@@ -245,7 +245,7 @@ export const initialState = {
             "input": false,
             "name": "ID_Free",
             "value": 22.40,
-            "units": "inches",
+            "units": "mm",
             "lmin": CONSTRAINED,
             "lmax": 0,
             "cmin": 2.54,
