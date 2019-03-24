@@ -29,7 +29,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",
-    "react-scripts": "^2.1.5",
+    "react-scripts": "^2.1.8",
     "reactstrap": "^6.5.0",
     "redux": "^4.0.1"
   },
