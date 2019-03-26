@@ -46,6 +46,8 @@ The remainder of this discussion will provide a few
 suggestions on how to explore the program.
 
 Start from an existing design.   
+See [Units: US (ips) and metric (SI)](SpringDesign/unitsUSmetric) to
+work in metric units. 
 
 CHANGE independent variables.
 For the compression spring design type, those include

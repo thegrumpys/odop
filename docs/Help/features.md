@@ -56,7 +56,7 @@ performance of an existing design, ODOP is at its best when used to
 develop solutions to difficult and highly constrained original design problems.
  
  
-* Analysis  is just the beginning ...   
+* Analysis is just the beginning ...   
 
  The user's ability to enter independent variables and compute dependent variables 
  is the most basic of the software's capabilities.
@@ -64,7 +64,7 @@ develop solutions to difficult and highly constrained original design problems.
  basically guessing values of inputs in order to produce the desired values of outputs.
  
  
-Inversion of design equations
+* Capable of inversion of design equations
 
  ODOP is very versatile in its approach to design because it has
  the capability to invert the dependent-independent relationships of the
@@ -80,7 +80,7 @@ Inversion of design equations
 
 * Selection of design parameters within constraints
 
- The ODOP Search feature selects appropriate values for independent variables (design parameters).
+ The ODOP Search feature selects appropriate values for independent variables.
  In the spring design example, these might include selecting quantities such as wire
  diameter, coil diameter, free length and number of coils to achieve the
  desired force-deflection characteristics.  At the same time, the program
@@ -131,12 +131,10 @@ Inversion of design equations
 
 * Material selection tables
 
- In addition to tables of commonly available sizes, ODOP may contain
- tables of material properties for many commonly used materials.
- These tables may be altered or supplemented by the user. 
+ ODOP may contain tables of material properties for many commonly used materials.
  In the spring design example, with most spring materials, 
  allowable stress varies significantly as a function of wire
- diameter.  For this reason, ODOP recalculates allowable stress and
+ diameter.  For this reason, ODOP:Spring recalculates allowable stress and
  factor of safety for each combination of material type and wire size
  evaluated.  These features eliminate the need for the designer to
  refer to tables and charts of material properties.  
@@ -147,8 +145,8 @@ Inversion of design equations
  Once a designer has established a custom design that satisfies the objectives, 
  ODOP has a feature that can select from a table of standard sizes.
  In the spring design example, 
- the material file allows for a table of standard wire diameters 
- specific to each different material type. 
+ each material can have a unique table of standard wire diameters. 
+ Standard wire diameters for both US customary (inch) and metric (mm) units are provided.
  Similarly, a feature is provided to select the closest or otherwise 
  most appropriate design from a catalog of stock designs. 
  The default stock spring catalogs supplied with ODOP:Spring include
