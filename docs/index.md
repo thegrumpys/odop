@@ -54,7 +54,7 @@
 
 * [Release Process](procedures/release)
 * [New Design Type](procedures/NewDesignType)
-* [Changes to initialState.js](procedures/initialStateChanges)
+* [initialState, startup and load.sql](procedures/initialState_startup_loadSQL)
 * [Install a new system](procedures/NewSystem)
 * [New database](procedures/NewDB)
 * [Image locations](procedures/ImageLocations)
