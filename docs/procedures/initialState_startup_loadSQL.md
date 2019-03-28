@@ -10,10 +10,10 @@ initialState.js files are created by hand (possibly modifying a previous example
 
 When operating in the development environment, a "Use initialState" button appears on the promptForDesign modal.
 Pushing this button will load the "built-in" initialState.js as opposed to loading a database entry.
-The resulting "state" of the design may be modified and then saved (** File : Save As ** menu item) as a database entry.   
+The resulting "state" of the design may be modified and then saved (**File : Save As** menu item) as a database entry.   
 
 By convention, every design type will have a database entry named "startup" that is derived from the corresponding initialState.js file. 
-The "startup" entry is unique in that it is protected from deletion by the ** File : Delete ** menu entry.
+The "startup" entry is unique in that it is protected from deletion by the **File : Delete** menu entry.
 
 load.sql files are created via SQL dump from (potentially multiple) database entries.
 These load.sql files can be used to populate a new database or to transfer designs from the development database to the production database.
@@ -28,20 +28,19 @@ Refer to other procedures articles for information on configuring new design typ
 or installing new ODOP systems or initializing new databases.
 
 1. Make the desired changes to initialState.js
-2. Make a corresponding entry in migrate.js
+2. Make corresponding entries in migrate.js
 3. Click the "Use initialState" button (available in development environment only) when launching the program;   
 **File : Save As** on top of the "startup" entry in the database
 4. Dump SQL to a load.sql file in order to provide for creating startup from scratch in the case of starting with an empty DB   
  \- MySQL Workbench should be able to export the table   
  [From release.md:](release)   
  Using mysqldump dump the affected "startup" entries into a load.sql file. Finally manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). Commit these changes.   
- \- Save to ODOP\designtypes\Spring\{springtype}\load.sql   
+ \- Save to ODOP\designtypes\Spring\ {springtype} \load.sql   
  
 Notes:   
 Use of separate "development" and "production" databases should
 prevent any unintended consequences from incrementing the design model
-number in migrate.js.    
-
+number in migrate.js. 
 Previously, without separate "development" and "production" databases,
 after over-writing the startup database entry with development code, 
 the release (Heroku) version of the system would see a future version 
