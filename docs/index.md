@@ -2,6 +2,7 @@
 
 ## About
 * [Introduction](About/Intro)
+* [Message-of-the-day](About/messageOfTheDay)
 * [Experimental Software](About/experimental)
 * [Requirements](About/requirements)
 * [Notice](About/Legal/Disclaimer)
