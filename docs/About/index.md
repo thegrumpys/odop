@@ -1,5 +1,6 @@
 ## About
 * [Introduction](Intro)
+* [Message-of-the-day](messageOfTheDay)
 * [Experimental Software](experimental)
 * [Requirements](requirements)
 * [Notice](Legal/Disclaimer)
