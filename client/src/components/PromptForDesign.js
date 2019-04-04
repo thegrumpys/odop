@@ -189,7 +189,7 @@ export class PromptForDesign extends React.Component {
                       Open Design Optimization Platform
                     </ModalHeader>
                     <ModalBody>
-                        Experimental software: <a href="https://thegrumpys.github.io/odop/About/experimental" target="_blank" rel="noopener noreferrer">See details</a>
+                        <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay" target="_blank" rel="noopener noreferrer">Message-of-the-day </a> 
                         <br />
                         Learn <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">About</a> ODOP
                         <br /><br />
