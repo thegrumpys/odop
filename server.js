@@ -311,7 +311,7 @@ app.get('*', (req, res) => {
 
 const port = process.env.PORT || 5000;
 if (!module.parent) { // If not in a testcase then start listening
-    console.log('SERVER: Server NODE_ENV=',process.env.NODE_ENV,' starting on port ',port);
+    console.log('SERVER: Server NODE_ENV =',process.env.NODE_ENV,'starting on port =',port,'node version =', process.version);
     app.listen(port);
 }
 
