@@ -12,6 +12,10 @@ If you see the Independent Variables of the Rectangular Solid design type
 simply click your browser's refresh button and then click the **Open** button to 
 switch to the Spring design type.
 
+If you haven't seen it already, the 
+[ODOP Design Process Flow Diagram](../About/png/DesignProcessFlowDiagram.png)
+provides an important conceptual introduction to the overall design process within ODOP.   
+
 Tutorial sessions teach operation of the program.
 Use the <b>Help : Tutorial...</b> menu item to select the desired tutorial session.   
 
