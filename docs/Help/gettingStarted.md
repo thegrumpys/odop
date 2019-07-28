@@ -22,6 +22,10 @@ to describe several screen captures that refer to the ODOP main page.
 Note that the [Terminology](terminology) page of the on-line documentation may be 
 helpful with some of the terms utilized here.
 
+If you haven't seen it already, the 
+[ODOP Design Process Flow Diagram](../About/png/DesignProcessFlowDiagram.png)
+provides an important conceptual introduction to the overall design process within ODOP.   
+
 The ODOP starting dialog provides the opportunity to select a design type.
 Within each design type, you will have the opportunity to select an existing design.
 At a minimum, each design type will have a default design with the name "startup".
