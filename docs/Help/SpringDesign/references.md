@@ -57,6 +57,10 @@
     Copyright 1978,  
     Library of Congress Number 77-27436  TJ210.C37
 
+ &nbsp; &nbsp; [Wikipedia](https://en.wikipedia.org)
+ 
+ &nbsp;
+
  A list of "Useful Publications for Spring Makers" appears in the May 1985
  issue of "Springs, The Magazine of Spring Technology" published by:
 

@@ -467,12 +467,14 @@ will calculate cycle life directly.  This calculation is based on the
 calculation applies only to body coils and is only approximate.  It is
 useful in comparing the relative effect of different loading conditions,
 or relative performance of different designs, but you should expect results
-in practice to vary widely from the cycle life value predicted.
+in practice to vary widely from the cycle life value predicted.  
+
+For more information, 
+see: [Goodman relation](https://en.wikipedia.org/wiki/Goodman_relation)
 
 For materials not contained in the materials table (Prop\_Calc\_Method=2 or
 3), ODOP:Spring does not have enough information available to directly
-calculate cycle life and so the Cycle\_Life variable is set to "NaN", 
-an abbreviation for "Not a Number". 
+calculate cycle life and so the Cycle\_Life variable is set to zero. 
 In this case, the FS\_CycleLife variable described here can be used to get
 some indication of a design's life in a specific cyclic application.
    
