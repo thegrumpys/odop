@@ -3,8 +3,53 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const OktaJwtVerifier = require('@okta/jwt-verifier');
+var cors = require('cors');
+
+const oktaJwtVerifier = new OktaJwtVerifier({
+  issuer: process.env.ISSUER,
+  clientId: process.env.SPA_CLIENT_ID,
+  assertClaims: {
+    aud: 'api://default',
+  },
+});
+
+/**
+ * A simple middleware that asserts valid access tokens and sends 401 responses
+ * if the token is not present or fails validation.  If the token is valid its
+ * contents are attached to req.jwt
+ */
+function authenticationRequired(req, res, next) {
+  const authHeader = req.headers.authorization || '';
+  const match = authHeader.match(/Bearer (.+)/);
+
+  console.log('SERVER: ===========================================================');
+
+  if (!match) {
+    console.log('SERVER: 401 - UNAUTHORIZED');
+    return res.status(401).end();
+  }
+
+  const accessToken = match[1];
+  const expectedAudience = 'api://default';
+
+  return oktaJwtVerifier.verifyAccessToken(accessToken, expectedAudience)
+    .then((jwt) => {
+      req.jwt = jwt;
+      next();
+    })
+    .catch((err) => {
+      res.status(401).send(err.message);
+      console.log('SERVER: 401 - UNAUTHORIZED');
+    });
+}
 
 const app = express();
+
+/**
+ * For local testing only!  Enables CORS for all domains
+ */
+app.use(cors());
 app.use(bodyParser.json({ type: 'application/json' }));
 
 // Serve static files from the React app
@@ -34,13 +79,13 @@ function startConnection() {
 // DELETE - remove a particular resource's object
 // 200 - OK, The request was successful
 // 201 - CREATED, A new resource object was successfully created
-// 404 - NOT FOUND, The requested resource could not be found
 // 400 - BAD REQUEST, The request was malformed or invalid
+// 401 - UNAUTHORIZED, The client is unauthorized to perform the requested function
+// 404 - NOT FOUND, The requested resource could not be found
 // 500 - INTERNAL SERVER ERROR, Unknown server error has occurred
 
-app.get('/api/v1/designtypes', (req, res) => {
+app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
     var value;
-    console.log('SERVER: ===========================================================');
     console.log('SERVER: In GET /api/v1/designtypes');
     var connection = startConnection();
     var stmt = 'SELECT DISTINCT type FROM design';
@@ -61,9 +106,8 @@ app.get('/api/v1/designtypes', (req, res) => {
     });
 });
 
-app.get('/api/v1/designtypes/:type/designs', (req, res) => {
+app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) => {
     var value;
-    console.log('SERVER: ===========================================================');
     var type = req.params['type'];
     console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs');
     var connection = startConnection();
@@ -85,10 +129,9 @@ app.get('/api/v1/designtypes/:type/designs', (req, res) => {
     });
 });
 
-app.get('/api/v1/designtypes/:type/designs/:name', (req, res) => {
+app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var type;
     var value;
-    console.log('SERVER: ===========================================================');
     var type = req.params['type'];
     var name = req.params['name'];
     console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs/'+name);
@@ -120,10 +163,9 @@ app.get('/api/v1/designtypes/:type/designs/:name', (req, res) => {
 });
 
 
-app.post('/api/v1/designtypes/:type/designs/:name', (req, res) => {
+app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var type;
     var value;
-    console.log('SERVER: ===========================================================');
     var type = req.params['type'];
     var name = req.params['name'];
     console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name);
@@ -173,10 +215,9 @@ app.post('/api/v1/designtypes/:type/designs/:name', (req, res) => {
     }
 });
 
-app.put('/api/v1/designtypes/:type/designs/:name', (req, res) => {
+app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var type;
     var value;
-    console.log('SERVER: ===========================================================');
     var type = req.params['type'];
     var name = req.params['name'];
     console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name);
@@ -226,9 +267,8 @@ app.put('/api/v1/designtypes/:type/designs/:name', (req, res) => {
     }
 });
 
-app.delete('/api/v1/designtypes/:type/designs/:name', (req, res) => {
+app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var value;
-    console.log('SERVER: ===========================================================');
     var type = req.params['type'];
     var name = req.params['name'];
     console.log('SERVER: In DELETE /api/v1/designtypes/'+type+'/designs/'+name);
@@ -272,10 +312,9 @@ app.delete('/api/v1/designtypes/:type/designs/:name', (req, res) => {
     }
 });
 
-app.post('/api/v1/usage_log', (req, res) => {
+app.post('/api/v1/usage_log', authenticationRequired, (req, res) => {
     var ip_address;
     var note;
-    console.log('SERVER: ===========================================================');
     ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     console.log('SERVER: In POST /api/v1/usage_log ip_address='+ip_address+' req.body=',req.body);
     note = JSON.stringify(req.body); // Convert blob to string
@@ -302,7 +341,6 @@ app.post('/api/v1/usage_log', (req, res) => {
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-    console.log('SERVER: ===========================================================');
     console.log('SERVER: In *');
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
     res.status(200).end();
