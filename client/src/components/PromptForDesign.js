@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
@@ -12,11 +12,15 @@ import { displayError } from './ErrorModal';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 import { logUsage } from '../logUsage';
+import OktaSignIn from '@okta/okta-signin-widget';
+import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 
-export class PromptForDesign extends React.Component {
+export class PromptForDesign extends Component {
     
     constructor(props) {
         super(props);
+        this.onLoginSuccess = this.onLoginSuccess.bind(this);
+        this.onLoginError = this.onLoginError.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onLoadInitialState = this.onLoadInitialState.bind(this);
         this.onOpen = this.onOpen.bind(this);
@@ -29,7 +33,35 @@ export class PromptForDesign extends React.Component {
             type: "Spring/Compression",
             name: "startup"
         };
-        this.getDesignTypes();
+//        this.getDesignTypes();
+    }
+
+    componentDidMount() {
+        this.widget = new OktaSignIn({
+          baseUrl: 'https://dev-729070.okta.com',
+          clientId: "0oa1itosqdQvfGNMD357",  // spa
+//          clientId: "0oa1kkefuuMoIcv9w357", // web
+          redirectUri: 'http://localhost:3000/',
+//          i18n: {
+//              en: {
+//                'primaryauth.title': 'Sign in to React & Company',
+//              },
+//          },
+//          authParams: {
+//              issuer: "https://dev-729070.okta.com/oauth2/default",
+//              responseType: ['token', 'id_token'], // spa
+//              responseType: ['code'], // web
+//              display: 'page',
+//              pkce: true,
+//              scopes: ['openid', 'profile', 'email'],
+//          },
+          pkce: true
+        });
+        this.widget.renderEl({el: '#osw-container'}, this.onLoginSuccess, this.onLoginError);
+    }
+
+    componentWillUnmount() {
+        this.widget.remove();
     }
 
     getDesignTypes() {
@@ -37,7 +69,11 @@ export class PromptForDesign extends React.Component {
 
         // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designtypes')
+        fetch('/api/v1/designtypes'/* , {
+                headers: {
+                    Authorization: 'Bearer ' + await this.props.auth.getAccessToken()
+                }
+            }*/)
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -66,7 +102,11 @@ export class PromptForDesign extends React.Component {
 
         // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs')
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs'/*, {
+                headers: {
+                    Authorization: 'Bearer ' + await this.props.auth.getAccessToken()
+                }
+            }*/)
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -99,7 +139,11 @@ export class PromptForDesign extends React.Component {
         const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/dispatcher));
 
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name))
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name)/*, {
+                headers: {
+                    Authorization: 'Bearer ' + await this.props.auth.getAccessToken()
+                }
+            }*/)
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -136,6 +180,74 @@ export class PromptForDesign extends React.Component {
         const store = createStore(reducers, state, middleware);
         store.dispatch(startup());
         ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
+    }
+
+    onLoginSuccess(res) {
+        console.log('In PromptForDesign.onLoginSuccess res=',res);
+        // The properties in the response object depend on two factors:
+        // 1. The type of authentication flow that has just completed, determined by res.status
+        // 2. What type of token the widget is returning
+
+        // The user has started the password recovery flow, and is on the confirmation
+        // screen letting them know that an email is on the way.
+        if (res.status === 'FORGOT_PASSWORD_EMAIL_SENT') {
+          // Any followup action you want to take
+          return;
+        }
+
+        // The user has started the unlock account flow, and is on the confirmation
+        // screen letting them know that an email is on the way.
+        if (res.status === 'UNLOCK_ACCOUNT_EMAIL_SENT') {
+          // Any followup action you want to take
+          return;
+        }
+
+        // The user has successfully completed the authentication flow
+        if (res.status === 'SUCCESS') {
+
+          // Handle success when the widget is not configured for OIDC
+
+//          if (res.type === 'SESSION_STEP_UP') {
+//            // Session step up response
+//            // If the widget is not configured for OIDC and the authentication type is SESSION_STEP_UP,
+//            // the response will contain user metadata and a stepUp object with the url of the resource
+//            // and a 'finish' function to navigate to that url
+//            console.log(res.user);
+//            console.log('Target resource url: ' + res.stepUp.url);
+//            res.stepUp.finish();
+//            return;
+//          } else {
+//            // If the widget is not configured for OIDC, the response will contain
+//            // user metadata and a sessionToken that can be converted to an Okta
+//            // session cookie:
+//            console.log(res.user);
+//            res.session.setCookieAndRedirect('https://acme.com/app');
+//            return;
+//          }
+
+
+          // OIDC response
+
+          // If the widget is configured for OIDC with a single responseType, the
+          // response will be the token.
+          // i.e. authParams.responseType = 'id_token':
+//          this.widget.tokenManager.add('my_id_token', res);
+
+          // If the widget is configured for OIDC with multiple responseTypes, the
+          // response will be an array of tokens:
+          // i.e. authParams.responseType = ['id_token', 'token']
+//          this.widget.tokenManager.add('my_id_token', res[0]);
+//          this.widget.tokenManager.add('my_access_token', res[1]);
+
+          return;
+        }
+    }
+    
+    onLoginError(err) {
+        // This function is invoked with errors the widget cannot recover from:
+        // Known errors: CONFIG_ERROR, UNSUPPORTED_BROWSER_ERROR
+        console.log('In PromptForDesign.onLoginError err=',err);
+        throw err;
     }
 
     onSelectType(event) {
@@ -178,7 +290,7 @@ export class PromptForDesign extends React.Component {
         });
         // Noop - all done
     }
-
+    
     render() {
 //        console.log('In PromptForDesign.render');
         return (
@@ -189,6 +301,7 @@ export class PromptForDesign extends React.Component {
                       Open Design Optimization Platform
                     </ModalHeader>
                     <ModalBody>
+                        <div id="osw-container" />
                         <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay" target="_blank" rel="noopener noreferrer">Message-of-the-day </a> 
                         <br />
                         Learn <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">About</a> ODOP
