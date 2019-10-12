@@ -23,10 +23,10 @@ function authenticationRequired(req, res, next) {
   const authHeader = req.headers.authorization || '';
   const match = authHeader.match(/Bearer (.+)/);
 
-  console.log('SERVER: ===========================================================');
+  console.log('SERVER: =========================================================== authHeader='+authHeader+' match[1]='+match[1]);
 
   if (!match) {
-    console.log('SERVER: 401 - UNAUTHORIZED');
+    console.log('SERVER: 401 - UNAUTHORIZED1');
     return res.status(401).end();
   }
 
@@ -35,12 +35,14 @@ function authenticationRequired(req, res, next) {
 
   return oktaJwtVerifier.verifyAccessToken(accessToken, expectedAudience)
     .then((jwt) => {
+      console.log('SERVER: jwt='+jwt);
       req.jwt = jwt;
       next();
     })
     .catch((err) => {
+      console.log('SERVER: err='+err);
       res.status(401).send(err.message);
-      console.log('SERVER: 401 - UNAUTHORIZED');
+      console.log('SERVER: 401 - UNAUTHORIZED2');
     });
 }
 

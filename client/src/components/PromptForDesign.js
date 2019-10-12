@@ -31,9 +31,10 @@ export class PromptForDesign extends Component {
             designtypes: [],
             designs: [],
             type: "Spring/Compression",
-            name: "startup"
+            name: "startup",
+            authenticated: false,
+            authtoken: null,
         };
-//        this.getDesignTypes();
     }
 
     componentDidMount() {
@@ -47,14 +48,14 @@ export class PromptForDesign extends Component {
 //                'primaryauth.title': 'Sign in to React & Company',
 //              },
 //          },
-//          authParams: {
+          authParams: {
 //              issuer: "https://dev-729070.okta.com/oauth2/default",
-//              responseType: ['token', 'id_token'], // spa
+              responseType: ['token', 'id_token'], // spa
 //              responseType: ['code'], // web
 //              display: 'page',
 //              pkce: true,
 //              scopes: ['openid', 'profile', 'email'],
-//          },
+          },
           pkce: true
         });
         this.widget.renderEl({el: '#osw-container'}, this.onLoginSuccess, this.onLoginError);
@@ -69,11 +70,11 @@ export class PromptForDesign extends Component {
 
         // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designtypes'/* , {
+        fetch('/api/v1/designtypes' , {
                 headers: {
-                    Authorization: 'Bearer ' + await this.props.auth.getAccessToken()
+                    Authorization: 'Bearer ' + this.state.authtoken
                 }
-            }*/)
+            })
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -102,11 +103,11 @@ export class PromptForDesign extends Component {
 
         // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs'/*, {
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
-                    Authorization: 'Bearer ' + await this.props.auth.getAccessToken()
+                    Authorization: 'Bearer ' + this.state.authtoken
                 }
-            }*/)
+            })
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -139,11 +140,11 @@ export class PromptForDesign extends Component {
         const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/dispatcher));
 
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name)/*, {
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
                 headers: {
-                    Authorization: 'Bearer ' + await this.props.auth.getAccessToken()
+                    Authorization: 'Bearer ' + this.state.authtoken
                 }
-            }*/)
+            })
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -238,7 +239,16 @@ export class PromptForDesign extends Component {
           // i.e. authParams.responseType = ['id_token', 'token']
 //          this.widget.tokenManager.add('my_id_token', res[0]);
 //          this.widget.tokenManager.add('my_access_token', res[1]);
+//          console.log(res[0].accessToken);
+//          console.log(res[1].idToken);
 
+          this.setState({
+              authenticated: true,
+              authtoken: res[0].accessToken,
+              idtoken: res[1].idToken,
+          });
+          this.widget.remove();
+          this.getDesignTypes();
           return;
         }
     }
@@ -301,7 +311,8 @@ export class PromptForDesign extends Component {
                       Open Design Optimization Platform
                     </ModalHeader>
                     <ModalBody>
-                        <div id="osw-container" />
+                        {!this.state.authenticated && <div id="osw-container" />}
+                        {this.state.authenticated && <React.Fragment>
                         <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay" target="_blank" rel="noopener noreferrer">Message-of-the-day </a> 
                         <br />
                         Learn <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">About</a> ODOP
@@ -319,12 +330,13 @@ export class PromptForDesign extends Component {
                                 <option key={index} value={design}>{design}</option>
                             )}
                         </Input>
+                        </React.Fragment>}
                     </ModalBody>
-                    <ModalFooter>
+                    {this.state.authenticated && <ModalFooter>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         {process.env.NODE_ENV !== "production" && <Button color="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
                         <Button color="primary" onClick={this.onOpen}>Open</Button>
-                    </ModalFooter>
+                    </ModalFooter>}
                 </Modal>
             </React.Fragment>
         );
