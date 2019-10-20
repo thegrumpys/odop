@@ -75,7 +75,7 @@ export default class FELogin extends Component {
 
   componentWillUnmount() {
       console.log('In FELogin.componentWillUnmount');
-      this.widget.remove();
+      if (this.signIn != null) this.signIn.remove();
   }
 
   render() {
