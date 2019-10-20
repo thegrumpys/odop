@@ -38,21 +38,22 @@ export class PromptForDesign extends Component {
     }
 
     componentDidMount() {
+        console.log('In PromptForDesign.componentDidMount');
         this.widget = new OktaSignIn({
           baseUrl: 'https://dev-729070.okta.com',
           clientId: "0oa1itosqdQvfGNMD357",  // spa
 //          clientId: "0oa1kkefuuMoIcv9w357", // web
-          redirectUri: 'http://localhost:3000/',
+          redirectUri: 'http://localhost:3000/xxx',
 //          i18n: {
 //              en: {
 //                'primaryauth.title': 'Sign in to React & Company',
 //              },
 //          },
           authParams: {
-//              issuer: "https://dev-729070.okta.com/oauth2/default",
+              issuer: "https://dev-729070.okta.com/oauth2/default",
               responseType: ['token', 'id_token'], // spa
 //              responseType: ['code'], // web
-//              display: 'page',
+              display: 'page',
 //              pkce: true,
 //              scopes: ['openid', 'profile', 'email'],
           },
@@ -62,6 +63,7 @@ export class PromptForDesign extends Component {
     }
 
     componentWillUnmount() {
+        console.log('In PromptForDesign.componentWillUnmount');
         this.widget.remove();
     }
 
@@ -239,8 +241,8 @@ export class PromptForDesign extends Component {
           // i.e. authParams.responseType = ['id_token', 'token']
 //          this.widget.tokenManager.add('my_id_token', res[0]);
 //          this.widget.tokenManager.add('my_access_token', res[1]);
-//          console.log(res[0].accessToken);
-//          console.log(res[1].idToken);
+          console.log(res[0].accessToken);
+          console.log(res[1].idToken);
 
           this.setState({
               authenticated: true,

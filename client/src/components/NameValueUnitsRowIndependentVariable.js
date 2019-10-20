@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
@@ -6,7 +6,7 @@ import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFl
     saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
     fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 
-class NameValueUnitsRowIndependentVariable extends React.Component {
+class NameValueUnitsRowIndependentVariable extends Component {
     
     constructor(props) {
 //        console.log('In NameValueUnitsRowIndependentVariable.constructor props=',props);

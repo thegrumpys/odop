@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, UncontrolledTooltip, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
 import { evaluateConstraintName, evaluateConstraintValue } from '../store/middleware/evaluateConstraint';
 
-class ConstraintsMinRowDependentVariable extends React.Component {
+class ConstraintsMinRowDependentVariable extends Component {
     
     constructor(props) {
         super(props);

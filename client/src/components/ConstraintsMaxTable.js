@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Table, UncontrolledTooltip } from 'reactstrap';
 import ConstraintsMaxRowIndependentVariable from './ConstraintsMaxRowIndependentVariable';
 import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
 import { connect } from 'react-redux';
 
-export class ConstraintsMaxTable extends React.Component {
+export class ConstraintsMaxTable extends Component {
     
     render() {
         return (

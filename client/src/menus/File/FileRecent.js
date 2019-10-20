@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 
-class FileRecent extends React.Component {
+class FileRecent extends Component {
 
     constructor(props) {
         super(props);

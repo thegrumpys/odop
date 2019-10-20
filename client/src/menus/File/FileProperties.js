@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Container, Row, Col, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeLabelsValue } from '../../store/actionCreators';
 
-class FileProperties extends React.Component {
+class FileProperties extends Component {
 
     constructor(props) {
         super(props);

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 
-class HelpIndex extends React.Component {
+class HelpIndex extends Component {
 
     constructor(props) {
         super(props);

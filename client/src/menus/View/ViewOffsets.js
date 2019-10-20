@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 
-class ViewOffsets extends React.Component {
+class ViewOffsets extends Component {
 
     constructor(props) {
 //        console.log('In ViewOffsets.constructor');

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button, Container, Row, Col, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, CONSTRAINED, FDCL } from '../../store/actionTypes';
@@ -10,7 +10,7 @@ import { changeSymbolConstraint,
     search } from '../../store/actionCreators';
 import { evaluateConstraintValue } from '../../store/middleware/evaluateConstraint';
 
-class ActionTrade extends React.Component {
+class ActionTrade extends Component {
 
     constructor(props) {
         super(props);

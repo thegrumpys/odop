@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 import { search } from '../../store/actionCreators';
 
-class ActionSearch extends React.Component {
+class ActionSearch extends Component {
 
     constructor(props) {
         super(props);

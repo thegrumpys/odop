@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Alert, Button } from 'reactstrap';
 
 export var displayError = function(message, header = '') {
@@ -19,7 +19,7 @@ export var displayError = function(message, header = '') {
     );
 }
 
-export class ErrorModal extends React.Component {
+export class ErrorModal extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);

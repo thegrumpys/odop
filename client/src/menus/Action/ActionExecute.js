@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 
-class ActionExecute extends React.Component {
+class ActionExecute extends Component {
 
     constructor(props) {
 //        console.log('In ActionExecute.constructor');

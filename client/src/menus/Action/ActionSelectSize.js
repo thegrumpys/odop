@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { changeSymbolValue, setSymbolFlag } from '../../store/actionCreators';
 
-class ActionSelectSize extends React.Component {
+class ActionSelectSize extends Component {
 
     constructor(props) {
 //        console.log('In ActionSelectSize.constructor props=',props);

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Container, Row, Col, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { initialSystemControls } from '../../initialSystemControls';
 import { changeSystemControlsValue } from '../../store/actionCreators';
 
-class FilePreferences extends React.Component {
+class FilePreferences extends Component {
 
     constructor(props) {
         super(props);

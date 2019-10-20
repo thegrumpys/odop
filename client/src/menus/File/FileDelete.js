@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -6,7 +6,7 @@ import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 
-class FileDelete extends React.Component {
+class FileDelete extends Component {
 
     constructor(props) {
         super(props);

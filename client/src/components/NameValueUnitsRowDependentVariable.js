@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
@@ -16,7 +16,7 @@ Number.prototype.toODOPPrecision = function() {
     return odopValue;
 };
      
-class NameValueUnitsRowDependentVariable extends React.Component {
+class NameValueUnitsRowDependentVariable extends Component {
     
     constructor(props) {
 //        console.log('In NameValueUnitsRowDependentVariable.constructor');

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../store/actionCreators';
 
-class NameValueUnitsRowCalcInput extends React.Component {
+class NameValueUnitsRowCalcInput extends Component {
     
     constructor(props) {
 //        console.log('In NameValueUnitsRowCalcInput.constructor');

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 
-class ViewViolations extends React.Component {
+class ViewViolations extends Component {
 
     constructor(props) {
         super(props);

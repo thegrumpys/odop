@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 import { Alert, Button } from 'reactstrap';
 import { load } from '../store/actionCreators';
 
@@ -21,7 +21,7 @@ export var startExecute = function(prefix,steps) {
     }
 }
 
-export class ExecutePanel extends React.Component {
+export class ExecutePanel extends Component {
     constructor(props) {
         super(props);
 //        console.log('In ExecutePanel constructor props=',props);

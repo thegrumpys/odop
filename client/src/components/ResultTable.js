@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Table, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
 
-class ResultTable extends React.Component {
+class ResultTable extends Component {
     
     render() {
         var feasibility_string;

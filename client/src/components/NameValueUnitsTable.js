@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Table, UncontrolledTooltip  } from 'reactstrap';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
 import NameValueUnitsRowDependentVariable from './NameValueUnitsRowDependentVariable';
 import { connect } from 'react-redux';
 
-export class NameValueUnitsTable extends React.Component {
+export class NameValueUnitsTable extends Component {
     
     render() {
         return (

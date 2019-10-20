@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Table, UncontrolledTooltip } from 'reactstrap';
 import ConstraintsMinRowIndependentVariable from './ConstraintsMinRowIndependentVariable';
 import ConstraintsMinRowDependentVariable from './ConstraintsMinRowDependentVariable';
 import { connect } from 'react-redux';
 
-export class ConstraintsMinTable extends React.Component {
+export class ConstraintsMinTable extends Component {
     
     render() {
         return (

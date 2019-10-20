@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
 import { version } from '../../version';
 
-class HelpAbout extends React.Component {
+class HelpAbout extends Component {
 
     constructor(props) {
         super(props);

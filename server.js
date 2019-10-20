@@ -23,7 +23,7 @@ function authenticationRequired(req, res, next) {
   const authHeader = req.headers.authorization || '';
   const match = authHeader.match(/Bearer (.+)/);
 
-  console.log('SERVER: =========================================================== authHeader='+authHeader+' match[1]='+match[1]);
+  console.log('SERVER: =========================================================== authHeader='+authHeader+', match[1]='+match[1]);
 
   if (!match) {
     console.log('SERVER: 401 - UNAUTHORIZED1');

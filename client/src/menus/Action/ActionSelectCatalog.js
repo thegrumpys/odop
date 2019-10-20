@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Label, Input, Table } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../../store/actionCreators';
 
-class ActionSelectCatalog extends React.Component {
+class ActionSelectCatalog extends Component {
 
     constructor(props) {
 //        console.log('In ActionSelectCatalog.constructor props=',props);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Modal, ModalBody } from 'reactstrap';
 
 export var displaySpinner = function(display) {
@@ -7,7 +7,7 @@ export var displaySpinner = function(display) {
     });
 }
 
-export class Spinner extends React.Component {
+export class Spinner extends Component {
     constructor(props) {
         super(props);
         displaySpinner = displaySpinner.bind(this); // Bind external function - no 'this'
