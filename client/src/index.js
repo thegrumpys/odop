@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FEApp } from './components/FEApp';
+import FEApp from './components/FEApp';
 //import { Spinner } from './components/Spinner';
 //import { ErrorModal } from './components/ErrorModal';
 //import { PromptForDesign } from './components/PromptForDesign';
