@@ -9,6 +9,28 @@ export default class FELogin extends Component {
     super(props);
 
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
+    console.log("config=",config);
+    
+    console.log("issuer=",issuer);
+    var baseUrl = issuer.split('/oauth2')[0];
+    console.log("baseUrl=",baseUrl);
+    // Begin Diagnostic
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+        xhr.onerror = function() {
+          console.log('Invalid URL or Cross-Origin Request Blocked.  You must explicitly add this site (' + window.location.origin + ') to the list of allowed websites in the administrator UI');
+        }
+        xhr.onload = function() {
+          console.log(this.responseText);
+        };
+        xhr.open('GET', issuer + '/v1/keys', true);
+        xhr.withCredentials = true;
+        xhr.send();
+    } else {
+        console.log("CORS is not supported for this browser!")
+    }
+    // End Diagnostic
+    
     this.signIn = new OktaSignIn({
         /**
          * Note: when using the Sign-In Widget for an OIDC flow, it still
@@ -34,6 +56,7 @@ export default class FELogin extends Component {
     }
 
   componentDidMount() {
+    console.log('In FELogin.componentDidMount');
     this.signIn.renderEl(
       { el: '#sign-in-widget' },
       (res) => {
@@ -49,6 +72,12 @@ export default class FELogin extends Component {
       },
     );
   }
+
+  componentWillUnmount() {
+      console.log('In FELogin.componentWillUnmount');
+      this.widget.remove();
+  }
+
   render() {
     return (
       <div>
