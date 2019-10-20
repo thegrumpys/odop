@@ -49,14 +49,14 @@ export default withAuth(class FELoginForm extends Component {
         <label>
           Username:
           <input
-            id="current-username" type="text"
+            id="username" type="text"
             value={this.state.username}
-            onChange={this.handleUsernameChange} />
+            onChange={this.handleUsernameChange} autoComplete="username" />
           Password:
           <input
-            id="current-password" type="password"
+            id="password" type="password"
             value={this.state.password}
-            onChange={this.handlePasswordChange} />
+            onChange={this.handlePasswordChange} autoComplete="current-password" />
         </label>
         <input id="submit" type="submit" value="Submit" />
       </form>
