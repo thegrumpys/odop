@@ -21,7 +21,7 @@ export default class FELogin extends Component {
           console.log('Invalid URL or Cross-Origin Request Blocked.  You must explicitly add this site (' + window.location.origin + ') to the list of allowed websites in the administrator UI');
         }
         xhr.onload = function() {
-          console.log(this.responseText);
+          console.log('responseText=',this.responseText);
         };
         xhr.open('GET', issuer + '/v1/keys', true);
         xhr.withCredentials = true;
@@ -43,7 +43,7 @@ export default class FELogin extends Component {
         logo: '/favicon.ico',
         i18n: {
           en: {
-            'primaryauth.title': 'Sign in to React & Company',
+            'primaryauth.title': 'Sign in to ODOP',
           },
         },
         authParams: {
