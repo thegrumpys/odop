@@ -1,31 +1,59 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import FELoginForm from './FELoginForm';
-import { withAuth } from '@okta/okta-react';
+import * as OktaSignIn from '@okta/okta-signin-widget';
+import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 
-export default withAuth(class FELogin extends Component {
+import config from './config';
+
+export default class FELogin extends Component {
   constructor(props) {
     super(props);
-    this.state = { authenticated: null };
-    this.checkAuthentication = this.checkAuthentication.bind(this);
-    this.checkAuthentication();
-  }
 
-  async checkAuthentication() {
-    const authenticated = await this.props.auth.isAuthenticated();
-    if (authenticated !== this.state.authenticated) {
-      this.setState({ authenticated });
+    const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
+    this.signIn = new OktaSignIn({
+        /**
+         * Note: when using the Sign-In Widget for an OIDC flow, it still
+         * needs to be configured with the base URL for your Okta Org. Here
+         * we derive it from the given issuer for convenience.
+         */
+        baseUrl: issuer.split('/oauth2')[0],
+        clientId,
+        redirectUri,
+        logo: '/favicon.ico',
+        i18n: {
+          en: {
+            'primaryauth.title': 'Sign in to React & Company',
+          },
+        },
+        authParams: {
+          pkce,
+          issuer,
+          display: 'page',
+          scopes,
+        },
+      });
     }
-  }
 
-  componentDidUpdate() {
-    this.checkAuthentication();
+  componentDidMount() {
+    this.signIn.renderEl(
+      { el: '#sign-in-widget' },
+      (res) => {
+        /**
+         * In this flow, the success handler will not be called beacuse we redirect
+         * to the Okta org for the authentication workflow.
+         */
+          console.log('In FELogin.onLoginSuccess res=',res);
+      },
+      (err) => {
+        console.log('In FELogin.onLoginError err=',err);
+        throw err;
+      },
+    );
   }
-
   render() {
-    if (this.state.authenticated === null) return null;
-    return this.state.authenticated ?
-      <Redirect to={{ pathname: '/' }}/> :
-      <FELoginForm baseUrl={this.props.baseUrl} />;
+    return (
+      <div>
+        <div id="sign-in-widget" />
+      </div>
+    );
   }
-});
+}
