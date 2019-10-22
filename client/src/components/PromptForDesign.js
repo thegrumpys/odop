@@ -12,34 +12,61 @@ import { displayError } from './ErrorModal';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 import { logUsage } from '../logUsage';
+import { withAuth } from '@okta/okta-react';
 
-export class PromptForDesign extends Component {
+export default withAuth(class PromptForDesign extends Component {
     
     constructor(props) {
         super(props);
+        console.log("In PromptForDesign.ctor props=",props)
         this.onCancel = this.onCancel.bind(this);
         this.onLoadInitialState = this.onLoadInitialState.bind(this);
         this.onOpen = this.onOpen.bind(this);
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
+        this.checkAuthentication = this.checkAuthentication.bind(this);
         this.state = {
             modal: true,
             designtypes: [],
             designs: [],
             type: "Spring/Compression",
-            name: "startup"
+            name: "startup",
+            authenticated: null,
+            accessToken: null,
         };
+        this.checkAuthentication();
+        this.getDesignTypes();
+    }
+
+    async checkAuthentication() {
+        console.log('In PromptForDesign.checkAuthentication');
+        const authenticated = await this.props.auth.isAuthenticated();
+        console.log("In PromptForDesign.checkAuthentication authenticated=",authenticated);
+        const accessToken = await this.props.auth.getAccessToken();
+        console.log("In PromptForDesign.checkAuthentication accessToken=",accessToken);
+        if (authenticated !== this.state.authenticated) {
+            this.setState({
+                authenticated: authenticated, 
+                accessToken: accessToken,
+            });
+        }
+    }
+
+    componentDidUpdate() {
+        console.log('In PromptForDesign.componentDidUpdate');
+        this.checkAuthentication();
         this.getDesignTypes();
     }
 
     getDesignTypes() {
-//        console.log('In PromptForDesign.getDesignTypes');
+        console.log('In PromptForDesign.getDesignTypes');
 
         // Get the designs and store them in state
         displaySpinner(true);
+        console.log("In PromptForDesign.getDesignTypes accessToken=",this.state.accessToken);
         fetch('/api/v1/designtypes' , {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.authtoken
+                    Authorization: 'Bearer ' + this.state.accessToken
                 }
             })
             .then(res => {
@@ -66,13 +93,13 @@ export class PromptForDesign extends Component {
     }
     
     getDesignNames(type) {
-//        console.log('In PromptForDesign.getDesignNames type=', type);
+        console.log('In PromptForDesign.getDesignNames type=', type);
 
         // Get the designs and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.authtoken
+                    Authorization: 'Bearer ' + this.state.accessToken
                 }
             })
             .then(res => {
@@ -83,7 +110,7 @@ export class PromptForDesign extends Component {
                 return res.json()
             })
             .then(designs => {
-//                console.log('In PromptForDesign.getDesigns designs=',designs)
+                console.log('In PromptForDesign.getDesigns designs=',designs)
                 this.setState({ 
                     designs: designs
                 })
@@ -98,7 +125,7 @@ export class PromptForDesign extends Component {
     }
     
     getDesign(type,name) {
-//        console.log('In PromptForDesign.getDesign type=', type, ' name=', name);
+        console.log('In PromptForDesign.getDesign type=', type, ' name=', name);
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -109,7 +136,7 @@ export class PromptForDesign extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.authtoken
+                    Authorization: 'Bearer ' + this.state.accessToken
                 }
             })
             .then(res => {
@@ -120,7 +147,7 @@ export class PromptForDesign extends Component {
                 return res.json()
             })
             .then(design => {
-//                console.log('In PromptForDesign.getDesigns design=', design);
+                console.log('In PromptForDesign.getDesigns design=', design);
                 var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
                 const store = createStore(reducers, migrated_design, middleware);
@@ -135,7 +162,7 @@ export class PromptForDesign extends Component {
     }
     
     loadInitialState(type) {
-//        console.log('In PromptForDesign.loadInitialState type=', type);
+        console.log('In PromptForDesign.loadInitialState type=', type);
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -151,7 +178,7 @@ export class PromptForDesign extends Component {
     }
 
     onSelectType(event) {
-//        console.log('In PromptForDesign.onSelectType event.target.value=',event.target.value);
+        console.log('In PromptForDesign.onSelectType event.target.value=',event.target.value);
         this.setState({
             type: event.target.value
         });
@@ -159,14 +186,14 @@ export class PromptForDesign extends Component {
     }
     
     onSelectName(event) {
-//        console.log('In PromptForDesign.onSelectName event.target.value=',event.target.value);
+        console.log('In PromptForDesign.onSelectName event.target.value=',event.target.value);
         this.setState({
             name: event.target.value 
         });
     }
     
     onOpen() {
-//        console.log('In PromptForDesign.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
+        console.log('In PromptForDesign.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
         this.setState({
             modal: !this.state.modal
         });
@@ -175,7 +202,7 @@ export class PromptForDesign extends Component {
     }
     
     onLoadInitialState() {
-//        console.log('In PromptForDesign.onLoadInitialState this.state.type=',this.state.type);
+        console.log('In PromptForDesign.onLoadInitialState this.state.type=',this.state.type);
         this.setState({
             modal: !this.state.modal
         });
@@ -184,7 +211,7 @@ export class PromptForDesign extends Component {
 
     
     onCancel() {
-//        console.log('In PromptForDesign.onCancel');
+        console.log('In PromptForDesign.onCancel');
         this.setState({
             modal: !this.state.modal
         });
@@ -192,7 +219,7 @@ export class PromptForDesign extends Component {
     }
 
     render() {
-//        console.log('In PromptForDesign.render');
+        console.log('In PromptForDesign.render');
         return (
             <React.Fragment>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
@@ -220,6 +247,7 @@ export class PromptForDesign extends Component {
                         </Input>
                     </ModalBody>
                     <ModalFooter>
+                        <Button color="secondary" onClick={() => {this.props.auth.logout()}}>Logout</Button>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         {process.env.NODE_ENV !== "production" && <Button color="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
                         <Button color="primary" onClick={this.onOpen}>Open</Button>
@@ -228,5 +256,4 @@ export class PromptForDesign extends Component {
             </React.Fragment>
         );
     }
-}  
-
+});
