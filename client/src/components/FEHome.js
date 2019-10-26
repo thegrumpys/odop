@@ -41,4 +41,4 @@ export default withAuth(class FEHome extends Component {
       );
     }
   }
-}
+});
