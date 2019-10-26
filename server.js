@@ -20,13 +20,13 @@ const oktaJwtVerifier = new OktaJwtVerifier({
  * contents are attached to req.jwt
  */
 function authenticationRequired(req, res, next) {
-  console.log('SERVER: =========================================================== authHeader='+authHeader+', match='+match);
+  console.log('SERVER: ===========================================================');
 
   const authHeader = req.headers.authorization || '';
   const match = authHeader.match(/Bearer (.+)/);
 
-  console.log('SERVER: In authenticationRequired authHeader='+authHeader);
-  console.log('SERVER: In authenticationRequired match='+match);
+//  console.log('SERVER: In authenticationRequired authHeader='+authHeader);
+//  console.log('SERVER: In authenticationRequired match='+match);
 
   if (!match) {
     console.log('SERVER: 401 - UNAUTHORIZED1');
@@ -38,12 +38,12 @@ function authenticationRequired(req, res, next) {
 
   return oktaJwtVerifier.verifyAccessToken(accessToken, expectedAudience)
     .then((jwt) => {
-      console.log('SERVER: jwt='+jwt);
+//      console.log('SERVER: In authenticationRequired jwt='+jwt);
       req.jwt = jwt;
       next();
     })
     .catch((err) => {
-      console.log('SERVER: err='+err);
+//      console.log('SERVER: In authenticationRequired err='+err);
       res.status(401).send(err.message);
       console.log('SERVER: 401 - UNAUTHORIZED2');
     });
