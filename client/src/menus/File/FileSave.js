@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
+import { withAuth } from '@okta/okta-react';
+import { compose } from 'redux';
 
 class FileSave extends Component {
 
@@ -11,10 +13,26 @@ class FileSave extends Component {
         super(props);
         this.onSave = this.onSave.bind(this);
         this.state = {
-            modal: false
+            modal: false,
+            authenticated: null,
+            accessToken: null,
         };
     }
     
+    async componentDidMount() {
+//        console.log('In FileSave.componentDidMount');
+        const authenticated = await this.props.auth.isAuthenticated();
+//        console.log("In FileSave.componentDidMount authenticated=",authenticated);
+        const accessToken = await this.props.auth.getAccessToken();
+//        console.log("In FileSave.componentDidMount accessToken=",accessToken);
+        if (authenticated !== this.state.authenticated) {
+            this.setState({
+                authenticated: authenticated, 
+                accessToken: accessToken,
+            });
+        }
+    }
+
     putDesign(type,name) {
 //        console.log('In FileSave.putDesign type=', type,' name=', name);
         displaySpinner(true);
@@ -23,6 +41,7 @@ class FileSave extends Component {
                 headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
+                  Authorization: 'Bearer ' + this.state.accessToken
                 },
                 body: JSON.stringify(this.props.state)
             })
@@ -61,10 +80,15 @@ class FileSave extends Component {
             </React.Fragment>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     state: state 
 });
 
-export default connect(mapStateToProps)(FileSave);
+export default compose(
+    withAuth,
+    connect(
+        mapStateToProps
+    )
+)(FileSave);

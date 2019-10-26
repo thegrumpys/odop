@@ -6,6 +6,8 @@ import { load } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
+import { withAuth } from '@okta/okta-react';
+import { compose } from 'redux';
 
 class FileOpen extends Component {
 
@@ -19,15 +21,35 @@ class FileOpen extends Component {
             modal: false,
             designs: [],
             type: this.props.type,
-            name: this.props.name
+            name: this.props.name,
+            authenticated: null,
+            accessToken: null,
         };
+    }
+
+    async componentDidMount() {
+//        console.log('In FileOpen.componentDidMount');
+        const authenticated = await this.props.auth.isAuthenticated();
+//        console.log("In FileOpen.componentDidMount authenticated=",authenticated);
+        const accessToken = await this.props.auth.getAccessToken();
+//        console.log("In FileOpen.componentDidMount accessToken=",accessToken);
+        if (authenticated !== this.state.authenticated) {
+            this.setState({
+                authenticated: authenticated, 
+                accessToken: accessToken,
+            });
+        }
     }
 
     getDesigns(type) {
 //        console.log('In FileOpen.getDesigns type=', type);
         // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs')
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
+                headers: {
+                    Authorization: 'Bearer ' + this.state.accessToken
+                }
+            })
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -44,7 +66,11 @@ class FileOpen extends Component {
     getDesign(type,name) {
 //        console.log('In FileOpen.getDesign type=', type, ' name=', name);
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name))
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
+                headers: {
+                    Authorization: 'Bearer ' + this.state.accessToken
+                }
+            })
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -128,7 +154,7 @@ class FileOpen extends Component {
             </React.Fragment>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     type: state.type, 
@@ -139,4 +165,10 @@ const mapDispatchToProps = {
     load: load
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FileOpen);
+export default compose(
+    withAuth,
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )
+)(FileOpen);

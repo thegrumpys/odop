@@ -2,10 +2,10 @@
 -- version 4.4.10
 -- http://www.phpmyadmin.net
 --
--- Host: ofcmikjy9x4lroa2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306
--- Generation Time: Oct 06, 2018 at 02:31 AM
--- Server version: 5.7.19-log
--- PHP Version: 5.6.36
+-- Host: u28rhuskh0x5paau.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306
+-- Generation Time: Oct 26, 2019 at 09:19 PM
+-- Server version: 5.7.23-log
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `prntcdsszgqddxh8`
+-- Database: `s6v0edrsu4v1u49m`
 --
 
 -- --------------------------------------------------------
@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `design` (
   `id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `value` mediumtext COLLATE utf8_unicode_ci

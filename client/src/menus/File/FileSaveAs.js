@@ -6,6 +6,8 @@ import { changeName } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
+import { withAuth } from '@okta/okta-react';
+import { compose } from 'redux';
 
 class FileSaveAs extends Component {
 
@@ -19,15 +21,35 @@ class FileSaveAs extends Component {
             modal: false,
             designs: [],
             type: this.props.state.type,
-            name: this.props.state.name
+            name: this.props.state.name,
+            authenticated: null,
+            accessToken: null,
         };
     }
     
+    async componentDidMount() {
+//        console.log('In FileSaveAs.componentDidMount');
+        const authenticated = await this.props.auth.isAuthenticated();
+//        console.log("In FileSaveAs.componentDidMount authenticated=",authenticated);
+        const accessToken = await this.props.auth.getAccessToken();
+//        console.log("In FileSaveAs.componentDidMount accessToken=",accessToken);
+        if (authenticated !== this.state.authenticated) {
+            this.setState({
+                authenticated: authenticated, 
+                accessToken: accessToken,
+            });
+        }
+    }
+
     getDesigns(type) {
 //        console.log('In FileOpen.getDesigns type=', type);
         // Get the designs and store them in state
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs')
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
+                headers: {
+                    Authorization: 'Bearer ' + this.state.accessToken
+                }
+            })
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -54,6 +76,7 @@ class FileSaveAs extends Component {
                 headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
+                  Authorization: 'Bearer ' + this.state.accessToken
                 },
                 body: JSON.stringify(this.props.state)
             })
@@ -129,8 +152,7 @@ class FileSaveAs extends Component {
             </React.Fragment>
         );
     }
-}  
-
+}
 
 const mapStateToProps = state => ({
     state: state 
@@ -140,4 +162,10 @@ const mapDispatchToProps = {
     changeName: changeName
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FileSaveAs);
+export default compose(
+    withAuth,
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )
+)(FileSaveAs);

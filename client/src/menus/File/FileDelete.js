@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
+import { withAuth } from '@okta/okta-react';
+import { compose } from 'redux';
 
 class FileDelete extends Component {
 
@@ -18,15 +20,35 @@ class FileDelete extends Component {
             modal: false,
             designs: [],
             type: this.props.type,
-            name: ''
+            name: '',
+            authenticated: null,
+            accessToken: null,
         };
+    }
+
+    async componentDidMount() {
+//        console.log('In FileDelete.componentDidMount');
+        const authenticated = await this.props.auth.isAuthenticated();
+//        console.log("In FileDelete.componentDidMount authenticated=",authenticated);
+        const accessToken = await this.props.auth.getAccessToken();
+//        console.log("In FileDelete.componentDidMount accessToken=",accessToken);
+        if (authenticated !== this.state.authenticated) {
+            this.setState({
+                authenticated: authenticated, 
+                accessToken: accessToken,
+            });
+        }
     }
 
     getDesigns(type) {
         // Get the designs and store them in state
 //        console.log('In FileDelete.getDesigns type=', type);
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs')
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
+                headers: {
+                    Authorization: 'Bearer ' + this.state.accessToken
+                }
+            })
             .then(res => {
                 displaySpinner(false);
                 if (!res.ok) {
@@ -51,6 +73,7 @@ class FileDelete extends Component {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + this.state.accessToken
                 },
             })
             .then(res => {
@@ -129,11 +152,16 @@ class FileDelete extends Component {
             </React.Fragment>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     name: state.name, 
     type: state.type, 
 });
 
-export default connect(mapStateToProps)(FileDelete);
+export default compose(
+    withAuth,
+    connect(
+        mapStateToProps
+    )
+)(FileDelete);

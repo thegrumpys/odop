@@ -25,11 +25,11 @@ function authenticationRequired(req, res, next) {
   const authHeader = req.headers.authorization || '';
   const match = authHeader.match(/Bearer (.+)/);
 
-//  console.log('SERVER: In authenticationRequired authHeader='+authHeader);
-//  console.log('SERVER: In authenticationRequired match='+match);
+//  console.log('SERVER: In authenticationRequired authHeader=',authHeader);
+//  console.log('SERVER: In authenticationRequired match=',match);
 
   if (!match) {
-    console.log('SERVER: 401 - UNAUTHORIZED1');
+    console.log('SERVER: 401 - UNAUTHORIZED');
     return res.status(401).end();
   }
 
@@ -38,14 +38,14 @@ function authenticationRequired(req, res, next) {
 
   return oktaJwtVerifier.verifyAccessToken(accessToken, expectedAudience)
     .then((jwt) => {
-//      console.log('SERVER: In authenticationRequired jwt='+jwt);
+//      console.log('SERVER: In authenticationRequired jwt=',jwt);
       req.jwt = jwt;
       next();
     })
     .catch((err) => {
-//      console.log('SERVER: In authenticationRequired err='+err);
+//      console.log('SERVER: In authenticationRequired err=',err);
       res.status(401).send(err.message);
-      console.log('SERVER: 401 - UNAUTHORIZED2');
+      console.log('SERVER: 401 - UNAUTHORIZED');
     });
 }
 
@@ -91,9 +91,10 @@ function startConnection() {
 
 app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
     var value;
-    console.log('SERVER: In GET /api/v1/designtypes');
+    var user = req.jwt.claims.uid;
+    console.log('SERVER: In GET /api/v1/designtypes user=',user);
     var connection = startConnection();
-    var stmt = 'SELECT DISTINCT type FROM design';
+    var stmt = 'SELECT DISTINCT type FROM design WHERE (user = \''+user+'\' OR user IS NULL)';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -114,9 +115,10 @@ app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
 app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) => {
     var value;
     var type = req.params['type'];
-    console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs');
+    var user = req.jwt.claims.uid;
+    console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs user=',user);
     var connection = startConnection();
-    var stmt = 'SELECT name FROM design WHERE type = \''+type+'\'';
+    var stmt = 'SELECT name FROM design WHERE type = \''+type+'\' AND (user = \''+user+'\' OR user IS NULL)';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -139,9 +141,10 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
     var value;
     var type = req.params['type'];
     var name = req.params['name'];
-    console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs/'+name);
+    var user = req.jwt.claims.uid;
+//    console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
     var connection = startConnection();
-    var stmt = 'SELECT * FROM design WHERE type = \''+type+'\' AND name = \''+name+'\'';
+    var stmt = 'SELECT * FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND (user = \''+user+'\' OR user IS NULL)';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -173,7 +176,8 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
     var value;
     var type = req.params['type'];
     var name = req.params['name'];
-    console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name);
+    var user = req.jwt.claims.uid;
+    console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
 //    console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
     if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
         res.status(400).end();
@@ -225,7 +229,8 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
     var value;
     var type = req.params['type'];
     var name = req.params['name'];
-    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name);
+    var user = req.jwt.claims.uid;
+    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
 //    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
     if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
         res.status(400).end();
@@ -276,7 +281,8 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (r
     var value;
     var type = req.params['type'];
     var name = req.params['name'];
-    console.log('SERVER: In DELETE /api/v1/designtypes/'+type+'/designs/'+name);
+    var user = req.jwt.claims.uid;
+    console.log('SERVER: In DELETE /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
     if (name === 'startup') { // Do not let startup be deleted
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');

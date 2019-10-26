@@ -32,7 +32,6 @@ export default withAuth(class PromptForDesign extends Component {
             name: "startup",
             authenticated: null,
             accessToken: null,
-            idToken: null,
         };
     }
 
@@ -42,13 +41,10 @@ export default withAuth(class PromptForDesign extends Component {
 //        console.log("In PromptForDesign.componentDidMount authenticated=",authenticated);
         const accessToken = await this.props.auth.getAccessToken();
 //        console.log("In PromptForDesign.componentDidMount accessToken=",accessToken);
-        const idToken = await this.props.auth.getIdToken();
-//        console.log("In PromptForDesign.componentDidMount idToken=",idToken);
         if (authenticated !== this.state.authenticated) {
             this.setState({
                 authenticated: authenticated, 
                 accessToken: accessToken,
-                idToken: idToken,
             });
         }
         this.getDesignTypes();
