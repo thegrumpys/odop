@@ -69,7 +69,7 @@ export default class FELogin extends Component {
       (err) => {
         console.log('In FELogin.onLoginError err=',err);
         throw err;
-      },
+      }
     );
   }
 

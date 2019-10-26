@@ -20,10 +20,13 @@ const oktaJwtVerifier = new OktaJwtVerifier({
  * contents are attached to req.jwt
  */
 function authenticationRequired(req, res, next) {
+  console.log('SERVER: =========================================================== authHeader='+authHeader+', match='+match);
+
   const authHeader = req.headers.authorization || '';
   const match = authHeader.match(/Bearer (.+)/);
 
-  console.log('SERVER: =========================================================== authHeader='+authHeader+', match[1]='+match[1]);
+  console.log('SERVER: In authenticationRequired authHeader='+authHeader);
+  console.log('SERVER: In authenticationRequired match='+match);
 
   if (!match) {
     console.log('SERVER: 401 - UNAUTHORIZED1');
@@ -314,9 +317,10 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (r
     }
 });
 
-app.post('/api/v1/usage_log', authenticationRequired, (req, res) => {
+app.post('/api/v1/usage_log', (req, res) => {
     var ip_address;
     var note;
+    console.log('SERVER: ===========================================================');
     ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     console.log('SERVER: In POST /api/v1/usage_log ip_address='+ip_address+' req.body=',req.body);
     note = JSON.stringify(req.body); // Convert blob to string
@@ -343,6 +347,7 @@ app.post('/api/v1/usage_log', authenticationRequired, (req, res) => {
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
+    console.log('SERVER: ===========================================================');
     console.log('SERVER: In *');
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
     res.status(200).end();

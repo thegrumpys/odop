@@ -129,4 +129,3 @@ export class ExecutePanel extends Component {
 ExecutePanel.contextTypes = {
     store: PropTypes.object
 };
-
