@@ -66,7 +66,7 @@ class FileSaveAs extends Component {
     postDesign(type,name) {
         this.props.changeName(name);
         var method = 'POST'; // Create it
-        if (this.state.designs.indexOf(name) > -1) { // Does it already exist?
+        if (this.state.designs.map(e => {return e.name}).indexOf(name) > -1) { // Does it already exist?
             method = 'PUT'; // Update it
         }
 //        console.log('In FileSaveAs.postDesign type=', type,' name=', name,' method=', method);

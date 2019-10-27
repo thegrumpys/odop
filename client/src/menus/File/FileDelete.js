@@ -57,8 +57,8 @@ class FileDelete extends Component {
                 return res.json()
             })
            .then(designs => this.setState({ 
-               designs: designs.filter((design) => {return design !== this.props.name && design !== 'startup'}),
-               name: designs.filter((design) => {return design !== this.props.name && design !== 'startup'})[0]
+               designs: designs.filter((design) => {return design.name !== this.props.name && design.user !== null}),
+               name: designs.filter((design) => {return design.name !== this.props.name && design.user !== null})[0]
            }))
            .catch(error => {
                displayError('GET of design names failed with message: \''+error.message+'\'');
@@ -140,7 +140,7 @@ class FileDelete extends Component {
                         <Label for="fileDeleteSelect">Select design to delete:</Label>
                         <Input type="select" id="fileDeleteSelect" onChange={this.onSelect}>
                             {this.state.designs.map((design, index) => {
-                                return <option key={index} value={design}>{design}</option>
+                                return <option key={index} value={design.name}>{design.name}{design.user === null ? ' [R/O]' : ''}</option>
                             })}
                         </Input>
                     </ModalBody>

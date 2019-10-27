@@ -94,7 +94,7 @@ app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
     var user = req.jwt.claims.uid;
     console.log('SERVER: In GET /api/v1/designtypes user=',user);
     var connection = startConnection();
-    var stmt = 'SELECT DISTINCT type FROM design WHERE (user = \''+user+'\' OR user IS NULL)';
+    var stmt = 'SELECT DISTINCT type FROM design WHERE (user = \''+user+'\' OR user IS NULL) ORDER BY type';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -105,6 +105,7 @@ app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
             throw err;
         } else {
             value = rows.map((row) => {return row.type});
+            console.log('SERVER: After SELECT value=', value);
             res.status(200).json(value);
             connection.end();
             console.log('SERVER: 200 - OK');
@@ -118,8 +119,8 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) 
     var type = req.params['type'];
     console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs user=',user);
     var connection = startConnection();
-    var stmt = 'SELECT name FROM design WHERE type = \''+type+'\' AND (user = \''+user+'\' OR user IS NULL)';
-//    console.log('SERVER: stmt='+stmt);
+    var stmt = 'SELECT user, name FROM design WHERE type = \''+type+'\' AND (user = \''+user+'\' OR user IS NULL) ORDER BY name, user';
+    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
         if (err) {
@@ -128,7 +129,8 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) 
             console.log('SERVER: 500 - INTERNAL SERVER ERROR');
             throw err;
         } else {
-            value = rows.map((row) => {return row.name});
+            value = rows.map((row) => {return {user: row.user, name: row.name}});
+            console.log('SERVER: After SELECT value=', value);
             res.status(200).json(value);
             connection.end();
             console.log('SERVER: 200 - OK');
@@ -220,6 +222,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
                         throw err;
                     } else {
                         value = {};
+//                        console.log('SERVER: After SELECT value=', value);
                         res.status(200).json(value);
                         connection.end();
                         console.log('SERVER: 200 - OK');
@@ -274,6 +277,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
                         throw err;
                     } else {
                         value = {};
+//                        console.log('SERVER: After SELECT value=', value);
                         res.status(200).json(value);
                         connection.end();
                         console.log('SERVER: 200 - OK');
@@ -290,44 +294,40 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (r
     var type = req.params['type'];
     var name = req.params['name'];
     console.log('SERVER: In DELETE /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
-    if (name === 'startup') { // Do not let startup be deleted
-        res.status(400).end();
-        console.log('SERVER: 400 - BAD REQUEST');
-    } else {
-        var connection = startConnection();
-        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
-//        console.log('SERVER: stmt='+stmt);
-        connection.query(stmt, (err, rows, fields) => {
-//            console.log('SERVER: After SELECT err=', err, ' rows=', rows);
-            if (err) {
-                res.status(500).end();
-                connection.end();
-                console.log('SERVER: 500 - INTERNAL SERVER ERROR');
-                throw err;
-            } else if (rows[0].count === 0) {
-                res.status(404).end();
-                connection.end();
-                console.log('SERVER: 404 - NOT FOUND');
-            } else {
-                var stmt = 'DELETE FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
-//                console.log('SERVER: stmt='+stmt);
-                connection.query(stmt, (err, rows, fields) => {
-//                    console.log('SERVER: After DELETE err=', err, ' rows=', rows);
-                    if (err) {
-                        res.status(500).end();
-                        connection.end();
-                        console.log('SERVER: 500 - INTERNAL SERVER ERROR');
-                        throw err;
-                    } else {
-                        value = {};
-                        res.status(200).json(value);
-                        connection.end();
-                        console.log('SERVER: 200 - OK');
-                    }
-                });
-            }
-        });
-    }
+    var connection = startConnection();
+    var stmt = 'SELECT COUNT(*) AS count FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
+//    console.log('SERVER: stmt='+stmt);
+    connection.query(stmt, (err, rows, fields) => {
+//        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+        if (err) {
+            res.status(500).end();
+            connection.end();
+            console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+            throw err;
+        } else if (rows[0].count === 0) {
+            res.status(404).end();
+            connection.end();
+            console.log('SERVER: 404 - NOT FOUND');
+        } else {
+            var stmt = 'DELETE FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
+//            console.log('SERVER: stmt='+stmt);
+            connection.query(stmt, (err, rows, fields) => {
+//                console.log('SERVER: After DELETE err=', err, ' rows=', rows);
+                if (err) {
+                    res.status(500).end();
+                    connection.end();
+                    console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+                    throw err;
+                } else {
+                    value = {};
+//                    console.log('SERVER: After SELECT value=', value);
+                    res.status(200).json(value);
+                    connection.end();
+                    console.log('SERVER: 200 - OK');
+                }
+            });
+        }
+    });
 });
 
 app.post('/api/v1/usage_log', (req, res) => {
@@ -350,6 +350,7 @@ app.post('/api/v1/usage_log', (req, res) => {
             throw err;
         } else {
             var value = {};
+//            console.log('SERVER: After SELECT value=', value);
             res.status(200).json(value);
             connection.end();
             console.log('SERVER: 200 - OK');

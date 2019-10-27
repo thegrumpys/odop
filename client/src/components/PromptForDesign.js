@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Label, Input } from 'reactstrap';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -239,7 +238,7 @@ export default withAuth(class PromptForDesign extends Component {
                             <Label for="fileOpenSelectName">Select design to open:</Label>
                             <Input type="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
                                 {this.state.designs.map((design, index) =>
-                                    <option key={index} value={design}>{design}</option>
+                                    <option key={index} value={design.name}>{design.name} {design.user === null ? '[R/O]' : ''}</option>
                                 )}
                             </Input>
                         </ModalBody>

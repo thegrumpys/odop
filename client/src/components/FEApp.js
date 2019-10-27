@@ -10,10 +10,10 @@ function onAuthRequired({history}) {
 }
 
 class FEApp extends Component {
-  constructor(props) {
-    super(props);
+//  constructor(props) {
+//    super(props);
 //    console.log("In FEApp.ctor props=",props)
-  }
+//  }
 
   render() {
     return (
