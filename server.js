@@ -179,7 +179,6 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
 
 
 app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
-    var type;
     var value;
     var user = req.jwt.claims.uid;
     var type = req.params['type'];
@@ -195,7 +194,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
         delete req.body.name; // Do not save the name in the blob
         value = JSON.stringify(req.body); // Convert blob to string
         var connection = startConnection();
-        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\' ORDER BY user DESC';
+        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
 //        console.log('SERVER: stmt='+stmt);
         connection.query(stmt, (err, rows, fields) => {
 //            console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -204,7 +203,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
                 connection.end();
                 console.log('SERVER: 500 - INTERNAL SERVER ERROR');
                 throw err;
-            } else if (rows[0].count === 1) {
+            } else if (rows[0].count > 0) {
                 res.status(400).end();
                 connection.end();
                 console.log('SERVER: 400 - BAD REQUEST');
@@ -234,7 +233,6 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
 });
 
 app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
-    var type;
     var value;
     var user = req.jwt.claims.uid;
     var type = req.params['type'];
