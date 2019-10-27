@@ -114,8 +114,8 @@ app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
 
 app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) => {
     var value;
-    var type = req.params['type'];
     var user = req.jwt.claims.uid;
+    var type = req.params['type'];
     console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs user=',user);
     var connection = startConnection();
     var stmt = 'SELECT name FROM design WHERE type = \''+type+'\' AND (user = \''+user+'\' OR user IS NULL)';
@@ -139,9 +139,9 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) 
 app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var type;
     var value;
+    var user = req.jwt.claims.uid;
     var type = req.params['type'];
     var name = req.params['name'];
-    var user = req.jwt.claims.uid;
 //    console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
     var connection = startConnection();
     var stmt = 'SELECT * FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND (user = \''+user+'\' OR user IS NULL)';
@@ -158,11 +158,16 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
             connection.end();
             console.log('SERVER: 404 - NOT FOUND');
         } else {
+//            console.log('SERVER: After SELECT rows[0]=', rows[0]);
+            user = rows[0].user; // Get user from the JSON blob
+            name = rows[0].name; // Get name from the JSON blob
             type = rows[0].type; // Get type from the JSON blob
+//            console.log('SERVER: After SELECT user=', user, ' name=', name, ' type=', type);
             value = JSON.parse(rows[0].value); // Get value from the JSON blob
+            value.user = user; // Insert user into blob
             value.name = name; // Insert name into blob
             value.type = type; // Insert type into blob
-//            console.log('SERVER: After SELECT type=', type, ' value=', value);
+//            console.log('SERVER: After SELECT value=', value);
             res.status(200).json(value);
             connection.end();
             console.log('SERVER: 200 - OK');
@@ -174,15 +179,16 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
 app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var type;
     var value;
+    var user = req.jwt.claims.uid;
     var type = req.params['type'];
     var name = req.params['name'];
-    var user = req.jwt.claims.uid;
     console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
 //    console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
     if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
     } else {
+        delete req.body.user; // Do not save the user in the blob
         delete req.body.name; // Do not save the name in the blob
         delete req.body.type; // Do not save the type in the blob
         value = JSON.stringify(req.body); // Convert blob to string
@@ -227,15 +233,16 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
 app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var type;
     var value;
+    var user = req.jwt.claims.uid;
     var type = req.params['type'];
     var name = req.params['name'];
-    var user = req.jwt.claims.uid;
     console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
 //    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
     if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
     } else {
+        delete req.body.user; // Do not save the user in the blob
         delete req.body.name; // Do not save the name in the blob
         delete req.body.type; // Do not save the type in the blob
         value = JSON.stringify(req.body); // Convert blob to string
@@ -279,9 +286,9 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
 
 app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var value;
+    var user = req.jwt.claims.uid;
     var type = req.params['type'];
     var name = req.params['name'];
-    var user = req.jwt.claims.uid;
     console.log('SERVER: In DELETE /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
     if (name === 'startup') { // Do not let startup be deleted
         res.status(400).end();
