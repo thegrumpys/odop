@@ -105,7 +105,7 @@ app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
             throw err;
         } else {
             value = rows.map((row) => {return row.type});
-            console.log('SERVER: After SELECT value=', value);
+//            console.log('SERVER: After SELECT value=', value);
             res.status(200).json(value);
             connection.end();
             console.log('SERVER: 200 - OK');
@@ -120,7 +120,7 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) 
     console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs user=',user);
     var connection = startConnection();
     var stmt = 'SELECT user, name FROM design WHERE type = \''+type+'\' AND (user = \''+user+'\' OR user IS NULL) ORDER BY name, user';
-    console.log('SERVER: stmt='+stmt);
+//    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
         if (err) {
@@ -130,7 +130,7 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) 
             throw err;
         } else {
             value = rows.map((row) => {return {user: row.user, name: row.name}});
-            console.log('SERVER: After SELECT value=', value);
+//            console.log('SERVER: After SELECT value=', value);
             res.status(200).json(value);
             connection.end();
             console.log('SERVER: 200 - OK');
