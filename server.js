@@ -105,7 +105,7 @@ app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
             throw err;
         } else {
             value = rows.map((row) => {return row.type});
-//            console.log('SERVER: After SELECT value=', value);
+//            console.log('SERVER: After SELECT DISTINCT value=', value);
             res.status(200).json(value);
             connection.end();
             console.log('SERVER: 200 - OK');
@@ -119,7 +119,7 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) 
     var type = req.params['type'];
     console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs user=',user);
     var connection = startConnection();
-    var stmt = 'SELECT user, name FROM design WHERE type = \''+type+'\' AND (user = \''+user+'\' OR user IS NULL) ORDER BY name, user';
+    var stmt = 'SELECT user, name FROM design WHERE (user = \''+user+'\' OR user IS NULL) AND type = \''+type+'\' ORDER BY name, user';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -144,9 +144,9 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
     var user = req.jwt.claims.uid;
     var type = req.params['type'];
     var name = req.params['name'];
-//    console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
+    console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
     var connection = startConnection();
-    var stmt = 'SELECT * FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND (user = \''+user+'\' OR user IS NULL)';
+    var stmt = 'SELECT * FROM design WHERE (user = \''+user+'\' OR user IS NULL) AND type = \''+type+'\' AND name = \''+name+'\'';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -162,13 +162,13 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
         } else {
 //            console.log('SERVER: After SELECT rows[0]=', rows[0]);
             user = rows[0].user; // Get user from the JSON blob
-            name = rows[0].name; // Get name from the JSON blob
             type = rows[0].type; // Get type from the JSON blob
+            name = rows[0].name; // Get name from the JSON blob
 //            console.log('SERVER: After SELECT user=', user, ' name=', name, ' type=', type);
             value = JSON.parse(rows[0].value); // Get value from the JSON blob
             value.user = user; // Insert user into blob
-            value.name = name; // Insert name into blob
             value.type = type; // Insert type into blob
+            value.name = name; // Insert name into blob
 //            console.log('SERVER: After SELECT value=', value);
             res.status(200).json(value);
             connection.end();
@@ -191,11 +191,11 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
         console.log('SERVER: 400 - BAD REQUEST');
     } else {
         delete req.body.user; // Do not save the user in the blob
-        delete req.body.name; // Do not save the name in the blob
         delete req.body.type; // Do not save the type in the blob
+        delete req.body.name; // Do not save the name in the blob
         value = JSON.stringify(req.body); // Convert blob to string
         var connection = startConnection();
-        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
+        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
 //        console.log('SERVER: stmt='+stmt);
         connection.query(stmt, (err, rows, fields) => {
 //            console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -211,7 +211,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
             } else {
 //                console.log('SERVER: In POST /api/v1/designs/'+name,' type=', type,' value=', value);
                 value = value.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
-                var stmt = 'INSERT INTO design (user, name, type, value) VALUES (\''+user+'\',\''+name+'\',\''+type+'\',\''+value+'\')';
+                var stmt = 'INSERT INTO design (user, type, name, value) VALUES (\''+user+'\',\''+type+'\',\''+name+'\',\''+value+'\')';
 //                console.log('SERVER: stmt='+stmt);
                 connection.query(stmt, function(err, rows, fields) {
 //                    console.log('SERVER: After INSERT err=', err, ' rows=', rows);
@@ -222,7 +222,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
                         throw err;
                     } else {
                         value = {};
-//                        console.log('SERVER: After SELECT value=', value);
+//                        console.log('SERVER: After INSERT value=', value);
                         res.status(200).json(value);
                         connection.end();
                         console.log('SERVER: 200 - OK');
@@ -250,7 +250,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
         delete req.body.type; // Do not save the type in the blob
         value = JSON.stringify(req.body); // Convert blob to string
         var connection = startConnection();
-        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
+        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
 //        console.log('SERVER: stmt='+stmt);
         connection.query(stmt, (err, rows, fields) => {
 //            console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -266,7 +266,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
             } else {
 //                console.log('SERVER: In PUT /api/v1/designs/'+name,' type=', type,' value=', value);
                 value = value.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
-                var stmt = 'UPDATE design SET value = \''+value+'\' WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
+                var stmt = 'UPDATE design SET value = \''+value+'\' WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
 //                console.log('SERVER: stmt='+stmt);
                 connection.query(stmt, (err, rows, fields) => {
 //                    console.log('SERVER: After UPDATE err=', err, ' rows=', rows);
@@ -277,7 +277,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
                         throw err;
                     } else {
                         value = {};
-//                        console.log('SERVER: After SELECT value=', value);
+//                        console.log('SERVER: After UPDATE value=', value);
                         res.status(200).json(value);
                         connection.end();
                         console.log('SERVER: 200 - OK');
@@ -295,7 +295,7 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (r
     var name = req.params['name'];
     console.log('SERVER: In DELETE /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
     var connection = startConnection();
-    var stmt = 'SELECT COUNT(*) AS count FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
+    var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, (err, rows, fields) => {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -309,7 +309,7 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (r
             connection.end();
             console.log('SERVER: 404 - NOT FOUND');
         } else {
-            var stmt = 'DELETE FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
+            var stmt = 'DELETE FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
 //            console.log('SERVER: stmt='+stmt);
             connection.query(stmt, (err, rows, fields) => {
 //                console.log('SERVER: After DELETE err=', err, ' rows=', rows);
@@ -320,7 +320,7 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (r
                     throw err;
                 } else {
                     value = {};
-//                    console.log('SERVER: After SELECT value=', value);
+//                    console.log('SERVER: After DELETE value=', value);
                     res.status(200).json(value);
                     connection.end();
                     console.log('SERVER: 200 - OK');
@@ -350,7 +350,7 @@ app.post('/api/v1/usage_log', (req, res) => {
             throw err;
         } else {
             var value = {};
-//            console.log('SERVER: After SELECT value=', value);
+//            console.log('SERVER: After INSERT value=', value);
             res.status(200).json(value);
             connection.end();
             console.log('SERVER: 200 - OK');
