@@ -187,7 +187,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
         delete req.body.type; // Do not save the type in the blob
         value = JSON.stringify(req.body); // Convert blob to string
         var connection = startConnection();
-        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE type = \''+type+'\' AND name = \''+name+'\'';
+        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
 //        console.log('SERVER: stmt='+stmt);
         connection.query(stmt, (err, rows, fields) => {
 //            console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -203,7 +203,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
             } else {
 //                console.log('SERVER: In POST /api/v1/designs/'+name,' type=', type,' value=', value);
                 value = value.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
-                var stmt = 'INSERT INTO design (name, type, value) VALUES (\''+name+'\',\''+type+'\',\''+value+'\')';
+                var stmt = 'INSERT INTO design (user, name, type, value) VALUES (\''+user+'\',\''+name+'\',\''+type+'\',\''+value+'\')';
 //                console.log('SERVER: stmt='+stmt);
                 connection.query(stmt, function(err, rows, fields) {
 //                    console.log('SERVER: After INSERT err=', err, ' rows=', rows);
@@ -240,7 +240,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
         delete req.body.type; // Do not save the type in the blob
         value = JSON.stringify(req.body); // Convert blob to string
         var connection = startConnection();
-        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE type = \''+type+'\' AND name = \''+name+'\'';
+        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
 //        console.log('SERVER: stmt='+stmt);
         connection.query(stmt, (err, rows, fields) => {
 //            console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -256,7 +256,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
             } else {
 //                console.log('SERVER: In PUT /api/v1/designs/'+name,' type=', type,' value=', value);
                 value = value.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
-                var stmt = 'UPDATE design SET value = \''+value+'\' WHERE type = \''+type+'\' AND name = \''+name+'\'';
+                var stmt = 'UPDATE design SET value = \''+value+'\' WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
 //                console.log('SERVER: stmt='+stmt);
                 connection.query(stmt, (err, rows, fields) => {
 //                    console.log('SERVER: After UPDATE err=', err, ' rows=', rows);
@@ -288,7 +288,7 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (r
         console.log('SERVER: 400 - BAD REQUEST');
     } else {
         var connection = startConnection();
-        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE type = \''+type+'\' AND name = \''+name+'\'';
+        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
 //        console.log('SERVER: stmt='+stmt);
         connection.query(stmt, (err, rows, fields) => {
 //            console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -302,7 +302,7 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (r
                 connection.end();
                 console.log('SERVER: 404 - NOT FOUND');
             } else {
-                var stmt = 'DELETE FROM design WHERE type = \''+type+'\' AND name = \''+name+'\'';
+                var stmt = 'DELETE FROM design WHERE type = \''+type+'\' AND name = \''+name+'\' AND user = \''+user+'\'';
 //                console.log('SERVER: stmt='+stmt);
                 connection.query(stmt, (err, rows, fields) => {
 //                    console.log('SERVER: After DELETE err=', err, ' rows=', rows);

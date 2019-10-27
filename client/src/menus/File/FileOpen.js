@@ -7,12 +7,12 @@ import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withAuth } from '@okta/okta-react';
-import { compose } from 'redux';
 
 class FileOpen extends Component {
 
     constructor(props) {
         super(props);
+//        console.log("In FileOpen .ctor props=",props)
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onOpen = this.onOpen.bind(this);
@@ -165,10 +165,9 @@ const mapDispatchToProps = {
     load: load
 };
 
-export default compose(
-    withAuth,
+export default withAuth(
     connect(
         mapStateToProps,
         mapDispatchToProps
-    )
-)(FileOpen);
+    )(FileOpen)
+);

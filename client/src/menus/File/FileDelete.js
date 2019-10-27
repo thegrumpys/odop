@@ -6,12 +6,12 @@ import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withAuth } from '@okta/okta-react';
-import { compose } from 'redux';
 
 class FileDelete extends Component {
 
     constructor(props) {
         super(props);
+//        console.log("In FileDelete.ctor props=",props)
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onDelete = this.onDelete.bind(this);
@@ -159,9 +159,8 @@ const mapStateToProps = state => ({
     type: state.type, 
 });
 
-export default compose(
-    withAuth,
+export default withAuth(
     connect(
         mapStateToProps
-    )
-)(FileDelete);
+    )(FileDelete)
+);

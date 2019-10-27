@@ -32,6 +32,7 @@ export default withAuth(class PromptForDesign extends Component {
             name: "startup",
             authenticated: null,
             accessToken: null,
+            store: null,
         };
     }
 
@@ -143,8 +144,10 @@ export default withAuth(class PromptForDesign extends Component {
                 var migrated_design = migrate(design);
                 const store = createStore(reducers, migrated_design, middleware);
                 store.dispatch(startup());
-                ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
                 logUsage('function=PromptForDesign,type='+type+',name='+name);
+                this.setState({
+                    store: store
+                });
             })
             .catch(error => {
                 displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
@@ -165,7 +168,9 @@ export default withAuth(class PromptForDesign extends Component {
         var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
         const store = createStore(reducers, state, middleware);
         store.dispatch(startup());
-        ReactDOM.render(<Provider store={store}><App store={store} /></Provider>, document.getElementById('root2'));
+        this.setState({
+            store: store
+        });
     }
 
     onSelectType(event) {
@@ -211,40 +216,46 @@ export default withAuth(class PromptForDesign extends Component {
 
     render() {
 //        console.log('In PromptForDesign.render');
-        return (
-            <React.Fragment>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}>
-                    <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>
-                      Open Design Optimization Platform
-                    </ModalHeader>
-                    <ModalBody>
-                        <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay" target="_blank" rel="noopener noreferrer">Message-of-the-day </a> 
-                        <br />
-                        Learn <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">About</a> ODOP
-                        <br /><br />
-                        <Label for="fileOpenSelectType">Select design type to open:</Label>
-                        <Input type="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
-                            {this.state.designtypes.map((designtype, index) =>
-                                <option key={index} value={designtype}>{designtype}</option>
-                            )}
-                        </Input>
-                        <br />
-                        <Label for="fileOpenSelectName">Select design to open:</Label>
-                        <Input type="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
-                            {this.state.designs.map((design, index) =>
-                                <option key={index} value={design}>{design}</option>
-                            )}
-                        </Input>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={() => this.props.auth.logout()}>Logout</Button>
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        {process.env.NODE_ENV !== "production" && <Button color="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
-                        <Button color="primary" onClick={this.onOpen}>Open</Button>
-                    </ModalFooter>
-                </Modal>
-            </React.Fragment>
-        );
+        if (this.state.store === null) {
+            return (
+                <React.Fragment>
+                    <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                        <ModalHeader toggle={this.toggle}>
+                        <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>
+                          Open Design Optimization Platform
+                        </ModalHeader>
+                        <ModalBody>
+                            <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay" target="_blank" rel="noopener noreferrer">Message-of-the-day </a> 
+                            <br />
+                            Learn <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">About</a> ODOP
+                            <br /><br />
+                            <Label for="fileOpenSelectType">Select design type to open:</Label>
+                            <Input type="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
+                                {this.state.designtypes.map((designtype, index) =>
+                                    <option key={index} value={designtype}>{designtype}</option>
+                                )}
+                            </Input>
+                            <br />
+                            <Label for="fileOpenSelectName">Select design to open:</Label>
+                            <Input type="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
+                                {this.state.designs.map((design, index) =>
+                                    <option key={index} value={design}>{design}</option>
+                                )}
+                            </Input>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="secondary" onClick={() => this.props.auth.logout()}>Logout</Button>
+                            <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                            {process.env.NODE_ENV !== "production" && <Button color="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
+                            <Button color="primary" onClick={this.onOpen}>Open</Button>
+                        </ModalFooter>
+                    </Modal>
+                </React.Fragment>
+            );
+        } else {
+            return (
+              <Provider store={this.state.store}><App store={this.state.store} /></Provider>
+            );
+        }
     }
 });

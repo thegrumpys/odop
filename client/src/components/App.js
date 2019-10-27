@@ -42,7 +42,7 @@ import HelpAbout from '../menus/Help/HelpAbout';
 class App extends Component {
     
     constructor(props) {
-//        console.log('In App.constructor');
+//        console.log("In App.ctor props=",props)
         super(props);
         this.toggle = this.toggle.bind(this);
         this.toggleTab = this.toggleTab.bind(this);

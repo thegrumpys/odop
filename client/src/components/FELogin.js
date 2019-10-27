@@ -7,6 +7,7 @@ import config from './config';
 export default class FELogin extends Component {
   constructor(props) {
     super(props);
+//    console.log("In FELogin.ctor props=",props)
 
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //    console.log("config=",config);
@@ -64,10 +65,10 @@ export default class FELogin extends Component {
          * In this flow, the success handler will not be called beacuse we redirect
          * to the Okta org for the authentication workflow.
          */
-          console.log('In FELogin.onLoginSuccess res=',res);
+//          console.log('In FELogin.onLoginSuccess res=',res);
       },
       (err) => {
-        console.log('In FELogin.onLoginError err=',err);
+//        console.log('In FELogin.onLoginError err=',err);
         throw err;
       }
     );

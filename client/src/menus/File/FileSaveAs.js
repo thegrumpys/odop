@@ -7,12 +7,12 @@ import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withAuth } from '@okta/okta-react';
-import { compose } from 'redux';
 
 class FileSaveAs extends Component {
 
     constructor(props) {
         super(props);
+//        console.log("In FileSaveAs.ctor props=",props)
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onSaveAs = this.onSaveAs.bind(this);
@@ -162,10 +162,9 @@ const mapDispatchToProps = {
     changeName: changeName
 };
 
-export default compose(
-    withAuth,
+export default withAuth(
     connect(
         mapStateToProps,
         mapDispatchToProps
-    )
-)(FileSaveAs);
+    )(FileSaveAs)
+);
