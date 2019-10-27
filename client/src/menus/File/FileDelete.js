@@ -140,7 +140,7 @@ class FileDelete extends Component {
                         <Label for="fileDeleteSelect">Select design to delete:</Label>
                         <Input type="select" id="fileDeleteSelect" onChange={this.onSelect}>
                             {this.state.designs.map((design, index) => {
-                                return <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
+                                return <option key={index} value={design.name}>{design.name}</option>
                             })}
                         </Input>
                     </ModalBody>
