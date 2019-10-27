@@ -74,7 +74,7 @@ class FileSave extends Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.onSave}>
+                <DropdownItem onClick={this.onSave} disabled={this.props.state.user === null ? true : false}>
                     Save
                 </DropdownItem>
             </React.Fragment>

@@ -238,7 +238,7 @@ export default withAuth(class PromptForDesign extends Component {
                             <Label for="fileOpenSelectName">Select design to open:</Label>
                             <Input type="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
                                 {this.state.designs.map((design, index) =>
-                                    <option key={index} value={design.name}>{design.name} {design.user === null ? '[R/O]' : ''}</option>
+                                    <option key={index} value={design.name}>{design.name} {design.user === null ? '[ReadOnly]' : ''}</option>
                                 )}
                             </Input>
                         </ModalBody>

@@ -239,15 +239,15 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
     var user = req.jwt.claims.uid;
     var type = req.params['type'];
     var name = req.params['name'];
-    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
-//    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
+    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name);
+//    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name+' user=',user,' req.body=',req.body);
     if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
     } else {
         delete req.body.user; // Do not save the user in the blob
-        delete req.body.name; // Do not save the name in the blob
         delete req.body.type; // Do not save the type in the blob
+        delete req.body.name; // Do not save the name in the blob
         value = JSON.stringify(req.body); // Convert blob to string
         var connection = startConnection();
         var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
@@ -264,7 +264,6 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
                 connection.end();
                 console.log('SERVER: 404 - NOT FOUND');
             } else {
-//                console.log('SERVER: In PUT /api/v1/designs/'+name,' type=', type,' value=', value);
                 value = value.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
                 var stmt = 'UPDATE design SET value = \''+value+'\' WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
 //                console.log('SERVER: stmt='+stmt);

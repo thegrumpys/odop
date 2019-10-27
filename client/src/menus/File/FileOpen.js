@@ -142,7 +142,7 @@ class FileOpen extends Component {
                         <Label for="fileOpenSelect">Select design to open:</Label>
                         <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
                             {this.state.designs.map((design, index) =>
-                                <option key={index} value={design.name}>{design.name}{design.user === null ? ' [R/O]' : ''}</option>
+                                <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
                             )}
                         </Input>
                     </ModalBody>
