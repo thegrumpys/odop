@@ -119,7 +119,7 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) 
     var type = req.params['type'];
     console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs user=',user);
     var connection = startConnection();
-    var stmt = 'SELECT user, name FROM design WHERE (user = \''+user+'\' OR user IS NULL) AND type = \''+type+'\' ORDER BY name, user';
+    var stmt = 'SELECT user, name FROM design WHERE (user = \''+user+'\' OR user IS NULL) AND type = \''+type+'\' ORDER BY name ASC, user DESC';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -146,7 +146,7 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
     var name = req.params['name'];
     console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
     var connection = startConnection();
-    var stmt = 'SELECT * FROM design WHERE (user = \''+user+'\' OR user IS NULL) AND type = \''+type+'\' AND name = \''+name+'\'';
+    var stmt = 'SELECT * FROM design WHERE (user = \''+user+'\' OR user IS NULL) AND type = \''+type+'\' AND name = \''+name+'\' ORDER BY user DESC';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
@@ -195,7 +195,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
         delete req.body.name; // Do not save the name in the blob
         value = JSON.stringify(req.body); // Convert blob to string
         var connection = startConnection();
-        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
+        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\' ORDER BY user DESC';
 //        console.log('SERVER: stmt='+stmt);
         connection.query(stmt, (err, rows, fields) => {
 //            console.log('SERVER: After SELECT err=', err, ' rows=', rows);
