@@ -2,6 +2,7 @@ import { STARTUP,
     LOAD, 
     LOAD_INITIAL_STATE, 
     CHANGE_NAME, 
+    CHANGE_USER, 
     
     CHANGE_SYMBOL_VALUE, 
     CHANGE_SYMBOL_VIOLATION, 
@@ -48,6 +49,10 @@ export function reducers(state, action) {
     case CHANGE_NAME:
         return Object.assign({}, state, {
             name: action.payload.name
+        });
+    case CHANGE_USER:
+        return Object.assign({}, state, {
+            user: action.payload.user
         });
         
 // SYMBOL

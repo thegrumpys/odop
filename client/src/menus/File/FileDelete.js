@@ -57,8 +57,8 @@ class FileDelete extends Component {
                 return res.json()
             })
            .then(designs => this.setState({ 
-               designs: designs.filter((design) => {return design.name !== this.props.name && design.user !== null}),
-               name: designs.filter((design) => {return design.name !== this.props.name && design.user !== null})[0]
+               designs: designs.filter((design) => {return design.user !== null}),
+               name: designs.filter((design) => {return design.user !== null})[0]
            }))
            .catch(error => {
                displayError('GET of design names failed with message: \''+error.message+'\'');

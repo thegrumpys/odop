@@ -3,7 +3,7 @@ import { initialState } from '../designtypes/Piston-Cylinder/initialState';
 import { initialSystemControls } from '../initialSystemControls';
 import { MIN, MAX, CONSTRAINED, FIXED } from '../store/actionTypes';
 import { 
-    startup, load, changeName, 
+    startup, load, changeName, changeUser,
     changeSymbolValue, changeSymbolViolation, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
     changeInputSymbolValues, saveInputSymbolValues, restoreInputSymbolValues, 
     changeOutputSymbolValues, saveOutputSymbolConstraints, restoreOutputSymbolConstraints, 
@@ -85,12 +85,33 @@ it('reducers change name', () => {
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.user).toEqual(null);
 
     store.dispatch(changeName('startup'));
     
     var design = store.getState(); // after
     expect(design.name).toEqual("startup");
     expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.user).toEqual(null);
+});
+
+it('reducers change user', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+
+    var design = store.getState(); // before
+    expect(design.name).toEqual("initialState");
+    expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.user).toEqual(null);
+
+    store.dispatch(changeUser('00u1itcx44XGp65ln357'));
+    
+    var design = store.getState(); // after
+    expect(design.name).toEqual("startup");
+    expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.user).toEqual('00u1itcx44XGp65ln357');
 });
 
 //=====================================================================

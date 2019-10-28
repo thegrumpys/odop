@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from
 import { Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { changeName } from '../../store/actionCreators';
+import { changeUser } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -24,6 +25,7 @@ class FileSaveAs extends Component {
             name: this.props.state.name,
             authenticated: null,
             accessToken: null,
+            user: null,
         };
     }
     
@@ -33,10 +35,13 @@ class FileSaveAs extends Component {
 //        console.log("In FileSaveAs.componentDidMount authenticated=",authenticated);
         const accessToken = await this.props.auth.getAccessToken();
 //        console.log("In FileSaveAs.componentDidMount accessToken=",accessToken);
+        const user = await this.props.auth.getUser();
+//        console.log("In FileSaveAs.componentDidMount user=",user);
         if (authenticated !== this.state.authenticated) {
             this.setState({
                 authenticated: authenticated, 
                 accessToken: accessToken,
+                user: user,
             });
         }
     }
@@ -64,9 +69,8 @@ class FileSaveAs extends Component {
     }
     
     postDesign(type,name) {
-        if (this.state.name !== name) {
-            this.props.changeName(name);
-        }
+        this.props.changeName(name);
+        this.props.changeUser(this.state.user.sub);
         var method = 'POST'; // Create it
         if (this.state.designs.map(e => {return e.name}).indexOf(name) > -1) { // Does it already exist?
             method = 'PUT'; // Update it
@@ -161,7 +165,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    changeName: changeName
+    changeName: changeName,
+    changeUser: changeUser
 };
 
 export default withAuth(

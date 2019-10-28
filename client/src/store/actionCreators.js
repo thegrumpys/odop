@@ -2,6 +2,7 @@ import { STARTUP,
     LOAD, 
     LOAD_INITIAL_STATE, 
     CHANGE_NAME, 
+    CHANGE_USER, 
     
     CHANGE_SYMBOL_VALUE, 
     FIX_SYMBOL_VALUE, 
@@ -58,6 +59,15 @@ export function changeName(name) {
         type: CHANGE_NAME,
         payload: {
             name
+        } 
+    }
+}
+
+export function changeUser(user) {
+    return {
+        type: CHANGE_USER,
+        payload: {
+            user
         } 
     }
 }
