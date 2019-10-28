@@ -141,7 +141,7 @@ class FileOpen extends Component {
                         <br />
                         <Label for="fileOpenSelect">Select design to open:</Label>
                         <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
-                            {this.state.designs.map((design, index) =>
+                            {this.state.designs.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                 <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
                             )}
                         </Input>
