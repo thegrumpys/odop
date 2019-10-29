@@ -47,7 +47,7 @@ class FileSaveAs extends Component {
     }
 
     getDesigns(type) {
-//        console.log('In FileOpen.getDesigns type=', type);
+//        console.log('In FileSaveAs.getDesigns type=', type);
         // Get the designs and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
@@ -70,9 +70,10 @@ class FileSaveAs extends Component {
     
     postDesign(type,name) {
         this.props.changeName(name);
-        this.props.changeUser(this.state.user.sub);
+        var user = this.state.user.sub;
+        this.props.changeUser(user);
         var method = 'POST'; // Create it
-        if (this.state.designs.map(e => {return e.name}).indexOf(name) > -1) { // Does it already exist?
+        if (this.state.designs.filter(e => {return e.name === name && e.user === user}).length > 0) { // Does it already exist?
             method = 'PUT'; // Update it
         }
 //        console.log('In FileSaveAs.postDesign type=', type,' name=', name,' method=', method);
