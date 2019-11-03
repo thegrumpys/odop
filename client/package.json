@@ -20,9 +20,7 @@
     "url": "https://github.com/thegrumpys/odop/issues"
   },
   "homepage": "https://odop.heroku.com/",
-  "devDependencies": {
-    "istanbul": "^0.4.5"
-  },
+  "devDependencies": {},
   "dependencies": {
     "@okta/okta-auth-js": "^2.9.0",
     "@okta/okta-react": "^1.2.3",
