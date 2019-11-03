@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: u28rhuskh0x5paau.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306
--- Generation Time: Nov 03, 2019 at 10:59 PM
+-- Generation Time: Oct 26, 2019 at 09:19 PM
 -- Server version: 5.7.23-log
 -- PHP Version: 7.2.9
 
@@ -36,6 +36,20 @@ CREATE TABLE IF NOT EXISTS `design` (
   `value` mediumtext COLLATE utf8_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usage_log`
+--
+
+CREATE TABLE IF NOT EXISTS `usage_log` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ip_address` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `note` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -47,6 +61,12 @@ ALTER TABLE `design`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `usage_log`
+--
+ALTER TABLE `usage_log`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -54,6 +74,11 @@ ALTER TABLE `design`
 -- AUTO_INCREMENT for table `design`
 --
 ALTER TABLE `design`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `usage_log`
+--
+ALTER TABLE `usage_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
