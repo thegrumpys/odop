@@ -14,7 +14,7 @@ DEVELOPMENT ENVIRONMENT
 * Bring up on Windows under Microsoft Edge and verify Help About Software Version is X.Y.Z. Bring up on Windows and Mac OS X under Google Chrome and verify Help About Software Version is X.Y.Z.
 
 PRODUCTION
-* If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) to create and format the database tables.
+* If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) to create and format the database tables using create.sql file. Do this to development, test and/or production databases.
 * If the database already exists, but no the entries exist or must be recreated, then run all affected load.sql files to create "startup" files in the database. Delete any old invalid designs if necessary.
 * In git/odop push to Heroku (command: git push heroku master). Verify no error messages during build on heroku.
 * On http://odop.herokuapp.com website is operational and version X.Y.Z displays.
