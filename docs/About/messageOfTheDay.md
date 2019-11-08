@@ -1,7 +1,11 @@
-**Message-of-the-day** &nbsp; updated June 26, 2019   
+**Message-of-the-day** &nbsp; updated November 7, 2019   
 
 Watch this space for breaking news 
-(planned outages, newly discovered issues & work-arounds, etc.). 
+(planned outages, newly discovered issues & work-arounds, news of impending releases, etc.). 
+
+A new version providing multi-user support will be released shortly. 
+Access will require a username and password.
+To establish a free account, send your request to **Info@SpringDesignSoftware.org**.
 
 ODOP is experimental software. 
 For details, see: [Experimental Software](experimental)
