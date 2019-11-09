@@ -181,9 +181,9 @@ describe('Designs with empty DB', () => {
         });
     });
     
-    describe('DELETE /api/v1/designtypes/Test-Design/designs/startup with non-empty DB', () => {
+    describe('DELETE /api/v1/designtypes/Test-Design/designs/Startup with non-empty DB', () => {
         it('it should fail DELETE with 400 BAD REQUEST, because name is startup', (done) => {
-            var name = 'startup';
+            var name = 'Startup';
             chai.request(server)
                 .delete('/api/v1/designtypes/Test-Design/designs/'+name)
                 .end((err, res) => {
@@ -342,9 +342,9 @@ describe('Designs with non-empty DB', () => {
         });
     });
     
-    describe('DELETE /api/v1/designtypes/Test-Design/designs/startup with non-empty DB', () => {
+    describe('DELETE /api/v1/designtypes/Test-Design/designs/Startup with non-empty DB', () => {
         it('it should fail DELETE with 400 BAD REQUEST, because name is startup', (done) => {
-            var name = 'startup';
+            var name = 'Startup';
             chai.request(server)
                 .delete('/api/v1/designtypes/Test-Design/designs/'+name)
                 .end((err, res) => {
@@ -549,9 +549,9 @@ describe('Designs with multiple DB entries', () => {
         });
     });
     
-    describe('DELETE /api/v1/designtypes/Test-Design/designs/startup with multiple DB entries', () => {
+    describe('DELETE /api/v1/designtypes/Test-Design/designs/Startup with multiple DB entries', () => {
         it('it should fail DELETE with 400 BAD REQUEST, because name is startup', (done) => {
-            var name = 'startup';
+            var name = 'Startup';
             chai.request(server)
                 .delete('/api/v1/designtypes/Test-Design/designs/'+name)
                 .end((err, res) => {
