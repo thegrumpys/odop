@@ -75,3 +75,4 @@ $ package dotenv file
 
 # configured scripts
 scripts/load_all.sh
+scripts/create_db.sh

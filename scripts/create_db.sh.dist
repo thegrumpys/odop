@@ -1,0 +1,15 @@
+# BEWARE! This empties the database of all current tables.
+
+user="@@@ PUT DATABASE USER HERE @@@"
+password="@@@ PUT DATABASE PASSWORD HERE @@@"
+host="@@@ PUT DATABASE HOST HERE @@@"
+database="@@@ PUT DATABASE NAME HERE @@@"
+
+filename="./data/create.sql"
+
+mysql --user=$user --password=$password -h $host << EOF
+  drop database $database;
+  create database $database character set utf8;
+  use $database;
+  source $filename;
+EOF
