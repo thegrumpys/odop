@@ -116,7 +116,7 @@ class FileOpen extends Component {
         var type = this.state.type;
         if (type === undefined) type = 'Piston-Cylinder';
         var name = this.state.name;
-        if (name === undefined) name = 'startup';
+        if (name === undefined) name = 'Startup';
         this.getDesign(type,name);
     }
     

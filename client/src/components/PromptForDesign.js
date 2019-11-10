@@ -28,7 +28,7 @@ export default withAuth(class PromptForDesign extends Component {
             designtypes: [],
             designs: [],
             type: "Spring/Compression",
-            name: "startup",
+            name: "Startup",
             authenticated: null,
             accessToken: null,
             store: null,
