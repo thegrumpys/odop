@@ -1,7 +1,7 @@
 ## Requirements
 
 In theory, the only requirement to operate the ODOP software is a modern web browser.
-In practice, all web browsers and all hardware platforms are not equal.
+In practice, all web browsers, operating systems and hardware platforms are not equal.
 As the expression goes, "Your mileage may vary".   
 
 It is expected that most users doing serious design work will run the ODOP software on a
@@ -16,11 +16,13 @@ a legible manner.
 Unfortunately, the necessary amount of scrolling may negatively impact productivity and 
 general satisfaction with operation on small screen hardware.
 
-ODOP is developed using the current version of Google Chrome and is routinely tested 
-using current versions of other browsers including Microsoft Edge. 
+ODOP is developed using the current version of Google Chrome (both MacOS and Windows 10)
+and is routinely tested using current versions of other browsers including 
+the newer Chromium based version of the Microsoft Edge browser. 
 Depending on screen size and resolution, 
 Firefox users may find it desirable to adjust font size in order to optimize the on-screen presentation.
-Microsoft Internet Explorer is not supported for operation with ODOP.   
+Microsoft Internet Explorer and the older EdgeHTML version of the Microsoft Edge browser are not 
+supported for operation with ODOP.   
 
 The default configuration of some ad blocker browser extensions may interfere with rendering 
 of ODOP user interface graphic elements such as checkboxes. 
