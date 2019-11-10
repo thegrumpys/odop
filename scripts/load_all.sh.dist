@@ -1,0 +1,16 @@
+# BEWARE! This empties the design table of all current designs.
+
+user='@@@ PUT DATABASE USER HERE @@@'
+password='@@@ PUT DATABASE PASSWORD HERE @@@'
+host='@@@ PUT DATABASE HOST HERE @@@'
+database="@@@ PUT DATABASE NAME HERE @@@"
+
+mysql --user=$user --password=$password -h $host << EOF
+  use $database;
+  truncate table design;
+  source ./designtypes/Piston-Cylinder/load.sql;
+  source ./designtypes/Solid/load.sql;
+  source ./designtypes/Spring/Compression/load.sql;
+  source ./designtypes/Spring/Extension/load.sql;
+  source ./designtypes/Spring/Torsion/load.sql;
+EOF

@@ -72,3 +72,6 @@ typings/
 
 $ package dotenv file
 .env
+
+# configured scripts
+scripts/load_all.sh
