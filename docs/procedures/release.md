@@ -14,9 +14,10 @@ DEVELOPMENT ENVIRONMENT
 * Bring up on Windows under Microsoft Edge and verify Help About Software Version is X.Y.Z. Bring up on Windows and Mac OS X under Google Chrome and verify Help About Software Version is X.Y.Z.
 
 PRODUCTION
+* Update client/src/components/config.js file with Okta ISSUER and CLIENT_ID for production (heroku), staging (heroku-staging), or development (localhost). Commit with message "Update Okta ISSUER and CLIENT_ID" and push to origin. Do a pull to get latest version on all systems.
+* In git/odop push to Heroku (command: git push heroku master or git push heroku-staging master). Verify no error messages during build on heroku.
 * If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) to create and format the database tables using create.sql file. Do this to development, test and/or production databases.
 * If the database already exists, but no the entries exist or must be recreated, then either run the configured ./scripts/load_all.sh script or manually run all affected load.sql files to create "startup" files in the database. Delete any old, invalid or development-only designs if necessary.
-* In git/odop push to Heroku (command: git push heroku master). Verify no error messages during build on heroku.
 * On http://odop.herokuapp.com website is operational and version X.Y.Z displays.
 
 DEVELOPMENT ENVIRONMENT

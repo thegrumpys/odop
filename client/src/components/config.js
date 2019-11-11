@@ -1,12 +1,15 @@
-//const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || '{clientId}';
 //const ISSUER = process.env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
-const CLIENT_ID = '0oa1itosqdQvfGNMD357';
+//const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || '{clientId}';
+
 const ISSUER = 'https://dev-729070.okta.com/oauth2/default';
+//const CLIENT_ID = '0oa1itosqdQvfGNMD357'; // For localhost
+const CLIENT_ID = '0oa1s9izxgX3DHecg357'; // For heroku-staging
+//const CLIENT_ID = '0oa1s8kbaxJR4O7z7357'; // For heroku
 
 export default {
   oidc: {
-    clientId: CLIENT_ID,
     issuer: ISSUER,
+    clientId: CLIENT_ID,
     redirectUri: window.location.origin + '/implicit/callback',
     scopes: ['openid', 'profile', 'email'],
     pkce: true,
