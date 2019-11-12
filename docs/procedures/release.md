@@ -11,11 +11,11 @@ Do a "Load Initial State" followed by a File > Save "Startup".
 Then using mysqldump dump the affected "Startup" entries into a load.sql file. 
 Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). 
 Commit these changes.
-* Bring up Google Chrome and enable View Debugger and verify no unexpected console.log output. 
-* Test various input and menu functions.
+* Bring up Google Chrome and enable View Console / Debugger. 
+* Test various input and menu functions and verify no unexpected console.log output.
 * Shutdown server and client under your development environment. 
-In server run "npm test" and verify test cases executed successfully. 
-Then in client run "npm test" and verify test cases executed successfully.
+In server, run "npm test" and verify test cases executed successfully. 
+Then in client, run "npm test" and verify test cases executed successfully.
 * Update client/src/version.js file to X.Y.Z (for example, 0.4). 
 Commit with message "Update version.js to X.Y.Z" and push to origin. 
 Do a pull to get latest version on all systems. 
@@ -31,7 +31,7 @@ Verify no error messages during build on heroku.
 * If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) 
 to create and format the database tables using the create.sql file. 
 Do this to development, test, staging and/or production databases as appropriate.
-* If the database already exists, but no the entries exist or must be recreated, then either run the configured ./scripts/load_all.sh script or 
+* If the database already exists, but no entries exist or must be recreated, then either run the configured ./scripts/load_all.sh script or 
 manually run all affected load.sql files to create startup files for each design type in the database. 
 Delete any old, invalid or development-only designs if necessary.
 * Confirm that the http://odop.herokuapp.com website is operational and that version X.Y.Z displays.

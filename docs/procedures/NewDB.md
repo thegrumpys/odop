@@ -16,7 +16,7 @@ Note ".env" appears in .gitignore, editing .env will only modify the local versi
 
  . . .   
 
-Run odop/data/create.sql to create the two tables: design and usage_log
+Run odop/data/create.sql to create the two tables: design and usage_log.   
 Those tables will then exist but be empty.
 
  . . .   
