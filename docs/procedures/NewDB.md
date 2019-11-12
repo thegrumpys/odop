@@ -10,8 +10,9 @@ On the pop-up, press the "Provision" button
 
  . . .   
  
-Edit your local (not GitHub) .env file and add a new entry for JAWSDB\_**Color**\_URL   
+Edit your local .env file and add a new entry for JAWSDB\_**Color**\_URL   
 Caution: The DB username and password are contained in the connection string.   
+Note ".env" appears in .gitignore, editing .env will only modify the local version of the file. 
 
  . . .   
 
@@ -20,5 +21,5 @@ Those tables will then exist but be empty.
 
  . . .   
 
-Run the (three?) load.sql files
-That will create the (three?) design types.
+As appropriate (see reference to load_all.sh in [Release procedure](release)), 
+run the (five?) load.sql files to populate designs for the (five?) design types.
