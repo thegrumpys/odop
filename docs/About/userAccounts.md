@@ -13,6 +13,7 @@ The system provided design by the name of "Startup" is the default starting desi
 
 Each user will be able to save designs into a private section of the ODOP design library. 
 It is possible to save a private design "on top of" a system design of the same name. 
+This feature allows the default startup design to be personalized.
 Once such a private design is deleted, the underlying system design (marked "[ReadOnly]") 
 will again be available.
 
@@ -20,8 +21,8 @@ In order to logout, use the browser refresh button then click the "Logout" butto
 
 Note that there is an inactivity timeout. 
 After a period of 2 - 8 hours of inactivity, the user will be automatically logged out. 
-Un-saved data will be lost. 
-An attempt to save a design after that point will produce an error. 
+If that happens, un-saved data will be lost. 
+An attempt to save a design after automatic logout will produce an error. 
 
 &nbsp;
 
