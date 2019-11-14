@@ -28,12 +28,12 @@ provides an important conceptual introduction to the overall design process with
 
 The ODOP starting dialog provides the opportunity to select a design type.
 Within each design type, you will have the opportunity to select an existing design.
-At a minimum, each design type will have a default design with the name "startup".
+At a minimum, each design type will have a default design with the name "Startup".
 
 &nbsp;
 
 This screen capture illustrates selecting the **Solid** design type 
-and its default design called **startup**.   
+and its default design called **Startup**.   
 ![Start with Rectangular Solid](./png/SelectSolid.png "Start with Rectangular Solid")
 
 &nbsp;   

@@ -49,7 +49,7 @@ The screen capture below illustrates selecting the Rectangular **Solid** design 
 which is used in the ODOP Introduction and Getting Started instructions. 
 Select the Solid design type before continuing with those instructions.   
 
-At a minimum, each design type is supplied with a default design by the name of "startup".
+At a minimum, each design type is supplied with a default design by the name of "Startup".
 Leave this startup design selected in order to continue with the 
 ODOP Introduction and Getting Started instructions.   
 

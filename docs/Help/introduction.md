@@ -53,7 +53,7 @@ algorithm that will locate the nearest feasible point with a minimal amount of e
 ODOP is structured to permit multiple design types to be available concurrently.
 At the time that the program first initializes, the user can specify a design type
 and then select from a list of existing designs of that type in order to begin work.
-For each design type, a default starting point named "startup" should always be availabe.
+For each design type, a default starting point named "Startup" should always be availabe.
 
 As of this writing, five design types are included with the ODOP software.
 The [Rectangular Solid](./DesignTypes/r_solid) design type is a small demonstration problem 

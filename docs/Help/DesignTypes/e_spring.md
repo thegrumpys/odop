@@ -253,7 +253,7 @@ entry on "Terminology", rather than having constraint levels that are expressed
 as simple constants, these express a desired relationship between 
 selected variables.   
 
-In the default extension spring start point (startup), Force\_1 MIN is
+In the default extension spring start point ("Startup"), Force\_1 MIN is
 a "function" of Initial\_Tension. 
 The constraint relationship says that Force\_1, the force at the first
 load point, should be greater than the value of Initial\_Tension.
@@ -324,7 +324,7 @@ by tooling marks.  Refer to the sources listed in the on-line Help
 Spring Design References entry for additional details.
 
 ODOP:Spring uses bending stresses in the calculation of FS\_Hook.   FS\_Hook is
-not constrained in the default extension spring start point (startup).
+not constrained in the default extension spring start point ("Startup").
 In order to establish such a constraint, use the numeric entry fields.  For
 example:
 

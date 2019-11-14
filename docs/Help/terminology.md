@@ -170,7 +170,7 @@ Currently implemented Design Types include:
 The simplest way to use a different design type and equation set is to select a 
 design type that uses the desired equation set at the time that the ODOP 
 software first starts. 
-A default design named "startup" should be available for each design type.
+A default design named "Startup" should be available for each design type.
 An explanation of how to select a design type and open a design of that type 
 is provided in: [Getting Started](gettingStarted).   
 
