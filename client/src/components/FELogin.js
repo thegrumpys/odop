@@ -10,33 +10,33 @@ export default class FELogin extends Component {
 //    console.log("In FELogin.ctor props=",props)
 
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
-    console.log("config=",config);
-    console.log("config.oidc=",config.oidc);
+//    console.log("config=",config);
+//    console.log("config.oidc=",config.oidc);
     
-    console.log("pkce=",pkce);
-    console.log("issuer=",issuer);
-    console.log("clientId=",clientId);
-    console.log("redirectUri=",redirectUri);
-    console.log("scopes=",scopes);
+//    console.log("pkce=",pkce);
+//    console.log("issuer=",issuer);
+//    console.log("clientId=",clientId);
+//    console.log("redirectUri=",redirectUri);
+//    console.log("scopes=",scopes);
 //    var baseUrl = issuer.split('/oauth2')[0];
 //    console.log("baseUrl=",baseUrl);
 
-    // Begin Diagnostic
-    var xhr = new XMLHttpRequest();
-    if ("withCredentials" in xhr) {
-        xhr.onerror = function() {
-          console.log('Invalid URL or Cross-Origin Request Blocked.  You must explicitly add this site (' + window.location.origin + ') to the list of allowed websites in the administrator UI');
-        }
-        xhr.onload = function() {
-          console.log('responseText=',this.responseText);
-        };
-        xhr.open('GET', issuer + '/v1/keys', true);
-        xhr.withCredentials = true;
-        xhr.send();
-    } else {
-        console.log("CORS is not supported for this browser!")
-    }
-    // End Diagnostic
+//    // Begin Diagnostic
+//    var xhr = new XMLHttpRequest();
+//    if ("withCredentials" in xhr) {
+//        xhr.onerror = function() {
+//          console.log('Invalid URL or Cross-Origin Request Blocked.  You must explicitly add this site (' + window.location.origin + ') to the list of allowed websites in the administrator UI');
+//        }
+//        xhr.onload = function() {
+//          console.log('responseText=',this.responseText);
+//        };
+//        xhr.open('GET', issuer + '/v1/keys', true);
+//        xhr.withCredentials = true;
+//        xhr.send();
+//    } else {
+//        console.log("CORS is not supported for this browser!")
+//    }
+//    // End Diagnostic
     
     this.signIn = new OktaSignIn({
         /**
