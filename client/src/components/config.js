@@ -2,9 +2,9 @@
 //const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || '{clientId}';
 
 const ISSUER = 'https://dev-729070.okta.com/oauth2/default';
-//const CLIENT_ID = '0oa1itosqdQvfGNMD357'; // For localhost
+//const CLIENT_ID = '0oa1s8kbaxJR4O7z7357'; // For heroku production
 const CLIENT_ID = '0oa1s9izxgX3DHecg357'; // For heroku-staging
-//const CLIENT_ID = '0oa1s8kbaxJR4O7z7357'; // For heroku
+//const CLIENT_ID = '0oa1itosqdQvfGNMD357'; // For localhost development
 
 export default {
   oidc: {
