@@ -12,7 +12,7 @@
 
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
-import withAuth from './withAuth';
+import { withAuth } from '@okta/okta-react';
 
 export default withAuth(class FEImplicitCallback extends Component {
   constructor(props) {
