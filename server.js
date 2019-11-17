@@ -363,7 +363,7 @@ app.post('/api/v1/usage_log', (req, res) => {
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
     console.log('SERVER: ===========================================================');
-    console.log('SERVER: In GET *");
+    console.log('SERVER: In GET *');
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
     res.status(200).end();
     console.log('SERVER: 200 - OK');
