@@ -60,9 +60,9 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 //app.use(express.static(path.join(__dirname, 'public')));
 
 // Dump debugging output for each request
-app.use(function (req, res, next) {
-    console.log('SERVER: In USE time=',Date.now(),' req.method=',req.method,' req.originalUrl=',req.originalUrl,' req.params=',req.params,' req.body=',req.body);
-});
+//app.use(function (req, res, next) {
+//    console.log('SERVER: In USE time=',Date.now(),' req.method=',req.method,' req.originalUrl=',req.originalUrl,' req.params=',req.params,' req.body=',req.body);
+//});
 
 
 function startConnection() {
@@ -365,6 +365,7 @@ app.post('/api/v1/usage_log', (req, res) => {
 app.get('*', (req, res) => {
     console.log('SERVER: ===========================================================');
     console.log('SERVER: In GET *');
+    console.log('SERVER: In GET time=',Date.now(),' req.method=',req.method,' req.originalUrl=',req.originalUrl,' req.params=',req.params,' req.body=',req.body);
     console.log("SERVER: In GET * PATH=",path.join(__dirname+'/client/build/index.html'));
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
     res.status(200).end();
