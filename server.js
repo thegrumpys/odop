@@ -56,10 +56,10 @@ const app = express();
  */
 app.use(cors());
 app.use(bodyParser.json({ type: 'application/json' }));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
     console.log('SERVER: In USE time=',Date.now(),' req.method=',req.method,' req.originalUrl=',req.originalUrl,' req.params=',req.params,' req.body=',req.body);
 });
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
