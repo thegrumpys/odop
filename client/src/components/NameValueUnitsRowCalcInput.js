@@ -10,7 +10,7 @@ class NameValueUnitsRowCalcInput extends Component {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onSelect = this.onSelect.bind(this);
-//        console.log('In NameValueUnitsRowCalcInput.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table)
+//        console.log('In NameValueUnitsRowCalcInput.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table);
         if (this.props.element.type === 'table') {
 //            console.log('In NameValueUnitsRowCalcInput.constructor file = ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table

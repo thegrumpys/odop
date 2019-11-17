@@ -7,7 +7,7 @@ import config from './config';
 export default class FELogin extends Component {
   constructor(props) {
     super(props);
-//    console.log("In FELogin.ctor props=",props)
+//    console.log("In FELogin.ctor props=",props);
 
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //    console.log("config=",config);
@@ -34,7 +34,7 @@ export default class FELogin extends Component {
 //        xhr.withCredentials = true;
 //        xhr.send();
 //    } else {
-//        console.log("CORS is not supported for this browser!")
+//        console.log("CORS is not supported for this browser!");
 //    }
 //    // End Diagnostic
     

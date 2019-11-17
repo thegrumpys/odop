@@ -7,7 +7,7 @@ import PromptForDesign from './PromptForDesign';
 export default withAuth(class FEHome extends Component {
   constructor(props) {
     super(props);
-    console.log("In FEHome.ctor props=",props)
+    console.log("In FEHome.ctor props=",props);
     this.state = { authenticated: null };
     this.checkAuthentication = this.checkAuthentication.bind(this);
     this.checkAuthentication();
@@ -34,16 +34,16 @@ export default withAuth(class FEHome extends Component {
         return null;
     }
 
-    if (!this.state.authenticated) {
-      console.log("In FEHome.render FELogin");
-      return (
-        <div><FELogin /></div>
-      );
+    if (this.state.authenticated) {
+        console.log("In FEHome.render PromptForDesign");
+        return (
+          <div><PromptForDesign /></div>
+        );
     } else {
-      console.log("In FEHome.render PromptForDesign");
-      return (
-        <div><PromptForDesign /></div>
-      );
+        console.log("In FEHome.render FELogin");
+        return (
+          <div><FELogin /></div>
+        );
     }
   }
 });

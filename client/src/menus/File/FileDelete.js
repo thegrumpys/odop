@@ -11,7 +11,7 @@ class FileDelete extends Component {
 
     constructor(props) {
         super(props);
-//        console.log("In FileDelete.ctor props=",props)
+//        console.log("In FileDelete.ctor props=",props);
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onDelete = this.onDelete.bind(this);

@@ -17,7 +17,7 @@ export default withAuth(class PromptForDesign extends Component {
     
     constructor(props) {
         super(props);
-//        console.log("In PromptForDesign.ctor props=",props)
+//        console.log("In PromptForDesign.ctor props=",props);
         this.onCancel = this.onCancel.bind(this);
         this.onLoadInitialState = this.onLoadInitialState.bind(this);
         this.onOpen = this.onOpen.bind(this);
@@ -68,7 +68,7 @@ export default withAuth(class PromptForDesign extends Component {
                 return res.json()
             })
             .then(designtypes => {
-//                console.log('In PromptForDesign.getDesigns designtypes=',designtypes)
+//                console.log('In PromptForDesign.getDesigns designtypes=',designtypes);
                 this.setState({ 
                     designtypes: designtypes
                 })
@@ -101,7 +101,7 @@ export default withAuth(class PromptForDesign extends Component {
                 return res.json()
             })
             .then(designs => {
-//                console.log('In PromptForDesign.getDesigns designs=',designs)
+//                console.log('In PromptForDesign.getDesigns designs=',designs);
                 this.setState({ 
                     designs: designs
                 })

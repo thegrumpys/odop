@@ -12,7 +12,7 @@ class FileOpen extends Component {
 
     constructor(props) {
         super(props);
-//        console.log("In FileOpen .ctor props=",props)
+//        console.log("In FileOpen .ctor props=",props);
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onOpen = this.onOpen.bind(this);
