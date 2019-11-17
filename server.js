@@ -51,18 +51,19 @@ function authenticationRequired(req, res, next) {
 
 const app = express();
 
-/**
- * For local testing only!  Enables CORS for all domains
- */
+// For local testing only!  Enables CORS for all domains
 app.use(cors());
 app.use(bodyParser.json({ type: 'application/json' }));
-app.use(express.static(path.join(__dirname, 'public')));
+
+//Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+//app.use(express.static(path.join(__dirname, 'public')));
+
+// Dump debugging output for each request
 app.use(function (req, res, next) {
     console.log('SERVER: In USE time=',Date.now(),' req.method=',req.method,' req.originalUrl=',req.originalUrl,' req.params=',req.params,' req.body=',req.body);
 });
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
 
 function startConnection() {
     var connection;
