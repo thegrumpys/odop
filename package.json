@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build && find .",
+    "heroku-postbuild": "cd client && npm install && npm run build && pwd && find .",
     "test": "mocha --timeout 10000",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha --- --timeout 10000",
     "showcoverage": "open coverage/lcov-report/index.html"
