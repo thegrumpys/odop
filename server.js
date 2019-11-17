@@ -56,6 +56,10 @@ const app = express();
  */
 app.use(cors());
 app.use(bodyParser.json({ type: 'application/json' }));
+app.use(function (req, res, next) {
+    console.log('SERVER: In USE time=',Date.now()),' req.method=',req.method,' req.originalUrl=',req.originalUrl,' req.params=',req.params,' req.body=',req.body);
+});
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -359,15 +363,15 @@ app.post('/api/v1/usage_log', (req, res) => {
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
     console.log('SERVER: ===========================================================');
-    console.log('SERVER: In GET * req.url=',req.url,' req.params=',req.params,' req.body=',req.body);
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+    console.log('SERVER: In GET *");
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
     res.status(200).end();
     console.log('SERVER: 200 - OK');
 });
 
 const port = process.env.PORT || 5000;
 if (!module.parent) { // If not in a testcase then start listening
-    console.log('SERVER: Server NODE_ENV =',process.env.NODE_ENV,'starting on port =',port,'node version =', process.version);
+    console.log('SERVER: PUBLIC_URL =',process.env.PUBLIC_URL,'NODE_ENV =',process.env.NODE_ENV,'starting on port =',port,'node version =', process.version);
     app.listen(port);
 }
 
