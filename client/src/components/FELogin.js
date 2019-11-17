@@ -13,11 +13,11 @@ export default class FELogin extends Component {
 //    console.log("config=",config);
 //    console.log("config.oidc=",config.oidc);
     
-//    console.log("pkce=",pkce);
-//    console.log("issuer=",issuer);
-//    console.log("clientId=",clientId);
-//    console.log("redirectUri=",redirectUri);
-//    console.log("scopes=",scopes);
+    console.log("pkce=",pkce);
+    console.log("issuer=",issuer);
+    console.log("clientId=",clientId);
+    console.log("redirectUri=",redirectUri);
+    console.log("scopes=",scopes);
 //    var baseUrl = issuer.split('/oauth2')[0];
 //    console.log("baseUrl=",baseUrl);
 
