@@ -4,7 +4,7 @@ import { Security } from '@okta/okta-react';
 import config from './config';
 import FEHome from './FEHome';
 import FELogin from './FELogin';
-import FELogin from './FEImplicitCallback';
+import FEImplicitCallback from './FEImplicitCallback';
 
 function onAuthRequired({history}) {
   history.push('/login');
