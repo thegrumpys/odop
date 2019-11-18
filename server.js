@@ -361,11 +361,11 @@ app.post('/api/v1/usage_log', (req, res) => {
     });
 });
 
-app.get('/implicit/callback', (req, res) => {
-    console.log('SERVER: ===========================================================');
-    console.log('SERVER: In GET /implicit/callback');
-    res.redirect('http://localhost:3000'+req.originalUrl);
-});
+//app.get('/implicit/callback', (req, res) => {
+//    console.log('SERVER: ===========================================================');
+//    console.log('SERVER: In GET /implicit/callback');
+//    res.redirect('http://localhost:3000'+req.originalUrl);
+//});
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
