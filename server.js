@@ -363,7 +363,7 @@ app.post('/api/v1/usage_log', (req, res) => {
 
 app.get('/implicit/callback', (req, res) => {
     console.log('SERVER: ===========================================================');
-    console.log('SERVER: In GET /implicit/callback');
+    console.log('SERVER: In GET /implicit/callback document.location.href=',document.location.href,'window.location.hash=',window.location.hash);
     res.redirect('http://localhost:3000'+req.originalUrl);
 });
 
