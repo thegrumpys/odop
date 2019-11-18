@@ -57,6 +57,7 @@ export default class FELogin extends Component {
           pkce,
           issuer,
           display: 'page',
+          responseMode: 'query',
           scopes,
         },
       });
