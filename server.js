@@ -20,8 +20,6 @@ const oktaJwtVerifier = new OktaJwtVerifier({
  * contents are attached to req.jwt
  */
 function authenticationRequired(req, res, next) {
-  console.log('SERVER: ===========================================================');
-
   const authHeader = req.headers.authorization || '';
   const match = authHeader.match(/Bearer (.+)/);
 
@@ -61,6 +59,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Dump debugging output for each request
 app.use(function (req, res, next) {
+    console.log('SERVER: ===========================================================');
     console.log('SERVER: In USE req.ip=',req.ip,' req.method=',req.method,' req.originalUrl=',req.originalUrl);
     next();
 });
@@ -336,7 +335,6 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (r
 app.post('/api/v1/usage_log', (req, res) => {
     var ip_address;
     var note;
-    console.log('SERVER: ===========================================================');
     ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     console.log('SERVER: In POST /api/v1/usage_log ip_address='+ip_address+' req.body=',req.body);
     note = JSON.stringify(req.body); // Convert blob to string
@@ -362,7 +360,6 @@ app.post('/api/v1/usage_log', (req, res) => {
 });
 
 app.get('/implicit/callback', (req, res) => {
-    console.log('SERVER: ===========================================================');
     console.log('SERVER: In GET /implicit/callback');
     res.redirect('http://localhost:3000'+req.originalUrl);
 });
@@ -370,7 +367,6 @@ app.get('/implicit/callback', (req, res) => {
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-    console.log('SERVER: ===========================================================');
     console.log('SERVER: In GET *');
     console.log("SERVER: In GET * PATH=",path.join(__dirname,'client/build/index.html'));
     res.sendFile(path.join(__dirname,'client/build/index.html'));
