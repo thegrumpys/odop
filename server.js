@@ -359,10 +359,10 @@ app.post('/api/v1/usage_log', (req, res) => {
     });
 });
 
-//app.get('/implicit/callback', (req, res) => {
-//    console.log('SERVER: In GET /implicit/callback');
-//    res.redirect(req.originalUrl);
-//});
+app.get('/implicit/callback', (req, res) => {
+    console.log('SERVER: In GET /implicit/callback');
+    res.redirect('http://localhost:3000'+req.originalUrl);
+});
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
@@ -376,7 +376,7 @@ app.get('*', (req, res) => {
 
 const port = process.env.PORT || 5000;
 if (!module.parent) { // If not in a testcase then start listening
-    console.log('SERVER: PUBLIC_URL =',process.env.PUBLIC_URL,'NODE_ENV =',process.env.NODE_ENV,'starting on port =',port,'node version =', process.version);
+    console.log('SERVER: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'starting on port =', port, 'node version =', process.version);
     app.listen(port);
 }
 
