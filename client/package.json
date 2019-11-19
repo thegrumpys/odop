@@ -22,9 +22,10 @@
   "homepage": "https://odop.heroku.com/",
   "devDependencies": {},
   "dependencies": {
+    "@mars/heroku-js-runtime-env": "^3.0.2",
     "@okta/okta-auth-js": "^2.9.0",
     "@okta/okta-react": "^1.2.3",
-    "@okta/okta-signin-widget": "^3.3.0",
+    "@okta/okta-signin-widget": "^3.4.2",
     "bootstrap": "^4.1.3",
     "jquery": "^3.3.1",
     "react": "^16.6.3",
@@ -33,7 +34,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.2.0",
     "reactstrap": "^6.5.0",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "typescript": "^3.7.2"
   },
   "proxy": "http://localhost:5000",
   "browserslist": [
