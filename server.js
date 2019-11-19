@@ -368,8 +368,8 @@ app.post('/api/v1/usage_log', (req, res) => {
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
     console.log('SERVER: In GET *');
-    console.log("SERVER: In GET * PATH=",path.join(__dirname,'client/build/index.html'));
-    res.sendFile(path.join(__dirname,'client/build/index.html'));
+    console.log("SERVER: In GET * PATH=",path.join(__dirname, 'client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     res.status(200).end();
     console.log('SERVER: 200 - OK');
 });
