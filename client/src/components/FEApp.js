@@ -23,7 +23,7 @@ class FEApp extends Component {
         <Security {...config.oidc} onAuthRequired={onAuthRequired}>
           <Route path='/' exact={true} component={FEHome} />
           <Route path='/login' component={FELogin} />
-          <Route path='/implicit/callback' component={FEImplicitCallback} />
+          <Route path='/x/implicit/callback' component={FEImplicitCallback} />
         </Security>
       </Router>
     );
