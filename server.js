@@ -7,8 +7,8 @@ const OktaJwtVerifier = require('@okta/jwt-verifier');
 var cors = require('cors');
 
 const oktaJwtVerifier = new OktaJwtVerifier({
-  issuer: process.env.ISSUER,
-  clientId: process.env.CLIENT_ID,
+  issuer: process.env.REACT_APP_ISSUER,
+  clientId: process.env.REACT_APP_CLIENT_ID,
   assertClaims: {
     aud: 'api://default',
   },
