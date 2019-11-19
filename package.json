@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/thegrumpys/odop/issues"
   },
-  "homepage": "https://odop.herokuapp.com/",
+  "homepage": "https://odop-staging.herokuapp.com/",
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
