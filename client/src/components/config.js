@@ -1,4 +1,5 @@
 import runtimeEnv from '@mars/heroku-js-runtime-env';
+require('dotenv').config();
 
 var issuer;
 var clientId;
