@@ -366,13 +366,13 @@ app.post('/api/v1/usage_log', (req, res) => {
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-    console.log('SERVER: In GET *');
-    console.log("SERVER: In GET * PATH=",path.join(__dirname, 'client/build', 'index.html'));
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-    res.status(200).end();
-    console.log('SERVER: 200 - OK');
-});
+//app.get('*', (req, res) => {
+//    console.log('SERVER: In GET *');
+//    console.log("SERVER: In GET * PATH=",path.join(__dirname, 'client/build', 'index.html'));
+//    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+//    res.status(200).end();
+//    console.log('SERVER: 200 - OK');
+//});
 
 const port = process.env.PORT || 5000;
 if (!module.parent) { // If not in a testcase then start listening
