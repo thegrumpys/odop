@@ -4,7 +4,7 @@ require('dotenv').config();
 var issuer;
 var clientId;
 
-if (process.env.NODE_ENV == "development") {
+if (process.env.NODE_ENV === "development") {
   console.log('In config: process.env.REACT_APP_ISSUER=', process.env.REACT_APP_ISSUER, 'process.env.REACT_APP_CLIENT_ID=', process.env.REACT_APP_CLIENT_ID);
   issuer = process.env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
   clientId = process.env.REACT_APP_CLIENT_ID || '{clientId}';
