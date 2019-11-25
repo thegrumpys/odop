@@ -1,11 +1,6 @@
 {
   "root": "client/build/",
   "routes": {
-    "/implicit/callback": "index.html",
     "/**": "index.html"
-  },
-  "logging": {
-    "access": false,
-    "error": "warn"
   }
 }
