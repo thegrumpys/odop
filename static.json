@@ -1,6 +1,7 @@
 {
   "root": "client/build/",
   "routes": {
+    "/implicit/callback": "index.html",
     "/**": "index.html"
   }
 }
