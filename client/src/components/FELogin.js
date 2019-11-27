@@ -61,6 +61,22 @@ export default class FELogin extends Component {
 //          responseMode: 'query',
           scopes,
         },
+
+        helpLinks: {
+          custom: [
+            {
+              text: 'About ODOP user accounts',
+              href: 'https://thegrumpys.github.io/odop/About/userAccounts',
+              target: '_blank'
+            },
+            {
+              text: 'ODOP Message Of The Day',
+              href: 'https://thegrumpys.github.io/odop/About/messageOfTheDay',
+              target: '_blank'
+            }
+          ]
+        }
+
       });
     }
 

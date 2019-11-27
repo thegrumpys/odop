@@ -20,10 +20,13 @@ will again be available.
 In order to logout, use the browser refresh button and then click the "Logout" button.
 
 Note that there is an inactivity timeout. 
-After a period of 2 - 8 hours of inactivity, the user will be automatically logged out. 
+After a period of inactivity (2 - 8 hours), the user will be automatically logged out. 
 If that happens, un-saved data will be lost. 
 An attempt to save a design after automatic logout will produce an error. 
 
 &nbsp;
+
+When invoked from the ODOP Sign-In, this page opens in a new browser tab.
+Switch tabs in order to return to that Sign-In page or simply close this tab.   
 
 [About](./)
