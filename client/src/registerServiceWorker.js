@@ -1,3 +1,4 @@
+
 // In production, we register a service worker to serve assets from local cache.
 
 // This lets the app load faster on subsequent visits in production, and gives
@@ -49,13 +50,38 @@ export default function register() {
         registerValidSW(swUrl);
       }
     });
+  } else {
+    console.log('Cannot Register to SW. Current env:', process.env.NODE_ENV);
   }
 }
+
+
+window.addEventListener('push', function(event) {
+  console.log('Push Notification received', event);
+
+  var data = {title: 'New!', content: 'Something new happened!'};
+
+  if (event.data) {
+    data = JSON.parse(event.data.text());
+  }
+
+  var options = {
+    body: data.content,
+    icon: '/src/icons/logo.png',
+    badge: '/src/icons/logo.png'
+  };
+
+  event.waitUntil(
+    window.registration.showNotification(data.title, options)
+  );
+});
+
 
 function registerValidSW(swUrl) {
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
+      console.log('SW is Registered!');
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {
