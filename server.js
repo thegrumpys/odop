@@ -360,9 +360,10 @@ if (process.env.NODE_ENV === 'production') {
     app.use(function (req, res, next) {
       console.log("SERVER: In USE PATH=",path.join(__dirname, 'client/build'));
       express.static(path.join(__dirname, 'client/build'));
+      next();
     });
     // Handle React routing, return all requests to React app
-    app.get('*', function(req, res) {
+    app.get('*', function (req, res, next) {
       console.log("SERVER: In GET * PATH=",path.join(__dirname, 'client/build', 'index.html'));
       res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
