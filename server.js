@@ -53,10 +53,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json({ type: 'application/json' }));
 
-//Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
-//app.use(express.static(path.join(__dirname, 'public')));
-
 // Dump debugging output for each request
 app.use(function (req, res, next) {
     console.log('SERVER: ===========================================================');
@@ -359,20 +355,18 @@ app.post('/api/v1/usage_log', (req, res) => {
     });
 });
 
-//app.get('/implicit/callback', (req, res) => {
-//    console.log('SERVER: In GET /implicit/callback');
-//    res.redirect(req.originalUrl);
-//});
-
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-//app.get('*', (req, res) => {
-//    console.log('SERVER: In GET *');
-//    console.log("SERVER: In GET * PATH=",path.join(__dirname, 'client/build', 'index.html'));
-//    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-//    res.status(200).end();
-//    console.log('SERVER: 200 - OK');
-//});
+if (process.env.NODE_ENV === 'production') {
+    // Serve any static files
+    app.use(function (req, res, next) {
+      console.log("SERVER: In USE PATH=",path.join(__dirname, 'client/build', 'index.html'));
+      express.static(path.join(__dirname, 'client/build'));
+    });
+    // Handle React routing, return all requests to React app
+    app.get('*', function(req, res) {
+      console.log("SERVER: In GET * PATH=",path.join(__dirname, 'client/build', 'index.html'));
+      res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    });
+}
 
 const port = process.env.PORT || 5000;
 if (!module.parent) { // If not in a testcase then start listening
