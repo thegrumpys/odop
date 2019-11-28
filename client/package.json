@@ -37,11 +37,7 @@
     "redux": "^4.0.1",
     "typescript": "^3.7.2"
   },
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:5000"
-    }
-  },
+  "proxy": "http://localhost:5000",
   "browserslist": [
     ">0.2%",
     "not dead",
