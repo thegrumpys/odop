@@ -360,7 +360,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(function (req, res, next) {
       console.log("SERVER: In USE PATH=",path.join(__dirname, 'client/build'));
       express.static(path.join(__dirname, 'client/build'));
-//      next();
+      next();
     });
 //    app.use(
 //        express.static(path.join(__dirname, 'client/build'))
