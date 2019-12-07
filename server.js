@@ -356,6 +356,13 @@ app.post('/api/v1/usage_log', (req, res) => {
 });
 
 if (process.env.NODE_ENV === 'production') {
+    // If it’s not https already, redirect the same url on https.
+    app.use((req, res, next) => {
+        if (req.header('x-forwarded-proto') !== 'https')
+          res.redirect(`https://${req.header('host')}${req.url}`);
+        else
+          next();
+      })
     // Serve any static files
 //    app.use(function (req, res, next) {
 //      console.log("SERVER: In USE PATH=",path.join(__dirname, 'client/build'));
