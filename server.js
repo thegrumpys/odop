@@ -363,7 +363,7 @@ if (process.env.NODE_ENV === 'production') {
 //      next();
 //    });
     app.use(
-        express.static(path.join(__dirname, 'client/build'));
+        express.static(path.join(__dirname, 'client/build'))
     );
     // Handle React routing, return all requests to React app
     app.get('*', function (req, res, next) {
