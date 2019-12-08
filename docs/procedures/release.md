@@ -26,7 +26,7 @@ Bring up on Windows and Mac OS X under Google Chrome and verify Help About Softw
 STAGING and PRODUCTION ENVIRONMENTS
 * Update Heroku Configuration Variables with Okta REACT\_APP\_ISSUER and REACT\_APP\_CLIENT\_ID for production (heroku), or staging (heroku-staging). 
 Update .env and client/.env with Okta REACT\_APP\_ISSUER and REACT\_APP\_CLIENT\_ID for development (localhost).
-Do a pull to get latest version on all systems.
+Do a pull or push to get latest version on all systems.
 * In git/odop push to Heroku (command: git push heroku master or git push heroku-staging master). 
 Verify no error messages during build on heroku.
 * If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) 
