@@ -253,7 +253,7 @@ support it should have a ratio of free length to coil diameter
 is usually provided by operation in a sleeve or over a post.  The
 constraint Slenderness MAX can be used to restrict the search to designs
 that will not tend to buckle.  Note that the value of Slenderness is not
-constrained in the default start point (startup) and thus the search may produce
+constrained in the default start point ("Startup") and thus the search may produce
 designs that are prone to buckling. 
 The compression spring Report 1 tab will provide an
 indication as to the possibility of bucking for your specific design and
@@ -352,7 +352,7 @@ provided by operation in a sleeve or over a post.
 
 The constraint Slenderness MAX can be used to restrict the search to
 designs that will not tend to buckle.  Note that Slenderness is not
-constrained in the default startup.  Thus, unless this constraint is
+constrained in the default startup design.  Thus, unless this constraint is
 established, a search may produce designs that are subject to buckling.
 
 The Report tabs will provide an indication as to the possibility of

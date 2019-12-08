@@ -298,7 +298,7 @@ export const execute = {
                     a positive value if violated or a negative value if satisfied.
                     The Objective Value will reflect the aggregate impact of all violated constraints.
                     This example illustrates a few of the constraints provided with 
-                    the default design named "startup".
+                    the default design named "Startup".
                     </p>
                     
                     <img src="https://raw.githubusercontent.com/thegrumpys/odop/master/docs/Help/png/ConstraintSpring.png" alt="Constraints"/>

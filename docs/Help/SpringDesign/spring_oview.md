@@ -160,7 +160,7 @@ accuracy of analytical predictions.
 For compression springs, the Report tabs will produce an
 informational message any time that more than 80 % of available
 deflection (%\_Avail_Deflect) is used at the second load point.  Note
-that the default start point (startup) supplied with ODOP:Spring has
+that the default start point ("Startup") supplied with ODOP:Spring has
 %\_Avail_Deflect constrained to be less than 90.0, thus in the "as
 supplied" condition, ODOP:Spring will frequently select designs that
 produce this informational message.
@@ -190,7 +190,7 @@ support it should have a ratio of free length to coil diameter
 is usually provided by operation in a sleeve or over a post.  The
 constraint Slenderness MAX can be used to restrict the search to designs
 that will not tend to buckle.  Note that the value of Slenderness is not
-constrained in the default start point (startup) and thus the search may produce
+constrained in the default start point ("Startup") and thus the search may produce
 designs that are prone to buckling. 
 The compression spring REPORT 1 tab will provide an
 indication as to the possibility of bucking for your specific design and
@@ -284,11 +284,11 @@ For specifics on names associated with each spring type, see:
 **Spring Constraints**   
  While most of ODOP:Spring constraints are obvious, a few need a bit of
  additional explanation.  This section primarily covers constraints that are
- established in the default start point (startup).
+ established in the default start point ("Startup").
  Remember that the user may use checkboxes and numeric entry fields to establish additional
  constraints on any variable, dependent or independent.  
  Unchecking a checkbox will eliminate any constraints, including the default constraints
- established by the start point (startup).  Further information is available in the
+ established by the default start point ("Startup").  Further information is available in the
  documentation sections Spring Basics (above), the
  NAMES sections of each of the specific spring types and
  [Terminology](../terminology).
@@ -300,7 +300,7 @@ between point 1 and point 2.  Refer to the force-deflection diagram in
 the documentation section for each specific spring type for an illustration of
 L\_Stroke.
 
-ID\_Free MIN is established by the default start point (startup) because it
+ID\_Free MIN is established by the default start point ("Startup") because it
 discourages the search from investigating designs with a zero or
 negative inside diameter, and there by encountering numerical
 difficulties.
@@ -486,7 +486,7 @@ from the materials table which then is applied to the
 interpolated value of tensile strength for that material and wire diameter
 to produce a value for the material's endurance limit (Stress\_Lim\_Endur).
 
-As illustrated in the tutorial section TUTOR4, the default start point (startup)
+As illustrated in the tutorial section TUTOR4, the default start point ("Startup")
 supplied with ODOP:Spring does not provide default constraints for Cycle\_Life
 or FS\_CycleLife.  Simply designating a Life\_Category 
 is not enough to have ODOP:Spring search for designs with a long cycle life.

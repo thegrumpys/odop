@@ -23,7 +23,7 @@ file named eqnset.js.
 * designtypes/_designName_/load.sql
 * docs/Help/DesignTypes/_designName_.md 
    
-* startup entry in database  (typically created from initialState.js)
+* "Startup" entry in database  (typically created from initialState.js)
    
 **Additional (or non-stub) files may (optionally) be utilized by some design types.**    
 For example, coil spring design types utilize:   
@@ -55,11 +55,11 @@ For example, coil spring design types utilize:
 * Using an existing eqnset.js file as an example, replace equations with the design equations of the new design type.
 * Use stub versions of init, report, size, catalog, execute and migrate to get started.
 * Add an icon with the name favicon.icon to client/public/designtypes
-* Create a startup entry in the database   
+* Create a Startup entry in the database   
     * When in developer mode, and database access is enabled   
         * Start from initialState   
         * Optionally, make modifications. 
-        * Save As startup.   
+        * Save As Startup.   
 
 * Create a load.sql file   
  ---- Using an existing load.sql file as an example, overwrite the initialState section with the new initial state json.   

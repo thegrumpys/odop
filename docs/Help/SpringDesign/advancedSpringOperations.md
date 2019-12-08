@@ -75,7 +75,7 @@
  Each of these files are pre-configured for a material type (Eg.  5160H)
  that carries an appropriate value of HOT\_FACTOR_KH, an end type of
  TAPERED_C&G, and starting values that are closer to the solution point of a
- typical hot large wound spring than the values in the default startup.
+ typical hot large wound spring than the values in the default startup design.
 
  Alternately, select a material from the table that indicates it is "hot wound", 
  select an appropriate end type (Eg.  TAPERED\_C&G) 
