@@ -41,9 +41,10 @@ Delete any old, invalid or development-only designs if necessary.
 Update Server's .env with JAWSDB\_URL for development (localhost).
 Note: See Heroku Dashboard Resources tab for Production JAWS DB has no color; staging is AMBER, test is TEAL, and local/development is CYAN. 
 Do a pull or push to get latest version on all systems.
+* Update Heroku Buildpack for production (heroku), or staging (heroku-staging).
 * In git/odop push to Heroku (command: git push heroku-staging master or git push heroku master). 
 Verify no error messages during build on heroku.
-* Confirm that the http://odop.herokuapp.com website is operational and that version X.Y.Z displays.
+* Confirm that the http://odop-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version X.Y.Z displays.
 
 DEVELOPMENT ENVIRONMENT
 * Create X.Y.Z tag (for example, 0.4). 
