@@ -23,18 +23,25 @@ Restart server then client under your development environment.
 * Bring up on Windows under Microsoft Edge and verify Help About Software Version is X.Y.Z. 
 Bring up on Windows and Mac OS X under Google Chrome and verify Help About Software Version is X.Y.Z.
 
-STAGING and PRODUCTION ENVIRONMENTS
+DO first for STAGING and then do again for PRODUCTION ENVIRONMENTS
+* For handling dynamic runtime configuration variables in Heroku only
+update Heroku Configuration Variables with JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for production (heroku), or staging (heroku-staging). 
+NO entry for .env and client/.env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost).
+Do a pull or push to get latest version on all systems.
 * Update Heroku Configuration Variables with Okta REACT\_APP\_ISSUER and REACT\_APP\_CLIENT\_ID for production (heroku), or staging (heroku-staging). 
 Update .env and client/.env with Okta REACT\_APP\_ISSUER and REACT\_APP\_CLIENT\_ID for development (localhost).
 Do a pull or push to get latest version on all systems.
-* In git/odop push to Heroku (command: git push heroku master or git push heroku-staging master). 
-Verify no error messages during build on heroku.
 * If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) 
 to create and format the database tables using the create.sql file. 
 Do this to development, test, staging and/or production databases as appropriate.
 * If the database already exists, but no entries exist or must be recreated, then either run the configured ./scripts/load_all.sh script or 
 manually run all affected load.sql files to create startup files for each design type in the database. 
 Delete any old, invalid or development-only designs if necessary.
+* Update Heroku Configuration Variables with JAWSDB\_URL for production (heroku), or staging (heroku-staging). 
+Update .env with JAWSDB\_URL for development (localhost).
+Do a pull or push to get latest version on all systems.
+* In git/odop push to Heroku (command: git push heroku master or git push heroku-staging master). 
+Verify no error messages during build on heroku.
 * Confirm that the http://odop.herokuapp.com website is operational and that version X.Y.Z displays.
 
 DEVELOPMENT ENVIRONMENT
