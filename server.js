@@ -65,10 +65,10 @@ app.use(function (req, res, next) {
 function startConnection() {
     var connection;
     if (process.env.NODE_ENV !== "production") { // Are we running on localhost?
-        console.log('SERVER: In Connecting process.env.JAWSDB_URL=', process.env.JAWSDB_URL);
+//        console.log('SERVER: In Connecting process.env.JAWSDB_URL=', process.env.JAWSDB_URL);
         connection = mysql.createConnection(process.env.JAWSDB_URL);
     } else { // We are running on Heroku
-        console.log('SERVER: In Connecting env.JAWSDB_URL=', env.JAWSDB_URL);
+//        console.log('SERVER: In Connecting env.JAWSDB_URL=', env.JAWSDB_URL);
         const env = runtimeEnv(); // Load the Heroku env object.
         connection = mysql.createConnection(env.JAWSDB_URL);
     }
