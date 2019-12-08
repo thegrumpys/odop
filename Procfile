@@ -1,1 +1,1 @@
-web: DEBUG=express:* node server.js
+web: node server.js

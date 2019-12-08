@@ -4,8 +4,8 @@
   "description": "Open Design Optimization Platform (ODOP) Server",
   "main": "server.js",
   "scripts": {
-    "start": "DEBUG=express:* node server.js",
-    "server": "DEBUG=express:* nodemon server.js",
+    "start": "node server.js",
+    "server": "nodemon server.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "test": "mocha --timeout 10000",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha --- --timeout 10000",
@@ -28,6 +28,7 @@
     "nodemon": "^1.19.4"
   },
   "dependencies": {
+    "@mars/heroku-js-runtime-env": "^3.0.2",
     "@okta/jwt-verifier": "^1.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

@@ -1,3 +1,4 @@
+const runtimeEnv = require('@mars/heroku-js-runtime-env');
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
@@ -63,15 +64,13 @@ app.use(function (req, res, next) {
 
 function startConnection() {
     var connection;
-    if (process.env.NODE_ENV === 'production') {
-//        console.log('SERVER: connecting to process.env.JAWSDB_URL');
+    if (process.env.NODE_ENV !== "production") { // Are we running on localhost?
+        console.log('SERVER: In Connecting process.env.JAWSDB_URL=', process.env.JAWSDB_URL);
         connection = mysql.createConnection(process.env.JAWSDB_URL);
-    } else if (process.env.NODE_ENV === 'test') {
-//        console.log('SERVER: connecting to process.env.JAWSDB_TEAL_URL');
-        connection = mysql.createConnection(process.env.JAWSDB_TEAL_URL);
-    } else { // undefined or other - treat as development
-//        console.log('SERVER: connecting to process.env.JAWSDB_CYAN_URL');
-        connection = mysql.createConnection(process.env.JAWSDB_CYAN_URL);
+    } else { // We are running on Heroku
+        console.log('SERVER: In Connecting env.JAWSDB_URL=', env.JAWSDB_URL);
+        const env = runtimeEnv(); // Load the Heroku env object.
+        connection = mysql.createConnection(env.JAWSDB_URL);
     }
     connection.connect();
     return connection;

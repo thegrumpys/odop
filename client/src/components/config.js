@@ -4,11 +4,11 @@ require('dotenv').config();
 var issuer;
 var clientId;
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== "production") { // Are we running on localhost?
 //  console.log('In config: process.env.REACT_APP_ISSUER=', process.env.REACT_APP_ISSUER, 'process.env.REACT_APP_CLIENT_ID=', process.env.REACT_APP_CLIENT_ID);
   issuer = process.env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
   clientId = process.env.REACT_APP_CLIENT_ID || '{clientId}';
-} else {
+} else { // We are running on Heroku
   const env = runtimeEnv(); // Load the env object.
 //  console.log('In config: env.REACT_APP_ISSUER=', env.REACT_APP_ISSUER, 'env.REACT_APP_CLIENT_ID=', env.REACT_APP_CLIENT_ID);
   issuer = env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
