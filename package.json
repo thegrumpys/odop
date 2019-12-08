@@ -4,8 +4,8 @@
   "description": "Open Design Optimization Platform (ODOP) Server",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js",
+    "start": "DEBUG=express:* node server.js",
+    "server": "DEBUG=express:* nodemon server.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "test": "mocha --timeout 10000",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha --- --timeout 10000",
