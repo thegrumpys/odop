@@ -24,8 +24,8 @@ Restart server then client under your development environment.
 Bring up on Windows and Mac OS X under Google Chrome and verify Help About Software Version is X.Y.Z.
 
 STAGING and PRODUCTION ENVIRONMENTS
-* Update Heroku Configuration Variables with Okta REACT_APP_ISSUER and REACT_APP_CLIENT\_ID for production (heroku), or staging (heroku-staging). 
-Update .env and client/.env with Okta REACT_APP_ISSUER and REACT_APP_CLIENT\_ID for development (localhost).
+* Update Heroku Configuration Variables with Okta REACT\_APP\_ISSUER and REACT\_APP\_CLIENT\_ID for production (heroku), or staging (heroku-staging). 
+Update .env and client/.env with Okta REACT\_APP\_ISSUER and REACT\_APP\_CLIENT\_ID for development (localhost).
 Do a pull to get latest version on all systems.
 * In git/odop push to Heroku (command: git push heroku master or git push heroku-staging master). 
 Verify no error messages during build on heroku.
