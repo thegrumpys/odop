@@ -218,7 +218,7 @@ export default withAuth(class PromptForDesign extends Component {
         if (this.state.store === null) {
             return (
                 <React.Fragment>
-                    <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
                         <ModalHeader toggle={this.toggle}>
                         <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>
                           Open Design Optimization Platform
