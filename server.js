@@ -63,7 +63,7 @@ app.use(function (req, res, next) {
 
 function startConnection() {
     var connection;
-    console.log('SERVER: In Connecting process.env.JAWSDB_URL=', process.env.JAWSDB_URL);
+//    console.log('SERVER: In Connecting process.env.JAWSDB_URL=', process.env.JAWSDB_URL);
     connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
     return connection;
