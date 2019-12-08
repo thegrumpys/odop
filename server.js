@@ -366,11 +366,6 @@ if (process.env.NODE_ENV === 'production') {
       }
     })
     // Serve any static files
-//    app.use(function (req, res, next) {
-//      console.log("SERVER: In USE PATH=",path.join(__dirname, 'client/build'));
-//      express.static(path.join(__dirname, 'client/build'));
-//      next();
-//    });
     app.use(
         express.static(path.join(__dirname, 'client/build'))
     );
