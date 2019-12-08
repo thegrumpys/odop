@@ -73,6 +73,11 @@ export default class FELogin extends Component {
               text: 'ODOP Message Of The Day',
               href: 'https://thegrumpys.github.io/odop/About/messageOfTheDay',
               target: '_blank'
+            },
+            {
+              text: 'Learn about ODOP',
+              href: 'https://thegrumpys.github.io/odop/About',
+              target: '_blank'
             }
           ]
         }
