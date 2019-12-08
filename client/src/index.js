@@ -20,5 +20,5 @@ import FEApp from './components/FEApp';
 //    }
 //  }
 
-console.log('CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'starting on port =', process.env.PORT, 'node version =', process.version);
+//console.log('CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'starting on port =', process.env.PORT, 'node version =', process.version);
 ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><FEApp /></div>, document.getElementById('root'));

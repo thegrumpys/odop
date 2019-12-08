@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as OktaSignIn from '@okta/okta-signin-widget';
+import OktaSignIn from '@okta/okta-signin-widget/dist/js/okta-sign-in.min'
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 
 import config from './config';
@@ -7,17 +7,17 @@ import config from './config';
 export default class FELogin extends Component {
   constructor(props) {
     super(props);
-    console.log("In FELogin.ctor props=",props);
+//    console.log("In FELogin.ctor props=",props);
 
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //    console.log("config=",config);
 //    console.log("config.oidc=",config.oidc);
     
-    console.log("pkce=",pkce);
-    console.log("issuer=",issuer);
-    console.log("clientId=",clientId);
-    console.log("redirectUri=",redirectUri);
-    console.log("scopes=",scopes);
+//    console.log("pkce=",pkce);
+//    console.log("issuer=",issuer);
+//    console.log("clientId=",clientId);
+//    console.log("redirectUri=",redirectUri);
+//    console.log("scopes=",scopes);
 //    var baseUrl = issuer.split('/oauth2')[0];
 //    console.log("baseUrl=",baseUrl);
 
@@ -57,8 +57,6 @@ export default class FELogin extends Component {
           pkce,
           issuer,
           display: 'page',
-//          responseType: 'code',
-//          responseMode: 'query',
           scopes,
         },
 
@@ -86,7 +84,7 @@ export default class FELogin extends Component {
     }
 
   componentDidMount() {
-    console.log('In FELogin.componentDidMount');
+//    console.log('In FELogin.componentDidMount');
     this.signIn.renderEl(
       { el: '#sign-in-widget' },
       (res) => {
@@ -104,12 +102,12 @@ export default class FELogin extends Component {
   }
 
   componentWillUnmount() {
-      console.log('In FELogin.componentWillUnmount');
+//      console.log('In FELogin.componentWillUnmount');
       if (this.signIn != null) this.signIn.remove();
   }
 
   render() {
-    console.log('In FELogin.render');
+//    console.log('In FELogin.render');
     return (
       <div>
         <div id="sign-in-widget" />

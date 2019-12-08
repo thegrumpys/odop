@@ -1,2 +1,1 @@
-web: bin/boot
-worker: node server.js
+web: DEBUG=express:* node server.js
