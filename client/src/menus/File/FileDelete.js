@@ -56,10 +56,17 @@ class FileDelete extends Component {
                 }
                 return res.json()
             })
-           .then(designs => this.setState({ 
-               designs: designs.filter((design) => {return design.user !== null}),
-               name: designs.filter((design) => {return design.user !== null})[0]
-           }))
+           .then(designs => {
+               this.setState({ 
+                   designs: designs.filter((design) => {return design.user !== null})
+               });
+               var name = '';
+               if (this.state.designs.length > 0)
+                   name = this.state.designs[0].name; // Default to first name
+               this.setState({ 
+                   name: name
+               });
+           })
            .catch(error => {
                displayError('GET of design names failed with message: \''+error.message+'\'');
            });
