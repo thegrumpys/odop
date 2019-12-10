@@ -5,7 +5,7 @@ In practice, all web browsers, operating systems and hardware platforms are not 
 As the expression goes, "Your mileage may vary".   
 
 It is expected that most users doing serious design work will run the ODOP software on a
-desktop or laptop computer with a relatively large and relatively high resolution monitor. 
+desktop or laptop computer with a full size and relatively high resolution monitor. 
 The hardware environment "responsive" nature of the ODOP software allows 
 it to function on many mobile devices.
 When operating on a small screen mobile device like a cell phone, 
@@ -20,14 +20,18 @@ ODOP is developed using the current version of Google Chrome (using both MacOS a
 and is routinely tested using current versions of other browsers including 
 the newer Chromium based version of the Microsoft Edge browser. 
 Depending on screen size and resolution, 
-Firefox users may find it desirable to adjust font size in order to optimize the on-screen presentation.
-Microsoft Internet Explorer and the older EdgeHTML version of the Microsoft Edge browser are not 
-supported for operation with ODOP.   
+Firefox users may find it desirable to adjust font size in order to optimize the on-screen presentation.   
+
+**Microsoft Internet Explorer and the older EdgeHTML version of the Microsoft Edge browser are not supported for operation with ODOP.**  
 
 The default configuration of some ad blocker browser extensions may interfere with rendering 
 of ODOP user interface graphic elements such as checkboxes. 
 It may be necessary to adjust adjust the ad blocker configuration or temporarily disable it.   
 
 Offline operation is not currently supported.
+
+In order to keep saved designs private, it is necessary to establish a user account that provides
+a unique username and password.
+See: [User Accounts](userAccounts)
 
 [About](./)

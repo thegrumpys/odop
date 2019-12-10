@@ -1,18 +1,18 @@
 ## User Accounts, Username, Login, Logout
 
-A user account with username and password is required to access ODOP.
+In order to keep saved designs private, 
+it is necessary to establish a user account that provides a unique username and password.
 To establish a free account, send a request to **Info@SpringDesignSoftware.org**.
 You will receive a reply message with instructions on how to complete creating your account. 
 The process contains one step that is not automated, so expect a delay of a day or more.
 
-[Intro Pages Overview](introPagesOverview) provides links to  on-line help pages that
-provide important information about getting started with the software. 
-In particular, note that the software expects to start from an existing design. 
+As described in more detail in other on-line Help pages, 
+the ODOP software expects to start from an existing design. 
 Each "Design Type" contains one or more system provided designs marked "[ReadOnly]". 
 For each Design Type, the system provided design by the name of "Startup" is the default starting design. 
 
-Each user will be able to save designs into a private section of the ODOP design library. 
-It is possible to save a private design "on top of" a system design of the same name. 
+When saving designs into a private section of the ODOP design library, 
+it is possible to save a private design "on top of" a system design of the same name. 
 This feature allows the default startup design to be personalized.
 Once such a private design is deleted, the underlying system design (marked "[ReadOnly]") 
 will again be available.
