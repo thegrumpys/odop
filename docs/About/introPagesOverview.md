@@ -24,6 +24,10 @@ For example, see:
    + Inactivity time out   
 
 **Help**
+*  [Introduction](../Help/introduction)  
+   + Overview of concepts
+   + Search, Seek and Trade features   
+&nbsp;
 *  [Getting Started](../Help/gettingStarted)  
    + Rectangular Solid design type versus Spring Design
    + Link to design process flow diagram
@@ -38,15 +42,15 @@ For example, see:
    + US (ips) versus metric (SI) units
    + Report tabs   
 &nbsp;
+*  [Utilizing Help with a widescreen monitor](../Help/wideScreen)
+   + Configure multiple browser sessions to view program and on-line Help simultaneously 
+   + Screen capture examples   
+&nbsp;
 *  [Launching the ODOP program](../Help/launchODOP)  
    + Utilizing Help on wide-screen monitors
    + Link to launch the ODOP program
    + Link to User Accounts page
    + Selecting a Design Type and a starting design  
-&nbsp;
-*  [Introduction](../Help/introduction)  
-   + Overview of concepts
-   + Search, Seek and Trade features   
    
 &nbsp;
 

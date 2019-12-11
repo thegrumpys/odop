@@ -5,32 +5,36 @@ Tutorial and the spring design Demo.
 A few suggestions on how to explore ODOP:Spring after completing the
 tutorial and demo sessions are also provided.   
 
-A [User Account](..\About\userAccounts) with associated username and password 
-is required to use the ODOP:Spring software.
+A user account with associated username and password 
+is required to access the ODOP:Spring software.
+See: [User Accounts](..\About\userAccounts) for details on
+how to obtain an account.
 
 A list of various on-line Help pages providing introductory information is available at
 [Intro Pages Overview](..\About\introPagesOverview).
-In particular, see [Launching the program](launchODOP) for detailed instructions on 
+In particular, see [Launching the program](launchODOP) for more detailed instructions on 
 how to get the program up and running.
-
-Before continuing, please confirm that the program is running and that the 
-Compression Spring design type is loaded.
-You should see Independent Variables like OD\_Free, Wire\_Dia and L\_Free.
-If you see the Independent Variables of the Rectangular Solid design type 
-(Length, Width and Height),
-simply click your browser's refresh button and then click the **Open** button to 
-switch to the Spring design type.  
 
 Note that the ODOP software expects to start from an existing design. 
 Each "Design Type" contains one or more system provided designs marked "[ReadOnly]". 
-For each Design Type, a system provided design by the name of "Startup" is the default starting design.
+For each Design Type, 
+the system provided design by the name of "Startup" is the default starting design.
 
 If you haven't seen it already, the 
 [ODOP Design Process Flow Diagram](../About/png/DesignProcessFlowDiagram.png)
 provides an important conceptual introduction to the overall design process within ODOP.   
 
+Before continuing with the material below, 
+please confirm that the program is running and that the Compression Spring design type is loaded.
+You should see Independent Variables like OD\_Free, Wire\_Dia and L\_Free.
+If you see the Independent Variables of the Rectangular Solid design type 
+(Length, Width and Height),
+simply confirm that the browser tab containing the program is currently active, 
+click your browser's refresh button and then click the **Open** button to 
+switch to the default design type (Spring/Compression) with the default design (Startup).  
+
 Tutorial sessions teach operation of the program.
-Use the <b>Help : Tutorial...</b> menu item to select the desired tutorial session.   
+Use the **Help : Tutorial...** menu item to select the desired tutorial session.   
 
 ![Help Tutorial](./png/HelpTutorial.png "Help Tutorial")   
    
