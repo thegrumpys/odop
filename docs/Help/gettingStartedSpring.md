@@ -23,7 +23,7 @@ If you haven't seen it already, the
 provides an important conceptual introduction to the overall design process within ODOP.   
 
 Before continuing with the material below, 
-please confirm that the ODOP program is running in a browser window 
+please confirm that the ODOP program is running in a browser window (or tab) 
 and that the Compression Spring design type is loaded.
 You should see Independent Variables like OD\_Free, Wire\_Dia and L\_Free.
 If you see the Independent Variables of the Rectangular Solid design type 
@@ -67,9 +67,10 @@ a bit of free-form experimentation may be in order.
 The remainder of this discussion will provide a few 
 suggestions on how to explore the program.
 
-Start from an existing design.   
+Start from an existing design. 
 See [Units: US (ips) and metric (SI)](SpringDesign/unitsUSmetric) to
 work in metric units. 
+More information on default designs is available at [Default Designs](./defaultDesigns).
 
 CHANGE independent variables.
 For the compression spring design type, those include
@@ -105,7 +106,8 @@ For the compression spring design type, those include
  Use the main page entry fields to enter constraints
  associated with a hypothesized design. 
  Try designing the spring in a ball  point pen, 
- or perhaps a suspension spring for an automobile or a diesel locomotive. 
+ or perhaps a suspension spring for a motorcycle, 
+ an automobile or a railroad locomotive. 
  Use the **File : Save** menu item to save the results of your work in 
  the design library.
  
@@ -113,11 +115,11 @@ For the compression spring design type, those include
  You can master these advanced features with the same technique. 
  Dive in and try it! 
  
- Once you have already saved any work that you wish to keep, you can sign out.  
+ Once you have already saved any work that you wish to keep, you can sign out.
  Use the browser refresh button and then click the "Logout" button.
  At that point, exit the program by simply closing the browser tab.   
   
-  &nbsp;   
+&nbsp;   
     
 [Help](./)
 

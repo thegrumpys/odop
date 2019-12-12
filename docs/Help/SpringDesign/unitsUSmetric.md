@@ -11,7 +11,7 @@ The Startup design for each spring design type (compression, extension & torsion
 In order to create a design utilizing metric units, simply open the "Startup_Metric" entry.   
 
 It is possibile to personalize the default Startup design. 
-See: [Default Designs](./defaultDesigns) for more information.
+See: [Default Designs](../defaultDesigns) for more information.
 
 &nbsp;
   
