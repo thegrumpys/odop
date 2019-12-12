@@ -25,13 +25,14 @@ If you haven't seen it already, the
 provides an important conceptual introduction to the overall design process within ODOP.   
 
 Before continuing with the material below, 
-please confirm that the program is running and that the Compression Spring design type is loaded.
+please confirm that the ODOP program is running in a browser window 
+and that the Compression Spring design type is loaded.
 You should see Independent Variables like OD\_Free, Wire\_Dia and L\_Free.
 If you see the Independent Variables of the Rectangular Solid design type 
 (Length, Width and Height),
-simply confirm that the browser tab containing the program is currently active, 
-click your browser's refresh button and then click the **Open** button to 
-switch to the default design type (Spring/Compression) with the default design (Startup).  
+simply click the refresh button of the window containing the ODOP program 
+and then click the **Open** button to switch to the default design type (Spring/Compression) 
+with the default design (Startup).  
 
 Tutorial sessions teach operation of the program.
 Use the **Help : Tutorial...** menu item to select the desired tutorial session.   

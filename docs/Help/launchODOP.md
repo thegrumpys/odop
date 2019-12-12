@@ -7,7 +7,7 @@ is recommended.
 Where a wide screen monitor is in use, 
 it should be possible to view both the program and on-line Help entries 
 simultaneously in separate windows.
-See: [Utilizing Help with a widescreen monitor](wideScreen) for additional details.
+See: [Utilizing on-line Help with a widescreen monitor](wideScreen) for additional details.
 
 If a wide screen monitor is not available, 
 you can operate with this Help content in one
@@ -16,18 +16,34 @@ This approach will permit rapid switching from this Help content in order
 to view the corresponding part of the program user interface
 (ODOP main page).
 
-In order to start the ODOP software, 
+In order to start the ODOP software in **this** browser window (or tab), 
 follow this link:   
 
-[Launch ODOP](https://odop.herokuapp.com)
+[Launch ODOP](https://odop.herokuapp.com)   
 
 Alternatively, copy this address (URL):   
 
 **https://odop.herokuapp.com**
 
-and paste it into the address field of a different browser window.   
- 
- 
+and paste it into the address field of a different browser window (or tab).   
+  
+&nbsp;
+
+There may be a delay of approximately 20 seconds the first time that the software is launched.
+If you are not currently signed in, a sign-in screen will appear.   
+A user account with associated username and password 
+is required to access the ODOP:Spring software.
+See: [User Accounts](..\About\userAccounts) for details on
+how to obtain an account.   
+![Sign-in screen](./png/SignInWidgetExpanded.png "Sign-in screen")  
+  
+&nbsp;
+
+Once logged in, you will reach a screen where it is possible to select 
+a design type and a starting design.   
+
+![Select design type and starting design](./png/SelectSolid.png "Select design type and starting design")
+  
 &nbsp;
 
 To continue, use your browser's **Back** button to return to the previous page now.
