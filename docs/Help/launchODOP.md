@@ -27,10 +27,9 @@ Alternatively, copy this address (URL):
 
 and paste it into the address field of a different browser window (or tab).   
   
-&nbsp;
-
 There may be a delay of approximately 20 seconds the first time that the software is launched.
 If you are not currently signed in, a sign-in screen will appear.   
+
 A user account with associated username and password 
 is required to access the ODOP:Spring software.
 See: [User Accounts](..\About\userAccounts) for details on
@@ -50,4 +49,4 @@ To continue, use your browser's **Back** button to return to the previous page n
 
 &nbsp;
 
-[About](./)
+[Help](./)
