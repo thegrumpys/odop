@@ -12,13 +12,11 @@ how to obtain an account.
 
 A list of various on-line Help pages providing introductory information is available at
 [Intro Pages Overview](..\About\introPagesOverview).
-In particular, see [Launching the program](launchODOP) for more detailed instructions on 
+In particular, see [Launching the Program](launchODOP) for more detailed instructions on 
 how to get the program up and running.
 
-Note that the ODOP software expects to start from an existing design. 
-Each "Design Type" contains one or more system provided designs marked "[ReadOnly]". 
-For each Design Type, 
-the system provided design by the name of "Startup" is the default starting design.
+The ODOP software expects to start from an existing design. 
+More information on this point is available at [Default Designs](./defaultDesigns).
 
 If you haven't seen it already, the 
 [ODOP Design Process Flow Diagram](../About/png/DesignProcessFlowDiagram.png)
@@ -35,7 +33,8 @@ and then click the **Open** button to switch to the default design type (Spring/
 with the default design (Startup).  
 
 Tutorial sessions teach operation of the program.
-Use the **Help : Tutorial...** menu item to select the desired tutorial session.   
+Use the **Help : Tutorial...** menu item (illustrated in the screen captures below) 
+to select the desired tutorial session.   
 
 ![Help Tutorial](./png/HelpTutorial.png "Help Tutorial")   
    
@@ -43,7 +42,7 @@ Use the **Help : Tutorial...** menu item to select the desired tutorial session.
 ![Select Spring Tutorial](./png/SelectSpringTutor.png "[Select Spring Tutorial")   
    
 The spring tutorial session named **tutorTour** is recommended as a good starting point
-for users that have not completed the tour provided in the **Help : Getting Started** topic.   
+for users that have not already completed the tour provided in the **Help : Getting Started** topic.   
 
 &nbsp;
 
@@ -114,10 +113,12 @@ For the compression spring design type, those include
  You can master these advanced features with the same technique. 
  Dive in and try it! 
  
- Once you have already saved any work that you wish to keep, 
- you can exit the program by simply closing the browser tab.
-
- 
+ Once you have already saved any work that you wish to keep, you can sign out.  
+ Use the browser refresh button and then click the "Logout" button.
+ At that point, exit the program by simply closing the browser tab.   
+  
+  &nbsp;   
+    
 [Help](./)
 
  

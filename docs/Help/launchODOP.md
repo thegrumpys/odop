@@ -1,4 +1,4 @@
-## Launching the program   
+## Launching the Program   
 
 While it is possible to use the ODOP software from a mobile device,
 establishing initial impressions with a full size monitor, keyboard and mouse
