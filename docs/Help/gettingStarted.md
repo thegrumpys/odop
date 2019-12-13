@@ -14,7 +14,7 @@ These include full-featured apps for compression, extension and torsion spring d
 plus the Rectangular Solid and Piston-Cylinder demonstration cases. 
 If you are interested in learning about capabilities, concepts, and basic
 mechanics of how to operate the program,
-the Rectangular Solid design type is intended as an easy to understand 
+the Rectangular Solid design type is intended as a small and easy to understand 
 demonstration problem and is a good place to start. 
 The remainder of this Getting Started topic will use the Rectangular Solid design type
 to describe several screen captures that refer to the ODOP main page.
@@ -26,20 +26,35 @@ If you haven't seen it already, the
 [ODOP Design Process Flow Diagram](../About/png/DesignProcessFlowDiagram.png)
 provides an important conceptual introduction to the overall design process within ODOP.   
 
-The ODOP starting dialog provides the opportunity to select a design type.
-Within each design type, you will have the opportunity to select an existing design.
-At a minimum, each design type will have a default design with the name "Startup".
+The ODOP software expects to start from an existing design. 
+More information on this point is available at [Default Designs](./defaultDesigns).
+
+A user account with associated username and password 
+is required to access the ODOP software.
+See: [User Accounts](..\About\userAccounts) for details on
+how to obtain an account.
+
+The material below assumes that you will be able to operate the ODOP program in one browser
+window (or tab) at the same time that you are able to view this on-line Help material in a
+different browser window (or tab). 
+See [Launching the Program](launchODOP) for more detailed instructions on 
+how to get the program up and running with this multiple browser window (tab) configuration.
 
 &nbsp;
 
+Before continuing with the material below, 
+please confirm that the ODOP program is running in a browser window (or tab) 
+and that the Rectangular Solid design type is loaded.
+You should see Independent Variables like Length, Width and Height.
+If you see the Independent Variables of the Compression Spring design type 
+(OD\_Free, Wire\_Dia and L\_Free),
+simply click the refresh button of the window containing the ODOP program, 
+drop down the box under "Select design type to open:" 
+and select the "Solid" design type.   
+
 This screen capture illustrates selecting the **Solid** design type 
 and its default design called **Startup**.   
-![Start with Rectangular Solid](./png/SelectSolid.png "Start with Rectangular Solid")
-
-&nbsp;   
-So, if you have not already selected the **Solid** design type,
-please do it now.
-You will need to return to this point and proceed with the tour.
+![Start with Rectangular Solid](./png/SelectSolid.png "Start with Rectangular Solid")   
 
 &nbsp;
 

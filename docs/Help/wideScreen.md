@@ -16,7 +16,7 @@ one approach is to launch the ODOP program in each browser window.
 
 Starting from the sign-in page,
 it is possible to expand the list of links and select "Learn About ODOP"
-to get started with the on-line help in the smaller window.   
+to get started with the on-line Help in the smaller window.   
 
 ![Sign-in screen](./png/SignInWidgetExpanded.png "Sign-in screen")
 
