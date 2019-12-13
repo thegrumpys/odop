@@ -14,20 +14,27 @@ discussion and the referenced program features on the main page at the same time
 If you are using this side-by-side  browser configuration, 
 one approach is to launch the ODOP program in each browser window.   
 
-In the smaller window, click the "About" link of the ODOP starting dialog
+Starting from the sign-in page,
+it is possible to expand the list of links and select "Learn About ODOP"
+to get started with the on-line help in the smaller window.   
+
+![Sign-in screen](./png/SignInWidgetExpanded.png "Sign-in screen")
+
+Alternatively, click the "About" link of the ODOP starting dialog
 as highlighted in red of the screen capture below.   
 
 ![ODOP starting dialog](./png/StartDialog.png "ODOP starting dialog")   
 
-That "About" link will take you to the ODOP Introduction page. 
-From there you can procede to the Getting Started page and 
-continue with those instructions while viewing ODOP program operation 
-in the larger window.   
+In either case, that "About" link will take you to a list of pages 
+in the "About" section of the on-line Help.
+Follow the "Introduction" link.
+From there you can continue with those instructions while 
+viewing ODOP program operation in the larger window.   
 
 &nbsp;
 
-In the larger window, select the design type and specific design that you 
-wish to work with.
+After starting the program in the larger window, 
+select the design type and specific design that you wish to work with.
 The screen capture below illustrates selecting the Rectangular **Solid** design type
 which is used in the ODOP Introduction and Getting Started instructions. 
 Select the Solid design type before continuing with those instructions.   

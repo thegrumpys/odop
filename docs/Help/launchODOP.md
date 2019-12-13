@@ -13,13 +13,15 @@ If a wide screen monitor is not available,
 you can operate with this Help content in one
 browser tab while the ODOP main page is in another browser tab.
 This approach will permit rapid switching from this Help content in order
-to view the corresponding part of the program user interface
-(ODOP main page).
+to view the corresponding part of the program user interface. 
+For example, the ODOP main page.   
 
-In order to start the ODOP software in **this** browser window (or tab), 
+In order to start the ODOP software in **this browser window** (or tab), 
 follow this link:   
 
 [Launch ODOP](https://odop.herokuapp.com)   
+  
+&nbsp;   
 
 Alternatively, copy this address (URL):   
 
@@ -28,8 +30,7 @@ Alternatively, copy this address (URL):
 and paste it into the address field of a different browser window (or tab).   
   
 There may be a delay of approximately 20 seconds the first time that the software is launched.
-If you are not currently signed in, a sign-in screen will appear.   
-
+If you are not currently signed in, a sign-in screen will appear. 
 A user account with associated username and password 
 is required to access the ODOP:Spring software.
 See: [User Accounts](..\About\userAccounts) for details on
@@ -42,6 +43,13 @@ Once logged in, you will reach a screen where it is possible to select
 a design type and a starting design.   
 
 ![Select design type and starting design](./png/SelectSolid.png "Select design type and starting design")
+  
+&nbsp;
+
+After opening a specific design, you will reach ODOP's main page.
+This screen capture illustrates the default (Startup) design of the Rectangular Solid design type.   
+
+![ODOP main page](./png/MainPageSolid.png "ODOP main page")
   
 &nbsp;
 
