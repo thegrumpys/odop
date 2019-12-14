@@ -47,12 +47,12 @@ please confirm that the ODOP program is running in a browser window (or tab)
 and that the Rectangular Solid design type is loaded.
 You should see Independent Variables like Length, Width and Height.
 If you see the Independent Variables of the Compression Spring design type 
-(OD\_Free, Wire\_Dia and L\_Free),
+(OD\_Free, Wire\_Dia, L\_Free, etc.),
 simply click the refresh button of the window containing the ODOP program, 
-drop down the box under "Select design type to open:" 
-and select the "Solid" design type.   
+drop down the box under "Select design type to open:", 
+select the "Solid" design type and click the "Open" button.   
 
-This screen capture illustrates selecting the **Solid** design type 
+This screen capture illustrates selecting the Rectangular **Solid** design type 
 and its default design called **Startup**.   
 ![Start with Rectangular Solid](./png/SelectSolid.png "Start with Rectangular Solid")   
 
