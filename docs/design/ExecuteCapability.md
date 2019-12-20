@@ -1,5 +1,9 @@
 ## Investigate alternatives to assist implementation of the Execute, Demo and Tutorial features
 
+**December 2019 update**   
+This feature has been implemented without using any of the 3rd party alternatives below.   
+&nbsp;
+
 The Execute feature is the basis of demo and tutorial sessions in the CLI software.
 The CLI EXECUTE command has provisions for:
  - user control of  pacing

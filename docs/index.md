@@ -34,9 +34,8 @@
 * [Ideas for a web page menu structure](design/menu)
 * [Proposed names for quantities previously called "constants"](design/PreviouslyConstants)
 * [Ideas regarding the web user-interface for FIX](design/WebUI_for_Fix)
-* [Ideas for "responsive" page design](design/ResponsivePageDesign)
 * [Auto-Search feature and preferences](design/AutoSearch)
-* [Investigate alternatives to assist implementation of the Execute, Demo and Tutorial features](design/ExecuteCapability)
+* [Ideas for "responsive" page design](design/ResponsivePageDesign)
 * [Warn user if conflicting constraints are established](design/WarnConflictingConstraints)
 * [Consider an UnDo / ReDo feature](design/UnDo_ReDo)
 * [Proposed names for the (problem independent) system](design/SysName)
@@ -44,13 +43,15 @@
 * [Idea for a simple showcase problem](design/GeometricSolidsProblem)
 * [Idea for a Refine Search feature](design/RefineSearchFeature)
 * [AutoSave feature](design/AutoSaveFeature)
-* [Consider adding a search at the beginning of trade](design/SearchBeforeTrade)
 * [Sub-Problems feature](design/SubProblems)
 * [Side-by-Side comparison of designs](design/SideBySideCompare)
 * [Idea for a virtual annunciator panel](design/AnnunciatorPanel)
 * [Description of ODOP users](design/UserDescription)
 * [Ideas for Simplified Design Check UI](design/SimplifiedUI)
 * [Functionally Determined Constraint Level - User Interface](design/FDCL_UI)   
+&nbsp;
+* [Consider adding a search at the beginning of trade](design/SearchBeforeTrade)
+* [Investigate alternatives to assist implementation of the Execute, Demo and Tutorial features](design/ExecuteCapability)
 
 
 ## Procedures
