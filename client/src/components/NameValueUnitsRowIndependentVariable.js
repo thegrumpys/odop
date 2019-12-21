@@ -6,6 +6,16 @@ import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFl
     saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
     fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 
+/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
+Number.prototype.toODOPPrecision = function() {
+    var value = this.valueOf();
+    var odopValue;
+    if (value < 10000.0 || value >= 1000000.0)
+         odopValue = value.toPrecision(4);
+    else odopValue = value.toFixed(0);
+    return odopValue;
+};
+
 class NameValueUnitsRowIndependentVariable extends Component {
     
     constructor(props) {
@@ -68,7 +78,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
-                            <Input className="text-right" type="number" value={this.props.element.value} onChange={this.onChange} /> : '' }
+                            <Input className="text-right" type="number" value={this.props.element.value.toODOPPrecision()} onChange={this.onChange} /> : '' }
                         { this.props.element.type === undefined && typeof this.props.element.value === 'string' ?
                             <Input className="text-right" type="text" value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.type === 'table' &&
