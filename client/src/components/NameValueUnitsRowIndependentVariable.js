@@ -22,11 +22,16 @@ class NameValueUnitsRowIndependentVariable extends Component {
 //        console.log('In NameValueUnitsRowIndependentVariable.constructor props=',props);
         super(props);
         this.onChange = this.onChange.bind(this);
+        this.onFocus = this.onFocus.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onSet = this.onSet.bind(this);
         this.onReset = this.onReset.bind(this);
 //        console.log('In NameValueUnitsRowIndependentVariable.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table);
-        if (this.props.element.type === 'table') {
+        if (this.props.element.type === undefined && typeof this.props.element.value === 'number') {
+            this.state = {
+                value: this.props.element.value
+            };
+        } else if (this.props.element.type === 'table') {
 //            console.log('In NameValueUnitsRowIndependentVariable.constructor file = ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowIndependentVariable.constructor table=',table);
@@ -39,6 +44,12 @@ class NameValueUnitsRowIndependentVariable extends Component {
     onChange(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onChange event.target.value=',event.target.value);
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
+    }
+    
+    onFocus(event) {
+        console.log("In onFocus event=", event.target.value);
+        console.log("In onFocus props value=", this.props.element.value);
+        console.log("In onFocus state value=", this.state.value);
     }
     
     onSelect(event) {
