@@ -7,12 +7,13 @@ import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withAuth } from '@okta/okta-react';
+import FELogin from '../../components/FELogin';
 
 class FileOpen extends Component {
 
     constructor(props) {
         super(props);
-//        console.log("In FileOpen .ctor props=",props);
+        console.log("In FileOpen .ctor props=",props);
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onOpen = this.onOpen.bind(this);
@@ -25,24 +26,45 @@ class FileOpen extends Component {
             authenticated: null,
             accessToken: null,
         };
+        this.checkAuthentication = this.checkAuthentication.bind(this);
+        this.checkAuthentication();
     }
 
-    async componentDidMount() {
-//        console.log('In FileOpen.componentDidMount');
+    async checkAuthentication() {
+        console.log("In FileOpen.checkAuthentication");
         const authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileOpen.componentDidMount authenticated=",authenticated);
+        console.log("In FileOpen.checkAuthentication authenticated=",authenticated);
         const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In FileOpen.componentDidMount accessToken=",accessToken);
+        console.log("In FileOpen.checkAuthentication accessToken=",accessToken);
         if (authenticated !== this.state.authenticated) {
-            this.setState({
+            this.setState({ 
                 authenticated: authenticated, 
                 accessToken: accessToken,
             });
         }
+      }
+
+    componentDidUpdate() {
+        console.log("In FileOpen.componentDidUpdate");
+        this.checkAuthentication();
     }
 
+//    async componentDidMount() {
+//        console.log('In FileOpen.componentDidMount');
+//        const authenticated = await this.props.auth.isAuthenticated();
+//        console.log("In FileOpen.componentDidMount authenticated=",authenticated);
+//        const accessToken = await this.props.auth.getAccessToken();
+//        console.log("In FileOpen.componentDidMount accessToken=",accessToken);
+//        if (authenticated !== this.state.authenticated) {
+//            this.setState({
+//                authenticated: authenticated, 
+//                accessToken: accessToken,
+//            });
+//        }
+//    }
+
     getDesigns(type) {
-//        console.log('In FileOpen.getDesigns type=', type);
+        console.log('In FileOpen.getDesigns type=', type);
         // Get the designs and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
@@ -64,7 +86,7 @@ class FileOpen extends Component {
     }
     
     getDesign(type,name) {
-//        console.log('In FileOpen.getDesign type=', type, ' name=', name);
+        console.log('In FileOpen.getDesign type=', type, ' name=', name);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
                 headers: {
@@ -79,7 +101,7 @@ class FileOpen extends Component {
                 return res.json()
             })
             .then((design) => {
-//                console.log('In FileOpen.getDesigns design=', design);
+                console.log('In FileOpen.getDesigns design=', design);
                 var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
                 this.props.load(migrated_design)
@@ -91,7 +113,7 @@ class FileOpen extends Component {
     }
     
     toggle() {
-//        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
+        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
         this.getDesigns(this.props.type);
         this.setState({
             modal: !this.state.modal,
@@ -101,14 +123,14 @@ class FileOpen extends Component {
     }
     
     onSelect(event) {
-//        console.log('In FileOpen.onSelect event.target.value=',event.target.value);
+        console.log('In FileOpen.onSelect event.target.value=',event.target.value);
         this.setState({
             name: event.target.value 
         });
     }
     
     onOpen() {
-//        console.log('In FileOpen.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
+        console.log('In FileOpen.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
         this.setState({
             modal: !this.state.modal
         });
@@ -121,7 +143,7 @@ class FileOpen extends Component {
     }
     
     onCancel() {
-//        console.log('In FileOpen.onCancel');
+        console.log('In FileOpen.onCancel');
         this.setState({
             modal: !this.state.modal
         });
@@ -129,30 +151,43 @@ class FileOpen extends Component {
     }
 
     render() {
-//        console.log('In FileOpen.render');
-        return (
-            <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
-                    Open&hellip;
-                </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Open </ModalHeader>
-                    <ModalBody>
-                        <br />
-                        <Label for="fileOpenSelect">Select design to open:</Label>
-                        <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
-                            {this.state.designs.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
-                                <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
-                            )}
-                        </Input>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onOpen}>Open</Button>
-                    </ModalFooter>
-                </Modal>
-            </React.Fragment>
-        );
+        console.log('In FileOpen.render');
+        if (this.state.authenticated === null) {
+            console.log("In FileOpen.render this.state.authenticated=",this.state.authenticated);
+            return null;
+        }
+
+        if (this.state.authenticated) {
+            console.log("In FileOpen.render Modal");
+            return (
+                <React.Fragment>
+                    <DropdownItem onClick={this.toggle}>
+                        Open&hellip;
+                    </DropdownItem>
+                    <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                        <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Open </ModalHeader>
+                        <ModalBody>
+                            <br />
+                            <Label for="fileOpenSelect">Select design to open:</Label>
+                            <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
+                                {this.state.designs.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
+                                    <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
+                                )}
+                            </Input>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                            <Button color="primary" onClick={this.onOpen}>Open</Button>
+                        </ModalFooter>
+                    </Modal>
+                </React.Fragment>
+            );
+        } else {
+            console.log("In FileOpen.render FELogin");
+            return (
+              <div><FELogin /></div>
+            );
+        }
     }
 }
 
