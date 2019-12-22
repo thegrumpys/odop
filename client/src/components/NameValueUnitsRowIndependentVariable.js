@@ -23,13 +23,14 @@ class NameValueUnitsRowIndependentVariable extends Component {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onSet = this.onSet.bind(this);
         this.onReset = this.onReset.bind(this);
 //        console.log('In NameValueUnitsRowIndependentVariable.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table);
         if (this.props.element.type === undefined && typeof this.props.element.value === 'number') {
             this.state = {
-                value: this.props.element.value
+                focused: false
             };
         } else if (this.props.element.type === 'table') {
 //            console.log('In NameValueUnitsRowIndependentVariable.constructor file = ../designtypes/'+this.props.element.table+'.json');
@@ -47,9 +48,17 @@ class NameValueUnitsRowIndependentVariable extends Component {
     }
     
     onFocus(event) {
-        console.log("In onFocus event=", event.target.value);
-        console.log("In onFocus props value=", this.props.element.value);
-        console.log("In onFocus state value=", this.state.value);
+//        console.log("In NameValueUnitsRowIndependentVariable.onFocus event.target.value=", event.target.value);
+        this.setState({
+            focused: true
+        });
+    }
+    
+    onBlur(event) {
+//      console.log("In NameValueUnitsRowIndependentVariable.onBlur event.target.value=", event.target.value);
+        this.setState({
+            focused: false
+        });
     }
     
     onSelect(event) {
@@ -89,7 +98,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
-                            <Input className="text-right" type="number" value={this.props.element.value.toODOPPrecision()} onChange={this.onChange} /> : '' }
+                            <Input className="text-right" type="number" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
                         { this.props.element.type === undefined && typeof this.props.element.value === 'string' ?
                             <Input className="text-right" type="text" value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.type === 'table' &&
