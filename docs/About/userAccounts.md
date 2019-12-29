@@ -17,6 +17,12 @@ The welcome letter includes instructions on how to establish a password and if d
 change it in the future.
 Note that the opportunity to activate the account expires seven days after the welcome letter is issued.    
 
+An email address is required for the username.
+As noted in our [Privacy Notice](Legal/PrivacyStatement), 
+your personal information will be secure and not abused. 
+If you have any remaining concerns on this point, 
+using an email account different than your primary email account is a reasonable approach.
+
 The ODOP user account (username / password) feature is based on capabilities provided by 
 [Okta](https://www.okta.com/).
 Do not expect the ODOP app to appear on Okta's list of apps and 
@@ -34,7 +40,7 @@ In order to sign out, use the browser refresh button and then click the "Logout"
 Note that by design, after a period of inactivity (in the future, 2 - 8 hours), 
 the user will be automatically logged out. 
 Currently, there is an issue with this feature that is under active investigation.
-Until this is issue is resolved, users are logged out one hour after login.
+Until this issue is resolved, users are logged out one hour after login.
 If that happens, un-saved data will be lost. 
 An attempt to save a design after automatic logout will produce an error. 
 In this situation, 
