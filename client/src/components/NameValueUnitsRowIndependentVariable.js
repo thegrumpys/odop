@@ -55,7 +55,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
     }
     
     onBlur(event) {
-//      console.log("In NameValueUnitsRowIndependentVariable.onBlur event.target.value=", event.target.value);
+//        console.log("In NameValueUnitsRowIndependentVariable.onBlur event.target.value=", event.target.value);
         this.setState({
             focused: false
         });
@@ -73,7 +73,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                     this.props.changeSymbolValue(name,value);
                 }
             }
-        })
+        });
     }
     
     onSet() {
