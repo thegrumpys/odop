@@ -3,15 +3,31 @@ import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../store/actionCreators';
 
+/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
+Number.prototype.toODOPPrecision = function() {
+    var value = this.valueOf();
+    var odopValue;
+    if (value < 10000.0 || value >= 1000000.0)
+         odopValue = value.toPrecision(4);
+    else odopValue = value.toFixed(0);
+    return odopValue;
+};
+
 class NameValueUnitsRowCalcInput extends Component {
     
     constructor(props) {
 //        console.log('In NameValueUnitsRowCalcInput.constructor');
         super(props);
         this.onChange = this.onChange.bind(this);
+        this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
         this.onSelect = this.onSelect.bind(this);
 //        console.log('In NameValueUnitsRowCalcInput.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table);
-        if (this.props.element.type === 'table') {
+        if (this.props.element.type === undefined && typeof this.props.element.value === 'number') {
+            this.state = {
+                focused: false
+            };
+        } else if (this.props.element.type === 'table') {
 //            console.log('In NameValueUnitsRowCalcInput.constructor file = ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
@@ -26,6 +42,20 @@ class NameValueUnitsRowCalcInput extends Component {
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
     }
     
+    onFocus(event) {
+//        console.log("In NameValueUnitsRowCalcInput.onFocus event.target.value=", event.target.value);
+        this.setState({
+            focused: true
+        });
+    }
+    
+    onBlur(event) {
+//        console.log("In NameValueUnitsRowCalcInput.onBlur event.target.value=", event.target.value);
+        this.setState({
+            focused: false
+        });
+    }
+    
     onSelect(event) {
 //        console.log('In NameValueUnitsRowCalcInput.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
@@ -33,7 +63,7 @@ class NameValueUnitsRowCalcInput extends Component {
         this.state.table[selectedIndex].forEach((value, index) => {
             if (index > 0) { // Skip the first column
                 var name = this.state.table[0][index];
-//                console.log('name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',this.props.symbol_table.find(element => element.name === name));
+//                console.log('In NameValueUnitsRowCalcInput.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',this.props.symbol_table.find(element => element.name === name));
                 if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
                     this.props.changeSymbolValue(name,value);
                 }
@@ -53,7 +83,7 @@ class NameValueUnitsRowCalcInput extends Component {
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
-                            <Input className="text-right" type="number" value={this.props.element.value} onChange={this.onChange} /> : '' }
+                            <Input className="text-right" type="number" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
                         { this.props.element.type === undefined && typeof this.props.element.value === 'string' ?
                             <Input className="text-right" type="text" value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.type === 'table' &&
