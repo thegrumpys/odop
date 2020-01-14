@@ -1,13 +1,13 @@
-**Message-of-the-day** &nbsp; updated December 28, 2019   
+**Message-of-the-day** &nbsp; updated January 14, 2020   
 
 Watch this space for breaking news 
 (news of impending releases, planned outages, newly discovered issues & work-arounds, etc.). 
 
 A new version requiring a username and password is now in place. 
 To establish a free account, see: [User Accounts](userAccounts). 
-A current issue regarding session timeout is described there.
+A current issue regarding session expiration (timeout) is described there.
 
-Browser requirements have changed. 
+With the introduction of these new features, browser requirements have changed. 
 For details, see: [Requirements](requirements)  
 
 ODOP is experimental software. 
