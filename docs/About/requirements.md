@@ -1,7 +1,10 @@
 ## Requirements
 
-It is not necessary to install any software on your computer in order
-to run ODOP.
+In order to keep saved designs private, it is necessary to establish a user account that provides
+a unique username and password.
+See: [User Accounts](userAccounts)   
+
+It is not necessary to install any software on your computer in order to run ODOP.
 In theory, the only requirement to operate the ODOP software is a modern web browser.
 In practice, all web browsers, operating systems and hardware platforms are not equal.
 As the expression goes, "Your mileage may vary".   
@@ -31,9 +34,5 @@ of ODOP user interface graphic elements such as checkboxes.
 It may be necessary to adjust adjust the ad blocker configuration or temporarily disable it.   
 
 Offline operation is not currently supported.
-
-In order to keep saved designs private, it is necessary to establish a user account that provides
-a unique username and password.
-See: [User Accounts](userAccounts)
 
 [About](./)
