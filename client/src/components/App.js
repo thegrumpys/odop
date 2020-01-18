@@ -13,7 +13,8 @@ import {
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem
+    DropdownItem,
+    Button
 } from 'reactstrap';
 import classnames from 'classnames';
 import { ExecutePanel } from './ExecutePanel';
@@ -38,6 +39,7 @@ import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
+import { withAuth } from '@okta/okta-react';
 
 class App extends Component {
     
@@ -124,6 +126,10 @@ class App extends Component {
                                     <DropdownItem divider />
                                     <FilePreferences />
                                     <FileProperties />
+                                    <DropdownItem divider />
+                                    <DropdownItem onClick={() => this.props.auth.logout()}>
+                                        Logout
+                                    </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav inNavbar>
@@ -220,4 +226,8 @@ const mapStateToProps = state => ({
     labels: state.labels,
 });
 
-export default connect(mapStateToProps)(App);
+export default withAuth(
+        connect(
+            mapStateToProps
+        )(App)
+    );
