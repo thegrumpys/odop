@@ -91,6 +91,16 @@ export const execute = {
                     </p>
                     
                     <p>
+                    Notice that several constraints are established by default.  
+                    For example, you should see established constraints on quantities like
+                    Coils_A, Deflect_1, L_Stroke, ID_Free, FS_2, FS_Solid and %_Avail_Deflect.
+                    These constraints are helpful in guiding the search process to deliver a good spring design.
+                    Without similar constraints, the search process can "cheat", producing a result that is
+                    mathematically possible but not particularly helpful in terms of a usable spring design.
+                    You should feel free to experiment with different values for these constraint levels.
+                    </p>
+                    
+                    <p>
                     Use the "Next" button to proceed after your inputs are complete.
                     Note that it will be possible to use the "Back" button to return to the beginning of any step  
                     if any corrections or additional inputs are desired later.
@@ -183,9 +193,13 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
+                    Take a moment to review the results. 
+                    Is this a reasonable design that meets the original objectives ? 
+                    If not, try adjusting constraint levels and repeating the <b>Search</b> and <b>Seek</b>.
                     </p>
                     
                     <p>
+                    
                     </p>
                     
                     <p>
