@@ -174,7 +174,7 @@ export const execute = {
                     <p>
                     While it is possible to seek the constrained extreme of any independent or dependent variable 
                     that is not in FIXed status, for compression springs, the most likely candidates are: 
-                    min Weight, max Cycle_Life, min OD_Free or min L_Solid (solid height).
+                    min Weight, max Cycle_Life, min Rate, min OD_Free or min L_Solid (solid height).
                     </p>
                     
                     <p>
@@ -199,10 +199,15 @@ export const execute = {
                     </p>
                     
                     <p>
-                    
+                    Next, we will get into selecting a standard wire size. 
+                    But first, if this design seems like a good starting point, 
+                    you should save it with a name like "ProjectX_Baseline".
+                    Saving this design will keep it available as a point of reference in a few more steps.
                     </p>
                     
                     <p>
+                    Use the <b>File : SaveAs</b> menu.
+                    Then, use the "Next" button to continue.
                     </p>
                 </React.Fragment>
             )
@@ -212,24 +217,21 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Okay, that wasn't really very exciting. 
-                    The objective here is to illustrate how ODOP can do simple analysis. 
-                    Given the physical description of the object under consideration, 
-                    ODOP can use the mathematical model to predict aspects of its performance.
-                    For a spring, that is things like spring Rate, stresses, 
-                    factor of safety, cycle life, etc.
-                    When working with the rectangular solid, 
-                    we will be speaking in terms of things like Volume, Weight, etc.
+                    Use the <b>Select Size</b> menu to select the nearest larger standard wire size.
+                    Note that this leaves Wire_Dia in FIXed status.
                     </p>
                     
                     <p>
-                    Ready for another example ?
+                    Even a small change in wire diameter has likely caused constraints to be violated.
+                    This situation can be resolved by repeating <b>Search</b> and <b>Seek</b> 
+                    with the new (now FIXed) standard wire diameter.
                     </p>
                     
                     <p>
-                    When you click on Next, the tutorial will impose a value of 12 coils (turns) on Coils_T.<br />
+                    If the result appears reasonable,
+                    save it with a name like "ProjectX_Candidate1".
                     <br />
-                    CHANGE Coils_T 12
+                    
                     </p>
                 </React.Fragment>
             )
@@ -239,34 +241,20 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Well, that brought a little color into the ODOP world !
+                    Now, just to be sure that we are not missing out on some interesting design possibility,
+                    restore that "baseline" design.
+                    Use the <b>File : Open</b> menu.
                     </p>
                     
                     <p>
-                    If you scroll down, you can see that the
-                    design now exceeds the 90 percent MAX constraint on %_Avail_Deflect
-                    (percentage of available deflection at load point 2).
-                    Since a constraint is violated, this design is considered to be
-                    "Not Feasible".
-                    A Search (<b>Action : Search</b> menu) will be required to
-                    find values of free (not FIXed) Independent Variables such that 
-                    constraints are not violated.
+                    
                     </p>
                     
                     <p>
-                    Before we get into Search, let's suppose that we really don't 
-                    want the Search process to change either the 0.110 inch value for Wire_Dia that 
-                    we established earlier in this session or the 40 pound value of Force_2 that 
-                    was established by the initialState.
-                    When you click Next, the tutorial will check the appropriate FIX checkboxes 
-                    (positioned between the Value entry fields and the Units fields) 
-                    to put Wire_Dia and Force_2 into FIXed status.
+                    
                     </p>
                 </React.Fragment>
-            ),
-            actions: [
-                changeSymbolValue("Coils_T",12)
-            ]
+            )
         },
         {
             title: "Page 11 of 16",
