@@ -13,8 +13,7 @@ import {
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem,
-    Button
+    DropdownItem
 } from 'reactstrap';
 import classnames from 'classnames';
 import { ExecutePanel } from './ExecutePanel';
