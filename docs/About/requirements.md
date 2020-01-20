@@ -5,7 +5,8 @@ a unique username and password.
 See: [User Accounts](userAccounts)   
 
 It is not necessary to install any software on your computer in order to run ODOP.
-In theory, the only requirement to operate the ODOP software is a modern web browser.
+In theory, the only requirement to operate the ODOP software is an Internet connection and 
+a modern web browser.
 In practice, all web browsers, operating systems and hardware platforms are not equal.
 As the expression goes, "Your mileage may vary".   
 

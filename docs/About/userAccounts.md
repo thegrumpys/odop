@@ -40,7 +40,7 @@ In order to sign out, use the browser refresh button and then click the "Logout"
 Note that by design, after a period of inactivity (in the future, 8 hours or longer), 
 the user session will expire. 
 Currently, there is an issue with this feature that is under active investigation.
-Until this issue is resolved, user sessions expire eight hours after login.
+Until this issue is resolved, user sessions expire eight hours after login regardless of activity.
 If that happens, it will not be possible to open (**File : Open** menu) existing designs or
 save (**File : Save** and **File : SaveAs** menus) in-progress designs. 
 In this situation, 
