@@ -3,7 +3,7 @@ import * as mo from '../mat_ips_offsets';
 import * as eto from './endtypes_offsets';
 
 export function init(p, x) {
-//    console.log('In init p=',p);
+//    console.log('In init p=',p,'x=',x);
  var i, j;
  var m_tab;
  const ten3 = 1000.0;
