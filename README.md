@@ -1,13 +1,12 @@
 ![ODOP logo](./client/public/favicon.ico "ODOP logo") 
 ### Open Design Optimization Platform &nbsp; (ODOP)
 
-ODOP provides features and capabilities to facilitate the analysis and design 
+ODOP provides features and capabilities to facilitate the analysis and optimal design 
 of a broad range of problems that have a mathematical model available. 
-
-[Try ODOP on Heroku](https://odop.herokuapp.com/)   
+Currently available apps include:
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Spring/Compression/favicon.ico"> 
-<b>Helical coil spring design</b> - full-featured apps for design of compression, extension and torsion springs    
+<b>[Helical coil spring design](https://www.springdesignsoftware.org)</b> - full-featured apps for design of compression, extension and torsion springs    
 <br />
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Solid/favicon.ico"> 
@@ -19,8 +18,10 @@ of a broad range of problems that have a mathematical model available.
 
 &nbsp;
 
-[Read the Introduction and Getting Started pages](https://thegrumpys.github.io/odop/About/Intro)   
+Read the [Introduction, Requirements and Getting Started](https://thegrumpys.github.io/odop/About/Intro) pages.   
 
-[More detail is available in the on-line Help facility](https://thegrumpys.github.io/odop/Help)   
+More detail is available in the [On-line Help](https://thegrumpys.github.io/odop/Help) facility.   
+
+Try [ODOP on Heroku](https://odop.herokuapp.com/)   
 
 &nbsp;

@@ -15,6 +15,12 @@ For example, see:
    + Link to Design Types
    + Link to Getting Started  
 &nbsp;
+*  [Requirements](requirements)  
+   + User account
+   + Internet connection & modern web browser
+   + Hardware "responsive" design
+   + Browser support   
+&nbsp;
 *  [User Accounts](userAccounts)  
    + Instructions to get UserID and Password
    + Sign-in and Sign-out

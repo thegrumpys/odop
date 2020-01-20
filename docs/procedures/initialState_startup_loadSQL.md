@@ -6,7 +6,7 @@ Naming conventions for designs and
 procedures for handling spring design units (US customary inch-pound-second units versus metric units) are described here.
 
 An initialState.js file is required for every design type. 
-It contains initialization for Independendent variables, Dependent variables, Calculation inputs, constraint levels, units and much more.
+It contains initialization for Independendent variables, Dependent variables, Calculation Inputs, constraint levels, units and much more.
 initialState.js files are created by hand (possibly modifying a previous example).
 
 When operating in the development environment, a "Use initialState" button appears on the promptForDesign modal.
@@ -14,7 +14,8 @@ Pushing this button will load the "built-in" initialState.js as opposed to loadi
 The resulting "state" of the design may be modified and then saved (**File : Save As** menu item) as a database entry.   
 
 By convention, every design type will have a database entry named "Startup" that is derived from the corresponding initialState.js file. 
-The "Startup" entry is unique in that it is protected from deletion by the **File : Delete** menu entry.
+The "Startup" entry is unique in that it is protected from deletion by the **File : Delete** menu entry. 
+Separately, multi-user support provides that "system provided" design entries (null userID) are read-only.  
 
 load.sql files are created via SQL dump from (potentially multiple) database entries.
 These load.sql files can be used to populate a new database or to transfer designs from the development database to the production database.
@@ -51,6 +52,11 @@ When operating in the development environment,
 the **View : Offsets** menu item is enabled.
 Start with initialState and then use **View : Offsets** as a copy / paste source for the contents of offsets.js.   
 
+Internally, the code uses the flags in initialState to differientate:
++ Independent Variables (element.input && element.equationset)   
++ Dependent Variables (!element.input && element.equationset)   
++ Calculation Inputs (!element.equationset)   
+  
 &nbsp;
 
 #### Naming conventions for designs
