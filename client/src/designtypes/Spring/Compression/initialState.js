@@ -422,7 +422,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Spring_Type",
             "value": "Compression",
             "units": "",
