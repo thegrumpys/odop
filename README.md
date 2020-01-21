@@ -18,7 +18,7 @@ Currently available apps include:
 
 &nbsp;
 
-Read the [Introduction, Requirements and Getting Started](https://thegrumpys.github.io/odop/About/Intro) pages.   
+Read the [Introduction, Requirements and Getting Started](https://thegrumpys.github.io/odop/About) pages.   
 
 More detail is available in the [On-line Help](https://thegrumpys.github.io/odop/Help) facility.   
 
