@@ -28,7 +28,7 @@ interested in the shortest possible path to designing springs.
 selecting the appropriate design type and how to arrange browser windows for the best
 possible presentation.
 
-For the less technical explanation using the Rectangular Solid design type 
+For getting started with the less technical explanation using the Rectangular Solid design type 
 go to: [ODOP Introduction](ODOPintro) 
 
 For instructions on how to invoke the tutorial and demo sessions using the 
