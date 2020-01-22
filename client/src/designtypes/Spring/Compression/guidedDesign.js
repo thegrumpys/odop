@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, fixSymbolValue, search } from '../../../store/actionCreators';
+import { fixSymbolValue, search } from '../../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -153,6 +153,8 @@ export const execute = {
                     This is a good time to take a close look at existing values.
                     You may need to scroll down to see everything.
                     The Report tabs (upper right) offer additional information in a spring design specific format.
+                    If you do look at the Report tabs,
+                    it is usually best to switch back to the main "Design" tab before continuing.
                     </p>
                     
                     <p>
@@ -223,7 +225,7 @@ export const execute = {
                     
                     <p>
                     Even a small change in wire diameter has likely caused constraints to be violated.
-                    This situation can be resolved by repeating <b>Search</b> and <b>Seek</b> 
+                    This situation can be resolved by repeating <b>Search</b> and <b>Seek</b>&nbsp;
                     with the new (now FIXed) standard wire diameter.
                     </p>
                     
@@ -247,11 +249,14 @@ export const execute = {
                     </p>
                     
                     <p>
-                    
+                    This time use the <b>Select Size</b> menu to select the nearest <b>smaller</b> standard wire size.
+                    As before run <b>Search</b> and <b>Seek</b> to resolve any constrain violations that have crept in
+                    with the new (now FIXed) standard wire diameter.
                     </p>
                     
                     <p>
-                    
+                    If the result appears reasonable,
+                    save it with a name like "ProjectX_Candidate2".
                     </p>
                 </React.Fragment>
             )
@@ -261,23 +266,24 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Now, the FIX checkboxes for Wire_Dia and Force_2 are checked.
+                    At this point it is appropriate to do a careful comparison of the two candidates.
+                    If you are working with a wide-screen monitor,
+                    it should be possible to set up a side-by-side comparison.
+                    There is an On-line Help entry that describes how this can be done for the Help content. 
+                    You can follow the same browser window configuration to work with two
+                    ODOP design sessions at the same time.
+                    See:  
+                    <br /><br />
+                    <b>Note to self:</b> Tutorial does not like Anchor tags.  Figure out how to create a link in a tutorial session !
+                    <br /><br />
+                    A href="https://thegrumpys.github.io/odop/Help/wideScreen" Utilizing Help with a widescreen monitor /A
                     </p>
                     
                     <p>
-                    By having Wire_Dia and Force_2 in FIXed status, the search will be able to adjust
-                    only the values of OD_Free, Wire_Dia, L_Free and Coils_T to find a design that does not 
-                    exceed the 98 per cent maximum on %_Avail_Deflect.
-                    Of course, the entire collection of Dependent Variables will respond 
-                    to any changes in the Independent Variables.
                     </p>
                     <br /><br />
                 </React.Fragment>
-            ),
-            actions: [
-                fixSymbolValue('Wire_Dia'),
-                fixSymbolValue('Force_2')
-            ]
+            )
         },
         {
             title: "Page 12 of 16",
