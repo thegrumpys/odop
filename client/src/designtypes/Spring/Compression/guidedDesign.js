@@ -1,5 +1,5 @@
 import React from 'react';
-import { fixSymbolValue, search } from '../../../store/actionCreators';
+import { Link } from 'react-router-dom';
 export const execute = {
     steps: [
         {
@@ -20,7 +20,9 @@ export const execute = {
                     does not actually execute any design changes. 
                     The intent is that you will supply the numbers and menu selections;
                     this tutorial will supply step-by-step instructions and explanations to
-                    guide you through the design process
+                    guide you through the design process.
+                    It would be best if you have had the opportunity to view some of the other, 
+                    more introductory, tutorial and demo sessions before working through this one.
                     </p>
                     
                     <p>
@@ -85,7 +87,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    For now, leave wire diameter (Wire_Dia) free.  
+                    For the moment, leave wire diameter (Wire_Dia) free.  
                     This will allow the search process to manipulate wire diameter as necessary to achieve those goals.
                     Selecting an available wire size happens later in the session.
                     </p>
@@ -102,8 +104,8 @@ export const execute = {
                     
                     <p>
                     Use the "Next" button to proceed after your inputs are complete.
-                    Note that it will be possible to use the "Back" button to return to the beginning of any step  
-                    if any corrections or additional inputs are desired later.
+                    Note that it will be possible to use the "Back" button to return the design to the beginning 
+                    of any step if any corrections or additional inputs are desired later.
                     </p>
                 </React.Fragment>
             )
@@ -151,17 +153,15 @@ export const execute = {
                     
                     <p>
                     This is a good time to take a close look at existing values.
-                    You may need to scroll down to see everything.
+                    You will likely need to scroll down to see everything.
                     The Report tabs (upper right) offer additional information in a spring design specific format.
-                    If you do look at the Report tabs,
-                    it is usually best to switch back to the main "Design" tab before continuing.
+                    If you do look at the Report tabs, you may want to 
+                    switch back to the main "Design" tab before using the "Next" button to proceed.
                     </p>
                     
                     <p>
-                    Use the "Next" button to proceed.
-                    </p>
                     
-                    <br />
+                    </p>
                 </React.Fragment>
             )
         },
@@ -170,19 +170,19 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Invoke the <b>Seek</b> feature now.  Use the <b>Action : Seek...</b> menu above.
+                    While the <b>Seek</b> feature can find the constrained extreme of any independent or dependent variable 
+                    that is not in FIXed status, for compression springs, the most likely candidates are: 
+                    min Weight, max Cycle_Life, min Rate, min OD_Free, min L_Solid (solid height) or max Stroke.
                     </p>
                     
                     <p>
-                    While it is possible to seek the constrained extreme of any independent or dependent variable 
-                    that is not in FIXed status, for compression springs, the most likely candidates are: 
-                    min Weight, max Cycle_Life, min Rate, min OD_Free or min L_Solid (solid height).
+                    Invoke <b>Seek</b> now.  Use the <b>Action : Seek...</b> menu above.
                     </p>
                     
                     <p>
                     When examining the results of <b>Seek</b>, you may notice that multiple constraints are
                     violated by a small amount.  
-                    The design will be classified as "MARGINALLY FEASIBLE" or even "NOT FEASIBLE".
+                    The design likely will be classified as "MARGINALLY FEASIBLE" or even "NOT FEASIBLE".
                     This is normal.
                     The solution algorithm is finding a balance between the rewards and penalties of 
                     violating those constraints
@@ -197,14 +197,19 @@ export const execute = {
                     <p>
                     Take a moment to review the results. 
                     Is this a reasonable design that meets the original objectives ? 
-                    If not, try adjusting constraint levels and repeating the <b>Search</b> and <b>Seek</b>.
+                    If not, try adjusting constraint levels and repeating <b>Search</b> and <b>Seek</b>.
                     </p>
                     
                     <p>
                     Next, we will get into selecting a standard wire size. 
                     But first, if this design seems like a good starting point, 
                     you should save it with a name like "ProjectX_Baseline".
-                    Saving this design will keep it available as a point of reference in a few more steps.
+                    Saving this design will keep it available for re-use in a few more steps.
+                    </p>
+                    
+                    <p>
+                    Before saving a design, it is a good practice to update the Comment field with notes
+                    for future reference.  Use the <b>File : Properties ...</b> menu.
                     </p>
                     
                     <p>
@@ -220,7 +225,7 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     Use the <b>Select Size</b> menu to select the nearest larger standard wire size.
-                    Note that this leaves Wire_Dia in FIXed status.
+                    Note that this operation leaves Wire_Dia in FIXed status.
                     </p>
                     
                     <p>
@@ -250,13 +255,13 @@ export const execute = {
                     
                     <p>
                     This time use the <b>Select Size</b> menu to select the nearest <b>smaller</b> standard wire size.
-                    As before run <b>Search</b> and <b>Seek</b> to resolve any constrain violations that have crept in
+                    As before, use <b>Search</b> and <b>Seek</b> to resolve any constraint violations that have crept in
                     with the new (now FIXed) standard wire diameter.
                     </p>
                     
                     <p>
                     If the result appears reasonable,
-                    save it with a name like "ProjectX_Candidate2".
+                    update the Comment and save it with a name like "ProjectX_Candidate2".
                     </p>
                 </React.Fragment>
             )
@@ -266,17 +271,55 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    At this point it is appropriate to do a careful comparison of the two candidates.
+                    At this point it is appropriate to do a careful comparison of the candidate designs.
                     If you are working with a wide-screen monitor,
                     it should be possible to set up a side-by-side comparison.
-                    There is an On-line Help entry that describes how this can be done for the Help content. 
+                    There is an On-line Help entry that describes how this can be done for Help content. 
                     You can follow the same browser window configuration to work with two
                     ODOP design sessions at the same time.
-                    See:  
+                    For additional details see:  
                     <br /><br />
-                    <b>Note to self:</b> Tutorial does not like Anchor tags.  Figure out how to create a link in a tutorial session !
+                    <b>Note to developers:</b> The link below fails in the local dev environment because it
+                    appends the link path to the local path in the browser address line.
                     <br /><br />
-                    A href="https://thegrumpys.github.io/odop/Help/wideScreen" Utilizing Help with a widescreen monitor /A
+                    <Link to="https://thegrumpys.github.io/odop/Help/wideScreen" > Side-by-side sessions on a widescreen monitor </Link>
+                    </p>
+                    
+                    <p>
+                    Aside from using a wide-screen monitor, 
+                    it is also possible to use your browser's print function to print each of the candidate designs
+                    and lay the printed pages side-by-side on a physical desktop.
+                    </p>
+                    
+                    <p>
+                    When ready, use the "Next" button to proceed.
+                    </p>
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 12 of 16",
+            text: (
+                <React.Fragment>
+                    <p>
+                    The preferred candidate design can be the basis for manufacturing a custom spring.
+                    
+                    </p>
+
+                    <p>
+                    </p>
+                </React.Fragment>
+            ),
+        },
+        {
+            title: "Page 13 of 16",
+            text: (
+                <React.Fragment>
+                    <p>
+                    
+                    </p>
+                    
+                    <p>
                     </p>
                     
                     <p>
@@ -286,77 +329,26 @@ export const execute = {
             )
         },
         {
-            title: "Page 12 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    Now that we have expressed what we want the design to accomplish,
-                    we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
-                    Specifically, Search will find values of the free Independent Variables
-                    that cause the Constraints and FIXes to be satisfied.
-                    </p>
-
-                    <p>
-                    If the program can find a solution that satisfies all the constraints,
-                    it will display "<b>FEASIBLE</b>" in the Result section (immediately below these words).  
-                    If a satisfactory solution is found, but one or more constraints remain violated by a
-                    trivial amount, the program will display "<b>MARGINALLY FEASIBLE</b>" in the Result section.
-                    </p>
-                </React.Fragment>
-            ),
-        },
-        {
-            title: "Page 13 of 16",
-            text: (
-                <React.Fragment>
-                    <p>We have a solution. Please take a moment to scroll through and view the values.</p>
-                    
-                    <p>
-                    Indeed, the design now utilizes less than 98 percent of its available deflection.
-                    Also, Wire_Dia has remained at 0.110 inches 
-                    and Force_2 at 40 pounds as specified. 
-                    </p>
-                    
-                    <p>
-                    Finally, to wrap up this session,
-                    the next page will demonstrate how it is possible to specify
-                    the value of L_Stroke, a Dependent Variable.
-                    We will choose 1.725 inches, a value very close to what was in place
-                    prior to making the changes up to this point in this tutorial session.
-                    </p>
-                    <br /><br />
-                </React.Fragment>
-            ),
-            actions: [
-                search()
-            ]
-        },
-        {
             title: "Page 14 of 16",
             text: (
                 <React.Fragment>
                     <p>
-                    The tutorial has imposed: FIX L_Stroke 1.725
+                    
                     </p>
                     
                     <p>
-                    The FIX is implemented as a weighted double-sided constraint.
+                    
                     </p>
                     
                     <p>
-                    Again, a Search will be required to establish values for the free Independent Variables
-                    such that the FIXed value of L_Stroke is established while simultaneously keeping %_Avail_Deflect 
-                    below the 98 percent maximum.
+                    
                     </p>
                     
                     <p>
-                    Look for the results on the next page.
+                    
                     </p>
                 </React.Fragment>
-            ),
-            actions: [
-                fixSymbolValue('L_Stroke', 1.725)
-            ]
+            )
         },
         {
             title: "Page 15 of 16",
@@ -399,10 +391,7 @@ export const execute = {
                         </li>
                     </ul>
                 </React.Fragment>
-            ),
-            actions: [
-                search()
-            ]
+            )
         },
         {
             title: "Page 16 of 16 (last page)",
@@ -423,15 +412,12 @@ export const execute = {
                     </p>
                     
                     <p>
-                    More compression spring tutorial sessions are available. 
-                    They have names like tutorTour, tutor3, tutor4, ... etc. 
-                    Refer to the on-line documentation section (Help entry) covering the 
-                    tutorial for a list of the Tutorial and Demo topics.
+                    
                     </p>
                     
-                    <p>If you do not wish to continue with more demonstration problems, 
-                    you can experiment with the various ODOP features, menus and reports. 
-                    The HELP menu is a good place to start. </p>
+                    <p>
+                    
+                    </p>
                 </React.Fragment>
             )
         }
