@@ -41,7 +41,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 16",
+            title: "Page 02 of 13",
             text: (
                 <React.Fragment>
                     <p>
@@ -69,7 +69,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 03 of 16",
+            title: "Page 03 of 13",
             text: (
                 <React.Fragment>
                 <img src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram.png" alt="Spring Design Workflow Diagram"/>
@@ -77,7 +77,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 04 of 16",
+            title: "Page 04 of 13",
             text: (
                 <React.Fragment>
                     <p>
@@ -104,14 +104,16 @@ export const execute = {
                     
                     <p>
                     Use the "Next" button to proceed after your inputs are complete.
-                    Note that it will be possible to use the "Back" button to return the design to the beginning 
-                    of any step if any corrections or additional inputs are desired later.
+                    Note that it will be possible to use the tutorial "Back" button to return the active design 
+                    to the beginning of any step if any corrections or additional inputs are desired later.
+                    Separately, frequent use of the <b>File : Save As...</b> feature will allow you to go back to 
+                    a previous point in the design process with relatively little effort.
                     </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 05 of 16",
+            title: "Page 05 of 13",
             text: (
                 <React.Fragment>
                     <p>
@@ -134,7 +136,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 06 of 16",
+            title: "Page 06 of 13",
             text: (
                 <React.Fragment>
                     <p>
@@ -166,7 +168,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 07 of 16",
+            title: "Page 07 of 13",
             text: (
                 <React.Fragment>
                     <p>
@@ -191,7 +193,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 08 of 16",
+            title: "Page 08 of 13",
             text: (
                 <React.Fragment>
                     <p>
@@ -209,22 +211,22 @@ export const execute = {
                     
                     <p>
                     Before saving a design, it is a good practice to update the Comment field with notes
-                    for future reference.  Use the <b>File : Properties ...</b> menu.
+                    for future reference.  Use the <b>File : Properties...</b> menu.
                     </p>
                     
                     <p>
-                    Use the <b>File : SaveAs</b> menu.
+                    Use the <b>File : Save As...</b> menu.
                     Then, use the "Next" button to continue.
                     </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 09 of 16",
+            title: "Page 09 of 13",
             text: (
                 <React.Fragment>
                     <p>
-                    Use the <b>Select Size</b> menu to select the nearest larger standard wire size.
+                    Use the <b>Action : Select Size...</b> menu to select the nearest larger standard wire size.
                     Note that this operation leaves Wire_Dia in FIXed status.
                     </p>
                     
@@ -236,7 +238,7 @@ export const execute = {
                     
                     <p>
                     If the result appears reasonable,
-                    save it with a name like "ProjectX_Candidate1".
+                    update the Comment and save the design with a name like "ProjectX_Candidate1".
                     <br />
                     
                     </p>
@@ -244,19 +246,29 @@ export const execute = {
             )
         },
         {
-            title: "Page 10 of 16",
+            title: "Page 10 of 13",
             text: (
                 <React.Fragment>
                     <p>
                     Now, just to be sure that we are not missing out on some interesting design possibility,
                     restore that "baseline" design.
-                    Use the <b>File : Open</b> menu.
+                    Use the <b>File : Open...</b> menu.
                     </p>
                     
                     <p>
-                    This time use the <b>Select Size</b> menu to select the nearest <b>smaller</b> standard wire size.
-                    As before, use <b>Search</b> and <b>Seek</b> to resolve any constraint violations that have crept in
+                    This time use the <b>Action : Select Size...</b> menu to select the nearest <b>smaller</b> standard wire size.
+                    As before, use <b>Search</b> to resolve any constraint violations that have crept in
                     with the new (now FIXed) standard wire diameter.
+                    If a feasible or marginally feasible design is available, 
+                    use <b>Seek</b> to optimize it on the previously used (max or min) criteria.
+                    </p>
+                    
+                    <p>
+                    If using a smaller standard wire size does not permit any feasible or marginally feasible solutions,
+                    go back and have a look at what might be possible with an even larger standard wire diameter.
+                    Again, use <b>Search</b> to resolve any constraint violations that have crept in
+                    with the new (now FIXed) standard wire diameter.
+                    Use <b>Seek</b> to optimize it on the previously used (max or min) criteria.
                     </p>
                     
                     <p>
@@ -267,7 +279,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 11 of 16",
+            title: "Page 11 of 13",
             text: (
                 <React.Fragment>
                     <p>
@@ -298,126 +310,53 @@ export const execute = {
             )
         },
         {
-            title: "Page 12 of 16",
+            title: "Page 12 of 13",
             text: (
                 <React.Fragment>
                     <p>
-                    The preferred candidate design can be the basis for manufacturing a custom spring.
-                    
+                    Your preferred candidate design can be the basis for manufacturing a custom spring.
                     </p>
 
                     <p>
+                    Our last step is to determine if there is an available catalog spring that meets 
+                    the original design specifications. 
+                    ODOP:Spring comes equipped with multiple spring catalogs, including:
+                    <br /><br /> 
+                    MS24585 Spring, Helical, Compression: For Loads Below 20 Pounds (SAE-AS24585)
+                    <br />
+                    MS24586 Spring, Helical, Extension:   For Loads Below 20 Pounds (SAE-AS24586)
+                    <br /><br />
+                    If necessary, use the <b>File : Open...</b> menu to re-open the preferred candidate design.
+                    Use the <b>Action : Select Catalog...</b> menu to review the four most similar designs in the catalog. 
+                    The display of catalog entries will be ranked by objective function value (amount of constraint violation).
+                    Selecting a design from the catalog will replace the current design so that you can evaluate it.
+                    More detail about standard design catalogs is available in the On-line Help. 
                     </p>
                 </React.Fragment>
             ),
         },
         {
-            title: "Page 13 of 16",
+            title: "Page 13 of 13",
             text: (
                 <React.Fragment>
                     <p>
-                    
+                    If there is something in the catalog that looks workable, 
+                    the side-by-side browser configuration can be used to compare the details of the custom spring 
+                    to the best of the catalog springs.
                     </p>
                     
                     <p>
+                    As noted previously, it is possible to use the tutorial "Back" button to return the 
+                    active design to the beginning of any step if any corrections or additional inputs are desired.
+                    You may also open a previously saved design to resume from that point.
                     </p>
                     
                     <p>
+                    This concludes this Guided Design section of the tutorial.
+                    Your feedback is welcome.
+                    Use the Contact Us page of the website to find the appropriate contact information.
                     </p>
                     <br /><br />
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 14 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    
-                    </p>
-                    
-                    <p>
-                    
-                    </p>
-                    
-                    <p>
-                    
-                    </p>
-                    
-                    <p>
-                    
-                    </p>
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 15 of 16",
-            text: (
-                <React.Fragment>
-                    <p>
-                    We have a solution. Please take a moment to scroll through and view the values.
-                    </p>
-                    
-                    <p>
-                    This session has touched on a few of the most basic concepts of ODOP operation.
-                    </p>
-                    
-                    <ul>
-                        <li>
-                        It is possible to set the value of any Independent Variable
-                            <ul>
-                                <li>
-                                    Dependent Variables will immediately recalculate to reflect that value.
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        <li>
-                        If constraints are violated, a Search can manipulate values of free
-                        Independent Variables in order to achieve a feasible solution
-                        (if one exists).
-                        </li>
-                        
-                        <li>
-                        It is possible to FIX the value of any Variable.
-                            <ul>
-                                <li>
-                                    FIXed Independent Variables are not altered by the Search process.
-                                </li>
-                                <li>
-                                    FIXed Dependent Variables require a Search to establish their value.
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 16 of 16 (last page)",
-            text: (
-                <React.Fragment>
-                    <p>
-                    Remember that it is always possible to restart a given session of
-                    the ODOP demo / tutorial. 
-                    If at any point you become curious about 
-                    "Why does the tutorial do it that way ?",
-                    you can finish that tutorial section normally, 
-                    then return to the point in question later. 
-                    Alternatively, it is possible to make a sequence of changes in mid-tutorial 
-                    to explore your ideas and then use the "Back" button to get back on
-                    track with the tutorial.
-                    You are encouraged to experiment with the program. 
-                    You are not likely to break it or wear it out !
-                    </p>
-                    
-                    <p>
-                    
-                    </p>
-                    
-                    <p>
-                    
-                    </p>
                 </React.Fragment>
             )
         }
