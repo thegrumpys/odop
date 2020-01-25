@@ -10,11 +10,11 @@ Currently available apps include:
 <br />
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Solid/favicon.ico"> 
-<b>Rectangular Solid</b> - a familiar to everyone demonstration case   
+<b>[Rectangular Solid](https://thegrumpys.github.io/odop/Help/DesignTypes/r_solid)</b> - a familiar to everyone demonstration case   
 <br />
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Piston-Cylinder/favicon.ico"> 
-<b>Piston-Cylinder design</b> - A simple demonstration case   
+<b>[Piston-Cylinder design](https://thegrumpys.github.io/odop/Help/DesignTypes/pcyl)</b> - A simple demonstration case   
 
 &nbsp;
 
