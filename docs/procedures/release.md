@@ -24,6 +24,7 @@ Restart server then client under your development environment.
 Bring up on Windows and Mac OS X under Google Chrome and verify Help About Software Version is X.Y.Z.
 
 B. DO first for STAGING and then do again for PRODUCTION ENVIRONMENTS
+1. If not logged into Heroku, go to the Heroku Website and login in.
 1. For handling dynamic runtime configuration variables in Heroku only
 update Heroku Configuration Variables with JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for staging (heroku-staging), or production (heroku). 
 NO entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost).
@@ -42,7 +43,8 @@ Update Server's .env with JAWSDB\_URL for development (localhost).
 Note: See Heroku Dashboard Resources tab for Production JAWS DB has no color; staging is AMBER, test is TEAL, and local/development is CYAN. 
 Do a pull or push to get latest version on all systems.
 1. Update Heroku Buildpack for staging (heroku-staging), or production (heroku).
-1. In git/odop push to Heroku (command: git push heroku-staging master or git push heroku master). 
+1. If not logged into Heroku, login in using the command line "heroku login" which in turns brings up the Heroku Website login page in your browser.
+1. In your git/odop directory push to Heroku using the command line: git push heroku-staging master or git push heroku master. 
 Verify no error messages during build on heroku.
 1. Confirm that the http://odop-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version X.Y.Z displays.
 
