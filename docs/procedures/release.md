@@ -1,6 +1,6 @@
 # Release Process:
 
-DEVELOPMENT ENVIRONMENT
+A. DEVELOPMENT ENVIRONMENT
 1. Verify Github Milestone issues are completed.
 1. Ask "Have we done everything on our milestone list?", "Is there anything else we need to do?", and "Are we ready for release?"
 1. Make sure your development environment is on branch master.
@@ -23,7 +23,7 @@ Restart server then client under your development environment.
 1. Bring up on Windows under Microsoft Edge and verify Help About Software Version is X.Y.Z. 
 Bring up on Windows and Mac OS X under Google Chrome and verify Help About Software Version is X.Y.Z.
 
-DO first for STAGING and then do again for PRODUCTION ENVIRONMENTS
+B. DO first for STAGING and then do again for PRODUCTION ENVIRONMENTS
 1. For handling dynamic runtime configuration variables in Heroku only
 update Heroku Configuration Variables with JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for staging (heroku-staging), or production (heroku). 
 NO entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost).
@@ -46,13 +46,13 @@ Do a pull or push to get latest version on all systems.
 Verify no error messages during build on heroku.
 1. Confirm that the http://odop-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version X.Y.Z displays.
 
-DEVELOPMENT ENVIRONMENT
+C. DEVELOPMENT ENVIRONMENT
 1. Create X.Y.Z tag (for example, 0.4). 
 Commit "Release X.Y.Z" and push to origin.
 1. In Eclipse do a pull, Team > Show in History and verify tag is X.Y.Z (for example, 0.4).
 1. In Github mark Milestone X.Y.Z closed.
 
-FUTURES
+D. FUTURES
 1. Discuss the next release, what work needs to be done and who does it. 
 In other words, set the direction for the upcoming milestone. 
 
