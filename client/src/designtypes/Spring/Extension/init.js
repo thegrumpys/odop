@@ -2,8 +2,8 @@ import * as o from './offsets';
 import * as mo from '../mat_ips_offsets';
 import * as eto from './endtypes_offsets';
 
-export function init(p, x) {
-//    console.log('In init p=',p);
+export function init(store, p, x) {
+//    console.log('In init store=',st,'p=',p,'x=',x);
  var i, j;
  const ten3 = 1000.0;
  const e_end_num = 5;

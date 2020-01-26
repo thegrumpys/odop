@@ -109,8 +109,8 @@ function convertToResultArray(entry) {
     return result;
 }
 
-export function getCatalogEntries(name, st, viol_wt) {
-//    console.log('Entering getCatalogEntries name=',name,' st=',st,' viol_wt=',viol_wt);
+export function getCatalogEntries(name, store, st, viol_wt) {
+//    console.log('Entering getCatalogEntries name=',name,' store=',store,' st=',st,' viol_wt=',viol_wt);
     var catalog, entry;
     var result = [];
     var p, x, offset;
@@ -199,7 +199,7 @@ export function getCatalogEntries(name, st, viol_wt) {
         st.forEach(pPush);
         x = [];
         st.forEach(xPush);
-        x = init(st, p, x);
+        x = init(store, p, x);
         offset = 0;
         st.forEach(xPull);
 //        console.log('In getCatalogEntries 1 st=',st);
