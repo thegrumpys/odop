@@ -5,11 +5,11 @@ import * as eto from './endtypes_offsets';
 export function init(store, p, x) {
 //    console.log('In init store=',st,'p=',p,'x=',x);
  var i, j;
+ var m_tab;
  const ten3 = 1000.0;
- const e_end_num = 5;
  var tensile_400;
  const unused = "unused";
- var m_tab;
+ const e_end_num = 5;
 
    /*  Bring in material properties table  */
  if (x[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
@@ -19,6 +19,7 @@ export function init(store, p, x) {
 //    console.log("et_tab=", et_tab);
 
      x[o.Spring_Type] = "Extension";
+     store.dispatch(changeSymbolInput("Spring_Type", true));
      if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Tensile_Endur] === unused) x[o.Prop_Calc_Method] = 1;
      j = x[o.End_Type];
  

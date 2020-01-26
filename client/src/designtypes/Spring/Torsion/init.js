@@ -8,7 +8,8 @@ export function init(store, p, x) {
  var m_tab;
  const ten3 = 1000.0;
  var tensile_400;
-
+ const unused = "unused";
+ 
    /*  Bring in material properties table  */
  if (x[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
      else m_tab = require('../mat_ips.json');
@@ -18,7 +19,8 @@ export function init(store, p, x) {
 
  
      x[o.Spring_Type] = "Torsion";
-     if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Ten_Bnd_Endur] === "unused") x[o.Prop_Calc_Method] = 1;
+     store.dispatch(changeSymbolInput("Spring_Type", true));
+     if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Ten_Bnd_Endur] === unused) x[o.Prop_Calc_Method] = 1;
      j = x[o.End_Type];
  
  switch(x[o.Prop_Calc_Method]){
@@ -134,18 +136,18 @@ export function init(store, p, x) {
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
 //     console.log("case 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur");
-     x[o.ASTM_Fed_Spec] = "unused";
-     x[o.Material_File] = "unused";
-     x[o.Process] = "unused";
+     x[o.ASTM_Fed_Spec] = unused;
+     x[o.Material_File] = unused;
+     x[o.Process] = unused;
      break;
 
  case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
 //     console.log("case 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur");
-     x[o.ASTM_Fed_Spec] = "unused";
-     x[o.Material_File] = "unused";
-     x[o.Process] = "unused";
-     x[o.PC_Ten_Bnd_Endur] = "unused";
-     x[o.PC_Ten_Bnd_Stat]  = "unused";
+     x[o.ASTM_Fed_Spec] = unused;
+     x[o.Material_File] = unused;
+     x[o.Process] = unused;
+     x[o.PC_Ten_Bnd_Endur] = unused;
+     x[o.PC_Ten_Bnd_Stat]  = unused;
  }
 //    console.log('Exiting init p=',p,' x=',x);
     return x;
