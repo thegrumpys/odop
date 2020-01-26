@@ -290,11 +290,6 @@ export const execute = {
                     ODOP design sessions at the same time.
                     For additional details see:  
                     <a href="https://thegrumpys.github.io/odop/Help/wideScreen" target="_blank" rel="noopener noreferrer"> Side-by-side sessions on a widescreen monitor </a>
-                    <br /><br />
-                    <b>Note to developers:</b> The link below fails in the local dev environment because it
-                    appends the link path to the local path in the browser address line.
-                    <br /><br />
-                    <Link to="https://thegrumpys.github.io/odop/Help/wideScreen" > Side-by-side sessions on a widescreen monitor </Link>
                     </p>
                     
                     <p>
