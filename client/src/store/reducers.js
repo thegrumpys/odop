@@ -254,7 +254,8 @@ export function reducers(state, action) {
                 if ((!element.input && element.equationset) || (!element.equationset)) {
                     value = action.payload.values[i++]
                     if (value !== undefined) {
-//                        console.log('CHANGE_OUTPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
+//                        if (element.name === "Prop_Calc_Method")
+//                            console.log('CHANGE_OUTPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
                         return Object.assign({}, element, {
                             value: value
                         });

@@ -110,7 +110,7 @@ function convertToResultArray(entry) {
 }
 
 export function getCatalogEntries(name, st, viol_wt) {
-//    console.log('In getCatalogEntries name=',name,' st=',st,' viol_wt=',viol_wt);
+//    console.log('Entering getCatalogEntries name=',name,' st=',st,' viol_wt=',viol_wt);
     var catalog, entry;
     var result = [];
     var p, x, offset;
@@ -199,7 +199,7 @@ export function getCatalogEntries(name, st, viol_wt) {
         st.forEach(pPush);
         x = [];
         st.forEach(xPush);
-        x = init(p, x);
+        x = init(st, p, x);
         offset = 0;
         st.forEach(xPull);
 //        console.log('In getCatalogEntries 1 st=',st);
@@ -240,6 +240,6 @@ export function getCatalogEntries(name, st, viol_wt) {
     if (cat3 !== undefined) {
         result.push(convertToResultArray(cat3));
     }
-//    console.log('In getCatalogEntries result=',result);
+//    console.log('Exiting getCatalogEntries result=',result);
     return result;
 }
