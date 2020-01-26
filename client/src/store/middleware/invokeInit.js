@@ -23,7 +23,7 @@ export function invokeInit(store) {
 
     // Compute outputs x from inputs p using equations
     var { init } = require('../../designtypes/'+design.type+'/init.js'); // Dynamically load init
-    x = init(design.symbol_table, p, x);
+    x = init(store, p, x);
 
     // Compute and dispatch output changes
     store.dispatch(changeOutputSymbolValues(x));

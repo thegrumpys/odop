@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Label, Input, Table } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -29,12 +30,13 @@ class ActionSelectCatalog extends Component {
         var name;
         if (names.length > 0)
             name = names[0]; // Default to first name
+        const { store } = this.context;
         // Loop to create st from symbol_table
         var st = [];
         this.props.symbol_table.forEach((element) => {
             st.push(Object.assign({},element));
         });
-        var entries = getCatalogEntries(name, st, this.props.system_controls.viol_wt);
+        var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt);
         var entry = 0; // Default to first entry
         this.setState({
             names: names,
@@ -51,12 +53,13 @@ class ActionSelectCatalog extends Component {
         var name;
         if (names.length > 0)
             name = names[0]; // Default to first name
+        const { store } = this.context;
         // Loop to create st from symbol_table
         var st = [];
         this.props.symbol_table.forEach((element) => {
             st.push(Object.assign({},element));
         });
-        var entries = getCatalogEntries(name, st, this.props.system_controls.viol_wt);
+        var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt);
         var entry = 0; // Default to first entry
         this.setState({
             modal: !this.state.modal,
@@ -71,12 +74,13 @@ class ActionSelectCatalog extends Component {
 //        console.log('In ActionSelectCatalog.onSelectCatalogName event.target.value=',event.target.value);
         var name = event.target.value;
         var { getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogEntries
+        const { store } = this.context;
         // Loop to create p and x from symbol_table
         var st = [];
         this.props.symbol_table.forEach((element) => {
             st.push(Object.assign({},element));
         });
-        var entries = getCatalogEntries(name, st, this.props.system_controls.viol_wt);
+        var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt);
         var entry = 0; // Default to first entry
         this.setState({
             name: name,
@@ -171,6 +175,10 @@ class ActionSelectCatalog extends Component {
         );
     }
 }  
+
+ActionSelectCatalog.contextTypes = {
+    store: PropTypes.object
+};
 
 const mapStateToProps = state => ({
     type: state.type,
