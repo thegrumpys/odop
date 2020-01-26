@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeSymbolValue } from '../store/actionCreators';
+import { changeSymbolValue, changeSymbolInput } from '../store/actionCreators';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -18,6 +18,7 @@ class NameValueUnitsRowCalcInput extends Component {
     constructor(props) {
 //        console.log('In NameValueUnitsRowCalcInput.constructor');
         super(props);
+        this.initializeInputFlags = this.initializeInputFlags.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -35,11 +36,85 @@ class NameValueUnitsRowCalcInput extends Component {
                 table: table
             };
         }
+        this.initializeInputFlags(this.props.element.name,this.props.element.value);
+    }
+    
+    initializeInputFlags(name,value) {
+//        console.log('In NameValueUnitsRowCalcInput.initializeInputFlags','name=',name,'value=',value);
+        
+        if (this.props.type === "Spring/Compression" && name === "Spring_Type") {
+            this.props.changeSymbolInput("Spring_Type", true);
+        } else if (this.props.type === "Spring/Expansion" && name === "Spring_Type") {
+            this.props.changeSymbolInput("Spring_Type", true);
+        } else if (this.props.type === "Spring/Torsion" && name === "Spring_Type") {
+            this.props.changeSymbolInput("Spring_Type", true);
+        }
+
+        if (this.props.type === "Spring/Compression" && name === "Prop_Calc_Method") {
+            switch(value){
+                default:
+                case 1: // Prop_Calc_Method = 1 - Use values from material table
+                    this.props.changeSymbolInput("ASTM/Fed_Spec", true);
+                    this.props.changeSymbolInput("Process", true);
+                    this.props.changeSymbolInput("Density", true);
+                    this.props.changeSymbolInput("Torsion_Modulus", true);
+                    this.props.changeSymbolInput("Hot_Factor_Kh", true);
+                    this.props.changeSymbolInput("Tensile", true);
+                    this.props.changeSymbolInput("%_Tensile_Stat", true);
+                    this.props.changeSymbolInput("%_Tensile_Endur", true);
+                    this.props.changeSymbolInput("Stress_Lim_Stat", true);
+                    this.props.changeSymbolInput("Stress_Lim_Endur", true);
+                    break;
+                case 2: // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
+                    this.props.changeSymbolInput("ASTM/Fed_Spec", true);
+                    this.props.changeSymbolInput("Process", true);
+                    this.props.changeSymbolInput("Density", false);
+                    this.props.changeSymbolInput("Torsion_Modulus", false);
+                    this.props.changeSymbolInput("Hot_Factor_Kh", false);
+                    this.props.changeSymbolInput("Tensile", false);
+                    this.props.changeSymbolInput("%_Tensile_Endur", false);
+                    this.props.changeSymbolInput("%_Tensile_Stat", false);
+                    this.props.changeSymbolInput("Stress_Lim_Stat", true);
+                    this.props.changeSymbolInput("Stress_Lim_Endur", true);
+                    break;
+                case 3: // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
+                    this.props.changeSymbolInput("ASTM/Fed_Spec", true);
+                    this.props.changeSymbolInput("Process", true);
+                    this.props.changeSymbolInput("Density", false);
+                    this.props.changeSymbolInput("Torsion_Modulus", false);
+                    this.props.changeSymbolInput("Hot_Factor_Kh", false);
+                    this.props.changeSymbolInput("Tensile", false);
+                    this.props.changeSymbolInput("%_Tensile_Endur", true);
+                    this.props.changeSymbolInput("%_Tensile_Stat", true);
+                    this.props.changeSymbolInput("Stress_Lim_Stat", false);
+                    this.props.changeSymbolInput("Stress_Lim_Endur", false);
+                    break;
+            }
+        } else if (this.props.type === "Spring/Extension" && name === "Prop_Calc_Method") {
+            console.log("TBD");
+        } else if (this.props.type === "Spring/Torsion" && name === "Prop_Calc_Method") {
+            console.log("TBD");
+        }
+
+        if (this.props.type === "Spring/Compression" && name === "End_Type") {
+            if (value === 7) {
+                this.props.changeSymbolInput("Inactive_Coils", false);
+                this.props.changeSymbolInput("Add_Coils@Solid", false);
+            } else {
+                this.props.changeSymbolInput("Inactive_Coils", true);
+                this.props.changeSymbolInput("Add_Coils@Solid", true);
+            }
+        } else if (this.props.type === "Spring/Expansion" && name === "End_Type") {
+            console.log("TBD");
+        } else if (this.props.type === "Spring/Torsion" && name === "End_Type") {
+            console.log("TBD");
+        }
     }
     
     onChange(event) {
 //        console.log('In NameValueUnitsRowCalcInput.onChange event.target.value=',event.target.value);
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
+        this.initializeInputFlags(this.props.element.name, parseFloat(event.target.value));
     }
     
     onFocus(event) {
@@ -60,12 +135,14 @@ class NameValueUnitsRowCalcInput extends Component {
 //        console.log('In NameValueUnitsRowCalcInput.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex);
+        this.initializeInputFlags(this.props.element.name,selectedIndex);
         this.state.table[selectedIndex].forEach((value, index) => {
             if (index > 0) { // Skip the first column
                 var name = this.state.table[0][index];
 //                console.log('In NameValueUnitsRowCalcInput.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',this.props.symbol_table.find(element => element.name === name));
                 if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
                     this.props.changeSymbolValue(name,value);
+                    this.initializeInputFlags(name,value);
                 }
             }
         });
@@ -114,7 +191,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    changeSymbolValue: changeSymbolValue
+        changeSymbolValue: changeSymbolValue,
+        changeSymbolInput: changeSymbolInput
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NameValueUnitsRowCalcInput);

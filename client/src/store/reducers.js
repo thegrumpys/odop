@@ -12,6 +12,7 @@ import { STARTUP,
     RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, 
     SET_SYMBOL_FLAG, 
     RESET_SYMBOL_FLAG, 
+    CHANGE_SYMBOL_INPUT, 
     
     CHANGE_INPUT_SYMBOL_VALUES, 
     SAVE_INPUT_SYMBOL_VALUES, 
@@ -193,6 +194,18 @@ export function reducers(state, action) {
                             lmax: element.lmax & ~action.payload.mask
                         });
                     }
+                }
+                return element;
+            })
+        });
+    case CHANGE_SYMBOL_INPUT:
+        return Object.assign({}, state, {
+            symbol_table: state.symbol_table.map((element) => {
+                if (element.name === action.payload.name) {
+//                    console.log('CHANGE_SYMBOL_INPUT element=',element.name,' old value=',element.input,' new value=',action.payload.value);
+                    return Object.assign({}, element, {
+                        input: action.payload.value
+                    });
                 }
                 return element;
             })

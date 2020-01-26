@@ -9,19 +9,6 @@ export function init(st, p, x) {
  const ten3 = 1000.0;
  var tensile_400;
  
- function changeSymbolInput(name,value) {
-     st.find(element => {
-         if (element.name === name) {
-             console.log('In init element=',element.name,' old value=',element.input,' new value=',value);
-             element.input = value;
-             return true;
-         } else {
-             return false;
-         }
-     });
- }
-
-
    /*  Bring in material properties table  */
  if (x[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
     else m_tab = require('../mat_ips.json');
@@ -31,7 +18,6 @@ export function init(st, p, x) {
 
  
      x[o.Spring_Type] = "Compression";
-     changeSymbolInput("Spring_Type", true);
      if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Tensile_Endur] === "unused") x[o.Prop_Calc_Method] = 1;
      j = x[o.End_Type];
  
@@ -145,23 +131,6 @@ export function init(st, p, x) {
 //  hook_deflect_all=hda_tbl(end_type_index-c_end_num);
 //else
 //  hook_deflect_all=0.0;
-    changeSymbolInput("ASTM/Fed_Spec", true);
-    changeSymbolInput("Process", true);
-    if (et_tab[j][eto.end_type] === "User_Specified") {
-        changeSymbolInput("Inactive_Coils", false);
-        changeSymbolInput("Add_Coils@Solid", false);
-    } else {
-        changeSymbolInput("Inactive_Coils", true);
-        changeSymbolInput("Add_Coils@Solid", true);
-    }
-    changeSymbolInput("Density", true);
-    changeSymbolInput("Torsion_Modulus", true);
-    changeSymbolInput("Hot_Factor_Kh", true);
-    changeSymbolInput("Tensile", true);
-    changeSymbolInput("%_Tensile_Stat", true);
-    changeSymbolInput("%_Tensile_Endur", true);
-    changeSymbolInput("Stress_Lim_Stat", true);
-    changeSymbolInput("Stress_Lim_Endur", true);
     break;
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
@@ -169,23 +138,6 @@ export function init(st, p, x) {
      x[o.ASTM_Fed_Spec] = "unused";
      x[o.Material_File] = "unused";
      x[o.Process] = "unused";
-     changeSymbolInput("ASTM/Fed_Spec", true);
-     changeSymbolInput("Process", true);
-     if (et_tab[j][eto.end_type] === "User_Specified") {
-         changeSymbolInput("Inactive_Coils", false);
-         changeSymbolInput("Add_Coils@Solid", false);
-     } else {
-         changeSymbolInput("Inactive_Coils", true);
-         changeSymbolInput("Add_Coils@Solid", true);
-     }
-     changeSymbolInput("Density", false);
-     changeSymbolInput("Torsion_Modulus", false);
-     changeSymbolInput("Hot_Factor_Kh", false);
-     changeSymbolInput("Tensile", false);
-     changeSymbolInput("%_Tensile_Endur", false);
-     changeSymbolInput("%_Tensile_Stat", false);
-     changeSymbolInput("Stress_Lim_Stat", true);
-     changeSymbolInput("Stress_Lim_Endur", true);
      break;
 
  case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
@@ -195,23 +147,7 @@ export function init(st, p, x) {
      x[o.Process] = "unused";
      x[o.PC_Tensile_Endur] = "unused";
      x[o.PC_Tensile_Stat]  = "unused";
-     changeSymbolInput("ASTM/Fed_Spec", true);
-     changeSymbolInput("Process", true);
-     if (et_tab[j][eto.end_type] === "User_Specified") {
-         changeSymbolInput("Inactive_Coils", false);
-         changeSymbolInput("Add_Coils@Solid", false);
-     } else {
-         changeSymbolInput("Inactive_Coils", true);
-         changeSymbolInput("Add_Coils@Solid", true);
-     }
-     changeSymbolInput("Density", false);
-     changeSymbolInput("Torsion_Modulus", false);
-     changeSymbolInput("Hot_Factor_Kh", false);
-     changeSymbolInput("Tensile", false);
-     changeSymbolInput("%_Tensile_Endur", true);
-     changeSymbolInput("%_Tensile_Stat", true);
-     changeSymbolInput("Stress_Lim_Stat", false);
-     changeSymbolInput("Stress_Lim_Endur", false);
+     break;
  }
 //    console.log('In init p=',p,' x=',x);
     return x;
