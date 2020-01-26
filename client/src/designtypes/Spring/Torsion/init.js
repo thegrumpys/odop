@@ -19,6 +19,7 @@ export function init(p, x) {
  
      x[o.Spring_Type] = "Torsion";
      if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Ten_Bnd_Endur] === "unused") x[o.Prop_Calc_Method] = 1;
+     j = x[o.End_Type];
  
  switch(x[o.Prop_Calc_Method]){
  default:
@@ -30,7 +31,6 @@ export function init(p, x) {
 //    x[o.Material_Index] = i;
 //    console.log("Material_Index = x[o.Material_Type] =", x[o.Material_Type]);
 //    console.log("Material_Index = x[o.Material_Index] =", x[o.Material_Index]);
-    j = x[o.End_Type];
 
      /*  taken from READMAT.PLI
       *  Initial manipulations of material array

@@ -10,10 +10,13 @@ export function init(st, p, x) {
  var tensile_400;
  
  function changeSymbolInput(name,value) {
-     st.find((element) => {
+     st.find(element => {
          if (element.name === name) {
              console.log('In init element=',element.name,' old value=',element.input,' new value=',value);
              element.input = value;
+             return true;
+         } else {
+             return false;
          }
      });
  }
