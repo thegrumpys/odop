@@ -23,6 +23,7 @@ export function getDemoNames() {
 export function getTutorialNames() {
     var result = [
         'tutorTour',
+        'guidedDesign',
         'tutor',
         'tutor3',
         'tutor4',
