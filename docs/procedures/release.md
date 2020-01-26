@@ -16,19 +16,19 @@ Commit these changes.
 1. Shutdown server and client under your development environment. 
 In server, run "npm test" and verify test cases executed successfully. 
 Then in client, run "npm test" and verify test cases executed successfully.
-* Update client/src/version.js file to X.Y.Z (for example, 0.4). 
+1. Update client/src/version.js file to X.Y.Z (for example, 0.4). 
 Commit with message "Update version.js to X.Y.Z" and push to origin. 
 Do a pull to get latest version on all systems. 
 Restart server then client under your development environment.
-* Bring up on Windows under Microsoft Edge and verify Help About Software Version is X.Y.Z. 
+1. Bring up on Windows under Microsoft Edge and verify Help About Software Version is X.Y.Z. 
 Bring up on Windows and Mac OS X under Google Chrome and verify Help About Software Version is X.Y.Z.
 
 DO first for STAGING and then do again for PRODUCTION ENVIRONMENTS
 1. For handling dynamic runtime configuration variables in Heroku only
-update Heroku Configuration Variables with JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for production (heroku), or staging (heroku-staging). 
+update Heroku Configuration Variables with JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for staging (heroku-staging), or production (heroku). 
 NO entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost).
 Do a pull or push to get latest version on all systems.
-1. Update Heroku Configuration Variables with Okta REACT\_APP\_ISSUER and REACT\_APP\_CLIENT\_ID for production (heroku), or staging (heroku-staging). 
+1. Update Heroku Configuration Variables with Okta REACT\_APP\_ISSUER and REACT\_APP\_CLIENT\_ID for staging (heroku-staging), or production (heroku). 
 Update Server's .env and Client's .env with Okta REACT\_APP\_ISSUER and REACT\_APP\_CLIENT\_ID for development (localhost).
 Do a pull or push to get latest version on all systems.
 1. If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) 
@@ -37,11 +37,11 @@ Do this to development, test, staging and/or production databases as appropriate
 1. If the database already exists, but no entries exist or must be recreated, then either run the configured ./scripts/load_all.sh script or 
 manually run all affected load.sql files to create startup files for each design type in the database. 
 Delete any old, invalid or development-only designs if necessary.
-1. Update Heroku Configuration Variables with JAWSDB\_URL for production (heroku), or staging (heroku-staging). 
+1. Update Heroku Configuration Variables with JAWSDB\_URL for staging (heroku-staging), or production (heroku). 
 Update Server's .env with JAWSDB\_URL for development (localhost).
 Note: See Heroku Dashboard Resources tab for Production JAWS DB has no color; staging is AMBER, test is TEAL, and local/development is CYAN. 
 Do a pull or push to get latest version on all systems.
-1. Update Heroku Buildpack for production (heroku), or staging (heroku-staging).
+1. Update Heroku Buildpack for staging (heroku-staging), or production (heroku).
 1. In git/odop push to Heroku (command: git push heroku-staging master or git push heroku master). 
 Verify no error messages during build on heroku.
 1. Confirm that the http://odop-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version X.Y.Z displays.
