@@ -35,7 +35,7 @@ export const execute = {
                     
                     <p>
                     To continue with this session, just click the "Next" button as you finish
-                    reading each page (step). 
+                    reading each page. 
                     </p>
                 </React.Fragment>
             )
@@ -49,8 +49,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    As with the other tutorial and demo sessions, 
-                    you should understand that this tutorial session is "live" and not
+                    You should understand that this tutorial session is "live" and not
                     a simple playback of a previous recording.  
                     The ODOP main page has simply been displaced downward by the text in this  
                     light green section.
@@ -290,6 +289,7 @@ export const execute = {
                     You can follow the same browser window configuration to work with two
                     ODOP design sessions at the same time.
                     For additional details see:  
+                    <a href="https://thegrumpys.github.io/odop/Help/wideScreen" target="_blank"> Side-by-side sessions on a widescreen monitor </a>
                     <br /><br />
                     <b>Note to developers:</b> The link below fails in the local dev environment because it
                     appends the link path to the local path in the browser address line.
