@@ -110,11 +110,11 @@ export class ExecutePanel extends Component {
             <Alert style={{marginTop: '10px'}}>
                 <div className="text-left align-middle">
                     <b>{this.state.prefix}{this.state.title !== undefined && this.state.title.length > 0 ? ' - ' + this.state.title : ''}</b>
-                    <Button className="float-right" color="primary" onClick={this.onNext}>Next</Button>
+                    <Button className="float-right" color="primary" onClick={this.onNext} disabled={this.state.steps[this.state.step+1] === undefined}>Next</Button>
                     <span className="float-right">&nbsp;</span>
-                    <Button className="float-right" color="secondary" onClick={this.onBack}>Back</Button>
+                    <Button className="float-right" color="secondary" onClick={this.onBack} disabled={this.state.step === 0}>Back</Button>
                     <span className="float-right">&nbsp;</span>
-                    <Button className="float-right" color="secondary" onClick={this.onCancel}>Cancel</Button>
+                    <Button className="float-right" color="secondary" onClick={this.onCancel}>Exit</Button>
                 </div>
                 <hr/>
                 <div style={{marginTop: '10px'}}>
