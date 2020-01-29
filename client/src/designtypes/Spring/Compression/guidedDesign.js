@@ -7,29 +7,44 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     Welcome to the "Guided Design" tutorial session
-                    for the <b>compression spring</b> design type.
+                    for the compression spring design type.
                     This session is appropriate for a situation where you are creating a 
                     design from the original problem specification as opposed to validating
-                    an existing or hypothesized design.
+                    an existing or hypothetical design.
                     </p>
                     
                     <p>
-                    This session is different than other tutorial and demo sessions in that it 
-                    provides only high-level textual guidance for a spring design workflow and 
+                    It is recommended that before working through this session, 
+                    you take the opportunity to view some of the other, 
+                    more introductory, tutorial and demo sessions.
+                    This session is different than other sessions in that it 
+                    provides only high-level guidance for a spring design workflow and 
                     does not actually execute any design changes. 
-                    The intent is that you will supply the numbers and menu selections;
-                    this tutorial will supply step-by-step instructions and explanations to
+                    You supply the numbers and menu selections.
+                    This session supplies step-by-step instructions and explanations to
                     guide you through the design process.
-                    It would be best if you have had the opportunity to view some of the other, 
-                    more introductory, tutorial and demo sessions before working through this one.
                     </p>
                     
                     <p>
-                    Where the other tutorial and demo sessions will start by imposing a known
-                    starting design (called initialState), 
-                    this session will allow the existing design to remain in place.
-                    It will be helpful if this design is a valid and consistent spring so as to 
-                    provide a reasonable starting point for the search process. 
+                    This procedure is possible because the sessions are "live" and not
+                    a simple playback of a previous recording.  
+                    The main page has simply been displaced downward by the text in this  
+                    light green section.
+                    All the menus and other inputs to the program remain available and active.
+                    With only a bit of coaching provided by this session, 
+                    you are expected to enter values and execute menu selections appropriate to the
+                    design problem at hand.
+                    </p>
+                    
+                    <p>
+                    Where the other tutorial and demo sessions start by imposing a known
+                    starting design or initial state, 
+                    this session allows the existing design to be carried forward.
+                    It is helpful if the design brought into this session 
+                    is a plausible spring so as to provide a reasonable starting point 
+                    for the operations to come in this session. 
+                    For example, a value of zero for any of the spring dimensions can
+                    create an unneccessary challenge in getting the search process started. 
                     </p>
                     
                     <p>
@@ -44,24 +59,19 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    
+                    One of the points of this session is to
+                    illustrates that frequent use of the File : Save As... feature 
+                    provides the opportunity to easily go back to a previous point in the design process. 
+                    If necessary to preserve your existing design, do it now.
                     </p>
-                    
+                
                     <p>
-                    You should understand that this tutorial session is "live" and not
-                    a simple playback of a previous recording.  
-                    The ODOP main page has simply been displaced downward by the text in this  
-                    light green section.
-                    All the menus and other inputs to the program remain available and active.
-                    With a bit of coaching provided by this tutorial session, 
-                    you are expected to enter values and execute menu selections appropriate to the
-                    design problem at hand.
-                    </p>
+                    The next screen displays a diagram illustrating the major steps that this session 
+                    guides you through.
+                    The diagram is intended only as a "big picture" conceptual starting point as it is
+                    significantly simplified as compared to the detail provided in the session.
                     
-                    <p>
-                    The next screen will display a diagram illustrating the major steps that this session 
-                    will guide you through.
-                    After reviewing the diagram, use the "Next" button to continue.
+                    <br />
                     </p>
                 </React.Fragment>
             )
@@ -71,6 +81,9 @@ export const execute = {
             text: (
                 <React.Fragment>
                 <img src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram.png" alt="Spring Design Workflow Diagram"/>
+                    <p>
+                     After reviewing the diagram, use the "Next" button to continue.
+                    </p>
                 </React.Fragment>
             )
         },
@@ -81,12 +94,11 @@ export const execute = {
                     <p>
                     This is the time to express your objectives (goals, requirements) for the design at hand 
                     in terms of constraints (Min & Max) and FIXes.
-                    Fill in the values and checkboxes now.
                     </p>
                     
                     <p>
                     For the moment, leave wire diameter (Wire_Dia) free.  
-                    This will allow the search process to manipulate wire diameter as necessary to achieve those goals.
+                    This allows the search process to manipulate wire diameter as necessary to achieve those goals.
                     Selecting an available wire size happens later in the session.
                     </p>
                     
@@ -101,11 +113,11 @@ export const execute = {
                     </p>
                     
                     <p>
+                    <b>Fill in the values and checkboxes now.</b>
+                    </p>
+                    
+                    <p>
                     Use the "Next" button to proceed after your inputs are complete.
-                    Note that it will be possible to use the tutorial "Back" button to return the active design 
-                    to the beginning of any step if any corrections or additional inputs are desired later.
-                    Separately, frequent use of the <b>File : Save As...</b> feature will allow you to go back to 
-                    a previous point in the design process with relatively little effort.
                     </p>
                 </React.Fragment>
             )
@@ -117,15 +129,18 @@ export const execute = {
                     <p>
                     The preceding changes have likely caused the violation of one or more constraints.
                     If so, the current design is considered to be "infeasible" or "NOT FEASIBLE".
-                    The <b>Search</b> feature will adjust values of the Independent Variables in an 
+                    Next, a search is used to adjust values of the Independent Variables in an 
                     attempt to find a design that does not violate constraints.
                     </p>
                     
                     <p>
-                    Invoke the <b>Search</b> feature now.  Use the <b>Action : Search</b> menu above.
+                    <b>Invoke the Search feature now.</b>  Use the Action : Search menu above.
                     </p>
                     
                     <p>
+                    Take a moment to look at the results.  
+                    It is possible to use the tutorial "Back" button to return the active design 
+                    to the beginning of any step if any corrections or additional inputs are desired later.
                     Use the "Next" button to continue.
                     </p>
                     
@@ -138,23 +153,29 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    If the "Feasibility:" result of the search is "NOT FEASIBLE", then it will likely be necessary 
-                    to accept compromise and adjust the goals for the design. 
+                    If the "Feasibility:" result of the search is "NOT FEASIBLE", 
+                    consider the possibility that some aspect of the design is over specified.
+                    More information on such a possibility is provided in this entry on the on-line help:
+                    [Design situations: under-specified, properly specified, over-specified]()
+                    Given that the design is properly specified but just not achievable within the available
+                    space and material properties,
+                    then it is likely necessary to accept compromise and adjust the goals for the design 
+                    as expressed in terms of constraint levels. 
                     This can be done manually.
-                    Also, the on-line Help provides a description of the <b>Trade</b> feature and instruction on its use.
-                    Trade can be used to gain a better understanding of exactly how much constraint levels need to be adjusted 
-                    in order to find the "nearest" feasible design.
+                    Also, the On-line Help provides a description of the Trade feature and instruction on its use.
+                    Trade can be used to gain a better understanding of exactly how much your constraints 
+                    need to be adjusted in order to find the "nearest" feasible design.
                     </p>
                     
                     <p>
                     If the "Feasibility:" result of the search is "FEASIBLE" or "MARGINALLY FEASIBLE", 
-                    then the <b>Seek</b> feature may be able to provide an optimized result. 
+                    then the Seek feature may be able to provide an optimized result. 
                     </p>
                     
                     <p>
                     This is a good time to take a close look at existing values.
-                    You will likely need to scroll down to see everything.
-                    The Report tabs (upper right) offer additional information in a spring design specific format.
+                    Scroll down to see everything.
+                    The Report tabs in the upper right offer additional information in a spring design specific format.
                     If you do look at the Report tabs, you may want to 
                     switch back to the main "Design" tab before using the "Next" button to proceed.
                     </p>
