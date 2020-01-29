@@ -1,9 +1,10 @@
 import * as o from './offsets';
 import * as mo from '../mat_ips_offsets';
 import * as eto from './endtypes_offsets';
+import { changeSymbolInput } from '../../../store/actionCreators';
 
 export function init(store, p, x) {
-//    console.log('In init store=',st,'p=',p,'x=',x);
+//    console.log('In init store=',store,'p=',p,'x=',x);
  var i, j;
  var m_tab;
  const ten3 = 1000.0;
@@ -162,6 +163,18 @@ export function init(store, p, x) {
         }
     }
     
+    store.dispatch(changeSymbolInput("ASTM/Fed_Spec", true));
+    store.dispatch(changeSymbolInput("Process", true));
+    store.dispatch(changeSymbolInput("Density", true));
+    store.dispatch(changeSymbolInput("Torsion_Modulus", true));
+    store.dispatch(changeSymbolInput("Hot_Factor_Kh", true));
+    store.dispatch(changeSymbolInput("Tensile", true));
+    store.dispatch(changeSymbolInput("%_Tensile_Stat", true));
+    store.dispatch(changeSymbolInput("%_Tensile_Endur", true));
+    store.dispatch(changeSymbolInput("%_Tensile_Bend", true));
+    store.dispatch(changeSymbolInput("Stress_Lim_Stat", true));
+    store.dispatch(changeSymbolInput("Stress_Lim_Endur", true));
+    store.dispatch(changeSymbolInput("Stress_Lim_Bend", true));
     break;
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
@@ -169,6 +182,18 @@ export function init(store, p, x) {
      x[o.ASTM_Fed_Spec] = unused;
      x[o.Material_File] = unused;
      x[o.Process] = unused;
+     store.dispatch(changeSymbolInput("ASTM/Fed_Spec", true));
+     store.dispatch(changeSymbolInput("Process", true));
+     store.dispatch(changeSymbolInput("Density", false));
+     store.dispatch(changeSymbolInput("Torsion_Modulus", false));
+     store.dispatch(changeSymbolInput("Hot_Factor_Kh", false));
+     store.dispatch(changeSymbolInput("Tensile", false));
+     store.dispatch(changeSymbolInput("%_Tensile_Endur", false));
+     store.dispatch(changeSymbolInput("%_Tensile_Stat", false));
+     store.dispatch(changeSymbolInput("%_Tensile_Bend", false));
+     store.dispatch(changeSymbolInput("Stress_Lim_Stat", true));
+     store.dispatch(changeSymbolInput("Stress_Lim_Endur", true));
+     store.dispatch(changeSymbolInput("Stress_Lim_Bend", true));
      break;
 
  case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
@@ -179,6 +204,18 @@ export function init(store, p, x) {
      x[o.PC_Tensile_Endur] = unused;
      x[o.PC_Tensile_Stat]  = unused;
      x[o.PC_Tensile_Bend]  = unused;
+     store.dispatch(changeSymbolInput("ASTM/Fed_Spec", true));
+     store.dispatch(changeSymbolInput("Process", true));
+     store.dispatch(changeSymbolInput("Density", false));
+     store.dispatch(changeSymbolInput("Torsion_Modulus", false));
+     store.dispatch(changeSymbolInput("Hot_Factor_Kh", false));
+     store.dispatch(changeSymbolInput("Tensile", false));
+     store.dispatch(changeSymbolInput("%_Tensile_Endur", true));
+     store.dispatch(changeSymbolInput("%_Tensile_Stat", true));
+     store.dispatch(changeSymbolInput("%_Tensile_Bend", true));
+     store.dispatch(changeSymbolInput("Stress_Lim_Stat", false));
+     store.dispatch(changeSymbolInput("Stress_Lim_Endur", false));
+     store.dispatch(changeSymbolInput("Stress_Lim_Bend", false));
  }
 //    console.log('In init p=',p,' x=',x);
     return x;
