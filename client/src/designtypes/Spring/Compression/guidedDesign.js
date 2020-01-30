@@ -42,7 +42,7 @@ export const execute = {
                     this session allows the existing design to be carried forward.
                     It is helpful if the design brought into this session 
                     is a plausible spring so as to provide a reasonable starting point 
-                    for the operations to come in this session. 
+                    for the operations to come later in this session. 
                     For example, a value of zero for any of the spring dimensions can
                     create an unneccessary challenge in getting the search process started. 
                     </p>
@@ -59,10 +59,12 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    One of the points of this session is to
-                    illustrates that frequent use of the File : Save As... feature 
-                    provides the opportunity to easily go back to a previous point in the design process. 
-                    If necessary to preserve your existing design, do it now.
+                    One of the points of this session is to illustrate that frequent use of the 
+                    File : Save As... feature provides the opportunity to easily go back to a 
+                    previous point in the design process. 
+                    <br /><br />
+                    If it is necessary to preserve your existing design, 
+                    <b> use the File : Save As... menu now.</b>
                     </p>
                 
                     <p>
@@ -70,7 +72,6 @@ export const execute = {
                     guides you through.
                     The diagram is intended only as a "big picture" conceptual starting point as it is
                     significantly simplified as compared to the detail provided in the session.
-                    
                     <br />
                     </p>
                 </React.Fragment>
@@ -80,10 +81,65 @@ export const execute = {
             title: "Page 03 of 13",
             text: (
                 <React.Fragment>
-                <img src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram.png" alt="Spring Design Workflow Diagram"/>
+                    <table>
+                    <tbody>
+                        <tr>
+                            <td width="60%">
+                            <img src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram1.png" alt="Spring Design Workflow Diagram"/>
+                            </td>
+                            <td width="40%">
+                                <p>
+                                For design from original problem specifications, not design validation.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60%">
+                            <img src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram2.png" alt="Spring Design Workflow Diagram"/>
+                            </td>
+                            <td width="40%">
+                                <p>
+                                Enter what is known about requirements for the design.
+                                <br /><br />
+                                Leaving wire diameter free (not FIXed or constrained) allows the search process 
+                                to select a non-standard wire size.
+                                <br /><br /><br /><br />
+                                If a feasible solution is not available, 
+                                consider the posibility that the design is over specified.
+                                See the On-line Help topic on Trade.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60%">
+                            <img src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram3.png" alt="Spring Design Workflow Diagram"/>
+                            </td>
+                            <td width="40%">
+                                <p>
+                                Seek &nbsp;  Min Weight, Max Cycle Life, Min Outside Diameter, Min Solid Height, Min Rate, etc.
+                                <br /><br /> 
+                                Select  a standard wire size.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60%">
+                            <img src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram4.png" alt="Spring Design Workflow Diagram"/>
+                            </td>
+                            <td width="40%">
+                                <p>
+                                Another search is required to adjust other variables to compensate for the change in wire diameter.
+                                <br /><br /> 
+                                Select the nearest spring from a catalog of stock springs.  Confirm if requirements are met.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    <br />
                     <p>
                      After reviewing the diagram, use the "Next" button to continue.
-                    </p>
+                     </p>
                 </React.Fragment>
             )
         },
