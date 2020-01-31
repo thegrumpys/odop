@@ -20,7 +20,7 @@ export const execute = {
                     This session is different than other sessions in that it 
                     provides only high-level guidance for a spring design workflow and 
                     does not actually execute any design changes. 
-                    You supply numbers and menu selections following the step-by-step instructions 
+                    You supply numbers and menu selections following step-by-step instructions 
                     and explanations provided to guide you through the design process.
                     </p>
                     
@@ -43,7 +43,7 @@ export const execute = {
                     is a plausible spring so as to provide a reasonable starting point 
                     for the operations to come later. 
                     For example, a value of zero for any of the spring dimensions can
-                    create an unneccessary challenge in getting the search process started. 
+                    create an unneccessary challenge in getting the search algorithm started. 
                     </p>
                     
                     <p>
@@ -67,6 +67,7 @@ export const execute = {
                     is helpful in having a presentation with related designs clustered together.
                     <br /><br />
                     So, if you wish to preserve your existing design, 
+                    <br />
                     <b> use the File : Save As... menu now.</b>
                     </p>
                 
@@ -102,13 +103,13 @@ export const execute = {
                             </td>
                             <td width="40%">
                                 <p>
-                                Enter what is known about requirements for the design.
+                                To start, enter what is known about requirements for the design.
                                 <br /><br />
-                                Leaving wire diameter free (not Fixed or constrained) allows the search process 
+                                Leaving wire diameter free (not Fixed or constrained) allows the search  
                                 to select a non-standard wire size.
                                 <br /><br /><br /><br /><br /><br /><br /><br />
                                 If a feasible solution is not available, exit.
-                                Consider the posibility that the design is over specified.
+                                Consider the posibility that the design is over-specified.
                                 Additional information is available in On-line Help topics.
                                 </p>
                             </td>
@@ -157,7 +158,7 @@ export const execute = {
                     
                     <p>
                     For the moment, leave wire diameter (Wire_Dia) free.  
-                    This allows the search process to manipulate wire diameter as necessary to achieve those goals.
+                    This allows the search to manipulate wire diameter as necessary to achieve those goals.
                     Selecting an available wire size happens later in the session.
                     </p>
                     
@@ -165,8 +166,8 @@ export const execute = {
                     Notice that several constraints are established by default.  
                     For example, you should see established constraints on quantities like
                     Coils_A, Deflect_1, L_Stroke, ID_Free, FS_2, FS_Solid and %_Avail_Deflect.
-                    These constraints are helpful in guiding the search process to deliver a good spring design.
-                    Without similar constraints, the search process can "cheat", producing a result that is
+                    These constraints are helpful in guiding the search to deliver a good spring design.
+                    Without similar constraints, the search can "cheat", producing a result that is
                     mathematically possible but not particularly helpful in terms of a usable spring design.
                     You should feel free to experiment with different values for these constraint levels.
                     </p>
@@ -187,7 +188,7 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     It is possible to use the tutorial "Back" button to return the active design 
-                    to the beginning of any step to make corrections or additional inputs.
+                    to the beginning of any tutorial step to make corrections or additional inputs.
                     Better yet, learn to use File : Save As... during routine design activity.
                     If you want to preserve the option to easily return to this state of the design,
                     update the Comment field and use the File : Save As... menu.
@@ -219,7 +220,7 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     If the "Feasibility:" result of the search is "NOT FEASIBLE", 
-                    consider the possibility that some aspect of the design is over specified.
+                    consider the possibility that some aspect of the design is over-specified.
                     More information on such a possibility is provided in this entry on the on-line help:
                     <a href="https://thegrumpys.github.io/odop/Help/designSituations" target="_blank" rel="noopener noreferrer"> Design situations: under-specified, properly specified, over-specified </a>
                     </p>
@@ -265,7 +266,7 @@ export const execute = {
                     <p>
                     While the Seek feature can find the constrained extreme of any independent or dependent variable 
                     that is not in Fixed status, for compression springs, the most likely candidates are: 
-                    min Weight, max Cycle_Life, min OD_Free, min L_Solid (solid height), min Rate or max Stroke.
+                    min Weight, max Cycle_Life, min OD_Free, min L_Solid (solid height), min Rate and max Stroke.
                     </p>
                     
                     <p>
@@ -281,6 +282,10 @@ export const execute = {
                     The solution algorithm is finding a balance between the rewards and penalties of 
                     violating those constraints
                     </p>
+                    
+                    <p>
+                    When ready, use the "Next" button to proceed.
+                    </p>
                 </React.Fragment>
             )
         },
@@ -290,7 +295,7 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     Take a moment to review the results. 
-                    Is this a reasonable design that meets the original objectives ? 
+                    Is this a reasonable design that meets the original objectives ? &nbsp;
                     If not, try adjusting constraint levels and repeating Search and Seek.
                     </p>
                     
@@ -298,7 +303,7 @@ export const execute = {
                     The next screen gets into selecting a standard wire size. 
                     But first, if this design seems like a good starting point, 
                     you should update the Comment field and ...
-                    <br /><br />
+                    <br />
                     <b>Save the current design with a name like "ProjectX_Baseline"</b>.
                     <br /><br /> 
                     Saving this design keeps it available for re-use in a few more steps.
@@ -317,7 +322,7 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     Use the Action : Select Size... menu to: 
-                    <br /><br />
+                    <br />
                     <b>Select the nearest larger standard wire size.</b>
                     <br /><br />
                     Note that this operation leaves Wire_Dia in Fixed status.
@@ -328,14 +333,18 @@ export const execute = {
                     This situation can be resolved.
                     <br /><br />
                     <b>Repeat &nbsp; Search &nbsp; and &nbsp; Seek</b>&nbsp;
-                    with the new (now Fixed) standard wire diameter.
+                    with the new, now Fixed, standard wire diameter.
                     </p>
                     
                     <p>
                     If the result appears reasonable,
                     update the Comment and ...
-                    <br /><br />
+                    <br />
                     <b>Save the design with a name like "ProjectX_Candidate1".</b>
+                    </p>
+                    
+                    <p>
+                    When ready, use the "Next" button to proceed.
                     </p>
                 </React.Fragment>
             )
@@ -347,18 +356,17 @@ export const execute = {
                     <p>
                     Now, just to be sure that we are not missing out on some interesting design possibility ... 
                     <br /><br />
-                    <b>Restore that "baseline" design.</b>
-                    <br /><br />
+                    <b>Restore that "baseline" design.</b> &nbsp; 
                     Use the File : Open... menu.
                     </p>
                     
                     <p>
-                    This time, use the Action : Select Size... menu to ...
-                    <br /><br />
+                    This time, use the Action : Select Size... menu to:
+                    <br />
                     <b>Select the nearest smaller standard wire size.</b>
                     <br /><br />
                     As before, use Search to resolve any constraint violations that have crept in
-                    with the new (now Fixed) standard wire diameter.
+                    with the new, now Fixed, standard wire diameter.
                     If a feasible or marginally feasible design is available, 
                     use Seek to optimize it on the previously used (max or min) criteria.
                     </p>
@@ -367,14 +375,18 @@ export const execute = {
                     If using a smaller standard wire size does not permit any feasible or marginally feasible solutions,
                     go back and have a look at what might be possible with an even larger standard wire diameter.
                     Again, use Search to resolve any constraint violations that have crept in
-                    with the new (now Fixed) standard wire diameter.
+                    with the new standard wire diameter.
                     Use Seek to optimize it on the previously used (max or min) criteria.
                     </p>
                     
                     <p>
-                    If the result appears reasonable, Update the Comment and ...
-                    <br /><br />
+                    If the result appears reasonable, update the Comment and ...
+                    <br />
                     <b>Save the design with a name like "ProjectX_Candidate2".</b>
+                    </p>
+                    
+                    <p>
+                    When ready, use the "Next" button to proceed.
                     </p>
                 </React.Fragment>
             )
@@ -391,12 +403,12 @@ export const execute = {
                     You can follow the same browser window configuration to work with two
                     ODOP design sessions at the same time.
                     For additional details see:  
-                    <a href="https://thegrumpys.github.io/odop/Help/wideScreen" target="_blank" rel="noopener noreferrer"> Side-by-side sessions on a widescreen monitor </a>
+                    <a href="https://thegrumpys.github.io/odop/Help/wideScreen" target="_blank" rel="noopener noreferrer"> Side-by-side sessions on a wide-screen monitor </a>
                     </p>
                     
                     <p>
                     Aside from using a wide-screen monitor, 
-                    it is also possible to use your browser's print function to print each of the candidate designs
+                    it is also possible to use your browser's print feature to print each of the candidate designs
                     and lay the printed pages side-by-side on a physical desktop.
                     </p>
                     
@@ -423,14 +435,14 @@ export const execute = {
                     <br /><br />
                     If necessary, 
                     use the File : Open... menu to: 
-                    <br /><br />
-                    <b>Re-open the preferred candidate design.</b>
                     <br />
+                    <b>Re-open the preferred candidate design.</b>
+                    <br /><br />
                     </p>
 
                     <p>
                     <b>Use the Action : Select Catalog... menu</b> 
-                    <br /><br />
+                    <br />
                     to review the four most similar designs in the catalog. 
                     The display of catalog entries is ranked by objective function value 
                     (OBJ is a measure of constraint violation).
@@ -438,6 +450,10 @@ export const execute = {
                     More detail about standard design catalogs is available in the 
                     <a href="https://thegrumpys.github.io/odop/Help/SpringDesign/selectSizeCatalog" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
                      entry of On-line Help. 
+                    </p>
+                    
+                    <p>
+                    When ready, use the "Next" button to proceed.
                     </p>
                 </React.Fragment>
             ),
@@ -460,12 +476,27 @@ export const execute = {
                     
                     <p>
                     This concludes this Guided Design section of the tutorial.
+                    The mission here has been to introduce the process and best practices associated with using the 
+                    ODOP:Spring software to design a full custom spring.
+                    From there, this tutorial session illustrated how to check built-in catalogs to 
+                    determine if a stock spring can come close to meeting the application requirements as 
+                    originally expressed in terms of Fixes and constraints. 
+                    At this point, you should have a sufficient understanding of the steps involved to
+                    continue using the software for other opportunities in spring design.
+                    </p>
+                    
+                    <p>
                     Your feedback is welcome.
                     Use the 
                     <a href="https://thegrumpys.github.io/odop/About/ContactUs" target="_blank" rel="noopener noreferrer"> Contact Us </a>
-                    page of the website to find the appropriate contact information.
+                    page of the On-line Help to find the appropriate contact information.
                     </p>
-                    <br /><br />
+                    <br />
+                    
+                    <p>
+                    When ready, use the "Exit" button to resume regular (non-tutorial) operation of the program 
+                    with the existing design.
+                    </p>
                 </React.Fragment>
             )
         }
