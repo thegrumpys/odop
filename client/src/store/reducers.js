@@ -13,6 +13,7 @@ import { STARTUP,
     SET_SYMBOL_FLAG, 
     RESET_SYMBOL_FLAG, 
     CHANGE_SYMBOL_INPUT, 
+    CHANGE_SYMBOL_HIDDEN, 
     
     CHANGE_INPUT_SYMBOL_VALUES, 
     SAVE_INPUT_SYMBOL_VALUES, 
@@ -205,6 +206,19 @@ export function reducers(state, action) {
 //                    console.log('CHANGE_SYMBOL_INPUT element=',element.name,' old value=',element.input,' new value=',action.payload.value);
                     return Object.assign({}, element, {
                         input: action.payload.value
+                    });
+                }
+                return element;
+            })
+        });
+        
+    case CHANGE_SYMBOL_HIDDEN:
+        return Object.assign({}, state, {
+            symbol_table: state.symbol_table.map((element) => {
+                if (element.name === action.payload.name) {
+//                    console.log('CHANGE_SYMBOL_HIDDEN element=',element.name,' old value=',element.hidden,' new value=',action.payload.value);
+                    return Object.assign({}, element, {
+                        hidden: action.payload.value
                     });
                 }
                 return element;

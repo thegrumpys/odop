@@ -13,6 +13,7 @@ import { STARTUP,
     SET_SYMBOL_FLAG, 
     RESET_SYMBOL_FLAG, 
     CHANGE_SYMBOL_INPUT, 
+    CHANGE_SYMBOL_HIDDEN, 
     
     CHANGE_INPUT_SYMBOL_VALUES, 
     SAVE_INPUT_SYMBOL_VALUES, 
@@ -160,6 +161,16 @@ export function resetSymbolFlag(name, minmax, mask) {
 export function changeSymbolInput(name, value) {
     return {
         type: CHANGE_SYMBOL_INPUT,
+        payload: {
+            name,
+            value
+        }
+    }
+}
+
+export function changeSymbolHidden(name, value) {
+    return {
+        type: CHANGE_SYMBOL_HIDDEN,
         payload: {
             name,
             value
