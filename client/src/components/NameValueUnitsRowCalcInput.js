@@ -114,8 +114,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-        changeSymbolValue: changeSymbolValue,
-        changeSymbolInput: changeSymbolInput
+        changeSymbolValue: changeSymbolValue
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NameValueUnitsRowCalcInput);
