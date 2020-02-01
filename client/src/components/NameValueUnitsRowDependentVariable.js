@@ -44,7 +44,7 @@ class NameValueUnitsRowDependentVariable extends Component {
         return (
             <tr key={this.props.element.name}>
                 <td className="align-middle" colSpan="2" id={'dependent_variable_'+this.props.index}>{this.props.element.name}</td>
-                { this.props.element.tooltip !== undefined && <UncontrolledTooltip placement="left" target={'dependent_variable_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
+                { this.props.element.tooltip !== undefined && <UncontrolledTooltip placement="top" target={'dependent_variable_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         <span className="text-right form-control bg-light">{this.props.element.value.toODOPPrecision()}</span>
@@ -55,7 +55,7 @@ class NameValueUnitsRowDependentVariable extends Component {
                         </InputGroupAddon>
                     </InputGroup>
                 </td>
-                <td className="text-nowrap align-middle" colSpan="1">{this.props.element.units}</td>
+                <td className="text-nowrap align-middle small" colSpan="1">{this.props.element.units}</td>
                 <td></td>
             </tr>
         );

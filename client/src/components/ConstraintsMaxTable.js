@@ -12,30 +12,32 @@ export class ConstraintsMaxTable extends Component {
                 <Table className="col-md-3 border border-secondary" size="sm">
                     <thead>
                         <tr>
-                            <th className="text-center bg-secondary text-white" colSpan="3" id="IVMaxConstraintTitle">IV Max Constraint</th>
+                            <th className="text-center bg-secondary text-white" colSpan="4" id="IVMaxConstraintTitle">IV Max Constraint</th>
                         </tr>
                         <tr>
+                            <th className="text-left d-lg-none" id="MaxConstraintNameTitle">Name</th>
                             <th className="text-left" id="MaxConstraintConstrainTitle">Constrain</th>
                             <th className="text-center" id="MaxConstraintValueTitle">Value</th>
                             <th className="text-right" id="MaxConstraintViolationTitle">Violation</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.map((element) => element.input && element.equationset && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} />)}
+                        {this.props.symbol_table.map((element,index) => element.input && element.equationset && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                     <thead>
                         <tr>
-                            <th className="text-center bg-secondary text-white" colSpan="3" id="DVMaxConstraintTitle">DV Max Constraint</th>
+                            <th className="text-center bg-secondary text-white" colSpan="4" id="DVMaxConstraintTitle">DV Max Constraint</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.map((element) => !element.input && element.equationset && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} />)}
+                        {this.props.symbol_table.map((element,index) => !element.input && element.equationset && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                 </Table>
                 <UncontrolledTooltip placement="top" target="IVMaxConstraintTitle">Upper limits on Independent Variables</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="MaxConstraintConstrainTitle">Check box to establish upper limit</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="MaxConstraintValueTitle">Enter value for upper limit</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="MaxConstraintViolationTitle">Measure of constraint <br />satisfaction (-) or violation (+)</UncontrolledTooltip>
+                <UncontrolledTooltip class="d-lg-none" placement="top" target="MaxConstraintNameTitle">Variable names</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="MaxConstraintConstrainTitle">Check box to establish upper limit</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="MaxConstraintValueTitle">Enter value for upper limit</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="MaxConstraintViolationTitle">Measure of constraint <br />satisfaction (-) or violation (+)</UncontrolledTooltip>
                 <UncontrolledTooltip placement="top" target="DVMaxConstraintTitle">Upper limits on Dependent Variables</UncontrolledTooltip>
             </React.Fragment>
         );

@@ -118,6 +118,8 @@ class ConstraintsMaxRowDependentVariable extends Component {
         return (
             <React.Fragment>
                 <tr key={this.props.element.name}>
+                    <td className="align-middle d-lg-none" id={'dependent_variable_max_constrain_'+this.props.index}>{this.props.element.name}</td>
+                    { this.props.element.tooltip !== undefined && <UncontrolledTooltip class="d-lg-none" placement="top" target={'dependent_variable_max_constrain_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             <InputGroupAddon addonType="prepend">
@@ -165,7 +167,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
                             </ModalFooter>
                         </Modal> : ''}
                     </td>
-                    <td className="text-right align-middle" colSpan="1">
+                    <td className="text-right align-middle small" colSpan="1">
                         {this.props.element.lmax & FIXED ? (this.props.element.vmax*100.0).toFixed(1) : (this.props.element.lmax & CONSTRAINED ? (this.props.element.vmax*100.0).toFixed(1) + '%' : '')}
                     </td>
                 </tr>

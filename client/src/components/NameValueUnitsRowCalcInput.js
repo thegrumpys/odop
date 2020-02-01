@@ -79,7 +79,7 @@ class NameValueUnitsRowCalcInput extends Component {
         return (
             <tr key={this.props.element.name}>
                 <td className="align-middle" colSpan="2" id={'constant_'+this.props.index}>{this.props.element.name}</td>
-                { this.props.element.tooltip !== undefined && <UncontrolledTooltip placement="left" target={'constant_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
+                { this.props.element.tooltip !== undefined && <UncontrolledTooltip placement="top" target={'constant_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
@@ -102,7 +102,7 @@ class NameValueUnitsRowCalcInput extends Component {
                         </InputGroupAddon>
                     </InputGroup>
                 </td>
-                <td className="text-nowrap align-middle" colSpan="1">{this.props.element.units}</td>
+                <td className="text-nowrap align-middle small" colSpan="1">{this.props.element.units}</td>
             </tr>
         );
     }
