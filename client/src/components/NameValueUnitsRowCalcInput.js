@@ -60,7 +60,6 @@ class NameValueUnitsRowCalcInput extends Component {
 //        console.log('In NameValueUnitsRowCalcInput.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex);
-        this.initializeInputFlags(this.props.element.name,selectedIndex);
         this.state.table[selectedIndex].forEach((value, index) => {
             if (index > 0) { // Skip the first column
                 var name = this.state.table[0][index];
