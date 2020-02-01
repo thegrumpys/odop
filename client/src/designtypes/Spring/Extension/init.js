@@ -17,7 +17,9 @@ export function init(store, p, x) {
  else m_tab = require('../mat_ips.json');
 //    console.log("m_tab=", m_tab);
  var et_tab = require('./endtypes.json');
-//    console.log("et_tab=", et_tab);
+//console.log("et_tab=", et_tab);
+ var si_tab = require('./si_range.json');
+//console.log("et_tab=", et_tab);
 
      x[o.Spring_Type] = "Extension";
      store.dispatch(changeSymbolInput("Spring_Type", true));
@@ -217,7 +219,29 @@ export function init(store, p, x) {
      store.dispatch(changeSymbolInput("Stress_Lim_Endur", false));
      store.dispatch(changeSymbolInput("Stress_Lim_Bend", false));
  }
-//    console.log('In init p=',p,' x=',x);
+
+ if (et_tab[j][eto.end_type] === "User_Specified") {
+     store.dispatch(changeSymbolInput("Hook_Deflect_All", false));
+     store.dispatch(changeSymbolInput("End_ID", false));
+     store.dispatch(changeSymbolInput("Extended_End_ID", false));
+     store.dispatch(changeSymbolInput("L_End", false));
+     store.dispatch(changeSymbolInput("L_Extended_End", false));
+ } else {
+     store.dispatch(changeSymbolInput("Hook_Deflect_All", true));
+     store.dispatch(changeSymbolInput("End_ID", true));
+     store.dispatch(changeSymbolInput("Extended_End_ID", true));
+     store.dispatch(changeSymbolInput("L_End", true));
+     store.dispatch(changeSymbolInput("L_Extended_End", true));
+ }
+
+ if (si_tab[x[o.SI_Range]][0] === "User_Specified") {
+     store.dispatch(changeSymbolInput("SI_Lo_Factor", false));
+     store.dispatch(changeSymbolInput("SI_Hi_Factor", false));
+ } else {
+     store.dispatch(changeSymbolInput("SI_Lo_Factor", true));
+     store.dispatch(changeSymbolInput("SI_Hi_Factor", true));
+ }
+ //    console.log('In init p=',p,' x=',x);
     return x;
 
 }
