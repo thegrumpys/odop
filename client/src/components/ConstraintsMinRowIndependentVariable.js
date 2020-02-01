@@ -98,6 +98,8 @@ class ConstraintMinRowIndependentVariable extends Component {
         return (
             <React.Fragment>
                 <tr key={this.props.element.name}>
+                    <td className="align-middle d-lg-none" id={'independent_variable_min_constrain_'+this.props.index}>{this.props.element.name}</td>
+                    { this.props.element.tooltip !== undefined && <UncontrolledTooltip class="d-lg-none" placement="top" target={'independent_variable_min_constrain_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             <InputGroupAddon addonType="prepend">
@@ -145,7 +147,7 @@ class ConstraintMinRowIndependentVariable extends Component {
                             </ModalFooter>
                         </Modal> : ''}
                     </td>
-                    <td className="text-right align-middle" colSpan="1">
+                    <td className="text-right align-middle small" colSpan="1">
                         {this.props.element.lmin & FIXED ? '' : (this.props.element.lmin & CONSTRAINED ? (this.props.element.vmin*100.0).toFixed(1) + '%' : '')}
                     </td>
                 </tr>

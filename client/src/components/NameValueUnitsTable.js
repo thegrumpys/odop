@@ -46,9 +46,9 @@ export class NameValueUnitsTable extends Component {
                     </tbody>
                 </Table>
                 <UncontrolledTooltip placement="top" target="IVTitle">Inputs to design equations</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="NameTitle">Variable names</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="ValueTitle">Current values <br /> (Check box at right to FIX)</UncontrolledTooltip>
-                <UncontrolledTooltip placement="bottom" target="UnitsTitle">Units (information only)</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="NameTitle">Variable names</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="ValueTitle">Current values <br /> (Check box at right to FIX)</UncontrolledTooltip>
+                <UncontrolledTooltip placement="top" target="UnitsTitle">Units (information only)</UncontrolledTooltip>
                 <UncontrolledTooltip placement="top" target="DVTitle">Outputs from design equations</UncontrolledTooltip>
             </React.Fragment>
         );
