@@ -47,7 +47,7 @@ class NameValueUnitsRowDependentVariable extends Component {
                 { this.props.element.tooltip !== undefined && <UncontrolledTooltip placement="top" target={'dependent_variable_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
-                        <span className="text-right form-control bg-light">{this.props.element.value.toODOPPrecision()}</span>
+                        <Input disabled={true} className="text-right" type="number" value={this.props.element.value.toODOPPrecision()} />
                         <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
