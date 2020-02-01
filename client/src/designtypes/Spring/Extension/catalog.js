@@ -18,14 +18,16 @@ export function getCatalogNames() {
 }
 
 function getObjectiveValue(st, viol_wt) {
+//    console.log('In getObjectiveValue st=',st,"viol_wt=",viol_wt);
     var element;
     var vmin;
     var vmax;
     var viol_sum = 0.0;
+    var result;
 
     for (let i = 0; i < st.length; i++) {
         element = st[i];
-        if (element.input) {
+        if (element.input && element.equationset) {
             vmin = 0.0;
             vmax = 0.0;
             if (element.lmin & CONSTRAINED ) { // TODO: || element.lmin < FREESTAT) {
@@ -44,7 +46,7 @@ function getObjectiveValue(st, viol_wt) {
     }
     for (let i = 0; i < st.length; i++) {
         element = st[i];
-        if (!element.input) {
+        if ((!element.input && element.equationset) || (!element.equationset)) {
             vmin = 0.0;
             vmax = 0.0;
             /* State variable fix levels. */
@@ -84,10 +86,14 @@ function getObjectiveValue(st, viol_wt) {
     }
     
     // Return Objective Value
-    return viol_wt * viol_sum;
+    result = viol_wt * viol_sum;
+//    console.log('In getObjectiveValue result=',result);
+    return result;
 }
 
-function converToResultArray(entry) {
+function convertToResultArray(entry) {
+//    console.log('In convertToResultArray entry=',entry);
+    var result;
     var entry_select = entry[0].replace('-', '\u2011');
     var entry_table = `OD_Free:\u00A0${entry[1]}, Wire_Dia:\u00A0${entry[2]}, Coils_T:\u00A0${entry[3]}, Initial_Tension:\u00A0${entry[4]}, Material_Type:\u00A0${entry[5]}, End_Type:\u00A0${entry[6]}, Obj:\u00A0${entry[9]}`;
     // Convert to changeSymbolValue array
@@ -98,11 +104,13 @@ function converToResultArray(entry) {
     entry_symbol_values.push(['Initial_Tension',entry[4]]);
     entry_symbol_values.push(['Material_Type',entry[7]]);
     entry_symbol_values.push(['End_Type',entry[8]]);
-    return [entry_select, entry_table, entry_symbol_values];
+    result = [entry_select, entry_table, entry_symbol_values];
+//    console.log('In convertToResultArray result=',result);
+    return result;
 }
 
-export function getCatalogEntries(name, st, viol_wt) {
-//    console.log('In getCatalogEntries name=',name,' st=',st,' viol_wt=',viol_wt);
+export function getCatalogEntries(name, store, st, viol_wt) {
+//    console.log('Entering getCatalogEntries name=',name,' store=',store,' st=',st,' viol_wt=',viol_wt);
     var catalog, entry;
     var result = [];
     var p, x, offset;
@@ -117,17 +125,17 @@ export function getCatalogEntries(name, st, viol_wt) {
         return index > 0 && element[0] === entry[6];
     }
     function pPush(element) {
-        if (element.input) {
+        if (element.input && element.equationset) {
             p.push(element.value);
         }
     }
     function xPush(element) {
-        if (!element.input) {
+        if ((!element.input && element.equationset) || (!element.equationset)) {
             x.push(element.value)
         }
     }
     function xPull(element) {
-        if (!element.input) {
+        if ((!element.input && element.equationset) || (!element.equationset)) {
             element.value = x[offset++];
         }
     }
@@ -191,7 +199,7 @@ export function getCatalogEntries(name, st, viol_wt) {
         st.forEach(pPush);
         x = [];
         st.forEach(xPush);
-        x = init(p, x);
+        x = init(store, p, x);
         offset = 0;
         st.forEach(xPull);
 //        console.log('In getCatalogEntries 1 st=',st);
@@ -211,7 +219,6 @@ export function getCatalogEntries(name, st, viol_wt) {
 //        console.log('In getCatalogEntries 3 objective_value=',objective_value);
         
         entry[9] = objective_value.toFixed(6); // Set Objective Value
-        
 //        console.log("In getCatalogEntries 4: entry = ", entry);
         
         // get four lowest objective values as candidate entries
@@ -222,17 +229,17 @@ export function getCatalogEntries(name, st, viol_wt) {
 //        console.log('In getCatalogEntries 4 cat0=',cat0,' cat1=',cat1,' cat2=',cat2,' cat3=',cat3);
     }
     if (cat0 !== undefined) {
-        result.push(converToResultArray(cat0));
+        result.push(convertToResultArray(cat0));
     }
     if (cat1 !== undefined) {
-        result.push(converToResultArray(cat1));
+        result.push(convertToResultArray(cat1));
     }
     if (cat2 !== undefined) {
-        result.push(converToResultArray(cat2));
+        result.push(convertToResultArray(cat2));
     }
     if (cat3 !== undefined) {
-        result.push(converToResultArray(cat3));
+        result.push(convertToResultArray(cat3));
     }
-//    console.log('In getCatalogEntries result=',result);
+//    console.log('Exiting getCatalogEntries result=',result);
     return result;
 }

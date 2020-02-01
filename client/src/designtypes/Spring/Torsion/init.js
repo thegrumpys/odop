@@ -1,14 +1,16 @@
 import * as o from './offsets';
 import * as mo from '../mat_ips_offsets';
 import * as eto from './endtypes_offsets';
+import { changeSymbolInput } from '../../../store/actionCreators';
 
-export function init(p, x) {
-//    console.log('Entering init p=',p);
+export function init(store, p, x) {
+//    console.log('In init store=',store,'p=',p,'x=',x);
  var i, j;
  var m_tab;
  const ten3 = 1000.0;
  var tensile_400;
-
+ const unused = "unused";
+ 
    /*  Bring in material properties table  */
  if (x[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
      else m_tab = require('../mat_ips.json');
@@ -18,7 +20,9 @@ export function init(p, x) {
 
  
      x[o.Spring_Type] = "Torsion";
-     if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Ten_Bnd_Endur] === "unused") x[o.Prop_Calc_Method] = 1;
+     store.dispatch(changeSymbolInput("Spring_Type", true));
+     if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Ten_Bnd_Endur] === unused) x[o.Prop_Calc_Method] = 1;
+     j = x[o.End_Type];
  
  switch(x[o.Prop_Calc_Method]){
  default:
@@ -30,7 +34,6 @@ export function init(p, x) {
 //    x[o.Material_Index] = i;
 //    console.log("Material_Index = x[o.Material_Type] =", x[o.Material_Type]);
 //    console.log("Material_Index = x[o.Material_Index] =", x[o.Material_Index]);
-    j = x[o.End_Type];
 
      /*  taken from READMAT.PLI
       *  Initial manipulations of material array
@@ -130,22 +133,52 @@ export function init(p, x) {
 //end_type        = end_name(end_type_index);
 //inactive_coils  = inact_coil_tbl(end_type_index);
     x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
+    store.dispatch(changeSymbolInput("ASTM/Fed_Spec", true));
+    store.dispatch(changeSymbolInput("Process", true));
+    store.dispatch(changeSymbolInput("Density", true));
+    store.dispatch(changeSymbolInput("Elastic_Modulus", true));
+    store.dispatch(changeSymbolInput("Hot_Factor_Kh", true));
+    store.dispatch(changeSymbolInput("Tensile", true));
+    store.dispatch(changeSymbolInput("%_Ten_Bnd_Stat", true));
+    store.dispatch(changeSymbolInput("%_Ten_Bnd_Endur", true));
+    store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", true));
+    store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Endur", true));
     break;
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
 //     console.log("case 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur");
-     x[o.ASTM_Fed_Spec] = "unused";
-     x[o.Material_File] = "unused";
-     x[o.Process] = "unused";
+     x[o.ASTM_Fed_Spec] = unused;
+     x[o.Material_File] = unused;
+     x[o.Process] = unused;
+     store.dispatch(changeSymbolInput("ASTM/Fed_Spec", true));
+     store.dispatch(changeSymbolInput("Process", true));
+     store.dispatch(changeSymbolInput("Density", false));
+     store.dispatch(changeSymbolInput("Elastic_Modulus", false));
+     store.dispatch(changeSymbolInput("Hot_Factor_Kh", false));
+     store.dispatch(changeSymbolInput("Tensile", false));
+     store.dispatch(changeSymbolInput("%_Ten_Bnd_Endur", false));
+     store.dispatch(changeSymbolInput("%_Ten_Bnd_Stat", false));
+     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", true));
+     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Endur", true));
      break;
 
  case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
 //     console.log("case 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur");
-     x[o.ASTM_Fed_Spec] = "unused";
-     x[o.Material_File] = "unused";
-     x[o.Process] = "unused";
-     x[o.PC_Ten_Bnd_Endur] = "unused";
-     x[o.PC_Ten_Bnd_Stat]  = "unused";
+     x[o.ASTM_Fed_Spec] = unused;
+     x[o.Material_File] = unused;
+     x[o.Process] = unused;
+     x[o.PC_Ten_Bnd_Endur] = unused;
+     x[o.PC_Ten_Bnd_Stat]  = unused;
+     store.dispatch(changeSymbolInput("ASTM/Fed_Spec", true));
+     store.dispatch(changeSymbolInput("Process", true));
+     store.dispatch(changeSymbolInput("Density", false));
+     store.dispatch(changeSymbolInput("Elastic_Modulus", false));
+     store.dispatch(changeSymbolInput("Hot_Factor_Kh", false));
+     store.dispatch(changeSymbolInput("Tensile", false));
+     store.dispatch(changeSymbolInput("%_Ten_Bnd_Endur", true));
+     store.dispatch(changeSymbolInput("%_Ten_Bnd_Stat", true));
+     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", false));
+     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Endur", false));
  }
 //    console.log('Exiting init p=',p,' x=',x);
     return x;

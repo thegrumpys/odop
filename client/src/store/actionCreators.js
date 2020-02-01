@@ -12,6 +12,7 @@ import { STARTUP,
     CHANGE_SYMBOL_CONSTRAINTS, 
     SET_SYMBOL_FLAG, 
     RESET_SYMBOL_FLAG, 
+    CHANGE_SYMBOL_INPUT, 
     
     CHANGE_INPUT_SYMBOL_VALUES, 
     SAVE_INPUT_SYMBOL_VALUES, 
@@ -152,6 +153,16 @@ export function resetSymbolFlag(name, minmax, mask) {
             name,
             minmax,
             mask
+        }
+    }
+}
+
+export function changeSymbolInput(name, value) {
+    return {
+        type: CHANGE_SYMBOL_INPUT,
+        payload: {
+            name,
+            value
         }
     }
 }

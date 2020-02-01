@@ -23,7 +23,7 @@ export function updateViolationsAndObjectiveValue(store, merit) {
 
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
-        if (element.input) {
+        if (element.input && element.equationset) {
             vmin = 0.0;
             vmax = 0.0;
             if (element.lmin & CONSTRAINED ) {
@@ -44,7 +44,7 @@ export function updateViolationsAndObjectiveValue(store, merit) {
     }
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
-        if (!element.input) {
+        if ((!element.input && element.equationset) || (!element.equationset)) {
             vmin = 0.0;
             vmax = 0.0;
             /* State variable fix levels. */

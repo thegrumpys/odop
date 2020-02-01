@@ -62,7 +62,7 @@ export const dispatcher = store => next => action => {
         design = store.getState();
         design.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
-                if (element.input) {
+                if (element.input && element.equationset) {
                     // Independent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
                     store.dispatch(resetSymbolFlag(element.name, MIN, CONSTRAINED | FDCL));
@@ -74,7 +74,8 @@ export const dispatcher = store => next => action => {
                     if (action.payload.value !== undefined) {
                         store.dispatch(changeSymbolValue(element.name, action.payload.value));
                     }
-                } else {
+                    return true; // found
+                } else if (!element.input && element.equationset) {
                     // Dependent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
                     store.dispatch(resetSymbolFlag(element.name, MIN, FDCL));
@@ -88,10 +89,13 @@ export const dispatcher = store => next => action => {
                         store.dispatch(changeSymbolConstraint(element.name, MIN, element.value));
                         store.dispatch(changeSymbolConstraint(element.name, MAX, element.value));
                     }
+                    return true; // found
+                } else {
+                    // Calculation Inputs
+                    return false; // not-found
                 }
-                return true;
             } else {
-                return false;
+                return false; // not-found
             }
         });
         invokeEquationSet(store);

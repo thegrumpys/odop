@@ -1,25 +1,30 @@
 import * as o from './offsets';
 import * as mo from '../mat_ips_offsets';
 import * as eto from './endtypes_offsets';
+import { changeSymbolInput } from '../../../store/actionCreators';
 
-export function init(p, x) {
-//    console.log('In init p=',p);
+export function init(store, p, x) {
+//    console.log('In init store=',store,'p=',p,'x=',x);
  var i, j;
+ var m_tab;
  const ten3 = 1000.0;
- const e_end_num = 5;
  var tensile_400;
  const unused = "unused";
- var m_tab;
+ const e_end_num = 5;
 
    /*  Bring in material properties table  */
  if (x[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
  else m_tab = require('../mat_ips.json');
 //    console.log("m_tab=", m_tab);
  var et_tab = require('./endtypes.json');
-//    console.log("et_tab=", et_tab);
+//console.log("et_tab=", et_tab);
+ var si_tab = require('./si_range.json');
+//console.log("et_tab=", et_tab);
 
      x[o.Spring_Type] = "Extension";
+     store.dispatch(changeSymbolInput("Spring_Type", true));
      if (x[o.Prop_Calc_Method] === 2 && x[o.PC_Tensile_Endur] === unused) x[o.Prop_Calc_Method] = 1;
+     j = x[o.End_Type];
  
  switch(x[o.Prop_Calc_Method]){
  default:
@@ -31,7 +36,6 @@ export function init(p, x) {
 //    x[o.Material_Index] = i;
 //    console.log("Material_Index = x[o.Material_Type] =", x[o.Material_Type]);
 //    console.log("Material_Index = x[o.Material_Index] =", x[o.Material_Index]);
-    j = x[o.End_Type];
 
      /*  taken from READMAT.PLI
       *  Initial manipulations of material array
@@ -161,6 +165,18 @@ export function init(p, x) {
         }
     }
     
+    store.dispatch(changeSymbolInput("ASTM/Fed_Spec", true));
+    store.dispatch(changeSymbolInput("Process", true));
+    store.dispatch(changeSymbolInput("Density", true));
+    store.dispatch(changeSymbolInput("Torsion_Modulus", true));
+    store.dispatch(changeSymbolInput("Hot_Factor_Kh", true));
+    store.dispatch(changeSymbolInput("Tensile", true));
+    store.dispatch(changeSymbolInput("%_Tensile_Stat", true));
+    store.dispatch(changeSymbolInput("%_Tensile_Endur", true));
+    store.dispatch(changeSymbolInput("%_Tensile_Bend", true));
+    store.dispatch(changeSymbolInput("Stress_Lim_Stat", true));
+    store.dispatch(changeSymbolInput("Stress_Lim_Endur", true));
+    store.dispatch(changeSymbolInput("Stress_Lim_Bend", true));
     break;
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
@@ -168,6 +184,18 @@ export function init(p, x) {
      x[o.ASTM_Fed_Spec] = unused;
      x[o.Material_File] = unused;
      x[o.Process] = unused;
+     store.dispatch(changeSymbolInput("ASTM/Fed_Spec", true));
+     store.dispatch(changeSymbolInput("Process", true));
+     store.dispatch(changeSymbolInput("Density", false));
+     store.dispatch(changeSymbolInput("Torsion_Modulus", false));
+     store.dispatch(changeSymbolInput("Hot_Factor_Kh", false));
+     store.dispatch(changeSymbolInput("Tensile", false));
+     store.dispatch(changeSymbolInput("%_Tensile_Endur", false));
+     store.dispatch(changeSymbolInput("%_Tensile_Stat", false));
+     store.dispatch(changeSymbolInput("%_Tensile_Bend", false));
+     store.dispatch(changeSymbolInput("Stress_Lim_Stat", true));
+     store.dispatch(changeSymbolInput("Stress_Lim_Endur", true));
+     store.dispatch(changeSymbolInput("Stress_Lim_Bend", true));
      break;
 
  case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
@@ -178,8 +206,42 @@ export function init(p, x) {
      x[o.PC_Tensile_Endur] = unused;
      x[o.PC_Tensile_Stat]  = unused;
      x[o.PC_Tensile_Bend]  = unused;
+     store.dispatch(changeSymbolInput("ASTM/Fed_Spec", true));
+     store.dispatch(changeSymbolInput("Process", true));
+     store.dispatch(changeSymbolInput("Density", false));
+     store.dispatch(changeSymbolInput("Torsion_Modulus", false));
+     store.dispatch(changeSymbolInput("Hot_Factor_Kh", false));
+     store.dispatch(changeSymbolInput("Tensile", false));
+     store.dispatch(changeSymbolInput("%_Tensile_Endur", true));
+     store.dispatch(changeSymbolInput("%_Tensile_Stat", true));
+     store.dispatch(changeSymbolInput("%_Tensile_Bend", true));
+     store.dispatch(changeSymbolInput("Stress_Lim_Stat", false));
+     store.dispatch(changeSymbolInput("Stress_Lim_Endur", false));
+     store.dispatch(changeSymbolInput("Stress_Lim_Bend", false));
  }
-//    console.log('In init p=',p,' x=',x);
+
+ if (et_tab[j][eto.end_type] === "User_Specified") {
+     store.dispatch(changeSymbolInput("Hook_Deflect_All", false));
+     store.dispatch(changeSymbolInput("End_ID", false));
+     store.dispatch(changeSymbolInput("Extended_End_ID", false));
+     store.dispatch(changeSymbolInput("L_End", false));
+     store.dispatch(changeSymbolInput("L_Extended_End", false));
+ } else {
+     store.dispatch(changeSymbolInput("Hook_Deflect_All", true));
+     store.dispatch(changeSymbolInput("End_ID", true));
+     store.dispatch(changeSymbolInput("Extended_End_ID", true));
+     store.dispatch(changeSymbolInput("L_End", true));
+     store.dispatch(changeSymbolInput("L_Extended_End", true));
+ }
+
+ if (si_tab[x[o.SI_Range]][0] === "User_Specified") {
+     store.dispatch(changeSymbolInput("SI_Lo_Factor", false));
+     store.dispatch(changeSymbolInput("SI_Hi_Factor", false));
+ } else {
+     store.dispatch(changeSymbolInput("SI_Lo_Factor", true));
+     store.dispatch(changeSymbolInput("SI_Hi_Factor", true));
+ }
+ //    console.log('In init p=',p,' x=',x);
     return x;
 
 }

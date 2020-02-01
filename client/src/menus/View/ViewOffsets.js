@@ -36,9 +36,9 @@ class ViewOffsets extends Component {
                     <ModalBody>
                         <pre>
                         {'// Independent Variables (input-only)\n'}
-                        {this.props.symbol_table.map((element) => {return element.input ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n' : ''})}
+                        {this.props.symbol_table.map((element) => {return (element.input && element.equationset) ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n' : ''})}
                         {'\n// Dependent Variables (input-output)\n'}
-                        {this.props.symbol_table.map((element) => {return !element.input ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ix++) + ';\n' : ''})}
+                        {this.props.symbol_table.map((element) => {return ((!element.input && element.equationset) || (!element.equationset)) ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ix++) + ';\n' : ''})}
                         {'\n// System Controls (Preferences)\n'}
                         {Object.keys(this.props.system_controls).map((element) => { return 'export const ' + element.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (isc++) + ';\n'})}
                         {'\n// Labels (Properties)\n'}
