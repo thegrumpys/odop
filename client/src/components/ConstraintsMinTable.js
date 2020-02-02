@@ -6,6 +6,11 @@ import { connect } from 'react-redux';
 
 export class ConstraintsMinTable extends Component {
     
+    constructor(props) {
+        super(props);
+//        console.log('In ConstraintsMinTable.constructor props=',props);
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -18,7 +23,7 @@ export class ConstraintsMinTable extends Component {
                             <th className="text-left d-lg-none" id="MinConstraintNameTitle">Name</th>
                             <th className="text-left" id="MinConstraintConstrainTitle">Constrain</th>
                             <th className="text-center" id="MinConstraintValueTitle">Value</th>
-                            <th className="text-right" id="MinConstraintViolationTitle">Violation</th>
+                            <th className={"text-right " + (this.props.system_controls.view_violations ? "d-block" : "d-none")} id="MinConstraintViolationTitle">Violation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,7 +51,8 @@ export class ConstraintsMinTable extends Component {
 }
 
 const mapStateToProps = state => ({
-    symbol_table: state.symbol_table
+    symbol_table: state.symbol_table,
+    system_controls: state.system_controls
 });
 
 export default connect(mapStateToProps)(ConstraintsMinTable);
