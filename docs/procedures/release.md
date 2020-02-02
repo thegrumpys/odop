@@ -5,8 +5,10 @@ A. DEVELOPMENT ENVIRONMENT
 1. Ask "Have we done everything on our milestone list?", "Is there anything else we need to do?", and "Are we ready for release?"
 1. Make sure your development environment is on branch master.
 1. Assume development database has been created by running create.sql.
-1. Start server and client under your development environment. 
-1. If the initial state has changed significantly or the startup files need to be purged, then create load.sql files for each affected design type. 
+1. Start server and client under your development environment. If they are already started, log off of Okta and re-log into Okta.
+1. If the initial state has changed significantly or the startup files need to be purged. 
+To do this compare the current master against the previous released commit tag and check if any of the initialState files have changed.
+If so, then create load.sql files for each affected design type. 
 Do a "Load Initial State" followed by a File > Save "Startup". 
 Then using mysqldump dump the affected "Startup" entries into a load.sql file. 
 Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). 
