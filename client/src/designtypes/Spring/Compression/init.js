@@ -139,6 +139,7 @@ export function init(store, p, x) {
     store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", false));
     store.dispatch(changeSymbolHidden("Material_Type", false));
     store.dispatch(changeSymbolHidden("Process", false));
+    store.dispatch(changeSymbolHidden("Life_Category", false));
     store.dispatch(changeSymbolHidden("%_Tensile_Endur", false));
     store.dispatch(changeSymbolHidden("%_Tensile_Stat", false));
 
@@ -159,6 +160,7 @@ export function init(store, p, x) {
      store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
      store.dispatch(changeSymbolHidden("Material_Type", true));
      store.dispatch(changeSymbolHidden("Process", true));
+     store.dispatch(changeSymbolHidden("Life_Category", true));
      store.dispatch(changeSymbolHidden("%_Tensile_Endur", false));
      store.dispatch(changeSymbolHidden("%_Tensile_Stat", false));
 
@@ -179,6 +181,7 @@ export function init(store, p, x) {
      store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
      store.dispatch(changeSymbolHidden("Material_Type", true));
      store.dispatch(changeSymbolHidden("Process", true));
+     store.dispatch(changeSymbolHidden("Life_Category", true));
      store.dispatch(changeSymbolHidden("%_Tensile_Endur", true));
      store.dispatch(changeSymbolHidden("%_Tensile_Stat", true));
 
