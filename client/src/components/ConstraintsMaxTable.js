@@ -6,11 +6,6 @@ import { connect } from 'react-redux';
 
 export class ConstraintsMaxTable extends Component {
     
-    constructor(props) {
-        super(props);
-//        console.log('In ConstraintsMaxTable.constructor props=',props);
-    }
-
     render() {
         return (
             <React.Fragment>

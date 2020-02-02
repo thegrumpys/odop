@@ -6,11 +6,6 @@ import { connect } from 'react-redux';
 
 export class ConstraintsMinTable extends Component {
     
-    constructor(props) {
-        super(props);
-//        console.log('In ConstraintsMinTable.constructor props=',props);
-    }
-
     render() {
         return (
             <React.Fragment>
