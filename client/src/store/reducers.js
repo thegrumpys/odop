@@ -325,6 +325,7 @@ export function reducers(state, action) {
 // SYMTEM CONTROL
         
     case CHANGE_SYSTEM_CONTROLS_VALUE:
+        console.log("In CHANGE_SYSTEM_CONTROLS_VALUE state.system_controls.view_violations=",state.system_controls.view_violations,"action.payload.system_controls.view_violations=",action.payload.system_controls.view_violations);
         return {
             ...state,
             system_controls: {

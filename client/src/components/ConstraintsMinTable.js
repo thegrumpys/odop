@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 export class ConstraintsMinTable extends Component {
     
     render() {
+        console.log('In ConstraintsMinTable.render this.props.system_controls.view_violations=',this.props.system_controls.view_violations);
         return (
             <React.Fragment>
                 <Table className="col-md-3 border border-secondary" size="sm">

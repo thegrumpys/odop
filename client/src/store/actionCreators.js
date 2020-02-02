@@ -258,6 +258,7 @@ export function changeResultViolatedConstraintCount(violated_constraint_count) {
 }
 
 export function changeSystemControlsValue(system_controls) {
+    console.log("In changeSystemControlsValue system_controls.view_violations=",system_controls.view_violations);
     return {
         type: CHANGE_SYSTEM_CONTROLS_VALUE,
         payload: {
