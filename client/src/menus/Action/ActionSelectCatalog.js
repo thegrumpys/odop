@@ -23,29 +23,6 @@ class ActionSelectCatalog extends Component {
         };
     }
 
-    componentDidMount() {
-//        console.log('In ActionSelectCatalog componentDidMount this.state=',this.state);
-        var { getCatalogNames, getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
-        var names = getCatalogNames();
-        var name;
-        if (names.length > 0)
-            name = names[0]; // Default to first name
-        const { store } = this.context;
-        // Loop to create st from symbol_table
-        var st = [];
-        this.props.symbol_table.forEach((element) => {
-            st.push(Object.assign({},element));
-        });
-        var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt);
-        var entry = 0; // Default to first entry
-        this.setState({
-            names: names,
-            name: name,
-            entries: entries,
-            entry: entry
-        });
-    }
-
     toggle() {
 //        console.log('In ActionSelectCatalog.toggle');
         var { getCatalogNames, getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
@@ -121,7 +98,7 @@ class ActionSelectCatalog extends Component {
 //        console.log('In ActionSelectCatalog.render this.state=',this.state);
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle} disabled={this.state.names.length === 0}>
+                <DropdownItem onClick={this.toggle}>
                     Select Catalog&hellip;
                 </DropdownItem>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
