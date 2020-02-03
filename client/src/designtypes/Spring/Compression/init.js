@@ -111,6 +111,7 @@ export function init(store, p, x) {
     x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0;
 //    stress_lim_stat =tensile*pc_tensile_stat /100.0;
     x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0;
+
 //    /*  copy from end type table to constants  */
 //    /*  check these values.     See AS Design Hdbk. p52  */
 //    /*    VVVVVVVVVVVVV          Kludge for Torsion  */
@@ -122,19 +123,23 @@ export function init(store, p, x) {
 //
 //end_type        = end_name(end_type_index);
 //inactive_coils  = inact_coil_tbl(end_type_index);
-    x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
 //if end_type_index <= c_end_num then
 //  add_coils_solid=acs_tbl(end_type_index);
-    x[o.Add_Coils_Solid] = et_tab[j][eto.add_coils_solid];
 //else
 //  add_coils_solid=0.0;
 //if end_type_index > c_end_num then
 //  hook_deflect_all=hda_tbl(end_type_index-c_end_num);
 //else
 //  hook_deflect_all=0.0;
+
+    if(et_tab[j][eto.end_type] !== "User_Specified") {
+        x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
+        x[o.Add_Coils_Solid] = et_tab[j][eto.add_coils_solid];
+    }
     store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", false));
     store.dispatch(changeSymbolHidden("Material_Type", false));
     store.dispatch(changeSymbolHidden("Process", false));
+    store.dispatch(changeSymbolHidden("Life_Category", false));
     store.dispatch(changeSymbolHidden("%_Tensile_Endur", false));
     store.dispatch(changeSymbolHidden("%_Tensile_Stat", false));
 
@@ -155,6 +160,7 @@ export function init(store, p, x) {
      store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
      store.dispatch(changeSymbolHidden("Material_Type", true));
      store.dispatch(changeSymbolHidden("Process", true));
+     store.dispatch(changeSymbolHidden("Life_Category", true));
      store.dispatch(changeSymbolHidden("%_Tensile_Endur", false));
      store.dispatch(changeSymbolHidden("%_Tensile_Stat", false));
 
@@ -175,6 +181,7 @@ export function init(store, p, x) {
      store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
      store.dispatch(changeSymbolHidden("Material_Type", true));
      store.dispatch(changeSymbolHidden("Process", true));
+     store.dispatch(changeSymbolHidden("Life_Category", true));
      store.dispatch(changeSymbolHidden("%_Tensile_Endur", true));
      store.dispatch(changeSymbolHidden("%_Tensile_Stat", true));
 
