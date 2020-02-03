@@ -9,6 +9,7 @@ export function migrate(design) {
      */
 //    console.log('In migrate design=',design);
 
+    var previous_version = design.version;
     var migrated_design = design; // Assume no-op as default 
 
     /* eslint-disable no-fallthrough */
@@ -83,6 +84,7 @@ export function migrate(design) {
         // console.log('Convert from 4 to 5');
         design.system_controls.show_violations = 1; // Add show_violations to system_controls
         migrated_design.version = '5'; // last thing... set the migrated model version
+        displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
     case '5':
         // Current model version
         // console.log('Convert from 5 to 6');
