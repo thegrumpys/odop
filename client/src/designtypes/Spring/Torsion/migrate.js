@@ -15,10 +15,14 @@ export function migrate(design) {
 //    console.log('In migrate design.version=',design.version);
     switch(design.version) {
     case '1':
+        // console.log('Convert from 1 to 2');
+        design.system_controls.show_violations = 1; // Add show_violations to system_controls
+        migrated_design.version = '2'; // last thing... set the migrated model version
+    case '1':
         // Current model version
-//        console.log('Convert from 1 to 2');
+        // console.log('Convert from 2 to 3');
         // To be defined - presently do nothing
-        // migrated_design.version = '2'; // last thing... set the migrated model version
+        // migrated_design.version = '3'; // last thing... set the migrated model version
         break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');

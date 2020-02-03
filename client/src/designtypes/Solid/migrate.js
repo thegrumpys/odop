@@ -80,10 +80,14 @@ export function migrate(design) {
         migrated_design.version = '4'; // last thing... set the migrated model version
         break; // Do not copy this break
     case '4':
-        // Current model version
         // console.log('Convert from 4 to 5');
+        design.system_controls.show_violations = 1; // Add show_violations to system_controls
+        migrated_design.version = '5'; // last thing... set the migrated model version
+    case '5':
+        // Current model version
+        // console.log('Convert from 5 to 6');
         // To be defined - presently do nothing
-        // migrated_design.version = '5'; // last thing... set the migrated model version
+        // migrated_design.version = '6'; // last thing... set the migrated model version
         break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');

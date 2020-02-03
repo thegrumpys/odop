@@ -18,7 +18,7 @@ export class ConstraintsMaxTable extends Component {
                             <th className="text-left d-lg-none" id="MaxConstraintNameTitle">Name</th>
                             <th className="text-left" id="MaxConstraintConstrainTitle">Constrain</th>
                             <th className="text-center" id="MaxConstraintValueTitle">Value</th>
-                            <th className={"text-right " + (this.props.system_controls.view_violations ? "d-block" : "d-none")} id="MaxConstraintViolationTitle">Violation</th>
+                            <th className={"text-right " + (this.props.system_controls.show_violations ? "" : "d-none")} id="MaxConstraintViolationTitle">Violation</th>
                         </tr>
                     </thead>
                     <tbody>

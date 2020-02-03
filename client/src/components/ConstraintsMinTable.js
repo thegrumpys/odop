@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 export class ConstraintsMinTable extends Component {
     
     render() {
-        console.log('In ConstraintsMinTable.render this.props.system_controls.view_violations=',this.props.system_controls.view_violations);
         return (
             <React.Fragment>
                 <Table className="col-md-3 border border-secondary" size="sm">
@@ -19,7 +18,7 @@ export class ConstraintsMinTable extends Component {
                             <th className="text-left d-lg-none" id="MinConstraintNameTitle">Name</th>
                             <th className="text-left" id="MinConstraintConstrainTitle">Constrain</th>
                             <th className="text-center" id="MinConstraintValueTitle">Value</th>
-                            <th className={"text-right " + (this.props.system_controls.view_violations ? "d-block" : "d-none")} id="MinConstraintViolationTitle">Violation</th>
+                            <th className={"text-right " + (this.props.system_controls.show_violations ? "" : "d-none")} id="MinConstraintViolationTitle">Violation</th>
                         </tr>
                     </thead>
                     <tbody>
