@@ -126,7 +126,8 @@ class NameValueUnitsRowIndependentVariable extends Component {
 
 const mapStateToProps = state => ({
     type: state.type,
-    symbol_table: state.symbol_table
+    symbol_table: state.symbol_table,
+    system_controls: state.system_controls
 });
 
 const mapDispatchToProps = {

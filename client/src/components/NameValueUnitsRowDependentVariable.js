@@ -62,6 +62,9 @@ class NameValueUnitsRowDependentVariable extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    system_controls: state.system_controls
+});
 
 const mapDispatchToDependentVariableProps = {
     changeSymbolValue: changeSymbolValue,
@@ -74,4 +77,4 @@ const mapDispatchToDependentVariableProps = {
     freeSymbolValue: freeSymbolValue
 };
 
-export default connect(null, mapDispatchToDependentVariableProps)(NameValueUnitsRowDependentVariable);
+export default connect(mapStateToProps, mapDispatchToDependentVariableProps)(NameValueUnitsRowDependentVariable);
