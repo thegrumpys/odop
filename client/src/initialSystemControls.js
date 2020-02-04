@@ -13,5 +13,6 @@ export const initialSystemControls = {
         "delmin": 0.0001,
         "tol": 0.0001,
         "smallnum": 1.0e-07,
+        "show_units": 1,
         "show_violations": 1
     };

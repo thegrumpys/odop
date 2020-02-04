@@ -94,6 +94,7 @@ export function migrate(design) {
         break; // Do not copy this break
     case '5':
         // console.log('Convert from 5 to 6');
+        design.system_controls.show_units = 1; // Add show_units to system_controls
         design.system_controls.show_violations = 1; // Add show_violations to system_controls
         migrated_design.version = '6'; // last thing... set the migrated model version
         displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);

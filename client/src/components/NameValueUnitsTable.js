@@ -18,7 +18,7 @@ export class NameValueUnitsTable extends Component {
                         <tr>
                             <th className="text-left" colSpan="2" id="NameTitle">Name</th>
                             <th className="text-center" colSpan="2" id="ValueTitle">Value (Fix)</th>
-                            <th className="text-left" id="UnitsTitle">Units</th>
+                            <th className={"text-left " + (this.props.system_controls.show_units ? "" : "d-none")} id="UnitsTitle">Units</th>
                             <th></th>
                         </tr>
                     </thead>
