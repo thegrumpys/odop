@@ -178,13 +178,13 @@ class App extends Component {
                         <Nav tabs>
                             <NavItem>
                                 <NavLink className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.toggleTab("1"); }}>
-                                    Design: <img src={src} alt={alt} height="30px"/> {this.props.name}
+                                    <span class="d-none d-md-inline">Design: </span><img class="d-none d-md-inline" src={src} alt={alt} height="30px"/> {this.props.name}
                                 </NavLink>
                             </NavItem>
                             {this.state.report_names.map((element,i) => {return (
                                 <NavItem key={element}>
                                     <NavLink className={classnames({ active: this.state.activeTab === (i+2).toString() })} onClick={() => { this.toggleTab((i+2).toString()); }}>
-                                        Report: {element}
+                                        <span class="d-none d-md-inline">Report: </span>{element}
                                     </NavLink>
                                 </NavItem>
                                 );
