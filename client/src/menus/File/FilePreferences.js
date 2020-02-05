@@ -83,7 +83,7 @@ class FilePreferences extends Component {
                                         <Row key={property_name}>
                                             <Col className="align-middle text-left">{property_name}</Col>
                                             <Col className="align-middle text-right">
-                                                <Input className="text-right" type="number" value={this.state.system_controls[property_name]} onChange={(event) => {this.onChange(property_name, event.target.value)}}/>
+                                                <Input type="number" className="text-right" value={this.state.system_controls[property_name]} onChange={(event) => {this.onChange(property_name, event.target.value)}}/>
                                             </Col>
                                         </Row>
                                     );

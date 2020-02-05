@@ -6,8 +6,6 @@ import {
     NavbarBrand,
     Nav,
     Container,
-    NavItem,
-    NavLink,
     TabContent,
     TabPane,
     UncontrolledDropdown,
@@ -174,17 +172,17 @@ class App extends Component {
                             </UncontrolledDropdown>
                         </Nav>
                         <Nav tabs>
-                            <NavItem>
-                                <NavLink className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.toggleTab("1"); }}>
+                            <Nav.Item>
+                                <Nav.Link className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.toggleTab("1"); }}>
                                     Design: <img src={src} alt={alt} height="30px"/> {this.props.name}
-                                </NavLink>
-                            </NavItem>
+                                </Nav.Link>
+                            </Nav.Item>
                             {this.state.report_names.map((element,i) => {return (
-                                <NavItem key={element}>
-                                    <NavLink className={classnames({ active: this.state.activeTab === (i+2).toString() })} onClick={() => { this.toggleTab((i+2).toString()); }}>
+                                <Nav.Item key={element}>
+                                    <Nav.Link className={classnames({ active: this.state.activeTab === (i+2).toString() })} onClick={() => { this.toggleTab((i+2).toString()); }}>
                                         Report: {element}
-                                    </NavLink>
-                                </NavItem>
+                                    </Nav.Link>
+                                </Nav.Item>
                                 );
                             })}
                         </Nav>

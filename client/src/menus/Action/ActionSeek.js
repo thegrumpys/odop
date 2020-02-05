@@ -79,7 +79,7 @@ class ActionSeek extends Component {
                             <InputGroupAddon addonType="prepend">
                                <InputGroupText>Name: </InputGroupText>
                             </InputGroupAddon>
-                            <Input className="align-middle" type="select" onChange={this.onNameSelect} value={this.state.name}>
+                            <Form.Control as="select" className="align-middle" onChange={this.onNameSelect} value={this.state.name}>
                                 {this.props.symbol_table.map((element, index) =>
                                     (element.equationset && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}

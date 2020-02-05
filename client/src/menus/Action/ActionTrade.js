@@ -705,7 +705,7 @@ class ActionTrade extends Component {
                                             <Col className="align-middle text-left" xs="4">{dname}</Col>
                                             <Col className="align-middle text-left" xs="2">{this.state.ldir[i] < 0 ? 'MIN' : 'MAX'}</Col>
                                             <Col className="align-middle text-right" xs="6">
-                                                <Input className="align-middle text-right" type="number" value={Math.abs(this.state.dir[i])} onChange={(event) => {this.onArbitraryChange(i, event)}}/>
+                                                <Input type="number" className="align-middle text-right" value={Math.abs(this.state.dir[i])} onChange={(event) => {this.onArbitraryChange(i, event)}}/>
                                             </Col>
                                         </Row>
                                     );
@@ -729,7 +729,7 @@ class ActionTrade extends Component {
                                     Default
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input className="text-right" type="number" value={this.state.defaultest * 100.0} onChange={this.onSizeChange}/>
+                            <Input type="number" className="text-right" value={this.state.defaultest * 100.0} onChange={this.onSizeChange}/>
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>

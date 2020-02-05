@@ -98,9 +98,9 @@ class NameValueUnitsRowIndependentVariable extends Component {
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
-                            <Input className="text-right" type="number" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
+                            <Input type="number" className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
                         { this.props.element.type === undefined && typeof this.props.element.value === 'string' ?
-                            <Input className="text-right" type="text" value={this.props.element.value} onChange={this.onChange} /> : '' }
+                            <Input type="text" className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.type === 'table' &&
                         (
                             <Form.Control as="select" value={this.props.element.value} onChange={this.onSelect}>
@@ -112,7 +112,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                         }
                         <InputGroupAddon addonType="append">
                             <InputGroupText>
-                                <Input addon type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
+                                <Input type="checkbox" addon aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
                             </InputGroupText>
                         </InputGroupAddon>
                     </InputGroup>
