@@ -1,8 +1,9 @@
-## FEASIBILITY
- This section is referenced by the message produced when SEARCH converges
- without a feasible solution.  Well, if you are in that situation ...
-
- Don't panic !  Don't get the idea that the program is unable to find an
+## Feasibility
+ 
+ If you are in a situation where when Search does not produce a feasible result ...   
+ 
+ Don't panic!  
+ Don't get the idea that the program is unable to find an
  answer when you know that a reasonable answer is available.
 
  Look at the violations.  Adjust constraint levels.  Repeat the search.
@@ -14,7 +15,8 @@
  second SEARCH may find a feasible solution.
 
  Active constraints are highlighted in the program user interface (main page). 
- Examine the associated constraint violations to determine which constraints are dominating the situation.
+ Examine the associated constraint violations to determine 
+ which constraints are dominating the situation.
  Evaluate the requirements of the application and determine if the constraint
  levels associated with any of the active constraints may be relaxed. 
  Alter the values of the active constraint levels to more appropriate values by making
@@ -22,7 +24,8 @@
  
  The Help section titled WHAT TO DO IF in [Spring Overview](./SpringDesign/spring_oview) describes a 
  number of possible  (probable) constraint conflicts and recommends a few solutions. 
- For example, confirm that any variables in fixed status (check boxes in the "Fix" column) 
+ For example, confirm that any variables in fixed status 
+ (check boxes in the "Fix" column) 
  really need to be fixed.
 
  Uncheck those boxes to allow SEARCH to alter the value of any variables 
@@ -66,6 +69,12 @@
 
  The SEEK command is designed to assist in evaluating various
  design possibilities within a feasible region.
+
+See also:   
+ &nbsp; [Terminology](terminology)   
+ &nbsp; [Design Situations](designSituations)   
+
+&nbsp;
 
  [Help](./)
  

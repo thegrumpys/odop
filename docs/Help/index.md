@@ -4,6 +4,7 @@
 * [Terminology](terminology)
 * [Getting Started](gettingStarted)
 * [Tutorial and Demo](tutordemo)
+* [Design Situations](designSituations)
 * [Feasibility](feasibility)
 * [Search](search)
 * [Seek](seek)
@@ -12,3 +13,4 @@
 * [Hints, Tips and Tricks](htt)
 * [Available Design Types](DesignTypes)
 * [Spring Design](SpringDesign)
+* [About topics](../About)
