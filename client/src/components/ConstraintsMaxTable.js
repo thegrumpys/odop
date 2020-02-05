@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, UncontrolledTooltip } from 'reactstrap';
+import { Table, UncontrolledTooltip } from 'react-bootstrap';
 import ConstraintsMaxRowIndependentVariable from './ConstraintsMaxRowIndependentVariable';
 import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
 import { connect } from 'react-redux';

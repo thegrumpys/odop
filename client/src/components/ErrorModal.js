@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Alert, Button } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Alert, Button } from 'react-bootstrap';
 
 export var displayError = function(message, header = '') {
     this.setState( // Special form of setState using updater function

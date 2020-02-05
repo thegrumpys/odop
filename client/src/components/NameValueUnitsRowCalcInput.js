@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../store/actionCreators';
 

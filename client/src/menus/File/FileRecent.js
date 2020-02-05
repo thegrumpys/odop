@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown.Item } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class FileRecent extends Component {
@@ -21,9 +21,9 @@ class FileRecent extends Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle} disabled>
+                <Dropdown.Item onClick={this.toggle} disabled>
                     Recent
-                </DropdownItem>
+                </Dropdown.Item>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Recent </ModalHeader>
                     <ModalBody>

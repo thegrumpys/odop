@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown.Item, Label, Input } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class HelpTutorial extends Component {
@@ -60,9 +60,9 @@ class HelpTutorial extends Component {
 //        console.log('In ActionExecute.render');
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle} disabled={this.state.execute_names.length === 0}>
+                <Dropdown.Item onClick={this.toggle} disabled={this.state.execute_names.length === 0}>
                     Tutorial&hellip;
-                </DropdownItem>
+                </Dropdown.Item>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Execute</ModalHeader>
                     <ModalBody>

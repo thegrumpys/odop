@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Label, Input, Table } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown.Item, Label, Input, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../../store/actionCreators';
 
@@ -98,9 +98,9 @@ class ActionSelectCatalog extends Component {
 //        console.log('In ActionSelectCatalog.render this.state=',this.state);
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <Dropdown.Item onClick={this.toggle}>
                     Select Catalog&hellip;
-                </DropdownItem>
+                </Dropdown.Item>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Catalog</ModalHeader>
                     <ModalBody>

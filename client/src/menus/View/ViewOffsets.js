@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { Dropdown.Item, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class ViewOffsets extends Component {
@@ -28,9 +28,9 @@ class ViewOffsets extends Component {
         var il = 0;
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <Dropdown.Item onClick={this.toggle}>
                     Offsets
-                </DropdownItem>
+                </Dropdown.Item>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : Offsets </ModalHeader>
                     <ModalBody>

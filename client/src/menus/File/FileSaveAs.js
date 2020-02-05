@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
-import { Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown.Item } from 'react-bootstrap';
+import { Label, Input } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeName } from '../../store/actionCreators';
 import { changeUser } from '../../store/actionCreators';
@@ -141,9 +141,9 @@ class FileSaveAs extends Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <Dropdown.Item onClick={this.toggle}>
                     Save As&hellip;
-                </DropdownItem>
+                </Dropdown.Item>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Save As </ModalHeader>
                     <ModalBody>

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Alert, Button } from 'reactstrap';
+import { Alert, Button } from 'react-bootstrap';
 import { load } from '../store/actionCreators';
 
 export var startExecute = function(prefix,steps) {

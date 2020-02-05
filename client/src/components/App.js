@@ -11,10 +11,10 @@ import {
     TabContent,
     TabPane,
     UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
-} from 'reactstrap';
+    Dropdown.Toggle,
+    Dropdown.Menu,
+    Dropdown.Item
+} from 'react-bootstrap';
 import classnames from 'classnames';
 import { ExecutePanel } from './ExecutePanel';
 import { DesignTable } from './DesignTable';
@@ -111,68 +111,68 @@ class App extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
                             <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav>
+                                <Dropdown.Toggle nav>
                                     File
-                                </DropdownToggle>
-                                <DropdownMenu right>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu right>
                                     <FileOpen />
                                     <FileSave />
                                     <FileSaveAs />
                                     <FileDelete />
-                                    <DropdownItem divider />
+                                    <Dropdown.Divider />
                                     <FileRecent />
-                                    <DropdownItem divider />
+                                    <Dropdown.Divider />
                                     <FilePreferences />
                                     <FileProperties />
-                                    <DropdownItem divider />
-                                    <DropdownItem onClick={() => this.props.auth.logout()}>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item onClick={() => this.props.auth.logout()}>
                                         Logout
-                                    </DropdownItem>
-                                </DropdownMenu>
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav>
+                                <Dropdown.Toggle nav>
                                     Action
-                                </DropdownToggle>
-                                <DropdownMenu right>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu right>
                                     <ActionSearch />
                                     <ActionSeek />
                                     <ActionTrade />
-                                    <DropdownItem divider />
+                                    <Dropdown.Divider />
                                     <ActionSelectSize />
                                     <ActionSelectCatalog />
-                                    <DropdownItem divider />
+                                    <Dropdown.Divider />
                                     <ActionExecute />
-                               </DropdownMenu>
+                               </Dropdown.Menu>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav>
+                                <Dropdown.Toggle nav>
                                     View
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <DropdownItem disabled>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu right>
+                                    <Dropdown.Item disabled>
                                         Define  Sub-Problems&hellip;
-                                    </DropdownItem>
-                                    <DropdownItem disabled>
+                                    </Dropdown.Item>
+                                    <Dropdown.Item disabled>
                                         Display Sub-Problems&hellip;
-                                    </DropdownItem>
-                                    <DropdownItem divider />
+                                    </Dropdown.Item>
+                                    <Dropdown.Divider />
                                     {process.env.NODE_ENV !== "production" && <ViewOffsets />}
-                               </DropdownMenu>
+                               </Dropdown.Menu>
                             </UncontrolledDropdown>
                             <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav>
+                                <Dropdown.Toggle nav>
                                     Help
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <DropdownItem disabled>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu right>
+                                    <Dropdown.Item disabled>
                                         Context Help
-                                    </DropdownItem>
+                                    </Dropdown.Item>
                                     <HelpIndex />
                                     <HelpDemo />
                                     <HelpTutorial />
                                     <HelpAbout />
-                               </DropdownMenu>
+                               </Dropdown.Menu>
                             </UncontrolledDropdown>
                         </Nav>
                         <Nav tabs>

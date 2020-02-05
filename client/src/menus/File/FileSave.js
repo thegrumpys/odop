@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DropdownItem } from 'reactstrap';
+import { Dropdown.Item } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
@@ -74,9 +74,9 @@ class FileSave extends Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.onSave} disabled={this.props.state.user === null ? true : false}>
+                <Dropdown.Item onClick={this.onSave} disabled={this.props.state.user === null ? true : false}>
                     Save
-                </DropdownItem>
+                </Dropdown.Item>
             </React.Fragment>
         );
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ModalBody } from 'reactstrap';
+import { Modal, ModalBody } from 'react-bootstrap';
 
 export var displaySpinner = function(display) {
     this.setState({

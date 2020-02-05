@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown.Item, Label, Input } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { changeSymbolValue, setSymbolFlag } from '../../store/actionCreators';
@@ -134,9 +134,9 @@ class ActionSelectSize extends Component {
 //        console.log('In ActionSelectSize.render');
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle} disabled={this.state.types.length === 0}>
+                <Dropdown.Item onClick={this.toggle} disabled={this.state.types.length === 0}>
                     Select Size&hellip;
-                </DropdownItem>
+                </Dropdown.Item>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Size</ModalHeader>
                     <ModalBody>

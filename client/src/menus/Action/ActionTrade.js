@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button, Container, Row, Col, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
+import { Dropdown.Item, Modal, ModalHeader, ModalBody, ModalFooter, Button, Container, Row, Col, Input, InputGroup, InputGroupAddon, InputGroupText } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, CONSTRAINED, FDCL } from '../../store/actionTypes';
 import { changeSymbolConstraint,
@@ -659,9 +659,9 @@ class ActionTrade extends Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.strategyToggle}>
+                <Dropdown.Item onClick={this.strategyToggle}>
                     Trade&hellip;
-                </DropdownItem>
+                </Dropdown.Item>
                 <Modal isOpen={this.state.strategyModal} className={this.props.className} size="lg">
                     <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy </ModalHeader>
                     <ModalBody>

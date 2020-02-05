@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, UncontrolledTooltip  } from 'reactstrap';
+import { Table, UncontrolledTooltip  } from 'react-bootstrap';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
 import NameValueUnitsRowDependentVariable from './NameValueUnitsRowDependentVariable';

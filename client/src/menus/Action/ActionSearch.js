@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DropdownItem } from 'reactstrap';
+import { Dropdown.Item } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { search } from '../../store/actionCreators';
 
@@ -17,9 +17,9 @@ class ActionSearch extends Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <Dropdown.Item onClick={this.toggle}>
                     Search
-                </DropdownItem>
+                </Dropdown.Item>
             </React.Fragment>
         );
     }
