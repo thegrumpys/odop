@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Modal.Header, Modal.Body, Modal.Footer, Dropdown.Item, Container, Row, Col, Input } from 'react-bootstrap';
+import { Button, Modal, Dropdown, Container, Row, Col, Input, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { initialSystemControls } from '../../initialSystemControls';
 import { changeSystemControlsValue } from '../../store/actionCreators';

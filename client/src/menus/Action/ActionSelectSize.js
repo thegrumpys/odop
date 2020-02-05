@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Modal.Header, Modal.Body, Modal.Footer, Dropdown.Item, Label, Input } from 'react-bootstrap';
+import { Button, Modal, Dropdown, Label, Input, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { changeSymbolValue, setSymbolFlag } from '../../store/actionCreators';

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {
     Collapse,
     Navbar,
-    NavbarToggler,
-    NavbarBrand,
     Nav,
     Container,
     TabContent,
@@ -102,8 +100,8 @@ class App extends Component {
         return (
             <React.Fragment>
                 <Navbar color="white" light expand="md" fixed="top">
-                    <NavbarBrand><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
+                    <Navbar.Brand><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
+                    <Navbar.Toggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
                             <UncontrolledDropdown nav inNavbar>

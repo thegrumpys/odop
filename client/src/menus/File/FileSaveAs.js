@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Modal.Header, Modal.Body, Modal.Footer, Dropdown.Item } from 'react-bootstrap';
-import { Label, Input } from 'react-bootstrap';
+import { Button, Modal, Dropdown, Label, Input, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeName } from '../../store/actionCreators';
 import { changeUser } from '../../store/actionCreators';

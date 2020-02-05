@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Modal.Header, Modal.Body, Modal.Footer, Dropdown.Item } from 'react-bootstrap';
+import { Button, Modal, Dropdown, Form } from 'react-bootstrap';
 import { Label, Input } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { displayError } from '../../components/ErrorModal';

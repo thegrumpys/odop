@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown.Item } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class HelpIndex extends Component {

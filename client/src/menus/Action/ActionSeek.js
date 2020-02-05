@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown.Item, Modal, Modal.Header, Modal.Body, Modal.Footer, InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, Button } from 'react-bootstrap';
+import { Dropdown, Modal, InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek } from '../../store/actionCreators';

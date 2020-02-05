@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import { Label, Input } from 'react-bootstrap';
+import { Button, Modal, Label, Input, Form } from 'react-bootstrap';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { initialSystemControls } from '../initialSystemControls';
@@ -218,10 +217,10 @@ export default withAuth(class PromptForDesign extends Component {
         if (this.state.store === null) {
             return (
                 <React.Fragment>
-                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
+                    <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
                         <Modal.Header toggle={this.toggle}>
-                        <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>
-                          Open Design Optimization Platform
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>
+                              Open Design Optimization Platform
                         </Modal.Header>
                         <Modal.Body>
                             <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay" target="_blank" rel="noopener noreferrer">Message-of-the-day </a> 

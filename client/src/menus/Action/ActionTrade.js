@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Dropdown.Item, Modal, Modal.Header, Modal.Body, Modal.Footer, Button, Container, Row, Col, Input, InputGroup, InputGroupAddon, InputGroupText } from 'react-bootstrap';
+import { Dropdown, Modal, Button, Container, Row, Col, Input, InputGroup, InputGroupAddon, InputGroupText, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, CONSTRAINED, FDCL } from '../../store/actionTypes';
 import { changeSymbolConstraint,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown.Item, Modal, Modal.Header, Modal.Body, Modal.Footer, Button } from 'react-bootstrap';
+import { Dropdown, Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class ViewOffsets extends Component {
