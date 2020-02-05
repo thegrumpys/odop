@@ -83,12 +83,12 @@ class NameValueUnitsRowCalcInput extends Component {
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
-                            <Input disabled={this.props.element.input} className="text-right" type="number" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
+                            <Input disabled={!this.props.element.input} className="text-right" type="number" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
                         { this.props.element.type === undefined && typeof this.props.element.value === 'string' ?
-                            <Input disabled={this.props.element.input} className="text-right" type="text" value={this.props.element.value} onChange={this.onChange} /> : '' }
+                            <Input disabled={!this.props.element.input} className="text-right" type="text" value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.type === 'table' &&
                         (
-                            <Input disabled={this.props.element.input} type="select" value={this.props.element.value} onChange={this.onSelect}>
+                            <Input disabled={!this.props.element.input} type="select" value={this.props.element.value} onChange={this.onSelect}>
                                 {this.state.table.map((value, index) =>
                                     index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
                                 )}

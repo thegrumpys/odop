@@ -437,7 +437,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Prop_Calc_Method",
             "value": 1,
             "units": "",
@@ -454,7 +454,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Material_Type",
             "value": 2,
             "units": "",
@@ -471,7 +471,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "ASTM/Fed_Spec",
             "value": "Defined in initialState",
             "units": "",
@@ -486,7 +486,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Process",
             "value": "Cold_Coiled",
             "units": "",
@@ -501,7 +501,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Catalog_Number",
             "value": "Defined in initialState ... -1?",
             "units": "",
@@ -515,7 +515,7 @@ export const initialState = {
             "hidden": true
         },
         {
-            "input": false,
+            "input": true,
             "name": "Material_File",
             "value": "mat_ips.json",
             "units": "",
@@ -529,7 +529,7 @@ export const initialState = {
             "hidden": true
         },
         {
-            "input": false,
+            "input": true,
             "name": "Life_Category",
             "value": 1,
             "units": "",
@@ -546,7 +546,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "End_Type",
             "value": 4,
             "units": "",
@@ -563,7 +563,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Inactive_Coils",
             "value": 2.0,
             "units": "coils",
@@ -578,7 +578,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Add_Coils@Solid",
             "value": 0.0,
             "units": "coils",
@@ -593,7 +593,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Density",
             "value": 0.036,
             "units": "lb/cu-in",
@@ -608,7 +608,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Torsion_Modulus",
             "value": 11500000.0,
             "units": "PSI",
@@ -623,7 +623,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Hot_Factor_Kh",
             "value": 1.0,
             "units": "ratio",
@@ -638,7 +638,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Tensile",
             "value": 261000.0,
             "units": "PSI",
@@ -653,7 +653,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "%_Tensile_Endur",
             "value": 50.0,
             "units": "%",
@@ -668,7 +668,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "%_Tensile_Stat",
             "value": 50.0,
             "units": "%",
@@ -683,7 +683,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Stress_Lim_Endur",
             "value": 130709.6,
             "units": "PSI",
@@ -698,7 +698,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Stress_Lim_Stat",
             "value": 130709.6,
             "units": "PSI",
@@ -713,7 +713,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "tbase010",
             "value": 0.010,
             "units": "",
@@ -727,7 +727,7 @@ export const initialState = {
             "hidden": true
         },
         {
-            "input": false,
+            "input": true,
             "name": "tbase400",
             "value": 0.400,
             "units": "",
@@ -741,7 +741,7 @@ export const initialState = {
             "hidden": true
         },
         {
-            "input": false,
+            "input": true,
             "name": "const_term",
             "value": 1.0,
             "units": "",
@@ -755,7 +755,7 @@ export const initialState = {
             "hidden": true
         },
         {
-            "input": false,
+            "input": true,
             "name": "slope_term",
             "value": 1.0,
             "units": "",
@@ -769,7 +769,7 @@ export const initialState = {
             "hidden": true
         },
         {
-            "input": false,
+            "input": true,
             "name": "tensile_010",
             "value": 100000.0,
             "units": "PSI",
