@@ -18,7 +18,7 @@ export class ConstraintsMaxTable extends Component {
                             <th className="text-left d-lg-none" id="MaxConstraintNameTitle">Name</th>
                             <th className="text-left" id="MaxConstraintConstrainTitle">Constrain</th>
                             <th className="text-center" id="MaxConstraintValueTitle">Value</th>
-                            <th className="text-right" id="MaxConstraintViolationTitle">Violation</th>
+                            <th className={"text-right " + (this.props.system_controls.show_violations ? "" : "d-none")} id="MaxConstraintViolationTitle">Violation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +47,7 @@ export class ConstraintsMaxTable extends Component {
 
 const mapStateToProps = state => ({
     symbol_table: state.symbol_table,
-    objective_value: state.result.objective_value
+    system_controls: state.system_controls
 });
 
 export default connect(mapStateToProps)(ConstraintsMaxTable);

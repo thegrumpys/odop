@@ -102,7 +102,7 @@ class NameValueUnitsRowCalcInput extends Component {
                         </InputGroupAddon>
                     </InputGroup>
                 </td>
-                <td className="text-nowrap align-middle small" colSpan="1">{this.props.element.units}</td>
+                <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
             </tr>
         );
     }
@@ -110,11 +110,12 @@ class NameValueUnitsRowCalcInput extends Component {
 
 const mapStateToProps = state => ({
     type: state.type,
-    symbol_table: state.symbol_table
+    symbol_table: state.symbol_table,
+    system_controls: state.system_controls
 });
 
 const mapDispatchToProps = {
-        changeSymbolValue: changeSymbolValue
+    changeSymbolValue: changeSymbolValue
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NameValueUnitsRowCalcInput);

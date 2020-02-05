@@ -55,13 +55,16 @@ class NameValueUnitsRowDependentVariable extends Component {
                         </InputGroupAddon>
                     </InputGroup>
                 </td>
-                <td className="text-nowrap align-middle small" colSpan="1">{this.props.element.units}</td>
+                <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
                 <td></td>
             </tr>
         );
     }
 }
 
+const mapStateToProps = state => ({
+    system_controls: state.system_controls
+});
 
 const mapDispatchToDependentVariableProps = {
     changeSymbolValue: changeSymbolValue,
@@ -74,4 +77,4 @@ const mapDispatchToDependentVariableProps = {
     freeSymbolValue: freeSymbolValue
 };
 
-export default connect(null, mapDispatchToDependentVariableProps)(NameValueUnitsRowDependentVariable);
+export default connect(mapStateToProps, mapDispatchToDependentVariableProps)(NameValueUnitsRowDependentVariable);

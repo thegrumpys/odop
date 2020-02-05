@@ -18,7 +18,7 @@ export class NameValueUnitsTable extends Component {
                         <tr>
                             <th className="text-left" colSpan="2" id="NameTitle">Name</th>
                             <th className="text-center" colSpan="2" id="ValueTitle">Value (Fix)</th>
-                            <th className="text-left" id="UnitsTitle">Units</th>
+                            <th className={"text-left " + (this.props.system_controls.show_units ? "" : "d-none")} id="UnitsTitle">Units</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -57,7 +57,8 @@ export class NameValueUnitsTable extends Component {
 }
 
 const mapStateToProps = state => ({
-    symbol_table: state.symbol_table
+    symbol_table: state.symbol_table,
+    system_controls: state.system_controls
 });
 
 export default connect(mapStateToProps)(NameValueUnitsTable);

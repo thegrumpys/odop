@@ -69,7 +69,7 @@ class FilePreferences extends Component {
                 <DropdownItem onClick={this.toggle}>
                     Preferences&hellip;
                 </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
                     <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Preferences </ModalHeader>
                     <ModalBody>
                         <Container>

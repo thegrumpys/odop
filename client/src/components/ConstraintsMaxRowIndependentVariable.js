@@ -88,9 +88,9 @@ class ConstraintMaxRowIndependentVariable extends Component {
         // =======================================
         var cmax_class;
         if (this.props.objective_value < this.props.system_controls.objmin) {
-            cmax_class = (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) ? 'text-low-danger text-right border-low-danger' : 'text-right';
+            cmax_class = (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) ? 'text-right text-low-danger border-low-danger' : 'text-right';
         } else {
-            cmax_class = (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
+            cmax_class = (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) ? 'text-right text-danger border-danger font-weight-bold' : 'text-right';
         }
         // =======================================
         // Table Row
@@ -147,7 +147,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                             </ModalFooter>
                         </Modal> : ''}
                     </td>
-                    <td className="text-right align-middle small" colSpan="1">
+                    <td className={"text-right align-middle small " + (this.props.system_controls.show_violations ? "" : "d-none")} colSpan="1">
                         {this.props.element.lmax & FIXED ? '' : (this.props.element.lmax & CONSTRAINED ? (this.props.element.vmax*100.0).toFixed(1) + '%' : '')}
                     </td>
                 </tr>

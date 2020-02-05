@@ -18,7 +18,7 @@ export class ConstraintsMinTable extends Component {
                             <th className="text-left d-lg-none" id="MinConstraintNameTitle">Name</th>
                             <th className="text-left" id="MinConstraintConstrainTitle">Constrain</th>
                             <th className="text-center" id="MinConstraintValueTitle">Value</th>
-                            <th className="text-right" id="MinConstraintViolationTitle">Violation</th>
+                            <th className={"text-right " + (this.props.system_controls.show_violations ? "" : "d-none")} id="MinConstraintViolationTitle">Violation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,7 +46,8 @@ export class ConstraintsMinTable extends Component {
 }
 
 const mapStateToProps = state => ({
-    symbol_table: state.symbol_table
+    symbol_table: state.symbol_table,
+    system_controls: state.system_controls
 });
 
 export default connect(mapStateToProps)(ConstraintsMinTable);

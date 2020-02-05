@@ -32,7 +32,6 @@ import ActionTrade from '../menus/Action/ActionTrade';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
-import ViewViolations from '../menus/View/ViewViolations';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
@@ -158,7 +157,6 @@ class App extends Component {
                                         Display Sub-Problems&hellip;
                                     </DropdownItem>
                                     <DropdownItem divider />
-                                    <ViewViolations />
                                     {process.env.NODE_ENV !== "production" && <ViewOffsets />}
                                </DropdownMenu>
                             </UncontrolledDropdown>

@@ -104,12 +104,12 @@ class ConstraintsMinRowDependentVariable extends Component {
         // =======================================
         var cmin_class;
         if (this.props.element.lmin & FIXED) {
-            cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-info text-right font-weight-bold border-info' : 'text-right';
+            cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-right text-info border-info font-weight-bold' : 'text-right';
         } else {
             if (this.props.objective_value < this.props.system_controls.objmin) {
-                cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-low-danger text-right border-low-danger' : 'text-right';
+                cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-right text-low-danger border-low-danger' : 'text-right';
             } else {
-                cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-danger text-right font-weight-bold border-danger' : 'text-right';
+                cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-right text-danger border-danger font-weight-bold' : 'text-right';
             }
         }
         // =======================================
@@ -167,7 +167,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                             </ModalFooter>
                         </Modal> : ''}
                     </td>
-                    <td className="text-right align-middle small" colSpan="1">
+                    <td className={"text-right align-middle small " + (this.props.system_controls.show_violations ? "" : "d-none")} colSpan="1">
                         {this.props.element.lmin & FIXED ? (this.props.element.vmin*100.0).toFixed(1) : (this.props.element.lmin & CONSTRAINED ? (this.props.element.vmin*100.0).toFixed(1) + '%' : '')}
                     </td>
                 </tr>
