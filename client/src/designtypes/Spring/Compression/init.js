@@ -19,7 +19,6 @@ export function init(store, p, x) {
 
  
      x[o.Spring_Type] = "Compression";
-     store.dispatch(changeSymbolInput("Spring_Type", false));
      j = x[o.End_Type];
  
  switch(x[o.Prop_Calc_Method]){

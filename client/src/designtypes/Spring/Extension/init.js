@@ -21,7 +21,6 @@ export function init(store, p, x) {
 //console.log("et_tab=", et_tab);
 
      x[o.Spring_Type] = "Extension";
-     store.dispatch(changeSymbolInput("Spring_Type", false));
      j = x[o.End_Type];
  
  switch(x[o.Prop_Calc_Method]){
