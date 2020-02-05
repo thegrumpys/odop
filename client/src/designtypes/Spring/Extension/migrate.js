@@ -19,6 +19,13 @@ export function migrate(design) {
         // console.log('Convert from 1 to 2');
         design.system_controls.show_units = 1; // Add show_units to system_controls
         design.system_controls.show_violations = 1; // Add show_violations to system_controls
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (!element.equationset) { // That is a Calculation Input
+                if (element.name !== "Spring_type") { // And it is NOT Spring_Type
+                    element.input = !element.input; // Flip the input boolean value
+                }
+            }
+        });
         migrated_design.version = '2'; // last thing... set the migrated model version
         displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
     case '2':
