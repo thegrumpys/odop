@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown.Item } from 'react-bootstrap';
+import { Button, Modal, Modal.Header, Modal.Body, Modal.Footer, Dropdown.Item } from 'react-bootstrap';
 import { Label, Input } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeName } from '../../store/actionCreators';
@@ -144,18 +144,18 @@ class FileSaveAs extends Component {
                 <Dropdown.Item onClick={this.toggle}>
                     Save As&hellip;
                 </Dropdown.Item>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Save As </ModalHeader>
-                    <ModalBody>
+                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Save As </Modal.Header>
+                    <Modal.Body>
                         <br />
-                        <Label for="fileSaveAsText">Save As:</Label>
+                        <Form.Label for="fileSaveAsText">Save As:</Form.Label>
                         <Input type="text" id="fileSaveAsText" placeholder="Enter design name here" onChange={this.onTextInput}/>
-                    </ModalBody>
-                    <ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button color="primary" onClick={this.onSaveAs}>Save As</Button>
-                    </ModalFooter>
-                </Modal>
+                    </Modal.Footer>
+                </Modal.Dialog>
             </React.Fragment>
         );
     }

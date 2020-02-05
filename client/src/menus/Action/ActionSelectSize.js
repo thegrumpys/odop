@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown.Item, Label, Input } from 'react-bootstrap';
+import { Button, Modal, Modal.Header, Modal.Body, Modal.Footer, Dropdown.Item, Label, Input } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { changeSymbolValue, setSymbolFlag } from '../../store/actionCreators';
@@ -137,28 +137,28 @@ class ActionSelectSize extends Component {
                 <Dropdown.Item onClick={this.toggle} disabled={this.state.types.length === 0}>
                     Select Size&hellip;
                 </Dropdown.Item>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Size</ModalHeader>
-                    <ModalBody>
-                        <Label for="sizeTypeSelect">Select size type:</Label>
-                        <Input type="select" id="sizeTypeSelect" onChange={this.onSelectSizeType} value={this.state.type}>
+                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Size</Modal.Header>
+                    <Modal.Body>
+                        <Form.Label for="sizeTypeSelect">Select size type:</Form.Label>
+                        <Form.Control as="select" id="sizeTypeSelect" onChange={this.onSelectSizeType} value={this.state.type}>
                             {this.state.types.map((element, index) =>
                                 <option key={index} value={element}>{element}</option>
                             )}
-                        </Input>
+                        </Form.Control>
                         <br />
-                        <Label for="sizeEntrySelect">Select size:</Label>
-                        <Input type="select" id="sizeEntrySelect" onChange={this.onSelectSizeEntry} value={this.state.size}>
+                        <Form.Label for="sizeEntrySelect">Select size:</Form.Label>
+                        <Form.Control as="select" id="sizeEntrySelect" onChange={this.onSelectSizeEntry} value={this.state.size}>
                             {this.state.sizes.map((element, index) => (
                                 <option key={index} value={element}>{element}</option>
                             ))}
-                        </Input>
-                    </ModalBody>
-                    <ModalFooter>
+                        </Form.Control>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
                         <Button color="primary" onClick={this.onSelect}>Select</Button>
-                    </ModalFooter>
-                </Modal>
+                    </Modal.Footer>
+                </Modal.Dialog>
             </React.Fragment>
         );
     }

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Dropdown.Item, Modal, ModalHeader, ModalBody, ModalFooter, Button, Container, Row, Col, Input, InputGroup, InputGroupAddon, InputGroupText } from 'react-bootstrap';
+import { Dropdown.Item, Modal, Modal.Header, Modal.Body, Modal.Footer, Button, Container, Row, Col, Input, InputGroup, InputGroupAddon, InputGroupText } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, CONSTRAINED, FDCL } from '../../store/actionTypes';
 import { changeSymbolConstraint,
@@ -662,9 +662,9 @@ class ActionTrade extends Component {
                 <Dropdown.Item onClick={this.strategyToggle}>
                     Trade&hellip;
                 </Dropdown.Item>
-                <Modal isOpen={this.state.strategyModal} className={this.props.className} size="lg">
-                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy </ModalHeader>
-                    <ModalBody>
+                <Modal.Dialog isOpen={this.state.strategyModal} className={this.props.className} size="lg">
+                    <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy </Modal.Header>
+                    <Modal.Body>
                         Specify your trade strategy:<br/>
                         <ul>
                             <li>Help - View Trade information in a new tab</li>
@@ -673,18 +673,18 @@ class ActionTrade extends Component {
                             <li>Existing - relax constraints to the point of the existing violations</li>
                             <li>Done - return to main page</li>
                         </ul>
-                    </ModalBody>
-                    <ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button outline color="info" onClick={this.onStrategyContextHelp}>Help</Button>{' '}
                         <Button color="secondary" onClick={this.onStrategyDone}> &nbsp; Done &nbsp; </Button>{' '}
                         <Button color="secondary" onClick={this.onStrategyExisting}>Existing</Button>{' '}
                         <Button color="info" onClick={this.onStrategyArbitrary}>Arbitrary</Button>{' '}
                         <Button color="primary" onClick={this.onStrategyProportional}>Proportional</Button>
-                    </ModalFooter>
-                </Modal>
-                <Modal isOpen={this.state.arbitraryModal} className={this.props.className}>
-                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Arbitrary </ModalHeader>
-                    <ModalBody>
+                    </Modal.Footer>
+                </Modal.Dialog>
+                <Modal.Dialog isOpen={this.state.arbitraryModal} className={this.props.className}>
+                    <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Arbitrary </Modal.Header>
+                    <Modal.Body>
                         <Container>
                             <Row>
                                 <Col className="text-left font-weight-bold align-middle" xs="4">Name</Col>
@@ -712,15 +712,15 @@ class ActionTrade extends Component {
                                 })
                             }
                         </Container>
-                    </ModalBody>
-                    <ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button color="secondary" onClick={this.onArbitraryCancel}>Cancel</Button>{' '}
                         <Button color="primary" onClick={this.onArbitraryContinue} disabled={this.state.arbitraryContinueDisabled}>Continue</Button>
-                    </ModalFooter>
-                </Modal>
-                <Modal isOpen={this.state.sizeModal} className={this.props.className}>
-                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Size </ModalHeader>
-                    <ModalBody>
+                    </Modal.Footer>
+                </Modal.Dialog>
+                <Modal.Dialog isOpen={this.state.sizeModal} className={this.props.className}>
+                    <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Size </Modal.Header>
+                    <Modal.Body>
                         Enter local exploration step size (%)<br/>
                         Possibilities range from {(90.0 * this.state.smallest).toFixed(2)} to {(100.0 * this.state.bigest).toFixed(2)}<br/>
                         <InputGroup>
@@ -731,45 +731,45 @@ class ActionTrade extends Component {
                             </InputGroupAddon>
                             <Input className="text-right" type="number" value={this.state.defaultest * 100.0} onChange={this.onSizeChange}/>
                         </InputGroup>
-                    </ModalBody>
-                    <ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button color="secondary" onClick={this.onSizeCancel}>Cancel</Button>{' '}
                         <Button color="primary" onClick={this.onSizeContinue}>Continue</Button>
-                    </ModalFooter>
-                </Modal>
-                <Modal isOpen={this.state.feasibleModal} className={this.props.className}>
-                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Feasible </ModalHeader>
-                    <ModalBody>
+                    </Modal.Footer>
+                </Modal.Dialog>
+                <Modal.Dialog isOpen={this.state.feasibleModal} className={this.props.className}>
+                    <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Feasible </Modal.Header>
+                    <Modal.Body>
                         A feasible point has been established.<br/>
                         <ul>
                             <li>Done - To return with these constraints</li>
                             <li>Resize - Enter a smaller local exploration step size</li>
                         </ul>
                         {this.list_constraints()}
-                    </ModalBody>
-                    <ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button color="secondary" onClick={this.onFeasibleRestart}>Resize</Button>{' '}
                         <Button color="primary" onClick={this.onFeasibleDone}> &nbsp; Done &nbsp; </Button>
-                    </ModalFooter>
-                </Modal>
-                <Modal isOpen={this.state.establishModal} className={this.props.className}>
-                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Establish </ModalHeader>
-                    <ModalBody>
+                    </Modal.Footer>
+                </Modal.Dialog>
+                <Modal.Dialog isOpen={this.state.establishModal} className={this.props.className}>
+                    <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Establish </Modal.Header>
+                    <Modal.Body>
                         Do you wish to establish this set of constraints?
                         <ul>
                             <li>Accept - establish this set of constraints</li>
                             <li>Done - Return to the main page with previously established constraints</li>
                         </ul>
                         {this.list_constraints()}
-                    </ModalBody>
-                    <ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button color="secondary" onClick={this.onEstablishDone}> &nbsp; Done &nbsp; </Button>{' '}
                         <Button color="primary" onClick={this.onEstablishAccept}>Accept</Button>
-                    </ModalFooter>
-                </Modal>
-                <Modal isOpen={this.state.notFeasibleModal} className={this.props.className}>
-                    <ModalHeader><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Not Feasible </ModalHeader>
-                    <ModalBody>
+                    </Modal.Footer>
+                </Modal.Dialog>
+                <Modal.Dialog isOpen={this.state.notFeasibleModal} className={this.props.className}>
+                    <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Not Feasible </Modal.Header>
+                    <Modal.Body>
                         The result is not feasible: obj = { parseFloat(this.props.design.result.objective_value).toFixed(6) }<br/>
                         <ul>
                             <li>Done &nbsp; - To return to the main page with these constraints</li>
@@ -777,13 +777,13 @@ class ActionTrade extends Component {
                             <li>Restart - To restart Trade with the previously established constraints</li>
                         </ul>
                         {this.list_constraints()}
-                    </ModalBody>
-                    <ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button color="secondary" onClick={this.onNotFeasibleRestart}>Restart</Button>{' '}
                         <Button color="secondary" onClick={this.onNotFeasibleRepeat}>Repeat</Button>{' '}
                         <Button color="primary" onClick={this.onNotFeasibleDone}> &nbsp; Done &nbsp; </Button>
-                    </ModalFooter>
-                </Modal>
+                    </Modal.Footer>
+                </Modal.Dialog>
             </React.Fragment>
         );
     }

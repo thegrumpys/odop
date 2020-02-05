@@ -11,9 +11,7 @@ import {
     TabContent,
     TabPane,
     UncontrolledDropdown,
-    Dropdown.Toggle,
-    Dropdown.Menu,
-    Dropdown.Item
+    Dropdown
 } from 'react-bootstrap';
 import classnames from 'classnames';
 import { ExecutePanel } from './ExecutePanel';

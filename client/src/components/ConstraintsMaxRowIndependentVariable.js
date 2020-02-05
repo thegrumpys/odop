@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, UncontrolledTooltip, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'react-bootstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, UncontrolledTooltip, Modal, Modal.Header, Modal.Body, Modal.Footer, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
@@ -110,11 +110,11 @@ class ConstraintMaxRowIndependentVariable extends Component {
                             <Input id={this.props.element.name + "_cmax"} className={cmax_class} type="number" value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
                             {this.props.element.lmax & FDCL ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</UncontrolledTooltip> : ''}
                         </InputGroup>
-                        {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal isOpen={this.state.modal} className={this.props.className} size="lg">
-                            <ModalHeader>
+                        {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal.Dialog isOpen={this.state.modal} className={this.props.className} size="lg">
+                            <Modal.Header>
                                 Set {this.props.element.name} Max Constraint
-                            </ModalHeader>
-                            <ModalBody>
+                            </Modal.Header>
+                            <Modal.Body>
                                 Select constraint variable or enter constraint value.
                                 <table>
                                     <tbody>
@@ -141,11 +141,11 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                         </tr>
                                     </tbody>
                                 </table>
-                            </ModalBody>
-                            <ModalFooter>
+                            </Modal.Body>
+                            <Modal.Footer>
                                 <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
-                            </ModalFooter>
-                        </Modal> : ''}
+                            </Modal.Footer>
+                        </Modal.Dialog> : ''}
                     </td>
                     <td className={"text-right align-middle small " + (this.props.system_controls.show_violations ? "" : "d-none")} colSpan="1">
                         {this.props.element.lmax & FIXED ? '' : (this.props.element.lmax & CONSTRAINED ? (this.props.element.vmax*100.0).toFixed(1) + '%' : '')}

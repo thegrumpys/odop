@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown.Item, Label, Input } from 'react-bootstrap';
+import { Button, Modal, Modal.Header, Modal.Body, Modal.Footer, Dropdown.Item, Label, Input } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class HelpTutorial extends Component {
@@ -63,22 +63,22 @@ class HelpTutorial extends Component {
                 <Dropdown.Item onClick={this.toggle} disabled={this.state.execute_names.length === 0}>
                     Tutorial&hellip;
                 </Dropdown.Item>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Execute</ModalHeader>
-                    <ModalBody>
+                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Execute</Modal.Header>
+                    <Modal.Body>
                         <br />
-                        <Label for="tutorialSelect">Select demo/tutorial to execute:</Label>
-                        <Input type="select" id="tutorialSelect" onChange={this.onSelect} value={this.state.execute_name}>
+                        <Form.Label for="tutorialSelect">Select demo/tutorial to execute:</Form.Label>
+                        <Form.Control as="select" id="tutorialSelect" onChange={this.onSelect} value={this.state.execute_name}>
                             {this.state.execute_names.map((element, index) => (
                                 <option key={index} value={element}>{element}</option>
                             ))}
-                        </Input>
-                    </ModalBody>
-                    <ModalFooter>
+                        </Form.Control>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
                        <Button color="primary" onClick={this.onExecute}>Execute</Button>
-                    </ModalFooter>
-                </Modal>
+                    </Modal.Footer>
+                </Modal.Dialog>
             </React.Fragment>
         );
     }

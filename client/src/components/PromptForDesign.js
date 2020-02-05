@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { Label, Input } from 'react-bootstrap';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
@@ -218,37 +218,37 @@ export default withAuth(class PromptForDesign extends Component {
         if (this.state.store === null) {
             return (
                 <React.Fragment>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
-                        <ModalHeader toggle={this.toggle}>
+                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
+                        <Modal.Header toggle={this.toggle}>
                         <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>
                           Open Design Optimization Platform
-                        </ModalHeader>
-                        <ModalBody>
+                        </Modal.Header>
+                        <Modal.Body>
                             <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay" target="_blank" rel="noopener noreferrer">Message-of-the-day </a> 
                             <br />
                             Learn <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">About</a> ODOP
                             <br /><br />
-                            <Label for="fileOpenSelectType">Select design type to open:</Label>
-                            <Input type="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
+                            <Form.Label for="fileOpenSelectType">Select design type to open:</Form.Label>
+                            <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
                                 {this.state.designtypes.map((designtype, index) =>
                                     <option key={index} value={designtype}>{designtype}</option>
                                 )}
-                            </Input>
+                            </Form.Control>
                             <br />
-                            <Label for="fileOpenSelectName">Select design to open:</Label>
-                            <Input type="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
+                            <Form.Label for="fileOpenSelectName">Select design to open:</Form.Label>
+                            <Form.Control as="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
                                 {this.state.designs.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                     <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
                                 )}
-                            </Input>
-                        </ModalBody>
-                        <ModalFooter>
+                            </Form.Control>
+                        </Modal.Body>
+                        <Modal.Footer>
                             <Button color="secondary" onClick={() => this.props.auth.logout()}>Logout</Button>
                             <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                             {process.env.NODE_ENV !== "production" && <Button color="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
                             <Button color="primary" onClick={this.onOpen}>Open</Button>
-                        </ModalFooter>
-                    </Modal>
+                        </Modal.Footer>
+                    </Modal.Dialog>
                 </React.Fragment>
             );
         } else {

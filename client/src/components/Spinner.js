@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ModalBody } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 export var displaySpinner = function(display) {
     this.setState({
@@ -18,9 +18,9 @@ export class Spinner extends Component {
     
     render() {
         return (
-            <Modal isOpen={this.state.modal} zIndex={1100} size="sm" fade={false} backdrop={false} className={this.props.className}>
-                <ModalBody><img src="spinner.gif" alt="Spinning Spinner" style={{"height":"90px"}}/>&nbsp;Running...</ModalBody>
-            </Modal>
+            <Modal.Dialog isOpen={this.state.modal} zIndex={1100} size="sm" fade={false} backdrop={false} className={this.props.className}>
+                <Modal.Body><img src="spinner.gif" alt="Spinning Spinner" style={{"height":"90px"}}/>&nbsp;Running...</Modal.Body>
+            </Modal.Dialog>
         );
     }
     

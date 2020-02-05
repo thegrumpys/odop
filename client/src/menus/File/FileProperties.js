@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown.Item, Container, Row, Col, Input } from 'react-bootstrap';
+import { Button, Modal, Modal.Header, Modal.Body, Modal.Footer, Dropdown.Item, Container, Row, Col, Input } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeLabelsValue } from '../../store/actionCreators';
 
@@ -65,9 +65,9 @@ class FileProperties extends Component {
                 <Dropdown.Item onClick={this.toggle}>
                     Properties&hellip;
                 </Dropdown.Item>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Properties </ModalHeader>
-                    <ModalBody>
+                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Properties </Modal.Header>
+                    <Modal.Body>
                         <Container>
                             <Row>
                                 <Col className="text-left font-weight-bold">Name</Col>
@@ -87,13 +87,13 @@ class FileProperties extends Component {
                                     })
                             }
                         </Container>
-                    </ModalBody>
-                    <ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                         <Button color="primary" onClick={this.onRestoreDefaults}>Restore Defaults</Button>
                         <Button color="primary" onClick={this.onApplyandClose}>Apply and Close</Button>
-                    </ModalFooter>
-                </Modal>
+                    </Modal.Footer>
+                </Modal.Dialog>
             </React.Fragment>
         );
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown.Item } from 'react-bootstrap';
+import { Button, Modal, Modal.Header, Modal.Body, Modal.Footer, Dropdown.Item } from 'react-bootstrap';
 import { Label, Input } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { load } from '../../store/actionCreators';
@@ -135,22 +135,22 @@ class FileOpen extends Component {
                 <Dropdown.Item onClick={this.toggle}>
                     Open&hellip;
                 </Dropdown.Item>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Open </ModalHeader>
-                    <ModalBody>
+                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Open </Modal.Header>
+                    <Modal.Body>
                         <br />
-                        <Label for="fileOpenSelect">Select design to open:</Label>
-                        <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
+                        <Form.Label for="fileOpenSelect">Select design to open:</Form.Label>
+                        <Form.Control as="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
                             {this.state.designs.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                 <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
                             )}
-                        </Input>
-                    </ModalBody>
-                    <ModalFooter>
+                        </Form.Control>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button color="primary" onClick={this.onOpen}>Open</Button>
-                    </ModalFooter>
-                </Modal>
+                    </Modal.Footer>
+                </Modal.Dialog>
             </React.Fragment>
         );
     }

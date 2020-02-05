@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown.Item } from 'react-bootstrap';
+import { Button, Modal, Modal.Header, Modal.Body, Modal.Footer, Dropdown.Item } from 'react-bootstrap';
 import { Label, Input } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { displayError } from '../../components/ErrorModal';
@@ -140,22 +140,22 @@ class FileDelete extends Component {
                 <Dropdown.Item onClick={this.toggle}>
                     Delete&hellip;
                 </Dropdown.Item>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Delete </ModalHeader>
-                    <ModalBody>
+                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Delete </Modal.Header>
+                    <Modal.Body>
                         <br />
-                        <Label for="fileDeleteSelect">Select design to delete:</Label>
-                        <Input type="select" id="fileDeleteSelect" onChange={this.onSelect}>
+                        <Form.Label for="fileDeleteSelect">Select design to delete:</Form.Label>
+                        <Form.Control as="select" id="fileDeleteSelect" onChange={this.onSelect}>
                             {this.state.designs.map((design, index) => {
                                 return <option key={index} value={design.name}>{design.name}</option>
                             })}
-                        </Input>
-                    </ModalBody>
-                    <ModalFooter>
+                        </Form.Control>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button color="primary" onClick={this.onDelete} disabled={this.state.designs.length === 0 ? true : false}>Delete</Button>
-                    </ModalFooter>
-                </Modal>
+                    </Modal.Footer>
+                </Modal.Dialog>
             </React.Fragment>
         );
     }

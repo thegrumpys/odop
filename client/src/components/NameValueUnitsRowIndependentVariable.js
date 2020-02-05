@@ -103,11 +103,11 @@ class NameValueUnitsRowIndependentVariable extends Component {
                             <Input className="text-right" type="text" value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.type === 'table' &&
                         (
-                            <Input type="select" value={this.props.element.value} onChange={this.onSelect}>
+                            <Form.Control as="select" value={this.props.element.value} onChange={this.onSelect}>
                                 {this.state.table.map((value, index) =>
                                     index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
                                 )}
-                            </Input>
+                            </Form.Control>
                         )
                         }
                         <InputGroupAddon addonType="append">

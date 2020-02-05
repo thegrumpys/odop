@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, UncontrolledTooltip, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'react-bootstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, UncontrolledTooltip, Modal, Modal.Header, Modal.Body, Modal.Footer, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
@@ -110,11 +110,11 @@ class ConstraintMinRowIndependentVariable extends Component {
                             <Input id={this.props.element.name + "_cmin"} className={cmin_class} type="number" value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} onClick={this.onClick} />
                             {this.props.element.lmin & FDCL ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmin"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</UncontrolledTooltip> : ''}
                         </InputGroup>
-                        {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ? <Modal isOpen={this.state.modal} className={this.props.className} size="lg">
-                            <ModalHeader>
+                        {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ? <Modal.Dialog isOpen={this.state.modal} className={this.props.className} size="lg">
+                            <Modal.Header>
                                 Set {this.props.element.name} Min Constraint
-                            </ModalHeader>
-                            <ModalBody>
+                            </Modal.Header>
+                            <Modal.Body>
                                 Select constraint variable or enter constraint value.
                                 <table>
                                     <tbody>
@@ -141,11 +141,11 @@ class ConstraintMinRowIndependentVariable extends Component {
                                         </tr>
                                     </tbody>
                                 </table>
-                            </ModalBody>
-                            <ModalFooter>
+                            </Modal.Body>
+                            <Modal.Footer>
                                 <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
-                            </ModalFooter>
-                        </Modal> : ''}
+                            </Modal.Footer>
+                        </Modal.Dialog> : ''}
                     </td>
                     <td className={"text-right align-middle small " + (this.props.system_controls.show_violations ? "" : "d-none")} colSpan="1">
                         {this.props.element.lmin & FIXED ? '' : (this.props.element.lmin & CONSTRAINED ? (this.props.element.vmin*100.0).toFixed(1) + '%' : '')}

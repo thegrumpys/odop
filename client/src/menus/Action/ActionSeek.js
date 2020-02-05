@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown.Item, Modal, ModalHeader, ModalBody, ModalFooter, InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, Button } from 'react-bootstrap';
+import { Dropdown.Item, Modal, Modal.Header, Modal.Body, Modal.Footer, InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek } from '../../store/actionCreators';
@@ -67,9 +67,9 @@ class ActionSeek extends Component {
                 <Dropdown.Item onClick={this.toggle}>
                     Seek&hellip;
                 </Dropdown.Item>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek </ModalHeader>
-                    <ModalBody>
+                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek </Modal.Header>
+                    <Modal.Body>
                         <InputGroup>
                             <ButtonGroup>
                                 <Button color="primary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
@@ -83,15 +83,15 @@ class ActionSeek extends Component {
                                 {this.props.symbol_table.map((element, index) =>
                                     (element.equationset && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
-                            </Input>
+                            </Form.Control>
                         </InputGroup>
-                    </ModalBody>
-                    <ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button outline color="info" onClick={this.onContextHelp}>Help</Button>{' '}
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button color="primary" onClick={this.onSeek}>Seek</Button>
-                    </ModalFooter>
-                </Modal>
+                    </Modal.Footer>
+                </Modal.Dialog>
             </React.Fragment>
         );
     }

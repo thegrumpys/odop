@@ -92,7 +92,7 @@ class NameValueUnitsRowCalcInput extends Component {
                                 {this.state.table.map((value, index) =>
                                     index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
                                 )}
-                            </Input>
+                            </Form.Control>
                         )
                         }
                         <InputGroupAddon addonType="append">
