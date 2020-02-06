@@ -60,6 +60,8 @@ export default class FELogin extends Component {
           scopes,
         },
 
+        features: { registration:true },
+
         helpLinks: {
           custom: [
             {
