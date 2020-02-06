@@ -26,6 +26,7 @@ export function report(report_name, prefs, st, labels) {
     pitch, hlx_ang,
     od_1, od_2, id_1, id_2,
     wgt1000, fs_1, ctp1, l_max, od_max;
+    var matTypeValue, astmFedSpecValue;
     var m_tab;
 
     /*  Bring in material properties table  */
@@ -150,6 +151,16 @@ export function report(report_name, prefs, st, labels) {
     cycle_life_u = st[o.Cycle_Life].units + " (est)";
 
     safe_travel = def_max;
+    
+//    console.log("st[o.Prop_Calc_Method].value = ", st[o.Prop_Calc_Method].value);
+    if (st[o.Prop_Calc_Method].value === 1){
+        matTypeValue = m_tab[st[o.Material_Type].value][mo.matnam];
+        astmFedSpecValue = st[o.ASTM_Fed_Spec].value;
+    } else {
+        matTypeValue = "User_Specified";
+        astmFedSpecValue = "N/A";
+    }
+//    console.log("matTypeValue, astmFedSpecValue = ", matTypeValue, astmFedSpecValue);
 
     switch(report_name) {
     case "1 (mini)":
@@ -174,7 +185,7 @@ export function report(report_name, prefs, st, labels) {
                         <td> &nbsp; &nbsp; </td>
                         <td>{st[o.Material_Type].name}</td>
                         <td>=</td>
-                        <td className="text-left" colSpan="2">{m_tab[st[o.Material_Type].value][mo.matnam]}</td>
+                        <td className="text-left" colSpan="2">{matTypeValue}</td>
                         <td></td>
                     </tr>
                     <tr>
@@ -393,7 +404,7 @@ export function report(report_name, prefs, st, labels) {
                                 <td> &nbsp; &nbsp; </td>
                                 <td>{st[o.Material_Type].name}</td>
                                 <td>=</td>
-                                <td className="text-left" colSpan="2">{m_tab[st[o.Material_Type].value][mo.matnam]}</td>
+                                <td className="text-left" colSpan="2">{matTypeValue}</td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -626,7 +637,7 @@ export function report(report_name, prefs, st, labels) {
                     <td> &nbsp; &nbsp; </td>
                     <td>{st[o.Material_Type].name}</td>
                     <td>=</td>
-                    <td className="text-left" colSpan="2">{m_tab[st[o.Material_Type].value][mo.matnam]}</td>
+                    <td className="text-left" colSpan="2">{matTypeValue}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -638,7 +649,7 @@ export function report(report_name, prefs, st, labels) {
                     <td> &nbsp; </td>
                     <td>{st[o.ASTM_Fed_Spec].name}</td>
                     <td>=</td>
-                    <td className="text-left" colSpan="2">{st[o.ASTM_Fed_Spec].value}</td>
+                    <td className="text-left" colSpan="2">{astmFedSpecValue}</td>
                     <td></td>
                 </tr>
                     <tr>
