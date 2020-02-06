@@ -1,21 +1,24 @@
 ## User Accounts, Username, Login, Logout
 
-A user account with username and password is required to operate the software.
-While evaluations may be conducted in a public account,
-there are a few restrictions or points to be aware of.
-See the **Evaluations** section below for details.   
+A user account with username and password is required to operate the software.   
+
+Evaluators may sign-in with the username "public" and password "public".
+It will be possible to save designs but keep in mind that all saved information will be completely public.
+Saved designs in the public account that are more than one week old are subject to being removed 
+with only minimal notice on the [Message of the Day](messageOfTheDay) page.
 
 In order to keep saved designs private, 
 it is necessary to establish a private user account with an associated unique username and password. 
 To establish a free private account, 
-use the Self-Service Registration feature on the sign-in page,
+use the "Sign up" (Self-Service Registration) feature on the sign-in page,
 or send a request to:   
 
 **Info@SpringDesignSoftware.org**   
 
-You will receive a reply message (welcome letter) with instructions on how to complete creating your account,
-promptly with the Self-Service Registration approach or after some delay with the email request approach. 
-The email request approach contains one step that is not automated, 
+You will receive a reply message (welcome letter) with instructions on how to complete creating your account. 
+This will happen promptly if using Self-Service Registration or 
+after some delay with the email request alternative. 
+The email request alternative contains one step that is not automated, 
 so expect a delay of hours to a day or so. 
 The welcome letter includes instructions on how to establish a password and if desired, 
 change it in the future.
@@ -55,17 +58,8 @@ Until this issue is resolved, user sessions expire eight hours after login regar
 If that happens, it will not be possible to open (**File : Open** menu) existing designs or
 save (**File : Save** and **File : SaveAs** menus) in-progress designs. 
 In this situation, 
-it should still be possible to print from your browser to save the current state of an in-progress design.
-
-&nbsp; 
+it should still be possible to print from your browser to save the current state of an in-progress design.   
  
-**Evaluations**
-
-Evaluators may sign-in with the username "public" and password "public".
-It will be possible to save designs but keep in mind that all saved information will be completely public.
-Saved designs in the public account that are more than a week old are subject to being removed 
-with only minimal notice on the [Message of the Day](messageOfTheDay) page.
-
  
 &nbsp; 
  
