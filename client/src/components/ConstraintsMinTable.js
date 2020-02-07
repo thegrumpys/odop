@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, UncontrolledTooltip } from 'react-bootstrap';
+import { Table, Tooltip } from 'react-bootstrap';
 import ConstraintsMinRowIndependentVariable from './ConstraintsMinRowIndependentVariable';
 import ConstraintsMinRowDependentVariable from './ConstraintsMinRowDependentVariable';
 import { connect } from 'react-redux';
@@ -33,12 +33,12 @@ export class ConstraintsMinTable extends Component {
                         {this.props.symbol_table.map((element,index) => !element.input && element.equationset && !element.hidden && <ConstraintsMinRowDependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                 </Table>
-                <UncontrolledTooltip placement="top" target="IVMinConstraintTitle">Lower limits on Independent Variables</UncontrolledTooltip>
-                <UncontrolledTooltip class="d-lg-none" placement="top" target="MinConstraintNameTitle">Variable names</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="MinConstraintConstrainTitle">Check box to establish lower limit</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="MinConstraintValueTitle">Enter value for lower limit</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="MinConstraintViolationTitle">Measure of constraint <br />satisfaction (-) or violation (+)</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="DVMinConstraintTitle">Lower limits on Dependent Variables</UncontrolledTooltip>
+                <Tooltip placement="top" target="IVMinConstraintTitle">Lower limits on Independent Variables</Tooltip>
+                <Tooltip class="d-lg-none" placement="top" target="MinConstraintNameTitle">Variable names</Tooltip>
+                <Tooltip placement="top" target="MinConstraintConstrainTitle">Check box to establish lower limit</Tooltip>
+                <Tooltip placement="top" target="MinConstraintValueTitle">Enter value for lower limit</Tooltip>
+                <Tooltip placement="top" target="MinConstraintViolationTitle">Measure of constraint <br />satisfaction (-) or violation (+)</Tooltip>
+                <Tooltip placement="top" target="DVMinConstraintTitle">Lower limits on Dependent Variables</Tooltip>
             </React.Fragment>
         );
     }

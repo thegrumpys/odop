@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip, Form } from 'react-bootstrap';
+import { InputGroup, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
 import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
@@ -94,13 +94,13 @@ class NameValueUnitsRowIndependentVariable extends Component {
         return (
             <tr key={this.props.element.name}>
                 <td className="align-middle" colSpan="2" id={'independent_variable_'+this.props.index}>{this.props.element.name}</td>
-                { this.props.element.tooltip !== undefined && <UncontrolledTooltip placement="top" target={'independent_variable_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
+                { this.props.element.tooltip !== undefined && <Tooltip placement="top" target={'independent_variable_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
-                            <Input type="number" className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
+                            <Form.Control type="number" className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
                         { this.props.element.type === undefined && typeof this.props.element.value === 'string' ?
-                            <Input type="text" className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
+                            <Form.Control type="text" className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.type === 'table' &&
                         (
                             <Form.Control as="select" value={this.props.element.value} onChange={this.onSelect}>
@@ -110,11 +110,11 @@ class NameValueUnitsRowIndependentVariable extends Component {
                             </Form.Control>
                         )
                         }
-                        <InputGroupAddon addonType="append">
-                            <InputGroupText>
-                                <Input type="checkbox" addon aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
-                            </InputGroupText>
-                        </InputGroupAddon>
+                        <InputGroup.Append>
+                            <InputGroup.Text>
+                                <Form.Check type="checkbox" addon aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
+                            </InputGroup.Text>
+                        </InputGroup.Append>
                     </InputGroup>
                 </td>
                 <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>

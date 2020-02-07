@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Dropdown, Modal, Button, Container, Row, Col, Input, InputGroup, InputGroupAddon, InputGroupText, Form } from 'react-bootstrap';
+import { Dropdown, Modal, Button, Container, Row, Col, InputGroup, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, CONSTRAINED, FDCL } from '../../store/actionTypes';
 import { changeSymbolConstraint,
@@ -705,7 +705,7 @@ class ActionTrade extends Component {
                                             <Col className="align-middle text-left" xs="4">{dname}</Col>
                                             <Col className="align-middle text-left" xs="2">{this.state.ldir[i] < 0 ? 'MIN' : 'MAX'}</Col>
                                             <Col className="align-middle text-right" xs="6">
-                                                <Input type="number" className="align-middle text-right" value={Math.abs(this.state.dir[i])} onChange={(event) => {this.onArbitraryChange(i, event)}}/>
+                                                <Form.Control type="number" className="align-middle text-right" value={Math.abs(this.state.dir[i])} onChange={(event) => {this.onArbitraryChange(i, event)}}/>
                                             </Col>
                                         </Row>
                                     );
@@ -724,12 +724,12 @@ class ActionTrade extends Component {
                         Enter local exploration step size (%)<br/>
                         Possibilities range from {(90.0 * this.state.smallest).toFixed(2)} to {(100.0 * this.state.bigest).toFixed(2)}<br/>
                         <InputGroup>
-                            <InputGroupAddon addonType="prepend">
-                                <InputGroupText>
+                            <InputGroup.Prepend>
+                                <InputGroup.Text>
                                     Default
-                                </InputGroupText>
-                            </InputGroupAddon>
-                            <Input type="number" className="text-right" value={this.state.defaultest * 100.0} onChange={this.onSizeChange}/>
+                                </InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control type="number" className="text-right" value={this.state.defaultest * 100.0} onChange={this.onSizeChange}/>
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>

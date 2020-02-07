@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, UncontrolledTooltip  } from 'react-bootstrap';
+import { Table, Tooltip  } from 'react-bootstrap';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
 import NameValueUnitsRowDependentVariable from './NameValueUnitsRowDependentVariable';
@@ -37,7 +37,7 @@ export class NameValueUnitsTable extends Component {
                         { (this.props.symbol_table.reduce((accum,element)=>{if (!element.equationset && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
                             (<tr>
                                 <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">Calculation Inputs</th>
-                                <UncontrolledTooltip placement="top" target="CITitle">Variables that are not subject to constraints, FIX or Search</UncontrolledTooltip>
+                                <Tooltip placement="top" target="CITitle">Variables that are not subject to constraints, FIX or Search</Tooltip>
                             </tr>)
                         }
                     </thead>
@@ -45,11 +45,11 @@ export class NameValueUnitsTable extends Component {
                         {this.props.symbol_table.map((element,index) => !element.equationset && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
                     </tbody>
                 </Table>
-                <UncontrolledTooltip placement="top" target="IVTitle">Inputs to design equations</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="NameTitle">Variable names</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="ValueTitle">Current values <br /> (Check box at right to FIX)</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="UnitsTitle">Units (information only)</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="DVTitle">Outputs from design equations</UncontrolledTooltip>
+                <Tooltip placement="top" target="IVTitle">Inputs to design equations</Tooltip>
+                <Tooltip placement="top" target="NameTitle">Variable names</Tooltip>
+                <Tooltip placement="top" target="ValueTitle">Current values <br /> (Check box at right to FIX)</Tooltip>
+                <Tooltip placement="top" target="UnitsTitle">Units (information only)</Tooltip>
+                <Tooltip placement="top" target="DVTitle">Outputs from design equations</Tooltip>
             </React.Fragment>
         );
     }

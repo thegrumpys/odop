@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip, Form } from 'react-bootstrap';
+import { InputGroup, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
 import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
@@ -44,15 +44,15 @@ class NameValueUnitsRowDependentVariable extends Component {
         return (
             <tr key={this.props.element.name}>
                 <td className="align-middle" colSpan="2" id={'dependent_variable_'+this.props.index}>{this.props.element.name}</td>
-                { this.props.element.tooltip !== undefined && <UncontrolledTooltip placement="top" target={'dependent_variable_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
+                { this.props.element.tooltip !== undefined && <Tooltip placement="top" target={'dependent_variable_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
-                        <Input type="number" disabled={true} className="text-right" value={this.props.element.value.toODOPPrecision()} />
-                        <InputGroupAddon addonType="append">
-                            <InputGroupText>
-                                <Input type="checkbox" addon aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
-                            </InputGroupText>
-                        </InputGroupAddon>
+                        <Form.Control type="number" disabled={true} className="text-right" value={this.props.element.value.toODOPPrecision()} />
+                        <InputGroup.Append>
+                            <InputGroup.Text>
+                                <Form.Check type="checkbox" addon aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
+                            </InputGroup.Text>
+                        </InputGroup.Append>
                     </InputGroup>
                 </td>
                 <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>

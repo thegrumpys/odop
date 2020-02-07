@@ -6,7 +6,6 @@ import {
     Container,
     TabContent,
     TabPane,
-    UncontrolledDropdown,
     Dropdown
 } from 'react-bootstrap';
 import classnames from 'classnames';
@@ -104,7 +103,7 @@ class App extends Component {
                     <Navbar.Toggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
-                            <UncontrolledDropdown nav inNavbar>
+                            <Dropdown nav inNavbar>
                                 <Dropdown.Toggle nav>
                                     File
                                 </Dropdown.Toggle>
@@ -123,8 +122,8 @@ class App extends Component {
                                         Logout
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
-                            </UncontrolledDropdown>
-                            <UncontrolledDropdown nav inNavbar>
+                            </Dropdown>
+                            <Dropdown nav inNavbar>
                                 <Dropdown.Toggle nav>
                                     Action
                                 </Dropdown.Toggle>
@@ -138,8 +137,8 @@ class App extends Component {
                                     <Dropdown.Divider />
                                     <ActionExecute />
                                </Dropdown.Menu>
-                            </UncontrolledDropdown>
-                            <UncontrolledDropdown nav inNavbar>
+                            </Dropdown>
+                            <Dropdown nav inNavbar>
                                 <Dropdown.Toggle nav>
                                     View
                                 </Dropdown.Toggle>
@@ -153,8 +152,8 @@ class App extends Component {
                                     <Dropdown.Divider />
                                     {process.env.NODE_ENV !== "production" && <ViewOffsets />}
                                </Dropdown.Menu>
-                            </UncontrolledDropdown>
-                            <UncontrolledDropdown nav inNavbar>
+                            </Dropdown>
+                            <Dropdown nav inNavbar>
                                 <Dropdown.Toggle nav>
                                     Help
                                 </Dropdown.Toggle>
@@ -167,7 +166,7 @@ class App extends Component {
                                     <HelpTutorial />
                                     <HelpAbout />
                                </Dropdown.Menu>
-                            </UncontrolledDropdown>
+                            </Dropdown>
                         </Nav>
                         <Nav tabs>
                             <Nav.Item>

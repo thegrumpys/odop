@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, UncontrolledTooltip, Modal, Button } from 'react-bootstrap';
+import { InputGroup, ButtonGroup, Tooltip, Modal, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
@@ -119,16 +119,16 @@ class ConstraintsMaxRowDependentVariable extends Component {
             <React.Fragment>
                 <tr key={this.props.element.name}>
                     <td className="align-middle d-lg-none" id={'dependent_variable_max_constrain_'+this.props.index}>{this.props.element.name}</td>
-                    { this.props.element.tooltip !== undefined && <UncontrolledTooltip class="d-lg-none" placement="top" target={'dependent_variable_max_constrain_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
+                    { this.props.element.tooltip !== undefined && <Tooltip class="d-lg-none" placement="top" target={'dependent_variable_max_constrain_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <InputGroupAddon addonType="prepend">
-                                <InputGroupText>
-                                    <Input type="checkbox" addon aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
-                                </InputGroupText>
-                            </InputGroupAddon>
-                            <Input type="number" id={this.props.element.name + "_cmax"} className={cmax_class} value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} onClick={this.onClick} />
-                            {this.props.element.lmax & FDCL ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</UncontrolledTooltip> : ''}
+                            <InputGroup.Prepend>
+                                <InputGroup.Text>
+                                    <Form.Check type="checkbox" addon aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
+                                </InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control type="number" id={this.props.element.name + "_cmax"} className={cmax_class} value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} onClick={this.onClick} />
+                            {this.props.element.lmax & FDCL ? <Tooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</Tooltip> : ''}
                         </InputGroup>
                         {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal.Dialog isOpen={this.state.modal} className={this.props.className} size="lg">
                             <Modal.Header>
@@ -154,7 +154,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
                                             <td>Value:&nbsp;</td>
                                             <td>
                                                 <InputGroup>
-                                                    <Input type="number" id={this.props.element.name + "_cmax"} className="text-right" value={this.state.value} onChange={this.onChangeValue} />
+                                                    <Form.Control type="number" id={this.props.element.name + "_cmax"} className="text-right" value={this.state.value} onChange={this.onChangeValue} />
                                                     <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
                                                 </InputGroup>
                                             </td>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Dropdown, Container, Row, Col, Input, Form } from 'react-bootstrap';
+import { Button, Modal, Dropdown, Container, Row, Col, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { initialSystemControls } from '../../initialSystemControls';
 import { changeSystemControlsValue } from '../../store/actionCreators';
@@ -83,7 +83,7 @@ class FilePreferences extends Component {
                                         <Row key={property_name}>
                                             <Col className="align-middle text-left">{property_name}</Col>
                                             <Col className="align-middle text-right">
-                                                <Input type="number" className="text-right" value={this.state.system_controls[property_name]} onChange={(event) => {this.onChange(property_name, event.target.value)}}/>
+                                                <Form.Control type="number" className="text-right" value={this.state.system_controls[property_name]} onChange={(event) => {this.onChange(property_name, event.target.value)}}/>
                                             </Col>
                                         </Row>
                                     );

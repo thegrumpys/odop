@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown, Form } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';

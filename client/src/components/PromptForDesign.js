@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Label, Input, Form } from 'react-bootstrap';
+import { Button, Modal, Form } from 'react-bootstrap';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { initialSystemControls } from '../initialSystemControls';

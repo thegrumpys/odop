@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Dropdown, Label, Input, Form } from 'react-bootstrap';
+import { Button, Modal, Dropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeName } from '../../store/actionCreators';
 import { changeUser } from '../../store/actionCreators';
@@ -148,7 +148,7 @@ class FileSaveAs extends Component {
                     <Modal.Body>
                         <br />
                         <Form.Label for="fileSaveAsText">Save As:</Form.Label>
-                        <Input type="text" id="fileSaveAsText" placeholder="Enter design name here" onChange={this.onTextInput}/>
+                        <Form.Control type="text" id="fileSaveAsText" placeholder="Enter design name here" onChange={this.onTextInput}/>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Button, Modal, Dropdown, Label, Input, Table, Form } from 'react-bootstrap';
+import { Button, Modal, Dropdown, Table, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../../store/actionCreators';
 

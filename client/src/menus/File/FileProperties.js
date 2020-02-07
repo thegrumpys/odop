@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Dropdown, Container, Row, Col, Input, Form } from 'react-bootstrap';
+import { Button, Modal, Dropdown, Container, Row, Col, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeLabelsValue } from '../../store/actionCreators';
 
@@ -80,7 +80,7 @@ class FileProperties extends Component {
                                             <Row key={label.name}>
                                                 <Col className="align-middle text-left">{label.name}</Col>
                                                 <Col className="align-middle text-left">
-                                                    <Input type="textarea" className="input-group-lg" value={label.value} onChange={(event) => {this.onChange(label.name, event.target.value)}}/>
+                                                    <Form.Control type="textarea" className="input-group-lg" value={label.value} onChange={(event) => {this.onChange(label.name, event.target.value)}}/>
                                                 </Col>
                                             </Row>
                                         );

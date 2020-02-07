@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Dropdown, Label, Input, Form } from 'react-bootstrap';
+import { Button, Modal, Dropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class ActionExecute extends Component {
