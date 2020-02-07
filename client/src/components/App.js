@@ -4,7 +4,7 @@ import {
     Navbar,
     Nav,
     Container,
-    TabContent,
+    Tabs,
     TabPane,
     Dropdown
 } from 'react-bootstrap';
@@ -98,7 +98,7 @@ class App extends Component {
 //        console.log('src=',src,' alt=',alt);
         return (
             <React.Fragment>
-                <Navbar color="white" light expand="md" fixed="top">
+                <Navbar variant="light" bg="light" expand="md" fixed="top">
                     <Navbar.Brand><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
                     <Navbar.Toggler onClick={this.toggle} />
                     <Collapse in={this.state.isOpen} navbar>
@@ -187,19 +187,19 @@ class App extends Component {
                 </Navbar>
                 <Container style={{backgroundColor: '#eee', paddingTop: '100px'}}>
                     <ExecutePanel />
-                    <TabContent activeTab={this.state.activeTab}>
-                        <TabPane tabId="1">
+                    <Tabs defaultActiveKey={this.state.activeTab}>
+                        <TabPane eventKey="1">
                             <Container fluid>
                                 <DesignTable />
                             </Container>
                         </TabPane>
                         {this.state.report_names.map((element,i) => {return (
-                            <TabPane key={element} tabId={(i+2).toString()} id="report">
+                            <TabPane key={element} eventKey={(i+2).toString()} id="report">
                                 {this.report(element)}
                             </TabPane>
                             );
                         })}
-                    </TabContent>
+                    </Tabs>
                 </Container>
             </React.Fragment>
         );
