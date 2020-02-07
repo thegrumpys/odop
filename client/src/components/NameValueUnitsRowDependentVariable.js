@@ -50,7 +50,7 @@ class NameValueUnitsRowDependentVariable extends Component {
                         <Form.Control type="number" disabled={true} className="text-right" value={this.props.element.value.toODOPPrecision()} />
                         <InputGroup.Append>
                             <InputGroup.Text>
-                                <Form.Check type="checkbox" addon aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
+                                <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
                             </InputGroup.Text>
                         </InputGroup.Append>
                     </InputGroup>

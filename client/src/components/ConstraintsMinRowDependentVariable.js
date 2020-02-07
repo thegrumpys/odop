@@ -119,12 +119,12 @@ class ConstraintsMinRowDependentVariable extends Component {
             <React.Fragment>
                 <tr key={this.props.element.name}>
                     <td className="align-middle d-lg-none" id={'dependent_variable_min_constrain_'+this.props.index}>{this.props.element.name}</td>
-                    { this.props.element.tooltip !== undefined && <Tooltip class="d-lg-none" placement="top" target={'dependent_variable_min_constrain_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}
+                    { this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none" placement="top" target={'dependent_variable_min_constrain_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             <InputGroup.Prepend>
                                 <InputGroup.Text>
-                                    <Form.Check type="checkbox" addon aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
+                                    <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
                             <Form.Control type="number" id={this.props.element.name + "_cmin"} className={cmin_class} value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick} />

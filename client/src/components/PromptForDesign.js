@@ -229,14 +229,14 @@ export default withAuth(class PromptForDesign extends Component {
                             <br />
                             Learn <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">About</a> ODOP
                             <br /><br />
-                            <Form.Label for="fileOpenSelectType">Select design type to open:</Form.Label>
+                            <Form.Label htmlFor="fileOpenSelectType">Select design type to open:</Form.Label>
                             <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
                                 {this.state.designtypes.map((designtype, index) =>
                                     <option key={index} value={designtype}>{designtype}</option>
                                 )}
                             </Form.Control>
                             <br />
-                            <Form.Label for="fileOpenSelectName">Select design to open:</Form.Label>
+                            <Form.Label htmlFor="fileOpenSelectName">Select design to open:</Form.Label>
                             <Form.Control as="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
                                 {this.state.designs.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                     <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>

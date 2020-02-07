@@ -34,7 +34,7 @@ export class ConstraintsMinTable extends Component {
                     </tbody>
                 </Table>
                 <Tooltip placement="top" target="IVMinConstraintTitle">Lower limits on Independent Variables</Tooltip>
-                <Tooltip class="d-lg-none" placement="top" target="MinConstraintNameTitle">Variable names</Tooltip>
+                <Tooltip className="d-lg-none" placement="top" target="MinConstraintNameTitle">Variable names</Tooltip>
                 <Tooltip placement="top" target="MinConstraintConstrainTitle">Check box to establish lower limit</Tooltip>
                 <Tooltip placement="top" target="MinConstraintValueTitle">Enter value for lower limit</Tooltip>
                 <Tooltip placement="top" target="MinConstraintViolationTitle">Measure of constraint <br />satisfaction (-) or violation (+)</Tooltip>

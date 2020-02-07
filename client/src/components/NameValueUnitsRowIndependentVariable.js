@@ -112,7 +112,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                         }
                         <InputGroup.Append>
                             <InputGroup.Text>
-                                <Form.Check type="checkbox" addon aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
+                                <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
                             </InputGroup.Text>
                         </InputGroup.Append>
                     </InputGroup>

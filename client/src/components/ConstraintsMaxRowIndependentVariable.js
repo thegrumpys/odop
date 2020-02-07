@@ -99,12 +99,12 @@ class ConstraintMaxRowIndependentVariable extends Component {
             <React.Fragment>
                 <tr key={this.props.element.name}>
                     <td className="align-middle d-lg-none" id={'independent_variable_max_constrain_'+this.props.index}>{this.props.element.name}</td>
-                    { this.props.element.tooltip !== undefined && <Tooltip class="d-lg-none" placement="top" target={'independent_variable_max_constrain_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}
+                    { this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none" placement="top" target={'independent_variable_max_constrain_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             <InputGroup.Prepend>
                                 <InputGroup.Text>
-                                    <Form.Check type="checkbox" addon aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetIndependentVariableFlagConstrained : this.onSetIndependentVariableFlagConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
+                                    <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetIndependentVariableFlagConstrained : this.onSetIndependentVariableFlagConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
                             <Form.Control type="number" id={this.props.element.name + "_cmax"} className={cmax_class} value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
