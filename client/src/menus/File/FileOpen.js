@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Modal, Dropdown, Form } from 'react-bootstrap';
-import { Label, Input } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { load } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
