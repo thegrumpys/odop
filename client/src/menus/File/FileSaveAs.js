@@ -143,7 +143,7 @@ class FileSaveAs extends Component {
                 <Dropdown.Item onClick={this.toggle}>
                     Save As&hellip;
                 </Dropdown.Item>
-                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Save As </Modal.Header>
                     <Modal.Body>
                         <br />
@@ -151,10 +151,10 @@ class FileSaveAs extends Component {
                         <Form.Control type="text" id="fileSaveAsText" placeholder="Enter design name here" onChange={this.onTextInput}/>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onSaveAs}>Save As</Button>
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                        <Button variant="primary" onClick={this.onSaveAs}>Save As</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
+                </Modal>
             </React.Fragment>
         );
     }

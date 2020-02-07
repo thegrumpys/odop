@@ -101,7 +101,7 @@ class App extends Component {
                 <Navbar color="white" light expand="md" fixed="top">
                     <Navbar.Brand><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
                     <Navbar.Toggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
+                    <Collapse in={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
                             <Dropdown nav inNavbar>
                                 <Dropdown.Toggle nav>

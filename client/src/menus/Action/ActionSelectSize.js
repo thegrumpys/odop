@@ -137,7 +137,7 @@ class ActionSelectSize extends Component {
                 <Dropdown.Item onClick={this.toggle} disabled={this.state.types.length === 0}>
                     Select Size&hellip;
                 </Dropdown.Item>
-                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Size</Modal.Header>
                     <Modal.Body>
                         <Form.Label for="sizeTypeSelect">Select size type:</Form.Label>
@@ -155,10 +155,10 @@ class ActionSelectSize extends Component {
                         </Form.Control>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
-                        <Button color="primary" onClick={this.onSelect}>Select</Button>
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
+                        <Button variant="primary" onClick={this.onSelect}>Select</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
+                </Modal>
             </React.Fragment>
         );
     }

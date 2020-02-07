@@ -69,7 +69,7 @@ class FilePreferences extends Component {
                 <Dropdown.Item onClick={this.toggle}>
                     Preferences&hellip;
                 </Dropdown.Item>
-                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
+                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
                     <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Preferences </Modal.Header>
                     <Modal.Body>
                         <Container>
@@ -92,11 +92,11 @@ class FilePreferences extends Component {
                         </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                        <Button color="primary" onClick={this.onRestoreDefaults}>Restore Defaults</Button>
-                        <Button color="primary" onClick={this.onApplyandClose}>Apply and Close</Button>
+                        <Button variant="secondary" onClick={this.toggle}>Cancel</Button>
+                        <Button variant="primary" onClick={this.onRestoreDefaults}>Restore Defaults</Button>
+                        <Button variant="primary" onClick={this.onApplyandClose}>Apply and Close</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
+                </Modal>
             </React.Fragment>
         );
     }

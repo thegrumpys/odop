@@ -67,13 +67,13 @@ class ActionSeek extends Component {
                 <Dropdown.Item onClick={this.toggle}>
                     Seek&hellip;
                 </Dropdown.Item>
-                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek </Modal.Header>
                     <Modal.Body>
                         <InputGroup>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
-                                <Button color="primary" onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}>Max</Button>
+                                <Button variant="primary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
+                                <Button variant="primary" onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}>Max</Button>
                             </ButtonGroup>
                             &nbsp;
                             <InputGroup.Prepend>
@@ -88,10 +88,10 @@ class ActionSeek extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button outline color="info" onClick={this.onContextHelp}>Help</Button>{' '}
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onSeek}>Seek</Button>
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                        <Button variant="primary" onClick={this.onSeek}>Seek</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
+                </Modal>
             </React.Fragment>
         );
     }

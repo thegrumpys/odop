@@ -63,7 +63,7 @@ class HelpDemo extends Component {
                 <Dropdown.Item onClick={this.toggle} disabled={this.state.execute_names.length === 0}>
                     Demo&hellip;
                 </Dropdown.Item>
-                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Execute</Modal.Header>
                     <Modal.Body>
                         <br />
@@ -75,10 +75,10 @@ class HelpDemo extends Component {
                         </Form.Control>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
-                       <Button color="primary" onClick={this.onExecute}>Execute</Button>
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
+                       <Button variant="primary" onClick={this.onExecute}>Execute</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
+                </Modal>
             </React.Fragment>
         );
     }

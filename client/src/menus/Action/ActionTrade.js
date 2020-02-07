@@ -662,7 +662,7 @@ class ActionTrade extends Component {
                 <Dropdown.Item onClick={this.strategyToggle}>
                     Trade&hellip;
                 </Dropdown.Item>
-                <Modal.Dialog isOpen={this.state.strategyModal} className={this.props.className} size="lg">
+                <Modal show={this.state.strategyModal} className={this.props.className} size="lg">
                     <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy </Modal.Header>
                     <Modal.Body>
                         Specify your trade strategy:<br/>
@@ -676,13 +676,13 @@ class ActionTrade extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button outline color="info" onClick={this.onStrategyContextHelp}>Help</Button>{' '}
-                        <Button color="secondary" onClick={this.onStrategyDone}> &nbsp; Done &nbsp; </Button>{' '}
-                        <Button color="secondary" onClick={this.onStrategyExisting}>Existing</Button>{' '}
+                        <Button variant="secondary" onClick={this.onStrategyDone}> &nbsp; Done &nbsp; </Button>{' '}
+                        <Button variant="secondary" onClick={this.onStrategyExisting}>Existing</Button>{' '}
                         <Button color="info" onClick={this.onStrategyArbitrary}>Arbitrary</Button>{' '}
-                        <Button color="primary" onClick={this.onStrategyProportional}>Proportional</Button>
+                        <Button variant="primary" onClick={this.onStrategyProportional}>Proportional</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
-                <Modal.Dialog isOpen={this.state.arbitraryModal} className={this.props.className}>
+                </Modal>
+                <Modal show={this.state.arbitraryModal} className={this.props.className}>
                     <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Arbitrary </Modal.Header>
                     <Modal.Body>
                         <Container>
@@ -714,11 +714,11 @@ class ActionTrade extends Component {
                         </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="secondary" onClick={this.onArbitraryCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onArbitraryContinue} disabled={this.state.arbitraryContinueDisabled}>Continue</Button>
+                        <Button variant="secondary" onClick={this.onArbitraryCancel}>Cancel</Button>{' '}
+                        <Button variant="primary" onClick={this.onArbitraryContinue} disabled={this.state.arbitraryContinueDisabled}>Continue</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
-                <Modal.Dialog isOpen={this.state.sizeModal} className={this.props.className}>
+                </Modal>
+                <Modal show={this.state.sizeModal} className={this.props.className}>
                     <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Size </Modal.Header>
                     <Modal.Body>
                         Enter local exploration step size (%)<br/>
@@ -733,11 +733,11 @@ class ActionTrade extends Component {
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="secondary" onClick={this.onSizeCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onSizeContinue}>Continue</Button>
+                        <Button variant="secondary" onClick={this.onSizeCancel}>Cancel</Button>{' '}
+                        <Button variant="primary" onClick={this.onSizeContinue}>Continue</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
-                <Modal.Dialog isOpen={this.state.feasibleModal} className={this.props.className}>
+                </Modal>
+                <Modal show={this.state.feasibleModal} className={this.props.className}>
                     <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Feasible </Modal.Header>
                     <Modal.Body>
                         A feasible point has been established.<br/>
@@ -748,11 +748,11 @@ class ActionTrade extends Component {
                         {this.list_constraints()}
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="secondary" onClick={this.onFeasibleRestart}>Resize</Button>{' '}
-                        <Button color="primary" onClick={this.onFeasibleDone}> &nbsp; Done &nbsp; </Button>
+                        <Button variant="secondary" onClick={this.onFeasibleRestart}>Resize</Button>{' '}
+                        <Button variant="primary" onClick={this.onFeasibleDone}> &nbsp; Done &nbsp; </Button>
                     </Modal.Footer>
-                </Modal.Dialog>
-                <Modal.Dialog isOpen={this.state.establishModal} className={this.props.className}>
+                </Modal>
+                <Modal show={this.state.establishModal} className={this.props.className}>
                     <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Establish </Modal.Header>
                     <Modal.Body>
                         Do you wish to establish this set of constraints?
@@ -763,11 +763,11 @@ class ActionTrade extends Component {
                         {this.list_constraints()}
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="secondary" onClick={this.onEstablishDone}> &nbsp; Done &nbsp; </Button>{' '}
-                        <Button color="primary" onClick={this.onEstablishAccept}>Accept</Button>
+                        <Button variant="secondary" onClick={this.onEstablishDone}> &nbsp; Done &nbsp; </Button>{' '}
+                        <Button variant="primary" onClick={this.onEstablishAccept}>Accept</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
-                <Modal.Dialog isOpen={this.state.notFeasibleModal} className={this.props.className}>
+                </Modal>
+                <Modal show={this.state.notFeasibleModal} className={this.props.className}>
                     <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Not Feasible </Modal.Header>
                     <Modal.Body>
                         The result is not feasible: obj = { parseFloat(this.props.design.result.objective_value).toFixed(6) }<br/>
@@ -779,11 +779,11 @@ class ActionTrade extends Component {
                         {this.list_constraints()}
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="secondary" onClick={this.onNotFeasibleRestart}>Restart</Button>{' '}
-                        <Button color="secondary" onClick={this.onNotFeasibleRepeat}>Repeat</Button>{' '}
-                        <Button color="primary" onClick={this.onNotFeasibleDone}> &nbsp; Done &nbsp; </Button>
+                        <Button variant="secondary" onClick={this.onNotFeasibleRestart}>Restart</Button>{' '}
+                        <Button variant="secondary" onClick={this.onNotFeasibleRepeat}>Repeat</Button>{' '}
+                        <Button variant="primary" onClick={this.onNotFeasibleDone}> &nbsp; Done &nbsp; </Button>
                     </Modal.Footer>
-                </Modal.Dialog>
+                </Modal>
             </React.Fragment>
         );
     }

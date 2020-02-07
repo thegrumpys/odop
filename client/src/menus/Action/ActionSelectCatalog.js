@@ -101,7 +101,7 @@ class ActionSelectCatalog extends Component {
                 <Dropdown.Item onClick={this.toggle}>
                     Select Catalog&hellip;
                 </Dropdown.Item>
-                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
+                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
                     <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Catalog</Modal.Header>
                     <Modal.Body>
                         <Form.Label for="catalogNameSelect">Select catalog name:</Form.Label>
@@ -144,10 +144,10 @@ class ActionSelectCatalog extends Component {
                         }
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
-                        <Button color="primary" onClick={this.onSelect} disabled={this.state.entries.length === 0}>Select</Button>
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
+                        <Button variant="primary" onClick={this.onSelect} disabled={this.state.entries.length === 0}>Select</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
+                </Modal>
             </React.Fragment>
         );
     }

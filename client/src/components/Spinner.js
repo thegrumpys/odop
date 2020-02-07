@@ -18,9 +18,9 @@ export class Spinner extends Component {
     
     render() {
         return (
-            <Modal.Dialog show={this.state.modal} zIndex={1100} size="sm" fade={false} backdrop={false} className={this.props.className}>
+            <Modal show={this.state.modal} zIndex={1100} size="sm" fade={false} backdrop={false} className={this.props.className}>
                 <Modal.Body><img src="spinner.gif" alt="Spinning Spinner" style={{"height":"90px"}}/>&nbsp;Running...</Modal.Body>
-            </Modal.Dialog>
+            </Modal>
         );
     }
     

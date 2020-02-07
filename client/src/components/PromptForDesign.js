@@ -217,10 +217,12 @@ export default withAuth(class PromptForDesign extends Component {
         if (this.state.store === null) {
             return (
                 <React.Fragment>
-                    <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
+                    <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
                         <Modal.Header toggle={this.toggle}>
+                            <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>
                               Open Design Optimization Platform
+                            </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay" target="_blank" rel="noopener noreferrer">Message-of-the-day </a> 
@@ -242,12 +244,12 @@ export default withAuth(class PromptForDesign extends Component {
                             </Form.Control>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button color="secondary" onClick={() => this.props.auth.logout()}>Logout</Button>
-                            <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                            {process.env.NODE_ENV !== "production" && <Button color="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
-                            <Button color="primary" onClick={this.onOpen}>Open</Button>
+                            <Button variant="secondary" onClick={() => this.props.auth.logout()}>Logout</Button>
+                            <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                            {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
+                            <Button variant="primary" onClick={this.onOpen}>Open</Button>
                         </Modal.Footer>
-                    </Modal.Dialog>
+                    </Modal>
                 </React.Fragment>
             );
         } else {

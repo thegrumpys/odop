@@ -25,7 +25,7 @@ class HelpAbout extends Component {
                 <Dropdown.Item onClick={this.toggle}>
                     About
                 </Dropdown.Item>
-                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; About {this.props.type}</Modal.Header>
                     <Modal.Body>
                         This is <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank" rel="noopener noreferrer">Open Source </a> software. &nbsp; 
@@ -35,9 +35,9 @@ class HelpAbout extends Component {
                         Link to <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">website home page</a>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="primary" onClick={this.toggle}>Close</Button>
+                        <Button variant="primary" onClick={this.toggle}>Close</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
+                </Modal>
             </React.Fragment>
         );
     }

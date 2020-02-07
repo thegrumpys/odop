@@ -65,7 +65,7 @@ class FileProperties extends Component {
                 <Dropdown.Item onClick={this.toggle}>
                     Properties&hellip;
                 </Dropdown.Item>
-                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Properties </Modal.Header>
                     <Modal.Body>
                         <Container>
@@ -89,11 +89,11 @@ class FileProperties extends Component {
                         </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                        <Button color="primary" onClick={this.onRestoreDefaults}>Restore Defaults</Button>
-                        <Button color="primary" onClick={this.onApplyandClose}>Apply and Close</Button>
+                        <Button variant="secondary" onClick={this.toggle}>Cancel</Button>
+                        <Button variant="primary" onClick={this.onRestoreDefaults}>Restore Defaults</Button>
+                        <Button variant="primary" onClick={this.onApplyandClose}>Apply and Close</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
+                </Modal>
             </React.Fragment>
         );
     }

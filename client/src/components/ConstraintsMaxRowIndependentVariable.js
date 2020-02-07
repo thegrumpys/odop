@@ -110,7 +110,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                             <Form.Control type="number" id={this.props.element.name + "_cmax"} className={cmax_class} value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
                             {this.props.element.lmax & FDCL ? <Tooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</Tooltip> : ''}
                         </InputGroup>
-                        {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal.Dialog isOpen={this.state.modal} className={this.props.className} size="lg">
+                        {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg">
                             <Modal.Header>
                                 Set {this.props.element.name} Max Constraint
                             </Modal.Header>
@@ -124,7 +124,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                                 <InputGroup>
                                                     <ButtonGroup>
                                                         {this.props.element.cmaxchoices.map((e) => {return (
-                                                            <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) === e}>{e}</Button>
+                                                            <Button key={e} variant="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) === e}>{e}</Button>
                                                         );})}
                                                     </ButtonGroup>
                                                 </InputGroup>
@@ -135,7 +135,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                             <td>
                                                 <InputGroup>
                                                     <Form.Control type="number" id={this.props.element.name + "_cmax"} className="text-right" value={this.state.value} onChange={this.onChangeValue} />
-                                                    <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
+                                                    <Button variant="primary" onClick={this.onEnterValue}>Enter</Button>
                                                 </InputGroup>
                                             </td>
                                         </tr>
@@ -143,9 +143,9 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                 </table>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
+                                <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
                             </Modal.Footer>
-                        </Modal.Dialog> : ''}
+                        </Modal> : ''}
                     </td>
                     <td className={"text-right align-middle small " + (this.props.system_controls.show_violations ? "" : "d-none")} colSpan="1">
                         {this.props.element.lmax & FIXED ? '' : (this.props.element.lmax & CONSTRAINED ? (this.props.element.vmax*100.0).toFixed(1) + '%' : '')}

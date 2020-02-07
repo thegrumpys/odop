@@ -24,15 +24,15 @@ class FileRecent extends Component {
                 <Dropdown.Item onClick={this.toggle} disabled>
                     Recent
                 </Dropdown.Item>
-                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Recent </Modal.Header>
                     <Modal.Body>
                         Not implemented
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="primary" onClick={this.toggle}>Close</Button>
+                        <Button variant="primary" onClick={this.toggle}>Close</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
+                </Modal>
             </React.Fragment>
         );
     }

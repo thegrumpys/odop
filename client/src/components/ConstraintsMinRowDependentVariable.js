@@ -130,7 +130,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                             <Form.Control type="number" id={this.props.element.name + "_cmin"} className={cmin_class} value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick} />
                             {this.props.element.lmin & FDCL ? <Tooltip placement="top" target={this.props.element.name + "_cmin"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</Tooltip> : ''}
                         </InputGroup>
-                        {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ? <Modal.Dialog isOpen={this.state.modal} className={this.props.className} size="lg">
+                        {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg">
                             <Modal.Header>
                                 Set {this.props.element.name} Min Constraint
                             </Modal.Header>
@@ -144,7 +144,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                                                 <InputGroup>
                                                     <ButtonGroup>
                                                         {this.props.element.cminchoices.map((e) => {return (
-                                                            <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) === e}>{e}</Button>
+                                                            <Button key={e} variant="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) === e}>{e}</Button>
                                                         );})}
                                                     </ButtonGroup>
                                                 </InputGroup>
@@ -155,7 +155,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                                             <td>
                                                 <InputGroup>
                                                     <Form.Control type="number" id={this.props.element.name + "_cmin"} className="text-right" value={this.state.value} onChange={this.onChangeValue} />
-                                                    <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
+                                                    <Button variant="primary" onClick={this.onEnterValue}>Enter</Button>
                                                 </InputGroup>
                                             </td>
                                         </tr>
@@ -163,9 +163,9 @@ class ConstraintsMinRowDependentVariable extends Component {
                                 </table>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
+                                <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
                             </Modal.Footer>
-                        </Modal.Dialog> : ''}
+                        </Modal> : ''}
                     </td>
                     <td className={"text-right align-middle small " + (this.props.system_controls.show_violations ? "" : "d-none")} colSpan="1">
                         {this.props.element.lmin & FIXED ? (this.props.element.vmin*100.0).toFixed(1) : (this.props.element.lmin & CONSTRAINED ? (this.props.element.vmin*100.0).toFixed(1) + '%' : '')}

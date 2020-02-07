@@ -31,7 +31,7 @@ class ViewOffsets extends Component {
                 <Dropdown.Item onClick={this.toggle}>
                     Offsets
                 </Dropdown.Item>
-                <Modal.Dialog isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : Offsets </Modal.Header>
                     <Modal.Body>
                         <pre>
@@ -46,9 +46,9 @@ class ViewOffsets extends Component {
                         </pre>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color="primary" onClick={this.toggle}>Close</Button>
+                        <Button variant="primary" onClick={this.toggle}>Close</Button>
                     </Modal.Footer>
-                </Modal.Dialog>
+                </Modal>
             </React.Fragment>
         );
     }
