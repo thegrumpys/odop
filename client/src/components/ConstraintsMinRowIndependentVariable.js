@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, ButtonGroup, Tooltip, Modal, Button, Form } from 'react-bootstrap';
+import { InputGroup, ButtonGroup /*, Tooltip */ , Modal, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
@@ -99,7 +99,7 @@ class ConstraintMinRowIndependentVariable extends Component {
             <React.Fragment>
                 <tr key={this.props.element.name}>
                     <td className="align-middle d-lg-none" id={'independent_variable_min_constrain_'+this.props.index}>{this.props.element.name}</td>
-                    { this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none" placement="top" target={'independent_variable_min_constrain_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}
+{/*                    { this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none" placement="top" target={'independent_variable_min_constrain_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}*/}
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             <InputGroup.Prepend>
@@ -108,7 +108,7 @@ class ConstraintMinRowIndependentVariable extends Component {
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
                             <Form.Control type="number" id={this.props.element.name + "_cmin"} className={cmin_class} value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} onClick={this.onClick} />
-                            {this.props.element.lmin & FDCL ? <Tooltip placement="top" target={this.props.element.name + "_cmin"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</Tooltip> : ''}
+{/*                            {this.props.element.lmin & FDCL ? <Tooltip placement="top" target={this.props.element.name + "_cmin"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</Tooltip> : ''}*/}
                         </InputGroup>
                         {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg">
                             <Modal.Header>

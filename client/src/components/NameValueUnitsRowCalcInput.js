@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, Tooltip, Form } from 'react-bootstrap';
+import { InputGroup /*, Tooltip */ , Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../store/actionCreators';
 
@@ -79,7 +79,7 @@ class NameValueUnitsRowCalcInput extends Component {
         return (
             <tr key={this.props.element.name}>
                 <td className="align-middle" colSpan="2" id={'constant_'+this.props.index}>{this.props.element.name}</td>
-                { this.props.element.tooltip !== undefined && <Tooltip placement="top" target={'constant_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}
+{/*                { this.props.element.tooltip !== undefined && <Tooltip placement="top" target={'constant_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}*/}
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, ButtonGroup, Tooltip, Modal, Button, Form } from 'react-bootstrap';
+import { InputGroup, ButtonGroup /*, Tooltip */ , Modal, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
@@ -99,7 +99,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
             <React.Fragment>
                 <tr key={this.props.element.name}>
                     <td className="align-middle d-lg-none" id={'independent_variable_max_constrain_'+this.props.index}>{this.props.element.name}</td>
-                    { this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none" placement="top" target={'independent_variable_max_constrain_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}
+{/*                    { this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none" placement="top" target={'independent_variable_max_constrain_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}*/}
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             <InputGroup.Prepend>
@@ -108,7 +108,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
                             <Form.Control type="number" id={this.props.element.name + "_cmax"} className={cmax_class} value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
-                            {this.props.element.lmax & FDCL ? <Tooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</Tooltip> : ''}
+{/*                            {this.props.element.lmax & FDCL ? <Tooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</Tooltip> : ''}*/}
                         </InputGroup>
                         {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg">
                             <Modal.Header>

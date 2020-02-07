@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Tooltip } from 'react-bootstrap';
+import { Table /*, Tooltip */  } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class ResultTable extends Component {
@@ -45,10 +45,10 @@ class ResultTable extends Component {
                         </tr>
                     </tbody>
                 </Table>
-                <Tooltip placement="top" target="Feasibility">Not Feasible:<br /> OBJ greater than OBJMIN<br /><br />Marginally Feasible:<br />constraint(s) slightly violated<br /><br />Feasible:<br />no constraints violated</Tooltip>
-                <Tooltip placement="top" target="TerminationCondition">Status feedback from solution process</Tooltip>
-                <Tooltip placement="top" target="ObjectiveValue">Search works to minimize Objective Function value <br /> See Help for details</Tooltip>
-                <Tooltip placement="top" target="OBJMIN">Stop Search if Objective&nbsp;Value gets lower than {this.props.system_controls.objmin.toFixed(6)}</Tooltip>
+{/*                <Tooltip placement="top" target="Feasibility">Not Feasible:<br /> OBJ greater than OBJMIN<br /><br />Marginally Feasible:<br />constraint(s) slightly violated<br /><br />Feasible:<br />no constraints violated</Tooltip>*/}
+{/*                <Tooltip placement="top" target="TerminationCondition">Status feedback from solution process</Tooltip>*/}
+{/*                <Tooltip placement="top" target="ObjectiveValue">Search works to minimize Objective Function value <br /> See Help for details</Tooltip>*/}
+{/*                <Tooltip placement="top" target="OBJMIN">Stop Search if Objective&nbsp;Value gets lower than {this.props.system_controls.objmin.toFixed(6)}</Tooltip>*/}
             </React.Fragment>
         );
     }

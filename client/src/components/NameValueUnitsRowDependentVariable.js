@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, Tooltip, Form } from 'react-bootstrap';
+import { InputGroup /*, Tooltip */ , Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
 import { changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
@@ -44,7 +44,7 @@ class NameValueUnitsRowDependentVariable extends Component {
         return (
             <tr key={this.props.element.name}>
                 <td className="align-middle" colSpan="2" id={'dependent_variable_'+this.props.index}>{this.props.element.name}</td>
-                { this.props.element.tooltip !== undefined && <Tooltip placement="top" target={'dependent_variable_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}
+{/*                { this.props.element.tooltip !== undefined && <Tooltip placement="top" target={'dependent_variable_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}*/}
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         <Form.Control type="number" disabled={true} className="text-right" value={this.props.element.value.toODOPPrecision()} />
