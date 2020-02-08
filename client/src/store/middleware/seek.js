@@ -25,11 +25,11 @@ export function seek(store, action) {
     }
     
     if (design.system_controls.ioopt > 5) {
-        console.log("02A THE NUMBER OF FIXED INDEPENDENT VARIABLES =", design.symbol_table.reduce((total, element)=>{return (element.equationset && element.input) && element.lmin&FIXED ? total+1 : total+0}, 0));
-        console.log("02B THE NUMBER OF FREE INDEPENDENT VARIABLES =", design.symbol_table.reduce((total, element)=>{return (element.equationset && element.input) && (element.lmin&FIXED)===0 ? total+1 : total+0}, 0));
+        console.log("02A THE NUMBER OF FIXED INDEPENDENT VARIABLES =", design.symbol_table.reduce((total, element)=>{return (element.equationset && element.input) && element.lmin & FIXED ? total+1 : total+0}, 0));
+        console.log("02B THE NUMBER OF FREE INDEPENDENT VARIABLES =", design.symbol_table.reduce((total, element)=>{return (element.equationset && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0));
     }
     var ncode;
-    if(design.symbol_table.reduce((total, element)=>{return (element.equationset && element.input) && (element.lmin&FIXED)===0 ? total+1 : total+0}, 0) === 0) {
+    if(design.symbol_table.reduce((total, element)=>{return (element.equationset && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
         ncode = 'WARNING, NO FREE INDEPENDENT VARIABLES';
         store.dispatch(changeResultTerminationCondition(ncode));
         return;
