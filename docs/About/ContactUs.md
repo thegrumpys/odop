@@ -2,7 +2,7 @@
 
 The best way to reach the team developing the ODOP software and the ODOP:Spring app is through email to **Info@SpringDesignSoftware.org**   
 
-It is also possible to leave voice messages at **650-887-8026**.   
+If there is no answer at **650-887-8026**, please leave a voice message.   
 
 &nbsp;
 
