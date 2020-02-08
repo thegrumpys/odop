@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Dropdown, Form } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class HelpTutorial extends Component {
@@ -60,11 +60,15 @@ class HelpTutorial extends Component {
 //        console.log('In ActionExecute.render');
         return (
             <React.Fragment>
-                <Dropdown.Item onClick={this.toggle} disabled={this.state.execute_names.length === 0}>
+                <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names.length === 0}>
                     Tutorial&hellip;
-                </Dropdown.Item>
+                </NavDropdown.Item>
                 <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Execute</Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Execute
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         <br />
                         <Form.Label for="tutorialSelect">Select demo/tutorial to execute:</Form.Label>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Dropdown, Form } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { load } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
@@ -131,11 +131,15 @@ class FileOpen extends Component {
 //        console.log('In FileOpen.render');
         return (
             <React.Fragment>
-                <Dropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Open&hellip;
-                </Dropdown.Item>
+                </NavDropdown.Item>
                 <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Open </Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Open
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         <br />
                         <Form.Label for="fileOpenSelect">Select design to open:</Form.Label>

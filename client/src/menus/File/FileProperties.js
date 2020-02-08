@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Dropdown, Container, Row, Col, Form } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Container, Row, Col, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeLabelsValue } from '../../store/actionCreators';
 
@@ -62,11 +62,15 @@ class FileProperties extends Component {
     render() {
         return (
             <React.Fragment>
-                <Dropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Properties&hellip;
-                </Dropdown.Item>
+                </NavDropdown.Item>
                 <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Properties </Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Properties
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         <Container>
                             <Row>

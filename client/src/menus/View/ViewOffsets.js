@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown, Modal, Button } from 'react-bootstrap';
+import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class ViewOffsets extends Component {
@@ -28,11 +28,15 @@ class ViewOffsets extends Component {
         var il = 0;
         return (
             <React.Fragment>
-                <Dropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Offsets
-                </Dropdown.Item>
+                </NavDropdown.Item>
                 <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : Offsets </Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : Offsets
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         <pre>
                         {'// Independent Variables (input-only)\n'}

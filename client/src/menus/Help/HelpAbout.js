@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, Dropdown } from 'react-bootstrap';
+import { Button, Modal, NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { version } from '../../version';
 
@@ -22,11 +22,15 @@ class HelpAbout extends Component {
     render() {
         return (
             <React.Fragment>
-                <Dropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     About
-                </Dropdown.Item>
+                </NavDropdown.Item>
                 <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; About {this.props.type}</Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>  &nbsp; About {this.props.type}
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         This is <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank" rel="noopener noreferrer">Open Source </a> software. &nbsp; 
                         <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT License.</a> <br />

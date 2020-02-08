@@ -6,7 +6,7 @@ import {
     Container,
     Tabs,
     TabPane,
-    Dropdown
+    NavDropdown
 } from 'react-bootstrap';
 import classnames from 'classnames';
 import { ExecutePanel } from './ExecutePanel';
@@ -103,70 +103,50 @@ class App extends Component {
                     <Navbar.Toggle onClick={this.toggle} />
                     <Navbar.Collapse in={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
-                            <Dropdown nav inNavbar>
-                                <Dropdown.Toggle nav>
-                                    File
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu right>
-                                    <FileOpen />
-                                    <FileSave />
-                                    <FileSaveAs />
-                                    <FileDelete />
-                                    <Dropdown.Divider />
-                                    <FileRecent />
-                                    <Dropdown.Divider />
-                                    <FilePreferences />
-                                    <FileProperties />
-                                    <Dropdown.Divider />
-                                    <Dropdown.Item onClick={() => this.props.auth.logout()}>
-                                        Logout
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                            <Dropdown nav inNavbar>
-                                <Dropdown.Toggle nav>
-                                    Action
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu right>
-                                    <ActionSearch />
-                                    <ActionSeek />
-                                    <ActionTrade />
-                                    <Dropdown.Divider />
-                                    <ActionSelectSize />
-                                    <ActionSelectCatalog />
-                                    <Dropdown.Divider />
-                                    <ActionExecute />
-                               </Dropdown.Menu>
-                            </Dropdown>
-                            <Dropdown nav inNavbar>
-                                <Dropdown.Toggle nav>
-                                    View
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu right>
-                                    <Dropdown.Item disabled>
-                                        Define  Sub-Problems&hellip;
-                                    </Dropdown.Item>
-                                    <Dropdown.Item disabled>
-                                        Display Sub-Problems&hellip;
-                                    </Dropdown.Item>
-                                    <Dropdown.Divider />
-                                    {process.env.NODE_ENV !== "production" && <ViewOffsets />}
-                               </Dropdown.Menu>
-                            </Dropdown>
-                            <Dropdown nav inNavbar>
-                                <Dropdown.Toggle nav>
-                                    Help
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu right>
-                                    <Dropdown.Item disabled>
-                                        Context Help
-                                    </Dropdown.Item>
-                                    <HelpIndex />
-                                    <HelpDemo />
-                                    <HelpTutorial />
-                                    <HelpAbout />
-                               </Dropdown.Menu>
-                            </Dropdown>
+                            <NavDropdown title="File">
+                                <FileOpen />
+                                <FileSave />
+                                <FileSaveAs />
+                                <FileDelete />
+                                <NavDropdown.Divider />
+                                <FileRecent />
+                                <NavDropdown.Divider />
+                                <FilePreferences />
+                                <FileProperties />
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item onClick={() => this.props.auth.logout()}>
+                                    Logout
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                            <NavDropdown title="Action">
+                                <ActionSearch />
+                                <ActionSeek />
+                                <ActionTrade />
+                                <NavDropdown.Divider />
+                                <ActionSelectSize />
+                                <ActionSelectCatalog />
+                                <NavDropdown.Divider />
+                                <ActionExecute />
+                            </NavDropdown>
+                            <NavDropdown title="View">
+                                <NavDropdown.Item disabled>
+                                    Define  Sub-Problems&hellip;
+                                </NavDropdown.Item>
+                                <NavDropdown.Item disabled>
+                                    Display Sub-Problems&hellip;
+                                </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                {process.env.NODE_ENV !== "production" && <ViewOffsets />}
+                            </NavDropdown>
+                            <NavDropdown title="Help">
+                                <NavDropdown.Item disabled>
+                                    Context Help
+                                </NavDropdown.Item>
+                                <HelpIndex />
+                                <HelpDemo />
+                                <HelpTutorial />
+                                <HelpAbout />
+                            </NavDropdown>
                         </Nav>
                         <Nav tabs>
                             <Nav.Item>

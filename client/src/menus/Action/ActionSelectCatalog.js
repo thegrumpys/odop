@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Button, Modal, Dropdown, Table, Form } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Table, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../../store/actionCreators';
 
@@ -98,11 +98,15 @@ class ActionSelectCatalog extends Component {
 //        console.log('In ActionSelectCatalog.render this.state=',this.state);
         return (
             <React.Fragment>
-                <Dropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Select Catalog&hellip;
-                </Dropdown.Item>
+                </NavDropdown.Item>
                 <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
-                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Catalog</Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Catalog
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         <Form.Label for="catalogNameSelect">Select catalog name:</Form.Label>
                         <Form.Control as="select" id="catalogNameSelect" onChange={this.onSelectCatalogName} value={this.state.name}>

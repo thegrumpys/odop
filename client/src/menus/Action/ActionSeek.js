@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown, Modal, InputGroup, ButtonGroup, Button, Form } from 'react-bootstrap';
+import { NavDropdown, Modal, InputGroup, ButtonGroup, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek } from '../../store/actionCreators';
@@ -64,11 +64,15 @@ class ActionSeek extends Component {
     render() {
         return (
             <React.Fragment>
-                <Dropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Seek&hellip;
-                </Dropdown.Item>
+                </NavDropdown.Item>
                 <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek </Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         <InputGroup>
                             <ButtonGroup>

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Dropdown, Modal, Button, Container, Row, Col, InputGroup, Form } from 'react-bootstrap';
+import { NavDropdown, Modal, Button, Container, Row, Col, InputGroup, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, CONSTRAINED, FDCL } from '../../store/actionTypes';
 import { changeSymbolConstraint,
@@ -659,11 +659,15 @@ class ActionTrade extends Component {
     render() {
         return (
             <React.Fragment>
-                <Dropdown.Item onClick={this.strategyToggle}>
+                <NavDropdown.Item onClick={this.strategyToggle}>
                     Trade&hellip;
-                </Dropdown.Item>
+                </NavDropdown.Item>
                 <Modal show={this.state.strategyModal} className={this.props.className} size="lg">
-                    <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy </Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         Specify your trade strategy:<br/>
                         <ul>
@@ -683,7 +687,11 @@ class ActionTrade extends Component {
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.arbitraryModal} className={this.props.className}>
-                    <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Arbitrary </Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Arbitrary
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         <Container>
                             <Row>
@@ -719,7 +727,11 @@ class ActionTrade extends Component {
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.sizeModal} className={this.props.className}>
-                    <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Size </Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Size
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         Enter local exploration step size (%)<br/>
                         Possibilities range from {(90.0 * this.state.smallest).toFixed(2)} to {(100.0 * this.state.bigest).toFixed(2)}<br/>
@@ -738,7 +750,11 @@ class ActionTrade extends Component {
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.feasibleModal} className={this.props.className}>
-                    <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Feasible </Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Feasible
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         A feasible point has been established.<br/>
                         <ul>
@@ -753,7 +769,11 @@ class ActionTrade extends Component {
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.establishModal} className={this.props.className}>
-                    <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Establish </Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Establish
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         Do you wish to establish this set of constraints?
                         <ul>
@@ -768,7 +788,11 @@ class ActionTrade extends Component {
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.notFeasibleModal} className={this.props.className}>
-                    <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Not Feasible </Modal.Header>
+                    <Modal.Header toggle={this.toggle}>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Not Feasible
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         The result is not feasible: obj = { parseFloat(this.props.design.result.objective_value).toFixed(6) }<br/>
                         <ul>
