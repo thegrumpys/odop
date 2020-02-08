@@ -100,8 +100,8 @@ class App extends Component {
             <React.Fragment>
                 <Navbar variant="light" bg="light" expand="md" fixed="top">
                     <Navbar.Brand><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
-                    <Navbar.Toggler onClick={this.toggle} />
-                    <Collapse in={this.state.isOpen} navbar>
+                    <Navbar.Toggle onClick={this.toggle} />
+                    <Navbar.Collapse in={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
                             <Dropdown nav inNavbar>
                                 <Dropdown.Toggle nav>
@@ -183,7 +183,7 @@ class App extends Component {
                                 );
                             })}
                         </Nav>
-                    </Collapse>
+                    </Navbar.Collapse>
                 </Navbar>
                 <Container style={{backgroundColor: '#eee', paddingTop: '100px'}}>
                     <ExecutePanel />
