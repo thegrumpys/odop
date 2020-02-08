@@ -34,7 +34,7 @@ export class ConstraintsMaxTable extends Component {
                     </tbody>
                 </Table>
                 <UncontrolledTooltip placement="top" target="IVMaxConstraintTitle">Upper limits on Independent Variables</UncontrolledTooltip>
-                <UncontrolledTooltip class="d-lg-none" placement="top" target="MaxConstraintNameTitle">Variable names</UncontrolledTooltip>
+                <UncontrolledTooltip className="d-lg-none" placement="top" target="MaxConstraintNameTitle">Variable names</UncontrolledTooltip>
                 <UncontrolledTooltip placement="top" target="MaxConstraintConstrainTitle">Check box to establish upper limit</UncontrolledTooltip>
                 <UncontrolledTooltip placement="top" target="MaxConstraintValueTitle">Enter value for upper limit</UncontrolledTooltip>
                 <UncontrolledTooltip placement="top" target="MaxConstraintViolationTitle">Measure of constraint <br />satisfaction (-) or violation (+)</UncontrolledTooltip>
