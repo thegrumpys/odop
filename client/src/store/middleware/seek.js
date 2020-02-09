@@ -120,8 +120,9 @@ export function seek(store, action) {
 	    var temp1 = design.symbol_table[SOUGHT - 1].value;
         console.log('13 CURRENT VALUE OF '+dname+' IS '+temp1+' '+input);
     }
+//  Check if obj is more negative than negative objmin
     if (obj < -design.system_controls.objmin) {
-        ncode = 'SEEK SHOULD BE RE-EXECUTED';
+        ncode = 'TO FURTHER IMPROVE RESULT, RE-EXECUTE SEEK';
         store.dispatch(changeResultTerminationCondition(ncode));
     } else {
         ncode = 'SEEK COMPLETED';
