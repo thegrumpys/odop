@@ -107,7 +107,7 @@ export class ExecutePanel extends Component {
     render() {
 //        console.log('In ExecutePanel render this.state.text=',this.state.text);
         return this.state.modal && (
-            <Alert style={{marginTop: '10px'}}>
+            <Alert variant="success" style={{marginTop: '10px'}}>
                 <div className="text-left align-middle">
                     <b>{this.state.prefix}{this.state.title !== undefined && this.state.title.length > 0 ? ' - ' + this.state.title : ''}</b>
                     <Button className="float-right" variant="primary" onClick={this.onNext} disabled={this.state.steps[this.state.step+1] === undefined}>Next</Button>

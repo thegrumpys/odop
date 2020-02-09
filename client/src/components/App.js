@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {
-    Collapse,
     Navbar,
     Nav,
     Container,
     Tabs,
-    TabPane,
+    Tab,
     NavDropdown
 } from 'react-bootstrap';
 import classnames from 'classnames';
@@ -38,7 +37,7 @@ class App extends Component {
 //        console.log("In App.ctor props=",props);
         super(props);
         this.toggle = this.toggle.bind(this);
-        this.toggleTab = this.toggleTab.bind(this);
+        this.setKey = this.setKey.bind(this);
         var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
         var report_names = getReportNames();
         this.state = {
@@ -55,7 +54,7 @@ class App extends Component {
         });
     }
     
-    toggleTab(tab) {
+    setKey(tab) {
 //        console.log('In App.toggleTab tab=',tab);
         if (this.state.activeTab !== tab) {
             this.setState({
@@ -101,8 +100,8 @@ class App extends Component {
                 <Navbar variant="light" bg="light" expand="md" fixed="top">
                     <Navbar.Brand><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
                     <Navbar.Toggle onClick={this.toggle} />
-                    <Navbar.Collapse in={this.state.isOpen} navbar>
-                        <Nav className="mr-auto" navbar>
+                    <Navbar.Collapse in={this.state.isOpen}>
+                        <Nav className="mr-auto">
                             <NavDropdown title="File">
                                 <FileOpen />
                                 <FileSave />
@@ -148,15 +147,15 @@ class App extends Component {
                                 <HelpAbout />
                             </NavDropdown>
                         </Nav>
-                        <Nav tabs>
+                        <Nav>
                             <Nav.Item>
-                                <Nav.Link className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.toggleTab("1"); }}>
+                                <Nav.Link className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.setKey("1"); }}>
                                     Design: <img src={src} alt={alt} height="30px"/> {this.props.name}
                                 </Nav.Link>
                             </Nav.Item>
                             {this.state.report_names.map((element,i) => {return (
                                 <Nav.Item key={element}>
-                                    <Nav.Link className={classnames({ active: this.state.activeTab === (i+2).toString() })} onClick={() => { this.toggleTab((i+2).toString()); }}>
+                                    <Nav.Link className={classnames({ active: this.state.activeTab === (i+2).toString() })} onClick={() => { this.setKey((i+2).toString()); }}>
                                         Report: {element}
                                     </Nav.Link>
                                 </Nav.Item>
@@ -166,17 +165,17 @@ class App extends Component {
                     </Navbar.Collapse>
                 </Navbar>
                 <Container style={{backgroundColor: '#eee', paddingTop: '100px'}}>
-                    <ExecutePanel />
-                    <Tabs defaultActiveKey={this.state.activeTab}>
-                        <TabPane eventKey="1">
+                    <Tabs activeKey={this.state.activeTab} onSelect={k => this.setKey(k)}>
+                        <ExecutePanel />
+                        <Tab eventKey="1">
                             <Container fluid>
                                 <DesignTable />
                             </Container>
-                        </TabPane>
+                        </Tab>
                         {this.state.report_names.map((element,i) => {return (
-                            <TabPane key={element} eventKey={(i+2).toString()} id="report">
+                            <Tab key={element} eventKey={(i+2).toString()} id="report">
                                 {this.report(element)}
-                            </TabPane>
+                            </Tab>
                             );
                         })}
                     </Tabs>

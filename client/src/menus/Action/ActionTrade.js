@@ -679,10 +679,10 @@ class ActionTrade extends Component {
                         </ul>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button outline color="info" onClick={this.onStrategyContextHelp}>Help</Button>{' '}
+                        <Button outline variant="info" onClick={this.onStrategyContextHelp}>Help</Button>{' '}
                         <Button variant="secondary" onClick={this.onStrategyDone}> &nbsp; Done &nbsp; </Button>{' '}
                         <Button variant="secondary" onClick={this.onStrategyExisting}>Existing</Button>{' '}
-                        <Button color="info" onClick={this.onStrategyArbitrary}>Arbitrary</Button>{' '}
+                        <Button variant="info" onClick={this.onStrategyArbitrary}>Arbitrary</Button>{' '}
                         <Button variant="primary" onClick={this.onStrategyProportional}>Proportional</Button>
                     </Modal.Footer>
                 </Modal>
