@@ -143,15 +143,15 @@ class FileSaveAs extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     Save As&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>  &nbsp; File : Save As
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <br />
-                        <Form.Label for="fileSaveAsText">Save As:</Form.Label>
+                        <Form.Label htmlFor="fileSaveAsText">Save As:</Form.Label>
                         <Form.Control type="text" id="fileSaveAsText" placeholder="Enter design name here" onChange={this.onTextInput}/>
                     </Modal.Body>
                     <Modal.Footer>

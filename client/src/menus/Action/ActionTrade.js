@@ -663,7 +663,7 @@ class ActionTrade extends Component {
                     Trade&hellip;
                 </NavDropdown.Item>
                 <Modal show={this.state.strategyModal} className={this.props.className} size="lg">
-                    <Modal.Header toggle={this.toggle}>
+                    <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy
                         </Modal.Title>
@@ -687,7 +687,7 @@ class ActionTrade extends Component {
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.arbitraryModal} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}>
+                    <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Arbitrary
                         </Modal.Title>
@@ -727,7 +727,7 @@ class ActionTrade extends Component {
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.sizeModal} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}>
+                    <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Size
                         </Modal.Title>
@@ -750,7 +750,7 @@ class ActionTrade extends Component {
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.feasibleModal} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}>
+                    <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Feasible
                         </Modal.Title>
@@ -769,7 +769,7 @@ class ActionTrade extends Component {
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.establishModal} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}>
+                    <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Establish
                         </Modal.Title>
@@ -788,7 +788,7 @@ class ActionTrade extends Component {
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.notFeasibleModal} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}>
+                    <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Not Feasible
                         </Modal.Title>

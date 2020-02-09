@@ -139,15 +139,15 @@ class FileDelete extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     Delete&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Delete
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <br />
-                        <Form.Label for="fileDeleteSelect">Select design to delete:</Form.Label>
+                        <Form.Label htmlFor="fileDeleteSelect">Select design to delete:</Form.Label>
                         <Form.Control as="select" id="fileDeleteSelect" onChange={this.onSelect}>
                             {this.state.designs.map((design, index) => {
                                 return <option key={index} value={design.name}>{design.name}</option>

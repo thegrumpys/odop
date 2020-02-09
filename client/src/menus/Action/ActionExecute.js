@@ -63,15 +63,15 @@ class ActionExecute extends Component {
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names.length === 0}>
                     Execute&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Execute
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <br />
-                        <Form.Label for="tutorialSelect">Select demo/tutorial to execute:</Form.Label>
+                        <Form.Label htmlFor="tutorialSelect">Select demo/tutorial to execute:</Form.Label>
                         <Form.Control as="select" id="tutorialSelect" onChange={this.onSelect} value={this.state.execute_name}>
                             {this.state.execute_names.map((element, index) => (
                                 <option key={index} value={element}>{element}</option>

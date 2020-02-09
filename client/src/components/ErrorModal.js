@@ -40,7 +40,7 @@ export class ErrorModal extends Component {
     render() {
         return (
             <Modal show={this.state.modal} className={this.props.className}>
-                { this.state.header !== '' ? <Modal.Header toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>{this.state.header}</Modal.Header> : ''}
+                { this.state.header !== '' ? <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>{this.state.header}</Modal.Header> : ''}
                 <Modal.Body><Alert variant="danger">{this.state.message}</Alert></Modal.Body>
                 <Modal.Footer><Button variant="primary" onClick={this.toggle}>Close</Button></Modal.Footer>
             </Modal>

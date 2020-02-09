@@ -137,21 +137,21 @@ class ActionSelectSize extends Component {
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.types.length === 0}>
                     Select Size&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Size
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form.Label for="sizeTypeSelect">Select size type:</Form.Label>
+                        <Form.Label htmlFor="sizeTypeSelect">Select size type:</Form.Label>
                         <Form.Control as="select" id="sizeTypeSelect" onChange={this.onSelectSizeType} value={this.state.type}>
                             {this.state.types.map((element, index) =>
                                 <option key={index} value={element}>{element}</option>
                             )}
                         </Form.Control>
                         <br />
-                        <Form.Label for="sizeEntrySelect">Select size:</Form.Label>
+                        <Form.Label htmlFor="sizeEntrySelect">Select size:</Form.Label>
                         <Form.Control as="select" id="sizeEntrySelect" onChange={this.onSelectSizeEntry} value={this.state.size}>
                             {this.state.sizes.map((element, index) => (
                                 <option key={index} value={element}>{element}</option>

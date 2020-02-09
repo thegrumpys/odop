@@ -101,14 +101,14 @@ class ActionSelectCatalog extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     Select Catalog&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
-                    <Modal.Header toggle={this.toggle}>
+                <Modal show={this.state.modal} className={this.props.className} size="lg">
+                    <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Catalog
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form.Label for="catalogNameSelect">Select catalog name:</Form.Label>
+                        <Form.Label htmlFor="catalogNameSelect">Select catalog name:</Form.Label>
                         <Form.Control as="select" id="catalogNameSelect" onChange={this.onSelectCatalogName} value={this.state.name}>
                             {this.state.names.map((element, index) =>
                                 <option key={index} value={element}>{element}</option>
@@ -116,10 +116,10 @@ class ActionSelectCatalog extends Component {
                         </Form.Control>
                         <br />
                         {this.state.entries.length === 0 ? 
-                            <Form.Label for="catalogEntrySelect">No acceptable entries were found in this catalog</Form.Label>
+                            <Form.Label htmlFor="catalogEntrySelect">No acceptable entries were found in this catalog</Form.Label>
                         :
                             <React.Fragment>
-                                <Form.Label for="catalogEntrySelect">Closest catalog entries:</Form.Label>
+                                <Form.Label htmlFor="catalogEntrySelect">Closest catalog entries:</Form.Label>
                                 <Table className="border border-secondary" size="sm">
                                     <thead>
                                         <tr>
@@ -138,7 +138,7 @@ class ActionSelectCatalog extends Component {
                                     </tbody>
                                 </Table>
                                 <br />
-                                <Form.Label for="catalogEntrySelect">Select entry:</Form.Label>
+                                <Form.Label htmlFor="catalogEntrySelect">Select entry:</Form.Label>
                                 <Form.Control as="select" id="catalogEntrySelect" onChange={this.onSelectCatalogEntry} value={this.state.entry}>
                                     {this.state.entries.length === 0 ? <option>None</option> : '' || this.state.entries.map((element, index) => (
                                         <option key={index} value={index}>{element[0]}</option>

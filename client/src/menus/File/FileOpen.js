@@ -134,15 +134,15 @@ class FileOpen extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     Open&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <Modal.Header toggle={this.toggle}>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Open
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <br />
-                        <Form.Label for="fileOpenSelect">Select design to open:</Form.Label>
+                        <Form.Label htmlFor="fileOpenSelect">Select design to open:</Form.Label>
                         <Form.Control as="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
                             {this.state.designs.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                 <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
