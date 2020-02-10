@@ -165,8 +165,8 @@ class App extends Component {
                     </Navbar.Collapse>
                 </Navbar>
                 <Container style={{backgroundColor: '#eee', paddingTop: '100px'}}>
-                    <Tabs activeKey={this.state.activeTab} onSelect={k => this.setKey(k)}>
-                        <ExecutePanel />
+                    <ExecutePanel />
+                    <Tabs defaultActiveKey="1" activeKey={this.state.activeTab} onSelect={k => this.setKey(k)}>
                         <Tab eventKey="1">
                             <Container fluid>
                                 <DesignTable />

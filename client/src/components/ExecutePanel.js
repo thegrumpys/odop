@@ -4,7 +4,7 @@ import { Alert, Button } from 'react-bootstrap';
 import { load } from '../store/actionCreators';
 
 export var startExecute = function(prefix,steps) {
-//    console.log('In startExecute steps=',steps);
+//    console.log('In startExecute this=',this,'prefix=',prefix,'steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
         this.setState({
             modal: true, // Default: do display
