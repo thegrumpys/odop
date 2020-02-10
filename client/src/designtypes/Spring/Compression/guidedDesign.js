@@ -1,4 +1,5 @@
 import React from 'react';
+import { Table, Image } from 'react-bootstrap';
 export const execute = {
     steps: [
         {
@@ -85,29 +86,31 @@ export const execute = {
             title: "Page 03 of 13",
             text: (
                 <React.Fragment>
-                    <table>
+                    <Table bordered size="sm">
                     <tbody>
                         <tr>
-                            <td width="60%">
-                            <img src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram1.png" alt="Spring Design Workflow Diagram"/>
+                            <td width="60%" valign="top">
+                            <Image fluid src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram1.png" alt="Spring Design Workflow Diagram"/>
                             </td>
-                            <td width="40%">
+                            <td width="40%" valign="top">
                                 <p>
                                 This workflow is intended for design from original problem specifications, not design validation.
                                 </p>
                             </td>
                         </tr>
                         <tr>
-                            <td width="60%">
-                            <img src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram2.png" alt="Spring Design Workflow Diagram"/>
+                            <td width="60%" valign="top">
+                            <Image fluid src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram2.png" alt="Spring Design Workflow Diagram"/>
                             </td>
-                            <td width="40%">
+                            <td width="40%" valign="top">
                                 <p>
                                 To start, enter what is known about requirements for the design.
-                                <br /><br />
+                                </p>
+                                <p>
                                 Leaving wire diameter free (not Fixed or constrained) allows the search  
                                 to select a non-standard wire size.
-                                <br /><br /><br /><br /><br /><br /><br /><br />
+                                </p>
+                                <p>
                                 If a feasible solution is not available, exit.
                                 Consider the posibility that the design is over-specified.
                                 Additional information is available in On-line Help topics.
@@ -115,32 +118,33 @@ export const execute = {
                             </td>
                         </tr>
                         <tr>
-                            <td width="60%">
-                            <img src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram3.png" alt="Spring Design Workflow Diagram"/>
+                            <td width="60%" valign="top">
+                            <Image fluid src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram3.png" alt="Spring Design Workflow Diagram"/>
                             </td>
-                            <td width="40%">
+                            <td width="40%" valign="top">
                                 <p>
                                 Seek &nbsp;  Min Weight, Max Cycle Life, Min Outside Diameter, Min Solid Height, Min Rate, etc.
-                                <br /><br /><br /><br /> 
+                                </p>
+                                <p> 
                                 Select  a standard wire size from the built-in tables.
                                 </p>
                             </td>
                         </tr>
                         <tr>
-                            <td width="60%">
-                            <img src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram4.png" alt="Spring Design Workflow Diagram"/>
+                            <td width="60%" valign="top">
+                            <Image fluid src="designtypes/Spring/Compression/SpringDesignWorkflowDiagram4.png" alt="Spring Design Workflow Diagram"/>
                             </td>
-                            <td width="40%">
+                            <td width="40%" valign="top">
                                 <p>
                                 Another search is required to adjust other variables to compensate for the change in wire diameter.
-                                <br /><br /><br /><br /> 
+                                </p>
+                                <p>
                                 Select the nearest entry from a built-in catalog of stock springs.  Confirm if requirements are met.
                                 </p>
                             </td>
                         </tr>
                     </tbody>
-                    </table>
-                    <br />
+                    </Table>
                     <p>
                      After reviewing the diagram, use the "Next" button to continue.
                      </p>
