@@ -11,7 +11,8 @@
 * [Terms of Service](About/Legal/TermsOfService)
 * [Privacy Statement](About/Legal/PrivacyStatement)
 * [User Accounts](About/userAccounts)
-* [Contact Us](About/ContactUs)   
+* [Contact Us](About/ContactUs)
+* [Help topics](Help)   
 
 
 ## Help
@@ -20,6 +21,7 @@
 * [Terminology](Help/terminology)
 * [Getting Started](Help/gettingStarted)
 * [Tutorial and Demo](Help/tutordemo)
+* [Design Situations](Help/designSituations)
 * [Feasibility](Help/feasibility)
 * [Search](Help/search)
 * [Seek](Help/seek)
@@ -27,7 +29,8 @@
 * [Reports](Help/reports)
 * [Hints, Tips and Tricks](Help/htt)
 * [Available Design Types](Help/DesignTypes)
-* [Spring Design](Help/SpringDesign)   
+* [Spring Design](Help/SpringDesign)
+* [About topics](About)   
 
 
 ## Design

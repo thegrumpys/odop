@@ -1,6 +1,7 @@
 ## Restrictions
 
-This section covers a few restrictions and limitations of the ODOP:Spring program. 
+This section covers a few restrictions and limitations of the ODOP software 
+and the ODOP:Spring app. 
 Please review the [Disclaimer](Disclaimer) section for liability limitations.
 
 The current release of ODOP:Spring is valid only for helical coil compression,
@@ -39,14 +40,33 @@ value such as outside diameter, inside diameter, solid height, etc.,
 the user is expected to offset the value entered as a constraint level by
 the anticipated manufacturing tolerance.
    
-The standard size tables supplied with the current release of ODOP:Spring do
-not represent the product offerings of any single manufacturer. 
+Unless marked otherwise, 
+the standard size tables supplied with the current release of ODOP:Spring 
+do not represent the product offerings of any single manufacturer. 
 These tables are samples intended to illustrate software capabilities.
 Please review the operation of the SELECT SIZE menu entry for a better 
 understanding of how to use these tables.
 
-The spring catalogs supplied with the current release of ODOP:Spring are
-intended for demonstration purposes only.  They do not necessarily
-represent the current offering of any single manufacturer.
+Unless marked otherwise, 
+the spring catalogs supplied with the current release of ODOP:Spring are
+intended for demonstration purposes only. 
+The supplied catalogs do not necessarily represent the current offering of 
+any single manufacturer.  
+
+Designs saved in the public account are subject to removal one week after 
+the most recent update to the design.
+Notice of impending cleanup of designs saved in the public account will be posted
+at [Message of the Day](../messageOfTheDay).
+Clean up activity will likely occur just prior to new releases of the
+ODOP software and the ODOP:Spring app.
+While designs saved in private accounts will be preserved and version migrated
+on a best effort basis,
+it should be understood that this data can't be maintained literally forever.
+To the extent possible, 
+private account holders will be notified by email prior to any account closure
+or other impact to saved designs.
+   
+&nbsp;
    
 [About](../)
+
