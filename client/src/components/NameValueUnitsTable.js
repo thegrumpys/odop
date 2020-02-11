@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table /*, Tooltip */   } from 'react-bootstrap';
+import { Table, OverlayTrigger, Tooltip  } from 'react-bootstrap';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
 import NameValueUnitsRowDependentVariable from './NameValueUnitsRowDependentVariable';
@@ -13,12 +13,28 @@ export class NameValueUnitsTable extends Component {
                 <Table className="col-md-6 border border-secondary" size="sm">
                     <thead>
                         <tr>
-                            <th className="text-center bg-secondary text-white" colSpan="6" id="IVTitle">Independent Variables</th>
+                            <th className="text-center bg-secondary text-white" colSpan="6" id="IVTitle">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Inputs to design equations</Tooltip>}>
+                                    <span>Independent Variables</span>
+                                </OverlayTrigger>
+                            </th>
                         </tr>
                         <tr>
-                            <th className="text-left" colSpan="2" id="NameTitle">Name</th>
-                            <th className="text-center" colSpan="2" id="ValueTitle">Value (Fix)</th>
-                            <th className={"text-left " + (this.props.system_controls.show_units ? "" : "d-none")} id="UnitsTitle">Units</th>
+                            <th className="text-left" colSpan="2" id="NameTitle">
+                            <OverlayTrigger placement="auto" overlay={<Tooltip>Variable names</Tooltip>}>
+                                <span>Name</span>
+                            </OverlayTrigger>
+                            </th>
+                            <th className="text-center" colSpan="2" id="ValueTitle">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Current values <br /> (Check box at right to FIX)</Tooltip>}>
+                                    <span>Value (Fix)</span>
+                                </OverlayTrigger>
+                            </th>
+                            <th className={"text-left " + (this.props.system_controls.show_units ? "" : "d-none")} id="UnitsTitle">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Units (information only)</Tooltip>}>
+                                    <span>Units</span>
+                                </OverlayTrigger>
+                            </th>
                             <th></th>
                         </tr>
                     </thead>
@@ -27,7 +43,11 @@ export class NameValueUnitsTable extends Component {
                     </tbody>
                     <thead>
                         <tr>
-                            <th className="text-center bg-secondary text-white" colSpan="6" id="DVTitle">Dependent Variables</th>
+                            <th className="text-center bg-secondary text-white" colSpan="6" id="DVTitle">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Outputs from design equations</Tooltip>}>
+                                    <span>Dependent Variables</span>
+                                </OverlayTrigger>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,8 +56,11 @@ export class NameValueUnitsTable extends Component {
                     <thead>
                         { (this.props.symbol_table.reduce((accum,element)=>{if (!element.equationset && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
                             (<tr>
-                                <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">Calculation Inputs</th>
-{/*                                <Tooltip placement="top" target="CITitle">Variables that are not subject to constraints, FIX or Search</Tooltip>*/}
+                                <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">
+                                    <OverlayTrigger placement="auto" overlay={<Tooltip>Variables that are not subject to constraints, FIX or Search</Tooltip>}>
+                                        <span>Calculation Inputs</span>
+                                    </OverlayTrigger>
+                                </th>
                             </tr>)
                         }
                     </thead>
@@ -45,11 +68,6 @@ export class NameValueUnitsTable extends Component {
                         {this.props.symbol_table.map((element,index) => !element.equationset && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
                     </tbody>
                 </Table>
-{/*                <Tooltip placement="top" target="IVTitle">Inputs to design equations</Tooltip>*/}
-{/*                <Tooltip placement="top" target="NameTitle">Variable names</Tooltip>*/}
-{/*                <Tooltip placement="top" target="ValueTitle">Current values <br /> (Check box at right to FIX)</Tooltip>*/}
-{/*                <Tooltip placement="top" target="UnitsTitle">Units (information only)</Tooltip>*/}
-{/*                <Tooltip placement="top" target="DVTitle">Outputs from design equations</Tooltip>*/}
             </React.Fragment>
         );
     }

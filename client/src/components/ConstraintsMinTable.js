@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table /*, Tooltip */  } from 'react-bootstrap';
+import { Table, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ConstraintsMinRowIndependentVariable from './ConstraintsMinRowIndependentVariable';
 import ConstraintsMinRowDependentVariable from './ConstraintsMinRowDependentVariable';
 import { connect } from 'react-redux';

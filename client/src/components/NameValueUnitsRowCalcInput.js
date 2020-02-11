@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup /*, Tooltip */ , Form } from 'react-bootstrap';
+import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../store/actionCreators';
 

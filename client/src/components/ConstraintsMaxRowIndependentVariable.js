@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, ButtonGroup /*, Tooltip */ , Modal, Button, Form } from 'react-bootstrap';
+import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
