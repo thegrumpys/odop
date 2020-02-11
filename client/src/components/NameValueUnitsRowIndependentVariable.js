@@ -93,8 +93,11 @@ class NameValueUnitsRowIndependentVariable extends Component {
         // =======================================
         return (
             <tr key={this.props.element.name}>
-                <td className="align-middle" colSpan="2" id={'independent_variable_'+this.props.index}>{this.props.element.name}</td>
-{/*                { this.props.element.tooltip !== undefined && <Tooltip placement="top" target={'independent_variable_'+this.props.index}>{this.props.element.tooltip}</Tooltip>} */}
+                <td className="align-middle" colSpan="2" id={'independent_variable_'+this.props.index}>
+                    <OverlayTrigger placement="auto" overlay={this.props.element.tooltip !== undefined && <Tooltip>{this.props.element.tooltip}</Tooltip>}>
+                        <span>{this.props.element.name}</span>
+                    </OverlayTrigger>
+                </td>
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
