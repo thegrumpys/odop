@@ -12,13 +12,33 @@ export class ConstraintsMaxTable extends Component {
                 <Table className="col-md-3 border border-secondary" size="sm">
                     <thead>
                         <tr>
-                            <th className="text-center bg-secondary text-white" colSpan="4" id="IVMaxConstraintTitle">IV Max Constraint</th>
+                            <th className="text-center bg-secondary text-white" colSpan="4" id="IVMaxConstraintTitle">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Upper limits on Independent Variables</Tooltip>}>
+                                    <span>IV Max Constraint</span>
+                                </OverlayTrigger>
+                            </th>
                         </tr>
                         <tr>
-                            <th className="text-left d-lg-none" id="MaxConstraintNameTitle">Name</th>
-                            <th className="text-left" id="MaxConstraintConstrainTitle">Constrain</th>
-                            <th className="text-center" id="MaxConstraintValueTitle">Value</th>
-                            <th className={"text-right " + (this.props.system_controls.show_violations ? "" : "d-none")} id="MaxConstraintViolationTitle">Violation</th>
+                            <th className="text-left d-lg-none" id="MaxConstraintNameTitle">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Variable names</Tooltip>}>
+                                    <span>Name</span>
+                                </OverlayTrigger>
+                            </th>
+                            <th className="text-left" id="MaxConstraintConstrainTitle">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Check box to establish upper limit</Tooltip>}>
+                                    <span>Constrain</span>
+                                </OverlayTrigger>
+                            </th>
+                            <th className="text-center" id="MaxConstraintValueTitle">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Enter value for upper limit</Tooltip>}>
+                                    <span>Value</span>
+                                </OverlayTrigger>
+                            </th>
+                            <th className={"text-right " + (this.props.system_controls.show_violations ? "" : "d-none")} id="MaxConstraintViolationTitle">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Measure of constraint <br />satisfaction (-) or violation (+)</Tooltip>}>
+                                    <span>Violation</span>
+                                </OverlayTrigger>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,19 +46,17 @@ export class ConstraintsMaxTable extends Component {
                     </tbody>
                     <thead>
                         <tr>
-                            <th className="text-center bg-secondary text-white" colSpan="4" id="DVMaxConstraintTitle">DV Max Constraint</th>
+                            <th className="text-center bg-secondary text-white" colSpan="4" id="DVMaxConstraintTitle">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Upper limits on Dependent Variables</Tooltip>}>
+                                    <span>DV Max Constraint</span>
+                                </OverlayTrigger>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.symbol_table.map((element,index) => !element.input && element.equationset && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                 </Table>
-{/*                <Tooltip placement="top" target="IVMaxConstraintTitle">Upper limits on Independent Variables</Tooltip>*/}
-{/*                <Tooltip className="d-lg-none" placement="top" target="MaxConstraintNameTitle">Variable names</Tooltip>*/}
-{/*                <Tooltip placement="top" target="MaxConstraintConstrainTitle">Check box to establish upper limit</Tooltip>*/}
-{/*                <Tooltip placement="top" target="MaxConstraintValueTitle">Enter value for upper limit</Tooltip>*/}
-{/*                <Tooltip placement="top" target="MaxConstraintViolationTitle">Measure of constraint <br />satisfaction (-) or violation (+)</Tooltip>*/}
-{/*                <Tooltip placement="top" target="DVMaxConstraintTitle">Upper limits on Dependent Variables</Tooltip>*/}
             </React.Fragment>
         );
     }

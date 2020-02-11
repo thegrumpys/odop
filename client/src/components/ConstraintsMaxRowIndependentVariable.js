@@ -98,8 +98,11 @@ class ConstraintMaxRowIndependentVariable extends Component {
         return (
             <React.Fragment>
                 <tr key={this.props.element.name}>
-                    <td className="align-middle d-lg-none" id={'independent_variable_max_constrain_'+this.props.index}>{this.props.element.name}</td>
-{/*                    { this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none" placement="top" target={'independent_variable_max_constrain_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}*/}
+                    <td className="align-middle d-lg-none" id={'independent_variable_max_constrain_'+this.props.index}>
+                        <OverlayTrigger placement="auto" overlay={this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none">{this.props.element.tooltip}</Tooltip>}>
+                            <span>{this.props.element.name}</span>
+                        </OverlayTrigger>
+                    </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             <InputGroup.Prepend>
@@ -107,8 +110,9 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                     <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetIndependentVariableFlagConstrained : this.onSetIndependentVariableFlagConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <Form.Control type="number" id={this.props.element.name + "_cmax"} className={cmax_class} value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
-{/*                            {this.props.element.lmax & FDCL ? <Tooltip placement="top" target={this.props.element.name + "_cmax"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</Tooltip> : ''}*/}
+                            <OverlayTrigger placement="auto" overlay={this.props.element.lmax & FDCL && <Tooltip>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</Tooltip>}>
+                                <Form.Control type="number" id={this.props.element.name + "_cmax"} className={cmax_class} value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
+                            </OverlayTrigger>
                         </InputGroup>
                         {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg">
                             <Modal.Header>

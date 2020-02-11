@@ -118,8 +118,11 @@ class ConstraintsMinRowDependentVariable extends Component {
         return (
             <React.Fragment>
                 <tr key={this.props.element.name}>
-                    <td className="align-middle d-lg-none" id={'dependent_variable_min_constrain_'+this.props.index}>{this.props.element.name}</td>
-{/*                    { this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none" placement="top" target={'dependent_variable_min_constrain_'+this.props.index}>{this.props.element.tooltip}</Tooltip>}*/}
+                    <td className="align-middle d-lg-none" id={'dependent_variable_min_constrain_'+this.props.index}>
+                        <OverlayTrigger placement="auto" overlay={this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none">{this.props.element.tooltip}</Tooltip>}>
+                            <span>{this.props.element.name}</span>
+                        </OverlayTrigger>
+                    </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             <InputGroup.Prepend>
@@ -127,8 +130,9 @@ class ConstraintsMinRowDependentVariable extends Component {
                                     <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <Form.Control type="number" id={this.props.element.name + "_cmin"} className={cmin_class} value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick} />
-{/*                            {this.props.element.lmin & FDCL ? <Tooltip placement="top" target={this.props.element.name + "_cmin"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</Tooltip> : ''}*/}
+                            <OverlayTrigger placement="auto" overlay={this.props.element.lmin & FDCL && <Tooltip>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</Tooltip>}>
+                                <Form.Control type="number" id={this.props.element.name + "_cmin"} className={cmin_class} value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick} />
+                            </OverlayTrigger>
                         </InputGroup>
                         {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg">
                             <Modal.Header>
