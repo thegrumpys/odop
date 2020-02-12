@@ -98,7 +98,7 @@ class App extends Component {
         return (
             <React.Fragment>
                 <Navbar variant="light" bg="light" expand="md" fixed="top">
-                    <Navbar.Brand><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
+                    <Navbar.Brand><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
                     <Navbar.Toggle onClick={this.toggle} />
                     <Navbar.Collapse in={this.state.isOpen}>
                         <Nav className="mr-auto">
@@ -150,13 +150,13 @@ class App extends Component {
                         <Nav>
                             <Nav.Item>
                                 <Nav.Link className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.setKey("1"); }}>
-                                    Design: <img src={src} alt={alt} height="30px"/> {this.props.name}
+                                    <span className="d-none d-md-inline">Design: </span><img src={src} alt={alt} height="30px"/> {this.props.name}
                                 </Nav.Link>
                             </Nav.Item>
                             {this.state.report_names.map((element,i) => {return (
                                 <Nav.Item key={element}>
                                     <Nav.Link className={classnames({ active: this.state.activeTab === (i+2).toString() })} onClick={() => { this.setKey((i+2).toString()); }}>
-                                        Report: {element}
+                                        <span className="d-none d-md-inline">Report: </span>{element}
                                     </Nav.Link>
                                 </Nav.Item>
                                 );
