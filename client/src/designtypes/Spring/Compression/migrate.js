@@ -98,9 +98,15 @@ export function migrate(design) {
         design.system_controls.show_violations = 1; // Add show_violations to system_controls
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
             if (!element.equationset) { // That is a Calculation Input
-                if (element.name !== "Spring_type") { // And it is NOT Spring_Type
+                if (element.name === "Spring_Type") { // And it is Spring_Type
+                    element.input = false; // Force it to be output
+                } else {
                     element.input = !element.input; // Flip the input boolean value
                 }
+            }
+            if (element.type !== undefined && element.type === "table") {
+                element.format = "table";
+                delete element.type;
             }
         });
         migrated_design.version = '6'; // last thing... set the migrated model version

@@ -27,12 +27,12 @@ class NameValueUnitsRowIndependentVariable extends Component {
         this.onSelect = this.onSelect.bind(this);
         this.onSet = this.onSet.bind(this);
         this.onReset = this.onReset.bind(this);
-//        console.log('In NameValueUnitsRowIndependentVariable.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table);
-        if (this.props.element.type === undefined && typeof this.props.element.value === 'number') {
+//        console.log('In NameValueUnitsRowIndependentVariable.constructor this.props.element.name=',this.props.element.name,' this.props.element.format=',this.props.element.format,' this.props.element.table=',this.props.element.table);
+        if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
                 focused: false
             };
-        } else if (this.props.element.type === 'table') {
+        } else if (this.props.element.format === 'table') {
 //            console.log('In NameValueUnitsRowIndependentVariable.constructor file = ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowIndependentVariable.constructor table=',table);
@@ -100,11 +100,11 @@ class NameValueUnitsRowIndependentVariable extends Component {
                 </td>
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
-                        { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
+                        { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             <Form.Control type="number" className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
-                        { this.props.element.type === undefined && typeof this.props.element.value === 'string' ?
+                        { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
                             <Form.Control type="text" className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
-                        { this.props.element.type === 'table' &&
+                        { this.props.element.format === 'table' &&
                         (
                             <Form.Control as="select" value={this.props.element.value} onChange={this.onSelect}>
                                 {this.state.table.map((value, index) =>

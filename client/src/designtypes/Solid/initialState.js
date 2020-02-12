@@ -51,7 +51,7 @@ export const initialState = {
             "name": "Material",
             "value": 6,
             "units": "",
-            "type": "table",
+            "format": "table",
             "table": "Solid/materials",
             "lmin": 0,
             "lmax": 0,

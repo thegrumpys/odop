@@ -63,6 +63,12 @@ export function migrate(design) {
         // console.log('Convert from 2 to 3');
         design.system_controls.show_units = 1; // Add show_units to system_controls
         design.system_controls.show_violations = 1; // Add show_violations to system_controls
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.type !== undefined && element.type === "table") {
+                element.format = "table";
+                delete element.type;
+            }
+        });
         migrated_design.version = '3'; // last thing... set the migrated model version
         displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
     case '3':
