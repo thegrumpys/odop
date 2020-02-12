@@ -150,7 +150,7 @@ class App extends Component {
                         <Nav>
                             <Nav.Item>
                                 <Nav.Link className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.setKey("1"); }}>
-                                    <span className="d-none d-md-inline">Design: </span><img src={src} alt={alt} height="30px"/> {this.props.name}
+                                    <span className="d-none d-md-inline">Design: </span><img className="d-none d-md-inline" src={src} alt={alt} height="30px"/> {this.props.name}
                                 </Nav.Link>
                             </Nav.Item>
                             {this.state.report_names.map((element,i) => {return (
