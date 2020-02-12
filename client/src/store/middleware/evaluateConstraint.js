@@ -17,7 +17,7 @@ export function evaluateConstraintName(symbol_table, flags, value) {
         }
     }
     
-//    console.log('In evaluateConstraintName',' symbol_table=',symbol_table,' flags=',flags,' value=',value,' result=',result);
+    console.log('In evaluateConstraintName',' symbol_table=',symbol_table,' flags=',flags,' value=',value,' result=',result);
     return result;
 }
 

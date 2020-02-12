@@ -14,24 +14,24 @@ export class NameValueUnitsTable extends Component {
                     <thead>
                         <tr>
                             <th className="text-center bg-secondary text-white" colSpan="6" id="IVTitle">
-                                <OverlayTrigger placement="auto" overlay={<Tooltip>Inputs to design equations</Tooltip>}>
+                                <OverlayTrigger placement="top" overlay={<Tooltip>Inputs to design equations</Tooltip>}>
                                     <span>Independent Variables</span>
                                 </OverlayTrigger>
                             </th>
                         </tr>
                         <tr>
                             <th className="text-left" colSpan="2" id="NameTitle">
-                            <OverlayTrigger placement="auto" overlay={<Tooltip>Variable names</Tooltip>}>
+                            <OverlayTrigger placement="top" overlay={<Tooltip>Variable names</Tooltip>}>
                                 <span>Name</span>
                             </OverlayTrigger>
                             </th>
                             <th className="text-center" colSpan="2" id="ValueTitle">
-                                <OverlayTrigger placement="auto" overlay={<Tooltip>Current values <br /> (Check box at right to FIX)</Tooltip>}>
+                                <OverlayTrigger placement="top" overlay={<Tooltip>Current values <br /> (Check box at right to FIX)</Tooltip>}>
                                     <span>Value (Fix)</span>
                                 </OverlayTrigger>
                             </th>
                             <th className={"text-left " + (this.props.system_controls.show_units ? "" : "d-none")} id="UnitsTitle">
-                                <OverlayTrigger placement="auto" overlay={<Tooltip>Units (information only)</Tooltip>}>
+                                <OverlayTrigger placement="top" overlay={<Tooltip>Units (information only)</Tooltip>}>
                                     <span>Units</span>
                                 </OverlayTrigger>
                             </th>
@@ -44,7 +44,7 @@ export class NameValueUnitsTable extends Component {
                     <thead>
                         <tr>
                             <th className="text-center bg-secondary text-white" colSpan="6" id="DVTitle">
-                                <OverlayTrigger placement="auto" overlay={<Tooltip>Outputs from design equations</Tooltip>}>
+                                <OverlayTrigger placement="top" overlay={<Tooltip>Outputs from design equations</Tooltip>}>
                                     <span>Dependent Variables</span>
                                 </OverlayTrigger>
                             </th>
@@ -57,7 +57,7 @@ export class NameValueUnitsTable extends Component {
                         { (this.props.symbol_table.reduce((accum,element)=>{if (!element.equationset && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
                             (<tr>
                                 <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">
-                                    <OverlayTrigger placement="auto" overlay={<Tooltip>Variables that are not subject to constraints, FIX or Search</Tooltip>}>
+                                    <OverlayTrigger placement="top" overlay={<Tooltip>Variables that are not subject to constraints, FIX or Search</Tooltip>}>
                                         <span>Calculation Inputs</span>
                                     </OverlayTrigger>
                                 </th>
