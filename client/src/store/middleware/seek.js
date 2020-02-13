@@ -23,6 +23,18 @@ export function seek(store, action) {
             console.log('02 NOTE:  THE SEEK PROCESS MAY PRODUCE BETTER RESULTS WITH A FEASIBLE START POINT.');
         }
     }
+    
+    if (design.system_controls.ioopt > 5) {
+        console.log("02A THE NUMBER OF FIXED INDEPENDENT VARIABLES IS:", design.symbol_table.reduce((total, element)=>{return (element.equationset && element.input) && element.lmin & FIXED ? total+1 : total+0}, 0));
+        console.log("02B THE NUMBER OF FREE INDEPENDENT VARIABLES IS:", design.symbol_table.reduce((total, element)=>{return (element.equationset && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0));
+    }
+    var ncode;
+    if(design.symbol_table.reduce((total, element)=>{return (element.equationset && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+        ncode = 'WARNING, NO FREE INDEPENDENT VARIABLES';
+        store.dispatch(changeResultTerminationCondition(ncode));
+        return;
+    }
+    
     if (action.payload.minmax === MAX) {
         SDIR = +1;
     } else {
@@ -32,7 +44,6 @@ export function seek(store, action) {
     var temp;
     var dname;
     var input;
-    var ncode;
     var element;
     var pc;
     var obj;
@@ -109,8 +120,9 @@ export function seek(store, action) {
 	    var temp1 = design.symbol_table[SOUGHT - 1].value;
         console.log('13 CURRENT VALUE OF '+dname+' IS '+temp1+' '+input);
     }
-    if (obj < 0.0) {
-        ncode = 'SEEK SHOULD BE RE-EXECUTED WITH A NEW ESTIMATE OF THE OPTIMUM';
+//  Check if obj is more negative than negative objmin
+    if (obj < -design.system_controls.objmin) {
+        ncode = 'TO FURTHER IMPROVE RESULT, RE-EXECUTE SEEK';
         store.dispatch(changeResultTerminationCondition(ncode));
     } else {
         ncode = 'SEEK COMPLETED';

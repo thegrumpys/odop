@@ -47,7 +47,7 @@ Do a pull or push to get latest version on all systems.
 1. Update Heroku Buildpack for staging (heroku-staging), or production (heroku).
 1. If not logged into Heroku, login in using the command line "heroku login" which in turns brings up the Heroku Website login page in your browser.
 1. In your git/odop directory push to Heroku using the command line: git push heroku-staging master or git push heroku master. 
-Verify no error messages during build on heroku.
+Verify no error messages during build on heroku. Note: to push a non-master branch, such as 324, assuming 324 is the current branch, issue: git push heroku +HEAD:master.
 1. Confirm that the http://odop-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version X.Y.Z displays.
 
 C. DEVELOPMENT ENVIRONMENT
