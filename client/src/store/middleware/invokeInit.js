@@ -14,7 +14,7 @@ export function invokeInit(store) {
     var x = [];
     for (let i = 0; i < design.symbol_table.length; i++) {
         element = design.symbol_table[i];
-        if (element.input && element.equationset) {
+        if (element.type === "equationset" && element.input) {
             p.push(element.value);
         } else {
             x.push(element.value);

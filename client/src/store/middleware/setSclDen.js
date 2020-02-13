@@ -11,7 +11,7 @@ export function setSclDen(store) {
     var cmax = [];
     design.symbol_table.forEach((element) => {
         // Only do it from independent and dependent variables, but not for calculation inputs
-        if (element.equationset) {
+        if (element.type === "equationset") {
             cmin.push(element.cmin);
             cmax.push(element.cmax);
         }

@@ -89,6 +89,13 @@ export function migrate(design) {
                 element.format = "table";
                 delete element.type;
             }
+            if (element.equationset) {
+                element.type = "equationset";
+                delete element.equationset;
+            } else {
+                element.type = "calcinput";
+                delete element.equationset;
+            }
         });
         migrated_design.version = '5'; // last thing... set the migrated model version
         displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
