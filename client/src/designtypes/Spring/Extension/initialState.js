@@ -417,7 +417,7 @@ export const initialState = {
             "units": "cycles",
             "lmin": 0,
             "lmax": 0,
-            "cmin": 2.0,
+            "cmin": 10000,
             "cmax": 1000000.0,
             "ioclass": 0,
             "sdlim": 1000.0,
