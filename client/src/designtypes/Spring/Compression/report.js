@@ -13,6 +13,7 @@ export function getReportNames() {
 }
 
 export function report(report_name, prefs, st, labels) {
+    return;
 //    console.log('In report report_name=',report_name,' prefs=',prefs,' st=',st,' labels=',labels);
     
     var kc, ks, temp, s_f, len_lbl, 
