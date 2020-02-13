@@ -525,6 +525,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 0.0,
+            "tooltip": "mat_SI.json for metric units. Anything else for US ips units",
             "equationset": false,
             "hidden": true
         },
