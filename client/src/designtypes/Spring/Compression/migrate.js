@@ -103,6 +103,13 @@ export function migrate(design) {
                 }
             }
         });
+        // Re-order elements for improved consistency, grouping
+//        design.symbol_table.splice(41,0,design.symbol_table[32]);
+//        design.symbol_table.splice(32,1);
+//        design.symbol_table.splice(41,0,design.symbol_table[31]);
+//        design.symbol_table.splice(31,1);
+        design.symbol_table.splice(41,0,design.symbol_table[30]);
+        design.symbol_table.splice(30,1);
         migrated_design.version = '6'; // last thing... set the migrated model version
         displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
     case '6':
