@@ -104,12 +104,13 @@ export function migrate(design) {
             }
         });
         // Re-order elements for improved consistency, grouping
-//        design.symbol_table.splice(41,0,design.symbol_table[32]);
-//        design.symbol_table.splice(32,1);
-//        design.symbol_table.splice(41,0,design.symbol_table[31]);
-//        design.symbol_table.splice(31,1);
-        design.symbol_table.splice(41,0,design.symbol_table[30]);
-        design.symbol_table.splice(30,1);
+        // Note that index values come from symbol_table_offsets.js not offsets.js
+        design.symbol_table.splice(47,0,design.symbol_table[38]);  //  Add_Coils_Solid
+        design.symbol_table.splice(38,1);
+        design.symbol_table.splice(46,0,design.symbol_table[37]);  //  Inactive_Coils
+        design.symbol_table.splice(37,1);
+        design.symbol_table.splice(45,0,design.symbol_table[36]);  //  End_Type
+        design.symbol_table.splice(36,1);
         migrated_design.version = '6'; // last thing... set the migrated model version
         displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
     case '6':

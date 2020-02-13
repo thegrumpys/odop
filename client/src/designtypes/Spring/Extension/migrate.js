@@ -27,8 +27,9 @@ export function migrate(design) {
             }
         });
         // Re-order elements for improved consistency, grouping
-        design.symbol_table.splice(49,0,design.symbol_table[35]);
-        design.symbol_table.splice(35,1);
+        // Note that index values come from symbol_table_offsets.js not offsets.js
+        design.symbol_table.splice(57,0,design.symbol_table[42]);  //  End_Type
+        design.symbol_table.splice(42,1);
         migrated_design.version = '2'; // last thing... set the migrated model version
         displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
     case '2':
