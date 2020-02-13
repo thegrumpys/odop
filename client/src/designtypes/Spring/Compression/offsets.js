@@ -69,6 +69,8 @@ export const del = 10;
 export const delmin = 11;
 export const tol = 12;
 export const smallnum = 13;
+export const show_units = 14;
+export const show_violations = 15;
 
 // Labels (Properties)
 export const COMMENT = 0;
