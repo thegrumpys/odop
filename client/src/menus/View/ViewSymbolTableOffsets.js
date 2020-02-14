@@ -23,7 +23,6 @@ class ViewSymbolTableOffsets extends Component {
     render() {
 //        console.log('In ViewSymbolTableOffsets.render');
         var ip = 0;
-        var ix = 0;
         var isc = 0;
         var il = 0;
         return (
