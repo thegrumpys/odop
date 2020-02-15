@@ -34,7 +34,7 @@ class FileSaveAs extends Component {
         const authenticated = await this.props.auth.isAuthenticated();
 //        console.log("In FileSaveAs.componentDidMount authenticated=",authenticated);
         const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In FileSaveAs.componentDidMount accessToken=",accessToken);
+        console.log("In FileSaveAs.componentDidMount accessToken=",accessToken);
         const user = await this.props.auth.getUser();
 //        console.log("In FileSaveAs.componentDidMount user=",user);
         if (authenticated !== this.state.authenticated) {
@@ -46,7 +46,11 @@ class FileSaveAs extends Component {
         }
     }
 
-    getDesigns(type) {
+    componentDidUpdate() {
+      console.log("In FileSaveAs.componentDidUpdate");
+    }
+
+   getDesigns(type) {
 //        console.log('In FileSaveAs.getDesigns type=', type);
         // Get the designs and store them in state
         displaySpinner(true);

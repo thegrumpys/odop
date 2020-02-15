@@ -31,13 +31,17 @@ class FileDelete extends Component {
         const authenticated = await this.props.auth.isAuthenticated();
 //        console.log("In FileDelete.componentDidMount authenticated=",authenticated);
         const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In FileDelete.componentDidMount accessToken=",accessToken);
+        console.log("In FileDelete.componentDidMount accessToken=",accessToken);
         if (authenticated !== this.state.authenticated) {
             this.setState({
                 authenticated: authenticated, 
                 accessToken: accessToken,
             });
         }
+    }
+
+    componentDidUpdate() {
+      console.log("In FileDelete.componentDidUpdate");
     }
 
     getDesigns(type) {

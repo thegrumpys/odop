@@ -23,7 +23,7 @@ export default withAuth(class FEHome extends Component {
   }
 
   componentDidUpdate() {
-//    console.log("In FEHome.componentDidUpdate");
+    console.log("In FEHome.componentDidUpdate");
     this.checkAuthentication();
   }
 

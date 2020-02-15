@@ -40,7 +40,7 @@ export default withAuth(class PromptForDesign extends Component {
         const authenticated = await this.props.auth.isAuthenticated();
 //        console.log("In PromptForDesign.componentDidMount authenticated=",authenticated);
         const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In PromptForDesign.componentDidMount accessToken=",accessToken);
+        console.log("In PromptForDesign.componentDidMount accessToken=",accessToken);
         if (authenticated !== this.state.authenticated) {
             this.setState({
                 authenticated: authenticated, 
@@ -48,6 +48,10 @@ export default withAuth(class PromptForDesign extends Component {
             });
         }
         this.getDesignTypes();
+    }
+
+    componentDidUpdate() {
+      console.log("In PromptForDesign.componentDidUpdate");
     }
 
     getDesignTypes() {

@@ -24,13 +24,17 @@ class FileSave extends Component {
         const authenticated = await this.props.auth.isAuthenticated();
 //        console.log("In FileSave.componentDidMount authenticated=",authenticated);
         const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In FileSave.componentDidMount accessToken=",accessToken);
+        console.log("In FileSave.componentDidMount accessToken=",accessToken);
         if (authenticated !== this.state.authenticated) {
             this.setState({
                 authenticated: authenticated, 
                 accessToken: accessToken,
             });
         }
+    }
+
+    componentDidUpdate() {
+      console.log("In FileSave.componentDidUpdate");
     }
 
     putDesign(type,name) {

@@ -32,13 +32,17 @@ class FileOpen extends Component {
         const authenticated = await this.props.auth.isAuthenticated();
 //        console.log("In FileOpen.componentDidMount authenticated=",authenticated);
         const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In FileOpen.componentDidMount accessToken=",accessToken);
+        console.log("In FileOpen.componentDidMount accessToken=",accessToken);
         if (authenticated !== this.state.authenticated) {
             this.setState({
                 authenticated: authenticated, 
                 accessToken: accessToken,
             });
         }
+    }
+
+    componentDidUpdate() {
+      console.log("In FileOpen.componentDidUpdate");
     }
 
     getDesigns(type) {
