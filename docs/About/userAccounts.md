@@ -53,16 +53,14 @@ In order to sign out:
 
 The design intent of the user account feature has the user session expire (time-out) after a period of inactivity 
 (in the future, 8 hours or longer). 
-Currently, there is an issue with this feature that is under active investigation.
-Until this issue is resolved, 
-user sessions expire eight hours after the most recent selection of a design type, 
+Currently, user sessions expire eight hours after the most recent selection of a design type and design name, 
 regardless of other activity. 
 It is possible to defer session expiration for another eight hours by 
-re-selecting the design-type after using the browser refresh button. 
+using the browser refresh button and then selecting a design. 
 If working an in-progress design, 
-first save it (**File : Save** and **File : SaveAs** menus), 
-and then after browser refresh and re-selecting the design-type, 
-re-select the previously saved design.
+first save it (**File : Save** or **File : SaveAs** menu) 
+and then after browser refresh, 
+re-select the previously saved in-progress design.
 If a session expires, 
 it will not be possible to open existing designs or save in-progress designs. 
 In this situation, 
