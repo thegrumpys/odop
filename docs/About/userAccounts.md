@@ -3,28 +3,28 @@
 A user account with username and password is required to operate the software.   
 
 Evaluators may sign-in with the username "public" and password "public".
-It will be possible to save designs but keep in mind that all saved information will be completely public.
-Saved designs in the public account that are more than one week old are subject to being removed 
+It is possible to save designs but keep in mind that all saved information will be completely public.
+Designs in the public account more than one week old are subject to being removed 
 with only minimal notice on the [Message of the Day](messageOfTheDay) page.
 
-In order to keep saved designs private, 
+In order to keep saved designs private and be assured of long-term storage, 
 it is necessary to establish a private user account with an associated unique username and password. 
 To establish a free private account, 
-use the "Sign up" (Self-Service Registration) feature on the sign-in page,
-or send a request to:   
+use the "Sign up" (Self-Service Registration) feature on the sign-in page. 
+Instructions on how to complete the sign-up process will be provided promptly via email.
+
+Alternatively, send a request to:   
 
 **Info@SpringDesignSoftware.org**   
 
 You will receive a reply message (welcome letter) with instructions on how to complete creating your account. 
-This will happen promptly if using Self-Service Registration or 
-after some delay with the email request alternative. 
-The email request alternative contains one step that is not automated, 
+This alternative contains one step that is not automated, 
 so expect a delay of hours to a day or so. 
 The welcome letter includes instructions on how to establish a password and if desired, 
 change it in the future.
 Note that the opportunity to activate the account expires seven days after the welcome letter is issued.    
 
-An email address is required for the username.
+An account username must be in the form of an email address. 
 As noted in our [Privacy Notice](Legal/PrivacyStatement), 
 your personal information will be secure and not abused. 
 If you have any remaining concerns on this point, 
@@ -51,14 +51,20 @@ In order to sign out:
   - use "Logout" on the File menu
   - use the browser refresh button and then click the "Logout" button
 
-Note that by design, after a period of inactivity (in the future, 8 hours or longer), 
-the user session will expire. 
+User account design intent has the user session expire (time-out) after a period of inactivity 
+(in the future, 8 hours or longer). 
 Currently, there is an issue with this feature that is under active investigation.
-Until this issue is resolved, user sessions expire eight hours after login regardless of activity.
-If that happens, it will not be possible to open (**File : Open** menu) existing designs or
+Until this issue is resolved, 
+user sessions expire eight hours after the most recent selection of a design type, 
+regardless of other activity. 
+It is possible to avoid re-entering username and password by saving the current state,
+using the browser refresh button, 
+re-selecting the design-type and then re-opening the saved design.
+If a session expires, it will not be possible to open (**File : Open** menu) existing designs or
 save (**File : Save** and **File : SaveAs** menus) in-progress designs. 
 In this situation, 
-it should still be possible to print from your browser to save the current state of an in-progress design.   
+it should still be possible to print from your browser to save the current state of an in-progress design. 
+Recover from an expired session by using browser refresh and then re-enter username and password.  
  
  
 &nbsp; 
