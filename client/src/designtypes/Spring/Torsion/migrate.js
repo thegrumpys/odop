@@ -27,8 +27,6 @@ export function migrate(design) {
                     element.input = !element.input; // Flip the input boolean value
                 }
             }
-        });
-        design.symbol_table.forEach((element) => { // For each Symbol Table entry
             if (element.type !== undefined && element.type === "table") {
                 element.format = "table";
                 delete element.type;
