@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DropdownItem } from 'reactstrap';
+import { NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class HelpIndex extends Component {
@@ -16,9 +16,9 @@ class HelpIndex extends Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.onHelp}>
+                <NavDropdown.Item onClick={this.onHelp}>
                     Index
-                </DropdownItem>
+                </NavDropdown.Item>
             </React.Fragment>
         );
     }

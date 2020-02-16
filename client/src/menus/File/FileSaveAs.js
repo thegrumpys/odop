@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
-import { Label, Input } from 'reactstrap';
+import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeName } from '../../store/actionCreators';
 import { changeUser } from '../../store/actionCreators';
@@ -141,20 +140,24 @@ class FileSaveAs extends Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Save As&hellip;
-                </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Save As </ModalHeader>
-                    <ModalBody>
+                </NavDropdown.Item>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>  &nbsp; File : Save As
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                         <br />
-                        <Label for="fileSaveAsText">Save As:</Label>
-                        <Input type="text" id="fileSaveAsText" placeholder="Enter design name here" onChange={this.onTextInput}/>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onSaveAs}>Save As</Button>
-                    </ModalFooter>
+                        <Form.Label htmlFor="fileSaveAsText">Save As:</Form.Label>
+                        <Form.Control type="text" id="fileSaveAsText" placeholder="Enter design name here" onChange={this.onTextInput}/>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                        <Button variant="primary" onClick={this.onSaveAs}>Save As</Button>
+                    </Modal.Footer>
                 </Modal>
             </React.Fragment>
         );

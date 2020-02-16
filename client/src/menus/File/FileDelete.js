@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
-import { Label, Input } from 'reactstrap';
+import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
@@ -137,24 +136,28 @@ class FileDelete extends Component {
 //        console.log('In FileDelete.render this.state.type=',this.state.type,' this.state.name=',this.state.name);
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Delete&hellip;
-                </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Delete </ModalHeader>
-                    <ModalBody>
+                </NavDropdown.Item>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Delete
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                         <br />
-                        <Label for="fileDeleteSelect">Select design to delete:</Label>
-                        <Input type="select" id="fileDeleteSelect" onChange={this.onSelect}>
+                        <Form.Label htmlFor="fileDeleteSelect">Select design to delete:</Form.Label>
+                        <Form.Control as="select" id="fileDeleteSelect" onChange={this.onSelect}>
                             {this.state.designs.map((design, index) => {
                                 return <option key={index} value={design.name}>{design.name}</option>
                             })}
-                        </Input>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onDelete} disabled={this.state.designs.length === 0 ? true : false}>Delete</Button>
-                    </ModalFooter>
+                        </Form.Control>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                        <Button variant="primary" onClick={this.onDelete} disabled={this.state.designs.length === 0 ? true : false}>Delete</Button>
+                    </Modal.Footer>
                 </Modal>
             </React.Fragment>
         );

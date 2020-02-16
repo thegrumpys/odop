@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Alert, Button } from 'reactstrap';
+import { Modal, Alert, Button } from 'react-bootstrap';
 
 export var displayError = function(message, header = '') {
     this.setState( // Special form of setState using updater function
@@ -39,10 +39,10 @@ export class ErrorModal extends Component {
 
     render() {
         return (
-            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                { this.state.header !== '' ? <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>{this.state.header}</ModalHeader> : ''}
-                <ModalBody><Alert color="danger">{this.state.message}</Alert></ModalBody>
-                <ModalFooter><Button color="primary" onClick={this.toggle}>Close</Button></ModalFooter>
+            <Modal show={this.state.modal} className={this.props.className}>
+                { this.state.header !== '' ? <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>{this.state.header}</Modal.Header> : ''}
+                <Modal.Body><Alert variant="danger">{this.state.message}</Alert></Modal.Body>
+                <Modal.Footer><Button variant="primary" onClick={this.toggle}>Close</Button></Modal.Footer>
             </Modal>
         );
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Label, Input } from 'reactstrap';
+import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class HelpDemo extends Component {
@@ -60,24 +60,28 @@ class HelpDemo extends Component {
 //        console.log('In ActionExecute.render');
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle} disabled={this.state.execute_names.length === 0}>
+                <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names.length === 0}>
                     Demo&hellip;
-                </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Execute</ModalHeader>
-                    <ModalBody>
+                </NavDropdown.Item>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>  &nbsp; Action : Execute
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                         <br />
-                        <Label for="tutorialSelect">Select demo/tutorial to execute:</Label>
-                        <Input type="select" id="tutorialSelect" onChange={this.onSelect} value={this.state.execute_name}>
+                        <Form.Label htmlFor="tutorialSelect">Select demo/tutorial to execute:</Form.Label>
+                        <Form.Control as="select" id="tutorialSelect" onChange={this.onSelect} value={this.state.execute_name}>
                             {this.state.execute_names.map((element, index) => (
                                 <option key={index} value={element}>{element}</option>
                             ))}
-                        </Input>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
-                       <Button color="primary" onClick={this.onExecute}>Execute</Button>
-                    </ModalFooter>
+                        </Form.Control>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
+                       <Button variant="primary" onClick={this.onExecute}>Execute</Button>
+                    </Modal.Footer>
                 </Modal>
             </React.Fragment>
         );

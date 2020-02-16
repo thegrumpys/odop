@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Alert, Button } from 'reactstrap';
+import { Alert, Button, Container, Row } from 'react-bootstrap';
 import { load } from '../store/actionCreators';
 
 export var startExecute = function(prefix,steps) {
-//    console.log('In startExecute steps=',steps);
+//    console.log('In startExecute this=',this,'prefix=',prefix,'steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
         this.setState({
             modal: true, // Default: do display
@@ -107,19 +107,25 @@ export class ExecutePanel extends Component {
     render() {
 //        console.log('In ExecutePanel render this.state.text=',this.state.text);
         return this.state.modal && (
-            <Alert style={{marginTop: '10px'}}>
-                <div className="text-left align-middle">
-                    <b>{this.state.prefix}{this.state.title !== undefined && this.state.title.length > 0 ? ' - ' + this.state.title : ''}</b>
-                    <Button className="float-right" color="primary" onClick={this.onNext} disabled={this.state.steps[this.state.step+1] === undefined}>Next</Button>
-                    <span className="float-right">&nbsp;</span>
-                    <Button className="float-right" color="secondary" onClick={this.onBack} disabled={this.state.step === 0}>Back</Button>
-                    <span className="float-right">&nbsp;</span>
-                    <Button className="float-right" color="secondary" onClick={this.onCancel}>Exit</Button>
-                </div>
-                <hr/>
-                <div style={{marginTop: '10px'}}>
-                    {this.state.text}
-                </div>
+            <Alert variant="success" style={{marginTop: '10px'}}>
+                <Container>
+                    <Row>
+                        <div className="col-5 text-left align-middle pl-0">
+                            <b>{this.state.prefix}{this.state.title !== undefined && this.state.title.length > 0 ? ' - ' + this.state.title : ''}</b>
+                        </div>
+                        <div className="col-7 text-left align-middle">
+                            <Button className="float-right ml-1" variant="primary" onClick={this.onNext} disabled={this.state.steps[this.state.step+1] === undefined}>Next</Button>
+                            <Button className="float-right ml-1" variant="secondary" onClick={this.onBack} disabled={this.state.step === 0}>Back</Button>
+                            <Button className="float-right ml-1" variant="secondary" onClick={this.onCancel}>Exit</Button>
+                        </div>
+                        <hr/>
+                    </Row>
+                    <Row>
+                        <div style={{marginTop: '10px'}}>
+                            {this.state.text}
+                        </div>
+                    </Row>
+                </Container>
             </Alert>
         );
     }

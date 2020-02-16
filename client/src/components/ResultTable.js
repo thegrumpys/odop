@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, UncontrolledTooltip } from 'reactstrap';
+import { Table, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class ResultTable extends Component {
@@ -24,11 +24,19 @@ class ResultTable extends Component {
                 <Table className="col-md-8" size="sm">
                     <tbody>
                         <tr>
-                            <th width="33%" id="Feasibility">Feasibility:</th>
+                            <th width="33%" id="Feasibility">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Not Feasible:<br /> OBJ greater than OBJMIN<br /><br />Marginally Feasible:<br />constraint(s) slightly violated<br /><br />Feasible:<br />no constraints violated</Tooltip>}>
+                                    <span>Feasibility</span>
+                                </OverlayTrigger>
+                            </th>
                             <td width="67%" className={feasibility_class + " text-left"}>{feasibility_string}</td>
                         </tr>
                         <tr>
-                            <th width="33%" id="TerminationCondition">Termination Message:</th>
+                            <th width="33%" id="TerminationCondition">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Status feedback from solution process</Tooltip>}>
+                                    <span>Termination Message:</span>
+                                </OverlayTrigger>
+                            </th>
                             <td width="67%" className="text-left">{this.props.termination_condition}</td>
                        </tr>
                     </tbody>
@@ -36,19 +44,23 @@ class ResultTable extends Component {
                 <Table className="col-md-4" size="sm">
                     <tbody>
                         <tr>
-                            <th width="50%" id="ObjectiveValue">Objective&nbsp;Value:</th>
+                            <th width="50%" id="ObjectiveValue">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Search works to minimize Objective Function value <br /> See Help for details</Tooltip>}>
+                                    <span>Objective&nbsp;Value:</span>
+                                </OverlayTrigger>
+                            </th>
                             <td width="50%" className={feasibility_class + " text-right"}>{this.props.objective_value.toFixed(6)}</td>
                         </tr>
                         <tr>
-                            <th width="50%" id="OBJMIN">OBJMIN:</th>
+                            <th width="50%" id="OBJMIN">
+                                <OverlayTrigger placement="auto" overlay={<Tooltip>Stop Search if Objective&nbsp;Value gets lower than {this.props.system_controls.objmin.toFixed(6)}</Tooltip>}>
+                                    <span>OBJMIN:</span>
+                                </OverlayTrigger>
+                            </th>
                             <td width="50%" className="text-right">{this.props.system_controls.objmin.toFixed(6)}</td>
                         </tr>
                     </tbody>
                 </Table>
-                <UncontrolledTooltip placement="top" target="Feasibility">Not Feasible:<br /> OBJ greater than OBJMIN<br /><br />Marginally Feasible:<br />constraint(s) slightly violated<br /><br />Feasible:<br />no constraints violated</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="TerminationCondition">Status feedback from solution process</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="ObjectiveValue">Search works to minimize Objective Function value <br /> See Help for details</UncontrolledTooltip>
-                <UncontrolledTooltip placement="top" target="OBJMIN">Stop Search if Objective&nbsp;Value gets lower than {this.props.system_controls.objmin.toFixed(6)}</UncontrolledTooltip>
             </React.Fragment>
         );
     }

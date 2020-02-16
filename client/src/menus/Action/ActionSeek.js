@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, Button } from 'reactstrap';
+import { NavDropdown, Modal, InputGroup, ButtonGroup, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek } from '../../store/actionCreators';
@@ -64,33 +64,37 @@ class ActionSeek extends Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Seek&hellip;
-                </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek </ModalHeader>
-                    <ModalBody>
+                </NavDropdown.Item>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                         <InputGroup>
                             <ButtonGroup>
-                                <Button color="primary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
-                                <Button color="primary" onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}>Max</Button>
+                                <Button variant="primary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
+                                <Button variant="primary" onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}>Max</Button>
                             </ButtonGroup>
                             &nbsp;
-                            <InputGroupAddon addonType="prepend">
-                               <InputGroupText>Name: </InputGroupText>
-                            </InputGroupAddon>
-                            <Input className="align-middle" type="select" onChange={this.onNameSelect} value={this.state.name}>
+                            <InputGroup.Prepend>
+                               <InputGroup.Text>Name: </InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control as="select" className="align-middle" onChange={this.onNameSelect} value={this.state.name}>
                                 {this.props.symbol_table.map((element, index) =>
                                     (element.equationset && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
-                            </Input>
+                            </Form.Control>
                         </InputGroup>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button outline color="info" onClick={this.onContextHelp}>Help</Button>{' '}
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onSeek}>Seek</Button>
-                    </ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button outline variant="info" onClick={this.onContextHelp}>Help</Button>{' '}
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                        <Button variant="primary" onClick={this.onSeek}>Seek</Button>
+                    </Modal.Footer>
                 </Modal>
             </React.Fragment>
         );

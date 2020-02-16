@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
+import { Button, Modal, NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class FileRecent extends Component {
@@ -21,17 +21,21 @@ class FileRecent extends Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle} disabled>
+                <NavDropdown.Item onClick={this.toggle} disabled>
                     Recent
-                </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Recent </ModalHeader>
-                    <ModalBody>
+                </NavDropdown.Item>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>  &nbsp; File : Recent
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                         Not implemented
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.toggle}>Close</Button>
-                    </ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={this.toggle}>Close</Button>
+                    </Modal.Footer>
                 </Modal>
             </React.Fragment>
         );

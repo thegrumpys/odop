@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Container, Row, Col, Input } from 'reactstrap';
+import { Button, Modal, NavDropdown, Container, Row, Col, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { initialSystemControls } from '../../initialSystemControls';
 import { changeSystemControlsValue } from '../../store/actionCreators';
@@ -66,12 +66,16 @@ class FilePreferences extends Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Preferences&hellip;
-                </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} size="lg">
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Preferences </ModalHeader>
-                    <ModalBody>
+                </NavDropdown.Item>
+                <Modal show={this.state.modal} className={this.props.className} size="lg">
+                    <Modal.Header>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Preferences
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                         <Container>
                             <Row>
                                 <Col className="text-left font-weight-bold">Name</Col>
@@ -83,19 +87,19 @@ class FilePreferences extends Component {
                                         <Row key={property_name}>
                                             <Col className="align-middle text-left">{property_name}</Col>
                                             <Col className="align-middle text-right">
-                                                <Input className="text-right" type="number" value={this.state.system_controls[property_name]} onChange={(event) => {this.onChange(property_name, event.target.value)}}/>
+                                                <Form.Control type="number" className="text-right" value={this.state.system_controls[property_name]} onChange={(event) => {this.onChange(property_name, event.target.value)}}/>
                                             </Col>
                                         </Row>
                                     );
                                 })
                             }
                         </Container>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                        <Button color="primary" onClick={this.onRestoreDefaults}>Restore Defaults</Button>
-                        <Button color="primary" onClick={this.onApplyandClose}>Apply and Close</Button>
-                    </ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.toggle}>Cancel</Button>
+                        <Button variant="primary" onClick={this.onRestoreDefaults}>Restore Defaults</Button>
+                        <Button variant="primary" onClick={this.onApplyandClose}>Apply and Close</Button>
+                    </Modal.Footer>
                 </Modal>
             </React.Fragment>
         );

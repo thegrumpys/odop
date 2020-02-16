@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem } from 'reactstrap';
-import { Label, Input } from 'reactstrap';
+import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { load } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
@@ -132,24 +131,28 @@ class FileOpen extends Component {
 //        console.log('In FileOpen.render');
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Open&hellip;
-                </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Open </ModalHeader>
-                    <ModalBody>
+                </NavDropdown.Item>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Open
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                         <br />
-                        <Label for="fileOpenSelect">Select design to open:</Label>
-                        <Input type="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
+                        <Form.Label htmlFor="fileOpenSelect">Select design to open:</Form.Label>
+                        <Form.Control as="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
                             {this.state.designs.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                 <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
                             )}
-                        </Input>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button color="primary" onClick={this.onOpen}>Open</Button>
-                    </ModalFooter>
+                        </Form.Control>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                        <Button variant="primary" onClick={this.onOpen}>Open</Button>
+                    </Modal.Footer>
                 </Modal>
             </React.Fragment>
         );

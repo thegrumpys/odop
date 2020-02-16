@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, DropdownItem, Container, Row, Col, Input } from 'reactstrap';
+import { Button, Modal, NavDropdown, Container, Row, Col, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeLabelsValue } from '../../store/actionCreators';
 
@@ -62,12 +62,16 @@ class FileProperties extends Component {
     render() {
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Properties&hellip;
-                </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Properties </ModalHeader>
-                    <ModalBody>
+                </NavDropdown.Item>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Properties
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                         <Container>
                             <Row>
                                 <Col className="text-left font-weight-bold">Name</Col>
@@ -80,19 +84,19 @@ class FileProperties extends Component {
                                             <Row key={label.name}>
                                                 <Col className="align-middle text-left">{label.name}</Col>
                                                 <Col className="align-middle text-left">
-                                                    <Input className="input-group-lg" type="textarea" value={label.value} onChange={(event) => {this.onChange(label.name, event.target.value)}}/>
+                                                    <Form.Control type="textarea" className="input-group-lg" value={label.value} onChange={(event) => {this.onChange(label.name, event.target.value)}}/>
                                                 </Col>
                                             </Row>
                                         );
                                     })
                             }
                         </Container>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                        <Button color="primary" onClick={this.onRestoreDefaults}>Restore Defaults</Button>
-                        <Button color="primary" onClick={this.onApplyandClose}>Apply and Close</Button>
-                    </ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.toggle}>Cancel</Button>
+                        <Button variant="primary" onClick={this.onRestoreDefaults}>Restore Defaults</Button>
+                        <Button variant="primary" onClick={this.onApplyandClose}>Apply and Close</Button>
+                    </Modal.Footer>
                 </Modal>
             </React.Fragment>
         );

@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
 import {
-    Collapse,
     Navbar,
-    NavbarToggler,
-    NavbarBrand,
     Nav,
     Container,
-    NavItem,
-    NavLink,
-    TabContent,
-    TabPane,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
-} from 'reactstrap';
+    Tabs,
+    Tab,
+    NavDropdown
+} from 'react-bootstrap';
 import classnames from 'classnames';
 import { ExecutePanel } from './ExecutePanel';
 import { DesignTable } from './DesignTable';
@@ -45,7 +37,7 @@ class App extends Component {
 //        console.log("In App.ctor props=",props);
         super(props);
         this.toggle = this.toggle.bind(this);
-        this.toggleTab = this.toggleTab.bind(this);
+        this.setKey = this.setKey.bind(this);
         var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
         var report_names = getReportNames();
         this.state = {
@@ -62,7 +54,7 @@ class App extends Component {
         });
     }
     
-    toggleTab(tab) {
+    setKey(tab) {
 //        console.log('In App.toggleTab tab=',tab);
         if (this.state.activeTab !== tab) {
             this.setState({
@@ -105,108 +97,88 @@ class App extends Component {
 //        console.log('src=',src,' alt=',alt);
         return (
             <React.Fragment>
-                <Navbar color="white" light expand="md" fixed="top">
-                    <NavbarBrand><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="mr-auto" navbar>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav>
-                                    File
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <FileOpen />
-                                    <FileSave />
-                                    <FileSaveAs />
-                                    <FileDelete />
-                                    <DropdownItem divider />
-                                    <FileRecent />
-                                    <DropdownItem divider />
-                                    <FilePreferences />
-                                    <FileProperties />
-                                    <DropdownItem divider />
-                                    <DropdownItem onClick={() => this.props.auth.logout()}>
-                                        Logout
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav>
-                                    Action
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <ActionSearch />
-                                    <ActionSeek />
-                                    <ActionTrade />
-                                    <DropdownItem divider />
-                                    <ActionSelectSize />
-                                    <ActionSelectCatalog />
-                                    <DropdownItem divider />
-                                    <ActionExecute />
-                               </DropdownMenu>
-                            </UncontrolledDropdown>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav>
-                                    View
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <DropdownItem disabled>
-                                        Define  Sub-Problems&hellip;
-                                    </DropdownItem>
-                                    <DropdownItem disabled>
-                                        Display Sub-Problems&hellip;
-                                    </DropdownItem>
-                                    <DropdownItem divider />
-                                    {process.env.NODE_ENV !== "production" && <ViewOffsets />}
-                               </DropdownMenu>
-                            </UncontrolledDropdown>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav>
-                                    Help
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <DropdownItem disabled>
-                                        Context Help
-                                    </DropdownItem>
-                                    <HelpIndex />
-                                    <HelpDemo />
-                                    <HelpTutorial />
-                                    <HelpAbout />
-                               </DropdownMenu>
-                            </UncontrolledDropdown>
+                <Navbar variant="light" bg="light" expand="md" fixed="top">
+                    <Navbar.Brand><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
+                    <Navbar.Toggle onClick={this.toggle} />
+                    <Navbar.Collapse in={this.state.isOpen}>
+                        <Nav className="mr-auto">
+                            <NavDropdown title="File">
+                                <FileOpen />
+                                <FileSave />
+                                <FileSaveAs />
+                                <FileDelete />
+                                <NavDropdown.Divider />
+                                <FileRecent />
+                                <NavDropdown.Divider />
+                                <FilePreferences />
+                                <FileProperties />
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item onClick={() => this.props.auth.logout()}>
+                                    Logout
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                            <NavDropdown title="Action">
+                                <ActionSearch />
+                                <ActionSeek />
+                                <ActionTrade />
+                                <NavDropdown.Divider />
+                                <ActionSelectSize />
+                                <ActionSelectCatalog />
+                                <NavDropdown.Divider />
+                                <ActionExecute />
+                            </NavDropdown>
+                            <NavDropdown title="View">
+                                <NavDropdown.Item disabled>
+                                    Define  Sub-Problems&hellip;
+                                </NavDropdown.Item>
+                                <NavDropdown.Item disabled>
+                                    Display Sub-Problems&hellip;
+                                </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                {process.env.NODE_ENV !== "production" && <ViewOffsets />}
+                            </NavDropdown>
+                            <NavDropdown title="Help">
+                                <NavDropdown.Item disabled>
+                                    Context Help
+                                </NavDropdown.Item>
+                                <HelpIndex />
+                                <HelpDemo />
+                                <HelpTutorial />
+                                <HelpAbout />
+                            </NavDropdown>
                         </Nav>
-                        <Nav tabs>
-                            <NavItem>
-                                <NavLink className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.toggleTab("1"); }}>
+                        <Nav>
+                            <Nav.Item>
+                                <Nav.Link className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.setKey("1"); }}>
                                     <span className="d-none d-md-inline">Design: </span><img className="d-none d-md-inline" src={src} alt={alt} height="30px"/> {this.props.name}
-                                </NavLink>
-                            </NavItem>
+                                </Nav.Link>
+                            </Nav.Item>
                             {this.state.report_names.map((element,i) => {return (
-                                <NavItem key={element}>
-                                    <NavLink className={classnames({ active: this.state.activeTab === (i+2).toString() })} onClick={() => { this.toggleTab((i+2).toString()); }}>
+                                <Nav.Item key={element}>
+                                    <Nav.Link className={classnames({ active: this.state.activeTab === (i+2).toString() })} onClick={() => { this.setKey((i+2).toString()); }}>
                                         <span className="d-none d-md-inline">Report: </span>{element}
-                                    </NavLink>
-                                </NavItem>
+                                    </Nav.Link>
+                                </Nav.Item>
                                 );
                             })}
                         </Nav>
-                    </Collapse>
+                    </Navbar.Collapse>
                 </Navbar>
                 <Container style={{backgroundColor: '#eee', paddingTop: '100px'}}>
                     <ExecutePanel />
-                    <TabContent activeTab={this.state.activeTab}>
-                        <TabPane tabId="1">
+                    <Tabs defaultActiveKey="1" activeKey={this.state.activeTab} onSelect={k => this.setKey(k)}>
+                        <Tab eventKey="1">
                             <Container fluid>
                                 <DesignTable />
                             </Container>
-                        </TabPane>
+                        </Tab>
                         {this.state.report_names.map((element,i) => {return (
-                            <TabPane key={element} tabId={(i+2).toString()} id="report">
+                            <Tab key={element} eventKey={(i+2).toString()} id="report">
                                 {this.report(element)}
-                            </TabPane>
+                            </Tab>
                             );
                         })}
-                    </TabContent>
+                    </Tabs>
                 </Container>
             </React.Fragment>
         );

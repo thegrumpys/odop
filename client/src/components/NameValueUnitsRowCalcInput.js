@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input, UncontrolledTooltip } from 'reactstrap';
+import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../store/actionCreators';
 
@@ -78,28 +78,31 @@ class NameValueUnitsRowCalcInput extends Component {
         // =======================================
         return (
             <tr key={this.props.element.name}>
-                <td className="align-middle" colSpan="2" id={'constant_'+this.props.index}>{this.props.element.name}</td>
-                { this.props.element.tooltip !== undefined && <UncontrolledTooltip placement="top" target={'constant_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
+                <td className="align-middle" colSpan="2" id={'constant_'+this.props.index}>
+                    <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip>{this.props.element.tooltip}</Tooltip>}>
+                        <span>{this.props.element.name}</span>
+                    </OverlayTrigger>
+                </td>
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
-                            <Input disabled={!this.props.element.input} className="text-right" type="number" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
+                            <Form.Control type="number" disabled={!this.props.element.input} className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
                         { this.props.element.type === undefined && typeof this.props.element.value === 'string' ?
-                            <Input disabled={!this.props.element.input} className="text-right" type="text" value={this.props.element.value} onChange={this.onChange} /> : '' }
+                            <Form.Control type="text" disabled={!this.props.element.input} className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.type === 'table' &&
                         (
-                            <Input disabled={!this.props.element.input} type="select" value={this.props.element.value} onChange={this.onSelect}>
+                            <Form.Control as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>
                                 {this.state.table.map((value, index) =>
                                     index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
                                 )}
-                            </Input>
+                            </Form.Control>
                         )
                         }
-                        <InputGroupAddon addonType="append">
-                            <InputGroupText>
+                        <InputGroup.Append>
+                            <InputGroup.Text>
                                 &nbsp;&nbsp;
-                            </InputGroupText>
-                        </InputGroupAddon>
+                            </InputGroup.Text>
+                        </InputGroup.Append>
                     </InputGroup>
                 </td>
                 <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>

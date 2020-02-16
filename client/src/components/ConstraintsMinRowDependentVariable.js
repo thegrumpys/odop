@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input, ButtonGroup, UncontrolledTooltip, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
@@ -118,23 +118,27 @@ class ConstraintsMinRowDependentVariable extends Component {
         return (
             <React.Fragment>
                 <tr key={this.props.element.name}>
-                    <td className="align-middle d-lg-none" id={'dependent_variable_min_constrain_'+this.props.index}>{this.props.element.name}</td>
-                    { this.props.element.tooltip !== undefined && <UncontrolledTooltip className="d-lg-none" placement="top" target={'dependent_variable_min_constrain_'+this.props.index}>{this.props.element.tooltip}</UncontrolledTooltip>}
+                    <td className="align-middle d-lg-none" id={'dependent_variable_min_constrain_'+this.props.index}>
+                        <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none">{this.props.element.tooltip}</Tooltip>}>
+                            <span>{this.props.element.name}</span>
+                        </OverlayTrigger>
+                    </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <InputGroupAddon addonType="prepend">
-                                <InputGroupText>
-                                    <Input addon type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
-                                </InputGroupText>
-                            </InputGroupAddon>
-                            <Input id={this.props.element.name + "_cmin"} className={cmin_class} type="number" value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick} />
-                            {this.props.element.lmin & FDCL ? <UncontrolledTooltip placement="top" target={this.props.element.name + "_cmin"}>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</UncontrolledTooltip> : ''}
+                            <InputGroup.Prepend>
+                                <InputGroup.Text>
+                                    <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
+                                </InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <OverlayTrigger placement="top" overlay={this.props.element.lmin & FDCL ? <Tooltip>{evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</Tooltip> : <span></span>}>
+                                <Form.Control type="number" id={this.props.element.name + "_cmin"} className={cmin_class} value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick} />
+                            </OverlayTrigger>
                         </InputGroup>
-                        {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ? <Modal isOpen={this.state.modal} className={this.props.className} size="lg">
-                            <ModalHeader>
+                        {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg">
+                            <Modal.Header>
                                 Set {this.props.element.name} Min Constraint
-                            </ModalHeader>
-                            <ModalBody>
+                            </Modal.Header>
+                            <Modal.Body>
                                 Select constraint variable or enter constraint value.
                                 <table>
                                     <tbody>
@@ -144,7 +148,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                                                 <InputGroup>
                                                     <ButtonGroup>
                                                         {this.props.element.cminchoices.map((e) => {return (
-                                                            <Button key={e} color="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) === e}>{e}</Button>
+                                                            <Button key={e} variant="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) === e}>{e}</Button>
                                                         );})}
                                                     </ButtonGroup>
                                                 </InputGroup>
@@ -154,17 +158,17 @@ class ConstraintsMinRowDependentVariable extends Component {
                                             <td>Value:&nbsp;</td>
                                             <td>
                                                 <InputGroup>
-                                                    <Input id={this.props.element.name + "_cmin"} className="text-right" type="number" value={this.state.value} onChange={this.onChangeValue} />
-                                                    <Button color="primary" onClick={this.onEnterValue}>Enter</Button>
+                                                    <Form.Control type="number" id={this.props.element.name + "_cmin"} className="text-right" value={this.state.value} onChange={this.onChangeValue} />
+                                                    <Button variant="primary" onClick={this.onEnterValue}>Enter</Button>
                                                 </InputGroup>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button color="secondary" onClick={this.onCancel}>Cancel</Button>
-                            </ModalFooter>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
+                            </Modal.Footer>
                         </Modal> : ''}
                     </td>
                     <td className={"text-right align-middle small " + (this.props.system_controls.show_violations ? "" : "d-none")} colSpan="1">
