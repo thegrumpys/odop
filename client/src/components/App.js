@@ -25,6 +25,7 @@ import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
 import ViewOffsets from '../menus/View/ViewOffsets';
+import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
 import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
@@ -136,6 +137,7 @@ class App extends Component {
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 {process.env.NODE_ENV !== "production" && <ViewOffsets />}
+                                {process.env.NODE_ENV !== "production" && <ViewSymbolTableOffsets />}
                             </NavDropdown>
                             <NavDropdown title="Help">
                                 <NavDropdown.Item disabled>
