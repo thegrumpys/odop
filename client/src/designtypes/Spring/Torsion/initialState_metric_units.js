@@ -549,26 +549,6 @@ export const initialState = {
         },
         {
             "input": true,
-<<<<<<< HEAD
-=======
-            "name": "End_Type",
-            "value": 1,
-            "units": "",
-            "format": "table",
-            "table": "Spring/Torsion/endtypes",
-            "lmin": 0,
-            "lmax": 0,
-            "cmin": 0,
-            "cmax": 0,
-            "ioclass": 0,
-            "sdlim": 0.0,
-            "tooltip": "Select end type",
-            "type": "calcinput",
-            "hidden": false
-        },
-        {
-            "input": true,
->>>>>>> refs/heads/322
             "name": "Inactive_Coils",
             "value": 0.0,
             "units": "coils",
