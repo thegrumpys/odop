@@ -51,21 +51,16 @@ In order to sign out:
   - use "Logout" on the File menu
   - use the browser refresh button and then click the "Logout" button
 
-The design intent of the user account feature has the user session expire (time-out) after a period of inactivity 
-(in the future, 8 hours or longer). 
-Currently, user sessions expire eight hours after the most recent selection of a design type and design name, 
-regardless of other activity. 
-It is possible to defer session expiration for another eight hours by 
-using the browser refresh button and then selecting a design. 
-If working an in-progress design, 
-first save it (**File : Save** or **File : SaveAs** menu) 
-and then after browser refresh, 
-re-select the previously saved in-progress design.
-If a session expires, 
-it will not be possible to open existing designs or save in-progress designs. 
-In this situation, 
-it should still be possible to print from your browser to save the current details of an in-progress design. 
-Recover from an expired session by using browser refresh and then re-enter username and password.  
+The user account feature was intended to have your session expire after a period of inactivity. 
+Instead your session expires after a fixed period from app startup regardless of activity. 
+In order to continue your session for another eight hours when a design is in-progress, 
+you can save it (**File : Save** or **File : SaveAs** menu), 
+reload the browser page and 
+re-open the saved design.
+If the session expires you cannot save the active design, 
+but there is an alternative. 
+You can print the details of an active design from the browser, 
+reload the browser page, log in again and then manually re-enter the details of the design.  
  
  
 &nbsp; 
