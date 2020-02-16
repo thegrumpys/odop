@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DropdownItem, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class ViewSymbolTableOffsets extends Component {
@@ -23,17 +23,20 @@ class ViewSymbolTableOffsets extends Component {
     render() {
 //        console.log('In ViewSymbolTableOffsets.render');
         var ip = 0;
-        var ix = 0;
         var isc = 0;
         var il = 0;
         return (
             <React.Fragment>
-                <DropdownItem onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle}>
                     SymbolTableOffsets
-                </DropdownItem>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <ModalHeader toggle={this.toggle}><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : SymbolTableOffsets </ModalHeader>
-                    <ModalBody>
+                </NavDropdown.Item>
+                <Modal show={this.state.modal} className={this.props.className}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : SymbolTableOffsets
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                         <pre>
                         {'// Variables\n'}
                         {this.props.symbol_table.map((element) => {return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n'})}
@@ -42,10 +45,10 @@ class ViewSymbolTableOffsets extends Component {
                         {'\n// Labels (Properties)\n'}
                         {this.props.labels.map((element) => {return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (il++) + ';\n'})}
                         </pre>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.toggle}>Close</Button>
-                    </ModalFooter>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={this.toggle}>Close</Button>
+                    </Modal.Footer>
                 </Modal>
             </React.Fragment>
         );
