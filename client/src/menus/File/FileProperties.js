@@ -84,7 +84,7 @@ class FileProperties extends Component {
                                             <Row key={label.name}>
                                                 <Col className="align-middle text-left">{label.name}</Col>
                                                 <Col className="align-middle text-left">
-                                                    <Form.Control type="textarea" className="input-group-lg" value={label.value} onChange={(event) => {this.onChange(label.name, event.target.value)}}/>
+                                                    <Form.Control as="textarea" className="input-group-lg" value={label.value} onChange={(event) => {this.onChange(label.name, event.target.value)}}/>
                                                 </Col>
                                             </Row>
                                         );
