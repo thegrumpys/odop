@@ -49,7 +49,7 @@ export const dispatcher = store => next => action => {
         design = store.getState();
         design.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
-                !element.equationset && invokeInit(store);
+                element.type === "calcinput" && invokeInit(store);
                 return true;
             } else {
                 return false;
@@ -62,7 +62,7 @@ export const dispatcher = store => next => action => {
         design = store.getState();
         design.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
-                if (element.input && element.equationset) {
+                if (element.type === "equationset" && element.input) {
                     // Independent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
                     store.dispatch(resetSymbolFlag(element.name, MIN, CONSTRAINED | FDCL));
@@ -75,7 +75,7 @@ export const dispatcher = store => next => action => {
                         store.dispatch(changeSymbolValue(element.name, action.payload.value));
                     }
                     return true; // found
-                } else if (!element.input && element.equationset) {
+                } else if (element.type === "equationset" && !element.input) {
                     // Dependent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
                     store.dispatch(resetSymbolFlag(element.name, MIN, FDCL));

@@ -13,7 +13,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Longest dimension",
-            "equationset": true,
+            "type": "equationset",
             "hidden": false
         },
         {
@@ -28,7 +28,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Width dimension",
-            "equationset": true,
+            "type": "equationset",
             "hidden": false
         },
         {
@@ -43,7 +43,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Shortest dimension",
-            "equationset": true,
+            "type": "equationset",
             "hidden": false
         },
         {
@@ -51,7 +51,7 @@ export const initialState = {
             "name": "Material",
             "value": 6,
             "units": "",
-            "type": "table",
+            "format": "table",
             "table": "Solid/materials",
             "lmin": 0,
             "lmax": 0,
@@ -60,7 +60,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Select from list",
-            "equationset": false,
+            "type": "calcinput",
             "hidden": false
         },
         {
@@ -75,7 +75,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Weight per unit volume of the selected material",
-            "equationset": false,
+            "type": "calcinput",
             "hidden": false
         },
         {
@@ -90,7 +90,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Three-dimensional space enclosed",
-            "equationset": true,
+            "type": "equationset",
             "hidden": false
         },
         {
@@ -105,7 +105,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Sum of the area of the surfaces",
-            "equationset": true,
+            "type": "equationset",
             "hidden": false
         },
         {
@@ -120,7 +120,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Computed ratio of volume to surface area",
-            "equationset": true,
+            "type": "equationset",
             "hidden": false
         },
         {
@@ -135,7 +135,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Perimeter around width and height dimensions",
-            "equationset": true,
+            "type": "equationset",
             "hidden": false
         },
         {
@@ -150,7 +150,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Sum of length and girth dimensions. Shippers limit to 108 in.",
-            "equationset": true,
+            "type": "equationset",
             "hidden": false
         },
         {
@@ -165,7 +165,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "3D distance from corner to furthest corner",
-            "equationset": true,
+            "type": "equationset",
             "hidden": false
         },
         {
@@ -180,7 +180,7 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Volume times Density of the selected material. Shippers limit to 70 Lb.",
-            "equationset": true,
+            "type": "equationset",
             "hidden": false
         }
     ],

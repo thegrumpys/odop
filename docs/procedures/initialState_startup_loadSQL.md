@@ -53,9 +53,9 @@ the **View : Offsets** menu item is enabled.
 Start with initialState and then use **View : Offsets** as a copy / paste source for the contents of offsets.js.   
 
 Internally, the code uses the flags in initialState to differientate:
-+ Independent Variables (element.input && element.equationset)   
-+ Dependent Variables (!element.input && element.equationset)   
-+ Calculation Inputs (!element.equationset)   
++ Independent Variables (element.type === "equationset" && element.input)   
++ Dependent Variables (element.type === "equationset" && !element.input)   
++ Calculation Inputs (element.type === "calcinput")   
   
 &nbsp;
 

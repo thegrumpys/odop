@@ -27,7 +27,7 @@ function getObjectiveValue(st, viol_wt) {
 
     for (let i = 0; i < st.length; i++) {
         element = st[i];
-        if (element.input && element.equationset) {
+        if (element.type === "equationset" && element.input) {
             vmin = 0.0;
             vmax = 0.0;
             if (element.lmin & CONSTRAINED ) { // TODO: || element.lmin < FREESTAT) {
@@ -46,7 +46,7 @@ function getObjectiveValue(st, viol_wt) {
     }
     for (let i = 0; i < st.length; i++) {
         element = st[i];
-        if ((!element.input && element.equationset) || (!element.equationset)) {
+        if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
             vmin = 0.0;
             vmax = 0.0;
             /* State variable fix levels. */
@@ -125,17 +125,17 @@ export function getCatalogEntries(name, store, st, viol_wt) {
         return index > 0 && element[0] === entry[6];
     }
     function pPush(element) {
-        if (element.input && element.equationset) {
+        if (element.type === "equationset" && element.input) {
             p.push(element.value);
         }
     }
     function xPush(element) {
-        if ((!element.input && element.equationset) || (!element.equationset)) {
+        if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
             x.push(element.value)
         }
     }
     function xPull(element) {
-        if ((!element.input && element.equationset) || (!element.equationset)) {
+        if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
             element.value = x[offset++];
         }
     }

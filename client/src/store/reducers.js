@@ -113,7 +113,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
                 // Only do it from independent and dependent variables, but not for calculation inputs
-                if (element.equationset) {
+                if (element.type === "equationset") {
                     value = action.payload.values[i++];
                     if (value !== undefined) {
                         if (action.payload.minmax === MIN) {
@@ -231,7 +231,7 @@ export function reducers(state, action) {
         i=0;
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
-                if (element.input && element.equationset) {
+                if (element.type === "equationset" && element.input) {
                     value = action.payload.values[i++]
                     if (value !== undefined) {
 //                        if (element.name === 'Force_2')
@@ -250,7 +250,7 @@ export function reducers(state, action) {
     case SAVE_INPUT_SYMBOL_VALUES:
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
-                if (element.input && element.equationset) {
+                if (element.type === "equationset" && element.input) {
                     return Object.assign({}, element, {
                         oldvalue: element.value
                     });
@@ -262,7 +262,7 @@ export function reducers(state, action) {
     case RESTORE_INPUT_SYMBOL_VALUES:
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
-                if (element.input && element.equationset) {
+                if (element.type === "equationset" && element.input) {
                     return Object.assign({}, element, {
                         value: element.oldvalue
                     });
@@ -278,7 +278,7 @@ export function reducers(state, action) {
         i=0;
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
-                if ((!element.input && element.equationset) || (!element.equationset)) {
+                if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
                     value = action.payload.values[i++]
                     if (value !== undefined) {
 //                        if (element.name === "Prop_Calc_Method")

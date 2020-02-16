@@ -9,8 +9,8 @@ export function despak(pc, store, merit) {
     var p = [];
     for (let i = 0; i < design.symbol_table.length; i++) {
         var element = design.symbol_table[i];
-        if (element.input && element.equationset) {
-            if (element.equationset && !(element.lmin & FIXED)) {
+        if (element.type === "equationset" && element.input) {
+            if (!(element.lmin & FIXED)) {
                 p.push(pc[kd++]);
             } else {
                 p.push(element.value);

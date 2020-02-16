@@ -22,12 +22,12 @@ class NameValueUnitsRowCalcInput extends Component {
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onSelect = this.onSelect.bind(this);
-//        console.log('In NameValueUnitsRowCalcInput.constructor this.props.element.name=',this.props.element.name,' this.props.element.type=',this.props.element.type,' this.props.element.table=',this.props.element.table);
-        if (this.props.element.type === undefined && typeof this.props.element.value === 'number') {
+//        console.log('In NameValueUnitsRowCalcInput.constructor this.props.element.name=',this.props.element.name,' this.props.element.format=',this.props.element.format,' this.props.element.table=',this.props.element.table);
+        if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
                 focused: false
             };
-        } else if (this.props.element.type === 'table') {
+        } else if (this.props.element.format === 'table') {
 //            console.log('In NameValueUnitsRowCalcInput.constructor file = ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
@@ -85,11 +85,11 @@ class NameValueUnitsRowCalcInput extends Component {
                 </td>
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
-                        { this.props.element.type === undefined && typeof this.props.element.value === 'number' ?
+                        { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             <Form.Control type="number" disabled={!this.props.element.input} className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
-                        { this.props.element.type === undefined && typeof this.props.element.value === 'string' ?
+                        { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
                             <Form.Control type="text" disabled={!this.props.element.input} className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
-                        { this.props.element.type === 'table' &&
+                        { this.props.element.format === 'table' &&
                         (
                             <Form.Control as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>
                                 {this.state.table.map((value, index) =>

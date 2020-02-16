@@ -21,7 +21,9 @@ export function migrate(design) {
         design.system_controls.show_violations = 1; // Add show_violations to system_controls
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
             if (!element.equationset) { // That is a Calculation Input
-                if (element.name !== "Spring_type") { // And it is NOT Spring_Type
+                if (element.name === "Spring_Type") { // And it is Spring_Type
+                    element.input = false; // Force it to be output
+                } else {
                     element.input = !element.input; // Flip the input boolean value
                 }
             }
@@ -30,6 +32,19 @@ export function migrate(design) {
         // Note that index values come from symbol_table_offsets.js not offsets.js
         design.symbol_table.splice(46,0,design.symbol_table[36]);
         design.symbol_table.splice(36,1);
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.type !== undefined && element.type === "table") {
+                element.format = "table";
+                delete element.type;
+            }
+            if (element.equationset) {
+                element.type = "equationset";
+                delete element.equationset;
+            } else {
+                element.type = "calcinput";
+                delete element.equationset;
+            }
+        });
         migrated_design.version = '2'; // last thing... set the migrated model version
         displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
     case '2':

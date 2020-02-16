@@ -79,9 +79,9 @@ The replacement for CONTNT is named init.js.
 It is called on every change to (any variable?, not just) a "Calculation Input" (every keystroke).
 
 Regarding properties of Elements (entries, members, variables) in initialState.js:   
-* "input": true,   
-* "equationset": true,   
-* "hidden": false   
+* "input": true or false  
+* "type": "equationset" or "calcinput"
+* "hidden": true or false   
 
 Elements with the property ("input": true) are inputs to the design equations and go into the p vector. 
 Fixed elements are compressed out and not operated on by Search.
@@ -94,8 +94,8 @@ Note that changes to the p vector are not saved into the state of the design.
 Thus, unexpected results (stale data) can occur if elements are moved into p and they later change.
 This stale data issue is not a concern for elements of x.
 
-Elements with the property ("equationset": true), are fixable and constrainable ("unrestricted" in the terminology above).
-Elements with the property ("equationset": false), are members of the previous d vector ("restricted" in the previous terminology).
+Elements with the property ("type": "equationset"), are fixable and constrainable ("unrestricted" in the terminology above).
+Elements with the property ("type": "calcinput"), are members of the previous d vector ("restricted" in the previous terminology).
 
 Elements with the property ("hidden": true) are not visible in the user interface.
 
