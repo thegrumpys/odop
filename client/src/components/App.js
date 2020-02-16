@@ -175,8 +175,8 @@ class App extends Component {
                             </Container>
                         </Tab>
                         {this.state.report_names.map((element,i) => {return (
-                            <Tab key={element} eventKey={(i+2).toString()} id="report">
-                                {this.report(element)}
+                            <Tab key={element} eventKey={(i+2).toString()}>
+                                <div id={"report-"+i}>{this.report(element)}</div>
                             </Tab>
                             );
                         })}
