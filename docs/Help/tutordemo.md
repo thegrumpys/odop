@@ -35,17 +35,20 @@ for details on starting the spring design tutorial and demo sessions.
   
  &nbsp; 
   
-Topics covered (or planned) in the various sections of the tutorial include:
+Topics covered (* or planned) in the various sections of the tutorial include:
 
+ tutorTour - guided tour of the main page using the compression spring design type   
  tutor  - variable names, CHANGE of independent variables; analysis concept,   
  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FIX of dependent variables, SEARCH; equation inversion concept   
  tutor3 - constraints, constraint levels; synthesis concept   
  tutor4 - SAVE, print description of a finished design   
  tutor5 - Calculation Inputs, material properties, allowable stresses, end types   
- tutor6 - standard size table, catalog look-up   
+ tutor6 * standard size table, catalog look-up   
  tutor7 - SEEK, minimize spring material; optimization concept   
- tutor8 - SEEK, exploration of available solutions   
- tutor9 - TRADE, restructuring goals to find feasible solution   
+ tutor8 * SEEK, exploration of available solutions   
+ tutor9 * TRADE, restructuring goals to find feasible solution   
+ guidedDesign - Design workflow using compression spring example;   
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; optimization, standard wire size, select from catalog
 
  A sequence of solved demonstration problems is available (or planned) 
  under the names demo through demo(n). 
@@ -53,22 +56,25 @@ Topics covered (or planned) in the various sections of the tutorial include:
  reference book problems where the ODOP:Spring results are compared to 
  the reference book results in order to validate results from the program.  
  
- Demonstration examples available (or planned) include:
+ Demonstration examples available (* or planned) include:
 
- demo   - Introduction, simple design check problem    
+ demo   - Introduction, simple design check problem   
+ longdemo -  Design a compression spring from original specifications   
  demo1  - Spring Mfgrs. Inst. Handbook        compression spring example 1   
  demo2  - Spring Mfgrs. Inst. Handbook        compression spring example 2   
  demo3  - major spring mfgr design handbook   compression spring example   
- demo4  - Spotts, Mechanical Design Analysis  compression spring example   
+ demo4  * Spotts, Mechanical Design Analysis  compression spring example   
  demo5  - Carlson, Spring Designer's Handbook compression spring problem 1   
  demo6  - Spring Mfgrs. Inst. Handbook        extension   spring example 1   
  demo7  - Spring Mfgrs. Inst. Handbook        extension   spring example 2   
  demo8  - major spring mfgr design handbook   extension   spring example   
  demo9  - Carlson, Spring Designer's Handbook extension   spring problem 3   
- demo10 - Carlson, Spring Designer's Handbook compression spring problem 6   
- demo11 - Carlson, Spring Designer's Handbook compression spring problem 8   
- demo12 - Carlson, Spring Designer's Handbook fatigue life comparison   
- demo13 - Factor of safety and cycle life illustration   
+ demo10 * Carlson, Spring Designer's Handbook compression spring problem 6   
+ demo11 * Carlson, Spring Designer's Handbook compression spring problem 8   
+ demo12 * Carlson, Spring Designer's Handbook fatigue life comparison   
+ demo13 * Factor of safety and cycle life illustration   
+ demo14 - Spring Mfgrs. Inst. 1991 Handbook   torsion     spring example p.25   
+ demo15 - Carlson, Spring Designer's Handbook torsion     spring problem 4   
  &nbsp;
  
  [Help](./)
