@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated February 16, 2020   
+**Message-of-the-day** &nbsp; updated February 24, 2020   
 
 Watch this space for breaking news 
 (news of impending releases, planned outages, newly discovered issues & work-arounds, etc.). 
@@ -11,11 +11,12 @@ For details, see: [Requirements](requirements)
 ODOP is experimental software. 
 For details, see: [Experimental Software](experimental)   
 
-New users should be sure to see the [About](../About) section of the on-line documentation 
-early in the learning process.
+Evaluators and new users should be sure to see the [About](../About) section 
+of the on-line documentation early in the learning process.   
 
 &nbsp;
 
-When invoked from the ODOP initial page, this page opens in a new browser tab.
-Switch tabs in order to return to that initial page or simply close this tab.
+When invoked from the sign-in page or the initial page for selecting design type and design, 
+this page opens in a new browser tab.
+To return, switch tabs or simply close this tab.
  

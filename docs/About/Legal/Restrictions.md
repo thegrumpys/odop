@@ -1,6 +1,7 @@
 ## Restrictions
 
-This section covers a few restrictions and limitations of the ODOP software 
+This section covers a few restrictions and limitations of the 
+**O**pen **D**esign **O**ptimization **P**latform software 
 and the ODOP:Spring app. 
 Please review the [Disclaimer](Disclaimer) section for liability limitations.
 

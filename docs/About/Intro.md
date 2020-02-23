@@ -1,9 +1,10 @@
 ## Introducing ODOP
 
-**ODOP** is a web software application (web app) that
+The **O**pen **D**esign **O**ptimization **P**latform software 
+is a web software application (web app) that
 provides features and capabilities to facilitate the analysis 
 and design of a broad range of problems that have a mathematical model available. 
-The software consists of a problem independent component, the solution "platform" 
+The software contains a problem independent component, the solution "platform" 
 on which multiple problem-specific components (referred to as "design types") 
 may be constructed. 
 
