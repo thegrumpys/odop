@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-bootstrap';
 import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MAX } from '../../../store/actionTypes';
 export const execute = {
@@ -160,7 +161,7 @@ export const execute = {
             title: "Page 06 of 16",
             text: (
                 <React.Fragment>
-                <img src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
+                <Image fluid src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
                 </React.Fragment>
             )
         },

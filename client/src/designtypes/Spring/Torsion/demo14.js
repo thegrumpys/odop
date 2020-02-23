@@ -15,6 +15,12 @@ export const execute = {
                     </p>
                     
                     <p>
+                    A detailed description of  
+                    <a href="https://thegrumpys.github.io/odop/Help/DesignTypes/t_spring" target="_blank" rel="noopener noreferrer"> torsion spring names </a>
+                    is provided in the On-line Help.  
+                    </p>
+                    
+                    <p>
                     As with the other tutorial and demo sessions, 
                     this session needs to start from a known state.  
                     So, if you have entered any work of value that is not yet saved,
