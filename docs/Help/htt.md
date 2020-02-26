@@ -57,7 +57,7 @@ and browser back / forward.
 **Off-line Operation**   
 Off-line operation is not currently supported. 
 If a design session is in progress when network connectivity is lost, 
-it is possible that operation can continue but it will not be possible to
+it is possible that design activity can continue but it will not be possible to
 save or open new designs until network connectivity is restored.   
 
 **Unexpected delay when first opening the software**   
@@ -65,17 +65,17 @@ Note that loading the ODOP software the first time may take 20 seconds or longer
 This is a technical issue related to web hosting during program development. 
 A production web hosting arrangement will not have this delay.
 
-**Closing or exiting the software**
-If information that you wish to keep has already been saved,
-sign out by using "Logout" on the File menu or 
+**Closing or exiting the software**   
+Use the **File : Save As** menu to preserve the current state of a design in progress. 
+Sign out by using "Logout" on the File menu or 
 use the browser Reload a.k.a "Refresh" function and then click the "Logout" button.
-Finally, simply close the browser tab or browser window containing the ODOP app.
+Finally, close the browser tab or browser window containing the ODOP app.
 
 <a id="passwordReset"></a>  
 
-**Password reset**
+**Password reset**   
 Use your existing username (email address) and password to login at:   
-https://dev-729070.okta.com   
+[https://dev-729070.okta.com](https://dev-729070.okta.com)   
 After login, drop down the menu in the upper right that displays your first name
 and then use the Change Password section of the Settings page.   
 
@@ -104,7 +104,7 @@ not a word like O-dop.
 **Reporting problems with the ODOP software**   
 Your feedback is greatly appreciated.
 You may use the email address or phone number on the [Contact Us page](../About/ContactUs).
-Also, you may search for and review known issues on Please search for your issue and review known issues on 
+Also, you may search for and review known issues on  
 [GitHub](https://github.com/thegrumpys/odop/issues).
 In order to comment on an existing issue or to open a new issue, a (free) GitHub account is required.
 Follow the "Sign up" link at the top right.
