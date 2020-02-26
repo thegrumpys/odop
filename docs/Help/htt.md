@@ -104,7 +104,7 @@ not a word like O-dop.
 **Reporting problems with the ODOP software**   
 Your feedback is greatly appreciated.
 You may use the email address or phone number on the [Contact Us page](../About/ContactUs).
-Also, you may search for and review known issues on  
+Also, you may search for and review known issues on 
 [GitHub](https://github.com/thegrumpys/odop/issues).
 In order to comment on an existing issue or to open a new issue, a (free) GitHub account is required.
 Follow the "Sign up" link at the top right.
