@@ -44,9 +44,9 @@ spring designs that may be the source of NaN and other computational difficulty.
 So, if you encounter NaN where you expect a numeric value, check Report 1 for additional messages.
 
 **Browser refresh and back / forward**   
-Unfortunately, using the browser "Refresh" function with a single page web app such as ODOP 
-will likely result in a complete reset of the main page and potential loss of a user's work 
-since the last Save operation. 
+Unfortunately, using the browser Reload a.k.a. "Refresh" function with a single page 
+web app such as ODOP will likely result in a complete reset of the main page and 
+potential loss of a user's work since the last Save operation. 
 Similarly, use of the browser "Back" function followed by "Forward" will likely result in 
 reset of the main page.   
 
@@ -67,7 +67,17 @@ A production web hosting arrangement will not have this delay.
 
 **Closing or exiting the software**
 If information that you wish to keep has already been saved,
-simply close the browser tab or browser window containing the ODOP app.
+sign out by using "Logout" on the File menu or 
+use the browser Reload a.k.a "Refresh" function and then click the "Logout" button.
+Finally, simply close the browser tab or browser window containing the ODOP app.
+
+<a id="passwordReset"></a>  
+
+**Password reset**
+Use your existing username (email address) and password to login at:   
+https://dev-729070.okta.com   
+After login, drop down the menu in the upper right that displays your first name
+and then use the Change Password section of the Settings page.   
 
 **Responsive software design**   
 Developed as a "responsive" web app, the ODOP software will change its screen layout and 
@@ -75,8 +85,8 @@ input behavior in response to the capabilities of the user's device.
 Specifically, as available screen width diminishes,
 sections on the right of the main page will reposition to the bottom of the page.
 This means that more vertical scrolling will be required but font sizes will remain legible,
-even on a cell phone.
-Note that while operation on a cell phone may be possible, 
+even on a smartphone.
+Note that while operation on a smartphone may be possible, 
 the scrolling necessary to accommodate screen size limitations may impact productivity.
 Similarly, while it is possible to use the ODOP software from a mobile device, 
 establishing initial impressions with a full size monitor, keyboard and mouse is recommended.   
@@ -93,7 +103,8 @@ not a word like O-dop.
 
 **Reporting problems with the ODOP software**   
 Your feedback is greatly appreciated.
-Please search for your issue and review known issues on 
+You may use the email address or phone number on the [Contact Us page](../About/ContactUs).
+Also, you may search for and review known issues on Please search for your issue and review known issues on 
 [GitHub](https://github.com/thegrumpys/odop/issues).
 In order to comment on an existing issue or to open a new issue, a (free) GitHub account is required.
 Follow the "Sign up" link at the top right.
