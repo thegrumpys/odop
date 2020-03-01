@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { logUsage } from '../../logUsage';
 
 class FileRecent extends Component {
 
@@ -16,6 +17,7 @@ class FileRecent extends Component {
         this.setState({
             modal: !this.state.modal
         });
+        if (this.state.modal) logUsage('function=FileRecent');
     }
     
     render() {

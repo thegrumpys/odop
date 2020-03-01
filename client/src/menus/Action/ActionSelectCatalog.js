@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Table, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../../store/actionCreators';
+import { logUsage } from '../../logUsage';
 
 class ActionSelectCatalog extends Component {
 
@@ -79,11 +80,12 @@ class ActionSelectCatalog extends Component {
             modal: !this.state.modal
         });
         // Do select catalog entry
-//        console.log('In ActionSelectCatalog.onSelect this.state.entries=',this.state.entries);
+//        console.log('In ActionSelectCatalog.onSelect this.state.entries[this.state.entry]=',this.state.entries[this.state.entry]);
         this.state.entries[this.state.entry][2].forEach((element) => { 
 //            console.log('In ActionSelectCatalog.onSelect element=',element);
             this.props.changeSymbolValue(element[0],element[1]);
         });
+        logUsage('function=ActionSelectCatalog,name='+this.state.name+',entry='+this.state.entries[this.state.entry][0]);
     }
 
     onCancel() {

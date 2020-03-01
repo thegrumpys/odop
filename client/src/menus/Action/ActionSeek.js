@@ -3,6 +3,7 @@ import { NavDropdown, Modal, InputGroup, ButtonGroup, Button, Form } from 'react
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek } from '../../store/actionCreators';
+import { logUsage } from '../../logUsage';
 
 class ActionSeek extends Component {
 
@@ -45,6 +46,7 @@ class ActionSeek extends Component {
         });
         // Do seek
         this.props.seek(this.state.name, this.state.minmax);
+        logUsage('function=ActionSeek,name='+this.state.name+',minmax='+this.state.minmax);
     }
     
     onCancel() {

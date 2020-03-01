@@ -3,6 +3,7 @@ import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { changeSymbolValue, setSymbolFlag } from '../../store/actionCreators';
+import { logUsage } from '../../logUsage';
 
 class ActionSelectSize extends Component {
 
@@ -120,6 +121,7 @@ class ActionSelectSize extends Component {
         this.props.changeSymbolValue(this.state.type,this.state.size);
         this.props.setSymbolFlag(this.state.type, MIN, FIXED);
         this.props.setSymbolFlag(this.state.type, MAX, FIXED);
+        logUsage('function=ActionSelectSize,type='+this.state.type+',size='+this.state.size);
     }
 
     onCancel() {

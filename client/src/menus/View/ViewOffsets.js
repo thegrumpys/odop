@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { logUsage } from '../../logUsage';
 
 class ViewOffsets extends Component {
 
@@ -18,6 +19,7 @@ class ViewOffsets extends Component {
         this.setState({
             modal: !this.state.modal
         });
+        if (this.state.modal) logUsage('function=ViewOffsets');
     }
 
     render() {

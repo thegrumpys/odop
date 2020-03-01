@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { logUsage } from '../../logUsage';
 
 class ActionExecute extends Component {
 
@@ -46,6 +47,7 @@ class ActionExecute extends Component {
 //        console.log('In ActionExecute.onExecute startTutorial(',this.state.execute_name,')');
         var { execute } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load execute
         execute("Action : Execute",this.state.execute_name);
+        logUsage('function=ActionExecute,name='+this.state.execute_name);
     }
     
     onCancel() {

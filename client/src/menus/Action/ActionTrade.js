@@ -9,6 +9,7 @@ import { changeSymbolConstraint,
     changeResultTerminationCondition,
     search } from '../../store/actionCreators';
 import { evaluateConstraintValue } from '../../store/middleware/evaluateConstraint';
+import { logUsage } from '../../logUsage';
 
 class ActionTrade extends Component {
 
@@ -80,6 +81,7 @@ class ActionTrade extends Component {
                 strategyModal: !this.state.strategyModal,
             });
         }
+        logUsage('function=ActionTrade');
     }
     
     commonViolationSetup() {

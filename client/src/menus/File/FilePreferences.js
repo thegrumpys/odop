@@ -3,6 +3,7 @@ import { Button, Modal, NavDropdown, Container, Row, Col, Form } from 'react-boo
 import { connect } from 'react-redux';
 import { initialSystemControls } from '../../initialSystemControls';
 import { changeSystemControlsValue } from '../../store/actionCreators';
+import { logUsage } from '../../logUsage';
 
 class FilePreferences extends Component {
 
@@ -61,6 +62,7 @@ class FilePreferences extends Component {
         });
         // Copy the updated local copy into the props.system_controls
         this.props.changeSystemControlsValue(copy);
+        logUsage('function=FilePreferences');
     }
 
     render() {

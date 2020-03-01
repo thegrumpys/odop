@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Container, Row, Col, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeLabelsValue } from '../../store/actionCreators';
+import { logUsage } from '../../logUsage';
 
 class FileProperties extends Component {
 
@@ -57,6 +58,7 @@ class FileProperties extends Component {
         });
         // Copy the state.labels into the props.labels
         this.props.changeLabelsValue(this.state.labels);
+        logUsage('function=FileProperties');
     }
 
     render() {
