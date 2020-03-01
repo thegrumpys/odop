@@ -5,8 +5,7 @@ A user account with username and password is required to operate the software.
 Evaluators may sign-in with the username "public" and password "public".
 It is possible to save designs but keep in mind that all saved information will be completely public.
 Designs in the public account are not assured of long-term storage.
-At least one week notice will be provided on the [Message of the Day](messageOfTheDay) page 
-prior to removing any designs in the public account. 
+See [Restrictions](Legal/Restrictions) for long-term data storage policies.
 
 In order to keep saved designs private and be assured of long-term storage, 
 it is necessary to establish a private user account with an associated unique username and password. 
@@ -15,10 +14,7 @@ use the "Sign up" (Self-Service Registration) feature on the sign-in page.
 After you respond to an activation email message, 
 your account will be ready for immediate login.
 
-Alternatively, send a request to:   
-
-**Info@SpringDesignSoftware.org**   
-
+Alternatively, send a request to: **Info@SpringDesignSoftware.org**. 
 You will receive a reply message (welcome letter) with instructions on how to complete creating your account. 
 This alternative contains one step that is not automated, 
 so expect a delay of hours to a day or so. 
@@ -33,6 +29,8 @@ do not be concerned about a "You don't have any apps." message on your personal 
 Once you have established a password, 
 simply [launch the program](../Help/launchODOP) 
 in order to get to the sign-in page.
+It is also possible to launch the program from the SpringDesignSoftware.org home page, 
+Getting Started page or any of the three spring type pages. 
 
 An account username must be in the form of an email address. 
 As noted in our [Privacy Notice](Legal/PrivacyStatement), 
@@ -42,14 +40,15 @@ using an email account different than your primary email account is a reasonable
 
 **Screen capture of the sign-in page:**   
 ![Sign-in screen](../Help/png/SignInWidgetExpanded.png "Sign-in screen")    
+
+See [Password reset](../Help/htt#passwordReset) for instructions on how to 
+change a password or recover from a lost password after account creation is complete. 
    
 See [Default Designs](../Help/defaultDesigns) for information on how a private design
 can be used to personalize system provided default designs.
 
-See [Restrictions](Legal/Restrictions) for long term data storage policies in private accounts.
-
-Follow this link for instructions on how to [change a password](../Help/htt#passwordReset) 
-after account creation is complete. 
+See [Restrictions](Legal/Restrictions) for long term data storage policies 
+in both public and private accounts.
 
 In order to sign out:
   - use "Logout" on the File menu

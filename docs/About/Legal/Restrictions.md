@@ -54,8 +54,7 @@ intended for demonstration purposes only.
 The supplied catalogs do not necessarily represent the current offering of 
 any single manufacturer.  
 
-Designs saved in the public account are subject to removal one week after 
-the most recent update to the design.
+Designs saved in the public account are not assured of long term storage. 
 Notice of impending cleanup of designs saved in the public account will be posted
 at [Message of the Day](../messageOfTheDay).
 Clean up activity will likely occur just prior to new releases of the
@@ -64,8 +63,8 @@ While designs saved in private accounts will be preserved and version migrated
 on a best effort basis,
 it should be understood that this data can't be maintained literally forever.
 To the extent possible, 
-private account holders will be notified by email prior to any account closure
-or other impact to saved designs.
+private account holders will be notified by email prior well in advance of 
+any impact to saved designs.
    
 &nbsp;
    
