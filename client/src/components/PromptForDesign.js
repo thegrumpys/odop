@@ -164,6 +164,7 @@ export default withAuth(class PromptForDesign extends Component {
 
         var { initialState } = require('../designtypes/'+type+'/initialState.js'); // Dynamically load initialState
         var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+        console.log('In PromptForDesign.loadInitialState state=', state);
         const store = createStore(reducers, state, middleware);
         store.dispatch(startup());
         this.setState({

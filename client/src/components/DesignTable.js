@@ -8,6 +8,7 @@ import ResultTable from './ResultTable';
 export class DesignTable extends Component {
     
     render() {
+        console.log("In DesignTable.render");
         return (
             <React.Fragment>
                 <Row>

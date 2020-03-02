@@ -19,17 +19,17 @@ export function seek(store, action) {
     var design = store.getState(); // Re-access store to get latest element values
     if (design.system_controls.ioopt > 5) {
         console.log('01 SEEK:    OBJ =', design.result.objective_value);
-        if (design.result.objective_value > design.system_controls.objmin && design.symbol_table.reduce((total, element)=>{return ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) && element.lmin&FIXED ? total+1 : total+0}, 0) === 0) {
+        if (design.result.objective_value > design.system_controls.objmin && Object.keys(design.symbol_table).reduce((total, element)=>{return ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) && element.lmin&FIXED ? total+1 : total+0}, 0) === 0) {
             console.log('02 NOTE:  THE SEEK PROCESS MAY PRODUCE BETTER RESULTS WITH A FEASIBLE START POINT.');
         }
     }
     
     if (design.system_controls.ioopt > 5) {
-        console.log("02A THE NUMBER OF FIXED INDEPENDENT VARIABLES IS:", design.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && element.lmin & FIXED ? total+1 : total+0}, 0));
-        console.log("02B THE NUMBER OF FREE INDEPENDENT VARIABLES IS:", design.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0));
+        console.log("02A THE NUMBER OF FIXED INDEPENDENT VARIABLES IS:", Object.keys(design.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && element.lmin & FIXED ? total+1 : total+0}, 0));
+        console.log("02B THE NUMBER OF FREE INDEPENDENT VARIABLES IS:", Object.keys(design.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0));
     }
     var ncode;
-    if(design.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+    if(Object.keys(design.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
         ncode = 'WARNING, NO FREE INDEPENDENT VARIABLES';
         store.dispatch(changeResultTerminationCondition(ncode));
         return;
@@ -40,22 +40,22 @@ export function seek(store, action) {
     } else {
         SDIR = -1;
     }
-    var found = false;
     var temp;
     var dname;
     var input;
     var element;
     var pc;
     var obj;
-    for (let i = 0; !found && i < design.symbol_table.length; i++) {
-        element = design.symbol_table[i];
+    var i = 0;
+    for (element in design.symbol_table) {
         if (element.name.startsWith(action.payload.name)) {
             temp = element.value;
             dname = element.name;
             input = element.units;
             SOUGHT = i + 1; // Skip 0 value which is special
-            found = true;
+            break;
         }
+        i++;
     }
     M_NUM = temp + 0.1 * SDIR * temp;
     if (design.system_controls.ioopt > 5) {
@@ -82,8 +82,7 @@ export function seek(store, action) {
         M_DEN = 1.0;
     }
     pc = [];
-    for (let i = 0; i < design.symbol_table.length; i++) {
-        element = design.symbol_table[i];
+    for (element in design.symbol_table) {
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 pc.push(element.value);

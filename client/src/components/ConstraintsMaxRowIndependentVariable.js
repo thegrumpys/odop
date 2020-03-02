@@ -67,7 +67,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
             modal: !this.state.modal
         });
         this.props.setSymbolFlag(this.props.element.name, MAX, FDCL);
-        this.props.symbol_table.forEach((element, i) => {
+        Object.keys(this.props.symbol_table).forEach((element, i) => {
             if (element.name === name) {
 //                console.log('@@@ element=',element,' i=',i);
                 this.props.changeSymbolConstraint(this.props.element.name, MAX, i);

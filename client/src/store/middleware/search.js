@@ -10,8 +10,7 @@ export function search(store, objmin, merit) {
     // Compress P into PC
     var element;
     var pc = [];
-    for (let i = 0; i < design.symbol_table.length; i++) {
-        element = design.symbol_table[i];
+    for (element in design.symbol_table) {
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 pc.push(element.value);
@@ -26,8 +25,7 @@ export function search(store, objmin, merit) {
     // Expand PC back into store change actions
     var kd = 0;
     var p = [];
-    for (let i = 0; i < design.symbol_table.length; i++) {
-        element = design.symbol_table[i];
+    for (element in design.symbol_table) {
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 p.push(pc[kd++]);

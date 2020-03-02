@@ -1,7 +1,7 @@
 import { CONSTRAINED } from '../../store/actionTypes';
 export const initialState = {
-    "symbol_table": [
-        {
+    "symbol_table": {
+        pressure: {
             "input": true,
             "name": "PRESSURE",
             "value": 500,
@@ -16,7 +16,7 @@ export const initialState = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        radius: {
             "input": true,
             "name": "RADIUS",
             "value": 0.4,
@@ -31,7 +31,7 @@ export const initialState = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        thickness: {
             "input": true,
             "name": "THICKNESS",
             "value": 0.04,
@@ -46,7 +46,7 @@ export const initialState = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        force: {
             "input": false,
             "name": "FORCE",
             "value": 0,
@@ -61,7 +61,7 @@ export const initialState = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        area: {
             "input": false,
             "name": "AREA",
             "value": 0,
@@ -76,7 +76,7 @@ export const initialState = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        stress: {
             "input": false,
             "name": "STRESS",
             "value": 0,
@@ -91,7 +91,7 @@ export const initialState = {
             "type": "equationset",
             "hidden": false
         }
-    ],
+    },
     "labels": [
         {
             "name": "COMMENT",

@@ -40,13 +40,13 @@ class ViewOffsets extends Component {
                     <Modal.Body>
                         <pre>
                         {'// Independent Variables (input-only)\n'}
-                        {this.props.symbol_table.map((element) => {return (element.type === "equationset" && element.input) ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n' : ''})}
+                        {Object.keys(this.props.symbol_table).map((element) => {console.log("element=",element); return (element.type === "equationset" && element.input) ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n' : ''})}
                         {'\n// Dependent Variables (input-output)\n'}
-                        {this.props.symbol_table.map((element) => {return ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ix++) + ';\n' : ''})}
+                        {Object.keys(this.props.symbol_table).map((element) => {console.log("element=",element); return ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) ? 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ix++) + ';\n' : ''})}
                         {'\n// System Controls (Preferences)\n'}
-                        {Object.keys(this.props.system_controls).map((element) => { return 'export const ' + element.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (isc++) + ';\n'})}
+                        {Object.keys(this.props.system_controls).map((element) => {console.log("element=",element); return 'export const ' + element.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (isc++) + ';\n'})}
                         {'\n// Labels (Properties)\n'}
-                        {this.props.labels.map((element) => {return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (il++) + ';\n'})}
+                        {this.props.labels.map((element) => {console.log("element=",element); return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (il++) + ';\n'})}
                         </pre>
                     </Modal.Body>
                     <Modal.Footer>

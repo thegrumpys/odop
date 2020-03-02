@@ -75,7 +75,7 @@ class App extends Component {
 
         // Loop to create symbol_table
         var st = [];
-        this.props.symbol_table.forEach((element) => {
+        Object.keys(this.props.symbol_table).forEach((element) => {
             st.push(Object.assign({},element));
         });
 
@@ -92,7 +92,7 @@ class App extends Component {
     }
   
     render() {
-//        console.log('In App.render');
+        console.log("'In App.render this.props.symbol_table=",this.props.symbol_table,"this.props.system_controls=",this.props.system_controls);
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
         var alt = this.props.type+' icon';
 //        console.log('src=',src,' alt=',alt);

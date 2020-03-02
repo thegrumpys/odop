@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 export class NameValueUnitsTable extends Component {
     
     render() {
+        console.log("In NameValueUnitsTable.render this.props.symbol_table=",this.props.symbol_table,"this.props.system_controls=",this.props.system_controls);
         return (
             <React.Fragment>
                 <Table className="col-md-6 border border-secondary" size="sm">
@@ -39,7 +40,7 @@ export class NameValueUnitsTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
+                        {Object.keys(this.props.symbol_table).map((element,index) => element.type === "equationset" && element.input && !element.hidden && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                     <thead>
                         <tr>
@@ -51,10 +52,10 @@ export class NameValueUnitsTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
+                        {Object.keys(this.props.symbol_table).map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                     <thead>
-                        { (this.props.symbol_table.reduce((accum,element)=>{if (element.type === "calcinput" && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
+                        { (Object.keys(this.props.symbol_table).reduce((accum,element)=>{if (element.type === "calcinput" && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
                             (<tr>
                                 <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">
                                     <OverlayTrigger placement="top" overlay={<Tooltip>Variables that are not subject to constraints, FIX or Search</Tooltip>}>
@@ -65,7 +66,7 @@ export class NameValueUnitsTable extends Component {
                         }
                     </thead>
                     <tbody>
-                        {this.props.symbol_table.map((element,index) => element.type === "calcinput" && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
+                        {Object.keys(this.props.symbol_table).map((element,index) => element.type === "calcinput" && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
                     </tbody>
                 </Table>
             </React.Fragment>

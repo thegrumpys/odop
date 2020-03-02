@@ -47,7 +47,7 @@ export const dispatcher = store => next => action => {
 
     case CHANGE_SYMBOL_VALUE:
         design = store.getState();
-        design.symbol_table.find((element) => {
+        Object.keys(design.symbol_table).find((element) => {
             if (element.name === action.payload.name) {
                 element.type === "calcinput" && invokeInit(store);
                 return true;
@@ -60,7 +60,7 @@ export const dispatcher = store => next => action => {
         break;
     case FIX_SYMBOL_VALUE:
         design = store.getState();
-        design.symbol_table.find((element) => {
+        Object.keys(design.symbol_table).find((element) => {
             if (element.name === action.payload.name) {
                 if (element.type === "equationset" && element.input) {
                     // Independent
@@ -103,7 +103,7 @@ export const dispatcher = store => next => action => {
         break;
     case FREE_SYMBOL_VALUE:
         design = store.getState();
-        design.symbol_table.find((element) => {
+        Object.keys(design.symbol_table).find((element) => {
             if (element.name === action.payload.name) {
                 store.dispatch(restoreOutputSymbolConstraints(element.name));
                 return true;

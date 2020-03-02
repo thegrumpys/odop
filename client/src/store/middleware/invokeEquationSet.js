@@ -12,8 +12,7 @@ export function invokeEquationSet(store) {
     // Loop to create p and x from symbol_table
     var p = [];
     var x = [];
-    for (let i = 0; i < design.symbol_table.length; i++) {
-        element = design.symbol_table[i];
+    for (element in design.symbol_table) {
         if (element.type === "equationset" && element.input) {
             p.push(element.value);
         } else {
