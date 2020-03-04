@@ -21,7 +21,7 @@ export function updateViolationsAndObjectiveValue(store, merit) {
 
     var design = store.getState(); // Re-access store to get latest element values
 
-    for (element in design.symbol_table) {
+    Object.values(design.symbol_table).forEach((element) => {
         if (element.type === "equationset" && element.input) {
             vmin = 0.0;
             vmax = 0.0;
@@ -40,8 +40,8 @@ export function updateViolationsAndObjectiveValue(store, merit) {
                 viol_sum = viol_sum + vmax * vmax;
             }
         }
-    }
-    for (element in design.symbol_table) {
+    });
+    Object.values(design.symbol_table).forEach((element) => {
         if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
             vmin = 0.0;
             vmax = 0.0;
@@ -83,7 +83,7 @@ export function updateViolationsAndObjectiveValue(store, merit) {
                 }
             }
         }
-    }
+    });
     
     /* Merit Function */
     if (merit && typeof merit === 'function') {
@@ -99,14 +99,14 @@ export function updateViolationsAndObjectiveValue(store, merit) {
     // Update Violated Constraint Count, which becomes Feasibility on the UI
     design = store.getState(); // Re-access store to get latest vmin and vmax
     var violated_constraint_count = 0;
-    for (element in design.symbol_table) {
+    Object.values(design.symbol_table).forEach((element) => {
         if (element.lmin & CONSTRAINED)
             if (element.vmin > 0.0)
                 violated_constraint_count++;
         if (element.lmax & CONSTRAINED)
             if (element.vmax > 0.0)
                 violated_constraint_count++;
-    }
+    });
     store.dispatch(changeResultViolatedConstraintCount(violated_constraint_count));
     
 }

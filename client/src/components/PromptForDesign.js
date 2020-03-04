@@ -154,7 +154,7 @@ export default withAuth(class PromptForDesign extends Component {
     }
     
     loadInitialState(type) {
-//        console.log('In PromptForDesign.loadInitialState type=', type);
+        console.log('In PromptForDesign.loadInitialState type=', type);
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -173,7 +173,7 @@ export default withAuth(class PromptForDesign extends Component {
     }
 
     onSelectType(event) {
-//        console.log('In PromptForDesign.onSelectType event.target.value=',event.target.value);
+        console.log('In PromptForDesign.onSelectType event.target.value=',event.target.value);
         this.setState({
             type: event.target.value
         });
@@ -181,14 +181,14 @@ export default withAuth(class PromptForDesign extends Component {
     }
     
     onSelectName(event) {
-//        console.log('In PromptForDesign.onSelectName event.target.value=',event.target.value);
+        console.log('In PromptForDesign.onSelectName event.target.value=',event.target.value);
         this.setState({
             name: event.target.value 
         });
     }
     
     onOpen() {
-//        console.log('In PromptForDesign.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
+        console.log('In PromptForDesign.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
         this.setState({
             modal: !this.state.modal
         });
@@ -197,7 +197,7 @@ export default withAuth(class PromptForDesign extends Component {
     }
     
     onLoadInitialState() {
-//        console.log('In PromptForDesign.onLoadInitialState this.state.type=',this.state.type);
+        console.log('In PromptForDesign.onLoadInitialState this.state.type=',this.state.type);
         this.setState({
             modal: !this.state.modal
         });
@@ -206,7 +206,7 @@ export default withAuth(class PromptForDesign extends Component {
 
     
     onCancel() {
-//        console.log('In PromptForDesign.onCancel');
+        console.log('In PromptForDesign.onCancel');
         this.setState({
             modal: !this.state.modal
         });
@@ -214,7 +214,7 @@ export default withAuth(class PromptForDesign extends Component {
     }
 
     render() {
-//        console.log('In PromptForDesign.render');
+        console.log('In PromptForDesign.render');
         if (this.state.store === null) {
             return (
                 <React.Fragment>

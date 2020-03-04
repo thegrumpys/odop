@@ -36,7 +36,7 @@ import { evaluateConstraintValue } from './middleware/evaluateConstraint';
 export function reducers(state, action) {
     var i;
     var value;
-//    console.log('In reducers', action);
+//    console.log('In reducers state=', state, 'action=', action);
     switch (action.type) {
     case STARTUP:
         return state;
@@ -277,12 +277,13 @@ export function reducers(state, action) {
     case CHANGE_OUTPUT_SYMBOL_VALUES:
         i=0;
         return Object.assign({}, state, {
-            symbol_table: Object.keys(state.symbol_table).map((element) => {
+            symbol_table: Object.values(state.symbol_table).map((element) => {
+                console.log('CHANGE_OUTPUT_SYMBOL_VALUES i=',i,' element=',element);
                 if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
                     value = action.payload.values[i++]
                     if (value !== undefined) {
-//                        if (element.name === "Prop_Calc_Method")
-//                            console.log('CHANGE_OUTPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
+//                       if (element.name === "Prop_Calc_Method")
+                        console.log('CHANGE_OUTPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
                         return Object.assign({}, element, {
                             value: value
                         });

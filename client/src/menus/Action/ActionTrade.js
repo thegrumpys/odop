@@ -93,7 +93,7 @@ class ActionTrade extends Component {
         this.props.search(); // @@@
         design = store.getState();
         var i = 0;
-        for (element in design.symbol_table) {
+        Object.values(design.symbol_table).forEach((element) => {
             if (element.lmin & CONSTRAINED && !(element.lmin & FDCL) && element.vmin > 0.0) {
                 nviol++
                 vflag[nviol - 1] = i;
@@ -104,7 +104,7 @@ class ActionTrade extends Component {
                 ldir[nviol - 1] = +1;
             }
             i++;
-        }
+        });
 //        console.log('nviol=',nviol);
 //        console.log('vflag=',vflag);
 //        console.log('ldir=',ldir);

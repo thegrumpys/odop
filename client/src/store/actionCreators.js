@@ -204,6 +204,7 @@ export function restoreInputSymbolValues(merit) {
 }
 
 export function changeOutputSymbolValues(values) {
+    console.log('In actionCreators.changeOutputSymbolValues values=', values)
     return {
         type: CHANGE_OUTPUT_SYMBOL_VALUES,
         payload: {

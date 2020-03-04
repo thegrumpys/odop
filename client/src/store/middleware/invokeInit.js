@@ -13,13 +13,14 @@ export function invokeInit(store) {
     var p = [];
     var x = [];
     console.log('In invokeInit design.symbol_table=',design.symbol_table);
-    for (element in design.symbol_table) {
+    Object.values(design.symbol_table).forEach((element) => {
+        console.log('In invokeInit element=',element);
         if (element.type === "equationset" && element.input) {
             p.push(element.value);
         } else {
             x.push(element.value);
         }
-    }
+    });
 
     // Compute outputs x from inputs p using equations
     var { init } = require('../../designtypes/'+design.type+'/init.js'); // Dynamically load init

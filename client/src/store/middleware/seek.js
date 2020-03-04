@@ -47,16 +47,16 @@ export function seek(store, action) {
     var pc;
     var obj;
     var i = 0;
-    for (element in design.symbol_table) {
+    Object.values(design.symbol_table).some((element) => {
         if (element.name.startsWith(action.payload.name)) {
             temp = element.value;
             dname = element.name;
             input = element.units;
             SOUGHT = i + 1; // Skip 0 value which is special
-            break;
+            return true;
         }
         i++;
-    }
+    });
     M_NUM = temp + 0.1 * SDIR * temp;
     if (design.system_controls.ioopt > 5) {
 	    temp = design.symbol_table[SOUGHT - 1].value;
@@ -82,13 +82,13 @@ export function seek(store, action) {
         M_DEN = 1.0;
     }
     pc = [];
-    for (element in design.symbol_table) {
+    Object.values(design.symbol_table).forEach((element) => {
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 pc.push(element.value);
             }
         }
-    }
+    });
     obj = despak(pc, store);
     design = store.getState(); // Re-access store to get latest element values
     if (obj < design.system_controls.objmin) {
