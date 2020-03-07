@@ -42,7 +42,7 @@ export class ConstraintsMaxTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {Object.keys(this.props.symbol_table).map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={index} />)}
+                        {Object.values(this.props.symbol_table).map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                     <thead>
                         <tr>
@@ -54,7 +54,7 @@ export class ConstraintsMaxTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {Object.keys(this.props.symbol_table).map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={index} />)}
+                        {Object.values(this.props.symbol_table).map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                 </Table>
             </React.Fragment>

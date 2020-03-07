@@ -39,9 +39,9 @@ class ViewSymbolTableOffsets extends Component {
                     <Modal.Body>
                         <pre>
                         {'// Variables\n'}
-                        {Object.keys(this.props.symbol_table).map((element) => {console.log("element=",element); return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n'})}
+                        {Object.values(this.props.symbol_table).map((element) => {console.log("element=",element); return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n'})}
                         {'\n// System Controls (Preferences)\n'}
-                        {Object.keys(this.props.system_controls).map((element) => {console.log("element=",element); return 'export const ' + element.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (isc++) + ';\n'})}
+                        {Object.values(this.props.system_controls).map((element) => {console.log("element=",element); return 'export const ' + element.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (isc++) + ';\n'})}
                         {'\n// Labels (Properties)\n'}
                         {this.props.labels.map((element) => {console.log("element=",element); return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (il++) + ';\n'})}
                         </pre>

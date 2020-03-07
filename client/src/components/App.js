@@ -75,7 +75,7 @@ class App extends Component {
 
         // Loop to create symbol_table
         var st = [];
-        Object.keys(this.props.symbol_table).forEach((element) => {
+        Object.values(this.props.symbol_table).forEach((element) => {
             st.push(Object.assign({},element));
         });
 

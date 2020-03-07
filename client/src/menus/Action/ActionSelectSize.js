@@ -32,7 +32,7 @@ class ActionSelectSize extends Component {
             type = types[0]; // Default to first type
         // Loop to create st from symbol_table
         var st = [];
-        Object.keys(this.props.symbol_table).forEach((element) => {
+        Object.values(this.props.symbol_table).forEach((element) => {
             st.push(element);
         });
         var sizes = getSizeEntries(type, st);
@@ -60,7 +60,7 @@ class ActionSelectSize extends Component {
             type = types[0]; // Default to first type
         // Loop to create st from symbol_table
         var st = [];
-        Object.keys(this.props.symbol_table).forEach((element) => {
+        Object.values(this.props.symbol_table).forEach((element) => {
             st.push(element);
         });
         var sizes = getSizeEntries(type, st);
@@ -86,7 +86,7 @@ class ActionSelectSize extends Component {
         var { getSizeEntries } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeEntries
         // Loop to create p and x from symbol_table
         var st = [];
-        Object.keys(this.props.symbol_table).forEach((element) => {
+        Object.values(this.props.symbol_table).forEach((element) => {
             st.push(element);
         });
         var sizes = getSizeEntries(type, st);

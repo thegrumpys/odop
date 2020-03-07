@@ -33,7 +33,7 @@ class ActionSelectCatalog extends Component {
         const { store } = this.context;
         // Loop to create st from symbol_table
         var st = [];
-        Object.keys(this.props.symbol_table).forEach((element) => {
+        Object.values(this.props.symbol_table).forEach((element) => {
             st.push(Object.assign({},element));
         });
         var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt);
@@ -54,7 +54,7 @@ class ActionSelectCatalog extends Component {
         const { store } = this.context;
         // Loop to create p and x from symbol_table
         var st = [];
-        Object.keys(this.props.symbol_table).forEach((element) => {
+        Object.values(this.props.symbol_table).forEach((element) => {
             st.push(Object.assign({},element));
         });
         var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt);

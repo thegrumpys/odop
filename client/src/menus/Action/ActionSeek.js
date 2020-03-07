@@ -84,7 +84,7 @@ class ActionSeek extends Component {
                                <InputGroup.Text>Name: </InputGroup.Text>
                             </InputGroup.Prepend>
                             <Form.Control as="select" className="align-middle" onChange={this.onNameSelect} value={this.state.name}>
-                                {Object.keys(this.props.symbol_table).map((element, index) =>
+                                {Object.values(this.props.symbol_table).map((element, index) =>
                                     (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
                             </Form.Control>

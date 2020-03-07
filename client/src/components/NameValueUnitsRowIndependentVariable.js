@@ -68,8 +68,8 @@ class NameValueUnitsRowIndependentVariable extends Component {
         this.state.table[selectedIndex].forEach((value, index) => {
             if (index > 0) { // Skip the first column
                 var name = this.state.table[0][index];
-//                console.log('In NameValueUnitsRowIndependentVariable.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',Object.keys(this.props.symbol_table).find(element => element.name === name));
-                if (Object.keys(this.props.symbol_table).find(element => element.name === name) !== undefined) {
+//                console.log('In NameValueUnitsRowIndependentVariable.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',Object.values(this.props.symbol_table).find(element => element.name === name));
+                if (Object.values(this.props.symbol_table).find(element => element.name === name) !== undefined) {
                     this.props.changeSymbolValue(name,value);
                 }
             }

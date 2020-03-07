@@ -42,7 +42,7 @@ export class ConstraintsMinTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {Object.keys(this.props.symbol_table).map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={index} />)}
+                        {Object.values(this.props.symbol_table).map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                     <thead>
                         <tr>
@@ -54,7 +54,7 @@ export class ConstraintsMinTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {Object.keys(this.props.symbol_table).map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMinRowDependentVariable key={element.name} element={element} index={index} />)}
+                        {Object.values(this.props.symbol_table).map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMinRowDependentVariable key={element.name} element={element} index={index} />)}
                     </tbody>
                 </Table>
             </React.Fragment>

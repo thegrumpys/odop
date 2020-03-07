@@ -75,7 +75,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
         });
         if (this.props.element.lmax & FIXED) {
             this.props.setSymbolFlag(this.props.element.name, MIN, FDCL);
-            Object.keys(this.props.symbol_table).forEach((element, i) => {
+            Object.values(this.props.symbol_table).forEach((element, i) => {
                 if (element.name === name) {
 //                    console.log('@In onSelectVariable element=',element,' i=',i);
                     this.props.changeSymbolConstraint(this.props.element.name, MIN, i);
@@ -83,7 +83,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
             })
         }
         this.props.setSymbolFlag(this.props.element.name, MAX, FDCL);
-        Object.keys(this.props.symbol_table).forEach((element, i) => {
+        Object.values(this.props.symbol_table).forEach((element, i) => {
             if (element.name === name) {
 //                console.log('In onSelectVariable element=',element,' i=',i);
                 this.props.changeSymbolConstraint(this.props.element.name, MAX, i);
