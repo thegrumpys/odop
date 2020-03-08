@@ -56,6 +56,7 @@ export function seek(store, action) {
             return true;
         }
         i++;
+        return false;
     });
     M_NUM = temp + 0.1 * SDIR * temp;
     if (design.system_controls.ioopt > 5) {

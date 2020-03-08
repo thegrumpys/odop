@@ -84,7 +84,6 @@ class ActionTrade extends Component {
     
     commonViolationSetup() {
         var design;
-        var element;
         var nviol = 0;
         var ldir = [];
         var vflag = [];

@@ -5,8 +5,6 @@ export function invokeEquationSet(store) {
     
 //    console.log('Entering invokeEquationSet');
     
-    var element;
-
     var design = store.getState();
     
     // Loop to create p and x from symbol_table
