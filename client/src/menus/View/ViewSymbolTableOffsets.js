@@ -18,7 +18,7 @@ class ViewSymbolTableOffsets extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.gtag('event', 'ViewSymbolTableOffsets', { 'event_category': 'menu' });
+        window.gtag('event', 'ViewSymbolTableOffsets');
     }
 
     render() {

@@ -61,7 +61,7 @@ class ActionTrade extends Component {
     //===========================================================
     
     strategyToggle() {
-        window.gtag('event', 'ActionTrade', { 'event_category': 'menu' });
+        window.gtag('event', 'ActionTrade');
 //        console.log('In strategyToggle');
 //        console.log('state=',this.state);
         var design;

@@ -43,7 +43,7 @@ class FileProperties extends Component {
     }
     
     onRestoreDefaults() {
-        window.gtag('event', 'FileProperties', { 'event_category': 'menu', 'event_label': 'RestoreDefaults' });
+        window.gtag('event', 'FileProperties', { 'event_label': 'RestoreDefaults' });
         // Copy the default values into the state.labels
         var { initialState } = require('../../designtypes/'+this.props.type+'/initialState.js'); // Dynamically load initialState
         this.setState({
@@ -56,7 +56,7 @@ class FileProperties extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.gtag('event', 'FileProperties', { 'event_category': 'menu', 'event_label': 'ApplyandClose' });
+        window.gtag('event', 'FileProperties', { 'event_label': 'ApplyandClose' });
         // Copy the state.labels into the props.labels
         this.props.changeLabelsValue(this.state.labels);
     }

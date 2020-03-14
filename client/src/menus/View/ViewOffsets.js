@@ -18,7 +18,7 @@ class ViewOffsets extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.gtag('event', 'ViewOffsets', { 'event_category': 'menu' });
+        window.gtag('event', 'ViewOffsets');
     }
 
     render() {

@@ -50,7 +50,7 @@ class FileSave extends Component {
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
-                window.gtag('event', 'FileSave', { 'event_category': 'menu', 'event_label': type, 'value': name });
+                window.gtag('event', 'FileSave', { 'event_label': type + ' ' + name });
                 logUsage('function=FileSave,type='+type+',name='+name);
                 return res.json()
             })

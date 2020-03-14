@@ -11,7 +11,7 @@ class ActionSearch extends Component {
     }
     
     toggle() {
-        window.gtag('event', 'ActionSearch', { 'event_category': 'menu' });
+        window.gtag('event', 'ActionSearch');
         this.props.search();
     }
 
