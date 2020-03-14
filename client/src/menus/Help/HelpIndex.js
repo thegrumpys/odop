@@ -10,6 +10,7 @@ class HelpIndex extends Component {
     }
 
     onHelp() {
+        window.gtag('event', 'HelpIndex', { 'event_category': 'menu', 'event_label': 'https://thegrumpys.github.io/odop/Help' });
         window.open('https://thegrumpys.github.io/odop/Help', '_blank');
     }
 

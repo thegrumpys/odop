@@ -82,6 +82,7 @@ class FileOpen extends Component {
                 var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
                 this.props.load(migrated_design)
+                window.gtag('event', 'FileOpen', { 'event_category': 'menu', 'event_label': type, 'value': name });
                 logUsage('function=FileOpen,type='+type+',name='+name);
             })
             .catch(error => {

@@ -87,6 +87,7 @@ class FileDelete extends Component {
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
+                window.gtag('event', 'FileDelete', { 'event_category': 'menu', 'event_label': type, 'value': name });
                 logUsage('function=FileDelete,type='+type+',name='+name);
                 return res.json()
             })

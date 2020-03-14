@@ -17,6 +17,7 @@ class HelpAbout extends Component {
         this.setState({
             modal: !this.state.modal
         });
+        window.gtag('event', 'HelpAbout', { 'event_category': 'menu' });
     }
 
     render() {

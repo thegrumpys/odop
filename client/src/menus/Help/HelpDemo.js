@@ -42,6 +42,7 @@ class HelpDemo extends Component {
         this.setState({
             modal: !this.state.modal
         });
+        window.gtag('event', 'HelpDemo', { 'event_category': 'menu', 'event_label': 'file', 'value': this.state.execute_name });
         // Do execute
 //        console.log('In ActionExecute.onExecute startTutorial(',this.state.execute_name,')');
         var { execute } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load execute

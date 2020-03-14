@@ -116,6 +116,7 @@ class ActionSelectSize extends Component {
         this.setState({
             modal: !this.state.modal
         });
+        window.gtag('event', 'ActionSeek', { 'event_category': 'menu', 'event_label': this.state.type, 'value': this.state.size });
         // Do select size entry
         this.props.changeSymbolValue(this.state.type,this.state.size);
         this.props.setSymbolFlag(this.state.type, MIN, FIXED);

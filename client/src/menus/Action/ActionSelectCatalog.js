@@ -79,6 +79,7 @@ class ActionSelectCatalog extends Component {
             modal: !this.state.modal
         });
         // Do select catalog entry
+        window.gtag('event', 'ActionSelectCatalog', { 'event_category': 'menu' });
 //        console.log('In ActionSelectCatalog.onSelect this.state.entries=',this.state.entries);
         this.state.entries[this.state.entry][2].forEach((element) => { 
 //            console.log('In ActionSelectCatalog.onSelect element=',element);

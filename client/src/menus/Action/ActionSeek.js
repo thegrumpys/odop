@@ -44,6 +44,7 @@ class ActionSeek extends Component {
             modal: !this.state.modal
         });
         // Do seek
+        window.gtag('event', 'ActionSeek', { 'event_category': 'menu', 'event_label': this.state.name, 'value': this.state.minmax });
         this.props.seek(this.state.name, this.state.minmax);
     }
     

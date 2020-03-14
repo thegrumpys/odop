@@ -42,6 +42,7 @@ class HelpTutorial extends Component {
         this.setState({
             modal: !this.state.modal
         });
+        window.gtag('event', 'HelpTutorial', { 'event_category': 'menu', 'event_label': this.state.execute_name });
         // Do execute
 //        console.log('In ActionExecute.onExecute startTutorial(',this.state.execute_name,')');
         var { execute } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load execute
