@@ -91,6 +91,7 @@ class FileSaveAs extends Component {
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
+                window.gtag('event', 'FileSaveAs', { 'event_label': type + ' ' + name });
                 logUsage('function=FileSaveAs,type='+type+',name='+name);
                 return res.json()
             })

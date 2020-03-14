@@ -142,6 +142,7 @@ export default withAuth(class PromptForDesign extends Component {
                 var migrated_design = migrate(design);
                 const store = createStore(reducers, migrated_design, middleware);
                 store.dispatch(startup());
+                window.gtag('event', 'PromptForDesign', { 'event_label': type + ' ' + name });
                 logUsage('function=PromptForDesign,type='+type+',name='+name);
                 this.setState({
                     store: store

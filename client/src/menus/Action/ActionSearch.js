@@ -11,6 +11,7 @@ class ActionSearch extends Component {
     }
     
     toggle() {
+        window.gtag('event', 'ActionSearch');
         this.props.search();
     }
 

@@ -56,7 +56,8 @@ class App extends Component {
     }
     
     setKey(tab) {
-//        console.log('In App.toggleTab tab=',tab);
+        console.log('In App.setKey tab=',tab);
+        if (tab === 1) window.gtag('event', 'TabDesign');
         if (this.state.activeTab !== tab) {
             this.setState({
                 activeTab: tab
