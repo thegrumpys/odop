@@ -50,15 +50,17 @@ A "cookie" is a piece of data stored on a site visitor's local storage to help i
 For instance, by using a cookie to identify you, you would not have to log in a password more than once, thereby saving time and effort. 
 Cookies can also enable a site to track and target the interests of its users to enhance the experience on the site. 
 
-Outside of the previously mentioned identity, authentication and authorization features (username and password) provided by Okta, 
-this website does not use cookies. 
-In addition to Okta, some of our other business partners (for example: Heroku, GitHub or JawsDB) may use cookies related to our site. 
-However, we have no access to or control over these cookies.   
+The odop.herokuapp.com website does not use cookies. 
+However, some of our business partners (for example: Okta, Heroku, JawsDB, GitHub Pages and Google Analytics) may use cookies related to our site.
+We have no access to or control over these cookies.   
 
 **IP Address**   
 In addition to the previously mentioned features of Okta,
 we collect user IP address information associated with access to our database (a.k.a. the ODOP Design Library) 
 for the purpose of measuring usage of the system.
+Google Analytics is currently under evaluation as an alternative means to measuring usage of the system
+that does not collect IP address information.
+
    
 &nbsp;   
 **If you feel that we are not abiding by this privacy policy, please [Contact Us](../ContactUs) immediately.**

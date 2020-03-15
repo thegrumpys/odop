@@ -10,6 +10,7 @@
 * [Seek](seek)
 * [Trade](trade)
 * [Reports](reports)
+* [Printing](htt#printing)
 * [Hints, Tips and Tricks](htt)
 * [Available Design Types](DesignTypes)
 * [Spring Design](SpringDesign)

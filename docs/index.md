@@ -27,6 +27,7 @@
 * [Seek](Help/seek)
 * [Trade](Help/trade)
 * [Reports](Help/reports)
+* [Printing](Help/htt#printing)
 * [Hints, Tips and Tricks](Help/htt)
 * [Available Design Types](Help/DesignTypes)
 * [Spring Design](Help/SpringDesign)

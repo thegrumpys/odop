@@ -91,11 +91,20 @@ the scrolling necessary to accommodate screen size limitations may impact produc
 Similarly, while it is possible to use the ODOP software from a mobile device, 
 establishing initial impressions with a full size monitor, keyboard and mouse is recommended.   
 
+<a id="printing"></a>  
+
 **Printing**   
 Use the print features of the browser.
 Depending on the browser and operating system, it may be possible to
-"print" into a .PDF file.
-The Reports of the Spring design type are formatted for printing.
+"print" into a local .PDF file.
+Again, depending on the operating system, browser, web page (main "Design" page versus Report pages) 
+and selected paper size,
+it may be necessary to adjust the print scale to obtain optimum results.
+For example, with Chromium based browsers like Google Chrome and Microsoft Chromium Edge
+when US letter size paper is selected, 
+a print scale of 79% may produce the best results for the main "Design" page.
+In order to set print scale with Chromium Edge use the sequence:
+Settings and more / Print / Printer = Microsoft Print to PDF / More settings / Scale (%) = 79.   
 
 **How to pronounce ODOP**   
 The preferred pronunciation is the individual letters O-D-O-P, 
