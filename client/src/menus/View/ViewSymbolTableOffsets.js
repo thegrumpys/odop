@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { logUsage } from '../../logUsage';
 
 class ViewSymbolTableOffsets extends Component {
 
@@ -18,7 +19,7 @@ class ViewSymbolTableOffsets extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.gtag('event', 'ViewSymbolTableOffsets');
+        logUsage('event', 'ViewSymbolTableOffsets');
     }
 
     render() {

@@ -1,7 +1,9 @@
 import { displayError } from './components/ErrorModal';
 
-export function logUsage(note) {
-    var body = JSON.stringify({note: note});
+export function logUsage(tag, action, note) {
+    window.gtag(tag, action, note); // Output to Google
+
+    var body = JSON.stringify({tag: tag, action: action, note: note});
 //    console.log('body=',body);
     fetch('/api/v1/usage_log', {
             method: 'POST',

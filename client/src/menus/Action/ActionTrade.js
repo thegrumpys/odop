@@ -9,6 +9,7 @@ import { changeSymbolConstraint,
     changeResultTerminationCondition,
     search } from '../../store/actionCreators';
 import { evaluateConstraintValue } from '../../store/middleware/evaluateConstraint';
+import { logUsage } from '../../logUsage';
 
 class ActionTrade extends Component {
 
@@ -61,7 +62,7 @@ class ActionTrade extends Component {
     //===========================================================
     
     strategyToggle() {
-        window.gtag('event', 'ActionTrade');
+        logUsage('event', 'ActionTrade');
 //        console.log('In strategyToggle');
 //        console.log('state=',this.state);
         var design;

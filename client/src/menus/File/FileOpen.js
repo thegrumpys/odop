@@ -82,8 +82,7 @@ class FileOpen extends Component {
                 var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
                 this.props.load(migrated_design)
-                window.gtag('event', 'FileOpen', { 'event_label': type + ' ' + name });
-                logUsage('function=FileOpen,type='+type+',name='+name);
+                logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
             })
             .catch(error => {
                 displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');

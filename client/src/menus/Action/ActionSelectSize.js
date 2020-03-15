@@ -3,6 +3,7 @@ import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { changeSymbolValue, setSymbolFlag } from '../../store/actionCreators';
+import { logUsage } from '../../logUsage';
 
 class ActionSelectSize extends Component {
 
@@ -116,7 +117,7 @@ class ActionSelectSize extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.gtag('event', 'ActionSeek', { 'event_label': this.state.type, 'value': this.state.size });
+        logUsage('event', 'ActionSelectSize', { 'event_label': this.state.type + ' ' + this.state.size });
         // Do select size entry
         this.props.changeSymbolValue(this.state.type,this.state.size);
         this.props.setSymbolFlag(this.state.type, MIN, FIXED);

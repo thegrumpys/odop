@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Table, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../../store/actionCreators';
+import { logUsage } from '../../logUsage';
 
 class ActionSelectCatalog extends Component {
 
@@ -79,7 +80,7 @@ class ActionSelectCatalog extends Component {
             modal: !this.state.modal
         });
         // Do select catalog entry
-        window.gtag('event', 'ActionSelectCatalog', { 'event_label': this.state.name + ' ' + this.state.entries[this.state.entry][0] });
+        logUsage('event', 'ActionSelectCatalog', { 'event_label': this.state.name + ' ' + this.state.entries[this.state.entry][0] });
 //        console.log('In ActionSelectCatalog.onSelect this.state.entries=',this.state.entries);
         this.state.entries[this.state.entry][2].forEach((element) => { 
 //            console.log('In ActionSelectCatalog.onSelect element=',element);

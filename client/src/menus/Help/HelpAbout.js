@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { version } from '../../version';
+import { logUsage } from '../../logUsage';
 
 class HelpAbout extends Component {
 
@@ -17,7 +18,7 @@ class HelpAbout extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.gtag('event', 'HelpAbout');
+        logUsage('event', 'HelpAbout');
     }
 
     render() {
