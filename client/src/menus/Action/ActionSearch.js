@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { search } from '../../store/actionCreators';
+import { logUsage } from '../../logUsage';
 
 class ActionSearch extends Component {
 
@@ -11,7 +12,7 @@ class ActionSearch extends Component {
     }
     
     toggle() {
-        window.gtag('event', 'ActionSearch');
+        logUsage('event', 'ActionSearch');
         this.props.search();
     }
 

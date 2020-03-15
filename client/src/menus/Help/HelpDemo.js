@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { logUsage } from '../../logUsage';
 
 class HelpDemo extends Component {
 
@@ -42,7 +43,7 @@ class HelpDemo extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.gtag('event', 'HelpDemo', { 'event_label': this.state.execute_name });
+        logUsage('event', 'HelpDemo', { 'event_label': this.state.execute_name });
         // Do execute
 //        console.log('In ActionExecute.onExecute startTutorial(',this.state.execute_name,')');
         var { execute } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load execute

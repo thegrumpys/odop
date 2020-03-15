@@ -31,6 +31,7 @@ import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
 import { withAuth } from '@okta/okta-react';
+import { logUsage } from '../logUsage';
 
 class App extends Component {
     
@@ -39,6 +40,7 @@ class App extends Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.setKey = this.setKey.bind(this);
+        this.report = this.report.bind(this);
         var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
         var report_names = getReportNames();
         this.state = {
@@ -56,8 +58,8 @@ class App extends Component {
     }
     
     setKey(tab) {
-        console.log('In App.setKey tab=',tab);
-        if (tab === 1) window.gtag('event', 'TabDesign');
+//        console.log('In App.setKey tab=',tab);
+        logUsage('event', 'Tab', { 'event_label': tab });
         if (this.state.activeTab !== tab) {
             this.setState({
                 activeTab: tab

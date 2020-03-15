@@ -1,7 +1,6 @@
 import React from 'react';
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_ips_offsets';
-//import { displayError } from '../../components/ErrorModal';
 
 export function getReportNames() {
     // Note: report names must match cases in switch statement below
@@ -14,7 +13,6 @@ export function getReportNames() {
 
 export function report(report_name, prefs, st, labels) {
 //    console.log('In report report_name=',report_name,' prefs=',prefs,' st=',st,' labels=',labels);
-    window.gtag('event', 'TabReport', { 'event_label': report_name });
     
     var kc, ks, temp, s_f, len_lbl, 
     safe_load_u, wgt1000_u, cycle_life_u, 
@@ -67,10 +65,6 @@ export function report(report_name, prefs, st, labels) {
     if (hits) errmsg = "Warning" + errmsg;
     const startpntmsg = "YOU MAY WISH TO CHOOSE A MORE REASONABLE START POINT BEFORE CONTINUING WITH SEARCH, SEEK OR TRADE.";
     const NaNmsg = 'Any "NaN" values are "Not a Number".';
-//    
-//    if (hits && report_name === '1 (mini)') {
-//        displayError(errmsg + ' ... ' + startpntmsg + " " + NaNmsg);
-//    }
     
     len_lbl = "Wire Length";
     
