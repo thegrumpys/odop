@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-bootstrap';
 import { changeSymbolValue, fixSymbolValue, loadInitialState, search } from '../../store/actionCreators';
 export const execute = {
     steps: [
@@ -153,7 +154,7 @@ export const execute = {
             title: "Page 06 of 16",
             text: (
                 <React.Fragment>
-                   <img src="designtypes/Solid/RectangularSolidDiagram.png" alt="Rectangular Solid diagram"/>
+                   <Image fluid src="designtypes/Solid/RectangularSolidDiagram.png" alt="Rectangular Solid diagram"/>
                 </React.Fragment>
             )
         },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { changeSymbolValue, fixSymbolValue, loadInitialState, changeLabelsValue, search } from '../../../store/actionCreators';
 export const execute = {
-    "name": "demo14",
+    "name": "demo15",
     "steps": [
         {
             title: "Session Now In Progress",
@@ -11,6 +11,12 @@ export const execute = {
                     <p>
                     This demo session works through a handbook design example and confirms that the 
                     results are in reasonable agreement with results published in the handbook. 
+                    </p>
+                    
+                    <p>
+                    A detailed description of  
+                    <a href="https://thegrumpys.github.io/odop/Help/DesignTypes/t_spring" target="_blank" rel="noopener noreferrer"> torsion spring names </a>
+                    is provided in the On-line Help.  
                     </p>
                     
                     <p>
