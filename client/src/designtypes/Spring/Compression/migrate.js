@@ -91,7 +91,6 @@ export function migrate(design) {
             }
         });
         migrated_design.version = '5'; // last thing... set the migrated model version
-        break; // Do not copy this break
     case '5':
         // console.log('Convert from 5 to 6');
         design.system_controls.show_units = 1; // Add show_units to system_controls
@@ -125,12 +124,27 @@ export function migrate(design) {
         design.symbol_table.splice(45,0,design.symbol_table[36]);  //  End_Type
         design.symbol_table.splice(36,1);
         migrated_design.version = '6'; // last thing... set the migrated model version
-        displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
     case '6':
-        // Current model version
         // console.log('Convert from 6 to 7');
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.name === "Catalog_Number") { // If it is Catalog_Number
+                element.value = ""; // Reset its value to blanks
+                element.hidden = false; // Force it to be shown
+            }
+        });
+        // Create Catalog_Name and Re-order Catalog_Number
+        design.symbol_table.splice(47,0,Object.assign({},design.symbol_table[33]));  // Duplicate Catalog_Number
+        design.symbol_table[47].name = 'Catalog_Name'; // Rename it to Catalog_Name
+        design.symbol_table.splice(48,0,design.symbol_table[33]);  // Re-order Catalog_Number
+        design.symbol_table.splice(33,1); // Remove old Catalog_Number
+        migrated_design.version = '7';
+        displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
+    case '7':
+        // Current model version
+        // console.log('Convert from 7 to 8');
         // To be defined - presently do nothing
-        // migrated_design.version = '7'; // last thing... set the migrated model version
+        // migrated_design.version = '8'; // last thing... set the migrated model version
+        // displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
         break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');

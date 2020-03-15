@@ -68,11 +68,12 @@ class ActionSelectCatalog extends Component {
     }
 
     onSelectCatalogEntry(event) {
-//      console.log('In ActionSelectCatalog.onSelectCatalogEntry event.target.value=',event.target.value);
-      this.setState({
-          entry: parseFloat(event.target.value) 
-      });
-  }
+//        console.log('In ActionSelectCatalog.onSelectCatalogEntry event.target.value=',event.target.value);
+        var entry = parseFloat(event.target.value);
+        this.setState({
+            entry: entry
+        });
+    }
 
     onSelect() {
 //        console.log('In ActionSelectCatalog.onSelect this.state=',this.state);
@@ -86,6 +87,9 @@ class ActionSelectCatalog extends Component {
 //            console.log('In ActionSelectCatalog.onSelect element=',element);
             this.props.changeSymbolValue(element[0],element[1]);
         });
+        // The catalog name and number must be set after setting the affected symbols table entries
+        this.props.changeSymbolValue('Catalog_Name',this.state.name);
+        this.props.changeSymbolValue('Catalog_Number',this.state.entries[this.state.entry][0]);
     }
 
     onCancel() {
@@ -130,22 +134,14 @@ class ActionSelectCatalog extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.entries.length === 0 ? <tr><td colSpan="9">None</td></tr> : '' ||
-                                         this.state.entries.map((element, index) => (
+                                        {this.state.entries.map((element, index) => (
                                             <tr key={index}>
-                                                <td>{element[0]}</td>
+                                                <td><Form.Check type='radio' name="catalogEntrySelect" id="catalogEntrySelect" checked={index === this.state.entry} label={element[0]} onChange={this.onSelectCatalogEntry} value={index}></Form.Check></td>
                                                 <td>{element[1]}</td>
                                             </tr>
                                         ))}
                                     </tbody>
                                 </Table>
-                                <br />
-                                <Form.Label htmlFor="catalogEntrySelect">Select entry:</Form.Label>
-                                <Form.Control as="select" id="catalogEntrySelect" onChange={this.onSelectCatalogEntry} value={this.state.entry}>
-                                    {this.state.entries.length === 0 ? <option>None</option> : '' || this.state.entries.map((element, index) => (
-                                        <option key={index} value={index}>{element[0]}</option>
-                                    ))}
-                                </Form.Control>
                             </React.Fragment>
                         }
                     </Modal.Body>

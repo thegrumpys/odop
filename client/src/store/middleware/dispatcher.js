@@ -25,6 +25,7 @@ import { seek } from './seek';
 import { invokeInit } from './invokeInit';
 import { invokeEquationSet } from './invokeEquationSet';
 import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
+import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, restoreOutputSymbolConstraints } from '../actionCreators';
 
 export const dispatcher = store => next => action => {
@@ -57,6 +58,7 @@ export const dispatcher = store => next => action => {
         });
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
+        resetCatalogSelection(store, action)
         break;
     case FIX_SYMBOL_VALUE:
         design = store.getState();
@@ -131,10 +133,14 @@ export const dispatcher = store => next => action => {
         // DO NOT INVOKE invokeInit(store) BECAUSE OF RECURSION
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
+        store.dispatch(changeSymbolValue('Catalog_Name', ''))
+        store.dispatch(changeSymbolValue('Catalog_Number', ''))
         break;
     case RESTORE_INPUT_SYMBOL_VALUES:
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
+        store.dispatch(changeSymbolValue('Catalog_Name', ''))
+        store.dispatch(changeSymbolValue('Catalog_Number', ''))
         break;
 
     case SEARCH:
