@@ -7,6 +7,7 @@ import { logUsage } from '../../logUsage';
 class FileProperties extends Component {
 
     constructor(props) {
+//        console.log('In FileProperties.constructor props=', props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -21,6 +22,7 @@ class FileProperties extends Component {
     }
 
     toggle() {
+//        console.log('In FileProperties.toggle');
         // Open the modal
         // Copy the props.labels into the state.labels
         this.setState({
@@ -30,6 +32,7 @@ class FileProperties extends Component {
     }
 
     onChange(name, value) {
+//        console.log('In FileProperties.onChange name=', name, 'value=', value);
         // Save the value into the state.labels
         this.setState({
             labels: this.state.labels.map((label) => {
@@ -44,6 +47,7 @@ class FileProperties extends Component {
     }
     
     onRestoreDefaults() {
+//        console.log('In FileProperties.onRestoreDefaults');
         logUsage('event', 'FileProperties', { 'event_label': 'RestoreDefaults' });
         // Copy the default values into the state.labels
         var { initialState } = require('../../designtypes/'+this.props.type+'/initialState.js'); // Dynamically load initialState
@@ -53,6 +57,7 @@ class FileProperties extends Component {
     }
     
     onApplyandClose() {
+//        console.log('In FileProperties.onApplyandClose');
         // Close the modal
         this.setState({
             modal: !this.state.modal
@@ -63,6 +68,7 @@ class FileProperties extends Component {
     }
 
     render() {
+//        console.log('In FileProperties.render');
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

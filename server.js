@@ -202,7 +202,15 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
                 console.log('SERVER: 400 - BAD REQUEST');
             } else {
 //                console.log('SERVER: In POST /api/v1/designs/'+name,' type=', type,' value=', value);
-                value = value.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
+                value = value.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
+                             .replace(/\\n/g, "\\\\n")
+                             .replace(/\\'/g, "\\\\'")
+                             .replace(/\\"/g, '\\\\"')
+                             .replace(/\\&/g, "\\\\&")
+                             .replace(/\\r/g, "\\\\r")
+                             .replace(/\\t/g, "\\\\t")
+                             .replace(/\\b/g, "\\\\b")
+                             .replace(/\\f/g, "\\\\f");
                 var stmt = 'INSERT INTO design (user, type, name, value) VALUES (\''+user+'\',\''+type+'\',\''+name+'\',\''+value+'\')';
 //                console.log('SERVER: stmt='+stmt);
                 connection.query(stmt, function(err, rows, fields) {
@@ -255,7 +263,16 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
                 connection.end();
                 console.log('SERVER: 404 - NOT FOUND');
             } else {
-                value = value.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
+//                console.log('SERVER: In PUT /api/v1/designs/'+name,' type=', type,' value=', value);
+                value = value.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
+                             .replace(/\\n/g, "\\\\n")
+                             .replace(/\\'/g, "\\\\'")
+                             .replace(/\\"/g, '\\\\"')
+                             .replace(/\\&/g, "\\\\&")
+                             .replace(/\\r/g, "\\\\r")
+                             .replace(/\\t/g, "\\\\t")
+                             .replace(/\\b/g, "\\\\b")
+                             .replace(/\\f/g, "\\\\f");
                 var stmt = 'UPDATE design SET value = \''+value+'\' WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
 //                console.log('SERVER: stmt='+stmt);
                 connection.query(stmt, (err, rows, fields) => {
