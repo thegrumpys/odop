@@ -710,6 +710,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 0.0,
+            "tooltip": "Name of the catalog from which the catalog entry number was selected",
             "type": "calcinput",
             "hidden": false
         },
@@ -724,6 +725,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 0.0,
+            "tooltip": "Number of the catalog entry which was selected from the named catalog",
             "type": "calcinput",
             "hidden": false
         },

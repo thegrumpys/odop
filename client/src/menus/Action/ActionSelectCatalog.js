@@ -29,16 +29,32 @@ class ActionSelectCatalog extends Component {
         var { getCatalogNames, getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
         var names = getCatalogNames();
         var name;
-        if (names.length > 0)
-            name = names[0]; // Default to first name
+        var entry_string;
         const { store } = this.context;
-        // Loop to create st from symbol_table
+        // Loop to create st from symbol_table, and initialize names/name and entries/entry
         var st = [];
         this.props.symbol_table.forEach((element) => {
             st.push(Object.assign({},element));
+            if (element.name === "Catalog_Name") {
+                name = names[0]; // Default to first name
+                if (element.value !== "") {
+                    name = element.value;
+                }
+            }
+            if (element.name === "Catalog_Number") {
+                entry_string = ""; // Default to blank entry string
+                if (element.value !== "") {
+                    entry_string = element.value;
+                }
+            }
         });
         var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt);
         var entry = 0; // Default to first entry
+        entries.forEach((element, index) => {
+            if (element[0] === entry_string) {
+                entry = index;
+            }
+        });
         this.setState({
             modal: !this.state.modal,
             names: names,
@@ -117,7 +133,7 @@ class ActionSelectCatalog extends Component {
                         <Form.Label htmlFor="catalogNameSelect">Select catalog name:</Form.Label>
                         <Form.Control as="select" id="catalogNameSelect" onChange={this.onSelectCatalogName} value={this.state.name}>
                             {this.state.names.map((element, index) =>
-                                <option key={index} value={element}>{element}</option>
+                                <option key={index} value={element} selected={element === this.state.name}>{element}</option>
                             )}
                         </Form.Control>
                         <br />
