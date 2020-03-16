@@ -451,8 +451,10 @@ documentation sections on the specific spring types:
 * [Torsion Spring](../DesignTypes/t_spring)   
 
 Additional information on spring end types is available in the sources listed
-in [Spring Design References](./references).
+in [Spring Design References](./references).   
 
+
+<a id="cycleLife"></a>  
    
 **Cycle Life**   
 This section presents a discussion of cycle life considerations and
