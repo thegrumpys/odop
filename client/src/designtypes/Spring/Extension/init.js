@@ -248,10 +248,6 @@ export function init(store, p, x) {
      store.dispatch(changeSymbolInput("L_Extended_End", false));
  }
 
- console.log('o.SI_Range=',o.SI_Range);
- console.log('x[o.SI_Range]=',x[o.SI_Range]);
- console.log('si_tab[x[o.SI_Range]]=',si_tab[x[o.SI_Range]]);
- console.log('si_tab[x[o.SI_Range]][0]=',si_tab[x[o.SI_Range]][0]);
  if (si_tab[x[o.SI_Range]][0] === "User_Specified") {
      store.dispatch(changeSymbolInput("SI_Lo_Factor", true));
      store.dispatch(changeSymbolInput("SI_Hi_Factor", true));
