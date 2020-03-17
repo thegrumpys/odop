@@ -22,9 +22,29 @@ export default withAuth(class FEHome extends Component {
     }
   }
 
-  componentDidUpdate() {
-//    console.log("In FEHome.componentDidUpdate");
+  async componentDidUpdate() {
+    console.log("In FEHome.componentDidUpdate this.props.auth=", this.props.auth);
     this.checkAuthentication();
+    setInterval(() => {
+        this.props.auth._oktaAuth.session.get()
+        .then(function(session1) {
+            // logged in
+            console.log('In FEHome.componentDidUpdate before session1=',session1);
+            session1.refresh()
+            .then(function(session2) {
+                // existing session is now refreshed
+                console.log('In FEHome.componentDidUpdate after session2=',session2);
+            })
+            .catch(function(err2) {
+                // there was a problem refreshing (the user may not have an existing session)
+                console.log('In FEHome.componentDidUpdate after err2=',err2);
+            });
+        })
+        .catch(function(err1) {
+            // not logged in
+            console.log('In FEHome.componentDidUpdate before err1=',err1);
+        });
+    }, 3600000);
   }
 
   render() {
