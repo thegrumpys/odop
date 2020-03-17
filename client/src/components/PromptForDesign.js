@@ -11,6 +11,7 @@ import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 import { logUsage } from '../logUsage';
 import { withAuth } from '@okta/okta-react';
+import config from './config';
 
 export default withAuth(class PromptForDesign extends Component {
     
@@ -26,8 +27,8 @@ export default withAuth(class PromptForDesign extends Component {
             modal: true,
             designtypes: [],
             designs: [],
-            type: "Spring/Compression",
-            name: "Startup",
+            type: config.design.type,
+            name: config.design.name,
             authenticated: null,
             accessToken: null,
             store: null,
