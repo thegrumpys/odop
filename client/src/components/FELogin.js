@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import OktaSignIn from '@okta/okta-signin-widget/dist/js/okta-sign-in.min'
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
-
 import config from './config';
 
 export default class FELogin extends Component {

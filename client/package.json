@@ -23,6 +23,7 @@
   "devDependencies": {},
   "dependencies": {
     "@mars/heroku-js-runtime-env": "^3.0.2",
+    "@okta/jwt-verifier": "^1.0.0",
     "@okta/okta-auth-js": "^2.13.0",
     "@okta/okta-react": "^1.4.0",
     "@okta/okta-signin-widget": "^3.7.0",
