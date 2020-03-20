@@ -391,7 +391,7 @@ export const initialState = {
             "cmax": 1.5,
             "ioclass": 0,
             "sdlim": 0.0,
-            "tooltip": "Factor of safety to achieve the target cycle life category. See On-line Help.",
+            "tooltip": "Factor of safety to achieve the target cycle life category. See on-line Help.",
             "type": "equationset",
             "hidden": false
         },
@@ -406,7 +406,7 @@ export const initialState = {
             "cmax": 1.5,
             "ioclass": 0,
             "sdlim": 0.0,
-            "tooltip": "Factor of safety in the hooks. See On-line Help.",
+            "tooltip": "Factor of safety in the hooks. See on-line Help.",
             "type": "equationset",
             "hidden": false
         },
@@ -421,7 +421,7 @@ export const initialState = {
             "cmax": 1000000.0,
             "ioclass": 0,
             "sdlim": 1000.0,
-            "tooltip": "Rough estimate of the average number of cycles to failure. See On-line Help.",
+            "tooltip": "Rough estimate of the average number of cycles to failure. See on-line Help.",
             "type": "equationset",
             "hidden": false
         },
