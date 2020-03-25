@@ -57,6 +57,11 @@
     Copyright 1978,  
     Library of Congress Number 77-27436  TJ210.C37
 
+    Spring Design Manual AE-11
+    Published by Society of Automotive Engineers (January 1, 1990) (1990)
+    ISBN 10: 0898837774  ISBN 13: 9780898837773
+
+
  &nbsp; &nbsp; [Wikipedia](https://en.wikipedia.org)
  
  &nbsp;
