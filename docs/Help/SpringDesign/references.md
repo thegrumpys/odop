@@ -62,7 +62,8 @@
     ISBN 10: 0898837774  ISBN 13: 9780898837773
 
 
- &nbsp; &nbsp; [Wikipedia](https://en.wikipedia.org)
+ &nbsp; &nbsp; [Wikipedia Spring_(device)](https://en.wikipedia.org/wiki/Spring_(device))   
+ &nbsp; &nbsp; [Wikipedia Coil_spring](https://en.wikipedia.org/wiki/Coil_spring)
  
  &nbsp;
 
