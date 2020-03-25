@@ -1,7 +1,9 @@
 import { startExecute } from "../../../components/ExecutePanel";
 export function getExecuteNames() {
     var result = [
-        'tweakPrefs'
+        'tweakPrefs',
+        'mkHotWndStartup',
+        'mkHotWndStartup_Metric'
     ];
 //    console.log('In getExecuteNames result=',result);
     return result;
