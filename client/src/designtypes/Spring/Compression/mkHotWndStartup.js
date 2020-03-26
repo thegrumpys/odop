@@ -9,11 +9,17 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    This session creates a Startup design optimized for 
-                    large hot-wound compression springs.  
+                    Starting from initialState, this session creates a Startup design 
+                    optimized for large hot-wound compression springs.  
                     While it uses the Execute / Demo / Tutorial mechanism
                     associated with end-user training,
                     this session is not intended for end-users. 
+                    </p>
+                    
+                    <p>
+                    This session provides an alternative approach to maintaining the 
+                    desired designs across releases that impact initialState.
+                    Perhaps it will work out as a way to avoid coding migrations.
                     </p>
                     
                     <p>
