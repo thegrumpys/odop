@@ -1,7 +1,10 @@
 import { displayError } from './components/ErrorModal';
+require('dotenv').config();
 
 export function logUsage(tag, action, note) {
-    window.gtag(tag, action, note); // Output to Google
+if (process.env.NODE_ENV === "production") { // Limit G.A. tracking to production
+    window.gtag(tag, action, note); // Output to Google Analytics
+}
 
     var body = JSON.stringify({tag: tag, action: action, note: note});
 //    console.log('body=',body);
