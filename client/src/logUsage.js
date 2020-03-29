@@ -1,5 +1,4 @@
 import { displayError } from './components/ErrorModal';
-require('dotenv').config();
 
 export function logUsage(tag, action, note) {
     if (process.env.NODE_ENV === "production") { // Limit G.A. tracking to production
