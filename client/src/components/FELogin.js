@@ -85,7 +85,7 @@ export default class FELogin extends Component {
     }
 
   componentDidMount() {
-//    console.log('In FELogin.componentDidMount this.signIn=',this.signIn);
+    console.log('In FELogin.componentDidMount this.signIn=',this.signIn);
     this.signIn.renderEl(
       { el: '#sign-in-widget' },
       (res) => {
@@ -103,8 +103,8 @@ export default class FELogin extends Component {
   }
 
   componentWillUnmount() {
-//      console.log('In FELogin.componentWillUnmount this.signIn=',this.signIn);
-//      if (this.signIn != null) this.signIn.remove();
+      console.log('In FELogin.componentWillUnmount this.signIn=',this.signIn);
+      if (this.signIn != null) this.signIn.remove();
   }
 
   render() {
