@@ -76,7 +76,7 @@ class FileSaveAs extends Component {
         this.props.changeName(name);
         this.props.changeUser(this.state.uid);
         var method = 'POST'; // Create it
-        if (this.state.designs.filter(e => {return e.name === name && e.user === user}).length > 0) { // Does it already exist?
+        if (this.state.designs.filter(e => {return e.name === name && e.user === this.state.uid}).length > 0) { // Does it already exist?
             method = 'PUT'; // Update it
         }
 //        console.log('In FileSaveAs.postDesign type=', type,' name=', name,' method=', method);
