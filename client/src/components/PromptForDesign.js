@@ -40,17 +40,17 @@ export default withAuth(class PromptForDesign extends Component {
         const authenticated = await this.props.auth.isAuthenticated();
 //        console.log("In PromptForDesign.componentDidMount authenticated=",authenticated);
         if (authenticated !== this.state.authenticated) {
-            const inner_this = this;
-//            console.log("In PromptForDesign.componentDidMount before inner_this=",inner_this);
+            const outer_this = this;
+//            console.log("In PromptForDesign.componentDidMount before outer_this=",outer_this);
             this.props.auth._oktaAuth.session.get()
             .then(function(session) {
                 // logged in
                 console.log('In PromptForDesign.componentDidMount session=',session);
-                inner_this.setState({
+                outer_this.setState({
                     authenticated: authenticated, 
                     uid: session.userId,
                 });
-                inner_this.getDesignTypes();
+                outer_this.getDesignTypes();
             })
             .catch(function(err) {
                 // not logged in
