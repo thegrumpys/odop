@@ -39,6 +39,9 @@ export default withAuth(class FEHome extends Component {
         .catch(function(err) {
             // not logged in
             console.log('In FEHome.componentDidUpdate before err=',err);
+            this.setState({ 
+                authenticated: false 
+            });
         });
     }, this.state.session_refresh * 1000);
   }
