@@ -15,7 +15,7 @@ class FileSave extends Component {
         this.state = {
             modal: false,
             authenticated: null,
-            accessToken: null,
+            uid: null,
         };
     }
     
@@ -23,12 +23,21 @@ class FileSave extends Component {
 //        console.log('In FileSave.componentDidMount');
         const authenticated = await this.props.auth.isAuthenticated();
 //        console.log("In FileSave.componentDidMount authenticated=",authenticated);
-        const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In FileSave.componentDidMount accessToken=",accessToken);
         if (authenticated !== this.state.authenticated) {
-            this.setState({
-                authenticated: authenticated, 
-                accessToken: accessToken,
+            const inner_this = this;
+//            console.log("In FileSave.componentDidMount before inner_this=",inner_this);
+            this.props.auth._oktaAuth.session.get()
+            .then(function(session) {
+                // logged in
+                console.log('In FileSave.componentDidMount session=',session);
+                inner_this.setState({
+                    authenticated: authenticated, 
+                    uid: session.userId,
+                });
+            })
+            .catch(function(err) {
+                // not logged in
+                console.log('In FileSave.componentDidMount err=',err);
             });
         }
     }
@@ -41,7 +50,7 @@ class FileSave extends Component {
                 headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
-                  Authorization: 'Bearer ' + this.state.accessToken
+                  Authorization: 'Bearer ' + this.state.uid
                 },
                 body: JSON.stringify(this.props.state)
             })

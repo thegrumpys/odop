@@ -21,7 +21,7 @@ class FileDelete extends Component {
             type: this.props.type,
             name: '',
             authenticated: null,
-            accessToken: null,
+            uid: null,
         };
     }
 
@@ -29,12 +29,21 @@ class FileDelete extends Component {
 //        console.log('In FileDelete.componentDidMount');
         const authenticated = await this.props.auth.isAuthenticated();
 //        console.log("In FileDelete.componentDidMount authenticated=",authenticated);
-        const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In FileDelete.componentDidMount accessToken=",accessToken);
         if (authenticated !== this.state.authenticated) {
-            this.setState({
-                authenticated: authenticated, 
-                accessToken: accessToken,
+            const inner_this = this;
+//            console.log("In FileDelete.componentDidMount before inner_this=",inner_this);
+            this.props.auth._oktaAuth.session.get()
+            .then(function(session) {
+                // logged in
+                console.log('In FileDelete.componentDidMount session=',session);
+                inner_this.setState({
+                    authenticated: authenticated, 
+                    uid: session.userId,
+                });
+            })
+            .catch(function(err) {
+                // not logged in
+                console.log('In FileDelete.componentDidMount err=',err);
             });
         }
     }
@@ -45,7 +54,7 @@ class FileDelete extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.accessToken
+                    Authorization: 'Bearer ' + this.state.uid
                 }
             })
             .then(res => {
@@ -79,7 +88,7 @@ class FileDelete extends Component {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + this.state.accessToken
+                    Authorization: 'Bearer ' + this.state.uid
                 },
             })
             .then(res => {

@@ -23,8 +23,7 @@ class FileSaveAs extends Component {
             type: this.props.state.type,
             name: this.props.state.name,
             authenticated: null,
-            accessToken: null,
-            user: null,
+            uid: null,
         };
     }
     
@@ -32,15 +31,21 @@ class FileSaveAs extends Component {
 //        console.log('In FileSaveAs.componentDidMount');
         const authenticated = await this.props.auth.isAuthenticated();
 //        console.log("In FileSaveAs.componentDidMount authenticated=",authenticated);
-        const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In FileSaveAs.componentDidMount accessToken=",accessToken);
-        const user = await this.props.auth.getUser();
-//        console.log("In FileSaveAs.componentDidMount user=",user);
         if (authenticated !== this.state.authenticated) {
-            this.setState({
-                authenticated: authenticated, 
-                accessToken: accessToken,
-                user: user,
+            const inner_this = this;
+//            console.log("In FileSaveAs.componentDidMount before inner_this=",inner_this);
+            this.props.auth._oktaAuth.session.get()
+            .then(function(session) {
+                // logged in
+                console.log('In FileSaveAs.componentDidMount session=',session);
+                inner_this.setState({
+                    authenticated: authenticated, 
+                    uid: session.userId,
+                });
+            })
+            .catch(function(err) {
+                // not logged in
+                console.log('In FileSaveAs.componentDidMount err=',err);
             });
         }
     }
@@ -51,7 +56,7 @@ class FileSaveAs extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.accessToken
+                  Authorization: 'Bearer ' + this.state.uid
                 }
             })
             .then(res => {
@@ -69,8 +74,7 @@ class FileSaveAs extends Component {
     
     postDesign(type,name) {
         this.props.changeName(name);
-        var user = this.state.user.sub;
-        this.props.changeUser(user);
+        this.props.changeUser(this.state.uid);
         var method = 'POST'; // Create it
         if (this.state.designs.filter(e => {return e.name === name && e.user === user}).length > 0) { // Does it already exist?
             method = 'PUT'; // Update it
@@ -82,7 +86,7 @@ class FileSaveAs extends Component {
                 headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
-                  Authorization: 'Bearer ' + this.state.accessToken
+                  Authorization: 'Bearer ' + this.state.uid
                 },
                 body: JSON.stringify(this.props.state)
             })

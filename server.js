@@ -31,20 +31,9 @@ function authenticationRequired(req, res, next) {
     return res.status(401).end();
   }
 
-  const accessToken = match[1];
-  const expectedAudience = 'api://default';
-
-  return oktaJwtVerifier.verifyAccessToken(accessToken, expectedAudience)
-    .then((jwt) => {
-//      console.log('SERVER: In authenticationRequired jwt=',jwt);
-      req.jwt = jwt;
-      next();
-    })
-    .catch((err) => {
-//      console.log('SERVER: In authenticationRequired err=',err);
-      res.status(401).send(err.message);
-      console.log('SERVER: 401 - UNAUTHORIZED');
-    });
+  req.uid = match[1];
+  console.log('SERVER: In authenticationRequired req.uid=',req.uid);
+  next();
 }
 
 const app = express();
@@ -84,7 +73,7 @@ function startConnection() {
 
 app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
     var value;
-    var user = req.jwt.claims.uid;
+    var user = req.uid;
     console.log('SERVER: In GET /api/v1/designtypes user=',user);
     var connection = startConnection();
     var stmt = 'SELECT DISTINCT type FROM design WHERE (user = \''+user+'\' OR user IS NULL) ORDER BY type';
@@ -108,7 +97,7 @@ app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
 
 app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) => {
     var value;
-    var user = req.jwt.claims.uid;
+    var user = req.uid;
     var type = req.params['type'];
     console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs user=',user);
     var connection = startConnection();
@@ -134,7 +123,7 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) 
 app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var type;
     var value;
-    var user = req.jwt.claims.uid;
+    var user = req.uid;
     var type = req.params['type'];
     var name = req.params['name'];
     console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
@@ -173,7 +162,7 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
 
 app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var value;
-    var user = req.jwt.claims.uid;
+    var user = req.uid;
     var type = req.params['type'];
     var name = req.params['name'];
     console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
@@ -235,7 +224,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
 
 app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var value;
-    var user = req.jwt.claims.uid;
+    var user = req.uid;
     var type = req.params['type'];
     var name = req.params['name'];
     console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name);
@@ -297,7 +286,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
 
 app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var value;
-    var user = req.jwt.claims.uid;
+    var user = req.uid;
     var type = req.params['type'];
     var name = req.params['name'];
     console.log('SERVER: In DELETE /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);

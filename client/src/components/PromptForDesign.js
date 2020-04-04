@@ -30,7 +30,7 @@ export default withAuth(class PromptForDesign extends Component {
             type: config.design.type,
             name: config.design.name,
             authenticated: null,
-            accessToken: null,
+            uid: null,
             store: null,
         };
     }
@@ -39,25 +39,34 @@ export default withAuth(class PromptForDesign extends Component {
 //        console.log('In PromptForDesign.componentDidMount');
         const authenticated = await this.props.auth.isAuthenticated();
 //        console.log("In PromptForDesign.componentDidMount authenticated=",authenticated);
-        const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In PromptForDesign.componentDidMount accessToken=",accessToken);
         if (authenticated !== this.state.authenticated) {
-            this.setState({
-                authenticated: authenticated, 
-                accessToken: accessToken,
+            const inner_this = this;
+//            console.log("In PromptForDesign.componentDidMount before inner_this=",inner_this);
+            this.props.auth._oktaAuth.session.get()
+            .then(function(session) {
+                // logged in
+                console.log('In PromptForDesign.componentDidMount session=',session);
+                inner_this.setState({
+                    authenticated: authenticated, 
+                    uid: session.userId,
+                });
+                inner_this.getDesignTypes();
+            })
+            .catch(function(err) {
+                // not logged in
+                console.log('In PromptForDesign.componentDidMount err=',err);
             });
         }
-        this.getDesignTypes();
     }
 
     getDesignTypes() {
-//        console.log('In PromptForDesign.getDesignTypes');
+//        console.log('In PromptForDesign.getDesignTypes uid=', this.state.uid);
 
         // Get the designs and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes', {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.accessToken
+                    Authorization: 'Bearer ' + this.state.uid
                 }
             })
             .then(res => {
@@ -84,13 +93,13 @@ export default withAuth(class PromptForDesign extends Component {
     }
     
     getDesignNames(type) {
-//        console.log('In PromptForDesign.getDesignNames type=', type);
+//        console.log('In PromptForDesign.getDesignNames type=', type, ' uid=', this.state.uid);
 
         // Get the designs and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.accessToken
+                    Authorization: 'Bearer ' + this.state.uid
                 }
             })
             .then(res => {
@@ -116,7 +125,7 @@ export default withAuth(class PromptForDesign extends Component {
     }
     
     getDesign(type,name) {
-//        console.log('In PromptForDesign.getDesign type=', type, ' name=', name);
+//        console.log('In PromptForDesign.getDesign type=', type, ' name=', name, ' uid=', this.state.uid);
         
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -127,7 +136,7 @@ export default withAuth(class PromptForDesign extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.accessToken
+                    Authorization: 'Bearer ' + this.state.uid
                 }
             })
             .then(res => {

@@ -22,7 +22,7 @@ class FileOpen extends Component {
             type: this.props.type,
             name: this.props.name,
             authenticated: null,
-            accessToken: null,
+            uid: null,
         };
     }
 
@@ -30,12 +30,21 @@ class FileOpen extends Component {
 //        console.log('In FileOpen.componentDidMount');
         const authenticated = await this.props.auth.isAuthenticated();
 //        console.log("In FileOpen.componentDidMount authenticated=",authenticated);
-        const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In FileOpen.componentDidMount accessToken=",accessToken);
         if (authenticated !== this.state.authenticated) {
-            this.setState({
-                authenticated: authenticated, 
-                accessToken: accessToken,
+            const inner_this = this;
+//            console.log("In FileOpen.componentDidMount before inner_this=",inner_this);
+            this.props.auth._oktaAuth.session.get()
+            .then(function(session) {
+                // logged in
+                console.log('In FileOpen.componentDidMount session=',session);
+                inner_this.setState({
+                    authenticated: authenticated, 
+                    uid: session.userId,
+                });
+            })
+            .catch(function(err) {
+                // not logged in
+                console.log('In FileOpen.componentDidMount err=',err);
             });
         }
     }
@@ -46,7 +55,7 @@ class FileOpen extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.accessToken
+                    Authorization: 'Bearer ' + this.state.uid
                 }
             })
             .then(res => {
@@ -67,7 +76,7 @@ class FileOpen extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.accessToken
+                    Authorization: 'Bearer ' + this.state.uid
                 }
             })
             .then(res => {
