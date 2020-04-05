@@ -10,7 +10,7 @@ class FileSave extends Component {
 
     constructor(props) {
         super(props);
-//        console.log("In FileSave.ctor props=",props);
+//        console.log("In FileSave.constructor props=",props);
         this.onSave = this.onSave.bind(this);
         this.state = {
             modal: false,
@@ -21,24 +21,26 @@ class FileSave extends Component {
     
     async componentDidMount() {
 //        console.log('In FileSave.componentDidMount');
-        const authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileSave.componentDidMount authenticated=",authenticated);
-        if (authenticated !== this.state.authenticated) {
-            const inner_this = this;
-//            console.log("In FileSave.componentDidMount before inner_this=",inner_this);
-            this.props.auth._oktaAuth.session.get()
-            .then(function(session) {
-                // logged in
-                console.log('In FileSave.componentDidMount session=',session);
-                inner_this.setState({
-                    authenticated: authenticated, 
+        var authenticated = await this.props.auth.isAuthenticated();
+        console.log("In FileSave.componentDidMount before authenticated=",authenticated);
+        var session = await this.props.auth._oktaAuth.session.get();
+        console.log('In FileSave.componentDidMount session=',session);
+        if (session.status === "INACTIVE") {
+            console.log('In FileSave.componentDidMount INACTIVE session.status=',session.status);
+            authenticated = authenticated && false; // Combine with session status
+        }
+        console.log("In FileSave.componentDidMount after authenticated=",authenticated);
+        if (authenticated !== this.state.authenticated) { // Did authentication change?
+            this.setState({ authenticated }); // Remember our current authentication state
+            if (authenticated) { // We have become authenticated
+                this.setState({
                     uid: session.userId,
                 });
-            })
-            .catch(function(err) {
-                // not logged in
-                console.log('In FileSave.componentDidMount err=',err);
-            });
+            } else { // We have become unauthenticated
+                this.setState({
+                    uid: null,
+                });
+            }
         }
     }
 

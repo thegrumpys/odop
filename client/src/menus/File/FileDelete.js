@@ -10,7 +10,7 @@ class FileDelete extends Component {
 
     constructor(props) {
         super(props);
-//        console.log("In FileDelete.ctor props=",props);
+//        console.log("In FileDelete.constructor props=",props);
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onDelete = this.onDelete.bind(this);
@@ -27,24 +27,26 @@ class FileDelete extends Component {
 
     async componentDidMount() {
 //        console.log('In FileDelete.componentDidMount');
-        const authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileDelete.componentDidMount authenticated=",authenticated);
-        if (authenticated !== this.state.authenticated) {
-            const inner_this = this;
-//            console.log("In FileDelete.componentDidMount before inner_this=",inner_this);
-            this.props.auth._oktaAuth.session.get()
-            .then(function(session) {
-                // logged in
-                console.log('In FileDelete.componentDidMount session=',session);
-                inner_this.setState({
-                    authenticated: authenticated, 
+        var authenticated = await this.props.auth.isAuthenticated();
+        console.log("In FileDelete.componentDidMount before authenticated=",authenticated);
+        var session = await this.props.auth._oktaAuth.session.get();
+        console.log('In FileDelete.componentDidMount session=',session);
+        if (session.status === "INACTIVE") {
+            console.log('In FileDelete.componentDidMount INACTIVE session.status=',session.status);
+            authenticated = authenticated && false; // Combine with session status
+        }
+        console.log("In FileDelete.componentDidMount after authenticated=",authenticated);
+        if (authenticated !== this.state.authenticated) { // Did authentication change?
+            this.setState({ authenticated }); // Remember our current authentication state
+            if (authenticated) { // We have become authenticated
+                this.setState({
                     uid: session.userId,
                 });
-            })
-            .catch(function(err) {
-                // not logged in
-                console.log('In FileDelete.componentDidMount err=',err);
-            });
+            } else { // We have become unauthenticated
+                this.setState({
+                    uid: null,
+                });
+            }
         }
     }
 

@@ -6,7 +6,7 @@ import config from './config';
 export default class FELogin extends Component {
   constructor(props) {
     super(props);
-//    console.log("In FELogin.ctor props=",props);
+//    console.log("In FELogin.constructor props=",props);
 
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //    console.log("config=",config);

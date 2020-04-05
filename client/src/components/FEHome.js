@@ -8,12 +8,12 @@ import config from './config';
 export default withAuth(class FEHome extends Component {
   constructor(props) {
     super(props);
-    console.log("In FEHome.constructor props=",props);
-    this.state = { authenticated: false };
+//    console.log("In FEHome.constructor props=",props);
     this.checkAuthentication = this.checkAuthentication.bind(this);
     this.checkAuthentication();
     console.log("In FEHome.constructor config.session.refresh=",config.session.refresh);
-    this.state = {
+    this.state = { 
+        authenticated: false,
         session_refresh: config.session.refresh
     };
     this.interval = null;
@@ -21,30 +21,16 @@ export default withAuth(class FEHome extends Component {
   }
 
   async checkAuthentication() {
-    console.log("In FEHome.checkAuthentication this.props.auth=",this.props.auth);
-    
+//    console.log("In FEHome.checkAuthentication this.props.auth=",this.props.auth);
     var authenticated = await this.props.auth.isAuthenticated();
     console.log("In FEHome.checkAuthentication before authenticated=",authenticated);
-
-    this.props.auth._oktaAuth.session.get()
-    .then(function(session) {
-        // logged in
-        console.log('In FEHome.checkAuthentication session=',session);
-        if (session.status === "INACTIVE") {
-            console.log('In FEHome.checkAuthentication INACTIVE session.status=',session.status);
-            authenticated = authenticated && false;
-        } else {
-            console.log('In FEHome.checkAuthentication ACTIVE session.status=',session.status);
-            authenticated = authenticated && true;
-        }
-    })
-    .catch(function(err) {
-        // not logged in
-        console.log('In FEHome.checkAuthentication err=',err);
-        authenticated = authenticated && false;
-    });
+    var session = await this.props.auth._oktaAuth.session.get();
+    console.log('In FEHome.checkAuthentication session=',session);
+    if (session.status === "INACTIVE") {
+        console.log('In FEHome.checkAuthentication INACTIVE session.status=',session.status);
+        authenticated = authenticated && false; // Combine with session status
+    }
     console.log("In FEHome.checkAuthentication after authenticated=",authenticated);
-
     if (authenticated !== this.state.authenticated) { // Did authentication change?
       this.setState({ authenticated }); // Remember our current authentication state
       if (authenticated) { // We have become authenticated
@@ -68,7 +54,7 @@ export default withAuth(class FEHome extends Component {
   }
 
   async componentDidUpdate() {
-    console.log("In FEHome.componentDidUpdate this.props.auth=", this.props.auth);
+//    console.log("In FEHome.componentDidUpdate this.props.auth=", this.props.auth);
     this.checkAuthentication();
   }
 

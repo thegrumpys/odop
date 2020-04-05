@@ -17,7 +17,7 @@ export default withAuth(class PromptForDesign extends Component {
     
     constructor(props) {
         super(props);
-        console.log("In PromptForDesign.ctor props=",props);
+//        console.log("In PromptForDesign.constructor props=",props);
         this.onCancel = this.onCancel.bind(this);
         this.onLoadInitialState = this.onLoadInitialState.bind(this);
         this.onOpen = this.onOpen.bind(this);
@@ -36,26 +36,28 @@ export default withAuth(class PromptForDesign extends Component {
     }
 
     async componentDidMount() {
-        console.log('In PromptForDesign.componentDidMount');
-        const authenticated = await this.props.auth.isAuthenticated();
-        console.log("In PromptForDesign.componentDidMount authenticated=",authenticated);
-        if (authenticated !== this.state.authenticated) {
-            const outer_this = this;
-//            console.log("In PromptForDesign.componentDidMount before outer_this=",outer_this);
-            this.props.auth._oktaAuth.session.get()
-            .then(function(session) {
-                // logged in
-                console.log('In PromptForDesign.componentDidMount session=',session);
-                outer_this.setState({
-                    authenticated: authenticated, 
+//        console.log('In PromptForDesign.componentDidMount');
+        var authenticated = await this.props.auth.isAuthenticated();
+        console.log("In PromptForDesign.componentDidMount before authenticated=",authenticated);
+        var session = await this.props.auth._oktaAuth.session.get();
+        console.log('In PromptForDesign.componentDidMount session=',session);
+        if (session.status === "INACTIVE") {
+            console.log('In PromptForDesign.componentDidMount INACTIVE session.status=',session.status);
+            authenticated = authenticated && false; // Combine with session status
+        }
+        console.log("In PromptForDesign.componentDidMount after authenticated=",authenticated);
+        if (authenticated !== this.state.authenticated) { // Did authentication change?
+            this.setState({ authenticated }); // Remember our current authentication state
+            if (authenticated) { // We have become authenticated
+                this.setState({
                     uid: session.userId,
                 });
-                outer_this.getDesignTypes();
-            })
-            .catch(function(err) {
-                // not logged in
-                console.log('In PromptForDesign.componentDidMount err=',err);
-            });
+            } else { // We have become unauthenticated
+                this.setState({
+                    uid: null,
+                });
+            }
+            this.getDesignTypes();
         }
     }
 
