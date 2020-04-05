@@ -25,27 +25,28 @@ export default withAuth(class FEHome extends Component {
 //    console.log("In FEHome.checkAuthentication authenticated=",authenticated);
     if (authenticated !== this.state.authenticated) {
       this.setState({ authenticated });
+      this.interval = setInterval(() => {
+          this.props.auth._oktaAuth.session.refresh()
+          .then(function(session) {
+              // logged in
+              console.log('In FEHome.componentDidUpdate before session=',session);
+          })
+          .catch(function(err) {
+              // not logged in
+              console.log('In FEHome.componentDidUpdate before err=',err);
+              this.setState({ 
+                  authenticated: false 
+              });
+          });
+      }, this.state.session_refresh * 1000);
+    } else if (!authenticated) {
+        clearInterval(this.interval);
     }
   }
 
   async componentDidUpdate() {
     console.log("In FEHome.componentDidUpdate this.props.auth=", this.props.auth);
     this.checkAuthentication();
-    this.interval = setInterval(() => {
-        this.props.auth._oktaAuth.session.refresh()
-        .then(function(session) {
-            // logged in
-            console.log('In FEHome.componentDidUpdate before session=',session);
-        })
-        .catch(function(err) {
-            // not logged in
-            console.log('In FEHome.componentDidUpdate before err=',err);
-            this.setState({ 
-                authenticated: false 
-            });
-            clearInterval(this.interval);
-        });
-    }, this.state.session_refresh * 1000);
   }
 
   render() {
