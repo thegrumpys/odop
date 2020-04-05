@@ -85,7 +85,7 @@ export default class FELogin extends Component {
     }
 
   componentDidMount() {
-    console.log('In FELogin.componentDidMount this.signIn=',this.signIn);
+//    console.log('In FELogin.componentDidMount this.signIn=',this.signIn);
     if (this.signIn != null) this.signIn.remove();
     this.signIn.renderEl(
       { el: '#sign-in-widget' },
@@ -94,17 +94,17 @@ export default class FELogin extends Component {
          * In this flow, the success handler will not be called beacuse we redirect
          * to the Okta org for the authentication workflow.
          */
-          console.log('In FELogin.onLoginSuccess res=',res);
+//          console.log('In FELogin.onLoginSuccess res=',res);
       },
       (err) => {
-        console.log('In FELogin.onLoginError err=',err);
+//        console.log('In FELogin.onLoginError err=',err);
         throw err;
       }
     );
   }
 
   componentWillUnmount() {
-      console.log('In FELogin.componentWillUnmount this.signIn=',this.signIn);
+//      console.log('In FELogin.componentWillUnmount this.signIn=',this.signIn);
   }
 
   render() {

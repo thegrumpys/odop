@@ -23,7 +23,7 @@ function authenticationRequired(req, res, next) {
   }
 
   req.uid = match[1];
-  console.log('SERVER: In authenticationRequired req.uid=',req.uid);
+//  console.log('SERVER: In authenticationRequired req.uid=',req.uid);
   next();
 }
 

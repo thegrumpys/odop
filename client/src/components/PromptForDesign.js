@@ -38,14 +38,14 @@ export default withAuth(class PromptForDesign extends Component {
     async componentDidMount() {
 //        console.log('In PromptForDesign.componentDidMount');
         var authenticated = await this.props.auth.isAuthenticated();
-        console.log("In PromptForDesign.componentDidMount before authenticated=",authenticated);
+//        console.log("In PromptForDesign.componentDidMount before authenticated=",authenticated);
         var session = await this.props.auth._oktaAuth.session.get();
-        console.log('In PromptForDesign.componentDidMount session=',session);
+//        console.log('In PromptForDesign.componentDidMount session=',session);
         if (session.status === "INACTIVE") {
-            console.log('In PromptForDesign.componentDidMount INACTIVE session.status=',session.status);
+//            console.log('In PromptForDesign.componentDidMount INACTIVE session.status=',session.status);
             authenticated = authenticated && false; // Combine with session status
         }
-        console.log("In PromptForDesign.componentDidMount after authenticated=",authenticated);
+//        console.log("In PromptForDesign.componentDidMount after authenticated=",authenticated);
         if (authenticated !== this.state.authenticated) { // Did authentication change?
             this.setState({ authenticated }); // Remember our current authentication state
             if (authenticated) { // We have become authenticated

@@ -30,14 +30,14 @@ class FileSaveAs extends Component {
     async componentDidMount() {
 //        console.log('In FileSaveAs.componentDidMount');
         var authenticated = await this.props.auth.isAuthenticated();
-        console.log("In FileSaveAs.componentDidMount before authenticated=",authenticated);
+//        console.log("In FileSaveAs.componentDidMount before authenticated=",authenticated);
         var session = await this.props.auth._oktaAuth.session.get();
-        console.log('In FileSaveAs.componentDidMount session=',session);
+//        console.log('In FileSaveAs.componentDidMount session=',session);
         if (session.status === "INACTIVE") {
-            console.log('In FileSaveAs.componentDidMount INACTIVE session.status=',session.status);
+//            console.log('In FileSaveAs.componentDidMount INACTIVE session.status=',session.status);
             authenticated = authenticated && false; // Combine with session status
         }
-        console.log("In FileSaveAs.componentDidMount after authenticated=",authenticated);
+//        console.log("In FileSaveAs.componentDidMount after authenticated=",authenticated);
         if (authenticated !== this.state.authenticated) { // Did authentication change?
             this.setState({ authenticated }); // Remember our current authentication state
             if (authenticated) { // We have become authenticated
