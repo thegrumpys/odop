@@ -16,6 +16,7 @@ export default withAuth(class FEHome extends Component {
     this.state = {
         session_refresh: config.session.refresh
     };
+    this.interval = null;
   }
 
   async checkAuthentication() {
@@ -30,7 +31,7 @@ export default withAuth(class FEHome extends Component {
   async componentDidUpdate() {
     console.log("In FEHome.componentDidUpdate this.props.auth=", this.props.auth);
     this.checkAuthentication();
-    setInterval(() => {
+    this.interval = setInterval(() => {
         this.props.auth._oktaAuth.session.refresh()
         .then(function(session) {
             // logged in
@@ -42,6 +43,7 @@ export default withAuth(class FEHome extends Component {
             this.setState({ 
                 authenticated: false 
             });
+            clearInterval(this.interval);
         });
     }, this.state.session_refresh * 1000);
   }
