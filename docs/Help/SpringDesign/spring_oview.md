@@ -480,7 +480,7 @@ calculate cycle life and so the Cycle\_Life variable is set to zero.
 In this case, the FS\_CycleLife variable described here can be used to get
 some indication of a design's life in a specific cyclic application.
    
-The user may user the Calculation Input Life\_Category to select 
+Use the Calculation Input Life\_Category to select 
 one of eight possible combinations of "cycle life conditions" and
 surface treatments (shot peening) expected in the application of the spring
 being designed.  The selection is used to determine a value for %\_Tensile\_Endur
