@@ -17,7 +17,7 @@ export default withAuth(class PromptForDesign extends Component {
     
     constructor(props) {
         super(props);
-//        console.log("In PromptForDesign.ctor props=",props);
+        console.log("In PromptForDesign.ctor props=",props);
         this.onCancel = this.onCancel.bind(this);
         this.onLoadInitialState = this.onLoadInitialState.bind(this);
         this.onOpen = this.onOpen.bind(this);
@@ -36,9 +36,9 @@ export default withAuth(class PromptForDesign extends Component {
     }
 
     async componentDidMount() {
-//        console.log('In PromptForDesign.componentDidMount');
+        console.log('In PromptForDesign.componentDidMount');
         const authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In PromptForDesign.componentDidMount authenticated=",authenticated);
+        console.log("In PromptForDesign.componentDidMount authenticated=",authenticated);
         if (authenticated !== this.state.authenticated) {
             const outer_this = this;
 //            console.log("In PromptForDesign.componentDidMount before outer_this=",outer_this);

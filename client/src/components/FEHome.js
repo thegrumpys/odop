@@ -8,8 +8,8 @@ import config from './config';
 export default withAuth(class FEHome extends Component {
   constructor(props) {
     super(props);
-//    console.log("In FEHome.ctor props=",props);
-    this.state = { authenticated: null };
+    console.log("In FEHome.constructor props=",props);
+    this.state = { authenticated: false };
     this.checkAuthentication = this.checkAuthentication.bind(this);
     this.checkAuthentication();
     console.log("In FEHome.constructor config.session.refresh=",config.session.refresh);
@@ -17,30 +17,53 @@ export default withAuth(class FEHome extends Component {
         session_refresh: config.session.refresh
     };
     this.interval = null;
+    console.log('In FEHome.constructor 1 this.interval=',this.interval);
   }
 
   async checkAuthentication() {
-//    console.log("In FEHome.checkAuthentication this.props.auth=",this.props.auth);
-    const authenticated = await this.props.auth.isAuthenticated();
-//    console.log("In FEHome.checkAuthentication authenticated=",authenticated);
-    if (authenticated !== this.state.authenticated) {
-      this.setState({ authenticated });
-      this.interval = setInterval(() => {
-          this.props.auth._oktaAuth.session.refresh()
-          .then(function(session) {
-              // logged in
-              console.log('In FEHome.componentDidUpdate before session=',session);
-          })
-          .catch(function(err) {
-              // not logged in
-              console.log('In FEHome.componentDidUpdate before err=',err);
-              this.setState({ 
-                  authenticated: false 
+    console.log("In FEHome.checkAuthentication this.props.auth=",this.props.auth);
+    
+    var authenticated = await this.props.auth.isAuthenticated();
+    console.log("In FEHome.checkAuthentication before authenticated=",authenticated);
+
+    this.props.auth._oktaAuth.session.get()
+    .then(function(session) {
+        // logged in
+        console.log('In FEHome.checkAuthentication session=',session);
+        if (session.status === "INACTIVE") {
+            console.log('In FEHome.checkAuthentication INACTIVE session.status=',session.status);
+            authenticated = authenticated && false;
+        } else {
+            console.log('In FEHome.checkAuthentication ACTIVE session.status=',session.status);
+            authenticated = authenticated && true;
+        }
+    })
+    .catch(function(err) {
+        // not logged in
+        console.log('In FEHome.checkAuthentication err=',err);
+        authenticated = authenticated && false;
+    });
+    console.log("In FEHome.checkAuthentication after authenticated=",authenticated);
+
+    if (authenticated !== this.state.authenticated) { // Did authentication change?
+      this.setState({ authenticated }); // Remember our current authentication state
+      if (authenticated) { // We have become authenticated
+          this.interval = setInterval(() => {
+              this.props.auth._oktaAuth.session.refresh()
+              .then(function(session) {
+                  // logged in
+                  console.log('In FEHome.checkAuthentication before session=',session);
+              })
+              .catch(function(err) {
+                  // not logged in
+                  console.log('In FEHome.checkAuthentication before err=',err);
               });
-          });
-      }, this.state.session_refresh * 1000);
-    } else if (!authenticated) {
-        clearInterval(this.interval);
+          }, this.state.session_refresh * 1000);
+          console.log('In FEHome.checkAuthentication 2 this.interval=',this.interval);
+      } else { // We have become unauthenticated
+          console.log('In FEHome.checkAuthentication 3 this.interval=',this.interval);
+          clearInterval(this.interval);
+      }
     }
   }
 
