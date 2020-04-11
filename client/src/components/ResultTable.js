@@ -25,7 +25,7 @@ class ResultTable extends Component {
                     <tbody>
                         <tr>
                             <th width="33%" id="Feasibility">
-                                <OverlayTrigger placement="auto" overlay={<Tooltip>Not Feasible:<br /> OBJ greater than OBJMIN<br /><br />Marginally Feasible:<br />constraint(s) slightly violated<br /><br />Feasible:<br />no constraints violated</Tooltip>}>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: many constraints violated; MARGINALLY FEASIBLE: constraints slightly violated; FEASIBLE: no constraints violated</Tooltip>}>
                                     <span>Feasibility</span>
                                 </OverlayTrigger>
                             </th>
@@ -33,7 +33,7 @@ class ResultTable extends Component {
                         </tr>
                         <tr>
                             <th width="33%" id="TerminationCondition">
-                                <OverlayTrigger placement="auto" overlay={<Tooltip>Status feedback from solution process</Tooltip>}>
+                                <OverlayTrigger placement="top" overlay={<Tooltip>Status feedback message from solution process</Tooltip>}>
                                     <span>Termination Message:</span>
                                 </OverlayTrigger>
                             </th>
@@ -45,7 +45,7 @@ class ResultTable extends Component {
                     <tbody>
                         <tr>
                             <th width="50%" id="ObjectiveValue">
-                                <OverlayTrigger placement="auto" overlay={<Tooltip>Search works to minimize Objective Function value <br /> See Help for details</Tooltip>}>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>Search works to minimize this value. See Help for details</Tooltip>}>
                                     <span>Objective&nbsp;Value:</span>
                                 </OverlayTrigger>
                             </th>
@@ -53,7 +53,7 @@ class ResultTable extends Component {
                         </tr>
                         <tr>
                             <th width="50%" id="OBJMIN">
-                                <OverlayTrigger placement="auto" overlay={<Tooltip>Stop Search if Objective&nbsp;Value gets lower than {this.props.system_controls.objmin.toFixed(6)}</Tooltip>}>
+                                <OverlayTrigger placement="top" overlay={<Tooltip>Stop Search if Objective&nbsp;Value gets lower than this value = {this.props.system_controls.objmin.toFixed(6)}</Tooltip>}>
                                     <span>OBJMIN:</span>
                                 </OverlayTrigger>
                             </th>
