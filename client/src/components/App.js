@@ -36,7 +36,7 @@ import { logUsage } from '../logUsage';
 class App extends Component {
     
     constructor(props) {
-//        console.log("In App.ctor props=",props);
+//        console.log("In App.constructor props=",props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.setKey = this.setKey.bind(this);

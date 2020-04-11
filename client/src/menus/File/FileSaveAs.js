@@ -12,7 +12,7 @@ class FileSaveAs extends Component {
 
     constructor(props) {
         super(props);
-//        console.log("In FileSaveAs.ctor props=",props);
+//        console.log("In FileSaveAs.constructor props=",props);
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onSaveAs = this.onSaveAs.bind(this);
@@ -23,25 +23,32 @@ class FileSaveAs extends Component {
             type: this.props.state.type,
             name: this.props.state.name,
             authenticated: null,
-            accessToken: null,
-            user: null,
+            uid: null,
         };
     }
     
     async componentDidMount() {
 //        console.log('In FileSaveAs.componentDidMount');
-        const authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileSaveAs.componentDidMount authenticated=",authenticated);
-        const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In FileSaveAs.componentDidMount accessToken=",accessToken);
-        const user = await this.props.auth.getUser();
-//        console.log("In FileSaveAs.componentDidMount user=",user);
-        if (authenticated !== this.state.authenticated) {
-            this.setState({
-                authenticated: authenticated, 
-                accessToken: accessToken,
-                user: user,
-            });
+        var authenticated = await this.props.auth.isAuthenticated();
+//        console.log("In FileSaveAs.componentDidMount before authenticated=",authenticated);
+        var session = await this.props.auth._oktaAuth.session.get();
+//        console.log('In FileSaveAs.componentDidMount session=',session);
+        if (session.status === "INACTIVE") {
+//            console.log('In FileSaveAs.componentDidMount INACTIVE session.status=',session.status);
+            authenticated = authenticated && false; // Combine with session status
+        }
+//        console.log("In FileSaveAs.componentDidMount after authenticated=",authenticated);
+        if (authenticated !== this.state.authenticated) { // Did authentication change?
+            this.setState({ authenticated }); // Remember our current authentication state
+            if (authenticated) { // We have become authenticated
+                this.setState({
+                    uid: session.userId,
+                });
+            } else { // We have become unauthenticated
+                this.setState({
+                    uid: null,
+                });
+            }
         }
     }
 
@@ -51,7 +58,7 @@ class FileSaveAs extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.accessToken
+                  Authorization: 'Bearer ' + this.state.uid
                 }
             })
             .then(res => {
@@ -69,10 +76,9 @@ class FileSaveAs extends Component {
     
     postDesign(type,name) {
         this.props.changeName(name);
-        var user = this.state.user.sub;
-        this.props.changeUser(user);
+        this.props.changeUser(this.state.uid);
         var method = 'POST'; // Create it
-        if (this.state.designs.filter(e => {return e.name === name && e.user === user}).length > 0) { // Does it already exist?
+        if (this.state.designs.filter(e => {return e.name === name && e.user === this.state.uid}).length > 0) { // Does it already exist?
             method = 'PUT'; // Update it
         }
 //        console.log('In FileSaveAs.postDesign type=', type,' name=', name,' method=', method);
@@ -82,7 +88,7 @@ class FileSaveAs extends Component {
                 headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
-                  Authorization: 'Bearer ' + this.state.accessToken
+                  Authorization: 'Bearer ' + this.state.uid
                 },
                 body: JSON.stringify(this.props.state)
             })

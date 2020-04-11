@@ -10,26 +10,37 @@ class FileSave extends Component {
 
     constructor(props) {
         super(props);
-//        console.log("In FileSave.ctor props=",props);
+//        console.log("In FileSave.constructor props=",props);
         this.onSave = this.onSave.bind(this);
         this.state = {
             modal: false,
             authenticated: null,
-            accessToken: null,
+            uid: null,
         };
     }
     
     async componentDidMount() {
 //        console.log('In FileSave.componentDidMount');
-        const authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileSave.componentDidMount authenticated=",authenticated);
-        const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In FileSave.componentDidMount accessToken=",accessToken);
-        if (authenticated !== this.state.authenticated) {
-            this.setState({
-                authenticated: authenticated, 
-                accessToken: accessToken,
-            });
+        var authenticated = await this.props.auth.isAuthenticated();
+//        console.log("In FileSave.componentDidMount before authenticated=",authenticated);
+        var session = await this.props.auth._oktaAuth.session.get();
+//        console.log('In FileSave.componentDidMount session=',session);
+        if (session.status === "INACTIVE") {
+//            console.log('In FileSave.componentDidMount INACTIVE session.status=',session.status);
+            authenticated = authenticated && false; // Combine with session status
+        }
+//        console.log("In FileSave.componentDidMount after authenticated=",authenticated);
+        if (authenticated !== this.state.authenticated) { // Did authentication change?
+            this.setState({ authenticated }); // Remember our current authentication state
+            if (authenticated) { // We have become authenticated
+                this.setState({
+                    uid: session.userId,
+                });
+            } else { // We have become unauthenticated
+                this.setState({
+                    uid: null,
+                });
+            }
         }
     }
 
@@ -41,7 +52,7 @@ class FileSave extends Component {
                 headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
-                  Authorization: 'Bearer ' + this.state.accessToken
+                  Authorization: 'Bearer ' + this.state.uid
                 },
                 body: JSON.stringify(this.props.state)
             })

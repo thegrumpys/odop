@@ -10,7 +10,7 @@ class FileDelete extends Component {
 
     constructor(props) {
         super(props);
-//        console.log("In FileDelete.ctor props=",props);
+//        console.log("In FileDelete.constructor props=",props);
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onDelete = this.onDelete.bind(this);
@@ -21,21 +21,32 @@ class FileDelete extends Component {
             type: this.props.type,
             name: '',
             authenticated: null,
-            accessToken: null,
+            uid: null,
         };
     }
 
     async componentDidMount() {
 //        console.log('In FileDelete.componentDidMount');
-        const authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileDelete.componentDidMount authenticated=",authenticated);
-        const accessToken = await this.props.auth.getAccessToken();
-//        console.log("In FileDelete.componentDidMount accessToken=",accessToken);
-        if (authenticated !== this.state.authenticated) {
-            this.setState({
-                authenticated: authenticated, 
-                accessToken: accessToken,
-            });
+        var authenticated = await this.props.auth.isAuthenticated();
+//        console.log("In FileDelete.componentDidMount before authenticated=",authenticated);
+        var session = await this.props.auth._oktaAuth.session.get();
+//        console.log('In FileDelete.componentDidMount session=',session);
+        if (session.status === "INACTIVE") {
+//            console.log('In FileDelete.componentDidMount INACTIVE session.status=',session.status);
+            authenticated = authenticated && false; // Combine with session status
+        }
+//        console.log("In FileDelete.componentDidMount after authenticated=",authenticated);
+        if (authenticated !== this.state.authenticated) { // Did authentication change?
+            this.setState({ authenticated }); // Remember our current authentication state
+            if (authenticated) { // We have become authenticated
+                this.setState({
+                    uid: session.userId,
+                });
+            } else { // We have become unauthenticated
+                this.setState({
+                    uid: null,
+                });
+            }
         }
     }
 
@@ -45,7 +56,7 @@ class FileDelete extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.accessToken
+                    Authorization: 'Bearer ' + this.state.uid
                 }
             })
             .then(res => {
@@ -79,7 +90,7 @@ class FileDelete extends Component {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + this.state.accessToken
+                    Authorization: 'Bearer ' + this.state.uid
                 },
             })
             .then(res => {
