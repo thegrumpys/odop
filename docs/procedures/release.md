@@ -18,7 +18,7 @@ Then using mysqldump dump the affected design file into a load.sql file.
 Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). 
 Commit these changes.
 1. Bring up Google Chrome and enable View Console / Debugger. 
-1. Test various input and menu functions and verify no unexpected console.log output.
+1. Test various input and menu functions and verify no unexpected console.log output. Use regular expression search: "^\s*console.log" to find non-commented out console.log lines.
 1. Shutdown server and client under your development environment. 
 In server, run "npm test" and verify test cases executed successfully. 
 Then in client, run "npm test" and verify test cases executed successfully.
