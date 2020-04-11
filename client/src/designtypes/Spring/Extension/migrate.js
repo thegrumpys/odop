@@ -55,26 +55,28 @@ export function migrate(design) {
         // Create Catalog_Name and Re-order Catalog_Number
         design.symbol_table.splice(62,0,Object.assign({},design.symbol_table[39]));  // Duplicate Catalog_Number
         design.symbol_table[62].name = 'Catalog_Name'; // Rename it to Catalog_Name
-        design.symbol_table[62].tooltip = "Name of the catalog from which the catalog entry number was selected";
+        design.symbol_table[62].tooltip = "Name of the catalog from which the catalog entry was selected";
         design.symbol_table.splice(63,0,design.symbol_table[39]);  // Re-order Catalog_Number
-        design.symbol_table[63].tooltip = "Number of the catalog entry which was selected from the named catalog";
+        design.symbol_table[63].tooltip = "Catalog entry which was selected from the named catalog";
         design.symbol_table.splice(39,1); // Remove old Catalog_Number
+        design.symbol_table[25].tooltip = "Factor of safety to achieve the target cycle life category. See on-line Help.";
+        design.symbol_table[26].tooltip = "Factor of safety in the hooks. See on-line Help.";
+        design.symbol_table[27].tooltip = "Rough estimate of the average number of cycles to failure. See on-line Help.";
         migrated_design.version = '3';
-        displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
     case '3':
         // Current model version
         // console.log('Convert from 3 to 4');
         // To be defined - presently do nothing
         // migrated_design.version = '4'; // last thing... set the migrated model version
-        // displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
         break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
         migrated_design = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+        return migrated_design;
     }
+    displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
     
 //    console.log('In migrate migrated_design=',migrated_design);
-    return migrated_design;
 }

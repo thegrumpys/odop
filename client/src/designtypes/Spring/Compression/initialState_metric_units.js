@@ -387,7 +387,7 @@ export const initialState = {
             "cmax": 1.5,
             "ioclass": 0,
             "sdlim": 0.0,
-            "tooltip": "Factor of safety to achieve the target cycle life category",
+            "tooltip": "Factor of safety to achieve the target cycle life category. See  Help.",
             "type": "equationset",
             "hidden": false
         },
@@ -402,7 +402,7 @@ export const initialState = {
             "cmax": 1000000,
             "ioclass": 0,
             "sdlim": 1000.0,
-            "tooltip": "Rough estimate of the average number of cycles to failure",
+            "tooltip": "Rough estimate of the average number of cycles to failure. See  Help.",
             "type": "equationset",
             "hidden": false
         },
@@ -710,7 +710,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 0.0,
-            "tooltip": "Name of the catalog from which the catalog entry number was selected",
+            "tooltip": "Name of the catalog from which the catalog entry was selected",
             "type": "calcinput",
             "hidden": false
         },
@@ -725,7 +725,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 0.0,
-            "tooltip": "Number of the catalog entry which was selected from the named catalog",
+            "tooltip": "Catalog entry which was selected from the named catalog",
             "type": "calcinput",
             "hidden": false
         },
