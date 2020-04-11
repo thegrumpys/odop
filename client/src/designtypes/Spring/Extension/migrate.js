@@ -63,21 +63,20 @@ export function migrate(design) {
         design.symbol_table[26].tooltip = "Factor of safety in the hooks. See on-line Help.";
         design.symbol_table[27].tooltip = "Rough estimate of the average number of cycles to failure. See on-line Help.";
         migrated_design.version = '3';
-        displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
     case '3':
         // Current model version
         // console.log('Convert from 3 to 4');
         // To be defined - presently do nothing
         // migrated_design.version = '4'; // last thing... set the migrated model version
-        // displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
         break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
         migrated_design = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+        return migrated_design;
     }
+    displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
     
 //    console.log('In migrate migrated_design=',migrated_design);
-    return migrated_design;
 }
