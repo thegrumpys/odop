@@ -7,10 +7,13 @@ A. DEVELOPMENT ENVIRONMENT
 1. Assume development database has been created by running create.sql.
 1. Start server and client under your development environment. If they are already started, log off of Okta and re-log into Okta.
 1. If the initial state has changed significantly or the startup files need to be purged. 
-To do this compare the current master against the previous released commit tag and check if any of the initialState files have changed.
-If so, then create load.sql files for each affected design type. 
-Do a "Load Initial State" followed by a File > Save "Startup". 
-Then using mysqldump dump the affected "Startup" entries into a load.sql file. 
+To do this compare the current master branch against the previous released commit tag branch and check if any of the client/src/designtypes/.../initialState.js files have changed.
+If the version has changed migrate the current "Startup" file followed by a File > SaveAs "Migrated\_Startup" to create a migrated version of Startup. 
+Next do a "Load Initial State" followed by a File > SaveAs "Loaded\_Initial\_Startup" to create a non-migrated version of Startup.
+Then compare the two to verify that initial state and migration operate exactly the same. If they don't repauir them until they do.
+Then File > Open "Loaded\_Initial\_Startup" and replace "Startup" by a File > Save "Startup".
+All other design file then can be migrated and saved back into themselves using File > Save.. 
+Then using mysqldump dump the affected design file into a load.sql file. 
 Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). 
 Commit these changes.
 1. Bring up Google Chrome and enable View Console / Debugger. 
