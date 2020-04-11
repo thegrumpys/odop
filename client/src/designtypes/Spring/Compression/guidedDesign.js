@@ -21,15 +21,15 @@ export const execute = {
                     This session is different than other sessions in that it 
                     provides only high-level guidance for a spring design workflow and 
                     does not actually execute any design changes. 
-                    You supply numbers and menu selections following step-by-step instructions 
+                    You supply numbers and menu selections while following step-by-step instructions 
                     and explanations provided to guide you through the design process.
                     </p>
                     
                     <p>
                     This approach is possible because the sessions are "live" and not
                     a simple playback of a previous recording.  
-                    The main page has simply been displaced downward by the text in this  
-                    light green section.
+                    The main and report pages have simply been displaced downward by the text in  
+                    this light green section.
                     All the menus and other inputs to the program remain available and active.
                     With only a bit of coaching provided by this session, 
                     you are expected to enter values and execute menu selections appropriate to the
@@ -59,12 +59,12 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    One of the points of this session is to illustrate that frequent use of the 
-                    File : Save As... feature provides the opportunity to easily go back to a 
+                    One of the points of this session is to illustrate that use of the 
+                    File : Save As... feature provides an opportunity to easily go back to a 
                     previous point in the design process. 
-                    Before saving a design, it is a good practice to update the Comment field with notes
-                    for future reference.  Use the File : Properties... menu.
-                    Establishing a naming scheme with a common prefix like "ProjectX" 
+                    Before saving a design it is a good practice to use the File : Properties... menu
+                    to add notes into the Comment field.
+                    Also, establishing a naming scheme with a common prefix like "ProjectX" 
                     is helpful in having a presentation with related designs clustered together.
                     <br /><br />
                     So, if you wish to preserve your existing design, 
@@ -75,8 +75,8 @@ export const execute = {
                     <p>
                     The next screen displays a diagram illustrating the major steps that this session 
                     guides you through.
-                    The diagram is intended only as a "big picture" conceptual starting point as it is
-                    significantly simplified as compared to the detail provided in the session.
+                    The diagram is intended only as a "big picture" conceptual starting point.
+                    The rest of the session provides considerably more detail.
                     <br />
                     </p>
                 </React.Fragment>
@@ -113,7 +113,7 @@ export const execute = {
                                 <p>
                                 If a feasible solution is not available, exit.
                                 Consider the posibility that the design is over-specified.
-                                Additional information is available in On-line Help topics.
+                                Additional information is available in on-line Help topics.
                                 </p>
                             </td>
                         </tr>
@@ -157,7 +157,10 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     This is the time to express your objectives (goals, requirements) for the design at hand 
-                    in terms of constraints (Min & Max) and Fixes.
+                    in terms of minimum and maximum constraints and Fixes. 
+                    More information about constraints and Fix is available in the 
+                    <a href="https://thegrumpys.github.io/odop/Help/terminology" target="_blank" rel="noopener noreferrer"> Terminology </a> 
+                    section of the on-line Help.
                     </p>
                     
                     <p>
@@ -167,9 +170,35 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Notice that several constraints are established by default.  
-                    For example, you should see established constraints on quantities like
-                    Coils_A, Deflect_1, L_Stroke, ID_Free, FS_2, FS_Solid and %_Avail_Deflect.
+                    Notice that several constraints are established in the default Startup design.  
+                    For example, you should see established constraints on quantities like:
+                    
+                    <Table bordered size="sm">
+                    <tbody>
+                        <tr>
+                            <td> &nbsp; &nbsp; &nbsp; &nbsp; </td><td>active coils</td><td>Coils_A</td><td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; </td><td> &nbsp; </td>
+                        </tr>
+                        <tr>
+                            <td></td><td>deflection at first load point</td><td>Deflect_1</td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td>length of stroke</td><td>L_Stroke</td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td>inside diameter</td><td>ID_Free</td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td>factor of safety at second load point</td><td>FS_2</td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td>factor of safety at solid</td><td>FS_Solid</td><td></td>
+                        </tr>
+                        <tr>
+                            <td></td><td>percent available deflection</td><td>%_Avail_Deflect &nbsp;  &nbsp;</td><td></td>
+                        </tr>
+                    </tbody>
+                    </Table>
+                    
                     These constraints are helpful in guiding the search to deliver a good spring design.
                     Without similar constraints, the search can "cheat", producing a result that is
                     mathematically possible but not particularly helpful in terms of a usable spring design.
@@ -193,9 +222,10 @@ export const execute = {
                     <p>
                     It is possible to use the tutorial "Back" button to return the active design 
                     to the beginning of any tutorial step to make corrections or additional inputs.
-                    Better yet, learn to use File : Save As... during routine design activity.
-                    If you want to preserve the option to easily return to this state of the design,
-                    update the Comment field and use the File : Save As... menu.
+                    Better yet, learn to save frequently during routine design activity.
+                    If you want to preserve the option to easily return to any specific state of the design,
+                    invoke the File : Properties menu to add notes into the Comment field and then 
+                    use the File : Save As... menu to save the existing state of the design.
                     </p>
                     
                     <p>
@@ -210,7 +240,12 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Take a moment to look at the results.  
+                    Take a moment to look at the results. 
+                    In particular, look at the "Feasibility:" status in the Results section 
+                    near the top of the main "Design" tab.    
+                    </p>
+                    
+                    <p>
                     Use the "Next" button to continue.
                     </p>
                     
@@ -231,15 +266,15 @@ export const execute = {
                     
                     <p>
                     Given that the design is properly specified but just not achievable within the available
-                    space and material properties,
-                    then it is likely necessary to accept compromise and adjust the goals for the design 
+                    space and material properties 
+                    it is likely necessary to accept compromise and adjust the goals for the design 
                     as expressed in terms of Fixes and constraint levels. 
-                    This can be done manually.
-                    Also, the On-line Help provides a description of the 
-                    <a href="https://thegrumpys.github.io/odop/Help/trade" target="_blank" rel="noopener noreferrer"> Trade </a>
-                    feature and instruction on its use.
-                    Trade can be used to gain a better understanding of exactly how much your constraints 
-                    need to be adjusted in order to find the "nearest" feasible design.
+                    This can be done manually. 
+                    Also, the Trade feature can be used to gain a better understanding of exactly how much your 
+                    constraints need to be adjusted in order to find the "nearest" feasible design. 
+                    The 
+                    &nbsp;<a href="https://thegrumpys.github.io/odop/Help/trade" target="_blank" rel="noopener noreferrer">on-line Help for Trade</a>&nbsp; 
+                    provides a more detailed description and instruction on its use.
                     </p>
                     
                     <p>
@@ -304,18 +339,17 @@ export const execute = {
                     </p>
                     
                     <p>
-                    The next screen gets into selecting a standard wire size. 
-                    But first, if this design seems like a good starting point, 
-                    you should update the Comment field and ...
-                    <br />
+                    The next step gets into selecting a standard wire size. 
+                    But first this design needs to be saved in order to keep it
+                    available for re-use in a few more steps.
+                    Invoke the File : Properties menu to update the Comment field 
+                    and invoke the File : Save As... menu to  
+                    <br /><br />
                     <b>Save the current design with a name like "ProjectX_Baseline"</b>.
-                    <br /><br /> 
-                    Saving this design keeps it available for re-use in a few more steps.
                     </p>
                     
                     <p>
-                    Use the File : Save As... menu.
-                    Then, use the "Next" button to continue.
+                    When finished with the save, use the "Next" button to continue.
                     </p>
                 </React.Fragment>
             )
@@ -325,17 +359,22 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Use the Action : Select Size... menu to: 
-                    <br />
-                    <b>Select the nearest larger standard wire size.</b>
-                    <br /><br />
-                    Note that this operation leaves Wire_Dia in Fixed status.
+                    The on-line Help entry on  
+                    <a href="https://thegrumpys.github.io/odop/Help/SpringDesign/selectSizeCatalog" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
+                    provides a more detailed introduction to these features. 
                     </p>
                     
                     <p>
+                    Now, invoke the Action : Select Size... menu to: 
+                    <br /><br />
+                    <b>Select the nearest larger standard wire size.</b>
+                    <br /><br />
+                    Note that this operation leaves Wire_Dia in Fixed status.
                     Even a small change in wire diameter has likely caused constraints to be violated.
                     This situation can be resolved.
-                    <br /><br />
+                    </p>
+                    
+                    <p>
                     <b>Repeat &nbsp; Search &nbsp; and &nbsp; Seek</b>&nbsp;
                     with the new, now Fixed, standard wire diameter.
                     </p>
@@ -343,7 +382,7 @@ export const execute = {
                     <p>
                     If the result appears reasonable,
                     update the Comment and ...
-                    <br />
+                    <br /><br />
                     <b>Save the design with a name like "ProjectX_Candidate1".</b>
                     </p>
                     
@@ -366,13 +405,13 @@ export const execute = {
                     
                     <p>
                     This time, use the Action : Select Size... menu to:
-                    <br />
+                    <br /><br />
                     <b>Select the nearest smaller standard wire size.</b>
                     <br /><br />
                     As before, use Search to resolve any constraint violations that have crept in
                     with the new, now Fixed, standard wire diameter.
                     If a feasible or marginally feasible design is available, 
-                    use Seek to optimize it on the previously used (max or min) criteria.
+                    invoke Seek to optimize it on the previously used minimum or maximum criteria.
                     </p>
                     
                     <p>
@@ -380,12 +419,12 @@ export const execute = {
                     go back and have a look at what might be possible with an even larger standard wire diameter.
                     Again, use Search to resolve any constraint violations that have crept in
                     with the new standard wire diameter.
-                    Use Seek to optimize it on the previously used (max or min) criteria.
+                    Invoke Seek to optimize it on the previously used minimum or maximum criteria.
                     </p>
                     
                     <p>
                     If the result appears reasonable, update the Comment and ...
-                    <br />
+                    <br /><br />
                     <b>Save the design with a name like "ProjectX_Candidate2".</b>
                     </p>
                     
@@ -403,7 +442,7 @@ export const execute = {
                     At this point it is appropriate to do a careful comparison of the candidate designs.
                     If you are working with a wide-screen monitor,
                     it should be possible to set up a side-by-side comparison.
-                    There is an On-line Help entry that describes how this can be done for Help content. 
+                    There is an on-line Help entry that describes how this can be done for Help content. 
                     You can follow the same browser window configuration to work with two
                     ODOP design sessions at the same time.
                     For additional details see:  
@@ -433,27 +472,40 @@ export const execute = {
                     <p>
                     Our last step is to determine if there is an available catalog spring that meets 
                     the original design specifications. 
-                    ODOP:Spring comes equipped with multiple spring catalogs, including:
-                    <br /><br /> 
-                    MS24585 Spring, Helical, Compression: For Loads Below 20 Pounds (SAE-AS24585)
-                    <br /><br />
+                    ODOP:Spring comes equipped with multiple spring catalogs, including: 
+                    
+                    <Table bordered size="sm">
+                    <tbody>
+                        <tr>
+                            <td> &nbsp; </td><td>catalog</td><td>a generic catalog of commonly available springs</td>
+                        </tr>
+                        <tr>
+                            <td></td><td>catalog_ms_c_s</td><td>MS24585 Spring, Helical, Compression: For Loads Below 20 Pounds (SAE-AS24585); steel</td>
+                        </tr>
+                        <tr>
+                            <td></td><td>catalog_ms_c_ss</td><td>MS24585 Spring, Helical, Compression: For Loads Below 20 Pounds (SAE-AS24585); stainless steel</td>
+                        </tr>
+                    </tbody>
+                    </Table>
+                    
                     If necessary, 
                     use the File : Open... menu to: 
-                    <br />
-                    <b>Re-open the preferred candidate design.</b>
                     <br /><br />
+                    <b>Re-open the preferred candidate design.</b>
                     </p>
 
                     <p>
+                    Next, 
+                    <br /><br />
                     <b>Use the Action : Select Catalog... menu</b> 
-                    <br />
+                    <br /><br />
                     to review the four most similar designs in the catalog. 
                     The display of catalog entries is ranked by objective function value 
                     (OBJ is a measure of constraint violation).
                     Selecting a design from the catalog replaces the current design so that you can evaluate it.
-                    More detail about standard design catalogs is available in the 
+                    As mentioned previously, more detail about standard design catalogs is available in the 
                     <a href="https://thegrumpys.github.io/odop/Help/SpringDesign/selectSizeCatalog" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
-                     entry of On-line Help. 
+                     entry of on-line Help. 
                     </p>
                     
                     <p>
@@ -493,7 +545,7 @@ export const execute = {
                     Your feedback is welcome.
                     Use the 
                     <a href="https://thegrumpys.github.io/odop/About/ContactUs" target="_blank" rel="noopener noreferrer"> Contact Us </a>
-                    page of the On-line Help to find the appropriate contact information.
+                    page of the on-line Help to find the appropriate contact information.
                     </p>
                     <br />
                     
