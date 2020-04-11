@@ -904,7 +904,7 @@ export const initialState = {
     ],
     "name": "initialState",
     "type": "Spring/Torsion",
-    "version": "2",
+    "version": "3",
     "result": {
         "objective_value": 0,
         "termination_condition": "",
