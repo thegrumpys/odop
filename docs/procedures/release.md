@@ -10,8 +10,9 @@ A. DEVELOPMENT ENVIRONMENT
 To do this compare the current master branch against the previous released commit tag branch and check if any of the client/src/designtypes/.../initialState.js files have changed.
 If the version has changed migrate the current "Startup" file followed by a File > SaveAs "Migrated\_Startup" to create a migrated version of Startup. 
 Next do a "Load Initial State" followed by a File > SaveAs "Loaded\_Initial\_Startup" to create a non-migrated version of Startup.
-Then compare the two to verify that initial state and migration operate exactly the same. If they don't repair them until they do.
-Then File > Open "Loaded\_Initial\_Startup", replace "Startup" by a File > Save "Startup", and File > Delete "Migrated\_Startup" and "Loaded\_Initial\_Startup".
+Then using mysqldump dump both design files into a load.sql file, and 
+compare the two load.sql files to verify that initial state and migration operate exactly the same. If they don't match then repair them until they do.
+Finally File > Open "Loaded\_Initial\_Startup", replace "Startup" by a File > Save "Startup", and File > Delete "Migrated\_Startup" and "Loaded\_Initial\_Startup".
 All other design file then can be migrated and saved back into themselves using File > Save.. 
 Then using mysqldump dump the affected design file into a load.sql file. 
 Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). 
