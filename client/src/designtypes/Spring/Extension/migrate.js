@@ -79,4 +79,5 @@ export function migrate(design) {
     /* eslint-enable */
     
 //    console.log('In migrate migrated_design=',migrated_design);
+    return migrated_design;
 }
