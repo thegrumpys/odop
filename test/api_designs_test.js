@@ -146,6 +146,7 @@ describe('Designs with empty DB', () => {
     //                        console.log('TEST: err2=', err2);
                             res2.should.have.status(200);
                             res2.body.should.be.a('object');
+                            res2.body.should.have.property('user').eql('USERID0123456789');
                             res2.body.should.have.property('name').eql('test');
                             res2.body.should.have.property('type').eql('Test-Design');
                             res2.body.should.have.property('version').eql('0.0');
@@ -306,6 +307,7 @@ describe('Designs with non-empty DB', () => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
                     res.body.should.be.a('object');
+                    res.body.should.have.property('user').eql('USERID0123456789');
                     res.body.should.have.property('name').eql('test');
                     res.body.should.have.property('type').eql('Test-Design');
                     res.body.should.have.property('version').eql('0.0');
@@ -344,6 +346,7 @@ describe('Designs with non-empty DB', () => {
     //                        console.log('TEST: err2=', err2);
                             res2.should.have.status(200);
                             res2.body.should.be.a('object');
+                            res2.body.should.have.property('user').eql('USERID0123456789');
                             res2.body.should.have.property('name').eql('test');
                             res2.body.should.have.property('type').eql('Test-Design');
                             res2.body.should.have.property('version').eql('0.0');
@@ -518,6 +521,7 @@ describe('Designs with multiple DB entries', () => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
                     res.body.should.be.a('object');
+                    res.body.should.have.property('user').eql('USERID0123456789');
                     res.body.should.have.property('name').eql('test');
                     res.body.should.have.property('type').eql('Test-Design');
                     res.body.should.have.property('version').eql('0.0');
@@ -528,6 +532,7 @@ describe('Designs with multiple DB entries', () => {
     //                        console.log('TEST: err2=', err2);
                             res2.should.have.status(200);
                             res2.body.should.be.a('object');
+                            res2.body.should.have.property('user').eql('USERID0123456789');
                             res2.body.should.have.property('name').eql('test');
                             res2.body.should.have.property('type').eql('Test-Design2');
                             res2.body.should.have.property('version').eql('0.2');
@@ -538,6 +543,7 @@ describe('Designs with multiple DB entries', () => {
             //                        console.log('TEST: err3=', err3);
                                     res3.should.have.status(200);
                                     res3.body.should.be.a('object');
+                                    res3.body.should.have.property('user').eql('USERID0123456789');
                                     res3.body.should.have.property('name').eql('test2');
                                     res3.body.should.have.property('type').eql('Test-Design');
                                     res3.body.should.have.property('version').eql('2.0');
