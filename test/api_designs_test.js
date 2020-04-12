@@ -195,19 +195,20 @@ describe('Designs with empty DB', () => {
         });
     });
     
-    describe('DELETE /api/v1/designtypes/Test-Design/designs/Startup with non-empty DB', () => {
-        it('it should fail DELETE with 400 BAD REQUEST, because name is startup', (done) => {
-            var name = 'Startup';
-            chai.request(server)
-                .delete('/api/v1/designtypes/Test-Design/designs/'+name)
-                .set('Authorization', 'Bearer USERID0123456789')
-                .end((err, res) => {
-//                    console.log('TEST: err=', err);
-                    res.should.have.status(400);
-                    done(err);
-                });
-        });
-    });
+// NO LONGER NEEDED BECAUSE STARTUP FILE'S USER IS NULL MAKING IT READ_ONLY
+//    describe('DELETE /api/v1/designtypes/Test-Design/designs/Startup with non-empty DB', () => {
+//        it('it should fail DELETE with 400 BAD REQUEST, because name is Startup', (done) => {
+//            var name = 'Startup';
+//            chai.request(server)
+//                .delete('/api/v1/designtypes/Test-Design/designs/'+name)
+//                .set('Authorization', 'Bearer USERID0123456789')
+//                .end((err, res) => {
+////                    console.log('TEST: err=', err);
+//                    res.should.have.status(400);
+//                    done(err);
+//                });
+//        });
+//    });
     
     describe('POST /api/v1/usage_log/ip_address/66.68.47.92 with empty DB', () => {
         it('it should POST with 200 OK with note=test', (done) => {
@@ -290,7 +291,7 @@ describe('Designs with non-empty DB', () => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
                     res.body.length.should.be.eql(1);
-                    res.body[0].should.be.eql('test');
+                    res.body[0].should.be.eql({user: 'USERID0123456789', name: 'test'});
                     done(err);
                 });
         });
@@ -365,20 +366,21 @@ describe('Designs with non-empty DB', () => {
                 });
         });
     });
-    
-    describe('DELETE /api/v1/designtypes/Test-Design/designs/Startup with non-empty DB', () => {
-        it('it should fail DELETE with 400 BAD REQUEST, because name is startup', (done) => {
-            var name = 'Startup';
-            chai.request(server)
-                .delete('/api/v1/designtypes/Test-Design/designs/'+name)
-                .set('Authorization', 'Bearer USERID0123456789')
-                .end((err, res) => {
-//                    console.log('TEST: err=', err);
-                    res.should.have.status(400);
-                    done(err);
-                });
-        });
-    });
+
+// NO LONGER NEEDED BECAUSE STARTUP FILE'S USER IS NULL MAKING IT READ_ONLY
+//    describe('DELETE /api/v1/designtypes/Test-Design/designs/Startup with non-empty DB', () => {
+//        it('it should fail DELETE with 400 BAD REQUEST, because name is Startup', (done) => {
+//            var name = 'Startup';
+//            chai.request(server)
+//                .delete('/api/v1/designtypes/Test-Design/designs/'+name)
+//                .set('Authorization', 'Bearer USERID0123456789')
+//                .end((err, res) => {
+////                    console.log('TEST: err=', err);
+//                    res.should.have.status(400);
+//                    done(err);
+//                });
+//        });
+//    });
     
     describe('POST /api/v1/usage_log with non-empty DB', () => {
         it('it should POST with 200 OK with note=test', (done) => {
@@ -500,8 +502,8 @@ describe('Designs with multiple DB entries', () => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
                     res.body.length.should.be.eql(2);
-                    res.body[0].should.be.eql('test');
-                    res.body[1].should.be.eql('test2');
+                    res.body[0].should.be.eql({user: 'USERID0123456789',name: 'test'});
+                    res.body[1].should.be.eql({user: 'USERID0123456789',name: 'test2'});
                     done(err);
                 });
         });
@@ -588,19 +590,20 @@ describe('Designs with multiple DB entries', () => {
         });
     });
     
-    describe('DELETE /api/v1/designtypes/Test-Design/designs/Startup with multiple DB entries', () => {
-        it('it should fail DELETE with 400 BAD REQUEST, because name is startup', (done) => {
-            var name = 'Startup';
-            chai.request(server)
-                .delete('/api/v1/designtypes/Test-Design/designs/'+name)
-                .set('Authorization', 'Bearer USERID0123456789')
-                .end((err, res) => {
-//                    console.log('TEST: err=', err);
-                    res.should.have.status(400);
-                    done(err);
-                });
-        });
-    });
+// NO LONGER NEEDED BECAUSE STARTUP FILE'S USER IS NULL MAKING IT READ_ONLY
+//    describe('DELETE /api/v1/designtypes/Test-Design/designs/Startup with multiple DB entries', () => {
+//        it('it should fail DELETE with 400 BAD REQUEST, because name is Startup', (done) => {
+//            var name = 'Startup';
+//            chai.request(server)
+//                .delete('/api/v1/designtypes/Test-Design/designs/'+name)
+//                .set('Authorization', 'Bearer USERID0123456789')
+//                .end((err, res) => {
+////                    console.log('TEST: err=', err);
+//                    res.should.have.status(400);
+//                    done(err);
+//                });
+//        });
+//    });
     
     describe('POST /api/v1/usage_log with multiple DB entries', () => {
         it('it should POST with 200 OK with note=test', (done) => {
