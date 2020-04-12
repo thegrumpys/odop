@@ -74,7 +74,9 @@ export function migrate(design) {
         migrated_design = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
         return migrated_design;
     }
-    displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
+    if (previous_version !== migrated_design.version) {
+        displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
+    }
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
     
