@@ -45,7 +45,7 @@ function startConnection() {
     var connection;
     if (process.env.NODE_ENV === "test") { // Are we running on test?
 //        console.log('SERVER: In Connecting process.env.JAWSDB_TEST_URL
-        connection = mysql.createConnection(process.env.JAWSDB_TEST_URL
+        connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
     } else { // Are we running anywhere else: production, staging, or development?
 //        console.log('SERVER: In Connecting process.env.JAWSDB_URL=', process.env.JAWSDB_URL);
         connection = mysql.createConnection(process.env.JAWSDB_URL);

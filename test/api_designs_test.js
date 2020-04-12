@@ -40,8 +40,7 @@ chai.use(chaiHttp);
 describe('Designs with empty DB', () => {
     
     beforeEach((done) => { // Before each test we empty the database
-        var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL
-);
+        var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
         connection.connect();
         var stmt = 'DELETE FROM design WHERE 1'; // Empty test design table
 //        console.log('TEST: stmt='+stmt);
@@ -230,8 +229,7 @@ describe('Designs with empty DB', () => {
 describe('Designs with non-empty DB', () => {
 
     beforeEach((done) => { // Before each test we create a test design
-        var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL
-);
+        var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
         connection.connect();
         var stmt = 'DELETE FROM design WHERE 1'; // Empty test DB
 //        console.log('TEST: stmt='+stmt);
@@ -402,8 +400,7 @@ describe('Designs with non-empty DB', () => {
 describe('Designs with multiple DB entries', () => {
 
     beforeEach((done) => { // Before each test we create a test design
-        var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL
-);
+        var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
         connection.connect();
         var stmt0 = 'DELETE FROM design WHERE 1'; // Empty test DB
 //        console.log('TEST: stmt0='+stmt0);
