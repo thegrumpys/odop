@@ -521,20 +521,20 @@ it('middleware seek1 min stress; feasible start; no fixed', () => {
     
     var design = store.getState(); // after
     expect(design.symbol_table[0].name).toEqual("PRESSURE");
-    expect(design.symbol_table[0].value).toEqual(1254.3621931874964);
+    expect(design.symbol_table[0].value).toEqual(1389.1186225065449);
     expect(design.symbol_table[1].name).toEqual("RADIUS");
-    expect(design.symbol_table[1].value).toEqual(0.5025499901050051);
+    expect(design.symbol_table[1].value).toEqual(0.4877369775989805);
     expect(design.symbol_table[2].name).toEqual("THICKNESS");
-    expect(design.symbol_table[2].value).toEqual(0.05031359856496264);
+    expect(design.symbol_table[2].value).toEqual(0.040000000000000056);
     expect(design.symbol_table[3].name).toEqual("FORCE");
-    expect(design.symbol_table[3].value).toEqual(995.2481203224017);
+    expect(design.symbol_table[3].value).toEqual(1038.1511075527435);
     expect(design.symbol_table[4].name).toEqual("AREA");
-    expect(design.symbol_table[4].value).toEqual(0.7934296216257505);
+    expect(design.symbol_table[4].value).toEqual(0.7473451804133828);
     expect(design.symbol_table[5].name).toEqual("STRESS");
-    expect(design.symbol_table[5].value).toEqual(6264.506274188985);
-    expect(design.result.objective_value).toEqual(0.00004841950763854388);
+    expect(design.symbol_table[5].value).toEqual(8469.056480847505);
+    expect(design.result.objective_value).toEqual(0);
     expect(design.result.termination_condition).toEqual("SEEK COMPLETED");
-    expect(design.result.violated_constraint_count).toEqual(3);
+    expect(design.result.violated_constraint_count).toEqual(0);
 });
 
 it('middleware seek2 min stress; alt start pt, opened constraints, feasible start; no fixed', () => {
@@ -556,20 +556,20 @@ it('middleware seek2 min stress; alt start pt, opened constraints, feasible star
     
     var design = store.getState(); // after
     expect(design.symbol_table[0].name).toEqual("PRESSURE");
-    expect(design.symbol_table[0].value).toEqual(565.157822733626);
+    expect(design.symbol_table[0].value).toEqual(888);
     expect(design.symbol_table[1].name).toEqual("RADIUS");
-    expect(design.symbol_table[1].value).toEqual(0.7495610043125683);
+    expect(design.symbol_table[1].value).toEqual(0.63);
     expect(design.symbol_table[2].name).toEqual("THICKNESS");
-    expect(design.symbol_table[2].value).toEqual(0.06531967146069526);
+    expect(design.symbol_table[2].value).toEqual(0.045);
     expect(design.symbol_table[3].name).toEqual("FORCE");
-    expect(design.symbol_table[3].value).toEqual(997.5475007697938);
+    expect(design.symbol_table[3].value).toEqual(1107.2455342982923);
     expect(design.symbol_table[4].name).toEqual("AREA");
-    expect(design.symbol_table[4].value).toEqual(1.7650777546433516);
+    expect(design.symbol_table[4].value).toEqual(1.2468981242097887);
     expect(design.symbol_table[5].name).toEqual("STRESS");
-    expect(design.symbol_table[5].value).toEqual(3242.6699011968067);
-    expect(design.result.objective_value).toEqual(0.00004572617379211771);
+    expect(design.symbol_table[5].value).toEqual(6216.000000000001);
+    expect(design.result.objective_value).toEqual(0);
     expect(design.result.termination_condition).toEqual("SEEK COMPLETED");
-    expect(design.result.violated_constraint_count).toEqual(2);
+    expect(design.result.violated_constraint_count).toEqual(0);
 });
 
 it('middleware seek3 min stress; infeasible start; no fixed', () => {
@@ -585,18 +585,18 @@ it('middleware seek3 min stress; infeasible start; no fixed', () => {
     
     var design = store.getState(); // after
     expect(design.symbol_table[0].name).toEqual("PRESSURE");
-    expect(design.symbol_table[0].value).toEqual(697.2006127120937);
+    expect(design.symbol_table[0].value).toEqual(697.2108757363197);
     expect(design.symbol_table[1].name).toEqual("RADIUS");
     expect(design.symbol_table[1].value).toEqual(0.5825642374486647);
     expect(design.symbol_table[2].name).toEqual("THICKNESS");
     expect(design.symbol_table[2].value).toEqual(0.05814850143495808);
     expect(design.symbol_table[3].name).toEqual("FORCE");
-    expect(design.symbol_table[3].value).toEqual(743.3533003120947);
+    expect(design.symbol_table[3].value).toEqual(743.3642427191874);
     expect(design.symbol_table[4].name).toEqual("AREA");
     expect(design.symbol_table[4].value).toEqual(1.0661971414805103);
     expect(design.symbol_table[5].name).toEqual("STRESS");
-    expect(design.symbol_table[5].value).toEqual(3492.473006786572);
-    expect(design.result.objective_value).toEqual(0.14668027900694727);
+    expect(design.symbol_table[5].value).toEqual(3492.524417147412);
+    expect(design.result.objective_value).toEqual(0.14664192222304165);
     expect(design.result.termination_condition).toEqual("SEEK COMPLETED");
     expect(design.result.violated_constraint_count).toEqual(4);
 });
@@ -621,20 +621,20 @@ it('middleware seek4 min pressure; alt start pt, opened constraints, feasible st
     
     var design = store.getState(); // after
     expect(design.symbol_table[0].name).toEqual("PRESSURE");
-    expect(design.symbol_table[0].value).toEqual(554.0657042936255);
+    expect(design.symbol_table[0].value).toEqual(888);
     expect(design.symbol_table[1].name).toEqual("RADIUS");
-    expect(design.symbol_table[1].value).toEqual(0.7566964996102077);
+    expect(design.symbol_table[1].value).toEqual(0.63);
     expect(design.symbol_table[2].name).toEqual("THICKNESS");
     expect(design.symbol_table[2].value).toEqual(0.045);
     expect(design.symbol_table[3].name).toEqual("FORCE");
-    expect(design.symbol_table[3].value).toEqual(996.6773563197182);
+    expect(design.symbol_table[3].value).toEqual(1107.2455342982923);
     expect(design.symbol_table[4].name).toEqual("AREA");
-    expect(design.symbol_table[4].value).toEqual(1.7988432573901598);
+    expect(design.symbol_table[4].value).toEqual(1.2468981242097887);
     expect(design.symbol_table[5].name).toEqual("STRESS");
-    expect(design.symbol_table[5].value).toEqual(4658.439766589454);
-    expect(design.result.objective_value).toEqual(0.000047222529713772604);
+    expect(design.symbol_table[5].value).toEqual(6216.000000000001);
+    expect(design.result.objective_value).toEqual(0);
     expect(design.result.termination_condition).toEqual("SEEK COMPLETED");
-    expect(design.result.violated_constraint_count).toEqual(2);
+    expect(design.result.violated_constraint_count).toEqual(0);
 });
 
 it('middleware seek5 max force; alt start pt, opened constraints, feasible start; no fixed', () => {
@@ -656,20 +656,20 @@ it('middleware seek5 max force; alt start pt, opened constraints, feasible start
     
     var design = store.getState(); // after
     expect(design.symbol_table[0].name).toEqual("PRESSURE");
-    expect(design.symbol_table[0].value).toEqual(1507.1078497754713);
+    expect(design.symbol_table[0].value).toEqual(888);
     expect(design.symbol_table[1].name).toEqual("RADIUS");
-    expect(design.symbol_table[1].value).toEqual(0.757090147294469);
+    expect(design.symbol_table[1].value).toEqual(0.63);
     expect(design.symbol_table[2].name).toEqual("THICKNESS");
-    expect(design.symbol_table[2].value).toEqual(0.058360538073425804);
+    expect(design.symbol_table[2].value).toEqual(0.045);
     expect(design.symbol_table[3].name).toEqual("FORCE");
-    expect(design.symbol_table[3].value).toEqual(2713.8722061594754);
+    expect(design.symbol_table[3].value).toEqual(1107.2455342982923);
     expect(design.symbol_table[4].name).toEqual("AREA");
-    expect(design.symbol_table[4].value).toEqual(1.8007153280793988);
+    expect(design.symbol_table[4].value).toEqual(1.2468981242097887);
     expect(design.symbol_table[5].name).toEqual("STRESS");
-    expect(design.symbol_table[5].value).toEqual(9775.5824538458);
-    expect(design.result.objective_value).toEqual(0.0004427903909232145);
+    expect(design.symbol_table[5].value).toEqual(6216.000000000001);
+    expect(design.result.objective_value).toEqual(0);
     expect(design.result.termination_condition).toEqual("SEEK COMPLETED");
-    expect(design.result.violated_constraint_count).toEqual(2);
+    expect(design.result.violated_constraint_count).toEqual(0);
 });
 
 it('middleware seek6 min stress; alt start pt, opened constraints, feasible start; force fixed', () => {
@@ -700,18 +700,18 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
     
     design = store.getState(); // after
     expect(design.symbol_table[0].name).toEqual("PRESSURE");
-    expect(design.symbol_table[0].value).toEqual(620.288526225231);
+    expect(design.symbol_table[0].value).toEqual(888);
     expect(design.symbol_table[1].name).toEqual("RADIUS");
-    expect(design.symbol_table[1].value).toEqual(0.7529224268036674);
+    expect(design.symbol_table[1].value).toEqual(0.63);
     expect(design.symbol_table[2].name).toEqual("THICKNESS");
-    expect(design.symbol_table[2].value).toEqual(0.06530453483860871);
+    expect(design.symbol_table[2].value).toEqual(0.045);
     expect(design.symbol_table[3].name).toEqual("FORCE");
-    expect(design.symbol_table[3].value).toEqual(1104.699321666792);
+    expect(design.symbol_table[3].value).toEqual(1107.2455342982923);
     expect(design.symbol_table[4].name).toEqual("AREA");
-    expect(design.symbol_table[4].value).toEqual(1.7809443105282723);
+    expect(design.symbol_table[4].value).toEqual(1.2468981242097887);
     expect(design.symbol_table[5].name).toEqual("STRESS");
-    expect(design.symbol_table[5].value).toEqual(3575.778800340361);
-    expect(design.result.objective_value).toEqual(0.00001908478702508192);
+    expect(design.symbol_table[5].value).toEqual(6216.000000000001);
+    expect(design.result.objective_value).toEqual(0);
     expect(design.result.termination_condition).toEqual("SEEK COMPLETED");
-    expect(design.result.violated_constraint_count).toEqual(3);
+    expect(design.result.violated_constraint_count).toEqual(0);
 });

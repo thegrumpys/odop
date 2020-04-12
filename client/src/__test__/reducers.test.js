@@ -85,14 +85,14 @@ it('reducers change name', () => {
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.user).toEqual(null);
+    expect(design.user).toEqual(undefined);
 
     store.dispatch(changeName('startup'));
     
     var design = store.getState(); // after
     expect(design.name).toEqual("startup");
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.user).toEqual(null);
+    expect(design.user).toEqual(undefined);
 });
 
 it('reducers change user', () => {
@@ -104,12 +104,12 @@ it('reducers change user', () => {
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.user).toEqual(null);
+    expect(design.user).toEqual(undefined);
 
     store.dispatch(changeUser('00u1itcx44XGp65ln357'));
     
     var design = store.getState(); // after
-    expect(design.name).toEqual("startup");
+    expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
     expect(design.user).toEqual('00u1itcx44XGp65ln357');
 });
