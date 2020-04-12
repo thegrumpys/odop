@@ -35,8 +35,8 @@ B. DO first for STAGING and then do again for PRODUCTION ENVIRONMENTS
 update Heroku Configuration Variables with JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for staging (heroku-staging), or production (heroku). 
 NO entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost).
 Do a pull or push to get latest version on all systems.
-1. Update Heroku Configuration Variables with Okta REACT\_APP\_ISSUER and REACT\_APP\_CLIENT\_ID for staging (heroku-staging), or production (heroku). 
-Update Server's .env and Client's .env with Okta REACT\_APP\_ISSUER and REACT\_APP\_CLIENT\_ID for development (localhost).
+1. Update Heroku Configuration Variables with REACT\_APP\_ISSUER, REACT\_APP\_CLIENT\_ID, REACT\_APP\_DESIGN\_TYPE, REACT\_APP\_DESIGN\_NAME and REACT\_APP\_SESSION\_REFRESH for staging (heroku-staging), or production (heroku). 
+Update Server's .env and Client's .env with REACT\_APP\_ISSUER, REACT\_APP\_CLIENT\_ID, REACT\_APP\_DESIGN\_TYPE, REACT\_APP\_DESIGN\_NAME and REACT\_APP\_SESSION\_REFRESH for development (localhost).
 Do a pull or push to get latest version on all systems.
 1. If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) 
 to create and format the database tables using the create.sql file. 
