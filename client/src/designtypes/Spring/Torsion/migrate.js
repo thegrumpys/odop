@@ -5,7 +5,7 @@ import { initialSystemControls } from '../../../initialSystemControls';
 export function migrate(design) {
     /*
      * When doing a migration also update client's initialState and set its version to the new one.
-     * Also update server's load.sql and set its version to the new one.
+     * Also update load.sql and set its version to the new one.
      */
 //    console.log('In migrate design=',design);
 
