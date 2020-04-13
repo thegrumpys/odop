@@ -5,7 +5,7 @@ import { initialSystemControls } from '../../../initialSystemControls';
 export function migrate(design) {
     /*
      * When doing a migration also update client's initialState and set its version to the new one.
-     * Also update server's load.sql and set its version to the new one.
+     * Also update load.sql and set its version to the new one.
      */
 //    console.log('In migrate design=',design);
 
@@ -17,7 +17,7 @@ export function migrate(design) {
     switch(design.version) {
     case '1':
         // Current model version
-//        console.log('Convert from 2 to 3');
+//        console.log('Convert from 1 to 2');
         // Mark all design_parameters and state_varaibles with equationset: true, 
         design.design_parameters.forEach((design_parameter) => {
 //            console.log('design_parameter=',design_parameter);
