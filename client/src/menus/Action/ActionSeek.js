@@ -93,7 +93,7 @@ class ActionSeek extends Component {
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button outline variant="info" onClick={this.onContextHelp}>Help</Button>{' '}
+                        <Button outline="true" variant="info" onClick={this.onContextHelp}>Help</Button>{' '}
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button variant="primary" onClick={this.onSeek}>Seek</Button>
                     </Modal.Footer>
