@@ -11,12 +11,12 @@ A. **DEVELOPMENT environment**
 &nbsp;
 1. Make sure your development environment is on branch master.   
 &nbsp;   
-1. If this is a "patch" release with no migrate requirement or initialState impact,
+1. If this is a "Patch" release with no migrate requirement or initialState impact,
 skip forward to [No Migrate](release#noMigrate).   
 To confirm, 
 compare the current master branch against the previous released commit tag branch and check if any of the client/src/designtypes/.../initialState.js files have changed.   
 &nbsp;   
-1. Assume development database has been created by running create.sql.
+1. Assume the development database has been created by running create.sql.
 1. Start server and client under your development environment.   
    If they are already started, log off of Okta and re-log into Okta to ensure the session is valid and not at risk of time-out.   
 &nbsp;
@@ -30,7 +30,7 @@ compare the current master branch against the previous released commit tag branc
 1. Migrate all other design files and save them back into themselves using File : Save.   
 1. Use MySqlDump, dump the affected design file into a load.sql file.   
 1. Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list).   
-1. Commit these changes.  
+1. Commit these changes.   
 &nbsp;
 <a id="noMigrate"></a>  
 **No Migrate**   
@@ -47,8 +47,8 @@ compare the current master branch against the previous released commit tag branc
 1. Commit with message "Update version.js to Major.Minor.Patch" and push to origin. 
 1. Pull to get latest version on all systems. 
 1. Restart server then client under your development environment.
-1. Bring up on Windows under Microsoft Chromium Edge and verify Help About Software Version is Major.Minor.Patch.   Major.Minor.Patch
-   Bring up on Windows and Mac OS X under Google Chrome and verify Help About Software Version is Major.Minor.Patch.
+1. Bring up on Windows under Microsoft Chromium Edge and verify Help : About Software Version is as expected (Major.Minor.Patch).   
+   Bring up on Windows and Mac OS X under Google Chrome and verify Help : About Software Version is as expected.
 
 &nbsp;   
 
@@ -63,7 +63,8 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
 &nbsp;   
 1. Update Heroku Configuration Variables with   
    REACT\_APP\_ISSUER   
-   REACT\_APP\_CLIENT\_ID, REACT\_APP\_DESIGN\_TYPE   
+   REACT\_APP\_CLIENT\_ID    
+   REACT\_APP\_DESIGN\_TYPE   
    REACT\_APP\_DESIGN\_NAME   
    REACT\_APP\_SESSION\_REFRESH   
    for staging (heroku-staging), or production (heroku).   
@@ -75,10 +76,11 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
    REACT\_APP\_SESSION\_REFRESH   
    for development (localhost).  
 &nbsp;   
-1. Do a pull or push to get latest version on all systems.
-&nbsp;   
+1. Do a pull or push to get latest version on all systems.   
 <a id="noConfigVar"></a>  
 **No Config Var Changes**   
+&nbsp;   
+1. If this is a "Patch" release or otherwise has no database impact, skip forward to [No DB Changes](release#noDBchanges).   
 &nbsp;   
 1. If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) 
 to create and format the database tables using the create.sql file.   
@@ -94,8 +96,10 @@ to create and format the database tables using the create.sql file.
    Note: See Heroku Dashboard Resources tab for JAWS DB: Production has no color; staging is AMBER, test is TEAL, and local/development is CYAN.   
    Do a pull or push to get latest version on all systems.
 1. Update Heroku Buildpack for staging (heroku-staging), or production (heroku).   
+<a id="noDBchanges"></a>  
+**No DB Changes**   
 &nbsp;   
-1. If not logged into Heroku, login in using the command line "heroku login" which in turns brings up the Heroku Website login page in your browser.   
+1. If not logged into Heroku, login in using the command line "heroku login" which in turn brings up the Heroku website login page in your browser.   
 &nbsp;   
 1. In your git/odop directory push to Heroku using the command line:   
    git push heroku-staging master   
