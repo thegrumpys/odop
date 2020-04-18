@@ -26,7 +26,8 @@ import { invokeInit } from './invokeInit';
 import { invokeEquationSet } from './invokeEquationSet';
 import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
 import { resetCatalogSelection } from './resetCatalogSelection';
-import { changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, restoreOutputSymbolConstraints } from '../actionCreators';
+import { changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
+         restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actionCreators';
 
 export const dispatcher = store => next => action => {
     
@@ -47,18 +48,24 @@ export const dispatcher = store => next => action => {
         break;
 
     case CHANGE_SYMBOL_VALUE:
+//        console.log('In dispatcher.CHANGE_SYMBOL_VALUE name=',action.payload.name,'value=',action.payload.value,'merit=',action.payload.merit);
         design = store.getState();
         design.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
-                element.type === "calcinput" && invokeInit(store);
+                if (element.type === "equationset" && element.input) {
+                    store.dispatch(changeResultTerminationCondition(''));
+                } else if (element.type === "calcinput") {
+                    store.dispatch(changeResultTerminationCondition(''));
+                    invokeInit(store);
+                }
                 return true;
             } else {
                 return false;
             }
         });
+        resetCatalogSelection(store, action)
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
-        resetCatalogSelection(store, action)
         break;
     case FIX_SYMBOL_VALUE:
         design = store.getState();
@@ -130,17 +137,20 @@ export const dispatcher = store => next => action => {
         break;
 
     case CHANGE_INPUT_SYMBOL_VALUES:
+//        console.log('In dispatcher.CHANGE_INPUT_SYMBOL_VALUES values=',action.payload.values,'merit=',action.payload.merit);
         // DO NOT INVOKE invokeInit(store) BECAUSE OF RECURSION
+        store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
+        store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
+        store.dispatch(changeResultTerminationCondition(''));
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
-        store.dispatch(changeSymbolValue('Catalog_Name', ''))
-        store.dispatch(changeSymbolValue('Catalog_Number', ''))
         break;
     case RESTORE_INPUT_SYMBOL_VALUES:
+        store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
+        store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
+        store.dispatch(changeResultTerminationCondition(''));
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
-        store.dispatch(changeSymbolValue('Catalog_Name', ''))
-        store.dispatch(changeSymbolValue('Catalog_Number', ''))
         break;
 
     case SEARCH:

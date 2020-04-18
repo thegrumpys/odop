@@ -69,6 +69,7 @@ export function seek(store, action) {
         M_DEN = 1.0;
     }
     store.dispatch(saveInputSymbolValues());
+//    console.log('In seek SOUGHT=',SOUGHT,'SDIR=',SDIR,'temp=',temp,'M_NUM=',M_NUM,'M-DEN=',M_DEN);
     obj = search(store, -1.0, merit);
     design = store.getState(); // Re-access store to get latest element values
     M_NUM = design.symbol_table[SOUGHT - 1].value;

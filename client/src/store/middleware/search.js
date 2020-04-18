@@ -4,6 +4,7 @@ import { patsh } from './patsh';
 
 // Search
 export function search(store, objmin, merit) {
+//    console.log('Entering search store=',store,'objmin=',objmin,'merit=',merit);
     
     var design = store.getState();
     
@@ -21,6 +22,7 @@ export function search(store, objmin, merit) {
     
     // Do the pattern search
     var delarg = design.system_controls.del;
+//    console.log('In search pc=',pc,'delarg=',delarg,'design.system_controls.delmin=',design.system_controls.delmin,'objmin=',objmin,'design.system_controls.maxit=',design.system_controls.maxit,'design.system_controls.tol=',design.system_controls.tol);
     var ncode = patsh(pc, delarg, design.system_controls.delmin, objmin, design.system_controls.maxit, design.system_controls.tol, store, merit);
     
     // Expand PC back into store change actions
@@ -41,5 +43,6 @@ export function search(store, objmin, merit) {
     
     design = store.getState();
     var obj = design.result.objective_value;
+//    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
     return obj;
 }
