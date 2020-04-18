@@ -14,11 +14,11 @@ Pushing this button will load the "built-in" initialState.js as opposed to loadi
 The resulting "state" of the design may be modified and then saved (**File : Save As** menu item) as a database entry.   
 
 By convention, every design type will have a database entry named "Startup" that is derived from the corresponding initialState.js file. 
-The "Startup" entry is unique in that it is protected from deletion by the **File : Delete** menu entry. 
-Separately, multi-user support provides that "system provided" design entries (null userID) are read-only.  
+Multi-user support provides "system provided" design entries (null userID) that are read-only. 
+These files cannot be selected for deletion. 
 
 load.sql files are created via SQL dump from (potentially multiple) database entries.
-These load.sql files can be used to populate a new database or to transfer designs from the development database to the production database.
+These load.sql files can be used to populate a new database or to transfer designs between (development, test, staging and production) databases.
 
 &nbsp;
 
@@ -31,7 +31,7 @@ or installing new ODOP systems or initializing new databases.
 
 1. Make the desired changes to initialState.js
 2. Make corresponding entries in migrate.js
-3. Click the "Use initialState" button (available in development environment only) when launching the program;   
+3. Click the "Use initialState" button (available in development environment only) when launching the program (promptForDesign modal);   
 **File : Save As** on top of the "Startup" entry in the database
 4. Dump SQL to a load.sql file in order to provide for creating Startup from scratch in the case of starting with an empty DB   
  \- MySQL Workbench should be able to export the table   
@@ -49,8 +49,8 @@ the release (Heroku) version of the system would see a future version
 of Startup and respond by using initialState.   
 
 When operating in the development environment,
-the **View : Offsets** menu item is enabled.
-Start with initialState and then use **View : Offsets** as a copy / paste source for the contents of offsets.js.   
+the **View : Offsets** and **View : SymbolTableOffsets** menu items are enabled.
+Start with initialState and then use **View : xxx** as a copy / paste source for the contents of the respective offsets.js and symbol\_table_offsets.js.   
 
 Internally, the code uses the flags in initialState to differientate:
 + Independent Variables (element.type === "equationset" && element.input)   
@@ -72,19 +72,11 @@ The implication is that there should be no spaces within design file names that 
 
 In the source code, each of the Spring design types (Compression, Extension & Torsion) has:
  - initialState\_metric_units.js
- - initialState\_US-ips_units.js
  - initialState.js
- 
- The contents of one of the unit-specific files can be copied over initialState.js in order to work with those units.
- Thus, while there are three files, only two are unique.
- 
+  
  In the database, each of the Spring design types (Compression, Extension & Torsion) has:
  - Startup_Metric
- - Startup_US-ips
  - Startup
- 
- As with initialState, the contents of one of the unit-specific entries can be copied over Startup in order to work with those units.
- Thus, while there are three database entries, only two are unique.
  
  The Spring\Compression design type has additional database entries:
  - Demo
@@ -93,5 +85,7 @@ In the source code, each of the Spring design types (Compression, Extension & To
   
  Since multiple designs can be put into a single load.sql file, there is only one load.sql file for each design type.
  
- 
+ See issue 338 for details on how Exec macros can be used to create Demo and HotWound from InitialState or Startup.
+ HotWoundMetric can be created from Startup_Metric.
+  
  
