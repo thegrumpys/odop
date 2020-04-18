@@ -30,7 +30,9 @@ it('despak without merit', () => {
     var design = store.getState(); // after
     expect(obj).toEqual(0.00005);
 
+    expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.version).toEqual("3");
 
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(500);
