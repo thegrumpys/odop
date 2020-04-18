@@ -8,10 +8,10 @@ import { dispatcher } from '../store/middleware/dispatcher';
 import { despak } from '../store/middleware/despak';
 
 //=====================================================================
-// search
+// despak
 //=====================================================================
 
-it('search without merit', () => {
+it('despak without merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(reducers, state);
 
@@ -24,10 +24,11 @@ it('search without merit', () => {
     store.dispatch(changeResultObjectiveValue(0.00005));
 
     var design = store.getState(); // before
-    var obj = despak(store, design.system_controls.objmin);
+    var pc = [];
+    var obj = despak(pc, store);
 
     var design = store.getState(); // after
-    expect(obj).toEqual(0);
+    expect(obj).toEqual(0.00005);
 
     expect(design.type).toEqual("Piston-Cylinder");
 
@@ -62,6 +63,6 @@ it('search without merit', () => {
     expect(design.system_controls.show_violations).toEqual(1);
 
     expect(design.result.objective_value).toEqual(0.00005);
-    expect(design.result.termination_condition).toEqual("DELMIN - SHORT SEARCH");
+    expect(design.result.termination_condition).toEqual("");
     expect(design.result.violated_constraint_count).toEqual(0);
 });

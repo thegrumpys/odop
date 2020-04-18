@@ -27,7 +27,7 @@ it('search without merit', () => {
     var obj = search(store, design.system_controls.objmin);
 
     var design = store.getState(); // after
-    expect(obj).toEqual(0);
+    expect(obj).toEqual(0.00005);
 
     expect(design.type).toEqual("Piston-Cylinder");
 
