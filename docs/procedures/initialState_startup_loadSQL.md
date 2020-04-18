@@ -15,7 +15,7 @@ The resulting "state" of the design may be modified and then saved (**File : Sav
 
 By convention, every design type will have a database entry named "Startup" that is derived from the corresponding initialState.js file. 
 Multi-user support provides "system provided" design entries (null userID) that are read-only. 
-These files cannot be selected for deletion. 
+These designs cannot be selected for deletion. 
 
 load.sql files are created via SQL dump from (potentially multiple) database entries.
 These load.sql files can be used to populate a new database or to transfer designs between (development, test, staging and production) databases.

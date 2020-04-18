@@ -1,6 +1,9 @@
 # Release Process:
 
-For reference, regarding Major.Minor.Patch: [ODOP version numbering](../design/VersionNumbers)
+This entry describes the steps necessary to make a new ODOP "release".
+Specifically, this is the process to publish the current development version to Heroku.
+
+For background regarding "Major.Minor.Patch" see: [ODOP version numbering](../design/VersionNumbers)
 
 A. **DEVELOPMENT environment**  
 
