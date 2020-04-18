@@ -3,10 +3,10 @@ import { initialState } from '../designtypes/Piston-Cylinder/initialState';
 import * as sto from '../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../initialSystemControls';
 import { MIN, MAX, CONSTRAINED, FIXED } from '../store/actionTypes';
-import { 
+import {
     startup,
-    changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, 
-    changeResultObjectiveValue, 
+    changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
+    changeResultObjectiveValue,
     search, seek, trade } from '../store/actionCreators';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
@@ -21,7 +21,7 @@ it('middleware with startup', () => {
         reducers,
         state,
         applyMiddleware(dispatcher));
-    
+
     var design = store.getState(); // before
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].cmin).toEqual(0);
@@ -53,9 +53,9 @@ it('middleware with startup', () => {
     expect(design.symbol_table[sto.STRESS].cmax).toEqual(3000);
     expect(design.symbol_table[sto.STRESS].smin).toEqual(undefined);
     expect(design.symbol_table[sto.STRESS].smax).toEqual(undefined);
-    
+
     store.dispatch(startup());
-    
+
     var design = store.getState(); // after
 //  value=500, level=1500, sdlimit=0, status=1, stemp=1500
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
@@ -106,7 +106,7 @@ it('middleware change pressure design parameter value without startup', () => {
         reducers,
         state,
         applyMiddleware(dispatcher));
-    
+
     var design = store.getState(); // before
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(500);
@@ -118,7 +118,7 @@ it('middleware change pressure design parameter value without startup', () => {
     expect(design.symbol_table[sto.STRESS].value).toEqual(0);
 
     store.dispatch(changeSymbolValue("PRESSURE", 5000));
-    
+
     design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(5000);
@@ -136,7 +136,7 @@ it('middleware change radius design parameter value without startup', () => {
         reducers,
         state,
         applyMiddleware(dispatcher));
-    
+
     var design = store.getState(); // before
     expect(design.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.symbol_table[sto.RADIUS].value).toEqual(0.4);
@@ -148,7 +148,7 @@ it('middleware change radius design parameter value without startup', () => {
     expect(design.symbol_table[sto.STRESS].value).toEqual(0);
 
     store.dispatch(changeSymbolValue("RADIUS", 0.5));
-    
+
     design = store.getState(); // after
     expect(design.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.symbol_table[sto.RADIUS].value).toEqual(0.5);
@@ -166,7 +166,7 @@ it('middleware change thickness design parameter value without startup', () => {
         reducers,
         state,
         applyMiddleware(dispatcher));
-    
+
     var design = store.getState(); // before
     expect(design.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(design.symbol_table[sto.THICKNESS].value).toEqual(0.04);
@@ -178,7 +178,7 @@ it('middleware change thickness design parameter value without startup', () => {
     expect(design.symbol_table[sto.STRESS].value).toEqual(0);
 
     store.dispatch(changeSymbolValue("THICKNESS", 0.05));
-    
+
     design = store.getState(); // after
     expect(design.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(design.symbol_table[sto.THICKNESS].value).toEqual(0.05);
@@ -199,7 +199,7 @@ it('middleware change constraints to force all violations', () => {
         reducers,
         state,
         applyMiddleware(dispatcher));
-    
+
     var design = store.getState(); // before
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].cmin).toEqual(0);
@@ -231,7 +231,7 @@ it('middleware change constraints to force all violations', () => {
     expect(design.symbol_table[sto.STRESS].cmax).toEqual(3000);
     expect(design.symbol_table[sto.STRESS].smin).toEqual(undefined);
     expect(design.symbol_table[sto.STRESS].smax).toEqual(undefined);
-    
+
     // Set all constraints to cause violations
     store.dispatch(changeSymbolConstraint("PRESSURE", MIN,600));
     store.dispatch(changeSymbolConstraint("RADIUS", MIN, 0.5));
@@ -289,9 +289,9 @@ it('middleware search1 from initial state', () => {
         state,
         applyMiddleware(dispatcher));
     store.dispatch(startup());
-    
+
     store.dispatch(search());
-    
+
     var design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(697.2108757363197);
@@ -319,9 +319,9 @@ it('middleware search2: initial state w/ single SV constraint modified', () => {
     store.dispatch(startup());
 
     store.dispatch(changeSymbolConstraint("STRESS", MAX, 10000));
-    
+
     store.dispatch(search());
-    
+
     var design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(1389.1186225065448);
@@ -350,9 +350,9 @@ it('middleware search3: initial state w/ single DP FIXed', () => {
 
     store.dispatch(changeSymbolValue("RADIUS", 0.444));
     store.dispatch(setSymbolFlag("RADIUS", MIN, FIXED));
-    
+
     store.dispatch(search());
-    
+
     var design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(972.4279315207291);
@@ -383,9 +383,9 @@ it('middleware search4: initial state w/ single SV FIXed', () => {
     store.dispatch(setSymbolFlag("STRESS", MAX, FIXED|CONSTRAINED));
     store.dispatch(changeSymbolConstraint("STRESS", MIN, 3500));
     store.dispatch(changeSymbolConstraint("STRESS", MAX, 3500));
-    
+
     store.dispatch(search());
-    
+
     var design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(750.4968399919907);
@@ -415,9 +415,9 @@ it('middleware search5: initial state w/ 3 constraints modified', () => {
     store.dispatch(changeSymbolConstraint("FORCE", MIN, 1200));
     store.dispatch(changeSymbolConstraint("RADIUS", MAX, 0.4));
     store.dispatch(changeSymbolConstraint("STRESS", MAX, 3200));
-    
+
     store.dispatch(search());
-    
+
     var design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(962.044187410488);
@@ -447,9 +447,9 @@ it('middleware search6: initial state w/ 3 constraints modified further', () => 
     store.dispatch(changeSymbolConstraint("FORCE", MIN, 2500));
     store.dispatch(changeSymbolConstraint("RADIUS", MAX, 0.55));
     store.dispatch(changeSymbolConstraint("STRESS", MAX, 3400));
-    
+
     store.dispatch(search());
-    
+
     var design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(747.1742312566108);
@@ -482,9 +482,9 @@ it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', ()
     store.dispatch(setSymbolFlag("STRESS", MAX, FIXED|CONSTRAINED));
     store.dispatch(changeSymbolConstraint("STRESS", MIN, 3800));
     store.dispatch(changeSymbolConstraint("STRESS", MAX, 3800));
-    
+
     store.dispatch(search());
-    
+
     var design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(766.5319070212193);
@@ -516,10 +516,10 @@ it('middleware seek1 min stress; feasible start; no fixed', () => {
     store.dispatch(startup());
 
     store.dispatch(changeSymbolConstraint("STRESS", MAX, 10000));
-    
+
     store.dispatch(search());
     store.dispatch(seek("STRESS", MIN));
-    
+
     var design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(1254.3621931874964);
@@ -552,9 +552,9 @@ it('middleware seek2 min stress; alt start pt, opened constraints, feasible star
     store.dispatch(changeSymbolConstraint("RADIUS", MAX, 0.75));
     store.dispatch(changeSymbolConstraint("THICKNESS", MAX, 0.065));
     store.dispatch(changeSymbolConstraint("STRESS", MAX, 10000));
-    
+
     store.dispatch(seek("STRESS", MIN));
-    
+
     var design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(565.157822733626);
@@ -580,10 +580,10 @@ it('middleware seek3 min stress; infeasible start; no fixed', () => {
         state,
         applyMiddleware(dispatcher));
     store.dispatch(startup());
-    
+
     store.dispatch(search());
     store.dispatch(seek("STRESS", MIN));
-    
+
     var design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(697.2006127120937);
@@ -617,9 +617,9 @@ it('middleware seek4 min pressure; alt start pt, opened constraints, feasible st
     store.dispatch(changeSymbolConstraint("THICKNESS", MAX, 0.065));
     store.dispatch(changeSymbolConstraint("STRESS", MAX, 10000));
     store.dispatch(setSymbolFlag("THICKNESS", MIN, FIXED|CONSTRAINED));
-    
+
     store.dispatch(seek("PRESSURE", MIN));
-    
+
     var design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(554.0657042936255);
@@ -652,9 +652,9 @@ it('middleware seek5 max force; alt start pt, opened constraints, feasible start
     store.dispatch(changeSymbolConstraint("RADIUS", MAX, 0.75));
     store.dispatch(changeSymbolConstraint("THICKNESS", MAX, 0.065));
     store.dispatch(changeSymbolConstraint("STRESS", MAX, 10000));
-    
+
     store.dispatch(seek("FORCE", MAX));
-    
+
     var design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(1507.1078497754713);
@@ -688,17 +688,17 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
     store.dispatch(changeSymbolConstraint("RADIUS", MAX, 0.75));
     store.dispatch(changeSymbolConstraint("THICKNESS", MAX, 0.065));
     store.dispatch(changeSymbolConstraint("STRESS", MAX, 10000));
-    design = store.getState(); 
+    design = store.getState();
     store.dispatch(setSymbolFlag("FORCE", MIN, FIXED|CONSTRAINED));
     store.dispatch(setSymbolFlag("FORCE", MAX, FIXED|CONSTRAINED));
     store.dispatch(changeSymbolConstraint("FORCE", MIN, design.symbol_table[sto.FORCE].value));
     store.dispatch(changeSymbolConstraint("FORCE", MAX, design.symbol_table[sto.FORCE].value));
-    
-//    design = store.getState(); 
+
+//    design = store.getState();
 //    store.dispatch(search());
-    design = store.getState(); 
+    design = store.getState();
     store.dispatch(seek("STRESS", MIN));
-    
+
     design = store.getState(); // after
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(620.288526225231);

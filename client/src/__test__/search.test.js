@@ -14,7 +14,7 @@ import { search } from '../store/middleware/search';
 it('search without merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(reducers, state);
-    
+
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
     store.dispatch(changeSymbolValue("THICKNESS", 0.04));
@@ -24,11 +24,13 @@ it('search without merit', () => {
     store.dispatch(changeResultObjectiveValue(0.00005));
 
     var design = store.getState(); // before
-    search(store, design.system_controls.objmin);
+    var obj = search(store, design.system_controls.objmin);
 
     var design = store.getState(); // after
+    expect(obj).toEqual(0);
+
     expect(design.type).toEqual("Piston-Cylinder");
-    
+
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(500);
     expect(design.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
@@ -41,7 +43,7 @@ it('search without merit', () => {
     expect(design.symbol_table[sto.AREA].value).toEqual(456);
     expect(design.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.symbol_table[sto.STRESS].value).toEqual(789);
-    
+
     expect(design.system_controls.ioopt).toEqual(3);
     expect(design.system_controls.maxit).toEqual(100);
     expect(design.system_controls.weapon).toEqual(1);

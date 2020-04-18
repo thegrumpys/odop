@@ -14,7 +14,7 @@ import { invokeInit } from '../store/middleware/invokeInit';
 it('invokeInit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(reducers, state);
-    
+
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
     store.dispatch(changeSymbolValue("THICKNESS", 0.04));

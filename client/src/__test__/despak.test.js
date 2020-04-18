@@ -2,16 +2,16 @@ import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../designtypes/Piston-Cylinder/initialState';
 import * as sto from '../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../initialSystemControls';
-import { changeSymbolValue } from '../store/actionCreators';
+import { changeSymbolValue, changeResultObjectiveValue } from '../store/actionCreators';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
-import { invokeEquationSet } from '../store/middleware/invokeEquationSet';
+import { despak } from '../store/middleware/despak';
 
 //=====================================================================
-// invokeEquationSet
+// search
 //=====================================================================
 
-it('invokeEquationSet', () => {
+it('search without merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(reducers, state);
 
@@ -21,11 +21,16 @@ it('invokeEquationSet', () => {
     store.dispatch(changeSymbolValue("FORCE", 123)); // x vector
     store.dispatch(changeSymbolValue("AREA", 456));
     store.dispatch(changeSymbolValue("STRESS", 789));
+    store.dispatch(changeResultObjectiveValue(0.00005));
 
-    invokeEquationSet(store);
+    var design = store.getState(); // before
+    var obj = despak(store, design.system_controls.objmin);
 
     var design = store.getState(); // after
+    expect(obj).toEqual(0);
+
     expect(design.type).toEqual("Piston-Cylinder");
+
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(500);
     expect(design.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
@@ -33,11 +38,11 @@ it('invokeEquationSet', () => {
     expect(design.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(design.symbol_table[sto.THICKNESS].value).toEqual(0.04);
     expect(design.symbol_table[sto.FORCE].name).toEqual("FORCE"); // x vector
-    expect(design.symbol_table[sto.FORCE].value).toEqual(251.32741228718348);
+    expect(design.symbol_table[sto.FORCE].value).toEqual(123);
     expect(design.symbol_table[sto.AREA].name).toEqual("AREA");
-    expect(design.symbol_table[sto.AREA].value).toEqual(0.5026548245743669);
+    expect(design.symbol_table[sto.AREA].value).toEqual(456);
     expect(design.symbol_table[sto.STRESS].name).toEqual("STRESS");
-    expect(design.symbol_table[sto.STRESS].value).toEqual(2500);
+    expect(design.symbol_table[sto.STRESS].value).toEqual(789);
 
     expect(design.system_controls.ioopt).toEqual(3);
     expect(design.system_controls.maxit).toEqual(100);
@@ -56,7 +61,7 @@ it('invokeEquationSet', () => {
     expect(design.system_controls.show_units).toEqual(1);
     expect(design.system_controls.show_violations).toEqual(1);
 
-    expect(design.result.objective_value).toEqual(0);
-    expect(design.result.termination_condition).toEqual("");
+    expect(design.result.objective_value).toEqual(0.00005);
+    expect(design.result.termination_condition).toEqual("DELMIN - SHORT SEARCH");
     expect(design.result.violated_constraint_count).toEqual(0);
 });
