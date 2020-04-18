@@ -13,7 +13,7 @@ import { search } from '../store/middleware/search';
 
 it('search without merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(reducers, state);
+    const store = createStore(reducers, state, applyMiddleware(dispatcher));
 
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
@@ -21,13 +21,13 @@ it('search without merit', () => {
     store.dispatch(changeSymbolValue("FORCE", 123)); // x vector
     store.dispatch(changeSymbolValue("AREA", 456));
     store.dispatch(changeSymbolValue("STRESS", 789));
-    store.dispatch(changeResultObjectiveValue(0.00005));
+    store.dispatch(changeResultObjectiveValue(0.560511));
 
     var design = store.getState(); // before
     var obj = search(store, design.system_controls.objmin);
 
     var design = store.getState(); // after
-    expect(obj).toEqual(0.00005);
+    expect(obj).toEqual(0);
 
     expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
@@ -40,11 +40,11 @@ it('search without merit', () => {
     expect(design.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(design.symbol_table[sto.THICKNESS].value).toEqual(0.04);
     expect(design.symbol_table[sto.FORCE].name).toEqual("FORCE"); // x vector
-    expect(design.symbol_table[sto.FORCE].value).toEqual(123);
+    expect(design.symbol_table[sto.FORCE].value).toEqual(251.32741228718348);
     expect(design.symbol_table[sto.AREA].name).toEqual("AREA");
-    expect(design.symbol_table[sto.AREA].value).toEqual(456);
+    expect(design.symbol_table[sto.AREA].value).toEqual(0.5026548245743669);
     expect(design.symbol_table[sto.STRESS].name).toEqual("STRESS");
-    expect(design.symbol_table[sto.STRESS].value).toEqual(789);
+    expect(design.symbol_table[sto.STRESS].value).toEqual(2500);
 
     expect(design.system_controls.ioopt).toEqual(3);
     expect(design.system_controls.maxit).toEqual(100);
@@ -63,7 +63,7 @@ it('search without merit', () => {
     expect(design.system_controls.show_units).toEqual(1);
     expect(design.system_controls.show_violations).toEqual(1);
 
-    expect(design.result.objective_value).toEqual(0.00005);
-    expect(design.result.termination_condition).toEqual("DELMIN - SHORT SEARCH");
+    expect(design.result.objective_value).toEqual(0);
+    expect(design.result.termination_condition).toEqual("OBJMIN - SHORT SEARCH");
     expect(design.result.violated_constraint_count).toEqual(0);
 });
