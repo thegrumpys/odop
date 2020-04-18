@@ -38,7 +38,7 @@ it('search without merit', () => {
     var obj = search(store, design.system_controls.objmin);
 
     var design = store.getState(); // after
-    expect(obj).toEqual(0.017724895486223562);
+    expect(obj).toEqual(0.14664192222304165);
 
     expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
@@ -74,8 +74,8 @@ it('search without merit', () => {
     expect(design.system_controls.show_units).toEqual(1);
     expect(design.system_controls.show_violations).toEqual(1);
 
-    expect(design.result.objective_value).toEqual(0.017724895486223562);
-    expect(design.result.termination_condition).toEqual("DELMIN 53 ITER.");
+    expect(design.result.objective_value).toEqual(0.14664192222304165);
+    expect(design.result.termination_condition).toEqual("DELMIN 12 ITER.");
     expect(design.result.violated_constraint_count).toEqual(4);
 });
 
@@ -122,6 +122,7 @@ it('search with merit', () => {
                 m_funct = (-element.value + M_NUM) / M_DEN;
             }
         }
+//        console.log('In merit ', m_funct);
         return m_funct;
     }
 

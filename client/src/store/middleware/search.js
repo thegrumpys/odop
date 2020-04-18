@@ -22,7 +22,7 @@ export function search(store, objmin, merit) {
     
     // Do the pattern search
     var delarg = design.system_controls.del;
-//    console.log('In search pc=',pc,'delarg=',delarg,'design.system_controls.delmin=',design.system_controls.delmin,'design.system_controls.maxit=',design.system_controls.maxit,'design.system_controls.tol=',design.system_controls.tol);
+//    console.log('In search pc=',pc,'delarg=',delarg,'design.system_controls.delmin=',design.system_controls.delmin,'objmin=',objmin,'design.system_controls.maxit=',design.system_controls.maxit,'design.system_controls.tol=',design.system_controls.tol);
     var ncode = patsh(pc, delarg, design.system_controls.delmin, objmin, design.system_controls.maxit, design.system_controls.tol, store, merit);
     
     // Expand PC back into store change actions
