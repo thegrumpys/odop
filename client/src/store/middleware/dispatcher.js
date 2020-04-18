@@ -133,14 +133,14 @@ export const dispatcher = store => next => action => {
         // DO NOT INVOKE invokeInit(store) BECAUSE OF RECURSION
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
-        store.dispatch(changeSymbolValue('Catalog_Name', ''))
-        store.dispatch(changeSymbolValue('Catalog_Number', ''))
+//        store.dispatch(changeSymbolValue('Catalog_Name', ''))
+//        store.dispatch(changeSymbolValue('Catalog_Number', ''))
         break;
     case RESTORE_INPUT_SYMBOL_VALUES:
         invokeEquationSet(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
-        store.dispatch(changeSymbolValue('Catalog_Name', ''))
-        store.dispatch(changeSymbolValue('Catalog_Number', ''))
+//        store.dispatch(changeSymbolValue('Catalog_Name', ''))
+//        store.dispatch(changeSymbolValue('Catalog_Number', ''))
         break;
 
     case SEARCH:

@@ -17,12 +17,13 @@ export function eqnset(p, x) {
      * m_flag = 0 if call is from search, no console I/O permitted. m_flag > 0
      * if "special" call requesting direct output.
      */
+//    console.log('Entering eqnset p=',p,'x=',x);
     x[o.AREA] = Math.PI * p[o.RADIUS] * p[o.RADIUS];
     x[o.FORCE] = p[o.PRESSURE] * x[o.AREA];
     x[o.STRESS] = (p[o.PRESSURE] * p[o.RADIUS]) / (2.0 * p[o.THICKNESS]);
 //    if (M_FLAG)
 //        console.log('No report available.');
-//    console.log('In eqnset p=',p,' x=',x);
+//    console.log('Exiting eqnset x=',x);
     return x;
 }
 
