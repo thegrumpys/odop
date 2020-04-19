@@ -11,7 +11,7 @@ database="@@@ PUT DATABASE NAME HERE @@@"
 
 mysql --user=$user --password=$password --host=$host << EOF
   use $database;
-  DELETE FROM `design` WHERE `user` = NULL;
+  DELETE FROM design WHERE user = NULL;
   source ./designtypes/Piston-Cylinder/load.sql;
   source ./designtypes/Solid/load.sql;
   source ./designtypes/Spring/Compression/load.sql;
