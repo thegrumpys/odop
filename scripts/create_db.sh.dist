@@ -11,7 +11,7 @@ database="@@@ PUT DATABASE NAME HERE @@@"
 
 filename="./data/create.sql"
 
-mysql --user=$user --password=$password -h $host << EOF
+mysql --user=$user --password=$password --host=$host << EOF
   drop database $database;
   create database $database character set utf8;
   use $database;
