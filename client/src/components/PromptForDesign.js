@@ -178,6 +178,7 @@ export default withAuth(class PromptForDesign extends Component {
         var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
         const store = createStore(reducers, state, middleware);
         store.dispatch(startup());
+        logUsage('event', 'PromptForDesign', { 'event_label': type + ' load initialState' });
         this.setState({
             store: store
         });
