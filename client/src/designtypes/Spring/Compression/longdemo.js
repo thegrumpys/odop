@@ -276,7 +276,7 @@ export const execute = {
                     The next page covers use of the catalog.
                     Selecting a catalog entry will replace the current design.
                     So again, if this were a real design situation as opposed to a tutorial session,
-                    this would be a good time to save your work before proceding.
+                    this would be a good time to save your work before continuing.
                     </p>
                 </React.Fragment>
             ),
