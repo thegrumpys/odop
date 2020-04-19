@@ -1,0 +1,12 @@
+# Production
+user="@@@ PUT DATABASE USER HERE @@@"
+password="@@@ PUT DATABASE PASSWORD HERE @@@"
+host="@@@ PUT DATABASE HOST HERE @@@"
+database="@@@ PUT DATABASE NAME HERE @@@"
+# Staging
+# Test
+# Development
+
+filename="${database}_$(date +%F).sql"
+
+mysqldump --user=$user --password=$password -host=$host $database > $filename

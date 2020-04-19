@@ -1,9 +1,13 @@
 # BEWARE! This empties the design table of all current designs.
 
+# Production
 user="@@@ PUT DATABASE USER HERE @@@"
 password="@@@ PUT DATABASE PASSWORD HERE @@@"
 host="@@@ PUT DATABASE HOST HERE @@@"
 database="@@@ PUT DATABASE NAME HERE @@@"
+# Staging
+# Test
+# Development
 
 mysql --user=$user --password=$password -h $host << EOF
   use $database;

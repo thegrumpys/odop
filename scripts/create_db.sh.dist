@@ -1,9 +1,13 @@
 # BEWARE! This empties the database of all current tables.
 
+# Production
 user="@@@ PUT DATABASE USER HERE @@@"
 password="@@@ PUT DATABASE PASSWORD HERE @@@"
 host="@@@ PUT DATABASE HOST HERE @@@"
 database="@@@ PUT DATABASE NAME HERE @@@"
+# Staging
+# Test
+# Development
 
 filename="./data/create.sql"
 
