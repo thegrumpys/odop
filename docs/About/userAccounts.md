@@ -54,17 +54,14 @@ In order to sign out:
   - use "Logout" on the File menu
   - use the browser refresh button and then click the "Logout" button
 
-The user account feature was intended to have your session expire after a period of inactivity. 
-Instead your session expires after a fixed period from app startup regardless of activity. 
-In order to continue your session for another eight hours when a design is in-progress, 
-you can save it (**File : Save** or **File : SaveAs** menu), 
-reload the browser page and 
-re-open the saved design.
-If the session expires you cannot save the active design, 
-but there is an alternative. 
-You can print the details of an active design from the browser, 
-reload the browser page, log in again and then manually re-enter the details of the design.  
- 
+Once signed in, your user session will remain active for as long as the browser window (tab) 
+associated with the app exists and your Internet connection is maintained. 
+Actually, the user session may persist for up to two hours after loss of Internet connection or 
+closing a previous browser window or tab. 
+In this situation, you may be able to open a new browser window (tab) and open a previously saved design without 
+need to sign-in again. 
+However, you should learn to save frequently as once the browser window or tab is closed, 
+any unsaved design in progress will be lost.
  
 &nbsp; 
  
