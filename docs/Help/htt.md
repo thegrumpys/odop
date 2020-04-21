@@ -106,9 +106,12 @@ a print scale of 79% may produce the best results for the main "Design" page.
 In order to set print scale with Chromium Edge use the sequence:
 Settings and more / Print / Printer = Microsoft Print to PDF / More settings / Scale (%) = 79.   
 
+**Design Migration**   
+See: [MIGRATION](terminology#migration)    
+
 **How to pronounce ODOP**   
 The preferred pronunciation is the individual letters O-D-O-P, 
-not a word like O-dop.
+not a single word like O-dop.
 
 **Reporting problems with the ODOP software**   
 Your feedback is greatly appreciated.

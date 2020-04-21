@@ -54,6 +54,10 @@ The odop.herokuapp.com website does not use cookies.
 However, some of our business partners (for example: Okta, Heroku, JawsDB, GitHub Pages and Google Analytics) may use cookies related to our site.
 We have no access to or control over these cookies.   
 
+**Public Account**   
+Evaluators may sign-in with the username "public" and password "public".
+It is possible to save designs into the public account but keep in mind that all saved information will be completely public.   
+
 **IP Address**   
 In addition to the previously mentioned features of Okta,
 we collect user IP address information associated with access to our database (a.k.a. the ODOP Design Library) 

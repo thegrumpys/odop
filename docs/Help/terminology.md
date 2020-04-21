@@ -192,4 +192,17 @@ the current ODOP software release supplies only one such numerical search algori
 Additional information on the search algorithm is available in the 
 [Search](./search) Help entry.   
 
+<a id="migration"></a>   
+
+**MIGRATION**   
+The term "migration" refers to the process of upgrading designs created in a previous 
+version of the software to the format required by the current version. 
+This process changes the underlying data structures that describe the design. 
+Opening a design saved in a prior version will produce a pop-up message of the form:   
+"Migrated design from version {_previous version number_} to {_current version number_}.   
+Saving the design will eliminate the message on future open operations.
+Complete detail on the latest changes is available in GitHub.    
+
+&nbsp;   
+
 [Help](./)
