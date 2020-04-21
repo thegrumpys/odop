@@ -1,11 +1,22 @@
 ## Contact Us
 
-The best way to reach the team developing the 
+You can reach the team developing the 
 **O**pen **D**esign **O**ptimization **P**latform software 
-and the ODOP:Spring app is through email to  
+and the ODOP:Spring app.   
+
+
+**eMail**    
+
 **Info@SpringDesignSoftware.org**   
 
-If there is no answer at **650-887-8026**, please leave a voice message.   
+&nbsp;   
+
+**Telephone**   
+
+**650-887-8026**   
+8:00am - 5:00pm Pacific time  
+If necessary, please leave a voice message. 
+We will respond at our first possible opportunity.   
 
 &nbsp;
 
