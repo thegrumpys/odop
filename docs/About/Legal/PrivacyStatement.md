@@ -54,16 +54,18 @@ The odop.herokuapp.com website does not use cookies.
 However, some of our business partners (for example: Okta, Heroku, JawsDB, GitHub Pages and Google Analytics) may use cookies related to our site.
 We have no access to or control over these cookies.   
 
+**IP Address**   
+In addition to the previously mentioned features of Okta,
+the Okta logs provide IP address information associated with user sessions.
+Also, we collect user IP address information associated with access to our database (a.k.a. the ODOP Design Library) 
+for the purpose of measuring usage of the system.
+Google Analytics is currently under evaluation as an alternative means to measuring usage of the system
+that does not reveal IP address information.
+Note that use of VPN (Virtual Private Network) technology hides the true IP address and physical location of the user.
+
 **Public Account**   
 Evaluators may sign-in with the username "public" and password "public".
 It is possible to save designs into the public account but keep in mind that all saved information will be completely public.   
-
-**IP Address**   
-In addition to the previously mentioned features of Okta,
-we collect user IP address information associated with access to our database (a.k.a. the ODOP Design Library) 
-for the purpose of measuring usage of the system.
-Google Analytics is currently under evaluation as an alternative means to measuring usage of the system
-that does not collect IP address information.
 
    
 &nbsp;   
