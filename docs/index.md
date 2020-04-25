@@ -36,15 +36,12 @@
 
 ## Design
 * [Ideas for a web page menu structure](design/menu)
-* [Proposed names for quantities previously called "constants"](design/PreviouslyConstants)
 * [Ideas regarding the web user-interface for FIX](design/WebUI_for_Fix)
 * [Auto-Search feature and preferences](design/AutoSearch)
 * [Ideas for "responsive" page design](design/ResponsivePageDesign)
 * [Warn user if conflicting constraints are established](design/WarnConflictingConstraints)
 * [Consider an UnDo / ReDo feature](design/UnDo_ReDo)
-* [Proposed names for the (problem independent) system](design/SysName)
 * [System Control variables and multi-user operation](design/SysControls)
-* [Idea for a simple showcase problem](design/GeometricSolidsProblem)
 * [Idea for a Refine Search feature](design/RefineSearchFeature)
 * [AutoSave feature](design/AutoSaveFeature)
 * [Sub-Problems feature](design/SubProblems)
@@ -53,10 +50,16 @@
 * [Description of ODOP users](design/UserDescription)
 * [Ideas for Simplified Design Check UI](design/SimplifiedUI)
 * [Functionally Determined Constraint Level - User Interface](design/FDCL_UI)
-* [Version Number Guidelines](design/VersionNumbers)   
-&nbsp;
-* [Consider adding a search at the beginning of trade](design/SearchBeforeTrade)
-* [Investigate alternatives to assist implementation of the Execute, Demo and Tutorial features](design/ExecuteCapability)
+* [Version Number Guidelines](design/VersionNumbers) 
+* [Idea for a welcome page](design/WelcomePage)   
+
+<!--- The following topics of this section are already implemented or otherwise no longer relevant.  They are maintained here to keep the thought history.  -->
+
+* [Proposed names for the (problem independent) system](design/SysName)
+* [Proposed names for quantities previously called "constants"](design/PreviouslyConstants) 
+* [Idea for a simple showcase problem](design/GeometricSolidsProblem)
+* [Consider adding a search at the beginning of trade](design/SearchBeforeTrade) 
+* [Investigate alternatives to assist implementation of the Execute, Demo and Tutorial features](design/ExecuteCapability)   
 
 
 ## Procedures
