@@ -25,7 +25,7 @@ export default withAuth(class PromptForDesign extends Component {
         this.onSelectName = this.onSelectName.bind(this);
         this.state = {
             modal: true,
-            designtypes: [],
+            designtypes: config.design.types,
             designs: [],
             type: config.design.type,
             name: config.design.name,
@@ -57,43 +57,10 @@ export default withAuth(class PromptForDesign extends Component {
                     uid: null,
                 });
             }
-            this.getDesignTypes();
+            this.getDesignNames(this.state.type);
         }
     }
 
-    getDesignTypes() {
-//        console.log('In PromptForDesign.getDesignTypes uid=', this.state.uid);
-
-        // Get the designs and store them in state
-        displaySpinner(true);
-        fetch('/api/v1/designtypes', {
-                headers: {
-                    Authorization: 'Bearer ' + this.state.uid
-                }
-            })
-            .then(res => {
-                displaySpinner(false);
-                if (!res.ok) {
-                   throw Error(res.statusText);
-                }
-                return res.json()
-            })
-            .then(designtypes => {
-//                console.log('In PromptForDesign.getDesigns designtypes=',designtypes);
-                this.setState({ 
-                    designtypes: designtypes
-                })
-                this.getDesignNames(this.state.type);
-            })
-            .catch(error => {
-                this.setState({
-                    modal: !this.state.modal
-                });
-                displayError('GET of design types failed with message: \''+error.message+'\'. Using builtin initial state instead. You may continue in "demo mode" but you will be unable to save your work.');
-                this.loadInitialState(this.state.type);
-            });
-    }
-    
     getDesignNames(type) {
 //        console.log('In PromptForDesign.getDesignNames type=', type, ' uid=', this.state.uid);
 
