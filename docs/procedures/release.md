@@ -26,6 +26,7 @@ compare the current master branch against the previous released commit tag branc
 1. If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) 
 to create and format the database tables using the create.sql file.   
    Do this to development, test, staging and/or production databases as appropriate.   
+   Note: See Heroku Dashboard Resources tab for JAWS DB: Production has no color; staging is AMBER, test is TEAL, and local/development is CYAN.   
 1. Start server and client under your development environment.   
    If they are already started, log off of Okta and re-log into Okta to ensure the session is valid and not at risk of time-out.   
 &nbsp;   
@@ -42,16 +43,17 @@ to create and format the database tables using the create.sql file.
 1. Commit these changes.   
 &nbsp;
 1. If there are environment variable changes, update Server's .env and Client's .env with   
+   JAWSDB\_URL
    REACT\_APP\_ISSUER   
    REACT\_APP\_CLIENT\_ID   
    REACT\_APP\_DESIGN\_TYPE   
    REACT\_APP\_DESIGN\_NAME   
    REACT\_APP\_SESSION\_REFRESH   
    for development (localhost).  
+   NOTE: No entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost).   
 1. Do a pull or push to get latest version on all systems.   
-
-<a id="test4consoleoutput"></a>   
-
+<a id="test4consoleoutput"></a>
+&nbsp;
 1. **Test For Console Output** &nbsp; Bring up Google Chrome and enable View Console / Debugger.   
    Test various input and menu functions and verify no unexpected console.log output.  
    Use regular expression search: "^\s*console.log" to find non-commented out console.log lines.   
@@ -73,26 +75,28 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
 1. If no changes to dynamic runtime configuration variables skip forward to [Database Stuff](release#databaseStuff).   
 &nbsp;   
 1. If not logged into Heroku, go to the Heroku Website and login in.   
-1. For handling dynamic runtime configuration variables in Heroku only   
-   Update Heroku Configuration Variables with JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for staging (heroku-staging), or production (heroku).  
-   NO entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost).   
-   Do a pull or push to get latest version on all systems.   
+1. For handling dynamic runtime configuration variables in Heroku only:   
+   From Dashboard, expand "odop" for production or "odop-staging" for the staging system. Go to settings/Config Vars. Click "Reveal Config Vars".   
+   Update Heroku Configuration Variables JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for staging, or production.   
 &nbsp;   
 1. Update Heroku Configuration Variables with   
+   JAWSDB\_URL
    REACT\_APP\_ISSUER   
    REACT\_APP\_CLIENT\_ID    
    REACT\_APP\_DESIGN\_TYPE   
    REACT\_APP\_DESIGN\_NAME   
    REACT\_APP\_SESSION\_REFRESH   
-   for staging (heroku-staging), or production (heroku).   
-
-<a id="databaseStuff"></a>   
-
+   for staging (odop-staging), or production (odop).   
+1. Update Heroku Buildpack for staging (odop-staging), or production (odop).   
+   Buildpack configuration is on Heroku Settings tab.   
+<a id="databaseStuff"></a> 
+&nbsp; 
 1. **Database Stuff** &nbsp; If this is a "Patch" release or otherwise has no database impact, skip forward to [Publish to Heroku](release#publish2Heroku).   
 &nbsp;   
 1. If the database is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB) 
 to create and format the database tables using the create.sql file.   
    Do this for staging and/or production databases as appropriate.   
+   Note: See Heroku Dashboard Resources tab for JAWS DB: Production has no color; staging is AMBER, test is TEAL, and local/development is CYAN.   
 1. Check the size of the production database as compared to capacity limits (5Mb for JAWSDB free plan).   
    If appropriate, dump to off-line storage and re-initialize the log_Usage table.
 &nbsp;   
@@ -107,14 +111,9 @@ to create and format the database tables using the create.sql file.
    manually run all affected load.sql files to create startup files for each design type in the database.   
 1. Delete any old, invalid or development-only designs if necessary.  
 &nbsp;   
-1. Update Heroku Configuration Variables with JAWSDB\_URL for staging (heroku-staging), or production (heroku).   
-   Update Server's .env with JAWSDB\_URL for development (localhost).   
-   Note: See Heroku Dashboard Resources tab for JAWS DB: Production has no color; staging is AMBER, test is TEAL, and local/development is CYAN.   
-   Do a pull or push to get latest version on all systems.
-1. Update Heroku Buildpack for staging (heroku-staging), or production (heroku).   
-
-<a id="publish2Heroku"></a>   
-
+1. Do a pull or push as required to get latest version on all systems.   
+<a id="publish2Heroku"></a> 
+&nbsp; 
 1. **Publish to Heroku** &nbsp; If not logged into Heroku, login in using the command line "heroku login" which in turn brings up the Heroku website login page in your browser.   
 1. Shutdown server and client under your development environment.  
 &nbsp;   

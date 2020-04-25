@@ -11,6 +11,7 @@ On the pop-up, press the "Provision" button
  . . .   
  
 Edit your local .env file and add a new entry for JAWSDB\_**Color**\_URL   
+   Note: See Heroku Dashboard Resources tab for JAWS DB: Production has no color; staging is AMBER, test is TEAL, and local/development is CYAN.   
 Caution: The DB username and password are contained in the connection string.   
 Note ".env" appears in .gitignore, editing .env will only modify the local version of the file. 
 
