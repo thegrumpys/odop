@@ -43,7 +43,7 @@ to create and format the database tables using the create.sql file.
 1. Commit these changes.   
 &nbsp;
 1. If there are environment variable changes, update Server's .env and Client's .env with   
-   JAWSDB\_URL
+   JAWSDB\_URL   
    REACT\_APP\_ISSUER   
    REACT\_APP\_CLIENT\_ID   
    REACT\_APP\_DESIGN\_TYPE   
@@ -80,7 +80,7 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
    Update Heroku Configuration Variables JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for staging, or production.   
 &nbsp;   
 1. Update Heroku Configuration Variables with   
-   JAWSDB\_URL
+   JAWSDB\_URL   
    REACT\_APP\_ISSUER   
    REACT\_APP\_CLIENT\_ID    
    REACT\_APP\_DESIGN\_TYPE   
