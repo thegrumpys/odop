@@ -38,7 +38,7 @@ chai.use(chaiHttp);
 //========================================================================================
 
 describe('Designs with empty DB', () => {
-    
+
     beforeEach((done) => { // Before each test we empty the database
         var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
         connection.connect();
@@ -58,22 +58,18 @@ describe('Designs with empty DB', () => {
         });
     });
 
-// NOT SUPPORTED IN "test" NODE_ENV
-//    describe('GET / with empty DB', () => {
-//        it('it should GET with 200 OK *', (done) => {
-//            chai.request(server)
-//                .get('/')
-//                .set('Authorization', 'Bearer USERID0123456789')
-//                .end((err, res) => {
-////                    console.log('TEST: err=', err);
-//                    res.should.have.status(200);
-//                    should.exist(res.body);
-//                    res.body.should.be.a('object');
-//                    done(err);
-//                });
-//        });
-//    });
-    
+    describe('GET /api/v1/designtypes without Authorization with empty DB', () => {
+        it('it should GET with 401 UNAUTHORIZED', (done) => {
+            chai.request(server)
+                .get('/api/v1/designtypes')
+                .end((err, res) => {
+//                    console.log('TEST: err=', err);
+                    res.should.have.status(401);
+                    done(err);
+                });
+        });
+    });
+
     describe('GET /api/v1/designtypes with empty DB', () => {
         it('it should GET with 200 OK no design types', (done) => {
             chai.request(server)
@@ -88,7 +84,7 @@ describe('Designs with empty DB', () => {
                 });
         });
     });
-    
+
     describe('GET /api/v1/designtypes/Test-Design/designs with empty DB', () => {
         it('it should GET with 200 OK no design names', (done) => {
             chai.request(server)
@@ -103,7 +99,7 @@ describe('Designs with empty DB', () => {
                 });
         });
     });
-    
+
     describe('GET /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
         it('it should fail GET with 404 NOT FOUND, because test does not exist', (done) => {
             chai.request(server)
@@ -116,7 +112,7 @@ describe('Designs with empty DB', () => {
                 });
         });
     });
-    
+
     describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
         it('it should fail POST with 400 BAD REQUEST, because body is empty', (done) => {
             chai.request(server)
@@ -129,7 +125,7 @@ describe('Designs with empty DB', () => {
                 });
         });
     });
-    
+
     describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
         it('it should POST with 200 OK one design named test typed Test-Design, because test does not exist and GET with 200 OK one design named test typed Test-Design', (done) => {
             chai.request(server)
@@ -155,7 +151,7 @@ describe('Designs with empty DB', () => {
                 });
         });
     });
-    
+
     describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
         it('it should fail PUT with 400 BAD REQUEST, because body is empty', (done) => {
             chai.request(server)
@@ -168,7 +164,7 @@ describe('Designs with empty DB', () => {
                 });
         });
     });
-    
+
     describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
         it('it should fail PUT with 404 NOT FOUND, because test does not exist', (done) => {
             chai.request(server)
@@ -182,7 +178,7 @@ describe('Designs with empty DB', () => {
                 });
         });
     });
-    
+
     describe('DELETE /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
         it('it should fail DELETE with 404 NOT FOUND, because test does not exist', (done) => {
             chai.request(server)
@@ -195,35 +191,7 @@ describe('Designs with empty DB', () => {
                 });
         });
     });
-    
-// NO LONGER NEEDED BECAUSE STARTUP FILE'S USER IS NULL MAKING IT READ_ONLY
-//    describe('DELETE /api/v1/designtypes/Test-Design/designs/Startup with non-empty DB', () => {
-//        it('it should fail DELETE with 400 BAD REQUEST, because name is Startup', (done) => {
-//            var name = 'Startup';
-//            chai.request(server)
-//                .delete('/api/v1/designtypes/Test-Design/designs/'+name)
-//                .set('Authorization', 'Bearer USERID0123456789')
-//                .end((err, res) => {
-////                    console.log('TEST: err=', err);
-//                    res.should.have.status(400);
-//                    done(err);
-//                });
-//        });
-//    });
-    
-    describe('POST /api/v1/usage_log/ip_address/66.68.47.92 with empty DB', () => {
-        it('it should POST with 200 OK with note=test', (done) => {
-            chai.request(server)
-                .post('/api/v1/usage_log')
-                .send({ note: 'test'})
-                .end((err, res) => {
-//                    console.log('TEST: err=', err);
-                    res.should.have.status(200);
-                    done(err);
-                });
-        });
-    });
-    
+
 });
 
 //========================================================================================
@@ -265,7 +233,19 @@ describe('Designs with non-empty DB', () => {
             });
         });
     });
-    
+
+    describe('GET /api/v1/designtypes without Authorization with non-empty DB', () => {
+        it('it should GET with 200 OK one design type', (done) => {
+            chai.request(server)
+                .get('/api/v1/designtypes')
+                .end((err, res) => {
+//                    console.log('TEST: err=', err);
+                    res.should.have.status(401);
+                    done(err);
+                });
+        });
+    });
+
     describe('GET /api/v1/designtypes with non-empty DB', () => {
         it('it should GET with 200 OK one design type', (done) => {
             chai.request(server)
@@ -281,7 +261,7 @@ describe('Designs with non-empty DB', () => {
                 });
         });
     });
-    
+
     describe('GET /api/v1/designtypes/Test-Design/designs with non-empty DB', () => {
         it('it should GET with 200 OK one design name', (done) => {
             chai.request(server)
@@ -297,7 +277,7 @@ describe('Designs with non-empty DB', () => {
                 });
         });
     });
-    
+
     describe('GET /api/v1/designtypes/Test-Design/designs/test with non-empty DB', () => {
         it('it should GET with 200 OK one design named test', (done) => {
             chai.request(server)
@@ -315,7 +295,7 @@ describe('Designs with non-empty DB', () => {
                 });
         });
     });
-    
+
     describe('POST /api/v1/designtypes/Test-Design/designs/test with non-empty DB', () => {
         it('it should fail POST with 400 BAD REQUEST, because test already exists', (done) => {
             chai.request(server)
@@ -329,7 +309,7 @@ describe('Designs with non-empty DB', () => {
                 });
         });
     });
-    
+
     describe('PUT /api/v1/designtypes/Test-Design/designs/test with non-empty DB', () => {
         it('it should PUT with 200 OK one design named test typed Test-Design, because name already exists, and GET with 200 OK one design named test typed Test-Design', (done) => {
             chai.request(server)
@@ -355,7 +335,7 @@ describe('Designs with non-empty DB', () => {
                 });
         });
     });
-    
+
     describe('DELETE /api/v1/designtypes/Test-Design/designs/test with non-empty DB', () => {
         it('it should DELETE with 200 OK one design named test', (done) => {
             var name = 'test';
@@ -370,34 +350,6 @@ describe('Designs with non-empty DB', () => {
         });
     });
 
-// NO LONGER NEEDED BECAUSE STARTUP FILE'S USER IS NULL MAKING IT READ_ONLY
-//    describe('DELETE /api/v1/designtypes/Test-Design/designs/Startup with non-empty DB', () => {
-//        it('it should fail DELETE with 400 BAD REQUEST, because name is Startup', (done) => {
-//            var name = 'Startup';
-//            chai.request(server)
-//                .delete('/api/v1/designtypes/Test-Design/designs/'+name)
-//                .set('Authorization', 'Bearer USERID0123456789')
-//                .end((err, res) => {
-////                    console.log('TEST: err=', err);
-//                    res.should.have.status(400);
-//                    done(err);
-//                });
-//        });
-//    });
-    
-    describe('POST /api/v1/usage_log with non-empty DB', () => {
-        it('it should POST with 200 OK with note=test', (done) => {
-            chai.request(server)
-                .post('/api/v1/usage_log')
-                .send({ note: 'test'})
-                .end((err, res) => {
-//                    console.log('TEST: err=', err);
-                    res.should.have.status(200);
-                    done(err);
-                });
-        });
-    });
-    
 });
 
 // ========================================================================================
@@ -477,7 +429,19 @@ describe('Designs with multiple DB entries', () => {
             });
         });
     });
-    
+
+    describe('GET /api/v1/designtypes without Authorization with multiple DB entries', () => {
+        it('it should GET with 200 OK two design types named Test-Design and Test-Design2', (done) => {
+            chai.request(server)
+                .get('/api/v1/designtypes')
+                .end((err, res) => {
+//                    console.log('TEST: err=', err);
+                    res.should.have.status(401);
+                    done(err);
+                });
+        });
+    });
+
     describe('GET /api/v1/designtypes with multiple DB entries', () => {
         it('it should GET with 200 OK two design types named Test-Design and Test-Design2', (done) => {
             chai.request(server)
@@ -494,7 +458,7 @@ describe('Designs with multiple DB entries', () => {
                 });
         });
     });
-    
+
     describe('GET /api/v1/designtypes/Test-Design/designs with multiple DB entries', () => {
         it('it should GET with 200 OK two design named test and test2', (done) => {
             chai.request(server)
@@ -511,7 +475,7 @@ describe('Designs with multiple DB entries', () => {
                 });
         });
     });
-    
+
     describe('GET /api/v1/designtypes/Test-Design/designs/test with multiple DB entries', () => {
         it('it should GET with 200 OK one design named test typed Test-Design, GET with 200 OK one design named test typed Test-Design2, AND GET with 200 OK one design named test2 typed Test-Design', (done) => {
             chai.request(server)
@@ -553,7 +517,7 @@ describe('Designs with multiple DB entries', () => {
                 });
         });
     });
-    
+
     describe('POST /api/v1/designtypes/Test-Design/designs/test with multiple DB entries', () => {
         it('it should fail POST with 400 BAD REQUEST, because test already exists', (done) => {
             chai.request(server)
@@ -567,7 +531,7 @@ describe('Designs with multiple DB entries', () => {
                 });
         });
     });
-    
+
     describe('PUT /api/v1/designtypes/Test-Design/designs/test with multiple DB entries', () => {
         it('it should PUT with 200 OK one design named test', (done) => {
             chai.request(server)
@@ -581,7 +545,7 @@ describe('Designs with multiple DB entries', () => {
                 });
         });
     });
-    
+
     describe('DELETE /api/v1/designtypes/Test-Design/designs/test with multiple DB entries', () => {
         it('it should DELETE with 200 OK one design named test', (done) => {
             var name = 'test';
@@ -595,33 +559,5 @@ describe('Designs with multiple DB entries', () => {
                 });
         });
     });
-    
-// NO LONGER NEEDED BECAUSE STARTUP FILE'S USER IS NULL MAKING IT READ_ONLY
-//    describe('DELETE /api/v1/designtypes/Test-Design/designs/Startup with multiple DB entries', () => {
-//        it('it should fail DELETE with 400 BAD REQUEST, because name is Startup', (done) => {
-//            var name = 'Startup';
-//            chai.request(server)
-//                .delete('/api/v1/designtypes/Test-Design/designs/'+name)
-//                .set('Authorization', 'Bearer USERID0123456789')
-//                .end((err, res) => {
-////                    console.log('TEST: err=', err);
-//                    res.should.have.status(400);
-//                    done(err);
-//                });
-//        });
-//    });
-    
-    describe('POST /api/v1/usage_log with multiple DB entries', () => {
-        it('it should POST with 200 OK with note=test', (done) => {
-            chai.request(server)
-                .post('/api/v1/usage_log')
-                .send({ note: 'test'})
-                .end((err, res) => {
-//                    console.log('TEST: err=', err);
-                    res.should.have.status(200);
-                    done(err);
-                });
-        });
-    });
-    
+
 });
