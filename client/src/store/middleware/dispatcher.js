@@ -16,6 +16,7 @@ import { STARTUP,
     
     SEARCH, 
     SEEK,
+    TRADE,
     
     MIN, MAX, FIXED, CONSTRAINED, FDCL
     } from '../actionTypes';
@@ -35,7 +36,7 @@ export const dispatcher = store => next => action => {
 
     const returnValue = next(action);
 
-//    console.log('In dispatcher',action);
+    console.log('In dispatcher',action);
 
     switch (action.type) {
     case STARTUP:
@@ -159,6 +160,8 @@ export const dispatcher = store => next => action => {
         break;
     case SEEK:
         seek(store, action);
+        break;
+    case TRADE:
         break;
     default:
         break;
