@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavDropdown, Modal, InputGroup, ButtonGroup, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
-import { seek, auto_save } from '../../store/actionCreators';
+import { seek, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 
 class ActionSeek extends Component {
@@ -46,7 +46,7 @@ class ActionSeek extends Component {
         });
         // Do seek
         logUsage('event', 'ActionSeek', { 'event_label': this.state.minmax + ' ' + this.state.name });
-        this.props.auto_save();
+        this.props.saveAutoSave();
         this.props.seek(this.state.name, this.state.minmax);
     }
     
@@ -110,7 +110,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     seek: seek,
-    auto_save: auto_save
+    saveAutoSave: saveAutoSave
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionSeek);

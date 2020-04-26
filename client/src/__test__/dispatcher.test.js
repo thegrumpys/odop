@@ -719,7 +719,7 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
 });
 
 //=====================================================================
-// AUTO_SAVE
+// AUTO SAVE
 //=====================================================================
 
 it('middleware restore auto save', () => {

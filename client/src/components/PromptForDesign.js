@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { initialSystemControls } from '../initialSystemControls';
 import App from './App';
-import { startup } from '../store/actionCreators';
+import { startup, deleteAutoSave } from '../store/actionCreators';
 import { displaySpinner } from './Spinner';
 import { displayError } from './ErrorModal';
 import { reducers } from '../store/reducers';
@@ -121,6 +121,7 @@ export default withAuth(class PromptForDesign extends Component {
                 var migrated_design = migrate(design);
                 const store = createStore(reducers, migrated_design, middleware);
                 store.dispatch(startup());
+                store.dispatch(deleteAutoSave());
                 logUsage('event', 'PromptForDesign', { 'event_label': type + ' ' + name });
                 this.setState({
                     store: store
@@ -145,6 +146,7 @@ export default withAuth(class PromptForDesign extends Component {
         var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
         const store = createStore(reducers, state, middleware);
         store.dispatch(startup());
+        store.dispatch(deleteAutoSave());
         logUsage('event', 'PromptForDesign', { 'event_label': type + ' load initialState' });
         this.setState({
             store: store
@@ -161,11 +163,12 @@ export default withAuth(class PromptForDesign extends Component {
         const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 
         if (typeof(Storage) !== "undefined") {
-            console.log("Get Auto Save");
+            console.log("Restore Auto Save");
             var state_string = localStorage.getItem('autosave');
             var state = JSON.parse(state_string);
             const store = createStore(reducers, state, middleware);
             store.dispatch(startup());
+            store.dispatch(deleteAutoSave());
             logUsage('event', 'PromptForDesign', { 'event_label': state.type + ' load autoSave' });
             this.setState({
                 store: store
@@ -218,7 +221,7 @@ export default withAuth(class PromptForDesign extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        localStorage.removeItem('autosave');
+        this.state.store.dispatch(deleteAutoSave());
         this.props.auth.logout()
   }
 

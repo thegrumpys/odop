@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { load } from '../../store/actionCreators';
+import { load, deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -17,8 +17,6 @@ class FileOpen extends Component {
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
         this.onOpen = this.onOpen.bind(this);
-        this.loadInitialState = this.loadInitialState.bind(this);
-        this.loadAutoSave = this.loadAutoSave.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
@@ -104,6 +102,7 @@ class FileOpen extends Component {
                 var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
                 this.props.load(migrated_design)
+                this.props.deleteAutoSave();
                 logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
             })
             .catch(error => {
@@ -198,7 +197,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    load: load
+    load: load,
+    deleteAutoSave: deleteAutoSave
 };
 
 export default withAuth(

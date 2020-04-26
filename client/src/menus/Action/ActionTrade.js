@@ -8,7 +8,7 @@ import { changeSymbolConstraint,
     restoreInputSymbolValues,
     changeResultTerminationCondition,
     search,
-    auto_save } from '../../store/actionCreators';
+    saveAutoSave } from '../../store/actionCreators';
 import { evaluateConstraintValue } from '../../store/middleware/evaluateConstraint';
 import { logUsage } from '../../logUsage';
 
@@ -64,7 +64,7 @@ class ActionTrade extends Component {
     
     strategyToggle() {
         logUsage('event', 'ActionTrade');
-        this.props.auto_save(); // @@@
+        this.props.saveAutoSave(); // @@@
 //        console.log('In strategyToggle');
 //        console.log('state=',this.state);
         var design;
@@ -906,7 +906,7 @@ const mapDispatchToProps = {
     restoreInputSymbolValues: restoreInputSymbolValues,
     changeResultTerminationCondition: changeResultTerminationCondition,
     search: search,
-    auto_save: auto_save
+    saveAutoSave: saveAutoSave
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionTrade);

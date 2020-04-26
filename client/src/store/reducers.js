@@ -43,15 +43,18 @@ export function reducers(state, action) {
 //    console.log('In reducers', action);
     switch (action.type) {
     case STARTUP:
+//      console.log('In STARTUP state=',state);
         return state;
     case LOAD:
-        return action.payload.design;
+        state = action.payload.design;
+//      console.log('In LOAD state=',state);
+        return state;
     case LOAD_INITIAL_STATE:
 //        console.log('In LOAD_INITIAL_STATE');
         var { initialState } = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState
-        var design = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-//        console.log('In LOAD_INITIAL_STATE design=',design);
-        return design;
+        var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+//        console.log('In LOAD_INITIAL_STATE state=',state);
+        return state;
     case CHANGE_NAME:
         return Object.assign({}, state, {
             name: action.payload.name
@@ -364,8 +367,7 @@ export function reducers(state, action) {
     case RESTORE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
             console.log("Restore Auto Save");
-            var state_string = localStorage.getItem('autosave'); // get auto save file contents
-            state = JSON.parse(state_string);
+            state = JSON.parse(localStorage.getItem('autosave')); // get auto save file contents
         }
         return state; // state changed
     case DELETE_AUTO_SAVE:

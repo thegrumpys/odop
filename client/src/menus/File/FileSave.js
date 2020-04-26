@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { auto_save } from '../../store/actionCreators';
+import { deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -81,6 +81,7 @@ class FileSave extends Component {
         var name = this.props.state.name;
         if (name === undefined) name = 'checkpt';
         this.putDesign(type,name);
+        this.props.deleteAutoSave();
     }
 
     render() {
@@ -96,7 +97,7 @@ class FileSave extends Component {
 
 const mapStateToProps = state => ({
     state: state,
-    auto_save: auto_save
+    deleteAutoSave: deleteAutoSave
 });
 
 export default withAuth(
