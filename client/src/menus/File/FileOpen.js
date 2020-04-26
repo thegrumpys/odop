@@ -6,6 +6,7 @@ import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withAuth } from '@okta/okta-react';
+import config from '../../config';
 
 class FileOpen extends Component {
 
@@ -15,9 +16,11 @@ class FileOpen extends Component {
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onOpen = this.onOpen.bind(this);
-        this.onSelect = this.onSelect.bind(this);
+        this.onSelectType = this.onSelectType.bind(this);
+        this.onSelectName = this.onSelectName.bind(this);
         this.state = {
             modal: false,
+            designtypes: config.design.types,
             designs: [],
             type: this.props.type,
             name: this.props.name,
@@ -51,8 +54,8 @@ class FileOpen extends Component {
         }
     }
 
-    getDesigns(type) {
-//        console.log('In FileOpen.getDesigns type=', type);
+    getDesignNames(type) {
+//        console.log('In FileOpen.getDesignNames type=', type);
         // Get the designs and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
@@ -89,7 +92,7 @@ class FileOpen extends Component {
                 return res.json()
             })
             .then((design) => {
-//                console.log('In FileOpen.getDesigns design=', design);
+//                console.log('In FileOpen.getDesign design=', design);
                 var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
                 this.props.load(migrated_design)
@@ -102,7 +105,7 @@ class FileOpen extends Component {
     
     toggle() {
 //        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
-        this.getDesigns(this.props.type);
+        this.getDesignNames(this.props.type);
         this.setState({
             modal: !this.state.modal,
             type: this.props.type,
@@ -110,8 +113,16 @@ class FileOpen extends Component {
         });
     }
     
-    onSelect(event) {
-//        console.log('In FileOpen.onSelect event.target.value=',event.target.value);
+    onSelectType(event) {
+//        console.log('In FileOpen.onSelectType event.target.value=',event.target.value);
+        this.setState({
+            type: event.target.value
+        });
+        this.getDesignNames(event.target.value);
+  }
+  
+    onSelectName(event) {
+//        console.log('In FileOpen.onSelectName event.target.value=',event.target.value);
         this.setState({
             name: event.target.value 
         });
@@ -153,8 +164,15 @@ class FileOpen extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <br />
-                        <Form.Label htmlFor="fileOpenSelect">Select design to open:</Form.Label>
-                        <Form.Control as="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
+                        <Form.Label htmlFor="fileOpenSelectType">Select design type to open:</Form.Label>
+                        <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
+                            {this.state.designtypes.map((designtype, index) =>
+                                <option key={index} value={designtype}>{designtype}</option>
+                            )}
+                        </Form.Control>
+                        <br />
+                        <Form.Label htmlFor="fileOpenSelectName">Select design to open:</Form.Label>
+                        <Form.Control as="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
                             {this.state.designs.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                 <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
                             )}

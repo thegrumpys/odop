@@ -117,7 +117,7 @@ class App extends Component {
                                 <FilePreferences />
                                 <FileProperties />
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={() => this.props.auth.logout()}>
+                                <NavDropdown.Item onClick={() => {localStorage.removeItem('autosave');this.props.auth.logout()}}>
                                     Logout
                                 </NavDropdown.Item>
                             </NavDropdown>

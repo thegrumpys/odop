@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Security, ImplicitCallback } from '@okta/okta-react';
-import config from './config';
+import config from '../config';
 import FEHome from './FEHome';
 import FELogin from './FELogin';
 

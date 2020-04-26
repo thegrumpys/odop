@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
 import FELogin from './FELogin';
 import PromptForDesign from './PromptForDesign';
-import config from './config';
+import config from '../config';
 
 export default withAuth(class FEHome extends Component {
   constructor(props) {

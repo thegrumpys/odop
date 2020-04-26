@@ -34,6 +34,8 @@ export const SEARCH = 'SEARCH';
 export const SEEK = 'SEEK';
 export const TRADE = 'TRADE';
 
+export const AUTO_SAVE = 'AUTO_SAVE';
+
 export const MIN = 'MIN';
 export const MAX = 'MAX';
 

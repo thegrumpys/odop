@@ -18,6 +18,8 @@ import { STARTUP,
     SEEK,
     TRADE,
     
+    AUTO_SAVE,
+    
     MIN, MAX, FIXED, CONSTRAINED, FDCL
     } from '../actionTypes';
 import { setSclDen } from './setSclDen';
@@ -28,7 +30,7 @@ import { invokeEquationSet } from './invokeEquationSet';
 import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
 import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
-         restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actionCreators';
+         restoreOutputSymbolConstraints, changeResultTerminationCondition, auto_save } from '../actionCreators';
 
 export const dispatcher = store => next => action => {
     
@@ -36,7 +38,7 @@ export const dispatcher = store => next => action => {
 
     const returnValue = next(action);
 
-    console.log('In dispatcher',action);
+//    console.log('In dispatcher',action);
 
     switch (action.type) {
     case STARTUP:
@@ -46,6 +48,7 @@ export const dispatcher = store => next => action => {
         invokeEquationSet(store);
         setSclDen(store);
         updateViolationsAndObjectiveValue(store);
+        store.dispatch(auto_save());
         break;
 
     case CHANGE_SYMBOL_VALUE:
@@ -155,13 +158,25 @@ export const dispatcher = store => next => action => {
         break;
 
     case SEARCH:
+        store.dispatch(auto_save());
         design = store.getState();
         search(store, design.system_controls.objmin);
         break;
     case SEEK:
+        store.dispatch(auto_save());
         seek(store, action);
         break;
     case TRADE:
+        store.dispatch(auto_save());
+        break;
+
+    case AUTO_SAVE:
+//        console.log('In dispatcher AUTO_SAVE');
+        design = store.getState();
+        if (typeof(Storage) !== "undefined") {
+            console.log("Set Auto Save");
+            localStorage.setItem('autosave', JSON.stringify(design));
+        }
         break;
     default:
         break;

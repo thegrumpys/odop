@@ -11,18 +11,20 @@ import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 import { logUsage } from '../logUsage';
 import { withAuth } from '@okta/okta-react';
-import config from './config';
+import config from '../config';
 
 export default withAuth(class PromptForDesign extends Component {
     
     constructor(props) {
         super(props);
 //        console.log("In PromptForDesign.constructor props=",props);
-        this.onCancel = this.onCancel.bind(this);
-        this.onLoadInitialState = this.onLoadInitialState.bind(this);
-        this.onOpen = this.onOpen.bind(this);
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
+        this.onLogout = this.onLogout.bind(this);
+        this.onCancel = this.onCancel.bind(this);
+        this.onLoadInitialState = this.onLoadInitialState.bind(this);
+        this.onLoadAutoSave = this.onLoadAutoSave.bind(this);
+        this.onOpen = this.onOpen.bind(this);
         this.state = {
             modal: true,
             designtypes: config.design.types,
@@ -150,6 +152,28 @@ export default withAuth(class PromptForDesign extends Component {
             store: store
         });
     }
+    
+    loadAutoSave() {
+//        console.log('In PromptForDesign.loadAutoSave');
+        
+        /* eslint-disable no-underscore-dangle */
+        const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+        /* eslint-enable */
+
+        const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/dispatcher));
+
+        if (typeof(Storage) !== "undefined") {
+            console.log("Get Auto Save");
+            var state_string = localStorage.getItem('autosave');
+            var state = JSON.parse(state_string);
+            const store = createStore(reducers, state, middleware);
+            store.dispatch(startup());
+            logUsage('event', 'PromptForDesign', { 'event_label': state.type + ' load autoSave' });
+            this.setState({
+                store: store
+            });
+        }
+    }
 
     onSelectType(event) {
 //        console.log('In PromptForDesign.onSelectType event.target.value=',event.target.value);
@@ -166,24 +190,15 @@ export default withAuth(class PromptForDesign extends Component {
         });
     }
     
-    onOpen() {
-//        console.log('In PromptForDesign.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Load the model
-        this.getDesign(this.state.type,this.state.name);
-    }
-    
-    onLoadInitialState() {
-//        console.log('In PromptForDesign.onLoadInitialState this.state.type=',this.state.type);
-        this.setState({
-            modal: !this.state.modal
-        });
-        this.loadInitialState(this.state.type);
-    }
+    onLogout() {
+//      console.log('In PromptForDesign.onLogout');
+      this.setState({
+          modal: !this.state.modal
+      });
+      localStorage.removeItem('autosave');
+      this.props.auth.logout()
+  }
 
-    
     onCancel() {
 //        console.log('In PromptForDesign.onCancel');
         this.setState({
@@ -192,6 +207,31 @@ export default withAuth(class PromptForDesign extends Component {
         // Noop - all done
     }
 
+    onLoadInitialState() {
+//        console.log('In PromptForDesign.onLoadInitialState this.state.type=',this.state.type);
+        this.setState({
+            modal: !this.state.modal
+        });
+        this.loadInitialState(this.state.type);
+    }
+
+    onLoadAutoSave() {
+//        console.log('In PromptForDesign.onLoadAutoSave');
+        this.setState({
+            modal: !this.state.modal
+        });
+        this.loadAutoSave();
+    }
+    
+    onOpen() {
+//      console.log('In PromptForDesign.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
+      this.setState({
+          modal: !this.state.modal
+      });
+      // Load the model
+      this.getDesign(this.state.type,this.state.name);
+  }
+  
     render() {
 //        console.log('In PromptForDesign.render');
         if (this.state.store === null) {
@@ -224,9 +264,10 @@ export default withAuth(class PromptForDesign extends Component {
                             </Form.Control>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="secondary" onClick={() => this.props.auth.logout()}>Logout</Button>
+                            <Button variant="secondary" onClick={this.onLogout}>Logout</Button>
                             <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                             {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
+                            {localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={this.onLoadAutoSave}>Load Auto Save</Button>}{' '}
                             <Button variant="primary" onClick={this.onOpen}>Open</Button>
                         </Modal.Footer>
                     </Modal>
