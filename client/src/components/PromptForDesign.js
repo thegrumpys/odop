@@ -23,7 +23,6 @@ export default withAuth(class PromptForDesign extends Component {
         this.onOpen = this.onOpen.bind(this);
         this.onLoadInitialState = this.onLoadInitialState.bind(this);
         this.onLoadAutoSave = this.onLoadAutoSave.bind(this);
-        this.onCancel = this.onCancel.bind(this);
         this.onLogout = this.onLogout.bind(this);
         this.state = {
             modal: true,
@@ -214,14 +213,6 @@ export default withAuth(class PromptForDesign extends Component {
         this.loadInitialState(this.state.type);
     }
 
-    onCancel() {
-//        console.log('In PromptForDesign.onCancel');
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Noop - all done
-  }
-
     onLogout() {
 //        console.log('In PromptForDesign.onLogout');
         this.setState({
@@ -264,7 +255,6 @@ export default withAuth(class PromptForDesign extends Component {
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.onLogout}>Logout</Button>
-                            <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                             {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
                             {localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={this.onLoadAutoSave}>Load Auto Save</Button>}{' '}
                             <Button variant="primary" onClick={this.onOpen}>Open</Button>
