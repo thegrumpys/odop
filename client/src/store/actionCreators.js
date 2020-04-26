@@ -29,9 +29,13 @@ import { STARTUP,
     
     CHANGE_SYSTEM_CONTROLS_VALUE, 
     CHANGE_LABELS_VALUE, 
+
     SEARCH, 
     SEEK,
-    AUTO_SAVE } from './actionTypes';
+
+    SAVE_AUTO_SAVE,
+    RESTORE_AUTO_SAVE,
+    DELETE_AUTO_SAVE } from './actionTypes';
 
 export function startup() {
     return {
@@ -292,8 +296,20 @@ export function seek(name, minmax) {
     }
 }
 
-export function auto_save() {
+export function saveAutoSave() {
     return {
-        type: AUTO_SAVE
+        type: SAVE_AUTO_SAVE
+    }
+}
+
+export function restoreAutoSave() {
+    return {
+        type: RESTORE_AUTO_SAVE
+    }
+}
+
+export function deleteAutoSave() {
+    return {
+        type: DELETE_AUTO_SAVE
     }
 }

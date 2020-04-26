@@ -7,7 +7,8 @@ import {
     startup,
     changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
     changeResultObjectiveValue,
-    search, seek, auto_save } from '../store/actionCreators';
+    search, seek, 
+    saveAutoSave, restoreAutoSave, deleteAutoSave } from '../store/actionCreators';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 
@@ -721,19 +722,16 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
 // AUTO_SAVE
 //=====================================================================
 
-it('middleware trade', () => {
+it('middleware restore auto save', () => {
  var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
  const store = createStore(
      reducers,
      state,
      applyMiddleware(dispatcher));
- store.dispatch(startup());
- if (typeof(Storage) !== "undefined") {
-     localStorage.removeItem('autosave'); // Remove any existing auto_save
- }
+ store.dispatch(saveAutoSave());
 
  design = store.getState();
- store.dispatch(auto_save());
+ store.dispatch(restoreAutoSave());
 
  var design = store.getState(); // after
 //value=500, level=1500, sdlimit=0, status=1, stemp=1500
@@ -775,7 +773,7 @@ it('middleware trade', () => {
  expect(design.symbol_table[sto.STRESS].smax).toEqual(3000);
 
  expect(typeof(Storage)).not.toEqual("undefined");
- expect(localStorage.getItem('autosave')).not.toEqual(null);
+ expect(localStorage.getItem('autosave')).not.toBeNull();
  
-
+ store.dispatch(deleteAutoSave());
 });

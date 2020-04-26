@@ -9,7 +9,8 @@ import {
     changeInputSymbolValues, saveInputSymbolValues, restoreInputSymbolValues,
     changeOutputSymbolValues, saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
     changeResultObjectiveValue, changeResultTerminationCondition, changeResultViolatedConstraintCount,
-    changeSystemControlsValue, changeLabelsValue, search, seek, trade, auto_save
+    changeSystemControlsValue, changeLabelsValue, search, seek,
+    saveAutoSave, restoreAutoSave, deleteAutoSave
     } from '../store/actionCreators';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
@@ -600,19 +601,81 @@ it('reducers seek stress max', () => {
     expect(design.symbol_table[sto.AREA].value).toEqual(0);
 });
 
-it('reducers auto_save', () => {
+//=====================================================================
+//NO-OP
+//=====================================================================
+
+it('reducers save auto save', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
         state);
+    store.dispatch(deleteAutoSave()); // create auto save file with current state contents
+    var design = store.getState(); // after
+    expect(typeof(Storage)).not.toEqual("undefined");
+    expect(localStorage.getItem('autosave')).toBeNull();
 
-    // Without middleware this should do nothing
-    store.dispatch(auto_save());
+    store.dispatch(saveAutoSave()); // create auto save file with current state contents
 
     var design = store.getState(); // after
+    expect(typeof(Storage)).not.toEqual("undefined");
+    expect(localStorage.getItem('autosave')).not.toBeNull();
     expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.name).toEqual("initialState");
     expect(design.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.symbol_table[sto.RADIUS].value).toEqual(0.4);
     expect(design.symbol_table[sto.AREA].name).toEqual("AREA");
     expect(design.symbol_table[sto.AREA].value).toEqual(0);
+});
+
+it('reducers restore auto save', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    store.dispatch(saveAutoSave()); // create auto save file with current state contents
+    var design = store.getState(); // after
+    expect(typeof(Storage)).not.toEqual("undefined");
+    expect(localStorage.getItem('autosave')).not.toBeNull();
+    store.dispatch(load({
+        "name": "test",
+        "type": "Test-Design"
+    }));
+    var design = store.getState(); // after
+    expect(design.name).toEqual("test");
+    expect(design.type).toEqual("Test-Design");
+
+    store.dispatch(restoreAutoSave());
+
+    var design = store.getState(); // after
+    expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.name).toEqual("initialState");
+    expect(design.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.symbol_table[sto.RADIUS].value).toEqual(0.4);
+    expect(design.symbol_table[sto.AREA].name).toEqual("AREA");
+    expect(design.symbol_table[sto.AREA].value).toEqual(0);
+});
+
+it('reducers delete auto save', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+    store.dispatch(saveAutoSave()); // create auto save file with current state contents
+    var design = store.getState(); // after
+    expect(typeof(Storage)).not.toEqual("undefined");
+    expect(localStorage.getItem('autosave')).not.toBeNull();
+
+    store.dispatch(deleteAutoSave());
+
+    var design = store.getState(); // after
+    expect(typeof(Storage)).not.toEqual("undefined");
+    expect(localStorage.getItem('autosave')).toBeNull();
+    expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.name).toEqual("initialState");
+    expect(design.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.symbol_table[sto.RADIUS].value).toEqual(0.4);
+    expect(design.symbol_table[sto.AREA].name).toEqual("AREA");
+    expect(design.symbol_table[sto.AREA].value).toEqual(0);
+
 });

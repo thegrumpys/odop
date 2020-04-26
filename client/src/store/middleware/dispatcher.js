@@ -17,7 +17,7 @@ import { STARTUP,
     SEARCH, 
     SEEK,
     
-    AUTO_SAVE,
+    RESTORE_AUTO_SAVE,
     
     MIN, MAX, FIXED, CONSTRAINED, FDCL
     } from '../actionTypes';
@@ -43,11 +43,11 @@ export const dispatcher = store => next => action => {
     case STARTUP:
     case LOAD:
     case LOAD_INITIAL_STATE:
+    case RESTORE_AUTO_SAVE:
         invokeInit(store);
         invokeEquationSet(store);
         setSclDen(store);
         updateViolationsAndObjectiveValue(store);
-        store.dispatch(auto_save());
         break;
 
     case CHANGE_SYMBOL_VALUE:
@@ -164,14 +164,6 @@ export const dispatcher = store => next => action => {
         seek(store, action);
         break;
 
-    case AUTO_SAVE:
-//        console.log('In dispatcher AUTO_SAVE');
-        design = store.getState();
-        if (typeof(Storage) !== "undefined") {
-            console.log("Set Auto Save");
-            localStorage.setItem('autosave', JSON.stringify(design));
-        }
-        break;
     default:
         break;
     }
