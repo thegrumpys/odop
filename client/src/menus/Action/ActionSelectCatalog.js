@@ -134,7 +134,7 @@ class ActionSelectCatalog extends Component {
                         <Form.Label htmlFor="catalogNameSelect">Select catalog name:</Form.Label>
                         <Form.Control as="select" id="catalogNameSelect" onChange={this.onSelectCatalogName} value={this.state.name}>
                             {this.state.names.map((element, index) =>
-                                <option key={index} value={element} selected={element === this.state.name}>{element}</option>
+                                <option key={index} value={element}>{element}</option>
                             )}
                         </Form.Control>
                         <br />

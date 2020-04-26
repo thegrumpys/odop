@@ -8,6 +8,7 @@ import {
     NavDropdown
 } from 'react-bootstrap';
 import classnames from 'classnames';
+import { deleteAutoSave } from '../store/actionCreators';
 import { ExecutePanel } from './ExecutePanel';
 import { DesignTable } from './DesignTable';
 import { connect } from 'react-redux';
@@ -117,7 +118,7 @@ class App extends Component {
                                 <FilePreferences />
                                 <FileProperties />
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={() => {localStorage.removeItem('autosave');this.props.auth.logout()}}>
+                                <NavDropdown.Item onClick={() => {this.props.deleteAutoSave();this.props.auth.logout()}}>
                                     Logout
                                 </NavDropdown.Item>
                             </NavDropdown>
@@ -200,8 +201,13 @@ const mapStateToProps = state => ({
     labels: state.labels,
 });
 
+const mapDispatchToProps = {
+    deleteAutoSave: deleteAutoSave
+};
+
 export default withAuth(
-        connect(
-            mapStateToProps
-        )(App)
-    );
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(App)
+);

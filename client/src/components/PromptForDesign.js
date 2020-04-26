@@ -162,18 +162,15 @@ export default withAuth(class PromptForDesign extends Component {
 
         const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 
-        if (typeof(Storage) !== "undefined") {
-            console.log("Restore Auto Save");
-            var state_string = localStorage.getItem('autosave');
-            var state = JSON.parse(state_string);
-            const store = createStore(reducers, state, middleware);
-            store.dispatch(startup());
-            store.dispatch(deleteAutoSave());
-            logUsage('event', 'PromptForDesign', { 'event_label': state.type + ' load autoSave' });
-            this.setState({
-                store: store
-            });
-        }
+//        console.log("Restore Auto Save");
+        var state = JSON.parse(localStorage.getItem('autosave'));
+        const store = createStore(reducers, state, middleware);
+        store.dispatch(startup());
+        store.dispatch(deleteAutoSave());
+        logUsage('event', 'PromptForDesign', { 'event_label': state.type + ' load autoSave' });
+        this.setState({
+            store: store
+        });
     }
 
     onSelectType(event) {
@@ -221,7 +218,10 @@ export default withAuth(class PromptForDesign extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        this.state.store.dispatch(deleteAutoSave());
+        if (typeof(Storage) !== "undefined") {
+//            console.log("Delete Auto Save");
+            localStorage.removeItem('autosave'); // remove auto save file
+        }
         this.props.auth.logout()
   }
 
@@ -259,7 +259,7 @@ export default withAuth(class PromptForDesign extends Component {
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.onLogout}>Logout</Button>
                             {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
-                            {localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={this.onLoadAutoSave}>Load Auto Save</Button>}{' '}
+                            {typeof(Storage) !== "undefined" && localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={this.onLoadAutoSave}>Load Auto Save</Button>}{' '}
                             <Button variant="primary" onClick={this.onOpen}>Open</Button>
                         </Modal.Footer>
                     </Modal>
