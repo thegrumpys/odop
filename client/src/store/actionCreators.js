@@ -31,7 +31,6 @@ import { STARTUP,
     CHANGE_LABELS_VALUE, 
     SEARCH, 
     SEEK,
-    TRADE,
     AUTO_SAVE } from './actionTypes';
 
 export function startup() {
@@ -290,12 +289,6 @@ export function seek(name, minmax) {
             name,
             minmax
         }
-    }
-}
-
-export function trade() {
-    return {
-        type: TRADE
     }
 }
 

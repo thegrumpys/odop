@@ -14,10 +14,12 @@ class FileOpen extends Component {
         super(props);
 //        console.log("In FileOpen .constructor props=",props);
         this.toggle = this.toggle.bind(this);
-        this.onCancel = this.onCancel.bind(this);
-        this.onOpen = this.onOpen.bind(this);
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
+        this.onOpen = this.onOpen.bind(this);
+        this.loadInitialState = this.loadInitialState.bind(this);
+        this.loadAutoSave = this.loadAutoSave.bind(this);
+        this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
             designtypes: config.design.types,
@@ -51,6 +53,7 @@ class FileOpen extends Component {
                     uid: null,
                 });
             }
+            this.getDesignNames(this.state.type);
         }
     }
 
@@ -70,12 +73,17 @@ class FileOpen extends Component {
                 }
                 return res.json()
             })
-            .then(designs => this.setState({ designs }))
+            .then(designs => {
+//                console.log('In FileOpen.getDesigns designs=',designs);
+                this.setState({
+                    designs: designs
+                })
+            })
             .catch(error => {
                 displayError('GET of design names failed with message: \''+error.message+'\'');
             });
     }
-    
+
     getDesign(type,name) {
 //        console.log('In FileOpen.getDesign type=', type, ' name=', name);
         displaySpinner(true);
@@ -102,7 +110,7 @@ class FileOpen extends Component {
                 displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
             });
     }
-    
+
     toggle() {
 //        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
         this.getDesignNames(this.props.type);
@@ -112,7 +120,7 @@ class FileOpen extends Component {
             name: this.props.name
         });
     }
-    
+
     onSelectType(event) {
 //        console.log('In FileOpen.onSelectType event.target.value=',event.target.value);
         this.setState({
@@ -120,27 +128,23 @@ class FileOpen extends Component {
         });
         this.getDesignNames(event.target.value);
   }
-  
+
     onSelectName(event) {
 //        console.log('In FileOpen.onSelectName event.target.value=',event.target.value);
         this.setState({
-            name: event.target.value 
+            name: event.target.value
         });
     }
-    
+
     onOpen() {
 //        console.log('In FileOpen.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
         this.setState({
             modal: !this.state.modal
         });
         // Load the model
-        var type = this.state.type;
-        if (type === undefined) type = 'Piston-Cylinder';
-        var name = this.state.name;
-        if (name === undefined) name = 'Startup';
-        this.getDesign(type,name);
+        this.getDesign(this.state.type,this.state.name);
     }
-    
+
     onCancel() {
 //        console.log('In FileOpen.onCancel');
         this.setState({
@@ -189,8 +193,8 @@ class FileOpen extends Component {
 }
 
 const mapStateToProps = state => ({
-    type: state.type, 
-    name: state.name, 
+    type: state.type,
+    name: state.name,
 });
 
 const mapDispatchToProps = {

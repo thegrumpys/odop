@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { auto_save } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -94,7 +95,8 @@ class FileSave extends Component {
 }
 
 const mapStateToProps = state => ({
-    state: state 
+    state: state,
+    auto_save: auto_save
 });
 
 export default withAuth(

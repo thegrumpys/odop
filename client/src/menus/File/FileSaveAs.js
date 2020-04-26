@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { changeName } from '../../store/actionCreators';
-import { changeUser } from '../../store/actionCreators';
+import { changeName, changeUser, auto_save } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -176,7 +175,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     changeName: changeName,
-    changeUser: changeUser
+    changeUser: changeUser,
+    auto_save: auto_save
 };
 
 export default withAuth(

@@ -9,7 +9,7 @@ import {
     changeInputSymbolValues, saveInputSymbolValues, restoreInputSymbolValues,
     changeOutputSymbolValues, saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
     changeResultObjectiveValue, changeResultTerminationCondition, changeResultViolatedConstraintCount,
-    changeSystemControlsValue, changeLabelsValue, search, seek
+    changeSystemControlsValue, changeLabelsValue, search, seek, trade, auto_save
     } from '../store/actionCreators';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
@@ -600,3 +600,19 @@ it('reducers seek stress max', () => {
     expect(design.symbol_table[sto.AREA].value).toEqual(0);
 });
 
+it('reducers auto_save', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        state);
+
+    // Without middleware this should do nothing
+    store.dispatch(auto_save());
+
+    var design = store.getState(); // after
+    expect(design.type).toEqual("Piston-Cylinder");
+    expect(design.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.symbol_table[sto.RADIUS].value).toEqual(0.4);
+    expect(design.symbol_table[sto.AREA].name).toEqual("AREA");
+    expect(design.symbol_table[sto.AREA].value).toEqual(0);
+});

@@ -16,7 +16,6 @@ import { STARTUP,
     
     SEARCH, 
     SEEK,
-    TRADE,
     
     AUTO_SAVE,
     
@@ -158,16 +157,11 @@ export const dispatcher = store => next => action => {
         break;
 
     case SEARCH:
-        store.dispatch(auto_save());
         design = store.getState();
         search(store, design.system_controls.objmin);
         break;
     case SEEK:
-        store.dispatch(auto_save());
         seek(store, action);
-        break;
-    case TRADE:
-        store.dispatch(auto_save());
         break;
 
     case AUTO_SAVE:
