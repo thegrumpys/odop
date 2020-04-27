@@ -360,19 +360,19 @@ export function reducers(state, action) {
 
     case SAVE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-//            console.log("Save Auto Save");
+            console.log("Save Auto Save");
             localStorage.setItem('autosave', JSON.stringify(state)); // create or replace auto save file with current state contents
         }
         return state; // state not changed
     case RESTORE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-//            console.log("Restore Auto Save");
+            console.log("Restore Auto Save");
             state = JSON.parse(localStorage.getItem('autosave')); // get auto save file contents
         }
         return state; // state changed
     case DELETE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-//            console.log("Delete Auto Save");
+            console.log("Delete Auto Save");
             localStorage.removeItem('autosave'); // remove auto save file
         }
         return state; // state not changed

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Container, Row, Col, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { changeLabelsValue } from '../../store/actionCreators';
+import { changeLabelsValue, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 
 class FileProperties extends Component {
@@ -54,6 +54,7 @@ class FileProperties extends Component {
         this.setState({
             labels: initialState.labels
         });
+        this.props.saveAutoSave();
     }
     
     onApplyandClose() {
@@ -65,6 +66,7 @@ class FileProperties extends Component {
         logUsage('event', 'FileProperties', { 'event_label': 'ApplyandClose' });
         // Copy the state.labels into the props.labels
         this.props.changeLabelsValue(this.state.labels);
+        this.props.saveAutoSave();
     }
 
     render() {
@@ -118,7 +120,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    changeLabelsValue: changeLabelsValue
+    changeLabelsValue: changeLabelsValue,
+    saveAutoSave: saveAutoSave
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileProperties);
