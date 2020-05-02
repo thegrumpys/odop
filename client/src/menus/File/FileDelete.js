@@ -17,7 +17,7 @@ class FileDelete extends Component {
         this.onSelect = this.onSelect.bind(this);
         this.state = {
             modal: false,
-            designs: [],
+            names: [],
             type: this.props.type,
             name: '',
             authenticated: null,
@@ -51,7 +51,7 @@ class FileDelete extends Component {
     }
 
     getDesigns(type) {
-        // Get the designs and store them in state
+        // Get the names and store them in state
 //        console.log('In FileDelete.getDesigns type=', type);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
@@ -66,13 +66,13 @@ class FileDelete extends Component {
                 }
                 return res.json()
             })
-           .then(designs => {
+           .then(names => {
                this.setState({ 
-                   designs: designs.filter((design) => {return design.user !== null})
+                   names: names.filter((design) => {return design.user !== null})
                });
                var name = '';
-               if (this.state.designs.length > 0)
-                   name = this.state.designs[0].name; // Default to first name
+               if (this.state.names.length > 0)
+                   name = this.state.names[0].name; // Default to first name
                this.setState({ 
                    name: name
                });
@@ -160,14 +160,14 @@ class FileDelete extends Component {
                         <br />
                         <Form.Label htmlFor="fileDeleteSelect">Select design to delete:</Form.Label>
                         <Form.Control as="select" id="fileDeleteSelect" onChange={this.onSelect}>
-                            {this.state.designs.map((design, index) => {
+                            {this.state.names.map((design, index) => {
                                 return <option key={index} value={design.name}>{design.name}</option>
                             })}
                         </Form.Control>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" onClick={this.onDelete} disabled={this.state.designs.length === 0 ? true : false}>Delete</Button>
+                        <Button variant="primary" onClick={this.onDelete} disabled={this.state.names.length === 0 ? true : false}>Delete</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>
