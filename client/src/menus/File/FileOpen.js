@@ -113,7 +113,7 @@ class FileOpen extends Component {
     toggle() {
 //        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
         var type = (this.state.types.includes(this.props.type) ? this.props.type : config.design.type);
-        this.getDesignNames(this.props.type);
+        this.getDesignNames(type);
         var name = (this.state.names.includes(this.props.name) ? this.props.name : config.design.name);
         this.setState({
             modal: !this.state.modal,
