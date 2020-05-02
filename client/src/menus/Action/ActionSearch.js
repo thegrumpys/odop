@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { search } from '../../store/actionCreators';
+import { search, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 
 class ActionSearch extends Component {
@@ -13,6 +13,7 @@ class ActionSearch extends Component {
     
     toggle() {
         logUsage('event', 'ActionSearch');
+        this.props.saveAutoSave();
         this.props.search();
     }
 
@@ -28,7 +29,8 @@ class ActionSearch extends Component {
 }  
 
 const mapDispatchToProps = {
-    search: search
+    search: search,
+    saveAutoSave: saveAutoSave
 };
 
 export default connect(null, mapDispatchToProps)(ActionSearch);

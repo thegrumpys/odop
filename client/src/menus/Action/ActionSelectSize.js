@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
-import { changeSymbolValue, setSymbolFlag } from '../../store/actionCreators';
+import { changeSymbolValue, setSymbolFlag, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 
 class ActionSelectSize extends Component {
@@ -119,6 +119,7 @@ class ActionSelectSize extends Component {
         });
         logUsage('event', 'ActionSelectSize', { 'event_label': this.state.type + ' ' + this.state.size });
         // Do select size entry
+        this.props.saveAutoSave();
         this.props.changeSymbolValue(this.state.type,this.state.size);
         this.props.setSymbolFlag(this.state.type, MIN, FIXED);
         this.props.setSymbolFlag(this.state.type, MAX, FIXED);
@@ -177,7 +178,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     changeSymbolValue: changeSymbolValue,
-    setSymbolFlag: setSymbolFlag
+    setSymbolFlag: setSymbolFlag,
+    saveAutoSave: saveAutoSave
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionSelectSize);

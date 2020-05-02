@@ -7,7 +7,8 @@ import {
     startup,
     changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
     changeResultObjectiveValue,
-    search, seek, trade } from '../store/actionCreators';
+    search, seek, 
+    saveAutoSave, restoreAutoSave, deleteAutoSave } from '../store/actionCreators';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 
@@ -504,7 +505,7 @@ it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', ()
 });
 
 //=====================================================================
-//SEEK
+// SEEK
 //=====================================================================
 
 it('middleware seek1 min stress; feasible start; no fixed', () => {
@@ -715,4 +716,64 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
     expect(design.result.objective_value).toEqual(0.00001908478702508192);
     expect(design.result.termination_condition).toEqual("SEEK COMPLETED");
     expect(design.result.violated_constraint_count).toEqual(3);
+});
+
+//=====================================================================
+// AUTO SAVE
+//=====================================================================
+
+it('middleware restore auto save', () => {
+ var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+ const store = createStore(
+     reducers,
+     state,
+     applyMiddleware(dispatcher));
+ store.dispatch(saveAutoSave());
+
+ design = store.getState();
+ store.dispatch(restoreAutoSave());
+
+ var design = store.getState(); // after
+//value=500, level=1500, sdlimit=0, status=1, stemp=1500
+ expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
+ expect(design.symbol_table[sto.PRESSURE].cmin).toEqual(0);
+ expect(design.symbol_table[sto.PRESSURE].cmax).toEqual(1500);
+ expect(design.symbol_table[sto.PRESSURE].smin).toEqual(500); // updated
+ expect(design.symbol_table[sto.PRESSURE].smax).toEqual(1500);
+//value=0.4, level=0, sdlimit=0, status=1, stemp=0.4
+//value=0.4, level=0.5, sdlimit=0, status=1, stemp=0.5
+ expect(design.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+ expect(design.symbol_table[sto.RADIUS].cmin).toEqual(0);
+ expect(design.symbol_table[sto.RADIUS].cmax).toEqual(0.5);
+ expect(design.symbol_table[sto.RADIUS].smin).toEqual(0.4);
+ expect(design.symbol_table[sto.RADIUS].smax).toEqual(0.5);
+//value=0.04, level=0, sdlimit=0, status=1, stemp=0.04
+//value=0.04, level=0.05, sdlimit=0, status=1, stemp=0.05
+ expect(design.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
+ expect(design.symbol_table[sto.THICKNESS].cmin).toEqual(0.0);
+ expect(design.symbol_table[sto.THICKNESS].cmax).toEqual(0.05);
+ expect(design.symbol_table[sto.THICKNESS].smin).toEqual(0.04);
+ expect(design.symbol_table[sto.THICKNESS].smax).toEqual(0.05);
+//value=251.32741228718348, level=1000, sdlimit=0, status=1, stemp=1000
+ expect(design.symbol_table[sto.FORCE].name).toEqual("FORCE");
+ expect(design.symbol_table[sto.FORCE].cmin).toEqual(1000);
+ expect(design.symbol_table[sto.FORCE].cmax).toEqual(0);
+ expect(design.symbol_table[sto.FORCE].smin).toEqual(1000);
+ expect(design.symbol_table[sto.FORCE].smax).toEqual(251.32741228718348); // updated
+ expect(design.symbol_table[sto.AREA].name).toEqual("AREA");
+ expect(design.symbol_table[sto.AREA].cmin).toEqual(0);
+ expect(design.symbol_table[sto.AREA].cmax).toEqual(0);
+ expect(design.symbol_table[sto.AREA].smin).toEqual(0.5026548245743669); // updated
+ expect(design.symbol_table[sto.AREA].smax).toEqual(0.5026548245743669); // updated
+//value=2500, level=3000, sdlimit=0, status=1, stemp=3000
+ expect(design.symbol_table[sto.STRESS].name).toEqual("STRESS");
+ expect(design.symbol_table[sto.STRESS].cmin).toEqual(0);
+ expect(design.symbol_table[sto.STRESS].cmax).toEqual(3000);
+ expect(design.symbol_table[sto.STRESS].smin).toEqual(2500); // updated
+ expect(design.symbol_table[sto.STRESS].smax).toEqual(3000);
+
+ expect(typeof(Storage)).not.toEqual("undefined");
+ expect(localStorage.getItem('autosave')).not.toBeNull();
+ 
+ store.dispatch(deleteAutoSave());
 });

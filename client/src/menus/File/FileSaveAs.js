@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { changeName } from '../../store/actionCreators';
-import { changeUser } from '../../store/actionCreators';
+import { changeName, changeUser, deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -133,6 +132,7 @@ class FileSaveAs extends Component {
         var name = this.state.name;
         if (name === undefined) name = 'checkpt';
         this.postDesign(type,name);
+        this.props.deleteAutoSave();
     }
     
     onCancel() {
@@ -176,7 +176,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     changeName: changeName,
-    changeUser: changeUser
+    changeUser: changeUser,
+    deleteAutoSave: deleteAutoSave
 };
 
 export default withAuth(

@@ -16,7 +16,8 @@ import { STARTUP,
     
     SEARCH, 
     SEEK,
-    TRADE,
+    
+    RESTORE_AUTO_SAVE,
     
     MIN, MAX, FIXED, CONSTRAINED, FDCL
     } from '../actionTypes';
@@ -36,12 +37,13 @@ export const dispatcher = store => next => action => {
 
     const returnValue = next(action);
 
-    console.log('In dispatcher',action);
+//    console.log('In dispatcher',action);
 
     switch (action.type) {
     case STARTUP:
     case LOAD:
     case LOAD_INITIAL_STATE:
+    case RESTORE_AUTO_SAVE:
         invokeInit(store);
         invokeEquationSet(store);
         setSclDen(store);
@@ -161,8 +163,7 @@ export const dispatcher = store => next => action => {
     case SEEK:
         seek(store, action);
         break;
-    case TRADE:
-        break;
+
     default:
         break;
     }

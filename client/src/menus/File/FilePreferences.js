@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Container, Row, Col, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { initialSystemControls } from '../../initialSystemControls';
-import { changeSystemControlsValue } from '../../store/actionCreators';
+import { changeSystemControlsValue, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 
 class FilePreferences extends Component {
@@ -64,6 +64,7 @@ class FilePreferences extends Component {
         });
         // Copy the updated local copy into the props.system_controls
         this.props.changeSystemControlsValue(copy);
+        this.props.saveAutoSave();
     }
 
     render() {
@@ -115,7 +116,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    changeSystemControlsValue: changeSystemControlsValue
+    changeSystemControlsValue: changeSystemControlsValue,
+    saveAutoSave: saveAutoSave
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilePreferences);

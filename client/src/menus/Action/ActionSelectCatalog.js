@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Table, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { changeSymbolValue } from '../../store/actionCreators';
+import { changeSymbolValue, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 
 class ActionSelectCatalog extends Component {
@@ -98,6 +98,7 @@ class ActionSelectCatalog extends Component {
         });
         // Do select catalog entry
         logUsage('event', 'ActionSelectCatalog', { 'event_label': this.state.name + ' ' + this.state.entries[this.state.entry][0] });
+        this.props.saveAutoSave();
 //        console.log('In ActionSelectCatalog.onSelect this.state.entries=',this.state.entries);
         this.state.entries[this.state.entry][2].forEach((element) => { 
 //            console.log('In ActionSelectCatalog.onSelect element=',element);
@@ -133,7 +134,7 @@ class ActionSelectCatalog extends Component {
                         <Form.Label htmlFor="catalogNameSelect">Select catalog name:</Form.Label>
                         <Form.Control as="select" id="catalogNameSelect" onChange={this.onSelectCatalogName} value={this.state.name}>
                             {this.state.names.map((element, index) =>
-                                <option key={index} value={element} selected={element === this.state.name}>{element}</option>
+                                <option key={index} value={element}>{element}</option>
                             )}
                         </Form.Control>
                         <br />
@@ -182,7 +183,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    changeSymbolValue: changeSymbolValue
+    changeSymbolValue: changeSymbolValue,
+    saveAutoSave: saveAutoSave
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionSelectCatalog);

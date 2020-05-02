@@ -1,33 +1,37 @@
-import { STARTUP, 
-    LOAD, 
-    LOAD_INITIAL_STATE, 
-    CHANGE_NAME, 
-    CHANGE_USER, 
+import { STARTUP,
+    LOAD,
+    LOAD_INITIAL_STATE,
+    CHANGE_NAME,
+    CHANGE_USER,
+
+    CHANGE_SYMBOL_VALUE,
+    CHANGE_SYMBOL_VIOLATION,
+    CHANGE_SYMBOL_CONSTRAINT,
+    CHANGE_SYMBOL_CONSTRAINTS,
+    SAVE_OUTPUT_SYMBOL_CONSTRAINTS,
+    RESTORE_OUTPUT_SYMBOL_CONSTRAINTS,
+    SET_SYMBOL_FLAG,
+    RESET_SYMBOL_FLAG,
+    CHANGE_SYMBOL_INPUT,
+    CHANGE_SYMBOL_HIDDEN,
+
+    CHANGE_INPUT_SYMBOL_VALUES,
+    SAVE_INPUT_SYMBOL_VALUES,
+    RESTORE_INPUT_SYMBOL_VALUES,
+
+    CHANGE_OUTPUT_SYMBOL_VALUES,
+
+    CHANGE_RESULT_OBJECTIVE_VALUE,
+    CHANGE_RESULT_TERMINATION_CONDITION,
+    CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT,
+
+    CHANGE_SYSTEM_CONTROLS_VALUE,
+    CHANGE_LABELS_VALUE,
     
-    CHANGE_SYMBOL_VALUE, 
-    CHANGE_SYMBOL_VIOLATION, 
-    CHANGE_SYMBOL_CONSTRAINT, 
-    CHANGE_SYMBOL_CONSTRAINTS, 
-    SAVE_OUTPUT_SYMBOL_CONSTRAINTS, 
-    RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, 
-    SET_SYMBOL_FLAG, 
-    RESET_SYMBOL_FLAG, 
-    CHANGE_SYMBOL_INPUT, 
-    CHANGE_SYMBOL_HIDDEN, 
-    
-    CHANGE_INPUT_SYMBOL_VALUES, 
-    SAVE_INPUT_SYMBOL_VALUES, 
-    RESTORE_INPUT_SYMBOL_VALUES, 
-    
-    CHANGE_OUTPUT_SYMBOL_VALUES, 
-    
-    CHANGE_RESULT_OBJECTIVE_VALUE, 
-    CHANGE_RESULT_TERMINATION_CONDITION, 
-    CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT, 
-    
-    CHANGE_SYSTEM_CONTROLS_VALUE, 
-    CHANGE_LABELS_VALUE, 
-    
+    SAVE_AUTO_SAVE,
+    RESTORE_AUTO_SAVE,
+    DELETE_AUTO_SAVE,
+
     MIN } from './actionTypes';
 import { sclden } from './middleware/sclden';
 import { initialSystemControls } from '../initialSystemControls';
@@ -39,15 +43,18 @@ export function reducers(state, action) {
 //    console.log('In reducers', action);
     switch (action.type) {
     case STARTUP:
+//      console.log('In STARTUP state=',state);
         return state;
     case LOAD:
-        return action.payload.design;
+        state = action.payload.design;
+//      console.log('In LOAD state=',state);
+        return state;
     case LOAD_INITIAL_STATE:
 //        console.log('In LOAD_INITIAL_STATE');
         var { initialState } = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState
-        var design = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-//        console.log('In LOAD_INITIAL_STATE design=',design);
-        return design;
+        state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+//        console.log('In LOAD_INITIAL_STATE state=',state);
+        return state;
     case CHANGE_NAME:
         return Object.assign({}, state, {
             name: action.payload.name
@@ -56,9 +63,9 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             user: action.payload.user
         });
-        
+
 // SYMBOL
-        
+
     case CHANGE_SYMBOL_VALUE:
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
@@ -211,7 +218,7 @@ export function reducers(state, action) {
                 return element;
             })
         });
-        
+
     case CHANGE_SYMBOL_HIDDEN:
         return Object.assign({}, state, {
             symbol_table: state.symbol_table.map((element) => {
@@ -224,9 +231,9 @@ export function reducers(state, action) {
                 return element;
             })
         });
-        
+
 // INPUT SYMBOL
-        
+
     case CHANGE_INPUT_SYMBOL_VALUES:
         i=0;
         return Object.assign({}, state, {
@@ -271,9 +278,9 @@ export function reducers(state, action) {
                 }
             })
         });
-        
+
 // OUTPUT SYMBOL
-        
+
     case CHANGE_OUTPUT_SYMBOL_VALUES:
         i=0;
         return Object.assign({}, state, {
@@ -294,9 +301,9 @@ export function reducers(state, action) {
                 }
             })
         });
-        
+
 // RESULT
-         
+
     case CHANGE_RESULT_OBJECTIVE_VALUE:
         return {
             ...state,
@@ -321,9 +328,9 @@ export function reducers(state, action) {
                 violated_constraint_count: action.payload.violated_constraint_count
             }
         }
-        
+
 // SYMTEM CONTROL
-        
+
     case CHANGE_SYSTEM_CONTROLS_VALUE:
         return {
             ...state,
@@ -332,9 +339,9 @@ export function reducers(state, action) {
                 ...action.payload.system_controls
             }
         }
-        
+
 // LABELS
-        
+
     case CHANGE_LABELS_VALUE:
         return Object.assign({}, state, {
             labels: state.labels.map((element) => {
@@ -348,7 +355,30 @@ export function reducers(state, action) {
                 }
             })
         });
+
+// AUTO_SAVE
+
+    case SAVE_AUTO_SAVE:
+        if (typeof(Storage) !== "undefined") {
+            console.log("Save Auto Save");
+            localStorage.setItem('autosave', JSON.stringify(state)); // create or replace auto save file with current state contents
+        }
+        return state; // state not changed
+    case RESTORE_AUTO_SAVE:
+        if (typeof(Storage) !== "undefined") {
+            console.log("Restore Auto Save");
+            state = JSON.parse(localStorage.getItem('autosave')); // get auto save file contents
+        }
+        return state; // state changed
+    case DELETE_AUTO_SAVE:
+        if (typeof(Storage) !== "undefined") {
+            console.log("Delete Auto Save");
+            localStorage.removeItem('autosave'); // remove auto save file
+        }
+        return state; // state not changed
+
     default:
         return state;
     }
+
 }

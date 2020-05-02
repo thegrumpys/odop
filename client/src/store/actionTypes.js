@@ -32,7 +32,10 @@ export const CHANGE_SYSTEM_CONTROLS_VALUE = 'CHANGE_SYSTEM_CONTROLS_VALUE';
 
 export const SEARCH = 'SEARCH';
 export const SEEK = 'SEEK';
-export const TRADE = 'TRADE';
+
+export const SAVE_AUTO_SAVE = 'SAVE_AUTO_SAVE';
+export const RESTORE_AUTO_SAVE = 'RESTORE_AUTO_SAVE';
+export const DELETE_AUTO_SAVE = 'DELETE_AUTO_SAVE';
 
 export const MIN = 'MIN';
 export const MAX = 'MAX';

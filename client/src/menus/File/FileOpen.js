@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { load } from '../../store/actionCreators';
+import { load, deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withAuth } from '@okta/okta-react';
+import config from '../../config';
 
 class FileOpen extends Component {
 
@@ -13,11 +14,13 @@ class FileOpen extends Component {
         super(props);
 //        console.log("In FileOpen .constructor props=",props);
         this.toggle = this.toggle.bind(this);
-        this.onCancel = this.onCancel.bind(this);
+        this.onSelectType = this.onSelectType.bind(this);
+        this.onSelectName = this.onSelectName.bind(this);
         this.onOpen = this.onOpen.bind(this);
-        this.onSelect = this.onSelect.bind(this);
+        this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
+            designtypes: config.design.types,
             designs: [],
             type: this.props.type,
             name: this.props.name,
@@ -48,11 +51,12 @@ class FileOpen extends Component {
                     uid: null,
                 });
             }
+            this.getDesignNames(this.state.type);
         }
     }
 
-    getDesigns(type) {
-//        console.log('In FileOpen.getDesigns type=', type);
+    getDesignNames(type) {
+//        console.log('In FileOpen.getDesignNames type=', type);
         // Get the designs and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
@@ -67,12 +71,17 @@ class FileOpen extends Component {
                 }
                 return res.json()
             })
-            .then(designs => this.setState({ designs }))
+            .then(designs => {
+//                console.log('In FileOpen.getDesigns designs=',designs);
+                this.setState({
+                    designs: designs
+                })
+            })
             .catch(error => {
                 displayError('GET of design names failed with message: \''+error.message+'\'');
             });
     }
-    
+
     getDesign(type,name) {
 //        console.log('In FileOpen.getDesign type=', type, ' name=', name);
         displaySpinner(true);
@@ -89,47 +98,52 @@ class FileOpen extends Component {
                 return res.json()
             })
             .then((design) => {
-//                console.log('In FileOpen.getDesigns design=', design);
+//                console.log('In FileOpen.getDesign design=', design);
                 var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
                 this.props.load(migrated_design)
+                this.props.deleteAutoSave();
                 logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
             })
             .catch(error => {
                 displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
             });
     }
-    
+
     toggle() {
 //        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
-        this.getDesigns(this.props.type);
+        this.getDesignNames(this.props.type);
         this.setState({
             modal: !this.state.modal,
             type: this.props.type,
             name: this.props.name
         });
     }
-    
-    onSelect(event) {
-//        console.log('In FileOpen.onSelect event.target.value=',event.target.value);
+
+    onSelectType(event) {
+//        console.log('In FileOpen.onSelectType event.target.value=',event.target.value);
         this.setState({
-            name: event.target.value 
+            type: event.target.value
+        });
+        this.getDesignNames(event.target.value);
+  }
+
+    onSelectName(event) {
+//        console.log('In FileOpen.onSelectName event.target.value=',event.target.value);
+        this.setState({
+            name: event.target.value
         });
     }
-    
+
     onOpen() {
 //        console.log('In FileOpen.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
         this.setState({
             modal: !this.state.modal
         });
         // Load the model
-        var type = this.state.type;
-        if (type === undefined) type = 'Piston-Cylinder';
-        var name = this.state.name;
-        if (name === undefined) name = 'Startup';
-        this.getDesign(type,name);
+        this.getDesign(this.state.type,this.state.name);
     }
-    
+
     onCancel() {
 //        console.log('In FileOpen.onCancel');
         this.setState({
@@ -153,8 +167,15 @@ class FileOpen extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <br />
-                        <Form.Label htmlFor="fileOpenSelect">Select design to open:</Form.Label>
-                        <Form.Control as="select" id="fileOpenSelect" onChange={this.onSelect} value={this.state.name}>
+                        <Form.Label htmlFor="fileOpenSelectType">Select design type to open:</Form.Label>
+                        <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
+                            {this.state.designtypes.map((designtype, index) =>
+                                <option key={index} value={designtype}>{designtype}</option>
+                            )}
+                        </Form.Control>
+                        <br />
+                        <Form.Label htmlFor="fileOpenSelectName">Select design to open:</Form.Label>
+                        <Form.Control as="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
                             {this.state.designs.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                 <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
                             )}
@@ -171,12 +192,13 @@ class FileOpen extends Component {
 }
 
 const mapStateToProps = state => ({
-    type: state.type, 
-    name: state.name, 
+    type: state.type,
+    name: state.name,
 });
 
 const mapDispatchToProps = {
-    load: load
+    load: load,
+    deleteAutoSave: deleteAutoSave
 };
 
 export default withAuth(

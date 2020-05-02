@@ -4,25 +4,26 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { initialSystemControls } from '../initialSystemControls';
 import App from './App';
-import { startup } from '../store/actionCreators';
+import { startup, deleteAutoSave } from '../store/actionCreators';
 import { displaySpinner } from './Spinner';
 import { displayError } from './ErrorModal';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 import { logUsage } from '../logUsage';
 import { withAuth } from '@okta/okta-react';
-import config from './config';
+import config from '../config';
 
 export default withAuth(class PromptForDesign extends Component {
-    
+
     constructor(props) {
         super(props);
 //        console.log("In PromptForDesign.constructor props=",props);
-        this.onCancel = this.onCancel.bind(this);
-        this.onLoadInitialState = this.onLoadInitialState.bind(this);
-        this.onOpen = this.onOpen.bind(this);
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
+        this.onOpen = this.onOpen.bind(this);
+        this.onLoadInitialState = this.onLoadInitialState.bind(this);
+        this.onLoadAutoSave = this.onLoadAutoSave.bind(this);
+        this.onLogout = this.onLogout.bind(this);
         this.state = {
             modal: true,
             designtypes: config.design.types,
@@ -63,7 +64,6 @@ export default withAuth(class PromptForDesign extends Component {
 
     getDesignNames(type) {
 //        console.log('In PromptForDesign.getDesignNames type=', type, ' uid=', this.state.uid);
-
         // Get the designs and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
@@ -80,7 +80,7 @@ export default withAuth(class PromptForDesign extends Component {
             })
             .then(designs => {
 //                console.log('In PromptForDesign.getDesigns designs=',designs);
-                this.setState({ 
+                this.setState({
                     designs: designs
                 })
             })
@@ -92,15 +92,15 @@ export default withAuth(class PromptForDesign extends Component {
                 this.loadInitialState(this.state.type);
             });
     }
-    
+
     getDesign(type,name) {
 //        console.log('In PromptForDesign.getDesign type=', type, ' name=', name, ' uid=', this.state.uid);
-        
+
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
         /* eslint-enable */
 
-        const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/dispatcher));
+        const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
@@ -121,6 +121,7 @@ export default withAuth(class PromptForDesign extends Component {
                 var migrated_design = migrate(design);
                 const store = createStore(reducers, migrated_design, middleware);
                 store.dispatch(startup());
+                store.dispatch(deleteAutoSave());
                 logUsage('event', 'PromptForDesign', { 'event_label': type + ' ' + name });
                 this.setState({
                     store: store
@@ -131,21 +132,42 @@ export default withAuth(class PromptForDesign extends Component {
                 this.loadInitialState(type);
             });
     }
-    
+
     loadInitialState(type) {
 //        console.log('In PromptForDesign.loadInitialState type=', type);
-        
+
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
         /* eslint-enable */
 
-        const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware,*/dispatcher));
+        const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 
         var { initialState } = require('../designtypes/'+type+'/initialState.js'); // Dynamically load initialState
         var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
         const store = createStore(reducers, state, middleware);
         store.dispatch(startup());
+        store.dispatch(deleteAutoSave());
         logUsage('event', 'PromptForDesign', { 'event_label': type + ' load initialState' });
+        this.setState({
+            store: store
+        });
+    }
+
+    loadAutoSave() {
+//        console.log('In PromptForDesign.loadAutoSave');
+
+        /* eslint-disable no-underscore-dangle */
+        const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+        /* eslint-enable */
+
+        const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
+
+        console.log("Restore Auto Save");
+        var state = JSON.parse(localStorage.getItem('autosave'));
+        const store = createStore(reducers, state, middleware);
+        store.dispatch(startup());
+        store.dispatch(deleteAutoSave());
+        logUsage('event', 'PromptForDesign', { 'event_label': state.type + ' load autoSave' });
         this.setState({
             store: store
         });
@@ -158,14 +180,14 @@ export default withAuth(class PromptForDesign extends Component {
         });
         this.getDesignNames(event.target.value);
     }
-    
+
     onSelectName(event) {
 //        console.log('In PromptForDesign.onSelectName event.target.value=',event.target.value);
         this.setState({
-            name: event.target.value 
+            name: event.target.value
         });
     }
-    
+
     onOpen() {
 //        console.log('In PromptForDesign.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
         this.setState({
@@ -174,7 +196,15 @@ export default withAuth(class PromptForDesign extends Component {
         // Load the model
         this.getDesign(this.state.type,this.state.name);
     }
-    
+
+    onLoadAutoSave() {
+//        console.log('In PromptForDesign.onLoadAutoSave');
+        this.setState({
+            modal: !this.state.modal
+        });
+        this.loadAutoSave();
+    }
+
     onLoadInitialState() {
 //        console.log('In PromptForDesign.onLoadInitialState this.state.type=',this.state.type);
         this.setState({
@@ -183,14 +213,17 @@ export default withAuth(class PromptForDesign extends Component {
         this.loadInitialState(this.state.type);
     }
 
-    
-    onCancel() {
-//        console.log('In PromptForDesign.onCancel');
+    onLogout() {
+//        console.log('In PromptForDesign.onLogout');
         this.setState({
             modal: !this.state.modal
         });
-        // Noop - all done
-    }
+        if (typeof(Storage) !== "undefined") {
+            console.log("Delete Auto Save");
+            localStorage.removeItem('autosave'); // remove auto save file
+        }
+        this.props.auth.logout()
+  }
 
     render() {
 //        console.log('In PromptForDesign.render');
@@ -205,7 +238,7 @@ export default withAuth(class PromptForDesign extends Component {
                             </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay" target="_blank" rel="noopener noreferrer">Message-of-the-day </a> 
+                            <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay" target="_blank" rel="noopener noreferrer">Message-of-the-day </a>
                             <br />
                             Learn <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">About</a> ODOP
                             <br /><br />
@@ -224,9 +257,9 @@ export default withAuth(class PromptForDesign extends Component {
                             </Form.Control>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="secondary" onClick={() => this.props.auth.logout()}>Logout</Button>
-                            <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                            <Button variant="secondary" onClick={this.onLogout}>Logout</Button>
                             {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
+                            {typeof(Storage) !== "undefined" && localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={this.onLoadAutoSave}>Load Auto Save</Button>}{' '}
                             <Button variant="primary" onClick={this.onOpen}>Open</Button>
                         </Modal.Footer>
                     </Modal>
