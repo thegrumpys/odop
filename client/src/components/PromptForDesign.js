@@ -219,7 +219,7 @@ export default withAuth(class PromptForDesign extends Component {
             modal: !this.state.modal
         });
         if (typeof(Storage) !== "undefined") {
-            console.log("Delete Auto Save");
+//            console.log("Delete Auto Save");
             localStorage.removeItem('autosave'); // remove auto save file
         }
         this.props.auth.logout()
