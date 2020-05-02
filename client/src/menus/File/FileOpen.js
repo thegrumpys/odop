@@ -20,8 +20,8 @@ class FileOpen extends Component {
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
-            designtypes: config.design.types,
-            designs: [],
+            types: config.design.types,
+            names: [],
             type: this.props.type,
             name: this.props.name,
             authenticated: null,
@@ -57,7 +57,7 @@ class FileOpen extends Component {
 
     getDesignNames(type) {
 //        console.log('In FileOpen.getDesignNames type=', type);
-        // Get the designs and store them in state
+        // Get the names and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
@@ -71,10 +71,10 @@ class FileOpen extends Component {
                 }
                 return res.json()
             })
-            .then(designs => {
-//                console.log('In FileOpen.getDesigns designs=',designs);
+            .then(names => {
+//                console.log('In FileOpen.getDesigns names=',names);
                 this.setState({
-                    designs: designs
+                    names: names
                 })
             })
             .catch(error => {
@@ -112,11 +112,13 @@ class FileOpen extends Component {
 
     toggle() {
 //        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
+        var type = (this.state.types.includes(this.props.type) ? this.props.type : config.design.type);
         this.getDesignNames(this.props.type);
+        var name = (this.state.names.includes(this.props.name) ? this.props.name : config.design.name);
         this.setState({
             modal: !this.state.modal,
-            type: this.props.type,
-            name: this.props.name
+            type: type,
+            name: name
         });
     }
 
@@ -169,14 +171,14 @@ class FileOpen extends Component {
                         <br />
                         <Form.Label htmlFor="fileOpenSelectType">Select design type to open:</Form.Label>
                         <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
-                            {this.state.designtypes.map((designtype, index) =>
+                            {this.state.types.map((designtype, index) =>
                                 <option key={index} value={designtype}>{designtype}</option>
                             )}
                         </Form.Control>
                         <br />
                         <Form.Label htmlFor="fileOpenSelectName">Select design to open:</Form.Label>
                         <Form.Control as="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
-                            {this.state.designs.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
+                            {this.state.names.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                 <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
                             )}
                         </Form.Control>
