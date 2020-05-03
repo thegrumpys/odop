@@ -109,9 +109,18 @@ There are issues that need to be thought through:
    + Should a fragment of the user ID string be added to the name of the AutoSave file ?
    + Should a time stamp string be added to the name of the AutoSave file ?
    + Should the Public account be excluded from AutoSave ?
+   + if an AutoSave design exists when the ODOP app starts, should it be auto-opened ? 
 
 
 **Discussion**   
 
-The words above need to be turned into a specification for a first generation implementation.
+The words above need to be turned into a specification. 
+See issue #306 (now closed) for first generation implementation.   
+
+Should a future, more capable implementation of AutoSave be based on Git ?   
+Security issues ?   
+
+
+
+
 
