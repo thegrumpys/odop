@@ -30,6 +30,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
 //        console.log('In NameValueUnitsRowIndependentVariable.constructor this.props.element.name=',this.props.element.name,' this.props.element.format=',this.props.element.format,' this.props.element.table=',this.props.element.table);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
+                type: this.props.type,
                 focused: false
             };
         } else if (this.props.element.format === 'table') {
@@ -37,11 +38,38 @@ class NameValueUnitsRowIndependentVariable extends Component {
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowIndependentVariable.constructor table=',table);
             this.state = {
+                type: this.props.type,
                 table: table
+            };
+        } else {
+            this.state = {
+                type: this.props.type,
             };
         }
     }
     
+    static getDerivedStateFromProps(props, state) {
+//        console.log('In NameValueUnitsRowIndependentVariable.getDerivedStateFromProps props=',props,'state=',state);
+        if (props.type !== state.type) {
+            if (props.element.format === undefined && typeof props.element.value === 'number') {
+                return {
+                    focused: false
+                };
+            } else if (props.element.format === 'table') {
+//                console.log('In NameValueUnitsRowIndependentVariable.getDerivedStateFromProps file = ../designtypes/'+props.element.table+'.json');
+                var table = require('../designtypes/'+props.element.table+'.json'); // Dynamically load table
+//                console.log('In NameValueUnitsRowIndependentVariable.getDerivedStateFromProps table=',table);
+                return {
+                    table: table
+                };
+            } else {
+                return {
+                };
+            }
+        }
+        return null; // Return null if the state hasn't changed
+    }
+
     onChange(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onChange event.target.value=',event.target.value);
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
@@ -69,9 +97,9 @@ class NameValueUnitsRowIndependentVariable extends Component {
             if (index > 0) { // Skip the first column
                 var name = this.state.table[0][index];
 //                console.log('In NameValueUnitsRowIndependentVariable.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',this.props.symbol_table.find(element => element.name === name));
-                if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
+//                if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
                     this.props.changeSymbolValue(name,value);
-                }
+//                }
             }
         });
     }
@@ -129,7 +157,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
 
 const mapStateToProps = state => ({
     type: state.type,
-    symbol_table: state.symbol_table,
+//    symbol_table: state.symbol_table,
     system_controls: state.system_controls
 });
 

@@ -4,6 +4,7 @@ import * as mo from '../mat_ips_offsets';
 
 export function getReportNames() {
     // Note: report names must match cases in switch statement below
+//    console.log('In Compression getReportNames');
     return [
       '1 (mini)',
       '2 (pre-set)',
@@ -12,7 +13,7 @@ export function getReportNames() {
 }
 
 export function report(report_name, prefs, st, labels) {
-//    console.log('In report report_name=',report_name,' prefs=',prefs,' st=',st,' labels=',labels);
+//    console.log('In Compression report report_name=',report_name,' prefs=',prefs,' st=',st,' labels=',labels);
     
     var kc, ks, temp, s_f, len_lbl, 
     safe_load_u, wgt1000_u, cycle_life_u, 
@@ -216,212 +217,213 @@ export function report(report_name, prefs, st, labels) {
     switch(report_name) {
     case "1 (mini)":
     default:
-
-    return (
-        <React.Fragment>
-            <h4>ODOP:Spring &nbsp; Compression Spring Report</h4><br />
-            <b>
-            {hits > 0 && errmsg}{hits > 0 && <br />}
-            {hits > 0 && startpntmsg}{hits > 0 && <br />}
-            </b>
-            {hits > 0 && NaNmsg}{hits > 0 && <br />}
-            {hits > 0 && <br />}
-            <table>
-                <tbody>
-                    <tr>
-                        <td>{st[o.Spring_Type].name}</td>
-                        <td>=</td>
-                        <td className="" colSpan="2">{st[o.Spring_Type].value}</td>
-                        <td/>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Material_Type].name}</td>
-                        <td>=</td>
-                        <td className="text-left" colSpan="2">{matTypeValue}</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>{st[o.Wire_Dia].name}</td>
-                        <td>=</td>
-                        <td>{st[o.Wire_Dia].value.toFixed(4)}</td>
-                        <td>{st[o.Wire_Dia].units}</td>
-                        <td/>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.End_Type].name}</td>
-                        <td>=</td>
-                        <td className="text-left" colSpan="2">{et_tab[st[o.End_Type].value][0]}</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>{st[o.Spring_Index].name}</td>
-                        <td>=</td>
-                        <td>{st[o.Spring_Index].value.toFixed(3)}</td>
-                        <td>{st[o.Spring_Index].units}</td>
-                        <td/>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Coils_T].name}</td>
-                        <td>=</td>
-                        <td>{st[o.Coils_T].value.toFixed(3)}</td>
-                        <td>{"total " + st[o.Coils_T].units}</td>
-                    </tr>
-                    <tr>
-                        <td>{st[o.Rate].name}</td>
-                        <td>=</td>
-                        <td>{st[o.Rate].value.toFixed(3)}</td>
-                        <td>{st[o.Rate].units}</td>
-                        <td/>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Coils_A].name}</td>
-                        <td>=</td>
-                        <td>{st[o.Coils_A].value.toFixed(3)}</td>
-                        <td>{"active " + st[o.Coils_A].units}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br/>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <td> &nbsp; &nbsp; </td>
-                        <th>Length</th>
-                        <td> &nbsp; &nbsp; </td>
-                        <th>Deflect</th>
-                        <td> &nbsp; &nbsp; </td>
-                        <th>Force</th>
-                        <td> &nbsp; &nbsp; </td>
-                        <th>&nbsp; OD &nbsp;</th>
-                        <td> &nbsp; &nbsp; </td>
-                        <th>&nbsp; ID &nbsp; </th>
-                        <td> &nbsp; &nbsp; </td>
-                        <th>&nbsp;Stress</th>
-                        <td> &nbsp; &nbsp; </td>
-                        <th>Static FS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><b>Free</b></td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.L_Free].value.toFixed(3)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{(0.0).toFixed(4)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{(0.0).toFixed(2)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.OD_Free].value.toFixed(4)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.ID_Free].value.toFixed(4)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{(0.0).toFixed(0)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>infinite</td>
-                    </tr>
-                    <tr>
-                        <td><b>1</b></td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.L_1].value.toFixed(3)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Deflect_1].value.toFixed(4)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Force_1].value.toFixed(2)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{od_1.toFixed(4)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{id_1.toFixed(4)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Stress_1].value.toFixed(0)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{fs_1.toFixed(3)}</td>
-                    </tr>
-                    <tr>
-                        <td><b>2</b></td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.L_2].value.toFixed(3)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Deflect_2].value.toFixed(4)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Force_2].value.toFixed(2)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{od_2.toFixed(4)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{id_2.toFixed(4)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Stress_2].value.toFixed(0)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.FS_2].value.toFixed(3)}</td>
-                    </tr>
-                    <tr>
-                        <td><b>Solid</b></td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.L_Solid].value.toFixed(3)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{(st[o.L_Free].value - st[o.L_Solid].value).toFixed(4)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Force_Solid].value.toFixed(2)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{od_solid.toFixed(4)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{(od_solid - 2.0 * st[o.Wire_Dia].value).toFixed(4)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Stress_Solid].value.toFixed(0)}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.FS_Solid].value.toFixed(3)}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br/>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>Safe Load</td>
-                        <td>=</td>
-                        <td>{safe_load.toFixed(3)}</td>
-                        <td>{safe_load_u}</td>
-                        <td/>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{len_lbl}</td>
-                        <td>=</td>
-                        <td>{wire_len_t.toFixed(3)}</td>
-                        <td>{st[o.L_Free].units}</td>
-                    </tr>
-                    <tr>
-                        <td>{st[o.L_Stroke].name}</td>
-                        <td>=</td>
-                        <td>{st[o.L_Stroke].value.toFixed(3)}</td>
-                        <td>{st[o.L_Stroke].units}</td>
-                        <td/>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Weight].name}</td>
-                        <td>=</td>
-                        <td>{wgt1000.toFixed(3)}</td>
-                        <td>{st[o.Weight].units}</td>
-                        <td>{wgt1000_u}</td>
-                    </tr>
-                    <tr>
-                        <td>Pitch</td>
-                        <td>=</td>
-                        <td>{pitch.toFixed(3)}</td>
-                        <td>{st[o.L_Free].units}</td>
-                        <td/>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{st[o.Cycle_Life].name}</td>
-                        <td>=</td>
-                        <td>{st[o.Cycle_Life].value.toFixed(0)}</td>
-                        <td>{cycle_life_u}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br />
-            Deflection at load point 2 is {st[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
-            {pcadmsg}{pcadmsg !== undefined && <br />}
-            {errmsg1}{errmsg1 !== undefined && <br />}
-            {errmsg2}{errmsg2 !== undefined && <br />}
-            {errmsg3}{errmsg0}
-        </React.Fragment>
-    );
-    case "2 (pre-set)":
+//        console.log("In Compression report 1 (mini)");
         return (
-                <React.Fragment>
+            <React.Fragment>
+                <h4>ODOP:Spring &nbsp; Compression Spring Report</h4><br />
+                <b>
+                {hits > 0 && errmsg}{hits > 0 && <br />}
+                {hits > 0 && startpntmsg}{hits > 0 && <br />}
+                </b>
+                {hits > 0 && NaNmsg}{hits > 0 && <br />}
+                {hits > 0 && <br />}
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>{st[o.Spring_Type].name}</td>
+                            <td>=</td>
+                            <td className="" colSpan="2">{st[o.Spring_Type].value}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Material_Type].name}</td>
+                            <td>=</td>
+                            <td className="text-left" colSpan="2">{matTypeValue}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>{st[o.Wire_Dia].name}</td>
+                            <td>=</td>
+                            <td>{st[o.Wire_Dia].value.toFixed(4)}</td>
+                            <td>{st[o.Wire_Dia].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.End_Type].name}</td>
+                            <td>=</td>
+                            <td className="text-left" colSpan="2">{et_tab[st[o.End_Type].value][0]}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>{st[o.Spring_Index].name}</td>
+                            <td>=</td>
+                            <td>{st[o.Spring_Index].value.toFixed(3)}</td>
+                            <td>{st[o.Spring_Index].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Coils_T].name}</td>
+                            <td>=</td>
+                            <td>{st[o.Coils_T].value.toFixed(3)}</td>
+                            <td>{"total " + st[o.Coils_T].units}</td>
+                        </tr>
+                        <tr>
+                            <td>{st[o.Rate].name}</td>
+                            <td>=</td>
+                            <td>{st[o.Rate].value.toFixed(3)}</td>
+                            <td>{st[o.Rate].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Coils_A].name}</td>
+                            <td>=</td>
+                            <td>{st[o.Coils_A].value.toFixed(3)}</td>
+                            <td>{"active " + st[o.Coils_A].units}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <td> &nbsp; &nbsp; </td>
+                            <th>Length</th>
+                            <td> &nbsp; &nbsp; </td>
+                            <th>Deflect</th>
+                            <td> &nbsp; &nbsp; </td>
+                            <th>Force</th>
+                            <td> &nbsp; &nbsp; </td>
+                            <th>&nbsp; OD &nbsp;</th>
+                            <td> &nbsp; &nbsp; </td>
+                            <th>&nbsp; ID &nbsp; </th>
+                            <td> &nbsp; &nbsp; </td>
+                            <th>&nbsp;Stress</th>
+                            <td> &nbsp; &nbsp; </td>
+                            <th>Static FS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Free</b></td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.L_Free].value.toFixed(3)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{(0.0).toFixed(4)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{(0.0).toFixed(2)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.OD_Free].value.toFixed(4)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.ID_Free].value.toFixed(4)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{(0.0).toFixed(0)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>infinite</td>
+                        </tr>
+                        <tr>
+                            <td><b>1</b></td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.L_1].value.toFixed(3)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Deflect_1].value.toFixed(4)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Force_1].value.toFixed(2)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{od_1.toFixed(4)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{id_1.toFixed(4)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Stress_1].value.toFixed(0)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{fs_1.toFixed(3)}</td>
+                        </tr>
+                        <tr>
+                            <td><b>2</b></td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.L_2].value.toFixed(3)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Deflect_2].value.toFixed(4)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Force_2].value.toFixed(2)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{od_2.toFixed(4)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{id_2.toFixed(4)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Stress_2].value.toFixed(0)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.FS_2].value.toFixed(3)}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Solid</b></td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.L_Solid].value.toFixed(3)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{(st[o.L_Free].value - st[o.L_Solid].value).toFixed(4)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Force_Solid].value.toFixed(2)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{od_solid.toFixed(4)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{(od_solid - 2.0 * st[o.Wire_Dia].value).toFixed(4)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Stress_Solid].value.toFixed(0)}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.FS_Solid].value.toFixed(3)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Safe Load</td>
+                            <td>=</td>
+                            <td>{safe_load.toFixed(3)}</td>
+                            <td>{safe_load_u}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{len_lbl}</td>
+                            <td>=</td>
+                            <td>{wire_len_t.toFixed(3)}</td>
+                            <td>{st[o.L_Free].units}</td>
+                        </tr>
+                        <tr>
+                            <td>{st[o.L_Stroke].name}</td>
+                            <td>=</td>
+                            <td>{st[o.L_Stroke].value.toFixed(3)}</td>
+                            <td>{st[o.L_Stroke].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Weight].name}</td>
+                            <td>=</td>
+                            <td>{wgt1000.toFixed(3)}</td>
+                            <td>{st[o.Weight].units}</td>
+                            <td>{wgt1000_u}</td>
+                        </tr>
+                        <tr>
+                            <td>Pitch</td>
+                            <td>=</td>
+                            <td>{pitch.toFixed(3)}</td>
+                            <td>{st[o.L_Free].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Cycle_Life].name}</td>
+                            <td>=</td>
+                            <td>{st[o.Cycle_Life].value.toFixed(0)}</td>
+                            <td>{cycle_life_u}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                Deflection at load point 2 is {st[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
+                {pcadmsg}{pcadmsg !== undefined && <br />}
+                {errmsg1}{errmsg1 !== undefined && <br />}
+                {errmsg2}{errmsg2 !== undefined && <br />}
+                {errmsg3}{errmsg0}
+            </React.Fragment>
+        );
+    case "2 (pre-set)":
+//        console.log("In Compression report 2 (pre-set)");
+        return (
+            <React.Fragment>
                 <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
                     <br />
                     <table>
@@ -575,377 +577,378 @@ export function report(report_name, prefs, st, labels) {
                             <td></td>
                             <td></td>
                         </tr>
-                </tbody>
-            </table>
-        </React.Fragment>
-    );
+                    </tbody>
+                </table>
+            </React.Fragment>
+        );
     case "3 (maxi)":
-    return (
-        <React.Fragment>
-            <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
-            <br />
-            <table>
-                <tbody>
-                    <tr>
-                        <td>{labels[o.Contact_person].name}:</td>
-                        <td> &nbsp; </td>
-                        <td>{labels[o.Contact_person].value}</td>
+//        console.log("In Compression report 3 (maxi)");
+        return (
+            <React.Fragment>
+                <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
+                <br />
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>{labels[o.Contact_person].name}:</td>
+                            <td> &nbsp; </td>
+                            <td>{labels[o.Contact_person].value}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{labels[o.Phone].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{labels[o.Phone].value}</td>
+                        </tr>
+                        <tr>
+                            <td>{labels[o.Company_name].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{labels[o.Company_name].value}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{labels[o.Date].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{labels[o.Date].value}</td>
+                        </tr>
+                        <tr>
+                            <td>{labels[o.Street].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{labels[o.Street].value}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{labels[o.Part_Number].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{labels[o.Part_Number].value}</td>
+                        </tr>
+                        <tr>
+                            <td>{labels[o.City].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{labels[o.City].value}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{labels[o.Finish].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{labels[o.Finish].value}</td>
+                        </tr>
+                        <tr>
+                            <td>{labels[o.State___Zip].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{labels[o.State___Zip].value}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <b>Comment: &nbsp; </b> {labels[o.COMMENT].value} <br/>
+                <br/>
+                <table>
+                    <tbody>
+                        <tr>
+                        <td>{st[o.Spring_Type].name}</td>
+                        <td>=</td>
+                        <td className="" colSpan="2">{st[o.Spring_Type].value}</td>
+                        <td/>
                         <td> &nbsp; &nbsp; </td>
-                        <td>{labels[o.Phone].name}: </td>
-                        <td> &nbsp; </td>
-                        <td>{labels[o.Phone].value}</td>
+                        <td>{st[o.Material_Type].name}</td>
+                        <td>=</td>
+                        <td className="text-left" colSpan="2">{matTypeValue}</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td>{labels[o.Company_name].name}: </td>
+                        <td>{st[o.Wire_Dia].name}</td>
+                        <td>=</td>
+                        <td>{st[o.Wire_Dia].value.toFixed(4)}</td>
+                        <td>{st[o.Wire_Dia].units}</td>
+                        <td/>
                         <td> &nbsp; </td>
-                        <td>{labels[o.Company_name].value}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{labels[o.Date].name}: </td>
-                        <td> &nbsp; </td>
-                        <td>{labels[o.Date].value}</td>
+                        <td>{st[o.ASTM_Fed_Spec].name}</td>
+                        <td>=</td>
+                        <td className="text-left" colSpan="2">{astmFedSpecValue}</td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td>{labels[o.Street].name}: </td>
+                        <td>{st[o.Mean_Dia].name}</td>
+                        <td>=</td>
+                        <td>{st[o.Mean_Dia].value.toFixed(3)}</td>
+                        <td>{st[o.Mean_Dia].units}</td>
+                        <td/>
                         <td> &nbsp; </td>
-                        <td>{labels[o.Street].value}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{labels[o.Part_Number].name}: </td>
-                        <td> &nbsp; </td>
-                        <td>{labels[o.Part_Number].value}</td>
+                        <td>{st[o.Tensile].name}</td>
+                        <td>=</td>
+                        <td>{tensileFixed0}</td>
+                        <td>{st[o.Tensile].units}</td>
                     </tr>
                     <tr>
-                        <td>{labels[o.City].name}: </td>
+                        <td>{st[o.Spring_Index].name}</td>
+                        <td>=</td>
+                        <td>{st[o.Spring_Index].value.toFixed(3)}</td>
+                        <td>{st[o.Spring_Index].units}</td>
+                        <td/>
                         <td> &nbsp; </td>
-                        <td>{labels[o.City].value}</td>
-                        <td> &nbsp; &nbsp; </td>
-                        <td>{labels[o.Finish].name}: </td>
-                        <td> &nbsp; </td>
-                        <td>{labels[o.Finish].value}</td>
+                        <td>{st[o.End_Type].name}</td>
+                        <td>=</td>
+                        <td className="text-left" colSpan="2">{et_tab[st[o.End_Type].value][0]}</td>
                     </tr>
                     <tr>
-                        <td>{labels[o.State___Zip].name}: </td>
+                        <td>{st[o.Coils_T].name}</td>
+                        <td>=</td>
+                        <td>{st[o.Coils_T].value.toFixed(3)}</td>
+                        <td>{"total " + st[o.Coils_T].units}</td>
+                        <td/>
                         <td> &nbsp; </td>
-                        <td>{labels[o.State___Zip].value}</td>
+                        <td>Pitch</td>
+                        <td>=</td>
+                        <td>{pitch.toFixed(3)}</td>
+                        <td>{st[o.L_Free].units}</td>
+                    </tr>
+                    <tr>
+                        <td>{st[o.Coils_A].name}</td>
+                        <td>=</td>
+                        <td>{st[o.Coils_A].value.toFixed(3)}</td>
+                        <td>{"active " + st[o.Coils_A].units}</td>
+                        <td/>
+                        <td> &nbsp; </td>
+                        <td>Helix Angle</td>
+                        <td>=</td>
+                        <td>{hlx_ang.toFixed(2)}</td>
+                        <td>degrees</td>
+                    </tr>
+                    <tr>
+                        <td>{len_lbl}</td>
+                        <td>=</td>
+                        <td>{wire_len_t.toFixed(3)}</td>
+                        <td>{st[o.L_Free].units}</td>
+                        <td/>
+                        <td> &nbsp; </td>
+                        <td>{st[o.Weight].name}</td>
+                        <td>=</td>
+                        <td>{wgt1000.toFixed(3)}</td>
+                        <td>{st[o.Weight].units}</td>
+                        <td>{wgt1000_u}</td>
+                    </tr>
+                    <tr>
+                        <td>Safe Load</td>
+                        <td>=</td>
+                        <td>{safe_load.toFixed(3)}</td>
+                        <td>{safe_load_u}</td>
+                        <td/>
+                        <td> &nbsp; </td>
+                        <td>{st[o.Rate].name}</td>
+                        <td>=</td>
+                        <td>{st[o.Rate].value.toFixed(3)}</td>
+                        <td>{st[o.Rate].units}</td>
+                    </tr>
+                    <tr>
+                        <td>Safe Travel</td>
+                        <td>=</td>
+                        <td>{safe_travel.toFixed(3)}</td>
+                        <td>{st[o.L_Free].units}</td>
+                        <td/>
+                        <td> &nbsp; </td>
+                        <td>{st[o.Cycle_Life].name}</td>
+                        <td>=</td>
+                        <td>{st[o.Cycle_Life].value.toFixed(0)}</td>
+                        <td className="text-left" colSpan="2">{cycle_life_u}</td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
-            <b>Comment: &nbsp; </b> {labels[o.COMMENT].value} <br/>
             <br/>
             <table>
+                <thead>
+                    <tr>
+                        <th/>
+                        <th/>
+                        <th>Free </th>
+                        <th>1st Load</th>
+                        <th>&nbsp; 2nd Load</th>
+                        <td></td>
+                        <th> &nbsp; &nbsp; Solid</th>
+                        <th></th>
+                        <th> &nbsp; &nbsp; </th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
-                    <td>{st[o.Spring_Type].name}</td>
-                    <td>=</td>
-                    <td className="" colSpan="2">{st[o.Spring_Type].value}</td>
-                    <td/>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{st[o.Material_Type].name}</td>
-                    <td>=</td>
-                    <td className="text-left" colSpan="2">{matTypeValue}</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>{st[o.Wire_Dia].name}</td>
-                    <td>=</td>
-                    <td>{st[o.Wire_Dia].value.toFixed(4)}</td>
-                    <td>{st[o.Wire_Dia].units}</td>
-                    <td/>
-                    <td> &nbsp; </td>
-                    <td>{st[o.ASTM_Fed_Spec].name}</td>
-                    <td>=</td>
-                    <td className="text-left" colSpan="2">{astmFedSpecValue}</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>{st[o.Mean_Dia].name}</td>
-                    <td>=</td>
-                    <td>{st[o.Mean_Dia].value.toFixed(3)}</td>
-                    <td>{st[o.Mean_Dia].units}</td>
-                    <td/>
-                    <td> &nbsp; </td>
-                    <td>{st[o.Tensile].name}</td>
-                    <td>=</td>
-                    <td>{tensileFixed0}</td>
-                    <td>{st[o.Tensile].units}</td>
-                </tr>
-                <tr>
-                    <td>{st[o.Spring_Index].name}</td>
-                    <td>=</td>
-                    <td>{st[o.Spring_Index].value.toFixed(3)}</td>
-                    <td>{st[o.Spring_Index].units}</td>
-                    <td/>
-                    <td> &nbsp; </td>
-                    <td>{st[o.End_Type].name}</td>
-                    <td>=</td>
-                    <td className="text-left" colSpan="2">{et_tab[st[o.End_Type].value][0]}</td>
-                </tr>
-                <tr>
-                    <td>{st[o.Coils_T].name}</td>
-                    <td>=</td>
-                    <td>{st[o.Coils_T].value.toFixed(3)}</td>
-                    <td>{"total " + st[o.Coils_T].units}</td>
-                    <td/>
-                    <td> &nbsp; </td>
-                    <td>Pitch</td>
-                    <td>=</td>
-                    <td>{pitch.toFixed(3)}</td>
-                    <td>{st[o.L_Free].units}</td>
-                </tr>
-                <tr>
-                    <td>{st[o.Coils_A].name}</td>
-                    <td>=</td>
-                    <td>{st[o.Coils_A].value.toFixed(3)}</td>
-                    <td>{"active " + st[o.Coils_A].units}</td>
-                    <td/>
-                    <td> &nbsp; </td>
-                    <td>Helix Angle</td>
-                    <td>=</td>
-                    <td>{hlx_ang.toFixed(2)}</td>
-                    <td>degrees</td>
-                </tr>
-                <tr>
-                    <td>{len_lbl}</td>
-                    <td>=</td>
-                    <td>{wire_len_t.toFixed(3)}</td>
-                    <td>{st[o.L_Free].units}</td>
-                    <td/>
-                    <td> &nbsp; </td>
-                    <td>{st[o.Weight].name}</td>
-                    <td>=</td>
-                    <td>{wgt1000.toFixed(3)}</td>
-                    <td>{st[o.Weight].units}</td>
-                    <td>{wgt1000_u}</td>
-                </tr>
-                <tr>
-                    <td>Safe Load</td>
-                    <td>=</td>
-                    <td>{safe_load.toFixed(3)}</td>
-                    <td>{safe_load_u}</td>
-                    <td/>
-                    <td> &nbsp; </td>
-                    <td>{st[o.Rate].name}</td>
-                    <td>=</td>
-                    <td>{st[o.Rate].value.toFixed(3)}</td>
-                    <td>{st[o.Rate].units}</td>
-                </tr>
-                <tr>
-                    <td>Safe Travel</td>
-                    <td>=</td>
-                    <td>{safe_travel.toFixed(3)}</td>
-                    <td>{st[o.L_Free].units}</td>
-                    <td/>
-                    <td> &nbsp; </td>
-                    <td>{st[o.Cycle_Life].name}</td>
-                    <td>=</td>
-                    <td>{st[o.Cycle_Life].value.toFixed(0)}</td>
-                    <td className="text-left" colSpan="2">{cycle_life_u}</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-        <br/>
-        <table>
-            <thead>
-                <tr>
-                    <th/>
-                    <th/>
-                    <th>Free </th>
-                    <th>1st Load</th>
-                    <th>&nbsp; 2nd Load</th>
-                    <td></td>
-                    <th> &nbsp; &nbsp; Solid</th>
-                    <th></th>
-                    <th> &nbsp; &nbsp; </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><b>Force</b></td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{(0.0).toFixed(2)}</td>
-                    <td>{st[o.Force_1].value.toFixed(2)}</td>
-                    <td>{st[o.Force_2].value.toFixed(2)}</td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{st[o.Force_Solid].value.toFixed(2)}</td>
-                    <td className="text-left" colSpan="2">{st[o.Force_1].units}</td>
-                    <td/>
-                </tr>
-                <tr>
-                    <td><b>Length</b></td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{st[o.L_Free].value.toFixed(3)}</td>
-                    <td>{st[o.L_1].value.toFixed(3)}</td>
-                    <td>{st[o.L_2].value.toFixed(3)}</td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{st[o.L_Solid].value.toFixed(3)}</td>
-                    <td>{st[o.L_1].units}</td>
-                </tr>
-                <tr>
-                    <td><b>Deflection</b></td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{(0.0).toFixed(3)}</td>
-                    <td>{st[o.Deflect_1].value.toFixed(3)}</td>
-                    <td>{st[o.Deflect_2].value.toFixed(3)}</td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{(st[o.L_Free].value - st[o.L_Solid].value).toFixed(3)}</td>
-                    <td>{st[o.Deflect_2].units}</td>
-                </tr>
-                <tr>
-                    <td><b>Outside Dia.</b></td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{st[o.OD_Free].value.toFixed(3)}</td>
-                    <td>{od_1.toFixed(3)}</td>
-                    <td>{od_2.toFixed(3)}</td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{od_solid.toFixed(3)}</td>
-                    <td>{st[o.OD_Free].units}</td>
-                </tr>
-                <tr>
-                    <td><b>Inside Dia.</b></td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{st[o.ID_Free].value.toFixed(3)}</td>
-                    <td>{id_1.toFixed(3)}</td>
-                    <td>{id_2.toFixed(3)}</td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{(od_solid - 2.0 * st[o.Wire_Dia].value).toFixed(3)}</td>
-                    <td>{st[o.ID_Free].units}</td>
-                </tr>
-                <tr>
-                    <td>w/o set &nbsp; kw = </td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{kw1.toFixed(3)}</td>
-                    <td></td>
-                    <td></td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td> ... <b>Stress</b></td>
-                    <td></td>
-                    <td></td>
-                    <td>{st[o.Stress_1].value.toFixed(0)}</td>
-                    <td>{st[o.Stress_2].value.toFixed(0)}</td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{st[o.Stress_Solid].value.toFixed(0)}</td>
-                    <td>{st[o.Stress_1].units}</td>
-                </tr>
-                <tr>
-                    <td> ... <b>% Tensile</b></td>
-                    <td></td>
-                    <td></td>
-                    <td>{(st[o.Stress_1].value / dhat).toFixed(1)}</td>
-                    <td>{(st[o.Stress_2].value / dhat).toFixed(1)}</td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{(st[o.Stress_Solid].value / dhat).toFixed(1)}</td>
-                    <td>% &nbsp; &nbsp; </td>
-                </tr>
-                <tr>
-                    <td> ... <b>Static F.S.</b></td>
-                    <td></td>
-                    <td></td>
-                    <td>{fs_1.toFixed(2)}</td>
-                    <td>{st[o.FS_2].value.toFixed(2)}</td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>{st[o.FS_Solid].value.toFixed(2)}</td>
-                    <td>{st[o.FS_Solid].units}</td>
-                </tr>
-            </tbody>
-        </table>
-        <hr/>
-        <table>
-            <tbody>
-                <tr>
-                    <td>Wind: </td>
-                    <td> &nbsp; </td>
-                    <td>rh</td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>lh</td>
-                    <td> &nbsp; </td>
-                    <td>opt</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Data source: </td>
-                    <td> &nbsp; </td>
-                    <td>print </td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>sample </td>
-                    <td> &nbsp; </td>
-                    <td>verbal</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Mandrel: </td>
+                        <td><b>Force</b></td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{(0.0).toFixed(2)}</td>
+                        <td>{st[o.Force_1].value.toFixed(2)}</td>
+                        <td>{st[o.Force_2].value.toFixed(2)}</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{st[o.Force_Solid].value.toFixed(2)}</td>
+                        <td className="text-left" colSpan="2">{st[o.Force_1].units}</td>
+                        <td/>
+                    </tr>
+                    <tr>
+                        <td><b>Length</b></td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{st[o.L_Free].value.toFixed(3)}</td>
+                        <td>{st[o.L_1].value.toFixed(3)}</td>
+                        <td>{st[o.L_2].value.toFixed(3)}</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{st[o.L_Solid].value.toFixed(3)}</td>
+                        <td>{st[o.L_1].units}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Deflection</b></td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{(0.0).toFixed(3)}</td>
+                        <td>{st[o.Deflect_1].value.toFixed(3)}</td>
+                        <td>{st[o.Deflect_2].value.toFixed(3)}</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{(st[o.L_Free].value - st[o.L_Solid].value).toFixed(3)}</td>
+                        <td>{st[o.Deflect_2].units}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Outside Dia.</b></td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{st[o.OD_Free].value.toFixed(3)}</td>
+                        <td>{od_1.toFixed(3)}</td>
+                        <td>{od_2.toFixed(3)}</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{od_solid.toFixed(3)}</td>
+                        <td>{st[o.OD_Free].units}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Inside Dia.</b></td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{st[o.ID_Free].value.toFixed(3)}</td>
+                        <td>{id_1.toFixed(3)}</td>
+                        <td>{id_2.toFixed(3)}</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{(od_solid - 2.0 * st[o.Wire_Dia].value).toFixed(3)}</td>
+                        <td>{st[o.ID_Free].units}</td>
+                    </tr>
+                    <tr>
+                        <td>w/o set &nbsp; kw = </td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{kw1.toFixed(3)}</td>
+                        <td></td>
+                        <td></td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td> ... <b>Stress</b></td>
+                        <td></td>
+                        <td></td>
+                        <td>{st[o.Stress_1].value.toFixed(0)}</td>
+                        <td>{st[o.Stress_2].value.toFixed(0)}</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{st[o.Stress_Solid].value.toFixed(0)}</td>
+                        <td>{st[o.Stress_1].units}</td>
+                    </tr>
+                    <tr>
+                        <td> ... <b>% Tensile</b></td>
+                        <td></td>
+                        <td></td>
+                        <td>{(st[o.Stress_1].value / dhat).toFixed(1)}</td>
+                        <td>{(st[o.Stress_2].value / dhat).toFixed(1)}</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{(st[o.Stress_Solid].value / dhat).toFixed(1)}</td>
+                        <td>% &nbsp; &nbsp; </td>
+                    </tr>
+                    <tr>
+                        <td> ... <b>Static F.S.</b></td>
+                        <td></td>
+                        <td></td>
+                        <td>{fs_1.toFixed(2)}</td>
+                        <td>{st[o.FS_2].value.toFixed(2)}</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>{st[o.FS_Solid].value.toFixed(2)}</td>
+                        <td>{st[o.FS_Solid].units}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr/>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Wind: </td>
+                        <td> &nbsp; </td>
+                        <td>rh</td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>lh</td>
+                        <td> &nbsp; </td>
+                        <td>opt</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Data source: </td>
+                        <td> &nbsp; </td>
+                        <td>print </td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>sample </td>
+                        <td> &nbsp; </td>
+                        <td>verbal</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Mandrel: </td>
+                        <td> &nbsp; </td>
+                        <td> &nbsp; </td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td>Fits in: </td>
+                        <td> &nbsp; </td>
+                        <td> &nbsp; </td>
+                        <td>Works over:</td>
+                    </tr>
+                    <tr>
+                        <td>Stress relieve</td>
+                        <td>/ HT: </td>
+                        <td> &nbsp; </td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td> &nbsp; </td>
+                        <td> &nbsp; </td>
+                        <td>Squareness</td>
+                        <td className="text-left">(deg): </td>
+                    </tr>
+                    <tr>
+                        <td>Shot peen: </td>
+                        <td> &nbsp; </td>
+                        <td> yes </td>
+                        <td> &nbsp; </td>
+                        <td> no </td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td> &nbsp; </td>
+                        <td> Operating temp: </td>
+                    </tr>
+                    <tr>
+                        <td>Special notes</td>
+                        <td className="text-left" colSpan="2">& tolerances: </td>
+                        <td> &nbsp; </td>
+                        <td> &nbsp; </td>
+                        <td> &nbsp; </td>
+                        <td> &nbsp; &nbsp; </td>
+                        <td> End use: </td>
+                        <td> &nbsp; </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr/>
+            Deflection at load point 2 is {st[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
+            {pcadmsg}{pcadmsg !== undefined && <br />}
+            {errmsg1}{errmsg1 !== undefined && <br />}
+            {errmsg2}{errmsg2 !== undefined && <br />}
+            {errmsg3}{errmsg0}
+            <hr/>
+            <table>
+                <tbody>
+                    <tr>
+                    <td> &nbsp; approved for mfg.&nbsp; </td>
                     <td> &nbsp; </td>
                     <td> &nbsp; </td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td>Fits in: </td>
+                    <td> &nbsp; approved for mfg.&nbsp; </td>
+                    </tr>
+                    <tr>
                     <td> &nbsp; </td>
+                    </tr>
+                    <tr>
+                    <td> by _______________________ &nbsp; </td>
+                    <td> &nbsp; date _______ &nbsp; </td>
                     <td> &nbsp; </td>
-                    <td>Works over:</td>
-                </tr>
-                <tr>
-                    <td>Stress relieve</td>
-                    <td>/ HT: </td>
-                    <td> &nbsp; </td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td> &nbsp; </td>
-                    <td> &nbsp; </td>
-                    <td>Squareness</td>
-                    <td className="text-left">(deg): </td>
-                </tr>
-                <tr>
-                    <td>Shot peen: </td>
-                    <td> &nbsp; </td>
-                    <td> yes </td>
-                    <td> &nbsp; </td>
-                    <td> no </td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td> &nbsp; </td>
-                    <td> Operating temp: </td>
-                </tr>
-                <tr>
-                    <td>Special notes</td>
-                    <td className="text-left" colSpan="2">& tolerances: </td>
-                    <td> &nbsp; </td>
-                    <td> &nbsp; </td>
-                    <td> &nbsp; </td>
-                    <td> &nbsp; &nbsp; </td>
-                    <td> End use: </td>
-                    <td> &nbsp; </td>
-                </tr>
-            </tbody>
-        </table>
-        <hr/>
-        Deflection at load point 2 is {st[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
-        {pcadmsg}{pcadmsg !== undefined && <br />}
-        {errmsg1}{errmsg1 !== undefined && <br />}
-        {errmsg2}{errmsg2 !== undefined && <br />}
-        {errmsg3}{errmsg0}
-        <hr/>
-        <table>
-            <tbody>
-                <tr>
-                <td> &nbsp; approved for mfg.&nbsp; </td>
-                <td> &nbsp; </td>
-                <td> &nbsp; </td>
-                <td> &nbsp; approved for mfg.&nbsp; </td>
-                </tr>
-                <tr>
-                <td> &nbsp; </td>
-                </tr>
-                <tr>
-                <td> by _______________________ &nbsp; </td>
-                <td> &nbsp; date _______ &nbsp; </td>
-                <td> &nbsp; </td>
-                <td> by _______________________ &nbsp; </td>
-                <td> &nbsp; date _______ &nbsp; </td>
-                </tr>
-            </tbody>
-        </table>
-        </React.Fragment>
-    );
+                    <td> by _______________________ &nbsp; </td>
+                    <td> &nbsp; date _______ &nbsp; </td>
+                    </tr>
+                </tbody>
+            </table>
+            </React.Fragment>
+        );
     }
 }

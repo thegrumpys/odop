@@ -43,6 +43,6 @@ export default {
     name: design_name
   },
   session: {
-      refresh: session_refresh
+    refresh: session_refresh,
   }
 };

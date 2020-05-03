@@ -8,7 +8,7 @@ import {
     NavDropdown
 } from 'react-bootstrap';
 import classnames from 'classnames';
-import { deleteAutoSave } from '../store/actionCreators';
+import { changeUser, deleteAutoSave } from '../store/actionCreators';
 import { ExecutePanel } from './ExecutePanel';
 import { DesignTable } from './DesignTable';
 import { connect } from 'react-redux';
@@ -19,6 +19,8 @@ import FileDelete from '../menus/File/FileDelete';
 import FileRecent from '../menus/File/FileRecent';
 import FilePreferences from '../menus/File/FilePreferences';
 import FileProperties from '../menus/File/FileProperties';
+import LogIn from '../menus/Session/LogIn';
+import LogOut from '../menus/Session/LogOut';
 import ActionSearch from '../menus/Action/ActionSearch';
 import ActionSeek from '../menus/Action/ActionSeek';
 import ActionTrade from '../menus/Action/ActionTrade';
@@ -37,7 +39,7 @@ import { logUsage } from '../logUsage';
 class App extends Component {
     
     constructor(props) {
-//        console.log("In App.constructor props=",props);
+//        console.log('In App.constructor props=',props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.setKey = this.setKey.bind(this);
@@ -47,10 +49,59 @@ class App extends Component {
         this.state = {
             isOpen: false,
             activeTab: "1",
-            report_names: report_names
+            type: this.props.type,
+            report_names: report_names,
         };
+        this.checkAuthentication = this.checkAuthentication.bind(this);
+        this.checkAuthentication();
     }
     
+    static getDerivedStateFromProps(props, state) {
+//        console.log('In App.getDerivedStateFromProps props=',props,'state=',state);
+        if (props.type !== state.type) {
+          var { getReportNames } = require('../designtypes/'+props.type+'/report.js'); // Dynamically load getReportNames
+          var report_names = getReportNames();
+//          console.log('In App.getDerivedStateFromProps report_names=', report_names);
+          return {
+              report_names: report_names,
+          };
+        }
+        // Return null if the state hasn't changed
+        return null;
+    }
+
+    async checkAuthentication() {
+//      console.log('In App.checkAuthentication');
+      var authenticated = await this.props.auth.isAuthenticated();
+//      console.log("In App.checkAuthentication before authenticated=",authenticated);
+      var session = await this.props.auth._oktaAuth.session.get();
+//      console.log('In App.checkAuthentication session=',session);
+      if (session.status === "INACTIVE") {
+//          console.log('In App.checkAuthentication INACTIVE session.status=',session.status);
+          authenticated = authenticated && false; // Combine with session status
+      }
+//      console.log("In App.checkAuthentication after authenticated=",authenticated);
+      if (authenticated) { // We have become authenticated
+//            this.interval = setInterval(() => {
+//                this.props.auth._oktaAuth.session.refresh()
+//                .then(function(session) {
+//                    // logged in
+//                    console.log('In App.checkAuthentication before session=',session);
+//                })
+//                .catch(function(err) {
+//                    // not logged in
+//                    console.log('In App.checkAuthentication before err=',err);
+//                });
+//            }, this.state.session_refresh * 1000);
+//            console.log('In App.checkAuthentication setInterval this.interval=',this.interval);
+            this.props.changeUser(session.userId);
+      } else { // We have become unauthenticated
+//            console.log('In App.checkAuthentication clearInterval this.interval=',this.interval);
+//            clearInterval(this.interval);
+            this.props.changeUser(null);
+      }
+    }
+
     toggle() {
 //        console.log('In App.toggle');
         this.setState({
@@ -103,24 +154,24 @@ class App extends Component {
         return (
             <React.Fragment>
                 <Navbar variant="light" bg="light" expand="md" fixed="top">
-                    <Navbar.Brand><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
+                    <Navbar.Brand><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>&nbsp;ODOP</Navbar.Brand>
                     <Navbar.Toggle onClick={this.toggle} />
                     <Navbar.Collapse in={this.state.isOpen}>
                         <Nav className="mr-auto">
+                            <NavDropdown title="Session">
+                                <LogIn/>
+                                <LogOut/>
+                            </NavDropdown>
                             <NavDropdown title="File">
-                                <FileOpen />
-                                <FileSave />
-                                <FileSaveAs />
-                                <FileDelete />
+                                <FileOpen/>
+                                <FileSave/>
+                                <FileSaveAs/>
+                                <FileDelete/>
                                 <NavDropdown.Divider />
                                 <FileRecent />
                                 <NavDropdown.Divider />
                                 <FilePreferences />
                                 <FileProperties />
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={() => {this.props.deleteAutoSave();this.props.auth.logout()}}>
-                                    Logout
-                                </NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title="Action">
                                 <ActionSearch />
@@ -170,7 +221,7 @@ class App extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <Container style={{backgroundColor: '#eee', paddingTop: '100px'}}>
+                <Container style={{backgroundColor: '#eee', paddingTop: '60px'}}>
                     <ExecutePanel />
                     <Tabs defaultActiveKey="1" activeKey={this.state.activeTab} onSelect={k => this.setKey(k)}>
                         <Tab eventKey="1">
@@ -195,13 +246,13 @@ class App extends Component {
 const mapStateToProps = state => ({
     name: state.name,
     type: state.type,
-    version: state.version,
     symbol_table: state.symbol_table,
     system_controls: state.system_controls,
-    labels: state.labels,
+    labels: state.labels
 });
 
 const mapDispatchToProps = {
+    changeUser: changeUser,
     deleteAutoSave: deleteAutoSave
 };
 

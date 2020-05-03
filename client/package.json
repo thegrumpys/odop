@@ -7,6 +7,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test-fetch": "react-scripts test --env=node",
     "coverage": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject"
   },
@@ -20,7 +21,9 @@
     "url": "https://github.com/thegrumpys/odop/issues"
   },
   "homepage": "https://odop.heroku.com/",
-  "devDependencies": {},
+  "devDependencies": {
+    "node-fetch": "^2.6.0"
+  },
   "dependencies": {
     "@mars/heroku-js-runtime-env": "^3.0.2",
     "@okta/okta-auth-js": "^2.13.2",

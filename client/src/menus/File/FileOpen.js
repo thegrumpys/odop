@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { load, deleteAutoSave } from '../../store/actionCreators';
+import { load, loadInitialState, changeUser, restoreAutoSave, deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -12,11 +12,13 @@ class FileOpen extends Component {
 
     constructor(props) {
         super(props);
-//        console.log("In FileOpen .constructor props=",props);
+//        console.log("In FileOpen.constructor props=",props);
         this.toggle = this.toggle.bind(this);
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
         this.onOpen = this.onOpen.bind(this);
+        this.onLoadAutoSave = this.onLoadAutoSave.bind(this);
+        this.onLoadInitialState = this.onLoadInitialState.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
@@ -24,35 +26,21 @@ class FileOpen extends Component {
             names: [],
             type: this.props.type,
             name: this.props.name,
-            authenticated: null,
-            uid: null,
         };
+//        this.getDesignNames(this.state.type);
     }
 
-    async componentDidMount() {
+    componentDidMount() {
 //        console.log('In FileOpen.componentDidMount');
-        var authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileOpen.componentDidMount before authenticated=",authenticated);
-        var session = await this.props.auth._oktaAuth.session.get();
-//        console.log('In FileOpen.componentDidMount session=',session);
-        if (session.status === "INACTIVE") {
-//            console.log('In FileOpen.componentDidMount INACTIVE session.status=',session.status);
-            authenticated = authenticated && false; // Combine with session status
-        }
-//        console.log("In FileOpen.componentDidMount after authenticated=",authenticated);
-        if (authenticated !== this.state.authenticated) { // Did authentication change?
-            this.setState({ authenticated }); // Remember our current authentication state
-            if (authenticated) { // We have become authenticated
-                this.setState({
-                    uid: session.userId,
-                });
-            } else { // We have become unauthenticated
-                this.setState({
-                    uid: null,
-                });
-            }
-            this.getDesignNames(this.state.type);
-        }
+    }
+    
+    componentDidUpdate(prevProps, prevState) {
+//        console.log('In FileOpen.componentDidUpdate prevProps=',prevProps,'prevState=',prevState);
+    }
+    
+    static getDerivedStateFromProps(props, state) {
+//        console.log('In FileOpen.getDerivedStateFromProps props=',props,'state=',state);
+        return null; // Return null if the state hasn't changed
     }
 
     getDesignNames(type) {
@@ -61,7 +49,7 @@ class FileOpen extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.uid
+                    Authorization: 'Bearer ' + this.props.user
                 }
             })
             .then(res => {
@@ -87,7 +75,7 @@ class FileOpen extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
                 headers: {
-                    Authorization: 'Bearer ' + this.state.uid
+                    Authorization: 'Bearer ' + this.props.user
                 }
             })
             .then(res => {
@@ -101,7 +89,9 @@ class FileOpen extends Component {
 //                console.log('In FileOpen.getDesign design=', design);
                 var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
-                this.props.load(migrated_design)
+                var user = this.props.user; // Save current user
+                this.props.load(migrated_design);
+                this.props.changeUser(user); // Restore current user
                 this.props.deleteAutoSave();
                 logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
             })
@@ -110,16 +100,34 @@ class FileOpen extends Component {
             });
     }
 
+    loadInitialState(type) {
+//      console.log('In FileOpen.loadInitialState type=', type);
+      var user = this.props.user; // Save current user
+      this.props.loadInitialState(type);
+      this.props.changeUser(user); // Restore current user
+      this.props.deleteAutoSave();
+      logUsage('event', 'FileOpen', { 'event_label': type + ' load initialState' });
+    }
+
+    loadAutoSave() {
+//      console.log('In FileOpen.loadAutoSave');
+      var user = this.props.user; // Save current user
+      this.props.restoreAutoSave();
+      this.props.changeUser(user); // Restore current user
+      this.props.deleteAutoSave();
+      logUsage('event', 'FileOpen', { 'event_label': 'load autoSave' });
+    }
+
     toggle() {
 //        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
         var type = (this.state.types.includes(this.props.type) ? this.props.type : config.design.type);
-        this.getDesignNames(type);
         var name = (this.state.names.includes(this.props.name) ? this.props.name : config.design.name);
         this.setState({
             modal: !this.state.modal,
             type: type,
             name: name
         });
+        this.getDesignNames(this.state.type);
     }
 
     onSelectType(event) {
@@ -146,6 +154,22 @@ class FileOpen extends Component {
         this.getDesign(this.state.type,this.state.name);
     }
 
+    onLoadAutoSave() {
+//      console.log('In FileOpen.onLoadAutoSave');
+      this.setState({
+          modal: !this.state.modal
+      });
+      this.loadAutoSave();
+    }
+
+    onLoadInitialState() {
+//      console.log('In FileOpen.onLoadInitialState this.state.type=',this.state.type);
+      this.setState({
+          modal: !this.state.modal
+      });
+      this.loadInitialState(this.state.type);
+  }
+
     onCancel() {
 //        console.log('In FileOpen.onCancel');
         this.setState({
@@ -161,7 +185,7 @@ class FileOpen extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     Open&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} className={this.props.className}>
+                <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Open
@@ -169,6 +193,7 @@ class FileOpen extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <br />
+                        { this.props.user == null ? <Alert variant="warning">Session : LogIn to access your private [read/write] designs</Alert> : <React.Fragment></React.Fragment> }
                         <Form.Label htmlFor="fileOpenSelectType">Select design type to open:</Form.Label>
                         <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
                             {this.state.types.map((designtype, index) =>
@@ -176,7 +201,7 @@ class FileOpen extends Component {
                             )}
                         </Form.Control>
                         <br />
-                        <Form.Label htmlFor="fileOpenSelectName">Select design to open:</Form.Label>
+                        <Form.Label htmlFor="fileOpenSelectName">Select design name to open:</Form.Label>
                         <Form.Control as="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
                             {this.state.names.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                 <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
@@ -185,6 +210,8 @@ class FileOpen extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                        {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
+                        {typeof(Storage) !== "undefined" && localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={this.onLoadAutoSave}>Load Auto Save</Button>}{' '}
                         <Button variant="primary" onClick={this.onOpen}>Open</Button>
                     </Modal.Footer>
                 </Modal>
@@ -194,12 +221,16 @@ class FileOpen extends Component {
 }
 
 const mapStateToProps = state => ({
+    user: state.user,
     type: state.type,
     name: state.name,
 });
 
 const mapDispatchToProps = {
     load: load,
+    loadInitialState: loadInitialState,
+    changeUser: changeUser,
+    restoreAutoSave: restoreAutoSave,
     deleteAutoSave: deleteAutoSave
 };
 

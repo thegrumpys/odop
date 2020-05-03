@@ -5,7 +5,7 @@ export function logUsage(tag, action, note) {
         window.gtag(tag, action, note); // Output to Google Analytics
     }
 
-    var body = JSON.stringify({tag: tag, action: action, note: note});
+    var body = JSON.stringify({tag: tag, action: action, note: note}, null, 2);
 //    console.log('body=',body);
     fetch('/api/v1/usage_log', {
             method: 'POST',

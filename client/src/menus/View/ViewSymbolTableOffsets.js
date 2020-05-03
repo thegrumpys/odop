@@ -8,7 +8,6 @@ class ViewSymbolTableOffsets extends Component {
     constructor(props) {
 //        console.log('In ViewSymbolTableOffsets.constructor');
         super(props);
-        this.toggle = this.toggle.bind(this);
         this.state = {
             modal: false
         };
@@ -19,7 +18,7 @@ class ViewSymbolTableOffsets extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        logUsage('event', 'ViewSymbolTableOffsets');
+        if (this.state.modal) logUsage('event', 'ViewSymbolTableOffsets');
     }
 
     render() {
@@ -32,7 +31,7 @@ class ViewSymbolTableOffsets extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     SymbolTableOffsets
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} className={this.props.className}>
+                <Modal show={this.state.modal} className={this.props.className} onHide={this.toggle}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : SymbolTableOffsets

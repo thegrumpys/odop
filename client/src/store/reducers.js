@@ -60,6 +60,7 @@ export function reducers(state, action) {
             name: action.payload.name
         });
     case CHANGE_USER:
+//        console.log('In CHANGE_USER action.payload.user=',action.payload.user);
         return Object.assign({}, state, {
             user: action.payload.user
         });
@@ -329,7 +330,7 @@ export function reducers(state, action) {
             }
         }
 
-// SYMTEM CONTROL
+// SYSTEM CONTROL
 
     case CHANGE_SYSTEM_CONTROLS_VALUE:
         return {
@@ -361,7 +362,7 @@ export function reducers(state, action) {
     case SAVE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
 //            console.log("Save Auto Save");
-            localStorage.setItem('autosave', JSON.stringify(state)); // create or replace auto save file with current state contents
+            localStorage.setItem('autosave', JSON.stringify(state, null, 2)); // create or replace auto save file with current state contents
         }
         return state; // state not changed
     case RESTORE_AUTO_SAVE:

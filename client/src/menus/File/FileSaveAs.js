@@ -21,43 +21,16 @@ class FileSaveAs extends Component {
             designs: [],
             type: this.props.state.type,
             name: this.props.state.name,
-            authenticated: null,
-            uid: null,
         };
     }
     
-    async componentDidMount() {
-//        console.log('In FileSaveAs.componentDidMount');
-        var authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileSaveAs.componentDidMount before authenticated=",authenticated);
-        var session = await this.props.auth._oktaAuth.session.get();
-//        console.log('In FileSaveAs.componentDidMount session=',session);
-        if (session.status === "INACTIVE") {
-//            console.log('In FileSaveAs.componentDidMount INACTIVE session.status=',session.status);
-            authenticated = authenticated && false; // Combine with session status
-        }
-//        console.log("In FileSaveAs.componentDidMount after authenticated=",authenticated);
-        if (authenticated !== this.state.authenticated) { // Did authentication change?
-            this.setState({ authenticated }); // Remember our current authentication state
-            if (authenticated) { // We have become authenticated
-                this.setState({
-                    uid: session.userId,
-                });
-            } else { // We have become unauthenticated
-                this.setState({
-                    uid: null,
-                });
-            }
-        }
-    }
-
     getDesigns(type) {
 //        console.log('In FileSaveAs.getDesigns type=', type);
         // Get the designs and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
-                  Authorization: 'Bearer ' + this.state.uid
+                  Authorization: 'Bearer ' + this.props.user
                 }
             })
             .then(res => {
@@ -75,9 +48,9 @@ class FileSaveAs extends Component {
     
     postDesign(type,name) {
         this.props.changeName(name);
-        this.props.changeUser(this.state.uid);
+        this.props.changeUser(this.props.user);
         var method = 'POST'; // Create it
-        if (this.state.designs.filter(e => {return e.name === name && e.user === this.state.uid}).length > 0) { // Does it already exist?
+        if (this.state.designs.filter(e => {return e.name === name && e.user === this.props.user}).length > 0) { // Does it already exist?
             method = 'PUT'; // Update it
         }
 //        console.log('In FileSaveAs.postDesign type=', type,' name=', name,' method=', method);
@@ -87,9 +60,9 @@ class FileSaveAs extends Component {
                 headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
-                  Authorization: 'Bearer ' + this.state.uid
+                  Authorization: 'Bearer ' + this.props.user
                 },
-                body: JSON.stringify(this.props.state)
+                body: JSON.stringify(this.props.state, null, 2)
             })
             .then(res => {
                 displaySpinner(false);
@@ -128,9 +101,7 @@ class FileSaveAs extends Component {
         });
         // Save the model
         var type = this.state.type;
-        if (type === undefined) type = 'Piston-Cylinder';
         var name = this.state.name;
-        if (name === undefined) name = 'checkpt';
         this.postDesign(type,name);
         this.props.deleteAutoSave();
     }
@@ -144,12 +115,13 @@ class FileSaveAs extends Component {
     }
 
     render() {
+//        console.log('In FileSaveAs.render this.props.state.type=',this.props.state.type, ' this.props.state.name=',this.props.state.name);
         return (
             <React.Fragment>
-                <NavDropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle} disabled={!this.props.user}>
                     Save As&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} className={this.props.className}>
+                <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>  &nbsp; File : Save As
@@ -171,13 +143,14 @@ class FileSaveAs extends Component {
 }
 
 const mapStateToProps = state => ({
-    state: state 
+    state: state,
+    user: state.user,
 });
 
 const mapDispatchToProps = {
     changeName: changeName,
     changeUser: changeUser,
-    deleteAutoSave: deleteAutoSave
+    deleteAutoSave: deleteAutoSave,
 };
 
 export default withAuth(

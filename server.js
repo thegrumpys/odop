@@ -170,7 +170,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
         delete req.body.user; // Do not save the user in the blob
         delete req.body.type; // Do not save the type in the blob
         delete req.body.name; // Do not save the name in the blob
-        value = JSON.stringify(req.body); // Convert blob to string
+        value = JSON.stringify(req.body, null, 2); // Convert blob to string
         var connection = startConnection();
         var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
 //        console.log('SERVER: stmt='+stmt);
@@ -232,7 +232,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
         delete req.body.user; // Do not save the user in the blob
         delete req.body.type; // Do not save the type in the blob
         delete req.body.name; // Do not save the name in the blob
-        value = JSON.stringify(req.body); // Convert blob to string
+        value = JSON.stringify(req.body, null, 2); // Convert blob to string
         var connection = startConnection();
         var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
 //        console.log('SERVER: stmt='+stmt);
@@ -327,7 +327,7 @@ app.post('/api/v1/usage_log', (req, res) => {
     var note;
     ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     console.log('SERVER: In POST /api/v1/usage_log ip_address='+ip_address+' req.body=',req.body);
-    note = JSON.stringify(req.body); // Convert blob to string
+    note = JSON.stringify(req.body, null, 2); // Convert blob to string
     var connection = startConnection();
     note = note.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
     var stmt = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address+'\',\''+note+'\')';

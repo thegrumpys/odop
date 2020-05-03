@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
+import { getDesigns } from '../../server';
 import { withAuth } from '@okta/okta-react';
 
 class FileDelete extends Component {
 
     constructor(props) {
         super(props);
-//        console.log("In FileDelete.constructor props=",props);
+        console.log('In FileDelete.constructor props=',props);
         this.toggle = this.toggle.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onDelete = this.onDelete.bind(this);
@@ -18,79 +19,60 @@ class FileDelete extends Component {
         this.state = {
             modal: false,
             names: [],
+            item: -1,
+            user: this.props.user,
             type: this.props.type,
-            name: '',
-            authenticated: null,
-            uid: null,
         };
     }
 
     async componentDidMount() {
-//        console.log('In FileDelete.componentDidMount');
-        var authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileDelete.componentDidMount before authenticated=",authenticated);
-        var session = await this.props.auth._oktaAuth.session.get();
-//        console.log('In FileDelete.componentDidMount session=',session);
-        if (session.status === "INACTIVE") {
-//            console.log('In FileDelete.componentDidMount INACTIVE session.status=',session.status);
-            authenticated = authenticated && false; // Combine with session status
+        console.log('In FileDelete.componentDidMount');
+        var names = await getDesigns(this.state.user, this.state.type);
+        names = names.filter((design) => {return design.user !== null});
+        console.log('In FileDelete.componentDidMount names=', names);
+        var item = -1;
+        if (names.length > 0) {
+            item = 0;
         }
-//        console.log("In FileDelete.componentDidMount after authenticated=",authenticated);
-        if (authenticated !== this.state.authenticated) { // Did authentication change?
-            this.setState({ authenticated }); // Remember our current authentication state
-            if (authenticated) { // We have become authenticated
-                this.setState({
-                    uid: session.userId,
-                });
-            } else { // We have become unauthenticated
-                this.setState({
-                    uid: null,
-                });
-            }
-        }
-    }
-
-    getDesigns(type) {
-        // Get the names and store them in state
-//        console.log('In FileDelete.getDesigns type=', type);
-        displaySpinner(true);
-        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
-                headers: {
-                    Authorization: 'Bearer ' + this.state.uid
-                }
-            })
-            .then(res => {
-                displaySpinner(false);
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-                return res.json()
-            })
-           .then(names => {
-               this.setState({ 
-                   names: names.filter((design) => {return design.user !== null})
-               });
-               var name = '';
-               if (this.state.names.length > 0)
-                   name = this.state.names[0].name; // Default to first name
-               this.setState({ 
-                   name: name
-               });
-           })
-           .catch(error => {
-               displayError('GET of design names failed with message: \''+error.message+'\'');
-           });
+        console.log('In FileDelete.componentDidMount item=', item);
+        this.setState({
+            names: names,
+            item: item,
+        });
     }
     
-    deleteDesign(type,name) {
-//        console.log('In FileDelete.deleteDesign type=', type, ' name=', name);
+    componentDidUpdate(prevProps, prevState) {
+        console.log('In FileDelete.componentDidUpdate prevProps=',prevProps,'prevState=',prevState);
+    }
+    
+    static async getDerivedStateFromProps(props, state) {
+        console.log('In FileDelete.getDerivedStateFromProps props=',props,'state=',state);
+        if (props.type !== state.type) {
+            var names = await getDesigns(props.user, props.type);
+            names = names.filter((design) => {return design.user !== null});
+            console.log('In FileDelete.getDerivedStateFromProps names=', names);
+            var item = -1;
+            if (names.length > 0) {
+                item = 0;
+            }
+            console.log('In FileDelete.getDerivedStateFromProps item=', item);
+            return {
+                names: names,
+                item: item,
+            };
+        }
+        return null; // Return null if the state hasn't changed
+    }
+
+    deleteDesign(user, type, name) {
+        console.log('In FileDelete.deleteDesign user=', user, 'type=', type, ' name=', name);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + this.state.uid
+                    Authorization: 'Bearer ' + user
                 },
             })
             .then(res => {
@@ -107,36 +89,36 @@ class FileDelete extends Component {
     }
     
     toggle() {
-//        console.log('In FileDelete.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
+        console.log('In FileDelete.toggle');
         this.setState({
             modal: !this.state.modal,
             type: this.props.type
         });
-        this.getDesigns(this.state.type);
     }
     
     onSelect(event) {
-//        console.log('In FileDelete.onSelect event.target.value=',event.target.value);
+        console.log('In FileDelete.onSelect event=',event);
         this.setState({
-            name: event.target.value 
+            item: event.target.value,
         });
     }
     
     onDelete() {
-//        console.log('In FileDelete.onDelete this.state.type=',this.state.type,' this.state.name=',this.state.name);
+        console.log('In FileDelete.onDelete');
         // Validate name, and delete the database element
-        if (this.state.name === '') {
+        if (this.state.item === -1) {
             displayError("Select design to delete.");
             return;
         }
         this.setState({
             modal: !this.state.modal
         });
-        this.deleteDesign(this.state.type,this.state.name);
+        this.deleteDesign(this.state.user, this.state.type, this.state.names[this.state.item]);
+        delete this.state.names[this.state.item];
     }
     
     onCancel() {
-//        console.log('In FileDelete.onCancel');
+        console.log('In FileDelete.onCancel');
         this.setState({
             modal: !this.state.modal
         });
@@ -144,13 +126,13 @@ class FileDelete extends Component {
     }
 
     render() {
-//        console.log('In FileDelete.render this.state.type=',this.state.type,' this.state.name=',this.state.name);
+        console.log('In FileDelete.render');
         return (
             <React.Fragment>
-                <NavDropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle} disabled={this.state.user == null || (this.state.names !== null && this.state.names.length === 0)}>
                     Delete&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} className={this.props.className}>
+                <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Delete
@@ -161,13 +143,13 @@ class FileDelete extends Component {
                         <Form.Label htmlFor="fileDeleteSelect">Select design to delete:</Form.Label>
                         <Form.Control as="select" id="fileDeleteSelect" onChange={this.onSelect}>
                             {this.state.names.map((design, index) => {
-                                return <option key={index} value={design.name}>{design.name}</option>
+                                return <option key={index} value={index}>{design.name}</option>
                             })}
                         </Form.Control>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" onClick={this.onDelete} disabled={this.state.names.length === 0 ? true : false}>Delete</Button>
+                        <Button variant="primary" onClick={this.onDelete}>Delete</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>
@@ -176,7 +158,7 @@ class FileDelete extends Component {
 }
 
 const mapStateToProps = state => ({
-    name: state.name, 
+    user: state.user, 
     type: state.type, 
 });
 

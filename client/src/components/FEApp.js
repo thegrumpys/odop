@@ -3,26 +3,15 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Security, ImplicitCallback } from '@okta/okta-react';
 import config from '../config';
 import FEHome from './FEHome';
-import FELogin from './FELogin';
-
-function onAuthRequired({history}) {
-  history.push('/login');
-}
 
 class FEApp extends Component {
-//  constructor(props) {
-//    super(props);
-//    console.log("In FEApp.constructor props=",props);
-//  }
-
   render() {
 //    console.log("In FEApp.render");
     return (
       <Router>
-        <Security {...config.oidc} onAuthRequired={onAuthRequired}>
+        <Security {...config.oidc}>
           <Route path='/' exact={true} component={FEHome} />
-          <Route path='/login' component={FELogin} />
-          <Route path='/implicit/callback' component={ImplicitCallback} />
+          <Route path='/implicit/callback' exact={true} component={ImplicitCallback} />
         </Security>
       </Router>
     );

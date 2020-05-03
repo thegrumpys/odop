@@ -4,7 +4,7 @@ import * as eto from './endtypes_offsets';
 import { changeSymbolInput, changeSymbolHidden } from '../../../store/actionCreators';
 
 export function init(store, p, x) {
-//    console.log('In init store=',store,'p=',p,'x=',x);
+//    console.log('In Extension init store=',store,'p=',p,'x=',x);
  var i, j;
  var m_tab;
  const ten3 = 1000.0;
@@ -18,7 +18,7 @@ export function init(store, p, x) {
  var et_tab = require('./endtypes.json');
 //console.log("et_tab=", et_tab);
  var si_tab = require('./si_range.json');
-//console.log("et_tab=", et_tab);
+//console.log("si_tab=", si_tab);
 
      x[o.Spring_Type] = "Extension";
      j = x[o.End_Type];
