@@ -203,6 +203,17 @@ Opening a design saved in a prior version will produce a pop-up message of the f
 Saving the design will eliminate the message on future open operations.
 Complete detail on the latest changes is available in GitHub.    
 
+The Help : About menu item lists the Design Model version for the currently open design type 
+in the form: "Design Model version   {_current version number_}".
+
+Help : About also displays the current ODOP software version in the form: 
+"Software version   {_Major.Minor.Patch_}". 
+A change in software version may or may not be associated with a change in the 
+design version number for any design type.
+A change in the version number of any design type will usually be associated with a change in the 
+minor or major field of the software version.   
+
+
 &nbsp;   
 
 [Help](./)
