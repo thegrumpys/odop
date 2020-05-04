@@ -51,7 +51,8 @@
 * [Ideas for Simplified Design Check UI](design/SimplifiedUI)
 * [Functionally Determined Constraint Level - User Interface](design/FDCL_UI)
 * [Version Number Guidelines](design/VersionNumbers) 
-* [Idea for a welcome page](design/WelcomePage)   
+* [Idea for a welcome page](design/WelcomePage)  
+* [Okta Registration Flow](design/OktaRegistrationFlow)    
 
 <!--- The following topics of this section are already implemented or otherwise no longer relevant.  They are maintained here to keep the thought history.  -->
 
