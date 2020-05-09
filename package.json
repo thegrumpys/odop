@@ -9,7 +9,9 @@
     "heroku-postbuild": "cd client && npm install && npm run build",
     "test": "mocha --timeout 10000",
     "coverage": "nyc --reporter=html node_modules/mocha/bin/_mocha --timeout 10000",
-    "showcoverage": "open coverage/index.html"
+    "showcoverage": "open coverage/index.html",
+    "harp-compile": "cd docs && harp compile",
+    "harp-server": "cd docs && harp server --port 8080"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "harp": "^0.32.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.19.4",
     "nyc": "^15.0.1"
