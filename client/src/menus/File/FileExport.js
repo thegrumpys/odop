@@ -104,7 +104,7 @@ class FileExport extends Component {
                 console.log('In FileExport.exportDesign migrated_design=', migrated_design);
 //                this.props.load(migrated_design)
 //                this.props.deleteAutoSave();
-                const url = window.URL.createObjectURL(new Blob([JSON.stringify(migrated_design)]));
+                const url = window.URL.createObjectURL(new Blob([JSON.stringify(migrated_design, null, 2)]));
                 console.log('In FileExport.exportDesign url=', url);
                 const link = document.createElement('a');
                 link.href = url;
