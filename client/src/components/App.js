@@ -27,6 +27,7 @@ import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
+import HelpMotd from '../menus/Help/HelpMotd';
 import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
@@ -144,9 +145,7 @@ class App extends Component {
                                 {process.env.NODE_ENV !== "production" && <ViewSymbolTableOffsets />}
                             </NavDropdown>
                             <NavDropdown title="Help">
-                                <NavDropdown.Item disabled>
-                                    Context Help
-                                </NavDropdown.Item>
+                                <HelpMotd />
                                 <HelpIndex />
                                 <HelpDemo />
                                 <HelpTutorial />
