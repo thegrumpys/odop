@@ -30,15 +30,23 @@ class HelpAbout extends Component {
                 <Modal show={this.state.modal} className={this.props.className}>
                     <Modal.Header>
                         <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>  &nbsp; About {this.props.type}
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>  &nbsp; About ODOP
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        This is <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank" rel="noopener noreferrer">Open Source </a> software. &nbsp; 
-                        <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT License.</a> <br />
-                        Software version &nbsp; {version()}  <br />
-                        Design Model version &nbsp; {this.props.version}<br />
-                        Link to <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">website home page</a>
+                        Link to <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">About</a> topics
+                        <br/> 
+                        Link to <a href="https://www.springdesignsoftware.org/" target="_blank" rel="noopener noreferrer">website</a> home page
+                        <hr/>
+                        This is <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank" rel="noopener noreferrer">Open Source </a> software.  
+                        <br/> 
+                        About <a href="https://en.wikipedia.org/wiki/MIT_License" target="_blank" rel="noopener noreferrer">MIT License</a> 
+                        &nbsp; &nbsp; &nbsp; &nbsp; 
+                        <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">ODOP License</a> 
+                        <hr/>
+                        ODOP software version &nbsp; {version()} 
+                        <br />
+                        {this.props.type} app model version &nbsp; {this.props.version}<br />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
