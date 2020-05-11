@@ -7,33 +7,26 @@ class HelpMotd extends Component {
 
     constructor(props) {
         super(props);
-        this.toggle = this.toggle.bind(this);
-        this.state = {
-            modal: false
-        };
+        this.onHelp = this.onHelp.bind(this);
     }
 
-    toggle() {
-        this.setState({
-            modal: !this.state.modal
-        });
-        logUsage('event', 'HelpMotd');
+    onHelp() {
+        logUsage('event', 'HelpMotd', { 'event_label': 'https://thegrumpys.github.io/odop/About/messageOfTheDay' });
+        window.open('https://thegrumpys.github.io/odop/About/messageOfTheDay', '_blank');
     }
 
     render() {
         return (
             <React.Fragment>
-                <NavDropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.onHelp}>
+                    Message of the Day
                 </NavDropdown.Item>
-                <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay" target="_blank" rel="noopener noreferrer"> &nbsp; Message of the Day</a>
             </React.Fragment>
         );
     }
 }  
 
 const mapStateToProps = state => ({
-    type: state.type, 
-    version: state.version
-  });
+});
 
 export default connect(mapStateToProps)(HelpMotd);
