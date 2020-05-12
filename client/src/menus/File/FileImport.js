@@ -23,42 +23,42 @@ class FileImport extends Component {
             selectedFile: null, // Initially, no file is selected
             fileReader: new FileReader(),
         };
-        this.state.fileReader.onloadend = this.onLoadEnd;
-        this.state.fileReader.onError = this.onError;
+        this.state.fileReader.onloadend = this.onLoadEnd; // On Load End callback
+        this.state.fileReader.onError = this.onError; // On Error callback
     }
 
     toggle() {
 //        console.log('In FileImport.toggle');
         this.setState({
-            modal: !this.state.modal,
+            modal: !this.state.modal, // Display Modal
         });
     }
 
     // On file select (from the pop up)
     onFileChange(event) {
-//        console.log('In FileImport.onFileChange event.target.files[0]=',event.target.files[0]);
+//        console.log('In FileImport.onFileChange event=',event);
         this.setState({ 
             selectedFile: event.target.files[0]
-        }); // Update the state
+        });
     };
 
     // On file upload (click the upload button)
     onFileUpload() {
-//        console.log('In FileImport.onFileUpload this.state.selectedFile=',this.state.selectedFile);
+//        console.log('In FileImport.onFileUpload');
         this.setState({
-            modal: !this.state.modal,
+            modal: !this.state.modal, // Hide Modal
         });
         displaySpinner(true);
         this.state.fileReader.readAsText(this.state.selectedFile); // Begin Reading Text File
     };
     
-    onLoadEnd(e) {
-//        console.log('In FileImport.onLoadEnd e=',e);
-//        console.log('In FileImport.onLoadEnd this.state.fileReader.result=',this.state.fileReader.result);
+    onLoadEnd(event) {
+//        console.log('In FileImport.onLoadEnd event=',event);
         displaySpinner(false);
-        var design = JSON.parse(this.state.fileReader.result);
-//        console.log('In FileImport.onLoadEnd design=',design);
-//        console.log('In FileImport.onLoadEnd type=',design.type,'name=',design.name);
+        var design = JSON.parse(this.state.fileReader.result); // Convert file contents to JSON object
+        var path = require('path');
+        var filename = path.basename(this.state.selectedFile.name,'.json'); // Drop prefix directories and suffix extension
+        design.name = filename; // Replace design name with file name
         var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
         var migrated_design = migrate(design);
         this.props.load(migrated_design);
@@ -68,7 +68,6 @@ class FileImport extends Component {
     
     onError(e) {
 //        console.log('In FileImport.onError e=',e);
-//        console.log('In FileImport.onLoadEnd this.state.fileReader.error=',this.state.fileReader.error);
         displaySpinner(false);
         displayError('GET of design names failed with message: \''+this.state.fileReader.error.message+'\'');
     }
