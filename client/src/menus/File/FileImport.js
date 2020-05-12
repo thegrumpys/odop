@@ -95,7 +95,7 @@ class FileImport extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Form.Label htmlFor="fileImportSelectName">Select file to import:</Form.Label>
-                        <Form.File id="fileImportSelectName" onChange={this.onFileChange}></Form.File>
+                        <Form.File id="fileImportSelectName" accept=".json" onChange={this.onFileChange}></Form.File>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
