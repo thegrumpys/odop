@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { load, deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
@@ -93,8 +93,10 @@ class FileImport extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form.Label htmlFor="fileImportSelectName">Select file to import:</Form.Label>
-                        <Form.File id="fileImportSelectName" accept=".json" onChange={this.onFileChange}></Form.File>
+                        <Form.File custom>
+                            <Form.File.Input accept=".json" onChange={this.onFileChange} />
+                            <Form.File.Label data-browse="Select File">{this.state.selectedFile == null ? 'No File Selected' : this.state.selectedFile.name}</Form.File.Label>
+                        </Form.File>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}

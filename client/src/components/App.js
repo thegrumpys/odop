@@ -111,17 +111,16 @@ class App extends Component {
                         <Nav className="mr-auto">
                             <NavDropdown title="File">
                                 <FileOpen />
+                                <FileRecent />
                                 <FileSave />
                                 <FileSaveAs />
                                 <FileDelete />
                                 <NavDropdown.Divider />
-                                <FileRecent />
+                                <FileImport />
+                                <FileExport />
                                 <NavDropdown.Divider />
                                 <FilePreferences />
                                 <FileProperties />
-                                <NavDropdown.Divider />
-                                <FileImport />
-                                <FileExport />
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={() => {this.props.deleteAutoSave();this.props.auth.logout()}}>
                                     Logout
