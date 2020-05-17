@@ -10,7 +10,7 @@
     "test": "mocha --timeout 10000",
     "coverage": "nyc --reporter=html node_modules/mocha/bin/_mocha --timeout 10000",
     "showcoverage": "open coverage/index.html",
-    "harp-compile": "cd docs && harp compile",
+    "harp-compile": "cd docs && harp compile . /home/mikmil36/springdesignsoftware.org/odop/docs",
     "harp-server": "cd docs && harp server --port 8080"
   },
   "repository": {
