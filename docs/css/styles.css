@@ -2,25 +2,25 @@
     font-family:'Noto Sans';
     font-weight:400;
     font-style:normal;
-    src:url("/odop/docs/font/NotoSans-Regular.ttf") format("truetype")
+    src:url("/font/NotoSans-Regular.ttf") format("truetype"),
 }
 @font-face{
     font-family:'Noto Sans';
     font-weight:700;
     font-style:normal;
-    src:url("/odop/docs/font/NotoSans-Bold.ttf") format("truetype")
+    src:url("/font/NotoSans-Bold.ttf") format("truetype")
 }
 @font-face{
     font-family:'Noto Sans';
     font-weight:400;
     font-style:italic;
-    src:url("/odop/docs/font/NotoSans-Italic.ttf") format("truetype")
+    src:url("/font/NotoSans-Italic.ttf") format("truetype")
 }
 @font-face{
     font-family:'Noto Sans';
     font-weight:700;
     font-style:italic;
-    src:url("/odop/docs/font/NotoSans-BoldItalic.ttf") format("truetype")
+    src:url("/font/NotoSans-BoldItalic.ttf") format("truetype")
 }
 body{
     background-color:#fff;
