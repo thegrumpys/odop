@@ -2,7 +2,7 @@
     font-family:'Noto Sans';
     font-weight:400;
     font-style:normal;
-    src:url("../font/NotoSans-Regular.ttf") format("truetype"),
+    src:url("../font/NotoSans-Regular.ttf") format("truetype")
 }
 @font-face{
     font-family:'Noto Sans';
