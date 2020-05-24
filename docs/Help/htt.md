@@ -46,13 +46,17 @@ So, if you encounter NaN where you expect a numeric value, check Report 1 for ad
 **Browser refresh and back / forward**   
 Unfortunately, using the browser Reload a.k.a. "Refresh" function with a single page 
 web app such as ODOP will likely result in a complete reset of the main page and 
-potential loss of a user's work since the last Save operation. 
+potential loss of a user's work since the previous Save operation. 
 Similarly, use of the browser "Back" function followed by "Forward" will likely result in 
 reset of the main page.   
 
 Note: 
 The on-line documentation pages (Help) are not subject to the same concerns about browser refresh 
 and browser back / forward.   
+
+**AutoSave Feature**   
+The ODOP software offers a basic AutoSave feature.
+See [AutoSave](autoSave) for details.   
 
 **Off-line Operation**   
 Off-line operation is not currently supported. 
