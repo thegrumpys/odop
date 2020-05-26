@@ -16,7 +16,7 @@ For example, see:
    + Link to Getting Started  
 &nbsp;
 *  [Requirements](requirements)  
-   + User account
+   + User account if saving to design library
    + Internet connection & modern web browser
    + Hardware "responsive" design
    + Browser support   
@@ -24,7 +24,6 @@ For example, see:
 *  [User Accounts](userAccounts)  
    + Instructions to get UserID and Password
    + Sign-in and Sign-out
-   + Inactivity time out   
 
 **Help**
 *  [Introduction](../Help/introduction)  

@@ -35,20 +35,16 @@ and paste it into the address field of a different browser window (or tab).
   
 Depending on current web hosting provisions, 
 there may be a delay of approximately 20 seconds the first time that the software is launched
-within any specific 30 minute period.
-If you are not currently signed in, a sign-in screen will appear. 
-A user account with associated username and password 
-is required to access the ODOP:Spring software.
+within any specific 30 minute period.   
+
+It is possible to create designs and use most ODOP features without a user account.
+In order to keep designs saved into the ODOP design library private, 
+it is necessary to establish a user account with associated 
+unique username and password.
 See: [User Accounts](..\About\userAccounts) for details on
 how to obtain an account.   
 
-**Screen capture of the sign-in page:**   
-![Sign-in screen](./png/SignInWidgetExpanded.png "Sign-in screen")  
-  
-&nbsp;
-
-Once logged in, you will reach a screen where it is possible to select 
-a design type and a starting design.   
+Use the **File : Open** menu item to select a design type and starting design.   
 
 ![Select design type and starting design](./png/SelectSolid.png "Select design type and starting design")
   

@@ -1,9 +1,23 @@
 ## User Accounts, Username, Login, Logout
 
-A user account with username and password is required to operate the software.   
+It is possible to create designs and use most ODOP features without a user account.
+In order to keep designs saved into the ODOP design library private, 
+it is necessary to establish a user account with associated 
+unique username and password. 
+
+Three modes of operation are possible:
+ - not logged in
+ - logged in to the public account
+ - logged in to a private account
+
+If not logged in, all ODOP features are available 
+with the exception of saving designs into the ODOP design library.
+The **File : Export** menu item allows design data to be preserved in local storage.
+For details, see: [Save, Save As, Import and Export](../Help/htt).
 
 Evaluators may sign-in with the username "public" and password "public".
-It is possible to save designs but keep in mind that all saved information will be completely public.
+In this mode, it is possible to save designs into the ODOP design library 
+but keep in mind that all saved information will be completely public and modifiable.
 Designs in the public account are not assured of long-term storage.
 See [Restrictions](Legal/Restrictions) for long-term data storage policies.
 
@@ -49,11 +63,7 @@ can be used to personalize system provided default designs.
 
 See [Restrictions](Legal/Restrictions) for long term data storage policies 
 in both public and private accounts.
-
-In order to sign out:
-  - use "Logout" on the File menu
-  - use the browser refresh button and then click the "Logout" button
-
+ 
 Once signed in, your user session will remain active for as long as the browser window (tab) 
 associated with the app exists and your Internet connection is maintained. 
 Actually, the user session may persist for up to two hours after loss of Internet connection or 
@@ -61,7 +71,10 @@ closing a previous browser window or tab.
 In this situation, you may be able to open a new browser window (tab) and open a previously saved design without 
 need to sign-in again. 
 However, you should learn to save frequently as once the browser window or tab is closed, 
-any unsaved design in progress will be lost.
+any unsaved design in progress may be lost. 
+For more information on this point, see: [AutoSave](../Help/autoSave).
+
+In order to sign out use the "Logout" menu entry.
  
 &nbsp; 
  

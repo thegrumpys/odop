@@ -18,7 +18,7 @@ See: [User Accounts](../About/userAccounts).
 
 **File : Import** and **File : Export**  
 The ODOP software can export the state of the current design as a download into a file in the local file system.
-By default, the file will appear in the user's download folder (directory)
+By default, the file is placed in the user's download folder (directory)
 with a file name extension of ".json". 
 Use browser settings to control the default download folder or 
 be prompted to specify a folder every time.   

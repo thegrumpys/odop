@@ -1,7 +1,9 @@
 ## Requirements
 
-In order to keep saved designs private, it is necessary to establish a user account that provides
-a unique username and password.
+It is possible to create designs and use most ODOP features without a user account.
+In order to keep designs saved into the ODOP design library private, 
+it is necessary to establish a user account with associated 
+unique username and password. 
 See: [User Accounts](userAccounts)   
 
 It is not necessary to install any software on your computer in order to run ODOP.
