@@ -12,7 +12,7 @@ class ActionSearch extends Component {
     }
     
     toggle() {
-        logUsage('event', 'ActionSearch');
+        logUsage('event', 'ActionSearch', { 'event_label': 'ActionSearch'});
         this.props.saveAutoSave();
         this.props.search();
     }

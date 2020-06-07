@@ -19,7 +19,7 @@ class ViewOffsets extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        logUsage('event', 'ViewOffsets');
+        logUsage('event', 'ViewOffsets', { 'event_label': 'ViewOffsets'});
     }
 
     render() {

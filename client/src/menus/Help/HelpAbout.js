@@ -18,7 +18,7 @@ class HelpAbout extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        logUsage('event', 'HelpAbout');
+        logUsage('event', 'HelpAbout', { 'event_label': 'HelpAbout'});
     }
 
     render() {
