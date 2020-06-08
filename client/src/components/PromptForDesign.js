@@ -37,21 +37,16 @@ export default withAuth(class PromptForDesign extends Component {
     }
 
     async componentDidMount() {
-//        console.log('In PromptForDesign.componentDidMount');
+//        console.log('In PromptForDesign.componentDidMount this.props.auth=',this.props.auth);
         var authenticated = await this.props.auth.isAuthenticated();
 //        console.log("In PromptForDesign.componentDidMount before authenticated=",authenticated);
-        var session = await this.props.auth._oktaAuth.session.get();
-//        console.log('In PromptForDesign.componentDidMount session=',session);
-        if (session.status === "INACTIVE") {
-//            console.log('In PromptForDesign.componentDidMount INACTIVE session.status=',session.status);
-            authenticated = authenticated && false; // Combine with session status
-        }
-//        console.log("In PromptForDesign.componentDidMount after authenticated=",authenticated);
         if (authenticated !== this.state.authenticated) { // Did authentication change?
             this.setState({ authenticated }); // Remember our current authentication state
             if (authenticated) { // We have become authenticated
+                var user = await this.props.auth.getUser();
+//                console.log('In PromptForDesign.componentDidMount user=',user);
                 this.setState({
-                    uid: session.userId,
+                    uid: user.sub,
                 });
             } else { // We have become unauthenticated
                 this.setState({
@@ -66,6 +61,7 @@ export default withAuth(class PromptForDesign extends Component {
 //        console.log('In PromptForDesign.getDesignNames type=', type, ' uid=', this.state.uid);
         // Get the designs and store them in state
         displaySpinner(true);
+//        console.log('In PromptForDesign.getDesignNames this.state.uid=',this.state.uid);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
                     Authorization: 'Bearer ' + this.state.uid
@@ -103,6 +99,7 @@ export default withAuth(class PromptForDesign extends Component {
         const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 
         displaySpinner(true);
+//        console.log('In PromptForDesign.getDesign this.state.uid=',this.state.uid);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
                 headers: {
                     Authorization: 'Bearer ' + this.state.uid

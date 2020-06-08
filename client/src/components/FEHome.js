@@ -24,13 +24,6 @@ export default withAuth(class FEHome extends Component {
 //    console.log("In FEHome.checkAuthentication this.props.auth=",this.props.auth);
     var authenticated = await this.props.auth.isAuthenticated();
 //    console.log("In FEHome.checkAuthentication before authenticated=",authenticated);
-    var session = await this.props.auth._oktaAuth.session.get();
-//    console.log('In FEHome.checkAuthentication session=',session);
-    if (session.status === "INACTIVE") {
-//        console.log('In FEHome.checkAuthentication INACTIVE session.status=',session.status);
-        authenticated = authenticated && false; // Combine with session status
-    }
-//    console.log("In FEHome.checkAuthentication after authenticated=",authenticated);
     if (authenticated !== this.state.authenticated) { // Did authentication change?
       this.setState({ authenticated }); // Remember our current authentication state
       if (authenticated) { // We have become authenticated
