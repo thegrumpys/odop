@@ -64,7 +64,7 @@ export default withAuth(class FEHome extends Component {
           <div><PromptForDesign /></div>
         );
     } else {
-        console.log("In FEHome.render FELogin");
+//        console.log("In FEHome.render FELogin");
         return (
           <div><FELogin /></div>
         );
