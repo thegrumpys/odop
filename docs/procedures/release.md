@@ -127,7 +127,7 @@ to create and format the database tables using the create.sql file.
 &nbsp;
 1. Disable maintenance mode:  heroku maintenance:off -a odop
 1. Confirm that the http://heroku-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version Major.Minor.Patch displays.
-1. **Publish Documentation to SpringDesignSoftware.org** &nbsp In your git/odop directory push to springdesignsoftware.org using the command line:
+1. **Publish to SpringDesignSoftware.org** &nbsp; In your git/odop directory push to springdesignsoftware.org using the command line:
    git push production master.
    Verify no error messages during build on production.
 1. Confirm that the http://springdesignsoftware.org/odop/docs website is operational and that documentation displays.
