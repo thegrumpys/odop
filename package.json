@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
+    "heroku-prebuild": "echo @@@@@@@@@@ This runs before Heroku installs dependencies. @@@@@@@@@@",
     "heroku-postbuild": "cd client && npm install && npm run build",
+    "heroku-cleanup": "echo @@@@@@@@@@ This runs after Heroku prunes and caches dependencies. @@@@@@@@@@",
     "test": "mocha --timeout 10000",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha --- --timeout 10000",
     "showcoverage": "open coverage/lcov-report/index.html"
