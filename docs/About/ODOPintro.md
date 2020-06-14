@@ -74,7 +74,7 @@ See:
 
 Five [Design Types](../Help/DesignTypes) are currently available.
    
-![Compression Spring Design Type icon](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Compression/favicon.ico "Compression Spring Design Type") 
+![Compression Spring Design Type icon](https://www.springdesignsoftware.org/odop/designtypes/Spring/Compression/favicon.ico "Compression Spring Design Type") 
 The **Compression, Extension and Torsion Spring** design types are full-featured apps 
 enabling the engineering design of helical coil springs.
 While best saved for a time after your initial introduction to ODOP is complete,
