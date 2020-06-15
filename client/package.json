@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/thegrumpys/odop/issues"
   },
-  "homepage": "https://odop.heroku.com/",
+  "homepage": "https://springdesignsoftware.org/odop",
   "devDependencies": {},
   "dependencies": {
     "@mars/heroku-js-runtime-env": "^3.0.2",
