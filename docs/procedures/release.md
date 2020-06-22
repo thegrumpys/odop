@@ -123,7 +123,8 @@ to create and format the database tables using the create.sql file.
    git push heroku master.
    Verify no error messages during build on heroku.
    Note: to push a non-master branch, such as 324, assuming 324 is the current branch, issue:
-   git push heroku +HEAD:master.
+   "git status" to make sure you're on the correct branch then
+   "git push heroku[-staging] +HEAD:master".
 &nbsp;
 1. Disable maintenance mode:  heroku maintenance:off -a odop
 1. Confirm that the http://heroku-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version Major.Minor.Patch displays.
@@ -137,6 +138,7 @@ to create and format the database tables using the create.sql file.
 C. **DEVELOPMENT ENVIRONMENT**
 1. Create Major.Minor.Patch tag (for example, 3.2.1).
    Commit "Release Major.Minor.Patch" and push to origin.
+1. Create a "master-Major.Minor.Patch" branch, commit and push to origin.
 1. In Eclipse do a pull, Team > Show in History and verify tag is Major.Minor.Patch (for example, 2.3.1).
 1. In Github mark Milestone Major.Minor.Patch closed.
 
