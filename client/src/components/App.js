@@ -19,6 +19,8 @@ import FileDelete from '../menus/File/FileDelete';
 import FileRecent from '../menus/File/FileRecent';
 import FilePreferences from '../menus/File/FilePreferences';
 import FileProperties from '../menus/File/FileProperties';
+import FileImport from '../menus/File/FileImport';
+import FileExport from '../menus/File/FileExport';
 import ActionSearch from '../menus/Action/ActionSearch';
 import ActionSeek from '../menus/Action/ActionSeek';
 import ActionTrade from '../menus/Action/ActionTrade';
@@ -109,11 +111,13 @@ class App extends Component {
                         <Nav className="mr-auto">
                             <NavDropdown title="File">
                                 <FileOpen />
+                                <FileRecent />
                                 <FileSave />
                                 <FileSaveAs />
                                 <FileDelete />
                                 <NavDropdown.Divider />
-                                <FileRecent />
+                                <FileImport />
+                                <FileExport />
                                 <NavDropdown.Divider />
                                 <FilePreferences />
                                 <FileProperties />
