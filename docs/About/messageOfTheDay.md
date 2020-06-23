@@ -11,7 +11,7 @@ ODOP version 3.5 was released June 28, 2020.
 Opening a design saved in a prior version will produce a pop-up message. 
 See: [MIGRATION](../Help/terminology#migration). 
 Complete detail on the latest changes is available in GitHub at: 
-[ODOP milestone 3.5](https://github.com/thegrumpys/odop/milestone/35?closed=1)
+[ODOP milestone 3.5](https://github.com/thegrumpys/odop/milestone/33?closed=1)
 
 ODOP is experimental software. 
 For details, see: [Experimental Software](experimental)   
