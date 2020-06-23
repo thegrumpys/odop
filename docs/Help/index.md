@@ -12,6 +12,7 @@
 * [Reports](reports)
 * [Printing](htt#printing)
 * [Hints, Tips and Tricks](htt)
+* [AutoSave](autoSave)
 * [Available Design Types](DesignTypes)
 * [Spring Design](SpringDesign)
 * [About topics](../About)
