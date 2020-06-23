@@ -5,6 +5,11 @@ Tutorial and the spring design Demo.
 A few suggestions on how to explore ODOP:Spring after completing the
 tutorial and demo sessions are also provided.   
 
+A user account with associated username and password 
+is required to access the ODOP:Spring software.
+See: [User Accounts](..\About\userAccounts) for details on
+how to obtain an account.
+
 A list of various on-line Help pages providing introductory information is available at
 [Intro Pages Overview](..\About\introPagesOverview).
 In particular, see [Launching the Program](launchODOP) for more detailed instructions on 

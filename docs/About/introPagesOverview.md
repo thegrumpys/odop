@@ -16,7 +16,7 @@ For example, see:
    + Link to Getting Started  
 &nbsp;
 *  [Requirements](requirements)  
-   + User account if saving to design library
+   + User account
    + Internet connection & modern web browser
    + Hardware "responsive" design
    + Browser support   

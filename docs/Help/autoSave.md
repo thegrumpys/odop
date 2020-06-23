@@ -17,8 +17,8 @@ in reset of the main page.
 browser Reload and browser Back / Forward.*
 
 In order to at least partially address these issues,
-the ODOP software provides an AutoSave feature.
-AutoSave data is created and stored locally.  
+the ODOP software provides a basic AutoSave feature.
+AutoSave data is created and stored locally. 
 While not technically a browser "cookie",
 AutoSave data utilizes a similar mechanism.
 Only one AutoSave design is available at any point in time.
@@ -33,13 +33,16 @@ cause AutoSave data to be deleted after the function.
 
 - Other operations do not utilize or affect AutoSave data.
 
-If AutoSave data exists at the time of a File : Open, 
+If AutoSave data exists at the time the app starts, 
 a "Load AutoSave" button will be available.
-Pressing the button will cause the AutoSave data to replace the current design.
+Pressing this button will cause the AutoSave data to replace the current design.
 
 Note that not all operations are recoverable by the current AutoSave implementation. 
-Users should save or export frequently and use the browser Reload and Back functions with the understanding that 
-design changes applied since your last Save will likely require recovery via the AutoSave feature   
+Users should save or export frequently and 
+use the browser Reload and Back functions only with the understanding that 
+design changes applied since your last save or export may be lost. 
+The AutoSave feature may assist in recovery but it is not guaranteed to
+capture all of the latest changes.  
 
 &nbsp;
  

@@ -11,8 +11,7 @@ new standard size or catalog item.
 
 The design library is a database physically located on an Internet server,
 a.k.a. "in the cloud". 
-Design information stored in the design library does not appear on the local storage of your computer.   
-
+Design information stored in the design library does not appear on the local storage of your computer. 
 In order to save designs into the design library it is necessary to be logged into an ODOP user account. 
 See: [User Accounts](../About/userAccounts).
 
@@ -85,7 +84,8 @@ A production web hosting arrangement will not have this delay.
 **Closing or exiting the software**   
 Use  **File : Save As** or **File : Export** to 
 preserve the current state of a design in progress. 
-If logged in, sign out by using the "Logout" menu item.  
+Sign out by using "Logout" on the File menu or 
+use the browser Reload a.k.a "Refresh" function and then click the "Logout" button.
 Finally, close the browser tab or browser window containing the ODOP app.
 
 <a id="passwordReset"></a>  

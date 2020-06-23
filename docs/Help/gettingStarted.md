@@ -29,6 +29,11 @@ provides an important conceptual introduction to the overall design process with
 The ODOP software expects to start from an existing design. 
 More information on this point is available at [Default Designs](./defaultDesigns).
 
+A user account with associated username and password 
+is required to access the ODOP software.
+See: [User Accounts](..\About\userAccounts) for details on
+how to obtain an account.
+
 The material below assumes that you will be able to operate the ODOP program in one browser
 window (or tab) at the same time that you are able to view this on-line Help material in a
 different browser window (or tab). 
@@ -43,7 +48,7 @@ and that the Rectangular Solid design type is loaded.
 You should see Independent Variables like Length, Width and Height.
 If you see the Independent Variables of the Compression Spring design type 
 (OD\_Free, Wire\_Dia, L\_Free, etc.),
-use the **File : Open** menu item to 
+simply click the refresh button of the window containing the ODOP program, 
 drop down the box under "Select design type to open:", 
 select the "Solid" design type and click the "Open" button.   
 

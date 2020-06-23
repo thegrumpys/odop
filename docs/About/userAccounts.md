@@ -1,28 +1,17 @@
 ## User Accounts, Username, Login, Logout
 
-It is possible to create designs and use most ODOP features without a user account.
-In order to keep designs saved into the ODOP design library private, 
+A user account with username and password is required to operate the software. 
+Specifically, in order to keep designs saved into the ODOP design library private, 
 it is necessary to establish a user account with associated 
 unique username and password. 
 
-Three modes of operation are possible:
- - not logged in
- - logged in to the public account
- - logged in to a private account
-
-If not logged in, all ODOP features are available 
-with the exception of saving designs into the ODOP design library.
-The **File : Export** menu item allows design data to be preserved in local storage.
-For details, see: [Save, Save As, Import and Export](../Help/htt).
-
 Evaluators may sign-in with the username "public" and password "public".
-In this mode, it is possible to save designs into the ODOP design library 
+When operating in the public account, it is possible to save designs into the ODOP design library 
 but keep in mind that all saved information will be completely public and modifiable.
-Designs in the public account are not assured of long-term storage.
+Designs saved in the public account do not have the same assurance of long-term storage
+as those saved in a private account.
 See [Restrictions](Legal/Restrictions) for long-term data storage policies.
 
-In order to keep saved designs private and be assured of long-term storage, 
-it is necessary to establish a private user account with an associated unique username and password. 
 To establish a free private account, 
 use the "Sign up" (Self-Service Registration) feature on the sign-in page. 
 After you respond to an activation email message, 
@@ -63,6 +52,9 @@ can be used to personalize system provided default designs.
 
 See [Restrictions](Legal/Restrictions) for long term data storage policies 
 in both public and private accounts.
+
+The **File : Export** menu item allows design data to be preserved in local storage.
+For details, see: [Save, Save As, Import and Export](../Help/htt).
  
 Once signed in, your user session will remain active for as long as the browser window (tab) 
 associated with the app exists and your Internet connection is maintained. 
@@ -74,7 +66,9 @@ However, you should learn to save frequently as once the browser window or tab i
 any unsaved design in progress may be lost. 
 For more information on this point, see: [AutoSave](../Help/autoSave).
 
-In order to sign out use the "Logout" menu entry.
+In order to sign out:
+  - use "Logout" on the File menu
+  - use the browser refresh button and then click the "Logout" button
  
 &nbsp; 
  
