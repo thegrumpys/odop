@@ -159,7 +159,7 @@ export const execute = {
                     This is the time to express your objectives (goals, requirements) for the design at hand 
                     in terms of minimum and maximum constraints and Fixes. 
                     More information about constraints and Fix is available in the 
-                    <a href="https://thegrumpys.github.io/odop/Help/terminology" target="_blank" rel="noopener noreferrer"> Terminology </a> 
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology" target="_blank" rel="noopener noreferrer"> Terminology </a> 
                     section of the on-line Help.
                     </p>
                     
@@ -172,6 +172,7 @@ export const execute = {
                     <p>
                     Notice that several constraints are established in the default Startup design.  
                     For example, you should see established constraints on quantities like:
+                    </p>
                     
                     <Table bordered size="sm">
                     <tbody>
@@ -199,6 +200,7 @@ export const execute = {
                     </tbody>
                     </Table>
                     
+                    <p>
                     These constraints are helpful in guiding the search to deliver a good spring design.
                     Without similar constraints, the search can "cheat", producing a result that is
                     mathematically possible but not particularly helpful in terms of a usable spring design.
@@ -261,7 +263,7 @@ export const execute = {
                     If the "Feasibility:" result of the search is "NOT FEASIBLE", 
                     consider the possibility that some aspect of the design is over-specified.
                     More information on such a possibility is provided in this entry on the on-line help:
-                    <a href="https://thegrumpys.github.io/odop/Help/designSituations" target="_blank" rel="noopener noreferrer"> Design situations: under-specified, properly specified, over-specified </a>
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer"> Design situations: under-specified, properly specified, over-specified </a>
                     </p>
                     
                     <p>
@@ -273,7 +275,7 @@ export const execute = {
                     Also, the Trade feature can be used to gain a better understanding of exactly how much your 
                     constraints need to be adjusted in order to find the "nearest" feasible design. 
                     The 
-                    &nbsp;<a href="https://thegrumpys.github.io/odop/Help/trade" target="_blank" rel="noopener noreferrer">on-line Help for Trade</a>&nbsp; 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">on-line Help for Trade</a>&nbsp; 
                     provides a more detailed description and instruction on its use.
                     </p>
                     
@@ -360,7 +362,7 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     The on-line Help entry on  
-                    <a href="https://thegrumpys.github.io/odop/Help/SpringDesign/selectSizeCatalog" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/selectSizeCatalog" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
                     provides a more detailed introduction to these features. 
                     </p>
                     
@@ -446,7 +448,7 @@ export const execute = {
                     You can follow the same browser window configuration to work with two
                     ODOP design sessions at the same time.
                     For additional details see:  
-                    <a href="https://thegrumpys.github.io/odop/Help/wideScreen" target="_blank" rel="noopener noreferrer"> Side-by-side sessions on a wide-screen monitor </a>
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/wideScreen" target="_blank" rel="noopener noreferrer"> Side-by-side sessions on a wide-screen monitor </a>
                     </p>
                     
                     <p>
@@ -473,6 +475,7 @@ export const execute = {
                     Our last step is to determine if there is an available catalog spring that meets 
                     the original design specifications. 
                     ODOP:Spring comes equipped with multiple spring catalogs, including: 
+                    </p>
                     
                     <Table bordered size="sm">
                     <tbody>
@@ -488,6 +491,7 @@ export const execute = {
                     </tbody>
                     </Table>
                     
+                    <p>
                     If necessary, 
                     use the File : Open... menu to: 
                     <br /><br />
@@ -504,7 +508,7 @@ export const execute = {
                     (OBJ is a measure of constraint violation).
                     Selecting a design from the catalog replaces the current design so that you can evaluate it.
                     As mentioned previously, more detail about standard design catalogs is available in the 
-                    <a href="https://thegrumpys.github.io/odop/Help/SpringDesign/selectSizeCatalog" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/selectSizeCatalog" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
                      entry of on-line Help. 
                     </p>
                     
@@ -544,7 +548,7 @@ export const execute = {
                     <p>
                     Your feedback is welcome.
                     Use the 
-                    <a href="https://thegrumpys.github.io/odop/About/ContactUs" target="_blank" rel="noopener noreferrer"> Contact Us </a>
+                    <a href="https://www.springdesignsoftware.org/odop/docs/About/ContactUs" target="_blank" rel="noopener noreferrer"> Contact Us </a>
                     page of the on-line Help to find the appropriate contact information.
                     </p>
                     <br />
