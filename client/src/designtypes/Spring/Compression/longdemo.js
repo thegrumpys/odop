@@ -297,9 +297,9 @@ export const execute = {
                     Finally, we'll use the Select Catalog feature 
                     (<b>Action : Select Catalog...</b> menu item) 
                     to determine if a similar design is available in the built-in catalog. 
-                    We'll chose the design that is closest to the current (custom) design, 
+                    We'll choose the design that is closest to the current (custom) design, 
                     then evaluate it.
-                    Again, the demo session will need your participation on 
+                    Again, the demo session needs your participation on 
                     the Action menu ...
                     <br /><br />
                     In Demo / Tutorial speak:<br />
@@ -307,11 +307,10 @@ export const execute = {
                     </p>
                     
                     <p>
-                    You will have the opportunity to specify a catalog. 
-                    Details on up to four entries from that catalog will be displayed.
-                    Finally, if any of those entries appears to be worth further investigation, 
-                    select that entry by name in the lower selection drop-down box.
-                    The selected entry will become the current design providing an opportunity
+                    You have the opportunity to specify a catalog. 
+                    Details on up to four entries from that catalog are displayed.
+                    Pressing the "Select" button causes the
+                    selected entry to become the current design providing an opportunity
                     to compare its performance to the previously established constraints.
                     </p>
                     
@@ -327,8 +326,9 @@ export const execute = {
                 <React.Fragment>
                     <p>Several more demo problems are available. 
                     They are named demo1, demo2, ... etc. 
-                    Refer to the on-line documentation section (Help entry) covering the Tutorial 
-                    for a list of the Tutorial and Demo topics.</p>
+                    Refer to the on-line documentation section (Help entry) covering the  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    for a list of topics.</p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP:Spring features, menus and reports. 
