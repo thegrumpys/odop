@@ -19,6 +19,7 @@ class FileOpen extends Component {
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
+            types: config.design.types,
             names: [],
             type: this.props.type,
             name: this.props.name,
@@ -105,7 +106,7 @@ class FileOpen extends Component {
 
     toggle() {
 //        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
-        var type = (this.state.types.includes(this.props.type) ? this.props.type : config.design.type);
+        var type = this.props.type;
         this.getDesignNames(type);
         var name = (this.state.names.includes(this.props.name) ? this.props.name : config.design.name);
         this.setState({
