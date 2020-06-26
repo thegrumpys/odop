@@ -251,5 +251,7 @@ See docs/procedures/ImageLocations for preferred approach on image path.
 
 ![Torsion Spring Names](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names")   
 
+![Torsion Spring Names](https://www.springdesignsoftware.org/odop/designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names")   
+
 -->
 

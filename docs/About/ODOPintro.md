@@ -74,18 +74,20 @@ See:
 
 Five [Design Types](../Help/DesignTypes) are currently available.
    
-![Compression Spring Design Type icon](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Compression/favicon.ico "Compression Spring Design Type") 
+![Compression Spring Design Type icon](https://www.springdesignsoftware.org/odop/designtypes/Spring/Compression/favicon.ico "Compression Spring Design Type") 
+![Extension Spring Design Type icon](https://www.springdesignsoftware.org/odop/designtypes/Spring/Extension/favicon.ico "Extension Spring Design Type") 
+![Torsion Spring Design Type icon](https://www.springdesignsoftware.org/odop/designtypes/Spring/Torsion/favicon.ico "Torsion Spring Design Type") 
 The **Compression, Extension and Torsion Spring** design types are full-featured apps 
 enabling the engineering design of helical coil springs.
 While best saved for a time after your initial introduction to ODOP is complete,
 a comprehensive introduction to coil spring design with ODOP is available at
 [Spring Design Topics](../Help/SpringDesign).
 
-![Rectangular Solid Design Type icon](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Solid/favicon.ico "Rectangular Solid Design Type") 
+![Rectangular Solid Design Type icon](https://www.springdesignsoftware.org/odop/designtypes/Solid/favicon.ico "Rectangular Solid Design Type") 
 The [Rectangular Solid](../Help/DesignTypes/r_solid) design type is intended as an 
 easy to understand demonstration problem.
 
-![Piston-Cylinder Design Type icon](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Piston-Cylinder/favicon.ico "Piston-Cylinder Design Type") 
+![Piston-Cylinder Design Type icon](https://www.springdesignsoftware.org/odop/designtypes/Piston-Cylinder/favicon.ico "Piston-Cylinder Design Type") 
 The [Piston-Cylinder](../Help/DesignTypes/pcyl) design type is a simple demonstration problem 
 that illustrates competing objectives.
 
