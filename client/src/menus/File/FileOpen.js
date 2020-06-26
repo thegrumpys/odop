@@ -14,13 +14,11 @@ class FileOpen extends Component {
         super(props);
 //        console.log("In FileOpen .constructor props=",props);
         this.toggle = this.toggle.bind(this);
-        this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
         this.onOpen = this.onOpen.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
-            types: config.design.types,
             names: [],
             type: this.props.type,
             name: this.props.name,
@@ -117,14 +115,6 @@ class FileOpen extends Component {
         });
     }
 
-    onSelectType(event) {
-//        console.log('In FileOpen.onSelectType event.target.value=',event.target.value);
-        this.setState({
-            type: event.target.value
-        });
-        this.getDesignNames(event.target.value);
-  }
-
     onSelectName(event) {
 //        console.log('In FileOpen.onSelectName event.target.value=',event.target.value);
         this.setState({
@@ -163,13 +153,6 @@ class FileOpen extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <br />
-                        <Form.Label htmlFor="fileOpenSelectType">Select design type to open:</Form.Label>
-                        <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
-                            {this.state.types.map((designtype, index) =>
-                                <option key={index} value={designtype}>{designtype}</option>
-                            )}
-                        </Form.Control>
                         <br />
                         <Form.Label htmlFor="fileOpenSelectName">Select design to open:</Form.Label>
                         <Form.Control as="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
