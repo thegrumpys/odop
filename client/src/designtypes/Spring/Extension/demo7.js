@@ -16,7 +16,7 @@ export const execute = {
                     
                     <p>
                     A detailed description of  
-                    <a href="https://thegrumpys.github.io/odop/Help/DesignTypes/e_spring" target="_blank" rel="noopener noreferrer"> extension spring names </a>
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/e_spring" target="_blank" rel="noopener noreferrer"> extension spring names </a>
                     is provided in the On-line Help.  
                     </p>
                     
@@ -98,7 +98,7 @@ export const execute = {
                     It is important to notice that the handbook has given us three points to
                     define the rate (slope of the linear force-deflection curve) of a coil
                     spring.  Thus, there is a good chance that the problem is 
-                    <a href="https://thegrumpys.github.io/odop/Help/designSituations" target="_blank" rel="noopener noreferrer"> overspecified</a>. 
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer"> overspecified</a>. 
                     We are allowed a small tolerant region around load 1,  (+/-5 pounds).
                     Also, later in the problem the handbook indicates that load 2 may also
                     vary by 10%  (94.5 to 105 pounds).
