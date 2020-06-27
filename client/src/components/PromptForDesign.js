@@ -159,7 +159,7 @@ export default withAuth(class PromptForDesign extends Component {
 
         const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 
-        console.log("Restore Auto Save");
+//        console.log("Restore Auto Save");
         var state = JSON.parse(localStorage.getItem('autosave'));
         const store = createStore(reducers, state, middleware);
         store.dispatch(startup());
