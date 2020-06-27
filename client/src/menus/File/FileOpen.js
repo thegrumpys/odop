@@ -46,7 +46,7 @@ class FileOpen extends Component {
                     uid: null,
                 });
             }
-            this.getDesignNames(this.state.type);
+//            this.getDesignNames(this.state.type);
         }
     }
 
