@@ -70,7 +70,7 @@ class ActionSeek extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     Seek&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} className={this.props.className}>
+                <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek
