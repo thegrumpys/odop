@@ -101,7 +101,7 @@ class FileImport extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" onClick={this.onFileUpload} disabled={this.state.selectedFile == null}>Upload!</Button>
+                        <Button variant="primary" onClick={this.onFileUpload} disabled={this.state.selectedFile == null}>Upload</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>
