@@ -49,6 +49,7 @@ class NameValueUnitsRowCalcInput extends Component {
 //            console.log('In NameValueUnitsRowCalcInput.getDerivedStateFromProps props=',props,'state=',state);
             if (props.element.format === undefined && typeof props.element.value === 'number') {
                 return {
+                    type: props.type,
                     focused: false
                 };
             } else if (props.element.format === 'table') {
@@ -56,10 +57,12 @@ class NameValueUnitsRowCalcInput extends Component {
                 var table = require('../designtypes/'+props.element.table+'.json'); // Dynamically load table
 //                console.log('In NameValueUnitsRowCalcInput.getDerivedStateFromProps table=',table);
                 return {
+                    type: props.type,
                     table: table
                 };
             } else {
                 return {
+                    type: props.type,
                 };
             }
         }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 export function getReportNames() {
+//    console.log('In getReportNames');
     return []; // No report names
 }
 
