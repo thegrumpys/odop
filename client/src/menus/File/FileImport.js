@@ -56,6 +56,7 @@ class FileImport extends Component {
 //        console.log('In FileImport.onLoadEnd event=',event);
         displaySpinner(false);
         var design = JSON.parse(this.state.fileReader.result); // Convert file contents to JSON object
+//        console.log('In FileImport.onLoadEnd design.type=',design.type,'design.name=',design.name);
         var path = require('path');
         var filename = path.basename(this.state.selectedFile.name,'.json'); // Drop prefix directories and suffix extension
         design.name = filename; // Replace design name with file name

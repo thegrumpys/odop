@@ -47,6 +47,7 @@ class App extends Component {
         this.report = this.report.bind(this);
         var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
         var report_names = getReportNames();
+//        console.log('In App.constructor report_names=', report_names);
         this.state = {
             isOpen: false,
             activeTab: "1",
@@ -56,12 +57,13 @@ class App extends Component {
     }
     
     static getDerivedStateFromProps(props, state) {
-//        console.log('In App.getDerivedStateFromProps props=',props,'state=',state);
+//        console.log('In App.getDerivedStateFromProps props=',props.type,'state=',state.type);
         if (props.type !== state.type) {
           var { getReportNames } = require('../designtypes/'+props.type+'/report.js'); // Dynamically load getReportNames
           var report_names = getReportNames();
 //          console.log('In App.getDerivedStateFromProps report_names=', report_names);
           return {
+              type: props.type,
               report_names: report_names,
           };
         }

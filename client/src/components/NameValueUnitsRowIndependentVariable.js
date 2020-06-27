@@ -54,6 +54,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
 //            console.log('In NameValueUnitsRowIndependentVariable.getDerivedStateFromProps props=',props,'state=',state);
             if (props.element.format === undefined && typeof props.element.value === 'number') {
                 return {
+                    type: props.type,
                     focused: false
                 };
             } else if (props.element.format === 'table') {
@@ -61,10 +62,13 @@ class NameValueUnitsRowIndependentVariable extends Component {
                 var table = require('../designtypes/'+props.element.table+'.json'); // Dynamically load table
 //                console.log('In NameValueUnitsRowIndependentVariable.getDerivedStateFromProps table=',table);
                 return {
+                    type: props.type,
                     table: table
                 };
             } else {
-                return null;
+                return {
+                    type: props.type,
+                };
             }
         }
         return null; // Return null if the state hasn't changed
