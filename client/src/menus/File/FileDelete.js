@@ -45,6 +45,18 @@ class FileDelete extends Component {
         }
     }
 
+    static getDerivedStateFromProps(props, state) {
+      console.log('In FileDelete.getDerivedStateFromProps props=',props,'state=',state);
+      if (props.type !== state.type) {
+        console.log('In FileDelete.getDerivedStateFromProps props=',props.type,'state=',state.type);
+        return {
+            type: props.type,
+        };
+      }
+      // Return null if the state hasn't changed
+      return null;
+    }
+
     getDesigns(type) {
         // Get the names and store them in state
 //        console.log('In FileDelete.getDesigns type=', type);
@@ -62,6 +74,7 @@ class FileDelete extends Component {
                 return res.json()
             })
            .then(names => {
+               console.log('In FileDelete.getDesigns names=', names);
                this.setState({ 
                    names: names.filter((design) => {return design.user !== null})
                });
@@ -102,10 +115,9 @@ class FileDelete extends Component {
     }
     
     toggle() {
-//        console.log('In FileDelete.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
+        console.log('In FileDelete.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
         this.setState({
             modal: !this.state.modal,
-            type: this.props.type
         });
         this.getDesigns(this.state.type);
     }
