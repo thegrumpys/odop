@@ -62,7 +62,7 @@ to create and format the database tables using the create.sql file.
 1. In server, run "npm test" and verify test cases executed successfully.
 1. In client, run "npm test" and verify test cases executed successfully.
 &nbsp;
-1. Update client/src/version.js file to Major.Minor.Patch (for example: 2.3.1).
+1. Update client/src/version.js file to Major.Minor.Patch (for example: 2.3.1). Remove 'dev' suffix. Optionally use 'rc1' or 'rc2'.
 1. Commit with message "Update version.js to Major.Minor.Patch" and push to origin.
 1. Pull to get latest version on all systems.
 1. Restart server then client under your development environment.
@@ -140,6 +140,8 @@ C. **DEVELOPMENT ENVIRONMENT**
    Commit "Release Major.Minor.Patch" and push to origin.
 1. Create a "master-Major.Minor.Patch" branch, commit and push to origin.
 1. In Eclipse do a pull, Team > Show in History and verify tag is Major.Minor.Patch (for example, 2.3.1).
+1. Update client/src/version.js file to next Major.Minor.Patch followed by suffix 'dev' (for example: 2.3.1dev).
+1. Commit with message "Update version.js to Major.Minor.Patchdev" and push to origin.
 1. In Github mark Milestone Major.Minor.Patch closed.
 
 &nbsp;
