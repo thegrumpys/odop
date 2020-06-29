@@ -15,6 +15,8 @@ A. **DEVELOPMENT environment**
    "Have we done everything on our milestone list?"
    "Is there anything else we need to do?"
    "Are we ready for release?"
+   Remember that changes to docs cannot be pushed to master and closed, because they will be immediately put on GITHUB Pages.
+   Instead they must be pushed to master on the day of the release to heroku production.
 &nbsp;
 1. Make sure your development environment is on branch master.
 &nbsp;
