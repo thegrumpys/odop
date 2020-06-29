@@ -18,7 +18,6 @@ class FileDelete extends Component {
         this.state = {
             modal: false,
             names: [],
-            type: this.props.type,
             name: '',
             authenticated: null,
             uid: null,
@@ -45,18 +44,6 @@ class FileDelete extends Component {
         }
     }
 
-    static getDerivedStateFromProps(props, state) {
-      console.log('In FileDelete.getDerivedStateFromProps props=',props,'state=',state);
-      if (props.type !== state.type) {
-        console.log('In FileDelete.getDerivedStateFromProps props=',props.type,'state=',state.type);
-        return {
-            type: props.type,
-        };
-      }
-      // Return null if the state hasn't changed
-      return null;
-    }
-
     getDesigns(type) {
         // Get the names and store them in state
 //        console.log('In FileDelete.getDesigns type=', type);
@@ -74,7 +61,7 @@ class FileDelete extends Component {
                 return res.json()
             })
            .then(names => {
-               console.log('In FileDelete.getDesigns names=', names);
+//               console.log('In FileDelete.getDesigns names=', names);
                this.setState({ 
                    names: names.filter((design) => {return design.user !== null})
                });
@@ -115,11 +102,11 @@ class FileDelete extends Component {
     }
     
     toggle() {
-        console.log('In FileDelete.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
+//        console.log('In FileDelete.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
         this.setState({
             modal: !this.state.modal,
         });
-        this.getDesigns(this.state.type);
+        this.getDesigns(this.props.type);
     }
     
     onSelect(event) {
@@ -130,7 +117,7 @@ class FileDelete extends Component {
     }
     
     onDelete() {
-//        console.log('In FileDelete.onDelete this.state.type=',this.state.type,' this.state.name=',this.state.name);
+//        console.log('In FileDelete.onDelete this.props.type=',this.props.type,' this.state.name=',this.state.name);
         // Validate name, and delete the database element
         if (this.state.name === '') {
             displayError("Select design to delete.");
