@@ -51,24 +51,20 @@ class App extends Component {
         this.state = {
             isOpen: false,
             activeTab: "1",
-            type: this.props.type,
             report_names: report_names
         };
     }
     
-    static getDerivedStateFromProps(props, state) {
-//        console.log('In App.getDerivedStateFromProps props=',props.type,'state=',state.type);
-        if (props.type !== state.type) {
-          var { getReportNames } = require('../designtypes/'+props.type+'/report.js'); // Dynamically load getReportNames
-          var report_names = getReportNames();
-//          console.log('In App.getDerivedStateFromProps report_names=', report_names);
-          return {
-              type: props.type,
-              report_names: report_names,
-          };
+    componentDidUpdate(prevProps) {
+//        console.log('In App.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+        if (prevProps.type !== this.props.type) {
+            var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
+            var report_names = getReportNames();
+//            console.log('In App.componentDidUpdate report_names=', report_names);
+            this.setState({
+                report_names: report_names,
+            });
         }
-        // Return null if the state hasn't changed
-        return null;
     }
 
     toggle() {

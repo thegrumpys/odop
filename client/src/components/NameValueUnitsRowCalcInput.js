@@ -25,7 +25,6 @@ class NameValueUnitsRowCalcInput extends Component {
 //        console.log('In NameValueUnitsRowCalcInput.constructor this.props.element.name=',this.props.element.name,' this.props.element.format=',this.props.element.format,' this.props.element.table=',this.props.element.table);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
-                type: this.props.type,
                 focused: false
             };
         } else if (this.props.element.format === 'table') {
@@ -33,40 +32,27 @@ class NameValueUnitsRowCalcInput extends Component {
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
             this.state = {
-                type: this.props.type,
                 table: table
-            };
-        } else {
-            this.state = {
-                type: this.props.type,
             };
         }
     }
     
-    static getDerivedStateFromProps(props, state) {
-//        console.log('In NameValueUnitsRowCalcInput.getDerivedStateFromProps props=',props,'state=',state);
-        if (props.type !== state.type) {
-//            console.log('In NameValueUnitsRowCalcInput.getDerivedStateFromProps props=',props,'state=',state);
-            if (props.element.format === undefined && typeof props.element.value === 'number') {
-                return {
-                    type: props.type,
-                    focused: false
-                };
-            } else if (props.element.format === 'table') {
-//                console.log('In NameValueUnitsRowCalcInput.getDerivedStateFromProps file = ../designtypes/'+props.element.table+'.json');
-                var table = require('../designtypes/'+props.element.table+'.json'); // Dynamically load table
-//                console.log('In NameValueUnitsRowCalcInput.getDerivedStateFromProps table=',table);
-                return {
-                    type: props.type,
+    componentDidUpdate(prevProps) {
+//        console.log('In NameValueUnitsRowCalcInput.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+        if (prevProps.type !== this.props.type) {
+            if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
+                this.setState({
+                    focused: false,
+                });
+            } else if (this.props.element.format === 'table') {
+//                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate file = ../designtypes/'+this.props.element.table+'.json');
+                var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
+//                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate table=',table);
+                this.setState({
                     table: table
-                };
-            } else {
-                return {
-                    type: props.type,
-                };
+                });
             }
         }
-        return null; // Return null if the state hasn't changed
     }
 
     onChange(event) {
