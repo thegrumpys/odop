@@ -126,7 +126,7 @@ class FileDelete extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        this.deleteDesign(this.state.type,this.state.name);
+        this.deleteDesign(this.props.type,this.state.name);
     }
     
     onCancel() {
@@ -138,7 +138,7 @@ class FileDelete extends Component {
     }
 
     render() {
-//        console.log('In FileDelete.render this.state.type=',this.state.type,' this.state.name=',this.state.name);
+//        console.log('In FileDelete.render this.props.type=',this.props.type,' this.state.name=',this.state.name);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>
