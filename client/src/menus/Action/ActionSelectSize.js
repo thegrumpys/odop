@@ -56,6 +56,7 @@ class ActionSelectSize extends Component {
 //        console.log('In ActionSelectSize.toggle');
         var { getSizeTypes, getSizeEntries } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeTypes & getSizeEntries
         var types = getSizeTypes();
+//        console.log('In ActionSelectSize.toggle types=',types);
         var type;
         if (types.length > 0)
             type = types[0]; // Default to first type
@@ -65,6 +66,7 @@ class ActionSelectSize extends Component {
             st.push(element);
         });
         var sizes = getSizeEntries(type, st);
+//        console.log('In ActionSelectSize.toggle sizes=',sizes);
         var size;
         if (sizes.length === 1)
             size = sizes[0]; // Default to first size

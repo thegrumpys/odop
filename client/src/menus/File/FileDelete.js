@@ -103,10 +103,10 @@ class FileDelete extends Component {
     
     toggle() {
 //        console.log('In FileDelete.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
+        this.getDesigns(this.props.type);
         this.setState({
             modal: !this.state.modal,
         });
-        this.getDesigns(this.props.type);
     }
     
     onSelect(event) {
