@@ -15,7 +15,7 @@ export const execute = {
                     
                     <p>
                     A detailed description of  
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/t_spring" target="_blank" rel="noopener noreferrer"> torsion spring names </a>
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/t_spring" target="_blank" rel="noopener noreferrer">torsion spring names</a>&nbsp;
                     is provided in the On-line Help.  
                     </p>
                     
@@ -101,7 +101,8 @@ export const execute = {
                         </ul>
                    
                     <p>
-                    As described in the on-line Help section on Materials 
+                    As described in the on-line Help section on  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/materials" target="_blank" rel="noopener noreferrer">Materials</a>&nbsp;
                     and also in the compression spring tutorial sessions tutor5 and tutor7,
                     changing Prop_Calc_Method will allow the use of different material property values.
                     </p>
@@ -126,8 +127,6 @@ export const execute = {
                     The demo session has now entered the remaining initial specifications for the problem. 
                     In summary, the changes were:<br />
                     <br />
-                    CHANGE  Material_Type  MUSIC_WIRE<br />
-                    <br />
                     FIX   M_1  0.0<br />
                     FIX   M_2  4.0<br />
                     FIX   ID_Free  0.75<br />
@@ -146,7 +145,6 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                changeSymbolValue("Material_Type",2),
                 fixSymbolValue('M_1', 0.0),
                 fixSymbolValue('M_2', 4.0),
                 fixSymbolValue('ID_Free', 0.75),
