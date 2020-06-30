@@ -6,6 +6,7 @@ import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withAuth } from '@okta/okta-react';
+import config from '../../config';
 
 class FileSaveAs extends Component {
 
@@ -19,8 +20,6 @@ class FileSaveAs extends Component {
         this.state = {
             modal: false,
             names: [],
-            type: this.props.state.type,
-            name: this.props.state.name,
             authenticated: null,
             uid: null,
         };
@@ -44,6 +43,13 @@ class FileSaveAs extends Component {
                 });
             }
         }
+    }
+
+    componentDidUpdate(prevProps) {
+//      console.log('In FileSaveAs.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+      if (prevProps.type !== this.props.state.type) {
+          getDesigns(this.props.state.type);
+      }
     }
 
     getDesigns(type) {
@@ -95,7 +101,7 @@ class FileSaveAs extends Component {
                 return res.json()
             })
             .catch(error => {
-                displayError('POST of \''+name+'\' \''+type+'\' design failed with message: \''+error.message+'\'');
+                displayError(method+' of \''+name+'\' \''+type+'\' design failed with message: \''+error.message+'\'');
             });
     }
 
@@ -117,14 +123,14 @@ class FileSaveAs extends Component {
     }
     
     onSaveAs() {
-//        console.log('In FileSaveAs.onSaveAs this.state.type=',this.state.type,' this.state.name=',this.state.name);
+//        console.log('In FileSaveAs.onSaveAs this.props.state.type=',this.props.state.type,' this.props.state.name=',this.props.state.name);
         this.setState({
             modal: !this.state.modal
         });
         // Save the model
-        var type = this.state.type;
-        if (type === undefined) type = 'Piston-Cylinder';
-        var name = this.state.name;
+        var type = this.props.state.type;
+        if (type === undefined) type = config.design.type;
+        var name = this.props.state.name;
         if (name === undefined) name = 'checkpt';
         this.postDesign(type,name);
         this.props.deleteAutoSave();
@@ -166,7 +172,7 @@ class FileSaveAs extends Component {
 }
 
 const mapStateToProps = state => ({
-    state: state 
+    state: state,
 });
 
 const mapDispatchToProps = {

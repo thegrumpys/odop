@@ -13,9 +13,9 @@ class FileSave extends Component {
     constructor(props) {
         super(props);
 //        console.log("In FileSave.constructor props=",props);
-        this.onSave = this.onSave.bind(this);
+        this.toggle = this.toggle.bind(this);
         this.state = {
-            modal: false,
+            names: [],
             authenticated: null,
             uid: null,
         };
@@ -41,11 +41,46 @@ class FileSave extends Component {
         }
     }
 
-    putDesign(type,name) {
-//        console.log('In FileSave.putDesign type=', type,' name=', name);
+    componentDidUpdate(prevProps) {
+//      console.log('In FileSave.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+      if (prevProps.type !== this.props.state.type) {
+          getDesigns(this.props.state.type);
+      }
+    }
+
+    getDesigns(type) {
+//        console.log('In FileSave.getDesigns type=', type);
+        // Get the names and store them in state
+        displaySpinner(true);
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
+                headers: {
+                  Authorization: 'Bearer ' + this.state.uid
+                }
+            })
+            .then(res => {
+                displaySpinner(false);
+                if (!res.ok) {
+                   throw Error(res.statusText);
+                }
+                return res.json()
+            })
+            .then(names => this.setState({ names }))
+            .catch(error => {
+                displayError('GET of design names failed with message: \''+error.message+'\'');
+            });
+    }
+    
+    postDesign(type,name) {
+        this.props.changeName(name);
+        this.props.changeUser(this.state.uid);
+        var method = 'POST'; // Create it
+        if (this.state.names.filter(e => {return e.name === name && e.user === this.state.uid}).length > 0) { // Does it already exist?
+            method = 'PUT'; // Update it
+        }
+//        console.log('In FileSave.postDesign type=', type,' name=', name,' method=', method);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
-                method: 'PUT', // Update it
+                method: method,
                 headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
@@ -62,28 +97,25 @@ class FileSave extends Component {
                 return res.json()
             })
             .catch(error => {
-                displayError('PUT of \''+name+'\' \''+type+'\' design failed with message: \''+error.message+'\'');
+                displayError(method+' of \''+name+'\' \''+type+'\' design failed with message: \''+error.message+'\'');
             });
     }
 
-    onSave() {
-//        console.log('In FileSave.toggle this.props.state.type=',this.props.state.type, ' this.props.state.name=',this.props.state.name);
-        this.setState({
-            modal: !this.state.modal
-        });
+    toggle() {
+//        console.log('In FileSave.toggle this.props.state.type=',this.props.state.type,' this.props.state.name=',this.props.state.name);
         // Save the model
         var type = this.props.state.type;
         if (type === undefined) type = config.design.type;
         var name = this.props.state.name;
         if (name === undefined) name = 'checkpt';
-        this.putDesign(type,name);
+        this.postDesign(type,name);
         this.props.deleteAutoSave();
     }
 
     render() {
         return (
             <React.Fragment>
-                <NavDropdown.Item onClick={this.onSave} disabled={this.props.state.user === null ? true : false}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Save
                 </NavDropdown.Item>
             </React.Fragment>
@@ -96,6 +128,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+    changeName: changeName,
+    changeUser: changeUser,
     deleteAutoSave: deleteAutoSave
 };
 
