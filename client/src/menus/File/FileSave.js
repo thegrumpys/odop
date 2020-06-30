@@ -6,6 +6,7 @@ import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withAuth } from '@okta/okta-react';
+import config from '../../config';
 
 class FileSave extends Component {
 
@@ -72,7 +73,7 @@ class FileSave extends Component {
         });
         // Save the model
         var type = this.props.state.type;
-        if (type === undefined) type = 'Piston-Cylinder';
+        if (type === undefined) type = config.design.type;
         var name = this.props.state.name;
         if (name === undefined) name = 'checkpt';
         this.putDesign(type,name);
@@ -92,11 +93,15 @@ class FileSave extends Component {
 
 const mapStateToProps = state => ({
     state: state,
-    deleteAutoSave: deleteAutoSave
 });
+
+const mapDispatchToProps = {
+    deleteAutoSave: deleteAutoSave
+};
 
 export default withAuth(
     connect(
-        mapStateToProps
+        mapStateToProps,
+        mapDispatchToProps
     )(FileSave)
 );

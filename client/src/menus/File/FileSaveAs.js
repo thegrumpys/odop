@@ -18,7 +18,7 @@ class FileSaveAs extends Component {
         this.onTextInput = this.onTextInput.bind(this);
         this.state = {
             modal: false,
-            designs: [],
+            names: [],
             type: this.props.state.type,
             name: this.props.state.name,
             authenticated: null,
@@ -48,7 +48,7 @@ class FileSaveAs extends Component {
 
     getDesigns(type) {
 //        console.log('In FileSaveAs.getDesigns type=', type);
-        // Get the designs and store them in state
+        // Get the names and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
@@ -62,7 +62,7 @@ class FileSaveAs extends Component {
                 }
                 return res.json()
             })
-            .then(designs => this.setState({ designs }))
+            .then(names => this.setState({ names }))
             .catch(error => {
                 displayError('GET of design names failed with message: \''+error.message+'\'');
             });
@@ -72,7 +72,7 @@ class FileSaveAs extends Component {
         this.props.changeName(name);
         this.props.changeUser(this.state.uid);
         var method = 'POST'; // Create it
-        if (this.state.designs.filter(e => {return e.name === name && e.user === this.state.uid}).length > 0) { // Does it already exist?
+        if (this.state.names.filter(e => {return e.name === name && e.user === this.state.uid}).length > 0) { // Does it already exist?
             method = 'PUT'; // Update it
         }
 //        console.log('In FileSaveAs.postDesign type=', type,' name=', name,' method=', method);
