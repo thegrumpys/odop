@@ -28,6 +28,7 @@ class ActionSelectCatalog extends Component {
 //        console.log('In ActionSelectCatalog.toggle');
         var { getCatalogNames, getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
         var names = getCatalogNames();
+//        console.log('In ActionSelectCatalog.toggle names=',names);
         var name;
         var entry_string;
         const { store } = this.context;

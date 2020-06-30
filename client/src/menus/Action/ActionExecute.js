@@ -12,23 +12,26 @@ class ActionExecute extends Component {
         this.onSelect = this.onSelect.bind(this);
         this.onExecute = this.onExecute.bind(this);
         this.onCancel = this.onCancel.bind(this);
-        var { getExecuteNames } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load getExecuteNames
-        var execute_names = getExecuteNames();
-        var execute_name;
-        if (execute_names.length > 0)
-            execute_name = execute_names[0]; // Default to first name
         this.state = {
             modal: false,
-            execute_names: execute_names,
-            execute_name: execute_name
+            execute_names: [],
+            execute_name: undefined
         };
     }
 
     toggle() {
 //        console.log('In ActionExecute.toggle');
-        this.setState({
-            modal: !this.state.modal
-        });
+        var { getExecuteNames } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load getExecuteNames
+        var execute_names = getExecuteNames();
+//        console.log('In ActionExecute.toggle execute_names=', execute_names);
+        var execute_name;
+        if (execute_names.length > 0)
+            execute_name = execute_names[0]; // Default to first name
+        this.state = {
+            modal: !this.state.modal,
+            execute_names: execute_names,
+            execute_name: execute_name
+        };
     }
 
     onSelect(event) {
