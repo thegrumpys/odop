@@ -14,13 +14,22 @@ class ActionExecute extends Component {
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
-            execute_names: [],
-            execute_name: undefined
         };
     }
+    
+    componentDidMount() {
+//      console.log('In ActionExecute.componentDidMount);
+      this.updateExecuteNames();
+}
 
-    toggle() {
-//        console.log('In ActionExecute.toggle');
+    componentDidUpdate(prevProps) {
+//      console.log('In ActionExecute.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+      if (prevProps.type !== this.props.type) {
+          this.updateExecuteNames();
+      }
+  }
+
+    updateExecuteNames() {
         var { getExecuteNames } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load getExecuteNames
         var execute_names = getExecuteNames();
 //        console.log('In ActionExecute.toggle execute_names=', execute_names);
@@ -28,9 +37,15 @@ class ActionExecute extends Component {
         if (execute_names.length > 0)
             execute_name = execute_names[0]; // Default to first name
         this.setState({
-            modal: !this.state.modal,
             execute_names: execute_names,
             execute_name: execute_name
+        });
+    }
+
+    toggle() {
+//        console.log('In ActionExecute.toggle');
+        this.setState({
+            modal: !this.state.modal
         });
     }
 
@@ -65,7 +80,7 @@ class ActionExecute extends Component {
 //        console.log('In ActionExecute.render');
         return (
             <React.Fragment>
-                <NavDropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>
                     Execute&hellip;
                 </NavDropdown.Item>
                 <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
@@ -78,7 +93,7 @@ class ActionExecute extends Component {
                         <br />
                         <Form.Label htmlFor="tutorialSelect">Select demo/tutorial to execute:</Form.Label>
                         <Form.Control as="select" id="tutorialSelect" onChange={this.onSelect} value={this.state.execute_name}>
-                            {this.state.execute_names.map((element, index) => (
+                            {this.state.execute_names !== undefined && this.state.execute_names.map((element, index) => (
                                 <option key={index} value={element}>{element}</option>
                             ))}
                         </Form.Control>
