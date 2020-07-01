@@ -6,7 +6,7 @@ import { logUsage } from '../../logUsage';
 class HelpDemo extends Component {
 
     constructor(props) {
-//        console.log('In ActionExecute.constructor');
+//        console.log('In HelpDemo.constructor');
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onSelect = this.onSelect.bind(this);
@@ -14,47 +14,62 @@ class HelpDemo extends Component {
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
-            execute_names: [],
-            execute_name: undefined
         };
     }
 
-    toggle() {
-//        console.log('In ActionExecute.toggle');
+    componentDidMount() {
+//        console.log('In HelpDemo.componentDidMount);
+        this.updateExecuteNames();
+  }
+
+    componentDidUpdate(prevProps) {
+//        console.log('In HelpDemo.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+        if (prevProps.type !== this.props.type) {
+            this.updateExecuteNames();
+        }
+    }
+
+    updateExecuteNames() {
         var { getDemoNames } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load getDemoNames
         var execute_names = getDemoNames();
-//        console.log('In ActionExecute.toggle execute_names=', execute_names);
+//        console.log('In HelpDemo.componentDidUpdate execute_names=', execute_names);
         var execute_name;
         if (execute_names.length > 0)
             execute_name = execute_names[0]; // Default to first name
         this.setState({
-            modal: !this.state.modal,
             execute_names: execute_names,
             execute_name: execute_name
         });
     }
 
+    toggle() {
+//        console.log('In HelpDemo.toggle');
+        this.setState({
+            modal: !this.state.modal
+        });
+    }
+
     onSelect(event) {
-//      console.log('In ActionExecute.onSelect event.target.value=',event.target.value);
+//      console.log('In HelpDemo.onSelect event.target.value=',event.target.value);
       this.setState({
           execute_name: event.target.value 
       });
   }
   
     onExecute() {
-//        console.log('In ActionExecute.onExecute');
+//        console.log('In HelpDemo.onExecute');
         this.setState({
             modal: !this.state.modal
         });
         logUsage('event', 'HelpDemo', { 'event_label': this.state.execute_name });
         // Do execute
-//        console.log('In ActionExecute.onExecute startTutorial(',this.state.execute_name,')');
+//        console.log('In HelpDemo.onExecute startTutorial(',this.state.execute_name,')');
         var { execute } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load execute
         execute("Help : Demo",this.state.execute_name);
     }
     
     onCancel() {
-//        console.log('In ActionExecute.onCancel');
+//        console.log('In HelpDemo.onCancel');
         this.setState({
             modal: !this.state.modal
         });
@@ -62,10 +77,10 @@ class HelpDemo extends Component {
     }
     
     render() {
-//        console.log('In ActionExecute.render');
+//        console.log('In HelpDemo.render');
         return (
             <React.Fragment>
-                <NavDropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>
                     Demo&hellip;
                 </NavDropdown.Item>
                 <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
@@ -78,7 +93,7 @@ class HelpDemo extends Component {
                         <br />
                         <Form.Label htmlFor="tutorialSelect">Select demo/tutorial to execute:</Form.Label>
                         <Form.Control as="select" id="tutorialSelect" onChange={this.onSelect} value={this.state.execute_name}>
-                            {this.state.execute_names.map((element, index) => (
+                            {this.state.execute_names !== undefined && this.state.execute_names.map((element, index) => (
                                 <option key={index} value={element}>{element}</option>
                             ))}
                         </Form.Control>
