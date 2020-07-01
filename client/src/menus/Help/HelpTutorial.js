@@ -65,7 +65,7 @@ class HelpTutorial extends Component {
 //        console.log('In ActionExecute.render');
         return (
             <React.Fragment>
-                <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names.length === 0}>
+                <NavDropdown.Item onClick={this.toggle}>
                     Tutorial&hellip;
                 </NavDropdown.Item>
                 <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
