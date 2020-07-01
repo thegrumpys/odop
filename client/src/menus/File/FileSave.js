@@ -39,14 +39,15 @@ class FileSave extends Component {
                 });
             }
         }
+        this.getDesigns(this.props.state.type);
     }
 
-//    componentDidUpdate(prevProps) {
-////      console.log('In FileSave.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-//      if (prevProps.type !== this.props.state.type) {
-//          this.getDesigns(this.props.state.type);
-//      }
-//    }
+    componentDidUpdate(prevProps) {
+//        console.log('In FileSave.componentDidUpdate prevProps=',prevProps.state.type,'props=',this.props.state.type);
+        if (prevProps.state.type !== this.props.state.type) {
+            this.getDesigns(this.props.state.type);
+        }
+    }
 
     getDesigns(type) {
 //        console.log('In FileSave.getDesigns type=', type);
@@ -64,7 +65,10 @@ class FileSave extends Component {
                 }
                 return res.json()
             })
-            .then(names => this.setState({ names }))
+            .then(names => {
+//                console.log('In FileSave.getDesigns names=', names);
+                this.setState({ names })
+            })
             .catch(error => {
                 displayError('GET of design names failed with message: \''+error.message+'\'');
             });
@@ -104,11 +108,7 @@ class FileSave extends Component {
     toggle() {
 //        console.log('In FileSave.toggle this.props.state.type=',this.props.state.type,' this.props.state.name=',this.props.state.name);
         // Save the model
-        var type = this.props.state.type;
-        if (type === undefined) type = config.design.type;
-        var name = this.props.state.name;
-        if (name === undefined) name = 'checkpt';
-        this.postDesign(type,name);
+        this.postDesign(this.props.state.type, this.props.state.name);
         this.props.deleteAutoSave();
     }
 
