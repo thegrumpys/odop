@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { deleteAutoSave } from '../../store/actionCreators';
+import { changeName, changeUser, deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -41,12 +41,12 @@ class FileSave extends Component {
         }
     }
 
-    componentDidUpdate(prevProps) {
-//      console.log('In FileSave.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-      if (prevProps.type !== this.props.state.type) {
-          getDesigns(this.props.state.type);
-      }
-    }
+//    componentDidUpdate(prevProps) {
+////      console.log('In FileSave.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+//      if (prevProps.type !== this.props.state.type) {
+//          this.getDesigns(this.props.state.type);
+//      }
+//    }
 
     getDesigns(type) {
 //        console.log('In FileSave.getDesigns type=', type);

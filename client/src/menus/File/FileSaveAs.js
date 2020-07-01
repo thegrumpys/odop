@@ -45,12 +45,12 @@ class FileSaveAs extends Component {
         }
     }
 
-    componentDidUpdate(prevProps) {
-//      console.log('In FileSaveAs.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-      if (prevProps.type !== this.props.state.type) {
-          getDesigns(this.props.state.type);
-      }
-    }
+//    componentDidUpdate(prevProps) {
+////      console.log('In FileSaveAs.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+//      if (prevProps.type !== this.props.state.type) {
+//          this.getDesigns(this.props.state.type);
+//      }
+//    }
 
     getDesigns(type) {
 //        console.log('In FileSaveAs.getDesigns type=', type);
