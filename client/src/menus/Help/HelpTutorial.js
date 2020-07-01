@@ -27,11 +27,11 @@ class HelpTutorial extends Component {
         var execute_name;
         if (execute_names.length > 0)
             execute_name = execute_names[0]; // Default to first name
-        this.state = {
+        this.setState({
             modal: !this.state.modal,
             execute_names: execute_names,
             execute_name: execute_name
-        };
+        });
     }
 
     onSelect(event) {
