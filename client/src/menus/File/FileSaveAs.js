@@ -6,7 +6,6 @@ import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withAuth } from '@okta/okta-react';
-import config from '../../config';
 
 class FileSaveAs extends Component {
 
@@ -20,6 +19,7 @@ class FileSaveAs extends Component {
         this.state = {
             modal: false,
             names: [],
+            name: undefined, // default to no name
             authenticated: null,
             uid: null,
         };
@@ -43,14 +43,15 @@ class FileSaveAs extends Component {
                 });
             }
         }
+        this.getDesigns(this.props.state.type);
     }
 
-//    componentDidUpdate(prevProps) {
-////      console.log('In FileSaveAs.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-//      if (prevProps.type !== this.props.state.type) {
-//          this.getDesigns(this.props.state.type);
-//      }
-//    }
+    componentDidUpdate(prevProps) {
+//        console.log('In FileSave.componentDidUpdate prevProps=',prevProps.state.type,'props=',this.props.state.type);
+        if (prevProps.state.type !== this.props.state.type) {
+            this.getDesigns(this.props.state.type);
+        }
+    }
 
     getDesigns(type) {
 //        console.log('In FileSaveAs.getDesigns type=', type);
@@ -68,7 +69,10 @@ class FileSaveAs extends Component {
                 }
                 return res.json()
             })
-            .then(names => this.setState({ names }))
+            .then(names => {
+//                console.log('In FileSaveAs.getDesigns names=', names);
+                this.setState({ names })
+            })
             .catch(error => {
                 displayError('GET of design names failed with message: \''+error.message+'\'');
             });
@@ -107,18 +111,15 @@ class FileSaveAs extends Component {
 
     toggle() {
 //        console.log('In FileSaveAs.toggle this.props.state.type=',this.props.state.type, ' this.props.state.name=',this.props.state.name);
-        this.getDesigns(this.props.state.type);
         this.setState({
             modal: !this.state.modal,
-            type: this.props.state.type,
-            name: this.props.state.name
         });
     }
 
     onTextInput(event) {
 //        console.log('In FileSaveAs.onTextInput event.target.value=',event.target.value);
         this.setState({
-            name: event.target.value 
+            name: event.target.value // Change name in component state
         });
     }
     
@@ -128,11 +129,7 @@ class FileSaveAs extends Component {
             modal: !this.state.modal
         });
         // Save the model
-        var type = this.props.state.type;
-        if (type === undefined) type = config.design.type;
-        var name = this.props.state.name;
-        if (name === undefined) name = 'checkpt';
-        this.postDesign(type,name);
+        this.postDesign(this.props.state.type, this.state.name); // Take name from component state
         this.props.deleteAutoSave();
     }
     
@@ -163,7 +160,7 @@ class FileSaveAs extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" onClick={this.onSaveAs}>Save As</Button>
+                        <Button variant="primary" onClick={this.onSaveAs} disabled={this.state.name === undefined}>Save As</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>
