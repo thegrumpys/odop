@@ -6,7 +6,6 @@ import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withAuth } from '@okta/okta-react';
-import config from '../../config';
 
 class FileSave extends Component {
 
