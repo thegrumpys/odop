@@ -96,7 +96,7 @@ class FileSave extends Component {
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
-                if (method === 'POST') this.state.names.push(name); // If create and successful then sdd name to the array of names
+                if (method === 'POST') this.state.names.push(name); // If successful and created then sdd name to the array of names
                 logUsage('event', 'FileSave', { 'event_label': type + ' ' + name });
                 return res.json()
             })
