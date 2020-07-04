@@ -99,7 +99,7 @@ class FileDelete extends Component {
                 }
 //                console.log('In FileDelete.deleteDesign this.state.names=',this.state.names);
                 var names = this.state.names.filter(e => e.name !== name || e.user !== this.state.uid); // If delete and successful then remove name from the array of names
-//                console.log('In FileSave.postDesign type=',type,'name=',name,'names=', names);
+//                console.log('In FileSave.postDesign names=', names);
                 this.setState({ 
                     names: names,
                 });
