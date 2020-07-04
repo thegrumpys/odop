@@ -65,7 +65,7 @@ class FileDelete extends Component {
                 return res.json()
             })
            .then(names => {
-//               console.log('In FileDelete.getDesignNames names=', names);
+//               console.log('In FileDelete.getDesignNames type=',type,'names=', names);
                this.setState({ 
                    names: names.filter((design) => {return design.user !== null})
                });
@@ -97,8 +97,11 @@ class FileDelete extends Component {
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
+//                console.log('In FileDelete.deleteDesign this.state.names=',this.state.names);
+                var names = this.state.names.filter(e => e.name !== name || e.user !== this.state.uid); // If delete and successful then remove name from the array of names
+//                console.log('In FileSave.postDesign type=',type,'name=',name,'names=', names);
                 this.setState({ 
-                    names: this.state.names.filter(entry => entry !== name), // If successful and removed then deleted name in the array of names
+                    names: names,
                 });
                 logUsage('event', 'FileDelete', { 'event_label': type + ' ' + name });
                 return res.json()
