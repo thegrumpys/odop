@@ -65,7 +65,7 @@ class FileDelete extends Component {
                 return res.json()
             })
            .then(names => {
-//               console.log('In FileDelete.getDesignNames names=', names);
+//               console.log('In FileDelete.getDesignNames type=',type,'names=', names);
                this.setState({ 
                    names: names.filter((design) => {return design.user !== null})
                });
@@ -97,8 +97,11 @@ class FileDelete extends Component {
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
+//                console.log('In FileDelete.deleteDesign this.state.names=',this.state.names);
+                var names = this.state.names.filter(e => e.name !== name || e.user !== this.state.uid); // If delete and successful then remove name from the array of names
+//                console.log('In FileSave.postDesign names=', names);
                 this.setState({ 
-                    names: this.state.names.filter(entry => entry !== name), // If successful and removed then deleted name in the array of names
+                    names: names,
                 });
                 logUsage('event', 'FileDelete', { 'event_label': type + ' ' + name });
                 return res.json()
@@ -167,8 +170,8 @@ class FileDelete extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <br />
-                        <Form.Label htmlFor="fileDeleteSelectType">Select design type to open:</Form.Label>
-                        <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
+                        <Form.Label htmlFor="fileDeleteSelectType">Select design type for delete:</Form.Label>
+                        <Form.Control as="select" id="fileDeleteSelectType" onChange={this.onSelectType} value={this.state.type}>
                             {this.state.types.map((designtype, index) =>
                                 <option key={index} value={designtype}>{designtype}</option>
                             )}
