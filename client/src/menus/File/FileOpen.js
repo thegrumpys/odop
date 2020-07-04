@@ -55,54 +55,54 @@ class FileOpen extends Component {
         // Get the names and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
-                headers: {
-                    Authorization: 'Bearer ' + this.state.uid
-                }
+            headers: {
+                Authorization: 'Bearer ' + this.state.uid
+            }
+        })
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+               throw Error(res.statusText);
+            }
+            return res.json()
+        })
+        .then(names => {
+//                console.log('In FileOpen.getDesignNames names=',names);
+            this.setState({
+                names: names
             })
-            .then(res => {
-                displaySpinner(false);
-                if (!res.ok) {
-                   throw Error(res.statusText);
-                }
-                return res.json()
-            })
-            .then(names => {
-//                console.log('In FileOpen.getDesigns names=',names);
-                this.setState({
-                    names: names
-                })
-            })
-            .catch(error => {
-                displayError('GET of design names failed with message: \''+error.message+'\'');
-            });
+        })
+        .catch(error => {
+            displayError('GET of design names failed with message: \''+error.message+'\'');
+        });
     }
 
     getDesign(type,name) {
 //        console.log('In FileOpen.getDesign type=', type, ' name=', name);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
-                headers: {
-                    Authorization: 'Bearer ' + this.state.uid
-                }
-            })
-            .then(res => {
-                displaySpinner(false);
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-                return res.json()
-            })
-            .then((design) => {
+            headers: {
+                Authorization: 'Bearer ' + this.state.uid
+            }
+        })
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+                throw Error(res.statusText);
+            }
+            return res.json()
+        })
+        .then((design) => {
 //                console.log('In FileOpen.getDesign design=', design);
-                var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
-                var migrated_design = migrate(design);
-                this.props.load(migrated_design)
-                this.props.deleteAutoSave();
-                logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
-            })
-            .catch(error => {
-                displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
-            });
+            var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
+            var migrated_design = migrate(design);
+            this.props.load(migrated_design)
+            this.props.deleteAutoSave();
+            logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
+        })
+        .catch(error => {
+            displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
+        });
     }
 
     toggle() {

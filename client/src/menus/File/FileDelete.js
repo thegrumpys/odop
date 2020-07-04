@@ -44,9 +44,9 @@ class FileDelete extends Component {
         }
     }
 
-    getDesigns(type) {
+    getDesignNames(type) {
         // Get the names and store them in state
-//        console.log('In FileDelete.getDesigns type=', type);
+//        console.log('In FileDelete.getDesignNames type=', type);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
@@ -61,7 +61,7 @@ class FileDelete extends Component {
                 return res.json()
             })
            .then(names => {
-//               console.log('In FileDelete.getDesigns names=', names);
+//               console.log('In FileDelete.getDesignNames names=', names);
                this.setState({ 
                    names: names.filter((design) => {return design.user !== null})
                });
@@ -103,7 +103,7 @@ class FileDelete extends Component {
     
     toggle() {
 //        console.log('In FileDelete.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
-        this.getDesigns(this.props.type);
+        this.getDesignNames(this.props.type);
         this.setState({
             modal: !this.state.modal,
         });

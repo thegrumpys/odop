@@ -38,39 +38,39 @@ class FileSave extends Component {
                 });
             }
         }
-        this.getDesigns(this.props.state.type);
+        this.getDesignNames(this.props.state.type);
     }
 
     componentDidUpdate(prevProps) {
 //        console.log('In FileSave.componentDidUpdate prevProps=',prevProps.state.type,'props=',this.props.state.type);
         if (prevProps.state.type !== this.props.state.type) {
-            this.getDesigns(this.props.state.type);
+            this.getDesignNames(this.props.state.type);
         }
     }
 
-    getDesigns(type) {
-//        console.log('In FileSave.getDesigns type=', type);
+    getDesignNames(type) {
+//        console.log('In FileSave.getDesignNames type=', type);
         // Get the names and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
                   Authorization: 'Bearer ' + this.state.uid
                 }
-            })
-            .then(res => {
-                displaySpinner(false);
-                if (!res.ok) {
-                   throw Error(res.statusText);
-                }
-                return res.json()
-            })
-            .then(names => {
-//                console.log('In FileSave.getDesigns type=',type,'names=', names);
-                this.setState({ names })
-            })
-            .catch(error => {
-                displayError('GET of design names failed with message: \''+error.message+'\'');
-            });
+        })
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+               throw Error(res.statusText);
+            }
+            return res.json()
+        })
+        .then(names => {
+//            console.log('In FileSave.getDesignNames type=',type,'names=', names);
+            this.setState({ names })
+        })
+        .catch(error => {
+            displayError('GET of design names failed with message: \''+error.message+'\'');
+        });
     }
     
     postDesign(type,name) {
@@ -85,33 +85,33 @@ class FileSave extends Component {
 //        console.log('In FileSave.postDesign method=', method);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
-                method: method,
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                  Authorization: 'Bearer ' + this.state.uid
-                },
-                body: JSON.stringify(this.props.state)
-            })
-            .then(res => {
-                displaySpinner(false);
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-                if (method === 'POST') {
-                    var names = Array.from(this.state.names); // clone it
-                    names.push({user: this.state.uid, name: name}); // If create and successful then sdd name to the array of names
-//                    console.log('In FileSave.postDesign type=',type,'name=',name,'names=', names);
-                    this.setState({
-                        names: names,
-                    });
-                }
-                logUsage('event', 'FileSave', { 'event_label': type + ' ' + name });
-                return res.json()
-            })
-            .catch(error => {
-                displayError(method+' of \''+name+'\' \''+type+'\' design failed with message: \''+error.message+'\'');
-            });
+            method: method,
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer ' + this.state.uid
+            },
+            body: JSON.stringify(this.props.state)
+        })
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+                throw Error(res.statusText);
+            }
+            if (method === 'POST') {
+                var names = Array.from(this.state.names); // clone it
+                names.push({user: this.state.uid, name: name}); // If create and successful then sdd name to the array of names
+//                console.log('In FileSave.postDesign type=',type,'name=',name,'names=', names);
+                this.setState({
+                    names: names,
+                });
+            }
+            logUsage('event', 'FileSave', { 'event_label': type + ' ' + name });
+            return res.json()
+        })
+        .catch(error => {
+            displayError(method+' of \''+name+'\' \''+type+'\' design failed with message: \''+error.message+'\'');
+        });
     }
 
     toggle() {

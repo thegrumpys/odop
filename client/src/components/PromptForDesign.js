@@ -81,7 +81,7 @@ export default withAuth(class PromptForDesign extends Component {
                 return res.json()
             })
             .then(designs => {
-//                console.log('In PromptForDesign.getDesigns designs=',designs);
+//                console.log('In PromptForDesign.getDesignNames designs=',designs);
                 this.setState({
                     designs: designs
                 })
@@ -119,7 +119,7 @@ export default withAuth(class PromptForDesign extends Component {
                 return res.json()
             })
             .then(design => {
-//                console.log('In PromptForDesign.getDesigns design=', design);
+//                console.log('In PromptForDesign.getDesign design=', design);
                 var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
                 var migrated_design = migrate(design);
                 const store = createStore(reducers, migrated_design, middleware);
