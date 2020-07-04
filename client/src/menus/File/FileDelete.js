@@ -5,6 +5,7 @@ import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withAuth } from '@okta/okta-react';
+import config from '../../config';
 
 class FileDelete extends Component {
 
@@ -12,12 +13,15 @@ class FileDelete extends Component {
         super(props);
 //        console.log("In FileDelete.constructor props=",props);
         this.toggle = this.toggle.bind(this);
-        this.onCancel = this.onCancel.bind(this);
+        this.onSelectType = this.onSelectType.bind(this);
+        this.onSelectName = this.onSelectName.bind(this);
         this.onDelete = this.onDelete.bind(this);
-        this.onSelect = this.onSelect.bind(this);
+        this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
+            types: config.design.types,
             names: [],
+            type: this.props.type,
             name: '',
             authenticated: null,
             uid: null,
@@ -44,9 +48,9 @@ class FileDelete extends Component {
         }
     }
 
-    getDesigns(type) {
+    getDesignNames(type) {
         // Get the names and store them in state
-//        console.log('In FileDelete.getDesigns type=', type);
+//        console.log('In FileDelete.getDesignNames type=', type);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
                 headers: {
@@ -61,7 +65,7 @@ class FileDelete extends Component {
                 return res.json()
             })
            .then(names => {
-//               console.log('In FileDelete.getDesigns names=', names);
+//               console.log('In FileDelete.getDesignNames names=', names);
                this.setState({ 
                    names: names.filter((design) => {return design.user !== null})
                });
@@ -93,6 +97,9 @@ class FileDelete extends Component {
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
+                this.setState({ 
+                    names: this.state.names.filter(entry => entry !== name), // If successful and removed then deleted name in the array of names
+                });
                 logUsage('event', 'FileDelete', { 'event_label': type + ' ' + name });
                 return res.json()
             })
@@ -102,14 +109,22 @@ class FileDelete extends Component {
     }
     
     toggle() {
-//        console.log('In FileDelete.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
-        this.getDesigns(this.props.type);
+//        console.log('In FileDelete.toggle this.state.type=',this.state.type,' this.props.name=',this.props.name);
+        this.getDesignNames(this.state.type);
         this.setState({
             modal: !this.state.modal,
         });
     }
     
-    onSelect(event) {
+    onSelectType(event) {
+//      console.log('In FileOpen.onSelectType event.target.value=',event.target.value);
+      this.setState({
+          type: event.target.value
+      });
+      this.getDesignNames(event.target.value);
+}
+
+    onSelectName(event) {
 //        console.log('In FileDelete.onSelect event.target.value=',event.target.value);
         this.setState({
             name: event.target.value 
@@ -117,7 +132,7 @@ class FileDelete extends Component {
     }
     
     onDelete() {
-//        console.log('In FileDelete.onDelete this.props.type=',this.props.type,' this.state.name=',this.state.name);
+//        console.log('In FileDelete.onDelete this.state.type=',this.state.type,' this.state.name=',this.state.name);
         // Validate name, and delete the database element
         if (this.state.name === '') {
             displayError("Select design to delete.");
@@ -126,7 +141,7 @@ class FileDelete extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        this.deleteDesign(this.props.type,this.state.name);
+        this.deleteDesign(this.state.type,this.state.name);
     }
     
     onCancel() {
@@ -138,7 +153,7 @@ class FileDelete extends Component {
     }
 
     render() {
-//        console.log('In FileDelete.render this.props.type=',this.props.type,' this.state.name=',this.state.name);
+//        console.log('In FileDelete.render this.state.type=',this.state.type,' this.state.name=',this.state.name);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>
@@ -152,8 +167,15 @@ class FileDelete extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <br />
-                        <Form.Label htmlFor="fileDeleteSelect">Select design to delete:</Form.Label>
-                        <Form.Control as="select" id="fileDeleteSelect" onChange={this.onSelect}>
+                        <Form.Label htmlFor="fileDeleteSelectType">Select design type to open:</Form.Label>
+                        <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
+                            {this.state.types.map((designtype, index) =>
+                                <option key={index} value={designtype}>{designtype}</option>
+                            )}
+                        </Form.Control>
+                        <br />
+                        <Form.Label htmlFor="fileDeleteSelectName">Select design to delete:</Form.Label>
+                        <Form.Control as="select" id="fileDeleteSelectName" onChange={this.onSelectName}>
                             {this.state.names.map((design, index) => {
                                 return <option key={index} value={design.name}>{design.name}</option>
                             })}
