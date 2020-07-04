@@ -49,56 +49,56 @@ class FileDelete extends Component {
 //        console.log('In FileDelete.getDesignNames type=', type);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
-                headers: {
-                    Authorization: 'Bearer ' + this.state.uid
-                }
-            })
-            .then(res => {
-                displaySpinner(false);
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-                return res.json()
-            })
-           .then(names => {
+            headers: {
+                Authorization: 'Bearer ' + this.state.uid
+            }
+        })
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+                throw Error(res.statusText);
+            }
+            return res.json()
+        })
+       .then(names => {
 //               console.log('In FileDelete.getDesignNames names=', names);
-               this.setState({ 
-                   names: names.filter((design) => {return design.user !== null})
-               });
-               var name = '';
-               if (this.state.names.length > 0)
-                   name = this.state.names[0].name; // Default to first name
-               this.setState({ 
-                   name: name
-               });
-           })
-           .catch(error => {
-               displayError('GET of design names failed with message: \''+error.message+'\'');
+           this.setState({ 
+               names: names.filter((design) => {return design.user !== null})
            });
+           var name = '';
+           if (this.state.names.length > 0)
+               name = this.state.names[0].name; // Default to first name
+           this.setState({ 
+               name: name
+           });
+       })
+       .catch(error => {
+           displayError('GET of design names failed with message: \''+error.message+'\'');
+       });
     }
     
     deleteDesign(type,name) {
 //        console.log('In FileDelete.deleteDesign type=', type, ' name=', name);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + this.state.uid
-                },
-            })
-            .then(res => {
-                displaySpinner(false);
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-                logUsage('event', 'FileDelete', { 'event_label': type + ' ' + name });
-                return res.json()
-            })
-            .catch(error => {
-                displayError('DELETE of \''+name+'\' design  \''+type+'\' design type failed with message: \''+error.message+'\'');
-            });
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + this.state.uid
+            },
+        })
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+                throw Error(res.statusText);
+            }
+            logUsage('event', 'FileDelete', { 'event_label': type + ' ' + name });
+            return res.json()
+        })
+        .catch(error => {
+            displayError('DELETE of \''+name+'\' design  \''+type+'\' design type failed with message: \''+error.message+'\'');
+        });
     }
     
     toggle() {
