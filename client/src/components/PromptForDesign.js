@@ -45,9 +45,15 @@ export default withAuth(class PromptForDesign extends Component {
             if (authenticated) { // We have become authenticated
                 var user = await this.props.auth.getUser();
 //                console.log('In PromptForDesign.componentDidMount user=',user);
-                this.setState({
-                    uid: user.sub,
-                });
+                if (user !== undefined) { // Have we a user?
+                    this.setState({
+                        uid: user.sub,
+                    });
+                } else {
+                    this.setState({
+                        uid: null,
+                    });
+                }
             } else { // We have become unauthenticated
                 this.setState({
                     uid: null,
