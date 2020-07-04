@@ -170,8 +170,8 @@ class FileDelete extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <br />
-                        <Form.Label htmlFor="fileDeleteSelectType">Select design type to open:</Form.Label>
-                        <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
+                        <Form.Label htmlFor="fileDeleteSelectType">Select design type for delete:</Form.Label>
+                        <Form.Control as="select" id="fileDeleteSelectType" onChange={this.onSelectType} value={this.state.type}>
                             {this.state.types.map((designtype, index) =>
                                 <option key={index} value={designtype}>{designtype}</option>
                             )}
