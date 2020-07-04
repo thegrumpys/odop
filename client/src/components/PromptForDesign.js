@@ -69,30 +69,30 @@ export default withAuth(class PromptForDesign extends Component {
         displaySpinner(true);
 //        console.log('In PromptForDesign.getDesignNames this.state.uid=',this.state.uid);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
-                headers: {
-                    Authorization: 'Bearer ' + this.state.uid
-                }
+            headers: {
+                Authorization: 'Bearer ' + this.state.uid
+            }
+        })
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+               throw Error(res.statusText);
+            }
+            return res.json()
+        })
+        .then(designs => {
+//                console.log('In PromptForDesign.getDesignNames designs=',designs);
+            this.setState({
+                designs: designs
             })
-            .then(res => {
-                displaySpinner(false);
-                if (!res.ok) {
-                   throw Error(res.statusText);
-                }
-                return res.json()
-            })
-            .then(designs => {
-//                console.log('In PromptForDesign.getDesigns designs=',designs);
-                this.setState({
-                    designs: designs
-                })
-            })
-            .catch(error => {
-                this.setState({
-                    modal: !this.state.modal
-                });
-                displayError('GET of design names for design types failed with message: \''+error.message+'\'. Using builtin initial state instead. You may continue in "demo mode" but you will be unable to save your work.');
-                this.loadInitialState(this.state.type);
+        })
+        .catch(error => {
+            this.setState({
+                modal: !this.state.modal
             });
+            displayError('GET of design names for design types failed with message: \''+error.message+'\'. Using builtin initial state instead. You may continue in "demo mode" but you will be unable to save your work.');
+            this.loadInitialState(this.state.type);
+        });
     }
 
     getDesign(type,name) {
@@ -107,33 +107,33 @@ export default withAuth(class PromptForDesign extends Component {
         displaySpinner(true);
 //        console.log('In PromptForDesign.getDesign this.state.uid=',this.state.uid);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
-                headers: {
-                    Authorization: 'Bearer ' + this.state.uid
-                }
-            })
-            .then(res => {
-                displaySpinner(false);
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-                return res.json()
-            })
-            .then(design => {
-//                console.log('In PromptForDesign.getDesigns design=', design);
-                var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
-                var migrated_design = migrate(design);
-                const store = createStore(reducers, migrated_design, middleware);
-                store.dispatch(startup());
-                store.dispatch(deleteAutoSave());
-                logUsage('event', 'PromptForDesign', { 'event_label': type + ' ' + name });
-                this.setState({
-                    store: store
-                });
-            })
-            .catch(error => {
-                displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
-                this.loadInitialState(type);
+            headers: {
+                Authorization: 'Bearer ' + this.state.uid
+            }
+        })
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+                throw Error(res.statusText);
+            }
+            return res.json()
+        })
+        .then(design => {
+//                console.log('In PromptForDesign.getDesign design=', design);
+            var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
+            var migrated_design = migrate(design);
+            const store = createStore(reducers, migrated_design, middleware);
+            store.dispatch(startup());
+            store.dispatch(deleteAutoSave());
+            logUsage('event', 'PromptForDesign', { 'event_label': type + ' ' + name });
+            this.setState({
+                store: store
             });
+        })
+        .catch(error => {
+            displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
+            this.loadInitialState(type);
+        });
     }
 
     loadInitialState(type) {

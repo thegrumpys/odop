@@ -38,58 +38,76 @@ class FileSave extends Component {
                 });
             }
         }
-        this.getDesigns(this.props.state.type);
+        this.getDesignNames(this.props.state.type);
     }
 
     componentDidUpdate(prevProps) {
 //        console.log('In FileSave.componentDidUpdate prevProps=',prevProps.state.type,'props=',this.props.state.type);
         if (prevProps.state.type !== this.props.state.type) {
-            this.getDesigns(this.props.state.type);
+            this.getDesignNames(this.props.state.type);
         }
     }
 
-    getDesigns(type) {
-//        console.log('In FileSave.getDesigns type=', type);
+    getDesignNames(type) {
+//        console.log('In FileSave.getDesignNames type=', type);
         // Get the names and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
-                headers: {
-                  Authorization: 'Bearer ' + this.state.uid
-                }
-            })
-            .then(res => {
-                displaySpinner(false);
-                if (!res.ok) {
-                   throw Error(res.statusText);
-                }
-                return res.json()
-            })
-            .then(names => {
-//                console.log('In FileSave.getDesigns type=',type,'names=', names);
-                this.setState({ names })
-            })
-            .catch(error => {
-                displayError('GET of design names failed with message: \''+error.message+'\'');
-            });
+            headers: {
+                Authorization: 'Bearer ' + this.state.uid
+            }
+        })
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+               throw Error(res.statusText);
+            }
+            return res.json()
+        })
+        .then(names => {
+//            console.log('In FileSave.getDesignNames type=',type,'names=', names);
+            this.setState({ names })
+        })
+        .catch(error => {
+            displayError('GET of design names failed with message: \''+error.message+'\'');
+        });
     }
     
     postDesign(type,name) {
 //        console.log('In FileSave.postDesign type=', type,' name=', name);
         this.props.changeName(name);
         this.props.changeUser(this.state.uid);
-//        console.log('In FileSave.postDesign this.state.names=',this.state.names);
-        var method = 'POST'; // Create it
-        if (this.state.names.filter(e => e.name === name && e.user === this.state.uid).length > 0) { // Does it already exist?
-            method = 'PUT'; // Update it
-        }
-//        console.log('In FileSave.postDesign method=', method);
+        // First fetch the current list of names
         displaySpinner(true);
-        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
+        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
+            headers: {
+                Authorization: 'Bearer ' + this.state.uid
+            }
+        })
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+               throw Error(res.statusText);
+            }
+            return res.json()
+        })
+        .then(names => {
+            // Second create or update the design 
+//            console.log('In FileSave.postDesign type=',type,'names=', names);
+            this.setState({ names })
+//            console.log('In FileSave.postDesign this.state.names=',this.state.names);
+            var method = 'POST'; // Create it
+            if (this.state.names.filter(e => e.name === name && e.user === this.state.uid).length > 0) { // Does it already exist?
+                method = 'PUT'; // Update it
+            }
+//            console.log('In FileSave.postDesign method=', method);
+            displaySpinner(true);
+            fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
                 method: method,
                 headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                  Authorization: 'Bearer ' + this.state.uid
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + this.state.uid
                 },
                 body: JSON.stringify(this.props.state)
             })
@@ -112,6 +130,10 @@ class FileSave extends Component {
             .catch(error => {
                 displayError(method+' of \''+name+'\' \''+type+'\' design failed with message: \''+error.message+'\'');
             });
+        })
+        .catch(error => {
+            displayError('GET of design names failed with message: \''+error.message+'\'');
+        });
     }
 
     toggle() {
