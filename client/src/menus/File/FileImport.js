@@ -14,7 +14,7 @@ class FileImport extends Component {
 //        console.log('In FileImport.constructor props=',props);
         this.toggle = this.toggle.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
-        this.onFileUpload = this.onFileUpload.bind(this);
+        this.onFileImport = this.onFileImport.bind(this);
         this.onLoadEnd = this.onLoadEnd.bind(this);
         this.onError = this.onError.bind(this);
         this.onCancel = this.onCancel.bind(this);
@@ -43,8 +43,8 @@ class FileImport extends Component {
     };
 
     // On file upload (click the upload button)
-    onFileUpload() {
-//        console.log('In FileImport.onFileUpload');
+    onFileImport() {
+//        console.log('In FileImport.onFileImport');
         this.setState({
             modal: !this.state.modal, // Hide Modal
         });
@@ -101,7 +101,7 @@ class FileImport extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" onClick={this.onFileUpload} disabled={this.state.selectedFile == null}>Upload</Button>
+                        <Button variant="primary" onClick={this.onFileImport} disabled={this.state.selectedFile == null}>Import</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>

@@ -65,7 +65,7 @@ class FileSave extends Component {
                 return res.json()
             })
             .then(names => {
-//                console.log('In FileSave.getDesigns names=', names);
+//                console.log('In FileSave.getDesigns type=',type,'names=', names);
                 this.setState({ names })
             })
             .catch(error => {
@@ -74,13 +74,15 @@ class FileSave extends Component {
     }
     
     postDesign(type,name) {
+//        console.log('In FileSave.postDesign type=', type,' name=', name);
         this.props.changeName(name);
         this.props.changeUser(this.state.uid);
+//        console.log('In FileSave.postDesign this.state.names=',this.state.names);
         var method = 'POST'; // Create it
-        if (this.state.names.filter(e => {return e.name === name && e.user === this.state.uid}).length > 0) { // Does it already exist?
+        if (this.state.names.filter(e => e.name === name && e.user === this.state.uid).length > 0) { // Does it already exist?
             method = 'PUT'; // Update it
         }
-//        console.log('In FileSave.postDesign type=', type,' name=', name,' method=', method);
+//        console.log('In FileSave.postDesign method=', method);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
                 method: method,
@@ -96,7 +98,14 @@ class FileSave extends Component {
                 if (!res.ok) {
                     throw Error(res.statusText);
                 }
-                if (method === 'POST') this.state.names.push(name); // If successful and created then sdd name to the array of names
+                if (method === 'POST') {
+                    var names = Array.from(this.state.names); // clone it
+                    names.push({user: this.state.uid, name: name}); // If create and successful then sdd name to the array of names
+//                    console.log('In FileSave.postDesign type=',type,'name=',name,'names=', names);
+                    this.setState({
+                        names: names,
+                    });
+                }
                 logUsage('event', 'FileSave', { 'event_label': type + ' ' + name });
                 return res.json()
             })

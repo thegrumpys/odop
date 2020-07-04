@@ -47,7 +47,7 @@ class FileSaveAs extends Component {
     }
 
     componentDidUpdate(prevProps) {
-//        console.log('In FileSave.componentDidUpdate prevProps=',prevProps.state.type,'props=',this.props.state.type);
+//        console.log('In FileSaveAs.componentDidUpdate prevProps=',prevProps.state.type,'props=',this.props.state.type);
         if (prevProps.state.type !== this.props.state.type) {
             this.getDesigns(this.props.state.type);
         }
@@ -79,13 +79,15 @@ class FileSaveAs extends Component {
     }
     
     postDesign(type,name) {
+//        console.log('In FileSaveAs.postDesign type=', type,' name=', name);
         this.props.changeName(name);
         this.props.changeUser(this.state.uid);
+//        console.log('In FileSaveAs.postDesign this.state.names=',this.state.names);
         var method = 'POST'; // Create it
-        if (this.state.names.filter(e => {return e.name === name && e.user === this.state.uid}).length > 0) { // Does it already exist?
+        if (this.state.names.filter(e => e.name === name && e.user === this.state.uid).length > 0) { // Does it already exist?
             method = 'PUT'; // Update it
         }
-//        console.log('In FileSaveAs.postDesign type=', type,' name=', name,' method=', method);
+//        console.log('In FileSaveAs.postDesign method=', method);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
                 method: method,
@@ -100,6 +102,14 @@ class FileSaveAs extends Component {
                 displaySpinner(false);
                 if (!res.ok) {
                     throw Error(res.statusText);
+                }
+                if (method === 'POST') {
+                    var names = Array.from(this.state.names); // clone it
+                    names.push({user: this.state.uid, name: name}); // If create and successful then sdd name to the array of names
+//                    console.log('In FileSaveAs.postDesign type=',type,'name=',name,'names=', names);
+                    this.setState({
+                        names: names,
+                    });
                 }
                 logUsage('event', 'FileSaveAs', { 'event_label': type + ' ' + name });
                 return res.json()
