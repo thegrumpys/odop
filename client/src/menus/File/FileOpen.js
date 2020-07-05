@@ -46,12 +46,21 @@ class FileOpen extends Component {
                     uid: null,
                 });
             }
-//            this.getDesignNames(this.state.type);
         }
     }
 
+    componentDidUpdate(prevProps) {
+      console.log('In FileOpen.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+      if (prevProps.type !== this.props.type) {
+          this.setState({ 
+              type: this.props.type
+          });
+          this.getDesignNames(this.props.type);
+      }
+  }
+
     getDesignNames(type) {
-//        console.log('In FileOpen.getDesignNames type=', type);
+        console.log('In FileOpen.getDesignNames type=', type);
         // Get the names and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
@@ -67,7 +76,7 @@ class FileOpen extends Component {
             return res.json()
         })
         .then(names => {
-//                console.log('In FileOpen.getDesignNames names=',names);
+                console.log('In FileOpen.getDesignNames names=',names);
             this.setState({
                 names: names
             })
@@ -78,7 +87,7 @@ class FileOpen extends Component {
     }
 
     getDesign(type,name) {
-//        console.log('In FileOpen.getDesign type=', type, ' name=', name);
+        console.log('In FileOpen.getDesign type=', type, ' name=', name);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
             headers: {
@@ -93,7 +102,7 @@ class FileOpen extends Component {
             return res.json()
         })
         .then((design) => {
-//                console.log('In FileOpen.getDesign design=', design);
+            console.log('In FileOpen.getDesign design=', design);
             var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
             var migrated_design = migrate(design);
             this.props.load(migrated_design)
