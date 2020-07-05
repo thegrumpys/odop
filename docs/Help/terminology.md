@@ -192,6 +192,12 @@ the current ODOP software release supplies only one such numerical search algori
 Additional information on the search algorithm is available in the 
 [Search](./search) Help entry.   
 
+**ODOP DESIGN LIBRARY**   
+The design library is a database physically located on an Internet server,
+a.k.a. "in the cloud". 
+Design information stored in the design library does not appear on the local storage of your computer. 
+You must be logged in to an ODOP user account in order to save designs into the ODOP design library.    
+
 <a id="migration"></a>   
 
 **MIGRATION**   

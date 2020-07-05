@@ -2,16 +2,28 @@
 
 This topic covers a few points that may allow a better user experience with the ODOP software.
 
-**Use File : Save As** and **File : Save**  
+**File : Save As** and **File : Save**  
 A design investigation may evolve through a sequence of preliminary or candidate designs.
 As each candidate design is established, it can be marked with a **File : Properties** comment
 and saved into the design library with **File : Save As**.
 In particular, it may be desirable to save the current design before selecting a 
 new standard size or catalog item.
 
-Note that the design library is a database physically located on an Internet server,
-a.k.a "in the cloud". 
-Design information stored in the design library does not appear on the local storage of your computer.
+The design library is a database physically located on an Internet server,
+a.k.a. "in the cloud". 
+Design information stored in the design library does not appear on the local storage of your computer. 
+In order to save designs into the design library it is necessary to be logged into an ODOP user account. 
+See: [User Accounts](../About/userAccounts).
+
+**File : Import** and **File : Export**  
+The ODOP software can export the state of the current design as a download into a file in the local file system.
+By default, the file is placed in the user's download folder (directory)
+with a file name extension of ".json". 
+Use browser settings to control the default download folder or 
+be prompted to specify a folder every time.   
+
+The **File : Import** menu item will restore a previously exported design as the current design. 
+
 
 **Side-by-Side comparison of designs**   
 Depending on available screen size, 
@@ -46,7 +58,7 @@ So, if you encounter NaN where you expect a numeric value, check Report 1 for ad
 **Browser refresh and back / forward**   
 Unfortunately, using the browser Reload a.k.a. "Refresh" function with a single page 
 web app such as ODOP will likely result in a complete reset of the main page and 
-potential loss of a user's work since the last Save operation. 
+potential loss of a user's work since the previous Save operation. 
 Similarly, use of the browser "Back" function followed by "Forward" will likely result in 
 reset of the main page.   
 
@@ -54,11 +66,15 @@ Note:
 The on-line documentation pages (Help) are not subject to the same concerns about browser refresh 
 and browser back / forward.   
 
+**AutoSave Feature**   
+The ODOP software offers a basic AutoSave feature.
+See [AutoSave](autoSave) for details.   
+
 **Off-line Operation**   
 Off-line operation is not currently supported. 
 If a design session is in progress when network connectivity is lost, 
 it is possible that design activity can continue but it will not be possible to
-save or open new designs until network connectivity is restored.   
+save into the design library or open new designs until network connectivity is restored.   
 
 **Unexpected delay when first opening the software**   
 Note that loading the ODOP software the first time may take 20 seconds or longer. 
@@ -66,7 +82,8 @@ This is a technical issue related to web hosting during program development.
 A production web hosting arrangement will not have this delay.
 
 **Closing or exiting the software**   
-Use the **File : Save As** menu to preserve the current state of a design in progress. 
+Use  **File : Save As** or **File : Export** to 
+preserve the current state of a design in progress. 
 Sign out by using "Logout" on the File menu or 
 use the browser Reload a.k.a "Refresh" function and then click the "Logout" button.
 Finally, close the browser tab or browser window containing the ODOP app.
@@ -107,6 +124,7 @@ In order to set print scale with Chromium Edge use the sequence:
 Settings and more / Print / Printer = Microsoft Print to PDF / More settings / Scale (%) = 79.   
 
 **Design Migration**   
+The term "migration" refers to the process of upgrading designs created in a previous version of the software to the format required by the current version. 
 See: [MIGRATION](terminology#migration)    
 
 **How to pronounce ODOP**   

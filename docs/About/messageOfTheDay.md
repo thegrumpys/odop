@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated May 3, 2020   
+**Message-of-the-day** &nbsp; updated July 6, 2020   
 
 Watch this space for breaking news 
 including impending and recent releases, planned outages, newly discovered issues, work-arounds, etc.  
@@ -7,17 +7,18 @@ To establish a free account, see: [User Accounts](userAccounts).
 With the recent introduction of user account features, browser requirements have changed. 
 For details, see: [Requirements](requirements)  
 
-ODOP version 3.4 was released April 19, 2020. 
+ODOP version 3.5 was released July 5, 2020. 
 Opening a design saved in a prior version will produce a pop-up message. 
 See: [MIGRATION](../Help/terminology#migration). 
 Complete detail on the latest changes is available in GitHub at: 
-[ODOP milestone 3.4](https://github.com/thegrumpys/odop/milestone/34?closed=1)
+[ODOP milestone 3.5](https://github.com/thegrumpys/odop/milestone/33?closed=1)
 
 ODOP is experimental software. 
 For details, see: [Experimental Software](experimental)   
 
 Evaluators and new users should be sure to see the [About](../About) section 
-of the on-line documentation early in the learning process.   
+of the on-line documentation early in the learning process. 
+Also, a short [Getting Started with ODOP](https://www.youtube.com/watch?v=agVKIdLA6t0) video is available.
 
 Thank you for your interest in the **O**pen **D**esign **O**ptimization **P**latform software and the ODOP:Spring app. 
 Your success and feedback are important to us. 

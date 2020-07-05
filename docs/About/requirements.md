@@ -1,7 +1,8 @@
 ## Requirements
 
-In order to keep saved designs private, it is necessary to establish a user account that provides
-a unique username and password.
+In order to keep designs saved into the ODOP design library private, 
+it is necessary to establish a user account with associated 
+unique username and password. 
 See: [User Accounts](userAccounts)   
 
 It is not necessary to install any software on your computer in order to run ODOP.
@@ -14,7 +15,7 @@ It is expected that most users doing serious design work will run the ODOP softw
 desktop or laptop computer with a full size and relatively high resolution monitor. 
 The hardware environment "responsive" nature of the ODOP software allows 
 it to function on many mobile devices.
-When operating on a small screen mobile device like a cell phone, 
+When operating on a small screen mobile device like a smart phone, 
 the various sections on the right of the main page Design tab will automatically 
 move downward on the page.
 Thus, a mobile device user can scroll vertically to see all the content in 

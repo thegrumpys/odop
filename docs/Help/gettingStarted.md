@@ -31,7 +31,7 @@ More information on this point is available at [Default Designs](./defaultDesign
 
 A user account with associated username and password 
 is required to access the ODOP software.
-See: [User Accounts](..\About\userAccounts) for details on
+See: [User Accounts](../About/userAccounts) for details on
 how to obtain an account.
 
 The material below assumes that you will be able to operate the ODOP program in one browser
