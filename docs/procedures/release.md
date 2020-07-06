@@ -1,26 +1,35 @@
 # Release Process:
 
 This entry describes the steps necessary to make a new ODOP "release".
-Specifically, this is the process to publish the current development version to Heroku.
+Specifically, this is the process to publish the current development version to Heroku 
+and the documentation to GitHub Pages and SpringDesignSoftware.org.
 
 Ideally, any system downtime affecting the production system should be announced in advance via docs/About/messageOfTheDay.md
 
 For background regarding "Major.Minor.Patch" see: [ODOP version numbering](../design/VersionNumbers)
    
-Remember that if pushed to master, changes to docs will be immediately published on GITHUB Pages.
-A branch containing documentation references to new features should not be pushed to master 
-thus the corresponding issue cannot be closed until the branch is pushed to master on the day of 
-the release to heroku production.   
+Remember that if merged to master and pushed, changes to docs will be immediately published on GitHub Pages.
+Until all doc references are fully switched over to SpringDesignSoftware.org,
+documentation references to new features should not be merged to master 
+until immediately before the version containing those features is published to Heroku production.
+This will delay closing the corresponding issue covering those documentation changes. 
+Once documentation references are fully switched over to SpringDesignSoftware.org,
+it will be possible to merge doc updates to master but delay their publication to SpringDesignSoftware.org.  
 
 &nbsp;
 
 A. **DEVELOPMENT environment**
 
-1. Verify Github Milestone issues are completed.  Ask:   
+1. Verify GitHub Milestone issues are completed.  Ask:   
    "Have we done everything on our milestone list?"   
    "Is there anything else we need to do?"   
    "Are we ready for release?"   
 1. Make sure your development environment is on branch master.   
+1. Check for and deal with security vulnerabilities.
+See GitHub Dependabot alerts.   
+Issue the command:   
+npm audit fix   
+when positioned in the server directory and again when positioned in the client directory.
 1. If this release has no migrate requirement, initialState impact or environment variable changes,
 skip forward to [Test For Console Output](release#test4consoleoutput).   
 To confirm,
@@ -127,29 +136,34 @@ git push heroku-staging master
   &nbsp; or   
 git push heroku master   
 Verify no error messages during build on heroku.   
-Note: to push a non-master branch, confirm that is the current branch with:   
+&nbsp;   
+Note 1: This step may fail if the previous release contains patches that are not included in the new release.
+You can either move those patches into the current release or issue the git push command with a --force option.   
+Note 2: to push a non-master branch, confirm that is the current branch with:   
 git status   
    &nbsp; then   
 git push heroku[-staging] +HEAD:master   
-
-1. If maintence mode was previously enabled, disable maintenance mode:  
+&nbsp;   
+1. If maintenance mode was previously enabled, disable maintenance mode:  
 heroku maintenance:off -a odop
 1. Confirm that the http://heroku-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version Major.Minor.Patch displays.
-1. **Publish to SpringDesignSoftware.org** &nbsp; In your git/odop directory push to springdesignsoftware.org using the command line:   
+1. **Publish to SpringDesignSoftware.org**. &nbsp; For production only, 
+while positioned in the git/odop directory, push to SpringDesignSoftware.org using the command line:   
 git push production master.   
 Verify no unexpected error messages during build on production.
-1. Confirm that the http://springdesignsoftware.org/odop/docs website is operational and that documentation displays.
+1. Confirm that the http://SpringDesignSoftware.org/odop/docs website is operational and that documentation displays.
 
 &nbsp;
 
 C. **DEVELOPMENT ENVIRONMENT**
 1. Create Major.Minor.Patch tag (for example, 3.2.1).
    Commit "Release Major.Minor.Patch" and push to origin.
-1. Create a "master-Major.Minor.Patch" branch, commit and push to origin.
 1. In Eclipse do a pull, Team > Show in History and verify tag is Major.Minor.Patch (for example, 2.3.1).
-1. Update client/src/version.js file to next Major.Minor.Patch followed by suffix 'dev' (for example: 2.3.1dev).
+1. Create a "master-Major.Minor.Patch" branch, commit and push to origin.
+Optionally in this branch, Update client/src/version.js file to next Major.Minor.Patch followed by suffix 'dev' (for example: 2.3.2dev).   
+1. In master, update client/src/version.js file to next Major.Minor.Patch followed by suffix 'dev' (for example: 2.4dev).
 1. Commit with message "Update version.js to Major.Minor.Patchdev" and push to origin.
-1. In Github mark Milestone Major.Minor.Patch closed.
+1. In GitHub mark Milestone Major.Minor.Patch closed.
 
 &nbsp;
 
