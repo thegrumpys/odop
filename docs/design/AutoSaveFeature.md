@@ -1,5 +1,13 @@
 ## AutoSave feature
 
+**August 2020 update**  
+A first-generation Auto-Save Feature was implemented in ODOP release 3.5
+(issue and branch #306).
+The original pre-implementation discussion is preserved below.
+
+Skip forward to [Second Generation AutoSave Proposal](AutoSaveFeature#secondgen).
+
+**Original Discussion**  
 There are various scenarios in which an AutoSave feature might protect against data loss 
 caused by certain events.  
 For example:   
@@ -24,6 +32,8 @@ For example:
    * After a fixed quantity of time; perhaps user adjustable in preferences 
    * After a change of state or model (dispatcher)
    * After a change in objective function value
+   * On switching tabs
+   * On logout
 
 If it is possible to trigger an asynchronous Save operation by monitoring for a change of state,
 it might be desirable to wait for a period of inactivity before updating the AutoSave. 
@@ -112,15 +122,29 @@ There are issues that need to be thought through:
    + if an AutoSave design exists when the ODOP app starts, should it be auto-opened ? 
 
 
-**Discussion**   
-
-The words above need to be turned into a specification. 
-See issue #306 (now closed) for first generation implementation.   
-
-Should a future, more capable implementation of AutoSave be based on Git ?   
+**Futures**   
+Should a future, more capable implementation of AutoSave be based on 
+the version management capabilities of Git ?   
+It may be desirable to have a tutorial-style "back" capability for each of multiple sessions
+operating in different tabs.   
 Security issues ?   
 
+<a id="secondgen"></a>
+&nbsp;  
+**Second Generation AutoSave Proposal**  
 
+Turn the ODOP icon / logo at the left of the menu & tab bar into an AutoSave / Reset feature.
+Hopefully, it will be possible to create a tool-tip for the icon with wording similar to:
+"AutoSave then reset app".
+Clicking the icon would create or update the AutoSave data and then trigger a browser reload.  
+
+Consider changing the philosophy of AutoSave.
+On app startup, rather than providing a "Load AutoSave" button,
+if AutoSave data is available, it should immediately (no prompt) be loaded as the current design. 
+Note ... consider possible unintended side-effects.  
+
+Concurrently with this philosophy change, the list of AutoSave actions should be expanded to include
+logout, tab switching, use of the File : Preferences and Properties menus and perhaps other user actions. 
 
 
 

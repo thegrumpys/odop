@@ -2,6 +2,30 @@
 
 The following terms have special meanings used in the context of this program.
 
+**On this page:**  
+[MATHEMATICAL MODEL](terminology#mathModel)  
+[DESIGN TYPES](terminology#designTypes)  
+[INDEPENDENT VARIABLES](terminology#independentVar)  
+[DEPENDENT VARIABLES](terminology#dependentVar)  
+[CALCULATION INPUTS](terminology#calcInputs)  
+[CONSTRAINTS](terminology#constraints)  
+[CONSTRAINT VIOLATIONS](terminology#constraintViol)  
+[FUNCTION CONSTRAINTS](terminology#fdcl)  
+[FIX](terminology#fix)  
+[FEASIBLE REGION](terminology#feasibleRegion)  
+[OBJECTIVE FUNCTION](terminology#obj)  
+[PREFERENCES](terminology#preferences)  
+[PROPERTIES](terminology#properties)  
+[EQUATION SETS](terminology#eqnSet)  
+[SEARCH](terminology#search)  
+[ODOP DESIGN LIBRARY](terminology#designLib)  
+[MIGRATION](terminology#migration)  
+
+___
+
+<a id="mathModel"></a>  
+___
+
 **MATHEMATICAL MODEL**   
 A mathematical model is a set of equations that describes the behavior of 
 a real world problem of interest.
@@ -14,6 +38,11 @@ For examples, see:
 * [Rectangular Solid](./DesignTypes/png/RectangularSolidDiagram.png).   
 
 See "Design Types" and "Equation Set" below for more detail.
+
+___
+
+<a id="designTypes"></a>  
+___
 
 **DESIGN TYPES**   
 A Design Type is a specific design problem. 
@@ -28,6 +57,11 @@ word processing documents, spreadsheets and graphic presentations operate.
 The ODOP software stores multiple designs of each Design Type in 
 its database (a.k.a. design library).
 
+___
+
+<a id="independentVar"></a>  
+___
+
 **INDEPENDENT VARIABLES** &nbsp;  (inputs, design parameters)   
 The independent variables are the inputs of the design equations.
 They are the quantities on the right hand side of the equals sign that
@@ -37,6 +71,11 @@ the design is completely determined.
 For independent variables, a FIX operation reduces the computational demand 
 of the numerical search problem.
 See the FIX entry below for more details.
+
+___
+
+<a id="dependentVar"></a>  
+___
 
 **DEPENDENT VARIABLES** &nbsp;  (outputs, state variables)   
 The dependent variables are the outputs of the design equations.
@@ -49,12 +88,22 @@ variable.  A FIX operation on a dependent variable increases the
 computational demand of the numerical search problem.
 See the FIX entry below for more details.
 
+___
+
+<a id="calcInputs"></a>  
+___
+
 **CALCULATION INPUTS** &nbsp;  (constants)   
 Referred to as "constants" in earlier versions of the software, 
 Calculation Inputs are inputs to the design equations and are adjustable by the
 user, but are not manipulated by the search algorithm or subject to FIX or constraints. 
 Calculation Inputs frequently represent material properties or other 
 physical parameters.
+
+___
+
+<a id="constraints"></a>  
+___
 
 **CONSTRAINTS**   
 Constraints are one sided boundaries that represent goals for the design
@@ -76,11 +125,21 @@ ODOP will stop the search process if it gets very close to a feasible design
 but still violates one or more constraints by a fraction of a percent. 
 In this case, the design is referred to as "marginally feasible".
 
+___
+
+<a id="constraintViol"></a>  
+___
+
 **CONSTRAINT VIOLATIONS**   
 A constraint violation represents the difference between the current
 value of a given variable and its corresponding constraint level.  By
 convention, negative values represent constraint satisfaction, positive
 values represent constraint violation.
+
+___
+
+<a id="fdcl"></a>  
+___
 
 **FUNCTION CONSTRAINTS**   
 When a constraint level is determined as the value of another Independent Variable,
@@ -97,6 +156,11 @@ initialState.
 
 More specific information is available in the On-line Help section covering 
 extension springs.
+
+___
+
+<a id="fix"></a>  
+___
 
 **FIX**   
 The user can establish (i.e. FIX) the value of any variable, independent or dependent.
@@ -117,6 +181,11 @@ Once the appropriate FIX checkbox is checked, the user will be able to enter
 a target value in either the Minimum or Maximum constraint level entry field.
 A Search (menu Action : Search) will be required to establish the desired values.
 
+___
+
+<a id="feasibleRegion"></a>  
+___
+
 **FEASIBLE REGION**   
 A feasible region may be formed within the boundaries represented by the
 various constraints on the design problem.  If a given design satisfies
@@ -135,6 +204,11 @@ re-executing the search.
 Perhaps use of the TRADE feature is appropriate.
 For more information, see: [Trade](./trade).
 
+___
+
+<a id="obj"></a>  
+___
+
 **OBJECTIVE FUNCTION**   
 The objective function constitutes the numerical search problem.  It is
 formed as a blend of violated constraints, dependent variable FIX
@@ -143,10 +217,20 @@ represents the variable under investigation.  The search algorithm works
 to drive the objective function to the lowest value possible.
 For more detail, see the Search entry below.
 
+___
+
+<a id="preferences"></a>  
+___
+
 **PREFERENCES** &nbsp; (Internal Variables &nbsp; File : Preferences menu item)   
 Preference settings control the operation of the program.  They have no
 direct meaning to the design problem.  For further information, refer to 
 the Help sections on Preferences and Search.
+
+___
+
+<a id="properties"></a>  
+___
 
 **PROPERTIES** &nbsp; (File : Properties menu item)   
 It is possible to store a series of text strings with a design in order 
@@ -155,6 +239,11 @@ The File : Properties menu is used to establish a set of label - value
 pairs where the text of the value is set by the user.
 The number of labels and the text of the label are established in the design type 
 source code in the initialState.js file.
+
+___
+
+<a id="eqnSet"></a>  
+___
 
 **EQUATION SETS**   
 The ODOP software allows for multiple design types and thus multiple sets of 
@@ -177,6 +266,12 @@ is provided in: [Getting Started](gettingStarted).
 Additional information on how to implement new ODOP design types is available
 in the [NewDesignType](../procedures/NewDesignType) documentation.
 
+
+___
+
+<a id="search"></a>  
+___
+
 **SEARCH**    
 The [Search](search) algorithm manipulates the values of independent variables 
 so as to determine a minimum value of the objective function. 
@@ -192,13 +287,22 @@ the current ODOP software release supplies only one such numerical search algori
 Additional information on the search algorithm is available in the 
 [Search](./search) Help entry.   
 
+
+___
+
+<a id="designLib"></a>  
+___
+
 **ODOP DESIGN LIBRARY**   
 The design library is a database physically located on an Internet server,
 a.k.a. "in the cloud". 
 Design information stored in the design library does not appear on the local storage of your computer. 
 You must be logged in to an ODOP user account in order to save designs into the ODOP design library.    
 
+___
+
 <a id="migration"></a>   
+___
 
 **MIGRATION**   
 The term "migration" refers to the process of upgrading designs created in a previous 
@@ -219,6 +323,7 @@ design version number for any design type.
 A change in the version number of any design type will usually be associated with a change in the 
 minor or major field of the software version.   
 
+___
 
 &nbsp;   
 
