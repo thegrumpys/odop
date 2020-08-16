@@ -211,6 +211,8 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
     
 //    f1_it_margin= force_1-initial_tension;
     x[o.F1_IT_Margin] = p[o.Force_1] - p[o.Initial_Tension];
+ 
+     x[o.Energy] = 0.5 * x[o.Rate] * (x[o.Deflect_2] * x[o.Deflect_2] - x[o.Deflect_1] * x[o.Deflect_1]);
     
 //    console.log('In eqnset p=',p,' x=',x);
     return x;
