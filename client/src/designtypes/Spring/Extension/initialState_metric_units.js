@@ -517,6 +517,21 @@ export const initialState = {
         },
         {
             "input": false,
+            "name": "Energy",
+            "value": 1,
+            "units": "N-mm",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 1,
+            "cmax": 1000000,
+            "ioclass": 0,
+            "sdlim": 0.0,
+            "tooltip": "Change in elastic potential energy between 1 and 2",
+            "type": "equationset",
+            "hidden": false
+        },
+        {
+            "input": false,
             "name": "Spring_Type",
             "value": "Extension",
             "units": "",
