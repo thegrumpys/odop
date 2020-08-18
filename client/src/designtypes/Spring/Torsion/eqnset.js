@@ -6,6 +6,8 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     
     const zero = 0.0;
     const Deg_Per_Turn = 360.0;
+    const Deg2Rad = 2.0 * Math.PI / 360.0;
+    var RateInRad, Def1InRad, Def2InRad;
     var kb;
     var temp;
     var s_f;
@@ -120,6 +122,11 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
                            /*  crude approximation  ... better available on web  */
     x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * 
         (Math.PI * x[o.Mean_Dia] * p[o.Coils_T] + x[o.Xlen_1] + x[o.Xlen_2]);
+ 
+     RateInRad = x[o.Rate] / Deg2Rad;
+     Def1InRad = x[o.Deflect_1] * Deg2Rad;
+     Def2InRad = x[o.Deflect_2] * Deg2Rad;
+     x[o.Energy] = 0.5 * RateInRad * (Def2InRad * Def2InRad - Def1InRad * Def1InRad);
     
 //    console.log('Exiting eqnset p=',p,' x=',x);
     return x;
