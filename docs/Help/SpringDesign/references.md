@@ -12,7 +12,7 @@
     Associated Spring - Barnes Group Inc.
     18 Main St.
     Bristol, Ct.   06010
-    telephone: 203-582-9581
+
 
     Design of Machine Elements   (sixth edition, 1985)
     M. F. Spotts
@@ -27,15 +27,18 @@
     Oak Brook, Illinois  60523
     telephone: 630-495-8588
    
+   
     Machinery's Handbook
     ISBN  0-8311-1155-0
     Industrial Press Inc.   
     200 Madison Ave.,   
     New York, NY  10157  
+   
 
     Mark's Standard Handbook for Mechanical Engineers
     ISBN  0-07-004123-7
     McGraw-Hill Book Co, Inc.   New York, N.Y.
+   
 
     Mechanical Design Analysis
     M. F. Spotts
@@ -43,12 +46,15 @@
     Englewood Cliffs, N.J.
     Copyright 1964, 
     Library of Congress Number 64-18626
+   
 
     Mechanical Springs    (second edition, 1963)
     A. M. Wahl
     McGraw-Hill Book Co, Inc.   New York, N.Y.
+   
 
     Roark's Formulas for Stress and Strain
+      
    
     Spring Designer's Handbook
     Harold Carlson
@@ -56,14 +62,20 @@
     270 Madison Ave., New York, NY  10016
     Copyright 1978,  
     Library of Congress Number 77-27436  TJ210.C37
+   
 
     Spring Design Manual AE-11
     Published by Society of Automotive Engineers (January 1, 1990) (1990)
     ISBN 10: 0898837774  ISBN 13: 9780898837773
 
+&nbsp;
 
- &nbsp; &nbsp; [Wikipedia Spring_(device)](https://en.wikipedia.org/wiki/Spring_(device))   
- &nbsp; &nbsp; [Wikipedia Coil_spring](https://en.wikipedia.org/wiki/Coil_spring)
+Additional resources available on the Internet include:   
+
+ &nbsp; &nbsp; [Wikipedia: Spring_(device)](https://en.wikipedia.org/wiki/Spring_(device))   
+ &nbsp; &nbsp; [Wikipedia: Coil_spring](https://en.wikipedia.org/wiki/Coil_spring)   
+ &nbsp; &nbsp; [Wikipedia: Roark's Formulas for Stress and Strain](https://en.wikipedia.org/wiki/Roark%27s_Formulas_for_Stress_and_Strain)   
+ &nbsp; &nbsp; [Associated Spring - Barnes Group: Engineering Guide to Spring Design](http://www.faculty.fairfield.edu/wdornfeld/ME311/AssocSpringBarnes-SpringDesignHandbook.pdf)   
  
  &nbsp;
 
@@ -75,6 +87,7 @@
     Oak Brook, Illinois  60523
     telephone: 630-495-8588
    
+&nbsp;
 
 [Spring Design Topics](./)   
 [Help](../)   

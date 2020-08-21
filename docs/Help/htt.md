@@ -12,6 +12,7 @@ This topic covers various points that may allow a better user experience with th
 [AutoSave Feature](htt#autoSave)  
 [Off-line Operation](htt#offlineOps)  
 [Unexpected delay when first opening the app](htt#delay)  
+[Bookmark the app](htt#bookmark)  
 [Closing or exiting the app](htt#shutdown)  
 [Password Reset](htt#passwordReset)  
 [Responsive software design](htt#responsiveDesign)  
@@ -143,6 +144,14 @@ Note that loading the ODOP app the first time may take 20 seconds or longer.
 This is a technical issue related to web hosting during program development. 
 A production web hosting arrangement will not have this delay.
 
+___
+
+<a id="bookmark"></a>  
+___
+
+**Bookmark the app**   
+It is possible to save a couple clicks in opening the app.
+Bookmark (or create a favorite): https://odop.herokuapp.com/
 ___
 
 <a id="shutdown"></a>  

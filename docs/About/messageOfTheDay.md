@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated July 6, 2020   
+**Message-of-the-day** &nbsp; updated August 22, 2020   
 
 Watch this space for breaking news 
 including impending and recent releases, planned outages, newly discovered issues, work-arounds, etc.  
@@ -8,7 +8,7 @@ With the recent introduction of user account features, browser requirements have
 For details, see: [Requirements](requirements)  
 
 ODOP version 3.5 was released July 5, 2020. 
-Opening a design saved in a prior version will produce a pop-up message. 
+Opening a spring design saved in a prior version will produce a pop-up message. 
 See: [MIGRATION](../Help/terminology#migration). 
 Complete detail on the latest changes is available in GitHub at: 
 [ODOP milestone 3.5](https://github.com/thegrumpys/odop/milestone/33?closed=1)
