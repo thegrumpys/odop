@@ -1,19 +1,64 @@
 #### Compression Spring Design Type
 
 The Compression Spring design type is a full-featured app enabling the engineering 
-design of helical coil compression springs.
-
-___
+design of helical coil compression springs.   
 
 This section presents material unique to the Compression Spring design type.
 In conjunction with reading the material below, please be sure to review the material 
 available at [Spring Design Topics](../SpringDesign).   
 
+___
+
+**On this page:**  
+[Compression Spring Force-Deflection Diagram](c_spring#c_springFD_Diag)  
+[Compression Spring Force-Deflection Points](c_spring#c_springFD_Names)  
+[Independent Variable names](c_spring#c_springIV_Names)  
+[Dependent Variable names](c_spring#c_springDV_Names)  
+[Calculation Input names](c_spring#c_springCalcInputNames)  
+[Other Values](c_spring#c_springOtherValues)  
+[Constraints unique to compression springs](c_spring#c_springConstraints)  
+[End Types](c_spring#c_springEndTypes)  
+[Buckling](c_spring#c_springBuckling)  
+
 &nbsp;
+___
 
-**Compression Spring Names**   
+<a id="c_springFD_Diag"></a>  
+___
 
- The force-deflection points and associated names are:
+**Compression Spring Force-Deflection Diagram**   
+
+    Force_Solid -|---------------/.
+                 |              / .
+     Force_2 ----|-------------/  .
+                 |            /:  .      ODOP:Spring
+           F     |           / :  .        Names
+                 |          /  :  .
+           O     |         /   :  .       Compression
+                 |        /    :  .         spring
+           R     |       /     :  .
+                 |      /      :  .
+    Force_1 -----|-----/       :  .
+                 |    /:       :  .
+           C     |   / :<----->:------- L_Stroke
+                 |  /  :       :  .
+           E     | /   :       :  .
+                 |/____:_______:__._______
+            L_Free     :       :  L_Solid
+                      L_1     L_2
+                 Deflect_1    Deflect_2
+     
+                 D E F L E C T I O N
+
+&nbsp;   
+___
+
+<a id="c_springFD_Names"></a>  
+___
+
+**Compression Spring Force-Deflection Point names**   
+
+ The compression spring force-deflection points and associated names are:
 
              length    force        outside  inside    stress      factor of
                                     diameter diameter              safety
@@ -28,10 +73,15 @@ available at [Spring Design Topics](../SpringDesign).
     solid:   L_Solid  Force_Solid                     Stress_Solid  FS_Solid
 
 
- point 1 = minimum operating load &nbsp; point 2 = maximum operating load   
+ point 1 = minimum operating load &nbsp; &nbsp; point 2 = maximum operating load   
 
 &nbsp;
    
+___
+
+<a id="c_springIV_Names"></a>  
+___
+
 **Independent Variable names:**   
 
     Wire_Dia     -  wire diameter
@@ -46,78 +96,13 @@ available at [Spring Design Topics](../SpringDesign).
     
     Force_2      -  load at point 2  (maximum operating load)
     
-
 &nbsp;
    
-**Calculation Input names**  
+___
 
-    Spring_Type   -  character string used only as a label
-    
-    Prop_Calc_Method -  Property Calculation Method
-                controls how material properties and
-                allowable stresses are determined.
-                1 indicates values come from materials table;
-                allowable stresses will be calculated as a 
-                function of Wire_Dia.
-                2 indicates tensile and allowable % are supplied
-                by the user; allowable stresses are calculated.
-                3 indicates allowable stresses are supplied 
-                directly by the user.
-                Refer to the on-line documentation section 
-                on Materials.
-    
-    Material_Type -  selects an entry in the material table.
-                     Is used to determine allowable stresses when
-                     Prop_Calc_Method is 1.
-                     Otherwise is ignored.
-    
-    ASTM/Fed-Spec -  character string used only as a label to further
-                     identify the origin of material property data
-    
-    Process       -  character string used to identify the
-                     manufacturing process.  It is normally controlled
-                     by the material selected from the material table.
-                     Values are usually Cold_Coiled or Hot_Wound.
-                     Refer to discussion under Hot_Factor_Kh.
-    
-<!---     Catalog_Number -  character string that contains the catalog number of -->
-<!---                       the most recent catalog selection.   -->
-<!---                       Otherwise is ignored. -->
-<!---     Material_File -  character string containing the material table name. -->
-<!---                      It is normally established by the initialState.js file. -->
-    
-    Life_Category    -  This value reflects the user's input about 
-                        shot peening and required cycle life.  
-                        It is input to the calculation of FS_CycleLife.
-                        Refer to documentation section on Cycle_Life.
-    
-    End_Type         -  character string that is used to determine
-                        calculations for Inactive_Coils and L_Solid & Pitch.
-    
-    Inactive_Coils   -  number of inactive coils (depends on End_Type)
-    
-    Add_Coils@Solid  -  extra coils included in solid height calculation
-                        refer to End_Type for additional information
-    
-    Density          -  wire density; weight per unit volume
-    
-    Torsion_Modlus   -  torsional modulus (G); 
-                        a.k.a. shear modulus or modulus of rigidity
-    
-    Hot_Factor_Kh    -  empirical correction factor for hot wound modulus
-    
-    Tensile          -  tensile strength 
-    
-    %_Tensile_Endur  -  fraction of tensile strength for torsion endurance
-    
-    %_Tensile_Stat   -  fraction of tensile strength for torsion static load
-    
-    Stress_Lim_Endur -  allowable stress limit; cyclic application (torsion)
-    
-    Stress_Lim_Stat  -  allowable stress limit; static application (torsion)
+<a id="c_springDV_Names"></a>  
+___
 
-&nbsp;
-   
 **Dependent Variable names**:
 
     Mean_Dia     -  mean diameter of spring coil in free condition
@@ -177,9 +162,93 @@ available at [Spring Design Topics](../SpringDesign).
                     
     %_Avail_Deflect - the percentage of available deflection consumed at
                     load point 2.
+                    
+    Energy       -  Change in elastic potential energy between 
+                    point 1 and point 2.
 
 &nbsp;
    
+___
+
+<a id="c_springCalcInputNames"></a>  
+___
+
+**Calculation Input names**  
+
+    Spring_Type   -  character string used only as a label
+    
+    Prop_Calc_Method -  Property Calculation Method
+                controls how material properties and
+                allowable stresses are determined.
+                1 indicates values come from materials table;
+                allowable stresses will be calculated as a 
+                function of Wire_Dia.
+                2 indicates tensile and allowable % are supplied
+                by the user; allowable stresses are calculated.
+                3 indicates allowable stresses are supplied 
+                directly by the user.
+                Refer to the on-line documentation section 
+                on Materials.
+    
+    Material_Type -  selects an entry in the material table.
+                     Is used to determine allowable stresses when
+                     Prop_Calc_Method is 1.
+                     Otherwise is ignored.
+    
+    ASTM/Fed-Spec -  character string used only as a label to further
+                     identify the origin of material property data
+    
+    Process       -  character string used to identify the
+                     manufacturing process.  It is normally controlled
+                     by the material selected from the material table.
+                     Values are usually Cold_Coiled or Hot_Wound.
+                     Refer to discussion under Hot_Factor_Kh.
+    
+<!---     Material_File -  character string containing the material table name. -->
+<!---                      It is normally established by the initialState.js file. -->
+    
+    Life_Category    -  This value reflects the user's input about 
+                        shot peening and required cycle life.  
+                        It is input to the calculation of FS_CycleLife.
+                        Refer to documentation section on Cycle_Life.
+    
+    Density          -  wire density; weight per unit volume
+    
+    Torsion_Modlus   -  torsional modulus (G); 
+                        a.k.a. shear modulus or modulus of rigidity
+    
+    Hot_Factor_Kh    -  empirical correction factor for hot wound modulus
+    
+    Tensile          -  tensile strength 
+    
+    %_Tensile_Endur  -  fraction of tensile strength for torsion endurance
+    
+    %_Tensile_Stat   -  fraction of tensile strength for torsion static load
+    
+    Stress_Lim_Endur -  allowable stress limit; cyclic application (torsion)
+    
+    Stress_Lim_Stat  -  allowable stress limit; static application (torsion)
+    
+    End_Type         -  character string that is used to determine
+                        calculations for Inactive_Coils and L_Solid & Pitch.
+    
+    Inactive_Coils   -  number of inactive coils (depends on End_Type)
+    
+    Add_Coils@Solid  -  extra coils included in solid height calculation
+                        refer to End_Type for additional information
+    
+    Catalog_Name     -  name of the catalog containing the most recently 
+                        selected catalog entry.
+                        
+    Catalog_Number   -  catalog number of the most recent catalog entry.  
+
+&nbsp;
+   
+___
+
+<a id="c_springOtherValues"></a>  
+___
+
 **Other Values**   
 
 Other values are calculated and displayed by the Report tabs.   
@@ -194,8 +263,7 @@ These include:
     
     Pitch        -  coil to coil spacing in the free state
     
-    Weight       -  weight of spring including a term due to
-                    free length
+    Weight       -  weight of spring 
     
     Buckling     -  indication of tendency to buckle given the current
                     design and loading conditions.
@@ -207,34 +275,12 @@ These include:
     
     Helix Angle  -  angle, in degrees, of the spring helix relative
                     to a perpendicular to the spring axis
-
 &nbsp;
 
-**Compression Spring Force-Deflection Diagram**   
+___
 
-    Force_Solid -|---------------/.
-                 |              / .
-     Force_2 ----|-------------/  .
-                 |            /:  .      ODOP:Spring
-           F     |           / :  .        Names
-                 |          /  :  .
-           O     |         /   :  .       Compression
-                 |        /    :  .         spring
-           R     |       /     :  .
-                 |      /      :  .
-    Force_1 -----|-----/       :  .
-                 |    /:       :  .
-           C     |   / :<----->:------- L_Stroke
-                 |  /  :       :  .
-           E     | /   :       :  .
-                 |/____:_______:__._______
-            L_Free     :       :  L_Solid
-                      L_1     L_2
-                 Deflect_1    Deflect_2
-     
-                 D E F L E C T I O N
-
-&nbsp;
+<a id="c_springConstraints"></a>  
+___
 
 **Constraints unique to compression springs:**   
 
@@ -266,6 +312,11 @@ to 98 percent.  Thus, it requires the search to select designs that
 provide a small margin between load point 2 and the solid condition.
 
 &nbsp;
+
+___
+
+<a id="c_springEndTypes"></a>  
+___
 
 **End Types**   
 The current version of the ODOP:Spring program implements six spring end
@@ -318,12 +369,14 @@ Note that the Add\_Coils@Solid term is not included in Coils\_T or the wire
 length and weight calculations.  It is only an adjustment for the solid
 height calculation and is not the correct way to represent dead coils.
    
-Users that understand the impact of the Add_Coils@Solid term may control it
-directly to represent unusual end configurations; for example, springs that
-have a different end type at each end.  To establish the value of
-Inactive\_Coils and/or Add_Coils@Solid directly, first select a value of
-End\_Type of User_Specified.  For example to represent a
-spring with one end Closed with the other end Closed&Ground:
+The Add_Coils@Solid term may be used to represent unusual end configurations. 
+For example, springs that have a different end type at each end. 
+To establish the value of Inactive\_Coils and/or Add_Coils@Solid directly, 
+first select a value of End\_Type of User_Specified.  
+
+Examples:   
+To represent a spring with one end Closed 
+and with the other end Closed&Ground:
 
     CHANGE  End_Type  User_Specified
     CHANGE  Inactive_Coils   2.0
@@ -339,7 +392,12 @@ ends:
 
 &nbsp;
    
-**BUCKLING**   
+___
+
+<a id="c_springBuckling"></a>  
+___
+
+**Buckling**   
 
                      free length          L_Free
     Slenderness = ----------------  =  -------------
