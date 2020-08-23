@@ -1,19 +1,66 @@
 #### Torsion Spring Design Type
 
-The Torsion Spring design type is a full-featured app enabling the engineering 
-design of helical coil torsion springs.
+The Torsion Spring design type is a full-featured mathematical model enabling 
+the engineering design of helical coil torsion springs.   
+
+This section presents material unique to the Torsion Spring design type.
+The more general material available at [Spring Design Topics](../SpringDesign)
+provides important supplemental information.   
 
 ___
 
-This section presents material unique to the Torsion Spring design type.
-In conjunction with reading the material below, please be sure to review the material 
-available at [Spring Design Topics](../SpringDesign).   
+**On this page:**  
+[Torsion spring moment-deflection diagram](t_spring#t_springFD_Diag)  
+[Torsion spring moment-deflection point names](t_spring#t_springFD_Names)  
+[Torsion spring dimensions](t_spring#t_springDims)  
+[Independent Variable names](t_spring#t_springIV_Names)  
+[Dependent Variable names](t_spring#t_springDV_Names)  
+[Calculation Input names](t_spring#t_springCalcInputNames)  
+[Values in reports](t_spring#t_springOtherValues)  
+[Torsion spring end types](t_spring#t_springEndTypes)  
+<!--- [Constraints unique to torsion springs](t_spring#t_springConstraints)  -->
 
 &nbsp;
+___
 
-**Torsion Spring Names**   
+<a id="t_springFD_Diag"></a>  
+___
 
- The force-deflection points and associated names are:
+**Torsion spring moment-deflection diagram**   
+
+                 |                / 
+         M_2 ----|---------------/  
+                 |              /:
+           M     |             / :
+                 |            /  :        ODOP:Spring
+           O     |           /   :          Names
+                 |          /    :  
+           M     |         /     :          Torsion
+                 |        /      :          spring
+           E     |       /       :  
+                 |      /        :  
+        M_1 -----|-----/         :  
+                 |    /:         :  
+           N     |   / :<------->:------- Stroke
+                 |  /  :         :  
+           T     | /   :         :  
+                 |/____:_________:_________
+            L_Free     :         :  
+                      L_1       L_2
+                 Deflect_1     Deflect_2
+     
+                 D E F L E C T I O N
+
+&nbsp;   
+
+___
+
+<a id="t_springFD_Names"></a>  
+___
+
+**Torsion spring moment-deflection point names**   
+
+ The torsion spring moment-deflection points and associated names are:
 
              length    torque     outside  inside    stress    factor of
             deflection            diameter diameter            safety
@@ -30,10 +77,30 @@ available at [Spring Design Topics](../SpringDesign).
     max safe:   
 
 
- point 1 = minimum operating load &nbsp; point 2 = maximum operating load   
+ point 1 = minimum operating load &nbsp; &nbsp; point 2 = maximum operating load   
 
 &nbsp;
    
+
+___
+
+<a id="t_springDims"></a>  
+___
+
+**Torsion spring dimensions**  
+
+The following diagram may be of some assistance in interpreting the names 
+associated with various dimensions of a torsion spring.  
+   
+![Torsion Spring Names](./png/TorsionNames.png "Torsion Spring Names")   
+
+&nbsp;   
+   
+___
+
+<a id="t_springIV_Names"></a>  
+___
+
 **Independent Variable names:**   
 
     Wire_Dia     -  wire diameter
@@ -50,6 +117,11 @@ available at [Spring Design Topics](../SpringDesign).
    
 &nbsp;
    
+___
+
+<a id="t_springDV_Names"></a>  
+___
+
 **Dependent Variable names**:
 
     Mean_Dia       -  mean diameter of spring coil in free condition
@@ -60,7 +132,7 @@ available at [Spring Design Topics](../SpringDesign).
     Coils_A        -  number of active coils (turns)
                       (includes arm deflection)
                       
-    Rate           -  spring constant - force per unit deflection 
+    Rate           -  spring constant - moment per unit deflection 
     
     Deflect_1      -  deflection caused by M_1
     
@@ -104,7 +176,14 @@ available at [Spring Design Topics](../SpringDesign).
     Force_Arm_2    -  Force produced at distance of Arm_2
 
 &nbsp;
-   
+For additional information: [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
+&nbsp;  
+
+___
+
+<a id="t_springCalcInputNames"></a>  
+___
+
 **Calculation Input names**   
 
     Spring_Type    -  character string used only as label
@@ -138,9 +217,6 @@ available at [Spring Design Topics](../SpringDesign).
                       Controls use of Kb - stress correction factor
     
 <!---  -->
-<!---    CATALOG_NUMBER  -  character string that contains the catalog number of -->
-<!---            the most recent catalog selection.   -->
-<!---            Otherwise is ignored.     -->
 <!---    MATERIAL_FILE    -  character string containing the material table name. -->
 <!---            It is normally established by the initialState.js file.  -->
 <!---  -->
@@ -152,10 +228,6 @@ available at [Spring Design Topics](../SpringDesign).
     
     End_Type       -  This selection indicates end configuration:
                       Tangent ends versus User Specified ends.
-    
-<!---  -->
-<!---     INACTIVE_COILS   -  number of inactive coils (depends on end type)  -->
-<!---  -->
     
     Density          -  wire density; weight per unit volume 
     
@@ -174,18 +246,31 @@ available at [Spring Design Topics](../SpringDesign).
     
     Stress_Lim_Bnd_Stat  -  allowable stress limit; static application (bending)
     
-    Arm_1, etc.      -  refer to the diagram below
+    Arm_1, etc.      -  refer to the diagram in torsion spring dimensions
+    
+    Catalog_Name     -  name of the catalog containing the most recently 
+                        selected catalog entry.
+                        
+    Catalog_Number   -  catalog number of the most recent catalog entry.  
+
 
 &nbsp;
-
-![Torsion Spring Names](./png/TorsionNames.png "Torsion Spring Names")   
-
+For additional information: 
+ - [Materials](../SpringDesign/materials)   
+ - [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
+ - [Torsion spring end types](t_spring#t_springEndTypes)   
+ - [Torsion spring dimensions](t_spring#t_springDims)  
+ 
 &nbsp;
+   
+___
 
-**Other Values**   
+<a id="t_springOtherValues"></a>  
+___
 
-Other values are calculated and displayed by the Report tabs. 
-These include:
+**Values in reports**   
+
+Other values calculated and displayed in the Reports include:
 
     Wire Length      -  total length of wire required to manufacture the
                         spring, not including any waste.
@@ -208,6 +293,11 @@ These include:
 
 &nbsp;
 
+___
+
+<a id="t_springEndTypes"></a>  
+___
+
 **End Types**   
 
 For torsion springs, the Calculation Input End_Type has the following possible values:
@@ -222,11 +312,14 @@ They are for display only.
 
 Separately, the values of Arm\_1, Arm\_2, L\_End\_1, L\_End\_2, XLen\_1 and XLen_2 are available to
 describe end conditions. 
-Refer to the diagram above for more details.   
+This diagram  may be helpful.   
+
+![Torsion Spring Names](./png/TorsionNames.png "Torsion Spring Names")   
 
 &nbsp;
 
 [Design Types](./)   
+[Spring Design Topics](../SpringDesign)   
 [Help](../)   
 
 
@@ -234,11 +327,9 @@ Refer to the diagram above for more details.
 
 
 <!---
-While single line comments work as expected, a multi-line comment must be the last thing in the file.
-Eclipse .md Preview suppresses display of everything after the comment header.
-
-**Under Construction**   
-This page is still a work in progress !   
+While single line comments work as expected, 
+the previous version of Eclipse required a multi-line comment must be the last thing in the file.
+Eclipse .md Preview suppressed display of everything after the comment header.
 
 The following lines are alternate syntax for in-line image links   
 See docs/procedures/ImageLocations for preferred approach on image path.   
