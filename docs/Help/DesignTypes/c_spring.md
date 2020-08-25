@@ -163,8 +163,10 @@ ___
     %_Avail_Deflect - the percentage of available deflection consumed at
                     load point 2.
                     
+<!---
     Energy       -  Change in elastic potential energy between 
                     point 1 and point 2.
+-->
 
 &nbsp;
 For additional information: [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  

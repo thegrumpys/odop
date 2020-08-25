@@ -174,6 +174,11 @@ ___
                       Refer to additional discussion in the Cycle_Life section.
                       
     Force_Arm_2    -  Force produced at distance of Arm_2
+                    
+<!---
+    Energy         -  Change in elastic potential energy between 
+                      point 1 and point 2.
+-->
 
 &nbsp;
 For additional information: [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
