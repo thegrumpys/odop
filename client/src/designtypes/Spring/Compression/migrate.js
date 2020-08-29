@@ -157,6 +157,9 @@ export function migrate(design) {
         design.symbol_table[28].sdlim = 0.0; 
         design.symbol_table[28].tooltip = "Change in elastic potential energy between 1 and 2";
         migrated_design.version = '8'; 
+        // Make Catalog_Name and Catalog_Number not available for input
+        design.symbol_table[47].input = false;
+        design.symbol_table[48].input = false;
     case '8':
         // Current model version
         // console.log('Convert from 8 to 9');

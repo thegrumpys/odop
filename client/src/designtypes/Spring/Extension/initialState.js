@@ -945,7 +945,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": true,
+            "input": false,
             "name": "Catalog_Name",
             "value": "",
             "units": "",
@@ -960,7 +960,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": true,
+            "input": false,
             "name": "Catalog_Number",
             "value": "",
             "units": "",

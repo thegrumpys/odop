@@ -78,6 +78,9 @@ export function migrate(design) {
         design.symbol_table[34].cmin = 1.0; 
         design.symbol_table[34].sdlim = 0.0; 
         design.symbol_table[34].tooltip = "Change in elastic potential energy between 1 and 2";
+        // Make Catalog_Name and Catalog_Number not available for input
+        design.symbol_table[62].input = false;
+        design.symbol_table[63].input = false;
         migrated_design.version = '4'; // last thing... set the migrated model version
     case '4':
         // Current model version
