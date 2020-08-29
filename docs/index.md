@@ -22,6 +22,7 @@
 * [Getting Started](Help/gettingStarted)
 * [Tutorial and Demo](Help/tutordemo)
 * [Design Situations](Help/designSituations)
+* [Default Designs](Help/defaultDesigns)
 * [Feasibility](Help/feasibility)
 * [Search](Help/search)
 * [Seek](Help/seek)

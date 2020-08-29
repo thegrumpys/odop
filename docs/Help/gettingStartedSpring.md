@@ -68,7 +68,7 @@ The remainder of this discussion will provide a few
 suggestions on how to explore the program.
 
 Start from an existing design. 
-See [Units: US (ips) and metric (SI)](SpringDesign/unitsUSmetric) to
+See [Units: US customary and metric](SpringDesign/unitsUSmetric) to
 work in metric units. 
 More information on default designs is available at [Default Designs](./defaultDesigns).
 

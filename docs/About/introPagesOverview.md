@@ -24,6 +24,7 @@ For example, see:
 *  [User Accounts](userAccounts)  
    + Instructions to get UserID and Password
    + Sign-in and Sign-out
+   + Password recovery
 
 **Help**
 *  [Introduction](../Help/introduction)  
@@ -31,7 +32,7 @@ For example, see:
    + Search, Seek and Trade features   
 &nbsp;
 *  [Getting Started](../Help/gettingStarted)  
-   + Rectangular Solid design type versus Spring Design
+   + Rectangular Solid design type versus Spring design types
    + Link to design process flow diagram
    + Link to launch the ODOP program
    + Tour of the ODOP main page using the Rectangular Solid design type
@@ -50,15 +51,24 @@ For example, see:
    + US (ips) versus metric (SI) units
    + Report tabs   
 &nbsp;
+*  [Design Situations](../Help/designSituations)
+   + Feasibility
+   + Under, over & properly specified   
+&nbsp;
 *  [Default Designs](../Help/defaultDesigns)
    + Start from an existing design
    + Concept of Design Library; User saved designs remain private
-   + Design Types
    + Designs marked as "[ReadOnly]"   
+   + Customize the Startup design
+   + Units: US customary and metric
+   + About pre-established constraints   
 &nbsp;
 *  [Utilizing Help with a widescreen monitor](../Help/wideScreen)
    + Configure multiple browser sessions to view program and on-line Help simultaneously 
    + Screen capture examples   
+&nbsp;
+*  [Hints, Tips and Tricks](../Help/htt)
+   + Various points that may allow a better user experience    
    
 &nbsp;
 

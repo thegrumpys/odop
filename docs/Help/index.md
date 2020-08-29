@@ -5,6 +5,7 @@
 * [Getting Started](gettingStarted)
 * [Tutorial and Demo](tutordemo)
 * [Design Situations](designSituations)
+* [Default Designs](defaultDesigns)
 * [Feasibility](feasibility)
 * [Search](search)
 * [Seek](seek)

@@ -172,12 +172,21 @@ ___
 **Password reset**   
 Use your existing username (email address) and password to login at:   
 [https://dev-729070.okta.com](https://dev-729070.okta.com)   
+
 After login, drop down the menu in the upper right that displays your first name
 and then use the Change Password section of the Settings page.  
 
 If you don't remember the current password,
 select "Forgot password?" under "Need help signing in?" 
 on the Sign-in page,
+
+Do not expect the ODOP:Spring app to appear on Okta's list of apps and 
+do not be concerned about a "You don't have any apps." message on your personal Okta home page. 
+Once you have established a password, 
+simply [launch the ODOP:Spring app](../Help/launchODOP) 
+in order to get to the sign-in page.
+It is also possible to launch the app from the SpringDesignSoftware.org home page, 
+Getting Started page or any of the three spring type pages.   
 
 ___
 
