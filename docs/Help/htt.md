@@ -16,6 +16,7 @@ This topic covers various points that may allow a better user experience with th
 [Closing or exiting the app](htt#shutdown)  
 [Password Reset](htt#passwordReset)  
 [Responsive software design](htt#responsiveDesign)  
+[Optimizing for small screens](htt#smallScreen)  
 [Printing](htt#printing)  
 [Design Migration](htt#designMigration)  
 [How to pronounce ODOP](htt#pronounceODOP)  
@@ -60,7 +61,8 @@ ___
 
 **Side-by-Side comparison of designs**   
 Depending on available screen size, 
-it may be possible to open two browser sessions with an ODOP design session in each.
+it may be possible to open two independent browser sessions or 
+two tabs in the same browser session with an ODOP design session in each.
 Adjustments the browser's font size or "zoom" scale may be necessary for best results.
 A non-overlapping side-by-side positioning of the windows will then 
 facilitate comparison of two designs.   
@@ -68,6 +70,10 @@ facilitate comparison of two designs.
 One of the two browser sessions can keep the current most desirable design.
 The other browser session can continue forward with additional trial designs.
 The side-by-side aspect of the screen layout can help quickly identify the preferred design.
+
+See also:   
+[Responsive software design](htt#responsiveDesign)  
+[Optimizing for small screens](htt#smallScreen)  
 
 ___
 
@@ -204,6 +210,20 @@ Note that while operation on a smartphone may be possible,
 the scrolling necessary to accommodate screen size limitations may impact productivity.
 Similarly, while it is possible to use the ODOP app from a mobile device, 
 establishing initial impressions with a full size monitor, keyboard and mouse is recommended.   
+
+___
+
+<a id="smallScreen"></a>  
+___
+
+**Optimizing for small screens**   
+Once familiar with the ODOP screen layout and operations on a large screen, 
+two **File : Preferences** settings may be used to facilitate operation on a small screen.
+Specifically, 
+changing show_units to a value of 0 will suppress display of the main page units column
+and changing show-violations to 0 will suppress display of the violations column.
+
+These settings are saved along with the design. 
 
 ___
 
