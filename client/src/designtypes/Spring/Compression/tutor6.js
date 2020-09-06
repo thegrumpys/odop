@@ -1,0 +1,244 @@
+import React from 'react';
+import { changeSymbolValue, changeSymbolConstraint, loadInitialState, fixSymbolValue, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { MAX, CONSTRAINED } from '../../../store/actionTypes';
+export const execute = {
+    steps: [
+        {
+            title: "Session Now In Progress",
+            text: (
+                <React.Fragment>
+                    <p>
+                    This section of the tutorial will cover the use of the ODOP:Spring &nbsp;
+                    <b>Action : Select Size</b> and <b>Action : Select Catalog</b> menus.
+                    </p>
+                    
+                    <p>
+                    After designing a custom compression spring, we will select an appropriate
+                    standard wire size from the ODOP:Spring standard size table. 
+                    Following another search, 
+                    we will use the Select Catalog menu to scan the ODOP:Spring sample compression spring
+                    catalog to determine the four entries closest to our custom spring.  
+                    After selecting the best of the four, 
+                    we'll compare its performance to our original objectives.
+                    </p>
+                    
+                    <p>
+                    As with the other tutorial and demo sessions, 
+                    this session needs to start from a known state.  
+                    So, if you have entered any work of value that is not yet saved,
+                    use the <b>File : Save</b> menu item to save your work before continuing.
+                    Moving to the next page will establish the necessary initialState
+                    for the ODOP Compression Spring design type.
+                    </p>
+                    
+                    <p>
+                    To continue with this session, just click the "Next" button as you finish
+                    reading each page (step). 
+                    </p>
+                    <br />
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 02 of 09",
+            text: (
+                <React.Fragment>
+                    <p>
+                    The initial conditions expected by this tutorial session are now established.
+                    </p>
+                    
+                    <p>
+                    At this point, we need a spring to design.  
+                    How about this for a problem statement ?<br />
+                    <br />  
+                    - outside diameter less than 0.925 inch<br />
+                    - free length 1.713 inch<br />
+                    - supports 50 pounds static load at length 1.278 inches<br />
+                    - solid height less than 1.060 inches<br />
+                    - hard drawn wire, closed & ground ends<br />
+                    <br />
+                    (Used with permission of Spring Manufacturers Institute,  Inc.)
+                    </p>
+                    
+                    <p>
+                    We'll solve this problem in three steps:<br />
+                    - determine wire diameter and number of coils to meet the requirements
+                    as though this were an entirely custom design
+                    <br />
+                    - select the nearest standard wire size and re-execute the search to
+                    determine the corresponding change in number of coils
+                    <br />
+                   - determine the four catalog entries closest to the resulting spring
+                   and select the closest one for further examination
+                   </p>
+                </React.Fragment>
+            ),
+            actions: [
+                loadInitialState('Spring/Compression'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
+                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
+            ]
+        },
+        {
+            title: "Page 03 of 09",
+            text: (
+                <React.Fragment>
+                    <p>
+                    OK, first we enter what we know this spring has to do:<br />
+                    <br />
+                    change  material_type  hard_drawn_wire<br />
+                    change  od_free max  .920 &nbsp; - - - (0.005 margin)<br />
+                    change  l_solid max  1.06<br />
+                    <br />
+                    fix  l_free   1.713<br />
+                    fix  force_1  0<br />
+                    fix  force_2 50<br />
+                    fix  l_2      1.278
+                    </p>
+                    
+                    <p>
+                    Report 1 provides a warning message.  
+                    When free length reduced to 1.713 and the load increased to 50 pounds, 
+                    the current values of Wire_Dia and Coils_T 
+                    (determined from the initial conditions established at the beginning of this tutorial session) 
+                    produced a starting point where L_2, the length at load point 2,
+                    is less than zero.  
+                    This is an impossible condition and provides a difficult start point for the search.  
+                    The message suggests that we might get better (and more reliable) performance 
+                    if we remedy the situation manually.  
+                    However in this case, we'll ignore the message and proceed with the search.
+                    </p>
+                    <br /><br />
+                </React.Fragment>
+            ),
+            actions: [
+                changeSymbolValue("Material_Type",1),
+                saveOutputSymbolConstraints('OD_Free'),
+                setSymbolFlag('OD_Free', MAX, CONSTRAINED),
+                changeSymbolConstraint('OD_Free', MAX, 0.920),
+                saveOutputSymbolConstraints('L_Solid'),
+                setSymbolFlag('L_Solid', MAX, CONSTRAINED),
+                changeSymbolConstraint('L_Solid', MAX, 1.06),
+                fixSymbolValue('L_Free', 1.713),
+                fixSymbolValue('Force_1', 0.0),
+                fixSymbolValue('Force_2', 50.0),
+                fixSymbolValue('L_2', 1.278)
+            ]
+        },
+        {
+            title: "Page 04 of 09",
+            text: (
+                <React.Fragment>
+                    <p>
+                    The search is complete.
+                    Take a moment to get a detailed look at the results ...
+                    </p>
+                    
+                    <p>
+                    The tutorial is not yet ready to manipulate the <b>Action : Select Size</b> 
+                    and <b>Action : Select Catalog</b> menu items.
+                    So, you will need to do that on your own.
+                    </p>
+                    
+                    <p>
+                    Now  use the <b>Action : Select Size</b> menu item to find the nearest standard wire diameter.  
+                    It will return with Wire_Dia in fixed status.
+                    </p>
+                    
+                    <p>
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                search()
+            ]
+        },
+        {
+            title: "Page 05 of 09",
+            text: (
+                <React.Fragment>
+                    <p>
+                    </p>
+                    
+                    <p>
+                    </p>
+                    <br /><br />
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 06 of 09",
+            text: (
+                <React.Fragment>
+                    <p>
+                    </p>
+                
+                    <p>
+                    </p>
+                    <br />
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 07 of 09",
+            text: (
+                <React.Fragment>
+                    <p>
+                    </p>
+                    
+                    <p>
+                    </p>
+                    
+                    <p>
+                    </p>
+                    <br />
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 08 of 09",
+            text: (
+                <React.Fragment>
+                    <p>
+                    </p>
+                    
+                    <p>
+                    </p>
+                    
+                    <p>
+                    </p>
+                    
+                    <p>
+                    </p>
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 09 of 09 (last page)",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Congratulations, you've finished another section of the tutorial.
+                    
+                    Take a few minutes at this point to experiment on your own. 
+                    </p>
+                    
+                    <p>
+                    Also, look in the on-line documentation section (Help entry) titled  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/selectSizeCatalog" 
+                    target="_blank" rel="noopener noreferrer">Select Size and Select Catalog</a>.&nbsp; 
+                    </p>
+                    
+                    <p>
+                    More tutorial sessions are available. 
+                    They have names like tutor3, tutor4, ... etc. 
+                    Refer to the on-line documentation section (Help entry) covering the  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    for a list of topics.
+                    </p>
+                </React.Fragment>
+            )
+        }
+    ]
+}

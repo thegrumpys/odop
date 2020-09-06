@@ -30,6 +30,7 @@ export function getTutorialNames() {
         'tutor3',
         'tutor4',
         'tutor5',
+        'tutor6',
         'tutor7'
     ];
 //    console.log('In getTutorialNames result=',result);
