@@ -85,7 +85,8 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    OK, first we enter what we know this spring has to do:<br />
+                    Okay, first we enter what we know this spring has to do. 
+                    As usual, we use FIX and constraints to express our objectives for the design.<br />
                     <br />
                     change  material_type  hard_drawn_wire<br />
                     change  od_free max  .920 &nbsp; - - - (0.005 margin)<br />
@@ -98,6 +99,10 @@ export const execute = {
                     </p>
                     
                     <p>
+                    You can scroll down to confirm that this tutorial session has imposed the above values.
+                    </p>
+
+                    <p>
                     Report 1 provides a warning message.  
                     When free length reduced to 1.713 and the load increased to 50 pounds, 
                     the current values of Wire_Dia and Coils_T 
@@ -109,7 +114,7 @@ export const execute = {
                     if we remedy the situation manually.  
                     However in this case, we'll ignore the message and proceed with the search.
                     </p>
-                    <br /><br />
+                    <br />
                 </React.Fragment>
             ),
             actions: [
@@ -136,18 +141,26 @@ export const execute = {
                     </p>
                     
                     <p>
-                    The tutorial is not yet ready to manipulate the <b>Action : Select Size</b> 
+                    The tutorial is not yet ready to manipulate the <b>Action : Select Size</b>&nbsp;
                     and <b>Action : Select Catalog</b> menu items.
-                    So, you will need to do that on your own.
+                    So for now, you will need to do that on your own.
                     </p>
                     
                     <p>
-                    Now  use the <b>Action : Select Size</b> menu item to find the nearest standard wire diameter.  
+                    Use the <b>Action : Select Size</b> menu item to find the nearest standard wire diameter.  
                     It will return with Wire_Dia in fixed status.
                     </p>
                     
                     <p>
+                    In the process of moving to the next page, the tutorial will confirm that Wire_Dia is 
+                    fixed at 0.120 inch and then run another search.
+                    But first, we'll make a small change that will allow ODOP:Spring to
+                    consider designs with a larger factor of safety than the default established by 
+                    ththis tutorial session's initial conditions: <br />
+                    <br />
+                    change  fs_2  max  2.0
                     </p>
+                    <br />
                 </React.Fragment>
             ),
             actions: [
@@ -159,13 +172,33 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
+                    Let's take a look ... Note the 50 pounds load at 1.278 length is very close to being achieved.
                     </p>
                     
                     <p>
+                    Now we'll take a look at a design from the catalog.  
+                    Note that selecting from a catalog will replace the current design.
+                    If this was not a tutorial session, you might want to use the <b>File : Save As</b> menu
+                    to that custom design available for future reference.
+                    </p>
+                    
+                    <p>
+                    Use the <b>Action : Select Catalog</b> menu item to display the four nearest entries in the catalog.  
+                    </p>
+                    
+                    <p>
+                    While multiple catalogs are available to select from,
+                    this tutorial session expect you to keep the default catalog selected.
+                    It will return with Wire_Dia in fixed status.
                     </p>
                     <br /><br />
                 </React.Fragment>
-            )
+            ),
+            actions: [
+                fixSymbolValue('Wire_Dia', 0.120),
+                changeSymbolConstraint('FS_2', MAX, 2.0),
+                search()
+            ]
         },
         {
             title: "Page 06 of 09",
@@ -175,6 +208,11 @@ export const execute = {
                     </p>
                 
                     <p>
+                    We don't expect that a spring selected from off the shelf will do as well as as a 
+                    custom designed spring.  
+                    That requirement of starting with a free length of
+                    1.713 inches and achieving exactly a 50 pound load at a length of 1.278
+                    inches is a bit unusual.
                     </p>
                     <br />
                 </React.Fragment>
