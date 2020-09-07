@@ -40,7 +40,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 09",
+            title: "Page 02 of 07",
             text: (
                 <React.Fragment>
                     <p>
@@ -81,7 +81,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 09",
+            title: "Page 03 of 07",
             text: (
                 <React.Fragment>
                     <p>
@@ -132,7 +132,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 04 of 09",
+            title: "Page 04 of 07",
             text: (
                 <React.Fragment>
                     <p>
@@ -156,7 +156,7 @@ export const execute = {
                     fixed at 0.120 inch and then run another search.
                     But first, we'll make a small change that will allow ODOP:Spring to
                     consider designs with a larger factor of safety than the default established by 
-                    ththis tutorial session's initial conditions: <br />
+                    this tutorial session's initial conditions: <br />
                     <br />
                     change  fs_2  max  2.0
                     </p>
@@ -168,28 +168,33 @@ export const execute = {
             ]
         },
         {
-            title: "Page 05 of 09",
+            title: "Page 05 of 07",
             text: (
                 <React.Fragment>
                     <p>
-                    Let's take a look ... Note the 50 pounds load at 1.278 length is very close to being achieved.
+                    The search is complete.
+                    Let's take a look ... 
+                    Note the 50 pounds load at 1.278 length is very close to being achieved.
                     </p>
                     
                     <p>
                     Now we'll take a look at a design from the catalog.  
                     Note that selecting from a catalog will replace the current design.
                     If this was not a tutorial session, you might want to use the <b>File : Save As</b> menu
-                    to that custom design available for future reference.
-                    </p>
-                    
-                    <p>
-                    Use the <b>Action : Select Catalog</b> menu item to display the four nearest entries in the catalog.  
+                    to insure that your custom design is available for future reference.
                     </p>
                     
                     <p>
                     While multiple catalogs are available to select from,
-                    this tutorial session expect you to keep the default catalog selected.
-                    It will return with Wire_Dia in fixed status.
+                    this tutorial session expects you to keep the default catalog selected.
+                    The four entries are ordered by the value of their objective function.
+                    The first entry will have the least constraint violation.
+                    </p>
+                    
+                    <p>
+                    Now, use the <b>Action : Select Catalog</b> menu item to 
+                    display the four nearest entries in the catalog.  
+                    Select the first entry and continue to the next page of this tutorial session.
                     </p>
                     <br /><br />
                 </React.Fragment>
@@ -201,10 +206,12 @@ export const execute = {
             ]
         },
         {
-            title: "Page 06 of 09",
+            title: "Page 06 of 07",
             text: (
                 <React.Fragment>
                     <p>
+                    Look at the constraint violations to judge how well the catalog spring
+                    meets the objectives originally set out for this design.
                     </p>
                 
                     <p>
@@ -214,51 +221,30 @@ export const execute = {
                     1.713 inches and achieving exactly a 50 pound load at a length of 1.278
                     inches is a bit unusual.
                     </p>
+                    
+                    <p>
+                    As you can see, we found a reasonable, but not perfect match in the catalog.
+                    This, of course, was partially predetermined.  
+                    The problem was selected to  have an answer that fell within the range 
+                    of spring sizes covered by the  catalog (.125 to 1.75 outside diameter).  
+                    If you are designing springs  for railway freight cars, 
+                    a different catalog might be appropriate.  
+                    Contact technical support to make that happen.<br />
+                    <br />
+                    That's enough for this section of the tutorial.  
+                    You are encouraged to experiment with the SELECT command using various 
+                    different springs.
+                    </p>
                     <br />
                 </React.Fragment>
             )
         },
         {
-            title: "Page 07 of 09",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    <br />
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 08 of 09",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 09 of 09 (last page)",
+            title: "Page 07 of 07 (last page)",
             text: (
                 <React.Fragment>
                     <p>
                     Congratulations, you've finished another section of the tutorial.
-                    
                     Take a few minutes at this point to experiment on your own. 
                     </p>
                     
