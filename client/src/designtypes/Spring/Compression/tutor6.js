@@ -32,7 +32,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    To continue with this session, just click the "Next" button as you finish
+                    To continue with this session, just <b>click the "Next" button</b> as you finish
                     reading each page (step). 
                     </p>
                     <br />
@@ -88,14 +88,14 @@ export const execute = {
                     Okay, first we enter what we know this spring has to do. 
                     As usual, we use FIX and constraints to express our objectives for the design.<br />
                     <br />
-                    change  material_type  hard_drawn_wire<br />
-                    change  od_free max  .920 &nbsp; - - - (0.005 margin)<br />
-                    change  l_solid max  1.06<br />
+                    CHANGE  Material_Type  HARD_DRAWN_WIRE<br />
+                    CHANGE  OD_Free MAX  .920 &nbsp; - - - (0.005 margin)<br />
+                    CHANGE  L_Solid MAX  1.06<br />
                     <br />
-                    fix  l_free   1.713<br />
-                    fix  force_1  0<br />
-                    fix  force_2 50<br />
-                    fix  l_2      1.278
+                    FIX  L_Free   1.713<br />
+                    FIX  Force_1  0<br />
+                    FIX  Force_2 50<br />
+                    FIX  L_2      1.278
                     </p>
                     
                     <p>
@@ -148,7 +148,7 @@ export const execute = {
                     
                     <p>
                     Use the <b>Action : Select Size</b> menu item to find the nearest standard wire diameter.  
-                    It will return with Wire_Dia in fixed status.
+                    It will return with Wire_Dia in FIXed status.
                     </p>
                     
                     <p>
@@ -158,7 +158,7 @@ export const execute = {
                     consider designs with a larger factor of safety than the default established by 
                     this tutorial session's initial conditions: <br />
                     <br />
-                    change  fs_2  max  2.0
+                    CHANGE  FS_2  MAX  2.0
                     </p>
                     <br />
                 </React.Fragment>
@@ -194,7 +194,8 @@ export const execute = {
                     <p>
                     Now, use the <b>Action : Select Catalog</b> menu item to 
                     display the four nearest entries in the catalog.  
-                    Select the first entry and continue to the next page of this tutorial session.
+                    &nbsp; <b>Select the first entry</b>&nbsp;
+                    and continue to the next page of this tutorial session.
                     </p>
                     <br /><br />
                 </React.Fragment>
@@ -227,9 +228,11 @@ export const execute = {
                     This, of course, was partially predetermined.  
                     The problem was selected to  have an answer that fell within the range 
                     of spring sizes covered by the  catalog (.125 to 1.75 outside diameter).  
-                    If you are designing springs  for railway freight cars, 
+                    If you are designing suspension springs for railway freight cars, 
                     a different catalog might be appropriate.  
-                    Contact technical support to make that happen.<br />
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/ContactUs" 
+                    target="_blank" rel="noopener noreferrer">Contact technical support</a>&nbsp; 
+                    to make that happen.<br />
                     <br />
                     That's enough for this section of the tutorial.  
                     You are encouraged to experiment with the SELECT command using various 
@@ -261,6 +264,7 @@ export const execute = {
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a list of topics.
                     </p>
+                    <br /><br />
                 </React.Fragment>
             )
         }
