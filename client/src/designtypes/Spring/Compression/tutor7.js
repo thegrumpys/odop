@@ -22,13 +22,14 @@ export const execute = {
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState
-                    for the ODOP <b>Compression Spring</b> design type.
+                    for the ODOP Compression Spring design type.
                     </p>
                     
                     <p>
-                    To continue with this session, just click the "Next" button as you finish
+                    To continue with this session, just <b>click the "Next" button</b> as you finish
                     reading each page (step). 
                     </p>
+                    <br />
                 </React.Fragment>
             )
         },
@@ -55,8 +56,8 @@ export const execute = {
                     amount of metal that could still support 10 pounds of force.  However, given
                     no additional constraints, the process is likely to produce some pretty
                     bizarre results.  For example, without a constraint on inside diameter, the
-                    coil outside diameter could be reduced to twice the wire diameter or 
-                    (mathematically if not physically) perhaps even less. 
+                    coil outside diameter could be reduced to twice the wire diameter  
+                    (mathematically, if not physically) or perhaps even less. 
                     Without a constraint on
                     Rate or Stroke (change in length between point 1 and point 2), the number of coils
                     could be reduced to near zero and free length down to equal the solid
@@ -69,10 +70,15 @@ export const execute = {
                      </p>
                      
                      <p>
-                    When asking to optimize a design, you must understand that the software will
+                    When asking to optimize a design, you must understand that the search process will
                     find such trivial (also called "degenerate") cases.  It is necessary to
                     impose realistic constraints and when the process does something unexpected,
                     make compensating changes and run through the calculation process again.
+                    </p>
+                    
+                    <p>
+                    Additional information is available in the documentation section on 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>.&nbsp; 
                     </p>
                 </React.Fragment>
             ),
@@ -130,8 +136,10 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     If the use of Prop_Calc_Method seems a bit unfamiliar, you may wish to
-                    review the on-line documentation sections (HELP entries) on Names, Materials, 
-                    and Advanced Spring Operations. 
+                    review the on-line documentation sections (HELP entries) on 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/c_spring" target="_blank" rel="noopener noreferrer">Compression Spring Design Type</a>, 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/materials" target="_blank" rel="noopener noreferrer">Materials</a> and 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/advancedSpringOperations" target="_blank" rel="noopener noreferrer">Advanced Spring Operations</a>.&nbsp; 
                     Also, an earlier tutorial section (tutor5) and one of the demo problems (demo4)
                     provide additional details.
                     </p>
@@ -168,12 +176,14 @@ export const execute = {
                     The search stops with the first feasible design it finds.  It is not
                     necessarily a design that delivers 80,000 PSI stress at point 2.
                     However, when we ask for a minimum weight design (that is also a
-                    feasible design), we can expect to achieve the desired 80,000 psi stress at
+                    feasible design), we can expect the process to take up the slack
+                    and achieve the desired 80,000 psi stress at
                     point 2 (100 pound load).
                     </p>
                     
                     <p>
-                    Optionally, you can mark this design with a comment like:
+                    Optionally, you can use the <b>File : Properties</b> menu  
+                    to mark this design with a comment like:
                     "This is the point where we start optimizing" and
                     use <b>File : Save As</b> to save it into the Design Library
                     with a name like "tutor7StartPoint".
@@ -202,7 +212,8 @@ export const execute = {
                 requirement is to find the spring of least weight that satisfies a
                 specific set of requirements.  
                 In other situations, the designer may need to determine
-                the greatest load, greatest factor of safety or lowest spring rate that
+                the greatest load, greatest factor of safety, lowest spring rate 
+                or greatest energy storage that
                 may be produced within the space constraints of a specific outside
                 diameter and solid height.
                 </p>
@@ -259,12 +270,13 @@ export const execute = {
                     
                     <p>
                     Moving to the next page will reestablish the initialState
-                    for the ODOP <b>Compression Spring</b> design model
+                    for the ODOP Compression Spring design model
                     and immediately add new constraints on diameter, solid height and deflection.
                     </p>
                     
                     <p>
                     </p>
+                    <br />
                 </React.Fragment>
             )
         },
@@ -315,7 +327,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    This completes our overview of the SpringSys SEEK command.
+                    This completes our overview of the ODOP SEEK command.
                     </p>
                     
                     <p>
@@ -344,10 +356,11 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Many of the Preferances quantities are related to control of the search
+                    Many of the Preferences quantities are related to control of the search
                     process.  Others are weighting factors that have some influence on
                     search results.
-                    Refer to the on-line documentation section (Help entry) for Search
+                    Refer to the on-line documentation section (Help entry) on 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/search" target="_blank" rel="noopener noreferrer">Search</a>&nbsp; 
                     for additional details.
                     </p>
                     <br /><br />
@@ -360,18 +373,16 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     This completes our overview of the ODOP Seek feature
-                    and a quick look at the internal variables found in the 
+                    and a quick look at the internal variables found in the&nbsp;
                     <b>File : Preferences</b> menu item.
-                    Additional examples of  Seek  MIN  Weight  are presented in the
-                    TODO: demoxxx example problem. 
-                    Use the <b>Help Demo...</b> menu to find that demo session.
                     </p>
                     
                     <p>
                     More tutorial sessions are available. 
                     They have names like tutor3, tutor4, ... etc. 
-                    Refer to the on-line documentation section (Help entry) covering the 
-                    tutorial for a list of the Tutorial and Demo topics.
+                    Refer to the on-line documentation section (Help entry) covering the  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    for a list of topics.
                     </p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
