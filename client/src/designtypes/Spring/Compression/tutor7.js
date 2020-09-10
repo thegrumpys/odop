@@ -8,12 +8,18 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    This section of the tutorial will introduce the concept of optimization.
-                    The ODOP Seek feature (<b>Action : Seek</b> menu) will be used to find 
-                    a design optimized for of minimum weight (material volume) and again
-                    to find a design optimized to produce maximum force within constraints. 
-                    As a bonus, this section will also cover the use of the
-                    ODOP internal variables and the <b>File : Preferences</b> menu item.
+                    ODOP Seek provides a powerful facility for asking "What if ... " and "What's best ?" kinds of questions. 
+                    In order to do this, Seek utilizes the concepts of mathematical optimization. 
+                    Specifically, the program can probe the constrained extreme of any variable, independent or dependent. 
+                    For example, within the context of coil spring design ODOP:Spring can be asked to find the lightest material weight 
+                    (or lowest spring rate, least solid height, greatest factor of safety, greatest cycle life, etc.) 
+                    all while maintaining specified objectives for force-deflection characteristics, stress, diameters, etc. 
+                    It is this "goal seeking" capability that makes ODOP:Spring much more than a spring calculator. 
+                    </p>
+                    
+                    <p>
+                    This section of the tutorial will set up a problem with a reasonably large feasible region and then use the 
+                    ODOP Seek feature (<b>Action : Seek</b> menu) to probe the limits in various directions. 
                     </p>
                     
                     <p>
@@ -55,13 +61,15 @@ export const execute = {
                     If we just turn the software loose, we are asking for a spring with the least
                     amount of metal that could still support 10 pounds of force.  However, given
                     no additional constraints, the process is likely to produce some pretty
-                    bizarre results.  For example, without a constraint on inside diameter, the
-                    coil outside diameter could be reduced to twice the wire diameter  
-                    (mathematically, if not physically) or perhaps even less. 
-                    Without a constraint on
-                    Rate or Stroke (change in length between point 1 and point 2), the number of coils
-                    could be reduced to near zero and free length down to equal the solid
-                    height.  The result is the mathematical equivalent of a solid bar supporting
+                    bizarre results.  
+                    For example, without a constraint on inside diameter, 
+                    the coil outside diameter could be reduced (mathematically, if not physically) 
+                    to twice the wire diameter or perhaps even less. 
+                    Without a constraint on Rate or 
+                    Stroke (change in length between point 1 and point 2), 
+                    the number of coils could be reduced to something less than one  
+                    and free length reduced down to equal the solid height.  
+                    The result is the mathematical equivalent of a solid bar supporting
                     the 10 pound load.
                     </p>
                     
@@ -77,8 +85,22 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Additional information is available in the documentation section on 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>.&nbsp; 
+                    </p>
+                    
+                    <p>
+                    One more point ... 
+                    When Search terminates with a strictly feasible solution (i.e. OBJ = 0.0), 
+                    the resulting solution point is only one of many possible solution points. 
+                    The entire collection of feasible solution points is referred to as a "feasible region". 
+                    The boundaries of this region are formed by the various constraints.
+
+                    The ODOP Search feature will terminate when it finds its first feasible solution. 
+                    Seek should have a feasible design as its starting point. 
+                    At a minimum, it should be understood that a feasible design is available. 
+                    In the case that a Search has terminated without finding a feasible point, 
+                    use of the 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">Trade</a>&nbsp; 
+                    feature may be appropriate.
                     </p>
                 </React.Fragment>
             ),
@@ -87,6 +109,186 @@ export const execute = {
                 changeSymbolValue("L_Free", 3.0),
                 changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
+            ]
+        },
+        {
+            title: "Page 2a of 12",
+            text: (
+                <React.Fragment>
+                    <p>
+                    We start by adding a few constraints to the compression spring starting point used in other tutorial sessions.
+                    This will leave us with a well formed 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situation</a>&nbsp; 
+                    and a reasonable feasible region to work in.
+                    </p>
+                    
+                    <p>
+                    FIX  Force_1   0.0<br />
+                    FIX  Force_2  20.0<br />
+                    CHANGE  OD_Free MAX   1.5<br />
+                    CHANGE  L_Stroke MIN  1.0<br />
+                    CHANGE  L_Solid MAX   1.5
+                    </p>
+                    
+                    <p>
+                    The changes are now in place.
+                    This is a good opportunity to review the setup.
+                    Don't forget to check out the Reports.' 
+                    </p>
+                    
+                    <p>
+                    We will execute a search in the process of moving to the next page.
+                    </p>
+                    <br /><br />
+                </React.Fragment>
+            ),
+            actions: [
+                fixSymbolValue('Force_1', 0.0),
+                fixSymbolValue('Force_2', 20.0),
+                saveOutputSymbolConstraints('OD_Free'),
+                setSymbolFlag('OD_Free', MAX, CONSTRAINED),
+                changeSymbolConstraint('OD_Free', MAX, 1.5),
+                saveOutputSymbolConstraints('L_Stroke'),
+                setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
+                changeSymbolConstraint('L_Stroke', MIN, 1.0),
+                saveOutputSymbolConstraints('L_Solid'),
+                setSymbolFlag('L_Solid', MAX, CONSTRAINED),
+                changeSymbolConstraint('L_Solid', MAX, 1.5)
+            ]
+        },
+        {
+            title: "Page 2b of 12",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Our search is complete.
+                    As expected, a feasible solution is available.
+                    </p>
+                    
+                    <p>
+                    Now we can try exploring in various directions.  
+                    For the moment, we're simply gaining insight on the 
+                    range of feasible solutions available with this set of constraints.
+                    </p>
+                    
+                    <p>
+                    </p>
+                    
+                    <p>
+                    Take note of the current value of Weight. 
+                    In the process of moving to the next page the tutorial session will 
+                    invoke the Seek feature. <br />
+                    <br />
+                    SEEK  MIN  Weight
+                    </p>
+                    <br /><br />
+                </React.Fragment>
+            ),
+            actions: [
+                search()
+            ]
+        },
+        {
+            title: "Page 2c of 12",
+            text: (
+                <React.Fragment>
+                    <p>
+                    If you see the Feasibility status shown as "NOT FEASIBLE",
+                    It means that the solution point has slightly violated constraints
+                    in order to achieve improvements in the result 
+                    (minimum Weight in this case).
+                    </p>
+                    <p>
+                    You may see the message:
+                    <br />
+                    "TO FURTHER IMPROVE RESULT, RE-EXECUTE SEEK"
+                    </p>
+                    
+                    <p>
+                    This can happen when the optimum is far from the starting point.
+                    The internal estimate of the optimum was not perfect.
+                    Simply re-execute Seek to refine the result.
+                    </p>
+                    
+                    
+                    <p>
+                    Let's try exploring in a different direction.
+                    Perhaps this will be a design requiring minimum rate.
+                    Take note of the current value of Rate. 
+                    </p>
+                    
+                    <p>
+                    In the process of moving to the next page 
+                    the tutorial will execute:
+                    <br /><br />
+                    SEEK  MIN  Rate
+                    </p>
+                    <br /><br />
+                </React.Fragment>
+            ),
+            actions: [
+                seek("Weight", MIN),
+                seek("Weight", MIN)
+            ]
+        },
+        {
+            title: "Page 2d of 12",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Have a look at our minimum rate spring.
+                    Again, it is helpful to look at the Reports.
+                    </p>
+                    
+                    <p>
+                    In general, it is the interaction of more than one constraint that 
+                    limits further progress in achieving even better results.
+                    In this case the constraints on coil diameter and solid height
+                    prevent further progress in reducing the spring rate.
+                    </p>
+                    
+                    <p>
+                    Let's see what happens if we ask for a spring with the lowest possible solid height
+                    consistent with our objectives for OD, Stroke, and load capacity.
+                    </p>
+                    
+                    <p>
+                    In the process of moving to the next page 
+                    the tutorial will execute:
+                    <br /><br />
+                    SEEK  MIN  L_Solid
+                    </p>
+                    <br /><br />
+                </React.Fragment>
+            ),
+            actions: [
+                seek("Rate", MIN),
+                seek("Rate", MIN)
+            ]
+        },
+        {
+            title: "Page 2e of 12",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Have a look at our minimum solid height spring.
+                    Again, be sure to look at the Reports.
+                    </p>
+                    
+                    <p>
+                    </p>
+                    
+                    <p>
+                    </p>
+                    
+                    <p>
+                    </p>
+                    <br /><br />
+                </React.Fragment>
+            ),
+            actions: [
+                seek("L_Solid", MIN),
+                seek("L_Solid", MIN)
             ]
         },
         {
@@ -331,7 +533,6 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Onward to the subject of internal variables ...
                     </p>
                     <br /><br />
                 </React.Fragment>
@@ -345,23 +546,6 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    ODOP contains a number of quantities that you can think of as "internal
-                    variables".  They are variables and switches that are used to
-                    control the operation of the program.
-                    These quantities are not specifically related to spring design.
-                    </p>
-                    
-                    <p>
-                    Go to the <b>File : Preferences</b> menu to see the list.
-                    </p>
-                    
-                    <p>
-                    Many of the Preferences quantities are related to control of the search
-                    process.  Others are weighting factors that have some influence on
-                    search results.
-                    Refer to the on-line documentation section (Help entry) on 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/search" target="_blank" rel="noopener noreferrer">Search</a>&nbsp; 
-                    for additional details.
                     </p>
                     <br /><br />
                 </React.Fragment>
@@ -372,9 +556,16 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    This completes our overview of the ODOP Seek feature
-                    and a quick look at the internal variables found in the&nbsp;
-                    <b>File : Preferences</b> menu item.
+ The next tutorial section looks at the SpringSys Trade command.  In many
+ ways Trade is a mirror image capability to that of Seek.
+ When a design problem is expressed in terms of constraints and first
+ submitted to the search, the feasibility of the design will be
+ determined.  If the result is feasible, Seek may be used to
+ probe the limits of the feasible region.  However, if the result is not
+ feasible, Trade may be used to identify those constraints that are most
+ leveraged and guide the designer to restructure his goals in a way that
+ is most consistent with the performance that can be achieved within the
+ limits of available space and material properties.
                     </p>
                     
                     <p>
