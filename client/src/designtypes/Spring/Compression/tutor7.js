@@ -123,6 +123,10 @@ export const execute = {
                     </p>
                     
                     <p>
+                    By now, you should be familiar with "tutorial shorthand".
+                    </p>
+                    
+                    <p>
                     FIX  Force_1   0.0<br />
                     FIX  Force_2  20.0<br />
                     CHANGE  OD_Free MAX   1.5<br />
@@ -282,6 +286,10 @@ export const execute = {
                     </p>
                     
                     <p>
+                    At this point, you likely feel that you have seen enough of this set of constraints.
+                    It is time to get a fresh start with requirements for a somewhat larger spring.
+                    Moving to the next page will reestablish the start point as it was 
+                    at the beginning of this tutorial session. 
                     </p>
                     <br /><br />
                 </React.Fragment>
@@ -296,22 +304,20 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Before we go further, we need a design problem to optimize.
-                    So, let's see if we can find the minimum weight spring necessary to
+                    Now, let's see if we can find the minimum weight spring necessary to
                     support a 100 pound static load at a minimum of 2.5 inches
                     deflection.  Just to make the problem a little bit more interesting,
-                    we'll ignore the material and say that we want no more than 80,000
+                    we'll ignore the material and simply say that we want no more than 80,000
                     PSI stresses.
                     </p>
                     
                     <p>
-                    By now, you should be familiar with "tutorial shorthand".
                     The tutorial has just imposed these changes in order to describe this problem:<br />
                     <br />
                     FIX  Force_1  0<br />
                     FIX  Force_2  100<br />
                     CHANGE  L_Stroke  MIN  2.5 &nbsp; &#60;--- use constraint, not FIX<br />
-                    
+                    <br />
                     CHANGE  Prop_Calc_Method  3  &nbsp;  &#60;--- specify allowable stress<br />
                     CHANGE  Stress_Lim_Stat  80000<br />
                     CHANGE  FS_2  MIN  1.0  &nbsp;  &#60;--- more details on next page<br />
@@ -320,6 +326,10 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
+                loadInitialState('Spring/Compression'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
+                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}]),
                 fixSymbolValue('Force_1', 0.0),
                 fixSymbolValue('Force_2', 100.0),
                 saveOutputSymbolConstraints('L_Stroke'),
@@ -355,7 +365,7 @@ export const execute = {
                     <p>
                     While it is not always absolutely necessary, it is usually a good
                     idea to start the optimization process from or near a feasible start
-                    point.  At the vary least, you want to know that a feasible
+                    point.  At the very least, you want to know that a feasible
                     solution is available.
                     </p>
                     
