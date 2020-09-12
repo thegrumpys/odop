@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-bootstrap';
 import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search, seek } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
@@ -41,7 +42,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 12",
+            title: "Page 02 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -54,13 +55,13 @@ export const execute = {
 
                     <p>
                     Visualize for a moment the consequences of specifying only a minimum load ...
-                    say 10 pounds ...  that a spring should support, then asking ODOP:Spring to
+                    say 20 pounds ...  that a spring should support and then asking ODOP:Spring to
                     design a spring of minimum weight without supplying any additional constraints.
                     </p>
                     
                     <p>
                     If we just turn the software loose, we are asking for a spring with the least
-                    amount of metal that could still support 10 pounds of force.  However, given
+                    amount of metal that could still support 20 pounds of force.  However, given
                     no additional constraints, the process is likely to produce some pretty
                     bizarre results.  
                     For example, without a constraint on inside diameter, 
@@ -71,7 +72,7 @@ export const execute = {
                     the number of coils could be reduced to something less than one  
                     and free length reduced down to equal the solid height.  
                     The result is the mathematical equivalent of a solid bar supporting
-                    the 10 pound load.
+                    the 20 pound load.
                     </p>
                     
                     <p>
@@ -84,9 +85,21 @@ export const execute = {
                     impose realistic constraints and when the process does something unexpected,
                     make appropriate changes to constraints and run through the calculation process again.
                     </p>
-                    
+                </React.Fragment>
+            ),
+            actions: [
+                loadInitialState('Spring/Compression'),
+                changeSymbolValue("L_Free", 3.0),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
+                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
+            ]
+        },
+        {
+            title: "Page 03 of 17",
+            text: (
+                <React.Fragment>
                     <p>
-                    One more point ... 
+                    One more point ... <br />
                     When Search terminates with a strictly feasible solution (i.e. Objective Value = 0.0), 
                     the resulting solution point is likely only one of many possible solution points. 
                     The entire collection of feasible solution points bounded by the various constraints 
@@ -102,17 +115,16 @@ export const execute = {
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">Trade</a>&nbsp; 
                     feature may be appropriate.
                     </p>
+                    
+                    <p>
+                    <br />
+                    </p>
+                    <br /><br />
                 </React.Fragment>
-            ),
-            actions: [
-                loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
-                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
-            ]
+            )
         },
         {
-            title: "Page 2a of 12",
+            title: "Page 04 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -136,8 +148,8 @@ export const execute = {
                     
                     <p>
                     The changes are now in place.
-                    This is a good opportunity to review the setup.
-                    Don't forget to check out the Reports.' 
+                    This is a good opportunity to scroll down and review the setup.
+                    Don't forget to check out the Reports.  
                     </p>
                     
                     <p>
@@ -161,7 +173,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 2b of 12",
+            title: "Page 05 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -185,7 +197,10 @@ export const execute = {
                     <br />
                     SEEK  MIN  Weight
                     </p>
-                    <br /><br />
+                    
+                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/SeekMinWeight.png" alt="SeekMinWeight"/>
+                    
+                    <br />
                 </React.Fragment>
             ),
             actions: [
@@ -193,7 +208,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 2c of 12",
+            title: "Page 06 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -206,9 +221,7 @@ export const execute = {
                     You may see the message:
                     <br />
                     "TO FURTHER IMPROVE RESULT, RE-EXECUTE SEEK"
-                    </p>
-                    
-                    <p>
+                    <br />
                     This can happen when the optimum is far from the starting point.
                     As a result, the internal estimate of the optimum was not perfect.
                     Simply re-execute Seek to refine the result.
@@ -217,7 +230,7 @@ export const execute = {
                     
                     <p>
                     Let's try exploring in a different direction.
-                    Perhaps this will be a design requiring a softer spring 
+                    Perhaps this will be a design that prioritizes a softer spring 
                     with a reduced spring rate.
                     Take note of the current value of Rate. 
                     </p>
@@ -228,7 +241,7 @@ export const execute = {
                     <br /><br />
                     SEEK  MIN  Rate
                     </p>
-                    <br /><br />
+                    <br />
                 </React.Fragment>
             ),
             actions: [
@@ -237,7 +250,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 2d of 12",
+            title: "Page 07 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -275,7 +288,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 2e of 12",
+            title: "Page 08 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -293,8 +306,7 @@ export const execute = {
                     At this point, you likely feel that you have seen enough of this set of constraints.
                     It is time to get a fresh start with requirements for a somewhat larger spring.
                     Moving to the next page will reestablish the start point as it was 
-                    at the beginning of this tutorial session. 
-                    </p>
+                    at the beginning of this tutorial session and immediately add new constraints.                    </p>
                     <br /><br />
                 </React.Fragment>
             ),
@@ -304,7 +316,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 12",
+            title: "Page 09 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -347,7 +359,7 @@ export const execute = {
                 ]
         },
         {
-            title: "Page 04 of 12",
+            title: "Page 10 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -379,7 +391,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 05 of 12",
+            title: "Page 11 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -411,7 +423,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 06 of 12",
+            title: "Page 12 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -423,17 +435,20 @@ export const execute = {
                     <p>
                     <b>Seek MIN Weight</b> will execute in the process of moving to the next page.
                     </p>
+                    <br /><br />
                 </React.Fragment>
             )
         },
         {
-            title: "Page 07 of 12",
+            title: "Page 13 of 17",
             text: (
                 <React.Fragment>
                     <p>
                     We have a solution.
-                    While not far away from feasible, this solution "bends" the constraints just a bit
-                    in order to get a better (lower) value of weight.
+                    It is typical for Seek to produce a solution that "bends" the constraints 
+                    just a bit.
+                    The underlying math is balancing the penalty of violating the constraints 
+                    with the reward of an improved value of the target variable.
                     </p>
                     
                     <p>
@@ -455,7 +470,7 @@ export const execute = {
                 ]
         },
         {
-            title: "Page 08 of 12",
+            title: "Page 14 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -477,7 +492,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 09 of 12",
+            title: "Page 15 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -515,7 +530,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 10 of 12",
+            title: "Page 16 of 17",
             text: (
                 <React.Fragment>
                     <p>
@@ -523,7 +538,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    This completes our overview of the ODOP SEEK command.
+                    This completes our overview of the ODOP Seek feature.
                     </p>
                     
                     <p>
@@ -540,10 +555,9 @@ export const execute = {
                     requirement is to find the spring of least weight that satisfies a
                     specific set of requirements.  
                     In other situations, the designer may need to determine
-                    the greatest load, greatest factor of safety, lowest spring rate 
-                    or greatest energy storage that
-                    may be produced within the space constraints of a specific outside
-                    diameter and solid height.
+                    the greatest load, greatest factor of safety, lowest spring rate, 
+                    greatest cycle life or greatest energy storage that
+                    may be produced within the space constraints of the application.
                     </p>
                     
                     <p>
@@ -553,32 +567,24 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
+                seek("Force_2", MAX),
                 seek("Force_2", MAX)
             ]
         },
         {
-            title: "Page 11 of 12",
+            title: "Page 17 of 17 (last page)",
             text: (
                 <React.Fragment>
                     <p>
-                    </p>
-                    <br /><br />
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 12 of 12 (last page)",
-            text: (
-                <React.Fragment>
-                    <p>
-                    The next tutorial section looks at the SpringSys Trade command.  In many
+                    The next tutorial section looks at the ODOP Trade feature.  In many
                     ways Trade is a mirror image capability to that of Seek.
                     When a design problem is expressed in terms of constraints and first
                     submitted to the search, the feasibility of the design will be
                     determined.  If the result is feasible, Seek may be used to
-                    probe the limits of the feasible region.  However, if the result is not
-                    feasible, Trade may be used to identify those constraints that are most
-                    leveraged and guide the designer to restructure his goals in a way that
+                    probe the limits of the feasible region.  
+                    However if the result is not feasible by a significant margin, 
+                    Trade may be used to identify those constraints that are most
+                    leveraged and thus guide the designer to restructure his goals in a way that
                     is most consistent with the performance that can be achieved within the
                     limits of available space and material properties.
                     </p>
