@@ -12,13 +12,14 @@ export const execute = {
                     In order to do this, Seek utilizes the concepts of mathematical optimization. 
                     Specifically, the program can probe the constrained extreme of any variable, independent or dependent. 
                     For example, within the context of coil spring design ODOP:Spring can be asked to find the lightest material weight 
-                    (or lowest spring rate, least solid height, greatest factor of safety, greatest cycle life, etc.) 
+                    (or lowest spring rate, least solid height, greatest factor of safety, greatest cycle life, greatest energy storage, etc.) 
                     all while maintaining specified objectives for force-deflection characteristics, stress, diameters, etc. 
                     It is this "goal seeking" capability that makes ODOP:Spring much more than a spring calculator. 
                     </p>
                     
                     <p>
-                    This section of the tutorial will set up a problem with a reasonably large feasible region and then use the 
+                    This section of the tutorial will set up a few different compression spring problems, 
+                    each with a reasonably large feasible region, and then use the 
                     ODOP Seek feature (<b>Action : Seek</b> menu) to probe the limits in various directions. 
                     </p>
                     
@@ -81,21 +82,20 @@ export const execute = {
                     When asking to optimize a design, you must understand that the search process will
                     find such trivial (also called "degenerate") cases.  It is necessary to
                     impose realistic constraints and when the process does something unexpected,
-                    make compensating changes and run through the calculation process again.
-                    </p>
-                    
-                    <p>
+                    make appropriate changes to constraints and run through the calculation process again.
                     </p>
                     
                     <p>
                     One more point ... 
-                    When Search terminates with a strictly feasible solution (i.e. OBJ = 0.0), 
-                    the resulting solution point is only one of many possible solution points. 
-                    The entire collection of feasible solution points is referred to as a "feasible region". 
-                    The boundaries of this region are formed by the various constraints.
-
+                    When Search terminates with a strictly feasible solution (i.e. Objective Value = 0.0), 
+                    the resulting solution point is likely only one of many possible solution points. 
+                    The entire collection of feasible solution points bounded by the various constraints 
+                    is referred to as a "feasible region". 
+                    </p>
+                    
+                    <p>
                     The ODOP Search feature will terminate when it finds its first feasible solution. 
-                    Seek should have a feasible design as its starting point. 
+                    The Seek solution process is easier if it has a feasible design as its starting point. 
                     At a minimum, it should be understood that a feasible design is available. 
                     In the case that a Search has terminated without finding a feasible point, 
                     use of the 
@@ -210,14 +210,15 @@ export const execute = {
                     
                     <p>
                     This can happen when the optimum is far from the starting point.
-                    The internal estimate of the optimum was not perfect.
+                    As a result, the internal estimate of the optimum was not perfect.
                     Simply re-execute Seek to refine the result.
                     </p>
                     
                     
                     <p>
                     Let's try exploring in a different direction.
-                    Perhaps this will be a design requiring minimum rate.
+                    Perhaps this will be a design requiring a softer spring 
+                    with a reduced spring rate.
                     Take note of the current value of Rate. 
                     </p>
                     
@@ -249,6 +250,9 @@ export const execute = {
                     limits further progress in achieving even better results.
                     In this case the constraints on coil diameter and solid height
                     prevent further progress in reducing the spring rate.
+                    If you are looking for a spring with a good cycle life 
+                    or no tendency to buckle under load, 
+                    additional constraints will be necessary.
                     </p>
                     
                     <p>
@@ -363,10 +367,9 @@ export const execute = {
                     </p>
                     
                     <p>
-                    While it is not always absolutely necessary, it is usually a good
-                    idea to start the optimization process from or near a feasible start
-                    point.  At the very least, you want to know that a feasible
-                    solution is available.
+                    As mentioned previously, while it is not always absolutely necessary, 
+                    it is best practice to start the optimization process from or near a feasible start point.  
+                    At the very least, you want to know that a feasible solution is available.
                     </p>
                     
                     <p>
@@ -411,34 +414,15 @@ export const execute = {
             title: "Page 06 of 12",
             text: (
                 <React.Fragment>
-                <p>
-                The ODOP:Spring Seek feature (<b>Action : Seek</b> menu)
-                provides the ability to maximize or minimize
-                any single variable (Independent or Dependent) 
-                subject to the existing constraints on the problem. 
-                In other words, Seek does constrained optimization. 
-                </p>
-                
-                <p>
-                In spring design, a common
-                requirement is to find the spring of least weight that satisfies a
-                specific set of requirements.  
-                In other situations, the designer may need to determine
-                the greatest load, greatest factor of safety, lowest spring rate 
-                or greatest energy storage that
-                may be produced within the space constraints of a specific outside
-                diameter and solid height.
-                </p>
-                
-                <p>
-                Before going further, look at the current value of weight.
-                We expect that the ultimate answer will be less than that. 
-                After all, that's what optimization is all about.
-                </p>
-                
-                <p>
-                <b>Seek MIN Weight</b> will execute in the process of moving to the next page.
-                </p>
+                    <p>
+                    Before going further, look at the current value of weight.
+                    We expect that the ultimate answer will be less than that. 
+                    After all, that's what optimization is all about.
+                    </p>
+                    
+                    <p>
+                    <b>Seek MIN Weight</b> will execute in the process of moving to the next page.
+                    </p>
                 </React.Fragment>
             )
         },
@@ -543,6 +527,27 @@ export const execute = {
                     </p>
                     
                     <p>
+                    To summarize,
+                    the ODOP:Spring Seek feature (<b>Action : Seek</b> menu)
+                    provides the ability to maximize or minimize
+                    any single variable (Independent or Dependent) 
+                    subject to the existing constraints on the problem. 
+                    In other words, Seek does constrained optimization. 
+                    </p>
+                    
+                    <p>
+                    In spring design, a common
+                    requirement is to find the spring of least weight that satisfies a
+                    specific set of requirements.  
+                    In other situations, the designer may need to determine
+                    the greatest load, greatest factor of safety, lowest spring rate 
+                    or greatest energy storage that
+                    may be produced within the space constraints of a specific outside
+                    diameter and solid height.
+                    </p>
+                    
+                    <p>
+                    Seek is the right tool for that job.
                     </p>
                     <br /><br />
                 </React.Fragment>
@@ -566,16 +571,16 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
- The next tutorial section looks at the SpringSys Trade command.  In many
- ways Trade is a mirror image capability to that of Seek.
- When a design problem is expressed in terms of constraints and first
- submitted to the search, the feasibility of the design will be
- determined.  If the result is feasible, Seek may be used to
- probe the limits of the feasible region.  However, if the result is not
- feasible, Trade may be used to identify those constraints that are most
- leveraged and guide the designer to restructure his goals in a way that
- is most consistent with the performance that can be achieved within the
- limits of available space and material properties.
+                    The next tutorial section looks at the SpringSys Trade command.  In many
+                    ways Trade is a mirror image capability to that of Seek.
+                    When a design problem is expressed in terms of constraints and first
+                    submitted to the search, the feasibility of the design will be
+                    determined.  If the result is feasible, Seek may be used to
+                    probe the limits of the feasible region.  However, if the result is not
+                    feasible, Trade may be used to identify those constraints that are most
+                    leveraged and guide the designer to restructure his goals in a way that
+                    is most consistent with the performance that can be achieved within the
+                    limits of available space and material properties.
                     </p>
                     
                     <p>
