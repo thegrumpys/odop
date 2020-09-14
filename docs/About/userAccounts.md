@@ -66,6 +66,11 @@ However, you should learn to save frequently as once the browser window or tab i
 any unsaved design in progress may be lost. 
 For more information on this point, see: [AutoSave](../Help/autoSave).
 
+**Troubleshooting login issues:**
+- Enter your email address in the "Username" field of the sign-in page.   
+&nbsp;   
+
+
 In order to sign out:
   - use "Logout" on the File menu
   - use the browser refresh button and then click the "Logout" button
