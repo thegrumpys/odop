@@ -1,6 +1,6 @@
 #### ODOP:Spring Screen Shots
 
-Click a thumbnail image or the link within a description field to see a full-size screen shot of the ODOP:Spring web app. 
+Click a thumbnail image or the link within a description to see a full-size screen shot of the ODOP:Spring web app. 
 Use your browser's Back button to return to this page.  
 &nbsp;   
 
@@ -16,8 +16,9 @@ Thumbnail | &nbsp; | Description
 [<img height="64" src="../png/ScrCap_Report3Noted.png">](../png/ScrCap_Report3Noted.png "Report 3") | &nbsp; | [Report 3](../png/ScrCap_Report3Noted.png "Report 3") is formatted to support a request for quotation.
 [<img height="64" src="../png/ScrCap_SelectCatalogNoted.png">](../png/ScrCap_SelectCatalogNoted.png "Select Catalog feature") | &nbsp; | Use the [Select Catalog](../png/ScrCap_SelectCatalogNoted.png "Select Catalog feature") feature to choose the nearest entry from a built-in catalog of stock springs.
 [<img height="64" src="../png/ScrCap_DemoScreenNoted.png">](../png/ScrCap_DemoScreenNoted.png "Example of a Demo page") | &nbsp; | The [Demo](../png/ScrCap_DemoScreenNoted.png "Example of a Demo page") feature provides solutions to several commonly available handbook problems.
-[<img height="64" src="../png/ScrCap_SeekNoted.png">](../png/ScrCap_SeekNoted.png "Seek feature") | &nbsp; | [Seek](../png/ScrCap_SeekNoted.png "Seek feature") does optimization.  It can find the constrained extreme of any problem variable.
+[<img height="64" src="../png/ScrCap_SeekNoted.png">](../png/ScrCap_SeekNoted.png "Seek feature") | &nbsp; | [Seek](../png/ScrCap_SeekNoted.png "Seek feature") does optimization.  It can find the constrained extreme (max or min) of any problem variable.
 [<img height="64" src="../png/ScrCap_TradeNoted.png">](../png/ScrCap_TradeNoted.png "Trade feature") | &nbsp; | When faced with conflicting objectives, [Trade](../png/ScrCap_TradeNoted.png "Trade feature") provides guidance in relaxing constraints to find the design closest to the original objectives.
+[<img height="64" src="../png/ScrCap_SaveAsNoted.png">](../png/ScrCap_SaveAsNoted.png "SaveAs feature") | &nbsp; | [Save](../png/ScrCap_SaveAsNoted.png "SaveAs feature") designs to a private cloud-based Design Library.  Alternatively, Export designs to local storage.
 
   
 &nbsp;   

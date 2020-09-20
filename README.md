@@ -1,5 +1,6 @@
-![ODOP logo](./client/public/favicon.ico "ODOP logo") 
-### Open Design Optimization Platform &nbsp; (ODOP)
+&nbsp; | &nbsp; | &nbsp;
+--- | --- | ---
+![ODOP logo](./client/public/favicon.ico "ODOP logo") | &nbsp; |### Open Design Optimization Platform &nbsp; (ODOP)   
 
 ODOP provides features and capabilities to facilitate the analysis and optimal design 
 of a broad range of problems that have a mathematical model available. 
