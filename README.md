@@ -6,7 +6,7 @@ of a broad range of problems that have a mathematical model available.
 Currently available apps include:
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Spring/Compression/favicon.ico"> 
-<b>[Helical coil spring design](https://www.springdesignsoftware.org)</b> - full-featured web app for design of compression, extension and torsion springs    
+<b>[Helical coil spring design](https://www.springdesignsoftware.org)</b> - a full-featured web app enabling the engineering design of compression, extension and torsion springs    
 <br />
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Solid/favicon.ico"> 
@@ -14,7 +14,7 @@ Currently available apps include:
 <br />
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Piston-Cylinder/favicon.ico"> 
-<b>[Piston-Cylinder design](https://thegrumpys.github.io/odop/Help/DesignTypes/pcyl)</b> - A simple demonstration case   
+<b>[Piston-Cylinder design](https://thegrumpys.github.io/odop/Help/DesignTypes/pcyl)</b> - a simple demonstration case   
 
 &nbsp;
 
