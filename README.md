@@ -6,7 +6,7 @@ of a broad range of problems that have a mathematical model available.
 Currently available apps include:
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Spring/Compression/favicon.ico"> 
-<b>[Helical coil spring design](https://www.springdesignsoftware.org)</b> - full-featured apps for design of compression, extension and torsion springs    
+<b>[Helical coil spring design](https://www.springdesignsoftware.org)</b> - full-featured web app for design of compression, extension and torsion springs    
 <br />
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Solid/favicon.ico"> 
