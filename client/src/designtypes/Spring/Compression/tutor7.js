@@ -306,7 +306,8 @@ export const execute = {
                     At this point, you likely feel that you have seen enough of this set of constraints.
                     It is time to get a fresh start with requirements for a somewhat larger spring.
                     Moving to the next page will reestablish the start point as it was 
-                    at the beginning of this tutorial session and immediately add new constraints.                    </p>
+                    at the beginning of this tutorial session and immediately add new constraints.
+                    </p>
                     <br /><br />
                 </React.Fragment>
             ),
