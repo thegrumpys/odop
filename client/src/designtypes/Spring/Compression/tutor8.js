@@ -49,7 +49,7 @@ export const execute = {
                     <p>
                     To demonstrate the use of Trade, it will be necessary to find a
                     problem that does not have a feasible solution.  
-                    Back in the tutorial section where we covered the <b>File : Save</b> and <b>File : Open</b> menu items (tutor4),
+                    Back in the tutorial section tutor4 where the <b>File : Save</b> and <b>File : Open</b> menu items were covered,
                     we invented a problem that did not initially have a feasible solution.
                     Let's look at that one again.  It went something like:
                     <br /><br />
@@ -102,7 +102,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    Moving to the next page will execute a search.
+                    Moving to the next page will execute a search to determine if a feasible solution is available.
                     </p>
                     
                     <p>
@@ -136,15 +136,26 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
+                    The search couldn't find a design that satisfied all of our objectives
+                    so it did its best and found a compromise.
                     </p>
                     
                     <p>
+                    If you scroll down, you can see that several constraints are violated.  
+                    The relative magnitude of those violations contains information as to 
+                    which constraints are most leveraged.  
+                    The search finds that it is to its advantage to violate
+                    some constraints more than others.
                     </p>
                     
                     <p>
+                    This design obviously needs some work.
                     </p>
                     
                     <p>
+                    In the rest of this tutorial section we will use <b>Action : Trade:</b> 
+                    to look at how the constraints on outside diameter and solid height 
+                    trade off against each other.
                     </p>
                     <br />
                 </React.Fragment>
@@ -158,15 +169,33 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
+                    Trade will ask for "weights" to apply to each of the violated
+                    constraints.  These weights define the direction that Trade will
+                    investigate for constraint relaxation.  Only the relative size of
+                    the weights matters.  Trade will normalize the input to unit value.
                     </p>
                     
                     <p>
+                    Trade needs the user to enter an exploration size.  The accuracy of this
+                    estimate is not critical.  If the number entered is too large, Trade
+                    will find a feasible solution, report the results and offer the
+                    opportunity to start again with a smaller step.  If the estimate is too
+                    small, a second or even third pass through the Trade process may be
+                    taken to refine the result.  The estimate of the appropriate step size
+                    can be gauged by looking at the magnitude of the constraint violations.
+                    The exploration size in percent should be larger than the largest
+                    percentage constraint violation.  Perhaps even larger than the sum of
+                    all the constraint violations.
                     </p>
                     
                     <p>
+                    The tutorial is not yet ready to directly control the Trade feature.
+                    You will need to take a more active role.
                     </p>
                     
                     <p>
+                    Drop down the Action menu and select Trade.
+                    Select the "Arbitrary" strategy (green button).
                     </p>
                     <br /><br />
                 </React.Fragment>
