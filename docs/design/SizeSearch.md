@@ -1,14 +1,18 @@
-## SizeSearch
+## SizeSearch - Enhanced SelectSize
 
-This entry describes a hypothetical extension to the ODOP Search feature that evaluates the results with multiple standard sizes.  
+This entry describes a hypothetical extension to the ODOP Search feature that invokes the search algorithm 
+to evaluate results with multiple standard sizes.  
 
 Other names considered:  SuperSearch, SearchPlus, Survey, SizeSurvey.  
 
 As visualized, this feature would be implemented as an additional **Action : SizeSearch** menu item. 
-It would not be a replacement for the current **Action : Select Size** menu item. 
+It would not be a replacement for the current **Action : SelectSize** menu item. 
+Alternatively, the current single **Action : SelectSize** menu entry can be maintained if a 
+second level selection modal (similar to Trade's strategy selection) allows the choice.
+The naming might be: Basic and Advanced or Manual and Auto. 
 
 Currently, the **Action : Select Size** menu item offers 3 standard sizes, 
-one smaller and two larger than the current value of the Independent Variable under consideration.  
+one smaller and two larger than the current value of the Independent Variable under consideration. 
 The user selects one of the three and is returned to the main page with the appropriate variable in FIXed status.
 The user then needs to evaluate the need for a search and then, if appropriate, must run the Search manually.
 

@@ -54,15 +54,18 @@
 * [Functionally Determined Constraint Level - User Interface](design/FDCL_UI)
 * [Version Number Guidelines](design/VersionNumbers) 
 * [Idea for a welcome page](design/WelcomePage)  
-* [Okta Registration Flow](design/OktaRegistrationFlow)    
+* [Okta Registration Flow](design/OktaRegistrationFlow)   
+* [SizeSearch - Enhanced SelectSize](design/SizeSearch) 
 
 <!--- The following topics of this section are already implemented or otherwise no longer relevant.  They are maintained here to keep the thought history.  -->
 
+<!---  
 * [Proposed names for the (problem independent) system](design/SysName)
 * [Proposed names for quantities previously called "constants"](design/PreviouslyConstants) 
 * [Idea for a simple showcase problem](design/GeometricSolidsProblem)
 * [Consider adding a search at the beginning of trade](design/SearchBeforeTrade) 
 * [Investigate alternatives to assist implementation of the Execute, Demo and Tutorial features](design/ExecuteCapability)   
+-->  
 
 
 ## Procedures
