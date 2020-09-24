@@ -11,8 +11,8 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Coming soon ...
-                    Tutorial content on the ODOP Trade feature.
+                    This tutorial section provides content on the ODOP Trade feature.
+                    A few refinements are in progress. 
                     In the mean time, refer to the on-line documentation section (Help entry) on 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">Trade</a>&nbsp; 
                     for additional details.
@@ -27,7 +27,7 @@ export const execute = {
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState
-                    for the ODOP Compression Spring design type.
+                    for the ODOP Compression Spring design type using U.S. customary units.
                     </p>
                     
                     <p>
@@ -39,7 +39,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 07",
+            title: "Page 02 of 08",
             text: (
                 <React.Fragment>
                     <p>
@@ -59,8 +59,7 @@ export const execute = {
                     The spring must support 250 pounds and sustain at least
                     1.0 inch of deflection from no load to full load.
                     <br /><br />
-                    We add the requirement of a long cycle life and start by entering
-                    what we know about the design.
+                    We add the requirement of a moderate cycle life.
                     </p>
                     
                     <p>
@@ -76,7 +75,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 07",
+            title: "Page 03 of 08",
             text: (
                 <React.Fragment>
                     <p>
@@ -85,9 +84,9 @@ export const execute = {
                     <p>
                     In "Tutorial shorthand", the changes just imposed by the tutorial are:<br />
                     <br />
-                        CHANGE Life_Category "1 million cycles - Not Peened" &nbsp; &#60;--- request nearest cycle life category<br />
-                        CHANGE  FS_CycleLife MIN  1.0<br />
-                        CHANGE  OD_Free MAX  1.950 &nbsp; &#60;--- 0.050 margin for hole<br />
+                        CHANGE  Cycle_Life MIN  50000<br />
+                        CHANGE  FS_2 MAX 2.0 &nbsp; &#60;--- allow more conservative designs<br/>
+                        CHANGE  OD_Free MAX  2.0<br />
                         CHANGE  L_Solid MAX  1.2<br />
                         CHANGE  L_Stroke MIN 1.0<br />
                         FIX  Force_1  0<br />
@@ -95,32 +94,31 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Now we're set up to consider designs that will have a long cycle life.
-                    The 250 pound load has given us an unreasonable start point. 
-                    Look for warnings on Report 1.
-                    In this case, we'll ignore the warning.
+                    So now, we're set up to consider designs that will have a somewhat longer cycle life.
                     </p>
 
                     <p>
-                    Moving to the next page will execute a search to determine if a feasible solution is available.
+                    The 250 pound load has given us an unreasonable start point. 
+                    Look for warnings on Report 1.
+                    In this case, we'll ignore the warning.
                     </p>
                     
                     <p>
                     </p>
 
                     <p>
+                    Moving to the next page will execute a search to determine if a feasible solution is available.
                     </p>
                     <br />
                 </React.Fragment>
             ),
             actions: [
-                changeSymbolValue("Life_Category",3),
-                saveOutputSymbolConstraints('FS_CycleLife'),
-                setSymbolFlag('FS_CycleLife', MIN, CONSTRAINED),
-                changeSymbolConstraint('FS_CycleLife', MIN, 1.0),
+                saveOutputSymbolConstraints('Cycle_Life'),
+                setSymbolFlag('Cycle_Life', MIN, CONSTRAINED),
+                changeSymbolConstraint('Cycle_Life', MIN, 50000.0),
                 saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
-                changeSymbolConstraint('OD_Free', MAX, 1.950),
+                changeSymbolConstraint('OD_Free', MAX, 2.0),
                 saveOutputSymbolConstraints('L_Solid'),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
                 changeSymbolConstraint('L_Solid', MAX, 1.2),
@@ -132,7 +130,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 04 of 07",
+            title: "Page 04 of 08",
             text: (
                 <React.Fragment>
                     <p>
@@ -153,8 +151,8 @@ export const execute = {
                     </p>
                     
                     <p>
-                    In the rest of this tutorial section we will use <b>Action : Trade:</b> 
-                    to look at how the constraints on outside diameter and solid height 
+                    In the rest of this tutorial section we will use <b>Action : Trade </b> 
+                    to look at how the constraints on stroke, outside diameter and solid height 
                     trade off against each other.
                     </p>
                     <br />
@@ -165,7 +163,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 05 of 07",
+            title: "Page 05 of 08",
             text: (
                 <React.Fragment>
                     <p>
@@ -194,8 +192,109 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Drop down the Action menu and select Trade.
-                    Select the "Arbitrary" strategy (green button).
+                    Drop down the Action menu and select <b>Trade. </b>
+                    Select the <b>Arbitrary</b> strategy (green button).
+                    </p>
+                    
+                    <p>
+                    Enter zero for the weight on each violated constraint except L_Stroke 
+                    which should be set to 1.0. 
+                    Select <b>Continue</b>.
+                    </p>
+                    
+                    <p>
+                    Enter a step size of 20 (%).
+                    Select <b>Continue</b>.
+                    </p>
+                    
+                    <p>
+                    Observe that Trade predicts a feasible solution if the L_Stroke MIN constraint 
+                    is moved from 1.0 inches to somewhere less than 0.7 inches.
+                    </p>
+                    
+                    <p>
+                    Select <b>Done. </b>
+                    This will return to the main page with no changes.
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+            ]
+        },
+        {
+            title: "Page 06 of 08",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Ready for another shot at it ?   This time we'll work with OD_FREE MAX.
+                    </p>
+                    
+                    <p>
+                    For another change of pace, we'll run a second pass through
+                    Trade to refine the result a bit more.
+                    </p>
+                
+                    <p>
+                    &nbsp; 
+                    <br /><br /><br />
+                    </p>
+                
+                    <p>
+                    &nbsp; 
+                    <br /><br />
+                    </p>
+                    
+                    <p>
+                    Drop down the Action menu and select <b>Trade. </b>
+                    Select the <b>Arbitrary</b> strategy (green button).
+                    </p>
+                    
+                    <p>
+                    Enter zero for the weight on each violated constraint except OD_Free 
+                    which should be set to 1.0. 
+                    Select <b>Continue</b>.
+                    </p>
+                    
+                    <p>
+                    Enter a step size of 25 (%).
+                    Select <b>Continue</b>.
+                    </p>
+                
+                    <p>
+                    <b>Accept</b> the resulting set of constraints. 
+                    <b> Repeat</b> the process with the same weights and a step size 0f 8 %.
+                    </p>
+                    
+                    <p>
+                    Observe that Trade predicts a feasible solution if the OD_Free MAX constraint 
+                    is moved from the previous value of 2.0 inches 
+                    to a new value of approximately 3.0 inches. 
+                    </p>
+                    
+                    <p>
+                    <b>Accept the result</b>.
+                    </p>
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 07 of 08",
+            text: (
+                <React.Fragment>
+                    <p>
+                    Of course it is possible to combine any or all of these approaches.
+                    Trade will be happy to calculate how far it is necessary to move
+                    with a combined approach ... just give more than one non-zero entry
+                    when defining the weights at the beginning of Trade's process.
+                    </p>
+                    
+                    <p>
+                    </p>
+                    
+                    <p>
+                    </p>
+                    
+                    <p>
                     </p>
                     <br /><br />
                 </React.Fragment>
@@ -204,23 +303,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 06 of 07",
-            text: (
-                <React.Fragment>
-                    <p>
-                    </p>
-                
-                    <p>
-                    </p>
-                    
-                    <p>
-                    </p>
-                    <br />
-                </React.Fragment>
-            )
-        },
-        {
-            title: "Page 07 of 07 (last page)",
+            title: "Page 08 of 08 (last page)",
             text: (
                 <React.Fragment>
                     <p>
@@ -229,9 +312,8 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Also, look in the on-line documentation section (Help entry) titled  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign" 
-                    target="_blank" rel="noopener noreferrer">TODO</a>.&nbsp; 
+                    Also, be sure to look in the on-line documentation section (Help entry) titled  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">Trade</a>&nbsp; 
                     </p>
                     
                     <p>
