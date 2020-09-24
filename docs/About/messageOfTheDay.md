@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated September 14, 2020   
+**Message-of-the-day** &nbsp; updated September 24, 2020   
 
 Watch this space for breaking news 
 including impending and recent releases, planned outages, newly discovered issues, work-arounds, etc.  

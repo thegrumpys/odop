@@ -1,9 +1,9 @@
 ## SizeSearch - Enhanced SelectSize
 
-This entry describes a hypothetical extension to the ODOP Search feature that invokes the search algorithm 
+This entry describes a hypothetical extension to the ODOP SelectSize feature that invokes the search algorithm 
 to evaluate results with multiple standard sizes.  
 
-Other names considered:  SuperSearch, SearchPlus, Survey, SizeSurvey.  
+Other names considered:  SelectSizePlus, SuperSearch, SearchPlus, Survey, SizeSurvey.  
 
 As visualized, this feature would be implemented as an additional **Action : SizeSearch** menu item. 
 It would not be a replacement for the current **Action : SelectSize** menu item. 
