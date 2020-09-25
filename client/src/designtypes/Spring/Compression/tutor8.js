@@ -12,10 +12,8 @@ export const execute = {
                     
                     <p>
                     This tutorial section provides content on the ODOP Trade feature.
-                    A few refinements are in progress. 
-                    In the mean time, refer to the on-line documentation section (Help entry) on 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">Trade</a>&nbsp; 
-                    for additional details.
+                    Background information is available in the on-line documentation section (Help entry) on 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">Trade</a>.&nbsp; 
                     </p>
                     
                     <p>
@@ -273,6 +271,7 @@ export const execute = {
                     
                     <p>
                     <b>Accept the result</b>.
+                    Continue to the next page.
                     </p>
                 </React.Fragment>
             )
@@ -282,13 +281,16 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
+                    <p>
+                    Based on the Objective Value, it appears that moving the constraint from
+                    its original value of 2.0 inches to a new value of approximately 3.0 inches 
+                    produces a result that is is extremely close to feasibility.
+                    </p>
+                    
                     Of course it is possible to combine any or all of these approaches.
                     Trade will be happy to calculate how far it is necessary to move
                     with a combined approach ... just give more than one non-zero entry
                     when defining the weights at the beginning of Trade's process.
-                    </p>
-                    
-                    <p>
                     </p>
                     
                     <p>
