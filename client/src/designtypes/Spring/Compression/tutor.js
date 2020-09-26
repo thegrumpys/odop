@@ -10,8 +10,8 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     Welcome to the first ODOP tutorial session.
-                    This session will provide an introduction to basic ODOP features and concepts.
-                    in the context of the <b>compression spring</b> design type.
+                    This session will provide an introduction to basic ODOP features and concepts 
+                    in the context of the compression spring design type.
                     </p>
                     
                     <p>
@@ -30,7 +30,7 @@ export const execute = {
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState
-                    for the ODOP <b>Compression Spring</b> design type.
+                    for the ODOP Compression Spring design type using U.S. customary units.
                     </p>
                     
                     <p>
@@ -58,8 +58,10 @@ export const execute = {
                     
                     <p>
                     ODOP contains an "on-line" help facility.
-                    It includes an overview of the program, a <b>Getting Started</b> section plus
-                    helpful hints and detailed explanations of major features.  
+                    It includes an overview of the program,  
+                    <a href="https://www.springdesignsoftware.org/odop/docs/About/introPagesOverview" target="_blank" rel="noopener noreferrer"> multiple introductory sections </a> 
+                    to help you in the process of getting started 
+                    plus helpful hints and detailed explanations of major features.  
                     But first, a few words about what <b>not</b> to expect ...
                     The on-line help facility is not intended to replace the documentation that comes 
                     with your browser or computer system.  
@@ -86,23 +88,34 @@ export const execute = {
                     So, as you are reading, please click the Help menu above.
                     It will drop down to provide a list of entries (topics) to choose from.
                     Selecting <b>Index</b> on this list will bring up a new browser tab with the
-                    list of available Help entries. You can switch back and forth between the tabs.
+                    list of available Help entries. You can switch back and forth between the tabs
+                    or close the new tab in order to return to this discussion.
                     </p>
                     
                     <p>
                     Several of these entries are designed to bring new users up to speed
-                    as quickly as possible.<br />
-                    <br />
-                    <b>Features</b> and <b>Introduction</b> cover many of the concepts 
-                    behind the program.<br />
-                    <br />
-                    <b>Terminology</b> explains some of the unique terms that the program
+                    as quickly as possible.
+                    </p>
+                    
+                    <p>
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/features" target="_blank" rel="noopener noreferrer"> Features </a> 
+                    and 
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/introduction" target="_blank" rel="noopener noreferrer"> Introduction </a> 
+                    cover many of the concepts behind the program.
+                    </p>
+                    
+                    <p>
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology" target="_blank" rel="noopener noreferrer"> Terminology </a> 
+                    explains some of the unique terms that the program
                     and its supporting documentation insist on using. 
                     ODOP is structured to be general and extensible to new kinds of designs.
                     The expectation is that this generality will pay off in the program's 
-                    ability to solve the really hard problems.<br />
-                    <br />
-                    <b>Getting Started</b> provides a tour of the main page (below) plus
+                    ability to solve the really hard problems.
+                    </p>
+                    
+                    <p>
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/gettingStarted" target="_blank" rel="noopener noreferrer"> Getting Started </a> 
+                    provides a tour of the main page (below) plus
                     makes a few suggestions on how new users should approach learning the program.
                     Note that for the compression spring design type, 
                     the "main page" is actually the first of four "tabs" and 
@@ -224,8 +237,8 @@ export const execute = {
                     ODOP can use the mathematical model to predict aspects of its performance.
                     For a spring, that is things like spring Rate, stresses, 
                     factor of safety, cycle life, etc.
-                    When working with the rectangular solid, 
-                    we will be speaking in terms of things like Volume, Weight, etc.
+                    If working with the Rectangular Solid demonstration case, 
+                    we would be speaking in terms of things like Volume, Weight, etc.
                     </p>
                     
                     <p>
@@ -313,6 +326,11 @@ export const execute = {
                     it will display "<b>FEASIBLE</b>" in the Result section (immediately below these words).  
                     If a satisfactory solution is found, but one or more constraints remain violated by a
                     trivial amount, the program will display "<b>MARGINALLY FEASIBLE</b>" in the Result section.
+                    </p>
+
+                    <p>
+                    Click "Next".
+                    The search operation will take place as we transition to the next page.
                     </p>
                 </React.Fragment>
             ),
@@ -437,8 +455,9 @@ export const execute = {
                     <p>
                     More compression spring tutorial sessions are available. 
                     They have names like tutorTour, tutor3, tutor4, ... etc. 
-                    Refer to the on-line documentation section (Help entry) covering the 
-                    tutorial for a list of the Tutorial and Demo topics.
+                    Refer to the on-line documentation section (Help entry) covering the  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    for a list of topics.
                     </p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
