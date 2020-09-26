@@ -223,9 +223,11 @@ ___
 ___
 
 **PREFERENCES** &nbsp; (Internal Variables &nbsp; File : Preferences menu item)   
-Preference settings control the operation of the program.  They have no
-direct meaning to the design problem.  For further information, refer to 
-the Help sections on Preferences and Search.
+Preference settings control the operation of the program. 
+They have no direct meaning to the design problem. 
+For more specific information, refer to the documentation section
+(on-line Help entry) on [Search](search) 
+and Tutorial session tutor9.
 
 ___
 

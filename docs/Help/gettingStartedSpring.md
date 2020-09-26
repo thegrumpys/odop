@@ -8,27 +8,30 @@ tutorial and demo sessions are also provided.
 A user account with associated username and password 
 is required to access the ODOP:Spring software.
 See: [User Accounts](../About/userAccounts) for details on
-how to obtain an account.
+how to obtain a free account.
 
 A list of various on-line Help pages providing introductory information is available at
 [Intro Pages Overview](../About/introPagesOverview).
 In particular, see [Launching the Program](launchODOP) for more detailed instructions on 
 how to get the program up and running.
 
-The ODOP software expects to start from an existing design. 
-More information on this point is available at [Default Designs](./defaultDesigns).
+The ODOP software expects to start from an [existing design](./defaultDesigns).
+While they contain pre-established constraints that 
+serve to guide the solution to reasonable and expected results,
+the provided Startup designs are [under specified](./designSituations). 
+You should provide additional constraints and Fixes specific to your spring application.
 
 If you haven't seen it already, the 
 [ODOP Design Process Flow Diagram](../About/png/DesignProcessFlowDiagram.png)
 provides an important conceptual introduction to the overall design process within ODOP.   
 
 Before continuing with the material below, 
-please confirm that the ODOP program is running in a browser window (or tab) 
+it would be helpful to have the ODOP program is running in a browser window (or tab) 
 and that the Compression Spring design type is loaded.
 You should see Independent Variables like OD\_Free, Wire\_Dia and L\_Free.
 If you see the Independent Variables of the Rectangular Solid design type 
 (Length, Width and Height),
-simply click the refresh button of the window containing the ODOP program 
+simply click the browser Reload (Refresh) button of the window or tab containing the ODOP program 
 and then click the **Open** button to switch to the default design type (Spring/Compression) 
 with the default design (Startup).  
 
@@ -115,9 +118,10 @@ For the compression spring design type, those include
  You can master these advanced features with the same technique. 
  Dive in and try it! 
  
- Once you have already saved any work that you wish to keep, you can sign out.
- Use the browser refresh button and then click the "Logout" button.
- At that point, exit the program by simply closing the browser tab.   
+ Once you have already saved any work that you wish to keep, you can sign out 
+ by using "Logout" on the File menu.
+ Alternatively, use the browser Reload a.k.a "Refresh" function and then click the "Logout" button. 
+ Finally, close the browser tab or browser window containing the ODOP app.
   
 &nbsp;   
     

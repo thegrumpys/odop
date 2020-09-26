@@ -3,6 +3,7 @@
 This topic covers various points that may allow a better user experience with the ODOP software.  
 
 **On this page:**  
+[Use the power of Search and Seek](htt#Search_Seek)  
 [File : Save As and File : Save](htt#fileSaveAndSaveAs)  
 [File : Import and File : Export](htt#fileImportAndExport)  
 [Side-by-Side comparison of designs](htt#sideBySideCompare)  
@@ -21,6 +22,23 @@ This topic covers various points that may allow a better user experience with th
 [Design Migration](htt#designMigration)  
 [How to pronounce ODOP](htt#pronounceODOP)  
 [Reporting problems with the ODOP app](htt#reportProblems)  
+
+___
+
+<a id="Search_Seek"></a>  
+___
+
+**Use the power of Search and Seek**  
+
+Optimization software like ODOP offers considerable leverage over a calculator approach.
+If you find that you are repeatedly entering trial values of Independent Variables and then
+examining the corresponding values of Dependent Variables 
+it is likely that you are missing out on the power that the ODOP software has to offer. 
+You should be expressing your goals for the design by establishing the values for
+constraints and FIXes and then using the Search and Seek features.  
+
+The Tutorial and Demo features offer multiple examples of the best way to utilize the 
+Search and Seek features. 
 
 ___
 
@@ -138,7 +156,10 @@ ___
 Off-line operation is not currently supported. 
 If a design session is in progress when network connectivity is lost, 
 it is possible that design activity can continue but it will not be possible to
-save into the design library or open new designs until network connectivity is restored.   
+save into the design library or open new designs from the library 
+until network connectivity is restored. 
+It should be possible to use the **File : Export** menu to save designs to
+local storage even after a loss of network connectivity.  
 
 ___
 
@@ -157,7 +178,8 @@ ___
 
 **Bookmark the app**   
 It is possible to save a couple clicks in opening the app.
-Bookmark (or create a favorite): https://odop.herokuapp.com/
+Bookmark (or create a favorite): https://odop.herokuapp.com/   
+
 ___
 
 <a id="shutdown"></a>  
