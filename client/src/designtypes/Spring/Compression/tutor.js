@@ -59,7 +59,7 @@ export const execute = {
                     <p>
                     ODOP contains an "on-line" help facility.
                     It includes an overview of the program,  
-                    <a href="https://www.springdesignsoftware.org/odop/docs/About/introPagesOverview" target="_blank" rel="noopener noreferrer"> multiple introductory sections </a> 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/introPagesOverview" target="_blank" rel="noopener noreferrer">multiple introductory sections</a>&nbsp; 
                     to help you in the process of getting started 
                     plus helpful hints and detailed explanations of major features.  
                     But first, a few words about what <b>not</b> to expect ...
@@ -98,14 +98,14 @@ export const execute = {
                     </p>
                     
                     <p>
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/features" target="_blank" rel="noopener noreferrer"> Features </a> 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/features" target="_blank" rel="noopener noreferrer">Features</a>&nbsp; 
                     and 
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/introduction" target="_blank" rel="noopener noreferrer"> Introduction </a> 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/introduction" target="_blank" rel="noopener noreferrer">Introduction</a>&nbsp; 
                     cover many of the concepts behind the program.
                     </p>
                     
                     <p>
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology" target="_blank" rel="noopener noreferrer"> Terminology </a> 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology" target="_blank" rel="noopener noreferrer">Terminology</a>&nbsp; 
                     explains some of the unique terms that the program
                     and its supporting documentation insist on using. 
                     ODOP is structured to be general and extensible to new kinds of designs.
@@ -114,9 +114,9 @@ export const execute = {
                     </p>
                     
                     <p>
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/gettingStarted" target="_blank" rel="noopener noreferrer"> Getting Started </a> 
-                    provides a tour of the main page (below) plus
-                    makes a few suggestions on how new users should approach learning the program.
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/gettingStartedSpring" target="_blank" rel="noopener noreferrer">Getting Started (spring)</a>&nbsp; 
+                    describes how to launch the first sessions of the spring design Tutorial and the spring design Demo 
+                    plus makes a few suggestions on how new users should approach learning the program.
                     Note that for the compression spring design type, 
                     the "main page" is actually the first of four "tabs" and 
                     has the name "Design:" plus a coil spring icon and the name of the current design. 
@@ -130,7 +130,7 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Perhaps you have already discovered that ODOP provides a "tooltip" feature.
+                    It is likely that you have already discovered that ODOP provides a "tooltip" feature.
                     If using a touchpad or mouse, simply hover the cursor over any of the 
                     titles or Variable names on the main page. 
                     A tooltip will pop-up with additional information about that portion of

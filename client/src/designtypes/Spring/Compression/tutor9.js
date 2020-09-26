@@ -1,6 +1,4 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, loadInitialState, changeLabelsValue } from '../../../store/actionCreators';
-import { MAX } from '../../../store/actionTypes';
 export const execute = {
     steps: [
         {
