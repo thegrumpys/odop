@@ -1,22 +1,24 @@
-## SizeSearch - Enhanced SelectSize
+## SizeSearch and SizeSeek - Enhanced SelectSize
 
-This entry describes a hypothetical extension to the ODOP SelectSize feature that invokes the search algorithm 
+This entry describes two hypothetical extensions to the existing ODOP SelectSize feature that invokes the search algorithm 
 to evaluate results with multiple standard sizes.  
 
+Preferred names:  SizeSearch and SizeSeek. 
 Other names considered:  SelectSizePlus, SuperSearch, SearchPlus, Survey, SizeSurvey.  
 
-As visualized, this feature would be implemented as an additional **Action : SizeSearch** menu item. 
-It would not be a replacement for the current **Action : SelectSize** menu item. 
-Alternatively, the current single **Action : SelectSize** menu entry can be maintained if a 
-second level selection modal (similar to Trade's strategy selection) allows the choice.
-The naming might be: Basic and Advanced or Manual and Auto. 
+There are at least two alternatives for a user interface. 
+ - two additional menu items: **Action : SizeSearch** and **Action : SizeSeek**. 
+The current **Action : SelectSize** menu item would continue. 
+ - have a second level selection modal (similar to Trade's strategy selection) 
+invoked by the current single **Action : SelectSize** menu entry.
+The naming for the three alternatives might be SelectSize, SizeSearch and SizeSeek. 
 
 Currently, the **Action : Select Size** menu item offers 3 standard sizes, 
 one smaller and two larger than the current value of the Independent Variable under consideration. 
 The user selects one of the three and is returned to the main page with the appropriate variable in FIXed status.
 The user then needs to evaluate the need for a search and then, if appropriate, must run the Search manually.
 
-The **Action : SizeSearch** feature visualized here would automate the process.
+The SizeSearch and SizeSeek features visualized here would automate the process.
 Specifically, SizeSearch would:  
 
 - Check the {Start Point}, if OBJ > OBJMIN, confirm that the size variable is in FREE status and run a search. The result becomes the new {Start Point}.  
@@ -29,5 +31,9 @@ Ideally, the presentation of the the "Objective Value" would follow the color-co
 The default choice would be the {Result 1, 2 or 3} with the lowest "Objective Value".
 After the user selects one of the four points {Cancel = Start Point, Result 1, 2, or 3}, return to the main page with that set of values; 
 the {Result 1, 2 or 3} size variable in FIXed status and the correct corresponding value of the "Objective Value". 
-If the {Cancel = Start Point} was selected, it should be returned in FREE status.
+If the {Cancel = Start Point} was selected, the size variable should be returned in FREE status.
 
+SizeSeek should operate like SizeSearch except using the Seek algorithm.
+It will be necessary to prompt the user for the Seek variable and direction (MAX / MIN).
+
+ 
