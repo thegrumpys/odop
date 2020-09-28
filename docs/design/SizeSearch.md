@@ -11,7 +11,8 @@ There are at least two alternatives for a user interface.
 The current **Action : SelectSize** menu item would continue. 
  - have a second level selection modal (similar to Trade's strategy selection) 
 invoked by the current single **Action : SelectSize** menu entry.
-The naming for the three alternatives might be SelectSize, SizeSearch and SizeSeek. 
+The naming for the three alternatives might be SelectSize, SizeSearch and SizeSeek 
+or perhaps SelectSize, SearchSize and SeekSize. 
 
 Currently, the **Action : Select Size** menu item offers 3 standard sizes, 
 one smaller and two larger than the current value of the Independent Variable under consideration. 
