@@ -420,7 +420,7 @@ export const initialState = {
             "cmin": 10000,
             "cmax": 1000000.0,
             "ioclass": 0,
-            "sdlim": 1000.0,
+            "sdlim": 10000.0,
             "tooltip": "Rough estimate of the average number of cycles to failure. See on-line Help.",
             "type": "equationset",
             "hidden": false
