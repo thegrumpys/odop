@@ -214,7 +214,8 @@ export const execute = {
                     They are named demo1, demo2, ... etc. 
                     Tutorial sessions named tutor3, tutor4, ... etc. provide instructions on how to use 
                     the ODOP software.
-                    Refer to the on-line documentation section (Help entry) named "Tutorial and Demo" 
+                    Refer to the on-line documentation section (Help entry) covering the  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a complete list of the tutorial and demo topics.
                     </p>
                     

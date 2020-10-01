@@ -273,9 +273,16 @@ export const execute = {
                     the value of STRESS_2 is a reasonable match for the corresponding
                     stress value in the handbook example.
                     </p>
+                    
                     <p>
                     We can wrap up by saying that the ODOP:Spring values are a good match
                     for the handbook solution.
+                    </p>
+                    
+                    <p>
+                    Refer to the on-line documentation section (Help entry) covering the  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    for a complete list of additional tutorial and demo topics.
                     </p>
                 </React.Fragment>
             ),
