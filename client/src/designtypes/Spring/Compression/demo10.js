@@ -1,6 +1,6 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
-import { MAX, CONSTRAINED } from '../../../store/actionTypes';
+import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, freeSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { MAX, CONSTRAINED, FREE_SYMBOL_VALUE } from '../../../store/actionTypes';
 export const execute = {
     steps: [
         {
@@ -56,18 +56,21 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Design a compression spring such that the following conditions are met:<br />
+                    Design a compression spring such that the following specifications are met:<br />
                     <br />
-                    outside diameter  =  1.00  inch<br />
-                    free length       =  3.25  inches<br />
-                    load              = 60.0   pounds at length = 1.75 inches<br />
-                    &nbsp; &nbsp; (1.5 inch deflection from free)<br />
-                    solid height      =  1.625 inches maximum<br />
-                    ends              =  closed and ground<br />
-                    material          =  oil tempered MB wire,  ASTM A229<br />
+                    material              =  302  stainless<br />
+                    maximum force (solid) = 90.0  pounds<br />
+                    maximum deflection    =  3.0  inches<br />
+                    outside diameter      =  1.00 inch (arbitrary)<br />
+                    design stress (solid) = 90000 psi<br />
                     <br />
-                    Determine wire diameter, stress, and number of active coils.<br />
-                    Select a commonly available wire size.
+                    </p>
+                    
+                    <p>
+                    Select free length, wire diameter and number of coils 
+                    for a compression spring to be fitted with drawbars and 
+                    used in an extension spring application.  
+                    Compression to solid is probable in this application.
                     </p>
                 </React.Fragment>
             )
@@ -76,6 +79,14 @@ export const execute = {
             title: "Page 04 of 13",
             text: (
                 <React.Fragment>
+                    <p>
+                    Because the problem has specified a specific stress level, 
+                    we will treat this as a "design-to-stress" problem.  
+                    You may wish to review the
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/advancedSpringOperations" target="_blank" rel="noopener noreferrer">Design To Stress</a>&nbsp; 
+                    section of the documentation (on-line Help entry) for additional information.
+                    </p>
+                    
                     <p>Next, the demo session will enter everything we know about the problem. </p>
                     
                     <p>This is a good time to take a good look at the existing values.
@@ -93,16 +104,24 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     The demo has now entered what is known about the problem. 
-                    In summary, the changes were:<br />
+                    In summary, the changes were:
                     </p>
-                    FIX  OD_Free  1.00<br />
-                    FIX  L_Free   3.25<br />
-                    FIX  l_2      1.75<br />
-                    FIX  Force_1  0.0<br />
-                    FIX  Force_2  60.0<br />
-                    CHANGE  L_Solid   MAX  1.625<br />
-                    CHANGE  End_Type Closed & Ground<br />
-                    CHANGE  Material_Type OIL_TEMPERED_MB<br />
+                    
+                    <p>
+                    CHANGE Material_Type 302_STAINLESS (sets Density & Torsion Modulus but other properties are specified separately)<br />
+                    CHANGE Prop_Calc_Method 3<br /> 
+                    CHANGE Tensile 193920<br /> 
+                    CHANGE Stress_Lim_Stat 96960<br /> 
+                    FIX Force_2 90.0<br /> 
+                    FIX Force_Solid 90.0<br /> 
+                    FIX L_Stroke 3.0<br /> 
+                    FIX Mean_Dia 1.0<br /> 
+                    FIX Stress_Solid 96960<br /> 
+                    FIX Force_1 0.0<br /> 
+                    Free FS_2<br /> 
+                    Free FS_Solid<br /> 
+                    Free %_Avail_Deflect
+                    </p>
                     <br />
                     <p>
                     The remaining Independent Variable values remain as established by the initialState. 
@@ -110,16 +129,18 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                fixSymbolValue('OD_Free', 1.0),
-                fixSymbolValue('L_Free', 3.25),
-                fixSymbolValue('L_2', 1.75),
-                fixSymbolValue('Force_1', 0.0),
-                fixSymbolValue('Force_2', 60.0),
-                saveOutputSymbolConstraints('L_Solid'),
-                setSymbolFlag('L_Solid', MAX, CONSTRAINED),
-                changeSymbolConstraint('L_Solid', MAX, 1.625),
-                changeSymbolValue("End_Type",4),
-                changeSymbolValue("Material_Type",3)
+                changeSymbolValue("Material_Type",7),
+                changeSymbolValue("Prop_Calc_Method",3),
+                changeSymbolValue("Tensile",193920.0),
+                changeSymbolValue("Stress_Lim_Stat",96960),
+                fixSymbolValue('Force_2', 90.0),
+                fixSymbolValue('Force_Solid', 90.0),
+                fixSymbolValue('L_Stroke', 3.0),
+                fixSymbolValue('Mean_Dia', 1.0),
+                fixSymbolValue('Stress_Solid', 96960.0),
+                saveOutputSymbolConstraints('FS_2'),
+                freeSymbolValue('FS_2'),
+                fixSymbolValue('Force_1', 0.0)
             ]
         },
         {
@@ -176,7 +197,7 @@ export const execute = {
                     
                     <p>
                     Now, in order to conclude this problem,
-                    we want to demonstrate the ODOP SELECT SIZE feature. 
+                    we want to demonstrate the ODOP Select Size feature. 
                     Go to the <b>Action : Select Size...</b> menu item
                     and chose the nearest standard wire diameter.
                     In summary:
@@ -222,8 +243,6 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Note that this design is very close to delivering 1.75 inches
-                    compressed height at 60 pounds force.
                     <br /><br />
                     </p>
                     
@@ -252,15 +271,11 @@ export const execute = {
                     <p>
                     The demo session has now imposed the values:<br />
                     <br />
-                    CHANGE  Wire_Dia  .1205<br />
-                    CHANGE  Coils_T  13
                     </p>
                     <br />
                 </React.Fragment>
             ),
             actions: [
-                changeSymbolValue("Wire_Dia",0.1205),
-                changeSymbolValue("Coils_T", 13),
             ]
         },
         {

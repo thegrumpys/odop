@@ -16,7 +16,8 @@ export function getDemoNames() {
         'demo1',
         'demo2',
         'demo3',
-        'demo5'
+        'demo5',
+        'demo10'
     ];
 //    console.log('In getDemoNames result=',result);
     return result;
