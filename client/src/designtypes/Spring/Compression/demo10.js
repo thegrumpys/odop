@@ -1,6 +1,6 @@
 import React from 'react';
 import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, freeSymbolValue, loadInitialState, setSymbolFlag, resetSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
-import { MAX, CONSTRAINED } from '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
         {
@@ -14,8 +14,8 @@ export const execute = {
                     
                     <p>
                     While this particular problem struggles with ambiguity on 
-                    issues like end type and stress correction factors,
-                    it provides an opportunity to demonstrate how to handle a "design-to-stress" 
+                    details like end type and stress correction factors,
+                    it provides a good opportunity to demonstrate how to handle a "design-to-stress" 
                     approach that is common in traditional manual calculations. 
                     More detail on this point appears later in this session.
                     </p>
@@ -99,18 +99,102 @@ export const execute = {
                     </p>
                     
                     <p>
-                    This is a good time to take a good look at the existing values.
-                    You can scroll the page down to view the complete set of values. 
-                    Scroll back up in order to use the Next button to continue.
+                    Before we start making changes, 
+                    this is a good time for you to review our starting values.
                     </p>
                     
                     <p>
-                    Next, the demo session will enter everything we know about the problem. 
-                    Affected values will update immediately as the demo session enters the changes.                     
+                    At this point we are going to take a side trip into the nitty-gritty
+                    of the Wahl stress correction factors.
+                    The handbook requests a design that provides a specific uncorrected stress level.
+                    ODOP:Spring has the correction factor built in to its calculations. 
+                    So, we need to determine the necessary correction factor 
+                    and then use that to manually adjust the target stress value.
                     </p>
-                    <br /><br />
+                    
+                    <p>
+                    Also, before abandoning the material table, 
+                    we will take a sneak peek at the value of wire tensile strength 
+                    associated with the handbook solution.
+                    This will provide a bit of context in evaluating the handbook design.
+                    </p>
                 </React.Fragment>
             )
+        },
+        {
+            title: "Page 04a of 12",
+            text: (
+                <React.Fragment>
+                    <p>
+                    The following changes have now been imposed by the demo session:
+                    </p>
+
+                    <p>
+                    CHANGE Material_Type 302_STAINLESS &nbsp; <br />
+                    CHANGE OD_Free 1.142<br />
+                    CHANGE Wire_Dia 0.142
+                    </p>
+
+                    <p>
+                    Observe that Report 2 displays a KW1 correction factor of 1.211.
+                    Observe that the material table has the Tensile stress value of 196,938 PSI 
+                    associated with a wire size of 0.142 inch. 
+                    </p>
+                    
+                    <p>
+                    In the process of moving to the next page
+                    this demo session will select a property calculation method that does not utilize the built-in
+                    table of material properties. 
+                    The values of Density, Torsion Modulus and Tensile for 302 Stainless will carry forward 
+                    but other properties will be specified separately. 
+                    Specifically, the stress correction factor adjusted value of allowable stress will be applied. 
+                    In the process, the previous values of OD_Free and Wire_Dia will be restored so that the demo session
+                    is not able to "cheat" and start the solution with the answer already in place. 
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                changeSymbolValue("Material_Type",7),
+                changeSymbolValue("OD_Free",1.142),
+                changeSymbolValue("Wire_Dia",0.142)
+            ]
+        },
+        {
+            title: "Page 04b of 12",
+            text: (
+                <React.Fragment>
+                    <p>
+                    The following changes have now been imposed by the demo session:
+                    </p>
+
+                    <p>
+                    CHANGE Prop_Calc_Method 3<br /> 
+                    CHANGE OD_Free 1.1<br />
+                    CHANGE Wire_Dia 0.1055<br />
+                    CHANGE Stress_Lim_Stat 96880 
+                    </p>
+
+                    <p>
+                    Again, the change to Prop_Calc_Method is the key to our "design-to-stress" approach. 
+                    It is what allows stress limits to be directly specified and not supplied from the materials table. 
+                    The value of 96,880 is the problem-specified 80,000 PSI with 
+                    the previously noted stress correction factor applied. 
+                    </p>
+
+                    <p>
+                    Next, the demo session will enter everything we know about the problem. 
+                    Affected values will update immediately as the demo session enters the changes.                     
+                    &nbsp;
+                    <br />
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                changeSymbolValue("Prop_Calc_Method",3),
+                changeSymbolValue("OD_Free",1.1),
+                changeSymbolValue("Wire_Dia",0.1055),
+                changeSymbolValue("Stress_Lim_Stat",96880)
+            ]
         },
         {
             title: "Page 05 of 12",
@@ -122,46 +206,64 @@ export const execute = {
                     </p>
                     
                     <p>
-                    CHANGE Material_Type 302_STAINLESS &nbsp; (sets Density & Torsion Modulus but other properties are specified separately)<br />
-                    CHANGE Prop_Calc_Method 3 &nbsp; (allows stress limits to be directly specified; not from materials table)<br /> 
-                    CHANGE Stress_Lim_Stat 96960 &nbsp; (80,000 PSI with stress correction applied) <br /> 
-x                    CHANGE Tensile 193920 &nbsp; (figured so that allowable stress is 50%) <br /> 
                     CHANGE  End_Type Closed<br />
                     FIX Force_1 0.0<br /> 
                     FIX Force_2 90.0<br /> 
                     FIX Force_Solid 90.0<br /> 
                     FIX L_Stroke 3.0<br /> 
                     FIX Mean_Dia 1.0<br /> 
-                    FIX Stress_Solid 96960<br /> 
-                    Free FS_2 &nbsp; (as per Design-to-Stress entry in on-line Help) <br /> 
-                    Free FS_Solid<br /> 
-                    Free %_Avail_Deflect
+                    FIX Stress_Solid 96880<br /> 
                     </p>
                     <br />
+                    
                     <p>
-                    The remaining Independent Variable values remain as established by the initialState. 
                     </p>
                 </React.Fragment>
             ),
             actions: [
-                changeSymbolValue("Material_Type",7),
-                changeSymbolValue("Prop_Calc_Method",3),
-//                changeSymbolValue("Tensile",193920.0),
-                changeSymbolValue("Stress_Lim_Stat",96960),
                 changeSymbolValue("End_Type",3),
                 fixSymbolValue('Force_1', 0.0),
                 fixSymbolValue('Force_2', 90.0),
                 fixSymbolValue('Force_Solid', 90.0),
                 fixSymbolValue('L_Stroke', 3.0),
                 fixSymbolValue('Mean_Dia', 1.0),
-                fixSymbolValue('Stress_Solid', 96960.0),
-                saveOutputSymbolConstraints('FS_2'),
-//                resetSymbolFlag('FS_2')
-//                freeSymbolValue('FS_2')
+                fixSymbolValue('Stress_Solid', 96880.0)
             ]
         },
         {
-            title: "Page 06 of 12",
+            title: "Page 06a of 12",
+            text: (
+                <React.Fragment>
+                    <p>
+                    As per the discussion in 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/advancedSpringOperations" target="_blank" rel="noopener noreferrer">Design To Stress</a>&nbsp; 
+                    the demo session has adjusted constraints:
+                    </p>
+
+                    <p>
+                    Free FS_2<br /> 
+                    Free FS_Solid<br /> 
+                    Free %_Avail_Deflect<br />
+                    &nbsp;
+                    <br />
+                    The remaining Independent Variable values remain as established by the initialState. 
+                    </p>
+                    
+                    <p>
+                    Put the discussion of tweakPrefs here.
+                    </p>
+                </React.Fragment>
+            ),
+            actions: [
+                saveOutputSymbolConstraints('FS_2'),
+                resetSymbolFlag('FS_2', MIN, CONSTRAINED),
+                resetSymbolFlag('FS_2', MAX, CONSTRAINED),
+                resetSymbolFlag('FS_Solid', MIN, CONSTRAINED),
+                resetSymbolFlag('%_Avail_Deflect', MAX, CONSTRAINED)
+            ]
+        },
+        {
+            title: "Page 06b of 12",
             text: (
                 <React.Fragment>
                     <p>
@@ -221,7 +323,7 @@ x                    CHANGE Tensile 193920 &nbsp; (figured so that allowable str
                     the demo session will impose the handbook value of Wire_Dia. 
                     In summary:
                     <br /><br />
-                    CHANGE  Wire_Dia 0.142<br />
+                    FIX Wire_Dia 0.142<br />
                     <br />
                     Look for the new value of Wire_Dia on the next page.
                     </p>
@@ -282,7 +384,8 @@ x                    CHANGE Tensile 193920 &nbsp; (figured so that allowable str
                     The handbook results:<br />
                     &nbsp; &nbsp;  wire diameter = 0.142 in.<br />
                     &nbsp; &nbsp;  stress at solid = 80,000  psi &nbsp;  (uncorrected)<br />
-                    &nbsp; &nbsp;  stress at solid = 96,960  psi &nbsp;  (corrected)<br />
+                    &nbsp; &nbsp;  stress correction factor = 1.211  psi &nbsp;  (from Report 2)<br />
+                    &nbsp; &nbsp;  stress at solid = 96,880  psi &nbsp;  (corrected)<br />
                     &nbsp; &nbsp;  number of active coils = 16.95 &nbsp; (rounded to 17)
                     </p>
                     
@@ -295,6 +398,10 @@ x                    CHANGE Tensile 193920 &nbsp; (figured so that allowable str
                     challenges in formulating this demonstration session, 
                     the real objective of demonstrating how ODOP:Spring can handle a "design-to-stess" 
                     problem has been achieved.
+                    </p>
+                    
+                    <p>
+                    Need to comment on relatively high stresses.  Expect short cycle life.
                     </p>
                 </React.Fragment>
             )
