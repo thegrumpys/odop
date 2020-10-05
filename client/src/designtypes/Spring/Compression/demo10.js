@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, freeSymbolValue, loadInitialState, setSymbolFlag, resetSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, resetSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, changeSystemControlsValue, search } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -13,7 +13,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    While this particular problem struggles with ambiguity on 
+                    While this particular problem statement struggles with ambiguity on 
                     details like end type and stress correction factors,
                     it provides a good opportunity to demonstrate how to handle a "design-to-stress" 
                     approach that is common in traditional manual calculations. 
@@ -37,7 +37,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 12",
+            title: "Page 02 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -60,12 +60,13 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 12",
+            title: "Page 03 of 15",
             text: (
                 <React.Fragment>
                     <p>
-                    To briefly restate the problem, our challenge is to 
-                    design a compression spring such that the following specifications are met:<br />
+                    We will start by skipping the sailboat context and briefly restate the problem. 
+                    Our challenge is to design a compression spring such that the following 
+                    specifications are met:<br />
                     <br />
                     material              =  302  stainless<br />
                     maximum force (solid) = 90.0  pounds<br />
@@ -85,10 +86,11 @@ export const execute = {
             )
         },
         {
-            title: "Page 04 of 12",
+            title: "Page 04 of 15",
             text: (
                 <React.Fragment>
                     <p>
+                    This problem statement is a bit unusual in that it has the design load coincide with the solid condition. 
                     Because the problem has specified a specific stress level, 
                     we will treat this as a "design-to-stress" problem.  
                     You may wish to review the
@@ -105,11 +107,11 @@ export const execute = {
                     
                     <p>
                     At this point we are going to take a side trip into the nitty-gritty
-                    of the Wahl stress correction factors.
+                    of the Wahl stress correction factor.
                     The handbook requests a design that provides a specific uncorrected stress level.
                     ODOP:Spring has the correction factor built in to its calculations. 
                     So, we need to determine the necessary correction factor 
-                    and then use that to manually adjust the target stress value.
+                    and then use that to manually adjust the target stress value used by ODOP:Spring.
                     </p>
                     
                     <p>
@@ -122,7 +124,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 04a of 12",
+            title: "Page 05 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -137,19 +139,19 @@ export const execute = {
 
                     <p>
                     Observe that Report 2 displays a KW1 correction factor of 1.211.
-                    Observe that the material table has the Tensile stress value of 196,938 PSI 
+                    Observe that the material table provides a Tensile stress value of 196,938 PSI 
                     associated with a wire size of 0.142 inch. 
                     </p>
                     
                     <p>
-                    In the process of moving to the next page
+                    In the process of moving to the next page, 
                     this demo session will select a property calculation method that does not utilize the built-in
                     table of material properties. 
                     The values of Density, Torsion Modulus and Tensile for 302 Stainless will carry forward 
                     but other properties will be specified separately. 
                     Specifically, the stress correction factor adjusted value of allowable stress will be applied. 
                     In the process, the previous values of OD_Free and Wire_Dia will be restored so that the demo session
-                    is not able to "cheat" and start the solution with the answer already in place. 
+                    is not able to "cheat" and start the solution with the handbook answer already in place. 
                     </p>
                 </React.Fragment>
             ),
@@ -160,7 +162,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 04b of 12",
+            title: "Page 06 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -183,7 +185,7 @@ export const execute = {
 
                     <p>
                     Next, the demo session will enter everything we know about the problem. 
-                    Affected values will update immediately as the demo session enters the changes.                     
+                    As usual, affected values will update immediately as the demo session enters the changes.                     
                     &nbsp;
                     <br />
                     </p>
@@ -197,7 +199,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 05 of 12",
+            title: "Page 07 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -217,6 +219,8 @@ export const execute = {
                     <br />
                     
                     <p>
+                    Once we make a few adjustments to constraints supplied by the initialState starting point
+                    the problem set up will be complete.
                     </p>
                 </React.Fragment>
             ),
@@ -231,7 +235,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 06a of 12",
+            title: "Page 08 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -250,7 +254,9 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Put the discussion of tweakPrefs here.
+                    Separately, in the interest of obtaining a high precision result, 
+                    the demo session has established the same set of search algorithm tuning parameters 
+                    that are described in the <b>Action : Execute : tweakPrefs</b> menu item.
                     </p>
                 </React.Fragment>
             ),
@@ -259,11 +265,12 @@ export const execute = {
                 resetSymbolFlag('FS_2', MIN, CONSTRAINED),
                 resetSymbolFlag('FS_2', MAX, CONSTRAINED),
                 resetSymbolFlag('FS_Solid', MIN, CONSTRAINED),
-                resetSymbolFlag('%_Avail_Deflect', MAX, CONSTRAINED)
+                resetSymbolFlag('%_Avail_Deflect', MAX, CONSTRAINED),
+                changeSystemControlsValue({maxit: 190, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
             ]
         },
         {
-            title: "Page 06b of 12",
+            title: "Page 09 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -281,7 +288,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 07 of 12",
+            title: "Page 10 of 15",
             text: (
                 <React.Fragment>
                     <p>Yes,  A feasible solution is available. Please take a moment to scroll through and view the values.</p>
@@ -305,7 +312,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 08 of 12",
+            title: "Page 11 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -321,7 +328,7 @@ export const execute = {
                     <p>
                     While the difference is quite small, in order to compare with the handbook result, 
                     the demo session will impose the handbook value of Wire_Dia. 
-                    In summary:
+                    Specifically:
                     <br /><br />
                     FIX Wire_Dia 0.142<br />
                     <br />
@@ -331,7 +338,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 09 of 12",
+            title: "Page 12 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -351,7 +358,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 10 of 12",
+            title: "Page 13 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -361,11 +368,11 @@ export const execute = {
                     </p>
                     
                     <p>
-                    <br /><br />
+                    <br />
                     </p>
                     
                     <p>
-                    Next we'll make a detailed comparison with the handbook results.
+                    Next, we'll make a detailed comparison with the handbook results.
                     </p>
                     
                     <p>
@@ -377,7 +384,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 11 of 12",
+            title: "Page 14 of 15",
             text: (
                 <React.Fragment>
                     <p>
@@ -401,13 +408,17 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Need to comment on relatively high stresses.  Expect short cycle life.
+                    Finally, it seems appropriate to comment that this design specifies rather 
+                    high stresses for stainless steel.
+                    Perhaps the problem was originally developed in the context of carbon steel 
+                    and then switched to specify stainless to accomodate the maritime environment.
+                    In any case, expect a short cycle life.
                     </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 12 of 12 (last page)",
+            title: "Page 15 of 15 (last page)",
             text: (
                 <React.Fragment>
                     <p>
