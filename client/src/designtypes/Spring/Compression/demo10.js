@@ -14,7 +14,7 @@ export const execute = {
                     
                     <p>
                     While this particular problem statement struggles with ambiguity on 
-                    details like end type and stress correction factors,
+                    details like end type and stress correction factor,
                     it provides a good opportunity to demonstrate how to handle a "design-to-stress" 
                     approach that is common in traditional manual calculations. 
                     More detail on this point appears later in this session.
@@ -138,7 +138,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    Observe that Report 2 displays a KW1 correction factor of 1.211.
+                    Observe that Report 2 displays a kw1 correction factor of 1.211.
                     Observe that the material table provides a Tensile stress value of 196,938 PSI 
                     associated with a wire size of 0.142 inch. 
                     </p>
@@ -368,14 +368,16 @@ export const execute = {
                     </p>
                     
                     <p>
-                    <br />
+                    </p>
+                    
+                    <p>
+                    The original problem statement did not specify an end type.
+                    It turns out that selecting a different end type may impact free length
+                    but otherwise doesn't impact the final solution.
                     </p>
                     
                     <p>
                     Next, we'll make a detailed comparison with the handbook results.
-                    </p>
-                    
-                    <p>
                     </p>
                 </React.Fragment>
             ),
@@ -391,13 +393,17 @@ export const execute = {
                     The handbook results:<br />
                     &nbsp; &nbsp;  wire diameter = 0.142 in.<br />
                     &nbsp; &nbsp;  stress at solid = 80,000  psi &nbsp;  (uncorrected)<br />
-                    &nbsp; &nbsp;  stress correction factor = 1.211  psi &nbsp;  (from Report 2)<br />
-                    &nbsp; &nbsp;  stress at solid = 96,880  psi &nbsp;  (corrected)<br />
                     &nbsp; &nbsp;  number of active coils = 16.95 &nbsp; (rounded to 17)
                     </p>
                     
                     <p>
-                    The results are in very good agreement.
+                    The ODOP:Spring solution required an adjustment:<br />
+                    &nbsp; &nbsp;  Wahl stress correction factor kw1 = 1.211  psi &nbsp;  (from Report 2)<br />
+                    &nbsp; &nbsp;  stress at solid = 96,880  psi &nbsp;  (corrected)
+                    </p>
+                    
+                    <p>
+                    With the adjustment in place, the results are in very good agreement.
                     </p>
                     
                     <p>
@@ -408,11 +414,12 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Finally, it seems appropriate to comment that this design specifies rather 
-                    high stresses for stainless steel.
-                    Perhaps the problem was originally developed in the context of carbon steel 
-                    and then switched to specify stainless to accomodate the maritime environment.
-                    In any case, expect a short cycle life.
+                    Finally, it seems appropriate to comment that the handbook specifies a stress level 
+                    that seems excessive for stainless steel.
+                    Perhaps the handbook problem was originally developed in the context of carbon steel 
+                    and then later switched to specify stainless to accomodate the background story 
+                    of a maritime environment.
+                    In any case, we should anticipate a short cycle life for this design.
                     </p>
                 </React.Fragment>
             )

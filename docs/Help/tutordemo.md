@@ -60,9 +60,9 @@ tutor9 |   | Preferences (internal variables) and Properties (notes saved with d
  Demonstration examples available (* or planned) include:
 
 Name | Description | &nbsp;  
---- | --- | --- 
+--- | --- | ---  
 demo | Introduction, simple design check (design validation) problem |    
-longdemo | Design a compression spring from original specifications | 
+longdemo | Design a compression spring from original specifications |  
 demo1 | Spring Mfgrs. Inst. Handbook | compression spring example&nbsp;1    
 demo2 | Spring Mfgrs. Inst. Handbook | compression spring example&nbsp;2  
 demo3 | major spring mfgr design handbook | compression spring example  
@@ -72,7 +72,7 @@ demo6 | Spring Mfgrs. Inst. Handbook | extension spring example&nbsp;1
 demo7 | Spring Mfgrs. Inst. Handbook | extension   spring example&nbsp;2  
 demo8 | major spring mfgr design handbook | extension spring example  
 demo9 | Carlson, Spring Designer's Handbook | extension spring problem&nbsp;3  
-demo10 * | Carlson, Spring Designer's Handbook | compression spring problem&nbsp;6  
+demo10 | Carlson, Spring Designer's Handbook | compression spring problem&nbsp;6  
 demo11 * | Carlson, Spring Designer's Handbook | compression spring problem&nbsp;8  
 demo12 * | Carlson, Spring Designer's Handbook | fatigue life comparison  
 demo13 * | Factor of safety and cycle life illustration | &nbsp;   
