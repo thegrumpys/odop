@@ -89,7 +89,7 @@ export const execute = {
                     As usual, we use FIX and constraints to express our objectives for the design.<br />
                     <br />
                     CHANGE  Material_Type  HARD_DRAWN_WIRE<br />
-                    CHANGE  OD_Free MAX  .920 &nbsp; - - - (0.005 margin)<br />
+                    CHANGE  OD_Free MAX  .920 &nbsp; &#60;--- (0.005 margin)<br />
                     CHANGE  L_Solid MAX  1.06<br />
                     <br />
                     FIX  L_Free   1.713<br />

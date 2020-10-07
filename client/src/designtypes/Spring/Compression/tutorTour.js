@@ -22,7 +22,7 @@ export const execute = {
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState
-                    for the ODOP <b>Compression Spring</b> design type.
+                    for the ODOP Compression Spring design type.
                     </p>
                     
                     <p>
@@ -96,8 +96,11 @@ export const execute = {
                     
                     <p>
                     ODOP contains an "on-line" help facility.
-                    It includes an overview of the program, a <b>Getting Started</b> section plus
-                    helpful hints and detailed explanations of major features.  
+                    It includes an overview of the program, a generic
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/gettingStarted" target="_blank" rel="noopener noreferrer">Getting Started</a>&nbsp; 
+                    section, a 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/gettingStartedSpring" target="_blank" rel="noopener noreferrer">spring design oriented Getting Started</a>&nbsp; 
+                    section plus helpful hints and detailed explanations of major features.  
                     </p>
                     
                     <p>
@@ -484,8 +487,9 @@ export const execute = {
                     <p>
                     More tutorial sessions are available. 
                     They have names like tutor3, tutor4, ... etc. 
-                    Refer to the on-line documentation section (Help entry) covering the 
-                    tutorial for a list of the Tutorial and Demo topics.
+                    Refer to the on-line documentation section (Help entry) covering the  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    for a list of topics.
                     </p>
                     
                     <p>If you do not wish to continue with more tutorial sessions or demonstration problems, 

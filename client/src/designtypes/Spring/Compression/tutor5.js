@@ -22,7 +22,7 @@ export const execute = {
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState
-                    for the ODOP <b>Compression Spring</b> design type.
+                    for the ODOP Compression Spring design type.
                     </p>
                     
                     <p>
@@ -51,14 +51,16 @@ export const execute = {
                     </p>
                     
                     <p>
-                    The on-line documentation sections (Help entries) available
-                    under the <b>Spring Design</b> and <b>Compression Spring</b> headings provide a more
-                    detailed definition for each of the Calculation Inputs.  It would make the
-                    tutorial too long (and boring !) to review each quantity here.
+                    The on-line documentation sections (Help entries) titled 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign" target="_blank" rel="noopener noreferrer">Spring Design</a>&nbsp; 
+                    and 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/c_spring" target="_blank" rel="noopener noreferrer">Compression Spring</a>&nbsp; 
+                    provide a more detailed definition for each of the Calculation Inputs.  
+                    It would make the tutorial too long (and boring !) to review each quantity here.
                     However, it is important to make sure that you understand that
                     Stress_Lim_Stat and Stress_Lim_Endur are the allowable
-                    stress limits for static load and endurance respectively.  The factor of
-                    safety numbers are calculated directly from Stress_Lim_Stat and Stress_Lim_Endur.
+                    stress limits for static load and endurance respectively. 
+                    The factor of safety numbers are calculated directly from Stress_Lim_Stat and Stress_Lim_Endur.
                    </p>
                 </React.Fragment>
             ),
@@ -116,8 +118,9 @@ export const execute = {
                     Take a moment to scroll down to the Calculation Inputs section.
                     Locate Material_Type.
                     Click on the downward pointing triangle to drop down the selection list.
-                    The on-line documentation (Help entry) on Spring Materials provides
-                    additional descriptive information on each of the entries in this table.
+                    The on-line documentation (Help entry) on 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/materials" target="_blank" rel="noopener noreferrer">Spring Materials</a>&nbsp; 
+                    provides additional descriptive information on each of the entries in this table.
                     </p>
                     
                     <p>
@@ -198,7 +201,7 @@ export const execute = {
                     <p>
                     Finally, the user may directly establish values of the allowable stresses. 
                     This is accomplished by changing the value of Prop_Calc_Method to
-                    <b>"3-Use Stress_Lim_..."</b>.
+                    <b> "3-Use Stress_Lim_..."</b>.
                     </p>
                     
                     <p>
@@ -238,8 +241,9 @@ export const execute = {
                     <p>
                     Note the "Tapered, Closed & Ground" and "Pig-tail" end types that
                     are common in hot-wound springs.
-                    Refer to the discussion in the on-line documentation (Help entry)
-                    on Compression Spring for information on Add_Coils@Solid and the 
+                    Refer to the discussion in the on-line documentation (Help entry) on 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/c_spring#c_springEndTypes" target="_blank" rel="noopener noreferrer">Compression Spring End Types</a>&nbsp; 
+                    for information on Add_Coils@Solid and the 
                     calculation of solid height for these end types.
                     </p>
                     
@@ -249,7 +253,7 @@ export const execute = {
                     (for example, a spring with extra dead coils or with two different end types)
                     where the designer has provided custom values for Inactive_Coils and
                     Add_Coils@Solid.
-                    Additional information is available in the on-line documentation for
+                    Additional information is available in the same on-line documentation section for
                     the Compression Spring design type.
                     </p>
                 </React.Fragment>
@@ -267,14 +271,16 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Also, look in the on-line documentation section (Help entry) titled Materials. 
+                    Also, look in the on-line documentation section (Help entry) titled  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/materials" target="_blank" rel="noopener noreferrer">Spring Materials</a>.&nbsp; 
                     </p>
                     
                     <p>
                     More tutorial sessions are available. 
                     They have names like tutor3, tutor4, ... etc. 
-                    Refer to the on-line documentation section (Help entry) covering the 
-                    tutorial for a list of the Tutorial and Demo topics.
+                    Refer to the on-line documentation section (Help entry) covering the  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    for a list of topics.
                     </p>
                 </React.Fragment>
             )
