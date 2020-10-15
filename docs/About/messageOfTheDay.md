@@ -8,10 +8,10 @@ With the recent introduction of user account features, browser requirements have
 For details, see: [Requirements](requirements)  
 
 ODOP version 3.5 was released July 5, 2020. 
-Detail on changes is available in GitHub at: 
+Change details are available in GitHub at: 
 [ODOP milestone 3.5](https://github.com/thegrumpys/odop/milestone/33?closed=1). 
-ODOP version 3.6 is on schedule for a planned for release in late October, 2020. 
-Detail on planned changes is available in GitHub at: 
+ODOP version 3.6 is on schedule for a planned release in late October, 2020. 
+Change details are available in GitHub at: 
 [ODOP milestone 3.6](https://github.com/thegrumpys/odop/milestone/36). 
 Opening a spring design saved in a prior version will produce a pop-up message. 
 See: [MIGRATION](../Help/terminology#migration). 
