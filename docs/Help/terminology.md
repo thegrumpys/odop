@@ -70,7 +70,7 @@ Once values are selected for each independent variable,
 the design is completely determined. 
 For independent variables, a FIX operation reduces the computational demand 
 of the numerical search problem.
-See the FIX entry below for more details.
+See the [FIX](terminology#fix) entry below for more details.
 
 ___
 
@@ -82,19 +82,18 @@ The dependent variables are the outputs of the design equations.
 They are the quantities on the left hand side of the equal sign.
 Frequently, dependent variables are measures of the performance of a given
 design and can be thought of as indicating the "state" of the design. 
-A SEARCH operation is required to establish appropriate values of the
+A Search operation is required to establish appropriate values of the
 independent variables to produce the desired value of a FIXed dependent
 variable.  A FIX operation on a dependent variable increases the
 computational demand of the numerical search problem.
-See the FIX entry below for more details.
+See the [FIX](terminology#fix) entry below for more details.
 
 ___
 
 <a id="calcInputs"></a>  
 ___
 
-**CALCULATION INPUTS** &nbsp;  (constants)   
-Referred to as "constants" in earlier versions of the software, 
+**CALCULATION INPUTS** &nbsp;  (previously, "Constants")   
 Calculation Inputs are inputs to the design equations and are adjustable by the
 user, but are not manipulated by the search algorithm or subject to FIX or constraints. 
 Calculation Inputs frequently represent material properties or other 
@@ -111,19 +110,23 @@ problem.  Either dependent or independent variables may be constrained to
 be greater than or less than a simple constant or a functionally
 determined quantity such as a different dependent or independent
 variable or Calculation Input. 
-The section below on "FUNCTION CONSTRAINTS" provides more information on this subject.
+The section below on [FUNCTION CONSTRAINTS](terminology#fdcl) 
+provides more information on this subject.
 
 In order to establish a constraint, it is necessary to check the corresponding
 Minimum or Maximum constraint checkbox and enter a value for the desired 
 constraint level in the corresponding entry field.
 
-If any constraint is violated, a [SEARCH](search) operation is 
+If any constraint is violated, a [Search](search) operation is 
 required to establish appropriate values of the free (not FIXed) 
 Independent Variables to meet the specified constraint levels.
 In order to save time and provide more predictable operation,
 ODOP will stop the search process if it gets very close to a feasible design 
 but still violates one or more constraints by a fraction of a percent. 
 In this case, the design is referred to as "marginally feasible".
+
+[Design Situations](designSituations) provides more insights on how
+constraints are used to properly specify a design problem.
 
 ___
 
@@ -155,7 +158,7 @@ as choices to be selected as constraints are configured in the design type's
 initialState.   
 
 More specific information is available in the On-line Help section covering 
-extension springs.
+[extension spring constraints](DesignTypes/e_spring#e_springConstraints).
 
 ___
 
@@ -215,7 +218,7 @@ formed as a blend of violated constraints, dependent variable FIX
 violations and in the case of the [SEEK](seek) feature, a "merit function" that
 represents the variable under investigation.  The search algorithm works
 to drive the objective function to the lowest value possible.
-For more detail, see the Search entry below.
+For more detail, see the [SEARCH](terminology#search) entry below.
 
 ___
 
@@ -277,7 +280,7 @@ ___
 **SEARCH**    
 The [Search](search) algorithm manipulates the values of independent variables 
 so as to determine a minimum value of the objective function. 
-For more detail, see Objective Function entry above.
+For more detail, see the [OBJECTIVE FUNCTION](terminology#obj) entry above.
 The objective function is constructed such that 
 (within the limits of the physical reality represented by the design equations)
 constraints and dependent variable FIX violations will be minimized in the process.
@@ -311,7 +314,7 @@ The term "migration" refers to the process of upgrading designs created in a pre
 version of the software to the format required by the current version. 
 This process changes the underlying data structures that describe the design. 
 Opening a design saved in a prior version will produce a pop-up message of the form:   
-"Migrated design from version {_previous version number_} to {_current version number_}.   
+"Migrated design from version {_previous version number_} to {_current version number_}".   
 Saving the design will eliminate the message on future open operations.
 Complete detail on the latest changes is available in GitHub.    
 

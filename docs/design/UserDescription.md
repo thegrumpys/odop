@@ -3,9 +3,9 @@
 While admittedly a little late in the game, 
 it is hopefully never too late to articulate a description of an ODOP user.
 
-Mike sees four distinct groups:
+There are at least four distinct groups:
 
- * Evaluators (a.k.a. "tourists")
+ * Evaluators (including "tourists")
  
  * Spring Designers
  
@@ -35,8 +35,8 @@ Spring design users can be further broken down:
  * <b>Customers of Spring manufacturers or spring industry participants</b>   
  
  If private label versions of ODOP:Spring are linked to by the web site of a spring manufacturer or 
- spring industry participant such as a wire manufacturer, machinery manufacturer or test equipment 
- manufacturer, spring end-users may come through this channel.
+ spring industry participant such as a stock spring distributor, wire manufacturer, machinery manufacturer 
+ or test equipment  manufacturer, spring end-users may come through this channel.
  
  * <b>Spring design engineers employed by spring manufacturers</b>   
  
@@ -44,18 +44,18 @@ Spring design users can be further broken down:
  this is not likely to be a large group.
  Specifcally: 
  * UTS ASD is already well entrenched in this group.
-Unless there are clear feature advantages, there will be little desire for this group to 
+Unless there are clear feature advantages, there will be little motivation for this group to 
 learn a different approach to spring design.
  * The UTS ASD software provides many (most?) of the ODOP:Spring key features.
  * On the scale of the cost of the UTS ASD software, this group is not particulary price sensitive.
- * The UTS ASD software supports a much broader range of spring types than ODOP:Spring.
+ * While compression, extension and torsion springs provide most of the demand for spring design,
+ the UTS ASD software supports a broader range of spring types than ODOP:Spring.
  * The UTS ASD software provides features like CAD graphics and CAD data interfaces that are not
  currently provided by ODOP:Spring.
  
  It is possible that ODOP:Spring is better at solving design problems starting from original 
  specifications than UTS ASD. 
- This point should be investigated and potentially emphasized in 
- ODOP documentation and marketing efforts.
+ This point should be investigated and potentially emphasized in  ODOP documentation and marketing efforts.
  Also, while not a major factor, it is quite unlikely that UTS ASD has any equivalent to 
  the ODOP Trade feature.
  

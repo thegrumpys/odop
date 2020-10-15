@@ -37,6 +37,7 @@
 
 
 ## Design
+* [Early Design Decisions](design/EarlyDesignDecisions)
 * [Ideas for a web page menu structure](design/menu)
 * [Ideas regarding the web user-interface for FIX](design/WebUI_for_Fix)
 * [Auto-Search feature and preferences](design/AutoSearch)

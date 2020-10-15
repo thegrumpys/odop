@@ -1,17 +1,20 @@
-**Message-of-the-day** &nbsp; updated September 24, 2020   
+**Message-of-the-day** &nbsp; updated October 15, 2020   
 
 Watch this space for breaking news 
-including impending and recent releases, planned outages, newly discovered issues, work-arounds, etc.  
+including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
 
 To establish a free account, see: [User Accounts](userAccounts). 
 With the recent introduction of user account features, browser requirements have changed. 
 For details, see: [Requirements](requirements)  
 
 ODOP version 3.5 was released July 5, 2020. 
+Detail on changes is available in GitHub at: 
+[ODOP milestone 3.5](https://github.com/thegrumpys/odop/milestone/33?closed=1). 
+ODOP version 3.6 is on schedule for a planned for release in late October, 2020. 
+Detail on planned changes is available in GitHub at: 
+[ODOP milestone 3.6](https://github.com/thegrumpys/odop/milestone/36). 
 Opening a spring design saved in a prior version will produce a pop-up message. 
 See: [MIGRATION](../Help/terminology#migration). 
-Complete detail on the latest changes is available in GitHub at: 
-[ODOP milestone 3.5](https://github.com/thegrumpys/odop/milestone/33?closed=1)
 
 ODOP is experimental software. 
 For details, see: [Experimental Software](experimental)   
