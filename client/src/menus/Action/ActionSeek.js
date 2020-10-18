@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
+import { displayError } from '../../components/ErrorModal';
 
 class ActionSeek extends Component {
 
@@ -17,15 +18,30 @@ class ActionSeek extends Component {
         this.onContextHelp = this.onContextHelp.bind(this);
         this.state = {
             modal: false,
-            name: this.props.symbol_table[0].name, // TODO: A fudge
+            name: undefined, // TODO: A fudge
             minmax: MIN // TODO: A fudge
         };
     }
     
     toggle() {
-        this.setState({
-            modal: !this.state.modal
-        });
+        if(this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            displayError('No free independent variables');
+        } else {
+            var result = this.props.symbol_table.find( // Find free variable matching the current variable name
+                (element) => this.state.name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
+            );
+            if (result === undefined) { // Was matching free variable not found
+                // Set default name to the First free variable. There must be at least one
+                // This duplicates the UI render code algorithm - be careful and make them match!
+                result = this.props.symbol_table.find( // Find first free variable
+                    (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
+                );
+            }
+            this.setState({
+                modal: !this.state.modal,
+                name: result.name,
+            });
+        }
     }
     
     onMinMax(minmax) {

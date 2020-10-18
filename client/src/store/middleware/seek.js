@@ -5,9 +5,6 @@ import { despak } from './despak';
 
 // Seek
 export function seek(store, action) {
-//    if (design.system_controls.ioopt > 5) {
-//        console.log("00 In seek", action);
-//    }
     /***************************************************************************
      * sought - indicates parameter/variable in question; + for DP, - for SV
      * sdir - indicates direction of motion; + for max, - for min
@@ -17,6 +14,9 @@ export function seek(store, action) {
     var M_DEN;
     var M_NUM;
     var design = store.getState(); // Re-access store to get latest element values
+    if (design.system_controls.ioopt > 5) {
+        console.log("00 In seek", action);
+    }
     if (design.system_controls.ioopt > 5) {
         console.log('01 SEEK:    OBJ =', design.result.objective_value);
         if (design.result.objective_value > design.system_controls.objmin && design.symbol_table.reduce((total, element)=>{return ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) && element.lmin&FIXED ? total+1 : total+0}, 0) === 0) {
@@ -30,7 +30,7 @@ export function seek(store, action) {
     }
     var ncode;
     if(design.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-        ncode = 'WARNING, NO FREE INDEPENDENT VARIABLES';
+        ncode = 'NO FREE INDEPENDENT VARIABLES';
         store.dispatch(changeResultTerminationCondition(ncode));
         return;
     }
@@ -129,6 +129,10 @@ export function seek(store, action) {
         ncode = 'SEEK COMPLETED';
         store.dispatch(changeResultTerminationCondition(ncode));
     }
+
+        if (design.system_controls.ioopt > 5) {
+            console.log('14 Merit Function = ', merit(design));  // Merit Function contribution to OBJ may be negative
+        }
     
     function merit(design) {
         var m_funct;
@@ -143,7 +147,7 @@ export function seek(store, action) {
             }
         }
 //        if (design.system_controls.ioopt > 5) {
-//            console.log('14 In merit ', m_funct);
+//            console.log('15 In merit ', m_funct);
 //        }
         return m_funct;
     }
