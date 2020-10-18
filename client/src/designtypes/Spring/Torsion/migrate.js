@@ -45,7 +45,6 @@ export function migrate(design) {
         design.symbol_table.splice(36,1);
         migrated_design.version = '2'; // last thing... set the migrated model version
     case '2':
-        // Current model version
         // console.log('Convert from 2 to 3');
         design.symbol_table[24].tooltip = "Factor of safety to achieve the target cycle life category. See on-line Help.";
         design.symbol_table[25].tooltip = "Rough estimate of the average number of cycles to failure. See on-line Help.";
@@ -53,8 +52,24 @@ export function migrate(design) {
     case '3':
         // Current model version
         // console.log('Convert from 3 to 4');
+        // Add Energy calculation
+        design.symbol_table.splice(27,0,Object.assign({},design.symbol_table[25]));  //  Duplicate Cycle_Life in target position
+        design.symbol_table[27].name = 'Energy'; // Rename it to Energy
+        design.symbol_table[27].value = 0.0; 
+        if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
+            design.symbol_table[27].units = 'N-mm';
+        } else {
+            design.symbol_table[27].units = 'in-lb';
+        }
+        design.symbol_table[27].cmin = 1.0; 
+        design.symbol_table[27].sdlim = 0.0; 
+        design.symbol_table[27].tooltip = "Change in elastic potential energy between 1 and 2";
+        migrated_design.version = '4'; // last thing... set the migrated model version
+    case '4':
+        // Current model version
+        // console.log('Convert from 4 to 5');
         // To be defined - presently do nothing
-        // migrated_design.version = '4'; // last thing... set the migrated model version
+        // migrated_design.version = '5'; // last thing... set the migrated model version
         // displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
         break; // Do not copy this break
     default: // Unknown

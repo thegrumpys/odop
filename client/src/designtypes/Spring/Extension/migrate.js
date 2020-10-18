@@ -66,8 +66,27 @@ export function migrate(design) {
     case '3':
         // Current model version
         // console.log('Convert from 3 to 4');
+        // Add Energy calculation
+        design.symbol_table.splice(34,0,Object.assign({},design.symbol_table[27]));  //  Duplicate Cycle_Life in target position
+        design.symbol_table[34].name = 'Energy'; // Rename it to Energy
+        design.symbol_table[34].value = 0.0; 
+        if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
+            design.symbol_table[34].units = 'N-mm';
+        } else {
+            design.symbol_table[34].units = 'in-lb';
+        }
+        design.symbol_table[34].cmin = 1.0; 
+        design.symbol_table[34].sdlim = 0.0; 
+        design.symbol_table[34].tooltip = "Change in elastic potential energy between 1 and 2";
+        // Make Catalog_Name and Catalog_Number not available for input
+        design.symbol_table[62].input = false;
+        design.symbol_table[63].input = false;
+        migrated_design.version = '4'; // last thing... set the migrated model version
+    case '4':
+        // Current model version
+        // console.log('Convert from 4 to 5');
         // To be defined - presently do nothing
-        // migrated_design.version = '4'; // last thing... set the migrated model version
+        // migrated_design.version = '5'; // last thing... set the migrated model version
         break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');

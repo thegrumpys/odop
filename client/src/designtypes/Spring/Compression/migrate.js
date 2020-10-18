@@ -143,10 +143,28 @@ export function migrate(design) {
         design.symbol_table[26].tooltip = "Rough estimate of the average number of cycles to failure. See on-line Help.";
         migrated_design.version = '7';
     case '7':
-        // Current model version
         // console.log('Convert from 7 to 8');
+        // Add Energy calculation
+        design.symbol_table.splice(28,0,Object.assign({},design.symbol_table[26]));  //  Duplicate Cycle_Life in target position
+        design.symbol_table[28].name = 'Energy'; // Rename it to Energy
+        design.symbol_table[28].value = 0.0; 
+        if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
+            design.symbol_table[28].units = 'N-mm';
+        } else {
+            design.symbol_table[28].units = 'in-lb';
+        }
+        design.symbol_table[28].cmin = 1.0; 
+        design.symbol_table[28].sdlim = 0.0; 
+        design.symbol_table[28].tooltip = "Change in elastic potential energy between 1 and 2";
+        // Make Catalog_Name and Catalog_Number not available for input
+        design.symbol_table[47].input = false;
+        design.symbol_table[48].input = false;
+        migrated_design.version = '8';  // last thing... set the migrated model version
+    case '8':
+        // Current model version
+        // console.log('Convert from 8 to 9');
         // To be defined - presently do nothing
-        // migrated_design.version = '8'; // last thing... set the migrated model version
+        // migrated_design.version = '9'; // last thing... set the migrated model version
         break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');

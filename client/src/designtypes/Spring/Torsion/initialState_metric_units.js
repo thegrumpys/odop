@@ -386,7 +386,7 @@ export const initialState = {
             "cmin": 10000,
             "cmax": 1000000,
             "ioclass": 0,
-            "sdlim": 1000.0,
+            "sdlim": 10000.0,
             "tooltip": "Rough estimate of the average number of cycles to failure. See on-line Help.",
             "type": "equationset",
             "hidden": false
@@ -403,6 +403,21 @@ export const initialState = {
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Force produced at distance of Arm_2",
+            "type": "equationset",
+            "hidden": false
+        },
+        {
+            "input": false,
+            "name": "Energy",
+            "value": 1,
+            "units": "N-mm",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 1,
+            "cmax": 1000000,
+            "ioclass": 0,
+            "sdlim": 0.0,
+            "tooltip": "Change in elastic potential energy between 1 and 2",
             "type": "equationset",
             "hidden": false
         },
@@ -904,7 +919,7 @@ export const initialState = {
     ],
     "name": "initialState",
     "type": "Spring/Torsion",
-    "version": "2",
+    "version": "4",
     "result": {
         "objective_value": 0,
         "termination_condition": "",
