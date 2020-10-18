@@ -182,7 +182,7 @@ export const execute = {
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
                     <p>
                     Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
-                    Simply select (click on) that tab (above the words) to view the report.
+                    Simply select (click on) that tab (above these words) to view the report.
                     The message: 
                     "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
                     is produced any time that the second load uses more
@@ -324,15 +324,23 @@ export const execute = {
             title: "Page 13 of 13 (last page)",
             text: (
                 <React.Fragment>
-                    <p>Several more demo problems are available. 
+                    <p>
+                    Several more demo problems are available. 
                     They are named demo1, demo2, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the  
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
-                    for a list of topics.</p>
+                    for a list of topics.
+                    </p>
                     
-                    <p>If you do not wish to continue with more demonstration problems, 
+                    <p>
+                    If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP:Spring features, menus and reports. 
-                    The Help menu is a good place to start. </p>
+                    The Help menu is a good place to start. 
+                    </p>
+                    
+                    <p>
+                    Select (click on) the <b>Exit</b> button to end this tutorial session.
+                    </p>
                     <br />
                 </React.Fragment>
             )

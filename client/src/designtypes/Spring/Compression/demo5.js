@@ -286,10 +286,13 @@ export const execute = {
             title: "Page 13 of 13 (last page)",
             text: (
                 <React.Fragment>
-                    <p>Several more demo problems are available. 
+                    <p>
+                    Several more demo problems are available. 
                     They are named demo1, demo2, ... etc. 
-                    Refer to the on-line documentation section (Help entry) covering the Tutorial 
-                    for a list of the Tutorial and Demo topics.</p>
+                    Refer to the on-line documentation section (Help entry) covering the  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    for a complete list of additional tutorial and demo topics.
+                    </p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP:Spring features, menus and reports. 

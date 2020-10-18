@@ -16,7 +16,8 @@ export function getDemoNames() {
         'demo1',
         'demo2',
         'demo3',
-        'demo5'
+        'demo5',
+        'demo10'
     ];
 //    console.log('In getDemoNames result=',result);
     return result;
@@ -30,7 +31,10 @@ export function getTutorialNames() {
         'tutor3',
         'tutor4',
         'tutor5',
-        'tutor7'
+        'tutor6',
+        'tutor7',
+        'tutor8',
+        'tutor9'
     ];
 //    console.log('In getTutorialNames result=',result);
     return result;

@@ -46,7 +46,10 @@ export const execute = {
                     Note that the default set of constraint levels imposed in the initialState 
                     are set to allow a broad range of springs to be feasible.
                     More information about the constraints of spring design is provided in the
-                    on-line documentation section (Help entry) titled Spring Design Overview.
+                    on-line documentation sections (Help entries) titled 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/spring_oview" target="_blank" rel="noopener noreferrer">Spring Design Overview</a>&nbsp;
+                    and  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>.&nbsp;
                     </p>
                     
                     <p>
@@ -382,10 +385,12 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    More tutorial and demo problems are available. 
-                    They are named: tutor4, tutor5, demo1, demo2, ... etc. 
-                    Refer to the documentation section (on-line Help entry) covering the Tutorial 
-                    for a list of the Tutorial and Demo topics.</p>
+                    More tutorial sessions and demo problems are available. 
+                    They have names like tutor4, tutor5, demo1, demo2, ... etc. 
+                    Refer to the on-line documentation section (Help entry) covering the  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    for a list of topics.
+                    </p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP:Spring features, menus and reports. 
