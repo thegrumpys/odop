@@ -198,10 +198,8 @@ ___
     FS_SI_Hi        -  factor of safety on upper limit of initial stress
     F1_IT_Margin    -  amount by which Force_1 exceeds Initial_Tension
                     
-<!---
     Energy       -  Change in elastic potential energy between 
                     point 1 and point 2.
--->
 
 &nbsp;
 For additional information: [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
