@@ -5,7 +5,9 @@ import {
     Container,
     Tabs,
     Tab,
-    NavDropdown
+    NavDropdown,
+    OverlayTrigger,
+    Tooltip
 } from 'react-bootstrap';
 import classnames from 'classnames';
 import { deleteAutoSave } from '../store/actionCreators';
@@ -119,8 +121,10 @@ class App extends Component {
         return (
             <React.Fragment>
                 <Navbar variant="light" bg="light" expand="md" fixed="top">
-                    <Navbar.Brand><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
-                    <Navbar.Toggle onClick={this.toggle} />
+                  <OverlayTrigger placement="bottom" overlay={<Tooltip>Reset app. Caution, data loss possible. To recover see Help on AutoSave</Tooltip>}>
+                    <Navbar.Brand href="/"><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
+                  </OverlayTrigger>
+                  <Navbar.Toggle onClick={this.toggle} />
                     <Navbar.Collapse in={this.state.isOpen}>
                         <Nav className="mr-auto">
                             <NavDropdown title="File">
