@@ -78,10 +78,11 @@ are generally more significant than any lack of precision of the solution method
  * ODOP remains a proof of concept. 
 If the existing scaling denominators and objective function construction were retained,
 it would be relative easy to replace the current Pattern Search algorithm with a different
-unconstrained minimization algorithm that does not require analytic gradients (can use calculated gradient).
+unconstrained minimization algorithm that does not require analytic gradients 
+(can use an estimate of the gradient computed as finite differences).
 While it would be difficult and time consuming, 
 if a major market opportunity justifies it,
 it would be possible to replace all of the underlying optimization technology.
-In the mean time, what is there provides an opportunity to discover that 
-major market opportunity.
+In the mean time, the existing implementation provides an infrastructure to discover 
+such a major market opportunity.
 
