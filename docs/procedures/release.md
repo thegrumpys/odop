@@ -39,11 +39,8 @@ and check if any of the client/src/designtypes/.../initialState.js files have ch
 1. If the database does not exist or is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB)
 to create and format the database tables using the create.sql file. 
 Do this to development, test, staging and/or production databases as appropriate.   
-Note: See Heroku Dashboard Resources tab for JAWS DB:   
-Production is prntcdsszgqddxh8
-staging is d9bw76r236auqu3s   
-test is cmyr2m3s55btzgvr   
-local/development is s6v0edrsu4v1u49m   
+See Heroku Dashboard Resources tab for JAWS DB.
+The database names are summarized in [Procedures for creating a new JAWSDB](NewDB).   
 1. Start server and client under your development environment. 
 If they are already started, log off of Okta and re-log into Okta to ensure the session is valid and not at risk of time-out.   
 1. Do a "Load Initial State" followed by a File : SaveAs "Loaded\_Initial\_Startup" to create a non-migrated version of Startup.

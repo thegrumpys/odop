@@ -7,14 +7,15 @@ Separately, most browser users are conditioned to use the browser "Reload" a.k.a
 as a means to recovery from various operational difficulties and anomalies. 
 Unfortunately, 
 using the browser Reload function with a single page web app such as ODOP 
-will likely result in a complete reset of the main page 
-and potential loss of a user's work since the previous Save operation. 
-Similarly, use of the browser "Back" function followed by "Forward" will likely result 
-in reset of the main page.   
+will likely incur a complete reset of the app potentially 
+resulting in loss of work since the previous Save operation. 
+Similarly, use of the browser "Back" function followed by "Forward" or 
+use of the ODOP logo icon at the left of the menu & tab bar
+will  result in reset of the app.   
 
 *Note:*   
 *The on-line Help documentation pages are not subject to the same concerns about 
-browser Reload and browser Back / Forward.*
+browser Reload, browser Back / Forward and the ODOP logo icon.*
 
 In order to at least partially address these issues,
 the ODOP software provides a basic AutoSave feature.

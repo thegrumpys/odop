@@ -129,22 +129,38 @@ It may be desirable to have a tutorial-style "back" capability for each of multi
 operating in different tabs.   
 Security issues ?   
 
+___
+
 <a id="secondgen"></a>
-&nbsp;  
+___
+
 **Second Generation AutoSave Proposal**  
 
-Turn the ODOP icon / logo at the left of the menu & tab bar into an AutoSave / Reset feature.
-Hopefully, it will be possible to create a tool-tip for the icon with wording similar to:
-"AutoSave then reset app".
-Clicking the icon would create or update the AutoSave data and then trigger a browser reload.  
+As of release 3.6, the ODOP icon / logo at the left of the menu & tab bar provides an app Reset function. 
+There is a tool-tip with wording similar to:
+"Reset app. You should save work-in-progress first. See Help AutoSave".  
 
+Proposal:  
+Invoke AutoSave before the app reset triggered by the 
+ODOP icon / logo at the left of the menu & tab bar. 
+Clicking the icon would create or update the AutoSave data and then trigger a browser reload. 
+If implemented, tool-tip wording can change to something similar to:
+"AutoSave then reset app".
+
+Proposal:  
+Expand the list of actions creating or updating AutoSave data to include:
+ - logout
+ - tab switching 
+ - after use of the File : Preferences and Properties menus 
+ - other user actions ? 
+
+For Discussion:  
 Consider changing the philosophy of AutoSave.
 On app startup, rather than providing a "Load AutoSave" button,
-if AutoSave data is available, it should immediately (no prompt) be loaded as the current design. 
-Note ... consider possible unintended side-effects.  
-
-Concurrently with this philosophy change, the list of AutoSave actions should be expanded to include
-logout, tab switching, use of the File : Preferences and Properties menus and perhaps other user actions. 
+if AutoSave data is available, it could immediately (no prompt) be loaded as the current design. 
+Note ... consider possible unintended side-effects. 
+This idea needs proper integration with the changes proposed in issue
+[Pass starting Design Type into ODOP #388](https://github.com/thegrumpys/odop/issues/388). 
 
 
 
