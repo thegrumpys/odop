@@ -121,7 +121,7 @@ class App extends Component {
         return (
             <React.Fragment>
                 <Navbar variant="light" bg="light" expand="md" fixed="top">
-                  <OverlayTrigger placement="bottom" overlay={<Tooltip>Reset app. Caution, data loss possible. To recover see Help on AutoSave</Tooltip>}>
+                  <OverlayTrigger placement="bottom" overlay={<Tooltip>Reset app. Save&nbsp;your&nbsp;work&nbsp;first! See&nbsp;Help&nbsp;AutoSave.</Tooltip>}>
                     <Navbar.Brand href="/"><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
                   </OverlayTrigger>
                   <Navbar.Toggle onClick={this.toggle} />
