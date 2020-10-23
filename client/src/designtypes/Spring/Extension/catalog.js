@@ -9,9 +9,9 @@ import { evaluateConstraintValue } from '../../../store/middleware/evaluateConst
 
 export function getCatalogNames() {
     var result = [
-        'extencat', // Default
-        'catalog_ms_e_s',
-        'catalog_ms_e_ss'
+        'generic_extension_catalog', // Default
+        'MS24586_(SAE-AS24586)_e_stl',
+        'MS24586_(SAE-AS24586)_e_ss'
     ];
 //    console.log('In getCatalogNames result=',result);
     return result;
