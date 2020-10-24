@@ -1,10 +1,16 @@
 import { startExecute } from "../../../components/ExecutePanel";
 export function getExecuteNames() {
-    var result = [
-//        'mkHotWndStartup',
-//        'mkHotWndStartup_Metric',
+    if (process.env.NODE_ENV !== "production") {
+      var result = [
+        'mkHotWndStartup',        // Script to make Hot Wound Startup file from Load Initial State
+        'mkHotWndStartup_Metric', // Script to make Hot Wound Startup Metric file from Load Initial State Metric
         'tweakPrefs'
-    ];
+      ];
+    } else {
+      var result = [
+        'tweakPrefs'
+      ];
+    }
 //    console.log('In getExecuteNames result=',result);
     return result;
 }
