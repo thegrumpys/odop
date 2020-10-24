@@ -58,11 +58,16 @@ export function migrate(design) {
         design.symbol_table[27].name = 'Energy'; // Rename it to Energy
         design.symbol_table[27].value = 0.0; 
         if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
+            design.symbol_table[27].value = 0.0; 
             design.symbol_table[27].units = 'N-mm';
+            design.symbol_table[27].cmin = 1.0; 
+            design.symbol_table[27].cmax = 1000000; 
         } else {
+            design.symbol_table[27].value = 0.0; 
             design.symbol_table[27].units = 'in-lb';
+            design.symbol_table[27].cmin = 1.0; 
+            design.symbol_table[27].cmax = 1000000; 
         }
-        design.symbol_table[27].cmin = 1.0; 
         design.symbol_table[27].sdlim = 0.0; 
         design.symbol_table[27].tooltip = "Change in elastic potential energy between 1 and 2";
         migrated_design.version = '4'; // last thing... set the migrated model version
