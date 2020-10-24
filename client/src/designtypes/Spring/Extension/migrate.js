@@ -66,6 +66,7 @@ export function migrate(design) {
     case '3':
         // Current model version
         // console.log('Convert from 3 to 4');
+        design.symbol_table[27].sdlim = 10000; 
         // Add Energy calculation
         design.symbol_table.splice(34,0,Object.assign({},design.symbol_table[27]));  //  Duplicate Cycle_Life in target position
         design.symbol_table[34].name = 'Energy'; // Rename it to Energy

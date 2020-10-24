@@ -144,6 +144,7 @@ export function migrate(design) {
         migrated_design.version = '7';
     case '7':
         // console.log('Convert from 7 to 8');
+        design.symbol_table[26].sdlim = 10000; 
         // Add Energy calculation
         design.symbol_table.splice(28,0,Object.assign({},design.symbol_table[26]));  //  Duplicate Cycle_Life in target position
         design.symbol_table[28].name = 'Energy'; // Rename it to Energy
