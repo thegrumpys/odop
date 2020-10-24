@@ -22,6 +22,7 @@ export default withAuth(class PromptForDesign extends Component {
         this.onSelectName = this.onSelectName.bind(this);
         this.onOpen = this.onOpen.bind(this);
         this.onLoadInitialState = this.onLoadInitialState.bind(this);
+        this.onLoadInitialStateMetric = this.onLoadInitialStateMetric.bind(this);
         this.onLoadAutoSave = this.onLoadAutoSave.bind(this);
         this.onLogout = this.onLogout.bind(this);
         this.state = {
@@ -156,6 +157,26 @@ export default withAuth(class PromptForDesign extends Component {
         });
     }
 
+    loadInitialStateMetric(type) {
+//      console.log('In PromptForDesign.loadInitialStateMetric type=', type);
+
+      /* eslint-disable no-underscore-dangle */
+      const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+      /* eslint-enable */
+
+      const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
+
+      var { initialState } = require('../designtypes/'+type+'/initialState_metric_units.js'); // Dynamically load initialState
+      var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+      const store = createStore(reducers, state, middleware);
+      store.dispatch(startup());
+      store.dispatch(deleteAutoSave());
+      logUsage('event', 'PromptForDesign', { 'event_label': type + ' load initialState' });
+      this.setState({
+          store: store
+      });
+  }
+
     loadAutoSave() {
 //        console.log('In PromptForDesign.loadAutoSave');
 
@@ -216,6 +237,14 @@ export default withAuth(class PromptForDesign extends Component {
         this.loadInitialState(this.state.type);
     }
 
+    onLoadInitialStateMetric() {
+//      console.log('In PromptForDesign.onLoadInitialStateMetric this.state.type=',this.state.type);
+      this.setState({
+          modal: !this.state.modal
+      });
+      this.loadInitialStateMetric(this.state.type);
+  }
+
     onLogout() {
 //        console.log('In PromptForDesign.onLogout');
         this.setState({
@@ -262,6 +291,7 @@ export default withAuth(class PromptForDesign extends Component {
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.onLogout}>Logout</Button>
                             {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
+                            {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialStateMetric}>Load Initial State Metric</Button>}{' '}
                             {typeof(Storage) !== "undefined" && localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={this.onLoadAutoSave}>Load Auto Save</Button>}{' '}
                             <Button variant="primary" onClick={this.onOpen}>Open</Button>
                         </Modal.Footer>
