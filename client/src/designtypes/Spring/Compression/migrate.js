@@ -148,13 +148,17 @@ export function migrate(design) {
         // Add Energy calculation
         design.symbol_table.splice(28,0,Object.assign({},design.symbol_table[26]));  //  Duplicate Cycle_Life in target position
         design.symbol_table[28].name = 'Energy'; // Rename it to Energy
-        design.symbol_table[28].value = 0.0; 
         if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
+            design.symbol_table[28].value = 0.0; 
             design.symbol_table[28].units = 'N-mm';
+            design.symbol_table[28].cmin = 1.0; 
+            design.symbol_table[28].cmax = 1000000; 
         } else {
+            design.symbol_table[28].value = 0.0; 
             design.symbol_table[28].units = 'in-lb';
+            design.symbol_table[28].cmin = 1.0; 
+            design.symbol_table[28].cmax = 1000000; 
         }
-        design.symbol_table[28].cmin = 1.0; 
         design.symbol_table[28].sdlim = 0.0; 
         design.symbol_table[28].tooltip = "Change in elastic potential energy between 1 and 2";
         // Make Catalog_Name and Catalog_Number not available for input

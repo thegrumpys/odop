@@ -711,7 +711,7 @@ export const initialState = {
             "cmax": 0,
             "ioclass": 0,
             "sdlim": 0.0,
-            "tooltip": "Wire tensile strength (computed as a function of wire diameter when Prop_Calc_Method=1; See Help for details)",
+            "tooltip": "Wire tensile strength (computed as a function of wire diameter when Prop_Calc_Method=1; See on-line Help for details)",
             "type": "calcinput",
             "hidden": false
         },
