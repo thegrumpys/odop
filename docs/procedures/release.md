@@ -152,7 +152,7 @@ heroku maintenance:off -a odop
 1. Confirm that the http://heroku-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version Major.Minor.Patch displays.
 1. **Publish to SpringDesignSoftware.org**. &nbsp; For production only, 
 while positioned in the git/odop directory, push to SpringDesignSoftware.org using the command line:   
-git push production master.   
+git push springdesignsoftware master.   
 Verify no unexpected error messages during build on production.
 1. Confirm that the http://SpringDesignSoftware.org/odop/docs website is operational and that documentation displays.
 
