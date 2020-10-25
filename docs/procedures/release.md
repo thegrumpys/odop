@@ -43,16 +43,22 @@ See Heroku Dashboard Resources tab for JAWS DB.
 The database names are summarized in [Procedures for creating a new JAWSDB](NewDB).   
 1. Start server and client under your development environment. 
 If they are already started, log off of Okta and re-log into Okta to ensure the session is valid and not at risk of time-out.   
-1. Do a "Load Initial State" followed by a File : SaveAs "Loaded\_Initial\_Startup" to create a non-migrated version of Startup.
-1. Migrate the current "Startup" file followed by a File : SaveAs "Startup" to create a migrated version of Startup.
+&nbsp;  
+1. Repeat the following steps (through "Commit these changes") for each design type with an impacted initialState. 
+Process "Startup_Metric" designs for the three spring design types similarly. 
+Do a "Load Initial State" followed by a File : SaveAs "Loaded\_Initial\_Startup" to create a non-migrated version of Startup.
+1. Migrate the current "Startup" file by File : Open "Startup" followed by a File : SaveAs "Startup".
 1. Using MySqlDump, dump both design files into a load.sql file   
 Compare the two load.sql files to verify that initial state and migration operate exactly the same.
-If they don't match then repair them until they do.   
-1. File : Delete "Loaded\_Initial\_Startup".
-1. Migrate all other design files and save them back into themselves using File : Save.
+If they don't match then repair them until they do. 
+It is OK to ignore reordering of .json properties.  
+1. Make "Loaded\_Initial\_Startup" the new "Startup". This should eliminate any re-order issue.
+1. Create designs (example: HotWound, HotWoundMetric) based on initialState from available Execute macros. 
+Migrate all other design files and save them back into themselves using File : Save.
 1. Using MySqlDump, dump the affected design file into a load.sql file.
-1. Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list).
-1. Commit these changes.
+1. Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). 
+Set the user field = NULL.
+1. Commit these changes.  The script to load these changes will be run in a later step (B9?).
 &nbsp;
 1. If there are environment variable changes, update Server's .env and Client's .env with   
    JAWSDB\_URL   
@@ -110,7 +116,7 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
 1. If the database does not exist or is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB)
 to create and format the database tables using the create.sql file.
 Do this for staging and/or production databases as appropriate.   
-Note: See Heroku Dashboard Resources tab for JAWS DB: Production is prntcdsszgqddxh8; staging is d9bw76r236auqu3s, test is cmyr2m3s55btzgvr, and local/development is s6v0edrsu4v1u49m.
+See the above link for the easier-to-read table of database names.  
 1. If the database already exists but no entries exist or must be recreated, then either
    run the configured ./scripts/load_all.sh script
    or
