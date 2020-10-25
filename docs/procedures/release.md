@@ -45,20 +45,20 @@ The database names are summarized in [Procedures for creating a new JAWSDB](NewD
 If they are already started, log off of Okta and re-log into Okta to ensure the session is valid and not at risk of time-out.   
 &nbsp;  
 1. Repeat the following steps (through "Commit these changes") for each design type with an impacted initialState. 
-Process "Startup_Metric" designs for the three spring design types similarly. 
-Do a "Load Initial State" followed by a File : SaveAs "Loaded\_Initial\_Startup" to create a non-migrated version of Startup.
-1. Migrate the current "Startup" file by File : Open "Startup" followed by a File : SaveAs "Startup".
-1. Using MySqlDump, dump both design files into a load.sql file   
+Process "Startup_Metric" designs for the three spring design types similarly.  
+    1. Do a "Load Initial State" followed by a File : SaveAs "Loaded\_Initial\_Startup" to create a non-migrated version of Startup.
+    1. Migrate the current "Startup" file by File : Open "Startup" followed by a File : SaveAs "Startup".
+    1. Using MySqlDump, dump both design files into a load.sql file   
 Compare the two load.sql files to verify that initial state and migration operate exactly the same.
 If they don't match then repair them until they do. 
 It is OK to ignore reordering of .json properties.  
-1. Make "Loaded\_Initial\_Startup" the new "Startup". This should eliminate any re-order issue.
-1. Create designs (example: HotWound, HotWoundMetric) based on initialState from available Execute macros. 
+    1. Make "Loaded\_Initial\_Startup" the new "Startup". This should eliminate the propagation of any property re-ordering.
+    1. Create designs (example: HotWound, HotWoundMetric) based on initialState from available Execute macros. 
 Migrate all other design files and save them back into themselves using File : Save.
-1. Using MySqlDump, dump the affected design file into a load.sql file.
-1. Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). 
+    1. Using MySqlDump, dump the affected design file into a load.sql file.
+    1. Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). 
 Set the user field = NULL.
-1. Commit these changes.  The script to load these changes will be run in a later step (B9?).
+    1. Commit these changes.  The script to load these changes will be run in a later step (B9?).
 &nbsp;
 1. If there are environment variable changes, update Server's .env and Client's .env with   
    JAWSDB\_URL   
