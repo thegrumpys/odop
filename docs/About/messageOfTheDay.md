@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated October 20, 2020   
+**Message-of-the-day** &nbsp; updated October 27, 2020   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -10,7 +10,8 @@ For details, see: [Requirements](requirements)
 ODOP version 3.5 was released July 5, 2020. 
 Change details are available in GitHub at: 
 [ODOP milestone 3.5](https://github.com/thegrumpys/odop/milestone/33?closed=1). 
-ODOP version 3.6 is on schedule for release in late October or perhaps early November, 2020. 
+ODOP version 3.6 is on schedule for release on the weekend of October 31, 2020. 
+The ODOP:Spring app will be unavailable for an hour, perhaps more. 
 Change details are available in GitHub at: 
 [ODOP milestone 3.6](https://github.com/thegrumpys/odop/milestone/36?closed=1). 
 Opening a spring design saved in a prior version will produce a pop-up message. 
