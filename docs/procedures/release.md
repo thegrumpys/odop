@@ -117,15 +117,16 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
 to create and format the database tables using the create.sql file.
 Do this for staging and/or production databases as appropriate.   
 See the above link for the easier-to-read table of database names.  
+1. Back up the production database.  
+   For background on backup provided by JAWSDB see: [Heroku docs](https://devcenter.heroku.com/articles/jawsdb#database-backups)
+1. Check the size of the production database as compared to capacity limits (5Mb for JAWSDB free plan). 
+Use the ./scripts/db_size.sh script.  
+For details, see the first FAQ question at: https://devcenter.heroku.com/articles/jawsdb#faq   
+If appropriate, dump to off-line storage and re-initialize the log_Usage table.
 1. If the database already exists but no entries exist or must be recreated, then either
    run the configured ./scripts/load_all.sh script
    or
    manually run all affected load.sql files to create startup files for each design type in the database.
-1. If the production database contains user generated designs, back it up.
-   See: [Heroku docs](https://devcenter.heroku.com/articles/jawsdb#database-backups)
-1. Check the size of the production database as compared to capacity limits (5Mb for JAWSDB free plan). 
-To find the size of a JAWS DB database go to the first FAQ question at: https://devcenter.heroku.com/articles/jawsdb#faq   
-If appropriate, dump to off-line storage and re-initialize the log_Usage table.
 1. Delete any old, invalid or development-only designs if necessary.
 &nbsp;
 1. Do a pull or push as required to get latest version on all systems.
