@@ -38,8 +38,10 @@ export const execute = {
                     
                     <p>
                     Where the other tutorial and demo sessions start by imposing a known
-                    starting design or initial state, 
+                    starting design (a.k.a. initialState), 
                     this session allows the previously existing design to be carried forward.
+                    While you can use either U.S. customary or metric units in this session,
+                    currently available spring catalogs use U.S. units. 
                     It is helpful if the design brought into this session 
                     is a plausible spring so as to provide a reasonable starting point 
                     for the operations to come later. 
@@ -111,9 +113,13 @@ export const execute = {
                                 to select a non-standard wire size.
                                 </p>
                                 <p>
+                                Search for a solution that meets requirements. Use the Action : Search menu.
+                                </p>
+                                <p>
                                 If a feasible solution is not available, exit.
-                                Consider the posibility that the design is over-specified.
-                                Additional information is available in on-line Help topics.
+                                Consider the posibility that the design is over-specified. 
+                                See: 
+                                <a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer"> Design situations: under-specified, properly specified, over-specified </a>
                                 </p>
                             </td>
                         </tr>
@@ -139,7 +145,12 @@ export const execute = {
                                 Another search is required to adjust other variables to compensate for the change in wire diameter.
                                 </p>
                                 <p>
-                                Select the nearest entry from a built-in catalog of stock springs.  Confirm if requirements are met.
+                                A feasible result is a custom design that meets problem specifications. 
+                                It may be possible to find a catalog spring that meets requirements at lower cost. 
+                                </p>
+                                <p>
+                                Use the Action : Select Catalog menu to find the nearest entry from a built-in catalog of stock springs. 
+                                Confirm if requirements are met.
                                 </p>
                             </td>
                         </tr>
@@ -272,16 +283,15 @@ export const execute = {
                     it is likely necessary to accept compromise and adjust the goals for the design 
                     as expressed in terms of Fixes and constraint levels. 
                     This can be done manually. 
-                    Also, the Trade feature can be used to gain a better understanding of exactly how much your 
+                    Also, the 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">Trade feature</a>&nbsp; 
+                    can be used to gain a better understanding of exactly how much your 
                     constraints need to be adjusted in order to find the "nearest" feasible design. 
-                    The 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">on-line Help for Trade</a>&nbsp; 
-                    provides a more detailed description and instruction on its use.
                     </p>
                     
                     <p>
                     If the "Feasibility:" result of the search is "FEASIBLE" or "MARGINALLY FEASIBLE", 
-                    then the Seek feature may be able to provide an optimized result. 
+                    then the Seek feature can be used to provide an optimized result. 
                     </p>
                     
                     <p>
@@ -305,8 +315,9 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    While the Seek feature can find the constrained extreme of any independent or dependent variable 
-                    that is not in Fixed status, for compression springs, the most likely candidates are: 
+                    The Seek feature can find the constrained extreme of any independent or dependent variable 
+                    that is not in Fixed status. 
+                    For compression springs, the most likely candidates are: 
                     min Weight, max Cycle_Life, min OD_Free, min L_Solid (solid height), min Rate and max Stroke.
                     </p>
                     
@@ -480,17 +491,22 @@ export const execute = {
                     <Table bordered size="sm">
                     <tbody>
                         <tr>
-                            <td> &nbsp; </td><td>catalog</td><td>a generic catalog of commonly available springs</td>
+                            <td> &nbsp; </td><td>generic_compression_catalog</td><td>a generic catalog of commonly available compression springs</td>
                         </tr>
                         <tr>
-                            <td></td><td>catalog_ms_c_s</td><td>MS24585 Spring, Helical, Compression: For Loads Below 20 Pounds (SAE-AS24585); steel</td>
+                            <td></td><td>MS24585_(SAE-AS24585)_c_stl</td><td>MS24585 Spring, Helical, Compression: For Loads Below 20 Pounds (SAE-AS24585); steel</td>
                         </tr>
                         <tr>
-                            <td></td><td>catalog_ms_c_ss</td><td>MS24585 Spring, Helical, Compression: For Loads Below 20 Pounds (SAE-AS24585); stainless steel</td>
+                            <td></td><td>MS24585_(SAE-AS24585)_c_ss</td><td>MS24585 Spring, Helical, Compression: For Loads Below 20 Pounds (SAE-AS24585); stainless steel</td>
                         </tr>
                     </tbody>
                     </Table>
                     
+                    <p>
+                    Similar catalogs are available for extension springs. 
+                    Currently available spring catalogs use U.S. units. 
+                    </p>
+
                     <p>
                     If necessary, 
                     use the File : Open... menu to: 
