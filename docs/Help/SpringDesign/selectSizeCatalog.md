@@ -31,14 +31,17 @@
 *  MS24585 Spring, Helical, Compression:  For Loads Below 20 Pounds &nbsp; (SAE-AS24585)   
 *  MS24586 Spring, Helical, Extension: &nbsp; For Loads Below 20 Pounds &nbsp; (SAE-AS24586)   
 
- The individual catalogs are named:   
-*  generic\_compression_catalog &nbsp; - &nbsp; compression spring catalog
-*  MS24585\_(SAE-AS24585)\_c\_stl -  Military Standard, Compression, Steel
-*  MS24585\_(SAE-AS24585)\_c\_ss&nbsp; - Military Standard, Compression, Stainless Steel
-*  generic\_extension_catalog &nbsp; - &nbsp; extension spring catalog
-*  MS24586\_(SAE-AS24586)\_e\_stl - Military Standard, Extension, Steel
-*  MS24586\_(SAE-AS24586)\_e\_ss&nbsp; - Military Standard, Extension,   Stainless Steel
-
+ The individual catalogs are:   
+ 
+ Name | &nbsp; | Description
+--- | --- | ---
+generic\_compression\_catalog  | &nbsp; | compression spring catalog 
+MS24585\_(SAE-AS24585)\_c\_stl | &nbsp; | Military Standard, Compression, Steel 
+MS24585\_(SAE-AS24585)\_c\_ss  | &nbsp; | Military Standard, Compression, Stainless Steel 
+generic\_extension\_catalog    | &nbsp; | extension spring catalog 
+MS24586\_(SAE-AS24586)\_e\_stl | &nbsp; | Military Standard, Extension, Steel 
+MS24586\_(SAE-AS24586)\_e\_ss  | &nbsp; | Military Standard, Extension, Stainless Steel 
+ 
 &nbsp;
 
  Note that it may be desirable to save (**File : Save** or **File : Save As**) the current
