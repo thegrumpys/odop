@@ -105,9 +105,13 @@ class FileOpen extends Component {
 //            console.log('In FileOpen.getDesign design=', design);
             var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
             var migrated_design = migrate(design);
-            this.props.load(migrated_design)
-            this.props.deleteAutoSave();
-            logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
+            if (migrated_design.model === "ODOP") {
+                this.props.load(migrated_design)
+                this.props.deleteAutoSave();
+                logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
+            } else {
+                displayError('Invalid model type, function ignored');
+            }
         })
         .catch(error => {
             displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');

@@ -123,13 +123,17 @@ export default withAuth(class PromptForDesign extends Component {
 //                console.log('In PromptForDesign.getDesign design=', design);
             var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
             var migrated_design = migrate(design);
-            const store = createStore(reducers, migrated_design, middleware);
-            store.dispatch(startup());
-            store.dispatch(deleteAutoSave());
-            logUsage('event', 'PromptForDesign', { 'event_label': type + ' ' + name });
-            this.setState({
-                store: store
-            });
+            if (migrated_design.model === "ODOP") {
+                const store = createStore(reducers, migrated_design, middleware);
+                store.dispatch(startup());
+                store.dispatch(deleteAutoSave());
+                logUsage('event', 'PromptForDesign', { 'event_label': type + ' ' + name });
+                this.setState({
+                    store: store
+                });
+            } else {
+                displayError('Invalid model type, function ignored');
+            }
         })
         .catch(error => {
             displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');

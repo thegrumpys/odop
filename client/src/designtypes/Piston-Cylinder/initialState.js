@@ -100,10 +100,12 @@ export const initialState = {
     ],
     "name": "initialState",
     "type": "Piston-Cylinder",
-    "version": "3",
+    "version": "4",
     "result": {
         "objective_value": 0,
         "termination_condition": "",
         "violated_constraint_count": 0
-    }
+    },
+    "model": "ODOP",
+    "units": "US"
 };

@@ -192,10 +192,12 @@ export const initialState = {
     ],
     "name": "initialState",
     "type": "Solid",
-    "version": "5",
+    "version": "6",
     "result": {
         "objective_value": 0,
         "termination_condition": "",
         "violated_constraint_count": 0
-    }
+    },
+    "model": "ODOP",
+    "units": "US"
 };

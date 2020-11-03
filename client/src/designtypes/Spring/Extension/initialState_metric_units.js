@@ -1089,10 +1089,12 @@ export const initialState = {
     ],
     "name": "initialState",
     "type": "Spring/Extension",
-    "version": "4",
+    "version": "5",
     "result": {
         "objective_value": 0,
         "termination_condition": "",
         "violated_constraint_count": 0
-    }
+    },
+    "model": "ODOP",
+    "units": "Metric"
 };

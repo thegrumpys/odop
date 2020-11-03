@@ -167,9 +167,20 @@ export function migrate(design) {
         migrated_design.version = '8';  // last thing... set the migrated model version
     case '8':
         // Current model version
-        // console.log('Convert from 8 to 9');
+        console.log('Convert from 8 to 9');
+        design['model'] = "ODOP"; // Add in model type
+        if (design.symbol_table[0].units === "inches") { // Add in units type
+            design['units'] = "US";
+        } else {
+            design['units'] = "Metric";
+        }
+        migrated_design.version = '9'; // last thing... set the migrated model version
+    case '9':
+        // Current model version
+        // console.log('Convert from 9 to 10');
         // To be defined - presently do nothing
-        // migrated_design.version = '9'; // last thing... set the migrated model version
+        // migrated_design.version = '10'; // last thing... set the migrated model version
+
         break; // Do not copy this break
     default: // Unknown
         displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
