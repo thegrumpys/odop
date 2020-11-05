@@ -8,7 +8,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "coverage": "react-scripts test --env=jsdom --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.3",
     "redux": "^4.0.5",
+    "source-map-explorer": "^2.5.0",
     "typescript": "^3.8.3"
   },
   "proxy": "http://localhost:5000",
