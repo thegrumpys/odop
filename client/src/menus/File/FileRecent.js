@@ -21,7 +21,7 @@ class FileRecent extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavDropdown.Item onClick={this.toggle} disabled>
+                <NavDropdown.Item onClick={this.toggle} onHide={this.toggle} disabled>
                     Recent
                 </NavDropdown.Item>
                 <Modal show={this.state.modal} className={this.props.className}>
