@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Modal } from 'react-bootstrap';
 import OktaSignIn from '@okta/okta-signin-widget/dist/js/okta-sign-in.min'
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import config from '../config';
@@ -7,7 +8,7 @@ export default class FELogin extends Component {
   constructor(props) {
     super(props);
 //    console.log("In FELogin.constructor props=",props);
-
+    this.onHide = this.onHide.bind(this);
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //    console.log("config=",config);
 //    console.log("config.oidc=",config.oidc);
@@ -81,8 +82,11 @@ export default class FELogin extends Component {
           ]
         }
 
-      });
-    }
+    });
+    this.state = {
+      modal: true
+    };
+  }
 
   componentDidMount() {
 //    console.log('In FELogin.componentDidMount this.signIn=',this.signIn);
@@ -106,13 +110,20 @@ export default class FELogin extends Component {
   componentWillUnmount() {
 //      console.log('In FELogin.componentWillUnmount this.signIn=',this.signIn);
   }
+  
+  onHide() {
+//      console.log('In FELogin.onHide');
+      this.setState({
+          modal: !this.state.modal,
+      });
+  }
 
   render() {
 //    console.log('In FELogin.render');
     return (
-      <div>
-        <div id="sign-in-widget" />
-      </div>
+        <Modal show={this.state.modal} className={this.props.className} onHide={this.onHide}>
+            <div id="sign-in-widget" />
+        </Modal>
     );
   }
 }

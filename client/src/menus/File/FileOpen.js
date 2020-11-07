@@ -25,7 +25,7 @@ class FileOpen extends Component {
             type: this.props.type,
             name: this.props.name,
             authenticated: null,
-            uid: null,
+            user: this.props.user,
         };
     }
 
@@ -39,25 +39,27 @@ class FileOpen extends Component {
                 var user = await this.props.auth.getUser();
 //                console.log('In FileOpen.componentDidMount user=',user);
                 this.setState({
-                    uid: user.sub,
+                    user: user.sub,
                 });
             } else { // We have become unauthenticated
                 this.setState({
-                    uid: null,
+                    user: null,
                 });
             }
         }
     }
 
     componentDidUpdate(prevProps) {
-//      console.log('In FileOpen.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-      if (prevProps.type !== this.props.type) {
+//      console.log('In FileOpen.componentDidUpdate');
+      if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
+//          console.log('In FileOpen.componentDidUpdate prevProps.user=',prevProps.user,'props.user=',this.props.user,'prevProps.type=',prevProps.type,'props.type=',this.props.type);
           this.setState({ 
-              type: this.props.type
+              user: this.props.user,
+              type: this.props.type,
           });
           this.getDesignNames(this.props.type);
       }
-  }
+    }
 
     getDesignNames(type) {
 //        console.log('In FileOpen.getDesignNames type=', type);
@@ -65,7 +67,7 @@ class FileOpen extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.uid
+                Authorization: 'Bearer ' + this.state.user
             }
         })
         .then(res => {
@@ -91,7 +93,7 @@ class FileOpen extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
             headers: {
-                Authorization: 'Bearer ' + this.state.uid
+                Authorization: 'Bearer ' + this.state.user
             }
         })
         .then(res => {
@@ -198,6 +200,7 @@ class FileOpen extends Component {
 }
 
 const mapStateToProps = state => ({
+    user: state.user,
     type: state.type,
     name: state.name,
 });

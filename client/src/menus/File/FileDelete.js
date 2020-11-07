@@ -24,7 +24,7 @@ class FileDelete extends Component {
             type: this.props.type,
             name: '',
             authenticated: null,
-            uid: null,
+            user: this.props.user,
         };
     }
 
@@ -38,21 +38,23 @@ class FileDelete extends Component {
                 var user = await this.props.auth.getUser();
 //                console.log('In FileDelete.componentDidMount user=',user);
                 this.setState({
-                    uid: user.sub,
+                    user: user.sub,
                 });
             } else { // We have become unauthenticated
                 this.setState({
-                    uid: null,
+                    user: null,
                 });
             }
         }
     }
 
     componentDidUpdate(prevProps) {
-//      console.log('In FileDelete.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-      if (prevProps.type !== this.props.type) {
+//      console.log('In FileDelete.componentDidUpdate');
+      if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
+//          console.log('In FileDelete.componentDidUpdate prevProps.user=',prevProps.user,'props.user=',this.props.user,'prevProps.type=',prevProps.type,'props.type=',this.props.type);
           this.setState({ 
-              type: this.props.type
+              user: this.props.user,
+              type: this.props.type,
           });
           this.getDesignNames(this.props.type);
       }
@@ -64,7 +66,7 @@ class FileDelete extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.uid
+                Authorization: 'Bearer ' + this.state.user
             }
         })
         .then(res => {
@@ -99,7 +101,7 @@ class FileDelete extends Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + this.state.uid
+                Authorization: 'Bearer ' + this.state.user
             },
         })
         .then(res => {
@@ -199,8 +201,9 @@ class FileDelete extends Component {
 }
 
 const mapStateToProps = state => ({
-    name: state.name, 
+    user: state.user, 
     type: state.type, 
+    name: state.name, 
 });
 
 export default withAuth(

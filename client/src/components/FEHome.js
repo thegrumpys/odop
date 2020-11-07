@@ -1,73 +1,109 @@
 import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
-import { withAuth } from '@okta/okta-react';
-import FELogin from './FELogin';
-import PromptForDesign from './PromptForDesign';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux'
+import { initialSystemControls } from '../initialSystemControls';
+import App from './App';
+import { startup, deleteAutoSave } from '../store/actionCreators';
+import { displaySpinner } from './Spinner';
+import { displayError } from './ErrorModal';
+import { reducers } from '../store/reducers';
+import { dispatcher } from '../store/middleware/dispatcher';
+import { logUsage } from '../logUsage';
 import config from '../config';
 
-export default withAuth(class FEHome extends Component {
+class FEHome extends Component {
   constructor(props) {
     super(props);
-//    console.log("In FEHome.constructor props=",props);
-    this.checkAuthentication = this.checkAuthentication.bind(this);
-    this.checkAuthentication();
-//    console.log("In FEHome.constructor config.session.refresh=",config.session.refresh);
+//    console.log('In FEHome.constructor props=',props);
+//    console.log('In FEHome.constructor config.session.refresh=',config.session.refresh);
     this.state = { 
-        authenticated: false,
-        session_refresh: config.session.refresh
+        type: config.design.type,
+        name: config.design.name,
+        session_refresh: config.session.refresh,
+        store: null,
     };
     this.interval = null;
 //    console.log('In FEHome.constructor 1 this.interval=',this.interval);
   }
-
-  async checkAuthentication() {
-//    console.log("In FEHome.checkAuthentication this.props.auth=",this.props.auth);
-    var authenticated = await this.props.auth.isAuthenticated();
-//    console.log("In FEHome.checkAuthentication before authenticated=",authenticated);
-    if (authenticated !== this.state.authenticated) { // Did authentication change?
-      this.setState({ authenticated }); // Remember our current authentication state
-      if (authenticated) { // We have become authenticated
-          this.interval = setInterval(() => {
-              this.props.auth._oktaAuth.session.refresh()
-              .then(function(session) {
-                  // logged in
-//                  console.log('In FEHome.checkAuthentication before session=',session);
-              })
-              .catch(function(err) {
-                  // not logged in
-//                  console.log('In FEHome.checkAuthentication before err=',err);
-              });
-          }, this.state.session_refresh * 1000);
-//          console.log('In FEHome.checkAuthentication 2 this.interval=',this.interval);
-      } else { // We have become unauthenticated
-//          console.log('In FEHome.checkAuthentication 3 this.interval=',this.interval);
-          clearInterval(this.interval);
-      }
-    }
+  
+  componentDidMount() {
+//      console.log('In FEHome.componentDidMount');
+    this.getDesign(this.state.type, this.state.name);
+//      this.loadInitialState(this.state.type)
   }
 
-  async componentDidUpdate() {
-//    console.log("In FEHome.componentDidUpdate this.props.auth=", this.props.auth);
-    this.checkAuthentication();
+  getDesign(type,name) {
+//    console.log('In FEHome.getDesign type=', type, ' name=', name);
+
+    /* eslint-disable no-underscore-dangle */
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    /* eslint-enable */
+
+    const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
+
+    displaySpinner(true);
+    fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
+            headers: {
+                Authorization: 'Bearer ' + null // User null for system read-only files
+            }
+        })
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+                throw Error(res.statusText);
+            }
+            return res.json()
+        })
+        .then(design => {
+//            console.log('In FEHome.getDesigns design=', design);
+            var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
+            var migrated_design = migrate(design);
+            const store = createStore(reducers, migrated_design, middleware);
+            store.dispatch(startup());
+            store.dispatch(deleteAutoSave());
+            logUsage('event', 'FEHome', { 'event_label': type + ' ' + name });
+            this.setState({
+                store: store
+            });
+        })
+        .catch(error => {
+            displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
+            this.loadInitialState(type);
+        });
+  }
+
+  loadInitialState(type) {
+//    console.log('In FEHome.loadInitialState type=', type);
+
+    /* eslint-disable no-underscore-dangle */
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    /* eslint-enable */
+
+    const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
+
+    var { initialState } = require('../designtypes/'+type+'/initialState.js'); // Dynamically load initialState
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(reducers, state, middleware);
+    store.dispatch(startup());
+    store.dispatch(deleteAutoSave());
+    logUsage('event', 'FEHome', { 'event_label': type + ' load initialState' });
+    this.setState({
+        store: store
+    });
   }
 
   render() {
 //    console.log('In FEHome.render');
-    if (this.state.authenticated === null) {
-//        console.log("In FEHome.render this.state.authenticated=",this.state.authenticated);
-        return null;
-    }
-
-    if (this.state.authenticated) {
-//        console.log("In FEHome.render PromptForDesign");
+    if (this.state.store !== null) {
+//        console.log('In FEHome.render Provider & App');
         return (
-          <div><PromptForDesign /></div>
-        );
-    } else {
-//        console.log("In FEHome.render FELogin");
-        return (
-          <div><FELogin /></div>
+            <Provider store={this.state.store}><App store={this.state.store} /></Provider>
         );
     }
+//    console.log('In FEHome.render null');
+    return null;
   }
-});
+}
+
+export default FEHome;
