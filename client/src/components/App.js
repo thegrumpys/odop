@@ -121,7 +121,7 @@ class App extends Component {
         return (
             <React.Fragment>
                 <Navbar variant="light" bg="light" expand="md" fixed="top">
-                  <OverlayTrigger placement="bottom" overlay={<Tooltip>Reset app. Save&nbsp;your&nbsp;work&nbsp;first! See&nbsp;Help&nbsp;AutoSave.</Tooltip>}>
+                  <OverlayTrigger placement="bottom" overlay={<Tooltip>Reset app.<br/>Save your work first!<br/>See Help AutoSave.</Tooltip>}>
                     <Navbar.Brand href="/"><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
                   </OverlayTrigger>
                   <Navbar.Toggle onClick={this.toggle} />
@@ -176,7 +176,10 @@ class App extends Component {
                         <Nav>
                             <Nav.Item>
                                 <Nav.Link className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.setKey("1"); }}>
-                                    <span className="d-none d-md-inline">Design: </span><img className="d-none d-md-inline" src={src} alt={alt} height="30px"/> {this.props.name}
+                                    <span className="d-none d-md-inline">Design: </span>
+                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}</Tooltip>}>
+                                        <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
+                                    </OverlayTrigger>
                                 </Nav.Link>
                             </Nav.Item>
                             {this.state.report_names.map((element,i) => {return (
