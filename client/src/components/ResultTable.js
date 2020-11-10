@@ -68,10 +68,10 @@ class ResultTable extends Component {
 }
 
 const mapStateToProps = state => ({
-    system_controls: state.system_controls,
-    objective_value: state.result.objective_value,
-    termination_condition: state.result.termination_condition,
-    violated_constraint_count: state.result.violated_constraint_count
+    system_controls: state.model.system_controls,
+    objective_value: state.model.result.objective_value,
+    termination_condition: state.model.result.termination_condition,
+    violated_constraint_count: state.model.result.violated_constraint_count
 });
 
 export default connect(mapStateToProps)(ResultTable);

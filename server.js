@@ -139,14 +139,10 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
             console.log('SERVER: 404 - NOT FOUND');
         } else {
 //            console.log('SERVER: After SELECT rows[0]=', rows[0]);
-            user = rows[0].user; // Get user from the JSON blob
             type = rows[0].type; // Get type from the JSON blob
-            name = rows[0].name; // Get name from the JSON blob
 //            console.log('SERVER: After SELECT user=', user, ' name=', name, ' type=', type);
             value = JSON.parse(rows[0].value); // Get value from the JSON blob
-            value.user = user; // Insert user into blob
             value.type = type; // Insert type into blob
-            value.name = name; // Insert name into blob
 //            console.log('SERVER: After SELECT value=', value);
             res.status(200).json(value);
             connection.end();
@@ -159,17 +155,15 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
 app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var value;
     var user = req.uid;
-    var type = req.params['type'];
+    var type = req.body.type;
     var name = req.params['name'];
     console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
 //    console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
-    if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
+    if (req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
     } else {
-        delete req.body.user; // Do not save the user in the blob
         delete req.body.type; // Do not save the type in the blob
-        delete req.body.name; // Do not save the name in the blob
         value = JSON.stringify(req.body); // Convert blob to string
         var connection = startConnection();
         var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
@@ -221,17 +215,15 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
 app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var value;
     var user = req.uid;
-    var type = req.params['type'];
+    var type = req.body.type;
     var name = req.params['name'];
     console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name);
 //    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name+' user=',user,' req.body=',req.body);
-    if (req.body === undefined || req.body.length === 0 || req.body.name === undefined) {
+    if (req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
     } else {
-        delete req.body.user; // Do not save the user in the blob
         delete req.body.type; // Do not save the type in the blob
-        delete req.body.name; // Do not save the name in the blob
         value = JSON.stringify(req.body); // Convert blob to string
         var connection = startConnection();
         var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';

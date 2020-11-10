@@ -199,8 +199,8 @@ class FileDelete extends Component {
 }
 
 const mapStateToProps = state => ({
-    name: state.name, 
-    type: state.type, 
+    name: state.model.name, 
+    type: state.model.type, 
 });
 
 export default withAuth(
