@@ -109,7 +109,7 @@ class HelpTutorial extends Component {
 }  
 
 const mapStateToProps = state => ({
-    type: state.type,
+    type: state.model.type,
 });
 
 export default connect(mapStateToProps)(HelpTutorial);

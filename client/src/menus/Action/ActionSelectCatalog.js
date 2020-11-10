@@ -178,9 +178,9 @@ ActionSelectCatalog.contextTypes = {
 };
 
 const mapStateToProps = state => ({
-    type: state.type,
-    symbol_table: state.symbol_table,
-    system_controls: state.system_controls
+    type: state.model.type,
+    symbol_table: state.model.symbol_table,
+    system_controls: state.model.system_controls
 });
 
 const mapDispatchToProps = {

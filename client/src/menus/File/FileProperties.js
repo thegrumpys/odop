@@ -115,8 +115,8 @@ class FileProperties extends Component {
 }  
 
 const mapStateToProps = state => ({
-    type: state.type,
-    labels: state.labels
+    type: state.model.type,
+    labels: state.model.labels
 });
 
 const mapDispatchToProps = {

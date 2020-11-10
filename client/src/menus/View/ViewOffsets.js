@@ -61,9 +61,9 @@ class ViewOffsets extends Component {
 }  
 
 const mapStateToProps = state => ({
-    symbol_table: state.symbol_table,
-    system_controls: state.system_controls,
-    labels: state.labels
+    symbol_table: state.model.symbol_table,
+    system_controls: state.model.system_controls,
+    labels: state.model.labels
 });
 
 export default connect(mapStateToProps)(ViewOffsets);
