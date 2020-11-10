@@ -64,8 +64,8 @@ export class ConstraintsMaxTable extends Component {
 }
 
 const mapStateToProps = state => ({
-    symbol_table: state.symbol_table,
-    system_controls: state.system_controls
+    symbol_table: state.model.symbol_table,
+    system_controls: state.model.system_controls
 });
 
 export default connect(mapStateToProps)(ConstraintsMaxTable);

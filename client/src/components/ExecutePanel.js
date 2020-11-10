@@ -6,11 +6,12 @@ import { load } from '../store/actionCreators';
 export var startExecute = function(prefix,steps) {
 //    console.log('In startExecute this=',this,'prefix=',prefix,'steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
+        var design = this.state.store.getState();
         this.setState({
             modal: true, // Default: do display
             prefix: prefix,
             // Put current store state into steps[0].state - remember this for "back" time travel
-            steps: Object.assign([...steps], {0: Object.assign({}, steps[0], {state: this.state.store.getState()})}),
+            steps: Object.assign([...steps], {0: Object.assign({}, steps[0], {state: design.model})}),
             step: 0,
             title: steps[0].title,
             text: steps[0].text, // Default: first text
@@ -66,9 +67,10 @@ export class ExecutePanel extends Component {
 //        console.log('In ExecutePanel onNext steps=',this.state.steps);
         var next = this.state.step+1;
         if (this.state.steps[next] !== undefined) {
+            var design = this.state.store.getState();
             this.setState({
                 // Put current store state into steps[next].state - remember this for "back" time travel
-                steps: Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: this.state.store.getState()})}),
+                steps: Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: design.model})}),
                 step: next,
                 title: this.state.steps[next].title,
                 text: this.state.steps[next].text

@@ -11,8 +11,8 @@ export function search(store, objmin, merit) {
     // Compress P into PC
     var element;
     var pc = [];
-    for (let i = 0; i < design.symbol_table.length; i++) {
-        element = design.symbol_table[i];
+    for (let i = 0; i < design.model.symbol_table.length; i++) {
+        element = design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 pc.push(element.value);
@@ -21,15 +21,15 @@ export function search(store, objmin, merit) {
     }
     
     // Do the pattern search
-    var delarg = design.system_controls.del;
-//    console.log('In search pc=',pc,'delarg=',delarg,'design.system_controls.delmin=',design.system_controls.delmin,'objmin=',objmin,'design.system_controls.maxit=',design.system_controls.maxit,'design.system_controls.tol=',design.system_controls.tol);
-    var ncode = patsh(pc, delarg, design.system_controls.delmin, objmin, design.system_controls.maxit, design.system_controls.tol, store, merit);
+    var delarg = design.model.system_controls.del;
+//    console.log('In search pc=',pc,'delarg=',delarg,'design.model.system_controls.delmin=',design.model.system_controls.delmin,'objmin=',objmin,'design.model.system_controls.maxit=',design.model.system_controls.maxit,'design.model.system_controls.tol=',design.model.system_controls.tol);
+    var ncode = patsh(pc, delarg, design.model.system_controls.delmin, objmin, design.model.system_controls.maxit, design.model.system_controls.tol, store, merit);
     
     // Expand PC back into store change actions
     var kd = 0;
     var p = [];
-    for (let i = 0; i < design.symbol_table.length; i++) {
-        element = design.symbol_table[i];
+    for (let i = 0; i < design.model.symbol_table.length; i++) {
+        element = design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 p.push(pc[kd++]);
@@ -42,7 +42,7 @@ export function search(store, objmin, merit) {
     store.dispatch(changeResultTerminationCondition(ncode));
     
     design = store.getState();
-    var obj = design.result.objective_value;
+    var obj = design.model.result.objective_value;
 //    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
     return obj;
 }

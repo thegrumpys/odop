@@ -174,8 +174,8 @@ class ActionSelectSize extends Component {
 }  
 
 const mapStateToProps = state => ({
-    type: state.type,
-    symbol_table: state.symbol_table
+    type: state.model.type,
+    symbol_table: state.model.symbol_table
 });
 
 const mapDispatchToProps = {

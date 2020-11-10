@@ -8,8 +8,8 @@ export function despak(pc, store, merit) {
     var design = store.getState();
     var kd = 0;
     var p = [];
-    for (let i = 0; i < design.symbol_table.length; i++) {
-        var element = design.symbol_table[i];
+    for (let i = 0; i < design.model.symbol_table.length; i++) {
+        var element = design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 p.push(pc[kd++]);
@@ -20,7 +20,7 @@ export function despak(pc, store, merit) {
     }
     store.dispatch(changeInputSymbolValues(p, merit));
     design = store.getState();
-    var obj = design.result.objective_value;
+    var obj = design.model.result.objective_value;
 //    console.log('Exiting despak obj=',obj);
     return obj;
 }

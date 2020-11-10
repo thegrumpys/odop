@@ -155,7 +155,7 @@ class FileSave extends Component {
 }
 
 const mapStateToProps = state => ({
-    state: state,
+    state: state.model,
 });
 
 const mapDispatchToProps = {
