@@ -123,7 +123,7 @@ export default withAuth(class PromptForDesign extends Component {
 //                console.log('In PromptForDesign.getDesign design=', design);
             var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
             var migrated_design = migrate(design);
-            const store = createStore(reducers, {"model": migrated_design}, middleware);
+            const store = createStore(reducers, {model: migrated_design}, middleware);
             store.dispatch(startup());
             store.dispatch(deleteAutoSave());
             logUsage('event', 'PromptForDesign', { 'event_label': type + ' ' + name });
@@ -148,7 +148,7 @@ export default withAuth(class PromptForDesign extends Component {
 
         var { initialState } = require('../designtypes/'+type+'/initialState.js'); // Dynamically load initialState
         var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-        const store = createStore(reducers, {"model": state}, middleware);
+        const store = createStore(reducers, {model: state}, middleware);
         store.dispatch(startup());
         store.dispatch(deleteAutoSave());
         logUsage('event', 'PromptForDesign', { 'event_label': type + ' load initialState' });
@@ -168,7 +168,7 @@ export default withAuth(class PromptForDesign extends Component {
 
       var { initialState } = require('../designtypes/'+type+'/initialState_metric_units.js'); // Dynamically load initialState
       var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-      const store = createStore(reducers, {"model": state}, middleware);
+      const store = createStore(reducers, {model: state}, middleware);
       store.dispatch(startup());
       store.dispatch(deleteAutoSave());
       logUsage('event', 'PromptForDesign', { 'event_label': type + ' load initialState' });
@@ -188,7 +188,7 @@ export default withAuth(class PromptForDesign extends Component {
 
 //        console.log("Restore Auto Save");
         var state = JSON.parse(localStorage.getItem('autosave'));
-        const store = createStore(reducers, {"model": state}, middleware);
+        const store = createStore(reducers, {model: state}, middleware);
         store.dispatch(startup());
         store.dispatch(deleteAutoSave());
         logUsage('event', 'PromptForDesign', { 'event_label': state.model.type + ' load autoSave' });

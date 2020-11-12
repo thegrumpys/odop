@@ -661,6 +661,9 @@ class ActionTrade extends Component {
     //===========================================================
     
     render() {
+        var design;
+        const { store } = this.context;
+        design = store.getState();
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.strategyToggle}>
@@ -798,7 +801,7 @@ class ActionTrade extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        The result is not feasible: obj = { parseFloat(this.props.design.model.result.objective_value).toFixed(6) }<br/>
+                        The result is not feasible: obj = { parseFloat(design.model.result.objective_value).toFixed(6) }<br/>
                         <ul>
                             <li>Done &nbsp; - To return to the main page with these constraints</li>
                             <li>Repeat - To repeat Trade with these constraints</li>
@@ -897,7 +900,6 @@ ActionTrade.contextTypes = {
 };
 
 const mapStateToProps = state => ({
-    design: state.model
 });
 
 const mapDispatchToProps = {

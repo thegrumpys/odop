@@ -20,7 +20,7 @@ it('middleware with startup', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
@@ -105,7 +105,7 @@ it('middleware change pressure design parameter value without startup', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
@@ -135,7 +135,7 @@ it('middleware change radius design parameter value without startup', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
@@ -165,7 +165,7 @@ it('middleware change thickness design parameter value without startup', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
@@ -198,7 +198,7 @@ it('middleware change constraints to force all violations', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
@@ -287,7 +287,7 @@ it('middleware search1 from initial state', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -315,7 +315,7 @@ it('middleware search2: initial state w/ single SV constraint modified', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -345,7 +345,7 @@ it('middleware search3: initial state w/ single DP FIXed', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -376,7 +376,7 @@ it('middleware search4: initial state w/ single SV FIXed', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -409,7 +409,7 @@ it('middleware search5: initial state w/ 3 constraints modified', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -441,7 +441,7 @@ it('middleware search6: initial state w/ 3 constraints modified further', () => 
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -473,7 +473,7 @@ it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', ()
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -512,7 +512,7 @@ it('middleware seek1 min stress; feasible start; no fixed', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -543,7 +543,7 @@ it('middleware seek2 min stress; alt start pt, opened constraints, feasible star
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -578,7 +578,7 @@ it('middleware seek3 min stress; infeasible start; no fixed', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -607,7 +607,7 @@ it('middleware seek4 min pressure; alt start pt, opened constraints, feasible st
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -643,7 +643,7 @@ it('middleware seek5 max force; alt start pt, opened constraints, feasible start
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -678,7 +678,7 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {"model": state},
+        {model: state},
         applyMiddleware(dispatcher));
     store.dispatch(startup());
 
@@ -726,7 +726,7 @@ it('middleware restore auto save', () => {
  var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
  const store = createStore(
      reducers,
-     {"model": state},
+     {model: state},
      applyMiddleware(dispatcher));
  store.dispatch(saveAutoSave());
 

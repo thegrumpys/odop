@@ -18,7 +18,7 @@ import { search } from '../store/middleware/search';
 
 it('search without merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(reducers, {"model": state}, applyMiddleware(dispatcher));
+    const store = createStore(reducers, {model: state}, applyMiddleware(dispatcher));
 
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
@@ -81,7 +81,7 @@ it('search without merit', () => {
 
 it('search with merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(reducers, {"model": state}, applyMiddleware(dispatcher));
+    const store = createStore(reducers, {model: state}, applyMiddleware(dispatcher));
 
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));

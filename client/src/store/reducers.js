@@ -53,12 +53,13 @@ export function reducers(state, action) {
     case LOAD_INITIAL_STATE:
 //        console.log('In LOAD_INITIAL_STATE');
         var { initialState } = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState
-        state = Object.assign({}, initialState, { 
+        state = Object.assign({}, state, { 
             model: {
+                ...initialState,
                 system_controls: initialSystemControls
             }
         }); // Merge initialState and initialSystemControls
-//        console.log('In LOAD_INITIAL_STATE state=',state);
+//        console.log('In LOAD_INITIAL_STATE initialState=',initialState,'state=',state);
         return state;
     case CHANGE_NAME:
         result = Object.assign({}, state, {
