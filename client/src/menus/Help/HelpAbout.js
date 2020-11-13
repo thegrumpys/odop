@@ -58,8 +58,8 @@ class HelpAbout extends Component {
 }  
 
 const mapStateToProps = state => ({
-    type: state.type, 
-    version: state.version
+    type: state.model.type, 
+    version: state.model.version
   });
 
 export default connect(mapStateToProps)(HelpAbout);

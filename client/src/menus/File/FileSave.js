@@ -160,8 +160,8 @@ class FileSave extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
-    type: state.type, 
-    state: state,
+    type: state.model.type, 
+    state: state.model,
 });
 
 const mapDispatchToProps = {

@@ -121,7 +121,7 @@ class ActionSeek extends Component {
 }  
 
 const mapStateToProps = state => ({
-    symbol_table: state.symbol_table
+    symbol_table: state.model.symbol_table
 });
 
 const mapDispatchToProps = {

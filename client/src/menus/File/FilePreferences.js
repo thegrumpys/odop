@@ -112,7 +112,7 @@ class FilePreferences extends Component {
 }  
 
 const mapStateToProps = state => ({
-    system_controls: state.system_controls
+    system_controls: state.model.system_controls
 });
 
 const mapDispatchToProps = {

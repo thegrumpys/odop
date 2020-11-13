@@ -246,12 +246,12 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-    name: state.name,
-    type: state.type,
-    version: state.version,
-    symbol_table: state.symbol_table,
-    system_controls: state.system_controls,
-    labels: state.labels,
+    name: state.model.name,
+    type: state.model.type,
+    version: state.model.version,
+    symbol_table: state.model.symbol_table,
+    system_controls: state.model.system_controls,
+    labels: state.model.labels,
 });
 
 const mapDispatchToProps = {

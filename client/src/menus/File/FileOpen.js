@@ -201,8 +201,8 @@ class FileOpen extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
-    type: state.type,
-    name: state.name,
+    type: state.model.type,
+    name: state.model.name,
 });
 
 const mapDispatchToProps = {
