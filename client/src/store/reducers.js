@@ -40,7 +40,6 @@ import { evaluateConstraintValue } from './middleware/evaluateConstraint';
 export function reducers(state, action) {
     var i;
     var value;
-    var result;
 //    console.log('In reducers state=',state,'action=', action);
     switch (action.type) {
     case STARTUP:
@@ -62,21 +61,17 @@ export function reducers(state, action) {
 //        console.log('In LOAD_INITIAL_STATE initialState=',initialState,'state=',state);
         return state;
     case CHANGE_NAME:
-        result = Object.assign({}, state, {
+        return Object.assign({}, state, {
             model: {
                 ...state.model,
                 name: action.payload.name
             }
         });
-//        console.log('In reducers.CHANGE_NAME result=',result);
-        return result;
     case CHANGE_USER:
-        result = Object.assign({}, state, {
+        return Object.assign({}, state, {
             ...state,
             user: action.payload.user
         });
-//        console.log('In reducers.CHANGE_USER result=',result);
-        return result;
 
 // SYMBOL
 
@@ -361,8 +356,7 @@ export function reducers(state, action) {
 // RESULT
 
     case CHANGE_RESULT_OBJECTIVE_VALUE:
-        return {
-            ...state,
+        return Object.assign({}, state, {
             model: {
                 ...state.model,
                 result: {
@@ -370,10 +364,9 @@ export function reducers(state, action) {
                     objective_value: action.payload.objective_value
                 }
             }
-        }
+        });
     case CHANGE_RESULT_TERMINATION_CONDITION:
-        return {
-            ...state,
+        return Object.assign({}, state, {
             model: {
                 ...state.model,
                 result: {
@@ -381,10 +374,9 @@ export function reducers(state, action) {
                     termination_condition: action.payload.termination_condition
                 }
             }
-        }
+        });
     case CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT:
-        return {
-            ...state,
+        return Object.assign({}, state, {
             model: {
                 ...state.model,
                 result: {
@@ -392,20 +384,20 @@ export function reducers(state, action) {
                     violated_constraint_count: action.payload.violated_constraint_count
                 }
             }
-        }
+        });
 
-// SYMTEM CONTROL
+// SYSTEM CONTROL
 
     case CHANGE_SYSTEM_CONTROLS_VALUE:
-        return {
-            ...state,
+        return Object.assign({}, state, {
             model: {
+                ...state.model,
                 system_controls: {
                     ...state.model.system_controls,
                     ...action.payload.system_controls
                 }
             }
-        }
+        });
 
 // LABELS
 

@@ -521,12 +521,17 @@ it('reducers change system controls value', () => {
         {model: state});
 
     var design = store.getState(); // before
+    expect(design.model.name).toEqual('initialState');
     expect(design.model.system_controls.ioopt).toEqual(3);
+    expect(design.model.system_controls.maxit).toEqual(100);
 
-    store.dispatch(changeSystemControlsValue({ioopt: 5}));
+    var new_system_controls = Object.assign({}, initialSystemControls, {ioopt: 5}); // Make a copy with one property updated
+    store.dispatch(changeSystemControlsValue(new_system_controls));
 
     design = store.getState(); // after
+    expect(design.model.name).toEqual('initialState'); // Make sure a parent property hasn't changed
     expect(design.model.system_controls.ioopt).toEqual(5);
+    expect(design.model.system_controls.maxit).toEqual(100); // Make sure another sibling property hasn't changed
 });
 
 it('reducers change label value', () => {
