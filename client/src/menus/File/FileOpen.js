@@ -105,7 +105,7 @@ class FileOpen extends Component {
 //            console.log('In FileOpen.getDesign design=', design);
             var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
             var migrated_design = migrate(design);
-            this.props.load(migrated_design)
+            this.props.load({name: name, model: migrated_design})
             this.props.deleteAutoSave();
             logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
         })
