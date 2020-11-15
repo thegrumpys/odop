@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { changeUser } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -24,7 +25,7 @@ class FileDelete extends Component {
             type: this.props.type,
             name: '',
             authenticated: null,
-            uid: null,
+            user: null,
         };
     }
 
@@ -38,19 +39,22 @@ class FileDelete extends Component {
                 var user = await this.props.auth.getUser();
 //                console.log('In FileDelete.componentDidMount user=',user);
                 this.setState({
-                    uid: user.sub,
+                    user: user.sub,
                 });
+                this.props.changeUser(user.sub);
             } else { // We have become unauthenticated
                 this.setState({
-                    uid: null,
+                    user: null,
                 });
+                this.props.changeUser(null);
             }
         }
     }
 
     componentDidUpdate(prevProps) {
-//      console.log('In FileDelete.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+//      console.log('In FileDelete.componentDidUpdate');
       if (prevProps.type !== this.props.type) {
+//          console.log('In FileDelete.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
           this.setState({ 
               type: this.props.type
           });
@@ -64,7 +68,7 @@ class FileDelete extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.uid
+                Authorization: 'Bearer ' + this.state.user
             }
         })
         .then(res => {
@@ -91,7 +95,7 @@ class FileDelete extends Component {
        });
     }
     
-    deleteDesign(type,name) {
+    deleteDesign(type, name) {
 //        console.log('In FileDelete.deleteDesign type=', type, ' name=', name);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
@@ -99,7 +103,7 @@ class FileDelete extends Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + this.state.uid
+                Authorization: 'Bearer ' + this.state.user
             },
         })
         .then(res => {
@@ -124,7 +128,7 @@ class FileDelete extends Component {
     }
     
     onSelectType(event) {
-//      console.log('In FileOpen.onSelectType event.target.value=',event.target.value);
+//      console.log('In FileDelete.onSelectType event.target.value=',event.target.value);
       this.setState({
           type: event.target.value
       });
@@ -199,12 +203,17 @@ class FileDelete extends Component {
 }
 
 const mapStateToProps = state => ({
-    name: state.model.name, 
+    name: state.name, 
     type: state.model.type, 
 });
 
+const mapDispatchToProps = {
+    changeUser: changeUser,
+};
+
 export default withAuth(
     connect(
-        mapStateToProps
+        mapStateToProps,
+        mapDispatchToProps
     )(FileDelete)
 );

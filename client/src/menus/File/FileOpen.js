@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { load, deleteAutoSave } from '../../store/actionCreators';
+import { changeUser, load, deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -25,7 +25,7 @@ class FileOpen extends Component {
             type: this.props.type,
             name: this.props.name,
             authenticated: null,
-            uid: null,
+            user: null,
         };
     }
 
@@ -39,19 +39,22 @@ class FileOpen extends Component {
                 var user = await this.props.auth.getUser();
 //                console.log('In FileOpen.componentDidMount user=',user);
                 this.setState({
-                    uid: user.sub,
+                    user: user.sub,
                 });
+                this.props.changeUser(user.sub);
             } else { // We have become unauthenticated
                 this.setState({
-                    uid: null,
+                    user: null,
                 });
+                this.props.changeUser(null);
             }
         }
     }
 
     componentDidUpdate(prevProps) {
-//      console.log('In FileOpen.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+//      console.log('In FileOpen.componentDidUpdate');
       if (prevProps.type !== this.props.type) {
+//          console.log('In FileOpen.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
           this.setState({ 
               type: this.props.type
           });
@@ -65,7 +68,7 @@ class FileOpen extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.uid
+                Authorization: 'Bearer ' + this.state.user
             }
         })
         .then(res => {
@@ -76,7 +79,7 @@ class FileOpen extends Component {
             return res.json()
         })
         .then(names => {
-//            console.log('In FileOpen.getDesignNames names=',names);
+//            console.log('In FileOpen.getDesignNames type=', type,'names=',names);
             this.setState({
                 names: names
             })
@@ -86,12 +89,12 @@ class FileOpen extends Component {
         });
     }
 
-    getDesign(type,name) {
+    getDesign(type, name) {
 //        console.log('In FileOpen.getDesign type=', type, ' name=', name);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
             headers: {
-                Authorization: 'Bearer ' + this.state.uid
+                Authorization: 'Bearer ' + this.state.user
             }
         })
         .then(res => {
@@ -198,11 +201,12 @@ class FileOpen extends Component {
 }
 
 const mapStateToProps = state => ({
+    name: state.name,
     type: state.model.type,
-    name: state.model.name,
 });
 
 const mapDispatchToProps = {
+    changeUser: changeUser,
     load: load,
     deleteAutoSave: deleteAutoSave
 };

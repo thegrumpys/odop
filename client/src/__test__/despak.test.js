@@ -14,7 +14,7 @@ import { despak } from '../store/middleware/despak';
 
 it('despak without merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(reducers, {model: state});
+    const store = createStore(reducers, {name: "initialState", model: state});
 
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
@@ -42,7 +42,7 @@ it('despak without merit', () => {
     var design = store.getState(); // after
     expect(obj).toEqual(0.00005);
 
-    expect(design.model.name).toEqual("initialState");
+    expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.model.version).toEqual("3");
 
@@ -83,7 +83,7 @@ it('despak without merit', () => {
 
 it('despak with merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(reducers, {model: state}, applyMiddleware(dispatcher));
+    const store = createStore(reducers, {name: "initialState", model: state}, applyMiddleware(dispatcher));
 
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
@@ -138,7 +138,7 @@ it('despak with merit', () => {
     var design = store.getState(); // after
     expect(obj).toEqual(0.0011111111111111111);
 
-    expect(design.model.name).toEqual("initialState");
+    expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.model.version).toEqual("3");
 

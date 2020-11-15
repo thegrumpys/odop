@@ -13,16 +13,16 @@ class FileExport extends Component {
     }
     
     onExport() {
-//        console.log('In FileExport.onExport this.props.state.type=',this.props.state.type,' this.props.state.name=',this.props.state.name);
+//        console.log('In FileExport.onExport this.props.type=',this.props.type,' this.props.name=',this.props.name);
         const url = window.URL.createObjectURL(new Blob([JSON.stringify(this.props.state, null, 2)]));
 //        console.log('In FileExport.exportDesign url=', url);
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', this.props.state.name + '.json');
+        link.setAttribute('download', this.props.name + '.json');
 //        console.log('In FileExport.exportDesign link=', link);
         document.body.appendChild(link);
         link.click();
-        logUsage('event', 'FileExport', { 'event_label': this.props.state.type + ' ' + this.props.state.name });
+        logUsage('event', 'FileExport', { 'event_label': this.props.type + ' ' + this.props.name });
     }
 
     render() {
@@ -38,6 +38,8 @@ class FileExport extends Component {
 }
 
 const mapStateToProps = state => ({
+    name: state.name,
+    type: state.model.type,
     state: state.model
 });
 

@@ -1087,7 +1087,6 @@ export const initialState = {
             "value": ""
         }
     ],
-    "name": "initialState",
     "type": "Spring/Extension",
     "version": "4",
     "result": {

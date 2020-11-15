@@ -40,6 +40,8 @@ import { evaluateConstraintValue } from './middleware/evaluateConstraint';
 export function reducers(state, action) {
     var i;
     var value;
+    var name;
+    var model;
 //    console.log('In reducers state=',state,'action=', action);
     switch (action.type) {
     case STARTUP:
@@ -61,14 +63,12 @@ export function reducers(state, action) {
 //        console.log('In LOAD_INITIAL_STATE initialState=',initialState,'state=',state);
         return state;
     case CHANGE_NAME:
-        return Object.assign({}, state, {
-            model: {
-                ...state.model,
-                name: action.payload.name
-            }
+        return Object.assign({}, {
+            ...state,
+            name: action.payload.name
         });
     case CHANGE_USER:
-        return Object.assign({}, state, {
+        return Object.assign({}, {
             ...state,
             user: action.payload.user
         });
@@ -423,14 +423,19 @@ export function reducers(state, action) {
     case SAVE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
 //            console.log("Save Auto Save");
+            state.model.name = state.name; // move name into model to save it ***FUDGE*** for compatibility with existing autosave files
             localStorage.setItem('autosave', JSON.stringify(state.model), null, 2); // create or replace auto save file with current state contents
+            delete state.model.name; // after saving it delete name from model ***FUDGE*** for compatibility with existing autosave files
         }
         return state; // state not changed
     case RESTORE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
 //            console.log("Restore Auto Save");
-            var model = JSON.parse(localStorage.getItem('autosave')); // get auto save file contents
+            model = JSON.parse(localStorage.getItem('autosave')); // get auto save file contents
+            name = model.name; // get name from model to restore it ***FUDGE*** for compatibility with existing autosave files
+            delete model.name; // after restoring it delete name from model ***FUDGE*** for compatibility with existing autosave files
             return Object.assign({}, state, {
+                name: name,
                 model: model
             })
         }

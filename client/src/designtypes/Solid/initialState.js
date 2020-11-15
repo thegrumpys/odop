@@ -190,7 +190,6 @@ export const initialState = {
             "value": "Rectangular Solid default Startup file ..."
         }
     ],
-    "name": "initialState",
     "type": "Solid",
     "version": "5",
     "result": {

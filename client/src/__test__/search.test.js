@@ -18,7 +18,7 @@ import { search } from '../store/middleware/search';
 
 it('search without merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(reducers, {model: state}, applyMiddleware(dispatcher));
+    const store = createStore(reducers, {name: "initialState", model: state}, applyMiddleware(dispatcher));
 
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
@@ -40,7 +40,7 @@ it('search without merit', () => {
     var design = store.getState(); // after
     expect(obj).toEqual(0.14664192222304165);
 
-    expect(design.model.name).toEqual("initialState");
+    expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.model.version).toEqual("3");
 
@@ -81,7 +81,7 @@ it('search without merit', () => {
 
 it('search with merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(reducers, {model: state}, applyMiddleware(dispatcher));
+    const store = createStore(reducers, {name: "initialState", model: state}, applyMiddleware(dispatcher));
 
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
@@ -131,7 +131,7 @@ it('search with merit', () => {
     var design = store.getState(); // after
     expect(obj).toEqual(0.017724895486223562);
 
-    expect(design.model.name).toEqual("initialState");
+    expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.model.version).toEqual("3");
 

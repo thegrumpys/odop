@@ -58,8 +58,9 @@ class App extends Component {
     }
     
     componentDidUpdate(prevProps) {
-//        console.log('In App.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+//        console.log('In App.componentDidUpdate');
         if (prevProps.type !== this.props.type) {
+//            console.log('In App.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
             var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
             var report_names = getReportNames();
 //            console.log('In App.componentDidUpdate report_names=', report_names);
@@ -213,7 +214,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-    name: state.model.name,
+    name: state.name,
     type: state.model.type,
     version: state.model.version,
     symbol_table: state.model.symbol_table,

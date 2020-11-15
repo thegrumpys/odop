@@ -917,7 +917,6 @@ export const initialState = {
             "value": ""
         }
     ],
-    "name": "initialState",
     "type": "Spring/Torsion",
     "version": "4",
     "result": {
