@@ -123,7 +123,7 @@ export default withAuth(class PromptForDesign extends Component {
 //                console.log('In PromptForDesign.getDesign design=', design);
             var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
             var migrated_design = migrate(design);
-            if (migrated_design.model === "ODOP") {
+            if (migrated_design.jsontype === "ODOP") {
                 const store = createStore(reducers, migrated_design, middleware);
                 store.dispatch(startup());
                 store.dispatch(deleteAutoSave());
@@ -132,7 +132,7 @@ export default withAuth(class PromptForDesign extends Component {
                     store: store
                 });
             } else {
-                displayError('Invalid model type, function ignored');
+                displayError('Invalid JSON type, function ignored');
             }
         })
         .catch(error => {

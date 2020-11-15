@@ -62,12 +62,12 @@ class FileImport extends Component {
         design.name = filename; // Replace design name with file name
         var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
         var migrated_design = migrate(design);
-        if (migrated_design.model === "ODOP") {
+        if (migrated_design.jsontype === "ODOP") {
             this.props.load(migrated_design);
             this.props.deleteAutoSave();
             logUsage('event', 'FileImport', { 'event_label': migrated_design.type + ' ' + migrated_design.name });
         } else {
-            displayError('Invalid model type, function ignored');
+            displayError('Invalid JSON type, function ignored');
         }
     }
     

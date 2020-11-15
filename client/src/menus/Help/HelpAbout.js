@@ -44,9 +44,9 @@ class HelpAbout extends Component {
                         &nbsp; &nbsp; &nbsp; &nbsp; 
                         <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">ODOP License</a> 
                         <hr/>
-                        ODOP software version: {version()} 
+                        ODOP software version &nbsp; {version()} 
                         <br />
-                        Model: {this.props.model} {this.props.type}, Version: {this.props.version}, Units: {this.props.units}<br />
+                        Model: &nbsp; {this.props.jsontype} {this.props.type}, Version: {this.props.version}, Units: {this.props.units}<br />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
@@ -60,7 +60,7 @@ class HelpAbout extends Component {
 const mapStateToProps = state => ({
     type: state.type, 
     version: state.version,
-    model: state.model,
+    jsontype: state.jsontype,
     units: state.units,
 });
 

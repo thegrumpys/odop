@@ -105,12 +105,12 @@ class FileOpen extends Component {
 //            console.log('In FileOpen.getDesign design=', design);
             var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
             var migrated_design = migrate(design);
-            if (migrated_design.model === "ODOP") {
+            if (migrated_design.jsontype === "ODOP") {
                 this.props.load(migrated_design)
                 this.props.deleteAutoSave();
                 logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
             } else {
-                displayError('Invalid model type, function ignored');
+                displayError('Invalid JSON type, function ignored');
             }
         })
         .catch(error => {

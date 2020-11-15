@@ -198,6 +198,6 @@ export const initialState = {
         "termination_condition": "",
         "violated_constraint_count": 0
     },
-    "model": "ODOP",
+    "jsontype": "ODOP",
     "units": "US"
 };
