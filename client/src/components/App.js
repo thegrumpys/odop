@@ -52,7 +52,7 @@ class App extends Component {
 //        console.log('In App.constructor report_names=', report_names);
         this.state = {
             isOpen: false,
-            activeTab: "1",
+            activeTab: "Design",
             report_names: report_names
         };
     }
@@ -175,13 +175,13 @@ class App extends Component {
                         </Nav>
                         <Nav>
                             <Nav.Item>
-                                <Nav.Link className={classnames({ active: this.state.activeTab === "1" })} onClick={() => { this.setKey("1"); }}>
+                                <Nav.Link className={classnames({ active: this.state.activeTab === "Design" })} onClick={() => { this.setKey("Design"); }}>
                                     <span className="d-none d-md-inline">Design: </span><img className="d-none d-md-inline" src={src} alt={alt} height="30px"/> {this.props.name}
                                 </Nav.Link>
                             </Nav.Item>
                             {this.state.report_names.map((element,i) => {return (
                                 <Nav.Item key={element}>
-                                    <Nav.Link className={classnames({ active: this.state.activeTab === (i+2).toString() })} onClick={() => { this.setKey((i+2).toString()); }}>
+                                    <Nav.Link className={classnames({ active: this.state.activeTab === "Report"+(i+1).toString() })} onClick={() => { this.setKey("Report"+(i+1).toString()); }}>
                                         <span className="d-none d-md-inline">Report: </span>{element}
                                     </Nav.Link>
                                 </Nav.Item>
@@ -192,15 +192,15 @@ class App extends Component {
                 </Navbar>
                 <Container style={{backgroundColor: '#eee', paddingTop: '60px'}}>
                     <ExecutePanel />
-                    <Tabs defaultActiveKey="1" activeKey={this.state.activeTab} onSelect={k => this.setKey(k)}>
-                        <Tab eventKey="1">
-                            <Container fluid>
+                    <Tabs defaultActiveKey="Design" activeKey={this.state.activeTab} onSelect={key => this.setKey(key)}>
+                        <Tab eventKey="Design">
+                            <Container fluid id="design">
                                 <DesignTable />
                             </Container>
                         </Tab>
                         {this.state.report_names.map((element,i) => {return (
-                            <Tab key={element} eventKey={(i+2).toString()}>
-                                <div id={"report-"+i}>{this.report(element)}</div>
+                            <Tab key={element} eventKey={"Report"+(i+1).toString()}>
+                                <div id={"report-"+(i+1).toString()}>{this.report(element)}</div>
                             </Tab>
                             );
                         })}
