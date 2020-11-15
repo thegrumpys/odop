@@ -44,7 +44,7 @@ it('despak without merit', () => {
 
     expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.version).toEqual("3");
+    expect(design.version).toEqual("4");
 
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(500);
@@ -140,7 +140,7 @@ it('despak with merit', () => {
 
     expect(design.name).toEqual("initialState");
     expect(design.type).toEqual("Piston-Cylinder");
-    expect(design.version).toEqual("3");
+    expect(design.version).toEqual("4");
 
     expect(design.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
     expect(design.symbol_table[sto.PRESSURE].value).toEqual(500);
