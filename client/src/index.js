@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Spinner } from './components/Spinner';
 import { ErrorModal } from './components/ErrorModal';
 import FEApp from './components/FEApp';
+import './odop.css';
 
 //function loggerMiddleware({ getState }) {
 //    return next => action => {
