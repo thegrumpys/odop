@@ -25,6 +25,7 @@ class ActionExecute extends Component {
     componentDidUpdate(prevProps) {
 //      console.log('In ActionExecute.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
       if (prevProps.type !== this.props.type) {
+//          console.log('In ActionExecute.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
           this.updateExecuteNames();
       }
   }
@@ -109,7 +110,7 @@ class ActionExecute extends Component {
 }  
 
 const mapStateToProps = state => ({
-    type: state.type,
+    type: state.model.type,
 });
 
 export default connect(mapStateToProps)(ActionExecute);

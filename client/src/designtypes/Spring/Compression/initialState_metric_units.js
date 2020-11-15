@@ -857,7 +857,6 @@ export const initialState = {
             "value": ""
         }
     ],
-    "name": "initialState",
     "type": "Spring/Compression",
     "version": "9",
     "result": {

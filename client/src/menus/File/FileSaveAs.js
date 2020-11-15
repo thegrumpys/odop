@@ -21,7 +21,7 @@ class FileSaveAs extends Component {
             names: [],
             name: undefined, // default to no name
             authenticated: null,
-            uid: null,
+            user: null,
         };
     }
     
@@ -35,21 +35,23 @@ class FileSaveAs extends Component {
                 var user = await this.props.auth.getUser();
 //                console.log('In FileSaveAs.componentDidMount user=',user);
                 this.setState({
-                    uid: user.sub,
+                    user: user.sub,
                 });
+                this.props.changeUser(user.sub);
             } else { // We have become unauthenticated
                 this.setState({
-                    uid: null,
+                    user: null,
                 });
+                this.props.changeUser(null);
             }
         }
-        this.getDesignNames(this.props.state.type);
     }
 
     componentDidUpdate(prevProps) {
-//        console.log('In FileSaveAs.componentDidUpdate prevProps=',prevProps.state.type,'props=',this.props.state.type);
-        if (prevProps.state.type !== this.props.state.type) {
-            this.getDesignNames(this.props.state.type);
+//        console.log('In FileSaveAs.componentDidUpdate');
+        if (prevProps.type !== this.props.type) {
+//            console.log('In FileSaveAs.componentDidUpdate prevProps=',prevProps.state.type,'props=',this.props.type);
+            this.getDesignNames(this.props.type);
         }
     }
 
@@ -59,7 +61,7 @@ class FileSaveAs extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-              Authorization: 'Bearer ' + this.state.uid
+              Authorization: 'Bearer ' + this.state.user
             }
         })
         .then(res => {
@@ -70,7 +72,7 @@ class FileSaveAs extends Component {
             return res.json()
         })
         .then(names => {
-//                console.log('In FileSaveAs.getDesignNames names=', names);
+//            console.log('In FileSaveAs.getDesignNames  type=', type,'names=', names);
             this.setState({ names })
         })
         .catch(error => {
@@ -78,15 +80,14 @@ class FileSaveAs extends Component {
         });
     }
     
-    postDesign(type,name) {
+    postDesign(type, name) {
 //        console.log('In FileSaveAs.postDesign type=', type,' name=', name);
         this.props.changeName(name);
-        this.props.changeUser(this.state.uid);
         // First fetch the current list of names
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.uid
+                Authorization: 'Bearer ' + this.state.user
             }
         })
         .then(res => {
@@ -102,7 +103,7 @@ class FileSaveAs extends Component {
             this.setState({ names })
 //            console.log('In FileSaveAs.postDesign this.state.names=',this.state.names);
             var method = 'POST'; // Create it
-            if (this.state.names.filter(e => e.name === name && e.user === this.state.uid).length > 0) { // Does it already exist?
+            if (this.state.names.filter(e => e.name === name && e.user === this.state.user).length > 0) { // Does it already exist?
                 method = 'PUT'; // Update it
             }
 //            console.log('In FileSaveAs.postDesign method=', method);
@@ -112,7 +113,7 @@ class FileSaveAs extends Component {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + this.state.uid
+                    Authorization: 'Bearer ' + this.state.user
                 },
                 body: JSON.stringify(this.props.state)
             })
@@ -123,7 +124,7 @@ class FileSaveAs extends Component {
                 }
                 if (method === 'POST') {
                     var names = Array.from(this.state.names); // clone it
-                    names.push({user: this.state.uid, name: name}); // If create and successful then sdd name to the array of names
+                    names.push({user: this.state.user, name: name}); // If create and successful then sdd name to the array of names
 //                    console.log('In FileSaveAs.postDesign type=',type,'name=',name,'names=', names);
                     this.setState({
                         names: names,
@@ -142,7 +143,7 @@ class FileSaveAs extends Component {
     }
 
     toggle() {
-//        console.log('In FileSaveAs.toggle this.props.state.type=',this.props.state.type, ' this.props.state.name=',this.props.state.name);
+//        console.log('In FileSaveAs.toggle this.props.type=',this.props.type, ' this.state.name=',this.state.name);
         this.setState({
             modal: !this.state.modal,
         });
@@ -156,12 +157,12 @@ class FileSaveAs extends Component {
     }
     
     onSaveAs() {
-//        console.log('In FileSaveAs.onSaveAs this.props.state.type=',this.props.state.type,' this.props.state.name=',this.props.state.name);
+//        console.log('In FileSaveAs.onSaveAs this.props.type=',this.props.type,' this.state.name=',this.state.name);
         this.setState({
             modal: !this.state.modal
         });
         // Save the model
-        this.postDesign(this.props.state.type, this.state.name); // Take name from component state
+        this.postDesign(this.props.type, this.state.name); // Take name from component state
         this.props.deleteAutoSave();
     }
     
@@ -201,12 +202,14 @@ class FileSaveAs extends Component {
 }
 
 const mapStateToProps = state => ({
-    state: state,
+    name: state.name,
+    type: state.model.type,
+    state: state.model,
 });
 
 const mapDispatchToProps = {
-    changeName: changeName,
     changeUser: changeUser,
+    changeName: changeName,
     deleteAutoSave: deleteAutoSave
 };
 

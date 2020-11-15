@@ -79,7 +79,7 @@ export function migrate(design) {
         migrated_design.version = '3'; // last thing... set the migrated model version
     case '3':
         // Current model version
-        console.log('Convert from 3 to 4');
+//        console.log('Convert from 3 to 4');
         design['jsontype'] = "ODOP"; // Add in JSON type
         if (design.symbol_table[0].units === "LB/SQ-IN") { // Add in units type
             design['units'] = "US";

@@ -21,10 +21,10 @@ class FileRecent extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavDropdown.Item onClick={this.toggle} onHide={this.toggle} disabled>
+                <NavDropdown.Item onClick={this.toggle} disabled>
                     Recent
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} className={this.props.className}>
+                <Modal show={this.state.modal} className={this.props.className} onHide={this.toggle}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>  &nbsp; File : Recent

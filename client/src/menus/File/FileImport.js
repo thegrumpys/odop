@@ -59,11 +59,10 @@ class FileImport extends Component {
 //        console.log('In FileImport.onLoadEnd design.type=',design.type,'design.name=',design.name);
         var path = require('path');
         var filename = path.basename(this.state.selectedFile.name,'.json'); // Drop prefix directories and suffix extension
-        design.name = filename; // Replace design name with file name
         var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
         var migrated_design = migrate(design);
         if (migrated_design.jsontype === "ODOP") {
-            this.props.load(migrated_design);
+            this.props.load({name: filename, model: migrated_design});
             this.props.deleteAutoSave();
             logUsage('event', 'FileImport', { 'event_label': migrated_design.type + ' ' + migrated_design.name });
         } else {

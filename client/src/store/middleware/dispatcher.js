@@ -37,7 +37,7 @@ export const dispatcher = store => next => action => {
 
     const returnValue = next(action);
 
-//    console.log('In dispatcher',action);
+//    console.log('In dispatcher state=',store.getState(),'action=',action);
 
     switch (action.type) {
     case STARTUP:
@@ -53,7 +53,7 @@ export const dispatcher = store => next => action => {
     case CHANGE_SYMBOL_VALUE:
 //        console.log('In dispatcher.CHANGE_SYMBOL_VALUE name=',action.payload.name,'value=',action.payload.value,'merit=',action.payload.merit);
         design = store.getState();
-        design.symbol_table.find((element) => {
+        design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
                 if (element.type === "equationset" && element.input) {
                     store.dispatch(changeResultTerminationCondition(''));
@@ -72,7 +72,7 @@ export const dispatcher = store => next => action => {
         break;
     case FIX_SYMBOL_VALUE:
         design = store.getState();
-        design.symbol_table.find((element) => {
+        design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
                 if (element.type === "equationset" && element.input) {
                     // Independent
@@ -115,7 +115,7 @@ export const dispatcher = store => next => action => {
         break;
     case FREE_SYMBOL_VALUE:
         design = store.getState();
-        design.symbol_table.find((element) => {
+        design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
                 store.dispatch(restoreOutputSymbolConstraints(element.name));
                 return true;
@@ -158,7 +158,7 @@ export const dispatcher = store => next => action => {
 
     case SEARCH:
         design = store.getState();
-        search(store, design.system_controls.objmin);
+        search(store, design.model.system_controls.objmin);
         break;
     case SEEK:
         seek(store, action);

@@ -32,7 +32,7 @@ export default withAuth(class PromptForDesign extends Component {
             type: config.design.type,
             name: config.design.name,
             authenticated: null,
-            uid: null,
+            user: null,
             store: null,
         };
     }
@@ -48,16 +48,16 @@ export default withAuth(class PromptForDesign extends Component {
 //                console.log('In PromptForDesign.componentDidMount user=',user);
                 if (user !== undefined) { // Have we a user?
                     this.setState({
-                        uid: user.sub,
+                        user: user.sub,
                     });
                 } else {
                     this.setState({
-                        uid: null,
+                        user: null,
                     });
                 }
             } else { // We have become unauthenticated
                 this.setState({
-                    uid: null,
+                    user: null,
                 });
             }
             this.getDesignNames(this.state.type);
@@ -65,13 +65,13 @@ export default withAuth(class PromptForDesign extends Component {
     }
 
     getDesignNames(type) {
-//        console.log('In PromptForDesign.getDesignNames type=', type, ' uid=', this.state.uid);
+//        console.log('In PromptForDesign.getDesignNames type=', type, ' user=', this.state.user);
         // Get the designs and store them in state
         displaySpinner(true);
-//        console.log('In PromptForDesign.getDesignNames this.state.uid=',this.state.uid);
+//        console.log('In PromptForDesign.getDesignNames this.state.user=',this.state.user);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.uid
+                Authorization: 'Bearer ' + this.state.user
             }
         })
         .then(res => {
@@ -96,8 +96,8 @@ export default withAuth(class PromptForDesign extends Component {
         });
     }
 
-    getDesign(type,name) {
-//        console.log('In PromptForDesign.getDesign type=', type, ' name=', name, ' uid=', this.state.uid);
+    getDesign(type, name) {
+//        console.log('In PromptForDesign.getDesign type=', type, ' name=', name, ' user=', this.state.user);
 
         /* eslint-disable no-underscore-dangle */
         const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -106,10 +106,10 @@ export default withAuth(class PromptForDesign extends Component {
         const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 
         displaySpinner(true);
-//        console.log('In PromptForDesign.getDesign this.state.uid=',this.state.uid);
+//        console.log('In PromptForDesign.getDesign this.state.user=',this.state.user);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
             headers: {
-                Authorization: 'Bearer ' + this.state.uid
+                Authorization: 'Bearer ' + this.state.user
             }
         })
         .then(res => {
@@ -124,7 +124,7 @@ export default withAuth(class PromptForDesign extends Component {
             var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
             var migrated_design = migrate(design);
             if (migrated_design.jsontype === "ODOP") {
-                const store = createStore(reducers, migrated_design, middleware);
+                const store = createStore(reducers, {name: name, model: migrated_design}, middleware);
                 store.dispatch(startup());
                 store.dispatch(deleteAutoSave());
                 logUsage('event', 'PromptForDesign', { 'event_label': type + ' ' + name });
@@ -152,7 +152,7 @@ export default withAuth(class PromptForDesign extends Component {
 
         var { initialState } = require('../designtypes/'+type+'/initialState.js'); // Dynamically load initialState
         var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-        const store = createStore(reducers, state, middleware);
+        const store = createStore(reducers, {name: "initialState", model: state}, middleware);
         store.dispatch(startup());
         store.dispatch(deleteAutoSave());
         logUsage('event', 'PromptForDesign', { 'event_label': type + ' load initialState' });
@@ -172,7 +172,7 @@ export default withAuth(class PromptForDesign extends Component {
 
       var { initialState } = require('../designtypes/'+type+'/initialState_metric_units.js'); // Dynamically load initialState
       var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-      const store = createStore(reducers, state, middleware);
+      const store = createStore(reducers, {name: "initialState", model: state}, middleware);
       store.dispatch(startup());
       store.dispatch(deleteAutoSave());
       logUsage('event', 'PromptForDesign', { 'event_label': type + ' load initialState' });
@@ -192,7 +192,10 @@ export default withAuth(class PromptForDesign extends Component {
 
 //        console.log("Restore Auto Save");
         var state = JSON.parse(localStorage.getItem('autosave'));
-        const store = createStore(reducers, state, middleware);
+        var name = state.name; // get name from model to restore it ***FUDGE*** for compatibility with existing autosave files
+        delete state.name; // after restoring it delete name from model ***FUDGE*** for compatibility with existing autosave files
+//        console.log('In PromptForDesign.loadAutoSave state=',state,'type=',state.type,'name=',name);
+        const store = createStore(reducers, {name: name, model: state}, middleware);
         store.dispatch(startup());
         store.dispatch(deleteAutoSave());
         logUsage('event', 'PromptForDesign', { 'event_label': state.type + ' load autoSave' });

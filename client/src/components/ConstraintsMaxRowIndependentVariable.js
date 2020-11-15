@@ -165,9 +165,9 @@ class ConstraintMaxRowIndependentVariable extends Component {
 }
 
 const mapStateToProps = state => ({
-    symbol_table: state.symbol_table,
-    system_controls: state.system_controls,
-    objective_value: state.result.objective_value
+    symbol_table: state.model.symbol_table,
+    system_controls: state.model.system_controls,
+    objective_value: state.model.result.objective_value
 });
 
 const mapDispatchToProps = {
