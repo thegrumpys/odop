@@ -646,10 +646,12 @@ it('reducers restore auto save', () => {
     expect(localStorage.getItem('autosave')).not.toBeNull();
     store.dispatch(load({
         "name": "test",
-        "type": "Test-Design"
+        "model": {
+            "type": "Test-Design"
+        }
     }));
     var design = store.getState(); // after
-    expect(design.model.name).toEqual("test");
+    expect(design.name).toEqual("test");
     expect(design.model.type).toEqual("Test-Design");
 
     store.dispatch(restoreAutoSave());

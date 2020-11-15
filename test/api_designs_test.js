@@ -3,19 +3,16 @@ require('dotenv').config();
 // Load testTestDesign into the design table with name='test' and type='Test-Design'
 // Model this after the design/model used by the client, but without content
 const testTestDesign = {
-    "name": "test",
     "type": "Test-Design",
     "version": "0.0"
 };
 // Same name, but different type
 const testTestDesign2 = {
-    "name": "test",
     "type": "Test-Design2",
     "version": "0.2"
 };
 // Different name, but same type
 const test2TestDesign = {
-    "name": "test2",
     "type": "Test-Design",
     "version": "2.0"
 };
@@ -136,11 +133,11 @@ describe('Designs with empty DB', () => {
                         .get('/api/v1/designtypes/Test-Design/designs/test')
                         .set('Authorization', 'Bearer USERID0123456789')
                         .end((err2, res2) => {
-    //                        console.log('TEST: err2=', err2);
+//                            console.log('TEST: err2=', err2);
                             res2.should.have.status(200);
                             res2.body.should.be.a('object');
                             res2.body.should.not.have.property('user').eql('USERID0123456789');
-                            res2.body.should.have.property('name').eql('test');
+                            res2.body.should.not.have.property('name').eql('test');
                             res2.body.should.have.property('type').eql('Test-Design');
                             res2.body.should.have.property('version').eql('0.0');
                             done(err2);
@@ -205,9 +202,8 @@ describe('Designs with non-empty DB', () => {
             if (err) throw err;
             var copy = Object.assign({},testTestDesign); // Make a copy
             var user = 'USERID0123456789';
-            var name = copy.name; // Get the name from the blob
+            var name = 'test'; // Get the name from the blob
             var type = copy.type; // Get the type from the blob
-            delete copy.name; // Delete the name from the blob
             delete copy.type; // Delete the type from the blob
             var value = JSON.stringify(copy); // Convert blob to string
 //            console.log('TEST: Before INSERT user=', user, ' name=', name,' type=', type,' value=', value);
@@ -284,7 +280,7 @@ describe('Designs with non-empty DB', () => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.not.have.property('user').eql('USERID0123456789');
-                    res.body.should.have.property('name').eql('test');
+                    res.body.should.not.have.property('name').eql('test');
                     res.body.should.have.property('type').eql('Test-Design');
                     res.body.should.have.property('version').eql('0.0');
                     done(err);
@@ -319,11 +315,11 @@ describe('Designs with non-empty DB', () => {
                         .get('/api/v1/designtypes/Test-Design/designs/test')
                         .set('Authorization', 'Bearer USERID0123456789')
                         .end((err2, res2) => {
-    //                        console.log('TEST: err2=', err2);
+//                            console.log('TEST: err2=', err2);
                             res2.should.have.status(200);
                             res2.body.should.be.a('object');
                             res2.body.should.not.have.property('user').eql('USERID0123456789');
-                            res2.body.should.have.property('name').eql('test');
+                            res2.body.should.not.have.property('name').eql('test');
                             res2.body.should.have.property('type').eql('Test-Design');
                             res2.body.should.have.property('version').eql('0.0');
                             done(err2);
@@ -362,9 +358,8 @@ describe('Designs with multiple DB entries', () => {
             if (err0) throw err0;
             var copy1 = Object.assign({},testTestDesign); // Make a copy
             var user1 = 'USERID0123456789';
-            var name1 = copy1.name; // Get the name from the blob
+            var name1 = 'test';
             var type1 = copy1.type; // Get the type from the blob
-            delete copy1.name; // Delete the name from the blob
             delete copy1.type; // Delete the type from the blob
             var value1 = JSON.stringify(copy1); // Convert blob to string
 //            console.log('TEST: Before INSERT user1=', user1,' name1=', name1,' type1=', type1,' value1=', value1);
@@ -375,9 +370,8 @@ describe('Designs with multiple DB entries', () => {
                 if (err1) throw err1;
                 var copy2 = Object.assign({},testTestDesign2); // Make a copy
                 var user2 = 'USERID0123456789';
-                var name2 = copy2.name; // Get the name from the blob
+                var name2 = 'test';
                 var type2 = copy2.type; // Get the type from the blob
-                delete copy2.name; // Delete the name from the blob
                 delete copy2.type; // Delete the type from the blob
                 var value2 = JSON.stringify(copy2); // Convert blob to string
 //                console.log('TEST: Before INSERT user2=', user2,' name2=', name2,' type2=', type2,' value2=', value2);
@@ -388,9 +382,8 @@ describe('Designs with multiple DB entries', () => {
                     if (err2) throw err2;
                     var copy3 = Object.assign({},test2TestDesign); // Make a copy
                     var user3 = 'USERID0123456789';
-                    var name3 = copy3.name; // Get the name from the blob
+                    var name3 = 'test2';
                     var type3 = copy3.type; // Get the type from the blob
-                    delete copy3.name; // Delete the name from the blob
                     delete copy3.type; // Delete the type from the blob
                     var value3 = JSON.stringify(copy3); // Convert blob to string
 //                    console.log('TEST: Before INSERT user3=', user3,' type3=', name3=', name3,' type3=', type3,' value3=', value3);
@@ -479,29 +472,29 @@ describe('Designs with multiple DB entries', () => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.not.have.property('user').eql('USERID0123456789');
-                    res.body.should.have.property('name').eql('test');
+                    res.body.should.not.have.property('name').eql('test');
                     res.body.should.have.property('type').eql('Test-Design');
                     res.body.should.have.property('version').eql('0.0');
                     chai.request(server)
                         .get('/api/v1/designtypes/Test-Design2/designs/test')
                         .set('Authorization', 'Bearer USERID0123456789')
                         .end((err2, res2) => {
-    //                        console.log('TEST: err2=', err2);
+//                            console.log('TEST: err2=', err2);
                             res2.should.have.status(200);
                             res2.body.should.be.a('object');
                             res2.body.should.not.have.property('user').eql('USERID0123456789');
-                            res2.body.should.have.property('name').eql('test');
+                            res2.body.should.not.have.property('name').eql('test');
                             res2.body.should.have.property('type').eql('Test-Design2');
                             res2.body.should.have.property('version').eql('0.2');
                             chai.request(server)
                                 .get('/api/v1/designtypes/Test-Design/designs/test2')
                                 .set('Authorization', 'Bearer USERID0123456789')
                                 .end((err3, res3) => {
-            //                        console.log('TEST: err3=', err3);
+//                                    console.log('TEST: err3=', err3);
                                     res3.should.have.status(200);
                                     res3.body.should.be.a('object');
                                     res3.body.should.not.have.property('user').eql('USERID0123456789');
-                                    res3.body.should.have.property('name').eql('test2');
+                                    res3.body.should.not.have.property('name').eql('test2');
                                     res3.body.should.have.property('type').eql('Test-Design');
                                     res3.body.should.have.property('version').eql('2.0');
                                     done(err3);
