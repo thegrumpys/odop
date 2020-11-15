@@ -18,6 +18,7 @@ class ActionTrade extends Component {
         super(props);
         
         this.strategyToggle = this.strategyToggle.bind(this);
+        this.onNoop = this.onNoop.bind(this);
         
         this.onStrategyDone = this.onStrategyDone.bind(this);
         this.onStrategyExisting = this.onStrategyExisting.bind(this);
@@ -118,6 +119,8 @@ class ActionTrade extends Component {
         });
         return nviol;
     }
+    
+    onNoop() {} // No-op for onHide
 
     //===========================================================
     // Strategy Modal
@@ -666,7 +669,7 @@ class ActionTrade extends Component {
                 <NavDropdown.Item onClick={this.strategyToggle}>
                     Trade&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.strategyModal} className={this.props.className} size="lg">
+                <Modal show={this.state.strategyModal} className={this.props.className} size="lg" onHide={this.onStrategyDone}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy
@@ -690,7 +693,7 @@ class ActionTrade extends Component {
                         <Button variant="primary" onClick={this.onStrategyProportional}>Proportional</Button>
                     </Modal.Footer>
                 </Modal>
-                <Modal show={this.state.arbitraryModal} className={this.props.className}>
+                <Modal show={this.state.arbitraryModal} className={this.props.className} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Arbitrary
@@ -730,7 +733,7 @@ class ActionTrade extends Component {
                         <Button variant="primary" onClick={this.onArbitraryContinue} disabled={this.state.arbitraryContinueDisabled}>Continue</Button>
                     </Modal.Footer>
                 </Modal>
-                <Modal show={this.state.sizeModal} className={this.props.className}>
+                <Modal show={this.state.sizeModal} className={this.props.className} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Size
@@ -753,7 +756,7 @@ class ActionTrade extends Component {
                         <Button variant="primary" onClick={this.onSizeContinue}>Continue</Button>
                     </Modal.Footer>
                 </Modal>
-                <Modal show={this.state.feasibleModal} className={this.props.className}>
+                <Modal show={this.state.feasibleModal} className={this.props.className} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Feasible
@@ -772,7 +775,7 @@ class ActionTrade extends Component {
                         <Button variant="primary" onClick={this.onFeasibleDone}> &nbsp; Done &nbsp; </Button>
                     </Modal.Footer>
                 </Modal>
-                <Modal show={this.state.establishModal} className={this.props.className}>
+                <Modal show={this.state.establishModal} className={this.props.className} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Establish
@@ -791,7 +794,7 @@ class ActionTrade extends Component {
                         <Button variant="primary" onClick={this.onEstablishAccept}>Accept</Button>
                     </Modal.Footer>
                 </Modal>
-                <Modal show={this.state.notFeasibleModal} className={this.props.className}>
+                <Modal show={this.state.notFeasibleModal} className={this.props.className} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Not Feasible
