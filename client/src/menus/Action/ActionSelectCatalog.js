@@ -24,8 +24,20 @@ class ActionSelectCatalog extends Component {
         };
     }
 
-    toggle() {
-//        console.log('In ActionSelectCatalog.toggle');
+    componentDidMount() {
+//        console.log('In ActionSelectCatalog.componentDidMount this.state=',this.state);
+        this.updateCatalogNames();
+    }
+    
+    componentDidUpdate(prevProps) {
+        if (prevProps.type !== this.props.type) {
+//            console.log('In ActionSelectCatalog.componentDidUpdate prevPropsprev.type=',prevProps.type,'props.type=',this.props.type);
+            this.updateCatalogNames();
+        }
+    }
+    
+    updateCatalogNames() {
+//        console.log('In ActionSelectCatalog.updateCatalogNames');
         var { getCatalogNames, getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
         var names = getCatalogNames();
 //        console.log('In ActionSelectCatalog.toggle names=',names);
@@ -57,11 +69,17 @@ class ActionSelectCatalog extends Component {
             }
         });
         this.setState({
-            modal: !this.state.modal,
             names: names,
             name: name,
             entries: entries,
             entry: entry
+        });
+    }
+    
+    toggle() {
+//        console.log('In ActionSelectCatalog.toggle');
+        this.setState({
+            modal: !this.state.modal,
         });
     }
 
@@ -122,7 +140,7 @@ class ActionSelectCatalog extends Component {
 //        console.log('In ActionSelectCatalog.render this.state=',this.state);
         return (
             <React.Fragment>
-                <NavDropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.toggle} disabled={this.state.names.length === 0}>
                     Select Catalog&hellip;
                 </NavDropdown.Item>
                 <Modal show={this.state.modal} className={this.props.className} size="lg" onHide={this.onCancel}>

@@ -26,6 +26,18 @@ class ActionSelectSize extends Component {
 
     componentDidMount() {
 //        console.log('In ActionSelectSize componentDidMount this.state=',this.state);
+        this.updateSizeTypes();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.type !== this.props.type) {
+//            console.log('In ActionSelectSize.componentDidUpdate prevPropsprev.type=',prevProps.type,'props.type=',this.props.type);
+            this.updateSizeTypes();
+        }
+    }
+    
+    updateSizeTypes() {
+//        console.log('In ActionSelectSize updateSizeTypes');
         var { getSizeTypes, getSizeEntries } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeTypes & getSizeEntries
         var types = getSizeTypes();
         var type;
@@ -54,32 +66,8 @@ class ActionSelectSize extends Component {
 
     toggle() {
 //        console.log('In ActionSelectSize.toggle');
-        var { getSizeTypes, getSizeEntries } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeTypes & getSizeEntries
-        var types = getSizeTypes();
-//        console.log('In ActionSelectSize.toggle types=',types);
-        var type;
-        if (types.length > 0)
-            type = types[0]; // Default to first type
-        // Loop to create st from symbol_table
-        var st = [];
-        this.props.symbol_table.forEach((element) => {
-            st.push(element);
-        });
-        var sizes = getSizeEntries(type, st);
-//        console.log('In ActionSelectSize.toggle sizes=',sizes);
-        var size;
-        if (sizes.length === 1)
-            size = sizes[0]; // Default to first size
-        else if (sizes.length === 2)
-            size = sizes[1]; // Default to middle size
-        else // if (sizes.length == 3)
-            size = sizes[1]; // Default to middle size
         this.setState({
             modal: !this.state.modal,
-            types: types,
-            type: type,
-            sizes: sizes,
-            size: size
         });
     }
 
