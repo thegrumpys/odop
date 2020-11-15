@@ -46,7 +46,7 @@ export function reducers(state, action) {
 //        console.log('In STARTUP state=',state);
         return state;
     case LOAD:
-        state = {model: action.payload.design};
+        state = action.payload.design;
 //        console.log('In LOAD state=',state);
         return state;
     case LOAD_INITIAL_STATE:
