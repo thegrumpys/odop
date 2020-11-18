@@ -4,10 +4,12 @@ import NameValueUnitsTable from './NameValueUnitsTable';
 import ConstraintsMinTable from './ConstraintsMinTable';
 import ConstraintsMaxTable from './ConstraintsMaxTable';
 import ResultTable from './ResultTable';
+import { connect } from 'react-redux';
 
-export class DesignTable extends Component {
+class DesignTable extends Component {
     
     render() {
+//        console.log('In DesignTable.render this.props=', this.props);
         return (
             <React.Fragment>
                 <Row>
@@ -23,3 +25,5 @@ export class DesignTable extends Component {
     }
     
 }
+
+export default connect()(DesignTable);

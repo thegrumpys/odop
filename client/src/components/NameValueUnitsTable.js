@@ -5,9 +5,10 @@ import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependent
 import NameValueUnitsRowDependentVariable from './NameValueUnitsRowDependentVariable';
 import { connect } from 'react-redux';
 
-export class NameValueUnitsTable extends Component {
+class NameValueUnitsTable extends Component {
     
     render() {
+//        console.log('In NameValueUnitsTable.render this.props=', this.props);
         return (
             <React.Fragment>
                 <Table className="col-md-6 border border-secondary" size="sm">

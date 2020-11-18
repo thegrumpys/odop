@@ -4,9 +4,10 @@ import ConstraintsMinRowIndependentVariable from './ConstraintsMinRowIndependent
 import ConstraintsMinRowDependentVariable from './ConstraintsMinRowDependentVariable';
 import { connect } from 'react-redux';
 
-export class ConstraintsMinTable extends Component {
+class ConstraintsMinTable extends Component {
     
     render() {
+//        console.log('In ConstraintsMinTable.render this.props=', this.props);
         return (
             <React.Fragment>
                 <Table className="col-md-3 border border-secondary" size="sm">

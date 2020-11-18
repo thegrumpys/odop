@@ -11,8 +11,8 @@ import {
 } from 'react-bootstrap';
 import classnames from 'classnames';
 import { deleteAutoSave } from '../store/actionCreators';
-import { ExecutePanel } from './ExecutePanel';
-import { DesignTable } from './DesignTable';
+import ExecutePanel from './ExecutePanel';
+import DesignTable from './DesignTable';
 import { connect } from 'react-redux';
 import FileOpen from '../menus/File/FileOpen';
 import FileSave from '../menus/File/FileSave';
@@ -115,7 +115,7 @@ class App extends Component {
     }
   
     render() {
-//        console.log('In App.render');
+//        console.log('In App.render this.props=', this.props);
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
         var alt = this.props.type+' icon';
 //        console.log('src=',src,' alt=',alt);

@@ -16,6 +16,7 @@ class HelpIndex extends Component {
     }
 
     render() {
+//        console.log('In HelpIndex.render this.props=', this.props);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.onHelp}>

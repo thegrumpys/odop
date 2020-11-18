@@ -26,7 +26,7 @@ class FileExport extends Component {
     }
 
     render() {
-//        console.log('In FileExport.render');
+//        console.log('In FileExport.render this.props=', this.props);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.onExport}>

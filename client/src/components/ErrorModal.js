@@ -38,6 +38,7 @@ export class ErrorModal extends Component {
     }
 
     render() {
+//        console.log('In ErrorModal.render this.props=', this.props);
         return (
             <Modal show={this.state.modal} className={this.props.className} onHide={this.toggle}>
                 { this.state.header !== '' ? <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>{this.state.header}</Modal.Header> : ''}

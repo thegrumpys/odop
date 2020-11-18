@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 class ResultTable extends Component {
     
     render() {
+//        console.log('In ResultTable.render this.props=', this.props);
         var feasibility_string;
         var feasibility_class;
         if (this.props.objective_value > this.props.system_controls.objmin) {

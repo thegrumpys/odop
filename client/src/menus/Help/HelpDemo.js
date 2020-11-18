@@ -77,7 +77,7 @@ class HelpDemo extends Component {
     }
     
     render() {
-//        console.log('In HelpDemo.render');
+//        console.log('In HelpDemo.render this.props=', this.props);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>

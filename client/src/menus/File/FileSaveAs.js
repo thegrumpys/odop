@@ -175,6 +175,7 @@ class FileSaveAs extends Component {
     }
 
     render() {
+//        console.log('In FileSaveAs.render this.props=', this.props);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

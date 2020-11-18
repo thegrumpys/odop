@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Alert, Button, Container, Row } from 'react-bootstrap';
 import { load } from '../store/actionCreators';
+import { connect } from 'react-redux';
 
 export var startExecute = function(prefix,steps) {
 //    console.log('In startExecute this=',this,'prefix=',prefix,'steps=',steps);
@@ -22,7 +23,7 @@ export var startExecute = function(prefix,steps) {
     }
 }
 
-export class ExecutePanel extends Component {
+class ExecutePanel extends Component {
     constructor(props) {
         super(props);
 //        console.log('In ExecutePanel constructor props=',props);
@@ -107,7 +108,7 @@ export class ExecutePanel extends Component {
     }
     
     render() {
-//        console.log('In ExecutePanel render this.state.text=',this.state.text);
+//        console.log('In ExecutePanel.render this.props=', this.props);
         return this.state.modal && (
             <Alert variant="success" style={{marginTop: '10px'}}>
                 <Container>
@@ -137,3 +138,5 @@ export class ExecutePanel extends Component {
 ExecutePanel.contextTypes = {
     store: PropTypes.object
 };
+
+export default connect()(ExecutePanel);

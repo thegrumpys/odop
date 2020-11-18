@@ -105,7 +105,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
     }
     
     render() {
-//        console.log('In NameValueUnitsRowIndependentVariable.render');
+//        console.log('In NameValueUnitsRowIndependentVariable.render this.props=', this.props);
         // =======================================
         // Table Row
         // =======================================

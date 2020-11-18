@@ -16,7 +16,7 @@ class FEApp extends Component {
 //  }
 
   render() {
-//    console.log("In FEApp.render");
+//    console.log("In FEApp.render this.props=", this.props);
     return (
       <Router>
         <Security {...config.oidc} onAuthRequired={onAuthRequired}>

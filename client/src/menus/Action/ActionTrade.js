@@ -664,6 +664,7 @@ class ActionTrade extends Component {
     //===========================================================
     
     render() {
+//        console.log('In ActionTrade.render this.props=', this.props);
         var design;
         const { store } = this.context;
         design = store.getState();

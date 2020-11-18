@@ -4,9 +4,10 @@ import ConstraintsMaxRowIndependentVariable from './ConstraintsMaxRowIndependent
 import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
 import { connect } from 'react-redux';
 
-export class ConstraintsMaxTable extends Component {
+class ConstraintsMaxTable extends Component {
     
     render() {
+//        console.log('In ConstraintsMaxTable.render this.props=', this.props);
         return (
             <React.Fragment>
                 <Table className="col-md-3 border border-secondary" size="sm">

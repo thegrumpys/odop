@@ -124,7 +124,7 @@ class ActionSelectSize extends Component {
     }
 
     render() {
-//        console.log('In ActionSelectSize.render');
+//        console.log('In ActionSelectSize.render this.props=', this.props);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.types.length === 0}>

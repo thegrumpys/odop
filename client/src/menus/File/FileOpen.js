@@ -166,7 +166,7 @@ class FileOpen extends Component {
     }
 
     render() {
-//        console.log('In FileOpen.render');
+//        console.log('In FileOpen.render this.props=', this.props);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

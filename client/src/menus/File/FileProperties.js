@@ -70,7 +70,7 @@ class FileProperties extends Component {
     }
 
     render() {
-//        console.log('In FileProperties.render');
+//        console.log('In FileProperties.render this.props=', this.props);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

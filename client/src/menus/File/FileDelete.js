@@ -164,7 +164,7 @@ class FileDelete extends Component {
     }
 
     render() {
-//        console.log('In FileDelete.render this.state.type=',this.state.type,' this.state.name=',this.state.name);
+//        console.log('In FileDelete.render this.props=', this.props);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

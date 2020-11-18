@@ -265,7 +265,7 @@ export default withAuth(class PromptForDesign extends Component {
   }
 
     render() {
-//        console.log('In PromptForDesign.render');
+//        console.log('In PromptForDesign.render this.props=', this.props);
         if (this.state.store === null) {
             return (
                 <React.Fragment>
