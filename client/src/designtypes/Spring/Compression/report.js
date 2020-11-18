@@ -383,6 +383,7 @@ export function report(report_name, prefs, st, labels) {
                         <td>=</td>
                         <td>{wire_len_t.toFixed(3)}</td>
                         <td>{st[o.L_Free].units}</td>
+                        <td/>
                     </tr>
                     <tr>
                         <td>{st[o.L_Stroke].name}</td>
@@ -408,6 +409,7 @@ export function report(report_name, prefs, st, labels) {
                         <td>=</td>
                         <td>{st[o.Cycle_Life].value.toFixed(0)}</td>
                         <td>{cycle_life_u}</td>
+                        <td/>
                     </tr>
                 </tbody>
             </table>

@@ -13,6 +13,7 @@ import classnames from 'classnames';
 import { deleteAutoSave } from '../store/actionCreators';
 import ExecutePanel from './ExecutePanel';
 import DesignTable from './DesignTable';
+import Report0 from './Report0';
 import { connect } from 'react-redux';
 import FileOpen from '../menus/File/FileOpen';
 import FileSave from '../menus/File/FileSave';
@@ -184,6 +185,11 @@ class App extends Component {
                                     {this.props.name}
                                 </Nav.Link>
                             </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link className={classnames({ active: this.state.activeTab === "Report0" })} onClick={() => { this.setKey("Report0"); }}>
+                                    <span className="d-none d-md-inline">Report: 0 (inter)</span>
+                                </Nav.Link>
+                            </Nav.Item>
                             {this.state.report_names.map((element,i) => {return (
                                 <Nav.Item key={element}>
                                     <Nav.Link className={classnames({ active: this.state.activeTab === "Report"+(i+1).toString() })} onClick={() => { this.setKey("Report"+(i+1).toString()); }}>
@@ -201,6 +207,11 @@ class App extends Component {
                         <Tab eventKey="Design">
                             <Container fluid id="design">
                                 <DesignTable />
+                            </Container>
+                        </Tab>
+                        <Tab eventKey="Report0">
+                            <Container fluid id="report0">
+                                <Report0 />
                             </Container>
                         </Tab>
                         {this.state.report_names.map((element,i) => {return (
