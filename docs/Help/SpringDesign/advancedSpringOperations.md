@@ -71,9 +71,6 @@
 
     HotWound       - U.S. customary units (inches, pounds) 
     HotWoundMetric - metric units (mm, Newtons)
-<!---
-    SMI_HW         - SMI material properties; U.S. units
--->
 
  Each of these files are pre-configured for a material type (Eg.  5160H)
  that carries an appropriate value of HOT\_FACTOR_KH, an end type of
