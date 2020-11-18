@@ -8,7 +8,7 @@
  A method of getting ODOP:Spring to find a design with a specific working
  stress is presented here.  Another approach that allows the user to have
  complete control over the allowable stresses that are used in the factor of
- safety calculations is presented in the MATERIALS section.
+ safety calculations is presented in the [MATERIALS](materials) section.
 
  First, it will be necessary to free the various FS_ constraints so that
  they are no longer active.
@@ -64,13 +64,16 @@
  Refer to additional discussion in the [MATERIALS](materials) section.
  
 **HOT WOUND**   
- The easiest way to design a hot wound spring is to load a start point
+ The easiest way to design a hot wound spring is to open a start point
  that is already set up for hot wound. 
- Sample hot wound startup files  supplied with ODOP:Spring are:
+ Sample compression spring hot wound startup designs supplied with ODOP:Spring 
+ (marked "[ReadOnly]") are:   
 
-    HOT_WND -    compression spring, inch-pound-second units
-    HOT_CGS -    compression spring, metric units
-    SMI_HW  -    compression spring, SMI material properties
+    HotWound       - U.S. customary units (inches, pounds) 
+    HotWoundMetric - metric units (mm, Newtons)
+<!---
+    SMI_HW         - SMI material properties; U.S. units
+-->
 
  Each of these files are pre-configured for a material type (Eg.  5160H)
  that carries an appropriate value of HOT\_FACTOR_KH, an end type of
@@ -85,7 +88,7 @@
  The value of HOT\_FACTOR\_KH is used to reduce the effective modulus of
  elasticity and torsional modulus in the design equations.
 
- For normal cold coiled materials the value of HOT\_FACTOR\_KH is 1.00.
+ For normal cold coiled materials, the value of HOT\_FACTOR\_KH is 1.00.
  Thus, it has no effect on the modulus.  For materials designated as
  "hot wound" in the materials table, the value of HOT\_FACTOR\_KH is
  automatically established as appropriate (generally 0.96 for centerless
