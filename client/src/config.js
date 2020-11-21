@@ -9,7 +9,7 @@ var session_refresh;
 
 if (process.env.NODE_ENV !== "production") { // Are we running on localhost?
 //  console.log('In config: process.env.REACT_APP_ISSUER=', process.env.REACT_APP_ISSUER, 'process.env.REACT_APP_CLIENT_ID=', process.env.REACT_APP_CLIENT_ID);
-  design_user = process.env.REACT_APP_DESIGN_USER || '00u1p2btpo5VDhoKn357' // 'public' user
+  design_user = process.env.REACT_APP_DESIGN_USER || '00u1p2btpo5VDhoKn357'
   design_types = process.env.REACT_APP_DESIGN_TYPES || '["Piston-Cylinder","Solid","Spring/Compression","Spring/Extension","Spring/Torsion"]';
   design_types = JSON.parse(design_types);
   design_type = process.env.REACT_APP_DESIGN_TYPE || 'Spring/Compression';

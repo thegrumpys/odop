@@ -145,6 +145,15 @@ class FileOpen extends Component {
         // Noop - all done
     }
 
+    onSignIn() {
+//      console.log('In FileOpen.onCancel');
+      this.setState({
+          modal: !this.state.modal
+      });
+      // Enable SignInWidget
+      // When done, enable File Open modal
+  }
+
     render() {
 //        console.log('In FileOpen.render this.props=', this.props);
         return (
@@ -175,6 +184,7 @@ class FileOpen extends Component {
                         </Form.Control>
                     </Modal.Body>
                     <Modal.Footer>
+                        <Button variant="secondary" onCLick={this.onSignIn}>Sign In...</Button>{' '}
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button variant="primary" onClick={this.onOpen}>Open</Button>
                     </Modal.Footer>

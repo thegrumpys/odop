@@ -7,7 +7,8 @@ import {
     Tab,
     NavDropdown,
     OverlayTrigger,
-    Tooltip
+    Tooltip,
+    Button
 } from 'react-bootstrap';
 import classnames from 'classnames';
 import { deleteAutoSave } from '../store/actionCreators';
@@ -127,6 +128,9 @@ class App extends Component {
                   <Navbar.Toggle onClick={this.toggle} />
                     <Navbar.Collapse in={this.state.isOpen}>
                         <Nav className="mr-auto">
+                            <Button variant="light">
+                                Sign In&hellip;
+                            </Button>
                             <NavDropdown title="File">
                                 <FileOpen />
                                 <FileRecent />
