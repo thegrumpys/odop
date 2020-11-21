@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Spinner } from './components/Spinner';
 import { ErrorModal } from './components/ErrorModal';
-import FEApp from './components/FEApp';
+import PromptForDesign from './components/PromptForDesign';
 import './odop.css';
 
 //function loggerMiddleware({ getState }) {
@@ -22,4 +22,4 @@ import './odop.css';
 //  }
 
 //console.log('CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'starting on port =', process.env.PORT, 'node version =', process.version);
-ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><FEApp /></div>, document.getElementById('root'));
+ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><PromptForDesign /></div>, document.getElementById('root'));

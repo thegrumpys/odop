@@ -5,7 +5,7 @@ import { changeName, changeUser, deleteAutoSave } from '../../store/actionCreato
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
-import { withAuth } from '@okta/okta-react';
+import config from '../../config';
 
 class FileSaveAs extends Component {
 
@@ -20,31 +20,12 @@ class FileSaveAs extends Component {
             modal: false,
             names: [],
             name: undefined, // default to no name
-            authenticated: null,
-            user: null,
+            user: config.design.user,
         };
     }
     
     async componentDidMount() {
 //        console.log('In FileSaveAs.componentDidMount');
-        var authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileSaveAs.componentDidMount before authenticated=",authenticated);
-        if (authenticated !== this.state.authenticated) { // Did authentication change?
-            this.setState({ authenticated }); // Remember our current authentication state
-            if (authenticated) { // We have become authenticated
-                var user = await this.props.auth.getUser();
-//                console.log('In FileSaveAs.componentDidMount user=',user);
-                this.setState({
-                    user: user.sub,
-                });
-                this.props.changeUser(user.sub);
-            } else { // We have become unauthenticated
-                this.setState({
-                    user: null,
-                });
-                this.props.changeUser(null);
-            }
-        }
     }
 
     componentDidUpdate(prevProps) {
@@ -214,9 +195,7 @@ const mapDispatchToProps = {
     deleteAutoSave: deleteAutoSave
 };
 
-export default withAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(FileSaveAs)
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(FileSaveAs);

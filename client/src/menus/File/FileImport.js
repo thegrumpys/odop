@@ -5,7 +5,6 @@ import { load, deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
-import { withAuth } from '@okta/okta-react';
 
 class FileImport extends Component {
 
@@ -120,9 +119,7 @@ const mapDispatchToProps = {
     deleteAutoSave: deleteAutoSave
 };
 
-export default withAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(FileImport)
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(FileImport);

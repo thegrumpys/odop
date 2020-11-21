@@ -36,7 +36,6 @@ import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
-import { withAuth } from '@okta/okta-react';
 import { logUsage } from '../logUsage';
 
 class App extends Component {
@@ -141,9 +140,6 @@ class App extends Component {
                                 <FilePreferences />
                                 <FileProperties />
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={() => {this.props.deleteAutoSave();this.props.auth.logout()}}>
-                                    Logout
-                                </NavDropdown.Item>
                             </NavDropdown>
                             <NavDropdown title="Action">
                                 <ActionSearch />
@@ -230,9 +226,7 @@ const mapDispatchToProps = {
     deleteAutoSave: deleteAutoSave
 };
 
-export default withAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(App)
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);

@@ -5,7 +5,6 @@ import { changeUser, load, deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
-import { withAuth } from '@okta/okta-react';
 import config from '../../config';
 
 class FileOpen extends Component {
@@ -24,31 +23,12 @@ class FileOpen extends Component {
             names: [],
             type: this.props.type,
             name: this.props.name,
-            authenticated: null,
-            user: null,
+            user: config.design.user,
         };
     }
 
     async componentDidMount() {
 //        console.log('In FileOpen.componentDidMount');
-        var authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileOpen.componentDidMount before authenticated=",authenticated);
-        if (authenticated !== this.state.authenticated) { // Did authentication change?
-            this.setState({ authenticated }); // Remember our current authentication state
-            if (authenticated) { // We have become authenticated
-                var user = await this.props.auth.getUser();
-//                console.log('In FileOpen.componentDidMount user=',user);
-                this.setState({
-                    user: user.sub,
-                });
-                this.props.changeUser(user.sub);
-            } else { // We have become unauthenticated
-                this.setState({
-                    user: null,
-                });
-                this.props.changeUser(null);
-            }
-        }
     }
 
     componentDidUpdate(prevProps) {
@@ -215,9 +195,7 @@ const mapDispatchToProps = {
     deleteAutoSave: deleteAutoSave
 };
 
-export default withAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(FileOpen)
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(FileOpen);

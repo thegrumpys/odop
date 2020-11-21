@@ -10,10 +10,9 @@ import { displayError } from './ErrorModal';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 import { logUsage } from '../logUsage';
-import { withAuth } from '@okta/okta-react';
 import config from '../config';
 
-export default withAuth(class PromptForDesign extends Component {
+export default class PromptForDesign extends Component {
 
     constructor(props) {
         super(props);
@@ -24,44 +23,20 @@ export default withAuth(class PromptForDesign extends Component {
         this.onLoadInitialState = this.onLoadInitialState.bind(this);
         this.onLoadInitialStateMetric = this.onLoadInitialStateMetric.bind(this);
         this.onLoadAutoSave = this.onLoadAutoSave.bind(this);
-        this.onLogout = this.onLogout.bind(this);
         this.state = {
             modal: true,
             designtypes: config.design.types,
             designs: [],
             type: config.design.type,
             name: config.design.name,
-            authenticated: null,
             user: null,
             store: null,
         };
     }
 
     async componentDidMount() {
-//        console.log('In PromptForDesign.componentDidMount this.props.auth=',this.props.auth);
-        var authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In PromptForDesign.componentDidMount before authenticated=",authenticated);
-        if (authenticated !== this.state.authenticated) { // Did authentication change?
-            this.setState({ authenticated }); // Remember our current authentication state
-            if (authenticated) { // We have become authenticated
-                var user = await this.props.auth.getUser();
-//                console.log('In PromptForDesign.componentDidMount user=',user);
-                if (user !== undefined) { // Have we a user?
-                    this.setState({
-                        user: user.sub,
-                    });
-                } else {
-                    this.setState({
-                        user: null,
-                    });
-                }
-            } else { // We have become unauthenticated
-                this.setState({
-                    user: null,
-                });
-            }
-            this.getDesignNames(this.state.type);
-        }
+//        console.log('In PromptForDesign.componentDidMount');
+        this.getDesignNames(this.state.type);
     }
 
     getDesignNames(type) {
@@ -252,18 +227,6 @@ export default withAuth(class PromptForDesign extends Component {
       this.loadInitialStateMetric(this.state.type);
   }
 
-    onLogout() {
-//        console.log('In PromptForDesign.onLogout');
-        this.setState({
-            modal: !this.state.modal
-        });
-        if (typeof(Storage) !== "undefined") {
-//            console.log("Delete Auto Save");
-            localStorage.removeItem('autosave'); // remove auto save file
-        }
-        this.props.auth.logout()
-  }
-
     render() {
 //        console.log('In PromptForDesign.render this.props=', this.props);
         if (this.state.store === null) {
@@ -296,7 +259,6 @@ export default withAuth(class PromptForDesign extends Component {
                             </Form.Control>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="secondary" onClick={this.onLogout}>Logout</Button>
                             {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
                             {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialStateMetric}>Load Initial State Metric</Button>}{' '}
                             {typeof(Storage) !== "undefined" && localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={this.onLoadAutoSave}>Load Auto Save</Button>}{' '}
@@ -311,4 +273,4 @@ export default withAuth(class PromptForDesign extends Component {
             );
         }
     }
-});
+}
