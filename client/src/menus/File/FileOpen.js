@@ -184,7 +184,7 @@ class FileOpen extends Component {
                         </Form.Control>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onCLick={this.onSignIn}>Sign In...</Button>{' '}
+                        <Button variant="secondary" onClick={this.onSignIn}>Sign In...</Button>{' '}
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button variant="primary" onClick={this.onOpen}>Open</Button>
                     </Modal.Footer>

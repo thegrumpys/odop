@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { initialSystemControls } from '../initialSystemControls';
 import App from './App';
-import { startup, deleteAutoSave } from '../store/actionCreators';
+import { changeUser, load, loadInitialState, deleteAutoSave } from '../store/actionCreators';
 import { displaySpinner } from './Spinner';
 import { displayError } from './ErrorModal';
 import { reducers } from '../store/reducers';
@@ -12,7 +13,7 @@ import { dispatcher } from '../store/middleware/dispatcher';
 import { logUsage } from '../logUsage';
 import config from '../config';
 
-export default class PromptForDesign extends Component {
+class PromptForDesign extends Component {
 
     constructor(props) {
         super(props);
@@ -30,7 +31,6 @@ export default class PromptForDesign extends Component {
             type: config.design.type,
             name: config.design.name,
             user: null,
-            store: null,
         };
     }
 
@@ -73,13 +73,6 @@ export default class PromptForDesign extends Component {
 
     getDesign(type, name) {
 //        console.log('In PromptForDesign.getDesign type=', type, ' name=', name, ' user=', this.state.user);
-
-        /* eslint-disable no-underscore-dangle */
-        const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-        /* eslint-enable */
-
-        const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
-
         displaySpinner(true);
 //        console.log('In PromptForDesign.getDesign this.state.user=',this.state.user);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
@@ -99,13 +92,9 @@ export default class PromptForDesign extends Component {
             var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
             var migrated_design = migrate(design);
             if (migrated_design.jsontype === "ODOP") {
-                const store = createStore(reducers, {name: name, model: migrated_design}, middleware);
-                store.dispatch(startup());
-                store.dispatch(deleteAutoSave());
+                this.props.load({name: name, model: migrated_design});
+                this.props.deleteAutoSave();
                 logUsage('event', 'PromptForDesign', { 'event_label': type + ' ' + name });
-                this.setState({
-                    store: store
-                });
             } else {
                 displayError('Invalid JSON type, function ignored');
             }
@@ -116,67 +105,23 @@ export default class PromptForDesign extends Component {
         });
     }
 
-    loadInitialState(type) {
-//        console.log('In PromptForDesign.loadInitialState type=', type);
-
-        /* eslint-disable no-underscore-dangle */
-        const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-        /* eslint-enable */
-
-        const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
-
-        var { initialState } = require('../designtypes/'+type+'/initialState.js'); // Dynamically load initialState
-        var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-        const store = createStore(reducers, {name: "initialState", model: state}, middleware);
-        store.dispatch(startup());
-        store.dispatch(deleteAutoSave());
-        logUsage('event', 'PromptForDesign', { 'event_label': type + ' load initialState' });
-        this.setState({
-            store: store
-        });
+    loadInitialState(type, units) {
+//        console.log('In PromptForDesign.loadInitialState type=', type, 'units=', units);
+        this.props.loadInitialState(type, units);
+        this.props.deleteAutoSave();
+        logUsage('event', 'PromptForDesign', { 'event_label': type + ' load initialState ' + units});
     }
-
-    loadInitialStateMetric(type) {
-//      console.log('In PromptForDesign.loadInitialStateMetric type=', type);
-
-      /* eslint-disable no-underscore-dangle */
-      const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-      /* eslint-enable */
-
-      const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
-
-      var { initialState } = require('../designtypes/'+type+'/initialState_metric_units.js'); // Dynamically load initialState
-      var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-      const store = createStore(reducers, {name: "initialState", model: state}, middleware);
-      store.dispatch(startup());
-      store.dispatch(deleteAutoSave());
-      logUsage('event', 'PromptForDesign', { 'event_label': type + ' load initialState' });
-      this.setState({
-          store: store
-      });
-  }
 
     loadAutoSave() {
 //        console.log('In PromptForDesign.loadAutoSave');
-
-        /* eslint-disable no-underscore-dangle */
-        const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-        /* eslint-enable */
-
-        const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
-
 //        console.log("Restore Auto Save");
         var state = JSON.parse(localStorage.getItem('autosave'));
         var name = state.name; // get name from model to restore it ***FUDGE*** for compatibility with existing autosave files
         delete state.name; // after restoring it delete name from model ***FUDGE*** for compatibility with existing autosave files
 //        console.log('In PromptForDesign.loadAutoSave state=',state,'type=',state.type,'name=',name);
-        const store = createStore(reducers, {name: name, model: state}, middleware);
-        store.dispatch(startup());
-        store.dispatch(deleteAutoSave());
+        this.props.load({name: name, model: state});
+        this.props.deleteAutoSave();
         logUsage('event', 'PromptForDesign', { 'event_label': state.type + ' load autoSave' });
-        this.setState({
-            store: store
-        });
     }
 
     onSelectType(event) {
@@ -216,7 +161,7 @@ export default class PromptForDesign extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        this.loadInitialState(this.state.type);
+        this.loadInitialState(this.state.type, 'US');
     }
 
     onLoadInitialStateMetric() {
@@ -224,12 +169,12 @@ export default class PromptForDesign extends Component {
       this.setState({
           modal: !this.state.modal
       });
-      this.loadInitialStateMetric(this.state.type);
+      this.loadInitialState(this.state.type, 'Metric');
   }
 
     render() {
 //        console.log('In PromptForDesign.render this.props=', this.props);
-        if (this.state.store === null) {
+        if (this.props.name === null) {
             return (
                 <React.Fragment>
                     <Modal show={this.state.modal} className={this.props.className} size="lg" backdrop='static'>
@@ -260,7 +205,7 @@ export default class PromptForDesign extends Component {
                         </Modal.Body>
                         <Modal.Footer>
                             {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
-                            {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialStateMetric}>Load Initial State Metric</Button>}{' '}
+                            {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialStateMetric}>Load Metric Initial State</Button>}{' '}
                             {typeof(Storage) !== "undefined" && localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={this.onLoadAutoSave}>Load Auto Save</Button>}{' '}
                             <Button variant="primary" onClick={this.onOpen}>Open</Button>
                         </Modal.Footer>
@@ -269,8 +214,24 @@ export default class PromptForDesign extends Component {
             );
         } else {
             return (
-              <Provider store={this.state.store}><App store={this.state.store} /></Provider>
+              <App />
             );
         }
     }
 }
+
+const mapStateToProps = state => ({
+    name: state.name, 
+});
+
+const mapDispatchToProps = {
+    changeUser: changeUser,
+    load: load,
+    loadInitialState: loadInitialState,
+    deleteAutoSave: deleteAutoSave
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+ )(PromptForDesign);
