@@ -52,11 +52,12 @@ export function load(design) {
     }
 }
 
-export function loadInitialState(type) {
+export function loadInitialState(type, units) {
     return {
         type: LOAD_INITIAL_STATE,
         payload: {
-            type
+            type,
+            units
         } 
     }
 }
