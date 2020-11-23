@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 
 export var displaySpinner = function(display) {
+//    console.log('In displaySpinner display=', display);
     this.setState({
         modal: display
     });

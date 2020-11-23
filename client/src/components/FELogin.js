@@ -15,8 +15,9 @@ class FELogin extends Component {
   }
 
   async onSuccess(res) {
-    console.log('In FELogin.onSuccess this.props=',this.props,'res=',res);
+//    console.log('In FELogin.onSuccess this.props=',this.props,'res=',res);
     if (res.status === 'SUCCESS') {
+      var user;
       if (this.props.authState.isAuthenticated) {
           user = this.props.oktaAuth.idToken.clientId;
       } else {
@@ -34,11 +35,12 @@ class FELogin extends Component {
 
   onError(err) {
     console.log('error logging in', err);
+    displayError('Error logging in, Error: ' + err);
     this.props.changeUser(null);
   }
 
   render() {
-    console.log('In FELogin.render this.props=',this.props);
+//    console.log('In FELogin.render this.props=',this.props);
     return this.props.authState.isAuthenticated ?
       <Redirect to={{ pathname: '/' }}/> :
       <FELoginWidget

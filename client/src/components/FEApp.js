@@ -9,7 +9,7 @@ import { OktaAuth } from '@okta/okta-auth-js'
 export default withRouter(class FEApp extends Component {
   constructor(props) {
     super(props);
-    console.log('In FEApp.constructor this.props=',this.props);
+//    console.log('In FEApp.constructor this.props=',this.props);
     this.onAuthRequired = this.onAuthRequired.bind(this);
   }
 
@@ -18,7 +18,7 @@ export default withRouter(class FEApp extends Component {
   }
 
   render() {
-    console.log('In FEApp.render this.props=',this.props);
+//    console.log('In FEApp.render this.props=',this.props);
 
     // Note: If your app is configured to use the Implicit Flow
     // instead of the Authorization Code with Proof of Code Key Exchange (PKCE)

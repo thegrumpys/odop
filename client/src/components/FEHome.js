@@ -6,20 +6,21 @@ import { displaySpinner } from './Spinner';
 import { displayError } from './ErrorModal';
 import { load, loadInitialState, deleteAutoSave } from '../store/actionCreators';
 import { connect } from 'react-redux';
+import { logUsage } from '../logUsage';
 
 class FEHome extends Component {
   constructor(props) {
-    console.log('In FEHome.constructor props=',props);
+//    console.log('In FEHome.constructor props=',props);
     super(props);
   }
   
   componentDidMount() {
-    console.log('In FEHome.componentDidMount this.props=',this.props);
+//    console.log('In FEHome.componentDidMount this.props=',this.props);
     this.getDesign(config.design.type, config.design.name);
   }
 
   getDesign(type, name) {
-    console.log('In FEHome.getDesign type=', type, ' name=', name, ' user=', this.props.user);
+//    console.log('In FEHome.getDesign type=', type, ' name=', name, ' user=', this.props.user);
     displaySpinner(true);
 //    console.log('In FEHome.getDesign this.props.user=',this.props.user);
     fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
@@ -43,7 +44,7 @@ class FEHome extends Component {
             this.props.deleteAutoSave();
             logUsage('event', 'FEHome', { 'event_label': type + ' ' + name });
         } else {
-            displayError('Invalid JSON type, function ignored');
+            throw Error('Invalid JSON type, function ignored');
         }
     })
     .catch(error => {
@@ -53,8 +54,10 @@ class FEHome extends Component {
 }
 
   render() {
-    console.log('In FEHome.render this.props=',this.props);
-    if (this.props.authState.isPending) return null;
+//    console.log('In FEHome.render this.props=',this.props);
+    // If you're not logged in then there is nothing to display
+    // If there is no name then there is no model therefore these is nothing to display
+    if (this.props.authState.isPending || this.props.name === null) return null;
     return (
       <div>
         <App />
@@ -65,6 +68,7 @@ class FEHome extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
+    name: state.name,
 });
 
 const mapDispatchToProps = {

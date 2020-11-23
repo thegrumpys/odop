@@ -4,7 +4,7 @@ import FEApp from './FEApp';
 
 class FEAppWithRouter extends Component {
   render() {
-    console.log('In FEAppWithRouter.render this.props=',this.props);
+//    console.log('In FEAppWithRouter.render this.props=',this.props);
     return (
       <Router>
         <FEApp/>
