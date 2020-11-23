@@ -7,14 +7,15 @@ import {
     Tab,
     NavDropdown,
     OverlayTrigger,
-    Tooltip,
-    Button
+    Tooltip
 } from 'react-bootstrap';
 import classnames from 'classnames';
 import { deleteAutoSave } from '../store/actionCreators';
 import ExecutePanel from './ExecutePanel';
 import DesignTable from './DesignTable';
 import { connect } from 'react-redux';
+import LogIn from '../menus/Session/LogIn';
+import LogOut from '../menus/Session/LogOut';
 import FileOpen from '../menus/File/FileOpen';
 import FileSave from '../menus/File/FileSave';
 import FileSaveAs from '../menus/File/FileSaveAs';
@@ -37,6 +38,7 @@ import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
+import { withOktaAuth } from '@okta/okta-react';
 import { logUsage } from '../logUsage';
 
 class App extends Component {
@@ -119,6 +121,7 @@ class App extends Component {
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
         var alt = this.props.type+' icon';
 //        console.log('src=',src,' alt=',alt);
+        const logOnOff = this.props.authState.isAuthenticated ? <LogOut /> : <LogIn />;
         return (
             <React.Fragment>
                 <Navbar variant="light" bg="light" expand="md" fixed="top">
@@ -128,9 +131,7 @@ class App extends Component {
                   <Navbar.Toggle onClick={this.toggle} />
                     <Navbar.Collapse in={this.state.isOpen}>
                         <Nav className="mr-auto">
-                            <Button variant="light">
-                                Sign In&hellip;
-                            </Button>
+                            {logOnOff}
                             <NavDropdown title="File">
                                 <FileOpen />
                                 <FileRecent />
@@ -230,7 +231,9 @@ const mapDispatchToProps = {
     deleteAutoSave: deleteAutoSave
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(App);
+export default withOktaAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(App)
+);
