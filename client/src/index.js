@@ -7,8 +7,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { dispatcher } from './store/middleware/dispatcher';
 import { reducers } from './store/reducers';
 import { Provider } from 'react-redux'
-import FEAppWithRouter from './components/FEAppWithRouter';
+import FEApp from './components/FEApp';
 import './odop.css';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 //function loggerMiddleware({ getState }) {
 //    return next => action => {
@@ -34,4 +35,4 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 const store = createStore(reducers, {user: null, name: null, model: null}, middleware);
 
-ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><Provider store={store}><FEAppWithRouter /></Provider></div>, document.getElementById('root'));
+ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><Provider store={store}><Router><FEApp /></Router></Provider></div>, document.getElementById('root'));
