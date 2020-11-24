@@ -137,7 +137,7 @@ class App extends Component {
                         <Nav className="mr-auto">
                             {logOnOff}
                             <NavDropdown title="File">
-                                <Link to='/file/test'>Test</Link>
+                                <Link to='/file/test' Class="dropdown-item">Test</Link>
                                 <FileOpen />
                                 <FileRecent />
                                 <FileSave />
