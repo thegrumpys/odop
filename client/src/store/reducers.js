@@ -74,14 +74,14 @@ export function reducers(state, action) {
             ...state,
             name: action.payload.name
         });
-//        console.log('In CHANGE_NAME action.payload.name=',action.payload.name,'state=',state);
+        console.log('In CHANGE_NAME action.payload.name=',action.payload.name,'state=',state);
         return state;
     case CHANGE_USER:
         state = Object.assign({}, {
             ...state,
             user: action.payload.user
         });
-//        console.log('In CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
+        console.log('In CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
         return state;
 
 // SYMBOL

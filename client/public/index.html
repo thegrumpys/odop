@@ -26,6 +26,13 @@
   gtag('js', new Date());
   gtag('config', 'AW-659158420');
 </script>
+<script>
+  window.addEventListener('load',function(){
+    if(jQuery('.okta-form-title.o-form-head').is(':visible')){
+      gtag('event', 'conversion', {'send_to': 'AW-659158420/fPTOCOiopNQBEJTrp7oC'});
+    }
+  })
+</script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">

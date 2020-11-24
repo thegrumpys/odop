@@ -9,6 +9,7 @@ import {
     OverlayTrigger,
     Tooltip
 } from 'react-bootstrap';
+import { withRouter, Link } from 'react-router-dom';
 import classnames from 'classnames';
 import { deleteAutoSave } from '../store/actionCreators';
 import ExecutePanel from './ExecutePanel';
@@ -44,7 +45,7 @@ import { logUsage } from '../logUsage';
 class App extends Component {
     
     constructor(props) {
-//        console.log("In App.constructor props=",props);
+        console.log("In App.constructor props=",props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.setKey = this.setKey.bind(this);
@@ -60,9 +61,9 @@ class App extends Component {
     }
     
     componentDidUpdate(prevProps) {
-//        console.log('In App.componentDidUpdate');
+        console.log('In App.componentDidUpdate');
         if (prevProps.type !== this.props.type) {
-//            console.log('In App.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+            console.log('In App.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
             var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
             var report_names = getReportNames();
 //            console.log('In App.componentDidUpdate report_names=', report_names);
@@ -117,7 +118,10 @@ class App extends Component {
     }
   
     render() {
-//        console.log('In App.render this.props=', this.props);
+        console.log('In App.render this.props=', this.props);
+        // If you're waiting to logged in then there is nothing to display OR
+        // If there is no name then there is no model therefore these is nothing to display
+        if (this.props.authState.isPending || this.props.name === null) return null;
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
         var alt = this.props.type+' icon';
 //        console.log('src=',src,' alt=',alt);
@@ -133,6 +137,7 @@ class App extends Component {
                         <Nav className="mr-auto">
                             {logOnOff}
                             <NavDropdown title="File">
+                                <Link to='/file/test'>Test</Link>
                                 <FileOpen />
                                 <FileRecent />
                                 <FileSave />
@@ -231,9 +236,9 @@ const mapDispatchToProps = {
     deleteAutoSave: deleteAutoSave
 };
 
-export default withOktaAuth(
+export default withRouter(withOktaAuth(
     connect(
         mapStateToProps,
         mapDispatchToProps
     )(App)
-);
+));

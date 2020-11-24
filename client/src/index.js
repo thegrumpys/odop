@@ -10,6 +10,8 @@ import { Provider } from 'react-redux'
 import FEApp from './components/FEApp';
 import './odop.css';
 import { BrowserRouter as Router } from 'react-router-dom';
+import config from './config';
+import { loadInitialState, changeName } from './store/actionCreators';
 
 //function loggerMiddleware({ getState }) {
 //    return next => action => {
@@ -26,13 +28,13 @@ import { BrowserRouter as Router } from 'react-router-dom';
 //    }
 //  }
 
-//console.log('CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'starting on port =', process.env.PORT, 'node version =', process.version);
+console.log('CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'starting on port =', process.env.PORT, 'node version =', process.version);
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
-
 const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
-const store = createStore(reducers, {user: null, name: null, model: null}, middleware);
-
+const store = createStore(reducers, {user: null}, middleware);
+store.dispatch(loadInitialState(config.design.type, 'US'));
+store.dispatch(changeName(config.design.name));
 ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><Provider store={store}><Router><FEApp /></Router></Provider></div>, document.getElementById('root'));

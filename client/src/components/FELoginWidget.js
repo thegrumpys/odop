@@ -8,17 +8,6 @@ export default class FELoginWidget extends Component {
   componentDidMount() {
 //    console.log('In FELoginWidget.componentDidMount');
     const el = ReactDOM.findDOMNode(this);
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//    this.widget = new OktaSignIn({
-//      baseUrl: this.props.baseUrl,
-//      authParams: {
-//        // If your app is configured to use the Implicit Flow
-//        // instead of the Authorization Code with Proof of Code Key Exchange (PKCE)
-//        // you will need to uncomment the below line
-//        // pkce: false
-//      }
-//    });
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //  console.log("config=",config);
 //  console.log("config.oidc=",config.oidc);

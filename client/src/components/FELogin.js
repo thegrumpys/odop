@@ -10,19 +10,15 @@ import { connect } from 'react-redux';
 class FELogin extends Component {
   constructor(props) {
     super(props);
+    console.log('In FELogin.constructor props=',props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onError = this.onError.bind(this);
   }
 
   async onSuccess(res) {
-//    console.log('In FELogin.onSuccess this.props=',this.props,'res=',res);
+    console.log('In FELogin.onSuccess this.props=',this.props,'res=',res);
     if (res.status === 'SUCCESS') {
-      var user;
-      if (this.props.authState.isAuthenticated) {
-          user = this.props.oktaAuth.idToken.clientId;
-      } else {
-          user = null;
-      }
+      var user = res.tokens.idToken.clientId;
       this.props.changeUser(user);
       return this.props.oktaAuth.signInWithRedirect();
     } else {
@@ -44,7 +40,6 @@ class FELogin extends Component {
     return this.props.authState.isAuthenticated ?
       <Redirect to={{ pathname: '/' }}/> :
       <FELoginWidget
-        baseUrl={this.props.baseUrl}
         onSuccess={this.onSuccess}
         onError={this.onError}/>;
   }
