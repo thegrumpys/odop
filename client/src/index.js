@@ -28,7 +28,8 @@ import { loadInitialState, changeName } from './store/actionCreators';
 //    }
 //  }
 
-console.log('CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'starting on port =', process.env.PORT, 'node version =', process.version);
+console.error('==================================================================');
+//console.log('CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'Starting on port =', process.env.PORT, 'Node version =', process.version);
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
