@@ -11,7 +11,7 @@ import FEApp from './components/FEApp';
 import './odop.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import config from './config';
-import { loadInitialState, changeName } from './store/actionCreators';
+import { restoreAutoSave, deleteAutoSave, loadInitialState, changeName } from './store/actionCreators';
 
 //function loggerMiddleware({ getState }) {
 //    return next => action => {
@@ -28,14 +28,21 @@ import { loadInitialState, changeName } from './store/actionCreators';
 //    }
 //  }
 
-console.error('==================================================================');
-//console.log('CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'Starting on port =', process.env.PORT, 'Node version =', process.version);
+console.error('In index.js ==================================================================');
+//console.log('In index.js CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'Starting on port =', process.env.PORT, 'Node version =', process.version);
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
 const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 const store = createStore(reducers, {user: null}, middleware);
-store.dispatch(loadInitialState(config.design.type, 'US'));
-store.dispatch(changeName(config.design.name));
+if (typeof(Storage) !== "undefined" && localStorage.getItem('autosave') !== null) {
+    console.log('In index.js restore auto save')
+    store.dispatch(restoreAutoSave());
+    store.dispatch(deleteAutoSave());
+} else {
+    console.log('In index.js load initial state');
+    store.dispatch(loadInitialState(config.design.type, 'US'));
+    store.dispatch(changeName(config.design.name));
+}
 ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><Provider store={store}><Router><FEApp /></Router></Provider></div>, document.getElementById('root'));

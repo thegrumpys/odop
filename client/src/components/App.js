@@ -61,7 +61,7 @@ class App extends Component {
     }
     
     componentDidUpdate(prevProps) {
-        console.log('In App.componentDidUpdate');
+//        console.log('In App.componentDidUpdate');
         if (prevProps.type !== this.props.type) {
             console.log('In App.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
             var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
@@ -137,7 +137,7 @@ class App extends Component {
                         <Nav className="mr-auto">
                             {logOnOff}
                             <NavDropdown title="File">
-                                <Link to='/file/test' Class="dropdown-item">Test</Link>
+                                <Link to='/file/test' className="dropdown-item">Test</Link>
                                 <FileOpen />
                                 <FileRecent />
                                 <FileSave />

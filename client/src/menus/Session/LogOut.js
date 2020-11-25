@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 import { connect } from 'react-redux';
 import { withOktaAuth } from '@okta/okta-react';
-import { changeUser } from '../../store/actionCreators';
+import { changeUser, saveAutoSave } from '../../store/actionCreators';
 
 class LogOut extends Component {
 
@@ -16,6 +16,7 @@ class LogOut extends Component {
     async toggle() {
       console.log('In LogOut.toggle this.props=',this.props);
       this.props.changeUser(null);
+      this.props.saveAutoSave();
       // Before changing the postLogoutRedirectUri you must go into the Okta Admin UI
       // And add the new one into the "Logout redirect URIs" to whitelist it.
 //      this.props.oktaAuth.signOut({postLogoutRedirectUri: window.location.origin + '/'});
@@ -42,6 +43,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     changeUser: changeUser,
+    saveAutoSave: saveAutoSave,
 };
 
 export default withOktaAuth(

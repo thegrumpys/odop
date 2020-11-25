@@ -17,6 +17,8 @@ class FELogin extends Component {
 
   async onSuccess(res) {
     console.log('In FELogin.onSuccess this.props=',this.props,'res=',res);
+    // status (string) - Always present. One of: FORGOT_PASSWORD_EMAIL_SENT, 
+    // UNLOCK_ACCOUNT_EMAIL_SENT, ACTIVATION_EMAIL_SENT, REGISTRATION_COMPLETE, or SUCCESS
     if (res.status === 'SUCCESS') {
       var user = res.tokens.idToken.clientId;
       this.props.changeUser(user);
