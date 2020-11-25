@@ -433,28 +433,28 @@ export function reducers(state, action) {
 
     case SAVE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-            console.log("In reducers.SAVE_AUTO_SAVE");
             state.model.name = state.name; // move name into model to save it ***FUDGE*** for compatibility with existing autosave files
             localStorage.setItem('autosave', JSON.stringify(state.model), null, 2); // create or replace auto save file with current state contents
             delete state.model.name; // after saving it delete name from model ***FUDGE*** for compatibility with existing autosave files
+            console.log("In reducers.SAVE_AUTO_SAVE state=",state);
         }
         return state; // state not changed
     case RESTORE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-            console.log("In reducers.RESTORE_AUTO_SAVE");
             model = JSON.parse(localStorage.getItem('autosave')); // get auto save file contents
             name = model.name; // get name from model to restore it ***FUDGE*** for compatibility with existing autosave files
             delete model.name; // after restoring it delete name from model ***FUDGE*** for compatibility with existing autosave files
-            return Object.assign({}, state, {
+            state = Object.assign({}, state, {
                 name: name,
                 model: model
             })
+            console.log("In reducers.RESTORE_AUTO_SAVE state=",state);
         }
         return state; // state changed
     case DELETE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-            console.log("In reducers.DELETE_AUTO_SAVE");
             localStorage.removeItem('autosave'); // remove auto save file
+            console.log("In reducers.DELETE_AUTO_SAVE state=",state);
         }
         return state; // state not changed
 

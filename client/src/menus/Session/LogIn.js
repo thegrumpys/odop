@@ -4,9 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { logUsage } from '../../logUsage';
 import { connect } from 'react-redux';
 import { withOktaAuth } from '@okta/okta-react';
-import { saveAutoSave } from '../../store/actionCreators';
 
-class LogIn extends Component {
+export default withRouter(withOktaAuth(class LogIn extends Component {
 
     constructor(props) {
       super(props);
@@ -18,7 +17,6 @@ class LogIn extends Component {
       console.log('In LogIn.toggle this.props=',this.props);
       this.props.oktaAuth.setOriginalUri();
       console.log('In LogIn.toggle this.props.oktaAuth.getOriginalUri=',this.props.oktaAuth.getOriginalUri());
-      this.props.saveAutoSave();
       this.props.history.push('/login');
       logUsage('event', 'LogIn', { 'event_label': '' });
     }
@@ -36,21 +34,4 @@ class LogIn extends Component {
       );
     }
 
-}
-
-const mapStateToProps = state => ({
-});
-
-const mapDispatchToProps = {
-    saveAutoSave: saveAutoSave
-};
-
-export default withRouter(
-    withOktaAuth(
-        connect(
-            mapStateToProps,
-            mapDispatchToProps
-        )(LogIn)
-    )
-);
-
+}));

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import FELoginWidget from './FELoginWidget';
 import { withOktaAuth } from '@okta/okta-react';
-import { changeUser } from '../store/actionCreators';
+import { changeUser, saveAutoSave } from '../store/actionCreators';
 import config from '../config';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -22,6 +22,7 @@ class FELogin extends Component {
     if (res.status === 'SUCCESS') {
       var user = res.tokens.idToken.clientId;
       this.props.changeUser(user);
+      this.props.saveAutoSave();
       return this.props.oktaAuth.signInWithRedirect();
     } else {
       // The user can be in another authentication state that requires further action.
@@ -53,6 +54,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     changeUser: changeUser,
+    saveAutoSave: saveAutoSave,
 };
 
 export default withRouter(withOktaAuth(
