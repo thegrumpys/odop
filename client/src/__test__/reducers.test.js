@@ -23,7 +23,7 @@ it('reducers without startup', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // after
     expect(design.model.type).toEqual("Piston-Cylinder");
@@ -37,7 +37,7 @@ it('reducers with startup', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
@@ -62,7 +62,7 @@ it('reducers load', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
@@ -84,7 +84,7 @@ it('reducers change name', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
@@ -103,7 +103,7 @@ it('reducers change user', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
@@ -126,7 +126,7 @@ it('reducers change symbol value', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
@@ -147,7 +147,7 @@ it('reducers change symbol violation min', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
@@ -164,7 +164,7 @@ it('reducers change symbol violation max', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
@@ -181,7 +181,7 @@ it('reducers change symbol constraint min', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
@@ -200,7 +200,7 @@ it('reducers change symbol constraint max', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
@@ -219,7 +219,7 @@ it('reducers set symbol flag min', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
@@ -236,7 +236,7 @@ it('reducers reset symbol flag min', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
@@ -253,7 +253,7 @@ it('reducers set symbol flag max', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
@@ -270,7 +270,7 @@ it('reducers reset symbol flag max', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
@@ -291,7 +291,7 @@ it('reducers change input symbol values', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
@@ -329,7 +329,7 @@ it('reducers save input symbol values', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
@@ -347,7 +347,7 @@ it('reducers restore input symbol values', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
@@ -369,7 +369,7 @@ it('reducers change output symbol values', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
@@ -407,7 +407,7 @@ it('reducers save output symbol constraints', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE");
@@ -437,7 +437,7 @@ it('reducers restore output symbol constraints', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE");
@@ -471,7 +471,7 @@ it('reducers change result objective value', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.result.objective_value).toEqual(0);
@@ -486,7 +486,7 @@ it('reducers change result termination condition', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.result.termination_condition).toEqual('');
@@ -501,7 +501,7 @@ it('reducers change result violated constaint count', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.result.violated_constraint_count).toEqual(0);
@@ -520,7 +520,7 @@ it('reducers change system controls value', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.name).toEqual('initialState');
@@ -540,7 +540,7 @@ it('reducers change label value', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
     expect(design.model.labels[0].name).toEqual('COMMENT');
@@ -561,7 +561,7 @@ it('reducers search', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     // Without middleware this should do nothing
     store.dispatch(search());
@@ -578,7 +578,7 @@ it('reducers seek stress min', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     // Without middleware this should do nothing
     store.dispatch(seek("STRESS", MIN));
@@ -595,7 +595,7 @@ it('reducers seek stress max', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
 
     // Without middleware this should do nothing
     store.dispatch(seek("STRESS", MAX));
@@ -616,7 +616,7 @@ it('reducers save auto save', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {user: "USERID0123456789", name: "initialState", model: state});
     store.dispatch(deleteAutoSave()); // create auto save file with current state contents
     var design = store.getState(); // after
     expect(typeof(Storage)).not.toEqual("undefined");
@@ -627,8 +627,9 @@ it('reducers save auto save', () => {
     var design = store.getState(); // after
     expect(typeof(Storage)).not.toEqual("undefined");
     expect(localStorage.getItem('autosave')).not.toBeNull();
-    expect(design.model.type).toEqual("Piston-Cylinder");
+    expect(design.user).toEqual("USERID0123456789");
     expect(design.name).toEqual("initialState");
+    expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
     expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
@@ -639,18 +640,20 @@ it('reducers restore auto save', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {"user": "USERID0123456789", name: "initialState", model: state});
     store.dispatch(saveAutoSave()); // create auto save file with current state contents
     var design = store.getState(); // after
     expect(typeof(Storage)).not.toEqual("undefined");
     expect(localStorage.getItem('autosave')).not.toBeNull();
     store.dispatch(load({
+        "user": "USERID0123456789",
         "name": "test",
         "model": {
             "type": "Test-Design"
         }
     }));
     var design = store.getState(); // after
+    expect(design.user).toEqual("USERID0123456789");
     expect(design.name).toEqual("test");
     expect(design.model.type).toEqual("Test-Design");
 
@@ -669,7 +672,7 @@ it('reducers delete auto save', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
-        {name: "initialState", model: state});
+        {user: "USERID0123456789", name: "initialState", model: state});
     store.dispatch(saveAutoSave()); // create auto save file with current state contents
     var design = store.getState(); // after
     expect(typeof(Storage)).not.toEqual("undefined");
@@ -680,8 +683,9 @@ it('reducers delete auto save', () => {
     var design = store.getState(); // after
     expect(typeof(Storage)).not.toEqual("undefined");
     expect(localStorage.getItem('autosave')).toBeNull();
-    expect(design.model.type).toEqual("Piston-Cylinder");
+    expect(design.user).toEqual("USERID0123456789");
     expect(design.name).toEqual("initialState");
+    expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
     expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");

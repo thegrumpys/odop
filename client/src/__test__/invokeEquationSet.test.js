@@ -13,7 +13,7 @@ import { invokeEquationSet } from '../store/middleware/invokeEquationSet';
 
 it('invokeEquationSet', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(reducers, {name: "initialState", model: state});
+    const store = createStore(reducers, {"user": "USERID0123456789", name: "initialState", model: state});
 
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
