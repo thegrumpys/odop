@@ -17,13 +17,14 @@ class FileDelete extends Component {
         this.onSelectName = this.onSelectName.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onCancel = this.onCancel.bind(this);
+        var user = this.props.user || config.design.user;
         this.state = {
             modal: false,
             types: config.design.types,
             names: [],
             type: this.props.type,
             name: '',
-            user: config.design.user,
+            user: user,
         };
     }
 
@@ -183,6 +184,7 @@ class FileDelete extends Component {
 }
 
 const mapStateToProps = state => ({
+    user: state.user,
     name: state.name, 
     type: state.model.type, 
 });

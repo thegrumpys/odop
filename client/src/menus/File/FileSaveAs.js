@@ -16,11 +16,12 @@ class FileSaveAs extends Component {
         this.onCancel = this.onCancel.bind(this);
         this.onSaveAs = this.onSaveAs.bind(this);
         this.onTextInput = this.onTextInput.bind(this);
+        var user = this.props.user || config.design.user;
         this.state = {
             modal: false,
             names: [],
             name: undefined, // default to no name
-            user: config.design.user,
+            user: user,
         };
     }
     
@@ -184,6 +185,7 @@ class FileSaveAs extends Component {
 }
 
 const mapStateToProps = state => ({
+    user: state.user,
     name: state.name,
     type: state.model.type,
     state: state.model,

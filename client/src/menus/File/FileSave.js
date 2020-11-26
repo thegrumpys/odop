@@ -13,9 +13,10 @@ class FileSave extends Component {
         super(props);
 //        console.log("In FileSave.constructor props=",props);
         this.toggle = this.toggle.bind(this);
+        var user = this.props.user || config.design.user;
         this.state = {
             names: [],
-            user: config.design.user,
+            user: user,
         };
     }
     
@@ -137,6 +138,7 @@ class FileSave extends Component {
 }
 
 const mapStateToProps = state => ({
+    user: state.user,
     name: state.name,
     type: state.model.type,
     state: state.model,
