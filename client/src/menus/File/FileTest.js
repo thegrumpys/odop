@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { withOktaAuth } from '@okta/okta-react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class FileTest extends Component {
+class FileTest extends Component {
 
     constructor(props) {
       console.log('In FileTest.constructor props=',props);
       super(props);
+      this.onSignIn = this.onSignIn.bind(this);
       this.onCancel = this.onCancel.bind(this);
       this.state = {
           modal: true,
       };
+    }
+    
+    onSignIn() {
+        console.log('In FileTest.onSignIn');
+        this.setState({
+            modal: !this.state.modal
+        });
+        this.props.history.push('/login');
     }
     
     onCancel() {
@@ -22,6 +34,7 @@ export default class FileTest extends Component {
 
     render() {
       console.log('In FileTest.render this.props=',this.props);
+      const signIn = this.props.authState.isAuthenticated ? null : <Button variant="secondary" onClick={this.onSignIn}>Sign In&hellip;</Button>;
       return (
           <React.Fragment>
               <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
@@ -31,6 +44,7 @@ export default class FileTest extends Component {
                       </Modal.Title>
                   </Modal.Header>
                   <Modal.Footer>
+                      {signIn}{' '}
                       <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                   </Modal.Footer>
               </Modal>
@@ -39,3 +53,16 @@ export default class FileTest extends Component {
     }
 
 }
+
+const mapStateToProps = state => ({
+});
+
+const mapDispatchToProps = {
+};
+
+export default withRouter(withOktaAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(FileTest)
+));
