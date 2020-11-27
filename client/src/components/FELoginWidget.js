@@ -91,6 +91,7 @@ export default class FELoginWidget extends Component {
   }
 
   render() {
+//    console.log('In FELoginWidget.render this.props=',this.props);
     return <div />;
   }
 }
