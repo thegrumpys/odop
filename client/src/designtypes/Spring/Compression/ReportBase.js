@@ -28,19 +28,6 @@ export class ReportBase extends Component {
             this.labels.push(Object.assign({},element));
         });
 
-//        var this.kc, this.ks, this.temp, this.s_f, this.len_lbl, 
-//        this.safe_load_u, this.wgt1000_u, this.cycle_life_u, 
-//        this.pcadmsg, this.errmsg, this.errmsg0, this.errmsg1, this.errmsg2, this.errmsg3, this.hits,
-//        this.safe_travel, this.tensileFixed0,
-//        this.sq1, this.sq2,
-//        this.dhat, this.wire_len_a, this.wire_len_t, this.safe_load, this.def_max,
-//        this.pitch, this.hlx_ang,
-//        this.od_1, this.od_2, this.od_solid, this.id_1, this.id_2,
-//        this.wgt1000, this.fs_1,  //   kw2fs_1, kw2fs_2, kw2fs_s,   (unused)
-//        this.kw1, this.kw2, this.kw2str1, this.kw2str2, this.kw2strs;
-//        var this.matTypeValue, this.astmFedSpecValue;
-//        var this.m_tab;
-
         /*  Bring in material properties table  */
         if (this.st[o.Material_File].value === "mat_SI.json") this.m_tab = require('../mat_SI.json');
             else this.m_tab = require('../mat_ips.json');
