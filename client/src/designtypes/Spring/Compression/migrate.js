@@ -168,6 +168,20 @@ export function migrate(design) {
     case '8':
         // Current model version
 //        console.log('Convert from 8 to 9');
+        if (design.symbol_table[0].units === 'mm') { // Check for units 
+//            design.symbol_table[0].cmax = 100; 
+        } else {
+            design.symbol_table[0].cmax = 10; 
+            design.symbol_table[1].cmax = 2; 
+            design.symbol_table[2].cmax = 100; 
+            design.symbol_table[5].cmax = 1000; 
+            design.symbol_table[11].cmax = 100; 
+            design.symbol_table[19].cmin = 1; 
+            design.symbol_table[19].cmax = 1000; 
+            design.symbol_table[21].cmax = 200000; 
+            design.symbol_table[22].cmax = 200000; 
+            design.symbol_table[27].cmin = 1; 
+        }
         design['jsontype'] = "ODOP"; // Add in model type
         if (design.symbol_table[0].units === "inches") { // Add in units type
             design['units'] = "US";
