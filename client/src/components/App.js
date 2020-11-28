@@ -46,7 +46,6 @@ class App extends Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.setKey = this.setKey.bind(this);
-        this.report = this.report.bind(this);
         var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
         var report_names = getReportNames();
 //        console.log('In App.constructor report_names=', report_names);
@@ -87,33 +86,6 @@ class App extends Component {
         }
     }
     
-    report(report_name) {
-//        console.log('In App.report report_name=',report_name);
-        
-        // Loop to create prefs from system_controls
-        var prefs = [];
-        for(var key in this.props.system_controls) {
-            prefs.push(this.props.system_controls[key]);
-        }
-
-        // Loop to create symbol_table
-        var st = [];
-        this.props.symbol_table.forEach((element) => {
-            st.push(Object.assign({},element));
-        });
-
-        // Loop to create labels
-        var labels = [];
-        this.props.labels.forEach((element) => {
-            labels.push(Object.assign({},element));
-        });
-
-        // Generate design-type specific report
-        var { report } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load report
-        var output = report(report_name, prefs, st, labels);
-        return output;
-    }
-  
     render() {
 //        console.log('In App.render this.props=', this.props);
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
@@ -185,9 +157,9 @@ class App extends Component {
                                 </Nav.Link>
                             </Nav.Item>
                             {this.state.report_names.map((element,i) => {return (
-                                <Nav.Item key={element}>
+                                <Nav.Item key={element.name}>
                                     <Nav.Link className={classnames({ active: this.state.activeTab === "Report"+(i+1).toString() })} onClick={() => { this.setKey("Report"+(i+1).toString()); }}>
-                                        <span className="d-none d-md-inline">Report: </span>{element}
+                                        <span className="d-none d-md-inline">Report: </span>{element.name}
                                     </Nav.Link>
                                 </Nav.Item>
                                 );
@@ -204,8 +176,8 @@ class App extends Component {
                             </Container>
                         </Tab>
                         {this.state.report_names.map((element,i) => {return (
-                            <Tab key={element} eventKey={"Report"+(i+1).toString()}>
-                                <div id={"report-"+(i+1).toString()}>{this.report(element)}</div>
+                            <Tab key={element.name} eventKey={"Report"+(i+1).toString()}>
+                                <div id={"report-"+(i+1).toString()}>{element.component}</div>
                             </Tab>
                             );
                         })}
@@ -221,9 +193,6 @@ const mapStateToProps = state => ({
     name: state.name,
     type: state.model.type,
     version: state.model.version,
-    symbol_table: state.model.symbol_table,
-    system_controls: state.model.system_controls,
-    labels: state.model.labels,
 });
 
 const mapDispatchToProps = {
