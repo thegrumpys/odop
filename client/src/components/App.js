@@ -29,6 +29,7 @@ import ActionTrade from '../menus/Action/ActionTrade';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
+import ViewReports from '../menus/View/ViewReports';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
 import HelpMotd from '../menus/Help/HelpMotd';
@@ -135,6 +136,8 @@ class App extends Component {
                                     Display Sub-Problems&hellip;
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
+                                <ViewReports parent={this} report_names={this.state.report_names}/>
+                                <NavDropdown.Divider />
                                 {process.env.NODE_ENV !== "production" && <ViewOffsets />}
                                 {process.env.NODE_ENV !== "production" && <ViewSymbolTableOffsets />}
                             </NavDropdown>
@@ -156,20 +159,12 @@ class App extends Component {
                                     {this.props.name}
                                 </Nav.Link>
                             </Nav.Item>
-                            {this.state.report_names.map((element,i) => {return (
-                                <Nav.Item key={element.name}>
-                                    <Nav.Link className={classnames({ active: this.state.activeTab === "Report"+(i+1).toString() })} onClick={() => { this.setKey("Report"+(i+1).toString()); }}>
-                                        <span className="d-none d-md-inline">Report: </span>{element.name}
-                                    </Nav.Link>
-                                </Nav.Item>
-                                );
-                            })}
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
                 <Container style={{backgroundColor: '#eee', paddingTop: '60px'}}>
                     <ExecutePanel />
-                    <Tabs defaultActiveKey="Design" activeKey={this.state.activeTab} onSelect={key => this.setKey(key)}>
+                    <Tabs defaultActiveKey="Design" activeKey={this.state.activeTab}>
                         <Tab eventKey="Design">
                             <Container fluid id="design">
                                 <DesignTable />

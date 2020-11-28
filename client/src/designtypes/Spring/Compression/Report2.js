@@ -234,56 +234,56 @@ export class Report2 extends Component {
         return (
             <React.Fragment>
                 <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
-                    <br />
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>{st[o.Spring_Type].name}</td>
-                                <td>=</td>
-                                <td className="" colSpan="2">{st[o.Spring_Type].value}</td>
-                                <td/>
-                                <td> &nbsp; &nbsp; </td>
-                                <td>{st[o.Material_Type].name}</td>
-                                <td>=</td>
-                                <td className="text-left" colSpan="2">{matTypeValue}</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>{st[o.Wire_Dia].name}</td>
-                                <td>=</td>
-                                <td>{st[o.Wire_Dia].value.toFixed(4)}</td>
-                                <td>{st[o.Wire_Dia].units}</td>
-                                <td/>
-                                <td> &nbsp; &nbsp; </td>
-                                <td>{st[o.Tensile].name}</td>
-                                <td>=</td>
-                                <td>{tensileFixed0}</td>
-                                <td>{st[o.Tensile].units}</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>{st[o.Spring_Index].name}</td>
-                                <td>=</td>
-                                <td>{st[o.Spring_Index].value.toFixed(3)}</td>
-                                <td>{st[o.Spring_Index].units}</td>
-                                <td/>
-                                <td> &nbsp; &nbsp; </td>
-                                <td>Stress Ratio</td>
-                                <td>=</td>
-                                <td>{(st[o.Stress_1].value / st[o.Stress_2].value).toFixed(3)}</td>
-                                <td>{st[o.Spring_Index].units}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <hr/>
-                    kw1 = {kw1.toFixed(3)} &nbsp; &nbsp; (Applies before set removal)
-                    <br/>
-                    kw2 = {kw2.toFixed(3)} &nbsp; &nbsp; (Applies &nbsp;after &nbsp; set removal)
-                    <br/>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                    ---- kw2 ----- &nbsp; &nbsp; ---- kw1 -----
-                    <table>
+                <br />
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>{st[o.Spring_Type].name}</td>
+                            <td>=</td>
+                            <td className="" colSpan="2">{st[o.Spring_Type].value}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Material_Type].name}</td>
+                            <td>=</td>
+                            <td className="text-left" colSpan="2">{matTypeValue}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>{st[o.Wire_Dia].name}</td>
+                            <td>=</td>
+                            <td>{st[o.Wire_Dia].value.toFixed(4)}</td>
+                            <td>{st[o.Wire_Dia].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>{st[o.Tensile].name}</td>
+                            <td>=</td>
+                            <td>{tensileFixed0}</td>
+                            <td>{st[o.Tensile].units}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>{st[o.Spring_Index].name}</td>
+                            <td>=</td>
+                            <td>{st[o.Spring_Index].value.toFixed(3)}</td>
+                            <td>{st[o.Spring_Index].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>Stress Ratio</td>
+                            <td>=</td>
+                            <td>{(st[o.Stress_1].value / st[o.Stress_2].value).toFixed(3)}</td>
+                            <td>{st[o.Spring_Index].units}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr/>
+                kw1 = {kw1.toFixed(3)} &nbsp; &nbsp; (Applies before set removal)
+                <br/>
+                kw2 = {kw2.toFixed(3)} &nbsp; &nbsp; (Applies &nbsp;after &nbsp; set removal)
+                <br/>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                ---- kw2 ----- &nbsp; &nbsp; ---- kw1 -----
+                <table>
                     <thead>
                         <tr>
                             <th></th>

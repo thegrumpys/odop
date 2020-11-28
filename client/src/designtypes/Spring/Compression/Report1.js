@@ -233,7 +233,8 @@ export class Report1 extends Component {
 
         return (
             <React.Fragment>
-                <h4>ODOP:Spring &nbsp; Compression Spring Report</h4><br />
+                <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
+                <br />
                 <b>
                 {hits > 0 && errmsg}{hits > 0 && <br />}
                 {hits > 0 && startpntmsg}{hits > 0 && <br />}
