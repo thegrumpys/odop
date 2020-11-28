@@ -8,8 +8,8 @@ import Report3 from "./Report3"
 export function getReportNames() {
     // Note: report names must match cases in switch statement below
     return [
-        { name: '1 (mini)', component: <Report1 /> },
-        { name: '2 (pre-set)', component: <Report2 /> },
-        { name: '3 (maxi)', component: <Report3 /> },
+        { name: 'Report 1 (mini)', component: <Report1 /> },
+        { name: 'Report 2 (pre-set)', component: <Report2 /> },
+        { name: 'Report 3 (maxi)', component: <Report3 /> },
     ];
 }

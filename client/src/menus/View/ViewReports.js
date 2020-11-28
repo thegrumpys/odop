@@ -19,7 +19,7 @@ class ViewReports extends Component {
                 </NavDropdown.Item>
                 {this.props.report_names.map((element,i) => {return (
                     <NavDropdown.Item key={element.name} onClick={() => this.props.parent.setKey("Report"+(i+1).toString())}>
-                        Report: {element.name}
+                        {element.name}
                     </NavDropdown.Item>
                 )})}
             </React.Fragment>
