@@ -58,6 +58,23 @@ export const dispatcher = store => next => action => {
                 if (element.type === "equationset" && element.input) {
                     store.dispatch(changeResultTerminationCondition(''));
                 } else if (element.type === "calcinput") {
+//                    console.log("In dispatcher.CHANGE_SYMBOL_VALUE element=",element);
+                    if (element.format === 'table') {
+//                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE file = ../../designtypes/'+element.table+'.json');
+                        var table = require('../../designtypes/'+element.table+'.json'); // Dynamically load table
+                        var selectedIndex = element.value;
+//                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE table=',table,'selectedIndex=',selectedIndex);
+                        table[selectedIndex].forEach((value, index) => {
+                            if (index > 0) { // Skip the first column
+                                var name = table[0][index];
+//                                console.log('In dispatcher.CHANGE_SYMBOL_VALUE value=',value,'index=',index,' name=',name);
+                                if (design.model.symbol_table.find(element2 => element2.name === name) !== undefined) {
+//                                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE name=',name,'value=',value);
+                                    store.dispatch(changeSymbolValue(name,value));
+                                }
+                            }
+                        });
+                    }
                     store.dispatch(changeResultTerminationCondition(''));
                     invokeInit(store);
                 }

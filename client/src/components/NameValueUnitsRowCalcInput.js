@@ -78,15 +78,6 @@ class NameValueUnitsRowCalcInput extends Component {
 //        console.log('In NameValueUnitsRowCalcInput.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex);
-        this.state.table[selectedIndex].forEach((value, index) => {
-            if (index > 0) { // Skip the first column
-                var name = this.state.table[0][index];
-//                console.log('In NameValueUnitsRowCalcInput.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',this.props.symbol_table.find(element => element.name === name));
-                if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
-                    this.props.changeSymbolValue(name,value);
-                }
-            }
-        });
     }
     
     render() {
@@ -131,7 +122,6 @@ class NameValueUnitsRowCalcInput extends Component {
 
 const mapStateToProps = state => ({
     type: state.model.type,
-    symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls
 });
 
