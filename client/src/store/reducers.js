@@ -42,7 +42,7 @@ export function reducers(state, action) {
     var value;
     var name;
     var model;
-//    console.log('In reducers state=',state,'action=', action);
+    console.log('In reducers state=',state,'action=', action);
     switch (action.type) {
     case STARTUP:
 //        console.log('In STARTUP state=',state);
