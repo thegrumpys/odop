@@ -434,7 +434,7 @@ export function reducers(state, action) {
     case SAVE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
             localStorage.setItem(action.payload.name, JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
-            console.log("In reducers.SAVE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
+//            console.log("In reducers.SAVE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state not changed
     case RESTORE_AUTO_SAVE:
@@ -451,13 +451,13 @@ export function reducers(state, action) {
             } else {
                 state = Object.assign({}, state, autosave); // New format
             }
-            console.log("In reducers.RESTORE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
+//            console.log("In reducers.RESTORE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state changed
     case DELETE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
             localStorage.removeItem(action.payload.name); // remove auto save file
-            console.log("In reducers.DELETE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
+//            console.log("In reducers.DELETE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state not changed
 

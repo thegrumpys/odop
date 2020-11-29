@@ -56,6 +56,7 @@ class FileOpen extends Component {
         .then(res => {
             displaySpinner(false);
             if (!res.ok) {
+//               console.warn('In FileOpen.getDesignNames res=',res);
                throw Error(res.statusText);
             }
             return res.json()
@@ -105,13 +106,17 @@ class FileOpen extends Component {
 
     toggle() {
 //        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
-        var type = (this.state.types.includes(this.props.type) ? this.props.type : config.design.type);
-        this.getDesignNames(type);
-        var name = (this.state.names.includes(this.props.name) ? this.props.name : config.design.name);
+        if (this.props.authState.isAuthenticated) {
+            var type = (this.state.types.includes(this.props.type) ? this.props.type : config.design.type);
+            this.getDesignNames(type);
+            var name = (this.state.names.includes(this.props.name) ? this.props.name : config.design.name);
+            this.setState({
+                type: type,
+                name: name
+            });
+        }
         this.setState({
             modal: !this.state.modal,
-            type: type,
-            name: name
         });
     }
 
@@ -172,14 +177,14 @@ class FileOpen extends Component {
                         <br />
                         {!this.props.authState.isAuthenticated && <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
                         <Form.Label htmlFor="fileOpenSelectType">Select design type to open:</Form.Label>
-                        <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
+                        <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type} disabled={!this.props.authState.isAuthenticated}>
                             {this.state.types.map((designtype, index) =>
                                 <option key={index} value={designtype}>{designtype}</option>
                             )}
                         </Form.Control>
                         <br />
                         <Form.Label htmlFor="fileOpenSelectName">Select {!this.props.authState.isAuthenticated ? "system" : "private or system"} design to open:</Form.Label>
-                        <Form.Control as="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
+                        <Form.Control as="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name} disabled={!this.props.authState.isAuthenticated}>
                             {this.state.names.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                 <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
                             )}

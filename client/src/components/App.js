@@ -40,12 +40,13 @@ import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
 import { withOktaAuth } from '@okta/okta-react';
 import { logUsage } from '../logUsage';
+import { changeUser } from '../store/actionCreators';
 
 class App extends Component {
     
     constructor(props) {
-//        console.log("In App.constructor props=",props);
         super(props);
+//        console.log('In App.constructor props=',props);
         this.toggle = this.toggle.bind(this);
         this.setKey = this.setKey.bind(this);
         this.report = this.report.bind(this);
@@ -60,9 +61,19 @@ class App extends Component {
     }
     
     componentDidUpdate(prevProps) {
-//        console.log('In App.componentDidUpdate');
+//        console.log('In App.componentDidUpdate prevProps=',prevProps);
+        if (prevProps.authState.isAuthenticated !== this.props.authState.isAuthenticated) {
+//            console.log('In App.componentDidUpdate prevProps.authState.isAuthenticated=',prevProps.authState.isAuthenticated,'props.authState.isAuthenticated=',this.props.authState.isAuthenticated);
+            if (this.props.authState.isAuthenticated) {
+//                console.log('In App.componentDidUpdate isAuthenticated this.props.authState.idToken.clientId=',this.props.authState.idToken.clientId);
+                this.props.changeUser(this.props.authState.idToken.clientId);
+            } else {
+//                console.log('In App.componentDidUpdate !isAuthenticated');
+                this.props.changeUser(null);
+            }
+        }
         if (prevProps.type !== this.props.type) {
-//            console.log('In App.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+//            console.log('In App.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
             var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
             var report_names = getReportNames();
 //            console.log('In App.componentDidUpdate report_names=', report_names);
@@ -231,6 +242,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+    changeUser: changeUser,
 };
 
 export default withRouter(withOktaAuth(

@@ -17,7 +17,7 @@ function authenticationRequired(req, res, next) {
 //  console.log('SERVER: In authenticationRequired authHeader=',authHeader);
 //  console.log('SERVER: In authenticationRequired match=',match);
 
-  if (!match) {
+  if (!match || match[1] === "null") {
     console.log('SERVER: 401 - UNAUTHORIZED');
     return res.status(401).end();
   }

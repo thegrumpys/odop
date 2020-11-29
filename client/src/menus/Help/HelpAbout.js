@@ -3,6 +3,7 @@ import { Button, Modal, NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { version } from '../../version';
 import { logUsage } from '../../logUsage';
+import { withOktaAuth } from '@okta/okta-react';
 
 class HelpAbout extends Component {
 
@@ -45,9 +46,14 @@ class HelpAbout extends Component {
                         &nbsp; &nbsp; &nbsp; &nbsp; 
                         <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">ODOP License</a> 
                         <hr/>
-                        ODOP software version &nbsp; {version()} 
+                        ODOP software version: {version()} 
                         <br />
-                        Model: &nbsp; {this.props.jsontype} {this.props.type}, Version: {this.props.version}, Units: {this.props.units}<br />
+                        {process.env.NODE_ENV !== "production" && 
+                        <React.Fragment>
+                            Authenticated: {this.props.authState.isAuthenticated ? 'true' : 'false'}, User: {this.props.user === null ? 'Not Signed In' : this.props.user} 
+                            <br />
+                        </React.Fragment>}
+                        Model: {this.props.jsontype} {this.props.type}, Units: {this.props.units}, Version: {this.props.version}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
@@ -59,10 +65,14 @@ class HelpAbout extends Component {
 }  
 
 const mapStateToProps = state => ({
+    user: state.user, 
     type: state.model.type, 
     version: state.model.version,
     jsontype: state.model.jsontype,
     units: state.model.units,
 });
 
-export default connect(mapStateToProps)(HelpAbout);
+export default withOktaAuth(
+    connect(
+        mapStateToProps)(HelpAbout)
+);

@@ -103,7 +103,9 @@ class FileDelete extends Component {
     
     toggle() {
 //        console.log('In FileDelete.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
-        this.getDesignNames(this.props.type);
+        if (this.props.authState.isAuthenticated) {
+            this.getDesignNames(this.props.type);
+        }
         this.setState({
             modal: !this.state.modal,
         });
@@ -170,14 +172,14 @@ class FileDelete extends Component {
                         <br />
                         {!this.props.authState.isAuthenticated && <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
                         <Form.Label htmlFor="fileDeleteSelectType">Select design type for delete:</Form.Label>
-                        <Form.Control as="select" id="fileDeleteSelectType" onChange={this.onSelectType} value={this.state.type}>
+                        <Form.Control as="select" id="fileDeleteSelectType" onChange={this.onSelectType} value={this.state.type} disabled={!this.props.authState.isAuthenticated}>
                             {this.state.types.map((designtype, index) =>
                                 <option key={index} value={designtype}>{designtype}</option>
                             )}
                         </Form.Control>
                         <br />
                         <Form.Label htmlFor="fileDeleteSelectName">Select design to delete:</Form.Label>
-                        <Form.Control as="select" id="fileDeleteSelectName" onChange={this.onSelectName}>
+                        <Form.Control as="select" id="fileDeleteSelectName" onChange={this.onSelectName} disabled={!this.props.authState.isAuthenticated}>
                             {this.state.names.map((design, index) => {
                                 return <option key={index} value={design.name}>{design.name}</option>
                             })}
