@@ -180,7 +180,7 @@ class FileSaveAs extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <br />
-                        {!this.props.authState.isAuthenticated && <Alert variant="info">Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
+                        {!this.props.authState.isAuthenticated && <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
                         <Form.Label htmlFor="fileSaveAsText">Save As:</Form.Label>
                         <Form.Control type="text" id="fileSaveAsText" placeholder="Enter design name here" onChange={this.onTextInput} disabled={!this.props.authState.isAuthenticated}/>
                     </Modal.Body>

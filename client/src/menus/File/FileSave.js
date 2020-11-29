@@ -164,7 +164,7 @@ class FileSave extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Alert variant="info">Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>
+                        <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>
                     </Modal.Body>
                     <Modal.Footer>
                         {!this.props.authState.isAuthenticated && <Button variant="info" onClick={this.onSignIn}>Sign In...</Button>}{' '}

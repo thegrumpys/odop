@@ -168,7 +168,7 @@ class FileDelete extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <br />
-                        {!this.props.authState.isAuthenticated && <Alert variant="info">Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
+                        {!this.props.authState.isAuthenticated && <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
                         <Form.Label htmlFor="fileDeleteSelectType">Select design type for delete:</Form.Label>
                         <Form.Control as="select" id="fileDeleteSelectType" onChange={this.onSelectType} value={this.state.type}>
                             {this.state.types.map((designtype, index) =>
