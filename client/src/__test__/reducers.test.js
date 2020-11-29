@@ -89,14 +89,14 @@ it('reducers change name', () => {
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-    expect(design.user).toEqual(undefined);
+    expect(design.user).toEqual("USERID0123456789");
 
     store.dispatch(changeName('startup'));
 
     var design = store.getState(); // after
     expect(design.name).toEqual("startup");
     expect(design.model.type).toEqual("Piston-Cylinder");
-    expect(design.user).toEqual(undefined);
+    expect(design.user).toEqual("USERID0123456789");
 });
 
 it('reducers change user', () => {
@@ -108,7 +108,7 @@ it('reducers change user', () => {
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-    expect(design.user).toEqual(undefined);
+    expect(design.user).toEqual("USERID0123456789");
 
     store.dispatch(changeUser('00u1itcx44XGp65ln357'));
 
@@ -641,18 +641,61 @@ it('reducers restore auto save', () => {
     const store = createStore(
         reducers,
         {"user": "USERID0123456789", name: "initialState", model: state});
+
+    // Create autosave file and verify it was created
     store.dispatch(saveAutoSave()); // create auto save file with current state contents
-    var design = store.getState(); // after
     expect(typeof(Storage)).not.toEqual("undefined");
     expect(localStorage.getItem('autosave')).not.toBeNull();
+
+    // Load with an entirely different state before restore and verify it
     store.dispatch(load({
         "user": "USERID0123456789",
         "name": "test",
         "model": {
             "type": "Test-Design"
         }
-    }));
+    })); 
     var design = store.getState(); // after
+    expect(design.user).toEqual("USERID0123456789");
+    expect(design.name).toEqual("test");
+    expect(design.model.type).toEqual("Test-Design");
+
+    store.dispatch(restoreAutoSave());
+
+    var design = store.getState(); // after
+    expect(design.model.type).toEqual("Piston-Cylinder");
+    expect(design.name).toEqual("initialState");
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
+    expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
+    expect(design.model.symbol_table[sto.AREA].value).toEqual(0);
+});
+
+it('reducers restore old auto save', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        {"user": "USERID0123456789", name: "initialState", model: state});
+
+    // Create an old format autosave file and verify it was created
+    delete state.jsontype; // Mark it as old by deleting jsontype
+    delete state.units; // Mark it as old by deleting units
+    var design = store.getState(); // before
+    state.name = design.name; // move name into model to save it ***FUDGE*** for compatibility with existing autosave files
+    expect(typeof(Storage)).not.toEqual("undefined");
+    localStorage.setItem('autosave', JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
+    expect(localStorage.getItem('autosave')).not.toBeNull();
+    delete state.name; // after saving it delete name from model ***FUDGE*** for compatibility with existing autosave files
+
+    // Load with an entirely different state before restore and verify it
+    store.dispatch(load({
+        "user": "USERID0123456789",
+        "name": "test",
+        "model": {
+            "type": "Test-Design"
+        }
+    })); // load with an entirely different state before restore
+    var design = store.getState(); // before
     expect(design.user).toEqual("USERID0123456789");
     expect(design.name).toEqual("test");
     expect(design.model.type).toEqual("Test-Design");

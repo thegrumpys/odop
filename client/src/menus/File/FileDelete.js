@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeUser } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
+import { withOktaAuth } from '@okta/okta-react';
+import { withRouter } from 'react-router-dom';
 
 class FileDelete extends Component {
 
@@ -15,16 +17,15 @@ class FileDelete extends Component {
         this.toggle = this.toggle.bind(this);
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
-        this.onDelete = this.onDelete.bind(this);
+        this.onSignIn = this.onSignIn.bind(this);
         this.onCancel = this.onCancel.bind(this);
-        var user = this.props.user || config.design.user;
+        this.onDelete = this.onDelete.bind(this);
         this.state = {
             modal: false,
             types: config.design.types,
             names: [],
             type: this.props.type,
             name: '',
-            user: user,
         };
     }
 
@@ -49,7 +50,7 @@ class FileDelete extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.user
+                Authorization: 'Bearer ' + this.props.user
             }
         })
         .then(res => {
@@ -84,7 +85,7 @@ class FileDelete extends Component {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + this.state.user
+                Authorization: 'Bearer ' + this.props.user
             },
         })
         .then(res => {
@@ -123,6 +124,22 @@ class FileDelete extends Component {
         });
     }
     
+    onSignIn() {
+//      console.log('In FileDelete.onSignIn');
+      this.setState({
+          modal: !this.state.modal
+      });
+      this.props.history.push('/login');
+    }
+
+    onCancel() {
+//      console.log('In FileDelete.onCancel');
+      this.setState({
+          modal: !this.state.modal
+      });
+      // Noop - all done
+  }
+
     onDelete() {
 //        console.log('In FileDelete.onDelete this.state.type=',this.state.type,' this.state.name=',this.state.name);
         // Validate name, and delete the database element
@@ -136,14 +153,6 @@ class FileDelete extends Component {
         this.deleteDesign(this.state.type,this.state.name);
     }
     
-    onCancel() {
-//        console.log('In FileDelete.onCancel');
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Noop - all done
-    }
-
     render() {
 //        console.log('In FileDelete.render this.props=', this.props);
         return (
@@ -159,6 +168,7 @@ class FileDelete extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <br />
+                        {!this.props.authState.isAuthenticated && <Alert variant="info">Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
                         <Form.Label htmlFor="fileDeleteSelectType">Select design type for delete:</Form.Label>
                         <Form.Control as="select" id="fileDeleteSelectType" onChange={this.onSelectType} value={this.state.type}>
                             {this.state.types.map((designtype, index) =>
@@ -174,8 +184,9 @@ class FileDelete extends Component {
                         </Form.Control>
                     </Modal.Body>
                     <Modal.Footer>
+                        {!this.props.authState.isAuthenticated && <Button variant="info" onClick={this.onSignIn}>Sign In...</Button>}{' '}
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" onClick={this.onDelete} disabled={this.state.names.length === 0 ? true : false}>Delete</Button>
+                        <Button variant="primary" onClick={this.onDelete} disabled={!this.props.authState.isAuthenticated && this.state.names.length === 0 ? true : false}>Delete</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>
@@ -193,7 +204,9 @@ const mapDispatchToProps = {
     changeUser: changeUser,
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(FileDelete);
+export default withRouter(withOktaAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(FileDelete)
+));

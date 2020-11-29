@@ -297,20 +297,38 @@ export function seek(name, minmax) {
     }
 }
 
-export function saveAutoSave() {
+export function saveAutoSave(name) {
+    if (name === undefined) {
+        name = "autosave";
+    }
     return {
-        type: SAVE_AUTO_SAVE
+        type: SAVE_AUTO_SAVE,
+        payload: {
+            name,
+        }
     }
 }
 
-export function restoreAutoSave() {
+export function restoreAutoSave(name) {
+    if (name === undefined) {
+        name = "autosave";
+    }
     return {
-        type: RESTORE_AUTO_SAVE
+        type: RESTORE_AUTO_SAVE,
+        payload: {
+            name,
+        }
     }
 }
 
-export function deleteAutoSave() {
+export function deleteAutoSave(name) {
+    if (name === undefined) {
+        name = "autosave";
+    }
     return {
-        type: DELETE_AUTO_SAVE
+        type: DELETE_AUTO_SAVE,
+        payload: {
+            name,
+        }
     }
 }

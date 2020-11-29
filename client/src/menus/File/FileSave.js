@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { NavDropdown } from 'react-bootstrap';
+import { NavDropdown, Button, Modal, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeUser, deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
+import { withOktaAuth } from '@okta/okta-react';
+import { withRouter } from 'react-router-dom';
 
 class FileSave extends Component {
 
@@ -13,10 +15,11 @@ class FileSave extends Component {
         super(props);
 //        console.log("In FileSave.constructor props=",props);
         this.toggle = this.toggle.bind(this);
-        var user = this.props.user || config.design.user;
+        this.onSignIn = this.onSignIn.bind(this);
+        this.onCancel = this.onCancel.bind(this);
         this.state = {
+            modal: false,
             names: [],
-            user: user,
         };
     }
     
@@ -38,7 +41,7 @@ class FileSave extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.user
+                Authorization: 'Bearer ' + this.props.user
             }
         })
         .then(res => {
@@ -63,7 +66,7 @@ class FileSave extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.user
+                Authorization: 'Bearer ' + this.props.user
             }
         })
         .then(res => {
@@ -79,7 +82,7 @@ class FileSave extends Component {
             this.setState({ names })
 //            console.log('In FileSave.postDesign this.state.names=',this.state.names);
             var method = 'POST'; // Create it
-            if (this.state.names.filter(e => e.name === name && e.user === this.state.user).length > 0) { // Does it already exist?
+            if (this.state.names.filter(e => e.name === name && e.user === this.props.user).length > 0) { // Does it already exist?
                 method = 'PUT'; // Update it
             }
 //            console.log('In FileSave.postDesign method=', method);
@@ -89,7 +92,7 @@ class FileSave extends Component {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + this.state.user
+                    Authorization: 'Bearer ' + this.props.user
                 },
                 body: JSON.stringify(this.props.state)
             })
@@ -100,7 +103,7 @@ class FileSave extends Component {
                 }
                 if (method === 'POST') {
                     var names = Array.from(this.state.names); // clone it
-                    names.push({user: this.state.user, name: name}); // If create and successful then sdd name to the array of names
+                    names.push({user: this.props.user, name: name}); // If create and successful then sdd name to the array of names
 //                    console.log('In FileSave.postDesign type=',type,'name=',name,'names=', names);
                     this.setState({
                         names: names,
@@ -121,10 +124,32 @@ class FileSave extends Component {
     toggle() {
 //        console.log('In FileSave.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
         // Save the model
-        this.postDesign(this.props.type, this.props.name);
-        this.props.deleteAutoSave();
+        if (this.props.authState.isAuthenticated) {
+            this.postDesign(this.props.type, this.props.name);
+            this.props.deleteAutoSave();
+        } else {
+            this.setState({
+                modal: !this.state.modal,
+            });
+        }
     }
 
+    onSignIn() {
+//      console.log('In FileSave.onSignIn');
+      this.setState({
+          modal: !this.state.modal
+      });
+      this.props.history.push('/login');
+    }
+
+    onCancel() {
+//      console.log('In FileSave.onCancel');
+      this.setState({
+          modal: !this.state.modal
+      });
+      // Noop - all done
+    }
+ 
     render() {
 //        console.log('In FileSave.render this.props=', this.props);
         return (
@@ -132,6 +157,20 @@ class FileSave extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     Save
                 </NavDropdown.Item>
+                <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Save
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Alert variant="info">Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        {!this.props.authState.isAuthenticated && <Button variant="info" onClick={this.onSignIn}>Sign In...</Button>}{' '}
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                    </Modal.Footer>
+                </Modal>
             </React.Fragment>
         );
     }
@@ -149,7 +188,9 @@ const mapDispatchToProps = {
     deleteAutoSave: deleteAutoSave
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(FileSave);
+export default withRouter(withOktaAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(FileSave)
+));

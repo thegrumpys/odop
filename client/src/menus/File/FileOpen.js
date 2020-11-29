@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeUser, load, deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
+import { withOktaAuth } from '@okta/okta-react';
+import { withRouter } from 'react-router-dom';
 
 class FileOpen extends Component {
 
@@ -15,16 +17,15 @@ class FileOpen extends Component {
         this.toggle = this.toggle.bind(this);
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
+        this.onSignIn = this.onSignIn.bind(this);
         this.onOpen = this.onOpen.bind(this);
         this.onCancel = this.onCancel.bind(this);
-        var user = this.props.user || config.design.user;
         this.state = {
             modal: false,
             types: config.design.types,
             names: [],
             type: this.props.type,
             name: this.props.name,
-            user: user,
         };
     }
 
@@ -49,7 +50,7 @@ class FileOpen extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.user
+                Authorization: 'Bearer ' + this.props.user
             }
         })
         .then(res => {
@@ -75,7 +76,7 @@ class FileOpen extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
             headers: {
-                Authorization: 'Bearer ' + this.state.user
+                Authorization: 'Bearer ' + this.props.user
             }
         })
         .then(res => {
@@ -129,6 +130,14 @@ class FileOpen extends Component {
         });
     }
 
+    onSignIn() {
+//      console.log('In FileOpen.onSignIn');
+      this.setState({
+          modal: !this.state.modal
+      });
+      this.props.history.push('/login');
+    }
+
     onOpen() {
 //        console.log('In FileOpen.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
         this.setState({
@@ -146,15 +155,6 @@ class FileOpen extends Component {
         // Noop - all done
     }
 
-    onSignIn() {
-//      console.log('In FileOpen.onCancel');
-      this.setState({
-          modal: !this.state.modal
-      });
-      // Enable SignInWidget
-      // When done, enable File Open modal
-  }
-
     render() {
 //        console.log('In FileOpen.render this.props=', this.props);
         return (
@@ -170,6 +170,7 @@ class FileOpen extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <br />
+                        {!this.props.authState.isAuthenticated && <Alert variant="info">Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
                         <Form.Label htmlFor="fileOpenSelectType">Select design type to open:</Form.Label>
                         <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
                             {this.state.types.map((designtype, index) =>
@@ -177,7 +178,7 @@ class FileOpen extends Component {
                             )}
                         </Form.Control>
                         <br />
-                        <Form.Label htmlFor="fileOpenSelectName">Select design to open:</Form.Label>
+                        <Form.Label htmlFor="fileOpenSelectName">Select {!this.props.authState.isAuthenticated ? "system" : "private or system"} design to open:</Form.Label>
                         <Form.Control as="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
                             {this.state.names.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                 <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
@@ -185,7 +186,7 @@ class FileOpen extends Component {
                         </Form.Control>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={this.onSignIn}>Sign In...</Button>{' '}
+                        {!this.props.authState.isAuthenticated && <Button variant="info" onClick={this.onSignIn}>Sign In...</Button>}{' '}
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button variant="primary" onClick={this.onOpen}>Open</Button>
                     </Modal.Footer>
@@ -207,7 +208,9 @@ const mapDispatchToProps = {
     deleteAutoSave: deleteAutoSave
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(FileOpen);
+export default withRouter(withOktaAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(FileOpen)
+));

@@ -9,14 +9,14 @@ class LogOut extends Component {
 
     constructor(props) {
       super(props);
-      console.log("In LogOut.constructor props=",props);
+//      console.log("In LogOut.constructor props=",props);
       this.toggle = this.toggle.bind(this);
     }
 
     async toggle() {
-      console.log('In LogOut.toggle this.props=',this.props);
+//      console.log('In LogOut.toggle this.props=',this.props);
       this.props.changeUser(null);
-      this.props.saveAutoSave();
+      this.props.saveAutoSave("redirect");
       // Before changing the postLogoutRedirectUri you must go into the Okta Admin UI
       // And add the new one into the "Logout redirect URIs" to whitelist it.
 //      this.props.oktaAuth.signOut({postLogoutRedirectUri: window.location.origin + '/'});
@@ -25,7 +25,7 @@ class LogOut extends Component {
     }
 
     render() {
-      console.log('In LogOut.render this.props=',this.props);
+//      console.log('In LogOut.render this.props=',this.props);
       return this.props.authState.isAuthenticated ? (
         <React.Fragment>
             <Button variant="light" onClick={this.toggle}>

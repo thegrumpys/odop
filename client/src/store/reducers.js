@@ -74,14 +74,14 @@ export function reducers(state, action) {
             ...state,
             name: action.payload.name
         });
-        console.log('In reducers.CHANGE_NAME action.payload.name=',action.payload.name,'state=',state);
+//        console.log('In reducers.CHANGE_NAME action.payload.name=',action.payload.name,'state=',state);
         return state;
     case CHANGE_USER:
         state = Object.assign({}, {
             ...state,
             user: action.payload.user
         });
-        console.log('In reducers.CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
+//        console.log('In reducers.CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
         return state;
 
 // SYMBOL
@@ -433,20 +433,31 @@ export function reducers(state, action) {
 
     case SAVE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-            localStorage.setItem('autosave', JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
-            console.log("In reducers.SAVE_AUTO_SAVE state=",state);
+            localStorage.setItem(action.payload.name, JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
+            console.log("In reducers.SAVE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state not changed
     case RESTORE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-            state = Object.assign({}, state, JSON.parse(localStorage.getItem('autosave')))
-            console.log("In reducers.RESTORE_AUTO_SAVE state=",state);
+            var autosave = JSON.parse(localStorage.getItem(action.payload.name)); // get auto save file contents
+            // Migrate autosave file from old (no model property) to new (with model property)
+            if (autosave.model === undefined) { // Is it the old format
+                name = autosave.name;
+                delete autosave.name;
+                state = Object.assign({}, state, {
+                    name: name, 
+                    model: autosave
+                });
+            } else {
+                state = Object.assign({}, state, autosave); // New format
+            }
+            console.log("In reducers.RESTORE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state changed
     case DELETE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-            localStorage.removeItem('autosave'); // remove auto save file
-            console.log("In reducers.DELETE_AUTO_SAVE state=",state);
+            localStorage.removeItem(action.payload.name); // remove auto save file
+            console.log("In reducers.DELETE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state not changed
 

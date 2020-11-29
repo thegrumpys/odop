@@ -11,7 +11,8 @@ import FEApp from './components/FEApp';
 import './odop.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import config from './config';
-import { restoreAutoSave, deleteAutoSave, loadInitialState, changeName } from './store/actionCreators';
+import { restoreAutoSave, deleteAutoSave, load, loadInitialState, changeName } from './store/actionCreators';
+import { displayError } from './components/ErrorModal';
 
 //function loggerMiddleware({ getState }) {
 //    return next => action => {
@@ -36,12 +37,23 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
 const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 const store = createStore(reducers, {user: null}, middleware);
-if (typeof(Storage) !== "undefined" && localStorage.getItem('autosave') !== null) {
-    console.log('In index.js restore auto save')
-    store.dispatch(restoreAutoSave());
-    store.dispatch(deleteAutoSave());
+if (typeof(Storage) !== "undefined" && localStorage.getItem("redirect") !== null) {
+//    console.log('In index.js restore auto save')
+    store.dispatch(restoreAutoSave("redirect"));
+    var design = store.getState();
+//    console.log('In index.js design=',design);
+    var name = design.name;
+    // Migrate model version here.
+    var { migrate } = require('./designtypes/'+design.model.type+'/migrate.js'); // Dynamically load migrate
+    var migrated_design = migrate(design.model);
+    if (migrated_design.jsontype === "ODOP") {
+        store.dispatch(load({name: name, model: migrated_design}));
+        store.dispatch(deleteAutoSave("redirect"));
+    } else {
+        displayError('Invalid JSON type, function ignored');
+    }
 } else {
-    console.log('In index.js load initial state');
+//    console.log('In index.js load initial state');
     store.dispatch(loadInitialState(config.design.type, 'US'));
     store.dispatch(changeName(config.design.name));
 }

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeName, changeUser, deleteAutoSave } from '../../store/actionCreators';
 import { displayError } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
+import { withOktaAuth } from '@okta/okta-react';
+import { withRouter } from 'react-router-dom';
 
 class FileSaveAs extends Component {
 
@@ -13,15 +15,14 @@ class FileSaveAs extends Component {
         super(props);
 //        console.log("In FileSaveAs.constructor props=",props);
         this.toggle = this.toggle.bind(this);
+        this.onSignIn = this.onSignIn.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onSaveAs = this.onSaveAs.bind(this);
         this.onTextInput = this.onTextInput.bind(this);
-        var user = this.props.user || config.design.user;
         this.state = {
             modal: false,
             names: [],
             name: undefined, // default to no name
-            user: user,
         };
     }
     
@@ -43,7 +44,7 @@ class FileSaveAs extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-              Authorization: 'Bearer ' + this.state.user
+              Authorization: 'Bearer ' + this.props.user
             }
         })
         .then(res => {
@@ -69,7 +70,7 @@ class FileSaveAs extends Component {
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.user
+                Authorization: 'Bearer ' + this.props.user
             }
         })
         .then(res => {
@@ -85,7 +86,7 @@ class FileSaveAs extends Component {
             this.setState({ names })
 //            console.log('In FileSaveAs.postDesign this.state.names=',this.state.names);
             var method = 'POST'; // Create it
-            if (this.state.names.filter(e => e.name === name && e.user === this.state.user).length > 0) { // Does it already exist?
+            if (this.state.names.filter(e => e.name === name && e.user === this.props.user).length > 0) { // Does it already exist?
                 method = 'PUT'; // Update it
             }
 //            console.log('In FileSaveAs.postDesign method=', method);
@@ -95,7 +96,7 @@ class FileSaveAs extends Component {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + this.state.user
+                    Authorization: 'Bearer ' + this.props.user
                 },
                 body: JSON.stringify(this.props.state)
             })
@@ -106,7 +107,7 @@ class FileSaveAs extends Component {
                 }
                 if (method === 'POST') {
                     var names = Array.from(this.state.names); // clone it
-                    names.push({user: this.state.user, name: name}); // If create and successful then sdd name to the array of names
+                    names.push({user: this.props.user, name: name}); // If create and successful then sdd name to the array of names
 //                    console.log('In FileSaveAs.postDesign type=',type,'name=',name,'names=', names);
                     this.setState({
                         names: names,
@@ -138,6 +139,22 @@ class FileSaveAs extends Component {
         });
     }
     
+    onSignIn() {
+//      console.log('In FileSaveAs.onSignIn');
+      this.setState({
+          modal: !this.state.modal
+      });
+      this.props.history.push('/login');
+    }
+
+    onCancel() {
+//      console.log('In FileSaveAs.onCancel');
+      this.setState({
+          modal: !this.state.modal
+      });
+      // Noop - all done
+  }
+
     onSaveAs() {
 //        console.log('In FileSaveAs.onSaveAs this.props.type=',this.props.type,' this.state.name=',this.state.name);
         this.setState({
@@ -148,14 +165,6 @@ class FileSaveAs extends Component {
         this.props.deleteAutoSave();
     }
     
-    onCancel() {
-//        console.log('In FileSaveAs.onCancel');
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Noop - all done
-    }
-
     render() {
 //        console.log('In FileSaveAs.render this.props=', this.props);
         return (
@@ -171,12 +180,14 @@ class FileSaveAs extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <br />
+                        {!this.props.authState.isAuthenticated && <Alert variant="info">Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
                         <Form.Label htmlFor="fileSaveAsText">Save As:</Form.Label>
-                        <Form.Control type="text" id="fileSaveAsText" placeholder="Enter design name here" onChange={this.onTextInput}/>
+                        <Form.Control type="text" id="fileSaveAsText" placeholder="Enter design name here" onChange={this.onTextInput} disabled={!this.props.authState.isAuthenticated}/>
                     </Modal.Body>
                     <Modal.Footer>
+                        {!this.props.authState.isAuthenticated && <Button variant="info" onClick={this.onSignIn}>Sign In...</Button>}{' '}
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" onClick={this.onSaveAs} disabled={this.state.name === undefined}>Save As</Button>
+                        <Button variant="primary" onClick={this.onSaveAs} disabled={!this.props.authState.isAuthenticated || this.state.name === undefined}>Save As</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>
@@ -197,7 +208,9 @@ const mapDispatchToProps = {
     deleteAutoSave: deleteAutoSave
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(FileSaveAs);
+export default withRouter(withOktaAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(FileSaveAs)
+));
