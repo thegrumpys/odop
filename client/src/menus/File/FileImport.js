@@ -10,7 +10,7 @@ class FileImport extends Component {
 
     constructor(props) {
         super(props);
-//        console.log('In FileImport.constructor props=',props);
+//        console.log('In FileImport.constructor this=',this,'props=',props);
         this.toggle = this.toggle.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
         this.onFileImport = this.onFileImport.bind(this);

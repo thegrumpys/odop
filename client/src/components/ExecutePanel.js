@@ -26,7 +26,7 @@ export var startExecute = function(prefix,steps) {
 class ExecutePanel extends Component {
     constructor(props) {
         super(props);
-//        console.log('In ExecutePanel constructor props=',props);
+//        console.log('In ExecutePanel constructor this=',this,'props=',props);
         this.onNext = this.onNext.bind(this);
         this.onBack = this.onBack.bind(this);
         this.onCancel = this.onCancel.bind(this);

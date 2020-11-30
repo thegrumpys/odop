@@ -8,7 +8,7 @@ import { logUsage } from '../../logUsage';
 class ActionSelectSize extends Component {
 
     constructor(props) {
-//        console.log('In ActionSelectSize.constructor props=',props);
+//        console.log('In ActionSelectSize.constructor this=',this,'props=',props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onSelectSizeType = this.onSelectSizeType.bind(this);

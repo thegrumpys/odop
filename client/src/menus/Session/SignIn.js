@@ -5,27 +5,27 @@ import { logUsage } from '../../logUsage';
 import { connect } from 'react-redux';
 import { withOktaAuth } from '@okta/okta-react';
 
-export default withRouter(withOktaAuth(class LogIn extends Component {
+export default withRouter(withOktaAuth(class SignIn extends Component {
 
     constructor(props) {
       super(props);
-//      console.log("In LogIn.constructor props=",props);
+//      console.log("In SignIn.constructor props=",props);
       this.toggle = this.toggle.bind(this);
     }
 
     async toggle() {
-//      console.log('In LogIn.toggle this.props=',this.props);
+//      console.log('In SignIn.toggle this.props=',this.props);
       this.props.oktaAuth.setOriginalUri();
-//      console.log('In LogIn.toggle this.props.oktaAuth.getOriginalUri=',this.props.oktaAuth.getOriginalUri());
+//      console.log('In SignIn.toggle this.props.oktaAuth.getOriginalUri=',this.props.oktaAuth.getOriginalUri());
       this.props.history.push('/login');
-      logUsage('event', 'LogIn', { 'event_label': '' });
+      logUsage('event', 'SignIn', { 'event_label': '' });
     }
 
     render() {
-//      console.log('In LogIn.render this.props=',this.props);
+//      console.log('In SignIn.render this.props=',this.props);
       return this.props.authState.isAuthenticated ? null : (
         <React.Fragment>
-            <OverlayTrigger placement="bottom" overlay={<Tooltip>Log in to save private designs.<br/>See About : User Accounts.</Tooltip>}>
+            <OverlayTrigger placement="bottom" overlay={<Tooltip>Sign in to save private designs.<br/>See About : User Accounts.</Tooltip>}>
                 <Button variant="light" onClick={this.toggle}>
                     Sign In&hellip;
                 </Button>

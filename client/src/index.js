@@ -7,7 +7,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { dispatcher } from './store/middleware/dispatcher';
 import { reducers } from './store/reducers';
 import { Provider } from 'react-redux'
-import FEApp from './components/FEApp';
+import Routes from './components/Routes';
 import './odop.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import config from './config';
@@ -29,7 +29,7 @@ import { displayError } from './components/ErrorModal';
 //    }
 //  }
 
-console.error('In index.js ==================================================================');
+//console.error('In index.js ==================================================================');
 //console.log('In index.js CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'Starting on port =', process.env.PORT, 'Node version =', process.version);
 
 /* eslint-disable no-underscore-dangle */
@@ -57,4 +57,4 @@ if (typeof(Storage) !== "undefined" && localStorage.getItem("redirect") !== null
     store.dispatch(loadInitialState(config.design.type, 'US'));
     store.dispatch(changeName(config.design.name));
 }
-ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><Provider store={store}><Router><FEApp /></Router></Provider></div>, document.getElementById('root'));
+ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><Provider store={store}><Router><Routes /></Router></Provider></div>, document.getElementById('root'));

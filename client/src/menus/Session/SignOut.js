@@ -5,27 +5,27 @@ import { connect } from 'react-redux';
 import { withOktaAuth } from '@okta/okta-react';
 import { changeUser, saveAutoSave } from '../../store/actionCreators';
 
-class LogOut extends Component {
+class SignOut extends Component {
 
     constructor(props) {
       super(props);
-//      console.log("In LogOut.constructor props=",props);
+//      console.log("In SignOut.constructor props=",props);
       this.toggle = this.toggle.bind(this);
     }
 
     async toggle() {
-//      console.log('In LogOut.toggle this.props=',this.props);
+//      console.log('In SignOut.toggle this.props=',this.props);
       this.props.changeUser(null);
       this.props.saveAutoSave("redirect");
-      // Before changing the postLogoutRedirectUri you must go into the Okta Admin UI
-      // And add the new one into the "Logout redirect URIs" to whitelist it.
-//      this.props.oktaAuth.signOut({postLogoutRedirectUri: window.location.origin + '/'});
+      // Before changing the postSignOutRedirectUri you must go into the Okta Admin UI
+      // And add the new one into the "SignOut redirect URIs" to whitelist it.
+//      this.props.oktaAuth.signOut({postSignOutRedirectUri: window.location.origin + '/'});
       this.props.oktaAuth.signOut();
-      logUsage('event', 'LogOut', { 'event_label': '' });
+      logUsage('event', 'SignOut', { 'event_label': '' });
     }
 
     render() {
-//      console.log('In LogOut.render this.props=',this.props);
+//      console.log('In SignOut.render this.props=',this.props);
       return this.props.authState.isAuthenticated ? (
         <React.Fragment>
             <Button variant="light" onClick={this.toggle}>
@@ -50,5 +50,5 @@ export default withOktaAuth(
     connect(
         mapStateToProps,
         mapDispatchToProps
-    )(LogOut)
+    )(SignOut)
 );

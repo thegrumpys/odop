@@ -14,8 +14,8 @@ import classnames from 'classnames';
 import ExecutePanel from './ExecutePanel';
 import DesignTable from './DesignTable';
 import { connect } from 'react-redux';
-import LogIn from '../menus/Session/LogIn';
-import LogOut from '../menus/Session/LogOut';
+import SignIn from '../menus/Session/SignIn';
+import SignOut from '../menus/Session/SignOut';
 import FileOpen from '../menus/File/FileOpen';
 import FileSave from '../menus/File/FileSave';
 import FileSaveAs from '../menus/File/FileSaveAs';
@@ -42,17 +42,17 @@ import { withOktaAuth } from '@okta/okta-react';
 import { logUsage } from '../logUsage';
 import { changeUser } from '../store/actionCreators';
 
-class App extends Component {
+class MainPage extends Component {
     
     constructor(props) {
         super(props);
-//        console.log('In App.constructor props=',props);
+//        console.log('In MainPage.constructor this=',this,'props=',props);
         this.toggle = this.toggle.bind(this);
         this.setKey = this.setKey.bind(this);
         this.report = this.report.bind(this);
         var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
         var report_names = getReportNames();
-//        console.log('In App.constructor report_names=', report_names);
+//        console.log('In MainPage.constructor report_names=', report_names);
         this.state = {
             isOpen: false,
             activeTab: "Design",
@@ -61,22 +61,22 @@ class App extends Component {
     }
     
     componentDidUpdate(prevProps) {
-//        console.log('In App.componentDidUpdate prevProps=',prevProps);
+//        console.log('In MainPage.componentDidUpdate prevProps=',prevProps);
         if (prevProps.authState.isAuthenticated !== this.props.authState.isAuthenticated) {
-//            console.log('In App.componentDidUpdate prevProps.authState.isAuthenticated=',prevProps.authState.isAuthenticated,'props.authState.isAuthenticated=',this.props.authState.isAuthenticated);
+//            console.log('In MainPage.componentDidUpdate prevProps.authState.isAuthenticated=',prevProps.authState.isAuthenticated,'props.authState.isAuthenticated=',this.props.authState.isAuthenticated);
             if (this.props.authState.isAuthenticated) {
-//                console.log('In App.componentDidUpdate isAuthenticated this.props.authState.idToken.clientId=',this.props.authState.idToken.clientId);
+//                console.log('In MainPage.componentDidUpdate isAuthenticated this.props.authState.idToken.clientId=',this.props.authState.idToken.clientId);
                 this.props.changeUser(this.props.authState.idToken.clientId);
             } else {
-//                console.log('In App.componentDidUpdate !isAuthenticated');
+//                console.log('In MainPage.componentDidUpdate !isAuthenticated');
                 this.props.changeUser(null);
             }
         }
         if (prevProps.type !== this.props.type) {
-//            console.log('In App.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+//            console.log('In MainPage.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
             var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
             var report_names = getReportNames();
-//            console.log('In App.componentDidUpdate report_names=', report_names);
+//            console.log('In MainPage.componentDidUpdate report_names=', report_names);
             this.setState({
                 report_names: report_names,
             });
@@ -84,14 +84,14 @@ class App extends Component {
     }
 
     toggle() {
-//        console.log('In App.toggle');
+//        console.log('In MainPage.toggle');
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
     
     setKey(tab) {
-//        console.log('In App.setKey tab=',tab);
+//        console.log('In MainPage.setKey tab=',tab);
         logUsage('event', 'Tab', { 'event_label': tab });
         if (this.state.activeTab !== tab) {
             this.setState({
@@ -101,7 +101,7 @@ class App extends Component {
     }
     
     report(report_name) {
-//        console.log('In App.report report_name=',report_name);
+//        console.log('In MainPage.report report_name=',report_name);
         
         // Loop to create prefs from system_controls
         var prefs = [];
@@ -128,14 +128,14 @@ class App extends Component {
     }
   
     render() {
-//        console.log('In App.render this.props=', this.props);
+//        console.log('In MainPage.render this.props=', this.props);
         // If you're waiting to logged in then there is nothing to display OR
         // If there is no name then there is no model therefore these is nothing to display
         if (this.props.authState.isPending || this.props.name === null) return null;
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
         var alt = this.props.type+' icon';
 //        console.log('src=',src,' alt=',alt);
-        const logOnOff = this.props.authState.isAuthenticated ? <LogOut /> : <LogIn />;
+        const logOnOff = this.props.authState.isAuthenticated ? <SignOut /> : <SignIn />;
         return (
             <React.Fragment>
                 <Navbar variant="light" bg="light" expand="md" fixed="top">
@@ -249,5 +249,5 @@ export default withRouter(withOktaAuth(
     connect(
         mapStateToProps,
         mapDispatchToProps
-    )(App)
+    )(MainPage)
 ));

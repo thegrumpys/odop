@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import FELoginWidget from './FELoginWidget';
+import SignInPageWidget from './SignInPageWidget';
 import { withOktaAuth } from '@okta/okta-react';
 import { changeUser, saveAutoSave } from '../store/actionCreators';
 import config from '../config';
@@ -8,16 +8,16 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { displayError } from './ErrorModal';
 
-class FELogin extends Component {
+class SignInPage extends Component {
   constructor(props) {
     super(props);
-//    console.log('In FELogin.constructor props=',props);
+//    console.log('In SignInPage.constructor this=',this,'props=',props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onError = this.onError.bind(this);
   }
 
   async onSuccess(res) {
-//    console.log('In FELogin.onSuccess this.props=',this.props,'res=',res);
+//    console.log('In SignInPage.onSuccess this.props=',this.props,'res=',res);
     // status (string) - Always present. One of: FORGOT_PASSWORD_EMAIL_SENT, 
     // UNLOCK_ACCOUNT_EMAIL_SENT, ACTIVATION_EMAIL_SENT, REGISTRATION_COMPLETE, or SUCCESS
     if (res.status === 'SUCCESS') {
@@ -40,10 +40,10 @@ class FELogin extends Component {
   }
 
   render() {
-//    console.log('In FELogin.render this.props=',this.props);
+//    console.log('In SignInPage.render this.props=',this.props);
     return this.props.authState.isAuthenticated ?
       <Redirect to={{ pathname: '/' }}/> :
-      <FELoginWidget
+      <SignInPageWidget
         onSuccess={this.onSuccess}
         onError={this.onError}/>;
   }
@@ -62,5 +62,5 @@ export default withRouter(withOktaAuth(
     connect(
         mapStateToProps,
         mapDispatchToProps
-    )(FELogin)
+    )(SignInPage)
 ));

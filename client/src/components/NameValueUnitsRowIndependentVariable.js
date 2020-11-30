@@ -19,7 +19,7 @@ Number.prototype.toODOPPrecision = function() {
 class NameValueUnitsRowIndependentVariable extends Component {
     
     constructor(props) {
-//        console.log('In NameValueUnitsRowIndependentVariable.constructor props=',props);
+//        console.log('In NameValueUnitsRowIndependentVariable.constructor this=',this,'props=',props);
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onFocus = this.onFocus.bind(this);

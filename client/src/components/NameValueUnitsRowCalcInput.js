@@ -16,7 +16,7 @@ Number.prototype.toODOPPrecision = function() {
 class NameValueUnitsRowCalcInput extends Component {
     
     constructor(props) {
-//        console.log('In NameValueUnitsRowCalcInput.constructor props=',props);
+//        console.log('In NameValueUnitsRowCalcInput.constructor this=',this,'props=',props);
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onFocus = this.onFocus.bind(this);

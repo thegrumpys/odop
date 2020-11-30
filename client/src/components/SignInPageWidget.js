@@ -4,9 +4,9 @@ import OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import config from '../config';
 
-export default class FELoginWidget extends Component {
+export default class SignInPageWidget extends Component {
   componentDidMount() {
-//    console.log('In FELoginWidget.componentDidMount');
+//    console.log('In SignInPageWidget.componentDidMount');
     const el = ReactDOM.findDOMNode(this);
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //  console.log("config=",config);
@@ -86,12 +86,12 @@ export default class FELoginWidget extends Component {
   }
 
   componentWillUnmount() {
-//      console.log('In FELoginWidget.componentWillUnmount');
+//      console.log('In SignInPageWidget.componentWillUnmount');
     this.widget.remove();
   }
 
   render() {
-//    console.log('In FELoginWidget.render this.props=',this.props);
+//    console.log('In SignInPageWidget.render this.props=',this.props);
     return <div />;
   }
 }
