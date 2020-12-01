@@ -133,7 +133,7 @@ export function migrate(design) {
             design.symbol_table[20].sdlim = 14000; 
             design.symbol_table[21].cmax = 30000; 
             design.symbol_table[22].cmax = 100000; 
-            design.symbol_table[23].lmax = "FDCL"; 
+            design.symbol_table[23].lmax = 'FDCL'; 
             design.symbol_table[23].cmax = 52; 
             design.symbol_table[23].sdlim = 150000; 
             design.symbol_table[28].cmin = 1.0; 

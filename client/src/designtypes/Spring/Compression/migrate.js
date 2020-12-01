@@ -169,15 +169,38 @@ export function migrate(design) {
         // Current model version
 //        console.log('Convert from 8 to 9');
         if (design.symbol_table[0].units === 'mm') { // Check for units 
-//            design.symbol_table[0].cmax = 100; 
+            design.symbol_table[0].cmax = 200; 
+            design.symbol_table[1].cmax = 50; 
+            design.symbol_table[2].cmax = 400; 
+            design.symbol_table[3].cmax = 40; 
+            design.symbol_table[5].cmax = 4000; 
+            design.symbol_table[6].cmax = 200; 
+            design.symbol_table[9].cmax = 200; 
+            design.symbol_table[10].cmax = 400; 
+            design.symbol_table[11].cmax = 1000; 
+            design.symbol_table[12].cmax = 500; 
+            design.symbol_table[13].cmax = 400; 
+            design.symbol_table[14].cmax = 100; 
+            design.symbol_table[16].cmin = 1; 
+            design.symbol_table[16].cmax = 200; 
+            design.symbol_table[17].cmin = 1; 
+            design.symbol_table[17].cmax = 10000; 
+            design.symbol_table[19].cmin = 1; 
+            design.symbol_table[19].cmax = 4000; 
+            design.symbol_table[20].cmin = 0; 
+            design.symbol_table[22].cmax = 2000; 
+            design.symbol_table[27].cmin = 1; 
         } else {
             design.symbol_table[0].cmax = 10; 
             design.symbol_table[1].cmax = 2; 
             design.symbol_table[2].cmax = 100; 
+            design.symbol_table[3].cmax = 40; 
             design.symbol_table[5].cmax = 1000; 
             design.symbol_table[11].cmax = 100; 
+            design.symbol_table[12].cmax = 50; 
             design.symbol_table[19].cmin = 1; 
             design.symbol_table[19].cmax = 1000; 
+            design.symbol_table[20].cmin = 0; 
             design.symbol_table[21].cmax = 200000; 
             design.symbol_table[22].cmax = 200000; 
             design.symbol_table[27].cmin = 1; 
