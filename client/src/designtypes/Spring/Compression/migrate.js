@@ -174,6 +174,7 @@ export function migrate(design) {
             design.symbol_table[2].cmax = 400; 
             design.symbol_table[3].cmax = 40; 
             design.symbol_table[5].cmax = 4000; 
+            design.symbol_table[6].cmin = 1; 
             design.symbol_table[6].cmax = 200; 
             design.symbol_table[9].cmax = 200; 
             design.symbol_table[10].cmax = 400; 

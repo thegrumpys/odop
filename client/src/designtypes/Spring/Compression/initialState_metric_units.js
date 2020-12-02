@@ -98,7 +98,7 @@ export const initialState = {
             "units": "mm",
             "lmin": 0,
             "lmax": 0,
-            "cmin": 0.2,
+            "cmin": 1.0,
             "cmax": 200.0,
             "ioclass": 0,
             "sdlim": 0.0,

@@ -122,6 +122,7 @@ export function migrate(design) {
             design.symbol_table[30].cmin = 20; 
             design.symbol_table[30].cmax = 400; 
         } else {
+            design.symbol_table[0].cmax = 10; 
             design.symbol_table[2].cmax = 100; 
             design.symbol_table[3].cmax = 40; 
             design.symbol_table[4].cmax = 10; 
@@ -130,6 +131,7 @@ export function migrate(design) {
             design.symbol_table[6].cmax = 100; 
             design.symbol_table[12].cmin = 0.1; 
             design.symbol_table[13].cmin = 0.1; 
+            design.symbol_table[14].cmax = 100; 
             design.symbol_table[20].sdlim = 14000; 
             design.symbol_table[21].cmax = 30000; 
             design.symbol_table[22].cmax = 100000; 
