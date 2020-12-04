@@ -209,7 +209,7 @@ export class ReportBase extends Component {
     def_dia(def_len) {
         /*  calculates mean diameter of deflected spring.  */
 //        console.log("In ReportBase.def_dia this=",this);
-        return(Math.sqrt(this.wire_len_a - def_len * def_len) / (this.props.symbol_table[o.Coils_A].value * Math.PI));
+        return Math.sqrt(this.wire_len_a - def_len * def_len) / (this.props.symbol_table[o.Coils_A].value * Math.PI);
     }
 
 }
