@@ -14,11 +14,11 @@ class ViewReports extends Component {
 //        console.log('In ViewReports.render this.props=', this.props);
         return (
             <React.Fragment>
-                <NavDropdown.Item onClick={() => this.props.parent.setKey("Design")}>
+                <NavDropdown.Item onClick={() => this.props.parent.setKey("View0")}>
                     Design
                 </NavDropdown.Item>
                 {this.props.report_names.map((element,i) => {return (
-                    <NavDropdown.Item key={element.name} onClick={() => this.props.parent.setKey("Report"+(i+1).toString())}>
+                    <NavDropdown.Item key={element.name} onClick={() => this.props.parent.setKey("View"+(i+1).toString())}>
                         {element.name}
                     </NavDropdown.Item>
                 )})}

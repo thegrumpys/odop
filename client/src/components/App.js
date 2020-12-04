@@ -52,7 +52,7 @@ class App extends Component {
 //        console.log('In App.constructor report_names=', report_names);
         this.state = {
             isOpen: false,
-            activeTab: "Design",
+            activeTab: "View0",
             report_names: report_names
         };
     }
@@ -78,7 +78,7 @@ class App extends Component {
     }
     
     setKey(tab) {
-//        console.log('In App.setKey tab=',tab);
+        console.log('In App.setKey tab=',tab);
         logUsage('event', 'Tab', { 'event_label': tab });
         if (this.state.activeTab !== tab) {
             this.setState({
@@ -151,7 +151,7 @@ class App extends Component {
                         </Nav>
                         <Nav>
                             <Nav.Item>
-                                <Nav.Link className={classnames({ active: this.state.activeTab === "Design" })} onClick={() => { this.setKey("Design"); }}>
+                                <Nav.Link className={classnames({ active: this.state.activeTab === "View0" })} onClick={() => { this.setKey("View0"); }}>
                                     <span className="d-none d-md-inline">Design: </span>
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}</Tooltip>}>
                                         <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
@@ -164,15 +164,15 @@ class App extends Component {
                 </Navbar>
                 <Container style={{backgroundColor: '#eee', paddingTop: '60px'}}>
                     <ExecutePanel />
-                    <Tabs defaultActiveKey="Design" activeKey={this.state.activeTab}>
-                        <Tab eventKey="Design">
-                            <Container fluid id="design">
+                    <Tabs defaultActiveKey="View0" activeKey={this.state.activeTab}>
+                        <Tab eventKey="View0">
+                            <Container fluid id="view-0">
                                 <DesignTable />
                             </Container>
                         </Tab>
                         {this.state.report_names.map((element,i) => {return (
-                            <Tab key={element.name} eventKey={"Report"+(i+1).toString()}>
-                                <div id={"report-"+(i+1).toString()}>{element.component}</div>
+                            <Tab key={element.name} eventKey={"View"+(i+1).toString()}>
+                                <div id={"view-"+(i+1).toString()}>{element.component}</div>
                             </Tab>
                             );
                         })}
