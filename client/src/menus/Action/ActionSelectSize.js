@@ -8,7 +8,7 @@ import { logUsage } from '../../logUsage';
 class ActionSelectSize extends Component {
 
     constructor(props) {
-//        console.log('In ActionSelectSize.constructor this=',this,'props=',props);
+//        console.log('In ActionSelectSize.constructor props=',props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onSelectSizeType = this.onSelectSizeType.bind(this);
@@ -124,7 +124,7 @@ class ActionSelectSize extends Component {
     }
 
     render() {
-//        console.log('In ActionSelectSize.render this.props=', this.props);
+//        console.log('In ActionSelectSize.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.types.length === 0}>

@@ -19,7 +19,7 @@ Number.prototype.toODOPPrecision = function() {
 class NameValueUnitsRowDependentVariable extends Component {
     
     constructor(props) {
-//        console.log('In NameValueUnitsRowDependentVariable.constructor');
+//        console.log('In NameValueUnitsRowDependentVariable.constructor props=',props)
         super(props);
         this.onSet = this.onSet.bind(this);
         this.onReset = this.onReset.bind(this);
@@ -37,7 +37,7 @@ class NameValueUnitsRowDependentVariable extends Component {
     }
     
     render() {
-//        console.log('In NameValueUnitsRowDependentVariable.render this.props=', this.props);
+//        console.log('In NameValueUnitsRowDependentVariable.render this=', this);
         // =======================================
         // Table Row
         // =======================================

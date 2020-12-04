@@ -7,7 +7,7 @@ export function migrate(design) {
      * When doing a migration also update client's initialState and set its version to the new one.
      * Also update load.sql and set its version to the new one.
      */
-//    console.log('In migrate design=',design);
+    console.log('In migrate design=',design);
 
     var previous_version = design.version;
     var migrated_design = design; // Assume no-op as default 
@@ -193,6 +193,6 @@ export function migrate(design) {
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
     
-//    console.log('In migrate migrated_design=',migrated_design);
+    console.log('In migrate migrated_design=',migrated_design);
     return migrated_design;
 }

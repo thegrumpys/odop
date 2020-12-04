@@ -14,7 +14,7 @@ class SignOut extends Component {
     }
 
     async toggle() {
-//      console.log('In SignOut.toggle this.props=',this.props);
+//      console.log('In SignOut.toggle this=',this);
       this.props.changeUser(null);
       this.props.saveAutoSave("redirect");
       // Before changing the postSignOutRedirectUri you must go into the Okta Admin UI
@@ -25,7 +25,7 @@ class SignOut extends Component {
     }
 
     render() {
-//      console.log('In SignOut.render this.props=',this.props);
+//      console.log('In SignOut.render this=',this);
       return this.props.authState.isAuthenticated ? (
         <React.Fragment>
             <Button variant="light" onClick={this.toggle}>

@@ -67,7 +67,7 @@ function startConnection() {
 // 404 - NOT FOUND, The requested resource could not be found
 // 500 - INTERNAL SERVER ERROR, Unknown server error has occurred
 
-app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
+app.get('/api/v1/designtypes', (req, res) => {
     var value;
     var user = req.uid;
     console.log('SERVER: In GET /api/v1/designtypes user=',user);
@@ -91,7 +91,7 @@ app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
     });
 });
 
-app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) => {
+app.get('/api/v1/designtypes/:type/designs', (req, res) => {
     var value;
     var user = req.uid;
     var type = req.params['type'];
@@ -116,7 +116,7 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) 
     });
 });
 
-app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
+app.get('/api/v1/designtypes/:type/designs/:name', (req, res) => {
     var type;
     var value;
     var user = req.uid;

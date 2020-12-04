@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 class DesignTable extends Component {
     
     render() {
-//        console.log('In DesignTable.render this.props=', this.props);
+//        console.log('In DesignTable.render this=', this);
         return (
             <React.Fragment>
                 <Row>

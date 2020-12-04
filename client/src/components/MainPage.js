@@ -46,18 +46,25 @@ class MainPage extends Component {
     
     constructor(props) {
         super(props);
-//        console.log('In MainPage.constructor this=',this,'props=',props);
+        console.log('In MainPage.constructor props=',props);
         this.toggle = this.toggle.bind(this);
         this.setKey = this.setKey.bind(this);
         this.report = this.report.bind(this);
-        var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
-        var report_names = getReportNames();
-//        console.log('In MainPage.constructor report_names=', report_names);
         this.state = {
             isOpen: false,
             activeTab: "Design",
-            report_names: report_names
+            report_names: [],
         };
+    }
+    
+    componentDidMount() {
+        console.log('In MainPage.componentDidMount this=',this);
+        var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
+        var report_names = getReportNames();
+//        console.log('In MainPage.componentDidMount report_names=', report_names);
+        this.setState({
+            report_names: report_names,
+        });
     }
     
     componentDidUpdate(prevProps) {
@@ -128,7 +135,7 @@ class MainPage extends Component {
     }
   
     render() {
-//        console.log('In MainPage.render this.props=', this.props);
+        console.log('In MainPage.render this=', this);
         // If you're waiting to logged in then there is nothing to display OR
         // If there is no name then there is no model therefore these is nothing to display
         if (this.props.authState.isPending || this.props.name === null) return null;
@@ -192,11 +199,11 @@ class MainPage extends Component {
                         <Nav>
                             <Nav.Item>
                                 <Nav.Link className={classnames({ active: this.state.activeTab === "Design" })} onClick={() => { this.setKey("Design"); }}>
-                                    <span className="d-none d-md-inline">Design: </span>
+                                    <span className="d-none d-md-inline">Design:&nbsp;</span>
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}</Tooltip>}>
                                         <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
                                     </OverlayTrigger>
-                                    {this.props.name}
+                                    &nbsp;{this.props.name}
                                 </Nav.Link>
                             </Nav.Item>
                             {this.state.report_names.map((element,i) => {return (

@@ -6,7 +6,7 @@ import { logUsage } from '../../logUsage';
 class HelpTutorial extends Component {
 
     constructor(props) {
-//        console.log('In HelpTutorial.constructor');
+//        console.log('In HelpTutorial.constructor props=',props)
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onSelect = this.onSelect.bind(this);
@@ -77,7 +77,7 @@ class HelpTutorial extends Component {
     }
     
     render() {
-//        console.log('In HelpTutorial.render this.props=', this.props);
+//        console.log('In HelpTutorial.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>

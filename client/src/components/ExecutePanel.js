@@ -26,7 +26,7 @@ export var startExecute = function(prefix,steps) {
 class ExecutePanel extends Component {
     constructor(props) {
         super(props);
-//        console.log('In ExecutePanel constructor this=',this,'props=',props);
+//        console.log('In ExecutePanel constructor props=',props);
         this.onNext = this.onNext.bind(this);
         this.onBack = this.onBack.bind(this);
         this.onCancel = this.onCancel.bind(this);
@@ -108,7 +108,7 @@ class ExecutePanel extends Component {
     }
     
     render() {
-//        console.log('In ExecutePanel.render this.props=', this.props);
+//        console.log('In ExecutePanel.render this=', this);
         return this.state.modal && (
             <Alert variant="success" style={{marginTop: '10px'}}>
                 <Container>

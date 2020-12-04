@@ -6,7 +6,7 @@ import config from '../config';
 
 export default class SignInPageWidget extends Component {
   componentDidMount() {
-//    console.log('In SignInPageWidget.componentDidMount');
+//    console.log('In SignInPageWidget.componentDidMount this=',this);
     const el = ReactDOM.findDOMNode(this);
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //  console.log("config=",config);
@@ -86,12 +86,12 @@ export default class SignInPageWidget extends Component {
   }
 
   componentWillUnmount() {
-//      console.log('In SignInPageWidget.componentWillUnmount');
+//      console.log('In SignInPageWidget.componentWillUnmount this=',this);
     this.widget.remove();
   }
 
   render() {
-//    console.log('In SignInPageWidget.render this.props=',this.props);
+//    console.log('In SignInPageWidget.render this=',this);
     return <div />;
   }
 }

@@ -8,7 +8,7 @@ import { logUsage } from '../../logUsage';
 class ActionSelectCatalog extends Component {
 
     constructor(props) {
-//        console.log('In ActionSelectCatalog.constructor this=',this,'props=',props);
+//        console.log('In ActionSelectCatalog.constructor props=',props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onSelectCatalogName = this.onSelectCatalogName.bind(this);
@@ -137,7 +137,7 @@ class ActionSelectCatalog extends Component {
     }
 
     render() {
-//        console.log('In ActionSelectCatalog.render this.props=', this.props);
+//        console.log('In ActionSelectCatalog.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.names.length === 0}>

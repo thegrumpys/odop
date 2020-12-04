@@ -10,7 +10,7 @@ class FileImport extends Component {
 
     constructor(props) {
         super(props);
-//        console.log('In FileImport.constructor this=',this,'props=',props);
+//        console.log('In FileImport.constructor props=',props);
         this.toggle = this.toggle.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
         this.onFileImport = this.onFileImport.bind(this);
@@ -83,7 +83,7 @@ class FileImport extends Component {
     }
 
     render() {
-//        console.log('In FileImport.render this.props=', this.props);
+//        console.log('In FileImport.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

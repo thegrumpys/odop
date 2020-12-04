@@ -13,7 +13,7 @@ class FileOpen extends Component {
 
     constructor(props) {
         super(props);
-//        console.log("In FileOpen .constructor props=",props);
+        console.log("In FileOpen .constructor props=",props);
         this.toggle = this.toggle.bind(this);
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
@@ -29,14 +29,14 @@ class FileOpen extends Component {
         };
     }
 
-    async componentDidMount() {
-//        console.log('In FileOpen.componentDidMount');
+    componentDidMount() {
+        console.log('In FileOpen.componentDidMount');
     }
 
     componentDidUpdate(prevProps) {
 //      console.log('In FileOpen.componentDidUpdate');
       if (prevProps.type !== this.props.type) {
-//          console.log('In FileOpen.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+          console.log('In FileOpen.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
           this.setState({ 
               type: this.props.type
           });
@@ -45,7 +45,7 @@ class FileOpen extends Component {
   }
 
     getDesignNames(type) {
-//        console.log('In FileOpen.getDesignNames type=', type);
+        console.log('In FileOpen.getDesignNames type=', type);
         // Get the names and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
@@ -105,16 +105,14 @@ class FileOpen extends Component {
     }
 
     toggle() {
-//        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
-        if (this.props.authState.isAuthenticated) {
-            var type = (this.state.types.includes(this.props.type) ? this.props.type : config.design.type);
-            this.getDesignNames(type);
-            var name = (this.state.names.includes(this.props.name) ? this.props.name : config.design.name);
-            this.setState({
-                type: type,
-                name: name
-            });
-        }
+        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
+        var type = (this.state.types.includes(this.props.type) ? this.props.type : config.design.type);
+        this.getDesignNames(type);
+        var name = (this.state.names.includes(this.props.name) ? this.props.name : config.design.name);
+        this.setState({
+            type: type,
+            name: name
+        });
         this.setState({
             modal: !this.state.modal,
         });
@@ -161,7 +159,7 @@ class FileOpen extends Component {
     }
 
     render() {
-//        console.log('In FileOpen.render this.props=', this.props);
+        console.log('In FileOpen.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>
@@ -177,14 +175,14 @@ class FileOpen extends Component {
                         <br />
                         {!this.props.authState.isAuthenticated && <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
                         <Form.Label htmlFor="fileOpenSelectType">Select design type to open:</Form.Label>
-                        <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type} disabled={!this.props.authState.isAuthenticated}>
+                        <Form.Control as="select" id="fileOpenSelectType" onChange={this.onSelectType} value={this.state.type}>
                             {this.state.types.map((designtype, index) =>
                                 <option key={index} value={designtype}>{designtype}</option>
                             )}
                         </Form.Control>
                         <br />
                         <Form.Label htmlFor="fileOpenSelectName">Select {!this.props.authState.isAuthenticated ? "system" : "private or system"} design to open:</Form.Label>
-                        <Form.Control as="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name} disabled={!this.props.authState.isAuthenticated}>
+                        <Form.Control as="select" id="fileOpenSelectName" onChange={this.onSelectName} value={this.state.name}>
                             {this.state.names.filter((design,index,self) => {return self.map(design => {return design.name}).indexOf(design.name) === index}).map((design, index) =>
                                 <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
                             )}

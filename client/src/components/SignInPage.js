@@ -11,13 +11,13 @@ import { displayError } from './ErrorModal';
 class SignInPage extends Component {
   constructor(props) {
     super(props);
-//    console.log('In SignInPage.constructor this=',this,'props=',props);
+//    console.log('In SignInPage.constructor props=',props);
     this.onSuccess = this.onSuccess.bind(this);
     this.onError = this.onError.bind(this);
   }
 
   async onSuccess(res) {
-//    console.log('In SignInPage.onSuccess this.props=',this.props,'res=',res);
+//    console.log('In SignInPage.onSuccess this=',this,'res=',res);
     // status (string) - Always present. One of: FORGOT_PASSWORD_EMAIL_SENT, 
     // UNLOCK_ACCOUNT_EMAIL_SENT, ACTIVATION_EMAIL_SENT, REGISTRATION_COMPLETE, or SUCCESS
     if (res.status === 'SUCCESS') {
@@ -34,13 +34,13 @@ class SignInPage extends Component {
   }
 
   onError(err) {
-//    console.log('error logging in', err);
+//    console.log('In SignInPage.onError this=',this,'err=',err);
     displayError('Error logging in, Error: ' + err);
     this.props.changeUser(null);
   }
 
   render() {
-//    console.log('In SignInPage.render this.props=',this.props);
+//    console.log('In SignInPage.render this=',this);
     return this.props.authState.isAuthenticated ?
       <Redirect to={{ pathname: '/' }}/> :
       <SignInPageWidget

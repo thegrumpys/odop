@@ -16,7 +16,7 @@ class HelpMotd extends Component {
     }
 
     render() {
-//        console.log('In HelpMotd.render this.props=', this.props);
+//        console.log('In HelpMotd.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.onHelp}>

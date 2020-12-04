@@ -6,7 +6,7 @@ import { logUsage } from '../../logUsage';
 class ViewSymbolTableOffsets extends Component {
 
     constructor(props) {
-//        console.log('In ViewSymbolTableOffsets.constructor');
+//        console.log('In ViewSymbolTableOffsets.constructor props=',props)
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {
@@ -23,7 +23,7 @@ class ViewSymbolTableOffsets extends Component {
     }
 
     render() {
-//        console.log('In ViewSymbolTableOffsets.render this.props=', this.props);
+//        console.log('In ViewSymbolTableOffsets.render this=', this);
         var ip = 0;
         var isc = 0;
         var il = 0;

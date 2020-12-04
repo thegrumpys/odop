@@ -16,7 +16,7 @@ Number.prototype.toODOPPrecision = function() {
 class NameValueUnitsRowCalcInput extends Component {
     
     constructor(props) {
-//        console.log('In NameValueUnitsRowCalcInput.constructor this=',this,'props=',props);
+//        console.log('In NameValueUnitsRowCalcInput.constructor props=',props);
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onFocus = this.onFocus.bind(this);
@@ -90,7 +90,7 @@ class NameValueUnitsRowCalcInput extends Component {
     }
     
     render() {
-//        console.log('In NameValueUnitsRowCalcInput.render this.props=', this.props);
+//        console.log('In NameValueUnitsRowCalcInput.render this=', this);
         // =======================================
         // Table Row
         // =======================================

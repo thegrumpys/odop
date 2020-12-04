@@ -6,7 +6,7 @@ import { logUsage } from '../../logUsage';
 class ActionExecute extends Component {
 
     constructor(props) {
-//        console.log('In ActionExecute.constructor');
+//        console.log('In ActionExecute.constructor props=',props)
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onSelect = this.onSelect.bind(this);
@@ -78,7 +78,7 @@ class ActionExecute extends Component {
     }
     
     render() {
-//        console.log('In ActionExecute.render this.props=', this.props);
+//        console.log('In ActionExecute.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>

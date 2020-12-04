@@ -6,6 +6,8 @@ var clientId;
 var design_types;
 var design_type;
 var design_name;
+var design_units;
+var design_view;
 var session_refresh;
 
 if (process.env.NODE_ENV !== "production") { // Are we running on localhost?
@@ -16,6 +18,8 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost?
   design_types = JSON.parse(design_types);
   design_type = process.env.REACT_APP_DESIGN_TYPE || 'Spring/Compression';
   design_name = process.env.REACT_APP_DESIGN_NAME || 'Startup';
+  design_units = process.env.REACT_APP_DESIGN_UNITS || 'US';
+  design_view = process.env.REACT_APP_DESIGN_VIEW || 'Design';
   session_refresh = process.env.REACT_APP_SESSION_REFRESH || 3600;
 } else { // We are running on Heroku
   const env = runtimeEnv(); // Load the env object.
@@ -26,6 +30,8 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost?
   design_types = JSON.parse(design_types);
   design_type = env.REACT_APP_DESIGN_TYPE || 'Spring/Compression';
   design_name = env.REACT_APP_DESIGN_NAME || 'Startup';
+  design_units = env.REACT_APP_DESIGN_UNITS || 'US';
+  design_view = env.REACT_APP_DESIGN_VIEW || 'Design';
   session_refresh = env.REACT_APP_SESSION_REFRESH || 3600;
 }
 
@@ -40,7 +46,9 @@ export default {
   design: {
     types: design_types,
     type: design_type,
-    name: design_name
+    name: design_name,
+    units: design_units,
+    view: design_view,
   },
   session: {
       refresh: session_refresh

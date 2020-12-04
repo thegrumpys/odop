@@ -45,13 +45,13 @@ export function reducers(state, action) {
 //    console.log('In reducers state=',state,'action=', action);
     switch (action.type) {
     case STARTUP:
-//        console.log('In reducers.STARTUP state=',state);
+        console.log('In reducers.STARTUP state=',state);
         return state;
     case LOAD:
         state = Object.assign({}, state, { 
             ...action.payload.design
         });
-//        console.log('In reducers.LOAD action.payload.design=',action.payload.design,'state=',state);
+        console.log('In reducers.LOAD action.payload.design=',action.payload.design,'state=',state);
         return state;
     case LOAD_INITIAL_STATE:
 //        console.log('In reducers.LOAD_INITIAL_STATE');
@@ -67,21 +67,21 @@ export function reducers(state, action) {
                 system_controls: initialSystemControls
             }
         }); // Merge initialState and initialSystemControls
-//        console.log('In reducers.LOAD_INITIAL_STATE initialState=',initialState,'state=',state);
+        console.log('In reducers.LOAD_INITIAL_STATE action.payload.type=',action.payload.type,'action.payload.units=',action.payload.units,'state=',state);
         return state;
     case CHANGE_NAME:
         state = Object.assign({}, {
             ...state,
             name: action.payload.name
         });
-//        console.log('In reducers.CHANGE_NAME action.payload.name=',action.payload.name,'state=',state);
+        console.log('In reducers.CHANGE_NAME action.payload.name=',action.payload.name,'state=',state);
         return state;
     case CHANGE_USER:
         state = Object.assign({}, {
             ...state,
             user: action.payload.user
         });
-//        console.log('In reducers.CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
+        console.log('In reducers.CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
         return state;
 
 // SYMBOL
@@ -434,12 +434,13 @@ export function reducers(state, action) {
     case SAVE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
             localStorage.setItem(action.payload.name, JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
-//            console.log("In reducers.SAVE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
+            console.log("In reducers.SAVE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state not changed
     case RESTORE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
             var autosave = JSON.parse(localStorage.getItem(action.payload.name)); // get auto save file contents
+            console.log("In reducers.RESTORE_AUTO_SAVE autosave=",autosave);
             // Migrate autosave file from old (no model property) to new (with model property)
             if (autosave.model === undefined) { // Is it the old format
                 name = autosave.name;
@@ -451,13 +452,17 @@ export function reducers(state, action) {
             } else {
                 state = Object.assign({}, state, autosave); // New format
             }
-//            console.log("In reducers.RESTORE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
+            var { migrate } = require('../designtypes/'+state.model.type+'/migrate.js'); // Dynamically load migrate
+            state = Object.assign({}, state, {
+                model: migrate(state.model),
+            });
+            console.log("In reducers.RESTORE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state changed
     case DELETE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
             localStorage.removeItem(action.payload.name); // remove auto save file
-//            console.log("In reducers.DELETE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
+            console.log("In reducers.DELETE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state not changed
 

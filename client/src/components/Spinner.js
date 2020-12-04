@@ -11,7 +11,7 @@ export var displaySpinner = function(display) {
 export class Spinner extends Component {
     constructor(props) {
         super(props);
-//        console.log('In Spinner.constructor');
+//        console.log('In Spinner.constructor props=',props);
         displaySpinner = displaySpinner.bind(this); // Bind external function - no 'this'
         this.onNoop = this.onNoop.bind(this);
         this.state = {
@@ -22,7 +22,7 @@ export class Spinner extends Component {
     onNoop() {} // No-op for onHide
 
     render() {
-//        console.log('In Spinner.render this.props=', this.props);
+//        console.log('In Spinner.render this=', this);
         return (
             <Modal show={this.state.modal} zindex={1100} size="sm" fade="false" className={this.props.className} onHide={this.onNoop}>
                 <Modal.Body><img src="spinner.gif" alt="Spinning Spinner" style={{"height":"90px"}}/>&nbsp;Running...</Modal.Body>
