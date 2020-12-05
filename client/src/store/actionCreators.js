@@ -142,13 +142,14 @@ export function changeSymbolConstraints(values, minmax) {
     }
 }
 
-export function setSymbolFlag(name, minmax, mask) {
+export function setSymbolFlag(name, minmax, mask, source=undefined) {
     return {
         type: SET_SYMBOL_FLAG,
         payload: {
             name,
             minmax,
-            mask
+            mask,
+            source,
         }
     }
 }

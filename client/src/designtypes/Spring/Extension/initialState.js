@@ -1,4 +1,4 @@
-import { CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 export const initialState = {
     "symbol_table": [
         {
@@ -59,7 +59,8 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Minimum force required to separate coils",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "propagate": { name: "Force_1", minmax: MIN }
         },
         {
             "input": true,
@@ -90,7 +91,8 @@ export const initialState = {
             "tooltip": "Minimum operating load (Length L_1) (FDCL)",
             "type": "equationset",
             "hidden": false,
-            "cminchoices": [ "Initial_Tension" ]
+            "cminchoices": [ "Initial_Tension" ],
+            "cminchoice": 0
         },
         {
             "input": true,
@@ -317,7 +319,9 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "cminchoices": [ "Stress_Init_Lo" ],
-            "cmaxchoices": [ "Stress_Init_Hi" ]
+            "cminchoice": 0,
+            "cmaxchoices": [ "Stress_Init_Hi" ],
+            "cmaxchoice": 0
         },
         {
             "input": false,
@@ -363,7 +367,8 @@ export const initialState = {
             "tooltip": "Bending stress in hooks",
             "type": "equationset",
             "hidden": false,
-            "cmaxchoices": [ "Stress_Lim_Bend" ]
+            "cmaxchoices": [ "Stress_Lim_Bend" ],
+            "cminchoice": 0
         },
         {
             "input": false,
@@ -453,7 +458,8 @@ export const initialState = {
             "sdlim": 0,
             "tooltip": "Stress Initial range low point - sets lower limit for Initial_Tension",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "propagate": { name: "Stress_Initial", minmax: MIN }
         },
         {
             "input": false,
@@ -468,7 +474,8 @@ export const initialState = {
             "sdlim": 0,
             "tooltip": "Stress Initial range high point - sets upper limit for Initial_Tension",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "propagate": { name: "Stress_Initial", minmax: MAX }
         },
         {
             "input": false,
@@ -803,7 +810,8 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Allowable stress for bending",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "propagate": { name: "Stress_Hook", minmax: MAX }
         },
         {
             "input": true,

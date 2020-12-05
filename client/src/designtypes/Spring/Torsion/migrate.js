@@ -80,6 +80,29 @@ export function migrate(design) {
         } else {
             design['units'] = "Metric";
         }
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+//            console.log('In migrate.propgate element=',element);
+            if (element.lmin & FDCL) {
+//                console.log('In migrate.propgate element.lmin&FDCL=',element.lmin&FDCL);
+                var source = design.symbol_table[element.cmin];
+                var sink = element;
+                console.log('In migrate.propgate source=',source,'sink=',sink);
+                source.propagate = { name: sink.name, minmax: MIN };
+//                console.log('In migrate.propgate sink.name=',sink.name,'MIN','source.propagate=',source.propagate);
+                sink.cminchoice = sink.cminchoices.indexOf(source.name);
+//                console.log('In migrate.propgate source.name=',source.name,'sink.cminchoices=',sink.cminchoices,'sink.cminchoice=',sink.cminchoice);
+            }
+            if (element.lmax & FDCL) {
+//                console.log('In migrate.propgate element.lmax&FDCL=',element.lmax&FDCL);
+                var source = design.symbol_table[element.cmax];
+                var sink = element;
+                console.log('In migrate.propgate source=',source,'sink=',sink);
+                source.propagate = { name: sink.name, minmax: MAX };
+//                console.log('In migrate.propgate sink.name=',sink.name,'MAX','source.propagate=',source.propagate);
+               sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
+//                console.log('In migrate.propgate source.name=',source.name,'sink.cmaxchoices=',sink.cmaxchoices,'sink.cmaxchoice=',sink.cmaxchoice);
+            }
+        });
         migrated_design.version = '5'; // last thing... set the migrated model version
         break; // Do not copy this break
     case '5':

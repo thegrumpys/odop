@@ -26,6 +26,7 @@ import { search } from './search';
 import { seek } from './seek';
 import { invokeInit } from './invokeInit';
 import { invokeEquationSet } from './invokeEquationSet';
+import { propagate } from './propagate';
 import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
 import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
@@ -34,6 +35,8 @@ import { changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstrai
 export const dispatcher = store => next => action => {
     
     var design;
+    var source;
+    var sink;
 
     const returnValue = next(action);
 
@@ -47,6 +50,7 @@ export const dispatcher = store => next => action => {
         invokeInit(store);
         invokeEquationSet(store);
         setSclDen(store);
+        propagate(store);
         updateViolationsAndObjectiveValue(store);
         break;
 
@@ -77,6 +81,16 @@ export const dispatcher = store => next => action => {
                     }
                     store.dispatch(changeResultTerminationCondition(''));
                     invokeInit(store);
+                }
+                if (element.propagate != undefined) {
+                    source = element;
+//                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE source.propagate=',source.propagate);
+//                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE source.propagate.name=',source.propagate.name,'source.propagate.minmax=',source.propagate.minmax,'source.value=',source.value);
+                    sink = design.model.symbol_table.find(sink => source.propagate.name === sink.name);
+//                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE sink=',sink);
+//                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE sink.name=',sink.name,'source.propagate.minmax=',source.propagate.minmax,'source.value=',source.value);
+                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE source=',source,'sink=',sink);
+                    store.dispatch(changeSymbolConstraint(sink.name, source.propagate.minmax, source.value))
                 }
                 return true;
             } else {
@@ -150,9 +164,34 @@ export const dispatcher = store => next => action => {
         updateViolationsAndObjectiveValue(store);
         break;
     case SET_SYMBOL_FLAG:
+        if (action.payload.mask & FDCL) {
+            design = store.getState();
+            source = design.model.symbol_table.find(element => element.name === action.payload.source);
+            sink = design.model.symbol_table.find(element => element.name === action.payload.name);
+            source.propagate = { name: sink.name, minmax: action.payload.minmax };
+            sink.cminchoice = sink.cminchoices.indexOf(source.name);
+            console.log('In reducers.SET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
+            store.dispatch(changeSymbolConstraint(sink.name, source.propagate.minmax, source.value)); // Propagate now
+        }
         updateViolationsAndObjectiveValue(store);
         break;
     case RESET_SYMBOL_FLAG:
+        if (action.payload.mask & FDCL) {
+            design = store.getState();
+            sink = design.model.symbol_table.find(element => element.name === action.payload.name);
+            if (action.payload.minmax === MIN) {
+                source = design.model.symbol_table.find(element => element.name === sink.cminchoices[sink.cminchoice]);
+            } else {
+                source = design.model.symbol_table.find(element => element.name === sink.cmaxchoices[sink.cmaxchoice]);
+            }
+            if (source.propagate !== undefined) {
+                delete source.propagate;
+            }
+            if (sink.cminchoice !== undefined) {
+                delete sink.cminchoice;
+            }
+            console.log('In reducers.RESET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
+        }
         updateViolationsAndObjectiveValue(store);
         break;
 
@@ -163,6 +202,7 @@ export const dispatcher = store => next => action => {
         store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
         store.dispatch(changeResultTerminationCondition(''));
         invokeEquationSet(store);
+        propagate(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
     case RESTORE_INPUT_SYMBOL_VALUES:
@@ -170,6 +210,7 @@ export const dispatcher = store => next => action => {
         store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
         store.dispatch(changeResultTerminationCondition(''));
         invokeEquationSet(store);
+        propagate(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
 

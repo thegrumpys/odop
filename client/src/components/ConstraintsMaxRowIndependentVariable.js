@@ -3,7 +3,6 @@ import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form }
 import { connect } from 'react-redux';
 import { MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
-import { evaluateConstraintName, evaluateConstraintValue } from '../store/middleware/evaluateConstraint';
 
 class ConstraintMaxRowIndependentVariable extends Component {
     
@@ -40,7 +39,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
         if (this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0) {
             this.setState({
                 modal: !this.state.modal,
-                value: this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : 0
+                value: this.props.element.lmax & CONSTRAINED ? this.props.element.cmax : 0
             });
         }
     }
@@ -66,13 +65,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        this.props.setSymbolFlag(this.props.element.name, MAX, FDCL);
-        this.props.symbol_table.forEach((element, i) => {
-            if (element.name === name) {
-//                console.log('@@@ element=',element,' i=',i);
-                this.props.changeSymbolConstraint(this.props.element.name, MAX, i);
-            }
-        })
+        this.props.setSymbolFlag(this.props.element.name, MAX, FDCL, name);
     }
     
     onCancel(event) {
@@ -111,12 +104,12 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                     <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetIndependentVariableFlagConstrained : this.onSetIndependentVariableFlagConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            { this.props.element.lmax & FDCL ?
-                                <OverlayTrigger placement="top" overlay={<Tooltip>={evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</Tooltip>}>
-                                    <Form.Control type="number" id={this.props.element.name + "_cmax"} className={cmax_class} value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
+                            {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
+                                <OverlayTrigger placement="top" overlay={<Tooltip>={this.props.element.lmax & FDCL ? this.props.element.cmaxchoices[this.props.element.cmaxchoice] : this.props.element.cmax}</Tooltip>}>
+                                    <Form.Control type="number" id={this.props.element.name + "_cmax"} className={cmax_class} value={this.props.element.lmax & CONSTRAINED ? this.props.element.cmax : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" id={this.props.element.name + "_cmax"} className={cmax_class} value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
+                                <Form.Control type="number" id={this.props.element.name + "_cmax"} className={cmax_class} value={this.props.element.lmax & CONSTRAINED ? this.props.element.cmax : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
                             }
                         </InputGroup>
                         {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg" onHide={this.onCancel}>
@@ -133,7 +126,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                                 <InputGroup>
                                                     <ButtonGroup>
                                                         {this.props.element.cmaxchoices.map((e) => {return (
-                                                            <Button key={e} variant="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) === e}>{e}</Button>
+                                                            <Button key={e} variant="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={this.props.element.cmaxchoices[this.props.element.cmaxchoice] === e}>{e}</Button>
                                                         );})}
                                                     </ButtonGroup>
                                                 </InputGroup>
@@ -166,7 +159,6 @@ class ConstraintMaxRowIndependentVariable extends Component {
 }
 
 const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value
 });

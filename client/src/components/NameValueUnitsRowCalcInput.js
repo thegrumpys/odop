@@ -81,7 +81,7 @@ class NameValueUnitsRowCalcInput extends Component {
     }
     
     render() {
-        console.log('In NameValueUnitsRowCalcInput.render this.props=', this.props);
+//        console.log('In NameValueUnitsRowCalcInput.render this.props=', this.props);
         // =======================================
         // Table Row
         // =======================================

@@ -115,7 +115,7 @@ class App extends Component {
     }
   
     render() {
-        console.log('In App.render this.props=', this.props);
+//        console.log('In App.render this.props=', this.props);
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
         var alt = this.props.type+' icon';
 //        console.log('src=',src,' alt=',alt);

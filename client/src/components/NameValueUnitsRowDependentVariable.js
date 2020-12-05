@@ -37,7 +37,7 @@ class NameValueUnitsRowDependentVariable extends Component {
     }
     
     render() {
-        console.log('In NameValueUnitsRowDependentVariable.render this.props=', this.props);
+//        console.log('In NameValueUnitsRowDependentVariable.render this.props=', this.props);
         // =======================================
         // Table Row
         // =======================================

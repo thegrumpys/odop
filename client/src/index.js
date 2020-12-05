@@ -25,6 +25,7 @@ import './odop.css';
 //    }
 //  }
 
+console.error('In index.js ==================================================================');
 //console.log('CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'starting on port =', process.env.PORT, 'node version =', process.version);
 
 /* eslint-disable no-underscore-dangle */
