@@ -18,54 +18,54 @@ class Report3 extends ReportBase {
             <React.Fragment>
                 <h4>ODOP:Spring &nbsp; Torsion Spring Report</h4>
                 <br />
-                <table>
+                <table className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.labels[o.Contact_person].name}:</td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Contact_person].value}</td>
+                            <td width="25%">{this.props.labels[o.Contact_person].value}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.props.labels[o.Phone].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Phone].value}</td>
+                            <td width="25%">{this.props.labels[o.Phone].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.Company_name].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Company_name].value}</td>
+                            <td width="25%">{this.props.labels[o.Company_name].value}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.props.labels[o.Date].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Date].value}</td>
+                            <td width="25%">{this.props.labels[o.Date].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.Street].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Street].value}</td>
+                            <td width="25%">{this.props.labels[o.Street].value}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.props.labels[o.Part_Number].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Part_Number].value}</td>
+                            <td width="25%">{this.props.labels[o.Part_Number].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.City].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.City].value}</td>
+                            <td width="25%">{this.props.labels[o.City].value}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.props.labels[o.Finish].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Finish].value}</td>
+                            <td width="25%">{this.props.labels[o.Finish].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.State___Zip].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.State___Zip].value}</td>
+                            <td width="25%">{this.props.labels[o.State___Zip].value}</td>
                         </tr>
                     </tbody>
                 </table>
                 <b>Comment: &nbsp; </b> {this.props.labels[o.COMMENT].value} <br/>
                 <br/>
-                <table>
+                <table className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
@@ -202,7 +202,7 @@ class Report3 extends ReportBase {
                     </tbody>
                 </table>
                 <br/>
-                <table>
+                <table className="report-table">
                     <thead>
                         <tr>
                             <th/>
@@ -313,7 +313,7 @@ class Report3 extends ReportBase {
                 <hr/>
                 Deflection at load point 2 is {(100.0 * this.props.symbol_table[o.Deflect_2].value / this.def_max).toFixed(0)}% of total safe deflection.<br />
                 <hr/>
-                <table>
+                <table className="report-table">
                     <tbody>
                         <tr>
                             <td>Wind: </td>
@@ -392,7 +392,7 @@ class Report3 extends ReportBase {
                 </table>
                 <br />
                 <hr/>
-                <table>
+                <table className="report-table">
                     <tbody>
                         <tr>
                             <td> &nbsp; approved for mfg.&nbsp; </td>

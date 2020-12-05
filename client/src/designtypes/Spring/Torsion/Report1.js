@@ -23,7 +23,7 @@ class Report1 extends ReportBase {
                 </b>
                 {this.hits > 0 && this.NaNmsg}{this.hits > 0 && <br />}
                 {this.hits > 0 && <br />}
-                <table>
+                <table className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
@@ -75,7 +75,7 @@ class Report1 extends ReportBase {
                     </tbody>
                 </table>
                 <br/>
-                <table>
+                <table className="report-table">
                     <thead>
                         <tr>
                             <th></th>
@@ -167,7 +167,7 @@ class Report1 extends ReportBase {
                     </tbody>
                 </table>
                 <br/>
-                <table>
+                <table className="report-table">
                     <tbody>
                         <tr>
                             <td>Safe Load</td>

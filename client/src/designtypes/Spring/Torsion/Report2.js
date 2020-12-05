@@ -18,7 +18,7 @@ class Report2 extends ReportBase {
             <React.Fragment>
                 <h4>ODOP:Spring &nbsp; Torsion Spring Report</h4>
                 <br />
-                <table>
+                <table className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
@@ -30,7 +30,6 @@ class Report2 extends ReportBase {
                             <td>{this.props.symbol_table[o.Material_Type].name}</td>
                             <td>=</td>
                             <td className="text-left" colSpan="2">{this.matTypeValue}</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Wire_Dia].name}</td>
@@ -43,7 +42,6 @@ class Report2 extends ReportBase {
                             <td>=</td>
                             <td>{this.tensileFixed0}</td>
                             <td>{this.props.symbol_table[o.Tensile].units}</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Index].name}</td>
@@ -57,28 +55,22 @@ class Report2 extends ReportBase {
                             <td>{(this.props.symbol_table[o.Stress_1].value / this.props.symbol_table[o.Stress_2].value).toFixed(3)}</td>
                             <td>{this.props.symbol_table[o.Spring_Index].units}</td>
                         </tr>
-                        <tr>
-                            <td> &nbsp; &nbsp; </td>
-                        </tr>
-                        <tr>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td>this.kb </td>
-                            <td>=</td>
-                            <td>{this.kb.toFixed(3)}</td>
-                        </tr>
                     </tbody>
                 </table>
                 <br/>
-                <table>
+                <table className="report-table">
                     <thead>
                         <tr>
                             <th colSpan="10"></th>
-                            <th colSpan="5" style={{textAlign: "center"}}>---- kb ----</th>
+                            <td>kb</td>
+                            <td>=</td>
+                            <td>{this.kb.toFixed(3)}</td>
+                            <th colSpan="2"></th>
+                        </tr>
+                        <tr>
+                            <th colSpan="10"></th>
+                            <th colSpan="3" style={{textAlign: "center"}}>---- kb ----</th>
+                            <th colSpan="2"></th>
                         </tr>
                         <tr>
                             <th></th>
@@ -104,8 +96,8 @@ class Report2 extends ReportBase {
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.props.symbol_table[o.L_Body].value.toFixed(3)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td>{(0.0).toFixed(3)}</td>
-                            <td>{(0.0).toFixed(2)}</td>
+                            <td> &nbsp; {(0.0).toFixed(3)}</td>
+                            <td> &nbsp; {(0.0).toFixed(2)}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td> &nbsp; &nbsp; </td>
                             <td> &nbsp; &nbsp; </td>
@@ -121,8 +113,8 @@ class Report2 extends ReportBase {
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.props.symbol_table[o.L_1].value.toFixed(3)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td>{this.props.symbol_table[o.Deflect_1].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.M_1].value.toFixed(2)}</td>
+                            <td> &nbsp; {this.props.symbol_table[o.Deflect_1].value.toFixed(3)}</td>
+                            <td> &nbsp; {this.props.symbol_table[o.M_1].value.toFixed(2)}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td> &nbsp; &nbsp; </td>
                             <td> &nbsp; &nbsp; </td>
@@ -138,8 +130,8 @@ class Report2 extends ReportBase {
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.props.symbol_table[o.L_2].value.toFixed(3)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td>{this.props.symbol_table[o.Deflect_2].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.M_2].value.toFixed(2)}</td>
+                            <td> &nbsp; {this.props.symbol_table[o.Deflect_2].value.toFixed(3)}</td>
+                            <td> &nbsp; {this.props.symbol_table[o.M_2].value.toFixed(2)}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td> &nbsp; &nbsp; </td>
                             <td> &nbsp; &nbsp; </td>
@@ -155,8 +147,8 @@ class Report2 extends ReportBase {
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.l_max.toFixed(3)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td>{this.def_max.toFixed(3)}</td>
-                            <td>{this.safe_load.toFixed(2)}</td>
+                            <td> &nbsp; {this.def_max.toFixed(3)}</td>
+                            <td> &nbsp; {this.safe_load.toFixed(2)}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td> &nbsp; &nbsp; </td>
                             <td> &nbsp; &nbsp; </td>
@@ -170,7 +162,7 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <hr/>
-                <table>
+                <table className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.symbol_table[o.FS_CycleLife].name}</td>
