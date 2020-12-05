@@ -11,7 +11,7 @@ class ConstraintsMinRowDependentVariable extends Component {
         super(props);
         this.onChangeDependentVariableConstraint = this.onChangeDependentVariableConstraint.bind(this);
         this.onSetDependentVariableFlagConstrained = this.onSetDependentVariableFlagConstrained.bind(this)
-        this.onResetSymbolFlagConstrained = this.onResetSymbolFlagConstrained.bind(this)
+        this.onResetDependentVariableFlagConstrained = this.onResetDependentVariableFlagConstrained.bind(this)
         this.onClick = this.onClick.bind(this);
         this.onChangeValue = this.onChangeValue.bind(this);
         this.onEnterValue = this.onEnterValue.bind(this);
@@ -26,7 +26,7 @@ class ConstraintsMinRowDependentVariable extends Component {
         this.props.setSymbolFlag(this.props.element.name, MIN, CONSTRAINED);
     }
     
-    onResetSymbolFlagConstrained(event) {
+    onResetDependentVariableFlagConstrained(event) {
         this.props.resetSymbolFlag(this.props.element.name, MIN, CONSTRAINED);
     }
     
@@ -76,7 +76,7 @@ class ConstraintsMinRowDependentVariable extends Component {
         this.props.setSymbolFlag(this.props.element.name, MIN, FDCL);
         this.props.symbol_table.forEach((element, i) => {
             if (element.name === name) {
-//                console.log('@@@ element=',element,' i=',i);
+//                console.log('In onSelectVariable element=',element,' i=',i);
                 this.props.changeSymbolConstraint(this.props.element.name, MIN, i);
             }
         })
@@ -84,7 +84,7 @@ class ConstraintsMinRowDependentVariable extends Component {
             this.props.setSymbolFlag(this.props.element.name, MAX, FDCL);
             this.props.symbol_table.forEach((element, i) => {
                 if (element.name === name) {
-//                    console.log('@@@ element=',element,' i=',i);
+//                    console.log('In onSelectVariable element=',element,' i=',i);
                     this.props.changeSymbolConstraint(this.props.element.name, MAX, i);
                 }
             })
@@ -128,11 +128,11 @@ class ConstraintsMinRowDependentVariable extends Component {
                         <InputGroup>
                             <InputGroup.Prepend>
                                 <InputGroup.Text>
-                                    <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
+                                    <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetDependentVariableFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            { this.props.element.lmin & FDCL ?
-                                <OverlayTrigger placement="top" overlay={<Tooltip>={evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</Tooltip>}>
+                            {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ?
+                                <OverlayTrigger placement="top" overlay={<Tooltip>FDCL ={evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</Tooltip>}>
                                     <Form.Control type="number" id={this.props.element.name + "_cmin"} className={cmin_class} value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick} />
                                 </OverlayTrigger>
                             :
