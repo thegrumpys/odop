@@ -31,6 +31,7 @@ import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
+import ViewSymbolTable from '../menus/View/ViewSymbolTable';
 import HelpMotd from '../menus/Help/HelpMotd';
 import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
@@ -165,6 +166,7 @@ class App extends Component {
                                 <NavDropdown.Divider />
                                 {process.env.NODE_ENV !== "production" && <ViewOffsets />}
                                 {process.env.NODE_ENV !== "production" && <ViewSymbolTableOffsets />}
+                                {process.env.NODE_ENV !== "production" && <ViewSymbolTable />}
                             </NavDropdown>
                             <NavDropdown title="Help">
                                 <HelpMotd />
@@ -203,10 +205,11 @@ class App extends Component {
                                 <DesignTable />
                             </Container>
                         </Tab>
-                        {this.state.report_names.map((element,i) => {return (
-                            <Tab key={element} eventKey={"Report"+(i+1).toString()}>
-                                <div id={"report-"+(i+1).toString()}>{this.report(element)}</div>
-                            </Tab>
+                        {this.state.report_names.map((element,i) => {
+                            return (
+                                <Tab key={element} eventKey={"Report"+(i+1).toString()}>
+                                    <div id={"report-"+(i+1).toString()}>{this.report(element)}</div>
+                                </Tab>
                             );
                         })}
                     </Tabs>
