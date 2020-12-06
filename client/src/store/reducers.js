@@ -48,13 +48,20 @@ export function reducers(state, action) {
 //        console.log('In STARTUP state=',state);
         return state;
     case LOAD:
-        state = action.payload.design;
-//        console.log('In LOAD state=',state);
+        state = Object.assign({}, state, { 
+            ...action.payload.design
+        });
+//        console.log('In LOAD action.payload.design=',action.payload.design,'state=',state);
         return state;
     case LOAD_INITIAL_STATE:
 //        console.log('In LOAD_INITIAL_STATE');
-        var { initialState } = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState
+        if (action.payload.units === 'US') {
+            var { initialState } = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState
+        } else {
+            var { initialState } = require('../designtypes/'+action.payload.type+'/initialState_metric_units.js'); // Dynamically load initialState
+        }
         state = Object.assign({}, state, { 
+            name: 'initialState',
             model: {
                 ...initialState,
                 system_controls: initialSystemControls
@@ -63,15 +70,19 @@ export function reducers(state, action) {
 //        console.log('In LOAD_INITIAL_STATE initialState=',initialState,'state=',state);
         return state;
     case CHANGE_NAME:
-        return Object.assign({}, {
+        state = Object.assign({}, {
             ...state,
             name: action.payload.name
         });
+//        console.log('In CHANGE_NAME action.payload.name=',action.payload.name,'state=',state);
+        return state;
     case CHANGE_USER:
-        return Object.assign({}, {
+        state = Object.assign({}, {
             ...state,
             user: action.payload.user
         });
+//        console.log('In CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
+        return state;
 
 // SYMBOL
 

@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
 import { InputGroup, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-
-class Report0Value extends Component {
+import { changeSymbolValue } from '../store/actionCreators';
+class Value extends Component {
     
     constructor(props) {
-//        console.log('In Report0Value.constructor props=',props);
+//        console.log('In Value.constructor props=',props);
         super(props);
+        this.onChange = this.onChange.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
+        this.onSelect = this.onSelect.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
                 focused: false
             };
         } else if (this.props.element.format === 'table') {
-//            console.log('In Report0Value.constructor file = ../designtypes/'+this.props.element.table+'.json');
+            console.log('In Value.constructor file= ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
-//            console.log('In Report0Value.constructor table=',table);
+            console.log('In Value.constructor table=',table);
             this.state = {
                 table: table
             };
@@ -22,16 +27,16 @@ class Report0Value extends Component {
     }
     
     componentDidUpdate(prevProps) {
-//        console.log('In Report0Value.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+        console.log('In Value.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
             if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
                 this.setState({
                     focused: false,
                 });
             } else if (this.props.element.format === 'table') {
-//                console.log('In Report0Value.componentDidUpdate file = ../designtypes/'+this.props.element.table+'.json');
+                console.log('In Value.componentDidUpdate file= ../designtypes/'+this.props.element.table+'.json');
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
-//                console.log('In Report0Value.componentDidUpdate table=',table);
+                console.log('In Value.componentDidUpdate table=',table);
                 this.setState({
                   table: table
                 });
@@ -39,8 +44,44 @@ class Report0Value extends Component {
         }
     }
 
+    onChange(event) {
+        console.log('In Value.onChange event.target.value=',event.target.value);
+       this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
+    }
+  
+    onFocus(event) {
+        console.log("In Value.onFocus event.target.value=", event.target.value);
+       this.setState({
+            focused: true
+        });
+    }
+  
+    onBlur(event) {
+        console.log("In Value.onBlur event.target.value=", event.target.value);
+        this.setState({
+          focused: false
+        });
+    }
+  
+    onSelect(event) {
+        console.log('In Value.onSelect event.target.value=',event.target.value);
+        var selectedIndex = parseFloat(event.target.value);
+        this.props.changeSymbolValue(this.props.element.name,selectedIndex);
+        this.state.table[selectedIndex].forEach((value, index) => {
+            console.log('In Value.onSelect value=',value,'index=',index);
+            if (index > 0) { // Skip the first column
+                var name = this.state.table[0][index];
+                console.log('In Value.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table);
+                console.log('In Value.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',this.props.symbol_table.find(element => element.name === name));
+                if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
+                    this.props.changeSymbolValue(name,value);
+                }
+            }
+        });
+    }
+  
     render() {
-//        console.log('In Report0Value.render this.props=', this.props);
+        console.log('In Value.render this.props=', this.props);
         var colSpan;
         if (this.props.colSpan === undefined) {
             colSpan = "1";
@@ -71,4 +112,12 @@ class Report0Value extends Component {
     }
 }
 
-export default connect()(Report0Value);
+const mapStateToProps = state => ({
+    symbol_table: state.model.symbol_table,
+});
+
+const mapDispatchToProps = {
+    changeSymbolValue: changeSymbolValue,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Value);

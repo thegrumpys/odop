@@ -33,7 +33,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                 focused: false
             };
         } else if (this.props.element.format === 'table') {
-//            console.log('In NameValueUnitsRowIndependentVariable.constructor file = ../designtypes/'+this.props.element.table+'.json');
+//            console.log('In NameValueUnitsRowIndependentVariable.constructor file= ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowIndependentVariable.constructor table=',table);
             this.state = {
@@ -50,7 +50,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                     focused: false,
                 });
             } else if (this.props.element.format === 'table') {
-//                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate file = ../designtypes/'+this.props.element.table+'.json');
+//                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate file= ../designtypes/'+this.props.element.table+'.json');
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate table=',table);
                 this.setState({
