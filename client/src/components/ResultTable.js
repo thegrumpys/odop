@@ -58,7 +58,7 @@ class ResultTable extends Component {
                                     <span>OBJMIN:</span>
                                 </OverlayTrigger>
                             </th>
-                            <td width="50%" className="text-right">{this.props.system_controls.objmin.toFixed(6)}</td>
+                            <td width="50%" className={"text-right"}>{this.props.system_controls.objmin.toFixed(6)}</td>
                         </tr>
                     </tbody>
                 </Table>

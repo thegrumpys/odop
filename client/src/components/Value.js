@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { InputGroup, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../store/actionCreators';
+
 class Value extends Component {
     
     constructor(props) {
@@ -81,20 +82,14 @@ class Value extends Component {
   
     render() {
 //        console.log('In Value.render this.props=', this.props);
-        var colSpan;
-        if (this.props.colSpan === undefined) {
-            colSpan = "1";
-        } else {
-            colSpan = this.props.colSpan;
-        }
         return (
             <React.Fragment>
-                <td className="align-middle">
+                <td className="align-middle" style={this.props.style}>
                     <InputGroup>
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
-                            <Form.Control type="number" disabled={!this.props.element.input} className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
+                            <Form.Control type="number" disabled={!this.props.element.input} className={"text-right"} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
-                            <Form.Control type="text" disabled={!this.props.element.input} className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
+                            <Form.Control type="text" disabled={!this.props.element.input} className={"text-right"} value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.format === 'table' &&
                         (
                             <Form.Control as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>

@@ -49,8 +49,8 @@ export class ReportBase extends Component {
         }
         if (this.hits)
             this.errmsg = "Warning" + this.errmsg;
-        const startpntmsg = "YOU MAY WISH TO CHOOSE A MORE REASONABLE START POINT BEFORE CONTINUING WITH SEARCH, SEEK OR TRADE.";
-        const NaNmsg = 'Any "NaN" values are "Not a Number".';
+        this.startpntmsg = "YOU MAY WISH TO CHOOSE A MORE REASONABLE START POINT BEFORE CONTINUING WITH SEARCH, SEEK OR TRADE.";
+        this.NaNmsg = 'Any "NaN" values are "Not a Number".';
 
         this.len_lbl = "Wire Length";
 

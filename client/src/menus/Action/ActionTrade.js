@@ -752,7 +752,7 @@ class ActionTrade extends Component {
                                     Default
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <Form.Control type="number" className="text-right" value={this.state.defaultest * 100.0} onChange={this.onSizeChange}/>
+                            <Form.Control type="number" className={"text-right"} value={this.state.defaultest * 100.0} onChange={this.onSizeChange}/>
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>

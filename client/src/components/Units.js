@@ -18,7 +18,7 @@ class Units extends Component {
         }
         return (
             <React.Fragment>
-                <td className={"text-nowrap align-middle " + (this.props.system_controls.show_units ? "" : "d-none")}>{this.props.element.units}</td>
+                <td className={"text-nowrap align-middle " + (this.props.system_controls.show_units ? "" : "d-none")} style={this.props.style}>{this.props.element.units}</td>
             </React.Fragment>
         );
     }
