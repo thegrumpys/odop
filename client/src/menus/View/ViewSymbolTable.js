@@ -38,7 +38,7 @@ class ViewSymbolTable extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <pre style={{'max-height': 'calc(100vh - 210px)', 'overflow-y': 'auto', 'overflow-x': 'scroll'}}>
+                        <pre className="view-table-fixed-2-columns">
                             <table className="report-table-borders">
                                 <thead>
                                     <tr>
@@ -73,73 +73,41 @@ class ViewSymbolTable extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                            {this.props.symbol_table.map((element,i) => {
-                                return (
-                                    <tr>
-                                        <td>{i}</td>
-                                        <td>{element.name}</td>
-                                        <td>{element.value}</td>
-                                        <td>{element.oldvalue}</td>
-                                        <td>{element.units}</td>
-                                        <td>{element.type}</td>
-                                        <td>{yn(element.input)}</td>
-                                        <td>{yn(element.hidden)}</td>
-                                        <td>{element.format}</td>
-                                        <td>{element.table}</td>
-                                        <td>{element.cminchoices}</td>
-                                        <td>{element.cminchoice}</td>
-                                        <td>{element.cmaxchoices}</td>
-                                        <td>{element.cmaxchoice}</td>
-                                        <td>{element.propagate}</td>
-                                        <td>{flags[element.lmin]}</td>
-                                        <td>{element.cmin}</td>
-                                        <td>{element.smin}</td>
-                                        <td>{flags[element.lmax]}</td>
-                                        <td>{element.cmax}</td>
-                                        <td>{element.smax}</td>
-                                        <td>{element.oldlmin}</td>
-                                        <td>{element.oldcmin}</td>
-                                        <td>{element.oldlmax}</td>
-                                        <td>{element.oldcmax}</td>
-                                        <td>{element.ioclass}</td>
-                                        <td>{element.sdlim}</td>
-                                        <td>{element.tooltip}</td>
-                                    </tr>
-                                );
-                            })}
+                                    {this.props.symbol_table.map((element,i) => {
+                                        return (
+                                            <tr>
+                                                <td>{i}</td>
+                                                <td>{element.name}</td>
+                                                <td>{element.value}</td>
+                                                <td>{element.oldvalue}</td>
+                                                <td>{element.units}</td>
+                                                <td>{element.type}</td>
+                                                <td>{yn(element.input)}</td>
+                                                <td>{yn(element.hidden)}</td>
+                                                <td>{element.format}</td>
+                                                <td>{element.table}</td>
+                                                <td>{element.cminchoices}</td>
+                                                <td>{element.cminchoice}</td>
+                                                <td>{element.cmaxchoices}</td>
+                                                <td>{element.cmaxchoice}</td>
+                                                <td>{element.propagate}</td>
+                                                <td>{flags[element.lmin]}</td>
+                                                <td>{element.cmin}</td>
+                                                <td>{element.smin}</td>
+                                                <td>{flags[element.lmax]}</td>
+                                                <td>{element.cmax}</td>
+                                                <td>{element.smax}</td>
+                                                <td>{element.oldlmin}</td>
+                                                <td>{element.oldcmin}</td>
+                                                <td>{element.oldlmax}</td>
+                                                <td>{element.oldcmax}</td>
+                                                <td>{element.ioclass}</td>
+                                                <td>{element.sdlim}</td>
+                                                <td>{element.tooltip}</td>
+                                            </tr>
+                                        );
+                                    })}
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>name</th>
-                                        <th>value</th>
-                                        <th>oldvalue</th>
-                                        <th>units</th>
-                                        <th>type</th>
-                                        <th>input</th>
-                                        <th>hidden</th>
-                                        <th>format</th>
-                                        <th>table</th>
-                                        <th>cminchoices</th>
-                                        <th>cminchoice</th>
-                                        <th>cmaxchoices</th>
-                                        <th>cmaxchoice</th>
-                                        <th>propagate</th>
-                                        <th>lmin</th>
-                                        <th>cmin</th>
-                                        <th>smin</th>
-                                        <th>lmax</th>
-                                        <th>cmax</th>
-                                        <th>smax</th>
-                                        <th>oldlmin</th>
-                                        <th>oldcmin</th>
-                                        <th>oldlmax</th>
-                                        <th>oldcmax</th>
-                                        <th>ioclass</th>
-                                        <th>sdlim</th>
-                                        <th>tooltip</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </pre>
                     </Modal.Body>
