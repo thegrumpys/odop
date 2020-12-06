@@ -207,7 +207,8 @@ export class Calculator extends ReportBase {
                 {this.pcadmsg}{this.pcadmsg !== undefined && <br />}
                 {this.errmsg1}{this.errmsg1 !== undefined && <br />}
                 {this.errmsg2}{this.errmsg2 !== undefined && <br />}
-                {this.errmsg3}{this.errmsg0}
+                {this.errmsg3}
+                {this.errmsg0}
            </React.Fragment>
         );
     }

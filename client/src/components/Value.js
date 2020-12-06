@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
-import { InputGroup, Form } from 'react-bootstrap';
+import { InputGroup, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolValue } from '../store/actionCreators';
 
+/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
+Number.prototype.toODOPPrecision = function() {
+    var value = this.valueOf();
+    var odopValue;
+    if (value < 10000.0 || value >= 1000000.0)
+         odopValue = value.toPrecision(4);
+    else odopValue = value.toFixed(0);
+    return odopValue;
+};
+     
 class Value extends Component {
     
     constructor(props) {
@@ -82,23 +93,45 @@ class Value extends Component {
   
     render() {
 //        console.log('In Value.render this.props=', this.props);
+        var value_class;
+        var value_tooltip;
+        if (this.props.element.lmin & FIXED) {
+            value_class = ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) ? 'text-right text-info border-info font-weight-bold' : 'text-right';
+            value_tooltip = "FIX VIOLATION: Value not equal to "+this.props.element.cmin.toODOPPrecision();
+        } else {
+            if (this.props.objective_value < this.props.system_controls.objmin) {
+                value_class = ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) ? 'text-right text-low-danger border-low-danger' : 'text-right';
+            } else {
+                if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
+                   value_class = 'text-right text-danger border-danger font-weight-bold'
+                   value_tooltip = "CONSTRAINT VIOLATION: Value outside the constraint range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
+                } else {
+                   value_class = 'text-right';
+                }
+            }
+        }
         return (
             <React.Fragment>
                 <td className="align-middle" style={this.props.style}>
                     <InputGroup>
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
-                            <Form.Control type="number" disabled={!this.props.element.input} className={"text-right"} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
+                            (value_tooltip != undefined ?
+                                <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
+                                   <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
+                                </OverlayTrigger>
+                            :
+                               <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
+                            )
+                        : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
                             <Form.Control type="text" disabled={!this.props.element.input} className={"text-right"} value={this.props.element.value} onChange={this.onChange} /> : '' }
-                        { this.props.element.format === 'table' &&
-                        (
-                            <Form.Control as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>
+                        { this.props.element.format === 'table' ?
+                            (<Form.Control as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>
                                 {this.state.table.map((value, index) =>
                                     index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
                                 )}
-                            </Form.Control>
-                        )
-                        }
+                            </Form.Control>)
+                        : ''}
                     </InputGroup>
                 </td>
             </React.Fragment>
@@ -108,6 +141,8 @@ class Value extends Component {
 
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,
+    system_controls: state.model.system_controls,
+    objective_value: state.model.result.objective_value
 });
 
 const mapDispatchToProps = {
