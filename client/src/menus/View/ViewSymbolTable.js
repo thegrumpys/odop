@@ -34,7 +34,7 @@ class ViewSymbolTable extends Component {
                 <Modal show={this.state.modal} className={this.props.className} onHide={this.toggle} size="lg">
                     <Modal.Header>
                         <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : SymbolTableOffsets
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : SymbolTable
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
