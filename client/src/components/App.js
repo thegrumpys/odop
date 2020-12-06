@@ -78,7 +78,7 @@ class App extends Component {
     }
     
     setKey(tab) {
-        console.log('In App.setKey tab=',tab);
+//        console.log('In App.setKey tab=',tab);
         logUsage('event', 'Tab', { 'event_label': tab });
         if (this.state.activeTab !== tab) {
             this.setState({

@@ -17,9 +17,9 @@ class Value extends Component {
                 focused: false
             };
         } else if (this.props.element.format === 'table') {
-            console.log('In Value.constructor file= ../designtypes/'+this.props.element.table+'.json');
+//            console.log('In Value.constructor file= ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
-            console.log('In Value.constructor table=',table);
+//            console.log('In Value.constructor table=',table);
             this.state = {
                 table: table
             };
@@ -27,16 +27,16 @@ class Value extends Component {
     }
     
     componentDidUpdate(prevProps) {
-        console.log('In Value.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+//        console.log('In Value.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
             if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
                 this.setState({
                     focused: false,
                 });
             } else if (this.props.element.format === 'table') {
-                console.log('In Value.componentDidUpdate file= ../designtypes/'+this.props.element.table+'.json');
+//                console.log('In Value.componentDidUpdate file= ../designtypes/'+this.props.element.table+'.json');
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
-                console.log('In Value.componentDidUpdate table=',table);
+//                console.log('In Value.componentDidUpdate table=',table);
                 this.setState({
                   table: table
                 });
@@ -45,34 +45,33 @@ class Value extends Component {
     }
 
     onChange(event) {
-        console.log('In Value.onChange event.target.value=',event.target.value);
+//        console.log('In Value.onChange event.target.value=',event.target.value);
        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
     }
   
     onFocus(event) {
-        console.log("In Value.onFocus event.target.value=", event.target.value);
+//        console.log("In Value.onFocus event.target.value=", event.target.value);
        this.setState({
             focused: true
         });
     }
   
     onBlur(event) {
-        console.log("In Value.onBlur event.target.value=", event.target.value);
+//        console.log("In Value.onBlur event.target.value=", event.target.value);
         this.setState({
           focused: false
         });
     }
   
     onSelect(event) {
-        console.log('In Value.onSelect event.target.value=',event.target.value);
+//        console.log('In Value.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex);
         this.state.table[selectedIndex].forEach((value, index) => {
-            console.log('In Value.onSelect value=',value,'index=',index);
+//            console.log('In Value.onSelect value=',value,'index=',index);
             if (index > 0) { // Skip the first column
                 var name = this.state.table[0][index];
-                console.log('In Value.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table);
-                console.log('In Value.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',this.props.symbol_table.find(element => element.name === name));
+//                console.log('In Value.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table);
                 if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
                     this.props.changeSymbolValue(name,value);
                 }
@@ -81,7 +80,7 @@ class Value extends Component {
     }
   
     render() {
-        console.log('In Value.render this.props=', this.props);
+//        console.log('In Value.render this.props=', this.props);
         var colSpan;
         if (this.props.colSpan === undefined) {
             colSpan = "1";
