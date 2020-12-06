@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Table } from 'react-bootstrap';
 import { ReportBase } from "./ReportBase" // import the inner non-redux-connected class
+import ResultTable from '../../../components/ResultTable';
 import Name from '../../../components/Name';
 import Value from '../../../components/Value';
 import Units from '../../../components/Units';
@@ -19,15 +20,17 @@ export class Calculator extends ReportBase {
 
         return (
             <React.Fragment>
+                <h4>ODOP:Spring &nbsp; Compression Spring Calculator</h4>
+                <b>
+                {this.hits > 0 && this.errmsg}{this.hits > 0 && <br />}
+                {this.hits > 0 && startpntmsg}{this.hits > 0 && <br />}
+                </b>
+                {this.hits > 0 && NaNmsg}{this.hits > 0 && <br />}
+                {this.hits > 0 && <br />}
                 <Row>
-                    <h4>ODOP:Spring &nbsp; Compression Spring Calculator</h4>
-                    <br />
-                    <b>
-                    {this.hits > 0 && this.errmsg}{this.hits > 0 && <br />}
-                    {this.hits > 0 && startpntmsg}{this.hits > 0 && <br />}
-                    </b>
-                    {this.hits > 0 && NaNmsg}{this.hits > 0 && <br />}
-                    {this.hits > 0 && <br />}
+                    <ResultTable />
+                </Row>
+                <Row>
                     <table>
                         <tbody>
                             <tr>
