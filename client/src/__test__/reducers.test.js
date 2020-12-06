@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../designtypes/Piston-Cylinder/initialState';
 import * as sto from '../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../initialSystemControls';
-import { MIN, MAX, CONSTRAINED, FIXED } from '../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
 import {
     startup, load, changeName, changeUser,
     changeSymbolValue, changeSymbolViolation, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
@@ -215,7 +215,7 @@ it('reducers change symbol constraint max', () => {
     expect(design.model.symbol_table[sto.THICKNESS].smax).toEqual(0.06);
 });
 
-it('reducers set symbol flag min', () => {
+it('reducers set symbol flag min FIXED', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -232,7 +232,7 @@ it('reducers set symbol flag min', () => {
     expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(CONSTRAINED|FIXED);
 });
 
-it('reducers reset symbol flag min', () => {
+it('reducers reset symbol flag min CONSTRAINED', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -249,7 +249,28 @@ it('reducers reset symbol flag min', () => {
     expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(0); // No flags
 });
 
-it('reducers set symbol flag max', () => {
+it('reducers set symbol flag min FDCL', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        {name: "initialState", model: state});
+
+    var design = store.getState(); // before
+    design.model.symbol_table[sto.RADIUS].cminchoices = ["THICKNESS"]; // Prepare for FDCL
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(CONSTRAINED);
+    expect(design.model.symbol_table[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
+
+    store.dispatch(setSymbolFlag("RADIUS", MIN, FDCL, "THICKNESS"));
+
+    design = store.getState(); // after
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(CONSTRAINED|FDCL);
+    expect(design.model.symbol_table[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
+    console.log('In reducers set symbol flag min FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
+});
+
+it('reducers set symbol flag max FIXED', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -266,7 +287,7 @@ it('reducers set symbol flag max', () => {
     expect(design.model.symbol_table[sto.THICKNESS].lmax).toEqual(CONSTRAINED|FIXED);
 });
 
-it('reducers reset symbol flag max', () => {
+it('reducers reset symbol flag max CONSTRAINED', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -281,6 +302,27 @@ it('reducers reset symbol flag max', () => {
     design = store.getState(); // after
     expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(design.model.symbol_table[sto.THICKNESS].lmax).toEqual(0); // No flags
+});
+
+it('reducers set symbol flag max FDCL', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        {name: "initialState", model: state});
+
+    var design = store.getState(); // before
+    design.model.symbol_table[sto.RADIUS].cmaxchoices = ["THICKNESS"]; // Prepare for FDCL
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].lmax).toEqual(CONSTRAINED);
+    expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
+
+    store.dispatch(setSymbolFlag("RADIUS", MAX, FDCL, "THICKNESS"));
+
+    design = store.getState(); // after
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].lmax).toEqual(CONSTRAINED|FDCL);
+    expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
+    console.log('In reducers set symbol flag max FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
 });
 
 //=====================================================================

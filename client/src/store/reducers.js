@@ -41,7 +41,7 @@ export function reducers(state, action) {
     var value;
     var name;
     var model;
-    console.warn('In reducers state=',state,'action=', action);
+//    console.warn('In reducers state=',state,'action=', action);
     switch (action.type) {
     case STARTUP:
 //        console.log('In STARTUP state=',state);
@@ -215,6 +215,7 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
+//                        console.log('In reducers.SET_SYMBOL_FLAG state=',state,'action=', action);
                         if (action.payload.minmax === MIN) {
                             return Object.assign({}, element, {
                                 lmin: element.lmin | action.payload.mask
@@ -235,6 +236,7 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
+//                        console.log('In reducers.RESET_SYMBOL_FLAG state=',state,'action=', action);
                         if (action.payload.minmax === MIN) {
                             return Object.assign({}, element, {
                                 lmin: element.lmin & ~action.payload.mask
