@@ -50,7 +50,7 @@ class NameValueUnitsRowDependentVariable extends Component {
                 </td>
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
-                        <Form.Control type="number" disabled={true} className={"text-right"} value={this.props.element.value.toODOPPrecision()} />
+                        <Form.Control type="number" disabled={true} className="text-right" value={this.props.element.value.toODOPPrecision()} />
                         <InputGroup.Append>
                             <InputGroup.Text>
                                 <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />

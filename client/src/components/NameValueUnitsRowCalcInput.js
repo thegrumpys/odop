@@ -104,9 +104,9 @@ class NameValueUnitsRowCalcInput extends Component {
                 <td className="align-middle" colSpan="2">
                     <InputGroup>
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
-                            <Form.Control type="number" disabled={!this.props.element.input} className={"text-right"} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
+                            <Form.Control type="number" disabled={!this.props.element.input} className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
-                            <Form.Control type="text" disabled={!this.props.element.input} className={"text-right"} value={this.props.element.value} onChange={this.onChange} /> : '' }
+                            <Form.Control type="text" disabled={!this.props.element.input} className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.format === 'table' &&
                         (
                             <Form.Control as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>

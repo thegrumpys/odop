@@ -18,7 +18,7 @@ class Report3 extends ReportBase {
             <React.Fragment>
                 <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
                 <br />
-                <table>
+                <table className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.labels[o.Contact_person].name}:</td>
@@ -65,7 +65,7 @@ class Report3 extends ReportBase {
                 </table>
                 <b>Comment: &nbsp; </b> {this.props.labels[o.COMMENT].value} <br/>
                 <br/>
-                <table>
+                <table className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
@@ -179,7 +179,7 @@ class Report3 extends ReportBase {
                     </tbody>
                 </table>
                 <br/>
-                <table>
+                <table className="report-table">
                     <thead>
                         <tr>
                             <th/>
@@ -288,7 +288,7 @@ class Report3 extends ReportBase {
                     </tbody>
                 </table>
                 <hr/>
-                <table>
+                <table className="report-table">
                     <tbody>
                         <tr>
                             <td>Wind: </td>
@@ -359,7 +359,7 @@ class Report3 extends ReportBase {
                 {this.errmsg2}{this.errmsg2 !== undefined && <br />}
                 {this.errmsg3}{this.errmsg0}
                 <hr/>
-                <table>
+                <table className="report-table">
                     <tbody>
                         <tr>
                             <td> &nbsp; approved for mfg.&nbsp; </td>

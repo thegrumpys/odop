@@ -143,7 +143,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                             <td>Value:&nbsp;</td>
                                             <td>
                                                 <InputGroup>
-                                                    <Form.Control type="number" id={this.props.element.name + "_cmax"} className={"text-right"} value={this.state.value} onChange={this.onChangeValue} />
+                                                    <Form.Control type="number" id={this.props.element.name + "_cmax"} className="text-right" value={this.state.value} onChange={this.onChangeValue} />
                                                     <Button variant="primary" onClick={this.onEnterValue}>Enter</Button>
                                                 </InputGroup>
                                             </td>

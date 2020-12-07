@@ -112,7 +112,7 @@ class Value extends Component {
         }
         return (
             <React.Fragment>
-                <td className="align-middle" style={this.props.style}>
+                <td className={"align-middle " + this.props.className}>
                     <InputGroup>
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             (value_tooltip != undefined ?
@@ -124,7 +124,7 @@ class Value extends Component {
                             )
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
-                            <Form.Control type="text" disabled={!this.props.element.input} className={"text-right"} value={this.props.element.value} onChange={this.onChange} /> : '' }
+                            <Form.Control type="text" disabled={!this.props.element.input} className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
                         { this.props.element.format === 'table' ?
                             (<Form.Control as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>
                                 {this.state.table.map((value, index) =>

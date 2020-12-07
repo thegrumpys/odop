@@ -12,7 +12,7 @@ class Name extends Component {
     render() {
 //        console.log('In Name.render this.props=', this.props);
         return (
-            <td className="align-middle" id={'calculator_name_'+this.props.index} style={this.props.style}>
+            <td className={"align-middle " + this.props.className} id={'calculator_name_'+this.props.index}>
                 <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip>{this.props.element.tooltip}</Tooltip>}>
                     <span>{this.props.element.name}</span>
                 </OverlayTrigger>

@@ -23,9 +23,9 @@ class Computed_Value extends Component {
 //        console.log('In Computed_Value.render this.props=', this.props);
         return (
             <React.Fragment>
-                <td className="align-middle" style={this.props.style}>
+                <td className="align-middle" className={this.props.className}>
                     <InputGroup>
-                        <Form.Control type="number" disabled={true} className={"text-right text-muted"} value={this.props.value.toODOPPrecision()} />
+                        <Form.Control type="number" disabled={true} className="text-right text-muted" value={this.props.value.toODOPPrecision()} />
                     </InputGroup>
                 </td>
             </React.Fragment>

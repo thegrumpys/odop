@@ -32,58 +32,58 @@ export class Calculator extends ReportBase {
                     <ResultTable />
                 </Row>
                 <Row>
-                    <table>
+                    <table className="report-table">
                         <tbody>
                             <tr>
                                 <Name element={this.props.symbol_table[o.Spring_Type]} index={o.Spring_Type} />
                                 <td>=</td>
                                 <Value element={this.props.symbol_table[o.Spring_Type]} index={o.Spring_Type} />
-                                <Units element={this.props.symbol_table[o.Spring_Type]} index={o.Spring_Type} style={{textAlign: 'left'}} />
+                                <Units element={this.props.symbol_table[o.Spring_Type]} index={o.Spring_Type} className="text-left" />
                                 <td> &nbsp; &nbsp; </td>
                                 <Name element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} />
                                 <td>=</td>
                                 <Value element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} />
-                                <Units element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} style={{textAlign: 'left'}} />
+                                <Units element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} className="text-left" />
                             </tr>
                             <tr>
                                 <Name element={this.props.symbol_table[o.Wire_Dia]} index={o.Wire_Dia} />
                                 <td>=</td>
                                 <Value element={this.props.symbol_table[o.Wire_Dia]} index={o.Wire_Dia} />
-                                <Units element={this.props.symbol_table[o.Wire_Dia]} index={o.Wire_Dia} style={{textAlign: 'left'}} />
+                                <Units element={this.props.symbol_table[o.Wire_Dia]} index={o.Wire_Dia} className="text-left" />
                                 <td> &nbsp; &nbsp; </td>
                                 <Name element={this.props.symbol_table[o.End_Type]} index={o.End_Type} />
                                 <td>=</td>
                                 <Value element={this.props.symbol_table[o.End_Type]} index={o.End_Type} />
-                                <Units element={this.props.symbol_table[o.End_Type]} index={o.End_Type} style={{textAlign: 'left'}} />
+                                <Units element={this.props.symbol_table[o.End_Type]} index={o.End_Type} className="text-left" />
                             </tr>
                             <tr>
                                 <Name element={this.props.symbol_table[o.Spring_Index]} index={o.Spring_Index} />
                                 <td>=</td>
                                 <Value element={this.props.symbol_table[o.Spring_Index]} index={o.Spring_Index} />
-                                <Units element={this.props.symbol_table[o.Spring_Index]} index={o.Spring_Index} style={{textAlign: 'left'}} />
+                                <Units element={this.props.symbol_table[o.Spring_Index]} index={o.Spring_Index} className="text-left" />
                                 <td> &nbsp; &nbsp; </td>
                                 <Name element={this.props.symbol_table[o.Coils_T]} index={o.Coils_T} />
                                 <td>=</td>
                                 <Value element={this.props.symbol_table[o.Coils_T]} index={o.Coils_T} />
-                                <Units element={this.props.symbol_table[o.Coils_T]} index={o.Coils_T} style={{textAlign: 'left'}} />
+                                <Units element={this.props.symbol_table[o.Coils_T]} index={o.Coils_T} className="text-left" />
                             </tr>
                             <tr>
                                 <Name element={this.props.symbol_table[o.Rate]} index={o.Rate} />
                                 <td>=</td>
                                 <Value element={this.props.symbol_table[o.Rate]} index={o.Rate} />
-                                <Units element={this.props.symbol_table[o.Rate]} index={o.Rate} style={{textAlign: 'left'}} />
+                                <Units element={this.props.symbol_table[o.Rate]} index={o.Rate} className="text-left" />
                                 <td> &nbsp; &nbsp; </td>
                                 <Name element={this.props.symbol_table[o.Coils_A]} index={o.Coils_A} />
                                 <td>=</td>
                                 <Value element={this.props.symbol_table[o.Coils_A]} index={o.Coils_A} />
-                                <Units element={this.props.symbol_table[o.Coils_A]} index={o.Coils_A} style={{textAlign: 'left'}} />
+                                <Units element={this.props.symbol_table[o.Coils_A]} index={o.Coils_A} className="text-left" />
                             </tr>
                         </tbody>
                     </table>
                 </Row>
                 <br />
                 <Row>
-                    <table>
+                    <table className="report-table">
                         <thead>
                             <tr>
                                 <th></th>
@@ -107,7 +107,7 @@ export class Calculator extends ReportBase {
                                 <Computed_Value value={0.0} />
                                 <td className="align-middle">
                                     <InputGroup>
-                                        <Form.Control type="text" disabled={true} className={"text-right text-muted"} value={"infinite"} />
+                                        <Form.Control type="text" disabled={true} className="text-right text-muted" value={"infinite"} />
                                     </InputGroup>
                                 </td>
                             </tr>
@@ -146,42 +146,42 @@ export class Calculator extends ReportBase {
                 </Row>
                 <br />
                 <Row>
-                    <table>
+                    <table className="report-table">
                         <tbody>
                             <tr>
                                 <td>Safe Load</td>
                                 <td>=</td>
                                 <Computed_Value value={this.safe_load} />
-                                <td style={{textAlign: 'left'}}>{this.safe_load_u}</td>
+                                <td className="text-left">{this.safe_load_u}</td>
                                 <td> &nbsp; &nbsp; </td>
                                 <td>{this.len_lbl}</td>
                                 <td>=</td>
                                 <Computed_Value value={this.wire_len_t} />
-                                <Units element={this.props.symbol_table[o.L_Free]} index={o.L_Free} style={{textAlign: 'left'}} />
+                                <Units element={this.props.symbol_table[o.L_Free]} index={o.L_Free} className="text-left" />
                                 <td />
                             </tr>
                             <tr>
                                 <Name element={this.props.symbol_table[o.L_Stroke]} index={o.L_Stroke} />
                                 <td>=</td>
                                 <Value element={this.props.symbol_table[o.L_Stroke]} index={o.L_Stroke} />
-                                <Units element={this.props.symbol_table[o.L_Stroke]} index={o.L_Stroke} style={{textAlign: 'left'}} />
+                                <Units element={this.props.symbol_table[o.L_Stroke]} index={o.L_Stroke} className="text-left" />
                                 <td> &nbsp; &nbsp; </td>
                                 <Name element={this.props.symbol_table[o.Weight]} index={o.Weight} />
                                 <td>=</td>
                                 <Computed_Value value={this.wgt1000} />
-                                <Units element={this.props.symbol_table[o.Weight]} index={o.Weight} style={{textAlign: 'left'}} />
-                                <td style={{textAlign: 'left'}}>{this.wgt1000_u}</td>
+                                <Units element={this.props.symbol_table[o.Weight]} index={o.Weight} className="text-left" />
+                                <td className="text-left">{this.wgt1000_u}</td>
                             </tr>
                             <tr>
                                 <td>Pitch</td>
                                 <td>=</td>
                                 <Computed_Value value={this.pitch} />
-                                <Units element={this.props.symbol_table[o.L_Free]} index={o.L_Free} style={{textAlign: 'left'}} />
+                                <Units element={this.props.symbol_table[o.L_Free]} index={o.L_Free} className="text-left" />
                                 <td> &nbsp; &nbsp; </td>
                                 <Name element={this.props.symbol_table[o.Cycle_Life]} index={o.Cycle_Life} />
                                 <td>=</td>
                                 <Value element={this.props.symbol_table[o.Cycle_Life]} index={o.Cycle_Life} />
-                                <td style={{textAlign: 'left'}}>{this.cycle_life_u}</td>
+                                <td className="text-left">{this.cycle_life_u}</td>
                                 <td />
                             </tr>
                         </tbody>
@@ -189,7 +189,7 @@ export class Calculator extends ReportBase {
                 </Row>
                 <br />
                 <Row>
-                    <table>
+                    <table className="report-table">
                         <tbody>
                             <tr>
                                 <td>
