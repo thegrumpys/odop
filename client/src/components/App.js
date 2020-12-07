@@ -29,6 +29,7 @@ import ActionTrade from '../menus/Action/ActionTrade';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
+import ViewReports from '../menus/View/ViewReports';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
 import ViewSymbolTable from '../menus/View/ViewSymbolTable';
@@ -47,13 +48,12 @@ class App extends Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.setKey = this.setKey.bind(this);
-        this.report = this.report.bind(this);
         var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
         var report_names = getReportNames();
 //        console.log('In App.constructor report_names=', report_names);
         this.state = {
             isOpen: false,
-            activeTab: "Design",
+            activeTab: "View0",
             report_names: report_names
         };
     }
@@ -79,7 +79,7 @@ class App extends Component {
     }
     
     setKey(tab) {
-//        console.log('In App.setKey tab=',tab);
+        console.log('In App.setKey tab=',tab);
         logUsage('event', 'Tab', { 'event_label': tab });
         if (this.state.activeTab !== tab) {
             this.setState({
@@ -88,33 +88,6 @@ class App extends Component {
         }
     }
     
-    report(report_name) {
-//        console.log('In App.report report_name=',report_name);
-        
-        // Loop to create prefs from system_controls
-        var prefs = [];
-        for(var key in this.props.system_controls) {
-            prefs.push(this.props.system_controls[key]);
-        }
-
-        // Loop to create symbol_table
-        var st = [];
-        this.props.symbol_table.forEach((element) => {
-            st.push(Object.assign({},element));
-        });
-
-        // Loop to create labels
-        var labels = [];
-        this.props.labels.forEach((element) => {
-            labels.push(Object.assign({},element));
-        });
-
-        // Generate design-type specific report
-        var { report } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load report
-        var output = report(report_name, prefs, st, labels);
-        return output;
-    }
-  
     render() {
 //        console.log('In App.render this.props=', this.props);
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
@@ -164,6 +137,8 @@ class App extends Component {
                                     Display Sub-Problems&hellip;
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
+                                <ViewReports parent={this} report_names={this.state.report_names}/>
+                                <NavDropdown.Divider />
                                 {process.env.NODE_ENV !== "production" && <ViewOffsets />}
                                 {process.env.NODE_ENV !== "production" && <ViewSymbolTableOffsets />}
                                 {process.env.NODE_ENV !== "production" && <ViewSymbolTable />}
@@ -178,7 +153,7 @@ class App extends Component {
                         </Nav>
                         <Nav>
                             <Nav.Item>
-                                <Nav.Link className={classnames({ active: this.state.activeTab === "Design" })} onClick={() => { this.setKey("Design"); }}>
+                                <Nav.Link className={classnames({ active: this.state.activeTab === "View0" })} onClick={() => { this.setKey("View0"); }}>
                                     <span className="d-none d-md-inline">Design: </span>
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}</Tooltip>}>
                                         <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
@@ -186,30 +161,21 @@ class App extends Component {
                                     {this.props.name}
                                 </Nav.Link>
                             </Nav.Item>
-                            {this.state.report_names.map((element,i) => {return (
-                                <Nav.Item key={element}>
-                                    <Nav.Link className={classnames({ active: this.state.activeTab === "Report"+(i+1).toString() })} onClick={() => { this.setKey("Report"+(i+1).toString()); }}>
-                                        <span className="d-none d-md-inline">Report: </span>{element}
-                                    </Nav.Link>
-                                </Nav.Item>
-                                );
-                            })}
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
                 <Container style={{backgroundColor: '#eee', paddingTop: '60px'}}>
                     <ExecutePanel />
-                    <Tabs defaultActiveKey="Design" activeKey={this.state.activeTab} onSelect={key => this.setKey(key)}>
-                        <Tab eventKey="Design">
-                            <Container fluid id="design">
+                    <Tabs defaultActiveKey="View0" activeKey={this.state.activeTab}>
+                        <Tab eventKey="View0">
+                            <Container fluid id="view-0">
                                 <DesignTable />
                             </Container>
                         </Tab>
-                        {this.state.report_names.map((element,i) => {
-                            return (
-                                <Tab key={element} eventKey={"Report"+(i+1).toString()}>
-                                    <div id={"report-"+(i+1).toString()}>{this.report(element)}</div>
-                                </Tab>
+                        {this.state.report_names.map((element,i) => {return (
+                            <Tab key={element.name} eventKey={"View"+(i+1).toString()}>
+                                <div id={"view-"+(i+1).toString()}>{element.component}</div>
+                            </Tab>
                             );
                         })}
                     </Tabs>
@@ -224,9 +190,6 @@ const mapStateToProps = state => ({
     name: state.name,
     type: state.model.type,
     version: state.model.version,
-    symbol_table: state.model.symbol_table,
-    system_controls: state.model.system_controls,
-    labels: state.model.labels,
 });
 
 const mapDispatchToProps = {
