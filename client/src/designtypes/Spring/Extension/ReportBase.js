@@ -9,7 +9,10 @@ export class ReportBase extends Component {
         super(props);
 //        console.log('In ReportBase.constructor this=',this,'props=',props);
         this.def_dia = this.def_dia.bind(this);
+    }
 
+    render() {
+//        console.log('In ReportBase.render this=',this);
         const Close_Wound_Coil = 5;
 
         /*  Bring in material properties table  */
@@ -43,8 +46,8 @@ export class ReportBase extends Component {
         }
         if (this.hits)
             this.errmsg = "Warning" + this.errmsg;
-        const startpntmsg = "YOU MAY WISH TO CHOOSE A MORE REASONABLE START POINT BEFORE CONTINUING WITH SEARCH, SEEK OR TRADE.";
-        const NaNmsg = 'Any "NaN" values are "Not a Number".';
+        this.startpntmsg = "YOU MAY WISH TO CHOOSE A MORE REASONABLE START POINT BEFORE CONTINUING WITH SEARCH, SEEK OR TRADE.";
+        this.NaNmsg = 'Any "NaN" values are "Not a Number".';
         
         this.len_lbl = "Wire Length";
 

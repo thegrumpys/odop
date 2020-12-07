@@ -20,9 +20,9 @@ class Report1 extends ReportBase {
                 <h4>ODOP:Spring &nbsp; Extension Spring Report</h4><br />
                 <b>
                 {this.hits > 0 && this.errmsg}{this.hits > 0 && <br />}
-                {this.hits > 0 && startpntmsg}{this.hits > 0 && <br />}
+                {this.hits > 0 && this.startpntmsg}{this.hits > 0 && <br />}
                 </b>
-                {this.hits > 0 && NaNmsg}{this.hits > 0 && <br />}
+                {this.hits > 0 && this.NaNmsg}{this.hits > 0 && <br />}
                 {this.hits > 0 && <br />}
                 <table>
                     <tbody>

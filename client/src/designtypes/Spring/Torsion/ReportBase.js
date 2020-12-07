@@ -9,7 +9,10 @@ export class ReportBase extends Component {
         super(props);
 //        console.log('In ReportBase.constructor this=',this,'props=',props);
         this.def_dia_t = this.def_dia_t.bind(this);
+    }
 
+    render() {
+//        console.log('In ReportBase.render this=',this);
         /*  Bring in material properties table  */
         if (this.props.symbol_table[o.Material_File].value === "mat_SI.json")
             this.m_tab = require('../mat_SI.json');

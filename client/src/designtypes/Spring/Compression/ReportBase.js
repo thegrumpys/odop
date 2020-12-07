@@ -11,7 +11,6 @@ export class ReportBase extends Component {
         this.def_dia = this.def_dia.bind(this);
     }
 
-
     render() {
 //        console.log('In ReportBase.render this=',this);
         /*  Bring in material properties table  */
