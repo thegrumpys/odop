@@ -9,7 +9,11 @@ export class ReportBase extends Component {
         super(props);
 //        console.log('In ReportBase.constructor this=',this,'props=',props);
         this.def_dia = this.def_dia.bind(this);
+    }
 
+
+    render() {
+//        console.log('In ReportBase.render this=',this);
         /*  Bring in material properties table  */
         if (this.props.symbol_table[o.Material_File].value === "mat_SI.json")
             this.m_tab = require('../mat_SI.json');
@@ -43,7 +47,7 @@ export class ReportBase extends Component {
             this.hits++;
             this.errmsg += ": " + this.props.symbol_table[o.Wire_Dia].name + " > reasonable";
         }
-        if (this.props.symbol_table[o.Tensile].value <= this.props.system_controls[o.smallnum]) {
+        if (this.props.symbol_table[o.Tensile].value <= this.props.system_controls.smallnum) {
             this.hits++;
             this.errmsg += ": " + this.props.symbol_table[o.Tensile].name + " < reasonable";
         }
@@ -119,7 +123,7 @@ export class ReportBase extends Component {
         this.tensileFixed0 = this.props.symbol_table[o.Tensile].value.toFixed(0);
 
         /* used to compute % tensile values */
-//        if (this.props.symbol_table[o.Tensile].value <= this.props.system_controls[o.smallnum]) {
+//        if (this.props.symbol_table[o.Tensile].value <= this.props.system_controls.smallnum) {
 //            return (
 //                    <React.Fragment>
 //                    YOU MUST SUPPLY A VALUE FOR TENSILE STRENGTH IN ORDER TO COMPLETE THESE CALCULATIONS.
@@ -177,7 +181,7 @@ export class ReportBase extends Component {
 
         temp = this.props.symbol_table[o.Deflect_2].value / this.props.symbol_table[o.L_Free].value;
         sq1 = 1.4 * this.props.symbol_table[o.Slenderness].value - 4.0;
-        if (sq1 > this.props.system_controls[o.smallnum]) {
+        if (sq1 > this.props.system_controls.smallnum) {
             /* structured to avoid div by 0 */
             if (temp > 0.76 / sq1) {
                 this.errmsg1 = "Given a deflection ratio of " + temp.toFixed(3) +

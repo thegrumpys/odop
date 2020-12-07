@@ -35,7 +35,7 @@ export class ReportBase extends Component {
             this.hits++;
             this.errmsg += ": " + this.props.symbol_table[o.Wire_Dia].name + " > reasonable";
         }
-        if (this.props.symbol_table[o.Tensile].value <= this.props.system_controls[o.smallnum]) {
+        if (this.props.symbol_table[o.Tensile].value <= this.props.system_controls.smallnum) {
             this.hits++;
             this.errmsg += ": " + this.props.symbol_table[o.Tensile].name + " < reasonable";
         }

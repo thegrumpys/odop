@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-class Name extends Component {
+class SymbolName extends Component {
     
     constructor(props) {
-//        console.log('In Name.constructor props=',props);
+//        console.log('In SymbolName.constructor props=',props);
         super(props);
     }
     
     render() {
-//        console.log('In Name.render this.props=', this.props);
+//        console.log('In SymbolName.render this.props=', this.props);
         return (
             <td className={"align-middle " + this.props.className} id={'calculator_name_'+this.props.index}>
                 <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip>{this.props.element.tooltip}</Tooltip>}>
@@ -24,4 +24,4 @@ class Name extends Component {
 const mapStateToProps = state => ({
 });
 
-export default connect(mapStateToProps)(Name);
+export default connect(mapStateToProps)(SymbolName);

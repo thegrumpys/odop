@@ -12,6 +12,7 @@ class Report3 extends ReportBase {
     }
 
     render() {
+        super.render();
 //        console.log('In Report3.render this.props=',this.props);
 
         return (

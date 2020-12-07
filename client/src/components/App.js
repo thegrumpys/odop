@@ -156,7 +156,7 @@ class App extends Component {
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}</Tooltip>}>
                                         <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
                                     </OverlayTrigger>
-                                    {this.props.name}
+                                    &nbsp;{this.props.name}
                                 </Nav.Link>
                             </Nav.Item>
                         </Nav>

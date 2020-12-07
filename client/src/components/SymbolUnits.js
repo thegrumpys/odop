@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class Units extends Component {
+class SymbolUnits extends Component {
     
     constructor(props) {
-//        console.log('In Units.constructor props=',props);
+//        console.log('In SymbolUnits.constructor props=',props);
         super(props);
     }
     
     render() {
-//        console.log('In Units.render this.props=', this.props);
+//        console.log('In SymbolUnits.render this.props=', this.props);
         var colSpan;
         if (this.props.colSpan === undefined) {
             colSpan = "1";
@@ -28,4 +28,4 @@ const mapStateToProps = state => ({
     system_controls: state.model.system_controls,
 });
 
-export default connect(mapStateToProps)(Units);
+export default connect(mapStateToProps)(SymbolUnits);
