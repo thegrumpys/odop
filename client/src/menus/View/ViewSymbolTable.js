@@ -92,11 +92,11 @@ class ViewSymbolTable extends Component {
                                                 <td>{element.cmaxchoice}</td>
                                                 <td>{element.propagate}</td>
                                                 <td>{flags[element.lmin]}</td>
-                                                <td>{element.cmin}</td>
-                                                <td>{element.smin}</td>
+                                                <td>{String(element.cmin)}</td>
+                                                <td>{String(element.smin)}</td>
                                                 <td>{flags[element.lmax]}</td>
-                                                <td>{element.cmax}</td>
-                                                <td>{element.smax}</td>
+                                                <td>{String(element.cmax)}</td>
+                                                <td>{String(element.smax)}</td>
                                                 <td>{element.oldlmin}</td>
                                                 <td>{element.oldcmin}</td>
                                                 <td>{element.oldlmax}</td>
