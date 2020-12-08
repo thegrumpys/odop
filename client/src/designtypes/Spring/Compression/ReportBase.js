@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_ips_offsets';
-import { connect } from 'react-redux';
 
 export class ReportBase extends Component {
 
@@ -216,10 +215,3 @@ export class ReportBase extends Component {
     }
 
 }
-
-const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table,
-    system_controls: state.model.system_controls,
-});
-
-export default connect(mapStateToProps)(ReportBase);

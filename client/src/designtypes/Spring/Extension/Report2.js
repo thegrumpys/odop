@@ -6,15 +6,9 @@ import { connect } from 'react-redux';
 
 class Report2 extends ReportBase {
 
-    constructor(props) {
-        super(props);
-//      console.log('In Report2.constructor this=',this,'props=',props);
-    }
-
     render() {
         super.render();
 //        console.log('In Report2.render this.props=',this.props);
-
         return (
             <React.Fragment>
                 <h4>ODOP:Spring &nbsp; Extension Spring Report</h4>

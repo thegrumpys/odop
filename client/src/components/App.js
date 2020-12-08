@@ -47,26 +47,16 @@ class App extends Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.setKey = this.setKey.bind(this);
-        var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
-        var report_names = getReportNames();
-//        console.log('In App.constructor report_names=', report_names);
         this.state = {
             isOpen: false,
             activeTab: "View0",
-            report_names: report_names
         };
     }
     
     componentDidUpdate(prevProps) {
-//        console.log('In App.componentDidUpdate');
+//        console.log('In App.componentDidUpdate this=',this,'prevProps=',prevProps);
         if (prevProps.type !== this.props.type) {
 //            console.log('In App.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-            var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
-            var report_names = getReportNames();
-//            console.log('In App.componentDidUpdate report_names=', report_names);
-            this.setState({
-                report_names: report_names,
-            });
         }
     }
 
@@ -89,6 +79,9 @@ class App extends Component {
     
     render() {
 //        console.log('In App.render this.props=', this.props);
+        var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
+        var report_names = getReportNames(); // Get them in App render because they are now React Components
+//      console.log('In App.constructor report_names=', report_names);
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
         var alt = this.props.type+' icon';
 //        console.log('src=',src,' alt=',alt);
@@ -136,7 +129,7 @@ class App extends Component {
                                     Display Sub-Problems&hellip;
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <ViewReports parent={this} report_names={this.state.report_names}/>
+                                <ViewReports parent={this} report_names={report_names}/>
                                 <NavDropdown.Divider />
                                 {process.env.NODE_ENV !== "production" && <ViewOffsets />}
                                 {process.env.NODE_ENV !== "production" && <ViewSymbolTableOffsets />}
@@ -170,7 +163,7 @@ class App extends Component {
                                 <DesignTable />
                             </Container>
                         </Tab>
-                        {this.state.report_names.map((element,i) => {return (
+                        {report_names.map((element,i) => {return (
                             <Tab key={element.name} eventKey={"View"+(i+1).toString()}>
                                 <div id={"view-"+(i+1).toString()}>{element.component}</div>
                             </Tab>
