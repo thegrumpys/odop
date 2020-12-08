@@ -51,7 +51,7 @@
 * [Side-by-Side comparison of designs](design/SideBySideCompare)
 * [Idea for a virtual annunciator panel](design/AnnunciatorPanel)
 * [Description of ODOP users](design/UserDescription)
-* [Ideas for Simplified Design Check UI](design/SimplifiedUI)
+* [View Alternatives](design/SimplifiedUI)
 * [Functionally Determined Constraint Level - User Interface](design/FDCL_UI)
 * [Version Number Guidelines](design/VersionNumbers) 
 * [Idea for a welcome page](design/WelcomePage)  
