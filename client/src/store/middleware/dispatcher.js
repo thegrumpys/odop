@@ -81,10 +81,11 @@ export const dispatcher = store => next => action => {
                     store.dispatch(resetSymbolFlag(element.name, MAX, CONSTRAINED | FDCL));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED));
-                    store.dispatch(changeSymbolConstraint(element.name, MIN, undefined));
-                    store.dispatch(changeSymbolConstraint(element.name, MAX, undefined));
                     if (action.payload.value !== undefined) {
                         store.dispatch(changeSymbolValue(element.name, action.payload.value));
+                    } else {
+                        store.dispatch(changeSymbolConstraint(element.name, MIN, element.value));
+                        store.dispatch(changeSymbolConstraint(element.name, MAX, element.value));
                     }
                     return true; // found
                 } else if (element.type === "equationset" && !element.input) {
