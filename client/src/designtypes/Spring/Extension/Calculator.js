@@ -205,7 +205,7 @@ export class Calculator extends ReportBase {
                                 <tr>
                                     <td className="text-left" colSpan="3">|&lt;---</td>
                                     <SymbolName className="text-right" element={this.props.symbol_table[o.L_Free]} index={o.L_Free} />
-                                    <td>(w/ends) =</td>
+                                    <td>(w/ends)&nbsp;=</td>
                                     <SymbolValue element={this.props.symbol_table[o.L_Free]} index={o.L_Free} />
                                     <td className="text-right" colSpan="3">----&gt;|</td>
                                 </tr>
