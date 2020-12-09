@@ -267,7 +267,7 @@ it('reducers set symbol flag min FDCL', () => {
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(CONSTRAINED|FDCL);
     expect(design.model.symbol_table[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
-    console.log('In reducers set symbol flag min FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
+//    console.log('In reducers set symbol flag min FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
 });
 
 it('reducers set symbol flag max FIXED', () => {
@@ -322,7 +322,7 @@ it('reducers set symbol flag max FDCL', () => {
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].lmax).toEqual(CONSTRAINED|FDCL);
     expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
-    console.log('In reducers set symbol flag max FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
+//    console.log('In reducers set symbol flag max FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
 });
 
 //=====================================================================

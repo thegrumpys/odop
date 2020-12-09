@@ -1,7 +1,7 @@
 import { displayError } from '../../../components/ErrorModal';
 import { initialState } from './initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
-import { MIN, MAX, FDCL } from '../../../store/actionTypes';
+import { MIN, MAX, FIXED, FDCL } from '../../../store/actionTypes';
 
 export function migrate(design) {
     /*
@@ -196,6 +196,7 @@ export function migrate(design) {
 //                console.log('In migrate.propgate sink.name=',sink.name,'MAX','source.propagate=',source.propagate);
                 sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
 //                console.log('In migrate.propgate source.name=',source.name,'sink.cmaxchoices=',sink.cmaxchoices,'sink.cmaxchoice=',sink.cmaxchoice);
+            }
             if (element.lmin & FIXED || element.lmax & FIXED) { // If one is FIXED
                 element.lmin |= FIXED; // Set them both fixed because they are paired
                 element.lmax |= FIXED;
