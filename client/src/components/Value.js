@@ -20,7 +20,7 @@ class Value extends Component {
     }
     
     render() {
-//        console.log('In Value.render this.props=', this.props);
+//        console.log('In Value.render this=', this);
         return (
             <React.Fragment>
                 <td className="align-middle" className={this.props.className}>

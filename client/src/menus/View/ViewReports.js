@@ -11,7 +11,7 @@ class ViewReports extends Component {
     }
     
     render() {
-//        console.log('In ViewReports.render this.props=', this.props);
+//        console.log('In ViewReports.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={() => this.props.parent.setKey("View0")}>

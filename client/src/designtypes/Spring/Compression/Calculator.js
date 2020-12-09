@@ -19,7 +19,6 @@ export class Calculator extends ReportBase {
     render() {
         super.render();
 //        console.log('In Calculator.render this.props=',this.props);
-
         return (
             <Container>
                 <Row>

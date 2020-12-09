@@ -78,7 +78,7 @@ class ActionExecute extends Component {
     }
     
     render() {
-//        console.log('In ActionExecute.render this.props=', this.props);
+//        console.log('In ActionExecute.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>

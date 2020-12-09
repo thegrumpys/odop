@@ -92,7 +92,7 @@ class SymbolValue extends Component {
     }
   
     render() {
-//        console.log('In SymbolValue.render this.props=', this.props);
+        console.log('In SymbolValue.render this=', this);
         var value_class;
         var value_tooltip;
         if (this.props.element.lmin & FIXED) {

@@ -164,7 +164,7 @@ class FileDelete extends Component {
     }
 
     render() {
-//        console.log('In FileDelete.render this.props=', this.props);
+//        console.log('In FileDelete.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

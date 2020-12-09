@@ -206,7 +206,7 @@ class PromptForDesign extends Component {
   }
 
     render() {
-//        console.log('In PromptForDesign.render this.props=', this.props);
+//        console.log('In PromptForDesign.render this=', this);
         if (this.props.name === null) {
             return (
                 <React.Fragment>

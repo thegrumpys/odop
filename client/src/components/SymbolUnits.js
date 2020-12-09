@@ -9,7 +9,7 @@ class SymbolUnits extends Component {
     }
     
     render() {
-//        console.log('In SymbolUnits.render this.props=', this.props);
+//        console.log('In SymbolUnits.render this=', this);
         var colSpan;
         if (this.props.colSpan === undefined) {
             colSpan = "1";

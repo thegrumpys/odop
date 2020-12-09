@@ -78,7 +78,7 @@ class App extends Component {
     }
     
     render() {
-//        console.log('In App.render this.props=', this.props);
+//        console.log('In App.render this=', this);
         var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
         var report_names = getReportNames(); // Get them in App render because they are now React Components
 //      console.log('In App.constructor report_names=', report_names);

@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 class NameValueUnitsTable extends Component {
     
     render() {
-//        console.log('In NameValueUnitsTable.render this.props=', this.props);
+//        console.log('In NameValueUnitsTable.render this=', this);
         return (
             <React.Fragment>
                 <Table className="col-md-6 border border-secondary" size="sm">

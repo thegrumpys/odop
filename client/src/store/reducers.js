@@ -180,6 +180,12 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
+//                        console.log('In reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS state=',state,'action=', action);
+//                        console.log('In reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS',
+//                                    'element.lmin=',element.lmin,
+//                                    'element.cmin=',element.cmin,
+//                                    'element.lmax=',element.lmax,
+//                                    'element.cmax=',element.cmax);
                         return Object.assign({}, element, {
                             oldlmin: element.lmin,
                             oldcmin: element.cmin,
@@ -197,14 +203,32 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
-                        return Object.assign({}, element, {
-                            lmin: element.oldlmin,
-                            cmin: element.oldcmin,
-                            smin: sclden(state.model.system_controls, element.value, evaluateConstraintValue(state.model.symbol_table,element.oldlmin,element.oldcmin), element.sdlim, element.oldlmin),
-                            lmax: element.oldlmax,
-                            cmax: element.oldcmax,
-                            smax: sclden(state.model.system_controls, element.value, evaluateConstraintValue(state.model.symbol_table,element.oldlmax,element.oldcmax), element.sdlim, element.oldlmax)
-                        });
+//                        console.log('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS state=',state,'action=', action);
+//                        console.log('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS',
+//                                    'element.oldlmin=',element.oldlmin,
+//                                    'element.oldcmin=',element.oldcmin,
+//                                    'element.oldlmax=',element.oldlmax,
+//                                    'element.oldcmax=',element.oldcmax);
+                        if (element.oldlmin !== undefined) { // Is there something to restore then restore them else just use the current values as-is
+                            var lmin = element.oldlmin; // Get the values as locals
+                            var cmin = element.oldcmin;
+                            var lmax = element.oldlmax;
+                            var cmax = element.oldcmax;
+                            delete element.oldlmin; // Delete the values
+                            delete element.oldcmin;
+                            delete element.oldlmax;
+                            delete element.oldcmax;
+                            return Object.assign({}, element, { // Assign the locals
+                                lmin: lmin,
+                                cmin: cmin,
+                                smin: sclden(state.model.system_controls, element.value, evaluateConstraintValue(state.model.symbol_table,lmin,cmin), element.sdlim, lmin),
+                                lmax: lmax,
+                                cmax: cmax,
+                                smax: sclden(state.model.system_controls, element.value, evaluateConstraintValue(state.model.symbol_table,lmax,cmax), element.sdlim, lmax)
+                            });
+                        } else {
+                            return element;
+                        }
                     }
                     return element;
                 })
@@ -216,6 +240,7 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
+//                        console.log('In reducers.SET_SYMBOL_FLAG state=',state,'action=', action);
                         if (action.payload.minmax === MIN) {
                             return Object.assign({}, element, {
                                 lmin: element.lmin | action.payload.mask
@@ -236,6 +261,7 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
+//                        console.log('In reducers.RESET_SYMBOL_FLAG state=',state,'action=', action);
                         if (action.payload.minmax === MIN) {
                             return Object.assign({}, element, {
                                 lmin: element.lmin & ~action.payload.mask
@@ -328,9 +354,15 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.type === "equationset" && element.input) {
-                        return Object.assign({}, element, {
-                            value: element.oldvalue
-                        });
+                        if (element.oldvalue !== undefined) {
+                            var oldvalue = element.oldvalue; // Get the value as local
+                            delete element.oldvalue; // Delete the value
+                            return Object.assign({}, element, { // Assign the local
+                                value: value
+                            });
+                        } else {
+                            return element;
+                        }
                     } else {
                         return element;
                     }

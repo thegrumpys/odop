@@ -137,7 +137,7 @@ class ActionSelectCatalog extends Component {
     }
 
     render() {
-//        console.log('In ActionSelectCatalog.render this.props=', this.props);
+//        console.log('In ActionSelectCatalog.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.names.length === 0}>
