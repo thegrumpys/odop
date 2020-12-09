@@ -22,7 +22,7 @@ export class Calculator extends ReportBase {
         return (
             <Container>
                 <Row>
-                    <h4>ODOP:Spring &nbsp; Extension Spring Claculator</h4><br />
+                    <h4>ODOP:Spring &nbsp; Extension Spring Calculator</h4><br />
                     <b>
                     {this.hits > 0 && this.errmsg}{this.hits > 0 && <br />}
                     {this.hits > 0 && this.startpntmsg}{this.hits > 0 && <br />}
@@ -130,7 +130,7 @@ export class Calculator extends ReportBase {
                                 <SymbolValue element={this.props.symbol_table[o.FS_2]} index={o.FS_2} />
                             </tr>
                             <tr>
-                                <td><b>MaxSafe</b></td>
+                                <td><b>Max Safe</b></td>
                                 <Value value={(this.props.symbol_table[o.L_Free].value + this.safe_travel)} />
                                 <Value value={this.safe_travel} />
                                 <Value value={this.safe_load} />

@@ -153,7 +153,7 @@ class Report1 extends ReportBase {
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.od_max.toFixed(4)}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td>{(this.od_max - 2.0 * this.props.symbol_table[o.Wire_Dia].value).toFixed(4)}</td>
+                            <td>{(this.od_max - (2.0 * this.props.symbol_table[o.Wire_Dia].value)).toFixed(4)}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.props.symbol_table[o.Stress_Lim_Bnd_Stat].value.toFixed(0)}</td>
                             <td> &nbsp; &nbsp; </td>
@@ -200,8 +200,8 @@ class Report1 extends ReportBase {
                             <td>=</td>
                             <td>{this.props.symbol_table[o.End_Angle_Free].value.toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.End_Angle_Free].units}</td>
-                            </tr>
-                            <tr>
+                        </tr>
+                        <tr>
                             <td>{this.props.symbol_table[o.Arm_2].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Arm_2].value.toFixed(3)}</td>
