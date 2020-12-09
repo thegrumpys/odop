@@ -11,7 +11,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
         super(props);
         this.onChangeDependentVariableConstraint = this.onChangeDependentVariableConstraint.bind(this);
         this.onSetDependentVariableFlagConstrained = this.onSetDependentVariableFlagConstrained.bind(this)
-        this.onResetSymbolFlagConstrained = this.onResetSymbolFlagConstrained.bind(this)
+        this.onResetDependentVariableFlagConstrained = this.onResetDependentVariableFlagConstrained.bind(this)
         this.onClick = this.onClick.bind(this);
         this.onChangeValue = this.onChangeValue.bind(this);
         this.onEnterValue = this.onEnterValue.bind(this);
@@ -26,7 +26,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
         this.props.setSymbolFlag(this.props.element.name, MAX, CONSTRAINED);
     }
     
-    onResetSymbolFlagConstrained(event) {
+    onResetDependentVariableFlagConstrained(event) {
         this.props.resetSymbolFlag(this.props.element.name, MAX, CONSTRAINED);
     }
     
@@ -77,7 +77,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
             this.props.setSymbolFlag(this.props.element.name, MIN, FDCL);
             this.props.symbol_table.forEach((element, i) => {
                 if (element.name === name) {
-//                    console.log('@In onSelectVariable element=',element,' i=',i);
+//                    console.log('In onSelectVariable element=',element,' i=',i);
                     this.props.changeSymbolConstraint(this.props.element.name, MIN, i);
                 }
             })
@@ -128,11 +128,11 @@ class ConstraintsMaxRowDependentVariable extends Component {
                         <InputGroup>
                             <InputGroup.Prepend>
                                 <InputGroup.Text>
-                                    <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
+                                    <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetDependentVariableFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            { this.props.element.lmax & FDCL ?
-                                <OverlayTrigger placement="top" overlay={<Tooltip>={evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</Tooltip>}>
+                            {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
+                                <OverlayTrigger placement="top" overlay={<Tooltip>FDCL ={evaluateConstraintName(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax)}</Tooltip>}>
                                     <Form.Control type="number" id={this.props.element.name + "_cmax"} className={cmax_class} value={this.props.element.lmax & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax) : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} onClick={this.onClick} />
                                 </OverlayTrigger>
                             :

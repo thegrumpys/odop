@@ -1,6 +1,7 @@
 import { displayError } from '../../../components/ErrorModal';
 import { initialState } from './initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
+import { FIXED } from '../../../store/actionTypes';
 
 export function migrate(design) {
     /*
@@ -174,6 +175,49 @@ export function migrate(design) {
         } else {
             design['units'] = "Metric";
         }
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.lmin & FIXED || element.lmax & FIXED) { // If one is FIXED
+                element.lmin |= FIXED; // Set them both fixed because they are paired
+                element.lmax |= FIXED;
+                if (element.oldlmin === undefined) {
+//                    console.log('In migrate create oldlmin element=',element);
+                    element.oldlmin = element.lmin & ~FIXED; // with FIXED turned off
+                }
+                if (element.oldcmin === undefined) {
+//                    console.log('In migrate create oldcmin element=',element);
+                    element.oldcmin = element.cmin;
+                }
+                if (element.oldlmax === undefined) {
+//                    console.log('In migrate create oldlmax element=',element);
+                    element.oldlmax = element.lmax & ~FIXED; // with FIXED turned off
+                }
+                if (element.oldcmax === undefined) {
+//                    console.log('In migrate create oldcmax element=',element);
+                    element.oldcmax = element.cmax;
+                }
+            } else { // Get rid of remnants of non-FIXED elements
+                if (element.oldlmin !== undefined) {
+//                    console.log('In migrate delete oldlmin element=',element);
+                    delete element.oldlmin;
+                }
+                if (element.oldcmin !== undefined) {
+//                    console.log('In migrate delete oldcmin element=',element);
+                    delete element.oldcmin;
+                }
+                if (element.oldlmax !== undefined) {
+//                    console.log('In migrate delete oldlmax element=',element);
+                    delete element.oldlmax;
+                }
+                if (element.oldcmax !== undefined) {
+//                    console.log('In migrate delete oldcmax element=',element);
+                    delete element.oldcmax;
+                }
+            }
+            if (element.oldvalue != undefined) {
+//                console.log('In migrate delete oldvalue element=',element);
+                delete element.oldvalue
+            }
+        });
         migrated_design.version = '9'; // last thing... set the migrated model version
     case '9':
         // Current model version
