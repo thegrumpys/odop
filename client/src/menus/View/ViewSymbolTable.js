@@ -41,7 +41,7 @@ class ViewSymbolTable extends Component {
                         <pre className="view-table-fixed-2-columns">
                             <table className="report-table-borders">
                                 <thead>
-                                    <tr>
+                                    <tr key="table-head-row">
                                         <th>#</th>
                                         <th>name</th>
                                         <th>value</th>
@@ -75,7 +75,7 @@ class ViewSymbolTable extends Component {
                                 <tbody>
                                     {this.props.symbol_table.map((element,i) => {
                                         return (
-                                            <tr>
+                                            <tr key={element.name}>
                                                 <td>{i}</td>
                                                 <td>{element.name}</td>
                                                 <td>{element.value}</td>
