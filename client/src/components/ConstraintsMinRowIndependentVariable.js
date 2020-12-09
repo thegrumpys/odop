@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { MIN, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
+import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
 
 class ConstraintMinRowIndependentVariable extends Component {
@@ -31,6 +31,9 @@ class ConstraintMinRowIndependentVariable extends Component {
     
     onChangeIndependentVariableConstraint(event) {
         this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(event.target.value));
+        if (this.props.element.lmin & FIXED) {
+            this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(event.target.value));
+        }
     }
     
     onClick(event) {
@@ -58,6 +61,10 @@ class ConstraintMinRowIndependentVariable extends Component {
         });
         this.props.resetSymbolFlag(this.props.element.name, MIN, FDCL);
         this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(this.state.value));
+        if (this.props.element.lmin & FIXED) {
+            this.props.resetSymbolFlag(this.props.element.name, MAX, FDCL);
+            this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(this.state.value));
+        }
     }
       
     onSelectVariable(event, name) {
@@ -76,15 +83,19 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
 
     render() {
-//        console.log('In ConstraintMinRowIndependentVariable.render this.props=', this.props);
+//        console.log('In ConstraintMinRowIndependentVariable.render this=', this);
         // =======================================
         // Constraint Minimum Column
         // =======================================
         var cmin_class;
-        if (this.props.objective_value < this.props.system_controls.objmin) {
-            cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-right text-low-danger border-low-danger' : 'text-right';
+        if (this.props.element.lmin & FIXED) {
+            cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-right text-info border-info font-weight-bold' : 'text-right';
         } else {
-            cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-right text-danger border-danger font-weight-bold' : 'text-right';
+            if (this.props.objective_value < this.props.system_controls.objmin) {
+                cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-right text-low-danger border-low-danger' : 'text-right';
+            } else {
+                cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-right text-danger border-danger font-weight-bold' : 'text-right';
+            }
         }
         // =======================================
         // Table Row
@@ -97,7 +108,6 @@ class ConstraintMinRowIndependentVariable extends Component {
                             <span>{this.props.element.name}</span>
                         </OverlayTrigger>
                     </td>
-                    {/*                    { }*/}
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             <InputGroup.Prepend>

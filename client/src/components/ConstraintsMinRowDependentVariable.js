@@ -10,7 +10,7 @@ class ConstraintsMinRowDependentVariable extends Component {
         super(props);
         this.onChangeDependentVariableConstraint = this.onChangeDependentVariableConstraint.bind(this);
         this.onSetDependentVariableFlagConstrained = this.onSetDependentVariableFlagConstrained.bind(this)
-        this.onResetSymbolFlagConstrained = this.onResetSymbolFlagConstrained.bind(this)
+        this.onResetDependentVariableFlagConstrained = this.onResetDependentVariableFlagConstrained.bind(this)
         this.onClick = this.onClick.bind(this);
         this.onChangeValue = this.onChangeValue.bind(this);
         this.onEnterValue = this.onEnterValue.bind(this);
@@ -25,7 +25,7 @@ class ConstraintsMinRowDependentVariable extends Component {
         this.props.setSymbolFlag(this.props.element.name, MIN, CONSTRAINED);
     }
     
-    onResetSymbolFlagConstrained(event) {
+    onResetDependentVariableFlagConstrained(event) {
         this.props.resetSymbolFlag(this.props.element.name, MIN, CONSTRAINED);
     }
     
@@ -86,7 +86,7 @@ class ConstraintsMinRowDependentVariable extends Component {
     }
 
     render() {
-//        console.log('In ConstraintsMinRowDependentVariable.render this.props=', this.props);
+//        console.log('In ConstraintsMinRowDependentVariable.render this=', this);
         // =======================================
         // Constraint Minimum Column
         // =======================================
@@ -115,7 +115,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                         <InputGroup>
                             <InputGroup.Prepend>
                                 <InputGroup.Text>
-                                    <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetSymbolFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
+                                    <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetDependentVariableFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
                             {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ?

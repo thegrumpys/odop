@@ -108,7 +108,7 @@ export default class FELogin extends Component {
   }
 
   render() {
-//    console.log('In FELogin.render this.props=', this.props);
+//    console.log('In FELogin.render this=', this);
     return (
       <div>
         <div id="sign-in-widget" />

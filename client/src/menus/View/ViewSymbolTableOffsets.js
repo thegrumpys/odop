@@ -23,7 +23,7 @@ class ViewSymbolTableOffsets extends Component {
     }
 
     render() {
-//        console.log('In ViewSymbolTableOffsets.render this.props=', this.props);
+//        console.log('In ViewSymbolTableOffsets.render this=', this);
         var ip = 0;
         var isc = 0;
         var il = 0;
@@ -42,8 +42,6 @@ class ViewSymbolTableOffsets extends Component {
                         <pre>
                         {'// Variables\n'}
                         {this.props.symbol_table.map((element) => {return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n'})}
-                        {'\n// System Controls (Preferences)\n'}
-                        {Object.keys(this.props.system_controls).map((element) => { return 'export const ' + element.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (isc++) + ';\n'})}
                         {'\n// Labels (Properties)\n'}
                         {this.props.labels.map((element) => {return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (il++) + ';\n'})}
                         </pre>

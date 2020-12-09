@@ -28,7 +28,7 @@ class NameValueUnitsRowCalcInput extends Component {
                 focused: false
             };
         } else if (this.props.element.format === 'table') {
-//            console.log('In NameValueUnitsRowCalcInput.constructor file = ../designtypes/'+this.props.element.table+'.json');
+//            console.log('In NameValueUnitsRowCalcInput.constructor file= ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
             this.state = {
@@ -45,7 +45,7 @@ class NameValueUnitsRowCalcInput extends Component {
                     focused: false,
                 });
             } else if (this.props.element.format === 'table') {
-//                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate file = ../designtypes/'+this.props.element.table+'.json');
+//                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate file= ../designtypes/'+this.props.element.table+'.json');
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate table=',table);
                 this.setState({
@@ -81,7 +81,7 @@ class NameValueUnitsRowCalcInput extends Component {
     }
     
     render() {
-//        console.log('In NameValueUnitsRowCalcInput.render this.props=', this.props);
+//        console.log('In NameValueUnitsRowCalcInput.render this=', this);
         // =======================================
         // Table Row
         // =======================================

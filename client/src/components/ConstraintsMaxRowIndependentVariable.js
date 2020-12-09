@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
+import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
 
 class ConstraintMaxRowIndependentVariable extends Component {
@@ -30,6 +30,9 @@ class ConstraintMaxRowIndependentVariable extends Component {
     }
     
     onChangeIndependentVariableConstraint(event) {
+        if (this.props.element.lmax & FIXED) {
+            this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(event.target.value));
+        }
         this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(event.target.value));
     }
     
@@ -56,6 +59,10 @@ class ConstraintMaxRowIndependentVariable extends Component {
         this.setState({
             modal: !this.state.modal
         });
+        if (this.props.element.lmax & FIXED) {
+            this.props.resetSymbolFlag(this.props.element.name, MIN, FDCL);
+            this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(this.state.value));            
+        }
         this.props.resetSymbolFlag(this.props.element.name, MAX, FDCL);
         this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(this.state.value));
     }
@@ -76,15 +83,19 @@ class ConstraintMaxRowIndependentVariable extends Component {
     }
 
     render() {
-//        console.log('In ConstraintMaxRowIndependentVariable.render this.props=', this.props);
+//        console.log('In ConstraintMaxRowIndependentVariable.render this=', this);
         // =======================================
         // Constraint Maximum Column
         // =======================================
         var cmax_class;
-        if (this.props.objective_value < this.props.system_controls.objmin) {
-            cmax_class = (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) ? 'text-right text-low-danger border-low-danger' : 'text-right';
+        if (this.props.element.lmax & FIXED) {
+            cmax_class = (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) ? 'text-right text-info border-info font-weight-bold' : 'text-right';
         } else {
-            cmax_class = (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) ? 'text-right text-danger border-danger font-weight-bold' : 'text-right';
+            if (this.props.objective_value < this.props.system_controls.objmin) {
+                cmax_class = (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) ? 'text-right text-low-danger border-low-danger' : 'text-right';
+            } else {
+                cmax_class = (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) ? 'text-right text-danger border-danger font-weight-bold' : 'text-right';
+            }
         }
         // =======================================
         // Table Row

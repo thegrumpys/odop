@@ -52,7 +52,7 @@ export default withAuth(class FEHome extends Component {
   }
 
   render() {
-//    console.log('In FEHome.render this.props=', this.props);
+//    console.log('In FEHome.render this=', this);
     if (this.state.authenticated === null) {
 //        console.log("In FEHome.render this.state.authenticated=",this.state.authenticated);
         return null;
