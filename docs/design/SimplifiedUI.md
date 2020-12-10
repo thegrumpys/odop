@@ -75,14 +75,23 @@ including its own heading and associated tooltip.
 
 Provide a button labeled "ReCalc" or "Solve" or "Search". 
 This button invokes Search.
+Search, Seek and Trade remain enabled on the Action menu.
 
 Provide alerts for violated constraints. 
  - Highlight the variable value associated with the violated constraint plus change the tooltip ?
  - Provide an "Info" column with tooltip giving constraint violation details ?
 
-The extension spring "Basic" View.
-Compare with the "Advanced" view below.
-![Extension Spring - Basic](./png/Basic3.png "Extension Spring - Basic")   
+The graphic below shows the extension spring "Basic" View with Objective Value = 0.
+Compare with the equivalent view provided in the "Advanced" section below.  
+![Extension Spring - Basic, FEASIBLE](./png/Basic4.png "Extension Spring - Basic, FEASIBLE")   
+
+The graphic below shows the extension spring "Basic" View with Objective Value > OBJMIN and < 4*OBJMIN. 
+Note how violated constraints get an appropriately colored "Info" indicator in the Info column. 
+This text can carry a tooltip that provides the "outside the range" details 
+similar to how it is handled in the Calculator view.
+The Stress_Initial row is normally suppressed in the Basic view, 
+but because it is violated, it appears in this case.
+![Extension Spring - Basic, VIOLATIONS](./png/Basic5.png "Extension Spring - Basic, VIOLATIONS")   
 
 
 <a id="advancedUI"></a>
