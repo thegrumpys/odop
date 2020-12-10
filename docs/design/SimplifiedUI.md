@@ -32,7 +32,7 @@ Issue 365 - Change labels: Termination Message, OBJ, OBJMIN
 Ability to use the Exec / Tutor / Demo feature to optionally put text-based "guidance" above each alternative.
 
 There is an idea for a future version of the Exec / Tutor / Demo feature to accept input (yes, no) and 
-support conditional logic or branch based on that input.  
+support conditional logic or branch based on that input. 
 Perhaps this can be the foundation for a conversational or "Wizard-like" approach ?  
 
 
@@ -46,7 +46,8 @@ Those features should be inaccessible or disabled.
 A user that wants these features should use one of the other views. 
 
 See [Issue #432: Allow value inputs within Reports](https://github.com/thegrumpys/odop/issues/432)  
-(screen shots are included)  
+(screen shots are included in the issue)  
+
 This is a spring design specific view derived from Report1.
 
 It is desirable to limit wire size inputs to the values in the material-appropriate standard size tables.  
@@ -65,7 +66,7 @@ Start by implementing some aspect of "sub-problems" as described in:
 
 Note that FIXed Dependent Variables or variables associated with violated constraints must be displayed.
 
-Use this feature to suppress display of all non-critical aspect of the design.
+Use this feature to suppress display of all non-critical aspects of the design.
 Specifically, PropCalcMethod and Calculation Inputs and Dependent variables associated with stress from Initial_Tension.
 
 Supress display of all constraints and violations. 
@@ -77,17 +78,24 @@ This button invokes Search.
 
 Provide alerts for violated constraints. 
  - Highlight the variable value associated with the violated constraint plus change the tooltip ?
- - Provide an "Info Column" with tooltip giving constraint violation details ?
+ - Provide an "Info" column with tooltip giving constraint violation details ?
 
-Put graphic illustration here !
+The extension spring "Basic" View.
+Compare with the "Advanced" view below.
+![Extension Spring - Basic](./png/Basic3.png "Extension Spring - Basic")   
+
 
 <a id="advancedUI"></a>
 &nbsp;  
 **View : Advanced**
 
-This alternbative is the original full-featured "main page" or "Design tab" as enhanced by 
+This alternative is the original full-featured "main page" or "Design tab" as enhanced by 
 the ResultTable improvements of Issue 365 and
 other incremental improvements (for example, milestone 3.10)
+
+The extension spring "Advanced" view:  
+![Extension Spring - Advanced](./png/Exten1234.png "Extension Spring - Advanced")  
+Contrast this with the "Basic" view above.
 
 <a id="originalArticle"></a>
 &nbsp;  
@@ -105,7 +113,7 @@ As first opened...
 *  assuming the Startup entry has no FIXed variables, initially, all of the input fields are blank
 *  initially (before Check Design button is pressed), the Value fields are blank   
 
-![Simplified Variable and Empty Values Section](./png/Variable_ValuesSection.png "[Simplified Variable and Empty Values Section")   
+![Simplified Variable and Empty Values Section](./png/Variable_ValuesSection.png "Simplified Variable and Empty Values Section")   
 
 As the user enters values in the Input fields, nothing happens.
 Any Independent or Dependent Variables that the user enters are put into FIXed status with the user specified value.
