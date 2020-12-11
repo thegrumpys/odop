@@ -32,7 +32,7 @@ Issue 365 - Change labels: Termination Message, OBJ, OBJMIN
 Ability to use the Exec / Tutor / Demo feature to optionally put text-based "guidance" above each alternative.
 
 There is an idea for a future version of the Exec / Tutor / Demo feature to accept input (yes, no) and 
-support conditional logic or branch based on that input. 
+support conditional logic or branching based on that input. 
 Perhaps this can be the foundation for a conversational or "Wizard-like" approach ?  
 
 
@@ -42,7 +42,7 @@ Perhaps this can be the foundation for a conversational or "Wizard-like" approac
 
 Simple Spring Calculator  
 This alternative provides no direct ability to Constrain, FIX, Search, Seek or Trade. 
-Those features should be inaccessible or disabled. 
+Those features should be inaccessible or disabled for this view. 
 A user that wants these features should use one of the other views. 
 
 See [Issue #432: Allow value inputs within Reports](https://github.com/thegrumpys/odop/issues/432)  
@@ -67,7 +67,8 @@ Start by implementing some aspect of "sub-problems" as described in:
 Note that FIXed Dependent Variables or variables associated with violated constraints must be displayed.
 
 Use this feature to suppress display of all non-critical aspects of the design.
-Specifically, PropCalcMethod and Calculation Inputs and Dependent variables associated with stress from Initial_Tension.
+Specifically, PropCalcMethod and 
+in extension springs, Calculation Inputs and Dependent variables associated with stress from Initial_Tension.
 
 Supress display of all constraints and violations. 
 Use the newly available screen width to give FIX checkboxes a dedicated column 
