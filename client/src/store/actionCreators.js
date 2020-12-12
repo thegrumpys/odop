@@ -52,7 +52,7 @@ export function load(design) {
     }
 }
 
-export function loadInitialState(type, units) {
+export function loadInitialState(type, units = 'US') {
     return {
         type: LOAD_INITIAL_STATE,
         payload: {

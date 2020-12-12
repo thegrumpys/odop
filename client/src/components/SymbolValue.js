@@ -96,11 +96,19 @@ class SymbolValue extends Component {
         var value_class;
         var value_tooltip;
         if (this.props.element.lmin & FIXED) {
-            value_class = ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) ? 'text-right text-info border-info font-weight-bold' : 'text-right';
-            value_tooltip = "FIX VIOLATION: Value not equal to "+this.props.element.cmin.toODOPPrecision();
+            if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
+                value_class = 'text-right text-info border-info font-weight-bold';
+                value_tooltip = "FIX VIOLATION: Value not equal to "+this.props.element.cmin.toODOPPrecision();
+            } else {
+                value_class = 'text-right';
+            }
         } else {
             if (this.props.objective_value < this.props.system_controls.objmin) {
-                value_class = ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) ? 'text-right text-low-danger border-low-danger' : 'text-right';
+                if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
+                    value_class = 'text-right text-low-danger border-low-danger';
+                } else {
+                    value_class = 'text-right';
+                }
             } else {
                 if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
                    value_class = 'text-right text-danger border-danger font-weight-bold'

@@ -80,6 +80,17 @@ export class Calculator extends ReportBase {
                                 <SymbolValue element={this.props.symbol_table[o.Coils_A]} index={o.Coils_A} />
                                 <SymbolUnits element={this.props.symbol_table[o.Coils_A]} index={o.Coils_A} className="text-left" />
                             </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td> &nbsp; &nbsp; </td>
+                                <SymbolName element={this.props.symbol_table[o.Coil_Spacing]} index={o.Coil_Spacing} />
+                                <td>=</td>
+                                <SymbolValue element={this.props.symbol_table[o.Coil_Spacing]} index={o.Coil_Spacing} />
+                                <SymbolUnits element={this.props.symbol_table[o.Coil_Spacing]} index={o.Coil_Spacing} className="text-left" />
+                            </tr>
                         </tbody>
                     </table>
                 </Row>
