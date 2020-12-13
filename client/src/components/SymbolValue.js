@@ -3,6 +3,7 @@ import { InputGroup, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolValue } from '../store/actionCreators';
+import { evaluateConstraintValue } from '../store/middleware/evaluateConstraint';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -98,7 +99,7 @@ class SymbolValue extends Component {
         if (this.props.element.lmin & FIXED) {
             if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
                 value_class = 'text-right text-info border-info font-weight-bold';
-                value_tooltip = "FIX VIOLATION: Value not equal to "+this.props.element.cmin.toODOPPrecision();
+                value_tooltip = "FIX VIOLATION: Value not equal to "+this.evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin).toODOPPrecision();
             } else {
                 value_class = 'text-right';
             }
@@ -112,7 +113,7 @@ class SymbolValue extends Component {
             } else {
                 if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
                    value_class = 'text-right text-danger border-danger font-weight-bold'
-                   value_tooltip = "CONSTRAINT VIOLATION: Value outside the constraint range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
+                   value_tooltip = "CONSTRAINT VIOLATION: Value outside the constraint range from "+evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin).toODOPPrecision()+" to "+evaluateConstraintValue(this.props.symbol_table,this.props.element.lmax,this.props.element.cmax).toODOPPrecision();
                 } else {
                    value_class = 'text-right';
                 }

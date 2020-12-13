@@ -71,9 +71,37 @@ input::-webkit-inner-spin-button {
 .border-low-danger {
   border-color: #fd7e14 !important;
 }
-[id^=view] table td {
-  text-align: right;
+/**************************************************/
+.text-strictly-feasible {
+  color: #343a40 !important;
 }
+.border-strictly-feasible {
+  border-color: #343a40 !important;
+}
+.text-feasible {
+  color: #28a745 !important;
+}
+.border-feasible {
+  border-color: #28a745 !important;
+}
+.text-approaching-feasible {
+  color: #fd7e14 !important;
+  font-weight: bold !important;
+}
+.border-approaching-feasible {
+  border-color: #fd7e14 !important;
+}
+.text-not-feasible {
+  color: #dc3545 !important;
+  font-weight: bold !important;
+}
+.border-not-feasible {
+  border-color: #dc3545 !important;
+}
+/**************************************************/
+[id^=view] table td {
+ text-align: right;
+}    
 /**************************************************/
 .report-table-borders, .report-table-borders th, .report-table-borders td {
   border: 1px solid black;
@@ -98,7 +126,7 @@ input::-webkit-inner-spin-button {
   z-index:1;
 }
 .view-table-fixed-2-columns td:nth-child(2), .view-table-fixed-2-columns th:nth-child(2)  { 
-position:sticky;
+  position:sticky;
   left:30px;
   background: #eee;
   z-index:1;
@@ -112,6 +140,7 @@ position:sticky;
 .view-table-fixed-2-columns th:first-child, .view-table-fixed-2-columns th:nth-child(2) {
   z-index:3
 }
+/**************************************************/
     </style>
   </head>
   <body>

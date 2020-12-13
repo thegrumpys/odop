@@ -6,19 +6,27 @@ class ResultTable extends Component {
     
     render() {
 //        console.log('In ResultTable.render this=', this);
+//        From Issue #365:
+//        The proposed terminology and color scheme:
+//            OBJ value       Category Term           Color            RGB
+//            zero            STRICTLY FEASIBLE       Black            #343a40
+//            < OBJMIN        FEASIBLE                Green (or cyan)  #28a745
+//            < 4x OBJMIN     APPROACHING FEASIBLE    Orange           #fd7e14
+//            > 4x OBJMIN     NOT FEASIBLE            Red              #dc3545
         var feasibility_string;
         var feasibility_class;
-        if (this.props.objective_value > this.props.system_controls.objmin) {
+        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
             feasibility_string = "NOT FEASIBLE";
-            feasibility_class = "text-danger font-weight-bold";
+            feasibility_class = "text-not-feasible";
+        } else if (this.props.objective_value > this.props.system_controls.objmin) {
+            feasibility_string = "APPROACHING FEASIBLE";
+            feasibility_class = "text-approaching-feasible";
+        } else if (this.props.objective_value > 0.0) {
+            feasibility_string = "FEASIBLE";
+            feasibility_class = "text-feasible";
         } else {
-            if (this.props.violated_constraint_count > 0) {
-                feasibility_string = "MARGINALLY FEASIBLE";
-                feasibility_class = "text-low-danger";
-            } else {
-                feasibility_string = "FEASIBLE";
-                feasibility_class = "";
-            }
+            feasibility_string = "STRICTLY FEASIBLE";
+            feasibility_class = "text-strictly-feasible";
         }
         return (
             <React.Fragment>

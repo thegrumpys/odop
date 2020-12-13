@@ -5,6 +5,7 @@ import { patsh } from './patsh';
 // Search
 export function search(store, objmin, merit) {
 //    console.log('Entering search store=',store,'objmin=',objmin,'merit=',merit);
+//    console.trace();
     
     var design = store.getState();
     
@@ -15,6 +16,7 @@ export function search(store, objmin, merit) {
         element = design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
+//                console.log('In search i=',i,'element=',element);
                 pc.push(element.value);
             }
         }
