@@ -4,7 +4,10 @@ import { changeSymbolConstraints } from '../actionCreators';
 // Startup
 export function setSclDen(store) {
 
+//    console.log('Entering setSclDen');
+
     var design = store.getState();
+//    console.log('In setSclDen design=',design);
 
     // Loop to create cmin and cmax arrays from symbol_table
     var cmin = [];
@@ -21,5 +24,7 @@ export function setSclDen(store) {
     // And update violations and objective value
     store.dispatch(changeSymbolConstraints(cmin, MIN));
     store.dispatch(changeSymbolConstraints(cmax, MAX));
+
+//    console.log('Exiting setSclDen');
 
 }
