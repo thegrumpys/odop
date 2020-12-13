@@ -220,10 +220,10 @@ export function reducers(state, action) {
                             return Object.assign({}, element, { // Assign the locals
                                 lmin: lmin,
                                 cmin: cmin,
-                                smin: sclden(state.model.system_controls, element.value, evaluateConstraintValue(state.model.symbol_table,lmin,cmin), element.sdlim, lmin),
+                                smin: sclden(state.model.system_controls, element.value, cmin, element.sdlim, lmin),
                                 lmax: lmax,
                                 cmax: cmax,
-                                smax: sclden(state.model.system_controls, element.value, evaluateConstraintValue(state.model.symbol_table,lmax,cmax), element.sdlim, lmax)
+                                smax: sclden(state.model.system_controls, element.value, cmax, element.sdlim, lmax)
                             });
                         } else {
                             return element;
