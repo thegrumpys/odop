@@ -7,6 +7,9 @@ import { evaluateConstraintValue } from './evaluateConstraint';
 export function updateViolationsAndObjectiveValue(store, merit) {
     
     // Update Constraint Violations
+
+//    console.log('Entering updateViolationsAndObjectiveValue');
+
     /*
      * The following section of code constructs the objective function from the
      * constraint violations, merit function, and state variable fix violations.
@@ -20,6 +23,7 @@ export function updateViolationsAndObjectiveValue(store, merit) {
     var viol_sum = 0.0;
 
     var design = store.getState(); // Re-access store to get latest element values
+//    console.log('In updateViolationsAndObjectiveValue design=',design);
 
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
@@ -112,4 +116,5 @@ export function updateViolationsAndObjectiveValue(store, merit) {
     }
     store.dispatch(changeResultViolatedConstraintCount(violated_constraint_count));
     
+//    console.log('Exiting updateViolationsAndObjectiveValue');
 }
