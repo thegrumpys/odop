@@ -130,9 +130,9 @@ export function seek(store, action) {
         store.dispatch(changeResultTerminationCondition(ncode));
     }
 
-        if (design.model.system_controls.ioopt > 5) {
-            console.log('14 Merit Function = ', merit(design));  // Merit Function contribution to OBJ may be negative
-        }
+    if (design.model.system_controls.ioopt > 5) {
+        console.log('14 Merit Function = ', merit(design));  // Merit Function contribution to OBJ may be negative
+    }
     
     function merit(design) {
         var m_funct;
