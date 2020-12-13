@@ -359,7 +359,7 @@ export function reducers(state, action) {
                         if (element.oldvalue !== undefined) {
 //                            if (element.name === "Wire_Dia")
 //                                console.log('In reducers.RESTORE_INPUT_SYMBOL_VALUES oldvalue==defined element=',element);
-                            var oldvalue = element.oldvalue; // Get the value as local
+                            var value = element.oldvalue; // Get the value as local
                             delete element.oldvalue; // Delete the value
                             return Object.assign({}, element, { // Assign the local
                                 value: value
