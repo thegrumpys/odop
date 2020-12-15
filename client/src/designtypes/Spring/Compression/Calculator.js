@@ -5,6 +5,7 @@ import ResultTable from '../../../components/ResultTable';
 import SymbolName from '../../../components/SymbolName';
 import SymbolValue from '../../../components/SymbolValue';
 import SymbolUnits from '../../../components/SymbolUnits';
+import SymbolValueWireDia from '../SymbolValueWireDia';
 import Value from '../../../components/Value';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
@@ -50,7 +51,7 @@ export class Calculator extends ReportBase {
                             <tr>
                                 <SymbolName element={this.props.symbol_table[o.Wire_Dia]} index={o.Wire_Dia} />
                                 <td>=</td>
-                                <SymbolValue element={this.props.symbol_table[o.Wire_Dia]} index={o.Wire_Dia} />
+                                <SymbolValueWireDia element={this.props.symbol_table[o.Wire_Dia]} index={o.Wire_Dia} />
                                 <SymbolUnits element={this.props.symbol_table[o.Wire_Dia]} index={o.Wire_Dia} className="text-left" />
                                 <td> &nbsp; &nbsp; </td>
                                 <SymbolName element={this.props.symbol_table[o.End_Type]} index={o.End_Type} />
