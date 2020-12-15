@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import FeasibilityIndicator from './FeasibilityIndicator';
 
 class ResultTable extends Component {
     
@@ -53,20 +54,11 @@ class ResultTable extends Component {
                 <Table className="col-md-4" size="sm">
                     <tbody>
                         <tr>
-                            <th width="50%" id="ObjectiveValue">
-                                <OverlayTrigger placement="bottom" overlay={<Tooltip>Search works to minimize this value. See Help for details</Tooltip>}>
-                                    <span>Objective&nbsp;Value:</span>
+                            <td className="text-center" id="ObjectiveValue">
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>Objective Value = {this.props.objective_value.toFixed(6)}<br />OBJMIN = {this.props.system_controls.objmin.toFixed(6)}</Tooltip>}>
+                                    <FeasibilityIndicator />
                                 </OverlayTrigger>
-                            </th>
-                            <td width="50%" className={feasibility_class + " text-right"}>{this.props.objective_value.toFixed(6)}</td>
-                        </tr>
-                        <tr>
-                            <th width="50%" id="OBJMIN">
-                                <OverlayTrigger placement="top" overlay={<Tooltip>Stop Search if Objective&nbsp;Value gets lower than this value = {this.props.system_controls.objmin.toFixed(6)}</Tooltip>}>
-                                    <span>OBJMIN:</span>
-                                </OverlayTrigger>
-                            </th>
-                            <td width="50%" className="text-right">{this.props.system_controls.objmin.toFixed(6)}</td>
+                            </td>
                         </tr>
                     </tbody>
                 </Table>
