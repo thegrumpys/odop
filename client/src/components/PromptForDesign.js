@@ -45,11 +45,17 @@ class PromptForDesign extends Component {
             this.setState({ authenticated }); // Remember our current authentication state
             if (authenticated) { // We have become authenticated
                 var user = await this.props.auth.getUser();
-//                console.log('In PromptForDesign.componentDidMount user=',user);
-                this.setState({
-                    user: user.sub,
-                });
-                this.props.changeUser(user.sub);
+                if (user != undefined) {
+//                    console.log('In PromptForDesign.componentDidMount user=',user);
+                    this.setState({
+                        user: user.sub,
+                    });
+                    this.props.changeUser(user.sub);
+                } else {
+                    this.setState({
+                        user: null,
+                    });
+                }
             } else { // We have become unauthenticated
                 this.setState({
                     user: null,

@@ -93,29 +93,20 @@ class SymbolValue extends Component {
   
     render() {
 //        console.log('In SymbolValue.render this=', this);
-        var value_class;
+        var value_class = 'text-right ';
         var value_tooltip;
-        if (this.props.element.lmin & FIXED) {
-            if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
-                value_class = 'text-right text-info border-info font-weight-bold';
-                value_tooltip = "FIX VIOLATION: Value not equal to "+this.props.element.cmin.toODOPPrecision();
+        if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
+            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+                value_tooltip = "CONSTRAINT VIOLATION: Value outside the constraint range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
+                value_class += "text-not-feasible";
+            } else if (this.props.objective_value > this.props.system_controls.objmin) {
+                value_tooltip = "CONSTRAINT VIOLATION: Value outside the constraint range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
+                value_class += "text-approaching-feasible";
+            } else if (this.props.objective_value > 0.0) {
+                value_tooltip = "CONSTRAINT VIOLATION: Value outside the constraint range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
+                value_class += "text-feasible";
             } else {
-                value_class = 'text-right';
-            }
-        } else {
-            if (this.props.objective_value < this.props.system_controls.objmin) {
-                if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
-                    value_class = 'text-right text-low-danger border-low-danger';
-                } else {
-                    value_class = 'text-right';
-                }
-            } else {
-                if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
-                   value_class = 'text-right text-danger border-danger font-weight-bold'
-                   value_tooltip = "CONSTRAINT VIOLATION: Value outside the constraint range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
-                } else {
-                   value_class = 'text-right';
-                }
+                value_class += "text-strictly-feasible";
             }
         }
         return (

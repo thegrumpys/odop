@@ -385,7 +385,7 @@ it('reducers save input symbol values', () => {
     expect(design.model.symbol_table[sto.RADIUS].oldvalue).toEqual(0.4);
 });
 
-it('reducers restore input symbol values', () => {
+it('reducers restore input symbol values without previous save', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -399,7 +399,26 @@ it('reducers restore input symbol values', () => {
     store.dispatch(restoreInputSymbolValues());
 
     design = store.getState(); // after
-    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(undefined);
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4); // If there is no oldvalue then restore doesn't do anything
+    expect(design.model.symbol_table[sto.RADIUS].oldvalue).toEqual(undefined);
+});
+
+it('reducers restore input symbol values with previous save', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        {name: "initialState", model: state});
+
+    var design = store.getState(); // before
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
+    expect(design.model.symbol_table[sto.RADIUS].oldvalue).toEqual(undefined);
+
+    store.dispatch(saveInputSymbolValues());
+    store.dispatch(restoreInputSymbolValues());
+
+    design = store.getState(); // after
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
     expect(design.model.symbol_table[sto.RADIUS].oldvalue).toEqual(undefined);
 });
 
@@ -475,7 +494,7 @@ it('reducers save output symbol constraints', () => {
     expect(design.model.symbol_table[sto.FORCE].oldcmax).toEqual(0);
 });
 
-it('reducers restore output symbol constraints', () => {
+it('reducers restore output symbol constraints without previous save', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -495,10 +514,41 @@ it('reducers restore output symbol constraints', () => {
     store.dispatch(restoreOutputSymbolConstraints("FORCE"));
 
     design = store.getState(); // after
-    expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(undefined);
-    expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(undefined);
-    expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(undefined);
-    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1); // If there is no old lmin/cmin/lmax/cmax then restore doesn't do anything
+    expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
+    expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].oldlmin).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].oldcmin).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].oldcmax).toEqual(undefined);
+});
+
+it('reducers restore output symbol constraints with previous save', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        {name: "initialState", model: state});
+
+    var design = store.getState(); // before
+    expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE");
+    expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1); // CONSTRAINED flag
+    expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
+    expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0); // No flags
+    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].oldlmin).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].oldcmin).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].oldcmax).toEqual(undefined);
+
+    store.dispatch(saveOutputSymbolConstraints("FORCE"));
+    store.dispatch(restoreOutputSymbolConstraints("FORCE"));
+
+    design = store.getState(); // after
+    expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1);
+    expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
+    expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
     expect(design.model.symbol_table[sto.FORCE].oldlmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldcmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(undefined);

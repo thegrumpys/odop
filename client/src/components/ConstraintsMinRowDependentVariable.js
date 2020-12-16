@@ -31,14 +31,14 @@ class ConstraintsMinRowDependentVariable extends Component {
     
     onChangeDependentVariableConstraint(event) {
         this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(event.target.value));
-        if (this.props.element.lmin & FIXED) {
+        if (this.props.element.l & FIXED) {
             this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(event.target.value));
         }
     }
     
     onClick(event) {
 //        console.log("In onClick event=",event);
-        // Show modal only if there are cminchoices
+        // Show modal only if there are cchoices
         if (this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0) {
             this.setState({
                 modal: !this.state.modal,
@@ -90,14 +90,16 @@ class ConstraintsMinRowDependentVariable extends Component {
         // =======================================
         // Constraint Minimum Column
         // =======================================
-        var cmin_class;
-        if (this.props.element.lmin & FIXED) {
-            cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-right text-info border-info font-weight-bold' : 'text-right';
-        } else {
-            if (this.props.objective_value < this.props.system_controls.objmin) {
-                cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-right text-low-danger border-low-danger' : 'text-right';
+        var value_class = 'text-right ';
+        if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
+            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+                value_class += "text-not-feasible";
+            } else if (this.props.objective_value > this.props.system_controls.objmin) {
+                value_class += "text-approaching-feasible";
+            } else if (this.props.objective_value > 0.0) {
+                value_class += "text-feasible";
             } else {
-                cmin_class = (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) ? 'text-right text-danger border-danger font-weight-bold' : 'text-right';
+                value_class += "text-strictly-feasible";
             }
         }
         // =======================================
@@ -119,7 +121,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
                             {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ?
-                                <OverlayTrigger placement="top" overlay={<Tooltip>={this.props.element.lmin & FDCL ? this.props.element.cminchoices[this.props.element.cminchoice] : this.props.element.cmin}</Tooltip>}>
+                                <OverlayTrigger placement="top" overlay={<Tooltip>FDCL ={this.props.element.lmin & FDCL ? this.props.element.cminchoices[this.props.element.cminchoice] : this.props.element.cmin}</Tooltip>}>
                                     <Form.Control type="number" id={this.props.element.name + "_cmin"} className={cmin_class} value={this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick} />
                                 </OverlayTrigger>
                             :

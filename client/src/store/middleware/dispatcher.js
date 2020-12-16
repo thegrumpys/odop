@@ -105,7 +105,9 @@ export const dispatcher = store => next => action => {
         design = store.getState();
         design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
-                if (element.type === "equationset" && element.input) {
+                if (element.lmin & FIXED) { // Is it already FIXED?
+                    return true; // We're done
+                } else if (element.type === "equationset" && element.input) {
                     // Independent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
                     store.dispatch(resetSymbolFlag(element.name, MIN, CONSTRAINED | FDCL));
@@ -149,7 +151,9 @@ export const dispatcher = store => next => action => {
         design = store.getState();
         design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
-                store.dispatch(restoreOutputSymbolConstraints(element.name));
+                if (element.lmin & FIXED) {
+                    store.dispatch(restoreOutputSymbolConstraints(element.name));
+                }
                 return true;
             } else {
                 return false;
