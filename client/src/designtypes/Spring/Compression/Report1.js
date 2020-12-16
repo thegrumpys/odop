@@ -8,7 +8,7 @@ class Report1 extends ReportBase {
 
     render() {
         super.render();
-//        console.log('In Report1.render this.props=',this.props);
+//        console.log('In Report1.render this=',this);
         return (
             <React.Fragment>
                 <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
@@ -167,7 +167,7 @@ class Report1 extends ReportBase {
                 {this.pcadmsg}{this.pcadmsg !== undefined && <br />}
                 {this.errmsg1}{this.errmsg1 !== undefined && <br />}
                 {this.errmsg2}{this.errmsg2 !== undefined && <br />}
-                {this.errmsg3}{this.errmsg0}
+                {this.errmsg0}
             </React.Fragment>
         );
     }

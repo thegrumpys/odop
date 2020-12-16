@@ -179,6 +179,9 @@ export class ReportBase extends Component {
 
         temp = this.props.symbol_table[o.Deflect_2].value / this.props.symbol_table[o.L_Free].value;
         sq1 = 1.4 * this.props.symbol_table[o.Slenderness].value - 4.0;
+        this.errmsg1 = undefined;
+        this.errmsg2 = undefined;
+        this.errmsg0 = undefined;
         if (sq1 > this.props.system_controls.smallnum) {
             /* structured to avoid div by 0 */
             if (temp > 0.76 / sq1) {
