@@ -16,7 +16,7 @@ class FeasibilityIndicator extends Component {
         const boxY = 8;
         const boxHeight = 16;
         const xOrigin = triangleWidth+blackWidth;
-        const yOrigin = 10;
+        const yOrigin = 0;
         var x;
         if (this.props.objective_value <= 0) { // Black
             x = -blackWidth/2; // Center of black
@@ -44,7 +44,7 @@ class FeasibilityIndicator extends Component {
                     <rect x={xOrigin} y={yOrigin+boxY} width={greenWidth} height={boxHeight} fill="#28a745" />
                     <rect x={xOrigin+greenWidth} y={yOrigin+boxY} width={orangeWidth} height={boxHeight} fill="#fd7e14" />
                     <rect x={xOrigin+greenWidth+orangeWidth} y={yOrigin+boxY} width={redWidth} height={boxHeight} fill="#dc3545" />
-                    <polygon points={[[xOrigin+x, yOrigin+triangleHeight], [xOrigin+triangleWidth/2+x, yOrigin], [xOrigin-triangleWidth/2+x, yOrigin]]} fill="#05a4e8" />
+                    <polygon points={[[xOrigin+x, yOrigin+triangleHeight], [xOrigin+triangleWidth/2+x, yOrigin], [xOrigin-triangleWidth/2+x, yOrigin]]} fill="#05a4e8" stroke="white" strokeWidth={1} />
                 </svg>
             </React.Fragment>
         );
