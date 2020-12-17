@@ -5,7 +5,8 @@ export function getExecuteNames() {
       result = [
         'mkHotWndStartup',        // Script to make Hot Wound Startup file from Load Initial State
         'mkHotWndStartup_Metric', // Script to make Hot Wound Startup Metric file from Load Initial State Metric
-        'tweakPrefs'
+        'tweakPrefs',             // Script to tweak Preference values for greater precision of search result
+        'welcome1'                // Script to guide novice users
       ];
     } else {
       result = [
