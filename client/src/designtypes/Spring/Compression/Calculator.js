@@ -19,7 +19,7 @@ export class Calculator extends ReportBase {
 
     render() {
         super.render();
-//        console.log('In Calculator.render this.props=',this.props);
+//        console.log('In Calculator.render this=',this);
         return (
             <Container>
                 <Row>
@@ -211,7 +211,6 @@ export class Calculator extends ReportBase {
                     {this.pcadmsg}{this.pcadmsg !== undefined && <br />}
                     {this.errmsg1}{this.errmsg1 !== undefined && <br />}
                     {this.errmsg2}{this.errmsg2 !== undefined && <br />}
-                    {this.errmsg3}
                     {this.errmsg0}
                 </Row>
            </Container>

@@ -174,11 +174,16 @@ export class ReportBase extends Component {
 
         this.cycle_life_u = this.props.symbol_table[o.Cycle_Life].units + " (est)";
 
-        if (this.props.symbol_table[o.PC_Avail_Deflect].value > 80.0)
+        this.pcadmsg = undefined;
+        if (this.props.symbol_table[o.PC_Avail_Deflect].value > 80.0) {
             this.pcadmsg = "Coil to coil contact may cause inaccuracy in point 2.";
+        }
 
         temp = this.props.symbol_table[o.Deflect_2].value / this.props.symbol_table[o.L_Free].value;
         sq1 = 1.4 * this.props.symbol_table[o.Slenderness].value - 4.0;
+        this.errmsg1 = undefined;
+        this.errmsg2 = undefined;
+        this.errmsg0 = undefined;
         if (sq1 > this.props.system_controls.smallnum) {
             /* structured to avoid div by 0 */
             if (temp > 0.76 / sq1) {
