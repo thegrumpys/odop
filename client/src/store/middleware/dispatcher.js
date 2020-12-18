@@ -176,7 +176,11 @@ export const dispatcher = store => next => action => {
             sink = design.model.symbol_table.find(element => element.name === action.payload.name);
             if (source.propagate === undefined) source.propagate = [];
             source.propagate.push({ name: sink.name, minmax: action.payload.minmax });
-            sink.cminchoice = sink.cminchoices.indexOf(source.name);
+            if (action.payload.minmax === MIN) {
+                sink.cminchoice = sink.cminchoices.indexOf(source.name);
+            } else {
+                sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
+            }
 //            console.log('In reducers.SET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
             store.dispatch(changeSymbolConstraint(sink.name, action.payload.minmax, source.value)); // Propagate now
         }
@@ -198,8 +202,14 @@ export const dispatcher = store => next => action => {
 //                console.log('In reducers.RESET_SYMBOL_FLAG.propgate source.propagate.length=',source.propagate.length);
                 if (source.propagate.length === 0) delete source.propagate;
             }
-            if (sink.cminchoice !== undefined) {
-                delete sink.cminchoice;
+            if (action.payload.minmax === MIN) {
+                if (sink.cminchoice !== undefined) {
+                    delete sink.cminchoice;
+                }
+            } else {
+                if (sink.cmaxchoice !== undefined) {
+                    delete sink.cmaxchoice;
+                }
             }
 //            console.log('In reducers.RESET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
         }

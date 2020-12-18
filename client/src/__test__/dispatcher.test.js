@@ -280,14 +280,15 @@ it('middleware change constraints to force all violations', () => {
 });
 
 it('middleware set symbol flag min FDCL', () => {
+    initialState.symbol_table[sto.RADIUS].cminchoices = ["THICKNESS"]; // Prepare for FDCL
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+//    console.log('In middleware set symbol flag min FDCL state=',state)
     const store = createStore(
         reducers,
         {name: "initialState", model: state},
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
-    design.model.symbol_table[sto.RADIUS].cminchoices = ["THICKNESS"]; // Prepare for FDCL
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(CONSTRAINED);
     expect(design.model.symbol_table[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
@@ -300,25 +301,26 @@ it('middleware set symbol flag min FDCL', () => {
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(CONSTRAINED|FDCL);
     expect(design.model.symbol_table[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
-    expect(design.model.symbol_table[sto.THICKNESS].propagate).toEqual({ name: "RADIUS", minmax: MIN});
+    expect(design.model.symbol_table[sto.THICKNESS].propagate.length).toEqual(1);
+    expect(design.model.symbol_table[sto.THICKNESS].propagate[0].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.THICKNESS].propagate[0].minmax).toEqual(MIN);
     expect(design.model.symbol_table[sto.RADIUS].cminchoice).toEqual(0);
     
-    delete design.model.symbol_table[sto.RADIUS].cminchoices;
-    delete design.model.symbol_table[sto.THICKNESS].propagate;
-    delete design.model.symbol_table[sto.RADIUS].cminchoice;
+    delete initialState.symbol_table[sto.RADIUS].cminchoices;
 //    console.log('In middleware set symbol flag min FDCL design.model.symbol_table[sto.THICKNESS]=',design.model.symbol_table[sto.THICKNESS]);
 //    console.log('In middleware set symbol flag min FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
 });
 
 it('middleware set symbol flag max FDCL', () => {
+    initialState.symbol_table[sto.RADIUS].cmaxchoices = ["THICKNESS"]; // Prepare for FDCL
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+//    console.log('In middleware set symbol flag max FDCL state=',state)
     const store = createStore(
         reducers,
         {name: "initialState", model: state},
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
-    design.model.symbol_table[sto.RADIUS].cmaxchoices = ["THICKNESS"]; // Prepare for FDCL
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].lmax).toEqual(CONSTRAINED);
     expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
@@ -331,12 +333,12 @@ it('middleware set symbol flag max FDCL', () => {
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].lmax).toEqual(CONSTRAINED|FDCL);
     expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
-    expect(design.model.symbol_table[sto.THICKNESS].propagate).toEqual({ name: "RADIUS", minmax: MAX});
+    expect(design.model.symbol_table[sto.THICKNESS].propagate.length).toEqual(1);
+    expect(design.model.symbol_table[sto.THICKNESS].propagate[0].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.THICKNESS].propagate[0].minmax).toEqual(MAX);
     expect(design.model.symbol_table[sto.RADIUS].cmaxchoice).toEqual(0);
 
-    delete design.model.symbol_table[sto.RADIUS].cmaxchoices;
-    delete design.model.symbol_table[sto.THICKNESS].propagate;
-    delete design.model.symbol_table[sto.RADIUS].cmaxchoice;
+    delete initialState.symbol_table[sto.RADIUS].cmaxchoices;
 //    console.log('In middleware set symbol flag max FDCL design.model.symbol_table[sto.THICKNESS]=',design.model.symbol_table[sto.THICKNESS]);
 //    console.log('In middleware set symbol flag max FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
 });
