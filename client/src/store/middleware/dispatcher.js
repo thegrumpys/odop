@@ -85,12 +85,13 @@ export const dispatcher = store => next => action => {
                 if (element.propagate != undefined) {
                     source = element;
 //                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE source.propagate=',source.propagate);
-//                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE source.propagate.name=',source.propagate.name,'source.propagate.minmax=',source.propagate.minmax,'source.value=',source.value);
-                    sink = design.model.symbol_table.find(sink => source.propagate.name === sink.name);
-//                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE sink=',sink);
-//                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE sink.name=',sink.name,'source.propagate.minmax=',source.propagate.minmax,'source.value=',source.value);
-//                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE source=',source,'sink=',sink);
-                    store.dispatch(changeSymbolConstraint(sink.name, source.propagate.minmax, source.value))
+                    source.propagate.forEach(entry => {
+//                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE entry.name=',entry.name);
+                        sink = design.model.symbol_table.find(sink => entry.name === sink.name);
+//                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE source=',source,'sink=',sink);
+//                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE sink.name=',sink.name,'entry.minmax=',entry.minmax,'source.value=',source.value);
+                        store.dispatch(changeSymbolConstraint(sink.name, entry.minmax, source.value))
+                    });
                 }
                 return true;
             } else {
@@ -173,10 +174,11 @@ export const dispatcher = store => next => action => {
             design = store.getState();
             source = design.model.symbol_table.find(element => element.name === action.payload.source);
             sink = design.model.symbol_table.find(element => element.name === action.payload.name);
-            source.propagate = { name: sink.name, minmax: action.payload.minmax };
+            if (source.propagate === undefined) source.propagate = [];
+            source.propagate.push({ name: sink.name, minmax: action.payload.minmax });
             sink.cminchoice = sink.cminchoices.indexOf(source.name);
 //            console.log('In reducers.SET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
-            store.dispatch(changeSymbolConstraint(sink.name, source.propagate.minmax, source.value)); // Propagate now
+            store.dispatch(changeSymbolConstraint(sink.name, action.payload.minmax, source.value)); // Propagate now
         }
         updateViolationsAndObjectiveValue(store);
         break;
@@ -190,7 +192,11 @@ export const dispatcher = store => next => action => {
                 source = design.model.symbol_table.find(element => element.name === sink.cmaxchoices[sink.cmaxchoice]);
             }
             if (source.propagate !== undefined) {
-                delete source.propagate;
+                var index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
+//                console.log('In reducers.RESET_SYMBOL_FLAG.propgate index=',index);
+                source.propagate.splice(index,1);
+//                console.log('In reducers.RESET_SYMBOL_FLAG.propgate source.propagate.length=',source.propagate.length);
+                if (source.propagate.length === 0) delete source.propagate;
             }
             if (sink.cminchoice !== undefined) {
                 delete sink.cminchoice;

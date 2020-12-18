@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InputGroup, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../../store/actionTypes';
+import { CONSTRAINED } from '../../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue } from '../../store/actionCreators';
 import * as mo from './mat_ips_offsets';
 

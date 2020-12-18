@@ -156,7 +156,8 @@ export function migrate(design) {
                 var source = design.symbol_table[element.cmin];
                 var sink = element;
 //                console.log('In migrate.propgate source=',source,'sink=',sink);
-                source.propagate = { name: sink.name, minmax: MIN };
+                if (source.propagate === undefined) source.propagate = [];
+                source.propagate.push({ name: sink.name, minmax: MIN });
 //                console.log('In migrate.propgate sink.name=',sink.name,'MIN','source.propagate=',source.propagate);
                 sink.cminchoice = sink.cminchoices.indexOf(source.name);
 //                console.log('In migrate.propgate source.name=',source.name,'sink.cminchoices=',sink.cminchoices,'sink.cminchoice=',sink.cminchoice);
@@ -166,7 +167,8 @@ export function migrate(design) {
                 var source = design.symbol_table[element.cmax];
                 var sink = element;
 //                console.log('In migrate.propgate source=',source,'sink=',sink);
-                source.propagate = { name: sink.name, minmax: MAX };
+                if (source.propagate === undefined) source.propagate = [];
+                source.propagate.push({ name: sink.name, minmax: MAX });
 //                console.log('In migrate.propgate sink.name=',sink.name,'MAX','source.propagate=',source.propagate);
                 sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
 //                console.log('In migrate.propgate source.name=',source.name,'sink.cmaxchoices=',sink.cmaxchoices,'sink.cmaxchoice=',sink.cmaxchoice);

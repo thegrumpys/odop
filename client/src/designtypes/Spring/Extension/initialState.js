@@ -60,7 +60,7 @@ export const initialState = {
             "tooltip": "Minimum force required to separate coils",
             "type": "equationset",
             "hidden": false,
-            "propagate": { name: "Force_1", minmax: MIN }
+            "propagate": [{ name: "Force_1", minmax: MIN }]
         },
         {
             "input": true,
@@ -463,7 +463,7 @@ export const initialState = {
             "tooltip": "Stress Initial range low point - sets lower limit for Initial_Tension",
             "type": "equationset",
             "hidden": false,
-            "propagate": { name: "Stress_Initial", minmax: MIN }
+            "propagate": [{ name: "Stress_Initial", minmax: MIN }]
         },
         {
             "input": false,
@@ -479,7 +479,7 @@ export const initialState = {
             "tooltip": "Stress Initial range high point - sets upper limit for Initial_Tension",
             "type": "equationset",
             "hidden": false,
-            "propagate": { name: "Stress_Initial", minmax: MAX }
+            "propagate": [{ name: "Stress_Initial", minmax: MAX }]
         },
         {
             "input": false,
@@ -815,7 +815,7 @@ export const initialState = {
             "tooltip": "Allowable stress for bending",
             "type": "calcinput",
             "hidden": false,
-            "propagate": { name: "Stress_Hook", minmax: MAX }
+            "propagate": [{ name: "Stress_Hook", minmax: MAX }]
         },
         {
             "input": true,

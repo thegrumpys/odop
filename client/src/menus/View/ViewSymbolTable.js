@@ -86,11 +86,11 @@ class ViewSymbolTable extends Component {
                                                 <td>{yn(element.hidden)}</td>
                                                 <td>{element.format}</td>
                                                 <td>{element.table}</td>
-                                                <td>{element.cminchoices}</td>
+                                                <td>{JSON.stringify(element.cminchoices)}</td>
                                                 <td>{element.cminchoice}</td>
-                                                <td>{element.cmaxchoices}</td>
+                                                <td>{JSON.stringify(element.cmaxchoices)}</td>
                                                 <td>{element.cmaxchoice}</td>
-                                                <td>{element.propagate}</td>
+                                                <td>{JSON.stringify(element.propagate)}</td>
                                                 <td>{flags[element.lmin]}</td>
                                                 <td>{String(element.cmin)}</td>
                                                 <td>{String(element.smin)}</td>
