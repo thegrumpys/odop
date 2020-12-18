@@ -181,8 +181,8 @@ export const dispatcher = store => next => action => {
             } else {
                 sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
             }
-//            console.log('In reducers.SET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
             store.dispatch(changeSymbolConstraint(sink.name, action.payload.minmax, source.value)); // Propagate now
+//            console.log('In dispatcher.SET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
         }
         updateViolationsAndObjectiveValue(store);
         break;
@@ -195,23 +195,25 @@ export const dispatcher = store => next => action => {
             } else {
                 source = design.model.symbol_table.find(element => element.name === sink.cmaxchoices[sink.cmaxchoice]);
             }
+//            console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
             if (source.propagate !== undefined) {
                 var index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
-//                console.log('In reducers.RESET_SYMBOL_FLAG.propgate index=',index);
+//                console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate index=',index);
                 source.propagate.splice(index,1);
-//                console.log('In reducers.RESET_SYMBOL_FLAG.propgate source.propagate.length=',source.propagate.length);
-                if (source.propagate.length === 0) delete source.propagate;
+//                console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate source.propagate.length=',source.propagate.length);
+                if (source.propagate.length === 0) {
+                    source.propagate = undefined; // De-reference the array
+//                    console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate delete source.propagate=',source.propagate);
+                    delete source.propagate; // Delete the property
+//                  console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate source=',source);
+                }
             }
             if (action.payload.minmax === MIN) {
-                if (sink.cminchoice !== undefined) {
-                    delete sink.cminchoice;
-                }
+                delete sink.cminchoice;
             } else {
-                if (sink.cmaxchoice !== undefined) {
-                    delete sink.cmaxchoice;
-                }
+                delete sink.cmaxchoice;
             }
-//            console.log('In reducers.RESET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
+//            console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
         }
         updateViolationsAndObjectiveValue(store);
         break;
