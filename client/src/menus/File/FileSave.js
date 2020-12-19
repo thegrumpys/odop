@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavDropdown, Button, Modal, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeUser, deleteAutoSave } from '../../store/actionCreators';
-import { displayError } from '../../components/ErrorModal';
+import { displayMessage } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
@@ -56,7 +56,7 @@ class FileSave extends Component {
             this.setState({ names })
         })
         .catch(error => {
-            displayError('GET of design names failed with message: \''+error.message+'\'');
+            displayMessage('GET of design names failed with message: \''+error.message+'\'');
         });
     }
     
@@ -113,11 +113,11 @@ class FileSave extends Component {
                 return res.json()
             })
             .catch(error => {
-                displayError(method+' of \''+name+'\' \''+type+'\' design failed with message: \''+error.message+'\'');
+                displayMessage(method+' of \''+name+'\' \''+type+'\' design failed with message: \''+error.message+'\'');
             });
         })
         .catch(error => {
-            displayError('GET of design names failed with message: \''+error.message+'\'');
+            displayMessage('GET of design names failed with message: \''+error.message+'\'');
         });
     }
 

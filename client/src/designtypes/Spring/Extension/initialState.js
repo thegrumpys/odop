@@ -1,4 +1,4 @@
-import { CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 export const initialState = {
     "symbol_table": [
         {
@@ -9,7 +9,7 @@ export const initialState = {
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
-            "cmax": 2.0,
+            "cmax": 10.0,
             "ioclass": 0,
             "sdlim": 0.0,
             "tooltip": "Outside diameter in free (no load) condition",
@@ -39,7 +39,7 @@ export const initialState = {
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
-            "cmax": 20,
+            "cmax": 100,
             "ioclass": 0,
             "sdlim": 0.0,
             "tooltip": "Total number of coils",
@@ -54,12 +54,13 @@ export const initialState = {
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
-            "cmax": 0.0,
+            "cmax": 40.0,
             "ioclass": 0,
             "sdlim": 0.0,
             "tooltip": "Minimum force required to separate coils",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "propagate": [{ name: "Force_1", minmax: MIN }]
         },
         {
             "input": true,
@@ -69,7 +70,11 @@ export const initialState = {
             "lmin": FIXED,
             "lmax": FIXED,
             "cmin": 0,
-            "cmax": 0.0,
+            "cmax": 10.0,
+            "oldlmin": 0,
+            "oldlmax": 0,
+            "oldcmin": 0,
+            "oldcmax": 10.0,
             "ioclass": 0,
             "sdlim": 0.0,
             "tooltip": "End Extension (see diagram in on-line Help)",
@@ -84,13 +89,14 @@ export const initialState = {
             "lmin": CONSTRAINED|FDCL,
             "lmax": 0,
             "cmin": 3,
-            "cmax": 6.0,
+            "cmax": 50.0,
             "ioclass": 0,
             "sdlim": 0.0,
             "tooltip": "Minimum operating load (Length L_1) (FDCL)",
             "type": "equationset",
             "hidden": false,
-            "cminchoices": [ "Initial_Tension" ]
+            "cminchoices": [ "Initial_Tension" ],
+            "cminchoice": 0
         },
         {
             "input": true,
@@ -99,8 +105,8 @@ export const initialState = {
             "units": "pounds",
             "lmin": 0,
             "lmax": 0,
-            "cmin": 0,
-            "cmax": 50,
+            "cmin": 1,
+            "cmax": 100,
             "ioclass": 0,
             "sdlim": 0.0,
             "tooltip": "Maximum operating load (Length L_2)",
@@ -189,7 +195,7 @@ export const initialState = {
             "units": "inches",
             "lmin": 0,
             "lmax": 0,
-            "cmin": 1.0,
+            "cmin": 0.1,
             "cmax": 20.0,
             "ioclass": 0,
             "sdlim": 0.0,
@@ -204,7 +210,7 @@ export const initialState = {
             "units": "inches",
             "lmin": 0,
             "lmax": 0,
-            "cmin": 1.0,
+            "cmin": 0.1,
             "cmax": 20.0,
             "ioclass": 0,
             "sdlim": 0.0,
@@ -220,7 +226,7 @@ export const initialState = {
             "lmin": 0,
             "lmax": 0,
             "cmin": 1.0,
-            "cmax": 20.0,
+            "cmax": 100.0,
             "ioclass": 0,
             "sdlim": 0.0,
             "tooltip": "Free length including ends (see diagram in on-line Help)",
@@ -312,12 +318,14 @@ export const initialState = {
             "cmin": 29,
             "cmax": 30,
             "ioclass": 0,
-            "sdlim": 2000.0,
+            "sdlim": 14000.0,
             "tooltip": "Stress resulting from Initial_Tension (FDCL)",
             "type": "equationset",
             "hidden": false,
             "cminchoices": [ "Stress_Init_Lo" ],
-            "cmaxchoices": [ "Stress_Init_Hi" ]
+            "cminchoice": 0,
+            "cmaxchoices": [ "Stress_Init_Hi" ],
+            "cmaxchoice": 0
         },
         {
             "input": false,
@@ -327,7 +335,7 @@ export const initialState = {
             "lmin": 0,
             "lmax": 0,
             "cmin": 100.0,
-            "cmax": 10000.0,
+            "cmax": 30000.0,
             "ioclass": 0,
             "sdlim": 0.0,
             "tooltip": "Torsion stress in wire at load point 1",
@@ -342,7 +350,7 @@ export const initialState = {
             "lmin": 0,
             "lmax": 0,
             "cmin": 100.0,
-            "cmax": 10000.0,
+            "cmax": 100000.0,
             "ioclass": 0,
             "sdlim": 0.0,
             "tooltip": "Torsion stress in wire at load point 2",
@@ -355,15 +363,16 @@ export const initialState = {
             "value": 191924.3,
             "units": "PSI",
             "lmin": 0,
-            "lmax": 0,
+            "lmax": FDCL,
             "cmin": 100.0,
-            "cmax": 10000.0,
+            "cmax": 52,
             "ioclass": 0,
-            "sdlim": 0.0,
+            "sdlim": 150000.0,
             "tooltip": "Bending stress in hooks",
             "type": "equationset",
             "hidden": false,
-            "cmaxchoices": [ "Stress_Lim_Bend" ]
+            "cmaxchoices": [ "Stress_Lim_Bend" ],
+            "cminchoice": 0
         },
         {
             "input": false,
@@ -432,7 +441,7 @@ export const initialState = {
             "units": "%",
             "lmin": 0,
             "lmax": CONSTRAINED,
-            "cmin": 0,
+            "cmin": 1.0,
             "cmax": 90.0,
             "ioclass": 0,
             "sdlim": 0,
@@ -448,12 +457,13 @@ export const initialState = {
             "lmin": 0,
             "lmax": 0,
             "cmin": 100,
-            "cmax": 10000.0,
+            "cmax": 20000.0,
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Stress Initial range low point - sets lower limit for Initial_Tension",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "propagate": [{ name: "Stress_Initial", minmax: MIN }]
         },
         {
             "input": false,
@@ -463,12 +473,13 @@ export const initialState = {
             "lmin": 0,
             "lmax": 0,
             "cmin": 100,
-            "cmax": 10000.0,
+            "cmax": 30000.0,
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Stress Initial range high point - sets upper limit for Initial_Tension",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "propagate": [{ name: "Stress_Initial", minmax: MAX }]
         },
         {
             "input": false,
@@ -803,7 +814,8 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Allowable stress for bending",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "propagate": [{ name: "Stress_Hook", minmax: MAX }]
         },
         {
             "input": true,

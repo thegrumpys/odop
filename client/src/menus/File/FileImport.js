@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { load, deleteAutoSave } from '../../store/actionCreators';
-import { displayError } from '../../components/ErrorModal';
+import { displayMessage } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 
@@ -65,14 +65,14 @@ class FileImport extends Component {
             this.props.deleteAutoSave();
             logUsage('event', 'FileImport', { 'event_label': migrated_design.type + ' ' + migrated_design.name });
         } else {
-            displayError('Invalid JSON type, function ignored');
+            displayMessage('Invalid JSON type, function ignored');
         }
     }
     
     onError(e) {
 //        console.log('In FileImport.onError e=',e);
         displaySpinner(false);
-        displayError('GET of design names failed with message: \''+this.state.fileReader.error.message+'\'');
+        displayMessage('GET of design names failed with message: \''+this.state.fileReader.error.message+'\'');
     }
 
     onCancel() {

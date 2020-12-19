@@ -28,7 +28,7 @@ class NameValueUnitsRowCalcInput extends Component {
                 focused: false
             };
         } else if (this.props.element.format === 'table') {
-//            console.log('In NameValueUnitsRowCalcInput.constructor file = ../designtypes/'+this.props.element.table+'.json');
+//            console.log('In NameValueUnitsRowCalcInput.constructor file= ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
             this.state = {
@@ -45,7 +45,7 @@ class NameValueUnitsRowCalcInput extends Component {
                     focused: false,
                 });
             } else if (this.props.element.format === 'table') {
-//                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate file = ../designtypes/'+this.props.element.table+'.json');
+//                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate file= ../designtypes/'+this.props.element.table+'.json');
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate table=',table);
                 this.setState({
@@ -78,15 +78,6 @@ class NameValueUnitsRowCalcInput extends Component {
 //        console.log('In NameValueUnitsRowCalcInput.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex);
-        this.state.table[selectedIndex].forEach((value, index) => {
-            if (index > 0) { // Skip the first column
-                var name = this.state.table[0][index];
-//                console.log('In NameValueUnitsRowCalcInput.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table,' check=',this.props.symbol_table.find(element => element.name === name));
-                if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
-                    this.props.changeSymbolValue(name,value);
-                }
-            }
-        });
     }
     
     render() {
@@ -131,7 +122,6 @@ class NameValueUnitsRowCalcInput extends Component {
 
 const mapStateToProps = state => ({
     type: state.model.type,
-    symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls
 });
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeUser, load, deleteAutoSave } from '../../store/actionCreators';
-import { displayError } from '../../components/ErrorModal';
+import { displayMessage } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
@@ -13,7 +13,7 @@ class FileOpen extends Component {
 
     constructor(props) {
         super(props);
-        console.log("In FileOpen .constructor props=",props);
+//        console.log("In FileOpen .constructor props=",props);
         this.toggle = this.toggle.bind(this);
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
@@ -30,13 +30,13 @@ class FileOpen extends Component {
     }
 
     componentDidMount() {
-        console.log('In FileOpen.componentDidMount');
+//        console.log('In FileOpen.componentDidMount');
     }
 
     componentDidUpdate(prevProps) {
 //      console.log('In FileOpen.componentDidUpdate');
       if (prevProps.type !== this.props.type) {
-          console.log('In FileOpen.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+//          console.log('In FileOpen.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
           this.setState({ 
               type: this.props.type
           });
@@ -45,7 +45,7 @@ class FileOpen extends Component {
   }
 
     getDesignNames(type) {
-        console.log('In FileOpen.getDesignNames type=', type);
+//        console.log('In FileOpen.getDesignNames type=', type);
         // Get the names and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
@@ -68,7 +68,7 @@ class FileOpen extends Component {
             })
         })
         .catch(error => {
-            displayError('GET of design names failed with message: \''+error.message+'\'');
+            displayMessage('GET of design names failed with message: \''+error.message+'\'');
         });
     }
 
@@ -96,16 +96,16 @@ class FileOpen extends Component {
                 this.props.deleteAutoSave();
                 logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
             } else {
-                displayError('Invalid JSON type, function ignored');
+                displayMessage('Invalid JSON type, function ignored');
             }
         })
         .catch(error => {
-            displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
+            displayMessage('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
         });
     }
 
     toggle() {
-        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
+//        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
         var type = (this.state.types.includes(this.props.type) ? this.props.type : config.design.type);
         this.getDesignNames(type);
         var name = (this.state.names.includes(this.props.name) ? this.props.name : config.design.name);
@@ -159,7 +159,7 @@ class FileOpen extends Component {
     }
 
     render() {
-        console.log('In FileOpen.render this=', this);
+//        console.log('In FileOpen.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

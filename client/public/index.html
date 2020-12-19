@@ -57,21 +57,90 @@
     From: https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box
     -->
     <style>
+/**************************************************/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   /* display: none; <- Crashes Chrome on hover */
   -webkit-appearance: none;
   margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
+/**************************************************/
 .text-low-danger {
   color: #fd7e14 !important;
 }
 .border-low-danger {
   border-color: #fd7e14 !important;
 }
-[id^=report] table td {
+/**************************************************/
+.text-strictly-feasible {
+  color: #343a40 !important;
+}
+.border-strictly-feasible {
+  border-color: #343a40 !important;
+}
+.text-feasible {
+  color: #28a745 !important;
+}
+.border-feasible {
+  border-color: #28a745 !important;
+}
+.text-approaching-feasible {
+  color: #fd7e14 !important;
+  font-weight: bold !important;
+}
+.border-approaching-feasible {
+  border-color: #fd7e14 !important;
+}
+.text-not-feasible {
+  color: #dc3545 !important;
+  font-weight: bold !important;
+}
+.border-not-feasible {
+  border-color: #dc3545 !important;
+}
+/**************************************************/
+[id^=view] table td {
  text-align: right;
 }    
+/**************************************************/
+.report-table-borders, .report-table-borders th, .report-table-borders td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 0px 5px 0px 5px;
+}
+.report-table th, .report-table td {
+  padding: 0px 5px 0px 5px;
+}
+/**************************************************/
+.view-table-fixed-2-columns {
+  overflow: auto;
+  max-height: calc(100vh - 210px);
+}
+.view-table-fixed-2-columns table {
+  border-collapse: separate;
+}
+.view-table-fixed-2-columns td:first-child, .view-table-fixed-2-columns th:first-child {
+  position:sticky;
+  left:0;
+  background: #eee;
+  z-index:1;
+}
+.view-table-fixed-2-columns td:nth-child(2), .view-table-fixed-2-columns th:nth-child(2)  { 
+  position:sticky;
+  left:30px;
+  background: #eee;
+  z-index:1;
+}
+.view-table-fixed-2-columns th {
+  position: sticky;
+  top: 0;
+  background: #eee;
+  z-index:2
+}
+.view-table-fixed-2-columns th:first-child, .view-table-fixed-2-columns th:nth-child(2) {
+  z-index:3
+}
+/**************************************************/
     </style>
   </head>
   <body>

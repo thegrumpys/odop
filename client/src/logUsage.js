@@ -1,4 +1,4 @@
-import { displayError } from './components/ErrorModal';
+import { displayMessage } from './components/ErrorModal';
 
 export function logUsage(tag, action, note) {
 //    console.log('In logUsage tag=',tag,'action=',action,'note=',note);
@@ -25,6 +25,6 @@ export function logUsage(tag, action, note) {
     })
     .catch(error => {
 //        console.log('error=',error);
-        displayError('POST of usage_log of note \''+note+'\' failed with message: \''+error.message+'\'');
+        displayMessage('POST of usage_log of note \''+note+'\' failed with message: \''+error.message+'\'');
     });
 }

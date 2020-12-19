@@ -1,24 +1,33 @@
 import React, { Component } from 'react';
 import { Table, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import FeasibilityIndicator from './FeasibilityIndicator';
 
 class ResultTable extends Component {
     
     render() {
 //        console.log('In ResultTable.render this=', this);
+//        From Issue #365:
+//        The proposed terminology and color scheme:
+//            OBJ value       Category Term           Color            RGB
+//            zero            STRICTLY FEASIBLE       Black            #343a40
+//            < OBJMIN        FEASIBLE                Green (or cyan)  #28a745
+//            < 4x OBJMIN     APPROACHING FEASIBLE    Orange           #fd7e14
+//            > 4x OBJMIN     NOT FEASIBLE            Red              #dc3545
         var feasibility_string;
         var feasibility_class;
-        if (this.props.objective_value > this.props.system_controls.objmin) {
+        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
             feasibility_string = "NOT FEASIBLE";
-            feasibility_class = "text-danger font-weight-bold";
+            feasibility_class = "text-not-feasible";
+        } else if (this.props.objective_value > this.props.system_controls.objmin) {
+            feasibility_string = "APPROACHING FEASIBLE";
+            feasibility_class = "text-approaching-feasible";
+        } else if (this.props.objective_value > 0.0) {
+            feasibility_string = "FEASIBLE";
+            feasibility_class = "text-feasible";
         } else {
-            if (this.props.violated_constraint_count > 0) {
-                feasibility_string = "MARGINALLY FEASIBLE";
-                feasibility_class = "text-low-danger";
-            } else {
-                feasibility_string = "FEASIBLE";
-                feasibility_class = "";
-            }
+            feasibility_string = "STRICTLY FEASIBLE";
+            feasibility_class = "text-strictly-feasible";
         }
         return (
             <React.Fragment>
@@ -26,16 +35,16 @@ class ResultTable extends Component {
                     <tbody>
                         <tr>
                             <th width="33%" id="Feasibility">
-                                <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: many constraints violated; MARGINALLY FEASIBLE: constraints slightly violated; FEASIBLE: no constraints violated</Tooltip>}>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: many constraints violated; APPROACHING FEASIBLE: some constraints violated; FEASIBLE: constraints slightly violated; STRICTLY FEASIBLE: no constraints violated</Tooltip>}>
                                     <span>Feasibility</span>
                                 </OverlayTrigger>
                             </th>
                             <td width="67%" className={feasibility_class + " text-left"}>{feasibility_string}</td>
                         </tr>
                         <tr>
-                            <th width="33%" id="TerminationCondition">
+                            <th width="33%" id="Message">
                                 <OverlayTrigger placement="top" overlay={<Tooltip>Status feedback message from solution process</Tooltip>}>
-                                    <span>Termination Message:</span>
+                                    <span>Message:</span>
                                 </OverlayTrigger>
                             </th>
                             <td width="67%" className="text-left">{this.props.termination_condition}</td>
@@ -45,20 +54,11 @@ class ResultTable extends Component {
                 <Table className="col-md-4" size="sm">
                     <tbody>
                         <tr>
-                            <th width="50%" id="ObjectiveValue">
-                                <OverlayTrigger placement="bottom" overlay={<Tooltip>Search works to minimize this value. See Help for details</Tooltip>}>
-                                    <span>Objective&nbsp;Value:</span>
+                            <td className="text-center" id="ObjectiveValue">
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>Objective Value = {this.props.objective_value.toFixed(6)}<br />OBJMIN = {this.props.system_controls.objmin.toFixed(6)}</Tooltip>}>
+                                    <FeasibilityIndicator />
                                 </OverlayTrigger>
-                            </th>
-                            <td width="50%" className={feasibility_class + " text-right"}>{this.props.objective_value.toFixed(6)}</td>
-                        </tr>
-                        <tr>
-                            <th width="50%" id="OBJMIN">
-                                <OverlayTrigger placement="top" overlay={<Tooltip>Stop Search if Objective&nbsp;Value gets lower than this value = {this.props.system_controls.objmin.toFixed(6)}</Tooltip>}>
-                                    <span>OBJMIN:</span>
-                                </OverlayTrigger>
-                            </th>
-                            <td width="50%" className="text-right">{this.props.system_controls.objmin.toFixed(6)}</td>
+                            </td>
                         </tr>
                     </tbody>
                 </Table>

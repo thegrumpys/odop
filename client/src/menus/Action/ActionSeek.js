@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
-import { displayError } from '../../components/ErrorModal';
+import { displayMessage } from '../../components/ErrorModal';
 
 class ActionSeek extends Component {
 
     constructor(props) {
         super(props);
+//        console.log('In ActionSeek.constructor this=',this);
         this.toggle = this.toggle.bind(this);
         this.onMinMax = this.onMinMax.bind(this);
         this.onNameSelect = this.onNameSelect.bind(this);
@@ -24,8 +25,9 @@ class ActionSeek extends Component {
     }
     
     toggle() {
+//        console.log('In ActionSeek.toggle this=',this);
         if(this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayError('No free independent variables');
+            displayMessage('No free independent variables','warning');
         } else {
             var result = this.props.symbol_table.find( // Find free variable matching the current variable name
                 (element) => this.state.name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
@@ -45,18 +47,21 @@ class ActionSeek extends Component {
     }
     
     onMinMax(minmax) {
+//        console.log('In ActionSeek.onMinMax this=',this,'minmax=',minmax);
         this.setState({
             minmax: minmax
         });
     }
 
     onNameSelect(event) {
+//        console.log('In ActionSeek.onNameSelect this=',this,'event=',event);
         this.setState({
             name: event.target.value 
         });
     }
     
     onSeek() {
+//        console.log('In ActionSeek.onSeek this=',this);
         this.setState({
             modal: !this.state.modal
         });
@@ -67,6 +72,7 @@ class ActionSeek extends Component {
     }
     
     onCancel() {
+//        console.log('In ActionSeek.onCancel this=',this);
         this.setState({
             modal: !this.state.modal
         });
@@ -74,6 +80,7 @@ class ActionSeek extends Component {
     }
     
     onContextHelp() {
+//        console.log('In ActionSeek.onContextHelp this=',this);
         this.setState({
             modal: !this.state.modal
         });

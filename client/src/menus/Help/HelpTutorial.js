@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
+import { stopExecute } from "../../components/ExecutePanel";
 
 class HelpTutorial extends Component {
 
@@ -25,6 +26,7 @@ class HelpTutorial extends Component {
     componentDidUpdate(prevProps) {
 //        console.log('In HelpTutorial.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
+            stopExecute(); // Stop whatever is currently running if anything is running
             this.updateExecuteNames();
         }
     }

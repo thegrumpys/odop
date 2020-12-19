@@ -28,7 +28,7 @@ import config from './config';
 //    }
 //  }
 
-console.error('In index.js ==================================================================');
+//console.error('In index.js ==================================================================');
 //console.log('In index.js CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'Starting on port =', process.env.PORT, 'Node version =', process.version);
 
 /* eslint-disable no-underscore-dangle */

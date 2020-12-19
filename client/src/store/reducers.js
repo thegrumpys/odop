@@ -35,23 +35,22 @@ import { STARTUP,
     MIN } from './actionTypes';
 import { sclden } from './middleware/sclden';
 import { initialSystemControls } from '../initialSystemControls';
-import { evaluateConstraintValue } from './middleware/evaluateConstraint';
 
 export function reducers(state, action) {
     var i;
     var value;
     var name;
     var model;
-//    console.log('In reducers state=',state,'action=', action);
+//    console.warn('In reducers state=',state,'action=', action);
     switch (action.type) {
     case STARTUP:
-        console.log('In reducers.STARTUP state=',state);
+//        console.log('In reducers.STARTUP state=',state);
         return state;
     case LOAD:
         state = Object.assign({}, state, { 
             ...action.payload.design
         });
-        console.log('In reducers.LOAD action.payload.design=',action.payload.design,'state=',state);
+//        console.log('In reducers.LOAD action.payload.design=',action.payload.design,'state=',state);
         return state;
     case LOAD_INITIAL_STATE:
 //        console.log('In reducers.LOAD_INITIAL_STATE');
@@ -67,21 +66,21 @@ export function reducers(state, action) {
                 system_controls: initialSystemControls
             }
         }); // Merge initialState and initialSystemControls
-        console.log('In reducers.LOAD_INITIAL_STATE action.payload.type=',action.payload.type,'action.payload.units=',action.payload.units,'state=',state);
+//        console.log('In reducers.LOAD_INITIAL_STATE action.payload.type=',action.payload.type,'action.payload.units=',action.payload.units,'state=',state);
         return state;
     case CHANGE_NAME:
         state = Object.assign({}, {
             ...state,
             name: action.payload.name
         });
-        console.log('In reducers.CHANGE_NAME action.payload.name=',action.payload.name,'state=',state);
+//        console.log('In reducers.CHANGE_NAME action.payload.name=',action.payload.name,'state=',state);
         return state;
     case CHANGE_USER:
         state = Object.assign({}, {
             ...state,
             user: action.payload.user
         });
-        console.log('In reducers.CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
+//        console.log('In reducers.CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
         return state;
 
 // SYMBOL
@@ -131,12 +130,12 @@ export function reducers(state, action) {
                         if (action.payload.minmax === MIN) {
                             return Object.assign({}, element, {
                                 cmin: action.payload.value,
-                                smin: sclden(state.model.system_controls, element.value, evaluateConstraintValue(state.model.symbol_table,element.lmin,action.payload.value), element.sdlim, element.lmin)
+                                smin: sclden(state.model.system_controls, element.value, action.payload.value, element.sdlim, element.lmin)
                             });
                         } else {
                             return Object.assign({}, element, {
                                 cmax: action.payload.value,
-                                smax: sclden(state.model.system_controls, element.value, evaluateConstraintValue(state.model.symbol_table,element.lmax,action.payload.value), element.sdlim, element.lmax)
+                                smax: sclden(state.model.system_controls, element.value, action.payload.value, element.sdlim, element.lmax)
                             });
                         }
                     }
@@ -157,12 +156,12 @@ export function reducers(state, action) {
                             if (action.payload.minmax === MIN) {
                                 return Object.assign({}, element, {
                                     cmin: value,
-                                    smin: sclden(state.model.system_controls, element.value, evaluateConstraintValue(state.model.symbol_table,element.lmin,value), element.sdlim, element.lmin)
+                                    smin: sclden(state.model.system_controls, element.value, value, element.sdlim, element.lmin)
                                 });
                             } else {
                                 return Object.assign({}, element, {
                                     cmax: value,
-                                    smax: sclden(state.model.system_controls, element.value, evaluateConstraintValue(state.model.symbol_table,element.lmax,value), element.sdlim, element.lmax)
+                                    smax: sclden(state.model.system_controls, element.value, value, element.sdlim, element.lmax)
                                 });
                             }
                         } else {
@@ -180,6 +179,12 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
+//                        console.log('In reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS state=',state,'action=', action);
+//                        console.log('In reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS',
+//                                    'element.lmin=',element.lmin,
+//                                    'element.cmin=',element.cmin,
+//                                    'element.lmax=',element.lmax,
+//                                    'element.cmax=',element.cmax);
                         return Object.assign({}, element, {
                             oldlmin: element.lmin,
                             oldcmin: element.cmin,
@@ -197,14 +202,32 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
-                        return Object.assign({}, element, {
-                            lmin: element.oldlmin,
-                            cmin: element.oldcmin,
-                            smin: sclden(state.model.system_controls, element.value, evaluateConstraintValue(state.model.symbol_table,element.oldlmin,element.oldcmin), element.sdlim, element.oldlmin),
-                            lmax: element.oldlmax,
-                            cmax: element.oldcmax,
-                            smax: sclden(state.model.system_controls, element.value, evaluateConstraintValue(state.model.symbol_table,element.oldlmax,element.oldcmax), element.sdlim, element.oldlmax)
-                        });
+//                        console.log('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS state=',state,'action=', action);
+//                        console.log('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS',
+//                                    'element.oldlmin=',element.oldlmin,
+//                                    'element.oldcmin=',element.oldcmin,
+//                                    'element.oldlmax=',element.oldlmax,
+//                                    'element.oldcmax=',element.oldcmax);
+                        if (element.oldlmin !== undefined) { // Is there something to restore then restore them else just use the current values as-is
+                            var lmin = element.oldlmin; // Get the values as locals
+                            var cmin = element.oldcmin;
+                            var lmax = element.oldlmax;
+                            var cmax = element.oldcmax;
+                            delete element.oldlmin; // Delete the values
+                            delete element.oldcmin;
+                            delete element.oldlmax;
+                            delete element.oldcmax;
+                            return Object.assign({}, element, { // Assign the locals
+                                lmin: lmin,
+                                cmin: cmin,
+                                smin: sclden(state.model.system_controls, element.value, cmin, element.sdlim, lmin),
+                                lmax: lmax,
+                                cmax: cmax,
+                                smax: sclden(state.model.system_controls, element.value, cmax, element.sdlim, lmax)
+                            });
+                        } else {
+                            return element;
+                        }
                     }
                     return element;
                 })
@@ -216,6 +239,7 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
+//                        console.log('In reducers.SET_SYMBOL_FLAG state=',state,'action=', action);
                         if (action.payload.minmax === MIN) {
                             return Object.assign({}, element, {
                                 lmin: element.lmin | action.payload.mask
@@ -236,6 +260,7 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
+//                        console.log('In reducers.RESET_SYMBOL_FLAG state=',state,'action=', action);
                         if (action.payload.minmax === MIN) {
                             return Object.assign({}, element, {
                                 lmin: element.lmin & ~action.payload.mask
@@ -313,6 +338,8 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.type === "equationset" && element.input) {
+//                        if (element.name === "Wire_Dia")
+//                            console.log('In reducers.SAVE_INPUT_SYMBOL_VALUES element=',element);
                         return Object.assign({}, element, {
                             oldvalue: element.value
                         });
@@ -328,9 +355,19 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.type === "equationset" && element.input) {
-                        return Object.assign({}, element, {
-                            value: element.oldvalue
-                        });
+                        if (element.oldvalue !== undefined) {
+//                            if (element.name === "Wire_Dia")
+//                                console.log('In reducers.RESTORE_INPUT_SYMBOL_VALUES oldvalue==defined element=',element);
+                            var value = element.oldvalue; // Get the value as local
+                            delete element.oldvalue; // Delete the value
+                            return Object.assign({}, element, { // Assign the local
+                                value: value
+                            });
+                        } else {
+//                            if (element.name === "Wire_Dia")
+//                                console.log('In reducers.RESTORE_INPUT_SYMBOL_VALUES oldvalue==undefined element=',element);
+                            return element;
+                        }
                     } else {
                         return element;
                     }
@@ -434,13 +471,13 @@ export function reducers(state, action) {
     case SAVE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
             localStorage.setItem(action.payload.name, JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
-            console.log("In reducers.SAVE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
+//            console.log("In reducers.SAVE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state not changed
     case RESTORE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
             var autosave = JSON.parse(localStorage.getItem(action.payload.name)); // get auto save file contents
-            console.log("In reducers.RESTORE_AUTO_SAVE autosave=",autosave);
+//            console.log("In reducers.RESTORE_AUTO_SAVE autosave=",autosave);
             // Migrate autosave file from old (no model property) to new (with model property)
             if (autosave.model === undefined) { // Is it the old format
                 name = autosave.name;
@@ -456,13 +493,13 @@ export function reducers(state, action) {
             state = Object.assign({}, state, {
                 model: migrate(state.model),
             });
-            console.log("In reducers.RESTORE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
+//            console.log("In reducers.RESTORE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state changed
     case DELETE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
             localStorage.removeItem(action.payload.name); // remove auto save file
-            console.log("In reducers.DELETE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
+//            console.log("In reducers.DELETE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state not changed
 

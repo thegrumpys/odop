@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../designtypes/Piston-Cylinder/initialState';
 import * as sto from '../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../initialSystemControls';
-import { MIN, MAX, CONSTRAINED, FIXED } from '../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
 import {
     startup, load, changeName, changeUser,
     changeSymbolValue, changeSymbolViolation, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
@@ -215,7 +215,7 @@ it('reducers change symbol constraint max', () => {
     expect(design.model.symbol_table[sto.THICKNESS].smax).toEqual(0.06);
 });
 
-it('reducers set symbol flag min', () => {
+it('reducers set symbol flag min FIXED', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -232,7 +232,7 @@ it('reducers set symbol flag min', () => {
     expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(CONSTRAINED|FIXED);
 });
 
-it('reducers reset symbol flag min', () => {
+it('reducers reset symbol flag min CONSTRAINED', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -249,7 +249,28 @@ it('reducers reset symbol flag min', () => {
     expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(0); // No flags
 });
 
-it('reducers set symbol flag max', () => {
+it('reducers set symbol flag min FDCL', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        {name: "initialState", model: state});
+
+    var design = store.getState(); // before
+    design.model.symbol_table[sto.RADIUS].cminchoices = ["THICKNESS"]; // Prepare for FDCL
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(CONSTRAINED);
+    expect(design.model.symbol_table[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
+
+    store.dispatch(setSymbolFlag("RADIUS", MIN, FDCL, "THICKNESS"));
+
+    design = store.getState(); // after
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(CONSTRAINED|FDCL);
+    expect(design.model.symbol_table[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
+//    console.log('In reducers set symbol flag min FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
+});
+
+it('reducers set symbol flag max FIXED', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -266,7 +287,7 @@ it('reducers set symbol flag max', () => {
     expect(design.model.symbol_table[sto.THICKNESS].lmax).toEqual(CONSTRAINED|FIXED);
 });
 
-it('reducers reset symbol flag max', () => {
+it('reducers reset symbol flag max CONSTRAINED', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -281,6 +302,27 @@ it('reducers reset symbol flag max', () => {
     design = store.getState(); // after
     expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(design.model.symbol_table[sto.THICKNESS].lmax).toEqual(0); // No flags
+});
+
+it('reducers set symbol flag max FDCL', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        {name: "initialState", model: state});
+
+    var design = store.getState(); // before
+    design.model.symbol_table[sto.RADIUS].cmaxchoices = ["THICKNESS"]; // Prepare for FDCL
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].lmax).toEqual(CONSTRAINED);
+    expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
+
+    store.dispatch(setSymbolFlag("RADIUS", MAX, FDCL, "THICKNESS"));
+
+    design = store.getState(); // after
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].lmax).toEqual(CONSTRAINED|FDCL);
+    expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
+//    console.log('In reducers set symbol flag max FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
 });
 
 //=====================================================================
@@ -343,7 +385,7 @@ it('reducers save input symbol values', () => {
     expect(design.model.symbol_table[sto.RADIUS].oldvalue).toEqual(0.4);
 });
 
-it('reducers restore input symbol values', () => {
+it('reducers restore input symbol values without previous save', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -357,7 +399,26 @@ it('reducers restore input symbol values', () => {
     store.dispatch(restoreInputSymbolValues());
 
     design = store.getState(); // after
-    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(undefined);
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4); // If there is no oldvalue then restore doesn't do anything
+    expect(design.model.symbol_table[sto.RADIUS].oldvalue).toEqual(undefined);
+});
+
+it('reducers restore input symbol values with previous save', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        {name: "initialState", model: state});
+
+    var design = store.getState(); // before
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
+    expect(design.model.symbol_table[sto.RADIUS].oldvalue).toEqual(undefined);
+
+    store.dispatch(saveInputSymbolValues());
+    store.dispatch(restoreInputSymbolValues());
+
+    design = store.getState(); // after
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
     expect(design.model.symbol_table[sto.RADIUS].oldvalue).toEqual(undefined);
 });
 
@@ -433,7 +494,7 @@ it('reducers save output symbol constraints', () => {
     expect(design.model.symbol_table[sto.FORCE].oldcmax).toEqual(0);
 });
 
-it('reducers restore output symbol constraints', () => {
+it('reducers restore output symbol constraints without previous save', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -453,10 +514,41 @@ it('reducers restore output symbol constraints', () => {
     store.dispatch(restoreOutputSymbolConstraints("FORCE"));
 
     design = store.getState(); // after
-    expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(undefined);
-    expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(undefined);
-    expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(undefined);
-    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1); // If there is no old lmin/cmin/lmax/cmax then restore doesn't do anything
+    expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
+    expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].oldlmin).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].oldcmin).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].oldcmax).toEqual(undefined);
+});
+
+it('reducers restore output symbol constraints with previous save', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        {name: "initialState", model: state});
+
+    var design = store.getState(); // before
+    expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE");
+    expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1); // CONSTRAINED flag
+    expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
+    expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0); // No flags
+    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].oldlmin).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].oldcmin).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(undefined);
+    expect(design.model.symbol_table[sto.FORCE].oldcmax).toEqual(undefined);
+
+    store.dispatch(saveOutputSymbolConstraints("FORCE"));
+    store.dispatch(restoreOutputSymbolConstraints("FORCE"));
+
+    design = store.getState(); // after
+    expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1);
+    expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
+    expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
     expect(design.model.symbol_table[sto.FORCE].oldlmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldcmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(undefined);

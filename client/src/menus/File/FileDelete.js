@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeUser } from '../../store/actionCreators';
-import { displayError } from '../../components/ErrorModal';
+import { displayMessage } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
@@ -73,7 +73,7 @@ class FileDelete extends Component {
            });
        })
        .catch(error => {
-           displayError('GET of design names failed with message: \''+error.message+'\'');
+           displayMessage('GET of design names failed with message: \''+error.message+'\'');
        });
     }
     
@@ -97,7 +97,7 @@ class FileDelete extends Component {
             return res.json()
         })
         .catch(error => {
-            displayError('DELETE of \''+name+'\' design  \''+type+'\' design type failed with message: \''+error.message+'\'');
+            displayMessage('DELETE of \''+name+'\' design  \''+type+'\' design type failed with message: \''+error.message+'\'');
         });
     }
     
@@ -146,7 +146,7 @@ class FileDelete extends Component {
 //        console.log('In FileDelete.onDelete this.state.type=',this.state.type,' this.state.name=',this.state.name);
         // Validate name, and delete the database element
         if (this.state.name === '') {
-            displayError("Select design to delete.");
+            displayMessage("Select design to delete.");
             return;
         }
         this.setState({
