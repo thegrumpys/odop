@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { initialSystemControls } from '../initialSystemControls';
-import App from './App';
+import MainPage from './MainPage';
 import { changeUser, load, loadInitialState, deleteAutoSave } from '../store/actionCreators';
 import { displaySpinner } from './Spinner';
 import { displayMessage } from './ErrorModal';
@@ -254,7 +254,7 @@ class PromptForDesign extends Component {
             );
         } else {
             return (
-              <App />
+              <MainPage />
             );
         }
     }
