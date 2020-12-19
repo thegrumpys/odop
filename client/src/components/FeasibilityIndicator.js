@@ -3,10 +3,15 @@ import { Row, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class FeasibilityIndicator extends Component {
-    static defaultProps = { width: 230, height: 32 };
+    static defaultProps = { width: 238, height: 24 };
     
     render() {
 //        console.log('In FeasibilityIndicator.render this=', this);
+        // Coordinate system is 4th quadrant ---x-->
+        //                                   | 
+        //                                   y 
+        //                                   | 
+        //                                   V 
         const triangleWidth = 16;
         const triangleHeight = 16;
         const blackWidth = 4;
