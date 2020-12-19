@@ -101,16 +101,16 @@ class ViewCADModel extends Component {
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>
-                    CAD Model
+                    CAD Model (Pre-alpha)
                 </NavDropdown.Item>
                 <Modal show={this.state.modal} className={this.props.className} onHide={this.toggle} size="lg">
                     <Modal.Header>
                         <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : CAD Model
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : CAD Model (Pre-alpha)
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <iframe title="CADModel" id="pcomiframe" src={src} width="100%" height="720px" sandbox="allow-forms allow-scripts allow-same-origin allow-popups" referrerPolicy="origin-when-cross-origin"></iframe>
+                        <iframe title="CADModel" id="pcomiframe" src={src} width="100%" height="750px" sandbox="allow-forms allow-scripts allow-same-origin allow-popups" referrerPolicy="origin-when-cross-origin"></iframe>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
