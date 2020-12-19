@@ -3,10 +3,10 @@ import OktaSignIn from '@okta/okta-signin-widget/dist/js/okta-sign-in.min'
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import config from '../config';
 
-export default class FELogin extends Component {
+export default class SignInPageWidget extends Component {
   constructor(props) {
     super(props);
-//    console.log("In FELogin.constructor props=",props);
+//    console.log("In SignInPageWidget.constructor props=",props);
 
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //    console.log("config=",config);
@@ -85,7 +85,7 @@ export default class FELogin extends Component {
     }
 
   componentDidMount() {
-//    console.log('In FELogin.componentDidMount this.signIn=',this.signIn);
+//    console.log('In SignInPageWidget.componentDidMount this.signIn=',this.signIn);
     if (this.signIn != null) this.signIn.remove();
     this.signIn.renderEl(
       { el: '#sign-in-widget' },
@@ -94,21 +94,21 @@ export default class FELogin extends Component {
          * In this flow, the success handler will not be called beacuse we redirect
          * to the Okta org for the authentication workflow.
          */
-//          console.log('In FELogin.onLoginSuccess res=',res);
+//          console.log('In SignInPageWidget.onLoginSuccess res=',res);
       },
       (err) => {
-//        console.log('In FELogin.onLoginError err=',err);
+//        console.log('In SignInPageWidget.onLoginError err=',err);
         throw err;
       }
     );
   }
 
   componentWillUnmount() {
-//      console.log('In FELogin.componentWillUnmount this.signIn=',this.signIn);
+//      console.log('In SignInPageWidget.componentWillUnmount this.signIn=',this.signIn);
   }
 
   render() {
-//    console.log('In FELogin.render this=', this);
+//    console.log('In SignInPageWidget.render this=', this);
     return (
       <div>
         <div id="sign-in-widget" />
