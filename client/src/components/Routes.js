@@ -9,7 +9,7 @@ import { OktaAuth } from '@okta/okta-auth-js'
 import { connect } from 'react-redux';
 import { load, loadInitialState, restoreAutoSave, deleteAutoSave, changeName } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
-import { displayError } from './ErrorModal';
+import { displayMessage } from './ErrorModal';
 
 
 class Routes extends Component {
@@ -62,7 +62,7 @@ class Routes extends Component {
       this.props.restoreAutoSave();
       this.props.deleteAutoSave();
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load autoSave' });
-      displayError('Autosave file restored after interruption. Use FileSave, FileSaveAs or FileExport to save it permanently');
+      displayMessage('Autosave file restored after interruption. Use FileSave, FileSaveAs or FileExport to save it permanently');
   }
   
   loadInitialState(type, units) {

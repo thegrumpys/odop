@@ -42,7 +42,7 @@ import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
 import { withOktaAuth } from '@okta/okta-react';
 import { logUsage } from '../logUsage';
-import { changeUser } from '../store/actionCreators';
+import { changeUser, deleteAutoSave } from '../store/actionCreators';
 
 class MainPage extends Component {
     
@@ -203,6 +203,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+    changeUser: changeUser,
     deleteAutoSave: deleteAutoSave
 };
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavDropdown, Button, Modal, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { changeUser, deleteAutoSave } from '../../store/actionCreators';
+import { deleteAutoSave } from '../../store/actionCreators';
 import { displayMessage } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -184,7 +184,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    changeUser: changeUser,
     deleteAutoSave: deleteAutoSave
 };
 

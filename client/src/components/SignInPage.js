@@ -6,7 +6,7 @@ import { changeUser, saveAutoSave } from '../store/actionCreators';
 import config from '../config';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { displayError } from './ErrorModal';
+import { displayMessage } from './ErrorModal';
 
 class SignInPage extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class SignInPage extends Component {
 
   onError(err) {
 //    console.log('In SignInPage.onError this=',this,'err=',err);
-    displayError('Error logging in, Error: ' + err);
+    displayMessage('Error logging in, Error: ' + err);
     this.props.changeUser(null);
   }
 

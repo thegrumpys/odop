@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { changeUser } from '../../store/actionCreators';
 import { displayMessage } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -203,7 +202,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    changeUser: changeUser,
 };
 
 export default withRouter(withOktaAuth(
