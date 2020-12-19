@@ -9,7 +9,6 @@ import { changeSymbolConstraint,
     changeResultTerminationCondition,
     search,
     saveAutoSave } from '../../store/actionCreators';
-import { evaluateConstraintValue } from '../../store/middleware/evaluateConstraint';
 import { logUsage } from '../../logUsage';
 
 class ActionTrade extends Component {
@@ -152,10 +151,10 @@ class ActionTrade extends Component {
             let j = this.state.vflag[i];
             element = design.model.symbol_table[j];
             if (this.state.ldir[i] < 0) {
-                value = evaluateConstraintValue(design.model.symbol_table,element.lmin,element.cmin) + element.vmin * element.smin * this.state.ldir[i];
+                value = element.cmin + element.vmin * element.smin * this.state.ldir[i];
                 this.props.changeSymbolConstraint(element.name, MIN, value);
             } else {
-                value = evaluateConstraintValue(design.model.symbol_table,element.lmax,element.cmax) + element.vmax * element.smax * this.state.ldir[i];
+                value = element.cmax + element.vmax * element.smax * this.state.ldir[i];
                 this.props.changeSymbolConstraint(element.name, MAX, value);
             }
         }
@@ -246,9 +245,9 @@ class ActionTrade extends Component {
             let j = this.state.vflag[i];
             element = design.model.symbol_table[j];
             if (this.state.ldir[i] < 0)
-                tc[i] = evaluateConstraintValue(design.model.symbol_table,element.lmin,element.cmin);
+                tc[i] = element.cmin;
             else
-                tc[i] = evaluateConstraintValue(design.model.symbol_table,element.lmax,element.cmax);
+                tc[i] = element.cmax;
         }
         var rk1;
         var smallest;
@@ -391,10 +390,10 @@ class ActionTrade extends Component {
             let j = this.state.vflag[i];
             element = design.model.symbol_table[j];
             if (this.state.ldir[i] < 0) {
-                value = evaluateConstraintValue(design.model.symbol_table,element.lmin,element.cmin) + this.state.dir[i] * evaluateConstraintValue(design.model.symbol_table,element.lmin,element.cmin) * c3;
+                value = element.cmin + this.state.dir[i] * element.cmin * c3;
                 this.props.changeSymbolConstraint(element.name, MIN, value);
             } else {
-                value = evaluateConstraintValue(design.model.symbol_table,element.lmax,element.cmax) + this.state.dir[i] * evaluateConstraintValue(design.model.symbol_table,element.lmax,element.cmax) * c3;
+                value = element.cmax + this.state.dir[i] * element.cmax * c3;
                 this.props.changeSymbolConstraint(element.name, MAX, value);
             }
         }
@@ -833,9 +832,9 @@ class ActionTrade extends Component {
 //            let j = this.state.vflag[i];
 //            element = design.model.symbol_table[j];
 //            if (this.state.ldir[i] < 0) {
-//                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + evaluateConstraintValue(design.model.symbol_table,element.lmin,element.cmin) + ' ' + element.units);
+//                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
 //            } else {
-//                console.log(element.name + ' MAX ' + element.vmax * 100.0 + ' ' + evaluateConstraintValue(design.model.symbol_table,element.lmax,element.cmax) + ' ' + element.units);
+//                console.log(element.name + ' MAX ' + element.vmax * 100.0 + ' ' + element.cmax + ' ' + element.units);
 //            }
 //        }
 //    }
@@ -859,7 +858,7 @@ class ActionTrade extends Component {
                         design = store.getState();
                         element = design.model.symbol_table[j];
                         if (this.state.ldir[i] < 0) {
-//                                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + evaluateConstraintValue(design.model.symbol_table,element.lmax,element.cmin) + ' ' + element.units);
+//                                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
                             if (design.model.result.objective_value < design.model.system_controls.objmin) {
                                 constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-low-danger align-middle text-right' : 'text-right';
                             } else {
@@ -870,12 +869,12 @@ class ActionTrade extends Component {
                                         <Col className="align-middle text-left" xs="3">{element.name}</Col>
                                         <Col className="align-middle text-left" xs="1">MIN</Col>
                                         <Col className="align-middle text-right" xs="3">{(element.vmin * 100.0).toFixed(1)}%</Col>
-                                        <Col className={constraint_class} xs="3">{evaluateConstraintValue(design.model.symbol_table,element.lmin,element.cmin).toFixed(4)}</Col>
+                                        <Col className={constraint_class} xs="3">{element.cmin.toFixed(4)}</Col>
                                         <Col className="align-middle text-right" xs="2">{element.units}</Col>
                                     </Row>
                                 );
                         } else {
-//                                console.log(element.name + ' MAX ' + element.vmax * 100.0 + ' ' + evaluateConstraintValue(design.model.symbol_table,element.lmax,element.cmax) + ' ' + element.units);
+//                                console.log(element.name + ' MAX ' + element.vmax * 100.0 + ' ' + element.cmax + ' ' + element.units);
                             if (design.model.result.objective_value < design.model.system_controls.objmin) {
                                 constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-low-danger align-middle text-right' : 'text-right';
                             } else {
@@ -886,7 +885,7 @@ class ActionTrade extends Component {
                                         <Col className="align-middle text-left" xs="3">{element.name}</Col>
                                         <Col className="align-middle text-left" xs="1">MAX</Col>
                                         <Col className="align-middle text-right" xs="3">{(element.vmax * 100.0).toFixed(1)}%</Col>
-                                        <Col className={constraint_class} xs="3">{evaluateConstraintValue(design.model.symbol_table,element.lmax,element.cmax).toFixed(4)}</Col>
+                                        <Col className={constraint_class} xs="3">{element.cmax.toFixed(4)}</Col>
                                         <Col className="align-middle text-right" xs="2">{element.units}</Col>
                                     </Row>
                                 );
