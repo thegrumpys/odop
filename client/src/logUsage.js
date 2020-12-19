@@ -1,4 +1,4 @@
-import { displayError } from './components/ErrorModal';
+import { displayMessage } from './components/ErrorModal';
 
 export function logUsage(tag, action, note) {
     if (process.env.NODE_ENV === "production") { // Limit G.A. tracking to production
@@ -24,6 +24,6 @@ export function logUsage(tag, action, note) {
     })
     .catch(error => {
 //        console.log('error=',error);
-        displayError('POST of usage_log of note \''+note+'\' failed with message: \''+error.message+'\'');
+        displayMessage('POST of usage_log of note \''+note+'\' failed with message: \''+error.message+'\'');
     });
 }

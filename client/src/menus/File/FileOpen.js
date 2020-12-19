@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeUser, load, deleteAutoSave } from '../../store/actionCreators';
-import { displayError } from '../../components/ErrorModal';
+import { displayMessage } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withAuth } from '@okta/okta-react';
@@ -85,7 +85,7 @@ class FileOpen extends Component {
             })
         })
         .catch(error => {
-            displayError('GET of design names failed with message: \''+error.message+'\'');
+            displayMessage('GET of design names failed with message: \''+error.message+'\'');
         });
     }
 
@@ -113,11 +113,11 @@ class FileOpen extends Component {
                 this.props.deleteAutoSave();
                 logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
             } else {
-                displayError('Invalid JSON type, function ignored');
+                displayMessage('Invalid JSON type, function ignored');
             }
         })
         .catch(error => {
-            displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
+            displayMessage('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
         });
     }
 

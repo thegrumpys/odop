@@ -1,4 +1,4 @@
-import { displayError } from '../../../components/ErrorModal';
+import { displayMessage } from '../../../components/ErrorModal';
 import { initialState } from './initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
 import { FIXED } from '../../../store/actionTypes';
@@ -134,12 +134,12 @@ export function migrate(design) {
 
         break; // Do not copy this break
     default: // Unknown
-        displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
+        displayMessage('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
         migrated_design = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
         return migrated_design;
     }
     if (previous_version !== migrated_design.version) {
-        displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
+        displayMessage("Migrated design from version " + previous_version + " to version " + migrated_design.version,'info');
     }
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
