@@ -53,14 +53,16 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.render size_table=',size_table);
         const needle = this.props.element.value;
 //        console.log('In SymbolValueWireDia.render needle=',needle);
-        const default_value = size_table.find((element,index) => {
-            if (index > 0) {
-                if (element < needle) return false
-                else return true;
+        var default_value = size_table.find((element,index) => {
+            if (index > 0) { // skip the column header
+                if (element < needle) return false; // keep looking
+                else return true; // were done
             } else {
-                return false;
+                return false; // keep looking
             }
         });
+        if (default_value === undefined)
+            default_value = size_table[size_table.length-1]; // If not found then set to maximum in table
 //        console.log('In SymbolValueWireDia.render default_value=',default_value);
 
         var value_class = 'text-right ';
@@ -83,11 +85,17 @@ class SymbolValueWireDia extends Component {
             <React.Fragment>
                 <td className={"align-middle " + this.props.className}>
                     <InputGroup>
-                        <Form.Control as="select" disabled={!this.props.element.input} value={default_value[0]} onChange={this.onSelect}>
-                            {size_table.map((value, index) =>
-                                index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : ''
-                            )}
-                        </Form.Control>
+                        {(value_tooltip != undefined ?
+                            <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
+                                <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value[0]} onChange={this.onSelect}>
+                                    {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
+                                </Form.Control>
+                            </OverlayTrigger>
+                        :
+                            <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value[0]} onChange={this.onSelect}>
+                                {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
+                            </Form.Control>
+                        )}
                     </InputGroup>
                 </td>
             </React.Fragment>

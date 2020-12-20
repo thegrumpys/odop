@@ -37,6 +37,7 @@ export const dispatcher = store => next => action => {
     var design;
     var source;
     var sink;
+    var mask;
 
     const returnValue = next(action);
 
@@ -170,10 +171,15 @@ export const dispatcher = store => next => action => {
         updateViolationsAndObjectiveValue(store);
         break;
     case SET_SYMBOL_FLAG:
-        if (action.payload.mask & FDCL) {
-            design = store.getState();
+        design = store.getState();
+        sink = design.model.symbol_table.find(element => element.name === action.payload.name);
+        if (action.payload.minmax === MIN) {
+            mask = sink.lmin;
+        } else {
+            mask = sink.lmax;
+        }
+        if (!(mask & FDCL) && (action.payload.mask & FDCL)) {
             source = design.model.symbol_table.find(element => element.name === action.payload.source);
-            sink = design.model.symbol_table.find(element => element.name === action.payload.name);
             if (source.propagate === undefined) source.propagate = [];
             source.propagate.push({ name: sink.name, minmax: action.payload.minmax });
             if (action.payload.minmax === MIN) {
@@ -187,19 +193,24 @@ export const dispatcher = store => next => action => {
         updateViolationsAndObjectiveValue(store);
         break;
     case RESET_SYMBOL_FLAG:
-        if (action.payload.mask & FDCL) {
-            design = store.getState();
-            sink = design.model.symbol_table.find(element => element.name === action.payload.name);
+        design = store.getState();
+        sink = design.model.symbol_table.find(element => element.name === action.payload.name);
+        if (action.payload.minmax === MIN) {
+            mask = sink.lmin;
+        } else {
+            mask = sink.lmax;
+        }
+        if ((mask & FDCL) && (action.payload.mask & FDCL)) {
+//            console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
             if (action.payload.minmax === MIN) {
                 source = design.model.symbol_table.find(element => element.name === sink.cminchoices[sink.cminchoice]);
             } else {
                 source = design.model.symbol_table.find(element => element.name === sink.cmaxchoices[sink.cmaxchoice]);
             }
-//            console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
             if (source.propagate !== undefined) {
                 var index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
 //                console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate index=',index);
-                source.propagate.splice(index,1);
+                source.propagate.splice(index,1); // Delete 1 entry at offset index
 //                console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate source.propagate.length=',source.propagate.length);
                 if (source.propagate.length === 0) {
                     source.propagate = undefined; // De-reference the array

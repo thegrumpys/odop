@@ -6,6 +6,7 @@ import SymbolName from '../../../components/SymbolName';
 import SymbolValue from '../../../components/SymbolValue';
 import SymbolUnits from '../../../components/SymbolUnits';
 import SymbolValueWireDia from '../SymbolValueWireDia';
+import ValueName from '../../../components/ValueName';
 import Value from '../../../components/Value';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
@@ -90,18 +91,18 @@ export class Calculator extends ReportBase {
                         <thead>
                             <tr>
                                 <th></th>
-                                <td style={{textAlign: 'center'}}><b>Length</b><br />{this.props.symbol_table[o.L_Free].units}</td>
-                                <td style={{textAlign: 'center'}}><b>Deflect</b><br />{this.props.symbol_table[o.L_Free].units}</td>
-                                <td style={{textAlign: 'center'}}><b>Force</b><br />{this.props.symbol_table[o.Force_1].units}</td>
-                                <td style={{textAlign: 'center'}}><b>OD</b><br />{this.props.symbol_table[o.OD_Free].units}</td>
-                                <td style={{textAlign: 'center'}}><b>ID</b><br />{this.props.symbol_table[o.ID_Free].units}</td>
-                                <td style={{textAlign: 'center'}}><b>Stress</b><br />{this.props.symbol_table[o.Stress_1].units}</td>
-                                <td style={{textAlign: 'center'}}><b>Static FS</b><br />{this.props.symbol_table[o.FS_2].units}</td>
+                                <ValueName name={<><b>Length</b><br />{this.props.symbol_table[o.L_Free].units}</>} tooltip="Length at initial point, point 1, point 2 and maximum safe point" className="text-center" />
+                                <ValueName name={<><b>Deflect</b><br />{this.props.symbol_table[o.L_Free].units}</>} tooltip="Deflection at initial point, point 1, point 2 and maximum safe point" className="text-center" />
+                                <ValueName name={<><b>Force</b><br />{this.props.symbol_table[o.Force_1].units}</>} tooltip="Force at initial point, point 1, point 2 and maximum safe point" className="text-center" />
+                                <ValueName name={<><b>OD</b><br />{this.props.symbol_table[o.OD_Free].units}</>} tooltip="Outside Diameter at initial point, point 1, point 2 and maximum safe point" className="text-center" />
+                                <ValueName name={<><b>ID</b><br />{this.props.symbol_table[o.ID_Free].units}</>} tooltip="Inside Diameter at initial point, point 1, point 2 and maximum safe point" className="text-center" />
+                                <ValueName name={<><b>Stress</b><br />{this.props.symbol_table[o.Stress_1].units}</>} tooltip="Stress at initial point, point 1, point 2 and maximum safe point" className="text-center" />
+                                <ValueName name={<><b>Static FS</b><br />{this.props.symbol_table[o.FS_2].units}</>} tooltip="Static Factor of Safety at initial point, point 1, point 2 and maximum safe point" className="text-center" />
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><b>Initial</b></td>
+                                <ValueName name={<b>Initial</b>} tooltip="Initial tension point" />
                                 <SymbolValue element={this.props.symbol_table[o.L_Free]} index={o.L_Free} />
                                 <Value value={0.0} />
                                 <SymbolValue element={this.props.symbol_table[o.Initial_Tension]} index={o.Initial_Tension} />
@@ -111,7 +112,7 @@ export class Calculator extends ReportBase {
                                 <Value value={(this.props.symbol_table[o.Stress_Lim_Stat].value / this.props.symbol_table[o.Stress_Initial].value)} />
                             </tr>
                             <tr>
-                                <td><b>1</b></td>
+                                <ValueName name={<b>1</b>} tooltip="Tension point 1" />
                                 <SymbolValue element={this.props.symbol_table[o.L_1]} index={o.L_1} />
                                 <SymbolValue element={this.props.symbol_table[o.Deflect_1]} index={o.Deflect_1} />
                                 <SymbolValue element={this.props.symbol_table[o.Force_1]} index={o.Force_1} />
@@ -121,7 +122,7 @@ export class Calculator extends ReportBase {
                                 <Value value={this.fs_1} />
                             </tr>
                             <tr>
-                                <td><b>2</b></td>
+                                <ValueName name={<b>2</b>} tooltip="Tension point 2" />
                                 <SymbolValue element={this.props.symbol_table[o.L_2]} index={o.L_2} />
                                 <SymbolValue element={this.props.symbol_table[o.Deflect_2]} index={o.Deflect_2} />
                                 <SymbolValue element={this.props.symbol_table[o.Force_2]} index={o.Force_2} />
@@ -131,7 +132,7 @@ export class Calculator extends ReportBase {
                                 <SymbolValue element={this.props.symbol_table[o.FS_2]} index={o.FS_2} />
                             </tr>
                             <tr>
-                                <td><b>Max Safe</b></td>
+                                <ValueName name={<b>Max Safe</b>} tooltip="Maximum safe tension point" />
                                 <Value value={(this.props.symbol_table[o.L_Free].value + this.safe_travel)} />
                                 <Value value={this.safe_travel} />
                                 <Value value={this.safe_load} />
@@ -148,12 +149,12 @@ export class Calculator extends ReportBase {
                     <table className="report-table">
                         <tbody>
                             <tr>
-                                <td>Safe Load</td>
+                                <ValueName name="Safe Load" tooltip="Safe Load is how far a spring can go safely without suffering damage"/>
                                 <td>=</td>
                                 <Value value={this.safe_load} />
                                 <td className="text-left">{this.safe_load_u}</td>
                                 <td> &nbsp; &nbsp; </td>
-                                <td>{this.len_lbl}</td>
+                                <ValueName name={this.len_lbl} tooltip={this.len_lbl + " is the length of wire to form the spring"}/>
                                 <td>=</td>
                                 <Value value={this.wire_len_t} />
                                 <SymbolUnits element={this.props.symbol_table[o.L_Free]} index={o.L_Free} className="text-left" />
