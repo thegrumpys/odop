@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
-import { displayError } from '../../components/ErrorModal';
+import { displayMessage } from '../../components/ErrorModal';
 
 class ActionSeek extends Component {
 
@@ -27,7 +27,7 @@ class ActionSeek extends Component {
     toggle() {
 //        console.log('In ActionSeek.toggle this=',this);
         if(this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayError('No free independent variables');
+            displayMessage('No free independent variables','warning');
         } else {
             var result = this.props.symbol_table.find( // Find free variable matching the current variable name
                 (element) => this.state.name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)

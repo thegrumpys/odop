@@ -41,10 +41,10 @@ import HelpAbout from '../menus/Help/HelpAbout';
 import { withAuth } from '@okta/okta-react';
 import { logUsage } from '../logUsage';
 
-class App extends Component {
+class MainPage extends Component {
     
     constructor(props) {
-//        console.log("In App.constructor props=",props);
+//        console.log("In MainPage.constructor props=",props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.setKey = this.setKey.bind(this);
@@ -55,21 +55,21 @@ class App extends Component {
     }
     
     componentDidUpdate(prevProps) {
-//        console.log('In App.componentDidUpdate this=',this,'prevProps=',prevProps);
+//        console.log('In MainPage.componentDidUpdate this=',this,'prevProps=',prevProps);
         if (prevProps.type !== this.props.type) {
-//            console.log('In App.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+//            console.log('In MainPage.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         }
     }
 
     toggle() {
-//        console.log('In App.toggle');
+//        console.log('In MainPage.toggle');
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
     
     setKey(tab) {
-//        console.log('In App.setKey tab=',tab);
+//        console.log('In MainPage.setKey tab=',tab);
         logUsage('event', 'Tab', { 'event_label': tab });
         if (this.state.activeTab !== tab) {
             this.setState({
@@ -79,10 +79,10 @@ class App extends Component {
     }
     
     render() {
-//        console.log('In App.render this=', this);
+//        console.log('In MainPage.render this=', this);
         var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
-        var report_names = getReportNames(); // Get them in App render because they are now React Components
-//      console.log('In App.constructor report_names=', report_names);
+        var report_names = getReportNames(); // Get them in MainPage render because they are now React Components
+//      console.log('In MainPage.constructor report_names=', report_names);
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
         var alt = this.props.type+' icon';
 //        console.log('src=',src,' alt=',alt);
@@ -193,5 +193,5 @@ export default withAuth(
     connect(
         mapStateToProps,
         mapDispatchToProps
-    )(App)
+    )(MainPage)
 );

@@ -23,6 +23,19 @@ export var startExecute = function(prefix,steps) {
     }
 }
 
+export var stopExecute = function() {
+//    console.log('In stopExecute this=',this,'prefix=',prefix,'steps=',steps);
+    var design = this.state.store.getState();
+    this.setState({
+        modal: false, // Default: do not display
+        prefix: '',
+        steps: null,
+        step: 0,
+        title: '',
+        text: '',  // Default: no text
+    });
+}
+
 class ExecutePanel extends Component {
     constructor(props) {
         super(props);
@@ -31,6 +44,7 @@ class ExecutePanel extends Component {
         this.onBack = this.onBack.bind(this);
         this.onCancel = this.onCancel.bind(this);
         startExecute = startExecute.bind(this); // Bind external function - no 'this'
+        stopExecute = stopExecute.bind(this); // Bind external function - no 'this'
         this.state = {
             modal: false, // Default: do not display
             prefix: '',
@@ -60,7 +74,7 @@ class ExecutePanel extends Component {
             steps: null,
             step: 0,
             title: '',
-            text: ''
+            text: '',
         });
     }
 

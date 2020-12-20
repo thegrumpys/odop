@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'
 import { initialSystemControls } from '../initialSystemControls';
-import App from './App';
+import MainPage from './MainPage';
 import { changeUser, load, loadInitialState, deleteAutoSave } from '../store/actionCreators';
 import { displaySpinner } from './Spinner';
-import { displayError } from './ErrorModal';
+import { displayMessage } from './ErrorModal';
 import { reducers } from '../store/reducers';
 import { dispatcher } from '../store/middleware/dispatcher';
 import { logUsage } from '../logUsage';
@@ -93,7 +93,7 @@ class PromptForDesign extends Component {
             this.setState({
                 modal: !this.state.modal
             });
-            displayError('GET of design names for design types failed with message: \''+error.message+'\'. Using builtin initial state instead. You may continue in "demo mode" but you will be unable to save your work.');
+            displayMessage('GET of design names for design types failed with message: \''+error.message+'\'. Using builtin initial state instead. You may continue in "demo mode" but you will be unable to save your work.');
             this.loadInitialState(this.state.type);
         });
     }
@@ -123,11 +123,11 @@ class PromptForDesign extends Component {
                 this.props.deleteAutoSave();
                 logUsage('event', 'PromptForDesign', { 'event_label': type + ' ' + name });
             } else {
-                displayError('Invalid JSON type, function ignored');
+                displayMessage('Invalid JSON type, function ignored');
             }
         })
         .catch(error => {
-            displayError('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
+            displayMessage('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
             this.loadInitialState(type);
         });
     }
@@ -254,7 +254,7 @@ class PromptForDesign extends Component {
             );
         } else {
             return (
-              <App />
+              <MainPage />
             );
         }
     }

@@ -3,7 +3,6 @@ import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form }
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
-import { evaluateConstraintName, evaluateConstraintValue } from '../store/middleware/evaluateConstraint';
 
 class ConstraintMinRowIndependentVariable extends Component {
     
@@ -38,25 +37,25 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
     
     onClick(event) {
-//        console.log("In onClick event=",event);
+//        console.log("In ConstraintMinRowIndependentVariable.onClick event=",event);
         // Show modal only if there are cminchoices
         if (this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0) {
             this.setState({
                 modal: !this.state.modal,
-                value: this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : 0
+                value: this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : 0
             });
         }
     }
     
     onChangeValue(event) {
-//        console.log("In onChangeValue event=",event);
+//        console.log("In ConstraintMinRowIndependentVariable.onChangeValue event=",event);
         this.setState({
             value: event.target.value
         });
     }
     
     onEnterValue(event) {
-//        console.log("In onEnterValue event=",event);
+//        console.log("In ConstraintMinRowIndependentVariable.onEnterValue event=",event);
         this.setState({
             modal: !this.state.modal
         });
@@ -69,30 +68,15 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
       
     onSelectVariable(event, name) {
-//        console.log("In onSelectVariable event=",event," name=",name);
+//        console.log("In ConstraintMinRowIndependentVariable.onSelectVariable event=",event," name=",name);
         this.setState({
             modal: !this.state.modal
         });
-        this.props.setSymbolFlag(this.props.element.name, MIN, FDCL);
-        this.props.symbol_table.forEach((element, i) => {
-            if (element.name === name) {
-//                console.log('In onSelectVariable element=',element,' i=',i);
-                this.props.changeSymbolConstraint(this.props.element.name, MIN, i);
-            }
-        })
-        if (this.props.element.lmin & FIXED) {
-            this.props.setSymbolFlag(this.props.element.name, MAX, FDCL);
-            this.props.symbol_table.forEach((element, i) => {
-                if (element.name === name) {
-//                    console.log('In onSelectVariable element=',element,' i=',i);
-                    this.props.changeSymbolConstraint(this.props.element.name, MAX, i);
-                }
-            })
-        }
+        this.props.setSymbolFlag(this.props.element.name, MIN, FDCL, name);
     }
     
     onCancel(event) {
-//        console.log("In onCancel event=",event);
+//        console.log("In ConstraintMinRowIndependentVariable.onCancel event=",event);
         this.setState({
             modal: !this.state.modal
         });
@@ -134,11 +118,11 @@ class ConstraintMinRowIndependentVariable extends Component {
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
                             {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ?
-                                <OverlayTrigger placement="top" overlay={<Tooltip>FDCL ={evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin)}</Tooltip>}>
-                                    <Form.Control type="number" id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} onClick={this.onClick}/>
+                                <OverlayTrigger placement="top" overlay={<Tooltip>FDCL ={this.props.element.lmin & FDCL ? this.props.element.cminchoices[this.props.element.cminchoice] : this.props.element.cmin}</Tooltip>}>
+                                    <Form.Control type="number" id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} onClick={this.onClick}/>
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.lmin & CONSTRAINED ? evaluateConstraintValue(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} onClick={this.onClick}/>
+                                <Form.Control type="number" id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : ''} onChange={this.onChangeIndependentVariableConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} onClick={this.onClick}/>
                             }
                         </InputGroup>
                         {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg" onHide={this.onCancel}>
@@ -155,7 +139,7 @@ class ConstraintMinRowIndependentVariable extends Component {
                                                 <InputGroup>
                                                     <ButtonGroup>
                                                         {this.props.element.cminchoices.map((e) => {return (
-                                                            <Button key={e} variant="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={evaluateConstraintName(this.props.symbol_table,this.props.element.lmin,this.props.element.cmin) === e}>{e}</Button>
+                                                            <Button key={e} variant="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={this.props.element.cminchoices[this.props.element.cminchoice] === e}>{e}</Button>
                                                         );})}
                                                     </ButtonGroup>
                                                 </InputGroup>
@@ -188,7 +172,6 @@ class ConstraintMinRowIndependentVariable extends Component {
 }
 
 const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value
 });

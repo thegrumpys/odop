@@ -1,7 +1,7 @@
-import { displayError } from '../../../components/ErrorModal';
+import { displayMessage } from '../../../components/ErrorModal';
 import { initialState } from './initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
-import { FIXED } from '../../../store/actionTypes';
+import { MIN, MAX, FIXED, FDCL } from '../../../store/actionTypes';
 
 export function migrate(design) {
     /*
@@ -150,6 +150,29 @@ export function migrate(design) {
             design['units'] = "Metric";
         }
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
+//            console.log('In migrate.propgate element=',element);
+            if (element.lmin & FDCL) {
+//                console.log('In migrate.propgate element.lmin&FDCL=',element.lmin&FDCL);
+                var source = design.symbol_table[element.cmin];
+                var sink = element;
+//                console.log('In migrate.propgate source=',source,'sink=',sink);
+                if (source.propagate === undefined) source.propagate = [];
+                source.propagate.push({ name: sink.name, minmax: MIN });
+//                console.log('In migrate.propgate sink.name=',sink.name,'MIN','source.propagate=',source.propagate);
+                sink.cminchoice = sink.cminchoices.indexOf(source.name);
+//                console.log('In migrate.propgate source.name=',source.name,'sink.cminchoices=',sink.cminchoices,'sink.cminchoice=',sink.cminchoice);
+            }
+            if (element.lmax & FDCL) {
+//                console.log('In migrate.propgate element.lmax&FDCL=',element.lmax&FDCL);
+                var source = design.symbol_table[element.cmax];
+                var sink = element;
+//                console.log('In migrate.propgate source=',source,'sink=',sink);
+                if (source.propagate === undefined) source.propagate = [];
+                source.propagate.push({ name: sink.name, minmax: MAX });
+//                console.log('In migrate.propgate sink.name=',sink.name,'MAX','source.propagate=',source.propagate);
+                sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
+//                console.log('In migrate.propgate source.name=',source.name,'sink.cmaxchoices=',sink.cmaxchoices,'sink.cmaxchoice=',sink.cmaxchoice);
+            }
             if (element.lmin & FIXED || element.lmax & FIXED) { // If one is FIXED
                 element.lmin |= FIXED; // Set them both fixed because they are paired
                 element.lmax |= FIXED;
@@ -201,12 +224,12 @@ export function migrate(design) {
 
         break; // Do not copy this break
     default: // Unknown
-        displayError('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
+        displayMessage('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
         migrated_design = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
         return migrated_design;
     }
     if (previous_version !== migrated_design.version) {
-        displayError("Migrated design from version " + previous_version + " to version " + migrated_design.version);
+        displayMessage("Migrated design from version " + previous_version + " to version " + migrated_design.version,'info');
     }
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */

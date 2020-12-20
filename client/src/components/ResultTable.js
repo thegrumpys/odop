@@ -35,16 +35,16 @@ class ResultTable extends Component {
                     <tbody>
                         <tr>
                             <th width="33%" id="Feasibility">
-                                <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: many constraints violated; MARGINALLY FEASIBLE: constraints slightly violated; FEASIBLE: no constraints violated</Tooltip>}>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: many constraints violated; APPROACHING FEASIBLE: some constraints violated; FEASIBLE: constraints slightly violated; STRICTLY FEASIBLE: no constraints violated</Tooltip>}>
                                     <span>Feasibility</span>
                                 </OverlayTrigger>
                             </th>
                             <td width="67%" className={feasibility_class + " text-left"}>{feasibility_string}</td>
                         </tr>
                         <tr>
-                            <th width="33%" id="TerminationCondition">
+                            <th width="33%" id="Message">
                                 <OverlayTrigger placement="top" overlay={<Tooltip>Status feedback message from solution process</Tooltip>}>
-                                    <span>Termination Message:</span>
+                                    <span>Message:</span>
                                 </OverlayTrigger>
                             </th>
                             <td width="67%" className="text-left">{this.props.termination_condition}</td>
