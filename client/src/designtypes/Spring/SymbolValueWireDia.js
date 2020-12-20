@@ -84,11 +84,17 @@ class SymbolValueWireDia extends Component {
             <React.Fragment>
                 <td className={"align-middle " + this.props.className}>
                     <InputGroup>
-                        <Form.Control as="select" disabled={!this.props.element.input} value={default_value[0]} onChange={this.onSelect}>
-                            {size_table.map((value, index) =>
-                                index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : ''
-                            )}
-                        </Form.Control>
+                        {(value_tooltip != undefined ?
+                            <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
+                                <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value[0]} onChange={this.onSelect}>
+                                    {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
+                                </Form.Control>
+                            </OverlayTrigger>
+                        :
+                            <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value[0]} onChange={this.onSelect}>
+                                {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
+                            </Form.Control>
+                        )}
                     </InputGroup>
                 </td>
             </React.Fragment>
