@@ -23,7 +23,7 @@ class HelpAbout extends Component {
     }
 
     render() {
-//        console.log('In HelpAbout.render this=', this);
+        console.log('In HelpAbout.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>
@@ -37,23 +37,26 @@ class HelpAbout extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         Link to <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">About</a> topics
-                        <br/> 
+                        <br/>
                         Link to <a href="https://www.springdesignsoftware.org/" target="_blank" rel="noopener noreferrer">website</a> home page
                         <hr/>
-                        This is <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank" rel="noopener noreferrer">Open Source </a> software.  
-                        <br/> 
-                        About <a href="https://en.wikipedia.org/wiki/MIT_License" target="_blank" rel="noopener noreferrer">MIT License</a> 
-                        &nbsp; &nbsp; &nbsp; &nbsp; 
-                        <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">ODOP License</a> 
+                        This is <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank" rel="noopener noreferrer">Open Source </a> software.
+                        <br/>
+                        About <a href="https://en.wikipedia.org/wiki/MIT_License" target="_blank" rel="noopener noreferrer">MIT License</a>
+                        &nbsp; &nbsp; &nbsp; &nbsp;
+                        <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">ODOP License</a>
                         <hr/>
-                        ODOP software version: {version()} 
-                        <br />
-                        {process.env.NODE_ENV !== "production" && 
-                        <React.Fragment>
-                            Authenticated: {this.props.authState.isAuthenticated ? 'true' : 'false'}, User: {this.props.user === null ? 'Not Signed In' : this.props.user} 
-                            <br />
-                        </React.Fragment>}
-                        Model: {this.props.jsontype} {this.props.type}, Units: {this.props.units}, Version: {this.props.version}
+                        ODOP Software Version: {version()}<br />
+                        {process.env.NODE_ENV !== "production" &&
+                            <>
+                                User Authenticated: {this.props.authState.isAuthenticated ? 'true' : 'false'}<br />
+                                User Email: {this.props.authState.isAuthenticated ? this.props.authState.idToken.claims.email : 'Unknown'}<br />
+                                User ClientId: {this.props.user === null ? 'Not Signed In' : this.props.user}<br />
+                            </>
+                        }
+                        Model: {this.props.jsontype} {this.props.type}<br />
+                        Model Units: {this.props.units}<br />
+                        Model Version: {this.props.version}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
@@ -62,11 +65,11 @@ class HelpAbout extends Component {
             </React.Fragment>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
-    user: state.user, 
-    type: state.model.type, 
+    user: state.user,
+    type: state.model.type,
     version: state.model.version,
     jsontype: state.model.jsontype,
     units: state.model.units,
