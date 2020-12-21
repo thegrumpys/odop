@@ -10,7 +10,8 @@ import { connect } from 'react-redux';
 import { load, loadInitialState, restoreAutoSave, deleteAutoSave, changeName } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
 import { displayMessage } from './ErrorModal';
-
+import queryString from 'query-string';
+import { displaySpinner } from './Spinner';
 
 class Routes extends Component {
 
@@ -20,6 +21,7 @@ class Routes extends Component {
     this.loadRedirect = this.loadRedirect.bind(this);
     this.loadAutoSave = this.loadAutoSave.bind(this);
     this.loadInitialState = this.loadInitialState.bind(this);
+    this.getDesign = this.getDesign.bind(this);
     this.onAuthRequired = this.onAuthRequired.bind(this);
   }
 
@@ -32,8 +34,16 @@ class Routes extends Component {
 //          console.log('In Routes.componentDidMount restore "autosave" file')
           this.loadAutoSave();
       } else {
-//          console.log('In Routes.componentDidMount load initial state');
-          this.loadInitialState(config.design.type,config.design.units);
+          var { type, name } = queryString.parse(location.search);
+          if (type !== undefined || name !== undefined) {
+              type = type !== undefined ? type : config.design.type;
+              name = name !== undefined ? name : config.design.name;
+//            console.log('In Routes.componentDidMount getDesign type=',type,'name=',name);
+              this.getDesign(type, name);
+          } else {
+//            console.log('In Routes.componentDidMount loadInitialState config.design.type=',config.design.type','config.design.units=',config.design.units);
+              this.loadInitialState(config.design.type,config.design.units);
+          }
       }
   }
   
@@ -73,6 +83,38 @@ class Routes extends Component {
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load initialState ' + units});
   }
   
+  getDesign(type, name) {
+//      console.log('In FileOpen.getDesign type=', type, ' name=', name);
+      displaySpinner(true);
+      fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
+          headers: {
+              Authorization: 'Bearer ' + this.props.user
+          }
+      })
+      .then(res => {
+          displaySpinner(false);
+          if (!res.ok) {
+              throw Error(res.statusText);
+          }
+          return res.json()
+      })
+      .then((design) => {
+//          console.log('In FileOpen.getDesign design=', design);
+          var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
+          var migrated_design = migrate(design);
+          if (migrated_design.jsontype === "ODOP") {
+              this.props.load({name: name, model: migrated_design});
+              this.props.deleteAutoSave();
+              logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
+          } else {
+              displayMessage('Invalid JSON type, function ignored');
+          }
+      })
+      .catch(error => {
+          displayMessage('GET of \''+name+'\' design failed with message: \''+error.message+'\'');
+      });
+  }
+
   onAuthRequired() {
 //    console.log('In Routes.onAuthRequired this=',this);
     this.props.history.push('/login')
