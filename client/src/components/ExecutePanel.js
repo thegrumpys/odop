@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 export var startExecute = function(prefix,steps) {
 //    console.log('In startExecute this=',this,'prefix=',prefix,'steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
-        var design = this.state.store.getState();
+        const { store } = this.context;
+        var design = store.getState();
         this.setState({
             modal: true, // Default: do display
             prefix: prefix,
@@ -18,14 +19,15 @@ export var startExecute = function(prefix,steps) {
             text: steps[0].text, // Default: first text
         });
         if (steps[0].actions !== undefined) {
-            steps[0].actions.forEach((action) => { this.state.store.dispatch(action); })
+            steps[0].actions.forEach((action) => { store.dispatch(action); })
         }
     }
 }
 
 export var stopExecute = function() {
-//    console.log('In stopExecute this=',this,'prefix=',prefix,'steps=',steps);
-    var design = this.state.store.getState();
+//    console.log('In stopExecute this=',this);
+    const { store } = this.context;
+    var design = store.getState();
     this.setState({
         modal: false, // Default: do not display
         prefix: '',
@@ -37,6 +39,7 @@ export var stopExecute = function() {
 }
 
 class ExecutePanel extends Component {
+
     constructor(props) {
         super(props);
 //        console.log('In ExecutePanel constructor props=',props);
@@ -56,18 +59,15 @@ class ExecutePanel extends Component {
     }
     
     componentDidMount() {
-//        console.log('In ExecutePanel componentDidMount this.context=',this.context);
-        this.setState({
-            store: this.context.store
-        });
+//        console.log('In ExecutePanel componentDidMount this=',this);
     }
 
     componentWillUnmount() {
-//        console.log('In ExecutePanel componentDidMount this.context=',this.context);
+//        console.log('In ExecutePanel componentWillUnmount this=',this);
     }
     
     onCancel() {
-//        console.log('In ExecutePanel onCancel');
+//        console.log('In ExecutePanel onCancel this=',this);
         this.setState({
             modal: !this.state.modal,
             prefix: '',
@@ -79,10 +79,11 @@ class ExecutePanel extends Component {
     }
 
     onNext() {
-//        console.log('In ExecutePanel onNext steps=',this.state.steps);
+//        console.log('In ExecutePanel onNext this=',this);
         var next = this.state.step+1;
         if (this.state.steps[next] !== undefined) {
-            var design = this.state.store.getState();
+            const { store } = this.context;
+            var design = store.getState();
             this.setState({
                 // Put current store state into steps[next].state - remember this for "back" time travel
                 steps: Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: design.model})}),
@@ -91,7 +92,7 @@ class ExecutePanel extends Component {
                 text: this.state.steps[next].text
             });
             if (this.state.steps[next].actions !== undefined) {
-                this.state.steps[next].actions.forEach((action) => { this.state.store.dispatch(action); })
+                this.state.steps[next].actions.forEach((action) => { store.dispatch(action); })
             }
        } else {
             this.setState({
@@ -106,23 +107,24 @@ class ExecutePanel extends Component {
     }
 
     onBack() {
-//        console.log('In ExecutePanel onBack steps=',this.state.steps);
+//        console.log('In ExecutePanel onBack this=',this);
         var prev = this.state.step-1;
         if (prev < 0) prev = 0; // Stop going backwards if it is on the first step
         // Put steps[prev].state into current store state - that is, time travel back
-        this.state.store.dispatch(load(this.state.steps[prev].state));
+        const { store } = this.context;
+        store.dispatch(load(this.state.steps[prev].state));
         this.setState({
             step: prev,
             title: this.state.steps[prev].title,
             text: this.state.steps[prev].text
         });
         if (this.state.steps[prev].actions !== undefined) {
-            this.state.steps[prev].actions.forEach((action) => { this.state.store.dispatch(action); })
+            this.state.steps[prev].actions.forEach((action) => { store.dispatch(action); })
         }
     }
     
     render() {
-//        console.log('In ExecutePanel.render this=', this);
+//        console.log('In ExecutePanel.render this=',this);
         return this.state.modal && (
             <Alert variant="success" style={{marginTop: '10px'}}>
                 <Container>
