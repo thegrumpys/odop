@@ -43,6 +43,8 @@ import HelpAbout from '../menus/Help/HelpAbout';
 import { withOktaAuth } from '@okta/okta-react';
 import { logUsage } from '../logUsage';
 import { changeUser, deleteAutoSave } from '../store/actionCreators';
+import config from '../config';
+import queryString from 'query-string';
 
 class MainPage extends Component {
     
@@ -51,9 +53,10 @@ class MainPage extends Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.setKey = this.setKey.bind(this);
+        const { view } = queryString.parse(location.search);
         this.state = {
             isOpen: false,
-            activeTab: "View0",
+            activeTab: view !== undefined ? view : config.design.view,
         };
     }
     

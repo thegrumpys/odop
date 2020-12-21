@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost?
   design_type = process.env.REACT_APP_DESIGN_TYPE || 'Spring/Compression';
   design_name = process.env.REACT_APP_DESIGN_NAME || 'Startup';
   design_units = process.env.REACT_APP_DESIGN_UNITS || 'US';
-  design_view = process.env.REACT_APP_DESIGN_VIEW || 'Design';
+  design_view = process.env.REACT_APP_DESIGN_VIEW || 'View0';
   session_refresh = process.env.REACT_APP_SESSION_REFRESH || 3600;
 } else { // We are running on Heroku
   const env = runtimeEnv(); // Load the env object.
@@ -31,9 +31,18 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost?
   design_type = env.REACT_APP_DESIGN_TYPE || 'Spring/Compression';
   design_name = env.REACT_APP_DESIGN_NAME || 'Startup';
   design_units = env.REACT_APP_DESIGN_UNITS || 'US';
-  design_view = env.REACT_APP_DESIGN_VIEW || 'Design';
+  design_view = env.REACT_APP_DESIGN_VIEW || 'View0';
   session_refresh = env.REACT_APP_SESSION_REFRESH || 3600;
 }
+
+console.log('issuer=',issuer);
+console.log('clientId=',clientId);
+console.log('design_types=',design_types);
+console.log('design_type=',design_type);
+console.log('design_name=',design_name);
+console.log('design_units=',design_units);
+console.log('design_view=',design_view);
+console.log('session_refresh=',session_refresh);
 
 export default {
   oidc: {
