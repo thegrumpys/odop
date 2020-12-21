@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import config from '../config';
+import { withOktaAuth } from '@okta/okta-react';
 
-export default class SignInPageWidget extends Component {
+export default withOktaAuth(class SignInPageWidget extends Component {
   componentDidMount() {
 //    console.log('In SignInPageWidget.componentDidMount this=',this);
     const el = ReactDOM.findDOMNode(this);
@@ -82,7 +83,16 @@ export default class SignInPageWidget extends Component {
       }
 
     });
-    this.widget.renderEl({el}, this.props.onSuccess, this.props.onError);
+    this.widget.showSignInToGetTokens({
+        el: el,
+        scopes,
+      }).then((tokens) => {
+        // Add tokens to storage
+        this.props.oktaAuth.handleLoginRedirect(tokens);
+      }).catch((err) => {
+        throw err;
+      });
+
   }
 
   componentWillUnmount() {
@@ -94,4 +104,4 @@ export default class SignInPageWidget extends Component {
 //    console.log('In SignInPageWidget.render this=',this);
     return <div />;
   }
-}
+});
