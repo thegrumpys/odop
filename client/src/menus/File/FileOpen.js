@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { load, deleteAutoSave } from '../../store/actionCreators';
+import { loadInitialState, load, restoreAutoSave, deleteAutoSave } from '../../store/actionCreators';
 import { displayMessage } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -15,6 +15,9 @@ class FileOpen extends Component {
         super(props);
 //        console.log("In FileOpen .constructor props=",props);
         this.toggle = this.toggle.bind(this);
+        this.onLoadInitialState = this.onLoadInitialState.bind(this);
+        this.onLoadMetricInitialState = this.onLoadMetricInitialState.bind(this);
+        this.onLoadAutoSave = this.onLoadAutoSave.bind(this);
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
         this.onSignIn = this.onSignIn.bind(this);
@@ -37,7 +40,7 @@ class FileOpen extends Component {
 //      console.log('In FileOpen.componentDidUpdate');
       if (prevProps.type !== this.props.type) {
 //          console.log('In FileOpen.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-          this.setState({ 
+          this.setState({
               type: this.props.type
           });
           this.getDesignNames(this.props.type);
@@ -134,11 +137,49 @@ class FileOpen extends Component {
     }
 
     onSignIn() {
-//      console.log('In FileOpen.onSignIn');
-      this.setState({
-          modal: !this.state.modal
-      });
-      this.props.history.push('/login');
+//        console.log('In FileOpen.onSignIn');
+        this.setState({
+            modal: !this.state.modal
+        });
+        this.props.history.push('/login');
+    }
+
+    onLoadInitialState() {
+//        console.log('In FileOpen.onLoadInitialState this.state.type=',this.state.type);
+        this.setState({
+            modal: !this.state.modal
+        });
+        this.props.loadInitialState(this.state.type, 'US');
+        this.props.deleteAutoSave();
+        logUsage('event', 'FileOpen', { 'event_label': this.state.type + ' load initialState ' + 'US'});
+    }
+
+    onLoadMetricInitialState() {
+//        console.log('In FileOpen.onLoadMetricInitialState this.state.type=',this.state.type);
+        this.setState({
+            modal: !this.state.modal
+        });
+        this.props.loadInitialState(this.state.type, 'Metric');
+        this.props.deleteAutoSave();
+        logUsage('event', 'FileOpen', { 'event_label': this.state.type + ' load initialState ' + 'Metric'});
+    }
+
+    onLoadAutoSave() {
+//        console.log('In FileOpen.onLoadAutoSave');
+       this.setState({
+            modal: !this.state.modal
+        });
+       this.props.restoreAutoSave();
+       this.props.deleteAutoSave();
+       logUsage('event', 'FileOpen', { 'event_label': this.state.type + ' load autoSave' });
+    }
+
+    onCancel() {
+//        console.log('In FileOpen.onCancel');
+        this.setState({
+            modal: !this.state.modal
+        });
+        // Noop - all done
     }
 
     onOpen() {
@@ -148,14 +189,6 @@ class FileOpen extends Component {
         });
         // Load the model
         this.getDesign(this.state.type,this.state.name);
-    }
-
-    onCancel() {
-//        console.log('In FileOpen.onCancel');
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Noop - all done
     }
 
     render() {
@@ -190,6 +223,9 @@ class FileOpen extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         {!this.props.authState.isAuthenticated && <Button variant="info" onClick={this.onSignIn}>Sign In...</Button>}{' '}
+                        {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
+                        {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadMetricInitialState}>Load Metric Initial State</Button>}{' '}
+                        {typeof(Storage) !== "undefined" && localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={this.onLoadAutoSave}>Load Auto Save</Button>}{' '}
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button variant="primary" onClick={this.onOpen}>Open</Button>
                     </Modal.Footer>
@@ -206,7 +242,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+    loadInitialState: loadInitialState,
     load: load,
+    restoreAutoSave: restoreAutoSave,
     deleteAutoSave: deleteAutoSave
 };
 
