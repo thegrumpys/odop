@@ -23,7 +23,7 @@ class HelpAbout extends Component {
     }
 
     render() {
-        console.log('In HelpAbout.render this=', this);
+//        console.log('In HelpAbout.render this=', this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

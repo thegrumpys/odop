@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom';
 import OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import config from '../config';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { withOktaAuth } from '@okta/okta-react';
+import { changeUser, saveAutoSave } from '../store/actionCreators';
 
-export default withOktaAuth(class SignInPageWidget extends Component {
+class SignInPageWidget extends Component {
   componentDidMount() {
 //    console.log('In SignInPageWidget.componentDidMount this=',this);
     const el = ReactDOM.findDOMNode(this);
@@ -88,6 +91,10 @@ export default withOktaAuth(class SignInPageWidget extends Component {
         scopes,
       }).then((tokens) => {
         // Add tokens to storage
+//        console.log('In SignInPageWidget.showSignInToGetTokens this=',this,'tokens=',tokens);
+        var user = tokens.idToken.clientId;
+        this.props.changeUser(user);
+        this.props.saveAutoSave("redirect");
         this.props.oktaAuth.handleLoginRedirect(tokens);
       }).catch((err) => {
         throw err;
@@ -104,4 +111,21 @@ export default withOktaAuth(class SignInPageWidget extends Component {
 //    console.log('In SignInPageWidget.render this=',this);
     return <div />;
   }
+}
+
+const mapStateToProps = state => ({
+    user: state.user,
 });
+
+const mapDispatchToProps = {
+    changeUser: changeUser,
+    saveAutoSave: saveAutoSave,
+};
+
+export default withRouter(withOktaAuth(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(SignInPageWidget)
+));
+
