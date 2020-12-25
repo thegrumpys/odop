@@ -28,7 +28,7 @@ class NameValueUnitsTable extends Component {
                             </th>
                             <th className="text-center" colSpan="2" id="ValueTitle">
                                 <OverlayTrigger placement="top" overlay={<Tooltip>Current values.<br />(Checkbox at right to FIX. Unchecked to FREE)</Tooltip>}>
-                                    <span>Value (&nbsp;<i class="far fa-check-square"></i>&nbsp;Fix&nbsp;-&nbsp;<i class="far fa-square"></i>&nbsp;Free&nbsp;)</span>
+                                    <span>Value (&nbsp;<i className="far fa-check-square"></i>&nbsp;Fix&nbsp;-&nbsp;<i className="far fa-square"></i>&nbsp;Free&nbsp;)</span>
                                 </OverlayTrigger>
                             </th>
                             <th className={"text-left " + (this.props.system_controls.show_units ? "" : "d-none")} id="UnitsTitle">
