@@ -33,13 +33,13 @@ class FileSaveAs extends Component {
     componentDidUpdate(prevProps) {
 //        console.log('In FileSaveAs.componentDidUpdate this=',this,'prevProps=',prevProps);
         if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
-            console.log('In FileSaveAs.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
+//            console.log('In FileSaveAs.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
             this.getDesignNames(this.props.user,this.props.type);
         }
     }
 
     getDesignNames(user,type) {
-        console.log('In FileSaveAs.getDesignNames user=',user,'type=',type);
+//        console.log('In FileSaveAs.getDesignNames user=',user,'type=',type);
         // Get the names and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
@@ -55,7 +55,7 @@ class FileSaveAs extends Component {
             return res.json()
         })
         .then(names => {
-            console.log('In FileSaveAs.getDesignNames  user=',user,'type=',type,'names=',names);
+//            console.log('In FileSaveAs.getDesignNames  user=',user,'type=',type,'names=',names);
             this.setState({ names })
         })
         .catch(error => {

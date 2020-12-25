@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import SignInPageWidget from './SignInPageWidget';
 import { withOktaAuth } from '@okta/okta-react';
-import { changeUser, saveAutoSave } from '../store/actionCreators';
 import config from '../config';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -21,12 +20,9 @@ class SignInPage extends Component {
 }
 
 const mapStateToProps = state => ({
-    user: state.user,
 });
 
 const mapDispatchToProps = {
-    changeUser: changeUser,
-    saveAutoSave: saveAutoSave,
 };
 
 export default withRouter(withOktaAuth(
