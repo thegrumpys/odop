@@ -29,27 +29,27 @@ class FileDelete extends Component {
     }
 
     async componentDidMount() {
-//        console.log('In FileDelete.componentDidMount');
+//        console.log('In FileDelete.componentDidMount this=',this);
     }
 
     componentDidUpdate(prevProps) {
-//      console.log('In FileDelete.componentDidUpdate');
-      if (prevProps.type !== this.props.type) {
-//          console.log('In FileDelete.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+//      console.log('In FileDelete.componentDidUpdate this=',this,'prevProps=',prevProps);
+      if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
+          console.log('In FileDelete.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
           this.setState({ 
               type: this.props.type
           });
-          this.getDesignNames(this.props.type);
+          this.getDesignNames(this.props.user,this.props.type);
       }
   }
 
-    getDesignNames(type) {
+    getDesignNames(user, type) {
+        console.log('In FileDelete.getDesignNames user=',user,'type=',type);
         // Get the names and store them in state
-//        console.log('In FileDelete.getDesignNames type=', type);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.props.user
+                Authorization: 'Bearer ' + user
             }
         })
         .then(res => {
@@ -60,7 +60,7 @@ class FileDelete extends Component {
             return res.json()
         })
        .then(names => {
-//           console.log('In FileDelete.getDesignNames names=', names);
+           console.log('In FileDelete.getDesignNames user=',user,'type=',type,'names=', names);
            this.setState({ 
                names: names.filter((design) => {return design.user !== null})
            });
@@ -76,15 +76,15 @@ class FileDelete extends Component {
        });
     }
     
-    deleteDesign(type, name) {
-//        console.log('In FileDelete.deleteDesign type=', type, ' name=', name);
+    deleteDesign(user, type, name) {
+//        console.log('In FileDelete.deleteDesign user=',user,'type=',type,'name=',name);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + this.props.user
+                Authorization: 'Bearer ' + user
             },
         })
         .then(res => {
@@ -101,9 +101,9 @@ class FileDelete extends Component {
     }
     
     toggle() {
-//        console.log('In FileDelete.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
+//        console.log('In FileDelete.toggle this=',this);
         if (this.props.authState.isAuthenticated) {
-            this.getDesignNames(this.props.type);
+            this.getDesignNames(this.props.user,this.props.type);
         }
         this.setState({
             modal: !this.state.modal,
@@ -111,22 +111,22 @@ class FileDelete extends Component {
     }
     
     onSelectType(event) {
-//      console.log('In FileDelete.onSelectType event.target.value=',event.target.value);
+//      console.log('In FileDelete.onSelectType this=',this,'event.target.value=',event.target.value)
       this.setState({
           type: event.target.value
       });
-      this.getDesignNames(event.target.value);
+      this.getDesignNames(this.props.user,event.target.value);
 }
 
     onSelectName(event) {
-//        console.log('In FileDelete.onSelect event.target.value=',event.target.value);
+//        console.log('In FileDelete.onSelect this=',this,'event.target.value=',event.target.value);
         this.setState({
             name: event.target.value 
         });
     }
     
     onSignIn() {
-//      console.log('In FileDelete.onSignIn');
+//      console.log('In FileDelete.onSignIn this=',this);
       this.setState({
           modal: !this.state.modal
       });
@@ -134,7 +134,7 @@ class FileDelete extends Component {
     }
 
     onCancel() {
-//      console.log('In FileDelete.onCancel');
+//      console.log('In FileDelete.onCancel this=',this);
       this.setState({
           modal: !this.state.modal
       });
@@ -142,7 +142,7 @@ class FileDelete extends Component {
   }
 
     onDelete() {
-//        console.log('In FileDelete.onDelete this.state.type=',this.state.type,' this.state.name=',this.state.name);
+//        console.log('In FileDelete.onDelete this=',this);
         // Validate name, and delete the database element
         if (this.state.name === '') {
             displayMessage("Select design to delete.");
@@ -151,11 +151,11 @@ class FileDelete extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        this.deleteDesign(this.state.type,this.state.name);
+        this.deleteDesign(this.state.user, this.state.type, this.state.name);
     }
     
     render() {
-//        console.log('In FileDelete.render this=', this);
+//        console.log('In FileDelete.render this=',this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

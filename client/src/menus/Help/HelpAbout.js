@@ -23,7 +23,7 @@ class HelpAbout extends Component {
     }
 
     render() {
-//        console.log('In HelpAbout.render this=', this);
+//        console.log('In HelpAbout.render this=',this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>
@@ -51,7 +51,7 @@ class HelpAbout extends Component {
                             <>
                                 User Authenticated: {this.props.authState.isAuthenticated ? 'true' : 'false'}<br />
                                 User Email: {this.props.authState.isAuthenticated ? this.props.authState.idToken.claims.email : 'Unknown'}<br />
-                                User ClientId: {this.props.user === null ? 'Not Signed In' : this.props.user}<br />
+                                User ClientId: {this.props.user === null ? 'Unknown' : this.props.user}<br />
                             </>
                         }
                         Model: {this.props.jsontype} {this.props.type}<br />

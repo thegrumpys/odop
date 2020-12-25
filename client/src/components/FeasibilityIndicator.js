@@ -6,7 +6,7 @@ class FeasibilityIndicator extends Component {
     static defaultProps = { width: 238, height: 24 };
     
     render() {
-//        console.log('In FeasibilityIndicator.render this=', this);
+//        console.log('In FeasibilityIndicator.render this=',this);
         // Coordinate system is 4th quadrant ---x-->
         //                                   | 
         //                                   y 

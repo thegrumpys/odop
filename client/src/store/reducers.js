@@ -80,7 +80,7 @@ export function reducers(state, action) {
             ...state,
             user: action.payload.user
         });
-//        console.log('In reducers.CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
+        console.log('In reducers.CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
         return state;
 
 // SYMBOL

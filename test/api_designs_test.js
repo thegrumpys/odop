@@ -206,7 +206,7 @@ describe('Designs with non-empty DB', () => {
             var type = copy.type; // Get the type from the blob
             delete copy.type; // Delete the type from the blob
             var value = JSON.stringify(copy); // Convert blob to string
-//            console.log('TEST: Before INSERT user=', user, ' name=', name,' type=', type,' value=', value);
+//            console.log('TEST: Before INSERT user=',user,'name=',name,'type=',type,'value=',value);
             var stmt = 'INSERT INTO design (user, name, type, value) VALUES (\''+user+'\',\''+name+'\',\''+type+'\',\''+value+'\')';
 //            console.log('TEST: stmt='+stmt);
             connection.query(stmt, function(err, rows, fields) {

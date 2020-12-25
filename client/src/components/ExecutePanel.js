@@ -122,7 +122,7 @@ class ExecutePanel extends Component {
     }
     
     render() {
-//        console.log('In ExecutePanel.render this=', this);
+//        console.log('In ExecutePanel.render this=',this);
         return this.state.modal && (
             <Alert variant="success" style={{marginTop: '10px'}}>
                 <Container>

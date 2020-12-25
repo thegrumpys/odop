@@ -92,7 +92,7 @@ class MainPage extends Component {
     }
     
     render() {
-//        console.log('In MainPage.render this=', this);
+//        console.log('In MainPage.render this=',this);
         var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
         var report_names = getReportNames(); // Get them in MainPage render because they are now React Components
 //      console.log('In MainPage.constructor report_names=', report_names);

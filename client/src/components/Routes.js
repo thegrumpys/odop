@@ -46,7 +46,7 @@ class Routes extends Component {
 //          console.log('In Routes.componentDidUpdate prevProps.name=',prevProps.name,'this.props.name=',this.props.name);
       }
       if (prevProps.type != this.props.type) {
-//          console.log('In Routes.componentDidUpdate prevProps.type=',prevProps.type,'this.props.type=',this.props.type);
+//          console.log('In Routes.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
       }
   }
   

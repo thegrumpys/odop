@@ -140,7 +140,7 @@ app.get('/api/v1/designtypes/:type/designs/:name', (req, res) => {
         } else {
 //            console.log('SERVER: After SELECT rows[0]=', rows[0]);
             type = rows[0].type; // Get type from the JSON blob
-//            console.log('SERVER: After SELECT user=', user, ' name=', name, ' type=', type);
+//            console.log('SERVER: After SELECT user=',user,'name=',name, 'type=',type);
             value = JSON.parse(rows[0].value); // Get value from the JSON blob
             value.type = type; // Insert type into blob
 //            console.log('SERVER: After SELECT value=', value);
@@ -180,7 +180,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
                 connection.end();
                 console.log('SERVER: 400 - BAD REQUEST');
             } else {
-//                console.log('SERVER: In POST /api/v1/designs/'+name,' type=', type,' value=', value);
+//                console.log('SERVER: In POST /api/v1/designs/'+name,'type=',type,'value=',value);
                 value = value.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
                              .replace(/\\n/g, "\\\\n")
                              .replace(/\\'/g, "\\\\'")
@@ -240,7 +240,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
                 connection.end();
                 console.log('SERVER: 404 - NOT FOUND');
             } else {
-//                console.log('SERVER: In PUT /api/v1/designs/'+name,' type=', type,' value=', value);
+//                console.log('SERVER: In PUT /api/v1/designs/'+name,'type=',type,'value=',value);
                 value = value.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
                              .replace(/\\n/g, "\\\\n")
                              .replace(/\\'/g, "\\\\'")
