@@ -159,7 +159,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
     var name = req.params['name'];
     console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
 //    console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
-    if (req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
+    if (req.uid === "null" || req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
     } else {
@@ -219,7 +219,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
     var name = req.params['name'];
     console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name);
 //    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name+' user=',user,' req.body=',req.body);
-    if (req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
+    if (req.uid === "null" || req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
     } else {
@@ -278,40 +278,45 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (r
     var type = req.params['type'];
     var name = req.params['name'];
     console.log('SERVER: In DELETE /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
-    var connection = startConnection();
-    var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
-//    console.log('SERVER: stmt='+stmt);
-    connection.query(stmt, (err, rows, fields) => {
-//        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
-        if (err) {
-            res.status(500).end();
-            connection.end();
-            console.log('SERVER: 500 - INTERNAL SERVER ERROR');
-            throw err;
-        } else if (rows[0].count === 0) {
-            res.status(404).end();
-            connection.end();
-            console.log('SERVER: 404 - NOT FOUND');
-        } else {
-            var stmt = 'DELETE FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
-//            console.log('SERVER: stmt='+stmt);
-            connection.query(stmt, (err, rows, fields) => {
-//                console.log('SERVER: After DELETE err=', err, ' rows=', rows);
-                if (err) {
-                    res.status(500).end();
-                    connection.end();
-                    console.log('SERVER: 500 - INTERNAL SERVER ERROR');
-                    throw err;
-                } else {
-                    value = {};
-//                    console.log('SERVER: After DELETE value=', value);
-                    res.status(200).json(value);
-                    connection.end();
-                    console.log('SERVER: 200 - OK');
-                }
-            });
-        }
-    });
+    if (req.uid === "null") {
+        res.status(400).end();
+        console.log('SERVER: 400 - BAD REQUEST');
+    } else {
+        var connection = startConnection();
+        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
+//        console.log('SERVER: stmt='+stmt);
+        connection.query(stmt, (err, rows, fields) => {
+//            console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+            if (err) {
+                res.status(500).end();
+                connection.end();
+                console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+                throw err;
+            } else if (rows[0].count === 0) {
+                res.status(404).end();
+                connection.end();
+                console.log('SERVER: 404 - NOT FOUND');
+            } else {
+                var stmt = 'DELETE FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
+//                console.log('SERVER: stmt='+stmt);
+                connection.query(stmt, (err, rows, fields) => {
+//                    console.log('SERVER: After DELETE err=', err, ' rows=', rows);
+                    if (err) {
+                        res.status(500).end();
+                        connection.end();
+                        console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+                        throw err;
+                    } else {
+                        value = {};
+//                        console.log('SERVER: After DELETE value=', value);
+                        res.status(200).json(value);
+                        connection.end();
+                        console.log('SERVER: 200 - OK');
+                    }
+                });
+            }
+        });
+    }
 });
 
 app.post('/api/v1/usage_log', (req, res) => {
