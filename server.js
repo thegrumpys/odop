@@ -6,9 +6,9 @@ const mysql = require('mysql');
 var cors = require('cors');
 
 /**
- * A simple middleware that asserts valid access tokens and sends 401 responses
- * if the token is not present or fails validation.  If the token is valid its
- * contents are attached to req.jwt
+ * A simple middleware that asserts valid user name and sends 401 responses
+ * if the token is not present.  If the token is present its
+ * contents are attached to request
  */
 function authenticationRequired(req, res, next) {
   const authHeader = req.headers.authorization || '';
@@ -17,7 +17,7 @@ function authenticationRequired(req, res, next) {
 //  console.log('SERVER: In authenticationRequired authHeader=',authHeader);
 //  console.log('SERVER: In authenticationRequired match=',match);
 
-  if (!match || match[1] === "null") {
+  if (!match) {
     console.log('SERVER: 401 - UNAUTHORIZED');
     return res.status(401).end();
   }
@@ -67,7 +67,7 @@ function startConnection() {
 // 404 - NOT FOUND, The requested resource could not be found
 // 500 - INTERNAL SERVER ERROR, Unknown server error has occurred
 
-app.get('/api/v1/designtypes', (req, res) => {
+app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
     var value;
     var user = req.uid;
     console.log('SERVER: In GET /api/v1/designtypes user=',user);
@@ -91,7 +91,7 @@ app.get('/api/v1/designtypes', (req, res) => {
     });
 });
 
-app.get('/api/v1/designtypes/:type/designs', (req, res) => {
+app.get('/api/v1/designtypes/:type/designs', authenticationRequired, (req, res) => {
     var value;
     var user = req.uid;
     var type = req.params['type'];
@@ -116,7 +116,7 @@ app.get('/api/v1/designtypes/:type/designs', (req, res) => {
     });
 });
 
-app.get('/api/v1/designtypes/:type/designs/:name', (req, res) => {
+app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req, res) => {
     var type;
     var value;
     var user = req.uid;

@@ -23,7 +23,7 @@ class FileSave extends Component {
         };
     }
     
-    async componentDidMount() {
+    componentDidMount() {
 //        console.log('In FileSave.componentDidMount this=',this);
     }
 

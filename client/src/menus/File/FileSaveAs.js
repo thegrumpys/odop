@@ -26,7 +26,7 @@ class FileSaveAs extends Component {
         };
     }
     
-    async componentDidMount() {
+    componentDidMount() {
 //        console.log('In FileSaveAs.componentDidMount this=',this);
     }
 

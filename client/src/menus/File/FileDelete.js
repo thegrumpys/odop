@@ -28,7 +28,7 @@ class FileDelete extends Component {
         };
     }
 
-    async componentDidMount() {
+    componentDidMount() {
 //        console.log('In FileDelete.componentDidMount this=',this);
     }
 
