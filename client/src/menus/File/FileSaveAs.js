@@ -26,25 +26,25 @@ class FileSaveAs extends Component {
         };
     }
     
-    async componentDidMount() {
-//        console.log('In FileSaveAs.componentDidMount');
+    componentDidMount() {
+//        console.log('In FileSaveAs.componentDidMount this=',this);
     }
 
     componentDidUpdate(prevProps) {
-//        console.log('In FileSaveAs.componentDidUpdate');
-        if (prevProps.type !== this.props.type) {
-//            console.log('In FileSaveAs.componentDidUpdate prevProps=',prevProps.state.type,'props=',this.props.type);
-            this.getDesignNames(this.props.type);
+//        console.log('In FileSaveAs.componentDidUpdate this=',this,'prevProps=',prevProps);
+        if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
+//            console.log('In FileSaveAs.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
+            this.getDesignNames(this.props.user,this.props.type);
         }
     }
 
-    getDesignNames(type) {
-//        console.log('In FileSaveAs.getDesignNames type=', type);
+    getDesignNames(user,type) {
+//        console.log('In FileSaveAs.getDesignNames user=',user,'type=',type);
         // Get the names and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-              Authorization: 'Bearer ' + this.props.user
+              Authorization: 'Bearer ' + user
             }
         })
         .then(res => {
@@ -55,7 +55,7 @@ class FileSaveAs extends Component {
             return res.json()
         })
         .then(names => {
-//            console.log('In FileSaveAs.getDesignNames  type=', type,'names=', names);
+//            console.log('In FileSaveAs.getDesignNames  user=',user,'type=',type,'names=',names);
             this.setState({ names })
         })
         .catch(error => {
@@ -63,14 +63,14 @@ class FileSaveAs extends Component {
         });
     }
     
-    postDesign(type, name) {
-//        console.log('In FileSaveAs.postDesign type=', type,' name=', name);
+    postDesign(user, type, name) {
+//        console.log('In FileSaveAs.postDesign user=',user,'type=',type,'name=',name);
         this.props.changeName(name);
         // First fetch the current list of names
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.props.user
+                Authorization: 'Bearer ' + user
             }
         })
         .then(res => {
@@ -86,7 +86,7 @@ class FileSaveAs extends Component {
             this.setState({ names })
 //            console.log('In FileSaveAs.postDesign this.state.names=',this.state.names);
             var method = 'POST'; // Create it
-            if (this.state.names.filter(e => e.name === name && e.user === this.props.user).length > 0) { // Does it already exist?
+            if (this.state.names.filter(e => e.name === name && e.user === user).length > 0) { // Does it already exist?
                 method = 'PUT'; // Update it
             }
 //            console.log('In FileSaveAs.postDesign method=', method);
@@ -96,7 +96,7 @@ class FileSaveAs extends Component {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + this.props.user
+                    Authorization: 'Bearer ' + user
                 },
                 body: JSON.stringify(this.props.state)
             })
@@ -107,7 +107,7 @@ class FileSaveAs extends Component {
                 }
                 if (method === 'POST') {
                     var names = Array.from(this.state.names); // clone it
-                    names.push({user: this.props.user, name: name}); // If create and successful then sdd name to the array of names
+                    names.push({user: user, name: name}); // If create and successful then add name to the array of names
 //                    console.log('In FileSaveAs.postDesign type=',type,'name=',name,'names=', names);
                     this.setState({
                         names: names,
@@ -126,21 +126,21 @@ class FileSaveAs extends Component {
     }
 
     toggle() {
-//        console.log('In FileSaveAs.toggle this.props.type=',this.props.type, ' this.state.name=',this.state.name);
+//        console.log('In FileSaveAs.toggle this=',this);
         this.setState({
             modal: !this.state.modal,
         });
     }
 
     onTextInput(event) {
-//        console.log('In FileSaveAs.onTextInput event.target.value=',event.target.value);
+//        console.log('In FileSaveAs.onTextInput this=',this,'event.target.value=',event.target.value);
         this.setState({
             name: event.target.value // Change name in component state
         });
     }
     
     onSignIn() {
-//      console.log('In FileSaveAs.onSignIn');
+//      console.log('In FileSaveAs.onSignIn this=',this);
       this.setState({
           modal: !this.state.modal
       });
@@ -148,7 +148,7 @@ class FileSaveAs extends Component {
     }
 
     onCancel() {
-//      console.log('In FileSaveAs.onCancel');
+//      console.log('In FileSaveAs.onCancel this=',this);
       this.setState({
           modal: !this.state.modal
       });
@@ -156,17 +156,17 @@ class FileSaveAs extends Component {
   }
 
     onSaveAs() {
-//        console.log('In FileSaveAs.onSaveAs this.props.type=',this.props.type,' this.state.name=',this.state.name);
+//        console.log('In FileSaveAs.onSaveAs this=',this);
         this.setState({
             modal: !this.state.modal
         });
         // Save the model
-        this.postDesign(this.props.type, this.state.name); // Take name from component state
+        this.postDesign(this.props.user, this.props.type, this.state.name); // Take name from component state
         this.props.deleteAutoSave();
     }
     
     render() {
-//        console.log('In FileSaveAs.render this=', this);
+//        console.log('In FileSaveAs.render this=',this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

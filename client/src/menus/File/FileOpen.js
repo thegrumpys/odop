@@ -33,27 +33,27 @@ class FileOpen extends Component {
     }
 
     componentDidMount() {
-//        console.log('In FileOpen.componentDidMount');
+//        console.log('In FileOpen.componentDidMount this=',this);
     }
 
     componentDidUpdate(prevProps) {
-//      console.log('In FileOpen.componentDidUpdate');
-      if (prevProps.type !== this.props.type) {
-//          console.log('In FileOpen.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+//      console.log('In FileOpen.componentDidUpdate this=',this,'prevProps=',prevProps);
+      if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
+//          console.log('In FileOpen.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
           this.setState({
               type: this.props.type
           });
-          this.getDesignNames(this.props.type);
+          this.getDesignNames(this.props.user,this.props.type);
       }
   }
 
-    getDesignNames(type) {
-//        console.log('In FileOpen.getDesignNames type=', type);
+    getDesignNames(user, type) {
+//        console.log('In FileOpen.getDesignNames user=',user,'type=',type);
         // Get the names and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.props.user
+                Authorization: 'Bearer ' + user
             }
         })
         .then(res => {
@@ -65,7 +65,7 @@ class FileOpen extends Component {
             return res.json()
         })
         .then(names => {
-//            console.log('In FileOpen.getDesignNames type=', type,'names=',names);
+//            console.log('In FileOpen.getDesignNames user=',user,'type=',type,'names=',names);
             this.setState({
                 names: names
             })
@@ -75,12 +75,12 @@ class FileOpen extends Component {
         });
     }
 
-    getDesign(type, name) {
-//        console.log('In FileOpen.getDesign type=', type, ' name=', name);
+    getDesign(user, type, name) {
+//        console.log('In FileOpen.getDesign user=',user,'type=',type,'name=',name);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
             headers: {
-                Authorization: 'Bearer ' + this.props.user
+                Authorization: 'Bearer ' + user
             }
         })
         .then(res => {
@@ -108,9 +108,9 @@ class FileOpen extends Component {
     }
 
     toggle() {
-//        console.log('In FileOpen.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
+//        console.log('In FileOpen.toggle this=',this);
         var type = (this.state.types.includes(this.props.type) ? this.props.type : config.design.type);
-        this.getDesignNames(type);
+        this.getDesignNames(this.props.user,type);
         var name = (this.state.names.includes(this.props.name) ? this.props.name : config.design.name);
         this.setState({
             type: type,
@@ -122,22 +122,22 @@ class FileOpen extends Component {
     }
 
     onSelectType(event) {
-//        console.log('In FileOpen.onSelectType event.target.value=',event.target.value);
+//        console.log('In FileOpen.onSelectType this=',this,'event.target.value=',event.target.value)
         this.setState({
             type: event.target.value
         });
-        this.getDesignNames(event.target.value);
+        this.getDesignNames(this.props.user,event.target.value);
   }
 
     onSelectName(event) {
-//        console.log('In FileOpen.onSelectName event.target.value=',event.target.value);
+//        console.log('In FileOpen.onSelectName this=',this,'event.target.value=',event.target.value)
         this.setState({
             name: event.target.value
         });
     }
 
     onSignIn() {
-//        console.log('In FileOpen.onSignIn');
+//        console.log('In FileOpen.onSignIn this=',this);
         this.setState({
             modal: !this.state.modal
         });
@@ -145,7 +145,7 @@ class FileOpen extends Component {
     }
 
     onLoadInitialState() {
-//        console.log('In FileOpen.onLoadInitialState this.state.type=',this.state.type);
+//        console.log('In FileOpen.onLoadInitialState this=',this);
         this.setState({
             modal: !this.state.modal
         });
@@ -155,7 +155,7 @@ class FileOpen extends Component {
     }
 
     onLoadMetricInitialState() {
-//        console.log('In FileOpen.onLoadMetricInitialState this.state.type=',this.state.type);
+//        console.log('In FileOpen.onLoadMetricInitialState this=',this);
         this.setState({
             modal: !this.state.modal
         });
@@ -165,7 +165,7 @@ class FileOpen extends Component {
     }
 
     onLoadAutoSave() {
-//        console.log('In FileOpen.onLoadAutoSave');
+//        console.log('In FileOpen.onLoadAutoSave this=',this);
        this.setState({
             modal: !this.state.modal
         });
@@ -175,7 +175,7 @@ class FileOpen extends Component {
     }
 
     onCancel() {
-//        console.log('In FileOpen.onCancel');
+//        console.log('In FileOpen.onCancel this=',this);
         this.setState({
             modal: !this.state.modal
         });
@@ -183,16 +183,16 @@ class FileOpen extends Component {
     }
 
     onOpen() {
-//        console.log('In FileOpen.onOpen this.state.type=',this.state.type,' this.state.name=',this.state.name);
+//        console.log('In FileOpen.onOpen this=',this);
         this.setState({
             modal: !this.state.modal
         });
         // Load the model
-        this.getDesign(this.state.type,this.state.name);
+        this.getDesign(this.props.user, this.state.type, this.state.name);
     }
 
     render() {
-//        console.log('In FileOpen.render this=', this);
+//        console.log('In FileOpen.render this=',this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

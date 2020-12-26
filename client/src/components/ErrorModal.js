@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Alert, Button } from 'react-bootstrap';
 
 export var displayMessage = function(message, variant = 'danger', header = '') {
-//    console.log('In displayMessage this=', this);
+//    console.log('In displayMessage this=',this);
     this.setState( // Special form of setState using updater function
         (prevState, props) => {
             if (!prevState.modal) {
@@ -41,7 +41,7 @@ export class ErrorModal extends Component {
     }
 
     render() {
-//        console.log('In ErrorModal.render this=', this);
+//        console.log('In ErrorModal.render this=',this);
         return (
             <Modal show={this.state.modal} className={this.props.className} onHide={this.toggle}>
                 { this.state.header !== '' ? <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>{this.state.header}</Modal.Header> : ''}

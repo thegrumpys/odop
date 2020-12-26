@@ -23,7 +23,7 @@ class ViewOffsets extends Component {
     }
 
     render() {
-//        console.log('In ViewOffsets.render this=', this);
+//        console.log('In ViewOffsets.render this=',this);
         var ip = 0;
         var ix = 0;
         var isc = 0;

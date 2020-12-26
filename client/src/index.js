@@ -41,6 +41,6 @@ if (config.design.units == 'US') {
 } else {
     var { initialState } = require('./designtypes/'+config.design.type+'/initialState_metric_units.js'); // Dynamically load initialState
 }
-const store = createStore(reducers, { user: null, name: 'StartUp', model: { ...initialState, system_controls: initialSystemControls }}, middleware);
+const store = createStore(reducers, { user: null, name: config.design.name, view: config.design.view, model: { ...initialState, system_controls: initialSystemControls }}, middleware);
 
 ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><Provider store={store}><Router><Routes /></Router></Provider></div>, document.getElementById('root'));

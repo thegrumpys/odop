@@ -23,7 +23,7 @@ class HelpAbout extends Component {
     }
 
     render() {
-        console.log('In HelpAbout.render this=', this);
+//        console.log('In HelpAbout.render this=',this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>
@@ -47,11 +47,11 @@ class HelpAbout extends Component {
                         <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">ODOP License</a>
                         <hr/>
                         ODOP Software Version: {version()}<br />
-                        {process.env.NODE_ENV !== "production" &&
+                        {process.env.NODE_ENV === "development" &&
                             <>
                                 User Authenticated: {this.props.authState.isAuthenticated ? 'true' : 'false'}<br />
                                 User Email: {this.props.authState.isAuthenticated ? this.props.authState.idToken.claims.email : 'Unknown'}<br />
-                                User ClientId: {this.props.user === null ? 'Not Signed In' : this.props.user}<br />
+                                User ClientId: {this.props.user === null ? 'Unknown' : this.props.user}<br />
                             </>
                         }
                         Model: {this.props.jsontype} {this.props.type}<br />

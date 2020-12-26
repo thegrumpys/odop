@@ -86,7 +86,7 @@ class ConstraintsMinRowDependentVariable extends Component {
     }
 
     render() {
-//        console.log('In ConstraintsMinRowDependentVariable.render this=', this);
+//        console.log('In ConstraintsMinRowDependentVariable.render this=',this);
         // =======================================
         // Constraint Minimum Column
         // =======================================

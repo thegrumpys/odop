@@ -1,13 +1,9 @@
 import React from 'react';
+import DesignTable from "../../components/DesignTable"
 
 export function getReportNames() {
 //    console.log('In getReportNames');
-    return []; // No report names
-}
-
-export function report(report_name, prefs, st, labels) {
-//    console.log('In report report_name=',report_name,' prefs=',prefs,' st=',st,' labels=',labels);
-    return (
-        <span>Not Implemented</span>
-    );
+    return [
+        { name: "View0", title: 'Design', component: <DesignTable /> },
+    ];
 }

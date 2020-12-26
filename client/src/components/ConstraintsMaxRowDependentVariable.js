@@ -86,7 +86,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
     }
 
     render() {
-//        console.log('In ConstraintsMaxRowDependentVariable.render this=', this);
+//        console.log('In ConstraintsMaxRowDependentVariable.render this=',this);
         // =======================================
         // Constraint Maximum Column
         // =======================================

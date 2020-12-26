@@ -1,4 +1,4 @@
-import { CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 export const initialState = {
     "symbol_table": [
         {

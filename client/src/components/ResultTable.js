@@ -6,7 +6,7 @@ import FeasibilityIndicator from './FeasibilityIndicator';
 class ResultTable extends Component {
     
     render() {
-//        console.log('In ResultTable.render this=', this);
+//        console.log('In ResultTable.render this=',this);
 //        From Issue #365:
 //        The proposed terminology and color scheme:
 //            OBJ value       Category Term           Color            RGB
@@ -35,7 +35,7 @@ class ResultTable extends Component {
                     <tbody>
                         <tr>
                             <th width="33%" id="Feasibility">
-                                <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: many constraints violated; APPROACHING FEASIBLE: some constraints violated; FEASIBLE: constraints slightly violated; STRICTLY FEASIBLE: no constraints violated</Tooltip>}>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: constraints significantly violated; APPROACHING FEASIBLE: constraints slightly violated; FEASIBLE: constraints not significantly violated; STRICTLY FEASIBLE: no constraints violated</Tooltip>}>
                                     <span>Feasibility</span>
                                 </OverlayTrigger>
                             </th>

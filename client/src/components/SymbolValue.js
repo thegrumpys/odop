@@ -92,7 +92,7 @@ class SymbolValue extends Component {
     }
   
     render() {
-//        console.log('In SymbolValue.render this=', this);
+//        console.log('In SymbolValue.render this=',this);
         var value_class = 'text-right ';
         var value_tooltip;
         if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
