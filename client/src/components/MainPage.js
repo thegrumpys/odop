@@ -42,7 +42,7 @@ import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
 import { withOktaAuth } from '@okta/okta-react';
 import { logUsage } from '../logUsage';
-import { changeUser, deleteAutoSave } from '../store/actionCreators';
+import { changeUser, changeView, deleteAutoSave } from '../store/actionCreators';
 import config from '../config';
 
 class MainPage extends Component {
@@ -51,7 +51,7 @@ class MainPage extends Component {
 //        console.log("In MainPage.constructor props=",props);
         super(props);
         this.toggle = this.toggle.bind(this);
-        this.setKey = this.setKey.bind(this);
+        this.setView = this.setView.bind(this);
         this.state = {
             isOpen: false,
             activeTab: config.design.view,
@@ -72,10 +72,17 @@ class MainPage extends Component {
         }
         if (prevProps.type !== this.props.type) {
 //            console.log('In MainPage.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+            var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
+            var reportNames = getReportNames(); // Get them in MainPage render because they are now React Components
+//            console.log('In MainPage.componentDidUpdate reportNames=', reportNames);
+            var view = reportNames.find(element => element.name === this.props.view);
+//            console.log('In MainPage.componentDidUpdate view=', view);
+            if (view === undefined)
+                this.props.changeView(config.design.view); // if not found then assume the configured default
         }
         if (prevProps.view !== this.props.view) {
 //            console.log('In MainPage.componentDidUpdate prevProps.view=',prevProps.view,'props.view=',this.props.view);
-          this.setKey(this.props.view);
+            this.setView(this.props.view);
       }
     }
 
@@ -86,12 +93,12 @@ class MainPage extends Component {
         });
     }
     
-    setKey(tab) {
-//        console.log('In MainPage.setKey tab=',tab);
-        logUsage('event', 'Tab', { 'event_label': tab });
-        if (this.state.activeTab !== tab) {
+    setView(view) {
+//        console.log('In MainPage.setView view=',view);
+        logUsage('event', 'Tab', { 'event_label': view });
+        if (this.state.activeTab !== view) {
             this.setState({
-                activeTab: tab
+                activeTab: view
             });
         }
     }
@@ -168,7 +175,7 @@ class MainPage extends Component {
                         </Nav>
                         <Nav>
                             <Nav.Item>
-                                <Nav.Link className={classnames({ active: this.state.activeTab === "View0" })} onClick={() => { this.setKey("View0"); }}>
+                                <Nav.Link className={classnames({ active: this.state.activeTab === "View0" })} onClick={() => { this.setView("View0"); }}>
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}</Tooltip>}>
                                         <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
                                     </OverlayTrigger>
@@ -203,6 +210,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     changeUser: changeUser,
+    changeView: changeView,
     deleteAutoSave: deleteAutoSave
 };
 
