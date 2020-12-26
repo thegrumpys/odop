@@ -151,7 +151,7 @@ class FileDelete extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        this.deleteDesign(this.state.user, this.state.type, this.state.name);
+        this.deleteDesign(this.props.user, this.state.type, this.state.name);
     }
     
     render() {

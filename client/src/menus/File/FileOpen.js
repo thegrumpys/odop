@@ -188,7 +188,7 @@ class FileOpen extends Component {
             modal: !this.state.modal
         });
         // Load the model
-        this.getDesign(this.state.user, this.state.type, this.state.name);
+        this.getDesign(this.props.user, this.state.type, this.state.name);
     }
 
     render() {
