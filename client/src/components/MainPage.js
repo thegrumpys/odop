@@ -42,14 +42,9 @@ import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
 import { withOktaAuth } from '@okta/okta-react';
 import { logUsage } from '../logUsage';
-<<<<<<< HEAD
-import { changeUser, deleteAutoSave } from '../store/actionCreators';
-import config from '../config';
-import queryString from 'query-string';
-=======
 import { changeUser, changeView, deleteAutoSave } from '../store/actionCreators';
 import config from '../config';
->>>>>>> refs/remotes/origin/438
+import queryString from 'query-string';
 
 class MainPage extends Component {
     
