@@ -3,6 +3,7 @@ import { STARTUP,
     LOAD_INITIAL_STATE, 
     CHANGE_NAME, 
     CHANGE_USER, 
+    CHANGE_VIEW, 
     
     CHANGE_SYMBOL_VALUE, 
     FIX_SYMBOL_VALUE, 
@@ -76,6 +77,15 @@ export function changeUser(user) {
         type: CHANGE_USER,
         payload: {
             user
+        } 
+    }
+}
+
+export function changeView(view) {
+    return {
+        type: CHANGE_VIEW,
+        payload: {
+            view
         } 
     }
 }

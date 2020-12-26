@@ -3,6 +3,7 @@ import { STARTUP,
     LOAD_INITIAL_STATE,
     CHANGE_NAME,
     CHANGE_USER,
+    CHANGE_VIEW,
 
     CHANGE_SYMBOL_VALUE,
     CHANGE_SYMBOL_VIOLATION,
@@ -81,6 +82,13 @@ export function reducers(state, action) {
             user: action.payload.user
         });
 //        console.log('In reducers.CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
+        return state;
+    case CHANGE_VIEW:
+        state = Object.assign({}, {
+            ...state,
+            view: action.payload.view
+        });
+//        console.log('In reducers.CHANGE_VIEW action.payload.view=',action.payload.view,'state=',state);
         return state;
 
 // SYMBOL
