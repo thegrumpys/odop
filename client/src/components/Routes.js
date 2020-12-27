@@ -38,10 +38,10 @@ class Routes extends Component {
           if (type !== undefined || name !== undefined) {
               type = type !== undefined ? type : config.design.type;
               name = name !== undefined ? name : config.design.name;
-//            console.log('In Routes.componentDidMount getDesign type=',type,'name=',name);
+//              console.log('In Routes.componentDidMount getDesign type=',type,'name=',name);
               this.getDesign(type, name);
           } else {
-//            console.log('In Routes.componentDidMount loadInitialState config.design.type=',config.design.type','config.design.units=',config.design.units);
+//              console.log('In Routes.componentDidMount loadInitialState config.design.type=',config.design.type,'config.design.units=',config.design.units);
               this.loadInitialState(config.design.type,config.design.units);
           }
       }
@@ -84,7 +84,7 @@ class Routes extends Component {
   }
   
   getDesign(type, name) {
-//      console.log('In FileOpen.getDesign type=', type, ' name=', name);
+//      console.log('In Routes.getDesign type=', type, ' name=', name);
       displaySpinner(true);
       fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
           headers: {
@@ -99,7 +99,7 @@ class Routes extends Component {
           return res.json()
       })
       .then((design) => {
-//          console.log('In FileOpen.getDesign design=', design);
+//          console.log('In Routes.getDesign design=', design);
           var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
           var migrated_design = migrate(design);
           if (migrated_design.jsontype === "ODOP") {
