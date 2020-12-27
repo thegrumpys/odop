@@ -39,7 +39,7 @@ class Routes extends Component {
               type = type !== undefined ? type : config.design.type;
               name = name !== undefined ? name : config.design.name;
 //              console.log('In Routes.componentDidMount getDesign type=',type,'name=',name);
-              this.getDesign(type, name);
+              this.getDesign(this.props.user, type, name);
           } else {
 //              console.log('In Routes.componentDidMount loadInitialState config.design.type=',config.design.type,'config.design.units=',config.design.units);
               this.loadInitialState(config.design.type,config.design.units);
@@ -56,7 +56,7 @@ class Routes extends Component {
 //          console.log('In Routes.componentDidUpdate prevProps.name=',prevProps.name,'this.props.name=',this.props.name);
       }
       if (prevProps.type != this.props.type) {
-//          console.log('In Routes.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
+//          console.log('In Routes.componentDidUpdate prevProps.type=',prevProps.type,'this.props.type=',this.props.type);
       }
   }
   
@@ -83,12 +83,12 @@ class Routes extends Component {
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load initialState ' + units});
   }
   
-  getDesign(type, name) {
-//      console.log('In Routes.getDesign type=', type, ' name=', name);
+  getDesign(user, type, name) {
+//      console.log('In Routes.getDesign user=',user,'type=',type,'name=',name);
       displaySpinner(true);
       fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
           headers: {
-              Authorization: 'Bearer ' + this.props.user
+              Authorization: 'Bearer ' + user
           }
       })
       .then(res => {

@@ -107,13 +107,13 @@ class MainPage extends Component {
     
     render() {
 //        console.log('In MainPage.render this=',this);
+        // If you're waiting to logged in then there is nothing to display OR
+        // If there is no name or type then there is no model therefore there is nothing to display
+        if (this.props.authState.isPending || this.props.name === null || this.props.type === null) return null;
+
         var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
         var reportNames = getReportNames(); // Get them in MainPage render because they are now React Components
 //      console.log('In MainPage.constructor reportNames=', reportNames);
-
-        // If you're waiting to logged in then there is nothing to display OR
-        // If there is no name then there is no model therefore these is nothing to display
-        if (this.props.authState.isPending || this.props.name === null) return null;
 
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
         var alt = this.props.type+' icon';

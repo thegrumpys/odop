@@ -36,11 +36,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
 const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 
-if (config.design.units == 'US') {
-    var { initialState } = require('./designtypes/'+config.design.type+'/initialState.js'); // Dynamically load initialState
-} else {
-    var { initialState } = require('./designtypes/'+config.design.type+'/initialState_metric_units.js'); // Dynamically load initialState
-}
-const store = createStore(reducers, { user: null, name: config.design.name, view: config.design.view, model: { ...initialState, system_controls: initialSystemControls }}, middleware);
+// Create a store with an empty model where type is null
+const store = createStore(reducers, { user: null, name: config.design.name, view: config.design.view, model: { type: null, system_controls: initialSystemControls }}, middleware);
 
 ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><Provider store={store}><Router><Routes /></Router></Provider></div>, document.getElementById('root'));
