@@ -1,74 +1,76 @@
 # Release Process:
 
 This entry describes the steps necessary to make a new ODOP "release".
-Specifically, this is the process to publish the current development version to Heroku 
+Specifically, this is the process to publish the current development version to Heroku
 and the documentation to GitHub Pages and SpringDesignSoftware.org.
 
 Ideally, any system downtime affecting the production system should be announced in advance via docs/About/messageOfTheDay.md
 
 For background regarding "Major.Minor.Patch" see: [ODOP version numbering](../design/VersionNumbers)
-   
+
 Remember that if merged to master and pushed, changes to docs will be immediately published on GitHub Pages.
 Until all doc references are fully switched over to SpringDesignSoftware.org,
-documentation references to new features should not be merged to master 
+documentation references to new features should not be merged to master
 until immediately before the version containing those features is published to Heroku production.
-This will delay closing the corresponding issue covering those documentation changes. 
+This will delay closing the corresponding issue covering those documentation changes.
 Once documentation references are fully switched over to SpringDesignSoftware.org,
-it will be possible to merge doc updates to master but delay their publication to SpringDesignSoftware.org.  
+it will be possible to merge doc updates to master but delay their publication to SpringDesignSoftware.org.
 
 &nbsp;
 
 A. **DEVELOPMENT environment**
 
-1. Verify GitHub Milestone issues are completed.  Ask:   
-   "Have we done everything on our milestone list?"   
-   "Is there anything else we need to do?"   
-   "Are we ready for release?"   
-1. Make sure your development environment is on branch master.   
+1. Verify GitHub Milestone issues are completed.  Ask:
+   "Have we done everything on our milestone list?"
+   "Is there anything else we need to do?"
+   "Are we ready for release?"
+1. Make sure your development environment is on branch master.
 1. Check for and deal with security vulnerabilities.
-See GitHub Dependabot alerts.   
-Issue the command:   
-npm audit fix   
+See GitHub Dependabot alerts.
+Issue the command:
+npm audit fix
 when positioned in the server directory and again when positioned in the client directory.
 1. If this release has no migrate requirement, initialState impact or environment variable changes,
-skip forward to [Test For Console Output](release#test4consoleoutput).   
+skip forward to [Test For Console Output](release#test4consoleoutput).
 To confirm,
-compare the current master branch against the previous released commit tag branch 
+compare the current master branch against the previous released commit tag branch
 and check if any of the client/src/designtypes/.../initialState.js files have changed.
 &nbsp;
 1. If the database does not exist or is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB)
-to create and format the database tables using the create.sql file. 
-Do this to development, test, staging and/or production databases as appropriate.   
+to create and format the database tables using the create.sql file.
+Do this to development, test, staging and/or production databases as appropriate.
 See Heroku Dashboard Resources tab for JAWS DB.
-The database names are summarized in [Procedures for creating a new JAWSDB](NewDB).   
-1. Start server and client under your development environment. 
-If they are already started, log off of Okta and re-log into Okta to ensure the session is valid and not at risk of time-out.   
-&nbsp;  
-1. Repeat the following steps (through sub-section 8: "Commit these changes") for each design type with an impacted initialState. 
-Process "Startup_Metric" designs for the three spring design types similarly.  
+The database names are summarized in [Procedures for creating a new JAWSDB](NewDB).
+1. Start server and client under your development environment.
+If they are already started, log off of Okta and re-log into Okta to ensure the session is valid and not at risk of time-out.
+&nbsp;
+1. Repeat the following steps (through sub-section 8: "Commit these changes") for each design type with an impacted initialState.
+Process "Startup_Metric" designs for the three spring design types similarly.
     1. Do a "Load Initial State" followed by a File : SaveAs "Loaded\_Initial\_Startup" to create a non-migrated version of Startup.
     1. Migrate the current "Startup" file by File : Open "Startup" followed by a File : SaveAs "Startup".
-    1. Using MySqlDump, dump both design files into a load.sql file   
+    1. Using MySqlDump, dump both design files into a load.sql file
 Compare the two load.sql files to verify that initial state and migration operate exactly the same.
-If they don't match then repair them until they do. 
-It is OK to ignore reordering of .json properties.  
+If they don't match then repair them until they do.
+It is OK to ignore reordering of .json properties.
     1. Make "Loaded\_Initial\_Startup" the new "Startup". This should eliminate the propagation of any property re-ordering.
-    1. Create designs (example: HotWound, HotWoundMetric) based on initialState from available Execute macros. 
+    1. Create designs (example: HotWound, HotWoundMetric) based on initialState from available Execute macros.
 Migrate all other design files and save them back into themselves using File : Save.
     1. Using MySqlDump, dump the affected design file into a load.sql file.
-    1. Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). 
+    1. Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list).
 Set the user field = NULL.
     1. Commit these changes.  The script to load these changes will be run in a [later step](release#runloadscript).
 &nbsp;
-1. If there are environment variable changes, update Server's .env and Client's .env with   
-   JAWSDB\_URL   
-   REACT\_APP\_ISSUER   
-   REACT\_APP\_CLIENT\_ID   
-   REACT\_APP\_DESIGN\_TYPE   
-   REACT\_APP\_DESIGN\_NAME   
-   REACT\_APP\_SESSION\_REFRESH   
-   for development (localhost).   
+1. If there are environment variable changes, update Server's .env and Client's .env with the following for development (localhost).
 NOTE: No entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost).
+    * JAWSDB\_URL
+    * REACT\_APP\_ISSUER
+    * REACT\_APP\_CLIENT\_ID
+    * REACT\_APP\_DESIGN\_TYPES
+    * REACT\_APP\_DESIGN\_TYPE
+    * REACT\_APP\_DESIGN\_NAME
+    * REACT\_APP\_DESIGN\_UNITS
+    * REACT\_APP\_DESIGN\_VIEW
+    * REACT\_APP\_SESSION\_REFRESH
 1. Do a pull or push to get latest version on all systems.
 <a id="test4consoleoutput"></a>
 &nbsp;
@@ -97,31 +99,33 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
    From Dashboard, expand "odop" for production or "odop-staging" for the staging system. Go to settings/Config Vars. Click "Reveal Config Vars".
    Update Heroku Configuration Variables JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for staging, or production.
 &nbsp;
-1. Update Heroku Configuration Variables with   
-   JAWSDB\_URL   
-   REACT\_APP\_ISSUER   
-   REACT\_APP\_CLIENT\_ID   
-   REACT\_APP\_DESIGN\_TYPE   
-   REACT\_APP\_DESIGN\_NAME   
-   REACT\_APP\_SESSION\_REFRESH   
-   for staging (odop-staging), or production (odop).
+1. Update Heroku Configuration Variables with the following for staging (odop-staging), or production (odop).
+    * JAWSDB\_URL
+    * REACT\_APP\_ISSUER
+    * REACT\_APP\_CLIENT\_ID
+    * REACT\_APP\_DESIGN\_TYPES
+    * REACT\_APP\_DESIGN\_TYPE
+    * REACT\_APP\_DESIGN\_NAME
+    * REACT\_APP\_DESIGN\_UNITS
+    * REACT\_APP\_DESIGN\_VIEW
+    * REACT\_APP\_SESSION\_REFRESH
 1. Update Heroku Buildpack for staging (odop-staging), or production (odop).
    Buildpack configuration is on Heroku Settings tab.
 <a id="databaseStuff"></a>
 &nbsp;
 1. **Database Stuff** &nbsp; If this release has no database impact, skip forward to [Publish to Heroku](release#publish2Heroku).
 1. Before operating on the production system database, check for active users on the production system; put the production system in maintenance mode.
-   To enable maintenance mode:  
+   To enable maintenance mode:
    heroku maintenance:on -a odop
 1. If the database does not exist or is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB)
 to create and format the database tables using the create.sql file.
-Do this for staging and/or production databases as appropriate.   
-See the above link for the easier-to-read table of database names.  
-1. Back up the production database.  
+Do this for staging and/or production databases as appropriate.
+See the above link for the easier-to-read table of database names.
+1. Back up the production database.
    For background on backup provided by JAWSDB see: [Heroku docs](https://devcenter.heroku.com/articles/jawsdb#database-backups)
-1. Check the size of the production database as compared to capacity limits (5Mb for JAWSDB free plan). 
-Use the ./scripts/db_size.sh script.  
-For details, see the first FAQ question at: https://devcenter.heroku.com/articles/jawsdb#faq   
+1. Check the size of the production database as compared to capacity limits (5Mb for JAWSDB free plan).
+Use the ./scripts/db_size.sh script.
+For details, see the first FAQ question at: https://devcenter.heroku.com/articles/jawsdb#faq
 If appropriate, dump to off-line storage and re-initialize the log_Usage table.
 <a id="runloadscript"></a>
 &nbsp;
@@ -137,25 +141,25 @@ If appropriate, dump to off-line storage and re-initialize the log_Usage table.
 1. **Publish to Heroku** &nbsp; If not logged into Heroku, login in using the command line "heroku login" which in turn brings up the Heroku website login page in your browser.
 1. Shutdown server and client under your development environment.
 &nbsp;
-1. In your git/odop directory push to Heroku using the command line:   
-git push heroku-staging master   
-  &nbsp; or   
-git push heroku master   
-Verify no error messages during build on heroku.   
-&nbsp;   
+1. In your git/odop directory push to Heroku using the command line:
+git push heroku-staging master
+  &nbsp; or
+git push heroku master
+Verify no error messages during build on heroku.
+&nbsp;
 Note 1: This step may fail if the previous release contains patches that are not included in the new release.
-You can either move those patches into the current release or issue the git push command with a --force option.   
-Note 2: to push a non-master branch, confirm that is the current branch with:   
-git status   
-   &nbsp; then   
-git push heroku[-staging] +HEAD:master   
-&nbsp;   
-1. If maintenance mode was previously enabled, disable maintenance mode:  
+You can either move those patches into the current release or issue the git push command with a --force option.
+Note 2: to push a non-master branch, confirm that is the current branch with:
+git status
+   &nbsp; then
+git push heroku[-staging] +HEAD:master
+&nbsp;
+1. If maintenance mode was previously enabled, disable maintenance mode:
 heroku maintenance:off -a odop
 1. Confirm that the http://heroku-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version Major.Minor.Patch displays.
-1. **Publish to SpringDesignSoftware.org**. &nbsp; For production only, 
-while positioned in the git/odop directory, push to SpringDesignSoftware.org using the command line:   
-git push springdesignsoftware master.   
+1. **Publish to SpringDesignSoftware.org**. &nbsp; For production only,
+while positioned in the git/odop directory, push to SpringDesignSoftware.org using the command line:
+git push springdesignsoftware master.
 Verify no unexpected error messages during build on production.
 1. Confirm that the http://SpringDesignSoftware.org/odop/docs website is operational and that documentation displays.
 
@@ -166,7 +170,7 @@ C. **DEVELOPMENT ENVIRONMENT**
    Commit "Release Major.Minor.Patch" and push to origin.
 1. In Eclipse do a pull, Team > Show in History and verify tag is Major.Minor.Patch (for example, 2.3.1).
 1. Create a "master-Major.Minor.Patch" branch, commit and push to origin.
-Optionally in this branch, Update client/src/version.js file to next Major.Minor.Patch followed by suffix 'dev' (for example: 2.3.2dev).   
+Optionally in this branch, Update client/src/version.js file to next Major.Minor.Patch followed by suffix 'dev' (for example: 2.3.2dev).
 1. In master, update client/src/version.js file to next Major.Minor.Patch followed by suffix 'dev' (for example: 2.4dev).
 1. Commit with message "Update version.js to Major.Minor.Patchdev" and push to origin.
 1. In GitHub mark Milestone Major.Minor.Patch closed.
