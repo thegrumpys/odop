@@ -203,7 +203,7 @@ class Report1 extends ReportBase {
                     </tbody>
                 </table>
                 <br />
-                Deflection at load point 2 is {this.pc_avail_deflect.toFixed(0)}% of total safe deflection.<br />
+                Deflection at load point 2 is {this.props.symbol_table[o.PC_Safe_Deflect].value.toFixed(0)}% of total safe deflection.<br />
                 <br />
                 <pre>
                 |&lt;--------------------------- {this.props.symbol_table[o.L_Free].name} (w/ends) = {this.props.symbol_table[o.L_Free].value.toFixed(3)} ---------------------------&gt;|<br />
