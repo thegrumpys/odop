@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
-import { stopExecute } from "../../components/ExecutePanel";
+import { startExecute, stopExecute } from "../../components/ExecutePanel";
 
 class HelpTutorial extends Component {
 
@@ -65,9 +65,10 @@ class HelpTutorial extends Component {
         });
         logUsage('event', 'HelpTutorial', { 'event_label': this.state.execute_name });
         // Do execute
-//        console.log('In HelpTutorial.onExecute startTutorial(',this.state.execute_name,')');
-        var { execute } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load execute
-        execute("Help : Tutorial",this.state.execute_name);
+//        console.log('In HelpTutorial.onExecute this.state.execute_name=',this.state.execute_name);
+        var { execute } = require('../../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
+//        console.log('In HelpTutorial.onExecute execute=',execute);
+        startExecute("Help : Tutorial" + ' : ' + this.state.execute_name, execute.steps);
     }
     
     onCancel() {

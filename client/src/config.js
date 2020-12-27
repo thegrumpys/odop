@@ -35,14 +35,14 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost?
   session_refresh = env.REACT_APP_SESSION_REFRESH || 3600;
 }
 
-console.log('issuer=',issuer);
-console.log('clientId=',clientId);
-console.log('design_types=',design_types);
-console.log('design_type=',design_type);
-console.log('design_name=',design_name);
-console.log('design_units=',design_units);
-console.log('design_view=',design_view);
-console.log('session_refresh=',session_refresh);
+//console.log('issuer=',issuer);
+//console.log('clientId=',clientId);
+//console.log('design_types=',design_types);
+//console.log('design_type=',design_type);
+//console.log('design_name=',design_name);
+//console.log('design_units=',design_units);
+//console.log('design_view=',design_view);
+//console.log('session_refresh=',session_refresh);
 
 export default {
   oidc: {
