@@ -119,6 +119,8 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     }
        else x[o.Cycle_Life] = zero;   // Setting to NaN causes problems with File : Open.  See issue #232
 
+    x[o.PC_Safe_Deflect] = 100.0 * x[o.Deflect_2] / ((x[o.Stress_Lim_Bnd_Stat] / s_f) / x[o.Rate]);
+
                            /*  crude approximation  ... better available on web  */
     x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * 
         (Math.PI * x[o.Mean_Dia] * p[o.Coils_T] + x[o.Xlen_1] + x[o.Xlen_2]);
