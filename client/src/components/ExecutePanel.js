@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Alert, Button, Container, Row } from 'react-bootstrap';
 import { load } from '../store/actionCreators';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
 
 export var startExecute = function(prefix,steps) {
 //    console.log('In startExecute this=',this,'prefix=',prefix,'steps=',steps);
@@ -29,6 +30,7 @@ export var stopExecute = function() {
     const { store } = this.context;
     var design = store.getState();
     this.setState({
+        execute_name: undefined, // Clear execute name
         modal: false, // Default: do not display
         prefix: '',
         steps: null,
@@ -42,14 +44,16 @@ class ExecutePanel extends Component {
 
     constructor(props) {
         super(props);
-//        console.log('In ExecutePanel constructor props=',props);
+//        console.log('In ExecutePanel.constructor props=',props);
         this.onNext = this.onNext.bind(this);
         this.onBack = this.onBack.bind(this);
         this.onCancel = this.onCancel.bind(this);
         startExecute = startExecute.bind(this); // Bind external function - no 'this'
         stopExecute = stopExecute.bind(this); // Bind external function - no 'this'
+        const { execute } = queryString.parse(location.search);
         this.state = {
-            modal: false, // Default: do not display
+            execute_name: execute, // Remember execute name
+            modal: false,
             prefix: '',
             steps: null,
             step: 0,
@@ -59,15 +63,30 @@ class ExecutePanel extends Component {
     }
     
     componentDidMount() {
-//        console.log('In ExecutePanel componentDidMount this=',this);
+//        console.log('In ExecutePanel.componentDidMount this=',this);
+        if (this.state.execute_name !== undefined) {
+//            console.log('In ExecutePanel.componentDidMount this.state.execute_name=',this.state.execute_name);
+            var { execute } = require('../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
+//            console.log('In ExecutePanel.componentDidMount execute=',execute);
+            startExecute("Execute" + ' : ' + this.state.execute_name, execute.steps);
+        }
+        this.setState({
+            store: this.context.store
+        });
     }
 
-    componentWillUnmount() {
-//        console.log('In ExecutePanel componentWillUnmount this=',this);
+    componentDidUpdate(prevProps) {
+//        console.log('In ExecutePanel.componentDidUpdate this=',this,'prevProps=',prevProps);
+        if (prevProps.type !== this.props.type) {
+//            console.log('In ExecutePanel.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+            if (this.state.execute_name !== undefined) {
+                stopExecute();
+            }
+        }
     }
-    
+
     onCancel() {
-//        console.log('In ExecutePanel onCancel this=',this);
+//        console.log('In ExecutePanel.onCancel this=',this);
         this.setState({
             modal: !this.state.modal,
             prefix: '',
@@ -79,7 +98,7 @@ class ExecutePanel extends Component {
     }
 
     onNext() {
-//        console.log('In ExecutePanel onNext this=',this);
+//        console.log('In ExecutePanel.onNext this=',this);
         var next = this.state.step+1;
         if (this.state.steps[next] !== undefined) {
             const { store } = this.context;
@@ -107,7 +126,7 @@ class ExecutePanel extends Component {
     }
 
     onBack() {
-//        console.log('In ExecutePanel onBack this=',this);
+//        console.log('In ExecutePanel.onBack this=',this);
         var prev = this.state.step-1;
         if (prev < 0) prev = 0; // Stop going backwards if it is on the first step
         // Put steps[prev].state into current store state - that is, time travel back
@@ -155,4 +174,14 @@ ExecutePanel.contextTypes = {
     store: PropTypes.object
 };
 
-export default connect()(ExecutePanel);
+const mapStateToProps = state => ({
+    type: state.model.type,
+});
+
+const mapDispatchToProps = {
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ExecutePanel);
