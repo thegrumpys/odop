@@ -17,25 +17,25 @@ class ActionExecute extends Component {
             modal: false,
         };
     }
-    
+
     componentDidMount() {
-//      console.log('In ActionExecute.componentDidMount);
-      this.updateExecuteNames();
-}
+//        console.log('In ActionExecute.componentDidMount);
+        this.updateExecuteNames();
+    }
 
     componentDidUpdate(prevProps) {
-//      console.log('In ActionExecute.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-      if (prevProps.type !== this.props.type) {
-//          console.log('In ActionExecute.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-          stopExecute(); // Stop whatever is currently running if anything is running
-          this.updateExecuteNames();
-      }
-  }
+//        console.log('In ActionExecute.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+        if (prevProps.type !== this.props.type) {
+//            console.log('In ActionExecute.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+//            stopExecute(); // Stop whatever is currently running if anything is running
+            this.updateExecuteNames();
+        }
+    }
 
     updateExecuteNames() {
         var { getExecuteNames } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load getExecuteNames
         var execute_names = getExecuteNames();
-//        console.log('In ActionExecute.toggle execute_names=', execute_names);
+//        console.log('In ActionExecute.updateExecuteNames execute_names=', execute_names);
         var execute_name;
         if (execute_names.length > 0)
             execute_name = execute_names[0]; // Default to first name

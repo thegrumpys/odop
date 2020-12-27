@@ -19,14 +19,15 @@ class HelpTutorial extends Component {
     }
 
     componentDidMount() {
-//      console.log('In HelpTutorial.componentDidMount);
-      this.updateExecuteNames();
-}
+//        console.log('In HelpTutorial.componentDidMount);
+        this.updateExecuteNames();
+    }
 
     componentDidUpdate(prevProps) {
 //        console.log('In HelpTutorial.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
-            stopExecute(); // Stop whatever is currently running if anything is running
+//            console.log('In HelpTutorial.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+//            stopExecute(); // Stop whatever is currently running if anything is running
             this.updateExecuteNames();
         }
     }
@@ -34,7 +35,7 @@ class HelpTutorial extends Component {
     updateExecuteNames() {
         var { getTutorialNames } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load getTutorialNames
         var execute_names = getTutorialNames();
-//        console.log('In HelpTutorial.componentDidUpdate execute_names=', execute_names);
+//        console.log('In HelpTutorial.updateExecuteNames execute_names=', execute_names);
         var execute_name;
         if (execute_names.length > 0)
             execute_name = execute_names[0]; // Default to first name
@@ -103,7 +104,7 @@ class HelpTutorial extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
-                       <Button variant="primary" onClick={this.onExecute}>Execute</Button>
+                        <Button variant="primary" onClick={this.onExecute}>Execute</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>

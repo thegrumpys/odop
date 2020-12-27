@@ -21,12 +21,13 @@ class HelpDemo extends Component {
     componentDidMount() {
 //        console.log('In HelpDemo.componentDidMount);
         this.updateExecuteNames();
-  }
+    }
 
     componentDidUpdate(prevProps) {
 //        console.log('In HelpDemo.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
-            stopExecute(); // Stop whatever is currently running if anything is running
+//            console.log('In HelpDemo.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+//            stopExecute(); // Stop whatever is currently running if anything is running
             this.updateExecuteNames();
         }
     }
@@ -34,7 +35,7 @@ class HelpDemo extends Component {
     updateExecuteNames() {
         var { getDemoNames } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load getDemoNames
         var execute_names = getDemoNames();
-//        console.log('In HelpDemo.componentDidUpdate execute_names=', execute_names);
+//        console.log('In HelpDemo.updateExecuteNames execute_names=', execute_names);
         var execute_name;
         if (execute_names.length > 0)
             execute_name = execute_names[0]; // Default to first name
@@ -89,7 +90,7 @@ class HelpDemo extends Component {
                 <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
                     <Modal.Header>
                         <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>  &nbsp; Action : Execute
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Help : Demo
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -103,7 +104,7 @@ class HelpDemo extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
-                       <Button variant="primary" onClick={this.onExecute}>Execute</Button>
+                        <Button variant="primary" onClick={this.onExecute}>Execute</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>
