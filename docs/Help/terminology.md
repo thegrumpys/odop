@@ -10,7 +10,7 @@ The following terms have special meanings used in the context of this program.
 [CALCULATION INPUTS](terminology#calcInputs)  
 [CONSTRAINTS](terminology#constraints)  
 [CONSTRAINT VIOLATIONS](terminology#constraintViol)  
-[FUNCTION CONSTRAINTS](terminology#fdcl)  
+[FUNCTION CONSTRAINTS (FDCL)](terminology#fdcl)  
 [FIX](terminology#fix)  
 [FEASIBLE REGION](terminology#feasibleRegion)  
 [OBJECTIVE FUNCTION](terminology#obj)  
@@ -144,10 +144,10 @@ ___
 <a id="fdcl"></a>  
 ___
 
-**FUNCTION CONSTRAINTS**   
+**FUNCTION CONSTRAINTS (FDCL)**   
 When a constraint level is determined as the value of another Independent Variable,
 Dependent Variable or Calculation Input (as opposed to being a simple constant),
-it is referred to as a "Functionally Determined Constraint Level".
+it is referred to as a "Functionally Determined Constraint Level" (FDCL).
 Such constraint levels can be configured by selecting (clicking into) the (MIN or MAX)
 constraint value field of eligible variables.
 After clicking a constraint field of an eligible variable, 
