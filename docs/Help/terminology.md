@@ -165,24 +165,34 @@ ___
 <a id="fix"></a>  
 ___
 
-**FIX**   
-The user can establish (i.e. FIX) the value of any variable, independent or dependent.
+**FIX and FREE**   
+The user can establish (i.e. FIX or hold) the value of any variable, independent or dependent.
 FIXed status is designated by checking the checkbox immediately to the right
 of the variable's value.
 
 FIXing an Independent Variable simply removes that variable from the set that
 is manipulated by the Search algorithm.
 This reduces the computational effort required for the Search to find a solution.
-The user can change the value of an independent variable by 
+The user can change the value of an Independent Variable by 
 entering a different value in that variable's value field. 
 The corresponding values of dependent variables are calculated and displayed immediately.
 
 FIXing a Dependent Variable is accomplished by establishing a weighted, 
-double sided constraint.
-This increases the computational effort required for the Search to find a solution.
-Once the appropriate FIX checkbox is checked, the user will be able to enter
-a target value in either the Minimum or Maximum constraint level entry field.
-A Search (menu Action : Search) will be required to establish the desired values.
+double-sided constraint.
+While not a significant concern, 
+this increases the computational effort required for the Search to find a solution.
+Once the appropriate FIX checkbox is checked, 
+enter a target value in either the Minimum or Maximum constraint level entry field.
+A Search (Action : Search menu) is required to establish the desired values.
+
+Clearing the checkbox (FREE) allows the Search to alter the value of the corresponding variable
+subject to constraints, if established.
+
+Establishing additional constraints and FIXed variables can reduce the ability of Search 
+to find a feasible solution.
+Too many constraints and FIXed variables can create an over-specified situation. 
+
+See also: [Design Situations](designSituations)
 
 ___
 
@@ -323,10 +333,11 @@ in the form: "Design Model version   {_current version number_}".
 
 Help : About also displays the current ODOP software version in the form: 
 "Software version   {_Major.Minor.Patch_}". 
+The ODOP version is independent of the version of any specific design type (a.k.a. model).
 A change in software version may or may not be associated with a change in the 
-design version number for any design type.
+design model version number for any design type.
 A change in the version number of any design type will usually be associated with a change in the 
-minor or major field of the software version.   
+minor or major field of the ODOP software version.   
 
 ___
 
