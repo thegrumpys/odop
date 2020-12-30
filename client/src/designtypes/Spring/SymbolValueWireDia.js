@@ -53,12 +53,12 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.render size_table=',size_table);
         const needle = this.props.element.value;
 //        console.log('In SymbolValueWireDia.render needle=',needle);
-        const default_value = size_table.find((element,index) => {
-            if (index > 0) {
-                if (element < needle) return false
-                else return true;
+        var default_value = size_table.find((element,index) => {
+            if (index > 0) { // skip the column header
+                if (element[0] !== needle) return false; // keep looking
+                else return true; // were done
             } else {
-                return false;
+                return false; // keep looking
             }
         });
 //        console.log('In SymbolValueWireDia.render default_value=',default_value);
@@ -85,12 +85,14 @@ class SymbolValueWireDia extends Component {
                     <InputGroup>
                         {(value_tooltip != undefined ?
                             <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value[0]} onChange={this.onSelect}>
+                                <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect}>
+                                    {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value+" Not in Table"}</option>}
                                     {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
                                 </Form.Control>
                             </OverlayTrigger>
                         :
-                            <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value[0]} onChange={this.onSelect}>
+                            <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect}>
+                            {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value+" Not in Table"}</option>}
                                 {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
                             </Form.Control>
                         )}

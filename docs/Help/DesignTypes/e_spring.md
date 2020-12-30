@@ -314,15 +314,15 @@ ___
 **Constraints unique to extension springs:**
 
 While most extension spring constraints have constant levels,
-a few are of the "Functionally Determined Constraint Level" variety.
-As described in the [Function Constraints](../terminology#fdcl) section 
+a few are of the "Functionally Determined Constraint Level" (FDCL) variety.
+As described in the [Function Constraints (FDCL)](../terminology#fdcl) section 
 of the On-line Help entry on "Terminology", 
 rather than having constraint levels that are expressed 
 as simple constants, these express a desired relationship between 
 selected variables.   
 
 In the default extension spring start point ("Startup"), Force\_1 MIN is
-a "function" of Initial\_Tension. 
+a function of Initial\_Tension. 
 The constraint relationship says that Force\_1, the force at the first
 load point, should be greater than the value of Initial\_Tension.
 
@@ -351,7 +351,7 @@ Once the SI\_Range selection gets empirical constants SI\_Lo\_Factor and SI\_Hi\
 from the material table, Stress\_Init\_Lo and Stress\_Init\_Hi are computed. 
 These values then become the MIN and MAX constraint levels for Stress\_Initial. 
 
-In summary, extension springs have three "Functionally Determined Constraint Levels" 
+In summary, extension springs have three "Functionally Determined Constraint Levels" (FDCL) 
 configured in the default startup design.
 
 **Constraint on: &nbsp; &nbsp; &nbsp;  Is current value of:**   
@@ -359,7 +359,7 @@ Force\_1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MIN &nbsp; &nbsp; &nbsp; Initial\_Te
 Stress\_Initial &nbsp; MIN &nbsp; &nbsp; &nbsp; Stress\_Init_Lo   
 Stress\_Initial &nbsp; MAX &nbsp; &nbsp;&nbsp; Stress\_Init_Hi   
 
-Additional "Functionally Determined Constraint Levels" available for configuration 
+Additional "Functionally Determined Constraint Levels" (FDCL) available for configuration 
 by the user include:   
 
 **Constraint on: &nbsp; &nbsp; &nbsp;  Is current value of:**   
