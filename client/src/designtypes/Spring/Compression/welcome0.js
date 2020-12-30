@@ -8,13 +8,16 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     Welcome to the ODOP:Spring web app!
-                    Calculator view is below. 
+                    Advanced view is below. 
+                    The existing values are an arbitrary starting point. 
+                    Modify them to meet your requirements. 
                     </p>
                     
                     <p>
-                    The white entry fields below are inputs to the Calculator.
-                    Once input values are entered, calculation results will appear
-                    in the light gray fields.
+                    Values in the Independent Variables and Calculation Inputs sections below are inputs.
+                    As input values are entered, calculation results will appear immediately. 
+                    Dependent Variables can be controlled by setting constraints or setting FIXed status. 
+                    Use the Search function (<b>Action : Search</b> menu) to find a design that meets constraints and FIXes.
                     </p>
 
                     <p>
@@ -26,23 +29,16 @@ export const execute = {
             ),
             actions: [
                 saveAutoSave(),
-                loadInitialState('Spring/Compression'),
-                changeSymbolValue("OD_Free", Number.NaN),
-                changeSymbolValue("Wire_Dia", Number.NaN),
-                changeSymbolValue("L_Free", Number.NaN),
-                changeSymbolValue("Coils_T", Number.NaN),
-                changeSymbolValue("Force_1", Number.NaN),
-                changeSymbolValue("Force_2", Number.NaN),
-                changeLabelsValue([{name: 'COMMENT', value: 'Welcome - Compression spring - Calculator view'}])
+                changeLabelsValue([{name: 'COMMENT', value: 'Welcome - Compression spring - Advanced view'}])
             ]
         },
         {
             title: "Page 02 of 04",
             text: (
                 <React.Fragment>
+                    <br />
                     <p>
-                    The ODOP:Spring Calculator view is based on applied load.
-                    Forces are calculation inputs. Deflections are outputs. 
+                    The ODOP:Spring Advanced view allows access to all program features.
                     Alternative calculation approaches are supported by other views.
                     Use the <b>View</b> menu above to switch views.
                     </p>
@@ -63,15 +59,18 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Calculator view provides a list of commonly available wire diameters that depends on the selected Material_Type and units (U.S., metric). 
-                    Choose a standard wire diameter by selecting the Wire_Dia input field and scrolling to the desired value. 
-                    After selection the value is automatically marked with FIXed status so that it is not manipulated by 
-                    the ODOP Search feature (<b>Action : Search</b> menu).
+                    FIXed status causes Search to achieve or hold a specified value for the associated variable.
+                    FREE status allows Search to manipulate the associated variable to achieve a feasible design.
+                    For more information, see: 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#fix" target="_blank" rel="noopener noreferrer">FIX</a>&nbsp; 
+                    and various tutorial and demo sessions.
+                    For more information on these sessions, see:
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     </p>
                     
                     <p>
-                    Tooltips are available for many elements of the Calculator view.
-                    Hover the cursor (tap a touch screen) to learn about these elements.
+                    Tooltips are available for many elements of the Advanced view.
+                    Hover the cursor over an item of interest (tap a touch screen) to learn about these elements.
                     Additional insights are available in the on-line Help plus Tutorial and Demo sessions.
                     </p>
                 </React.Fragment>
@@ -89,10 +88,10 @@ export const execute = {
                     
                     <p>
                     Push the gray "Exit" button in the upper right to close this light green panel.
-                    Enter input values in the white fields.
-                    Be sure to select appropriate values for Material_Type, End_Type and Wire_Dia.
-                    "NaN" (Not a Number) may appear if inputs are not complete.
-                    View the corresponding Calculator outputs.
+                    Enter values and constraints to describe what is known and what the design needs to achieve. 
+                    Be sure to select appropriate values for Material_Type and End_Type.
+                    Use the Search function (<b>Action : Search</b> menu) to find a feasible solution.
+                    Use the Seek function (<b>Action : Seek</b> menu) to optimize a feasible design.
                     Switch to other views to utilize the full capabilities of ODOP:Spring.
                    </p>
                     

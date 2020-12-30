@@ -6,7 +6,8 @@ export function getExecuteNames() {
         'mkHotWndStartup',        // Script to make Hot Wound Startup file from Load Initial State
         'mkHotWndStartup_Metric', // Script to make Hot Wound Startup Metric file from Load Initial State Metric
         'tweakPrefs',             // Script to tweak Preference values for greater precision of search result
-        'welcome1'                // Script to guide novice users
+        'welcome0',               // Script to guide novice users - Advanced view; spring type neutral
+        'welcome1'                // Script to guide novice users - Calculator view; spring type neutral
       ];
     } else {
       result = [
