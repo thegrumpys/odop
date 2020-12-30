@@ -26,7 +26,7 @@ export const execute = {
             actions: [
                 loadInitialState('Spring/Compression'),
                 changeSymbolValue("OD_Free", Number.NaN),
-                changeSymbolValue("Wire_Dia", 0.10),
+                changeSymbolValue("Wire_Dia", Number.NaN),
                 changeSymbolValue("L_Free", Number.NaN),
                 changeSymbolValue("Coils_T", Number.NaN),
                 changeSymbolValue("Force_1", Number.NaN),
@@ -89,6 +89,8 @@ export const execute = {
                     <p>
                     Push the gray "Exit" button in the upper right to close this light green panel.
                     Enter input values in the white fields.
+                    Be sure to select appropriate values for Material_Type, End_Type and Wire_Dia.
+                    "NaN" (Not a Number) may appear if inputs are not complete.
                     View the corresponding Calculator outputs.
                     Switch to other views to utilize the full capabilities of ODOP:Spring.
                    </p>
