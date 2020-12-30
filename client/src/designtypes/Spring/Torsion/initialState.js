@@ -397,6 +397,21 @@ export const initialState = {
         },
         {
             "input": false,
+            "name": "%_Safe_Deflect",
+            "value": 76.18,
+            "units": "%",
+            "lmin": 0,
+            "lmax": CONSTRAINED,
+            "cmin": 1.0,
+            "cmax": 90.0,
+            "ioclass": 0,
+            "sdlim": 0,
+            "tooltip": "Deflection of load point 2 as a percent of total safe deflection",
+            "type": "equationset",
+            "hidden": false
+        },
+        {
+            "input": false,
             "name": "Force_Arm_2",
             "value": 1.0,
             "units": "pounds",

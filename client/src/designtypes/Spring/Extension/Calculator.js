@@ -191,7 +191,7 @@ export class Calculator extends ReportBase {
                                 <td>
                                     Deflection at load point 2 is
                                 </td>
-                                    <Value value={this.pc_avail_deflect} />
+                                    <SymbolValue element={this.props.symbol_table[o.PC_Safe_Deflect]} index={o.PC_Safe_Deflect} />
                                 <td>
                                     % of total safe deflection.
                                 </td>

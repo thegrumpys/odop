@@ -1,7 +1,7 @@
 import { displayMessage } from '../../../components/ErrorModal';
 import { initialState } from './initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
-import { MIN, MAX, FIXED, FDCL } from '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 
 export function migrate(design) {
     /*
@@ -147,6 +147,23 @@ export function migrate(design) {
                 delete element.oldvalue
             }
         });
+        // Add %_Safe_Deflect calculation
+        design.symbol_table.splice(26,0,Object.assign({},design.symbol_table[26]));  //  Duplicate Cycle_Life in target position
+        design.symbol_table[26].name = '%_Safe_Deflect'; // Rename it to %_Safe_Deflect
+        design.symbol_table[26].value = 0.0; 
+        if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
+            design.symbol_table[26].value = 76.18; 
+            design.symbol_table[26].units = '%';
+            design.symbol_table[26].lmax = CONSTRAINED; 
+            design.symbol_table[26].cmin = 1.0; 
+            design.symbol_table[26].cmax = 90; 
+        } else {
+            design.symbol_table[26].value = 76.18; 
+            design.symbol_table[26].units = '%';
+            design.symbol_table[26].lmax = CONSTRAINED; 
+            design.symbol_table[26].cmin = 1.0; 
+            design.symbol_table[26].cmax = 90; 
+        }
         migrated_design.version = '5'; // last thing... set the migrated model version
         break; // Do not copy this break
     case '5':

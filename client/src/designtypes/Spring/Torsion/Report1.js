@@ -240,7 +240,7 @@ class Report1 extends ReportBase {
                     </tbody>
                 </table>
                 <br />
-                Deflection at load point 2 is {(100.0 * this.props.symbol_table[o.Deflect_2].value / this.def_max).toFixed(0)}% of total safe deflection.<br />
+                Deflection at load point 2 is {this.props.symbol_table[o.PC_Safe_Deflect].value.toFixed(0)}% of total safe deflection.<br />
             </React.Fragment>
         );
     }
