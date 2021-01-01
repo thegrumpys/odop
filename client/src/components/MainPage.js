@@ -65,8 +65,8 @@ class MainPage extends Component {
         if (prevProps.authState.isAuthenticated !== this.props.authState.isAuthenticated) {
 //            console.log('In MainPage.componentDidUpdate prevProps.authState.isAuthenticated=',prevProps.authState.isAuthenticated,'props.authState.isAuthenticated=',this.props.authState.isAuthenticated);
             if (this.props.authState.isAuthenticated) {
-//                console.log('In MainPage.componentDidUpdate isAuthenticated this.props.authState.idToken.clientId=',this.props.authState.idToken.clientId);
-                this.props.changeUser(this.props.authState.idToken.clientId);
+//                console.log('In MainPage.componentDidUpdate isAuthenticated this.props.authState.idToken.claims.sub=',this.props.authState.idToken.claims.sub);
+                this.props.changeUser(this.props.authState.idToken.claims.sub);
             } else {
 //                console.log('In MainPage.componentDidUpdate !isAuthenticated');
                 this.props.changeUser(null);

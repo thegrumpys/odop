@@ -91,8 +91,8 @@ class SignInPageWidget extends Component {
         scopes,
       }).then((tokens) => {
         // Add tokens to storage
-//        console.log('In SignInPageWidget.showSignInToGetTokens this=',this,'tokens=',tokens);
-        var user = tokens.idToken.clientId;
+//        console.log('In SignInPageWidget.showSignInToGetTokens this=',this,'tokens=',tokens,'tokens.idToken.claims.sub=',tokens.idToken.claims.sub);
+        var user = tokens.idToken.claims.sub;
         this.props.changeUser(user);
         this.props.saveAutoSave("redirect");
         this.props.oktaAuth.handleLoginRedirect(tokens);
