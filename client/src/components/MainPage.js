@@ -52,11 +52,13 @@ class MainPage extends Component {
 //        console.log("In MainPage.constructor props=",props);
         super(props);
         this.toggle = this.toggle.bind(this);
-        const { view } = queryString.parse(location.search);
         this.setView = this.setView.bind(this);
+        var { view } = queryString.parse(location.search);
+        view = view !== undefined ? view : config.design.view;
+        this.props.changeView(view);
         this.state = {
             isOpen: false,
-            activeTab: view !== undefined ? view : config.design.view,
+            activeTab: view,
         };
     }
     
