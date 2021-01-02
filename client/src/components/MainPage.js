@@ -29,6 +29,7 @@ import ActionTrade from '../menus/Action/ActionTrade';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
+import ViewCADModel from '../menus/View/ViewCADModel';
 import ViewReports from '../menus/View/ViewReports';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
@@ -123,6 +124,8 @@ class MainPage extends Component {
                                 <ActionExecute />
                             </NavDropdown>
                             <NavDropdown title="View">
+                                {this.props.type === "Spring/Extension" && <ViewCADModel />}
+                                {this.props.type === "Spring/Extension" && <NavDropdown.Divider />}
                                 <NavDropdown.Item disabled>
                                     Define  Sub-Problems&hellip;
                                 </NavDropdown.Item>
