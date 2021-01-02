@@ -124,7 +124,8 @@ class FileOpen extends Component {
     onSelectType(event) {
 //        console.log('In FileOpen.onSelectType this=',this,'event.target.value=',event.target.value)
         this.setState({
-            type: event.target.value
+            type: event.target.value,
+            names: [],
         });
         this.getDesignNames(this.props.user,event.target.value);
   }
@@ -227,7 +228,7 @@ class FileOpen extends Component {
                         {process.env.NODE_ENV !== "production" && <Button variant="secondary" onClick={this.onLoadMetricInitialState}>Load Metric Initial State</Button>}{' '}
                         {typeof(Storage) !== "undefined" && localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={this.onLoadAutoSave}>Load Auto Save</Button>}{' '}
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" onClick={this.onOpen}>Open</Button>
+                        <Button variant="primary" onClick={this.onOpen} disabled={this.state.names.length === 0 ? true : false}>Open</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>

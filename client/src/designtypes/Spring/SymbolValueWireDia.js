@@ -86,13 +86,13 @@ class SymbolValueWireDia extends Component {
                         {(value_tooltip != undefined ?
                             <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                 <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect}>
-                                    {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value+" Not in Table"}</option>}
+                                    {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value+" Non-std"}</option>}
                                     {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
                                 </Form.Control>
                             </OverlayTrigger>
                         :
                             <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect}>
-                            {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value+" Not in Table"}</option>}
+                            {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value+" Non-std"}</option>}
                                 {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
                             </Form.Control>
                         )}
