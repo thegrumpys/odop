@@ -130,7 +130,8 @@ class FileDelete extends Component {
     onSelectType(event) {
 //      console.log('In FileDelete.onSelectType event.target.value=',event.target.value);
       this.setState({
-          type: event.target.value
+          type: event.target.value,
+          names: [],
       });
       this.getDesignNames(event.target.value);
 }
