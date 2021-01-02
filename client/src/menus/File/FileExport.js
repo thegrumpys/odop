@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
-import { withAuth } from '@okta/okta-react';
 
 class FileExport extends Component {
 
@@ -26,7 +25,7 @@ class FileExport extends Component {
     }
 
     render() {
-//        console.log('In FileExport.render this=', this);
+//        console.log('In FileExport.render this=',this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.onExport}>
@@ -46,9 +45,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 };
 
-export default withAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(FileExport)
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(FileExport);
+

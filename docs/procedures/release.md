@@ -60,15 +60,16 @@ Migrate all other design files and save them back into themselves using File : S
 Set the user field = NULL.
     1. Commit these changes.  The script to load these changes will be run in a [later step](release#runloadscript).
 &nbsp;
-1. If there are environment variable changes, update Server's .env and Client's .env with   
-   JAWSDB\_URL   
-   REACT\_APP\_ISSUER   
-   REACT\_APP\_CLIENT\_ID   
-   REACT\_APP\_DESIGN\_TYPE   
-   REACT\_APP\_DESIGN\_NAME   
-   REACT\_APP\_SESSION\_REFRESH   
-   for development (localhost).   
-NOTE: No entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost).
+1. If there are environment variable changes, update Server's .env and Client's .env with the following for development (localhost). NOTE: No entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost).
+    * JAWSDB\_URL
+    * REACT\_APP\_ISSUER
+    * REACT\_APP\_CLIENT\_ID
+    * REACT\_APP\_DESIGN\_TYPES
+    * REACT\_APP\_DESIGN\_TYPE
+    * REACT\_APP\_DESIGN\_NAME
+    * REACT\_APP\_DESIGN\_UNITS
+    * REACT\_APP\_DESIGN\_VIEW
+    * REACT\_APP\_SESSION\_REFRESH
 1. Do a pull or push to get latest version on all systems.
 <a id="test4consoleoutput"></a>
 &nbsp;
@@ -97,14 +98,16 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
    From Dashboard, expand "odop" for production or "odop-staging" for the staging system. Go to settings/Config Vars. Click "Reveal Config Vars".
    Update Heroku Configuration Variables JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for staging, or production.
 &nbsp;
-1. Update Heroku Configuration Variables with   
-   JAWSDB\_URL   
-   REACT\_APP\_ISSUER   
-   REACT\_APP\_CLIENT\_ID   
-   REACT\_APP\_DESIGN\_TYPE   
-   REACT\_APP\_DESIGN\_NAME   
-   REACT\_APP\_SESSION\_REFRESH   
-   for staging (odop-staging), or production (odop).
+1. Update Heroku Configuration Variables with the following for staging (odop-staging), or production (odop).
+    * JAWSDB\_URL
+    * REACT\_APP\_ISSUER
+    * REACT\_APP\_CLIENT\_ID
+    * REACT\_APP\_DESIGN\_TYPES
+    * REACT\_APP\_DESIGN\_TYPE
+    * REACT\_APP\_DESIGN\_NAME
+    * REACT\_APP\_DESIGN\_UNITS
+    * REACT\_APP\_DESIGN\_VIEW
+    * REACT\_APP\_SESSION\_REFRESH
 1. Update Heroku Buildpack for staging (odop-staging), or production (odop).
    Buildpack configuration is on Heroku Settings tab.
 <a id="databaseStuff"></a>

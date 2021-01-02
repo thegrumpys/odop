@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
-import { stopExecute } from "../../components/ExecutePanel";
+import { startExecute, stopExecute } from "../../components/ExecutePanel";
 
 class HelpDemo extends Component {
 
     constructor(props) {
-//        console.log('In HelpDemo.constructor');
+//        console.log('In HelpDemo.constructor props=',props)
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onSelect = this.onSelect.bind(this);
@@ -21,12 +21,13 @@ class HelpDemo extends Component {
     componentDidMount() {
 //        console.log('In HelpDemo.componentDidMount);
         this.updateExecuteNames();
-  }
+    }
 
     componentDidUpdate(prevProps) {
 //        console.log('In HelpDemo.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
-            stopExecute(); // Stop whatever is currently running if anything is running
+//            console.log('In HelpDemo.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+//            stopExecute(); // Stop whatever is currently running if anything is running
             this.updateExecuteNames();
         }
     }
@@ -34,7 +35,7 @@ class HelpDemo extends Component {
     updateExecuteNames() {
         var { getDemoNames } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load getDemoNames
         var execute_names = getDemoNames();
-//        console.log('In HelpDemo.componentDidUpdate execute_names=', execute_names);
+//        console.log('In HelpDemo.updateExecuteNames execute_names=', execute_names);
         var execute_name;
         if (execute_names.length > 0)
             execute_name = execute_names[0]; // Default to first name
@@ -65,9 +66,10 @@ class HelpDemo extends Component {
         });
         logUsage('event', 'HelpDemo', { 'event_label': this.state.execute_name });
         // Do execute
-//        console.log('In HelpDemo.onExecute startTutorial(',this.state.execute_name,')');
-        var { execute } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load execute
-        execute("Help : Demo",this.state.execute_name);
+//        console.log('In HelpDemo.onExecute this.state.execute_name=',this.state.execute_name);
+        var { execute } = require('../../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
+//        console.log('In HelpDemo.onExecute execute=',execute);
+        startExecute("Help : Demo" + ' : ' + this.state.execute_name, execute.steps);
     }
     
     onCancel() {
@@ -79,7 +81,7 @@ class HelpDemo extends Component {
     }
     
     render() {
-//        console.log('In HelpDemo.render this=', this);
+//        console.log('In HelpDemo.render this=',this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>
@@ -88,7 +90,7 @@ class HelpDemo extends Component {
                 <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
                     <Modal.Header>
                         <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>  &nbsp; Action : Execute
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Help : Demo
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -102,7 +104,7 @@ class HelpDemo extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
-                       <Button variant="primary" onClick={this.onExecute}>Execute</Button>
+                        <Button variant="primary" onClick={this.onExecute}>Execute</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>

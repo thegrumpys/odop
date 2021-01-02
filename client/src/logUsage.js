@@ -1,6 +1,7 @@
 import { displayMessage } from './components/ErrorModal';
 
 export function logUsage(tag, action, note) {
+//    console.log('In logUsage tag=',tag,'action=',action,'note=',note);
     if (process.env.NODE_ENV === "production") { // Limit G.A. tracking to production
         window.gtag(tag, action, note); // Output to Google Analytics
     }

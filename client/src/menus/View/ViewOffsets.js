@@ -6,7 +6,7 @@ import { logUsage } from '../../logUsage';
 class ViewOffsets extends Component {
 
     constructor(props) {
-//        console.log('In ViewOffsets.constructor');
+//        console.log('In ViewOffsets.constructor props=',props)
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {
@@ -23,7 +23,7 @@ class ViewOffsets extends Component {
     }
 
     render() {
-//        console.log('In ViewOffsets.render this=', this);
+//        console.log('In ViewOffsets.render this=',this);
         var ip = 0;
         var ix = 0;
         var isc = 0;

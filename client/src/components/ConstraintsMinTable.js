@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 class ConstraintsMinTable extends Component {
     
     render() {
-//        console.log('In ConstraintsMinTable.render this=', this);
+//        console.log('In ConstraintsMinTable.render this=',this);
         return (
             <React.Fragment>
                 <Table className="col-md-3 border border-secondary" size="sm">

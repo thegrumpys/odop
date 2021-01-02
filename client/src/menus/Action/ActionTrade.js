@@ -663,7 +663,7 @@ class ActionTrade extends Component {
     //===========================================================
     
     render() {
-//        console.log('In ActionTrade.render this=', this);
+//        console.log('In ActionTrade.render this=',this);
         var design;
         const { store } = this.context;
         design = store.getState();

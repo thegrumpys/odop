@@ -3,6 +3,7 @@ import { STARTUP,
     LOAD_INITIAL_STATE,
     CHANGE_NAME,
     CHANGE_USER,
+    CHANGE_VIEW,
 
     CHANGE_SYMBOL_VALUE,
     CHANGE_SYMBOL_VIOLATION,
@@ -44,16 +45,16 @@ export function reducers(state, action) {
 //    console.warn('In reducers state=',state,'action=', action);
     switch (action.type) {
     case STARTUP:
-//        console.log('In STARTUP state=',state);
+//        console.log('In reducers.STARTUP state=',state);
         return state;
     case LOAD:
         state = Object.assign({}, state, { 
             ...action.payload.design
         });
-//        console.log('In LOAD action.payload.design=',action.payload.design,'state=',state);
+//        console.log('In reducers.LOAD action.payload.design=',action.payload.design,'state=',state);
         return state;
     case LOAD_INITIAL_STATE:
-//        console.log('In LOAD_INITIAL_STATE');
+//        console.log('In reducers.LOAD_INITIAL_STATE');
         if (action.payload.units === 'US') {
             var { initialState } = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState
         } else {
@@ -66,21 +67,28 @@ export function reducers(state, action) {
                 system_controls: initialSystemControls
             }
         }); // Merge initialState and initialSystemControls
-//        console.log('In LOAD_INITIAL_STATE initialState=',initialState,'state=',state);
+//        console.log('In reducers.LOAD_INITIAL_STATE action.payload.type=',action.payload.type,'action.payload.units=',action.payload.units,'state=',state);
         return state;
     case CHANGE_NAME:
         state = Object.assign({}, {
             ...state,
             name: action.payload.name
         });
-//        console.log('In CHANGE_NAME action.payload.name=',action.payload.name,'state=',state);
+//        console.log('In reducers.CHANGE_NAME action.payload.name=',action.payload.name,'state=',state);
         return state;
     case CHANGE_USER:
         state = Object.assign({}, {
             ...state,
             user: action.payload.user
         });
-//        console.log('In CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
+//        console.log('In reducers.CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
+        return state;
+    case CHANGE_VIEW:
+        state = Object.assign({}, {
+            ...state,
+            view: action.payload.view
+        });
+//        console.log('In reducers.CHANGE_VIEW action.payload.view=',action.payload.view,'state=',state);
         return state;
 
 // SYMBOL
@@ -92,7 +100,7 @@ export function reducers(state, action) {
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
 //                        if (element.name === 'Force_2')
-//                            console.log('CHANGE_SYMBOL_VALUE element=',element.name,' old value=',element.value,' new value=',action.payload.value);
+//                            console.log('In reducers.CHANGE_SYMBOL_VALUE element=',element.name,' old value=',element.value,' new value=',action.payload.value);
                         return Object.assign({}, element, {
                             value: action.payload.value
                         });
@@ -281,7 +289,7 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
-    //                    console.log('CHANGE_SYMBOL_INPUT element=',element.name,' old value=',element.input,' new value=',action.payload.value);
+    //                    console.log('In reducers.CHANGE_SYMBOL_INPUT element=',element.name,' old value=',element.input,' new value=',action.payload.value);
                         return Object.assign({}, element, {
                             input: action.payload.value
                         });
@@ -297,7 +305,7 @@ export function reducers(state, action) {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
-//                        console.log('CHANGE_SYMBOL_HIDDEN element=',element.name,' old value=',element.hidden,' new value=',action.payload.value);
+//                        console.log('In reducers.CHANGE_SYMBOL_HIDDEN element=',element.name,' old value=',element.hidden,' new value=',action.payload.value);
                         return Object.assign({}, element, {
                             hidden: action.payload.value
                         });
@@ -319,7 +327,7 @@ export function reducers(state, action) {
                         value = action.payload.values[i++]
                         if (value !== undefined) {
     //                        if (element.name === 'Force_2')
-    //                            console.log('CHANGE_INPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
+    //                            console.log('In reducers.CHANGE_INPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
                             return Object.assign({}, element, {
                                 value: value
                             });
@@ -387,7 +395,7 @@ export function reducers(state, action) {
                         value = action.payload.values[i++]
                         if (value !== undefined) {
     //                        if (element.name === "Prop_Calc_Method")
-    //                            console.log('CHANGE_OUTPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
+    //                            console.log('In reducers.CHANGE_OUTPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
                             return Object.assign({}, element, {
                                 value: value
                             });
@@ -470,28 +478,36 @@ export function reducers(state, action) {
 
     case SAVE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-//            console.log("Save Auto Save");
-            state.model.name = state.name; // move name into model to save it ***FUDGE*** for compatibility with existing autosave files
-            localStorage.setItem('autosave', JSON.stringify(state.model), null, 2); // create or replace auto save file with current state contents
-            delete state.model.name; // after saving it delete name from model ***FUDGE*** for compatibility with existing autosave files
+            localStorage.setItem(action.payload.name, JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
+//            console.log("In reducers.SAVE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state not changed
     case RESTORE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-//            console.log("Restore Auto Save");
-            model = JSON.parse(localStorage.getItem('autosave')); // get auto save file contents
-            name = model.name; // get name from model to restore it ***FUDGE*** for compatibility with existing autosave files
-            delete model.name; // after restoring it delete name from model ***FUDGE*** for compatibility with existing autosave files
-            return Object.assign({}, state, {
-                name: name,
-                model: model
-            })
+            var autosave = JSON.parse(localStorage.getItem(action.payload.name)); // get auto save file contents
+//            console.log("In reducers.RESTORE_AUTO_SAVE autosave=",autosave);
+            // Migrate autosave file from old (no model property) to new (with model property)
+            if (autosave.model === undefined) { // Is it the old format
+                name = autosave.name;
+                delete autosave.name;
+                state = Object.assign({}, state, {
+                    name: name, 
+                    model: autosave
+                });
+            } else {
+                state = Object.assign({}, state, autosave); // New format
+            }
+            var { migrate } = require('../designtypes/'+state.model.type+'/migrate.js'); // Dynamically load migrate
+            state = Object.assign({}, state, {
+                model: migrate(state.model),
+            });
+//            console.log("In reducers.RESTORE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state changed
     case DELETE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-//            console.log("Delete Auto Save");
-            localStorage.removeItem('autosave'); // remove auto save file
+            localStorage.removeItem(action.payload.name); // remove auto save file
+//            console.log("In reducers.DELETE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state not changed
 

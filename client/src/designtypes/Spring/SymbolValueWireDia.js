@@ -32,7 +32,7 @@ class SymbolValueWireDia extends Component {
     }
   
     render() {
-//        console.log('In SymbolValueWireDia.render this=', this);
+//        console.log('In SymbolValueWireDia.render this=',this);
         
 //        console.log('In SymbolValueWireDia.render ../' + this.props.type + '/symbol_table_offsets.js');
         var o = require('../'+this.props.type+'/symbol_table_offsets.js'); // Dynamically load table

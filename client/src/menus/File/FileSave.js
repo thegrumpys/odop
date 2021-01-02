@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { NavDropdown } from 'react-bootstrap';
+import { NavDropdown, Button, Modal, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { changeUser, deleteAutoSave } from '../../store/actionCreators';
+import { deleteAutoSave } from '../../store/actionCreators';
 import { displayMessage } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
-import { withAuth } from '@okta/okta-react';
+import config from '../../config';
+import { withOktaAuth } from '@okta/okta-react';
+import { withRouter } from 'react-router-dom';
 
 class FileSave extends Component {
 
@@ -13,50 +15,33 @@ class FileSave extends Component {
         super(props);
 //        console.log("In FileSave.constructor props=",props);
         this.toggle = this.toggle.bind(this);
+        this.onSignIn = this.onSignIn.bind(this);
+        this.onCancel = this.onCancel.bind(this);
         this.state = {
+            modal: false,
             names: [],
-            authenticated: null,
-            user: null,
         };
     }
     
-    async componentDidMount() {
-//        console.log('In FileSave.componentDidMount');
-        var authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileSave.componentDidMount before authenticated=",authenticated);
-        if (authenticated !== this.state.authenticated) { // Did authentication change?
-            this.setState({ authenticated }); // Remember our current authentication state
-            if (authenticated) { // We have become authenticated
-                var user = await this.props.auth.getUser();
-//                console.log('In FileSave.componentDidMount user=',user);
-                this.setState({
-                    user: user.sub,
-                });
-                this.props.changeUser(user.sub);
-            } else { // We have become unauthenticated
-                this.setState({
-                    user: null,
-                });
-                this.props.changeUser(null);
-            }
-        }
+    componentDidMount() {
+//        console.log('In FileSave.componentDidMount this=',this);
     }
 
     componentDidUpdate(prevProps) {
-//        console.log('In FileSave.componentDidUpdate');
-        if (prevProps.type !== this.props.type) {
-//            console.log('In FileSave.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-            this.getDesignNames(this.props.type);
+//        console.log('In FileSave.componentDidUpdate this=',this,'prevProps=',prevProps);
+        if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
+//            console.log('In FileSave.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
+            this.getDesignNames(this.props.user,this.props.type);
         }
     }
 
-    getDesignNames(type) {
-//        console.log('In FileSave.getDesignNames type=', type);
+    getDesignNames(user,type) {
+//        console.log('In FileSave.getDesignNames user=',user,'type=',type);
         // Get the names and store them in state
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.user
+                Authorization: 'Bearer ' + user
             }
         })
         .then(res => {
@@ -67,7 +52,7 @@ class FileSave extends Component {
             return res.json()
         })
         .then(names => {
-//            console.log('In FileSave.getDesignNames type=',type,'names=', names);
+//            console.log('In FileSave.getDesignNames user=',user,'type=',type,'names=',names);
             this.setState({ names })
         })
         .catch(error => {
@@ -75,13 +60,13 @@ class FileSave extends Component {
         });
     }
     
-    postDesign(type, name) {
-//        console.log('In FileSave.postDesign type=', type,' name=', name);
+    postDesign(user, type, name) {
+//        console.log('In FileSave.postDesign user=',user,'type=',type,'name=',name);
         // First fetch the current list of names
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.user
+                Authorization: 'Bearer ' + user
             }
         })
         .then(res => {
@@ -97,7 +82,7 @@ class FileSave extends Component {
             this.setState({ names })
 //            console.log('In FileSave.postDesign this.state.names=',this.state.names);
             var method = 'POST'; // Create it
-            if (this.state.names.filter(e => e.name === name && e.user === this.state.user).length > 0) { // Does it already exist?
+            if (this.state.names.filter(e => e.name === name && e.user === user).length > 0) { // Does it already exist?
                 method = 'PUT'; // Update it
             }
 //            console.log('In FileSave.postDesign method=', method);
@@ -107,7 +92,7 @@ class FileSave extends Component {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + this.state.user
+                    Authorization: 'Bearer ' + user
                 },
                 body: JSON.stringify(this.props.state)
             })
@@ -118,7 +103,7 @@ class FileSave extends Component {
                 }
                 if (method === 'POST') {
                     var names = Array.from(this.state.names); // clone it
-                    names.push({user: this.state.user, name: name}); // If create and successful then sdd name to the array of names
+                    names.push({user: user, name: name}); // If create and successful then sdd name to the array of names
 //                    console.log('In FileSave.postDesign type=',type,'name=',name,'names=', names);
                     this.setState({
                         names: names,
@@ -137,38 +122,74 @@ class FileSave extends Component {
     }
 
     toggle() {
-//        console.log('In FileSave.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
+//        console.log('In FileSave.toggle this=',this);
         // Save the model
-        this.postDesign(this.props.type, this.props.name);
-        this.props.deleteAutoSave();
+        if (this.props.authState.isAuthenticated) {
+            this.postDesign(this.props.user, this.props.type, this.props.name);
+            this.props.deleteAutoSave();
+        } else {
+            this.setState({
+                modal: !this.state.modal,
+            });
+        }
     }
 
+    onSignIn() {
+//      console.log('In FileSave.onSignIn this=',this);
+      this.setState({
+          modal: !this.state.modal
+      });
+      this.props.history.push('/login');
+    }
+
+    onCancel() {
+//      console.log('In FileSave.onCancel this=',this);
+      this.setState({
+          modal: !this.state.modal
+      });
+      // Noop - all done
+    }
+ 
     render() {
-//        console.log('In FileSave.render this=', this);
+//        console.log('In FileSave.render this=',this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>
                     Save
                 </NavDropdown.Item>
+                <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Save
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        {!this.props.authState.isAuthenticated && <Button variant="info" onClick={this.onSignIn}>Sign In...</Button>}{' '}
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
+                    </Modal.Footer>
+                </Modal>
             </React.Fragment>
         );
     }
 }
 
 const mapStateToProps = state => ({
+    user: state.user,
     name: state.name,
     type: state.model.type,
     state: state.model,
 });
 
 const mapDispatchToProps = {
-    changeUser: changeUser,
     deleteAutoSave: deleteAutoSave
 };
 
-export default withAuth(
+export default withRouter(withOktaAuth(
     connect(
         mapStateToProps,
         mapDispatchToProps
     )(FileSave)
-);
+));

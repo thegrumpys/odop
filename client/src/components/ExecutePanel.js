@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 import { Alert, Button, Container, Row } from 'react-bootstrap';
 import { load } from '../store/actionCreators';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
 
 export var startExecute = function(prefix,steps) {
 //    console.log('In startExecute this=',this,'prefix=',prefix,'steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
-        var design = this.state.store.getState();
+        const { store } = this.context;
+        var design = store.getState();
         this.setState({
             modal: true, // Default: do display
             prefix: prefix,
@@ -18,15 +20,17 @@ export var startExecute = function(prefix,steps) {
             text: steps[0].text, // Default: first text
         });
         if (steps[0].actions !== undefined) {
-            steps[0].actions.forEach((action) => { this.state.store.dispatch(action); })
+            steps[0].actions.forEach((action) => { store.dispatch(action); })
         }
     }
 }
 
 export var stopExecute = function() {
-//    console.log('In stopExecute this=',this,'prefix=',prefix,'steps=',steps);
-    var design = this.state.store.getState();
+//    console.log('In stopExecute this=',this);
+    const { store } = this.context;
+    var design = store.getState();
     this.setState({
+        execute_name: undefined, // Clear execute name
         modal: false, // Default: do not display
         prefix: '',
         steps: null,
@@ -37,16 +41,19 @@ export var stopExecute = function() {
 }
 
 class ExecutePanel extends Component {
+
     constructor(props) {
         super(props);
-//        console.log('In ExecutePanel constructor props=',props);
+//        console.log('In ExecutePanel.constructor props=',props);
         this.onNext = this.onNext.bind(this);
         this.onBack = this.onBack.bind(this);
         this.onCancel = this.onCancel.bind(this);
         startExecute = startExecute.bind(this); // Bind external function - no 'this'
         stopExecute = stopExecute.bind(this); // Bind external function - no 'this'
+        const { execute } = queryString.parse(location.search);
         this.state = {
-            modal: false, // Default: do not display
+            execute_name: execute, // Remember execute name
+            modal: false,
             prefix: '',
             steps: null,
             step: 0,
@@ -56,18 +63,30 @@ class ExecutePanel extends Component {
     }
     
     componentDidMount() {
-//        console.log('In ExecutePanel componentDidMount this.context=',this.context);
+//        console.log('In ExecutePanel.componentDidMount this=',this);
+        if (this.state.execute_name !== undefined) {
+//            console.log('In ExecutePanel.componentDidMount this.state.execute_name=',this.state.execute_name);
+            var { execute } = require('../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
+//            console.log('In ExecutePanel.componentDidMount execute=',execute);
+            startExecute("Execute" + ' : ' + this.state.execute_name, execute.steps);
+        }
         this.setState({
             store: this.context.store
         });
     }
 
-    componentWillUnmount() {
-//        console.log('In ExecutePanel componentDidMount this.context=',this.context);
+    componentDidUpdate(prevProps) {
+//        console.log('In ExecutePanel.componentDidUpdate this=',this,'prevProps=',prevProps);
+        if (prevProps.type !== this.props.type) {
+//            console.log('In ExecutePanel.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+            if (this.state.execute_name !== undefined) {
+                stopExecute();
+            }
+        }
     }
-    
+
     onCancel() {
-//        console.log('In ExecutePanel onCancel');
+//        console.log('In ExecutePanel.onCancel this=',this);
         this.setState({
             modal: !this.state.modal,
             prefix: '',
@@ -79,10 +98,11 @@ class ExecutePanel extends Component {
     }
 
     onNext() {
-//        console.log('In ExecutePanel onNext steps=',this.state.steps);
+//        console.log('In ExecutePanel.onNext this=',this);
         var next = this.state.step+1;
         if (this.state.steps[next] !== undefined) {
-            var design = this.state.store.getState();
+            const { store } = this.context;
+            var design = store.getState();
             this.setState({
                 // Put current store state into steps[next].state - remember this for "back" time travel
                 steps: Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: design.model})}),
@@ -91,7 +111,7 @@ class ExecutePanel extends Component {
                 text: this.state.steps[next].text
             });
             if (this.state.steps[next].actions !== undefined) {
-                this.state.steps[next].actions.forEach((action) => { this.state.store.dispatch(action); })
+                this.state.steps[next].actions.forEach((action) => { store.dispatch(action); })
             }
        } else {
             this.setState({
@@ -106,23 +126,24 @@ class ExecutePanel extends Component {
     }
 
     onBack() {
-//        console.log('In ExecutePanel onBack steps=',this.state.steps);
+//        console.log('In ExecutePanel.onBack this=',this);
         var prev = this.state.step-1;
         if (prev < 0) prev = 0; // Stop going backwards if it is on the first step
         // Put steps[prev].state into current store state - that is, time travel back
-        this.state.store.dispatch(load(this.state.steps[prev].state));
+        const { store } = this.context;
+        store.dispatch(load(this.state.steps[prev].state));
         this.setState({
             step: prev,
             title: this.state.steps[prev].title,
             text: this.state.steps[prev].text
         });
         if (this.state.steps[prev].actions !== undefined) {
-            this.state.steps[prev].actions.forEach((action) => { this.state.store.dispatch(action); })
+            this.state.steps[prev].actions.forEach((action) => { store.dispatch(action); })
         }
     }
     
     render() {
-//        console.log('In ExecutePanel.render this=', this);
+//        console.log('In ExecutePanel.render this=',this);
         return this.state.modal && (
             <Alert variant="success" style={{marginTop: '10px'}}>
                 <Container>
@@ -153,4 +174,14 @@ ExecutePanel.contextTypes = {
     store: PropTypes.object
 };
 
-export default connect()(ExecutePanel);
+const mapStateToProps = state => ({
+    type: state.model.type,
+});
+
+const mapDispatchToProps = {
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ExecutePanel);

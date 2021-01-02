@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { changeUser } from '../../store/actionCreators';
 import { displayMessage } from '../../components/ErrorModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
-import { withAuth } from '@okta/okta-react';
 import config from '../../config';
+import { withOktaAuth } from '@okta/okta-react';
+import { withRouter } from 'react-router-dom';
 
 class FileDelete extends Component {
 
@@ -16,59 +16,40 @@ class FileDelete extends Component {
         this.toggle = this.toggle.bind(this);
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
-        this.onDelete = this.onDelete.bind(this);
+        this.onSignIn = this.onSignIn.bind(this);
         this.onCancel = this.onCancel.bind(this);
+        this.onDelete = this.onDelete.bind(this);
         this.state = {
             modal: false,
             types: config.design.types,
             names: [],
             type: this.props.type,
             name: '',
-            authenticated: null,
-            user: null,
         };
     }
 
-    async componentDidMount() {
-//        console.log('In FileDelete.componentDidMount');
-        var authenticated = await this.props.auth.isAuthenticated();
-//        console.log("In FileDelete.componentDidMount before authenticated=",authenticated);
-        if (authenticated !== this.state.authenticated) { // Did authentication change?
-            this.setState({ authenticated }); // Remember our current authentication state
-            if (authenticated) { // We have become authenticated
-                var user = await this.props.auth.getUser();
-//                console.log('In FileDelete.componentDidMount user=',user);
-                this.setState({
-                    user: user.sub,
-                });
-                this.props.changeUser(user.sub);
-            } else { // We have become unauthenticated
-                this.setState({
-                    user: null,
-                });
-                this.props.changeUser(null);
-            }
-        }
+    componentDidMount() {
+//        console.log('In FileDelete.componentDidMount this=',this);
     }
 
     componentDidUpdate(prevProps) {
-//      console.log('In FileDelete.componentDidUpdate');
-      if (prevProps.type !== this.props.type) {
-//          console.log('In FileDelete.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+//      console.log('In FileDelete.componentDidUpdate this=',this,'prevProps=',prevProps);
+      if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
+//          console.log('In FileDelete.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
           this.setState({ 
               type: this.props.type
           });
-          this.getDesignNames(this.props.type);
+          this.getDesignNames(this.props.user,this.props.type);
       }
   }
 
-    getDesignNames(type) {
+    getDesignNames(user, type) {
+//        console.log('In FileDelete.getDesignNames user=',user,'type=',type);
         // Get the names and store them in state
-//        console.log('In FileDelete.getDesignNames type=', type);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
             headers: {
-                Authorization: 'Bearer ' + this.state.user
+                Authorization: 'Bearer ' + user
             }
         })
         .then(res => {
@@ -79,7 +60,7 @@ class FileDelete extends Component {
             return res.json()
         })
        .then(names => {
-//           console.log('In FileDelete.getDesignNames names=', names);
+//           console.log('In FileDelete.getDesignNames user=',user,'type=',type,'names=', names);
            this.setState({ 
                names: names.filter((design) => {return design.user !== null})
            });
@@ -95,15 +76,15 @@ class FileDelete extends Component {
        });
     }
     
-    deleteDesign(type, name) {
-//        console.log('In FileDelete.deleteDesign type=', type, ' name=', name);
+    deleteDesign(user, type, name) {
+//        console.log('In FileDelete.deleteDesign user=',user,'type=',type,'name=',name);
         displaySpinner(true);
         fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + this.state.user
+                Authorization: 'Bearer ' + user
             },
         })
         .then(res => {
@@ -120,31 +101,49 @@ class FileDelete extends Component {
     }
     
     toggle() {
-//        console.log('In FileDelete.toggle this.props.type=',this.props.type,' this.props.name=',this.props.name);
-        this.getDesignNames(this.props.type);
+//        console.log('In FileDelete.toggle this=',this);
+        if (this.props.authState.isAuthenticated) {
+            this.getDesignNames(this.props.user,this.props.type);
+        }
         this.setState({
             modal: !this.state.modal,
         });
     }
     
     onSelectType(event) {
-//      console.log('In FileDelete.onSelectType event.target.value=',event.target.value);
+//      console.log('In FileDelete.onSelectType this=',this,'event.target.value=',event.target.value)
       this.setState({
           type: event.target.value,
           names: [],
       });
-      this.getDesignNames(event.target.value);
+      this.getDesignNames(this.props.user,event.target.value);
 }
 
     onSelectName(event) {
-//        console.log('In FileDelete.onSelect event.target.value=',event.target.value);
+//        console.log('In FileDelete.onSelect this=',this,'event.target.value=',event.target.value);
         this.setState({
             name: event.target.value 
         });
     }
     
+    onSignIn() {
+//      console.log('In FileDelete.onSignIn this=',this);
+      this.setState({
+          modal: !this.state.modal
+      });
+      this.props.history.push('/login');
+    }
+
+    onCancel() {
+//      console.log('In FileDelete.onCancel this=',this);
+      this.setState({
+          modal: !this.state.modal
+      });
+      // Noop - all done
+  }
+
     onDelete() {
-//        console.log('In FileDelete.onDelete this.state.type=',this.state.type,' this.state.name=',this.state.name);
+//        console.log('In FileDelete.onDelete this=',this);
         // Validate name, and delete the database element
         if (this.state.name === '') {
             displayMessage("Select design to delete.");
@@ -153,19 +152,11 @@ class FileDelete extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        this.deleteDesign(this.state.type,this.state.name);
+        this.deleteDesign(this.props.user, this.state.type, this.state.name);
     }
     
-    onCancel() {
-//        console.log('In FileDelete.onCancel');
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Noop - all done
-    }
-
     render() {
-//        console.log('In FileDelete.render this=', this);
+//        console.log('In FileDelete.render this=',this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>
@@ -179,23 +170,25 @@ class FileDelete extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <br />
+                        {!this.props.authState.isAuthenticated && <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
                         <Form.Label htmlFor="fileDeleteSelectType">Select design type for delete:</Form.Label>
-                        <Form.Control as="select" id="fileDeleteSelectType" onChange={this.onSelectType} value={this.state.type}>
+                        <Form.Control as="select" id="fileDeleteSelectType" onChange={this.onSelectType} value={this.state.type} disabled={!this.props.authState.isAuthenticated}>
                             {this.state.types.map((designtype, index) =>
                                 <option key={index} value={designtype}>{designtype}</option>
                             )}
                         </Form.Control>
                         <br />
                         <Form.Label htmlFor="fileDeleteSelectName">Select design to delete:</Form.Label>
-                        <Form.Control as="select" id="fileDeleteSelectName" onChange={this.onSelectName}>
+                        <Form.Control as="select" id="fileDeleteSelectName" onChange={this.onSelectName} disabled={!this.props.authState.isAuthenticated}>
                             {this.state.names.map((design, index) => {
                                 return <option key={index} value={design.name}>{design.name}</option>
                             })}
                         </Form.Control>
                     </Modal.Body>
                     <Modal.Footer>
+                        {!this.props.authState.isAuthenticated && <Button variant="info" onClick={this.onSignIn}>Sign In...</Button>}{' '}
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" onClick={this.onDelete} disabled={this.state.names.length === 0 ? true : false}>Delete</Button>
+                        <Button variant="primary" onClick={this.onDelete} disabled={!this.props.authState.isAuthenticated && this.state.names.length === 0 ? true : false}>Delete</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>
@@ -204,17 +197,17 @@ class FileDelete extends Component {
 }
 
 const mapStateToProps = state => ({
+    user: state.user,
     name: state.name, 
     type: state.model.type, 
 });
 
 const mapDispatchToProps = {
-    changeUser: changeUser,
 };
 
-export default withAuth(
+export default withRouter(withOktaAuth(
     connect(
         mapStateToProps,
         mapDispatchToProps
     )(FileDelete)
-);
+));

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
-import { stopExecute } from "../../components/ExecutePanel";
+import { startExecute, stopExecute } from "../../components/ExecutePanel";
 
 class ActionExecute extends Component {
 
     constructor(props) {
-//        console.log('In ActionExecute.constructor');
+//        console.log('In ActionExecute.constructor props=',props)
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onSelect = this.onSelect.bind(this);
@@ -17,25 +17,25 @@ class ActionExecute extends Component {
             modal: false,
         };
     }
-    
+
     componentDidMount() {
-//      console.log('In ActionExecute.componentDidMount);
-      this.updateExecuteNames();
-}
+//        console.log('In ActionExecute.componentDidMount);
+        this.updateExecuteNames();
+    }
 
     componentDidUpdate(prevProps) {
-//      console.log('In ActionExecute.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-      if (prevProps.type !== this.props.type) {
-//          console.log('In ActionExecute.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-          stopExecute(); // Stop whatever is currently running if anything is running
-          this.updateExecuteNames();
-      }
-  }
+//        console.log('In ActionExecute.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
+        if (prevProps.type !== this.props.type) {
+//            console.log('In ActionExecute.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+//            stopExecute(); // Stop whatever is currently running if anything is running
+            this.updateExecuteNames();
+        }
+    }
 
     updateExecuteNames() {
         var { getExecuteNames } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load getExecuteNames
         var execute_names = getExecuteNames();
-//        console.log('In ActionExecute.toggle execute_names=', execute_names);
+//        console.log('In ActionExecute.updateExecuteNames execute_names=', execute_names);
         var execute_name;
         if (execute_names.length > 0)
             execute_name = execute_names[0]; // Default to first name
@@ -66,9 +66,10 @@ class ActionExecute extends Component {
         });
         logUsage('event', 'ActionExecute', { 'event_label': this.state.execute_name });
         // Do execute
-//        console.log('In ActionExecute.onExecute startTutorial(',this.state.execute_name,')');
-        var { execute } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load execute
-        execute("Action : Execute",this.state.execute_name);
+//        console.log('In ActionExecute.onExecute this.state.execute_name=',this.state.execute_name);
+        var { execute } = require('../../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
+//        console.log('In ActionExecute.onExecute execute=',execute);
+        startExecute("Action : Execute" + ' : ' + this.state.execute_name, execute.steps);
     }
     
     onCancel() {
@@ -80,7 +81,7 @@ class ActionExecute extends Component {
     }
     
     render() {
-//        console.log('In ActionExecute.render this=', this);
+//        console.log('In ActionExecute.render this=',this);
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>

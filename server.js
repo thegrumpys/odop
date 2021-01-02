@@ -6,9 +6,9 @@ const mysql = require('mysql');
 var cors = require('cors');
 
 /**
- * A simple middleware that asserts valid access tokens and sends 401 responses
- * if the token is not present or fails validation.  If the token is valid its
- * contents are attached to req.jwt
+ * A simple middleware that asserts valid user name and sends 401 responses
+ * if the token is not present.  If the token is present its
+ * contents are attached to request
  */
 function authenticationRequired(req, res, next) {
   const authHeader = req.headers.authorization || '';
@@ -140,7 +140,7 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
         } else {
 //            console.log('SERVER: After SELECT rows[0]=', rows[0]);
             type = rows[0].type; // Get type from the JSON blob
-//            console.log('SERVER: After SELECT user=', user, ' name=', name, ' type=', type);
+//            console.log('SERVER: After SELECT user=',user,'name=',name, 'type=',type);
             value = JSON.parse(rows[0].value); // Get value from the JSON blob
             value.type = type; // Insert type into blob
 //            console.log('SERVER: After SELECT value=', value);
@@ -159,7 +159,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
     var name = req.params['name'];
     console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
 //    console.log('SERVER: In POST /api/v1/designtypes/'+type+'/designs/'+name,' req.body=',req.body);
-    if (req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
+    if (req.uid === "null" || req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
     } else {
@@ -180,7 +180,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req
                 connection.end();
                 console.log('SERVER: 400 - BAD REQUEST');
             } else {
-//                console.log('SERVER: In POST /api/v1/designs/'+name,' type=', type,' value=', value);
+//                console.log('SERVER: In POST /api/v1/designs/'+name,'type=',type,'value=',value);
                 value = value.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
                              .replace(/\\n/g, "\\\\n")
                              .replace(/\\'/g, "\\\\'")
@@ -219,7 +219,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
     var name = req.params['name'];
     console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name);
 //    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name+' user=',user,' req.body=',req.body);
-    if (req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
+    if (req.uid === "null" || req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
     } else {
@@ -240,7 +240,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
                 connection.end();
                 console.log('SERVER: 404 - NOT FOUND');
             } else {
-//                console.log('SERVER: In PUT /api/v1/designs/'+name,' type=', type,' value=', value);
+//                console.log('SERVER: In PUT /api/v1/designs/'+name,'type=',type,'value=',value);
                 value = value.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
                              .replace(/\\n/g, "\\\\n")
                              .replace(/\\'/g, "\\\\'")
@@ -278,40 +278,45 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (r
     var type = req.params['type'];
     var name = req.params['name'];
     console.log('SERVER: In DELETE /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
-    var connection = startConnection();
-    var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
-//    console.log('SERVER: stmt='+stmt);
-    connection.query(stmt, (err, rows, fields) => {
-//        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
-        if (err) {
-            res.status(500).end();
-            connection.end();
-            console.log('SERVER: 500 - INTERNAL SERVER ERROR');
-            throw err;
-        } else if (rows[0].count === 0) {
-            res.status(404).end();
-            connection.end();
-            console.log('SERVER: 404 - NOT FOUND');
-        } else {
-            var stmt = 'DELETE FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
-//            console.log('SERVER: stmt='+stmt);
-            connection.query(stmt, (err, rows, fields) => {
-//                console.log('SERVER: After DELETE err=', err, ' rows=', rows);
-                if (err) {
-                    res.status(500).end();
-                    connection.end();
-                    console.log('SERVER: 500 - INTERNAL SERVER ERROR');
-                    throw err;
-                } else {
-                    value = {};
-//                    console.log('SERVER: After DELETE value=', value);
-                    res.status(200).json(value);
-                    connection.end();
-                    console.log('SERVER: 200 - OK');
-                }
-            });
-        }
-    });
+    if (req.uid === "null") {
+        res.status(400).end();
+        console.log('SERVER: 400 - BAD REQUEST');
+    } else {
+        var connection = startConnection();
+        var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
+//        console.log('SERVER: stmt='+stmt);
+        connection.query(stmt, (err, rows, fields) => {
+//            console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+            if (err) {
+                res.status(500).end();
+                connection.end();
+                console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+                throw err;
+            } else if (rows[0].count === 0) {
+                res.status(404).end();
+                connection.end();
+                console.log('SERVER: 404 - NOT FOUND');
+            } else {
+                var stmt = 'DELETE FROM design WHERE user = \''+user+'\' AND type = \''+type+'\' AND name = \''+name+'\'';
+//                console.log('SERVER: stmt='+stmt);
+                connection.query(stmt, (err, rows, fields) => {
+//                    console.log('SERVER: After DELETE err=', err, ' rows=', rows);
+                    if (err) {
+                        res.status(500).end();
+                        connection.end();
+                        console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+                        throw err;
+                    } else {
+                        value = {};
+//                        console.log('SERVER: After DELETE value=', value);
+                        res.status(200).json(value);
+                        connection.end();
+                        console.log('SERVER: 200 - OK');
+                    }
+                });
+            }
+        });
+    }
 });
 
 app.post('/api/v1/usage_log', (req, res) => {

@@ -9,6 +9,9 @@ import { reducers } from './store/reducers';
 import { Provider } from 'react-redux'
 import Routes from './components/Routes';
 import './odop.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { initialSystemControls } from './initialSystemControls';
+import config from './config';
 
 //function loggerMiddleware({ getState }) {
 //    return next => action => {
@@ -25,14 +28,15 @@ import './odop.css';
 //    }
 //  }
 
-console.error('In index.js ==================================================================');
-//console.log('CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'starting on port =', process.env.PORT, 'node version =', process.version);
+//console.error('In index.js ==================================================================');
+//console.log('In index.js CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'Starting on port =', process.env.PORT, 'Node version =', process.version);
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
-
 const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
-const store = createStore(reducers, {user: null, name: null, model: null}, middleware);
 
-ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><Provider store={store}><Routes /></Provider></div>, document.getElementById('root'));
+// Create a store with an empty model where type is null
+const store = createStore(reducers, { user: null, name: config.design.name, view: config.design.view, model: { type: null, system_controls: initialSystemControls }}, middleware);
+
+ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><Provider store={store}><Router><Routes /></Router></Provider></div>, document.getElementById('root'));
