@@ -6,8 +6,8 @@ import { logUsage } from '../../logUsage';
 class ViewCADModel extends Component {
 
     constructor(props) {
-//        console.log('In ViewCADModel.constructor');
         super(props);
+//        console.log('In ViewCADModel.constructor props=',props);
         this.toggle = this.toggle.bind(this);
         this.state = {
             modal: false
@@ -15,7 +15,7 @@ class ViewCADModel extends Component {
     }
     
     toggle() {
-//        console.log('In ViewCADModel.toggle');
+//        console.log('In ViewCADModel.toggle this=',this);
         this.setState({
             modal: !this.state.modal
         });
@@ -23,12 +23,8 @@ class ViewCADModel extends Component {
     }
 
     render() {
-//        console.log('In ViewCADModel.render');
+//        console.log('In ViewCADModel.render this=',this);
 
-//        var catalog_name = this.props.symbol_table[62];
-//        console.log('In ViewCADModel.render Catalog_Name=',catalog_name);
-//        var material_type = this.props.symbol_table[37];
-//        console.log('In ViewCADModel.render Material_Type=',material_type);
         var od_free = this.props.symbol_table[0];
 //        console.log('In ViewCADModel.render OD_Free=',od_free);
         var wire_dia = this.props.symbol_table[1];
@@ -122,7 +118,7 @@ class ViewCADModel extends Component {
 }  
 
 const mapStateToProps = state => ({
-    symbol_table: state.symbol_table,
+    symbol_table: state.model.symbol_table,
 });
 
 export default connect(mapStateToProps)(ViewCADModel);
