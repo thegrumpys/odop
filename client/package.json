@@ -4,7 +4,7 @@
   "description": "Open Design Optimization Platform (ODOP) Client",
   "main": "index.js",
   "scripts": {
-    "start": "export NODE_ENV=staging; react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "coverage": "react-scripts test --env=jsdom --coverage",
