@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { InputGroup, ButtonGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
-import { changeSymbolValue } from '../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -491,6 +491,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     changeSymbolValue: changeSymbolValue,
+    fixSymbolValue: fixSymbolValue,
+    freeSymbolValue: freeSymbolValue,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SymbolValue);
