@@ -5,7 +5,7 @@ import ConstraintsMinRowDependentVariable from './ConstraintsMinRowDependentVari
 import { connect } from 'react-redux';
 
 class ConstraintsMinTable extends Component {
-    
+
     render() {
 //        console.log('In ConstraintsMinTable.render this=',this);
         return (
@@ -61,7 +61,7 @@ class ConstraintsMinTable extends Component {
             </React.Fragment>
         );
     }
-    
+
 }
 
 const mapStateToProps = state => ({

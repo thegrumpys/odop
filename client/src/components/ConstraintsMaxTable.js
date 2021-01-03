@@ -5,7 +5,7 @@ import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVari
 import { connect } from 'react-redux';
 
 class ConstraintsMaxTable extends Component {
-    
+
     render() {
 //        console.log('In ConstraintsMaxTable.render this=',this);
         return (
@@ -61,7 +61,7 @@ class ConstraintsMaxTable extends Component {
             </React.Fragment>
         );
     }
-    
+
 }
 
 const mapStateToProps = state => ({
