@@ -10,6 +10,7 @@ var design_units;
 var design_view;
 var session_refresh;
 
+console.log('In config.js process.env.NODE_ENV=',process.env.NODE_ENV);
 if (process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "staging") { // Are we running on localhost as "development" or "test"?
 //  console.log('In config: process.env.REACT_APP_ISSUER=', process.env.REACT_APP_ISSUER, 'process.env.REACT_APP_CLIENT_ID=', process.env.REACT_APP_CLIENT_ID);
   issuer = process.env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
