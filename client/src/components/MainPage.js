@@ -168,9 +168,9 @@ class MainPage extends Component {
                                 <NavDropdown.Divider />
                                 <ViewReports reportNames={reportNames}/>
                                 <NavDropdown.Divider />
-                                {node.env !== "production" && <ViewOffsets />}
-                                {node.env !== "production" && <ViewSymbolTableOffsets />}
-                                {node.env !== "production" && <ViewSymbolTable />}
+                                {config.node.env !== "production" && <ViewOffsets />}
+                                {config.node.env !== "production" && <ViewSymbolTableOffsets />}
+                                {config.node.env !== "production" && <ViewSymbolTable />}
                             </NavDropdown>
                             <NavDropdown title="Help">
                                 <HelpMotd />

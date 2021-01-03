@@ -224,8 +224,8 @@ class FileOpen extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         {!this.props.authState.isAuthenticated && <Button variant="info" onClick={this.onSignIn}>Sign In...</Button>}{' '}
-                        {node.env !== "production" && <Button variant="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
-                        {node.env !== "production" && <Button variant="secondary" onClick={this.onLoadMetricInitialState}>Load Metric Initial State</Button>}{' '}
+                        {config.node.env !== "production" && <Button variant="secondary" onClick={this.onLoadInitialState}>Load Initial State</Button>}{' '}
+                        {config.node.env !== "production" && <Button variant="secondary" onClick={this.onLoadMetricInitialState}>Load Metric Initial State</Button>}{' '}
                         {typeof(Storage) !== "undefined" && localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={this.onLoadAutoSave}>Load Auto Save</Button>}{' '}
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button variant="primary" onClick={this.onOpen} disabled={this.state.names.length === 0 ? true : false}>Open</Button>

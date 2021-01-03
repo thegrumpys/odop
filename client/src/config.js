@@ -40,14 +40,14 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
 }
 
 console.log('In config.js node_env=',node_env);
-//console.log('In config.js issuer=',issuer);
-//console.log('In config.js clientId=',clientId);
-//console.log('In config.js design_types=',design_types);
-//console.log('In config.js design_type=',design_type);
-//console.log('In config.js design_name=',design_name);
-//console.log('In config.js design_units=',design_units);
-//console.log('In config.js design_view=',design_view);
-//console.log('In config.js session_refresh=',session_refresh);
+console.log('In config.js issuer=',issuer);
+console.log('In config.js clientId=',clientId);
+console.log('In config.js design_types=',design_types);
+console.log('In config.js design_type=',design_type);
+console.log('In config.js design_name=',design_name);
+console.log('In config.js design_units=',design_units);
+console.log('In config.js design_view=',design_view);
+console.log('In config.js session_refresh=',session_refresh);
 
 export default {
   node: {
