@@ -133,7 +133,7 @@ class MainPage extends Component {
                     <Navbar.Collapse in={this.state.isOpen}>
                         <Nav className="mr-auto">
                             {logOnOff}
-                            <NavDropdown title="File" renderMenuOnMount="true">
+                            <NavDropdown title="File" renderMenuOnMount=true>
                                 <FileOpen />
                                 <FileRecent />
                                 <FileSave />
