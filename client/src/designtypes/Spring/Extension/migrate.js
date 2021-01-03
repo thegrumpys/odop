@@ -92,56 +92,13 @@ export function migrate(design) {
         // Current model version
 //        console.log('Convert from 4 to 5');
         if (design.symbol_table[0].units === 'mm') { // Check for units 
-            design.symbol_table[0].cmax = 100; 
-            design.symbol_table[1].cmax = 20; 
-            design.symbol_table[2].cmax = 100; 
-            design.symbol_table[3].cmax = 100; 
-            design.symbol_table[4].cmax = 100; 
-            design.symbol_table[5].cmax = 200; 
-            design.symbol_table[6].cmin = 2; 
-            design.symbol_table[6].cmax = 400; 
-            design.symbol_table[7].cmax = 100; 
-            design.symbol_table[8].cmax = 100; 
-            design.symbol_table[12].cmax = 200; 
-            design.symbol_table[13].cmax = 200; 
-            design.symbol_table[14].cmax = 400; 
-            design.symbol_table[15].cmax = 500; 
-            design.symbol_table[16].cmax = 1000; 
-            design.symbol_table[17].cmin = 0.5; 
-            design.symbol_table[17].cmax = 500; 
-            design.symbol_table[18].cmax = 1000; 
-            design.symbol_table[20].sdlim = 100; 
-            design.symbol_table[21].cmin = 10; 
-            design.symbol_table[21].cmax = 200; 
-            design.symbol_table[22].cmax = 1000; 
             design.symbol_table[23].lmax = "FDCL"; 
             design.symbol_table[23].cmax = 52; 
             design.symbol_table[23].sdlim = 1000; 
-            design.symbol_table[28].cmin = 1.0; 
-            design.symbol_table[29].cmin = 10; 
-            design.symbol_table[29].cmax = 200; 
-            design.symbol_table[30].cmin = 20; 
-            design.symbol_table[30].cmax = 400; 
         } else {
-            design.symbol_table[0].cmax = 10; 
-            design.symbol_table[2].cmax = 100; 
-            design.symbol_table[3].cmax = 40; 
-            design.symbol_table[4].cmax = 10; 
-            design.symbol_table[5].cmax = 50; 
-            design.symbol_table[6].cmin = 1; 
-            design.symbol_table[6].cmax = 100; 
-            design.symbol_table[12].cmin = 0.1; 
-            design.symbol_table[13].cmin = 0.1; 
-            design.symbol_table[14].cmax = 100; 
-            design.symbol_table[20].sdlim = 14000; 
-            design.symbol_table[21].cmax = 30000; 
-            design.symbol_table[22].cmax = 100000; 
             design.symbol_table[23].lmax = 'FDCL'; 
             design.symbol_table[23].cmax = 52; 
             design.symbol_table[23].sdlim = 150000; 
-            design.symbol_table[28].cmin = 1.0; 
-            design.symbol_table[29].cmax = 20000; 
-            design.symbol_table[30].cmax = 30000; 
         }
         design['jsontype'] = "ODOP"; // Add in model type
         if (design.symbol_table[0].units === "inches") { // Add in units type
