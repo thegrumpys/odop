@@ -8,6 +8,7 @@ import { logUsage } from '../../logUsage';
 import config from '../../config';
 import { withOktaAuth } from '@okta/okta-react';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 class FileOpen extends Component {
 
@@ -23,8 +24,10 @@ class FileOpen extends Component {
         this.onSignIn = this.onSignIn.bind(this);
         this.onOpen = this.onOpen.bind(this);
         this.onCancel = this.onCancel.bind(this);
+        var { prompt } = queryString.parse(location.search);
+        var modal = prompt !== undefined ? true : false;
         this.state = {
-            modal: false,
+            modal: modal,
             types: config.design.types,
             names: [],
             type: this.props.type,
@@ -34,6 +37,7 @@ class FileOpen extends Component {
 
     componentDidMount() {
 //        console.log('In FileOpen.componentDidMount this=',this);
+        this.getDesignNames(this.props.user,this.props.type);
     }
 
     componentDidUpdate(prevProps) {
