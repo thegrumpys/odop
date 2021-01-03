@@ -346,7 +346,7 @@ app.post('/api/v1/usage_log', (req, res) => {
     });
 });
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
     // If it’s not https already, redirect the same url on https.
     app.use((req, res, next) => {
       if (req.header('x-forwarded-proto') !== 'https') {

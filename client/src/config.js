@@ -10,7 +10,7 @@ var design_units;
 var design_view;
 var session_refresh;
 
-if (process.env.NODE_ENV !== "production") { // Are we running on localhost?
+if (process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "staging") { // Are we running on localhost as "development" or "test"?
 //  console.log('In config: process.env.REACT_APP_ISSUER=', process.env.REACT_APP_ISSUER, 'process.env.REACT_APP_CLIENT_ID=', process.env.REACT_APP_CLIENT_ID);
   issuer = process.env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
   clientId = process.env.REACT_APP_CLIENT_ID || '{clientId}';
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost?
   design_units = process.env.REACT_APP_DESIGN_UNITS || 'US';
   design_view = process.env.REACT_APP_DESIGN_VIEW || 'View0';
   session_refresh = process.env.REACT_APP_SESSION_REFRESH || 3600;
-} else { // We are running on Heroku
+} else { // We are running on Heroku as "production" or "staging"
   const env = runtimeEnv(); // Load the env object.
 //  console.log('In config: env.REACT_APP_ISSUER=', env.REACT_APP_ISSUER, 'env.REACT_APP_CLIENT_ID=', env.REACT_APP_CLIENT_ID);
   issuer = env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
