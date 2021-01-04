@@ -15,6 +15,8 @@ import ConstraintsMaxHeaderIndependentVariable from './ConstraintsMaxHeaderIndep
 import ConstraintsMaxRowIndependentVariable from './ConstraintsMaxRowIndependentVariable';
 import ConstraintsMaxHeaderDependentVariable from './ConstraintsMaxHeaderDependentVariable';
 import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
+import NameValueUnitsHeaderCalcInput from './NameValueUnitsHeaderCalcInput';
+import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -204,6 +206,11 @@ class SymbolValue extends Component {
                                 <React.Fragment>
                                     <NameValueUnitsHeaderDependentVariable />
                                     <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                            {this.props.element.type === "calcinput" && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <NameValueUnitsHeaderCalcInput />
+                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
                                 </React.Fragment>}
                         </Table>
                         <Table className="border border-secondary" size="sm">
