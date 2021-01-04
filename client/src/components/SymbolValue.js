@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
-import { InputGroup, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { InputGroup, ButtonGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolValue } from '../store/actionCreators';
+import NameValueUnitsHeaderIndependentVariable from './NameValueUnitsHeaderIndependentVariable';
+import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
+import NameValueUnitsHeaderDependentVariable from './NameValueUnitsHeaderDependentVariable';
+import NameValueUnitsRowDependentVariable from './NameValueUnitsRowDependentVariable';
+import ConstraintsMinHeaderIndependentVariable from './ConstraintsMinHeaderIndependentVariable';
+import ConstraintsMinRowIndependentVariable from './ConstraintsMinRowIndependentVariable';
+import ConstraintsMinHeaderDependentVariable from './ConstraintsMinHeaderDependentVariable';
+import ConstraintsMinRowDependentVariable from './ConstraintsMinRowDependentVariable';
+import ConstraintsMaxHeaderIndependentVariable from './ConstraintsMaxHeaderIndependentVariable';
+import ConstraintsMaxRowIndependentVariable from './ConstraintsMaxRowIndependentVariable';
+import ConstraintsMaxHeaderDependentVariable from './ConstraintsMaxHeaderDependentVariable';
+import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -13,31 +25,50 @@ Number.prototype.toODOPPrecision = function() {
     else odopValue = value.toFixed(0);
     return odopValue;
 };
-     
+
 class SymbolValue extends Component {
-    
+
     constructor(props) {
 //        console.log('In SymbolValue.constructor props=',props);
         super(props);
         this.onChange = this.onChange.bind(this);
-        this.onChange = this.onChange.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onSelect = this.onSelect.bind(this);
+        this.onContextMenu = this.onContextMenu.bind(this);
+        this.onClose = this.onClose.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
-                focused: false
+                modal: false,
+                focused: false,
             };
         } else if (this.props.element.format === 'table') {
 //            console.log('In SymbolValue.constructor file= ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In SymbolValue.constructor table=',table);
             this.state = {
-                table: table
+                modal: false,
+                table: table,
+            };
+        } else {
+            this.state = {
+                modal: false,
             };
         }
     }
-    
+
+    componentDidMount() {
+//      console.log('In SymbolValue.componentDidMount this=',this);
+        document.addEventListener("click", this.handleClick);
+        document.addEventListener("contextmenu", this.handleContextMenu);
+    }
+
+    componentWillUnmount() {
+//      console.log('In SymbolValue.componentWillUnmount this=',this);
+        document.removeEventListener("click", this.handleClick);
+        document.removeEventListener("contextmenu", this.handleContextMenu);
+    }
+
     componentDidUpdate(prevProps) {
 //        console.log('In SymbolValue.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
@@ -60,21 +91,21 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.onChange event.target.value=',event.target.value);
        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
     }
-  
+
     onFocus(event) {
 //        console.log("In SymbolValue.onFocus event.target.value=", event.target.value);
        this.setState({
             focused: true
         });
     }
-  
+
     onBlur(event) {
 //        console.log("In SymbolValue.onBlur event.target.value=", event.target.value);
         this.setState({
           focused: false
         });
     }
-  
+
     onSelect(event) {
 //        console.log('In SymbolValue.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
@@ -90,7 +121,22 @@ class SymbolValue extends Component {
             }
         });
     }
-  
+
+    onContextMenu(e) {
+//        console.log('In SymbolValue.onContextMenu this=',this,'e=',e);
+        e.preventDefault();
+        this.setState({
+            modal: true,
+        });
+    }
+
+    onClose() {
+//        console.log('In SymbolValue.onCancel this=',this);
+        this.setState({
+            modal: false,
+        });
+    }
+
     render() {
 //        console.log('In SymbolValue.render this=',this);
         var value_class = 'text-right ';
@@ -116,10 +162,10 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             (value_tooltip != undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
+                                    <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
+                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                             )
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
@@ -146,6 +192,49 @@ class SymbolValue extends Component {
                         : ''}
                     </InputGroup>
                 </td>
+                <Modal show={this.state.modal} className={this.props.className} onHide={this.onClick}>
+                <Modal.Body>
+                        <Table className="border border-secondary" size="sm">
+                            {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <NameValueUnitsHeaderIndependentVariable />
+                                    <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                            {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <NameValueUnitsHeaderDependentVariable />
+                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                        </Table>
+                        <Table className="border border-secondary" size="sm">
+                            {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <ConstraintsMinHeaderIndependentVariable />
+                                    <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                            {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <ConstraintsMinHeaderDependentVariable />
+                                    <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                        </Table>
+                        <Table className="border border-secondary" size="sm">
+                            {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <ConstraintsMaxHeaderIndependentVariable />
+                                    <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                            {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <ConstraintsMaxHeaderDependentVariable />
+                                    <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                        </Table>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={this.onClose}>Close</Button>
+                    </Modal.Footer>
+                </Modal>
             </React.Fragment>
         );
     }
