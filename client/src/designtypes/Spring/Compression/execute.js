@@ -1,3 +1,4 @@
+import config from '../../../config';
 export function getExecuteNames() {
     var result;
     if (config.node.env !== "production") {
