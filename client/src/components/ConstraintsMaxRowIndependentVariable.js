@@ -102,9 +102,6 @@ class ConstraintMaxRowIndependentVariable extends Component {
                 value_class += "text-strictly-feasible";
             }
         }
-        // =======================================
-        // Table Row
-        // =======================================
         return (
             <React.Fragment>
                 <tr key={this.props.element.name}>
