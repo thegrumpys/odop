@@ -1,5 +1,17 @@
+import config from '../../config';
 export function getExecuteNames() {
-    var result = [];
+    var result;
+    if (config.node.env !== "production") {
+      result = [
+          'mk70PoundGoldBar',
+          'mkStandardGoldBar',
+          'mkStartUp',
+          'mkUSPS_MachinableParcels',
+          'mkUSPS_MaxVolume',
+      ];
+    } else {
+      result = [];
+    }
 //    console.log('In getExecuteNames result=',result);
     return result;
 }

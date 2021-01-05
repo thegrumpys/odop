@@ -78,7 +78,7 @@ class Routes extends Component {
   loadInitialState(type, units) {
 //      console.log('In Routes.loadInitialState this=',this,'type=',type,'units=',units);
       this.props.loadInitialState(type, units);
-      this.props.changeName('StartUp');
+      this.props.changeName('Startup');
       this.props.deleteAutoSave();
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load initialState ' + units});
   }
