@@ -3,8 +3,10 @@ export function getExecuteNames() {
     var result;
     if (config.node.env !== "production") {
       result = [
-        'mkHotWndStartup',        // Script to make Hot Wound Startup file from Load Initial State
-        'mkHotWndStartup_Metric', // Script to make Hot Wound Startup Metric file from Load Initial State Metric
+        'mkHotWound',             // Script to make Hot Wound Startup file from Load Initial State
+        'mkHotWoundMetric',       // Script to make Hot Wound Startup Metric file from Load Initial State Metric
+        'mkStartup',              // Script to make Startup file from Load Initial State
+        'mkStartup_Metric',       // Script to make Startup Metric file from Load Initial State Metric
         'tweakPrefs',             // Script to tweak Preference values for greater precision of search result
         'welcome0',               // Script to guide novice users - Advanced view; spring type neutral
         'welcome1'                // Script to guide novice users - Calculator view; spring type neutral
