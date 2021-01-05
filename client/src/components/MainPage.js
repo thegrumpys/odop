@@ -133,7 +133,7 @@ class MainPage extends Component {
                     <Navbar.Collapse in={this.state.isOpen}>
                         <Nav className="mr-auto">
                             {logOnOff}
-                            <NavDropdown title="File">
+                            <NavDropdown title="File" renderMenuOnMount={true}>
                                 <FileOpen />
                                 <FileRecent />
                                 <FileSave />
@@ -168,9 +168,9 @@ class MainPage extends Component {
                                 <NavDropdown.Divider />
                                 <ViewReports reportNames={reportNames}/>
                                 <NavDropdown.Divider />
-                                {process.env.NODE_ENV !== "production" && <ViewOffsets />}
-                                {process.env.NODE_ENV !== "production" && <ViewSymbolTableOffsets />}
-                                {process.env.NODE_ENV !== "production" && <ViewSymbolTable />}
+                                {config.node.env !== "production" && <ViewOffsets />}
+                                {config.node.env !== "production" && <ViewSymbolTableOffsets />}
+                                {config.node.env !== "production" && <ViewSymbolTable />}
                             </NavDropdown>
                             <NavDropdown title="Help">
                                 <HelpMotd />

@@ -5,12 +5,12 @@ import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
 
 class ConstraintsMinRowDependentVariable extends Component {
-    
+
     constructor(props) {
         super(props);
-        this.onChangeDependentVariableConstraint = this.onChangeDependentVariableConstraint.bind(this);
-        this.onSetDependentVariableFlagConstrained = this.onSetDependentVariableFlagConstrained.bind(this)
-        this.onResetDependentVariableFlagConstrained = this.onResetDependentVariableFlagConstrained.bind(this)
+        this.onChangeDependentVariableMinConstraint = this.onChangeDependentVariableMinConstraint.bind(this);
+        this.onSetDependentVariableFlagMinConstrained = this.onSetDependentVariableFlagMinConstrained.bind(this)
+        this.onResetDependentVariableFlagMinConstrained = this.onResetDependentVariableFlagMinConstrained.bind(this)
         this.onClick = this.onClick.bind(this);
         this.onChangeValue = this.onChangeValue.bind(this);
         this.onEnterValue = this.onEnterValue.bind(this);
@@ -20,25 +20,25 @@ class ConstraintsMinRowDependentVariable extends Component {
             modal: false, // Default: do not display
         };
     }
-    
-    onSetDependentVariableFlagConstrained(event) {
+
+    onSetDependentVariableFlagMinConstrained(event) {
         this.props.setSymbolFlag(this.props.element.name, MIN, CONSTRAINED);
     }
-    
-    onResetDependentVariableFlagConstrained(event) {
+
+    onResetDependentVariableFlagMinConstrained(event) {
         this.props.resetSymbolFlag(this.props.element.name, MIN, CONSTRAINED);
     }
-    
-    onChangeDependentVariableConstraint(event) {
+
+    onChangeDependentVariableMinConstraint(event) {
         this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(event.target.value));
-        if (this.props.element.l & FIXED) {
+        if (this.props.element.lmin & FIXED) {
             this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(event.target.value));
         }
     }
-    
+
     onClick(event) {
-//        console.log("In onClick event=",event);
-        // Show modal only if there are cchoices
+//        console.log("In ConstraintsMinRowDependentVariable.onClick event=",event);
+        // Show modal only if there are cminchoices
         if (this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0) {
             this.setState({
                 modal: !this.state.modal,
@@ -46,16 +46,16 @@ class ConstraintsMinRowDependentVariable extends Component {
             });
         }
     }
-    
+
     onChangeValue(event) {
-//        console.log("In onChangeValue event=",event);
+//        console.log("In ConstraintsMinRowDependentVariable.onChangeValue event=",event);
         this.setState({
             value: event.target.value
         });
     }
-    
+
     onEnterValue(event) {
-//        console.log("In onEnterValue event=",event);
+//        console.log("In ConstraintsMinRowDependentVariable.onEnterValue event=",event);
         this.setState({
             modal: !this.state.modal
         });
@@ -66,9 +66,9 @@ class ConstraintsMinRowDependentVariable extends Component {
             this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(this.state.value));
         }
     }
-      
+
     onSelectVariable(event, name) {
-//        console.log("In onSelectVariable event=",event," name=",name);
+//        console.log("In ConstraintsMinRowDependentVariable.onSelectVariable event=",event," name=",name);
         this.setState({
             modal: !this.state.modal
         });
@@ -77,9 +77,9 @@ class ConstraintsMinRowDependentVariable extends Component {
             this.props.setSymbolFlag(this.props.element.name, MAX, FDCL, name);
         }
     }
-    
+
     onCancel(event) {
-//        console.log("In onCancel event=",event);
+//        console.log("In ConstraintsMinRowDependentVariable.onCancel event=",event);
         this.setState({
             modal: !this.state.modal
         });
@@ -102,9 +102,6 @@ class ConstraintsMinRowDependentVariable extends Component {
                 value_class += "text-strictly-feasible";
             }
         }
-        // =======================================
-        // Table Row
-        // =======================================
         return (
             <React.Fragment>
                 <tr key={this.props.element.name}>
@@ -117,15 +114,15 @@ class ConstraintsMinRowDependentVariable extends Component {
                         <InputGroup>
                             <InputGroup.Prepend>
                                 <InputGroup.Text>
-                                    <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetDependentVariableFlagConstrained : this.onSetDependentVariableFlagConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
+                                    <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetDependentVariableFlagMinConstrained : this.onSetDependentVariableFlagMinConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
                             {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>FDCL ={this.props.element.lmin & FDCL ? this.props.element.cminchoices[this.props.element.cminchoice] : this.props.element.cmin}</Tooltip>}>
-                                    <Form.Control type="number" id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick} />
+                                    <Form.Control type="number" id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : ''} onChange={this.onChangeDependentVariableMinConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick} />
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : ''} onChange={this.onChangeDependentVariableConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick} />
+                                <Form.Control type="number" id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : ''} onChange={this.onChangeDependentVariableMinConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick} />
                             }
                         </InputGroup>
                         {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg" onHide={this.onCancel}>

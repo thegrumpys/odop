@@ -60,8 +60,9 @@ Migrate all other design files and save them back into themselves using File : S
 Set the user field = NULL.
     1. Commit these changes.  The script to load these changes will be run in a [later step](release#runloadscript).
 &nbsp;
-1. If there are environment variable changes, update Server's .env and Client's .env with the following for development (localhost). NOTE: No entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost).
+1. If there are environment variable changes, update Server's .env and Client's .env with the following for development (localhost). NOTE: No entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost). Assume NODE_ENV="development" for software development environment, or "test" for test case execution environment.
     * JAWSDB\_URL
+    * REACT\_APP\_NODE\_ENV=development|test
     * REACT\_APP\_ISSUER
     * REACT\_APP\_CLIENT\_ID
     * REACT\_APP\_DESIGN\_TYPES
@@ -100,6 +101,8 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
 &nbsp;
 1. Update Heroku Configuration Variables with the following for staging (odop-staging), or production (odop).
     * JAWSDB\_URL
+    * NODE\_ENV="staging" -- only for staging, assume default "production" for production
+    * REACT\_APP\_NODE\_ENV=production|staging -- only for staging, assume default "production" for production
     * REACT\_APP\_ISSUER
     * REACT\_APP\_CLIENT\_ID
     * REACT\_APP\_DESIGN\_TYPES

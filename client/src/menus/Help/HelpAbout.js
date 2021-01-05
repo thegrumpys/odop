@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { version } from '../../version';
 import { logUsage } from '../../logUsage';
 import { withOktaAuth } from '@okta/okta-react';
+import config from '../../config';
 
 class HelpAbout extends Component {
 
@@ -47,7 +48,7 @@ class HelpAbout extends Component {
                         <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">ODOP License</a>
                         <hr/>
                         ODOP Software Version: {version()}<br />
-                        {process.env.NODE_ENV !== "production" &&
+                        {config.node.env !== "production" &&
                             <>
                                 User Authenticated: {this.props.authState.isAuthenticated ? 'true' : 'false'}<br />
                                 User Email: {this.props.authState.isAuthenticated ? this.props.authState.idToken.claims.email : 'Unknown'}<br />

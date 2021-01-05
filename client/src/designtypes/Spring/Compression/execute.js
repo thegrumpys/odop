@@ -1,6 +1,7 @@
+import config from '../../../config';
 export function getExecuteNames() {
     var result;
-    if (process.env.NODE_ENV !== "production") {
+    if (config.node.env !== "production") {
       result = [
         'mkHotWndStartup',        // Script to make Hot Wound Startup file from Load Initial State
         'mkHotWndStartup_Metric', // Script to make Hot Wound Startup Metric file from Load Initial State Metric
