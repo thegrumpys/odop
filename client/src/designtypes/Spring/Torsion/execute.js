@@ -1,7 +1,17 @@
+import config from '../../../config';
 export function getExecuteNames() {
-    var result = [
+    var result;
+    if (config.node.env !== "production") {
+      result = [
+        'mkStartup',
+        'mkStartup_Metric',
+        'tweakPrefs',
+      ];
+    } else {
+      result = [
         'tweakPrefs'
-    ];
+      ];
+    }
 //    console.log('In getExecuteNames result=',result);
     return result;
 }
