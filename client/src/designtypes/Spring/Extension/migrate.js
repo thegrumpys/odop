@@ -92,11 +92,11 @@ export function migrate(design) {
         // Current model version
 //        console.log('Convert from 4 to 5');
         if (design.symbol_table[0].units === 'mm') { // Check for units 
-            design.symbol_table[23].lmax = "FDCL"; 
+            design.symbol_table[23].lmax = FDCL; 
             design.symbol_table[23].cmax = 52; 
             design.symbol_table[23].sdlim = 1000; 
         } else {
-            design.symbol_table[23].lmax = 'FDCL'; 
+            design.symbol_table[23].lmax = FDCL; 
             design.symbol_table[23].cmax = 52; 
             design.symbol_table[23].sdlim = 150000; 
         }

@@ -372,7 +372,7 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "cmaxchoices": [ "Stress_Lim_Bend" ],
-            "cminchoice": 0
+            "cmaxchoice": 0
         },
         {
             "input": false,
