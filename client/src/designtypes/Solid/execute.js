@@ -5,7 +5,7 @@ export function getExecuteNames() {
       result = [
           'mk70PoundGoldBar',
           'mkStandardGoldBar',
-          'mkStartUp',
+          'mkStartup',
           'mkUSPS_MachinableParcels',
           'mkUSPS_MaxVolume',
       ];

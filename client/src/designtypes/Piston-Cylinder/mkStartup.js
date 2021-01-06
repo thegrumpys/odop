@@ -4,7 +4,7 @@ import {
     changeName,
     changeLabelsValue,
     startup,
-} from '../../../store/actionCreators';
+} from '../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -13,17 +13,17 @@ export const execute = {
                 <React.Fragment>
                     <p>Setting the following symbol table actions:</p>
                     <ol>
-                        <li>{'loadInitialState("Spring/Compression","US"),'}</li>
+                        <li>{'loadInitialState("Piston-Cylinder","US"),'}</li>
                         <li>{'changeName("Startup"),'}</li>
-                        <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "Compression Spring default start point ..."\}]),'}</li>
+                        <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "PCYL Default startup file ..."\}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState("Spring/Compression","US"),
+                loadInitialState("Piston-Cylinder","US"),
                 changeName("Startup"),
-                changeLabelsValue([{name: "COMMENT", value: "Compression Spring default start point ..."}]),
+                changeLabelsValue([{name: "COMMENT", value: "PCYL Default startup file ..."}]),
                 startup(),
             ]
         }

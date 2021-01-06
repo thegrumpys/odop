@@ -3,6 +3,7 @@ export function getExecuteNames() {
     var result;
     if (config.node.env !== "production") {
       result = [
+        'mkDemo',                 // Script to make Demo Startup file from Load Initial State
         'mkHotWound',             // Script to make Hot Wound Startup file from Load Initial State
         'mkHotWoundMetric',       // Script to make Hot Wound Startup Metric file from Load Initial State Metric
         'mkStartup',              // Script to make Startup file from Load Initial State
