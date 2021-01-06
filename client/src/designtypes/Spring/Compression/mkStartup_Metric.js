@@ -15,15 +15,15 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Spring/Compression","Metric"),'}</li>
                         <li>{'changeName("Startup_Metric"),'}</li>
-                        <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "Rectangular Solid default Startup file ..."\}]),'}</li>
+                        <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "Compression Spring default start point ... metric units"\}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                 </React.Fragment>
             ),
             actions: [
-                loadInitialState("Solid","US"),
+                loadInitialState("Spring/Compression","Metric"),
                 changeName("Startup_Metric"),
-                changeLabelsValue([{name: "COMMENT", value: "Rectangular Solid default Startup file ..."}]),
+                changeLabelsValue([{name: "COMMENT", value: "Compression Spring default start point ... metric units"}]),
                 startup(),
             ]
         }
