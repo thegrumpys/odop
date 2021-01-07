@@ -55,7 +55,7 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
 
     onEnterButton(event) {
-        console.log("In ConstraintMinRowIndependentVariable.onEnterButton event=",event);
+//        console.log("In ConstraintMinRowIndependentVariable.onEnterButton event=",event);
         this.setState({
             modal: !this.state.modal
         });
@@ -68,7 +68,7 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
 
     onVariableButton(event, source_name) {
-        console.log("In ConstraintMinRowIndependentVariable.onVariableButton event=",event," source_name=",source_name);
+//        console.log("In ConstraintMinRowIndependentVariable.onVariableButton event=",event," source_name=",source_name);
         this.setState({
             modal: !this.state.modal
         });
