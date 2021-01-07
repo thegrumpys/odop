@@ -24,8 +24,6 @@ export const execute = {
                         <li>{'changeName("Demo"),'}</li>
                         <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "Compression Spring demo start point"\}]),'}</li>
                         <li>{'changeSymbolValue("L_Free", 3),'}</li>
-                        <li>{'changeSymbolConstraint("Cycle_Life", MIN, 1.02),'}</li>
-                        <li>{'changeSymbolConstraint("Cycle_Life", MAX, 1.5),'}</li>
                         <li>{'changeSymbolConstraint("%_Avail_Deflect", MAX, 98),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
@@ -36,8 +34,6 @@ export const execute = {
                 changeName("Demo"),
                 changeLabelsValue([{name: "COMMENT", value: "Compression Spring demo start point"}]),
                 changeSymbolValue("L_Free", 3),
-                changeSymbolConstraint("Cycle_Life", MIN, 1.02),
-                changeSymbolConstraint("Cycle_Life", MAX, 1.5),
                 changeSymbolConstraint("%_Avail_Deflect", MAX, 98),
                 startup(),
             ]
