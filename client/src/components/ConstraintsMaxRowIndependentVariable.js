@@ -13,8 +13,8 @@ class ConstraintMaxRowIndependentVariable extends Component {
         this.onResetIndependentVariableFlagMaxConstrained = this.onResetIndependentVariableFlagMaxConstrained.bind(this)
         this.onClick = this.onClick.bind(this);
         this.onChangeValue = this.onChangeValue.bind(this);
-        this.onEnterValue = this.onEnterValue.bind(this);
-        this.onSelectVariable = this.onSelectVariable.bind(this);
+        this.onEnterButton = this.onEnterButton.bind(this);
+        this.onVariableButton = this.onVariableButton.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false, // Default: do not display
@@ -54,8 +54,8 @@ class ConstraintMaxRowIndependentVariable extends Component {
         });
     }
 
-    onEnterValue(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onEnterValue event=",event);
+    onEnterButton(event) {
+//        console.log("In ConstraintMaxRowIndependentVariable.onEnterButton event=",event);
         this.setState({
             modal: !this.state.modal
         });
@@ -67,15 +67,15 @@ class ConstraintMaxRowIndependentVariable extends Component {
         this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(this.state.value));
     }
 
-    onSelectVariable(event, name) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onSelectVariable event=",event," name=",name);
+    onVariableButton(event, source_name) {
+//        console.log("In ConstraintMaxRowIndependentVariable.onVariableButton event=",event," source_name=",source_name);
         this.setState({
             modal: !this.state.modal
         });
         if (this.props.element.lmax & FIXED) {
-            this.props.setSymbolFlag(this.props.element.name, MIN, FDCL, name);
+            this.props.setSymbolFlag(this.props.element.name, MIN, FDCL, source_name);
         }
-        this.props.setSymbolFlag(this.props.element.name, MAX, FDCL, name);
+        this.props.setSymbolFlag(this.props.element.name, MAX, FDCL, source_name);
     }
 
     onCancel(event) {
@@ -139,7 +139,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                                 <InputGroup>
                                                     <ButtonGroup>
                                                         {this.props.element.cmaxchoices.map((e) => {return (
-                                                            <Button key={e} variant="primary" onClick={(event) => {this.onSelectVariable(event,e)}} style={{marginBotton: '5px'}} active={this.props.element.cmaxchoices[this.props.element.cmaxchoice] === e}>{e}</Button>
+                                                            <Button key={e} variant="primary" onClick={(event) => {this.onVariableButton(event,e)}} style={{marginBotton: '5px'}} active={this.props.element.cmaxchoices[this.props.element.cmaxchoice] === e}>{e}</Button>
                                                         );})}
                                                     </ButtonGroup>
                                                 </InputGroup>
@@ -150,7 +150,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                             <td>
                                                 <InputGroup>
                                                     <Form.Control type="number" id={this.props.element.name + "_cmax"} className="text-right" value={this.state.value} onChange={this.onChangeValue} />
-                                                    <Button variant="primary" onClick={this.onEnterValue}>Enter</Button>
+                                                    <Button variant="primary" onClick={this.onEnterButton}>Enter</Button>
                                                 </InputGroup>
                                             </td>
                                         </tr>

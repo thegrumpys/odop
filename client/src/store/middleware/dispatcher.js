@@ -171,15 +171,18 @@ export const dispatcher = store => next => action => {
         updateViolationsAndObjectiveValue(store);
         break;
     case SET_SYMBOL_FLAG:
+//        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action);
         design = store.getState();
         sink = design.model.symbol_table.find(element => element.name === action.payload.name);
+//        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate sink=',sink);
         if (action.payload.minmax === MIN) {
             mask = sink.lmin;
         } else {
             mask = sink.lmax;
         }
-        if (!(mask & FDCL) && (action.payload.mask & FDCL)) {
+        if ((mask & FDCL) && (action.payload.mask & FDCL)) { // Remember reducer sets mask before dispatcher (so mask logic's inverted)
             source = design.model.symbol_table.find(element => element.name === action.payload.source);
+//            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate source=',source);
             if (source.propagate === undefined) source.propagate = [];
             source.propagate.push({ name: sink.name, minmax: action.payload.minmax });
             if (action.payload.minmax === MIN) {
@@ -188,35 +191,35 @@ export const dispatcher = store => next => action => {
                 sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
             }
             store.dispatch(changeSymbolConstraint(sink.name, action.payload.minmax, source.value)); // Propagate now
-//            console.log('In dispatcher.SET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
+//            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action,'source=',source,'sink=',sink);
         }
         updateViolationsAndObjectiveValue(store);
         break;
     case RESET_SYMBOL_FLAG:
+//        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate action=',action);
         design = store.getState();
         sink = design.model.symbol_table.find(element => element.name === action.payload.name);
+//        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate sink=',sink);
         if (action.payload.minmax === MIN) {
             mask = sink.lmin;
         } else {
             mask = sink.lmax;
         }
-        if ((mask & FDCL) && (action.payload.mask & FDCL)) {
-//            console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
+//        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate mask=',mask);
+        if (!(mask & FDCL) && (action.payload.mask & FDCL)) { // Remember reducer sets mask before dispatcher (so mask logic's inverted)
             if (action.payload.minmax === MIN) {
                 source = design.model.symbol_table.find(element => element.name === sink.cminchoices[sink.cminchoice]);
             } else {
                 source = design.model.symbol_table.find(element => element.name === sink.cmaxchoices[sink.cmaxchoice]);
             }
+//            console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate source=',source);
             if (source.propagate !== undefined) {
                 var index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
-//                console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate index=',index);
+//                console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate index=',index);
                 source.propagate.splice(index,1); // Delete 1 entry at offset index
-//                console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate source.propagate.length=',source.propagate.length);
                 if (source.propagate.length === 0) {
                     source.propagate = undefined; // De-reference the array
-//                    console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate delete source.propagate=',source.propagate);
                     delete source.propagate; // Delete the property
-//                  console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate source=',source);
                 }
             }
             if (action.payload.minmax === MIN) {
@@ -224,7 +227,7 @@ export const dispatcher = store => next => action => {
             } else {
                 delete sink.cmaxchoice;
             }
-//            console.log('In dispatcher.RESET_SYMBOL_FLAG.propgate source=',source,'sink=',sink);
+//            console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate source=',source,'sink=',sink);
         }
         updateViolationsAndObjectiveValue(store);
         break;
