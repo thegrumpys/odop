@@ -55,7 +55,7 @@ class ResultTable extends Component {
                     <tbody>
                         <tr>
                             <td className="text-center" id="ObjectiveValue">
-                                <OverlayTrigger placement="bottom" overlay={<Tooltip>Objective Value = {this.props.objective_value.toFixed(6)}<br />OBJMIN = {this.props.system_controls.objmin.toFixed(6)}</Tooltip>}>
+                                <OverlayTrigger> 
                                     <FeasibilityIndicator />
                                 </OverlayTrigger>
                             </td>
