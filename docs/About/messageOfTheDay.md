@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated December 28, 2020   
+**Message-of-the-day** &nbsp; updated January 9, 2021   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -13,8 +13,7 @@ Change details are available in GitHub at:
 Opening a design saved in a prior version will produce a pop-up message. 
 See: [MIGRATION](../Help/terminology#migration). 
 
-ODOP is experimental software. 
-For details, see: [Experimental Software](experimental)   
+ODOP is [Experimental Software](experimental).  
 
 Evaluators and new users should be sure to see the [About](../About) section 
 of the on-line documentation early in the learning process. 
