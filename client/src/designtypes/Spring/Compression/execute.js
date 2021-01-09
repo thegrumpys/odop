@@ -3,7 +3,6 @@ export function getExecuteNames() {
     var result;
     if (config.node.env !== "production") {
       result = [
-        'mkCarlson_p184Metric',   // Script to make Carlson_p184Metric Startup file from Load Initial State
         'mkDemo',                 // Script to make Demo Startup file from Load Initial State
         'mkHotWound',             // Script to make Hot Wound Startup file from Load Initial State
         'mkHotWoundMetric',       // Script to make Hot Wound Startup Metric file from Load Initial State Metric
