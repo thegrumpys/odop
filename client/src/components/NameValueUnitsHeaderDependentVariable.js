@@ -10,7 +10,7 @@ class NameValueUnitsHeaderDependentVariable extends Component {
             <React.Fragment>
                 <tr>
                     <th className="text-center bg-secondary text-white" colSpan="6" id="IVTitle">
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Inputs to design equations</Tooltip>}>
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Outputs from design equations</Tooltip>}>
                             <span>Dependent Variables</span>
                         </OverlayTrigger>
                     </th>
