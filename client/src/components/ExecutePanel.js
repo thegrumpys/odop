@@ -105,7 +105,7 @@ class ExecutePanel extends Component {
             var design = store.getState();
             this.setState({
                 // Put current store state into steps[next].state - remember this for "back" time travel
-                steps: Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: design.model})}),
+                steps: Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: design})}),
                 step: next,
                 title: this.state.steps[next].title,
                 text: this.state.steps[next].text
