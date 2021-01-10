@@ -33,7 +33,8 @@ An ampersand following the question mark is optional.
 
 **Type**  
 The "type" component specifies the desired design type.
-If not present, the Heroku environment variable REACT_APP_DESIGN_TYPE will supply the default value.
+If a query parameter is not present, the environment variable REACT_APP_DESIGN_TYPE will supply the default value. 
+For more detail on this mechanism, see: config.js, .env, release.md and the Heroku environment variables. 
 As of this writing, REACT_APP_DESIGN_TYPE is set for compression spring design type.
 Punctuation such as spaces and slashes may need to be escaped by their hex equivalent.
 
@@ -48,7 +49,8 @@ Piston Cylinder | type=Piston-Cylinder
 
 **Name**  
 The "name" component specifies the desired design name.
-If not present, the Heroku environment variable REACT_APP_DESIGN_NAME will supply the default value.
+If a query parameter is not present, the environment variable REACT_APP_DESIGN_NAME will supply the default value.
+For more detail on this mechanism, see: config.js, .env, release.md and the Heroku environment variables. 
 As of this writing, REACT_APP_DESIGN_NAME is set for "Startup".
 Units (US: inches, pounds; metric: mm, newtons) are determined by the design.
 Specifically, the name "Startup_Metric" will utilize metric units.
