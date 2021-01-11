@@ -10,7 +10,7 @@ class ConstraintMaxHeaderIndependentVariable extends Component {
             <React.Fragment>
                 <tr>
                     <th className="text-center bg-secondary text-white" colSpan="4" id="IVMaxConstraintTitle">
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Lower limits on Independent Variables</Tooltip>}>
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Upper limits on Independent Variables</Tooltip>}>
                             <span>IV Max Constraint</span>
                         </OverlayTrigger>
                     </th>
@@ -22,12 +22,12 @@ class ConstraintMaxHeaderIndependentVariable extends Component {
                         </OverlayTrigger>
                     </th>
                     <th className="text-left" id="IVMaxConstraintConstrainTitle">
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Check box to establish lower limit</Tooltip>}>
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Check box to establish upper limit</Tooltip>}>
                             <span>Constrain</span>
                         </OverlayTrigger>
                     </th>
                     <th className="text-center" id="IVMaxConstraintValueTitle">
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Enter value for lower limit</Tooltip>}>
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Enter value for upper limit</Tooltip>}>
                             <span>Value</span>
                         </OverlayTrigger>
                     </th>

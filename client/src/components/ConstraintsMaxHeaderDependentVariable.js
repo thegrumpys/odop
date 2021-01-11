@@ -10,7 +10,7 @@ class ConstraintMaxHeaderDependentVariable extends Component {
             <React.Fragment>
                 <tr>
                     <th className="text-center bg-secondary text-white" colSpan="4" id="DVMaxConstraintTitle">
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Lower limits on Dependent Variables</Tooltip>}>
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Upper limits on Dependent Variables</Tooltip>}>
                             <span>DV Max Constraint</span>
                         </OverlayTrigger>
                     </th>
@@ -22,12 +22,12 @@ class ConstraintMaxHeaderDependentVariable extends Component {
                         </OverlayTrigger>
                     </th>
                     <th className="text-left" id="DVMaxConstraintConstrainTitle">
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Check box to establish lower limit</Tooltip>}>
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Check box to establish upper limit</Tooltip>}>
                             <span>Constrain</span>
                         </OverlayTrigger>
                     </th>
                     <th className="text-center" id="DVMaxConstraintValueTitle">
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Enter value for lower limit</Tooltip>}>
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Enter value for upper limit</Tooltip>}>
                             <span>Value</span>
                         </OverlayTrigger>
                     </th>
