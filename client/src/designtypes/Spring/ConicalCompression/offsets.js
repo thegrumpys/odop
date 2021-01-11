@@ -1,0 +1,87 @@
+// Independent Variables (input-only)
+export const OD_Free = 0;
+export const Wire_Dia = 1;
+export const L_Free = 2;
+export const Coils_T = 3;
+export const Force_1 = 4;
+export const Force_2 = 5;
+
+// Dependent Variables (input-output)
+export const Mean_Dia = 0;
+export const Coils_A = 1;
+export const Rate = 2;
+export const Deflect_1 = 3;
+export const Deflect_2 = 4;
+export const L_1 = 5;
+export const L_2 = 6;
+export const L_Stroke = 7;
+export const L_Solid = 8;
+export const Slenderness = 9;
+export const ID_Free = 10;
+export const Weight = 11;
+export const Spring_Index = 12;
+export const Force_Solid = 13;
+export const Stress_1 = 14;
+export const Stress_2 = 15;
+export const Stress_Solid = 16;
+export const FS_2 = 17;
+export const FS_Solid = 18;
+export const FS_CycleLife = 19;
+export const Cycle_Life = 20;
+export const PC_Avail_Deflect = 21;
+export const Energy = 22;
+export const Spring_Type = 23;
+export const Prop_Calc_Method = 24;
+export const Material_Type = 25;
+export const ASTM_Fed_Spec = 26;
+export const Process = 27;
+export const Material_File = 28;
+export const Life_Category = 29;
+export const Density = 30;
+export const Torsion_Modulus = 31;
+export const Hot_Factor_Kh = 32;
+export const Tensile = 33;
+export const PC_Tensile_Endur = 34;
+export const PC_Tensile_Stat = 35;
+export const Stress_Lim_Endur = 36;
+export const Stress_Lim_Stat = 37;
+export const End_Type = 38;
+export const Inactive_Coils = 39;
+export const Add_Coils_Solid = 40;
+export const Catalog_Name = 41;
+export const Catalog_Number = 42;
+export const tbase010 = 43;
+export const tbase400 = 44;
+export const const_term = 45;
+export const slope_term = 46;
+export const tensile_010 = 47;
+
+// System Controls (Preferences)
+export const ioopt = 0;
+export const maxit = 1;
+export const weapon = 2;
+export const nmerit = 3;
+export const fix_wt = 4;
+export const con_wt = 5;
+export const zero_wt = 6;
+export const viol_wt = 7;
+export const mfn_wt = 8;
+export const objmin = 9;
+export const del = 10;
+export const delmin = 11;
+export const tol = 12;
+export const smallnum = 13;
+export const show_units = 14;
+export const show_violations = 15;
+
+// Labels (Properties)
+export const COMMENT = 0;
+export const Contact_person = 1;
+export const Company_name = 2;
+export const Street = 3;
+export const City = 4;
+export const State___Zip = 5;
+export const Phone = 6;
+export const Date = 7;
+export const Part_Number = 8;
+export const Finish = 9;
