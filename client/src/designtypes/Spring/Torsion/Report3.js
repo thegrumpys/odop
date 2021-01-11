@@ -18,43 +18,43 @@ class Report3 extends ReportBase {
                         <tr>
                             <td>{this.props.labels[o.Contact_person].name}:</td>
                             <td> &nbsp; </td>
-                            <td width="25%">{this.props.labels[o.Contact_person].value}</td>
+                            <td width="35%">{this.props.labels[o.Contact_person].value}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.props.labels[o.Phone].name}: </td>
                             <td> &nbsp; </td>
-                            <td width="25%">{this.props.labels[o.Phone].value}</td>
+                            <td width="35%">{this.props.labels[o.Phone].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.Company_name].name}: </td>
                             <td> &nbsp; </td>
-                            <td width="25%">{this.props.labels[o.Company_name].value}</td>
+                            <td width="35%">{this.props.labels[o.Company_name].value}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.props.labels[o.Date].name}: </td>
                             <td> &nbsp; </td>
-                            <td width="25%">{this.props.labels[o.Date].value}</td>
+                            <td width="35%">{this.props.labels[o.Date].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.Street].name}: </td>
                             <td> &nbsp; </td>
-                            <td width="25%">{this.props.labels[o.Street].value}</td>
+                            <td width="35%">{this.props.labels[o.Street].value}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.props.labels[o.Part_Number].name}: </td>
                             <td> &nbsp; </td>
-                            <td width="25%">{this.props.labels[o.Part_Number].value}</td>
+                            <td width="35%">{this.props.labels[o.Part_Number].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.City].name}: </td>
                             <td> &nbsp; </td>
-                            <td width="25%">{this.props.labels[o.City].value}</td>
+                            <td width="35%">{this.props.labels[o.City].value}</td>
                             <td> &nbsp; &nbsp; </td>
                             <td>{this.props.labels[o.Finish].name}: </td>
                             <td> &nbsp; </td>
-                            <td width="25%">{this.props.labels[o.Finish].value}</td>
+                            <td width="35%">{this.props.labels[o.Finish].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.State___Zip].name}: </td>
                             <td> &nbsp; </td>
-                            <td width="25%">{this.props.labels[o.State___Zip].value}</td>
+                            <td width="35%">{this.props.labels[o.State___Zip].value}</td>
                         </tr>
                     </tbody>
                 </table>

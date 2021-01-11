@@ -77,7 +77,7 @@ class Report1 extends ReportBase {
                             <td>{this.props.symbol_table[o.Coil_Spacing].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Coil_Spacing].value.toFixed(3)}</td>
-                            <td>{"active " + this.props.symbol_table[o.Coil_Spacing].units}</td>
+                            <td>{this.props.symbol_table[o.Coil_Spacing].units}</td>
                         </tr>
                     </tbody>
                 </table>
