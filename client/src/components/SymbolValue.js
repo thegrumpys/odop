@@ -149,7 +149,7 @@ class SymbolValue extends Component {
                 value_class += "text-not-feasible";
             } else if (this.props.objective_value > this.props.system_controls.objmin) {
                 value_tooltip = "CONSTRAINT VIOLATION: Value outside the constraint range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
-                value_class += "text-approaching-feasible";
+                value_class += "text-close-to-feasible";
             } else if (this.props.objective_value > 0.0) {
                 value_tooltip = "CONSTRAINT VIOLATION: Value outside the constraint range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
                 value_class += "text-feasible";
