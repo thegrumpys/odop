@@ -12,7 +12,7 @@ class ResultTable extends Component {
 //            OBJ value       Category Term           Color            RGB
 //            zero            STRICTLY FEASIBLE       Black            #343a40
 //            < OBJMIN        FEASIBLE                Green (or cyan)  #28a745
-//            < 4x OBJMIN     CLOSE TO FEASIBLE    Orange           #fd7e14
+//            < 4x OBJMIN     CLOSE TO FEASIBLE       Orange           #fd7e14
 //            > 4x OBJMIN     NOT FEASIBLE            Red              #dc3545
         var feasibility_string;
         var feasibility_class;
@@ -35,7 +35,7 @@ class ResultTable extends Component {
                     <tbody>
                         <tr>
                             <th width="33%" id="Feasibility">
-                                <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: constraints significantly violated; CLOSE TO FEASIBLE: constraints slightly violated; FEASIBLE: constraints not significantly violated; STRICTLY FEASIBLE: no constraints violated</Tooltip>}>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: constraints significantly violated; <br />CLOSE TO FEASIBLE: constraints slightly violated; FEASIBLE: constraints not significantly violated; STRICTLY FEASIBLE: no constraints violated</Tooltip>}>
                                     <span>Feasibility</span>
                                 </OverlayTrigger>
                             </th>
