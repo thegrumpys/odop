@@ -9,7 +9,7 @@ Launch the ODOP software from the SpringDesignSoftware.org home page,
 Getting Started page or any of the three spring type pages. 
 To establish a free private account, 
 push the "Sign-in" button to the left of the File menu and then
-use the "Sign up" (Self-Service Registration) feature at the lower right the sign-in page. 
+use the "Sign up" (Self-Service Registration) feature at the lower right of the sign-in page. 
 After responding to an activation email message, 
 your account will be ready for immediate sign-in.
 
@@ -20,17 +20,16 @@ so expect a delay of hours to a day or so.
 The welcome letter includes instructions on how to establish a password and if desired, 
 change it in the future.
 
-Once you have established a username and password, 
-launch the ODOP software and 
-push the "Sign-in" button to the left of the File menu 
-in order to get to the sign-in page.
-
 Evaluators may sign-in with the username "public" and password "public".
 When operating in the public account, it is possible to save designs into the ODOP Design Library 
 but keep in mind that all saved information will be completely public and modifiable.
 Designs saved in the public account do not have the same assurance of long-term storage
 as those saved in a private account.
 See [Restrictions](Legal/Restrictions) for long-term data storage policies.
+
+Once you have established a username and password, 
+launch the ODOP software and push the "Sign-in" button to the left of the File menu 
+in order to get to the sign-in page.
 
 The ODOP user account (username / password) feature is based on capabilities provided by 
 [Okta](https://www.okta.com/).
