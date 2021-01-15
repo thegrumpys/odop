@@ -11,7 +11,7 @@ To establish a free private account,
 push the "Sign-in" button to the left of the File menu and then
 use the "Sign up" (Self-Service Registration) feature at the lower right the sign-in page. 
 After responding to an activation email message, 
-your account will be ready for immediate login.
+your account will be ready for immediate sign-in.
 
 Alternatively, send a request to: **Info@SpringDesignSoftware.org**. 
 You will receive a reply message (welcome letter) with instructions on how to complete creating your account. 
