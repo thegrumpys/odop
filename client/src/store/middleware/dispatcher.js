@@ -112,22 +112,15 @@ export const dispatcher = store => next => action => {
                 } else if (element.type === "equationset" && element.input) {
                     // Independent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
-                    store.dispatch(resetSymbolFlag(element.name, MIN, CONSTRAINED | FDCL));
-                    store.dispatch(resetSymbolFlag(element.name, MAX, CONSTRAINED | FDCL));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED));
                     if (action.payload.value !== undefined) {
                         store.dispatch(changeSymbolValue(element.name, action.payload.value));
-                    } else {
-                        store.dispatch(changeSymbolConstraint(element.name, MIN, element.value));
-                        store.dispatch(changeSymbolConstraint(element.name, MAX, element.value));
                     }
                     return true; // found
                 } else if (element.type === "equationset" && !element.input) {
                     // Dependent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
-                    store.dispatch(resetSymbolFlag(element.name, MIN, FDCL));
-                    store.dispatch(resetSymbolFlag(element.name, MAX, FDCL));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED|CONSTRAINED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED|CONSTRAINED));
                     if (action.payload.value !== undefined) {

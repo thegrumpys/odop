@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
-import { changeSymbolValue, fixSymbolValue, freeSymbolValue, saveOutputSymbolConstraints } from '../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -25,7 +25,6 @@ class NameValueUnitsRowDependentVariable extends Component {
     
     onSet() {
 //        console.log('In NameValueUnitsRowDependentVariable.onSet');
-        this.props.saveOutputSymbolConstraints(this.props.element.name);
         this.props.fixSymbolValue(this.props.element.name);
     }
     
@@ -68,7 +67,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToDependentVariableProps = {
-    saveOutputSymbolConstraints: saveOutputSymbolConstraints,
     changeSymbolValue: changeSymbolValue,
     fixSymbolValue: fixSymbolValue,
     freeSymbolValue: freeSymbolValue
