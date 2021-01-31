@@ -50,8 +50,8 @@ export const dispatcher = store => next => action => {
     case RESTORE_AUTO_SAVE:
         invokeInit(store);
         invokeEquationSet(store);
-        setSclDen(store);
         propagate(store);
+        setSclDen(store);
         updateViolationsAndObjectiveValue(store);
         break;
 
@@ -112,22 +112,15 @@ export const dispatcher = store => next => action => {
                 } else if (element.type === "equationset" && element.input) {
                     // Independent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
-                    store.dispatch(resetSymbolFlag(element.name, MIN, CONSTRAINED | FDCL));
-                    store.dispatch(resetSymbolFlag(element.name, MAX, CONSTRAINED | FDCL));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED));
                     if (action.payload.value !== undefined) {
                         store.dispatch(changeSymbolValue(element.name, action.payload.value));
-                    } else {
-                        store.dispatch(changeSymbolConstraint(element.name, MIN, element.value));
-                        store.dispatch(changeSymbolConstraint(element.name, MAX, element.value));
                     }
                     return true; // found
                 } else if (element.type === "equationset" && !element.input) {
                     // Dependent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
-                    store.dispatch(resetSymbolFlag(element.name, MIN, FDCL));
-                    store.dispatch(resetSymbolFlag(element.name, MAX, FDCL));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED|CONSTRAINED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED|CONSTRAINED));
                     if (action.payload.value !== undefined) {
@@ -175,20 +168,18 @@ export const dispatcher = store => next => action => {
         design = store.getState();
         sink = design.model.symbol_table.find(element => element.name === action.payload.name);
 //        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate sink=',sink);
-        if (action.payload.minmax === MIN) {
-            mask = sink.lmin;
-        } else {
-            mask = sink.lmax;
-        }
-        if ((mask & FDCL) && (action.payload.mask & FDCL)) { // Remember reducer sets mask before dispatcher (so mask logic's inverted)
+        if (action.payload.mask & FDCL) {
             source = design.model.symbol_table.find(element => element.name === action.payload.source);
 //            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate source=',source);
             if (source.propagate === undefined) source.propagate = [];
-            source.propagate.push({ name: sink.name, minmax: action.payload.minmax });
-            if (action.payload.minmax === MIN) {
-                sink.cminchoice = sink.cminchoices.indexOf(source.name);
-            } else {
-                sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
+            var index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
+            if (index === -1) { // If not found in propagate array then add it
+                source.propagate.push({ name: sink.name, minmax: action.payload.minmax });
+                if (action.payload.minmax === MIN) {
+                    sink.cminchoice = sink.cminchoices.indexOf(source.name);
+                } else {
+                    sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
+                }
             }
             store.dispatch(changeSymbolConstraint(sink.name, action.payload.minmax, source.value)); // Propagate now
 //            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action,'source=',source,'sink=',sink);
@@ -200,13 +191,7 @@ export const dispatcher = store => next => action => {
         design = store.getState();
         sink = design.model.symbol_table.find(element => element.name === action.payload.name);
 //        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate sink=',sink);
-        if (action.payload.minmax === MIN) {
-            mask = sink.lmin;
-        } else {
-            mask = sink.lmax;
-        }
-//        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate mask=',mask);
-        if (!(mask & FDCL) && (action.payload.mask & FDCL)) { // Remember reducer sets mask before dispatcher (so mask logic's inverted)
+        if (action.payload.mask & FDCL) {
             if (action.payload.minmax === MIN) {
                 source = design.model.symbol_table.find(element => element.name === sink.cminchoices[sink.cminchoice]);
             } else {
