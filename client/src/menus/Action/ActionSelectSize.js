@@ -66,6 +66,7 @@ class ActionSelectSize extends Component {
 
     toggle() {
 //        console.log('In ActionSelectSize.toggle');
+        this.updateSizeTypes();
         this.setState({
             modal: !this.state.modal,
         });
