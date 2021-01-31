@@ -102,6 +102,12 @@ class ConstraintMaxRowIndependentVariable extends Component {
                 value_class += "text-strictly-feasible";
             }
         }
+        var tooltip_text;
+        if (this.props.element.lmax & FDCL) {
+            tooltip_text = 'FDCL =' + this.props.element.cmaxchoices[this.props.element.cmaxchoice];
+        } else {
+            tooltip_text = '=' + this.props.element.cmax + ' (non-FDCL)';
+        }
         return (
             <React.Fragment>
                 <tr key={this.props.element.name}>
@@ -118,7 +124,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
                             {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
-                                <OverlayTrigger placement="top" overlay={<Tooltip>FDCL ={this.props.element.lmax & FDCL ? this.props.element.cmaxchoices[this.props.element.cmaxchoice] : this.props.element.cmax}</Tooltip>}>
+                                <OverlayTrigger placement="top" overlay={<Tooltip>{this.props.element.lmax & FDCL ? 'FDCL =' + this.props.element.cmaxchoices[this.props.element.cmaxchoice] : '=' + this.props.element.cmax + ' (non-FDCL)'}</Tooltip>}>
                                     <Form.Control type="number" id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.lmax & CONSTRAINED ? this.props.element.cmax : ''} onChange={this.onChangeIndependentVariableMaxConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
                                 </OverlayTrigger>
                             :
@@ -127,7 +133,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                         </InputGroup>
                         {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg" onHide={this.onCancel}>
                             <Modal.Header>
-                                Set {this.props.element.name} Max Constraint
+                                Functionally Determined Constraint Level (FDCL) - Set {this.props.element.name} Max Constraint
                             </Modal.Header>
                             <Modal.Body>
                                 Select constraint variable or enter constraint value.
