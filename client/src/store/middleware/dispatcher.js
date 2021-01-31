@@ -108,6 +108,9 @@ export const dispatcher = store => next => action => {
         design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
                 if (element.lmin & FIXED) { // Is it already FIXED?
+                    if (action.payload.value !== undefined) {
+                        store.dispatch(changeSymbolValue(element.name, action.payload.value));
+                    }
                     return true; // We're done
                 } else if (element.type === "equationset" && element.input) {
                     // Independent
