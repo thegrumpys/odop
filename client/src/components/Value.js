@@ -25,7 +25,11 @@ class Value extends Component {
             <React.Fragment>
                 <td className="align-middle" className={this.props.className}>
                     <InputGroup>
-                        <Form.Control type="number" disabled={true} className="text-right text-black-50" value={this.props.value.toODOPPrecision()} />
+                        {typeof this.props.value === 'number' ?
+                            <Form.Control type="number" disabled={true} className="text-right text-black-50" value={this.props.value.toODOPPrecision()} />
+                            :
+                            <Form.Control type="text" disabled={true} className="text-right text-black-50" value={this.props.value} />
+                        }
                     </InputGroup>
                 </td>
             </React.Fragment>

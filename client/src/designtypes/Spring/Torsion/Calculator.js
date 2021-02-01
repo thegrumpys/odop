@@ -46,7 +46,11 @@ export class Calculator extends ReportBase {
                                 <td> &nbsp; &nbsp; </td>
                                 <SymbolName element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} />
                                 <td>=</td>
-                                <SymbolValue element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} />
+                                {this.props.symbol_table[o.Prop_Calc_Method].value === 1 ?
+                                    <SymbolValue element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} />
+                                    :
+                                    <Value value={this.matTypeValue} />
+                                }
                                 <SymbolUnits element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} className="text-left" />
                             </tr>
                             <tr>
