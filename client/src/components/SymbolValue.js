@@ -162,7 +162,7 @@ class SymbolValue extends Component {
                 <td className={"align-middle " + this.props.className}>
                     <InputGroup>
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
-                            (value_tooltip != undefined ?
+                            (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                     <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                                 </OverlayTrigger>
@@ -171,7 +171,7 @@ class SymbolValue extends Component {
                             )
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
-                            (value_tooltip != undefined ?
+                            (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                     <Form.Control type="text" disabled={!this.props.element.input} className={value_class} value={this.props.element.value} onChange={this.onChange} />
                                 </OverlayTrigger>
@@ -180,7 +180,7 @@ class SymbolValue extends Component {
                             )
                         : ''}
                         { this.props.element.format === 'table' ?
-                            (value_tooltip != undefined ?
+                            (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                     <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={this.props.element.value} onChange={this.onSelect}>
                                         {this.state.table.map((value, index) => index > 0 ? <option key={index} value={index}>{value[0]}</option> : '')}

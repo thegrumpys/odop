@@ -142,7 +142,7 @@ export function migrate(design) {
                     delete element.oldcmax;
                 }
             }
-            if (element.oldvalue != undefined) {
+            if (element.oldvalue !== undefined) {
 //                console.log('In migrate delete oldvalue element=',element);
                 delete element.oldvalue
             }

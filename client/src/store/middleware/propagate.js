@@ -6,7 +6,7 @@ export function propagate(store) {
 //    console.log('In propagate design=',design);
     design.model.symbol_table.forEach((source) => {
 //        console.log('In propagate source=',source);
-        if (source.propagate != undefined) {
+        if (source.propagate !== undefined) {
 //            console.log('In propagate source.propagate=',source.propagate);
             source.propagate.forEach(entry => {
 //                console.log('In propagate entry.name=',entry.name);

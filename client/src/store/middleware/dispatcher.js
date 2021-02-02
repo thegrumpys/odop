@@ -83,7 +83,7 @@ export const dispatcher = store => next => action => {
                     store.dispatch(changeResultTerminationCondition(''));
                     invokeInit(store);
                 }
-                if (element.propagate != undefined) {
+                if (element.propagate !== undefined) {
                     source = element;
 //                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE source.propagate=',source.propagate);
                     source.propagate.forEach(entry => {
@@ -201,13 +201,15 @@ export const dispatcher = store => next => action => {
                 source = design.model.symbol_table.find(element => element.name === sink.cmaxchoices[sink.cmaxchoice]);
             }
 //            console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate source=',source);
-            if (source.propagate !== undefined) {
+            if (source !== undefined && source.propagate !== undefined) {
                 var index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
 //                console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate index=',index);
-                source.propagate.splice(index,1); // Delete 1 entry at offset index
-                if (source.propagate.length === 0) {
-                    source.propagate = undefined; // De-reference the array
-                    delete source.propagate; // Delete the property
+                if (index !== -1) { // If found in propagate array then remove it
+                    source.propagate.splice(index,1); // Delete 1 entry at offset index
+                    if (source.propagate.length === 0) {
+                        source.propagate = undefined; // De-reference the array
+                        delete source.propagate; // Delete the property
+                    }
                 }
             }
             if (action.payload.minmax === MIN) {
