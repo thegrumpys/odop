@@ -118,6 +118,8 @@ export const execute = {
                     FIX  Stroke  110.0<br />
                     FIX  Force_Arm_2  18.0<br />
                     CHANGE  Arm_2  9.0<br />
+                    <br />
+                    CHANGE %_Safe_Deflect MAX 95 &nbsp; (increase from default of 90 to better match handbook result)
                     </p>
                     
                     <p>
@@ -135,7 +137,8 @@ export const execute = {
                 changeSymbolConstraint('ID_Free', MAX, 1.25),
                 fixSymbolValue('Stroke', 110.0),
                 fixSymbolValue('Force_Arm_2', 18.0),
-                changeSymbolValue("Arm_2",9.0)
+                changeSymbolValue("Arm_2",9.0),
+                changeSymbolConstraint('%_Safe_Deflect', MAX, 95.0)
             ]
         },
         {
