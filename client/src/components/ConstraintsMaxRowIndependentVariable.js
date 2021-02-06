@@ -102,12 +102,6 @@ class ConstraintMaxRowIndependentVariable extends Component {
                 value_class += "text-strictly-feasible";
             }
         }
-        var tooltip_text;
-        if (this.props.element.lmax & FDCL) {
-            tooltip_text = 'FDCL =' + this.props.element.cmaxchoices[this.props.element.cmaxchoice];
-        } else {
-            tooltip_text = '=' + this.props.element.cmax + ' (non-FDCL)';
-        }
         return (
             <React.Fragment>
                 <tr key={this.props.element.name}>
