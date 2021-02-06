@@ -1,4 +1,4 @@
-import { displayMessage } from '../../../components/ErrorModal';
+import { displayMessage } from '../../../components/MessageModal';
 import { initialState } from './initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
 import { MIN, MAX, FIXED, FDCL } from '../../../store/actionTypes';

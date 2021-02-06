@@ -32,7 +32,7 @@ import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
 import ViewCADModel from '../menus/View/ViewCADModel';
-import ViewReports from '../menus/View/ViewReports';
+import ViewSelect from '../menus/View/ViewSelect';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
 import ViewSymbolTable from '../menus/View/ViewSymbolTable';
@@ -77,8 +77,8 @@ class MainPage extends Component {
         }
         if (prevProps.type !== this.props.type) {
 //            console.log('In MainPage.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
-            var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
-            var reportNames = getReportNames(); // Get them in MainPage render because they are now React Components
+            var { getViewNames } = require('../designtypes/'+this.props.type+'/view.js'); // Dynamically load getViewNames
+            var reportNames = getViewNames(); // Get them in MainPage render because they are now React Components
 //            console.log('In MainPage.componentDidUpdate reportNames=', reportNames);
             var view = reportNames.find(element => element.name === this.props.view);
 //            console.log('In MainPage.componentDidUpdate view=', view);
@@ -100,7 +100,6 @@ class MainPage extends Component {
     
     setView(view) {
 //        console.log('In MainPage.setView view=',view);
-        logUsage('event', 'Tab', { 'event_label': view });
         if (this.state.activeTab !== view) {
             this.setState({
                 activeTab: view
@@ -114,8 +113,8 @@ class MainPage extends Component {
         // If there is no name or type then there is no model therefore there is nothing to display
         if (this.props.authState.isPending || this.props.name === null || this.props.type === null) return null;
 
-        var { getReportNames } = require('../designtypes/'+this.props.type+'/report.js'); // Dynamically load getReportNames
-        var reportNames = getReportNames(); // Get them in MainPage render because they are now React Components
+        var { getViewNames } = require('../designtypes/'+this.props.type+'/view.js'); // Dynamically load getViewNames
+        var reportNames = getViewNames(); // Get them in MainPage render because they are now React Components
 //      console.log('In MainPage.constructor reportNames=', reportNames);
 
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
@@ -166,7 +165,7 @@ class MainPage extends Component {
                                     Display Sub-Problems&hellip;
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <ViewReports reportNames={reportNames}/>
+                                <ViewSelect reportNames={reportNames}/>
                                 <NavDropdown.Divider />
                                 {config.node.env !== "production" && <ViewOffsets />}
                                 {config.node.env !== "production" && <ViewSymbolTableOffsets />}
@@ -182,7 +181,7 @@ class MainPage extends Component {
                         </Nav>
                         <Nav>
                             <Nav.Item>
-                                <Nav.Link className={classnames({ active: this.state.activeTab === "View0" })} onClick={() => { this.setView("View0"); }}>
+                                <Nav.Link className={classnames({ active: this.state.activeTab === "Advanced" })} onClick={() => { this.setView("Advanced"); }}>
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}</Tooltip>}>
                                         <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
                                     </OverlayTrigger>

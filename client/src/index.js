@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Spinner } from './components/Spinner';
-import { ErrorModal } from './components/ErrorModal';
+import { MessageModal } from './components/MessageModal';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { dispatcher } from './store/middleware/dispatcher';
 import { reducers } from './store/reducers';
@@ -39,4 +39,4 @@ const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispa
 // Create a store with an empty model where type is null
 const store = createStore(reducers, { user: null, name: config.design.name, view: config.design.view, model: { type: null, system_controls: initialSystemControls }}, middleware);
 
-ReactDOM.render(<div id="root2"><Spinner /><ErrorModal /><Provider store={store}><Router><Routes /></Router></Provider></div>, document.getElementById('root'));
+ReactDOM.render(<div id="root2"><Spinner /><MessageModal /><Provider store={store}><Router><Routes /></Router></Provider></div>, document.getElementById('root'));

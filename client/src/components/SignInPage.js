@@ -5,7 +5,7 @@ import { withOktaAuth } from '@okta/okta-react';
 import config from '../config';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { displayMessage } from './ErrorModal';
+import { displayMessage } from './MessageModal';
 
 class SignInPage extends Component {
   constructor(props) {

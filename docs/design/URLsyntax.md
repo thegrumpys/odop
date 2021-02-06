@@ -67,12 +67,12 @@ Both user input views and reports are available.
  
 View | parameter
 ---|---
-Advanced | view=View0
+Advanced | view=Advanced
 Basic | {not yet implemented}
-Calculator | view=View1
-Report 1 | view=View2
-Report 2 | view=View3
-Report 3 | view=View4
+Calculator | view=Calculator
+Report 1 | view=Report1
+Report 2 | view=Report2
+Report 3 | view=Report3
 
 
 **Execute Script**  
@@ -95,15 +95,15 @@ Examples:
 
 URL|type|name|execute|View
 ---|---|---|---|---
-https://odop-staging.herokuapp.com/?view=View0&execute=welcomeAdv | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | welcomeAdv | Advanced
-https://odop-staging.herokuapp.com/?view=View1&execute=welcomeCalc | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | welcomeCalc | Calculator
-https://odop-staging.herokuapp.com/?view=View1&execute=demo | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | demo | Calculator
-https://odop-staging.herokuapp.com/?name=Startup&view=View1&execute=demo | REACT_APP_DESIGN_TYPE = Compression | Startup | demo | Calculator
-https://odop-staging.herokuapp.com/?type=Spring%2FCompression&view=View1&execute=demo | Spring/Compression | REACT_APP_DESIGN_NAME = StartUp | demo | Calculator
-https://odop-staging.herokuapp.com/?type=Spring%2FCompression&name=Startup&view=View1&execute=demo |  Spring/Compression | Startup | demo | Calculator
-https://odop-staging.herokuapp.com/?type=Spring%2FExtension&view=View1&execute=demo6 | Spring/Extension | REACT_APP_DESIGN_NAME = StartUp | demo6 | Calculator
-https://odop-staging.herokuapp.com/?type=Spring%2FExtension&name=Startup&view=View1&execute=demo6 | Spring/Extension | Startup | demo6 | Calculator
-https://odop-staging.herokuapp.com/?type=Spring%2FTorsion&view=View1&execute=demo14 | Spring/Torsion | REACT_APP_DESIGN_NAME = StartUp | demo14 | Calculator
-https://odop-staging.herokuapp.com/?type=Spring%2FTorsion&name=Startup&view=View1&execute=demo14 | Spring/Torsion | Startup | demo14 | Calculator
+https://odop-staging.herokuapp.com/?view=Advanced&execute=welcomeAdv | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | welcomeAdv | Advanced
+https://odop-staging.herokuapp.com/?view=Calculator&execute=welcomeCalc | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | welcomeCalc | Calculator
+https://odop-staging.herokuapp.com/?view=Calculator&execute=demo | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | demo | Calculator
+https://odop-staging.herokuapp.com/?name=Startup&view=Calculator&execute=demo | REACT_APP_DESIGN_TYPE = Compression | Startup | demo | Calculator
+https://odop-staging.herokuapp.com/?type=Spring%2FCompression&view=Calculator&execute=demo | Spring/Compression | REACT_APP_DESIGN_NAME = StartUp | demo | Calculator
+https://odop-staging.herokuapp.com/?type=Spring%2FCompression&name=Startup&view=Calculator&execute=demo |  Spring/Compression | Startup | demo | Calculator
+https://odop-staging.herokuapp.com/?type=Spring%2FExtension&view=Calculator&execute=demo6 | Spring/Extension | REACT_APP_DESIGN_NAME = StartUp | demo6 | Calculator
+https://odop-staging.herokuapp.com/?type=Spring%2FExtension&name=Startup&view=Calculator&execute=demo6 | Spring/Extension | Startup | demo6 | Calculator
+https://odop-staging.herokuapp.com/?type=Spring%2FTorsion&view=Calculator&execute=demo14 | Spring/Torsion | REACT_APP_DESIGN_NAME = StartUp | demo14 | Calculator
+https://odop-staging.herokuapp.com/?type=Spring%2FTorsion&name=Startup&view=Calculator&execute=demo14 | Spring/Torsion | Startup | demo14 | Calculator
 https://odop-staging.herokuapp.com/?prompt | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | {File : Open} | Advanced
 

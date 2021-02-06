@@ -9,7 +9,7 @@ import { OktaAuth } from '@okta/okta-auth-js'
 import { connect } from 'react-redux';
 import { load, loadInitialState, restoreAutoSave, deleteAutoSave, changeName } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
-import { displayMessage } from './ErrorModal';
+import { displayMessage } from './MessageModal';
 import queryString from 'query-string';
 import { displaySpinner } from './Spinner';
 
@@ -72,7 +72,7 @@ class Routes extends Component {
       this.props.restoreAutoSave();
       this.props.deleteAutoSave();
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load autoSave' });
-      displayMessage('Autosave file restored after interruption. Use FileSave, FileSaveAs or FileExport to save it permanently');
+      displayMessage('Autosave file restored after interruption. Use FileSave, FileSaveAs or FileExport to save it permanently','info');
   }
   
   loadInitialState(type, units) {
@@ -80,7 +80,7 @@ class Routes extends Component {
       this.props.loadInitialState(type, units);
       this.props.changeName('Startup');
       this.props.deleteAutoSave();
-      logUsage('event', 'Routes', { 'event_label': this.props.type + ' load initialState ' + units});
+      logUsage('event', 'Routes', { 'event_label': type + ' load initialState ' + units});
   }
   
   getDesign(user, type, name) {
@@ -105,7 +105,7 @@ class Routes extends Component {
           if (migrated_design.jsontype === "ODOP") {
               this.props.load({name: name, model: migrated_design});
               this.props.deleteAutoSave();
-              logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
+              logUsage('event', 'Routes', { 'event_label': type + ' ' + name });
           } else {
               displayMessage('Invalid JSON type, function ignored');
           }

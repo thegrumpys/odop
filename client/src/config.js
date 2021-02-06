@@ -30,7 +30,7 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   design_type = process.env.REACT_APP_DESIGN_TYPE || 'Spring/Compression';
   design_name = process.env.REACT_APP_DESIGN_NAME || 'Startup';
   design_units = process.env.REACT_APP_DESIGN_UNITS || 'US';
-  design_view = process.env.REACT_APP_DESIGN_VIEW || 'View0';
+  design_view = process.env.REACT_APP_DESIGN_VIEW || 'Advanced';
   session_refresh = process.env.REACT_APP_SESSION_REFRESH || 3600;
 } else { // We are running on Heroku as "production" or "staging"
   const env = runtimeEnv(); // Load the env object.
@@ -51,7 +51,7 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   design_type = env.REACT_APP_DESIGN_TYPE || 'Spring/Compression';
   design_name = env.REACT_APP_DESIGN_NAME || 'Startup';
   design_units = env.REACT_APP_DESIGN_UNITS || 'US';
-  design_view = env.REACT_APP_DESIGN_VIEW || 'View0';
+  design_view = env.REACT_APP_DESIGN_VIEW || 'Advanced';
   session_refresh = env.REACT_APP_SESSION_REFRESH || 3600;
 }
 

@@ -4,23 +4,24 @@ import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
 import { changeView } from '../../store/actionCreators';
 
-class ViewReports extends Component {
+class ViewSelect extends Component {
 
     constructor(props) {
-//        console.log('In ViewReports.constructor props=',props);
+//        console.log('In ViewSelect.constructor props=',props);
         super(props);
         this.onClick = this.onClick.bind(this);
     }
     
     onClick(event) {
-//        console.log('In ViewReports.onClick this=',this,'event=',event);
-//        console.log('In ViewReports.onClick event.target.id=',event.target.id);
+//        console.log('In ViewSelect.onClick this=',this,'event=',event);
+//        console.log('In ViewSelect.onClick event.target.id=',event.target.id);
 //        this.props.parent.setKey(view);
         this.props.changeView(event.target.id);
+        logUsage('event', 'ViewSelect', { 'event_label': event.target.id});
     }
     
     render() {
-//        console.log('In ViewReports.render this=',this);
+//        console.log('In ViewSelect.render this=',this);
         return (
             <React.Fragment>
                 {this.props.reportNames.map((element) => {return (
@@ -41,4 +42,4 @@ const mapDispatchToProps = {
     changeView: changeView,
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ViewReports);
+export default connect(mapStateToProps,mapDispatchToProps)(ViewSelect);

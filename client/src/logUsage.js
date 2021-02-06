@@ -1,4 +1,4 @@
-import { displayMessage } from './components/ErrorModal';
+import { displayMessage } from './components/MessageModal';
 
 export function logUsage(tag, action, note) {
 //    console.log('In logUsage tag=',tag,'action=',action,'note=',note);

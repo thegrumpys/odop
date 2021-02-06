@@ -21,7 +21,7 @@ export var displayMessage = function(message, variant = 'danger', header = '') {
     );
 }
 
-export class ErrorModal extends Component {
+export class MessageModal extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -41,7 +41,7 @@ export class ErrorModal extends Component {
     }
 
     render() {
-//        console.log('In ErrorModal.render this=',this);
+//        console.log('In MessageModal.render this=',this);
         return (
             <Modal show={this.state.modal} className={this.props.className} onHide={this.toggle}>
                 { this.state.header !== '' ? <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>{this.state.header}</Modal.Header> : ''}

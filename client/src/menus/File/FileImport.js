@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { load, deleteAutoSave } from '../../store/actionCreators';
-import { displayMessage } from '../../components/ErrorModal';
+import { displayMessage } from '../../components/MessageModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 

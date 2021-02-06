@@ -14,7 +14,7 @@ file named eqnset.js.
     * offsets.js 
     * eqnset.js
     * init.js<sup> * </sup>
-    * report.js<sup> * </sup>
+    * view.js<sup> * </sup>
     * size.js<sup> * </sup>
     * catalog.js<sup> * </sup>
     * execute.js<sup> * </sup>
@@ -34,7 +34,7 @@ For example, coil spring design types utilize:
     * sizes_xx.json &nbsp; (standard wire sizes tables)
 * client/src/designtypes/Spring/_designName_/
     * init.js<sup> ** </sup>
-    * report.js<sup> ** </sup>
+    * view.js<sup> ** </sup>
     * size.js<sup> ** </sup>
     * catalog.js<sup> ** </sup>
     * execute.js<sup> ** </sup> &nbsp;  (references exec, tutor & demo)
