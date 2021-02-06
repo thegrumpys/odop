@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InputGroup, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { CONSTRAINED } from '../../store/actionTypes';
+import { FIXED, CONSTRAINED } from '../../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue } from '../../store/actionCreators';
 import * as mo from './mat_ips_offsets';
 
@@ -65,18 +65,37 @@ class SymbolValueWireDia extends Component {
 
         var value_class = 'text-right ';
         var value_tooltip;
-        if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
+        if ((this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) || (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
+            value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
             if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-                value_tooltip = "CONSTRAINT VIOLATION: Value outside the constraint range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
-                value_class += "text-not-feasible";
+                value_class += "text-not-feasible ";
             } else if (this.props.objective_value > this.props.system_controls.objmin) {
-                value_tooltip = "CONSTRAINT VIOLATION: Value outside the constraint range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
-                value_class += "text-close-to-feasible";
+                value_class += "text-close-to-feasible ";
             } else if (this.props.objective_value > 0.0) {
-                value_tooltip = "CONSTRAINT VIOLATION: Value outside the constraint range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
-                value_class += "text-feasible";
+                value_class += "text-feasible ";
             } else {
-                value_class += "text-strictly-feasible";
+                value_class += "text-strictly-feasible ";
+            }
+        } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
+            value_tooltip = "CONSTRAINT VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
+            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+                value_class += "text-not-feasible ";
+            } else if (this.props.objective_value > this.props.system_controls.objmin) {
+                value_class += "text-close-to-feasible ";
+            } else if (this.props.objective_value > 0.0) {
+                value_class += "text-feasible ";
+            } else {
+                value_class += "text-strictly-feasible ";
+            }
+        }
+        if (this.props.element.lmin & FIXED) {
+            value_class += "borders-fixed ";
+        } else {
+            if (this.props.element.lmin & CONSTRAINED) {
+                value_class += "borders-constrained-min ";
+            }
+            if (this.props.element.lmax & CONSTRAINED) {
+                value_class += "borders-constrained-max ";
             }
         }
         return (

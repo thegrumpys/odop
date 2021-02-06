@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import ConstraintsMinHeaderIndependentVariable from './ConstraintsMinHeaderIndependentVariable';
 import ConstraintsMinRowIndependentVariable from './ConstraintsMinRowIndependentVariable';
 import ConstraintsMinHeaderDependentVariable from './ConstraintsMinHeaderDependentVariable';

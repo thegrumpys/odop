@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, OverlayTrigger, Tooltip  } from 'react-bootstrap';
+import { Table  } from 'react-bootstrap';
 import NameValueUnitsHeaderIndependentVariable from './NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from './NameValueUnitsHeaderDependentVariable';
