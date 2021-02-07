@@ -484,7 +484,7 @@ it('reducers save output symbol constraints', () => {
     store.dispatch(saveOutputSymbolConstraints("FORCE"));
 
     design = store.getState(); // after
-    expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1); // CONSTRAINED flag
+    expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(0); // CONSTRAINED flag now reset
     expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
     expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0); // No flags
     expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
