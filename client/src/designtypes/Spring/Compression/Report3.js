@@ -351,7 +351,6 @@ class Report3 extends ReportBase {
                 Deflection at load point 2 is {this.props.symbol_table[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
                 {this.pcadmsg}{this.pcadmsg !== undefined && <br />}
                 {this.errmsg1}{this.errmsg1 !== undefined && <br />}
-                {this.errmsg2}{this.errmsg2 !== undefined && <br />}
                 {this.errmsg0}
                 <hr/>
                 <table className="report-table">

@@ -182,14 +182,13 @@ export class ReportBase extends Component {
         temp = this.props.symbol_table[o.Deflect_2].value / this.props.symbol_table[o.L_Free].value;
         sq1 = 1.4 * this.props.symbol_table[o.Slenderness].value - 4.0;
         this.errmsg1 = undefined;
-        this.errmsg2 = undefined;
         this.errmsg0 = undefined;
         if (sq1 > this.props.system_controls.smallnum) {
             /* structured to avoid div by 0 */
             if (temp > 0.76 / sq1) {
                 this.errmsg1 = "Given a deflection ratio of " + temp.toFixed(3) +
-                               "  and a Slenderness ratio of " + this.props.symbol_table[o.Slenderness].value.toFixed(1) + ",";
-                this.errmsg2 = "the spring will tend to buckle with fixed/free  ends.";
+                               "  and a Slenderness ratio of " + this.props.symbol_table[o.Slenderness].value.toFixed(1) + ", " +
+                               "the spring will tend to buckle with fixed/free  ends.";
                 sq1 = 2.0 * this.props.symbol_table[o.Slenderness].value - 8.0;
                 if (sq1 <= 0.0 || temp < 1.6 / sq1)
                     this.errmsg0 = " not";
