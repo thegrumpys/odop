@@ -89,13 +89,13 @@ class SymbolValueWireDia extends Component {
             value_class += this.getValueClass(); 
             value_tooltip = "FIX VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision();
         } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) && (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
-            value_class = this.getValueClass(); 
+            value_class += this.getValueClass(); 
             value_tooltip = "CONSTRAINT VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
         } else if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
-            value_class = this.getValueClass(); 
+            value_class += this.getValueClass(); 
             value_tooltip = "CONSTRAINT VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision();
         } else if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
-            value_class = this.getValueClass(); 
+            value_class += this.getValueClass(); 
             value_tooltip = "CONSTRAINT VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision();
         }
         if (this.props.element.lmin & FIXED) {
