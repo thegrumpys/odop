@@ -138,33 +138,43 @@ class SymbolValue extends Component {
             modal: false,
         });
     }
+    
+    getValueClass() {
+        var value_class = '';
+        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+            value_class += "text-not-feasible ";
+        } else if (this.props.objective_value > this.props.system_controls.objmin) {
+            value_class += "text-close-to-feasible ";
+        } else if (this.props.objective_value > 0.0) {
+            value_class += "text-feasible ";
+        } else {
+            value_class += "text-strictly-feasible ";
+        }
+        return value_class;
+    }
 
     render() {
 //        console.log('In SymbolValue.render this=',this);
         var value_class = 'text-right ';
         var value_tooltip;
-        if ((this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) || (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
+        if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
+            value_class += this.getValueClass(); 
             value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
-            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-                value_class += "text-not-feasible ";
-            } else if (this.props.objective_value > this.props.system_controls.objmin) {
-                value_class += "text-close-to-feasible ";
-            } else if (this.props.objective_value > 0.0) {
-                value_class += "text-feasible ";
-            } else {
-                value_class += "text-strictly-feasible ";
-            }
-        } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) || (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
+        } else if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0)) {
+            value_class += this.getValueClass(); 
+            value_tooltip = "FIX VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision();
+        } else if (!this.props.element.input && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
+            value_class += this.getValueClass(); 
+            value_tooltip = "FIX VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision();
+        } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) && (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
+            value_class = this.getValueClass(); 
             value_tooltip = "CONSTRAINT VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
-            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-                value_class += "text-not-feasible ";
-            } else if (this.props.objective_value > this.props.system_controls.objmin) {
-                value_class += "text-close-to-feasible ";
-            } else if (this.props.objective_value > 0.0) {
-                value_class += "text-feasible ";
-            } else {
-                value_class += "text-strictly-feasible ";
-            }
+        } else if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
+            value_class = this.getValueClass(); 
+            value_tooltip = "CONSTRAINT VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision();
+        } else if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
+            value_class = this.getValueClass(); 
+            value_tooltip = "CONSTRAINT VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision();
         }
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
