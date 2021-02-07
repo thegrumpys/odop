@@ -176,9 +176,9 @@ export class Calculator extends ReportBase {
                                 <td> &nbsp; &nbsp; </td>
                                 <SymbolName element={this.props.symbol_table[o.Weight]} index={o.Weight} />
                                 <td>=</td>
-                                <Value value={this.wgt1000} />
+                                <SymbolValue element={this.props.symbol_table[o.Weight]} index={o.Weight} />
                                 <SymbolUnits element={this.props.symbol_table[o.Weight]} index={o.Weight} className="text-left" />
-                                <td className="text-left">{this.wgt1000_u}</td>
+                                <td />
                             </tr>
                             <tr>
                                 <ValueName name="Pitch" tooltip="Pitch is the distance between two adjacent coils"/>
