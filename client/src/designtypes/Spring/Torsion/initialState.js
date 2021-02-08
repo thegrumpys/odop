@@ -403,7 +403,7 @@ export const initialState = {
             "lmin": 0,
             "lmax": CONSTRAINED,
             "cmin": 1.0,
-            "cmax": 90.0,
+            "cmax": 95.0,
             "ioclass": 0,
             "sdlim": 0,
             "tooltip": "Deflection of load point 2 as a percent of total safe deflection",
