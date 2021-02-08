@@ -44,7 +44,7 @@ export class MessageModal extends Component {
 //        console.log('In MessageModal.render this=',this);
         return (
             <Modal show={this.state.modal} className={this.props.className} onHide={this.toggle}>
-                { this.state.header !== '' ? <Modal.Header><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>{this.state.header}</Modal.Header> : ''}
+                { this.state.header !== '' ? <Modal.Header><Modal.Title><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>{this.state.header}</Modal.Title></Modal.Header> : ''}
                 <Modal.Body><Alert variant={this.state.variant}>{this.state.message}</Alert></Modal.Body>
                 <Modal.Footer><Button variant="primary" onClick={this.toggle}>Close</Button></Modal.Footer>
             </Modal>

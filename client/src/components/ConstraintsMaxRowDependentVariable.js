@@ -127,7 +127,9 @@ class ConstraintsMaxRowDependentVariable extends Component {
                         </InputGroup>
                         {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg" onHide={this.onCancel}>
                             <Modal.Header>
-                                Functionally Determined Constraint Level (FDCL) - Set {this.props.element.name} Max Constraint
+                                <Modal.Title>
+                                    Functionally Determined Constraint Level (FDCL) - Set {this.props.element.name} Max Constraint
+                                </Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
                                 Select constraint variable or enter constraint value.

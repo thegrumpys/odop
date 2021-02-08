@@ -13,7 +13,7 @@ class NameValueUnitsHeaderCalcInput extends Component {
                         <tr>
                             <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">
                                 <OverlayTrigger placement="top" overlay={<Tooltip>Variables that are not subject to constraints, FIX or Search</Tooltip>}>
-                                    <span>Calculation Inputs</span>
+                                    <span>Calculation Input</span>
                                 </OverlayTrigger>
                             </th>
                         </tr>
