@@ -11,7 +11,7 @@ class NameValueUnitsHeaderIndependentVariable extends Component {
                 <tr>
                     <th className="text-center bg-secondary text-white" colSpan="6" id="IVTitle">
                         <OverlayTrigger placement="top" overlay={<Tooltip>Inputs to design equations. Search adjusts FREE Independent Variables to obtain a feasible solution.</Tooltip>}>
-                            <span>Independent Variables</span>
+                            <span>Independent Variable</span>
                         </OverlayTrigger>
                     </th>
                 </tr>

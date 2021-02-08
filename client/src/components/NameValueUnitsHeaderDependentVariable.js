@@ -11,7 +11,7 @@ class NameValueUnitsHeaderDependentVariable extends Component {
                 <tr>
                     <th className="text-center bg-secondary text-white" colSpan="6" id="IVTitle">
                         <OverlayTrigger placement="top" overlay={<Tooltip>Outputs from design equations</Tooltip>}>
-                            <span>Dependent Variables</span>
+                            <span>Dependent Variable</span>
                         </OverlayTrigger>
                     </th>
                 </tr>

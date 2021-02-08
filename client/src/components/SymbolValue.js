@@ -225,8 +225,13 @@ class SymbolValue extends Component {
                         : ''}
                     </InputGroup>
                 </td>
-                <Modal show={this.state.modal} className={this.props.className} onHide={this.onClick}>
-                <Modal.Body>
+                <Modal show={this.state.modal} className={this.props.className} onHide={this.onClose}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            Advanced Settings
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
                         <Table className="border border-secondary" size="sm">
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
