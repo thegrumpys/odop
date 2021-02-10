@@ -4,19 +4,25 @@ import {
     changeName,
     changeLabelsValue,
     changeSymbolValue,
+    changeSymbolConstraint,
     startup,
 } from '../../../store/actionCreators';
+import {
+    MIN,
+    MAX,
+    CONSTRAINED,
+} from '../../../store/actionTypes';
 export const execute = {
     "name": "mkHotWoundMetric",
     "steps": [
         {
-            title: "Make 70PoundGoldBar model",
+            title: "Make HotWoundMetric model",
             "name": "page0x",
             text: (
                 <React.Fragment>
                     <p>
                     This session creates a metric Startup design optimized for 
-                    large hot-wound compression springs.  
+                    designing large hot-wound compression springs.  
                     While it uses the Execute / Demo / Tutorial mechanism
                     associated with end-user training,
                     this session is not intended for end-users. 
@@ -36,6 +42,11 @@ export const execute = {
                         <li>{'changeSymbolValue("Force_2", 6000.0),'}</li>
                         <li>{'changeSymbolValue("Material_Type", 16),'}</li>
                         <li>{'changeSymbolValue("End_Type", 5),'}</li>
+                        <li>{'changeSymbolConstraint("Force_1", MAX, 500.),'}</li>
+                        <li>{'changeSymbolConstraint("Force_2", MAX, 10000.),'}</li>
+                        <li>{'changeSymbolConstraint("L_Solid", MAX, 500.),'}</li>
+                        <li>{'changeSymbolConstraint("Force_Solid", MAX, 10000.),'}</li>
+                        <li>{'changeSymbolConstraint("Cycle_Life", MAX, 10000000),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                     <p>
@@ -62,6 +73,11 @@ export const execute = {
                 changeSymbolValue("Force_2", 6000.0),
                 changeSymbolValue("Material_Type", 16),
                 changeSymbolValue("End_Type", 5),
+                changeSymbolConstraint("Force_1", MAX, 500.),
+                changeSymbolConstraint("Force_2", MAX, 10000.),
+                changeSymbolConstraint("L_Solid", MAX, 500.),
+                changeSymbolConstraint("Force_Solid", MAX, 10000.),
+                changeSymbolConstraint("Cycle_Life", MAX, 10000000),
                 startup(),
             ]
         }
