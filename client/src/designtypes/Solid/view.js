@@ -4,6 +4,6 @@ import DesignTable from "../../components/DesignTable"
 export function getViewNames() {
 //    console.log('In getViewNames');
     return [
-        { name: "Design", title: 'Design', component: <DesignTable /> },
+        { name: "Advanced", title: 'Design', component: <DesignTable /> },
     ];
 }
