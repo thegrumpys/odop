@@ -43,22 +43,25 @@ See Heroku Dashboard Resources tab for JAWS DB.
 The database names are summarized in [Procedures for creating a new JAWSDB](NewDB).   
 1. Start server and client under your development environment. 
 If they are already started, log off of Okta and re-log into Okta to ensure the session is valid and not at risk of time-out.   
-&nbsp;  
-1. Repeat the following steps (through sub-section 8: "Commit these changes") for each design type with an impacted initialState. 
-Process "Startup_Metric" designs for the three spring design types similarly.  
-    1. Do a "Load Initial State" followed by a File : SaveAs "Loaded\_Initial\_Startup" to create a non-migrated version of Startup.
-    1. Migrate the current "Startup" file by File : Open "Startup" followed by a File : SaveAs "Startup".
-    1. Using MySqlDump, dump both design files into a load.sql file   
+1. Verify initial_state and migrate match: Repeat the following steps for each design type (Piston-Cylinder, Solid, Spring/Compression, Spring/Extension, and Spring/Torsion) with an impacted initialState. 
+    1. Modify File > Export to create sorted output by uncommenting sort capability.
+    1. For each design type that has an impacted Initial State 
+        1. Do a File > Open > Load Initial State. Run Action > Execute > mk[x] script and Exit to created each [x] file. Do a File > Export and rename into the [mk\_x] JSON file.
+        1. Separately do a File > Open > Startup which should migrate it followed by a File : Export and rename into a "Migrated\_x" JSON file.
+        1. Compare the two JSON files to verify that initial state and migration operate exactly the same. If they don't match then repair them until they do or the changes are as intended.
+    1. When done modify File > Export to recomment out sort capability.
+1. Create load.sql files: Repeat the following steps or each design type (Piston-Cylinder, Solid, Spring/Compression, Spring/Extension, and Spring/Torsion) with an impacted initialState. 
+Process "Startup_Metric" designs for the three Spring design types similarly.
+    1. Do a File > Open > Load Initial State for each design type that has an impacted Initial State. 
+    Run Action > Execute > mk[Startup] script and Exit to created each [Startup] file. Do a File > SaveAs into the [mk\_Startup] file.
+    1. Separately do a File > Open > Startup followed by a File : SaveAs into a "Migrated\_Startup" file.
+    1. Using MySqlDump command run the `scripts/dump_db_startuo_files.sh` script to dump all "mk\_Startup" and "Migrated\_Startup" design files into two different load.sql files with those names.   
 Compare the two load.sql files to verify that initial state and migration operate exactly the same.
 If they don't match then repair them until they do. 
 It is OK to ignore reordering of .json properties.  
-    1. Make "Loaded\_Initial\_Startup" the new "Startup". This should eliminate the propagation of any property re-ordering.
-    1. Create designs (example: HotWound, HotWoundMetric) based on initialState from available Execute macros. 
-Migrate all other design files and save them back into themselves using File : Save.
-    1. Using MySqlDump, dump the affected design file into a load.sql file.
     1. Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). 
 Set the user field = NULL.
-    1. Commit these changes.  The script to load these changes will be run in a [later step](release#runloadscript).
+    1. **Commit these changes.**  The script to load these changes will be run in a [later step](release#runloadscript).
 &nbsp;
 1. If there are environment variable changes, update Server's .env and Client's .env with the following for development (localhost). NOTE: No entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost). Assume NODE_ENV="development" for software development environment, or "test" for test case execution environment.
     * JAWSDB\_URL
