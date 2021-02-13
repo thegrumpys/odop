@@ -13,16 +13,32 @@ export const execute = {
                     
                     <p>
                     The white entry fields below are inputs to the Calculator.
-                    As input values are entered, calculation results appear in the light gray fields.
+                    Calculation results appear in the light gray fields.
                     The existing values are an arbitrary starting point. 
                     Modify them to meet your requirements. 
+                    </p>
+
+                    <p>
+                    At first glance, ODOP:Spring Calculator view appears to be based on applied load.
+                    Forces are inputs. 
+                    Deflections are outputs. 
+                    There seems to be a requirement to supply a value for the number of coils. 
+                    But wait! There is more.
+                    With a little investigation you will find that Calculator view provides access to the
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#fix" target="_blank" rel="noopener noreferrer">FIX / FREE</a>,&nbsp; 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#constraints" target="_blank" rel="noopener noreferrer">constraints</a>&nbsp; 
+                    and
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/search" target="_blank" rel="noopener noreferrer">Search</a>&nbsp; 
+                    features that allow flexibility on how your design problem is specified.  
+                    For example, it is possible to specify force and deflection at two points
+                    and then let the software determine the necessary wire diameter, coil diameter and
+                    number of coils. 
                     </p>
 
                     <p>
                     Push the blue "Next" button in the upper right to show the next page of instructions, hints and tips. 
                     Push the darker gray "Exit" button to close this light green panel. 
                     </p>
-                    <br />
                 </React.Fragment>
             ),
             actions: [
@@ -42,12 +58,12 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    The ODOP:Spring Calculator view is based on applied load.
-                    Forces are calculation inputs. Deflections are outputs. 
-                    Alternative calculation approaches are supported by other views.
-                    Use the <b>View</b> menu above to switch views.
+                    <b>Right click</b> (long press a touch screen) on a darker (more bold) numeric value to control 
+                    FIX / FREE status and to establish or modify constraints. 
+                    FIXed status causes the ODOP Search feature (<b>Action : Search</b> menu) to achieve or hold a specified value.
+                    FREE status allows Search to manipulate the variable to achieve a feasible design.
                     </p>
-                    
+
                     <p>
                     The multi-colored Feasibility Status indicator provides feedback on the viability of the current design.
                     For more information about design feasibility and about the Feasibility Status indicator, follow the links: 
@@ -55,12 +71,7 @@ export const execute = {
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; and 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#feasibleRegion" target="_blank" rel="noopener noreferrer">Feasible Region</a>.&nbsp; 
                     </p>
-                    
-                    <p>
-                    Right click (long press a touch screen) on a darker numeric value to control FIX / FREE status and to establish or modify constraints. 
-                    FIXed status causes the ODOP Search feature (<b>Action : Search</b> menu) to achieve or hold a specified value.
-                    FREE status allows Search to manipulate the variable to achieve a feasible design.
-                    </p>
+                    <br />
                 </React.Fragment>
             )
         },
@@ -70,7 +81,8 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     The Wire_Dia field of Calculator view provides a list of commonly available wire diameters 
-                    that depends on the selected Material_Type and units (U.S., metric). 
+                    that depends on the selected Material_Type and 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/unitsUSmetric" target="_blank" rel="noopener noreferrer">units (U.S., metric)</a>.&nbsp; 
                     Choose a standard wire diameter by selecting the Wire_Dia input field and scrolling to the desired value. 
                     After selection the value is automatically marked with FIXed status so that it is not manipulated by Search.
                     </p>
@@ -78,9 +90,18 @@ export const execute = {
                     <p>
                     Tooltips are available for many elements of the Calculator view.
                     Hover the cursor (tap a touch screen) to learn about these elements.
-                    Additional insights are available in the on-line Help plus Tutorial and Demo sessions.
+                    Additional insights are available in the  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp; 
+                    plus 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    sessions.
                     </p>
-                    <br />
+                    
+                    <p>
+                    Use the <b>View</b> menu above to switch views. 
+                    Advanced view provides access to the full range of ODOP:Spring features.
+                    Reports present additional information about your current spring design.
+                    </p>
                 </React.Fragment>
             )
         },
