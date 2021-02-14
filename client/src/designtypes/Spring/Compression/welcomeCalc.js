@@ -8,9 +8,10 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     Welcome to the ODOP:Spring web app!
-                    Calculator view is below. 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewCalculator" target="_blank" rel="noopener noreferrer">Calculator view</a>&nbsp; 
+                    is below. 
                     </p>
-                    
+
                     <p>
                     The white entry fields below are inputs to the Calculator.
                     Calculation results appear in the light gray fields.
@@ -99,7 +100,8 @@ export const execute = {
                     
                     <p>
                     Use the <b>View</b> menu above to switch views. 
-                    Advanced view provides access to the full range of ODOP:Spring features.
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewAdvanced" target="_blank" rel="noopener noreferrer">Advanced view</a>&nbsp; 
+                    provides access to the full range of ODOP:Spring features.
                     Reports present additional information about your current spring design.
                     </p>
                 </React.Fragment>
@@ -111,7 +113,14 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     The <b>File : Open</b> menu above provides the ability to open existing designs of 
-                    supported spring types (compression, extension & torsion) and units (U.S., metric). 
+                    supported spring 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes" target="_blank" rel="noopener noreferrer">types</a>&nbsp; 
+                    (
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/c_spring" target="_blank" rel="noopener noreferrer">compression,</a>&nbsp; 
+                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/e_spring" target="_blank" rel="noopener noreferrer">extension</a>&nbsp;
+                    &  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/t_spring" target="_blank" rel="noopener noreferrer">torsion</a> 
+                    ) and units (U.S., metric). 
                     These system-provided designs can be a starting point for new custom designs. 
                    </p>
                     
@@ -121,7 +130,11 @@ export const execute = {
                     Enter input values in the white fields.
                     Be sure to select appropriate values for Material_Type, End_Type and Wire_Dia.
                     View the corresponding Calculator outputs.
+                    Use <b>right click</b> to access FIX / FREE and constraints.
                     Switch to other views to utilize additional capabilities of ODOP:Spring.
+                   </p>
+                    
+                    <p>
                     Push the gray "Exit" button in the upper right to close this light green panel.
                    </p>
                     
