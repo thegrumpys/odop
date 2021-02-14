@@ -34,7 +34,7 @@ when positioned in the server directory and again when positioned in the client 
 skip forward to [Test For Console Output](release#test4consoleoutput).   
 To confirm,
 compare the current master branch against the previous released commit tag branch 
-and check if any of the client/src/designtypes/.../initialState.js files have changed.
+and check if any of the client/src/designtypes/.../initialState.js files have changed.  
 &nbsp;
 1. If the database does not exist or is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB)
 to create and format the database tables using the create.sql file. 
@@ -57,10 +57,10 @@ Process "Startup_Metric" designs for the three Spring design types similarly.
     1. Using MySqlDump command run the `scripts/dump_db_startuo_files.sh` script to dump all newly created design files into their respective load.sql files. You might need to set a different OKTA Userid and also add carriage returns vefore each insetrted VALUES section.  
     1. Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). 
 Set the user field = NULL.
-    1. **Commit these changes.**  The script to load these changes will be run in a [later step](release#runloadscript).
+    1. **Commit these changes.**  The script to load these changes will be run in a [later step](release#runloadscript).  
 &nbsp;
 1. If there are environment variable changes, update Server's .env and Client's .env with the following for development (localhost). NOTE: No entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost). Assume NODE_ENV="development" for software development environment, or "test" for test case execution environment.
-    * JAWSDB\_URL
+    * JAWSDB\_URL - For server only
     * REACT\_APP\_NODE\_ENV=development|test
     * REACT\_APP\_ISSUER
     * REACT\_APP\_CLIENT\_ID
@@ -71,15 +71,16 @@ Set the user field = NULL.
     * REACT\_APP\_DESIGN\_VIEW
     * REACT\_APP\_SESSION\_REFRESH
 1. Do a pull or push to get latest version on all systems.
-<a id="test4consoleoutput"></a>
+<a id="test4consoleoutput"></a>  
 &nbsp;
 1. **Test For Console Output** &nbsp; Bring up Google Chrome and enable View Console / Debugger.
    Test various input and menu functions and verify no unexpected console.log output.
    Use regular expression search: "^\s*console.log" to find non-commented out console.log lines.
-1. Shutdown server and client under your development environment.
+   Most console.log output is acceptable in client/src/store/middleware/seek.js, client/src/registerServiceWorker.js, and server.js
+1. Shutdown server and client under your development environment.  
 &nbsp;
 1. In server, run "npm test" and verify test cases executed successfully.
-1. In client, run "npm test" and verify test cases executed successfully.
+1. In client, run "npm test" and verify test cases executed successfully.  
 &nbsp;
 1. Update client/src/version.js file to Major.Minor.Patch (for example: 2.3.1). Remove 'dev' suffix. Optionally use 'rc1' or 'rc2'.
 1. Commit with message "Update version.js to Major.Minor.Patch" and push to origin.
