@@ -77,5 +77,6 @@ $ package dotenv file
 scripts/load_all.sh
 scripts/create_db.sh
 scripts/db_size.sh
+scripts/dump_db_startup_files.sh
 scripts/dump_db.sh
 scripts/*.sql
