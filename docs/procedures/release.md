@@ -116,14 +116,14 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
 <a id="databaseStuff"></a>
 &nbsp;
 1. **Database Stuff** &nbsp; If this release has no database impact, skip forward to [Publish to Heroku](release#publish2Heroku).
-1. Before operating on the production system database, check for active users on the production system; put the production system in maintenance mode.
+1. If operating on the production system database (ignore for staging), check for active users on the production system; put the production system in maintenance mode.
    To enable maintenance mode:  
    heroku maintenance:on -a odop
 1. If the database does not exist or is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB)
 to create and format the database tables using the create.sql file.
 Do this for staging and/or production databases as appropriate.   
 See the above link for the easier-to-read table of database names.  
-1. Back up the production database.  
+1. Optionally back up staging database. Back up the production database.
    For background on backup provided by JAWSDB see: [Heroku docs](https://devcenter.heroku.com/articles/jawsdb#database-backups)
 1. Check the size of the production database as compared to capacity limits (5Mb for JAWSDB free plan). 
 Use the ./scripts/db_size.sh script.  
@@ -132,9 +132,10 @@ If appropriate, dump to off-line storage and re-initialize the log_Usage table.
 <a id="runloadscript"></a>
 &nbsp;
 1. If the database already exists but no entries exist or must be recreated, then either
+   modify the script for the particular database and
    run the configured ./scripts/load_all.sh script
    or
-   manually run all affected load.sql files to create startup files for each design type in the database.
+   manually run all affected load.sql files to create startup files for each design type in the affected database.
 1. Delete any old, invalid or development-only designs if necessary.
 &nbsp;
 1. Do a pull or push as required to get latest version on all systems.
