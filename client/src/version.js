@@ -1,3 +1,3 @@
 export function version() {
-    return "3.8rc1";
+    return "3.8rc2";
 }
