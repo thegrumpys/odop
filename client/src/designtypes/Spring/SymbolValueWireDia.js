@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
-import { InputGroup, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { FIXED, CONSTRAINED } from '../../store/actionTypes';
+import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue } from '../../store/actionCreators';
 import * as mo from './mat_ips_offsets';
+import NameValueUnitsHeaderIndependentVariable from '../../components/NameValueUnitsHeaderIndependentVariable';
+import NameValueUnitsRowIndependentVariable from '../../components/NameValueUnitsRowIndependentVariable';
+import NameValueUnitsHeaderDependentVariable from '../../components/NameValueUnitsHeaderDependentVariable';
+import NameValueUnitsRowDependentVariable from '../../components/NameValueUnitsRowDependentVariable';
+import ConstraintsMinHeaderIndependentVariable from '../../components/ConstraintsMinHeaderIndependentVariable';
+import ConstraintsMinRowIndependentVariable from '../../components/ConstraintsMinRowIndependentVariable';
+import ConstraintsMinHeaderDependentVariable from '../../components/ConstraintsMinHeaderDependentVariable';
+import ConstraintsMinRowDependentVariable from '../../components/ConstraintsMinRowDependentVariable';
+import ConstraintsMaxHeaderIndependentVariable from '../../components/ConstraintsMaxHeaderIndependentVariable';
+import ConstraintsMaxRowIndependentVariable from '../../components/ConstraintsMaxRowIndependentVariable';
+import ConstraintsMaxHeaderDependentVariable from '../../components/ConstraintsMaxHeaderDependentVariable';
+import ConstraintsMaxRowDependentVariable from '../../components/ConstraintsMaxRowDependentVariable';
+import NameValueUnitsHeaderCalcInput from '../../components/NameValueUnitsHeaderCalcInput';
+import NameValueUnitsRowCalcInput from '../../components/NameValueUnitsRowCalcInput';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -21,6 +35,11 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.constructor props=',props);
         super(props);
         this.onSelect = this.onSelect.bind(this);
+        this.onContextMenu = this.onContextMenu.bind(this);
+        this.onClose = this.onClose.bind(this);
+        this.state = {
+            modal: false,
+        };
     }
     
     onSelect(event) {
@@ -30,7 +49,22 @@ class SymbolValueWireDia extends Component {
         this.props.changeSymbolValue(this.props.element.name,wire_dia);
         this.props.fixSymbolValue(this.props.element.name);
     }
-  
+
+    onContextMenu(e) {
+//        console.log('In SymbolValue.onContextMenu this=',this,'e=',e);
+        e.preventDefault();
+        this.setState({
+            modal: true,
+        });
+    }
+
+    onClose() {
+//        console.log('In SymbolValue.onCancel this=',this);
+        this.setState({
+            modal: false,
+        });
+    }
+    
     getValueClass() {
         var value_class = '';
         if (this.props.objective_value > 4*this.props.system_controls.objmin) {
@@ -114,19 +148,72 @@ class SymbolValueWireDia extends Component {
                     <InputGroup>
                         {(value_tooltip !== undefined ?
                             <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect}>
+                                <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} onContextMenu={this.onContextMenu}>
                                     {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value+" Non-std"}</option>}
                                     {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
                                 </Form.Control>
                             </OverlayTrigger>
                         :
-                            <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect}>
+                            <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} onContextMenu={this.onContextMenu}>
                             {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value+" Non-std"}</option>}
                                 {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
                             </Form.Control>
                         )}
                     </InputGroup>
                 </td>
+                <Modal show={this.state.modal} className={this.props.className} onHide={this.onClose}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            Advanced Settings
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Table className="border border-secondary" size="sm">
+                            {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <NameValueUnitsHeaderIndependentVariable />
+                                    <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                            {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <NameValueUnitsHeaderDependentVariable />
+                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                            {this.props.element.type === "calcinput" && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <NameValueUnitsHeaderCalcInput />
+                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                        </Table>
+                        <Table className="border border-secondary" size="sm">
+                            {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <ConstraintsMinHeaderIndependentVariable />
+                                    <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                            {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <ConstraintsMinHeaderDependentVariable />
+                                    <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                        </Table>
+                        <Table className="border border-secondary" size="sm">
+                            {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <ConstraintsMaxHeaderIndependentVariable />
+                                    <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                            {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
+                                <React.Fragment>
+                                    <ConstraintsMaxHeaderDependentVariable />
+                                    <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                </React.Fragment>}
+                        </Table>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={this.onClose}>Close</Button>
+                    </Modal.Footer>
+                </Modal>
             </React.Fragment>
         );
     }
