@@ -15,10 +15,21 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Values in the Independent Variables and Calculation Inputs sections below are inputs.
-                    As input values are entered, calculation results will appear immediately in the Dependent Variables section. 
-                    Dependent Variables can be controlled by setting constraints or FIXed status. 
-                    Use the Search function (<b>Action : Search</b> menu) to find a design that meets constraints and FIXes.
+                    Values in the 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#independentVar" target="_blank" rel="noopener noreferrer">Independent Variables</a>&nbsp; 
+                    and 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#calcInputs" target="_blank" rel="noopener noreferrer">Calculation Inputs</a>&nbsp; 
+                    sections below are inputs.
+                    As input values are entered, calculation results will appear immediately in the 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#dependentVar" target="_blank" rel="noopener noreferrer">Dependent Variables</a>&nbsp; 
+                    section. 
+                    Dependent Variables can be controlled by setting 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#constraints" target="_blank" rel="noopener noreferrer">constraints</a>&nbsp; 
+                    or 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#fix" target="_blank" rel="noopener noreferrer">FIXed status</a>.&nbsp; 
+                    Use the 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/search" target="_blank" rel="noopener noreferrer">Search</a>&nbsp; 
+                    function (<b>Action : Search</b> menu) to find a design that meets constraints and FIXes.
                     </p>
 
                     <p>
@@ -40,7 +51,8 @@ export const execute = {
                     causes Search to achieve or hold a specified value.
                     FREE status allows Search to manipulate the variable to achieve a feasible design. 
                     The <a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
-                    sessions provide additional detail on these concepts.
+                    sessions provide additional detail on these concepts as well as more advanced topics 
+                    such as user specified material properties and end types.
                     </p>
 
                     <p>
@@ -61,7 +73,7 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     The ODOP:Spring Advanced view allows access to all program features.
-                    Alternative calculation approaches are supported by other views.
+                    Alternative presentations are provided by other views.
                     Use the <b>View</b> menu above to switch views.
                     </p>
                     
