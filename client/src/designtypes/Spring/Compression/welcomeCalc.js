@@ -63,12 +63,15 @@ export const execute = {
                     FIX / FREE status and to establish or modify constraints. 
                     FIXed status causes the ODOP Search feature (<b>Action : Search</b> menu) to achieve or hold a specified value.
                     FREE status allows Search to manipulate the variable to achieve a feasible design.
+                    The <a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    sessions provide additional detail on these concepts.
                     </p>
 
                     <p>
-                    The multi-colored Feasibility Status indicator provides feedback on the viability of the current design.
-                    For more information about design feasibility and about the Feasibility Status indicator, follow the links: 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/feasibility" target="_blank" rel="noopener noreferrer">Feasiblity</a>,&nbsp; 
+                    The multi-colored 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/feasibility" target="_blank" rel="noopener noreferrer">Feasibility Status indicator</a>,&nbsp; 
+                    provides feedback on the viability of the current design.
+                    See also: 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; and 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#feasibleRegion" target="_blank" rel="noopener noreferrer">Feasible Region</a>.&nbsp; 
                     </p>
