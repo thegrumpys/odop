@@ -152,11 +152,15 @@ export function migrate(design) {
         if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
             design.symbol_table[28].value = 0.0; 
             design.symbol_table[28].units = 'N-mm';
+            design.symbol_table[28].lmin = 0; 
+            design.symbol_table[28].lmax = 0; 
             design.symbol_table[28].cmin = 1.0; 
             design.symbol_table[28].cmax = 1000000; 
         } else {
             design.symbol_table[28].value = 0.0; 
             design.symbol_table[28].units = 'in-lb';
+            design.symbol_table[28].lmin = 0; 
+            design.symbol_table[28].lmax = 0; 
             design.symbol_table[28].cmin = 1.0; 
             design.symbol_table[28].cmax = 1000000; 
         }
