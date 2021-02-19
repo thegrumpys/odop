@@ -61,11 +61,15 @@ export function migrate(design) {
         if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
             design.symbol_table[27].value = 0.0; 
             design.symbol_table[27].units = 'N-mm';
+            design.symbol_table[27].lmin = 0; 
+            design.symbol_table[27].lmax = 0; 
             design.symbol_table[27].cmin = 1.0; 
             design.symbol_table[27].cmax = 1000000; 
         } else {
             design.symbol_table[27].value = 0.0; 
             design.symbol_table[27].units = 'in-lb';
+            design.symbol_table[27].lmin = 0; 
+            design.symbol_table[27].lmax = 0; 
             design.symbol_table[27].cmin = 1.0; 
             design.symbol_table[27].cmax = 1000000; 
         }
@@ -147,19 +151,21 @@ export function migrate(design) {
                 delete element.oldvalue
             }
         });
-        // Add %_Safe_Deflect calculation
+        // Add %_Safe_Deflect calculation; make it constrained to a max of 90%
         design.symbol_table.splice(26,0,Object.assign({},design.symbol_table[26]));  //  Duplicate Force_Arm_2 in target position
         design.symbol_table[26].name = '%_Safe_Deflect'; // Rename it to %_Safe_Deflect
         design.symbol_table[26].value = 0.0; 
         if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
             design.symbol_table[26].value = 76.18; 
             design.symbol_table[26].units = '%';
+            design.symbol_table[26].lmin = 0; 
             design.symbol_table[26].lmax = CONSTRAINED; 
             design.symbol_table[26].cmin = 1.0; 
             design.symbol_table[26].cmax = 90; 
         } else {
             design.symbol_table[26].value = 76.18; 
             design.symbol_table[26].units = '%';
+            design.symbol_table[26].lmin = 0; 
             design.symbol_table[26].lmax = CONSTRAINED; 
             design.symbol_table[26].cmin = 1.0; 
             design.symbol_table[26].cmax = 90; 
