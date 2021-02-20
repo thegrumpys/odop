@@ -4,11 +4,6 @@ import { connect } from 'react-redux';
 
 class ValueName extends Component {
     
-    constructor(props) {
-//        console.log('In ValueName.constructor props=',props);
-        super(props);
-    }
-    
     render() {
 //        console.log('In ValueName.render this=',this);
         return (

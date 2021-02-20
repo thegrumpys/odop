@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, loadInitialState, changeLabelsValue, saveAutoSave } from '../../../store/actionCreators';
+import { saveAutoSave } from '../../../store/actionCreators';
 export const execute = {
     steps: [
         {

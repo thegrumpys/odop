@@ -10,6 +10,8 @@ export function migrate(design) {
      */
 //    console.log('In migrate design=',design);
 
+    var source;
+    var sink;
     var previous_version = design.version;
     var migrated_design = design; // Assume no-op as default 
 
@@ -89,8 +91,8 @@ export function migrate(design) {
 //            console.log('In migrate.propgate element=',element);
             if (element.lmin & FDCL) {
 //                console.log('In migrate.propgate element.lmin&FDCL=',element.lmin&FDCL);
-                var source = design.symbol_table[element.cmin];
-                var sink = element;
+                source = design.symbol_table[element.cmin];
+                sink = element;
 //                console.log('In migrate.propgate source=',source,'sink=',sink);
                 if (source.propagate === undefined) source.propagate = [];
                 source.propagate.push({ name: sink.name, minmax: MIN });
@@ -100,8 +102,8 @@ export function migrate(design) {
             }
             if (element.lmax & FDCL) {
 //                console.log('In migrate.propgate element.lmax&FDCL=',element.lmax&FDCL);
-                var source = design.symbol_table[element.cmax];
-                var sink = element;
+                source = design.symbol_table[element.cmax];
+                sink = element;
 //                console.log('In migrate.propgate source=',source,'sink=',sink);
                 if (source.propagate === undefined) source.propagate = [];
                 source.propagate.push({ name: sink.name, minmax: MAX });

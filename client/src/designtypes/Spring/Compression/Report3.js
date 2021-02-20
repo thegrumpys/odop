@@ -1,6 +1,5 @@
 import React from 'react';
 import { ReportBase } from "./ReportBase" // import the inner non-redux-connected class
-import { Row } from 'react-bootstrap';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
 

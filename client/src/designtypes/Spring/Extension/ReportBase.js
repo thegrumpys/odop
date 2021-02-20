@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_ips_offsets';
 
@@ -121,6 +121,7 @@ export class ReportBase extends Component {
             this.astmFedSpecValue = "N/A";
         }
 //        console.log("this.matTypeValue, this.astmFedSpecValue = ", this.matTypeValue, this.astmFedSpecValue);
+        return null;
     }
 
     def_dia(def_len) {

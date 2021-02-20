@@ -14,16 +14,11 @@ Number.prototype.toODOPPrecision = function() {
 
 class Value extends Component {
     
-    constructor(props) {
-//        console.log('In Value.constructor props=',props);
-        super(props);
-    }
-    
     render() {
 //        console.log('In Value.render this=',this);
         return (
             <React.Fragment>
-                <td className="align-middle" className={this.props.className}>
+                <td className={"align-middle " + this.props.className}>
                     <InputGroup>
                         {typeof this.props.value === 'number' ?
                             <Form.Control type="number" disabled={true} className="text-right text-value" value={this.props.value.toODOPPrecision()} />

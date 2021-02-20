@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class FeasibilityIndicator extends Component {

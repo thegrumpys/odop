@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Container, Row, Table, InputGroup, Form } from 'react-bootstrap';
+import React from 'react';
+import { Container, Row, InputGroup, Form } from 'react-bootstrap';
 import { ReportBase } from "./ReportBase" // import the inner non-redux-connected class
 import ResultTable from '../../../components/ResultTable';
 import SymbolName from '../../../components/SymbolName';
@@ -12,11 +12,6 @@ import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
 
 export class Calculator extends ReportBase {
-
-    constructor(props) {
-      super(props);
-//      console.log('In Calculator.constructor props=',props);
-    }
 
     render() {
         super.render();

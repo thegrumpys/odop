@@ -4,11 +4,6 @@ import { connect } from 'react-redux';
 
 class SymbolName extends Component {
     
-    constructor(props) {
-//        console.log('In SymbolName.constructor props=',props);
-        super(props);
-    }
-    
     render() {
 //        console.log('In SymbolName.render this=',this);
         return (

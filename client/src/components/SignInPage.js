@@ -2,18 +2,12 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import SignInPageWidget from './SignInPageWidget';
 import { withOktaAuth } from '@okta/okta-react';
-import config from '../config';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { displayMessage } from './MessageModal';
 
 class SignInPage extends Component {
-  constructor(props) {
-    super(props);
-//    console.log('In SignInPage.constructor props=',props);
-  }
 
-  render() {
+    render() {
 //    console.log('In SignInPage.render this=',this);
     return this.props.authState.isAuthenticated ? <Redirect to={{ pathname: '/' }}/> : <SignInPageWidget />
   }

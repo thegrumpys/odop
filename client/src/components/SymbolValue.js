@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { InputGroup, ButtonGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
+import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
+import { FIXED, CONSTRAINED } from '../store/actionTypes';
 import { changeSymbolValue } from '../store/actionCreators';
 import NameValueUnitsHeaderIndependentVariable from './NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';

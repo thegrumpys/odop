@@ -9,10 +9,9 @@ import {
     OverlayTrigger,
     Tooltip
 } from 'react-bootstrap';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import ExecutePanel from './ExecutePanel';
-import DesignTable from './DesignTable';
 import { connect } from 'react-redux';
 import SignIn from '../menus/Session/SignIn';
 import SignOut from '../menus/Session/SignOut';
@@ -42,7 +41,6 @@ import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
 import { withOktaAuth } from '@okta/okta-react';
-import { logUsage } from '../logUsage';
 import { changeUser, changeView, deleteAutoSave } from '../store/actionCreators';
 import config from '../config';
 import queryString from 'query-string';
@@ -54,7 +52,7 @@ class MainPage extends Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.setView = this.setView.bind(this);
-        var { view } = queryString.parse(location.search);
+        var { view } = queryString.parse(window.location.search);
         view = view !== undefined ? view : config.design.view;
         this.props.changeView(view);
         this.state = {

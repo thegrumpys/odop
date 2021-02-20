@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
-import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
+import { Security, LoginCallback } from '@okta/okta-react';
 import config from '../config';
 import MainPage from './MainPage';
 import SignInPage from './SignInPage';
@@ -34,7 +33,7 @@ class Routes extends Component {
 //          console.log('In Routes.componentDidMount restore "autosave" file')
           this.loadAutoSave();
       } else {
-          var { type, name } = queryString.parse(location.search);
+          var { type, name } = queryString.parse(window.location.search);
           if (type !== undefined || name !== undefined) {
               type = type !== undefined ? type : config.design.type;
               name = name !== undefined ? name : config.design.name;
@@ -49,13 +48,13 @@ class Routes extends Component {
   
   componentDidUpdate(prevProps) {
 //      console.log('In Routes.componentDidUpdate this=',this,'prevProps=',prevProps);
-      if (prevProps.user != this.props.user) {
+      if (prevProps.user !== this.props.user) {
 //          console.log('In Routes.componentDidUpdate prevProps.user=',prevProps.user,'this.props.user=',this.props.user);
       }
-      if (prevProps.name != this.props.name) {
+      if (prevProps.name !== this.props.name) {
 //          console.log('In Routes.componentDidUpdate prevProps.name=',prevProps.name,'this.props.name=',this.props.name);
       }
-      if (prevProps.type != this.props.type) {
+      if (prevProps.type !== this.props.type) {
 //          console.log('In Routes.componentDidUpdate prevProps.type=',prevProps.type,'this.props.type=',this.props.type);
       }
   }

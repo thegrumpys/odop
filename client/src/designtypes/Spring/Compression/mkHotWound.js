@@ -8,9 +8,7 @@ import {
     startup,
 } from '../../../store/actionCreators';
 import {
-    MIN,
     MAX,
-    CONSTRAINED,
 } from '../../../store/actionTypes';
 export const execute = {
     "steps": [
@@ -31,7 +29,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Spring/Compression","US"),'}</li>
                         <li>{'changeName("HotWound"),'}</li>
-                        <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "Hot Wound Compression Spring Startup"\}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Hot Wound Compression Spring Startup"}]),'}</li>
                         <li>{'changeSymbolValue("OD_Free", 6.0),'}</li>
                         <li>{'changeSymbolValue("Wire_Dia", 0.625),'}</li>
                         <li>{'changeSymbolValue("L_Free", 10.0),'}</li>

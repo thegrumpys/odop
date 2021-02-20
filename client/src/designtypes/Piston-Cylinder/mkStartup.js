@@ -15,7 +15,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Piston-Cylinder","US"),'}</li>
                         <li>{'changeName("Startup"),'}</li>
-                        <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "PCYL Default startup file ..."\}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "PCYL Default startup file ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                 </React.Fragment>

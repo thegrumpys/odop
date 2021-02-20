@@ -16,7 +16,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Solid","US"),'}</li>
                         <li>{'changeName("USPS_MaxVolume"),'}</li>
-                        <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "USPS maximum volume given max 108 inches length + girth "\}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "USPS maximum volume given max 108 inches length + girth "}]),'}</li>
                         <li>{'changeSymbolValue("Length",36),'}</li>
                         <li>{'changeSymbolValue("Width",18),'}</li>
                         <li>{'changeSymbolValue("Height",18),'}</li>

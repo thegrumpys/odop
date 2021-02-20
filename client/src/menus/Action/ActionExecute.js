@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
-import { startExecute, stopExecute } from "../../components/ExecutePanel";
+import { startExecute } from "../../components/ExecutePanel";
 
 class ActionExecute extends Component {
 
@@ -27,7 +27,6 @@ class ActionExecute extends Component {
 //        console.log('In ActionExecute.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
 //            console.log('In ActionExecute.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
-//            stopExecute(); // Stop whatever is currently running if anything is running
             this.updateExecuteNames();
         }
     }
@@ -69,7 +68,7 @@ class ActionExecute extends Component {
 //        console.log('In ActionExecute.onExecute this.state.execute_name=',this.state.execute_name);
         var { execute } = require('../../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
 //        console.log('In ActionExecute.onExecute execute=',execute);
-        startExecute("Action : Execute" + ' : ' + this.state.execute_name, execute.steps);
+        startExecute('Action : Execute : ' + this.state.execute_name, execute.steps);
     }
     
     onCancel() {

@@ -16,7 +16,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Solid","US"),'}</li>
                         <li>{'changeName("StandardGoldBar"),'}</li>
-                        <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "The US standard gold bar is not a rectangular solid.  It has sloped sides.  The dimensions here are a rough approximation."\}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "The US standard gold bar is not a rectangular solid.  It has sloped sides.  The dimensions here are a rough approximation."}]),'}</li>
                         <li>{'changeSymbolValue("Length",7),'}</li>
                         <li>{'changeSymbolValue("Width",3.625),'}</li>
                         <li>{'changeSymbolValue("Height",1.75),'}</li>

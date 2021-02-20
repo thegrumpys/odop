@@ -24,7 +24,7 @@ class FileOpen extends Component {
         this.onSignIn = this.onSignIn.bind(this);
         this.onOpen = this.onOpen.bind(this);
         this.onCancel = this.onCancel.bind(this);
-        var { prompt } = queryString.parse(location.search);
+        var { prompt } = queryString.parse(window.location.search);
         var modal = prompt !== undefined ? true : false;
         this.state = {
             modal: modal,
@@ -156,7 +156,7 @@ class FileOpen extends Component {
         });
         this.props.loadInitialState(this.state.type, 'US');
         this.props.deleteAutoSave();
-        logUsage('event', 'FileOpen', { 'event_label': this.state.type + ' load initialState ' + 'US'});
+        logUsage('event', 'FileOpen', { 'event_label': this.state.type + ' load initialState US'});
     }
 
     onLoadMetricInitialState() {
@@ -166,7 +166,7 @@ class FileOpen extends Component {
         });
         this.props.loadInitialState(this.state.type, 'Metric');
         this.props.deleteAutoSave();
-        logUsage('event', 'FileOpen', { 'event_label': this.state.type + ' load initialState ' + 'Metric'});
+        logUsage('event', 'FileOpen', { 'event_label': this.state.type + ' load initialState Metric'});
     }
 
     onLoadAutoSave() {

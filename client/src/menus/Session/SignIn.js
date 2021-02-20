@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { logUsage } from '../../logUsage';
-import { connect } from 'react-redux';
 import { withOktaAuth } from '@okta/okta-react';
 
 export default withRouter(withOktaAuth(class SignIn extends Component {

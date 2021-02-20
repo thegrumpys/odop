@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavDropdown, Modal, Button } from 'react-bootstrap';
+import { NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
 import { changeView } from '../../store/actionCreators';

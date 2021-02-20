@@ -41,7 +41,6 @@ export function reducers(state, action) {
     var i;
     var value;
     var name;
-    var model;
 //    console.warn('In reducers state=',state,'action=', action);
     switch (action.type) {
     case STARTUP:
@@ -55,15 +54,17 @@ export function reducers(state, action) {
         return state;
     case LOAD_INITIAL_STATE:
 //        console.log('In reducers.LOAD_INITIAL_STATE');
+        var module;
         if (action.payload.units === 'US') {
-            var { initialState } = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState
+            module = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState
         } else {
-            var { initialState } = require('../designtypes/'+action.payload.type+'/initialState_metric_units.js'); // Dynamically load initialState
+            module = require('../designtypes/'+action.payload.type+'/initialState_metric_units.js'); // Dynamically load initialState
         }
+        console.log('module=',module,'initialState=',module.initialState);
         state = Object.assign({}, state, { 
             name: 'initialState',
             model: {
-                ...initialState,
+                ...module.initialState,
                 system_controls: initialSystemControls
             }
         }); // Merge initialState and initialSystemControls

@@ -15,7 +15,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Spring/Compression","US"),'}</li>
                         <li>{'changeName("Startup"),'}</li>
-                        <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "Compression Spring default start point ..."\}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Compression Spring default start point ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                 </React.Fragment>

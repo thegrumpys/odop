@@ -27,8 +27,6 @@ export var startExecute = function(prefix,steps) {
 
 export var stopExecute = function() {
 //    console.log('In stopExecute this=',this);
-    const { store } = this.context;
-    var design = store.getState();
     this.setState({
         execute_name: undefined, // Clear execute name
         modal: false, // Default: do not display
@@ -50,7 +48,7 @@ class ExecutePanel extends Component {
         this.onCancel = this.onCancel.bind(this);
         startExecute = startExecute.bind(this); // Bind external function - no 'this'
         stopExecute = stopExecute.bind(this); // Bind external function - no 'this'
-        const { execute } = queryString.parse(location.search);
+        const { execute } = queryString.parse(window.location.search);
         this.state = {
             execute_name: execute, // Remember execute name
             modal: false,
@@ -68,7 +66,7 @@ class ExecutePanel extends Component {
 //            console.log('In ExecutePanel.componentDidMount this.state.execute_name=',this.state.execute_name);
             var { execute } = require('../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
 //            console.log('In ExecutePanel.componentDidMount execute=',execute);
-            startExecute("Execute" + ' : ' + this.state.execute_name, execute.steps);
+            startExecute('Execute : ' + this.state.execute_name, execute.steps);
         }
         this.setState({
             store: this.context.store

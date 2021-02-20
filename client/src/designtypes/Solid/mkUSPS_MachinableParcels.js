@@ -23,7 +23,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Solid","US"),'}</li>
                         <li>{'changeName("USPS_MachinableParcels"),'}</li>
-                        <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "USPS Machinable Parcel dimensions"\}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "USPS Machinable Parcel dimensions"}]),'}</li>
                         <br />
                         <li>{'changeSymbolValue("Length",27),'}</li>
                         <li>{'setSymbolFlag("Length", MIN, CONSTRAINED),'}</li>

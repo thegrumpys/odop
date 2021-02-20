@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../../store/actionTypes';
+import { FIXED, CONSTRAINED } from '../../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue } from '../../store/actionCreators';
 import * as mo from './mat_ips_offsets';
 import NameValueUnitsHeaderIndependentVariable from '../../components/NameValueUnitsHeaderIndependentVariable';
@@ -88,10 +88,11 @@ class SymbolValueWireDia extends Component {
 
         // Find size name, load size table, and get wire diameter value
 //        console.log('In SymbolValueWireDia.render this.props.symbol_table[o.Material_File].value =', this.props.symbol_table[o.Material_File].value);
+        var m_tab;
         if (this.props.symbol_table[o.Material_File].value === "mat_SI.json")
-            var m_tab = require('./mat_SI.json');
+            m_tab = require('./mat_SI.json');
         else
-            var m_tab = require('./mat_ips.json');
+            m_tab = require('./mat_ips.json');
 //        console.log('In SymbolValueWireDia.render m_tab =', m_tab);
         var i = this.props.symbol_table[o.Material_Type].value;
 //        console.log('In SymbolValueWireDia.render i=',i);

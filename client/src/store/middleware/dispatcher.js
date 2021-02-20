@@ -29,7 +29,7 @@ import { invokeEquationSet } from './invokeEquationSet';
 import { propagate } from './propagate';
 import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
 import { resetCatalogSelection } from './resetCatalogSelection';
-import { changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
+import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
          restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actionCreators';
 
 export const dispatcher = store => next => action => {
@@ -37,7 +37,7 @@ export const dispatcher = store => next => action => {
     var design;
     var source;
     var sink;
-    var mask;
+    var index;
 
     const returnValue = next(action);
 
@@ -175,7 +175,7 @@ export const dispatcher = store => next => action => {
             source = design.model.symbol_table.find(element => element.name === action.payload.source);
 //            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate source=',source);
             if (source.propagate === undefined) source.propagate = [];
-            var index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
+            index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
             if (index === -1) { // If not found in propagate array then add it
                 source.propagate.push({ name: sink.name, minmax: action.payload.minmax });
                 if (action.payload.minmax === MIN) {
@@ -202,7 +202,7 @@ export const dispatcher = store => next => action => {
             }
 //            console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate source=',source);
             if (source !== undefined && source.propagate !== undefined) {
-                var index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
+                index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
 //                console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate index=',index);
                 if (index !== -1) { // If found in propagate array then remove it
                     source.propagate.splice(index,1); // Delete 1 entry at offset index

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 

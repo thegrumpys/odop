@@ -15,7 +15,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Solid","US"),'}</li>
                         <li>{'changeName("Startup"),'}</li>
-                        <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "Rectangular Solid default Startup file ..."\}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Rectangular Solid default Startup file ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                 </React.Fragment>

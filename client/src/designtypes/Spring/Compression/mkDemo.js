@@ -1,8 +1,6 @@
 import React from 'react';
 import {
-    MIN,
     MAX,
-    CONSTRAINED,
 } from '../../../store/actionTypes';
 import {
     loadInitialState,
@@ -22,7 +20,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Spring/Compression","US"),'}</li>
                         <li>{'changeName("Demo"),'}</li>
-                        <li>{'changeLabelsValue([\{name\: "COMMENT", value\: "Compression Spring demo start point"\}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Compression Spring demo start point"}]),'}</li>
                         <li>{'changeSymbolValue("L_Free", 3),'}</li>
                         <li>{'changeSymbolConstraint("%_Avail_Deflect", MAX, 98),'}</li>
                         <li>{'startup(),'}</li>
