@@ -103,7 +103,7 @@ class ConstraintsMinRowDependentVariable extends Component {
             }
         }
         return (
-            <React.Fragment>
+            <tbody>
                 <tr key={this.props.element.name}>
                     <td className="align-middle d-lg-none" id={'dependent_variable_min_constrain_'+this.props.index}>
                         <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none">{this.props.element.tooltip}</Tooltip>}>
@@ -168,7 +168,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                         {this.props.element.lmin & FIXED ? (this.props.element.vmin*100.0).toFixed(1) : (this.props.element.lmin & CONSTRAINED ? (this.props.element.vmin*100.0).toFixed(1) + '%' : '')}
                     </td>
                 </tr>
-            </React.Fragment>
+            </tbody>
         );
     }
 }

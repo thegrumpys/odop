@@ -7,7 +7,7 @@ class ConstraintMinHeaderDependentVariable extends Component {
     render() {
 //        console.log('In ConstraintMinHeaderDependentVariable.render this=',this);
         return (
-            <React.Fragment>
+            <thead>
                 <tr>
                     <th className="text-center bg-secondary text-white" colSpan="4" id="DVMinConstraintTitle">
                         <OverlayTrigger placement="top" overlay={<Tooltip>Lower limits on Dependent Variables</Tooltip>}>
@@ -37,7 +37,7 @@ class ConstraintMinHeaderDependentVariable extends Component {
                         </OverlayTrigger>
                     </th>
                 </tr>
-            </React.Fragment>
+            </thead>
         );
     }
 }

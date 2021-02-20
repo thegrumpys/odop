@@ -15,24 +15,12 @@ class NameValueUnitsTable extends Component {
         return (
             <React.Fragment>
                 <Table className="col-md-6 border border-secondary" size="sm">
-                    <thead>
-                        <NameValueUnitsHeaderIndependentVariable />
-                    </thead>
-                    <tbody>
-                        {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
-                    </tbody>
-                    <thead>
-                        <NameValueUnitsHeaderDependentVariable />
-                    </thead>
-                    <tbody>
-                        {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
-                    </tbody>
-                    <thead>
-                        <NameValueUnitsHeaderCalcInput />
-                    </thead>
-                    <tbody>
-                        {this.props.symbol_table.map((element,index) => element.type === "calcinput" && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
-                    </tbody>
+                    <NameValueUnitsHeaderIndependentVariable />
+                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
+                    <NameValueUnitsHeaderDependentVariable />
+                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
+                    <NameValueUnitsHeaderCalcInput />
+                    {this.props.symbol_table.map((element,index) => element.type === "calcinput" && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
                 </Table>
             </React.Fragment>
         );

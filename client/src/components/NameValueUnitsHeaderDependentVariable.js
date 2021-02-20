@@ -7,7 +7,7 @@ class NameValueUnitsHeaderDependentVariable extends Component {
     render() {
 //        console.log('In NameValueUnitsHeaderDependentVariable.render this=',this);
         return (
-            <React.Fragment>
+            <thead>
                 <tr>
                     <th className="text-center bg-secondary text-white" colSpan="6" id="IVTitle">
                         <OverlayTrigger placement="top" overlay={<Tooltip>Outputs from design equations</Tooltip>}>
@@ -33,7 +33,7 @@ class NameValueUnitsHeaderDependentVariable extends Component {
                     </th>
                     <th></th>
                 </tr>
-            </React.Fragment>
+            </thead>
         );
     }
     

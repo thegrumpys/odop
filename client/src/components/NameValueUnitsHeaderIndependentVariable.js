@@ -7,7 +7,7 @@ class NameValueUnitsHeaderIndependentVariable extends Component {
     render() {
 //        console.log('In NameValueUnitsHeaderIndependentVariable.render this=',this);
         return (
-            <React.Fragment>
+            <thead>
                 <tr>
                     <th className="text-center bg-secondary text-white" colSpan="6" id="IVTitle">
                         <OverlayTrigger placement="top" overlay={<Tooltip>Inputs to design equations. Search adjusts FREE Independent Variables to obtain a feasible solution.</Tooltip>}>
@@ -33,7 +33,7 @@ class NameValueUnitsHeaderIndependentVariable extends Component {
                     </th>
                     <th></th>
                 </tr>
-            </React.Fragment>
+            </thead>
         );
     }
     

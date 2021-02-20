@@ -86,36 +86,38 @@ class NameValueUnitsRowCalcInput extends Component {
         // Table Row
         // =======================================
         return (
-            <tr key={this.props.element.name}>
-                <td className="align-middle" colSpan="2" id={'constant_'+this.props.index}>
-                    <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip>{this.props.element.tooltip}</Tooltip>}>
-                        <span>{this.props.element.name}</span>
-                    </OverlayTrigger>
-                </td>
-                <td className="align-middle" colSpan="2">
-                    <InputGroup>
-                        { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
-                            <Form.Control type="number" disabled={!this.props.element.input} className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
-                        { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
-                            <Form.Control type="text" disabled={!this.props.element.input} className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
-                        { this.props.element.format === 'table' &&
-                        (
-                            <Form.Control as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>
-                                {this.state.table.map((value, index) =>
-                                    index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
-                                )}
-                            </Form.Control>
-                        )
-                        }
-                        <InputGroup.Append>
-                            <InputGroup.Text>
-                                &nbsp;&nbsp;
-                            </InputGroup.Text>
-                        </InputGroup.Append>
-                    </InputGroup>
-                </td>
-                <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
-            </tr>
+            <tbody>
+                <tr key={this.props.element.name}>
+                    <td className="align-middle" colSpan="2" id={'constant_'+this.props.index}>
+                        <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip>{this.props.element.tooltip}</Tooltip>}>
+                            <span>{this.props.element.name}</span>
+                        </OverlayTrigger>
+                    </td>
+                    <td className="align-middle" colSpan="2">
+                        <InputGroup>
+                            { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
+                                <Form.Control type="number" disabled={!this.props.element.input} className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
+                            { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
+                                <Form.Control type="text" disabled={!this.props.element.input} className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
+                            { this.props.element.format === 'table' &&
+                            (
+                                <Form.Control as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>
+                                    {this.state.table.map((value, index) =>
+                                        index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
+                                    )}
+                                </Form.Control>
+                            )
+                            }
+                            <InputGroup.Append>
+                                <InputGroup.Text>
+                                    &nbsp;&nbsp;
+                                </InputGroup.Text>
+                            </InputGroup.Append>
+                        </InputGroup>
+                    </td>
+                    <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
+                </tr>
+            </tbody>
         );
     }
 }

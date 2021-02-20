@@ -13,18 +13,10 @@ class ConstraintsMaxTable extends Component {
         return (
             <React.Fragment>
                 <Table className="col-md-3 border border-secondary" size="sm">
-                    <thead>
-                        <ConstraintsMaxHeaderIndependentVariable />
-                    </thead>
-                    <tbody>
-                        {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={index} />)}
-                    </tbody>
-                    <thead>
-                        <ConstraintsMaxHeaderDependentVariable />
-                    </thead>
-                    <tbody>
-                        {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={index} />)}
-                    </tbody>
+                    <ConstraintsMaxHeaderIndependentVariable />
+                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={index} />)}
+                    <ConstraintsMaxHeaderDependentVariable />
+                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={index} />)}
                 </Table>
             </React.Fragment>
         );

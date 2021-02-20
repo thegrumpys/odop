@@ -7,7 +7,7 @@ class ConstraintMinHeaderIndependentVariable extends Component {
     render() {
 //        console.log('In ConstraintMinHeaderIndependentVariable.render this=',this);
         return (
-            <React.Fragment>
+            <thead>
                 <tr>
                     <th className="text-center bg-secondary text-white" colSpan="4" id="IVMinConstraintTitle">
                         <OverlayTrigger placement="top" overlay={<Tooltip>Lower limits on Independent Variables</Tooltip>}>
@@ -37,7 +37,7 @@ class ConstraintMinHeaderIndependentVariable extends Component {
                         </OverlayTrigger>
                     </th>
                 </tr>
-            </React.Fragment>
+            </thead>
         );
     }
 }

@@ -7,7 +7,7 @@ class ConstraintMaxHeaderDependentVariable extends Component {
     render() {
 //        console.log('In ConstraintMaxHeaderDependentVariable.render this=',this);
         return (
-            <React.Fragment>
+            <thead>
                 <tr>
                     <th className="text-center bg-secondary text-white" colSpan="4" id="DVMaxConstraintTitle">
                         <OverlayTrigger placement="top" overlay={<Tooltip>Upper limits on Dependent Variables</Tooltip>}>
@@ -37,7 +37,7 @@ class ConstraintMaxHeaderDependentVariable extends Component {
                         </OverlayTrigger>
                     </th>
                 </tr>
-            </React.Fragment>
+            </thead>
         );
     }
 }

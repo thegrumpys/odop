@@ -103,7 +103,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
             }
         }
         return (
-            <React.Fragment>
+            <tbody>
                 <tr key={this.props.element.name}>
                     <td className="align-middle d-lg-none" id={'independent_variable_max_constrain_'+this.props.index}>
                         <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none">{this.props.element.tooltip}</Tooltip>}>
@@ -168,7 +168,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                         {this.props.element.lmax & FIXED ? '' : (this.props.element.lmax & CONSTRAINED ? (this.props.element.vmax*100.0).toFixed(1) + '%' : '')}
                     </td>
                 </tr>
-            </React.Fragment>
+            </tbody>
         );
     }
 }
