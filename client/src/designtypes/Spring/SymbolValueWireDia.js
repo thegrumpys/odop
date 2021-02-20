@@ -168,7 +168,7 @@ class SymbolValueWireDia extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Table className="border border-secondary" size="sm">
+                        <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <NameValueUnitsHeaderIndependentVariable />
@@ -185,7 +185,7 @@ class SymbolValueWireDia extends Component {
                                     <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
                                 </React.Fragment>}
                         </Table>
-                        <Table className="border border-secondary" size="sm">
+                        <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <ConstraintsMinHeaderIndependentVariable />
@@ -197,7 +197,7 @@ class SymbolValueWireDia extends Component {
                                     <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
                                 </React.Fragment>}
                         </Table>
-                        <Table className="border border-secondary" size="sm">
+                        <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <ConstraintsMaxHeaderIndependentVariable />
