@@ -171,42 +171,70 @@ class SymbolValueWireDia extends Component {
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
-                                    <NameValueUnitsHeaderIndependentVariable />
-                                    <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <thead>
+                                        <NameValueUnitsHeaderIndependentVariable />
+                                    </thead>
+                                    <tbody>
+                                        <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    </tbody>
                                 </React.Fragment>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
-                                    <NameValueUnitsHeaderDependentVariable />
-                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <thead>
+                                        <NameValueUnitsHeaderDependentVariable />
+                                    </thead>
+                                    <tbody>
+                                        <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    </tbody>
                                 </React.Fragment>}
                             {this.props.element.type === "calcinput" && !this.props.element.hidden &&
                                 <React.Fragment>
-                                    <NameValueUnitsHeaderCalcInput />
-                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
+                                    <thead>
+                                        <NameValueUnitsHeaderCalcInput />
+                                    </thead>
+                                    <tbody>
+                                        <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
+                                    </tbody>
                                 </React.Fragment>}
                         </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
-                                    <ConstraintsMinHeaderIndependentVariable />
-                                    <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <thead>
+                                        <ConstraintsMinHeaderIndependentVariable />
+                                    </thead>
+                                    <tbody>
+                                        <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    </tbody>
                                 </React.Fragment>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
-                                    <ConstraintsMinHeaderDependentVariable />
-                                    <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <thead>
+                                        <ConstraintsMinHeaderDependentVariable />
+                                    </thead>
+                                    <tbody>
+                                        <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    </tbody>
                                 </React.Fragment>}
                         </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
-                                    <ConstraintsMaxHeaderIndependentVariable />
-                                    <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <thead>
+                                        <ConstraintsMaxHeaderIndependentVariable />
+                                    </thead>
+                                    <tbody>
+                                        <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    </tbody>
                                 </React.Fragment>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
-                                    <ConstraintsMaxHeaderDependentVariable />
-                                    <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <thead>
+                                        <ConstraintsMaxHeaderDependentVariable />
+                                    </thead>
+                                    <tbody>
+                                        <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    </tbody>
                                 </React.Fragment>}
                         </Table>
                     </Modal.Body>
