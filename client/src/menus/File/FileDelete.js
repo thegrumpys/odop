@@ -36,7 +36,7 @@ class FileDelete extends Component {
 //      console.log('In FileDelete.componentDidUpdate this=',this,'prevProps=',prevProps);
       if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
 //          console.log('In FileDelete.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
-          this.setState({ 
+          this.setState({
               type: this.props.type
           });
           this.getDesignNames(this.props.user,this.props.type);
@@ -55,27 +55,28 @@ class FileDelete extends Component {
         .then(res => {
             displaySpinner(false);
             if (!res.ok) {
+//                console.warn('In FileDelete.getDesignNames res=',res);
                 throw Error(res.statusText);
             }
             return res.json()
         })
-       .then(names => {
-//           console.log('In FileDelete.getDesignNames user=',user,'type=',type,'names=', names);
-           this.setState({ 
-               names: names.filter((design) => {return design.user !== null})
-           });
-           var name = '';
-           if (this.state.names.length > 0)
-               name = this.state.names[0].name; // Default to first name
-           this.setState({ 
-               name: name
-           });
-       })
-       .catch(error => {
-           displayMessage('GET of design names failed with message: \''+error.message+'\'');
-       });
+        .then(names => {
+//            console.log('In FileDelete.getDesignNames user=',user,'type=',type,'names=', names);
+            this.setState({
+                names: names.filter((design) => {return design.user !== null})
+            });
+            var name = '';
+            if (this.state.names.length > 0)
+                name = this.state.names[0].name; // Default to first name
+            this.setState({ 
+                name: name
+            });
+        })
+        .catch(error => {
+            displayMessage('GET of design names failed with message: \''+error.message+'\'');
+        });
     }
-    
+
     deleteDesign(user, type, name) {
 //        console.log('In FileDelete.deleteDesign user=',user,'type=',type,'name=',name);
         displaySpinner(true);
@@ -99,7 +100,7 @@ class FileDelete extends Component {
             displayMessage('DELETE of \''+name+'\' design  \''+type+'\' design type failed with message: \''+error.message+'\'');
         });
     }
-    
+
     toggle() {
 //        console.log('In FileDelete.toggle this=',this);
         if (this.props.authState.isAuthenticated) {
@@ -107,40 +108,41 @@ class FileDelete extends Component {
         }
         this.setState({
             modal: !this.state.modal,
+            type: this.props.type,
         });
     }
-    
+
     onSelectType(event) {
-//      console.log('In FileDelete.onSelectType this=',this,'event.target.value=',event.target.value)
-      this.setState({
-          type: event.target.value,
-          names: [],
-      });
-      this.getDesignNames(this.props.user,event.target.value);
-}
+//        console.log('In FileDelete.onSelectType this=',this,'event.target.value=',event.target.value)
+        this.setState({
+            type: event.target.value,
+            names: [],
+        });
+        this.getDesignNames(this.props.user,event.target.value);
+    }
 
     onSelectName(event) {
-//        console.log('In FileDelete.onSelect this=',this,'event.target.value=',event.target.value);
+//        console.log('In FileDelete.onSelectName this=',this,'event.target.value=',event.target.value);
         this.setState({
-            name: event.target.value 
+            name: event.target.value
         });
     }
-    
+
     onSignIn() {
-//      console.log('In FileDelete.onSignIn this=',this);
-      this.setState({
-          modal: !this.state.modal
-      });
-      this.props.history.push('/login');
+//        console.log('In FileDelete.onSignIn this=',this);
+        this.setState({
+            modal: !this.state.modal
+        });
+        this.props.history.push('/login');
     }
 
     onCancel() {
-//      console.log('In FileDelete.onCancel this=',this);
-      this.setState({
-          modal: !this.state.modal
-      });
-      // Noop - all done
-  }
+//        console.log('In FileDelete.onCancel this=',this);
+        this.setState({
+            modal: !this.state.modal
+        });
+        // Noop - all done
+    }
 
     onDelete() {
 //        console.log('In FileDelete.onDelete this=',this);
@@ -198,8 +200,8 @@ class FileDelete extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
-    name: state.name, 
-    type: state.model.type, 
+    name: state.name,
+    type: state.model.type,
 });
 
 const mapDispatchToProps = {

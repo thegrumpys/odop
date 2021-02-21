@@ -63,8 +63,8 @@ class FileOpen extends Component {
         .then(res => {
             displaySpinner(false);
             if (!res.ok) {
-//               console.warn('In FileOpen.getDesignNames res=',res);
-               throw Error(res.statusText);
+//                console.warn('In FileOpen.getDesignNames res=',res);
+                throw Error(res.statusText);
             }
             return res.json()
         })
@@ -132,7 +132,7 @@ class FileOpen extends Component {
             names: [],
         });
         this.getDesignNames(this.props.user,event.target.value);
-  }
+    }
 
     onSelectName(event) {
 //        console.log('In FileOpen.onSelectName this=',this,'event.target.value=',event.target.value)
