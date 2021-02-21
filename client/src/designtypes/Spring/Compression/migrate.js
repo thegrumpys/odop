@@ -181,28 +181,11 @@ export function migrate(design) {
         }
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
 //            console.log('In migrate.propgate element=',element);
-           if (element.lmin & FDCL) {
-//                console.log('In migrate.propgate element.lmin&FDCL=',element.lmin&FDCL);
-                var source = design.symbol_table[element.cmin];
-                var sink = element;
-//                console.log('In migrate.propgate source=',source,'sink=',sink);
-                if (source.propagate === undefined) source.propagate = [];
-                source.propagate.push({ name: sink.name, minmax: MIN });
-//                console.log('In migrate.propgate sink.name=',sink.name,'MIN','source.propagate=',source.propagate);
-                sink.cminchoice = sink.cminchoices.indexOf(source.name);
-//                console.log('In migrate.propgate source.name=',source.name,'sink.cminchoices=',sink.cminchoices,'sink.cminchoice=',sink.cminchoice);
-            }
-            if (element.lmax & FDCL) {
-//                console.log('In migrate.propgate element.lmax&FDCL=',element.lmax&FDCL);
-                var source = design.symbol_table[element.cmax];
-                var sink = element;
-//                console.log('In migrate.propgate source=',source,'sink=',sink);
-                if (source.propagate === undefined) source.propagate = [];
-                source.propagate.push({ name: sink.name, minmax: MAX });
-//                console.log('In migrate.propgate sink.name=',sink.name,'MAX','source.propagate=',source.propagate);
-                sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
-//                console.log('In migrate.propgate source.name=',source.name,'sink.cmaxchoices=',sink.cmaxchoices,'sink.cmaxchoice=',sink.cmaxchoice);
-            }
+            // ***************************************************************
+            // Note no need to migrate FDCL because there has never been any
+            // FDCL definition in initialState for TORSION. The user cannot create 
+            // FDCL if it is not already configured in initialState.
+            // ***************************************************************
             if (element.lmin & FIXED || element.lmax & FIXED) { // If one is FIXED
                 element.lmin |= FIXED; // Set them both fixed because they are paired
                 element.lmax |= FIXED;
