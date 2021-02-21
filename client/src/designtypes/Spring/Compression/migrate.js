@@ -1,7 +1,7 @@
 import { displayMessage } from '../../../components/MessageModal';
 import { initialState } from './initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
-import { MIN, MAX, FIXED, FDCL } from '../../../store/actionTypes';
+import { FIXED } from '../../../store/actionTypes';
 
 export function migrate(design) {
     /*
