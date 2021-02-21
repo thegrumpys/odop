@@ -178,6 +178,12 @@ export function migrate(design) {
                 delete element.oldvalue
             }
         });
+        console.log(design.symbol_table[62].value);
+        if (design.symbol_table[62].value === 'catalog_ms_e_s') {
+            design.symbol_table[62].value = 'MS24586_(SAE-AS24586)_e_stl';
+        } else if (design.symbol_table[62].value === 'catalog_ms_e_ss') {
+            design.symbol_table[62].value = 'MS24586_(SAE-AS24586)_e_ss';
+        }
         migrated_design.version = '5'; // last thing... set the migrated model version
     case '5':
         // Current model version
