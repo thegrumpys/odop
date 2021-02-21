@@ -10,8 +10,6 @@ export function migrate(design) {
      */
 //    console.log('In migrate design=',design);
 
-    var source;
-    var sink;
     var previous_version = design.version;
     var migrated_design = design; // Assume no-op as default 
 
@@ -89,28 +87,11 @@ export function migrate(design) {
         }
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
 //            console.log('In migrate.propgate element=',element);
-            if (element.lmin & FDCL) {
-//                console.log('In migrate.propgate element.lmin&FDCL=',element.lmin&FDCL);
-                source = design.symbol_table[element.cmin];
-                sink = element;
-//                console.log('In migrate.propgate source=',source,'sink=',sink);
-                if (source.propagate === undefined) source.propagate = [];
-                source.propagate.push({ name: sink.name, minmax: MIN });
-//                console.log('In migrate.propgate sink.name=',sink.name,'MIN','source.propagate=',source.propagate);
-                sink.cminchoice = sink.cminchoices.indexOf(source.name);
-//                console.log('In migrate.propgate source.name=',source.name,'sink.cminchoices=',sink.cminchoices,'sink.cminchoice=',sink.cminchoice);
-            }
-            if (element.lmax & FDCL) {
-//                console.log('In migrate.propgate element.lmax&FDCL=',element.lmax&FDCL);
-                source = design.symbol_table[element.cmax];
-                sink = element;
-//                console.log('In migrate.propgate source=',source,'sink=',sink);
-                if (source.propagate === undefined) source.propagate = [];
-                source.propagate.push({ name: sink.name, minmax: MAX });
-//                console.log('In migrate.propgate sink.name=',sink.name,'MAX','source.propagate=',source.propagate);
-               sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
-//                console.log('In migrate.propgate source.name=',source.name,'sink.cmaxchoices=',sink.cmaxchoices,'sink.cmaxchoice=',sink.cmaxchoice);
-            }
+            // ***************************************************************
+            // Note no need to migrate FDCL because there has never been any
+            // FDCL definition in initialState for TORSION. The user cannot create 
+            // FDCL if it is not already configured in initialState.
+            // ***************************************************************
             if (element.lmin & FIXED || element.lmax & FIXED) { // If one is FIXED
                 element.lmin |= FIXED; // Set them both fixed because they are paired
                 element.lmax |= FIXED;
@@ -158,20 +139,22 @@ export function migrate(design) {
         design.symbol_table[26].name = '%_Safe_Deflect'; // Rename it to %_Safe_Deflect
         design.symbol_table[26].value = 0.0; 
         if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
-            design.symbol_table[26].value = 76.18; 
             design.symbol_table[26].units = '%';
             design.symbol_table[26].lmin = 0; 
             design.symbol_table[26].lmax = CONSTRAINED; 
             design.symbol_table[26].cmin = 1.0; 
             design.symbol_table[26].cmax = 90; 
         } else {
-            design.symbol_table[26].value = 76.18; 
             design.symbol_table[26].units = '%';
             design.symbol_table[26].lmin = 0; 
             design.symbol_table[26].lmax = CONSTRAINED; 
             design.symbol_table[26].cmin = 1.0; 
             design.symbol_table[26].cmax = 90; 
         }
+        delete design.symbol_table[26].oldlmin;
+        delete design.symbol_table[26].oldlmax;
+        delete design.symbol_table[26].oldcmin;
+        delete design.symbol_table[26].oldcmax;
         design.symbol_table[26].sdlim = 0.0; 
         design.symbol_table[26].tooltip = "Deflection of load point 2 as a percent of total safe deflection";
         migrated_design.version = '5'; // last thing... set the migrated model version
