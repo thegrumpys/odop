@@ -79,7 +79,7 @@ export const execute = {
                     
                     <p>
                     Tooltips are available for many elements of the Advanced view.
-                    Hover the cursor over an item of interest (tap a touch screen) to learn about these elements.
+                    Hover the cursor over an item of interest (tap on a touch screen) to learn about these elements.
                     </p>
                     
                     <p>
@@ -94,6 +94,9 @@ export const execute = {
                     ) and 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/unitsUSmetric" target="_blank" rel="noopener noreferrer">units (U.S., metric)</a>.&nbsp; 
                     These system-provided designs can be a starting point for new custom designs. 
+                    Sign up for a free  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/userAccounts" target="_blank" rel="noopener noreferrer">user account</a>&nbsp; 
+                    to save private designs into the cloud-based ODOP Design Library.  
                    </p>
                 </React.Fragment>
             )

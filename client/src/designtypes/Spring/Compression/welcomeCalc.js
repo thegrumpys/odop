@@ -59,7 +59,7 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    <b>Right click</b> (long press a touch screen) on a darker (more bold) numeric value to control 
+                    <b>Right click</b> (long press on a touch screen) on a darker (more bold) numeric value to control 
                     FIX / FREE status and to establish or modify constraints. 
                     FIXed status causes the ODOP Search feature (<b>Action : Search</b> menu) to achieve or hold a specified value.
                     FREE status allows Search to manipulate the variable to achieve a feasible design.
@@ -93,7 +93,7 @@ export const execute = {
                     
                     <p>
                     Tooltips are available for many elements of the Calculator view.
-                    Hover the cursor (tap a touch screen) to learn about these elements.
+                    Hover the cursor (tap on a touch screen) to learn about these elements.
                     Additional insights are available in the  
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp; 
                     plus 
@@ -125,6 +125,9 @@ export const execute = {
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/t_spring" target="_blank" rel="noopener noreferrer">torsion</a> 
                     ) and units (U.S., metric). 
                     These system-provided designs can be a starting point for new custom designs. 
+                    Sign up for a free  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/userAccounts" target="_blank" rel="noopener noreferrer">user account</a>&nbsp; 
+                    to save private designs into the cloud-based ODOP Design Library.  
                    </p>
                     
                     <p>
