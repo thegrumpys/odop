@@ -60,7 +60,6 @@ export function reducers(state, action) {
         } else {
             module = require('../designtypes/'+action.payload.type+'/initialState_metric_units.js'); // Dynamically load initialState
         }
-        console.log('module=',module,'initialState=',module.initialState);
         state = Object.assign({}, state, { 
             name: 'initialState',
             model: {
