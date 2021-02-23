@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, loadInitialState, changeLabelsValue, saveAutoSave } from '../../../store/actionCreators';
+import { saveAutoSave } from '../../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -13,8 +13,8 @@ export const execute = {
                     </p>
 
                     <p>
-                    The white entry fields below are inputs to the Calculator.
-                    Calculation results appear in the light gray fields.
+                    The white background entry fields below are inputs to the Calculator.
+                    Calculation results appear in the light gray background fields.
                     The existing values are an arbitrary starting point. 
                     Modify them to meet your requirements. 
                     </p>
@@ -59,12 +59,14 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    <b>Right click</b> (long press on a touch screen) on a darker (more bold) numeric value to control 
+                    <b>Right click</b> (long press on a touch screen) on 
+                    one of those white entry fields or a darker (more bold) numeric value to control 
                     FIX / FREE status and to establish or modify constraints. 
                     FIXed status causes the ODOP Search feature (<b>Action : Search</b> menu) to achieve or hold a specified value.
                     FREE status allows Search to manipulate the variable to achieve a feasible design.
                     The <a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     sessions provide additional detail on these concepts.
+                    For now, Firefox users will need to use Advanced View in order to access FIX / FREE and constraints. 
                     </p>
 
                     <p>
