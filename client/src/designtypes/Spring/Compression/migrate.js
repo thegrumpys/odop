@@ -228,10 +228,12 @@ export function migrate(design) {
                 delete element.oldvalue
             }
         });
-        if (design.symbol_table[62].value === 'catalog_ms_c_s') {
-            design.symbol_table[62].value = 'MS24585_(SAE-AS24585)_c_stl';
-        } else if (design.symbol_table[62].value === 'catalog_ms_c_ss') {
-            design.symbol_table[62].value = 'MS24585_(SAE-AS24585)_c_ss';
+        if (design.symbol_table[47].value === 'catalog_ms_c_s') {
+            design.symbol_table[47].value = 'MS24585_(SAE-AS24585)_c_stl';
+        } else if (design.symbol_table[47].value === 'catalog_ms_c_ss') {
+            design.symbol_table[47].value = 'MS24585_(SAE-AS24585)_c_ss';
+        } else if (design.symbol_table[47].value === 'catalog.json') {
+            design.symbol_table[47].value = 'generic_compression_catalog.json';
         }
         migrated_design.version = '9'; // last thing... set the migrated model version
     case '9':
