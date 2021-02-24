@@ -183,8 +183,8 @@ export function migrate(design) {
             design.symbol_table[62].value = 'MS24586_(SAE-AS24586)_e_stl';
         } else if (design.symbol_table[62].value === 'catalog_ms_e_ss') {
             design.symbol_table[62].value = 'MS24586_(SAE-AS24586)_e_ss';
-        } else if (design.symbol_table[62].value === 'extencat.json') {
-            design.symbol_table[62].value = 'generic_extension_catalog.json';
+        } else if (design.symbol_table[62].value === 'extencat') {
+            design.symbol_table[62].value = 'generic_extension_catalog';
         }
         migrated_design.version = '5'; // last thing... set the migrated model version
     case '5':
