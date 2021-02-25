@@ -178,7 +178,7 @@ export function migrate(design) {
                 delete element.oldvalue
             }
         });
-        console.log(design.symbol_table[62].value);
+//        console.log(design.symbol_table[62].value);
         if (design.symbol_table[62].value === 'catalog_ms_e_s') {
             design.symbol_table[62].value = 'MS24586_(SAE-AS24586)_e_stl';
         } else if (design.symbol_table[62].value === 'catalog_ms_e_ss') {
