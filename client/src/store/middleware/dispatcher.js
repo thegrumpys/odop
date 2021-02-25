@@ -83,17 +83,6 @@ export const dispatcher = store => next => action => {
                     store.dispatch(changeResultTerminationCondition(''));
                     invokeInit(store);
                 }
-                if (element.propagate !== undefined) {
-                    source = element;
-//                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE source.propagate=',source.propagate);
-                    source.propagate.forEach(entry => {
-//                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE entry.name=',entry.name);
-                        sink = design.model.symbol_table.find(sink => entry.name === sink.name);
-//                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE source=',source,'sink=',sink);
-//                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE sink.name=',sink.name,'entry.minmax=',entry.minmax,'source.value=',source.value);
-                        store.dispatch(changeSymbolConstraint(sink.name, entry.minmax, source.value))
-                    });
-                }
                 return true;
             } else {
                 return false;
@@ -101,6 +90,7 @@ export const dispatcher = store => next => action => {
         });
         resetCatalogSelection(store, action)
         invokeEquationSet(store);
+        propagate(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
     case FIX_SYMBOL_VALUE:
@@ -143,6 +133,7 @@ export const dispatcher = store => next => action => {
             }
         });
         invokeEquationSet(store);
+        propagate(store);
         updateViolationsAndObjectiveValue(store);
         break;
     case FREE_SYMBOL_VALUE:
@@ -158,6 +149,7 @@ export const dispatcher = store => next => action => {
             }
         });
         invokeEquationSet(store);
+        propagate(store);
         updateViolationsAndObjectiveValue(store);
         break;
     case CHANGE_SYMBOL_CONSTRAINT:
