@@ -30,7 +30,10 @@ export function getDemoNames() {
 }
 
 export function getTutorialNames() {
-    var result = [];
+    var result = [
+        'tutorTour',
+        'guidedDesign'
+    ];
 //    console.log('In getTutorialNames result=',result);
     return result;
 }
