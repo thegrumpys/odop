@@ -1,7 +1,7 @@
 ## User Accounts, Username, Sign-in, Sign-out
 
 A user account is **not** required to operate most features of the software. 
-If saving designs into the ODOP Design Library,
+If saving designs into the cloud-based (on-line) ODOP Design Library,
 it is necessary to establish a user account with associated unique username and password 
 so as to keep those designs private.  
 

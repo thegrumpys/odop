@@ -1,21 +1,17 @@
-## User Accounts, Username, Login, Logout
+## User Accounts, Username, Sign-in, Sign-out
 
-A user account with username and password is required to operate the software. 
-Specifically, in order to keep designs saved into the ODOP design library private, 
-it is necessary to establish a user account with associated 
-unique username and password. 
+A user account is **not** required to operate most features of the software. 
+If saving designs into the cloud-based (on-line) ODOP Design Library,
+it is necessary to establish a user account with associated unique username and password 
+so as to keep those designs private.  
 
-Evaluators may sign-in with the username "public" and password "public".
-When operating in the public account, it is possible to save designs into the ODOP design library 
-but keep in mind that all saved information will be completely public and modifiable.
-Designs saved in the public account do not have the same assurance of long-term storage
-as those saved in a private account.
-See [Restrictions](Legal/Restrictions) for long-term data storage policies.
-
+Launch the ODOP software from the SpringDesignSoftware.org home page, 
+Getting Started page or any of the three spring type pages. 
 To establish a free private account, 
-use the "Sign up" (Self-Service Registration) feature on the sign-in page. 
-After you respond to an activation email message, 
-your account will be ready for immediate login.
+push the "Sign-in" button to the left of the File menu and then
+use the "Sign up" (Self-Service Registration) feature at the lower right of the sign-in page. 
+After responding to an activation email message, 
+your account will be ready for immediate sign-in.
 
 Alternatively, send a request to: **Info@SpringDesignSoftware.org**. 
 You will receive a reply message (welcome letter) with instructions on how to complete creating your account. 
@@ -24,16 +20,22 @@ so expect a delay of hours to a day or so.
 The welcome letter includes instructions on how to establish a password and if desired, 
 change it in the future.
 
+Evaluators may sign-in with the username "public" and password "public".
+When operating in the public account, it is possible to save designs into the ODOP Design Library 
+but keep in mind that all saved information will be completely public and modifiable.
+Designs saved in the public account do not have the same assurance of long-term storage
+as those saved in a private account.
+See [Restrictions](Legal/Restrictions) for long-term data storage policies.
+
+Once you have established a username and password, 
+launch the ODOP software and push the "Sign-in" button to the left of the File menu 
+in order to get to the sign-in page.
+
 The ODOP user account (username / password) feature is based on capabilities provided by 
 [Okta](https://www.okta.com/).
 Do not expect the ODOP:Spring app to appear on Okta's list of apps and 
 do not be concerned about a "You don't have any apps." message on your personal Okta home page
-(used for adding apps, changing or recovering passwords, etc.).
-Once you have established a password, 
-simply [launch the program](../Help/launchODOP) 
-in order to get to the sign-in page.
-It is also possible to launch the program from the SpringDesignSoftware.org home page, 
-Getting Started page or any of the three spring type pages. 
+(used for adding apps, changing or recovering passwords, etc.).  
 
 An account username must be in the form of an email address. 
 As noted in our [Privacy Notice](Legal/PrivacyStatement), 
@@ -54,7 +56,7 @@ See [Restrictions](Legal/Restrictions) for long term data storage policies
 in both public and private accounts.
 
 The **File : Export** menu item allows design data to be preserved in local storage.
-For details, see: [Save, Save As, Import and Export](../Help/htt).
+For details, see: [Save, Save As, Import and Export](../Help/htt#fileSaveAndSaveAs).
  
 Once signed in, your user session will remain active for as long as the browser window (tab) 
 associated with the app exists and your Internet connection is maintained. 
@@ -62,18 +64,17 @@ Actually, the user session may persist for up to two hours after loss of Interne
 closing a previous browser window or tab. 
 In this situation, you may be able to open a new browser window (tab) and open a previously saved design without 
 need to sign-in again. 
-However, you should learn to save frequently as once the browser window or tab is closed, 
+However, you should save frequently as once the browser window or tab is closed, 
 any unsaved design in progress may be lost. 
 For more information on this point, see: [AutoSave](../Help/autoSave).
 
 **Troubleshooting login issues:**
-- Enter your email address in the "Username" field of the sign-in page.   
+- Be sure to enter your email address in the "Username" field of the sign-in page.   
 &nbsp;   
 
 
 In order to sign out:
-  - use "Logout" on the File menu
-  - use the browser refresh button and then click the "Logout" button
+  - Use the "Sign-out" button to the left of the File menu
  
 &nbsp; 
  

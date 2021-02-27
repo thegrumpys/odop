@@ -1,15 +1,15 @@
-**Message-of-the-day** &nbsp; updated January 9, 2021   
+**Message-of-the-day** &nbsp; updated February 27, 2021   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
 
 To establish a free account, see: [User Accounts](userAccounts). 
-With the recent introduction of user account features, browser requirements have changed. 
+With the recent changes in user account features, browser requirements have changed. 
 For details, see: [Requirements](requirements)  
 
-ODOP version 3.6 was released October 31, 2020. 
+ODOP version 4.0 was released February 27, 2020. 
 Change details are available in GitHub at: 
-[ODOP milestone 3.6](https://github.com/thegrumpys/odop/milestone/36?closed=1). 
+[ODOP milestone 3.6](https://github.com/thegrumpys/odop/milestone/39). 
 Opening a design saved in a prior version will produce a pop-up message. 
 See: [MIGRATION](../Help/terminology#migration). 
 
