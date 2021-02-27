@@ -68,6 +68,7 @@ class ActionSelectCatalog extends Component {
                 entry = index;
             }
         });
+//        console.log('names=',names,'name=',name,'entries=',entries,'entry=',entry);
         this.setState({
             names: names,
             name: name,
@@ -78,6 +79,7 @@ class ActionSelectCatalog extends Component {
     
     toggle() {
 //        console.log('In ActionSelectCatalog.toggle');
+        this.updateCatalogNames();
         this.setState({
             modal: !this.state.modal,
         });
