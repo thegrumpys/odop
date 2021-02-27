@@ -134,7 +134,7 @@ export function migrate(design) {
                 delete element.oldvalue
             }
         });
-        // Add %_Safe_Deflect calculation; make it constrained to a max of 90%
+        // Add %_Safe_Deflect calculation; make it constrained to a max of 95%
         design.symbol_table.splice(26,0,Object.assign({},design.symbol_table[26]));  //  Duplicate Force_Arm_2 in target position
         design.symbol_table[26].name = '%_Safe_Deflect'; // Rename it to %_Safe_Deflect
         design.symbol_table[26].value = 0.0; 
@@ -143,13 +143,13 @@ export function migrate(design) {
             design.symbol_table[26].lmin = 0; 
             design.symbol_table[26].lmax = CONSTRAINED; 
             design.symbol_table[26].cmin = 1.0; 
-            design.symbol_table[26].cmax = 90; 
+            design.symbol_table[26].cmax = 95; 
         } else {
             design.symbol_table[26].units = '%';
             design.symbol_table[26].lmin = 0; 
             design.symbol_table[26].lmax = CONSTRAINED; 
             design.symbol_table[26].cmin = 1.0; 
-            design.symbol_table[26].cmax = 90; 
+            design.symbol_table[26].cmax = 95; 
         }
         delete design.symbol_table[26].oldlmin;
         delete design.symbol_table[26].oldlmax;
