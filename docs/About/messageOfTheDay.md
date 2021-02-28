@@ -8,7 +8,7 @@ With the recent changes in user account features and introduction of Calculator 
 browser requirements have changed. 
 For details, see: [Requirements](requirements)  
 
-ODOP version 4.0 was released February 27, 2020. 
+ODOP version 4.0 was released February 27, 2021. 
 Change details are available in GitHub at: 
 [ODOP milestone 3.8](https://github.com/thegrumpys/odop/milestone/39?closed=1). 
 Opening a design saved in a prior version will produce a pop-up message. 
