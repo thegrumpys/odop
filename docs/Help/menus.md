@@ -76,9 +76,20 @@ ___
 ___
 
 **Action : Search**  
-Content describing Action : Search goes here  
 
+Action : Search menu item invokes the Search algorithm. 
+Search will alter the values of any FREE independent variables to find a design that satisfies all constraints 
+while also achieving the desired value for each FIXed dependent variable. 
 
+Search operates to minimize the value of the [objective function](terminology#obj). 
+The current design is used as a starting point. 
+Search stops if the Objective Value falls below OBJMIN.  
+
+FIXed status causes Search to achieve or hold a specified value. 
+FREE status allows Search to manipulate the variable to achieve a feasible design. 
+
+[See also: Search](search)   
+[See also: Feasibility](feasibility)
 
 ___
 
@@ -135,8 +146,11 @@ ___
 ___
 
 **View : Advanced**  
-Content describing Advanced View goes here  
+ 
+Advanced View is a design type independent display of all input and output variables.
+It provides access to all program features.
 
+[Compression spring variables displayed in Advanced View](https://www.springdesignsoftware.org/odop/docs/Help/png/ScrCap_CompressionNoted.png)
 
 
 ___
@@ -145,8 +159,22 @@ ___
 ___
 
 **View : Calculator**  
-Content describing Calculator View goes here  
 
+Calculator View, available for spring design types, 
+provides a simplified display of major input and output variables in a compact spring design specific format. 
+ 
+Right click (long press on a touch screen) on one of the white entry fields or a darker (more bold) 
+numeric value to control FIX / FREE status and to establish or modify constraints on those variables. 
+For now, Firefox users need to use Advanced View in order to access FIX / FREE and constraints. 
+
+Enabled constraints are indicated by a fine border line at the edge of a numeric field.
+A border on the left indicates that a lower (Min) constraint is enabled.
+A border on the right indicates that an upper (Max) constraint is enabled.
+A heavier border on both left and right of a numeric field indicates FIXed status.
+No border line indicates FREE status and no constraint enabled.
+
+
+[Compression spring variables displayed in Calculator View - coming soon]()
 
 
 ___
