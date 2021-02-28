@@ -1,7 +1,9 @@
 #### ODOP Menus
 
-This topic covers the ODOP menu structure.  
-When there is real content here, don't forget to include it in the appropriate index.md files.
+This topic covers the ODOP menu structure. 
+Additional content will be developed as time and priority permits. 
+
+<!--- When there is real content here, don't forget to include it in the appropriate index.md files.  -->
 
 **On this page:**  
 [ODOP logo](menus#ODOPlogo)  
@@ -10,6 +12,11 @@ When there is real content here, don't forget to include it in the appropriate i
 [File : Save](menus#FileSave)  
 [File : SaveAs...](menus#FileSaveAs)  
 [Action : Search](menus#ActionSearch)  
+[Action : Seek...](menus#ActionSeek)  
+[Action : Trade...](menus#ActionTrade)  
+[Action : Select Size...](menus#ActionSelectSize)  
+[Action : Select Catalog...](menus#ActionSelectCatalog)  
+[Action : Execute...](menus#ActionExecute)  
 [View : Advanced](menus#ViewAdvanced)  
 [View : Calculator](menus#ViewCalculator)  
 [View : Reports](menus#ViewReports)  
@@ -32,7 +39,7 @@ ___
 <a id="SignIn"></a>  
 ___
 
-**Sign In**  
+**Sign In...**  
 Content describing Sign In button goes here  
 
 
@@ -41,7 +48,7 @@ ___
 <a id="FileOpen"></a>  
 ___
 
-**File : Open**  
+**File : Open...**  
 Content describing File : Open goes here  
 
 
@@ -59,7 +66,7 @@ ___
 <a id="FileSaveAs"></a>  
 ___
 
-**File : SaveAs**  
+**File : SaveAs...**  
 Content describing FileSaveAs goes here  
 
 
@@ -70,6 +77,55 @@ ___
 
 **Action : Search**  
 Content describing Action : Search goes here  
+
+
+
+___
+
+<a id="ActionSeek"></a>  
+___
+
+**Action : Seek...**  
+Content describing Action : Seek goes here  
+
+
+___
+
+<a id="ActionTrade"></a>  
+___
+
+**Action : Trade...**  
+Content describing Action : Trade goes here  
+
+
+
+___
+
+<a id="ActionSelectSize"></a>  
+___
+
+**Action : Select Size...**  
+Content describing Action : Select Size goes here  
+
+
+
+___
+
+<a id="ActionSelectCatalog"></a>  
+___
+
+**Action : Select Catalog...**  
+Content describing Action : Select Catalog goes here  
+
+
+
+___
+
+<a id="ActionExecute"></a>  
+___
+
+**Action : Execute...**  
+Content describing Action : Execute goes here  
 
 
 
@@ -166,3 +222,4 @@ ___
 &nbsp;
  
 [Help](./)
+
