@@ -1,6 +1,6 @@
 ## Requirements
 
-In order to keep designs saved into the ODOP design library private, 
+In order to keep designs saved into the cloud-based ODOP design library private, 
 it is necessary to establish a user account with associated 
 unique username and password. 
 See: [User Accounts](userAccounts)   
@@ -16,7 +16,7 @@ desktop or laptop computer with a full size and relatively high resolution monit
 The hardware environment "responsive" nature of the ODOP software allows 
 it to function on many mobile devices.
 When operating on a small screen mobile device like a smart phone, 
-the various sections on the right of the main page Design tab will automatically 
+the various sections on the right of the main page Design tab automatically 
 move downward on the page.
 Thus, a mobile device user can scroll vertically to see all the content in 
 a legible manner.
@@ -27,7 +27,8 @@ ODOP is developed using the current version of Google Chrome (using both MacOS a
 and is routinely tested using current versions of other browsers including 
 the newer Chromium based version of the Microsoft Edge browser. 
 Depending on screen size and resolution, 
-Firefox users may find it desirable to adjust font size in order to optimize the on-screen presentation.   
+Firefox users may find it desirable to adjust font size in order to optimize the on-screen presentation. 
+For now, Firefox users need to use Advanced View in order to access FIX / FREE and constraints.
 
 **Microsoft Internet Explorer and the older EdgeHTML version of the Microsoft Edge browser are not supported for operation with ODOP.**  
 
