@@ -6,7 +6,8 @@ Use your browser's Back button to return to this page.
 
 Thumbnail | &nbsp; | Description
 --- | --- | ---
-[<img height="64" src="../png/ScrCap_3TypeNoted.png">](../png/ScrCap_3TypeNoted.png "Compression, Extension & Torsion") | &nbsp; | The main page of the ODOP:Spring user interface. [Compression, Extension & Torsion](../png/ScrCap_3TypeNoted.png "Compression, Extension & Torsion")
+[<img height="64" src="../png/ScrCap_3TypeNoted.png">](../png/ScrCap_3TypeNoted.png "Compression, Extension & Torsion") | &nbsp; | ODOP:Spring Advanced View [Compression, Extension & Torsion](../png/ScrCap_3TypeNoted.png "Compression, Extension & Torsion")
+[<img height="64" src="../png/ScrCap_3TypeCalcNoted.png">](../png/ScrCap_3TypeCalcNoted.png "Compression, Extension & Torsion") | &nbsp; | ODOP:Spring Calculator View [Compression, Extension & Torsion](../png/ScrCap_3TypeCalcNoted.png "Compression, Extension & Torsion")
 [<img height="64" src="../png/ScrCap_CompressionNoted.png">](../png/ScrCap_CompressionNoted.png "Compression spring main page") | &nbsp; | [Compression spring](../png/ScrCap_CompressionNoted.png "Compression spring main page"); U.S. customary units (inches, pounds).
 [<img height="64" src="../png/ScrCap_ExtensionNoted.png">](../png/ScrCap_ExtensionNoted.png "Extension spring main page") | &nbsp; | [Extension spring](../png/ScrCap_ExtensionNoted.png "Extension spring main page"); U.S. customary units (inches, pounds).
 [<img height="64" src="../png/ScrCap_TorsionMetricNoted.png">](../png/ScrCap_TorsionMetricNoted.png "Torsion spring; metric units") | &nbsp; | [Torsion spring](../png/ScrCap_TorsionMetricNoted.png "Torsion spring; metric units"); metric units (mm, Newtons).
