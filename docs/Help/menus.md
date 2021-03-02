@@ -77,16 +77,17 @@ ___
 
 **Action : Search**  
 
-Action : Search menu item invokes the Search algorithm. 
-Search will alter the values of any FREE independent variables to find a design that satisfies all constraints 
-while also achieving the desired value for each FIXed dependent variable. 
+The Action : Search menu item invokes the Search algorithm. 
+Search will alter the values of any FREE independent variables to find 
+a design that satisfies constraints and FIXes. 
+
+In other words, 
+FIXed status causes Search to achieve or hold a specified value. 
+FREE status allows Search to manipulate that variable to achieve a feasible design. 
 
 Search operates to minimize the value of the [objective function](terminology#obj). 
 The current design is used as a starting point. 
 Search stops if the Objective Value falls below OBJMIN.  
-
-FIXed status causes Search to achieve or hold a specified value. 
-FREE status allows Search to manipulate the variable to achieve a feasible design. 
 
 [See also: Search](search)   
 [See also: Feasibility](feasibility)
@@ -150,7 +151,10 @@ ___
 Advanced View is a design type independent display of all input and output variables.
 It provides access to all program features.
 
-[Compression spring variables displayed in Advanced View](https://www.springdesignsoftware.org/odop/docs/Help/png/ScrCap_CompressionNoted.png)
+Use the checkboxes in the variables column to control FIX / FREE status.
+Use the constraints column to establish or modify Min and/or Max values of constraints on the corresponding variables.
+
+[Spring variables displayed in Advanced View](https://www.springdesignsoftware.org/odop/docs/Help/png/ScrCap_3TypeNoted.png)
 
 
 ___
@@ -161,7 +165,7 @@ ___
 **View : Calculator**  
 
 Calculator View, available for spring design types, 
-provides a simplified display of major input and output variables in a compact spring design specific format. 
+provides a simplified display of major input and output variables in a compact format specific to spring design. 
  
 Right click (long press on a touch screen) on one of the white entry fields or a darker (more bold) 
 numeric value to control FIX / FREE status and to establish or modify constraints on those variables. 
@@ -174,7 +178,7 @@ A heavier border on both left and right of a numeric field indicates FIXed statu
 No border line indicates FREE status and no constraint enabled.
 
 
-[Compression spring variables displayed in Calculator View - coming soon]()
+[Spring variables displayed in Calculator View](https://www.springdesignsoftware.org/odop/docs/Help/png/ScrCap_3TypeCalcNoted.png)
 
 
 ___
