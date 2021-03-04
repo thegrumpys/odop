@@ -33,9 +33,12 @@ import { STARTUP,
     RESTORE_AUTO_SAVE,
     DELETE_AUTO_SAVE,
 
+    LOG_USAGE,
+
     MIN } from './actionTypes';
 import { sclden } from './middleware/sclden';
 import { initialSystemControls } from '../initialSystemControls';
+import { logUsage } from '../logUsage';
 
 export function reducers(state, action) {
     var i;
@@ -511,6 +514,10 @@ export function reducers(state, action) {
             localStorage.removeItem(action.payload.name); // remove auto save file
 //            console.log("In reducers.DELETE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
+        return state; // state not changed
+
+    case LOG_USAGE:
+        logUsage(action.payload.tag, action.payload.action, action.payload.note)
         return state; // state not changed
 
     default:

@@ -38,6 +38,8 @@ export const SAVE_AUTO_SAVE = 'SAVE_AUTO_SAVE';
 export const RESTORE_AUTO_SAVE = 'RESTORE_AUTO_SAVE';
 export const DELETE_AUTO_SAVE = 'DELETE_AUTO_SAVE';
 
+export const LOG_USAGE = 'LOG_USAGE';
+
 export const MIN = 'MIN';
 export const MAX = 'MAX';
 

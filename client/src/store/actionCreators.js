@@ -1,4 +1,5 @@
-import { STARTUP, 
+import {
+    STARTUP, 
     LOAD, 
     LOAD_INITIAL_STATE, 
     CHANGE_NAME, 
@@ -36,7 +37,10 @@ import { STARTUP,
 
     SAVE_AUTO_SAVE,
     RESTORE_AUTO_SAVE,
-    DELETE_AUTO_SAVE } from './actionTypes';
+    DELETE_AUTO_SAVE,
+    
+    LOG_USAGE,
+} from './actionTypes';
 
 export function startup() {
     return {
@@ -340,6 +344,17 @@ export function deleteAutoSave(name) {
         type: DELETE_AUTO_SAVE,
         payload: {
             name,
+        }
+    }
+}
+
+export function logUsage(tag, action, note) {
+    return {
+        type: LOG_USAGE,
+        payload: {
+            tag,
+            action,
+            note,
         }
     }
 }
