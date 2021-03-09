@@ -1,5 +1,5 @@
 import React from 'react';
-import { saveAutoSave } from '../../../store/actionCreators';
+import { logUsage, saveAutoSave } from '../../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -24,13 +24,13 @@ export const execute = {
                     Forces are inputs. 
                     Deflections are outputs. 
                     There seems to be a requirement to supply a value for the number of coils. 
-                    But wait! There is more.
-                    With a little investigation you will find that Calculator view provides access to the
+                    <b> But wait! There is more. </b>
+                    Continue reading and you will find that Calculator view provides access to the backsolving features (
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#fix" target="_blank" rel="noopener noreferrer">FIX / FREE</a>,&nbsp; 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#constraints" target="_blank" rel="noopener noreferrer">constraints</a>&nbsp; 
                     and
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/search" target="_blank" rel="noopener noreferrer">Search</a>&nbsp; 
-                    features that allow flexibility on how your design problem is specified.  
+                    ) that allow flexibility on how your design problem is specified.  
                     For example, it is possible to specify force and deflection at two points
                     and then let the software determine the necessary wire diameter, coil diameter and
                     number of coils. 
@@ -44,6 +44,7 @@ export const execute = {
             ),
             actions: [
                 saveAutoSave(),
+                logUsage('event','welcomeCalc', { 'event_label': 'Page 01 of 04' }),
 //                                       Expect to re-enable NaN in future release
 //                                       "NaN" (Not a Number) may appear if inputs are not complete.
 //                changeSymbolValue("OD_Free", Number.NaN),
@@ -79,7 +80,10 @@ export const execute = {
                     </p>
                     <br />
                 </React.Fragment>
-            )
+            ),
+            actions: [
+                logUsage('event','welcomeCalc', { 'event_label': 'Page 02 of 04' })
+            ]
         },
         {
             title: "Page 03 of 04",
@@ -110,7 +114,10 @@ export const execute = {
                     Reports present additional information about your current spring design.
                     </p>
                 </React.Fragment>
-            )
+            ),
+            actions: [
+                logUsage('event','welcomeCalc', { 'event_label': 'Page 03 of 04' })
+            ]
         },
         {
             title: "Page 04 of 04 (last page)",
@@ -138,7 +145,9 @@ export const execute = {
                     Enter input values in the white fields.
                     Be sure to select appropriate values for Material_Type, End_Type and Wire_Dia.
                     View the corresponding Calculator outputs.
-                    Use <b>right click</b> to access FIX / FREE and constraints.
+                    Use <b>right click</b> to access FIX / FREE and constraints. 
+                    Use the <b>Action : Search</b> menu to find a feasible design. 
+                    Use the <b>Action : Seek</b> menu to optimize a feasible design. 
                     Switch to other views to utilize additional capabilities of ODOP:Spring.
                    </p>
                     
@@ -151,7 +160,10 @@ export const execute = {
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/ContactUs" target="_blank" rel="noopener noreferrer">Contact Us.</a>&nbsp; 
                     </p>
                 </React.Fragment>
-            )
+            ),
+            actions: [
+                logUsage('event','welcomeCalc', { 'event_label': 'Page 04 of 04' })
+            ]
         }
     ]
 }
