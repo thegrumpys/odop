@@ -29,7 +29,7 @@ class FileOpen extends Component {
         this.state = {
             modal: modal,
             types: config.design.types,
-            names: [],
+            names: [ {user:this.props.user, name: this.props.name} ],
             type: this.props.type,
             name: this.props.name,
         };
@@ -70,8 +70,15 @@ class FileOpen extends Component {
         })
         .then(names => {
 //            console.log('In FileOpen.getDesignNames user=',user,'type=',type,'names=',names);
+            var name;
+            if (names.length > 0) {
+                name = names[0].name;
+            } else {
+                name = '';
+            }
             this.setState({
-                names: names
+                names: names,
+                name: name,
             })
         })
         .catch(error => {
