@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
-import { changeSymbolValue, changeSymbolConstraint, loadInitialState, fixSymbolValue, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, loadInitialState, logUsage, fixSymbolValue, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MAX } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -11,6 +11,13 @@ export const execute = {
                     <p>
                     The following example illustrates the use of ODOP:Spring to check
                     the design of a compression spring. 
+                    </p>
+                    
+                    <p> 
+                    As described in the tutorial session named tutorTour, 
+                    this light green panel is inserted above the main page.
+                    The ODOP:Spring app is just displaced downward. 
+                    It remains fully functional.
                     </p>
                     
                     <p>
@@ -71,7 +78,7 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     In general, the easiest way to begin is to modify an existing design.
-                    This demo will modify this design until it meets the requirements of the current design problem.
+                    This demo session will modify this design until it meets the requirements of the current design problem.
                     The following sequence of pages will illustrate this process.
                     </p>
                     
@@ -106,7 +113,7 @@ export const execute = {
                     will introduce additional capabilities of the software.</p>
                     
                     <p>This is a good time to take a good look at the existing values.
-                    Many values will update immediately as the demo process enters the changes.</p>
+                    Many values will update immediately as the demo session enters the changes.</p>
                     
                     <p>You can scroll the page down to view the complete set of values. 
                     Scroll back up in order to use the Next button to continue.</p>
@@ -118,7 +125,7 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    The demo has now entered what is known about the problem. 
+                    This demo session has now entered what is known about the problem. 
                     In summary, the changes were:<br />
                     </p>
                     FIX  Wire_Dia   0.0395<br/>
@@ -129,7 +136,7 @@ export const execute = {
                     FIX  L_2 &nbsp; 0.394<br/>
                     <br />
                     <p>
-                    The current values for Force_1 and Force_2 were established as defaults by the initialState. 
+                    The current values for Force_1 and Force_2 are left as established by the initialState. 
                     </p>
                 </React.Fragment>
             ),
@@ -154,10 +161,17 @@ export const execute = {
                     </p>
 
                     <p>
-                    If the program can find a solution that satisfies all the constraints,
-                    it will display "<b>FEASIBLE</b>" in the Result section (immediately below these words).  
+                    If the Search process can find a solution that fully satisfies all the constraints,
+                    it will display "<b>STRICTLY FEASIBLE</b>" in the Result section (immediately below these words).  
                     If a satisfactory solution is found, but one or more constraints remain violated by a
-                    trivial amount, the program will display "<b>MARGINALLY FEASIBLE</b>" in the Result section.
+                    trivial amount, the program will display "<b>FEASIBLE</b>" in the Result section.
+                    The on-line Help entry covering the multi-color 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/feasibilityIndicator" target="_blank" rel="noopener noreferrer">Feasibility Indicator</a>&nbsp;
+                    provides additional details. 
+                    </p>
+
+                    <p>
+                    This demo session will run the Search process during the transition to the next page.
                     </p>
                 </React.Fragment>
             )
@@ -166,19 +180,31 @@ export const execute = {
             title: "Page 08 of 10",
             text: (
                 <React.Fragment>
-                    <p>We have a solution. Take a moment to scroll through and view the values.</p>
-                    <p>Note that cycle life as well as other figures of merit such as weight and
-                    percentage of available deflection utilized at load point 2 are given in
-                    Report&nbsp;1&nbsp;(mini).  
-                    Simply select (click on) that tab to view the report.</p>
-                    <p>The message: 
+                    <p>
+                    We have a solution. 
+                    Take a moment to scroll through and view the values.
+                    </p>
+                    
+                    <p>
+                    Note that figures of merit such as cycle life, weight, 
+                    percentage of available deflection utilized at load point 2
+                    and various stress related details are available in the Reports.  
+                    Use the View menu to access Reports.
+                    </p>
+                    
+                    <p>
+                    The Report1 message: 
                     "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
                     is produced any time that the second load uses more
-                    than 80 % of available deflection.</p>
-                    <p>There is no warning about buckling so that is not a concern for this design.</p>
+                    than 80 % of available deflection.
+                    </p>
+                    <p>
+                    There is no Report1 warning about buckling so that is not a concern for this design.
+                    </p>
                 </React.Fragment>
             ),
             actions: [
+                logUsage('event','demo', { 'event_label': 'Page 08 of 10' }),
                 search()
             ]
         },
@@ -187,10 +213,11 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Don't forget to switch back to the tab containing the main page ("Design:").
+                    Don't forget to switch the view back to the main page.
                     <br /><br />
-                    Just in case you missed them on the previous screen,
-                    scroll down to view the values of <b>Cycle_Life, %_Avail_Deflect</b> and <b>Weight</b>.
+                    Just in case you missed them on the previous screen, you can
+                    scroll down to view the values of <b>Cycle_Life, %_Avail_Deflect</b> and <b>Weight </b> 
+                    to complete the original problem objectives.
                     </p>
                 </React.Fragment>
             )

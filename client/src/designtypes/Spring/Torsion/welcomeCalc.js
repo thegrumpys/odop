@@ -25,7 +25,7 @@ export const execute = {
                     Deflections are outputs. 
                     There seems to be a requirement to supply a value for the number of coils. 
                     <b> But wait! There is more. </b>
-                    Continue reading and you will find that Calculator view provides access to the backsolving features (
+                    Continue reading to find that Calculator view provides access to the backsolving features (
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#fix" target="_blank" rel="noopener noreferrer">FIX / FREE</a>,&nbsp; 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#constraints" target="_blank" rel="noopener noreferrer">constraints</a>&nbsp; 
                     and
@@ -67,7 +67,7 @@ export const execute = {
                     FREE status allows Search to manipulate the variable to achieve a feasible design.
                     The <a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     sessions provide additional detail on these concepts.
-                    For now, Firefox users will need to use Advanced View in order to access FIX / FREE and constraints. 
+                    For now, Firefox users need to use Advanced View in order to access FIX / FREE and constraints. 
                     </p>
 
                     <p>

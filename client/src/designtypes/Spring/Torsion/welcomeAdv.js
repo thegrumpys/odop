@@ -1,5 +1,5 @@
 import React from 'react';
-import { saveAutoSave } from '../../../store/actionCreators';
+import { logUsage, saveAutoSave } from '../../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -20,7 +20,7 @@ export const execute = {
                     and 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#calcInputs" target="_blank" rel="noopener noreferrer">Calculation Inputs</a>&nbsp; 
                     sections below are inputs.
-                    As input values are entered, calculation results will appear immediately in the 
+                    As input values are entered, calculation results appear immediately in the 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#dependentVar" target="_blank" rel="noopener noreferrer">Dependent Variables</a>&nbsp; 
                     section. 
                     Dependent Variables can be controlled by setting 
@@ -39,7 +39,8 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                saveAutoSave()
+                saveAutoSave(),
+                logUsage('event','welcomeAdv', { 'event_label': 'Page 01 of 04' })
             ]
         },
         {
@@ -65,7 +66,10 @@ export const execute = {
                    </p>
                     <br />
                 </React.Fragment>
-            )
+            ), 
+            actions: [
+                logUsage('event','welcomeAdv', { 'event_label': 'Page 02 of 04' })
+            ]
         },
         {
             title: "Page 03 of 04",
@@ -79,7 +83,7 @@ export const execute = {
                     
                     <p>
                     Tooltips are available for many elements of the Advanced view.
-                    Hover the cursor over an item of interest (tap a touch screen) to learn about these elements.
+                    Hover the cursor over an item of interest (tap on a touch screen) to learn about these elements.
                     </p>
                     
                     <p>
@@ -94,9 +98,15 @@ export const execute = {
                     ) and 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/unitsUSmetric" target="_blank" rel="noopener noreferrer">units (U.S., metric)</a>.&nbsp; 
                     These system-provided designs can be a starting point for new custom designs. 
+                    Sign up for a free  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/userAccounts" target="_blank" rel="noopener noreferrer">user account</a>&nbsp; 
+                    to save private designs into the cloud-based ODOP Design Library.  
                    </p>
                 </React.Fragment>
-            )
+            ),
+            actions: [
+                logUsage('event','welcomeAdv', { 'event_label': 'Page 03 of 04' })
+            ]
         },
         {
             title: "Page 04 of 04 (last page)",
@@ -121,7 +131,10 @@ export const execute = {
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/ContactUs" target="_blank" rel="noopener noreferrer">Contact Us.</a>&nbsp; 
                     </p>
                 </React.Fragment>
-            )
+            ),
+            actions: [
+                logUsage('event','welcomeAdv', { 'event_label': 'Page 04 of 04' })
+            ]
         }
     ]
 }

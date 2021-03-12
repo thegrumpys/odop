@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, logUsage, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -31,7 +31,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 13",
+            title: "Page 02 of 14",
             text: (
                 <React.Fragment>
                     <p>
@@ -66,7 +66,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 13",
+            title: "Page 03 of 14",
             text: (
                 <React.Fragment>
                     <p>
@@ -77,16 +77,25 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Since you may not be familiar with the names of ODOP:Spring variables,
-                    the next screen will illustrate several variable names in the
-                    context of a force-deflection diagram.
+                    Two diagrams follow.
+                    The first provides a high level overview of the ODOP design process or sequence.
+                    The second illustrates the names of ODOP:Spring variables 
+                    in the context of a force-deflection diagram.
                     </p>
                     <br />
                 </React.Fragment>
             )
         },
         {
-            title: "Page 04 of 13",
+            title: "Page 04 of 14",
+            text: (
+                <React.Fragment>
+                   <Image fluid src="https://www.springdesignsoftware.org/odop/docs/About/png/DesignProcessFlowDiagram.png" alt="DesignProcessFlowDiagram"/>
+                </React.Fragment>
+            )
+        },
+        {
+            title: "Page 05 of 14",
             text: (
                 <React.Fragment>
                    <Image fluid src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
@@ -94,7 +103,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 05 of 13",
+            title: "Page 06 of 14",
             text: (
                 <React.Fragment>
                     <p>Next, the demo session will enter everything we know about the problem. </p>
@@ -109,7 +118,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 06 of 13",
+            title: "Page 07 of 14",
             text: (
                 <React.Fragment>
                     <p>
@@ -155,7 +164,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 07 of 13",
+            title: "Page 08 of 14",
             text: (
                 <React.Fragment>
                     <p>
@@ -166,23 +175,30 @@ export const execute = {
                     </p>
 
                     <p>
-                    If the program can find a solution that satisfies all the constraints,
-                    it will display "<b>FEASIBLE</b>" in the Result section (immediately below these words).  
+                    If the program can find a solution that fully satisfies all the constraints,
+                    it will display "<b>STRICTLY FEASIBLE</b>" in the Result section (immediately below these words).  
                     If a satisfactory solution is found, but one or more constraints remain violated by a
-                    trivial amount, the program will display "<b>MARGINALLY FEASIBLE</b>" in the Result section.
+                    trivial amount, the program will display "<b>FEASIBLE</b>" in the Result section.
                     If the search process is unable to find a solution, the red "<b>NOT FEASIBLE</b>" will persist.
+                    The on-line Help entry covering the multi-color 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/feasibilityIndicator" target="_blank" rel="noopener noreferrer">Feasibility Indicator</a>&nbsp;
+                    provides additional details. 
+                    </p>
+
+                    <p>
+                    This demo session will run the Search process during the transition to the next page.
                     </p>
                 </React.Fragment>
             )
         },
         {
-            title: "Page 08 of 13",
+            title: "Page 09 of 14",
             text: (
                 <React.Fragment>
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
                     <p>
-                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
-                    Simply select (click on) that tab (above these words) to view the report.
+                    Note that results of additional calculations are given in the Reports. 
+                    Use the View menu to access Reports.
                     The message: 
                     "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
                     is produced any time that the second load uses more
@@ -192,28 +208,29 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
+                logUsage('event','longdemo', { 'event_label': 'Page 09 of 14' }),
                 search()
             ]
         },
         {
-            title: "Page 09 of 13",
+            title: "Page 10 of 14",
             text: (
                 <React.Fragment>
                     <p>
-                    If you are still on the Report tab,
-                    don't forget to switch back to the tab containing the main page ("Design:").
+                    If you are still on a Report view,
+                    don't forget to switch back to the Advanced view (the main page).
                     </p>
                     
                     <p>
                     As a general rule, in the first approach to a new problem, 
                     let the calculations use an arbitrary (non-standard) wire diameter. 
-                    As a last step, select a standard wire diameter,
-                    put it in FIXed status and then execute a search to make any necessary 
+                    As a last step, select a standard wire diameter.
+                    Then with Wire_Dia in FIXed status, execute a search to make any necessary 
                     adjustments in the remaining free Independent Variables.
                     </p>
                     
                     <p>
-                    Now it is time for a bit of audience participation.
+                    Now to illustrate this, it is time for a bit of audience participation.
                     Since the ODOP demo feature is not yet capable of directly controlling menus,
                     go to the <b>Action : Select Size...</b> menu item
                     to chose the nearest standard wire diameter.
@@ -228,7 +245,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 10 of 13",
+            title: "Page 11 of 14",
             text: (
                 <React.Fragment>
                     <p>
@@ -251,13 +268,12 @@ export const execute = {
             ]
         },
         {
-            title: "Page 11 of 13",
+            title: "Page 12 of 14",
             text: (
                 <React.Fragment>
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
-                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
-                    Simply select (click on) that tab to view the report.
+                    Note that results of additional calculations are given in the Reports. 
                     </p>
                     
                     <p>
@@ -275,22 +291,23 @@ export const execute = {
                     <p>
                     The next page covers use of the catalog.
                     Selecting a catalog entry will replace the current design.
-                    So again, if this were a real design situation as opposed to a tutorial session,
+                    So again, if this were a real design situation as opposed to a demo session,
                     this would be a good time to save your work before continuing.
                     </p>
                 </React.Fragment>
             ),
             actions: [
+                logUsage('event','longdemo', { 'event_label': 'Page 12 of 14' }),
                 search()
             ]
         },
         {
-            title: "Page 12 of 13",
+            title: "Page 13 of 14",
             text: (
                 <React.Fragment>
                     <p>
-                    If you are still on a Report tab,
-                    don't forget to switch back to the tab containing the main page ("Design:").
+                    If you are still on a Report view,
+                    don't forget to switch back to the Advanced view.
                     </p>
                     
                     <p>
@@ -321,7 +338,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 13 of 13 (last page)",
+            title: "Page 14 of 14 (last page)",
             text: (
                 <React.Fragment>
                     <p>

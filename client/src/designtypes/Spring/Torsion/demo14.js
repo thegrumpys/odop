@@ -15,6 +15,13 @@ export const execute = {
                     </p>
                     
                     <p>
+                    This demo session is written with the assumption that the reader is already familiar with 
+                    basic ODOP concepts and terminology.
+                    To get a more introductory experience, 
+                    the compression spring demo sessions named "demo" and "longdemo" are a good place to get started. 
+                    </p>
+                    
+                    <p>
                     A detailed description of  
                     <a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/t_spring" target="_blank" rel="noopener noreferrer"> torsion spring names </a>
                     is provided in the On-line Help.  
