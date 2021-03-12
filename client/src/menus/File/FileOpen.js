@@ -72,7 +72,7 @@ class FileOpen extends Component {
 //            console.log('In FileOpen.getDesignNames user=',user,'type=',type,'names=',names);
             var name;
             if (names.length > 0) {
-                var i = names.findIndex(element => element.name === 'Startup')
+                var i = names.findIndex(element => element.name === config.design.name)
                 if (i > 0) {
                     name = names[i].name;
                 } else {
