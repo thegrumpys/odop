@@ -12,11 +12,17 @@ export const execute = {
                     <p>
                     The following example briefly illustrates the use of ODOP:Spring in
                     the design of an extension spring. 
-                    
                     While the difference in difficulty between calculating compression and
                     extension springs by hand may be substantial, you should find that
                     ODOP:Spring makes the design of extension springs no more difficult 
                     or time consuming than the design of compression springs.
+                    </p>
+                    
+                    <p>
+                    This demo session is written with the assumption that the reader is already familiar with 
+                    basic ODOP concepts and terminology.
+                    To get a more introductory experience, 
+                    the compression spring demo sessions named "demo" and "longdemo" are a good place to get started. 
                     </p>
                     
                     <p>
