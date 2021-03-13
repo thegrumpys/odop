@@ -27,16 +27,17 @@ Only one AutoSave design is available at any point in time.
 - Action : Search, Seek, Trade, Select Size and Select Catalog 
 cause AutoSave data to be created before the function.
 
-- File : Open, Save, SaveAs and Logout 
+- File : Open, Save and SaveAs 
 cause AutoSave data to be deleted after the function.
+
+- Sign Out deletes AutoSave data.
 
 - Action : Execute and the Tutorial and Demo features are able to save and / or restore AutoSave data. 
 
 - Other operations do not utilize or affect AutoSave data.
 
 If AutoSave data exists at the time the app starts, 
-a "Load AutoSave" button will be available.
-Pressing this button will cause the AutoSave data to replace the current design.
+it will automatically load and provide a blue pop-up message describing the situation.
 
 Note that not all operations are recoverable by the current AutoSave implementation. 
 Users should save or export frequently and 
@@ -44,6 +45,9 @@ use the browser Reload and Back functions only with the understanding that
 design changes applied since your last save or export may be lost. 
 The AutoSave feature may assist in recovery but it is not guaranteed to
 capture all of the latest changes.  
+
+The AutoSave feature is not available when operating in "private browsing mode" 
+(Chrome "Incognito", Edge "InPrivate", Firefox "Private Window", etc.).
 
 &nbsp;
  
