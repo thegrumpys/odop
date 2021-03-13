@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated February 28, 2021   
+**Message-of-the-day** &nbsp; updated March 12, 2021   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -18,7 +18,7 @@ ODOP is [Experimental Software](experimental).
 
 Evaluators and new users should be sure to see the [About](../About) section 
 of the on-line documentation early in the learning process. 
-Also, a short [Getting Started with ODOP](https://www.youtube.com/watch?v=agVKIdLA6t0) video is available.
+Also, a short [Getting Started with ODOP](https://www.youtube.com/watch?v=JS-8Z1Ct0aI) video is available.
 
 Thank you for your interest in the **O**pen **D**esign **O**ptimization **P**latform software and the ODOP:Spring app. 
 Your success and feedback are important to us. 

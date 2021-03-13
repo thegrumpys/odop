@@ -65,7 +65,7 @@
    
 
     Spring Design Manual AE-11
-    Published by Society of Automotive Engineers (January 1, 1990) (1990)
+    Published by Society of Automotive Engineers  (1990)
     ISBN 10: 0898837774  ISBN 13: 9780898837773
 
 &nbsp;
@@ -75,7 +75,7 @@ Additional resources available on the Internet include:
  &nbsp; &nbsp; [Wikipedia: Spring_(device)](https://en.wikipedia.org/wiki/Spring_(device))   
  &nbsp; &nbsp; [Wikipedia: Coil_spring](https://en.wikipedia.org/wiki/Coil_spring)   
  &nbsp; &nbsp; [Wikipedia: Roark's Formulas for Stress and Strain](https://en.wikipedia.org/wiki/Roark%27s_Formulas_for_Stress_and_Strain)   
- &nbsp; &nbsp; [Associated Spring - Barnes Group: Engineering Guide to Spring Design](http://www.faculty.fairfield.edu/wdornfeld/ME311/AssocSpringBarnes-SpringDesignHandbook.pdf)   
+ &nbsp; &nbsp; [Associated Spring - Barnes Group: Engineering Guide to Spring Design](https://asbg.com/engineering-guide-to-spring-design.aspx)   
  
  &nbsp;
 
