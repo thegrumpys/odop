@@ -43,7 +43,8 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                saveAutoSave(),
+//                                We have concluded that Autosave here is not a good idea
+//                saveAutoSave(),
                 logUsage('event','welcomeCalc', { 'event_label': 'Page 01 of 04' }),
 //                                       Expect to re-enable NaN in future release
 //                                       "NaN" (Not a Number) may appear if inputs are not complete.
