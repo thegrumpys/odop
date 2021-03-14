@@ -39,7 +39,8 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                saveAutoSave(),
+//                                We have concluded that Autosave here is not a good idea
+//                saveAutoSave(),
                 logUsage('event','welcomeAdv', { 'event_label': 'Page 01 of 04' })
             ]
         },
