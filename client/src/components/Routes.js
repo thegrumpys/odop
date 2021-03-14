@@ -59,6 +59,13 @@ class Routes extends Component {
 //      console.log('In Routes.loadRedirect this=',this);
       this.props.restoreAutoSave("redirect");
       this.props.deleteAutoSave("redirect");
+      this.props.deleteAutoSave(); // Get rid of any AutoSave data too
+      config.url.prompt = false; // Turn off prompt
+      config.url.view = this.props.view; // Use model view
+      config.url.type = this.props.type; // Use model type
+      config.url.name = this.props.name; // Use model name
+      config.url.execute = undefined; // Turn off execute
+      this.props.history.push('/');
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load redirect' });
   }
   
@@ -73,7 +80,7 @@ class Routes extends Component {
       config.url.execute = undefined; // Turn off execute
       this.props.history.push('/')
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load autoSave' });
-      displayMessage('Autosave file restored after interruption. Use FileSave, FileSaveAs or FileExport to save it permanently','info');
+      displayMessage('AutoSave restored after interruption. Use FileSave, FileSaveAs or FileExport to save it permanently','info');
   }
   
   loadInitialState(type, units) {
