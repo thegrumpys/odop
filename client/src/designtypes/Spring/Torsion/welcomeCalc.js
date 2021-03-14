@@ -1,5 +1,5 @@
 import React from 'react';
-import { logUsage, saveAutoSave } from '../../../store/actionCreators';
+import { logUsage } from '../../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -43,7 +43,7 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-//                                We have concluded that Autosave here is not a good idea
+//                                       We have concluded that AutoSave here is not a good idea
 //                saveAutoSave(),
                 logUsage('event','welcomeCalc', { 'event_label': 'Page 01 of 04' }),
 //                                       Expect to re-enable NaN in future release
