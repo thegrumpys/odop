@@ -24,7 +24,7 @@ class ViewSelect extends Component {
 //        console.log('In ViewSelect.render this=',this);
         return (
             <React.Fragment>
-                {this.props.reportNames.map((element) => {return (
+                {this.props.viewNames.map((element) => {return (
                     <NavDropdown.Item key={element.title} id={element.name} onClick={this.onClick}>
                         {element.title}
                     </NavDropdown.Item>

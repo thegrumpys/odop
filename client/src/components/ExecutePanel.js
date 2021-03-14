@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Alert, Button, Container, Row } from 'react-bootstrap';
 import { load } from '../store/actionCreators';
 import { connect } from 'react-redux';
-import queryString from 'query-string';
+import config from '../config';
 
 export var startExecute = function(prefix,steps) {
 //    console.log('In startExecute this=',this,'prefix=',prefix,'steps=',steps);
@@ -48,9 +48,8 @@ class ExecutePanel extends Component {
         this.onCancel = this.onCancel.bind(this);
         startExecute = startExecute.bind(this); // Bind external function - no 'this'
         stopExecute = stopExecute.bind(this); // Bind external function - no 'this'
-        const { execute } = queryString.parse(window.location.search);
         this.state = {
-            execute_name: execute, // Remember execute name
+            execute_name: config.url.execute, // Remember execute name
             modal: false,
             prefix: '',
             steps: null,

@@ -43,7 +43,6 @@ import HelpAbout from '../menus/Help/HelpAbout';
 import { withOktaAuth } from '@okta/okta-react';
 import { changeUser, changeView, deleteAutoSave } from '../store/actionCreators';
 import config from '../config';
-import queryString from 'query-string';
 
 class MainPage extends Component {
     
@@ -52,12 +51,10 @@ class MainPage extends Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.setView = this.setView.bind(this);
-        var { view } = queryString.parse(window.location.search);
-        view = view !== undefined ? view : config.design.view;
-        this.props.changeView(view);
+        this.props.changeView(config.url.view);
         this.state = {
             isOpen: false,
-            activeTab: view,
+            activeTab: config.url.view,
         };
     }
     
@@ -76,12 +73,12 @@ class MainPage extends Component {
         if (prevProps.type !== this.props.type) {
 //            console.log('In MainPage.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
             var { getViewNames } = require('../designtypes/'+this.props.type+'/view.js'); // Dynamically load getViewNames
-            var reportNames = getViewNames(); // Get them in MainPage render because they are now React Components
-//            console.log('In MainPage.componentDidUpdate reportNames=', reportNames);
-            var view = reportNames.find(element => element.name === this.props.view);
+            var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
+//            console.log('In MainPage.componentDidUpdate viewNames=', viewNames);
+            var view = viewNames.find(element => element.name === this.props.view);
 //            console.log('In MainPage.componentDidUpdate view=', view);
             if (view === undefined)
-                this.props.changeView(config.design.view); // if not found then assume the configured default
+                this.props.changeView(config.url.view); // if not found then assume the configured default
         }
         if (prevProps.view !== this.props.view) {
 //            console.log('In MainPage.componentDidUpdate prevProps.view=',prevProps.view,'props.view=',this.props.view);
@@ -112,8 +109,8 @@ class MainPage extends Component {
         if (this.props.authState.isPending || this.props.name === null || this.props.type === null) return null;
 
         var { getViewNames } = require('../designtypes/'+this.props.type+'/view.js'); // Dynamically load getViewNames
-        var reportNames = getViewNames(); // Get them in MainPage render because they are now React Components
-//      console.log('In MainPage.constructor reportNames=', reportNames);
+        var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
+//      console.log('In MainPage.constructor viewNames=', viewNames);
 
         var src = 'designtypes/'+this.props.type+'/favicon.ico';
         var alt = this.props.type+' icon';
@@ -163,7 +160,7 @@ class MainPage extends Component {
                                     Display Sub-Problems&hellip;
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <ViewSelect reportNames={reportNames}/>
+                                <ViewSelect viewNames={viewNames}/>
                                 <NavDropdown.Divider />
                                 {config.node.env !== "production" && <ViewOffsets />}
                                 {config.node.env !== "production" && <ViewSymbolTableOffsets />}
@@ -191,8 +188,8 @@ class MainPage extends Component {
                 </Navbar>
                 <Container style={{backgroundColor: '#eee', paddingTop: '60px'}}>
                     <ExecutePanel />
-                    <Tabs defaultActiveKey={config.design.view} activeKey={this.state.activeTab}>
-                        {reportNames.map((element) => {return (
+                    <Tabs defaultActiveKey={config.url.view} activeKey={this.state.activeTab}>
+                        {viewNames.map((element) => {return (
                             <Tab key={element.title} eventKey={element.name}>
                                 <div id={element.name}>{element.component}</div>
                             </Tab>
