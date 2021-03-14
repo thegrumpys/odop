@@ -8,7 +8,6 @@ import { logUsage } from '../../logUsage';
 import config from '../../config';
 import { withOktaAuth } from '@okta/okta-react';
 import { withRouter } from 'react-router-dom';
-import queryString from 'query-string';
 
 class FileOpen extends Component {
 
@@ -24,11 +23,9 @@ class FileOpen extends Component {
         this.onSignIn = this.onSignIn.bind(this);
         this.onOpen = this.onOpen.bind(this);
         this.onCancel = this.onCancel.bind(this);
-        var { prompt } = queryString.parse(window.location.search);
-        var modal = prompt !== undefined ? true : false;
         this.state = {
-            modal: modal,
-            types: config.design.types,
+            modal: config.url.prompt,
+            types: config.env.types,
             names: [ {user:this.props.user, name: this.props.name} ],
             type: this.props.type,
             name: this.props.name,
@@ -72,7 +69,7 @@ class FileOpen extends Component {
 //            console.log('In FileOpen.getDesignNames user=',user,'type=',type,'names=',names);
             var name;
             if (names.length > 0) {
-                var i = names.findIndex(element => element.name === config.design.name)
+                var i = names.findIndex(element => element.name === config.url.name)
                 if (i > 0) {
                     name = names[i].name;
                 } else {
@@ -125,9 +122,9 @@ class FileOpen extends Component {
 
     toggle() {
 //        console.log('In FileOpen.toggle this=',this);
-        var type = (this.state.types.includes(this.props.type) ? this.props.type : config.design.type);
+        var type = (this.state.types.includes(this.props.type) ? this.props.type : config.url.type);
         this.getDesignNames(this.props.user,type);
-        var name = (this.state.names.includes(this.props.name) ? this.props.name : config.design.name);
+        var name = (this.state.names.includes(this.props.name) ? this.props.name : config.url.name);
         this.setState({
             type: type,
             name: name

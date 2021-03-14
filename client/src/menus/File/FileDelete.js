@@ -21,7 +21,7 @@ class FileDelete extends Component {
         this.onDelete = this.onDelete.bind(this);
         this.state = {
             modal: false,
-            types: config.design.types,
+            types: config.env.types,
             names: [],
             type: this.props.type,
             name: '',

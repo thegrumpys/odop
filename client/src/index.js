@@ -37,6 +37,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 
 // Create a store with an empty model where type is null
-const store = createStore(reducers, { user: null, name: config.design.name, view: config.design.view, model: { type: null, system_controls: initialSystemControls }}, middleware);
+const store = createStore(reducers, { user: null, name: config.url.name, view: config.url.view, model: { type: null, system_controls: initialSystemControls }}, middleware);
 
 ReactDOM.render(<div id="root2"><Spinner /><MessageModal /><Provider store={store}><Router><Routes /></Router></Provider></div>, document.getElementById('root'));

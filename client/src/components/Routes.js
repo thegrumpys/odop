@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import { load, loadInitialState, restoreAutoSave, deleteAutoSave, changeName } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
 import { displayMessage } from './MessageModal';
-import queryString from 'query-string';
 import { displaySpinner } from './Spinner';
 
 class Routes extends Component {
@@ -33,15 +32,12 @@ class Routes extends Component {
 //          console.log('In Routes.componentDidMount restore "autosave" file')
           this.loadAutoSave();
       } else {
-          var { type, name } = queryString.parse(window.location.search);
-          if (type !== undefined || name !== undefined) {
-              type = type !== undefined ? type : config.design.type;
-              name = name !== undefined ? name : config.design.name;
-//              console.log('In Routes.componentDidMount getDesign type=',type,'name=',name);
-              this.getDesign(this.props.user, type, name);
+          if (config.url.type === config.env.type && config.url.name === config.env.name) { // If defaults used then just load initial state
+//              console.log('In Routes.componentDidMount loadInitialState config.env.type=',config.env.type,'config.env.units=',config.env.units);
+              this.loadInitialState(config.env.type,config.env.units);
           } else {
-//              console.log('In Routes.componentDidMount loadInitialState config.design.type=',config.design.type,'config.design.units=',config.design.units);
-              this.loadInitialState(config.design.type,config.design.units);
+//              console.log('In Routes.componentDidMount getDesign config.url.type=',config.url.type,'config.url.name=',config.url.name);
+              this.getDesign(this.props.user, config.url.type, config.url.name);
           }
       }
   }
@@ -70,6 +66,12 @@ class Routes extends Component {
 //      console.log('In Routes.loadAutoSave this=',this);
       this.props.restoreAutoSave();
       this.props.deleteAutoSave();
+      config.url.prompt = false; // Turn off prompt
+      config.url.view = this.props.view; // Use model view
+      config.url.type = this.props.type; // Use model type
+      config.url.name = this.props.name; // Use model name
+      config.url.execute = undefined; // Turn off execute
+      this.props.history.push('/')
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load autoSave' });
       displayMessage('Autosave file restored after interruption. Use FileSave, FileSaveAs or FileExport to save it permanently','info');
   }
@@ -136,6 +138,7 @@ class Routes extends Component {
 const mapStateToProps = state => ({
     user: state.user,
     name: state.name,
+    view: state.view,
     type: state.model.type,
 });
 
