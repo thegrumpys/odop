@@ -13,7 +13,12 @@ Identity, authentication and authorization features (username and password) of o
 based on capabilities provided by [Okta.com](https://www.okta.com/).
 The privacy notice for features provided by Okta is available at: [Okta privacy policy](https://www.okta.com/privacy-policy/).  
 
-The remainder of this page applies to odop.herokuapp.com features unrelated to Okta.
+**Solicitation of reviews and feedback**   
+From time to time we may engage third party services to solicit reviews and other forms of feedback from users.
+The Capterra subsidiary of Gartner, Inc. is such a third party.
+The privacy notice for features provided by Capterra is available at [Gartner / Capterra Digital Markets Software Vendor Privacy Notice](https://www.gartner.com/en/digital-markets/privacy-policy).
+
+The remainder of this page applies to odop.herokuapp.com features unrelated to Okta and Gartner / Capterra.
    
 **Information Collection, Use, and Sharing**   
 We are the sole owners of the information collected on this site. 
@@ -51,8 +56,14 @@ For instance, by using a cookie to identify you, you would not have to log in a 
 Cookies can also enable a site to track and target the interests of its users to enhance the experience on the site. 
 
 The odop.herokuapp.com website does not use cookies. 
-However, some of our business partners (for example: Okta, Heroku, JawsDB, GitHub Pages and Google Analytics) may use cookies related to our site.
+However, some of our business partners 
+(for example: Okta, Heroku, JawsDB, GitHub Pages, Gartner / Capterra and Google Analytics) 
+may use cookies related to our site.
 We have no access to or control over these cookies.   
+
+The ODOP AutoSave feature utilizes a technology similar to cookies in order to preserve and recover design data 
+in various situations where it might otherwise be lost.
+This AutoSave feature is not used for user tracking.
 
 **IP Address**   
 In addition to the previously mentioned features of Okta,
