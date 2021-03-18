@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated March 12, 2021   
+**Message-of-the-day** &nbsp; updated March 18, 2021   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -10,7 +10,7 @@ For details, see: [Requirements](requirements)
 
 ODOP version 4.0 was released February 27, 2021. 
 Change details are available in GitHub at: 
-[ODOP milestone 3.8](https://github.com/thegrumpys/odop/milestone/39?closed=1). 
+[ODOP release 4.0](https://github.com/thegrumpys/odop/milestone/39?closed=1). 
 Opening a design saved in a prior version will produce a pop-up message. 
 See: [MIGRATION](../Help/terminology#migration). 
 
