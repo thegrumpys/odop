@@ -22,6 +22,9 @@ Read [About ODOP](https://thegrumpys.github.io/odop/About), including the Introd
 
 More detail is available in the [On-line Help](https://thegrumpys.github.io/odop/Help) facility.   
 
-Try [ODOP on Heroku](https://odop.herokuapp.com/)   
+Try:   
+&nbsp; [ODOP on Heroku](https://odop.herokuapp.com/)  
+&nbsp; [Compression spring design in Calculator view](https://odop.herokuapp.com/?view=Calculator&execute=welcomeCalc)  
+&nbsp; [Rectangular Solid with constraints of USPS "Machinable Parcels"](https://odop.herokuapp.com/?type=Solid&name=USPS_MachinableParcels)  
 
 &nbsp;
