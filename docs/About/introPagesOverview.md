@@ -16,10 +16,10 @@ For example, see:
    + Link to Getting Started  
 &nbsp;
 *  [Requirements](requirements)  
-   + User account
    + Internet connection & modern web browser
    + Hardware "responsive" design
-   + Browser support   
+   + Browser support
+   + User account (optional)   
 &nbsp;
 *  [User Accounts](userAccounts)  
    + Instructions to get UserID and Password

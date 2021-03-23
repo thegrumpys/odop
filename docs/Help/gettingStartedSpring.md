@@ -5,8 +5,9 @@ Tutorial and the spring design Demo.
 A few suggestions on how to explore ODOP:Spring after completing the
 tutorial and demo sessions are also provided.   
 
-A user account with associated username and password 
-is required to access the ODOP:Spring software.
+While a user account is not required to access the ODOP software,
+an account with associated username and password is required to save designs into 
+the cloud-based ODOP "Design Library".
 See: [User Accounts](../About/userAccounts) for details on
 how to obtain a free account.
 

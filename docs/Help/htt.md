@@ -212,7 +212,7 @@ Do not expect the ODOP:Spring app to appear on Okta's list of apps and
 do not be concerned about a "You don't have any apps." message on your personal Okta home page. 
 Once you have established a password, 
 simply [launch the ODOP:Spring app](../Help/launchODOP) 
-in order to get to the sign-in page.
+and click the "Sign In..." button in the upper left in order to get to the sign-in page.
 It is also possible to launch the app from the SpringDesignSoftware.org home page, 
 Getting Started page or any of the three spring type pages.   
 
@@ -222,15 +222,15 @@ ___
 ___
 
 **Responsive software design**   
-Developed as a "responsive" web app, the ODOP software will change its screen layout and 
+As a "responsive" web app, the ODOP software will change its screen layout and 
 input behavior in response to the capabilities of the user's device. 
 Specifically, as available screen width diminishes,
-sections on the right of the main page will reposition to the bottom of the page.
+sections on the right of the Advanced View main page will reposition to the bottom of the page.
 This means that more vertical scrolling will be required but font sizes will remain legible,
-even on a smartphone.
-Note that while operation on a smartphone may be possible, 
+even on a small screen device such as a smartphone.
+Note that while operation on a small screen device may be possible, 
 the scrolling necessary to accommodate screen size limitations may impact productivity.
-Similarly, while it is possible to use the ODOP app from a mobile device, 
+For that reason, 
 establishing initial impressions with a full size monitor, keyboard and mouse is recommended.   
 
 ___
@@ -242,8 +242,8 @@ ___
 Once familiar with the ODOP screen layout and operations on a large screen, 
 two **File : Preferences** settings may be used to facilitate operation on a small screen.
 Specifically, 
-changing show_units to a value of 0 will suppress display of the main page units column
-and changing show-violations to 0 will suppress display of the violations column.
+changing show_units to a value of 0 will suppress display of the Advanced View main page units column
+and changing show_violations to 0 will suppress display of the violations column.
 
 These settings are saved along with the design. 
 

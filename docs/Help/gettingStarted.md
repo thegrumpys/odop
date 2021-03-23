@@ -29,8 +29,9 @@ provides an important conceptual introduction to the overall design process with
 The ODOP software expects to start from an existing design. 
 More information on this point is available at [Default Designs](./defaultDesigns).
 
-A user account with associated username and password 
-is required to access the ODOP software.
+While a user account is not required to access the ODOP software,
+an account with associated username and password is necessary to save designs into 
+the cloud-based ODOP "Design Library".
 See: [User Accounts](../About/userAccounts) for details on
 how to obtain an account.
 

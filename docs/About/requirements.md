@@ -1,18 +1,18 @@
 ## Requirements
 
-In order to keep designs saved into the cloud-based ODOP design library private, 
-it is necessary to establish a user account with associated 
-unique username and password. 
-See: [User Accounts](userAccounts)   
-
 It is not necessary to install any software on your computer in order to run ODOP.
 In theory, the only requirement to operate the ODOP software is an Internet connection and 
 a modern web browser.
 In practice, all web browsers, operating systems and hardware platforms are not equal.
 As the expression goes, "Your mileage may vary".   
 
+In order to keep designs saved into the cloud-based ODOP design library private, 
+it is necessary to establish a user account with associated 
+unique username and password. 
+See: [User Accounts](userAccounts)   
+
 It is expected that most users doing serious design work will run the ODOP software on a
-desktop or laptop computer with a full size and relatively high resolution monitor. 
+desktop, laptop or tablet computer with a full size and relatively high resolution screen. 
 The hardware environment "responsive" nature of the ODOP software allows 
 it to function on many mobile devices.
 When operating on a small screen mobile device like a smart phone, 

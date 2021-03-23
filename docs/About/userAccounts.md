@@ -1,10 +1,11 @@
 ## User Accounts, Username, Sign-in, Sign-out
 
 A user account is **not** required to operate most features of the software. 
-If saving designs into the cloud-based (on-line) ODOP Design Library,
+If saving designs into the cloud-based (on-line) [ODOP Design Library](../Help/terminology#designLib),
 it is necessary to establish a user account with associated unique username and password 
 so as to keep those designs private.  
 
+You can sign up for a private account within the app. 
 Launch the ODOP software from the SpringDesignSoftware.org home page, 
 Getting Started page or any of the three spring type pages. 
 To establish a free private account, 
