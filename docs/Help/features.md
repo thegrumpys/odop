@@ -34,7 +34,7 @@ Each time another user starts work, another processor, memory and network connec
 Thus, each user does their design activities in a highly responsive environment and those activities
 do not degrade the responsiveness of other users.
 
-While multiple users may share the server that initially provides the web app main page as well as the server that 
+While multiple users may share the server that initially provides the web app as well as the server that 
 stores the design library (specifically, the File : Open and File : Save operations use that server), 
 these operations happen infrequently and at times that the user is relatively less sensitive to 
 slight delays in program operation.

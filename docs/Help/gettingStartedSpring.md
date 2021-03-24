@@ -107,8 +107,9 @@ For the compression spring design type, those include
  values when you FIX a dependent variable.
 
  Finally, try to design a spring from scratch. 
- Use the main page entry fields to enter constraints
- associated with a hypothesized design. 
+ Use the entry fields to enter constraints associated with a hypothesized design. 
+ Constraint entry fields appear directly in the Advanced View. 
+ A right-click is required to access FIX checkboxes and constraint entry fields in Calculator View. 
  Try designing the spring in a ball  point pen, 
  or perhaps a suspension spring for a motorcycle, 
  an automobile or a railroad locomotive. 
@@ -120,8 +121,7 @@ For the compression spring design type, those include
  Dive in and try it! 
  
  Once you have already saved any work that you wish to keep, you can sign out 
- by using "Logout" on the File menu.
- Alternatively, use the browser Reload a.k.a "Refresh" function and then click the "Logout" button. 
+ by using "Sign Out" button in the upper left.
  Finally, close the browser tab or browser window containing the ODOP app.
   
 &nbsp;   

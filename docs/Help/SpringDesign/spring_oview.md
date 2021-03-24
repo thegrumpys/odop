@@ -214,9 +214,9 @@ reaching the main page, a complete spring design is already defined.
 Use the numeric entry fields plus FIX checkboxes to alter that existing
 design to reflect what is known about the problem at hand.
 
-The main page and [Report](../reports) tabs can be used to
-view the current state of the design. 
-The main page will show which constraints are violated. 
+Entries on  the View menu can be used to examine the current state of the design. 
+Look at the main page multi-colored [Feasibility Indicator](../feasibilityIndicator) 
+and bold red or orange values to understand which constraints are violated.  
 Use the **Action : [Search](../search)** menu item 
 to have ODOP:Spring select values for the free Independent Variables that reduce 
 (and hopefully eliminate) constraint violations thus achieving a feasible

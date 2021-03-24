@@ -16,10 +16,8 @@ desktop, laptop or tablet computer with a full size and relatively high resoluti
 The hardware environment "responsive" nature of the ODOP software allows 
 it to function on many mobile devices.
 When operating on a small screen mobile device like a smart phone, 
-the various sections on the right of the main page Design tab automatically 
-move downward on the page.
-Thus, a mobile device user can scroll vertically to see all the content in 
-a legible manner.
+the various sections on the right of the Advanced View automatically move downward on the page.
+Thus, a mobile device user can scroll vertically to see all the content in a legible manner.
 Unfortunately, the necessary amount of scrolling may negatively impact productivity and 
 general satisfaction with operation on small screen hardware.
 

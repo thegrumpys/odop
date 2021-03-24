@@ -3,7 +3,7 @@
 As noted in the [requirements](../About/requirements) page, 
 it is not necessary to load any software on your computer in order to run the 
 ODOP software. 
-Only a recent web browser is necessary.
+Only an Internet connection and recent web browser are necessary.
 
 While it is possible to use the ODOP software from a mobile device,
 establishing initial impressions with a full-size monitor, keyboard and mouse
@@ -15,18 +15,18 @@ simultaneously in separate, non-overlapping windows.
 See: [Utilizing on-line Help with a widescreen monitor](wideScreen) for additional details. 
 If a wide-screen monitor is not available, 
 you can operate with this Help content in one
-browser tab while the ODOP main page is in another browser tab.
+browser tab while the ODOP app is in another browser tab.
 This approach will permit rapid switching from this Help content in order
 to view the corresponding part of the program user interface. 
-For example, the ODOP main page.   
+
+Spring design users are expected to launch ODOP:Spring from the 
+[SpringDesignSoftware.org](https://www.springdesignsoftware.org/) website.  
 
 In order to start the ODOP software in **this browser window** (or tab), 
 follow this link:   
 
-[Launch ODOP](https://odop.herokuapp.com)   
+[Launch ODOP](https://odop.herokuapp.com) 
   
-&nbsp;   
-
 Alternatively, copy this address (URL):   
 
 **https://odop.herokuapp.com**

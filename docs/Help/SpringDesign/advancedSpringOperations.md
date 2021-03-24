@@ -100,7 +100,7 @@
  It is possible to set a different value for HOT\_FACTOR\_KH by 
  using PROP\_CALC\_METHOD = 2 or 3. 
  This will permit any desired
- value of HOT\_FACTOR\_KH to be entered into the main page
+ value of HOT\_FACTOR\_KH to be entered into the Advanced View 
  Calculation Input entry field.
 
  Make permanent changes in these values by altering the appropriate
@@ -115,8 +115,8 @@
 [Help](../)   
 
 <!---
-Comment must be the last thing in the file.
-Eclipse MD Preview suppresses display of everything after the comment header.
+Depending on Eclipse version or Markdown interpreter, a multi-line comment must be the last thing in the file.
+Older Eclipse MD Preview suppresses display of everything after the comment header.
 
 This entry is a work in progress.   
 

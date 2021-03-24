@@ -116,8 +116,7 @@ to FIX (see below) its value and then execute the Search function
 
 Calculation Inputs are quantities that can be modified by the user
 but are not subject to Constraints, FIX or manipulation by the Search process. 
-You will likely need to scroll down to see the section of the main page 
-containing Calculation Inputs.   
+You will likely need to scroll down to see the section containing Calculation Inputs.   
 ![Calculation Inputs](./png/CalcInput.png "Calculation Inputs")   
 
 &nbsp;

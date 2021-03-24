@@ -38,7 +38,7 @@ Topics covered in the various sections of the tutorial include:
 
 Name | &nbsp; | Description  
 --- | --- | ---  
-tutorTour | &nbsp; | Guided tour of the main page using the compression spring design type and U.S. customary units  
+tutorTour | &nbsp; | Guided tour of the compression spring Advanced View using U.S. Customary units  
 guidedDesign |   | Design workflow using compression spring example; optimization, standard wire size, select from catalog  
 tutor |   | Variable names, change of Independent Variables; analysis concept, FIX of Dependent Variables, Search; equation inversion concept  
 tutor3 |   | Constraints, constraint levels; synthesis concept  

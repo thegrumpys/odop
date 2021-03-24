@@ -105,7 +105,7 @@ If Prop\_Calc\_Method is set to a value of **3 - Use Stress_Lim_...**,
 then ODOP:Spring will not
 modify the values of Stress\_Lim\_Stat and Stress\_Lim\_Endur in any way.
 These values will remain as established in the initial start point ("Startup") 
-or as set by the user on the main page. 
+or as set by the user in the Advanced View Calculation Input section. 
 The values of Material\_Type, Tensile, %\_Tensile\_Stat and %\_Tensile\_Endur 
 will be ignored.
 

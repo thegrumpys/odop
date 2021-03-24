@@ -6,35 +6,17 @@ side-by-side configuration.
 Note that this is different than two tabs in one browser session.
 Put the On-line Help content in one browser window such that it
 takes up roughly one third of the screen width.
-Put the ODOP main page in a separate browser window such that it takes up 
+Put the ODOP app in a separate browser window such that it takes up 
 the remaining two thirds of the screen width.
 It will then be possible to view both the screen captures in the Getting Started 
-discussion and the referenced program features on the main page at the same time.
+discussion and the referenced program features at the same time.
 
-If you are using this side-by-side  browser configuration, 
-one approach is to launch the ODOP program in each browser window.   
+One approach to getting started in this side-by-side browser configuration, 
+is to arrange the browser windows as desired and then 
+launch ODOP in each browser window. 
+In the larger window, continue with your design activities.
+In the smaller window, invoke the on-line Help with the **Help : Index** menu item.
 
-Starting from the sign-in page,
-it is possible to expand the list of links and select "Learn About ODOP"
-to get started with the on-line Help in the smaller window.   
-
-![Sign-in screen](./png/SignInWidgetExpanded.png "Sign-in screen")
-
-Alternatively, click the "About" link of the ODOP starting dialog
-as highlighted in red of the screen capture below.   
-
-![ODOP starting dialog](./png/StartDialog.png "ODOP starting dialog")   
-
-In either case, that "About" link will take you to a list of pages 
-in the "About" section of the on-line Help.
-Follow the "Introduction" link.
-From there you can continue with those instructions while 
-viewing ODOP program operation in the larger window.   
-
-&nbsp;
-
-After starting the program in the larger window, 
-select the design type and specific design that you wish to work with.
 The screen capture below illustrates selecting the Rectangular **Solid** design type
 which is used in the ODOP Introduction and Getting Started instructions. 
 Select the Solid design type before continuing with those instructions.   
