@@ -355,11 +355,12 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
       } else {
         next();
       }
-    })
+    });
     // Serve any static files
-    app.use(
+    app.use((req, res, next) => {
+        console.log("SERVER: In USE PATH=",path.join(__dirname, 'client/build'));
         express.static(path.join(__dirname, 'client/build'))
-    );
+    });
     // Handle React routing, return all requests to React app
     app.get('*', function (req, res, next) {
       console.log("SERVER: In GET * PATH=",path.join(__dirname, 'client/build', 'index.html'));
