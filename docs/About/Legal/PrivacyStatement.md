@@ -16,7 +16,10 @@ The privacy notice for features provided by Okta is available at: [Okta privacy 
 **Solicitation of reviews and feedback**   
 From time to time we may engage third party services to solicit reviews and other forms of feedback from users.
 The Capterra subsidiary of Gartner, Inc. is such a third party.
-The privacy notice for features provided by Capterra is available at [Gartner / Capterra Digital Markets Software Vendor Privacy Notice](https://www.gartner.com/en/digital-markets/privacy-policy).
+The privacy notice for features provided by Capterra are available at 
+[Gartner / Capterra Permission Based Marketing Policy](https://digital-markets.gartner.com/Permission-Based-Marketing-Policy) 
+and 
+[Gartner / Capterra Digital Markets Software Vendor Privacy Notice](https://www.gartner.com/en/digital-markets/privacy-policy). 
 
 The remainder of this page applies to odop.herokuapp.com features unrelated to Okta and Gartner / Capterra.
    
