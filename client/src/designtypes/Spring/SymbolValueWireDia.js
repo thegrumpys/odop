@@ -18,6 +18,7 @@ import ConstraintsMaxHeaderDependentVariable from '../../components/ConstraintsM
 import ConstraintsMaxRowDependentVariable from '../../components/ConstraintsMaxRowDependentVariable';
 import NameValueUnitsHeaderCalcInput from '../../components/NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from '../../components/NameValueUnitsRowCalcInput';
+import { logValue } from '../../logUsage';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -48,6 +49,7 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.onSelect wire_dia=',wire_dia);
         this.props.changeSymbolValue(this.props.element.name,wire_dia);
         this.props.fixSymbolValue(this.props.element.name);
+        logValue(this.props.element.name,wire_dia);
     }
 
     onContextMenu(e) {

@@ -3,6 +3,7 @@ import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
+import { logValue } from '../logUsage';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -26,11 +27,13 @@ class NameValueUnitsRowDependentVariable extends Component {
     onSet() {
 //        console.log('In NameValueUnitsRowDependentVariable.onSet');
         this.props.fixSymbolValue(this.props.element.name);
+        logValue(this.props.element.name,'FIXED');
     }
     
     onReset() {
 //        console.log('In NameValueUnitsRowDependentVariable.onReset');
         this.props.freeSymbolValue(this.props.element.name);
+        logValue(this.props.element.name,'FREE');
     }
     
     render() {

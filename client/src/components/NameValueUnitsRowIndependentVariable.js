@@ -3,6 +3,7 @@ import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
+import { logValue } from '../logUsage';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -47,6 +48,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
     onChange(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onChange event.target.value=',event.target.value);
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
+        logValue(this.props.element.name,event.target.value);
     }
     
     onFocus(event) {
@@ -67,16 +69,19 @@ class NameValueUnitsRowIndependentVariable extends Component {
 //        console.log('In NameValueUnitsRowIndependentVariable.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex);
+        logValue(this.props.element.name,selectedIndex);
     }
     
     onSet() {
 //        console.log('In NameValueUnitsRowIndependentVariable.onSet');
         this.props.fixSymbolValue(this.props.element.name);
+        logValue(this.props.element.name,'FIXED');
     }
     
     onReset() {
 //        console.log('In NameValueUnitsRowIndependentVariable.onReset');
         this.props.freeSymbolValue(this.props.element.name);
+        logValue(this.props.element.name,'FREE');
     }
     
     render() {

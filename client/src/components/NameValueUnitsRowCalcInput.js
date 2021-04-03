@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../store/actionCreators';
+import { logValue } from '../logUsage';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -58,6 +59,7 @@ class NameValueUnitsRowCalcInput extends Component {
     onChange(event) {
 //        console.log('In NameValueUnitsRowCalcInput.onChange event.target.value=',event.target.value);
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
+        logValue(this.props.element.name,event.target.value);
     }
     
     onFocus(event) {
@@ -78,6 +80,7 @@ class NameValueUnitsRowCalcInput extends Component {
 //        console.log('In NameValueUnitsRowCalcInput.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex);
+        logValue(this.props.element.name,selectedIndex);
     }
     
     render() {
