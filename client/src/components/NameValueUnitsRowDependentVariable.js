@@ -3,6 +3,7 @@ import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
+import { logValue } from '../logUsage';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -13,26 +14,28 @@ Number.prototype.toODOPPrecision = function() {
     else odopValue = value.toFixed(0);
     return odopValue;
 };
-     
+
 class NameValueUnitsRowDependentVariable extends Component {
-    
+
     constructor(props) {
 //        console.log('In NameValueUnitsRowDependentVariable.constructor props=',props)
         super(props);
         this.onSet = this.onSet.bind(this);
         this.onReset = this.onReset.bind(this);
     }
-    
+
     onSet() {
 //        console.log('In NameValueUnitsRowDependentVariable.onSet');
         this.props.fixSymbolValue(this.props.element.name);
+        logValue(this.props.element.name,'FIXED','FixedFlag',false);
     }
-    
+
     onReset() {
 //        console.log('In NameValueUnitsRowDependentVariable.onReset');
         this.props.freeSymbolValue(this.props.element.name);
+        logValue(this.props.element.name,'FREE','FixedFlag',false);
     }
-    
+
     render() {
 //        console.log('In NameValueUnitsRowDependentVariable.render this=',this);
         // =======================================

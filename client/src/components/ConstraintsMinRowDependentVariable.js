@@ -3,6 +3,7 @@ import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form }
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
+import { logValue } from '../logUsage';
 
 class ConstraintsMinRowDependentVariable extends Component {
 
@@ -23,16 +24,20 @@ class ConstraintsMinRowDependentVariable extends Component {
 
     onSetDependentVariableFlagMinConstrained(event) {
         this.props.setSymbolFlag(this.props.element.name, MIN, CONSTRAINED);
+        logValue(this.props.element.name,'Enabled','MinConstraintFlag',false);
     }
 
     onResetDependentVariableFlagMinConstrained(event) {
         this.props.resetSymbolFlag(this.props.element.name, MIN, CONSTRAINED);
+        logValue(this.props.element.name,'Disabled','MinConstraintFlag',false);
     }
 
     onChangeDependentVariableMinConstraint(event) {
         this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(event.target.value));
+        logValue(this.props.element.name,event.target.value,'MinConstraint');
         if (this.props.element.lmin & FIXED) {
             this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(event.target.value));
+            logValue(this.props.element.name,event.target.value,'MaxConstraint');
         }
     }
 

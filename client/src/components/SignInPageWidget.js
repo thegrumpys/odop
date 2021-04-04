@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withOktaAuth } from '@okta/okta-react';
 import { changeUser, saveAutoSave } from '../store/actionCreators';
+import { logUsage } from '../logUsage';
 
 class SignInPageWidget extends Component {
   componentDidMount() {
@@ -95,6 +96,7 @@ class SignInPageWidget extends Component {
         if (tokens !== undefined) {
             var user = tokens.idToken.claims.sub;
             this.props.changeUser(user);
+            logUsage('event', 'SignedIn', { 'event_label': user });
             this.props.saveAutoSave("redirect");
             this.props.oktaAuth.handleLoginRedirect(tokens);
         }

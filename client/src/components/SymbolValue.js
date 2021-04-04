@@ -17,6 +17,7 @@ import ConstraintsMaxHeaderDependentVariable from './ConstraintsMaxHeaderDepende
 import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
 import NameValueUnitsHeaderCalcInput from './NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
+import { logValue } from '../logUsage';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -92,6 +93,7 @@ class SymbolValue extends Component {
     onChange(event) {
 //        console.log('In SymbolValue.onChange event.target.value=',event.target.value);
        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
+       logValue(this.props.element.name,event.target.value);
     }
 
     onFocus(event) {
@@ -112,6 +114,7 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex);
+        logValue(this.props.element.name,selectedIndex);
         this.state.table[selectedIndex].forEach((value, index) => {
 //            console.log('In SymbolValue.onSelect value=',value,'index=',index);
             if (index > 0) { // Skip the first column
