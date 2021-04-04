@@ -12,16 +12,18 @@ import './odop.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { initialSystemControls } from './initialSystemControls';
 import config from './config';
+import { Beforeunload } from 'react-beforeunload';
+import { logUsage } from './logUsage';
 
 //function loggerMiddleware({ getState }) {
 //    return next => action => {
 //      console.log('will dispatch', action);
-//      
+//
 //      // Call the next dispatch method in the middleware chain.
 //      const returnValue = next(action)
-//      
+//
 //      console.log('state after dispatch', getState());
-//      
+//
 //      // This will likely be the action itself, unless
 //      // a middleware further in chain changed it.
 //      return returnValue
@@ -39,4 +41,17 @@ const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispa
 // Create a store with an empty model where type is null
 const store = createStore(reducers, { user: null, name: config.url.name, view: config.url.view, model: { type: null, system_controls: initialSystemControls }}, middleware);
 
-ReactDOM.render(<div id="root2"><Spinner /><MessageModal /><Provider store={store}><Router><Routes /></Router></Provider></div>, document.getElementById('root'));
+ReactDOM.render(
+    <div id="root2">
+        <Beforeunload onBeforeunload={(event) => {
+            logUsage('event', 'BeforeUnload', { 'event_label': ''});
+        }} />
+        <Spinner />
+        <MessageModal />
+        <Provider store={store}>
+            <Router>
+                <Routes />
+            </Router>
+        </Provider>
+    </div>,
+    document.getElementById('root'));

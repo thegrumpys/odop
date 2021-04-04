@@ -16,7 +16,7 @@ Number.prototype.toODOPPrecision = function() {
 };
 
 class NameValueUnitsRowIndependentVariable extends Component {
-    
+
     constructor(props) {
 //        console.log('In NameValueUnitsRowIndependentVariable.constructor props=',props);
         super(props);
@@ -33,7 +33,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
             };
         }
     }
-    
+
     componentDidUpdate(prevProps) {
 //        console.log('In NameValueUnitsRowCalcInput.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
@@ -50,40 +50,40 @@ class NameValueUnitsRowIndependentVariable extends Component {
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
         logValue(this.props.element.name,event.target.value);
     }
-    
+
     onFocus(event) {
 //        console.log("In NameValueUnitsRowIndependentVariable.onFocus event.target.value=", event.target.value);
         this.setState({
             focused: true
         });
     }
-    
+
     onBlur(event) {
 //        console.log("In NameValueUnitsRowIndependentVariable.onBlur event.target.value=", event.target.value);
         this.setState({
             focused: false
         });
     }
-    
+
     onSelect(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex);
         logValue(this.props.element.name,selectedIndex);
     }
-    
+
     onSet() {
 //        console.log('In NameValueUnitsRowIndependentVariable.onSet');
         this.props.fixSymbolValue(this.props.element.name);
-        logValue(this.props.element.name,'FIXED');
+        logValue(this.props.element.name,'FIXED','FixedFlag');
     }
-    
+
     onReset() {
 //        console.log('In NameValueUnitsRowIndependentVariable.onReset');
         this.props.freeSymbolValue(this.props.element.name);
-        logValue(this.props.element.name,'FREE');
+        logValue(this.props.element.name,'FREE','FixedFlag');
     }
-    
+
     render() {
 //        console.log('In NameValueUnitsRowIndependentVariable.render this=',this);
         // =======================================
