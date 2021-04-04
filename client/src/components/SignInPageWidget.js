@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withOktaAuth } from '@okta/okta-react';
 import { changeUser, saveAutoSave } from '../store/actionCreators';
-import { logUsage } from '../../logUsage';
+import { logUsage } from '../logUsage';
 
 class SignInPageWidget extends Component {
   componentDidMount() {
