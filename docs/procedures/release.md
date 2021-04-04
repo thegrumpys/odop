@@ -92,6 +92,9 @@ Set the user field = NULL.
 &nbsp;
 
 B. **DO first for STAGING and then do again for PRODUCTION environments**
+1. If operating on the production system (ignore for staging), check for active users on the production system; put the production system in maintenance mode.
+   To enable maintenance mode:  
+   heroku maintenance:on -a odop
 1. If no changes to dynamic runtime configuration variables skip forward to [Database Stuff](release#databaseStuff).
 &nbsp;
 1. If not logged into Heroku, go to the Heroku Website and login in.
@@ -116,9 +119,6 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
 <a id="databaseStuff"></a>
 &nbsp;
 1. **Database Stuff** &nbsp; If this release has no database impact, skip forward to [Publish to Heroku](release#publish2Heroku).
-1. If operating on the production system database (ignore for staging), check for active users on the production system; put the production system in maintenance mode.
-   To enable maintenance mode:  
-   heroku maintenance:on -a odop
 1. If the database does not exist or is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB)
 to create and format the database tables using the create.sql file.
 Do this for staging and/or production databases as appropriate.   
