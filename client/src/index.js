@@ -41,6 +41,8 @@ const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispa
 // Create a store with an empty model where type is null
 const store = createStore(reducers, { user: null, name: config.url.name, view: config.url.view, model: { type: null, system_controls: initialSystemControls }}, middleware);
 
+logUsage('event', 'Index', { 'event_label': ''});
+
 ReactDOM.render(
     <div id="root2">
         <Beforeunload onBeforeunload={(event) => {
