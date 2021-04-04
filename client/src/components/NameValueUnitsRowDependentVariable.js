@@ -27,13 +27,13 @@ class NameValueUnitsRowDependentVariable extends Component {
     onSet() {
 //        console.log('In NameValueUnitsRowDependentVariable.onSet');
         this.props.fixSymbolValue(this.props.element.name);
-        logValue(this.props.element.name,'FIXED','FixedFlag');
+        logValue(this.props.element.name,'FIXED','FixedFlag',false);
     }
 
     onReset() {
 //        console.log('In NameValueUnitsRowDependentVariable.onReset');
         this.props.freeSymbolValue(this.props.element.name);
-        logValue(this.props.element.name,'FREE','FixedFlag');
+        logValue(this.props.element.name,'FREE','FixedFlag',false);
     }
 
     render() {

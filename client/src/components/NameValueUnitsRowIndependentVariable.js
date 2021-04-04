@@ -75,13 +75,13 @@ class NameValueUnitsRowIndependentVariable extends Component {
     onSet() {
 //        console.log('In NameValueUnitsRowIndependentVariable.onSet');
         this.props.fixSymbolValue(this.props.element.name);
-        logValue(this.props.element.name,'FIXED','FixedFlag');
+        logValue(this.props.element.name,'FIXED','FixedFlag',false);
     }
 
     onReset() {
 //        console.log('In NameValueUnitsRowIndependentVariable.onReset');
         this.props.freeSymbolValue(this.props.element.name);
-        logValue(this.props.element.name,'FREE','FixedFlag');
+        logValue(this.props.element.name,'FREE','FixedFlag',false);
     }
 
     render() {

@@ -56,9 +56,9 @@ function flushBuffer() {
     }
 }
 
-export function logValue(name,value,suffix='') {
+export function logValue(name,value,suffix='',merge=true) {
 //    console.log('In logValue name=',name,'value=',value,'suffix=',suffix);
-    if (name === lastName && suffix === lastSuffix) {
+    if (name === lastName && suffix === lastSuffix && merge === true) {
         lastValue = value;
     } else {
         flushValue(); // Flush the last name & value

@@ -24,12 +24,12 @@ class ConstraintMaxRowIndependentVariable extends Component {
 
     onSetIndependentVariableFlagMaxConstrained(event) {
         this.props.setSymbolFlag(this.props.element.name, MAX, CONSTRAINED);
-        logValue(this.props.element.name,'Enabled','MaxConstraintFlag');
+        logValue(this.props.element.name,'Enabled','MaxConstraintFlag',false);
     }
 
     onResetIndependentVariableFlagMaxConstrained(event) {
         this.props.resetSymbolFlag(this.props.element.name, MAX, CONSTRAINED);
-        logValue(this.props.element.name,'Disabled','MaxConstraintFlag');
+        logValue(this.props.element.name,'Disabled','MaxConstraintFlag',false);
     }
 
     onChangeIndependentVariableMaxConstraint(event) {

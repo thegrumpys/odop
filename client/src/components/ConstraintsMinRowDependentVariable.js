@@ -24,12 +24,12 @@ class ConstraintsMinRowDependentVariable extends Component {
 
     onSetDependentVariableFlagMinConstrained(event) {
         this.props.setSymbolFlag(this.props.element.name, MIN, CONSTRAINED);
-        logValue(this.props.element.name,'Enabled','MinConstraintFlag');
+        logValue(this.props.element.name,'Enabled','MinConstraintFlag',false);
     }
 
     onResetDependentVariableFlagMinConstrained(event) {
         this.props.resetSymbolFlag(this.props.element.name, MIN, CONSTRAINED);
-        logValue(this.props.element.name,'Disabled','MinConstraintFlag');
+        logValue(this.props.element.name,'Disabled','MinConstraintFlag',false);
     }
 
     onChangeDependentVariableMinConstraint(event) {
