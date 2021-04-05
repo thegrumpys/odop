@@ -76,7 +76,7 @@ Set the user field = NULL.
 1. **Test For Console Output** &nbsp; Bring up Google Chrome and enable View Console / Debugger.
    Test various input and menu functions and verify no unexpected console.log output.
    Use regular expression search: "^\s*console.log" to find non-commented out console.log lines.
-   Most console.log output is acceptable in client/src/store/middleware/seek.js, client/src/registerServiceWorker.js, and server.js
+   Most console.log output is acceptable in client/src/store/middleware/seek.js, client/src/registerServiceWorker.js, server.js and client\public\dynoLoading.js.
 1. Shutdown server and client under your development environment.  
 &nbsp;
 1. In server, run "npm test" and verify test cases executed successfully.
@@ -160,9 +160,10 @@ git push heroku[-staging] +HEAD:master
 1. If maintenance mode was previously enabled, disable maintenance mode:  
 heroku maintenance:off -a odop
 1. Confirm that the http://odop-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version Major.Minor.Patch displays.
+1. Update docs/About/messageOfTheDay.md to announce availability of the new version.
 1. **Publish to SpringDesignSoftware.org**. &nbsp; For production only, 
 while positioned in the git/odop directory, push to SpringDesignSoftware.org using the command line:   
-git push springdesignsoftware master.   
+git push springdesignsoftware master   
 Verify no unexpected error messages during build on production.
 1. Confirm that the http://SpringDesignSoftware.org/odop/docs website is operational and that documentation displays.
 
