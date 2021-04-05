@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated March 21, 2021   
+**Message-of-the-day** &nbsp; updated April 05, 2021   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -8,15 +8,13 @@ With the recent changes in user account features and introduction of Calculator 
 browser requirements have changed. 
 For details, see: [Requirements](requirements)  
 
-ODOP version 4.0 was released February 27, 2021. 
-Change details are available in GitHub at: 
-[ODOP release 4.0](https://github.com/thegrumpys/odop/milestone/39?closed=1). 
+[ODOP version 4.0](https://github.com/thegrumpys/odop/milestone/39?closed=1) was released February 27, 2021.  
 Opening a design saved in a prior version will produce a pop-up message. 
 See: [MIGRATION](../Help/terminology#migration). 
 
-ODOP version 4.0.1 was released March 21, 2021. 
-Change details are available in GitHub at: 
-[ODOP release 4.0.1](https://github.com/thegrumpys/odop/milestone/40?closed=1). 
+[ODOP version 4.0.1](https://github.com/thegrumpys/odop/milestone/40?closed=1) was released March 21, 2021.   
+[ODOP version 4.0.2](https://github.com/thegrumpys/odop/milestone/46?closed=1) was released April 04, 2021.   
+Follow the links above to see change details in GitHub.  
 
 ODOP is [Experimental Software](experimental).  
 
