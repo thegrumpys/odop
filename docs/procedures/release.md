@@ -92,12 +92,15 @@ Set the user field = NULL.
 &nbsp;
 
 B. **DO first for STAGING and then do again for PRODUCTION environments**
+1. If not logged into Heroku, go to the Heroku Website and log in.
+1. Use the Heroku console settings tab to check the currently configured version of the Heroku stack. 
+   Upgrade the Heroku stack for the staging or production system as appropriate. 
+   The change will not be final until after the next deployment.  
 1. If operating on the production system (ignore for staging), check for active users on the production system; put the production system in maintenance mode.
-   To enable maintenance mode:  
+   Maintenance mode may be enabled in the Heroku console settings tab or from the command line with:  
    heroku maintenance:on -a odop
 1. If no changes to dynamic runtime configuration variables skip forward to [Database Stuff](release#databaseStuff).
 &nbsp;
-1. If not logged into Heroku, go to the Heroku Website and login in.
 1. For handling dynamic runtime configuration variables in Heroku only:
    From Dashboard, expand "odop" for production or "odop-staging" for the staging system. Go to settings/Config Vars. Click "Reveal Config Vars".
    Update Heroku Configuration Variables JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for staging, or production.
