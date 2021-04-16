@@ -25,14 +25,14 @@ export const execute = {
                     Deflections are outputs. 
                     There seems to be a requirement to supply a value for the number of coils. 
                     <b> But wait! There is more. </b>
-                    Continue reading to find that Calculator view provides access to the backsolving features (
+                    Continue reading to learn how <b>right click</b> in Calculator view provides access to the backsolving features (
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#fix" target="_blank" rel="noopener noreferrer">FIX / FREE</a>,&nbsp; 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#constraints" target="_blank" rel="noopener noreferrer">constraints</a>&nbsp; 
                     and
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/search" target="_blank" rel="noopener noreferrer">Search</a>&nbsp; 
                     ) that allow flexibility on how your design problem is specified.  
                     For example, it is possible to specify force and deflection at two points
-                    and then let the software determine the necessary wire diameter, coil diameter and
+                    and then let the Search feature determine the necessary wire diameter, coil diameter and
                     number of coils. 
                     </p>
 
@@ -143,10 +143,10 @@ export const execute = {
                     <p>
                     In summary: 
                     <br />
-                    Enter input values in the white fields.
-                    Be sure to select appropriate values for Material_Type, End_Type and Wire_Dia.
-                    View the corresponding Calculator outputs.
-                    Use <b>right click</b> to access FIX / FREE and constraints. 
+                    Use <b>right click</b> to specify what is known or desired in order to describe 
+                    your design objectives in terms of FIX, FREE and constraints.  
+                    Leave unspecified what is to be calculated.  
+                    Be sure to select appropriate values for Material_Type and End_Type.
                     Use the <b>Action : Search</b> menu to find a feasible design. 
                     Use the <b>Action : Seek</b> menu to optimize a feasible design. 
                     Switch to other views to utilize additional capabilities of ODOP:Spring.
