@@ -20,6 +20,7 @@ The following terms have special meanings used in the context of this program.
 [SEARCH](terminology#search)  
 [ODOP DESIGN LIBRARY](terminology#designLib)  
 [MIGRATION](terminology#migration)  
+[SPRING DESIGN VARIABLE NAMES](terminology#sdnames)  
 
 ___
 
@@ -340,6 +341,23 @@ A change in software version may or may not be associated with a change in the
 design model version number for any design type.
 A change in the version number of any design type will usually be associated with a change in the 
 minor or major field of the ODOP software version.   
+
+
+___
+
+<a id="sdnames"></a>  
+___
+
+**SPRING DESIGN VARIABLE NAMES**   
+
+See:
+ - [Terms including "Factor of Safety" common to all spring types](SpringDesign/spring_oview) 
+ - [Compression spring](DesignTypes/c_spring) 
+ - [Extension spring](DesignTypes/e_spring) 
+ - [Torsion spring](DesignTypes/t_spring) 
+
+[Variable names illustrated on compression spring Force-Deflection diagram:](png/ForceVsDeflection.png)
+
 
 ___
 
