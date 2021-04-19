@@ -51,7 +51,7 @@ function flushBuffer() {
 //    console.log('In flushBuffer buffer=',buffer);
     flushValue();
     if (buffer !== '') {
-        logIt('event', 'Buffer', buffer);
+        logIt('event', 'Values', buffer);
         buffer = '';
     }
 }
