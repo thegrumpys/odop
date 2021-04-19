@@ -13,15 +13,16 @@ On the pop-up, press the "Provision" button
 Edit your local .env file and add a new entry for JAWSDB\_**xxxx**\_URL   
 Note:  
 See Heroku Dashboard Resources tab for JAWS DB:  
-Production is prntcdsszgqddxh8; staging is d9bw76r236auqu3s, test is cmyr2m3s55btzgvr, and local/development is s6v0edrsu4v1u49m.   
+Old Production is prntcdsszgqddxh8; New Production is   vsm51n2ipc6nvcy6; staging is d9bw76r236auqu3s, test is cmyr2m3s55btzgvr, and local/development is s6v0edrsu4v1u49m.   
    
-Previously: Production has no color; staging is AMBER, test is TEAL, and local/development is CYAN.   
+Previously: Old Production has no color; staging is AMBER, test is TEAL, and local/development is CYAN.   
 
 Easier to read summary:  
 
 Role | Old | New | DB name
 --- | --- | --- | ---
-Production | no color | CONVEX | prntcdsszgqddxh8
+New Production | &nbsp; | CUBED | vsm51n2ipc6nvcy6
+Old Production | no color | CONVEX | prntcdsszgqddxh8
 Staging | AMBER | ROUND | d9bw76r236auqu3s
 Test | TEAL | OPAQUE | cmyr2m3s55btzgvr
 Development | CYAN | GRACEFUL | s6v0edrsu4v1u49m
