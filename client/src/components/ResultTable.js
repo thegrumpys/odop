@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
-import { Table, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Table, OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import FeasibilityIndicator from './FeasibilityIndicator';
+import { search, saveAutoSave } from '../store/actionCreators';
+import { logUsage } from '../logUsage';
 
 class ResultTable extends Component {
     
+    constructor(props) {
+        super(props);
+        this.onSearchButton = this.onSearchButton.bind(this);
+    }
+
+    onSearchButton(event) {
+        logUsage('event', 'ActionSearch', { 'event_label': 'ActionSearch'});
+        this.props.saveAutoSave();
+        this.props.search();
+    }
+
     render() {
 //        console.log('In ResultTable.render this=',this);
 //        From Issue #365:
@@ -16,18 +29,23 @@ class ResultTable extends Component {
 //            > 4x OBJMIN     NOT FEASIBLE            Red              #dc3545
         var feasibility_string;
         var feasibility_class;
+        var display_search_button;
         if (this.props.objective_value > 4*this.props.system_controls.objmin) {
             feasibility_string = "NOT FEASIBLE";
             feasibility_class = "text-not-feasible";
+            display_search_button = true;
         } else if (this.props.objective_value > this.props.system_controls.objmin) {
             feasibility_string = "CLOSE TO FEASIBLE";
             feasibility_class = "text-close-to-feasible";
+            display_search_button = true;
         } else if (this.props.objective_value > 0.0) {
             feasibility_string = "FEASIBLE";
             feasibility_class = "text-feasible";
+            display_search_button = false;
         } else {
             feasibility_string = "STRICTLY FEASIBLE";
             feasibility_class = "text-strictly-feasible";
+            display_search_button = false;
         }
         return (
             <React.Fragment>
@@ -42,7 +60,7 @@ class ResultTable extends Component {
                             <td width="67%" className={feasibility_class + " text-left"}>{feasibility_string}</td>
                         </tr>
                         <tr>
-                            <th width="33%" id="Message">
+                            <th width="33%" id="Message" className="pb-3">
                                 <OverlayTrigger placement="top" overlay={<Tooltip>Status feedback message from solution process</Tooltip>}>
                                     <span>Message:</span>
                                 </OverlayTrigger>
@@ -60,6 +78,9 @@ class ResultTable extends Component {
                                 </OverlayTrigger>
                             </td>
                         </tr>
+                        <tr>
+                            <td align="center">{display_search_button ? <Button variant="primary" size="sm" onClick={this.onSearchButton} disabled={!display_search_button}>Search</Button> : ''}</td>
+                        </tr>
                     </tbody>
                 </Table>
             </React.Fragment>
@@ -75,4 +96,9 @@ const mapStateToProps = state => ({
     violated_constraint_count: state.model.result.violated_constraint_count
 });
 
-export default connect(mapStateToProps)(ResultTable);
+const mapDispatchToProps = {
+    search: search,
+    saveAutoSave: saveAutoSave
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResultTable);

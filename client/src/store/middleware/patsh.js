@@ -49,8 +49,8 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
             if (s >= objmin) {
                 itno++;
                 if (itno > maxit) {
-                    NCODE = 'MAXIT';
-                    NCODE += ' '+itno+' ITER.';
+                    NCODE = 'Search terminated when iteration count exceeded the maximum limit (MAXIT)';
+                    NCODE += ' after '+itno+' iterations.';
                     return NCODE;
                 }
                 var tht = [];
@@ -66,22 +66,22 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
         }
         if (s + tol * Math.abs(ssi) >= ssi) {
             if (del < delmin) {
-                NCODE = 'DELMIN';
+                NCODE = 'Search terminated when step size reached the minimum limit (DELMIN)';
                 if (itno <= 2)
-                    NCODE += ' - SHORT SEARCH';
+                    NCODE += '. Low iteration count may produce low precision results.';
                 else
-                    NCODE += ' '+itno+' ITER.';
+                    NCODE += ' after '+itno+' iterations.';
                 return NCODE;
             }
             del = del / 1.9;
         }
         ssi = s;
     }
-    NCODE = 'OBJMIN';
+    NCODE = 'Search terminated when design reached feasibility (Objective value is less than OBJMIN)';
     if (itno <= 2)
-        NCODE += ' - SHORT SEARCH';
+        NCODE += '. Low iteration count may produce low precision results.';
     else
-        NCODE += ' '+itno+' ITER.';
+        NCODE += ' after '+itno+' iterations.';
     for (let i = 0; i < psi.length; i++)
         psi[i] = phi[i];
     return NCODE;
