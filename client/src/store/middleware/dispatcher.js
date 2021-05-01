@@ -53,6 +53,12 @@ export const dispatcher = store => next => action => {
         propagate(store);
         setSclDen(store);
         updateViolationsAndObjectiveValue(store);
+        design = store.getState();
+        if (design.model.result.objective_value > design.model.system_controls.objmin) {
+            store.dispatch(changeResultTerminationCondition('Use Search button to find a feasible design'));
+        } else {
+            store.dispatch(changeResultTerminationCondition(''));
+        }
         break;
 
     case CHANGE_SYMBOL_VALUE:
@@ -92,6 +98,12 @@ export const dispatcher = store => next => action => {
         invokeEquationSet(store);
         propagate(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
+        design = store.getState();
+        if (design.model.result.objective_value > design.model.system_controls.objmin) {
+            store.dispatch(changeResultTerminationCondition('Use Search button to find a feasible design'));
+        } else {
+            store.dispatch(changeResultTerminationCondition(''));
+        }
         break;
     case FIX_SYMBOL_VALUE:
         design = store.getState();
@@ -154,6 +166,12 @@ export const dispatcher = store => next => action => {
         break;
     case CHANGE_SYMBOL_CONSTRAINT:
         updateViolationsAndObjectiveValue(store);
+        design = store.getState();
+        if (design.model.result.objective_value > design.model.system_controls.objmin) {
+            store.dispatch(changeResultTerminationCondition('Use Search button to find a feasible design'));
+        } else {
+            store.dispatch(changeResultTerminationCondition(''));
+        }
         break;
     case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS:
         updateViolationsAndObjectiveValue(store);

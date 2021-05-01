@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
-import { changeSymbolValue, fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
+import { fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
@@ -72,7 +72,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToDependentVariableProps = {
-    changeSymbolValue: changeSymbolValue,
     fixSymbolValue: fixSymbolValue,
     freeSymbolValue: freeSymbolValue
 };
