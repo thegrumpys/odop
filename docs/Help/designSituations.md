@@ -39,18 +39,32 @@ in order to produce a useful result with Seek.
 In the Rectangular Solid design type, 
 an over-specified situation can be created by establishing a minimum constraint on Volume
 while there is also a maximum constraint on Weight.
-Weight and Volume are directly linked by the material density, 
+Weight and Volume are directly linked by the material Density, 
 a Calculation Input that is not available for Search to adjust.
 Thus, depending on the values, 
 finding a feasible solution may be impossible.
 
 Coil spring design offers many such opportunities to over-specify a design situation.
 For example, 
-establishing force and deflection at two load points completely determines
-the straight line force-deflection relationship of a compression spring.
-If additional constraints are imposed on free length (deflection at zero load)
-or solid height, the problem becomes over-specified.
-This is the same situation as attempting to specify a straight line with more than two points.
+[Hooke's Law](https://en.wikipedia.org/wiki/Hooke%27s_law) says that 
+the force-deflection relationship of coil springs is linear. 
+
+ - This discussion applies to helical coil compression, extension and torsion springs 
+that have the properties of uniform pitch and cylindrical shape with loading along the coil axis 
+and ignores deviation from linearity caused by real-world issues such as 
+tolerances and small geometric imperfections. 
+
+Two points define a line.
+For compression and torsion springs, 
+one of those two points is the requirement of zero force at zero deflection. 
+ODOP:Spring will allow the user to specify force and deflection at two load points.
+If the line defined by those two points does not pass through zero force at zero deflection, 
+the search process will likely determine the result is "NOT FEASIBLE".
+In summary, this is the same situation as attempting to specify a straight line with more than two points. 
+You will get a feasible design only if all the points are on the same straight line.
+
+For extension springs, the potential to vary initial tension (within limits) may allow the user
+some flexibility in specifying force and deflection at two load points.
 
 
 <!---  begin comment
