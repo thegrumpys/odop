@@ -175,6 +175,12 @@ export const dispatcher = store => next => action => {
         break;
     case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS:
         updateViolationsAndObjectiveValue(store);
+        design = store.getState();
+        if (design.model.result.objective_value > design.model.system_controls.objmin) {
+            store.dispatch(changeResultTerminationCondition('Use Search button to find a feasible design'));
+        } else {
+            store.dispatch(changeResultTerminationCondition(''));
+        }
         break;
     case SET_SYMBOL_FLAG:
 //        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action);
