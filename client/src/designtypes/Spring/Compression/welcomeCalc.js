@@ -31,7 +31,7 @@ export const execute = {
                     and
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/search" target="_blank" rel="noopener noreferrer">Search</a>&nbsp; 
                     ) that allow flexibility on how your design problem is specified.  
-                    For example, it is possible to specify force and deflection at two points
+                    For example, it is possible to specify force and deflection or spring rate 
                     and then let the Search feature determine the necessary wire diameter, coil diameter and
                     number of coils. 
                     </p>
