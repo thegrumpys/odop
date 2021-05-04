@@ -23,7 +23,8 @@ export const execute = {
                     At first glance, ODOP:Spring Calculator view appears to be based on applied load.
                     Forces are inputs. 
                     Deflections are outputs. 
-                    There seems to be a requirement to supply a value for the number of coils. 
+                    There seems to be a requirement to supply a value for the total number of coils 
+                    (Coils_T is a white input field). 
                     <b> But wait! There is more. </b>
                     Continue reading to learn how <b>right click</b> in Calculator view provides access to the backsolving features (
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#fix" target="_blank" rel="noopener noreferrer">FIX / FREE</a>,&nbsp; 
@@ -38,7 +39,7 @@ export const execute = {
 
                     <p>
                     Push the blue "Next" button in the upper right to show the next page of instructions, hints and tips. 
-                    Push the darker gray "Exit" button to close this light green panel. 
+                    Push the darker gray "Exit" button to close (hide) this light green panel. 
                     </p>
                 </React.Fragment>
             ),
@@ -70,14 +71,17 @@ export const execute = {
                     sessions provide additional detail on these concepts.
                     For now, Firefox users need to use Advanced View in order to access FIX / FREE and constraints. 
                     </p>
-
+                    
                     <p>
-                    The multi-colored 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/feasibility" target="_blank" rel="noopener noreferrer">Feasibility Status indicator</a>,&nbsp; 
-                    provides feedback on the viability of the current design.
-                    See also: 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; and 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#feasibleRegion" target="_blank" rel="noopener noreferrer">Feasible Region</a>.&nbsp; 
+                    Expanded descriptions are available as tooltips for many elements of the Calculator view.
+                    Hover the cursor (tap on a touch screen) over headings, labels, and variable names to learn more.
+                    &nbsp; <b>Variable names</b> are illustrated on this compression spring 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/png/ForceVsDeflection.png" target="_blank" rel="noopener noreferrer">Force-Deflection diagram</a>. 
+                    Additional insights are available in the  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp; 
+                    plus 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    sessions. 
                     </p>
                     <br />
                 </React.Fragment>
@@ -91,6 +95,15 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
+                    The multi-colored 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/feasibility" target="_blank" rel="noopener noreferrer">Feasibility Status indicator</a>,&nbsp; 
+                    provides feedback on the viability of the current design.
+                    See also: 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; and 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#feasibleRegion" target="_blank" rel="noopener noreferrer">Feasible Region</a>.&nbsp; 
+                    </p>
+                    
+                    <p>
                     The Wire_Dia field of Calculator view provides a list of commonly available wire diameters 
                     that depends on the selected Material_Type and 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/unitsUSmetric" target="_blank" rel="noopener noreferrer">units (U.S., metric)</a>.&nbsp; 
@@ -99,21 +112,12 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Tooltips are available for many elements of the Calculator view.
-                    Hover the cursor (tap on a touch screen) to learn about these elements.
-                    Additional insights are available in the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp; 
-                    plus 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
-                    sessions.
-                    </p>
-                    
-                    <p>
                     Use the <b>View</b> menu above to switch views. 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewAdvanced" target="_blank" rel="noopener noreferrer">Advanced view</a>&nbsp; 
                     provides access to the full range of ODOP:Spring features.
                     Reports present additional information about your current spring design.
                     </p>
+                    <br />
                 </React.Fragment>
             ),
             actions: [
