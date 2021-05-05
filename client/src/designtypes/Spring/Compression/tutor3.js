@@ -80,7 +80,7 @@ export const execute = {
                     uses to measure how close a given design is to being feasible.
                     It is formed by adding a contribution from all the violated constraints.
                     Thus, as in this case, if all the constraints are satisfied, the
-                    objective value is zero and we have a feasible design.<br />
+                    objective value is zero and we have a "strictly feasible" design.<br />
                     <br />
                     Let's find out what a violated constraint looks like.<br />
                     <br />
@@ -181,7 +181,7 @@ export const execute = {
                     
                     <p>
                     Now that we have covered the concept of constraints, we can describe
-                    the use of FIX on a state variable in more precise terms.  The FIX
+                    the use of FIX on a Dependent Variable in more specific terms.  The FIX
                     of a Dependent Variable is the creation of a two sided constraint that
                     is more heavily weighted than a normal constraint.  Thus when we
                     used FIX to establish a specific deflection in the earlier section
@@ -309,6 +309,11 @@ export const execute = {
                     <p>
                     This time, let's see if we can handle a design that has both force and
                     length specified at each of two points.
+                    As long as L_Free (spring length in the free, no load condition) is in FREE status,
+                    this should not be a problem. 
+                    You may want to review 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; 
+                    to better understand the limitations of specifying force and deflection at two points.
                     </p>
                     
                     <p>
