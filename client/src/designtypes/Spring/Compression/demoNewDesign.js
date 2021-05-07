@@ -208,7 +208,7 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                logUsage('event','longdemo', { 'event_label': 'Page 09 of 14' }),
+                logUsage('event','demoNewDesign', { 'event_label': 'Page 09 of 14' }),
                 search()
             ]
         },
@@ -297,7 +297,7 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                logUsage('event','longdemo', { 'event_label': 'Page 12 of 14' }),
+                logUsage('event','demoNewDesign', { 'event_label': 'Page 12 of 14' }),
                 search()
             ]
         },

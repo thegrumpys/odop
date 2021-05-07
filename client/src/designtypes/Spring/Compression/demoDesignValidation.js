@@ -9,8 +9,12 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    The following example illustrates the use of ODOP:Spring to check
+                    The following example illustrates the use of ODOP:Spring to validate 
                     the design of a compression spring. 
+                    Also known as "design check", this is a straightforward calculation of 
+                    stresses and other figures of merit for a design with known
+                    wire diameter, coil diameter, number of coils, free length and 
+                    applied loads or deflections. 
                     </p>
                     
                     <p> 
@@ -233,7 +237,7 @@ export const execute = {
                     <p>
                     The next demonstration problem provides a more 
                     detailed example of spring design from original specifications.  
-                    Select "longdemo" from the <b>Help : Demo...</b> menu item.
+                    Select "demoNewDesign" from the <b>Help : Demo...</b> menu item.
                     </p>
                     
                     <p>
