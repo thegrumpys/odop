@@ -289,14 +289,19 @@ ___
 ___
 
 **SEARCH**    
+Search (<b>Action : Search</b> menu item) is used to find a feasible design.
+
 The [Search](search) algorithm manipulates the values of independent variables 
-so as to determine a minimum value of the objective function. 
-For more detail, see the [OBJECTIVE FUNCTION](terminology#obj) entry above.
-The objective function is constructed such that 
-(within the limits of the physical reality represented by the design equations)
-constraints and dependent variable FIX violations will be minimized in the process.
-Thus, the solution provided by the Search will represent a solution to the 
-designer's goals as expressed by constraints and FIXes.
+so as to minimize the Objective Value. 
+Because the [OBJECTIVE FUNCTION](terminology#obj) is constructed as a sum of 
+constraint and dependent variable FIX violations, 
+minimizing the Objective Value will minimize violations and 
+thus move in the direction of a feasible design.
+The solution provided by  Search represents the best available solution to the 
+designer's goals as expressed by constraints and FIXes. 
+If a solution that meets all of these goals, is not available, 
+the search process converges to a compromise.
+Typically, this compromise violates multiple constraints.
 
 While the ODOP software is modular and can potentially support multiple numerical search algorithms, 
 the current ODOP software release supplies only one such numerical search algorithm.
@@ -350,13 +355,13 @@ ___
 
 **SPRING DESIGN VARIABLE NAMES**   
 
-See:
+[Variable names illustrated on compression spring Force-Deflection diagram:](png/ForceVsDeflection.png)
+
+See also:
  - [Terms including "Factor of Safety" common to all spring types](SpringDesign/spring_oview) 
  - [Compression spring](DesignTypes/c_spring) 
  - [Extension spring](DesignTypes/e_spring) 
  - [Torsion spring](DesignTypes/t_spring) 
-
-[Variable names illustrated on compression spring Force-Deflection diagram:](png/ForceVsDeflection.png)
 
 
 ___
