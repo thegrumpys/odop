@@ -263,6 +263,7 @@ export const dispatcher = store => next => action => {
         break;
     case SEEK:
         seek(store, action);
+        updateViolationsAndObjectiveValue(store);
         break;
 
     default:
