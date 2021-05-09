@@ -385,7 +385,7 @@ it('middleware search1 from initial state', () => {
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(3492.524417147412);
     expect(design.model.result.objective_value).toEqual(0.14664192222304165);
-    expect(design.model.result.termination_condition).toEqual("DELMIN 12 ITER.");
+    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 12 iterations.");
     expect(design.model.result.violated_constraint_count).toEqual(4);
 });
 
@@ -415,7 +415,7 @@ it('middleware search2: initial state w/ single SV constraint modified', () => {
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(8469.056480847505);
     expect(design.model.result.objective_value).toEqual(0.0);
-    expect(design.model.result.termination_condition).toEqual("OBJMIN 7 ITER.");
+    expect(design.model.result.termination_condition).toEqual("Search terminated when design reached feasibility (Objective value is less than OBJMIN) after 7 iterations.");
     expect(design.model.result.violated_constraint_count).toEqual(0);
 });
 
@@ -446,7 +446,7 @@ it('middleware search3: initial state w/ single DP FIXed', () => {
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(3597.9061295858437);
     expect(design.model.result.objective_value).toEqual(0.2379406084611994);
-    expect(design.model.result.termination_condition).toEqual("DELMIN 9 ITER.");
+    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 9 iterations.");
     expect(design.model.result.violated_constraint_count).toEqual(3);
 });
 
@@ -479,7 +479,7 @@ it('middleware search4: initial state w/ single SV FIXed', () => {
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(3752.0821052003944);
     expect(design.model.result.objective_value).toEqual(0.10531583651535117);
-    expect(design.model.result.termination_condition).toEqual("DELMIN 15 ITER.");
+    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 15 iterations.");
     expect(design.model.result.violated_constraint_count).toEqual(4);
 });
 
@@ -511,7 +511,7 @@ it('middleware search5: initial state w/ 3 constraints modified', () => {
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(3848.4668895888885);
     expect(design.model.result.objective_value).toEqual(0.29720134447532803);
-    expect(design.model.result.termination_condition).toEqual("DELMIN 8 ITER.");
+    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 8 iterations.");
     expect(design.model.result.violated_constraint_count).toEqual(4);
 });
 
@@ -543,7 +543,7 @@ it('middleware search6: initial state w/ 3 constraints modified further', () => 
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(4089.103647517854);
     expect(design.model.result.objective_value).toEqual(0.47279118427044764);
-    expect(design.model.result.termination_condition).toEqual("DELMIN 13 ITER.");
+    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 13 iterations.");
     expect(design.model.result.violated_constraint_count).toEqual(4);
 });
 
@@ -578,7 +578,7 @@ it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', ()
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(4187.112814828608);
     expect(design.model.result.objective_value).toEqual(0.44359387986703586);
-    expect(design.model.result.termination_condition).toEqual("DELMIN 16 ITER.");
+    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 16 iterations.");
     expect(design.model.result.violated_constraint_count).toEqual(4);
 });
 
@@ -612,7 +612,7 @@ it('middleware seek1 min stress; feasible start; no fixed', () => {
     expect(design.model.symbol_table[sto.AREA].value).toEqual(0.7934296216257505);
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(6264.506274188985);
-    expect(design.model.result.objective_value).toEqual(0.00004841950763854388);
+    expect(design.model.result.objective_value).toEqual(0.00008792778259151755);
     expect(design.model.result.termination_condition).toEqual("SEEK COMPLETED");
     expect(design.model.result.violated_constraint_count).toEqual(3);
 });
@@ -647,7 +647,7 @@ it('middleware seek2 min stress; alt start pt, opened constraints, feasible star
     expect(design.model.symbol_table[sto.AREA].value).toEqual(1.7650777546433516);
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(3242.6699011968067);
-    expect(design.model.result.objective_value).toEqual(0.00004572617379211771);
+    expect(design.model.result.objective_value).toEqual(0.000030201697511567047);
     expect(design.model.result.termination_condition).toEqual("SEEK COMPLETED");
     expect(design.model.result.violated_constraint_count).toEqual(2);
 });
@@ -676,7 +676,7 @@ it('middleware seek3 min stress; infeasible start; no fixed', () => {
     expect(design.model.symbol_table[sto.AREA].value).toEqual(1.0661971414805103);
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(3492.473006786572);
-    expect(design.model.result.objective_value).toEqual(0.14668027900694727);
+    expect(design.model.result.objective_value).toEqual(0.1466419122049737);
     expect(design.model.result.termination_condition).toEqual("SEEK COMPLETED");
     expect(design.model.result.violated_constraint_count).toEqual(4);
 });
@@ -712,7 +712,7 @@ it('middleware seek4 min pressure; alt start pt, opened constraints, feasible st
     expect(design.model.symbol_table[sto.AREA].value).toEqual(1.7988432573901598);
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(4658.439766589454);
-    expect(design.model.result.objective_value).toEqual(0.000047222529713772604);
+    expect(design.model.result.objective_value).toEqual(0.00009076104018969269);
     expect(design.model.result.termination_condition).toEqual("SEEK COMPLETED");
     expect(design.model.result.violated_constraint_count).toEqual(2);
 });
@@ -747,7 +747,7 @@ it('middleware seek5 max force; alt start pt, opened constraints, feasible start
     expect(design.model.symbol_table[sto.AREA].value).toEqual(1.8007153280793988);
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(9775.5824538458);
-    expect(design.model.result.objective_value).toEqual(0.0004427903909232145);
+    expect(design.model.result.objective_value).toEqual(0.00011182323691543637);
     expect(design.model.result.termination_condition).toEqual("SEEK COMPLETED");
     expect(design.model.result.violated_constraint_count).toEqual(2);
 });
@@ -791,7 +791,7 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
     expect(design.model.symbol_table[sto.AREA].value).toEqual(1.7809443105282723);
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(3575.778800340361);
-    expect(design.model.result.objective_value).toEqual(0.00001908478702508192);
+    expect(design.model.result.objective_value).toEqual(0.00004903216821127109);
     expect(design.model.result.termination_condition).toEqual("SEEK COMPLETED");
     expect(design.model.result.violated_constraint_count).toEqual(3);
 });

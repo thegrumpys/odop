@@ -75,7 +75,7 @@ it('search without merit', () => {
     expect(design.model.system_controls.show_violations).toEqual(1);
 
     expect(design.model.result.objective_value).toEqual(0.14664192222304165);
-    expect(design.model.result.termination_condition).toEqual("DELMIN 12 ITER.");
+    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 12 iterations.");
     expect(design.model.result.violated_constraint_count).toEqual(4);
 });
 
@@ -166,6 +166,6 @@ it('search with merit', () => {
     expect(design.model.system_controls.show_violations).toEqual(1);
 
     expect(design.model.result.objective_value).toEqual(0.017724895486223562);
-    expect(design.model.result.termination_condition).toEqual("DELMIN 53 ITER.");
+    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 53 iterations.");
     expect(design.model.result.violated_constraint_count).toEqual(3);
 });
