@@ -22,7 +22,7 @@ export const execute = {
                     This demo session is written with the assumption that the reader is already familiar with 
                     basic ODOP concepts and terminology.
                     To get a more introductory experience, 
-                    the compression spring demo sessions named "demo" and "longdemo" are a good place to get started. 
+                    the compression spring demo sessions named "demoDesignValidation" and "demoNewDesign" are a good place to get started. 
                     </p>
                     
                     <p>

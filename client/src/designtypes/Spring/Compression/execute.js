@@ -23,8 +23,8 @@ export function getExecuteNames() {
 
 export function getDemoNames() {
     var result = [
-        'demo',
-        'longdemo',
+        'demoDesignValidation',
+        'demoNewDesign',
         'demo1',
         'demo2',
         'demo3',

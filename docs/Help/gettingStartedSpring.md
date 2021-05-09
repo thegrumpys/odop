@@ -59,7 +59,7 @@ Use the **Help : Demo...** menu item to select the desired demo session.
 
 ![Select Spring Demo](./png/SelectSpringDemo.png "[Select Spring Demo")   
    
-The spring demo sessions named **demo** and **longdemo** are recommended as a good
+The spring demo sessions named **demoDesignValidation** and **demoNewDesign** are recommended as a good
 starting point for new users.   
 
 &nbsp;

@@ -61,8 +61,8 @@ tutor9 |   | Preferences (internal variables) and Properties (notes saved with d
 
 Name | Description | &nbsp;  
 --- | --- | ---  
-demo | Introduction, simple design check (design validation) problem |    
-longdemo | Design a compression spring from original specifications |  
+demo Design Validation | Introduction, simple design validation (design check) problem |    
+demo NewDesign | Design a compression spring from original specifications |  
 demo1 | Spring Mfgrs. Inst. Handbook | compression spring example&nbsp;1    
 demo2 | Spring Mfgrs. Inst. Handbook | compression spring example&nbsp;2  
 demo3 | major spring mfgr design handbook | compression spring example  

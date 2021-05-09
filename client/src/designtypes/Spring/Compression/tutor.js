@@ -117,10 +117,6 @@ export const execute = {
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/gettingStartedSpring" target="_blank" rel="noopener noreferrer">Getting Started (spring)</a>&nbsp; 
                     describes how to launch the first sessions of the spring design Tutorial and the spring design Demo 
                     plus makes a few suggestions on how new users should approach learning the program.
-                    Note that for the compression spring design type, 
-                    the "main page" is actually the first of four "tabs" and 
-                    has the name "Design:" plus a coil spring icon and the name of the current design. 
-                    The remaining tabs are Reports 1 through 3.
                     </p>
                 </React.Fragment>
             )
@@ -258,12 +254,12 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Well, that brought a little color into the ODOP world !
+                    Well, that brought a little more color into the ODOP world !
                     </p>
                     
                     <p>
                     If you scroll down, you can see that the
-                    design now exceeds the 90 percent MAX constraint on %_Avail_Deflect
+                    design now exceeds the 98 percent MAX constraint on %_Avail_Deflect
                     (percentage of available deflection at load point 2).
                     Since a constraint is violated, this design is considered to be
                     "Not Feasible".
@@ -322,10 +318,10 @@ export const execute = {
                     </p>
 
                     <p>
-                    If the program can find a solution that satisfies all the constraints,
-                    it will display "<b>FEASIBLE</b>" in the Result section (immediately below these words).  
+                    If the program can find a solution that completely satisfies all the constraints,
+                    it will display "<b>Strictly FEASIBLE</b>" in the Result section (immediately below these words).  
                     If a satisfactory solution is found, but one or more constraints remain violated by a
-                    trivial amount, the program will display "<b>MARGINALLY FEASIBLE</b>" in the Result section.
+                    trivial amount, the program will display "<b>FEASIBLE</b>" in the Result section.
                     </p>
 
                     <p>

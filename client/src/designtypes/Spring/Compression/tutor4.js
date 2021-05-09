@@ -196,7 +196,14 @@ export const execute = {
                 </p>
                 
                 <p>
-                For this step, the tutorial needs you to take a more active role.
+                In order to save designs into the ODOP cloud based Design Library, you need to be signed-in.
+                If necessary, follow the instructions at   
+                &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/userAccounts" target="_blank" rel="noopener noreferrer">user accounts</a>&nbsp; 
+                to get a free ODOP user account.
+                </p>
+                
+                <p>
+                For this next step, the tutorial needs you to take a more active role.
                 First, go to the <b>File : Properties</b> menu and replace the comment
                 with something unique.
                 If you are not feeling particularly creative, try the words:
@@ -208,7 +215,6 @@ export const execute = {
                 with a unique name of your choice.
                 If you are not feeling particularly creative, try the name "tutor4".
                 </p>
-                <br />
                 </React.Fragment>
             ),
             actions: [

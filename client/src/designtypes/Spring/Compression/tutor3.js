@@ -80,7 +80,7 @@ export const execute = {
                     uses to measure how close a given design is to being feasible.
                     It is formed by adding a contribution from all the violated constraints.
                     Thus, as in this case, if all the constraints are satisfied, the
-                    objective value is zero and we have a feasible design.<br />
+                    objective value is zero and we have a "strictly feasible" design.<br />
                     <br />
                     Let's find out what a violated constraint looks like.<br />
                     <br />
@@ -103,7 +103,9 @@ export const execute = {
                     
                     <p>
                     It should be pretty hard to miss the violation of OD_FREE MAX.
-                    Also, the Objective Value is greater than zero. 
+                    Also, the tool-tip on the "Status" label of the 
+                    multi-colored Feasibility Status indicator shows that
+                    the Objective Value is greater than zero. 
                     This is a good clue that there is work for the search procedure to do.<br />
                     <br />
                     Shall we see if Search can find a design with a smaller (less than
@@ -154,8 +156,8 @@ export const execute = {
                     really did its job and left no remaining constraint violations.
                     </p>
                     <p>
-                    This can be seen more readily in Report&nbsp;1&nbsp;(mini). 
-                    Simply select (click on) that tab to view the report.
+                    This can be seen more readily in Report&nbsp;1.&nbsp;  
+                    Use the View menu to switch to the report.
                     The message: 
                     "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
                     is produced any time that the second load uses more
@@ -173,13 +175,13 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    If you are still on the Report tab,
-                    don't forget to switch back to the tab containing the main page ("Design:").
+                    If you are still in the Report view,
+                    don't forget to switch back to a view containing the main page.
                     </p>
                     
                     <p>
                     Now that we have covered the concept of constraints, we can describe
-                    the use of FIX on a state variable in more precise terms.  The FIX
+                    the use of FIX on a Dependent Variable in more specific terms.  The FIX
                     of a Dependent Variable is the creation of a two sided constraint that
                     is more heavily weighted than a normal constraint.  Thus when we
                     used FIX to establish a specific deflection in the earlier section
@@ -258,8 +260,8 @@ export const execute = {
                 <React.Fragment>
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
-                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
-                    Simply select (click on) that tab to view the report.
+                    Note that results of additional calculations are given in Report&nbsp;1.&nbsp; 
+                    Use the View menu to select the report.
                     </p>
                     
                     <p>
@@ -281,8 +283,8 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    If you are still on a Report tab,
-                    don't forget to switch back to the tab containing the main page ("Design:").
+                    If you are still on a Report view,
+                    use the View menu to switch back to the main page.
                     </p>
                     
                     <p>
@@ -307,6 +309,11 @@ export const execute = {
                     <p>
                     This time, let's see if we can handle a design that has both force and
                     length specified at each of two points.
+                    As long as L_Free (spring length in the free, no load condition) is in FREE status,
+                    this should not be a problem. 
+                    You may want to review 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; 
+                    to better understand the limitations of specifying force and deflection at two points.
                     </p>
                     
                     <p>
