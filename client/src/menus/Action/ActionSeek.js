@@ -33,16 +33,16 @@ class ActionSeek extends Component {
         }
 //       if(this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && (Number.isNaN(element.value)) ? total+1 : total+0}, 0) === 0) {
 //           console.log('Found IV not a number.');
-//           warnMsg += 'Independent Variable is Not a Number; ';
+//           warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
 //        }
 //        var design;
 //        const { store } = this.context;
 //        design = store.getState();
-//        if (design.model.result.objective_value <= design.model.system_controls.objmin || nviol === 0) {
+//        if (design.model.result.objective_value <= design.model.system_controls.objmin     // Delete this line.  Is placeholder only
 //        console.log('ActionSeek:    OBJ =', design.model.result.objective_value);
 //       if (Number.isNan(design.model.result.objective_value)) {
 //           console.log('Found OBJ is Not a Number');
-//           warnMsg += 'OBJ is Not a Number; ';
+//           warnMsg += 'Objective Value is Not a Number. Check constraint levels; ';
 //        };
        if (warnMsg !== '') {
             displayMessage(warnMsg,'warning');
