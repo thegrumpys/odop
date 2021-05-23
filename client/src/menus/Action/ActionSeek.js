@@ -27,23 +27,20 @@ class ActionSeek extends Component {
     toggle() {
        console.log('In ActionSeek.toggle this=',this);
        var warnMsg = '';
-       if(this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+       if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
            console.log('Found no free IV.');
            warnMsg += 'No free independent variables; ';
-        }
-//       if(this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && (Number.isNaN(element.value)) ? total+1 : total+0}, 0) === 0) {
-//           console.log('Found IV not a number.');
-//           warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
-//        }
-//        var design;
-//        const { store } = this.context;
-//        design = store.getState();
-//        if (design.model.result.objective_value <= design.model.system_controls.objmin     // Delete this line.  Is placeholder only
-//        console.log('ActionSeek:    OBJ =', design.model.result.objective_value);
-//       if (Number.isNan(design.model.result.objective_value)) {
-//           console.log('Found OBJ is Not a Number');
-//           warnMsg += 'Objective Value is Not a Number. Check constraint levels; ';
-//        };
+       }
+       if (this.props.symbol_table.reduce((total, element)=>{console.log('total=',total,'element=',element);return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
+           console.log('Found IV not a number.');
+           warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
+       }
+//     this.props.objective_value > this.props.system_controls.objmin // Delete this line.  Is placeholder only
+       console.log('ActionSeek:    OBJ =', this.props.objective_value);
+       if (Number.isNaN(this.props.objective_value)) {
+          console.log('Found OBJ is Not a Number');
+          warnMsg += 'Objective Value is Not a Number. Check constraint levels; ';
+       }
        if (warnMsg !== '') {
             displayMessage(warnMsg,'warning');
         } else {
@@ -147,7 +144,9 @@ class ActionSeek extends Component {
 }  
 
 const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table
+    symbol_table: state.model.symbol_table,
+    system_controls: state.model.system_controls,
+    objective_value: state.model.result.objective_value,
 });
 
 const mapDispatchToProps = {
