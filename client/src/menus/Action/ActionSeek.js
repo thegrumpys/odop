@@ -25,9 +25,27 @@ class ActionSeek extends Component {
     }
     
     toggle() {
-//        console.log('In ActionSeek.toggle this=',this);
-        if(this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('No free independent variables','warning');
+       console.log('In ActionSeek.toggle this=',this);
+       var warnMsg = '';
+       if(this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+           console.log('Found no free IV.');
+           warnMsg += 'No free independent variables; ';
+        }
+//       if(this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && (Number.isNaN(element.value)) ? total+1 : total+0}, 0) === 0) {
+//           console.log('Found IV not a number.');
+//           warnMsg += 'Independent Variable is Not a Number; ';
+//        }
+//        var design;
+//        const { store } = this.context;
+//        design = store.getState();
+//        if (design.model.result.objective_value <= design.model.system_controls.objmin || nviol === 0) {
+//        console.log('ActionSeek:    OBJ =', design.model.result.objective_value);
+//       if (Number.isNan(design.model.result.objective_value)) {
+//           console.log('Found OBJ is Not a Number');
+//           warnMsg += 'OBJ is Not a Number; ';
+//        };
+       if (warnMsg !== '') {
+            displayMessage(warnMsg,'warning');
         } else {
             var result = this.props.symbol_table.find( // Find free variable matching the current variable name
                 (element) => this.state.name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
