@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { FIXED } from '../../store/actionTypes';
 import { search, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
+import { displayMessage } from '../../components/MessageModal';
 
 class ActionSearch extends Component {
 
@@ -12,9 +14,27 @@ class ActionSearch extends Component {
     }
     
     toggle() {
-        logUsage('event', 'ActionSearch', { 'event_label': 'ActionSearch'});
-        this.props.saveAutoSave();
-        this.props.search();
+       var warnMsg = '';
+       if (this.props.objective_value <= this.props.system_controls.objmin) {
+          warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do; ';
+          console.log('warnMsg = ', warnMsg);
+       }
+       if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+           warnMsg += 'No free independent variables; ';
+       }
+       if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
+           warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
+       }
+       if (Number.isNaN(this.props.objective_value)) {
+          warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
+       }
+       if (warnMsg !== '') {
+            displayMessage(warnMsg,'warning');
+        } else {
+            logUsage('event', 'ActionSearch', { 'event_label': 'ActionSearch'});
+            this.props.saveAutoSave();
+            this.props.search();
+        }
     }
 
     render() {
@@ -29,9 +49,15 @@ class ActionSearch extends Component {
     }
 }  
 
+const mapStateToProps = state => ({
+    symbol_table: state.model.symbol_table,
+    system_controls: state.model.system_controls,
+    objective_value: state.model.result.objective_value,
+});
+
 const mapDispatchToProps = {
     search: search,
     saveAutoSave: saveAutoSave
 };
 
-export default connect(null, mapDispatchToProps)(ActionSearch);
+export default connect(null, mapDispatchToProps, mapStateToProps)(ActionSearch);
