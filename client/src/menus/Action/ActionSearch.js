@@ -17,7 +17,6 @@ class ActionSearch extends Component {
        var warnMsg = '';
        if (this.props.objective_value <= this.props.system_controls.objmin) {
           warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do; ';
-          console.log('warnMsg = ', warnMsg);
        }
        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
            warnMsg += 'No free independent variables; ';
