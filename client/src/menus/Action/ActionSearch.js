@@ -60,4 +60,4 @@ const mapDispatchToProps = {
     saveAutoSave: saveAutoSave
 };
 
-export default connect(null, mapDispatchToProps, mapStateToProps)(ActionSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(ActionSearch);
