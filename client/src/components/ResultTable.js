@@ -13,9 +13,26 @@ class ResultTable extends Component {
     }
 
     onSearchButton(event) {
-        logUsage('event', 'ActionSearch', { 'event_label': 'ActionSearch'});
-        this.props.saveAutoSave();
-        this.props.search();
+       var warnMsg = '';
+       if (this.props.objective_value <= this.props.system_controls.objmin) {
+          warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do; ';
+       }
+       if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+           warnMsg += 'No free independent variables; ';
+       }
+       if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
+           warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
+       }
+       if (Number.isNaN(this.props.objective_value)) {
+          warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
+       }
+       if (warnMsg !== '') {
+            displayMessage(warnMsg,'warning');
+        } else {
+            logUsage('event', 'ActionSearch', { 'event_label': 'ActionSearch'});
+            this.props.saveAutoSave();
+            this.props.search();
+        }
     }
 
     render() {
