@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Table, OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { FIXED } from '../store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, saveAutoSave } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
+import { displayMessage } from '../components/MessageModal';
 
 class ResultTable extends Component {
     
@@ -107,6 +109,7 @@ class ResultTable extends Component {
 }
 
 const mapStateToProps = state => ({
+    symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value,
     termination_condition: state.model.result.termination_condition,
