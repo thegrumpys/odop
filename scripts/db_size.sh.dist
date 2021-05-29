@@ -1,12 +1,4 @@
-# Production
-user="@@@ PUT DATABASE USER HERE @@@"
-password="@@@ PUT DATABASE PASSWORD HERE @@@"
-host="@@@ PUT DATABASE HOST HERE @@@"
-database="@@@ PUT DATABASE NAME HERE @@@"
-# Staging
-# Test
-# Development
-
+db_size() {
 mysql --user=$user --password=$password --host=$host << EOF
 use $database;
 select
@@ -40,3 +32,29 @@ group by
     ,sp.grantee
     ,sp.has_insert;
 EOF
+}
+
+# Production
+user="@@@ PUT DATABASE USER HERE @@@"
+password="@@@ PUT DATABASE PASSWORD HERE @@@"
+host="@@@ PUT DATABASE HOST HERE @@@"
+database="@@@ PUT DATABASE NAME HERE @@@"
+db_size
+# Staging
+user="@@@ PUT DATABASE USER HERE @@@"
+password="@@@ PUT DATABASE PASSWORD HERE @@@"
+host="@@@ PUT DATABASE HOST HERE @@@"
+database="@@@ PUT DATABASE NAME HERE @@@"
+db_size
+# Test
+user="@@@ PUT DATABASE USER HERE @@@"
+password="@@@ PUT DATABASE PASSWORD HERE @@@"
+host="@@@ PUT DATABASE HOST HERE @@@"
+database="@@@ PUT DATABASE NAME HERE @@@"
+db_size
+# Development
+user="@@@ PUT DATABASE USER HERE @@@"
+password="@@@ PUT DATABASE PASSWORD HERE @@@"
+host="@@@ PUT DATABASE HOST HERE @@@"
+database="@@@ PUT DATABASE NAME HERE @@@"
+db_size
