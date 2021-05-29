@@ -27,6 +27,11 @@ class ActionSearch extends Component {
        if (Number.isNaN(this.props.objective_value)) {
           warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
        }
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.type !== undefined && element.type !== "table" && element.cmin > element.cmax) {
+                warnMsg += (element.name + ' constraints are inconsistent; ');
+            }
+        });
        if (warnMsg !== '') {
             displayMessage(warnMsg,'warning');
         } else {
