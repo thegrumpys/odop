@@ -34,25 +34,28 @@ group by
 EOF
 }
 
-# Production
+echo Production
 user="@@@ PUT DATABASE USER HERE @@@"
 password="@@@ PUT DATABASE PASSWORD HERE @@@"
 host="@@@ PUT DATABASE HOST HERE @@@"
 database="@@@ PUT DATABASE NAME HERE @@@"
 db_size
-# Staging
+
+echo Staging
 user="@@@ PUT DATABASE USER HERE @@@"
 password="@@@ PUT DATABASE PASSWORD HERE @@@"
 host="@@@ PUT DATABASE HOST HERE @@@"
 database="@@@ PUT DATABASE NAME HERE @@@"
 db_size
-# Test
+
+echo Test
 user="@@@ PUT DATABASE USER HERE @@@"
 password="@@@ PUT DATABASE PASSWORD HERE @@@"
 host="@@@ PUT DATABASE HOST HERE @@@"
 database="@@@ PUT DATABASE NAME HERE @@@"
 db_size
-# Development
+
+echo Development
 user="@@@ PUT DATABASE USER HERE @@@"
 password="@@@ PUT DATABASE PASSWORD HERE @@@"
 host="@@@ PUT DATABASE HOST HERE @@@"
