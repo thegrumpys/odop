@@ -14,25 +14,25 @@ class ActionSearch extends Component {
     }
     
     toggle() {
-       var warnMsg = '';
-       if (this.props.objective_value <= this.props.system_controls.objmin) {
-          warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
-       }
-       if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-           warnMsg += 'No free independent variables; ';
-       }
-       if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
-           warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
-       }
-       if (Number.isNaN(this.props.objective_value)) {
-          warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
-       }
+        var warnMsg = '';
+        if (this.props.objective_value <= this.props.system_controls.objmin) {
+            warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
+        }
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            warnMsg += 'No free independent variables; ';
+        }
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
+            warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
+        }
+        if (Number.isNaN(this.props.objective_value)) {
+            warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
+        }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
             if (element.type !== undefined && element.type !== "table" && element.cmin > element.cmax) {
                 warnMsg += (element.name + ' constraints are inconsistent; ');
             }
         });
-       if (warnMsg !== '') {
+        if (warnMsg !== '') {
             displayMessage(warnMsg,'warning');
         } else {
             logUsage('event', 'ActionSearch', { 'event_label': 'ActionSearch'});
