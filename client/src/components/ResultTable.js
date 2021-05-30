@@ -36,7 +36,7 @@ class ResultTable extends Component {
         if (warnMsg !== '') {
             displayMessage(warnMsg,'warning');
         } else {
-            logUsage('event', 'ActionSearch', { 'event_label': 'ActionSearch'});
+            logUsage('event', 'ActionSearch', { 'event_label': 'ButtonSearch'});
             this.props.saveAutoSave();
             this.props.search();
         }
