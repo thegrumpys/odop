@@ -147,11 +147,12 @@ export const execute = {
                     <p>
                     In summary: 
                     <br />
-                    Use <b>right click</b> to specify what is known or desired in order to describe 
+                    Use <b>right-click</b> on a value to specify what is known or desired in order to describe 
                     your design objectives in terms of FIX, FREE and constraints.  
-                    Leave unspecified what is to be calculated.  
+                    Values with FREE status will be calculated.  
+                    Independent Variables need to have a plausible (not blank; usually not zero and not negative) starting value.
                     Be sure to select appropriate values for Material_Type and End_Type.
-                    Use the <b>Action : Search</b> menu to find a feasible design. 
+                    Use the <b>Action : Search</b> menu or the Search button to find a feasible design. 
                     Use the <b>Action : Seek</b> menu to optimize a feasible design. 
                     Switch to other views to utilize additional capabilities of ODOP:Spring.
                    </p>
