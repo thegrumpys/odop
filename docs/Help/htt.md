@@ -55,7 +55,7 @@ new standard size or catalog item.
 The design library is a database physically located on an Internet server,
 a.k.a. "in the cloud". 
 Design information stored in the design library does not appear on the local storage of your computer. 
-In order to save designs into the design library it is necessary to be logged into an ODOP user account. 
+In order to save designs into the design library it is necessary to sign into an ODOP user account. 
 See: [User Accounts](../About/userAccounts).
 
 ___
@@ -186,10 +186,8 @@ ___
 ___
 
 **Closing or exiting the app**   
-Use  **File : Save As** or **File : Export** to 
-preserve the current state of a design in progress. 
-Sign out by using "Logout" on the File menu or 
-use the browser Reload a.k.a "Refresh" function and then click the "Logout" button.
+Use  **File : Save As** or **File : Export** to preserve the current state of a design in progress. 
+Sign out by using "Sign Out" on the menu bar (positioned right of the ODOP icon and left of the File menu). 
 Finally, close the browser tab or browser window containing the ODOP app.
 
 ___
@@ -198,10 +196,10 @@ ___
 ___
 
 **Password reset**   
-Use your existing username (email address) and password to login at:   
+Use your existing username (email address) and password to Sign In at:   
 [https://dev-729070.okta.com](https://dev-729070.okta.com)   
 
-After login, drop down the menu in the upper right that displays your first name
+After sign in, drop down the menu in the upper right that displays your first name
 and then use the Change Password section of the Settings page.  
 
 If you don't remember the current password,
