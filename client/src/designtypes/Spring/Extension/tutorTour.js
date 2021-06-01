@@ -127,10 +127,11 @@ export const execute = {
             text: (
                 <React.Fragment>
                     <p>
-                    Above, you should see an internal "tab" with the name "Design:",
-                    an icon associated with the design type (a helix with open ends in this case) 
+                    In the right portion of the menu bar (above this text), 
+                    you should see an icon associated with the design type 
+                    (in this case, an illustration of the currently active spring type) 
                     and the name of the specific design that is currently open.
-                    Spring designs will each have three additional tabs (highlighted in red below) 
+                    Spring designs will each have three additional views (highlighted in red below) 
                     providing spring-specific reports. 
                     </p>
                     
@@ -141,9 +142,9 @@ export const execute = {
                     </p>
                     
                     <p>
-                    You can take this opportunity to click on each of the Report tabs to view the 
+                    You can take this opportunity to click on each of the Report views to get acquainted with the 
                     information provided there.
-                    Be sure to return to the main page ("Design:") before clicking "Next" to continue.
+                    Be sure to return to the main page before clicking "Next" to continue.
                     </p>
                 </React.Fragment>
             )
