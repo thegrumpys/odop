@@ -69,7 +69,7 @@ However, you should save frequently as once the browser window or tab is closed,
 any unsaved design in progress may be lost. 
 For more information on this point, see: [AutoSave](../Help/autoSave).
 
-**Troubleshooting login issues:**
+**Troubleshooting sign in issues:**
 - Be sure to enter your email address in the "Username" field of the sign-in page.   
 &nbsp;   
 
