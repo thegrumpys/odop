@@ -78,7 +78,7 @@ class MainPage extends Component {
             var view = viewNames.find(element => element.name === this.props.view);
 //            console.log('In MainPage.componentDidUpdate view=', view);
             if (view === undefined)
-                this.props.changeView(config.url.view); // if not found then assume the configured default
+                this.props.changeView(config.env.view); // if not found then assume the configured default
         }
         if (prevProps.view !== this.props.view) {
 //            console.log('In MainPage.componentDidUpdate prevProps.view=',prevProps.view,'props.view=',this.props.view);
