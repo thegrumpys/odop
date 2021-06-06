@@ -25,15 +25,30 @@ class ActionSeek extends Component {
     }
     
     toggle() {
-//        console.log('In ActionSeek.toggle this=',this);
-        if(this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('No free independent variables','warning');
+//       console.log('In ActionSeek.toggle this=',this);
+        var warnMsg = '';
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            warnMsg += 'No free independent variables; ';
+        }
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
+            warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
+        }
+        if (Number.isNaN(this.props.objective_value)) {
+            warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
+        }
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.type !== undefined && element.type !== "table" && element.cmin > element.cmax) {
+                warnMsg += (element.name + ' constraints are inconsistent; ');
+            }
+        });
+        if (warnMsg !== '') {
+            displayMessage(warnMsg,'warning');
         } else {
             var result = this.props.symbol_table.find( // Find free variable matching the current variable name
                 (element) => this.state.name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
             );
             if (result === undefined) { // Was matching free variable not found
-                // Set default name to the First free variable. There must be at least one
+                // Set default name to the First free variable. There must be at least one
                 // This duplicates the UI render code algorithm - be careful and make them match!
                 result = this.props.symbol_table.find( // Find first free variable
                     (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
@@ -129,7 +144,9 @@ class ActionSeek extends Component {
 }  
 
 const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table
+    symbol_table: state.model.symbol_table,
+    system_controls: state.model.system_controls,
+    objective_value: state.model.result.objective_value,
 });
 
 const mapDispatchToProps = {

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Table, OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { FIXED } from '../store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, saveAutoSave } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
+import { displayMessage } from '../components/MessageModal';
 
 class ResultTable extends Component {
     
@@ -13,9 +15,31 @@ class ResultTable extends Component {
     }
 
     onSearchButton(event) {
-        logUsage('event', 'ActionSearch', { 'event_label': 'ActionSearch'});
-        this.props.saveAutoSave();
-        this.props.search();
+        var warnMsg = '';
+        if (this.props.objective_value <= this.props.system_controls.objmin) {
+            warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
+        }
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            warnMsg += 'No free independent variables; ';
+        }
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
+            warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
+        }
+        if (Number.isNaN(this.props.objective_value)) {
+            warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
+        }
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.type !== undefined && element.type !== "table" && element.cmin > element.cmax) {
+                warnMsg += (element.name + ' constraints are inconsistent; ');
+            }
+        });
+        if (warnMsg !== '') {
+            displayMessage(warnMsg,'warning');
+        } else {
+            logUsage('event', 'ActionSearch', { 'event_label': 'ButtonSearch'});
+            this.props.saveAutoSave();
+            this.props.search();
+        }
     }
 
     render() {
@@ -90,6 +114,7 @@ class ResultTable extends Component {
 }
 
 const mapStateToProps = state => ({
+    symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value,
     termination_condition: state.model.result.termination_condition,
