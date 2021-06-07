@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavDropdown, Modal, InputGroup, ButtonGroup, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX, FIXED } from '../../store/actionTypes';
+import { CONSTRAINED, MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/MessageModal';
@@ -37,7 +37,7 @@ class ActionSeek extends Component {
             warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
-            if (element.type !== undefined && element.type !== "table" && element.cmin > element.cmax) {
+            if (element.type !== undefined && element.type !== "table" && element.lmin === CONSTRAINED && element.lmax === CONSTRAINED && element.cmin > element.cmax) {
                 warnMsg += (element.name + ' constraints are inconsistent; ');
             }
         });
