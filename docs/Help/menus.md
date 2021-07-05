@@ -31,17 +31,32 @@ ___
 ___
 
 **ODOP logo**  
-Content describing ODOP logo goes here  
 
+The ODOP logo at the far left of the menu bar resets the app. 
+Specifically, the reset operation causes a reload of the app home page.
 
+After reset, if AutoSave data for an in-progress design is available, that data will be reloaded. 
+Once reloaded, AutoSave data is cleared.
+In most cases the first reset will return the design to the state prior to the most recent
+Search, Seek, Trade, Select Size or Select Catalog operation. 
+A second reset returns to the default design type and Startup design.
+
+Considering that it is possible for a reset to cause a loss of work in progress,
+it is good practice to save your work (**File : Save** or **File : Export**) 
+before invoking a reset of the app.  
+
+[See also: AutoSave](autoSave)   
 ___
 
 <a id="SignIn"></a>  
 ___
 
 **Sign In...**  
-Content describing Sign In button goes here  
 
+The Sign In button appears on the menu bar between the ODOP logo and the File menu.
+Use the Sign In button to create a new user account or log into an existing account.  
+
+[See also: User Accounts](../About/userAccounts)   
 
 ___
 
@@ -49,9 +64,18 @@ ___
 ___
 
 **File : Open...**  
-Content describing File : Open goes here  
 
+The File : Open menu item produces a dialog box that allows the selection of design type 
+(for example, compression, extension and torsion springs) and 
+a specific starting design.  
 
+The dialog also offers a Sign In opportunity to create a new user account 
+or to log into an existing account.
+
+The units system, for example, US Customary units (inches, pounds) 
+or metric units (mm, newtons) is established by the selected starting design.
+
+[See also: Default Designs](defaultDesigns)   
 ___
 
 <a id="FileSave"></a>  
