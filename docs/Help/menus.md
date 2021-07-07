@@ -10,7 +10,10 @@ Additional content will be developed as time and priority permits.
 [Sign In...](menus#SignIn)  
 [File : Open...](menus#FileOpen)  
 [File : Save](menus#FileSave)  
-[File : SaveAs...](menus#FileSaveAs)  
+[File : Save As...](menus#FileSaveAs)  
+[File : Delete...](menus#FileDelete)  
+[File : Import...](menus#FileImport)  
+[File : Export](menus#FileExport)  
 [Action : Search](menus#ActionSearch)  
 [Action : Seek...](menus#ActionSeek)  
 [Action : Trade...](menus#ActionTrade)  
@@ -39,13 +42,16 @@ After reset, if AutoSave data for an in-progress design is available, that data 
 Once reloaded, AutoSave data is cleared.
 In most cases the first reset will return the design to the state prior to the most recent
 Search, Seek, Trade, Select Size or Select Catalog operation. 
-A second reset returns to the default design type and Startup design.
+A second reset removes all in-memory aspects of the previous design and 
+returns to the default design type and Startup design.
 
 Considering that it is possible for a reset to cause a loss of work in progress,
 it is good practice to save your work (**File : Save** or **File : Export**) 
 before invoking a reset of the app.  
 
-[See also: AutoSave](autoSave)   
+See also:   
+[AutoSave](autoSave)   
+
 ___
 
 <a id="SignIn"></a>  
@@ -56,7 +62,8 @@ ___
 The Sign In button appears on the menu bar between the ODOP logo and the File menu.
 Use the Sign In button to create a new user account or log into an existing account.  
 
-[See also: User Accounts](../About/userAccounts)   
+See also:   
+[User Accounts](../About/userAccounts)   
 
 ___
 
@@ -65,9 +72,12 @@ ___
 
 **File : Open...**  
 
-The File : Open menu item produces a dialog box that allows the selection of design type 
+The File : Open... menu item produces a dialog box that allows the selection of design type 
 (for example, compression, extension and torsion springs) and 
-a specific starting design.  
+a specific starting design. 
+The selected design comes from the cloud-based ODOP Design Library and replaces the current design.
+This starting design may be system provided or a private design saved in a user account.
+System provided designs are marked "[ReadOnly]".
 
 The dialog also offers a Sign In opportunity to create a new user account 
 or to log into an existing account.
@@ -75,24 +85,89 @@ or to log into an existing account.
 The units system, for example, US Customary units (inches, pounds) 
 or metric units (mm, newtons) is established by the selected starting design.
 
-[See also: Default Designs](defaultDesigns)   
+See also:   
+[Default Designs](defaultDesigns)   
+[User Accounts](../About/userAccounts)   
+[Units: US customary and metric](SpringDesign/unitsUSmetric)  
+[Import and Export](htt#fileImportAndExport)  
+[ODOP Design Library](terminology#designLib)
+
 ___
 
 <a id="FileSave"></a>  
 ___
 
 **File : Save**  
-Content describing FileSave goes here  
 
+The File : Save menu item updates the current design into the cloud-based ODOP Design Library. 
+It is necessary to be logged into a user account.
+If not logged in to a user account, a pop-up providing a Sign In opportunity will appear.
+
+See also:   
+[Default Designs](defaultDesigns)   
+[User Accounts](../About/userAccounts)   
 
 ___
 
 <a id="FileSaveAs"></a>  
 ___
 
-**File : SaveAs...**  
-Content describing FileSaveAs goes here  
+**File : Save As...**  
 
+The File : Save As... menu item saves the current design into the cloud-based ODOP Design Library with a new name. 
+It is necessary to be logged into a user account. 
+If not logged in to a user account, a pop-up providing a Sign In opportunity will appear.
+
+See also:   
+[Default Designs](defaultDesigns)   
+[User Accounts](../About/userAccounts)   
+
+___
+
+<a id="FileDelete"></a>  
+___
+
+**File : Delete...**  
+
+The File : Delete... menu item removes the selected design. 
+It is necessary to be logged into a user account. 
+If not logged in to a user account, a pop-up providing a Sign In opportunity will appear.   
+
+After deleting a design with the same name as a system supplied design,
+the system supplied design is revealed. 
+System provided designs are marked "[ReadOnly]".
+
+There is no un-delete feature.
+
+See also:   
+[Default Designs](defaultDesigns)   
+[User Accounts](../About/userAccounts)   
+
+___
+
+<a id="FileImport"></a>  
+___
+
+**File : Import...**  
+
+The File : Import menu item restores a previously exported design as the current design.   
+
+See also:   
+[Import and Export](htt#fileImportAndExport)  
+
+___
+
+<a id="FileExport"></a>  
+___
+
+**File : Export**  
+
+The File : Export menu item saves the current design as a download into a file in the local file system. 
+By default, the file is placed in the user's download folder (directory) with a file name extension of ".json". 
+Use browser settings to control the default download folder or be prompted to specify a folder every time.   
+
+See also:   
+[Import and Export](htt#fileImportAndExport)  
 
 ___
 
@@ -101,11 +176,11 @@ ___
 
 **Action : Search**  
 
-The Action : Search menu item invokes the Search algorithm. 
+The Action : Search menu item invokes the numerical search algorithm. 
 Search will alter the values of any FREE independent variables to find 
 a design that satisfies constraints and FIXes. 
 
-In other words, 
+Specifically, 
 FIXed status causes Search to achieve or hold a specified value. 
 FREE status allows Search to manipulate that variable to achieve a feasible design. 
 
@@ -113,8 +188,11 @@ Search operates to minimize the value of the [objective function](terminology#ob
 The current design is used as a starting point. 
 Search stops if the Objective Value falls below OBJMIN.  
 
-[See also: Search](search)   
-[See also: Feasibility](feasibility)
+See also:   
+[Search](search)   
+[Feasibility](feasibility)   
+[Feasible Region](terminology#feasibleRegion)  
+[Design Situations](designSituations)
 
 ___
 
@@ -122,7 +200,14 @@ ___
 ___
 
 **Action : Seek...**  
+
 Content describing Action : Seek goes here  
+
+See also:   
+[Seek](seek)   
+[Feasibility](feasibility)   
+[Feasible Region](terminology#feasibleRegion)  
+[Design Situations](designSituations)
 
 
 ___
@@ -131,7 +216,14 @@ ___
 ___
 
 **Action : Trade...**  
+
 Content describing Action : Trade goes here  
+
+See also:   
+[Trade](trade)   
+[Feasibility](feasibility)   
+[Feasible Region](terminology#feasibleRegion)  
+[Design Situations](designSituations)
 
 
 
