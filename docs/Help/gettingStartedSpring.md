@@ -43,7 +43,7 @@ to select the desired tutorial session.
 ![Help Tutorial](./png/HelpTutorial.png "Help Tutorial")   
    
 
-![Select Spring Tutorial](./png/SelectSpringTutor.png "[Select Spring Tutorial")   
+![Select Spring Tutorial](./png/SelectSpringTutor.png "Select Spring Tutorial")   
    
 The spring tutorial session named **tutorTour** is recommended as a good starting point
 for users that have not already completed the tour provided in the **Help : Getting Started** topic.   

@@ -176,9 +176,10 @@ ___
 
 **Action : Search**  
 
-The Action : Search menu item invokes the numerical search algorithm. 
+The Action : Search menu item invokes the numerical search algorithm to provide ODOP's back-solving capability. 
+The Search feature gives a flexible approach to invert the dependent-independent relationships of the design equations. 
 Search will alter the values of any FREE independent variables to find 
-a design that satisfies constraints and FIXes. 
+a "feasible" design that satisfies constraints and FIXes. 
 
 Specifically, 
 FIXed status causes Search to achieve or hold a specified value. 
@@ -187,6 +188,14 @@ FREE status allows Search to manipulate that variable to achieve a feasible desi
 Search operates to minimize the value of the [objective function](terminology#obj). 
 The current design is used as a starting point. 
 Search stops if the Objective Value falls below OBJMIN.  
+
+Results of a Search are reported in the Result Section that appears 
+at the upper portion of the main page (Advanced and Calculator views).   
+
+![Result Section](./png/ResultSectionToolTip.png "Result Section")  
+
+The tooltip associated with the "Status" label of multi-color Feasibility Indicator provides 
+the numeric values of the current Objective Value and OBJMIN. 
 
 See also:   
 [Search](search)   
@@ -201,7 +210,18 @@ ___
 
 **Action : Seek...**  
 
-Content describing Action : Seek goes here  
+The Action : Search menu item provides ODOP's goal seeking capability.
+The Seek feature can obtain the constrained extreme of any variable, independent or dependent.
+
+For example in spring design, Seek can be asked to find the lightest material weight (or lowest spring rate, least solid height, greatest factor of safety, etc.) while maintaining  specified objectives for force and deflection, stress, diameters, etc.   
+
+Seek will prompt for the name of the varible to be investigated and the direction (Max or Min) to move in.
+
+Results of a Seek are reported in the Result Section that appears 
+at the upper portion of the main page (Advanced and Calculator views).   
+
+![Result Section](./png/ResultSectionToolTip.png "Result Section")  
+
 
 See also:   
 [Seek](seek)   
@@ -217,7 +237,20 @@ ___
 
 **Action : Trade...**  
 
-Content describing Action : Trade goes here  
+The Action : Trade menu item provides a feature to guide the restructuring of goals 
+associated with an infeasible design in a way that is most consistent with original objectives. 
+
+For example in spring design, 
+if all of the original design objectives cannot be achieved concurrently,
+ one or more (ex. spring cycle life) may be slightly compromised 
+in order to maintain the others (ex. loads, deflections, outside diameter and solid height).  
+
+Trade prompts the user step-by-step through a process that starts with a list of violated constraints.
+The user designates the constraints eligible to be relaxed and in what proportions. 
+After allowing the user to provide an exploration step size, 
+Trade extrapolates to the "nearest" feasible design in the designated direction and offers the user 
+the opportunity to accept that set of constraints. 
+
 
 See also:   
 [Trade](trade)   
@@ -226,15 +259,27 @@ See also:
 [Design Situations](designSituations)
 
 
-
 ___
 
 <a id="ActionSelectSize"></a>  
 ___
 
 **Action : Select Size...**  
-Content describing Action : Select Size goes here  
 
+ The Action : Select Size menu item searches a table for standard sizes nearest
+ to the current value of the designated Independent Variable.
+
+ If the user selects a standard size from the table, that value will be
+ established for the selected Independent Variable, which is then put in
+ "FIXed" status.  The user should then execute a Search to obtain
+ corresponding values for the other Independent Variables.
+  
+ In spring design Calculator view, selecting a new value of Wire_Dia automatically
+ incorporates selection from the appropriate (US, metric) standard size table and
+ automatically puts the selected value in FIXed status. 
+
+See also:   
+[Select Size](SpringDesign/selectSizeCatalog)   
 
 
 ___
