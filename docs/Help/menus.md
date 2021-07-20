@@ -8,21 +8,27 @@ Additional content will be developed as time and priority permits.
 **On this page:**  
 [ODOP logo](menus#ODOPlogo)  
 [Sign In...](menus#SignIn)  
+
 [File : Open...](menus#FileOpen)  
 [File : Save](menus#FileSave)  
 [File : Save As...](menus#FileSaveAs)  
 [File : Delete...](menus#FileDelete)  
 [File : Import...](menus#FileImport)  
 [File : Export](menus#FileExport)  
+[File : Preferences](menus#FilePreferences)  
+[File : Properties](menus#FileProperties)  
+
 [Action : Search](menus#ActionSearch)  
 [Action : Seek...](menus#ActionSeek)  
 [Action : Trade...](menus#ActionTrade)  
 [Action : Select Size...](menus#ActionSelectSize)  
 [Action : Select Catalog...](menus#ActionSelectCatalog)  
 [Action : Execute...](menus#ActionExecute)  
+
 [View : Advanced](menus#ViewAdvanced)  
 [View : Calculator](menus#ViewCalculator)  
 [View : Reports](menus#ViewReports)  
+
 [Help : Index](menus#HelpIndex)  
 [Help : Demo...](menus#HelpDemo)  
 [Help : Tutorial...](menus#HelpTutorial)  
@@ -169,6 +175,27 @@ Use browser settings to control the default download folder or be prompted to sp
 See also:   
 [Import and Export](htt#fileImportAndExport)  
 
+
+___
+
+<a id="FilePreferences"></a>  
+___
+
+**File : Preferences**  
+
+Content describing Preferences goes here  
+
+
+___
+
+<a id="FileProperties"></a>  
+___
+
+**File : Properties**  
+
+Content describing Properties goes here  
+
+
 ___
 
 <a id="ActionSearch"></a>  
@@ -288,8 +315,26 @@ ___
 ___
 
 **Action : Select Catalog...**  
-Content describing Action : Select Catalog goes here  
 
+The Action : Select Catalog menu item selects the closest or otherwise 
+most appropriate design from a catalog of stock designs. 
+The stock spring catalogs currently supplied with ODOP:Spring include 
+generic compression and extension spring catalogs plus 
+U.S. Military Standard 24585 (SAE-AS24585) for compression springs 
+and MS24586 (SAE-AS24586) for extension springs.
+
+Once the user picks the desired catalog from a drop-down list, 
+a selection list containing the "closest" four springs from that catalog appears.
+These designs are ranked based on their Objective Value.
+Thus ODOP:Spring is choosing from the catalog based on how well the
+stock spring designs meet the user's objectives (as expressed by FIXes and constraints)
+as opposed to simply choosing designs physically similar to the target design.
+
+Note that it may be desirable to save (File : Save or File : Save As) the current design 
+before selecting a catalog item.
+
+See also:   
+[Select Catalog](SpringDesign/selectSizeCatalog)   
 
 
 ___
@@ -298,8 +343,19 @@ ___
 ___
 
 **Action : Execute...**  
-Content describing Action : Execute goes here  
 
+The Action : Execute menu item invokes pre-programmed scripts that can perform 
+various tasks for the user. 
+For example, the "Welcome" scripts that run when the ODOP:Spring app is started from 
+the SpringDesignSoftware.org Getting-Started page are implemented this way.
+  
+Typically, users will see only the "tweakPrefs" script available for selection.
+This script will alter a group of "preference" values to improve the precision of search results.
+Specifically, after running this script, the Search process will run longer and expend more effort
+to refine the results by perhaps an extra significant digit. 
+
+See also:   
+[File : Preferences](menus#FilePreferences)   
 
 
 ___
