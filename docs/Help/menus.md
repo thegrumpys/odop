@@ -1,7 +1,6 @@
 #### ODOP Menus
 
 This topic covers the ODOP menu structure. 
-Additional content will be developed as time and priority permits. 
 
 <!--- When there is real content here, don't forget to include it in the appropriate index.md files.  -->
 
@@ -160,6 +159,7 @@ The File : Import menu item restores a previously exported design as the current
 
 See also:   
 [Import and Export](htt#fileImportAndExport)  
+[File : Export](menus#FileExport)  
 
 ___
 
@@ -174,6 +174,8 @@ Use browser settings to control the default download folder or be prompted to sp
 
 See also:   
 [Import and Export](htt#fileImportAndExport)  
+[File : Import...](menus#FileImport)  
+[.json files](https://en.wikipedia.org/wiki/JSON)
 
 
 ___
@@ -183,7 +185,14 @@ ___
 
 **File : Preferences**  
 
-Content describing Preferences goes here  
+The File : Preferences menu item provides access to a group of values that control various aspects of 
+ODOP operation. 
+Most of these values control behavior of the numerical search algorithm.
+A few control aspects of the on-screen display for Advanced View.
+
+See also:   
+[Search](search)   
+[Terminology preferences](terminology#preferences)
 
 
 ___
@@ -193,7 +202,27 @@ ___
 
 **File : Properties**  
 
-Content describing Properties goes here  
+The File : Preferences menu item provides access to a group of user supplied text strings 
+that can be used to label a design.
+The number of text strings and default labels for these text strings are part 
+of the initialState definition for each design type.
+For the coil spring designs, the default labels include: 
+COMMENT, 
+Contact person, 
+Company name, 
+Street, 
+City, 
+State & ZIP, 
+Phone, 
+Date, 
+Part Number, 
+and Finish.
+
+For the coil spring designs, content of the COMMENT field appears on Report 3.
+
+See also:   
+[View : Reports](menus#ViewReports)   
+[Terminology properties](terminology#properties)
 
 
 ___
@@ -228,7 +257,8 @@ See also:
 [Search](search)   
 [Feasibility](feasibility)   
 [Feasible Region](terminology#feasibleRegion)  
-[Design Situations](designSituations)
+[Design Situations](designSituations)   
+[File : Preferences](menus#FilePreferences)   
 
 ___
 
@@ -404,8 +434,14 @@ ___
 ___
 
 **View : Reports**  
-Content describing Reports goes here  
 
+Each design type may (or may not) have design type specific reports available on the View menu. 
+Each of the currently available coil spring design types offers three reports.
+ - Report 1 provides an overview of the design; basically a summary of the most useful information
+ - Report 2 has a focus on stress information
+ - Report 3 is intended to be printed, marked up and form the basis of a request for quotation 
+
+![Screen capture of Report 1](./png/ScrCap_Report1Noted.png "Report 1")  
 
 
 ___
@@ -446,25 +482,6 @@ ___
 **Help : About**  
 Content describing Help About goes here  
 
-1  
-
-2  
-
-3  
-
-4  
-
-5  
-
-6  
-
-7  
-
-8  
-
-9  
-
-10  
 
 ___
 
