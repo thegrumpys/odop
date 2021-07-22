@@ -3,6 +3,7 @@
 * [Introduction](introduction)
 * [Terminology](terminology)
 * [Getting Started](gettingStarted)
+* [Menus](menus)
 * [Tutorial and Demo](tutordemo)
 * [Design Situations](designSituations)
 * [Default Designs](defaultDesigns)

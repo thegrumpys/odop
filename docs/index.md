@@ -20,6 +20,7 @@
 * [Introduction](Help/introduction)
 * [Terminology](Help/terminology)
 * [Getting Started](Help/gettingStarted)
+* [Menus](Help/menus)
 * [Tutorial and Demo](Help/tutordemo)
 * [Design Situations](Help/designSituations)
 * [Default Designs](Help/defaultDesigns)

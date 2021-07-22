@@ -2,8 +2,6 @@
 
 This topic covers the ODOP menu structure. 
 
-<!--- When there is real content here, don't forget to include it in the appropriate index.md files.  -->
-
 **On this page:**  
 [ODOP logo](menus#ODOPlogo)  
 [Sign In...](menus#SignIn)  
