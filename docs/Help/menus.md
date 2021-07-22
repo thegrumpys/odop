@@ -28,6 +28,7 @@ This topic covers the ODOP menu structure.
 [View : Calculator](menus#ViewCalculator)  
 [View : Reports](menus#ViewReports)  
 
+[Help : Message of the Day](menus#HelpMotD)  
 [Help : Index](menus#HelpIndex)  
 [Help : Demo...](menus#HelpDemo)  
 [Help : Tutorial...](menus#HelpTutorial)  
@@ -40,14 +41,14 @@ ___
 
 **ODOP logo**  
 
-The ODOP logo at the far left of the menu bar resets the app. 
-Specifically, the reset operation causes a reload of the app home page.
+The ODOP logo at the far left of the menu bar causes a reload of the app home page. 
+This action resets the app.
 
 After reset, if AutoSave data for an in-progress design is available, that data will be reloaded. 
 Once reloaded, AutoSave data is cleared.
 In most cases the first reset will return the design to the state prior to the most recent
 Search, Seek, Trade, Select Size or Select Catalog operation. 
-A second reset removes all in-memory aspects of the previous design and 
+A second consecutive reset removes all in-memory aspects of the previous design and 
 returns to the default design type and Startup design.
 
 Considering that it is possible for a reset to cause a loss of work in progress,
@@ -192,7 +193,7 @@ A few control aspects of the on-screen display for Advanced View.
 
 See also:   
 [Search](search)   
-[Terminology preferences](terminology#preferences)
+[Terminology - Preferences](terminology#preferences)
 
 
 ___
@@ -222,7 +223,7 @@ For the coil spring designs, content of the COMMENT field appears on Report 3.
 
 See also:   
 [View : Reports](menus#ViewReports)   
-[Terminology properties](terminology#properties)
+[Terminology - Properties](terminology#properties)
 
 
 ___
@@ -258,6 +259,8 @@ See also:
 [Feasibility](feasibility)   
 [Feasible Region](terminology#feasibleRegion)  
 [Design Situations](designSituations)   
+[Constraints](terminology#constraints)   
+[FIX and FREE](terminology#fix)   
 [File : Preferences](menus#FilePreferences)   
 
 ___
@@ -446,12 +449,30 @@ Each of the currently available coil spring design types offers three reports.
 
 ___
 
+<a id="HelpMotD"></a>  
+___
+
+**Help : Message of the Day**  
+
+The ODOP app Message-of-the-Day provides current information on 
+recent and impending releases, planned outages, newly discovered issues and work-arounds.
+
+The first line contains the date of the most recent update.
+Check this information to stay up-to-date on issues affecting the ODOP software.
+
+
+___
+
 <a id="HelpIndex"></a>  
 ___
 
 **Help : Index**  
-Content describing on-line Help goes here  
 
+The Help : Index menu item displays a list of links to the various ODOP on-line Help articles.
+Most of these articles are common to all design types.
+An entry describing [Available Design Types](DesignTypes) is near the bottom of the list.   
+A link to a list of [Spring Design Topics](SpringDesign) is near the bottom of the list.
+The last link on the list is an alternate way to reach the [About](../About) articles.
 
 
 ___
@@ -460,8 +481,14 @@ ___
 ___
 
 **Help : Demo...**  
-Content describing Help Demo goes here  
 
+When enabled, the Help : Demo menu item provides a selection list of design type specific 
+demonstration sessions. 
+If no demonstration sessions are available for that design type, the Help : Demo menu item 
+will be disabled. 
+
+See also:   
+[Spring design demonstration sessions](tutordemo)   
 
 
 ___
@@ -469,9 +496,15 @@ ___
 <a id="HelpTutorial"></a>  
 ___
 
-**Help : Tutorial**  
-Content describing Help Tutorial goes here  
+**Help : Tutorial...**  
 
+When enabled, the Help : Tutorial menu item provides a selection list of design type specific 
+tutorial sessions. 
+If no tutorial sessions are available for that design type, the Help : Tutorial menu item 
+will be disabled.
+ 
+See also:   
+[Spring design tutorial sessions](tutordemo)   
 
 
 ___
@@ -480,7 +513,16 @@ ___
 ___
 
 **Help : About**  
-Content describing Help About goes here  
+
+The Help : About menu item displays information about the ODOP software.
+
+This information includes:
+ - a link to the "About: articles in the on-line Help 
+ - a link to the SpringDesignSoftware.org website home page 
+ - a link to the Wikipedia article describing open-source software 
+ - a description of the ODOP license 
+ - the current ODOP software version
+ - the current design type (Model) version and associated units
 
 
 ___
