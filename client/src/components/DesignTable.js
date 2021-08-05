@@ -4,6 +4,7 @@ import NameValueUnitsTable from './NameValueUnitsTable';
 import ConstraintsMinTable from './ConstraintsMinTable';
 import ConstraintsMaxTable from './ConstraintsMaxTable';
 import ResultTable from './ResultTable';
+import NameValueUnitsCalcInputTable from './NameValueUnitsCalcInputTable';
 import { connect } from 'react-redux';
 
 class DesignTable extends Component {
@@ -19,6 +20,9 @@ class DesignTable extends Component {
                     <NameValueUnitsTable />
                     <ConstraintsMinTable />
                     <ConstraintsMaxTable />
+                </Row>
+                <Row>
+                    <NameValueUnitsCalcInputTable />
                 </Row>
             </React.Fragment>
         );
