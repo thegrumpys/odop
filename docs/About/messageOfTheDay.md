@@ -1,28 +1,4 @@
-**Message-of-the-day** &nbsp; updated July 30, 2021   
-
-___
-**Newly discovered issue and work-around**   
-We are investigating an issue that affects the layout (rendering) of constraint columns in ODOP:Spring's Advanced View. 
-Full details are available at: 
-[Advanced View constraint column rendering #574](https://github.com/thegrumpys/odop/issues/574)  
-
-In summary,
-recently updated mainstream browsers are not rendering the Advanced View constraint columns as intended.
-The row height of the constraint columns is increased causing each successive constraint row to be 
-displaced further downward from its corresponding label.
-This issue is not observed with some older browser versions.
-
-ODOP:Spring's Calculator View is not affected.
-
-Until this issue is resolved, a work-around is possible. 
-Where use of Advanced View is required, 
-making the browser window sufficiently narrow will force the constraint columns 
-to re-locate to the bottom of the page.  
-In this configuration, labels appear with each constraint row 
-and thus eliminate any possible ambiguity.   
-___
-
-&nbsp;
+**Message-of-the-day** &nbsp; updated August 6, 2021   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -41,6 +17,7 @@ See: [MIGRATION](../Help/terminology#migration).
 [ODOP version 4.0.3](https://github.com/thegrumpys/odop/milestone/47?closed=1) was released April 25, 2021.   
 [ODOP version 4.0.4](https://github.com/thegrumpys/odop/milestone/48?closed=1) was released May 09, 2021.   
 [ODOP version 4.0.5](https://github.com/thegrumpys/odop/milestone/49?closed=1) was released June 06, 2021.   
+[ODOP version 4.0.6](https://github.com/thegrumpys/odop/milestone/50?closed=1) was released August 05, 2021.   
 Follow the links above to see change details in GitHub.  
 
 ODOP is [Experimental Software](experimental).  
