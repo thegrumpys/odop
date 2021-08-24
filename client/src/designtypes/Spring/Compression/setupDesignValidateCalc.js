@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, loadInitialState, logUsage, fixSymbolValue, setSymbolFlag, resetSymbolFlag } from '../../../store/actionCreators';
+import { changeSymbolConstraint, logUsage, fixSymbolValue, resetSymbolFlag } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -11,8 +11,6 @@ export const execute = {
                     Welcome to the ODOP:Spring web app!
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewCalculator" target="_blank" rel="noopener noreferrer">Calculator view</a>&nbsp; 
                     is below. 
-                    The default FIXes and constraints are now optimized for design validation problems.
-                    More detail on this point follows.
                     </p>
 
                     <p>
@@ -85,6 +83,13 @@ export const execute = {
                     The <a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     sessions provide additional detail on these concepts.
                     For now, Firefox users need to use Advanced View in order to access FIX / FREE and constraints. 
+                    </p>
+                    
+                    <p>
+                    The default FIXes and constraints are now optimized for design validation problems.
+                    Specifically, all inputs are in FIXed status.
+                    In order to utilize the Search feature, you will need to use right click in order
+                    to put at least one input (Independent Variable) in FREE status.
                     </p>
                     
                     <p>
@@ -164,12 +169,12 @@ export const execute = {
                     <br />
                     Use <b>right-click</b> on a value to specify what is known or desired in order to describe 
                     your design objectives in terms of FIX, FREE and constraints.  
-                    Values with FREE status will be calculated.  
-                    Independent Variables need to have a plausible (not blank; usually not zero and not negative) starting value.
-                    Be sure to select appropriate values for Material_Type and End_Type.
+                    Values with FREE status will be calculated. 
+                    Inputs (Independent Variables) need to have a plausible (not blank, not negative and usually not zero) starting value. 
+                    Be sure to select appropriate values for Material_Type and End_Type. 
                     Use the <b>Action : Search</b> menu or the Search button to find a feasible design. 
                     Use the <b>Action : Seek</b> menu to optimize a feasible design. 
-                    Switch to other views to utilize additional capabilities of ODOP:Spring.
+                    Switch to other views to utilize additional capabilities of ODOP:Spring. 
                    </p>
                     
                     <p>
