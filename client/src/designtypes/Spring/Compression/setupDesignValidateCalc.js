@@ -58,6 +58,9 @@ export const execute = {
                 fixSymbolValue('Force_2'),
                 resetSymbolFlag('Coils_A', MAX, CONSTRAINED),
                 resetSymbolFlag('FS_2', MAX, CONSTRAINED),
+                changeSymbolConstraint('L_Stroke', MIN, 0.01),
+                changeSymbolConstraint('ID_Free', MIN, 0.01),
+                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
 
 //                                       Expect to re-enable NaN in future release
 //                                       "NaN" (Not a Number) may appear if inputs are not complete.
