@@ -47,7 +47,7 @@ export const execute = {
             actions: [
 //                                       We have concluded that AutoSave here is not a good idea
 //                saveAutoSave(),
-                logUsage('event','welcomeCalc', { 'event_label': 'Page 01 of 04' }),
+                logUsage('event','setupDesignValidateCalc', { 'event_label': 'Page 01 of 04' }),
                 fixSymbolValue('Wire_Dia'),
                 fixSymbolValue('OD_Free'),
                 fixSymbolValue('L_Free'),
@@ -107,7 +107,7 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                logUsage('event','welcomeCalc', { 'event_label': 'Page 02 of 04' })
+                logUsage('event','setupDesignValidateCalc', { 'event_label': 'Page 02 of 04' })
             ]
         },
         {
@@ -141,7 +141,7 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                logUsage('event','welcomeCalc', { 'event_label': 'Page 03 of 04' })
+                logUsage('event','setupDesignValidateCalc', { 'event_label': 'Page 03 of 04' })
             ]
         },
         {
@@ -188,7 +188,7 @@ export const execute = {
                 </React.Fragment>
             ),
             actions: [
-                logUsage('event','welcomeCalc', { 'event_label': 'Page 04 of 04' })
+                logUsage('event','setupDesignValidateCalc', { 'event_label': 'Page 04 of 04' })
             ]
         }
     ]
