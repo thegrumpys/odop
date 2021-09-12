@@ -1,9 +1,15 @@
 #### Setting Values   
 
-This entry covers the input of values into ODOP.  
+This entry covers the input of values into ODOP. 
 Additional information on Fix, Free and constraints is provided.
 
 **Advanced View**
+
+New values may be supplied by clicking on the desired value and directly over-writing the existing value. 
+The existing value may be edited or double-click (double-tap a touch screen) to replace the entire value.  
+
+Use the checkbox immediately right of the variable value to control Fix / Free status. 
+Use the checkbox immediately left of constraint levels to enable or disable constraints. 
 
 _Independent Variables_
 
@@ -25,9 +31,14 @@ Otherwise, a compromise is achieved.
 
 &nbsp;
 
-(coil spring specific) **Calculator View**
+(coil spring specific) **Calculator View**  
 
-(marked up graphic of settings dialog goes here)
+Use right-click (long press on a touch screen) to access the value input dialog box.
+
+The operation of Fix, Free and constraints described in the Advanced View section above 
+applies to Calculator View as well.
+
+(ToDo: marked up graphic of settings dialog goes here)
 
 &nbsp;
 
