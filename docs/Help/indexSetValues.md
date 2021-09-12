@@ -1,0 +1,11 @@
+## Setting Values
+* [Terminology](terminology)
+* [Fix term](Terminology#fix)
+* [Search term](Terminology#Search)
+* [Design Situations](designSituations)
+* [Default Designs](defaultDesigns)
+* [Feasibility](feasibility)
+* [Search](search)
+* [Seek](seek)
+* [Trade](trade)
+* [Hints, Tips and Tricks](htt)
