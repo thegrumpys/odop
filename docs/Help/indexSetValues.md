@@ -1,7 +1,8 @@
 ## Setting Values
-* [Terminology](terminology)
-* [Fix term](Terminology#fix)
-* [Search term](Terminology#Search)
+* [Setting Values](settingValues)
+* [Terminology - all](terminology)
+* [Fix term](terminology#fix)
+* [Search term](terminology#Search)
 * [Design Situations](designSituations)
 * [Default Designs](defaultDesigns)
 * [Feasibility](feasibility)
