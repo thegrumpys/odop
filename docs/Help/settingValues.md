@@ -3,7 +3,7 @@
 This entry covers the input of values into ODOP.  
 Additional information on Fix, Free and constraints is provided.
 
-** _Advanced View_ **
+**Advanced View**
 
 _Independent Variables_
 
@@ -25,7 +25,7 @@ Otherwise, a compromise is achieved.
 
 &nbsp;
 
-(coil spring specific) ** _Calculator View_ **
+(coil spring specific) **Calculator View**
 
 (marked up graphic of settings dialog goes here)
 
