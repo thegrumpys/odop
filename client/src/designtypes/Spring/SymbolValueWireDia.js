@@ -19,6 +19,7 @@ import ConstraintsMaxRowDependentVariable from '../../components/ConstraintsMaxR
 import NameValueUnitsHeaderCalcInput from '../../components/NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from '../../components/NameValueUnitsRowCalcInput';
 import { logValue } from '../../logUsage';
+import { logUsage } from '../../logUsage';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -37,6 +38,7 @@ class SymbolValueWireDia extends Component {
         super(props);
         this.onSelect = this.onSelect.bind(this);
         this.onContextMenu = this.onContextMenu.bind(this);
+        this.onContextHelp = this.onContextHelp.bind(this);
         this.onClose = this.onClose.bind(this);
         this.state = {
             modal: false,
@@ -58,6 +60,15 @@ class SymbolValueWireDia extends Component {
         this.setState({
             modal: true,
         });
+    }
+    
+    onContextHelp() {
+//        console.log('In SymbolValueWireDia.onContextHelp this=',this);
+        logUsage('event', 'SymbolValueWireDia', { 'event_label': 'context Help button' });
+        this.setState({
+            modal: !this.state.modal
+        });
+        window.open('https://thegrumpys.github.io/odop/Help/indexSetValues', '_blank');
     }
 
     onClose() {
@@ -188,6 +199,10 @@ class SymbolValueWireDia extends Component {
                                     <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
                                 </React.Fragment>}
                         </Table>
+                            Use the checkbox to control <b>Fix</b> / <b>Free</b>. &nbsp; 
+                            <b>Fix</b> status prevents changes. &nbsp; 
+                            <b>Free</b> status allows changes to achieve a feasible design. <br/>
+                        <br/>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
@@ -214,6 +229,8 @@ class SymbolValueWireDia extends Component {
                         </Table>
                     </Modal.Body>
                     <Modal.Footer>
+                        <Button outline="true" variant="info" onClick={this.onContextHelp}>Help</Button>{' '}
+                        &nbsp;
                         <Button variant="primary" onClick={this.onClose}>Close</Button>
                     </Modal.Footer>
                 </Modal>
