@@ -38,7 +38,7 @@ Use right-click (long press on a touch screen) to access the value input dialog 
 The operation of Fix, Free and constraints described in the Advanced View section above 
 applies to Calculator View as well.
 
-(ToDo: marked up graphic of settings dialog goes here)
+![Value input dialog box](./png/ValueInputDialogNoted.png "Value input dialog box")   
 
 &nbsp;
 
