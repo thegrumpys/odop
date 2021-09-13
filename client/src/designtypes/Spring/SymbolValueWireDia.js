@@ -199,10 +199,21 @@ class SymbolValueWireDia extends Component {
                                     <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
                                 </React.Fragment>}
                         </Table>
-                            Use the checkbox to control <b>Fix</b> / <b>Free</b>. &nbsp; 
-                            <b>Fix</b> status prevents changes. &nbsp; 
-                            <b>Free</b> status allows changes to achieve a feasible design. <br/>
-                        <br/>
+                        <Table size="sm" style={{backgroundColor: '#eee'}} className="mb-0">
+                            <tbody>
+                                <tr className="table-light">
+                                    <td>
+                                        <em>
+                                            Use the checkbox to control the value's <b>Fix</b> / <b>Free</b> status.
+                                            <ul className="pt-1">
+                                                <li><b>Fix</b>: Check to prevent <img src="designtypes/Spring/SearchButton.png"/> from changing the value.</li>
+                                                <li><b>Free</b>: Uncheck to allow <img src="designtypes/Spring/SearchButton.png"/> to change the value.</li>
+                                            </ul>
+                                        </em>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
