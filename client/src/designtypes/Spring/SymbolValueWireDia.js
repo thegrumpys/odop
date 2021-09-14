@@ -206,8 +206,8 @@ class SymbolValueWireDia extends Component {
                                         <em>
                                             Use the checkbox to control the value's <b>Fix</b> / <b>Free</b> status.
                                             <ul className="pt-1">
-                                                <li><b>Fix</b>: Check to prevent <img src="designtypes/Spring/SearchButton.png"/> from changing the value.</li>
-                                                <li><b>Free</b>: Uncheck to allow <img src="designtypes/Spring/SearchButton.png"/> to change the value.</li>
+                                                <li><b>Fix</b>: Check to prevent <img src="designtypes/Spring/SearchButton.png" alt="SearchButton"/> from changing the value.</li>
+                                                <li><b>Free</b>: Uncheck to allow changes to achieve a feasible design.</li>
                                             </ul>
                                         </em>
                                     </td>
