@@ -18,6 +18,7 @@ import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVari
 import NameValueUnitsHeaderCalcInput from './NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 import { logValue } from '../logUsage';
+import { logUsage } from '../logUsage';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -39,6 +40,7 @@ class SymbolValue extends Component {
         this.onBlur = this.onBlur.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onContextMenu = this.onContextMenu.bind(this);
+        this.onContextHelp = this.onContextHelp.bind(this);
         this.onClose = this.onClose.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
@@ -133,6 +135,15 @@ class SymbolValue extends Component {
         this.setState({
             modal: true,
         });
+    }
+
+    onContextHelp() {
+//        console.log('In SymbolValueWireDia.onContextHelp this=',this);
+        logUsage('event', 'SymbolValueWireDia', { 'event_label': 'context Help button' });
+        this.setState({
+            modal: !this.state.modal
+        });
+        window.open('https://thegrumpys.github.io/odop/Help/indexSetValues', '_blank');
     }
 
     onClose() {
@@ -252,6 +263,21 @@ class SymbolValue extends Component {
                                     <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
                                 </React.Fragment>}
                         </Table>
+                        <Table size="sm" style={{backgroundColor: '#eee'}} className="mb-0">
+                            <tbody>
+                                <tr className="table-light">
+                                    <td>
+                                        <em>
+                                            Use the checkbox to control the value's <b>Fix</b> / <b>Free</b> status.
+                                            <ul className="pt-1">
+                                                <li><b>Fix</b>: Check to prevent <img src="designtypes/Spring/SearchButton.png" alt="SearchButton"/> from changing the value.</li>
+                                                <li><b>Free</b>: Uncheck to allow changes to achieve a feasible design.</li>
+                                            </ul>
+                                        </em>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
@@ -278,6 +304,8 @@ class SymbolValue extends Component {
                         </Table>
                     </Modal.Body>
                     <Modal.Footer>
+                        <Button outline="true" variant="info" onClick={this.onContextHelp}>Help</Button>{' '}
+                        &nbsp;
                         <Button variant="primary" onClick={this.onClose}>Close</Button>
                     </Modal.Footer>
                 </Modal>
