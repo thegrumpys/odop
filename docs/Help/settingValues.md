@@ -42,8 +42,7 @@ applies to Calculator View as well.
 
 &nbsp;
 
-Notes:
-Don't leave a value field blank.
-See also: [Not a Number](htt#nan)
-
+Notes:   
+ - Don't leave a value field blank.  See also: [Not a Number](htt#nan)
+ - xxx
  

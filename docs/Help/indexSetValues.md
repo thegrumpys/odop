@@ -4,8 +4,8 @@
 Related topics
 
 * [Terminology - all](terminology)
-* [Fix term](terminology#fix)
-* [Search term](terminology#search)
+* ["Fix" and "Free" terms](terminology#fix)
+* ["Search" term](terminology#search)
 * [Design Situations](designSituations)
 * [Default Designs](defaultDesigns)
 * [Feasibility](feasibility)
