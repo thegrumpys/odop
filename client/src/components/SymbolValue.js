@@ -268,10 +268,12 @@ class SymbolValue extends Component {
                                 <tr className="table-light">
                                     <td>
                                         <em>
-                                            Use the checkbox to control the value's <b>Fix</b> / <b>Free</b> status.
+                                            Use the checkbox to control this value's <b>Fix</b> / <b>Free</b> status.
                                             <ul className="pt-1">
-                                                <li><b>Fix</b>: Check to prevent <img src="designtypes/Spring/SearchButton.png" alt="SearchButton"/> from changing the value.</li>
-                                                <li><b>Free</b>: Uncheck to allow changes to achieve a feasible design.</li>
+                                                <li><b>Fix</b>: Check to prevent <img src="designtypes/Spring/SearchButton.png" alt="SearchButton"/> from changing this value.</li>
+                                                <li><b>Free</b>: Uncheck to allow changes to this value as
+                                                &nbsp;<img src="designtypes/Spring/SearchButton.png" alt="SearchButton"/>&nbsp;
+                                                works to achieve a feasible design.</li>
                                             </ul>
                                         </em>
                                     </td>
