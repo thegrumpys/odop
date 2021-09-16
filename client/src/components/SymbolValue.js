@@ -242,7 +242,7 @@ class SymbolValue extends Component {
                 <Modal show={this.state.modal} className={this.props.className} onHide={this.onClose}>
                     <Modal.Header>
                         <Modal.Title>
-                            Advanced Settings
+                            Value Input
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -271,9 +271,7 @@ class SymbolValue extends Component {
                                             Use the checkbox to control this value's <b>Fix</b> / <b>Free</b> status.
                                             <ul className="pt-1">
                                                 <li><b>Fix</b>: Check to prevent <img src="designtypes/Spring/SearchButton.png" alt="SearchButton"/> from changing this value.</li>
-                                                <li><b>Free</b>: Uncheck to allow changes to this value as
-                                                &nbsp;<img src="designtypes/Spring/SearchButton.png" alt="SearchButton"/>&nbsp;
-                                                works to achieve a feasible design.</li>
+                                                <li><b>Free</b>: Uncheck to allow <img src="designtypes/Spring/SearchButton.png" alt="SearchButton"/> to change this value.</li>
                                             </ul>
                                         </em>
                                     </td>
