@@ -13,9 +13,9 @@ The details:
 
 The ODOP View menu provides access to various "Views".  
 Each view is just a different way of looking at the current state of the [mathematical model](terminology#mathModel). 
-All ODOP [design types](terminology#designTypes) provide an "Advanced View" that permits input of values and provides access to all features.
-The ODOP spring design types also provide output-only "reports" and 
-a simplified spring design specific "Calculator View" that accepts inputs.
+All ODOP [design types](terminology#designTypes) provide an "[Advanced View](menus#ViewAdvanced)" that permits input of values and provides access to all features.
+The ODOP spring design types also provide output-only "[Reports](menus#ViewReports)" and 
+a simplified spring design specific "[Calculator View](menus#ViewCalculator)" that accepts inputs.
 
 User inputs to Advanced View And Calculator View operate similiarly.   
 
@@ -41,16 +41,18 @@ Otherwise, a compromise is achieved.
 
 _[Constraints](terminology#constraints)_
 
-If possible, Search will maintain a value greater than the minimum.
+When a minimum constraint is enabled, if possible Search will maintain a value greater than the minimum.
 Otherwise, a compromise is achieved.
 
-If possible, Search will maintain a value less than the maximum.
+When a maximum constraint is enabled, if possible Search will maintain a value less than the maximum.
 Otherwise, a compromise is achieved.   
+
+A constraint that is not enabled will have no influence on the result produced by Search.   
 
 **Operations specific to Calculator View**  
 
 Calculator View provides access to Fix / Free and constraints in a pop-up value input dialog box. 
-Use right-click (long press on a touch screen) on the variable of interest to access this value input dialog box. 
+Use right-click (long press on a touch screen) on the variable of interest to access the associated value input dialog box. 
 With Calculator View, values with a darker, more bold font may be changed by the user.
 Values with a dim or less bold font are calculated results and cannot be directly changed.
 
