@@ -3,6 +3,12 @@
 This entry covers the input of values into ODOP. 
 Additional information on the operation of [Fix, Free](terminology#fix) and [constraints](terminology#constraints) is provided.   
 
+Quick overview:
+
+![Value input dialog box](./png/ValueInputDialogClip.png "Value input dialog clip")   
+
+The details:
+
 **Views**
 
 The ODOP View menu provides access to various "Views".  
