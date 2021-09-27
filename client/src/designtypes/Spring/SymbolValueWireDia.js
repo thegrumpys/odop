@@ -68,7 +68,7 @@ class SymbolValueWireDia extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.open('https://thegrumpys.github.io/odop/Help/indexSetValues', '_blank');
+        window.open('https://thegrumpys.github.io/odop/Help/settingValues', '_blank');
     }
 
     onClose() {
@@ -204,10 +204,10 @@ class SymbolValueWireDia extends Component {
                                 <tr className="table-light">
                                     <td>
                                         <em>
-                                            Use the checkbox to control this value's <b>Fix</b> / <b>Free</b> status.
+                                            The checkbox controls this value's <b>Fix</b> / <b>Free</b> status.
                                             <ul className="pt-1">
-                                                <li><b>Fix</b>: Check to prevent <img src="designtypes/Spring/SearchButton.png" alt="SearchButton"/> from changing this value.</li>
-                                                <li><b>Free</b>: Uncheck to allow <img src="designtypes/Spring/SearchButton.png" alt="SearchButton"/> to change this value.</li>
+                                                <li><b>Fix</b>: Check to prevent <img src="SearchButton.png" alt="SearchButton"/> from changing this value.</li>
+                                                <li><b>Free</b>: Uncheck to allow <img src="SearchButton.png" alt="SearchButton"/> to change this value.</li>
                                             </ul>
                                         </em>
                                     </td>
