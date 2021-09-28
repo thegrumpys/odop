@@ -7,6 +7,19 @@ Quick overview:
 
 ![Value input dialog box](./png/ValueInputDialogClip.png "Value input dialog clip")   
 
+Related topics:
+
+* [Terminology - all](terminology)
+* ["Fix" and "Free" terms](terminology#fix)
+* ["Search" term](terminology#search)
+* [Design Situations](designSituations)
+* [Default Designs](defaultDesigns)
+* [Feasibility](feasibility)
+* [Search](search)
+* [Seek](seek)
+* [Trade](trade)
+* [Hints, Tips and Tricks](htt)
+
 The details:
 
 **Views**
@@ -62,5 +75,5 @@ Values with a dim or less bold font are calculated results and cannot be directl
 
 Notes:   
  - Do not leave a value field blank.  See also: [Not a Number](htt#nan)
- - &nbsp;
+ - Input of values less than 1.0 requires a leading zero.  For example, enter "0.25", not ".25".
  
