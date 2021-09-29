@@ -69,9 +69,9 @@ They are the quantities on the right hand side of the equals sign that
 can be arbitrarily selected by the designer or search routine. 
 Once values are selected for each independent variable, 
 the design is completely determined. 
-For independent variables, a FIX operation reduces the computational demand 
+For independent variables, a Fix status reduces the computational demand 
 of the numerical search problem.
-See the [FIX](terminology#fix) entry below for more details.
+See the [Fix](terminology#fix) entry below for more details.
 
 ___
 
@@ -83,9 +83,10 @@ The dependent variables are the outputs of the design equations.
 They are the quantities on the left hand side of the equal sign.
 Frequently, dependent variables are measures of the performance of a given
 design and can be thought of as indicating the "state" of the design. 
-A Search operation is required to establish appropriate values of the
-independent variables to produce the desired value of a FIXed dependent
-variable.  A FIX operation on a dependent variable increases the
+A [Search](terminology#search) is required to establish appropriate values of the
+independent variables to produce the desired value of a dependent
+variable in Fix status.  
+A a dependent variable in Fix status increases the
 computational demand of the numerical search problem.
 See the [FIX](terminology#fix) entry below for more details.
 
@@ -96,7 +97,7 @@ ___
 
 **CALCULATION INPUTS** &nbsp;  (previously, "Constants")   
 Calculation Inputs are inputs to the design equations and are adjustable by the
-user, but are not manipulated by the search algorithm or subject to FIX or constraints. 
+user, but are not manipulated by the search algorithm or subject to Fix or constraints. 
 Calculation Inputs frequently represent material properties or other 
 physical parameters.
 
@@ -119,7 +120,7 @@ Minimum or Maximum constraint checkbox and enter a value for the desired
 constraint level in the corresponding entry field.
 
 If any constraint is violated, a [Search](search) operation is 
-required to establish appropriate values of the free (not FIXed) 
+required to establish appropriate values of the free (not Fix status) 
 Independent Variables to meet the specified constraint levels.
 In order to save time and provide more predictable operation,
 ODOP will stop the search process if it gets very close to a feasible design 
@@ -167,31 +168,37 @@ ___
 ___
 
 **FIX and FREE**   
-The user can establish (i.e. FIX or hold) the value of any variable, independent or dependent.
-FIXed status is designated by checking the checkbox immediately to the right
+The user can establish (i.e. Fix or hold) the value of any variable, independent or dependent.
+Fix status is designated by checking the checkbox immediately to the right
 of the variable's value.
 
-FIXing an Independent Variable simply removes that variable from the set that
+Placing an Independent Variable in Fix status simply removes that variable from the set that
 is manipulated by the Search algorithm.
 This reduces the computational effort required for the Search to find a solution.
 The user can change the value of an Independent Variable by 
 entering a different value in that variable's value field. 
 The corresponding values of dependent variables are calculated and displayed immediately.
 
-FIXing a Dependent Variable is accomplished by establishing a weighted, 
-double-sided constraint.
+Fixing a Dependent Variable is accomplished internally by establishing a weighted, double-sided constraint.
 While not a significant concern, 
 this increases the computational effort required for the Search to find a solution.
-Once the appropriate FIX checkbox is checked, 
+Once the appropriate Fix checkbox is checked, 
 enter a target value in either the Minimum or Maximum constraint level entry field.
-A Search (Action : Search menu) is required to establish the desired values.
+A  [Search](terminology#search) (Action : Search menu) is required to establish the desired values.
 
-Clearing the checkbox (FREE) allows the Search to alter the value of the corresponding variable
+Clearing the checkbox (Free status) allows the Search to alter the value of the corresponding variable
 subject to constraints, if established.
 
-Establishing additional constraints and FIXed variables can reduce the ability of Search 
-to find a feasible solution.
-Too many constraints and FIXed variables can create an over-specified situation. 
+A "design" is determined primarily (ignoring the role of Calculation Inputs for the moment)
+by the set of independent variables.
+While a variable in Fix status cannot have its value adjusted 
+in order to contribute to achieving a feasible design, 
+Search will adjust the value of other variables in Free status to achieve feasibility. 
+If no variables with Free status are available, Search will produce an error message.
+
+Establishing additional constraints and placing variables in Fix status 
+can reduce the ability of Search to find a feasible solution.
+Too many constraints and variables in Fix status can create an over-specified situation. 
 
 See also: [Design Situations](designSituations)
 
@@ -225,7 +232,7 @@ ___
 
 **OBJECTIVE FUNCTION**   
 The objective function constitutes the numerical search problem.  It is
-formed as a blend of violated constraints, dependent variable FIX
+formed as a blend of violated constraints, dependent variable Fix 
 violations and in the case of the [SEEK](seek) feature, a "merit function" that
 represents the variable under investigation.  The search algorithm works
 to drive the objective function to the lowest value possible.
@@ -291,16 +298,17 @@ ___
 **SEARCH**    
 The term "Search" is used in the sense of "Search for a solution". 
 The ODOP Search feature (<b>Action : Search</b> menu item or Search button) 
-is used to find a feasible design.
+is used to find a feasible design. 
+The action of Search is conceptually similar to a manual recalculation operation in a spreadsheet program.   
 
 The [Search](search) algorithm manipulates the values of independent variables 
 so as to minimize the Objective Value. 
 Because the [OBJECTIVE FUNCTION](terminology#obj) is constructed as a sum of 
-constraint and dependent variable FIX violations, 
+constraint and dependent variable Fix violations, 
 minimizing the Objective Value will minimize violations and 
 thus move in the direction of a feasible design.
 The solution provided by  Search represents the best available solution to the 
-designer's goals as expressed by constraints and FIXes. 
+designer's goals as expressed by constraints and Fixes. 
 If a solution that meets all of these goals, is not available, 
 the search process converges to a compromise.
 Typically, this compromise violates multiple constraints.
