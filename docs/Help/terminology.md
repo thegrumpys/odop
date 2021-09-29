@@ -289,7 +289,9 @@ ___
 ___
 
 **SEARCH**    
-Search (<b>Action : Search</b> menu item) is used to find a feasible design.
+The term "Search" is used in the sense of "Search for a solution". 
+The ODOP Search feature (<b>Action : Search</b> menu item or Search button) 
+is used to find a feasible design.
 
 The [Search](search) algorithm manipulates the values of independent variables 
 so as to minimize the Objective Value. 

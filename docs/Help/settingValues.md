@@ -5,7 +5,9 @@ Additional information on the operation of [Fix, Free](terminology#fix) and [con
 
 Quick overview:
 
-![Value input dialog box](./png/ValueInputDialogClip.png "Value input dialog clip")   
+![Independent variable value input dialog box](./png/ValueInputDialogIndep5Noted.png "Independent variable value input dialog box")   
+
+![Dependent Variable value input dialog box](./png/ValueInputDialogDep5Noted.png "Dependent variable value input dialog box")   
 
 Related topics:
 
@@ -68,8 +70,7 @@ Calculator View provides access to Fix / Free and constraints in a pop-up value 
 Use right-click (long press on a touch screen) on the variable of interest to access the associated value input dialog box. 
 With Calculator View, values with a darker, more bold font may be changed by the user.
 Values with a dim or less bold font are calculated results and cannot be directly changed.
-
-![Value input dialog box](./png/ValueInputDialogNoted.png "Value input dialog box")   
+See the images above.
 
 &nbsp;
 
