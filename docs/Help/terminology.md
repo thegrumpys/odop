@@ -21,6 +21,7 @@ The following terms have special meanings used in the context of this program.
 [ODOP DESIGN LIBRARY](terminology#designLib)  
 [MIGRATION](terminology#migration)  
 [SPRING DESIGN VARIABLE NAMES](terminology#sdnames)  
+[FACTOR OF SAFETY](terminology#FactorOfSafety)  
 
 ___
 
@@ -366,9 +367,20 @@ ___
 **SPRING DESIGN VARIABLE NAMES**   
 
 [Variable names illustrated on compression spring Force-Deflection diagram:](png/ForceVsDeflection.png)
+___
+
+<a id="FactorOfSafety"></a>  
+___
+
+**FACTOR OF SAFETY**   
+
+This term is described in detail in the spring design overview section: 
+[Factor of Safety](SpringDesign/spring_oview#FS)
+
+___
 
 See also:
- - [Terms including "Factor of Safety" common to all spring types](SpringDesign/spring_oview) 
+ - [Terms common to all spring types](SpringDesign/spring_oview) 
  - [Compression spring](DesignTypes/c_spring) 
  - [Extension spring](DesignTypes/e_spring) 
  - [Torsion spring](DesignTypes/t_spring) 

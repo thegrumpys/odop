@@ -2,6 +2,7 @@
 
 This section presents design process information that is common to each of the
 coil spring types supported by ODOP:Spring.
+___
 
 For specifics, see:   
 * [Advanced Spring Operations](./advancedSpringOperations)   
@@ -11,8 +12,33 @@ For specifics, see:
 * [Compression Spring](../DesignTypes/c_spring)   
 * [Extension Spring](../DesignTypes/e_spring)   
 * [Torsion Spring](../DesignTypes/t_spring)   
+___
 
-**Spring Basics**   
+**On this page:**   
+
+[Spring basics](spring_oview#SpringBasics)  
+[The essential challenge of spring design](spring_oview#tesosd)  
+[Force-Deflection relationships](spring_oview#FDrelations)  
+[Allowable stresses and Factor of Safety](spring_oview#asfs)  
+[How to judge a good spring design](spring_oview#htjagsd)  
+[Technique](spring_oview#Technique)  
+[Names](spring_oview#Names)  
+[Spring Constraints](spring_oview#SpringConstraints)  
+[Constraints common to both compression and extension springs](spring_oview#cctbcaes)  
+[Factor of Safety](spring_oview#FoS)  
+[Materials](spring_oview#Materials)  
+[End Types](spring_oview#EndTypes)  
+[Cycle Life](spring_oview#cycleLife)  
+[What To Do If](spring_oview#wtdi)  
+[References](spring_oview#References)  
+[Restrictions](spring_oview#Restrictions)  
+
+___
+
+<a id="SpringBasics"></a>  
+___
+
+**Spring basics**   
  This section provides a limited amount of introductory material on spring
  design in the context of the ODOP:Spring program.
 
@@ -25,8 +51,12 @@ For specifics, see:
  ODOP:Spring documentation. 
  In  particular, refer to the specific spring type sections for additional details on
  variable Names and Force-Deflection Diagrams.
+___
 
-**The essential challenge of spring design:**   
+<a id="tesosd"></a>  
+___
+
+**The essential challenge of spring design**   
 The challenge of any design problem is to select values for those
 parameters that are under the designer's control such that the design
 produces the desired performance.
@@ -82,8 +112,12 @@ ODOP:Spring provides tools to assist in the process of making those
 compromises, but the ultimate responsibility for the design rests with
 the designer.
 
-   
-**Force-Deflection relationships:**   
+___
+
+<a id="FDrelations"></a>  
+___
+
+**Force-Deflection relationships**   
 Each of the spring type specific sections presents a Force-Deflection Diagram. 
 Most of a spring design problem can be stated in terms of those diagrams. 
 New users need to understand the diagram and understand
@@ -105,6 +139,11 @@ line with the other values, the conflict will keep ODOP:Spring from
 finding a feasible solution.  Consistent specification of constraints
 and FIX values is the responsibility of the ODOP:Spring user.
    
+___
+
+<a id="asfs"></a>  
+___
+
 **Allowable stresses and Factor of Safety**   
 ODOP:Spring can use a table of material properties to determine permissible
 stress levels for various commonly used spring materials. 
@@ -138,8 +177,12 @@ below titled Factor Of Safety and Cycle Life.
 Selection of materials from the ODOP:Spring materials table is covered 
 below in the Materials section and in the tutorial.
 
-   
-**How to judge a good spring design:**   
+___
+
+<a id="htjagsd"></a>  
+___
+
+**How to judge a good spring design**   
 The interpretation of a "good" spring design depends strongly on the
 intended application.  It is possible that some applications will
 require a spring to operate at stress levels that would make it totally
@@ -204,8 +247,12 @@ possible spring applications.
 More precise treatments of this subject are available in the sources listed 
 in the [Spring Design References](./references) section of the documentation.
 
-   
-**Technique:**   
+___
+
+<a id="Technique"></a>  
+___
+
+**Technique**   
 A typical spring design process should start by entering what is known
 about the problem. 
 As described in more detail in the [Introduction](../introduction) 
@@ -238,7 +285,11 @@ documentation sections [Introduction](../introduction),
 The [demo and tutorial sessions](../gettingStartedSpring) supplied with 
 ODOP:Spring provide detailed commentary on how to solve a variety of problems.
 
-   
+___
+
+<a id="Names"></a>  
+___
+
 **Names**   
  ODOP:Spring contains many kinds of names.  Menu item names are discussed
  individually in the later sections of the documentation.  Names for Independent
@@ -281,6 +332,11 @@ For specifics on names associated with each spring type, see:
 * [Extension Spring](../DesignTypes/e_spring)   
 * [Torsion Spring](../DesignTypes/t_spring)   
    
+___
+
+<a id="SpringConstraints"></a>  
+___
+
 **Spring Constraints**   
  While most of ODOP:Spring constraints are obvious, a few need a bit of
  additional explanation.  This section primarily covers constraints that are
@@ -292,8 +348,12 @@ For specifics on names associated with each spring type, see:
  documentation sections Spring Basics (above), the
  NAMES sections of each of the specific spring types and
  [Terminology](../terminology).
-   
-**Constraints common to both compression and extension springs:**
+___
+
+<a id="cctbcaes"></a>  
+___
+
+**Constraints common to both compression and extension springs**
 
 L\_Stroke MIN is a lower constraint on L\_Stroke, the length difference
 between point 1 and point 2.  Refer to the force-deflection diagram in
@@ -329,16 +389,19 @@ FS\_CycleLife MIN is a lower constraint level associated with
 FS\_CycleLife.  A value less than 1.0 will permit designs that risk
 failure in high cycle applications.
    
+___
 
-   
-**Factor Of Safety**
+<a id="FoS"></a>  
+___
+
+**Factor of Safety**
 
                          allowable stress
-    factor of safety =  ------------------
+    Factor of Safety =  ------------------
                          actual stress
 
 
- Factor of safety may be interpreted as:
+ Factor of Safety may be interpreted as:
     "How much better this design is than it HAS to be."
 
 
@@ -373,7 +436,13 @@ Selection of materials (and corresponding material properties)
 from the ODOP:Spring materials table is covered in the Materials
 section (next, below) and in the tutorial.
 
-   
+See also: https://en.wikipedia.org/wiki/Factor_of_safety
+
+___
+
+<a id="Materials"></a>  
+___
+
 **Materials**   
 Spring wire and bar materials available in the default material table supplied 
 with ODOP:Spring include:
@@ -419,6 +488,10 @@ the calculations is desired, the details provided in
 
 Examples of these procedures are presented in tutorial section TUTOR5.
 
+___
+
+<a id="EndTypes"></a>  
+___
    
 **End Types**   
 The current version of the ODOP:Spring program implements six spring end
@@ -453,9 +526,11 @@ documentation sections on the specific spring types:
 Additional information on spring end types is available in the sources listed
 in [Spring Design References](./references).   
 
+___
 
 <a id="cycleLife"></a>  
-   
+___
+
 **Cycle Life**   
 This section presents a discussion of cycle life considerations and
 describes the Soderberg calculation and the ODOP:Spring interpretation of
@@ -517,6 +592,10 @@ Additional information on the cycle life calculation is available in
 tutorial session TUTOR4, in the documentation on the specific spring types 
 and also in the sources listed in [Spring Design References](./references).
    
+___
+
+<a id="wtdi"></a>  
+___
    
 **What To Do If**   
 This section is intended to anticipate some of the more common user
@@ -581,14 +660,27 @@ inconsistency with another design method (hand calculator, spreadsheet
 calculation, etc.).  If the problem remains unresolved, please report it
 via the procedures for opening an issue on GitHub.   
 
+___
+
+<a id="References"></a>  
+___
 
 **References**   
 
 Refer to: [Spring Design References](./references)
 
+___
+
+<a id="Restrictions"></a>  
+___
+
 **Restrictions**   
 
 Refer to: [Restrictions](../../About/Legal/Restrictions)
+
+___
+
+&nbsp;
 
 [Spring Design Topics](./)   
 [Help](../)   
