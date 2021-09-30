@@ -375,7 +375,7 @@ ___
 **FACTOR OF SAFETY**   
 
 This term is described in detail in the spring design overview section: 
-[Factor of Safety](SpringDesign/spring_oview#FS)
+[Factor of Safety](SpringDesign/spring_oview#FoS)
 
 ___
 
