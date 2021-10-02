@@ -242,7 +242,7 @@ class SymbolValue extends Component {
                 <Modal show={this.state.modal} className={this.props.className} onHide={this.onClose}>
                     <Modal.Header>
                         <Modal.Title>
-                            Value Input
+                            {this.props.element.type === "equationset" && this.props.element.input ? 'Independent' : 'Dependent'} Variable Value Input
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
