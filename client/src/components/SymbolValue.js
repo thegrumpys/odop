@@ -35,7 +35,6 @@ class SymbolValue extends Component {
     constructor(props) {
 //        console.log('In SymbolValue.constructor props=',props);
         super(props);
-        this.onChange = this.onChange.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onSelect = this.onSelect.bind(this);
@@ -92,12 +91,6 @@ class SymbolValue extends Component {
         }
     }
 
-    onChange(event) {
-//        console.log('In SymbolValue.onChange event.target.value=',event.target.value);
-       this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
-       logValue(this.props.element.name,event.target.value);
-    }
-
     onFocus(event) {
 //        console.log("In SymbolValue.onFocus event.target.value=", event.target.value);
        this.setState({
@@ -138,8 +131,8 @@ class SymbolValue extends Component {
     }
 
     onContextHelp() {
-//        console.log('In SymbolValueWireDia.onContextHelp this=',this);
-        logUsage('event', 'SymbolValueWireDia', { 'event_label': 'context Help button' });
+//        console.log('In SymbolValue.onContextHelp this=',this);
+        logUsage('event', 'SymbolValue', { 'event_label': 'context Help button' });
         this.setState({
             modal: !this.state.modal
         });
@@ -152,7 +145,7 @@ class SymbolValue extends Component {
             modal: false,
         });
     }
-    
+
     getValueClass() {
         var value_class = '';
         if (this.props.objective_value > 4*this.props.system_controls.objmin) {
@@ -172,34 +165,48 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.render this=',this);
         var value_class = 'text-right ';
         var value_tooltip;
+        var value_fix_free_text = '';
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass(); 
+            value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
         } else if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0)) {
-            value_class += this.getValueClass(); 
+            value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision();
         } else if (!this.props.element.input && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass(); 
+            value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision();
         } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) && (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass(); 
+            value_class += this.getValueClass();
             value_tooltip = "CONSTRAINT VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
         } else if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
-            value_class += this.getValueClass(); 
+            value_class += this.getValueClass();
             value_tooltip = "CONSTRAINT VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision();
         } else if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
-            value_class += this.getValueClass(); 
+            value_class += this.getValueClass();
             value_tooltip = "CONSTRAINT VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision();
         }
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
+            if (this.props.element.type !== "calcinput") {
+                if (this.props.element.input) { // Independent Variable?
+                  value_fix_free_text = <div className="mb-3"><em>Fixed status prevents <img src="SearchButton.png" alt="SearchButton"/> from changing the value of this variable.</em></div>; // For Fixed
+                } else {
+                  value_fix_free_text = <div className="mb-3"><em>Fixed status restrains the <img src="SearchButton.png" alt="SearchButton"/> result to be as close as possible to the constraint value.</em></div>; // For Fixed
+                }
+            }
         } else {
+            if (this.props.element.type !== "calcinput") {
+                value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton"/> to change the value of this variable.</em></div>; // For Free
+            }
             if (this.props.element.lmin & CONSTRAINED) {
                 value_class += "borders-constrained-min ";
             }
             if (this.props.element.lmax & CONSTRAINED) {
                 value_class += "borders-constrained-max ";
             }
+        }
+        if (this.props.element.input) { // Independent Variable?
+            value_class += "background-white ";
         }
 //        console.log('In SymbolValue.render value_class=',value_class);
         return (
@@ -209,32 +216,28 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                    <Form.Control readOnly type="number" className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                <Form.Control readOnly type="number" className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                             )
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control type="text" disabled={!this.props.element.input} className={value_class} value={this.props.element.value} onChange={this.onChange} />
+                                    <Form.Control readOnly type="text" className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="text" disabled={!this.props.element.input} className={value_class} value={this.props.element.value} onChange={this.onChange} />
+                                <Form.Control readOnly type="text" className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                             )
                         : ''}
                         { this.props.element.format === 'table' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={this.props.element.value} onChange={this.onSelect}>
-                                        {this.state.table.map((value, index) => index > 0 ? <option key={index} value={index}>{value[0]}</option> : '')}
-                                    </Form.Control>
+                                    <Form.Control readOnly type="text" className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                                 </OverlayTrigger>
                             :
-                                (<Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={this.props.element.value} onChange={this.onSelect}>
-                                    {this.state.table.map((value, index) => index > 0 ? <option key={index} value={index}>{value[0]}</option> : '')}
-                                </Form.Control>)
+                                <Form.Control readOnly type="text" className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                             )
                         : ''}
                     </InputGroup>
@@ -242,7 +245,7 @@ class SymbolValue extends Component {
                 <Modal show={this.state.modal} className={this.props.className} onHide={this.onClose}>
                     <Modal.Header>
                         <Modal.Title>
-                            {this.props.element.type === "equationset" && this.props.element.input ? 'Independent' : 'Dependent'} Variable Value Input
+                        {this.props.element.type === "equationset" && (this.props.element.input ? 'Independent Variable' : 'Dependent Variable')} Value Input
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -267,13 +270,7 @@ class SymbolValue extends Component {
                             <tbody>
                                 <tr className="table-light">
                                     <td>
-                                        <em>
-                                            The checkbox controls this value's <b>Fix</b> / <b>Free</b> status.
-                                            <ul className="pt-1">
-                                                <li><b>Fix</b>: Check to prevent <img src="SearchButton.png" alt="SearchButton"/> from changing this value.</li>
-                                                <li><b>Free</b>: Uncheck to allow <img src="SearchButton.png" alt="SearchButton"/> to change this value.</li>
-                                            </ul>
-                                        </em>
+                                      {value_fix_free_text}
                                     </td>
                                 </tr>
                             </tbody>

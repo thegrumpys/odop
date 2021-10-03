@@ -48,6 +48,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
     onChange(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onChange event.target.value=',event.target.value);
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
+        if (this.props.system_controls.enable_auto_fix) this.props.fixSymbolValue(this.props.element.name);
         logValue(this.props.element.name,event.target.value);
     }
 
@@ -108,7 +109,6 @@ class NameValueUnitsRowIndependentVariable extends Component {
                         </InputGroup>
                     </td>
                     <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
-                    <td></td>
                 </tr>
             </tbody>
         );
