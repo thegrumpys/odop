@@ -9,6 +9,7 @@ Quick overview:
 ![Independent variable value input dialog box](./png/ValueInputDialogIndep5Noted.png "Independent variable value input dialog box")   
 
 ![Dependent Variable value input dialog box](./png/ValueInputDialogDep5Noted.png "Dependent variable value input dialog box")   
+
 ___   
 
 Related topics:
@@ -23,6 +24,7 @@ Related topics:
 * [Seek](seek)
 * [Trade](trade)
 * [Hints, Tips and Tricks](htt)   
+
 ___   
 
 The details:
@@ -74,8 +76,8 @@ A constraint that is not enabled will have no influence on the result produced b
 
 _[Calculation Inputs](terminology#calcInputs)_
 
-The simplified and spring-specific Calculator View provides access to Material\_type and End\_Type only.  
-Both are drop-down selection lists.
+The simplified and spring-specific Calculator View provides access to Material\_type and End\_Type only. 
+Both are drop-down selection lists. 
 Advanced View provides access to the full set of input values for each design type.   
 
 **Operations specific to Calculator View**  
