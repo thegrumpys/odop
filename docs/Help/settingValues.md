@@ -22,9 +22,8 @@ Related topics:
 * [Search](search)
 * [Seek](seek)
 * [Trade](trade)
-* [Hints, Tips and Tricks](htt)
+* [Hints, Tips and Tricks](htt)   
 ___   
-
 
 The details:
 
@@ -73,13 +72,20 @@ Otherwise, a compromise is achieved.
 
 A constraint that is not enabled will have no influence on the result produced by Search.   
 
+_[Calculation Inputs](terminology#calcInputs)_
+
+The simplified and spring-specific Calculator View provides access to Material\_type and End\_Type only.  
+Both are drop-down selection lists.
+Advanced View provides access to the full set of input values for each design type.   
+
 **Operations specific to Calculator View**  
 
 Calculator View provides access to Fix / Free and constraints in a pop-up value input dialog box. 
+See the annotated images in the "Quick overview" section above. 
 Use right-click (long press on a touch screen) on the variable of interest to access the associated value input dialog box. 
 With Calculator View, values with a darker, more bold font may be changed by the user.
-Values with a dim or less bold font are calculated results and cannot be directly changed.
-See the annotated images in the "Quick overview" section above.
+Values with a dim or less bold font are calculated results and cannot be directly changed.   
+
 ___   
 
 Notes:   
