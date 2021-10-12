@@ -80,7 +80,9 @@ class Routes extends Component {
       config.url.execute = undefined; // Turn off execute
       this.props.history.push('/')
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load autoSave' });
-      displayMessage('AutoSave restored after interruption. Use FileSave, FileSaveAs or FileExport to save it permanently','info');
+      displayMessage(
+          'Design restored from AutoSave data after interruption.  See Help AutoSave for details.  Use File Save, File SaveAs or File Export to save the design permanently.',
+          'info');
   }
   
   loadInitialState(type, units) {
