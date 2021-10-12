@@ -37,7 +37,12 @@ cause AutoSave data to be deleted after the function.
 - Other operations do not utilize or affect AutoSave data.
 
 If AutoSave data exists at the time the app starts, 
-it will automatically load and provide a blue pop-up message describing the situation.
+it will automatically load and provide a blue pop-up message describing the situation. 
+
+This behavior allows a browser refresh / reload or click on the ODOP logo to be used as an "undo" for the most recent 
+Action : Search, Seek, Trade, Select Size and Select Catalog. 
+From there, an additional browser refresh / reload or press on the ODOP logo will replace the re-loaded AutoSave data 
+with the default design type (compression spring) and design (Startup). 
 
 Note that not all operations are recoverable by the current AutoSave implementation. 
 Users should save or export frequently and 
