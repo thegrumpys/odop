@@ -156,6 +156,12 @@ class SymbolValueWireDia extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
+        if (this.props.element.input) { // Independent Variable?
+            value_class += "background-white ";
+        } else {
+            value_class += "background-white ";
+        }
+//        console.log('In SymbolValueWireDia.render value_class=',value_class);
         return (
             <React.Fragment>
                 <td className={"align-middle " + this.props.className}>
