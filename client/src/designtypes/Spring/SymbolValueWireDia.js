@@ -30,9 +30,9 @@ Number.prototype.toODOPPrecision = function() {
     else odopValue = value.toFixed(0);
     return odopValue;
 };
-     
+
 class SymbolValueWireDia extends Component {
-    
+
     constructor(props) {
 //        console.log('In SymbolValueWireDia.constructor props=',props);
         super(props);
@@ -44,7 +44,7 @@ class SymbolValueWireDia extends Component {
             modal: false,
         };
     }
-    
+
     onSelect(event) {
 //        console.log('In SymbolValueWireDia.onSelect event.target.value=',event.target.value);
         var wire_dia = parseFloat(event.target.value);
@@ -55,13 +55,13 @@ class SymbolValueWireDia extends Component {
     }
 
     onContextMenu(e) {
-//        console.log('In SymbolValue.onContextMenu this=',this,'e=',e);
+//        console.log('In SymbolValueWireDia.onContextMenu this=',this,'e=',e);
         e.preventDefault();
         this.setState({
             modal: true,
         });
     }
-    
+
     onContextHelp() {
 //        console.log('In SymbolValueWireDia.onContextHelp this=',this);
         logUsage('event', 'SymbolValueWireDia', { 'event_label': 'context Help button' });
@@ -72,12 +72,12 @@ class SymbolValueWireDia extends Component {
     }
 
     onClose() {
-//        console.log('In SymbolValue.onCancel this=',this);
+//        console.log('In SymbolValueWireDia.onClose this=',this);
         this.setState({
             modal: false,
         });
     }
-    
+
     getValueClass() {
         var value_class = '';
         if (this.props.objective_value > 4*this.props.system_controls.objmin) {
@@ -89,12 +89,13 @@ class SymbolValueWireDia extends Component {
         } else {
             value_class += "text-strictly-feasible ";
         }
+//        console.log('In SymbolValueWireDia.getValueClass value_class=',value_class);
         return value_class;
     }
 
     render() {
 //        console.log('In SymbolValueWireDia.render this=',this);
-        
+
 //        console.log('In SymbolValueWireDia.render ../' + this.props.type + '/symbol_table_offsets.js');
         var o = require('../'+this.props.type+'/symbol_table_offsets.js'); // Dynamically load table
 //        console.log('In SymbolValueWireDia.render o =', o);
@@ -127,28 +128,39 @@ class SymbolValueWireDia extends Component {
 
         var value_class = 'text-right ';
         var value_tooltip;
+        var value_fix_free_text = '';
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass(); 
+            value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
         } else if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0)) {
-            value_class += this.getValueClass(); 
+            value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision();
         } else if (!this.props.element.input && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass(); 
+            value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision();
         } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) && (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass(); 
+            value_class += this.getValueClass();
             value_tooltip = "CONSTRAINT VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
         } else if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
-            value_class += this.getValueClass(); 
+            value_class += this.getValueClass();
             value_tooltip = "CONSTRAINT VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision();
         } else if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
-            value_class += this.getValueClass(); 
+            value_class += this.getValueClass();
             value_tooltip = "CONSTRAINT VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision();
         }
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
+            if (this.props.element.type !== "calcinput") {
+                if (this.props.element.input) { // Independent Variable?
+                  value_fix_free_text = <div className="mb-3"><em>Fixed status prevents <img src="SearchButton.png" alt="SearchButton"/> from changing the value of this variable.</em></div>; // For Fixed
+                } else {
+                  value_fix_free_text = <div className="mb-3"><em>Fixed status restrains the <img src="SearchButton.png" alt="SearchButton"/> result to be as close as possible to the constraint value.</em></div>; // For Fixed
+                }
+            }
         } else {
+            if (this.props.element.type !== "calcinput") {
+                value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton"/> to change the value of this variable.</em></div>; // For Free
+            }
             if (this.props.element.lmin & CONSTRAINED) {
                 value_class += "borders-constrained-min ";
             }
@@ -156,6 +168,7 @@ class SymbolValueWireDia extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
+//        console.log('In SymbolValueWireDia.render value_class=',value_class);
         return (
             <React.Fragment>
                 <td className={"align-middle " + this.props.className}>
@@ -178,7 +191,7 @@ class SymbolValueWireDia extends Component {
                 <Modal show={this.state.modal} className={this.props.className} onHide={this.onClose}>
                     <Modal.Header>
                         <Modal.Title>
-                        {this.props.element.type === "equationset" && this.props.element.input ? 'Independent' : 'Dependent'} Variable Value Input
+                        {this.props.element.type === "equationset" && (this.props.element.input ? 'Independent Variable' : 'Dependent Variable')} Value Input
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -203,13 +216,7 @@ class SymbolValueWireDia extends Component {
                             <tbody>
                                 <tr className="table-light">
                                     <td>
-                                        <em>
-                                            The checkbox controls this value's <b>Fix</b> / <b>Free</b> status.
-                                            <ul className="pt-1">
-                                                <li><b>Fix</b>: Check to prevent <img src="SearchButton.png" alt="SearchButton"/> from changing this value.</li>
-                                                <li><b>Free</b>: Uncheck to allow <img src="SearchButton.png" alt="SearchButton"/> to change this value.</li>
-                                            </ul>
-                                        </em>
+                                        {value_fix_free_text}
                                     </td>
                                 </tr>
                             </tbody>

@@ -17,9 +17,9 @@ class NameValueUnitsHeaderIndependentVariable extends Component {
                 </tr>
                 <tr>
                     <th className="text-left" colSpan="2" id="IVNameTitle">
-                    <OverlayTrigger placement="top" overlay={<Tooltip>Variable names</Tooltip>}>
-                        <span>Name</span>
-                    </OverlayTrigger>
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Variable names</Tooltip>}>
+                            <span>Name</span>
+                        </OverlayTrigger>
                     </th>
                     <th className="text-center" colSpan="2" id="IVValueTitle">
                         <OverlayTrigger placement="top" overlay={<Tooltip>Current values.<br />Check box at right to FIX. (Hold unchanged) <br /> Uncheck box to FREE <br /> (Allow Search to specify) <br /> See Help Terminology FIX</Tooltip>}>
@@ -31,7 +31,6 @@ class NameValueUnitsHeaderIndependentVariable extends Component {
                             <span>Units</span>
                         </OverlayTrigger>
                     </th>
-                    <th></th>
                 </tr>
             </thead>
         );
