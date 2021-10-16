@@ -193,7 +193,7 @@ it('reducers change symbol constraint min', () => {
     design = store.getState(); // after
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].cmin).toEqual(0.1);
-    expect(design.model.symbol_table[sto.RADIUS].smin).toEqual(0.1);
+    expect(design.model.symbol_table[sto.RADIUS].smin).toEqual(0.10000010000000001);
 });
 
 it('reducers change symbol constraint max', () => {
@@ -212,7 +212,7 @@ it('reducers change symbol constraint max', () => {
     design = store.getState(); // after
     expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(design.model.symbol_table[sto.THICKNESS].cmax).toEqual(0.06);
-    expect(design.model.symbol_table[sto.THICKNESS].smax).toEqual(0.06);
+    expect(design.model.symbol_table[sto.THICKNESS].smax).toEqual(0.0600001);
 });
 
 it('reducers set symbol flag min FIXED', () => {

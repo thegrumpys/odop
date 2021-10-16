@@ -38,7 +38,7 @@ it('search without merit', () => {
     var obj = search(store, design.model.system_controls.objmin);
 
     var design = store.getState(); // after
-    expect(obj).toEqual(0.14664192222304165);
+    expect(obj).toEqual(0.14664180506450808);
 
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
@@ -74,7 +74,7 @@ it('search without merit', () => {
     expect(design.model.system_controls.show_units).toEqual(1);
     expect(design.model.system_controls.show_violations).toEqual(1);
 
-    expect(design.model.result.objective_value).toEqual(0.14664192222304165);
+    expect(design.model.result.objective_value).toEqual(0.14664180506450808);
     expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 12 iterations.");
     expect(design.model.result.violated_constraint_count).toEqual(4);
 });
@@ -129,7 +129,7 @@ it('search with merit', () => {
     var obj = search(store, -1.0, merit);
 
     var design = store.getState(); // after
-    expect(obj).toEqual(0.017724895486223562);
+    expect(obj).toEqual(0.01772489464482386);
 
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
@@ -165,7 +165,7 @@ it('search with merit', () => {
     expect(design.model.system_controls.show_units).toEqual(1);
     expect(design.model.system_controls.show_violations).toEqual(1);
 
-    expect(design.model.result.objective_value).toEqual(0.017724895486223562);
+    expect(design.model.result.objective_value).toEqual(0.01772489464482386);
     expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 53 iterations.");
     expect(design.model.result.violated_constraint_count).toEqual(3);
 });
