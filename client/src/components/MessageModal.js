@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Alert, Button } from 'react-bootstrap';
+import { logUsage } from '../logUsage';
 
-export var displayMessage = function(message, variant = 'danger', header = '') {
+export var displayMessage = function(message, variant = 'danger', header = '', help_url = '') {
 //    console.log('In displayMessage this=',this);
     this.setState( // Special form of setState using updater function
         (prevState, props) => {
@@ -11,6 +12,7 @@ export var displayMessage = function(message, variant = 'danger', header = '') {
                     header: header, // First header wins
                     message: message, // Initialize message
                     variant: variant, // Initialize variant
+                    help_url: help_url, // Initialize Help URL
                 };
             } else {
                 return {
@@ -25,12 +27,14 @@ export class MessageModal extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.onContextHelp = this.onContextHelp.bind(this);
         displayMessage = displayMessage.bind(this); // Bind external function - no 'this'
         this.state = {
             modal: false, // Default: do not display
             header: '', // Default: no header
             message: '', // Default: no message
-            variant: 'danger'
+            variant: 'danger', // Default: danger
+            help_url: '', // Default: no Help URL
         };
     }
     
@@ -40,13 +44,25 @@ export class MessageModal extends Component {
         });
     }
 
+    onContextHelp() {
+//        console.log('In MessageModal.onContextHelp this=',this);
+        logUsage('event', 'MessageModal', { 'event_label': 'context Help button: ' + this.state.help_url });
+        this.setState({
+            modal: !this.state.modal
+        });
+        window.open(this.state.help_url, '_blank');
+    }
+
     render() {
 //        console.log('In MessageModal.render this=',this);
         return (
             <Modal show={this.state.modal} className={this.props.className} onHide={this.toggle}>
                 { this.state.header !== '' ? <Modal.Header><Modal.Title><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>{this.state.header}</Modal.Title></Modal.Header> : ''}
                 <Modal.Body><Alert variant={this.state.variant}>{this.state.message}</Alert></Modal.Body>
-                <Modal.Footer><Button variant="primary" onClick={this.toggle}>Close</Button></Modal.Footer>
+                <Modal.Footer>
+                    { this.state.help_url !== '' ? <Button outline="true" variant="info" onClick={this.onContextHelp}>Help</Button> : ''}
+                    <Button variant="primary" onClick={this.toggle}>Close</Button>
+                </Modal.Footer>
             </Modal>
         );
     }
