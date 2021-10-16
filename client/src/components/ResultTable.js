@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Table, OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -36,9 +37,13 @@ class ResultTable extends Component {
         if (warnMsg !== '') {
             displayMessage(warnMsg,'warning');
         } else {
-            logUsage('event', 'ActionSearch', { 'event_label': 'ButtonSearch'});
+            var old_objective_value = this.props.objective_value.toPrecision(4);
             this.props.saveAutoSave();
             this.props.search();
+            const { store } = this.context;
+            var design = store.getState();
+            var new_objective_value = design.model.result.objective_value.toPrecision(4)
+            logUsage('event', 'ActionSearch', { 'event_label': 'ButtonSearch Before ' + old_objective_value + ' After ' + new_objective_value});
         }
     }
 
@@ -112,6 +117,10 @@ class ResultTable extends Component {
     }
     
 }
+
+ResultTable.contextTypes = {
+    store: PropTypes.object
+};
 
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,
