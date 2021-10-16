@@ -33,7 +33,6 @@ class NameValueUnitsHeaderCalcInput extends Component {
                                     <span>Units</span>
                                 </OverlayTrigger>
                             </th>
-                            <th></th>
                         </tr>
                     </thead>)
                 }
