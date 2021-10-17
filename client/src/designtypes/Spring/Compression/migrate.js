@@ -238,9 +238,23 @@ export function migrate(design) {
         migrated_design.version = '9'; // last thing... set the migrated model version
     case '9':
         // Current model version
-        // console.log('Convert from 9 to 10');
+        console.log('Convert from 9 to 10');
+        design.symbol_table.forEach((element, index) => { // For each Symbol Table entry
+            console.log('In migrate.propgate element=',element);
+            if (index === 7) { // Coils_A
+                element.validmin = 1.0;
+                element.validmax = Number.MAX_VALUE;
+            } else {
+                element.validmin = Number.MIN_VALUE;
+                element.validmax = Number.MAX_VALUE;
+            }
+        });
+        migrated_design.version = '10'; // last thing... set the migrated model version
+    case '10':
+        // Current model version
+        // console.log('Convert from 10 to 11');
         // To be defined - presently do nothing
-        // migrated_design.version = '10'; // last thing... set the migrated model version
+        // migrated_design.version = '11'; // last thing... set the migrated model version
 
         break; // Do not copy this break
     default: // Unknown

@@ -42,6 +42,7 @@ class SymbolValue extends Component {
         this.onContextMenu = this.onContextMenu.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.getValueClass = this.getValueClass.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
                 modal: false,
@@ -154,6 +155,7 @@ class SymbolValue extends Component {
     }
 
     getValueClass() {
+//        console.log('In SymbolValue.getValueClass this=',this);
         var value_class = '';
         if (this.props.objective_value > 4*this.props.system_controls.objmin) {
             value_class += "text-not-feasible ";
@@ -164,7 +166,7 @@ class SymbolValue extends Component {
         } else {
             value_class += "text-strictly-feasible ";
         }
-//        console.log('In SymbolValue.getValueClass value_class=',value_class);
+//        console.log('In SymbolValue.getValueClass element=','this.props.element,'value_class=',value_class);
         return value_class;
     }
 
@@ -173,6 +175,14 @@ class SymbolValue extends Component {
         var value_class = 'text-right ';
         var value_tooltip;
         var value_fix_free_text = '';
+        if (this.props.element.input && this.props.element.value <= this.props.element.validmin) {
+            value_class += "background-pink ";
+            value_tooltip = "VALIDITY VIOLATION: Value outside the range from "+this.props.element.validmin.toODOPPrecision()+" to "+this.props.element.validmax.toODOPPrecision();
+        }
+        if (this.props.element.input && this.props.element.value >= this.props.element.validmax) {
+            value_class += "background-pink ";
+            value_tooltip = "VALIDITY VIOLATION: Value outside the range from "+this.props.element.validmin.toODOPPrecision()+" to "+this.props.element.validmax.toODOPPrecision();
+        }
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();

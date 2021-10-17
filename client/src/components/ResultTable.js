@@ -17,6 +17,9 @@ class ResultTable extends Component {
 
     onSearchButton(event) {
         var warnMsg = '';
+        if (this.props.objective_value === Number.POSITIVE_INFINITY) {
+            warnMsg += 'One or more Variables have invalid values; ';
+        }
         if (this.props.objective_value <= this.props.system_controls.objmin) {
             warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
         }

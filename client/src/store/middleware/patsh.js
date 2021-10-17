@@ -38,13 +38,13 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
     for (let i = 0; i < psi.length; i++)
         phi[i] = psi[i];
     var ssi = despak(phi, store, merit);
-    while (ssi >= objmin) {
+    while (ssi !== Number.POSITIVE_INFINITY && ssi >= objmin) {
         var s = ssi;
         phi = [];
         for (let i = 0; i < psi.length; i++)
             phi[i] = psi[i];
         s = patsh_explore(phi, s, del);
-        while (s >= objmin && s + tol * Math.abs(ssi) < ssi) {
+        while (ssi !== Number.POSITIVE_INFINITY && s >= objmin && s + tol * Math.abs(ssi) < ssi) {
             ssi = s;
             if (s >= objmin) {
                 itno++;
@@ -64,7 +64,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                 s = patsh_explore(phi, s, del);
             }
         }
-        if (s + tol * Math.abs(ssi) >= ssi) {
+        if (ssi === Number.POSITIVE_INFINITY || s + tol * Math.abs(ssi) >= ssi) {
             if (del < delmin) {
                 NCODE = 'Search terminated when step size reached the minimum limit (DELMIN)';
                 if (itno <= 2)
@@ -77,11 +77,15 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
         }
         ssi = s;
     }
-    NCODE = 'Search terminated when design reached feasibility (Objective value is less than OBJMIN)';
-    if (itno <= 2)
-        NCODE += '. Low iteration count may produce low precision results.';
-    else
-        NCODE += ' after '+itno+' iterations.';
+    if (ssi === Number.POSITIVE_INFINITY) {
+        NCODE = 'Not valid';
+    } else {
+        NCODE = 'Search terminated when design reached feasibility (Objective value is less than OBJMIN)';
+        if (itno <= 2)
+            NCODE += '. Low iteration count may produce low precision results.';
+        else
+            NCODE += ' after '+itno+' iterations.';
+    }
     for (let i = 0; i < psi.length; i++)
         psi[i] = phi[i];
     return NCODE;
