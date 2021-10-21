@@ -6,9 +6,11 @@ ___
 
 Quick overview:
 
-![Independent variable value input dialog box](./png/ValueInputDialogIndep5Noted.png "Independent variable value input dialog box")   
+![Free independent variable value input dialog box](./png/ValInpDlgIndepFreeNoted.png "Free independent variable value input dialog box")   
+![Fixed independent variable value input dialog box](./png/ValInpDlgIndepFixNoted.png "Fixed independent variable value input dialog box")   
 
-![Dependent Variable value input dialog box](./png/ValueInputDialogDep5Noted.png "Dependent variable value input dialog box")   
+![Free dependent variable value input dialog box](./png/ValInpDlgDepFreeNoted.png "Free dependent variable value input dialog box")   
+![Fixed dependent variable value input dialog box](./png/ValInpDlgDepFixNoted.png "Fixed Dependent variable value input dialog box")   
 
 ___   
 
@@ -48,7 +50,7 @@ Double-click (double-tap a touch screen) to replace the entire value.
 
 Use the checkbox immediately right of the variable value to control [Fix / Free](terminology#fix) status. 
 Use the checkbox immediately left of constraint levels to enable or disable [constraints](terminology#constraints). 
-See the annotated screen capture above. 
+See the annotated screen captures above. 
 
 _[Independent Variables](terminology#independentVar)_
 
