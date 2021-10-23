@@ -110,7 +110,8 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("OD_Free", 91.1)
+                changeSymbolValue("OD_Free", 91.1),
+                changeSystemControlsValue({maxit: 600})
             ]
         },
         {
@@ -169,7 +170,8 @@ export const execute = {
                 loadInitialState('Spring/Compression'),
                 changeSymbolValue("OD_Free", 11.1),
                 setSymbolFlag('Spring_Index', MAX, CONSTRAINED),
-                changeSymbolConstraint('Spring_Index', MAX, 1.6)
+                changeSymbolConstraint('Spring_Index', MAX, 1.6),
+                changeSystemControlsValue({maxit: 600})
             ]
         },
         {
