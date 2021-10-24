@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
 import { InputGroup, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-
-/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
-Number.prototype.toODOPPrecision = function() {
-    var value = this.valueOf();
-    var odopValue;
-    if (value < 10000.0 || value >= 1000000.0)
-         odopValue = value.toPrecision(4);
-    else odopValue = value.toFixed(0);
-    return odopValue;
-};
+import { toODOPPrecision } from '../toODOPPrecision';
 
 class Value extends Component {
     

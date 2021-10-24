@@ -4,16 +4,8 @@ import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 import { logValue } from '../logUsage';
-
-/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
-Number.prototype.toODOPPrecision = function() {
-    var value = this.valueOf();
-    var odopValue;
-    if (value < 10000.0 || value >= 1000000.0)
-         odopValue = value.toPrecision(4);
-    else odopValue = value.toFixed(0);
-    return odopValue;
-};
+import { displayMessage } from '../components/MessageModal';
+import { toODOPPrecision } from '../toODOPPrecision';
 
 class NameValueUnitsRowIndependentVariable extends Component {
 
@@ -47,8 +39,18 @@ class NameValueUnitsRowIndependentVariable extends Component {
 
     onChange(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onChange event.target.value=',event.target.value);
-        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
-        logValue(this.props.element.name,event.target.value);
+        var value = parseFloat(event.target.value);
+        // Check for validity and pop up message if invalid otherwise set the value into the model
+        if (Number.isNaN(value)) {
+            displayMessage('VALIDATION VIOLATION: The '+this.props.element.name+' value \''+event.target.value+'\' is Not a Number.');
+        } else if (value <= this.props.element.validmin) {
+            displayMessage('VALIDATION VIOLATION: The '+this.props.element.name+' value \''+event.target.value+'\' less than or equal to '+this.props.element.validmin.toODOPPrecision());
+        } else if (value >= this.props.element.validmax) {
+            displayMessage('VALIDATION VIOLATION: The '+this.props.element.name+' value \''+event.target.value+'\' greater than or equal to '+this.props.element.validmax.toODOPPrecision());
+        } else {
+            this.props.changeSymbolValue(this.props.element.name, value);
+            logValue(this.props.element.name,event.target.value);
+        }
     }
 
     onFocus(event) {

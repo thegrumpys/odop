@@ -20,16 +20,7 @@ import NameValueUnitsHeaderCalcInput from '../../components/NameValueUnitsHeader
 import NameValueUnitsRowCalcInput from '../../components/NameValueUnitsRowCalcInput';
 import { logValue } from '../../logUsage';
 import { logUsage } from '../../logUsage';
-
-/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
-Number.prototype.toODOPPrecision = function() {
-    var value = this.valueOf();
-    var odopValue;
-    if (value < 10000.0 || value >= 1000000.0)
-         odopValue = value.toPrecision(4);
-    else odopValue = value.toFixed(0);
-    return odopValue;
-};
+import { toODOPPrecision } from '../../toODOPPrecision';
 
 class SymbolValueWireDia extends Component {
 
