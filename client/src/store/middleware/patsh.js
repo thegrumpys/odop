@@ -80,7 +80,10 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
             }
             del = del / 1.9;
 //            console.log('In patsh del=',del);
-            s = despak(psi, store, merit); // recompute s using psi
+            if (s === Number.POSITIVE_INFINITY) { // Under evaluation
+                s = despak(psi, store, merit); // recompute s using psi
+                console.log('In patsh del=',del,'psi=', psi, 's=', s);
+            }
         }
         ssi = s;
     }
