@@ -95,6 +95,8 @@ ___
 Notes:   
  - Do not leave a value field blank.  See also: [Not a Number](htt#nan)
  - Input of values less than 1.0 requires a leading zero.  For example, enter "0.25", not ".25".
+ - Input of negative numbers requires 2 steps.  Input the number then put the minus sign in front of it.
+ - Input of values in scientific notation, for example: 1.234e5, is not supported in the current release.
  
 &nbsp;   
 
