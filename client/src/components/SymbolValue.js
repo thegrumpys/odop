@@ -44,6 +44,7 @@ class SymbolValue extends Component {
         this.onClose = this.onClose.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display
                 modal: false,
                 focused: false,
             };
@@ -52,12 +53,16 @@ class SymbolValue extends Component {
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In SymbolValue.constructor table=',table);
             this.state = {
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display
                 modal: false,
+                focused: false,
                 table: table,
             };
         } else {
             this.state = {
+                valueString: this.props.element.value.toString(), // Update the display
                 modal: false,
+                focused: false,
             };
         }
     }
@@ -75,10 +80,11 @@ class SymbolValue extends Component {
     }
 
     componentDidUpdate(prevProps) {
-//        console.log('In SymbolValue.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
+//            console.log('In SymbolValue.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
             if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
                 this.setState({
+                    valueString: this.props.element.value.toString(), // Update the display
                     focused: false,
                 });
             } else if (this.props.element.format === 'table') {
@@ -86,47 +92,71 @@ class SymbolValue extends Component {
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //                console.log('In SymbolValue.componentDidUpdate table=',table);
                 this.setState({
-                  table: table
+                    valueString: this.props.element.value.toString(), // Update the display
+                    focused: false,
+                    table: table
                 });
             }
+        }
+        if (prevProps.element.value !== this.props.element.value) {
+//            console.log('In SymbolValue.componentDidUpdate prevProps.element.value=',prevProps.element.value,'prop.element.value=',this.props.element.value);
+            this.setState({
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display
+            });
         }
     }
 
     onChange(event) {
 //        console.log('In SymbolValue.onChange event.target.value=',event.target.value);
-       this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
-       logValue(this.props.element.name,event.target.value);
+       this.setState({
+           valueString: event.target.value, // Update the display
+       });
+       var value = parseFloat(event.target.value);
+       if (!isNaN(value) && isFinite(value)) {
+           this.props.changeSymbolValue(this.props.element.name, value); // Update the model
+           logValue(this.props.element.name,event.target.value);
+       }
+//       console.log('In SymbolValue.onChange event.target.value=',event.target.value,'this.state.valueString=',this.state.valueString,'this.props.element.value=',this.props.element.value);
     }
 
     onFocus(event) {
 //        console.log("In SymbolValue.onFocus event.target.value=", event.target.value);
        this.setState({
-            focused: true
-        });
+           valueString: this.props.element.value.toString(), // Update the display with unformatted value
+           focused: true
+       });
+//       console.log("In SymbolValue.onFocus event.target.value=", event.target.value,'this.state.valueString=',this.state.valueString,'this.props.element.value=',this.props.element.value);
     }
 
     onBlur(event) {
 //        console.log("In SymbolValue.onBlur event.target.value=", event.target.value);
         this.setState({
-          focused: false
+            valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
+            focused: false
         });
+//        console.log("In SymbolValue.onBlur event.target.value=", event.target.value,'this.state.valueString=',this.state.valueString,'this.props.element.value=',this.props.element.value);
     }
 
     onSelect(event) {
 //        console.log('In SymbolValue.onSelect event.target.value=',event.target.value);
-        var selectedIndex = parseFloat(event.target.value);
-        this.props.changeSymbolValue(this.props.element.name,selectedIndex);
-        logValue(this.props.element.name,selectedIndex);
-        this.state.table[selectedIndex].forEach((value, index) => {
-//            console.log('In SymbolValue.onSelect value=',value,'index=',index);
-            if (index > 0) { // Skip the first column
-                var name = this.state.table[0][index];
-//                console.log('In SymbolValue.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table);
-                if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
-                    this.props.changeSymbolValue(name,value);
-                }
-            }
+        this.setState({
+            valueString: event.target.value, // Update the display
         });
+        var selectedIndex = parseFloat(event.target.value);
+        if (!isNaN(selectedIndex) && isFinite(selectedIndex)) {
+            this.props.changeSymbolValue(this.props.element.name,selectedIndex); // Update the model
+            logValue(this.props.element.name,selectedIndex);
+            this.state.table[selectedIndex].forEach((value, index) => {
+//                console.log('In SymbolValue.onSelect value=',value,'index=',index);
+                if (index > 0) { // Skip the first column
+                    var name = this.state.table[0][index];
+//                    console.log('In SymbolValue.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table);
+//                    if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
+                        this.props.changeSymbolValue(name,value); // Update the model
+//                    }
+                }
+            });
+        }
     }
 
     onContextMenu(e) {
@@ -220,10 +250,10 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                    <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.valueString} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.valueString} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                             )
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
@@ -320,7 +350,7 @@ class SymbolValue extends Component {
 }
 
 const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table,
+//    symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value
 });
