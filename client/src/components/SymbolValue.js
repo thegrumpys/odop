@@ -84,7 +84,6 @@ class SymbolValue extends Component {
 //            console.log('In SymbolValue.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
             if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
                 this.setState({
-                    valueString: this.props.element.value.toString(), // Update the display
                     focused: false,
                 });
             } else if (this.props.element.format === 'table') {
@@ -92,17 +91,10 @@ class SymbolValue extends Component {
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //                console.log('In SymbolValue.componentDidUpdate table=',table);
                 this.setState({
-                    valueString: this.props.element.value.toString(), // Update the display
                     focused: false,
                     table: table
                 });
             }
-        }
-        if (prevProps.element.value !== this.props.element.value) {
-//            console.log('In SymbolValue.componentDidUpdate prevProps.element.value=',prevProps.element.value,'prop.element.value=',this.props.element.value);
-            this.setState({
-                valueString: this.props.element.value.toODOPPrecision(), // Update the display
-            });
         }
     }
 
