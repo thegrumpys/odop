@@ -49,20 +49,62 @@ export function updateViolationsAndObjectiveValue(store, merit) {
     store.dispatch(changeResultObjectiveValue(obj));
     store.dispatch(changeResultViolatedConstraintCount(violated_constraint_count));
 
-    if (obj === 0.0) { // If valid then determine if feasible
-        viol_sum = 0.0;
-        for (let i = 0; i < design.model.symbol_table.length; i++) {
-            element = design.model.symbol_table[i];
-            if (element.type === "equationset" && element.input) {
-                vmin = 0.0;
-                vmax = 0.0;
+    viol_sum = 0.0;
+    for (let i = 0; i < design.model.symbol_table.length; i++) {
+        element = design.model.symbol_table[i];
+        if (element.type === "equationset" && element.input) {
+            vmin = 0.0;
+            vmax = 0.0;
+            if (element.lmin & CONSTRAINED) {
+                vmin = (-element.value + element.cmin) / element.smin;
+                store.dispatch(changeSymbolViolation(element.name, MIN, vmin));
+            }
+            if (element.lmax & CONSTRAINED) {
+                vmax = ( element.value - element.cmax) / element.smax;
+                store.dispatch(changeSymbolViolation(element.name, MAX, vmax));
+            }
+            if (vmin > 0.0) {
+                viol_sum = viol_sum + vmin * vmin;
+            }
+            if (vmax > 0.0) {
+                viol_sum = viol_sum + vmax * vmax;
+            }
+        }
+    }
+    for (let i = 0; i < design.model.symbol_table.length; i++) {
+        element = design.model.symbol_table[i];
+        if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
+            vmin = 0.0;
+            vmax = 0.0;
+            /* State variable fix levels. */
+            /*
+             * The fix_wt's are automatically incorporated in the scaling denominators
+             * S(I+N) by the main routine.
+             * 
+             * This version reduces penalty of large fix violations.
+             */
+            if (element.lmin & FIXED) {
+                vmin = (-element.value + element.cmin) / element.smin;
+                store.dispatch(changeSymbolViolation(element.name, MIN, vmin))
+                vmax = -vmin;
+                store.dispatch(changeSymbolViolation(element.name, MAX, vmax))
+                if (vmin > 1.0) {
+                    viol_sum = viol_sum + vmin;
+                } else if (vmin < -1.0) {
+                    viol_sum = viol_sum - vmin;
+                } else {
+                    viol_sum = viol_sum + vmin * vmin;
+                }
+            } else {
                 if (element.lmin & CONSTRAINED) {
                     vmin = (-element.value + element.cmin) / element.smin;
-                    store.dispatch(changeSymbolViolation(element.name, MIN, vmin));
+//                    console.log('name=',element.name,' vmin=',vmin,' value=',element.value,' cmin=',element.cmin,' smin=',element.smin);
+                    store.dispatch(changeSymbolViolation(element.name, MIN, vmin))
                 }
                 if (element.lmax & CONSTRAINED) {
                     vmax = ( element.value - element.cmax) / element.smax;
-                    store.dispatch(changeSymbolViolation(element.name, MAX, vmax));
+//                    console.log('name=',element.name,' vmax=',vmax,' value=',element.value,' cmax=',element.cmax,' smax=',element.smax);
+                    store.dispatch(changeSymbolViolation(element.name, MAX, vmax))
                 }
                 if (vmin > 0.0) {
                     viol_sum = viol_sum + vmin * vmin;
@@ -72,51 +114,9 @@ export function updateViolationsAndObjectiveValue(store, merit) {
                 }
             }
         }
-        for (let i = 0; i < design.model.symbol_table.length; i++) {
-            element = design.model.symbol_table[i];
-            if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
-                vmin = 0.0;
-                vmax = 0.0;
-                /* State variable fix levels. */
-                /*
-                 * The fix_wt's are automatically incorporated in the scaling denominators
-                 * S(I+N) by the main routine.
-                 * 
-                 * This version reduces penalty of large fix violations.
-                 */
-                if (element.lmin & FIXED) {
-                    vmin = (-element.value + element.cmin) / element.smin;
-                    store.dispatch(changeSymbolViolation(element.name, MIN, vmin))
-                    vmax = -vmin;
-                    store.dispatch(changeSymbolViolation(element.name, MAX, vmax))
-                    if (vmin > 1.0) {
-                        viol_sum = viol_sum + vmin;
-                    } else if (vmin < -1.0) {
-                        viol_sum = viol_sum - vmin;
-                    } else {
-                        viol_sum = viol_sum + vmin * vmin;
-                    }
-                } else {
-                    if (element.lmin & CONSTRAINED) {
-                        vmin = (-element.value + element.cmin) / element.smin;
-    //                    console.log('name=',element.name,' vmin=',vmin,' value=',element.value,' cmin=',element.cmin,' smin=',element.smin);
-                        store.dispatch(changeSymbolViolation(element.name, MIN, vmin))
-                    }
-                    if (element.lmax & CONSTRAINED) {
-                        vmax = ( element.value - element.cmax) / element.smax;
-    //                    console.log('name=',element.name,' vmax=',vmax,' value=',element.value,' cmax=',element.cmax,' smax=',element.smax);
-                        store.dispatch(changeSymbolViolation(element.name, MAX, vmax))
-                    }
-                    if (vmin > 0.0) {
-                        viol_sum = viol_sum + vmin * vmin;
-                    }
-                    if (vmax > 0.0) {
-                        viol_sum = viol_sum + vmax * vmax;
-                    }
-                }
-            }
-        }
+    }
         
+    if (obj === 0.0) { // If valid then determine if feasible
         /* Merit Function */
         if (merit && typeof merit === 'function') {
             m_funct = merit(design);
