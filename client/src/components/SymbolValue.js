@@ -135,20 +135,16 @@ class SymbolValue extends Component {
             valueString: event.target.value, // Update the display
         });
         var selectedIndex = parseFloat(event.target.value);
-        if (!isNaN(selectedIndex) && isFinite(selectedIndex)) {
-            this.props.changeSymbolValue(this.props.element.name,selectedIndex); // Update the model
-            logValue(this.props.element.name,selectedIndex);
-            this.state.table[selectedIndex].forEach((value, index) => {
+        this.props.changeSymbolValue(this.props.element.name,selectedIndex); // Update the model
+        logValue(this.props.element.name,selectedIndex);
+        this.state.table[selectedIndex].forEach((value, index) => {
 //                console.log('In SymbolValue.onSelect value=',value,'index=',index);
-                if (index > 0) { // Skip the first column
-                    var name = this.state.table[0][index];
+            if (index > 0) { // Skip the first column
+                var name = this.state.table[0][index];
 //                    console.log('In SymbolValue.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table);
-//                    if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
-                        this.props.changeSymbolValue(name,value); // Update the model
-//                    }
-                }
-            });
-        }
+                this.props.changeSymbolValue(name,value); // Update the model
+            }
+        });
     }
 
     onContextMenu(e) {
