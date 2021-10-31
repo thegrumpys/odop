@@ -76,12 +76,6 @@ class NameValueUnitsRowCalcInput extends Component {
     
     render() {
         var value_class = 'text-right ';
-        if (this.props.element.input && this.props.element.value <= this.props.element.validmin) {
-            value_class += "background-pink ";
-        }
-        if (this.props.element.input && this.props.element.value >= this.props.element.validmax) {
-            value_class += "background-pink ";
-        }
         // =======================================
         // Table Row
         // =======================================

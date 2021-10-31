@@ -19,6 +19,7 @@ import NameValueUnitsHeaderCalcInput from './NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 import { logValue } from '../logUsage';
 import { logUsage } from '../logUsage';
+import { displayMessage } from '../components/MessageModal';
 import { toODOPPrecision } from '../toODOPPrecision';
 
 class SymbolValue extends Component {
@@ -29,7 +30,9 @@ class SymbolValue extends Component {
         this.onChange = this.onChange.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
-        this.onSelect = this.onSelect.bind(this);
+        this.onSelect = this.onReset.bind(this);
+        this.onSet = this.onSet.bind(this);
+        this.onReset = this.onReset.bind(this);
         this.onContextMenu = this.onContextMenu.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);
         this.onClose = this.onClose.bind(this);
@@ -86,8 +89,18 @@ class SymbolValue extends Component {
 
     onChange(event) {
 //        console.log('In SymbolValue.onChange event.target.value=',event.target.value);
-       this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
-       logValue(this.props.element.name,event.target.value);
+       var value = parseFloat(event.target.value);
+       // Check for validity and pop up message if invalid otherwise set the value into the model
+       if (Number.isNaN(value)) {
+           displayMessage('VALIDATION VIOLATION: The '+this.props.element.name+' value \''+event.target.value+'\' is Not a Number.');
+       } else if (value <= this.props.element.validmin) {
+           displayMessage('VALIDATION VIOLATION: The '+this.props.element.name+' value \''+event.target.value+'\' less than or equal to '+this.props.element.validmin.toODOPPrecision());
+       } else if (value >= this.props.element.validmax) {
+           displayMessage('VALIDATION VIOLATION: The '+this.props.element.name+' value \''+event.target.value+'\' greater than or equal to '+this.props.element.validmax.toODOPPrecision());
+       } else {
+           this.props.changeSymbolValue(this.props.element.name, value);
+           logValue(this.props.element.name,event.target.value);
+       }
     }
 
     onFocus(event) {
@@ -102,6 +115,18 @@ class SymbolValue extends Component {
         this.setState({
           focused: false
         });
+    }
+
+    onSet() {
+//      console.log('In NameValueUnitsRowDependentVariable.onSet');
+      this.props.fixSymbolValue(this.props.element.name);
+      logValue(this.props.element.name,'FIXED','FixedFlag',false);
+    }
+
+    onReset() {
+//      console.log('In NameValueUnitsRowDependentVariable.onReset');
+      this.props.freeSymbolValue(this.props.element.name);
+      logValue(this.props.element.name,'FREE','FixedFlag',false);
     }
 
     onSelect(event) {
@@ -166,14 +191,7 @@ class SymbolValue extends Component {
         var value_class = 'text-right ';
         var value_tooltip;
         var value_fix_free_text = '';
-        if (this.props.element.input && this.props.element.value <= this.props.element.validmin) {
-            value_class += "background-pink ";
-            value_tooltip = "VALIDITY VIOLATION: Value outside the range from "+this.props.element.validmin.toODOPPrecision()+" to "+this.props.element.validmax.toODOPPrecision();
-        }
-        if (this.props.element.input && this.props.element.value >= this.props.element.validmax) {
-            value_class += "background-pink ";
-            value_tooltip = "VALIDITY VIOLATION: Value outside the range from "+this.props.element.validmin.toODOPPrecision()+" to "+this.props.element.validmax.toODOPPrecision();
-        }
+
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
@@ -249,6 +267,13 @@ class SymbolValue extends Component {
                                 </Form.Control>)
                             )
                         : ''}
+                        { this.props.fixFreeFlag ?
+                            <InputGroup.Append>
+                                <InputGroup.Text>
+                                    <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
+                                </InputGroup.Text>
+                            </InputGroup.Append>
+                        : '' }
                     </InputGroup>
                 </td>
                 <Modal show={this.state.modal} className={this.props.className} onHide={this.onClose}>
