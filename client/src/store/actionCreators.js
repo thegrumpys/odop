@@ -260,11 +260,12 @@ export function changeResultObjectiveValue(objective_value) {
     }
 }
 
-export function changeResultTerminationCondition(termination_condition) {
+export function changeResultTerminationCondition(termination_condition, termination_condition_variant="") {
     return {
         type: CHANGE_RESULT_TERMINATION_CONDITION,
         payload: {
-            termination_condition
+            termination_condition,
+            termination_condition_variant
         }
     }
 }

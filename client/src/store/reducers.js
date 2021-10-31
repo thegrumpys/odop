@@ -432,7 +432,8 @@ export function reducers(state, action) {
                 ...state.model,
                 result: {
                     ...state.model.result,
-                    termination_condition: action.payload.termination_condition
+                    termination_condition: action.payload.termination_condition,
+                    termination_condition_variant: action.payload.termination_condition_variant
                 }
             }
         });

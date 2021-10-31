@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FIXED, CONSTRAINED } from '../store/actionTypes';
-import { changeSymbolValue } from '../store/actionCreators';
+import { changeSymbolValue, changeResultTerminationCondition, fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 import NameValueUnitsHeaderIndependentVariable from './NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from './NameValueUnitsHeaderDependentVariable';
@@ -39,6 +39,7 @@ class SymbolValue extends Component {
         this.getValueClass = this.getValueClass.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display
                 modal: false,
                 focused: false,
             };
@@ -47,12 +48,16 @@ class SymbolValue extends Component {
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In SymbolValue.constructor table=',table);
             this.state = {
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display
                 modal: false,
+                focused: false,
                 table: table,
             };
         } else {
             this.state = {
+                valueString: this.props.element.value.toString(), // Update the display
                 modal: false,
+                focused: false,
             };
         }
     }
@@ -70,8 +75,8 @@ class SymbolValue extends Component {
     }
 
     componentDidUpdate(prevProps) {
-//        console.log('In SymbolValue.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
+//            console.log('In SymbolValue.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
             if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
                 this.setState({
                     focused: false,
@@ -81,42 +86,73 @@ class SymbolValue extends Component {
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //                console.log('In SymbolValue.componentDidUpdate table=',table);
                 this.setState({
-                  table: table
+                    focused: false,
+                    table: table
                 });
             }
         }
     }
 
     onChange(event) {
-//        console.log('In SymbolValue.onChange event.target.value=',event.target.value);
+//       console.log('In SymbolValue.onChange event.target.value=',event.target.value);
+       this.setState({
+           valueString: event.target.value, // Update the display
+       });
        var value = parseFloat(event.target.value);
-       // Check for validity and pop up message if invalid otherwise set the value into the model
-       if (Number.isNaN(value)) {
-           displayMessage('VALIDATION VIOLATION: The '+this.props.element.name+' value \''+event.target.value+'\' is Not a Number.');
-       } else if (value <= this.props.element.validmin) {
-           displayMessage('VALIDATION VIOLATION: The '+this.props.element.name+' value \''+event.target.value+'\' less than or equal to '+this.props.element.validmin.toODOPPrecision());
-       } else if (value >= this.props.element.validmax) {
-           displayMessage('VALIDATION VIOLATION: The '+this.props.element.name+' value \''+event.target.value+'\' greater than or equal to '+this.props.element.validmax.toODOPPrecision());
+       if (!isNaN(value) && isFinite(value)) {
+           if (value <= this.props.element.validmin) {
+               this.props.changeResultTerminationCondition('VALIDITY VIOLATION: The '+this.props.element.name+' value \''+event.target.value+'\' less than or equal to '+this.props.element.validmin.toODOPPrecision(),'danger');
+           } else if (value >= this.props.element.validmax) {
+               this.props.changeResultTerminationCondition('VALIDITY VIOLATION: The '+this.props.element.name+' value \''+event.target.value+'\' greater than or equal to '+this.props.element.validmax.toODOPPrecision(),'danger');
+           } else {
+               this.props.changeResultTerminationCondition('');
+           }
        } else {
-           this.props.changeSymbolValue(this.props.element.name, value);
-           logValue(this.props.element.name,event.target.value);
+           this.props.changeResultTerminationCondition('');
        }
+//     console.log('In SymbolValue.onChange event.target.value=',event.target.value,'this.state.valueString=',this.state.valueString,'this.props.element.value=',this.props.element.value);
     }
 
     onFocus(event) {
-//        console.log("In SymbolValue.onFocus event.target.value=", event.target.value);
+//      console.log("In SymbolValue.onFocus event.target.value=", event.target.value);
        this.setState({
-            focused: true
-        });
+           valueString: this.props.element.value.toString(), // Update the display with unformatted value
+           focused: true
+       });
+//     console.log("In SymbolValue.onFocus event.target.value=", event.target.value,'this.state.valueString=',this.state.valueString,'this.props.element.value=',this.props.element.value);
     }
 
     onBlur(event) {
-//        console.log("In SymbolValue.onBlur event.target.value=", event.target.value);
-        this.setState({
-          focused: false
-        });
+//      console.log("In SymbolValue.onBlur event.target.value=", event.target.value);
+        var value = parseFloat(this.state.valueString);
+        if (!isNaN(value) && isFinite(value)) {
+            if (value <= this.props.element.validmin) {
+                this.setState({
+                    valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
+                    focused: true
+                });
+            } else if (value >= this.props.element.validmax) {
+                this.setState({
+                    valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
+                    focused: true
+                });
+            } else {
+                this.props.changeSymbolValue(this.props.element.name, value); // Update the model
+                logValue(this.props.element.name,event.target.value);
+                this.setState({
+                    valueString: value.toODOPPrecision(), // Update the display with formatted value
+                    focused: false
+                });
+            }
+        } else {
+            this.setState({
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
+                focused: true
+            });
+        }
+        this.props.changeResultTerminationCondition('');
+//      console.log("In SymbolValue.onBlur event.target.value=", event.target.value,'this.state.valueString=',this.state.valueString,'this.props.element.value=',this.props.element.value);
     }
-
     onSet() {
 //      console.log('In NameValueUnitsRowDependentVariable.onSet');
       this.props.fixSymbolValue(this.props.element.name);
@@ -131,17 +167,18 @@ class SymbolValue extends Component {
 
     onSelect(event) {
 //        console.log('In SymbolValue.onSelect event.target.value=',event.target.value);
+        this.setState({
+            valueString: event.target.value, // Update the display
+        });
         var selectedIndex = parseFloat(event.target.value);
-        this.props.changeSymbolValue(this.props.element.name,selectedIndex);
+        this.props.changeSymbolValue(this.props.element.name,selectedIndex); // Update the model
         logValue(this.props.element.name,selectedIndex);
         this.state.table[selectedIndex].forEach((value, index) => {
-//            console.log('In SymbolValue.onSelect value=',value,'index=',index);
+//                console.log('In SymbolValue.onSelect value=',value,'index=',index);
             if (index > 0) { // Skip the first column
                 var name = this.state.table[0][index];
-//                console.log('In SymbolValue.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table);
-                if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
-                    this.props.changeSymbolValue(name,value);
-                }
+//                    console.log('In SymbolValue.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table);
+                this.props.changeSymbolValue(name,value); // Update the model
             }
         });
     }
@@ -191,7 +228,13 @@ class SymbolValue extends Component {
         var value_class = 'text-right ';
         var value_tooltip;
         var value_fix_free_text = '';
-
+        var value = parseFloat(this.state.valueString);
+        if (value <= this.props.element.validmin) {
+            value_class += 'red-border ';
+        }
+        if (value >= this.props.element.validmax) {
+            value_class += 'red-border ';
+        }
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
@@ -239,10 +282,10 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                    <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                             )
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
@@ -346,13 +389,16 @@ class SymbolValue extends Component {
 }
 
 const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table,
+//    symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value
 });
 
 const mapDispatchToProps = {
     changeSymbolValue: changeSymbolValue,
+    changeResultTerminationCondition: changeResultTerminationCondition,
+    fixSymbolValue,
+    freeSymbolValue,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SymbolValue);

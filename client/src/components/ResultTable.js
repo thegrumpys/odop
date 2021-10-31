@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Table, OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
+import { Table, OverlayTrigger, Tooltip, Button, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED } from '../store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
@@ -92,12 +92,9 @@ class ResultTable extends Component {
                             <td width="67%" className={feasibility_class + " text-left"}>{feasibility_string}</td>
                         </tr>
                         <tr>
-                            <th width="33%" id="Message" className="pb-3">
-                                <OverlayTrigger placement="top" overlay={<Tooltip>Status feedback message from solution process</Tooltip>}>
-                                    <span>Message:</span>
-                                </OverlayTrigger>
-                            </th>
-                            <td width="67%" className="text-left">{this.props.termination_condition}</td>
+                            <td className="text-left" colSpan="2">
+                                <Alert variant={this.props.termination_condition_variant} className="mb-0">{this.props.termination_condition}</Alert>
+                            </td>
                        </tr>
                     </tbody>
                 </Table>
@@ -130,6 +127,7 @@ const mapStateToProps = state => ({
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value,
     termination_condition: state.model.result.termination_condition,
+    termination_condition_variant: state.model.result.termination_condition_variant,
     violated_constraint_count: state.model.result.violated_constraint_count
 });
 

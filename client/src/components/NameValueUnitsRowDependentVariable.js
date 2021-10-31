@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
-import { fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import { toODOPPrecision } from '../toODOPPrecision';
 import SymbolValue from './SymbolValue';
@@ -41,8 +40,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToDependentVariableProps = {
-    fixSymbolValue: fixSymbolValue,
-    freeSymbolValue: freeSymbolValue
 };
 
 export default connect(mapStateToProps, mapDispatchToDependentVariableProps)(NameValueUnitsRowDependentVariable);
