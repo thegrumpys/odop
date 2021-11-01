@@ -43,10 +43,10 @@ class ConstraintsMaxRowDependentVariable extends Component {
         var value = parseFloat(event.target.value);
         if (!isNaN(value) && isFinite(value)) {
             if (this.props.element.lmax & FIXED) {
-                this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(event.target.value));
+                this.props.changeSymbolConstraint(this.props.element.name, MIN, value);
                 logValue(this.props.element.name,event.target.value,'MinConstraint');
             }
-            this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(event.target.value));
+            this.props.changeSymbolConstraint(this.props.element.name, MAX, value);
             logValue(this.props.element.name,event.target.value,'MaxConstraint');
         }
     }
@@ -153,10 +153,10 @@ class ConstraintsMaxRowDependentVariable extends Component {
                             </InputGroup.Prepend>
                             {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{this.props.element.lmax & FDCL ? 'FDCL =' + this.props.element.cmaxchoices[this.props.element.cmaxchoice] : '=' + this.props.element.cmax + ' (non-FDCL)'}</Tooltip>}>
-                                    <Form.Control type="number" id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.lmax & CONSTRAINED ? (this.state.focused ? this.state.valueString : this.props.element.cmax.toString()) : ''} onChange={this.onChangeMaxConstraint} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} onClick={this.onClick} />
+                                    <Form.Control type="number" id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.lmax & CONSTRAINED ? (this.state.focused ? this.state.valueString : this.props.element.cmax.toString()) : ''} onChange={this.onChangeMaxConstraint} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} onClick={this.onClick} onFocus={this.onFocus} onBlur={this.onBlur }/>
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.lmax & CONSTRAINED ? (this.state.focused ? this.state.valueString : this.props.element.cmax.toString()) : ''} onChange={this.onChangeMaxConstraint} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} onClick={this.onClick} />
+                                <Form.Control type="number" id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.lmax & CONSTRAINED ? (this.state.focused ? this.state.valueString : this.props.element.cmax.toString()) : ''} onChange={this.onChangeMaxConstraint} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} onClick={this.onClick} onFocus={this.onFocus} onBlur={this.onBlur }/>
                             }
                         </InputGroup>
                         {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
