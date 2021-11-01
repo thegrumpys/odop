@@ -29,7 +29,13 @@ class NameValueUnitsRowIndependentVariable extends Component {
 //        console.log('In NameValueUnitsRowIndependentVariable.constructor this.props.element.name=',this.props.element.name,' this.props.element.format=',this.props.element.format,' this.props.element.table=',this.props.element.table);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
-                focused: false
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display
+                focused: false,
+            };
+        } else {
+            this.state = {
+                valueString: this.props.element.value.toString(), // Update the display
+                focused: false,
             };
         }
     }
@@ -39,6 +45,12 @@ class NameValueUnitsRowIndependentVariable extends Component {
         if (prevProps.type !== this.props.type) {
             if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
                 this.setState({
+                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
+                    focused: false,
+                });
+            } else {
+                this.setState({
+                    valueString: this.props.element.value.toString(), // Update the display
                     focused: false,
                 });
             }
@@ -47,13 +59,20 @@ class NameValueUnitsRowIndependentVariable extends Component {
 
     onChange(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onChange event.target.value=',event.target.value);
-        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
-        logValue(this.props.element.name,event.target.value);
+        this.setState({
+            valueString: event.target.value, // Update the display
+        });
+        var value = parseFloat(event.target.value);
+        if (!isNaN(value) && isFinite(value)) {
+            this.props.changeSymbolValue(this.props.element.name, value); // Update the model
+            logValue(this.props.element.name,event.target.value);
+        }
     }
 
     onFocus(event) {
 //        console.log("In NameValueUnitsRowIndependentVariable.onFocus event.target.value=", event.target.value);
         this.setState({
+            valueString: this.props.element.value.toString(), // Update the display with unformatted value
             focused: true
         });
     }
@@ -61,14 +80,18 @@ class NameValueUnitsRowIndependentVariable extends Component {
     onBlur(event) {
 //        console.log("In NameValueUnitsRowIndependentVariable.onBlur event.target.value=", event.target.value);
         this.setState({
+            valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
             focused: false
         });
     }
 
     onSelect(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onSelect event.target.value=',event.target.value);
+        this.setState({
+            valueString: event.target.value, // Update the display
+        });
         var selectedIndex = parseFloat(event.target.value);
-        this.props.changeSymbolValue(this.props.element.name,selectedIndex);
+        this.props.changeSymbolValue(this.props.element.name,selectedIndex); // Update the model
         logValue(this.props.element.name,selectedIndex);
     }
 
@@ -99,7 +122,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <Form.Control type="number" className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
+                            <Form.Control type="number" className="text-right" step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />

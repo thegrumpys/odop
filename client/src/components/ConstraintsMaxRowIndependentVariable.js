@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form } from 'react-bootstrap';
+import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
@@ -9,71 +9,100 @@ class ConstraintMaxRowIndependentVariable extends Component {
 
     constructor(props) {
         super(props);
-        this.onChangeIndependentVariableMaxConstraint = this.onChangeIndependentVariableMaxConstraint.bind(this);
-        this.onSetIndependentVariableFlagMaxConstrained = this.onSetIndependentVariableFlagMaxConstrained.bind(this)
-        this.onResetIndependentVariableFlagMaxConstrained = this.onResetIndependentVariableFlagMaxConstrained.bind(this)
+        this.onChangeMaxConstraint = this.onChangeMaxConstraint.bind(this);
+        this.onSetFlagMaxConstrained = this.onSetFlagMaxConstrained.bind(this)
+        this.onResetFlagMaxConstrained = this.onResetFlagMaxConstrained.bind(this)
+        this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
         this.onClick = this.onClick.bind(this);
         this.onChangeValue = this.onChangeValue.bind(this);
         this.onEnterButton = this.onEnterButton.bind(this);
         this.onVariableButton = this.onVariableButton.bind(this);
         this.onCancel = this.onCancel.bind(this);
-        this.state = {
-            modal: false, // Default: do not display
+        this.state = { // Always a "number"
+            modal: false, // Default: do not display modal
+            valueString: this.props.element.cmax.toString(), // Update the display
+            focused: false,
         };
     }
 
-    onSetIndependentVariableFlagMaxConstrained(event) {
+    onSetFlagMaxConstrained(event) {
         this.props.setSymbolFlag(this.props.element.name, MAX, CONSTRAINED);
         logValue(this.props.element.name,'Enabled','MaxConstraintFlag',false);
     }
 
-    onResetIndependentVariableFlagMaxConstrained(event) {
+    onResetFlagMaxConstrained(event) {
         this.props.resetSymbolFlag(this.props.element.name, MAX, CONSTRAINED);
         logValue(this.props.element.name,'Disabled','MaxConstraintFlag',false);
     }
 
-    onChangeIndependentVariableMaxConstraint(event) {
-        if (this.props.element.lmax & FIXED) {
-            this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(event.target.value));
-            logValue(this.props.element.name,event.target.value,'MinConstraint');
+    onChangeMaxConstraint(event) {
+        this.setState({
+            valueString: event.target.value, // Update the display
+        });
+        var value = parseFloat(event.target.value);
+        if (!isNaN(value) && isFinite(value)) {
+            if (this.props.element.lmax & FIXED) {
+                this.props.changeSymbolConstraint(this.props.element.name, MIN, value); // Update the model
+                logValue(this.props.element.name,event.target.value,'MinConstraint');
+            }
+            this.props.changeSymbolConstraint(this.props.element.name, MAX, value); // Update the model
+            logValue(this.props.element.name,event.target.value,'MaxConstraint');
         }
-        this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(event.target.value));
-        logValue(this.props.element.name,event.target.value,'MaxConstraint');
+    }
+    
+    onFocus(event) {
+//        console.log("In ConstraintMaxRowIndependentVariable.onFocus event.target.value=", event.target.value);
+        this.setState({
+            valueString: this.props.element.cmax.toString(), // Update the display with unformatted value
+            focused: true,
+        });
+    }
+    
+    onBlur(event) {
+//        console.log("In ConstraintMaxRowIndependentVariable.onBlur event.target.value=", event.target.value);
+        this.setState({
+            valueString: this.props.element.cmax.toString(), // Update the display with formatted value
+            focused: false,
+        });
     }
 
     onClick(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onClick event=",event);
+//        console.log("In ConstraintMaxRowIndependentVariable.onClick event.target.value=",event.target.value);
         // Show modal only if there are cmaxchoices
         if (this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0) {
             this.setState({
                 modal: !this.state.modal,
-                value: this.props.element.lmax & CONSTRAINED ? this.props.element.cmax : 0
             });
         }
     }
 
     onChangeValue(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onChangeValue event=",event);
+//        console.log("In ConstraintMaxRowIndependentVariable.onChangeValue event.target.value=",event.target.value);
         this.setState({
-            value: event.target.value
+            valueString: event.target.value,
+            focused: true,
         });
     }
 
     onEnterButton(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onEnterButton event=",event);
+//        console.log("In ConstraintMaxRowIndependentVariable.onEnterButton event.target.value=",event.target.value);
         this.setState({
             modal: !this.state.modal
         });
-        if (this.props.element.lmax & FIXED) {
-            this.props.resetSymbolFlag(this.props.element.name, MIN, FDCL);
-            this.props.changeSymbolConstraint(this.props.element.name, MIN, parseFloat(this.state.value));
+        var value = parseFloat(this.state.valueString);
+        if (!isNaN(value) && isFinite(value)) {
+            if (this.props.element.lmax & FIXED) {
+                this.props.resetSymbolFlag(this.props.element.name, MIN, FDCL);
+                this.props.changeSymbolConstraint(this.props.element.name, MIN, value);
+            }
+            this.props.resetSymbolFlag(this.props.element.name, MAX, FDCL);
+            this.props.changeSymbolConstraint(this.props.element.name, MAX, value);
         }
-        this.props.resetSymbolFlag(this.props.element.name, MAX, FDCL);
-        this.props.changeSymbolConstraint(this.props.element.name, MAX, parseFloat(this.state.value));
     }
 
     onVariableButton(event, source_name) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onVariableButton event=",event," source_name=",source_name);
+//        console.log("In ConstraintMaxRowIndependentVariable.onVariableButton event.target.value=",event.target.value," source_name=",source_name);
         this.setState({
             modal: !this.state.modal
         });
@@ -84,7 +113,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
     }
 
     onCancel(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onCancel event=",event);
+//        console.log("In ConstraintMaxRowIndependentVariable.onCancel event.target.value=",event.target.value);
         this.setState({
             modal: !this.state.modal
         });
@@ -119,27 +148,32 @@ class ConstraintMaxRowIndependentVariable extends Component {
                         <InputGroup>
                             <InputGroup.Prepend>
                                 <InputGroup.Text>
-                                    <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetIndependentVariableFlagMaxConstrained : this.onSetIndependentVariableFlagMaxConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
+                                    <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetFlagMaxConstrained : this.onSetFlagMaxConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
                             {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{this.props.element.lmax & FDCL ? 'FDCL =' + this.props.element.cmaxchoices[this.props.element.cmaxchoice] : '=' + this.props.element.cmax + ' (non-FDCL)'}</Tooltip>}>
-                                    <Form.Control type="number" id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.lmax & CONSTRAINED ? this.props.element.cmax : ''} onChange={this.onChangeIndependentVariableMaxConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
+                                    <Form.Control type="number" id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.lmax & CONSTRAINED ? (this.state.focused ? this.state.valueString : this.props.element.cmax.toString()) : ''} onChange={this.onChangeMaxConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} onFocus={this.onFocus} onBlur={this.onBlur }/>
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.lmax & CONSTRAINED ? this.props.element.cmax : ''} onChange={this.onChangeIndependentVariableMaxConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} />
+                                <Form.Control type="number" id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.lmax & CONSTRAINED ? (this.state.focused ? this.state.valueString : this.props.element.cmax.toString()) : ''} onChange={this.onChangeMaxConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick} onFocus={this.onFocus} onBlur={this.onBlur }/>
                             }
                         </InputGroup>
-                        {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ? <Modal show={this.state.modal} className={this.props.className} size="lg" onHide={this.onCancel}>
+                        {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
+                        Modal show={this.state.modal} className={this.props.className} size="lg" onHide={this.onCancel}>
                             <Modal.Header>
                                 <Modal.Title>
                                     Functionally Determined Constraint Level (FDCL) - Set {this.props.element.name} Max Constraint
                                 </Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                Select constraint variable or enter constraint value.
-                                <table>
+                                <Table borderless="true">
                                     <tbody>
+                                        <tr>
+                                            <td colspan="2">
+                                                Select constraint variable or enter constraint value.
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>Variable:&nbsp;</td>
                                             <td>
@@ -156,13 +190,13 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                             <td>Value:&nbsp;</td>
                                             <td>
                                                 <InputGroup>
-                                                    <Form.Control type="number" id={this.props.element.name + "_cmax"} className="text-right" value={this.state.value} onChange={this.onChangeValue} />
+                                                    <Form.Control type="number" id={this.props.element.name + "_cmax"} className="text-right" value={this.state.focused ? this.state.valueString : this.props.element.cmax.toString()} onChange={this.onChangeValue} />
                                                     <Button variant="primary" onClick={this.onEnterButton}>Enter</Button>
                                                 </InputGroup>
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </Table>
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>

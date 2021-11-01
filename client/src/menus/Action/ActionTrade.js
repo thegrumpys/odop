@@ -328,7 +328,7 @@ class ActionTrade extends Component {
     }
     
     onArbitraryChange(i, event) {
-//        console.log('=========================== i=',i,' event=',event.target.value);
+//        console.log('=========================== i=',i,' event.target.value=',event.target.value);
 //        console.log('state=',this.state);
         var design;
         const { store } = this.context;

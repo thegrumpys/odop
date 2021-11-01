@@ -44,8 +44,8 @@ class SymbolValue extends Component {
         this.onClose = this.onClose.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
-                valueString: this.props.element.value.toODOPPrecision(), // Update the display
                 modal: false,
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display
                 focused: false,
             };
         } else if (this.props.element.format === 'table') {
@@ -53,15 +53,15 @@ class SymbolValue extends Component {
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In SymbolValue.constructor table=',table);
             this.state = {
-                valueString: this.props.element.value.toODOPPrecision(), // Update the display
-                modal: false,
-                focused: false,
                 table: table,
+                modal: false,
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display
+                focused: false,
             };
         } else {
             this.state = {
-                valueString: this.props.element.value.toString(), // Update the display
                 modal: false,
+                valueString: this.props.element.value.toString(), // Update the display
                 focused: false,
             };
         }
@@ -84,6 +84,7 @@ class SymbolValue extends Component {
 //            console.log('In SymbolValue.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
             if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
                 this.setState({
+                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
                     focused: false,
                 });
             } else if (this.props.element.format === 'table') {
@@ -91,8 +92,14 @@ class SymbolValue extends Component {
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //                console.log('In SymbolValue.componentDidUpdate table=',table);
                 this.setState({
+                    table: table,
+                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
                     focused: false,
-                    table: table
+                });
+            } else {
+                this.setState({
+                    valueString: this.props.element.value.toString(), // Update the display
+                    focused: false,
                 });
             }
         }
@@ -100,33 +107,30 @@ class SymbolValue extends Component {
 
     onChange(event) {
 //        console.log('In SymbolValue.onChange event.target.value=',event.target.value);
-       this.setState({
-           valueString: event.target.value, // Update the display
-       });
-       var value = parseFloat(event.target.value);
-       if (!isNaN(value) && isFinite(value)) {
-           this.props.changeSymbolValue(this.props.element.name, value); // Update the model
-           logValue(this.props.element.name,event.target.value);
-       }
-//       console.log('In SymbolValue.onChange event.target.value=',event.target.value,'this.state.valueString=',this.state.valueString,'this.props.element.value=',this.props.element.value);
+        this.setState({
+            valueString: event.target.value, // Update the display
+        });
+        var value = parseFloat(event.target.value);
+        if (!isNaN(value) && isFinite(value)) {
+            this.props.changeSymbolValue(this.props.element.name, value); // Update the model
+            logValue(this.props.element.name,event.target.value);
+        }
     }
 
     onFocus(event) {
 //        console.log("In SymbolValue.onFocus event.target.value=", event.target.value);
-       this.setState({
-           valueString: this.props.element.value.toString(), // Update the display with unformatted value
-           focused: true
-       });
-//       console.log("In SymbolValue.onFocus event.target.value=", event.target.value,'this.state.valueString=',this.state.valueString,'this.props.element.value=',this.props.element.value);
+        this.setState({
+            valueString: this.props.element.value.toString(), // Update the display with unformatted value
+            focused: true,
+        });
     }
 
     onBlur(event) {
 //        console.log("In SymbolValue.onBlur event.target.value=", event.target.value);
         this.setState({
             valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
-            focused: false
+            focused: false,
         });
-//        console.log("In SymbolValue.onBlur event.target.value=", event.target.value,'this.state.valueString=',this.state.valueString,'this.props.element.value=',this.props.element.value);
     }
 
     onSelect(event) {
@@ -338,7 +342,7 @@ class SymbolValue extends Component {
 }
 
 const mapStateToProps = state => ({
-//    symbol_table: state.model.symbol_table,
+    type: state.model.type,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value
 });

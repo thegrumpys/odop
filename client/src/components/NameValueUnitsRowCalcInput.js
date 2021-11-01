@@ -26,14 +26,22 @@ class NameValueUnitsRowCalcInput extends Component {
 //        console.log('In NameValueUnitsRowCalcInput.constructor this.props.element.name=',this.props.element.name,' this.props.element.format=',this.props.element.format,' this.props.element.table=',this.props.element.table);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
-                focused: false
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display
+                focused: false,
             };
         } else if (this.props.element.format === 'table') {
 //            console.log('In NameValueUnitsRowCalcInput.constructor file= ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
             this.state = {
-                table: table
+                table: table,
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display
+                focused: false,
+            };
+        } else {
+            this.state = {
+                valueString: this.props.element.value.toString(), // Update the display
+                focused: false,
             };
         }
     }
@@ -43,6 +51,7 @@ class NameValueUnitsRowCalcInput extends Component {
         if (prevProps.type !== this.props.type) {
             if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
                 this.setState({
+                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
                     focused: false,
                 });
             } else if (this.props.element.format === 'table') {
@@ -50,7 +59,14 @@ class NameValueUnitsRowCalcInput extends Component {
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate table=',table);
                 this.setState({
-                    table: table
+                    table: table,
+                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
+                    focused: false,
+                });
+            } else {
+                this.setState({
+                    valueString: this.props.element.value.toString(), // Update the display
+                    focused: false,
                 });
             }
         }
@@ -58,13 +74,20 @@ class NameValueUnitsRowCalcInput extends Component {
 
     onChange(event) {
 //        console.log('In NameValueUnitsRowCalcInput.onChange event.target.value=',event.target.value);
-        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
-        logValue(this.props.element.name,event.target.value);
+        this.setState({
+            valueString: event.target.value, // Update the display
+        });
+        var value = parseFloat(event.target.value);
+        if (!isNaN(value) && isFinite(value)) {
+            this.props.changeSymbolValue(this.props.element.name, value); // Update the model
+            logValue(this.props.element.name,event.target.value);
+        }
     }
     
     onFocus(event) {
 //        console.log("In NameValueUnitsRowCalcInput.onFocus event.target.value=", event.target.value);
         this.setState({
+            valueString: this.props.element.value.toString(), // Update the display with unformatted value
             focused: true
         });
     }
@@ -72,6 +95,7 @@ class NameValueUnitsRowCalcInput extends Component {
     onBlur(event) {
 //        console.log("In NameValueUnitsRowCalcInput.onBlur event.target.value=", event.target.value);
         this.setState({
+            valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
             focused: false
         });
     }
@@ -99,7 +123,7 @@ class NameValueUnitsRowCalcInput extends Component {
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
-                                <Form.Control type="number" disabled={!this.props.element.input} className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
+                                <Form.Control type="number" disabled={!this.props.element.input} className="text-right" step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
                             { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
                                 <Form.Control type="text" disabled={!this.props.element.input} className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
                             { this.props.element.format === 'table' &&
