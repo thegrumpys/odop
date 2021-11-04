@@ -210,6 +210,12 @@ export class ReportBase extends Component {
             this.astmFedSpecValue = "N/A";
         }
 //        console.log("this.matTypeValue, this.astmFedSpecValue = ", this.matTypeValue, this.astmFedSpecValue);
+
+        this.energy_1 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_1].value * this.props.symbol_table[o.Deflect_1].value;
+        this.energy_2 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_2].value * this.props.symbol_table[o.Deflect_2].value;
+        var DefSolid = (this.props.symbol_table[o.L_Free].value - this.props.symbol_table[o.L_Solid].value);
+        this.energy_S = 0.5 * this.props.symbol_table[o.Rate].value * DefSolid * DefSolid;
+
         return null;
     }
 
