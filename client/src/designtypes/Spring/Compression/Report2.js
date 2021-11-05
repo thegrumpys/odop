@@ -45,10 +45,10 @@ class Report2 extends ReportBase {
                             <td>{this.props.symbol_table[o.Spring_Index].units}</td>
                             <td/>
                             <td> &nbsp; &nbsp; </td>
-                            <td>Stress Ratio</td>
+                            <td>Helix Angle</td>
                             <td>=</td>
-                            <td>{(this.props.symbol_table[o.Stress_1].value / this.props.symbol_table[o.Stress_2].value).toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Spring_Index].units}</td>
+                            <td>{this.hlx_ang.toFixed(2)}</td>
+                            <td>degrees</td>
                         </tr>
                     </tbody>
                 </table>
@@ -189,6 +189,30 @@ class Report2 extends ReportBase {
                 <table className="report-table">
                     <tbody>
                         <tr>
+                            <td>Stress Mean</td>
+                            <td>=</td>
+                            <td>{((this.props.symbol_table[o.Stress_1].value + this.props.symbol_table[o.Stress_2].value) / 2.0).toFixed(0)}</td>
+                            <td>{this.props.symbol_table[o.Stress_1].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>Stress Ratio</td>
+                            <td>=</td>
+                            <td>{(this.props.symbol_table[o.Stress_1].value / this.props.symbol_table[o.Stress_2].value).toFixed(3)}</td>
+                            <td>{this.props.symbol_table[o.Spring_Index].units}</td>
+                        </tr>
+                        <tr>
+                            <td>Stress Amplitude</td>
+                            <td>=</td>
+                            <td>{((this.props.symbol_table[o.Stress_2].value - this.props.symbol_table[o.Stress_1].value) / 2.0).toFixed(0)}</td>
+                            <td>{this.props.symbol_table[o.Stress_1].units}</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td>Stress Range</td>
+                            <td>=</td>
+                            <td>{(this.props.symbol_table[o.Stress_2].value - this.props.symbol_table[o.Stress_1].value).toFixed(0)}</td>
+                            <td>{this.props.symbol_table[o.Stress_1].units}</td>
+                        </tr>
+                        <tr>
                             <td>{this.props.symbol_table[o.FS_CycleLife].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.FS_CycleLife].value.toFixed(3)}</td>
@@ -199,18 +223,6 @@ class Report2 extends ReportBase {
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
                             <td>{this.cycle_life_u}</td>
-                        </tr>
-                        <tr>
-                            <td>Helix Angle</td>
-                            <td>=</td>
-                            <td>{this.hlx_ang.toFixed(2)}</td>
-                            <td>degrees</td>
-                            <td/>
-                            <td> &nbsp; &nbsp; </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                     </tbody>
                 </table>
