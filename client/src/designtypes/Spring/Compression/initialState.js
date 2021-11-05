@@ -833,7 +833,7 @@ export const initialState = {
             "value": ""
         },
         {
-            "name": "City",
+            "name": "City, State & Zip",
             "value": ""
         },
         {
@@ -841,7 +841,7 @@ export const initialState = {
             "value": ""
         },
         {
-            "name": "Phone",
+            "name": "Phone & email",
             "value": ""
         },
         {
