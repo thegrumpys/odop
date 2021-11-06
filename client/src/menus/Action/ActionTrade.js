@@ -290,13 +290,15 @@ class ActionTrade extends Component {
             defaultest = 0.90 * element.vmax;
         if (defaultest < design.model.system_controls.smallnum)
             defaultest = design.model.system_controls.smallnum;
+        defaultest = defaultest * 100; // Prepare for display
         this.setState({
             dir: dir,
             tc: tc,
             rk1: rk1,
             smallest: smallest,
             bigest: bigest,
-            defaultest: defaultest
+            defaultest: defaultest,
+            defaultestString: defaultest.toString(),
         });
     }
 
@@ -341,10 +343,10 @@ class ActionTrade extends Component {
                 value = element * parseFloat(event.target.value);
                 value = isNaN(value) ? this.state.dir[index] : value;
 //                console.log('i1=',i,' element=',element,' index=',index,' value=',value);
-                return value;
+            } else {
+                value = this.state.dir[index];
+//                console.log('i2=',i,' element=',element,' index=',index,' value=',value);
             }
-            value = this.state.dir[index];
-//            console.log('i2=',i,' element=',element,' index=',index,' value=',value);
             return value;
         })
 //        console.log('dir=',dir);
@@ -384,7 +386,15 @@ class ActionTrade extends Component {
         var value;
         const { store } = this.context;
         design = store.getState();
-        c3 = this.state.defaultest;
+        var value = parseFloat(this.state.defaultestString);
+        if (!isNaN(value)) {
+            c3 = value / 100.0; // Scale back for computation
+            this.setState({
+                defaultest: value,
+            });
+        } else {
+            c3 = this.state.defaultest / 100.0; // Scale back for computation
+        }
         // TAKE FIRST EXPLORATORY RELAXATION STEP
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
@@ -509,10 +519,8 @@ class ActionTrade extends Component {
     onSizeChange(event) {
 //        console.log('In onSizeChange');
 //        console.log('state=',this.state);
-        var value;
-        value = parseFloat(event.target.value) / 100.0;
         this.setState({
-            defaultest: isNaN(value) ? this.state.defaultest : value
+            defaultestString: event.target.value,
         });
     }
     
@@ -751,12 +759,12 @@ class ActionTrade extends Component {
                                     Default
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <Form.Control type="number" className="text-right" value={this.state.defaultest * 100.0} onChange={this.onSizeChange}/>
+                            <Form.Control type="number" className="text-right" value={this.state.defaultestString} onChange={this.onSizeChange}/>
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onSizeCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" onClick={this.onSizeContinue}>Continue</Button>
+                        <Button variant="primary" disabled={isNaN(parseFloat(this.state.defaultestString))} onClick={this.onSizeContinue}>Continue</Button>
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.feasibleModal} className={this.props.className} onHide={this.onNoop}>

@@ -41,7 +41,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
             valueString: event.target.value, // Update the display
         });
         var value = parseFloat(event.target.value);
-        if (!isNaN(value) && isFinite(value)) {
+        if (!isNaN(value)) {
             if (this.props.element.lmax & FIXED) {
                 this.props.changeSymbolConstraint(this.props.element.name, MIN, value);
                 logValue(this.props.element.name,event.target.value,'MinConstraint');
@@ -91,7 +91,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
             modal: !this.state.modal
         });
         var value = parseFloat(this.state.valueString);
-        if (!isNaN(value) && isFinite(value)) {
+        if (!isNaN(value)) {
             if (this.props.element.lmax & FIXED) {
                 this.props.resetSymbolFlag(this.props.element.name, MIN, FDCL);
                 this.props.changeSymbolConstraint(this.props.element.name, MIN, value);

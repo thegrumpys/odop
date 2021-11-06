@@ -78,7 +78,7 @@ class NameValueUnitsRowCalcInput extends Component {
             valueString: event.target.value, // Update the display
         });
         var value = parseFloat(event.target.value);
-        if (!isNaN(value) && isFinite(value)) {
+        if (!isNaN(value)) {
             this.props.changeSymbolValue(this.props.element.name, value); // Update the model
             logValue(this.props.element.name,event.target.value);
         }
