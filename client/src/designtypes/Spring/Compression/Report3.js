@@ -12,7 +12,7 @@ class Report3 extends ReportBase {
             <React.Fragment>
                 <h4>ODOP:Spring &nbsp; Compression Spring Report  &nbsp; &nbsp; <small>https://www.springdesignsoftware.org</small></h4>
                 <br />
-                <table className="report-table">
+                <table id="view1" className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.labels[o.Contact_person].name}:</td>
@@ -50,7 +50,7 @@ class Report3 extends ReportBase {
                 </table>
                 <b>{this.props.labels[o.COMMENT].name}: &nbsp; </b> {this.props.labels[o.COMMENT].value} <br/>
                 <br/>
-                <table className="report-table">
+                <table id="view2" className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
@@ -164,7 +164,7 @@ class Report3 extends ReportBase {
                     </tbody>
                 </table>
                 <br/>
-                <table className="report-table">
+                <table id="view3" className="report-table">
                     <thead>
                         <tr>
                             <th/>
@@ -273,7 +273,7 @@ class Report3 extends ReportBase {
                     </tbody>
                 </table>
                 <hr/>
-                <table className="report-table">
+                <table id="view4" className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.labels[o.Data_Source].name}: </td>
@@ -343,7 +343,7 @@ class Report3 extends ReportBase {
                 {this.errmsg1}{this.errmsg1 !== undefined && <br />}
                 {this.errmsg0}
                 <hr/>
-                <table className="report-table">
+                <table id="view5" className="report-table">
                     <tbody>
                         <tr>
                             <td> &nbsp; approved for mfg.&nbsp; </td>

@@ -12,7 +12,7 @@ class Report2 extends ReportBase {
             <React.Fragment>
                 <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
                 <br />
-                <table className="report-table">
+                <table id="view1" className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
@@ -57,7 +57,7 @@ class Report2 extends ReportBase {
                 <br/>
                 kw2 = {this.kw2.toFixed(3)} &nbsp; &nbsp; (Applies &nbsp;after &nbsp; set removal)
                 <br/>
-                <table className="report-table">
+                <table id="view2" className="report-table">
                     <thead>
                         <tr>
                             <th colSpan="5"></th>
@@ -139,7 +139,7 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <br/>
-                <table className="report-table">
+                <table id="view3" className="report-table">
                     <thead>
                         <tr>
                             <td></td>
@@ -186,7 +186,7 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <hr/>
-                <table className="report-table">
+                <table id="view4" className="report-table">
                     <tbody>
                         <tr>
                             <td>Stress Mean</td>
