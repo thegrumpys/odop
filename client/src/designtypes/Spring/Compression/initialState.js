@@ -837,10 +837,6 @@ export const initialState = {
             "value": ""
         },
         {
-            "name": "State & Zip",
-            "value": ""
-        },
-        {
             "name": "Phone & email",
             "value": ""
         },
@@ -853,7 +849,47 @@ export const initialState = {
             "value": ""
         },
         {
+            "name": "Data Source",
+            "value": "print     sample      verbal"
+        },
+        {
+            "name": "Mandril",
+            "value": ""
+        },
+        {
+            "name": "Wind",
+            "value": "rh lh opt"
+        },
+        {
+            "name": "Shot peen",
+            "value": "yes no"
+        },
+        {
+            "name": "Stress relieve/HT",
+            "value": ""
+        },
+        {
             "name": "Finish",
+            "value": ""
+        },
+        {
+            "name": "Squareness",
+            "value": ""
+        },
+        {
+            "name": "End use",
+            "value": ""
+        },
+        {
+            "name": "Fits in / Works over",
+            "value": ""
+        },
+        {
+            "name": "Operating temp",
+            "value": ""
+        },
+        {
+            "name": "Special notes & tol",
             "value": ""
         }
     ],

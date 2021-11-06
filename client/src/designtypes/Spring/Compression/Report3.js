@@ -19,9 +19,9 @@ class Report3 extends ReportBase {
                             <td> &nbsp; </td>
                             <td>{this.props.labels[o.Contact_person].value}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td>{this.props.labels[o.Phone].name}: </td>
+                            <td>{this.props.labels[o.Phone___email].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Phone].value}</td>
+                            <td>{this.props.labels[o.Phone___email].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.Company_name].name}: </td>
@@ -42,9 +42,9 @@ class Report3 extends ReportBase {
                             <td>{this.props.labels[o.Part_Number].value}</td>
                         </tr>
                         <tr>
-                            <td>{this.props.labels[o.City].name}: </td>
+                            <td>{this.props.labels[o.City__State___Zip].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.City].value}</td>
+                            <td>{this.props.labels[o.City__State___Zip].value}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -276,68 +276,63 @@ class Report3 extends ReportBase {
                 <table className="report-table">
                     <tbody>
                         <tr>
+                            <td>{this.props.labels[o.Data_Source].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{this.props.labels[o.Data_Source].value}</td>
+                        </tr>
+                        <tr>
+                            <td>{this.props.labels[o.Mandril].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{this.props.labels[o.Mandril].value}</td>
+                            <td>{this.props.symbol_table[o.ID_Free].units}</td>
+                        </tr>
+                        <tr>
+                            <td>{this.props.labels[o.Wind].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{this.props.labels[o.Wind].value}</td>
+                        </tr>
+                        <tr>
+                            <td>{this.props.labels[o.Shot_peen].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{this.props.labels[o.Shot_peen].value}</td>
+                        </tr>
+                        <tr>
+                            <td>{this.props.labels[o.Stress_relieve_HT].name}: </td>
+                            <td> &nbsp; </td>
+                            <td>{this.props.labels[o.Stress_relieve_HT].value}</td>
+                        </tr>
+                        <tr>
                             <td>{this.props.labels[o.Finish].name}: </td>
                             <td> &nbsp; </td>
                             <td>{this.props.labels[o.Finish].value}</td>
                         </tr>
                         <tr>
-                            <td>Wind: </td>
+                            <td>{this.props.labels[o.Squareness].name}: </td>
                             <td> &nbsp; </td>
-                            <td>rh</td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>lh</td>
-                            <td> &nbsp; </td>
-                            <td>opt</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Data source: </td>
-                            <td> &nbsp; </td>
-                            <td>print </td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>sample </td>
-                            <td> &nbsp; </td>
-                            <td>verbal</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Mandrel: </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>Fits in: </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td>Works over:</td>
-                        </tr>
-                        <tr>
-                            <td>Stress relieve</td>
-                            <td>/ HT: </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td>Squareness</td>
+                            <td>{this.props.labels[o.Squareness].value}</td>
                             <td className="text-left">(deg): </td>
                         </tr>
                         <tr>
-                            <td>Shot peen: </td>
+                            <td>{this.props.labels[o.End_use].name}: </td>
                             <td> &nbsp; </td>
-                            <td> yes </td>
-                            <td> &nbsp; </td>
-                            <td> no </td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> Operating temp: </td>
+                            <td>{this.props.labels[o.End_use].value}</td>
                         </tr>
                         <tr>
-                            <td>Special notes</td>
-                            <td className="text-left" colSpan="2">& tolerances: </td>
+                            <td>{this.props.labels[o.Fits_in___Works_over].name}: </td>
                             <td> &nbsp; </td>
+                            <td>{this.props.labels[o.Fits_in___Works_over].value}</td>
+                        </tr>
+                        <tr>
+                            <td>{this.props.labels[o.Operating_temp].name}: </td>
                             <td> &nbsp; </td>
+                            <td>{this.props.labels[o.Operating_temp].value}</td>
+                        </tr>
+                        <tr>
+                            <td className="text-left" colSpan="2">{this.props.labels[o.Special_notes___tol].name}: </td>
                             <td> &nbsp; </td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td> End use: </td>
+                            <td>{this.props.labels[o.Special_notes___tol].value}</td>
+                        </tr>
+                        <tr>
                             <td> &nbsp; </td>
                         </tr>
                     </tbody>
