@@ -94,6 +94,7 @@ class NameValueUnitsRowCalcInput extends Component {
             valueString: this.props.element.value.toString(), // Update the display with unformatted value
             focused: true
         });
+        this.props.onValid();
     }
     
     onBlur(event) {
@@ -102,6 +103,7 @@ class NameValueUnitsRowCalcInput extends Component {
             valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
             focused: false
         });
+        this.props.onValid();
     }
     
     onSelect(event) {

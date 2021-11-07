@@ -61,6 +61,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
             valueString: this.props.element.cmax.toString(), // Update the display with unformatted value
             focused: true,
         });
+        this.props.onValid();
     }
     
     onBlur(event) {
@@ -69,6 +70,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
             valueString: this.props.element.cmax.toString(), // Update the display with formatted value
             focused: false,
         });
+        this.props.onValid();
     }
 
     onClick(event) {

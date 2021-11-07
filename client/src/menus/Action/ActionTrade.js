@@ -390,29 +390,29 @@ class ActionTrade extends Component {
     }
     
     onArbitraryBlur(i, event) {
-////        console.log('In ActionTrade.onArbitraryBlur i=',i,' event.target.value=',event.target.value);
-////        console.log('state=',this.state);
-//        var dirString = this.state.dirString.map((element,index) => {
-//            if (index === i) {
-//                var value = parseFloat(event.target.value);
-//                if (!isNaN(value)) {
-//                    return value.toString();
-//                } else {
-//                    return Math.abs(this.state.dir[index]).toString();
-//                }
-//            } else {
-//                return Math.abs(this.state.dir[index]).toString();
-//            }
-//        });
-////        console.log('dirString=',dirString);
-//        var notAllNumbers = dirString.reduce((previousValue,currentValue) => {return previousValue || isNaN(parseFloat(currentValue))}, false);
-////      console.log('notAllNumbers=',notAllNumbers);
-//        var arbitraryContinueDisabled = notAllNumbers;
-////        console.log('arbitraryContinueDisabled=',arbitraryContinueDisabled);
-//        this.setState({
-//            dirString: dirString,
-//            arbitraryContinueDisabled: arbitraryContinueDisabled,
-//        });
+//        console.log('In ActionTrade.onArbitraryBlur i=',i,' event.target.value=',event.target.value);
+//        console.log('state=',this.state);
+        var dirString = this.state.dirString.map((element,index) => {
+            if (index === i) {
+                var value = parseFloat(event.target.value);
+                if (!isNaN(value)) {
+                    return value.toString();
+                } else {
+                    return Math.abs(this.state.dir[index]).toString();
+                }
+            } else {
+                return Math.abs(this.state.dir[index]).toString();
+            }
+        });
+//        console.log('dirString=',dirString);
+        var notAllNumbers = dirString.reduce((previousValue,currentValue) => {return previousValue || isNaN(parseFloat(currentValue))}, false);
+//      console.log('notAllNumbers=',notAllNumbers);
+        var arbitraryContinueDisabled = notAllNumbers;
+//        console.log('arbitraryContinueDisabled=',arbitraryContinueDisabled);
+        this.setState({
+            dirString: dirString,
+            arbitraryContinueDisabled: arbitraryContinueDisabled,
+        });
     }
     
     //===========================================================

@@ -58,23 +58,23 @@ class FilePreferences extends Component {
     }
     
     onBlur(name, valueString) {
-////        console.log("In FilePreferences.onBlur name=", name, "value=", value);
-//        var value = parseFloat(valueString);
-//        if (!isNaN(value)) {
-//            this.setState({
-//                system_controls: {
-//                    ...this.state.system_controls,
-//                    [name] : value.toString(),
-//                }
-//            });
-//        } else {
-//            this.setState({
-//                system_controls: {
-//                    ...this.state.system_controls,
-//                    [name] : this.props.system_controls[name].toString(),
-//                }
-//            });
-//        }
+//        console.log("In FilePreferences.onBlur name=", name, "value=", value);
+        var value = parseFloat(valueString);
+        if (!isNaN(value)) {
+            this.setState({
+                system_controls: {
+                    ...this.state.system_controls,
+                    [name] : value.toString(),
+                }
+            });
+        } else {
+            this.setState({
+                system_controls: {
+                    ...this.state.system_controls,
+                    [name] : this.props.system_controls[name].toString(),
+                }
+            });
+        }
     }
 
     onRestoreDefaults() {
