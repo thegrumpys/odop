@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -48,6 +49,9 @@ class ConstraintsMaxRowDependentVariable extends Component {
             }
             this.props.changeSymbolConstraint(this.props.element.name, MAX, value);
             logValue(this.props.element.name,event.target.value,'MaxConstraint');
+            this.props.onValid();
+        } else {
+            this.props.onInvalid();
         }
     }
     
@@ -210,6 +214,16 @@ class ConstraintsMaxRowDependentVariable extends Component {
             </tbody>
         );
     }
+}
+
+ConstraintsMaxRowDependentVariable.propTypes = {
+    onValid: PropTypes.func,
+    onInvalid: PropTypes.func,
+}
+
+ConstraintsMaxRowDependentVariable.defaultProps = {
+    onValid: (()=>{}),
+    onInvalid: (()=>{}),
 }
 
 const mapStateToProps = state => ({

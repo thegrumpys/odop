@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -66,6 +67,9 @@ class NameValueUnitsRowIndependentVariable extends Component {
         if (!isNaN(value)) {
             this.props.changeSymbolValue(this.props.element.name, value); // Update the model
             logValue(this.props.element.name,event.target.value);
+            this.props.onValid();
+        } else {
+            this.props.onInvalid();
         }
     }
 
@@ -136,6 +140,16 @@ class NameValueUnitsRowIndependentVariable extends Component {
             </tbody>
         );
     }
+}
+
+NameValueUnitsRowIndependentVariable.propTypes = {
+    onValid: PropTypes.func,
+    onInvalid: PropTypes.func,
+}
+
+NameValueUnitsRowIndependentVariable.defaultProps = {
+    onValid: (()=>{}),
+    onInvalid: (()=>{}),
 }
 
 const mapStateToProps = state => ({

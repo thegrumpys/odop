@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -81,6 +82,9 @@ class NameValueUnitsRowCalcInput extends Component {
         if (!isNaN(value)) {
             this.props.changeSymbolValue(this.props.element.name, value); // Update the model
             logValue(this.props.element.name,event.target.value);
+            this.props.onValid();
+        } else {
+            this.props.onInvalid();
         }
     }
     
@@ -147,6 +151,16 @@ class NameValueUnitsRowCalcInput extends Component {
             </tbody>
         );
     }
+}
+
+NameValueUnitsRowCalcInput.propTypes = {
+    onValid: PropTypes.func,
+    onInvalid: PropTypes.func,
+}
+
+NameValueUnitsRowCalcInput.defaultProps = {
+    onValid: (()=>{}),
+    onInvalid: (()=>{}),
 }
 
 const mapStateToProps = state => ({

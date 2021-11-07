@@ -42,11 +42,20 @@ class SymbolValue extends Component {
         this.onContextMenu = this.onContextMenu.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.onValidValue = this.onValidValue.bind(this);
+        this.onInvalidValue = this.onInvalidValue.bind(this);
+        this.onValidMinConstraint = this.onValidMinConstraint.bind(this);
+        this.onInvalidMinConstraint = this.onInvalidMinConstraint.bind(this);
+        this.onValidMaxConstraint = this.onValidMaxConstraint.bind(this);
+        this.onInvalidMaxConstraint = this.onInvalidMaxConstraint.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
                 modal: false,
                 valueString: this.props.element.value.toODOPPrecision(), // Update the display
                 focused: false,
+                isInvalidValue: false,
+                isInvalidMinConstraint: false,
+                isInvalidMaxConstraint: false,
             };
         } else if (this.props.element.format === 'table') {
 //            console.log('In SymbolValue.constructor file= ../designtypes/'+this.props.element.table+'.json');
@@ -57,12 +66,18 @@ class SymbolValue extends Component {
                 modal: false,
                 valueString: this.props.element.value.toODOPPrecision(), // Update the display
                 focused: false,
+                isInvalidValue: false,
+                isInvalidMinConstraint: false,
+                isInvalidMaxConstraint: false,
             };
         } else {
             this.state = {
                 modal: false,
                 valueString: this.props.element.value.toString(), // Update the display
                 focused: false,
+                isInvalidValue: false,
+                isInvalidMinConstraint: false,
+                isInvalidMaxConstraint: false,
             };
         }
     }
@@ -190,6 +205,48 @@ class SymbolValue extends Component {
         return value_class;
     }
 
+    onValidValue() {
+//        console.log('In SymbolValue.onValidValue this=',this);
+        this.setState({
+            isInvalidValue: false,
+        });
+    }
+
+    onInvalidValue() {
+//        console.log('In SymbolValue.onInvalidValue this=',this);
+        this.setState({
+            isInvalidValue: true,
+        });
+    }
+
+    onValidMinConstraint() {
+//        console.log('In SymbolValue.onValidMinConstraint this=',this);
+        this.setState({
+            isInvalidMinConstraint: false,
+        });
+    }
+
+    onInvalidMinConstraint() {
+//        console.log('In SymbolValue.onInvalidMinConstraint this=',this);
+        this.setState({
+            isInvalidMinConstraint: true,
+        });
+    }
+
+    onValidMaxConstraint() {
+//        console.log('In SymbolValue.onValidMaxConstraint this=',this);
+        this.setState({
+            isInvalidMaxConstraint: false,
+        });
+    }
+
+    onInvalidMaxConstraint() {
+//        console.log('In SymbolValue.onInvalidMaxConstraint this=',this);
+        this.setState({
+            isInvalidMaxConstraint: true,
+        });
+    }
+
     render() {
 //        console.log('In SymbolValue.render this=',this);
         var value_class = 'text-right ';
@@ -283,17 +340,17 @@ class SymbolValue extends Component {
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <NameValueUnitsHeaderIndependentVariable />
-                                    <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidValue} onInvalid={this.onInvalidValue} />
                                 </React.Fragment>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <NameValueUnitsHeaderDependentVariable />
-                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidValue} onInvalid={this.onInvalidValue} />
                                 </React.Fragment>}
                             {this.props.element.type === "calcinput" && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <NameValueUnitsHeaderCalcInput />
-                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
+                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidValue} onInvalid={this.onInvalidValue} />
                                 </React.Fragment>}
                         </Table>
                         <Table size="sm" style={{backgroundColor: '#eee'}} className="mb-0">
@@ -309,31 +366,31 @@ class SymbolValue extends Component {
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <ConstraintsMinHeaderIndependentVariable />
-                                    <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMinConstraint} onInvalid={this.onInvalidMinConstraint} />
                                 </React.Fragment>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <ConstraintsMinHeaderDependentVariable />
-                                    <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMinConstraint} onInvalid={this.onInvalidMinConstraint} />
                                 </React.Fragment>}
                         </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <ConstraintsMaxHeaderIndependentVariable />
-                                    <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMaxConstraint} onInvalid={this.onInvalidMaxConstraint} />
                                 </React.Fragment>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <ConstraintsMaxHeaderDependentVariable />
-                                    <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMaxConstraint} onInvalid={this.onInvalidMaxConstraint} />
                                 </React.Fragment>}
                         </Table>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button outline="true" variant="info" onClick={this.onContextHelp}>Help</Button>{' '}
                         &nbsp;
-                        <Button variant="primary" onClick={this.onClose}>Close</Button>
+                        <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>
