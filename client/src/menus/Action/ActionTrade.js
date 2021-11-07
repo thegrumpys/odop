@@ -28,6 +28,7 @@ class ActionTrade extends Component {
         this.onArbitraryCancel = this.onArbitraryCancel.bind(this);
         this.onArbitraryContinue = this.onArbitraryContinue.bind(this);
         this.onArbitraryChange = this.onArbitraryChange.bind(this);
+        this.onArbitraryBlur = this.onArbitraryBlur.bind(this);
 
         this.onSizeCancel = this.onSizeCancel.bind(this);
         this.onSizeContinue = this.onSizeContinue.bind(this);
@@ -54,7 +55,8 @@ class ActionTrade extends Component {
                 nviol:  0,
                 vflag: [],
                 ldir: [],
-                dir: []
+                dir: [],
+                dirString: [], // For arbitrary modal only
             };
     }
     
@@ -63,15 +65,15 @@ class ActionTrade extends Component {
     //===========================================================
     
     strategyToggle() {
-        logUsage('event', 'ActionTrade', { 'event_label': 'ActionTrade'});
-        this.props.saveAutoSave(); // @@@
-//        console.log('In strategyToggle');
+//        console.log('In ActionTrade.strategyToggle this=',this);
 //        console.log('state=',this.state);
+        logUsage('event', 'ActionTrade', { 'event_label': 'ActionTrade'});
+        this.props.saveAutoSave();
         var design;
         var ncode;
         const { store } = this.context;
-//        this.props.saveInputSymbolValues(); // @@@
-//        this.props.search(); // @@@
+//        this.props.saveInputSymbolValues();
+//        this.props.search();
         design = store.getState();
         var nviol = this.commonViolationSetup();
         if (design.model.result.objective_value <= design.model.system_controls.objmin || nviol === 0) {
@@ -87,6 +89,8 @@ class ActionTrade extends Component {
     }
     
     commonViolationSetup() {
+//        console.log('In ActionTrade.commonViolationSetup this=',this);
+//        console.log('state=',this.state);
         var design;
         var element;
         var nviol = 0;
@@ -94,7 +98,7 @@ class ActionTrade extends Component {
         var vflag = [];
         const { store } = this.context;
         this.props.saveInputSymbolValues();
-        this.props.search(); // @@@
+        this.props.search();
         design = store.getState();
         for (let i = 0; i < design.model.symbol_table.length; i++) {
             element = design.model.symbol_table[i];
@@ -119,14 +123,17 @@ class ActionTrade extends Component {
         return nviol;
     }
     
-    onNoop() {} // No-op for onHide
+    onNoop() { // No-op for onHide
+//      console.log('In ActionTrade.onNoop this=',this);
+//      console.log('state=',this.state);
+    }
 
     //===========================================================
     // Strategy Modal
     //===========================================================
     
     onStrategyDone() { // Option 3
-//        console.log('In onStrategyDone');
+//        console.log('In ActionTrade.onStrategyDone this=',this);
 //        console.log('state=',this.state);
         this.props.restoreInputSymbolValues();
         var ncode;
@@ -139,7 +146,7 @@ class ActionTrade extends Component {
     }
 
     onStrategyExisting() { // Option 2
-//        console.log('In onStrategyExisting');
+//        console.log('In ActionTrade.onStrategyExisting this=',this);
 //        console.log('state=',this.state);
         var design;
         var element;
@@ -167,11 +174,12 @@ class ActionTrade extends Component {
     }
 
     onStrategyArbitrary() { // Option 1
-//        console.log('In onStrategyArbitrary');
+//        console.log('In ActionTrade.onStrategyArbitrary this=',this);
 //        console.log('state=',this.state);
         var design;
         var element;
         var dir = [];
+        var dirString = [];
         const { store } = this.context;
         design = store.getState();
         for (let i = 0; i < this.state.nviol; i++) {
@@ -182,16 +190,19 @@ class ActionTrade extends Component {
             } else {
                 dir[i] = this.state.ldir[i] * element.vmax;
             }
+            dirString[i] = Math.abs(dir[i]).toString(); // Convert to string for arbitrary modal display
         }
         this.setState({
             dir: dir,
-            strategyModal: !this.state.strategyModal,
-            arbitraryModal: !this.state.arbitraryModal
+            dirString: dirString,
+            arbitraryContinueDisabled: false,
+            strategyModal: !this.state.strategyModal, // Hide strategy modal
+            arbitraryModal: !this.state.arbitraryModal, // Show arbitrary modal
         });
     }
 
     onStrategyProportional() { // Option 0
-//        console.log('In onStrategyProportional');
+//        console.log('In ActionTrade.onStrategyProportional this=',this);
 //        console.log('state=',this.state);
         var design;
         var element;
@@ -215,6 +226,8 @@ class ActionTrade extends Component {
     }
     
     onStrategyContextHelp() {
+//        console.log('In ActionTrade.onStrategyContextHelp this=',this);
+//        console.log('state=',this.state);
         this.setState({
             modal: !this.state.modal
         });
@@ -222,6 +235,8 @@ class ActionTrade extends Component {
     }
     
     commonArbitraryOrProportional(dir) {
+//        console.log('In ActionTrade.commonArbitraryOrProportional dir=',dir);
+//        console.log('state=',this.state);
         /**
          * **** CREATE normalized VECTOR IN VIOLATED CONSTRAINT SPACE
          * *****
@@ -312,41 +327,46 @@ class ActionTrade extends Component {
     //===========================================================
     
     onArbitraryCancel() {
-//        console.log('In onArbitraryCancel');
+//        console.log('In ActionTrade.onArbitraryCancel this=',this);
 //        console.log('state=',this.state);
         this.props.restoreInputSymbolValues();
         var ncode;
         ncode = 'TRADE CANCELLED';
         this.props.changeResultTerminationCondition(ncode);
         this.setState({
-            arbitraryModal: !this.state.arbitraryModal
+            arbitraryModal: !this.state.arbitraryModal, // Hide arbitrary modal
         });
         return;
     }
     
     onArbitraryContinue() {
-//        console.log('In onArbitraryContinue');
+//        console.log('In ActionTrade.onArbitraryContinue this=',this);
 //        console.log('state=',this.state);
         this.commonArbitraryOrProportional(this.state.dir);
         this.setState({
-            arbitraryModal: !this.state.arbitraryModal,
-            sizeModal: !this.state.sizeModal,
+            arbitraryModal: !this.state.arbitraryModal, // Hide arbitrary modal
+            sizeModal: !this.state.sizeModal, // Show size modal
         });
     }
     
     onArbitraryChange(i, event) {
-//        console.log('=========================== i=',i,' event.target.value=',event.target.value);
+//        console.log('In ActionTrade.onArbitraryChange i=',i,' event.target.value=',event.target.value);
 //        console.log('state=',this.state);
         var design;
         const { store } = this.context;
         design = store.getState();
         var dir = [];
+        var dirString = []
         var value;
         dir = this.state.ldir.map((element,index)=>{
             var value;
             if (index === i) {
-                value = element * parseFloat(event.target.value);
-                value = isNaN(value) ? this.state.dir[index] : value;
+                value = parseFloat(event.target.value);
+                if (!isNaN(value)) {
+                    value = value * element;
+                } else {
+                    value = this.state.dir[index];
+                }
 //                console.log('i1=',i,' element=',element,' index=',index,' value=',value);
             } else {
                 value = this.state.dir[index];
@@ -355,11 +375,44 @@ class ActionTrade extends Component {
             return value;
         })
 //        console.log('dir=',dir);
-        value = dir.reduce((value,dir) => {return Math.abs(dir) > value ? Math.abs(dir) : value}, 0.0);
-//        console.log('value=',value);
+        var greatestValue = dir.reduce((previousValue,currentValue) => {return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue}, 0.0);
+//        console.log('greatestValue=',greatestValue);
+        dirString = dir.map((element,index) => {return index === i ? event.target.value : Math.abs(element).toString()});
+//        console.log('dirString=',dirString);
+        var notAllNumbers = dirString.reduce((previousValue,currentValue) => {return previousValue || isNaN(parseFloat(currentValue))}, false);
+//        console.log('notAllNumbers=',notAllNumbers);
+        var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllNumbers;
+//        console.log('arbitraryContinueDisabled=',arbitraryContinueDisabled);
         this.setState({
             dir: dir,
-            arbitraryContinueDisabled: value < design.model.system_controls.smallnum
+            dirString: dirString,
+            arbitraryContinueDisabled: arbitraryContinueDisabled,
+        });
+    }
+    
+    onArbitraryBlur(i, event) {
+//        console.log('In ActionTrade.onArbitraryBlur i=',i,' event.target.value=',event.target.value);
+//        console.log('state=',this.state);
+        var dirString = this.state.dirString.map((element,index) => {
+            if (index === i) {
+                var value = parseFloat(event.target.value);
+                if (!isNaN(value)) {
+                    return value.toString();
+                } else {
+                    return Math.abs(this.state.dir[index]).toString();
+                }
+            } else {
+                return Math.abs(this.state.dir[index]).toString();
+            }
+        });
+//        console.log('dirString=',dirString);
+        var notAllNumbers = dirString.reduce((previousValue,currentValue) => {return previousValue || isNaN(parseFloat(currentValue))}, false);
+//      console.log('notAllNumbers=',notAllNumbers);
+        var arbitraryContinueDisabled = notAllNumbers;
+//        console.log('arbitraryContinueDisabled=',arbitraryContinueDisabled);
+        this.setState({
+            dirString: dirString,
+            arbitraryContinueDisabled: arbitraryContinueDisabled,
         });
     }
     
@@ -368,7 +421,7 @@ class ActionTrade extends Component {
     //===========================================================
     
     onSizeCancel() {
-//        console.log('In onSizeCancel');
+//        console.log('In ActionTrade.onSizeCancel this=',this);
 //        console.log('state=',this.state);
         this.props.restoreInputSymbolValues();
         var ncode;
@@ -381,7 +434,7 @@ class ActionTrade extends Component {
     }
     
     onSizeContinue() {
-//        console.log('In onSizeContinue');
+//        console.log('In ActionTrade.onSizeContinue this=',this);
 //        console.log('state=',this.state);
         var design;
         var element;
@@ -391,7 +444,7 @@ class ActionTrade extends Component {
         var value;
         const { store } = this.context;
         design = store.getState();
-        var value = parseFloat(this.state.defaultestString);
+        value = parseFloat(this.state.defaultestString);
         if (!isNaN(value)) {
             c3 = value / 100.0; // Scale back for computation
             this.setState({
@@ -512,8 +565,8 @@ class ActionTrade extends Component {
 //                        console.log(element.name + ' MAX ' + value + ' ' + element.units);
                 }
             }
-            design = store.getState(); // @@@
-            this.props.search(); // @@@
+            design = store.getState();
+            this.props.search();
         }
         this.setState({
             sizeModal: !this.state.sizeModal,
@@ -522,7 +575,7 @@ class ActionTrade extends Component {
     }
 
     onSizeChange(event) {
-//        console.log('In onSizeChange');
+//        console.log('In ActionTrade.onSizeChange this=',this);
 //        console.log('state=',this.state);
         this.setState({
             defaultestString: event.target.value,
@@ -534,7 +587,7 @@ class ActionTrade extends Component {
     //===========================================================
     
     onFeasibleRestart() {
-//        console.log('In onFeasibleRestart');
+//        console.log('In ActionTrade.onFeasibleRestart this=',this);
 //        console.log('state=',this.state);
         var design;
         var element;
@@ -559,7 +612,7 @@ class ActionTrade extends Component {
     }
 
     onFeasibleDone() {
-//        console.log('In onFeasibleDone');
+//        console.log('In ActionTrade.onFeasibleDone this=',this);
 //        console.log('state=',this.state);
         this.setState({
             feasibleModal: !this.state.feasibleModal
@@ -572,13 +625,13 @@ class ActionTrade extends Component {
     //===========================================================
     
     onEstablishAccept() {
-//        console.log('In onEstablishAccept');
+//        console.log('In ActionTrade.onEstablishAccept this=',this);
 //        console.log('state=',this.state);
         var design;
         var ncode;
         const { store } = this.context;
-//        design = store.getState(); // @@@
-//        this.props.search(); // @@@
+//        design = store.getState();
+//        this.props.search();
         design = store.getState(); // Re-access store to get latest element values
         if (design.model.result.objective_value <= design.model.system_controls.objmin) {
             ncode = 'ACCEPTED TRADE RESULT';
@@ -595,7 +648,7 @@ class ActionTrade extends Component {
     }
     
     onEstablishDone() {
-//      console.log('In onEstablishDone');
+//      console.log('In ActionTrade.onEstablishDone this=',this);
 //      console.log('state=',this.state);
       this.props.restoreInputSymbolValues();
       var design;
@@ -626,7 +679,7 @@ class ActionTrade extends Component {
     //===========================================================
     
     onNotFeasibleRestart() {
-//        console.log('In onNotFeasibleRestart');
+//        console.log('In ActionTrade.onNotFeasibleRestart this=',this);
 //        console.log('state=',this.state);
         var design;
         const { store } = this.context;
@@ -650,9 +703,9 @@ class ActionTrade extends Component {
     }
     
     onNotFeasibleRepeat() {
-//      console.log('In onNotFeasibleRepeat');
+//      console.log('In ActionTrade.onNotFeasibleRepeat this=',this);
 //      console.log('state=',this.state);
-//      this.props.saveInputSymbolValues(); // @@@
+//      this.props.saveInputSymbolValues();
       this.commonViolationSetup()
       this.setState({
           notFeasibleModal: !this.state.notFeasibleModal,
@@ -661,7 +714,7 @@ class ActionTrade extends Component {
   }
   
     onNotFeasibleDone() {
-//        console.log('In onNotFeasibleDone');
+//        console.log('In ActionTrade.onNotFeasibleDone this=',this);
 //        console.log('state=',this.state);
         var ncode;
         ncode = 'ACCEPTED TRADE RESULT';
@@ -685,6 +738,9 @@ class ActionTrade extends Component {
                 <NavDropdown.Item onClick={this.strategyToggle}>
                     Trade&hellip;
                 </NavDropdown.Item>
+                {/*==================================================*/}
+                {/*=====================strategy=====================*/}
+                {/*==================================================*/}
                 <Modal show={this.state.strategyModal} className={this.props.className} size="lg" onHide={this.onStrategyDone}>
                     <Modal.Header>
                         <Modal.Title>
@@ -709,6 +765,9 @@ class ActionTrade extends Component {
                         <Button variant="primary" onClick={this.onStrategyProportional}>Proportional</Button>
                     </Modal.Footer>
                 </Modal>
+                {/*==================================================*/}
+                {/*=====================arbitrary====================*/}
+                {/*==================================================*/}
                 <Modal show={this.state.arbitraryModal} className={this.props.className} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
@@ -736,7 +795,7 @@ class ActionTrade extends Component {
                                             <Col className="align-middle text-left" xs="4">{dname}</Col>
                                             <Col className="align-middle text-left" xs="2">{this.state.ldir[i] < 0 ? 'MIN' : 'MAX'}</Col>
                                             <Col className="align-middle text-right" xs="6">
-                                                <Form.Control type="number" className="align-middle text-right" value={Math.abs(this.state.dir[i])} onChange={(event) => {this.onArbitraryChange(i, event)}}/>
+                                                <Form.Control type="number" className="align-middle text-right" value={this.state.dirString[i]} onChange={(event) => {this.onArbitraryChange(i, event)}} onBlur={(event) => {this.onArbitraryBlur(i, event)}}/>
                                             </Col>
                                         </Row>
                                     );
@@ -749,6 +808,9 @@ class ActionTrade extends Component {
                         <Button variant="primary" onClick={this.onArbitraryContinue} disabled={this.state.arbitraryContinueDisabled}>Continue</Button>
                     </Modal.Footer>
                 </Modal>
+                {/*==================================================*/}
+                {/*=======================size=======================*/}
+                {/*==================================================*/}
                 <Modal show={this.state.sizeModal} className={this.props.className} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
@@ -772,6 +834,9 @@ class ActionTrade extends Component {
                         <Button variant="primary" disabled={isNaN(parseFloat(this.state.defaultestString))} onClick={this.onSizeContinue}>Continue</Button>
                     </Modal.Footer>
                 </Modal>
+                {/*==================================================*/}
+                {/*=====================feasible=====================*/}
+                {/*==================================================*/}
                 <Modal show={this.state.feasibleModal} className={this.props.className} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
@@ -791,6 +856,9 @@ class ActionTrade extends Component {
                         <Button variant="primary" onClick={this.onFeasibleDone}> &nbsp; Done &nbsp; </Button>
                     </Modal.Footer>
                 </Modal>
+                {/*==================================================*/}
+                {/*=====================establish====================*/}
+                {/*==================================================*/}
                 <Modal show={this.state.establishModal} className={this.props.className} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
@@ -810,6 +878,9 @@ class ActionTrade extends Component {
                         <Button variant="primary" onClick={this.onEstablishAccept}>Accept</Button>
                     </Modal.Footer>
                 </Modal>
+                {/*==================================================*/}
+                {/*====================notFeasible===================*/}
+                {/*==================================================*/}
                 <Modal show={this.state.notFeasibleModal} className={this.props.className} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
