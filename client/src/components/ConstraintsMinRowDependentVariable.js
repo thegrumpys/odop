@@ -179,7 +179,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                                 <Table borderless="true">
                                     <tbody>
                                         <tr>
-                                            <td colspan="2">
+                                            <td colSpan="2">
                                                 Select constraint variable or enter constraint value.
                                             </td>
                                         </tr>
