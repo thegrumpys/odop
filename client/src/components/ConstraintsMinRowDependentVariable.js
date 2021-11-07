@@ -199,8 +199,8 @@ class ConstraintsMinRowDependentVariable extends Component {
                                             <td>Value:&nbsp;</td>
                                             <td>
                                                 <InputGroup>
-                                                    <Form.Control type="number" id={this.props.element.name + "_cmin"} className="text-right" value={this.state.focused ? this.state.valueString : this.props.element.cmin.toString()} onChange={this.onChangeValue} />
-                                                    <Button variant="primary" onClick={this.onEnterButton}>Enter</Button>
+                                                    <Form.Control type="number" id={this.props.element.name + "_cmin"} className={value_class} value={this.state.focused ? this.state.valueString : this.props.element.cmin.toString()} onChange={this.onChangeValue} />
+                                                    <Button variant="primary" disabled={this.state.focused && isNaN(parseFloat(this.state.valueString))} onClick={this.onEnterButton}>Enter</Button>
                                                 </InputGroup>
                                             </td>
                                         </tr>
