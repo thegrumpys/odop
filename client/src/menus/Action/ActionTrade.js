@@ -177,10 +177,11 @@ class ActionTrade extends Component {
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
             element = design.model.symbol_table[j];
-            if (this.state.ldir[i] < 0)
+            if (this.state.ldir[i] < 0) {
                 dir[i] = this.state.ldir[i] * element.vmin;
-            else
+            } else {
                 dir[i] = this.state.ldir[i] * element.vmax;
+            }
         }
         this.setState({
             dir: dir,
@@ -200,10 +201,11 @@ class ActionTrade extends Component {
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
             element = design.model.symbol_table[j];
-            if (this.state.ldir[i] < 0)
+            if (this.state.ldir[i] < 0) {
                 dir[i] = this.state.ldir[i] * element.vmin;
-            else
+            } else {
                 dir[i] = this.state.ldir[i] * element.vmax;
+            }
         }
         this.commonArbitraryOrProportional(dir);
         this.setState({
@@ -244,10 +246,11 @@ class ActionTrade extends Component {
             dir[i] = dir[i] / value;
             let j = this.state.vflag[i];
             element = design.model.symbol_table[j];
-            if (this.state.ldir[i] < 0)
+            if (this.state.ldir[i] < 0) {
                 tc[i] = element.cmin;
-            else
+            } else {
                 tc[i] = element.cmax;
+            }
         }
         var rk1;
         var smallest;
@@ -284,12 +287,14 @@ class ActionTrade extends Component {
         }
         let j = this.state.vflag[itemp];
         element = design.model.symbol_table[j];
-        if (this.state.ldir[itemp] < 0)
+        if (this.state.ldir[itemp] < 0) {
             defaultest = 0.90 * element.vmin;
-        else
+        } else {
             defaultest = 0.90 * element.vmax;
-        if (defaultest < design.model.system_controls.smallnum)
+        }
+        if (defaultest < design.model.system_controls.smallnum) {
             defaultest = design.model.system_controls.smallnum;
+        }
         defaultest = defaultest * 100; // Prepare for display
         this.setState({
             dir: dir,
