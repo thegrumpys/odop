@@ -61,19 +61,19 @@ class ResultTable extends Component {
         var display_search_button;
         if (this.props.objective_value > 4*this.props.system_controls.objmin) {
             feasibility_string = "NOT FEASIBLE";
-            feasibility_class = "text-not-feasible";
+            feasibility_class = "text-not-feasible ";
             display_search_button = true;
         } else if (this.props.objective_value > this.props.system_controls.objmin) {
             feasibility_string = "CLOSE TO FEASIBLE";
-            feasibility_class = "text-close-to-feasible";
+            feasibility_class = "text-close-to-feasible ";
             display_search_button = true;
         } else if (this.props.objective_value > 0.0) {
             feasibility_string = "FEASIBLE";
-            feasibility_class = "text-feasible";
+            feasibility_class = "text-feasible ";
             display_search_button = false;
         } else {
             feasibility_string = "STRICTLY FEASIBLE";
-            feasibility_class = "text-strictly-feasible";
+            feasibility_class = "text-strictly-feasible ";
             display_search_button = false;
         }
         return (

@@ -794,7 +794,9 @@ class ActionTrade extends Component {
                                             <Col className="align-middle text-left" xs="4">{dname}</Col>
                                             <Col className="align-middle text-left" xs="2">{this.state.ldir[i] < 0 ? 'MIN' : 'MAX'}</Col>
                                             <Col className="align-middle text-right" xs="6">
-                                                <Form.Control type="number" className="align-middle text-right" value={this.state.dirString[i]} onChange={(event) => {this.onArbitraryChange(i, event)}} onBlur={(event) => {this.onArbitraryBlur(i, event)}}/>
+                                                <Form.Control type="number" className={
+                                                        'text-right ' + (isNaN(parseFloat(this.state.dirString[i])) ? 'borders-invalid ' : '')
+                                                    } value={this.state.dirString[i]} onChange={(event) => {this.onArbitraryChange(i, event)}} onBlur={(event) => {this.onArbitraryBlur(i, event)}}/>
                                             </Col>
                                         </Row>
                                     );
@@ -825,7 +827,9 @@ class ActionTrade extends Component {
                                     Default
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <Form.Control type="number" className="text-right" value={this.state.defaultestString} onChange={this.onSizeChange}/>
+                            <Form.Control type="number" className={
+                                    'text-right ' + (isNaN(parseFloat(this.state.defaultestString)) ? 'borders-invalid ' : '')
+                                } value={this.state.defaultestString} onChange={this.onSizeChange}/>
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>

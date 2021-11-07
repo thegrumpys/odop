@@ -190,21 +190,6 @@ class SymbolValue extends Component {
         });
     }
 
-    getValueClass() {
-        var value_class = '';
-        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-            value_class += "text-not-feasible ";
-        } else if (this.props.objective_value > this.props.system_controls.objmin) {
-            value_class += "text-close-to-feasible ";
-        } else if (this.props.objective_value > 0.0) {
-            value_class += "text-feasible ";
-        } else {
-            value_class += "text-strictly-feasible ";
-        }
-//        console.log('In SymbolValue.getValueClass value_class=',value_class);
-        return value_class;
-    }
-
     onValidValue() {
 //        console.log('In SymbolValue.onValidValue this=',this);
         this.setState({
@@ -245,6 +230,21 @@ class SymbolValue extends Component {
         this.setState({
             isInvalidMaxConstraint: true,
         });
+    }
+
+    getValueClass() {
+        var value_class = '';
+        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+            value_class += "text-not-feasible ";
+        } else if (this.props.objective_value > this.props.system_controls.objmin) {
+            value_class += "text-close-to-feasible ";
+        } else if (this.props.objective_value > 0.0) {
+            value_class += "text-feasible ";
+        } else {
+            value_class += "text-strictly-feasible ";
+        }
+//        console.log('In SymbolValue.getValueClass value_class=',value_class);
+        return value_class;
     }
 
     render() {
@@ -290,6 +290,9 @@ class SymbolValue extends Component {
             if (this.props.element.lmax & CONSTRAINED) {
                 value_class += "borders-constrained-max ";
             }
+        }
+        if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
+            value_class += "borders-invalid ";
         }
 //        console.log('In SymbolValue.render value_class=',value_class);
         return (

@@ -118,6 +118,10 @@ class NameValueUnitsRowIndependentVariable extends Component {
         // =======================================
         // Table Row
         // =======================================
+        var value_class = 'text-right ';
+        if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
+            value_class += "borders-invalid ";
+        }
         return (
             <tbody>
                 <tr key={this.props.element.name}>
@@ -128,7 +132,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <Form.Control type="number" className="text-right" step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
+                            <Form.Control type="number" className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />

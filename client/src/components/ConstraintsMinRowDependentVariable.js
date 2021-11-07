@@ -133,14 +133,17 @@ class ConstraintsMinRowDependentVariable extends Component {
         var value_class = 'text-right ';
         if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
             if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-                value_class += "text-not-feasible";
+                value_class += "text-not-feasible ";
             } else if (this.props.objective_value > this.props.system_controls.objmin) {
-                value_class += "text-close-to-feasible";
+                value_class += "text-close-to-feasible ";
             } else if (this.props.objective_value > 0.0) {
-                value_class += "text-feasible";
+                value_class += "text-feasible ";
             } else {
-                value_class += "text-strictly-feasible";
+                value_class += "text-strictly-feasible ";
             }
+        }
+        if (this.props.element.lmin & CONSTRAINED && this.state.focused && isNaN(parseFloat(this.state.valueString))) {
+            value_class += "borders-invalid ";
         }
         return (
             <tbody>

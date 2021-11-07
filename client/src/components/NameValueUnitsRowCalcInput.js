@@ -118,6 +118,10 @@ class NameValueUnitsRowCalcInput extends Component {
         // =======================================
         // Table Row
         // =======================================
+        var value_class = 'text-right ';
+        if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
+            value_class += "borders-invalid ";
+        }
         return (
             <tbody>
                 <tr key={this.props.element.name}>
@@ -129,9 +133,9 @@ class NameValueUnitsRowCalcInput extends Component {
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
-                                <Form.Control type="number" disabled={!this.props.element.input} className="text-right" step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
+                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
                             { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
-                                <Form.Control type="text" disabled={!this.props.element.input} className="text-right" value={this.props.element.value} onChange={this.onChange} /> : '' }
+                                <Form.Control type="text" disabled={!this.props.element.input} className={value_class} value={this.props.element.value} onChange={this.onChange} /> : '' }
                             { this.props.element.format === 'table' &&
                             (
                                 <Form.Control as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>
