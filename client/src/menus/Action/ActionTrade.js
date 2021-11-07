@@ -357,7 +357,6 @@ class ActionTrade extends Component {
         design = store.getState();
         var dir = [];
         var dirString = []
-        var value;
         dir = this.state.ldir.map((element,index)=>{
             var value;
             if (index === i) {
