@@ -58,23 +58,23 @@ class FilePreferences extends Component {
     }
     
     onBlur(name, valueString) {
-//        console.log("In FilePreferences.onBlur name=", name, "value=", value);
-        var value = parseFloat(valueString);
-        if (!isNaN(value)) {
-            this.setState({
-                system_controls: {
-                    ...this.state.system_controls,
-                    [name] : value.toString(),
-                }
-            });
-        } else {
-            this.setState({
-                system_controls: {
-                    ...this.state.system_controls,
-                    [name] : this.props.system_controls[name].toString(),
-                }
-            });
-        }
+////        console.log("In FilePreferences.onBlur name=", name, "value=", value);
+//        var value = parseFloat(valueString);
+//        if (!isNaN(value)) {
+//            this.setState({
+//                system_controls: {
+//                    ...this.state.system_controls,
+//                    [name] : value.toString(),
+//                }
+//            });
+//        } else {
+//            this.setState({
+//                system_controls: {
+//                    ...this.state.system_controls,
+//                    [name] : this.props.system_controls[name].toString(),
+//                }
+//            });
+//        }
     }
 
     onRestoreDefaults() {
@@ -149,7 +149,21 @@ class FilePreferences extends Component {
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.toggle}>Cancel</Button>
                         <Button variant="primary" onClick={this.onRestoreDefaults}>Restore Defaults</Button>
-                        <Button variant="primary" onClick={this.onApplyandClose}>Apply and Close</Button>
+                        <Button variant="primary" disabled=
+                            {
+                                (() => {
+                                    var previousValue = false;
+                                    /* console.log('1 previousValue=',previousValue); */
+                                    for (const property_name in this.state.system_controls) {
+                                        if (this.state.system_controls.hasOwnProperty(property_name)) {
+                                            previousValue = previousValue || isNaN(parseFloat(this.state.system_controls[property_name]));
+                                            /* console.log('2 previousValue=',previousValue); */
+                                        }
+                                    }
+                                    return previousValue;
+                                    /* console.log('3 previousValue=',previousValue); */
+                                })()
+                            } onClick={this.onApplyandClose}>Apply and Close</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>
