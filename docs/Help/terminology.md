@@ -260,9 +260,21 @@ ___
 It is possible to store a series of text strings with a design in order 
 to carry descriptive information. 
 The File : Properties menu is used to establish a set of label - value 
-pairs where the text of the value is set by the user.
+pairs where the text of the value is set by the user. 
+
+For coil spring designs, the content of these fields is displayed on Report 3. 
+Thus, information entered into File : Properties can be used to support the documentation of a spring design.
+See your browser documentation for details on how to print or save into .PDF format a page like Report 3. 
+From there, the information can be included as part of a Request for Quotation or other transfer of the design information.
+
 The number of labels and the text of the label are established in the design type 
 source code in the initialState.js file.
+
+See also:   
+[File : Properties](menus#FileProperties)   
+[View : Reports](menus#ViewReports)   
+[Printing](htt#printing)
+
 
 ___
 
