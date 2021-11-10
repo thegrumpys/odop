@@ -42,22 +42,42 @@ class SymbolValue extends Component {
         this.onContextMenu = this.onContextMenu.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.onValidValue = this.onValidValue.bind(this);
+        this.onInvalidValue = this.onInvalidValue.bind(this);
+        this.onValidMinConstraint = this.onValidMinConstraint.bind(this);
+        this.onInvalidMinConstraint = this.onInvalidMinConstraint.bind(this);
+        this.onValidMaxConstraint = this.onValidMaxConstraint.bind(this);
+        this.onInvalidMaxConstraint = this.onInvalidMaxConstraint.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
                 modal: false,
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display
                 focused: false,
+                isInvalidValue: false,
+                isInvalidMinConstraint: false,
+                isInvalidMaxConstraint: false,
             };
         } else if (this.props.element.format === 'table') {
 //            console.log('In SymbolValue.constructor file= ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In SymbolValue.constructor table=',table);
             this.state = {
-                modal: false,
                 table: table,
+                modal: false,
+                valueString: this.props.element.value.toODOPPrecision(), // Update the display
+                focused: false,
+                isInvalidValue: false,
+                isInvalidMinConstraint: false,
+                isInvalidMaxConstraint: false,
             };
         } else {
             this.state = {
                 modal: false,
+                valueString: this.props.element.value.toString(), // Update the display
+                focused: false,
+                isInvalidValue: false,
+                isInvalidMinConstraint: false,
+                isInvalidMaxConstraint: false,
             };
         }
     }
@@ -75,10 +95,11 @@ class SymbolValue extends Component {
     }
 
     componentDidUpdate(prevProps) {
-//        console.log('In SymbolValue.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
+//            console.log('In SymbolValue.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
             if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
                 this.setState({
+                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
                     focused: false,
                 });
             } else if (this.props.element.format === 'table') {
@@ -86,7 +107,14 @@ class SymbolValue extends Component {
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //                console.log('In SymbolValue.componentDidUpdate table=',table);
                 this.setState({
-                  table: table
+                    table: table,
+                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
+                    focused: false,
+                });
+            } else {
+                this.setState({
+                    valueString: this.props.element.value.toString(), // Update the display
+                    focused: false,
                 });
             }
         }
@@ -94,37 +122,46 @@ class SymbolValue extends Component {
 
     onChange(event) {
 //        console.log('In SymbolValue.onChange event.target.value=',event.target.value);
-       this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
-       logValue(this.props.element.name,event.target.value);
+        this.setState({
+            valueString: event.target.value, // Update the display
+        });
+        var value = parseFloat(event.target.value);
+        if (!isNaN(value)) {
+            this.props.changeSymbolValue(this.props.element.name, value); // Update the model
+            logValue(this.props.element.name,event.target.value);
+        }
     }
 
     onFocus(event) {
 //        console.log("In SymbolValue.onFocus event.target.value=", event.target.value);
-       this.setState({
-            focused: true
+        this.setState({
+            valueString: this.props.element.value.toString(), // Update the display with unformatted value
+            focused: true,
         });
     }
 
     onBlur(event) {
 //        console.log("In SymbolValue.onBlur event.target.value=", event.target.value);
         this.setState({
-          focused: false
+            valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
+            focused: false,
         });
     }
 
     onSelect(event) {
 //        console.log('In SymbolValue.onSelect event.target.value=',event.target.value);
+        this.setState({
+            valueString: event.target.value, // Update the display
+        });
         var selectedIndex = parseFloat(event.target.value);
-        this.props.changeSymbolValue(this.props.element.name,selectedIndex);
+        this.props.changeSymbolValue(this.props.element.name,selectedIndex); // Update the model
         logValue(this.props.element.name,selectedIndex);
         this.state.table[selectedIndex].forEach((value, index) => {
-//            console.log('In SymbolValue.onSelect value=',value,'index=',index);
+//                console.log('In SymbolValue.onSelect value=',value,'index=',index);
             if (index > 0) { // Skip the first column
                 var name = this.state.table[0][index];
-//                console.log('In SymbolValue.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table);
-                if (this.props.symbol_table.find(element => element.name === name) !== undefined) {
-                    this.props.changeSymbolValue(name,value);
-                }
+//                    console.log('In SymbolValue.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table);
+                this.props.changeSymbolValue(name,value); // Update the model
             }
         });
     }
@@ -150,6 +187,48 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.onCancel this=',this);
         this.setState({
             modal: false,
+        });
+    }
+
+    onValidValue() {
+//        console.log('In SymbolValue.onValidValue this=',this);
+        this.setState({
+            isInvalidValue: false,
+        });
+    }
+
+    onInvalidValue() {
+//        console.log('In SymbolValue.onInvalidValue this=',this);
+        this.setState({
+            isInvalidValue: true,
+        });
+    }
+
+    onValidMinConstraint() {
+//        console.log('In SymbolValue.onValidMinConstraint this=',this);
+        this.setState({
+            isInvalidMinConstraint: false,
+        });
+    }
+
+    onInvalidMinConstraint() {
+//        console.log('In SymbolValue.onInvalidMinConstraint this=',this);
+        this.setState({
+            isInvalidMinConstraint: true,
+        });
+    }
+
+    onValidMaxConstraint() {
+//        console.log('In SymbolValue.onValidMaxConstraint this=',this);
+        this.setState({
+            isInvalidMaxConstraint: false,
+        });
+    }
+
+    onInvalidMaxConstraint() {
+//        console.log('In SymbolValue.onInvalidMaxConstraint this=',this);
+        this.setState({
+            isInvalidMaxConstraint: true,
         });
     }
 
@@ -212,6 +291,9 @@ class SymbolValue extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
+        if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
+            value_class += "borders-invalid ";
+        }
 //        console.log('In SymbolValue.render value_class=',value_class);
         return (
             <React.Fragment>
@@ -220,10 +302,10 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                    <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                             )
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
@@ -261,17 +343,17 @@ class SymbolValue extends Component {
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <NameValueUnitsHeaderIndependentVariable />
-                                    <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidValue} onInvalid={this.onInvalidValue} />
                                 </React.Fragment>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <NameValueUnitsHeaderDependentVariable />
-                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidValue} onInvalid={this.onInvalidValue} />
                                 </React.Fragment>}
                             {this.props.element.type === "calcinput" && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <NameValueUnitsHeaderCalcInput />
-                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
+                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidValue} onInvalid={this.onInvalidValue} />
                                 </React.Fragment>}
                         </Table>
                         <Table size="sm" style={{backgroundColor: '#eee'}} className="mb-0">
@@ -287,31 +369,31 @@ class SymbolValue extends Component {
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <ConstraintsMinHeaderIndependentVariable />
-                                    <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMinConstraint} onInvalid={this.onInvalidMinConstraint} />
                                 </React.Fragment>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <ConstraintsMinHeaderDependentVariable />
-                                    <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMinConstraint} onInvalid={this.onInvalidMinConstraint} />
                                 </React.Fragment>}
                         </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <ConstraintsMaxHeaderIndependentVariable />
-                                    <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMaxConstraint} onInvalid={this.onInvalidMaxConstraint} />
                                 </React.Fragment>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <React.Fragment>
                                     <ConstraintsMaxHeaderDependentVariable />
-                                    <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMaxConstraint} onInvalid={this.onInvalidMaxConstraint} />
                                 </React.Fragment>}
                         </Table>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button outline="true" variant="info" onClick={this.onContextHelp}>Help</Button>{' '}
                         &nbsp;
-                        <Button variant="primary" onClick={this.onClose}>Close</Button>
+                        <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                     </Modal.Footer>
                 </Modal>
             </React.Fragment>
@@ -320,7 +402,7 @@ class SymbolValue extends Component {
 }
 
 const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table,
+    type: state.model.type,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value
 });

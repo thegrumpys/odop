@@ -35,7 +35,7 @@ class FileImport extends Component {
 
     // On file select (from the pop up)
     onFileChange(event) {
-//        console.log('In FileImport.onFileChange event=',event);
+//        console.log('In FileImport.onFileChange event.target.value=',event.target.value);
         this.setState({ 
             selectedFile: event.target.files[0]
         });
@@ -52,7 +52,7 @@ class FileImport extends Component {
     };
     
     onLoadEnd(event) {
-//        console.log('In FileImport.onLoadEnd event=',event);
+//        console.log('In FileImport.onLoadEnd event.target.value=',event.target.value);
         displaySpinner(false);
         var design = JSON.parse(this.state.fileReader.result); // Convert file contents to JSON object
 //        console.log('In FileImport.onLoadEnd design.type=',design.type,'design.name=',design.name);
