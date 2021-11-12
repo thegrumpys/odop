@@ -36,7 +36,7 @@ class NameValueUnitsRowCalcInput extends Component {
 //            console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
             this.state = {
                 table: table,
-                valueString: this.props.element.value.toODOPPrecision(), // Update the display
+                valueString: this.props.element.value.toString(), // Update the display
                 focused: false,
             };
         } else {
