@@ -33,7 +33,7 @@ The details:
 
 **Views**
 
-The ODOP View menu provides access to various "Views".  
+The ODOP View menu provides access to various "Views". 
 Each view is just a different way of looking at the current state of the [mathematical model](terminology#mathModel). 
 All ODOP [design types](terminology#designTypes) provide an "[Advanced View](menus#ViewAdvanced)" 
 that permits input of values and provides access to all features.
@@ -94,9 +94,8 @@ ___
 
 Notes:   
  - Do not leave a value field blank.  See also: [Not a Number](htt#nan)
- - Input of values less than 1.0 requires a leading zero.  For example, enter "0.25", not ".25".
- - Input of negative numbers requires 2 steps.  Input the number then put the minus sign in front of it.
- - Input of values in scientific notation, for example: 1.234e5, is not supported in the current release.
+ - Starting in ODOP version 4.0.7, input of values in scientific notation, for example: 1.234e5, is supported.
+ - Input of values less than 1.0 no longer requires a leading zero. 
  
 &nbsp;   
 
