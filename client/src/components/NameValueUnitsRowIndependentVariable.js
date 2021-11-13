@@ -66,6 +66,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
         var value = parseFloat(event.target.value);
         if (!isNaN(value)) {
             this.props.changeSymbolValue(this.props.element.name, value); // Update the model
+            if (this.props.system_controls.enable_auto_fix) this.props.fixSymbolValue(this.props.element.name);
             logValue(this.props.element.name,event.target.value);
             this.props.onValid();
         } else {
@@ -141,7 +142,6 @@ class NameValueUnitsRowIndependentVariable extends Component {
                         </InputGroup>
                     </td>
                     <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
-                    <td></td>
                 </tr>
             </tbody>
         );

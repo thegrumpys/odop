@@ -35,7 +35,7 @@ export class Calculator extends ReportBase {
                         <tbody>
                             <tr>
                                 <SymbolName element={this.props.symbol_table[o.Spring_Type]} index={o.Spring_Type} />
-                                <SymbolValue element={this.props.symbol_table[o.Spring_Type]} index={o.Spring_Type} />
+                                <Value value={this.props.symbol_table[o.Spring_Type].value} />
                                 <SymbolUnits element={this.props.symbol_table[o.Spring_Type]} index={o.Spring_Type} className="text-left" />
                                 <td> &nbsp; &nbsp; </td>
                                 <SymbolName element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} />

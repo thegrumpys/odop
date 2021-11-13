@@ -14,5 +14,6 @@ export const initialSystemControls = {
         "tol": 0.0001,
         "smallnum": 1.0e-07,
         "show_units": 1,
-        "show_violations": 1
+        "show_violations": 1,
+        "enable_auto_fix": 1
     };

@@ -35,7 +35,6 @@ class SymbolValue extends Component {
     constructor(props) {
 //        console.log('In SymbolValue.constructor props=',props);
         super(props);
-        this.onChange = this.onChange.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onSelect = this.onSelect.bind(this);
@@ -117,18 +116,6 @@ class SymbolValue extends Component {
                     focused: false,
                 });
             }
-        }
-    }
-
-    onChange(event) {
-//        console.log('In SymbolValue.onChange event.target.value=',event.target.value);
-        this.setState({
-            valueString: event.target.value, // Update the display
-        });
-        var value = parseFloat(event.target.value);
-        if (!isNaN(value)) {
-            this.props.changeSymbolValue(this.props.element.name, value); // Update the model
-            logValue(this.props.element.name,event.target.value);
         }
     }
 
@@ -294,6 +281,9 @@ class SymbolValue extends Component {
         if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
             value_class += "borders-invalid ";
         }
+        if (this.props.element.input) { // Independent Variable?
+            value_class += "background-white ";
+        }
 //        console.log('In SymbolValue.render value_class=',value_class);
         return (
             <React.Fragment>
@@ -302,32 +292,28 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                    <Form.Control type="number" readOnly className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                <Form.Control type="number" readOnly className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
                             )
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control type="text" disabled={!this.props.element.input} className={value_class} value={this.props.element.value} onChange={this.onChange} onContextMenu={this.onContextMenu} />
+                                    <Form.Control type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="text" disabled={!this.props.element.input} className={value_class} value={this.props.element.value} onChange={this.onChange} onContextMenu={this.onContextMenu} />
+                                <Form.Control type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
                             )
                         : ''}
                         { this.props.element.format === 'table' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={this.props.element.value} onChange={this.onSelect} onContextMenu={this.onContextMenu} >
-                                        {this.state.table.map((value, index) => index > 0 ? <option key={index} value={index}>{value[0]}</option> : '')}
-                                    </Form.Control>
+                                    <Form.Control type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                                 </OverlayTrigger>
                             :
-                                (<Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={this.props.element.value} onChange={this.onSelect} onContextMenu={this.onContextMenu} >
-                                    {this.state.table.map((value, index) => index > 0 ? <option key={index} value={index}>{value[0]}</option> : '')}
-                                </Form.Control>)
+                                <Form.Control type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                             )
                         : ''}
                     </InputGroup>
