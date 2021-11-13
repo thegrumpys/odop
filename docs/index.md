@@ -21,6 +21,7 @@
 * [Terminology](Help/terminology)
 * [Getting Started](Help/gettingStarted)
 * [Menus](Help/menus)
+* [Setting Values](Help/settingValues)
 * [Tutorial and Demo](Help/tutordemo)
 * [Design Situations](Help/designSituations)
 * [Default Designs](Help/defaultDesigns)
