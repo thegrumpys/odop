@@ -239,6 +239,7 @@ class SymbolValue extends Component {
         var value_class = 'text-right ';
         var value_tooltip;
         var value_fix_free_text = '';
+        var icon_class = '';
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
@@ -283,6 +284,9 @@ class SymbolValue extends Component {
         }
         if (this.props.element.input) { // Independent Variable?
             value_class += "background-white ";
+            icon_class = "fas fa-caret-right icon";
+        } else {
+            value_class += "background-white ";
         }
 //        console.log('In SymbolValue.render value_class=',value_class);
         return (
@@ -292,28 +296,46 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control type="number" readOnly className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                    <React.Fragment>
+                                        <i className={icon_class}></i>
+                                        <Form.Control type="number" readOnly className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                    </React.Fragment>
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" readOnly className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                <React.Fragment>
+                                    <i className={icon_class}></i>
+                                    <Form.Control type="number" readOnly className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                </React.Fragment>
                             )
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
+                                    <React.Fragment>
+                                        <i className={icon_class}></i>
+                                        <Form.Control type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
+                                    </React.Fragment>
                                 </OverlayTrigger>
                             :
+                                <React.Fragment>
+                                    <i className={icon_class}></i>
                                 <Form.Control type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
+                                </React.Fragment>
                             )
                         : ''}
                         { this.props.element.format === 'table' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
+                                    <React.Fragment>
+                                        <i className={icon_class}></i>
+                                        <Form.Control type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
+                                    </React.Fragment>
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
+                                <React.Fragment>
+                                    <i className={icon_class}></i>
+                                    <Form.Control type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
+                                </React.Fragment>
                             )
                         : ''}
                     </InputGroup>
