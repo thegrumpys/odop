@@ -283,11 +283,9 @@ class SymbolValue extends Component {
             value_class += "borders-invalid ";
         }
         if (this.props.element.input) { // Independent Variable?
-            value_class += "background-white ";
             icon_class = "fas fa-caret-right icon";
-        } else {
-            value_class += "background-white ";
         }
+        value_class += "background-white ";
 //        console.log('In SymbolValue.render value_class=',value_class);
         return (
             <React.Fragment>
