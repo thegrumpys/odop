@@ -17,6 +17,7 @@ import ConstraintsMaxHeaderDependentVariable from './ConstraintsMaxHeaderDepende
 import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
 import NameValueUnitsHeaderCalcInput from './NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
+import FormControlTypeNumber from './FormControlTypeNumber';
 import { logValue } from '../logUsage';
 import { logUsage } from '../logUsage';
 
@@ -36,8 +37,6 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.constructor props=',props);
         super(props);
         this.onChange = this.onChange.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onContextMenu = this.onContextMenu.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);
@@ -51,8 +50,6 @@ class SymbolValue extends Component {
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
                 modal: false,
-                valueString: this.props.element.value.toODOPPrecision(), // Update the display
-                focused: false,
                 isInvalidValue: false,
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
@@ -64,8 +61,6 @@ class SymbolValue extends Component {
             this.state = {
                 table: table,
                 modal: false,
-                valueString: this.props.element.value.toODOPPrecision(), // Update the display
-                focused: false,
                 isInvalidValue: false,
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
@@ -73,8 +68,6 @@ class SymbolValue extends Component {
         } else {
             this.state = {
                 modal: false,
-                valueString: this.props.element.value.toString(), // Update the display
-                focused: false,
                 isInvalidValue: false,
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
@@ -97,24 +90,12 @@ class SymbolValue extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.type !== this.props.type) {
 //            console.log('In SymbolValue.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
-            if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
-                this.setState({
-                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
-                    focused: false,
-                });
-            } else if (this.props.element.format === 'table') {
+            if (this.props.element.format === 'table') {
 //                console.log('In SymbolValue.componentDidUpdate file= ../designtypes/'+this.props.element.table+'.json');
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //                console.log('In SymbolValue.componentDidUpdate table=',table);
                 this.setState({
                     table: table,
-                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
-                    focused: false,
-                });
-            } else {
-                this.setState({
-                    valueString: this.props.element.value.toString(), // Update the display
-                    focused: false,
                 });
             }
         }
@@ -122,30 +103,11 @@ class SymbolValue extends Component {
 
     onChange(event) {
 //        console.log('In SymbolValue.onChange event.target.value=',event.target.value);
-        this.setState({
-            valueString: event.target.value, // Update the display
-        });
         var value = parseFloat(event.target.value);
         if (!isNaN(value)) {
             this.props.changeSymbolValue(this.props.element.name, value); // Update the model
             logValue(this.props.element.name,event.target.value);
         }
-    }
-
-    onFocus(event) {
-//        console.log("In SymbolValue.onFocus event.target.value=", event.target.value);
-        this.setState({
-            valueString: this.props.element.value.toString(), // Update the display with unformatted value
-            focused: true,
-        });
-    }
-
-    onBlur(event) {
-//        console.log("In SymbolValue.onBlur event.target.value=", event.target.value);
-        this.setState({
-            valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
-            focused: false,
-        });
     }
 
     onSelect(event) {
@@ -291,9 +253,6 @@ class SymbolValue extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
-        if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
-            value_class += "borders-invalid ";
-        }
 //        console.log('In SymbolValue.render value_class=',value_class);
         return (
             <React.Fragment>
@@ -302,10 +261,10 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             (value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                    <FormControlTypeNumber disabled={!this.props.element.input} className={value_class} value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onContextMenu={this.onContextMenu} />
                                 </OverlayTrigger>
                             :
-                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                <FormControlTypeNumber disabled={!this.props.element.input} className={value_class} value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onContextMenu={this.onContextMenu} />
                             )
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
