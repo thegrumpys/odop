@@ -4,6 +4,7 @@
 * [Terminology](terminology)
 * [Getting Started](gettingStarted)
 * [Menus](menus)
+* [Setting Values](settingValues)
 * [Tutorial and Demo](tutordemo)
 * [Design Situations](designSituations)
 * [Default Designs](defaultDesigns)
