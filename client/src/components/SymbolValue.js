@@ -238,6 +238,7 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.render this=',this);
         var value_class = 'text-right ';
         var value_tooltip;
+        var value_fix_free_text = '';
         var icon_class = '';
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
