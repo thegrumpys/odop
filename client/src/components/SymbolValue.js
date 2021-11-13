@@ -103,6 +103,9 @@ class SymbolValue extends Component {
 
     onChange(event) {
 //        console.log('In SymbolValue.onChange event.target.value=',event.target.value);
+        this.setState({
+            valueString: event.target.value, // Update the display
+        });
         var value = parseFloat(event.target.value);
         if (!isNaN(value)) {
             this.props.changeSymbolValue(this.props.element.name, value); // Update the model
