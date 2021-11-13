@@ -201,10 +201,8 @@ ___
 
 **File : Properties**  
 
-The File : Preferences menu item provides access to a group of user supplied text strings 
-that can be used to label a design.
-The number of text strings and default labels for these text strings are part 
-of the initialState definition for each design type.
+The File : Properties menu item provides access to a group of user controlled text strings 
+(label - value pairs) that can be used to label a design.
 For the coil spring designs, the default labels include: 
 COMMENT, 
 Contact person, 
@@ -215,13 +213,21 @@ State & ZIP,
 Phone, 
 Date, 
 Part Number, 
-and Finish.
+Finish 
+and other fields.
 
-For the coil spring designs, content of the COMMENT field appears on Report 3.
+The content of these fields is displayed on Report 3. 
+Thus, information entered into File : Properties can be used to support the documentation of a spring design.
+See your browser documentation for details on how to print or save into .PDF format a page like Report 3. 
+From there, the information can be included as part of a Request for Quotation or other transfer of the design information.
+
+The number of text strings and default labels for these text strings are part 
+of the initialState definition for each design type.
 
 See also:   
 [View : Reports](menus#ViewReports)   
-[Terminology - Properties](terminology#properties)
+[Terminology - Properties](terminology#properties)  
+[Printing](htt#printing)
 
 
 ___
@@ -438,11 +444,21 @@ ___
 
 Each design type may (or may not) have design type specific reports available on the View menu. 
 Each of the currently available coil spring design types offers three reports.
- - Report 1 provides an overview of the design; basically a summary of the most useful information
+ - Report 1 provides an overview of the design; basically a spring design specific summary of the most useful information
  - Report 2 has a focus on stress information
- - Report 3 is intended to be printed, marked up and form the basis of a request for quotation 
+ - Report 3 is intended to be printed or saved into .PDF format so that it can be included as part of a request for quotation 
 
 ![Screen capture of Report 1](./png/ScrCap_Report1Noted.png "Report 1")  
+
+Information entered into the File : Properties menu of coil spring design types is included as part of Report 3.
+Thus, this information can be used to support the documentation of a spring design.
+See your browser documentation for details on how to print or save into .PDF format a page like Report 3. 
+From there, the information can be included as part of a Request for Quotation or other transfer of the design information.
+
+See also:   
+[File : Properties](menus#FileProperties)   
+[Terminology - Properties](terminology#properties)  
+[Printing](htt#printing)
 
 
 ___

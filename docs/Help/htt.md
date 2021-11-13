@@ -251,15 +251,17 @@ ___
 ___
 
 **Printing**   
-Use the print features of the browser.
+Use the print features of the browser.  
+
 Depending on the browser and operating system, it may be possible to
 "print" into a local .PDF file.
-Again, depending on the operating system, browser, web page (main "Design" page versus Report pages) 
+Again, depending on the operating system, browser, web page 
+(Advanced View main page or Calculator View main page versus Report pages) 
 and selected paper size,
 it may be necessary to adjust the print scale to obtain optimum results.
 For example, with Chromium based browsers like Google Chrome and Microsoft Chromium Edge
 when US letter size paper is selected, 
-a print scale of 79% may produce the best results for the main "Design" page.
+a print scale of 79% may produce the best results for the Advanced View main page or Calculator View main page.
 In order to set print scale with Chromium Edge use the sequence:
 Settings and more / Print / Printer = Microsoft Print to PDF / More settings / Scale (%) = 79.   
 
