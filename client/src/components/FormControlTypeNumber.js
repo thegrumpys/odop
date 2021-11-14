@@ -37,11 +37,13 @@ class FormControlTypeNumber extends Component {
                 value: value,
                 valueString: event.target.value, // Update the display
             });
+            this.props.onChangeValid(event); // Pass valid number onward
             this.props.onChange(event); // Pass valid number onward
         } else {
             this.setState({
                 valueString: event.target.value, // Update the display
             });
+            this.props.onChangeInvalid(event); // Pass invalid number onward
         }
     }
 
@@ -89,6 +91,8 @@ class FormControlTypeNumber extends Component {
 
 FormControlTypeNumber.propTypes = {
     onChange: PropTypes.func,
+    onChangeValid: PropTypes.func,
+    onChangeInvalid: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onContextMenu: PropTypes.func,
@@ -96,6 +100,8 @@ FormControlTypeNumber.propTypes = {
 
 FormControlTypeNumber.defaultProps = {
     onChange: (()=>{}),
+    onChangeValid: (()=>{}),
+    onChangeInvalid: (()=>{}),
     onFocus: (()=>{}),
     onBlur: (()=>{}),
     onContextMenu: (()=>{}),
