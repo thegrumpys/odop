@@ -828,13 +828,13 @@ class ActionTrade extends Component {
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
                             <Form.Control type="number" className={
-                                    'text-right ' + (isNaN(parseFloat(this.state.defaultestString)) ? 'borders-invalid ' : '')
+                                    'text-right ' + (isNaN(parseFloat(this.state.defaultestString)) || parseFloat(this.state.defaultestString) < design.model.system_controls.smallnum ? 'borders-invalid ' : '')
                                 } value={this.state.defaultestString} onChange={this.onSizeChange}/>
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onSizeCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" disabled={isNaN(parseFloat(this.state.defaultestString))} onClick={this.onSizeContinue}>Continue</Button>
+                        <Button variant="primary" disabled={isNaN(parseFloat(this.state.defaultestString)) || parseFloat(this.state.defaultestString) < design.model.system_controls.smallnum} onClick={this.onSizeContinue}>Continue</Button>
                     </Modal.Footer>
                 </Modal>
                 {/*==================================================*/}
