@@ -17,7 +17,6 @@ import ConstraintsMaxHeaderDependentVariable from './ConstraintsMaxHeaderDepende
 import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
 import NameValueUnitsHeaderCalcInput from './NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
-import FormControlTypeNumber from './FormControlTypeNumber';
 import { logValue } from '../logUsage';
 import { logUsage } from '../logUsage';
 
@@ -36,7 +35,6 @@ class SymbolValue extends Component {
     constructor(props) {
 //        console.log('In SymbolValue.constructor props=',props);
         super(props);
-        this.onChange = this.onChange.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onContextMenu = this.onContextMenu.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);
@@ -99,13 +97,6 @@ class SymbolValue extends Component {
                 });
             }
         }
-    }
-
-    onChange(event) {
-//        console.log('In SymbolValue.onChange event.target.value=',event.target.value);
-        var value = parseFloat(event.target.value);
-        this.props.changeSymbolValue(this.props.element.name, value); // Update the model
-        logValue(this.props.element.name,event.target.value);
     }
 
     onSelect(event) {
@@ -266,13 +257,13 @@ class SymbolValue extends Component {
                                 <React.Fragment>
                                     {icon_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                            <FormControlTypeNumber readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
+                                            <Form.Control type="number" readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
                                     </OverlayTrigger>
                                 </React.Fragment>
                             :
                                 <React.Fragment>
                                     {icon_tag}
-                                    <FormControlTypeNumber readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
+                                    <Form.Control type="number" readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
                                 </React.Fragment>
                             )
                         : ''}
