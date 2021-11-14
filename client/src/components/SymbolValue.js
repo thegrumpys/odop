@@ -35,8 +35,6 @@ class SymbolValue extends Component {
     constructor(props) {
 //        console.log('In SymbolValue.constructor props=',props);
         super(props);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onContextMenu = this.onContextMenu.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);
@@ -50,8 +48,6 @@ class SymbolValue extends Component {
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
                 modal: false,
-                valueString: this.props.element.value.toODOPPrecision(), // Update the display
-                focused: false,
                 isInvalidValue: false,
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
@@ -63,8 +59,6 @@ class SymbolValue extends Component {
             this.state = {
                 table: table,
                 modal: false,
-                valueString: this.props.element.value.toODOPPrecision(), // Update the display
-                focused: false,
                 isInvalidValue: false,
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
@@ -72,8 +66,6 @@ class SymbolValue extends Component {
         } else {
             this.state = {
                 modal: false,
-                valueString: this.props.element.value.toString(), // Update the display
-                focused: false,
                 isInvalidValue: false,
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
@@ -96,50 +88,19 @@ class SymbolValue extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.type !== this.props.type) {
 //            console.log('In SymbolValue.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
-            if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
-                this.setState({
-                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
-                    focused: false,
-                });
-            } else if (this.props.element.format === 'table') {
+            if (this.props.element.format === 'table') {
 //                console.log('In SymbolValue.componentDidUpdate file= ../designtypes/'+this.props.element.table+'.json');
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //                console.log('In SymbolValue.componentDidUpdate table=',table);
                 this.setState({
                     table: table,
-                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
-                    focused: false,
-                });
-            } else {
-                this.setState({
-                    valueString: this.props.element.value.toString(), // Update the display
-                    focused: false,
                 });
             }
         }
     }
 
-    onFocus(event) {
-//        console.log("In SymbolValue.onFocus event.target.value=", event.target.value);
-        this.setState({
-            valueString: this.props.element.value.toString(), // Update the display with unformatted value
-            focused: true,
-        });
-    }
-
-    onBlur(event) {
-//        console.log("In SymbolValue.onBlur event.target.value=", event.target.value);
-        this.setState({
-            valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
-            focused: false,
-        });
-    }
-
     onSelect(event) {
 //        console.log('In SymbolValue.onSelect event.target.value=',event.target.value);
-        this.setState({
-            valueString: event.target.value, // Update the display
-        });
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex); // Update the model
         logValue(this.props.element.name,selectedIndex);
@@ -279,15 +240,14 @@ class SymbolValue extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
-        if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
+        if (isNaN(parseFloat(this.props.element.value))) {
             value_class += "borders-invalid ";
         }
         if (this.props.element.type === "equationset" && !this.props.element.input) { // Dependent Variable?
             icon_tag = 
                 <OverlayTrigger placement="top" overlay={<Tooltip>Dependent Variable</Tooltip>}>
                     <i className="fas fa-asterisk fa-sm icon"></i>
-                </OverlayTrigger>
-            ;
+                </OverlayTrigger>;
         }
         value_class += "background-white ";
 //        console.log('In SymbolValue.render value_class=',value_class);
@@ -300,13 +260,13 @@ class SymbolValue extends Component {
                                 <React.Fragment>
                                     {icon_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                            <Form.Control type="number" readOnly className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                            <Form.Control type="number" readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
                                     </OverlayTrigger>
                                 </React.Fragment>
                             :
                                 <React.Fragment>
                                     {icon_tag}
-                                    <Form.Control type="number" readOnly className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onFocus={this.onFocus} onBlur={this.onBlur} onContextMenu={this.onContextMenu} />
+                                    <Form.Control type="number" readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
                                 </React.Fragment>
                             )
                         : ''}
