@@ -82,7 +82,9 @@ class MainPage extends Component {
         }
         if (prevProps.view !== this.props.view) {
 //            console.log('In MainPage.componentDidUpdate prevProps.view=',prevProps.view,'props.view=',this.props.view);
-            this.setView(this.props.view);
+            this.setState({
+                activeTab: this.props.view
+            });
       }
     }
 
@@ -95,11 +97,7 @@ class MainPage extends Component {
     
     setView(view) {
 //        console.log('In MainPage.setView view=',view);
-        if (this.state.activeTab !== view) {
-            this.setState({
-                activeTab: view
-            });
-        }
+        this.props.changeView(view); // Update the model
     }
     
     render() {
