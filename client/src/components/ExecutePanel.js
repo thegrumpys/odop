@@ -22,6 +22,7 @@ export var startExecute = function(prefix,steps) {
         if (steps[0].actions !== undefined) {
             steps[0].actions.forEach((action) => { store.dispatch(action); })
         }
+        window.scrollTo(0, 0);
     }
 }
 
