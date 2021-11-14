@@ -80,6 +80,7 @@ class FormControlTypeNumber extends Component {
             <Form.Control type="number"
                 disabled={this.props.disabled}
                 className={value_class}
+                step="any"
                 value={this.state.focused ? this.state.valueString : this.state.value.toODOPPrecision()}
                 onChange={this.onChange}
                 onFocus={this.onFocus}
