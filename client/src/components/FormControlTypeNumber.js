@@ -30,7 +30,7 @@ class FormControlTypeNumber extends Component {
     }
 
     onChange(event) {
-//        console.log('In FormControlTypeNumber.onChange event=',event);
+//        console.log('In FormControlTypeNumber.onChange event.target.value=',event.target.value);
         var value = parseFloat(event.target.value);
         if (!isNaN(value)) {
             this.setState({
@@ -46,7 +46,7 @@ class FormControlTypeNumber extends Component {
     }
 
     onFocus(event) {
-//        console.log('In FormControlTypeNumber.onFocus event=',event);
+//        console.log('In FormControlTypeNumber.onFocus event.target.value=',event.target.value);
         this.setState({
             valueString: this.state.value.toString(), // Update the display with unformatted value
             focused: true,
@@ -55,7 +55,7 @@ class FormControlTypeNumber extends Component {
     }
 
     onBlur(event) {
-//        console.log('In FormControlTypeNumber.onBlur event=',event);
+//        console.log('In FormControlTypeNumber.onBlur event.target.value=',event.target.value);
         this.setState({
             valueString: this.state.value.toODOPPrecision(), // Update the display with formatted value
             focused: false,
@@ -64,7 +64,7 @@ class FormControlTypeNumber extends Component {
     }
 
     onContextMenu(event) {
-//        console.log('In FormControlTypeNumber.onContextMenu event=',event);
+//        console.log('In FormControlTypeNumber.onContextMenu event.target.value=',event.target.value);
         this.props.onContextMenu(event);
     }
 
