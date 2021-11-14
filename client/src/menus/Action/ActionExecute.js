@@ -68,7 +68,7 @@ class ActionExecute extends Component {
 //        console.log('In ActionExecute.onExecute this.state.execute_name=',this.state.execute_name);
         var { execute } = require('../../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
 //        console.log('In ActionExecute.onExecute execute=',execute);
-        startExecute('Action : Execute : ' + this.state.execute_name, execute.steps);
+        startExecute('Action : Execute : ' + this.state.execute_name, this.state.execute_name, execute.steps);
     }
     
     onCancel() {

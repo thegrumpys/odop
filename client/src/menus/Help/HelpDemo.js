@@ -68,7 +68,7 @@ class HelpDemo extends Component {
 //        console.log('In HelpDemo.onExecute this.state.execute_name=',this.state.execute_name);
         var { execute } = require('../../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
 //        console.log('In HelpDemo.onExecute execute=',execute);
-        startExecute('Help : Demo : ' + this.state.execute_name, execute.steps);
+        startExecute('Help : Demo : ' + this.state.execute_name, this.state.execute_name, execute.steps);
     }
     
     onCancel() {
