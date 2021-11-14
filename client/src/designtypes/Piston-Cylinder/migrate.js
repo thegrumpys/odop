@@ -91,7 +91,14 @@ export function migrate(design) {
         // Current model version
         // console.log('Convert from 4 to 5');
         // To be defined - presently do nothing
-        // migrated_design.version = '5'; // last thing... set the migrated model version
+        design.system_controls.enable_auto_fix = 1;
+        migrated_design.version = '5'; // last thing... set the migrated model version
+
+    case '5':
+        // Current model version
+        // console.log('Convert from 5 to 6');
+        // To be defined - presently do nothing
+        // migrated_design.version = '6'; // last thing... set the migrated model version
 
         break; // Do not copy this break
     default: // Unknown
