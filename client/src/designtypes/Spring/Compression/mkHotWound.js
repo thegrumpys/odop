@@ -15,7 +15,7 @@ export const execute = {
         {
             title: "Make HotWound model",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This session creates a Startup design optimized for 
                     designing large hot-wound compression springs.  
@@ -56,7 +56,7 @@ export const execute = {
                     <p>
                     When ready, use the "Exit" button to resume regular operation of the program.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState("Spring/Compression","US"),

@@ -9,7 +9,7 @@ class Report1 extends ReportBase {
         super.render();
 //        console.log('In Report1.render this.props=',this.props);
         return (
-            <React.Fragment>
+            <>
                 <h4>ODOP:Spring &nbsp; Torsion Spring Report</h4><br />
                 <b>
                 {this.hits > 0 && this.errmsg}{this.hits > 0 && <br />}
@@ -240,7 +240,7 @@ class Report1 extends ReportBase {
                 </table>
                 <br />
                 Deflection at load point 2 is {this.props.symbol_table[o.PC_Safe_Deflect].value.toFixed(0)}% of total safe deflection.<br />
-            </React.Fragment>
+            </>
         );
     }
 

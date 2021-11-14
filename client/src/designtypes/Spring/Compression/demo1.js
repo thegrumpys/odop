@@ -8,7 +8,7 @@ export const execute = {
             title: "Session Now In Progress",
             "name": "page0x",
             text: (
-                    <React.Fragment>
+                    <>
                         <p>
                         The following example illustrates the use of ODOP:Spring in
                         the design of a compression spring. 
@@ -25,13 +25,13 @@ export const execute = {
                         To continue with this example, just click the "Next" button as you finish
                         reading each page (step). 
                         </p>
-                    </React.Fragment>
+                    </>
                 )
         },
         {
             title: "Page 02 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
@@ -44,7 +44,7 @@ export const execute = {
                     </p>
                     
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -56,7 +56,7 @@ export const execute = {
         {
             title: "Page 03 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>This problem appears in the  HANDBOOK of SPRING DESIGN  published by:<br />
                     <br />
                     Spring Manufacturers Institute, Inc.<br />
@@ -68,13 +68,13 @@ export const execute = {
                     Refer to page 15 of the second printing (1983).<br />
                     ***  Used with permission of Spring Manufacturers Institute, Inc.  ***<br />
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Before making any additional changes, 
                     Example 1 may be restated: &nbsp; Design a compression spring such that<br />
@@ -94,13 +94,13 @@ export const execute = {
                     Scroll back up in order to use the Next button to continue.
                     The changes will happen immediately after this click of the Next button.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now, the demo session has entered everything we know about the problem
                     exactly as stated.
@@ -120,7 +120,7 @@ export const execute = {
                     <p>
                     Again, you can scroll the page down to view the complete set of values. 
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('OD_Free', 0.925),
@@ -136,7 +136,7 @@ export const execute = {
         {
             title: "Page 06 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We can be sure that a search is necessary.  It's quite unlikely that
                     the starting values would have produced the desired combination of
@@ -152,7 +152,7 @@ export const execute = {
                     Again, this is a good time to take a good look at the existing values.
                     The Search will take place immediately after this click of the Next button.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolConstraint('FS_2', MAX, 2.0)
@@ -161,7 +161,7 @@ export const execute = {
         {
             title: "Page 07 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The Search process has completed.
                     </p>
@@ -174,7 +174,7 @@ export const execute = {
                     <p>You can scroll the page down to view the complete set of values. 
                     Scroll back up in order to use the Next button to continue.</p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -183,7 +183,7 @@ export const execute = {
         {
             title: "Page 08 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The handbook solution did a bit of hand waving and used  0.125 inch
                     for wire diameter.
@@ -207,7 +207,7 @@ export const execute = {
                     We will need to Search one more time to bring all the numbers into alignment.
                     That Search will happen when you click the Next button.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
             ]
@@ -215,7 +215,7 @@ export const execute = {
         {
             title: "Page 09 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The second Search process has completed.
                     The changes were quite small.
@@ -224,7 +224,7 @@ export const execute = {
                     The next page will provide the handbook solution.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -233,7 +233,7 @@ export const execute = {
         {
             title: "Page 10 of 11",
             text: (
-                <React.Fragment>
+                <>
                     The handbook solution produced:
                         <table>
                             <tbody>
@@ -256,13 +256,13 @@ export const execute = {
                     <p>
                     Compare the Handbook solution (above) to the values produced by ODOP:Spring (below and Reports).
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 11 of 11 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We can quickly confirm this notion by setting FORCE_2 to the handbook's value.
                     Basically, 
@@ -284,7 +284,7 @@ export const execute = {
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a complete list of additional tutorial and demo topics.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Force_2', 75.1)

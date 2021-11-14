@@ -7,7 +7,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Welcome to the first ODOP tutorial session.
                     This session will provide an introduction to basic ODOP features and concepts 
@@ -37,13 +37,13 @@ export const execute = {
                     To continue with this session, just click the "Next" button as you finish
                     reading each page (step). 
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this tutorial session are now established.
                     </p>
@@ -71,7 +71,7 @@ export const execute = {
                     The spring design content assumes that the user is familiar with the
                     concepts of stress, factor of safety, yield point, endurance limit, etc.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -83,7 +83,7 @@ export const execute = {
         {
             title: "Page 03 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     So, as you are reading, please click the Help menu above.
                     It will drop down to provide a list of entries (topics) to choose from.
@@ -118,13 +118,13 @@ export const execute = {
                     describes how to launch the first sessions of the spring design Tutorial and the spring design Demo 
                     plus makes a few suggestions on how new users should approach learning the program.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     It is likely that you have already discovered that ODOP provides a "tooltip" feature.
                     If using a touchpad or mouse, simply hover the cursor over any of the 
@@ -141,13 +141,13 @@ export const execute = {
                     just click the Next button to continue with this session of the tutorial.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In the rest of this section of the tutorial we will cover the basic analysis
                     and solution features offered by ODOP. 
@@ -163,21 +163,21 @@ export const execute = {
                     context of a force-deflection diagram.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 06 of 16",
             text: (
-                <React.Fragment>
+                <>
                 <Image fluid src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 07 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This is a good time to take a close look at existing values.
                     You may need to scroll down to see everything.
@@ -193,13 +193,13 @@ export const execute = {
                     <p>
                     When you click on Next, the tutorial will set the value of Wire_Dia to 0.110 inches.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 08 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The tutorial has now entered a value of 0.110 inches for Wire_Dia. 
                     In the shorthand summary that will be used in the remaining tutorial 
@@ -216,7 +216,7 @@ export const execute = {
                     The remaining Independent Variable values remain as established by the initialState
                     that was imposed at the start of this session. 
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Wire_Dia", 0.110)
@@ -225,7 +225,7 @@ export const execute = {
         {
             title: "Page 09 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Okay, that wasn't really very exciting. 
                     The objective here is to illustrate how ODOP can do simple analysis. 
@@ -246,13 +246,13 @@ export const execute = {
                     <br />
                     CHANGE Coils_T 12
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 10 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Well, that brought a little more color into the ODOP world !
                     </p>
@@ -277,7 +277,7 @@ export const execute = {
                     (positioned between the Value entry fields and the Units fields) 
                     to put Wire_Dia and Force_2 into FIXed status.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Coils_T",12)
@@ -286,7 +286,7 @@ export const execute = {
         {
             title: "Page 11 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now, the FIX checkboxes for Wire_Dia and Force_2 are checked.
                     </p>
@@ -299,7 +299,7 @@ export const execute = {
                     to any changes in the Independent Variables.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Wire_Dia'),
@@ -309,7 +309,7 @@ export const execute = {
         {
             title: "Page 12 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now that we have expressed what we want the design to accomplish,
                     we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
@@ -328,13 +328,13 @@ export const execute = {
                     Click "Next".
                     The search operation will take place as we transition to the next page.
                     </p>
-                </React.Fragment>
+                </>
             ),
         },
         {
             title: "Page 13 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
                     
                     <p>
@@ -351,7 +351,7 @@ export const execute = {
                     prior to making the changes up to this point in this tutorial session.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -360,7 +360,7 @@ export const execute = {
         {
             title: "Page 14 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The tutorial has imposed: FIX L_Stroke 1.725
                     </p>
@@ -378,7 +378,7 @@ export const execute = {
                     <p>
                     Look for the results on the next page.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('L_Stroke', 1.725)
@@ -387,7 +387,7 @@ export const execute = {
         {
             title: "Page 15 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
                     </p>
@@ -424,7 +424,7 @@ export const execute = {
                             </ul>
                         </li>
                     </ul>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -433,7 +433,7 @@ export const execute = {
         {
             title: "Page 16 of 16 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Remember that it is always possible to restart a given session of
                     the ODOP demo / tutorial. 
@@ -459,7 +459,7 @@ export const execute = {
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP features, menus and reports. 
                     The HELP menu is a good place to start. </p>
-                </React.Fragment>
+                </>
             )
         }
     ]

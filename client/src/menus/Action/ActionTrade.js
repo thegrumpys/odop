@@ -733,7 +733,7 @@ class ActionTrade extends Component {
         const { store } = this.context;
         design = store.getState();
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.strategyToggle}>
                     Trade&hellip;
                 </NavDropdown.Item>
@@ -905,7 +905,7 @@ class ActionTrade extends Component {
                         <Button variant="primary" onClick={this.onNotFeasibleDone}> &nbsp; Done &nbsp; </Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 

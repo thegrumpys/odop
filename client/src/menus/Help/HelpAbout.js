@@ -26,7 +26,7 @@ class HelpAbout extends Component {
     render() {
 //        console.log('In HelpAbout.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     About
                 </NavDropdown.Item>
@@ -63,7 +63,7 @@ class HelpAbout extends Component {
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }

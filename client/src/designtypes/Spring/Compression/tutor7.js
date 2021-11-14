@@ -7,7 +7,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     ODOP Seek provides a powerful facility for asking "What if ... " and "What's best ?" kinds of questions. 
                     In order to do this, Seek utilizes the concepts of mathematical optimization. 
@@ -38,13 +38,13 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this tutorial session are now established.
                     </p>
@@ -85,7 +85,7 @@ export const execute = {
                     impose realistic constraints and when the process does something unexpected,
                     make appropriate changes to constraints and run through the calculation process again.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -97,7 +97,7 @@ export const execute = {
         {
             title: "Page 03 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     One more point ... <br />
                     When Search terminates with a strictly feasible solution (i.e. Objective Value = 0.0), 
@@ -120,13 +120,13 @@ export const execute = {
                     <br />
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We start by adding a few constraints to the compression spring starting point used in other tutorial sessions.
                     This will leave us with a well formed 
@@ -156,7 +156,7 @@ export const execute = {
                     We will execute a search in the process of moving to the next page.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Force_1', 0.0),
@@ -175,7 +175,7 @@ export const execute = {
         {
             title: "Page 05 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Our search is complete.
                     As expected, a feasible solution is available.
@@ -201,7 +201,7 @@ export const execute = {
                     <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/SeekMinWeight.png" alt="SeekMinWeight"/>
                     
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -210,7 +210,7 @@ export const execute = {
         {
             title: "Page 06 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If you see the Feasibility status shown as "NOT FEASIBLE",
                     It means that the solution point has slightly violated constraints
@@ -242,7 +242,7 @@ export const execute = {
                     SEEK  MIN  Rate
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 seek("Weight", MIN),
@@ -252,7 +252,7 @@ export const execute = {
         {
             title: "Page 07 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Have a look at our minimum rate spring.
                     Again, it is helpful to look at the Reports.
@@ -280,7 +280,7 @@ export const execute = {
                     SEEK  MIN  L_Solid
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 seek("Rate", MIN),
@@ -290,7 +290,7 @@ export const execute = {
         {
             title: "Page 08 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Have a look at our minimum solid height spring.
                     Again, be sure to look at the Reports.
@@ -309,7 +309,7 @@ export const execute = {
                     at the beginning of this tutorial session and immediately add new constraints.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 seek("L_Solid", MIN),
@@ -319,7 +319,7 @@ export const execute = {
         {
             title: "Page 09 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now, let's see if we can find the minimum weight spring necessary to
                     support a 100 pound static load at a minimum of 2.5 inches
@@ -340,7 +340,7 @@ export const execute = {
                     CHANGE  FS_2  MIN  1.0  &nbsp;  &#60;--- more details on next page<br />
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -362,7 +362,7 @@ export const execute = {
         {
             title: "Page 10 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If the use of Prop_Calc_Method seems a bit unfamiliar, you may wish to
                     review the on-line documentation sections (HELP entries) on 
@@ -388,13 +388,13 @@ export const execute = {
                     <p>
                     Moving to the next page will execute a search.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 11 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Yes, a feasible solution is available.
                     You should scan through the details.
@@ -417,7 +417,7 @@ export const execute = {
                     with a name like "tutor7StartPoint".
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -426,7 +426,7 @@ export const execute = {
         {
             title: "Page 12 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Before going further, look at the current value of weight.
                     We expect that the ultimate answer will be less than that. 
@@ -437,13 +437,13 @@ export const execute = {
                     <b>Seek MIN Weight</b> will execute in the process of moving to the next page.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 13 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We have a solution.
                     It is typical for Seek to produce a solution that "bends" the constraints 
@@ -464,7 +464,7 @@ export const execute = {
                     minimizing weight.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 seek("Weight", MIN)
@@ -473,7 +473,7 @@ export const execute = {
         {
             title: "Page 14 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Next we'll use the Seek feature to find a design that supports the
                     greatest possible load within specific limits on outside diameter and
@@ -489,13 +489,13 @@ export const execute = {
                     <p>
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 15 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In "Tutorial Speak" those changes are:<br />
                     <br />
@@ -512,7 +512,7 @@ export const execute = {
                     Next, we'll ask Seek (<b>Action : Seek</b> menu) to 
                     find a design that maximizes force at point 2.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -533,7 +533,7 @@ export const execute = {
         {
             title: "Page 16 of 17",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Take a moment to browse through the results that Seek MAX Force_2 produced.
                     </p>
@@ -565,7 +565,7 @@ export const execute = {
                     Seek is the right tool for that job.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 seek("Force_2", MAX),
@@ -575,7 +575,7 @@ export const execute = {
         {
             title: "Page 17 of 17 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The next tutorial section looks at the ODOP Trade feature.  In many
                     ways Trade is a mirror image capability to that of Seek.
@@ -601,7 +601,7 @@ export const execute = {
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP features, menus and reports. 
                     The HELP menu is a good place to start. </p>
-                </React.Fragment>
+                </>
             )
         }
     ]

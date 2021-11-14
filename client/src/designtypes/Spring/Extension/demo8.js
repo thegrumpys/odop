@@ -8,7 +8,7 @@ export const execute = {
             title: "Session Now In Progress",
             "name": "page0x",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The following example illustrates the use of ODOP:Spring in
                     the design of an extension spring. 
@@ -28,13 +28,13 @@ export const execute = {
                     <p>
                     <br />
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
@@ -59,7 +59,7 @@ export const execute = {
                         <tr><th>Length 2</th><td>&nbsp;=</td><td>&nbsp;1.142</td><td>in.</td><td>&nbsp;</td></tr>
                         </tbody>
                     </table>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Extension'),
@@ -69,7 +69,7 @@ export const execute = {
         {
             title: "Page 03 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We begin by entering the problem as specified.
                     At first glance, it appears that there is nothing particularly
@@ -88,7 +88,7 @@ export const execute = {
                     &nbsp; FIX  Force_2  6.74 &nbsp; <br />
                     &nbsp; FIX  L_2   1.142
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Material_Type",1),
@@ -107,7 +107,7 @@ export const execute = {
         {
             title: "Page 04 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Note that previously initialState had End_Extension FIXed at a value of 0.0 in. 
                     </p>
@@ -122,7 +122,7 @@ export const execute = {
                     This is a good time to scroll down and confirm these changes are now in place.
                     In the process of moving to the next page, the demo session will run Search.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 freeSymbolValue('End_Extension'),
@@ -131,7 +131,7 @@ export const execute = {
         {
             title: "Page 05 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     While ODOP:Spring is able to find a solution that satisfies the design
                     criteria, it is a bit different from the handbook solution. 
@@ -156,7 +156,7 @@ export const execute = {
                     FIX a value of 0.035 inch on Wire_Dia and then
                     run another search to re-establish corresponding values for all the other problem variables.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -165,7 +165,7 @@ export const execute = {
         {
             title: "Page 06 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The handbook results:
                     </p>
@@ -183,7 +183,7 @@ export const execute = {
                    
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.035),
@@ -193,7 +193,7 @@ export const execute = {
         {
             title: "Page 07 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now that we have demonstrated that the ODOP:Spring software can produce 
                     an acceptable design, 
@@ -218,7 +218,7 @@ export const execute = {
                     The demo session will impose an entire set of new values 
                     in the process of moving to the next page.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
             ]
@@ -226,7 +226,7 @@ export const execute = {
         {
             title: "Page 08 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo session has just entered the handbook solution. 
                     </p>
@@ -261,7 +261,7 @@ export const execute = {
                     a more convenient comparison.
                     Wait for the next page to scroll through the ODOP:Spring design to compare results.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue('OD_Free', 0.248),
@@ -276,7 +276,7 @@ export const execute = {
         {
             title: "Page 09 of 09 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     To repeat, the handbook solution produced:<br />
                     </p>
@@ -304,7 +304,7 @@ export const execute = {
                     same set of specifications, overall the ODOP:Spring calculations compare well to the
                     handbook results.
                     </p>
-                </React.Fragment>
+                </>
             )
         }
     ]

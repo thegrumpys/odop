@@ -18,11 +18,11 @@ class HelpIndex extends Component {
     render() {
 //        console.log('In HelpIndex.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.onHelp}>
                     Index
                 </NavDropdown.Item>
-            </React.Fragment>
+            </>
         );
     }
 }  

@@ -116,7 +116,7 @@ class FilePreferences extends Component {
     render() {
 //        console.log('In FilePreferences.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     Preferences&hellip;
                 </NavDropdown.Item>
@@ -168,7 +168,7 @@ class FilePreferences extends Component {
                             } onClick={this.onApplyandClose}>Apply and Close</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
     

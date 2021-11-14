@@ -167,7 +167,7 @@ class FileSaveAs extends Component {
     render() {
 //        console.log('In FileSaveAs.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     Save As&hellip;
                 </NavDropdown.Item>
@@ -189,7 +189,7 @@ class FileSaveAs extends Component {
                         <Button variant="primary" onClick={this.onSaveAs} disabled={!this.props.authState.isAuthenticated || this.state.name === undefined}>Save As</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }

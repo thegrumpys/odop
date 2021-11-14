@@ -17,7 +17,7 @@ class Value extends Component {
     render() {
 //        console.log('In Value.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <td className={"align-middle " + this.props.className}>
                     <InputGroup>
                         {typeof this.props.value === 'number' ?
@@ -27,7 +27,7 @@ class Value extends Component {
                         }
                     </InputGroup>
                 </td>
-            </React.Fragment>
+            </>
         );
     }
 }

@@ -9,7 +9,7 @@ class Report2 extends ReportBase {
         super.render();
 //        console.log('In Report2.render this.props=',this.props);
         return (
-            <React.Fragment>
+            <>
                 <h4>ODOP:Spring &nbsp; Extension Spring Report</h4>
                 <br />
                 <table>
@@ -219,7 +219,7 @@ class Report2 extends ReportBase {
                 (Torsion value assumes a vertical bend radius (R2) equal twice wire diameter.)<br />
                 {this.warnmsg}
                 <br /> &nbsp;
-            </React.Fragment>
+            </>
         );
     }
 

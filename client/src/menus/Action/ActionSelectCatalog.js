@@ -141,7 +141,7 @@ class ActionSelectCatalog extends Component {
     render() {
 //        console.log('In ActionSelectCatalog.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.names.length === 0}>
                     Select Catalog&hellip;
                 </NavDropdown.Item>
@@ -162,7 +162,7 @@ class ActionSelectCatalog extends Component {
                         {this.state.entries.length === 0 ? 
                             <Form.Label htmlFor="catalogEntrySelect">No acceptable entries were found in this catalog</Form.Label>
                         :
-                            <React.Fragment>
+                            <>
                                 <Form.Label htmlFor="catalogEntrySelect">Closest catalog entries:</Form.Label>
                                 <Table className="border border-secondary" size="sm">
                                     <thead>
@@ -180,7 +180,7 @@ class ActionSelectCatalog extends Component {
                                         ))}
                                     </tbody>
                                 </Table>
-                            </React.Fragment>
+                            </>
                         }
                     </Modal.Body>
                     <Modal.Footer>
@@ -188,7 +188,7 @@ class ActionSelectCatalog extends Component {
                         <Button variant="primary" onClick={this.onSelect} disabled={this.state.entries.length === 0}>Select</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }  

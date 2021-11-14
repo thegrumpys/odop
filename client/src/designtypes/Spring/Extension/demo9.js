@@ -8,7 +8,7 @@ export const execute = {
             title: "Session Now In Progress",
             "name": "page0x",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The following example briefly illustrates the use of ODOP:Spring in
                     the design of an extension spring. 
@@ -24,13 +24,13 @@ export const execute = {
                     <p>
                     Click Next to establish the necessary initialState.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
@@ -44,7 +44,7 @@ export const execute = {
                     <br />
                     Refer to Problem 3 &nbsp; on page 202 &nbsp;of the 10th printing &nbsp; (1978).
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Extension'),
@@ -54,7 +54,7 @@ export const execute = {
         {
             title: "Page 03 of 09",
             text: (
-                <React.Fragment>
+                <>
                 <p>
                 Before making any changes to our initialState, the design problem may be restated in a simplified form:<br />
                 <br />
@@ -76,13 +76,13 @@ export const execute = {
                 <p>
                 Determine (a standard) wire size, stress, and number of coils.
                 </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Carlson's Figure 128 indicates that the length added by the hook at each
                     end should be 75-85 % of a body inside diameter.  
@@ -93,7 +93,7 @@ export const execute = {
                     The change will be applied in the process of transitioning to the next page.
                     <br /><br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
             ]
@@ -101,7 +101,7 @@ export const execute = {
         {
             title: "Page 05 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo session has now entered what is known about the problem.<br /> 
                     <br />
@@ -120,7 +120,7 @@ export const execute = {
                     You may want to take this opportunity to look at the default values before 
                     those adjustments are made.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Material_Type",3),
@@ -135,7 +135,7 @@ export const execute = {
         {
             title: "Page 06 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     While not necessary for the solution of this problem, 
                     new preference values have been imposed to illustrate how it is done in a Demo session.
@@ -147,7 +147,7 @@ export const execute = {
                     <p>
                     In the process of transitioning to the next page, the demo session will run Search.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSystemControlsValue({maxit: 190, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
@@ -156,7 +156,7 @@ export const execute = {
         {
             title: "Page 07 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now let's see what the search has achieved.
                     </p>
@@ -179,7 +179,7 @@ export const execute = {
                     FIX a value of 0.062 inch on Wire_Dia and then
                     run another search to re-establish corresponding values for all the other problem variables.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -188,7 +188,7 @@ export const execute = {
         {
             title: "Page 08 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This is your opportunity for a detailed look at the numbers. 
                     Don't forget to review the Report(s).
@@ -214,7 +214,7 @@ export const execute = {
                     the Calculation Input Prop_Calc_Method will be changed to allow material properties that are
                     not determined by ODOP:Spring's built-in materials table.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.062),
@@ -224,7 +224,7 @@ export const execute = {
         {
             title: "Page 09 of 09 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In order to disable ODOP:Spring's calculation of deflection in the loops:<br />
                     &nbsp; CHANGE END_TYPE User_Specified<br />
@@ -250,7 +250,7 @@ export const execute = {
                     The agreement between results is quite good. 
                     Not perfect, but as close as can be expected.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue('Wire_Dia', 0.0625),

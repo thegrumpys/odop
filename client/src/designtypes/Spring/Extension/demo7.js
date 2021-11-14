@@ -8,7 +8,7 @@ export const execute = {
             title: "Session Now In Progress",
             "name": "page0x",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The following example illustrates the use of ODOP:Spring in
                     the design of an extension spring. 
@@ -30,13 +30,13 @@ export const execute = {
                     <p>
                     Click Next to establish the necessary initialState.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
@@ -52,7 +52,7 @@ export const execute = {
                     Refer to page 19 of the second printing (1983)<br />
                     ***  Used with permission of Spring Manufacturers Institute, Inc.  ***<br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Extension'),
@@ -62,7 +62,7 @@ export const execute = {
         {
             title: "Page 03 of 11",
             text: (
-                <React.Fragment>
+                <>
                 <p>
                 Before making any changes to our initialState, the Design Example may be restated in a simplified form:<br />
                 <br />
@@ -87,13 +87,13 @@ export const execute = {
                 The handbook example uses allowable stress appropriate for a static load (105,000 psi corrected) and 
                 does not state a requirement for cycle life.
                 </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     It is important to notice that the handbook has given us three points to
                     define the rate (slope of the linear force-deflection curve) of a coil
@@ -119,13 +119,13 @@ export const execute = {
                     <p>
                     To avoid this problem, we'll specify forces as MAX and MIN values.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo session has now entered what is known about the problem. 
                     </p>
@@ -143,7 +143,7 @@ export const execute = {
                     &nbsp; CHANGE  Force_2  MAX  105 &nbsp; (stated maximum)<br />
                     &nbsp; FIX  L_2    6.25
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Material_Type",2),
@@ -168,7 +168,7 @@ export const execute = {
         {
             title: "Page 06 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Note that previously initialState had End_Extension FIXed at a value of 0.0 in. 
                     &nbsp;For now, we'll let the solution process select any value of end extension that
@@ -180,7 +180,7 @@ export const execute = {
                     This is a good time to scroll down and confirm these changes are now in place.
                     After the click on Next, the demo session will run Search.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 freeSymbolValue('End_Extension'),
@@ -189,7 +189,7 @@ export const execute = {
         {
             title: "Page 07 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     While ODOP:Spring is able to find a solution that satisfies the design
                     criteria, it is quite different from the handbook solution.  The
@@ -230,7 +230,7 @@ export const execute = {
                     should specify a ODOP:Spring End_Extension  MIN  of 1.450 - 0.810 = 0.640
                     inches.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -239,7 +239,7 @@ export const execute = {
         {
             title: "Page 08 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo session has now imposed:
                     CHANGE  End_Extension MIN  0.640
@@ -258,7 +258,7 @@ export const execute = {
                     in the process of transitioning to the next page.
                     Another search will re-establish corresponding values for all the other problem variables.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 setSymbolFlag('End_Extension', MIN, CONSTRAINED),
@@ -268,7 +268,7 @@ export const execute = {
         {
             title: "Page 09 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Note that even though the ODOP:Spring value for initial tension is
                     significantly higher than the handbook's value (14.4 lb.),  it is still
@@ -292,7 +292,7 @@ export const execute = {
                     <p>
                     This is a good time to scroll through the ODOP:Spring design to compare results.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.120),
@@ -302,7 +302,7 @@ export const execute = {
         {
             title: "Page 10 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now that we've seen how ODOP:Spring can derive a design that's close to
                     the handbook design, 
@@ -341,7 +341,7 @@ export const execute = {
                    
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue('OD_Free', 0.645),
@@ -357,7 +357,7 @@ export const execute = {
         {
             title: "Page 11 of 11 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     To repeat, the handbook solution produced:<br />
                     &nbsp; Force 1  &nbsp; &nbsp; 50    pounds &nbsp; &nbsp; &nbsp; &nbsp;  Length 1  &nbsp; 5.625  inches<br />
@@ -396,7 +396,7 @@ export const execute = {
                     same spring problem, overall the ODOP:Spring calculations compare well to the
                     handbook results.
                     </p>
-                </React.Fragment>
+                </>
             )
         }
     ]

@@ -12,7 +12,7 @@ class DesignTable extends Component {
     render() {
 //        console.log('In DesignTable.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <Row>
                     <ResultTable />
                 </Row>
@@ -24,7 +24,7 @@ class DesignTable extends Component {
                 <Row>
                     <NameValueUnitsCalcInputTable />
                 </Row>
-            </React.Fragment>
+            </>
         );
     }
     

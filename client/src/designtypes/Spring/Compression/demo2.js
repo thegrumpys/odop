@@ -8,7 +8,7 @@ export const execute = {
             title: "Session Now In Progress",
             "name": "page0x",
             text: (
-                <React.Fragment>
+                <>
                     <p>Welcome back !</p>
                     
                     <p>
@@ -21,13 +21,13 @@ export const execute = {
                     <p>
                     Click Next to establish the necessary initialState.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 07",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
@@ -40,7 +40,7 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -52,7 +52,7 @@ export const execute = {
         {
             title: "Page 03 of 07",
             text: (
-                <React.Fragment>
+                <>
                     <p>This problem appears in the  HANDBOOK of SPRING DESIGN  published by:<br />
                     <br />
                     Spring Manufacturers Institute, Inc.<br />
@@ -64,13 +64,13 @@ export const execute = {
                     Refer to page 15 of the second printing (1983).<br />
                     ***  Used with permission of Spring Manufacturers Institute, Inc.  ***<br />
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 07",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Before making any changes, Example 2 may be restated:  Design a compression spring such that
                     </p>
@@ -97,13 +97,13 @@ export const execute = {
                     wire diameter operated satisfactorily.  This fact was used to aid
                     the handbook solution for number of active coils.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 07",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo has now entered what is known about the problem. 
                     In summary, the changes were:<br />
@@ -122,7 +122,7 @@ export const execute = {
                     <br />
                     CHANGE  Wire_Dia  0.035<br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Material_Type",7),
@@ -140,7 +140,7 @@ export const execute = {
         {
             title: "Page 06 of 07",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Taking the hint about the spring never being compressed below its
                     working length of .385 in., we'll permit the factor of safety in the
@@ -154,7 +154,7 @@ export const execute = {
                     <p>
                     After the click on Next, the demo will run Search.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolConstraint('FS_Solid', MIN, 0.5)
@@ -163,7 +163,7 @@ export const execute = {
         {
             title: "Page 07 of 07 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now let's see what the search has achieved.
                     Don't forget to review the Report(s).
@@ -179,7 +179,7 @@ export const execute = {
                     <p>
                     The two solutions are in reasonable agreement.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()

@@ -29,7 +29,7 @@ class ViewOffsets extends Component {
         var isc = 0;
         var il = 0;
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     Offsets
                 </NavDropdown.Item>
@@ -55,7 +55,7 @@ class ViewOffsets extends Component {
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }  

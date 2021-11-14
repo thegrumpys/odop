@@ -18,7 +18,7 @@ export const execute = {
         {
             title: "Make USPS_MachinableParcels model",
             text: (
-                <React.Fragment>
+                <>
                     <p>Setting the following symbol table actions:</p>
                     <ol>
                         <li>{'loadInitialState("Solid","US"),'}</li>
@@ -52,7 +52,7 @@ export const execute = {
                         <li>{'changeSymbolValue("Density",0.0001237),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState("Solid","US"),

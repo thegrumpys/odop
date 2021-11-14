@@ -4,7 +4,7 @@ export const execute = {
     steps: [
         {
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Click Next to tweak these Preference values for improved Search precision.
                     </p>
@@ -20,12 +20,12 @@ export const execute = {
                     <p>
                     Note: these changes may result in longer execution times for some Searches.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             text: (
-                <React.Fragment>
+                <>
                     <b>New values:</b><br />
                     maxit = 190<br />
                     objmin = 0.000005<br />
@@ -35,7 +35,7 @@ export const execute = {
                     <br />
                     Reset original values with <b>File : Preferences</b> Restore Defaults<br />
                     Click Exit to close.
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSystemControlsValue({maxit: 190, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})

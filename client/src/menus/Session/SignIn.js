@@ -23,13 +23,13 @@ export default withRouter(withOktaAuth(class SignIn extends Component {
     render() {
 //      console.log('In SignIn.render this=',this);
       return this.props.authState.isAuthenticated ? null : (
-        <React.Fragment>
+        <>
             <OverlayTrigger placement="bottom" overlay={<Tooltip>Sign in to save private designs.<br/>See About : User Accounts.</Tooltip>}>
                 <Button variant="light" onClick={this.toggle}>
                     Sign In&hellip;
                 </Button>
             </OverlayTrigger>
-        </React.Fragment>
+        </>
       );
     }
 

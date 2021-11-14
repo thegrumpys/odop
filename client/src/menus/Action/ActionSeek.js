@@ -105,7 +105,7 @@ class ActionSeek extends Component {
     render() {
 //        console.log('In ActionSeek.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     Seek&hellip;
                 </NavDropdown.Item>
@@ -138,7 +138,7 @@ class ActionSeek extends Component {
                         <Button variant="primary" onClick={this.onSeek}>Seek</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }  

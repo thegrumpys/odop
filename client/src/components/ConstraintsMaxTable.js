@@ -11,14 +11,14 @@ class ConstraintsMaxTable extends Component {
     render() {
 //        console.log('In ConstraintsMaxTable.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <Table className="col-md-3 border border-secondary" size="sm">
                     <ConstraintsMaxHeaderIndependentVariable />
                     {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={index} />)}
                     <ConstraintsMaxHeaderDependentVariable />
                     {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={index} />)}
                 </Table>
-            </React.Fragment>
+            </>
         );
     }
 

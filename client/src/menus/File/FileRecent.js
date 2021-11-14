@@ -21,7 +21,7 @@ class FileRecent extends Component {
     render() {
 //        console.log('In FileRecent.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle} disabled>
                     Recent
                 </NavDropdown.Item>
@@ -38,7 +38,7 @@ class FileRecent extends Component {
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }  

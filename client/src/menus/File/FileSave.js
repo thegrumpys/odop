@@ -152,7 +152,7 @@ class FileSave extends Component {
     render() {
 //        console.log('In FileSave.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     Save
                 </NavDropdown.Item>
@@ -170,7 +170,7 @@ class FileSave extends Component {
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }

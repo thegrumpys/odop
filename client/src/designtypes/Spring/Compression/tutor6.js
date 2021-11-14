@@ -6,7 +6,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This section of the tutorial will cover the use of the ODOP:Spring &nbsp;
                     <b>Action : Select Size</b> and <b>Action : Select Catalog</b> menus.
@@ -36,13 +36,13 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 07",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this tutorial session are now established.
                     </p>
@@ -71,7 +71,7 @@ export const execute = {
                    - determine the four catalog entries closest to the resulting spring
                    and select the closest one for further examination
                    </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -83,7 +83,7 @@ export const execute = {
         {
             title: "Page 03 of 07",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Okay, first we enter what we know this spring has to do. 
                     As usual, we use FIX and constraints to express our objectives for the design.<br />
@@ -115,7 +115,7 @@ export const execute = {
                     However in this case, we'll ignore the message and proceed with the search.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Material_Type",1),
@@ -134,7 +134,7 @@ export const execute = {
         {
             title: "Page 04 of 07",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The search is complete.
                     Take a moment to get a detailed look at the results ...
@@ -161,7 +161,7 @@ export const execute = {
                     CHANGE  FS_2  MAX  2.0
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -170,7 +170,7 @@ export const execute = {
         {
             title: "Page 05 of 07",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The search is complete.
                     Let's take a look ... 
@@ -198,7 +198,7 @@ export const execute = {
                     and continue to the next page of this tutorial session.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.120),
@@ -209,7 +209,7 @@ export const execute = {
         {
             title: "Page 06 of 07",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Look at the constraint violations to judge how well the catalog spring
                     meets the objectives originally set out for this design.
@@ -239,13 +239,13 @@ export const execute = {
                     different springs.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 07 of 07 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Congratulations, you've finished another section of the tutorial.
                     Take a few minutes at this point to experiment on your own. 
@@ -265,7 +265,7 @@ export const execute = {
                     for a list of topics.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             )
         }
     ]

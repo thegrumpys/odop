@@ -40,7 +40,7 @@ class FeasibilityIndicator extends Component {
         }
 //        console.log('In FeasibilityIndicator.render this.props.objective_value=', this.props.objective_value,'x=',x);
         return (
-            <React.Fragment>
+            <>
                 <OverlayTrigger placement="bottom" overlay={<Tooltip>Search works to minimize Objective Value.<br />Objective Value = {this.props.objective_value.toFixed(6)}<br />Search stops if Objective Value falls below<br />OBJMIN = {this.props.system_controls.objmin.toFixed(6)}</Tooltip>}>
                     <b>Status</b>
                 </OverlayTrigger>
@@ -51,7 +51,7 @@ class FeasibilityIndicator extends Component {
                     <rect x={xOrigin+greenWidth+orangeWidth} y={yOrigin+boxY} width={redWidth} height={boxHeight} fill="#dc3545" />
                     <polygon points={[[xOrigin+x, yOrigin+triangleHeight], [xOrigin+triangleWidth/2+x, yOrigin], [xOrigin-triangleWidth/2+x, yOrigin]]} fill="#05a4e8" stroke="white" strokeWidth={1} />
                 </svg>
-            </React.Fragment>
+            </>
         );
     }
     

@@ -6,7 +6,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     </p>
                     
@@ -33,13 +33,13 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 08",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this tutorial session are now established.
                     </p>
@@ -63,7 +63,7 @@ export const execute = {
                     <p>
                     The tutorial will impose these requirements in the process of moving to the next page.
                    </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -75,7 +75,7 @@ export const execute = {
         {
             title: "Page 03 of 08",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     </p>
                     
@@ -108,7 +108,7 @@ export const execute = {
                     Moving to the next page will execute a search to determine if a feasible solution is available.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 saveOutputSymbolConstraints('Cycle_Life'),
@@ -130,7 +130,7 @@ export const execute = {
         {
             title: "Page 04 of 08",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The search couldn't find a design that satisfied all of our objectives
                     so it did its best and found a compromise.
@@ -154,7 +154,7 @@ export const execute = {
                     trade off against each other.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -163,7 +163,7 @@ export const execute = {
         {
             title: "Page 05 of 08",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Trade will ask for "weights" to apply to each of the violated
                     constraints.  These weights define the direction that Trade will
@@ -214,7 +214,7 @@ export const execute = {
                     Select <b>Done. </b>
                     This will return to the main page with no changes.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
             ]
@@ -222,7 +222,7 @@ export const execute = {
         {
             title: "Page 06 of 08",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Ready for another shot at it ?   This time we'll work with OD_FREE MAX.
                     </p>
@@ -273,13 +273,13 @@ export const execute = {
                     <b>Accept the result</b>.
                     Continue to the next page.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 07 of 08",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     <p>
                     Based on the Objective Value, it appears that moving the constraint from
@@ -299,7 +299,7 @@ export const execute = {
                     <p>
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
             ]
@@ -307,7 +307,7 @@ export const execute = {
         {
             title: "Page 08 of 08 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Congratulations, you've finished another section of the tutorial.
                     Take a few minutes at this point to experiment on your own. 
@@ -326,7 +326,7 @@ export const execute = {
                     for a list of topics.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             )
         }
     ]

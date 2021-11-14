@@ -77,7 +77,7 @@ class ResultTable extends Component {
             display_search_button = false;
         }
         return (
-            <React.Fragment>
+            <>
                 <Table className="col-md-8" size="sm">
                     <tbody>
                         <tr>
@@ -112,7 +112,7 @@ class ResultTable extends Component {
                         </tr>
                     </tbody>
                 </Table>
-            </React.Fragment>
+            </>
         );
     }
     

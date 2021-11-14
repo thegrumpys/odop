@@ -17,7 +17,7 @@ export const execute = {
             title: "Make HotWoundMetric model",
             "name": "page0x",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This session creates a metric Startup design optimized for 
                     designing large hot-wound compression springs.  
@@ -57,7 +57,7 @@ export const execute = {
                     <p>
                     When ready, use the "Exit" button to resume regular operation of the program.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState("Spring/Compression","Metric"),

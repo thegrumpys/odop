@@ -252,52 +252,52 @@ class SymbolValue extends Component {
         value_class += "background-white ";
 //        console.log('In SymbolValue.render value_class=',value_class);
         return (
-            <React.Fragment>
+            <>
                 <td className={"align-middle " + this.props.className}>
                     <InputGroup>
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             (value_tooltip !== undefined ?
-                                <React.Fragment>
+                                <>
                                     {icon_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                             <Form.Control type="number" readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
                                     </OverlayTrigger>
-                                </React.Fragment>
+                                </>
                             :
-                                <React.Fragment>
+                                <>
                                     {icon_tag}
                                     <Form.Control type="number" readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
-                                </React.Fragment>
+                                </>
                             )
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
                             (value_tooltip !== undefined ?
-                                <React.Fragment>
+                                <>
                                     {icon_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                         <Form.Control type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                     </OverlayTrigger>
-                                </React.Fragment>
+                                </>
                             :
-                                <React.Fragment>
+                                <>
                                     {icon_tag}
                                     <Form.Control type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
-                                </React.Fragment>
+                                </>
                             )
                         : ''}
                         { this.props.element.format === 'table' ?
                             (value_tooltip !== undefined ?
-                                <React.Fragment>
+                                <>
                                     {icon_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                         <Form.Control type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                                     </OverlayTrigger>
-                                </React.Fragment>
+                                </>
                             :
-                                <React.Fragment>
+                                <>
                                     {icon_tag}
                                     <Form.Control type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
-                                </React.Fragment>
+                                </>
                             )
                         : ''}
                     </InputGroup>
@@ -311,20 +311,20 @@ class SymbolValue extends Component {
                     <Modal.Body>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <NameValueUnitsHeaderIndependentVariable />
                                     <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidValue} onInvalid={this.onInvalidValue} />
-                                </React.Fragment>}
+                                </>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <NameValueUnitsHeaderDependentVariable />
                                     <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidValue} onInvalid={this.onInvalidValue} />
-                                </React.Fragment>}
+                                </>}
                             {this.props.element.type === "calcinput" && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <NameValueUnitsHeaderCalcInput />
                                     <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidValue} onInvalid={this.onInvalidValue} />
-                                </React.Fragment>}
+                                </>}
                         </Table>
                         <Table size="sm" style={{backgroundColor: '#eee'}} className="mb-0">
                             <tbody>
@@ -337,27 +337,27 @@ class SymbolValue extends Component {
                         </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <ConstraintsMinHeaderIndependentVariable />
                                     <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMinConstraint} onInvalid={this.onInvalidMinConstraint} />
-                                </React.Fragment>}
+                                </>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <ConstraintsMinHeaderDependentVariable />
                                     <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMinConstraint} onInvalid={this.onInvalidMinConstraint} />
-                                </React.Fragment>}
+                                </>}
                         </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <ConstraintsMaxHeaderIndependentVariable />
                                     <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMaxConstraint} onInvalid={this.onInvalidMaxConstraint} />
-                                </React.Fragment>}
+                                </>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <ConstraintsMaxHeaderDependentVariable />
                                     <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMaxConstraint} onInvalid={this.onInvalidMaxConstraint} />
-                                </React.Fragment>}
+                                </>}
                         </Table>
                     </Modal.Body>
                     <Modal.Footer>
@@ -366,7 +366,7 @@ class SymbolValue extends Component {
                         <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }

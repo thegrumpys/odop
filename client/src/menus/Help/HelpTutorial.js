@@ -82,7 +82,7 @@ class HelpTutorial extends Component {
     render() {
 //        console.log('In HelpTutorial.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>
                     Tutorial&hellip;
                 </NavDropdown.Item>
@@ -106,7 +106,7 @@ class HelpTutorial extends Component {
                         <Button variant="primary" onClick={this.onExecute}>Execute</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }  

@@ -116,7 +116,7 @@ class MainPage extends Component {
 
         const logOnOff = this.props.authState.isAuthenticated ? <SignOut /> : <SignIn />;
         return (
-            <React.Fragment>
+            <>
                 <Navbar variant="light" bg="light" expand="md" fixed="top">
                   <OverlayTrigger placement="bottom" overlay={<Tooltip>Reset app.<br/>Save your work first!<br/>See Help AutoSave.</Tooltip>}>
                     <Navbar.Brand href="/"><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
@@ -195,7 +195,7 @@ class MainPage extends Component {
                         })}
                     </Tabs>
                 </Container>
-            </React.Fragment>
+            </>
         );
     }
     

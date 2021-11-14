@@ -85,7 +85,7 @@ class FileImport extends Component {
     render() {
 //        console.log('In FileImport.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     Import&hellip;
                 </NavDropdown.Item>
@@ -106,7 +106,7 @@ class FileImport extends Component {
                         <Button variant="primary" onClick={this.onFileImport} disabled={this.state.selectedFile == null}>Import</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }
