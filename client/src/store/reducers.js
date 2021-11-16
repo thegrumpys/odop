@@ -63,6 +63,7 @@ export function reducers(state, action) {
         } else {
             module = require('../designtypes/'+action.payload.type+'/initialState_metric_units.js'); // Dynamically load initialState
         }
+        module = JSON.parse(JSON.stringify(module)); // Make deep clone
         state = Object.assign({}, state, { 
             name: 'initialState',
             model: {
