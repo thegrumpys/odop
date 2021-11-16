@@ -82,7 +82,9 @@ class MainPage extends Component {
         }
         if (prevProps.view !== this.props.view) {
 //            console.log('In MainPage.componentDidUpdate prevProps.view=',prevProps.view,'props.view=',this.props.view);
-            this.setView(this.props.view);
+            this.setState({
+                activeTab: this.props.view
+            });
       }
     }
 
@@ -95,11 +97,7 @@ class MainPage extends Component {
     
     setView(view) {
 //        console.log('In MainPage.setView view=',view);
-        if (this.state.activeTab !== view) {
-            this.setState({
-                activeTab: view
-            });
-        }
+        this.props.changeView(view); // Update the model
     }
     
     render() {
@@ -118,7 +116,7 @@ class MainPage extends Component {
 
         const logOnOff = this.props.authState.isAuthenticated ? <SignOut /> : <SignIn />;
         return (
-            <React.Fragment>
+            <>
                 <Navbar variant="light" bg="light" expand="md" fixed="top">
                   <OverlayTrigger placement="bottom" overlay={<Tooltip>Reset app.<br/>Save your work first!<br/>See Help AutoSave.</Tooltip>}>
                     <Navbar.Brand href="/"><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
@@ -197,7 +195,7 @@ class MainPage extends Component {
                         })}
                     </Tabs>
                 </Container>
-            </React.Fragment>
+            </>
         );
     }
     

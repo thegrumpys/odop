@@ -241,7 +241,7 @@ class SymbolValueWireDia extends Component {
         value_class += "background-white "; // Always white
 //        console.log('In SymbolValueWireDia.render value_class=',value_class);
         return (
-            <React.Fragment>
+            <>
                 <td className={"align-middle " + this.props.className}>
                     <InputGroup>
                         {(value_tooltip !== undefined ?
@@ -262,7 +262,7 @@ class SymbolValueWireDia extends Component {
                     <Modal.Body>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <NameValueUnitsHeaderIndependentVariable />
                                     <tbody>
                                         <tr key={this.props.element.name}_radio>
@@ -314,17 +314,17 @@ class SymbolValueWireDia extends Component {
                                             <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
                                         </tr>
                                     </tbody>
-                                </React.Fragment>}
+                                </>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <NameValueUnitsHeaderDependentVariable />
                                     <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
-                                </React.Fragment>}
+                                </>}
                             {this.props.element.type === "calcinput" && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <NameValueUnitsHeaderCalcInput />
                                     <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
-                                </React.Fragment>}
+                                </>}
                         </Table>
                         <Table size="sm" style={{backgroundColor: '#eee'}} className="mb-0">
                             <tbody>
@@ -337,27 +337,27 @@ class SymbolValueWireDia extends Component {
                         </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <ConstraintsMinHeaderIndependentVariable />
                                     <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
-                                </React.Fragment>}
+                                </>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <ConstraintsMinHeaderDependentVariable />
                                     <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
-                                </React.Fragment>}
+                                </>}
                         </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <ConstraintsMaxHeaderIndependentVariable />
                                     <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
-                                </React.Fragment>}
+                                </>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                                <React.Fragment>
+                                <>
                                     <ConstraintsMaxHeaderDependentVariable />
                                     <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
-                                </React.Fragment>}
+                                </>}
                         </Table>
                     </Modal.Body>
                     <Modal.Footer>
@@ -366,7 +366,7 @@ class SymbolValueWireDia extends Component {
                         <Button variant="primary" onClick={this.onClose}>Close</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }

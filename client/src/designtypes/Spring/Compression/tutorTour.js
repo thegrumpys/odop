@@ -7,7 +7,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This tutorial session provides a quick tour of the ODOP "main" page 
                     also known as the "Advanced View".
@@ -20,13 +20,13 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The remainder of this session will display a sequence of small 
                     snippets of the main page and then provide a description of how each 
@@ -42,7 +42,7 @@ export const execute = {
                     and the app will respond.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
 //                loadInitialState('Spring/Compression'),
@@ -54,7 +54,7 @@ export const execute = {
         {
             title: "Page 03 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The snippet below illustrates the main menu (<b>File &nbsp; Action &nbsp; View &nbsp; Help</b>)
                     highlighted inside the red oval.
@@ -73,13 +73,13 @@ export const execute = {
                     Feel free to explore and review the entire menu structure.
                     Click "Next" when you are ready to proceed.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     ODOP contains an "on-line" help facility.
                     It includes an overview of the program, a generic
@@ -100,13 +100,13 @@ export const execute = {
                     concepts of stress, factor of safety, yield point, endurance limit, etc.
                    </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Here is an example of how each main menu item will drop down to provide 
                     specific menu items.
@@ -119,13 +119,13 @@ export const execute = {
                     <p>
                     <br />
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 06 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In the right portion of the menu bar (above this text), 
                     you should see an icon associated with the design type 
@@ -146,13 +146,13 @@ export const execute = {
                     information provided there.
                     Be sure to return to the main page before clicking "Next" to continue.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 07 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The Result section is positioned below this text, near the top of the main page.
                     This area provides feedback about the solution process.   
@@ -169,13 +169,13 @@ export const execute = {
                     
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 08 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If you hover the cursor over a heading or a variable name, 
                     a tool-tip will pop up to provide more information regarding each item.   
@@ -194,7 +194,7 @@ export const execute = {
                     
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
             ]
@@ -202,7 +202,7 @@ export const execute = {
         {
             title: "Page 09 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     There are numeric entry fields for each of the variables.
                     The user can change the value of Independent Variables by positioning
@@ -216,13 +216,13 @@ export const execute = {
                     
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 10 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In order change the value of a Dependent Variable, it is necessary
                     to FIX its value (more about FIX coming soon) and then execute the Search feature 
@@ -233,13 +233,13 @@ export const execute = {
                     
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             ),
         },
         {
             title: "Page 11 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Calculation Inputs are quantities that can be modified by the user
                     but are not subject to constraints, FIX or manipulation by the Search process. 
@@ -253,13 +253,13 @@ export const execute = {
                     Calculation Inputs.
                     Scroll back up and click "Next" when ready to continue.
                     </p>
-                </React.Fragment>
+                </>
             ),
         },
         {
             title: "Page 12 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This clip illustrates how a Calculation Input with a drop-down arrow 
                     can expand into a table that the user can select from.
@@ -271,13 +271,13 @@ export const execute = {
                     
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             ),
         },
         {
             title: "Page 13 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Constraints are single sided (Max or Min) limits imposed on the 
                     selected Variable. 
@@ -293,13 +293,13 @@ export const execute = {
                     
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             ),
         },
         {
             title: "Page 14 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In order to FIX the value of an Independent Variable, put a check
                     in the box immediately to the right of its value.
@@ -310,13 +310,13 @@ export const execute = {
                     
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             ),
         },
         {
             title: "Page 15 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In order to FIX the value of a Dependent Variable, put a check 
                     in the box immediately to the right of its value.
@@ -330,13 +330,13 @@ export const execute = {
                     
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             ),
         },
         {
             title: "Page 15 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     </p>
                     
@@ -372,13 +372,13 @@ export const execute = {
                             </ul>
                         </li>
                     </ul>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 16 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The quick tour of the main page is now complete.
                     This is a good time good to get a better look at what is available 
@@ -402,13 +402,13 @@ export const execute = {
                     <br />
                     After completing this tutorial session, if time is available, read through those entries from top to bottom.
                     </p>
-                </React.Fragment>
+                </>
             ),
         },
         {
             title: "Page 17 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Spring design demonstration sessions illustrate problem solving techniques as well as provide
                     sample solutions to several generally available reference book problems.
@@ -421,13 +421,13 @@ export const execute = {
                     
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             ),
         },
         {
             title: "Page 18 of 20",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This tutorial session will now wrap up with a few bits of 
                     general information.
@@ -439,21 +439,21 @@ export const execute = {
                     context of a force-deflection diagram.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 19 of 20",
             text: (
-                <React.Fragment>
+                <>
                 <Image fluid src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 20 of 20 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Remember that it is always possible to restart a given session of
                     the ODOP demo / tutorial. 
@@ -479,7 +479,7 @@ export const execute = {
                     <p>If you do not wish to continue with more tutorial sessions or demonstration problems, 
                     you can experiment with the various ODOP features, menus and reports. 
                     The HELP menu is a good place to start. </p>
-                </React.Fragment>
+                </>
             )
         }
     ]

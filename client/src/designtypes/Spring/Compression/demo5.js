@@ -6,7 +6,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The following example provides the ODOP:Spring solution to a reference book 
                     problem illustrating the design of a compression spring .
@@ -25,13 +25,13 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.<br />
                     <br />
@@ -42,7 +42,7 @@ export const execute = {
                     Refer to  Problem 1  on page 179  of the 10th printing  (1978).
                     </p>
                     
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -54,7 +54,7 @@ export const execute = {
         {
             title: "Page 03 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Design a compression spring such that the following conditions are met:<br />
                     <br />
@@ -69,13 +69,13 @@ export const execute = {
                     Determine wire diameter, stress, and number of active coils.<br />
                     Select a commonly available wire size.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>Next, the demo session will enter everything we know about the problem. </p>
                     
                     <p>This is a good time to take a good look at the existing values.
@@ -84,13 +84,13 @@ export const execute = {
                     <p>You can scroll the page down to view the complete set of values. 
                     Scroll back up in order to use the Next button to continue.</p>
                     <br /><br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo has now entered what is known about the problem. 
                     In summary, the changes were:<br />
@@ -107,7 +107,7 @@ export const execute = {
                     <p>
                     The remaining Independent Variable values remain as established by the initialState. 
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('OD_Free', 1.0),
@@ -125,7 +125,7 @@ export const execute = {
         {
             title: "Page 06 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now that we have expressed what we want the design to accomplish,
                     we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
@@ -137,13 +137,13 @@ export const execute = {
                     &nbsp;
                     <br />
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 07 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>Yes,  A feasible solution is available. Please take a moment to scroll through and view the values.</p>
                     <p>
                     Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
@@ -154,7 +154,7 @@ export const execute = {
                     than 80 % of available deflection.
                     </p>
                     <p>There is no warning about buckling so that is not a concern for this design.</p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -163,7 +163,7 @@ export const execute = {
         {
             title: "Page 08 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If you are still on the Report tab,
                     don't forget to switch back to the tab containing the main page ("Design:").
@@ -187,13 +187,13 @@ export const execute = {
                     to use a FIX to impose the expected value of Wire_Dia.
                     Look for the new value of Wire_Dia on the next page.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 09 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now that there has been a slight change in wire diameter, another search
                     will be required to make corresponding adjustments in the other parameters.
@@ -205,7 +205,7 @@ export const execute = {
                     <br /><br />
                     </p>
                     
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.120)
@@ -214,7 +214,7 @@ export const execute = {
         {
             title: "Page 10 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
                     Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
@@ -234,7 +234,7 @@ export const execute = {
                     
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -243,7 +243,7 @@ export const execute = {
         {
             title: "Page 11 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If you are still on a Report tab,
                     don't forget to switch back to the tab containing the main page ("Design:").
@@ -256,7 +256,7 @@ export const execute = {
                     CHANGE  Coils_T  13
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Wire_Dia",0.1205),
@@ -266,7 +266,7 @@ export const execute = {
         {
             title: "Page 12 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The handbook results:<br />
                     &nbsp; &nbsp;  solid height = 1.57 in.<br />
@@ -279,13 +279,13 @@ export const execute = {
                     <p>
                     The results are in very good agreement.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 13 of 13 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Several more demo problems are available. 
                     They are named demo1, demo2, ... etc. 
@@ -298,7 +298,7 @@ export const execute = {
                     you can experiment with the various ODOP:Spring features, menus and reports. 
                     The HELP menu is a good place to start. </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         }
     ]

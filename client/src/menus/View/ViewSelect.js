@@ -23,13 +23,13 @@ class ViewSelect extends Component {
     render() {
 //        console.log('In ViewSelect.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 {this.props.viewNames.map((element) => {return (
                     <NavDropdown.Item key={element.title} id={element.name} onClick={this.onClick}>
                         {element.title}
                     </NavDropdown.Item>
                 )})}
-            </React.Fragment>
+            </>
         );
     }
 }  

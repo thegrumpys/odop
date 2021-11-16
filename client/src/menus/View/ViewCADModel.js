@@ -95,7 +95,7 @@ class ViewCADModel extends Component {
 //        console.log('In ViewCADModel.render src=',src);
 
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     CAD Model (Pre-alpha)
                 </NavDropdown.Item>
@@ -112,7 +112,7 @@ class ViewCADModel extends Component {
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }  

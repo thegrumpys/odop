@@ -5,7 +5,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Welcome to the "Guided Design" tutorial session.
                     This session is appropriate for a situation where you are creating a 
@@ -54,13 +54,13 @@ export const execute = {
                     To continue with this session, just click the "Next" button as you finish
                     reading each page. 
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     One of the points of this session is to illustrate that use of the 
                     File : Save As... feature provides an opportunity to easily go back to a 
@@ -82,13 +82,13 @@ export const execute = {
                     The rest of the session provides considerably more detail.
                     <br />
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 03 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <Table bordered size="sm">
                     <tbody>
                         <tr>
@@ -160,13 +160,13 @@ export const execute = {
                     <p>
                      After reviewing the diagram, use the "Next" button to continue.
                      </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This is the time to express your objectives (goals, requirements) for the design at hand 
                     in terms of minimum and maximum constraints and Fixes. 
@@ -224,13 +224,13 @@ export const execute = {
                     mathematically possible but not particularly helpful in terms of a usable spring design.
                     You should feel free to experiment with different values for these constraint levels.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     It is possible to use the tutorial "Back" button to return the active design 
                     to the beginning of any tutorial step to make corrections or additional inputs.
@@ -266,13 +266,13 @@ export const execute = {
                     </p>
                     
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 06 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If the "Feasibility:" result of the search is "NOT FEASIBLE", 
                     consider the possibility that some aspect of the design is over-specified.
@@ -310,13 +310,13 @@ export const execute = {
                     if you are still positioned at a Report tab, 
                     you may want to switch back to the main "Design" tab before using the "Next" button to proceed.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 07 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The Seek feature can find the constrained extreme of any independent or dependent variable 
                     that is not in Fixed status. 
@@ -341,13 +341,13 @@ export const execute = {
                     <p>
                     When ready, use the "Next" button to proceed.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 08 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Take a moment to review the results. 
                     Is this a reasonable design that meets the original objectives ? &nbsp;
@@ -367,13 +367,13 @@ export const execute = {
                     <p>
                     When finished with the save, use the "Next" button to continue.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 09 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The on-line Help entry on  
                     <a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/selectSizeCatalog" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
@@ -405,13 +405,13 @@ export const execute = {
                     <p>
                     When ready, use the "Next" button to proceed.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 10 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now, just to be sure that we are not missing out on some interesting design possibility ... 
                     <br /><br />
@@ -447,13 +447,13 @@ export const execute = {
                     <p>
                     When ready, use the "Next" button to proceed.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 11 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     At this point it is appropriate to do a careful comparison of the candidate designs.
                     If you are working with a wide-screen monitor,
@@ -474,13 +474,13 @@ export const execute = {
                     <p>
                     When ready, use the "Next" button to proceed.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 12 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Your preferred candidate design can be the basis for manufacturing a custom spring.
                     </p>
@@ -534,13 +534,13 @@ export const execute = {
                     <p>
                     When ready, use the "Next" button to proceed.
                     </p>
-                </React.Fragment>
+                </>
             ),
         },
         {
             title: "Page 13 of 13",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If there is something in the catalog that looks workable, 
                     the side-by-side browser configuration can be used to compare the details of the custom spring 
@@ -576,7 +576,7 @@ export const execute = {
                     When ready, use the "Exit" button to resume regular (non-tutorial) operation of the program 
                     with the existing design.
                     </p>
-                </React.Fragment>
+                </>
             )
         }
     ]

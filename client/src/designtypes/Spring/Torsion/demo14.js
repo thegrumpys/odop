@@ -8,7 +8,7 @@ export const execute = {
             title: "Session Now In Progress",
             "name": "page0x",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The following example briefly illustrates the use of ODOP:Spring in
                     the design of a torsion spring. 
@@ -37,13 +37,13 @@ export const execute = {
                     <p>
                     Click Next to establish the necessary initialState.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 08",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
@@ -59,7 +59,7 @@ export const execute = {
                     Refer to page 25 of the 1991 edition.<br />
                     ***  Used with permission of Spring Manufacturers Institute, Inc.  ***<br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Torsion'),
@@ -69,7 +69,7 @@ export const execute = {
         {
             title: "Page 03 of 08",
             text: (
-                <React.Fragment>
+                <>
                 <p>
                 Before making any changes to our initialState, the Design Example may be restated in a simplified form:<br />
                 <br />
@@ -105,13 +105,13 @@ export const execute = {
                 There is no mention of spacing between coils or 
                 arm lengths necessary to compute wire length and weight.
                 </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 08",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo has now entered what is known about the problem. 
                     In summary, the changes were:<br />
@@ -130,7 +130,7 @@ export const execute = {
                     <p>
                     This is a good time to scroll down and confirm these changes are now in place.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Material_Type",3),
@@ -148,7 +148,7 @@ export const execute = {
         {
             title: "Page 05 of 08",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Note that the Handbook solution was required to calculate moment in the closed position (180 lb-in).
                     ODOP:Spring was able to accept the specifications for Force_Arm_2 and length of Arm_2 directly and
@@ -158,7 +158,7 @@ export const execute = {
                     <p>
                     After the click on Next, the demo will run Search.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
             ]
@@ -166,7 +166,7 @@ export const execute = {
         {
             title: "Page 06 of 08",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now let's see what the search has achieved.
                     Don't forget to review the Report(s).
@@ -176,7 +176,7 @@ export const execute = {
                     &nbsp;
                     <br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -185,7 +185,7 @@ export const execute = {
         {
             title: "Page 07 of 08",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The handbook solution used a standard wire diameter.
                     </p>
@@ -200,13 +200,13 @@ export const execute = {
                     FIX a value of 0.225 inch on Wire_Dia and then
                     run another search to re-establish corresponding values for all the other problem variables.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 08 of 08 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     </p>
                     <br />
@@ -225,7 +225,7 @@ export const execute = {
                    
                     <p>
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.225),

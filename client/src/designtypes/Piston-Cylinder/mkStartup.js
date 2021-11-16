@@ -10,7 +10,7 @@ export const execute = {
         {
             title: "Make Startup model",
             text: (
-                <React.Fragment>
+                <>
                     <p>Setting the following symbol table actions:</p>
                     <ol>
                         <li>{'loadInitialState("Piston-Cylinder","US"),'}</li>
@@ -18,7 +18,7 @@ export const execute = {
                         <li>{'changeLabelsValue([{name: "COMMENT", value: "PCYL Default startup file ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState("Piston-Cylinder","US"),

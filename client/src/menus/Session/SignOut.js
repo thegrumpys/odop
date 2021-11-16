@@ -27,11 +27,11 @@ class SignOut extends Component {
     render() {
 //      console.log('In SignOut.render this=',this);
       return this.props.authState.isAuthenticated ? (
-        <React.Fragment>
+        <>
             <Button variant="light" onClick={this.toggle}>
                  Sign Out
             </Button>
-        </React.Fragment>
+        </>
       ) : null;
     }
 

@@ -7,7 +7,7 @@ export const execute = {
             title: "Session Now In Progress",
             "name": "page0x",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This demo session works through a handbook design example and confirms that the 
                     results are in reasonable agreement with results published in the handbook. 
@@ -29,13 +29,13 @@ export const execute = {
                     <p>
                     Click Next to establish the necessary initialState.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
@@ -48,7 +48,7 @@ export const execute = {
                     Refer to  Problem 4  on page 212  of the 10th printing  (1978).
                     </p>
                     <br/>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Torsion'),
@@ -58,7 +58,7 @@ export const execute = {
         {
             title: "Page 03 of 09",
             text: (
-                <React.Fragment>
+                <>
                 <p>
                 Problem 4 may be restated in a simplified form:<br/>
                 Determine a standard wire diameter, working stress, number of coils and 
@@ -81,13 +81,13 @@ export const execute = {
                 <p>
                 No information about ends or arm length is provided.
                 </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Considering that the objective here is to illustrate how ODOP:Spring produces the same results as the handbook,
                     it will be necessary to use the same value of Modulus of Elasticity (E).
@@ -112,7 +112,7 @@ export const execute = {
                     CHANGE Prop_Calc_Method 3 <br/>
                     CHANGE Elastic_Modulus 28700000.0 <br/>
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Prop_Calc_Method",3),
@@ -122,7 +122,7 @@ export const execute = {
         {
             title: "Page 05 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo session has now entered the remaining initial specifications for the problem. 
                     In summary, the changes were:<br />
@@ -142,7 +142,7 @@ export const execute = {
                     Coil diameter is the primary element impacted here.
                     A search will run during the transition to the next page.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('M_1', 0.0),
@@ -154,7 +154,7 @@ export const execute = {
         {
             title: "Page 06 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now let's see what the search has achieved.
                     Don't forget to review the Report(s).
@@ -171,7 +171,7 @@ export const execute = {
                     &nbsp;
                     <br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -180,7 +180,7 @@ export const execute = {
         {
             title: "Page 07 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The handbook solution used a standard wire diameter.
                     The <b>Action : Select Size</b> menu item can be used to select the nearest standard wire diameter.
@@ -200,13 +200,13 @@ export const execute = {
                     and then
                     run another search to re-establish corresponding values for the two remaining free Independent Variables.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 08 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo session has now imposed the values:<br /> 
                     FIX Wire_Dia 0.063<br /> 
@@ -229,7 +229,7 @@ export const execute = {
                     the demo session will take one more step and 
                     impose the handbook's values for OD_Free and Coils_T.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.063),
@@ -241,7 +241,7 @@ export const execute = {
         {
             title: "Page 09 of 09 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now, the values for deflected ID and L_Body (free) are a closer match for
                     those in the handbook.
@@ -257,7 +257,7 @@ export const execute = {
                     The shift in OD_Free and Coils_T have resulted in a small change in deflection at point 2.
                     Even so, the two solutions are still in reasonable agreement.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("OD_Free",0.876),

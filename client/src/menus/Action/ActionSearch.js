@@ -49,11 +49,11 @@ class ActionSearch extends Component {
     render() {
 //        console.log('In ActionSearch.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     Search
                 </NavDropdown.Item>
-            </React.Fragment>
+            </>
         );
     }
 }  

@@ -9,7 +9,7 @@ class Report3 extends ReportBase {
         super.render();
 //        console.log('In Report3.render this.props=',this.props);
         return (
-            <React.Fragment>
+            <>
                 <h4>ODOP:Spring &nbsp; Extension Spring Report</h4>
                 <br />
                 <table>
@@ -393,7 +393,7 @@ class Report3 extends ReportBase {
                         </tr>
                     </tbody>
                 </table>
-            </React.Fragment>
+            </>
         );
     }
 

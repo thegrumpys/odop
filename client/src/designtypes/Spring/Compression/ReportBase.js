@@ -123,9 +123,9 @@ export class ReportBase extends Component {
         /* used to compute % tensile values */
 //        if (this.props.symbol_table[o.Tensile].value <= this.props.system_controls.smallnum) {
 //            return (
-//                    <React.Fragment>
+//                    <>
 //                    YOU MUST SUPPLY A VALUE FOR TENSILE STRENGTH IN ORDER TO COMPLETE THESE CALCULATIONS.
-//                    </React.Fragment>
+//                    </>
 //        );
 //        }
 

@@ -8,7 +8,7 @@ export const execute = {
             title: "Session Now In Progress",
             "name": "page0x",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The following example briefly illustrates the use of ODOP:Spring in
                     the design of an extension spring. 
@@ -35,13 +35,13 @@ export const execute = {
                     <p>
                     Click Next to establish the necessary initialState.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
@@ -57,7 +57,7 @@ export const execute = {
                     Refer to page 18 of the second printing (1983).<br />
                     ***  Used with permission of Spring Manufacturers Institute, Inc.  ***<br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Extension'),
@@ -67,7 +67,7 @@ export const execute = {
         {
             title: "Page 03 of 09",
             text: (
-                <React.Fragment>
+                <>
                 <p>
                 Before making any changes to our initialState, the Design Example may be restated in a simplified form:<br />
                 <br />
@@ -91,13 +91,13 @@ export const execute = {
                
                 <p>
                 </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo session has now entered what is known about the problem. 
                     <br />
@@ -119,7 +119,7 @@ export const execute = {
                     <p>
                     This is a good time to scroll down and confirm these changes are now in place.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Material_Type",3),
@@ -138,7 +138,7 @@ export const execute = {
         {
             title: "Page 05 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In the process of transitioning to the next page, the demo session will run Search.
                     </p>
@@ -146,7 +146,7 @@ export const execute = {
                     <p>
                     <br /><br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
             ]
@@ -154,7 +154,7 @@ export const execute = {
         {
             title: "Page 06 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now let's see what the search has achieved.
                     </p>
@@ -167,7 +167,7 @@ export const execute = {
                     <br /><br />
                     The next page will handle those details.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -176,7 +176,7 @@ export const execute = {
         {
             title: "Page 07 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     </p>
 
@@ -190,13 +190,13 @@ export const execute = {
                     FIX a value of 0.105 inch on Wire_Dia and then
                     run another search to re-establish corresponding values for all the other problem variables.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 08 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This is your opportunity for a detailed look at the numbers. 
                     Don't forget to review the Report(s).
@@ -219,7 +219,7 @@ export const execute = {
                     In the process, 
                     ODOP:Spring's calculation of deflection in the loops (Hook_Deflect_All) will be disabled.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.105),
@@ -229,7 +229,7 @@ export const execute = {
         {
             title: "Page 09 of 09 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In order to disable ODOP:Spring's calculation of deflection in the loops:<br />
                     &nbsp; CHANGE END_TYPE User_Specified<br />
@@ -249,7 +249,7 @@ export const execute = {
                     <p>
                     The agreement between results is now almost perfect.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('OD_Free', 1.105),

@@ -10,7 +10,7 @@ export const execute = {
         {
             title: "Make Startup model",
             text: (
-                <React.Fragment>
+                <>
                     <p>Setting the following symbol table actions:</p>
                     <ol>
                         <li>{'loadInitialState("Spring/Torsion","US"),'}</li>
@@ -18,7 +18,7 @@ export const execute = {
                         <li>{'changeLabelsValue([{name: "COMMENT", value: "Torsion Spring default start point"}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState("Spring/Torsion","US"),

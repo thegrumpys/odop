@@ -68,7 +68,7 @@ class HelpDemo extends Component {
 //        console.log('In HelpDemo.onExecute this.state.execute_name=',this.state.execute_name);
         var { execute } = require('../../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
 //        console.log('In HelpDemo.onExecute execute=',execute);
-        startExecute('Help : Demo : ' + this.state.execute_name, execute.steps);
+        startExecute('Help : Demo : ' + this.state.execute_name, this.state.execute_name, execute.steps);
     }
     
     onCancel() {
@@ -82,7 +82,7 @@ class HelpDemo extends Component {
     render() {
 //        console.log('In HelpDemo.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>
                     Demo&hellip;
                 </NavDropdown.Item>
@@ -106,7 +106,7 @@ class HelpDemo extends Component {
                         <Button variant="primary" onClick={this.onExecute}>Execute</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }  

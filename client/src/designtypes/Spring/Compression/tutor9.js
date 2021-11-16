@@ -4,7 +4,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     </p>
                     
@@ -23,13 +23,13 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 05",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     ODOP contains a number of quantities that you can think of as "internal variables".  
                     They are variables and switches that are used to
@@ -57,7 +57,7 @@ export const execute = {
                     of longer search run time.   
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
             ]
@@ -65,7 +65,7 @@ export const execute = {
         {
             title: "Page 03 of 05",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The preference items "show_units" and "show_violations" are available to
                     assist in tuning the user interface for operation on small screen devices.
@@ -91,7 +91,7 @@ export const execute = {
                     <p>
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
             ]
@@ -99,7 +99,7 @@ export const execute = {
         {
             title: "Page 04 of 05",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The <b>File : Properties</b> menu item provides an opportunity to save  
                     various kinds of textual information with a design. 
@@ -127,7 +127,7 @@ export const execute = {
                     target="_blank" rel="noopener noreferrer">Properties</a>.&nbsp; 
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
             ]
@@ -135,7 +135,7 @@ export const execute = {
         {
             title: "Page 05 of 05 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     You have reached the last page of the last tutorial session. 
                     So, if you made it this far without skipping any of the earlier sessions,
@@ -164,7 +164,7 @@ export const execute = {
                     for a list of topics.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             )
         }
     ]

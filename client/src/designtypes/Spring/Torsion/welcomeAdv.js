@@ -5,7 +5,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Welcome to the ODOP:Spring web app!
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewAdvanced" target="_blank" rel="noopener noreferrer">Advanced view </a> 
@@ -38,7 +38,7 @@ export const execute = {
                     Push the blue "Next" button in the upper right to show the next page of instructions, hints and tips. 
                     Push the darker gray "Exit" button to close this light green panel. 
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
 //                                       We have concluded that AutoSave here is not a good idea
@@ -49,7 +49,7 @@ export const execute = {
         {
             title: "Page 02 of 04",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The <a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     sessions provide additional detail on these concepts as well as more advanced topics 
@@ -76,7 +76,7 @@ export const execute = {
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; and 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#feasibleRegion" target="_blank" rel="noopener noreferrer">Feasible Region</a>.&nbsp; 
                    </p>
-                </React.Fragment>
+                </>
             ), 
             actions: [
                 logUsage('event','welcomeAdv', { 'event_label': 'Page 02 of 04' })
@@ -85,7 +85,7 @@ export const execute = {
         {
             title: "Page 03 of 04",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The ODOP:Spring 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewAdvanced" target="_blank" rel="noopener noreferrer">Advanced view</a>&nbsp; 
@@ -111,7 +111,7 @@ export const execute = {
                     to save private designs into the cloud-based ODOP Design Library.  
                    </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 logUsage('event','welcomeAdv', { 'event_label': 'Page 03 of 04' })
@@ -120,7 +120,7 @@ export const execute = {
         {
             title: "Page 04 of 04 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In summary: 
                     <br />
@@ -139,7 +139,7 @@ export const execute = {
                     We welcome your feedback.  
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/ContactUs" target="_blank" rel="noopener noreferrer">Contact Us.</a>&nbsp; 
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 logUsage('event','welcomeAdv', { 'event_label': 'Page 04 of 04' })

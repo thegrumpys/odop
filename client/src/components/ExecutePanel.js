@@ -5,12 +5,13 @@ import { load } from '../store/actionCreators';
 import { connect } from 'react-redux';
 import config from '../config';
 
-export var startExecute = function(prefix,steps) {
-//    console.log('In startExecute this=',this,'prefix=',prefix,'steps=',steps);
+export var startExecute = function(prefix,execute_name,steps) {
+//    console.log('In startExecute this=',this,'prefix=',prefix,'execute_name=',execute_name,'steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
         const { store } = this.context;
         var design = store.getState();
         this.setState({
+            execute_name: execute_name,
             modal: true, // Default: do display
             prefix: prefix,
             // Put current store state into steps[0].state - remember this for "back" time travel
@@ -22,6 +23,7 @@ export var startExecute = function(prefix,steps) {
         if (steps[0].actions !== undefined) {
             steps[0].actions.forEach((action) => { store.dispatch(action); })
         }
+        window.scrollTo(0, 0);
     }
 }
 
@@ -65,7 +67,7 @@ class ExecutePanel extends Component {
 //            console.log('In ExecutePanel.componentDidMount this.state.execute_name=',this.state.execute_name);
             var { execute } = require('../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
 //            console.log('In ExecutePanel.componentDidMount execute=',execute);
-            startExecute('Execute : ' + this.state.execute_name, execute.steps);
+            startExecute('Execute : ' + this.state.execute_name, this.state.execute_name, execute.steps);
         }
         this.setState({
             store: this.context.store
@@ -76,6 +78,7 @@ class ExecutePanel extends Component {
 //        console.log('In ExecutePanel.componentDidUpdate this=',this,'prevProps=',prevProps);
         if (prevProps.type !== this.props.type) {
 //            console.log('In ExecutePanel.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+//            console.log('In ExecutePanel.componentDidUpdate this.state.execute_name=',this.state.execute_name,'prefix=',this.state.prefix);
             if (this.state.execute_name !== undefined) {
                 stopExecute();
             }

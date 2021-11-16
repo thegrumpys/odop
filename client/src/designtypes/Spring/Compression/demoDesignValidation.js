@@ -7,7 +7,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The following example illustrates the use of ODOP:Spring to validate 
                     the design of a compression spring. 
@@ -38,13 +38,13 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 10",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.
                     Before we make additional changes, let's review the problem statement:<br />
@@ -67,7 +67,7 @@ export const execute = {
                             <tr><th>second load height</th><td>=</td><td>0.394</td><td>inches</td></tr>
                         </tbody>
                     </table>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -79,7 +79,7 @@ export const execute = {
         {
             title: "Page 03 of 10",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In general, the easiest way to begin is to modify an existing design.
                     This demo session will modify this design until it meets the requirements of the current design problem.
@@ -92,21 +92,21 @@ export const execute = {
                     context of a force-deflection diagram.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 10",
             text: (
-                <React.Fragment>
+                <>
                    <Image fluid src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 10",
             text: (
-                <React.Fragment>
+                <>
                     <p>Next, we enter everything we know about the problem. </p>
                     
                     <p>Because this session is simply checking the performance of an existing design, 
@@ -121,13 +121,13 @@ export const execute = {
                     
                     <p>You can scroll the page down to view the complete set of values. 
                     Scroll back up in order to use the Next button to continue.</p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 06 of 10",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This demo session has now entered what is known about the problem. 
                     In summary, the changes were:<br />
@@ -142,7 +142,7 @@ export const execute = {
                     <p>
                     The current values for Force_1 and Force_2 are left as established by the initialState. 
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.0395),
@@ -156,7 +156,7 @@ export const execute = {
         {
             title: "Page 07 of 10",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now that we have expressed what we want the design to accomplish,
                     we will ask "Search" for a solution.
@@ -177,13 +177,13 @@ export const execute = {
                     <p>
                     This demo session will run the Search process during the transition to the next page.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 08 of 10",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We have a solution. 
                     Take a moment to scroll through and view the values.
@@ -205,7 +205,7 @@ export const execute = {
                     <p>
                     There is no Report1 warning about buckling so that is not a concern for this design.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 logUsage('event','demo', { 'event_label': 'Page 08 of 10' }),
@@ -215,7 +215,7 @@ export const execute = {
         {
             title: "Page 09 of 10",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Don't forget to switch the view back to the main page.
                     <br /><br />
@@ -223,13 +223,13 @@ export const execute = {
                     scroll down to view the values of <b>Cycle_Life, %_Avail_Deflect</b> and <b>Weight </b> 
                     to complete the original problem objectives.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 10 of 10 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This completes the first ODOP:Spring demonstration problem.
                     </p>
@@ -255,7 +255,7 @@ export const execute = {
                     you can experiment with the various ODOP:Spring features, menus and reports. 
                     The HELP menu is a good place to start. 
                     </p>
-                </React.Fragment>
+                </>
             )
         }
     ]

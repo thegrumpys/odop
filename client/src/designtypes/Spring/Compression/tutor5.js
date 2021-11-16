@@ -6,7 +6,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This section of the tutorial will cover the use of the ODOP:Spring
                     Calculation Inputs, material selection, material properties 
@@ -30,13 +30,13 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this tutorial session are now established.
                     </p>
@@ -62,7 +62,7 @@ export const execute = {
                     stress limits for static load and endurance respectively. 
                     The factor of safety numbers are calculated directly from Stress_Lim_Stat and Stress_Lim_Endur.
                    </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -74,7 +74,7 @@ export const execute = {
         {
             title: "Page 03 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     ODOP:Spring provides flexibility in how material properties are determined. 
                     There are three different capabilities:
@@ -102,13 +102,13 @@ export const execute = {
                     The later two options eliminate the dependence on Wire_Dia.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We will examine each of these capabilities in detail, starting with the
                     default case.
@@ -144,13 +144,13 @@ export const execute = {
                     In turn, those allowable stress values are used to calculate the
                     Factor of Safety numbers that can be used as constraints on the design.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This is a good time for a bit of experimentation.
                     </p>
@@ -163,13 +163,13 @@ export const execute = {
                     Stress_Lim_Endur and Stress_Lim_Stat.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 06 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     For the case where there is a desire to specify a material that is
                     not in the material table, or to specify values that do not match those in
@@ -191,13 +191,13 @@ export const execute = {
                     and are no longer dependent on Wire_Dia.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 07 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Finally, the user may directly establish values of the allowable stresses. 
                     This is accomplished by changing the value of Prop_Calc_Method to
@@ -219,13 +219,13 @@ export const execute = {
                     user specified values and are no longer dependent on Wire_Dia.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 08 of 09",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     It is time to move on to a discussion of End_Types
                     </p>
@@ -256,13 +256,13 @@ export const execute = {
                     Additional information is available in the same on-line documentation section for
                     the Compression Spring design type.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 09 of 09 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Congratulations, you've finished another section of the tutorial.
                     You should feel confident about selecting materials and changing
@@ -282,7 +282,7 @@ export const execute = {
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a list of topics.
                     </p>
-                </React.Fragment>
+                </>
             )
         }
     ]

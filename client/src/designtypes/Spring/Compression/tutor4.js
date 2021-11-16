@@ -6,7 +6,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This section of the tutorial is going to be a bit different.
                     We'll cover the <b>File : Save</b> and <b>File : Open</b> menu entries 
@@ -31,13 +31,13 @@ export const execute = {
                     To continue with this session, just click the "Next" button as you finish
                     reading each page (step). 
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 12",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this tutorial session are now established.
                     </p>
@@ -75,7 +75,7 @@ export const execute = {
                             facilitate a convenient side-by-side comparison of two candidate designs.
                             </li>
                         </ul>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -87,7 +87,7 @@ export const execute = {
         {
             title: "Page 03 of 12",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The <b>File : Properties</b> menu item provides an opportunity to add
                     label and comment information to a design before it is saved.
@@ -103,13 +103,13 @@ export const execute = {
                     At that point, use the print facilities provided by your browser.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 12",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Well, since it looks like we need a design to save, 
                     it will be necessary to invent one.  
@@ -137,13 +137,13 @@ export const execute = {
                     The tutorial will impose the necessary values in the process of transitioning 
                     to the Next page. 
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 12",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In "Tutorial shorthand", the changes just imposed by the tutorial are:<br />
                     <br />
@@ -163,7 +163,7 @@ export const execute = {
                     In this case, we'll ignore the warning.
                     Moving to the next page will execute a search.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Life_Category",3),
@@ -186,7 +186,7 @@ export const execute = {
         {
             title: "Page 06 of 12",
             text: (
-                <React.Fragment>
+                <>
                 <p>
                 The search couldn't find a design that satisfied all of our objectives,
                 so it did its best and found a compromise.
@@ -215,7 +215,7 @@ export const execute = {
                 with a unique name of your choice.
                 If you are not feeling particularly creative, try the name "tutor4".
                 </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -224,7 +224,7 @@ export const execute = {
         {
             title: "Page 07 of 12",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now, to continue with our solution to this design problem, let's
                     see if we can improve on the design by altering a few of the
@@ -243,7 +243,7 @@ export const execute = {
                     <p>
                     Moving to the next page will provide the results of another search.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("OD_Free", 2.0),
@@ -255,7 +255,7 @@ export const execute = {
         {
             title: "Page 08 of 12",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     It is possible to get a side-by-side comparison between the current design
                     and the previous one that is now saved in the Design Library.
@@ -275,7 +275,7 @@ export const execute = {
                     With a little bit of window arranging, you should be able to see a 
                     clear comparison.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -284,7 +284,7 @@ export const execute = {
         {
             title: "Page 09 of 12",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Notice that when the search terminates without finding a
                     feasible solution, the results of two widely different
@@ -313,13 +313,13 @@ export const execute = {
                     to reach any previous page.
                     From there, you can continue forward with this session of the tutorial.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 10 of 12",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The tutorial just imposed the changes:<br />
                     <br />
@@ -334,7 +334,7 @@ export const execute = {
                     <p>
                     <br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 saveOutputSymbolConstraints('L_Solid'),
@@ -348,7 +348,7 @@ export const execute = {
         {
             title: "Page 11 of 12",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
                     </p>
@@ -359,7 +359,7 @@ export const execute = {
                     violations on all the constraints.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -368,7 +368,7 @@ export const execute = {
         {
             title: "Page 12 of 12 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Feel free to practice various ways to find feasible designs.  You can
                     start by repeating the first portion of this tutorial, then interrupting
@@ -387,7 +387,7 @@ export const execute = {
                     for selecting spring wire materials (with their associated
                     allowable stresses) and selecting spring end types.
                     </p>
-                </React.Fragment>
+                </>
             ),
         }
     ]

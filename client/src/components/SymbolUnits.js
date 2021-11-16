@@ -6,9 +6,9 @@ class SymbolUnits extends Component {
     render() {
 //        console.log('In SymbolUnits.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <td className={"text-nowrap align-middle " + (this.props.system_controls.show_units ? "" : "d-none") + this.props.className}>{this.props.element.units}</td>
-            </React.Fragment>
+            </>
         );
     }
 }

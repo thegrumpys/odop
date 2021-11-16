@@ -6,7 +6,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The following example provides the ODOP:Spring solution to a reference book 
                     problem illustrating the design of a compression spring .
@@ -33,13 +33,13 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.<br />
                     <br />
@@ -50,7 +50,7 @@ export const execute = {
                     Refer to  Problem 6  on page 233  of the 10th printing  (1978).
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -62,7 +62,7 @@ export const execute = {
         {
             title: "Page 03 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We will start by skipping the sailboat context and briefly restate the problem. 
                     Our challenge is to design a compression spring such that the following 
@@ -82,13 +82,13 @@ export const execute = {
                     used in an extension spring application.  
                     Compression to solid is probable in this application.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This problem statement is a bit unusual in that it has the design load coincide with the solid condition. 
                     Because the problem has specified a specific stress level, 
@@ -120,13 +120,13 @@ export const execute = {
                     associated with the handbook solution.
                     This will provide a bit of context in evaluating the handbook design.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The following changes have now been imposed by the demo session:
                     </p>
@@ -153,7 +153,7 @@ export const execute = {
                     In the process, the previous values of OD_Free and Wire_Dia will be restored so that the demo session
                     is not able to "cheat" and start the solution with the handbook answer already in place. 
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Material_Type",7),
@@ -164,7 +164,7 @@ export const execute = {
         {
             title: "Page 06 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The following changes have now been imposed by the demo session:
                     </p>
@@ -189,7 +189,7 @@ export const execute = {
                     &nbsp;
                     <br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Prop_Calc_Method",3),
@@ -201,7 +201,7 @@ export const execute = {
         {
             title: "Page 07 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo has now entered what is known about the problem. 
                     In summary, the changes were:
@@ -222,7 +222,7 @@ export const execute = {
                     Once we make a few adjustments to constraints supplied by the initialState starting point
                     the problem set up will be complete.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("End_Type",3),
@@ -237,7 +237,7 @@ export const execute = {
         {
             title: "Page 08 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     As per the discussion in 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/advancedSpringOperations" target="_blank" rel="noopener noreferrer">Design To Stress</a>&nbsp; 
@@ -258,7 +258,7 @@ export const execute = {
                     the demo session has established the same set of search algorithm tuning parameters 
                     that are described in the <b>Action : Execute : tweakPrefs</b> menu item.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 saveOutputSymbolConstraints('FS_2'),
@@ -272,7 +272,7 @@ export const execute = {
         {
             title: "Page 09 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now that we have expressed what we want the design to accomplish,
                     we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
@@ -284,13 +284,13 @@ export const execute = {
                     &nbsp;
                     <br />
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 10 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>Yes,  A feasible solution is available. Please take a moment to scroll through and view the values.</p>
                     <p>
                     Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
@@ -305,7 +305,7 @@ export const execute = {
                     Buckling should not be an immediate concern for a compression spring that will be fitted with drawbars
                     if utilized in a near static application.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -314,7 +314,7 @@ export const execute = {
         {
             title: "Page 11 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If you are still on the Report tab,
                     you may want to switch back to the tab containing the main page ("Design:").
@@ -334,13 +334,13 @@ export const execute = {
                     <br />
                     Look for the new value of Wire_Dia on the next page.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 12 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now that there has been a slight change in wire diameter, another search
                     will be required to make corresponding adjustments in the other parameters.
@@ -351,7 +351,7 @@ export const execute = {
                     <br /><br />
                     </p>
                     
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.142)
@@ -360,7 +360,7 @@ export const execute = {
         {
             title: "Page 13 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
                     Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
@@ -379,7 +379,7 @@ export const execute = {
                     <p>
                     Next, we'll make a detailed comparison with the handbook results.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -388,7 +388,7 @@ export const execute = {
         {
             title: "Page 14 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The handbook results:<br />
                     &nbsp; &nbsp;  wire diameter = 0.142 in.<br />
@@ -421,13 +421,13 @@ export const execute = {
                     of a maritime environment.
                     In any case, we should anticipate a short cycle life for this design.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 15 of 15 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Several more demo problems are available. 
                     They are named demo1, demo2, ... etc. 
@@ -440,7 +440,7 @@ export const execute = {
                     you can experiment with the various ODOP:Spring features, menus and reports. 
                     The HELP menu is a good place to start. </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         }
     ]

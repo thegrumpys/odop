@@ -160,7 +160,7 @@ class FileDelete extends Component {
     render() {
 //        console.log('In FileDelete.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     Delete&hellip;
                 </NavDropdown.Item>
@@ -193,7 +193,7 @@ class FileDelete extends Component {
                         <Button variant="primary" onClick={this.onDelete} disabled={!this.props.authState.isAuthenticated && this.state.names.length === 0 ? true : false}>Delete</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }

@@ -27,7 +27,7 @@ class ViewSymbolTable extends Component {
         var flags = ['','CONSTRAINED','FIXED','CONSTRAINED|FIXED','FDCL','CONSTRAINED|FDCL','FIXED|FDCL','CONSTRAINED|FIXED|FDCL']
         var yn = b => b ? 'Y' : 'N';
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     SymbolTable
                 </NavDropdown.Item>
@@ -115,7 +115,7 @@ class ViewSymbolTable extends Component {
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }  

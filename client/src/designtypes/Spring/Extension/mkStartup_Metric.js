@@ -10,7 +10,7 @@ export const execute = {
         {
             title: "Make Startup_Metric model",
             text: (
-                <React.Fragment>
+                <>
                     <p>Setting the following symbol table actions:</p>
                     <ol>
                         <li>{'loadInitialState("Spring/Extension","Metric"),'}</li>
@@ -18,7 +18,7 @@ export const execute = {
                         <li>{'changeLabelsValue([{name: "COMMENT", value: "Extension Spring default start point ... metric units"}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState("Spring/Extension","Metric"),

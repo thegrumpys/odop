@@ -733,7 +733,7 @@ class ActionTrade extends Component {
         const { store } = this.context;
         design = store.getState();
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.strategyToggle}>
                     Trade&hellip;
                 </NavDropdown.Item>
@@ -828,13 +828,13 @@ class ActionTrade extends Component {
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
                             <Form.Control type="number" className={
-                                    'text-right ' + (isNaN(parseFloat(this.state.defaultestString)) ? 'borders-invalid ' : '')
+                                    'text-right ' + (isNaN(parseFloat(this.state.defaultestString)) || parseFloat(this.state.defaultestString) < design.model.system_controls.smallnum ? 'borders-invalid ' : '')
                                 } value={this.state.defaultestString} onChange={this.onSizeChange}/>
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onSizeCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" disabled={isNaN(parseFloat(this.state.defaultestString))} onClick={this.onSizeContinue}>Continue</Button>
+                        <Button variant="primary" disabled={isNaN(parseFloat(this.state.defaultestString)) || parseFloat(this.state.defaultestString) < design.model.system_controls.smallnum} onClick={this.onSizeContinue}>Continue</Button>
                     </Modal.Footer>
                 </Modal>
                 {/*==================================================*/}
@@ -905,7 +905,7 @@ class ActionTrade extends Component {
                         <Button variant="primary" onClick={this.onNotFeasibleDone}> &nbsp; Done &nbsp; </Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 

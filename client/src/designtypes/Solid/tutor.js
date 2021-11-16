@@ -6,7 +6,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Welcome to the first ODOP tutorial session.
                     This session will provide an introduction to basic ODOP features and concepts
@@ -38,13 +38,13 @@ export const execute = {
                     To continue with this session, just click the "Next" button as you finish
                     reading each page (step). 
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this tutorial session are now established.
                     </p>
@@ -70,7 +70,7 @@ export const execute = {
                     strength of materials and the basics of spring design how to operate the program 
                     to create new designs.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Solid')
@@ -79,7 +79,7 @@ export const execute = {
         {
             title: "Page 03 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     So, as you are reading, please click the Help menu above.
                     It will drop down to provide a list of entries (topics) to choose from.
@@ -103,13 +103,13 @@ export const execute = {
                     <b>Getting Started</b>  provides a tour of the main page plus makes 
                     a few suggestions on how new users should approach learning the program.<br />
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Perhaps you have already discovered that ODOP provides a "tooltip" feature.
                     If using a touchpad or mouse, simply hover the cursor over any of the 
@@ -126,13 +126,13 @@ export const execute = {
                     just click the Next button to continue with this session of the tutorial.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In the rest of this section of the tutorial we will cover the basic analysis
                     and solution features offered by ODOP. 
@@ -147,21 +147,21 @@ export const execute = {
                     is illustrated on the next page.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 06 of 16",
             text: (
-                <React.Fragment>
+                <>
                    <Image fluid src="designtypes/Solid/RectangularSolidDiagram.png" alt="Rectangular Solid diagram"/>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 07 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This is a good time to take a close look at existing values.
                     You may need to scroll down to see everything.
@@ -181,13 +181,13 @@ export const execute = {
                     <p>
                     When you click on Next, the tutorial will impose a value of 20 inches on Length.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 08 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The tutorial has now entered a value of 20 inches for Length. 
                     In the shorthand summary that will be used in the remaining tutorial 
@@ -204,7 +204,7 @@ export const execute = {
                     The remaining Independent Variable values remain as established by the initialState
                     that was imposed at the start of this session. 
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Length",20)
@@ -213,7 +213,7 @@ export const execute = {
         {
             title: "Page 09 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Okay, that wasn't really very exciting. 
                     The objective here is to illustrate how ODOP can do simple analysis. 
@@ -233,13 +233,13 @@ export const execute = {
                     <br />
                     CHANGE Height 12
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 10 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Well, that brought a little color into the ODOP world !
                     </p>
@@ -261,7 +261,7 @@ export const execute = {
                     (positioned between the Value entry field and the Units field) 
                     to put Length into FIXed status.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Height",12)
@@ -270,7 +270,7 @@ export const execute = {
         {
             title: "Page 11 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now, the FIX checkbox for Length is checked.
                     </p>
@@ -283,7 +283,7 @@ export const execute = {
                     to any changes in the Independent Variables.
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Length')
@@ -292,7 +292,7 @@ export const execute = {
         {
             title: "Page 12 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now that we have expressed what we want the design to accomplish,
                     we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
@@ -306,13 +306,13 @@ export const execute = {
                     If a satisfactory solution is found, but one or more constraints remain violated by a
                     trivial amount, the program will display "<b>MARGINALLY FEASIBLE</b>" in the Result section.
                     </p>
-                </React.Fragment>
+                </>
             ),
         },
         {
             title: "Page 13 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
                     
                     <p>
@@ -327,7 +327,7 @@ export const execute = {
                     (output from the design equations).
                     </p>
                     <br /><br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -336,7 +336,7 @@ export const execute = {
         {
             title: "Page 14 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The tutorial has imposed:<br /><br />
                     FIX Girth 35.0
@@ -355,7 +355,7 @@ export const execute = {
                     <p>
                     Look for the results on the next page.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Girth', 35)
@@ -364,7 +364,7 @@ export const execute = {
         {
             title: "Page 15 of 16",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
                     </p>
@@ -401,7 +401,7 @@ export const execute = {
                             </ul>
                         </li>
                     </ul>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -410,7 +410,7 @@ export const execute = {
         {
             title: "Page 16 of 16 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Remember that it is always possible to restart a given session of
                     the ODOP demo / tutorial. 
@@ -434,7 +434,7 @@ export const execute = {
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP features, menus and reports. 
                     The HELP menu is a good place to start. </p>
-                </React.Fragment>
+                </>
             )
         }
     ]

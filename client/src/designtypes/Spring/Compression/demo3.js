@@ -6,7 +6,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The following example illustrates the use of ODOP:Spring in
                     the design of a compression spring from original specifications.
@@ -25,13 +25,13 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
@@ -52,7 +52,7 @@ export const execute = {
                           point 2  = 112.0  lb.    at   height  =  1.969 in.<br />
                           This spring must not set when compressed to solid.<br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression')
@@ -61,7 +61,7 @@ export const execute = {
         {
             title: "Page 03 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>Next, the demo session will enter everything we know about the problem. </p>
                     
                     <p>This is a good time to take a good look at the existing values.
@@ -71,13 +71,13 @@ export const execute = {
                     <p>You can scroll the page down to view the complete set of values. 
                     Scroll back up in order to use the Next button to continue.</p>
                     <br /><br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo has now entered what is known about the problem. 
                     In summary, the changes were:<br />
@@ -93,7 +93,7 @@ export const execute = {
                     <p>
                     The remaining Independent Variable values remain as established by the initialState. 
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Material_Type",3),
@@ -110,7 +110,7 @@ export const execute = {
         {
             title: "Page 05 of 11",
             text: (
-                <React.Fragment>
+                <>
                 <p>
                 Take a look at Report&nbsp;1&nbsp;(mini).
                 Simply select (click on) that tab to view the report.
@@ -124,13 +124,13 @@ export const execute = {
                 However in this case, we'll ignore the message and proceed with the search.
                 </p>
                 <br /><br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 06 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
                     <p>
                     Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
@@ -140,7 +140,7 @@ export const execute = {
                     than 80 % of available deflection.
                     </p>
                     <p>There is no warning about buckling so that is not a concern for this design.</p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -149,7 +149,7 @@ export const execute = {
         {
             title: "Page 07 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If you are still on the Report tab,
                     don't forget to switch back to the tab containing the main page ("Design:").
@@ -178,13 +178,13 @@ export const execute = {
                     stress at solid, factor of safety and weight of
                     the design produced by ODOP:Spring.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 08 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo session has now entered the handbook solution. 
                     We can look at the ODOP:Spring analysis of the handbook result.
@@ -200,7 +200,7 @@ export const execute = {
                     <p>
                     <br /><br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Wire_Dia",0.189),
@@ -212,7 +212,7 @@ export const execute = {
         {
             title: "Page 09 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Please take a moment to scroll through and view the values.
                     Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
@@ -229,13 +229,13 @@ export const execute = {
                     Point 1: &nbsp; 61.8 pounds at height = 2.362  inch<br />
                     Point 2: 112.0 pounds at height = 1.969  inch<br />
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 10 of 11",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If you are still on a Report tab,
                     don't forget to switch back to the tab containing the main page ("Design:").
@@ -257,13 +257,13 @@ export const execute = {
                     As can be expected, there is a weight penalty for a more conservative design. 
                     The ODOP:Spring design had a smaller factor of safety and less weight.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 11 of 11 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This completes our analysis of this problem.
                     </p>
@@ -281,7 +281,7 @@ export const execute = {
                     you can experiment with the various ODOP:Spring features, menus and reports. 
                     The HELP menu is a good place to start. 
                     </p>
-                </React.Fragment>
+                </>
             )
         }
     ]

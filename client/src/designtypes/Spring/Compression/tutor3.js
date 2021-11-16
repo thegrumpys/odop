@@ -6,7 +6,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In this tutorial session we will continue to develop the idea of
                     using "constraints" and "constraint levels" to express goals
@@ -30,13 +30,13 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
@@ -62,7 +62,7 @@ export const execute = {
                     constraint is violated. 
                     </p>
                     
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -74,7 +74,7 @@ export const execute = {
         {
             title: "Page 03 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The "Objective Value" is the thing that the search procedure
                     uses to measure how close a given design is to being feasible.
@@ -88,13 +88,13 @@ export const execute = {
                     its associated constraint.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The tutorial has changed a constraint: CHANGE  OD_Free MAX 0.9<br />
                     <br />
@@ -116,7 +116,7 @@ export const execute = {
                     
                     <p>You can scroll the page down to view the complete set of values. 
                     Scroll back up in order to use the Next button to continue.</p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 saveOutputSymbolConstraints('OD_Free'),
@@ -128,7 +128,7 @@ export const execute = {
         {
             title: "Page 05 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now that we have expressed what we want the design to accomplish,
                     we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
@@ -140,13 +140,13 @@ export const execute = {
                     The search will take place during the transition to the Next page.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 06 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     OK, let's take a look at the results.
                     Yes,  A feasible solution is available. Please take a moment to scroll through and view the values.
@@ -164,7 +164,7 @@ export const execute = {
                     than 80 % of available deflection.
                     </p>
                     <p>There is no warning about buckling so that is not a concern for this design.</p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -173,7 +173,7 @@ export const execute = {
         {
             title: "Page 07 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If you are still in the Report view,
                     don't forget to switch back to a view containing the main page.
@@ -196,13 +196,13 @@ export const execute = {
                     one quick example that combines a few FIXes and a few modified
                     constraint levels, then turn you loose for some more practice.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 08 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     For our sample problem let's suppose that we want to design a spring
                     to support a load of 280 pounds at a deflection of 5.5 inches. 
@@ -219,7 +219,7 @@ export const execute = {
                     FIX  Deflect_2   5.5<br />
                     CHANGE  OD_Free MAX  2.0<br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Force_2', 280.0),
@@ -232,7 +232,7 @@ export const execute = {
         {
             title: "Page 09 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Note the warning message on Report 1.
                     </p>
@@ -251,13 +251,13 @@ export const execute = {
                     <br /><br />
                     </p>
                     
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 10 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
                     Note that results of additional calculations are given in Report&nbsp;1.&nbsp; 
@@ -272,7 +272,7 @@ export const execute = {
                     <p>
                     Looks fine here. It is time to move on.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -281,7 +281,7 @@ export const execute = {
         {
             title: "Page 11 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If you are still on a Report view,
                     use the View menu to switch back to the main page.
@@ -294,7 +294,7 @@ export const execute = {
                     conditions in the initialState starting point.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -305,7 +305,7 @@ export const execute = {
         {
             title: "Page 12 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This time, let's see if we can handle a design that has both force and
                     length specified at each of two points.
@@ -332,7 +332,7 @@ export const execute = {
                     <p>
                     Search will do its thing during the transition to the Next page.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 fixSymbolValue('Force_1', 15.),
@@ -344,7 +344,7 @@ export const execute = {
         {
             title: "Page 13 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now for a look at the results ...
                     One would expect a bit more wire diameter to support that extra load.
@@ -354,7 +354,7 @@ export const execute = {
                     The lengths are essentially as requested.  This design is satisfactory.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             ),
             actions: [
                 search()
@@ -363,7 +363,7 @@ export const execute = {
         {
             title: "Page 14 of 15",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     This section of the tutorial has covered a lot of important ground.
                     We have seen how constraints can express one sided goals for the
@@ -384,13 +384,13 @@ export const execute = {
                     techniques for selecting spring wire materials (with their associated
                     allowable stresses) and selecting spring end types.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 15 of 15 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     More tutorial sessions and demo problems are available. 
                     They have names like tutor4, tutor5, demo1, demo2, ... etc. 
@@ -403,7 +403,7 @@ export const execute = {
                     you can experiment with the various ODOP:Spring features, menus and reports. 
                     The HELP menu is a good place to start. </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         }
     ]

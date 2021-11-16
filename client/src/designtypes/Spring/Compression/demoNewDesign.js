@@ -7,7 +7,7 @@ export const execute = {
         {
             title: "Session Now In Progress",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The following example illustrates the use of ODOP:Spring in
                     the design of a compression spring from original specifications.
@@ -27,13 +27,13 @@ export const execute = {
                     reading each page (step). 
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 02 of 14",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The initial conditions expected by this demo session are now established.
                     Before we make additional changes, let's review the problem statement:<br />
@@ -56,7 +56,7 @@ export const execute = {
                     Use a standard wire size.
                     Determine if a similar spring is available in the catalog.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
@@ -68,7 +68,7 @@ export const execute = {
         {
             title: "Page 03 of 14",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     In general, the easiest way to begin is to modify an existing design.
                     This demo session will modify this design until it meets the requirements 
@@ -83,29 +83,29 @@ export const execute = {
                     in the context of a force-deflection diagram.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 04 of 14",
             text: (
-                <React.Fragment>
+                <>
                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/About/png/DesignProcessFlowDiagram.png" alt="DesignProcessFlowDiagram"/>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 05 of 14",
             text: (
-                <React.Fragment>
+                <>
                    <Image fluid src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 06 of 14",
             text: (
-                <React.Fragment>
+                <>
                     <p>Next, the demo session will enter everything we know about the problem. </p>
                     
                     <p>This is a good time to take a good look at the existing values.
@@ -114,13 +114,13 @@ export const execute = {
                     <p>You can scroll the page down to view the complete set of values. 
                     Scroll back up in order to use the Next button to continue.</p>
                     <br /><br />
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 07 of 14",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     The demo has now entered what is known about the problem. 
                     In summary, the changes were:<br />
@@ -138,7 +138,7 @@ export const execute = {
                     <p>
                     The remaining Independent Variable values remain as established by the initialState. 
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 changeSymbolValue("Material_Type",3),
@@ -166,7 +166,7 @@ export const execute = {
         {
             title: "Page 08 of 14",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now that we have expressed what we want the design to accomplish,
                     we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
@@ -188,13 +188,13 @@ export const execute = {
                     <p>
                     This demo session will run the Search process during the transition to the next page.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 09 of 14",
             text: (
-                <React.Fragment>
+                <>
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
                     <p>
                     Note that results of additional calculations are given in the Reports. 
@@ -205,7 +205,7 @@ export const execute = {
                     than 80 % of available deflection.
                     </p>
                     <p>There is no warning about buckling so that is not a concern for this design.</p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 logUsage('event','demoNewDesign', { 'event_label': 'Page 09 of 14' }),
@@ -215,7 +215,7 @@ export const execute = {
         {
             title: "Page 10 of 14",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If you are still on a Report view,
                     don't forget to switch back to the Advanced view (the main page).
@@ -241,13 +241,13 @@ export const execute = {
                     Please confirm that Wire_Dia is FIXed at 0.135 and then click Next 
                     to move to the next page.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 11 of 14",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Now that there has been a slight change in wire diameter, another search
                     will be required to make corresponding adjustments in the other
@@ -262,7 +262,7 @@ export const execute = {
                     <p>
                     <br /><br />
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
             ]
@@ -270,7 +270,7 @@ export const execute = {
         {
             title: "Page 12 of 14",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
                     Note that results of additional calculations are given in the Reports. 
@@ -294,7 +294,7 @@ export const execute = {
                     So again, if this were a real design situation as opposed to a demo session,
                     this would be a good time to save your work before continuing.
                     </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 logUsage('event','demoNewDesign', { 'event_label': 'Page 12 of 14' }),
@@ -304,7 +304,7 @@ export const execute = {
         {
             title: "Page 13 of 14",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     If you are still on a Report view,
                     don't forget to switch back to the Advanced view.
@@ -334,13 +334,13 @@ export const execute = {
                     <p>
                     Please take this opportunity to select a spring from the catalog.
                     </p>
-                </React.Fragment>
+                </>
             )
         },
         {
             title: "Page 14 of 14 (last page)",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Several more demo problems are available. 
                     They are named demo1, demo2, ... etc. 
@@ -359,7 +359,7 @@ export const execute = {
                     Select (click on) the <b>Exit</b> button to end this tutorial session.
                     </p>
                     <br />
-                </React.Fragment>
+                </>
             )
         }
     ]

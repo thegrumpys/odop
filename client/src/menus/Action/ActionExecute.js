@@ -68,7 +68,7 @@ class ActionExecute extends Component {
 //        console.log('In ActionExecute.onExecute this.state.execute_name=',this.state.execute_name);
         var { execute } = require('../../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
 //        console.log('In ActionExecute.onExecute execute=',execute);
-        startExecute('Action : Execute : ' + this.state.execute_name, execute.steps);
+        startExecute('Action : Execute : ' + this.state.execute_name, this.state.execute_name, execute.steps);
     }
     
     onCancel() {
@@ -82,7 +82,7 @@ class ActionExecute extends Component {
     render() {
 //        console.log('In ActionExecute.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>
                     Execute&hellip;
                 </NavDropdown.Item>
@@ -106,7 +106,7 @@ class ActionExecute extends Component {
                         <Button variant="primary" onClick={this.onExecute}>Execute</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }  

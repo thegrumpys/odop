@@ -27,7 +27,7 @@ class ViewSymbolTableOffsets extends Component {
         var ip = 0;
         var il = 0;
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     SymbolTableOffsets
                 </NavDropdown.Item>
@@ -49,7 +49,7 @@ class ViewSymbolTableOffsets extends Component {
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }  

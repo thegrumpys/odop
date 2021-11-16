@@ -7,7 +7,7 @@ class NameValueUnitsHeaderCalcInput extends Component {
     render() {
 //        console.log('In NameValueUnitsHeaderCalcInput.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 { (this.props.symbol_table.reduce((accum,element)=>{if (element.type === "calcinput" && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
                     (<thead>
                         <tr>
@@ -36,7 +36,7 @@ class NameValueUnitsHeaderCalcInput extends Component {
                         </tr>
                     </thead>)
                 }
-            </React.Fragment>
+            </>
         );
     }
     

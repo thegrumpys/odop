@@ -72,7 +72,7 @@ class FileProperties extends Component {
     render() {
 //        console.log('In FileProperties.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     Properties&hellip;
                 </NavDropdown.Item>
@@ -109,7 +109,7 @@ class FileProperties extends Component {
                         <Button variant="primary" onClick={this.onApplyandClose}>Apply and Close</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }  

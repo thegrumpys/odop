@@ -208,7 +208,7 @@ class FileOpen extends Component {
     render() {
 //        console.log('In FileOpen.render this=',this);
         return (
-            <React.Fragment>
+            <>
                 <NavDropdown.Item onClick={this.toggle}>
                     Open&hellip;
                 </NavDropdown.Item>
@@ -244,7 +244,7 @@ class FileOpen extends Component {
                         <Button variant="primary" onClick={this.onOpen} disabled={this.state.names.length === 0 ? true : false}>Open</Button>
                     </Modal.Footer>
                 </Modal>
-            </React.Fragment>
+            </>
         );
     }
 }

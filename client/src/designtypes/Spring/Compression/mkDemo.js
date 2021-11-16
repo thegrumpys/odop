@@ -15,7 +15,7 @@ export const execute = {
         {
             title: "Make Demo model",
             text: (
-                <React.Fragment>
+                <>
                     <p>Setting the following symbol table actions:</p>
                     <ol>
                         <li>{'loadInitialState("Spring/Compression","US"),'}</li>
@@ -25,7 +25,7 @@ export const execute = {
                         <li>{'changeSymbolConstraint("%_Avail_Deflect", MAX, 98),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState("Spring/Compression","US"),
