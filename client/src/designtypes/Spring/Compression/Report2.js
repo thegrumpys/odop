@@ -12,7 +12,7 @@ class Report2 extends ReportBase {
             <React.Fragment>
                 <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
                 <br />
-                <table id="view1" className="report-table">
+                <table id="view1" className="report-table-borders">
                     <tbody>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
@@ -57,7 +57,7 @@ class Report2 extends ReportBase {
                 <br/>
                 kw2 = {this.kw2.toFixed(3)} &nbsp; &nbsp; (Applies &nbsp;after &nbsp; set removal)
                 <br/>
-                <table id="view2" className="report-table">
+                <table id="view2" className="report-table-borders">
                     <thead>
                         <tr>
                             <th colSpan="5"></th>
@@ -139,7 +139,7 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <br/>
-                <table id="view3" className="report-table">
+                <table id="view3" className="report-table-borders">
                     <thead>
                         <tr>
                             <td></td>
@@ -186,7 +186,7 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <hr/>
-                <table id="view4" className="report-table">
+                <table id="view4" className="report-table-borders">
                     <tbody>
                         <tr>
                             <td>Stress Amplitude</td>
@@ -201,10 +201,10 @@ class Report2 extends ReportBase {
                             <td>{this.props.symbol_table[o.Spring_Index].units}</td>
                         </tr>
                     </tbody>
+                </table>
                 <br />
                 Soderburg calculation
-                </table>
-                <table id="view5" className="report-table">
+                <table id="view5" className="report-table-borders">
                     <tbody>
                         <tr>
                             <td>Stress Mean</td>
@@ -249,7 +249,7 @@ class Report2 extends ReportBase {
                 <br />
                 Modified Goodman calculation
                 <br />
-                <table id="view6" className="report-table">
+                <table id="view6" className="report-table-borders">
                     <tbody>
                         <tr>
                             <td>{this.props.symbol_table[o.Material_Type].name}</td>
@@ -289,16 +289,21 @@ class Report2 extends ReportBase {
                             <td/>
                             <td/>
                             <td/>
-                            <td>{this.props.symbol_table[o.Cycle_Life].name}</td>
-                            <td>=</td>
-                            <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
-                            <td>{this.props.symbol_table[o.Cycle_Life].units}</td>
-                            <td> (est.)</td>
+                            {this.clWarnString === "" ?
+                                <>
+                                    <td>{this.props.symbol_table[o.Cycle_Life].name}</td>
+                                    <td>=</td>
+                                    <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
+                                    <td>{this.props.symbol_table[o.Cycle_Life].units}</td>
+                                    <td> (est.)</td>
+                                </>
+                            :
+                                <td colSpan="5">{this.clWarnString}</td>
+                            }
                         </tr>
                    </tbody>
-                   {this.clWarnString}
-                <br />
                 </table>
+                <br/>
             </React.Fragment>
         );
     }
