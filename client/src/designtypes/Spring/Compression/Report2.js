@@ -48,10 +48,22 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <hr/>
-                kw1 = {this.kw1.toFixed(3)} (Applies before set removal)
-                <br/>
-                kw2 = {this.kw2.toFixed(3)} (Applies after set removal)
-                <br/>
+                <table id="view2" className="report-table">
+                    <tbody>
+                        <tr>
+                            <td>kw1</td>
+                            <td>=</td>
+                            <td>{this.kw1.toFixed(3)}</td>
+                            <td className="text-left">(Applies before set removal)</td>
+                        </tr>
+                        <tr>
+                            <td>kw2</td>
+                            <td>=</td>
+                            <td>{this.kw2.toFixed(3)}</td>
+                            <td className="text-left">(Applies after set removal)</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <table id="view2" className="report-table">
                     <thead>
                         <tr>
