@@ -10,7 +10,7 @@ class Report1 extends ReportBase {
 //        console.log('In Report1.render this=',this);
         return (
             <React.Fragment>
-                <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
+                <h4>ODOP:Spring &nbsp; Compression Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></h4>
                 <br />
                 <b>
                 {this.hits > 0 && this.errmsg}{this.hits > 0 && <br />}

@@ -10,7 +10,7 @@ class Report2 extends ReportBase {
 //        console.log('In Report2.render this.props=',this.props);
         return (
             <React.Fragment>
-                <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
+                <h4>ODOP:Spring &nbsp; Compression Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></h4>
                 <br />
                 <table id="view1" className="report-table">
                     <tbody>
