@@ -17,34 +17,34 @@ class Report3 extends ReportBase {
                         <tr>
                             <td>{this.props.labels[o.Contact_person].name}:</td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Contact_person].value}</td>
-                            <td> &nbsp; &nbsp; </td>
+                            <td className="text-left" width="30%">{this.props.labels[o.Contact_person].value}</td>
+                            <td/>
                             <td>{this.props.labels[o.Phone___email].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Phone___email].value}</td>
+                            <td className="text-left" width="30%">{this.props.labels[o.Phone___email].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.Company_name].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Company_name].value}</td>
-                            <td> &nbsp; &nbsp; </td>
+                            <td className="text-left" width="30%">{this.props.labels[o.Company_name].value}</td>
+                            <td/>
                             <td>{this.props.labels[o.Date].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Date].value}</td>
+                            <td className="text-left" width="30%">{this.props.labels[o.Date].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.Street].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Street].value}</td>
-                            <td> &nbsp; &nbsp; </td>
+                            <td className="text-left" width="30%">{this.props.labels[o.Street].value}</td>
+                            <td/>
                             <td>{this.props.labels[o.Part_Number].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.Part_Number].value}</td>
+                            <td className="text-left" width="30%">{this.props.labels[o.Part_Number].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.City__State___Zip].name}: </td>
                             <td> &nbsp; </td>
-                            <td>{this.props.labels[o.City__State___Zip].value}</td>
+                            <td  className="text-left" width="30%">{this.props.labels[o.City__State___Zip].value}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -57,7 +57,7 @@ class Report3 extends ReportBase {
                             <td>=</td>
                             <td className="" colSpan="2">{this.props.symbol_table[o.Spring_Type].value}</td>
                             <td/>
-                            <td> &nbsp; &nbsp; </td>
+                            <td/>
                             <td>{this.props.symbol_table[o.Material_Type].name}</td>
                             <td>=</td>
                             <td className="text-left" colSpan="2">{this.matTypeValue}</td>
