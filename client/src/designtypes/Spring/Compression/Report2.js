@@ -12,7 +12,7 @@ class Report2 extends ReportBase {
             <React.Fragment>
                 <h4>ODOP:Spring &nbsp; Compression Spring Report</h4>
                 <br />
-                <table id="view1" className="report-table">
+                <table id="view1" className="report-table-borders">
                     <tbody>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
@@ -22,57 +22,56 @@ class Report2 extends ReportBase {
                             <td>{this.props.symbol_table[o.Material_Type].name}</td>
                             <td>=</td>
                             <td className="text-left" colSpan="2">{this.matTypeValue}</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Wire_Dia].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Wire_Dia].value.toFixed(4)}</td>
-                            <td>{this.props.symbol_table[o.Wire_Dia].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Wire_Dia].units}</td>
                             <td/>
                             <td>{this.props.symbol_table[o.Torsion_Modulus].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Torsion_Modulus].value.toFixed(0)}</td>
-                            <td>{this.props.symbol_table[o.Torsion_Modulus].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Torsion_Modulus].units}</td>
                         </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Index].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Spring_Index].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Spring_Index].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Spring_Index].units}</td>
                             <td/>
                             <td>{this.props.symbol_table[o.Tensile].name}</td>
                             <td>=</td>
                             <td>{this.tensileFixed0}</td>
-                            <td>{this.props.symbol_table[o.Tensile].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Tensile].units}</td>
                         </tr>
                     </tbody>
                 </table>
                 <hr/>
-                kw1 = {this.kw1.toFixed(3)} &nbsp; &nbsp; (Applies before set removal)
-                <br/>
-                kw2 = {this.kw2.toFixed(3)} &nbsp; &nbsp; (Applies &nbsp;after &nbsp; set removal)
-                <br/>
-                <table id="view2" className="report-table">
+                <table id="view2" className="report-table-borders">
                     <thead>
                         <tr>
-                            <th colSpan="5"></th>
-                            <th colSpan="3" style={{textAlign: 'center'}}>---- kw2 ----</th>
-                            <th colSpan="3" style={{textAlign: 'center'}}>---- kw1 ----</th>
+                            <th colSpan="4"></th>
+                            <th/>
+                            <th colSpan="2" className="text-center">kw2 = {this.kw1.toFixed(3)} (Applies before set removal)</th>
+                            <th/>
+                            <th colSpan="2" className="text-center">kw1 = {this.kw2.toFixed(3)} (Applies after set removal)</th>
+                            <th/>
+                            <th/>
                         </tr>
                         <tr>
                             <td></td>
-                            <td style={{textAlign: 'center'}}><b>Length</b><br />{this.props.symbol_table[o.L_Free].units}</td>
-                            <td style={{textAlign: 'center'}}><b>Deflect</b><br />{this.props.symbol_table[o.L_Free].units}</td>
-                            <td style={{textAlign: 'center'}}><b>Force</b><br />{this.props.symbol_table[o.Force_1].units}</td>
+                            <td className="text-center"><b>Length</b><br />{this.props.symbol_table[o.L_Free].units}</td>
+                            <td className="text-center"><b>Deflect</b><br />{this.props.symbol_table[o.L_Free].units}</td>
+                            <td className="text-center"><b>Force</b><br />{this.props.symbol_table[o.Force_1].units}</td>
                             <td/>
-                            <td style={{textAlign: 'center'}}><b>Stress</b><br />{this.props.symbol_table[o.Stress_1].units}</td>
-                            <td style={{textAlign: 'center'}}><b>%TS</b><br />%</td>
+                            <td className="text-center"><b>Stress</b><br />{this.props.symbol_table[o.Stress_1].units}</td>
+                            <td className="text-center"><b>%TS</b><br />%</td>
                             <td/>
-                            <td style={{textAlign: 'center'}}><b>Stress</b><br />{this.props.symbol_table[o.Stress_1].units}</td>
-                            <td style={{textAlign: 'center'}}><b>%TS</b><br />%</td>
+                            <td className="text-center"><b>Stress</b><br />{this.props.symbol_table[o.Stress_1].units}</td>
+                            <td className="text-center"><b>%TS</b><br />%</td>
                             <td/>
-                            <td style={{textAlign: 'center'}}><b>Static FS</b><br />{this.props.symbol_table[o.FS_2].units}</td>
+                            <td className="text-center"><b>Static FS</b><br />{this.props.symbol_table[o.FS_2].units}</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -135,15 +134,15 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <br/>
-                <table id="view3" className="report-table">
+                <table id="view3" className="report-table-borders">
                     <thead>
                         <tr>
                             <td></td>
-                            <td style={{textAlign: 'center'}}><b>Length</b><br />{this.props.symbol_table[o.L_Free].units}</td>
-                            <td style={{textAlign: 'center'}}><b>Deflect</b><br />{this.props.symbol_table[o.L_Free].units}</td>
-                            <td style={{textAlign: 'center'}}><b>Force</b><br />{this.props.symbol_table[o.Force_1].units}</td>
+                            <td className="text-center"><b>Length</b><br />{this.props.symbol_table[o.L_Free].units}</td>
+                            <td className="text-center"><b>Deflect</b><br />{this.props.symbol_table[o.L_Free].units}</td>
+                            <td className="text-center"><b>Force</b><br />{this.props.symbol_table[o.Force_1].units}</td>
                             <td/>
-                            <td style={{textAlign: 'center'}}><b>Energy</b><br />{this.props.symbol_table[o.Energy].units}</td>
+                            <td className="text-center"><b>Energy</b><br />{this.props.symbol_table[o.Energy].units}</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -182,91 +181,87 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <hr/>
-                <table id="view4" className="report-table">
+                <table id="view4" className="report-table-borders">
                     <tbody>
                         <tr>
                             <td>Helix Angle</td>
                             <td>=</td>
                             <td>{this.hlx_ang.toFixed(2)}</td>
                             <td>degrees</td>
+                            <td/>
+                            <td colSpan="5"/>
                         </tr>
                         <tr>
                             <td>Stress Amplitude</td>
                             <td>=</td>
                             <td>{((this.props.symbol_table[o.Stress_2].value - this.props.symbol_table[o.Stress_1].value) / 2.0).toFixed(0)}</td>
-                            <td>{this.props.symbol_table[o.Stress_1].units}</td>
-                            <td/>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
                             <td/>
                             <td>Stress Ratio</td>
                             <td>=</td>
                             <td>{(this.props.symbol_table[o.Stress_1].value / this.props.symbol_table[o.Stress_2].value).toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Spring_Index].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Spring_Index].units}</td>
                         </tr>
                     </tbody>
                 </table>
                 <br />
-                Soderburg calculation inputs:
-                <table id="view5" className="report-table">
+                <table id="view5" className="report-table-borders">
                     <tbody>
+                        <tr>
+                            <td colSpan="4" className="text-left">Soderburg calculation inputs:</td>
+                            <td/>
+                            <td colSpan="4"/>
+                        </tr>
                         <tr>
                             <td>Stress Mean</td>
                             <td>=</td>
                             <td>{((this.props.symbol_table[o.Stress_1].value + this.props.symbol_table[o.Stress_2].value) / 2.0).toFixed(0)}</td>
-                            <td>{this.props.symbol_table[o.Stress_1].units}</td>
-                            <td/>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
                             <td/>
                             <td>Stress Range</td>
                             <td>=</td>
                             <td>{(this.props.symbol_table[o.Stress_2].value - this.props.symbol_table[o.Stress_1].value).toFixed(0)}</td>
-                            <td>{this.props.symbol_table[o.Stress_1].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
                         </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Stress_Lim_Stat].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Stress_Lim_Stat].value.toFixed(0)}</td>
-                            <td>{this.props.symbol_table[o.Stress_Lim_Stat].units}</td>
-                            <td/>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_Lim_Stat].units}</td>
                             <td/>
                             <td>{this.props.symbol_table[o.Stress_Lim_Endur].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Stress_Lim_Endur].value.toFixed(0)}</td>
-                            <td>{this.props.symbol_table[o.Stress_Lim_Endur].units}</td>
-                            <td/>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_Lim_Endur].units}</td>
                         </tr>
                         <tr>
+                            <td/>
                             <td/>
                             <td/>
                             <td/>
                             <td/>
                             <td>{this.props.symbol_table[o.Life_Category].name}</td>
                             <td>=</td>
-                            <td>{this.lifeTargValue}</td>
-                            <td>{this.props.symbol_table[o.Life_Category].units}</td>
-                            <td/>
+                            <td colSpan="2" className="text-left">{this.lifeTargValue}</td>
                         </tr>
-                    </tbody>
-                </table>
-                <table id="view6" className="report-table">
-                    <tbody>
                         <tr>
-                            <td>Soderberg calculation output:</td>
-                            <td/>
-                            <td/>
-                            <td/>
+                            <td colSpan="4" className="text-left">Soderberg calculation output:</td>
                             <td/>
                             <td>{this.props.symbol_table[o.FS_CycleLife].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.FS_CycleLife].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.FS_CycleLife].units}</td>
-                            <td/>
+                            <td className="text-left">{this.props.symbol_table[o.FS_CycleLife].units}</td>
                         </tr>
                     </tbody>
                 </table>
                 <br />
-                Modified Goodman calculation inputs:
-                <br />
-                <table id="view7" className="report-table">
+                <table id="view7" className="report-table-borders">
                     <tbody>
+                        <tr>
+                            <td colSpan="4">Modified Goodman calculation inputs:</td>
+                            <td/>
+                            <td colSpan="4"/>
+                        </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Material_Type].name}</td>
                             <td>=</td>
@@ -274,15 +269,13 @@ class Report2 extends ReportBase {
                             <td/>
                             <td>{this.props.symbol_table[o.Life_Category].name}</td>
                             <td>=</td>
-                            <td/>
-                            <td className="text-left">{this.lifeTargValue}</td>
-                            <td>{this.props.symbol_table[o.Life_Category].units}</td>
+                            <td colSpan="2" className="text-left">{this.lifeTargValue}</td>
                         </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Tensile].name}</td>
                             <td>=</td>
                             <td>{this.tensileFixed0}</td>
-                            <td>{this.props.symbol_table[o.Tensile].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Tensile].units}</td>
                             <td/>
                             <td>{this.props.symbol_table[o.PC_Tensile_Endur].name}</td>
                             <td>=</td>
@@ -293,19 +286,16 @@ class Report2 extends ReportBase {
                             <td>{this.props.symbol_table[o.Stress_1].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Stress_1].value.toFixed(0)}</td>
-                            <td>{this.props.symbol_table[o.Stress_1].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
                             <td/>
                             <td>{this.props.symbol_table[o.Stress_2].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Stress_2].value.toFixed(0)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Stress_2].units}</td>
                        </tr>
-                   </tbody>
-                </table>
-                <table id="view8" className="report-table">
-                    <tbody>
                         <tr>
-                            <td>Modified Goodman calculation output:</td>
+                            <td colSpan="4" className="text-left">Modified Goodman calculation output:</td>
+                            <td/>
                             {this.clWarnString === "" ?
                                 <>
                                     <td>{this.props.symbol_table[o.Cycle_Life].name}</td>
