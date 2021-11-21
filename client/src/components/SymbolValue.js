@@ -139,42 +139,42 @@ class SymbolValue extends Component {
     }
 
     onChangeValidValue() {
-        console.log('In SymbolValue.onChangeValidValue this=',this);
+//        console.log('In SymbolValue.onChangeValidValue this=',this);
         this.setState({
             isInvalidValue: false,
         });
     }
 
     onChangeInvalidValue() {
-        console.log('In SymbolValue.onChangeInvalidValue this=',this);
+//        console.log('In SymbolValue.onChangeInvalidValue this=',this);
         this.setState({
             isInvalidValue: true,
         });
     }
 
     onChangeValidMinConstraint() {
-        console.log('In SymbolValue.onChangeValidMinConstraint this=',this);
+//        console.log('In SymbolValue.onChangeValidMinConstraint this=',this);
         this.setState({
             isInvalidMinConstraint: false,
         });
     }
 
     onChangeInvalidMinConstraint() {
-        console.log('In SymbolValue.onChangeInvalidMinConstraint this=',this);
+//        console.log('In SymbolValue.onChangeInvalidMinConstraint this=',this);
         this.setState({
             isInvalidMinConstraint: true,
         });
     }
 
     onChangeValidMaxConstraint() {
-        console.log('In SymbolValue.onChangeValidMaxConstraint this=',this);
+//        console.log('In SymbolValue.onChangeValidMaxConstraint this=',this);
         this.setState({
             isInvalidMaxConstraint: false,
         });
     }
 
     onChangeInvalidMaxConstraint() {
-        console.log('In SymbolValue.onChangeInvalidMaxConstraint this=',this);
+//        console.log('In SymbolValue.onChangeInvalidMaxConstraint this=',this);
         this.setState({
             isInvalidMaxConstraint: true,
         });
