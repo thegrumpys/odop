@@ -39,12 +39,12 @@ class SymbolValue extends Component {
         this.onContextMenu = this.onContextMenu.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);
         this.onClose = this.onClose.bind(this);
-        this.onValidValue = this.onValidValue.bind(this);
-        this.onInvalidValue = this.onInvalidValue.bind(this);
-        this.onValidMinConstraint = this.onValidMinConstraint.bind(this);
-        this.onInvalidMinConstraint = this.onInvalidMinConstraint.bind(this);
-        this.onValidMaxConstraint = this.onValidMaxConstraint.bind(this);
-        this.onInvalidMaxConstraint = this.onInvalidMaxConstraint.bind(this);
+        this.onChangeValidValue = this.onChangeValidValue.bind(this);
+        this.onChangeInvalidValue = this.onChangeInvalidValue.bind(this);
+        this.onChangeValidMinConstraint = this.onChangeValidMinConstraint.bind(this);
+        this.onChangeInvalidMinConstraint = this.onChangeInvalidMinConstraint.bind(this);
+        this.onChangeValidMaxConstraint = this.onChangeValidMaxConstraint.bind(this);
+        this.onChangeInvalidMaxConstraint = this.onChangeInvalidMaxConstraint.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
                 modal: false,
@@ -138,43 +138,43 @@ class SymbolValue extends Component {
         });
     }
 
-    onValidValue() {
-//        console.log('In SymbolValue.onValidValue this=',this);
+    onChangeValidValue() {
+        console.log('In SymbolValue.onChangeValidValue this=',this);
         this.setState({
             isInvalidValue: false,
         });
     }
 
-    onInvalidValue() {
-//        console.log('In SymbolValue.onInvalidValue this=',this);
+    onChangeInvalidValue() {
+        console.log('In SymbolValue.onChangeInvalidValue this=',this);
         this.setState({
             isInvalidValue: true,
         });
     }
 
-    onValidMinConstraint() {
-//        console.log('In SymbolValue.onValidMinConstraint this=',this);
+    onChangeValidMinConstraint() {
+        console.log('In SymbolValue.onChangeValidMinConstraint this=',this);
         this.setState({
             isInvalidMinConstraint: false,
         });
     }
 
-    onInvalidMinConstraint() {
-//        console.log('In SymbolValue.onInvalidMinConstraint this=',this);
+    onChangeInvalidMinConstraint() {
+        console.log('In SymbolValue.onChangeInvalidMinConstraint this=',this);
         this.setState({
             isInvalidMinConstraint: true,
         });
     }
 
-    onValidMaxConstraint() {
-//        console.log('In SymbolValue.onValidMaxConstraint this=',this);
+    onChangeValidMaxConstraint() {
+        console.log('In SymbolValue.onChangeValidMaxConstraint this=',this);
         this.setState({
             isInvalidMaxConstraint: false,
         });
     }
 
-    onInvalidMaxConstraint() {
-//        console.log('In SymbolValue.onInvalidMaxConstraint this=',this);
+    onChangeInvalidMaxConstraint() {
+        console.log('In SymbolValue.onChangeInvalidMaxConstraint this=',this);
         this.setState({
             isInvalidMaxConstraint: true,
         });
@@ -310,17 +310,17 @@ class SymbolValue extends Component {
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderIndependentVariable />
-                                    <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidValue} onInvalid={this.onInvalidValue} />
+                                    <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
                                 </>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderDependentVariable />
-                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidValue} onInvalid={this.onInvalidValue} />
+                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
                                 </>}
                             {this.props.element.type === "calcinput" && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderCalcInput />
-                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidValue} onInvalid={this.onInvalidValue} />
+                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
                                 </>}
                         </Table>
                         <Table size="sm" style={{backgroundColor: '#eee'}} className="mb-0">
@@ -336,24 +336,24 @@ class SymbolValue extends Component {
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <ConstraintsMinHeaderIndependentVariable />
-                                    <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMinConstraint} onInvalid={this.onInvalidMinConstraint} />
+                                    <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} />
                                 </>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <ConstraintsMinHeaderDependentVariable />
-                                    <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMinConstraint} onInvalid={this.onInvalidMinConstraint} />
+                                    <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} />
                                 </>}
                         </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <ConstraintsMaxHeaderIndependentVariable />
-                                    <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMaxConstraint} onInvalid={this.onInvalidMaxConstraint} />
+                                    <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} />
                                 </>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <ConstraintsMaxHeaderDependentVariable />
-                                    <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onValid={this.onValidMaxConstraint} onInvalid={this.onInvalidMaxConstraint} />
+                                    <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} />
                                 </>}
                         </Table>
                     </Modal.Body>

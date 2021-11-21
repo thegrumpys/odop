@@ -49,9 +49,9 @@ class ConstraintMaxRowIndependentVariable extends Component {
             }
             this.props.changeSymbolConstraint(this.props.element.name, MAX, value); // Update the model
             logValue(this.props.element.name,event.target.value,'MaxConstraint');
-            this.props.onValid();
+            this.props.onChangeValid();
         } else {
-            this.props.onInvalid();
+            this.props.onChangeInvalid();
         }
     }
     
@@ -61,7 +61,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
             valueString: this.props.element.cmax.toString(), // Update the display with unformatted value
             focused: true,
         });
-        this.props.onValid();
+        this.props.onChangeValid();
     }
     
     onBlur(event) {
@@ -70,7 +70,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
             valueString: this.props.element.cmax.toString(), // Update the display with formatted value
             focused: false,
         });
-        this.props.onValid();
+        this.props.onChangeValid();
     }
 
     onClick(event) {
@@ -222,13 +222,13 @@ class ConstraintMaxRowIndependentVariable extends Component {
 }
 
 ConstraintMaxRowIndependentVariable.propTypes = {
-    onValid: PropTypes.func,
-    onInvalid: PropTypes.func,
+    onChangeValid: PropTypes.func,
+    onChangeInvalid: PropTypes.func,
 }
 
 ConstraintMaxRowIndependentVariable.defaultProps = {
-    onValid: (()=>{}),
-    onInvalid: (()=>{}),
+    onChangeValid: (()=>{}),
+    onChangeInvalid: (()=>{}),
 }
 
 const mapStateToProps = state => ({

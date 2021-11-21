@@ -29,6 +29,16 @@ class FormControlTypeNumber extends Component {
         };
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.value !== this.props.value) {
+//            console.log('In FormControlTypeNumber.componentDidUpdate prevProps.value=',prevProps.value,'props.value=',this.props.value);
+            this.setState({
+                value: parseFloat(this.props.value),
+                valueString: this.props.value, // Update the display
+            });
+        }
+    }
+
     onChange(event) {
 //        console.log('In FormControlTypeNumber.onChange event.target.value=',event.target.value);
         var value = parseFloat(event.target.value);
@@ -71,7 +81,7 @@ class FormControlTypeNumber extends Component {
     }
 
     render() {
-//        console.log('In FormControlTypeNumber.render');
+//        console.log('In FormControlTypeNumber.render value=',this.state.value,'valueString=',this.state.valueString);
         var value_class = this.props.className + ' text-right';
         if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
             value_class += ' borders-invalid';

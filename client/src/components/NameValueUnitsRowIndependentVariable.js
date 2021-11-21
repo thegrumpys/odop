@@ -55,7 +55,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
     }
 
     render() {
-        console.log('In NameValueUnitsRowIndependentVariable.render this=',this);
+//        console.log('In NameValueUnitsRowIndependentVariable.render this=',this);
         // =======================================
         // Table Row
         // =======================================
@@ -69,7 +69,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <FormControlTypeNumber value={this.props.element.value.toODOPPrecision()} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
+                            <FormControlTypeNumber value={this.props.element.value} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />

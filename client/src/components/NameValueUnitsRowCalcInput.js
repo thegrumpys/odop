@@ -82,9 +82,9 @@ class NameValueUnitsRowCalcInput extends Component {
         if (!isNaN(value)) {
             this.props.changeSymbolValue(this.props.element.name, value); // Update the model
             logValue(this.props.element.name,event.target.value);
-            this.props.onValid();
+            this.props.onChangeValid();
         } else {
-            this.props.onInvalid();
+            this.props.onChangeInvalid();
         }
     }
     
@@ -94,7 +94,7 @@ class NameValueUnitsRowCalcInput extends Component {
             valueString: this.props.element.value.toString(), // Update the display with unformatted value
             focused: true
         });
-        this.props.onValid();
+        this.props.onChangeValid();
     }
     
     onBlur(event) {
@@ -103,7 +103,7 @@ class NameValueUnitsRowCalcInput extends Component {
             valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
             focused: false
         });
-        this.props.onValid();
+        this.props.onChangeValid();
     }
     
     onSelect(event) {
@@ -155,13 +155,13 @@ class NameValueUnitsRowCalcInput extends Component {
 }
 
 NameValueUnitsRowCalcInput.propTypes = {
-    onValid: PropTypes.func,
-    onInvalid: PropTypes.func,
+    onChangeValid: PropTypes.func,
+    onChangeInvalid: PropTypes.func,
 }
 
 NameValueUnitsRowCalcInput.defaultProps = {
-    onValid: (()=>{}),
-    onInvalid: (()=>{}),
+    onChangeValid: (()=>{}),
+    onChangeInvalid: (()=>{}),
 }
 
 const mapStateToProps = state => ({
