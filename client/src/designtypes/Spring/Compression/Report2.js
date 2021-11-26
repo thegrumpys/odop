@@ -271,60 +271,60 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <br />
-                <table id="view7" className="report-table">
-                    <tbody>
-                        <tr>
-                            <td colSpan="4">Modified Goodman calculation inputs:</td>
-                            <td/>
-                            <td colSpan="4"/>
-                        </tr>
-                        <tr>
-                            <td>{this.props.symbol_table[o.Material_Type].name}</td>
-                            <td>=</td>
-                            <td className="text-left" colSpan="2">{this.matTypeValue}</td>
-                            <td/>
-                            <td>{this.props.symbol_table[o.Life_Category].name}</td>
-                            <td>=</td>
-                            <td colSpan="2" className="text-left">{this.lifeTargValue}</td>
-                        </tr>
-                        <tr>
-                            <td>{this.props.symbol_table[o.Tensile].name}</td>
-                            <td>=</td>
-                            <td>{this.tensileFixed0}</td>
-                            <td className="text-left">{this.props.symbol_table[o.Tensile].units}</td>
-                            <td/>
-                            <td>{this.props.symbol_table[o.PC_Tensile_Endur].name}</td>
-                            <td>=</td>
-                            <td>{this.props.symbol_table[o.PC_Tensile_Endur].value.toFixed(0)}</td>
-                            <td className="text-left">{this.props.symbol_table[o.PC_Tensile_Endur].units}</td>
-                        </tr>
-                        <tr>
-                            <td>{this.props.symbol_table[o.Stress_1].name}</td>
-                            <td>=</td>
-                            <td>{this.props.symbol_table[o.Stress_1].value.toFixed(0)}</td>
-                            <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
-                            <td/>
-                            <td>{this.props.symbol_table[o.Stress_2].name}</td>
-                            <td>=</td>
-                            <td>{this.props.symbol_table[o.Stress_2].value.toFixed(0)}</td>
-                            <td className="text-left">{this.props.symbol_table[o.Stress_2].units}</td>
-                       </tr>
-                        <tr>
-                            <td colSpan="4" className="text-left">Modified Goodman calculation output:</td>
-                            <td/>
-                            {this.clWarnString === "" ?
-                                <>
-                                    <td>{this.props.symbol_table[o.Cycle_Life].name}</td>
+                {this.clWarnString === "" ?
+                    <>
+                        <table id="view7" className="report-table">
+                            <tbody>
+                                <tr>
+                                    <td colSpan="4">Modified Goodman calculation inputs:</td>
+                                    <td/>
+                                    <td colSpan="4"/>
+                                </tr>
+                                <tr>
+                                    <td>{this.props.symbol_table[o.Material_Type].name}</td>
                                     <td>=</td>
-                                    <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
-                                    <td className="text-left">{this.props.symbol_table[o.Cycle_Life].units + " (estimate)"}</td>
-                                </>
-                            :
-                                <td colSpan="5">{this.clWarnString}</td>
-                            }
-                       </tr>
-                   </tbody>
-                </table>
+                                    <td className="text-left" colSpan="2">{this.matTypeValue}</td>
+                                    <td/>
+                                    <td>{this.props.symbol_table[o.Life_Category].name}</td>
+                                    <td>=</td>
+                                    <td colSpan="2" className="text-left">{this.lifeTargValue}</td>
+                                </tr>
+                                <tr>
+                                    <td>{this.props.symbol_table[o.Tensile].name}</td>
+                                    <td>=</td>
+                                    <td>{this.tensileFixed0}</td>
+                                    <td className="text-left">{this.props.symbol_table[o.Tensile].units}</td>
+                                    <td/>
+                                    <td>{this.props.symbol_table[o.PC_Tensile_Endur].name}</td>
+                                    <td>=</td>
+                                    <td>{this.props.symbol_table[o.PC_Tensile_Endur].value.toFixed(0)}</td>
+                                    <td className="text-left">{this.props.symbol_table[o.PC_Tensile_Endur].units}</td>
+                                </tr>
+                                <tr>
+                                    <td>{this.props.symbol_table[o.Stress_1].name}</td>
+                                    <td>=</td>
+                                    <td>{this.props.symbol_table[o.Stress_1].value.toFixed(0)}</td>
+                                    <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
+                                    <td/>
+                                    <td>{this.props.symbol_table[o.Stress_2].name}</td>
+                                    <td>=</td>
+                                    <td>{this.props.symbol_table[o.Stress_2].value.toFixed(0)}</td>
+                                    <td className="text-left">{this.props.symbol_table[o.Stress_2].units}</td>
+                               </tr>
+                                <tr>
+                                    <td colSpan="4" className="text-left">Modified Goodman calculation output:</td>
+                                    <td/>
+                                            <td>{this.props.symbol_table[o.Cycle_Life].name}</td>
+                                            <td>=</td>
+                                            <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
+                                            <td className="text-left">{this.props.symbol_table[o.Cycle_Life].units + " (estimate)"}</td>
+                               </tr>
+                           </tbody>
+                        </table>
+                    </>
+                :
+                    <>{this.clWarnString}</>
+                }
                 <br/>
             </React.Fragment>
         );
