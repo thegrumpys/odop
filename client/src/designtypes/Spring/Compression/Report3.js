@@ -158,7 +158,6 @@ class Report3 extends ReportBase {
                     <thead>
                         <tr>
                             <th/>
-                            <th/>
                             <th className="text-right" width="15%">Free </th>
                             <th className="text-right" width="15%">1st Load</th>
                             <th className="text-right" width="15%">2nd Load</th>
@@ -169,7 +168,6 @@ class Report3 extends ReportBase {
                     <tbody>
                         <tr>
                             <td><b>Force</b></td>
-                            <td/>
                             <td>{(0.0).toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.Force_1].value.toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.Force_2].value.toFixed(2)}</td>
@@ -178,7 +176,6 @@ class Report3 extends ReportBase {
                         </tr>
                         <tr>
                             <td><b>Length</b></td>
-                            <td/>
                             <td>{this.props.symbol_table[o.L_Free].value.toFixed(3)}</td>
                             <td>{this.props.symbol_table[o.L_1].value.toFixed(3)}</td>
                             <td>{this.props.symbol_table[o.L_2].value.toFixed(3)}</td>
@@ -187,7 +184,6 @@ class Report3 extends ReportBase {
                         </tr>
                         <tr>
                             <td><b>Deflection</b></td>
-                            <td/>
                             <td>{(0.0).toFixed(3)}</td>
                             <td>{this.props.symbol_table[o.Deflect_1].value.toFixed(3)}</td>
                             <td>{this.props.symbol_table[o.Deflect_2].value.toFixed(3)}</td>
@@ -196,7 +192,6 @@ class Report3 extends ReportBase {
                         </tr>
                         <tr>
                             <td><b>Outside Dia.</b></td>
-                            <td/>
                             <td>{this.props.symbol_table[o.OD_Free].value.toFixed(3)}</td>
                             <td>{this.od_1.toFixed(3)}</td>
                             <td>{this.od_2.toFixed(3)}</td>
@@ -205,7 +200,6 @@ class Report3 extends ReportBase {
                         </tr>
                         <tr>
                             <td><b>Inside Dia.</b></td>
-                            <td/>
                             <td>{this.props.symbol_table[o.ID_Free].value.toFixed(3)}</td>
                             <td>{this.id_1.toFixed(3)}</td>
                             <td>{this.id_2.toFixed(3)}</td>
@@ -213,11 +207,7 @@ class Report3 extends ReportBase {
                             <td className="text-left">{this.props.symbol_table[o.ID_Free].units}</td>
                         </tr>
                         <tr>
-                            <td className="text-left"colSpan="7">w/o set kw = {this.kw1.toFixed(3)}</td>
-                        </tr>
-                        <tr>
-                            <td> ... <b>Stress</b></td>
-                            <td></td>
+                            <td><b>Stress*</b></td>
                             <td></td>
                             <td>{this.props.symbol_table[o.Stress_1].value.toFixed(0)}</td>
                             <td>{this.props.symbol_table[o.Stress_2].value.toFixed(0)}</td>
@@ -225,8 +215,7 @@ class Report3 extends ReportBase {
                             <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
                         </tr>
                         <tr>
-                            <td> ... <b>% Tensile</b></td>
-                            <td></td>
+                            <td><b>% Tensile*</b></td>
                             <td></td>
                             <td>{(this.props.symbol_table[o.Stress_1].value / this.dhat).toFixed(1)}</td>
                             <td>{(this.props.symbol_table[o.Stress_2].value / this.dhat).toFixed(1)}</td>
@@ -234,95 +223,97 @@ class Report3 extends ReportBase {
                             <td className="text-left">%</td>
                         </tr>
                         <tr>
-                            <td> ... <b>Static F.S.</b></td>
-                            <td></td>
+                            <td><b>Static F.S.*</b></td>
                             <td></td>
                             <td>{this.fs_1.toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.FS_2].value.toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.FS_Solid].value.toFixed(2)}</td>
                             <td className="text-left">{this.props.symbol_table[o.FS_Solid].units}</td>
                         </tr>
+                        <tr>
+                            <td/>
+                            <td className="text-left" colSpan="2"><b>*</b> without pre-set</td>
+                            <td className="text-left" colSpan="3">kw = {this.kw1.toFixed(3)}</td>
+                        </tr>
                     </tbody>
                 </table>
+                <br/>
+                Deflection at 2nd load is {this.props.symbol_table[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
+                {this.pcadmsg}{this.pcadmsg !== undefined && <br />}
+                {this.errmsg1}{this.errmsg1 !== undefined && <br />}
+                {this.errmsg0}
                 <hr/>
                 <table id="view4" className="report-table">
                     <tbody>
                         <tr>
-                            <td>{this.props.labels[o.Data_Source].name}: </td>
+                            <td className="text-left">{this.props.labels[o.Data_Source].name}: </td>
                             <td/>
-                            <td>{this.props.labels[o.Data_Source].value}</td>
+                            <td className="text-left" colSpan="4">{this.props.labels[o.Data_Source].value}</td>
+                        </tr>
+                        <tr>
+                            <td className="text-left">{this.props.labels[o.Mandril].name}: </td>
+                            <td/>
+                            <td className="text-left">{this.props.labels[o.Mandril].value}</td>
+                            <td className="text-left">{this.props.symbol_table[o.ID_Free].units}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td> &nbsp; &nbsp; </td>
+                        </tr>
+                        <tr>
+                            <td className="text-left">{this.props.labels[o.Wind].name}: </td>
+                            <td/>
+                            <td className="text-left">{this.props.labels[o.Wind].value}</td>
                             <td/>
                         </tr>
                         <tr>
-                            <td>{this.props.labels[o.Mandril].name}: </td>
+                            <td className="text-left">{this.props.labels[o.Shot_peen].name}: </td>
                             <td/>
-                            <td>{this.props.labels[o.Mandril].value}</td>
-                            <td>{this.props.symbol_table[o.ID_Free].units}</td>
-                        </tr>
-                        <tr>
-                            <td>{this.props.labels[o.Wind].name}: </td>
-                            <td/>
-                            <td>{this.props.labels[o.Wind].value}</td>
+                            <td className="text-left">{this.props.labels[o.Shot_peen].value}</td>
                             <td/>
                         </tr>
                         <tr>
-                            <td>{this.props.labels[o.Shot_peen].name}: </td>
+                            <td className="text-left">{this.props.labels[o.Stress_relieve_HT].name}: </td>
                             <td/>
-                            <td>{this.props.labels[o.Shot_peen].value}</td>
-                            <td/>
-                        </tr>
-                        <tr>
-                            <td>{this.props.labels[o.Stress_relieve_HT].name}: </td>
-                            <td/>
-                            <td>{this.props.labels[o.Stress_relieve_HT].value}</td>
+                            <td className="text-left">{this.props.labels[o.Stress_relieve_HT].value}</td>
                             <td/>
                         </tr>
                         <tr>
-                            <td>{this.props.labels[o.Finish].name}: </td>
+                            <td className="text-left">{this.props.labels[o.Finish].name}: </td>
                             <td/>
-                            <td>{this.props.labels[o.Finish].value}</td>
-                            <td/>
+                            <td className="text-left" colSpan="4">{this.props.labels[o.Finish].value}</td>
                         </tr>
                         <tr>
-                            <td>{this.props.labels[o.Squareness].name}: </td>
+                            <td className="text-left">{this.props.labels[o.Squareness].name}: </td>
                             <td/>
-                            <td>{this.props.labels[o.Squareness].value}</td>
+                            <td className="text-left">{this.props.labels[o.Squareness].value}</td>
                             <td className="text-left">(deg): </td>
                         </tr>
                         <tr>
-                            <td>{this.props.labels[o.End_use].name}: </td>
+                            <td className="text-left">{this.props.labels[o.End_use].name}: </td>
                             <td/>
-                            <td>{this.props.labels[o.End_use].value}</td>
+                            <td className="text-left" colSpan="4">{this.props.labels[o.End_use].value}</td>
+                        </tr>
+                        <tr>
+                            <td className="text-left">{this.props.labels[o.Fits_in___Works_over].name}: </td>
+                            <td/>
+                            <td className="text-left">{this.props.labels[o.Fits_in___Works_over].value}</td>
+                            <td className="text-left">{this.props.symbol_table[o.ID_Free].units}</td>
+                        </tr>
+                        <tr>
+                            <td className="text-left">{this.props.labels[o.Operating_temp].name}: </td>
+                            <td/>
+                            <td className="text-left">{this.props.labels[o.Operating_temp].value}</td>
                             <td/>
                         </tr>
                         <tr>
-                            <td>{this.props.labels[o.Fits_in___Works_over].name}: </td>
+                            <td className="text-left">{this.props.labels[o.Special_notes___tol].name}: </td>
                             <td/>
-                            <td>{this.props.labels[o.Fits_in___Works_over].value}</td>
-                            <td/>
-                        </tr>
-                        <tr>
-                            <td>{this.props.labels[o.Operating_temp].name}: </td>
-                            <td/>
-                            <td>{this.props.labels[o.Operating_temp].value}</td>
-                            <td/>
-                        </tr>
-                        <tr>
-                            <td>{this.props.labels[o.Special_notes___tol].name}: </td>
-                            <td/>
-                            <td>{this.props.labels[o.Special_notes___tol].value}</td>
-                            <td/>
+                            <td className="text-left" colSpan="4">{this.props.labels[o.Special_notes___tol].value}</td>
                         </tr>
                         <tr>
                             <td/>
                         </tr>
                     </tbody>
                 </table>
-                <hr/>
-                Deflection at load point 2 is {this.props.symbol_table[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
-                {this.pcadmsg}{this.pcadmsg !== undefined && <br />}
-                {this.errmsg1}{this.errmsg1 !== undefined && <br />}
-                {this.errmsg0}
                 <hr/>
                 <table id="view5" className="report-table">
                     <tbody>
@@ -333,7 +324,7 @@ class Report3 extends ReportBase {
                             <td> &nbsp; approved for mfg.&nbsp; </td>
                         </tr>
                         <tr>
-                            <td/>
+                            <td>&nbsp;</td>
                         </tr>
                         <tr>
                             <td> by _______________________ &nbsp; </td>
@@ -344,6 +335,7 @@ class Report3 extends ReportBase {
                         </tr>
                     </tbody>
                 </table>
+            <br/>
             </React.Fragment>
         );
     }
