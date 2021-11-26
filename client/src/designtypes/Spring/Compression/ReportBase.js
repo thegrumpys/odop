@@ -216,7 +216,12 @@ export class ReportBase extends Component {
         }
 //        console.log("this.matTypeValue, this.astmFedSpecValue = ", this.matTypeValue, this.astmFedSpecValue);
 
-            this.lifeTargValue = this.lifetarg[this.props.symbol_table[o.Life_Category].value];
+        this.lifeTargValue = this.lifetarg[this.props.symbol_table[o.Life_Category].value];
+        if (this.props.symbol_table[o.Life_Category].value <= 4){
+            this.peenValue = "Not peened";
+        } else {
+            this.peenValue = "Shot peened";
+        }
 
         this.energy_1 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_1].value * this.props.symbol_table[o.Deflect_1].value;
         this.energy_2 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_2].value * this.props.symbol_table[o.Deflect_2].value;

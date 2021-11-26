@@ -261,7 +261,7 @@ class Report2 extends ReportBase {
                             <td colSpan="2" className="text-left">{this.lifeTargValue}</td>
                         </tr>
                         <tr>
-                            <td colSpan="4" className="text-left">Soderberg calculation output:</td>
+                            <td colSpan="4" className="text-left">Soderberg calculation result:</td>
                             <td/>
                             <td>{this.props.symbol_table[o.FS_CycleLife].name}</td>
                             <td>=</td>
@@ -285,9 +285,9 @@ class Report2 extends ReportBase {
                                     <td>=</td>
                                     <td className="text-left" colSpan="2">{this.matTypeValue}</td>
                                     <td/>
-                                    <td>{this.props.symbol_table[o.Life_Category].name}</td>
-                                    <td>=</td>
-                                    <td colSpan="2" className="text-left">{this.lifeTargValue}</td>
+                                    <td> </td>
+                                    <td> &nbsp; </td>
+                                    <td colSpan="2" className="text-left">{this.peenValue}</td>
                                 </tr>
                                 <tr>
                                     <td>{this.props.symbol_table[o.Tensile].name}</td>
@@ -312,12 +312,12 @@ class Report2 extends ReportBase {
                                     <td className="text-left">{this.props.symbol_table[o.Stress_2].units}</td>
                                </tr>
                                 <tr>
-                                    <td colSpan="4" className="text-left">Modified Goodman calculation output:</td>
+                                    <td colSpan="4" className="text-left">Modified Goodman calculation result:</td>
                                     <td/>
-                                            <td>{this.props.symbol_table[o.Cycle_Life].name}</td>
-                                            <td>=</td>
-                                            <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
-                                            <td className="text-left">{this.props.symbol_table[o.Cycle_Life].units + " (estimate)"}</td>
+                                    <td>{this.props.symbol_table[o.Cycle_Life].name}</td>
+                                    <td>=</td>
+                                    <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
+                                    <td className="text-left">{this.props.symbol_table[o.Cycle_Life].units + " (estimate)"}</td>
                                </tr>
                            </tbody>
                         </table>
