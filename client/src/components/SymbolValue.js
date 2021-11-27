@@ -246,7 +246,7 @@ class SymbolValue extends Component {
                     <i className="fas fa-asterisk fa-sm icon"></i>
                 </OverlayTrigger>;
         }
-        value_class += "background-white ";
+        value_class += "background-white "; // Always white
 //        console.log('In SymbolValue.render value_class=',value_class);
         return (
             <>
@@ -257,13 +257,13 @@ class SymbolValue extends Component {
                                 <>
                                     {icon_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                            <Form.Control type="number" readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
+                                            <Form.Control type="number" readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} />
                                     </OverlayTrigger>
                                 </>
                             :
                                 <>
                                     {icon_tag}
-                                    <Form.Control type="number" readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
+                                    <Form.Control type="number" readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} />
                                 </>
                             )
                         : ''}
@@ -278,7 +278,7 @@ class SymbolValue extends Component {
                             :
                                 <>
                                     {icon_tag}
-                                    <Form.Control type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} onContextMenu={this.onContextMenu} />
+                                    <Form.Control type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                 </>
                             )
                         : ''}
@@ -327,7 +327,7 @@ class SymbolValue extends Component {
                             <tbody>
                                 <tr className="table-light">
                                     <td>
-                                      {value_fix_free_text}
+                                        {value_fix_free_text}
                                     </td>
                                 </tr>
                             </tbody>

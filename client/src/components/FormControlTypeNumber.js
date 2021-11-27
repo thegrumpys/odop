@@ -105,8 +105,7 @@ class FormControlTypeNumber extends Component {
                 value={this.state.focused ? this.state.valueString : this.state.value.toODOPPrecision()}
                 onChange={this.onChange}
                 onFocus={this.onFocus}
-                onBlur={this.onBlur}
-                onContextMenu={this.onContextMenu} />
+                onBlur={this.onBlur} />
         </>)
     }
 }
@@ -117,7 +116,6 @@ FormControlTypeNumber.propTypes = {
     onChangeInvalid: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
-    onContextMenu: PropTypes.func,
 }
 
 FormControlTypeNumber.defaultProps = {
@@ -126,7 +124,6 @@ FormControlTypeNumber.defaultProps = {
     onChangeInvalid: (()=>{}),
     onFocus: (()=>{}),
     onBlur: (()=>{}),
-    onContextMenu: (()=>{}),
 }
 
 const mapStateToProps = state => ({
