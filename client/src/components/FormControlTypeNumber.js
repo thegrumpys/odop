@@ -34,9 +34,10 @@ class FormControlTypeNumber extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.value !== this.props.value) {
 //            console.log('In FormControlTypeNumber.componentDidUpdate prevProps.value=',prevProps.value,'props.value=',this.props.value);
+            var value = parseFloat(this.props.value);
             this.setState({
-                value: parseFloat(this.props.value),
-                valueString: this.props.value, // Update the display
+                value: value,
+                valueString: value.toString(), // Update the display
             });
         }
     }
