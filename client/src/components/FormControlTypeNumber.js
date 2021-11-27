@@ -26,6 +26,7 @@ class FormControlTypeNumber extends Component {
         this.state = {
             value: value,
             valueString: value.toString(), // Update the display
+            isInvalid: false,
             focused: false,
         };
     }
@@ -47,12 +48,14 @@ class FormControlTypeNumber extends Component {
             this.setState({
                 value: value,
                 valueString: event.target.value, // Update the display
+                isInvalid: false,
             });
             this.props.onChangeValid(event); // Pass valid number onward
             this.props.onChange(event); // Pass valid number onward
         } else {
             this.setState({
                 valueString: event.target.value, // Update the display
+                isInvalid: true,
             });
             this.props.onChangeInvalid(event); // Pass invalid number onward
         }
@@ -69,15 +72,14 @@ class FormControlTypeNumber extends Component {
 
     onBlur(event) {
 //        console.log('In FormControlTypeNumber.onBlur event.target.value=',event.target.value);
-        event.target.value = this.state.value.toString();
-        if (!isNaN(this.state.value)) {
+        if (this.state.isInvalid) {
+            event.target.value = this.state.value.toString();
             this.props.onChangeValid(event); // Pass valid number onward
             this.props.onChange(event); // Pass valid number onward
-        } else {
-            this.props.onChangeInvalid(event); // Pass invalid number onward
         }
         this.setState({
             valueString: this.state.value.toODOPPrecision(), // Update the display with formatted value
+            isInvalid: false,
             focused: false,
         });
         this.props.onBlur(event);
