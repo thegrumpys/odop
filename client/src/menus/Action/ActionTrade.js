@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { NavDropdown, Modal, Button, Container, Row, Col, InputGroup, Form } from 'react-bootstrap';
+import { NavDropdown, Modal, Button, Container, Row, Col, InputGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, CONSTRAINED, FDCL } from '../../store/actionTypes';
 import { changeSymbolConstraint,
@@ -354,9 +354,7 @@ class ActionTrade extends Component {
         var design;
         const { store } = this.context;
         design = store.getState();
-        var dir = [];
-        var value;
-        dir = this.state.ldir.map((element,index)=>{
+        var dir = this.state.ldir.map((element,index)=>{
             var value;
             if (index === i) {
                 value = element * parseFloat(event.target.value);
@@ -366,17 +364,25 @@ class ActionTrade extends Component {
 //                console.log('i2=',i,' element=',element,' index=',index,' value=',value);
             }
             return value;
-        })
-//        console.log('dir=',dir);
+        });
+//        console.log('In ActionTrade.onArbitraryChangeValid dir=',dir);
         var greatestValue = dir.reduce((previousValue,currentValue) => {return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue}, 0.0);
-//        console.log('greatestValue=',greatestValue);
-        var notAllValid = isArbitraryInvalid.reduce((previousValue,currentValue) => {return previousValue || currentValue)}, false);
-//        console.log('notAllNumbers=',notAllNumbers);
-        var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllValid;
-//        console.log('arbitraryContinueDisabled=',arbitraryContinueDisabled);
+//        console.log('In ActionTrade.onArbitraryChangeValid greatestValue=',greatestValue);
+        var isArbitraryInvalid = this.state.isArbitraryInvalid.map((element, index) => {
+          if (index === i) {
+            return false;
+          } else {
+            return element;
+          }
+        });
+//        console.log('In ActionTrade.onArbitraryChangeValid isArbitraryInvalid=',isArbitraryInvalid);
+        var notAllArbitraryValid = isArbitraryInvalid.reduce((previousValue,currentValue) => {return previousValue || currentValue}, false);
+//        console.log('In ActionTrade.onArbitraryChangeValid notAllNumbers=',notAllArbitraryValid);
+        var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllArbitraryValid;
+//        console.log('In ActionTrade.onArbitraryChangeValid arbitraryContinueDisabled=',arbitraryContinueDisabled);
         this.setState({
             dir: dir,
-            
+            isArbitraryInvalid: isArbitraryInvalid,
             arbitraryContinueDisabled: arbitraryContinueDisabled,
         });
     }
@@ -384,6 +390,27 @@ class ActionTrade extends Component {
     onArbitraryChangeInvalid(i, event) {
 //        console.log('In ActionTrade.onArbitraryChangeInvalid i=',i,' event.target.value=',event.target.value);
 //        console.log('state=',this.state);
+        var design;
+        const { store } = this.context;
+        design = store.getState();
+        var greatestValue = this.state.dir.reduce((previousValue,currentValue) => {return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue}, 0.0);
+//        console.log('In ActionTrade.onArbitraryChangeInvalid greatestValue=',greatestValue);
+        var isArbitraryInvalid = this.state.isArbitraryInvalid.map((element, index) => {
+          if (index === i) {
+            return true;
+          } else {
+            return element;
+          }
+        });
+//        console.log('In ActionTrade.onArbitraryChangeInvalid isArbitraryInvalid=',isArbitraryInvalid);
+        var notAllArbitraryValid = isArbitraryInvalid.reduce((previousValue,currentValue) => {return previousValue || currentValue}, false);
+//        console.log('In ActionTrade.onArbitraryChangeInvalid notAllNumbers=',notAllArbitraryValid);
+        var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllArbitraryValid;
+//        console.log('In ActionTrade.onArbitraryChangeInvalid arbitraryContinueDisabled=',arbitraryContinueDisabled);
+        this.setState({
+            isArbitraryInvalid: isArbitraryInvalid,
+            arbitraryContinueDisabled: arbitraryContinueDisabled,
+        });
     }
     
     //===========================================================

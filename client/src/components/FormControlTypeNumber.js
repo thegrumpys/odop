@@ -22,9 +22,10 @@ class FormControlTypeNumber extends Component {
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
         this.onContextMenu = this.onContextMenu.bind(this);
+        var value = parseFloat(this.props.value);
         this.state = {
-            value: parseFloat(this.props.value),
-            valueString: this.props.value, // Update the display
+            value: value,
+            valueString: value.toString(), // Update the display
             focused: false,
         };
     }
@@ -68,6 +69,12 @@ class FormControlTypeNumber extends Component {
 
     onBlur(event) {
 //        console.log('In FormControlTypeNumber.onBlur event.target.value=',event.target.value);
+        event.target.value = this.state.value.toString();
+        if (!isNaN(this.state.value)) {
+            this.props.onChangeValid(event); // Pass valid number onward
+        } else {
+            this.props.onChangeInvalid(event); // Pass invalid number onward
+        }
         this.setState({
             valueString: this.state.value.toODOPPrecision(), // Update the display with formatted value
             focused: false,
