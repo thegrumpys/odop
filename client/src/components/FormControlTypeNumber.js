@@ -72,6 +72,7 @@ class FormControlTypeNumber extends Component {
         event.target.value = this.state.value.toString();
         if (!isNaN(this.state.value)) {
             this.props.onChangeValid(event); // Pass valid number onward
+            this.props.onChange(event); // Pass valid number onward
         } else {
             this.props.onChangeInvalid(event); // Pass invalid number onward
         }
