@@ -268,13 +268,19 @@ class Report3 extends ReportBase {
                             <td className="text-left">{this.props.labels[o.Shot_peen].name}: </td>
                             <td/>
                             <td className="text-left">{this.props.labels[o.Shot_peen].value}</td>
-                            <td/>
+                            <td colSpan="3" className="text-left">{"(calculations assume: " + this.peenValue + ")"}</td>
                         </tr>
                         <tr>
                             <td className="text-left">{this.props.labels[o.Stress_relieve_HT].name}: </td>
                             <td/>
                             <td className="text-left">{this.props.labels[o.Stress_relieve_HT].value}</td>
                             <td/>
+                        </tr>
+                        <tr>
+                            <td className="text-left">{this.props.labels[o.Pre_set].name}: </td>
+                            <td/>
+                            <td className="text-left">{this.props.labels[o.Pre_set].value}</td>
+                            <td className="text-left" colSpan="3">(calculations assume: No pre-set)</td>
                         </tr>
                         <tr>
                             <td className="text-left">{this.props.labels[o.Finish].name}: </td>

@@ -862,11 +862,15 @@ export const initialState = {
         },
         {
             "name": "Shot peen",
-            "value": "yes no"
+            "value": "yes no; details"
         },
         {
             "name": "Stress relieve/HT",
             "value": ""
+        },
+        {
+            "name": "Pre-set",
+            "value": "no"
         },
         {
             "name": "Finish",

@@ -48,6 +48,7 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <hr/>
+                Calculations assume: {this.peenValue}; No set removal.
                 <table id="view2" className="report-table">
                     <tbody>
                         <tr>
