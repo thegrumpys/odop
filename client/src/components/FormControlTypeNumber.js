@@ -18,6 +18,7 @@ class FormControlTypeNumber extends Component {
     constructor(props, context) {
 //        console.log('In FormControlTypeNumber.constructor props=',props,'context=',context);
         super(props, context);
+        this.onClick = this.onClick.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -42,6 +43,11 @@ class FormControlTypeNumber extends Component {
         }
     }
 
+    onClick(event) {
+//        console.log('In FormControlTypeNumber.onClick event.target.value=',event.target.value);
+        this.props.onClick(event); // Pass valid number onward
+    }
+
     onChange(event) {
 //        console.log('In FormControlTypeNumber.onChange event.target.value=',event.target.value);
         var value = parseFloat(event.target.value);
@@ -64,10 +70,12 @@ class FormControlTypeNumber extends Component {
 
     onFocus(event) {
 //        console.log('In FormControlTypeNumber.onFocus event.target.value=',event.target.value);
-        this.setState({
-            valueString: this.state.value.toString(), // Update the display with unformatted value
-            focused: true,
-        });
+        if (!this.props.readOnly) {
+            this.setState({
+                valueString: this.state.value.toString(), // Update the display with unformatted value
+                focused: true,
+            });
+        }
         this.props.onFocus(event);
     }
 
@@ -100,9 +108,11 @@ class FormControlTypeNumber extends Component {
         return (<>
             <Form.Control type="number"
                 disabled={this.props.disabled}
+                readOnly={this.props.readOnly}
                 className={value_class}
                 step="any"
                 value={this.state.focused ? this.state.valueString : this.state.value.toODOPPrecision()}
+                onClick={this.onClick}
                 onChange={this.onChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur} />
@@ -111,6 +121,11 @@ class FormControlTypeNumber extends Component {
 }
 
 FormControlTypeNumber.propTypes = {
+    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
+    value: PropTypes.string,
+    className: PropTypes.string,
+    onClick: PropTypes.func,
     onChange: PropTypes.func,
     onChangeValid: PropTypes.func,
     onChangeInvalid: PropTypes.func,
@@ -119,6 +134,11 @@ FormControlTypeNumber.propTypes = {
 }
 
 FormControlTypeNumber.defaultProps = {
+    disabled: false,
+    readOnly: false,
+    value: '',
+    className: '',
+    onClick: (()=>{}),
     onChange: (()=>{}),
     onChangeValid: (()=>{}),
     onChangeInvalid: (()=>{}),

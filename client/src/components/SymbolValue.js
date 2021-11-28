@@ -17,6 +17,7 @@ import ConstraintsMaxHeaderDependentVariable from './ConstraintsMaxHeaderDepende
 import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
 import NameValueUnitsHeaderCalcInput from './NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
+import FormControlTypeNumber from './FormControlTypeNumber';
 import { logValue } from '../logUsage';
 import { logUsage } from '../logUsage';
 
@@ -197,7 +198,7 @@ class SymbolValue extends Component {
 
     render() {
 //        console.log('In SymbolValue.render this=',this);
-        var value_class = 'text-right ';
+        var value_class = '';
         var value_tooltip;
         var value_fix_free_text = '';
         var icon_tag = '';
@@ -257,13 +258,13 @@ class SymbolValue extends Component {
                                 <>
                                     {icon_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                            <Form.Control type="number" readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} />
+                                            <FormControlTypeNumber readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                     </OverlayTrigger>
                                 </>
                             :
                                 <>
                                     {icon_tag}
-                                    <Form.Control type="number" readOnly className={value_class} step="any" value={this.props.element.value.toODOPPrecision()} onClick={this.onContextMenu} />
+                                    <FormControlTypeNumber readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                 </>
                             )
                         : ''}
