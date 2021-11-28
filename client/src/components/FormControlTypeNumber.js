@@ -123,7 +123,7 @@ class FormControlTypeNumber extends Component {
 FormControlTypeNumber.propTypes = {
     disabled: PropTypes.bool,
     readOnly: PropTypes.bool,
-    value: PropTypes.string,
+    value: PropTypes.any,
     className: PropTypes.string,
     onClick: PropTypes.func,
     onChange: PropTypes.func,
