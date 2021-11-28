@@ -316,7 +316,7 @@ class SymbolValue extends Component {
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderDependentVariable />
-                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
+                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} toolTip="Change value by enabling Fixed status and changing the constraint value, or by enabling one or both contraints and changing the corresponding value(s)" />
                                 </>}
                             {this.props.element.type === "calcinput" && !this.props.element.hidden &&
                                 <>
