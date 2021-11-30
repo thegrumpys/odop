@@ -255,14 +255,12 @@ class Report3 extends ReportBase {
                             <td/>
                             <td className="text-left">{this.props.labels[o.Mandril].value}</td>
                             <td className="text-left">{this.props.symbol_table[o.ID_Free].units}</td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td> &nbsp; &nbsp; </td>
+                            <td colSpan="2"></td>
                         </tr>
                         <tr>
                             <td className="text-left">{this.props.labels[o.Wind].name}: </td>
                             <td/>
-                            <td className="text-left">{this.props.labels[o.Wind].value}</td>
-                            <td/>
+                            <td className="text-left" colSpan="2">{this.props.labels[o.Wind].value}</td>
                         </tr>
                         <tr>
                             <td className="text-left">{this.props.labels[o.Shot_peen].name}: </td>
@@ -273,8 +271,7 @@ class Report3 extends ReportBase {
                         <tr>
                             <td className="text-left">{this.props.labels[o.Stress_relieve_HT].name}: </td>
                             <td/>
-                            <td className="text-left">{this.props.labels[o.Stress_relieve_HT].value}</td>
-                            <td/>
+                            <td className="text-left" colSpan="4">{this.props.labels[o.Stress_relieve_HT].value}</td>
                         </tr>
                         <tr>
                             <td className="text-left">{this.props.labels[o.Pre_set].name}: </td>
@@ -291,7 +288,7 @@ class Report3 extends ReportBase {
                             <td className="text-left">{this.props.labels[o.Squareness].name}: </td>
                             <td/>
                             <td className="text-left">{this.props.labels[o.Squareness].value}</td>
-                            <td className="text-left">(deg): </td>
+                            <td className="text-left">deg.</td>
                         </tr>
                         <tr>
                             <td className="text-left">{this.props.labels[o.End_use].name}: </td>
