@@ -23,8 +23,7 @@ class Report1 extends ReportBase {
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
                             <td>=</td>
-                            <td className="" colSpan="2">{this.props.symbol_table[o.Spring_Type].value}</td>
-                            <td/>
+                            <td className="text-right" colSpan="2">{this.props.symbol_table[o.Spring_Type].value}</td>
                             <td/>
                             <td>{this.props.symbol_table[o.Material_Type].name}</td>
                             <td>=</td>
@@ -36,7 +35,6 @@ class Report1 extends ReportBase {
                             <td>{this.props.symbol_table[o.Wire_Dia].value.toFixed(4)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Wire_Dia].units}</td>
                             <td/>
-                            <td/>
                             <td>{this.props.symbol_table[o.End_Type].name}</td>
                             <td>=</td>
                             <td className="text-left" colSpan="2">{this.et_tab[this.props.symbol_table[o.End_Type].value][0]}</td>
@@ -46,7 +44,6 @@ class Report1 extends ReportBase {
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Spring_Index].value.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Spring_Index].units}</td>
-                            <td/>
                             <td/>
                             <td>{this.props.symbol_table[o.Coils_T].name}</td>
                             <td>=</td>
@@ -59,7 +56,6 @@ class Report1 extends ReportBase {
                             <td>{this.props.symbol_table[o.Rate].value.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Rate].units}</td>
                             <td/>
-                            <td/>
                             <td>{this.props.symbol_table[o.Coils_A].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Coils_A].value.toFixed(3)}</td>
@@ -71,90 +67,55 @@ class Report1 extends ReportBase {
                 <table id="view2" className="report-table">
                     <thead>
                         <tr>
-                            <th></th>
-                            <td/>
-                            <th>Length</th>
-                            <td/>
-                            <th>Deflect</th>
-                            <td/>
-                            <th>Force</th>
-                            <td/>
-                            <th>&nbsp; OD &nbsp;</th>
-                            <td/>
-                            <th>&nbsp; ID &nbsp; </th>
-                            <td/>
-                            <th>&nbsp;Stress</th>
-                            <td/>
-                            <th>Static FS</th>
+                            <td></td>
+                            <td style={{textAlign: 'center'}}><b>Length</b><br />{this.props.symbol_table[o.L_Free].units}</td>
+                            <td style={{textAlign: 'center'}}><b>Deflect</b><br />{this.props.symbol_table[o.L_Free].units}</td>
+                            <td style={{textAlign: 'center'}}><b>Force</b><br />{this.props.symbol_table[o.Force_1].units}</td>
+                            <td style={{textAlign: 'center'}}><b>OD</b><br />{this.props.symbol_table[o.OD_Free].units}</td>
+                            <td style={{textAlign: 'center'}}><b>ID</b><br />{this.props.symbol_table[o.ID_Free].units}</td>
+                            <td style={{textAlign: 'center'}}><b>Stress</b><br />{this.props.symbol_table[o.Stress_1].units}</td>
+                            <td style={{textAlign: 'center'}}><b>Static FS</b><br />{this.props.symbol_table[o.FS_2].units}</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><b>Initial</b></td>
-                            <td/>
                             <td>{this.props.symbol_table[o.L_Free].value.toFixed(3)}</td>
-                            <td/>
                             <td>{(0.0).toFixed(4)}</td>
-                            <td/>
                             <td>{this.props.symbol_table[o.Initial_Tension].value.toFixed(2)}</td>
-                            <td/>
                             <td>{this.props.symbol_table[o.OD_Free].value.toFixed(4)}</td>
-                            <td/>
                             <td>{this.props.symbol_table[o.ID_Free].value.toFixed(4)}</td>
-                            <td/>
                             <td>{this.props.symbol_table[o.Stress_Initial].value.toFixed(0)}</td>
-                            <td/>
                             <td>{(this.props.symbol_table[o.Stress_Lim_Stat].value / this.props.symbol_table[o.Stress_Initial].value).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td><b>1</b></td>
-                            <td/>
                             <td>{this.props.symbol_table[o.L_1].value.toFixed(3)}</td>
-                            <td/>
                             <td>{this.props.symbol_table[o.Deflect_1].value.toFixed(4)}</td>
-                            <td/>
                             <td>{this.props.symbol_table[o.Force_1].value.toFixed(2)}</td>
-                            <td/>
                             <td>{this.od_1.toFixed(4)}</td>
-                            <td/>
                             <td>{this.id_1.toFixed(4)}</td>
-                            <td/>
                             <td>{this.props.symbol_table[o.Stress_1].value.toFixed(0)}</td>
-                            <td/>
                             <td>{this.fs_1.toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td><b>2</b></td>
-                            <td/>
                             <td>{this.props.symbol_table[o.L_2].value.toFixed(3)}</td>
-                            <td/>
                             <td>{this.props.symbol_table[o.Deflect_2].value.toFixed(4)}</td>
-                            <td/>
                             <td>{this.props.symbol_table[o.Force_2].value.toFixed(2)}</td>
-                            <td/>
                             <td>{this.od_2.toFixed(4)}</td>
-                            <td/>
                             <td>{this.id_2.toFixed(4)}</td>
-                            <td/>
                             <td>{this.props.symbol_table[o.Stress_2].value.toFixed(0)}</td>
-                            <td/>
                             <td>{this.props.symbol_table[o.FS_2].value.toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td><b>MaxSafe</b></td>
-                            <td/>
                             <td>{(this.props.symbol_table[o.L_Free].value + this.safe_travel).toFixed(3)}</td>
-                            <td/>
                             <td>{this.safe_travel.toFixed(4)}</td>
-                            <td/>
                             <td>{this.safe_load.toFixed(2)}</td>
-                            <td/>
                             <td>{this.od_maxsafe.toFixed(4)}</td>
-                            <td/>
                             <td>{this.id_maxsafe.toFixed(4)}</td>
-                            <td/>
                             <td>{this.props.symbol_table[o.Stress_Lim_Stat].value.toFixed(0)}</td>
-                            <td/>
                             <td>{(1.0).toFixed(2)}</td>
                         </tr>
                     </tbody>
@@ -168,7 +129,6 @@ class Report1 extends ReportBase {
                             <td>{this.safe_load.toFixed(3)}</td>
                             <td className="text-left">{this.safe_load_u}</td>
                             <td/>
-                            <td/>
                             <td>{this.len_lbl}</td>
                             <td>=</td>
                             <td>{this.wire_len_t.toFixed(3)}</td>
@@ -179,7 +139,6 @@ class Report1 extends ReportBase {
                             <td>=</td>
                             <td>{this.props.symbol_table[o.L_Stroke].value.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.L_Stroke].units}</td>
-                            <td/>
                             <td/>
                             <td>{this.props.symbol_table[o.Weight].name}</td>
                             <td>=</td>
@@ -192,7 +151,6 @@ class Report1 extends ReportBase {
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
                             <td className="text-left">{this.cycle_life_u}</td>
-                            <td/>
                             <td/>
                             <td>({this.props.symbol_table[o.Cycle_Life].name}</td>
                             <td>&nbsp;</td>
