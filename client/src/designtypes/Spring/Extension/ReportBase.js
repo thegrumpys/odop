@@ -13,13 +13,15 @@ export class ReportBase extends Component {
     render() {
 //        console.log('In ReportBase.render this=',this);
         const Close_Wound_Coil = 5;
-
         /*  Bring in material properties table  */
         if (this.props.symbol_table[o.Material_File].value === "mat_SI.json")
             this.m_tab = require('../mat_SI.json');
         else
             this.m_tab = require('../mat_ips.json');
         this.et_tab = require('./endtypes.json');
+
+        /*  Bring in life target table  */
+            this.lifetarg = require('./lifetarget.json');
 
         this.hits = 0;
         this.errmsg = "";
@@ -121,6 +123,18 @@ export class ReportBase extends Component {
             this.astmFedSpecValue = "N/A";
         }
 //        console.log("this.matTypeValue, this.astmFedSpecValue = ", this.matTypeValue, this.astmFedSpecValue);
+
+        this.lifeTargValue = this.lifetarg[this.props.symbol_table[o.Life_Category].value];
+        if (this.props.symbol_table[o.Life_Category].value <= 4){
+            this.peenValue = "Not peened";
+        } else {
+            this.peenValue = "Shot peened";
+        }
+
+        this.energy_1 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_1].value * this.props.symbol_table[o.Deflect_1].value;
+        this.energy_2 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_2].value * this.props.symbol_table[o.Deflect_2].value;
+        this.energy_MS = 0.5 * this.props.symbol_table[o.Rate].value * this.safe_travel * this.safe_travel;
+
         return null;
     }
 

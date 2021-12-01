@@ -17,7 +17,7 @@ class Report2 extends ReportBase {
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
                             <td>=</td>
-                            <td className="" colSpan="2">{this.props.symbol_table[o.Spring_Type].value}</td>
+                            <td className="text-left" colSpan="2">{this.props.symbol_table[o.Spring_Type].value}</td>
                             <td/>
                             <td>{this.props.symbol_table[o.Material_Type].name}</td>
                             <td>=</td>
@@ -118,7 +118,7 @@ class Report2 extends ReportBase {
                             <td>{this.props.symbol_table[o.Stress_1].value.toFixed(0)}</td>
                             <td>{(this.props.symbol_table[o.Stress_1].value / this.dhat).toFixed(1)}</td>
                             <td/>
-                            <td>{this.fs_1.toFixed(3)}</td>
+                            <td>{this.fs_1.toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td><b>2</b></td>
@@ -132,7 +132,7 @@ class Report2 extends ReportBase {
                             <td>{this.props.symbol_table[o.Stress_2].value.toFixed(0)}</td>
                             <td>{(this.props.symbol_table[o.Stress_2].value / this.dhat).toFixed(1)}</td>
                             <td/>
-                            <td>{this.props.symbol_table[o.FS_2].value.toFixed(3)}</td>
+                            <td>{this.props.symbol_table[o.FS_2].value.toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td><b>Solid</b></td>
@@ -146,7 +146,7 @@ class Report2 extends ReportBase {
                             <td>{this.props.symbol_table[o.Stress_Solid].value.toFixed(0)}</td>
                             <td>{(this.props.symbol_table[o.Stress_Solid].value / this.dhat).toFixed(1)}</td>
                             <td/>
-                            <td>{this.props.symbol_table[o.FS_Solid].value.toFixed(3)}</td>
+                            <td>{this.props.symbol_table[o.FS_Solid].value.toFixed(2)}</td>
                         </tr>
                     </tbody>
                 </table>
