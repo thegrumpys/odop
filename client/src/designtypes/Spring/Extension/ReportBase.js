@@ -118,9 +118,11 @@ export class ReportBase extends Component {
         if (this.props.symbol_table[o.Prop_Calc_Method].value === 1){
             this.matTypeValue = this.m_tab[this.props.symbol_table[o.Material_Type].value][mo.matnam];
             this.astmFedSpecValue = this.props.symbol_table[o.ASTM_Fed_Spec].value;
+            this.clWarnString = "";
         } else {
             this.matTypeValue = "User_Specified";
             this.astmFedSpecValue = "N/A";
+            this.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
         }
 //        console.log("this.matTypeValue, this.astmFedSpecValue = ", this.matTypeValue, this.astmFedSpecValue);
 

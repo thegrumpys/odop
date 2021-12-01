@@ -183,90 +183,180 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <hr/>
-                <table id="view4" className="report-table-borders">
+                <table id="view4" className="report-table">
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td/>
-                            <td/>
-                            <td>{this.props.symbol_table[o.FS_CycleLife].name}</td>
-                            <td>=</td>
-                            <td>{this.props.symbol_table[o.FS_CycleLife].value.toFixed(3)}</td>
-                            <td className="text-left">&nbsp;{this.props.symbol_table[o.FS_CycleLife].units}</td>
-                        </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Stress_Init_Lo].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Stress_Init_Lo].value.toFixed(0)}</td>
-                            <td>{this.props.symbol_table[o.Stress_Init_Lo].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_Init_Lo].units}</td>
                             <td/>
-                            <td/>
-                            <td>{this.props.symbol_table[o.Cycle_Life].name}</td>
-                            <td>=</td>
-                            <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
-                            <td className="text-left">&nbsp;{this.cycle_life_u}</td>
-                        </tr>
-                        <tr>
                             <td>{this.props.symbol_table[o.Stress_Init_Hi].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Stress_Init_Hi].value.toFixed(0)}</td>
-                            <td>{this.props.symbol_table[o.Stress_Init_Hi].units}</td>
-                            <td/>
-                            <td/>
-                            <td>({this.props.symbol_table[o.Cycle_Life].name}</td>
-                            <td className="text-left" colSpan="3">&nbsp; applies to body coils only.)</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_Init_Hi].units}</td>
                         </tr>
                         <tr>
-                            <td/>
-                        </tr>
-                    </tbody>
-                </table>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
+                            <td>{this.props.symbol_table[o.Stress_Lim_Endur].name}</td>
+                            <td>=</td>
+                            <td>{this.props.symbol_table[o.Stress_Lim_Endur].value.toFixed(0)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_Lim_Endur].units}</td>
                             <td/>
                             <td>{this.props.symbol_table[o.Stress_Lim_Stat].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Stress_Lim_Stat].value.toFixed(0)}</td>
-                            <td className="text-left">&nbsp;{this.props.symbol_table[o.Stress_Lim_Stat].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_Lim_Stat].units}</td>
                         </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Stress_Lim_Bend].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Stress_Lim_Bend].value.toFixed(0)}</td>
-                            <td className="text-left">&nbsp;{this.props.symbol_table[o.Stress_Lim_Bend].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_Lim_Bend].units}</td>
                             <td/>
-                            <td/>
-                            <td>{this.props.symbol_table[o.Stress_Lim_Endur].name}</td>
-                            <td>=</td>
-                            <td>{this.props.symbol_table[o.Stress_Lim_Endur].value.toFixed(0)}</td>
-                            <td className="text-left">&nbsp;{this.props.symbol_table[o.Stress_Lim_Endur].units}</td>
                         </tr>
                         <tr>
                             <td>Bending Str @End (Sa)</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Stress_Hook].value.toFixed(0)}</td>
-                            <td className="text-left">&nbsp;{this.props.symbol_table[o.Stress_Hook].units}</td>
-                            <td/>
-                            <td/>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_Hook].units}</td>
+                            <td>&nbsp;&nbsp;</td>
                             <td>Torsion Str @End (Sb)</td>
                             <td>=</td>
                             <td>{this.sb.toFixed(0)}</td>
-                            <td className="text-left">&nbsp;{this.props.symbol_table[o.Stress_Hook].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_Hook].units}</td>
+                        </tr>
+                        <tr>
+                            <td className="text-right" colSpan="9">(Torsion value assumes a vertical bend radius (R2) equal twice wire diameter.)</td>
                         </tr>
                     </tbody>
                 </table>
-                (Torsion value assumes a vertical bend radius (R2) equal twice wire diameter.)<br />
                 {this.warnmsg}
-                <br /> &nbsp;
+                <br />
+                <br />
+                <table id="view5" className="report-table">
+                    <tbody>
+                        <tr>
+                            <td>Stress Amplitude</td>
+                            <td>=</td>
+                            <td>{((this.props.symbol_table[o.Stress_2].value - this.props.symbol_table[o.Stress_1].value) / 2.0).toFixed(0)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
+                            <td/>
+                            <td>Stress Ratio</td>
+                            <td>=</td>
+                            <td>{(this.props.symbol_table[o.Stress_1].value / this.props.symbol_table[o.Stress_2].value).toFixed(3)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Spring_Index].units}</td>
+                        </tr>
+                        <tr>
+                            <td> &nbsp; </td>
+                        </tr>
+                        <tr>
+                            <td colSpan="4" className="text-left">Soderburg calculation inputs:</td>
+                            <td/>
+                            <td colSpan="4"/>
+                        </tr>
+                        <tr>
+                            <td>Stress Mean</td>
+                            <td>=</td>
+                            <td>{((this.props.symbol_table[o.Stress_1].value + this.props.symbol_table[o.Stress_2].value) / 2.0).toFixed(0)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
+                            <td/>
+                            <td>Stress Range</td>
+                            <td>=</td>
+                            <td>{(this.props.symbol_table[o.Stress_2].value - this.props.symbol_table[o.Stress_1].value).toFixed(0)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
+                        </tr>
+                        <tr>
+                            <td>{this.props.symbol_table[o.Stress_Lim_Stat].name}</td>
+                            <td>=</td>
+                            <td>{this.props.symbol_table[o.Stress_Lim_Stat].value.toFixed(0)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_Lim_Stat].units}</td>
+                            <td/>
+                            <td>{this.props.symbol_table[o.Stress_Lim_Endur].name}</td>
+                            <td>=</td>
+                            <td>{this.props.symbol_table[o.Stress_Lim_Endur].value.toFixed(0)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_Lim_Endur].units}</td>
+                        </tr>
+                        <tr>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td>{this.props.symbol_table[o.Life_Category].name}</td>
+                            <td>=</td>
+                            <td colSpan="2" className="text-left">{this.lifeTargValue}</td>
+                        </tr>
+                        <tr>
+                            <td colSpan="4" className="text-left">Soderberg calculation result:</td>
+                            <td/>
+                            <td><b>{this.props.symbol_table[o.FS_CycleLife].name}</b></td>
+                            <td>=</td>
+                            <td>{this.props.symbol_table[o.FS_CycleLife].value.toFixed(3)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.FS_CycleLife].units}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                {this.clWarnString === "" ?
+                    <>
+                        <table id="view6" className="report-table">
+                            <tbody>
+                                <tr>
+                                    <td colSpan="4">Modified Goodman calculation inputs:</td>
+                                    <td/>
+                                    <td colSpan="4"/>
+                                </tr>
+                                <tr>
+                                    <td>{this.props.symbol_table[o.Material_Type].name}</td>
+                                    <td>=</td>
+                                    <td className="text-left" colSpan="2">{this.matTypeValue}</td>
+                                    <td/>
+                                    <td> </td>
+                                    <td> &nbsp; </td>
+                                    <td colSpan="2" className="text-left">{this.peenValue}</td>
+                                </tr>
+                                <tr>
+                                    <td>{this.props.symbol_table[o.Tensile].name}</td>
+                                    <td>=</td>
+                                    <td>{this.props.symbol_table[o.Tensile].value.toFixed(0)}</td>
+                                    <td className="text-left">{this.props.symbol_table[o.Tensile].units}</td>
+                                    <td/>
+                                    <td>{this.props.symbol_table[o.PC_Tensile_Endur].name}</td>
+                                    <td>=</td>
+                                    <td>{this.props.symbol_table[o.PC_Tensile_Endur].value.toFixed(0)}</td>
+                                    <td className="text-left">{this.props.symbol_table[o.PC_Tensile_Endur].units}</td>
+                                </tr>
+                                <tr>
+                                    <td>{this.props.symbol_table[o.Stress_1].name}</td>
+                                    <td>=</td>
+                                    <td>{this.props.symbol_table[o.Stress_1].value.toFixed(0)}</td>
+                                    <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
+                                    <td/>
+                                    <td>{this.props.symbol_table[o.Stress_2].name}</td>
+                                    <td>=</td>
+                                    <td>{this.props.symbol_table[o.Stress_2].value.toFixed(0)}</td>
+                                    <td className="text-left">{this.props.symbol_table[o.Stress_2].units}</td>
+                                </tr>
+                                <tr>
+                                    <td colSpan="4" className="text-left">Modified Goodman calculation result:</td>
+                                    <td/>
+                                    <td><b>{this.props.symbol_table[o.Cycle_Life].name}</b></td>
+                                    <td>=</td>
+                                    <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
+                                    <td className="text-left">{this.props.symbol_table[o.Cycle_Life].units + " (estimate)"}</td>
+                                </tr>
+                                <tr>
+                                    <td colSpan="5"></td>
+                                    <td>({this.props.symbol_table[o.Cycle_Life].name}</td>
+                                    <td className="text-left" colSpan="3">&nbsp; applies to body coils only.)</td>
+                               </tr>
+                           </tbody>
+                        </table>
+                    </>
+                :
+                    <>{this.clWarnString}</>
+                }
+                <br/>
             </React.Fragment>
         );
     }

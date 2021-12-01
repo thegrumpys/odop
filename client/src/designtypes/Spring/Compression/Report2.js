@@ -264,7 +264,7 @@ class Report2 extends ReportBase {
                         <tr>
                             <td colSpan="4" className="text-left">Soderberg calculation result:</td>
                             <td/>
-                            <td>{this.props.symbol_table[o.FS_CycleLife].name}</td>
+                            <td><b>{this.props.symbol_table[o.FS_CycleLife].name}</b></td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.FS_CycleLife].value.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.FS_CycleLife].units}</td>
@@ -315,7 +315,7 @@ class Report2 extends ReportBase {
                                 <tr>
                                     <td colSpan="4" className="text-left">Modified Goodman calculation result:</td>
                                     <td/>
-                                    <td>{this.props.symbol_table[o.Cycle_Life].name}</td>
+                                    <td><b>{this.props.symbol_table[o.Cycle_Life].name}</b></td>
                                     <td>=</td>
                                     <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
                                     <td className="text-left">{this.props.symbol_table[o.Cycle_Life].units + " (estimate)"}</td>
