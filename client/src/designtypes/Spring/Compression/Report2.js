@@ -327,6 +327,9 @@ class Report2 extends ReportBase {
                     <>{this.clWarnString}</>
                 }
                 <br/>
+                Source data for %_Tensile_Endur (Stress_Lim_Endur) based on Stress Ratio = 0. 
+                <br/>
+                <br/>
             </React.Fragment>
         );
     }
