@@ -163,8 +163,7 @@ class Report1 extends ReportBase {
                             <td className="text-left">{this.cycle_life_u}</td>
                             <td/>
                             <td>({this.props.symbol_table[o.Cycle_Life].name}</td>
-                            <td>&nbsp;</td>
-                            <td className="text-left" colSpan="3">applies to body coils only.)</td>
+                            <td className="text-left" colSpan="4">applies to body coils only.)</td>
                         </tr>
                     </tbody>
                 </table>
