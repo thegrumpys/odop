@@ -141,9 +141,11 @@ export class ReportBase extends Component {
         if (this.props.symbol_table[o.Prop_Calc_Method].value === 1){
             this.matTypeValue = this.m_tab[this.props.symbol_table[o.Material_Type].value][mo.matnam];
             this.astmFedSpecValue = this.props.symbol_table[o.ASTM_Fed_Spec].value;
+            this.clWarnString = "";
         } else {
             this.matTypeValue = "User_Specified";
             this.astmFedSpecValue = "N/A";
+            this.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
         }
 //        console.log("this.matTypeValue, this.astmFedSpecValue = ", this.matTypeValue, this.astmFedSpecValue);
 
@@ -154,9 +156,14 @@ export class ReportBase extends Component {
             this.peenValue = "Shot peened";
         }
 
-        this.energy_1 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_1].value * this.props.symbol_table[o.Deflect_1].value;
-        this.energy_2 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_2].value * this.props.symbol_table[o.Deflect_2].value;
-        this.energy_S = 0.5 * this.props.symbol_table[o.Rate].value * this.def_max * this.def_max;
+        const Deg2Rad = 2.0 * Math.PI / 360.0;
+        this.RateInRad = this.props.symbol_table[o.Rate].value / Deg2Rad;
+        this.Def1InRad = this.props.symbol_table[o.Deflect_1].value * Deg2Rad;
+        this.Def2InRad = this.props.symbol_table[o.Deflect_2].value * Deg2Rad;
+        this.DefMSInRad = this.def_max * Deg2Rad;
+        this.energy_1 = 0.5 * this.RateInRad * this.Def1InRad * this.Def1InRad;
+        this.energy_2 = 0.5 * this.RateInRad * this.Def2InRad * this.Def2InRad;
+        this.energy_MS = 0.5 * this.RateInRad * this.DefMSInRad * this.DefMSInRad;
 
         return null;
     }
