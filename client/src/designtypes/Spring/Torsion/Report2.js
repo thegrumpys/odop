@@ -10,17 +10,15 @@ class Report2 extends ReportBase {
 //        console.log('In Report2.render this.props=',this.props);
         return (
             <React.Fragment>
-                <h4>ODOP:Spring &nbsp; Torsion Spring Report</h4>
+                <h4>ODOP:Spring &nbsp; Torsion Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></h4>
                 <br />
-                <table className="report-table">
+                <table id="view1" className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
                             <td>=</td>
-                            <td>{this.props.symbol_table[o.Spring_Type].value}</td>
+                            <td className="text-left" colSpan="2">{this.props.symbol_table[o.Spring_Type].value}</td>
                             <td/>
-                            <td/>
-                            <td> &nbsp; &nbsp; </td>
                             <td>{this.props.symbol_table[o.Material_Type].name}</td>
                             <td>=</td>
                             <td className="text-left" colSpan="2">{this.matTypeValue}</td>
@@ -29,61 +27,54 @@ class Report2 extends ReportBase {
                             <td>{this.props.symbol_table[o.Wire_Dia].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Wire_Dia].value.toFixed(4)}</td>
-                            <td>{this.props.symbol_table[o.Wire_Dia].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Wire_Dia].units}</td>
                             <td/>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>{this.props.symbol_table[o.Tensile].name}</td>
+                            <td>{this.props.symbol_table[o.Elastic_Modulus].name}</td>
                             <td>=</td>
-                            <td>{this.tensileFixed0}</td>
-                            <td>{this.props.symbol_table[o.Tensile].units}</td>
+                            <td>{this.props.symbol_table[o.Elastic_Modulus].value}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Elastic_Modulus].units}</td>
                         </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Index].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Spring_Index].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Spring_Index].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Spring_Index].units}</td>
                             <td/>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>Stress Ratio</td>
+                            <td>{this.props.symbol_table[o.Tensile].name}</td>
                             <td>=</td>
-                            <td>{(this.props.symbol_table[o.Stress_1].value / this.props.symbol_table[o.Stress_2].value).toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Spring_Index].units}</td>
+                            <td>{this.tensileFixed0}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Tensile].units}</td>
                         </tr>
                     </tbody>
                 </table>
-                <br/>
-                <table className="report-table">
-                    <thead>
+                <hr/>
+                Calculations assume: {this.peenValue}
+                <table id="view2" className="report-table">
+                    <tbody>
                         <tr>
-                            <th colSpan="10"></th>
+                            <td colSpan="5"></td>
                             <td>kb</td>
                             <td>=</td>
                             <td>{this.kb.toFixed(3)}</td>
-                            <th colSpan="2"></th>
+                            <td colSpan="2"></td>
                         </tr>
                         <tr>
-                            <th colSpan="10"></th>
-                            <th colSpan="3" style={{textAlign: "center"}}>---- kb ----</th>
-                            <th colSpan="2"></th>
+                            <td colSpan="5"></td>
+                            <td colSpan="3" style={{textAlign: "center"}}>---- kb ----</td>
+                            <td colSpan="2"></td>
                         </tr>
                         <tr>
-                            <th></th>
-                            <th> &nbsp; &nbsp; </th>
-                            <th>Length </th>
-                            <th> &nbsp; &nbsp; </th>
-                            <th>Deflect</th>
-                            <th>Moment</th>
-                            <th> &nbsp; &nbsp; </th>
-                            <th> &nbsp; &nbsp; </th>
-                            <th> &nbsp; &nbsp; </th>
-                            <th> &nbsp; &nbsp; </th>
-                            <th>Stress</th>
-                            <th> &nbsp;</th>
-                            <th> %TS</th>
-                            <th> &nbsp; &nbsp; </th>
-                            <th>Static FS</th>
+                            <td/>
+                            <td className="text-center"><b>Length</b><br />{this.props.symbol_table[o.L_Body].units}</td>
+                            <td className="text-center"><b>Deflect</b><br />{this.props.symbol_table[o.L_Body].units}</td>
+                            <td className="text-center"><b>Moment</b><br />{this.props.symbol_table[o.M_1].units}</td>
+                            <td/>
+                            <td className="text-center"><b>Stress</b><br />{this.props.symbol_table[o.Stress_1].units}</td>
+                            <td className="text-center"><b>%TS</b><br />%</td>
+                            <td/>
+                            <td className="text-center"><b>Static FS</b><br />{this.props.symbol_table[o.FS_2].units}</td>
                         </tr>
-                    </thead>
+                    </tbody>
                     <tbody>
                         <tr>
                             <td><b>Free</b></td>
