@@ -272,6 +272,18 @@ class Report3 extends ReportBase {
                             <td className="text-left" colSpan="2">{this.props.labels[o.Wind].value}</td>
                         </tr>
                         <tr>
+                            <td className="text-left">{this.props.labels[o.Relative_loop_pos____tol_].name}: </td>
+                            <td/>
+                            <td className="text-left" colSpan="4">{this.props.labels[o.Relative_loop_pos____tol_].value}</td>
+                        </tr>
+                        <tr>
+                            <td className="text-left">{this.props.labels[o.Gaps].name}: </td>
+                            <td/>
+                            <td className="text-left">{this.props.labels[o.Gaps].value}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Wire_Dia].units}</td>
+                            <td/>
+                        </tr>
+                        <tr>
                             <td className="text-left">{this.props.labels[o.Shot_peen].name}: </td>
                             <td/>
                             <td className="text-left">{this.props.labels[o.Shot_peen].value}</td>
@@ -283,16 +295,9 @@ class Report3 extends ReportBase {
                             <td className="text-left" colSpan="4">{this.props.labels[o.Stress_relieve_HT].value}</td>
                         </tr>
                         <tr>
-                            <td className="text-left">{this.props.labels[o.Relative_loop_pos____tol_].name}: </td>
+                            <td className="text-left">{this.props.labels[o.Finish].name}: </td>
                             <td/>
-                            <td className="text-left" colSpan="4">{this.props.labels[o.Relative_loop_pos____tol_].value}</td>
-                        </tr>
-                        <tr>
-                            <td className="text-left">{this.props.labels[o.Gaps].name}: </td>
-                            <td/>
-                            <td className="text-left">{this.props.labels[o.Gaps].value}</td>
-                            <td className="text-left">{this.props.symbol_table[o.Wire_Dia].units}</td>
-                            <td/>
+                            <td className="text-left" colSpan="4">{this.props.labels[o.Finish].value}</td>
                         </tr>
                         <tr>
                             <td className="text-left">{this.props.labels[o.End_use].name}: </td>
@@ -319,20 +324,21 @@ class Report3 extends ReportBase {
                 <table id="view5" className="report-table">
                     <tbody>
                         <tr>
-                            <td> &nbsp; approved for mfg.&nbsp; </td>
+                            <td className="text-center" colSpan="2">approved for mfg.</td>
                             <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td className="text-center" colSpan="2">approved for mfg.</td>
                             <td/>
-                            <td> &nbsp; approved for mfg.&nbsp; </td>
                         </tr>
                         <tr>
                             <td> &nbsp; </td>
                         </tr>
                         <tr>
-                            <td> by _______________________ &nbsp; </td>
-                            <td> &nbsp; date _______ &nbsp; </td>
-                            <td/>
-                            <td> by _______________________ &nbsp; </td>
-                            <td> &nbsp; date _______ &nbsp; </td>
+                            <td colSpan="2">by __________________________ &nbsp; </td>
+                            <td>date _______</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td colSpan="2">by __________________________ &nbsp; </td>
+                            <td>date _______</td>
                         </tr>
                     </tbody>
                 </table>

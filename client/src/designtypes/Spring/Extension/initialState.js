@@ -1103,6 +1103,14 @@ export const initialState = {
             "value": "rh lh opt"
         },
         {
+            "name": "Relative loop pos. & tol.",
+            "value": ""
+        },
+        {
+            "name": "Gaps",
+            "value": ""
+        },
+        {
             "name": "Shot peen",
             "value": "yes no; details"
         },
@@ -1112,14 +1120,6 @@ export const initialState = {
         },
         {
             "name": "Finish",
-            "value": ""
-        },
-        {
-            "name": "Relative loop pos. & tol.",
-            "value": ""
-        },
-        {
-            "name": "Gaps",
             "value": ""
         },
         {
