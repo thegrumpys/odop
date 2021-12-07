@@ -192,7 +192,7 @@ class Report1 extends ReportBase {
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Cycle_Life].units}</td>
-                            <td>(est.)</td>
+                            <td className="text-left">(est.)</td>
                         </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Force_Arm_2].name}</td>

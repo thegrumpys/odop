@@ -133,8 +133,6 @@ export class ReportBase extends Component {
         else
             this.hlx_ang = 0.0;
 
-        this.cycle_life_u = this.props.symbol_table[o.Cycle_Life].units + " (est)";
-
         this.safe_travel = this.def_max;
         
 //        console.log("this.props.symbol_table[o.Prop_Calc_Method].value = ", this.props.symbol_table[o.Prop_Calc_Method].value);
