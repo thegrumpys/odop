@@ -19,30 +19,30 @@ class FileExport extends Component {
     }
 
     toggle() {
-        console.log('In FileExport.toggle');
+//        console.log('In FileExport.toggle');
         this.setState({
             modal: !this.state.modal, // Display Modal
         });
     }
 
     onSelect(event) {
-        console.log('In FileExport.onSelect event.target.value=',event.target.value);
+//        console.log('In FileExport.onSelect event.target.value=',event.target.value);
         this.setState({
             filetype: event.target.value,
         });
     }
 
     onCancel() {
-        console.log('In FileExport.onCancel');
+//        console.log('In FileExport.onCancel');
         this.setState({
             modal: !this.state.modal
         });
     }
 
     onExport() {
-        console.log('In FileExport.onExport this.props.type=',this.props.type,' this.props.name=',this.props.name);
+//        console.log('In FileExport.onExport this.props.type=',this.props.type,' this.props.name=',this.props.name);
         var ordered = this.props.model;
-        console.log('In FileExport.onExport ordered=',ordered);
+//        console.log('In FileExport.onExport ordered=',ordered);
 // I created a special modified version of File Export which outputs a JSON file
 // with all properties sorted in alphabetical order.
 // It makes it easy to compare/diff two files and find the differences.
@@ -74,17 +74,17 @@ class FileExport extends Component {
             default:
             case "json":
                 url = window.URL.createObjectURL(new Blob([JSON.stringify(ordered, null, 2)]));
-                console.log('In FileExport.exportDesign url=', url);
+//                console.log('In FileExport.exportDesign url=', url);
                 break;
             case "csv":
                 url = window.URL.createObjectURL(new Blob(ordered.symbol_table.map(entry => entry.name+"\t"+entry.value+"\n")));
-                console.log('In FileExport.exportDesign url=', url);
+//                console.log('In FileExport.exportDesign url=', url);
                 break;
         }
         const link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', this.props.name + '.' + this.state.filetype);
-        console.log('In FileExport.exportDesign link=', link);
+//        console.log('In FileExport.exportDesign link=', link);
         document.body.appendChild(link);
         link.click();
         this.setState({
@@ -94,7 +94,7 @@ class FileExport extends Component {
     }
 
     render() {
-        console.log('In FileExport.render this=',this);
+//        console.log('In FileExport.render this=',this);
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle}>
