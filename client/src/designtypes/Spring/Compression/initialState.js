@@ -895,8 +895,24 @@ export const initialState = {
         {
             "name": "Special notes & tol",
             "value": ""
+        },
+        {
+            "name": "Customer approval",
+            "value": "__________________________ "
+        },
+        {
+            "name": "Customer date",
+            "value": " _______ "
+        },
+        {
+            "name": "Vendor approval",
+            "value": "__________________________ "
+        },
+            {
+            "name": "Vendor date",
+            "value": " _______ "
         }
-    ],
+],
     "type": "Spring/Compression",
     "version": "9",
     "result": {

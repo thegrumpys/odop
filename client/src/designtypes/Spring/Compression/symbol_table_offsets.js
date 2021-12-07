@@ -75,3 +75,7 @@ export const End_use = 16;
 export const Fits_in___Works_over = 17;
 export const Operating_temp = 18;
 export const Special_notes___tol = 19;
+export const Customer_approval = 20;
+export const Customer_date = 21;
+export const Vendor_approval = 22;
+export const Vendor_date = 23;

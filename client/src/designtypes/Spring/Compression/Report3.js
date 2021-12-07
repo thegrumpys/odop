@@ -321,20 +321,21 @@ class Report3 extends ReportBase {
                 <table id="view5" className="report-table">
                     <tbody>
                         <tr>
-                            <td> &nbsp; approved for mfg.&nbsp; </td>
+                            <td className="text-center" colSpan="2">approved for mfg.</td>
                             <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td className="text-center" colSpan="2">approved for mfg.</td>
                             <td/>
-                            <td> &nbsp; approved for mfg.&nbsp; </td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
-                            <td> by _______________________ &nbsp; </td>
-                            <td> &nbsp; date _______ &nbsp; </td>
-                            <td/>
-                            <td> by _______________________ &nbsp; </td>
-                            <td> &nbsp; date _______ &nbsp; </td>
+                            <td colSpan="2">by {this.props.labels[o.Customer_approval].value}</td>
+                            <td>date {this.props.labels[o.Customer_date].value}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td colSpan="2">by {this.props.labels[o.Vendor_approval].value}</td>
+                            <td>date {this.props.labels[o.Vendor_date].value}</td>
                         </tr>
                     </tbody>
                 </table>
