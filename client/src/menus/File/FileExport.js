@@ -77,7 +77,11 @@ class FileExport extends Component {
 //                console.log('In FileExport.exportDesign url=', url);
                 break;
             case "csv":
-                url = window.URL.createObjectURL(new Blob(ordered.symbol_table.map(entry => entry.name+"\t"+entry.value+"\n")));
+                url = window.URL.createObjectURL(new Blob(ordered.symbol_table.map(entry => 
+                    entry.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_')+"\t"+
+                    entry.value+"\t"+
+                    entry.units+
+                    "\n")));
 //                console.log('In FileExport.exportDesign url=', url);
                 break;
         }
