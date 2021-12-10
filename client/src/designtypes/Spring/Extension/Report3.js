@@ -334,11 +334,11 @@ class Report3 extends ReportBase {
                             <td> &nbsp; </td>
                         </tr>
                         <tr>
-                            <td colSpan="2">by __________________________ &nbsp; </td>
-                            <td>date _______</td>
+                            <td colSpan="2">by {this.props.labels[o.Customer_approval].value}</td>
+                            <td>date {this.props.labels[o.Customer_date].value}</td>
                             <td> &nbsp; &nbsp; </td>
-                            <td colSpan="2">by __________________________ &nbsp; </td>
-                            <td>date _______</td>
+                            <td colSpan="2">by {this.props.labels[o.Vendor_approval].value}</td>
+                            <td>date {this.props.labels[o.Vendor_date].value}</td>
                         </tr>
                     </tbody>
                 </table>

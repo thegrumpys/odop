@@ -89,3 +89,7 @@ export const Finish = 15;
 export const End_use = 16;
 export const Operating_temp = 17;
 export const Special_notes___tol = 18;
+export const Customer_approval = 19;
+export const Customer_date = 20;
+export const Vendor_approval = 21;
+export const Vendor_date = 22;
