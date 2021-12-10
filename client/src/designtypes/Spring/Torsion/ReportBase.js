@@ -22,6 +22,9 @@ export class ReportBase extends Component {
         /*  Bring in life target table  */
             this.lifetarg = require('./lifetarget.json');
 
+        /*  Bring in heat treat table  */
+            this.heattreatment = require('./heattreat.json');
+
         this.hits = 0;
         this.errmsg = "";
         if (this.props.symbol_table[o.ID_Free].value < 0.0) {
@@ -153,6 +156,8 @@ export class ReportBase extends Component {
         } else {
             this.peenValue = "Shot peened";
         }
+
+        this.heattreatValue = this.heattreatment[this.props.symbol_table[o.Heat_Treat].value];
 
         const Deg2Rad = 2.0 * Math.PI / 360.0;
         this.RateInRad = this.props.symbol_table[o.Rate].value / Deg2Rad;

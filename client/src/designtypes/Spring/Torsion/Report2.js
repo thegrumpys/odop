@@ -55,7 +55,7 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <hr/>
-                Calculations assume: {this.peenValue}
+                Calculations assume: {this.peenValue}, {this.heattreatValue}
                 <table id="view2" className="report-table">
                     <tbody>
                         <tr>

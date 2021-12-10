@@ -254,7 +254,7 @@ class Report3 extends ReportBase {
                         </tr>
                         <tr>
                             <td/>
-                            <td className="text-left" colSpan="2"><b>*</b> kb = {this.kb.toFixed(3)}</td>
+                            <td className="text-left" colSpan="4"><b>*</b> kb = {this.kb.toFixed(3)} &nbsp; ({this.heattreatValue})</td>
                         </tr>
                     </tbody>
                 </table>
@@ -289,7 +289,8 @@ class Report3 extends ReportBase {
                         <tr>
                             <td className="text-left">{this.props.labels[o.Stress_relieve_HT].name}: </td>
                             <td/>
-                            <td className="text-left" colSpan="4">{this.props.labels[o.Stress_relieve_HT].value}</td>
+                            <td className="text-left">{this.props.labels[o.Stress_relieve_HT].value}</td>
+                            <td colSpan="3" className="text-left">{"(calculations assume: " + this.heattreatValue + ")"}</td>
                         </tr>
                         <tr>
                             <td className="text-left">{this.props.labels[o.Relative_end_pos____tol_].name}: </td>
