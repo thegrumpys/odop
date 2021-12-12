@@ -80,7 +80,7 @@ export class ReportBase extends Component {
             this.pitch = (this.props.symbol_table[o.L_Free].value - 2.0 * this.props.symbol_table[o.Wire_Dia].value) / this.props.symbol_table[o.Coils_A].value;
             break;
         default:        //  User Specified
-            this.pitch = 0.0;
+            this.pitch = (this.props.symbol_table[o.L_Free].value - (this.props.symbol_table[o.Inactive_Coils].value + 1.0) * this.props.symbol_table[o.Wire_Dia].value) / this.props.symbol_table[o.Coils_A].value;
         }
 
         var sq1 = this.props.symbol_table[o.L_Free].value;
