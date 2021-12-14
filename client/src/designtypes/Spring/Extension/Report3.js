@@ -206,7 +206,15 @@ class Report3 extends ReportBase {
                             <td className="text-left">{this.props.symbol_table[o.ID_Free].units}</td>
                         </tr>
                         <tr>
-                            <td><b>Stress*</b></td>
+                            <td><b>Energy</b></td>
+                            <td>{(0.0).toFixed(2)}</td>
+                            <td>{this.energy_1.toFixed(2)}</td>
+                            <td>{this.energy_2.toFixed(2)}</td>
+                            <td>{this.energy_MS.toFixed(2)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Energy].units}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Stress</b><sup>*</sup></td>
                             <td>{this.props.symbol_table[o.Stress_Initial].value.toFixed(0)}</td>
                             <td>{this.props.symbol_table[o.Stress_1].value.toFixed(0)}</td>
                             <td>{this.props.symbol_table[o.Stress_2].value.toFixed(0)}</td>
@@ -214,7 +222,7 @@ class Report3 extends ReportBase {
                             <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
                         </tr>
                         <tr>
-                            <td><b>% Tensile*</b></td>
+                            <td><b>% Tensile</b><sup>*</sup></td>
                             <td>{(100.0 * this.props.symbol_table[o.Stress_Initial].value / this.props.symbol_table[o.Tensile].value).toFixed(1)}</td>
                             <td>{(this.props.symbol_table[o.Stress_1].value / this.dhat).toFixed(1)}</td>
                             <td>{(this.props.symbol_table[o.Stress_2].value / this.dhat).toFixed(1)}</td>
@@ -222,7 +230,7 @@ class Report3 extends ReportBase {
                             <td className="text-left">%</td>
                         </tr>
                         <tr>
-                            <td><b>Static F.S.*</b></td>
+                            <td><b>Static F.S.</b><sup>*</sup></td>
                             <td>{(this.props.symbol_table[o.Stress_Lim_Stat].value / this.props.symbol_table[o.Stress_Initial].value).toFixed(2)}</td>
                             <td>{this.fs_1.toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.FS_2].value.toFixed(2)}</td>
@@ -231,7 +239,7 @@ class Report3 extends ReportBase {
                         </tr>
                         <tr>
                             <td/>
-                            <td className="text-left" colSpan="2"><b>*</b> kw = {this.kw1.toFixed(3)}</td>
+                            <td className="text-left" colSpan="2"><sup>*</sup> kw = {this.kw1.toFixed(3)}</td>
                         </tr>
                     </tbody>
                 </table>

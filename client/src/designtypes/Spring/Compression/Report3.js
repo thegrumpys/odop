@@ -83,7 +83,7 @@ class Report3 extends ReportBase {
                             <td/>
                             <td>{this.props.symbol_table[o.Tensile].name}</td>
                             <td>=</td>
-                            <td>{this.tensileFixed0}</td>
+                            <td>{this.props.symbol_table[o.Tensile].value.toFixed(0)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Tensile].units}</td>
                         </tr>
                         <tr>
@@ -97,37 +97,37 @@ class Report3 extends ReportBase {
                             <td className="text-left" colSpan="2">{this.et_tab[this.props.symbol_table[o.End_Type].value][0]}</td>
                         </tr>
                         <tr>
+                            <td>{this.props.symbol_table[o.Rate].name}</td>
+                            <td>=</td>
+                            <td>{this.props.symbol_table[o.Rate].value.toFixed(3)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Rate].units}</td>
+                            <td/>
                             <td>{this.props.symbol_table[o.Coils_T].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Coils_T].value.toFixed(3)}</td>
                             <td className="text-left">{"total " + this.props.symbol_table[o.Coils_T].units}</td>
-                            <td/>
+                        </tr>
+                        <tr>
                             <td>Pitch</td>
                             <td>=</td>
                             <td>{this.pitch.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.L_Free].units}</td>
-                        </tr>
-                        <tr>
+                            <td/>
                             <td>{this.props.symbol_table[o.Coils_A].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Coils_A].value.toFixed(3)}</td>
                             <td className="text-left">{"active " + this.props.symbol_table[o.Coils_A].units}</td>
-                            <td/>
+                        </tr>
+                        <tr>
                             <td>Helix Angle</td>
                             <td>=</td>
                             <td>{this.hlx_ang.toFixed(2)}</td>
                             <td className="text-left">degrees</td>
-                        </tr>
-                        <tr>
+                            <td/>
                             <td>{this.len_lbl}</td>
                             <td>=</td>
                             <td>{this.wire_len_t.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.L_Free].units}</td>
-                            <td/>
-                            <td>{this.props.symbol_table[o.Weight].name}</td>
-                            <td>=</td>
-                            <td>{this.wgt1000.toFixed(3)}</td>
-                            <td className="text-left">{this.props.symbol_table[o.Weight].units + this.wgt1000_u}</td>
                         </tr>
                         <tr>
                             <td>Safe Load</td>
@@ -135,10 +135,10 @@ class Report3 extends ReportBase {
                             <td>{this.safe_load.toFixed(3)}</td>
                             <td className="text-left">{this.safe_load_u}</td>
                             <td/>
-                            <td>{this.props.symbol_table[o.Rate].name}</td>
+                            <td>{this.props.symbol_table[o.Weight].name}</td>
                             <td>=</td>
-                            <td>{this.props.symbol_table[o.Rate].value.toFixed(3)}</td>
-                            <td className="text-left">{this.props.symbol_table[o.Rate].units}</td>
+                            <td>{this.wgt1000.toFixed(3)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Weight].units + this.wgt1000_u}</td>
                         </tr>
                         <tr>
                             <td>Safe Travel</td>
@@ -207,24 +207,32 @@ class Report3 extends ReportBase {
                             <td className="text-left">{this.props.symbol_table[o.ID_Free].units}</td>
                         </tr>
                         <tr>
-                            <td><b>Stress*</b></td>
-                            <td></td>
+                            <td><b>Energy</b></td>
+                            <td>{(0.0).toFixed(2)}</td>
+                            <td>{this.energy_1.toFixed(2)}</td>
+                            <td>{this.energy_2.toFixed(2)}</td>
+                            <td>{this.energy_S.toFixed(2)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Energy].units}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Stress</b><sup>*</sup></td>
+                            <td>{(0.0).toFixed(0)}</td>
                             <td>{this.props.symbol_table[o.Stress_1].value.toFixed(0)}</td>
                             <td>{this.props.symbol_table[o.Stress_2].value.toFixed(0)}</td>
                             <td>{this.props.symbol_table[o.Stress_Solid].value.toFixed(0)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
                         </tr>
                         <tr>
-                            <td><b>% Tensile*</b></td>
-                            <td></td>
+                            <td><b>% Tensile</b><sup>*</sup></td>
+                            <td>{(0.0).toFixed(1)}</td>
                             <td>{(this.props.symbol_table[o.Stress_1].value / this.dhat).toFixed(1)}</td>
                             <td>{(this.props.symbol_table[o.Stress_2].value / this.dhat).toFixed(1)}</td>
                             <td>{(this.props.symbol_table[o.Stress_Solid].value / this.dhat).toFixed(1)}</td>
                             <td className="text-left">%</td>
                         </tr>
                         <tr>
-                            <td><b>Static F.S.*</b></td>
-                            <td></td>
+                            <td><b>Static F.S.</b><sup>*</sup></td>
+                            <td>{(0.0).toFixed(2)}</td>
                             <td>{this.fs_1.toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.FS_2].value.toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.FS_Solid].value.toFixed(2)}</td>
@@ -232,8 +240,7 @@ class Report3 extends ReportBase {
                         </tr>
                         <tr>
                             <td/>
-                            <td className="text-left" colSpan="2"><b>*</b> without pre-set</td>
-                            <td className="text-left" colSpan="3">kw = {this.kw1.toFixed(3)}</td>
+                            <td className="text-left" colSpan="5"><sup>*</sup> without pre-set &nbsp; kw = {this.kw1.toFixed(3)}</td>
                         </tr>
                     </tbody>
                 </table>

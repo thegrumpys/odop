@@ -121,8 +121,6 @@ export class ReportBase extends Component {
          * From: http://springipedia.com/compression-general-design.asp
          */
 
-        this.tensileFixed0 = this.props.symbol_table[o.Tensile].value.toFixed(0);
-
         /* used to compute % tensile values */
 //        if (this.props.symbol_table[o.Tensile].value <= this.props.system_controls.smallnum) {
 //            return (
