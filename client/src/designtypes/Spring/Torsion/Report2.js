@@ -42,7 +42,7 @@ class Report2 extends ReportBase {
                             <td/>
                             <td>{this.props.symbol_table[o.Tensile].name}</td>
                             <td>=</td>
-                            <td>{this.tensileFixed0}</td>
+                            <td>{this.props.symbol_table[o.Tensile].value.toFixed(0)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Tensile].units}</td>
                         </tr>
                         <tr>
@@ -55,19 +55,11 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <hr/>
-                Calculations assume: {this.peenValue}, {this.heattreatValue}
                 <table id="view2" className="report-table">
                     <tbody>
                         <tr>
-                            <td colSpan="6"></td>
-                            <td>kb =</td>
-                            <td>{this.kb.toFixed(3)}</td>
-                            <td colSpan="2"></td>
-                        </tr>
-                        <tr>
                             <td colSpan="5"></td>
-                            <td colSpan="3" style={{textAlign: "center"}}>----- kb -----</td>
-                            <td colSpan="2"></td>
+                            <td colSpan="4"  className="text-center">----- kb = {this.kb.toFixed(3)} -----</td>
                         </tr>
                         <tr>
                             <td/>
@@ -78,8 +70,9 @@ class Report2 extends ReportBase {
                             <td/>
                             <td className="text-center"><b>Stress</b><br />{this.props.symbol_table[o.Stress_1].units}</td>
                             <td className="text-center"><b>%TS</b><br />%</td>
-                            <td/>
                             <td className="text-center"><b>Static FS</b><br />{this.props.symbol_table[o.FS_2].units}</td>
+                            <td/>
+                            <td className="text-center"><b>Energy</b><br />{this.props.symbol_table[o.Energy].units}</td>
                         </tr>
                     </tbody>
                     <tbody>
@@ -92,8 +85,9 @@ class Report2 extends ReportBase {
                             <td/>
                             <td>{(0.0).toFixed(0)}</td>
                             <td>{(0.0).toFixed(1)}</td>
-                            <td/>
                             <td>infinite</td>
+                            <td/>
+                            <td>{(0.0).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td><b>1</b></td>
@@ -104,8 +98,9 @@ class Report2 extends ReportBase {
                             <td/>
                             <td>{this.props.symbol_table[o.Stress_1].value.toFixed(0)}</td>
                             <td>{(this.props.symbol_table[o.Stress_1].value / this.dhat).toFixed(1)}</td>
+                            <td>{this.fs_1.toFixed(2)}</td>
                             <td/>
-                            <td>{this.fs_1.toFixed(3)}</td>
+                            <td>{this.energy_1.toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td><b>2</b></td>
@@ -116,61 +111,7 @@ class Report2 extends ReportBase {
                             <td/>
                             <td>{this.props.symbol_table[o.Stress_2].value.toFixed(0)}</td>
                             <td>{(this.props.symbol_table[o.Stress_2].value / this.dhat).toFixed(1)}</td>
-                            <td/>
-                            <td>{this.props.symbol_table[o.FS_2].value.toFixed(3)}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Max Safe</b></td>
-                            <td>{this.l_max.toFixed(3)}</td>
-                            <td> &nbsp; {this.def_max.toFixed(3)}</td>
-                            <td> &nbsp; {this.safe_load.toFixed(2)}</td>
-                            <td/>
-                            <td/>
-                            <td>{this.props.symbol_table[o.Stress_Lim_Bnd_Stat].value.toFixed(0)}</td>
-                            <td>{(this.props.symbol_table[o.Stress_Lim_Bnd_Stat].value / this.dhat).toFixed(1)}</td>
-                            <td/>
-                            <td>{1.0.toFixed(3)}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br/>
-                <table id="view3" className="report-table">
-                    <thead>
-                        <tr>
-                            <td></td>
-                            <td className="text-center"><b>Length</b><br />{this.props.symbol_table[o.L_Body].units}</td>
-                            <td className="text-center"><b>Deflect</b><br />{this.props.symbol_table[o.L_Body].units}</td>
-                            <td className="text-center"><b>Moment</b><br />{this.props.symbol_table[o.M_1].units}</td>
-                            <td/>
-                            <td/>
-                            <td className="text-center"><b>Energy</b><br />{this.props.symbol_table[o.Energy].units}</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><b>Free</b></td>
-                            <td>{this.props.symbol_table[o.L_Body].value.toFixed(3)}</td>
-                            <td>{(0.0).toFixed(4)}</td>
-                            <td>{(0.0).toFixed(2)}</td>
-                            <td/>
-                            <td/>
-                            <td>{(0.0).toFixed(2)}</td>
-                        </tr>
-                        <tr>
-                            <td><b>1</b></td>
-                            <td>{this.props.symbol_table[o.L_1].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Deflect_1].value.toFixed(4)}</td>
-                            <td>{this.props.symbol_table[o.M_1].value.toFixed(2)}</td>
-                            <td/>
-                            <td/>
-                            <td>{this.energy_1.toFixed(2)}</td>
-                        </tr>
-                        <tr>
-                            <td><b>2</b></td>
-                            <td>{this.props.symbol_table[o.L_2].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Deflect_2].value.toFixed(4)}</td>
-                            <td>{this.props.symbol_table[o.M_2].value.toFixed(2)}</td>
-                            <td/>
+                            <td>{this.props.symbol_table[o.FS_2].value.toFixed(2)}</td>
                             <td/>
                             <td>{this.energy_2.toFixed(2)}</td>
                         </tr>
@@ -181,11 +122,18 @@ class Report2 extends ReportBase {
                             <td> &nbsp; {this.safe_load.toFixed(2)}</td>
                             <td/>
                             <td/>
+                            <td>{this.props.symbol_table[o.Stress_Lim_Bnd_Stat].value.toFixed(0)}</td>
+                            <td>{(this.props.symbol_table[o.Stress_Lim_Bnd_Stat].value / this.dhat).toFixed(1)}</td>
+                            <td>{1.0.toFixed(2)}</td>
+                            <td/>
                             <td>{this.energy_MS.toFixed(2)}</td>
                         </tr>
                     </tbody>
                 </table>
+                <br/>
+                Calculations assume: {this.peenValue}, {this.heattreatValue}
                 <hr/>
+                <b>Stress Details</b>
                 <table id="view4" className="report-table">
                     <tbody>
                         <tr>
@@ -210,6 +158,7 @@ class Report2 extends ReportBase {
                     </tbody>
                 </table>
                 <br />
+                <b>Cycle Life Details</b>
                 <table id="view5" className="report-table">
                     <tbody>
                         <tr>
@@ -234,7 +183,7 @@ class Report2 extends ReportBase {
                             <td>{this.props.symbol_table[o.Stress_Lim_Bnd_Stat].value.toFixed(0)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Stress_Lim_Bnd_Stat].units}</td>
                             <td/>
-                            <td>{this.props.symbol_table[o.Stress_Lim_Bnd_Endur].name}</td>
+                            <td>{this.props.symbol_table[o.Stress_Lim_Bnd_Endur].name}<sup>*</sup></td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Stress_Lim_Bnd_Endur].value.toFixed(0)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Stress_Lim_Bnd_Endur].units}</td>
@@ -281,10 +230,10 @@ class Report2 extends ReportBase {
                                 <tr>
                                     <td>{this.props.symbol_table[o.Tensile].name}</td>
                                     <td>=</td>
-                                    <td>{this.tensileFixed0}</td>
+                                    <td>{this.props.symbol_table[o.Tensile].value.toFixed(0)}</td>
                                     <td className="text-left">{this.props.symbol_table[o.Tensile].units}</td>
                                     <td/>
-                                    <td>{this.props.symbol_table[o.PC_Ten_Bnd_Endur].name}</td>
+                                    <td>{this.props.symbol_table[o.PC_Ten_Bnd_Endur].name}<sup>*</sup></td>
                                     <td>=</td>
                                     <td>{this.props.symbol_table[o.PC_Ten_Bnd_Endur].value.toFixed(0)}</td>
                                     <td className="text-left">{this.props.symbol_table[o.PC_Ten_Bnd_Endur].units}</td>
@@ -315,7 +264,7 @@ class Report2 extends ReportBase {
                     <>{this.clWarnString}</>
                 }
                 <br/>
-                Source data for %_Ten_Bnd_Endur (Stress_Lim_Bnd_Endur) based on Stress Ratio = 0. 
+                <sup>*</sup>Source data for %_Ten_Bnd_Endur (Stress_Lim_Bnd_Endur) based on Stress Ratio = 0. 
                 <br/>
                 <br/>
             </React.Fragment>

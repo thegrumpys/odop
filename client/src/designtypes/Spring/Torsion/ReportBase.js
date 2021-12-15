@@ -85,8 +85,6 @@ export class ReportBase extends Component {
         this.od_2 = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
         this.id_2 = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
 
-        this.tensileFixed0 = this.props.symbol_table[o.Tensile].value.toFixed(0);
-
         this.dhat = this.props.symbol_table[o.Tensile].value / 100.0;
 
         if (this.props.symbol_table[o.Heat_Treat].value === 2){     //  Stress Relieve
