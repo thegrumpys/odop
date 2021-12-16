@@ -149,7 +149,7 @@ class Report3 extends ReportBase {
                             <td>{this.props.symbol_table[o.Cycle_Life].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
-                            <td className="text-left">{this.cycle_life_u}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Cycle_Life].units + " (estimate)"}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -159,8 +159,8 @@ class Report3 extends ReportBase {
                         <tr>
                             <th/>
                             <th className="text-right" width="15%">Free </th>
-                            <th className="text-right" width="15%">1st Load</th>
-                            <th className="text-right" width="15%">2nd Load</th>
+                            <th className="text-right" width="15%">1st&nbsp;Load</th>
+                            <th className="text-right" width="15%">2nd&nbsp;Load</th>
                             <th className="text-right" width="15%">Solid</th>
                             <th/>
                         </tr>
@@ -232,7 +232,7 @@ class Report3 extends ReportBase {
                         </tr>
                         <tr>
                             <td><b>Static F.S.</b><sup>*</sup></td>
-                            <td>{(0.0).toFixed(2)}</td>
+                            <td>infinite</td>
                             <td>{this.fs_1.toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.FS_2].value.toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.FS_Solid].value.toFixed(2)}</td>
