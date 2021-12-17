@@ -97,10 +97,10 @@ class Report3 extends ReportBase {
                             <td className="text-left" colSpan="2">{this.et_tab[this.props.symbol_table[o.End_Type].value][0]}</td>
                         </tr>
                         <tr>
-                            <td>{this.props.symbol_table[o.Coils_T].name}</td>
+                            <td>{this.props.symbol_table[o.Rate].name}</td>
                             <td>=</td>
-                            <td>{this.props.symbol_table[o.Coils_T].value.toFixed(3)}</td>
-                            <td className="text-left">{"total " + this.props.symbol_table[o.Coils_T].units}</td>
+                            <td>{this.props.symbol_table[o.Rate].value.toFixed(3)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Rate].units}</td>
                             <td/>
                             <td>{this.props.symbol_table[o.End_Extension].name}</td>
                             <td>=</td>
@@ -108,26 +108,26 @@ class Report3 extends ReportBase {
                             <td className="text-left">{this.props.symbol_table[o.End_Extension].units}</td>
                         </tr>
                         <tr>
-                            <td>{this.props.symbol_table[o.Coils_A].name}</td>
-                            <td>=</td>
-                            <td>{this.props.symbol_table[o.Coils_A].value.toFixed(3)}</td>
-                            <td className="text-left">{"active " + this.props.symbol_table[o.Coils_A].units}</td>
-                            <td/>
-                            <td>{this.props.symbol_table[o.Rate].name}</td>
-                            <td>=</td>
-                            <td>{this.props.symbol_table[o.Rate].value.toFixed(3)}</td>
-                            <td className="text-left">{this.props.symbol_table[o.Rate].units}</td>
-                        </tr>
-                        <tr>
                             <td>{this.len_lbl}</td>
                             <td>=</td>
                             <td>{this.wire_len_t.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.L_Free].units}</td>
                             <td/>
+                            <td>{this.props.symbol_table[o.Coils_T].name}</td>
+                            <td>=</td>
+                            <td>{this.props.symbol_table[o.Coils_T].value.toFixed(3)}</td>
+                            <td className="text-left">{"total " + this.props.symbol_table[o.Coils_T].units}</td>
+                        </tr>
+                        <tr>
                             <td>{this.props.symbol_table[o.Weight].name}</td>
                             <td>=</td>
                             <td>{this.wgt1000.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Weight].units + this.wgt1000_u}</td>
+                            <td/>
+                            <td>{this.props.symbol_table[o.Coils_A].name}</td>
+                            <td>=</td>
+                            <td>{this.props.symbol_table[o.Coils_A].value.toFixed(3)}</td>
+                            <td className="text-left">{"active " + this.props.symbol_table[o.Coils_A].units}</td>
                         </tr>
                         <tr>
                             <td>Safe Load</td>
@@ -158,9 +158,9 @@ class Report3 extends ReportBase {
                         <tr>
                             <th/>
                             <th className="text-right" width="15%">Free </th>
-                            <th className="text-right" width="15%">1st Load</th>
-                            <th className="text-right" width="15%">2nd Load</th>
-                            <th className="text-right" width="15%">MaxSafe</th>
+                            <th className="text-right" width="15%">1st&nbsp;Load</th>
+                            <th className="text-right" width="15%">2nd&nbsp;Load</th>
+                            <th className="text-right" width="15%">Max&nbsp;Safe</th>
                             <th/>
                         </tr>
                     </thead>
