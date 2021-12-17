@@ -70,7 +70,6 @@ export class ReportBase extends Component {
         this.wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2) + this.props.symbol_table[o.Xlen_1].value + this.props.symbol_table[o.Xlen_2].value;
                                /*  more accurate weight  */
         this.wgt1000 = 1000.0 * this.props.symbol_table[o.Density].value * (Math.PI * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value / 4.0) * this.wire_len_t;
-        this.wgt1000_u = "/1000"
 
         /* 
          *  calculates mean diameter of deflected torsion spring. 

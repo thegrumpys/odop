@@ -138,7 +138,7 @@ class Report3 extends ReportBase {
                             <td>{this.props.symbol_table[o.Weight].name}</td>
                             <td>=</td>
                             <td>{this.wgt1000.toFixed(3)}</td>
-                            <td className="text-left">{this.props.symbol_table[o.Weight].units + this.wgt1000_u}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Weight].units + "/1000"}</td>
                         </tr>
                         <tr>
                             <td>Safe Travel</td>

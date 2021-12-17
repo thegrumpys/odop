@@ -60,7 +60,6 @@ export class ReportBase extends Component {
             + this.props.symbol_table[o.End_Extension].value;
 
         this.wgt1000 = 1000.0 * this.props.symbol_table[o.Weight].value;
-        this.wgt1000_u = "/1000"
 
 //        note that value of this.wire_len_a is actually square of body wire length
         this.wire_len_a = sq1 * sq1 + sq2 * sq2;
@@ -109,7 +108,7 @@ export class ReportBase extends Component {
         this.dhat = this.props.symbol_table[o.Tensile].value / 100.0;
 
         if (this.props.symbol_table[o.End_Type].value !== Close_Wound_Coil && (this.sb > this.props.symbol_table[o.Stress_Lim_Endur].value || this.props.symbol_table[o.Stress_Hook].value > this.props.symbol_table[o.Stress_Lim_Bend].value)) {
-            this.warnmsg = "Fatigue failure at end is possible.";
+            this.warnmsg = "Fatigue failure at end is possible. See the Hook Stress topic in on-line Help for the Extension Spring design type.";
         } else {
             this.warnmsg = "";
         }

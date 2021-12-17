@@ -178,11 +178,18 @@ class Report2 extends ReportBase {
                         <tr>
                             <td className="text-right" colSpan="9">(Torsion value assumes a vertical bend radius (R2) equal twice wire diameter.)</td>
                         </tr>
+                        <tr>
+                            <td>{this.props.symbol_table[o.FS_Hook].name}</td>
+                            <td>=</td>
+                            <td>{this.props.symbol_table[o.FS_Hook].value.toFixed(2)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.FS_Hook].units}</td>
+                            <td/>
+                        </tr>
                     </tbody>
                 </table>
-                {this.warnmsg}{this.warnmsg !== "" && <br />}
                 <br />
                 <b>Cycle Life Details</b>
+                {this.warnmsg !== "" && <br />}{this.warnmsg}{this.warnmsg !== "" && <br />}{this.warnmsg !== "" && <br />}
                 <table id="view5" className="report-table">
                     <tbody>
                         <tr>

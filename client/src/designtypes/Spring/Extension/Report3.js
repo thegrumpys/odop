@@ -122,7 +122,7 @@ class Report3 extends ReportBase {
                             <td>{this.props.symbol_table[o.Weight].name}</td>
                             <td>=</td>
                             <td>{this.wgt1000.toFixed(3)}</td>
-                            <td className="text-left">{this.props.symbol_table[o.Weight].units + this.wgt1000_u}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Weight].units + "/1000"}</td>
                             <td/>
                             <td>{this.props.symbol_table[o.Coils_A].name}</td>
                             <td>=</td>
@@ -138,7 +138,7 @@ class Report3 extends ReportBase {
                             <td>{this.props.symbol_table[o.Cycle_Life].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
-                            <td className="text-left" colSpan="4">{this.cycle_life_u}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Cycle_Life].units + " (estimate)"}</td>
                             <td></td>
                         </tr>
                         <tr>

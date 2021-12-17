@@ -94,7 +94,6 @@ export class ReportBase extends Component {
             this.wire_len_t = this.wire_len_t - 3.926 * this.props.symbol_table[o.Wire_Dia].value;
                                /*  more accurate weight  */
         this.wgt1000 = 1000.0 * this.props.symbol_table[o.Density].value * (Math.PI * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value / 4.0) * this.wire_len_t;
-        this.wgt1000_u = "/1000"
 
         /*
          * intermediate dia. calcs. assume no wire stretch
