@@ -63,14 +63,14 @@ class Report2 extends ReportBase {
                         </tr>
                         <tr>
                             <td/>
-                            <td className="text-center"><b>Length</b><br />{this.props.symbol_table[o.L_Body].units}</td>
-                            <td className="text-center"><b>Deflect</b><br />{this.props.symbol_table[o.L_Body].units}</td>
                             <td className="text-center"><b>Moment</b><br />{this.props.symbol_table[o.M_1].units}</td>
+                            <td className="text-center"><b>Deflect</b><br />{this.props.symbol_table[o.Deflect_1].units}</td>
+                            <td className="text-center"><b>Length</b><br />{this.props.symbol_table[o.L_Body].units}</td>
                             <td/>
                             <td/>
                             <td className="text-center"><b>Stress</b><br />{this.props.symbol_table[o.Stress_1].units}</td>
                             <td className="text-center"><b>%TS</b><br />%</td>
-                            <td className="text-center"><b>Static FS</b><br />{this.props.symbol_table[o.FS_2].units}</td>
+                            <td className="text-center"><b>Static&nbsp;FS</b><br />{this.props.symbol_table[o.FS_2].units}</td>
                             <td/>
                             <td className="text-center"><b>Energy</b><br />{this.props.symbol_table[o.Energy].units}</td>
                         </tr>
@@ -78,9 +78,9 @@ class Report2 extends ReportBase {
                     <tbody>
                         <tr>
                             <td><b>Free</b></td>
+                            <td>{(0.0).toFixed(2)}</td>
+                            <td>{(0.0).toFixed(1)}</td>
                             <td>{this.props.symbol_table[o.L_Body].value.toFixed(3)}</td>
-                            <td> &nbsp; {(0.0).toFixed(3)}</td>
-                            <td> &nbsp; {(0.0).toFixed(2)}</td>
                             <td/>
                             <td/>
                             <td>{(0.0).toFixed(0)}</td>
@@ -91,9 +91,9 @@ class Report2 extends ReportBase {
                         </tr>
                         <tr>
                             <td><b>1</b></td>
+                            <td>{this.props.symbol_table[o.M_1].value.toFixed(2)}</td>
+                            <td>{this.props.symbol_table[o.Deflect_1].value.toFixed(1)}</td>
                             <td>{this.props.symbol_table[o.L_1].value.toFixed(3)}</td>
-                            <td> &nbsp; {this.props.symbol_table[o.Deflect_1].value.toFixed(3)}</td>
-                            <td> &nbsp; {this.props.symbol_table[o.M_1].value.toFixed(2)}</td>
                             <td/>
                             <td/>
                             <td>{this.props.symbol_table[o.Stress_1].value.toFixed(0)}</td>
@@ -104,9 +104,9 @@ class Report2 extends ReportBase {
                         </tr>
                         <tr>
                             <td><b>2</b></td>
+                            <td>{this.props.symbol_table[o.M_2].value.toFixed(2)}</td>
+                            <td>{this.props.symbol_table[o.Deflect_2].value.toFixed(1)}</td>
                             <td>{this.props.symbol_table[o.L_2].value.toFixed(3)}</td>
-                            <td> &nbsp; {this.props.symbol_table[o.Deflect_2].value.toFixed(3)}</td>
-                            <td> &nbsp; {this.props.symbol_table[o.M_2].value.toFixed(2)}</td>
                             <td/>
                             <td/>
                             <td>{this.props.symbol_table[o.Stress_2].value.toFixed(0)}</td>
@@ -117,9 +117,9 @@ class Report2 extends ReportBase {
                         </tr>
                         <tr>
                             <td><b>Max Safe</b></td>
+                            <td>{this.safe_load.toFixed(2)}</td>
+                            <td>{this.def_max.toFixed(1)}</td>
                             <td>{this.l_max.toFixed(3)}</td>
-                            <td> &nbsp; {this.def_max.toFixed(3)}</td>
-                            <td> &nbsp; {this.safe_load.toFixed(2)}</td>
                             <td/>
                             <td/>
                             <td>{this.props.symbol_table[o.Stress_Lim_Bnd_Stat].value.toFixed(0)}</td>
