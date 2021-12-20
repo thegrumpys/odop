@@ -239,26 +239,40 @@ export function migrate(design) {
     case '9':
         // Current model version
         // console.log('Convert from 9 to 10');
-//        design.labels[4].name = 'City__State___Zip';
-//        design.labels[5].name = 'Phone___email';
-//        design.labels[6].name = 'Date';
-//        design.labels[7].name = 'Part_Number';
-//        design.labels[8].name = 'Data_Source';
-//        design.labels[9].name = 'Mandril';
+        design.labels[4].name = 'City__State___Zip';
+        design.labels[5].name = 'Phone___email';
+        design.labels[6].name = 'Date';
+        design.labels[7].name = 'Part_Number';
+        design.labels[8].name = 'Data_Source';
+        design.labels[9].name = 'Mandril';
+        design.labels.push(design.labels);
         design.labels[10].name = 'Wind';
-//        design.labels[11].name = 'Shot_peen';
-//        design.labels[12].name = 'Stress_relieve_HT';
-//        design.labels[13].name = 'Pre_set';
-//        design.labels[14].name = 'Finish';
-//        design.labels[15].name = 'Squareness';
-//        design.labels[16].name = 'End_use';
-//        design.labels[17].name = 'Fits_in___Works_over';
-//        design.labels[18].name = 'Operating_temp';
-//        design.labels[19].name = 'Special_notes___tol';
-//        design.labels[20].name = 'Customer_approval';
-//        design.labels[21].name = 'Customer_date';
-//        design.labels[22].name = 'Vendor_approval';
-//        design.labels[23].name = 'Vendor_date';
+        design.labels.push(design.labels);
+        design.labels[11].name = 'Shot_peen';
+        design.labels.push(design.labels);
+        design.labels[12].name = 'Stress_relieve_HT';
+        design.labels.push(design.labels);
+        design.labels[13].name = 'Pre_set';
+        design.labels.push(design.labels);
+        design.labels[14].name = 'Finish';
+        design.labels.push(design.labels);
+        design.labels[15].name = 'Squareness';
+        design.labels.push(design.labels);
+        design.labels[16].name = 'End_use';
+        design.labels.push(design.labels);
+        design.labels[17].name = 'Fits_in___Works_over';
+        design.labels.push(design.labels);
+        design.labels[18].name = 'Operating_temp';
+        design.labels.push(design.labels);
+        design.labels[19].name = 'Special_notes___tol';
+        design.labels.push(design.labels);
+        design.labels[20].name = 'Customer_approval';
+        design.labels.push(design.labels);
+        design.labels[21].name = 'Customer_date';
+        design.labels.push(design.labels);
+        design.labels[22].name = 'Vendor_approval';
+        design.labels.push(design.labels);
+        design.labels[23].name = 'Vendor_date';
         migrated_design.version = '10'; // last thing... set the migrated model version
     case '10':
         // Current model version
