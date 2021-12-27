@@ -187,9 +187,6 @@ class Report2 extends ReportBase {
                         </tr>
                     </tbody>
                 </table>
-                (Torsion value assumes a vertical bend radius (R2) equal twice wire diameter.)<br />
-                {this.warnmsg}
-                <br /> &nbsp;
                 <br />
                 <b>Cycle Life Details</b>
                 {this.warnmsg !== "" && <br />}{this.warnmsg}{this.warnmsg !== "" && <br />}{this.warnmsg !== "" && <br />}
