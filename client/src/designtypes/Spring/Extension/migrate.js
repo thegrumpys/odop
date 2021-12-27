@@ -190,16 +190,49 @@ export function migrate(design) {
     case '5':
         // Current model version
         // console.log('Convert from 5 to 6');
-        // To be defined - presently do nothing
         design.system_controls.enable_auto_fix = 1;
+        design.labels[4].name = 'City, State & Zip';
+        design.labels[4].value = design.labels[4].value + ", " + design.labels[5].value;
+        design.labels[5].name = 'Phone & email';
+        design.labels[5].value = design.labels[6].value;
+        design.labels[6].name = 'Date';
+        design.labels[6].value = design.labels[7].value;
+        design.labels[7].name = 'Part Number';
+        design.labels[7].value = design.labels[8].value;
+        design.labels[8].name = 'Data Source';
+        design.labels[8].value = 'print     sample      verbal';
+        design.labels[9].name = 'Mandril';
+        for (let i = 10; i <= 22; i++) {
+            design.labels.push(Object.assign({},design.labels[1]));
+            design.labels[i].value = '';
+        }
+        design.labels[10].name = 'Wind';
+        design.labels[10].value = 'rh lh opt';
+        design.labels[11].name = 'Relative loop pos. & tol.';
+        design.labels[12].name = 'Gaps';
+        design.labels[13].name = 'Shot peen';
+        design.labels[13].value = 'yes no; details';
+        design.labels[14].name = 'Stress relieve/HT';
+        design.labels[15].name = 'Finish';
+        design.labels[15].value = design.labels[9].value;
+        design.labels[9].value = '';
+        design.labels[16].name = 'End use';
+        design.labels[17].name = 'Operating temp';
+        design.labels[18].name = 'Special notes & tol';
+        design.labels[19].name = 'Customer approval';
+        design.labels[19].value = '__________________________ ';
+        design.labels[20].name = 'Customer date';
+        design.labels[20].value = ' _______ ';
+        design.labels[21].name = 'Vendor approval';
+        design.labels[21].value = '__________________________ ';
+        design.labels[22].name = 'Vendor date';
+        design.labels[22].value = ' _______ ';
         migrated_design.version = '6'; // last thing... set the migrated model version
-
     case '6':
         // Current model version
         // console.log('Convert from 6 to 7');
         // To be defined - presently do nothing
         // migrated_design.version = '7'; // last thing... set the migrated model version
-
         break; // Do not copy this break
     default: // Unknown
         displayMessage('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');

@@ -10,7 +10,7 @@ export function getViewNames() {
         { name: "Advanced", title: 'Advanced', component: <DesignTable /> },
         { name: "Calculator", title: 'Calculator', component: <Calculator /> },
         { name: "Report1", title: 'Report 1 (mini)', component: <Report1 /> },
-        { name: "Report2", title: 'Report 2 (other)', component: <Report2 /> },
+        { name: "Report2", title: 'Report 2 (stress)', component: <Report2 /> },
         { name: "Report3", title: 'Report 3 (maxi)', component: <Report3 /> },
     ];
 }

@@ -10,404 +10,348 @@ class Report3 extends ReportBase {
 //        console.log('In Report3.render this.props=',this.props);
         return (
             <>
-                <h4>ODOP:Spring &nbsp; Torsion Spring Report</h4>
+                <h4>ODOP:Spring &nbsp; Torsion Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></h4>
                 <br />
-                <table className="report-table">
+                <table id="view1" className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.labels[o.Contact_person].name}:</td>
-                            <td> &nbsp; </td>
-                            <td width="35%">{this.props.labels[o.Contact_person].value}</td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>{this.props.labels[o.Phone].name}: </td>
-                            <td> &nbsp; </td>
-                            <td width="35%">{this.props.labels[o.Phone].value}</td>
+                            <td/>
+                            <td className="text-left" width="30%">{this.props.labels[o.Contact_person].value}</td>
+                            <td/>
+                            <td>{this.props.labels[o.Phone___email].name}: </td>
+                            <td/>
+                            <td className="text-left" width="30%">{this.props.labels[o.Phone___email].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.Company_name].name}: </td>
-                            <td> &nbsp; </td>
-                            <td width="35%">{this.props.labels[o.Company_name].value}</td>
-                            <td> &nbsp; &nbsp; </td>
+                            <td/>
+                            <td className="text-left" width="30%">{this.props.labels[o.Company_name].value}</td>
+                            <td/>
                             <td>{this.props.labels[o.Date].name}: </td>
-                            <td> &nbsp; </td>
-                            <td width="35%">{this.props.labels[o.Date].value}</td>
+                            <td/>
+                            <td className="text-left" width="30%">{this.props.labels[o.Date].value}</td>
                         </tr>
                         <tr>
                             <td>{this.props.labels[o.Street].name}: </td>
-                            <td> &nbsp; </td>
-                            <td width="35%">{this.props.labels[o.Street].value}</td>
-                            <td> &nbsp; &nbsp; </td>
+                            <td/>
+                            <td className="text-left" width="30%">{this.props.labels[o.Street].value}</td>
+                            <td/>
                             <td>{this.props.labels[o.Part_Number].name}: </td>
-                            <td> &nbsp; </td>
-                            <td width="35%">{this.props.labels[o.Part_Number].value}</td>
+                            <td/>
+                            <td className="text-left" width="30%">{this.props.labels[o.Part_Number].value}</td>
                         </tr>
                         <tr>
-                            <td>{this.props.labels[o.City].name}: </td>
-                            <td> &nbsp; </td>
-                            <td width="35%">{this.props.labels[o.City].value}</td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>{this.props.labels[o.Finish].name}: </td>
-                            <td> &nbsp; </td>
-                            <td width="35%">{this.props.labels[o.Finish].value}</td>
-                        </tr>
-                        <tr>
-                            <td>{this.props.labels[o.State___Zip].name}: </td>
-                            <td> &nbsp; </td>
-                            <td width="35%">{this.props.labels[o.State___Zip].value}</td>
+                            <td>{this.props.labels[o.City__State___Zip].name}: </td>
+                            <td/>
+                            <td  className="text-left" width="30%">{this.props.labels[o.City__State___Zip].value}</td>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
                         </tr>
                     </tbody>
                 </table>
-                <b>Comment: &nbsp; </b> {this.props.labels[o.COMMENT].value} <br/>
+                <b>{this.props.labels[o.COMMENT].name}: &nbsp; </b> {this.props.labels[o.COMMENT].value} <br/>
                 <br/>
-                <table className="report-table">
+                <table id="view2" className="report-table">
                     <tbody>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
                             <td>=</td>
                             <td className="text-left" colSpan="2">{this.props.symbol_table[o.Spring_Type].value}</td>
                             <td/>
-                            <td> &nbsp; &nbsp; </td>
                             <td>{this.props.symbol_table[o.Material_Type].name}</td>
                             <td>=</td>
                             <td className="text-left" colSpan="2">{this.matTypeValue}</td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
-                            <td>{this.props.symbol_table[o.End_Type].name}</td>
-                            <td>=</td>
-                            <td className="text-left" colSpan="2">{this.et_tab[this.props.symbol_table[o.End_Type].value][0]}</td>
-                            <td/>
-                            <td> &nbsp; </td>
-                            <td>{this.props.symbol_table[o.ASTM_Fed_Spec].name}</td>
-                            <td>=</td>
-                            <td className="text-left" colSpan="2">{this.astmFedSpecValue}</td>
-                            <td></td>
-                        </tr>
-                            <tr>
                             <td>{this.props.symbol_table[o.Wire_Dia].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Wire_Dia].value.toFixed(4)}</td>
-                            <td>{this.props.symbol_table[o.Wire_Dia].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Wire_Dia].units}</td>
                             <td/>
-                            <td> &nbsp; </td>
-                            <td>{this.props.symbol_table[o.Tensile].name}</td>
+                            <td>{this.props.symbol_table[o.ASTM_Fed_Spec].name}</td>
                             <td>=</td>
-                            <td>{this.tensileFixed0}</td>
-                            <td>{this.props.symbol_table[o.Tensile].units}</td>
+                            <td className="text-left" colSpan="2">{this.astmFedSpecValue}</td>
                         </tr>
-                        <tr>
+                         <tr>
                             <td>{this.props.symbol_table[o.Mean_Dia].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Mean_Dia].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Mean_Dia].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Mean_Dia].units}</td>
                             <td/>
-                            <td> &nbsp; </td>
-                            <td>{this.len_lbl}</td>
+                            <td>{this.props.symbol_table[o.Tensile].name}</td>
                             <td>=</td>
-                            <td>{this.wire_len_t.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.L_Body].units}</td>
+                            <td>{this.props.symbol_table[o.Tensile].value.toFixed(0)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Tensile].units}</td>
                         </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Index].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Spring_Index].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Spring_Index].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Spring_Index].units}</td>
                             <td/>
-                            <td> &nbsp; </td>
-                            <td>{this.props.symbol_table[o.Weight].name}</td>
+                            <td>{this.props.symbol_table[o.End_Type].name}</td>
                             <td>=</td>
-                            <td>{this.wgt1000.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Weight].units}</td>
-                            <td className="text-left">{this.wgt1000_u}</td>
+                            <td className="text-left" colSpan="2">{this.et_tab[this.props.symbol_table[o.End_Type].value][0]}</td>
                         </tr>
                         <tr>
-                            <td>{this.props.symbol_table[o.Coils_T].name}</td>
-                            <td>=</td>
-                            <td>{this.props.symbol_table[o.Coils_T].value.toFixed(3)}</td>
-                            <td>{"total " + this.props.symbol_table[o.Coils_T].units}</td>
-                            <td/>
-                            <td> &nbsp; </td>
-                            <td>{this.props.symbol_table[o.End_Angle_Free].name}</td>
-                            <td>=</td>
-                            <td>{this.props.symbol_table[o.End_Angle_Free].value.toFixed(2)}</td>
-                            <td>{this.props.symbol_table[o.End_Angle_Free].units}</td>
-                        </tr>
-                        <tr>
-                            <td>{this.props.symbol_table[o.Coils_A].name}</td>
-                            <td>=</td>
-                            <td>{this.props.symbol_table[o.Coils_A].value.toFixed(3)}</td>
-                            <td>{"active " + this.props.symbol_table[o.Coils_A].units}</td>
-                            <td/>
-                            <td> &nbsp; </td>
                             <td>{this.props.symbol_table[o.Rate].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Rate].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Rate].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Rate].units}</td>
+                            <td/>
+                            <td>{this.props.symbol_table[o.End_Angle_Free].name}</td>
+                            <td>=</td>
+                            <td>{this.props.symbol_table[o.End_Angle_Free].value.toFixed(1)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.End_Angle_Free].units}</td>
                         </tr>
                         <tr>
                             <td>Pitch</td>
                             <td>=</td>
                             <td>{this.pitch.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.L_Body].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.L_Body].units}</td>
                             <td/>
-                            <td> &nbsp; </td>
+                            <td>{this.props.symbol_table[o.Coils_T].name}</td>
+                            <td>=</td>
+                            <td>{this.props.symbol_table[o.Coils_T].value.toFixed(3)}</td>
+                            <td className="text-left">{"total " + this.props.symbol_table[o.Coils_T].units}</td>
+                        </tr>
+                        <tr>
                             <td>Helix Angle</td>
                             <td>=</td>
                             <td>{this.hlx_ang.toFixed(2)}</td>
-                            <td>degrees</td>
+                            <td className="text-left">degrees</td>
+                            <td/>
+                            <td>{this.props.symbol_table[o.Coils_A].name}</td>
+                            <td>=</td>
+                            <td>{this.props.symbol_table[o.Coils_A].value.toFixed(3)}</td>
+                            <td className="text-left">{"active " + this.props.symbol_table[o.Coils_A].units}</td>
                         </tr>
                         <tr>
                             <td>Safe Load</td>
                             <td>=</td>
                             <td>{this.safe_load.toFixed(3)}</td>
-                            <td>{this.safe_load_u}</td>
+                            <td className="text-left">{this.safe_load_u}</td>
                             <td/>
-                            <td> &nbsp; </td>
+                            <td>{this.len_lbl}</td>
+                            <td>=</td>
+                            <td>{this.wire_len_t.toFixed(3)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.L_Body].units}</td>
+                        </tr>
+                        <tr>
                             <td>Safe Travel</td>
                             <td>=</td>
-                            <td>{this.safe_travel.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Deflect_2].units}</td>
+                            <td>{this.safe_travel.toFixed(1)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Deflect_2].units}</td>
+                            <td/>
+                            <td>{this.props.symbol_table[o.Weight].name}</td>
+                            <td>=</td>
+                            <td>{this.wgt1000.toFixed(3)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Weight].units + "/1000"}</td>
                         </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Arm_2].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Arm_2].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Arm_2].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Arm_2].units}</td>
                             <td/>
-                            <td> &nbsp; </td>
                             <td>{this.props.symbol_table[o.Cycle_Life].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
-                            <td className="text-left" colSpan="2">{this.cycle_life_u}</td>
-                            <td></td>
+                            <td className="text-left">{this.props.symbol_table[o.Cycle_Life].units + " (estimate)"}</td>
                         </tr>
                         <tr>
                             <td>{this.props.symbol_table[o.Force_Arm_2].name}</td>
                             <td>=</td>
                             <td>{this.props.symbol_table[o.Force_Arm_2].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Force_Arm_2].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Force_Arm_2].units}</td>
                             <td/>
-                            <td> &nbsp; &nbsp; </td>
                             <td>({this.props.symbol_table[o.Cycle_Life].name}</td>
-                            <td>&nbsp;</td>
-                            <td className="text-left" colSpan="3">applies to body coils only.)</td>
+                            <td className="text-left" colSpan="4">applies to body coils only.)</td>
                         </tr>
                     </tbody>
                 </table>
                 <br/>
-                <table className="report-table">
+                <table id="view3" className="report-table">
                     <thead>
                         <tr>
                             <th/>
+                            <th className="text-right" width="15%">Free </th>
+                            <th className="text-right" width="15%">1st&nbsp;Load</th>
+                            <th className="text-right" width="15%">2nd&nbsp;Load</th>
+                            <th className="text-right" width="15%">Max&nbsp;Safe</th>
                             <th/>
-                            <th>Free </th>
-                            <th>1st Load</th>
-                            <th>&nbsp; 2nd Load</th>
-                            <td></td>
-                            <th> &nbsp; Max Safe</th>
-                            <th></th>
-                            <th> &nbsp; &nbsp; </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><b>Moment</b></td>
-                            <td> &nbsp; &nbsp; </td>
                             <td>{(0.0).toFixed(3)}</td>
                             <td>{this.props.symbol_table[o.M_1].value.toFixed(3)}</td>
                             <td>{this.props.symbol_table[o.M_2].value.toFixed(3)}</td>
-                            <td> &nbsp; </td>
                             <td>{this.safe_load.toFixed(3)}</td>
                             <td className="text-left" colSpan="2">{this.props.symbol_table[o.M_1].units}</td>
-                            <td/>
-                        </tr>
-                        <tr>
-                            <td><b>Length</b></td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>{this.props.symbol_table[o.L_Body].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.L_1].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.L_2].value.toFixed(3)}</td>
-                            <td> &nbsp; </td>
-                            <td>{this.l_max.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.L_1].units}</td>
                         </tr>
                         <tr>
                             <td><b>Deflection</b></td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>{(0.0).toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Deflect_1].value.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Deflect_2].value.toFixed(3)}</td>
-                            <td> &nbsp; </td>
-                            <td>{this.def_max.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.Deflect_2].units}</td>
+                            <td>{(0.0).toFixed(1)}</td>
+                            <td>{this.props.symbol_table[o.Deflect_1].value.toFixed(1)}</td>
+                            <td>{this.props.symbol_table[o.Deflect_2].value.toFixed(1)}</td>
+                            <td>{this.def_max.toFixed(1)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Deflect_2].units}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Length</b></td>
+                            <td>{this.props.symbol_table[o.L_Body].value.toFixed(3)}</td>
+                            <td>{this.props.symbol_table[o.L_1].value.toFixed(3)}</td>
+                            <td>{this.props.symbol_table[o.L_2].value.toFixed(3)}</td>
+                            <td>{this.l_max.toFixed(3)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.L_1].units}</td>
                         </tr>
                         <tr>
                             <td><b>Outside Dia.</b></td>
-                            <td> &nbsp; &nbsp; </td>
                             <td>{this.props.symbol_table[o.OD_Free].value.toFixed(3)}</td>
                             <td>{this.od_1.toFixed(3)}</td>
                             <td>{this.od_2.toFixed(3)}</td>
-                            <td> &nbsp; </td>
                             <td>{this.od_max.toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.OD_Free].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.OD_Free].units}</td>
                         </tr>
                         <tr>
                             <td><b>Inside Dia.</b></td>
-                            <td> &nbsp; &nbsp; </td>
                             <td>{this.props.symbol_table[o.ID_Free].value.toFixed(3)}</td>
                             <td>{this.id_1.toFixed(3)}</td>
                             <td>{this.id_2.toFixed(3)}</td>
-                            <td> &nbsp; </td>
                             <td>{(this.od_max - 2.0 * this.props.symbol_table[o.Wire_Dia].value).toFixed(3)}</td>
-                            <td>{this.props.symbol_table[o.ID_Free].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.ID_Free].units}</td>
                         </tr>
                         <tr>
-                            <td> &nbsp; kb = </td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>{this.kb.toFixed(3)}</td>
-                            <td></td>
-                            <td></td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td></td>
-                            <td></td>
+                            <td><b>Energy</b></td>
+                            <td>{(0.0).toFixed(2)}</td>
+                            <td>{this.energy_1.toFixed(2)}</td>
+                            <td>{this.energy_2.toFixed(2)}</td>
+                            <td>{this.energy_MS.toFixed(2)}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Energy].units}</td>
                         </tr>
                         <tr>
-                            <td> ... <b>Stress</b></td>
-                            <td></td>
-                            <td></td>
+                            <td><b>Stress</b><sup>*</sup></td>
+                            <td>{(0.0).toFixed(0)}</td>
                             <td>{this.props.symbol_table[o.Stress_1].value.toFixed(0)}</td>
                             <td>{this.props.symbol_table[o.Stress_2].value.toFixed(0)}</td>
-                            <td> &nbsp; &nbsp; </td>
                             <td>{this.props.symbol_table[o.Stress_Lim_Bnd_Stat].value.toFixed(0)}</td>
-                            <td>{this.props.symbol_table[o.Stress_1].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.Stress_1].units}</td>
                         </tr>
                         <tr>
-                            <td> ... <b>% Tensile</b></td>
-                            <td></td>
-                            <td></td>
+                            <td><b>% Tensile</b><sup>*</sup></td>
+                            <td>{(0.0).toFixed(1)}</td>
                             <td>{(this.props.symbol_table[o.Stress_1].value / this.dhat).toFixed(1)}</td>
                             <td>{(this.props.symbol_table[o.Stress_2].value / this.dhat).toFixed(1)}</td>
-                            <td> &nbsp; &nbsp; </td>
                             <td>{(this.props.symbol_table[o.Stress_Lim_Bnd_Stat].value / this.dhat).toFixed(1)}</td>
-                            <td>% &nbsp; &nbsp; </td>
+                            <td className="text-left">{this.props.symbol_table[o.PC_Ten_Bnd_Stat].units}</td>
                         </tr>
                         <tr>
-                            <td> ... <b>Static F.S.</b></td>
-                            <td></td>
-                            <td></td>
+                            <td><b>Static F.S.</b><sup>*</sup></td>
+                            <td>infinite</td>
                             <td>{this.fs_1.toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.FS_2].value.toFixed(2)}</td>
-                            <td> &nbsp; &nbsp; </td>
                             <td>{1.0.toFixed(2)}</td>
-                            <td>{this.props.symbol_table[o.FS_2].units}</td>
+                            <td className="text-left">{this.props.symbol_table[o.FS_2].units}</td>
+                        </tr>
+                        <tr>
+                            <td/>
+                            <td className="text-left" colSpan="4"><sup>*</sup> kb = {this.kb.toFixed(3)} &nbsp; ({this.heattreatValue})</td>
                         </tr>
                     </tbody>
                 </table>
                 <hr/>
                 Deflection at load point 2 is {(100.0 * this.props.symbol_table[o.Deflect_2].value / this.def_max).toFixed(0)}% of total safe deflection.<br />
                 <hr/>
-                <table className="report-table">
+                <table id="view4" className="report-table">
                     <tbody>
                         <tr>
-                            <td>Wind: </td>
-                            <td> &nbsp; </td>
-                            <td>rh</td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>lh</td>
-                            <td> &nbsp; </td>
-                            <td>opt</td>
-                            <td></td>
+                            <td className="text-left">{this.props.labels[o.Data_Source].name}: </td>
+                            <td/>
+                            <td className="text-left" colSpan="4">{this.props.labels[o.Data_Source].value}</td>
                         </tr>
                         <tr>
-                            <td>Data source: </td>
-                            <td> &nbsp; </td>
-                            <td>print </td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>sample </td>
-                            <td> &nbsp; </td>
-                            <td>verbal</td>
-                            <td></td>
+                            <td className="text-left">{this.props.labels[o.Mandril].name}: </td>
+                            <td/>
+                            <td className="text-left">{this.props.labels[o.Mandril].value}</td>
+                            <td className="text-left">{this.props.symbol_table[o.ID_Free].units}</td>
+                            <td colSpan="2"></td>
                         </tr>
                         <tr>
-                            <td>Mandrel: </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td>Fits in: </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td>Works over:</td>
+                            <td className="text-left">{this.props.labels[o.Wind].name}: </td>
+                            <td/>
+                            <td className="text-left" colSpan="2">{this.props.labels[o.Wind].value}</td>
                         </tr>
                         <tr>
-                            <td>Stress relieve</td>
-                            <td className="text-left">/ HT: </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td></td>
-                            <td></td>
+                            <td className="text-left">{this.props.labels[o.Shot_peen].name}: </td>
+                            <td/>
+                            <td className="text-left">{this.props.labels[o.Shot_peen].value}</td>
+                            <td colSpan="3" className="text-left">{"(calculations assume: " + this.peenValue + ")"}</td>
                         </tr>
                         <tr>
-                            <td>Relative end</td>
-                            <td className="text-left">&nbsp;position:</td>
-                            <td></td>
-                            <td> &nbsp; </td>
-                            <td></td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td></td>
+                            <td className="text-left">{this.props.labels[o.Stress_relieve_HT].name}: </td>
+                            <td/>
+                            <td className="text-left">{this.props.labels[o.Stress_relieve_HT].value}</td>
+                            <td colSpan="3" className="text-left">{"(calculations assume: " + this.heattreatValue + ")"}</td>
                         </tr>
                         <tr>
-                            <td> &nbsp; </td>
-                            <td>tolerance:</td>
-                            <td></td>
-                            <td> &nbsp; </td>
-                            <td></td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> Operating temp: </td>
+                            <td className="text-left">{this.props.labels[o.Relative_end_pos____tol_].name}: </td>
+                            <td/>
+                            <td className="text-left" colSpan="4">{this.props.labels[o.Relative_end_pos____tol_].value}</td>
                         </tr>
                         <tr>
-                            <td>Special notes</td>
-                            <td className="text-left" colSpan="2">& tolerances: </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; &nbsp; </td>
-                            <td> End use: </td>
-                            <td> &nbsp; </td>
+                            <td className="text-left">{this.props.labels[o.Finish].name}: </td>
+                            <td/>
+                            <td className="text-left" colSpan="4">{this.props.labels[o.Finish].value}</td>
                         </tr>
                         <tr>
-                            <td> &nbsp; </td>
+                            <td className="text-left">{this.props.labels[o.End_use].name}: </td>
+                            <td/>
+                            <td className="text-left" colSpan="4">{this.props.labels[o.End_use].value}</td>
+                        </tr>
+                        <tr>
+                            <td className="text-left">{this.props.labels[o.Operating_temp].name}: </td>
+                            <td/>
+                            <td className="text-left">{this.props.labels[o.Operating_temp].value}</td>
+                            <td/>
+                        </tr>
+                        <tr>
+                            <td className="text-left">{this.props.labels[o.Special_notes___tol].name}: </td>
+                            <td/>
+                            <td className="text-left" colSpan="4">{this.props.labels[o.Special_notes___tol].value}</td>
+                        </tr>
+                        <tr>
+                            <td/>
                         </tr>
                     </tbody>
                 </table>
-                <br />
                 <hr/>
-                <table className="report-table">
+                <table id="view5" className="report-table">
                     <tbody>
                         <tr>
-                            <td> &nbsp; approved for mfg.&nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; approved for mfg.&nbsp; </td>
+                            <td className="text-center" colSpan="2">approved for mfg.</td>
+                            <td/>
+                            <td> &nbsp; &nbsp; </td>
+                            <td className="text-center" colSpan="2">approved for mfg.</td>
+                            <td/>
                         </tr>
                         <tr>
                             <td> &nbsp; </td>
                         </tr>
                         <tr>
-                            <td> by _______________________ &nbsp; </td>
-                            <td> &nbsp; date _______ &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> &nbsp; </td>
-                            <td> by _______________________ &nbsp; </td>
-                            <td> &nbsp; date _______ &nbsp; </td>
+                            <td colSpan="2">by {this.props.labels[o.Customer_approval].value}</td>
+                            <td>date {this.props.labels[o.Customer_date].value}</td>
+                            <td> &nbsp; &nbsp; </td>
+                            <td colSpan="2">by {this.props.labels[o.Vendor_approval].value}</td>
+                            <td>date {this.props.labels[o.Vendor_date].value}</td>
                         </tr>
                     </tbody>
                 </table>
+            <br/>
             </>
         );
     }

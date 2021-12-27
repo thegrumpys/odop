@@ -240,8 +240,47 @@ export function migrate(design) {
         // Current model version
         // console.log('Convert from 9 to 10');
         design.system_controls.enable_auto_fix = 1;
+        
+        design.labels[4].name = 'City, State & Zip';
+        design.labels[4].value = design.labels[4].value + ", " + design.labels[5].value;
+        design.labels[5].name = 'Phone & email';
+        design.labels[5].value = design.labels[6].value;
+        design.labels[6].name = 'Date';
+        design.labels[6].value = design.labels[7].value;
+        design.labels[7].name = 'Part Number';
+        design.labels[7].value = design.labels[8].value;
+        design.labels[8].name = 'Data Source';
+        design.labels[8].value = 'print     sample      verbal';
+        design.labels[9].name = 'Mandril';
+        for (let i = 10; i <= 23; i++) {
+            design.labels.push(Object.assign({},design.labels[1]));
+            design.labels[i].value = '';
+        }
+        design.labels[10].name = 'Wind';
+        design.labels[10].value = 'rh lh opt';
+        design.labels[11].name = 'Shot peen';
+        design.labels[11].value = 'yes no; details';
+        design.labels[12].name = 'Stress relieve/HT';
+        design.labels[13].name = 'Pre-set';
+        design.labels[13].value = 'no';
+        design.labels[14].name = 'Finish';
+        design.labels[14].value = design.labels[9].value;
+        design.labels[9].value = '';
+        design.labels[15].name = 'Squareness';
+        design.labels[16].name = 'End use';
+        design.labels[17].name = 'Fits in / Works over';
+        design.labels[18].name = 'Operating temp';
+        design.labels[19].name = 'Special notes & tol';
+        design.labels[20].name = 'Customer approval';
+        design.labels[20].value = '__________________________ ';
+        design.labels[21].name = 'Customer date';
+        design.labels[21].value = ' _______ ';
+        design.labels[22].name = 'Vendor approval';
+        design.labels[22].value = '__________________________ ';
+        design.labels[23].name = 'Vendor date';
+        design.labels[23].value = ' _______ ';
+       
         migrated_design.version = '10'; // last thing... set the migrated model version
-
     case '10':
         // Current model version
         // console.log('Convert from 10 to 11');

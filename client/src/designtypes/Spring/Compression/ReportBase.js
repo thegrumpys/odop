@@ -19,6 +19,9 @@ export class ReportBase extends Component {
             this.m_tab = require('../mat_ips.json');
         this.et_tab = require('./endtypes.json');
 
+        /*  Bring in life target table  */
+            this.lifetarg = require('./lifetarget.json');
+
         this.hits = 0;
         this.errmsg = "";
         if (this.props.symbol_table[o.L_Free].value < this.props.symbol_table[o.L_Solid].value) {
@@ -77,7 +80,7 @@ export class ReportBase extends Component {
             this.pitch = (this.props.symbol_table[o.L_Free].value - 2.0 * this.props.symbol_table[o.Wire_Dia].value) / this.props.symbol_table[o.Coils_A].value;
             break;
         default:        //  User Specified
-            this.pitch = 0.0;
+            this.pitch = (this.props.symbol_table[o.L_Free].value - (this.props.symbol_table[o.Inactive_Coils].value + 1.0) * this.props.symbol_table[o.Wire_Dia].value) / this.props.symbol_table[o.Coils_A].value;
         }
 
         var sq1 = this.props.symbol_table[o.L_Free].value;
@@ -91,7 +94,6 @@ export class ReportBase extends Component {
             this.wire_len_t = this.wire_len_t - 3.926 * this.props.symbol_table[o.Wire_Dia].value;
                                /*  more accurate weight  */
         this.wgt1000 = 1000.0 * this.props.symbol_table[o.Density].value * (Math.PI * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value / 4.0) * this.wire_len_t;
-        this.wgt1000_u = "/1000"
 
         /*
          * intermediate dia. calcs. assume no wire stretch
@@ -117,8 +119,6 @@ export class ReportBase extends Component {
          * From: https://www.acxesspring.com/spring-diameter-change.html
          * From: http://springipedia.com/compression-general-design.asp
          */
-
-        this.tensileFixed0 = this.props.symbol_table[o.Tensile].value.toFixed(0);
 
         /* used to compute % tensile values */
 //        if (this.props.symbol_table[o.Tensile].value <= this.props.system_controls.smallnum) {
@@ -202,14 +202,29 @@ export class ReportBase extends Component {
         this.safe_travel = Math.min(this.safe_load / this.props.symbol_table[o.Rate].value, def_max);
 
 //        console.log("this.props.symbol_table[o.Prop_Calc_Method].value = ", this.props.symbol_table[o.Prop_Calc_Method].value);
-        if (this.props.symbol_table[o.Prop_Calc_Method].value === 1){
+        if (this.props.symbol_table[o.Prop_Calc_Method].value === 1 && this.props.symbol_table[o.Material_Type] !== 0){
             this.matTypeValue = this.m_tab[this.props.symbol_table[o.Material_Type].value][mo.matnam];
             this.astmFedSpecValue = this.props.symbol_table[o.ASTM_Fed_Spec].value;
+            this.clWarnString = "";
         } else {
             this.matTypeValue = "User_Specified";
             this.astmFedSpecValue = "N/A";
+            this.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
         }
 //        console.log("this.matTypeValue, this.astmFedSpecValue = ", this.matTypeValue, this.astmFedSpecValue);
+
+        this.lifeTargValue = this.lifetarg[this.props.symbol_table[o.Life_Category].value];
+        if (this.props.symbol_table[o.Life_Category].value <= 4){
+            this.peenValue = "Not peened";
+        } else {
+            this.peenValue = "Shot peened";
+        }
+
+        this.energy_1 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_1].value * this.props.symbol_table[o.Deflect_1].value;
+        this.energy_2 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_2].value * this.props.symbol_table[o.Deflect_2].value;
+        var DefSolid = (this.props.symbol_table[o.L_Free].value - this.props.symbol_table[o.L_Solid].value);
+        this.energy_S = 0.5 * this.props.symbol_table[o.Rate].value * DefSolid * DefSolid;
+
         return null;
     }
 

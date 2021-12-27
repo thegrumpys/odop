@@ -19,11 +19,17 @@ export class ReportBase extends Component {
             this.m_tab = require('../mat_ips.json');
         this.et_tab = require('./endtypes.json');
 
+        /*  Bring in life target table  */
+            this.lifetarg = require('./lifetarget.json');
+
+        /*  Bring in heat treat table  */
+            this.heattreatment = require('./heattreat.json');
+
         this.hits = 0;
         this.errmsg = "";
         if (this.props.symbol_table[o.ID_Free].value < 0.0) {
             this.hits++;
-            this.errmsg += ": " + this.props.symbol_table[o.ID_Free].name + " < 0.0";
+            this.errmsg += ": " + this.props.symbol_table[o.ID_Free].name + " < zero";
         }
         if (this.props.symbol_table[o.Coils_A].value < 1.0) {
             this.hits++;
@@ -64,7 +70,6 @@ export class ReportBase extends Component {
         this.wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2) + this.props.symbol_table[o.Xlen_1].value + this.props.symbol_table[o.Xlen_2].value;
                                /*  more accurate weight  */
         this.wgt1000 = 1000.0 * this.props.symbol_table[o.Density].value * (Math.PI * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value / 4.0) * this.wire_len_t;
-        this.wgt1000_u = "/1000"
 
         /* 
          *  calculates mean diameter of deflected torsion spring. 
@@ -78,8 +83,6 @@ export class ReportBase extends Component {
         this.dhat = this.def_dia_t(this.props.symbol_table[o.Deflect_2].value);
         this.od_2 = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
         this.id_2 = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
-
-        this.tensileFixed0 = this.props.symbol_table[o.Tensile].value.toFixed(0);
 
         this.dhat = this.props.symbol_table[o.Tensile].value / 100.0;
 
@@ -130,19 +133,38 @@ export class ReportBase extends Component {
         else
             this.hlx_ang = 0.0;
 
-        this.cycle_life_u = this.props.symbol_table[o.Cycle_Life].units + " (est)";
-
         this.safe_travel = this.def_max;
         
 //        console.log("this.props.symbol_table[o.Prop_Calc_Method].value = ", this.props.symbol_table[o.Prop_Calc_Method].value);
         if (this.props.symbol_table[o.Prop_Calc_Method].value === 1){
             this.matTypeValue = this.m_tab[this.props.symbol_table[o.Material_Type].value][mo.matnam];
             this.astmFedSpecValue = this.props.symbol_table[o.ASTM_Fed_Spec].value;
+            this.clWarnString = "";
         } else {
             this.matTypeValue = "User_Specified";
             this.astmFedSpecValue = "N/A";
+            this.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
         }
 //        console.log("this.matTypeValue, this.astmFedSpecValue = ", this.matTypeValue, this.astmFedSpecValue);
+
+        this.lifeTargValue = this.lifetarg[this.props.symbol_table[o.Life_Category].value];
+        if (this.props.symbol_table[o.Life_Category].value <= 4){
+            this.peenValue = "Not peened";
+        } else {
+            this.peenValue = "Shot peened";
+        }
+
+        this.heattreatValue = this.heattreatment[this.props.symbol_table[o.Heat_Treat].value];
+
+        const Deg2Rad = 2.0 * Math.PI / 360.0;
+        this.RateInRad = this.props.symbol_table[o.Rate].value / Deg2Rad;
+        this.Def1InRad = this.props.symbol_table[o.Deflect_1].value * Deg2Rad;
+        this.Def2InRad = this.props.symbol_table[o.Deflect_2].value * Deg2Rad;
+        this.DefMSInRad = this.def_max * Deg2Rad;
+        this.energy_1 = 0.5 * this.RateInRad * this.Def1InRad * this.Def1InRad;
+        this.energy_2 = 0.5 * this.RateInRad * this.Def2InRad * this.Def2InRad;
+        this.energy_MS = 0.5 * this.RateInRad * this.DefMSInRad * this.DefMSInRad;
+
         return null;
     }
 

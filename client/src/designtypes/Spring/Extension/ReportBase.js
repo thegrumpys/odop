@@ -13,13 +13,15 @@ export class ReportBase extends Component {
     render() {
 //        console.log('In ReportBase.render this=',this);
         const Close_Wound_Coil = 5;
-
         /*  Bring in material properties table  */
         if (this.props.symbol_table[o.Material_File].value === "mat_SI.json")
             this.m_tab = require('../mat_SI.json');
         else
             this.m_tab = require('../mat_ips.json');
         this.et_tab = require('./endtypes.json');
+
+        /*  Bring in life target table  */
+            this.lifetarg = require('./lifetarget.json');
 
         this.hits = 0;
         this.errmsg = "";
@@ -58,7 +60,6 @@ export class ReportBase extends Component {
             + this.props.symbol_table[o.End_Extension].value;
 
         this.wgt1000 = 1000.0 * this.props.symbol_table[o.Weight].value;
-        this.wgt1000_u = "/1000"
 
 //        note that value of this.wire_len_a is actually square of body wire length
         this.wire_len_a = sq1 * sq1 + sq2 * sq2;
@@ -107,7 +108,7 @@ export class ReportBase extends Component {
         this.dhat = this.props.symbol_table[o.Tensile].value / 100.0;
 
         if (this.props.symbol_table[o.End_Type].value !== Close_Wound_Coil && (this.sb > this.props.symbol_table[o.Stress_Lim_Endur].value || this.props.symbol_table[o.Stress_Hook].value > this.props.symbol_table[o.Stress_Lim_Bend].value)) {
-            this.warnmsg = "Fatigue failure at end is possible.";
+            this.warnmsg = "Fatigue failure at end is possible. See the Hook Stress topic in on-line Help for the Extension Spring design type.";
         } else {
             this.warnmsg = "";
         }
@@ -116,11 +117,25 @@ export class ReportBase extends Component {
         if (this.props.symbol_table[o.Prop_Calc_Method].value === 1){
             this.matTypeValue = this.m_tab[this.props.symbol_table[o.Material_Type].value][mo.matnam];
             this.astmFedSpecValue = this.props.symbol_table[o.ASTM_Fed_Spec].value;
+            this.clWarnString = "";
         } else {
             this.matTypeValue = "User_Specified";
             this.astmFedSpecValue = "N/A";
+            this.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
         }
 //        console.log("this.matTypeValue, this.astmFedSpecValue = ", this.matTypeValue, this.astmFedSpecValue);
+
+        this.lifeTargValue = this.lifetarg[this.props.symbol_table[o.Life_Category].value];
+        if (this.props.symbol_table[o.Life_Category].value <= 4){
+            this.peenValue = "Not peened";
+        } else {
+            this.peenValue = "Shot peened";
+        }
+
+        this.energy_1 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_1].value * this.props.symbol_table[o.Deflect_1].value;
+        this.energy_2 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_2].value * this.props.symbol_table[o.Deflect_2].value;
+        this.energy_MS = 0.5 * this.props.symbol_table[o.Rate].value * this.safe_travel * this.safe_travel;
+
         return null;
     }
 

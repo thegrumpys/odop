@@ -833,15 +833,11 @@ export const initialState = {
             "value": ""
         },
         {
-            "name": "City",
+            "name": "City, State & Zip",
             "value": ""
         },
         {
-            "name": "State & Zip",
-            "value": ""
-        },
-        {
-            "name": "Phone",
+            "name": "Phone & email",
             "value": ""
         },
         {
@@ -853,12 +849,72 @@ export const initialState = {
             "value": ""
         },
         {
+            "name": "Data Source",
+            "value": "print     sample      verbal"
+        },
+        {
+            "name": "Mandril",
+            "value": ""
+        },
+        {
+            "name": "Wind",
+            "value": "rh lh opt"
+        },
+        {
+            "name": "Shot peen",
+            "value": "yes no; details"
+        },
+        {
+            "name": "Stress relieve/HT",
+            "value": ""
+        },
+        {
+            "name": "Pre-set",
+            "value": "no"
+        },
+        {
             "name": "Finish",
             "value": ""
+        },
+        {
+            "name": "Squareness",
+            "value": ""
+        },
+        {
+            "name": "End use",
+            "value": ""
+        },
+        {
+            "name": "Fits in / Works over",
+            "value": ""
+        },
+        {
+            "name": "Operating temp",
+            "value": ""
+        },
+        {
+            "name": "Special notes & tol",
+            "value": ""
+        },
+        {
+            "name": "Customer approval",
+            "value": "__________________________ "
+        },
+        {
+            "name": "Customer date",
+            "value": " _______ "
+        },
+        {
+            "name": "Vendor approval",
+            "value": "__________________________ "
+        },
+            {
+            "name": "Vendor date",
+            "value": " _______ "
         }
-    ],
+],
     "type": "Spring/Compression",
-    "version": "9",
+    "version": "10",
     "result": {
         "objective_value": 0,
         "termination_condition": "",
