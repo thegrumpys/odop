@@ -164,7 +164,7 @@ class FileDelete extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     Delete&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
+                <Modal show={this.state.modal} onHide={this.onCancel}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Delete

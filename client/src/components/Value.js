@@ -19,7 +19,7 @@ class Value extends Component {
 //        console.log('In Value.render this=',this);
         return (
             <>
-                <td className={"align-middle " + this.props.className}>
+                <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
                         {typeof this.props.value === 'number' ?
                             <FormControlTypeNumber disabled={true} value={this.props.value.toODOPPrecision()} />

@@ -110,7 +110,7 @@ class FormControlTypeNumber extends Component {
                 disabled={this.props.disabled}
                 readOnly={this.props.readOnly}
                 className={value_class}
-                step="any"
+                step={this.props.step}
                 value={this.state.focused ? this.state.valueString : this.state.value.toODOPPrecision()}
                 onClick={this.onClick}
                 onChange={this.onChange}
@@ -125,6 +125,7 @@ FormControlTypeNumber.propTypes = {
     readOnly: PropTypes.bool,
     value: PropTypes.any,
     className: PropTypes.string,
+    step: PropTypes.string,
     onClick: PropTypes.func,
     onChange: PropTypes.func,
     onChangeValid: PropTypes.func,
@@ -138,6 +139,7 @@ FormControlTypeNumber.defaultProps = {
     readOnly: false,
     value: '',
     className: '',
+    step: 'any',
     onClick: (()=>{}),
     onChange: (()=>{}),
     onChangeValid: (()=>{}),

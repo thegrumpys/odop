@@ -99,7 +99,7 @@ class ViewCADModel extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     CAD Model (Pre-alpha)
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} className={this.props.className} onHide={this.toggle} size="lg">
+                <Modal show={this.state.modal} onHide={this.toggle} size="lg">
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : CAD Model (Pre-alpha)

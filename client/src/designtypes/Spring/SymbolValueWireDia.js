@@ -229,7 +229,7 @@ class SymbolValueWireDia extends Component {
                         )}
                     </InputGroup>
                 </td>
-                <Modal show={this.state.modal} className={this.props.className} onHide={this.onClose}>
+                <Modal show={this.state.modal} onHide={this.onClose}>
                     <Modal.Header>
                         <Modal.Title>
                         {this.props.element.type === "equationset" && (this.props.element.input ? 'Independent Variable' : 'Dependent Variable')} Value Input

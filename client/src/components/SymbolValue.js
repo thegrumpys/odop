@@ -251,7 +251,7 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.render value_class=',value_class);
         return (
             <>
-                <td className={"align-middle " + this.props.className}>
+                <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             (value_tooltip !== undefined ?
@@ -300,7 +300,7 @@ class SymbolValue extends Component {
                         : ''}
                     </InputGroup>
                 </td>
-                <Modal show={this.state.modal} className={this.props.className} onHide={this.onClose}>
+                <Modal show={this.state.modal} onHide={this.onClose}>
                     <Modal.Header>
                         <Modal.Title>
                         {this.props.element.type === "equationset" && (this.props.element.input ? 'Independent Variable' : 'Dependent Variable')} Value Input
