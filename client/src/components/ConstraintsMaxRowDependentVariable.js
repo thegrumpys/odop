@@ -37,7 +37,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
         logValue(this.props.element.name,'Disabled','MaxConstraintFlag',false);
     }
 
-    onChangeMaxConstraint(event) {
+    onChangeValidMaxConstraint(event) {
 //        console.log("In ConstraintMaxRowDependentVariable.onChangeValidMaxConstraint event.target.value=", event.target.value);
         var value = parseFloat(event.target.value);
         if (this.props.element.lmax & FIXED) {
