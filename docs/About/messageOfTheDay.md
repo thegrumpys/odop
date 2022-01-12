@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated November 12, 2021   
+**Message-of-the-day** &nbsp; updated January 11, 2022   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -8,18 +8,11 @@ With the recent changes in user account features and introduction of Calculator 
 browser requirements have changed. 
 For details, see: [Requirements](requirements)  
 
-[ODOP version 4.0](https://github.com/thegrumpys/odop/milestone/39?closed=1) was released February 27, 2021.  
-Opening a design saved in a prior version will produce a pop-up message. 
+A preview of ODOP version 4.1 is now in place.
+Follow [this link](https://github.com/thegrumpys/odop/milestone/37) to see change details in GitHub.
+Opening a design saved in a prior version of ODOP will produce a pop-up message.
 See: [MIGRATION](../Help/terminology#migration). 
-
-[ODOP version 4.0.1](https://github.com/thegrumpys/odop/milestone/40?closed=1) was released March 21, 2021.   
-[ODOP version 4.0.2](https://github.com/thegrumpys/odop/milestone/46?closed=1) was released April 04, 2021.   
-[ODOP version 4.0.3](https://github.com/thegrumpys/odop/milestone/47?closed=1) was released April 25, 2021.   
-[ODOP version 4.0.4](https://github.com/thegrumpys/odop/milestone/48?closed=1) was released May 09, 2021.   
-[ODOP version 4.0.5](https://github.com/thegrumpys/odop/milestone/49?closed=1) was released June 06, 2021.   
-[ODOP version 4.0.6](https://github.com/thegrumpys/odop/milestone/50?closed=1) was released August 05, 2021.   
-[ODOP version 4.0.7](https://github.com/thegrumpys/odop/milestone/51?closed=1) was released November 12, 2021.   
-Follow the links above to see change details in GitHub.  
+A final release of ODOP version 4.1 is expected as soon as January 16, 2022.
 
 ODOP is [Experimental Software](experimental).  
 
@@ -42,5 +35,6 @@ To return, switch tabs or simply close this tab.
  
 <!---
 Comment
+[ODOP version 4.0.7](https://github.com/thegrumpys/odop/milestone/51?closed=1) was released November 12, 2021.   
 -->
  
