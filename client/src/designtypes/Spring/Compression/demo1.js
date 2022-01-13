@@ -167,9 +167,8 @@ export const execute = {
                     </p>
                     <p>
                     Again, this is a good time to take a good look at the existing values.
-                    Click on the Report tabs to view even more details.
-                    Be sure to click on the "Design:" tab to return to the main page 
-                    before continuing. 
+                    Even more details are provided in the Reports available on the View menu.
+                    After viewing Reports, be sure to return to the main page before continuing. 
                     </p>
                     <p>You can scroll the page down to view the complete set of values. 
                     Scroll back up in order to use the Next button to continue.</p>

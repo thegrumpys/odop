@@ -8,7 +8,7 @@ export const execute = {
                 <>
                     <p>
                     Welcome to the ODOP:Spring web app!
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewAdvanced" target="_blank" rel="noopener noreferrer">Advanced view </a> 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewAdvanced" target="_blank" rel="noopener noreferrer">Advanced View </a> 
                     is below. 
                     The existing values are an arbitrary starting point. 
                     Modify them to meet your requirements. 
@@ -26,17 +26,21 @@ export const execute = {
                     Dependent Variables can be controlled by setting 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#constraints" target="_blank" rel="noopener noreferrer">constraints</a>&nbsp; 
                     or 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#fix" target="_blank" rel="noopener noreferrer">FIXed status</a>.&nbsp; 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#fix" target="_blank" rel="noopener noreferrer">Fixed status</a>.&nbsp; 
                     Use the 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/search" target="_blank" rel="noopener noreferrer">Search</a>&nbsp; 
-                    function (<b>Action : Search</b> menu) to find a design that meets constraints and FIXes.
-                    FIXed status causes Search to achieve or hold a specified value.
-                    FREE status allows Search to manipulate the variable to achieve a feasible design. 
+                    function (Search button or the <b>Action : Search</b> menu) to find a design that meets constraints and Fixes.
+                    Fixed status causes Search to achieve or hold a specified value.
+                    Free status allows Search to manipulate the variable to achieve a feasible design. 
+                    By default, specifying a value for an Independent Variable will leave that variable in Fixed status.
+                    See
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#autoFix" target="_blank" rel="noopener noreferrer">AutoFix</a>&nbsp; 
+                    for details. 
                     </p>
 
                     <p>
                     Push the blue "Next" button in the upper right to show the next page of instructions, hints and tips. 
-                    Push the darker gray "Exit" button to close this light green panel. 
+                    Push the darker gray "Exit" button to close (hide) this light green panel. 
                     </p>
                 </>
             ),
@@ -57,10 +61,11 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Expanded descriptions are available as tooltips for many elements of the Advanced view.
+                    Expanded descriptions are available as tooltips for many elements of the Advanced View.
                     Hover the cursor (tap on a touch screen) over headings, labels, and variable names to learn more.
-                    &nbsp; <b>Variable names</b> are illustrated on this compression spring 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/png/ForceVsDeflection.png" target="_blank" rel="noopener noreferrer">Force-Deflection diagram</a>. 
+                    This compression spring 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/png/ForceVsDeflection.png" target="_blank" rel="noopener noreferrer">Force-Deflection diagram</a>&nbsp; 
+                    illustrates selected variable names.  
                     Additional insights are available in the  
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp; 
                     plus 
@@ -88,9 +93,11 @@ export const execute = {
                 <>
                     <p>
                     The ODOP:Spring 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewAdvanced" target="_blank" rel="noopener noreferrer">Advanced view</a>&nbsp; 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewAdvanced" target="_blank" rel="noopener noreferrer">Advanced View</a>&nbsp; 
                     allows access to all program features.
                     Alternative presentations are provided by other views.
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewReports" target="_blank" rel="noopener noreferrer">Reports</a>&nbsp; 
+                    present additional information about your current spring design.
                     Use the <b>View</b> menu above to switch views.
                     </p>
                     
@@ -104,7 +111,7 @@ export const execute = {
                     &  
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/t_spring" target="_blank" rel="noopener noreferrer">torsion</a> 
                     ) and 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/unitsUSmetric" target="_blank" rel="noopener noreferrer">units (U.S., metric)</a>.&nbsp; 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/unitsUSmetric" target="_blank" rel="noopener noreferrer">units</a>&nbsp; (U.S., metric). 
                     These system-provided designs can be a starting point for new custom designs. 
                     Sign up for a free  
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/userAccounts" target="_blank" rel="noopener noreferrer">user account</a>&nbsp; 
@@ -125,9 +132,9 @@ export const execute = {
                     In summary: 
                     <br />
                     Enter known values. 
-                    Use constraints and FIX to describe what the design needs to achieve.
+                    Use constraints and Fix to describe what the design needs to achieve.
                     Be sure to select appropriate values for Material_Type and End_Type.
-                    Use the Search function (<b>Action : Search</b> menu) to find a feasible solution.
+                    Use the Search function (Search button or <b>Action : Search</b> menu) to find a feasible solution.
                     Use the Seek function (<b>Action : Seek</b> menu) to optimize a feasible design.
                    </p>
                     

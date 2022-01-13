@@ -8,30 +8,31 @@ export const execute = {
                 <>
                     <p>
                     Welcome to the ODOP:Spring web app!
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewCalculator" target="_blank" rel="noopener noreferrer">Calculator view</a>&nbsp; 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewCalculator" target="_blank" rel="noopener noreferrer">Calculator View</a>&nbsp; 
                     is below. 
                     </p>
 
                     <p>
-                    The white background entry fields below are inputs to the Calculator.
+                    Values in the white background fields can be controlled by user input. 
+                    Control of Dependent Variables (marked with an asterisk) requires a Search.  
                     Calculation results appear in the light gray background fields.
                     The existing values are an arbitrary starting point. 
                     Modify them to meet your requirements. 
                     </p>
 
                     <p>
-                    At first glance, ODOP:Spring Calculator view appears to be based on applied load.
-                    Forces are inputs. 
-                    Deflections are outputs. 
-                    There seems to be a requirement to supply a value for the total number of coils 
-                    (Coils_T is a white input field). 
+                    At first glance, ODOP:Spring Calculator View appears to be based on applied load.
+                    Forces are inputs (Independent Variables). 
+                    Deflections are outputs (Dependent Variables). 
+                    There seems to be a requirement to supply a value for wire diameter and the total number of coils 
+                    (Independent Variables). 
                     <b> But wait! There is more. </b>
-                    Continue reading to learn how <b>right click</b> in Calculator view provides access to the backsolving features (
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#fix" target="_blank" rel="noopener noreferrer">FIX / FREE</a>,&nbsp; 
+                    Continue reading to learn how access to the ODOP backsolving features (
+                          <a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#fix" target="_blank" rel="noopener noreferrer">Fix / Free</a>,&nbsp; 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#constraints" target="_blank" rel="noopener noreferrer">constraints</a>&nbsp; 
                     and
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/search" target="_blank" rel="noopener noreferrer">Search</a>&nbsp; 
-                    ) that allow flexibility on how your design problem is specified.  
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/search" target="_blank" rel="noopener noreferrer">Search</a> 
+                    ) allows flexibility on how your design problem is specified.  
                     For example, it is possible to specify force and deflection or spring rate 
                     and then let the Search feature determine the necessary wire diameter, coil diameter and
                     number of coils. 
@@ -62,21 +63,25 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    <b>Right click</b> (long press on a touch screen) on 
-                    one of those white entry fields or a darker (more bold) numeric value to control 
-                    FIX / FREE status and to establish or modify constraints. 
-                    FIXed status causes the ODOP Search feature (<b>Action : Search</b> menu) to achieve or hold a specified value.
-                    FREE status allows Search to manipulate the variable to achieve a feasible design.
+                    Click on one of those white entry fields to specify a value, 
+                    control Fix / Free status and to establish or modify constraints. 
+                    Fixed status causes the ODOP Search feature (Search button or <b>Action : Search</b> menu) to achieve or hold a specified value.
+                    Free status allows Search to manipulate the variable to achieve a feasible design. 
+                    By default, specifying a value will leave that variable in Fixed status.
+                    See
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#autoFix" target="_blank" rel="noopener noreferrer">AutoFix</a>&nbsp; 
+                    for details. 
                     The <a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
-                    sessions provide additional detail on these concepts.
-                    For now, Firefox users need to use Advanced View in order to access FIX / FREE and constraints. 
+                    sessions provide additional detail on these concepts as well as more advanced topics 
+                    such as user specified material properties and end types.
                     </p>
                     
                     <p>
-                    Expanded descriptions are available as tooltips for many elements of the Calculator view.
+                    Expanded descriptions are available as tooltips for many elements of the Calculator View.
                     Hover the cursor (tap on a touch screen) over headings, labels, and variable names to learn more.
-                    &nbsp; <b>Variable names</b> are illustrated on this compression spring 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/png/ForceVsDeflection.png" target="_blank" rel="noopener noreferrer">Force-Deflection diagram</a>. 
+                    This compression spring 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/png/ForceVsDeflection.png" target="_blank" rel="noopener noreferrer">Force-Deflection diagram</a>&nbsp; 
+                    illustrates selected variable names.  
                     Additional insights are available in the  
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp; 
                     plus 
@@ -104,18 +109,20 @@ export const execute = {
                     </p>
                     
                     <p>
-                    The Wire_Dia field of Calculator view provides a list of commonly available wire diameters 
+                    The Wire_Dia field of Calculator View provides a list of commonly available wire diameters 
                     that depends on the selected Material_Type and 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/unitsUSmetric" target="_blank" rel="noopener noreferrer">units (U.S., metric)</a>.&nbsp; 
-                    Choose a standard wire diameter by selecting the Wire_Dia input field and scrolling to the desired value. 
-                    After selection the value is automatically marked with FIXed status so that it is not manipulated by Search.
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/unitsUSmetric" target="_blank" rel="noopener noreferrer">units</a>&nbsp; (U.S., metric). 
+                    To choose a standard wire diameter, select the Wire_Dia input field, choose "Select std size", 
+                    click in the Wire_Dia field and scroll to the desired value. 
+                    After selection, the value is automatically marked with Fixed status so that it is not manipulated by Search.
                     </p>
                     
                     <p>
                     Use the <b>View</b> menu above to switch views. 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewAdvanced" target="_blank" rel="noopener noreferrer">Advanced view</a>&nbsp; 
-                    provides access to the full range of ODOP:Spring features.
-                    Reports present additional information about your current spring design.
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewAdvanced" target="_blank" rel="noopener noreferrer">Advanced View</a>&nbsp; 
+                    provides access to the full range of ODOP:Spring features. 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewReports" target="_blank" rel="noopener noreferrer">Reports</a>&nbsp; 
+                    present additional information about your current spring design.
                     </p>
                     <br />
                 </>
@@ -147,12 +154,11 @@ export const execute = {
                     <p>
                     In summary: 
                     <br />
-                    Use <b>right-click</b> on a value to specify what is known or desired in order to describe 
-                    your design objectives in terms of FIX, FREE and constraints.  
-                    Values with FREE status will be calculated.  
+                    <b>Click on a value</b> to specify what is known or desired in order to describe 
+                    your design objectives in terms of Fix, Free and constraints.  
                     Independent Variables need to have a plausible (not blank; usually not zero and not negative) starting value.
                     Be sure to select appropriate values for Material_Type and End_Type.
-                    Use the <b>Action : Search</b> menu or the Search button to find a feasible design. 
+                    Use the the Search button or the <b>Action : Search</b> menu to find a feasible design. 
                     Use the <b>Action : Seek</b> menu to optimize a feasible design. 
                     Switch to other views to utilize additional capabilities of ODOP:Spring.
                    </p>

@@ -113,7 +113,7 @@ export const execute = {
                 <>
                 <p>
                 Take a look at Report&nbsp;1&nbsp;(mini).
-                Simply select (click on) that tab to view the report.
+                Use the View menu to select that Report.
                 <br /><br />
                 Note the warning message.  It says that when applying a 112
                 pound force, the current values of WIRE_DIA, COILS_T and L_FREE
@@ -151,8 +151,8 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    If you are still on the Report tab,
-                    don't forget to switch back to the tab containing the main page ("Design:").
+                    If you are still viewing the Report,
+                    don't forget to switch back to the main page.
                     </p>
                     
                     <p>
@@ -237,8 +237,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    If you are still on a Report tab,
-                    don't forget to switch back to the tab containing the main page ("Design:").
+                    If you are still viewing a Report, don't forget to switch back to the main page.
                     </p>
                     
                     <p>

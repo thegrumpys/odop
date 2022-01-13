@@ -307,8 +307,8 @@ export const execute = {
                     
                     <p>
                     While it really doesn't make a lot of difference, 
-                    if you are still positioned at a Report tab, 
-                    you may want to switch back to the main "Design" tab before using the "Next" button to proceed.
+                    if you are still viewing a Report, 
+                    you may want to switch back to the main page before using the "Next" button to proceed.
                     </p>
                 </>
             )

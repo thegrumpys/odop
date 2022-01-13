@@ -294,7 +294,7 @@ export const execute = {
                     <p>Yes,  A feasible solution is available. Please take a moment to scroll through and view the values.</p>
                     <p>
                     Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
-                    Simply select (click on) that tab to view the report.
+                    Use the View menu to select that Report.
                     The message: 
                     "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
                     is produced any time that the second load uses more
@@ -316,8 +316,8 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    If you are still on the Report tab,
-                    you may want to switch back to the tab containing the main page ("Design:").
+                    If you are still viewing the Report,
+                    you may want to switch back to the main page.
                     </p>
                     
                     <p>
@@ -364,7 +364,7 @@ export const execute = {
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
                     Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
-                    Simply select (click on) that tab to view the report.
+                    Use the View menu to select that Report.
                     </p>
                     
                     <p>

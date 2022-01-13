@@ -118,7 +118,7 @@ export const execute = {
                     <b> File : Properties</b> menu above to see the list of pre-configured labels.
                     Take a moment to provide text values for a few of these label fields.
                     Report 3 is formatted to support a Request for Quotation.
-                    Select the Report 3 tab to see how the labels appear. 
+                    Use the View menu to select Report 3 to see how the labels appear. 
                     </p>
                     
                     <p>
