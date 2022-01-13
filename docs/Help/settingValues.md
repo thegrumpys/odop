@@ -86,16 +86,15 @@ Advanced View provides access to the full set of input values for each design ty
 
 Calculator View provides access to Fix / Free and constraints in a pop-up value input dialog box. 
 See the annotated images in the "Quick overview" section above. 
-Use right-click (long press on a touch screen) on the variable of interest to access the associated value input dialog box. 
-With Calculator View, values with a darker, more bold font may be changed by the user.
+Click on the variable of interest to access the associated value input dialog box. 
 Values with a dim or less bold font are calculated results and cannot be directly changed.   
 
 ___   
 
 Notes:   
  - Do not leave a value field blank.  See also: [Not a Number](htt#nan)
- - Starting in ODOP version 4.0.7, input of values in scientific notation, for example: 1.234e5, is supported.
- - Input of values less than 1.0 no longer requires a leading zero. 
+ - Input of values in scientific notation, for example: 1.234e5, is supported.
+ - Input of values less than 1.0 does not require a leading zero. 
  
 &nbsp;   
 
