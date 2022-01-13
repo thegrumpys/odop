@@ -76,12 +76,10 @@ This screen clip illustrates how to get to the index of Help pages.
 
 &nbsp;
 
-At the upper right of the main page you see a "tab" with the name "Design:",
+At the upper right of the main page you see 
 an icon associated with the design type (a rectangular box in this case) and
 the name of the specific design that is currently open.
-As illustrated later, Spring designs will each have 
-three additional tabs providing Reports.   
-![Tab - Icon - Name](./png/TabIconName.png "Tab - Icon - Name")   
+![Design Type Icon - Design Name](./png/TabIconName.png "[Design Type Icon - Design Name")   
 
 &nbsp;
 
