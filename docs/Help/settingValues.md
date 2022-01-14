@@ -14,21 +14,6 @@ Quick overview:
 
 ___   
 
-Related topics:
-
-* [Terminology - all](terminology)
-* ["Fix" and "Free" terms](terminology#fix)
-* ["Search" term](terminology#search)
-* [Design Situations](designSituations)
-* [Default Designs](defaultDesigns)
-* [Feasibility](feasibility)
-* [Search](search)
-* [Seek](seek)
-* [Trade](trade)
-* [Hints, Tips and Tricks](htt)   
-
-___   
-
 The details:
 
 **Views**
@@ -47,6 +32,8 @@ User inputs to Advanced View And Calculator View operate similiarly.
 New values for a variable may be supplied by clicking on the desired value and directly over-writing the existing value. 
 The existing value may be edited. 
 Double-click (double-tap a touch screen) to replace the entire value.  
+The AutoFix feature, introduced in ODOP version 4.1, 
+automatically applies Fixed status to variables whose values are changed by user input. 
 
 Use the checkbox immediately right of the variable value to control [Fix / Free](terminology#fix) status. 
 Use the checkbox immediately left of constraint levels to enable or disable [constraints](terminology#constraints). 
@@ -82,19 +69,43 @@ The simplified and spring-specific Calculator View provides access to Material\_
 Both are drop-down selection lists. 
 Advanced View provides access to the full set of input values for each design type.   
 
-**Operations specific to Calculator View**  
+_[AutoFix](terminology#autoFix)_
 
-Calculator View provides access to Fix / Free and constraints in a pop-up value input dialog box. 
-See the annotated images in the "Quick overview" section above. 
-Click on the variable of interest to access the associated value input dialog box. 
-Values with a dim or less bold font are calculated results and cannot be directly changed.   
-
-___   
-
+The AutoFix feature, introduced in ODOP version 4.1, 
+automatically applies Fixed status to variables whose values are changed by user input.
+ 
+&nbsp;   
 Notes:   
  - Do not leave a value field blank.  See also: [Not a Number](htt#nan)
  - Input of values in scientific notation, for example: 1.234e5, is supported.
  - Input of values less than 1.0 does not require a leading zero. 
+ - A red border around an input field indicates a non-numeric or otherwise invalid value.
+
+&nbsp;   
+**Operations specific to Calculator View**  
+
+When in Calculator View, select one of the white entry fields to change a value, 
+control Fix / Free status or establish or modify constraints.
+See the annotated images in the "Quick overview" section above. 
+Fields with a light gray background are calculated results and cannot be directly changed.   
+ 
+___   
+
+
+Related topics:
+
+* [Terminology - index to all terms](terminology)
+* ["Fix" and "Free" terms](terminology#fix)
+* ["AutoFix" term](terminology#autoFix)
+* ["Search" term](terminology#search)
+* [Design Situations](designSituations)
+* [Default Designs](defaultDesigns)
+* [Feasibility](feasibility)
+* [Search](search)
+* [Seek](seek)
+* [Trade](trade)
+* [Hints, Tips and Tricks](htt)   
+
  
 &nbsp;   
 
