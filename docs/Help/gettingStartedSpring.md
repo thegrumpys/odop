@@ -109,7 +109,7 @@ For the compression spring design type, those include
  Finally, try to design a spring from scratch. 
  Use the entry fields to enter constraints associated with a hypothesized design. 
  Constraint entry fields appear directly in the Advanced View. 
- A right-click is required to access FIX checkboxes and constraint entry fields in Calculator View. 
+ In Calculator View, click on a white background entry field to change values, control Fix / Free status and establish or modify constraints. 
  Try designing the spring in a ball  point pen, 
  or perhaps a suspension spring for a motorcycle, 
  an automobile or a railroad locomotive. 

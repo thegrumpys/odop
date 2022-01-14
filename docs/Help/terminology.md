@@ -12,6 +12,7 @@ The following terms have special meanings used in the context of this program.
 [CONSTRAINT VIOLATIONS](terminology#constraintViol)  
 [FUNCTION CONSTRAINTS (FDCL)](terminology#fdcl)  
 [FIX](terminology#fix)  
+[AUTOFIX](terminology#autoFix)  
 [FEASIBLE REGION](terminology#feasibleRegion)  
 [OBJECTIVE FUNCTION](terminology#obj)  
 [PREFERENCES](terminology#preferences)  
@@ -202,6 +203,27 @@ can reduce the ability of Search to find a feasible solution.
 Too many constraints and variables in Fix status can create an over-specified situation. 
 
 See also: [Design Situations](designSituations)
+
+___
+
+<a id="autoFix"></a>  
+___
+
+**AUTOFIX**   
+
+The AutoFix feature, introduced in ODOP version 4.1, automatically applies "Fixed" status 
+to variables whose values are changed by user input. 
+
+ODOP Search (invoked by the Search button or the Action : Search menu item) works to 
+hold or achieve values in Fixed status.
+Alternatively, ODOP Search will manipulate the values of variables not in Fixed status 
+(a.k.a. "Free" status) in order to achieve a feasible design.
+
+The preference value "enable_auto_fix", accessed through the File : Preferences... menu,
+controls operation of the AutoFix feature.
+In order to revert to the previous behavior, set the value of "enable_auto_fix" to 0.
+
+See also: [terminology Fix](terminology#fix) 
 
 ___
 

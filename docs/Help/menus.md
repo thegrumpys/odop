@@ -239,12 +239,12 @@ ___
 
 The Action : Search menu item invokes the numerical search algorithm to provide ODOP's back-solving capability. 
 The Search feature gives a flexible approach to invert the dependent-independent relationships of the design equations. 
-Search will alter the values of any FREE independent variables to find 
-a "feasible" design that satisfies constraints and FIXes. 
+Search will alter the values of any Free independent variables to find 
+a "feasible" design that satisfies constraints and Fixes. 
 
 Specifically, 
-FIXed status causes Search to achieve or hold a specified value. 
-FREE status allows Search to manipulate that variable to achieve a feasible design. 
+Fixed status causes Search to achieve or hold a specified value. 
+Free status allows Search to manipulate that variable to achieve a feasible design. 
 
 Search operates to minimize the value of the [objective function](terminology#obj). 
 The current design is used as a starting point. 
@@ -335,12 +335,12 @@ ___
 
  If the user selects a standard size from the table, that value will be
  established for the selected Independent Variable, which is then put in
- "FIXed" status.  The user should then execute a Search to obtain
+ "Fixed" status.  The user should then execute a Search to obtain
  corresponding values for the other Independent Variables.
   
  In spring design Calculator view, selecting a new value of Wire_Dia automatically
  incorporates selection from the appropriate (US, metric) standard size table and
- automatically puts the selected value in FIXed status. 
+ automatically puts the selected value in Fixed status. 
 
 See also:   
 [Select Size](SpringDesign/selectSizeCatalog)   
@@ -364,7 +364,7 @@ Once the user picks the desired catalog from a drop-down list,
 a selection list containing the "closest" four springs from that catalog appears.
 These designs are ranked based on their Objective Value.
 Thus ODOP:Spring is choosing from the catalog based on how well the
-stock spring designs meet the user's objectives (as expressed by FIXes and constraints)
+stock spring designs meet the user's objectives (as expressed by Fixes and constraints)
 as opposed to simply choosing designs physically similar to the target design.
 
 Note that it may be desirable to save (File : Save or File : Save As) the current design 
@@ -405,7 +405,7 @@ ___
 Advanced View is a design type independent display of all input and output variables.
 It provides access to all program features.
 
-Use the checkboxes in the variables column to control FIX / FREE status.
+Use the checkboxes in the variables column to control Fix / Free status.
 Use the constraints column to establish or modify Min and/or Max values of constraints on the corresponding variables.
 
 [Spring variables displayed in Advanced View](https://www.springdesignsoftware.org/odop/docs/Help/png/ScrCap_3TypeNoted.png)
@@ -420,16 +420,15 @@ ___
 
 Calculator View, available for spring design types, 
 provides a simplified display of major input and output variables in a compact format specific to spring design. 
+Use Advanced View to access the complete set of variables and features. 
  
-Right click (long press on a touch screen) on one of the white entry fields or a darker (more bold) 
-numeric value to control FIX / FREE status and to establish or modify constraints on those variables. 
-For now, Firefox users need to use Advanced View in order to access FIX / FREE and constraints. 
+Select one of the white entry fields to change a value, control Fix / Free status and to establish or modify constraints. 
 
 Enabled constraints are indicated by a fine border line at the edge of a numeric field.
 A border on the left indicates that a lower (Min) constraint is enabled.
 A border on the right indicates that an upper (Max) constraint is enabled.
-A heavier border on both left and right of a numeric field indicates FIXed status.
-No border line indicates FREE status and no constraint enabled.
+A heavier border on both left and right of a numeric field indicates Fixed status.
+No border line indicates Free status and no constraint enabled.
 
 
 [Spring variables displayed in Calculator View](https://www.springdesignsoftware.org/odop/docs/Help/png/ScrCap_3TypeCalcNoted.png)
