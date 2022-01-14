@@ -48,7 +48,7 @@ For example, see:
    + Steps required to utilize the spring design Demo and Tutorial
    + Link to design process flow diagram
    + Suggestions for freeform exploration
-   + US (ips) versus metric (SI) units
+   + US customary (inches, pounds) versus metric (mm, Newtons) units
    + Report tabs   
 &nbsp;
 *  [Design Situations](../Help/designSituations)
