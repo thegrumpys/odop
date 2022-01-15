@@ -218,7 +218,7 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.render value_class=',value_class);
         return (
             <>
-                <td className={"align-middle " + this.props.className}>
+                <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
                         {(value_tooltip !== undefined ?
                             <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
