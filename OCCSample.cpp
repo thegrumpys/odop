@@ -137,41 +137,35 @@ int main(int argc, const char * argv[]) {
         TopoDS_Edge aTopHelixEdge = BRepBuilderAPI_MakeEdge(aTopHelixSegment, aTopHelixCylinder, 0.0, aClosedHelixCoils * aClosedHelixHypotenuse).Edge();
         BRepLib::BuildCurve3d(aTopHelixEdge);
 
+        // Create Total Helix Wire and Total Helix Pipe
         TopoDS_Wire aHelixWire = BRepBuilderAPI_MakeWire(aBottomHelixEdge,aCenterHelixEdge,aTopHelixEdge).Wire();
         BRepOffsetAPI_MakePipe aHelixPipe(aHelixWire, aProfileFace);
 
+        // Create Bottom Cutter Box
         BRepPrimAPI_MakeBox aBottomHelixBox(aSpringDiameter, aSpringDiameter, aClosedHelixPitch);
         const TopoDS_Shape& aBottomHelixCutter = aBottomHelixBox.Shape();
         gp_Trsf aBottomTrsf;
         aBottomTrsf.SetTranslation(gp_Vec(-aSpringDiameter/2.0, -aSpringDiameter/2.0, -aClosedHelixPitch));
         TopoDS_Shape aBottomHelixCutterTransformed = BRepBuilderAPI_Transform(aBottomHelixCutter, aBottomTrsf);
 
+        // Create Top Cutter Box
         BRepPrimAPI_MakeBox aTopHelixBox(aSpringDiameter, aSpringDiameter, aClosedHelixPitch);
         const TopoDS_Shape& aTopHelixCutter = aBottomHelixBox.Shape();
         gp_Trsf aTopTrsf;
         aTopTrsf.SetTranslation(gp_Vec(-aSpringDiameter/2.0, -aSpringDiameter/2.0, aSpringHeight));
         TopoDS_Shape aTopHelixCutterTransformed = BRepBuilderAPI_Transform(aTopHelixCutter, aTopTrsf);
 
+        // Fuse Bottom and Top Cutter Boxes, and Cut them from Total Helix Pipe
         TopoDS_Shape aHelixCutter = BRepAlgoAPI_Fuse(aBottomHelixCutterTransformed, aTopHelixCutterTransformed);
-        TopoDS_Shape S = BRepAlgoAPI_Cut(aHelixPipe, aHelixCutter);
+        TopoDS_Shape aCompressionCutAndGround = BRepAlgoAPI_Cut(aHelixPipe, aHelixCutter);
 
-        if (aHelixPipe.IsDone()) {
-            BRepMesh_IncrementalMesh mesh1(aHelixPipe, 0.1 ); // Perform mesh operation to generate STL file
-            mesh1.Perform();
-            BRepMesh_IncrementalMesh mesh2(aBottomHelixCutterTransformed, 0.1 ); // Perform mesh operation to generate STL file
-            mesh2.Perform();
-            BRepMesh_IncrementalMesh mesh3(S, 0.1 ); // Perform mesh operation to generate STL file
-            mesh3.Perform();
-
-            StlAPI_Writer writer;
-            int result;
-            result = writer.Write(aHelixPipe, "OCCSamplePrism.stl");
-            std::cout << "result=" << (result==true ? "success" : "fail") << std::endl;
-            result = writer.Write(aBottomHelixCutterTransformed, "OCCSampleCutter.stl");
-            std::cout << "result=" << (result==true ? "success" : "fail") << std::endl;
-            result = writer.Write(S, "OCCSampleCut.stl");
-            std::cout << "result=" << (result==true ? "success" : "fail") << std::endl;
-        }
+        // Perform mesh operation and generate STL file
+        BRepMesh_IncrementalMesh mesh(aCompressionCutAndGround, 0.1 );
+        mesh.Perform();
+        StlAPI_Writer writer;
+        int result;
+        result = writer.Write(aCompressionCutAndGround, "OCCSample.stl");
+        std::cout << "result=" << (result==true ? "success" : "fail") << std::endl;
 
     } catch(int &err) {
         std::cout << "err=" << err << std::endl;
