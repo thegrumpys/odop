@@ -166,8 +166,8 @@ export function migrate(design) {
         design.labels[4].name = 'City, State & Zip';
         if (design.labels[4].value !== '' && design.labels[5].value !== '') {
             design.labels[4].value = design.labels[4].value + ', ' + design.labels[5].value;
-        } else if (design.labels[4].value !== '' && design.labels[5].value === '') {
-            design.labels[4].value = design.labels[4].value; // Unknown State & Zip
+        // } else if (design.labels[4].value !== '' && design.labels[5].value === '') {
+        //    design.labels[4].value = design.labels[5].value; // Unknown State & Zip
         } else if (design.labels[4].value === '' && design.labels[5].value !== '') {
             design.labels[4].value = design.labels[5].value; // Unknown City
         } else if (design.labels[4].value === '' && design.labels[5].value === '') {
