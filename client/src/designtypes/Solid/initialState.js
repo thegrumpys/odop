@@ -191,7 +191,7 @@ export const initialState = {
         }
     ],
     "type": "Solid",
-    "version": "6",
+    "version": "7",
     "result": {
         "objective_value": 0,
         "termination_condition": "",

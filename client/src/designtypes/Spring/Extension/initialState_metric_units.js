@@ -1152,7 +1152,7 @@ export const initialState = {
         }
     ],
     "type": "Spring/Extension",
-    "version": "5",
+    "version": "6",
     "result": {
         "objective_value": 0,
         "termination_condition": "",

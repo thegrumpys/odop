@@ -192,7 +192,15 @@ export function migrate(design) {
         // console.log('Convert from 5 to 6');
         design.system_controls.enable_auto_fix = 1;
         design.labels[4].name = 'City, State & Zip';
-        design.labels[4].value = design.labels[4].value + ", " + design.labels[5].value;
+        if (design.labels[4].value !== '' && design.labels[5].value !== '') {
+            design.labels[4].value = design.labels[4].value + ', ' + design.labels[5].value;
+        } else if (design.labels[4].value !== '' && design.labels[5].value === '') {
+            design.labels[4].value = design.labels[4].value; // Unknown State & Zip
+        } else if (design.labels[4].value === '' && design.labels[5].value !== '') {
+            design.labels[4].value = design.labels[5].value; // Unknown City
+        } else if (design.labels[4].value === '' && design.labels[5].value === '') {
+            design.labels[4].value = ''; // Unknown City, Unknown State & Zip
+        }
         design.labels[5].name = 'Phone & email';
         design.labels[5].value = design.labels[6].value;
         design.labels[6].name = 'Date';
