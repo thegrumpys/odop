@@ -99,7 +99,7 @@ export const initialState = {
         }
     ],
     "type": "Piston-Cylinder",
-    "version": "4",
+    "version": "5",
     "result": {
         "objective_value": 0,
         "termination_condition": "",
