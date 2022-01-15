@@ -53,7 +53,7 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
 1. Create load.sql files: Repeat the following steps or each design type (Piston-Cylinder, Solid, Spring/Compression, Spring/Extension, and Spring/Torsion) with an impacted initialState or initialSystemControls. 
 Process "Startup_Metric" designs for the three Spring design types similarly.
     1. Do a File > Open > Load Initial State for each design type that has an impacted Initial State. It is not necessary to Load Initial Metric State, because the script does that for you. Do this FOR ALL mk* files: Run Action > Execute > mk[x] script and Exit the script to created each [x] file. Do a File > Save into the [x] file.
-    1. Using MySqlDump command run the `scripts/dump_db_startup_files.sh` script to dump all newly created design files into their respective load.sql files. You might need to set a different OKTA Userid and also add carriage returns before each inserted VALUES section.  
+    1. Using MySqlDump command run the `scripts/dump_db_startup_files.sh` script to dump all newly created design files into their respective load.sql files. You might need to set a different OKTA Userid inside the WHERE clause, and also add carriage returns before each inserted VALUES section.  
     1. Finally, manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). 
 Set the user field = NULL.
     1. **Commit these changes.**  The script to load these changes will be run in a [later step](release#runloadscript).  
