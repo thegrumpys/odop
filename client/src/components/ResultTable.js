@@ -27,7 +27,7 @@ class ResultTable extends Component {
         this.onSeek = this.onSeek.bind(this);
         this.state = {
             optimize_modal: false, // Default: do not display optimize modal
-            name: undefined, // TODO: A fudge
+            name: 'OD_Free', // TODO: A fudge
             minmax: MIN // TODO: A fudge
         };
     }
@@ -242,7 +242,7 @@ class ResultTable extends Component {
                               </td>
                             :
                               <td align="center">
-                                  <Button variant="primary" size="sm" onClick={this.onOptimizeButton} disabled={display_search_button}>Optimize</Button>&nbsp;
+                                  <Button variant="primary" size="sm" onClick={this.onOptimizeButton} disabled={display_search_button}>Seek Optimization</Button>&nbsp;
                                   <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                       If one feasible design exists there are likely many more available, each with varying 
                                       advantages / disadvantages. The ODOP Seek feature provides a “goal seeking” capability 
@@ -260,11 +260,12 @@ class ResultTable extends Component {
                 <Modal show={this.state.optimize_modal} onHide={this.onOptimizeCancel}>
                     <Modal.Header>
                         <Modal.Title>
-                            Optimize
+                            Seek Optimizations
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="pb-0">
-                        <Table borderless="true" size="sm" className="mb-0">
+                        <p>Select a pre-configured Seek optimization:</p>
+                        <Table borderless="true" size="sm">
                             <tbody>
                                 <tr>
                                     <td width="50%">
@@ -284,13 +285,7 @@ class ResultTable extends Component {
                                 </tr>
                             </tbody>
                         </Table>
-                    </Modal.Body>
-                    <Modal.Header>
-                        <Modal.Title>
-                            Seek
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
+                        <p>Select a specific Seek optimization:</p>
                         <InputGroup>
                             <ButtonGroup>
                                 <Button variant="secondary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
