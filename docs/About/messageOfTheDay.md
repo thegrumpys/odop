@@ -1,20 +1,20 @@
-**Message-of-the-day** &nbsp; updated January 11, 2022   
+**Message-of-the-day** &nbsp; updated January 15, 2022   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
 
-To establish a free account, see: [User Accounts](userAccounts). 
-With the recent changes in user account features and introduction of Calculator View, 
-browser requirements have changed. 
-For details, see: [Requirements](requirements)  
-
-A preview of ODOP version 4.1 is now in place.
-Follow [this link](https://github.com/thegrumpys/odop/milestone/37) to see change details in GitHub.
+[ODOP version 4.1](https://github.com/thegrumpys/odop/milestone/37?closed=1) was released January 15, 2022. 
 Opening a design saved in a prior version of ODOP will produce a pop-up message.
 See: [MIGRATION](../Help/terminology#migration). 
-A final release of ODOP version 4.1 is expected as soon as January 16, 2022.
+Follow the link above to see change details in GitHub.  
 
 ODOP is [Experimental Software](experimental).  
+
+To establish a free account, see: [User Accounts](userAccounts). 
+With the recent changes in [Calculator View](../Help/menus#ViewCalculator), 
+browser requirements have changed. 
+For details, see: [Requirements](requirements) 
+and [AutoFix](../Help/terminology#autoFix). 
 
 Evaluators and new users should be sure to see the [About](../About) section 
 of the on-line documentation early in the learning process. 
