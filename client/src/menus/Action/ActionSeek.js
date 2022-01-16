@@ -118,8 +118,8 @@ class ActionSeek extends Component {
                     <Modal.Body>
                         <InputGroup>
                             <ButtonGroup>
-                                <Button variant="primary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
-                                <Button variant="primary" onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}>Max</Button>
+                                <Button variant="secondary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
+                                <Button variant="secondary" onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}>Max</Button>
                             </ButtonGroup>
                             &nbsp;
                             <InputGroup.Prepend>
