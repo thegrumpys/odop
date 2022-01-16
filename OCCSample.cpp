@@ -66,10 +66,10 @@ int main(int argc, const char * argv[]) {
         Standard_Real OD_Free = 1.1;
         Standard_Real Wire_Dia = 0.1055;
         Standard_Real L_Free = 3.25;
-        Standard_Real Coils_T = 14.0;
+        Standard_Real Coils_T = 12.0;
         Standard_Real Mean_Dia = 0.9945;
         Standard_Real Coils_A = 10.0;
-        Standard_Integer End_Type = End_Types::Closed_Ground;
+        Standard_Integer End_Type = End_Types::Closed;
 
         std::cout << "OD_Free=" << OD_Free << std::endl;
         std::cout << "Wire_Dia=" << Wire_Dia << std::endl;
@@ -205,7 +205,7 @@ int main(int argc, const char * argv[]) {
 
         // Mesh Compression Spring
         std::cout << "Mesh Compression Spring" << std::endl;
-        BRepMesh_IncrementalMesh mesh(aCompressionSpring, LinearDeflection );
+        BRepMesh_IncrementalMesh mesh(aCompressionSpring, LinearDeflection, Standard_False, 0.5, Standard_False );
         mesh.Perform();
 
         // Generate STL File
