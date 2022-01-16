@@ -60,16 +60,16 @@ int main(int argc, const char * argv[]) {
 
         Standard_Real in2mm = 25.4;
 
+        std::cout << "in2mm=" << in2mm << std::endl;
+        std::cout << std::endl;
+
         Standard_Real OD_Free = 1.1;
         Standard_Real Wire_Dia = 0.1055;
         Standard_Real L_Free = 3.25;
-        Standard_Real Coils_T = 10.0;
+        Standard_Real Coils_T = 14.0;
         Standard_Real Mean_Dia = 0.9945;
         Standard_Real Coils_A = 10.0;
-        Standard_Integer End_Type = End_Types::Open;
-
-        std::cout << "in2mm=" << in2mm << std::endl;
-        std::cout << std::endl;
+        Standard_Integer End_Type = End_Types::Closed_Ground;
 
         std::cout << "OD_Free=" << OD_Free << std::endl;
         std::cout << "Wire_Dia=" << Wire_Dia << std::endl;
@@ -80,14 +80,21 @@ int main(int argc, const char * argv[]) {
         std::cout << "End_Type=" << End_Type << std::endl;
         std::cout << std::endl;
 
-        Standard_Real aSpringDiameter = OD_Free * in2mm;
-        Standard_Real aSpringHeight = L_Free * in2mm;
+        Standard_Real LevelOfDetail = 20; // Level of Detail
+        Standard_Real LinearDeflection = Mean_Dia/LevelOfDetail;
+
+        std::cout << "LevelOfDetail=" << LevelOfDetail << std::endl;
+        std::cout << "LinearDeflection=" << LinearDeflection << std::endl;
+        std::cout << std::endl;
+
         Standard_Real aProfileRadius = Wire_Dia / 2.0 * in2mm;
         Standard_Real aHelixRadius = Mean_Dia / 2.0 * in2mm;
         Standard_Real aClosedHelixPitch = Wire_Dia * in2mm;
         Standard_Real aClosedHelixHeight = Wire_Dia * (Coils_T - Coils_A) / 2.0 * in2mm;
         Standard_Real aClosedHelixCoils = (Coils_T - Coils_A) / 2.0;
         Standard_Real aClosedHelixHypotenuse = sqrt((2.0 * M_PI * 2.0 * M_PI) + (aClosedHelixPitch * aClosedHelixPitch));
+        Standard_Real aCutterWidth = OD_Free * in2mm;
+        Standard_Real aCutterHeight = L_Free * in2mm;
         Standard_Real aCenterHelixPitch = (L_Free - Wire_Dia * (Coils_T - Coils_A)) / Coils_A * in2mm;
         Standard_Real aCenterHelixHeight = L_Free * in2mm - Wire_Dia * (Coils_T - Coils_A) * in2mm;
         Standard_Real aCenterHelixCoils = Coils_A;
@@ -141,18 +148,18 @@ int main(int argc, const char * argv[]) {
         if (End_Type == End_Types::Open_Ground || End_Type == End_Types::Closed_Ground) {
             // Create Bottom Cutter Box
             std::cout << "Create Bottom Cutter Box" << std::endl;
-            BRepPrimAPI_MakeBox aBottomHelixBox(aSpringDiameter, aSpringDiameter, aClosedHelixPitch);
+            BRepPrimAPI_MakeBox aBottomHelixBox(aCutterWidth, aCutterWidth, aClosedHelixPitch);
             const TopoDS_Shape& aBottomHelixCutter = aBottomHelixBox.Shape();
             gp_Trsf aBottomTrsf;
-            aBottomTrsf.SetTranslation(gp_Vec(-aSpringDiameter/2.0, -aSpringDiameter/2.0, -aClosedHelixPitch));
+            aBottomTrsf.SetTranslation(gp_Vec(-aCutterWidth/2.0, -aCutterWidth/2.0, -aClosedHelixPitch));
             TopoDS_Shape aBottomHelixCutterTransformed = BRepBuilderAPI_Transform(aBottomHelixCutter, aBottomTrsf);
 
             // Create Top Cutter Box
             std::cout << "Create Top Cutter Box" << std::endl;
-            BRepPrimAPI_MakeBox aTopHelixBox(aSpringDiameter, aSpringDiameter, aClosedHelixPitch);
+            BRepPrimAPI_MakeBox aTopHelixBox(aCutterWidth, aCutterWidth, aClosedHelixPitch);
             const TopoDS_Shape& aTopHelixCutter = aBottomHelixBox.Shape();
             gp_Trsf aTopTrsf;
-            aTopTrsf.SetTranslation(gp_Vec(-aSpringDiameter/2.0, -aSpringDiameter/2.0, aSpringHeight));
+            aTopTrsf.SetTranslation(gp_Vec(-aCutterWidth/2.0, -aCutterWidth/2.0, aCutterHeight));
             TopoDS_Shape aTopHelixCutterTransformed = BRepBuilderAPI_Transform(aTopHelixCutter, aTopTrsf);
 
             // Fuse Bottom and Top Cutter Boxes
@@ -198,7 +205,7 @@ int main(int argc, const char * argv[]) {
 
         // Mesh Compression Spring
         std::cout << "Mesh Compression Spring" << std::endl;
-        BRepMesh_IncrementalMesh mesh(aCompressionSpring, 0.01 );
+        BRepMesh_IncrementalMesh mesh(aCompressionSpring, LinearDeflection );
         mesh.Perform();
 
         // Generate STL File
