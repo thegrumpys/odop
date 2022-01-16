@@ -48,22 +48,25 @@ int main(int argc, const char * argv[]) {
 // 5 [ "Tapered_C&G",    2.0,      -0.5],
 // 6 [ "Pig-tail",       2.0,       0.0],
 // 7 [ "User_Specified", 0.0,       0.0]
-        const int End_Type_Open = 1;
-        const int End_Type_Open_Ground = 2;
-        const int End_Type_Closed = 3;
-        const int End_Type_Closed_Ground = 4;
-        const int End_Type_Tapered_C_G = 5;
-        const int End_Type_Pig_tail = 6;
-        const int End_Type_User_Specified = 7;
+        enum End_Types {
+            Open = 1,
+            Open_Ground,
+            Closed,
+            Closed_Ground,
+            Tapered_C_G,
+            Pig_tail,
+            User_Specified,
+        };
 
         Standard_Real in2mm = 25.4;
+
         Standard_Real OD_Free = 1.1;
         Standard_Real Wire_Dia = 0.1055;
         Standard_Real L_Free = 3.25;
-        Standard_Real Coils_T = 16.0;
+        Standard_Real Coils_T = 10.0;
         Standard_Real Mean_Dia = 0.9945;
-        Standard_Real Coils_A = 8.0;
-        Standard_Integer End_Type = 4;
+        Standard_Real Coils_A = 10.0;
+        Standard_Integer End_Type = End_Types::Open;
 
         std::cout << "in2mm=" << in2mm << std::endl;
         std::cout << std::endl;
@@ -103,6 +106,7 @@ int main(int argc, const char * argv[]) {
         std::cout << std::endl;
 
         // Profile Face
+        std::cout << "Profile Face" << std::endl;
         gp_Ax2 anAxis;
         anAxis.SetDirection(gp_Dir(0.0, -1.0, 0.0));
         anAxis.SetLocation(gp_Pnt(aHelixRadius, 0.0, 0.0));
@@ -111,62 +115,99 @@ int main(int argc, const char * argv[]) {
         TopoDS_Wire aProfileWire = BRepBuilderAPI_MakeWire(aProfileEdge).Wire();
         TopoDS_Face aProfileFace = BRepBuilderAPI_MakeFace(aProfileWire).Face();
 
-        // Common, Closed, and Center Helix
-        gp_Ax2 aBottomHelixOrigin(gp_Pnt(0.0, 0.0, 0.0), gp_Dir(0.0, 0.0, 1.0));
-        Handle(Geom_CylindricalSurface) aBottomHelixCylinder = new Geom_CylindricalSurface(aBottomHelixOrigin, aHelixRadius);
-        gp_Ax2 aCenterHelixOrigin(gp_Pnt(0.0, 0.0, aClosedHelixHeight), gp_Dir(0.0, 0.0, 1.0));
-        Handle(Geom_CylindricalSurface) aCenterHelixCylinder = new Geom_CylindricalSurface(aCenterHelixOrigin, aHelixRadius);
-        gp_Ax2 aTopHelixOrigin(gp_Pnt(0.0, 0.0, aClosedHelixHeight+aCenterHelixHeight), gp_Dir(0.0, 0.0, 1.0));
-        Handle(Geom_CylindricalSurface) aTopHelixCylinder = new Geom_CylindricalSurface(aTopHelixOrigin, aHelixRadius);
+        TopoDS_Edge aBottomHelixEdge;
+        TopoDS_Edge aTopHelixEdge;
+        if (End_Type == End_Types::Closed || End_Type == End_Types::Closed_Ground) {
+            // Create Bottom Helix
+            std::cout << "Create Bottom Helix" << std::endl;
+            gp_Ax2 aBottomHelixOrigin(gp_Pnt(0.0, 0.0, 0.0), gp_Dir(0.0, 0.0, 1.0));
+            Handle(Geom_CylindricalSurface) aBottomHelixCylinder = new Geom_CylindricalSurface(aBottomHelixOrigin, aHelixRadius);
+            gp_Lin2d aBottomHelixLine2d(gp_Pnt2d(0.0, 0.0), gp_Dir2d(2. * M_PI, aClosedHelixPitch));
+            Handle(Geom2d_TrimmedCurve) aBottomHelixSegment = GCE2d_MakeSegment(aBottomHelixLine2d, 0.0, 2.0 * M_PI).Value();
+            aBottomHelixEdge = BRepBuilderAPI_MakeEdge(aBottomHelixSegment, aBottomHelixCylinder, 0.0, aClosedHelixCoils * aClosedHelixHypotenuse).Edge();
+            BRepLib::BuildCurve3d(aBottomHelixEdge);
 
-        // Create Bottom Helix
-        gp_Lin2d aBottomHelixLine2d(gp_Pnt2d(0.0, 0.0), gp_Dir2d(2. * M_PI, aClosedHelixPitch));
-        Handle(Geom2d_TrimmedCurve) aBottomHelixSegment = GCE2d_MakeSegment(aBottomHelixLine2d, 0.0, 2.0 * M_PI).Value();
-        TopoDS_Edge aBottomHelixEdge = BRepBuilderAPI_MakeEdge(aBottomHelixSegment, aBottomHelixCylinder, 0.0, aClosedHelixCoils * aClosedHelixHypotenuse).Edge();
-        BRepLib::BuildCurve3d(aBottomHelixEdge);
+            // Create Top Helix
+            std::cout << "Create Top Helix" << std::endl;
+            gp_Ax2 aTopHelixOrigin(gp_Pnt(0.0, 0.0, aClosedHelixHeight+aCenterHelixHeight), gp_Dir(0.0, 0.0, 1.0));
+            Handle(Geom_CylindricalSurface) aTopHelixCylinder = new Geom_CylindricalSurface(aTopHelixOrigin, aHelixRadius);
+            gp_Lin2d aTopHelixLine2d(gp_Pnt2d(0.0, 0.0), gp_Dir2d(2. * M_PI, aClosedHelixPitch));
+            Handle(Geom2d_TrimmedCurve) aTopHelixSegment = GCE2d_MakeSegment(aTopHelixLine2d, 0.0, 2.0 * M_PI).Value();
+            aTopHelixEdge = BRepBuilderAPI_MakeEdge(aTopHelixSegment, aTopHelixCylinder, 0.0, aClosedHelixCoils * aClosedHelixHypotenuse).Edge();
+            BRepLib::BuildCurve3d(aTopHelixEdge);
+        }
+
+        TopoDS_Shape aHelixCutter;
+        if (End_Type == End_Types::Open_Ground || End_Type == End_Types::Closed_Ground) {
+            // Create Bottom Cutter Box
+            std::cout << "Create Bottom Cutter Box" << std::endl;
+            BRepPrimAPI_MakeBox aBottomHelixBox(aSpringDiameter, aSpringDiameter, aClosedHelixPitch);
+            const TopoDS_Shape& aBottomHelixCutter = aBottomHelixBox.Shape();
+            gp_Trsf aBottomTrsf;
+            aBottomTrsf.SetTranslation(gp_Vec(-aSpringDiameter/2.0, -aSpringDiameter/2.0, -aClosedHelixPitch));
+            TopoDS_Shape aBottomHelixCutterTransformed = BRepBuilderAPI_Transform(aBottomHelixCutter, aBottomTrsf);
+
+            // Create Top Cutter Box
+            std::cout << "Create Top Cutter Box" << std::endl;
+            BRepPrimAPI_MakeBox aTopHelixBox(aSpringDiameter, aSpringDiameter, aClosedHelixPitch);
+            const TopoDS_Shape& aTopHelixCutter = aBottomHelixBox.Shape();
+            gp_Trsf aTopTrsf;
+            aTopTrsf.SetTranslation(gp_Vec(-aSpringDiameter/2.0, -aSpringDiameter/2.0, aSpringHeight));
+            TopoDS_Shape aTopHelixCutterTransformed = BRepBuilderAPI_Transform(aTopHelixCutter, aTopTrsf);
+
+            // Fuse Bottom and Top Cutter Boxes
+            aHelixCutter = BRepAlgoAPI_Fuse(aBottomHelixCutterTransformed, aTopHelixCutterTransformed);
+        }
 
         // Create Center Helix
+        Standard_Real aCenterHelixZ = 0.0;
+        if (End_Type == End_Types::Closed || End_Type == End_Types::Closed_Ground) {
+            std::cout << "Create Center Helix at Closed Height" << std::endl;
+            aCenterHelixZ = aClosedHelixHeight;
+        } else {
+            std::cout << "Create Center Helix at 0.0" << std::endl;
+            aCenterHelixZ = 0.0;
+        }
+        gp_Ax2 aCenterHelixOrigin(gp_Pnt(0.0, 0.0, aCenterHelixZ), gp_Dir(0.0, 0.0, 1.0));
+        Handle(Geom_CylindricalSurface) aCenterHelixCylinder = new Geom_CylindricalSurface(aCenterHelixOrigin, aHelixRadius);
         gp_Lin2d aCenterHelixLine2d(gp_Pnt2d(0.0, 0.0), gp_Dir2d(2. * M_PI, aCenterHelixPitch));
         Handle(Geom2d_TrimmedCurve) aCenterHelixSegment = GCE2d_MakeSegment(aCenterHelixLine2d, 0.0, 2.0 * M_PI).Value();
         TopoDS_Edge aCenterHelixEdge = BRepBuilderAPI_MakeEdge(aCenterHelixSegment, aCenterHelixCylinder, 0.0, aCenterHelixCoils * aCenterHelixHypotenuse).Edge();
         BRepLib::BuildCurve3d(aCenterHelixEdge);
 
-        // Create Top Helix
-        gp_Lin2d aTopHelixLine2d(gp_Pnt2d(0.0, 0.0), gp_Dir2d(2. * M_PI, aClosedHelixPitch));
-        Handle(Geom2d_TrimmedCurve) aTopHelixSegment = GCE2d_MakeSegment(aTopHelixLine2d, 0.0, 2.0 * M_PI).Value();
-        TopoDS_Edge aTopHelixEdge = BRepBuilderAPI_MakeEdge(aTopHelixSegment, aTopHelixCylinder, 0.0, aClosedHelixCoils * aClosedHelixHypotenuse).Edge();
-        BRepLib::BuildCurve3d(aTopHelixEdge);
-
-        // Create Total Helix Wire and Total Helix Pipe
-        TopoDS_Wire aHelixWire = BRepBuilderAPI_MakeWire(aBottomHelixEdge,aCenterHelixEdge,aTopHelixEdge).Wire();
+        // Create Helix Wire and Helix Pipe
+        TopoDS_Wire aHelixWire;
+        if (End_Type == End_Types::Closed || End_Type == End_Types::Closed_Ground) {
+            std::cout << "Create Helix Wire and Pipe from Bottom, Center and Top Helix" << std::endl;
+            aHelixWire = BRepBuilderAPI_MakeWire(aBottomHelixEdge,aCenterHelixEdge,aTopHelixEdge).Wire();
+        } else {
+            std::cout << "Create Helix Wire and Pipe from Center Helix" << std::endl;
+            aHelixWire = BRepBuilderAPI_MakeWire(aCenterHelixEdge).Wire();
+        }
         BRepOffsetAPI_MakePipe aHelixPipe(aHelixWire, aProfileFace);
 
-        // Create Bottom Cutter Box
-        BRepPrimAPI_MakeBox aBottomHelixBox(aSpringDiameter, aSpringDiameter, aClosedHelixPitch);
-        const TopoDS_Shape& aBottomHelixCutter = aBottomHelixBox.Shape();
-        gp_Trsf aBottomTrsf;
-        aBottomTrsf.SetTranslation(gp_Vec(-aSpringDiameter/2.0, -aSpringDiameter/2.0, -aClosedHelixPitch));
-        TopoDS_Shape aBottomHelixCutterTransformed = BRepBuilderAPI_Transform(aBottomHelixCutter, aBottomTrsf);
+        TopoDS_Shape aCompressionSpring;
+        if (End_Type == End_Types::Open_Ground || End_Type == End_Types::Closed_Ground) {
+            // Cut Bottom and Top Cutter Boxes from Total Helix Pipe
+            std::cout << "Create Compression Spring from Helix Pipe minus Cutters" << std::endl;
+            aCompressionSpring = BRepAlgoAPI_Cut(aHelixPipe, aHelixCutter);
+        } else {
+            std::cout << "Create Compression Spring from Helix Pipe" << std::endl;
+            aCompressionSpring = aHelixPipe;
+        }
 
-        // Create Top Cutter Box
-        BRepPrimAPI_MakeBox aTopHelixBox(aSpringDiameter, aSpringDiameter, aClosedHelixPitch);
-        const TopoDS_Shape& aTopHelixCutter = aBottomHelixBox.Shape();
-        gp_Trsf aTopTrsf;
-        aTopTrsf.SetTranslation(gp_Vec(-aSpringDiameter/2.0, -aSpringDiameter/2.0, aSpringHeight));
-        TopoDS_Shape aTopHelixCutterTransformed = BRepBuilderAPI_Transform(aTopHelixCutter, aTopTrsf);
-
-        // Fuse Bottom and Top Cutter Boxes, and Cut them from Total Helix Pipe
-        TopoDS_Shape aHelixCutter = BRepAlgoAPI_Fuse(aBottomHelixCutterTransformed, aTopHelixCutterTransformed);
-        TopoDS_Shape aCompressionCutAndGround = BRepAlgoAPI_Cut(aHelixPipe, aHelixCutter);
-
-        // Perform mesh operation and generate STL file
-        BRepMesh_IncrementalMesh mesh(aCompressionCutAndGround, 0.1 );
+        // Mesh Compression Spring
+        std::cout << "Mesh Compression Spring" << std::endl;
+        BRepMesh_IncrementalMesh mesh(aCompressionSpring, 0.01 );
         mesh.Perform();
+
+        // Generate STL File
+        std::cout << "Generate STL File" << std::endl;
         StlAPI_Writer writer;
         int result;
-        result = writer.Write(aCompressionCutAndGround, "OCCSample.stl");
+        result = writer.Write(aCompressionSpring, "OCCSample.stl");
         std::cout << "result=" << (result==true ? "success" : "fail") << std::endl;
-
+        
     } catch(int &err) {
         std::cout << "err=" << err << std::endl;
     }
