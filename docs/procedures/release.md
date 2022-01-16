@@ -139,11 +139,11 @@ If appropriate, dump to off-line storage and re-initialize the log_Usage table.
    or
    manually run all affected load.sql files to create startup files for each design type in the affected database.
 1. Delete any old, invalid or development-only designs if necessary.
-&nbsp;
-1. Do a pull or push as required to get latest version on all systems.
 <a id="publish2Heroku"></a>
 &nbsp;
-1. **Publish to Heroku** &nbsp; If not logged into Heroku, login in using the command line "heroku login" which in turn brings up the Heroku website login page in your browser.
+1. **Publish to Heroku** &nbsp; Update docs/About/messageOfTheDay.md to announce availability of the new version.
+1. Do a pull or push as required to get latest version on all systems.
+1. If not logged into Heroku, login in using the command line "heroku login" which in turn brings up the Heroku website login page in your browser.
 1. Shutdown server and client under your development environment.
 &nbsp;
 1. In your git/odop directory push to Heroku using the command line:   
@@ -162,7 +162,6 @@ git push heroku[-staging] +HEAD:master
 1. If maintenance mode was previously enabled, disable maintenance mode:  
 heroku maintenance:off -a odop
 1. Confirm that the http://odop-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version Major.Minor.Patch displays.
-1. Update docs/About/messageOfTheDay.md to announce availability of the new version.
 1. **Publish to SpringDesignSoftware.org**. &nbsp; For production only, 
 while positioned in the git/odop directory, push to SpringDesignSoftware.org using the command line:   
 git push springdesignsoftware master   
