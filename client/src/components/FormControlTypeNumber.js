@@ -105,10 +105,9 @@ class FormControlTypeNumber extends Component {
         if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
             value_class += ' borders-invalid';
         }
-        console.log('this.props=',this.props);
         return (<>
             <Form.Control type="number"
-                {...this.props}
+                {...this.props} // Allow OverlayTrigger to pass-in props
                 onClick={this.onClick}
                 onChange={this.onChange}
                 onFocus={this.onFocus}
