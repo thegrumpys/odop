@@ -248,7 +248,7 @@ class ResultTable extends Component {
                                       advantages / disadvantages. The ODOP Seek feature provides a “goal seeking” capability 
                                       to optimize your design on the parameter that you specify. If starting with a default 
                                       design, additional constraints specific to your application are required to obtain 
-                                      meaningful results. Click Help (below) for details.
+                                      meaningful results.
                                       </Tooltip>}>
                                       <span><i class="fas fa-info-circle text-primary"></i></span>
                                   </OverlayTrigger>
