@@ -105,17 +105,16 @@ class FormControlTypeNumber extends Component {
         if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
             value_class += ' borders-invalid';
         }
+        console.log('this.props=',this.props);
         return (<>
             <Form.Control type="number"
-                disabled={this.props.disabled}
-                readOnly={this.props.readOnly}
-                className={value_class}
-                step={this.props.step}
-                value={this.state.focused ? this.state.valueString : this.state.value.toODOPPrecision()}
+                {...this.props}
                 onClick={this.onClick}
                 onChange={this.onChange}
                 onFocus={this.onFocus}
-                onBlur={this.onBlur} />
+                onBlur={this.onBlur}
+                className={value_class}
+                value={this.state.focused ? this.state.valueString : this.state.value.toODOPPrecision()} />
         </>)
     }
 }
@@ -124,7 +123,6 @@ FormControlTypeNumber.propTypes = {
     disabled: PropTypes.bool,
     readOnly: PropTypes.bool,
     value: PropTypes.any,
-    className: PropTypes.string,
     step: PropTypes.string,
     onClick: PropTypes.func,
     onChange: PropTypes.func,
@@ -138,7 +136,6 @@ FormControlTypeNumber.defaultProps = {
     disabled: false,
     readOnly: false,
     value: '',
-    className: '',
     step: 'any',
     onClick: (()=>{}),
     onChange: (()=>{}),
