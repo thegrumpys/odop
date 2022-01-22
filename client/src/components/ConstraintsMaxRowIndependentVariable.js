@@ -10,6 +10,7 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 class ConstraintMaxRowIndependentVariable extends Component {
 
     constructor(props) {
+//        console.log("In ConstraintMaxRowIndependentVariable.constructor props=",props);
         super(props);
         this.onChangeValidMaxConstraint = this.onChangeValidMaxConstraint.bind(this);
         this.onChangeInvalidMaxConstraint = this.onChangeInvalidMaxConstraint.bind(this);
@@ -59,14 +60,16 @@ class ConstraintMaxRowIndependentVariable extends Component {
         // Show modal only if there are cmaxchoices
         if (this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0) {
             this.setState({
+                valueString: this.props.element.cmax.toString(), // Update the display
                 modal: !this.state.modal,
             });
         }
     }
 
     onChangeValidValue(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onChangeValue event.target.value=",event.target.value);
+//        console.log("In ConstraintMaxRowIndependentVariable.onChangeValidValue event.target.value=",event.target.value);
         this.setState({
+            valueString: event.target.value,
             isInvalidValue: false,
         });
         this.props.onChangeValid(event);

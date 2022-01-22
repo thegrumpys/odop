@@ -10,6 +10,7 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 class ConstraintMinRowIndependentVariable extends Component {
 
     constructor(props) {
+//        console.log("In ConstraintMinRowIndependentVariable.constructor props=",props);
         super(props);
         this.onChangeValidMinConstraint = this.onChangeValidMinConstraint.bind(this);
         this.onChangeInvalidMinConstraint = this.onChangeInvalidMinConstraint.bind(this);
@@ -59,6 +60,7 @@ class ConstraintMinRowIndependentVariable extends Component {
         // Show modal only if there are cminchoices
         if (this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0) {
             this.setState({
+                valueString: this.props.element.cmin.toString(), // Update the display
                 modal: !this.state.modal,
             });
         }
@@ -67,6 +69,7 @@ class ConstraintMinRowIndependentVariable extends Component {
     onChangeValidValue(event) {
 //        console.log("In ConstraintMinRowIndependentVariable.onChangeValidValue event=",event);
         this.setState({
+            valueString: event.target.value,
             isInvalidValue: false,
         });
         this.props.onChangeValid(event);
