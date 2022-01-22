@@ -149,10 +149,10 @@ class ConstraintsMinRowDependentVariable extends Component {
                             </InputGroup.Prepend>
                             {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{this.props.element.lmin & FDCL ? 'FDCL =' + this.props.element.cminchoices[this.props.element.cminchoice] : '=' + this.props.element.cmin + ' (non-FDCL)'}</Tooltip>}>
-                                    <FormControlTypeNumber id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : ''} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)}  onClick={this.onClick}/>
+                                    <FormControlTypeNumber id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : ''} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick}/>
                                 </OverlayTrigger>
                             :
-                                <FormControlTypeNumber id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : ''} onChangeValid={this.onChangeMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} onClick={this.onClick}/>
+                                <FormControlTypeNumber id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.lmin & CONSTRAINED ? this.props.element.cmin : ''} onChangeValid={this.onChangeMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} onClick={this.onClick}/>
                             }
                         </InputGroup>
                         {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ?
