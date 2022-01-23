@@ -12,13 +12,13 @@
 #include <BRepBuilderAPI_Transform.hxx>
 #include <BRepLib.hxx>
 #include <BRepMesh_IncrementalMesh.hxx>
-#include <BRepOffsetAPI_MakePipe.hxx>
+#include <BRepOffsetAPI_MakePipeShell.hxx>
 #include <BRepPrimAPI_MakeBox.hxx>
 #include <BRepPrimAPI_MakePrism.hxx>
 #include <BRepTools.hxx>
-#include <GCE2d_MakeSegment.hxx>
+#include <GCE2d_MakeLine.hxx>
 #include <GC_MakeCircle.hxx>
-#include <Geom2d_TrimmedCurve.hxx>
+#include <Geom2d_Line.hxx>
 #include <Geom_CylindricalSurface.hxx>
 #include <StlAPI_Writer.hxx>
 #include <TopExp.hxx>
@@ -26,7 +26,6 @@
 #include <TopoDS_Face.hxx>
 #include <TopoDS_Shape.hxx>
 #include <gp_Circ.hxx>
-#include <gp_Lin2d.hxx>
 #include <gp_Pnt.hxx>
 #include <gp_Pnt2d.hxx>
 #include <gp_Trsf.hxx>
@@ -66,9 +65,9 @@ int main(int argc, const char * argv[]) {
         Standard_Real OD_Free = 1.1;
         Standard_Real Wire_Dia = 0.1055;
         Standard_Real L_Free = 3.25;
-        Standard_Real Coils_T = 12.0;
+        Standard_Real Coils_T = 3.0;
         Standard_Real Mean_Dia = 0.9945;
-        Standard_Real Coils_A = 10.0;
+        Standard_Real Coils_A = 1.0;
         Standard_Integer End_Type = End_Types::Closed;
 
         std::cout << "OD_Free=" << OD_Free << std::endl;
@@ -129,8 +128,7 @@ int main(int argc, const char * argv[]) {
             std::cout << "Create Bottom Helix" << std::endl;
             gp_Ax2 aBottomHelixOrigin(gp_Pnt(0.0, 0.0, 0.0), gp_Dir(0.0, 0.0, 1.0));
             Handle(Geom_CylindricalSurface) aBottomHelixCylinder = new Geom_CylindricalSurface(aBottomHelixOrigin, aHelixRadius);
-            gp_Lin2d aBottomHelixLine2d(gp_Pnt2d(0.0, 0.0), gp_Dir2d(2. * M_PI, aClosedHelixPitch));
-            Handle(Geom2d_TrimmedCurve) aBottomHelixSegment = GCE2d_MakeSegment(aBottomHelixLine2d, 0.0, 2.0 * M_PI).Value();
+            Handle(Geom2d_Line) aBottomHelixSegment = GCE2d_MakeLine(gp_Pnt2d(0.0, 0.0), gp_Dir2d(2. * M_PI, aClosedHelixPitch));
             aBottomHelixEdge = BRepBuilderAPI_MakeEdge(aBottomHelixSegment, aBottomHelixCylinder, 0.0, aClosedHelixCoils * aClosedHelixHypotenuse).Edge();
             BRepLib::BuildCurve3d(aBottomHelixEdge);
 
@@ -138,8 +136,7 @@ int main(int argc, const char * argv[]) {
             std::cout << "Create Top Helix" << std::endl;
             gp_Ax2 aTopHelixOrigin(gp_Pnt(0.0, 0.0, aClosedHelixHeight+aCenterHelixHeight), gp_Dir(0.0, 0.0, 1.0));
             Handle(Geom_CylindricalSurface) aTopHelixCylinder = new Geom_CylindricalSurface(aTopHelixOrigin, aHelixRadius);
-            gp_Lin2d aTopHelixLine2d(gp_Pnt2d(0.0, 0.0), gp_Dir2d(2. * M_PI, aClosedHelixPitch));
-            Handle(Geom2d_TrimmedCurve) aTopHelixSegment = GCE2d_MakeSegment(aTopHelixLine2d, 0.0, 2.0 * M_PI).Value();
+            Handle(Geom2d_Line) aTopHelixSegment = GCE2d_MakeLine(gp_Pnt2d(0.0, 0.0), gp_Dir2d(2. * M_PI, aClosedHelixPitch));
             aTopHelixEdge = BRepBuilderAPI_MakeEdge(aTopHelixSegment, aTopHelixCylinder, 0.0, aClosedHelixCoils * aClosedHelixHypotenuse).Edge();
             BRepLib::BuildCurve3d(aTopHelixEdge);
         }
@@ -167,7 +164,7 @@ int main(int argc, const char * argv[]) {
         }
 
         // Create Center Helix
-        Standard_Real aCenterHelixZ = 0.0;
+        Standard_Real aCenterHelixZ;
         if (End_Type == End_Types::Closed || End_Type == End_Types::Closed_Ground) {
             std::cout << "Create Center Helix at Closed Height" << std::endl;
             aCenterHelixZ = aClosedHelixHeight;
@@ -177,8 +174,7 @@ int main(int argc, const char * argv[]) {
         }
         gp_Ax2 aCenterHelixOrigin(gp_Pnt(0.0, 0.0, aCenterHelixZ), gp_Dir(0.0, 0.0, 1.0));
         Handle(Geom_CylindricalSurface) aCenterHelixCylinder = new Geom_CylindricalSurface(aCenterHelixOrigin, aHelixRadius);
-        gp_Lin2d aCenterHelixLine2d(gp_Pnt2d(0.0, 0.0), gp_Dir2d(2. * M_PI, aCenterHelixPitch));
-        Handle(Geom2d_TrimmedCurve) aCenterHelixSegment = GCE2d_MakeSegment(aCenterHelixLine2d, 0.0, 2.0 * M_PI).Value();
+        Handle(Geom2d_Line) aCenterHelixSegment = GCE2d_MakeLine(gp_Pnt2d(0.0, 0.0), gp_Dir2d(2. * M_PI, aCenterHelixPitch));
         TopoDS_Edge aCenterHelixEdge = BRepBuilderAPI_MakeEdge(aCenterHelixSegment, aCenterHelixCylinder, 0.0, aCenterHelixCoils * aCenterHelixHypotenuse).Edge();
         BRepLib::BuildCurve3d(aCenterHelixEdge);
 
@@ -191,7 +187,12 @@ int main(int argc, const char * argv[]) {
             std::cout << "Create Helix Wire and Pipe from Center Helix" << std::endl;
             aHelixWire = BRepBuilderAPI_MakeWire(aCenterHelixEdge).Wire();
         }
-        BRepOffsetAPI_MakePipe aHelixPipe(aHelixWire, aProfileFace);
+        BRepOffsetAPI_MakePipeShell aHelixPipe(aHelixWire);
+        aHelixPipe.SetTransitionMode(BRepBuilderAPI_RoundCorner);
+        aHelixPipe.Add(aProfileWire, Standard_False, Standard_True);
+        aHelixPipe.Build();
+        Standard_Boolean flag = aHelixPipe.MakeSolid();
+        std::cout << "flag=" << (flag==true ? "success" : "fail") << std::endl;
 
         TopoDS_Shape aCompressionSpring;
         if (End_Type == End_Types::Open_Ground || End_Type == End_Types::Closed_Ground) {
@@ -206,17 +207,20 @@ int main(int argc, const char * argv[]) {
         // Mesh Compression Spring
         std::cout << "Mesh Compression Spring" << std::endl;
         BRepMesh_IncrementalMesh mesh(aCompressionSpring, LinearDeflection, Standard_False, 0.5, Standard_False );
-        mesh.Perform();
+        Standard_Integer status = mesh.GetStatusFlags();
+        std::cout << "status=" << status << std::endl;
 
         // Generate STL File
         std::cout << "Generate STL File" << std::endl;
         StlAPI_Writer writer;
-        int result;
+        Standard_Boolean result;
         result = writer.Write(aCompressionSpring, "OCCSample.stl");
         std::cout << "result=" << (result==true ? "success" : "fail") << std::endl;
         
+    } catch(Standard_Failure &err) {
+        std::cout << "Standard_Failure &err=" << err << std::endl;
     } catch(int &err) {
-        std::cout << "err=" << err << std::endl;
+        std::cout << "int &err=" << err << std::endl;
     }
 
     std::cout << "Ending OCCSample" << std::endl;
