@@ -11,7 +11,8 @@ file named eqnset.js.
  &nbsp; (<sup> * </sup> = may be stub)   
 * client/src/designtypes/_designName_/
     * initialState.js
-    * offsets.js 
+    * symbol_table.js - for symbol table access by index
+    * offsets.js  - for p and x vector access by index
     * eqnset.js
     * init.js<sup> * </sup>
     * view.js<sup> * </sup>
