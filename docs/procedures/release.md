@@ -36,6 +36,7 @@ To confirm,
 compare the current master branch against the previous released commit tag branch 
 and check if any of the client/src/designtypes/.../initialState.js files have changed.  
 &nbsp;
+1. Confirm offsets.js and symbol_table_offsets.js have been updated as part of migrate.js changes and are both updated to be sonsistent. Do this by copying from View > View Offsets and View Symbol Table and paste into offsets.js and symbol_table_offsets.js for all design-types that were changed.
 1. If the database does not exist or is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB)
 to create and format the database tables using the create.sql file. 
 Do this to development, test, staging and/or production databases as appropriate.   
