@@ -42,44 +42,44 @@
 
 using namespace std;
 
-Handle(Geom2d_TrimmedCurve) MakeArcOfCircle(const gp_Pnt2d& P1 ,
-                     const gp_Vec2d& V  ,
-                     const gp_Pnt2d& P2 )
-{
-    Standard_Boolean Sense;
-    gp_Circ2d cir;
-    gp_Lin2d corde = gce_MakeLin2d(P1,P2);
-    gp_Dir2d dir(corde.Direction());
-    gp_Lin2d bis(gp_Pnt2d((P1.X()+P2.X())/2.,(P1.Y()+P2.Y())/2.),
-                 gp_Dir2d(-dir.Y(),dir.X()));
-    gp_Lin2d norm(P1,gp_Dir2d(-V.Y(),V.X()));
-    gce_ErrorType TheError = gce_ConfusedPoints;
-    
-    IntAna2d_AnaIntersection Intp(bis,norm);
-    
-    if (Intp.IsDone())
-    {
-        if (!Intp.IsEmpty())
-        {
-            gp_Pnt2d center(Intp.Point(1).Value());
-            Standard_Real rad = (center.Distance(P1)+center.Distance(P2))/2.;
-            cir = gce_MakeCirc2d(center,rad);
-            TheError = gce_Done;
-        }
-    }
-    
-    if (TheError == gce_Done) {
-        Standard_Real Alpha1 = ElCLib::Parameter(cir,P1);
-        Standard_Real Alpha2 = ElCLib::Parameter(cir,P2);
-        Handle(Geom2d_Circle) Circ = new Geom2d_Circle(cir);
-        gp_Vec2d vv(dir);
-        Standard_Real cross = V^vv;
-        Sense = cross > 0.;
-        Handle(Geom2d_TrimmedCurve) TheArc= new Geom2d_TrimmedCurve(Circ,Alpha1,Alpha2,Sense);
-        return TheArc;
-    }
-    return NULL;
-}
+//Handle(Geom2d_TrimmedCurve) MakeArcOfCircle(const gp_Pnt2d& P1 ,
+//                     const gp_Vec2d& V  ,
+//                     const gp_Pnt2d& P2 )
+//{
+//    Standard_Boolean Sense;
+//    gp_Circ2d cir;
+//    gp_Lin2d corde = gce_MakeLin2d(P1,P2);
+//    gp_Dir2d dir(corde.Direction());
+//    gp_Lin2d bis(gp_Pnt2d((P1.X()+P2.X())/2.,(P1.Y()+P2.Y())/2.),
+//                 gp_Dir2d(-dir.Y(),dir.X()));
+//    gp_Lin2d norm(P1,gp_Dir2d(-V.Y(),V.X()));
+//    gce_ErrorType TheError = gce_ConfusedPoints;
+//
+//    IntAna2d_AnaIntersection Intp(bis,norm);
+//
+//    if (Intp.IsDone())
+//    {
+//        if (!Intp.IsEmpty())
+//        {
+//            gp_Pnt2d center(Intp.Point(1).Value());
+//            Standard_Real rad = (center.Distance(P1)+center.Distance(P2))/2.;
+//            cir = gce_MakeCirc2d(center,rad);
+//            TheError = gce_Done;
+//        }
+//    }
+//
+//    if (TheError == gce_Done) {
+//        Standard_Real Alpha1 = ElCLib::Parameter(cir,P1);
+//        Standard_Real Alpha2 = ElCLib::Parameter(cir,P2);
+//        Handle(Geom2d_Circle) Circ = new Geom2d_Circle(cir);
+//        gp_Vec2d vv(dir);
+//        Standard_Real cross = V^vv;
+//        Sense = cross > 0.;
+//        Handle(Geom2d_TrimmedCurve) TheArc= new Geom2d_TrimmedCurve(Circ,Alpha1,Alpha2,Sense);
+//        return TheArc;
+//    }
+//    return NULL;
+//}
 
 int main(int argc, const char * argv[]) {
 
@@ -206,7 +206,7 @@ int main(int argc, const char * argv[]) {
 
             // Create Bottom Transition
             std::cout << "Create Bottom Transition" << std::endl;
-            Handle(Geom2d_TrimmedCurve) bottomTransitionLine = MakeArcOfCircle(gp_Pnt2d(0.0, 0.0), gp_Vec2d(gp_Dir2d(2. * M_PI, closedHelixPitch)), gp_Pnt2d(closedTransitionCoils * 2.0 * M_PI + centerTransitionCoils * 2.0 * M_PI, closedTransitionCoils * closedHelixPitch + centerTransitionCoils * centerHelixPitch));
+            Handle(Geom2d_TrimmedCurve) bottomTransitionLine = GCE2d_MakeArcOfCircle(gp_Pnt2d(0.0, 0.0), gp_Vec2d(gp_Dir2d(2. * M_PI, closedHelixPitch)), gp_Pnt2d(closedTransitionCoils * 2.0 * M_PI + centerTransitionCoils * 2.0 * M_PI, closedTransitionCoils * closedHelixPitch + centerTransitionCoils * centerHelixPitch));
             gp_Ax2 bottomTransitionOrigin(gp_Pnt(0.0, 0.0, closedHelixHeight), gp_Dir(0.0, 0.0, 1.0));
             Handle(Geom_CylindricalSurface) bottomTransitionCylinder = new Geom_CylindricalSurface(bottomTransitionOrigin, helixRadius);
             gp_Trsf bottomTransitionTrsf;
