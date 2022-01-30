@@ -107,7 +107,7 @@ export class Calculator extends ReportBase {
                                 </td>
                             </tr>
                             <tr>
-                                <ValueName name={<b>1</b>} tooltip="Load point 1" />
+                                <ValueName name={<b>1</b>} tooltip="Point 1 (minimum operating load)" />
                                 <SymbolValue element={this.props.symbol_table[o.L_1]} index={o.L_1} />
                                 <SymbolValue element={this.props.symbol_table[o.Deflect_1]} index={o.Deflect_1} />
                                 <SymbolValue element={this.props.symbol_table[o.Force_1]} index={o.Force_1} />
@@ -117,7 +117,7 @@ export class Calculator extends ReportBase {
                                 <Value value={this.fs_1} />
                             </tr>
                             <tr>
-                                <ValueName name={<b>2</b>} tooltip="Load point 2" />
+                                <ValueName name={<b>2</b>} tooltip="Point 2 (maximum operating load)" />
                                 <SymbolValue element={this.props.symbol_table[o.L_2]} index={o.L_2} />
                                 <SymbolValue element={this.props.symbol_table[o.Deflect_2]} index={o.Deflect_2} />
                                 <SymbolValue element={this.props.symbol_table[o.Force_2]} index={o.Force_2} />
@@ -127,7 +127,7 @@ export class Calculator extends ReportBase {
                                 <SymbolValue element={this.props.symbol_table[o.FS_2]} index={o.FS_2} />
                             </tr>
                             <tr>
-                                <ValueName name={<b>Solid</b>} tooltip="Solid load point" />
+                                <ValueName name={<b>Solid</b>} tooltip="Fully compressed" />
                                 <SymbolValue element={this.props.symbol_table[o.L_Solid]} index={o.L_Solid} />
                                 <Value value={(this.props.symbol_table[o.L_Free].value - this.props.symbol_table[o.L_Solid].value)} />
                                 <SymbolValue element={this.props.symbol_table[o.Force_Solid]} index={o.Force_Solid} />
@@ -144,7 +144,7 @@ export class Calculator extends ReportBase {
                     <table className="report-table">
                         <tbody>
                             <tr>
-                                <ValueName name="Safe Load" tooltip="Safe Load is how far a spring can go safely without suffering damage"/>
+                                <ValueName name="Safe Load" tooltip="Greatest load that can be supported without exceeding maximum allowable stress"/>
                                 <Value value={this.safe_load} />
                                 <td className="text-left">{this.safe_load_u}</td>
                                 <td> &nbsp; &nbsp; </td>
@@ -182,7 +182,7 @@ export class Calculator extends ReportBase {
                         <tbody>
                             <tr>
                                 <td>
-                                    Deflection at load point 2 is
+                                    Deflection at point 2 (maximum operating load) is
                                 </td>
                                 <SymbolValue element={this.props.symbol_table[o.PC_Avail_Deflect]} index={o.PC_Avail_Deflect} />
                                 <td>
