@@ -101,7 +101,7 @@ int main(int argc, const char * argv[]) {
         Standard_Real middleHelixHypotenuse = sqrt((2.0 * M_PI * 2.0 * M_PI) + (middleHelixPitch * middleHelixPitch));
         Standard_Real middleTransitionCoils = closedTransitionCoils * closedHelixHypotenuse / middleHelixHypotenuse;
         if (Coils_T - Coils_A > 0.0) {
-            middleHelixCoils -= 2.0 * (closedTransitionCoils + middleTransitionCoils);
+            middleHelixCoils -= 2.0 * (closedTransitionCoils * closedHelixPitch / middleHelixPitch + middleTransitionCoils);
         }
         Standard_Real middleHelixHeight = middleHelixCoils * middleHelixPitch;
         Standard_Real middleTransitionHypotenuse = closedTransitionHypotenuse; // They must match
@@ -166,7 +166,8 @@ int main(int argc, const char * argv[]) {
             u += closedHelixCoils * 2.0 * M_PI;
             v += closedHelixCoils * closedHelixPitch;
             std::cout << "after Bottom Helix u=" << u << " v=" << v << std::endl;
-            
+            std::cout << std::endl;
+
             // Create Bottom Transition
             std::cout << "Create Bottom Transition" << std::endl;
             Handle(Geom2d_TrimmedCurve) bottomTransitionLine = GCE2d_MakeArcOfCircle(gp_Pnt2d(u, v), gp_Vec2d(gp_Dir2d(2. * M_PI, closedHelixPitch)), gp_Pnt2d(u + closedTransitionCoils * 2.0 * M_PI + middleTransitionCoils * 2.0 * M_PI, v + closedTransitionCoils * closedHelixPitch + middleTransitionCoils * middleHelixPitch));
@@ -265,6 +266,7 @@ int main(int argc, const char * argv[]) {
             u += middleTransitionCoils * 2.0 * M_PI + closedTransitionCoils * 2.0 * M_PI;
             v += middleTransitionCoils * middleHelixPitch + closedTransitionCoils * closedHelixPitch;
             std::cout << "after Top Transition u=" << u << " v=" << v << std::endl;
+            std::cout << std::endl;
 
             // Create Top Helix
             std::cout << "Create Top Helix" << std::endl;
