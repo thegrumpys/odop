@@ -86,7 +86,7 @@ class ActionExecute extends Component {
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>
                     Execute&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} className={this.props.className} onHide={this.onCancel}>
+                <Modal show={this.state.modal} onHide={this.onCancel}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Execute

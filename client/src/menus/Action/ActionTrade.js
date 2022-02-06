@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { NavDropdown, Modal, Button, Container, Row, Col, InputGroup, Form } from 'react-bootstrap';
+import { NavDropdown, Modal, Button, Container, Row, Col, InputGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, CONSTRAINED, FDCL } from '../../store/actionTypes';
 import { changeSymbolConstraint,
@@ -10,6 +10,7 @@ import { changeSymbolConstraint,
     search,
     saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
+import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 
 class ActionTrade extends Component {
 
@@ -27,12 +28,13 @@ class ActionTrade extends Component {
         
         this.onArbitraryCancel = this.onArbitraryCancel.bind(this);
         this.onArbitraryContinue = this.onArbitraryContinue.bind(this);
-        this.onArbitraryChange = this.onArbitraryChange.bind(this);
-        this.onArbitraryBlur = this.onArbitraryBlur.bind(this);
+        this.onArbitraryChangeValid = this.onArbitraryChangeValid.bind(this);
+        this.onArbitraryChangeInvalid = this.onArbitraryChangeInvalid.bind(this);
 
         this.onSizeCancel = this.onSizeCancel.bind(this);
         this.onSizeContinue = this.onSizeContinue.bind(this);
-        this.onSizeChange = this.onSizeChange.bind(this);
+        this.onSizeChangeValid = this.onSizeChangeValid.bind(this);
+        this.onSizeChangeInvalid = this.onSizeChangeInvalid.bind(this);
         
         this.onFeasibleRestart = this.onFeasibleRestart.bind(this);
         this.onFeasibleDone = this.onFeasibleDone.bind(this);
@@ -56,7 +58,6 @@ class ActionTrade extends Component {
                 vflag: [],
                 ldir: [],
                 dir: [],
-                dirString: [], // For arbitrary modal only
             };
     }
     
@@ -179,7 +180,7 @@ class ActionTrade extends Component {
         var design;
         var element;
         var dir = [];
-        var dirString = [];
+        var isArbitraryInvalid = [];
         const { store } = this.context;
         design = store.getState();
         for (let i = 0; i < this.state.nviol; i++) {
@@ -190,11 +191,11 @@ class ActionTrade extends Component {
             } else {
                 dir[i] = this.state.ldir[i] * element.vmax;
             }
-            dirString[i] = Math.abs(dir[i]).toString(); // Convert to string for arbitrary modal display
+            isArbitraryInvalid[i] = false;
         }
         this.setState({
             dir: dir,
-            dirString: dirString,
+            isArbitraryInvalid: isArbitraryInvalid,
             arbitraryContinueDisabled: false,
             strategyModal: !this.state.strategyModal, // Hide strategy modal
             arbitraryModal: !this.state.arbitraryModal, // Show arbitrary modal
@@ -310,7 +311,6 @@ class ActionTrade extends Component {
         if (defaultest < design.model.system_controls.smallnum) {
             defaultest = design.model.system_controls.smallnum;
         }
-        defaultest = defaultest * 100; // Prepare for display
         this.setState({
             dir: dir,
             tc: tc,
@@ -318,7 +318,6 @@ class ActionTrade extends Component {
             smallest: smallest,
             bigest: bigest,
             defaultest: defaultest,
-            defaultestString: defaultest.toString(),
         });
     }
 
@@ -349,68 +348,67 @@ class ActionTrade extends Component {
         });
     }
     
-    onArbitraryChange(i, event) {
-//        console.log('In ActionTrade.onArbitraryChange i=',i,' event.target.value=',event.target.value);
+    onArbitraryChangeValid(i, event) {
+//        console.log('In ActionTrade.onArbitraryChangeValid i=',i,' event.target.value=',event.target.value);
 //        console.log('state=',this.state);
         var design;
         const { store } = this.context;
         design = store.getState();
-        var dir = [];
-        var dirString = []
-        dir = this.state.ldir.map((element,index)=>{
+        var dir = this.state.ldir.map((element,index)=>{
             var value;
             if (index === i) {
-                value = parseFloat(event.target.value);
-                if (!isNaN(value)) {
-                    value = value * element;
-                } else {
-                    value = this.state.dir[index];
-                }
+                value = element * parseFloat(event.target.value);
 //                console.log('i1=',i,' element=',element,' index=',index,' value=',value);
             } else {
                 value = this.state.dir[index];
 //                console.log('i2=',i,' element=',element,' index=',index,' value=',value);
             }
             return value;
-        })
-//        console.log('dir=',dir);
+        });
+//        console.log('In ActionTrade.onArbitraryChangeValid dir=',dir);
         var greatestValue = dir.reduce((previousValue,currentValue) => {return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue}, 0.0);
-//        console.log('greatestValue=',greatestValue);
-        dirString = dir.map((element,index) => {return index === i ? event.target.value : Math.abs(element).toString()});
-//        console.log('dirString=',dirString);
-        var notAllNumbers = dirString.reduce((previousValue,currentValue) => {return previousValue || isNaN(parseFloat(currentValue))}, false);
-//        console.log('notAllNumbers=',notAllNumbers);
-        var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllNumbers;
-//        console.log('arbitraryContinueDisabled=',arbitraryContinueDisabled);
+//        console.log('In ActionTrade.onArbitraryChangeValid greatestValue=',greatestValue);
+        var isArbitraryInvalid = this.state.isArbitraryInvalid.map((element, index) => {
+          if (index === i) {
+            return false;
+          } else {
+            return element;
+          }
+        });
+//        console.log('In ActionTrade.onArbitraryChangeValid isArbitraryInvalid=',isArbitraryInvalid);
+        var notAllArbitraryValid = isArbitraryInvalid.reduce((previousValue,currentValue) => {return previousValue || currentValue}, false);
+//        console.log('In ActionTrade.onArbitraryChangeValid notAllNumbers=',notAllArbitraryValid);
+        var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllArbitraryValid;
+//        console.log('In ActionTrade.onArbitraryChangeValid arbitraryContinueDisabled=',arbitraryContinueDisabled);
         this.setState({
             dir: dir,
-            dirString: dirString,
+            isArbitraryInvalid: isArbitraryInvalid,
             arbitraryContinueDisabled: arbitraryContinueDisabled,
         });
     }
     
-    onArbitraryBlur(i, event) {
-//        console.log('In ActionTrade.onArbitraryBlur i=',i,' event.target.value=',event.target.value);
+    onArbitraryChangeInvalid(i, event) {
+//        console.log('In ActionTrade.onArbitraryChangeInvalid i=',i,' event.target.value=',event.target.value);
 //        console.log('state=',this.state);
-        var dirString = this.state.dirString.map((element,index) => {
-            if (index === i) {
-                var value = parseFloat(event.target.value);
-                if (!isNaN(value)) {
-                    return value.toString();
-                } else {
-                    return Math.abs(this.state.dir[index]).toString();
-                }
-            } else {
-                return Math.abs(this.state.dir[index]).toString();
-            }
+        var design;
+        const { store } = this.context;
+        design = store.getState();
+        var greatestValue = this.state.dir.reduce((previousValue,currentValue) => {return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue}, 0.0);
+//        console.log('In ActionTrade.onArbitraryChangeInvalid greatestValue=',greatestValue);
+        var isArbitraryInvalid = this.state.isArbitraryInvalid.map((element, index) => {
+          if (index === i) {
+            return true;
+          } else {
+            return element;
+          }
         });
-//        console.log('dirString=',dirString);
-        var notAllNumbers = dirString.reduce((previousValue,currentValue) => {return previousValue || isNaN(parseFloat(currentValue))}, false);
-//      console.log('notAllNumbers=',notAllNumbers);
-        var arbitraryContinueDisabled = notAllNumbers;
-//        console.log('arbitraryContinueDisabled=',arbitraryContinueDisabled);
+//        console.log('In ActionTrade.onArbitraryChangeInvalid isArbitraryInvalid=',isArbitraryInvalid);
+        var notAllArbitraryValid = isArbitraryInvalid.reduce((previousValue,currentValue) => {return previousValue || currentValue}, false);
+//        console.log('In ActionTrade.onArbitraryChangeInvalid notAllNumbers=',notAllArbitraryValid);
+        var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllArbitraryValid;
+//        console.log('In ActionTrade.onArbitraryChangeInvalid arbitraryContinueDisabled=',arbitraryContinueDisabled);
         this.setState({
-            dirString: dirString,
+            isArbitraryInvalid: isArbitraryInvalid,
             arbitraryContinueDisabled: arbitraryContinueDisabled,
         });
     }
@@ -443,15 +441,7 @@ class ActionTrade extends Component {
         var value;
         const { store } = this.context;
         design = store.getState();
-        value = parseFloat(this.state.defaultestString);
-        if (!isNaN(value)) {
-            c3 = value / 100.0; // Scale back for computation
-            this.setState({
-                defaultest: value,
-            });
-        } else {
-            c3 = this.state.defaultest / 100.0; // Scale back for computation
-        }
+        c3 = this.state.defaultest;
         // TAKE FIRST EXPLORATORY RELAXATION STEP
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
@@ -573,14 +563,23 @@ class ActionTrade extends Component {
         });
     }
 
-    onSizeChange(event) {
-//        console.log('In ActionTrade.onSizeChange this=',this);
+    onSizeChangeValid(event) {
+//        console.log('In ActionTrade.onSizeChangeValid this=',this);
 //        console.log('state=',this.state);
         this.setState({
-            defaultestString: event.target.value,
+            defaultest: parseFloat(event.target.value),
+            isSizeInvalid: false,
         });
     }
     
+    onSizeChangeInvalid(event) {
+//        console.log('In ActionTrade.onSizeChangeInvalid this=',this);
+//        console.log('state=',this.state);
+        this.setState({
+            isSizeInvalid: true,
+        });
+    }
+
     //===========================================================
     // Feasible Modal
     //===========================================================
@@ -740,7 +739,7 @@ class ActionTrade extends Component {
                 {/*==================================================*/}
                 {/*=====================strategy=====================*/}
                 {/*==================================================*/}
-                <Modal show={this.state.strategyModal} className={this.props.className} size="lg" onHide={this.onStrategyDone}>
+                <Modal show={this.state.strategyModal} size="lg" onHide={this.onStrategyDone}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy
@@ -767,7 +766,7 @@ class ActionTrade extends Component {
                 {/*==================================================*/}
                 {/*=====================arbitrary====================*/}
                 {/*==================================================*/}
-                <Modal show={this.state.arbitraryModal} className={this.props.className} onHide={this.onNoop}>
+                <Modal show={this.state.arbitraryModal} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Arbitrary
@@ -794,9 +793,7 @@ class ActionTrade extends Component {
                                             <Col className="align-middle text-left" xs="4">{dname}</Col>
                                             <Col className="align-middle text-left" xs="2">{this.state.ldir[i] < 0 ? 'MIN' : 'MAX'}</Col>
                                             <Col className="align-middle text-right" xs="6">
-                                                <Form.Control type="number" className={
-                                                        'text-right ' + (isNaN(parseFloat(this.state.dirString[i])) ? 'borders-invalid ' : '')
-                                                    } value={this.state.dirString[i]} onChange={(event) => {this.onArbitraryChange(i, event)}} onBlur={(event) => {this.onArbitraryBlur(i, event)}}/>
+                                                <FormControlTypeNumber value={Math.abs(this.state.dir[i])} onChangeValid={(event) => {this.onArbitraryChangeValid(i, event)}} onChangeInvalid={(event) => {this.onArbitraryChangeInvalid(i, event)}}/>
                                             </Col>
                                         </Row>
                                     );
@@ -812,7 +809,7 @@ class ActionTrade extends Component {
                 {/*==================================================*/}
                 {/*=======================size=======================*/}
                 {/*==================================================*/}
-                <Modal show={this.state.sizeModal} className={this.props.className} onHide={this.onNoop}>
+                <Modal show={this.state.sizeModal} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Size
@@ -827,20 +824,18 @@ class ActionTrade extends Component {
                                     Default
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <Form.Control type="number" className={
-                                    'text-right ' + (isNaN(parseFloat(this.state.defaultestString)) || parseFloat(this.state.defaultestString) < design.model.system_controls.smallnum ? 'borders-invalid ' : '')
-                                } value={this.state.defaultestString} onChange={this.onSizeChange}/>
+                            <FormControlTypeNumber value={this.state.defaultest} onChangeValid={this.onSizeChangeValid} onChangeInvalid={this.onSizeChangeInvalid}/>
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onSizeCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" disabled={isNaN(parseFloat(this.state.defaultestString)) || parseFloat(this.state.defaultestString) < design.model.system_controls.smallnum} onClick={this.onSizeContinue}>Continue</Button>
+                        <Button variant="primary" disabled={this.state.isSizeInvalid || this.state.defaultest < design.model.system_controls.smallnum} onClick={this.onSizeContinue}>Continue</Button>
                     </Modal.Footer>
                 </Modal>
                 {/*==================================================*/}
                 {/*=====================feasible=====================*/}
                 {/*==================================================*/}
-                <Modal show={this.state.feasibleModal} className={this.props.className} onHide={this.onNoop}>
+                <Modal show={this.state.feasibleModal} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Feasible
@@ -862,7 +857,7 @@ class ActionTrade extends Component {
                 {/*==================================================*/}
                 {/*=====================establish====================*/}
                 {/*==================================================*/}
-                <Modal show={this.state.establishModal} className={this.props.className} onHide={this.onNoop}>
+                <Modal show={this.state.establishModal} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Establish
@@ -884,7 +879,7 @@ class ActionTrade extends Component {
                 {/*==================================================*/}
                 {/*====================notFeasible===================*/}
                 {/*==================================================*/}
-                <Modal show={this.state.notFeasibleModal} className={this.props.className} onHide={this.onNoop}>
+                <Modal show={this.state.notFeasibleModal} onHide={this.onNoop}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Not Feasible

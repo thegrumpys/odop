@@ -56,7 +56,7 @@ export class MessageModal extends Component {
     render() {
 //        console.log('In MessageModal.render this=',this);
         return (
-            <Modal show={this.state.modal} className={this.props.className} onHide={this.toggle}>
+            <Modal show={this.state.modal} onHide={this.toggle}>
                 { this.state.header !== '' ? <Modal.Header><Modal.Title><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>{this.state.header}</Modal.Title></Modal.Header> : ''}
                 <Modal.Body><Alert variant={this.state.variant}>{this.state.message}</Alert></Modal.Body>
                 <Modal.Footer>

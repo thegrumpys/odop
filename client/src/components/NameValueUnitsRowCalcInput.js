@@ -4,6 +4,7 @@ import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue } from '../store/actionCreators';
 import { logValue } from '../logUsage';
+import FormControlTypeNumber from './FormControlTypeNumber';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -20,29 +21,16 @@ class NameValueUnitsRowCalcInput extends Component {
     constructor(props) {
 //        console.log('In NameValueUnitsRowCalcInput.constructor props=',props);
         super(props);
-        this.onChange = this.onChange.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
+        this.onChangeValid = this.onChangeValid.bind(this);
+        this.onChangeInvalid = this.onChangeInvalid.bind(this);
         this.onSelect = this.onSelect.bind(this);
 //        console.log('In NameValueUnitsRowCalcInput.constructor this.props.element.name=',this.props.element.name,' this.props.element.format=',this.props.element.format,' this.props.element.table=',this.props.element.table);
-        if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
-            this.state = {
-                valueString: this.props.element.value.toODOPPrecision(), // Update the display
-                focused: false,
-            };
-        } else if (this.props.element.format === 'table') {
+        if (this.props.element.format === 'table') {
 //            console.log('In NameValueUnitsRowCalcInput.constructor file= ../designtypes/'+this.props.element.table+'.json');
             var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //            console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
             this.state = {
                 table: table,
-                valueString: this.props.element.value.toString(), // Update the display
-                focused: false,
-            };
-        } else {
-            this.state = {
-                valueString: this.props.element.value.toString(), // Update the display
-                focused: false,
             };
         }
     }
@@ -50,60 +38,28 @@ class NameValueUnitsRowCalcInput extends Component {
     componentDidUpdate(prevProps) {
 //        console.log('In NameValueUnitsRowCalcInput.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
-            if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
-                this.setState({
-                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
-                    focused: false,
-                });
-            } else if (this.props.element.format === 'table') {
+            if (this.props.element.format === 'table') {
 //                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate file= ../designtypes/'+this.props.element.table+'.json');
                 var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
 //                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate table=',table);
                 this.setState({
                     table: table,
-                    valueString: this.props.element.value.toODOPPrecision(), // Update the display
-                    focused: false,
-                });
-            } else {
-                this.setState({
-                    valueString: this.props.element.value.toString(), // Update the display
-                    focused: false,
                 });
             }
         }
     }
 
-    onChange(event) {
-//        console.log('In NameValueUnitsRowCalcInput.onChange event.target.value=',event.target.value);
-        this.setState({
-            valueString: event.target.value, // Update the display
-        });
+    onChangeValid(event) {
+//        console.log('In NameValueUnitsRowCalcInput.onChangeValid event.target.value=',event.target.value);
         var value = parseFloat(event.target.value);
-        if (!isNaN(value)) {
-            this.props.changeSymbolValue(this.props.element.name, value); // Update the model
-            logValue(this.props.element.name,event.target.value);
-            this.props.onValid();
-        } else {
-            this.props.onInvalid();
-        }
+        this.props.changeSymbolValue(this.props.element.name, value); // Update the model
+        logValue(this.props.element.name,event.target.value);
+        this.props.onChangeValid(event);
     }
     
-    onFocus(event) {
-//        console.log("In NameValueUnitsRowCalcInput.onFocus event.target.value=", event.target.value);
-        this.setState({
-            valueString: this.props.element.value.toString(), // Update the display with unformatted value
-            focused: true
-        });
-        this.props.onValid();
-    }
-    
-    onBlur(event) {
-//        console.log("In NameValueUnitsRowCalcInput.onBlur event.target.value=", event.target.value);
-        this.setState({
-            valueString: this.props.element.value.toODOPPrecision(), // Update the display with formatted value
-            focused: false
-        });
-        this.props.onValid();
+    onChangeInvalid(event) {
+//        console.log("In NameValueUnitsRowCalcInput.onChangeInvalid event.target.value=", event.target.value);
+        this.props.onChangeInvalid(event);
     }
     
     onSelect(event) {
@@ -118,10 +74,6 @@ class NameValueUnitsRowCalcInput extends Component {
         // =======================================
         // Table Row
         // =======================================
-        var value_class = 'text-right ';
-        if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
-            value_class += "borders-invalid ";
-        }
         return (
             <tbody>
                 <tr key={this.props.element.name}>
@@ -133,9 +85,9 @@ class NameValueUnitsRowCalcInput extends Component {
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
-                                <Form.Control type="number" disabled={!this.props.element.input} className={value_class} step="any" value={this.state.focused ? this.state.valueString : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} /> : '' }
+                                <FormControlTypeNumber disabled={!this.props.element.input} value={this.props.element.value} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} /> : '' }
                             { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
-                                <Form.Control type="text" disabled={!this.props.element.input} className={value_class} value={this.props.element.value} onChange={this.onChange} /> : '' }
+                                <Form.Control type="text" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onChange} /> : '' }
                             { this.props.element.format === 'table' &&
                             (
                                 <Form.Control as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>
@@ -155,13 +107,13 @@ class NameValueUnitsRowCalcInput extends Component {
 }
 
 NameValueUnitsRowCalcInput.propTypes = {
-    onValid: PropTypes.func,
-    onInvalid: PropTypes.func,
+    onChangeValid: PropTypes.func,
+    onChangeInvalid: PropTypes.func,
 }
 
 NameValueUnitsRowCalcInput.defaultProps = {
-    onValid: (()=>{}),
-    onInvalid: (()=>{}),
+    onChangeValid: (()=>{}),
+    onChangeInvalid: (()=>{}),
 }
 
 const mapStateToProps = state => ({

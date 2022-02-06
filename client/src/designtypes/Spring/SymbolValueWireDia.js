@@ -17,6 +17,7 @@ import ConstraintsMaxHeaderDependentVariable from '../../components/ConstraintsM
 import ConstraintsMaxRowDependentVariable from '../../components/ConstraintsMaxRowDependentVariable';
 import NameValueUnitsHeaderCalcInput from '../../components/NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from '../../components/NameValueUnitsRowCalcInput';
+import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 import { logValue } from '../../logUsage';
 import { logUsage } from '../../logUsage';
 
@@ -36,8 +37,6 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.constructor props=',props);
         super(props);
         this.onChange = this.onChange.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onSet = this.onSet.bind(this);
         this.onReset = this.onReset.bind(this);
@@ -49,7 +48,6 @@ class SymbolValueWireDia extends Component {
             this.state = {
                 modal: false,
                 value_input: false,
-                focused: false
             };
         } else {
             this.state = {
@@ -60,13 +58,8 @@ class SymbolValueWireDia extends Component {
     }
 
     componentDidUpdate(prevProps) {
-//        console.log('In SymbolValueWireDia.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
         if (prevProps.type !== this.props.type) {
-            if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
-                this.setState({
-                    focused: false,
-                });
-            }
+//        console.log('In SymbolValueWireDia.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
         }
     }
 
@@ -75,20 +68,6 @@ class SymbolValueWireDia extends Component {
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
         if (this.props.system_controls.enable_auto_fix) this.props.fixSymbolValue(this.props.element.name);
         logValue(this.props.element.name,event.target.value);
-    }
-
-    onFocus(event) {
-//        console.log("In SymbolValueWireDia.onFocus event.target.value=", event.target.value);
-        this.setState({
-            focused: true
-        });
-    }
-
-    onBlur(event) {
-//        console.log("In SymbolValueWireDia.onBlur event.target.value=", event.target.value);
-        this.setState({
-            focused: false
-        });
     }
 
     onSelect(event) {
@@ -138,13 +117,8 @@ class SymbolValueWireDia extends Component {
 
     onRadio() {
 //        console.log('In SymbolValueWireDia.onRadio this=',this);
-        var focused = true; // display full-precision number
-        if (this.state.value_input) { // Beware we invert this below so check for not value_input
-            focused = false; // display limited-precision number
-        }
         this.setState({
             value_input: !this.state.value_input,
-            focused: focused,
         });
     }
 
@@ -188,8 +162,10 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.render needle=',needle);
         var default_value = size_table.find((element,index) => {
             if (index > 0) { // skip the column header
-                if (element[0] !== needle) return false; // keep looking
-                else return true; // were done
+                if (element[0] !== needle)
+                  return false; // keep looking
+                else
+                  return true; // were done
             } else {
                 return false; // keep looking
             }
@@ -242,7 +218,7 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.render value_class=',value_class);
         return (
             <>
-                <td className={"align-middle " + this.props.className}>
+                <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
                         {(value_tooltip !== undefined ?
                             <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
@@ -253,7 +229,7 @@ class SymbolValueWireDia extends Component {
                         )}
                     </InputGroup>
                 </td>
-                <Modal show={this.state.modal} className={this.props.className} onHide={this.onClose}>
+                <Modal show={this.state.modal} onHide={this.onClose}>
                     <Modal.Header>
                         <Modal.Title>
                         {this.props.element.type === "equationset" && (this.props.element.input ? 'Independent Variable' : 'Dependent Variable')} Value Input
@@ -264,9 +240,9 @@ class SymbolValueWireDia extends Component {
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderIndependentVariable />
-                                    <tbody>
-                                        <tr key={this.props.element.name}_radio>
-                                            <td colspan="2"></td>
+                                    <tbody key={this.props.element.name}>
+                                        <tr>
+                                            <td colSpan="2"></td>
                                             <td colSpan="2">
                                                 <InputGroup>
                                                     <InputGroup.Radio name="value_input" checked={!this.state.value_input} onChange={this.onRadio}/><InputGroup.Text>Select std size</InputGroup.Text>
@@ -277,7 +253,7 @@ class SymbolValueWireDia extends Component {
                                             </td>
                                             <td></td>
                                         </tr>
-                                        <tr key={this.props.element.name}>
+                                        <tr>
                                             <td className="align-middle" colSpan="2" id={'independent_variable_'+this.props.index}>
                                                 <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip>{this.props.element.tooltip}</Tooltip>}>
                                                     <span>{this.props.element.name}</span>
@@ -288,18 +264,18 @@ class SymbolValueWireDia extends Component {
                                                     {(value_tooltip !== undefined ?
                                                         <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                                             this.state.value_input ?
-                                                            <Form.Control type="number" className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
+                                                            <FormControlTypeNumber className="text-right" step="any" value={this.props.element.value} onChange={this.onChange} />
                                                             :
-                                                            <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} onContextMenu={this.onContextMenu}>
+                                                            <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
                                                                 {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value.toODOPPrecision()+" Non-std"}</option>}
                                                                 {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
                                                             </Form.Control>
                                                         </OverlayTrigger>
                                                     :
                                                         this.state.value_input ?
-                                                        <Form.Control type="number" className="text-right" step="any" value={this.state.focused ? this.props.element.value : this.props.element.value.toODOPPrecision()} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur} />
+                                                        <FormControlTypeNumber className="text-right" step="any" value={this.props.element.value} onChange={this.onChange} />
                                                         :
-                                                        <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} onContextMenu={this.onContextMenu}>
+                                                        <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
                                                             {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value.toODOPPrecision()+" Non-std"}</option>}
                                                             {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
                                                         </Form.Control>

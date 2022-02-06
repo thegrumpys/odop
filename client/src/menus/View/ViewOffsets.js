@@ -33,7 +33,7 @@ class ViewOffsets extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     Offsets
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} className={this.props.className} onHide={this.toggle}>
+                <Modal show={this.state.modal} onHide={this.toggle}>
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : Offsets

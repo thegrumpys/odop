@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { InputGroup, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import FormControlTypeNumber from './FormControlTypeNumber';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -18,10 +19,10 @@ class Value extends Component {
 //        console.log('In Value.render this=',this);
         return (
             <>
-                <td className={"align-middle " + this.props.className}>
+                <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
                         {typeof this.props.value === 'number' ?
-                            <Form.Control type="number" disabled={true} className="text-right" value={this.props.value.toODOPPrecision()} />
+                            <FormControlTypeNumber disabled={true} value={this.props.value.toODOPPrecision()} />
                             :
                             <Form.Control type="text" disabled={true} className="text-right" value={this.props.value} />
                         }

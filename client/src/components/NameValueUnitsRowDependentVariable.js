@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { FIXED } from '../store/actionTypes';
 import { fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 import { logValue } from '../logUsage';
+import FormControlTypeNumber from './FormControlTypeNumber';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -51,7 +52,7 @@ class NameValueUnitsRowDependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <Form.Control type="number" disabled={true} className="text-right" value={this.props.element.value.toODOPPrecision()} />
+                            <FormControlTypeNumber disabled={true} value={this.props.element.value.toODOPPrecision()} />
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
