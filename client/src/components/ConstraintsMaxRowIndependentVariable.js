@@ -147,7 +147,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                     <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetFlagMaxConstrained : this.onSetFlagMaxConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
+                            {(this.props.element.lmax & FIXED) === 0 && this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{this.props.element.lmax & FDCL ? 'FDCL =' + this.props.element.cmaxchoices[this.props.element.cmaxchoice] : '=' + this.props.element.cmax + ' (non-FDCL)'}</Tooltip>}>
                                     <FormControlTypeNumber id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.lmax & CONSTRAINED ? this.props.element.cmax : ''} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick}/>
                                 </OverlayTrigger>
