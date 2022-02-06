@@ -48,7 +48,7 @@ int main(int argc, const char * argv[]) {
         Standard_Real OD_Free = 1.1;
         Standard_Real Wire_Dia = 0.1055;
         Standard_Real L_Free = 3.25;
-        Standard_Real Coils_T = 18.0;
+        Standard_Real Coils_T = 16.0;
         Standard_Real Mean_Dia = 0.9945;
         Standard_Real Coils_A = 10.0;
         Standard_Integer End_Type = End_Types::Closed;
@@ -68,62 +68,61 @@ int main(int argc, const char * argv[]) {
         std::cout << std::endl;
 
         Standard_Real profileRadius = Wire_Dia / 2.0 * in2mm;
-        std::cout << "profileRadius=" << profileRadius << std::endl;
-
         Standard_Real helixRadius = Mean_Dia / 2.0 * in2mm;
+        std::cout << "profileRadius=" << profileRadius << std::endl;
         std::cout << "helixRadius=" << helixRadius << std::endl;
+        std::cout << std::endl;
 
         Standard_Real closedHelixCoils = (Coils_T - Coils_A) / 2.0;
         Standard_Real closedHelixPitch = Wire_Dia * in2mm;
         Standard_Real closedHelixHypotenuse = sqrt((2.0 * M_PI * 2.0 * M_PI) + (closedHelixPitch * closedHelixPitch));
-//        Standard_Real closedTransitionCoils = 0.0;
-//        if (Coils_T - Coils_A > 0.0) {
-//            closedTransitionCoils = 0.25;
-//        }
         Standard_Real closedHelixHeight = closedHelixCoils * closedHelixPitch;
         std::cout << "closedHelixCoils=" << closedHelixCoils << std::endl;
         std::cout << "closedHelixPitch=" << closedHelixPitch << std::endl;
         std::cout << "closedHelixHypotenuse=" << closedHelixHypotenuse << std::endl;
         std::cout << "closedHelixHeight=" << closedHelixHeight << std::endl;
+
+        Standard_Real maxTransitionCoils = 0.5;
+        std::cout << "maxTransitionCoils=" << maxTransitionCoils << std::endl;
+        std::cout << std::endl;
+
+        Standard_Real middleHelixCoils = Coils_A;
+        if (Coils_T - Coils_A > 0.0) {
+            middleHelixCoils -= 2.0 * maxTransitionCoils;
+        }
+        Standard_Real middleHelixPitch = (L_Free - Wire_Dia * (Coils_T - Coils_A)) / Coils_A * in2mm;
+        Standard_Real middleHelixHypotenuse = sqrt((2.0 * M_PI * 2.0 * M_PI) + (middleHelixPitch * middleHelixPitch));
+        Standard_Real middleHelixHeight = middleHelixCoils * middleHelixPitch;
+        std::cout << "middleHelixCoils=" << middleHelixCoils << std::endl;
+        std::cout << "middleHelixPitch=" << middleHelixPitch << std::endl;
+        std::cout << "middleHelixHypotenuse=" << middleHelixHypotenuse << std::endl;
+        std::cout << "middleHelixHeight=" << middleHelixHeight << std::endl;
+
+        Standard_Real middleTransitionCoils = maxTransitionCoils / 2;
+        Standard_Real closedTransitionCoils = middleTransitionCoils * middleHelixHypotenuse / closedHelixHypotenuse;
+        Standard_Real temp_middleTransitionCoils = middleTransitionCoils * maxTransitionCoils / (middleTransitionCoils + closedTransitionCoils); // scale them to max
+        Standard_Real temp_closedTransitionCoils = closedTransitionCoils * maxTransitionCoils / (middleTransitionCoils + closedTransitionCoils);
+        middleTransitionCoils = temp_middleTransitionCoils;
+        closedTransitionCoils = temp_closedTransitionCoils;
+
+        Standard_Real closedTransitionHypotenuse = closedTransitionCoils * closedHelixHypotenuse;
+        Standard_Real closedTransitionHeight = closedTransitionCoils * closedHelixPitch;
+        std::cout << "closedTransitionCoils=" << closedTransitionCoils << std::endl;
+        std::cout << "closedTransitionHypotenuse=" << closedTransitionHypotenuse << std::endl;
+        std::cout << "closedTransitionHeight=" << closedTransitionHeight << std::endl;
+        std::cout << std::endl;
+
+        Standard_Real middleTransitionHypotenuse = closedTransitionHypotenuse; // They must match
+        Standard_Real middleTransitionHeight = closedTransitionCoils * closedHelixPitch + middleTransitionCoils * middleHelixPitch;
+        std::cout << "middleTransitionCoils=" << middleTransitionCoils << std::endl;
+        std::cout << "middleTransitionHypotenuse=" << middleTransitionHypotenuse << std::endl;
+        std::cout << "middleTransitionHeight=" << middleTransitionHeight << std::endl;
         std::cout << std::endl;
 
         Standard_Real cutterWidth = OD_Free * in2mm;
         Standard_Real cutterHeight = L_Free * in2mm;
         std::cout << "cutterWidth=" << cutterWidth << std::endl;
         std::cout << "cutterHeight=" << cutterHeight << std::endl;
-        std::cout << std::endl;
-
-        Standard_Real middleHelixCoils = Coils_A;
-        Standard_Real middleHelixPitch = (L_Free - Wire_Dia * (Coils_T - Coils_A)) / Coils_A * in2mm;
-        Standard_Real middleHelixHypotenuse = sqrt((2.0 * M_PI * 2.0 * M_PI) + (middleHelixPitch * middleHelixPitch));
-
-        Standard_Real maxTransitionCoils = 0.5;
-        Standard_Real middleTransitionCoils = maxTransitionCoils / 2;
-        Standard_Real closedTransitionCoils = middleTransitionCoils * middleHelixHypotenuse / closedHelixHypotenuse;
-        middleTransitionCoils = middleTransitionCoils * maxTransitionCoils / (middleTransitionCoils + closedTransitionCoils); // scale them to max
-        closedTransitionCoils = closedTransitionCoils * maxTransitionCoils / (middleTransitionCoils + closedTransitionCoils);
-        if (Coils_T - Coils_A > 0.0) {
-            middleHelixCoils -= 2.0 * maxTransitionCoils;
-        }
-        Standard_Real closedTransitionHypotenuse = closedTransitionCoils * closedHelixHypotenuse;
-        Standard_Real closedTransitionHeight = closedTransitionCoils * closedHelixPitch;
-        Standard_Real middleHelixHeight = middleHelixCoils * middleHelixPitch;
-        Standard_Real middleTransitionHypotenuse = closedTransitionHypotenuse; // They must match
-        Standard_Real middleTransitionHeight = closedTransitionCoils * closedHelixPitch + middleTransitionCoils * middleHelixPitch;
-        std::cout << "middleHelixCoils=" << middleHelixCoils << std::endl;
-        std::cout << "middleHelixPitch=" << middleHelixPitch << std::endl;
-        std::cout << "middleHelixHypotenuse=" << middleHelixHypotenuse << std::endl;
-        std::cout << "middleHelixHeight=" << middleHelixHeight << std::endl;
-        std::cout << std::endl;
-        std::cout << "maxTransitionCoils=" << maxTransitionCoils << std::endl;
-        std::cout << std::endl;
-        std::cout << "closedTransitionCoils=" << closedTransitionCoils << std::endl;
-        std::cout << "closedTransitionHypotenuse=" << closedTransitionHypotenuse << std::endl;
-        std::cout << "closedTransitionHeight=" << closedTransitionHeight << std::endl;
-        std::cout << std::endl;
-        std::cout << "middleTransitionCoils=" << middleTransitionCoils << std::endl;
-        std::cout << "middleTransitionHypotenuse=" << middleTransitionHypotenuse << std::endl;
-        std::cout << "middleTransitionHeight=" << middleTransitionHeight << std::endl;
         std::cout << std::endl;
 
         Handle(Geom_Plane) plane = new Geom_Plane(gp_Ax3 ()); // Debugging tool
