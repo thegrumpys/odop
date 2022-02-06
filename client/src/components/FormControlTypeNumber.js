@@ -116,7 +116,7 @@ class FormControlTypeNumber extends Component {
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 className={value_class}
-                value={this.state.focused ? this.state.valueString : this.state.value.toODOPPrecision()} />
+                value={this.state.focused ? this.state.valueString : (isNaN(this.state.value) ? '' : this.state.value.toODOPPrecision())} />
         </>)
     }
 }
