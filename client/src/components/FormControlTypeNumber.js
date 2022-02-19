@@ -16,7 +16,7 @@ Number.prototype.toODOPPrecision = function() {
 class FormControlTypeNumber extends Component {
 
     constructor(props, context) {
-//        console.log('In FormControlTypeNumber.constructor props=',props,'context=',context);
+        console.log('In FormControlTypeNumber.constructor props=',props,'context=',context);
         super(props, context);
         this.onClick = this.onClick.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -34,7 +34,7 @@ class FormControlTypeNumber extends Component {
 
     componentDidUpdate(prevProps) {
         if (Number.isFinite(this.props.value) && prevProps.value !== this.props.value) {
-//            console.log('In FormControlTypeNumber.componentDidUpdate prevProps.value=',prevProps.value,'props.value=',this.props.value);
+            console.log('In FormControlTypeNumber.componentDidUpdate prevProps.value=',prevProps.value,'props.value=',this.props.value,'state.value=',this.state.value);
             var value = parseFloat(this.props.value);
             this.setState({
                 value: value,
@@ -49,7 +49,7 @@ class FormControlTypeNumber extends Component {
     }
 
     onChange(event) {
-//        console.log('In FormControlTypeNumber.onChange event.target.value=',event.target.value);
+        console.log('In FormControlTypeNumber.onChange event.target.value=',event.target.value);
         var value = parseFloat(event.target.value);
         if (!isNaN(value)) {
             this.setState({

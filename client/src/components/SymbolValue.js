@@ -258,13 +258,13 @@ class SymbolValue extends Component {
                                 <>
                                     {icon_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                            <FormControlTypeNumber readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
+                                            <FormControlTypeNumber id={this.props.element.name} readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                     </OverlayTrigger>
                                 </>
                             :
                                 <>
                                     {icon_tag}
-                                    <FormControlTypeNumber readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
+                                    <FormControlTypeNumber id={this.props.element.name} readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                 </>
                             )
                         : ''}
@@ -273,13 +273,13 @@ class SymbolValue extends Component {
                                 <>
                                     {icon_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                        <Form.Control type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
+                                        <Form.Control id={this.props.element.name} type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                     </OverlayTrigger>
                                 </>
                             :
                                 <>
                                     {icon_tag}
-                                    <Form.Control type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
+                                    <Form.Control id={this.props.element.name} type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                 </>
                             )
                         : ''}
@@ -288,13 +288,13 @@ class SymbolValue extends Component {
                                 <>
                                     {icon_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                        <Form.Control type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
+                                        <Form.Control id={this.props.element.name} type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                                     </OverlayTrigger>
                                 </>
                             :
                                 <>
                                     {icon_tag}
-                                    <Form.Control type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
+                                    <Form.Control id={this.props.element.name} type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                                 </>
                             )
                         : ''}
