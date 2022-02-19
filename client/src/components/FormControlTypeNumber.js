@@ -16,7 +16,7 @@ Number.prototype.toODOPPrecision = function() {
 class FormControlTypeNumber extends Component {
 
     constructor(props, context) {
-        console.log('In FormControlTypeNumber.constructor props=',props,'context=',context);
+//        console.log('In FormControlTypeNumber.constructor props=',props,'context=',context);
         super(props, context);
         this.onClick = this.onClick.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -34,24 +34,27 @@ class FormControlTypeNumber extends Component {
 
     componentDidUpdate(prevProps) {
         if (Number.isFinite(this.props.value) && prevProps.value !== this.props.value) {
-            console.log('In FormControlTypeNumber.componentDidUpdate prevProps.value=',prevProps.value,'props.value=',this.props.value,'state.value=',this.state.value);
-            var value = parseFloat(this.props.value);
-            this.setState({
-                value: value,
-                valueString: value.toString(), // Update the display
-            });
+//            console.log('In FormControlTypeNumber.componentDidUpdate prevProps.value=',prevProps.value,'props.value=',this.props.value,'value=',this.state.value,'valueString=',this.state.valueString);
+            if (this.props.value !== this.state.value) { // Only update our internal state value if they differ leaving the valueString unchanged.
+                var value = parseFloat(this.props.value);
+                this.setState({
+                    value: value,
+                    valueString: value.toString(), // Update the display
+                });
+            }
         }
     }
 
     onClick(event) {
-//        console.log('In FormControlTypeNumber.onClick event.target.value=',event.target.value);
+//        console.log('In FormControlTypeNumber.onClick event.target.value=',event.target.value,'state=',this.state);
         this.props.onClick(event); // Pass valid number onward
     }
 
     onChange(event) {
-        console.log('In FormControlTypeNumber.onChange event.target.value=',event.target.value);
+//        console.log('In FormControlTypeNumber.onChange event.target.value=',event.target.value,'state=',this.state);
         var value = parseFloat(event.target.value);
         if (!isNaN(value)) {
+//            console.log('In FormControlTypeNumber.onChange Valid event.target.value=',event.target.value,'state=',this.state);
             this.setState({
                 value: value,
                 valueString: event.target.value, // Update the display
@@ -60,6 +63,7 @@ class FormControlTypeNumber extends Component {
             this.props.onChangeValid(event); // Pass valid number onward
             this.props.onChange(event); // Pass valid number onward
         } else {
+//            console.log('In FormControlTypeNumber.onChange Invalid event.target.value=',event.target.value,'state=',this.state);
             this.setState({
                 valueString: event.target.value, // Update the display
                 isInvalid: true,
@@ -69,7 +73,7 @@ class FormControlTypeNumber extends Component {
     }
 
     onFocus(event) {
-//        console.log('In FormControlTypeNumber.onFocus event.target.value=',event.target.value);
+//        console.log('In FormControlTypeNumber.onFocus event.target.value=',event.target.value,'state=',this.state);
         if (!this.props.readOnly) {
             this.setState({
                 valueString: this.state.value.toString(), // Update the display with unformatted value
@@ -80,7 +84,7 @@ class FormControlTypeNumber extends Component {
     }
 
     onBlur(event) {
-//        console.log('In FormControlTypeNumber.onBlur event.target.value=',event.target.value);
+//        console.log('In FormControlTypeNumber.onBlur event.target.value=',event.target.value,'state=',this.state);
         if (this.state.isInvalid) {
             event.target.value = this.state.value.toString();
             this.props.onChangeValid(event); // Pass valid number onward
