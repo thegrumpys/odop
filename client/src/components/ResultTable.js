@@ -16,10 +16,6 @@ class ResultTable extends Component {
         super(props);
         this.onSearchButton = this.onSearchButton.bind(this);
         this.onOptimizeButton = this.onOptimizeButton.bind(this);
-        this.onOptimizeSeekMINWeight = this.onOptimizeSeekMINWeight.bind(this);
-        this.onOptimizeSeekMAXCycle_Life = this.onOptimizeSeekMAXCycle_Life.bind(this);
-        this.onOptimizeSeekMINRate = this.onOptimizeSeekMINRate.bind(this);
-        this.onOptimizeSeekMINL_Solid = this.onOptimizeSeekMINL_Solid.bind(this);
         this.onOptimizeContextHelp = this.onOptimizeContextHelp.bind(this);
         this.onOptimizeCancel = this.onOptimizeCancel.bind(this);
         this.onMinMax = this.onMinMax.bind(this);
@@ -28,7 +24,8 @@ class ResultTable extends Component {
         this.state = {
             optimize_modal: false, // Default: do not display optimize modal
             name: 'OD_Free', // TODO: A fudge
-            minmax: MIN // TODO: A fudge
+            minmax: MIN, // TODO: A fudge
+            ResultTableOptimize: '<p>@@@</p>'
         };
     }
 
@@ -72,54 +69,6 @@ class ResultTable extends Component {
         this.setState({
             optimize_modal: !this.state.optimize_modal,
         });
-    }
-
-    onOptimizeSeekMINWeight(event) {
-//        console.log('In ResultTable.onOptimizeSeekMINWeight this=',this,'event=',event);
-        logUsage('event', 'ResultTable', { 'event_label': 'optmize Seek MIN Weight button' });
-        this.setState({
-            optimize_modal: !this.state.optimize_modal,
-        });
-        displaySpinner(true);
-        this.props.saveAutoSave();
-        this.props.seek('Weight', MIN);
-        displaySpinner(false);
-    }
-
-    onOptimizeSeekMAXCycle_Life(event) {
-//        console.log('In ResultTable.onOptimizeSeekMAXCycle_Life this=',this,'event=',event);
-        logUsage('event', 'ResultTable', { 'event_label': 'optmize Seek MAX Cycle_Life button' });
-        this.setState({
-            optimize_modal: !this.state.optimize_modal,
-        });
-        displaySpinner(true);
-        this.props.saveAutoSave();
-        this.props.seek('Cycle_Life', MAX);
-        displaySpinner(false);
-    }
-
-    onOptimizeSeekMINRate(event) {
-//        console.log('In ResultTable.onOptimizeSeekMINRate this=',this,'event=',event);
-        logUsage('event', 'ResultTable', { 'event_label': 'optmize Seek MIN Rate button' });
-        this.setState({
-            optimize_modal: !this.state.optimize_modal,
-        });
-        displaySpinner(true);
-        this.props.saveAutoSave();
-        this.props.seek('Rate', MIN);
-        displaySpinner(false);
-    }
-
-    onOptimizeSeekMINL_Solid(event) {
-//        console.log('In ResultTable.onOptimizeSeekMINL_Solid this=',this,'event=',event);
-        logUsage('event', 'ResultTable', { 'event_label': 'optmize Seek MIN L_Solid button' });
-        this.setState({
-            optimize_modal: !this.state.optimize_modal,
-        });
-        displaySpinner(true);
-        this.props.saveAutoSave();
-        this.props.seek('L_Solid', MIN);
-        displaySpinner(false);
     }
 
     onOptimizeContextHelp(event) {
@@ -237,7 +186,7 @@ class ResultTable extends Component {
                                       a solution that meets all of these goals is not available, the search process converges 
                                       to a compromise. Typically, this compromise violates multiple constraints.
                                       </Tooltip>}>
-                                      <span><i class="fas fa-info-circle text-primary"></i></span>
+                                      <span><i className="fas fa-info-circle text-primary"></i></span>
                                   </OverlayTrigger>
                               </td>
                             :
@@ -250,7 +199,7 @@ class ResultTable extends Component {
                                       design, additional constraints specific to your application are required to obtain 
                                       meaningful results.
                                       </Tooltip>}>
-                                      <span><i class="fas fa-info-circle text-primary"></i></span>
+                                      <span><i className="fas fa-info-circle text-primary"></i></span>
                                   </OverlayTrigger>
                               </td>
                             }
@@ -264,27 +213,7 @@ class ResultTable extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="pb-0">
-                        <p>Select a pre-configured Seek optimization:</p>
-                        <Table borderless="true" size="sm">
-                            <tbody>
-                                <tr>
-                                    <td width="50%">
-                                        <Button variant="primary" onClick={this.onOptimizeSeekMINWeight}>Seek MIN Weight</Button>
-                                    </td>
-                                    <td width="50%">
-                                        <Button variant="primary" onClick={this.onOptimizeSeekMAXCycle_Life}>Seek MAX Cycle_Life</Button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="50%">
-                                        <Button variant="primary" onClick={this.onOptimizeSeekMINRate}>Seek MIN Rate</Button>
-                                    </td>
-                                    <td width="50%">
-                                        <Button variant="primary" onClick={this.onOptimizeSeekMINL_Solid}>Seek MIN L_Solid</Button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </Table>
+                        {this.state.ResultTableOptimize}
                         <p>Select a specific Seek optimization:</p>
                         <InputGroup>
                             <ButtonGroup>
