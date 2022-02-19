@@ -189,7 +189,7 @@ class MainPage extends Component {
                     <Tabs defaultActiveKey={config.url.view} activeKey={this.state.activeTab}>
                         {viewNames.map((element) => {return (
                             <Tab key={element.title} eventKey={element.name}>
-                                <div id={element.name}>{element.component}</div>
+                                <div id={'main_'+element.name}>{element.component}</div>
                             </Tab>
                             );
                         })}

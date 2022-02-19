@@ -85,12 +85,12 @@ class NameValueUnitsRowCalcInput extends Component {
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
-                                <FormControlTypeNumber id={this.props.element.name} disabled={!this.props.element.input} value={this.props.element.value} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} /> : '' }
+                                <FormControlTypeNumber id={'nvurci_'+this.props.element.name} disabled={!this.props.element.input} value={this.props.element.value} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} /> : '' }
                             { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
-                                <Form.Control id={this.props.element.name} type="text" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onChange} /> : '' }
+                                <Form.Control id={'nvurci_'+this.props.element.name} type="text" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onChange} /> : '' }
                             { this.props.element.format === 'table' &&
                             (
-                                <Form.Control id={this.props.element.name} as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>
+                                <Form.Control id={'nvurci_'+this.props.element.name} as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>
                                     {this.state.table.map((value, index) =>
                                         index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
                                     )}
