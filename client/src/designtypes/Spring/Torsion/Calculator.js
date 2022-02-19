@@ -35,14 +35,14 @@ export class Calculator extends ReportBase {
                         <tbody>
                             <tr>
                                 <SymbolName element={this.props.symbol_table[o.Spring_Type]} index={o.Spring_Type} />
-                                <Value value={this.props.symbol_table[o.Spring_Type].value} />
+                                <Value id="Spring_Type" value={this.props.symbol_table[o.Spring_Type].value} />
                                 <SymbolUnits element={this.props.symbol_table[o.Spring_Type]} index={o.Spring_Type} className="text-left" />
                                 <td> &nbsp; &nbsp; </td>
                                 <SymbolName element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} />
                                 {this.props.symbol_table[o.Prop_Calc_Method].value === 1 ?
                                     <SymbolValue element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} />
                                     :
-                                    <Value value={this.matTypeValue} />
+                                    <Value id="Material_Type" value={this.matTypeValue} />
                                 }
                                 <SymbolUnits element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} className="text-left" />
                             </tr>
@@ -104,11 +104,11 @@ export class Calculator extends ReportBase {
                             <tr>
                                 <ValueName name={<b>Free</b>} tooltip="Free or no torsion point" />
                                 <SymbolValue element={this.props.symbol_table[o.L_Body]} index={o.L_Body} />
-                                <Value value={0.0} />
-                                <Value value={0.0} />
+                                <Value id="Deflection_Free" value={0.0} />
+                                <Value id="Moment_Free" value={0.0} />
                                 <SymbolValue element={this.props.symbol_table[o.OD_Free]} index={o.OD_Free} />
                                 <SymbolValue element={this.props.symbol_table[o.ID_Free]} index={o.ID_Free} />
-                                <Value value={0.0} />
+                                <Value id="Stress_Free" value={0.0} />
                                 <td>infinite</td>
                             </tr>
                             <tr>
@@ -116,30 +116,30 @@ export class Calculator extends ReportBase {
                                 <SymbolValue element={this.props.symbol_table[o.L_1]} index={o.L_1} />
                                 <SymbolValue element={this.props.symbol_table[o.Deflect_1]} index={o.Deflect_1} />
                                 <SymbolValue element={this.props.symbol_table[o.M_1]} index={o.M_1} />
-                                <Value value={this.od_1} />
-                                <Value value={this.id_1} />
+                                <Value id="OD_1" value={this.od_1} />
+                                <Value id="ID_1" value={this.id_1} />
                                 <SymbolValue element={this.props.symbol_table[o.Stress_1]} index={o.Stress_1} />
-                                <Value value={this.fs_1} />
+                                <Value id="Static_FS_1" value={this.fs_1} />
                             </tr>
                             <tr>
                                 <ValueName name={<b>2</b>} tooltip="Torsion point 2" />
                                 <SymbolValue element={this.props.symbol_table[o.L_2]} index={o.L_2} />
                                 <SymbolValue element={this.props.symbol_table[o.Deflect_2]} index={o.Deflect_2} />
                                 <SymbolValue element={this.props.symbol_table[o.M_2]} index={o.M_2} />
-                                <Value value={this.od_2} />
-                                <Value value={this.id_2} />
+                                <Value id="OD_2" value={this.od_2} />
+                                <Value id="ID_2" value={this.id_2} />
                                 <SymbolValue element={this.props.symbol_table[o.Stress_2]} index={o.Stress_2} />
                                 <SymbolValue element={this.props.symbol_table[o.FS_2]} index={o.FS_2} />
                             </tr>
                             <tr>
                                 <ValueName name={<b>Max Safe</b>} tooltip="Maximum safe torsion point" />
-                                <Value value={this.l_max} />
-                                <Value value={this.def_max} />
-                                <Value value={this.safe_load} />
-                                <Value value={this.od_max} />
-                                <Value value={this.od_max - (2.0 * this.props.symbol_table[o.Wire_Dia].value)} />
+                                <Value id="Length_Max_Safe" value={this.l_max} />
+                                <Value id="Deflection_Max_Safe" value={this.def_max} />
+                                <Value id="Force_Max_Safe" value={this.safe_load} />
+                                <Value id="OD_Max_Safe" value={this.od_max} />
+                                <Value id="ID_Max_Safe" value={this.od_max - (2.0 * this.props.symbol_table[o.Wire_Dia].value)} />
                                 <SymbolValue element={this.props.symbol_table[o.Stress_Lim_Bnd_Stat]} index={o.Stress_Lim_Bnd_Stat} />
-                                <Value value={1.0} />
+                                <Value id="Static_FS_Max_Safe" value={1.0} />
                             </tr>
                         </tbody>
                     </table>
@@ -150,11 +150,11 @@ export class Calculator extends ReportBase {
                         <tbody>
                             <tr>
                                 <ValueName name="Safe Load" tooltip="Safe Load is how far a spring can go safely without suffering damage"/>
-                                <Value value={this.safe_load} />
+                                <Value id="Load_Max_Safe" value={this.safe_load} />
                                 <td className="text-left">{this.safe_load_u}</td>
                                 <td> &nbsp; &nbsp; </td>
                                 <ValueName name={this.len_lbl} tooltip={this.len_lbl + " is the length of wire to form the spring"}/>
-                                <Value value={this.wire_len_t} />
+                                <Value id="Wire_Length" value={this.wire_len_t} />
                                 <SymbolUnits element={this.props.symbol_table[o.L_Body]} index={o.L_Body} className="text-left" />
                                 <td />
                             </tr>
@@ -170,7 +170,7 @@ export class Calculator extends ReportBase {
                             </tr>
                             <tr>
                                 <ValueName name="Pitch" tooltip="Pitch is the distance between two adjacent coils"/>
-                                <Value value={this.pitch} />
+                                <Value id="Pitch" value={this.pitch} />
                                 <SymbolUnits element={this.props.symbol_table[o.L_Body]} index={o.L_Body} className="text-left" />
                                 <td> &nbsp; &nbsp; </td>
                                 <SymbolName element={this.props.symbol_table[o.End_Angle_Free]} index={o.End_Angle_Free} />
