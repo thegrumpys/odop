@@ -102,10 +102,10 @@ class NameValueUnitsRowDependentVariable extends Component {
                         <InputGroup>
                             {value_tooltip !== undefined ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <FormControlTypeNumber id={this.props.element.name} disabled={true} className={value_class} value={this.props.element.value.toODOPPrecision()} />
+                                    <FormControlTypeNumber id={'nvurdv_'+this.props.element.name} disabled={true} className={value_class} value={this.props.element.value.toODOPPrecision()} />
                                 </OverlayTrigger>
                             :
-                                <FormControlTypeNumber id={this.props.element.name} disabled={true} className={value_class} value={this.props.element.value.toODOPPrecision()} />
+                                <FormControlTypeNumber id={'nvurdv_'+this.props.element.name} disabled={true} className={value_class} value={this.props.element.value.toODOPPrecision()} />
                             }
                             <InputGroup.Append>
                                 <InputGroup.Text>
