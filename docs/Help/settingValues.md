@@ -73,6 +73,9 @@ _[AutoFix](terminology#autoFix)_
 
 The AutoFix feature, introduced in ODOP version 4.1, 
 automatically applies Fixed status to variables whose values are changed by user input.
+AutoFix behavior may be controlled in the File : Properties menu. 
+Set the value of enable_auto_fix to 1 to enable AutoFix behavior. 
+Set the value of enable_auto_fix to 0 to disable AutoFix behavior.
  
 &nbsp;   
 Notes:   
@@ -87,6 +90,8 @@ Notes:
 When in Calculator View, select one of the white entry fields to change a value, 
 control Fix / Free status or establish or modify constraints.
 See the annotated images in the "Quick overview" section above. 
+Fields with an asterisk in the upper left are Dependent Variables. 
+  
 Fields with a light gray background are calculated results and cannot be directly changed.   
  
 ___   
