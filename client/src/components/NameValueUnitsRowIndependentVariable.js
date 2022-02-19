@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { FIXED } from '../store/actionTypes';
+import { CONSTRAINED, FIXED } from '../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
@@ -54,8 +54,56 @@ class NameValueUnitsRowIndependentVariable extends Component {
         logValue(this.props.element.name,'FREE','FixedFlag',false);
     }
 
+    getValueClass() {
+        var value_class = '';
+        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+            value_class += "text-not-feasible ";
+        } else if (this.props.objective_value > this.props.system_controls.objmin) {
+            value_class += "text-close-to-feasible ";
+        } else if (this.props.objective_value > 0.0) {
+            value_class += "text-feasible ";
+        } else {
+            value_class += "text-strictly-feasible ";
+        }
+//        console.log('In NameValueUnitsRowIndependentVariable.getValueClass value_class=',value_class);
+        return value_class;
+    }
+
     render() {
 //        console.log('In NameValueUnitsRowIndependentVariable.render this=',this);
+        var value_class = 'text-right ';
+        var value_tooltip;
+        if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
+            value_class += this.getValueClass();
+            value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
+        } else if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0)) {
+            value_class += this.getValueClass();
+            value_tooltip = "FIX VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision();
+        } else if (!this.props.element.input && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
+            value_class += this.getValueClass();
+            value_tooltip = "FIX VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision();
+        } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) && (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
+            value_class += this.getValueClass();
+            value_tooltip = "CONSTRAINT VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
+        } else if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
+            value_class += this.getValueClass();
+            value_tooltip = "CONSTRAINT VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision();
+        } else if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
+            value_class += this.getValueClass();
+            value_tooltip = "CONSTRAINT VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision();
+        }
+        if (this.props.element.lmin & FIXED) {
+            value_class += "borders-fixed ";
+        } else {
+            if (this.props.element.lmin & CONSTRAINED) {
+                value_class += "borders-constrained-min ";
+            }
+            if (this.props.element.lmax & CONSTRAINED) {
+                value_class += "borders-constrained-max ";
+            }
+        }
+        value_class += "background-white "; // Always white
+//        console.log('In NameValueUnitsRowIndependentVariable.render value_class=',value_class);
         // =======================================
         // Table Row
         // =======================================
@@ -69,7 +117,13 @@ class NameValueUnitsRowIndependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <FormControlTypeNumber id={this.props.element.name} value={this.props.element.value} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
+                            {value_tooltip !== undefined ?
+                                <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
+                                    <FormControlTypeNumber id={this.props.element.name} className={value_class} value={this.props.element.value} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
+                                </OverlayTrigger>
+                            :
+                                <FormControlTypeNumber id={this.props.element.name} className={value_class} value={this.props.element.value} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
+                            }
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />

@@ -264,7 +264,7 @@ class SymbolValueWireDia extends Component {
                                                     {(value_tooltip !== undefined ?
                                                         <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                                             this.state.value_input ?
-                                                            <FormControlTypeNumber id={this.props.element.name} className="text-right" step="any" value={this.props.element.value} onChange={this.onChange} />
+                                                            <FormControlTypeNumber id={this.props.element.name} className={value_class} step="any" value={this.props.element.value} onChange={this.onChange} />
                                                             :
                                                             <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
                                                                 {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value.toODOPPrecision()+" Non-std"}</option>}
@@ -273,7 +273,7 @@ class SymbolValueWireDia extends Component {
                                                         </OverlayTrigger>
                                                     :
                                                         this.state.value_input ?
-                                                        <FormControlTypeNumber id={this.props.element.name} className="text-right" step="any" value={this.props.element.value} onChange={this.onChange} />
+                                                        <FormControlTypeNumber id={this.props.element.name} className={value_class} step="any" value={this.props.element.value} onChange={this.onChange} />
                                                         :
                                                         <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
                                                             {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value.toODOPPrecision()+" Non-std"}</option>}
