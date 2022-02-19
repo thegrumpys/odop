@@ -102,7 +102,7 @@ class FilePreferences extends Component {
                                         <Row key={property_name}>
                                             <Col className="align-middle text-left">{property_name}</Col>
                                             <Col className="align-middle text-right">
-                                                <FormControlTypeNumber value={this.state.system_controls[property_name]} onChangeValid={(event) => {this.onChangeValid(property_name, event.target.value)}} onChangeInvalid={this.onChangeInvalid}/>
+                                                <FormControlTypeNumber id={property_name} value={this.state.system_controls[property_name]} onChangeValid={(event) => {this.onChangeValid(property_name, event.target.value)}} onChangeInvalid={this.onChangeInvalid}/>
                                             </Col>
                                         </Row>
                                     );

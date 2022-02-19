@@ -33,7 +33,7 @@ class FormControlTypeNumber extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.value !== this.props.value) {
+        if (Number.isFinite(this.props.value) && prevProps.value !== this.props.value) {
 //            console.log('In FormControlTypeNumber.componentDidUpdate prevProps.value=',prevProps.value,'props.value=',this.props.value);
             var value = parseFloat(this.props.value);
             this.setState({
@@ -116,7 +116,7 @@ class FormControlTypeNumber extends Component {
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 className={value_class}
-                value={this.state.focused ? this.state.valueString : (isNaN(this.state.value) ? '' : this.state.value.toODOPPrecision())} />
+                value={this.state.focused ? this.state.valueString : (Number.isFinite(this.state.value) ? this.state.value.toODOPPrecision() : '')} />
         </>)
     }
 }

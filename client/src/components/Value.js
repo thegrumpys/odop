@@ -22,9 +22,9 @@ class Value extends Component {
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
                         {typeof this.props.value === 'number' ?
-                            <FormControlTypeNumber disabled={true} value={this.props.value.toODOPPrecision()} />
+                            <FormControlTypeNumber id={this.props.id} disabled={true} value={this.props.value.toODOPPrecision()} />
                             :
-                            <Form.Control type="text" disabled={true} className="text-right" value={this.props.value} />
+                            <Form.Control id={this.props.id} type="text" disabled={true} className="text-right" value={this.props.value} />
                         }
                     </InputGroup>
                 </td>
