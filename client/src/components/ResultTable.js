@@ -25,7 +25,6 @@ class ResultTable extends Component {
             optimize_modal: false, // Default: do not display optimize modal
             name: 'OD_Free', // TODO: A fudge
             minmax: MIN, // TODO: A fudge
-            ResultTableOptimize: '<p>@@@</p>'
         };
     }
 
@@ -143,6 +142,9 @@ class ResultTable extends Component {
             feasibility_class = "text-strictly-feasible ";
             display_search_button = false;
         }
+        
+        var ResultTableOptimize = require('../designtypes/'+this.props.type+'/ResultTableOptimize.js'); // Dynamically load ResultTableOptimize
+
         return (
             <>
                 <Table className="col-md-8" size="sm">
@@ -213,7 +215,7 @@ class ResultTable extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="pb-0">
-                        {this.state.ResultTableOptimize}
+                        <ResultTableOptimize.default onClick={this.onOptimizeCancel}/>
                         <p>Select a specific Seek optimization:</p>
                         <InputGroup>
                             <ButtonGroup>
@@ -248,6 +250,7 @@ ResultTable.contextTypes = {
 };
 
 const mapStateToProps = state => ({
+    type: state.model.type,
     symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value,

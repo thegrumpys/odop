@@ -54,6 +54,7 @@ export class ResultTableOptimize extends Component {
         this.props.saveAutoSave();
         this.props.seek('L_Solid', MIN);
         displaySpinner(false);
+        this.props.onClick(event);
     }
 
     render() {

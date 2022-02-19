@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX } from '../../../store/actionTypes';
-import { seek, saveAutoSave } from '../../../store/actionCreators';
-import { logUsage } from '../../../logUsage';
-import { displaySpinner } from '../../../components/Spinner';
+import { MIN, MAX } from '../../store/actionTypes';
+import { seek, saveAutoSave } from '../../store/actionCreators';
+import { logUsage } from '../../logUsage';
+import { displaySpinner } from '../../components/Spinner';
 
 export class ResultTableOptimize extends Component {
 
@@ -54,6 +54,7 @@ export class ResultTableOptimize extends Component {
         this.props.saveAutoSave();
         this.props.seek('L_Solid', MIN);
         displaySpinner(false);
+        this.props.onClick(event);
     }
 
     render() {
