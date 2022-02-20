@@ -11,48 +11,48 @@ export class ResultTableOptimize extends Component {
     constructor(props) {
 //        console.log('In ResultTableOptimize.ctor props=',props);
         super(props);
-        this.onOptimizeSeekMINWeight = this.onOptimizeSeekMINWeight.bind(this);
-        this.onOptimizeSeekMAXCycle_Life = this.onOptimizeSeekMAXCycle_Life.bind(this);
-        this.onOptimizeSeekMINRate = this.onOptimizeSeekMINRate.bind(this);
-        this.onOptimizeSeekMINL_Solid = this.onOptimizeSeekMINL_Solid.bind(this);
+        this.onOptimizeSeekMAXFORCE = this.onOptimizeSeekMAXFORCE.bind(this);
+        this.onOptimizeSeekMINRADIUS = this.onOptimizeSeekMINRADIUS.bind(this);
+        this.onOptimizeSeekMINPRESSURE = this.onOptimizeSeekMINPRESSURE.bind(this);
+        this.onOptimizeSeekMINSTRESS = this.onOptimizeSeekMINSTRESS.bind(this);
     }
 
-    onOptimizeSeekMINWeight(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINWeight this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optmize Seek MIN Weight button' });
+    onOptimizeSeekMAXFORCE(event) {
+//        console.log('In ResultTableOptimize.onOptimizeSeekMAXFORCE this=',this,'event=',event);
+        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX FORCE button' });
         displaySpinner(true);
         this.props.saveAutoSave();
-        this.props.seek('Weight', MIN);
+        this.props.seek('FORCE', MAX);
         displaySpinner(false);
         this.props.onClick(event);
     }
 
-    onOptimizeSeekMAXCycle_Life(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMAXCycle_Life this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optmize Seek MAX Cycle_Life button' });
+    onOptimizeSeekMINRADIUS(event) {
+//        console.log('In ResultTableOptimize.onOptimizeSeekMINRADIUS this=',this,'event=',event);
+        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN RADIUS button' });
         displaySpinner(true);
         this.props.saveAutoSave();
-        this.props.seek('Cycle_Life', MAX);
+        this.props.seek('RADIUS', MIN);
         displaySpinner(false);
         this.props.onClick(event);
     }
 
-    onOptimizeSeekMINRate(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINRate this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optmize Seek MIN Rate button' });
+    onOptimizeSeekMINPRESSURE(event) {
+//        console.log('In ResultTableOptimize.onOptimizeSeekMINPRESSURE this=',this,'event=',event);
+        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN PRESSURE button' });
         displaySpinner(true);
         this.props.saveAutoSave();
-        this.props.seek('Rate', MIN);
+        this.props.seek('PRESSURE', MIN);
         displaySpinner(false);
         this.props.onClick(event);
     }
 
-    onOptimizeSeekMINL_Solid(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINL_Solid this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optmize Seek MIN L_Solid button' });
+    onOptimizeSeekMINSTRESS(event) {
+//        console.log('In ResultTableOptimize.onOptimizeSeekMINSTRESS this=',this,'event=',event);
+        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN STRESS button' });
         displaySpinner(true);
         this.props.saveAutoSave();
-        this.props.seek('L_Solid', MIN);
+        this.props.seek('STRESS', MIN);
         displaySpinner(false);
         this.props.onClick(event);
     }
@@ -66,18 +66,18 @@ export class ResultTableOptimize extends Component {
                     <tbody>
                         <tr>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMINWeight}>Seek MIN Weight</Button>
+                                <Button variant="primary" onClick={this.onOptimizeSeekMAXFORCE}>Seek MAX FORCE</Button>
                             </td>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMAXCycle_Life}>Seek MAX Cycle_Life</Button>
+                                <Button variant="primary" onClick={this.onOptimizeSeekMINRADIUS}>Seek MIN RADIUS</Button>
                             </td>
                         </tr>
                         <tr>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMINRate}>Seek MIN Rate</Button>
+                                <Button variant="primary" onClick={this.onOptimizeSeekMINPRESSURE}>Seek MIN PRESSURE</Button>
                             </td>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMINL_Solid}>Seek MIN L_Solid</Button>
+                                <Button variant="primary" onClick={this.onOptimizeSeekMINSTRESS}>Seek MIN STRESS</Button>
                             </td>
                         </tr>
                     </tbody>

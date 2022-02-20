@@ -19,7 +19,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMINWeight(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINWeight this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optmize Seek MIN Weight button' });
+        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN Weight button' });
         displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Weight', MIN);
@@ -29,7 +29,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMAXCycle_Life(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMAXCycle_Life this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optmize Seek MAX Cycle_Life button' });
+        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX Cycle_Life button' });
         displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Cycle_Life', MAX);
@@ -39,7 +39,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMINRate(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINRate this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optmize Seek MIN Rate button' });
+        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN Rate button' });
         displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Rate', MIN);
@@ -49,7 +49,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMINL_Solid(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINL_Solid this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optmize Seek MIN L_Solid button' });
+        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN L_Solid button' });
         displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('L_Solid', MIN);

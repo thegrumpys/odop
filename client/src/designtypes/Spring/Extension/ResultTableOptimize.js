@@ -14,12 +14,12 @@ export class ResultTableOptimize extends Component {
         this.onOptimizeSeekMINWeight = this.onOptimizeSeekMINWeight.bind(this);
         this.onOptimizeSeekMAXCycle_Life = this.onOptimizeSeekMAXCycle_Life.bind(this);
         this.onOptimizeSeekMINRate = this.onOptimizeSeekMINRate.bind(this);
-        this.onOptimizeSeekMINL_Solid = this.onOptimizeSeekMINL_Solid.bind(this);
+        this.onOptimizeSeekMAXL_Stroke = this.onOptimizeSeekMAXL_Stroke.bind(this);
     }
 
     onOptimizeSeekMINWeight(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINWeight this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optmize Seek MIN Weight button' });
+        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN Weight button' });
         displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Weight', MIN);
@@ -29,7 +29,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMAXCycle_Life(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMAXCycle_Life this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optmize Seek MAX Cycle_Life button' });
+        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX Cycle_Life button' });
         displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Cycle_Life', MAX);
@@ -39,7 +39,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMINRate(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINRate this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optmize Seek MIN Rate button' });
+        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN Rate button' });
         displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Rate', MIN);
@@ -47,12 +47,12 @@ export class ResultTableOptimize extends Component {
         this.props.onClick(event);
     }
 
-    onOptimizeSeekMINL_Solid(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINL_Solid this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optmize Seek MIN L_Solid button' });
+    onOptimizeSeekMAXL_Stroke(event) {
+//        console.log('In ResultTableOptimize.onOptimizeSeekMAXL_Stroke this=',this,'event=',event);
+        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX L_Stroke button' });
         displaySpinner(true);
         this.props.saveAutoSave();
-        this.props.seek('L_Solid', MIN);
+        this.props.seek('L_Stroke', MIN);
         displaySpinner(false);
         this.props.onClick(event);
     }
@@ -77,7 +77,7 @@ export class ResultTableOptimize extends Component {
                                 <Button variant="primary" onClick={this.onOptimizeSeekMINRate}>Seek MIN Rate</Button>
                             </td>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMINL_Solid}>Seek MIN L_Solid</Button>
+                                <Button variant="primary" onClick={this.onOptimizeSeekMAXL_Stroke}>Seek MAX L_Stroke</Button>
                             </td>
                         </tr>
                     </tbody>

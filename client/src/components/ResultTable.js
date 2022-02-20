@@ -64,7 +64,7 @@ class ResultTable extends Component {
 
     onOptimizeButton(event) {
 //        console.log('In ResultTable.onOptimizeButton this=',this,'event=',event);
-        logUsage('event', 'ResultTable', { 'event_label': 'optmize button' });
+        logUsage('event', 'ResultTable', { 'event_label': 'optimize button' });
         this.setState({
             optimize_modal: !this.state.optimize_modal,
         });
@@ -72,7 +72,7 @@ class ResultTable extends Component {
 
     onOptimizeContextHelp(event) {
 //        console.log('In ResultTable.onOptimizeContextHelp this=',this,'event=',event);
-        logUsage('event', 'ResultTable', { 'event_label': 'optmize context Help button' });
+        logUsage('event', 'ResultTable', { 'event_label': 'optimize context Help button' });
         this.setState({
             optimize_modal: !this.state.optimize_modal,
         });
@@ -179,12 +179,12 @@ class ResultTable extends Component {
                         <tr>
                             {display_search_button ? 
                               <td align="center">
-                                  <Button variant="primary" size="sm" onClick={this.onSearchButton} disabled={!display_search_button}>Search</Button>&nbsp;
+                                  <Button variant="primary" size="sm" onClick={this.onSearchButton} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
                                   <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                      SEARCH will alter the values of any free independent variables to find a design that 
+                                      SEARCH alters the values of any free independent variables to find a design that 
                                       satisfies all constraints while also achieving the desired value for each fixed dependent 
                                       variable.  Search stops when the first feasible solution is found.  The solution provided 
-                                      by Search is a solution to the designer’s goals as expressed by constraints and Fixes. If 
+                                      by Search is a solution to the designer’s goals as expressed by constraints and fixes. If 
                                       a solution that meets all of these goals is not available, the search process converges 
                                       to a compromise. Typically, this compromise violates multiple constraints.
                                       </Tooltip>}>
@@ -193,7 +193,7 @@ class ResultTable extends Component {
                               </td>
                             :
                               <td align="center">
-                                  <Button variant="primary" size="sm" onClick={this.onOptimizeButton} disabled={display_search_button}>Seek Optimization</Button>&nbsp;
+                                  <Button variant="primary" size="sm" onClick={this.onOptimizeButton} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
                                   <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                       If one feasible design exists there are likely many more available, each with varying 
                                       advantages / disadvantages. The ODOP Seek feature provides a “goal seeking” capability 
