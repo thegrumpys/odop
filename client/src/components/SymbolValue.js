@@ -200,7 +200,6 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.render this=',this);
         var value_class = '';
         var value_tooltip;
-        var value_fix_free_text = '';
         var icon_tag = '';
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
@@ -223,17 +222,7 @@ class SymbolValue extends Component {
         }
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
-            if (this.props.element.type !== "calcinput") {
-                if (this.props.element.input) { // Independent Variable?
-                  value_fix_free_text = <div className="mb-3"><em>Fixed status prevents <img src="SearchButton.png" alt="SearchButton"/> from changing the value of this variable.</em></div>; // For Fixed
-                } else {
-                  value_fix_free_text = <div className="mb-3"><em>Fixed status restrains the <img src="SearchButton.png" alt="SearchButton"/> result to be as close as possible to the constraint value.</em></div>; // For Fixed
-                }
-            }
         } else {
-            if (this.props.element.type !== "calcinput") {
-                value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton"/> to change the value of this variable.</em></div>; // For Free
-            }
             if (this.props.element.lmin & CONSTRAINED) {
                 value_class += "borders-constrained-min ";
             }
@@ -323,15 +312,6 @@ class SymbolValue extends Component {
                                     <NameValueUnitsHeaderCalcInput />
                                     <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
                                 </>}
-                        </Table>
-                        <Table size="sm" style={{backgroundColor: '#eee'}} className="mb-0">
-                            <tbody>
-                                <tr className="table-light">
-                                    <td>
-                                        {value_fix_free_text}
-                                    </td>
-                                </tr>
-                            </tbody>
                         </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&

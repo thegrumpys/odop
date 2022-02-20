@@ -282,7 +282,9 @@ class SymbolValueWireDia extends Component {
                                                     )}
                                                     <InputGroup.Append>
                                                         <InputGroup.Text>
-                                                            <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
+                                                            <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
+                                                                <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
+                                                            </OverlayTrigger>
                                                         </InputGroup.Text>
                                                     </InputGroup.Append>
                                                 </InputGroup>
@@ -301,15 +303,6 @@ class SymbolValueWireDia extends Component {
                                     <NameValueUnitsHeaderCalcInput />
                                     <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
                                 </>}
-                        </Table>
-                        <Table size="sm" style={{backgroundColor: '#eee'}} className="mb-0">
-                            <tbody>
-                                <tr className="table-light">
-                                    <td>
-                                        {value_fix_free_text}
-                                    </td>
-                                </tr>
-                            </tbody>
                         </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
