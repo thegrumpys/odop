@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX } from '../../../store/actionTypes';
+import { MIN, MAX, FIXED } from '../../../store/actionTypes';
 import { seek, saveAutoSave } from '../../../store/actionCreators';
 import { logUsage } from '../../../logUsage';
 import { displaySpinner } from '../../../components/Spinner';
+import * as sto from './symbol_table_offsets';
 
 export class ResultTableOptimize extends Component {
 
@@ -66,18 +67,18 @@ export class ResultTableOptimize extends Component {
                     <tbody>
                         <tr>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMINWeight}>Seek MIN Weight</Button>
+                                <Button variant="primary" disabled={this.props.symbol_table[sto.Weight].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINWeight}>Seek MIN Weight</Button>
                             </td>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMAXCycle_Life}>Seek MAX Cycle_Life</Button>
+                                <Button variant="primary" disabled={this.props.symbol_table[sto.Cycle_Life].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMAXCycle_Life}>Seek MAX Cycle_Life</Button>
                             </td>
                         </tr>
                         <tr>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMINRate}>Seek MIN Rate</Button>
+                                <Button variant="primary" disabled={this.props.symbol_table[sto.Rate].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINRate}>Seek MIN Rate</Button>
                             </td>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMAXL_Stroke}>Seek MAX L_Stroke</Button>
+                                <Button variant="primary" disabled={this.props.symbol_table[sto.L_Stroke].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMAXL_Stroke}>Seek MAX L_Stroke</Button>
                             </td>
                         </tr>
                     </tbody>
@@ -88,6 +89,7 @@ export class ResultTableOptimize extends Component {
 }
 
 const mapStateToProps = state => ({
+    symbol_table: state.model.symbol_table,
 });
 
 const mapDispatchToProps = {

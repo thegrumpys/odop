@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { MIN, MAX } from '../../store/actionTypes';
+import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 import { displaySpinner } from '../../components/Spinner';
+import * as sto from './symbol_table_offsets';
 
 export class ResultTableOptimize extends Component {
 
@@ -66,18 +67,18 @@ export class ResultTableOptimize extends Component {
                     <tbody>
                         <tr>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMAXFORCE}>Seek MAX FORCE</Button>
+                                <Button variant="primary" disabled={this.props.symbol_table[sto.FORCE].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMAXFORCE}>Seek MAX FORCE</Button>
                             </td>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMINRADIUS}>Seek MIN RADIUS</Button>
+                                <Button variant="primary" disabled={this.props.symbol_table[sto.RADIUS].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINRADIUS}>Seek MIN RADIUS</Button>
                             </td>
                         </tr>
                         <tr>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMINPRESSURE}>Seek MIN PRESSURE</Button>
+                                <Button variant="primary" disabled={this.props.symbol_table[sto.PRESSURE].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINPRESSURE}>Seek MIN PRESSURE</Button>
                             </td>
                             <td width="50%">
-                                <Button variant="primary" onClick={this.onOptimizeSeekMINSTRESS}>Seek MIN STRESS</Button>
+                                <Button variant="primary" disabled={this.props.symbol_table[sto.STRESS].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINSTRESS}>Seek MIN STRESS</Button>
                             </td>
                         </tr>
                     </tbody>
@@ -88,6 +89,7 @@ export class ResultTableOptimize extends Component {
 }
 
 const mapStateToProps = state => ({
+    symbol_table: state.model.symbol_table,
 });
 
 const mapDispatchToProps = {
