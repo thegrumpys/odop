@@ -70,33 +70,3 @@ export const tbase400 = 58;
 export const const_term = 59;
 export const slope_term = 60;
 export const tensile_010 = 61;
-
-// System Controls (Preferences)
-export const ioopt = 0;
-export const maxit = 1;
-export const weapon = 2;
-export const nmerit = 3;
-export const fix_wt = 4;
-export const con_wt = 5;
-export const zero_wt = 6;
-export const viol_wt = 7;
-export const mfn_wt = 8;
-export const objmin = 9;
-export const del = 10;
-export const delmin = 11;
-export const tol = 12;
-export const smallnum = 13;
-export const show_units = 14;
-export const show_violations = 15;
-
-// Labels (Properties)
-export const COMMENT = 0;
-export const Contact_person = 1;
-export const Company_name = 2;
-export const Street = 3;
-export const City = 4;
-export const State___Zip = 5;
-export const Phone = 6;
-export const Date = 7;
-export const Part_Number = 8;
-export const Finish = 9;
