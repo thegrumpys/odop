@@ -284,7 +284,7 @@ class SymbolValueWireDia extends Component {
                                                                     {sorted_size_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
                                                                 </Form.Control>
                                                            </OverlayTrigger>
-                                                        }
+                                                        )
                                                     :
                                                         (this.state.value_input ?
                                                             <FormControlTypeNumber id={'svwd_'+this.props.element.name} className={value_class} step="any" value={this.props.element.value} onChange={this.onChange} />
