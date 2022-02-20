@@ -423,13 +423,13 @@ provides a simplified display of major input and output variables in a compact f
 Use Advanced View to access the complete set of variables and features. 
  
 Select one of the white entry fields to change a value, control Fix / Free status and to establish or modify constraints. 
+Fields with an asterisk in the upper left are Dependent Variables.  
 
 Enabled constraints are indicated by a fine border line at the edge of a numeric field.
 A border on the left indicates that a lower (Min) constraint is enabled.
 A border on the right indicates that an upper (Max) constraint is enabled.
 A heavier border on both left and right of a numeric field indicates Fixed status.
-No border line indicates Free status and no constraint enabled.
-
+No border line on either left or right indicates Free status and no constraint enabled.
 
 [Spring variables displayed in Calculator View](https://www.springdesignsoftware.org/odop/docs/Help/png/ScrCap_3TypeCalcNoted.png)
 
