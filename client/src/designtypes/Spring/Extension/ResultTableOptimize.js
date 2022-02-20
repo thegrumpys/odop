@@ -52,7 +52,7 @@ export class ResultTableOptimize extends Component {
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX L_Stroke button' });
         displaySpinner(true);
         this.props.saveAutoSave();
-        this.props.seek('L_Stroke', MIN);
+        this.props.seek('L_Stroke', MAX);
         displaySpinner(false);
         this.props.onClick(event);
     }
