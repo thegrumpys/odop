@@ -71,8 +71,9 @@ class NameValueUnitsRowIndependentVariable extends Component {
 
     render() {
 //        console.log('In NameValueUnitsRowIndependentVariable.render this=',this);
-        var value_class = 'text-right ';
+        var value_class = '';
         var value_tooltip;
+        var value_fix_free_text = '';
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
@@ -94,7 +95,17 @@ class NameValueUnitsRowIndependentVariable extends Component {
         }
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
+            if (this.props.element.type !== "calcinput") {
+                if (this.props.element.input) { // Independent Variable?
+                  value_fix_free_text = <div className="mb-3"><em>Fixed status prevents <img src="SearchButton.png" alt="SearchButton"/> from changing the value of this variable.</em></div>; // For Fixed
+                } else {
+                  value_fix_free_text = <div className="mb-3"><em>Fixed status restrains the <img src="SearchButton.png" alt="SearchButton"/> result to be as close as possible to the constraint value.</em></div>; // For Fixed
+                }
+            }
         } else {
+            if (this.props.element.type !== "calcinput") {
+                value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton"/> to change the value of this variable.</em></div>; // For Free
+            }
             if (this.props.element.lmin & CONSTRAINED) {
                 value_class += "borders-constrained-min ";
             }
@@ -126,7 +137,9 @@ class NameValueUnitsRowIndependentVariable extends Component {
                             }
                             <InputGroup.Append>
                                 <InputGroup.Text>
-                                    <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
+                                    <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
+                                        <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
+                                    </OverlayTrigger>
                                 </InputGroup.Text>
                             </InputGroup.Append>
                         </InputGroup>
