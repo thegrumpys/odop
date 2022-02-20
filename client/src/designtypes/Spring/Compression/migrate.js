@@ -292,8 +292,30 @@ export function migrate(design) {
     case '10':
         // Current model version
         // console.log('Convert from 10 to 11');
+        // #625 Repair design library problems created by unwanted v4.1 migrate in v4.2 Migrate
+//        console.log('design=',design);
+        var contactPersonFound = false; // Start by marking that we haven't found the first "Contact person"
+        design.labels.find((label, index) => {
+//            console.log('label=',label);
+            if (label.name === "Contact person") {
+                if (!contactPersonFound) {
+                    contactPersonFound = true; // Mark we found the first "Contact person"
+                    return false; // So far we haven't found the second "Contact person"
+                } else {
+                    design.labels.splice(index); // Delete from this "Contact person" to the end
+                    return true; // All done, we found the second "Contact person"
+                }
+            } else {
+                return false; // This is not a "Contact person"
+            }
+        });
+//        console.log('design=',design);
+        migrated_design.version = '11'; // last thing... set the migrated model version
+    case '11':
+        // Current model version
+        // console.log('Convert from 11 to 12');
         // To be defined - presently do nothing
-        // migrated_design.version = '11'; // last thing... set the migrated model version
+        // migrated_design.version = '12'; // last thing... set the migrated model version
 
         break; // Do not copy this break
     default: // Unknown
