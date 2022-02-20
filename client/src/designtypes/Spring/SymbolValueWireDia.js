@@ -262,23 +262,27 @@ class SymbolValueWireDia extends Component {
                                             <td className="align-middle" colSpan="2">
                                                 <InputGroup>
                                                     {(value_tooltip !== undefined ?
-                                                        <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                                            this.state.value_input ?
+                                                        (this.state.value_input ?
+                                                            <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
+                                                                <FormControlTypeNumber id={'svwd_'+this.props.element.name} className="text-right" step="any" value={this.props.element.value} onChange={this.onChange} />
+                                                            </OverlayTrigger>
+                                                          :
+                                                            <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
+                                                                <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
+                                                                     {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value.toODOPPrecision()+" Non-std"}</option>}
+                                                                     {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
+                                                                </Form.Control>
+                                                            </OverlayTrigger>
+                                                        )
+                                                    :
+                                                        (this.state.value_input ?
                                                             <FormControlTypeNumber id={'svwd_'+this.props.element.name} className="text-right" step="any" value={this.props.element.value} onChange={this.onChange} />
-                                                            :
+                                                        :
                                                             <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
                                                                 {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value.toODOPPrecision()+" Non-std"}</option>}
                                                                 {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
                                                             </Form.Control>
-                                                        </OverlayTrigger>
-                                                    :
-                                                        this.state.value_input ?
-                                                        <FormControlTypeNumber id={'svwd_'+this.props.element.name} className="text-right" step="any" value={this.props.element.value} onChange={this.onChange} />
-                                                        :
-                                                        <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
-                                                            {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value.toODOPPrecision()+" Non-std"}</option>}
-                                                            {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
-                                                        </Form.Control>
+                                                        )
                                                     )}
                                                     <InputGroup.Append>
                                                         <InputGroup.Text>
