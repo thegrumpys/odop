@@ -107,7 +107,7 @@ class ActionSeek extends Component {
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle}>
-                    Seek&hellip;
+                    Seek (optimize)&hellip;
                 </NavDropdown.Item>
                 <Modal show={this.state.modal} onHide={this.onCancel}>
                     <Modal.Header>

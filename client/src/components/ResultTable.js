@@ -211,7 +211,7 @@ class ResultTable extends Component {
                 <Modal show={this.state.optimize_modal} onHide={this.onOptimizeCancel}>
                     <Modal.Header>
                         <Modal.Title>
-                            Seek Optimizations
+                            Seek (optimize)
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="pb-0">
@@ -219,8 +219,8 @@ class ResultTable extends Component {
                         <p>Select a specific Seek optimization:</p>
                         <InputGroup>
                             <ButtonGroup>
-                                <Button variant="secondary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
-                                <Button variant="secondary" onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}>Max</Button>
+                                <Button variant="outline-secondary"onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
+                                <Button variant="outline-secondary"onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}>Max</Button>
                             </ButtonGroup>
                             &nbsp;
                             <InputGroup.Prepend>

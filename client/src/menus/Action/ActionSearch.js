@@ -51,7 +51,7 @@ class ActionSearch extends Component {
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle}>
-                    Search
+                    Search (solve)
                 </NavDropdown.Item>
             </>
         );
