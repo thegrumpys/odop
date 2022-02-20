@@ -1,21 +1,36 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Table, OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
+import { Table, OverlayTrigger, Tooltip, Button, Modal, InputGroup, Form, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { CONSTRAINED, FIXED } from '../store/actionTypes';
+import { CONSTRAINED, FIXED, MIN, MAX } from '../store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
-import { search, saveAutoSave } from '../store/actionCreators';
+import { seek, search, saveAutoSave } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/MessageModal';
+import { displaySpinner } from './Spinner';
 
 class ResultTable extends Component {
     
     constructor(props) {
+//        console.log('In ResultTable.ctor'');
         super(props);
         this.onSearchButton = this.onSearchButton.bind(this);
+        this.onOptimizeButton = this.onOptimizeButton.bind(this);
+        this.onOptimizeContextHelp = this.onOptimizeContextHelp.bind(this);
+        this.onOptimizeCancel = this.onOptimizeCancel.bind(this);
+        this.onMinMax = this.onMinMax.bind(this);
+        this.onNameSelect = this.onNameSelect.bind(this);
+        this.onSeek = this.onSeek.bind(this);
+        this.state = {
+            optimize_modal: false, // Default: do not display optimize modal
+            name: 'OD_Free', // TODO: A fudge
+            minmax: MIN, // TODO: A fudge
+        };
     }
 
     onSearchButton(event) {
+//        console.log('In ResultTable.onSearchButton this=',this,'event=',event);
+       logUsage('event', 'ResultTable', { 'event_label': 'search button' });
         var warnMsg = '';
         if (this.props.objective_value <= this.props.system_controls.objmin) {
             warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
@@ -47,6 +62,57 @@ class ResultTable extends Component {
         }
     }
 
+    onOptimizeButton(event) {
+//        console.log('In ResultTable.onOptimizeButton this=',this,'event=',event);
+        logUsage('event', 'ResultTable', { 'event_label': 'optimize button' });
+        this.setState({
+            optimize_modal: !this.state.optimize_modal,
+        });
+    }
+
+    onOptimizeContextHelp(event) {
+//        console.log('In ResultTable.onOptimizeContextHelp this=',this,'event=',event);
+        logUsage('event', 'ResultTable', { 'event_label': 'optimize context Help button' });
+        this.setState({
+            optimize_modal: !this.state.optimize_modal,
+        });
+        window.open('https://thegrumpys.github.io/odop/Help/seek', '_blank');
+    }
+
+    onOptimizeCancel(event) {
+//        console.log('In ResultTable.onOptimizeCancel this=',this,'event=',event);
+        this.setState({
+            optimize_modal: !this.state.optimize_modal,
+        });
+    }
+
+    onMinMax(minmax) {
+//        console.log('In ResultTable.onMinMax this=',this,'minmax=',minmax);
+        this.setState({
+            minmax: minmax
+        });
+    }
+
+    onNameSelect(event) {
+//        console.log('In ResultTable.onNameSelect this=',this,'event=',event);
+        this.setState({
+            name: event.target.value 
+        });
+    }
+    
+    onSeek(event) {
+//        console.log('In ResultTable.onSeek this=',this,'event=',event);
+        this.setState({
+            optimize_modal: !this.state.optimize_modal
+        });
+        // Do seek
+        logUsage('event', 'ResultTable', { 'event_label': 'seek ' + this.state.minmax + ' ' + this.state.name });
+        displaySpinner(true);
+        this.props.saveAutoSave();
+        this.props.seek(this.state.name, this.state.minmax);
+        displaySpinner(false);
+    }
+    
     render() {
 //        console.log('In ResultTable.render this=',this);
 //        From Issue #365:
@@ -76,6 +142,9 @@ class ResultTable extends Component {
             feasibility_class = "text-strictly-feasible ";
             display_search_button = false;
         }
+        
+        var ResultTableOptimize = require('../designtypes/'+this.props.type+'/ResultTableOptimize.js'); // Dynamically load ResultTableOptimize
+
         return (
             <>
                 <Table className="col-md-8" size="sm">
@@ -108,10 +177,68 @@ class ResultTable extends Component {
                             </td>
                         </tr>
                         <tr>
-                            <td align="center">{display_search_button ? <Button variant="primary" size="sm" onClick={this.onSearchButton} disabled={!display_search_button}>Search</Button> : ''}</td>
+                            {display_search_button ? 
+                              <td align="center">
+                                  <Button variant="primary" size="sm" onClick={this.onSearchButton} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
+                                  <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                                      SEARCH alters the values of any free independent variables to find a design that 
+                                      satisfies all constraints while also achieving the desired value for each fixed dependent 
+                                      variable.  Search stops when the first feasible solution is found.  The solution provided 
+                                      by Search is a solution to the designer’s goals as expressed by constraints and fixes. If 
+                                      a solution that meets all of these goals is not available, the search process converges 
+                                      to a compromise. Typically, this compromise violates multiple constraints.
+                                      </Tooltip>}>
+                                      <span><i className="fas fa-info-circle text-primary"></i></span>
+                                  </OverlayTrigger>
+                              </td>
+                            :
+                              <td align="center">
+                                  <Button variant="primary" size="sm" onClick={this.onOptimizeButton} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
+                                  <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                                      If one feasible design exists there are likely many more available, each with varying 
+                                      advantages / disadvantages. The ODOP Seek feature provides a “goal seeking” capability 
+                                      to optimize your design on the parameter that you specify. If starting with a default 
+                                      design, additional constraints specific to your application are required to obtain 
+                                      meaningful results.
+                                      </Tooltip>}>
+                                      <span><i className="fas fa-info-circle text-primary"></i></span>
+                                  </OverlayTrigger>
+                              </td>
+                            }
                         </tr>
                     </tbody>
                 </Table>
+                <Modal show={this.state.optimize_modal} onHide={this.onOptimizeCancel}>
+                    <Modal.Header>
+                        <Modal.Title>
+                            Seek Optimizations
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="pb-0">
+                        <ResultTableOptimize.default onClick={this.onOptimizeCancel}/>
+                        <p>Select a specific Seek optimization:</p>
+                        <InputGroup>
+                            <ButtonGroup>
+                                <Button variant="secondary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
+                                <Button variant="secondary" onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}>Max</Button>
+                            </ButtonGroup>
+                            &nbsp;
+                            <InputGroup.Prepend>
+                                <InputGroup.Text>Name: </InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control as="select" className="align-middle" onChange={this.onNameSelect} value={this.state.name}>
+                                {this.props.symbol_table.map((element, index) =>
+                                    (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
+                                )}
+                            </Form.Control>
+                        </InputGroup>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button outline="true" variant="info" onClick={this.onOptimizeContextHelp}>Help</Button>
+                        <Button variant="secondary" onClick={this.onOptimizeCancel}>Cancel</Button>
+                        <Button variant="primary" onClick={this.onSeek}>Seek</Button>
+                    </Modal.Footer>
+                </Modal>
             </>
         );
     }
@@ -123,6 +250,7 @@ ResultTable.contextTypes = {
 };
 
 const mapStateToProps = state => ({
+    type: state.model.type,
     symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value,
@@ -132,6 +260,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     search: search,
+    seek: seek,
     saveAutoSave: saveAutoSave
 };
 
