@@ -157,6 +157,10 @@ class SymbolValueWireDia extends Component {
         var size_name = m_tab[i][mo.siznam];
 //        console.log('In SymbolValueWireDia.render size_name=',size_name);
         var size_table = require('./'+size_name+'.json'); // Dynamically load table
+        size_table = JSON.parse(JSON.stringify(size_table)); // clone so these updates are fresh
+        size_table.forEach((element) => {
+            element.push(element[0].toString()); // add labels
+        });
 //        console.log('In SymbolValueWireDia.render size_table=',size_table);
         const needle = this.props.element.value;
 //        console.log('In SymbolValueWireDia.render needle=',needle);
@@ -171,6 +175,14 @@ class SymbolValueWireDia extends Component {
             }
         });
 //        console.log('In SymbolValueWireDia.render default_value=',default_value);
+        if (default_value === undefined) {
+            size_table[0] = [needle, needle.toODOPPrecision()+" Non-std"]; // Replace column header with non-std value
+        } else {
+            size_table.shift(); // Remove column header if there is no non-std value
+        }
+//        console.log('In SymbolValueWireDia.render size_table=',size_table);
+        var sorted_size_table = size_table.sort(function(a, b) { return a[0] - b[0]; }); // sort by value
+//        console.log('In SymbolValueWireDia.render sorted_size_table=',sorted_size_table);
 
         var value_class = 'text-right ';
         var value_tooltip;
@@ -267,8 +279,7 @@ class SymbolValueWireDia extends Component {
                                                             <FormControlTypeNumber id={'svwd_'+this.props.element.name} className={value_class} step="any" value={this.props.element.value} onChange={this.onChange} />
                                                             :
                                                             <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
-                                                                {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value.toODOPPrecision()+" Non-std"}</option>}
-                                                                {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
+                                                                {sorted_size_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
                                                             </Form.Control>
                                                         </OverlayTrigger>
                                                     :
@@ -276,8 +287,7 @@ class SymbolValueWireDia extends Component {
                                                         <FormControlTypeNumber id={'svwd_'+this.props.element.name} className={value_class} step="any" value={this.props.element.value} onChange={this.onChange} />
                                                         :
                                                         <Form.Control as="select" disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
-                                                            {default_value === undefined && <option key={0} value={this.props.element.value}>{this.props.element.value.toODOPPrecision()+" Non-std"}</option>}
-                                                            {size_table.map((value, index) => index > 0 ? <option key={index} value={value[0]}>{value[0]}</option> : '')}
+                                                            {sorted_size_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
                                                         </Form.Control>
                                                     )}
                                                     <InputGroup.Append>
