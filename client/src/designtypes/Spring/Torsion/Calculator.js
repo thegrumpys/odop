@@ -112,7 +112,7 @@ export class Calculator extends ReportBase {
                                 <td>infinite</td>
                             </tr>
                             <tr>
-                                <ValueName name={<b>1</b>} tooltip="Torsion point 1" />
+                                <ValueName name={<b>1</b>} tooltip="Point 1 (minimum operating load)" />
                                 <SymbolValue element={this.props.symbol_table[o.L_1]} index={o.L_1} />
                                 <SymbolValue element={this.props.symbol_table[o.Deflect_1]} index={o.Deflect_1} />
                                 <SymbolValue element={this.props.symbol_table[o.M_1]} index={o.M_1} />
@@ -122,7 +122,7 @@ export class Calculator extends ReportBase {
                                 <Value id="Static_FS_1" value={this.fs_1} />
                             </tr>
                             <tr>
-                                <ValueName name={<b>2</b>} tooltip="Torsion point 2" />
+                                <ValueName name={<b>2</b>} tooltip="Point 2 (maximum operating load)" />
                                 <SymbolValue element={this.props.symbol_table[o.L_2]} index={o.L_2} />
                                 <SymbolValue element={this.props.symbol_table[o.Deflect_2]} index={o.Deflect_2} />
                                 <SymbolValue element={this.props.symbol_table[o.M_2]} index={o.M_2} />
@@ -132,7 +132,7 @@ export class Calculator extends ReportBase {
                                 <SymbolValue element={this.props.symbol_table[o.FS_2]} index={o.FS_2} />
                             </tr>
                             <tr>
-                                <ValueName name={<b>Max Safe</b>} tooltip="Maximum safe torsion point" />
+                                <ValueName name={<b>Max Safe</b>} tooltip="Greatest load that can be supported without exceeding maximum allowable stress" />
                                 <Value id="Length_Max_Safe" value={this.l_max} />
                                 <Value id="Deflection_Max_Safe" value={this.def_max} />
                                 <Value id="Force_Max_Safe" value={this.safe_load} />
@@ -149,7 +149,7 @@ export class Calculator extends ReportBase {
                     <table className="report-table">
                         <tbody>
                             <tr>
-                                <ValueName name="Safe Load" tooltip="Safe Load is how far a spring can go safely without suffering damage"/>
+                                <ValueName name="Safe Load" tooltip="Greatest load that can be supported without exceeding maximum allowable stress"/>
                                 <Value id="Load_Max_Safe" value={this.safe_load} />
                                 <td className="text-left">{this.safe_load_u}</td>
                                 <td> &nbsp; &nbsp; </td>
@@ -204,7 +204,7 @@ export class Calculator extends ReportBase {
                         <tbody>
                             <tr>
                                 <td>
-                                    Deflection at load point 2 is
+                                    Deflection at point 2 (maximum operating load) is
                                 </td>
                                     <SymbolValue element={this.props.symbol_table[o.PC_Safe_Deflect]} index={o.PC_Safe_Deflect} />
                                 <td>
