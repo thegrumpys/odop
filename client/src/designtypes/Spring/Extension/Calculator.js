@@ -123,7 +123,7 @@ export class Calculator extends ReportBase {
                                 <SymbolValue element={this.props.symbol_table[o.FS_2]} index={o.FS_2} />
                             </tr>
                             <tr>
-                                <ValueName name={<b>Max Safe</b>} tooltip="Greatest load that can be supported without exceeding maximum allowable stress" />
+                                <ValueName name={<b>Max Safe</b>} tooltip="Greatest static load that can be supported without exceeding maximum allowable stress (Stress_Lim_Stat)" />
                                 <Value id="Length_Max_Safe" value={(this.props.symbol_table[o.L_Free].value + this.safe_travel)} />
                                 <Value id="Deflection_Max_Safe" value={this.safe_travel} />
                                 <Value id="Force_Max_Safe" value={this.safe_load} />
@@ -140,7 +140,7 @@ export class Calculator extends ReportBase {
                     <table className="report-table">
                         <tbody>
                             <tr>
-                                <ValueName name="Safe Load" tooltip="Greatest load that can be supported without exceeding maximum allowable stress"/>
+                                <ValueName name="Safe Load" tooltip="Greatest static load that can be supported without exceeding maximum allowable stress (Stress_Lim_Stat)"/>
                                 <Value id="Load_Max_Safe" value={this.safe_load} />
                                 <td className="text-left">{this.safe_load_u}</td>
                                 <td> &nbsp; &nbsp; </td>

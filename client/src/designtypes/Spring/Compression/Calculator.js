@@ -144,7 +144,7 @@ export class Calculator extends ReportBase {
                     <table className="report-table">
                         <tbody>
                             <tr>
-                                <ValueName name="Safe Load" tooltip="Greatest load that can be supported without exceeding maximum allowable stress"/>
+                                <ValueName name="Safe Load" tooltip="Greatest static load that can be supported without exceeding maximum allowable stress (Stress_Lim_Stat)"/>
                                 <Value id="Safe_Load" value={this.safe_load} />
                                 <td className="text-left">{this.safe_load_u}</td>
                                 <td> &nbsp; &nbsp; </td>
