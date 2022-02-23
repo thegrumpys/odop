@@ -149,10 +149,10 @@ class ConstraintMaxRowIndependentVariable extends Component {
                             </InputGroup.Prepend>
                             {(this.props.element.lmax & FIXED) === 0 && this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{this.props.element.lmax & FDCL ? 'FDCL =' + this.props.element.cmaxchoices[this.props.element.cmaxchoice] : '=' + this.props.element.cmax + ' (non-FDCL)'}</Tooltip>}>
-                                    <FormControlTypeNumber id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.lmax & CONSTRAINED ? this.props.element.cmax : ''} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick}/>
+                                    <FormControlTypeNumber id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.cmas} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} disabledText={this.props.element.lmax & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onClick={this.onClick}/>
                                 </OverlayTrigger>
                             :
-                                <FormControlTypeNumber id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.lmax & CONSTRAINED ? this.props.element.cmax : ''} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} onClick={this.onClick}/>
+                                <FormControlTypeNumber id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.cmax} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} disabledText={this.props.element.lmax & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onClick={this.onClick}/>
                             }
                         </InputGroup>
                         {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
