@@ -94,6 +94,7 @@ export function migrate(design) {
     case '5':
         // Current model version
         // console.log('Convert from 5 to 6');
+        // Remove ioclass from all Symbol Table entries
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
                 delete element.ioclass;
         });
