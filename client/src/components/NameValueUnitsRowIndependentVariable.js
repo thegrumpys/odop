@@ -102,7 +102,6 @@ class NameValueUnitsRowIndependentVariable extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
-        value_class += "background-white "; // Always white
 //        console.log('In NameValueUnitsRowIndependentVariable.render value_class=',value_class);
         // =======================================
         // Table Row
