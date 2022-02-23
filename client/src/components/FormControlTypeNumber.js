@@ -112,6 +112,7 @@ class FormControlTypeNumber extends Component {
         var p = Object.assign({},this.props); // clone the props
         delete p.onChangeValid; // remove special on functions
         delete p.onChangeInvalid;
+        delete p.disabledText;
         return (<>
             <Form.Control type="number"
                 {...p} // Allow OverlayTrigger to pass-in other props
@@ -120,7 +121,7 @@ class FormControlTypeNumber extends Component {
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 className={value_class}
-                value={this.props.disabled ? '' : this.state.focused ? this.state.valueString : (Number.isFinite(this.state.value) ? this.state.value.toODOPPrecision() : '')} />
+                value={this.props.disabledText ? '' : this.state.focused ? this.state.valueString : (Number.isFinite(this.state.value) ? this.state.value.toODOPPrecision() : '')} />
         </>)
     }
 }
@@ -128,6 +129,7 @@ class FormControlTypeNumber extends Component {
 FormControlTypeNumber.propTypes = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
+    disabledText: PropTypes.bool,
     readOnly: PropTypes.bool,
     value: PropTypes.any,
     step: PropTypes.string,
@@ -142,6 +144,7 @@ FormControlTypeNumber.propTypes = {
 FormControlTypeNumber.defaultProps = {
     className: '',
     disabled: false,
+    disabledText: false,
     readOnly: false,
     value: '',
     step: 'any',
