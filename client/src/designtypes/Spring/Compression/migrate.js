@@ -17,7 +17,6 @@ export function migrate(design) {
 //    console.log('In migrate design.version=',design.version);
     switch(design.version) {
     case '1':
-        // Current model version
 //        console.log('Convert from 1 to 2');
         // Mark all design_parameters and state_varaibles with equationset: true, 
         design.design_parameters.forEach((design_parameter) => {
@@ -171,7 +170,6 @@ export function migrate(design) {
         design.symbol_table[48].input = false;
         migrated_design.version = '8';  // last thing... set the migrated model version
     case '8':
-        // Current model version
 //        console.log('Convert from 8 to 9');
         design['jsontype'] = "ODOP"; // Add in model type
         if (design.symbol_table[0].units === "inches") { // Add in units type
@@ -237,7 +235,6 @@ export function migrate(design) {
         }
         migrated_design.version = '9'; // last thing... set the migrated model version
     case '9':
-        // Current model version
         // console.log('Convert from 9 to 10');
         design.system_controls.enable_auto_fix = 1;
         
@@ -293,7 +290,7 @@ export function migrate(design) {
         // Current model version
         // console.log('Convert from 10 to 11');
         // #625 Repair design library problems created by unwanted v4.1 migrate in v4.2 Migrate
-//        console.log('design=',design);
+//        console.log('Before: design=',design);
         var contactPersonFound = false; // Start by marking that we haven't found the first "Contact person"
         design.labels.find((label, index) => {
 //            console.log('label=',label);
@@ -309,7 +306,12 @@ export function migrate(design) {
                 return false; // This is not a "Contact person"
             }
         });
-//        console.log('design=',design);
+        // #589 Changes in initialState: remove ioclass; sdlimit mods to support #452
+        // Remove ioclass from all Symbol Table entries
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+                delete element.ioclass;
+        });
+//        console.log('After: design=',design);
         migrated_design.version = '11'; // last thing... set the migrated model version
     case '11':
         // Current model version
