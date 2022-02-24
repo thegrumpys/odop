@@ -290,7 +290,7 @@ export const initialState = {
             "lmax": 0,
             "cmin": 0.0,
             "cmax": 10000.0,
-            "sdlim": 100.0,
+            "sdlim": 1000.0,
             "tooltip": "Torsion stress in wire at load point 1",
             "type": "equationset",
             "hidden": false
@@ -304,7 +304,7 @@ export const initialState = {
             "lmax": 0,
             "cmin": 100.0,
             "cmax": 200000.0,
-            "sdlim": 1000.0,
+            "sdlim": 10000.0,
             "tooltip": "Torsion stress in wire at load point 2",
             "type": "equationset",
             "hidden": false
@@ -375,7 +375,7 @@ export const initialState = {
             "cmin": 10000,
             "cmax": 1000000,
             "sdlim": 10000.0,
-            "tooltip": "Rough estimate of the average number of cycles to failure. See on-line Help.",
+            "tooltip": "Rough estimate of the average number of cycles to failure when cycling between point 1 and point 2. See on-line Help.",
             "type": "equationset",
             "hidden": false
         },

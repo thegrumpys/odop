@@ -67,7 +67,6 @@ export function migrate(design) {
         design.symbol_table[27].tooltip = "Rough estimate of the average number of cycles to failure. See on-line Help.";
         migrated_design.version = '3';
     case '3':
-        // Current model version
         // console.log('Convert from 3 to 4');
         design.symbol_table[27].sdlim = 10000; 
         // Add Energy calculation
@@ -95,7 +94,6 @@ export function migrate(design) {
         design.symbol_table[63].input = false;
         migrated_design.version = '4'; // last thing... set the migrated model version
     case '4':
-        // Current model version
 //        console.log('Convert from 4 to 5');
         if (design.symbol_table[0].units === 'mm') { // Check for units 
             design.symbol_table[23].lmax = FDCL; 
@@ -188,7 +186,6 @@ export function migrate(design) {
         }
         migrated_design.version = '5'; // last thing... set the migrated model version
     case '5':
-        // Current model version
         // console.log('Convert from 5 to 6');
         design.system_controls.enable_auto_fix = 1;
         design.labels[4].name = 'City, State & Zip';
@@ -240,7 +237,7 @@ export function migrate(design) {
         // Current model version
         // console.log('Convert from 6 to 7');
         // #625 Repair design library problems created by unwanted v4.1 migrate in v4.2 Migrate
-//        console.log('design=',design);
+//        console.log('Before: design=',design);
         var contactPersonFound = false; // Start by marking that we haven't found the first "Contact person"
         design.labels.find((label, index) => {
 //            console.log('label=',label);
@@ -256,7 +253,12 @@ export function migrate(design) {
                 return false; // This is not a "Contact person"
             }
         });
-//        console.log('design=',design);
+        // #589 Changes in initialState: remove ioclass; sdlimit mods to support #452
+        // Remove ioclass from all Symbol Table entries
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+                delete element.ioclass;
+        });
+//        console.log('After: design=',design);
         migrated_design.version = '7'; // last thing... set the migrated model version
     case '7':
         // Current model version
