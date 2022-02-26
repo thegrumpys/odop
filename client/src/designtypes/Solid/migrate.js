@@ -116,6 +116,7 @@ export function migrate(design) {
     case '7':
         // Current model version
         // console.log('Convert from 7 to 8');
+        // #589 Changes in initialState: remove ioclass; sdlimit mods to support #452
         // Remove ioclass from all Symbol Table entries
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
                 delete element.ioclass;
