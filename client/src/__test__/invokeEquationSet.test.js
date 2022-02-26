@@ -57,7 +57,7 @@ it('invokeEquationSet', () => {
     expect(design.model.system_controls.tol).toEqual(0.0001);
     expect(design.model.system_controls.smallnum).toEqual(1.0e-07);
     expect(design.model.system_controls.show_units).toEqual(1);
-    expect(design.model.system_controls.show_violations).toEqual(1);
+    expect(design.model.system_controls.show_violations).toEqual(2);
 
     expect(design.model.result.objective_value).toEqual(0);
     expect(design.model.result.termination_condition).toEqual("");
