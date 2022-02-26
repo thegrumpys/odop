@@ -130,7 +130,7 @@ class ConstraintMinRowIndependentVariable extends Component {
         // =======================================
         // Constraint Minimum Column
         // =======================================
-        var value_class = 'text-right ';
+        var value_class = '';
         if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
             if (this.props.objective_value > 4*this.props.system_controls.objmin) {
                 value_class += "text-not-feasible ";
@@ -213,11 +213,7 @@ class ConstraintMinRowIndependentVariable extends Component {
                         {this.props.element.lmin & FIXED ? 
                             '' 
                             : (this.props.element.lmin & CONSTRAINED ? 
-                                (this.props.element.vmin < 0.0 ? 
-                                    <OverlayTrigger placement="top" overlay={<Tooltip>{(this.props.element.vmin*100.0).toODOPPrecision() + '%'}</Tooltip>}>
-                                        <i className="fas fa-smile text-feasible "></i> 
-                                    </OverlayTrigger>
-                                    : (this.props.element.vmin*100.0).toODOPPrecision() + '%')
+                                (this.props.element.vmin*100.0).toODOPPrecision()
                                 : '')}
                     </td>
                 </tr>

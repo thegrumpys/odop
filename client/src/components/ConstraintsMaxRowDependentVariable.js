@@ -130,7 +130,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
         // =======================================
         // Constraint Maximum Column
         // =======================================
-        var value_class = 'text-right ';
+        var value_class = '';
         if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
             if (this.props.objective_value > 4*this.props.system_controls.objmin) {
                 value_class += "text-not-feasible ";
@@ -213,11 +213,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
                         {this.props.element.lmax & FIXED ? 
                             (this.props.element.vmax*100.0).toODOPPrecision() 
                             : (this.props.element.lmax & CONSTRAINED ? 
-                                (this.props.element.vmax < 0.0 ? 
-                                    <OverlayTrigger placement="top" overlay={<Tooltip>{(this.props.element.vmax*100.0).toODOPPrecision() + '%'}</Tooltip>}>
-                                        <i className="fas fa-smile text-feasible "></i> 
-                                    </OverlayTrigger>
-                                    : (this.props.element.vmax*100.0).toODOPPrecision() + '%')
+                                (this.props.element.vmax*100.0).toODOPPrecision()
                                 : '')}
                     </td>
                 </tr>
