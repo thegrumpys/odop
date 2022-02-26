@@ -93,7 +93,7 @@ export class ReportBase extends Component {
          * hlx_ang=atan(0.5*pitch/mean_dia)*(180.0/pi);
          */
 
-        this.cycle_life_u = this.props.symbol_table[o.Cycle_Life].units + " (est)";
+        this.cycle_life_u = this.props.symbol_table[o.Cycle_Life].units + " (est.)";
 
         /*  ref. pg 51 Associated Spring Design Handbook  */
         /*  assume C2=4; i.e. R2=twice wire dia       */

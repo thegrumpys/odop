@@ -160,7 +160,6 @@ export class Calculator extends ReportBase {
                                 <SymbolName element={this.props.symbol_table[o.Cycle_Life]} index={o.Cycle_Life} />
                                 <SymbolValue element={this.props.symbol_table[o.Cycle_Life]} index={o.Cycle_Life} />
                                 <td className="text-left">{this.cycle_life_u}</td>
-                                <td />
                             </tr>
                         </tbody>
                     </table>

@@ -172,7 +172,7 @@ export class ReportBase extends Component {
         else
             this.hlx_ang = 0.0;
 
-        this.cycle_life_u = this.props.symbol_table[o.Cycle_Life].units + " (est)";
+        this.cycle_life_u = this.props.symbol_table[o.Cycle_Life].units + " (est.)";
 
         this.pcadmsg = undefined;
         if (this.props.symbol_table[o.PC_Avail_Deflect].value > 80.0) {

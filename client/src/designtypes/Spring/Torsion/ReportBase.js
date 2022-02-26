@@ -118,6 +118,8 @@ export class ReportBase extends Component {
 //        this.od_max=temp+wire_dia;
 //        id_max=temp-wire_dia;
         
+        this.cycle_life_u = this.props.symbol_table[o.Cycle_Life].units + " (est.)";
+
         this.def_max = this.safe_load / this.props.symbol_table[o.Rate].value;
         var ctp1 = this.props.symbol_table[o.Coils_T].value + 1.0;
         this.l_max = Math.max(this.props.symbol_table[o.L_Body].value, this.props.symbol_table[o.Wire_Dia].value * (ctp1 + this.def_max / 360.0));
