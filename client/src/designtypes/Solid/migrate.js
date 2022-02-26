@@ -99,7 +99,6 @@ export function migrate(design) {
         });
         migrated_design.version = '5'; // last thing... set the migrated model version
     case '5':
-        // Current model version
 //        console.log('Convert from 5 to 6');
         design['jsontype'] = "ODOP"; // Add in model type
         if (design.symbol_table[0].units === "inches") { // Add in units type
@@ -109,7 +108,6 @@ export function migrate(design) {
         }
         migrated_design.version = '6'; // last thing... set the migrated model version
     case '6':
-        // Current model version
         // console.log('Convert from 6 to 7');
         // To be defined - presently do nothing
         design.system_controls.enable_auto_fix = 1;
@@ -118,8 +116,18 @@ export function migrate(design) {
     case '7':
         // Current model version
         // console.log('Convert from 7 to 8');
+        // #589 Changes in initialState: remove ioclass; sdlimit mods to support #452
+        // Remove ioclass from all Symbol Table entries
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+                delete element.ioclass;
+        });
+        migrated_design.version = '8'; // last thing... set the migrated model version
+
+    case '8':
+        // Current model version
+        // console.log('Convert from 8 to 9');
         // To be defined - presently do nothing
-        // migrated_design.version = '8'; // last thing... set the migrated model version
+        // migrated_design.version = '9'; // last thing... set the migrated model version
 
         break; // Do not copy this break
     default: // Unknown

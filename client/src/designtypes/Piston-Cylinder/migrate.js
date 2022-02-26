@@ -78,7 +78,6 @@ export function migrate(design) {
         });
         migrated_design.version = '3'; // last thing... set the migrated model version
     case '3':
-        // Current model version
 //        console.log('Convert from 3 to 4');
         design['jsontype'] = "ODOP"; // Add in JSON type
         if (design.symbol_table[0].units === "LB/SQ-IN") { // Add in units type
@@ -88,17 +87,25 @@ export function migrate(design) {
         }
         migrated_design.version = '4'; // last thing... set the migrated model version
     case '4':
-        // Current model version
         // console.log('Convert from 4 to 5');
-        // To be defined - presently do nothing
         design.system_controls.enable_auto_fix = 1;
         migrated_design.version = '5'; // last thing... set the migrated model version
 
     case '5':
         // Current model version
         // console.log('Convert from 5 to 6');
+        // #589 Changes in initialState: remove ioclass; sdlimit mods to support #452
+        // Remove ioclass from all Symbol Table entries
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+                delete element.ioclass;
+        });
+        migrated_design.version = '6'; // last thing... set the migrated model version
+
+    case '6':
+        // Current model version
+        // console.log('Convert from 6 to 7');
         // To be defined - presently do nothing
-        // migrated_design.version = '6'; // last thing... set the migrated model version
+        // migrated_design.version = '7'; // last thing... set the migrated model version
 
         break; // Do not copy this break
     default: // Unknown

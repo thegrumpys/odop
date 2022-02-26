@@ -67,7 +67,6 @@ class ViewSymbolTable extends Component {
                                         <th>oldcmin</th>
                                         <th>oldlmax</th>
                                         <th>oldcmax</th>
-                                        <th>ioclass</th>
                                         <th>sdlim</th>
                                         <th>tooltip</th>
                                     </tr>
@@ -101,7 +100,6 @@ class ViewSymbolTable extends Component {
                                                 <td>{element.oldcmin}</td>
                                                 <td>{element.oldlmax}</td>
                                                 <td>{element.oldcmax}</td>
-                                                <td>{element.ioclass}</td>
                                                 <td>{element.sdlim}</td>
                                                 <td>{element.tooltip}</td>
                                             </tr>
