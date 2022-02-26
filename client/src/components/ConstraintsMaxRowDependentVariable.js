@@ -7,6 +7,16 @@ import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 
+/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
+Number.prototype.toODOPPrecision = function() {
+    var value = this.valueOf();
+    var odopValue;
+    if (value < 10000.0 || value >= 1000000.0)
+         odopValue = value.toPrecision(4);
+    else odopValue = value.toFixed(0);
+    return odopValue;
+};
+
 class ConstraintsMaxRowDependentVariable extends Component {
 
     constructor(props) {
@@ -199,8 +209,16 @@ class ConstraintsMaxRowDependentVariable extends Component {
                             </Modal.Footer>
                         </Modal> : ''}
                     </td>
-                    <td className={"text-right align-middle small " + (this.props.system_controls.show_violations ? "" : "d-none")} colSpan="1">
-                        {this.props.element.lmax & FIXED ? (this.props.element.vmax*100.0).toFixed(1) : (this.props.element.lmax & CONSTRAINED ? (this.props.element.vmax*100.0).toFixed(1) + '%' : '')}
+                    <td className={"text-right align-middle small " + value_class + (this.props.system_controls.show_violations ? "" : "d-none")} colSpan="1">
+                        {this.props.element.lmax & FIXED ? 
+                            (this.props.element.vmax*100.0).toODOPPrecision() 
+                            : (this.props.element.lmax & CONSTRAINED ? 
+                                (this.props.element.vmax < 0.0 ? 
+                                    <OverlayTrigger placement="top" overlay={<Tooltip>{(this.props.element.vmax*100.0).toODOPPrecision() + '%'}</Tooltip>}>
+                                        <i className="fas fa-smile text-feasible "></i> 
+                                    </OverlayTrigger>
+                                    : (this.props.element.vmax*100.0).toODOPPrecision() + '%')
+                                : '')}
                     </td>
                 </tr>
             </tbody>
