@@ -102,7 +102,7 @@ export class Calculator extends ReportBase {
                             <tr>
                                 <ValueName name={<b>Solid</b>} tooltip="Fully compressed" />
                                 <SymbolValue element={this.props.symbol_table[o.L_Solid]} index={o.L_Solid} />
-                                <Value id="Length_Solid" value={(this.props.symbol_table[o.L_Free].value - this.props.symbol_table[o.L_Solid].value)} />
+                                <Value id="Deflection_Solid" value={(this.props.symbol_table[o.L_Free].value - this.props.symbol_table[o.L_Solid].value)} />
                                 <SymbolValue element={this.props.symbol_table[o.Force_Solid]} index={o.Force_Solid} />
                                 <Value id="OD_Solid" value={this.od_solid} />
                                 <Value id="ID_Solid" value={(this.od_solid - 2.0 * this.props.symbol_table[o.Wire_Dia].value)} />
