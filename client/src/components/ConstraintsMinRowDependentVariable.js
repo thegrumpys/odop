@@ -213,7 +213,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                         {this.props.element.lmin & FIXED ? 
                             (this.props.element.vmin*100.0).toODOPPrecision() 
                             : (this.props.element.lmin & CONSTRAINED ? 
-                                (this.props.system_controls.show_violations == 1 && this.props.element.vmin < 0 ?
+                                (this.props.system_controls.show_violations === 1 && this.props.element.vmin < 0 ?
                                     ''
                                     : (this.props.element.vmin*100.0).toODOPPrecision())
                                 : '')}
