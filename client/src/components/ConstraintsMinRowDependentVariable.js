@@ -209,7 +209,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                             </Modal.Footer>
                         </Modal> : ''}
                     </td>
-                    <td className={"text-right align-middle small " + value_class + (this.props.system_controls.show_violations == 0 ? "d-none" : "")} colSpan="1">
+                    <td className={"text-right align-middle small " + value_class + (this.props.system_controls.show_violations === 0 ? "d-none" : "")} colSpan="1">
                         {this.props.element.lmin & FIXED ? 
                             (this.props.element.vmin*100.0).toODOPPrecision() 
                             : (this.props.element.lmin & CONSTRAINED ? 

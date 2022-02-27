@@ -209,7 +209,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
                             </Modal.Footer>
                         </Modal> : ''}
                     </td>
-                    <td className={"text-right align-middle small " + value_class + (this.props.system_controls.show_violations == 0 ? "d-none" : "")} colSpan="1">
+                    <td className={"text-right align-middle small " + value_class + (this.props.system_controls.show_violations === 0 ? "d-none" : "")} colSpan="1">
                         {this.props.element.lmax & FIXED ? 
                             (this.props.element.vmax*100.0).toODOPPrecision() 
                             : (this.props.element.lmax & CONSTRAINED ? 
