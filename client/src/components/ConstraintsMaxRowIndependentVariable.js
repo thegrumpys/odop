@@ -213,7 +213,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                         {this.props.element.lmax & FIXED ? 
                             '' 
                             : (this.props.element.lmax & CONSTRAINED ? 
-                                (this.props.system_controls.show_violations == 1 && this.props.element.vmax < 0 ?
+                                (this.props.system_controls.show_violations === 1 && this.props.element.vmax < 0 ?
                                     ''
                                     : (this.props.element.vmax*100.0).toODOPPrecision())
                                 : '')}
