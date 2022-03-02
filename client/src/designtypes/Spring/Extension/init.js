@@ -155,6 +155,7 @@ export function init(store, p, x) {
     if (x[o.SI_Range] <= 2 ) {
         x[o.SI_Lo_Factor] = m_tab[i][mo.silf];
         if (x[o.SI_Range] === 2) {
+            x[o.SI_Lo_Factor] = m_tab[i][mo.silf] / 2.0;    // see issue #544
             x[o.SI_Hi_Factor] = m_tab[i][mo.sisr];
         }
         else {
