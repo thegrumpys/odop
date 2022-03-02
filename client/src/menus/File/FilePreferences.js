@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, NavDropdown, Container, Row, Col } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Container, Row, Col, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { initialSystemControls } from '../../initialSystemControls';
 import { changeSystemControlsValue, saveAutoSave } from '../../store/actionCreators';
@@ -33,10 +33,12 @@ class FilePreferences extends Component {
         });
     }
     
-    onChangeValid(name, value) {
+    onChangeValid(name, valueString) {
+        console.log('In FilePreferences.onChangeValid this=',this,'name=',name,'value=',value);
         // Save the value into the state.system_controls
         // You cannot convert to floating point here, 
         // because exponent without a following value causes a parse error, e.g., '1.2e'
+        var value = parseFloat(valueString);
         this.setState({
             system_controls: {
                 ...this.state.system_controls,
@@ -94,18 +96,76 @@ class FilePreferences extends Component {
                         <Container>
                             <Row>
                                 <Col className="text-left font-weight-bold">Name</Col>
-                                <Col className="text-right font-weight-bold">Value</Col>
+                                <Col className="text-left font-weight-bold">Value</Col>
                             </Row>
                             {
                                 Object.keys(this.state.system_controls).map((property_name) => {
-                                    return (
-                                        <Row key={property_name}>
-                                            <Col className="align-middle text-left">{property_name}</Col>
-                                            <Col className="align-middle text-right">
-                                                <FormControlTypeNumber id={property_name} value={this.state.system_controls[property_name]} onChangeValid={(event) => {this.onChangeValid(property_name, event.target.value)}} onChangeInvalid={this.onChangeInvalid}/>
-                                            </Col>
-                                        </Row>
-                                    );
+                                    if (property_name === 'ioopt') {
+                                        return (
+                                            <Row key="ioopt">
+                                                <Col className="align-middle text-left">
+                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Controls the amount of logging output that is sent to the console.</Tooltip>}>
+                                                        <span>ioopt</span>
+                                                    </OverlayTrigger>
+                                                </Col>
+                                                <Col className="align-middle text-left">
+                                                    <Form.Check type="radio" id="ioopt" value="0" label="Brief" inline onChange={(event) => {this.onChangeValid('ioopt', event.target.value)}} checked={this.state.system_controls['ioopt'] === 0} />
+                                                    <Form.Check type="radio" id="ioopt" value="3" label="Normal" inline onChange={(event) => {this.onChangeValid('ioopt', event.target.value)}} checked={this.state.system_controls['ioopt'] === 3} />
+                                                    <Form.Check type="radio" id="ioopt" value="6" label="Verbose" inline onChange={(event) => {this.onChangeValid('ioopt', event.target.value)}} checked={this.state.system_controls['ioopt'] === 6} />
+                                                </Col>
+                                            </Row>
+                                        );
+                                    } else if (property_name === 'show_units') {
+                                        return (
+                                            <Row key="show_units">
+                                                <Col className="align-middle text-left">
+                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Controls the amount of logging output that is sent to the console.</Tooltip>}>
+                                                        <span>show_units</span>
+                                                    </OverlayTrigger>
+                                                </Col>
+                                                <Col className="align-middle text-left">
+                                                    <Form.Check type="checkbox" id="show_units" value={this.state.system_controls['show_units']} onChange={(event) => {this.onChangeValid('show_units', event.target.value)}} checked={this.state.system_controls['show_units'] !== 0} />
+                                                </Col>
+                                            </Row>
+                                        );
+                                    } else if (property_name === 'show_violations') {
+                                        return (
+                                            <Row key="show_violations">
+                                                <Col className="align-middle text-left">
+                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Controls the amount of logging output that is sent to the console.</Tooltip>}>
+                                                        <span>show_violations</span>
+                                                    </OverlayTrigger>
+                                                </Col>
+                                                <Col className="align-middle text-left">
+                                                    <Form.Check type="radio" id="show_violations" value="0" label="None" onChange={(event) => {this.onChangeValid('show_violations', event.target.value)}} checked={this.state.system_controls['show_violations'] === 0} />
+                                                    <Form.Check type="radio" id="show_violations" value="1" label="Violation (+)" onChange={(event) => {this.onChangeValid('show_violations', event.target.value)}} checked={this.state.system_controls['show_violations'] === 1} />
+                                                    <Form.Check type="radio" id="show_violations" value="2" label="Violation (+) &amp; Satisfication (-)" onChange={(event) => {this.onChangeValid('show_violations', event.target.value)}} checked={this.state.system_controls['show_violations'] === 2} />
+                                                </Col>
+                                            </Row>
+                                        );
+                                    } else if (property_name === 'enable_auto_fix') {
+                                        return (
+                                            <Row key="enable_auto_fix">
+                                                <Col className="align-middle text-left">
+                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Controls the amount of logging output that is sent to the console.</Tooltip>}>
+                                                        <span>enable_auto_fix</span>
+                                                    </OverlayTrigger>
+                                                </Col>
+                                                <Col className="align-middle text-left">
+                                                    <Form.Check type="checkbox" id="enable_auto_fix" value={this.state.system_controls['enable_auto_fix']} onChange={(event) => {this.onChangeValid('enable_auto_fix', event.target.value)}} checked={this.state.system_controls['enable_auto_fix'] !== 0} />
+                                                </Col>
+                                            </Row>
+                                        );
+                                    } else {
+                                        return (
+                                            <Row key={property_name}>
+                                                <Col className="align-middle text-left">{property_name}</Col>
+                                                <Col className="align-middle text-left">
+                                                    <FormControlTypeNumber id={property_name} value={this.state.system_controls[property_name]} onChangeValid={(event) => {this.onChangeValid(property_name, event.target.value)}} onChangeInvalid={this.onChangeInvalid}/>
+                                                </Col>
+                                            </Row>
+                                        );
+                                    }
                                 })
                             }
                         </Container>
