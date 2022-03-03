@@ -539,7 +539,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Select cycle life target. Selects %_Ten_Bnd_Endur from material table.",
+            "tooltip": "Select cycle life target. Uses %_Ten_Bnd_Endur from material table. Enable FS_CycleLife MIN for non-static.",
             "type": "calcinput",
             "hidden": false
         },
