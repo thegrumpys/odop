@@ -20,6 +20,7 @@ This topic covers various points that may allow a better user experience with th
 [Optimizing for small screens](htt#smallScreen)  
 [Printing](htt#printing)  
 [Design Migration](htt#designMigration)  
+[Extension spring catalog lookup](htt#e_springCatLookup)  
 [How to pronounce ODOP](htt#pronounceODOP)  
 [Reporting problems with the ODOP app](htt#reportProblems)  
 
@@ -276,6 +277,19 @@ See: [MIGRATION](terminology#migration)
 
 ___
 
+<a id="e_springCatLookup"></a>  
+___
+
+**Extension spring catalog lookup**   
+Entries in the provided extension spring catalog (previously MS24586, now SAE-AS24586) 
+run toward the low side of the initial tension range targeted by ODOP:Spring's default constraints. 
+If experiencing difficulty in selecting springs from the supplied catalog, try setting the 
+Calculation Input named SI_Range to a value of "Special_Request".
+
+See: [Extension spring design - Initial_Tension](DesignTypes/e_spring#e_springIT_Range)    
+
+___
+
 <a id="pronounceODOP"></a>  
 ___
 
@@ -302,3 +316,6 @@ ___
 &nbsp;
  
 [Help](./)
+
+&nbsp;
+ 

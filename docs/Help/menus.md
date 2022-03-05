@@ -372,6 +372,7 @@ before selecting a catalog item.
 
 See also:   
 [Select Catalog](SpringDesign/selectSizeCatalog)   
+[Extension spring catalog lookup](htt#e_springCatLookup)   
 
 
 ___
