@@ -314,12 +314,12 @@ export function migrate(design) {
         // #609 Add standard size table for metric Outside Diameters
         // Update Material_Type = 31 table and Material_File = 34 value
 //        console.log('Material_File.value=',design.symbol_table[34].value,'Material_Type.table=',design.symbol_table[31].table)
-        if (design.symbol_table[31].table === 'Spring/mat_met') {
+        if (design.symbol_table[31].table === 'Spring/mat_SI') {
           design.symbol_table[31].table = 'Spring/mat_metric';
         } else {
           design.symbol_table[31].table = 'Spring/mat_us';
         }
-        if (design.symbol_table[34].value === 'mat_met.json') {
+        if (design.symbol_table[34].value === 'mat_SI.json') {
           design.symbol_table[34].value = 'mat_metric.json';
         } else {
           design.symbol_table[34].value = 'mat_us.json';
