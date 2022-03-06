@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
+import config from '../../config';
 
 class HelpIndex extends Component {
 
@@ -11,8 +12,8 @@ class HelpIndex extends Component {
     }
 
     onHelp() {
-        logUsage('event', 'HelpIndex', { 'event_label': 'https://thegrumpys.github.io/odop/Help' });
-        window.open('https://thegrumpys.github.io/odop/Help', '_blank');
+        logUsage('event', 'HelpIndex', { 'event_label': config.documentation.prefix + '/Help' });
+        window.open(config.documentation.prefix + '/Help', '_blank');
     }
 
     render() {

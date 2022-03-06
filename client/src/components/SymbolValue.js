@@ -20,6 +20,7 @@ import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { logValue } from '../logUsage';
 import { logUsage } from '../logUsage';
+import config from '../config';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -129,7 +130,7 @@ class SymbolValue extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.open('https://thegrumpys.github.io/odop/Help/settingValues', '_blank');
+        window.open(config.documentation.prefix + '/Help/settingValues', '_blank');
     }
 
     onClose() {

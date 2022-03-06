@@ -8,6 +8,7 @@ import { seek, search, saveAutoSave } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/MessageModal';
 import { displaySpinner } from './Spinner';
+import config from '../config';
 
 class ResultTable extends Component {
     
@@ -76,7 +77,7 @@ class ResultTable extends Component {
         this.setState({
             optimize_modal: !this.state.optimize_modal,
         });
-        window.open('https://thegrumpys.github.io/odop/Help/seek', '_blank');
+        window.open(config.documentation.prefix + '/Help/seek', '_blank');
     }
 
     onOptimizeCancel(event) {

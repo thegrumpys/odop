@@ -37,7 +37,7 @@ class HelpAbout extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        Link to <a href="https://thegrumpys.github.io/odop/About/" target="_blank" rel="noopener noreferrer">About</a> topics
+                        Link to <a href={config.documentation.prefix + '/About/'} target="_blank" rel="noopener noreferrer">About</a> topics
                         <br/>
                         Link to <a href="https://www.springdesignsoftware.org/" target="_blank" rel="noopener noreferrer">website</a> home page
                         <hr/>

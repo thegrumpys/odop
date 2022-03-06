@@ -11,6 +11,7 @@ import { changeSymbolConstraint,
     saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 import FormControlTypeNumber from '../../components/FormControlTypeNumber';
+import config from '../../config';
 
 class ActionTrade extends Component {
 
@@ -232,7 +233,7 @@ class ActionTrade extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.open('https://thegrumpys.github.io/odop/Help/trade', '_blank');
+        window.open(config.documentation.prefix + '/Help/trade', '_blank');
     }
     
     commonArbitraryOrProportional(dir) {
