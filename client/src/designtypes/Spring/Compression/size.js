@@ -1,5 +1,5 @@
 import * as o from './symbol_table_offsets';
-import * as mo from '../mat_ips_offsets';
+import * as mo from '../mat_offsets';
 
 export function getSizeTypes() {
     var result = [
@@ -20,10 +20,10 @@ export function getSizeEntries(type, st) {
     switch(type) {
     case "Wire_Dia":
         // Find size name, load size table, and get wire diameter value
-        if (st[o.Material_File].value === "mat_SI.json")
-            m_tab = require('../mat_SI.json');
+        if (st[o.Material_File].value === "mat_metric.json")
+            m_tab = require('../mat_metric.json');
         else
-            m_tab = require('../mat_ips.json');
+            m_tab = require('../mat_us.json');
 //        console.log('In getSizeEntries: st[o.Material_File].value =', st[o.Material_File].value);
         var i = st[o.Material_Type].value;
 //        console.log('In getSizeEntries Wire_Dia i=',i);

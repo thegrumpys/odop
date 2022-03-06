@@ -447,7 +447,7 @@ export const initialState = {
             "value": 2,
             "units": "",
             "format": "table",
-            "table": "Spring/mat_ips",
+            "table": "Spring/mat_us",
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
@@ -517,7 +517,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Material_File",
-            "value": "mat_ips.json",
+            "value": "mat_us.json",
             "units": "",
             "lmin": 0,
             "lmax": 0,

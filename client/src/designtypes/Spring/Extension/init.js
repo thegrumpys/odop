@@ -1,5 +1,5 @@
 import * as o from './offsets';
-import * as mo from '../mat_ips_offsets';
+import * as mo from '../mat_offsets';
 import * as eto from './endtypes_offsets';
 import { changeSymbolInput, changeSymbolHidden } from '../../../store/actionCreators';
 
@@ -12,8 +12,8 @@ export function init(store, p, x) {
  const e_end_num = 5;
 
    /*  Bring in material properties table  */
- if (x[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
- else m_tab = require('../mat_ips.json');
+ if (x[o.Material_File] === "mat_metric.json") m_tab = require('../mat_metric.json');
+ else m_tab = require('../mat_us.json');
 //    console.log("m_tab=", m_tab);
  var et_tab = require('./endtypes.json');
 //console.log("et_tab=", et_tab);

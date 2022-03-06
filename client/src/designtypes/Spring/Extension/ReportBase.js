@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import * as o from './symbol_table_offsets';
-import * as mo from '../mat_ips_offsets';
+import * as mo from '../mat_offsets';
 
 export class ReportBase extends Component {
 
@@ -14,10 +14,10 @@ export class ReportBase extends Component {
 //        console.log('In ReportBase.render this=',this);
         const Close_Wound_Coil = 5;
         /*  Bring in material properties table  */
-        if (this.props.symbol_table[o.Material_File].value === "mat_SI.json")
-            this.m_tab = require('../mat_SI.json');
+        if (this.props.symbol_table[o.Material_File].value === "mat_metric.json")
+            this.m_tab = require('../mat_metric.json');
         else
-            this.m_tab = require('../mat_ips.json');
+            this.m_tab = require('../mat_us.json');
         this.et_tab = require('./endtypes.json');
 
         /*  Bring in life target table  */

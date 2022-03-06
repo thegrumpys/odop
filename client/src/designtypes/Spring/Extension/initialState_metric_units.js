@@ -542,7 +542,7 @@ export const initialState = {
             "value": 3,
             "units": "",
             "format": "table",
-            "table": "Spring/mat_SI",
+            "table": "Spring/mat_metric",
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
@@ -583,7 +583,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Material_File",
-            "value": "mat_SI.json",
+            "value": "mat_metric.json",
             "units": "",
             "lmin": 0,
             "lmax": 0,

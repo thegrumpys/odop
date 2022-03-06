@@ -1,5 +1,5 @@
 import * as o from './offsets';
-import * as mo from '../mat_ips_offsets';
+import * as mo from '../mat_offsets';
 import * as eto from './endtypes_offsets';
 export function eqnset(p, x) {        /*    Extension  Spring  */
     const zero = 0.0;
@@ -236,8 +236,8 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
         var m_tab;
     
         /*  Bring in material properties table  */
-        if (x[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
-            else m_tab = require('../mat_ips.json');
+        if (x[o.Material_File] === "mat_metric.json") m_tab = require('../mat_metric.json');
+            else m_tab = require('../mat_us.json');
     
     //    if st_code = 3 then temp=tensile;
         if (st_code === 3) temp = tensile;

@@ -311,6 +311,19 @@ export function migrate(design) {
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
                 delete element.ioclass;
         });
+        // #609 Add standard size table for metric Outside Diameters
+        // Update Material_Type = 31 table and Material_File = 34 value
+//        console.log('Material_File.value=',design.symbol_table[34].value,'Material_Type.table=',design.symbol_table[31].table)
+        if (design.symbol_table[31].table === 'Spring/mat_metric') {
+          design.symbol_table[31].table = 'Spring/mat_metric';
+        } else {
+          design.symbol_table[31].table = 'Spring/mat_us';
+        }
+        if (design.symbol_table[34].value === 'mat_metric.json') {
+          design.symbol_table[34].value = 'mat_metric.json';
+        } else {
+          design.symbol_table[34].value = 'mat_us.json';
+        }
 //        console.log('After: design=',design);
         migrated_design.version = '11'; // last thing... set the migrated model version
     case '11':

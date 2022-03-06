@@ -1,5 +1,5 @@
 import * as o from './offsets';
-import * as mo from '../mat_ips_offsets';
+import * as mo from '../mat_offsets';
 export function eqnset(p, x) {        /*    Compression  Spring  */
     const zero = 0.0;
     var ks;
@@ -132,8 +132,8 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
     var m_tab;
 
     /*  Bring in material properties table  */
-    if (x[o.Material_File] === "mat_SI.json") m_tab = require('../mat_SI.json');
-        else m_tab = require('../mat_ips.json');
+    if (x[o.Material_File] === "mat_metric.json") m_tab = require('../mat_metric.json');
+        else m_tab = require('../mat_us.json');
 
 //    if st_code = 3 then temp=tensile;
     if (st_code === 3) temp = tensile;
