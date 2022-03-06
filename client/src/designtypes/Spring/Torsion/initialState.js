@@ -110,9 +110,9 @@ export const initialState = {
             "units": "inches",
             "lmin": CONSTRAINED,
             "lmax": 0,
-            "cmin": 0.1,
+            "cmin": 0.01,
             "cmax": 10.0,
-            "sdlim": 0.1,
+            "sdlim": 0.01,
             "tooltip": "Inside diameter in free (no load) condition",
             "type": "equationset",
             "hidden": false
@@ -262,10 +262,10 @@ export const initialState = {
             "name": "Spring_Index",
             "value": 13.70634,
             "units": "ratio",
-            "lmin": 0,
-            "lmax": 0,
+            "lmin": CONSTRAINED,
+            "lmax": CONSTRAINED,
             "cmin": 4.0,
-            "cmax": 20.0,
+            "cmax": 25.0,
             "sdlim": 1.0,
             "tooltip": "Ratio of mean coil diameter (Mean_Dia) to wire diameter (Wire_Dia)",
             "type": "equationset",
@@ -539,7 +539,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Select cycle life target. Selects %_Ten_Bnd_Endur from material table.",
+            "tooltip": "Select cycle life target. Confirm that FS_CycleLife MIN constraint is enabled to utilize the selected %_Tensile_Endur for the material.",
             "type": "calcinput",
             "hidden": false
         },
@@ -926,7 +926,7 @@ export const initialState = {
         }
     ],
     "type": "Spring/Torsion",
-    "version": "6",
+    "version": "7",
     "result": {
         "objective_value": 0,
         "termination_condition": "",

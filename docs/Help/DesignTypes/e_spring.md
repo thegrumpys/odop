@@ -193,14 +193,16 @@ ___
             manufacturability.   
     Stress_Init_Hi  -  upper limit of initial stress for proper
             manufacturability   
-            
-    FS_SI_Lo        -  factor of safety on lower limit of initial stress
-    FS_SI_Hi        -  factor of safety on upper limit of initial stress
-    F1_IT_Margin    -  amount by which Force_1 exceeds Initial_Tension
-                    
+
     Energy       -  Change in elastic potential energy between 
                     point 1 and point 2.
 
+<!---
+    FS_SI_Lo        -  factor of safety on lower limit of initial stress
+    FS_SI_Hi        -  factor of safety on upper limit of initial stress
+    F1_IT_Margin    -  amount by which Force_1 exceeds Initial_Tension
+-->
+                    
 &nbsp;
 For additional information: [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
 &nbsp;
@@ -231,9 +233,6 @@ ___
             by the material selected from the material table.
             Values are usually Cold_Coiled or Hot_Wound.
             Refer to discussion under Hot_Factor_KH.
-    
-<!---     Material_File -  character string containing the material table name. -->
-<!---                      It is normally established by the initialState.js file. -->
     
     Prop_Calc_Method -  This value controls how material properties and
             and allowable stresses are determined.
@@ -273,6 +272,9 @@ ___
     Catalog_Name     -  name of the catalog containing the most recently 
                         selected catalog entry.
     Catalog_Number   -  catalog number of the most recent catalog entry.  
+    
+<!---     Material_File -  character string containing the material table name. -->
+<!---                      It is normally established by the initialState.js file. -->
 
 &nbsp;
 For additional information: 
@@ -341,15 +343,14 @@ The software calculates this range and using the constraint defaults established
 in the extension spring startup, the software will search for designs 
 that fall within this range.
 
-Specifically, the process starts by computing Stress\_Initial from Initial\_Tension.
 The SI_Range selection in extension spring Calculation Inputs provides 
 the terms "Readily Obtainable" and "Special Request" that
-refer to the ranges achievable in standard practice. 
-Both have the same minimum value, 
-the "Special Request" range permits a higher maximum initial tension.
-Once the SI\_Range selection gets empirical constants SI\_Lo\_Factor and SI\_Hi\_Factor
-from the material table, Stress\_Init\_Lo and Stress\_Init\_Hi are computed. 
-These values then become the MIN and MAX constraint levels for Stress\_Initial. 
+refer to the ranges of initial stress achievable in standard practice. 
+The "Special Request" range permits a lower minimum and higher maximum values.
+Internally, the SI\_Range selection gets empirical constants SI\_Lo\_Factor and SI\_Hi\_Factor
+from the material table and computes Stress\_Init\_Lo and Stress\_Init\_Hi. 
+These values then become the MIN and MAX constraint levels for Stress\_Initial 
+and thus limit Initial_Tension to the appropriate range of values.
 
 In summary, extension springs have three "Functionally Determined Constraint Levels" (FDCL) 
 configured in the default startup design.
@@ -359,8 +360,8 @@ Force\_1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MIN &nbsp; &nbsp; &nbsp; Initial\_Te
 Stress\_Initial &nbsp; MIN &nbsp; &nbsp; &nbsp; Stress\_Init_Lo   
 Stress\_Initial &nbsp; MAX &nbsp; &nbsp;&nbsp; Stress\_Init_Hi   
 
-Additional "Functionally Determined Constraint Levels" (FDCL) available for configuration 
-by the user include:   
+One additional "Functionally Determined Constraint Levels" (FDCL) that can be enabled 
+by the user is:   
 
 **Constraint on: &nbsp; &nbsp; &nbsp;  Is current value of:**   
 Stress\_Hook &nbsp; MAX &nbsp; &nbsp;&nbsp; Stress\_Lim_Bend   
