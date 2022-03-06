@@ -232,7 +232,7 @@ export function migrate(design) {
         });
         // #609 Add standard size table for metric Outside Diameters
         // Update Material_Type = 31 table and Material_File = 36 value
-        console.log('Material_File.value=',design.symbol_table[36].value,'Material_Type.table=',design.symbol_table[31].table)
+//        console.log('Material_File.value=',design.symbol_table[36].value,'Material_Type.table=',design.symbol_table[31].table)
         if (design.symbol_table[31].table === 'Spring/mat_SI') {
           design.symbol_table[31].table = 'Spring/mat_metric';
         } else {
