@@ -154,17 +154,17 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.render m_tab =', m_tab);
         var i = this.props.symbol_table[o.Material_Type].value;
 //        console.log('In SymbolValueWireDia.render i=',i);
-        var size_name = m_tab[i][mo.siznam];
-//        console.log('In SymbolValueWireDia.render size_name=',size_name);
-        var size_table = require('./'+size_name+'.json'); // Dynamically load table
-        size_table = JSON.parse(JSON.stringify(size_table)); // clone so these updates are fresh
-        size_table.forEach((element) => {
+        var wire_dia_filename = m_tab[i][mo.wire_dia_filename];
+//        console.log('In SymbolValueWireDia.render wire_dia_filename=',wire_dia_filename);
+        var wire_dia_table = require('./'+wire_dia_filename+'.json'); // Dynamically load table
+        wire_dia_table = JSON.parse(JSON.stringify(wire_dia_table)); // clone so these updates are fresh
+        wire_dia_table.forEach((element) => {
             element.push(element[0].toString()); // add labels
         });
-//        console.log('In SymbolValueWireDia.render size_table=',size_table);
+//        console.log('In SymbolValueWireDia.render wire_dia_table=',wire_dia_table);
         const needle = this.props.element.value;
 //        console.log('In SymbolValueWireDia.render needle=',needle);
-        var default_value = size_table.find((element,index) => {
+        var default_value = wire_dia_table.find((element,index) => {
             if (index > 0) { // skip the column header
                 if (element[0] !== needle)
                   return false; // keep looking
@@ -176,13 +176,13 @@ class SymbolValueWireDia extends Component {
         });
 //        console.log('In SymbolValueWireDia.render default_value=',default_value);
         if (default_value === undefined) {
-            size_table[0] = [needle, needle.toODOPPrecision()+" Non-std"]; // Replace column header with non-std value
+            wire_dia_table[0] = [needle, needle.toODOPPrecision()+" Non-std"]; // Replace column header with non-std value
         } else {
-            size_table.shift(); // Remove column header if there is no non-std value
+            wire_dia_table.shift(); // Remove column header if there is no non-std value
         }
-//        console.log('In SymbolValueWireDia.render size_table=',size_table);
-        var sorted_size_table = size_table.sort(function(a, b) { return a[0] - b[0]; }); // sort by value
-//        console.log('In SymbolValueWireDia.render sorted_size_table=',sorted_size_table);
+//        console.log('In SymbolValueWireDia.render wire_dia_table=',wire_dia_table);
+        var sorted_wire_dia_table = wire_dia_table.sort(function(a, b) { return a[0] - b[0]; }); // sort by value
+//        console.log('In SymbolValueWireDia.render sorted_wire_dia_table=',sorted_wire_dia_table);
 
         var value_class = 'text-right ';
         var value_tooltip;
@@ -281,7 +281,7 @@ class SymbolValueWireDia extends Component {
                                                         :
                                                             <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                                                 <Form.Control as="select" id={'svwd_'+this.props.element.name} disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
-                                                                    {sorted_size_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
+                                                                    {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
                                                                 </Form.Control>
                                                            </OverlayTrigger>
                                                         )
@@ -290,7 +290,7 @@ class SymbolValueWireDia extends Component {
                                                             <FormControlTypeNumber id={'svwd_'+this.props.element.name} className={value_class} step="any" value={this.props.element.value} onChange={this.onChange} />
                                                         :
                                                             <Form.Control as="select" id={'svwd_'+this.props.element.name} disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
-                                                                {sorted_size_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
+                                                                {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
                                                             </Form.Control>
                                                         )
                                                     )}

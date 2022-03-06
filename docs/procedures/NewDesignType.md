@@ -32,7 +32,7 @@ For example, coil spring design types utilize:
 * client/src/designtypes/Spring/
     * mat\_ips.json,  mat\_cgs.json, etc.
     * mat\_ips\_offsets.js, mat\_cgs\_offsets.js, etc.
-    * sizes_xx.json &nbsp; (standard wire sizes tables)
+    * wire_dia_xx.json &nbsp; (standard wire sizes tables)
 * client/src/designtypes/Spring/_designName_/
     * init.js<sup> ** </sup>
     * view.js<sup> ** </sup>

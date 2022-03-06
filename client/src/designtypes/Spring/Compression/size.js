@@ -12,11 +12,11 @@ export function getSizeTypes() {
 
 export function getSizeEntries(type, st) {
 //    console.log('In getSizeEntries type=',type,' st=',st);
-    var size_name, size_table, entry;
+    var wire_dia_filename, od_free_filename, wire_dia_table, od_free_table, wire_dia_entry, od_free_entry;
     var wire_dia, od_free;
     var size0, size1, size2;
     var result = [];
-    var m_tab;
+    var m_tab, i;
     switch(type) {
     case "Wire_Dia":
         // Find size name, load size table, and get wire diameter value
@@ -25,22 +25,22 @@ export function getSizeEntries(type, st) {
         else
             m_tab = require('../mat_us.json');
 //        console.log('In getSizeEntries: st[o.Material_File].value =', st[o.Material_File].value);
-        var i = st[o.Material_Type].value;
-//        console.log('In getSizeEntries Wire_Dia i=',i);
-        size_name = m_tab[i][mo.siznam];
-//        console.log('In getSizeEntries Wire_Dia size_name=',size_name);
-        size_table = require('../'+size_name+'.json'); // Dynamically load table
-//        console.log('In getSizeEntries Wire_Dia size_table=',size_table);
+        i = st[o.Material_Type].value;
+//        console.log('In getSizeEntries Material_Type i=',i);
+        wire_dia_filename = m_tab[i][mo.wire_dia_filename];
+//        console.log('In getSizeEntries wire_dia_filename=',wire_dia_filename);
+        wire_dia_table = require('../'+wire_dia_filename+'.json'); // Dynamically load table
+//        console.log('In getSizeEntries wire_dia_table=',wire_dia_table);
         wire_dia = st[o.Wire_Dia].value;
-//        console.log('In getSizeEntries Wire_Dia wire_dia=',wire_dia);
+//        console.log('In getSizeEntries wire_dia=',wire_dia);
         // Select one below value less than Wire_Dia and two value greater than Wire_Dia
-        for (let i = 1; i < size_table.length; i++) { // Skip column headers at zeroth entry
-            entry = size_table[i];
+        for (let i = 1; i < wire_dia_table.length; i++) { // Skip column headers at zeroth entry
+            wire_dia_entry = wire_dia_table[i];
             size0 = size1;
             size1 = size2;
-            size2 = entry[0];
+            size2 = wire_dia_entry[0];
             if (size1 !== undefined && wire_dia <= size1) {
-//                console.log('In getSizeEntries Wire_Dia entry[0]=',entry[0]);
+//                console.log('In getSizeEntries wire_dia_entry[0]=',wire_dia_entry[0]);
                 break;
             }
         };
@@ -55,20 +55,27 @@ export function getSizeEntries(type, st) {
         }
         break;
     case "OD_Free":
-        size_name = 'sizes_od_free';
-//        console.log('In getSizeEntries OD_Free size_name=',size_name);
-        size_table = require('../'+size_name+'.json'); // Dynamically load table
-//        console.log('In getSizeEntries OD_Free size_table=',size_table);
+        if (st[o.Material_File].value === "mat_metric.json")
+            m_tab = require('../mat_metric.json');
+        else
+            m_tab = require('../mat_us.json');
+//        console.log('In getSizeEntries: st[o.Material_File].value =', st[o.Material_File].value);
+        i = st[o.Material_Type].value;
+//        console.log('In getSizeEntries Material_Type i=',i);
+        od_free_filename = m_tab[i][mo.od_free_filename];
+//        console.log('In getSizeEntries od_free_filename=',od_free_filename);
+        od_free_table = require('../'+od_free_filename+'.json'); // Dynamically load table
+//        console.log('In getSizeEntries od_free_table=',od_free_table);
         od_free = st[o.OD_Free].value;
-//        console.log('In getSizeEntries OD_Free od_free=',od_free);
+//        console.log('In getSizeEntries od_free=',od_free);
         // Select one below value less than OD_Free and two value greater than OD_Free
-        for (let i = 1; i < size_table.length; i++) { // Skip column headers at zeroth entry
-            entry = size_table[i];
+        for (let i = 1; i < od_free_table.length; i++) { // Skip column headers at zeroth entry
+            od_free_entry = od_free_table[i];
             size0 = size1;
             size1 = size2;
-            size2 = entry[0];
+            size2 = od_free_entry[0];
             if (size1 !== undefined && od_free <= size1) {
-//                console.log('In getSizeEntries OD_Free entry[0]=',entry[0]);
+//                console.log('In getSizeEntries od_free_entry[0]=',od_free_entry[0]);
                 break;
             }
         };
