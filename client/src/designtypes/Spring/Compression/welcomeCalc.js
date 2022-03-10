@@ -1,5 +1,5 @@
 import React from 'react';
-import { logUsage } from '../../../store/actionCreators';
+import { logUsage, changeResultTerminationCondition } from '../../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -56,6 +56,7 @@ export const execute = {
 //                changeSymbolValue("Coils_T", Number.NaN),
 //                changeSymbolValue("Force_1", Number.NaN),
 //                changeSymbolValue("Force_2", Number.NaN),
+                changeResultTerminationCondition('When finished reading all 4 pages, use the gray "Exit" button in the upper right to close the light green panel above.'),
             ]
         },
         {
@@ -92,7 +93,8 @@ export const execute = {
                 </>
             ),
             actions: [
-                logUsage('event','welcomeCalc', { 'event_label': 'Page 02 of 04' })
+                logUsage('event','welcomeCalc', { 'event_label': 'Page 02 of 04' }),
+                changeResultTerminationCondition('')
             ]
         },
         {
