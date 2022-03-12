@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { version } from '../../version';
 import { logUsage } from '../../logUsage';
 import { withOktaAuth } from '@okta/okta-react';
+import config from '../../config';
 
 class HelpAbout extends Component {
 
