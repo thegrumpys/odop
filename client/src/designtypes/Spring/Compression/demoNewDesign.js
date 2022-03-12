@@ -98,7 +98,7 @@ export const execute = {
             title: "Page 05 of 14",
             text: (
                 <>
-                   <Image fluid src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
+                   <Image fluid src="/docs/Help/png/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
                 </>
             )
         },

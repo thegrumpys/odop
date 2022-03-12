@@ -37,8 +37,8 @@ Within the context of the ODOP software, the terms "mathematical model",
 Each design type has a mathematical model at its core.
 
 For examples, see:   
-* [Piston-Cylinder](./DesignTypes/png/PCylDiagram.png) 
-* [Rectangular Solid](./DesignTypes/png/RectangularSolidDiagram.png).   
+* [Piston-Cylinder](/docs/Help/DesignTypes/png/PCylDiagram.png) 
+* [Rectangular Solid](/docs/Help/DesignTypes/png/RectangularSolidDiagram.png).   
 
 See "Design Types" and "Equation Set" below for more detail.
 
@@ -246,7 +246,7 @@ permit the desired solution.  Perhaps the solution is to use a stronger
 material.  This can be represented by changing a material constant and
 re-executing the search. 
 Perhaps use of the TRADE feature is appropriate.
-For more information, see: [Trade](./trade.html).
+For more information, see: [Trade](/docs/Help/trade.html).
 
 ___
 
@@ -308,11 +308,11 @@ The ODOP software allows for multiple design types and thus multiple sets of
 design equations (mathematical models of a specific design problem) 
 to be concurrently available. 
 Currently implemented Design Types include:
-* [Compression Spring](./DesignTypes/c_spring.html)   
-* [Extension Spring](./DesignTypes/e_spring.html)   
-* [Torsion Spring](./DesignTypes/t_spring.html)   
-* [Rectangular Solid](./DesignTypes/r_solid.html)
-* [Piston-Cylinder](./DesignTypes/pcyl.html) 
+* [Compression Spring](/docs/Help/DesignTypes/c_spring.html)   
+* [Extension Spring](/docs/Help/DesignTypes/e_spring.html)   
+* [Torsion Spring](/docs/Help/DesignTypes/t_spring.html)   
+* [Rectangular Solid](/docs/Help/DesignTypes/r_solid.html)
+* [Piston-Cylinder](/docs/Help/DesignTypes/pcyl.html) 
 
 The simplest way to use a different design type and equation set is to select a 
 design type that uses the desired equation set at the time that the ODOP 
@@ -351,7 +351,7 @@ Typically, this compromise violates multiple constraints.
 While the ODOP software is modular and can potentially support multiple numerical search algorithms, 
 the current ODOP software release supplies only one such numerical search algorithm.
 Additional information on the search algorithm is available in the 
-[Search](./search.html) Help entry.   
+[Search](/docs/Help/search.html) Help entry.   
 
 
 ___
@@ -400,7 +400,7 @@ ___
 
 **SPRING DESIGN VARIABLE NAMES**   
 
-[Variable names illustrated on compression spring Force-Deflection diagram:](png/ForceVsDeflection.png)
+[Variable names illustrated on compression spring Force-Deflection diagram:](/docs/Help/png/ForceVsDeflection.png)
 ___
 
 <a id="FactorOfSafety"></a>  
@@ -415,9 +415,9 @@ ___
 
 See also:
  - [Terms common to all spring types](SpringDesign/spring_oview.html) 
- - [Compression spring](DesignTypes/c_spring.html) 
- - [Extension spring](DesignTypes/e_spring.html) 
- - [Torsion spring](DesignTypes/t_spring.html) 
+ - [Compression spring](/docs/Help/DesignTypes/c_spring.html) 
+ - [Extension spring](/docs/Help/DesignTypes/e_spring.html) 
+ - [Torsion spring](/docs/Help/DesignTypes/t_spring.html) 
 
 
 ___

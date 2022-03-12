@@ -5,10 +5,10 @@ coil spring types supported by ODOP:Spring.
 ___
 
 For specifics, see:   
-* [Advanced Spring Operations](./advancedSpringOperations.html)   
-* [Spring Materials](./materials.html)   
-* [Select Size and Select Catalog](./selectSizeCatalog.html)
-* [Spring Design References](./references.html)   
+* [Advanced Spring Operations](/docs/Help/SpringDesign/advancedSpringOperations.html)   
+* [Spring Materials](/docs/Help/SpringDesign/materials.html)   
+* [Select Size and Select Catalog](/docs/Help/SpringDesign/selectSizeCatalog.html)
+* [Spring Design References](/docs/Help/SpringDesign/references.html)   
 * [Compression Spring](../DesignTypes/c_spring.html)   
 * [Extension Spring](../DesignTypes/e_spring.html)   
 * [Torsion Spring](../DesignTypes/t_spring.html)   
@@ -45,7 +45,7 @@ ___
  It is not the intent of the ODOP:Spring documentation to teach spring design. 
  The ODOP:Spring program is aimed at experienced spring designers and
  engineers who have some background in strength of materials and failure theories. 
- The [Spring Design References](./references.html) documentation section contains 
+ The [Spring Design References](/docs/Help/SpringDesign/references.html) documentation section contains 
  a list of  reference works that cover spring design. 
  This section should be read in conjunction with other sections of the 
  ODOP:Spring documentation. 
@@ -169,7 +169,7 @@ life.  The calculation of FS\_CycleLife includes the material's
 endurance limit (Stress\_Lim\_Endur), static load and fluctuating
 component of stress in a calculation originally developed by Soderberg.
 Additional information on this calculation is available in the sources
-listed in [Spring Design References](./references.html).
+listed in [Spring Design References](/docs/Help/SpringDesign/references.html).
 
 Additional discussion on these topics is available in the sections
 below titled Factor Of Safety and Cycle Life.
@@ -245,7 +245,7 @@ The design equations in the current release of ODOP:Spring do NOT cover all
 possible spring applications.
 
 More precise treatments of this subject are available in the sources listed 
-in the [Spring Design References](./references.html) section of the documentation.
+in the [Spring Design References](/docs/Help/SpringDesign/references.html) section of the documentation.
 
 ___
 
@@ -418,7 +418,7 @@ to higher allowable stresses whenever smaller wire diameters were
 considered by the Search process.  Because many designers are accustomed to
 designing to specific stress limits, ODOP:Spring has been programmed to
 also permit this approach. 
-Refer to [Design to Stress](./advancedSpringOperations.html) for additional information.
+Refer to [Design to Stress](/docs/Help/SpringDesign/advancedSpringOperations.html) for additional information.
 
 The factor of safety concept applies to both static loads and cycle life.
 The calculation of FS\_CycleLife includes the material's endurance limit
@@ -428,7 +428,7 @@ normally determined by the materials table and the user's selection of
 cycle life and surface treatment (shot peening) with Life\_Category. 
 Additional information on the cycle life calculation is
 available in the documentation sections for the specific spring types
-and also in the sources listed in [Spring Design References](./references.html).
+and also in the sources listed in [Spring Design References](/docs/Help/SpringDesign/references.html).
    
 Refer to additional discussion in the sections titled Spring Basics (above), 
 NAMES (above and specific spring type sections) and Cycle Life (below).  
@@ -483,8 +483,8 @@ In general, the user may ignore these details and simply
 establish material property values by selecting a Material\_Type. 
 In the case that more control of material property data entering 
 the calculations is desired, the details provided in 
-[Prop_Calc_Method](./advancedSpringOperations.html) and 
-[Materials](./materials.html) may be useful. 
+[Prop_Calc_Method](/docs/Help/SpringDesign/advancedSpringOperations.html) and 
+[Materials](/docs/Help/SpringDesign/materials.html) may be useful. 
 
 Examples of these procedures are presented in tutorial section TUTOR5.
 
@@ -524,7 +524,7 @@ documentation sections on the specific spring types:
 * [Torsion Spring](../DesignTypes/t_spring.html)   
 
 Additional information on spring end types is available in the sources listed
-in [Spring Design References](./references.html).   
+in [Spring Design References](/docs/Help/SpringDesign/references.html).   
 
 ___
 
@@ -590,7 +590,7 @@ life category.
 
 Additional information on the cycle life calculation is available in
 tutorial session TUTOR4, in the documentation on the specific spring types 
-and also in the sources listed in [Spring Design References](./references.html).
+and also in the sources listed in [Spring Design References](/docs/Help/SpringDesign/references.html).
    
 ___
 
@@ -667,7 +667,7 @@ ___
 
 **References**   
 
-Refer to: [Spring Design References](./references.html)
+Refer to: [Spring Design References](/docs/Help/SpringDesign/references.html)
 
 ___
 

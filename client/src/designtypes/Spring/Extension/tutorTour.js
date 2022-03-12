@@ -446,7 +446,7 @@ export const execute = {
             title: "Page 19 of 20",
             text: (
                 <>
-                <Image fluid src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
+                <Image fluid src="/docs/Help/png/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
                 </>
             )
         },

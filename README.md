@@ -1,20 +1,27 @@
-![ODOP logo](./client/public/favicon.ico "ODOP logo") 
-### Open Design Optimization Platform &nbsp; (ODOP)
+![ODOP logo](./client/public/favicon.ico "ODOP logo") ### Open Design Optimization Platform &nbsp; (ODOP)
 
 ODOP provides features and capabilities to facilitate the analysis and optimal design 
 of a broad range of problems that have a mathematical model available. 
 Currently available apps include:
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Spring/Compression/favicon.ico"> 
-<b>[Helical coil spring design](https://www.springdesignsoftware.org)</b> - a full-featured web app enabling the engineering design of compression, extension and torsion springs    
+<b>[Compression spring design](https://odop.herokuapp.com/?type=Spring%2FCompression)</b> - a full-featured web app enabling the engineering design of compression springs    
+<br />
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Spring/Extension/favicon.ico"> 
+<b>[Extension spring design](https://odop.herokuapp.com/?type=Spring%2FExtension)</b> - a full-featured web app enabling the engineering design of extension springs    
+<br />
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Spring/Torsion/favicon.ico"> 
+<b>[Torsion spring design](https://odop.herokuapp.com/?type=Spring%2FTorsion)</b> - a full-featured web app enabling the engineering design of torsion springs    
 <br />
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Solid/favicon.ico"> 
-<b>[Rectangular Solid](https://odop.herokuapp.com/docs/Help/DesignTypes/r_solid.html)</b> - a familiar to everyone demonstration case   
+<b>[Rectangular Solid](https://odop.herokuapp.com/?type=Solid)</b> - a familiar to everyone demonstration case   
 <br />
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Piston-Cylinder/favicon.ico"> 
-<b>[Piston-Cylinder design](https://odop.herokuapp.com/docs/Help/DesignTypes/pcyl.html)</b> - a simple demonstration case   
+<b>[Piston-Cylinder design](https://odop.herokuapp.com/?type=Piston-Cylinder)</b> - a simple demonstration case   
 
 &nbsp;
 

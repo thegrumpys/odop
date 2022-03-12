@@ -43,21 +43,21 @@ See: [User Accounts](../About/userAccounts.html) for details on
 how to obtain an account.   
 
 **Screen capture of the sign-in page:**   
-![Sign-in screen](./png/SignInWidgetExpanded.png "Sign-in screen")  
+![Sign-in screen](/docs/Help/png/SignInWidgetExpanded.png "Sign-in screen")  
   
 &nbsp;
 
 Once logged in, you will reach a screen where it is possible to select 
 a design type and a starting design.   
 
-![Select design type and starting design](./png/SelectSolid.png "Select design type and starting design")
+![Select design type and starting design](/docs/Help/png/SelectSolid.png "Select design type and starting design")
   
 &nbsp;
 
 After opening a specific design, you will reach ODOP's main page.
 This screen capture illustrates the default (Startup) design of the Rectangular Solid design type.   
 
-![ODOP main page](./png/MainPageSolid.png "ODOP main page")
+![ODOP main page](/docs/Help/png/MainPageSolid.png "ODOP main page")
   
 &nbsp;
 

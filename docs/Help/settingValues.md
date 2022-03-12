@@ -6,11 +6,11 @@ ___
 
 Quick overview:
 
-![Free independent variable value input dialog box](./png/ValInpDlgIndepFreeNoted.png "Free independent variable value input dialog box")   
-![Fixed independent variable value input dialog box](./png/ValInpDlgIndepFixNoted.png "Fixed independent variable value input dialog box")   
+![Free independent variable value input dialog box](/docs/Help/png/ValInpDlgIndepFreeNoted.png "Free independent variable value input dialog box")   
+![Fixed independent variable value input dialog box](/docs/Help/png/ValInpDlgIndepFixNoted.png "Fixed independent variable value input dialog box")   
 
-![Free dependent variable value input dialog box](./png/ValInpDlgDepFreeNoted.png "Free dependent variable value input dialog box")   
-![Fixed dependent variable value input dialog box](./png/ValInpDlgDepFixNoted.png "Fixed Dependent variable value input dialog box")   
+![Free dependent variable value input dialog box](/docs/Help/png/ValInpDlgDepFreeNoted.png "Free dependent variable value input dialog box")   
+![Fixed dependent variable value input dialog box](/docs/Help/png/ValInpDlgDepFixNoted.png "Fixed Dependent variable value input dialog box")   
 
 ___   
 
@@ -109,7 +109,7 @@ Related topics:
 * [Search](search.html)
 * [Seek](seek.html)
 * [Trade](trade.html)
-* [Hints, Tips and Tricks](htt.html)   
+* [Hints, Tips and Tricks](/docs/Help/htt.html)   
 
  
 &nbsp;   

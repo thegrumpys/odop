@@ -9,7 +9,7 @@ you can select an available system provided design with "metric" in the name in 
 utilize metric units (mm, Newtons).   
 
 **Compression spring default designs**   
-![Compression spring default designs](./png/FileOpen_defaultDesigns.png "File : Open default designs")  
+![Compression spring default designs](/docs/Help/png/FileOpen_defaultDesigns.png "File : Open default designs")  
 
 When saving designs into a private section of the ODOP design library, 
 it is possible to save (**File : Save As** menu item) a private design "on top of" 

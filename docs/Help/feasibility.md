@@ -33,7 +33,7 @@ feedback on the viability of the current design relative to constraints and FIXe
  Alter the values of the active constraint levels to more appropriate values by making
  entries in the "value" column under "Min Constraint" or Max Constraint" headings.  
  
- The Help section titled WHAT TO DO IF in [Spring Overview](./SpringDesign/spring_oview.html) describes a 
+ The Help section titled WHAT TO DO IF in [Spring Overview](/docs/Help/SpringDesign/spring_oview.html) describes a 
  number of possible  (probable) constraint conflicts and recommends a few solutions. 
  For example, confirm that any variables in fixed status 
  (check-boxes in the "Fix" column) 

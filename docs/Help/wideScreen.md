@@ -25,14 +25,14 @@ At a minimum, each design type is supplied with a default design by the name of 
 Leave this startup design selected in order to continue with the 
 ODOP Introduction and Getting Started instructions.   
 
-![Start with Rectangular Solid](./png/SelectSolid.png "Start with Rectangular Solid")
+![Start with Rectangular Solid](/docs/Help/png/SelectSolid.png "Start with Rectangular Solid")
  
 &nbsp;
 
 The resulting configuration of two browser sessions on a wide-screen monitor 
 should look something like:   
 
-![Side-by-side browsers](./png/SideBySideBrowsers.png "Side-by-side browsers")   
+![Side-by-side browsers](/docs/Help/png/SideBySideBrowsers.png "Side-by-side browsers")   
  
 &nbsp;
 

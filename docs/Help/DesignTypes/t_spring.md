@@ -92,7 +92,7 @@ ___
 The following diagram may be of some assistance in interpreting the names 
 associated with various dimensions of a torsion spring.  
    
-![Torsion Spring Names](./png/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](/docs/Help/DesignTypes/png/TorsionNames.png "Torsion Spring Names")   
 
 &nbsp;   
    
@@ -317,7 +317,7 @@ Separately, the values of Arm\_1, Arm\_2, L\_End\_1, L\_End\_2, XLen\_1 and XLen
 describe end conditions. 
 This diagram  may be helpful.   
 
-![Torsion Spring Names](./png/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](/docs/Help/DesignTypes/png/TorsionNames.png "Torsion Spring Names")   
 
 &nbsp;
 
@@ -337,15 +337,11 @@ Eclipse .md Preview suppressed display of everything after the comment header.
 The following lines are alternate syntax for in-line image links   
 See docs/procedures/ImageLocations for preferred approach on image path.   
 
-![Torsion Spring Names](./png/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](/docs/Help/DesignTypes/png/TorsionNames.png "Torsion Spring Names")   
 
-<img src="../../../client/public/designtypes/Spring/Torsion/TorsionNames.png" alt="Torsion Spring Names"/>
+<img src="/docs/Help/DesignTypes/png/TorsionNames.png" alt="Torsion Spring Names"/>
 
-<img src="https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Torsion/TorsionNames.png" alt="Torsion Spring Names"/>   
-
-![Torsion Spring Names](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names")   
-
-![Torsion Spring Names](https://odop.herokuapp.com/designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](https://odop.herokuapp.com/docs/Help/DesignTypes/png/TorsionNames.png "Torsion Spring Names")   
 
 -->
 

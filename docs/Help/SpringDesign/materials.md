@@ -64,7 +64,7 @@ the defaults built into the program.
 Establish material property values simply by selecting a Material\_Type. 
 In the case that more control of material property data entering 
 the calculations is desired, the details provided below and in 
-[Prop_Calc_Method](./advancedSpringOperations.html) may be useful. 
+[Prop_Calc_Method](/docs/Help/SpringDesign/PCylDiagram.pngadvancedSpringOperations.html) may be useful. 
 
 Examples of these procedures are presented in tutorial section TUTOR5.
    
@@ -153,7 +153,7 @@ previously saved design, the complete status of the design will be restored.
 
 Additional information on controlling the way material property data is
 used in the calculations is presented in the section 
-[Design to Stress](./advancedSpringOperations.html).
+[Design to Stress](/docs/Help/SpringDesign/advancedSpringOperations.html).
 
 
 [Spring Design Topics](./)   
