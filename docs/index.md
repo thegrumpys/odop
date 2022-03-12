@@ -33,8 +33,8 @@
 * [Printing](Help/htt#printing.html)
 * [Hints, Tips and Tricks](Help/htt.html)
 * [AutoSave](Help/autoSave.html)
-* [Available Design Types](Help/DesignTypes.html)
-* [Spring Design](Help/SpringDesign.html)
+* [Available Design Types](Help/DesignTypes)
+* [Spring Design](Help/SpringDesign)
 * [About topics](About)   
 
 

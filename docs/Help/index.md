@@ -16,6 +16,6 @@
 * [Printing](htt.html#printing)
 * [Hints, Tips and Tricks](htt.html)
 * [AutoSave](autoSave.html)
-* [Available Design Types](DesignTypes.html)
-* [Spring Design](SpringDesign.html)
+* [Available Design Types](DesignTypes)
+* [Spring Design](SpringDesign)
 * [About topics](../About)
