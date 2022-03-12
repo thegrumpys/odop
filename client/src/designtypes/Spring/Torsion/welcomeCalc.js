@@ -13,11 +13,11 @@ export const execute = {
                     </p>
 
                     <p>
+                    The existing values are an arbitrary starting point. 
+                    Modify them to meet your requirements. 
                     Values in the white background fields can be controlled by user input. 
                     Control of Dependent Variables (marked with an asterisk) requires a Search.  
                     Calculation results appear in the light gray background fields.
-                    The existing values are an arbitrary starting point. 
-                    Modify them to meet your requirements. 
                     </p>
 
                     <p>
@@ -101,7 +101,7 @@ export const execute = {
                 <>
                     <p>
                     The multi-colored 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/feasibility" target="_blank" rel="noopener noreferrer">Feasibility Status indicator</a>,&nbsp; 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/feasibility" target="_blank" rel="noopener noreferrer">Feasibility Status indicator</a>&nbsp; 
                     provides feedback on the viability of the current design.
                     See also: 
                     &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; and 
