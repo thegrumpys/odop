@@ -4,6 +4,7 @@ import { Alert, Button, Container, Row } from 'react-bootstrap';
 import { load } from '../store/actionCreators';
 import { connect } from 'react-redux';
 import config from '../config';
+import { changeResultTerminationCondition } from '../store/actionCreators';
 
 export var startExecute = function(prefix,execute_name,steps) {
 //    console.log('In startExecute this=',this,'prefix=',prefix,'execute_name=',execute_name,'steps=',steps);
@@ -95,6 +96,7 @@ class ExecutePanel extends Component {
             title: '',
             text: '',
         });
+        this.props.changeResultTerminationCondition(''); // Reset any leftover messages
     }
 
     onNext() {
@@ -179,6 +181,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+    changeResultTerminationCondition: changeResultTerminationCondition,
 };
 
 export default connect(

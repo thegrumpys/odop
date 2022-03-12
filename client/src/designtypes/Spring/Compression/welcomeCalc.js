@@ -93,8 +93,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                logUsage('event','welcomeCalc', { 'event_label': 'Page 02 of 04' }),
-                changeResultTerminationCondition('')
+                logUsage('event','welcomeCalc', { 'event_label': 'Page 02 of 04' })
             ]
         },
         {
