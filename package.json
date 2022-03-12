@@ -9,11 +9,11 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build",
+    "heroku-postbuild": "cd client && npm install && npm run build && cd .. && npm run harp-compile",
     "test": "mocha --timeout 10000",
     "coverage": "nyc --reporter=html node_modules/mocha/bin/_mocha --timeout 10000",
     "showcoverage": "open coverage/index.html",
-    "harp-compile": "cd docs && harp compile . /home/mikmil36/springdesignsoftware.org/odop/docs",
+    "harp-compile": "cd docs && harp compile . ../client/public/docs",
     "harp-server": "cd docs && harp server --port 8080"
   },
   "repository": {

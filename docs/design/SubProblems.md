@@ -1,6 +1,6 @@
 ####  Sub-Problems feature
 
-The entry [Ideas for a web page menu structure](./menu) briefly introduced a possible implementation of a sub-problem capability.
+The entry [Ideas for a web page menu structure](./menu.html) briefly introduced a possible implementation of a sub-problem capability.
 This entry is intended to provide more detail.
 
 Experience with early design optimization software revealed that users of large design problems desire the ability to

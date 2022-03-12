@@ -30,7 +30,7 @@ use the <b>File : Save</b> or <b>File : Save As</b>
 menu item to save your work before starting a session.
  
 See: 
-[Spring design tutorial and demo](gettingStartedSpring)
+[Spring design tutorial and demo](gettingStartedSpring.html)
 for details on starting the spring design tutorial and demo sessions.   
  &nbsp; 
   

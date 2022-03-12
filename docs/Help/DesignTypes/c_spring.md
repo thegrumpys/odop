@@ -10,15 +10,15 @@ provides important supplemental information.
 ___
 
 **On this page:**  
-[Compression spring force-deflection diagram](c_spring#c_springFD_Diag)  
-[Compression spring force-deflection point names](c_spring#c_springFD_Names)  
-[Independent Variable names](c_spring#c_springIV_Names)  
-[Dependent Variable names](c_spring#c_springDV_Names)  
-[Calculation Input names](c_spring#c_springCalcInputNames)  
-[Values in reports](c_spring#c_springOtherValues)  
-[Constraints unique to compression springs](c_spring#c_springConstraints)  
-[Compression spring end types](c_spring#c_springEndTypes)  
-[Buckling](c_spring#c_springBuckling)  
+[Compression spring force-deflection diagram](c_spring.html#c_springFD_Diag)  
+[Compression spring force-deflection point names](c_spring.html#c_springFD_Names)  
+[Independent Variable names](c_spring.html#c_springIV_Names)  
+[Dependent Variable names](c_spring.html#c_springDV_Names)  
+[Calculation Input names](c_spring.html#c_springCalcInputNames)  
+[Values in reports](c_spring.html#c_springOtherValues)  
+[Constraints unique to compression springs](c_spring.html#c_springConstraints)  
+[Compression spring end types](c_spring.html#c_springEndTypes)  
+[Buckling](c_spring.html#c_springBuckling)  
 
 &nbsp;
 ___
@@ -167,7 +167,7 @@ ___
                     point 1 and point 2.
 
 &nbsp;
-For additional information: [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
+For additional information: [Cycle_Life](../SpringDesign/spring_oview.html#cycleLife)  
 &nbsp;
    
 ___
@@ -246,9 +246,9 @@ ___
 
 &nbsp;
 For additional information: 
- - [Materials](../SpringDesign/materials)   
- - [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
- - [Compression spring end types](c_spring#c_springEndTypes)   
+ - [Materials](../SpringDesign/materials.html)   
+ - [Cycle_Life](../SpringDesign/spring_oview.html#cycleLife)  
+ - [Compression spring end types](c_spring.html#c_springEndTypes)   
 &nbsp;
    
 ___
@@ -297,7 +297,7 @@ load.  In that case, the spring will usually need support in the form of
 a sleeve or post.  In order to restrain the search to select designs
 that do not have a tendency to buckle, set the value of Slenderness MAX
 to a value of 4.0 or less. 
-For additional information, see: [Buckling](c_spring#c_springBuckling)  
+For additional information, see: [Buckling](c_spring.html#c_springBuckling)  
 
 
 %\_Avail\_Deflect is the percentage of available deflection consumed at
@@ -409,7 +409,7 @@ bucking for each specific design and loading condition.  Both the
 fixed-free and fixed-fixed end conditions are covered.
 
 More precise treatments of this subject are available in the sources listed
-in the [Spring Design References](../SpringDesign/references) section 
+in the [Spring Design References](../SpringDesign/references.html) section 
 of the documentation.
 
 &nbsp;

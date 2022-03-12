@@ -1,6 +1,6 @@
 ## Launching the Program   
 
-As noted in the [requirements](../About/requirements) page, 
+As noted in the [requirements](../About/requirements.html) page, 
 it is not necessary to load any software on your computer in order to run the 
 ODOP software. 
 Only an Internet connection and recent web browser are necessary.
@@ -12,7 +12,7 @@ is recommended.
 Where a wide-screen monitor is in use, 
 it should be possible to view both the program and on-line Help entries 
 simultaneously in separate, non-overlapping windows.
-See: [Utilizing on-line Help with a widescreen monitor](wideScreen) for additional details. 
+See: [Utilizing on-line Help with a widescreen monitor](wideScreen.html) for additional details. 
 If a wide-screen monitor is not available, 
 you can operate with this Help content in one
 browser tab while the ODOP app is in another browser tab.
@@ -39,7 +39,7 @@ within any specific 30 minute period.
 While a user account is not required to access the ODOP software,
 an account with associated username and password is necessary to save designs into 
 the cloud-based ODOP "Design Library".
-See: [User Accounts](../About/userAccounts) for details on
+See: [User Accounts](../About/userAccounts.html) for details on
 how to obtain an account.   
 
 **Screen capture of the sign-in page:**   

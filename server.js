@@ -36,7 +36,7 @@ app.use(bodyParser.json({ type: 'application/json' }));
 // Dump debugging output for each request
 app.use(function (req, res, next) {
     console.log('SERVER: ===========================================================');
-    console.log('SERVER: In USE req.ip=',req.ip,' req.method=',req.method,' req.originalUrl=',req.originalUrl);
+    console.log('SERVER: In USE req.originalUrl=',req.originalUrl,'req.ip=',req.ip,'req.method=',req.method);
     next();
 });
 
@@ -44,7 +44,7 @@ app.use(function (req, res, next) {
 function startConnection() {
     var connection;
     if (process.env.NODE_ENV === "test") { // Are we running on test?
-//        console.log('SERVER: In Connecting process.env.JAWSDB_TEST_URL
+//        console.log('SERVER: In Connecting process.env.JAWSDB_TEST_URL=',process.env.JAWSDB_TEST_UR);
         connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
     } else { // Are we running anywhere else: production, staging, or development?
 //        console.log('SERVER: In Connecting process.env.JAWSDB_URL=', process.env.JAWSDB_URL);
@@ -346,13 +346,19 @@ app.post('/api/v1/usage_log', (req, res) => {
     });
 });
 
+//app.get('/docs', (req, res) => {
+//    console.log('req=', req);
+//});
+
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
+//    console.log('process.env.NODE_ENV == Production or staging');
     // If it’s not https already, redirect the same url on https.
     app.use((req, res, next) => {
       if (req.header('x-forwarded-proto') !== 'https') {
         console.log("SERVER: In USE Redirect PATH=",path.join(__dirname, 'client/build', 'index.html'));
         res.redirect(`https://${req.header('host')}${req.url}`);
       } else {
+//        console.log("SERVER: In USE next");
         next();
       }
     })
@@ -362,9 +368,11 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
     );
     // Handle React routing, return all requests to React app
     app.get('*', function (req, res, next) {
-      console.log("SERVER: In GET * PATH=",path.join(__dirname, 'client/build', 'index.html'));
-      res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+        console.log("SERVER: In GET * PATH=",path.join(__dirname, 'client/build', 'index.html'));
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
+} else {
+//    console.log('process.env.NODE_ENV != production or staging');
 }
 
 const port = process.env.PORT || 5000;

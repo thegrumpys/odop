@@ -90,7 +90,7 @@ export const execute = {
             title: "Page 04 of 14",
             text: (
                 <>
-                   <Image fluid src="https://www.springdesignsoftware.org/odop/docs/About/png/DesignProcessFlowDiagram.png" alt="DesignProcessFlowDiagram"/>
+                   <Image fluid src="/docs/About/png/DesignProcessFlowDiagram.png" alt="DesignProcessFlowDiagram"/>
                 </>
             )
         },
@@ -181,7 +181,7 @@ export const execute = {
                     trivial amount, the program will display "<b>FEASIBLE</b>" in the Result section.
                     If the search process is unable to find a solution, the red "<b>NOT FEASIBLE</b>" will persist.
                     The on-line Help entry covering the multi-color 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/feasibilityIndicator" target="_blank" rel="noopener noreferrer">Feasibility Indicator</a>&nbsp;
+                    &nbsp;<a href="/docs/Help/feasibilityIndicator" target="_blank" rel="noopener noreferrer">Feasibility Indicator</a>&nbsp;
                     provides additional details. 
                     </p>
 
@@ -345,7 +345,7 @@ export const execute = {
                     Several more demo problems are available. 
                     They are named demo1, demo2, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a list of topics.
                     </p>
                     

@@ -20,7 +20,7 @@ will again be available.
 
 While the system provided designs have multiple constraints established, 
 as provided, they are "under specified". 
-For more information on this point see: [Design Situations](designSituations).   
+For more information on this point see: [Design Situations](designSituations.html).   
 
 The constraints established in the default designs serve to guide or contain the solution to 
 reasonable and expected results.
@@ -33,8 +33,8 @@ To get started on a new design, open a system provided design and express the go
 Invoke the Search feature (**Action : Search** menu) to discover if a feasible solution is available.
 More information on how to proceed is available in the tutorials (**Help : Tutorial...** menu) 
 and in other on-line Help topics such as 
-[Getting Started With the Spring Tutorial and Demo](gettingStartedSpring) and 
-[Intro Pages Overview](../About/introPagesOverview).  
+[Getting Started With the Spring Tutorial and Demo](gettingStartedSpring.html) and 
+[Intro Pages Overview](../About/introPagesOverview.html).  
 
 &nbsp;
 

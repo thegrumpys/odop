@@ -3,26 +3,26 @@
 The following terms have special meanings used in the context of this program.
 
 **On this page:**  
-[MATHEMATICAL MODEL](terminology#mathModel)  
-[DESIGN TYPES](terminology#designTypes)  
-[INDEPENDENT VARIABLES](terminology#independentVar)  
-[DEPENDENT VARIABLES](terminology#dependentVar)  
-[CALCULATION INPUTS](terminology#calcInputs)  
-[CONSTRAINTS](terminology#constraints)  
-[CONSTRAINT VIOLATIONS](terminology#constraintViol)  
-[FUNCTION CONSTRAINTS (FDCL)](terminology#fdcl)  
-[FIX](terminology#fix)  
-[AUTOFIX](terminology#autoFix)  
-[FEASIBLE REGION](terminology#feasibleRegion)  
-[OBJECTIVE FUNCTION](terminology#obj)  
-[PREFERENCES](terminology#preferences)  
-[PROPERTIES](terminology#properties)  
-[EQUATION SETS](terminology#eqnSet)  
-[SEARCH](terminology#search)  
-[ODOP DESIGN LIBRARY](terminology#designLib)  
-[MIGRATION](terminology#migration)  
-[SPRING DESIGN VARIABLE NAMES](terminology#sdnames)  
-[FACTOR OF SAFETY](terminology#FactorOfSafety)  
+[MATHEMATICAL MODEL](terminology.html#mathModel)  
+[DESIGN TYPES](terminology.html#designTypes)  
+[INDEPENDENT VARIABLES](terminology.html#independentVar)  
+[DEPENDENT VARIABLES](terminology.html#dependentVar)  
+[CALCULATION INPUTS](terminology.html#calcInputs)  
+[CONSTRAINTS](terminology.html#constraints)  
+[CONSTRAINT VIOLATIONS](terminology.html#constraintViol)  
+[FUNCTION CONSTRAINTS (FDCL)](terminology.html#fdcl)  
+[FIX](terminology.html#fix)  
+[AUTOFIX](terminology.html#autoFix)  
+[FEASIBLE REGION](terminology.html#feasibleRegion)  
+[OBJECTIVE FUNCTION](terminology.html#obj)  
+[PREFERENCES](terminology.html#preferences)  
+[PROPERTIES](terminology.html#properties)  
+[EQUATION SETS](terminology.html#eqnSet)  
+[SEARCH](terminology.html#search)  
+[ODOP DESIGN LIBRARY](terminology.html#designLib)  
+[MIGRATION](terminology.html#migration)  
+[SPRING DESIGN VARIABLE NAMES](terminology.html#sdnames)  
+[FACTOR OF SAFETY](terminology.html#FactorOfSafety)  
 
 ___
 
@@ -73,7 +73,7 @@ Once values are selected for each independent variable,
 the design is completely determined. 
 For independent variables, a Fix status reduces the computational demand 
 of the numerical search problem.
-See the [Fix](terminology#fix) entry below for more details.
+See the [Fix](terminology.html#fix) entry below for more details.
 
 ___
 
@@ -85,12 +85,12 @@ The dependent variables are the outputs of the design equations.
 They are the quantities on the left hand side of the equal sign.
 Frequently, dependent variables are measures of the performance of a given
 design and can be thought of as indicating the "state" of the design. 
-A [Search](terminology#search) is required to establish appropriate values of the
+A [Search](terminology.html#search) is required to establish appropriate values of the
 independent variables to produce the desired value of a dependent
 variable in Fix status.  
 A a dependent variable in Fix status increases the
 computational demand of the numerical search problem.
-See the [FIX](terminology#fix) entry below for more details.
+See the [FIX](terminology.html#fix) entry below for more details.
 
 ___
 
@@ -114,14 +114,14 @@ problem.  Either dependent or independent variables may be constrained to
 be greater than or less than a simple constant or a functionally
 determined quantity such as a different dependent or independent
 variable or Calculation Input. 
-The section below on [FUNCTION CONSTRAINTS](terminology#fdcl) 
+The section below on [FUNCTION CONSTRAINTS](terminology.html#fdcl) 
 provides more information on this subject.
 
 In order to establish a constraint, it is necessary to check the corresponding
 Minimum or Maximum constraint checkbox and enter a value for the desired 
 constraint level in the corresponding entry field.
 
-If any constraint is violated, a [Search](search) operation is 
+If any constraint is violated, a [Search](search.html) operation is 
 required to establish appropriate values of the free (not Fix status) 
 Independent Variables to meet the specified constraint levels.
 In order to save time and provide more predictable operation,
@@ -129,7 +129,7 @@ ODOP will stop the search process if it gets very close to a feasible design
 but still violates one or more constraints by a fraction of a percent. 
 In this case, the design is referred to as "marginally feasible".
 
-[Design Situations](designSituations) provides more insights on how
+[Design Situations](designSituations.html) provides more insights on how
 constraints are used to properly specify a design problem.
 
 ___
@@ -162,7 +162,7 @@ as choices to be selected as constraints are configured in the design type's
 initialState.   
 
 More specific information is available in the On-line Help section covering 
-[extension spring constraints](DesignTypes/e_spring#e_springConstraints).
+[extension spring constraints](DesignTypes/e_spring.html#e_springConstraints).
 
 ___
 
@@ -186,7 +186,7 @@ While not a significant concern,
 this increases the computational effort required for the Search to find a solution.
 Once the appropriate Fix checkbox is checked, 
 enter a target value in either the Minimum or Maximum constraint level entry field.
-A  [Search](terminology#search) (Action : Search menu) is required to establish the desired values.
+A  [Search](terminology#search.html) (Action : Search menu) is required to establish the desired values.
 
 Clearing the checkbox (Free status) allows the Search to alter the value of the corresponding variable
 subject to constraints, if established.
@@ -202,7 +202,7 @@ Establishing additional constraints and placing variables in Fix status
 can reduce the ability of Search to find a feasible solution.
 Too many constraints and variables in Fix status can create an over-specified situation. 
 
-See also: [Design Situations](designSituations)
+See also: [Design Situations](designSituations.html)
 
 ___
 
@@ -223,7 +223,7 @@ The preference value "enable_auto_fix", accessed through the File : Preferences.
 controls operation of the AutoFix feature.
 In order to revert to the previous behavior, set the value of "enable_auto_fix" to 0.
 
-See also: [terminology Fix](terminology#fix) 
+See also: [terminology Fix](terminology.html#fix) 
 
 ___
 
@@ -246,7 +246,7 @@ permit the desired solution.  Perhaps the solution is to use a stronger
 material.  This can be represented by changing a material constant and
 re-executing the search. 
 Perhaps use of the TRADE feature is appropriate.
-For more information, see: [Trade](./trade).
+For more information, see: [Trade](./trade.html).
 
 ___
 
@@ -256,10 +256,10 @@ ___
 **OBJECTIVE FUNCTION**   
 The objective function constitutes the numerical search problem.  It is
 formed as a blend of violated constraints, dependent variable Fix 
-violations and in the case of the [SEEK](seek) feature, a "merit function" that
+violations and in the case of the [SEEK](seek.html) feature, a "merit function" that
 represents the variable under investigation.  The search algorithm works
 to drive the objective function to the lowest value possible.
-For more detail, see the [SEARCH](terminology#search) entry below.
+For more detail, see the [SEARCH](terminology.html#search) entry below.
 
 ___
 
@@ -270,7 +270,7 @@ ___
 Preference settings control the operation of the program. 
 They have no direct meaning to the design problem. 
 For more specific information, refer to the documentation section
-(on-line Help entry) on [Search](search) 
+(on-line Help entry) on [Search](search.html) 
 and Tutorial session tutor9.
 
 ___
@@ -293,9 +293,9 @@ The number of labels and the text of the label are established in the design typ
 source code in the initialState.js file.
 
 See also:   
-[File : Properties](menus#FileProperties)   
-[View : Reports](menus#ViewReports)   
-[Printing](htt#printing)
+[File : Properties](menus.html#FileProperties)   
+[View : Reports](menus.html#ViewReports)   
+[Printing](htt.html#printing)
 
 
 ___
@@ -308,21 +308,21 @@ The ODOP software allows for multiple design types and thus multiple sets of
 design equations (mathematical models of a specific design problem) 
 to be concurrently available. 
 Currently implemented Design Types include:
-* [Compression Spring](./DesignTypes/c_spring)   
-* [Extension Spring](./DesignTypes/e_spring)   
-* [Torsion Spring](./DesignTypes/t_spring)   
-* [Rectangular Solid](./DesignTypes/r_solid)
-* [Piston-Cylinder](./DesignTypes/pcyl) 
+* [Compression Spring](./DesignTypes/c_spring.html)   
+* [Extension Spring](./DesignTypes/e_spring.html)   
+* [Torsion Spring](./DesignTypes/t_spring.html)   
+* [Rectangular Solid](./DesignTypes/r_solid.html)
+* [Piston-Cylinder](./DesignTypes/pcyl.html) 
 
 The simplest way to use a different design type and equation set is to select a 
 design type that uses the desired equation set at the time that the ODOP 
 software first starts. 
 A default design named "Startup" should be available for each design type.
 An explanation of how to select a design type and open a design of that type 
-is provided in: [Getting Started](gettingStarted).   
+is provided in: [Getting Started](gettingStarted.html).   
 
 Additional information on how to implement new ODOP design types is available
-in the [NewDesignType](../procedures/NewDesignType) documentation.
+in the [NewDesignType](../procedures/NewDesignType.html) documentation.
 
 
 ___
@@ -336,9 +336,9 @@ The ODOP Search feature (<b>Action : Search</b> menu item or Search button)
 is used to find a feasible design. 
 The action of Search is conceptually similar to a manual recalculation operation in a spreadsheet program.   
 
-The [Search](search) algorithm manipulates the values of independent variables 
+The [Search](search.html) algorithm manipulates the values of independent variables 
 so as to minimize the Objective Value. 
-Because the [OBJECTIVE FUNCTION](terminology#obj) is constructed as a sum of 
+Because the [OBJECTIVE FUNCTION](terminology.html#obj) is constructed as a sum of 
 constraint and dependent variable Fix violations, 
 minimizing the Objective Value will minimize violations and 
 thus move in the direction of a feasible design.
@@ -351,7 +351,7 @@ Typically, this compromise violates multiple constraints.
 While the ODOP software is modular and can potentially support multiple numerical search algorithms, 
 the current ODOP software release supplies only one such numerical search algorithm.
 Additional information on the search algorithm is available in the 
-[Search](./search) Help entry.   
+[Search](./search.html) Help entry.   
 
 
 ___
@@ -365,7 +365,7 @@ a.k.a. "in the cloud".
 Design information stored in the design library does not appear on the local storage of your computer. 
 You must be logged in to an ODOP user account in order to save designs into the ODOP design library.    
 
-See: [User Accounts](../About/userAccounts) for details on how to obtain an account.
+See: [User Accounts](../About/userAccounts.html) for details on how to obtain an account.
 
 ___
 
@@ -409,15 +409,15 @@ ___
 **FACTOR OF SAFETY**   
 
 This term is described in detail in the spring design overview section: 
-[Factor of Safety](SpringDesign/spring_oview#FoS)
+[Factor of Safety](SpringDesign/spring_oview.html#FoS)
 
 ___
 
 See also:
- - [Terms common to all spring types](SpringDesign/spring_oview) 
- - [Compression spring](DesignTypes/c_spring) 
- - [Extension spring](DesignTypes/e_spring) 
- - [Torsion spring](DesignTypes/t_spring) 
+ - [Terms common to all spring types](SpringDesign/spring_oview.html) 
+ - [Compression spring](DesignTypes/c_spring.html) 
+ - [Extension spring](DesignTypes/e_spring.html) 
+ - [Torsion spring](DesignTypes/t_spring.html) 
 
 
 ___

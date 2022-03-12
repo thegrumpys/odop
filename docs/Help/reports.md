@@ -17,7 +17,7 @@ in each of the reports.
 Depending on the capabilities of the user's web browser,
 it should be possible to print the individual report pages or save 
 into .PDF format.
-For additional information, refer to [printing tips](htt#printing) 
+For additional information, refer to [printing tips](htt.html#printing) 
 and documentation on your browser's print function. 
 
 &nbsp;

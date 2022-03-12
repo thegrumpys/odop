@@ -3,34 +3,34 @@
 This topic covers the ODOP menu structure. 
 
 **On this page:**  
-[ODOP logo](menus#ODOPlogo)  
-[Sign In...](menus#SignIn)  
+[ODOP logo](menus.html#ODOPlogo)  
+[Sign In...](menus.html#SignIn)  
 
-[File : Open...](menus#FileOpen)  
-[File : Save](menus#FileSave)  
-[File : Save As...](menus#FileSaveAs)  
-[File : Delete...](menus#FileDelete)  
-[File : Import...](menus#FileImport)  
-[File : Export](menus#FileExport)  
-[File : Preferences](menus#FilePreferences)  
-[File : Properties](menus#FileProperties)  
+[File : Open...](menus.html#FileOpen)  
+[File : Save](menus.html#FileSave)  
+[File : Save As...](menus.html#FileSaveAs)  
+[File : Delete...](menus.html#FileDelete)  
+[File : Import...](menus.html#FileImport)  
+[File : Export](menus.html#FileExport)  
+[File : Preferences](menus.html#FilePreferences)  
+[File : Properties](menus.html#FileProperties)  
 
-[Action : Search](menus#ActionSearch)  
-[Action : Seek...](menus#ActionSeek)  
-[Action : Trade...](menus#ActionTrade)  
-[Action : Select Size...](menus#ActionSelectSize)  
-[Action : Select Catalog...](menus#ActionSelectCatalog)  
-[Action : Execute...](menus#ActionExecute)  
+[Action : Search](menus.html#ActionSearch)  
+[Action : Seek...](menus.html#ActionSeek)  
+[Action : Trade...](menus.html#ActionTrade)  
+[Action : Select Size...](menus.html#ActionSelectSize)  
+[Action : Select Catalog...](menus.html#ActionSelectCatalog)  
+[Action : Execute...](menus.html#ActionExecute)  
 
-[View : Advanced](menus#ViewAdvanced)  
-[View : Calculator](menus#ViewCalculator)  
-[View : Reports](menus#ViewReports)  
+[View : Advanced](menus.html#ViewAdvanced)  
+[View : Calculator](menus.html#ViewCalculator)  
+[View : Reports](menus.html#ViewReports)  
 
-[Help : Message of the Day](menus#HelpMotD)  
-[Help : Index](menus#HelpIndex)  
-[Help : Demo...](menus#HelpDemo)  
-[Help : Tutorial...](menus#HelpTutorial)  
-[Help : About](menus#HelpAbout)  
+[Help : Message of the Day](menus.html#HelpMotD)  
+[Help : Index](menus.html#HelpIndex)  
+[Help : Demo...](menus.html#HelpDemo)  
+[Help : Tutorial...](menus.html#HelpTutorial)  
+[Help : About](menus.html#HelpAbout)  
 
 ___
 
@@ -54,7 +54,7 @@ it is good practice to save your work (**File : Save** or **File : Export**)
 before invoking a reset of the app.  
 
 See also:   
-[AutoSave](autoSave)   
+[AutoSave](autoSave.html)   
 
 ___
 
@@ -67,7 +67,7 @@ The Sign In button appears on the menu bar between the ODOP logo and the File me
 Use the Sign In button to create a new user account or log into an existing account.  
 
 See also:   
-[User Accounts](../About/userAccounts)   
+[User Accounts](../About/userAccounts.html)   
 
 ___
 
@@ -90,11 +90,11 @@ The units system, for example, US Customary units (inches, pounds)
 or metric units (mm, newtons) is established by the selected starting design.
 
 See also:   
-[Default Designs](defaultDesigns)   
-[User Accounts](../About/userAccounts)   
-[Units: US customary and metric](SpringDesign/unitsUSmetric)  
-[Import and Export](htt#fileImportAndExport)  
-[ODOP Design Library](terminology#designLib)
+[Default Designs](defaultDesigns.html)   
+[User Accounts](../About/userAccounts.html)   
+[Units: US customary and metric](SpringDesign/unitsUSmetric.html)  
+[Import and Export](htt.html#fileImportAndExport)  
+[ODOP Design Library](terminology.html#designLib)
 
 ___
 
@@ -108,8 +108,8 @@ It is necessary to be logged into a user account.
 If not logged in to a user account, a pop-up providing a Sign In opportunity will appear.
 
 See also:   
-[Default Designs](defaultDesigns)   
-[User Accounts](../About/userAccounts)   
+[Default Designs](defaultDesigns.html)   
+[User Accounts](../About/userAccounts.html)   
 
 ___
 
@@ -123,8 +123,8 @@ It is necessary to be logged into a user account.
 If not logged in to a user account, a pop-up providing a Sign In opportunity will appear.
 
 See also:   
-[Default Designs](defaultDesigns)   
-[User Accounts](../About/userAccounts)   
+[Default Designs](defaultDesigns.html)   
+[User Accounts](../About/userAccounts.html)   
 
 ___
 
@@ -144,8 +144,8 @@ System provided designs are marked "[ReadOnly]".
 There is no un-delete feature.
 
 See also:   
-[Default Designs](defaultDesigns)   
-[User Accounts](../About/userAccounts)   
+[Default Designs](defaultDesigns.html)   
+[User Accounts](../About/userAccounts.html)   
 
 ___
 
@@ -157,8 +157,8 @@ ___
 The File : Import menu item restores a previously exported design as the current design.   
 
 See also:   
-[Import and Export](htt#fileImportAndExport)  
-[File : Export](menus#FileExport)  
+[Import and Export](htt.html#fileImportAndExport)  
+[File : Export](menus.html#FileExport)  
 
 ___
 
@@ -172,8 +172,8 @@ By default, the file is placed in the user's download folder (directory) with a 
 Use browser settings to control the default download folder or be prompted to specify a folder every time.   
 
 See also:   
-[Import and Export](htt#fileImportAndExport)  
-[File : Import...](menus#FileImport)  
+[Import and Export](htt.html#fileImportAndExport)  
+[File : Import...](menus.html#FileImport)  
 [.json files](https://en.wikipedia.org/wiki/JSON)
 
 
@@ -190,8 +190,8 @@ Most of these values control behavior of the numerical search algorithm.
 A few control aspects of the on-screen display for Advanced View.
 
 See also:   
-[Search](search)   
-[Terminology - Preferences](terminology#preferences)
+[Search](search.html)   
+[Terminology - Preferences](terminology.html#preferences)
 
 
 ___
@@ -225,9 +225,9 @@ The number of text strings and default labels for these text strings are part
 of the initialState definition for each design type.
 
 See also:   
-[View : Reports](menus#ViewReports)   
-[Terminology - Properties](terminology#properties)  
-[Printing](htt#printing)
+[View : Reports](menus.html#ViewReports)   
+[Terminology - Properties](terminology.html#properties)  
+[Printing](htt.html#printing)
 
 
 ___
@@ -246,7 +246,7 @@ Specifically,
 Fixed status causes Search to achieve or hold a specified value. 
 Free status allows Search to manipulate that variable to achieve a feasible design. 
 
-Search operates to minimize the value of the [objective function](terminology#obj). 
+Search operates to minimize the value of the [objective function](terminology.html#obj). 
 The current design is used as a starting point. 
 Search stops if the Objective Value falls below OBJMIN.  
 
@@ -259,13 +259,13 @@ The tooltip associated with the "Status" label of multi-color Feasibility Indica
 the numeric values of the current Objective Value and OBJMIN. 
 
 See also:   
-[Search](search)   
-[Feasibility](feasibility)   
-[Feasible Region](terminology#feasibleRegion)  
-[Design Situations](designSituations)   
-[Constraints](terminology#constraints)   
-[FIX and FREE](terminology#fix)   
-[File : Preferences](menus#FilePreferences)   
+[Search](search.html)   
+[Feasibility](feasibility.html)   
+[Feasible Region](terminology.html#feasibleRegion)  
+[Design Situations](designSituations.html)   
+[Constraints](terminology.html#constraints)   
+[FIX and FREE](terminology.html#fix)   
+[File : Preferences](menus.html#FilePreferences)   
 
 ___
 
@@ -288,10 +288,10 @@ at the upper portion of the main page (Advanced and Calculator views).
 
 
 See also:   
-[Seek](seek)   
-[Feasibility](feasibility)   
-[Feasible Region](terminology#feasibleRegion)  
-[Design Situations](designSituations)
+[Seek](seek.html)   
+[Feasibility](feasibility.html)   
+[Feasible Region](terminology.html#feasibleRegion)  
+[Design Situations](designSituations.html)
 
 
 ___
@@ -317,10 +317,10 @@ the opportunity to accept that set of constraints.
 
 
 See also:   
-[Trade](trade)   
-[Feasibility](feasibility)   
-[Feasible Region](terminology#feasibleRegion)  
-[Design Situations](designSituations)
+[Trade](trade.html)   
+[Feasibility](feasibility.html)   
+[Feasible Region](terminology.html#feasibleRegion)  
+[Design Situations](designSituations.html)
 
 
 ___
@@ -343,7 +343,7 @@ ___
  automatically puts the selected value in Fixed status. 
 
 See also:   
-[Select Size](SpringDesign/selectSizeCatalog)   
+[Select Size](SpringDesign/selectSizeCatalog.html)   
 
 
 ___
@@ -371,8 +371,8 @@ Note that it may be desirable to save (File : Save or File : Save As) the curren
 before selecting a catalog item.
 
 See also:   
-[Select Catalog](SpringDesign/selectSizeCatalog)   
-[Extension spring catalog lookup](htt#e_springCatLookup)   
+[Select Catalog](SpringDesign/selectSizeCatalog.html)   
+[Extension spring catalog lookup](htt.html#e_springCatLookup)   
 
 
 ___
@@ -393,7 +393,7 @@ Specifically, after running this script, the Search process will run longer and 
 to refine the results by perhaps an extra significant digit. 
 
 See also:   
-[File : Preferences](menus#FilePreferences)   
+[File : Preferences](menus.html#FilePreferences)   
 
 
 ___
@@ -456,9 +456,9 @@ See your browser documentation for details on how to print or save into .PDF for
 From there, the information can be included as part of a Request for Quotation or other transfer of the design information.
 
 See also:   
-[File : Properties](menus#FileProperties)   
-[Terminology - Properties](terminology#properties)  
-[Printing](htt#printing)
+[File : Properties](menus.html#FileProperties)   
+[Terminology - Properties](terminology.html#properties)  
+[Printing](htt.html#printing)
 
 
 ___
@@ -502,7 +502,7 @@ If no demonstration sessions are available for that design type, the Help : Demo
 will be disabled. 
 
 See also:   
-[Spring design demonstration sessions](tutordemo)   
+[Spring design demonstration sessions](tutordemo.html)   
 
 
 ___
@@ -518,7 +518,7 @@ If no tutorial sessions are available for that design type, the Help : Tutorial 
 will be disabled.
  
 See also:   
-[Spring design tutorial sessions](tutordemo)   
+[Spring design tutorial sessions](tutordemo.html)   
 
 
 ___

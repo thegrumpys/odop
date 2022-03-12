@@ -82,8 +82,8 @@ In the mean time ...
 end comment  --->
   
 See also:   
-  - [Feasibility](feasibility)   
-  - [Terminology](terminology)   
+  - [Feasibility](feasibility.html)   
+  - [Terminology](terminology.html)   
   
 &nbsp;
  

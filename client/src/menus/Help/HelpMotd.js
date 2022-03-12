@@ -12,8 +12,8 @@ class HelpMotd extends Component {
     }
 
     onHelp() {
-        logUsage('event', 'HelpMotd', { 'event_label': config.documentation.prefix + '/About/messageOfTheDay' });
-        window.open(config.documentation.prefix + '/About/messageOfTheDay', '_blank');
+        logUsage('event', 'HelpMotd', { 'event_label': config.documentation.prefix + '/About/messageOfTheDay.html' });
+        window.open(config.documentation.prefix + '/About/messageOfTheDay.html', '_blank');
     }
 
     render() {

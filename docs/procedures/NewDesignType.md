@@ -65,7 +65,7 @@ For example, coil spring design types utilize:
 * Create a load.sql file   
  ---- Using an existing load.sql file as an example, overwrite the initialState section with the new initial state json.   
  ---- {need more detail here} ...   
- ---- See also: [Making changes to initialState.js](initialStateChanges)
+ ---- See also: [Making changes to initialState.js](initialStateChanges.html)
    
 **Build a new GitHub repository ?**   
 * plug-ins ?

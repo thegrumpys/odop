@@ -12,7 +12,7 @@ while maintaining specified objectives for force-deflection characteristics, str
 This "goal seeking" capability makes ODOP:Spring much more than a spring calculator and
 one of the most powerful and intuitive coil spring design alternatives available.  
  
- When [Search](search) terminates with a strictly feasible solution (i.e.  OBJ = 0.0),
+ When [Search](search.html) terminates with a strictly feasible solution (i.e.  OBJ = 0.0),
  the resulting solution point is only one of many possible solution points.
  The entire collection of feasible solution points is referred to as a
  "feasible region".  The boundaries of this region are formed by the various
@@ -29,7 +29,7 @@ one of the most powerful and intuitive coil spring design alternatives available
  Seek should have a feasible design as its starting point. 
  At a minimum, it should be understood that a feasible design is available. 
  In the case that  a Search has terminated without finding a feasible point, 
- use of the [Trade](trade) feature may be appropriate.  
+ use of the [Trade](trade.html) feature may be appropriate.  
 
  Seek will automatically invoke SEARCH to maximize or minimize the indicated
  variable subject to the prevailing constraints and FIXes.  SEEK assumes the
@@ -52,7 +52,7 @@ preliminary search.
 
 The value of the internal variable MFN_WT will have some impact on the
 results produced by SEEK. 
-Refer to the documentation page on [Search](search) 
+Refer to the documentation page on [Search](search.html) 
 for additional information on adjusting internal variables 
 with the <b>File : Preferences</b> menu item.  
  

@@ -35,7 +35,7 @@ or installing new ODOP systems or initializing new databases.
 **File : Save As** on top of the "Startup" entry in the database
 4. Dump SQL to a load.sql file in order to provide for creating Startup from scratch in the case of starting with an empty DB   
  \- MySQL Workbench should be able to export the table   
- [From release.md:](release)   
+ [From release.md:](release.html)   
  Using mysqldump dump the affected "Startup" entries into a load.sql file. Finally manually edit each one and delete the 'id' field name and 'id' field value (it should be first in each list). Commit these changes.   
  \- Save to ODOP\designtypes\Spring\ {springtype} \load.sql   
  

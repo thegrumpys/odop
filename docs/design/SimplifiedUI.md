@@ -15,11 +15,11 @@ Specifically:
 *  allow users to incrementally learn the concepts required for successful operation of the full feature set
 
 On this page:  
-[Features common to each alternative](SimplifiedUI#commonFeatures)  
-[View : Calculator](SimplifiedUI#simpleCalc)  
-[View : Basic](SimplifiedUI#basicUI)  
-[View : Advanced](SimplifiedUI#advancedUI)  
-[Original article: Ideas for Simplified Design Check UI (Design Calculator)](SimplifiedUI#originalArticle)  
+[Features common to each alternative](SimplifiedUI.html#commonFeatures)  
+[View : Calculator](SimplifiedUI.html#simpleCalc)  
+[View : Basic](SimplifiedUI.html#basicUI)  
+[View : Advanced](SimplifiedUI.html#advancedUI)  
+[Original article: Ideas for Simplified Design Check UI (Design Calculator)](SimplifiedUI.html#originalArticle)  
 &nbsp;
 
 

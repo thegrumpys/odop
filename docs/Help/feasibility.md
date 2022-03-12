@@ -1,6 +1,6 @@
 ## Feasibility
 
-The multi-colored [Feasibility Status Indicator](feasibilityIndicator) provides
+The multi-colored [Feasibility Status Indicator](feasibilityIndicator.html) provides
 feedback on the viability of the current design relative to constraints and FIXes.
  
  If you are in a situation where your current design is described as "<b>NOT FEASIBLE</b>" 
@@ -12,7 +12,7 @@ feedback on the viability of the current design relative to constraints and FIXe
  Similarly, don't get the idea that the program considers a known good design to be bad.
  
  The notion of "feasible" refers to all constraints being met. 
- [SEARCH](search) (<b>Action&nbsp;:&nbsp;Search</b> menu) operates to find a feasible design,
+ [SEARCH](search.html) (<b>Action&nbsp;:&nbsp;Search</b> menu) operates to find a feasible design,
  one that meets all FIXes and constraints.
  So, be sure that you have executed a Search.
  
@@ -33,7 +33,7 @@ feedback on the viability of the current design relative to constraints and FIXe
  Alter the values of the active constraint levels to more appropriate values by making
  entries in the "value" column under "Min Constraint" or Max Constraint" headings.  
  
- The Help section titled WHAT TO DO IF in [Spring Overview](./SpringDesign/spring_oview) describes a 
+ The Help section titled WHAT TO DO IF in [Spring Overview](./SpringDesign/spring_oview.html) describes a 
  number of possible  (probable) constraint conflicts and recommends a few solutions. 
  For example, confirm that any variables in fixed status 
  (check-boxes in the "Fix" column) 
@@ -41,7 +41,7 @@ feedback on the viability of the current design relative to constraints and FIXe
  Uncheck those boxes to allow Search to alter the value of any variables 
  that are not absolutely determined by the application and then repeat the Search.
 
- [TRADE](trade) is designed to assist the process of finding a feasible
+ [TRADE](trade.html) is designed to assist the process of finding a feasible
  design when the designer is faced with two or more conflicting constraints.
  TRADE will use a series of searches and an extrapolation technique to predict 
  the "nearest" feasible point.
@@ -67,7 +67,7 @@ feedback on the viability of the current design relative to constraints and FIXe
  constraints.
 
  Search will terminate when it finds its first feasible solution.  Since
- we have not asked the search to "optimize" anything (refer to [SEEK](seek) for
+ we have not asked the search to "optimize" anything (refer to [SEEK](seek.html) for
  that), it does not have any way to determine that one specific feasible
  design is better than any other feasible design.  The search will simply
  stop and allow the user to examine the results.  This is the reason why the
@@ -78,8 +78,8 @@ feedback on the viability of the current design relative to constraints and FIXe
  design possibilities within a feasible region.
 
 See also:   
- &nbsp; [Terminology](terminology)   
- &nbsp; [Design Situations](designSituations)   
+ &nbsp; [Terminology](terminology.html)   
+ &nbsp; [Design Situations](designSituations.html)   
 
 &nbsp;
 

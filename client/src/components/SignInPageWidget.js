@@ -70,12 +70,12 @@ class SignInPageWidget extends Component {
         custom: [
           {
             text: 'About ODOP user accounts',
-            href: config.documentation.prefix + '/About/userAccounts',
+            href: config.documentation.prefix + '/About/userAccounts.html',
             target: '_blank'
           },
           {
             text: 'ODOP Message Of The Day',
-            href: config.documentation.prefix + '/About/messageOfTheDay',
+            href: config.documentation.prefix + '/About/messageOfTheDay.html',
             target: '_blank'
           },
           {

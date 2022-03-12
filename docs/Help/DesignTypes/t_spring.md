@@ -10,15 +10,15 @@ provides important supplemental information.
 ___
 
 **On this page:**  
-[Torsion spring moment-deflection diagram](t_spring#t_springFD_Diag)  
-[Torsion spring moment-deflection point names](t_spring#t_springFD_Names)  
-[Torsion spring dimensions](t_spring#t_springDims)  
-[Independent Variable names](t_spring#t_springIV_Names)  
-[Dependent Variable names](t_spring#t_springDV_Names)  
-[Calculation Input names](t_spring#t_springCalcInputNames)  
-[Values in reports](t_spring#t_springOtherValues)  
-[Torsion spring end types](t_spring#t_springEndTypes)  
-<!--- [Constraints unique to torsion springs](t_spring#t_springConstraints)  -->
+[Torsion spring moment-deflection diagram](t_spring.html#t_springFD_Diag)  
+[Torsion spring moment-deflection point names](t_spring.html#t_springFD_Names)  
+[Torsion spring dimensions](t_spring.html#t_springDims)  
+[Independent Variable names](t_spring.html#t_springIV_Names)  
+[Dependent Variable names](t_spring.html#t_springDV_Names)  
+[Calculation Input names](t_spring.html#t_springCalcInputNames)  
+[Values in reports](t_spring.html#t_springOtherValues)  
+[Torsion spring end types](t_spring.html#t_springEndTypes)  
+<!--- [Constraints unique to torsion springs](t_spring.html#t_springConstraints)  -->
 
 &nbsp;
 ___
@@ -179,7 +179,7 @@ ___
                       point 1 and point 2.
 
 &nbsp;
-For additional information: [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
+For additional information: [Cycle_Life](../SpringDesign/spring_oview.html#cycleLife)  
 &nbsp;  
 
 ___
@@ -259,10 +259,10 @@ ___
 
 &nbsp;
 For additional information: 
- - [Materials](../SpringDesign/materials)   
- - [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
- - [Torsion spring end types](t_spring#t_springEndTypes)   
- - [Torsion spring dimensions](t_spring#t_springDims)  
+ - [Materials](../SpringDesign/materials.html)   
+ - [Cycle_Life](../SpringDesign/spring_oview.html#cycleLife)  
+ - [Torsion spring end types](t_spring.html#t_springEndTypes)   
+ - [Torsion spring dimensions](t_spring.html#t_springDims)  
  
 &nbsp;
    

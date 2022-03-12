@@ -3,26 +3,26 @@
 This topic covers various points that may allow a better user experience with the ODOP software.  
 
 **On this page:**  
-[Use the power of Search and Seek](htt#Search_Seek)  
-[File : Save As and File : Save](htt#fileSaveAndSaveAs)  
-[File : Import and File : Export](htt#fileImportAndExport)  
-[Side-by-Side comparison of designs](htt#sideBySideCompare)  
-[Maximizing content visible in Help](htt#maxVis)  
-[NaN = "Not a Number"](htt#nan)  
-[Browser refresh and back / forward](htt#browserRefresh)  
-[AutoSave Feature](htt#autoSave)  
-[Off-line Operation](htt#offlineOps)  
-[Unexpected delay when first opening the app](htt#delay)  
-[Bookmark the app](htt#bookmark)  
-[Closing or exiting the app](htt#shutdown)  
-[Password Reset](htt#passwordReset)  
-[Responsive software design](htt#responsiveDesign)  
-[Optimizing for small screens](htt#smallScreen)  
-[Printing](htt#printing)  
-[Design Migration](htt#designMigration)  
-[Extension spring catalog lookup](htt#e_springCatLookup)  
-[How to pronounce ODOP](htt#pronounceODOP)  
-[Reporting problems with the ODOP app](htt#reportProblems)  
+[Use the power of Search and Seek](htt.html#Search_Seek)  
+[File : Save As and File : Save](htt.html#fileSaveAndSaveAs)  
+[File : Import and File : Export](htt.html#fileImportAndExport)  
+[Side-by-Side comparison of designs](htt.html#sideBySideCompare)  
+[Maximizing content visible in Help](htt.html#maxVis)  
+[NaN = "Not a Number"](htt.html#nan)  
+[Browser refresh and back / forward](htt.html#browserRefresh)  
+[AutoSave Feature](htt.html#autoSave)  
+[Off-line Operation](htt.html#offlineOps)  
+[Unexpected delay when first opening the app](htt.html#delay)  
+[Bookmark the app](htt.html#bookmark)  
+[Closing or exiting the app](htt.html#shutdown)  
+[Password Reset](htt.html#passwordReset)  
+[Responsive software design](htt.html#responsiveDesign)  
+[Optimizing for small screens](htt.html#smallScreen)  
+[Printing](htt.html#printing)  
+[Design Migration](htt.html#designMigration)  
+[Extension spring catalog lookup](htt.html#e_springCatLookup)  
+[How to pronounce ODOP](htt.html#pronounceODOP)  
+[Reporting problems with the ODOP app](htt.html#reportProblems)  
 
 ___
 
@@ -57,7 +57,7 @@ The design library is a database physically located on an Internet server,
 a.k.a. "in the cloud". 
 Design information stored in the design library does not appear on the local storage of your computer. 
 In order to save designs into the design library it is necessary to sign into an ODOP user account. 
-See: [User Accounts](../About/userAccounts).
+See: [User Accounts](../About/userAccounts.html).
 
 ___
 
@@ -91,8 +91,8 @@ The other browser session can continue forward with additional trial designs.
 The side-by-side aspect of the screen layout can help quickly identify the preferred design.
 
 See also:   
-[Responsive software design](htt#responsiveDesign)  
-[Optimizing for small screens](htt#smallScreen)  
+[Responsive software design](htt.html#responsiveDesign)  
+[Optimizing for small screens](htt.html#smallScreen)  
 
 ___
 
@@ -146,7 +146,7 @@ ___
 
 **AutoSave Feature**   
 The ODOP software offers a basic AutoSave feature.
-See [AutoSave](autoSave) for details.   
+See [AutoSave](autoSave.html) for details.   
 
 ___
 
@@ -210,7 +210,7 @@ on the Sign-in page,
 Do not expect the ODOP:Spring app to appear on Okta's list of apps and 
 do not be concerned about a "You don't have any apps." message on your personal Okta home page. 
 Once you have established a password, 
-simply [launch the ODOP:Spring app](../Help/launchODOP) 
+simply [launch the ODOP:Spring app](../Help/launchODOP.html) 
 and click the "Sign In..." button in the upper left in order to get to the sign-in page.
 It is also possible to launch the app from the SpringDesignSoftware.org home page, 
 Getting Started page or any of the three spring type pages.   
@@ -273,7 +273,7 @@ ___
 
 **Design Migration**   
 The term "migration" refers to the process of upgrading designs created in a previous version of the software to the format required by the current version. 
-See: [MIGRATION](terminology#migration)    
+See: [MIGRATION](terminology.html#migration)    
 
 ___
 
@@ -286,7 +286,7 @@ run toward the low side of the initial tension range targeted by ODOP:Spring's d
 If experiencing difficulty in selecting springs from the supplied catalog, try setting the 
 Calculation Input named SI_Range to a value of "Special_Request".
 
-See: [Extension spring design - Initial_Tension](DesignTypes/e_spring#e_springIT_Range)    
+See: [Extension spring design - Initial_Tension](DesignTypes/e_spring.html#e_springIT_Range)    
 
 ___
 
@@ -304,7 +304,7 @@ ___
 
 **Reporting problems with the ODOP software**   
 Your feedback is greatly appreciated.
-You may use the email address or phone number on the [Contact Us page](../About/ContactUs).
+You may use the email address or phone number on the [Contact Us page](../About/ContactUs.html).
 Also, you may search for and review known issues on 
 [GitHub](https://github.com/thegrumpys/odop/issues).
 In order to comment on an existing issue or to open a new issue, a (free) GitHub account is required.

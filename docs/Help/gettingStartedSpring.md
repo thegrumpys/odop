@@ -8,18 +8,18 @@ tutorial and demo sessions are also provided.
 While a user account is not required to access the ODOP software,
 an account with associated username and password is required to save designs into 
 the cloud-based ODOP "Design Library".
-See: [User Accounts](../About/userAccounts) for details on
+See: [User Accounts](../About/userAccounts.html) for details on
 how to obtain a free account.
 
 A list of various on-line Help pages providing introductory information is available at
-[Intro Pages Overview](../About/introPagesOverview).
-In particular, see [Launching the Program](launchODOP) for more detailed instructions on 
+[Intro Pages Overview](../About/introPagesOverview.html).
+In particular, see [Launching the Program](launchODOP.html) for more detailed instructions on 
 how to get the program up and running.
 
-The ODOP software expects to start from an [existing design](./defaultDesigns).
+The ODOP software expects to start from an [existing design](./defaultDesigns.html).
 While they contain pre-established constraints that 
 serve to guide the solution to reasonable and expected results,
-the provided Startup designs are [under specified](./designSituations). 
+the provided Startup designs are [under specified](./designSituations.html). 
 You should provide additional constraints and Fixes specific to your spring application.
 
 If you haven't seen it already, the 
@@ -72,9 +72,9 @@ The remainder of this discussion will provide a few
 suggestions on how to explore the program.
 
 Start from an existing design. 
-See [Units: US customary and metric](SpringDesign/unitsUSmetric) to
+See [Units: US customary and metric](SpringDesign/unitsUSmetric.html) to
 work in metric units. 
-More information on default designs is available at [Default Designs](./defaultDesigns).
+More information on default designs is available at [Default Designs](./defaultDesigns.html).
 
 CHANGE independent variables.
 For the compression spring design type, those include

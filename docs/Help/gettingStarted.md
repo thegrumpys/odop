@@ -19,7 +19,7 @@ demonstration problem and is a good place to start.
 The remainder of this Getting Started topic will use the Rectangular Solid design type
 to describe several screen captures that refer to the ODOP main page.
 
-Note that the [Terminology](terminology) page of the on-line documentation may be 
+Note that the [Terminology](terminology.html) page of the on-line documentation may be 
 helpful with some of the terms utilized here.
 
 If you haven't seen it already, the 
@@ -27,18 +27,18 @@ If you haven't seen it already, the
 provides an important conceptual introduction to the overall design process within ODOP.   
 
 The ODOP software expects to start from an existing design. 
-More information on this point is available at [Default Designs](./defaultDesigns).
+More information on this point is available at [Default Designs](./defaultDesigns.html).
 
 While a user account is not required to access the ODOP software,
 an account with associated username and password is necessary to save designs into 
 the cloud-based ODOP "Design Library".
-See: [User Accounts](../About/userAccounts) for details on
+See: [User Accounts](../About/userAccounts.html) for details on
 how to obtain an account.
 
 The material below assumes that you will be able to operate the ODOP program in one browser
 window (or tab) at the same time that you are able to view this on-line Help material in a
 different browser window (or tab). 
-See [Launching the Program](launchODOP) for more detailed instructions on 
+See [Launching the Program](launchODOP.html) for more detailed instructions on 
 how to get the program up and running with this multiple browser window (tab) configuration.
 
 &nbsp;
@@ -194,7 +194,7 @@ illustrate problem solving techniques as well as provide sample solutions
 to several generally available reference book problems.
 The focus is on solving the problem, not explaining the operation of the software.
 
-See: &nbsp; [Spring design tutorial and demo](gettingStartedSpring)
+See: &nbsp; [Spring design tutorial and demo](gettingStartedSpring.html)
 
 &nbsp;
  

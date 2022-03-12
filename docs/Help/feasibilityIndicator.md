@@ -2,7 +2,7 @@
 
 ODOP has a multi-colored Feasibility Status Indicator that provides feedback on the 
 viability of the current design relative to constraints and FIXes. 
-The indicator provides at-a-glance interpretation of the [Objective Value](terminology#obj).
+The indicator provides at-a-glance interpretation of the [Objective Value](terminology.html#obj).
  
  Graphic | Description | Obj Value
  --- | --- | ---  

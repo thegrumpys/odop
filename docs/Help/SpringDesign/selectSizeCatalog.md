@@ -50,7 +50,7 @@ MS24586\_(SAE-AS24586)\_e\_ss  | &nbsp; | Military Standard, Extension, Stainles
  
  
 [Spring Design Topics](./)   
-[Extension spring catalog lookup](../htt#e_springCatLookup)   
+[Extension spring catalog lookup](../htt.html#e_springCatLookup)   
 [Help](../)   
 
  
