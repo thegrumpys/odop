@@ -35,7 +35,7 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   env_units = process.env.REACT_APP_DESIGN_UNITS || 'US';
   env_view = process.env.REACT_APP_DESIGN_VIEW || 'Advanced';
   session_refresh = process.env.REACT_APP_SESSION_REFRESH || 3600;
-  documentation_prefix = process.env.REACT_APP_DOCUMENTATION_PREFIX || 'https://thegrumpys.github.io/odop';
+  documentation_prefix = process.env.REACT_APP_DOCUMENTATION_PREFIX || '/docs';
 } else { // We are running on Heroku as "production"
   const env = runtimeEnv(); // Load the env object.
 //  console.log('In config env.REACT_APP_NODE_ENV=', env.REACT_APP_NODE_ENV);
@@ -58,7 +58,7 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   env_units = env.REACT_APP_DESIGN_UNITS || 'US';
   env_view = env.REACT_APP_DESIGN_VIEW || 'Advanced';
   session_refresh = env.REACT_APP_SESSION_REFRESH || 3600;
-  documentation_prefix = process.env.REACT_APP_DOCUMENTATION_PREFIX || 'http://www.springdesignsoftware.org/odop/docs';
+  documentation_prefix = process.env.REACT_APP_DOCUMENTATION_PREFIX || '/docs';
 }
 
 var { prompt, type, name, view, execute } = queryString.parse(window.location.search);

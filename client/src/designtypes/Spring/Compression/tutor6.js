@@ -230,7 +230,7 @@ export const execute = {
                     of spring sizes covered by the  catalog (.125 to 1.75 outside diameter).  
                     If you are designing suspension springs for railway freight cars, 
                     a different catalog might be appropriate.  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/ContactUs" 
+                    &nbsp;<a href="/docs/About/ContactUs.html" 
                     target="_blank" rel="noopener noreferrer">Contact technical support</a>&nbsp; 
                     to make that happen.<br />
                     <br />
@@ -253,7 +253,7 @@ export const execute = {
                     
                     <p>
                     Also, look in the on-line documentation section (Help entry) titled  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/selectSizeCatalog" 
+                    &nbsp;<a href="/docs/Help/SpringDesign/selectSizeCatalog.html" 
                     target="_blank" rel="noopener noreferrer">Select Size and Select Catalog</a>.&nbsp; 
                     </p>
                     
@@ -261,7 +261,7 @@ export const execute = {
                     More tutorial sessions are available. 
                     They have names like tutor3, tutor4, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a list of topics.
                     </p>
                     <br /><br />

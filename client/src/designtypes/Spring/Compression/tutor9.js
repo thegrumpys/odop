@@ -46,7 +46,7 @@ export const execute = {
                     Many of the Preferences quantities are related to control of the search process.  
                     Others are weighting factors that have some influence on search results.
                     Refer to the on-line documentation section (Help entry) on 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/search" target="_blank" rel="noopener noreferrer">Search</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/search.html" target="_blank" rel="noopener noreferrer">Search</a>&nbsp; 
                     for more specific details.
                     </p>
 
@@ -75,7 +75,7 @@ export const execute = {
                     
                     <p>
                     Additional information on Preferences is available in the documentation section (on-line help entry) 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#preferences" 
+                    &nbsp;<a href="/docs/Help/terminology.html#preferences" 
                     target="_blank" rel="noopener noreferrer">Preferences</a>.&nbsp; 
                     </p>
                     
@@ -123,7 +123,7 @@ export const execute = {
                     
                     <p>
                     Additional information on Properties is available in the documentation section (on-line help entry) 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#preferences" 
+                    &nbsp;<a href="/docs/Help/terminology.html#preferences" 
                     target="_blank" rel="noopener noreferrer">Properties</a>.&nbsp; 
                     </p>
                     <br /><br />
@@ -160,7 +160,7 @@ export const execute = {
                     If you haven't seen them already, more tutorial sessions are available. 
                     They have names like tutor3, tutor4, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a list of topics.
                     </p>
                     <br /><br />

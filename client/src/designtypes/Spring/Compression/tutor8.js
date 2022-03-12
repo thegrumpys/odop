@@ -13,7 +13,7 @@ export const execute = {
                     <p>
                     This tutorial section provides content on the ODOP Trade feature.
                     Background information is available in the on-line documentation section (Help entry) on 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">Trade</a>.&nbsp; 
+                    &nbsp;<a href="/docs/Help/trade.html" target="_blank" rel="noopener noreferrer">Trade</a>.&nbsp; 
                     </p>
                     
                     <p>
@@ -315,14 +315,14 @@ export const execute = {
                     
                     <p>
                     Also, be sure to look in the on-line documentation section (Help entry) titled  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">Trade</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/trade.html" target="_blank" rel="noopener noreferrer">Trade</a>&nbsp; 
                     </p>
                     
                     <p>
                     More tutorial sessions are available. 
                     They have names like tutor3, tutor4, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a list of topics.
                     </p>
                     <br /><br />

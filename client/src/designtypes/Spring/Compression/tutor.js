@@ -59,7 +59,7 @@ export const execute = {
                     <p>
                     ODOP contains an "on-line" help facility.
                     It includes an overview of the program,  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/introPagesOverview" target="_blank" rel="noopener noreferrer">multiple introductory sections</a>&nbsp; 
+                    &nbsp;<a href="/docs/About/introPagesOverview.html" target="_blank" rel="noopener noreferrer">multiple introductory sections</a>&nbsp; 
                     to help you in the process of getting started 
                     plus helpful hints and detailed explanations of major features.  
                     But first, a few words about what <b>not</b> to expect ...
@@ -98,14 +98,14 @@ export const execute = {
                     </p>
                     
                     <p>
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/features" target="_blank" rel="noopener noreferrer">Features</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/features.html" target="_blank" rel="noopener noreferrer">Features</a>&nbsp; 
                     and 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/introduction" target="_blank" rel="noopener noreferrer">Introduction</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/introduction.html" target="_blank" rel="noopener noreferrer">Introduction</a>&nbsp; 
                     cover many of the concepts behind the program.
                     </p>
                     
                     <p>
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology" target="_blank" rel="noopener noreferrer">Terminology</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/terminology.html" target="_blank" rel="noopener noreferrer">Terminology</a>&nbsp; 
                     explains some of the unique terms that the program
                     and its supporting documentation insist on using. 
                     ODOP is structured to be general and extensible to new kinds of designs.
@@ -114,7 +114,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/gettingStartedSpring" target="_blank" rel="noopener noreferrer">Getting Started (spring)</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/gettingStartedSpring.html" target="_blank" rel="noopener noreferrer">Getting Started (spring)</a>&nbsp; 
                     describes how to launch the first sessions of the spring design Tutorial and the spring design Demo 
                     plus makes a few suggestions on how new users should approach learning the program.
                     </p>
@@ -452,7 +452,7 @@ export const execute = {
                     More compression spring tutorial sessions are available. 
                     They have names like tutorTour, tutor3, tutor4, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a list of topics.
                     </p>
                     

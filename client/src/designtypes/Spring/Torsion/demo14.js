@@ -23,7 +23,7 @@ export const execute = {
                     
                     <p>
                     A detailed description of  
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/t_spring" target="_blank" rel="noopener noreferrer"> torsion spring names </a>
+                    <a href="/docs/Help/DesignTypes/t_spring.html" target="_blank" rel="noopener noreferrer"> torsion spring names </a>
                     is provided in the On-line Help.  
                     </p>
                     

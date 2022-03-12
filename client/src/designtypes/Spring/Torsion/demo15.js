@@ -15,7 +15,7 @@ export const execute = {
                     
                     <p>
                     A detailed description of  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/t_spring" target="_blank" rel="noopener noreferrer">torsion spring names</a>&nbsp;
+                    &nbsp;<a href="/docs/Help/DesignTypes/t_spring.html" target="_blank" rel="noopener noreferrer">torsion spring names</a>&nbsp;
                     is provided in the On-line Help.  
                     </p>
                     
@@ -102,7 +102,7 @@ export const execute = {
                    
                     <p>
                     As described in the on-line Help section on  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/materials" target="_blank" rel="noopener noreferrer">Materials</a>&nbsp;
+                    &nbsp;<a href="/docs/Help/SpringDesign/materials.html" target="_blank" rel="noopener noreferrer">Materials</a>&nbsp;
                     and also in the compression spring tutorial sessions tutor5 and tutor7,
                     changing Prop_Calc_Method will allow the use of different material property values.
                     </p>

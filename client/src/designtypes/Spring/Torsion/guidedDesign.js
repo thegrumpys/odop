@@ -120,7 +120,7 @@ export const execute = {
                                 If a feasible solution is not available, exit.
                                 Consider the posibility that the design is over-specified. 
                                 See: 
-                                <a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer"> Design situations: under-specified, properly specified, over-specified </a>
+                                <a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer"> Design situations: under-specified, properly specified, over-specified </a>
                                 </p>
                             </td>
                         </tr>
@@ -171,7 +171,7 @@ export const execute = {
                     This is the time to express your objectives (goals, requirements) for the design at hand 
                     in terms of minimum and maximum constraints and Fixes. 
                     More information about constraints and Fix is available in the 
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology" target="_blank" rel="noopener noreferrer"> Terminology </a> 
+                    <a href="/docs/Help/terminology.html" target="_blank" rel="noopener noreferrer"> Terminology </a> 
                     section of the on-line Help.
                     </p>
                     
@@ -277,7 +277,7 @@ export const execute = {
                     If the "Feasibility:" result of the search is "NOT FEASIBLE", 
                     consider the possibility that some aspect of the design is over-specified.
                     More information on such a possibility is provided in this entry on the on-line help:
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer"> Design situations: under-specified, properly specified, over-specified </a>
+                    <a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer"> Design situations: under-specified, properly specified, over-specified </a>
                     </p>
                     
                     <p>
@@ -287,7 +287,7 @@ export const execute = {
                     as expressed in terms of Fixes and constraint levels. 
                     This can be done manually. 
                     Also, the 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">Trade feature</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/trade.html" target="_blank" rel="noopener noreferrer">Trade feature</a>&nbsp; 
                     can be used to gain a better understanding of exactly how much your 
                     constraints need to be adjusted in order to find the "nearest" feasible design. 
                     </p>
@@ -376,7 +376,7 @@ export const execute = {
                 <>
                     <p>
                     The on-line Help entry on  
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/selectSizeCatalog" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
+                    <a href="/docs/Help/SpringDesign/selectSizeCatalog.html" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
                     provides a more detailed introduction to these features. 
                     </p>
                     
@@ -462,7 +462,7 @@ export const execute = {
                     You can follow the same browser window configuration to work with two
                     ODOP design sessions at the same time.
                     For additional details see:  
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/wideScreen" target="_blank" rel="noopener noreferrer"> Side-by-side sessions on a wide-screen monitor </a>
+                    <a href="/docs/Help/wideScreen.html" target="_blank" rel="noopener noreferrer"> Side-by-side sessions on a wide-screen monitor </a>
                     </p>
                     
                     <p>
@@ -527,7 +527,7 @@ export const execute = {
                     (OBJ is a measure of constraint violation).
                     Selecting a design from the catalog replaces the current design so that you can evaluate it.
                     As mentioned previously, more detail about standard design catalogs is available in the 
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/selectSizeCatalog" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
+                    <a href="/docs/Help/SpringDesign/selectSizeCatalog.html" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
                      entry of on-line Help. 
                     </p>
                     
@@ -567,7 +567,7 @@ export const execute = {
                     <p>
                     Your feedback is welcome.
                     Use the 
-                    <a href="https://www.springdesignsoftware.org/odop/docs/About/ContactUs" target="_blank" rel="noopener noreferrer"> Contact Us </a>
+                    <a href="/docs/About/ContactUs.html" target="_blank" rel="noopener noreferrer"> Contact Us </a>
                     page of the on-line Help to find the appropriate contact information.
                     </p>
                     <br />

@@ -409,7 +409,7 @@ It provides access to all program features.
 Use the checkboxes in the variables column to control Fix / Free status.
 Use the constraints column to establish or modify Min and/or Max values of constraints on the corresponding variables.
 
-[Spring variables displayed in Advanced View](https://www.springdesignsoftware.org/odop/docs/Help/png/ScrCap_3TypeNoted.png)
+[Spring variables displayed in Advanced View](./png/ScrCap_3TypeNoted.png)
 
 
 ___
@@ -432,7 +432,7 @@ A border on the right indicates that an upper (Max) constraint is enabled.
 A heavier border on both left and right of a numeric field indicates Fixed status.
 No border line on either left or right indicates Free status and no constraint enabled.
 
-[Spring variables displayed in Calculator View](https://www.springdesignsoftware.org/odop/docs/Help/png/ScrCap_3TypeCalcNoted.png)
+[Spring variables displayed in Calculator View](./png/ScrCap_3TypeCalcNoted.png)
 
 
 ___

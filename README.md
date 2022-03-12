@@ -10,17 +10,17 @@ Currently available apps include:
 <br />
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Solid/favicon.ico"> 
-<b>[Rectangular Solid](https://thegrumpys.github.io/odop/Help/DesignTypes/r_solid)</b> - a familiar to everyone demonstration case   
+<b>[Rectangular Solid](https://odop.herokuapp.com/docs/Help/DesignTypes/r_solid.html)</b> - a familiar to everyone demonstration case   
 <br />
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img height="32" src="./client/public/designtypes/Piston-Cylinder/favicon.ico"> 
-<b>[Piston-Cylinder design](https://thegrumpys.github.io/odop/Help/DesignTypes/pcyl)</b> - a simple demonstration case   
+<b>[Piston-Cylinder design](https://odop.herokuapp.com/docs/Help/DesignTypes/pcyl.html)</b> - a simple demonstration case   
 
 &nbsp;
 
-Read [About ODOP](https://thegrumpys.github.io/odop/About), including the Introduction, Requirements, Getting Started and Contact Us pages.   
+Read [About ODOP](https://odop.herokuapp.com/docs/About), including the Introduction, Requirements, Getting Started and Contact Us pages.   
 
-More detail is available in the [On-line Help](https://thegrumpys.github.io/odop/Help) facility.   
+More detail is available in the [On-line Help](https://odop.herokuapp.com/docs/Help) facility.   
 
 Try:   
 &nbsp; [ODOP on Heroku](https://odop.herokuapp.com/)  

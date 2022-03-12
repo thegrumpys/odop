@@ -47,9 +47,9 @@ export const execute = {
                     are set to allow a broad range of springs to be feasible.
                     More information about the constraints of spring design is provided in the
                     on-line documentation sections (Help entries) titled 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/spring_oview" target="_blank" rel="noopener noreferrer">Spring Design Overview</a>&nbsp;
+                    &nbsp;<a href="/docs/Help/SpringDesign/spring_oview.html" target="_blank" rel="noopener noreferrer">Spring Design Overview</a>&nbsp;
                     and  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>.&nbsp;
+                    &nbsp;<a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer">Design Situations</a>.&nbsp;
                     </p>
                     
                     <p>
@@ -312,7 +312,7 @@ export const execute = {
                     As long as L_Free (spring length in the free, no load condition) is in FREE status,
                     this should not be a problem. 
                     You may want to review 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; 
                     to better understand the limitations of specifying force and deflection at two points.
                     </p>
                     
@@ -395,7 +395,7 @@ export const execute = {
                     More tutorial sessions and demo problems are available. 
                     They have names like tutor4, tutor5, demo1, demo2, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a list of topics.
                     </p>
                     

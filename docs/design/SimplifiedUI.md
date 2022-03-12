@@ -62,7 +62,7 @@ Start by implementing some aspect of "sub-problems" as described in:
 [#170](https://github.com/thegrumpys/odop/issues/170), 
 [#187](https://github.com/thegrumpys/odop/issues/187),
 [#90](https://github.com/thegrumpys/odop/issues/90) and 
-[Sub-Problems feature](https://thegrumpys.github.io/odop/design/SubProblems).  
+[Sub-Problems feature](/docs/design/SubProblems.html).  
 
 Note that FIXed Dependent Variables or variables associated with violated constraints must be displayed.
 
