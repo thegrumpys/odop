@@ -51,8 +51,8 @@ experience and preferences.
 Thus, the currently active materials table may
 not match the default table described above. 
 For additional information, refer to:
-* [Restrictions](../../About/Legal/Restrictions.html)
-* [NewDesignType](../../procedures/NewDesignType.html)
+* [Restrictions](/docs/Help/../About/Legal/Restrictions.html)
+* [NewDesignType](/docs/Help/../procedures/NewDesignType.html)
 
 The way that ODOP:Spring handles material property data is dependent on the
 user specified settings of the Calculation Inputs:  Material\_Type and
@@ -156,5 +156,5 @@ used in the calculations is presented in the section
 [Design to Stress](/docs/Help/SpringDesign/advancedSpringOperations.html).
 
 
-[Spring Design Topics](./)   
-[Help](../)   
+[Spring Design Topics[Design Types](/docs/Help/SpringDesign))   
+[Help](/docs/Help/)   

@@ -64,15 +64,15 @@ A high level overview of the ODOP Design Process Flow is available.  See:
 A more detailed explanation of these concepts is available in the on-line documentation. 
 See: 
  + [Intro Pages Overview](introPagesOverview.html)
- + [Features](../Help/features.html)
- + [Introduction](../Help/introduction.html)
- + [Help Index](../Help/index.html)
+ + [Features](/docs/Help/features.html)
+ + [Introduction](/docs/Help/introduction.html)
+ + [Help Index](/docs/Help/index.html)
 
 &nbsp;
 
 **AVAILABLE DESIGN TYPES**   
 
-Five [Design Types](../Help/DesignTypes) are currently available.
+Five [Design Types](/docs/Help/DesignTypes) are currently available.
    
 ![Compression Spring Design Type icon](https://odop.herokuapp.com/designtypes/Spring/Compression/favicon.ico "Compression Spring Design Type") 
 ![Extension Spring Design Type icon](https://odop.herokuapp.com/designtypes/Spring/Extension/favicon.ico "Extension Spring Design Type") 
@@ -81,14 +81,14 @@ The **Compression, Extension and Torsion Spring** design types are full-featured
 enabling the engineering design of helical coil springs.
 While best saved for a time after your initial introduction to ODOP is complete,
 a comprehensive introduction to coil spring design with ODOP is available at
-[Spring Design Topics](../Help/SpringDesign).
+[Spring Design Topics](/docs/Help/SpringDesign).
 
 ![Rectangular Solid Design Type icon](https://odop.herokuapp.com/designtypes/Solid/favicon.ico "Rectangular Solid Design Type") 
-The [Rectangular Solid](../Help/DesignTypes/r_solid.html) design type is intended as an 
+The [Rectangular Solid](/docs/Help/DesignTypes/r_solid.html) design type is intended as an 
 easy to understand demonstration problem.
 
 ![Piston-Cylinder Design Type icon](https://odop.herokuapp.com/designtypes/Piston-Cylinder/favicon.ico "Piston-Cylinder Design Type") 
-The [Piston-Cylinder](../Help/DesignTypes/pcyl.html) design type is a simple demonstration problem 
+The [Piston-Cylinder](/docs/Help/DesignTypes/pcyl.html) design type is a simple demonstration problem 
 that illustrates competing objectives.
 
 &nbsp;
@@ -97,12 +97,12 @@ that illustrates competing objectives.
 
 The ODOP software provides Help facility pages to help you get started. 
 To work with the Rectangular Solid design type go to: 
-[Getting Started](../Help/gettingStarted.html)
+[Getting Started](/docs/Help/gettingStarted.html)
    
 Also, ODOP  provides a demo / tutorial feature. 
 To use tutorial and demo sessions with the  compression spring design type 
-go to: [Spring design tutorial and demo](../Help/gettingStartedSpring.html)
+go to: [Spring design tutorial and demo](/docs/Help/gettingStartedSpring.html)
 
 &nbsp;
 
-[About](./)
+[Help](/docs/About)

@@ -8,11 +8,11 @@ tutorial and demo sessions are also provided.
 While a user account is not required to access the ODOP software,
 an account with associated username and password is required to save designs into 
 the cloud-based ODOP "Design Library".
-See: [User Accounts](../About/userAccounts.html) for details on
+See: [User Accounts](/docs/About/userAccounts.html) for details on
 how to obtain a free account.
 
 A list of various on-line Help pages providing introductory information is available at
-[Intro Pages Overview](../About/introPagesOverview.html).
+[Intro Pages Overview](/docs/About/introPagesOverview.html).
 In particular, see [Launching the Program](launchODOP.html) for more detailed instructions on 
 how to get the program up and running.
 
@@ -23,7 +23,7 @@ the provided Startup designs are [under specified](/docs/Help/designSituations.h
 You should provide additional constraints and Fixes specific to your spring application.
 
 If you haven't seen it already, the 
-[ODOP Design Process Flow Diagram](../About/png/DesignProcessFlowDiagram.png)
+[ODOP Design Process Flow Diagram](/docs/About/png/DesignProcessFlowDiagram.png)
 provides an important conceptual introduction to the overall design process within ODOP.   
 
 Before continuing with the material below, 
@@ -126,6 +126,6 @@ For the compression spring design type, those include
   
 &nbsp;   
     
-[Help](./)
+In getSizeEntries [Help](/docs/Help)
 
  

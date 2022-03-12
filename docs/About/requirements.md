@@ -35,4 +35,4 @@ It may be necessary to adjust adjust the ad blocker configuration or temporarily
 
 Offline operation is not currently supported.
 
-[About](./)
+[Help](/docs/About)

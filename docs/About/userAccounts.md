@@ -1,7 +1,7 @@
 ## User Accounts, Username, Sign-in, Sign-out
 
 A user account is **not** required to operate most features of the software. 
-If saving designs into the cloud-based (on-line) [ODOP Design Library](../Help/terminology.html#designLib),
+If saving designs into the cloud-based (on-line) [ODOP Design Library](/docs/Help/terminology.html#designLib),
 it is necessary to establish a user account with associated unique username and password 
 so as to keep those designs private.  
 
@@ -45,19 +45,19 @@ If you have any remaining concerns on this point,
 using an email account different than your primary email account is a reasonable approach.
 
 **Screen capture of the sign-in page:**   
-![Sign-in screen](../Help/png/SignInWidgetExpanded.png "Sign-in screen")    
+![Sign-in screen](/docs/Help/png/SignInWidgetExpanded.png "Sign-in screen")    
 
-See [Password reset](../Help/htt#passwordReset.html) for instructions on how to 
+See [Password reset](/docs/Help/htt#passwordReset.html) for instructions on how to 
 change a password or recover from a lost password after account creation is complete. 
    
-See [Default Designs](../Help/defaultDesigns.html) for information on how a private design
+See [Default Designs](/docs/Help/defaultDesigns.html) for information on how a private design
 can be used to personalize system provided default designs.
 
 See [Restrictions](Legal/Restrictions.html) for long term data storage policies 
 in both public and private accounts.
 
 The **File : Export** menu item allows design data to be preserved in local storage.
-For details, see: [Save, Save As, Import and Export](../Help/htt.html#fileSaveAndSaveAs).
+For details, see: [Save, Save As, Import and Export](/docs/Help/htt.html#fileSaveAndSaveAs).
  
 Once signed in, your user session will remain active for as long as the browser window (tab) 
 associated with the app exists and your Internet connection is maintained. 
@@ -67,7 +67,7 @@ In this situation, you may be able to open a new browser window (tab) and open a
 need to sign-in again. 
 However, you should save frequently as once the browser window or tab is closed, 
 any unsaved design in progress may be lost. 
-For more information on this point, see: [AutoSave](../Help/autoSave.html).
+For more information on this point, see: [AutoSave](/docs/Help/autoSave.html).
 
 **Troubleshooting sign in issues:**
 - Be sure to enter your email address in the "Username" field of the sign-in page.   
@@ -84,4 +84,4 @@ Switch tabs in order to return to that Sign-In page or simply close this tab.
 
 &nbsp;   
 
-[About](./)
+[Help](/docs/About)

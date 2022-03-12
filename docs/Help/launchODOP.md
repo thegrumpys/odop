@@ -1,6 +1,6 @@
 ## Launching the Program   
 
-As noted in the [requirements](../About/requirements.html) page, 
+As noted in the [requirements](/docs/About/requirements.html) page, 
 it is not necessary to load any software on your computer in order to run the 
 ODOP software. 
 Only an Internet connection and recent web browser are necessary.
@@ -39,7 +39,7 @@ within any specific 30 minute period.
 While a user account is not required to access the ODOP software,
 an account with associated username and password is necessary to save designs into 
 the cloud-based ODOP "Design Library".
-See: [User Accounts](../About/userAccounts.html) for details on
+See: [User Accounts](/docs/About/userAccounts.html) for details on
 how to obtain an account.   
 
 **Screen capture of the sign-in page:**   
@@ -65,4 +65,4 @@ To continue, use your browser's **Back** button to return to the previous page n
 
 &nbsp;
 
-[Help](./)
+In getSizeEntries [Help](/docs/Help)

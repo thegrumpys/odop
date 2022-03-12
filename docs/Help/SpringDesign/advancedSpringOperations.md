@@ -26,12 +26,12 @@
     FIX Stress_2  xxxxxx
 
  Finally, enter the rest of your problem's FIX and constraint information,
- then go to the [Search](../search.html) menu item (**Action : Search** menu) to have 
+ then go to the [Search](/docs/Help/search.html) menu item (**Action : Search** menu) to have 
  ODOP:Spring find a design with the  requested stress level at the second 
  working position.
 
  Note that as with the "factor of safety approach" it may be desirable to
- use the [Seek](../seek.html) menu item (**Action : Seek** menu) to find a 
+ use the [Seek](/docs/Help/seek.html) menu item (**Action : Seek** menu) to find a 
  spring of minimum weight.
 
  Also, while it is likely not a significant concern, 
@@ -107,12 +107,12 @@
  materials file. 
  For additional information, refer to:
 * [MATERIALS](materials.html)   
-* [Restrictions](../../About/Legal/Restrictions.html)   
-* [NewDesignType](../../procedures/NewDesignType.html)   
+* [Restrictions](/docs/About/Legal/Restrictions.html)   
+* [NewDesignType](/docs/procedures/NewDesignType.html)   
  
 
-[Spring Design Topics](./)   
-[Help](../)   
+[Spring Design Topics](/docs/Help/SpringDesign/)   
+[Help](/docs/Help/)   
 
 <!---
 Depending on Eclipse version or Markdown interpreter, a multi-line comment must be the last thing in the file.

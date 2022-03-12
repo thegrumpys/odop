@@ -34,8 +34,8 @@ Invoke the Search feature (**Action : Search** menu) to discover if a feasible s
 More information on how to proceed is available in the tutorials (**Help : Tutorial...** menu) 
 and in other on-line Help topics such as 
 [Getting Started With the Spring Tutorial and Demo](gettingStartedSpring.html) and 
-[Intro Pages Overview](../About/introPagesOverview.html).  
+[Intro Pages Overview](/docs/About/introPagesOverview.html).  
 
 &nbsp;
 
-[Help](./)
+In getSizeEntries [Help](/docs/Help)

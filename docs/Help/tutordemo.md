@@ -83,5 +83,5 @@ demo15 | Carlson, Spring Designer's Handbook | torsion spring problem&nbsp;4
  
  &nbsp;
  
- [Help](./)
+ In getSizeEntries [Help](/docs/Help)
  

@@ -322,7 +322,7 @@ An explanation of how to select a design type and open a design of that type
 is provided in: [Getting Started](gettingStarted.html).   
 
 Additional information on how to implement new ODOP design types is available
-in the [NewDesignType](../procedures/NewDesignType.html) documentation.
+in the [NewDesignType](/docs/procedures/NewDesignType.html) documentation.
 
 
 ___
@@ -365,7 +365,7 @@ a.k.a. "in the cloud".
 Design information stored in the design library does not appear on the local storage of your computer. 
 You must be logged in to an ODOP user account in order to save designs into the ODOP design library.    
 
-See: [User Accounts](../About/userAccounts.html) for details on how to obtain an account.
+See: [User Accounts](/docs/About/userAccounts.html) for details on how to obtain an account.
 
 ___
 
@@ -424,4 +424,4 @@ ___
 
 &nbsp;   
 
-[Help](./)
+In getSizeEntries [Help](/docs/Help)

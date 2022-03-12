@@ -3,13 +3,13 @@
 This is a placeholder for a future Terms of Service document.
 
 Additional information is available in the other **About** topics, including:   
-* [Experimental Software](../experimental.html)
-* [Requirements](../requirements.html)
-* [Notice](Disclaimer.html)
-* [Restrictions](Restrictions.html)
+* [Experimental Software](/docs/About/experimental.html)
+* [Requirements](/docs/About/requirements.html)
+* [Notice](/docs/About/Legal/Disclaimer.html)
+* [Restrictions](/docs/About/Legal/Restrictions.html)
 
 See also: [ODOP software LICENSE](https://github.com/thegrumpys/odop/blob/master/LICENSE)
    
    &nbsp;
    
-[About](../)
+[About](/docs/About)

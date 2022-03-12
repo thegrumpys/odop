@@ -56,4 +56,4 @@ The AutoSave feature is not available when operating in "private browsing mode"
 
 &nbsp;
  
-[Help](./)
+In getSizeEntries [Help](/docs/Help)

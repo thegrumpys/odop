@@ -34,7 +34,7 @@ Unless you ask us not to, we may contact you via email in the future to tell you
 
 **Your Access to and Control Over Information**   
 You may opt out of any future contacts from us at any time. 
-You can do the following at any time via [Contact Us](../ContactUs.html):
+You can do the following at any time via [Contact Us](/docs/About/ContactUs.html):
 * See what data we have about you, if any.
 * Change/correct any data we have about you.
 * Have us delete any data we have about you.
@@ -84,7 +84,7 @@ It is possible to save designs into the public account but keep in mind that all
 
    
 &nbsp;   
-**If you feel that we are not abiding by this privacy policy, please [Contact Us](../ContactUs.html) immediately.**
+**If you feel that we are not abiding by this privacy policy, please [Contact Us](/docs/About/ContactUs.html) immediately.**
    
 &nbsp;   
-[About](../)   
+[About](/docs/About/)   

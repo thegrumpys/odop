@@ -10,4 +10,4 @@
 * [Privacy Statement](Legal/PrivacyStatement.html)
 * [User Accounts](userAccounts.html)
 * [Contact Us](ContactUs.html)
-* [Help topics](../Help)
+* [Help topics](/docs/Help)

@@ -11,8 +11,8 @@ Be sure to review the [Restrictions](Legal/Restrictions.html) page before commit
 
 Features allowing the user to save and / or export design data can help protect against certain problems.
 Also, the latest release of the ODOP software implements a basic AutoSave feature. 
-More detail is available at: [AutoSave](../Help/autoSave.html).
+More detail is available at: [AutoSave](/docs/Help/autoSave.html).
 
 &nbsp;
 
-[About](./)
+[Help](/docs/About)

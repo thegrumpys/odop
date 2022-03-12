@@ -6,7 +6,7 @@ and the documentation to GitHub Pages and SpringDesignSoftware.org.
 
 Ideally, any system downtime affecting the production system should be announced in advance via docs/About/messageOfTheDay.md
 
-For background regarding "Major.Minor.Patch" see: [ODOP version numbering](../design/VersionNumbers.html)
+For background regarding "Major.Minor.Patch" see: [ODOP version numbering](/docs/design/VersionNumbers.html)
    
 Remember that if merged to master and pushed, changes to docs will be immediately published on GitHub Pages.
 Until all doc references are fully switched over to SpringDesignSoftware.org,

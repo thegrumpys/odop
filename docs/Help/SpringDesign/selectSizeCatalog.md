@@ -49,8 +49,8 @@ MS24586\_(SAE-AS24586)\_e\_ss  | &nbsp; | Military Standard, Extension, Stainles
  design before selecting a new standard size or catalog item.
  
  
-[Spring Design Topics](./)   
-[Extension spring catalog lookup](../htt.html#e_springCatLookup)   
-[Help](../)   
+[Spring Design Topics[Design Types](/docs/Help/SpringDesign))   
+[Extension spring catalog lookup](/docs/Help/htt.html#e_springCatLookup)   
+[Help](/docs/Help/)   
 
  

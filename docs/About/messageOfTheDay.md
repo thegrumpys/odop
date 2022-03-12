@@ -5,18 +5,18 @@ including recent and impending releases, planned outages, newly discovered issue
 
 [ODOP version 4.1](https://github.com/thegrumpys/odop/milestone/37?closed=1) was released January 15, 2022. 
 Opening a design saved in a prior version of ODOP will produce a pop-up message.
-See: [MIGRATION](../Help/terminology#migration.html). 
+See: [MIGRATION](/docs/Help/terminology#migration.html). 
 Follow the link above to see change details in GitHub.  
 
 ODOP is [Experimental Software](experimental.html).  
 
 To establish a free account, see: [User Accounts](userAccounts.html). 
-With the recent changes in [Calculator View](../Help/menus.html#ViewCalculator), 
+With the recent changes in [Calculator View](/docs/Help/menus.html#ViewCalculator), 
 browser requirements have changed. 
 For details, see: [Requirements](requirements.html) 
-and [AutoFix](../Help/terminology.html#autoFix). 
+and [AutoFix](/docs/Help/terminology.html#autoFix). 
 
-Evaluators and new users should be sure to see the [About](../About) section 
+Evaluators and new users should be sure to see the [About](/docs/About) section 
 of the on-line documentation early in the learning process. 
 Also, a short [Getting Started with ODOP](https://www.youtube.com/watch?v=JS-8Z1Ct0aI) video is available.
 

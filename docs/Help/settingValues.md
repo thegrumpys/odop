@@ -114,4 +114,4 @@ Related topics:
  
 &nbsp;   
 
-[Help](./)
+In getSizeEntries [Help](/docs/Help)

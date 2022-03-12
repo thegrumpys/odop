@@ -4,7 +4,7 @@ The Compression Spring design type is a full-featured mathematical model enablin
 the engineering design of helical coil compression springs.   
 
 This section presents material unique to the Compression Spring design type.
-The more general material available at [Spring Design Topics](../SpringDesign)
+The more general material available at [Spring Design Topics](/docs/Help/SpringDesign)
 provides important supplemental information.   
 
 ___
@@ -167,7 +167,7 @@ ___
                     point 1 and point 2.
 
 &nbsp;
-For additional information: [Cycle_Life](../SpringDesign/spring_oview.html#cycleLife)  
+For additional information: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
 &nbsp;
    
 ___
@@ -246,8 +246,8 @@ ___
 
 &nbsp;
 For additional information: 
- - [Materials](../SpringDesign/materials.html)   
- - [Cycle_Life](../SpringDesign/spring_oview.html#cycleLife)  
+ - [Materials](/docs/Help/SpringDesign/materials.html)   
+ - [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
  - [Compression spring end types](c_spring.html#c_springEndTypes)   
 &nbsp;
    
@@ -409,12 +409,12 @@ bucking for each specific design and loading condition.  Both the
 fixed-free and fixed-fixed end conditions are covered.
 
 More precise treatments of this subject are available in the sources listed
-in the [Spring Design References](../SpringDesign/references.html) section 
+in the [Spring Design References](/docs/Help/SpringDesign/references.html) section 
 of the documentation.
 
 &nbsp;
 
-[Design Types](./)   
-[Spring Design Topics](../SpringDesign)   
-[Help](../)   
+[Design Types](/docs/Help/DesignTypes)   
+[Spring Design Topics](/docs/Help/SpringDesign)   
+[Help](/docs/Help/)   
 

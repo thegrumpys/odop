@@ -67,7 +67,7 @@ The Sign In button appears on the menu bar between the ODOP logo and the File me
 Use the Sign In button to create a new user account or log into an existing account.  
 
 See also:   
-[User Accounts](../About/userAccounts.html)   
+[User Accounts](/docs/About/userAccounts.html)   
 
 ___
 
@@ -91,7 +91,7 @@ or metric units (mm, newtons) is established by the selected starting design.
 
 See also:   
 [Default Designs](defaultDesigns.html)   
-[User Accounts](../About/userAccounts.html)   
+[User Accounts](/docs/About/userAccounts.html)   
 [Units: US customary and metric](SpringDesign/unitsUSmetric.html)  
 [Import and Export](htt.html#fileImportAndExport)  
 [ODOP Design Library](terminology.html#designLib)
@@ -109,7 +109,7 @@ If not logged in to a user account, a pop-up providing a Sign In opportunity wil
 
 See also:   
 [Default Designs](defaultDesigns.html)   
-[User Accounts](../About/userAccounts.html)   
+[User Accounts](/docs/About/userAccounts.html)   
 
 ___
 
@@ -124,7 +124,7 @@ If not logged in to a user account, a pop-up providing a Sign In opportunity wil
 
 See also:   
 [Default Designs](defaultDesigns.html)   
-[User Accounts](../About/userAccounts.html)   
+[User Accounts](/docs/About/userAccounts.html)   
 
 ___
 
@@ -145,7 +145,7 @@ There is no un-delete feature.
 
 See also:   
 [Default Designs](defaultDesigns.html)   
-[User Accounts](../About/userAccounts.html)   
+[User Accounts](/docs/About/userAccounts.html)   
 
 ___
 
@@ -486,7 +486,7 @@ The Help : Index menu item displays a list of links to the various ODOP on-line 
 Most of these articles are common to all design types.
 An entry describing [Available Design Types](DesignTypes) is near the bottom of the list.   
 A link to a list of [Spring Design Topics](SpringDesign) is near the bottom of the list.
-The last link on the list is an alternate way to reach the [About](../About) articles.
+The last link on the list is an alternate way to reach the [About](/docs/About) articles.
 
 
 ___
@@ -543,5 +543,5 @@ ___
 
 &nbsp;
  
-[Help](./)
+In getSizeEntries [Help](/docs/Help)
 

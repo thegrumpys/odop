@@ -57,7 +57,7 @@ The design library is a database physically located on an Internet server,
 a.k.a. "in the cloud". 
 Design information stored in the design library does not appear on the local storage of your computer. 
 In order to save designs into the design library it is necessary to sign into an ODOP user account. 
-See: [User Accounts](../About/userAccounts.html).
+See: [User Accounts](/docs/About/userAccounts.html).
 
 ___
 
@@ -210,7 +210,7 @@ on the Sign-in page,
 Do not expect the ODOP:Spring app to appear on Okta's list of apps and 
 do not be concerned about a "You don't have any apps." message on your personal Okta home page. 
 Once you have established a password, 
-simply [launch the ODOP:Spring app](../Help/launchODOP.html) 
+simply [launch the ODOP:Spring app](/docs/Help/launchODOP.html) 
 and click the "Sign In..." button in the upper left in order to get to the sign-in page.
 It is also possible to launch the app from the SpringDesignSoftware.org home page, 
 Getting Started page or any of the three spring type pages.   
@@ -304,7 +304,7 @@ ___
 
 **Reporting problems with the ODOP software**   
 Your feedback is greatly appreciated.
-You may use the email address or phone number on the [Contact Us page](../About/ContactUs.html).
+You may use the email address or phone number on the [Contact Us page](/docs/About/ContactUs.html).
 Also, you may search for and review known issues on 
 [GitHub](https://github.com/thegrumpys/odop/issues).
 In order to comment on an existing issue or to open a new issue, a (free) GitHub account is required.
@@ -315,7 +315,7 @@ ___
 
 &nbsp;
  
-[Help](./)
+In getSizeEntries [Help](/docs/Help)
 
 &nbsp;
  

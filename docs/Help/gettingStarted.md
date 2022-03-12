@@ -23,7 +23,7 @@ Note that the [Terminology](terminology.html) page of the on-line documentation 
 helpful with some of the terms utilized here.
 
 If you haven't seen it already, the 
-[ODOP Design Process Flow Diagram](../About/png/DesignProcessFlowDiagram.png)
+[ODOP Design Process Flow Diagram](/docs/About/png/DesignProcessFlowDiagram.png)
 provides an important conceptual introduction to the overall design process within ODOP.   
 
 The ODOP software expects to start from an existing design. 
@@ -32,7 +32,7 @@ More information on this point is available at [Default Designs](/docs/Help/defa
 While a user account is not required to access the ODOP software,
 an account with associated username and password is necessary to save designs into 
 the cloud-based ODOP "Design Library".
-See: [User Accounts](../About/userAccounts.html) for details on
+See: [User Accounts](/docs/About/userAccounts.html) for details on
 how to obtain an account.
 
 The material below assumes that you will be able to operate the ODOP program in one browser
@@ -198,5 +198,5 @@ See: &nbsp; [Spring design tutorial and demo](gettingStartedSpring.html)
 
 &nbsp;
  
-[Help](./)
+[Help](/docs/Help)Entries [Help](/docs/Help)
  

@@ -4,7 +4,7 @@ The Torsion Spring design type is a full-featured mathematical model enabling
 the engineering design of helical coil torsion springs.   
 
 This section presents material unique to the Torsion Spring design type.
-The more general material available at [Spring Design Topics](../SpringDesign)
+The more general material available at [Spring Design Topics](/docs/Help/SpringDesign)
 provides important supplemental information.   
 
 ___
@@ -179,7 +179,7 @@ ___
                       point 1 and point 2.
 
 &nbsp;
-For additional information: [Cycle_Life](../SpringDesign/spring_oview.html#cycleLife)  
+For additional information: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
 &nbsp;  
 
 ___
@@ -259,8 +259,8 @@ ___
 
 &nbsp;
 For additional information: 
- - [Materials](../SpringDesign/materials.html)   
- - [Cycle_Life](../SpringDesign/spring_oview.html#cycleLife)  
+ - [Materials](/docs/Help/SpringDesign/materials.html)   
+ - [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
  - [Torsion spring end types](t_spring.html#t_springEndTypes)   
  - [Torsion spring dimensions](t_spring.html#t_springDims)  
  
@@ -321,9 +321,9 @@ This diagram  may be helpful.
 
 &nbsp;
 
-[Design Types](./)   
-[Spring Design Topics](../SpringDesign)   
-[Help](../)   
+[Design Types](/docs/Help/DesignTypes)   
+[Spring Design Topics](/docs/Help/SpringDesign)   
+[Help](/docs/Help/)   
 
 
 &nbsp;

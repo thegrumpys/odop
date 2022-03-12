@@ -1,6 +1,6 @@
 ## Spring Design Topics
 
-* [Getting Started - Spring Tutorial and Demo](../gettingStartedSpring.html)   
+* [Getting Started - Spring Tutorial and Demo](/docs/Help/gettingStartedSpring.html)   
 * [Spring Overview](spring_oview.html)   
 * [Advanced Spring Operations](advancedSpringOperations.html)   
 * [Spring Materials](materials.html)
@@ -11,4 +11,4 @@
 
 &nbsp;
 
-[Help](../)
+[Help](/docs/Help/)
