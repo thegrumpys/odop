@@ -124,7 +124,8 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     var sq1 = x[o.L_Body];
     var sq2 = p[o.Coils_T] * Math.PI * x[o.Mean_Dia];
     var wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
-    x[o.Weight] = x[o.Density] * (Math.PI * (0.5*p[o.Wire_Dia]) * (0.5*p[o.Wire_Dia])) * (wire_len_t + x[o.Xlen_1] + x[o.Xlen_2]);
+
+    x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * (wire_len_t + x[o.Xlen_1] + x[o.Xlen_2]);
 
     RateInRad = x[o.Rate] / Deg2Rad;
     Def1InRad = x[o.Deflect_1] * Deg2Rad;

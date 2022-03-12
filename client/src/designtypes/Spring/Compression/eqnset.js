@@ -101,7 +101,8 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
         var wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
         if (x[o.End_Type].value === 5 )  /*  calculate developed length of tapered ends based on 2 ends * pi * wire diameter * 0.625 */
             wire_len_t = wire_len_t - 3.926 * p[o.Wire_Dia];
-        x[o.Weight] = x[o.Density] * (Math.PI * (0.5*p[o.Wire_Dia]) * (0.5*p[o.Wire_Dia])) * wire_len_t;
+
+        x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * wire_len_t;
 
     if (p[o.L_Free] > x[o.L_Solid]) {
         x[o.PC_Avail_Deflect] = 100.0 * x[o.Deflect_2] / (p[o.L_Free] - x[o.L_Solid]);
