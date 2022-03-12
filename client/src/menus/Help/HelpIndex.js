@@ -13,7 +13,7 @@ class HelpIndex extends Component {
 
     onHelp() {
         logUsage('event', 'HelpIndex', { 'event_label': config.documentation.prefix + '/Help' });
-        console.log('In HelpIndex.onHelp config.documentation.prefix=',config.documentation.prefix + '/Help');
+//        console.log('In HelpIndex.onHelp config.documentation.prefix=',config.documentation.prefix + '/Help');
         window.open(config.documentation.prefix + '/Help', '_blank');
     }
 

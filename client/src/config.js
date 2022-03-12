@@ -47,7 +47,7 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
 //  console.log('In config env.REACT_APP_DESIGN_UNITS=', env.REACT_APP_DESIGN_UNITS);
 //  console.log('In config env.REACT_APP_DESIGN_VIEW=', env.REACT_APP_DESIGN_VIEW);
 //  console.log('In config env.REACT_APP_SESSION_REFRESH=', env.REACT_APP_SESSION_REFRESH);
-  console.log('In config env.REACT_APP_DOCUMENTATION_PREFIX=', env.REACT_APP_DOCUMENTATION_PREFIX);
+//  console.log('In config env.REACT_APP_DOCUMENTATION_PREFIX=', env.REACT_APP_DOCUMENTATION_PREFIX);
   node_env = env.REACT_APP_NODE_ENV || env.NODE_ENV;
   issuer = env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
   clientId = env.REACT_APP_CLIENT_ID || '{clientId}';
