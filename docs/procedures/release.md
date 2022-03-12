@@ -166,7 +166,7 @@ heroku maintenance:off -a odop
 while positioned in the git/odop directory, push to SpringDesignSoftware.org using the command line:   
 git push springdesignsoftware master   
 Verify no unexpected error messages during build on production.
-1. Confirm that the http://SpringDesignSoftware.org/odop/docs website is operational and that documentation displays.
+1. Confirm that the https://odop.herokuapp.com/docs website is operational and that documentation displays.
 
 &nbsp;
 
