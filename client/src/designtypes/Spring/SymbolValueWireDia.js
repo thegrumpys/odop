@@ -20,7 +20,6 @@ import NameValueUnitsRowCalcInput from '../../components/NameValueUnitsRowCalcIn
 import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 import { logValue } from '../../logUsage';
 import { logUsage } from '../../logUsage';
-import config from '../../config';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -106,7 +105,7 @@ class SymbolValueWireDia extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.open(config.documentation.prefix + '/Help/settingValues', '_blank');
+        window.open('/docs/Help/settingValues', '_blank');
     }
 
     onClose() {

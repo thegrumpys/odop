@@ -5,7 +5,6 @@ import { CONSTRAINED, MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/MessageModal';
-import config from '../../config';
 
 class ActionSeek extends Component {
 
@@ -100,7 +99,7 @@ class ActionSeek extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.open(config.documentation.prefix + '/Help/seek', '_blank');
+        window.open('/docs/Help/seek', '_blank');
     }
 
     render() {

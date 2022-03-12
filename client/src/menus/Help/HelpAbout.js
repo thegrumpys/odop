@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { version } from '../../version';
 import { logUsage } from '../../logUsage';
 import { withOktaAuth } from '@okta/okta-react';
-import config from '../../config';
 
 class HelpAbout extends Component {
 
@@ -37,7 +36,7 @@ class HelpAbout extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        Link to <a href={config.documentation.prefix + '/About/'} target="_blank" rel="noopener noreferrer">About</a> topics
+                        Link to <a href={'/docs/About/'} target="_blank" rel="noopener noreferrer">About</a> topics
                         <br/>
                         Link to <a href="https://www.springdesignsoftware.org/" target="_blank" rel="noopener noreferrer">website</a> home page
                         <hr/>

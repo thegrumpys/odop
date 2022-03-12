@@ -11,7 +11,6 @@ var env_name;
 var env_units;
 var env_view;
 var session_refresh;
-var documentation_prefix;
 
 //console.log('In config process.env.NODE_ENV=',process.env.NODE_ENV);
 if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "development" or "test"?
@@ -24,7 +23,6 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
 //  console.log('In config process.env.REACT_APP_DESIGN_UNITS=', process.env.REACT_APP_DESIGN_UNITS);
 //  console.log('In config process.env.REACT_APP_DESIGN_VIEW=', process.env.REACT_APP_DESIGN_VIEW);
 //  console.log('In config process.env.REACT_APP_SESSION_REFRESH=', process.env.REACT_APP_SESSION_REFRESH);
-//  console.log('In config process.env.REACT_APP_DOCUMENTATION_PREFIX=', process.env.REACT_APP_DOCUMENTATION_PREFIX);
   node_env = process.env.REACT_APP_NODE_ENV || process.env.NODE_ENV;
   issuer = process.env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
   clientId = process.env.REACT_APP_CLIENT_ID || '{clientId}';
@@ -35,7 +33,6 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   env_units = process.env.REACT_APP_DESIGN_UNITS || 'US';
   env_view = process.env.REACT_APP_DESIGN_VIEW || 'Advanced';
   session_refresh = process.env.REACT_APP_SESSION_REFRESH || 3600;
-  documentation_prefix = process.env.REACT_APP_DOCUMENTATION_PREFIX || '/docs';
 } else { // We are running on Heroku as "production"
   const env = runtimeEnv(); // Load the env object.
 //  console.log('In config env.REACT_APP_NODE_ENV=', env.REACT_APP_NODE_ENV);
@@ -47,7 +44,6 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
 //  console.log('In config env.REACT_APP_DESIGN_UNITS=', env.REACT_APP_DESIGN_UNITS);
 //  console.log('In config env.REACT_APP_DESIGN_VIEW=', env.REACT_APP_DESIGN_VIEW);
 //  console.log('In config env.REACT_APP_SESSION_REFRESH=', env.REACT_APP_SESSION_REFRESH);
-//  console.log('In config env.REACT_APP_DOCUMENTATION_PREFIX=', env.REACT_APP_DOCUMENTATION_PREFIX);
   node_env = env.REACT_APP_NODE_ENV || env.NODE_ENV;
   issuer = env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
   clientId = env.REACT_APP_CLIENT_ID || '{clientId}';
@@ -58,7 +54,6 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   env_units = env.REACT_APP_DESIGN_UNITS || 'US';
   env_view = env.REACT_APP_DESIGN_VIEW || 'Advanced';
   session_refresh = env.REACT_APP_SESSION_REFRESH || 3600;
-  documentation_prefix = process.env.REACT_APP_DOCUMENTATION_PREFIX || '/docs';
 }
 
 var { prompt, type, name, view, execute } = queryString.parse(window.location.search);
@@ -77,7 +72,6 @@ var url_execute = execute !== undefined ? execute : undefined;
 //console.log('In config env_units=',env_units);
 //console.log('In config env_view=',env_view);
 //console.log('In config session_refresh=',session_refresh);
-//console.log('In config documentation_prefix=',documentation_prefix);
 //console.log('In config url_prompt=',url_prompt);
 //console.log('In config url_type=',url_type);
 //console.log('In config url_name=',url_name);
@@ -101,9 +95,6 @@ export default {
       name: env_name,
       units: env_units,
       view: env_view,
-  },
-  documentation: {
-      prefix: documentation_prefix,
   },
   session: {
       refresh: session_refresh,

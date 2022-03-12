@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
-import config from '../../config';
 
 class HelpMotd extends Component {
 
@@ -12,8 +11,8 @@ class HelpMotd extends Component {
     }
 
     onHelp() {
-        logUsage('event', 'HelpMotd', { 'event_label': config.documentation.prefix + '/About/messageOfTheDay.html' });
-        window.open(config.documentation.prefix + '/About/messageOfTheDay.html', '_blank');
+        logUsage('event', 'HelpMotd', { 'event_label': '/docs/About/messageOfTheDay.html' });
+        window.open('/docs/About/messageOfTheDay.html', '_blank');
     }
 
     render() {
