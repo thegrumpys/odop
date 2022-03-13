@@ -21,11 +21,22 @@ class ResultTable extends Component {
         this.onMinMax = this.onMinMax.bind(this);
         this.onNameSelect = this.onNameSelect.bind(this);
         this.onSeek = this.onSeek.bind(this);
+        this.onNoop = this.onNoop.bind(this);
         this.state = {
             optimize_modal: false, // Default: do not display optimize modal
-            name: 'OD_Free', // TODO: A fudge
+            name: this.props.symbol_table[0].name, // TODO: A fudge
             minmax: MIN, // TODO: A fudge
         };
+    }
+
+    componentDidUpdate(prevProps) {
+//        console.log('In ResultTable.componentDidUpdate this=',this,'prevProps=',prevProps);
+        if (prevProps.type !== this.props.type) {
+//            console.log('In ResultTable.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+            this.setState({
+                name: this.props.symbol_table[0].name, // TODO: A fudge
+            });
+        }
     }
 
     onSearchButton(event) {
@@ -107,12 +118,20 @@ class ResultTable extends Component {
         });
         // Do seek
         logUsage('event', 'ResultTable', { 'event_label': 'seek ' + this.state.minmax + ' ' + this.state.name });
-        displaySpinner(true);
+        this.setState({
+            seek_modal: true,
+        });
+//        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek(this.state.name, this.state.minmax);
-        displaySpinner(false);
+        this.setState({
+            seek_modal: false,
+        });
+//        displaySpinner(false);
     }
-    
+
+    onNoop() {} // No-op for onHide
+
     render() {
 //        console.log('In ResultTable.render this=',this);
 //        From Issue #365:
@@ -238,6 +257,9 @@ class ResultTable extends Component {
                         <Button variant="secondary" onClick={this.onOptimizeCancel}>Cancel</Button>
                         <Button variant="primary" onClick={this.onSeek}>Seek</Button>
                     </Modal.Footer>
+                </Modal>
+                <Modal show={this.state.seek_modal} style={{zIndex: 1100}} size="sm" animation={false} onHide={this.onNoop}>
+                    <Modal.Body><img src="spinner.gif" alt="Spinning Spinner" style={{"height":"90px"}}/>&nbsp;Running...</Modal.Body>
                 </Modal>
             </>
         );

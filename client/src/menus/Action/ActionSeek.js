@@ -19,11 +19,21 @@ class ActionSeek extends Component {
         this.onContextHelp = this.onContextHelp.bind(this);
         this.state = {
             modal: false,
-            name: undefined, // TODO: A fudge
+            name: this.props.symbol_table[0].name, // TODO: A fudge
             minmax: MIN // TODO: A fudge
         };
     }
     
+    componentDidUpdate(prevProps) {
+//        console.log('In ActionSeek.componentDidUpdate this=',this,'prevProps=',prevProps);
+        if (prevProps.type !== this.props.type) {
+//            console.log('In ActionSeek.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+            this.setState({
+                name: this.props.symbol_table[0].name, // TODO: A fudge
+            });
+        }
+    }
+
     toggle() {
 //       console.log('In ActionSeek.toggle this=',this);
         var warnMsg = '';
