@@ -162,10 +162,6 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
     }
        else x[o.Cycle_Life] = 0.0;   // Setting to NaN causes problems with File : Open.  See issue 232
 
-//    wire_len_t=pi*(mean_dia*coils_t
-//            +end_id+wire_dia
-//            +extended_end_id+wire_dia)
-//         +end_extension;
     sq1 = p[o.Wire_Dia] * p[o.Coils_T];
     sq2 = p[o.Coils_T] * Math.PI * x[o.Mean_Dia];
     wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2)
@@ -173,7 +169,6 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
         + x[o.Extended_End_ID] +  p[o.Wire_Dia])
         + x[o.End_Extension];
     
-//    weight=density*(pi*wire_dia*wire_dia/4.0)*wire_len_t;
     x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * wire_len_t;
 
 //    safe_load=stress_lim_stat/s_f;

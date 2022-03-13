@@ -86,14 +86,10 @@ export class ReportBase extends Component {
         var sq1 = this.props.symbol_table[o.L_Free].value;
         var sq2 = this.props.symbol_table[o.Coils_T].value * Math.PI * this.props.symbol_table[o.Mean_Dia].value;
         this.wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
-             /*
-              *  calculate developed length of tapered ends based on
-              *  2 ends * pi * wire diameter * 0.625
-              */
-        if (this.props.symbol_table[o.End_Type].value === 5 )
+        if (this.props.symbol_table[o.End_Type].value === 5 )  /*  calculate developed length of tapered ends based on 2 ends * pi * wire diameter * 0.625 */
             this.wire_len_t = this.wire_len_t - 3.926 * this.props.symbol_table[o.Wire_Dia].value;
-                               /*  more accurate weight  */
-        this.wgt1000 = 1000.0 * this.props.symbol_table[o.Density].value * (Math.PI * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value / 4.0) * this.wire_len_t;
+
+        this.wgt1000 = 1000.0 * this.props.symbol_table[o.Weight].value;
 
         /*
          * intermediate dia. calcs. assume no wire stretch

@@ -120,15 +120,17 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
        else x[o.Cycle_Life] = zero;   // Setting to NaN causes problems with File : Open.  See issue #232
 
     x[o.PC_Safe_Deflect] = 100.0 * x[o.Deflect_2] / ((x[o.Stress_Lim_Bnd_Stat] / s_f) / x[o.Rate]);
-
-                           /*  crude approximation  ... better available on web  */
-    x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * 
-        (Math.PI * x[o.Mean_Dia] * p[o.Coils_T] + x[o.Xlen_1] + x[o.Xlen_2]);
  
-     RateInRad = x[o.Rate] / Deg2Rad;
-     Def1InRad = x[o.Deflect_1] * Deg2Rad;
-     Def2InRad = x[o.Deflect_2] * Deg2Rad;
-     x[o.Energy] = 0.5 * RateInRad * (Def2InRad * Def2InRad - Def1InRad * Def1InRad);
+    var sq1 = x[o.L_Body];
+    var sq2 = p[o.Coils_T] * Math.PI * x[o.Mean_Dia];
+    var wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
+
+    x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * (wire_len_t + x[o.Xlen_1] + x[o.Xlen_2]);
+
+    RateInRad = x[o.Rate] / Deg2Rad;
+    Def1InRad = x[o.Deflect_1] * Deg2Rad;
+    Def2InRad = x[o.Deflect_2] * Deg2Rad;
+    x[o.Energy] = 0.5 * RateInRad * (Def2InRad * Def2InRad - Def1InRad * Def1InRad);
     
 //    console.log('Exiting eqnset p=',p,' x=',x);
     return x;

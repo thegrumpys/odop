@@ -55,8 +55,8 @@ export class ReportBase extends Component {
         var sq1 = this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Coils_T].value;
         var sq2 = this.props.symbol_table[o.Coils_T].value * Math.PI * this.props.symbol_table[o.Mean_Dia].value;
         this.wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2)
-            + Math.PI * (this.props.symbol_table[o.End_ID].value +  this.props.symbol_table[o.Wire_Dia].value
-            + this.props.symbol_table[o.Extended_End_ID].value +  this.props.symbol_table[o.Wire_Dia].value)
+            + Math.PI * (this.props.symbol_table[o.End_ID].value + this.props.symbol_table[o.Wire_Dia].value
+            + this.props.symbol_table[o.Extended_End_ID].value + this.props.symbol_table[o.Wire_Dia].value)
             + this.props.symbol_table[o.End_Extension].value;
 
         this.wgt1000 = 1000.0 * this.props.symbol_table[o.Weight].value;
