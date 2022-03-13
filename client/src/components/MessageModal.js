@@ -60,7 +60,7 @@ export class MessageModal extends Component {
                 { this.state.header !== '' ? <Modal.Header><Modal.Title><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>{this.state.header}</Modal.Title></Modal.Header> : ''}
                 <Modal.Body><Alert variant={this.state.variant}>{this.state.message}</Alert></Modal.Body>
                 <Modal.Footer>
-                    { this.state.help_url !== '' ? <Button outline="true" variant="info" onClick={this.onContextHelp}>Help</Button> : ''}
+                    { this.state.help_url !== '' ? <Button variant="outline-info" onClick={this.onContextHelp}>Help</Button> : ''}
                     <Button variant="primary" onClick={this.toggle}>Close</Button>
                 </Modal.Footer>
             </Modal>

@@ -234,7 +234,7 @@ class ResultTable extends Component {
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button outline="true" variant="info" onClick={this.onOptimizeContextHelp}>Help</Button>
+                        <Button variant="outline-info" onClick={this.onOptimizeContextHelp}>Help</Button>
                         <Button variant="secondary" onClick={this.onOptimizeCancel}>Cancel</Button>
                         <Button variant="primary" onClick={this.onSeek}>Seek</Button>
                     </Modal.Footer>

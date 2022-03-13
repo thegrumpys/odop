@@ -118,8 +118,8 @@ class ActionSeek extends Component {
                     <Modal.Body>
                         <InputGroup>
                             <ButtonGroup>
-                                <Button variant="secondary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}> Min </Button>
-                                <Button variant="secondary" onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}> Max </Button>
+                                <Button variant="outline-secondary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}> Min </Button>
+                                <Button variant="outline-secondary" onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}> Max </Button>
                             </ButtonGroup>
                             &nbsp;
                             <InputGroup.Prepend>
@@ -133,7 +133,7 @@ class ActionSeek extends Component {
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button outline="true" variant="info" onClick={this.onContextHelp}>Help</Button>{' '}
+                        <Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
                         <Button variant="primary" onClick={this.onSeek}>Seek</Button>
                     </Modal.Footer>

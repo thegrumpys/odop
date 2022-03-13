@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Modal, Alert } from 'react-bootstrap';
 import { Route, withRouter } from 'react-router-dom';
 import { Security, LoginCallback } from '@okta/okta-react';
 import config from '../config';
@@ -17,10 +18,15 @@ class Routes extends Component {
     super(props);
 //    console.log('In Routes.constructor props=',props);
     this.loadRedirect = this.loadRedirect.bind(this);
-    this.loadAutoSave = this.loadAutoSave.bind(this);
+    this.promptLoadAutoSave = this.promptLoadAutoSave.bind(this);
+    this.loadAutoSaveDesign = this.loadAutoSaveDesign.bind(this);
+    this.loadDefaultDesign = this.loadDefaultDesign.bind(this);
     this.loadInitialState = this.loadInitialState.bind(this);
     this.getDesign = this.getDesign.bind(this);
     this.onAuthRequired = this.onAuthRequired.bind(this);
+        this.state = {
+            modal: false,
+        };
   }
 
   componentDidMount() {
@@ -30,15 +36,9 @@ class Routes extends Component {
           this.loadRedirect();
       } else if (typeof(Storage) !== "undefined" && localStorage.getItem("autosave") !== null) {
 //          console.log('In Routes.componentDidMount restore "autosave" file')
-          this.loadAutoSave();
+          this.promptLoadAutoSave();
       } else {
-          if (config.url.type === config.env.type && config.url.name === config.env.name) { // If defaults used then just load initial state
-//              console.log('In Routes.componentDidMount loadInitialState config.env.type=',config.env.type,'config.env.units=',config.env.units);
-              this.loadInitialState(config.env.type,config.env.units);
-          } else {
-//              console.log('In Routes.componentDidMount getDesign config.url.type=',config.url.type,'config.url.name=',config.url.name);
-              this.getDesign(this.props.user, config.url.type, config.url.name);
-          }
+          this.loadDefaultDesign();
       }
   }
   
@@ -69,8 +69,18 @@ class Routes extends Component {
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load redirect' });
   }
   
-  loadAutoSave() {
-//      console.log('In Routes.loadAutoSave this=',this);
+  promptLoadAutoSave() {
+//      console.log('In Routes.promptLoadAutoSave this=',this);
+        this.setState({
+            modal: true,
+        });
+  }
+  
+  loadAutoSaveDesign() {
+//      console.log('In Routes.loadAutoSaveDesign this=',this);
+      this.setState({
+          modal: false,
+      });
       this.props.restoreAutoSave();
       this.props.deleteAutoSave();
       config.url.prompt = false; // Turn off prompt
@@ -80,9 +90,20 @@ class Routes extends Component {
       config.url.execute = undefined; // Turn off execute
       this.props.history.push('/')
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load autoSave' });
-      displayMessage(
-          'Design restored from AutoSave data after interruption.  See Help AutoSave for details.  Use File Save, File SaveAs or File Export to save the design permanently.',
-          'info');
+  }
+  
+  loadDefaultDesign() {
+//      console.log('In Routes.loadDefaultDesign this=',this);
+      this.setState({
+          modal: false,
+      });
+      if (config.url.type === config.env.type && config.url.name === config.env.name) { // If defaults used then just load initial state
+//          console.log('In Routes.componentDidMount loadInitialState config.env.type=',config.env.type,'config.env.units=',config.env.units);
+          this.loadInitialState(config.env.type,config.env.units);
+      } else {
+//          console.log('In Routes.componentDidMount getDesign config.url.type=',config.url.type,'config.url.name=',config.url.name);
+          this.getDesign(this.props.user, config.url.type, config.url.name);
+      }
   }
   
   loadInitialState(type, units) {
@@ -130,16 +151,34 @@ class Routes extends Component {
     this.props.history.push('/login')
   }
 
+  onContextHelp() {
+//      console.log('In Routes.onContextHelp this=',this);
+      window.open('/docs/Help/autoSave.html', '_blank');
+  }
+
   render() {
 //    console.log('In Routes.render this=',this);
     const oktaAuth = new OktaAuth({...config.oidc});
     return (
-        <Security oktaAuth={oktaAuth}
-                  onAuthRequired={this.onAuthRequired} >
-          <Route path='/' exact={true} component={MainPage} />
-          <Route path='/login' render={() => <SignInPage />} />
-          <Route path='/implicit/callback' component={LoginCallback} />
-        </Security>
+        <>
+            <Security oktaAuth={oktaAuth}
+                      onAuthRequired={this.onAuthRequired} >
+              <Route path='/' exact={true} component={MainPage} />
+              <Route path='/login' render={() => <SignInPage />} />
+              <Route path='/implicit/callback' component={LoginCallback} />
+            </Security>
+            <Modal show={this.state.modal}>
+                <Modal.Header><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
+                <Modal.Body>
+                    <Alert variant="info">AutoSave design available. Recover the design?</Alert>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}
+                    <Button variant="secondary" onClick={this.loadDefaultDesign}>Cancel</Button>{' '}
+                    <Button variant="primary" onClick={this.loadAutoSaveDesign}>Yes</Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     );
   }
 }
