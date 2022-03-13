@@ -114,6 +114,8 @@ class ActionSeek extends Component {
 
     render() {
 //        console.log('In ActionSeek.render this=',this);
+        var ResultTableOptimize = require('../../designtypes/'+this.props.type+'/ResultTableOptimize.js'); // Dynamically load ResultTableOptimize
+
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle}>
@@ -126,6 +128,8 @@ class ActionSeek extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                        <p>This may be a long running operation. Please be patient.</p>
+                        <ResultTableOptimize.default onClick={this.onOptimizeCancel}/>
                         <InputGroup>
                             <ButtonGroup>
                                 <Button variant="outline-secondary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}> Min </Button>
@@ -154,6 +158,7 @@ class ActionSeek extends Component {
 }  
 
 const mapStateToProps = state => ({
+    type: state.model.type,
     symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value,

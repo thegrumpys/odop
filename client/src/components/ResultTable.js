@@ -234,6 +234,7 @@ class ResultTable extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="pb-0">
+                        <p>This may be a long running operation. Please be patient.</p>
                         <ResultTableOptimize.default onClick={this.onOptimizeCancel}/>
                         <p>Select a specific Seek optimization:</p>
                         <InputGroup>
