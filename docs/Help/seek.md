@@ -58,5 +58,5 @@ with the <b>File : Preferences</b> menu item.
  
 &nbsp;  
 
- In getSizeEntries [Help](/docs/Help)
+ [Help](/docs/Help)
  

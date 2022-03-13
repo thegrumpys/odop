@@ -126,6 +126,6 @@ For the compression spring design type, those include
   
 &nbsp;   
     
-In getSizeEntries [Help](/docs/Help)
+[Help](/docs/Help)
 
  

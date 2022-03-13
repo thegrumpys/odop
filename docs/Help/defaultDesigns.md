@@ -38,4 +38,4 @@ and in other on-line Help topics such as
 
 &nbsp;
 
-In getSizeEntries [Help](/docs/Help)
+[Help](/docs/Help)

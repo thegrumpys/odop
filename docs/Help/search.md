@@ -65,4 +65,4 @@ Values of TOL greater than 1.0E-02 may result in searches
 that are too inaccurate to be used effectively by SEEK, and TRADE.   
  
  
- In getSizeEntries [Help](/docs/Help)
+ [Help](/docs/Help)

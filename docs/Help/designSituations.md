@@ -87,5 +87,5 @@ See also:
   
 &nbsp;
  
-In getSizeEntries [Help](/docs/Help)
+[Help](/docs/Help)
   
