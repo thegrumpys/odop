@@ -105,7 +105,7 @@ class SymbolValueWireDia extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.open('https://thegrumpys.github.io/odop/Help/settingValues', '_blank');
+        window.open('/docs/Help/settingValues', '_blank');
     }
 
     onClose() {

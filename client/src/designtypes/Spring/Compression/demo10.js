@@ -94,9 +94,9 @@ export const execute = {
                     Because the problem has specified a specific stress level, 
                     we will treat this as a "design-to-stress" problem.  
                     You may wish to review the
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/advancedSpringOperations" target="_blank" rel="noopener noreferrer">Design To Stress</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/SpringDesign/advancedSpringOperations.html" target="_blank" rel="noopener noreferrer">Design To Stress</a>&nbsp; 
                     and 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/materials" target="_blank" rel="noopener noreferrer">Materials</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/SpringDesign/materials.html" target="_blank" rel="noopener noreferrer">Materials</a>&nbsp; 
                     sections of the documentation (on-line Help entries) for additional information. 
                     </p>
                     
@@ -240,7 +240,7 @@ export const execute = {
                 <>
                     <p>
                     As per the discussion in 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/advancedSpringOperations" target="_blank" rel="noopener noreferrer">Design To Stress</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/SpringDesign/advancedSpringOperations.html" target="_blank" rel="noopener noreferrer">Design To Stress</a>&nbsp; 
                     the demo session has adjusted constraints:
                     </p>
 
@@ -432,7 +432,7 @@ export const execute = {
                     Several more demo problems are available. 
                     They are named demo1, demo2, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a complete list of additional tutorial and demo topics.
                     </p>
                     

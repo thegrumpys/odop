@@ -70,17 +70,17 @@ class SignInPageWidget extends Component {
         custom: [
           {
             text: 'About ODOP user accounts',
-            href: 'https://thegrumpys.github.io/odop/About/userAccounts',
+            href: '/docs/About/userAccounts.html',
             target: '_blank'
           },
           {
             text: 'ODOP Message Of The Day',
-            href: 'https://thegrumpys.github.io/odop/About/messageOfTheDay',
+            href: '/docs/About/messageOfTheDay.html',
             target: '_blank'
           },
           {
             text: 'Learn about ODOP',
-            href: 'https://thegrumpys.github.io/odop/About',
+            href: '/docs/About',
             target: '_blank'
           }
         ]

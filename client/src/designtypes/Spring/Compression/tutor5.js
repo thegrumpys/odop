@@ -52,9 +52,9 @@ export const execute = {
                     
                     <p>
                     The on-line documentation sections (Help entries) titled 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign" target="_blank" rel="noopener noreferrer">Spring Design</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/SpringDesign" target="_blank" rel="noopener noreferrer">Spring Design</a>&nbsp; 
                     and 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/c_spring" target="_blank" rel="noopener noreferrer">Compression Spring</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/DesignTypes/c_spring.html" target="_blank" rel="noopener noreferrer">Compression Spring</a>&nbsp; 
                     provide a more detailed definition for each of the Calculation Inputs.  
                     It would make the tutorial too long (and boring !) to review each quantity here.
                     However, it is important to make sure that you understand that
@@ -119,7 +119,7 @@ export const execute = {
                     Locate Material_Type.
                     Click on the downward pointing triangle to drop down the selection list.
                     The on-line documentation (Help entry) on 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/materials" target="_blank" rel="noopener noreferrer">Spring Materials</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/SpringDesign/materials.html" target="_blank" rel="noopener noreferrer">Spring Materials</a>&nbsp; 
                     provides additional descriptive information on each of the entries in this table.
                     </p>
                     
@@ -242,7 +242,7 @@ export const execute = {
                     Note the "Tapered, Closed & Ground" and "Pig-tail" end types that
                     are common in hot-wound springs.
                     Refer to the discussion in the on-line documentation (Help entry) on 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/c_spring#c_springEndTypes" target="_blank" rel="noopener noreferrer">Compression Spring End Types</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/DesignTypes/c_spring.html#c_springEndTypes" target="_blank" rel="noopener noreferrer">Compression Spring End Types</a>&nbsp; 
                     for information on Add_Coils@Solid and the 
                     calculation of solid height for these end types.
                     </p>
@@ -272,14 +272,14 @@ export const execute = {
                     
                     <p>
                     Also, look in the on-line documentation section (Help entry) titled  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/materials" target="_blank" rel="noopener noreferrer">Spring Materials</a>.&nbsp; 
+                    &nbsp;<a href="/docs/Help/SpringDesign/materials.html" target="_blank" rel="noopener noreferrer">Spring Materials</a>.&nbsp; 
                     </p>
                     
                     <p>
                     More tutorial sessions are available. 
                     They have names like tutor3, tutor4, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a list of topics.
                     </p>
                 </>

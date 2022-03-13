@@ -99,7 +99,7 @@ class ActionSeek extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.open('https://thegrumpys.github.io/odop/Help/seek', '_blank');
+        window.open('/docs/Help/seek', '_blank');
     }
 
     render() {

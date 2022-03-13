@@ -8,7 +8,7 @@ export const execute = {
                 <>
                     <p>
                     Welcome to the ODOP:Spring web app!
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewCalculator" target="_blank" rel="noopener noreferrer">Calculator View</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/menus.html#ViewCalculator" target="_blank" rel="noopener noreferrer">Calculator View</a>&nbsp; 
                     is below. 
                     </p>
 
@@ -28,10 +28,10 @@ export const execute = {
                     (Independent Variables). 
                     <b> But wait! There is more. </b>
                     Continue reading to learn how access to the ODOP backsolving features (
-                          <a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#fix" target="_blank" rel="noopener noreferrer">Fix / Free</a>,&nbsp; 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#constraints" target="_blank" rel="noopener noreferrer">constraints</a>&nbsp; 
+                          <a href="/docs/Help/terminology.html#fix" target="_blank" rel="noopener noreferrer">Fix / Free</a>,&nbsp; 
+                    &nbsp;<a href="/docs/Help/terminology.html#constraints" target="_blank" rel="noopener noreferrer">constraints</a>&nbsp; 
                     and
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/search" target="_blank" rel="noopener noreferrer">Search</a> 
+                    &nbsp;<a href="/docs/Help/search.html" target="_blank" rel="noopener noreferrer">Search</a> 
                     ) allows flexibility on how your design problem is specified.  
                     For example, it is possible to specify force and deflection or spring rate 
                     and then let the Search feature determine the necessary wire diameter, coil diameter and
@@ -70,9 +70,9 @@ export const execute = {
                     Free status allows Search to manipulate the variable to achieve a feasible design. 
                     By default, specifying a value will leave that variable in Fixed status.
                     See
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#autoFix" target="_blank" rel="noopener noreferrer">AutoFix</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/terminology.html#autoFix" target="_blank" rel="noopener noreferrer">AutoFix</a>&nbsp; 
                     for details. 
-                    The <a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    The <a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     sessions provide additional detail on these concepts as well as more advanced topics 
                     such as user specified material properties and end types.
                     </p>
@@ -81,12 +81,12 @@ export const execute = {
                     Expanded descriptions are available as tooltips for many elements of the Calculator View.
                     Hover the cursor (tap on a touch screen) over headings, labels, and variable names to learn more.
                     This compression spring 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/png/ForceVsDeflection.png" target="_blank" rel="noopener noreferrer">Force-Deflection diagram</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/png/ForceVsDeflection.png" target="_blank" rel="noopener noreferrer">Force-Deflection diagram</a>&nbsp; 
                     illustrates selected variable names.  
                     Additional insights are available in the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp; 
                     plus 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     sessions. 
                     </p>
                     <br />
@@ -102,17 +102,17 @@ export const execute = {
                 <>
                     <p>
                     The multi-colored 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/feasibility" target="_blank" rel="noopener noreferrer">Feasibility Status indicator</a>,&nbsp; 
+                    &nbsp;<a href="/docs/Help/feasibility.html" target="_blank" rel="noopener noreferrer">Feasibility Status indicator</a>,&nbsp; 
                     provides feedback on the viability of the current design.
                     See also: 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; and 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#feasibleRegion" target="_blank" rel="noopener noreferrer">Feasible Region</a>.&nbsp; 
+                    &nbsp;<a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; and 
+                    &nbsp;<a href="/docs/Help/terminology.html#feasibleRegion" target="_blank" rel="noopener noreferrer">Feasible Region</a>.&nbsp; 
                     </p>
                     
                     <p>
                     The Wire_Dia field of Calculator View provides a list of commonly available wire diameters 
                     that depends on the selected Material_Type and 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/unitsUSmetric" target="_blank" rel="noopener noreferrer">units</a>&nbsp; (U.S., metric). 
+                    &nbsp;<a href="/docs/Help/SpringDesign/unitsUSmetric.html" target="_blank" rel="noopener noreferrer">units</a>&nbsp; (U.S., metric). 
                     To choose a standard wire diameter, select the Wire_Dia input field, choose "Select std size", 
                     click in the Wire_Dia field and scroll to the desired value. 
                     After selection, the value is automatically marked with Fixed status so that it is not manipulated by Search.
@@ -120,9 +120,9 @@ export const execute = {
                     
                     <p>
                     Use the <b>View</b> menu above to switch views. 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewAdvanced" target="_blank" rel="noopener noreferrer">Advanced View</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/menus.html#ViewAdvanced" target="_blank" rel="noopener noreferrer">Advanced View</a>&nbsp; 
                     provides access to the full range of ODOP:Spring features. 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/menus#ViewReports" target="_blank" rel="noopener noreferrer">Reports</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/menus.html#ViewReports" target="_blank" rel="noopener noreferrer">Reports</a>&nbsp; 
                     present additional information about your current spring design.
                     </p>
                     <br />
@@ -139,16 +139,16 @@ export const execute = {
                     <p>
                     The <b>File : Open</b> menu above provides the ability to open existing designs of 
                     supported spring 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes" target="_blank" rel="noopener noreferrer">types</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/DesignTypes" target="_blank" rel="noopener noreferrer">types</a>&nbsp; 
                     (
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/c_spring" target="_blank" rel="noopener noreferrer">compression,</a>&nbsp; 
-                    <a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/e_spring" target="_blank" rel="noopener noreferrer">extension</a>&nbsp;
+                    <a href="/docs/Help/DesignTypes/c_spring.html" target="_blank" rel="noopener noreferrer">compression,</a>&nbsp; 
+                    <a href="/docs/Help/DesignTypes/e_spring.html" target="_blank" rel="noopener noreferrer">extension</a>&nbsp;
                     &  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/t_spring" target="_blank" rel="noopener noreferrer">torsion</a> 
+                    &nbsp;<a href="/docs/Help/DesignTypes/t_spring.html" target="_blank" rel="noopener noreferrer">torsion</a> 
                     ) and units (U.S., metric). 
                     These system-provided designs can be a starting point for new custom designs. 
                     Sign up for a free  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/userAccounts" target="_blank" rel="noopener noreferrer">user account</a>&nbsp; 
+                    &nbsp;<a href="/docs/About/userAccounts.html" target="_blank" rel="noopener noreferrer">user account</a>&nbsp; 
                     to save private designs into the cloud-based ODOP Design Library.  
                    </p>
                     
@@ -170,7 +170,7 @@ export const execute = {
                     
                     <p>
                     We welcome your feedback.  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/ContactUs" target="_blank" rel="noopener noreferrer">Contact Us.</a>&nbsp; 
+                    &nbsp;<a href="/docs/About/ContactUs.html" target="_blank" rel="noopener noreferrer">Contact Us.</a>&nbsp; 
                     </p>
                 </>
             ),

@@ -198,7 +198,7 @@ export const execute = {
                 <p>
                 In order to save designs into the ODOP cloud based Design Library, you need to be signed-in.
                 If necessary, follow the instructions at   
-                &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/About/userAccounts" target="_blank" rel="noopener noreferrer">user accounts</a>&nbsp; 
+                &nbsp;<a href="/docs/About/userAccounts.html" target="_blank" rel="noopener noreferrer">user accounts</a>&nbsp; 
                 to get a free ODOP user account.
                 </p>
                 

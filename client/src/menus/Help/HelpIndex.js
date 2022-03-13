@@ -11,8 +11,8 @@ class HelpIndex extends Component {
     }
 
     onHelp() {
-        logUsage('event', 'HelpIndex', { 'event_label': 'https://thegrumpys.github.io/odop/Help' });
-        window.open('https://thegrumpys.github.io/odop/Help', '_blank');
+        logUsage('event', 'HelpIndex', { 'event_label': '/docs/Help' });
+        window.open('/docs/Help', '_blank');
     }
 
     render() {

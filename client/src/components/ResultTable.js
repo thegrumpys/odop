@@ -76,7 +76,7 @@ class ResultTable extends Component {
         this.setState({
             optimize_modal: !this.state.optimize_modal,
         });
-        window.open('https://thegrumpys.github.io/odop/Help/seek', '_blank');
+        window.open('/docs/Help/seek', '_blank');
     }
 
     onOptimizeCancel(event) {

@@ -61,7 +61,7 @@ export const execute = {
                     The menu section of the main page is above and slightly left of this text.
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/MainMenu.png" alt="Main Menu"/>
+                    <Image fluid src="/docs/Help/png/MainMenu.png" alt="Main Menu"/>
                     
                     <p>
                     <br />
@@ -83,9 +83,9 @@ export const execute = {
                     <p>
                     ODOP contains an "on-line" help facility.
                     It includes an overview of the program, a generic
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/gettingStarted" target="_blank" rel="noopener noreferrer">Getting Started</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/gettingStarted.html" target="_blank" rel="noopener noreferrer">Getting Started</a>&nbsp; 
                     section, a 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/gettingStartedSpring" target="_blank" rel="noopener noreferrer">spring design oriented Getting Started</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/gettingStartedSpring.html" target="_blank" rel="noopener noreferrer">spring design oriented Getting Started</a>&nbsp; 
                     section plus helpful hints and detailed explanations of major features.  
                     </p>
                     
@@ -114,7 +114,7 @@ export const execute = {
                     This screen clip illustrates how to get to the index of Help pages.   
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/HelpIndex.png" alt="Help Index"/>
+                    <Image fluid src="/docs/Help/png/HelpIndex.png" alt="Help Index"/>
                     
                     <p>
                     <br />
@@ -135,7 +135,7 @@ export const execute = {
                     providing spring-specific reports. 
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/SpringReportTabs.png" alt="Spring Report Tabs"/>
+                    <Image fluid src="/docs/Help/png/SpringReportTabs.png" alt="Spring Report Tabs"/>
                     
                     <p>
                     <br />
@@ -158,7 +158,7 @@ export const execute = {
                     This area provides feedback about the solution process.   
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/ResultSection.png" alt="Result Section"/>
+                    <Image fluid src="/docs/Help/png/ResultSection.png" alt="Result Section"/>
                     
                     <p>
                     <br />
@@ -181,7 +181,7 @@ export const execute = {
                     a tool-tip will pop up to provide more information regarding each item.   
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/ResultSectionToolTip.png" alt="Result Section ToolTip"/>
+                    <Image fluid src="/docs/Help/png/ResultSectionToolTip.png" alt="Result Section ToolTip"/>
                     
                     <p>
                     <br />
@@ -212,7 +212,7 @@ export const execute = {
                     reflect the result of the new value for that Independent Variable.   
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/IndependentSpring.png" alt="Independent Variable Entry Fields"/>
+                    <Image fluid src="/docs/Help/png/IndependentSpring.png" alt="Independent Variable Entry Fields"/>
                     
                     <p>
                     </p>
@@ -229,7 +229,7 @@ export const execute = {
                     (<b>Action : Search</b> menu).   
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/DependentSpring.png" alt="Dependent Variable Entry Fields"/>
+                    <Image fluid src="/docs/Help/png/DependentSpring.png" alt="Dependent Variable Entry Fields"/>
                     
                     <p>
                     </p>
@@ -245,7 +245,7 @@ export const execute = {
                     but are not subject to constraints, FIX or manipulation by the Search process. 
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/CalcInputSpring.png" alt="Calculation Input Entry Fields"/>
+                    <Image fluid src="/docs/Help/png/CalcInputSpring.png" alt="Calculation Input Entry Fields"/>
                     
                     <p>
                     <br />
@@ -267,7 +267,7 @@ export const execute = {
                     material property values are provided to the calculations. 
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/CalcInputTableSpring.png" alt="Calculation Input Selection Table"/>
+                    <Image fluid src="/docs/Help/png/CalcInputTableSpring.png" alt="Calculation Input Selection Table"/>
                     
                     <p>
                     </p>
@@ -289,7 +289,7 @@ export const execute = {
                     the default design named "Startup".
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/ConstraintSpring.png" alt="Constraints"/>
+                    <Image fluid src="/docs/Help/png/ConstraintSpring.png" alt="Constraints"/>
                     
                     <p>
                     </p>
@@ -306,7 +306,7 @@ export const execute = {
                     Note the checkboxes highlighted by the red oval in  this example.   
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/IV_FixSpring.png" alt="Fix an Independent Variable"/>
+                    <Image fluid src="/docs/Help/png/IV_FixSpring.png" alt="Fix an Independent Variable"/>
                     
                     <p>
                     </p>
@@ -326,7 +326,7 @@ export const execute = {
                     Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.   
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/DV_FixSpring.png" alt="Fix a Dependent Variable"/>
+                    <Image fluid src="/docs/Help/png/DV_FixSpring.png" alt="Fix a Dependent Variable"/>
                     
                     <p>
                     </p>
@@ -396,7 +396,7 @@ export const execute = {
                     On-line documentation specific to ODOP:Spring appears in the Spring Design topic.
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/HelpIndex.png" alt="Help Index"/>
+                    <Image fluid src="/docs/Help/png/HelpIndex.png" alt="Help Index"/>
                     
                     <p>
                     <br />
@@ -415,9 +415,9 @@ export const execute = {
                     Use the <b>Help : Demo...</b> menu item to select the desired demo session.   
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/HelpDemo.png" alt="Help Demo"/>
+                    <Image fluid src="/docs/Help/png/HelpDemo.png" alt="Help Demo"/>
                     <br />
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/SelectSpringDemo.png" alt="Select Spring Demo"/>
+                    <Image fluid src="/docs/Help/png/SelectSpringDemo.png" alt="Select Spring Demo"/>
                     
                     <p>
                     </p>
@@ -446,7 +446,7 @@ export const execute = {
             title: "Page 19 of 20",
             text: (
                 <>
-                <Image fluid src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
+                <Image fluid src="/docs/Help/png/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
                 </>
             )
         },
@@ -472,7 +472,7 @@ export const execute = {
                     More tutorial sessions are available. 
                     They have names like tutor3, tutor4, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a list of topics.
                     </p>
                     

@@ -99,7 +99,7 @@ export const execute = {
             title: "Page 04 of 10",
             text: (
                 <>
-                   <Image fluid src="designtypes/Spring/Compression/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
+                   <Image fluid src="/docs/Help/png/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
                 </>
             )
         },
@@ -170,7 +170,7 @@ export const execute = {
                     If a satisfactory solution is found, but one or more constraints remain violated by a
                     trivial amount, the program will display "<b>FEASIBLE</b>" in the Result section.
                     The on-line Help entry covering the multi-color 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/feasibilityIndicator" target="_blank" rel="noopener noreferrer">Feasibility Indicator</a>&nbsp;
+                    &nbsp;<a href="/docs/Help/feasibilityIndicator.html" target="_blank" rel="noopener noreferrer">Feasibility Indicator</a>&nbsp;
                     provides additional details. 
                     </p>
 
@@ -246,7 +246,7 @@ export const execute = {
                     Tutorial sessions named tutor3, tutor4, ... etc. provide instructions on how to use 
                     the ODOP software.
                     Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a complete list of the tutorial and demo topics.
                     </p>
                     

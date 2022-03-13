@@ -80,21 +80,21 @@ var url_execute = execute !== undefined ? execute : undefined;
 
 export default {
   node: {
-    env: node_env,
+      env: node_env,
   },
   oidc: {
-    issuer: issuer,
-    clientId: clientId,
-    redirectUri: window.location.origin + '/implicit/callback',
-    scopes: ['openid', 'profile', 'email'],
-    pkce: true,
+      issuer: issuer,
+      clientId: clientId,
+      redirectUri: window.location.origin + '/implicit/callback',
+      scopes: ['openid', 'profile', 'email'],
+      pkce: true,
   },
   env: {
-    types: env_types,
-    type: env_type,
-    name: env_name,
-    units: env_units,
-    view: env_view,
+      types: env_types,
+      type: env_type,
+      name: env_name,
+      units: env_units,
+      view: env_view,
   },
   session: {
       refresh: session_refresh,

@@ -112,7 +112,7 @@ export const execute = {
                     At a minimum, it should be understood that a feasible design is available. 
                     In the case that a Search has terminated without finding a feasible point, 
                     use of the 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/trade" target="_blank" rel="noopener noreferrer">Trade</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/trade.html" target="_blank" rel="noopener noreferrer">Trade</a>&nbsp; 
                     feature may be appropriate.
                     </p>
                     
@@ -130,7 +130,7 @@ export const execute = {
                     <p>
                     We start by adding a few constraints to the compression spring starting point used in other tutorial sessions.
                     This will leave us with a well formed 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/designSituations" target="_blank" rel="noopener noreferrer">Design Situation</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer">Design Situation</a>&nbsp; 
                     and a reasonable feasible region to work in.
                     </p>
                     
@@ -198,7 +198,7 @@ export const execute = {
                     SEEK  MIN  Weight
                     </p>
                     
-                    <Image fluid src="https://www.springdesignsoftware.org/odop/docs/Help/png/SeekMinWeight.png" alt="SeekMinWeight"/>
+                    <Image fluid src="/docs/Help/png/SeekMinWeight.png" alt="SeekMinWeight"/>
                     
                     <br />
                 </>
@@ -366,9 +366,9 @@ export const execute = {
                     <p>
                     If the use of Prop_Calc_Method seems a bit unfamiliar, you may wish to
                     review the on-line documentation sections (HELP entries) on 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/DesignTypes/c_spring" target="_blank" rel="noopener noreferrer">Compression Spring Design Type</a>, 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/materials" target="_blank" rel="noopener noreferrer">Materials</a> and 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/SpringDesign/advancedSpringOperations" target="_blank" rel="noopener noreferrer">Advanced Spring Operations</a>.&nbsp; 
+                    &nbsp;<a href="/docs/Help/DesignTypes/c_spring.html" target="_blank" rel="noopener noreferrer">Compression Spring Design Type</a>, 
+                    &nbsp;<a href="/docs/Help/SpringDesign/materials.html" target="_blank" rel="noopener noreferrer">Materials</a> and 
+                    &nbsp;<a href="/docs/Help/SpringDesign/advancedSpringOperations.html" target="_blank" rel="noopener noreferrer">Advanced Spring Operations</a>.&nbsp; 
                     Also, an earlier tutorial section (tutor5) and one of the demo problems (demo4)
                     provide additional details.
                     </p>
@@ -594,7 +594,7 @@ export const execute = {
                     More tutorial sessions are available. 
                     They have names like tutor3, tutor4, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a list of topics.
                     </p>
                     
