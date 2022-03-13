@@ -77,7 +77,7 @@ class Routes extends Component {
   }
   
   loadAutoSaveDesign() {
-//      console.log('In Routes.loadAutoSave this=',this);
+//      console.log('In Routes.loadAutoSaveDesign this=',this);
       this.setState({
           modal: false,
       });
@@ -90,12 +90,10 @@ class Routes extends Component {
       config.url.execute = undefined; // Turn off execute
       this.props.history.push('/')
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load autoSave' });
-//      displayMessage(
-//          'Design restored from AutoSave data after interruption.  See Help AutoSave for details.  Use File Save, File SaveAs or File Export to save the design permanently.',
-//          'info');
   }
   
   loadDefaultDesign() {
+//      console.log('In Routes.loadDefaultDesign this=',this);
       this.setState({
           modal: false,
       });
@@ -154,7 +152,7 @@ class Routes extends Component {
   }
 
   onContextHelp() {
-//      console.log('In ActionSeek.onContextHelp this=',this);
+//      console.log('In Routes.onContextHelp this=',this);
       window.open('/docs/Help/autoSave.html', '_blank');
   }
 
