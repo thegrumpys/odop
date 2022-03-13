@@ -683,5 +683,5 @@ ___
 &nbsp;
 
 [Spring Design Topics[Design Types](/docs/Help/SpringDesign))   
-[Help](/docs/Help/)   
+[Help](/docs/Help)   
 

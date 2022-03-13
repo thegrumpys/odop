@@ -23,4 +23,4 @@ These are:
 
 &nbsp;
 
-[Help](/docs/Help/)
+[Help](/docs/Help)

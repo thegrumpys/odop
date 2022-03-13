@@ -416,5 +416,5 @@ of the documentation.
 
 [Design Types](/docs/Help/DesignTypes)   
 [Spring Design Topics](/docs/Help/SpringDesign)   
-[Help](/docs/Help/)   
+[Help](/docs/Help)   
 

@@ -323,7 +323,7 @@ This diagram  may be helpful.
 
 [Design Types](/docs/Help/DesignTypes)   
 [Spring Design Topics](/docs/Help/SpringDesign)   
-[Help](/docs/Help/)   
+[Help](/docs/Help)   
 
 
 &nbsp;

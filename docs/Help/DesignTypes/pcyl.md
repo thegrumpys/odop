@@ -10,5 +10,5 @@ This diagram illustrates the Piston-Cylinder design variables:
 
 
 [Design Types](/docs/Help/DesignTypes)   
-[Help](/docs/Help/)   
+[Help](/docs/Help)   
 

@@ -157,4 +157,4 @@ used in the calculations is presented in the section
 
 
 [Spring Design Topics[Design Types](/docs/Help/SpringDesign))   
-[Help](/docs/Help/)   
+[Help](/docs/Help)   

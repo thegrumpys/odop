@@ -17,4 +17,4 @@ Thus, the user can experiment with various materials to see what will fit within
 
 
 [Design Types](/docs/Help/DesignTypes)   
-[Help](/docs/Help/)   
+[Help](/docs/Help)   

@@ -112,7 +112,7 @@
  
 
 [Spring Design Topics](/docs/Help/SpringDesign/)   
-[Help](/docs/Help/)   
+[Help](/docs/Help)   
 
 <!---
 Depending on Eclipse version or Markdown interpreter, a multi-line comment must be the last thing in the file.
