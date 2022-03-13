@@ -344,7 +344,7 @@ class SymbolValueWireDia extends Component {
                         </Table>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button outline="true" variant="info" onClick={this.onContextHelp}>Help</Button>{' '}
+                        <Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}
                         &nbsp;
                         <Button variant="primary" onClick={this.onClose}>Close</Button>
                     </Modal.Footer>

@@ -756,7 +756,7 @@ class ActionTrade extends Component {
                         </ul>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button outline="true" variant="info" onClick={this.onStrategyContextHelp}>Help</Button>{' '}
+                        <Button variant="outline-info" onClick={this.onStrategyContextHelp}>Help</Button>{' '}
                         <Button variant="secondary" onClick={this.onStrategyDone}> &nbsp; Done &nbsp; </Button>{' '}
                         <Button variant="secondary" onClick={this.onStrategyExisting}>Existing</Button>{' '}
                         <Button variant="info" onClick={this.onStrategyArbitrary}>Arbitrary</Button>{' '}
