@@ -20,7 +20,7 @@ The details:
 
 The ODOP View menu provides access to various "Views". 
 Each view is just a different way of looking at the current state of the [mathematical model](terminology.html#mathModel). 
-All ODOP [design types](terminology.html#designTypes) provide an "[Advanced View](menus#ViewAdvanced)" 
+All ODOP [design types](terminology.html#designTypes) provide an "[Advanced View](menus.html#ViewAdvanced)" 
 that permits input of values and provides access to all features.
 The ODOP spring design types also provide output-only "[Reports](menus.html#ViewReports)" and 
 a simplified spring design specific "[Calculator View](menus.html#ViewCalculator)" that accepts inputs.

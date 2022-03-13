@@ -186,7 +186,7 @@ While not a significant concern,
 this increases the computational effort required for the Search to find a solution.
 Once the appropriate Fix checkbox is checked, 
 enter a target value in either the Minimum or Maximum constraint level entry field.
-A  [Search](terminology#search.html) (Action : Search menu) is required to establish the desired values.
+A  [Search](terminology.html#search) (Action : Search menu) is required to establish the desired values.
 
 Clearing the checkbox (Free status) allows the Search to alter the value of the corresponding variable
 subject to constraints, if established.
