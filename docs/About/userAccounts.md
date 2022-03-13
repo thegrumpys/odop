@@ -47,7 +47,7 @@ using an email account different than your primary email account is a reasonable
 **Screen capture of the sign-in page:**   
 ![Sign-in screen](/docs/Help/png/SignInWidgetExpanded.png "Sign-in screen")    
 
-See [Password reset](/docs/Help/htt.html#passwordReset.html) for instructions on how to 
+See [Password reset](/docs/Help/htt.html#passwordReset) for instructions on how to 
 change a password or recover from a lost password after account creation is complete. 
    
 See [Default Designs](/docs/Help/defaultDesigns.html) for information on how a private design
