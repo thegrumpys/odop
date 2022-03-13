@@ -168,13 +168,14 @@ class Routes extends Component {
               <Route path='/implicit/callback' component={LoginCallback} />
             </Security>
             <Modal show={this.state.modal}>
+                <Modal.Header><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
                 <Modal.Body>
-                    <Alert variant="info">Restore AutoSave design available after interruption?</Alert>
+                    <Alert variant="info">AutoSave design available. Recover the design?</Alert>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}
-                    <Button variant="secondary" onClick={this.loadDefaultDesign}>Ignore AutoSave</Button>{' '}
-                    <Button variant="primary" onClick={this.loadAutoSaveDesign}>Restore AutoSave</Button>
+                    <Button variant="secondary" onClick={this.loadDefaultDesign}>Cancel</Button>{' '}
+                    <Button variant="primary" onClick={this.loadAutoSaveDesign}>Yes</Button>
                 </Modal.Footer>
             </Modal>
         </>
