@@ -1,5 +1,5 @@
 import React from 'react';
-import { logUsage } from '../../../store/actionCreators';
+import { logUsage, changeResultTerminationCondition } from '../../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -47,7 +47,8 @@ export const execute = {
             actions: [
 //                                       We have concluded that AutoSave here is not a good idea
 //                saveAutoSave(),
-                logUsage('event','welcomeAdv', { 'event_label': 'Page 01 of 04' })
+                logUsage('event','welcomeAdv', { 'event_label': 'Page 01 of 04' }),
+                changeResultTerminationCondition('When finished reading all 4 pages, use the gray "Exit" button in the upper right to close the light green panel above.'),
             ]
         },
         {
