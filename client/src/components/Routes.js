@@ -175,7 +175,7 @@ class Routes extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}
-                    <Button variant="secondary" onClick={this.loadDefaultDesign}>Delete AutoSave</Button>{' '}
+                    <Button variant="secondary" onClick={this.loadDefaultDesign}>Ignore AutoSave</Button>{' '}
                     <Button variant="primary" onClick={this.loadAutoSaveDesign}>Restore AutoSave</Button>
                 </Modal.Footer>
             </Modal>
