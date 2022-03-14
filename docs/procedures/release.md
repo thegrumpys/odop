@@ -6,7 +6,7 @@ and the documentation to GitHub Pages and SpringDesignSoftware.org.
 
 Ideally, any system downtime affecting the production system should be announced in advance via docs/About/messageOfTheDay.md
 
-For background regarding "Major.Minor.Patch" see: [ODOP version numbering](/docs/design/VersionNumbers.html)
+For background regarding "Major.Minor.Patch" see: [ODOP version numbering](../design/VersionNumbers)
    
 Remember that if merged to master and pushed, changes to docs will be immediately published on GitHub Pages.
 Until all doc references are fully switched over to SpringDesignSoftware.org,
@@ -31,17 +31,17 @@ Issue the command:
 npm audit fix   
 when positioned in the server directory and again when positioned in the client directory.
 1. If this release has no migrate requirement, initialState impact or environment variable changes,
-skip forward to [Test For Console Output](release.html#test4consoleoutput).   
+skip forward to [Test For Console Output](release#test4consoleoutput).   
 To confirm,
 compare the current master branch against the previous released commit tag branch 
 and check if any of the client/src/designtypes/.../initialState.js files have changed.  
 &nbsp;
 1. Confirm offsets.js and symbol_table_offsets.js have been updated as part of migrate.js changes and are both updated to be sonsistent. Do this by copying from View > View Offsets and View Symbol Table and paste into offsets.js and symbol_table_offsets.js for all design-types that were changed.
-1. If the database does not exist or is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB.html)
+1. If the database does not exist or is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB)
 to create and format the database tables using the create.sql file. 
 Do this to development, test, staging and/or production databases as appropriate.   
 See Heroku Dashboard Resources tab for JAWS DB.
-The database names are summarized in [Procedures for creating a new JAWSDB](NewDB.html).   
+The database names are summarized in [Procedures for creating a new JAWSDB](NewDB).   
 1. Start server and client under your development environment. 
 If they are already started, log off of Okta and re-log into Okta to ensure the session is valid and not at risk of time-out.   
 1. Verify initial_state and migrate match: Repeat the following steps for each design type (Piston-Cylinder, Solid, Spring/Compression, Spring/Extension, and Spring/Torsion) with an impacted initialState or initialSystemControls. 
@@ -56,7 +56,7 @@ Process "Startup_Metric" designs for the three Spring design types similarly.
     1. Do a File > Open > Load Initial State for each design type that has an impacted Initial State. It is not necessary to Load Initial Metric State, because the script does that for you. Do this FOR ALL mk* files: Run Action > Execute > mk[x] script and Exit the script to created each [x] file. Do a File > Save into the [x] file.
     1. Using MySqlDump command run the `scripts/dump_db_startup_files.sh` script to dump all newly created design files into their respective load.sql files. You might need to set a different OKTA Userid inside the WHERE clause for the Admin User who saved this file in the previous step.  
     1. Finally, manually edit and add carriage returns before each inserted VALUES section, and delete the 'id' field name and 'id' field value (it should be first in each record),and set the user field to NULL.
-    1. **Commit these changes.**  The script to load these changes will be run in a [later step](release.html#runloadscript).  
+    1. **Commit these changes.**  The script to load these changes will be run in a [later step](release#runloadscript).  
 &nbsp;
 1. If there are environment variable changes, update Server's .env and Client's .env with the following for development (localhost). NOTE: No entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost). Assume NODE_ENV="development" for software development environment, or "test" for test case execution environment.
     * JAWSDB\_URL - For server only
@@ -98,7 +98,7 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
 1. If operating on the production system (ignore for staging), check for active users on the production system; put the production system in maintenance mode.
    Maintenance mode may be enabled in the Heroku console settings tab or from the command line with:  
    heroku maintenance:on -a odop
-1. If no changes to dynamic runtime configuration variables skip forward to [Database Stuff](release.html#databaseStuff).
+1. If no changes to dynamic runtime configuration variables skip forward to [Database Stuff](release#databaseStuff).
 &nbsp;
 1. For handling dynamic runtime configuration variables in Heroku only:
    From Dashboard, expand "odop" for production or "odop-staging" for the staging system. Go to settings/Config Vars. Click "Reveal Config Vars".
@@ -120,8 +120,8 @@ B. **DO first for STAGING and then do again for PRODUCTION environments**
    Buildpack configuration is on Heroku Settings tab.
 <a id="databaseStuff"></a>
 &nbsp;
-1. **Database Stuff** &nbsp; If this release has no database impact, skip forward to [Publish to Heroku](release.html#publish2Heroku).
-1. If the database does not exist or is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB.html)
+1. **Database Stuff** &nbsp; If this release has no database impact, skip forward to [Publish to Heroku](release#publish2Heroku).
+1. If the database does not exist or is brand new and empty, then see [Procedures for creating a new JAWSDB](NewDB)
 to create and format the database tables using the create.sql file.
 Do this for staging and/or production databases as appropriate.   
 See the above link for the easier-to-read table of database names.  
@@ -166,7 +166,7 @@ heroku maintenance:off -a odop
 while positioned in the git/odop directory, push to SpringDesignSoftware.org using the command line:   
 git push springdesignsoftware master   
 Verify no unexpected error messages during build on production.
-1. Confirm that the https://odop.herokuapp.com/docs website is operational and that documentation displays.
+1. Confirm that the http://SpringDesignSoftware.org/odop/docs website is operational and that documentation displays.
 
 &nbsp;
 

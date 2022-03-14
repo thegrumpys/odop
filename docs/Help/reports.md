@@ -5,7 +5,7 @@ The spring design types each provide multiple reports of design type specific in
 in a compact format and accessed through the View menu.
 The Piston-Cylinder and Rectangular Solid design types do not provide any reports.
 
- ![Spring Reports](/docs/Help/png/SpringReportTabs.png "Spring Reports")   
+ ![Spring Reports](./png/SpringReportTabs.png "Spring Reports")   
 
 &nbsp;
 
@@ -17,9 +17,9 @@ in each of the reports.
 Depending on the capabilities of the user's web browser,
 it should be possible to print the individual report pages or save 
 into .PDF format.
-For additional information, refer to [printing tips](htt.html#printing) 
+For additional information, refer to [printing tips](htt#printing) 
 and documentation on your browser's print function. 
 
 &nbsp;
 
-[Help](/docs/Help)
+[Help](./)

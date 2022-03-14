@@ -9,7 +9,7 @@ you can select an available system provided design with "metric" in the name in 
 utilize metric units (mm, Newtons).   
 
 **Compression spring default designs**   
-![Compression spring default designs](/docs/Help/png/FileOpen_defaultDesigns.png "File : Open default designs")  
+![Compression spring default designs](./png/FileOpen_defaultDesigns.png "File : Open default designs")  
 
 When saving designs into a private section of the ODOP design library, 
 it is possible to save (**File : Save As** menu item) a private design "on top of" 
@@ -20,7 +20,7 @@ will again be available.
 
 While the system provided designs have multiple constraints established, 
 as provided, they are "under specified". 
-For more information on this point see: [Design Situations](designSituations.html).   
+For more information on this point see: [Design Situations](designSituations).   
 
 The constraints established in the default designs serve to guide or contain the solution to 
 reasonable and expected results.
@@ -33,9 +33,9 @@ To get started on a new design, open a system provided design and express the go
 Invoke the Search feature (**Action : Search** menu) to discover if a feasible solution is available.
 More information on how to proceed is available in the tutorials (**Help : Tutorial...** menu) 
 and in other on-line Help topics such as 
-[Getting Started With the Spring Tutorial and Demo](gettingStartedSpring.html) and 
-[Intro Pages Overview](/docs/About/introPagesOverview.html).  
+[Getting Started With the Spring Tutorial and Demo](gettingStartedSpring) and 
+[Intro Pages Overview](../About/introPagesOverview).  
 
 &nbsp;
 
-[Help](/docs/Help)
+[Help](./)

@@ -3,7 +3,7 @@
 This section covers a few restrictions and limitations of the 
 **O**pen **D**esign **O**ptimization **P**latform software 
 and the ODOP:Spring app. 
-Please review the [Disclaimer](Disclaimer.html) section for liability limitations.
+Please review the [Disclaimer](Disclaimer) section for liability limitations.
 
 The current release of ODOP:Spring is valid only for helical coil compression,
 extension and torsion springs that have the properties of uniform pitch,
@@ -56,7 +56,7 @@ any single manufacturer.
 
 Designs saved in the public account are not assured of long term storage. 
 Notice of impending cleanup of designs saved in the public account will be posted
-at [Message of the Day](/docs/About/messageOfTheDay.html).
+at [Message of the Day](../messageOfTheDay).
 Clean up activity will likely occur just prior to new releases of the
 ODOP software and the ODOP:Spring app.
 While designs saved in private accounts will be preserved and version migrated
@@ -68,5 +68,5 @@ any impact to saved designs.
    
 &nbsp;
    
-[About](/docs/About)
+[About](../)
 

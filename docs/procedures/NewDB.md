@@ -37,6 +37,6 @@ Those tables will then exist but be empty.
 
  . . .   
 
-As appropriate (see reference to load_all.sh in [Release procedure](release.html)), 
+As appropriate (see reference to load_all.sh in [Release procedure](release)), 
 run the (five?) load.sql files to populate designs for the (five?) design types.
 

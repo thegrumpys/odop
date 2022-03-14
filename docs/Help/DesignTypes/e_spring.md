@@ -4,24 +4,24 @@ The Extension Spring design type is a full-featured mathematical model enabling
 the engineering design of helical coil extension springs.   
 
 This section presents material unique to the Extension Spring design type.
-The more general material available at [Spring Design Topics](/docs/Help/SpringDesign)
+The more general material available at [Spring Design Topics](../SpringDesign)
 provides important supplemental information.   
 
 ___
 
 **On this page:**  
-[Extension spring force-deflection diagram](e_spring.html#e_springFD_Diag)  
-[Extension spring force-deflection point names](e_spring.html#e_springFD_Names)  
-[Extension spring dimensions](e_spring.html#e_springDims)  
-[Independent Variable names](e_spring.html#e_springIV_Names)  
-[Dependent Variable names](e_spring.html#e_springDV_Names)  
-[Calculation Input names](e_spring.html#e_springCalcInputNames)  
-[Values in reports](e_spring.html#e_springOtherValues)  
-[Constraints unique to extension springs](e_spring.html#e_springConstraints)  
-[Initial tension range](e_spring.html#e_springIT_Range)  
-[Hook Stress](e_spring.html#e_springHookStress)  
-[Extension spring cycle life](e_spring.html#e_springCycleLife)  
-[Extension spring end types](e_spring.html#e_springEndTypes)  
+[Extension spring force-deflection diagram](e_spring#e_springFD_Diag)  
+[Extension spring force-deflection point names](e_spring#e_springFD_Names)  
+[Extension spring dimensions](e_spring#e_springDims)  
+[Independent Variable names](e_spring#e_springIV_Names)  
+[Dependent Variable names](e_spring#e_springDV_Names)  
+[Calculation Input names](e_spring#e_springCalcInputNames)  
+[Values in reports](e_spring#e_springOtherValues)  
+[Constraints unique to extension springs](e_spring#e_springConstraints)  
+[Initial tension range](e_spring#e_springIT_Range)  
+[Hook Stress](e_spring#e_springHookStress)  
+[Extension spring cycle life](e_spring#e_springCycleLife)  
+[Extension spring end types](e_spring#e_springEndTypes)  
 
 &nbsp;
 ___
@@ -204,7 +204,7 @@ ___
 -->
                     
 &nbsp;
-For additional information: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
+For additional information: [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
 &nbsp;
    
 ___
@@ -278,9 +278,9 @@ ___
 
 &nbsp;
 For additional information: 
- - [Materials](/docs/Help/SpringDesign/materials.html)   
- - [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
- - [Extension spring end types](e_spring.html#e_springEndTypes)   
+ - [Materials](../SpringDesign/materials)   
+ - [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
+ - [Extension spring end types](e_spring#e_springEndTypes)   
 &nbsp;
    
 ___
@@ -317,7 +317,7 @@ ___
 
 While most extension spring constraints have constant levels,
 a few are of the "Functionally Determined Constraint Level" (FDCL) variety.
-As described in the [Function Constraints (FDCL)](/docs/Help/terminology.html#fdcl) section 
+As described in the [Function Constraints (FDCL)](../terminology#fdcl) section 
 of the On-line Help entry on "Terminology", 
 rather than having constraint levels that are expressed 
 as simple constants, these express a desired relationship between 
@@ -405,7 +405,7 @@ upward to form the hook or loop, either the bending or torsional stresses
 may be the first to induce failure.  Note that fatigue failure in the end
 of an extension spring may also be induced by stress concentration caused
 by tooling marks.  Refer to the sources listed in the on-line Help
-[Spring Design References](/docs/Help/SpringDesign/references.html) entry for additional details.
+[Spring Design References](../SpringDesign/references) entry for additional details.
 
 ODOP:Spring uses bending stresses in the calculation of FS\_Hook.   FS\_Hook is
 not constrained in the default extension spring start point ("Startup").
@@ -469,14 +469,14 @@ the constants described above as "directly impacted"
 may be set by the user with the numeric entry field.
    
 More precise treatments of extension spring end types are available in the sources 
-listed in the [Spring Design References](/docs/Help/SpringDesign/references.html) section 
+listed in the [Spring Design References](../SpringDesign/references) section 
 of the documentation.
 
 &nbsp;
 
-[Design Types](/docs/Help/DesignTypes)   
-[Spring Design Topics](/docs/Help/SpringDesign)   
-[Help](/docs/Help)   
+[Design Types](./)   
+[Spring Design Topics](../SpringDesign)   
+[Help](../)   
 
 <!---
 While single line comments work as expected, 

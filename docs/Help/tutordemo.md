@@ -30,7 +30,7 @@ use the <b>File : Save</b> or <b>File : Save As</b>
 menu item to save your work before starting a session.
  
 See: 
-[Spring design tutorial and demo](gettingStartedSpring.html)
+[Spring design tutorial and demo](gettingStartedSpring)
 for details on starting the spring design tutorial and demo sessions.   
  &nbsp; 
   
@@ -83,5 +83,5 @@ demo15 | Carlson, Spring Designer's Handbook | torsion spring problem&nbsp;4
  
  &nbsp;
  
- [Help](/docs/Help)
+ [Help](./)
  

@@ -3,34 +3,34 @@
 This topic covers the ODOP menu structure. 
 
 **On this page:**  
-[ODOP logo](menus.html#ODOPlogo)  
-[Sign In...](menus.html#SignIn)  
+[ODOP logo](menus#ODOPlogo)  
+[Sign In...](menus#SignIn)  
 
-[File : Open...](menus.html#FileOpen)  
-[File : Save](menus.html#FileSave)  
-[File : Save As...](menus.html#FileSaveAs)  
-[File : Delete...](menus.html#FileDelete)  
-[File : Import...](menus.html#FileImport)  
-[File : Export](menus.html#FileExport)  
-[File : Preferences](menus.html#FilePreferences)  
-[File : Properties](menus.html#FileProperties)  
+[File : Open...](menus#FileOpen)  
+[File : Save](menus#FileSave)  
+[File : Save As...](menus#FileSaveAs)  
+[File : Delete...](menus#FileDelete)  
+[File : Import...](menus#FileImport)  
+[File : Export](menus#FileExport)  
+[File : Preferences](menus#FilePreferences)  
+[File : Properties](menus#FileProperties)  
 
-[Action : Search](menus.html#ActionSearch)  
-[Action : Seek...](menus.html#ActionSeek)  
-[Action : Trade...](menus.html#ActionTrade)  
-[Action : Select Size...](menus.html#ActionSelectSize)  
-[Action : Select Catalog...](menus.html#ActionSelectCatalog)  
-[Action : Execute...](menus.html#ActionExecute)  
+[Action : Search](menus#ActionSearch)  
+[Action : Seek...](menus#ActionSeek)  
+[Action : Trade...](menus#ActionTrade)  
+[Action : Select Size...](menus#ActionSelectSize)  
+[Action : Select Catalog...](menus#ActionSelectCatalog)  
+[Action : Execute...](menus#ActionExecute)  
 
-[View : Advanced](menus.html#ViewAdvanced)  
-[View : Calculator](menus.html#ViewCalculator)  
-[View : Reports](menus.html#ViewReports)  
+[View : Advanced](menus#ViewAdvanced)  
+[View : Calculator](menus#ViewCalculator)  
+[View : Reports](menus#ViewReports)  
 
-[Help : Message of the Day](menus.html#HelpMotD)  
-[Help : Index](menus.html#HelpIndex)  
-[Help : Demo...](menus.html#HelpDemo)  
-[Help : Tutorial...](menus.html#HelpTutorial)  
-[Help : About](menus.html#HelpAbout)  
+[Help : Message of the Day](menus#HelpMotD)  
+[Help : Index](menus#HelpIndex)  
+[Help : Demo...](menus#HelpDemo)  
+[Help : Tutorial...](menus#HelpTutorial)  
+[Help : About](menus#HelpAbout)  
 
 ___
 
@@ -54,7 +54,7 @@ it is good practice to save your work (**File : Save** or **File : Export**)
 before invoking a reset of the app.  
 
 See also:   
-[AutoSave](autoSave.html)   
+[AutoSave](autoSave)   
 
 ___
 
@@ -67,7 +67,7 @@ The Sign In button appears on the menu bar between the ODOP logo and the File me
 Use the Sign In button to create a new user account or log into an existing account.  
 
 See also:   
-[User Accounts](/docs/About/userAccounts.html)   
+[User Accounts](../About/userAccounts)   
 
 ___
 
@@ -90,11 +90,11 @@ The units system, for example, US Customary units (inches, pounds)
 or metric units (mm, newtons) is established by the selected starting design.
 
 See also:   
-[Default Designs](defaultDesigns.html)   
-[User Accounts](/docs/About/userAccounts.html)   
-[Units: US customary and metric](SpringDesign/unitsUSmetric.html)  
-[Import and Export](htt.html#fileImportAndExport)  
-[ODOP Design Library](terminology.html#designLib)
+[Default Designs](defaultDesigns)   
+[User Accounts](../About/userAccounts)   
+[Units: US customary and metric](SpringDesign/unitsUSmetric)  
+[Import and Export](htt#fileImportAndExport)  
+[ODOP Design Library](terminology#designLib)
 
 ___
 
@@ -108,8 +108,8 @@ It is necessary to be logged into a user account.
 If not logged in to a user account, a pop-up providing a Sign In opportunity will appear.
 
 See also:   
-[Default Designs](defaultDesigns.html)   
-[User Accounts](/docs/About/userAccounts.html)   
+[Default Designs](defaultDesigns)   
+[User Accounts](../About/userAccounts)   
 
 ___
 
@@ -123,8 +123,8 @@ It is necessary to be logged into a user account.
 If not logged in to a user account, a pop-up providing a Sign In opportunity will appear.
 
 See also:   
-[Default Designs](defaultDesigns.html)   
-[User Accounts](/docs/About/userAccounts.html)   
+[Default Designs](defaultDesigns)   
+[User Accounts](../About/userAccounts)   
 
 ___
 
@@ -144,8 +144,8 @@ System provided designs are marked "[ReadOnly]".
 There is no un-delete feature.
 
 See also:   
-[Default Designs](defaultDesigns.html)   
-[User Accounts](/docs/About/userAccounts.html)   
+[Default Designs](defaultDesigns)   
+[User Accounts](../About/userAccounts)   
 
 ___
 
@@ -157,8 +157,8 @@ ___
 The File : Import menu item restores a previously exported design as the current design.   
 
 See also:   
-[Import and Export](htt.html#fileImportAndExport)  
-[File : Export](menus.html#FileExport)  
+[Import and Export](htt#fileImportAndExport)  
+[File : Export](menus#FileExport)  
 
 ___
 
@@ -172,8 +172,8 @@ By default, the file is placed in the user's download folder (directory) with a 
 Use browser settings to control the default download folder or be prompted to specify a folder every time.   
 
 See also:   
-[Import and Export](htt.html#fileImportAndExport)  
-[File : Import...](menus.html#FileImport)  
+[Import and Export](htt#fileImportAndExport)  
+[File : Import...](menus#FileImport)  
 [.json files](https://en.wikipedia.org/wiki/JSON)
 
 
@@ -190,8 +190,8 @@ Most of these values control behavior of the numerical search algorithm.
 A few control aspects of the on-screen display for Advanced View.
 
 See also:   
-[Search](search.html)   
-[Terminology - Preferences](terminology.html#preferences)
+[Search](search)   
+[Terminology - Preferences](terminology#preferences)
 
 
 ___
@@ -225,9 +225,9 @@ The number of text strings and default labels for these text strings are part
 of the initialState definition for each design type.
 
 See also:   
-[View : Reports](menus.html#ViewReports)   
-[Terminology - Properties](terminology.html#properties)  
-[Printing](htt.html#printing)
+[View : Reports](menus#ViewReports)   
+[Terminology - Properties](terminology#properties)  
+[Printing](htt#printing)
 
 
 ___
@@ -246,26 +246,26 @@ Specifically,
 Fixed status causes Search to achieve or hold a specified value. 
 Free status allows Search to manipulate that variable to achieve a feasible design. 
 
-Search operates to minimize the value of the [objective function](terminology.html#obj). 
+Search operates to minimize the value of the [objective function](terminology#obj). 
 The current design is used as a starting point. 
 Search stops if the Objective Value falls below OBJMIN.  
 
 Results of a Search are reported in the Result Section that appears 
 at the upper portion of the main page (Advanced and Calculator views).   
 
-![Result Section](/docs/Helppng/ResultSectionToolTip.png "Result Section")  
+![Result Section](./png/ResultSectionToolTip.png "Result Section")  
 
 The tooltip associated with the "Status" label of multi-color Feasibility Indicator provides 
 the numeric values of the current Objective Value and OBJMIN. 
 
 See also:   
-[Search](search.html)   
-[Feasibility](feasibility.html)   
-[Feasible Region](terminology.html#feasibleRegion)  
-[Design Situations](designSituations.html)   
-[Constraints](terminology.html#constraints)   
-[FIX and FREE](terminology.html#fix)   
-[File : Preferences](menus.html#FilePreferences)   
+[Search](search)   
+[Feasibility](feasibility)   
+[Feasible Region](terminology#feasibleRegion)  
+[Design Situations](designSituations)   
+[Constraints](terminology#constraints)   
+[FIX and FREE](terminology#fix)   
+[File : Preferences](menus#FilePreferences)   
 
 ___
 
@@ -284,14 +284,14 @@ Seek will prompt for the name of the varible to be investigated and the directio
 Results of a Seek are reported in the Result Section that appears 
 at the upper portion of the main page (Advanced and Calculator views).   
 
-![Result Section](/docs/Help/png/ResultSectionToolTip.png "Result Section")  
+![Result Section](./png/ResultSectionToolTip.png "Result Section")  
 
 
 See also:   
-[Seek](seek.html)   
-[Feasibility](feasibility.html)   
-[Feasible Region](terminology.html#feasibleRegion)  
-[Design Situations](designSituations.html)
+[Seek](seek)   
+[Feasibility](feasibility)   
+[Feasible Region](terminology#feasibleRegion)  
+[Design Situations](designSituations)
 
 
 ___
@@ -317,10 +317,10 @@ the opportunity to accept that set of constraints.
 
 
 See also:   
-[Trade](trade.html)   
-[Feasibility](feasibility.html)   
-[Feasible Region](terminology.html#feasibleRegion)  
-[Design Situations](designSituations.html)
+[Trade](trade)   
+[Feasibility](feasibility)   
+[Feasible Region](terminology#feasibleRegion)  
+[Design Situations](designSituations)
 
 
 ___
@@ -343,7 +343,7 @@ ___
  automatically puts the selected value in Fixed status. 
 
 See also:   
-[Select Size](SpringDesign/selectSizeCatalog.html)   
+[Select Size](SpringDesign/selectSizeCatalog)   
 
 
 ___
@@ -371,8 +371,8 @@ Note that it may be desirable to save (File : Save or File : Save As) the curren
 before selecting a catalog item.
 
 See also:   
-[Select Catalog](SpringDesign/selectSizeCatalog.html)   
-[Extension spring catalog lookup](htt.html#e_springCatLookup)   
+[Select Catalog](SpringDesign/selectSizeCatalog)   
+[Extension spring catalog lookup](htt#e_springCatLookup)   
 
 
 ___
@@ -393,7 +393,7 @@ Specifically, after running this script, the Search process will run longer and 
 to refine the results by perhaps an extra significant digit. 
 
 See also:   
-[File : Preferences](menus.html#FilePreferences)   
+[File : Preferences](menus#FilePreferences)   
 
 
 ___
@@ -409,7 +409,7 @@ It provides access to all program features.
 Use the checkboxes in the variables column to control Fix / Free status.
 Use the constraints column to establish or modify Min and/or Max values of constraints on the corresponding variables.
 
-[Spring variables displayed in Advanced View](/docs/Help/png/ScrCap_3TypeNoted.png)
+[Spring variables displayed in Advanced View](https://www.springdesignsoftware.org/odop/docs/Help/png/ScrCap_3TypeNoted.png)
 
 
 ___
@@ -432,7 +432,7 @@ A border on the right indicates that an upper (Max) constraint is enabled.
 A heavier border on both left and right of a numeric field indicates Fixed status.
 No border line on either left or right indicates Free status and no constraint enabled.
 
-[Spring variables displayed in Calculator View](/docs/Help/png/ScrCap_3TypeCalcNoted.png)
+[Spring variables displayed in Calculator View](https://www.springdesignsoftware.org/odop/docs/Help/png/ScrCap_3TypeCalcNoted.png)
 
 
 ___
@@ -448,7 +448,7 @@ Each of the currently available coil spring design types offers three reports.
  - Report 2 has a focus on stress information
  - Report 3 is intended to be printed or saved into .PDF format so that it can be included as part of a request for quotation 
 
-![Screen capture of Report 1](/docs/Help/png/ScrCap_Report1Noted.png "Report 1")  
+![Screen capture of Report 1](./png/ScrCap_Report1Noted.png "Report 1")  
 
 Information entered into the File : Properties menu of coil spring design types is included as part of Report 3.
 Thus, this information can be used to support the documentation of a spring design.
@@ -456,9 +456,9 @@ See your browser documentation for details on how to print or save into .PDF for
 From there, the information can be included as part of a Request for Quotation or other transfer of the design information.
 
 See also:   
-[File : Properties](menus.html#FileProperties)   
-[Terminology - Properties](terminology.html#properties)  
-[Printing](htt.html#printing)
+[File : Properties](menus#FileProperties)   
+[Terminology - Properties](terminology#properties)  
+[Printing](htt#printing)
 
 
 ___
@@ -486,7 +486,7 @@ The Help : Index menu item displays a list of links to the various ODOP on-line 
 Most of these articles are common to all design types.
 An entry describing [Available Design Types](DesignTypes) is near the bottom of the list.   
 A link to a list of [Spring Design Topics](SpringDesign) is near the bottom of the list.
-The last link on the list is an alternate way to reach the [About](/docs/About) articles.
+The last link on the list is an alternate way to reach the [About](../About) articles.
 
 
 ___
@@ -502,7 +502,7 @@ If no demonstration sessions are available for that design type, the Help : Demo
 will be disabled. 
 
 See also:   
-[Spring design demonstration sessions](tutordemo.html)   
+[Spring design demonstration sessions](tutordemo)   
 
 
 ___
@@ -518,7 +518,7 @@ If no tutorial sessions are available for that design type, the Help : Tutorial 
 will be disabled.
  
 See also:   
-[Spring design tutorial sessions](tutordemo.html)   
+[Spring design tutorial sessions](tutordemo)   
 
 
 ___
@@ -543,5 +543,5 @@ ___
 
 &nbsp;
  
-[Help](/docs/Help)
+[Help](./)
 

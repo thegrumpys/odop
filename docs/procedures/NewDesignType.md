@@ -32,7 +32,7 @@ For example, coil spring design types utilize:
 * client/src/designtypes/Spring/
     * mat\_ips.json,  mat\_cgs.json, etc.
     * mat\_ips\_offsets.js, mat\_cgs\_offsets.js, etc.
-    * wire_dia_xx.json &nbsp; (standard wire sizes tables)
+    * sizes_xx.json &nbsp; (standard wire sizes tables)
 * client/src/designtypes/Spring/_designName_/
     * init.js<sup> ** </sup>
     * view.js<sup> ** </sup>
@@ -65,7 +65,7 @@ For example, coil spring design types utilize:
 * Create a load.sql file   
  ---- Using an existing load.sql file as an example, overwrite the initialState section with the new initial state json.   
  ---- {need more detail here} ...   
- ---- See also: [Making changes to initialState.js](initialStateChanges.html)
+ ---- See also: [Making changes to initialState.js](initialStateChanges)
    
 **Build a new GitHub repository ?**   
 * plug-ins ?

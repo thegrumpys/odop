@@ -8,4 +8,4 @@ Would it utilize the Redux "immutable state" capabilities ?
 Note:  The "Back" button of the demo / tutorial feature restores a previously captured state.
 The entire state is captured / restored to / from the "Step".
 
-Refer to [Side-by-Side Comparison](/docs/design/SideBySideCompare.html)
+Refer to [Side-by-Side Comparison](./SideBySideCompare)

@@ -6,7 +6,7 @@ This problem will be used as a starting point for introducing concepts and basic
 
 The Rectangular Solid is a simple box defined by Length, Width and Height.
 
-![Rectangular Solid Design Type](/docs/Help/DesignTypes/png/RectangularSolidDiagram.png "Rectangular Solid Design Type")
+![Rectangular Solid Design Type](./png/RectangularSolidDiagram.png "Rectangular Solid Design Type")
 
 One interesting feature of the Rectangular Solid implementation is a materials table that 
 provides density values for a range of materials (both real and mythical). 
@@ -16,5 +16,5 @@ The default starting point supplied with the Rectangular Solid problem includes 
 Thus, the user can experiment with various materials to see what will fit within USPS regulations.
 
 
-[Design Types](/docs/Help/DesignTypes)   
-[Help](/docs/Help)   
+[Design Types](./)   
+[Help](../)   

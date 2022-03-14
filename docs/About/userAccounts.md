@@ -1,7 +1,7 @@
 ## User Accounts, Username, Sign-in, Sign-out
 
 A user account is **not** required to operate most features of the software. 
-If saving designs into the cloud-based (on-line) [ODOP Design Library](/docs/Help/terminology.html#designLib),
+If saving designs into the cloud-based (on-line) [ODOP Design Library](../Help/terminology#designLib),
 it is necessary to establish a user account with associated unique username and password 
 so as to keep those designs private.  
 
@@ -26,7 +26,7 @@ When operating in the public account, it is possible to save designs into the OD
 but keep in mind that all saved information will be completely public and modifiable.
 Designs saved in the public account do not have the same assurance of long-term storage
 as those saved in a private account.
-See [Restrictions](Legal/Restrictions.html) for long-term data storage policies.
+See [Restrictions](Legal/Restrictions) for long-term data storage policies.
 
 Once you have established a username and password, 
 launch the ODOP software and push the "Sign-in" button to the left of the File menu 
@@ -39,25 +39,25 @@ do not be concerned about a "You don't have any apps." message on your personal 
 (used for adding apps, changing or recovering passwords, etc.).  
 
 An account username must be in the form of an email address. 
-As noted in our [Privacy Notice](Legal/PrivacyStatement.html), 
+As noted in our [Privacy Notice](Legal/PrivacyStatement), 
 your personal information will be secure and not abused. 
 If you have any remaining concerns on this point, 
 using an email account different than your primary email account is a reasonable approach.
 
 **Screen capture of the sign-in page:**   
-![Sign-in screen](/docs/Help/png/SignInWidgetExpanded.png "Sign-in screen")    
+![Sign-in screen](../Help/png/SignInWidgetExpanded.png "Sign-in screen")    
 
-See [Password reset](/docs/Help/htt.html#passwordReset) for instructions on how to 
+See [Password reset](../Help/htt#passwordReset) for instructions on how to 
 change a password or recover from a lost password after account creation is complete. 
    
-See [Default Designs](/docs/Help/defaultDesigns.html) for information on how a private design
+See [Default Designs](../Help/defaultDesigns) for information on how a private design
 can be used to personalize system provided default designs.
 
-See [Restrictions](Legal/Restrictions.html) for long term data storage policies 
+See [Restrictions](Legal/Restrictions) for long term data storage policies 
 in both public and private accounts.
 
 The **File : Export** menu item allows design data to be preserved in local storage.
-For details, see: [Save, Save As, Import and Export](/docs/Help/htt.html#fileSaveAndSaveAs).
+For details, see: [Save, Save As, Import and Export](../Help/htt#fileSaveAndSaveAs).
  
 Once signed in, your user session will remain active for as long as the browser window (tab) 
 associated with the app exists and your Internet connection is maintained. 
@@ -67,7 +67,7 @@ In this situation, you may be able to open a new browser window (tab) and open a
 need to sign-in again. 
 However, you should save frequently as once the browser window or tab is closed, 
 any unsaved design in progress may be lost. 
-For more information on this point, see: [AutoSave](/docs/Help/autoSave.html).
+For more information on this point, see: [AutoSave](../Help/autoSave).
 
 **Troubleshooting sign in issues:**
 - Be sure to enter your email address in the "Username" field of the sign-in page.   
@@ -84,4 +84,4 @@ Switch tabs in order to return to that Sign-In page or simply close this tab.
 
 &nbsp;   
 
-[Help](/docs/About)
+[About](./)

@@ -19,26 +19,26 @@ demonstration problem and is a good place to start.
 The remainder of this Getting Started topic will use the Rectangular Solid design type
 to describe several screen captures that refer to the ODOP main page.
 
-Note that the [Terminology](terminology.html) page of the on-line documentation may be 
+Note that the [Terminology](terminology) page of the on-line documentation may be 
 helpful with some of the terms utilized here.
 
 If you haven't seen it already, the 
-[ODOP Design Process Flow Diagram](/docs/About/png/DesignProcessFlowDiagram.png)
+[ODOP Design Process Flow Diagram](../About/png/DesignProcessFlowDiagram.png)
 provides an important conceptual introduction to the overall design process within ODOP.   
 
 The ODOP software expects to start from an existing design. 
-More information on this point is available at [Default Designs](/docs/Help/defaultDesigns.html).
+More information on this point is available at [Default Designs](./defaultDesigns).
 
 While a user account is not required to access the ODOP software,
 an account with associated username and password is necessary to save designs into 
 the cloud-based ODOP "Design Library".
-See: [User Accounts](/docs/About/userAccounts.html) for details on
+See: [User Accounts](../About/userAccounts) for details on
 how to obtain an account.
 
 The material below assumes that you will be able to operate the ODOP program in one browser
 window (or tab) at the same time that you are able to view this on-line Help material in a
 different browser window (or tab). 
-See [Launching the Program](launchODOP.html) for more detailed instructions on 
+See [Launching the Program](launchODOP) for more detailed instructions on 
 how to get the program up and running with this multiple browser window (tab) configuration.
 
 &nbsp;
@@ -55,7 +55,7 @@ select the "Solid" design type and click the "Open" button.
 
 This screen capture illustrates selecting the Rectangular **Solid** design type 
 and its default design called **Startup**.   
-![Start with Rectangular Solid](/docs/Help/png/SelectSolid.png "Start with Rectangular Solid")   
+![Start with Rectangular Solid](./png/SelectSolid.png "Start with Rectangular Solid")   
 
 &nbsp;
 
@@ -64,7 +64,7 @@ and its default design called **Startup**.
 Have a look at the main menu (**File &nbsp; Action &nbsp; View &nbsp; Help**) 
 highlighted inside the red oval.
 Select one of the main menu entries and a drop-down with sub-items will appear.   
-![Main Menu](/docs/Help/png/MainMenu.png "Main Menu")   
+![Main Menu](./png/MainMenu.png "Main Menu")   
 
 &nbsp;
 
@@ -72,26 +72,26 @@ Here is an example of how each main menu item will drop down to provide
 specific menu items.
 Note that menu entries associated with not yet implemented features are disabled (gray).
 This screen clip illustrates how to get to the index of Help pages.   
-![Help Index](/docs/Help/png/HelpIndex.png "Help Index")   
+![Help Index](./png/HelpIndex.png "Help Index")   
 
 &nbsp;
 
 At the upper right of the main page you see 
 an icon associated with the design type (a rectangular box in this case) and
 the name of the specific design that is currently open.
-![Design Type Icon - Design Name](/docs/Help/png/png/TabIconName.png "[Design Type Icon - Design Name")   
+![Design Type Icon - Design Name](./png/TabIconName.png "[Design Type Icon - Design Name")   
 
 &nbsp;
 
 The Result section is positioned near the top of the main page.
 This area provides feedback about the solution process.   
-![Result Section](/docs/Help/png/png/ResultSection.png "Result Section")   
+![Result Section](./png/ResultSection.png "Result Section")   
 
 &nbsp;
 
 If you hover the cursor over a heading or a variable name, 
 a tool-tip will pop up to provide more information regarding each item.   
-![Result Section ToolTip](/docs/Help/png/png/ResultSectionToolTip.png "Result Section ToolTip")   
+![Result Section ToolTip](./png/ResultSectionToolTip.png "Result Section ToolTip")   
 
 &nbsp;
 
@@ -101,21 +101,21 @@ the cursor in the field and over-writing the existing value.
 Recalculation will happen immediately.
 The Dependent Variables, constraint violations and Objective Function will 
 immediately reflect the result of the new value for that Independent Variable.   
-![Independent Variables](/docs/Help/png/png/Independent.png "Independent Variables")   
+![Independent Variables](./png/Independent.png "Independent Variables")   
 
 &nbsp;
 
 In order change the value of a Dependent Variable, it is necessary
 to FIX (see below) its value and then execute the Search function
 (Action : Search menu).   
-![Dependent Variables](/docs/Help/png/png/Dependent.png "Dependent Variables")   
+![Dependent Variables](./png/Dependent.png "Dependent Variables")   
 
 &nbsp;
 
 Calculation Inputs are quantities that can be modified by the user
 but are not subject to Constraints, FIX or manipulation by the Search process. 
 You will likely need to scroll down to see the section containing Calculation Inputs.   
-![Calculation Inputs](/docs/Help/png/png/CalcInput.png "Calculation Inputs")   
+![Calculation Inputs](./png/CalcInput.png "Calculation Inputs")   
 
 &nbsp;
 
@@ -123,7 +123,7 @@ This clip illustrates how a Calculation Input with a drop-down arrow
 can expand into a table that the user can select from.
 In this case, the user selects a material and the appropriate 
 material property values (density in this case) are provided to the calculations.   
-![Calculation Input Table](/docs/Help/png/png/CalcInputTable.png "Calculation Input Table")   
+![Calculation Input Table](./png/CalcInputTable.png "Calculation Input Table")   
 
 &nbsp;
 
@@ -136,14 +136,14 @@ The Objective Value will reflect the aggregate impact of all violated constraint
 This example illustrates the 108 inch Max limit on Length+Girth
 and the 70 pound Max limit on weight that is common to many
 carriers in the package shipping industry.   
-![Constraints](/docs/Help/png/png/Constraint.png "Constraints")   
+![Constraints](./png/Constraint.png "Constraints")   
 
 &nbsp;
 
 In order to FIX the value of an Independent Variable, put a check
 in the box immediately to the right of its value.
 Note the checkboxes highlighted by the red oval in  this example.   
-![FIX an Independent Variable](/docs/Help/png/png/IV_Fix.png "FIX an Independent Variable")   
+![FIX an Independent Variable](./png/IV_Fix.png "FIX an Independent Variable")   
 
 &nbsp;
 
@@ -153,7 +153,7 @@ This will cause both associated constraints to be checked and the
 corresponding constraint entry fields to become available for input.
 Enter the FIX value into either entry field.
 Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.   
-![FIX a Dependent Variable](/docs/Help/png/png/DV_Fix.png "FIX a Dependent Variable")   
+![FIX a Dependent Variable](./png/DV_Fix.png "FIX a Dependent Variable")   
 
 &nbsp;
 
@@ -170,7 +170,7 @@ Selecting <b>Index</b> on this list will bring up a new browser tab with the
 list of available Help entries. 
 You can switch back and forth between the browser tabs.
  If time is available, read through those entries from top to bottom.   
- ![Help Index](/docs/Help/png/png/HelpIndex.png "Help Index")   
+ ![Help Index](./png/HelpIndex.png "Help Index")   
   
  On-line documentation for ODOP:Spring appears in the Spring Design topic.
 
@@ -194,9 +194,9 @@ illustrate problem solving techniques as well as provide sample solutions
 to several generally available reference book problems.
 The focus is on solving the problem, not explaining the operation of the software.
 
-See: &nbsp; [Spring design tutorial and demo](gettingStartedSpring.html)
+See: &nbsp; [Spring design tutorial and demo](gettingStartedSpring)
 
 &nbsp;
  
-[Help](/docs/Help)Entries [Help](/docs/Help)
+[Help](./)
  

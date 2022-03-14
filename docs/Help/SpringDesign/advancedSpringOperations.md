@@ -8,7 +8,7 @@
  A method of getting ODOP:Spring to find a design with a specific working
  stress is presented here.  Another approach that allows the user to have
  complete control over the allowable stresses that are used in the factor of
- safety calculations is presented in the [MATERIALS](materials.html) section.
+ safety calculations is presented in the [MATERIALS](materials) section.
 
  First, it will be necessary to free the various FS_ constraints so that
  they are no longer active.
@@ -26,12 +26,12 @@
     FIX Stress_2  xxxxxx
 
  Finally, enter the rest of your problem's FIX and constraint information,
- then go to the [Search](/docs/Help/search.html) menu item (**Action : Search** menu) to have 
+ then go to the [Search](../search) menu item (**Action : Search** menu) to have 
  ODOP:Spring find a design with the  requested stress level at the second 
  working position.
 
  Note that as with the "factor of safety approach" it may be desirable to
- use the [Seek](/docs/Help/seek.html) menu item (**Action : Seek** menu) to find a 
+ use the [Seek](../seek) menu item (**Action : Seek** menu) to find a 
  spring of minimum weight.
 
  Also, while it is likely not a significant concern, 
@@ -61,7 +61,7 @@
  are supplied directly by the user.
  There is no dependence on wire diameter.
 
- Refer to additional discussion in the [MATERIALS](materials.html) section.
+ Refer to additional discussion in the [MATERIALS](materials) section.
  
 **HOT WOUND**   
  The easiest way to design a hot wound spring is to open a start point
@@ -106,13 +106,13 @@
  Make permanent changes in these values by altering the appropriate
  materials file. 
  For additional information, refer to:
-* [MATERIALS](materials.html)   
-* [Restrictions](/docs/About/Legal/Restrictions.html)   
-* [NewDesignType](/docs/procedures/NewDesignType.html)   
+* [MATERIALS](materials)   
+* [Restrictions](../../About/Legal/Restrictions)   
+* [NewDesignType](../../procedures/NewDesignType)   
  
 
-[Spring Design Topics](/docs/Help/SpringDesign/)   
-[Help](/docs/Help)   
+[Spring Design Topics](./)   
+[Help](../)   
 
 <!---
 Depending on Eclipse version or Markdown interpreter, a multi-line comment must be the last thing in the file.

@@ -112,4 +112,4 @@ assigned are negative.
 
  Additional information on TRADE is available in the tutorial and demo features. 
 
-[Help](/docs/Help)
+[Help](./)

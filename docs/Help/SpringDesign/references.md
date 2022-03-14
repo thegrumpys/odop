@@ -89,7 +89,7 @@ Additional resources available on the Internet include:
    
 &nbsp;
 
-[Spring Design Topics[Design Types](/docs/Help/SpringDesign))   
-[Help](/docs/Help)   
+[Spring Design Topics](./)   
+[Help](../)   
 
 

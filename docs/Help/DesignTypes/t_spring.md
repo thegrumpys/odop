@@ -4,21 +4,21 @@ The Torsion Spring design type is a full-featured mathematical model enabling
 the engineering design of helical coil torsion springs.   
 
 This section presents material unique to the Torsion Spring design type.
-The more general material available at [Spring Design Topics](/docs/Help/SpringDesign)
+The more general material available at [Spring Design Topics](../SpringDesign)
 provides important supplemental information.   
 
 ___
 
 **On this page:**  
-[Torsion spring moment-deflection diagram](t_spring.html#t_springFD_Diag)  
-[Torsion spring moment-deflection point names](t_spring.html#t_springFD_Names)  
-[Torsion spring dimensions](t_spring.html#t_springDims)  
-[Independent Variable names](t_spring.html#t_springIV_Names)  
-[Dependent Variable names](t_spring.html#t_springDV_Names)  
-[Calculation Input names](t_spring.html#t_springCalcInputNames)  
-[Values in reports](t_spring.html#t_springOtherValues)  
-[Torsion spring end types](t_spring.html#t_springEndTypes)  
-<!--- [Constraints unique to torsion springs](t_spring.html#t_springConstraints)  -->
+[Torsion spring moment-deflection diagram](t_spring#t_springFD_Diag)  
+[Torsion spring moment-deflection point names](t_spring#t_springFD_Names)  
+[Torsion spring dimensions](t_spring#t_springDims)  
+[Independent Variable names](t_spring#t_springIV_Names)  
+[Dependent Variable names](t_spring#t_springDV_Names)  
+[Calculation Input names](t_spring#t_springCalcInputNames)  
+[Values in reports](t_spring#t_springOtherValues)  
+[Torsion spring end types](t_spring#t_springEndTypes)  
+<!--- [Constraints unique to torsion springs](t_spring#t_springConstraints)  -->
 
 &nbsp;
 ___
@@ -92,7 +92,7 @@ ___
 The following diagram may be of some assistance in interpreting the names 
 associated with various dimensions of a torsion spring.  
    
-![Torsion Spring Names](/docs/Help/DesignTypes/png/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](./png/TorsionNames.png "Torsion Spring Names")   
 
 &nbsp;   
    
@@ -179,7 +179,7 @@ ___
                       point 1 and point 2.
 
 &nbsp;
-For additional information: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
+For additional information: [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
 &nbsp;  
 
 ___
@@ -259,10 +259,10 @@ ___
 
 &nbsp;
 For additional information: 
- - [Materials](/docs/Help/SpringDesign/materials.html)   
- - [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
- - [Torsion spring end types](t_spring.html#t_springEndTypes)   
- - [Torsion spring dimensions](t_spring.html#t_springDims)  
+ - [Materials](../SpringDesign/materials)   
+ - [Cycle_Life](../SpringDesign/spring_oview#cycleLife)  
+ - [Torsion spring end types](t_spring#t_springEndTypes)   
+ - [Torsion spring dimensions](t_spring#t_springDims)  
  
 &nbsp;
    
@@ -317,13 +317,13 @@ Separately, the values of Arm\_1, Arm\_2, L\_End\_1, L\_End\_2, XLen\_1 and XLen
 describe end conditions. 
 This diagram  may be helpful.   
 
-![Torsion Spring Names](/docs/Help/DesignTypes/png/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](./png/TorsionNames.png "Torsion Spring Names")   
 
 &nbsp;
 
-[Design Types](/docs/Help/DesignTypes)   
-[Spring Design Topics](/docs/Help/SpringDesign)   
-[Help](/docs/Help)   
+[Design Types](./)   
+[Spring Design Topics](../SpringDesign)   
+[Help](../)   
 
 
 &nbsp;
@@ -337,11 +337,15 @@ Eclipse .md Preview suppressed display of everything after the comment header.
 The following lines are alternate syntax for in-line image links   
 See docs/procedures/ImageLocations for preferred approach on image path.   
 
-![Torsion Spring Names](/docs/Help/DesignTypes/png/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](./png/TorsionNames.png "Torsion Spring Names")   
 
-<img src="/docs/Help/DesignTypes/png/TorsionNames.png" alt="Torsion Spring Names"/>
+<img src="../../../client/public/designtypes/Spring/Torsion/TorsionNames.png" alt="Torsion Spring Names"/>
 
-![Torsion Spring Names](https://odop.herokuapp.com/docs/Help/DesignTypes/png/TorsionNames.png "Torsion Spring Names")   
+<img src="https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Torsion/TorsionNames.png" alt="Torsion Spring Names"/>   
+
+![Torsion Spring Names](https://raw.githubusercontent.com/thegrumpys/odop/master/client/public/designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names")   
+
+![Torsion Spring Names](https://www.springdesignsoftware.org/odop/designtypes/Spring/Torsion/TorsionNames.png "Torsion Spring Names")   
 
 -->
 

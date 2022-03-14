@@ -25,18 +25,18 @@ on how to launch the demo and tutorial sessions using the compression spring des
 The spring design tutorial session named **tutorTour** is a good starting point for those
 interested in the shortest possible path to designing springs.
 
-[Launching the program](/docs/Help/launchODOP.html) provides instructions on starting the program,
+[Launching the program](../Help/launchODOP) provides instructions on starting the program,
 selecting the appropriate design type and how to arrange browser windows for the best
 possible presentation.
 
 For getting started with the less technical explanation using the Rectangular Solid design type 
-go to: [ODOP Introduction](ODOPintro.html) 
+go to: [ODOP Introduction](ODOPintro) 
 
 For instructions on how to invoke the tutorial and demo sessions using the 
 compression spring design type 
-go to: [Spring design tutorial and demo](/docs/Help/gettingStartedSpring.html) 
+go to: [Spring design tutorial and demo](../Help/gettingStartedSpring) 
 
 &nbsp;
 
-[Help](/docs/About)
+[About](./)
 

@@ -8,22 +8,22 @@ tutorial and demo sessions are also provided.
 While a user account is not required to access the ODOP software,
 an account with associated username and password is required to save designs into 
 the cloud-based ODOP "Design Library".
-See: [User Accounts](/docs/About/userAccounts.html) for details on
+See: [User Accounts](../About/userAccounts) for details on
 how to obtain a free account.
 
 A list of various on-line Help pages providing introductory information is available at
-[Intro Pages Overview](/docs/About/introPagesOverview.html).
-In particular, see [Launching the Program](launchODOP.html) for more detailed instructions on 
+[Intro Pages Overview](../About/introPagesOverview).
+In particular, see [Launching the Program](launchODOP) for more detailed instructions on 
 how to get the program up and running.
 
-The ODOP software expects to start from an [existing design](/docs/Help/defaultDesigns.html).
+The ODOP software expects to start from an [existing design](./defaultDesigns).
 While they contain pre-established constraints that 
 serve to guide the solution to reasonable and expected results,
-the provided Startup designs are [under specified](/docs/Help/designSituations.html). 
+the provided Startup designs are [under specified](./designSituations). 
 You should provide additional constraints and Fixes specific to your spring application.
 
 If you haven't seen it already, the 
-[ODOP Design Process Flow Diagram](/docs/About/png/DesignProcessFlowDiagram.png)
+[ODOP Design Process Flow Diagram](../About/png/DesignProcessFlowDiagram.png)
 provides an important conceptual introduction to the overall design process within ODOP.   
 
 Before continuing with the material below, 
@@ -40,10 +40,10 @@ Tutorial sessions teach operation of the program.
 Use the **Help : Tutorial...** menu item (illustrated in the screen captures below) 
 to select the desired tutorial session.   
 
-![Help Tutorial](/docs/Help/png/HelpTutorial.png "Help Tutorial")   
+![Help Tutorial](./png/HelpTutorial.png "Help Tutorial")   
    
 
-![Select Spring Tutorial](/docs/Help/png/SelectSpringTutor.png "Select Spring Tutorial")   
+![Select Spring Tutorial](./png/SelectSpringTutor.png "Select Spring Tutorial")   
    
 The spring tutorial session named **tutorTour** is recommended as a good starting point
 for users that have not already completed the tour provided in the **Help : Getting Started** topic.   
@@ -54,10 +54,10 @@ Demo sessions illustrate problem solving techniques as well as provide
 sample solutions to several generally available reference book problems.
 Use the **Help : Demo...** menu item to select the desired demo session.   
 
-![Help Demo](/docs/Help/png/HelpDemo.png "Help Demo")   
+![Help Demo](./png/HelpDemo.png "Help Demo")   
    
 
-![Select Spring Demo](/docs/Help/png/SelectSpringDemo.png "[Select Spring Demo")   
+![Select Spring Demo](./png/SelectSpringDemo.png "[Select Spring Demo")   
    
 The spring demo sessions named **demoDesignValidation** and **demoNewDesign** are recommended as a good
 starting point for new users.   
@@ -72,9 +72,9 @@ The remainder of this discussion will provide a few
 suggestions on how to explore the program.
 
 Start from an existing design. 
-See [Units: US customary and metric](SpringDesign/unitsUSmetric.html) to
+See [Units: US customary and metric](SpringDesign/unitsUSmetric) to
 work in metric units. 
-More information on default designs is available at [Default Designs](/docs/Help/defaultDesigns.html).
+More information on default designs is available at [Default Designs](./defaultDesigns).
 
 CHANGE independent variables.
 For the compression spring design type, those include
@@ -84,7 +84,7 @@ For the compression spring design type, those include
 &nbsp;
 
  Look at reports contained in the three Report tabs.   
- ![Spring Report Tabs](/docs/Help/png/SpringReportTabs.png "Spring Report Tabs")   
+ ![Spring Report Tabs](./png/SpringReportTabs.png "Spring Report Tabs")   
  
 &nbsp;
 
@@ -126,6 +126,6 @@ For the compression spring design type, those include
   
 &nbsp;   
     
-[Help](/docs/Help)
+[Help](./)
 
  
