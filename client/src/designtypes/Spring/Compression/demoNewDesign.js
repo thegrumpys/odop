@@ -181,7 +181,7 @@ export const execute = {
                     trivial amount, the program will display "<b>FEASIBLE</b>" in the Result section.
                     If the search process is unable to find a solution, the red "<b>NOT FEASIBLE</b>" will persist.
                     The on-line Help entry covering the multi-color 
-                    &nbsp;<a href="/docs/Help/feasibilityIndicator" target="_blank" rel="noopener noreferrer">Feasibility Indicator</a>&nbsp;
+                    &nbsp;<a href="/docs/Help/feasibilityIndicator.html" target="_blank" rel="noopener noreferrer">Feasibility Indicator</a>&nbsp;
                     provides additional details. 
                     </p>
 
@@ -345,7 +345,7 @@ export const execute = {
                     Several more demo problems are available. 
                     They are named demo1, demo2, ... etc. 
                     Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="/docs/Help/tutordemo" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     for a list of topics.
                     </p>
                     
