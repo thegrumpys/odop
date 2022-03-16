@@ -109,7 +109,7 @@ class ActionSeek extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.open('/docs/Help/seek', '_blank');
+        window.open('/docs/Help/seek.html', '_blank');
     }
 
     render() {

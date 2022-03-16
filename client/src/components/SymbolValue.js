@@ -129,7 +129,7 @@ class SymbolValue extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.open('/docs/Help/settingValues', '_blank');
+        window.open('/docs/Help/settingValues.html', '_blank');
     }
 
     onClose() {

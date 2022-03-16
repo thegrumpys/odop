@@ -232,7 +232,7 @@ class ActionTrade extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        window.open('/docs/Help/trade', '_blank');
+        window.open('/docs/Help/trade.html', '_blank');
     }
     
     commonArbitraryOrProportional(dir) {

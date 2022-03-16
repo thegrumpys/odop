@@ -87,7 +87,7 @@ class ResultTable extends Component {
         this.setState({
             optimize_modal: !this.state.optimize_modal,
         });
-        window.open('/docs/Help/seek', '_blank');
+        window.open('/docs/Help/seek.html', '_blank');
     }
 
     onOptimizeCancel(event) {
