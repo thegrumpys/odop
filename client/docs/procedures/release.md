@@ -4,7 +4,7 @@ This entry describes the steps necessary to make a new ODOP "release".
 Specifically, this is the process to publish the current development version to Heroku 
 and the documentation to GitHub Pages and SpringDesignSoftware.org.
 
-Ideally, any system downtime affecting the production system should be announced in advance via docs/About/messageOfTheDay.md
+Ideally, any system downtime affecting the production system should be announced in advance via messageOfTheDay.md
 
 For background regarding "Major.Minor.Patch" see: [ODOP version numbering](/docs/design/VersionNumbers.html)
    
@@ -141,7 +141,7 @@ If appropriate, dump to off-line storage and re-initialize the log_Usage table.
 1. Delete any old, invalid or development-only designs if necessary.
 <a id="publish2Heroku"></a>
 &nbsp;
-1. **Publish to Heroku** &nbsp; Update docs/About/messageOfTheDay.md to announce availability of the new version.
+1. **Publish to Heroku** &nbsp; Update messageOfTheDay.md to announce availability of the new version.
 1. Do a pull or push as required to get latest version on all systems.
 1. If not logged into Heroku, login in using the command line "heroku login" which in turn brings up the Heroku website login page in your browser.
 1. Shutdown server and client under your development environment.

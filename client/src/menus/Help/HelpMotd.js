@@ -11,8 +11,8 @@ class HelpMotd extends Component {
     }
 
     onHelp() {
-        logUsage('event', 'HelpMotd', { 'event_label': '/docs/About/messageOfTheDay.html' });
-        window.open('/docs/About/messageOfTheDay.html', '_blank');
+        logUsage('event', 'HelpMotd', { 'event_label': 'https://thegrumpys.github.io/odop/About/messageOfTheDay.html' });
+        window.open('https://thegrumpys.github.io/odop/About/messageOfTheDay.html', '_blank');
     }
 
     render() {

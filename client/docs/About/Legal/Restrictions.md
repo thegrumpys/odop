@@ -56,7 +56,7 @@ any single manufacturer.
 
 Designs saved in the public account are not assured of long term storage. 
 Notice of impending cleanup of designs saved in the public account will be posted
-at [Message of the Day](/docs/About/messageOfTheDay.html).
+at [Message of the Day](https://thegrumpys.github.io/odop/About/messageOfTheDay.html).
 Clean up activity will likely occur just prior to new releases of the
 ODOP software and the ODOP:Spring app.
 While designs saved in private accounts will be preserved and version migrated

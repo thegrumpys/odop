@@ -75,7 +75,7 @@ class SignInPageWidget extends Component {
           },
           {
             text: 'ODOP Message Of The Day',
-            href: '/docs/About/messageOfTheDay.html',
+            href: 'https://thegrumpys.github.io/odop/About/messageOfTheDay.html',
             target: '_blank'
           },
           {

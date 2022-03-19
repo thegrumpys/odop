@@ -3,7 +3,7 @@
 ## About
 * [Introduction](About/Intro)
 * [Intro Pages Overview](About/introPagesOverview)
-* [Message-of-the-day](About/messageOfTheDay)
+* [Message-of-the-day](https://thegrumpys.github.io/odop/About/messageOfTheDay.html)
 * [Experimental Software](About/experimental)
 * [Requirements](About/requirements)
 * [Notice](About/Legal/Disclaimer)

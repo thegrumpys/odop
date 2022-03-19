@@ -1,7 +1,7 @@
 ## About
 * [Introduction](Intro)
 * [Intro Pages Overview](introPagesOverview)
-* [Message-of-the-day](messageOfTheDay)
+* [Message-of-the-day](https://thegrumpys.github.io/odop/About/messageOfTheDay.html)
 * [Experimental Software](experimental)
 * [Requirements](requirements)
 * [Notice](Legal/Disclaimer)
