@@ -40,4 +40,4 @@ To continue, use your browser's **Back** button to return to the previous page n
 
 &nbsp;
 
-[Help](/docs/About)
+[About](/docs/About)

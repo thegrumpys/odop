@@ -38,5 +38,5 @@ go to: [Spring design tutorial and demo](/docs/Help/gettingStartedSpring.html)
 
 &nbsp;
 
-[Help](/docs/About)
+[About](/docs/About)
 

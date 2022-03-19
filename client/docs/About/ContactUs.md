@@ -32,4 +32,4 @@ Open a new issue by clicking the green "New issue" button (upper right).
 
 &nbsp;
 
-[Help](/docs/About)
+[About](/docs/About)

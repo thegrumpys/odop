@@ -72,4 +72,4 @@ For example, see:
    
 &nbsp;
 
-[Help](/docs/About)   
+[About](/docs/About)   

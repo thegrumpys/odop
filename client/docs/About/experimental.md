@@ -15,4 +15,4 @@ More detail is available at: [AutoSave](/docs/Help/autoSave.html).
 
 &nbsp;
 
-[Help](/docs/About)
+[About](/docs/About)
