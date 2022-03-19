@@ -123,7 +123,7 @@ export const execute = {
                     
                     <p>
                     Additional information on Properties is available in the documentation section (on-line help entry) 
-                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#preferences" 
+                    &nbsp;<a href="https://www.springdesignsoftware.org/odop/docs/Help/terminology#properties" 
                     target="_blank" rel="noopener noreferrer">Properties</a>.&nbsp; 
                     </p>
                     <br /><br />
