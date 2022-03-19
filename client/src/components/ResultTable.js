@@ -7,7 +7,7 @@ import FeasibilityIndicator from './FeasibilityIndicator';
 import { seek, search, saveAutoSave } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/MessageModal';
-import { displaySpinner } from './Spinner';
+//import { displaySpinner } from './Spinner';
 
 class ResultTable extends Component {
     
