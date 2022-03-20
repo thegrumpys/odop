@@ -165,10 +165,11 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Trade will ask for "weights" to apply to each of the violated
-                    constraints.  These weights define the direction that Trade will
-                    investigate for constraint relaxation.  Only the relative size of
-                    the weights matters.  Trade will normalize the input to unit value.
+                    Trade will ask for "weights" to apply to each of the violated constraints.  
+                    These weights define the direction that Trade will move in for constraint relaxation.  
+                    Only the relative size of the weights matters.  
+                    The individual components are not expected to add to 100%.
+                    Trade will normalize the inputs to unit value.
                     </p>
                     
                     <p>
@@ -180,7 +181,7 @@ export const execute = {
                     taken to refine the result.  The estimate of the appropriate step size
                     can be gauged by looking at the magnitude of the constraint violations.
                     The exploration size in percent should be larger than the largest
-                    percentage constraint violation.  Perhaps even larger than the sum of
+                    percentage constraint violation, perhaps even larger than the sum of
                     all the constraint violations.
                     </p>
                     
@@ -195,8 +196,8 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Enter zero for the weight on each violated constraint except L_Stroke 
-                    which should be set to 1.0. 
+                    Enter <b>0.0</b> for the weight on each violated constraint except <b>L_Stroke </b> 
+                    which should be set to <b>1.0</b>. 
                     Select <b>Continue</b>.
                     </p>
                     
@@ -205,7 +206,7 @@ export const execute = {
                     the tutorial will provide a good step size.  
                     Enter a step size of <b>39</b> (%).
                     Select <b>Continue</b>. 
-                    It may take a few seconds to compute the result. 
+                    It may take several seconds to compute the result. 
                     </p>
                     
                     <p>
@@ -252,15 +253,15 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Enter zero for the weight on each violated constraint except OD_Free 
-                    which should be set to 1.0. 
+                    Enter <b>0.0</b> for the weight on each violated constraint except <b>OD_Free </b> 
+                    which should be set to <b>1.0</b>. 
                     Select <b>Continue</b>.
                     </p>
                     
                     <p>
                     Enter a step size of <b>25</b> (%).
                     Select <b>Continue</b>. 
-                    Again, it may take several seconds for Trade to compute its results.
+                    Again, it may take a few seconds for Trade to compute its results.
                     </p>
                 
                     <p>
@@ -278,7 +279,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    <b>Accept the result</b>.
+                    <b>Accept</b> the result.
                     Enter <b>Done</b> and review the results.  
                     Use <b>Next</b> to continue to the next page of this tutorial session.
                     </p>
