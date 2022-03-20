@@ -13,11 +13,11 @@ export const execute = {
                     </p>
 
                     <p>
+                    The existing values are an arbitrary starting point. 
+                    Modify them to meet your requirements. 
                     Values in the white background fields can be controlled by user input. 
                     Control of Dependent Variables (marked with an asterisk) requires a Search.  
                     Calculation results appear in the light gray background fields.
-                    The existing values are an arbitrary starting point. 
-                    Modify them to meet your requirements. 
                     </p>
 
                     <p>
@@ -56,7 +56,7 @@ export const execute = {
 //                changeSymbolValue("Coils_T", Number.NaN),
 //                changeSymbolValue("Force_1", Number.NaN),
 //                changeSymbolValue("Force_2", Number.NaN),
-                changeResultTerminationCondition('When finished reading all 4 pages, use the gray "Exit" button in the upper right to close the light green panel above.'),
+                changeResultTerminationCondition('When finished reading all four of the Welcome pages above, use the gray "Exit" button in the upper right to close the light green panel.'),
             ]
         },
         {

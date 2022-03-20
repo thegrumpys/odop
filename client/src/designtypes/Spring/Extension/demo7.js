@@ -178,7 +178,8 @@ export const execute = {
 
                     <p>
                     This is a good time to scroll down and confirm these changes are now in place.
-                    After the click on Next, the demo session will run Search.
+                    After the click on Next, the demo session will run Search. 
+                    The calculations may take several seconds.
                     </p>
                 </>
             ),
