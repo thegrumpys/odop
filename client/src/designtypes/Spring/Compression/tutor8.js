@@ -97,7 +97,7 @@ export const execute = {
 
                     <p>
                     The 250 pound load has given us an unreasonable start point. 
-                    Look for warnings on Report 1.
+                    Look for warnings on Report 1 and Calculator View.
                     In this case, we'll ignore the warning.
                     </p>
                     
@@ -137,7 +137,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    If you scroll down, you can see that several constraints are violated.  
+                    You can see from the entries in red that multiple constraints are violated.  
                     The relative magnitude of those violations contains information as to 
                     which constraints are most leveraged.  
                     The search finds that it is to its advantage to violate
@@ -150,8 +150,8 @@ export const execute = {
                     
                     <p>
                     In the rest of this tutorial section we will use <b>Action : Trade </b> 
-                    to look at how the constraints on stroke, outside diameter and solid height 
-                    trade off against each other.
+                    to look at how the constraints on stroke, outside diameter, cycle life 
+                    and solid height trade off against each other.
                     </p>
                     <br />
                 </>
@@ -201,18 +201,22 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Enter a step size of 20 (%).
-                    Select <b>Continue</b>.
+                    In the interest of keeping this session short and on track,
+                    the tutorial will provide a good step size.  
+                    Enter a step size of <b>39</b> (%).
+                    Select <b>Continue</b>. 
+                    It may take a few seconds to compute the result. 
                     </p>
                     
                     <p>
                     Observe that Trade predicts a feasible solution if the L_Stroke MIN constraint 
-                    is moved from 1.0 inches to somewhere less than 0.7 inches.
+                    is moved from 1.0 inches to something slightly less than 0.607 inches.
                     </p>
                     
                     <p>
-                    Select <b>Done. </b>
-                    This will return to the main page with no changes.
+                    Select <b>Done</b>.  
+                    This will exit Trade with no changes. 
+                    Use the <b>Next</b> button to continue to next page of this tutorial session.
                     </p>
                 </>
             ),
@@ -254,13 +258,17 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Enter a step size of 25 (%).
-                    Select <b>Continue</b>.
+                    Enter a step size of <b>25</b> (%).
+                    Select <b>Continue</b>. 
+                    Again, it may take several seconds for Trade to compute its results.
                     </p>
                 
                     <p>
-                    <b>Accept</b> the resulting set of constraints. 
-                    <b> Repeat</b> the process with the same weights and a step size 0f 8 %.
+                    The magnitude of the values remaining in the Violation column suggest that 
+                    we should be able get a better answer by repeating the Trade algorithm. 
+                    <b> Accept</b> the resulting set of constraints. 
+                    <b> Repeat</b> the process with the same <b>Arbitrary</b> direction, 
+                    the same weights and a step size of <b>8</b> %.
                     </p>
                     
                     <p>
@@ -271,7 +279,8 @@ export const execute = {
                     
                     <p>
                     <b>Accept the result</b>.
-                    Continue to the next page.
+                    Enter <b>Done</b> and review the results.  
+                    Use <b>Next</b> to continue to the next page of this tutorial session.
                     </p>
                 </>
             )
