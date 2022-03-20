@@ -271,7 +271,7 @@ class ActionTrade extends Component {
         var rk1;
         var smallest;
         var bigest;
-        var default_est;
+        var default_est_percent;
 //          c1 = 0.0
         rk1 = design.model.result.objective_value;
         /* estimate best step size */
@@ -304,12 +304,12 @@ class ActionTrade extends Component {
         let j = this.state.vflag[itemp];
         element = design.model.symbol_table[j];
         if (this.state.ldir[itemp] < 0) {
-            default_est = 0.90 * element.vmin;
+            default_est_percent = 90 * element.vmin; // 90% of vmin
         } else {
-            default_est = 0.90 * element.vmax;
+            default_est_percent = 90 * element.vmax; // 90% of vmax
         }
-        if (default_est < design.model.system_controls.smallnum) {
-            default_est = design.model.system_controls.smallnum;
+        if (default_est_percent / 100.0 < design.model.system_controls.smallnum) {
+            default_est_percent = design.model.system_controls.smallnum * 100.0;
         }
         this.setState({
             dir: dir,
@@ -317,7 +317,7 @@ class ActionTrade extends Component {
             rk1: rk1,
             smallest: smallest,
             bigest: bigest,
-            default_est: default_est,
+            default_est_percent: default_est_percent,
         });
     }
 
@@ -441,7 +441,7 @@ class ActionTrade extends Component {
         var value;
         const { store } = this.context;
         design = store.getState();
-        c3 = this.state.default_est;
+        c3 = this.state.default_est_percent / 100.0; // Convert from percent to actual value
         // TAKE FIRST EXPLORATORY RELAXATION STEP
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
@@ -567,7 +567,7 @@ class ActionTrade extends Component {
 //        console.log('In ActionTrade.onSizeChangeValid this=',this);
 //        console.log('state=',this.state);
         this.setState({
-            default_est: parseFloat(event.target.value) / 100.0,
+            default_est: parseFloat(event.target.value),
             isSizeInvalid: false,
         });
     }
@@ -728,7 +728,6 @@ class ActionTrade extends Component {
     
     render() {
 //        console.log('In ActionTrade.render this=',this);
-      var default_est_percent = this.state.default_est * 100.0;
         var design;
         const { store } = this.context;
         design = store.getState();
@@ -825,12 +824,12 @@ class ActionTrade extends Component {
                                     Default
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControlTypeNumber value={default_est_percent} onChangeValid={this.onSizeChangeValid} onChangeInvalid={this.onSizeChangeInvalid}/>
+                            <FormControlTypeNumber value={this.state.default_est_percent} onChangeValid={this.onSizeChangeValid} onChangeInvalid={this.onSizeChangeInvalid}/>
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onSizeCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" disabled={this.state.isSizeInvalid || this.state.default_est < design.model.system_controls.smallnum} onClick={this.onSizeContinue}>Continue</Button>
+                        <Button variant="primary" disabled={this.state.isSizeInvalid || this.state.default_est_percent / 100.0 < design.model.system_controls.smallnum} onClick={this.onSizeContinue}>Continue</Button>
                     </Modal.Footer>
                 </Modal>
                 {/*==================================================*/}
