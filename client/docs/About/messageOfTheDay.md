@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated January 15, 2022   
+**Message-of-the-day** &nbsp; updated March 15, 2022   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -27,9 +27,9 @@ If you are interested,
 a free over-the-phone walk through of the app including assistance with your first spring design can be arranged. 
 [Contact Us](ContactUs.html).   
 
-&nbsp;
+___
 
-When invoked from the sign-in page or the initial page for selecting design type and design, 
+When invoked from the sign-in page, 
 this page opens in a new browser tab.
 To return, switch tabs or simply close this tab.
  

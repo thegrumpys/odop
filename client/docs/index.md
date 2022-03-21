@@ -44,7 +44,6 @@
 * [Ideas regarding the web user-interface for FIX](design/WebUI_for_Fix.html)
 * [Auto-Search feature and preferences](design/AutoSearch.html)
 * [Ideas for "responsive" page design](design/ResponsivePageDesign.html)
-* [Warn user if conflicting constraints are established](design/WarnConflictingConstraints.html)
 * [Consider an UnDo / ReDo feature](design/UnDo_ReDo.html)
 * [System Control variables and multi-user operation](design/SysControls.html)
 * [Idea for a Refine Search feature](design/RefineSearchFeature.html)
@@ -59,7 +58,8 @@
 * [Idea for a welcome page](design/WelcomePage.html)  
 * [Okta Registration Flow](design/OktaRegistrationFlow.html)   
 * [SizeSearch - Enhanced SelectSize](design/SizeSearch.html) 
-* [URL syntax](design/URLsyntax.html)
+* [URL syntax](design/URLsyntax.html)  
+* [Documentation structure](design/Docs.html)
 
 <!--- The following topics of this section are already implemented or otherwise no longer relevant.  They are maintained here to keep the thought history.  -->
 
@@ -69,6 +69,7 @@
 * [Idea for a simple showcase problem](design/GeometricSolidsProblem.html)
 * [Consider adding a search at the beginning of trade](design/SearchBeforeTrade.html) 
 * [Investigate alternatives to assist implementation of the Execute, Demo and Tutorial features](design/ExecuteCapability.html)   
+* [Warn user if conflicting constraints are established](design/WarnConflictingConstraints.html)
 -->  
 
 
