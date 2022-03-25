@@ -253,7 +253,7 @@ Search stops if the Objective Value falls below OBJMIN.
 Results of a Search are reported in the Result Section that appears 
 at the upper portion of the main page (Advanced and Calculator views).   
 
-![Result Section](/docs/Helppng/ResultSectionToolTip.png "Result Section")  
+![Result Section](/docs/Help/png/ResultSectionToolTip.png "Result Section")  
 
 The tooltip associated with the "Status" label of multi-color Feasibility Indicator provides 
 the numeric values of the current Objective Value and OBJMIN. 
