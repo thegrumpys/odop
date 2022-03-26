@@ -547,7 +547,7 @@ or relative performance of different designs, but you should expect results
 in practice to vary widely from the cycle life value predicted.  
 
 For more information, 
-see: [Goodman relation](https://en.wikipedia.org/wiki/Goodman_relation.html)
+see: [Goodman relation](https://en.wikipedia.org/wiki/Goodman_relation)
 
 For materials not contained in the materials table (Prop\_Calc\_Method=2 or
 3), ODOP:Spring does not have enough information available to directly
@@ -682,6 +682,6 @@ ___
 
 &nbsp;
 
-[Spring Design Topics[Design Types](/docs/Help/SpringDesign))   
+[Spring Design Topics](/docs/Help/SpringDesign)   
 [Help](/docs/Help)   
 

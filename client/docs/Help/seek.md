@@ -11,37 +11,37 @@ ODOP:Spring can be asked to find the lightest material weight
 while maintaining specified objectives for force-deflection characteristics, stress, diameters, etc. 
 This "goal seeking" capability makes ODOP:Spring much more than a spring calculator and
 one of the most powerful and intuitive coil spring design alternatives available.  
- 
- When [Search](search.html) terminates with a strictly feasible solution (i.e.  OBJ = 0.0),
- the resulting solution point is only one of many possible solution points.
- The entire collection of feasible solution points is referred to as a
- "feasible region".  The boundaries of this region are formed by the various
- constraints.
 
- The ODOP Search feature will terminate when it finds its first feasible solution. 
- Since  we have not asked the search to "optimize" anything, it does not have
- any way to determine that one specific feasible design is better than any
- other feasible design.  The search will simply stop and allow the user to
- examine the results.  This is the reason why the feasible result of a
- search may be very close to one constraint, yet very far away from
- others.
+When [Search](search.html) terminates with a strictly feasible solution (i.e.  OBJ = 0.0),
+the resulting solution point is only one of many possible solution points.
+The entire collection of feasible solution points is referred to as a
+"feasible region".  The boundaries of this region are formed by the various
+constraints.
 
- Seek should have a feasible design as its starting point. 
- At a minimum, it should be understood that a feasible design is available. 
- In the case that  a Search has terminated without finding a feasible point, 
- use of the [Trade](trade.html) feature may be appropriate.  
+The ODOP Search feature will terminate when it finds its first feasible solution. 
+Since  we have not asked the search to "optimize" anything, it does not have
+any way to determine that one specific feasible design is better than any
+other feasible design.  The search will simply stop and allow the user to
+examine the results.  This is the reason why the feasible result of a
+search may be very close to one constraint, yet very far away from
+others.
 
- Seek will automatically invoke SEARCH to maximize or minimize the indicated
- variable subject to the prevailing constraints and FIXes.  SEEK assumes the
- availability of a region of feasible solutions.
+Seek should have a feasible design as its starting point. 
+At a minimum, it should be understood that a feasible design is available. 
+In the case that  a Search has terminated without finding a feasible point, 
+use of the [Trade](trade.html) feature may be appropriate.  
 
- EXAMPLES:
-*       SEEK  MIN  Weight
-*       SEEK  MAX  Cycle\_Life
-*       SEEK  MIN  Rate
-*       SEEK  MIN  L\_Solid
-*       SEEK  MAX  FS_2
-*       SEEK  MAX  Energy
+Seek will automatically invoke SEARCH to maximize or minimize the indicated
+variable subject to the prevailing constraints and FIXes.  SEEK assumes the
+availability of a region of feasible solutions.
+
+EXAMPLES:
+* SEEK  MIN  Weight
+* SEEK  MAX  Cycle\_Life
+* SEEK  MIN  Rate
+* SEEK  MIN  L\_Solid
+* SEEK  MAX  FS_2
+* SEEK  MAX  Energy
 
 Seek functions by forming a "merit function" from the indicated variable
 and adding that into the "objective function" that the search process
@@ -55,8 +55,7 @@ results produced by SEEK.
 Refer to the documentation page on [Search](search.html) 
 for additional information on adjusting internal variables 
 with the <b>File : Preferences</b> menu item.  
- 
+
 &nbsp;  
 
- [Help](/docs/Help)
- 
+[Help](/docs/Help)
