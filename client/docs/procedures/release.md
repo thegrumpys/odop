@@ -56,7 +56,11 @@ Process "Startup_Metric" designs for the three Spring design types similarly.
     1. Do a File > Open > Load Initial State for each design type that has an impacted Initial State. It is not necessary to Load Initial Metric State, because each mk_ script loads the correct initial state file (US or Metric) when it runs. Do this FOR ALL mk* files: Run Action > Execute > mk[x] script and Exit the script to created each [x] file. Do a File > Save into the [x] file.
     1. Using MySqlDump command run the `scripts/dump_db_startup_files.sh` script to dump all newly created design files into their respective load.sql files. You might need to set a different OKTA Userid inside the WHERE clause for the Admin User who saved this file in the previous step.  
     1. Finally, manually edit and add carriage returns before each inserted VALUES section, and delete the 'id' field name and 'id' field value (it should be first in each record),and set the user field to NULL.
-    1. **Commit these changes.**  The script to load these changes will be run in a [later step](release.html#runloadscript).  
+    1. **Commit these changes.**  The script to load these changes will be run in a [later step](release.html#runloadscript).
+1. Either modify the script for the development database and
+   run the configured ./scripts/load_all.sh script
+   or
+   manually run all affected load.sql files to create startup files for each design type in the develoment database.  
 &nbsp;
 1. If there are environment variable changes, update Server's .env and Client's .env with the following for development (localhost). NOTE: No entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost). Assume NODE_ENV="development" for software development environment, or "test" for test case execution environment.
     * JAWSDB\_URL - For server only
@@ -137,7 +141,7 @@ If appropriate, dump to off-line storage and re-initialize the log_Usage table.
    modify the script for the particular database and
    run the configured ./scripts/load_all.sh script
    or
-   manually run all affected load.sql files to create startup files for each design type in the affected database (for example, do this for Development, Staging and Production).
+   manually run all affected load.sql files to create startup files for each design type in the affected database (for example, do this for Staging and Production).
 1. Delete any old, invalid or development-only designs if necessary.
 <a id="publish2Heroku"></a>
 &nbsp;
