@@ -23,7 +23,8 @@ Example: 3.2.1
 1.  **Increment PATCH version when**   
  &nbsp; - minor changes are made to repair newly discovered defects   
  &nbsp; - minor / insignificant function is added, typically related to the defect repair mission   
- 
+ &nbsp; - removal or cleanup of function and/or data, typically related to the immediate previous release   
+  
 In summary, most planned releases should increment the MINOR version number.
 There should be some effort to accumulate significant internal and user-visible change into relatively few MAJOR releases. 
 In general, PATCH changes should not be planned.
