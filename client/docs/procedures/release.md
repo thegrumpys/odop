@@ -78,8 +78,8 @@ Process "Startup_Metric" designs for the three Spring design types similarly.
    Most console.log output is acceptable in client/src/store/middleware/seek.js, client/src/registerServiceWorker.js, server.js and client\public\dynoLoading.js.
 1. Shutdown server and client under your development environment.  
 &nbsp;
-1. In server, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully.
-1. In client, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully.
+1. In server, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully. 
+1. In client, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully.  
 &nbsp;
 1. Update client/src/version.js file to Major.Minor.Patch (for example: 2.3.1). Remove 'dev' suffix. Optionally use 'rc1' or 'rc2'.
 1. Commit with message "Update version.js to Major.Minor.Patch" and push to origin.
