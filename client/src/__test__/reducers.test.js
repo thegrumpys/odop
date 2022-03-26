@@ -475,7 +475,7 @@ it('reducers save output symbol constraints', () => {
     expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1); // CONSTRAINED flag
     expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
     expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0); // No flags
-    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(10000);
     expect(design.model.symbol_table[sto.FORCE].oldlmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldcmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(undefined);
@@ -487,11 +487,11 @@ it('reducers save output symbol constraints', () => {
     expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(0); // CONSTRAINED flag now reset
     expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
     expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0); // No flags
-    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(10000);
     expect(design.model.symbol_table[sto.FORCE].oldlmin).toEqual(1);
     expect(design.model.symbol_table[sto.FORCE].oldcmin).toEqual(1000);
     expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(0);
-    expect(design.model.symbol_table[sto.FORCE].oldcmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].oldcmax).toEqual(10000);
 });
 
 it('reducers restore output symbol constraints without previous save', () => {
@@ -505,7 +505,7 @@ it('reducers restore output symbol constraints without previous save', () => {
     expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1); // CONSTRAINED flag
     expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
     expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0); // No flags
-    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(10000);
     expect(design.model.symbol_table[sto.FORCE].oldlmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldcmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(undefined);
@@ -517,7 +517,7 @@ it('reducers restore output symbol constraints without previous save', () => {
     expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1); // If there is no old lmin/cmin/lmax/cmax then restore doesn't do anything
     expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
     expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0);
-    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(10000);
     expect(design.model.symbol_table[sto.FORCE].oldlmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldcmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(undefined);
@@ -535,7 +535,7 @@ it('reducers restore output symbol constraints with previous save', () => {
     expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1); // CONSTRAINED flag
     expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
     expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0); // No flags
-    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(10000);
     expect(design.model.symbol_table[sto.FORCE].oldlmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldcmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(undefined);
@@ -548,7 +548,7 @@ it('reducers restore output symbol constraints with previous save', () => {
     expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1);
     expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
     expect(design.model.symbol_table[sto.FORCE].lmax).toEqual(0);
-    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(0);
+    expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(10000);
     expect(design.model.symbol_table[sto.FORCE].oldlmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldcmin).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(undefined);

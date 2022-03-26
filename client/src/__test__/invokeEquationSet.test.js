@@ -27,7 +27,7 @@ it('invokeEquationSet', () => {
     var design = store.getState(); // after
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-    expect(design.model.version).toEqual("5");
+    expect(design.model.version).toEqual("6");
 
     expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
     expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(500);
@@ -57,7 +57,7 @@ it('invokeEquationSet', () => {
     expect(design.model.system_controls.tol).toEqual(0.0001);
     expect(design.model.system_controls.smallnum).toEqual(1.0e-07);
     expect(design.model.system_controls.show_units).toEqual(1);
-    expect(design.model.system_controls.show_violations).toEqual(2);
+    expect(design.model.system_controls.show_violations).toEqual(1);
 
     expect(design.model.result.objective_value).toEqual(0);
     expect(design.model.result.termination_condition).toEqual("");
