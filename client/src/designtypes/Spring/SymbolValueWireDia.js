@@ -65,24 +65,34 @@ class SymbolValueWireDia extends Component {
 
     onChange(event) {
 //        console.log('In SymbolValueWireDia.onChange event.target.value=',event.target.value);
-        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
-        if (this.props.system_controls.enable_auto_fix) {
-          this.props.fixSymbolValue(this.props.element.name);
-          this.props.changeResultTerminationCondition('The ' + this.props.element.name + ' variable has been automatically fixed');
+        var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
+        if (this.props.system_controls.enable_auto_fix && !(this.props.element.lmin & FIXED)) {
+            auto_fixed = true;
+            this.props.fixSymbolValue(this.props.element.name);
+            logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
         }
+        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
         logValue(this.props.element.name,event.target.value);
+        if (auto_fixed) {
+            this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
+        }
     }
 
     onSelect(event) {
 //        console.log('In SymbolValueWireDia.onSelect event.target.value=',event.target.value);
+        var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
+        if (this.props.system_controls.enable_auto_fix && !(this.props.element.lmin & FIXED)) {
+            auto_fixed = true;
+            this.props.fixSymbolValue(this.props.element.name);
+            logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
+        }
         var wire_dia = parseFloat(event.target.value);
 //        console.log('In SymbolValueWireDia.onSelect wire_dia=',wire_dia);
         this.props.changeSymbolValue(this.props.element.name,wire_dia);
-        if (this.props.system_controls.enable_auto_fix) {
-          this.props.fixSymbolValue(this.props.element.name);
-          this.props.changeResultTerminationCondition('The ' + this.props.element.name + ' variable has been automatically fixed');
-        }
         logValue(this.props.element.name,wire_dia);
+        if (auto_fixed) {
+            this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
+        }
     }
 
     onSet() {
