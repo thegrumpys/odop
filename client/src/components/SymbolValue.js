@@ -104,7 +104,7 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex); // Update the model
-        logValue(this.props.element.name,selectedIndex);
+        logValue(this.props.element.name,selectedIndex,'TableSelect');
         this.state.table[selectedIndex].forEach((value, index) => {
 //                console.log('In SymbolValue.onSelect value=',value,'index=',index);
             if (index > 0) { // Skip the first column
