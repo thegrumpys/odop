@@ -139,11 +139,12 @@ class SymbolValue extends Component {
         });
     }
 
-    onChangeValidValue() {
+    onChangeValidValue(event) {
 //        console.log('In SymbolValue.onChangeValidValue this=',this);
         this.setState({
             isInvalidValue: false,
         });
+        logValue(this.props.element.name,event.target.value);
     }
 
     onChangeInvalidValue() {

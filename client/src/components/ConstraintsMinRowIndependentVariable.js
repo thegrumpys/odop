@@ -53,10 +53,6 @@ class ConstraintMinRowIndependentVariable extends Component {
         var value = parseFloat(event.target.value);
         this.props.changeSymbolConstraint(this.props.element.name, MIN, value); // Update the model
         logValue(this.props.element.name,event.target.value,'MinConstraint');
-        if (this.props.element.lmin & FIXED) {
-            this.props.changeSymbolConstraint(this.props.element.name, MAX, value); // Update the model
-            logValue(this.props.element.name,event.target.value,'MaxConstraint');
-        }
         this.props.onChangeValid();
     }
     

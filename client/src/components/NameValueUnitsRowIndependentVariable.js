@@ -31,12 +31,12 @@ class NameValueUnitsRowIndependentVariable extends Component {
 
     onChangeValid(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=',event.target.value);
+        if (this.props.system_controls.enable_auto_fix && !(this.props.element.lmin & FIXED)) {
+            this.props.fixSymbolValue(this.props.element.name);
+            logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
+        }
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value)); // Update the model
         logValue(this.props.element.name,event.target.value);
-        if (this.props.system_controls.enable_auto_fix) {
-          this.props.fixSymbolValue(this.props.element.name);
-          logValue(this.props.element.name,'FIXED','FixedFlag',false);
-        }
         this.props.onChangeValid(event);
     }
     

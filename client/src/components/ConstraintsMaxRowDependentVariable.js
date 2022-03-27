@@ -53,10 +53,11 @@ class ConstraintsMaxRowDependentVariable extends Component {
         var value = parseFloat(event.target.value);
         if (this.props.element.lmax & FIXED) {
             this.props.changeSymbolConstraint(this.props.element.name, MIN, value); // Update the model
-            logValue(this.props.element.name,event.target.value,'MinConstraint');
+            logValue(this.props.element.name,event.target.value,'Max&MinConstraint');
+        } else {
+            logValue(this.props.element.name,event.target.value,'MaxConstraint');
         }
         this.props.changeSymbolConstraint(this.props.element.name, MAX, value); // Update the model
-        logValue(this.props.element.name,event.target.value,'MaxConstraint');
         this.props.onChangeValid();
     }
 

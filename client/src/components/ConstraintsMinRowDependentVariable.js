@@ -52,10 +52,11 @@ class ConstraintsMinRowDependentVariable extends Component {
 //        console.log("In ConstraintMinRowDependentVariable.onChangeValidMinConstraint event.target.value=", event.target.value);
         var value = parseFloat(event.target.value);
         this.props.changeSymbolConstraint(this.props.element.name, MIN, value); // Update the model
-        logValue(this.props.element.name,event.target.value,'MinConstraint');
         if (this.props.element.lmin & FIXED) {
             this.props.changeSymbolConstraint(this.props.element.name, MAX, value); // Update the model
-            logValue(this.props.element.name,event.target.value,'MaxConstraint');
+            logValue(this.props.element.name,event.target.value,'Min&MaxConstraint');
+        } else {
+            logValue(this.props.element.name,event.target.value,'MinConstraint');
         }
         this.props.onChangeValid();
     }

@@ -51,10 +51,6 @@ class ConstraintMaxRowIndependentVariable extends Component {
     onChangeValidMaxConstraint(event) {
 //        console.log("In ConstraintMaxRowIndependentVariable.onChangeValidMaxConstraint event.target.value=", event.target.value);
         var value = parseFloat(event.target.value);
-        if (this.props.element.lmax & FIXED) {
-            this.props.changeSymbolConstraint(this.props.element.name, MIN, value); // Update the model
-            logValue(this.props.element.name,event.target.value,'MinConstraint');
-        }
         this.props.changeSymbolConstraint(this.props.element.name, MAX, value); // Update the model
         logValue(this.props.element.name,event.target.value,'MaxConstraint');
         this.props.onChangeValid();

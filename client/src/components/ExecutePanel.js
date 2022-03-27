@@ -12,7 +12,6 @@ export var startExecute = function(prefix,execute_name,steps) {
     if (steps !== undefined && steps[0] !== undefined) {
         const { store } = this.context;
         var design = store.getState();
-        logUsage('event', 'ActionExecute', { 'event_label': execute_name });
         this.setState({
             execute_name: execute_name,
             modal: true, // Default: do display
@@ -32,7 +31,7 @@ export var startExecute = function(prefix,execute_name,steps) {
 
 export var stopExecute = function() {
 //    console.log('In stopExecute this=',this);
-    logUsage('event', 'ActionExecute', { 'event_label': this.state.execute_name + ' exit'});
+    logUsage('event', 'ExecutePanel', { 'event_label': 'stop ' + this.state.execute_name});
     this.setState({
         execute_name: undefined, // Clear execute name
         modal: false, // Default: do not display

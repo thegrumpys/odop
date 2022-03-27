@@ -3,7 +3,7 @@ import { Button, Modal, NavDropdown, Container, Row, Col } from 'react-bootstrap
 import { connect } from 'react-redux';
 import { initialSystemControls } from '../../initialSystemControls';
 import { changeSystemControlsValue, saveAutoSave } from '../../store/actionCreators';
-import { logUsage } from '../../logUsage';
+import { logUsage, logValue } from '../../logUsage';
 import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 
 class FilePreferences extends Component {
@@ -44,6 +44,7 @@ class FilePreferences extends Component {
             },
             isInvalidValue: false,
         });
+        logValue(name,value,'Preference');
     }
 
     onChangeInvalid() {
