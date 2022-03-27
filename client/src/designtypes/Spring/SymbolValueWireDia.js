@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FIXED, CONSTRAINED } from '../../store/actionTypes';
-import { changeSymbolValue, fixSymbolValue, freeSymbolValue } from '../../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../../store/actionCreators';
 import * as mo from './mat_offsets';
 import NameValueUnitsHeaderIndependentVariable from '../../components/NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from '../../components/NameValueUnitsHeaderDependentVariable';
@@ -66,7 +66,10 @@ class SymbolValueWireDia extends Component {
     onChange(event) {
 //        console.log('In SymbolValueWireDia.onChange event.target.value=',event.target.value);
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
-        if (this.props.system_controls.enable_auto_fix) this.props.fixSymbolValue(this.props.element.name);
+        if (this.props.system_controls.enable_auto_fix) {
+          this.props.fixSymbolValue(this.props.element.name);
+          this.props.changeResultTerminationCondition('The ' + this.props.element.name + ' variable has been automatically fixed');
+        }
         logValue(this.props.element.name,event.target.value);
     }
 
@@ -75,7 +78,10 @@ class SymbolValueWireDia extends Component {
         var wire_dia = parseFloat(event.target.value);
 //        console.log('In SymbolValueWireDia.onSelect wire_dia=',wire_dia);
         this.props.changeSymbolValue(this.props.element.name,wire_dia);
-        if (this.props.system_controls.enable_auto_fix) this.props.fixSymbolValue(this.props.element.name);
+        if (this.props.system_controls.enable_auto_fix) {
+          this.props.fixSymbolValue(this.props.element.name);
+          this.props.changeResultTerminationCondition('The ' + this.props.element.name + ' variable has been automatically fixed');
+        }
         logValue(this.props.element.name,wire_dia);
     }
 
@@ -364,7 +370,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     changeSymbolValue: changeSymbolValue,
     fixSymbolValue: fixSymbolValue,
-    freeSymbolValue: freeSymbolValue
+    freeSymbolValue: freeSymbolValue,
+    changeResultTerminationCondition: changeResultTerminationCondition
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SymbolValueWireDia);
