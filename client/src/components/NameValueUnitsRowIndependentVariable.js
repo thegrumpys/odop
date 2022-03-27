@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED } from '../store/actionTypes';
-import { changeSymbolValue, fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 
@@ -31,12 +31,17 @@ class NameValueUnitsRowIndependentVariable extends Component {
 
     onChangeValid(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=',event.target.value);
+        var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
         if (this.props.system_controls.enable_auto_fix && !(this.props.element.lmin & FIXED)) {
+            auto_fixed = true;
             this.props.fixSymbolValue(this.props.element.name);
             logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
         }
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value)); // Update the model
         logValue(this.props.element.name,event.target.value);
+        if (auto_fixed) {
+            this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
+        }
         this.props.onChangeValid(event);
     }
     
@@ -171,7 +176,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     changeSymbolValue: changeSymbolValue,
     fixSymbolValue: fixSymbolValue,
-    freeSymbolValue: freeSymbolValue
+    freeSymbolValue: freeSymbolValue,
+    changeResultTerminationCondition: changeResultTerminationCondition
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NameValueUnitsRowIndependentVariable);
