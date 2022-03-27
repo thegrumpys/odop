@@ -66,11 +66,11 @@ class SymbolValueWireDia extends Component {
     onChange(event) {
 //        console.log('In SymbolValueWireDia.onChange event.target.value=',event.target.value);
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
+        logValue(this.props.element.name,event.target.value);
         if (this.props.system_controls.enable_auto_fix) {
           this.props.fixSymbolValue(this.props.element.name);
           logValue(this.props.element.name,'FIXED','FixedFlag',false);
         }
-        logValue(this.props.element.name,event.target.value);
     }
 
     onSelect(event) {
@@ -78,11 +78,11 @@ class SymbolValueWireDia extends Component {
         var wire_dia = parseFloat(event.target.value);
 //        console.log('In SymbolValueWireDia.onSelect wire_dia=',wire_dia);
         this.props.changeSymbolValue(this.props.element.name,wire_dia);
+        logValue(this.props.element.name,wire_dia);
         if (this.props.system_controls.enable_auto_fix) {
           this.props.fixSymbolValue(this.props.element.name);
           logValue(this.props.element.name,'FIXED','FixedFlag',false);
         }
-        logValue(this.props.element.name,wire_dia);
     }
 
     onSet() {
