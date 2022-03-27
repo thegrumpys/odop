@@ -89,7 +89,7 @@ class SymbolValueWireDia extends Component {
         var wire_dia = parseFloat(event.target.value);
 //        console.log('In SymbolValueWireDia.onSelect wire_dia=',wire_dia);
         this.props.changeSymbolValue(this.props.element.name,wire_dia);
-        logValue(this.props.element.name,wire_dia);
+        logValue(this.props.element.name,wire_dia,'TableSelect');
         if (auto_fixed) {
             this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
         }

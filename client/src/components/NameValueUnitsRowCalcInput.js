@@ -66,7 +66,7 @@ class NameValueUnitsRowCalcInput extends Component {
 //        console.log('In NameValueUnitsRowCalcInput.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex);
-        logValue(this.props.element.name,selectedIndex);
+        logValue(this.props.element.name,selectedIndex,'TableSelect');
     }
     
     render() {
