@@ -71,9 +71,9 @@ class Routes extends Component {
   
   promptLoadAutoSave() {
 //      console.log('In Routes.promptLoadAutoSave this=',this);
-        this.setState({
-            modal: true,
-        });
+      this.setState({
+          modal: true,
+      });
   }
   
   loadAutoSaveDesign() {
@@ -104,6 +104,7 @@ class Routes extends Component {
 //          console.log('In Routes.componentDidMount getDesign config.url.type=',config.url.type,'config.url.name=',config.url.name);
           this.getDesign(this.props.user, config.url.type, config.url.name);
       }
+      logUsage('event', 'Routes', { 'event_label': this.props.type + ' load defaultDesign' });
   }
   
   loadInitialState(type, units) {

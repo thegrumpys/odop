@@ -5,12 +5,14 @@ import { load } from '../store/actionCreators';
 import { connect } from 'react-redux';
 import config from '../config';
 import { changeResultTerminationCondition } from '../store/actionCreators';
+import { logUsage } from '../logUsage';
 
 export var startExecute = function(prefix,execute_name,steps) {
 //    console.log('In startExecute this=',this,'prefix=',prefix,'execute_name=',execute_name,'steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
         const { store } = this.context;
         var design = store.getState();
+        logUsage('event', 'ActionExecute', { 'event_label': execute_name });
         this.setState({
             execute_name: execute_name,
             modal: true, // Default: do display
@@ -30,6 +32,7 @@ export var startExecute = function(prefix,execute_name,steps) {
 
 export var stopExecute = function() {
 //    console.log('In stopExecute this=',this);
+    logUsage('event', 'ActionExecute', { 'event_label': this.state.execute_name + ' exit'});
     this.setState({
         execute_name: undefined, // Clear execute name
         modal: false, // Default: do not display
@@ -88,14 +91,7 @@ class ExecutePanel extends Component {
 
     onCancel() {
 //        console.log('In ExecutePanel.onCancel this=',this);
-        this.setState({
-            modal: !this.state.modal,
-            prefix: '',
-            steps: null,
-            step: 0,
-            title: '',
-            text: '',
-        });
+        stopExecute();
         this.props.changeResultTerminationCondition(''); // Reset any leftover messages
     }
 
