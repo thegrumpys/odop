@@ -66,10 +66,12 @@ class SymbolValueWireDia extends Component {
     onChange(event) {
 //        console.log('In SymbolValueWireDia.onChange event.target.value=',event.target.value);
         var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-        if (this.props.system_controls.enable_auto_fix && !(this.props.element.lmin & FIXED)) {
+        if (this.props.system_controls.enable_auto_fix) {
             auto_fixed = true;
-            this.props.fixSymbolValue(this.props.element.name);
-            logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
+            if (!(this.props.element.lmin & FIXED)) {
+                this.props.fixSymbolValue(this.props.element.name);
+                logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
+            }
         }
         this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
         logValue(this.props.element.name,event.target.value);
@@ -83,8 +85,10 @@ class SymbolValueWireDia extends Component {
         var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
         if (this.props.system_controls.enable_auto_fix && !(this.props.element.lmin & FIXED)) {
             auto_fixed = true;
-            this.props.fixSymbolValue(this.props.element.name);
-            logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
+            if (!(this.props.element.lmin & FIXED)) {
+                this.props.fixSymbolValue(this.props.element.name);
+                logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
+            }
         }
         var wire_dia = parseFloat(event.target.value);
 //        console.log('In SymbolValueWireDia.onSelect wire_dia=',wire_dia);

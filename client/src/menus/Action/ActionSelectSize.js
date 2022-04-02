@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { changeSymbolValue, fixSymbolValue, saveAutoSave } from '../../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, saveAutoSave, changeResultTerminationCondition } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
+import { FIXED } from '../../store/actionTypes';
+import { logValue } from '../../logUsage';
 
 class ActionSelectSize extends Component {
 
@@ -110,8 +112,21 @@ class ActionSelectSize extends Component {
         logUsage('event', 'ActionSelectSize', { 'event_label': this.state.type + ' ' + this.state.size });
         // Do select size entry
         this.props.saveAutoSave();
+        var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
+        if (this.props.system_controls.enable_auto_fix) {
+            auto_fixed = true;
+            var found = this.props.symbol_table.find((element) => element.name === this.state.type);
+//            console.log('In ActionSelectSize.onSelect found=',found);
+            if (!(found.lmin & FIXED)) {
+                this.props.fixSymbolValue(this.state.type);
+                logValue(this.state.type,'AUTOFIXED','FixedFlag',false);
+            }
+        }
         this.props.changeSymbolValue(this.state.type,this.state.size);
-        this.props.fixSymbolValue(this.state.type);
+        logValue(this.state.type,this.state.size);
+        if (auto_fixed) {
+            this.props.changeResultTerminationCondition('The value of ' + this.state.type + ' has been automatically fixed.');
+        }
     }
 
     onCancel() {
@@ -162,13 +177,15 @@ class ActionSelectSize extends Component {
 
 const mapStateToProps = state => ({
     type: state.model.type,
-    symbol_table: state.model.symbol_table
+    symbol_table: state.model.symbol_table,
+    system_controls: state.model.system_controls
 });
 
 const mapDispatchToProps = {
     changeSymbolValue: changeSymbolValue,
     fixSymbolValue: fixSymbolValue,
-    saveAutoSave: saveAutoSave
+    saveAutoSave: saveAutoSave,
+    changeResultTerminationCondition: changeResultTerminationCondition
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActionSelectSize);

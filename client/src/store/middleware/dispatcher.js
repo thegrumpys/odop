@@ -30,7 +30,7 @@ import { propagate } from './propagate';
 import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
 import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
-         restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actionCreators';
+         restoreOutputSymbolConstraints } from '../actionCreators';
 
 export const dispatcher = store => next => action => {
     
@@ -60,9 +60,7 @@ export const dispatcher = store => next => action => {
         design = store.getState();
         design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
-                if (element.type === "equationset" && element.input) {
-                    store.dispatch(changeResultTerminationCondition(''));
-                } else if (element.type === "calcinput") {
+                if (element.type === "calcinput") {
 //                    console.log("In dispatcher.CHANGE_SYMBOL_VALUE element=",element);
                     if (element.format === 'table') {
 //                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE file = ../../designtypes/'+element.table+'.json');
@@ -80,7 +78,6 @@ export const dispatcher = store => next => action => {
                             }
                         });
                     }
-                    store.dispatch(changeResultTerminationCondition(''));
                     invokeInit(store);
                 }
                 return true;
@@ -219,7 +216,6 @@ export const dispatcher = store => next => action => {
         // DO NOT INVOKE invokeInit(store) BECAUSE OF RECURSION
         store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
         store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
-        store.dispatch(changeResultTerminationCondition(''));
         invokeEquationSet(store);
         propagate(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
@@ -227,7 +223,6 @@ export const dispatcher = store => next => action => {
     case RESTORE_INPUT_SYMBOL_VALUES:
         store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
         store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
-        store.dispatch(changeResultTerminationCondition(''));
         invokeEquationSet(store);
         propagate(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);
