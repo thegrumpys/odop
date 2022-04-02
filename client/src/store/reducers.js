@@ -44,7 +44,12 @@ export function reducers(state, action) {
     var i;
     var value;
     var name;
+
 //    console.warn('In reducers state=',state,'action=', action);
+
+    if (state.model.result !== undefined)
+        state.model.result.termination_condition = '';
+
     switch (action.type) {
     case STARTUP:
 //        console.log('In reducers.STARTUP state=',state);

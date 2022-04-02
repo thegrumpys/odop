@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Table, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeSymbolValue, saveAutoSave } from '../../store/actionCreators';
-import { logUsage } from '../../logUsage';
+import { logUsage, logValue } from '../../logUsage';
 
 class ActionSelectCatalog extends Component {
 
@@ -124,10 +124,13 @@ class ActionSelectCatalog extends Component {
         this.state.entries[this.state.entry][2].forEach((element) => { 
 //            console.log('In ActionSelectCatalog.onSelect element=',element);
             this.props.changeSymbolValue(element[0],element[1]);
+            logValue(element[0],element[1]);
         });
         // The catalog name and number must be set after setting the affected symbols table entries
         this.props.changeSymbolValue('Catalog_Name',this.state.name);
+        logValue('Catalog_Name',this.state.name);
         this.props.changeSymbolValue('Catalog_Number',this.state.entries[this.state.entry][0]);
+        logValue('Catalog_Number',this.state.entries[this.state.entry][0]);
     }
 
     onCancel() {
