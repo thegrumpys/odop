@@ -176,7 +176,7 @@ C. **DEVELOPMENT ENVIRONMENT**
    Commit "Release Major.Minor.Patch" and push to origin.
 1. In Eclipse do a pull, Team > Show in History and verify tag is Major.Minor.Patch (for example, 2.3.1).
 1. Create a "master-Major.Minor.Patch" branch, commit and push to origin.
-Optionally in this branch, Update client/src/version.js file to next Major.Minor.Patch followed by suffix 'dev' (for example: 2.3.2dev).   
+1. Back in the master branch, optionally update client/src/version.js file to next Major.Minor.Patch followed by suffix 'dev' (for example: 2.3.2dev).   
 1. In master, update client/src/version.js file to next Major.Minor.Patch followed by suffix 'dev' (for example: 2.4dev).
 1. Commit with message "Update version.js to Major.Minor.Patchdev" and push to origin.
 1. In GitHub mark Milestone Major.Minor.Patch closed.
