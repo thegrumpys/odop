@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../../store/actionTypes';
 import { seek, saveAutoSave } from '../../../store/actionCreators';
 import { logUsage } from '../../../logUsage';
-import { displaySpinner } from '../../../components/Spinner';
 import * as sto from './symbol_table_offsets';
 
 export class ResultTableOptimize extends Component {
@@ -21,40 +20,32 @@ export class ResultTableOptimize extends Component {
     onOptimizeSeekMINWeight(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINWeight this=',this,'event=',event);
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN Weight button' });
-        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Weight', MIN);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 
     onOptimizeSeekMAXCycle_Life(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMAXCycle_Life this=',this,'event=',event);
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX Cycle_Life button' });
-        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Cycle_Life', MAX);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 
     onOptimizeSeekMINRate(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINRate this=',this,'event=',event);
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN Rate button' });
-        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Rate', MIN);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 
     onOptimizeSeekMAXL_Stroke(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMAXL_Stroke this=',this,'event=',event);
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX L_Stroke button' });
-        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('L_Stroke', MAX);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 

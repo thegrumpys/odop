@@ -124,12 +124,12 @@ class ActionSeek extends Component {
                 <Modal show={this.state.modal} onHide={this.onCancel}>
                     <Modal.Header>
                         <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek (optimize)
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <p>This may be a long running operation. Please be patient.</p>
-                        <ResultTableOptimize.default onClick={this.onOptimizeCancel}/>
+                        <ResultTableOptimize.default onClick={this.onCancel}/>
                         <InputGroup>
                             <ButtonGroup>
                                 <Button variant="outline-secondary" onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}> Min </Button>

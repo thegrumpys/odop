@@ -7,7 +7,6 @@ import FeasibilityIndicator from './FeasibilityIndicator';
 import { seek, search, saveAutoSave } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/MessageModal';
-//import { displaySpinner } from './Spinner';
 
 class ResultTable extends Component {
     
@@ -41,7 +40,6 @@ class ResultTable extends Component {
 
     onSearchButton(event) {
 //        console.log('In ResultTable.onSearchButton this=',this,'event=',event);
-       logUsage('event', 'ResultTable', { 'event_label': 'search button' });
         var warnMsg = '';
         if (this.props.objective_value <= this.props.system_controls.objmin) {
             warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
@@ -63,19 +61,18 @@ class ResultTable extends Component {
         if (warnMsg !== '') {
             displayMessage(warnMsg,'warning');
         } else {
+            logUsage('event', 'ActionSearch', { 'event_label': 'Button ' + old_objective_value + ' --> ' + new_objective_value});
             var old_objective_value = this.props.objective_value.toPrecision(4);
             this.props.saveAutoSave();
             this.props.search();
             const { store } = this.context;
             var design = store.getState();
             var new_objective_value = design.model.result.objective_value.toPrecision(4)
-            logUsage('event', 'ActionSearch', { 'event_label': 'ButtonSearch ' + old_objective_value + ' --> ' + new_objective_value});
         }
     }
 
     onOptimizeButton(event) {
 //        console.log('In ResultTable.onOptimizeButton this=',this,'event=',event);
-        logUsage('event', 'ResultTable', { 'event_label': 'optimize button' });
         this.setState({
             optimize_modal: !this.state.optimize_modal,
         });
@@ -83,7 +80,6 @@ class ResultTable extends Component {
 
     onOptimizeContextHelp(event) {
 //        console.log('In ResultTable.onOptimizeContextHelp this=',this,'event=',event);
-        logUsage('event', 'ResultTable', { 'event_label': 'optimize context Help button' });
         this.setState({
             optimize_modal: !this.state.optimize_modal,
         });
@@ -117,17 +113,9 @@ class ResultTable extends Component {
             optimize_modal: !this.state.optimize_modal
         });
         // Do seek
-        logUsage('event', 'ResultTable', { 'event_label': 'seek ' + this.state.minmax + ' ' + this.state.name });
-        this.setState({
-            seek_modal: true,
-        });
-//        displaySpinner(true);
+        logUsage('event', 'ActionSeek', { 'event_label': 'Button ' + this.state.minmax + ' ' + this.state.name });
         this.props.saveAutoSave();
         this.props.seek(this.state.name, this.state.minmax);
-        this.setState({
-            seek_modal: false,
-        });
-//        displaySpinner(false);
     }
 
     onNoop() {} // No-op for onHide
@@ -258,9 +246,6 @@ class ResultTable extends Component {
                         <Button variant="secondary" onClick={this.onOptimizeCancel}>Cancel</Button>
                         <Button variant="primary" onClick={this.onSeek}>Seek</Button>
                     </Modal.Footer>
-                </Modal>
-                <Modal show={this.state.seek_modal} style={{zIndex: 1100}} size="sm" animation={false} onHide={this.onNoop}>
-                    <Modal.Body><img src="spinner.gif" alt="Spinning Spinner" style={{"height":"90px"}}/>&nbsp;Running...</Modal.Body>
                 </Modal>
             </>
         );

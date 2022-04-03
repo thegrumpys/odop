@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
-import { displaySpinner } from '../../components/Spinner';
 import * as sto from './symbol_table_offsets';
 
 export class ResultTableOptimize extends Component {
@@ -22,10 +21,8 @@ export class ResultTableOptimize extends Component {
     onOptimizeSeekMAXVolume(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMAXVolume this=',this,'event=',event);
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX Volume button' });
-        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Volume', MAX);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 
@@ -34,37 +31,30 @@ export class ResultTableOptimize extends Component {
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX Weight button' });
         this.props.saveAutoSave();
         this.props.seek('Weight', MAX);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 
     onOptimizeSeekMINLength(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINLength this=',this,'event=',event);
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN Length button' });
-        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Length', MIN);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 
     onOptimizeSeekMINWidth(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINWidth this=',this,'event=',event);
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN Width button' });
-        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Width', MIN);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 
     onOptimizeSeekMINHeight(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINWidth this=',this,'event=',event);
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN Height button' });
-        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('Height', MIN);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 

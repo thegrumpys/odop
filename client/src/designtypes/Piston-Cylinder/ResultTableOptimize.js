@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
-import { displaySpinner } from '../../components/Spinner';
 import * as sto from './symbol_table_offsets';
 
 export class ResultTableOptimize extends Component {
@@ -21,40 +20,32 @@ export class ResultTableOptimize extends Component {
     onOptimizeSeekMAXFORCE(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMAXFORCE this=',this,'event=',event);
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX FORCE button' });
-        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('FORCE', MAX);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 
     onOptimizeSeekMINRADIUS(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINRADIUS this=',this,'event=',event);
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN RADIUS button' });
-        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('RADIUS', MIN);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 
     onOptimizeSeekMINPRESSURE(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINPRESSURE this=',this,'event=',event);
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN PRESSURE button' });
-        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('PRESSURE', MIN);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 
     onOptimizeSeekMINSTRESS(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINSTRESS this=',this,'event=',event);
         logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN STRESS button' });
-        displaySpinner(true);
         this.props.saveAutoSave();
         this.props.seek('STRESS', MIN);
-        displaySpinner(false);
         this.props.onClick(event);
     }
 
