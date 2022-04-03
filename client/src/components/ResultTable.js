@@ -61,13 +61,13 @@ class ResultTable extends Component {
         if (warnMsg !== '') {
             displayMessage(warnMsg,'warning');
         } else {
-            logUsage('event', 'ActionSearch', { 'event_label': 'Button ' + old_objective_value + ' --> ' + new_objective_value});
             var old_objective_value = this.props.objective_value.toPrecision(4);
             this.props.saveAutoSave();
             this.props.search();
             const { store } = this.context;
             var design = store.getState();
             var new_objective_value = design.model.result.objective_value.toPrecision(4)
+            logUsage('event', 'ActionSearch', { 'event_label': 'Button ' + old_objective_value + ' --> ' + new_objective_value});
         }
     }
 
@@ -113,9 +113,9 @@ class ResultTable extends Component {
             optimize_modal: !this.state.optimize_modal
         });
         // Do seek
-        logUsage('event', 'ActionSeek', { 'event_label': 'Button ' + this.state.minmax + ' ' + this.state.name });
         this.props.saveAutoSave();
         this.props.seek(this.state.name, this.state.minmax);
+        logUsage('event', 'ActionSeek', { 'event_label': 'Button ' + this.state.minmax + ' ' + this.state.name });
     }
 
     onNoop() {} // No-op for onHide

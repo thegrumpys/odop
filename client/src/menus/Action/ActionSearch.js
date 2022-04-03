@@ -36,13 +36,13 @@ class ActionSearch extends Component {
         if (warnMsg !== '') {
             displayMessage(warnMsg,'warning');
         } else {
-            logUsage('event', 'ActionSearch', { 'event_label': old_objective_value + ' --> ' + new_objective_value});
             var old_objective_value = this.props.objective_value.toPrecision(4);
             this.props.saveAutoSave();
             this.props.search();
             const { store } = this.context;
             var design = store.getState();
             var new_objective_value = design.model.result.objective_value.toPrecision(4)
+            logUsage('event', 'ActionSearch', { 'event_label': old_objective_value + ' --> ' + new_objective_value});
         }
     }
 
