@@ -166,10 +166,6 @@ git push heroku[-staging] +HEAD:master
 1. If maintenance mode was previously enabled, disable maintenance mode:  
 heroku maintenance:off -a odop
 1. Confirm that the http://odop-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version Major.Minor.Patch displays.
-1. **Publish to SpringDesignSoftware.org**. &nbsp; For production only, 
-while positioned in the git/odop directory, push to SpringDesignSoftware.org using the command line:   
-git push springdesignsoftware master   
-Verify no unexpected error messages during build on production.
 1. Confirm that the https://odop.herokuapp.com/docs website is operational and that documentation displays.
 
 &nbsp;
