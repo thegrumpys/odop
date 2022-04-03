@@ -16,39 +16,37 @@ class SearchDocs extends Component {
     }
     
     onChange(event) {
-        console.log("In SearchDocs.onChange event=",event);
+//        console.log("In SearchDocs.onChange event=",event);
         this.setState({
             text: event.target.value,
         });
     }
 
     onKeyPress(event) {
-        console.log("In SearchDocs.onKeyPress event=",event);
+//        console.log("In SearchDocs.onKeyPress event=",event);
         if (event.charCode === 13) {
             this.onButtonPress(event);
         }
     }
     
     onButtonPress(event) {
-        console.log("In SearchDocs.onButtonPress event=",event);
-        var encoded_text = encodeURIComponent(this.state.text);
-        console.log("In SearchDocs.onButtonPress encoded_text=",encoded_text);
-        var encoded_site = encodeURIComponent('http://springdesignsoftware.org');
-        console.log("In SearchDocs.onButtonPress encoded_site=",encoded_site);
-        var url = 'http://google.com/search?q=' + encoded_text + '&at_sitesearch=' + encoded_site;
+//        console.log("In SearchDocs.onButtonPress event=",event);
+        var encoded_text = encodeURIComponent(this.state.text+' site:http://www.springdesignsoftware.org/odop/docs/');
+//        console.log("In SearchDocs.onButtonPress encoded_text=",encoded_text);
+        var url = 'http://google.com/search?q=' + encoded_text;
         console.log("In SearchDocs.onButtonPress url=",url);
-        window.open(url, '_blank')
         this.setState({
             text: '',
         });
+        window.open(url, '_blank')
     }
 
     render() {
-        console.log('In SearchDocs.render this=',this);
+//        console.log('In SearchDocs.render this=',this);
         return (
             <InputGroup>
-                <Form.Control type="text" placeholder="Full Text Search of Docs ..." onChange={this.onChange} onKeyPress={this.onKeyPress} />
-                <Button><i class="fas fa-search"></i></Button>
+                <Form.Control type="text" value={this.state.text} placeholder="Full Text Search of Docs ..." onChange={this.onChange} onKeyPress={this.onKeyPress} />
+                <Button onClick={this.onButtonPress} style={{padding: '0px 24px 16px 8px'}} disabled={this.state.text.length === 0}><i className="fas fa-search"></i></Button>
             </InputGroup>
         );
     }
