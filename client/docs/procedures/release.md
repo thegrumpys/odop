@@ -146,7 +146,7 @@ If appropriate, dump to off-line storage and re-initialize the log_Usage table.
 <a id="publish2Heroku"></a>
 &nbsp;
 1. **Publish to Heroku** &nbsp; Update messageOfTheDay.md to announce availability of the new version.
-1. Do a pull or push as required to get latest version on all systems.
+1. Do a pull as required to get latest version on all systems.
 1. If not logged into Heroku, login in using the command line "heroku login" which in turn brings up the Heroku website login page in your browser.
 1. Shutdown server and client under your development environment.
 &nbsp;
@@ -171,6 +171,7 @@ heroku maintenance:off -a odop
 &nbsp;
 
 C. **DEVELOPMENT ENVIRONMENT**
+1. Do a pull as required to get latest version on all systems.
 1. Create Major.Minor.Patch tag (for example, 3.2.1).
    Commit "Release Major.Minor.Patch" and push to origin.
 1. In Eclipse do a pull, Team > Show in History and verify tag is Major.Minor.Patch (for example, 2.3.1).
