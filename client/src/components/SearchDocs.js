@@ -35,7 +35,7 @@ class SearchDocs extends Component {
         var encoded_text = encodeURIComponent(this.state.text+' site:http://www.springdesignsoftware.org/odop/docs/');
 //        console.log("In SearchDocs.onButtonPress encoded_text=",encoded_text);
         var url = 'http://google.com/search?q=' + encoded_text;
-        console.log("In SearchDocs.onButtonPress url=",url);
+//        console.log("In SearchDocs.onButtonPress url=",url);
         logUsage('event', 'SearchDocs', { 'event_label': this.state.text});
         this.setState({
             text: '',
