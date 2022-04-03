@@ -32,7 +32,7 @@ class SearchDocs extends Component {
     
     onButtonPress(event) {
 //        console.log("In SearchDocs.onButtonPress event=",event);
-        var encoded_text = encodeURIComponent(this.state.text+' site:http://www.springdesignsoftware.org/odop/docs/');
+        var encoded_text = encodeURIComponent(this.state.text+' site:http://odop.herokuapp.com/docs/');
 //        console.log("In SearchDocs.onButtonPress encoded_text=",encoded_text);
         var url = 'http://google.com/search?q=' + encoded_text;
 //        console.log("In SearchDocs.onButtonPress url=",url);
@@ -47,7 +47,7 @@ class SearchDocs extends Component {
 //        console.log('In SearchDocs.render this=',this);
         return (
             <InputGroup className='pr-3'>
-                <Form.Control type="text" value={this.state.text} placeholder="Full Text Search of Docs ..." onChange={this.onChange} onKeyPress={this.onKeyPress} />
+                <Form.Control type="text" value={this.state.text} placeholder="Help lookup" onChange={this.onChange} onKeyPress={this.onKeyPress} />
                 <Button onClick={this.onButtonPress} style={{padding: '0px 24px 16px 8px'}} disabled={this.state.text.length === 0}><i className="fas fa-search"></i></Button>
             </InputGroup>
         );
