@@ -40,6 +40,7 @@ import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
+import SearchDocs from './SearchDocs';
 import { withOktaAuth } from '@okta/okta-react';
 import { changeUser, changeView, deleteAutoSave } from '../store/actionCreators';
 import config from '../config';
@@ -173,6 +174,9 @@ class MainPage extends Component {
                             </NavDropdown>
                         </Nav>
                         <Nav>
+                            <Nav.Item>
+                                <SearchDocs />
+                            </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link className={classnames({ active: this.state.activeTab === "Advanced" })} onClick={() => { this.setView("Advanced"); }}>
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}</Tooltip>}>
