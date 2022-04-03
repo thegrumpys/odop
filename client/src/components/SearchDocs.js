@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { InputGroup, Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { logUsage } from '../logUsage';
 
 class SearchDocs extends Component {
 
@@ -35,6 +36,7 @@ class SearchDocs extends Component {
 //        console.log("In SearchDocs.onButtonPress encoded_text=",encoded_text);
         var url = 'http://google.com/search?q=' + encoded_text;
         console.log("In SearchDocs.onButtonPress url=",url);
+        logUsage('event', 'SearchDocs', { 'event_label': this.state.text});
         this.setState({
             text: '',
         });
