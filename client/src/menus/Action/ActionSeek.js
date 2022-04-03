@@ -91,9 +91,9 @@ class ActionSeek extends Component {
             modal: !this.state.modal
         });
         // Do seek
-        logUsage('event', 'ActionSeek', { 'event_label': this.state.minmax + ' ' + this.state.name });
         this.props.saveAutoSave();
         this.props.seek(this.state.name, this.state.minmax);
+        logUsage('event', 'ActionSeek', { 'event_label': this.state.minmax + ' ' + this.state.name });
     }
     
     onCancel() {
