@@ -30,7 +30,7 @@ import { propagate } from './propagate';
 import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
 import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
-         restoreOutputSymbolConstraints } from '../actionCreators';
+         restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actionCreators';
 
 export const dispatcher = store => next => action => {
     
@@ -234,7 +234,11 @@ export const dispatcher = store => next => action => {
         break;
     case SEEK:
         seek(store, action);
+        design = store.getState();
+//        console.log('@@@@@',design.model.result.termination_condition);
+        var termination_condition = design.model.result.termination_condition;
         updateViolationsAndObjectiveValue(store);
+        store.dispatch(changeResultTerminationCondition(termination_condition));
         break;
 
     default:

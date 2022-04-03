@@ -7,7 +7,6 @@ import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
 import {
     startup,
     changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
-    changeResultObjectiveValue,
     search, seek, 
     saveAutoSave, restoreAutoSave, deleteAutoSave } from '../store/actionCreators';
 import { reducers } from '../store/reducers';
