@@ -68,7 +68,15 @@ ___
 **Recovering a design from AutoSave data**  
 
 If AutoSave data exists at the time the app starts, 
-it will automatically load and provide a blue pop-up message describing the situation. 
+a blue pop-up message will indicate that an AutoSave design is available
+and provide the opportunity to recover it. 
+Selecting "Yes" will recover the AutoSave design.
+Selecting "Cancel" will load the default design.
+
+If the app is started directly from odop.herokuapp.com without parameters as part of the URL,
+the default is Compression spring, US Customary units and Advanced View.
+If the app is started from SpringDesignSoftware.org,
+the default is the spring type, units and View that are selected there.
 
 ___
 
@@ -77,10 +85,13 @@ ___
 
 **Notes**  
 
-The operation of the AutoSave feature allows a browser refresh / reload or click on the ODOP logo to be used 
-as an "undo" for the most recent Action : Search, Seek, Trade, Select Size and Select Catalog. 
+The AutoSave feature is not intended to be used for long term storage of design information.
+Use File : Save, File : SaveAs or File : Export to save the design permanently.
+
+The operation of the AutoSave feature allows a browser refresh / reload or click on the ODOP logo 
+to be used as an "undo" for the most recent Action : Search, Seek, Trade, Select Size and Select Catalog. 
 From there, an additional browser refresh / reload or press on the ODOP logo will replace the design 
-recovered from AutoSave data with the default design type (compression spring) and design (Startup). 
+recovered from AutoSave data with the default design. 
 
 Note that not all operations are recoverable by the current AutoSave implementation. 
 Users should save or export frequently and 
@@ -93,8 +104,8 @@ The AutoSave feature is not available when operating in "private browsing mode"
 (Chrome "Incognito", Edge "InPrivate", Firefox "Private Window", etc.).
 
 ___
-
 See also:   
+  - [Launching the app](launchODOP.html)
   - [File : Save](menus.html#FileSave)   
   - [File : Export](menus.html#FileExport)   
   - [User accounts](../About/userAccounts.html)   
