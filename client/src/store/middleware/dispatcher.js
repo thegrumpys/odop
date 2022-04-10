@@ -41,7 +41,12 @@ export const dispatcher = store => next => action => {
 
     const returnValue = next(action);
 
-//    console.log('In dispatcher state=',store.getState(),'action=',action);
+//    console.log('<li>','In dispatcher state=',store.getState(),'action=',action,'</li>');
+    if (action.payload === undefined || action.payload.name === undefined) {
+        console.log('<li>','In dispatcher action=', action.type,'</li>');
+    } else {
+        console.log('<li>','In dispatcher action=', action.type,'action.payload.name=',action.payload.name,'</li>');
+    }
 
     switch (action.type) {
     case STARTUP:
@@ -85,7 +90,7 @@ export const dispatcher = store => next => action => {
                 return false;
             }
         });
-        resetCatalogSelection(store, action)
+        resetCatalogSelection(store, action);
         invokeEquationSet(store);
         propagate(store);
         updateViolationsAndObjectiveValue(store, action.payload.merit);

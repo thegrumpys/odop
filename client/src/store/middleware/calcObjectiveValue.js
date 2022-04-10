@@ -1,13 +1,11 @@
-import { MIN, MAX, CONSTRAINED, FIXED } from '../actionTypes';
-import { changeSymbolViolation,
-    changeResultObjectiveValue, changeResultViolatedConstraintCount } from '../actionCreators';
+import { CONSTRAINED, FIXED } from '../actionTypes';
 
 // Update Violations and Objective Value
-export function updateViolationsAndObjectiveValue(store, merit) {
+export function calcObjectiveValue(store, merit) {
     
     // Update Constraint Violations
 
-    console.log('<li>','Start updateViolationsAndObjectiveValue','</li><ul>');
+    console.log('<li>','@@@@@ Start calcObjectiveValue','</li><ul>');
 
     /*
      * The following section of code constructs the objective function from the
@@ -31,11 +29,9 @@ export function updateViolationsAndObjectiveValue(store, merit) {
             vmax = 0.0;
             if (element.lmin & CONSTRAINED ) {
                 vmin = (-element.value + element.cmin) / element.smin;
-                store.dispatch(changeSymbolViolation(element.name, MIN, vmin));
             }
             if (element.lmax & CONSTRAINED ) {
                 vmax = ( element.value - element.cmax) / element.smax;
-                store.dispatch(changeSymbolViolation(element.name, MAX, vmax));
             }
             if (vmin > 0.0) {
                 viol_sum = viol_sum + vmin * vmin;
@@ -59,9 +55,7 @@ export function updateViolationsAndObjectiveValue(store, merit) {
              */
             if (element.lmin & FIXED) {
                 vmin = (-element.value + element.cmin) / element.smin;
-                store.dispatch(changeSymbolViolation(element.name, MIN, vmin))
                 vmax = -vmin;
-                store.dispatch(changeSymbolViolation(element.name, MAX, vmax))
                 if (vmin > 1.0) {
                     viol_sum = viol_sum + vmin;
                 } else if (vmin < -1.0) {
@@ -73,12 +67,10 @@ export function updateViolationsAndObjectiveValue(store, merit) {
                 if (element.lmin & CONSTRAINED ) {
                     vmin = (-element.value + element.cmin) / element.smin;
 //                    console.log('name=',element.name,' vmin=',vmin,' value=',element.value,' cmin=',element.cmin,' smin=',element.smin);
-                    store.dispatch(changeSymbolViolation(element.name, MIN, vmin))
                 }
                 if (element.lmax & CONSTRAINED ) {
                     vmax = ( element.value - element.cmax) / element.smax;
 //                    console.log('name=',element.name,' vmax=',vmax,' value=',element.value,' cmax=',element.cmax,' smax=',element.smax);
-                    store.dispatch(changeSymbolViolation(element.name, MAX, vmax))
                 }
                 if (vmin > 0.0) {
                     viol_sum = viol_sum + vmin * vmin;
@@ -99,21 +91,7 @@ export function updateViolationsAndObjectiveValue(store, merit) {
     
     // Update Objective Value
     obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
-    store.dispatch(changeResultObjectiveValue(obj));
     
-    // Update Violated Constraint Count, which becomes Feasibility on the UI
-    design = store.getState(); // Re-access store to get latest vmin and vmax
-    var violated_constraint_count = 0;
-    for (let i = 0; i < design.model.symbol_table.length; i++) {
-        element = design.model.symbol_table[i];
-        if (element.lmin & CONSTRAINED)
-            if (element.vmin > 0.0)
-                violated_constraint_count++;
-        if (element.lmax & CONSTRAINED)
-            if (element.vmax > 0.0)
-                violated_constraint_count++;
-    }
-    store.dispatch(changeResultViolatedConstraintCount(violated_constraint_count));
-    
-    console.log('</ul><li>','End updateViolationsAndObjectiveValue','</li>');
+    console.log('</ul><li>','@@@@@ End calcObjectiveValue','</li>');
+    return obj;
 }

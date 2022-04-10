@@ -25,7 +25,7 @@ export function despak(pc, store, merit) {
     var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
     x = eqnset(p, x);
 
-    var obj = calcObjectiveValue(store,merit); // Update Objective Value
+    obj = calcObjectiveValue(store,merit); // Update Objective Value
 
     console.log('</ul><li>','!!!!! End despak obj=',obj,'</li>');
     return obj;

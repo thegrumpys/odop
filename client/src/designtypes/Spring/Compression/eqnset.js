@@ -1,6 +1,7 @@
 import * as o from './offsets';
 import * as mo from '../mat_offsets';
 export function eqnset(p, x) {        /*    Compression  Spring  */
+    console.log('<li>','@@@@@ Start eqnset p=',p,'x=',x,'</li><ul>');
     const zero = 0.0;
     var ks;
     var kc;
@@ -99,7 +100,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
         var sq1 = p[o.L_Free];
         var sq2 = p[o.Coils_T] * Math.PI * x[o.Mean_Dia];
         var wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
-        if (x[o.End_Type].value === 5 )  /*  calculate developed length of tapered ends based on 2 ends * pi * wire diameter * 0.625 */
+        if (x[o.End_Type] === 5 )  /*  calculate developed length of tapered ends based on 2 ends * pi * wire diameter * 0.625 */
             wire_len_t = wire_len_t - 3.926 * p[o.Wire_Dia];
 
         x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * wire_len_t;
@@ -115,7 +116,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
  
      x[o.Energy] = 0.5 * x[o.Rate] * (x[o.Deflect_2] * x[o.Deflect_2] - x[o.Deflect_1] * x[o.Deflect_1]);
     
-//    console.log('In eqnset p=',p,' x=',x);
+    console.log('</ul><li>','@@@@@ End eqnset','</li>');
     return x;
     
 function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
@@ -185,7 +186,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 //    end;
     }
 
-return(1.0);
+    return(1.0);
 
 }
     

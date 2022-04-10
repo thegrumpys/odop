@@ -1,5 +1,5 @@
 import { FIXED } from '../actionTypes';
-import { calcObjectiveValue } from './calcObjectiveValue';
+import { changeInputSymbolValues } from '../actionCreators';
 /**
  * despak - Expand any compressed design parameters and call the equation set.
  */
@@ -8,7 +8,6 @@ export function despak(pc, store, merit) {
     var design = store.getState();
     var kd = 0;
     var p = [];
-    var x = [];
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         var element = design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) {
@@ -17,16 +16,11 @@ export function despak(pc, store, merit) {
             } else {
                 p.push(element.value);
             }
-        } else {
-            x.push(element.value);
         }
     }
-
-    var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
-    x = eqnset(p, x);
-
-    var obj = calcObjectiveValue(store,merit); // Update Objective Value
-
+    store.dispatch(changeInputSymbolValues(p, merit));
+    design = store.getState();
+    var obj = design.model.result.objective_value;
     console.log('</ul><li>','!!!!! End despak obj=',obj,'</li>');
     return obj;
 }
