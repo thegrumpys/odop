@@ -4,7 +4,7 @@ import { changeInputSymbolValues } from '../actionCreators';
  * despak - Expand any compressed design parameters and call the equation set.
  */
 export function despak(pc, store, merit) {
-    console.log('<li>!!!!! Start despak pc=',pc,'</li><ul>');
+//    console.log('<li>!!!!! Start despak pc=',pc,'</li><ul>');
     var design = store.getState();
     var kd = 0;
     var p = [];
@@ -21,6 +21,6 @@ export function despak(pc, store, merit) {
     store.dispatch(changeInputSymbolValues(p, merit));
     design = store.getState();
     var obj = design.model.result.objective_value;
-    console.log('</ul><li>','!!!!! End despak obj=',obj,'</li>');
+//    console.log('</ul><li>','!!!!! End despak obj=',obj,'</li>');
     return obj;
 }

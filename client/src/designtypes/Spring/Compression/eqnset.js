@@ -1,7 +1,7 @@
 import * as o from './offsets';
 import * as mo from '../mat_offsets';
 export function eqnset(p, x) {        /*    Compression  Spring  */
-    console.log('<li>','@@@@@ Start eqnset p=',p,'x=',x,'</li><ul>');
+//    console.log('<li>','@@@@@ Start eqnset p=',p,'x=',x,'</li><ul>');
     const zero = 0.0;
     var ks;
     var kc;
@@ -116,7 +116,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
  
      x[o.Energy] = 0.5 * x[o.Rate] * (x[o.Deflect_2] * x[o.Deflect_2] - x[o.Deflect_1] * x[o.Deflect_1]);
     
-    console.log('</ul><li>','@@@@@ End eqnset','</li>');
+//    console.log('</ul><li>','@@@@@ End eqnset','</li>');
     return x;
     
 function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){

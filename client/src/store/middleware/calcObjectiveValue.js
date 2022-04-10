@@ -1,11 +1,11 @@
 import { CONSTRAINED, FIXED } from '../actionTypes';
 
 // Update Violations and Objective Value
-export function calcObjectiveValue(store, merit) {
+export function calcObjectiveValue(p, x, store, merit) {
     
     // Update Constraint Violations
 
-    console.log('<li>','@@@@@ Start calcObjectiveValue','</li><ul>');
+//    console.log('<li>','@@@@@ Start calcObjectiveValue','</li><ul>');
 
     /*
      * The following section of code constructs the objective function from the
@@ -20,18 +20,22 @@ export function calcObjectiveValue(store, merit) {
     var viol_sum = 0.0;
 
     var design = store.getState(); // Re-access store to get latest element values
-//    console.log('In updateViolationsAndObjectiveValue design=',design);
+//    console.log('In calcObjectiveValue design=',design);
 
+    var ip = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) {
             vmin = 0.0;
             vmax = 0.0;
+            var pp = p[ip++];
             if (element.lmin & CONSTRAINED ) {
-                vmin = (-element.value + element.cmin) / element.smin;
+                vmin = (-pp + element.cmin) / element.smin;
+//                console.log('<li>','p name=',element.name,' vmin=',vmin,' value=',pp,' cmin=',element.cmin,' smin=',element.smin,'</li>');
             }
             if (element.lmax & CONSTRAINED ) {
-                vmax = ( element.value - element.cmax) / element.smax;
+                vmax = ( pp - element.cmax) / element.smax;
+//                console.log('<li>','p name=',element.name,' vmax=',vmax,' value=',pp,' cmax=',element.cmax,' smax=',element.smax,'</li>');
             }
             if (vmin > 0.0) {
                 viol_sum = viol_sum + vmin * vmin;
@@ -41,11 +45,13 @@ export function calcObjectiveValue(store, merit) {
             }
         }
     }
+    var ix = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
         if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
             vmin = 0.0;
             vmax = 0.0;
+            var xx = x[ix++];
             /* State variable fix levels. */
             /*
              * The fix_wt's are automatically incorporated in the scaling denominators
@@ -54,7 +60,7 @@ export function calcObjectiveValue(store, merit) {
              * This version reduces penalty of large fix violations.
              */
             if (element.lmin & FIXED) {
-                vmin = (-element.value + element.cmin) / element.smin;
+                vmin = (-xx + element.cmin) / element.smin;
                 vmax = -vmin;
                 if (vmin > 1.0) {
                     viol_sum = viol_sum + vmin;
@@ -65,12 +71,12 @@ export function calcObjectiveValue(store, merit) {
                 }
             } else {
                 if (element.lmin & CONSTRAINED ) {
-                    vmin = (-element.value + element.cmin) / element.smin;
-//                    console.log('name=',element.name,' vmin=',vmin,' value=',element.value,' cmin=',element.cmin,' smin=',element.smin);
+                    vmin = (-xx + element.cmin) / element.smin;
+//                    console.log('<li>','x name=',element.name,' vmin=',vmin,' value=',xx,' cmin=',element.cmin,' smin=',element.smin,'</li>');
                 }
                 if (element.lmax & CONSTRAINED ) {
-                    vmax = ( element.value - element.cmax) / element.smax;
-//                    console.log('name=',element.name,' vmax=',vmax,' value=',element.value,' cmax=',element.cmax,' smax=',element.smax);
+                    vmax = ( xx - element.cmax) / element.smax;
+//                    console.log('<li>','x name=',element.name,' vmax=',vmax,' value=',xx,' cmax=',element.cmax,' smax=',element.smax,'</li>');
                 }
                 if (vmin > 0.0) {
                     viol_sum = viol_sum + vmin * vmin;
@@ -92,6 +98,6 @@ export function calcObjectiveValue(store, merit) {
     // Update Objective Value
     obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
     
-    console.log('</ul><li>','@@@@@ End calcObjectiveValue','</li>');
+//    console.log('</ul><li>','@@@@@ End calcObjectiveValue obj=',obj,'</li>');
     return obj;
 }

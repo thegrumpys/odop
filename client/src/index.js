@@ -32,7 +32,7 @@ import { logUsage } from './logUsage';
 
 //console.error('In index.js ==================================================================');
 //console.log('In index.js CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'Starting on port =', process.env.PORT, 'Node version =', process.version);
-console.log('<li>','Start index.js','</li><ul>');
+//console.log('<li>','Start index.js','</li><ul>');
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

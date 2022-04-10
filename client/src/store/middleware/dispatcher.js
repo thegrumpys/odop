@@ -42,11 +42,11 @@ export const dispatcher = store => next => action => {
     const returnValue = next(action);
 
 //    console.log('<li>','In dispatcher state=',store.getState(),'action=',action,'</li>');
-    if (action.payload === undefined || action.payload.name === undefined) {
-        console.log('<li>','In dispatcher action=', action.type,'</li>');
-    } else {
-        console.log('<li>','In dispatcher action=', action.type,'action.payload.name=',action.payload.name,'</li>');
-    }
+//    if (action.payload === undefined || action.payload.name === undefined) {
+//        console.log('<li>','In dispatcher action=', action.type,'</li>');
+//    } else {
+//        console.log('<li>','In dispatcher action=', action.type,'action.payload.name=',action.payload.name,'</li>');
+//    }
 
     switch (action.type) {
     case STARTUP:

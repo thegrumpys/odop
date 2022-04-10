@@ -7,7 +7,7 @@ export function updateViolationsAndObjectiveValue(store, merit) {
     
     // Update Constraint Violations
 
-    console.log('<li>','Start updateViolationsAndObjectiveValue','</li><ul>');
+//    console.log('<li>','Start updateViolationsAndObjectiveValue','</li><ul>');
 
     /*
      * The following section of code constructs the objective function from the
@@ -115,5 +115,5 @@ export function updateViolationsAndObjectiveValue(store, merit) {
     }
     store.dispatch(changeResultViolatedConstraintCount(violated_constraint_count));
     
-    console.log('</ul><li>','End updateViolationsAndObjectiveValue','</li>');
+//    console.log('</ul><li>','End updateViolationsAndObjectiveValue','</li>');
 }

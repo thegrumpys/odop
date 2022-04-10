@@ -1,7 +1,7 @@
 import { changeSymbolConstraint } from '../actionCreators';
 
 export function propagate(store) {
-    console.log('<li>','Start propagate store=',store,'</li><ul>');
+//    console.log('<li>','Start propagate store=',store,'</li><ul>');
     var design = store.getState(); // Re-access store to get latest source values
 //    console.log('In propagate design=',design);
     design.model.symbol_table.forEach((source) => {
@@ -17,5 +17,5 @@ export function propagate(store) {
             });
         }
     });
-    console.log('</ul><li>','End propagate','</li>');
+//    console.log('</ul><li>','End propagate','</li>');
 }

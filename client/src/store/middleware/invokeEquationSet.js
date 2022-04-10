@@ -3,7 +3,7 @@ import { changeOutputSymbolValues } from '../actionCreators';
 // Invoke Equation Set
 export function invokeEquationSet(store) {
     
-    console.log('<li>','Start invokeEquationSet','</li><ul>');
+//    console.log('<li>','Start invokeEquationSet','</li><ul>');
     
     var element;
 
@@ -29,5 +29,5 @@ export function invokeEquationSet(store) {
     // Compute and dispatch output changes
     store.dispatch(changeOutputSymbolValues(x));
     
-    console.log('</ul><li>','End invokeEquationSet','</li>');
+//    console.log('</ul><li>','End invokeEquationSet','</li>');
 }

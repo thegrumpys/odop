@@ -46,11 +46,11 @@ export function reducers(state, action) {
     var name;
 
 //    console.warn('In reducers state=',state,'action=', action);
-    if (action.payload === undefined || action.payload.name === undefined) {
-        console.log('<li>','In reducers action=', action.type,'</li>');
-    } else {
-        console.log('<li>','In reducers action=', action.type,'action.payload.name=',action.payload.name,'</li>');
-    }
+//    if (action.payload === undefined || action.payload.name === undefined) {
+//        console.log('<li>','In reducers action=', action.type,'</li>');
+//    } else {
+//        console.log('<li>','In reducers action=', action.type,'action.payload.name=',action.payload.name,'</li>');
+//    }
 
     if (state.model.result !== undefined) {
         state.model.result.termination_condition = '';

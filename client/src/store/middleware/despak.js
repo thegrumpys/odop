@@ -4,7 +4,7 @@ import { calcObjectiveValue } from './calcObjectiveValue';
  * despak - Expand any compressed design parameters and call the equation set.
  */
 export function despak(pc, store, merit) {
-    console.log('<li>!!!!! Start despak pc=',pc,'</li><ul>');
+//    console.log('<li>!!!!! Start despak pc=',pc,'</li><ul>');
     var design = store.getState();
     var kd = 0;
     var p = [];
@@ -25,8 +25,10 @@ export function despak(pc, store, merit) {
     var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
     x = eqnset(p, x);
 
-    var obj = calcObjectiveValue(store,merit); // Update Objective Value
+    // TODO: Do we need to call Propagate?
 
-    console.log('</ul><li>','!!!!! End despak obj=',obj,'</li>');
+    var obj = calcObjectiveValue(p, x, store, merit); // Update Objective Value
+
+//    console.log('</ul><li>','!!!!! End despak obj=',obj,'</li>');
     return obj;
 }
