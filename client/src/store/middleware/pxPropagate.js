@@ -8,7 +8,7 @@ export function pxPropagate(p, x, store) {
     var ix = 0;
     var value;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
-        source = design.model.symbol_table[i];
+        var source = design.model.symbol_table[i];
         console.log('In pxPropagate source=',source);
         if (source.type === "equationset" && source.input) {
             value = p[ip++];

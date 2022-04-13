@@ -6,7 +6,7 @@ export function propagate(store) {
 //    console.log('In propagate design=',design);
     var value;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
-        source = design.model.symbol_table[i];
+        var source = design.model.symbol_table[i];
         console.log('In propagate source=',source);
         value = source.value;
         if (source.propagate !== undefined) {
