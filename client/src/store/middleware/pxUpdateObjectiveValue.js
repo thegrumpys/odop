@@ -1,11 +1,11 @@
 import { CONSTRAINED, FIXED } from '../actionTypes';
 
 // Update Violations and Objective Value
-export function calcObjectiveValue(p, x, store, merit) {
+export function pxUpdateObjectiveValue(p, x, store, merit) {
     
     // Update Constraint Violations
 
-//    console.log('<li>','@@@@@ Start calcObjectiveValue','</li><ul>');
+//    console.log('<li>','@@@@@ Start pxUpdateObjectiveValue','</li><ul>');
 
     /*
      * The following section of code constructs the objective function from the
@@ -20,7 +20,7 @@ export function calcObjectiveValue(p, x, store, merit) {
     var viol_sum = 0.0;
 
     var design = store.getState(); // Re-access store to get latest element values
-//    console.log('In calcObjectiveValue design=',design);
+//    console.log('In pxUpdateObjectiveValue design=',design);
 
     var ip = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
@@ -98,6 +98,6 @@ export function calcObjectiveValue(p, x, store, merit) {
     // Update Objective Value
     obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
     
-//    console.log('</ul><li>','@@@@@ End calcObjectiveValue obj=',obj,'</li>');
+//    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
     return obj;
 }

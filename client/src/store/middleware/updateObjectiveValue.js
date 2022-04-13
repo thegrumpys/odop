@@ -3,11 +3,11 @@ import { changeSymbolViolation,
     changeResultObjectiveValue, changeResultViolatedConstraintCount } from '../actionCreators';
 
 // Update Violations and Objective Value
-export function updateViolationsAndObjectiveValue(store, merit) {
+export function updateObjectiveValue(store, merit) {
     
     // Update Constraint Violations
 
-//    console.log('<li>','Start updateViolationsAndObjectiveValue','</li><ul>');
+//    console.log('<li>','Start updateObjectiveValue','</li><ul>');
 
     /*
      * The following section of code constructs the objective function from the
@@ -22,7 +22,7 @@ export function updateViolationsAndObjectiveValue(store, merit) {
     var viol_sum = 0.0;
 
     var design = store.getState(); // Re-access store to get latest element values
-//    console.log('In updateViolationsAndObjectiveValue design=',design);
+//    console.log('In updateObjectiveValue design=',design);
 
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
@@ -115,5 +115,5 @@ export function updateViolationsAndObjectiveValue(store, merit) {
     }
     store.dispatch(changeResultViolatedConstraintCount(violated_constraint_count));
     
-//    console.log('</ul><li>','End updateViolationsAndObjectiveValue','</li>');
+//    console.log('</ul><li>','End updateObjectiveValue','</li>');
 }

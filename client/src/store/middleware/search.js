@@ -1,7 +1,7 @@
 import { FIXED } from '../actionTypes';
 import { changeInputSymbolValues, changeResultTerminationCondition } from '../actionCreators';
 import { patsh } from './patsh';
-import { calcObjectiveValue } from './calcObjectiveValue';
+import { pxUpdateObjectiveValue } from './pxUpdateObjectiveValue';
 
 // Search
 export function search(store, objmin, merit) {
@@ -47,7 +47,7 @@ export function search(store, objmin, merit) {
     store.dispatch(changeInputSymbolValues(p, merit));
     store.dispatch(changeResultTerminationCondition(ncode));
     
-    var obj = calcObjectiveValue(p, x, store, merit);
+    var obj = pxUpdateObjectiveValue(p, x, store, merit);
 //    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
     return obj;
 }

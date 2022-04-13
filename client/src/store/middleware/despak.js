@@ -1,6 +1,6 @@
 import { FIXED } from '../actionTypes';
-import { calcObjectiveValue } from './calcObjectiveValue';
-import { propagate } from './propagate';
+import { pxUpdateObjectiveValue } from './pxUpdateObjectiveValue';
+import { pxPropagate } from './pxPropagate';
 /**
  * despak - Expand any compressed design parameters and call the equation set.
  */
@@ -26,9 +26,9 @@ export function despak(pc, store, merit) {
     var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
     x = eqnset(p, x);
 
-    propagate(store);
+    pxPropagate(p, x, store);
 
-    var obj = calcObjectiveValue(p, x, store, merit); // Update Objective Value
+    var obj = pxUpdateObjectiveValue(p, x, store, merit); // Update Objective Value
 
 //    console.log('</ul><li>','!!!!! End despak obj=',obj,'</li>');
     return obj;

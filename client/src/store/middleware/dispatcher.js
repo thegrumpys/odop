@@ -27,7 +27,7 @@ import { seek } from './seek';
 import { invokeInit } from './invokeInit';
 import { invokeEquationSet } from './invokeEquationSet';
 import { propagate } from './propagate';
-import { updateViolationsAndObjectiveValue } from './updateViolationsAndObjectiveValue';
+import { updateObjectiveValue } from './updateObjectiveValue';
 import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
          restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actionCreators';
@@ -57,7 +57,7 @@ export const dispatcher = store => next => action => {
         invokeEquationSet(store);
         propagate(store);
         setSclDen(store);
-        updateViolationsAndObjectiveValue(store);
+        updateObjectiveValue(store);
         break;
 
     case CHANGE_SYMBOL_VALUE:
@@ -93,7 +93,7 @@ export const dispatcher = store => next => action => {
         resetCatalogSelection(store, action);
         invokeEquationSet(store);
         propagate(store);
-        updateViolationsAndObjectiveValue(store, action.payload.merit);
+        updateObjectiveValue(store, action.payload.merit);
         break;
     case FIX_SYMBOL_VALUE:
         design = store.getState();
@@ -136,7 +136,7 @@ export const dispatcher = store => next => action => {
         });
         invokeEquationSet(store);
         propagate(store);
-        updateViolationsAndObjectiveValue(store);
+        updateObjectiveValue(store);
         break;
     case FREE_SYMBOL_VALUE:
         design = store.getState();
@@ -152,13 +152,13 @@ export const dispatcher = store => next => action => {
         });
         invokeEquationSet(store);
         propagate(store);
-        updateViolationsAndObjectiveValue(store);
+        updateObjectiveValue(store);
         break;
     case CHANGE_SYMBOL_CONSTRAINT:
-        updateViolationsAndObjectiveValue(store);
+        updateObjectiveValue(store);
         break;
     case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS:
-        updateViolationsAndObjectiveValue(store);
+        updateObjectiveValue(store);
         break;
     case SET_SYMBOL_FLAG:
 //        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action);
@@ -181,7 +181,7 @@ export const dispatcher = store => next => action => {
             store.dispatch(changeSymbolConstraint(sink.name, action.payload.minmax, source.value)); // Propagate now
 //            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action,'source=',source,'sink=',sink);
         }
-        updateViolationsAndObjectiveValue(store);
+        updateObjectiveValue(store);
         break;
     case RESET_SYMBOL_FLAG:
 //        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate action=',action);
@@ -213,7 +213,7 @@ export const dispatcher = store => next => action => {
             }
 //            console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate source=',source,'sink=',sink);
         }
-        updateViolationsAndObjectiveValue(store);
+        updateObjectiveValue(store);
         break;
 
     case CHANGE_INPUT_SYMBOL_VALUES:
@@ -223,14 +223,14 @@ export const dispatcher = store => next => action => {
         store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
         invokeEquationSet(store);
         propagate(store);
-        updateViolationsAndObjectiveValue(store, action.payload.merit);
+        updateObjectiveValue(store, action.payload.merit);
         break;
     case RESTORE_INPUT_SYMBOL_VALUES:
         store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
         store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
         invokeEquationSet(store);
         propagate(store);
-        updateViolationsAndObjectiveValue(store, action.payload.merit);
+        updateObjectiveValue(store, action.payload.merit);
         break;
 
     case SEARCH:
@@ -242,7 +242,7 @@ export const dispatcher = store => next => action => {
         design = store.getState();
 //        console.log('@@@@@',design.model.result.termination_condition);
         var termination_condition = design.model.result.termination_condition;
-        updateViolationsAndObjectiveValue(store);
+        updateObjectiveValue(store);
         store.dispatch(changeResultTerminationCondition(termination_condition));
         break;
 
