@@ -32,7 +32,7 @@ class SearchDocs extends Component {
     
     onButtonPress(event) {
 //        console.log("In SearchDocs.onButtonPress event=",event);
-        var encoded_text = encodeURIComponent(this.state.text+' site:http://odop.herokuapp.com/docs/');
+        var encoded_text = encodeURIComponent(this.state.text+' site:http://odop.springdesignsoftware.org/docs/');
 //        console.log("In SearchDocs.onButtonPress encoded_text=",encoded_text);
         var url = 'http://google.com/search?q=' + encoded_text;
 //        console.log("In SearchDocs.onButtonPress url=",url);
