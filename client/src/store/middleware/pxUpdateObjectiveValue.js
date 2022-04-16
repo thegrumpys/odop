@@ -90,7 +90,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     
     /* Merit Function */
     if (merit && typeof merit === 'function') {
-        m_funct = merit(design);
+        m_funct = merit(p, x, design);
     } else {
         m_funct = 0.0;
     }

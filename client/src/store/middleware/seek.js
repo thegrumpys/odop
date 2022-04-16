@@ -131,23 +131,52 @@ export function seek(store, action) {
     }
 
     if (design.model.system_controls.ioopt > 5) {
-        console.log('14 Merit Function = ', merit(design));  // Merit Function contribution to OBJ may be negative
+        // Create p & x from symbol_table
+        var p = [];
+        var x = [];
+        for (let i = 0; i < design.model.symbol_table.length; i++) {
+            element = design.model.symbol_table[i];
+            if (element.type === "equationset" && element.input) {
+                p.push(element.value);
+            } else {
+                x.push(element.value);
+            }
+        }
+        console.log('14 Merit Function = ', merit(p, x, design));  // Merit Function contribution to OBJ may be negative
     }
     
-    function merit(design) {
+    function merit(p, x, design) {
         var m_funct;
         if (SOUGHT === 0) {
             m_funct = 0.0;
-        } else { // DP
-            element = design.model.symbol_table[SOUGHT - 1];
+        } else {
+            var ip = 0;
+            var ix = 0;
+            var value;
+            for (let i = 0; i < design.model.symbol_table.length; i++) {
+                element = design.model.symbol_table[i];
+                if (element.type === "equationset" && element.input) {
+                    if (i === SOUGHT - 1) {
+                        value = p[ip];
+                        break;
+                    }
+                    ip++;
+                } else {
+                    if (i === SOUGHT - 1) {
+                        value = x[ix];
+                        break;
+                    }
+                    ix++;
+                }
+            }
             if (SDIR < 0) {
-                m_funct = (element.value - M_NUM) / M_DEN;
+                m_funct = (value - M_NUM) / M_DEN;
             } else {
-                m_funct = (-element.value + M_NUM) / M_DEN;
+                m_funct = (-value + M_NUM) / M_DEN;
             }
         }
 //        if (design.model.system_controls.ioopt > 5) {
-//            console.log('15 In merit ', m_funct);
+//            console.log('15 In merit SOUGHT=',SOUGHT,'SDIR=', SDIR,'value=', value,'m_funct=', m_funct);
 //        }
         return m_funct;
     }
