@@ -192,6 +192,7 @@ export function reducers(state, action) {
             }
         });
     case SAVE_OUTPUT_SYMBOL_CONSTRAINTS:
+//        console.log('In reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS action=', action);
         return Object.assign({}, state, {
             model: {
                 ...state.model,
@@ -217,6 +218,7 @@ export function reducers(state, action) {
             }
         });
     case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS:
+//        console.log('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS action=', action);
         return Object.assign({}, state, {
             model: {
                 ...state.model,
@@ -246,6 +248,7 @@ export function reducers(state, action) {
                                 smax: sclden(state.model.system_controls, element.value, cmax, element.sdlim, lmax)
                             });
                         } else {
+                            console.warn('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, No old value exists for restore');
                             return element;
                         }
                     }

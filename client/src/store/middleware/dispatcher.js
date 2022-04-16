@@ -91,6 +91,7 @@ export const dispatcher = store => next => action => {
         updateViolationsAndObjectiveValue(store, action.payload.merit);
         break;
     case FIX_SYMBOL_VALUE:
+//        console.log('In dispatcher.FIX_SYMBOL_VALUE action=',action);
         design = store.getState();
         design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
@@ -123,6 +124,7 @@ export const dispatcher = store => next => action => {
                     return true; // found
                 } else {
                     // Calculation Inputs
+                    console.warn('In dispatcher.FIX_SYMBOL_VALUE Invalid Calculation Input action=',action);
                     return false; // not-found
                 }
             } else {
@@ -134,6 +136,7 @@ export const dispatcher = store => next => action => {
         updateViolationsAndObjectiveValue(store);
         break;
     case FREE_SYMBOL_VALUE:
+//        console.log('In dispatcher.FREE_SYMBOL_VALUE action=',action);
         design = store.getState();
         design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {

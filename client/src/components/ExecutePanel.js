@@ -102,7 +102,7 @@ class ExecutePanel extends Component {
             var design = store.getState();
             this.setState({
                 // Put current store state into steps[next].state - remember this for "back" time travel
-                steps: Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: design})}),
+                steps: Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: JSON.stringify(design)})}),
                 step: next,
                 title: this.state.steps[next].title,
                 text: this.state.steps[next].text
@@ -128,7 +128,7 @@ class ExecutePanel extends Component {
         if (prev < 0) prev = 0; // Stop going backwards if it is on the first step
         // Put steps[prev].state into current store state - that is, time travel back
         const { store } = this.context;
-        store.dispatch(load(this.state.steps[prev].state));
+        store.dispatch(load(JSON.parse(this.state.steps[prev].state)));
         this.setState({
             step: prev,
             title: this.state.steps[prev].title,
