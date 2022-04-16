@@ -11,6 +11,7 @@ import { load, loadInitialState, restoreAutoSave, deleteAutoSave, changeName } f
 import { logUsage } from '../logUsage';
 import { displayMessage } from './MessageModal';
 import { displaySpinner } from './Spinner';
+import { startExecute } from "./ExecutePanel";
 
 class Routes extends Component {
 
@@ -98,11 +99,16 @@ class Routes extends Component {
           modal: false,
       });
       if (config.url.type === config.env.type && config.url.name === config.env.name) { // If defaults used then just load initial state
-//          console.log('In Routes.componentDidMount loadInitialState config.env.type=',config.env.type,'config.env.units=',config.env.units);
+          console.log('In Routes.componentDidMount loadInitialState config.env.type=',config.env.type,'config.env.units=',config.env.units);
           this.loadInitialState(config.env.type,config.env.units);
       } else {
-//          console.log('In Routes.componentDidMount getDesign config.url.type=',config.url.type,'config.url.name=',config.url.name);
+          console.log('In Routes.componentDidMount getDesign config.url.type=',config.url.type,'config.url.name=',config.url.name);
           this.getDesign(this.props.user, config.url.type, config.url.name);
+      }
+      if (config.url.execute !== '') {
+          var { execute } = require('../designtypes/'+config.url.type+'/'+config.url.execute+'.js'); // Dynamically load execute
+          console.log('In Routes.loadDefaultDesign execute=',execute);
+          startExecute('Execute : ' + config.url.execute, config.url.execute, execute.steps);
       }
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load defaultDesign' });
   }
