@@ -3,6 +3,7 @@ import { despak } from './despak';
  * Hooke & Jeeves Pattern Search - find minimum of objective function.
  */
 export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
+//    console.log('<li>','@@@@@ Start patsh psi=',psi,'del=',del,'delmin=',delmin,'objmin=',objmin,'maxit=',maxit,'store=',store,'merit=',merit,'</li><ul>');
     var NCODE;
     var spi;
     var xflag = [];
@@ -51,6 +52,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                 if (itno > maxit) {
                     NCODE = 'Search terminated when iteration count exceeded the maximum limit (MAXIT)';
                     NCODE += ' after '+itno+' iterations.';
+//                    console.log('</ul><li>','@@@@@ End patsh NCODE=',NCODE,'</li>');
                     return NCODE;
                 }
                 var tht = [];
@@ -71,6 +73,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                     NCODE += '. Low iteration count may produce low precision results.';
                 else
                     NCODE += ' after '+itno+' iterations.';
+//                console.log('</ul><li>','@@@@@ End patsh NCODE=',NCODE,'</li>');
                 return NCODE;
             }
             del = del / 1.9;
@@ -84,5 +87,6 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
         NCODE += ' after '+itno+' iterations.';
     for (let i = 0; i < psi.length; i++)
         psi[i] = phi[i];
+//    console.log('</ul><li>','@@@@@ End patsh NCODE=',NCODE,'</li>');
     return NCODE;
 }

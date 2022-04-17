@@ -9,7 +9,7 @@ import { dispatcher } from '../store/middleware/dispatcher';
 import { invokeInit } from '../store/middleware/invokeInit';
 import { invokeEquationSet } from '../store/middleware/invokeEquationSet';
 import { setSclDen } from '../store/middleware/setSclDen';
-import { updateViolationsAndObjectiveValue } from '../store/middleware/updateViolationsAndObjectiveValue';
+import { updateObjectiveValue } from '../store/middleware/updateObjectiveValue';
 import { search } from '../store/middleware/search';
 
 //=====================================================================
@@ -33,7 +33,7 @@ it('search without merit', () => {
     invokeInit(store);
     invokeEquationSet(store);
     setSclDen(store);
-    updateViolationsAndObjectiveValue(store);
+    updateObjectiveValue(store);
     
     var obj = search(store, design.model.system_controls.objmin);
 
@@ -98,7 +98,7 @@ it('search with merit', () => {
     invokeInit(store);
     invokeEquationSet(store);
     setSclDen(store);
-    updateViolationsAndObjectiveValue(store);
+    updateObjectiveValue(store);
     
     var SOUGHT = sto.STRESS + 1;
     var SDIR = -1; // MIN

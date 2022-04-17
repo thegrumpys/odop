@@ -3,7 +3,7 @@ import { changeOutputSymbolValues } from '../actionCreators';
 // Invoke Init
 export function invokeInit(store) {
     
-//    console.log('Entering invokeInit');
+//    console.log('<li>','Start invokeInit','</li><ul>');
     
     var element;
 
@@ -29,5 +29,5 @@ export function invokeInit(store) {
     // Compute and dispatch output changes
     store.dispatch(changeOutputSymbolValues(x));
     
-//    console.log('Exiting invokeInit');
+//    console.log('</ul><li>','End invokeInit','</li>');
 }

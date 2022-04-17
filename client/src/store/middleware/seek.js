@@ -3,7 +3,16 @@ import { saveInputSymbolValues, restoreInputSymbolValues, changeResultTerminatio
 import { search } from './search';
 import { despak } from './despak';
 
-// Seek
+/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
+Number.prototype.toODOPPrecision = function() {
+    var value = this.valueOf();
+    var odopValue;
+    if (value < 10000.0 || value >= 1000000.0)
+         odopValue = value.toPrecision(4);
+    else odopValue = value.toFixed(0);
+    return odopValue;
+};
+
 export function seek(store, action) {
     /***************************************************************************
      * sought - indicates parameter/variable in question; + for DP, - for SV
@@ -58,9 +67,9 @@ export function seek(store, action) {
         }
     }
     M_NUM = temp + 0.1 * SDIR * temp;
+    var starting_value = design.model.symbol_table[SOUGHT - 1].value;
     if (design.model.system_controls.ioopt > 5) {
-	    temp = design.model.symbol_table[SOUGHT - 1].value;
-        console.log('03 THE CURRENT VALUE OF '+dname+' IS: '+temp+' '+input);
+        console.log('03 THE CURRENT VALUE OF '+dname+' IS: '+starting_value+' '+input);
         console.log('04 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+input);
         console.log('05 ESTIMATING VALUE OF OPTIMUM ...');
     }
@@ -116,38 +125,68 @@ export function seek(store, action) {
     }
     obj = search(store, design.model.system_controls.objmin, merit);
     design = store.getState(); // Re-access store to get latest element values
+    var ending_value = design.model.symbol_table[SOUGHT - 1].value;
     if (design.model.system_controls.ioopt > 5) {
         console.log('12 RETURN ON: '+design.model.result.termination_condition+'     OBJ ='+design.model.result.objective_value);
-	    var temp1 = design.model.symbol_table[SOUGHT - 1].value;
-        console.log('13 CURRENT VALUE OF '+dname+' IS '+temp1+' '+input);
+        console.log('13 CURRENT VALUE OF '+dname+' IS '+ending_value+' '+input);
     }
+    var percent_improvement = Math.abs(starting_value - ending_value) / starting_value * 100.0;
 //  Check if obj is more negative than negative objmin
     if (obj < -design.model.system_controls.objmin) {
-        ncode = 'TO FURTHER IMPROVE RESULT, RE-EXECUTE SEEK';
+        ncode = 'Seek completed. ' + dname + ' ' + (starting_value.toODOPPrecision()) + ' --> ' + (ending_value.toODOPPrecision()) + ' ' + input + '; ' + (percent_improvement.toODOPPrecision()) + '% improvement. TO FURTHER IMPROVE RESULT, RE-EXECUTE SEEK';
         store.dispatch(changeResultTerminationCondition(ncode));
     } else {
-        ncode = 'SEEK COMPLETED';
+        ncode = 'Seek completed. ' + dname + ' ' + (starting_value.toODOPPrecision()) + ' --> ' + (ending_value.toODOPPrecision()) + ' ' + input + '; ' + (percent_improvement.toODOPPrecision()) + '% improvement.';
         store.dispatch(changeResultTerminationCondition(ncode));
     }
 
     if (design.model.system_controls.ioopt > 5) {
-        console.log('14 Merit Function = ', merit(design));  // Merit Function contribution to OBJ may be negative
+        // Create p & x from symbol_table
+        var p = [];
+        var x = [];
+        for (let i = 0; i < design.model.symbol_table.length; i++) {
+            element = design.model.symbol_table[i];
+            if (element.type === "equationset" && element.input) {
+                p.push(element.value);
+            } else {
+                x.push(element.value);
+            }
+        }
+        console.log('14 Merit Function = ', merit(p, x, design));  // Merit Function contribution to OBJ may be negative
     }
     
-    function merit(design) {
+    function merit(p, x, design) {
         var m_funct;
         if (SOUGHT === 0) {
             m_funct = 0.0;
-        } else { // DP
-            element = design.model.symbol_table[SOUGHT - 1];
+        } else {
+            var ip = 0;
+            var ix = 0;
+            var value;
+            for (let i = 0; i < design.model.symbol_table.length; i++) {
+                element = design.model.symbol_table[i];
+                if (element.type === "equationset" && element.input) {
+                    if (i === SOUGHT - 1) {
+                        value = p[ip];
+                        break;
+                    }
+                    ip++;
+                } else {
+                    if (i === SOUGHT - 1) {
+                        value = x[ix];
+                        break;
+                    }
+                    ix++;
+                }
+            }
             if (SDIR < 0) {
-                m_funct = (element.value - M_NUM) / M_DEN;
+                m_funct = (value - M_NUM) / M_DEN;
             } else {
-                m_funct = (-element.value + M_NUM) / M_DEN;
+                m_funct = (-value + M_NUM) / M_DEN;
             }
         }
 //        if (design.model.system_controls.ioopt > 5) {
-//            console.log('15 In merit ', m_funct);
+//            console.log('15 In merit SOUGHT=',SOUGHT,'SDIR=', SDIR,'value=', value,'m_funct=', m_funct);
 //        }
         return m_funct;
     }
