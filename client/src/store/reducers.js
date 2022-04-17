@@ -48,6 +48,7 @@ export function reducers(state, action) {
 //    console.warn('In reducers state=',state,'action=', action);
 
     if (state.model.result !== undefined) {
+        console.warn('In reducers CLEAR TERMINATION_CONDITION state=',state,'action=', action);
         state.model.result.termination_condition = '';
     }
 
@@ -434,7 +435,7 @@ export function reducers(state, action) {
             }
         });
     case CHANGE_RESULT_TERMINATION_CONDITION:
-//        console.log('$$$$$ CHANGE_RESULT_TERMINATION_CONDITION $$$$$ action.payload.termination_conditio=',action.payload.termination_conditio);
+        console.log('$$$$$ CHANGE_RESULT_TERMINATION_CONDITION $$$$$ action.payload.termination_condition=',action.payload.termination_condition);
         return Object.assign({}, state, {
             model: {
                 ...state.model,

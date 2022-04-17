@@ -3,11 +3,12 @@ import React, { Component } from 'react';
 import { Alert, Button, Container, Row } from 'react-bootstrap';
 import { load } from '../store/actionCreators';
 import { connect } from 'react-redux';
+import config from '../config';
 import { changeResultTerminationCondition } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
 
 export var startExecute = function(prefix,execute_name,steps) {
-    console.log('In startExecute this=',this,'prefix=',prefix,'execute_name=',execute_name,'steps=',steps);
+    console.log('In startExecute prefix=',prefix,'execute_name=',execute_name,'steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
         const { store } = this.context;
         var design = store.getState();
@@ -46,13 +47,14 @@ class ExecutePanel extends Component {
 
     constructor(props) {
         super(props);
-//        console.log('In ExecutePanel.constructor props=',props);
+        console.log('In ExecutePanel.constructor props=',props);
         this.onNext = this.onNext.bind(this);
         this.onBack = this.onBack.bind(this);
         this.onCancel = this.onCancel.bind(this);
         startExecute = startExecute.bind(this); // Bind external function - no 'this'
         stopExecute = stopExecute.bind(this); // Bind external function - no 'this'
         this.state = {
+            execute_name: config.url.execute, // Remember execute name
             modal: false,
             prefix: '',
             steps: null,
