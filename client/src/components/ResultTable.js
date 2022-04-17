@@ -121,7 +121,7 @@ class ResultTable extends Component {
     onNoop() {} // No-op for onHide
 
     render() {
-        console.log('In ResultTable.render this=',this);
+//        console.log('In ResultTable.render this=',this);
 //        From Issue #365:
 //        The proposed terminology and color scheme:
 //            OBJ value       Category Term           Color            RGB

@@ -11,12 +11,13 @@ import { load, loadInitialState, restoreAutoSave, deleteAutoSave, changeName } f
 import { logUsage } from '../logUsage';
 import { displayMessage } from './MessageModal';
 import { displaySpinner } from './Spinner';
+import { startExecute } from "./ExecutePanel";
 
 class Routes extends Component {
 
   constructor(props) {
     super(props);
-    console.log('In Routes.constructor props=',props);
+//    console.log('In Routes.constructor props=',props);
     this.loadRedirect = this.loadRedirect.bind(this);
     this.promptLoadAutoSave = this.promptLoadAutoSave.bind(this);
     this.loadAutoSaveDesign = this.loadAutoSaveDesign.bind(this);
@@ -94,22 +95,22 @@ class Routes extends Component {
   
   loadDefaultDesign() {
 //      console.log('In Routes.loadDefaultDesign this=',this);
-      console.log('In Routes.loadDefaultDesign config.url.execute=',config.url.execute);
+//      console.log('In Routes.loadDefaultDesign config.url.execute=',config.url.execute);
       this.setState({
           modal: false,
       });
-      if (config.url.type === config.env.type && config.url.name === config.env.name) { // If defaults used then just load initial state
-          console.log('In Routes.loadDefaultDesign loadInitialState config.env.type=',config.env.type,'config.env.units=',config.env.units);
-          this.loadInitialState(config.env.type,config.env.units);
-      } else {
-          console.log('In Routes.loadDefaultDesign getDesign config.url.type=',config.url.type,'config.url.name=',config.url.name);
+//      if (config.url.type === config.env.type && config.url.name === config.env.name) { // If defaults used then just load initial state
+//          console.log('In Routes.loadDefaultDesign loadInitialState config.env.type=',config.env.type,'config.env.units=',config.env.units);
+//          this.loadInitialState(config.env.type,config.env.units);
+//      } else {
+//          console.log('In Routes.loadDefaultDesign getDesign config.url.type=',config.url.type,'config.url.name=',config.url.name);
           this.getDesign(this.props.user, config.url.type, config.url.name);
-      }
+//      }
       logUsage('event', 'Routes', { 'event_label': this.props.type + ' load defaultDesign' });
   }
   
   loadInitialState(type, units) {
-      console.log('In Routes.loadInitialState this=',this,'type=',type,'units=',units);
+//      console.log('In Routes.loadInitialState this=',this,'type=',type,'units=',units);
       this.props.loadInitialState(type, units);
       this.props.changeName('Startup');
       this.props.deleteAutoSave();
@@ -117,7 +118,7 @@ class Routes extends Component {
   }
   
   getDesign(user, type, name) {
-      console.log('In Routes.getDesign user=',user,'type=',type,'name=',name);
+//      console.log('In Routes.getDesign user=',user,'type=',type,'name=',name);
       displaySpinner(true);
       fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
           headers: {
@@ -132,15 +133,20 @@ class Routes extends Component {
           return res.json()
       })
       .then((design) => {
-          console.log('In Routes.getDesign design=', design);
+//          console.log('In Routes.getDesign design=', design);
           var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
           var migrated_design = migrate(design);
           if (migrated_design.jsontype === "ODOP") {
-              console.log('In Routes.getDesign before load');
+//              console.log('In Routes.getDesign before load');
               this.props.load({name: name, model: migrated_design});
-              console.log('In Routes.getDesign after load');
+//              console.log('In Routes.getDesign after load');
               this.props.deleteAutoSave();
               logUsage('event', 'Routes', { 'event_label': type + ' ' + name });
+              if (config.url.execute !== '') { // Once the design is loaded then you can run the query parameter execute script
+                  var { execute } = require('../designtypes/'+config.url.type+'/'+config.url.execute+'.js'); // Dynamically load execute
+//                  console.log('In Routes.loadDefaultDesign execute=',execute);
+                  startExecute('Execute : ' + config.url.execute, config.url.execute, execute.steps);
+              }
           } else {
               displayMessage('Invalid JSON type, function ignored');
           }
