@@ -78,7 +78,7 @@ Process "Startup_Metric" designs for the three Spring design types similarly.
 &nbsp;
 1. **Test For Console Output** &nbsp; Bring up Google Chrome and enable View Console / Debugger.
    Test various input and menu functions and verify no unexpected console.log output.
-   Use regular expression search: "^\s*console.log" to find non-commented out console.log lines.
+   Use regular expression search: "^\s*console\." to find non-commented out console.log lines.
    Most console.log output is acceptable in client/src/store/middleware/seek.js, client/src/registerServiceWorker.js, server.js and client\public\dynoLoading.js.
 1. Shutdown server and client under your development environment.  
 &nbsp;
