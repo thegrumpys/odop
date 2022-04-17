@@ -142,7 +142,7 @@ class Routes extends Component {
 //              console.log('In Routes.getDesign after load');
               this.props.deleteAutoSave();
               logUsage('event', 'Routes', { 'event_label': type + ' ' + name });
-              if (config.url.execute !== '') { // Once the design is loaded then you can run the query parameter execute script
+              if (config.url.execute !== undefined) { // Once the design is loaded then you can run the query parameter execute script
                   var { execute } = require('../designtypes/'+config.url.type+'/'+config.url.execute+'.js'); // Dynamically load execute
 //                  console.log('In Routes.loadDefaultDesign execute=',execute);
                   startExecute('Execute : ' + config.url.execute, config.url.execute, execute.steps);
