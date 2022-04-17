@@ -175,7 +175,7 @@ class MainPage extends Component {
                         </Nav>
                         <Nav>
                             <Nav.Item>
-                                <SearchDocs />
+                                {config.node.env !== "production" && <SearchDocs />}
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link className={classnames({ active: this.state.activeTab === "Advanced" })} onClick={() => { this.setView("Advanced"); }}>
