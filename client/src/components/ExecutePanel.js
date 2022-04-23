@@ -11,12 +11,14 @@ export var startExecute = function(prefix,execute_name,steps) {
     if (steps !== undefined && steps[0] !== undefined) {
         const { store } = this.context;
         var design = store.getState();
+        var steps = Object.assign([...steps], {0: Object.assign({}, steps[0], {state: JSON.stringify(design)})});
+//        console.log('In ExecutePanel.onNext steps=',steps);
         this.setState({
             execute_name: execute_name,
             modal: true, // Default: do display
             prefix: prefix,
             // Put current store state into steps[0].state - remember this for "back" time travel
-            steps: Object.assign([...steps], {0: Object.assign({}, steps[0], {state: design.model})}),
+            steps: steps,
             step: 0,
             title: steps[0].title,
             text: steps[0].text, // Default: first text
@@ -99,9 +101,11 @@ class ExecutePanel extends Component {
         if (this.state.steps[next] !== undefined) {
             const { store } = this.context;
             var design = store.getState();
+            var steps = Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: JSON.stringify(design)})});
+//            console.log('In ExecutePanel.onNext steps=',steps);
             this.setState({
                 // Put current store state into steps[next].state - remember this for "back" time travel
-                steps: Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: JSON.stringify(design)})}),
+                steps: steps,
                 step: next,
                 title: this.state.steps[next].title,
                 text: this.state.steps[next].text
@@ -127,6 +131,8 @@ class ExecutePanel extends Component {
         if (prev < 0) prev = 0; // Stop going backwards if it is on the first step
         // Put steps[prev].state into current store state - that is, time travel back
         const { store } = this.context;
+//        console.log('In ExecutePanel.onBack this.state.steps=',this.state.steps);
+//        console.log('In ExecutePanel.onBack JSON.parse(this.state.steps[prev].state)=',JSON.parse(this.state.steps[prev].state));
         store.dispatch(load(JSON.parse(this.state.steps[prev].state)));
         this.setState({
             step: prev,
