@@ -11,7 +11,7 @@ export var startExecute = function(prefix,execute_name,steps) {
     if (steps !== undefined && steps[0] !== undefined) {
         const { store } = this.context;
         var design = store.getState();
-        var steps = Object.assign([...steps], {0: Object.assign({}, steps[0], {state: JSON.stringify(design)})});
+        steps = Object.assign([...steps], {0: Object.assign({}, steps[0], {state: JSON.stringify(design)})});
 //        console.log('In ExecutePanel.onNext steps=',steps);
         this.setState({
             execute_name: execute_name,
