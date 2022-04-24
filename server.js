@@ -349,7 +349,7 @@ app.post('/api/v1/usage_log', (req, res) => {
     });
 });
 
-const MAX_SUMMARY_LENGTH = 100
+const MAX_SUMMARY_LENGTH = 30
 const SENTENCE_BOUNDARY_REGEX = /\b\.\s/gm
 const WORD_REGEX = /\b(\w*)[\W|\s|\b]?/gm
 

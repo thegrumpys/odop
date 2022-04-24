@@ -6,7 +6,7 @@ var cheerio = require("cheerio");
 // Change these constants to suit your needs
 const HTML_FOLDER = "client/public/docs";  // folder with your HTML files
 const EXCLUDE_FILES = [];
-const MAX_PREVIEW_CHARS = 275;  // Number of characters to show for a given search result
+//const MAX_PREVIEW_CHARS = 275;  // Number of characters to show for a given search result
 //const OUTPUT_INDEX = "lunr_index.js";  // Index file
 const LUNR_INDEX = "lunr_index.json";  // Index file
 const LUNR_PAGES = "lunr_pages.json";  // Index file
