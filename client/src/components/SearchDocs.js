@@ -54,7 +54,7 @@ class SearchDocs extends Component {
             return res.json()
         })
         .then((results) => {
-            console.log('In SearchDocs.onButtonPress results=', results);
+//            console.log('In SearchDocs.onButtonPress results=', results);
             this.setState({
                 modal: !this.state.modal,
                 results: results,
@@ -88,6 +88,7 @@ class SearchDocs extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                        <p>Found {this.state.results.length} matching documents</p>
                         <ul>
                         {this.state.results !== undefined && this.state.results.map((element) => 
                             <li key={element.id}><a href={'/docs/' + element.href} target='_blank' rel="noopener noreferrer"><b>{element.title}</b></a> - <div className="content" dangerouslySetInnerHTML={{__html: element.content}}></div></li>
