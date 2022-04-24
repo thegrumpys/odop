@@ -56,8 +56,8 @@ class SearchDocs extends Component {
             return res.json()
         })
         .then((results) => {
-            console.log('In SearchDocs.onButtonPress results=', results);
-            results.forEach((element) => console.log('element.href=',element.href));
+//            console.log('In SearchDocs.onButtonPress results=', results);
+//            results.forEach((element) => console.log('element.href=',element.href));
             this.setState({
                 modal: !this.state.modal,
                 results: results,
