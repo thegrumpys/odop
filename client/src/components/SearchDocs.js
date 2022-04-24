@@ -16,7 +16,6 @@ class SearchDocs extends Component {
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             text: '',
-            query: '',
             modal: false,
             results: [],
         };
@@ -44,7 +43,6 @@ class SearchDocs extends Component {
         logUsage('event', 'SearchDocs', { 'event_label': this.state.text});
         this.setState({
             text: '',
-            query: text,
         });
         displaySpinner(true);
         fetch('/api/v1/search?terms='+encoded_text)
@@ -92,7 +90,7 @@ class SearchDocs extends Component {
                     <Modal.Body>
                         <ul>
                         {this.state.results !== undefined && this.state.results.map((element) => 
-                            <li key={element.id}><a href={'/docs/' + element.href} target='_blank' rel="noopener noreferrer"><b>{element.title}</b></a> - <p>{element.content}</p></li>
+                            <li key={element.id}><a href={'/docs/' + element.href} target='_blank' rel="noopener noreferrer"><b>{element.title}</b></a> - <div className="content" dangerouslySetInnerHTML={{__html: element.content}}></div></li>
                         )}
                         </ul>
                     </Modal.Body>
