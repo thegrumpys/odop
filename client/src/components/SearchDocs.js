@@ -16,6 +16,7 @@ class SearchDocs extends Component {
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             text: '',
+            query: '',
             modal: false,
             results: [],
         };
@@ -43,6 +44,7 @@ class SearchDocs extends Component {
         logUsage('event', 'SearchDocs', { 'event_label': this.state.text});
         this.setState({
             text: '',
+            query: text,
         });
         displaySpinner(true);
         fetch('/api/v1/search?terms='+encoded_text)
@@ -85,7 +87,7 @@ class SearchDocs extends Component {
                 <Modal show={this.state.modal} onHide={this.onCancel}>
                     <Modal.Header>
                         <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Search
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Help lookup for terms '{this.state.query}'
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
