@@ -1,4 +1,4 @@
-#### Rectangular Solid Design Type
+# Rectangular Solid Design Type
 
 The Rectangular Solid design type is a small demonstration problem.
 It is a design situation that most people will be familiar and comfortable with.

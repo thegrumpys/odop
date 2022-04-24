@@ -1,4 +1,4 @@
-## Spring Design Topics
+# Spring Design Topics
 
 * [Getting Started - Spring Tutorial and Demo](/docs/Help/gettingStartedSpring.html)   
 * [Spring Overview](spring_oview.html)   

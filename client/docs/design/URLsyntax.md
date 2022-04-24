@@ -1,4 +1,4 @@
-## URL syntax
+# URL syntax
 
 Starting with ODOP release 3.8 it is possible to add query parameters to the URL 
 that launches ODOP in order to control startup behavior.

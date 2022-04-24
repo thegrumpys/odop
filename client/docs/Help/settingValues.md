@@ -1,4 +1,4 @@
-### Setting Values   
+# Setting Values   
 
 This entry covers the input of values into ODOP. 
 Additional information on the operation of [Fix, Free](terminology.html#fix) and [constraints](terminology.html#constraints) is provided.   

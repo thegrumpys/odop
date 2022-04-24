@@ -1,4 +1,4 @@
-## Proposed names for quantities previously called "constants"
+# Proposed names for quantities previously called "constants"
 
 The CLI system currently uses the term "constants" in a way that is not consistent with people's expectations for that word. 
 Specifically, the quantities contained in the D, DI and DS arrays are not truly constant. 

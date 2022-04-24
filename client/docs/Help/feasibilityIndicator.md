@@ -1,4 +1,4 @@
-## Feasibility Indicator
+# Feasibility Indicator
 
 ODOP has a multi-colored Feasibility Status Indicator that provides feedback on the 
 viability of the current design relative to constraints and FIXes. 

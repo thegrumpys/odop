@@ -1,4 +1,4 @@
-## Auto-Search feature and preferences
+# Auto-Search feature and preferences
 
 The experimental implementation of an Auto-Search feature exposed a significant issue.
 While the user is in the process of modifying an input field, the search will get fired off with transient, wildly incorrect values for constraint and fix levels. 

@@ -1,4 +1,4 @@
-#### Procedure to implement a new design type 
+# Procedure to implement a new design type 
 
 This entry describes how to implement a new ODOP design type 
 (a.k.a. "design problem").

@@ -1,4 +1,4 @@
-#### Design Situations   
+# Design Situations   
 
 At the time that a design problem is initially formed by establishing Fixes and constraints,
 the high level situation will likely be one of three cases:

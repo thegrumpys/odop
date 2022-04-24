@@ -1,8 +1,8 @@
-## Ideas regarding the web user-interface for FIX
+# Ideas regarding the web user-interface for FIX
 
 Multiple implementations are possible.  This page is intended to collect ideas and discuss pros & cons.
 
-#### State Variables
+# State Variables
 A state variable FIX can appear as a double sided constraint.
 This approach will avoid the need any dedicated FIX value entry columns on the main page making for a cleaner page design.
 
@@ -17,7 +17,7 @@ When a state variable FIX checkbox is active (checked):
  * The violation values will update to reflect the weighted values.
  * Constraint violation highlights will appear, but may have a different aspect (color, boldness, dashed, etc) than for violated constraints.
  
-#### Design Parameters   
+# Design Parameters   
  The user interface for establishing a FIX of a design parameter can be the same as for establishing the FIX of a state variable, or not.
 
 The differing approach removes the constraint level input boxes and checkboxes when a design parameter is fixed.
@@ -29,7 +29,7 @@ Perhaps input from beta testers will be required to resolve the issue.
  
  <br />
  
-#### October 2018 Discussion 
+# October 2018 Discussion 
 
 Reducing the differences on the handling of FIX between Independent and Dependent Variables is 
 considered to be a good thing from the user experience point of view. 

@@ -1,4 +1,4 @@
-#### ODOP:Spring Screen Shots
+# ODOP:Spring Screen Shots
 
 Click a thumbnail image or the link within a description to see a full-size screen shot of the ODOP:Spring web app. 
 Use your browser's Back button to return to this page.  

@@ -1,4 +1,4 @@
-## TRADE OVERVIEW
+# TRADE OVERVIEW
  When a design problem is first submitted to the search, the ability of the
  design to meet the stated constraints will be determined.  If the result is
  not feasible, it is necessary for the designer to restructure the design in
@@ -44,7 +44,7 @@
  Perhaps even larger than the sum of all the constraint violations.
 
 
-## TRADE
+# TRADE
 
  TRADE provides decision support for relaxation of constraints.  TRADE
  functions to help locate the "nearest" feasible point when a feasible
@@ -71,7 +71,7 @@
  be of greater interest.
 
    
-#### The strategy options:
+# The strategy options:
 
 * PROPORTIONAL - move constraint levels in a proportion determined by their existing violations (as a measure of their influence).
 

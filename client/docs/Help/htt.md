@@ -1,4 +1,4 @@
-### Hints, Tips and Tricks
+# Hints, Tips and Tricks
 
 This topic covers various points that may allow a better user experience with the ODOP software.  
 

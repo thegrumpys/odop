@@ -1,4 +1,4 @@
-#### Utilizing Help with a widescreen monitor
+# Utilizing Help with a widescreen monitor
 
 Where a wide screen monitor is in use, 
 it should be possible to configure two independent browser sessions in a 

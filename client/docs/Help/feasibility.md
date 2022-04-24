@@ -1,4 +1,4 @@
-## Feasibility
+# Feasibility
 
 The multi-colored [Feasibility Status Indicator](feasibilityIndicator.html) provides
 feedback on the viability of the current design relative to constraints and FIXes.

@@ -1,4 +1,4 @@
-## Side-by-Side comparison of designs
+# Side-by-Side comparison of designs
 
 The ability to compare designs in a side-by-side presentation can be quite useful.   
 

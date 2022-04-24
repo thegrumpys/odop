@@ -1,4 +1,4 @@
-## Introducing ODOP
+# Introducing ODOP
 
 The **O**pen **D**esign **O**ptimization **P**latform software 
 is a web software application (web app) that

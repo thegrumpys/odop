@@ -1,4 +1,4 @@
-## Idea for simple showcase problems
+# Idea for simple showcase problems
 
 In the interest of providing simple demonstration problems that even non-technical users can relate to, 
 classic geometric solids might provide a good starting point.

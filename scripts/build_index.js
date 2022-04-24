@@ -48,14 +48,21 @@ function readHtml(root, file, fileId) {
     var filename = path.join(root, file);
     var txt = fs.readFileSync(filename).toString();
     var $ = cheerio.load(txt);
-    var title = $("title").text();
+//    var title = $("title").text();
+//    if (typeof title == 'undefined') title = file;
+//    var description = $("meta[name=description]").attr("content");
+//    if (typeof description == 'undefined') description = "";
+//    var keywords = $("meta[name=keywords]").attr("content");
+//    if (typeof keywords == 'undefined') keywords = "";
+//    var content = $("body").text()
+//    if (typeof content == 'undefined') content = "";
+    var title = $("h1:last").text();
     if (typeof title == 'undefined') title = file;
-    var description = $("meta[name=description]").attr("content");
-    if (typeof description == 'undefined') description = "";
-    var keywords = $("meta[name=keywords]").attr("content");
-    if (typeof keywords == 'undefined') keywords = "";
-    var content = $("body").text()
+    var description = "";
+    var keywords = "";
+    var content = $("section:last").text()
     if (typeof content == 'undefined') content = "";
+    console.log('title=',title);
     var data = {
         "id": fileId,
         "href": file,

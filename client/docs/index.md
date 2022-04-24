@@ -1,6 +1,6 @@
 # ODOP <br /> Open Design Optimization Platform
 
-## About
+# About
 * [Introduction](About/Intro.html)
 * [Intro Pages Overview](About/introPagesOverview.html)
 * [Message-of-the-day](https://thegrumpys.github.io/odop/About/messageOfTheDay.html)
@@ -15,7 +15,7 @@
 * [Help topics](Help)   
 
 
-## Help
+# Help
 * [Features](Help/features.html)
 * [Introduction](Help/introduction.html)
 * [Terminology](Help/terminology.html)
@@ -38,7 +38,7 @@
 * [About topics](About)   
 
 
-## Design
+# Design
 * [Early Design Decisions](design/EarlyDesignDecisions.html)
 * [Ideas for a web page menu structure](design/menu.html)
 * [Ideas regarding the web user-interface for FIX](design/WebUI_for_Fix.html)
@@ -73,7 +73,7 @@
 -->  
 
 
-## Procedures
+# Procedures
 
 * [Release Process](procedures/release.html)
 * [New Design Type](procedures/NewDesignType.html)

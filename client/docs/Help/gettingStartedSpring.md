@@ -1,4 +1,4 @@
-#### Getting Started With the Spring Tutorial and Demo
+# Getting Started With the Spring Tutorial and Demo
 
 This page describes how to launch the first sessions of the spring design 
 Tutorial and the spring design Demo.

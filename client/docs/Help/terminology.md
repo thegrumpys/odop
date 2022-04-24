@@ -1,4 +1,4 @@
-## Terminology
+# Terminology
 
 The following terms have special meanings used in the context of this program.
 

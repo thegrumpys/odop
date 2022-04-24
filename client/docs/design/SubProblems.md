@@ -1,4 +1,4 @@
-####  Sub-Problems feature
+#  Sub-Problems feature
 
 The entry [Ideas for a web page menu structure](/docs/design/menu.html) briefly introduced a possible implementation of a sub-problem capability.
 This entry is intended to provide more detail.

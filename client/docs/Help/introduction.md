@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 As part of an introduction to the ODOP software, you should first read the [Features](features.html) section. 
 This section will build on some of the concepts introduced there. 

@@ -1,4 +1,4 @@
-## Notice
+# Notice
 
 Please review the  RESTRICTIONS  section of the documentation.
 Validity, accuracy or applicability of results of this program are NOT guaranteed.

@@ -1,4 +1,4 @@
-## Description of ODOP users
+# Description of ODOP users
 
 While admittedly a little late in the game, 
 it is hopefully never too late to articulate a description of an ODOP user.
@@ -13,13 +13,13 @@ There are at least four distinct groups:
  
  * Open Source software engineers
  
-#### Evaluators   
+# Evaluators   
 Just about all users will begin as evaluators.
 First impressions are important.
 Without a good first impression, few if any, will go forward to become one of the other user types.
 Mature on-line Help and Demo / Tutorial facilities are thought to be important factors here.
 
-#### Spring Designers   
+# Spring Designers   
 Considering that Piston-Cylinder and Rectangular Solid are only demonstration problems,
 "production" users will be spring designers. 
 Spring design users can be further broken down:
@@ -59,7 +59,7 @@ learn a different approach to spring design.
  Also, while not a major factor, it is quite unlikely that UTS ASD has any equivalent to 
  the ODOP Trade feature.
  
-#### Design Type (problem) implementors   
+# Design Type (problem) implementors   
 It is possible that people with design problems to solve on a routine basis will be attracted 
 to the ODOP feature set and / or user interface. 
 The open source aspect could be an important factor for this group.
@@ -69,7 +69,7 @@ This group will likely find the ODOP:Spring software through an Internet search 
 possibly via YouTube.
  
  
-#### Open Source software engineers   
+# Open Source software engineers   
 If ODOP gains a significant user base, 
 there will be a need to maintain the core system as software technology evolves.
 Hopefully, continued use by a vibrant user community will bring motivation for enhancement. 

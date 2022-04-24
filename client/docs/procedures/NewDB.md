@@ -1,4 +1,4 @@
-#### Procedures for creating a new JAWSDB
+# Procedures for creating a new JAWSDB
 
 [Background on JAWSDB](https://devcenter.heroku.com/articles/jawsdb)
 

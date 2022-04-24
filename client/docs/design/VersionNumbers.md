@@ -1,4 +1,4 @@
-## Version Number Guidelines
+# Version Number Guidelines
 
 This article provides a guide for constructing release version numbers for the ODOP project and its GitHub repository.
 

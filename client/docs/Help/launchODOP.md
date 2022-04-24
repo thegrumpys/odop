@@ -1,4 +1,4 @@
-## Launching the Program   
+# Launching the Program   
 
 As noted in the [requirements](/docs/About/requirements.html) page, 
 it is not necessary to load any software on your computer in order to run the 

@@ -1,4 +1,4 @@
-## Docs
+# Docs
 
 This article provides background on how the documentation for this project is structured and handled.
 

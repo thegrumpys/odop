@@ -1,4 +1,4 @@
-## Seek
+# Seek
 
 ODOP Seek provides powerful facilities for asking  "What if ... "
 and "What's best ?" kinds of questions.

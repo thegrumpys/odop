@@ -1,4 +1,4 @@
-## Early Design Decisions
+# Early Design Decisions
 
 The ODOP software has a long history. 
 In the interest of providing context to anyone looking for insight as to how things got to be the way that they are,
