@@ -57,19 +57,18 @@ function readHtml(root, file, fileId) {
 //    var content = $("body").text()
 //    if (typeof content == 'undefined') content = "";
     var title = $("h1:last").text();
-    if (typeof title == 'undefined') title = file;
+    $("h1:last").remove();
     var description = "";
     var keywords = "";
-    var content = $("section:last").text()
+    var content = $("section:last").text();
     if (typeof content == 'undefined') content = "";
-    console.log('title=',title);
     var data = {
         "id": fileId,
         "href": file,
         "title": title,
         "description": description,
         "keywords": keywords,
-        "content": content
+        "content": content,
     }
     return data;
 }
@@ -78,7 +77,7 @@ function readHtml(root, file, fileId) {
 function buildIndex(docs) {
     var idx = lunr(function () {
         this.ref('href');
-        this.field('title');
+        this.field('title', {boost: 10});
         this.field('description');
         this.field('keywords');
         this.field('content');

@@ -358,7 +358,6 @@ var searchIndex = lunr.Index.load(lunr_index);
 app.get('/api/v1/search', (req, res) => {
 //    console.log('SERVER: req=',req);
     var terms = req.query.terms;
-//    var results = idx.search(terms);
     const results = searchSite(terms);
     console.log('SERVER: results=',results);
     res.status(200).json(results);
@@ -367,25 +366,12 @@ app.get('/api/v1/search', (req, res) => {
 
 function searchSite(query) {
   const originalQuery = query;
-  query = getLunrSearchQuery(query);
   let results = getSearchResults(query);
   return results.length
     ? results
     : query !== originalQuery
     ? getSearchResults(originalQuery)
     : [];
-}
-
-function getLunrSearchQuery(query) {
-  const searchTerms = query.split(" ");
-  if (searchTerms.length === 1) {
-    return query;
-  }
-  query = "";
-  for (const term of searchTerms) {
-    query += `+${term} `;
-  }
-  return query.trim();
 }
 
 function getSearchResults(query) {
@@ -462,10 +448,11 @@ function createQueryStringRegex(query) {
     return query;
   }
   query = "";
-  for (const term of searchTerms) {
+  for (let term of searchTerms) {
+    if (term.startsWith('+') || term.startsWith('-')) term = term.slice(1); // Remove +/- prefix
     query += `${term}|`;
   }
-  query = query.slice(0, -1);
+  query = query.slice(0, -1); // Remove trailing '|'
   return `(${query})`;
 }
 

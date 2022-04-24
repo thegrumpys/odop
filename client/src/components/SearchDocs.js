@@ -84,7 +84,7 @@ class SearchDocs extends Component {
                     <Form.Control type="text" value={this.state.text} placeholder="Help lookup" onChange={this.onChange} onKeyPress={this.onKeyPress} />
                     <Button onClick={this.onButtonPress} style={{padding: '0px 24px 16px 8px'}} disabled={this.state.text.length === 0}><i className="fas fa-search"></i></Button>
                 </InputGroup>
-                <Modal show={this.state.modal} onHide={this.onCancel}>
+                <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>'
                     <Modal.Header>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Help lookup for terms '{this.state.query}'
@@ -94,7 +94,10 @@ class SearchDocs extends Component {
                         <p>Found {this.state.results.length} matching documents</p>
                         <ul>
                         {this.state.results !== undefined && this.state.results.map((element) => 
-                            <li key={element.id}><a href={'/docs/' + element.href} target='_blank' rel="noopener noreferrer"><b>{element.title}</b></a> - <div className="content" dangerouslySetInnerHTML={{__html: element.blurb}}></div></li>
+                            <li key={element.id}>
+                                <a href={'/docs/' + element.href} target='_blank' rel="noopener noreferrer"><b>{element.title}</b></a>
+                                <div className="content" dangerouslySetInnerHTML={{__html: element.blurb}}></div>
+                            </li>
                         )}
                         </ul>
                     </Modal.Body>
