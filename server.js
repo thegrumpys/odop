@@ -394,7 +394,7 @@ function getSearchResults(query) {
     let pageMatch = lunr_pages.filter((page) => page.href === hit.ref)[0];
     pageMatch.score = hit.score;
     console.log('query=',query,'hit=',hit,'pageMatch=',pageMatch,'pageMatch.content=',pageMatch.content);
-    pageMatch.content = createSearchResultBlurb(query, pageMatch.content);
+    pageMatch.blurb = createSearchResultBlurb(query, pageMatch.content);
     return [pageMatch];
   });
 }

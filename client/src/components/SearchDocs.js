@@ -91,7 +91,7 @@ class SearchDocs extends Component {
                         <p>Found {this.state.results.length} matching documents</p>
                         <ul>
                         {this.state.results !== undefined && this.state.results.map((element) => 
-                            <li key={element.id}><a href={'/docs/' + element.href} target='_blank' rel="noopener noreferrer"><b>{element.title}</b></a> - <div className="content" dangerouslySetInnerHTML={{__html: element.content}}></div></li>
+                            <li key={element.id}><a href={'/docs/' + element.href} target='_blank' rel="noopener noreferrer"><b>{element.title}</b></a> - <div className="content" dangerouslySetInnerHTML={{__html: element.blurb}}></div></li>
                         )}
                         </ul>
                     </Modal.Body>
