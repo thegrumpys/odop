@@ -4,6 +4,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 var cors = require('cors');
+var lunr = require("lunr");
+var lunr_index = require("./lunr_index.json");
+var lunr_pages = require("./lunr_pages.json");
 
 /**
  * A simple middleware that asserts valid user name and sends 401 responses
@@ -346,9 +349,49 @@ app.post('/api/v1/usage_log', (req, res) => {
     });
 });
 
+var searchIndex = lunr.Index.load(lunr_index);
+
 app.get('/api/v1/search', (req, res) => {
-    console.log('SERVER: req=',req);
+//    console.log('SERVER: req=',req);
+    var terms = req.query.terms;
+//    var results = idx.search(terms);
+    const results = searchSite(terms);
+    console.log('SERVER: results=',results);
+    res.status(200).json(results);
+    console.log('SERVER: 200 - OK');
 });
+
+function searchSite(query) {
+  const originalQuery = query;
+  query = getLunrSearchQuery(query);
+  let results = getSearchResults(query);
+  return results.length
+    ? results
+    : query !== originalQuery
+    ? getSearchResults(originalQuery)
+    : [];
+}
+
+function getLunrSearchQuery(query) {
+  const searchTerms = query.split(" ");
+  if (searchTerms.length === 1) {
+    return query;
+  }
+  query = "";
+  for (const term of searchTerms) {
+    query += `+${term} `;
+  }
+  return query.trim();
+}
+
+function getSearchResults(query) {
+  return searchIndex.search(query).flatMap((hit) => {
+    if (hit.ref == "undefined") return [];
+    let pageMatch = lunr_pages.filter((page) => page.href === hit.ref)[0];
+    pageMatch.score = hit.score;
+    return [pageMatch];
+  });
+}
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
 //    console.log('process.env.NODE_ENV == Production or staging');

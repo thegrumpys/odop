@@ -5,11 +5,11 @@ var cheerio = require("cheerio");
 
 // Change these constants to suit your needs
 const HTML_FOLDER = "client/public/docs";  // folder with your HTML files
-// Valid search fields: "title", "description", "keywords", "body"
-const SEARCH_FIELDS = ["title", "description", "keywords", "body"];
 const EXCLUDE_FILES = [];
 const MAX_PREVIEW_CHARS = 275;  // Number of characters to show for a given search result
-const OUTPUT_INDEX = "lunr_index.js";  // Index file
+//const OUTPUT_INDEX = "lunr_index.js";  // Index file
+const LUNR_INDEX = "lunr_index.json";  // Index file
+const LUNR_PAGES = "lunr_pages.json";  // Index file
 
 
 function isHtml(filename) {
@@ -54,15 +54,15 @@ function readHtml(root, file, fileId) {
     if (typeof description == 'undefined') description = "";
     var keywords = $("meta[name=keywords]").attr("content");
     if (typeof keywords == 'undefined') keywords = "";
-    var body = $("body").text()
-    if (typeof body == 'undefined') body = "";
+    var content = $("body").text()
+    if (typeof content == 'undefined') content = "";
     var data = {
         "id": fileId,
-        "link": file,
-        "t": title,
-        "d": description,
-        "k": keywords,
-        "b": body
+        "href": file,
+        "title": title,
+        "description": description,
+        "keywords": keywords,
+        "content": content
     }
     return data;
 }
@@ -70,10 +70,11 @@ function readHtml(root, file, fileId) {
 
 function buildIndex(docs) {
     var idx = lunr(function () {
-        this.ref('id');
-        for (var i = 0; i < SEARCH_FIELDS.length; i++) { 
-            this.field(SEARCH_FIELDS[i].slice(0, 1));
-        } 
+        this.ref('href');
+        this.field('title');
+        this.field('description');
+        this.field('keywords');
+        this.field('content');
         docs.forEach(function (doc) {
                 this.add(doc);
             }, this);
@@ -83,17 +84,19 @@ function buildIndex(docs) {
 
 
 function buildPreviews(docs) {
-    var result = {};
+    var result = [];
     for (var i = 0; i < docs.length; i++) {
         var doc = docs[i];
-        var preview = doc["d"];
-        if (preview == "") preview = doc["b"];
-        if (preview.length > MAX_PREVIEW_CHARS)
-            preview = preview.slice(0, MAX_PREVIEW_CHARS) + " ...";
+//        var preview = doc["description"];
+//        if (preview == "") preview = doc["body"];
+//        if (preview.length > MAX_PREVIEW_CHARS)
+//            preview = preview.slice(0, MAX_PREVIEW_CHARS) + " ...";
         result[doc["id"]] = {
-            "t": doc["t"],
-            "p": preview,
-            "l": doc["link"]
+            "title": doc["title"],
+            "description": doc["description"],
+            "content": doc["content"],
+            "href": doc["href"],
+            "id": doc["id"]
         }
     }
     return result;
@@ -110,13 +113,27 @@ function main() {
     }
     var idx = buildIndex(docs);
     var previews = buildPreviews(docs);
-    var js = "const LUNR_DATA = " + JSON.stringify(idx) + ";\n" + 
-             "const PREVIEW_LOOKUP = " + JSON.stringify(previews) + ";";
-    fs.writeFile(OUTPUT_INDEX, js, function(err) {
+//    var js = "const LUNR_DATA = " + JSON.stringify(idx) + ";\n" + 
+//             "const PREVIEW_LOOKUP = " + JSON.stringify(previews) + ";";
+//    fs.writeFile(OUTPUT_INDEX, js, function(err) {
+//        if(err) {
+//            return console.log(err);
+//        }
+//        console.log("Index saved as " + OUTPUT_INDEX);
+//    }); 
+    var index_json = JSON.stringify(idx, null, 2);
+    fs.writeFile(LUNR_INDEX, index_json, function(err) {
         if(err) {
             return console.log(err);
         }
-        console.log("Index saved as " + OUTPUT_INDEX);
+        console.log("Index saved as " + LUNR_INDEX);
+    }); 
+    var pages_json = JSON.stringify(previews, null, 2);
+    fs.writeFile(LUNR_PAGES, pages_json, function(err) {
+        if(err) {
+            return console.log(err);
+        }
+        console.log("Pages saved as " + LUNR_PAGES);
     }); 
 }
 
