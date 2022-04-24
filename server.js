@@ -346,9 +346,9 @@ app.post('/api/v1/usage_log', (req, res) => {
     });
 });
 
-//app.get('/docs', (req, res) => {
-//    console.log('req=', req);
-//});
+app.get('/api/v1/search', (req, res) => {
+    console.log('SERVER: req=',req);
+});
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
 //    console.log('process.env.NODE_ENV == Production or staging');
