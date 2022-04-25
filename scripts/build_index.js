@@ -5,6 +5,7 @@ var cheerio = require("cheerio");
 
 // Change these constants to suit your needs
 const HTML_FOLDER = "client/public/docs";  // folder with your HTML files
+const EXCLUDE_DIRECTORIES = ["design", "procedures"];
 const EXCLUDE_FILES = [];
 //const MAX_PREVIEW_CHARS = 275;  // Number of characters to show for a given search result
 //const OUTPUT_INDEX = "lunr_index.js";  // Index file
@@ -30,6 +31,8 @@ function findHtml(folder) {
         var filename = path.join(folder, files[i]);
         var stat = fs.lstatSync(filename);
         if (stat.isDirectory()) {
+            console.log('filename=',filename);
+            if (EXCLUDE_DIRECTORIES.includes(filename.substring(HTML_FOLDER.length+1))) continue;
             var recursed = findHtml(filename);
             for (var j = 0; j < recursed.length; j++) {
                 recursed[j] = path.join(files[i], recursed[j]).replace(/\\/g, "/");
