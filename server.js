@@ -359,18 +359,15 @@ app.get('/api/v1/search', (req, res) => {
 //    console.log('SERVER: req=',req);
     var terms = req.query.terms;
     const results = searchSite(terms);
-    console.log('SERVER: results=',results);
+//    console.log('SERVER: results=',results);
     res.status(200).json(results);
     console.log('SERVER: 200 - OK');
 });
 
 function searchSite(query) {
-  const originalQuery = query;
   let results = getSearchResults(query);
   return results.length
     ? results
-    : query !== originalQuery
-    ? getSearchResults(originalQuery)
     : [];
 }
 
@@ -379,8 +376,7 @@ function getSearchResults(query) {
     if (hit.ref == "undefined") return [];
     let pageMatch = lunr_pages.filter((page) => page.href === hit.ref)[0];
     pageMatch.score = hit.score;
-//    console.log('query=',query,'hit=',hit,'pageMatch=',pageMatch,'pageMatch.content=',pageMatch.content);
-    pageMatch.blurb = createSearchResultBlurb(query, pageMatch.content);
+    pageMatch.blurb_content = createSearchResultBlurb(query, pageMatch.content);
     return [pageMatch];
   });
 }
@@ -404,7 +400,6 @@ if (!String.prototype.matchAll) {
 }
 
 function createSearchResultBlurb(query, pageContent) {
-  console.log('query=',query,'pageContent=',pageContent);
   const searchQueryRegex = new RegExp(createQueryStringRegex(query), "gmi");
   const searchQueryHits = Array.from(
     pageContent.matchAll(searchQueryRegex),

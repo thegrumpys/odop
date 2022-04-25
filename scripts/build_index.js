@@ -57,7 +57,11 @@ function readHtml(root, file, fileId) {
 //    var content = $("body").text()
 //    if (typeof content == 'undefined') content = "";
     var title = $("h1:last").text();
-    $("h1:last").remove();
+    if (typeof title == 'undefined') {
+        title = "";
+    } else {
+        $("h1:last").remove(); // Remove title's text so doesn't get added to the content's text below
+    }
     var description = "";
     var keywords = "";
     var content = $("section:last").text();
@@ -81,6 +85,7 @@ function buildIndex(docs) {
         this.field('description');
         this.field('keywords');
         this.field('content');
+        this.metadataWhitelist = ['position']
         docs.forEach(function (doc) {
                 this.add(doc);
             }, this);
