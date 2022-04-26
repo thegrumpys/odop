@@ -4,13 +4,15 @@ var lunr = require("lunr");
 var cheerio = require("cheerio");
 
 // Change these constants to suit your needs
-const HTML_FOLDER = "client/public/docs";  // folder with your HTML files
+var HTML_FOLDER = "client/public/docs"
 const EXCLUDE_DIRECTORIES = ["design", "procedures"];
+console.log('EXCLUDE_DIRECTORIES=',EXCLUDE_DIRECTORIES);
 const EXCLUDE_FILES = [];
-//const MAX_PREVIEW_CHARS = 275;  // Number of characters to show for a given search result
-//const OUTPUT_INDEX = "lunr_index.js";  // Index file
+console.log('EXCLUDE_FILES=',EXCLUDE_FILES);
 const LUNR_INDEX = "lunr_index.json";  // Index file
+console.log('LUNR_INDEX=',LUNR_INDEX);
 const LUNR_PAGES = "lunr_pages.json";  // Index file
+console.log('LUNR_PAGES=',LUNR_PAGES);
 
 
 function isHtml(filename) {
@@ -118,6 +120,8 @@ function buildPreviews(docs) {
 
 
 function main() {
+    if (process.argv.length > 2) HTML_FOLDER=process.argv.slice(2)[0];
+    console.log('HTML_FOLDER=',HTML_FOLDER);
     files = findHtml(HTML_FOLDER);
     var docs = [];
     console.log("Building index for these files:");
