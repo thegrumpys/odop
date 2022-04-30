@@ -11,10 +11,11 @@ class ActionSearch extends Component {
 
     constructor(props) {
         super(props);
-        this.toggle = this.toggle.bind(this);
+        this.onSearchRequest = this.onSearchRequest.bind(this);
     }
-    
-    toggle() {
+
+    onSearchRequest(event) {
+//        console.log('In ActionSearch.onSearchRequest this=',this,'event=',event);
         var warnMsg = '';
         if (this.props.objective_value <= this.props.system_controls.objmin) {
             warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
@@ -50,13 +51,13 @@ class ActionSearch extends Component {
 //        console.log('In ActionSearch.render this=',this);
         return (
             <>
-                <NavDropdown.Item onClick={this.toggle}>
+                <NavDropdown.Item onClick={this.onSearchRequest}>
                     Search (solve)
                 </NavDropdown.Item>
             </>
         );
     }
-}  
+}
 
 ActionSearch.contextTypes = {
     store: PropTypes.object

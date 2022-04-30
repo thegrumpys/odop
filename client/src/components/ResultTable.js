@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Table, OverlayTrigger, Tooltip, Button, Modal, InputGroup, Form, ButtonGroup } from 'react-bootstrap';
+import { Table, OverlayTrigger, Tooltip, Modal, InputGroup, ButtonGroup, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, MIN, MAX } from '../store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
-import { seek, search, saveAutoSave } from '../store/actionCreators';
+import { search, seek, saveAutoSave } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/MessageModal';
 
@@ -13,33 +13,20 @@ class ResultTable extends Component {
     constructor(props) {
 //        console.log('In ResultTable.ctor'');
         super(props);
-        this.onSearchButton = this.onSearchButton.bind(this);
-        this.onOptimizeButton = this.onOptimizeButton.bind(this);
-        this.onOptimizeContextHelp = this.onOptimizeContextHelp.bind(this);
-        this.onOptimizeCancel = this.onOptimizeCancel.bind(this);
-        this.onMinMax = this.onMinMax.bind(this);
-        this.onNameSelect = this.onNameSelect.bind(this);
-        this.onSeek = this.onSeek.bind(this);
-        this.onNoop = this.onNoop.bind(this);
+        this.onSearchRequest = this.onSearchRequest.bind(this);
+        this.onSeekRequest = this.onSeekRequest.bind(this);
+        this.onSeekContextHelpButton = this.onSeekContextHelpButton.bind(this);
+        this.onSeekCancelButton = this.onSeekCancelButton.bind(this);
+        this.onSeekMinMaxSelect = this.onSeekMinMaxSelect.bind(this);
+        this.onSeekNameSelect = this.onSeekNameSelect.bind(this);
+        this.onSeekButton = this.onSeekButton.bind(this);
         this.state = {
-            optimize_modal: false, // Default: do not display optimize modal
-            name: this.props.symbol_table[0].name, // TODO: A fudge
-            minmax: MIN, // TODO: A fudge
+            seek_modal: false, // Default: do not display optimize modal
         };
     }
 
-    componentDidUpdate(prevProps) {
-//        console.log('In ResultTable.componentDidUpdate this=',this,'prevProps=',prevProps);
-        if (prevProps.type !== this.props.type) {
-//            console.log('In ResultTable.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
-            this.setState({
-                name: this.props.symbol_table[0].name, // TODO: A fudge
-            });
-        }
-    }
-
-    onSearchButton(event) {
-//        console.log('In ResultTable.onSearchButton this=',this,'event=',event);
+    onSearchRequest(event) {
+//        console.log('In ResultTable.onSearchRequest this=',this,'event=',event);
         var warnMsg = '';
         if (this.props.objective_value <= this.props.system_controls.objmin) {
             warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
@@ -71,64 +58,94 @@ class ResultTable extends Component {
         }
     }
 
-    onOptimizeButton(event) {
-//        console.log('In ResultTable.onOptimizeButton this=',this,'event=',event);
-        this.setState({
-            optimize_modal: !this.state.optimize_modal,
+    onSeekRequest(event) {
+//        console.log('In ResultTable.onSeekRequest this=',this,'event=',event);
+        var warnMsg = '';
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            warnMsg += 'No free independent variables; ';
+        }
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
+            warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
+        }
+        if (Number.isNaN(this.props.objective_value)) {
+            warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
+        }
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.type !== undefined && element.type !== "table" && element.lmin === CONSTRAINED && element.lmax === CONSTRAINED && element.cmin > element.cmax) {
+                warnMsg += (element.name + ' constraints are inconsistent; ');
+            }
         });
+        if (warnMsg !== '') {
+            displayMessage(warnMsg,'warning');
+        } else {
+            var result = this.props.symbol_table.find( // Find free variable matching the current variable name
+                (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
+            );
+            if (result === undefined) { // Was matching free variable not found
+                // Set default name to the First free variable. There must be at least one
+                // This duplicates the UI render code algorithm - be careful and make them match!
+                result = this.props.symbol_table.find( // Find first free variable
+                    (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
+                );
+            }
+            this.setState({
+                seek_modal: !this.state.seek_modal,
+                seek_name: result.name,
+                seek_minmax: MIN,
+            });
+        }
     }
 
-    onOptimizeContextHelp(event) {
-//        console.log('In ResultTable.onOptimizeContextHelp this=',this,'event=',event);
+    onSeekContextHelpButton(event) {
+//        console.log('In ResultTable.onSeekContextHelpButton this=',this,'event=',event);
         this.setState({
-            optimize_modal: !this.state.optimize_modal,
+            seek_modal: !this.state.seek_modal,
         });
         window.open('/docs/Help/seek.html', '_blank');
     }
 
-    onOptimizeCancel(event) {
-//        console.log('In ResultTable.onOptimizeCancel this=',this,'event=',event);
+    onSeekCancelButton(event) {
+//        console.log('In ResultTable.onSeekCancelButton this=',this,'event=',event);
         this.setState({
-            optimize_modal: !this.state.optimize_modal,
+            seek_modal: !this.state.seek_modal,
         });
     }
 
-    onMinMax(minmax) {
-//        console.log('In ResultTable.onMinMax this=',this,'minmax=',minmax);
+    onSeekMinMaxSelect(seek_minmax) {
+//        console.log('In ResultTable.onSeekMinMaxSelect this=',this,'seek_minmax=',seek_minmax);
         this.setState({
-            minmax: minmax
+            seek_minmax: seek_minmax
         });
     }
 
-    onNameSelect(event) {
-//        console.log('In ResultTable.onNameSelect this=',this,'event=',event);
+    onSeekNameSelect(event) {
+//        console.log('In ResultTable.onSeekNameSelect this=',this,'event=',event);
         this.setState({
-            name: event.target.value 
+            seek_name: event.target.value 
         });
     }
     
-    onSeek(event) {
-//        console.log('In ResultTable.onSeek this=',this,'event=',event);
+    onSeekButton(event) {
+//        console.log('In ResultTable.onSeekButton this=',this,'event=',event);
         this.setState({
-            optimize_modal: !this.state.optimize_modal
+            seek_modal: !this.state.seek_modal
         });
         // Do seek
         this.props.saveAutoSave();
-        this.props.seek(this.state.name, this.state.minmax);
-        logUsage('event', 'ActionSeek', { 'event_label': 'Button ' + this.state.minmax + ' ' + this.state.name });
+        this.props.seek(this.state.seek_name, this.state.seek_minmax);
+        logUsage('event', 'ActionSeek', { 'event_label': 'Button ' + this.state.seek_minmax + ' ' + this.state.seek_name });
     }
-
-    onNoop() {} // No-op for onHide
 
     render() {
 //        console.log('In ResultTable.render this=',this);
-//        From Issue #365:
-//        The proposed terminology and color scheme:
-//            OBJ value       Category Term           Color            RGB
-//            zero            STRICTLY FEASIBLE       Black            #343a40
-//            < OBJMIN        FEASIBLE                Green (or cyan)  #28a745
-//            < 4x OBJMIN     CLOSE TO FEASIBLE       Orange           #fd7e14
-//            > 4x OBJMIN     NOT FEASIBLE            Red              #dc3545
+
+//      From Issue #365:
+//      The proposed terminology and color scheme:
+//          OBJ value       Category Term           Color            RGB
+//          zero            STRICTLY FEASIBLE       Black            #343a40
+//          < OBJMIN        FEASIBLE                Green (or cyan)  #28a745
+//          < 4x OBJMIN     CLOSE TO FEASIBLE       Orange           #fd7e14
+//          > 4x OBJMIN     NOT FEASIBLE            Red              #dc3545
         var feasibility_string;
         var feasibility_class;
         var display_search_button;
@@ -149,7 +166,7 @@ class ResultTable extends Component {
             feasibility_class = "text-strictly-feasible ";
             display_search_button = false;
         }
-        
+
         var ResultTableOptimize = require('../designtypes/'+this.props.type+'/ResultTableOptimize.js'); // Dynamically load ResultTableOptimize
 
         return (
@@ -186,7 +203,7 @@ class ResultTable extends Component {
                         <tr>
                             {display_search_button ? 
                               <td align="center">
-                                  <Button variant="primary" size="sm" onClick={this.onSearchButton} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
+                                  <Button variant="primary" size="sm" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
                                   <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                       SEARCH alters the values of any free independent variables to find a design that 
                                       satisfies all constraints while also achieving the desired value for each fixed dependent 
@@ -200,7 +217,7 @@ class ResultTable extends Component {
                               </td>
                             :
                               <td align="center">
-                                  <Button variant="primary" size="sm" onClick={this.onOptimizeButton} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
+                                  <Button variant="primary" size="sm" onClick={this.onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
                                   <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                       If one feasible design exists there are likely many more available, each with varying 
                                       advantages / disadvantages. The ODOP Seek feature provides a “goal seeking” capability 
@@ -215,7 +232,7 @@ class ResultTable extends Component {
                         </tr>
                     </tbody>
                 </Table>
-                <Modal show={this.state.optimize_modal} onHide={this.onOptimizeCancel}>
+                <Modal show={this.state.seek_modal} onHide={this.onSeekCancelButton}>
                     <Modal.Header>
                         <Modal.Title>
                             Seek (optimize)
@@ -223,18 +240,18 @@ class ResultTable extends Component {
                     </Modal.Header>
                     <Modal.Body className="pb-0">
                         <p>This may be a long running operation. Please be patient.</p>
-                        <ResultTableOptimize.default onClick={this.onOptimizeCancel}/>
+                        <ResultTableOptimize.default onClick={this.onSeekCancelButton}/>
                         <p>Select a specific Seek optimization:</p>
                         <InputGroup>
                             <ButtonGroup>
-                                <Button variant="outline-secondary"onClick={() => this.onMinMax(MIN)} active={this.state.minmax === MIN}>Min</Button>
-                                <Button variant="outline-secondary"onClick={() => this.onMinMax(MAX)} active={this.state.minmax === MAX}>Max</Button>
+                                <Button variant="outline-secondary" onClick={() => this.onSeekMinMaxSelect(MIN)} active={this.state.seek_minmax === MIN}> Min </Button>
+                                <Button variant="outline-secondary" onClick={() => this.onSeekMinMaxSelect(MAX)} active={this.state.seek_minmax === MAX}> Max </Button>
                             </ButtonGroup>
                             &nbsp;
                             <InputGroup.Prepend>
                                 <InputGroup.Text>Name: </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <Form.Control as="select" className="align-middle" onChange={this.onNameSelect} value={this.state.name}>
+                            <Form.Control as="select" className="align-middle" onChange={this.onSeekNameSelect} value={this.state.seek_name}>
                                 {this.props.symbol_table.map((element, index) =>
                                     (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
@@ -242,15 +259,14 @@ class ResultTable extends Component {
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="outline-info" onClick={this.onOptimizeContextHelp}>Help</Button>
-                        <Button variant="secondary" onClick={this.onOptimizeCancel}>Cancel</Button>
-                        <Button variant="primary" onClick={this.onSeek}>Seek</Button>
+                        <Button variant="outline-info" onClick={this.onSeekContextHelpButton}>Help</Button>{' '}
+                        <Button variant="secondary" onClick={this.onSeekCancelButton}>Cancel</Button>{' '}
+                        <Button variant="primary" onClick={this.onSeekButton}>Seek</Button>
                     </Modal.Footer>
                 </Modal>
             </>
         );
     }
-    
 }
 
 ResultTable.contextTypes = {
