@@ -105,9 +105,16 @@ class ActionSeek extends Component {
 
         var ResultTableOptimize = require('../../designtypes/'+this.props.type+'/ResultTableOptimize.js'); // Dynamically load ResultTableOptimize
 
+        var display_search_button;
+        if (this.props.objective_value > this.props.system_controls.objmin) {
+            display_search_button = true;
+        } else {
+            display_search_button = false;
+        }
+
         return (
             <>
-                <NavDropdown.Item onClick={this.onSeekRequest}>
+                <NavDropdown.Item onClick={this.onSeekRequest} disabled={display_search_button}>
                     Seek (optimize)&hellip;
                 </NavDropdown.Item>
                 <Modal show={this.state.seek_modal} onHide={this.onSeekCancelButton}>

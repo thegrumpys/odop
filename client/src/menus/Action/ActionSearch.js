@@ -49,9 +49,17 @@ class ActionSearch extends Component {
 
     render() {
 //        console.log('In ActionSearch.render this=',this);
+
+        var display_search_button;
+        if (this.props.objective_value > this.props.system_controls.objmin) {
+            display_search_button = true;
+        } else {
+            display_search_button = false;
+        }
+
         return (
             <>
-                <NavDropdown.Item onClick={this.onSearchRequest}>
+                <NavDropdown.Item onClick={this.onSearchRequest} disabled={!display_search_button}>
                     Search (solve)
                 </NavDropdown.Item>
             </>

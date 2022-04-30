@@ -731,9 +731,17 @@ class ActionTrade extends Component {
         var design;
         const { store } = this.context;
         design = store.getState();
+
+        var display_search_button;
+        if (this.props.objective_value > this.props.system_controls.objmin) {
+            display_search_button = true;
+        } else {
+            display_search_button = false;
+        }
+
         return (
             <>
-                <NavDropdown.Item onClick={this.strategyToggle}>
+                <NavDropdown.Item onClick={this.strategyToggle} disabled={!display_search_button}>
                     Trade&hellip;
                 </NavDropdown.Item>
                 {/*==================================================*/}
@@ -985,6 +993,8 @@ ActionTrade.contextTypes = {
 };
 
 const mapStateToProps = state => ({
+    system_controls: state.model.system_controls,
+    objective_value: state.model.result.objective_value,
 });
 
 const mapDispatchToProps = {
