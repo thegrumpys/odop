@@ -1,4 +1,4 @@
-## Design Types
+# Design Types
 
 See [Terminology](/docs/Help/terminology.html) for more detail on ODOP usage of the term "Design Types".   
 

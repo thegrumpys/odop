@@ -1,4 +1,4 @@
-#### Torsion Spring Design Type
+# Torsion Spring Design Type
 
 The Torsion Spring design type is a full-featured mathematical model enabling 
 the engineering design of helical coil torsion springs.   

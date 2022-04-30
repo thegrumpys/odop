@@ -1,4 +1,4 @@
-## System Control variables and multi-user operation
+# System Control variables and multi-user operation
 
 A collection of "System Control" variables such as:   
 IOOPT, MAXIT, WEAPON, NMERIT, FIX_WT, CON_WT, ZERO_WT, VIOL_WT, MFN_WT, OBJMIN, DEL, DELMIN, TOL and SMALLNUM   

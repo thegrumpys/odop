@@ -1,4 +1,4 @@
-#### Intro Pages Overview
+# Intro Pages Overview
 
 Once logged in, various sections of the on-line Help will provide additional information on getting started with the software.
 For example, see:  

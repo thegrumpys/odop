@@ -1,4 +1,4 @@
-## Idea for a Refine Search feature
+# Idea for a Refine Search feature
 
 It is my understanding that in the math associated with linear programming, there is a theorm 
 (or something along those lines) 

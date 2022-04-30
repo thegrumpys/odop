@@ -1,4 +1,4 @@
-#### Compression Spring Design Type
+# Compression Spring Design Type
 
 The Compression Spring design type is a full-featured mathematical model enabling 
 the engineering design of helical coil compression springs.   

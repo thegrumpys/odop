@@ -1,4 +1,4 @@
-## Idea for a virtual annunciator panel
+# Idea for a virtual annunciator panel
 
 In the world of 20th century industrial automation and process control, 
 it was common to encounter the term ""Annunciator Panel".  

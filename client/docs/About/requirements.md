@@ -1,4 +1,4 @@
-## Requirements
+# Requirements
 
 It is not necessary to install any software on your computer in order to run ODOP.
 In theory, the only requirement to operate the ODOP software is an Internet connection and 

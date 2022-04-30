@@ -1,4 +1,4 @@
-## Consider an UnDo / ReDo / TimeTravel feature
+# Consider an UnDo / ReDo / TimeTravel feature
 
 Is there any real value in implementing an UnDo / ReDo feature ?   
 

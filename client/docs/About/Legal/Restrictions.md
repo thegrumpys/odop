@@ -1,4 +1,4 @@
-## Restrictions
+# Restrictions
 
 This section covers a few restrictions and limitations of the 
 **O**pen **D**esign **O**ptimization **P**latform software 

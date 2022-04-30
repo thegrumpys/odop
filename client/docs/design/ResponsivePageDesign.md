@@ -1,4 +1,4 @@
-## Ideas for "responsive" page design
+# Ideas for "responsive" page design
 
 Just a few thoughts - points for future discussion.
 

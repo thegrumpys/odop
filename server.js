@@ -4,6 +4,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 var cors = require('cors');
+var lunr = require("lunr");
+var lunr_index = require("./lunr_index.json");
+var lunr_pages = require("./lunr_pages.json");
 
 /**
  * A simple middleware that asserts valid user name and sends 401 responses
@@ -346,9 +349,164 @@ app.post('/api/v1/usage_log', (req, res) => {
     });
 });
 
-//app.get('/docs', (req, res) => {
-//    console.log('req=', req);
-//});
+const MAX_SUMMARY_LENGTH = 30
+const SENTENCE_BOUNDARY_REGEX = /\b\.\s/gm
+const WORD_REGEX = /\b(\w*)[\W|\s|\b]?/gm
+
+var searchIndex = lunr.Index.load(lunr_index);
+
+app.get('/api/v1/search', (req, res) => {
+//    console.log('SERVER: req=',req);
+    var terms = req.query.terms;
+    const results = searchSite(terms);
+//    console.log('SERVER: results=',results);
+    res.status(200).json(results);
+    console.log('SERVER: 200 - OK');
+});
+
+function searchSite(query) {
+  let results = getSearchResults(query);
+  return results.length
+    ? results
+    : [];
+}
+
+function getSearchResults(query) {
+  return searchIndex.search(query).flatMap((hit) => {
+    if (hit.ref == "undefined") return [];
+    let pageMatch = lunr_pages.filter((page) => page.href === hit.ref)[0];
+    pageMatch.score = hit.score;
+    pageMatch.blurb_content = createSearchResultBlurb(query, pageMatch.content);
+    return [pageMatch];
+  });
+}
+
+if (!String.prototype.matchAll) {
+  String.prototype.matchAll = function (regex) {
+    "use strict";
+    function ensureFlag(flags, flag) {
+      return flags.includes(flag) ? flags : flags + flag;
+    }
+    function* matchAll(str, regex) {
+      const localCopy = new RegExp(regex, ensureFlag(regex.flags, "g"));
+      let match;
+      while ((match = localCopy.exec(str))) {
+        match.index = localCopy.lastIndex - match[0].length;
+        yield match;
+      }
+    }
+    return matchAll(this, regex);
+  };
+}
+
+function createSearchResultBlurb(query, pageContent) {
+  const searchQueryRegex = new RegExp(createQueryStringRegex(query), "gmi");
+  const searchQueryHits = Array.from(
+    pageContent.matchAll(searchQueryRegex),
+    (m) => m.index
+  );
+  const sentenceBoundaries = Array.from(
+    pageContent.matchAll(SENTENCE_BOUNDARY_REGEX),
+    (m) => m.index
+  );
+  let searchResultText = "";
+  let lastEndOfSentence = 0;
+  for (const hitLocation of searchQueryHits) {
+    if (hitLocation > lastEndOfSentence) {
+      for (let i = 0; i < sentenceBoundaries.length; i++) {
+        if (sentenceBoundaries[i] > hitLocation) {
+          const startOfSentence = i > 0 ? sentenceBoundaries[i - 1] + 1 : 0;
+          const endOfSentence = sentenceBoundaries[i];
+          lastEndOfSentence = endOfSentence;
+          parsedSentence = pageContent.slice(startOfSentence, endOfSentence).trim();
+          searchResultText += `${parsedSentence} ... `;
+          break;
+        }
+      }
+    }
+    const searchResultWords = tokenize(searchResultText);
+    const pageBreakers = searchResultWords.filter((word) => word.length > 50);
+    if (pageBreakers.length > 0) {
+      searchResultText = fixPageBreakers(searchResultText, pageBreakers);
+    }
+    if (searchResultWords.length >= MAX_SUMMARY_LENGTH) break;
+  }
+  return ellipsize(searchResultText, MAX_SUMMARY_LENGTH).replace(
+    searchQueryRegex,
+    "<strong>$&</strong>"
+  );
+}
+
+function createQueryStringRegex(query) {
+  const searchTerms = query.split(" ");
+  if (searchTerms.length == 1) {
+    return query;
+  }
+  query = "";
+  for (let term of searchTerms) {
+    if (term.startsWith('+') || term.startsWith('-')) term = term.slice(1); // Remove +/- prefix
+    query += `${term}|`;
+  }
+  query = query.slice(0, -1); // Remove trailing '|'
+  return `(${query})`;
+}
+
+function tokenize(input) {
+  const wordMatches = Array.from(input.matchAll(WORD_REGEX), (m) => m);
+  return wordMatches.map((m) => ({
+    word: m[0],
+    start: m.index,
+    end: m.index + m[0].length,
+    length: m[0].length,
+  }));
+}
+
+function fixPageBreakers(input, largeWords) {
+  largeWords.forEach((word) => {
+    const chunked = chunkify(word.word, 20);
+    input = input.replace(word.word, chunked);
+  });
+  return input;
+}
+
+function chunkify(input, chunkSize) {
+  let output = "";
+  let totalChunks = (input.length / chunkSize) | 0;
+  let lastChunkIsUneven = input.length % chunkSize > 0;
+  if (lastChunkIsUneven) {
+    totalChunks += 1;
+  }
+  for (let i = 0; i < totalChunks; i++) {
+    let start = i * chunkSize;
+    let end = start + chunkSize;
+    if (lastChunkIsUneven && i === totalChunks - 1) {
+      end = input.length;
+    }
+    output += input.slice(start, end) + " ";
+  }
+  return output;
+}
+
+function ellipsize(input, maxLength) {
+  const words = tokenize(input);
+  if (words.length <= maxLength) {
+    return input;
+  }
+  return input.slice(0, words[maxLength].end) + "...";
+}
+
+function getColorForSearchResult(score) {
+  const warmColorHue = 171;
+  const coolColorHue = 212;
+  return adjustHue(warmColorHue, coolColorHue, score);
+}
+
+function adjustHue(hue1, hue2, score) {
+  if (score > 3) return `hsl(${hue1}, 100%, 50%)`;
+  const hueAdjust = (parseFloat(score) / 3) * (hue1 - hue2);
+  const newHue = hue2 + Math.floor(hueAdjust);
+  return `hsl(${newHue}, 100%, 50%)`;
+}
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
 //    console.log('process.env.NODE_ENV == Production or staging');

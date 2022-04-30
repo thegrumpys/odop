@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { InputGroup, Form, Button } from 'react-bootstrap';
+import { InputGroup, Form, Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../logUsage';
+import { displayMessage } from './MessageModal';
+import { displaySpinner } from './Spinner';
 
 class SearchDocs extends Component {
 
@@ -11,8 +13,12 @@ class SearchDocs extends Component {
         this.onChange = this.onChange.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
         this.onButtonPress = this.onButtonPress.bind(this);
+        this.onCancel = this.onCancel.bind(this);
         this.state = {
             text: '',
+            query: '',
+            modal: false,
+            results: [],
         };
     }
     
@@ -32,24 +38,74 @@ class SearchDocs extends Component {
     
     onButtonPress(event) {
 //        console.log("In SearchDocs.onButtonPress event=",event);
-        var encoded_text = encodeURIComponent(this.state.text+' site:http://odop.springdesignsoftware.org/docs/');
+        var text = this.state.text;
+        var encoded_text = encodeURIComponent(this.state.text);
 //        console.log("In SearchDocs.onButtonPress encoded_text=",encoded_text);
-        var url = 'http://google.com/search?q=' + encoded_text;
-//        console.log("In SearchDocs.onButtonPress url=",url);
         logUsage('event', 'SearchDocs', { 'event_label': this.state.text});
         this.setState({
             text: '',
+            query: text,
         });
-        window.open(url, '_blank')
+        displaySpinner(true);
+        fetch('/api/v1/search?terms='+encoded_text)
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+                throw Error(res.statusText);
+            }
+            return res.json()
+        })
+        .then((results) => {
+//            console.log('In SearchDocs.onButtonPress results=', results);
+//            results.forEach((element) => console.log('element.href=',element.href));
+            this.setState({
+                modal: !this.state.modal,
+                results: results,
+            });
+        })
+        .catch(error => {
+            displayMessage('GET of search \''+text+'\' failed with message: \''+error.message+'\'');
+        });
+    }
+
+    onCancel(event) {
+//        console.log("In SearchDocs.onCancel event=",event);
+        this.setState({
+            modal: !this.state.modal
+        });
+        // Noop - all done
     }
 
     render() {
 //        console.log('In SearchDocs.render this=',this);
         return (
-            <InputGroup className='pr-3'>
-                <Form.Control type="text" value={this.state.text} placeholder="Help lookup" onChange={this.onChange} onKeyPress={this.onKeyPress} />
-                <Button onClick={this.onButtonPress} style={{padding: '0px 24px 16px 8px'}} disabled={this.state.text.length === 0}><i className="fas fa-search"></i></Button>
-            </InputGroup>
+            <>
+                <InputGroup className='pr-3'>
+                    <Form.Control type="text" value={this.state.text} placeholder="Help lookup" onChange={this.onChange} onKeyPress={this.onKeyPress} />
+                    <Button onClick={this.onButtonPress} style={{padding: '0px 24px 16px 8px'}} disabled={this.state.text.length === 0}><i className="fas fa-search"></i></Button>
+                </InputGroup>
+                <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>'
+                    <Modal.Header>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Help lookup for terms '{this.state.query}'
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Found {this.state.results.length} matching documents</p>
+                        <ul>
+                        {this.state.results !== undefined && this.state.results.map((element) => 
+                            <li key={element.id}>
+                                <a href={'/docs/' + element.href} target='_blank' rel="noopener noreferrer"><b>{element.title}</b></a>
+                                <div className="content" dangerouslySetInnerHTML={{__html: element.blurb_content}}></div>
+                            </li>
+                        )}
+                        </ul>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
         );
     }
 }

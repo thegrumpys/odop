@@ -1,4 +1,4 @@
-#### Making changes to initialState.js
+# Making changes to initialState.js
 
 These steps apply to the situation where the database has already been initialized
 for the design type in question.

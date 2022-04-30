@@ -1,4 +1,4 @@
-## Help
+# Help
 * [Features](/docs/Help/features.html)
 * [Introduction](/docs/Help/introduction.html)
 * [Terminology](/docs/Help/terminology.html)

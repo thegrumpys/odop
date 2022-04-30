@@ -1,4 +1,4 @@
-#### Piston-Cylinder Design Type
+# Piston-Cylinder Design Type
 
 The Piston Cylinder design type is a small demonstration problem.
 As a design problem, it is interesting because it illustrates competing objectives.

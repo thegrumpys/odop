@@ -1,4 +1,4 @@
-#### Consider adding a search at the beginning of trade
+# Consider adding a search at the beginning of trade
 
 **December 2019 update**   
 This feature has been implemented.

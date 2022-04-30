@@ -1,12 +1,12 @@
-## Features
+# Features
 
-#### Open Design Optimization Platform &nbsp; (ODOP)   
+# Open Design Optimization Platform &nbsp; (ODOP)   
 
 ODOP is a web software application (web app) currently under development.
 It provides a number of features and capabilities to facilitate the analysis 
 and design of a broad range of problems that have a mathematical model available. 
 
-#### ODOP is:
+# ODOP is:
 
 
 * Open Source Software  

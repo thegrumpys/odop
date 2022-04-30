@@ -1,4 +1,4 @@
-#### Spring Design Overview
+# Spring Design Overview
 
 This section presents design process information that is common to each of the
 coil spring types supported by ODOP:Spring.

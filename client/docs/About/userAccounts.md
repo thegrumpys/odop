@@ -1,4 +1,4 @@
-## User Accounts, Username, Sign-in, Sign-out
+# User Accounts, Username, Sign-in, Sign-out
 
 A user account is **not** required to operate most features of the software. 
 If saving designs into the cloud-based (on-line) [ODOP Design Library](/docs/Help/terminology.html#designLib),

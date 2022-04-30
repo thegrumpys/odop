@@ -1,4 +1,4 @@
-#### initialState, Startup and load.sql
+# initialState, Startup and load.sql
 
 This entry is intended to serve as documentation for the relationships and procedures of initialState.js files, 
 startup entries in the database and load.sql files . 
@@ -22,7 +22,7 @@ These load.sql files can be used to populate a new database or to transfer desig
 
 &nbsp;
 
-#### Making changes to initialState.js
+# Making changes to initialState.js
 
 These steps apply to the situation where the database has already been initialized
 for the design type in question.
@@ -59,7 +59,7 @@ Internally, the code uses the flags in initialState to differientate:
   
 &nbsp;
 
-#### Naming conventions for designs
+# Naming conventions for designs
 
 Adopt a convention based on "upper camel case" as defined in [camelCase](https://en.wikipedia.org/wiki/Camel_case) but modified to use an underscore as a major or logical separation where appropriate. 
 Thus, expressing "ODOP spring design" in a design name would become: ODOP\_SpringDesign. 
@@ -68,7 +68,7 @@ The implication is that there should be no spaces within design file names that 
 
 &nbsp;
 
-#### Spring design units &nbsp; (US customary inch-pound-second units versus metric units)
+# Spring design units &nbsp; (US customary inch-pound-second units versus metric units)
 
 In the source code, each of the Spring design types (Compression, Extension & Torsion) has:
  - initialState\_metric_units.js

@@ -1,4 +1,4 @@
-## View Alternatives
+# View Alternatives
 
 Originally titled: _"Ideas for Simplified Design Check UI (Design Calculator)"_, 
 this article has been expanded to describe multiple hypothetical alternate user interfaces for ODOP. 

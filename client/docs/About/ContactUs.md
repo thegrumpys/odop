@@ -1,4 +1,4 @@
-## Contact Us
+# Contact Us
 
 You can reach the team developing the 
 **O**pen **D**esign **O**ptimization **P**latform software 

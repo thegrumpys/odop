@@ -1,4 +1,4 @@
-#### Extension Spring Design Type
+# Extension Spring Design Type
 
 The Extension Spring design type is a full-featured mathematical model enabling 
 the engineering design of helical coil extension springs.   

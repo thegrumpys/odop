@@ -1,4 +1,4 @@
-#### AutoSave
+# AutoSave
 
 Power failure, system crash or loss of network connectivity prevent a Save operation and 
 potentially incur loss of a user's work since the previous Save operation.

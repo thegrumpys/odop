@@ -9,11 +9,11 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build && harp docs build/docs",
+    "heroku-postbuild": "cd client && npm install && npm run build && harp docs build/docs && cd .. && node ./scripts/build_index.js client/build/docs",
     "test": "mocha --timeout 10000",
     "coverage": "nyc --reporter=html node_modules/mocha/bin/_mocha --timeout 10000",
     "showcoverage": "open coverage/index.html",
-    "harp-compile": "cd client && harp docs public/docs",
+    "harp-compile": "cd client && harp docs public/docs && cd .. && node ./scripts/build_index.js client/public/docs",
     "harp-server": "cd client && harp . --port 8080"
   },
   "repository": {
@@ -29,6 +29,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "cheerio": "^1.0.0-rc.10",
     "harp": "^0.41.2",
     "mocha": "^8.2.0",
     "nodemon": "^1.19.4",
@@ -39,6 +40,7 @@
     "cors": "^2.8.5",
     "dotenv": "^6.1.0",
     "express": "^4.17.1",
+    "lunr": "^2.3.9",
     "node-mysql": "^0.4.2"
   }
 }

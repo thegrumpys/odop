@@ -1,4 +1,4 @@
-## SelectSize+Search and SelectSize+Seek - Enhanced SelectSize
+# SelectSize+Search and SelectSize+Seek - Enhanced SelectSize
 
 This entry describes two hypothetical extensions to the existing ODOP SelectSize feature that invoke the search algorithm 
 to evaluate results with multiple standard sizes.  

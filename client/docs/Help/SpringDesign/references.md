@@ -1,4 +1,4 @@
-#### Spring Design References
+# Spring Design References
 
  There are many excellent sources of information on spring design.  Several
  on the following list were consulted in the development of the ODOP:Spring

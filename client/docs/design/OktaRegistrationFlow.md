@@ -1,4 +1,4 @@
-#### Okta Self-Service Registration Flow
+# Okta Self-Service Registration Flow
 
 This document was put together to better capture the various steps involved
 in the Okta Self-Service Registration Flow.   

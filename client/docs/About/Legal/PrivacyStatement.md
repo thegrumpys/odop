@@ -1,4 +1,4 @@
-## Privacy Notice
+# Privacy Notice
 
 This privacy notice discloses the privacy practices for the odop.herokuapp.com website. 
 This privacy notice applies solely to information collected by this website. 

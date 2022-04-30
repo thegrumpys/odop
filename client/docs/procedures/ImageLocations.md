@@ -1,4 +1,4 @@
-#### Image locations
+# Image locations
 
 When contemplating a location (directory path) for image files,
 consider that there are two worlds (Heroku & GitHub Pages) with differing requirements.

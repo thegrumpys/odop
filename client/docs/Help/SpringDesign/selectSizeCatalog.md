@@ -1,4 +1,4 @@
-#### Select Size and Select Catalog
+# Select Size and Select Catalog
 
  The **Action : Select Size** menu item searches a table for standard sizes nearest
  to the current value of the designated Independent Variable.

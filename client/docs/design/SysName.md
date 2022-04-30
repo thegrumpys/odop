@@ -1,4 +1,4 @@
-## Proposed names for the (problem independent) system
+# Proposed names for the (problem independent) system
 
 The next phase of development will introduce multiple new design problems.
 A new GitHub repository will likely be established.
@@ -10,19 +10,19 @@ Similarly, Xyz:Platform can become Xyz:Nuts, Xyx:Bolts:, Xyz:Springs
 
 Current proposals include:
 
-#### Open Design Optimization System
+# Open Design Optimization System
 * ODOSys
 * ODO/System
 * ODO:System
 * ODO : System
 * OpenDesOpt:System
 
-#### Open Design Optimization Platform
+# Open Design Optimization Platform
 * ODO:Platform
 * ODO : Platform
 * OpenDesOpt:Platform
 * OpenDesignOpt:Platform
 
-#### Open Design Optimization App
+# Open Design Optimization App
 * ODOapp
 * ODO:app

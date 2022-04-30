@@ -1,4 +1,4 @@
-## Warn user if conflicting constraints are established
+# Warn user if conflicting constraints are established
 
 This feature has been implemented.
 Search will test and pop-up a modal.

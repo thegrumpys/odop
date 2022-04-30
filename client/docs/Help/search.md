@@ -1,4 +1,4 @@
-## Search
+# Search
 
 The **Action : Search** menu invokes the SEARCH algorithm.
 SEARCH will alter the values of any free independent variables to find a
