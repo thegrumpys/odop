@@ -1,20 +1,18 @@
 # Release Process:
 
 This entry describes the steps necessary to make a new ODOP "release".
-Specifically, this is the process to publish the current development version to Heroku 
-and the documentation to GitHub Pages and SpringDesignSoftware.org.
+Specifically, this is the process to publish the current development version and its documentation to Heroku. 
 
 Ideally, any system downtime affecting the production system should be announced in advance via messageOfTheDay.md
 
 For background regarding "Major.Minor.Patch" see: [ODOP version numbering](/docs/design/VersionNumbers.html)
    
-Remember that if merged to master and pushed, changes to docs will be immediately published on GitHub Pages.
-Until all doc references are fully switched over to SpringDesignSoftware.org,
-documentation references to new features should not be merged to master 
-until immediately before the version containing those features is published to Heroku production.
-This will delay closing the corresponding issue covering those documentation changes. 
-Once documentation references are fully switched over to SpringDesignSoftware.org,
-it will be possible to merge doc updates to master but delay their publication to SpringDesignSoftware.org.  
+Effective with v4.2, documentation (Help, About, design, procedures, etc. but not messageOfTheDay) is hosted on Heroku.
+The build process includes a Harp compile to create html files for end-user viewing. 
+Full-text indexing is done at the same time.
+The html files should be referenced via the CNAME: odop.springdesignsoftware.org/docs and carry the .html suffix as in:
+[Document structure](https://odop.springdesignsoftware.org/docs/design/Docs.html). 
+Still maintained on GitHub Pages, messageOfTheDay can be updated independently of the release process.  
 
 &nbsp;
 
@@ -166,7 +164,7 @@ git push heroku[-staging] +HEAD:master
 1. If maintenance mode was previously enabled, disable maintenance mode:  
 heroku maintenance:off -a odop
 1. Confirm that the http://odop-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version Major.Minor.Patch displays.
-1. Confirm that the https://odop.herokuapp.com/docs website is operational and that documentation displays.
+1. Confirm that the https://odop.springdesignsoftware.org/docs website is operational and that documentation displays.
 
 &nbsp;
 
@@ -178,7 +176,7 @@ C. **DEVELOPMENT ENVIRONMENT**
 1. Create a "master-Major.Minor.Patch" branch, commit and push to origin.
 1. Back in the master update, update client/src/version.js file to next Major.Minor.Patch followed by suffix 'dev' (for example: 2.4dev).
 1. Commit with message "Update version.js to Major.Minor.Patchdev" and push to origin.
-1. In GitHub mark Milestone Major.Minor.Patch closed.
+1. In GitHub, mark Milestone Major.Minor.Patch closed.
 
 &nbsp;
 
