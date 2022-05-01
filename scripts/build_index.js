@@ -33,7 +33,7 @@ function findHtml(folder) {
         var filename = path.join(folder, files[i]);
         var stat = fs.lstatSync(filename);
         if (stat.isDirectory()) {
-            console.log('filename=',filename);
+//            console.log('filename=',filename);
             if (EXCLUDE_DIRECTORIES.includes(filename.substring(HTML_FOLDER.length+1))) continue;
             var recursed = findHtml(filename);
             for (var j = 0; j < recursed.length; j++) {
