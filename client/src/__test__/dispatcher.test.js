@@ -612,7 +612,7 @@ it('middleware seek1 min stress; feasible start; no fixed', () => {
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(6264.506274188985);
     expect(design.model.result.objective_value).toEqual(0.00008792761483306146);
-    expect(design.model.result.termination_condition).toEqual("SEEK COMPLETED");
+    expect(design.model.result.termination_condition).toContain("Seek completed");
     expect(design.model.result.violated_constraint_count).toEqual(3);
 });
 
@@ -647,7 +647,7 @@ it('middleware seek2 min stress; alt start pt, opened constraints, feasible star
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(3242.6699011968067);
     expect(design.model.result.objective_value).toEqual(0.00003020162308916649);
-    expect(design.model.result.termination_condition).toEqual("SEEK COMPLETED");
+    expect(design.model.result.termination_condition).toContain("Seek completed");
     expect(design.model.result.violated_constraint_count).toEqual(2);
 });
 
@@ -676,7 +676,7 @@ it('middleware seek3 min stress; infeasible start; no fixed', () => {
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(3492.473006786572);
     expect(design.model.result.objective_value).toEqual(0.14664179504643934);
-    expect(design.model.result.termination_condition).toEqual("SEEK COMPLETED");
+    expect(design.model.result.termination_condition).toContain("Seek completed");
     expect(design.model.result.violated_constraint_count).toEqual(4);
 });
 
@@ -712,7 +712,7 @@ it('middleware seek4 min pressure; alt start pt, opened constraints, feasible st
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(4658.439766589454);
     expect(design.model.result.objective_value).toEqual(0.00009076101892853454);
-    expect(design.model.result.termination_condition).toEqual("SEEK COMPLETED");
+    expect(design.model.result.termination_condition).toContain("Seek completed");
     expect(design.model.result.violated_constraint_count).toEqual(2);
 });
 
@@ -747,7 +747,7 @@ it('middleware seek5 max force; alt start pt, opened constraints, feasible start
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(9844.738325818731);
     expect(design.model.result.objective_value).toEqual(0.00011182321308065412);
-    expect(design.model.result.termination_condition).toEqual("SEEK COMPLETED");
+    expect(design.model.result.termination_condition).toContain("Seek completed");
     expect(design.model.result.violated_constraint_count).toEqual(2);
 });
 
@@ -791,7 +791,7 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(3575.778800340361);
     expect(design.model.result.objective_value).toEqual(0.00004903209661889629);
-    expect(design.model.result.termination_condition).toEqual("SEEK COMPLETED");
+    expect(design.model.result.termination_condition).toContain("Seek completed");
     expect(design.model.result.violated_constraint_count).toEqual(3);
 });
 
