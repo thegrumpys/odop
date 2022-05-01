@@ -10,7 +10,7 @@ Another alternative could parallel the current use of IOOPT.
 A preference setting (or View menu setting) could reduce the number of columns displayed.
 Specifically, columns displaying constraint violations could get dropped.
 
-See  ideas for a View menu and related discussion of IOCLASS for Sub-Problems in [menu.md](https://github.com/thegrumpys/odop/blob/master/docs/design/menu.md "link to menu.md").
+See  ideas for a View menu and related discussion of IOCLASS for Sub-Problems in [design article on menu(s)](menu.html "Link to design article on menu(s)").
 These include the idea of a checkbox for dropping display of "Calculation Inputs" (a.k.a Constants).
 
 If possible with modest effort, it would be nice if the "Name | Value | Units | Fixed | Min | Max"
