@@ -129,7 +129,7 @@ export const dispatcher = store => next => action => {
                     return true; // found
                 } else {
                     // Calculation Inputs
-                    throw 'In dispatcher.FIX_SYMBOL_VALUE Invalid Calculation Input action=',action;
+                    throw new Error('In dispatcher.FIX_SYMBOL_VALUE Calculation Input is Invalid');
                 }
             } else {
                 return false; // not-found
