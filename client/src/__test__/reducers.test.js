@@ -511,7 +511,7 @@ it('reducers restore output symbol constraints without previous save', () => {
     expect(design.model.symbol_table[sto.FORCE].oldlmax).toEqual(undefined);
     expect(design.model.symbol_table[sto.FORCE].oldcmax).toEqual(undefined);
 
-    store.dispatch(restoreOutputSymbolConstraints("FORCE"));
+    expect(() => {store.dispatch(restoreOutputSymbolConstraints("FORCE"))}).toThrow();
 
     design = store.getState(); // after
     expect(design.model.symbol_table[sto.FORCE].lmin).toEqual(1); // If there is no old lmin/cmin/lmax/cmax then restore doesn't do anything

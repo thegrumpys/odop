@@ -1,7 +1,6 @@
 import { FIXED } from '../actionTypes';
 import { changeInputSymbolValues, changeResultTerminationCondition } from '../actionCreators';
 import { patsh } from './patsh';
-import { pxUpdateObjectiveValue } from './pxUpdateObjectiveValue';
 
 // Search
 export function search(store, objmin, merit) {
@@ -31,7 +30,6 @@ export function search(store, objmin, merit) {
     // Expand PC back into store change actions
     var kd = 0;
     var p = [];
-    var x = [];
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) {
@@ -40,14 +38,13 @@ export function search(store, objmin, merit) {
             } else {
                 p.push(element.value);
             }
-        } else {
-            x.push(element.value);
         }
     }
     store.dispatch(changeInputSymbolValues(p, merit));
     store.dispatch(changeResultTerminationCondition(ncode));
     
-    var obj = pxUpdateObjectiveValue(p, x, store, merit);
+    design = store.getState();
+    var obj = design.model.result.objective_value;
 //    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
     return obj;
 }

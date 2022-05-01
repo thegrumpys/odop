@@ -20,6 +20,12 @@ it('search without merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(reducers, {"user": "USERID0123456789", name: "initialState", model: state}, applyMiddleware(dispatcher));
 
+    // These next statements replace store.dispatch(startup());
+    invokeInit(store);
+    invokeEquationSet(store);
+    setSclDen(store);
+    updateObjectiveValue(store);
+
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
     store.dispatch(changeSymbolValue("THICKNESS", 0.04));
@@ -29,12 +35,7 @@ it('search without merit', () => {
     store.dispatch(changeResultObjectiveValue(0.560511));
 
     var design = store.getState(); // before
-    // These next statements replace store.dispatch(startup());
-    invokeInit(store);
-    invokeEquationSet(store);
-    setSclDen(store);
-    updateObjectiveValue(store);
-    
+
     var obj = search(store, design.model.system_controls.objmin);
 
     var design = store.getState(); // after
@@ -83,6 +84,12 @@ it('search with merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(reducers, {"user": "USERID0123456789", name: "initialState", model: state}, applyMiddleware(dispatcher));
 
+    // These next statements replace store.dispatch(startup());
+    invokeInit(store);
+    invokeEquationSet(store);
+    setSclDen(store);
+    updateObjectiveValue(store);
+
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
     store.dispatch(changeSymbolValue("THICKNESS", 0.04));
@@ -94,12 +101,6 @@ it('search with merit', () => {
 
     var design = store.getState(); // before
 
-    // These next statements replace store.dispatch(startup());
-    invokeInit(store);
-    invokeEquationSet(store);
-    setSclDen(store);
-    updateObjectiveValue(store);
-    
     var SOUGHT = sto.STRESS + 1;
     var SDIR = -1; // MIN
     var temp = design.model.symbol_table[sto.STRESS].value;

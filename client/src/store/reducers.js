@@ -254,8 +254,7 @@ export function reducers(state, action) {
                                 smax: sclden(state.model.system_controls, element.value, cmax, element.sdlim, lmax)
                             });
                         } else {
-                            console.warn('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, No old value exists for restore');
-                            return element;
+                            throw 'In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, No old value exists for restore';
                         }
                     }
                     return element;

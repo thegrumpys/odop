@@ -129,8 +129,7 @@ export const dispatcher = store => next => action => {
                     return true; // found
                 } else {
                     // Calculation Inputs
-                    console.warn('In dispatcher.FIX_SYMBOL_VALUE Invalid Calculation Input action=',action);
-                    return false; // not-found
+                    throw 'In dispatcher.FIX_SYMBOL_VALUE Invalid Calculation Input action=',action;
                 }
             } else {
                 return false; // not-found
