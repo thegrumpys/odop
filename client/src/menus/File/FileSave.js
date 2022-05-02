@@ -157,7 +157,7 @@ class FileSave extends Component {
                     Save
                 </NavDropdown.Item>
                 <Modal show={this.state.modal} onHide={this.onCancel}>
-                    <Modal.Header>
+                    <Modal.Header closeButton>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Save
                         </Modal.Title>

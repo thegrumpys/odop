@@ -87,7 +87,7 @@ class ActionExecute extends Component {
                     Execute&hellip;
                 </NavDropdown.Item>
                 <Modal show={this.state.modal} onHide={this.onCancel}>
-                    <Modal.Header>
+                    <Modal.Header closeButton>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Execute
                         </Modal.Title>

@@ -291,7 +291,7 @@ class SymbolValue extends Component {
                     </InputGroup>
                 </td>
                 <Modal show={this.state.modal} onHide={this.onClose}>
-                    <Modal.Header>
+                    <Modal.Header closeButton>
                         <Modal.Title>
                         {this.props.element.type === "equationset" && (this.props.element.input ? 'Independent Variable' : 'Dependent Variable')} Value Input
                         </Modal.Title>

@@ -118,7 +118,7 @@ class ActionSeek extends Component {
                     Seek (optimize)&hellip;
                 </NavDropdown.Item>
                 <Modal show={this.state.seek_modal} onHide={this.onSeekCancelButton}>
-                    <Modal.Header>
+                    <Modal.Header closeButton>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek (optimize)
                         </Modal.Title>
