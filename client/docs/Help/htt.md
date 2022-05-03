@@ -42,13 +42,14 @@ to become over-specified.
 
 The various [tutorial and demo sessions](tutordemo.html) provide additional insights.   
 
-<!--- ToDo: create a hints article/topic for spring design.  Keep Wire_Dia free.  See guidedDesign --> 
+<!--- ToDo: create a hints article/topic for spring design.  Keep Wire_Dia free.  See guidedDesign.  etc. --> 
 
 See Also:   
  - [Setting Values](settingValues.html)   
  - [Feasibility](feasibility.html)   
  - [Design situations](designSituations.html)   
- - [Getting Started With the Spring Tutorial and Demo](gettingStartedSpring.html)
+ - [Getting Started With the Spring Tutorial and Demo](gettingStartedSpring.html)   
+ - [Intro Pages Overview](/docs/About/introPagesOverview.html)   
 
 ___
 
