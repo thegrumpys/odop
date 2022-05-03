@@ -31,6 +31,7 @@
 * [Trade](Help/trade.html)
 * [Reports](Help/reports.html)
 * [Printing](Help/htt.html#printing)
+* [Help lookup](Help/helpLookup.html)
 * [Hints, Tips and Tricks](Help/htt.html)
 * [AutoSave](Help/autoSave.html)
 * [Available Design Types](Help/DesignTypes)
