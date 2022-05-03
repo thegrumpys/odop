@@ -376,9 +376,26 @@ function getSearchResults(query) {
     if (hit.ref == "undefined") return [];
     let pageMatch = lunr_pages.filter((page) => page.href === hit.ref)[0];
     pageMatch.score = hit.score;
-    pageMatch.blurb_content = createSearchResultBlurb(query, pageMatch.content);
+    pageMatch.matchData = hit.matchData;
+    pageMatch.blurb_content = createSearchResultBlurb(query, pageMatch);
     return [pageMatch];
   });
+}
+
+function createHighlightedSearchResult(result, pageMatch) {
+//  console.log('result=',result,'pageMatch=',pageMatch);
+  let searchResultText = "";
+  Object.keys(result.matchData.metadata).forEach(function (term) {
+      console.log('term=',term);
+      Object.keys(result.matchData.metadata[term]).forEach(function (fieldName) {
+          console.log('fieldName=',fieldName);
+          result.matchData.metadata[term][fieldName].position.forEach((position) => {
+              console.log('position=',position);
+          });
+//          console.log('pageMatch.' + fieldName + '=',pageMatch[fieldName]);
+      });
+  });
+  return searchResultText;
 }
 
 if (!String.prototype.matchAll) {
@@ -399,16 +416,19 @@ if (!String.prototype.matchAll) {
   };
 }
 
-function createSearchResultBlurb(query, pageContent) {
+function createSearchResultBlurb(query, pageMatch) {
   const searchQueryRegex = new RegExp(createQueryStringRegex(query), "gmi");
+  console.log('searchQueryRegex=',searchQueryRegex);
   const searchQueryHits = Array.from(
-    pageContent.matchAll(searchQueryRegex),
+    pageMatch.content.matchAll(searchQueryRegex),
     (m) => m.index
   );
+  console.log('searchQueryHits=',searchQueryHits);
   const sentenceBoundaries = Array.from(
-    pageContent.matchAll(SENTENCE_BOUNDARY_REGEX),
+    pageMatch.content.matchAll(SENTENCE_BOUNDARY_REGEX),
     (m) => m.index
   );
+  console.log('sentenceBoundaries=',sentenceBoundaries);
   let searchResultText = "";
   let lastEndOfSentence = 0;
   for (const hitLocation of searchQueryHits) {
@@ -418,7 +438,7 @@ function createSearchResultBlurb(query, pageContent) {
           const startOfSentence = i > 0 ? sentenceBoundaries[i - 1] + 1 : 0;
           const endOfSentence = sentenceBoundaries[i];
           lastEndOfSentence = endOfSentence;
-          parsedSentence = pageContent.slice(startOfSentence, endOfSentence).trim();
+          parsedSentence = pageMatch.content.slice(startOfSentence, endOfSentence).trim();
           searchResultText += `${parsedSentence} ... `;
           break;
         }
@@ -431,9 +451,10 @@ function createSearchResultBlurb(query, pageContent) {
     }
     if (searchResultWords.length >= MAX_SUMMARY_LENGTH) break;
   }
+  let style_color = 'style="color:' + getColorForSearchResult(pageMatch.score) + '"'
   return ellipsize(searchResultText, MAX_SUMMARY_LENGTH).replace(
     searchQueryRegex,
-    "<strong>$&</strong>"
+    `<strong ${style_color}>$&</strong>`
   );
 }
 
@@ -496,16 +517,19 @@ function ellipsize(input, maxLength) {
 }
 
 function getColorForSearchResult(score) {
-  const warmColorHue = 171;
-  const coolColorHue = 212;
-  return adjustHue(warmColorHue, coolColorHue, score);
+  const warmColorSat = 100;
+  const coolColorSat = 30;
+  return adjustSat(warmColorSat, coolColorSat, score);
 }
 
-function adjustHue(hue1, hue2, score) {
-  if (score > 3) return `hsl(${hue1}, 100%, 50%)`;
-  const hueAdjust = (parseFloat(score) / 3) * (hue1 - hue2);
-  const newHue = hue2 + Math.floor(hueAdjust);
-  return `hsl(${newHue}, 100%, 50%)`;
+function adjustSat(sat1, sat2, score) {
+  var satAdjust = 0.0;
+  var newSat = sat1;
+  if (score <= 3) {
+    satAdjust = (parseFloat(score) / 3) * (sat1 - sat2);
+    newSat = sat2 + Math.floor(satAdjust);
+  }
+  return `hsl(360, ${newSat}%, 50%)`;
 }
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
