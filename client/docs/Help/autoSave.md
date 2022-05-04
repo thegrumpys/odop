@@ -2,18 +2,18 @@
 
 This topic covers the ODOP AutoSave feature and recovery of a design from AutoSave data.  
 
-**On this page:**  
-[Background](autoSave.html#Background)  
-[ODOP features impacting AutoSave data](autoSave.html#CreateDelete)  
-[Recovering a design from AutoSave data](autoSave.html#Recovery)  
-[Notes](autoSave.html#Notes)  
+### On this page:   
+ - [Background](autoSave.html#Background)  
+ - [ODOP features impacting AutoSave data](autoSave.html#CreateDelete)  
+ - [Recovering a design from AutoSave data](autoSave.html#Recovery)  
+ - [Notes](autoSave.html#Notes)  
 
 ___
 
 <a id="Background"></a>  
 ___
 
-**Background**  
+## Background   
 
 Power failure, system crash or loss of network connectivity prevent a Save operation and 
 potentially incur loss of a user's work since the previous Save operation.
@@ -43,7 +43,7 @@ ___
 <a id="CreateDelete"></a>  
 ___
 
-**ODOP features impacting AutoSave data**  
+## ODOP features impacting AutoSave data   
 
 
 - Action : Search, Seek, Trade, Select Size and Select Catalog 
@@ -65,7 +65,7 @@ ___
 <a id="Recovery"></a>  
 ___
 
-**Recovering a design from AutoSave data**  
+## Recovering a design from AutoSave data   
 
 If AutoSave data exists at the time the app starts, 
 a blue pop-up message will indicate that an AutoSave design is available
@@ -83,7 +83,7 @@ ___
 <a id="Notes"></a>  
 ___
 
-**Notes**  
+## Notes   
 
 The AutoSave feature is not intended to be used for long term storage of design information.
 Use File : Save, File : SaveAs or File : Export to save the design permanently.

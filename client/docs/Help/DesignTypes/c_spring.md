@@ -9,16 +9,16 @@ provides important supplemental information.
 
 ___
 
-**On this page:**  
-[Compression spring force-deflection diagram](c_spring.html#c_springFD_Diag)  
-[Compression spring force-deflection point names](c_spring.html#c_springFD_Names)  
-[Independent Variable names](c_spring.html#c_springIV_Names)  
-[Dependent Variable names](c_spring.html#c_springDV_Names)  
-[Calculation Input names](c_spring.html#c_springCalcInputNames)  
-[Values in reports](c_spring.html#c_springOtherValues)  
-[Constraints unique to compression springs](c_spring.html#c_springConstraints)  
-[Compression spring end types](c_spring.html#c_springEndTypes)  
-[Buckling](c_spring.html#c_springBuckling)  
+### On this page:   
+ - [Compression spring force-deflection diagram](c_spring.html#c_springFD_Diag)  
+ - [Compression spring force-deflection point names](c_spring.html#c_springFD_Names)  
+ - [Independent Variable names](c_spring.html#c_springIV_Names)  
+ - [Dependent Variable names](c_spring.html#c_springDV_Names)  
+ - [Calculation Input names](c_spring.html#c_springCalcInputNames)  
+ - [Values in reports](c_spring.html#c_springOtherValues)  
+ - [Constraints unique to compression springs](c_spring.html#c_springConstraints)  
+ - [Compression spring end types](c_spring.html#c_springEndTypes)  
+ - [Buckling](c_spring.html#c_springBuckling)  
 
 &nbsp;
 ___
@@ -26,7 +26,7 @@ ___
 <a id="c_springFD_Diag"></a>  
 ___
 
-**Compression spring force-deflection diagram**   
+## Compression spring force-deflection diagram    
 
     Force_Solid -|---------------/.
                  |              / .
@@ -56,7 +56,7 @@ ___
 <a id="c_springFD_Names"></a>  
 ___
 
-**Compression spring force-deflection point names**   
+## Compression spring force-deflection point names    
 
  The compression spring force-deflection points and associated names are:
 
@@ -82,7 +82,7 @@ ___
 <a id="c_springIV_Names"></a>  
 ___
 
-**Independent Variable names:**   
+## Independent Variable names:    
 
     Wire_Dia     -  wire diameter
     
@@ -103,7 +103,7 @@ ___
 <a id="c_springDV_Names"></a>  
 ___
 
-**Dependent Variable names**:
+## Dependent Variable names:   
 
     Mean_Dia     -  mean diameter of spring coil in free condition
                      (OD_Free + ID_Free)/2
@@ -175,7 +175,7 @@ ___
 <a id="c_springCalcInputNames"></a>  
 ___
 
-**Calculation Input names**  
+## Calculation Input names   
 
     Spring_Type   -  character string used only as a label
     
@@ -256,7 +256,7 @@ ___
 <a id="c_springOtherValues"></a>  
 ___
 
-**Values in reports**   
+## Values in reports    
 
 Other values calculated and displayed in the Reports include:
 
@@ -288,7 +288,7 @@ ___
 <a id="c_springConstraints"></a>  
 ___
 
-**Constraints unique to compression springs:**   
+## Constraints unique to compression springs:    
 
 Slenderness is a compression spring's ratio of free length (L\_Free) to
 mean coil diameter (Mean\_Dia).  If this ratio exceeds 4 for a
@@ -312,7 +312,7 @@ ___
 <a id="c_springEndTypes"></a>  
 ___
 
-**End Types**   
+## End Types    
 
 ODOP:Spring currently implements six spring end types for compression springs. 
 In addition, the user can define specialized end conditions.
@@ -386,7 +386,7 @@ ___
 <a id="c_springBuckling"></a>  
 ___
 
-**Buckling**   
+## Buckling    
 
 A compression spring intended for operation without lateral support
 should have a ratio of free length to coil diameter (Slenderness) less
@@ -414,7 +414,7 @@ of the documentation.
 
 &nbsp;
 
-[Design Types](/docs/Help/DesignTypes)   
-[Spring Design Topics](/docs/Help/SpringDesign)   
-[Help](/docs/Help)   
+ - [Design Types](/docs/Help/DesignTypes)   
+ - [Spring Design Topics](/docs/Help/SpringDesign)   
+ - [Help](/docs/Help)   
 

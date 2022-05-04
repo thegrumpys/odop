@@ -9,16 +9,16 @@ provides important supplemental information.
 
 ___
 
-**On this page:**  
-[Torsion spring moment-deflection diagram](t_spring.html#t_springFD_Diag)  
-[Torsion spring moment-deflection point names](t_spring.html#t_springFD_Names)  
-[Torsion spring dimensions](t_spring.html#t_springDims)  
-[Independent Variable names](t_spring.html#t_springIV_Names)  
-[Dependent Variable names](t_spring.html#t_springDV_Names)  
-[Calculation Input names](t_spring.html#t_springCalcInputNames)  
-[Values in reports](t_spring.html#t_springOtherValues)  
-[Torsion spring end types](t_spring.html#t_springEndTypes)  
-<!--- [Constraints unique to torsion springs](t_spring.html#t_springConstraints)  -->
+### On this page:   
+ - [Torsion spring moment-deflection diagram](t_spring.html#t_springFD_Diag)  
+ - [Torsion spring moment-deflection point names](t_spring.html#t_springFD_Names)  
+ - [Torsion spring dimensions](t_spring.html#t_springDims)  
+ - [Independent Variable names](t_spring.html#t_springIV_Names)  
+ - [Dependent Variable names](t_spring.html#t_springDV_Names)  
+ - [Calculation Input names](t_spring.html#t_springCalcInputNames)  
+ - [Values in reports](t_spring.html#t_springOtherValues)  
+ - [Torsion spring end types](t_spring.html#t_springEndTypes)  
+<!---  - [Constraints unique to torsion springs](t_spring.html#t_springConstraints)  -->
 
 &nbsp;
 ___
@@ -26,7 +26,7 @@ ___
 <a id="t_springFD_Diag"></a>  
 ___
 
-**Torsion spring moment-deflection diagram**   
+## Torsion spring moment-deflection diagram   
 
                  |                / 
          M_2 ----|---------------/  
@@ -58,7 +58,7 @@ ___
 <a id="t_springFD_Names"></a>  
 ___
 
-**Torsion spring moment-deflection point names**   
+## Torsion spring moment-deflection point names   
 
  The torsion spring moment-deflection points and associated names are:
 
@@ -87,7 +87,7 @@ ___
 <a id="t_springDims"></a>  
 ___
 
-**Torsion spring dimensions**  
+## Torsion spring dimensions   
 
 The following diagram may be of some assistance in interpreting the names 
 associated with various dimensions of a torsion spring.  
@@ -101,7 +101,7 @@ ___
 <a id="t_springIV_Names"></a>  
 ___
 
-**Independent Variable names:**   
+## Independent Variable names:   
 
     Wire_Dia     -  wire diameter
     
@@ -122,7 +122,7 @@ ___
 <a id="t_springDV_Names"></a>  
 ___
 
-**Dependent Variable names**:
+## Dependent Variable names:   
 
     Mean_Dia       -  mean diameter of spring coil in free condition
                      (OD_free + ID_Free)/2 
@@ -187,7 +187,7 @@ ___
 <a id="t_springCalcInputNames"></a>  
 ___
 
-**Calculation Input names**   
+## Calculation Input names   
 
     Spring_Type    -  character string used only as label
     
@@ -271,7 +271,7 @@ ___
 <a id="t_springOtherValues"></a>  
 ___
 
-**Values in reports**   
+## Values in reports   
 
 Other values calculated and displayed in the Reports include:
 
@@ -301,7 +301,7 @@ ___
 <a id="t_springEndTypes"></a>  
 ___
 
-**End Types**   
+## End Types   
 
 For torsion springs, the Calculation Input End_Type has the following possible values:
 
@@ -321,9 +321,9 @@ This diagram  may be helpful.
 
 &nbsp;
 
-[Design Types](/docs/Help/DesignTypes)   
-[Spring Design Topics](/docs/Help/SpringDesign)   
-[Help](/docs/Help)   
+ - [Design Types](/docs/Help/DesignTypes)   
+ - [Spring Design Topics](/docs/Help/SpringDesign)   
+ - [Help](/docs/Help)   
 
 
 &nbsp;

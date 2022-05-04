@@ -24,9 +24,12 @@ For example: tors*
 ### Restrict term matching to the topic title 
 For example: title:demo   
 
-Note:   
+Notes:   
 By default, "fuzzy" matching is enabled to the level of one character. 
 Adding, removing, changing or transposing a character in the word is considered a match.   
+
+Adding quotes and operators like AND & OR will not produce the desired results. 
+To lookup a phrase, put a + at the front of each word.   
 
 See Also: 
  - [LUNR, Search Made Simple Guide](https://lunrjs.com/guides/searching.html)   
