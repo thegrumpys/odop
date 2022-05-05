@@ -34,7 +34,7 @@ See:
 for details on starting the spring design tutorial and demo sessions.   
  &nbsp; 
   
-Topics covered in the various sections of the tutorial include:  
+### Topics covered in the various sections of the tutorial include:   
 
 Name | &nbsp; | Description  
 --- | --- | ---  
@@ -57,7 +57,7 @@ tutor9 |   | Preferences (internal variables) and Properties (notes saved with d
  reference book problems where the ODOP:Spring results are compared to 
  the reference book results in order to validate results from the program.  
  
- Demonstration examples available (* or planned) include:
+### Demonstration examples available include:   
 
 Name | Description | &nbsp;  
 --- | --- | ---  

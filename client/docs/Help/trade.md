@@ -92,6 +92,7 @@ restrictive constraints than the starting point, even if all the weights
 assigned are negative.
 
 #### Relax the violated constraints to their existing violations.   
+ - A simple change of constraint levels such that existing constraint violations become zero.
 
 &nbsp;
 

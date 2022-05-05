@@ -50,13 +50,15 @@ will produce the desired results, it is necessary to have an estimate of
 the optimum of the merit function. SEEK will form this estimate by executing a
 preliminary search. 
 
-## Seek algorithm tuning parameters
+## Seek algorithm settings 
+
+Adjust internal control settings with the [File : Preferences](menus.html#FilePreferences) menu item. 
 
 The value of the internal variable MFN_WT will have some impact on the
 results produced by SEEK. 
 Refer to the documentation page on [Search](search.html) 
 for additional information on adjusting internal variables 
-with the <b>File : Preferences</b> menu item.  
+with the [File : Preferences](menus.html#FilePreferences) menu item.  
 
 &nbsp;  
 

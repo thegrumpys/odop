@@ -1,7 +1,7 @@
 # Search
 
 The term "Search" is used in the sense of "Search for a solution". 
-The ODOP Search feature (<b>Action : Search</b> menu item or Search button) 
+The ODOP Search feature (**Action : Search** menu item or Search button) 
 is used to find a feasible design. 
 In the sense that it is a manual operation used to find a solution,
 Search is conceptually similar to a manual recalculation operation in a spreadsheet program.   
@@ -20,9 +20,9 @@ It is a "logic" method of compact implementation.  It is "robust"
 
 &nbsp;
 
-## Search algorithm tuning parameters
+## Search algorithm settings 
 
-Adjust internal variables with the <b>File : Preferences</b> menu item. 
+Adjust internal control settings with the [File : Preferences](menus.html#FilePreferences) menu item. 
 
 The search routine returns a line of text (Termination Message) 
 indicating the reason for terminating the search. 
@@ -33,7 +33,7 @@ function value less than OBJMIN.
 *   MAXIT &nbsp; - the search terminated by exceeding the maximum number of 
 iterations.
 
-Return codes unique to SEARCH1 are:
+Return codes unique to SEARCH are:
 
 *  DELMIN  - search terminated due to cutting step size to a value 
 smaller than DELMIN.  This usually indicates that no 
@@ -45,7 +45,7 @@ steps (iterations) of the search algorithm.
 The remaining constraint violations (if any) may be quite random and not the 
 result of extensive refinement by the search.
 
-Preferences (Internal quantities; see: **File : Preferences**) used by SEARCH1 are:
+[File : Preferences](menus.html#FilePreferences) used by SEARCH are:
 
 * MAXIT - maximum number of search pattern moves allowed before a 
 notification is sent to the user  (default=100). 
