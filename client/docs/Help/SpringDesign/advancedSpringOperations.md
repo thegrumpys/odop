@@ -1,6 +1,6 @@
 # Advanced Spring Operations
 
-**DESIGN TO STRESS**   
+## Design to Stress   
  If you want to avoid dealing with the ODOP:Spring "factor of safety" approach
  and design a spring in a more traditional "design to specific stress"
  approach, this is possible.
@@ -40,7 +40,7 @@
  the time required to execute the search.
 
 
-**PROP_CALC_METHOD**   
+## Prop_Calc_Method   
  The value of Prop\_Calc\_Method controls how material properties and
  allowable stresses are determined and used.
 
@@ -63,7 +63,7 @@
 
  Refer to additional discussion in the [MATERIALS](materials.html) section.
  
-**HOT WOUND**   
+## Hot Wound   
  The easiest way to design a hot wound spring is to open a start point
  that is already set up for hot wound. 
  Sample compression spring hot wound startup designs supplied with ODOP:Spring 

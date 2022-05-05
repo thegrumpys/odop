@@ -1,15 +1,14 @@
 # Features
 
-# Open Design Optimization Platform &nbsp; (ODOP)   
+## Open Design Optimization Platform &nbsp; (ODOP)   
 
-ODOP is a web software application (web app) currently under development.
-It provides a number of features and capabilities to facilitate the analysis 
+ODOP is a web software application (web app) that 
+provides features and capabilities to facilitate the analysis 
 and design of a broad range of problems that have a mathematical model available. 
 
-# ODOP is:
+## ODOP is:
 
-
-* Open Source Software  
+### Open Source Software  
 
 The ODOP software is being developed as open source software. 
  The source code is freely available under the (permissive) MIT License.
@@ -19,7 +18,7 @@ The ODOP software is being developed as open source software.
  web servers and allow free use of the software by the general public.
 
 
-* Browser Based and Highly Scalable  
+### Browser Based and Highly Scalable  
 
 The ODOP software is expected to run on most modern web browsers.
 A very broad range of hardware and operating systems will be able to utilize the software.
@@ -40,7 +39,7 @@ these operations happen infrequently and at times that the user is relatively le
 slight delays in program operation.
 
 
-* Responsive to different screen sizes   
+### Responsive to different screen sizes   
 
 Developed as a "responsive" web app, the software will change its
 screen layout and input behavior in response to the capabilities of the user's device.
@@ -48,7 +47,7 @@ Note that while operation on a cell phone may be possible,
 the scrolling necessary to accommodate screen size limitations may impact productivity.  
 
 
-* Capable of directly producing the desired solution.
+### Capable of directly producing the desired solution.
 
 The ODOP software can eliminate the iterative analysis process that is common with more conventional
 approaches to design.  While certainly capable of analyzing the
@@ -56,7 +55,7 @@ performance of an existing design, ODOP is at its best when used to
 develop solutions to difficult and highly constrained original design problems.
  
  
-* Analysis is just the beginning ...   
+### Analysis is just the beginning ...   
 
  The user's ability to enter independent variables and compute dependent variables 
  is the most basic of the software's capabilities.
@@ -64,7 +63,7 @@ develop solutions to difficult and highly constrained original design problems.
  basically guessing values of inputs in order to produce the desired values of outputs.
  
  
-* Capable of inversion of design equations
+### Capable of inversion of design equations
 
  ODOP is very versatile in its approach to design because it has
  the capability to invert the dependent-independent relationships of the
@@ -78,7 +77,7 @@ develop solutions to difficult and highly constrained original design problems.
  consistent combination of specifications on the problem.
 
 
-* Selection of design parameters within constraints
+### Selection of design parameters within constraints
 
  The ODOP Search feature selects appropriate values for independent variables.
  In the spring design example, these might include selecting quantities such as wire
@@ -89,7 +88,7 @@ develop solutions to difficult and highly constrained original design problems.
  inside or outside diameters, etc.  
 
 
-* Optimization
+### Optimization
 
  ODOP contains a powerful numerical search capability that probes for
  the design that is specified until a satisfactory solution is found.  The
@@ -102,7 +101,7 @@ develop solutions to difficult and highly constrained original design problems.
  not commonly found in other design methods or programs.
 
 
-* Exploration of available solutions
+### Exploration of available solutions
 
  ODOP has features that allow the designer to quickly probe the range
  of solutions available within constraints. 
@@ -115,7 +114,7 @@ develop solutions to difficult and highly constrained original design problems.
  expressed by the various other constraints on the problem.
 
 
-* Guidance in restructuring goals when satisfactory solutions can't be found
+### Guidance in restructuring goals when satisfactory solutions can't be found
 
  If ODOP determines that the designer's goals (as expressed by his
  constraints on the problem) cannot be met, it is necessary for the
@@ -129,7 +128,7 @@ develop solutions to difficult and highly constrained original design problems.
  that is most consistent with his original objectives.
 
 
-* Material selection tables
+### Material selection tables
 
  ODOP may contain tables of material properties for many commonly used materials.
  In the spring design example, with most spring materials, 
@@ -140,7 +139,7 @@ develop solutions to difficult and highly constrained original design problems.
  refer to tables and charts of material properties.  
 
 
-* Selection from standard size tables or catalogs of stock designs
+### Selection from standard size tables or catalogs of stock designs
 
  Once a designer has established a custom design that satisfies the objectives, 
  ODOP has a feature that can select from a table of standard sizes.
@@ -154,7 +153,7 @@ develop solutions to difficult and highly constrained original design problems.
  MS24586 (SAE-AS24586) for extension springs.
  
  
-* Save and recovery of designs
+### Save and recovery of designs
 
  ODOP can save designs into a database (design library) for later recovery. 
  This feature has many uses.  A designer can save a specific design for
@@ -165,7 +164,7 @@ develop solutions to difficult and highly constrained original design problems.
  including names and phone numbers, may be saved with each design.
 
 
-* On-line help
+### On-line help
 
  ODOP maintains its complete user's manual on-line and
  available to the user at all times.  A request for "HELP" will be
@@ -176,7 +175,7 @@ develop solutions to difficult and highly constrained original design problems.
  information is obtained.
 
 
-* Tutorial
+### Tutorial
 
  The spring design example comes with carefully structured lessons to help 
  a new user get started quickly. 

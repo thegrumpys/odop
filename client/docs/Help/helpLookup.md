@@ -1,6 +1,6 @@
 # Help Lookup   
 
-ODOP provides full-text indexing of its on-line Help.   
+ODOP provides a full-text index of its on-line Help.   
 
 Enter a word or phrase into the "Help lookup" text entry box at the top of the main page. 
 Press the Enter key or select the magnifiying glass icon to produce a ranked list of 

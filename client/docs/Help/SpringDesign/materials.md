@@ -1,7 +1,7 @@
 # Spring Materials and Material Properties
 
    
-**MATERIALS**   
+## Materials   
 Spring wire and bar materials available in the default material table supplied with ODOP:Spring
 include:
 

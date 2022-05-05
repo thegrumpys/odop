@@ -59,7 +59,7 @@ and its default design called **Startup**.
 
 &nbsp;
 
-**A Quick Tour of the Main Page**
+## A Quick Tour of the Main Page   
 
 Have a look at the main menu (**File &nbsp; Action &nbsp; View &nbsp; Help**) 
 highlighted inside the red oval.
@@ -157,7 +157,7 @@ Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.
 
 &nbsp;
 
-**USING HELP**   
+## Using Help   
 
 The quick tour of the main page is now complete.
 This is a good time to get a better look at what is available 
@@ -174,9 +174,14 @@ You can switch back and forth between the browser tabs.
   
  On-line documentation for ODOP:Spring appears in the Spring Design topic.
 
+## Help Lookup   
+
+A full-text index of the on-line help is available.
+For more detail see: [Help Lookup](/docs/Help/helpLookup.html) 
+
 &nbsp;
 
-**USING THE TUTORIAL AND DEMO FACILITY**   
+## Using the Tutorial and Demo Facility   
 
  The tutorial is designed to introduce new users to ODOP concepts, 
  features and menus. 

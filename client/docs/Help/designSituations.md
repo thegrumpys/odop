@@ -34,7 +34,7 @@ in order to produce a useful result with Seek.
 
 &nbsp;
 
-**Examples**
+## Examples   
 
 In the Rectangular Solid design type that provides a simple demonstration case, 
 an over-specified situation can be created by establishing a minimum constraint on Volume

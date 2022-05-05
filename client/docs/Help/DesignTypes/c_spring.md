@@ -131,7 +131,7 @@ ___
     
     Weight       -  weight of spring; wire density * wire volume
     
-    Sring_Index  -  spring index;  the ratio Mean_Dia/Wire_Dia
+    Spring_Index  -  spring index;  the ratio Mean_Dia/Wire_Dia
     
     Force_Solid  -  force produced in solid condition
     

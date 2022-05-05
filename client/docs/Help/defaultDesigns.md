@@ -8,7 +8,7 @@ While these default designs named "Startup" utilize US customary units (inches, 
 you can select an available system provided design with "metric" in the name in order to
 utilize metric units (mm, Newtons).   
 
-**Compression spring default designs**   
+## Compression spring default designs   
 ![Compression spring default designs](/docs/Help/png/FileOpen_defaultDesigns.png "File : Open default designs")  
 
 When saving designs into a private section of the ODOP design library, 
