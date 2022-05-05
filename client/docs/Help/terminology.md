@@ -342,7 +342,8 @@ ___
 The term "Search" is used in the sense of "Search for a solution". 
 The ODOP Search feature (<b>Action : Search</b> menu item or Search button) 
 is used to find a feasible design. 
-The action of Search is conceptually similar to a manual recalculation operation in a spreadsheet program.   
+In the sense that it is a manual operation used to find a solution,
+Search is conceptually similar to a manual recalculation operation in a spreadsheet program.   
 
 The [Search](search.html) algorithm manipulates the values of independent variables 
 so as to minimize the Objective Value. 

@@ -1,17 +1,28 @@
 # Search
 
+The term "Search" is used in the sense of "Search for a solution". 
+The ODOP Search feature (<b>Action : Search</b> menu item or Search button) 
+is used to find a feasible design. 
+In the sense that it is a manual operation used to find a solution,
+Search is conceptually similar to a manual recalculation operation in a spreadsheet program.   
+
 The **Action : Search** menu invokes the SEARCH algorithm.
 SEARCH will alter the values of any free independent variables to find a
 design that satisfies all constraints while also achieving the desired
 value for each fixed dependent variable.
 
-SEARCH operates to minimize the value of the objective function. 
+SEARCH operates to minimize the objective value. 
 The current design is used as a starting point.
 
 Only one SEARCH algorithm is available in the software at this time.
-
-* SEARCH1 -  a "logic" method of compact implementation.  It is "robust" 
+It is a "logic" method of compact implementation.  It is "robust" 
 (i.e. usually finds the right answer) but not always efficient.
+
+&nbsp;
+
+## Search algorithm tuning parameters
+
+Adjust internal variables with the <b>File : Preferences</b> menu item. 
 
 The search routine returns a line of text (Termination Message) 
 indicating the reason for terminating the search. 

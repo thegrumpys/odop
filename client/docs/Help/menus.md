@@ -1,36 +1,36 @@
-# ODOP Menus
+# ODOP Menus 
 
 This topic covers the ODOP menu structure. 
 
 ### On this page:   
- - [ODOP logo](menus.html#ODOPlogo)  
- - [Sign In...](menus.html#SignIn)  
+ - [ODOP logo](menus.html#ODOPlogo) 
+ - [Sign In...](menus.html#SignIn) 
 
- - [File : Open...](menus.html#FileOpen)  
- - [File : Save](menus.html#FileSave)  
- - [File : Save As...](menus.html#FileSaveAs)  
- - [File : Delete...](menus.html#FileDelete)  
- - [File : Import...](menus.html#FileImport)  
- - [File : Export](menus.html#FileExport)  
- - [File : Preferences](menus.html#FilePreferences)  
- - [File : Properties](menus.html#FileProperties)  
+ - [File : Open...](menus.html#FileOpen) 
+ - [File : Save](menus.html#FileSave) 
+ - [File : Save As...](menus.html#FileSaveAs) 
+ - [File : Delete...](menus.html#FileDelete) 
+ - [File : Import...](menus.html#FileImport) 
+ - [File : Export](menus.html#FileExport) 
+ - [File : Preferences](menus.html#FilePreferences) 
+ - [File : Properties](menus.html#FileProperties) 
 
- - [Action : Search](menus.html#ActionSearch)  
- - [Action : Seek...](menus.html#ActionSeek)  
- - [Action : Trade...](menus.html#ActionTrade)  
- - [Action : Select Size...](menus.html#ActionSelectSize)  
- - [Action : Select Catalog...](menus.html#ActionSelectCatalog)  
- - [Action : Execute...](menus.html#ActionExecute)  
+ - [Action : Search](menus.html#ActionSearch) 
+ - [Action : Seek...](menus.html#ActionSeek) 
+ - [Action : Trade...](menus.html#ActionTrade) 
+ - [Action : Select Size...](menus.html#ActionSelectSize) 
+ - [Action : Select Catalog...](menus.html#ActionSelectCatalog) 
+ - [Action : Execute...](menus.html#ActionExecute) 
 
- - [View : Advanced](menus.html#ViewAdvanced)  
- - [View : Calculator](menus.html#ViewCalculator)  
- - [View : Reports](menus.html#ViewReports)  
+ - [View : Advanced](menus.html#ViewAdvanced) 
+ - [View : Calculator](menus.html#ViewCalculator) 
+ - [View : Reports](menus.html#ViewReports) 
 
- - [Help : Message of the Day](menus.html#HelpMotD)  
- - [Help : Index](menus.html#HelpIndex)  
- - [Help : Demo...](menus.html#HelpDemo)  
- - [Help : Tutorial...](menus.html#HelpTutorial)  
- - [Help : About](menus.html#HelpAbout)  
+ - [Help : Message of the Day](menus.html#HelpMotD) 
+ - [Help : Index](menus.html#HelpIndex) 
+ - [Help : Demo...](menus.html#HelpDemo) 
+ - [Help : Tutorial...](menus.html#HelpTutorial) 
+ - [Help : About](menus.html#HelpAbout) 
 
 ___
 

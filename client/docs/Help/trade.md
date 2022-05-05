@@ -1,15 +1,24 @@
-# TRADE OVERVIEW
+# TRADE 
+
+## Trade Overview   
+
  When a design problem is first submitted to the search, the ability of the
  design to meet the stated constraints will be determined.  If the result is
- not feasible, it is necessary for the designer to restructure the design in
- some way.  One approach is to change the design in some qualitative way,
+ not feasible, it is necessary for the designer to restructure the design 
+ objectives in  some way. 
+ One approach is to change the design in some qualitative way,
  for example, to select stronger (and probably more expensive) materials. 
  But first, it makes sense to investigate any available compromise where one or more of the
  original objectives is sacrificed in order to maintain the others.
 
  The TRADE feature may be used to identify those constraints that
  are most leveraged and guide the designer to restructure his goals in a way
- that is most consistent with the original objectives.
+ that is most consistent with the original objectives. 
+ TRADE provides decision support for relaxation of constraints. 
+ It functions to help locate the "nearest" feasible point when a feasible
+ solution is not available with the existing set of constraints. 
+ "Nearest" in this case means the feasible point reached with the least total 
+ relaxation of constraints. 
 
  TRADE is similar to SEEK in that it automatically uses the capabilities
  of FIX and SEARCH and some math on the constraint violations to guide a
@@ -43,14 +52,9 @@
  should be larger than the largest percentage constraint violation.
  Perhaps even larger than the sum of all the constraint violations.
 
+&nbsp;
 
-# TRADE
-
- TRADE provides decision support for relaxation of constraints.  TRADE
- functions to help locate the "nearest" feasible point when a feasible
- solution is not available with the existing set of constraints.  "Nearest"
- in this case means the feasible point reached with the least total 
- relaxation of constraints.
+## Trade operation 
 
  TRADE uses a quadratic extrapolation scheme to take steps in the
  "violated constraint space" to find the nearest feasible point in a
@@ -71,13 +75,15 @@
  be of greater interest.
 
    
-# The strategy options:
+### The strategy options:
 
-* PROPORTIONAL - move constraint levels in a proportion determined by their existing violations (as a measure of their influence).
+#### PROPORTIONAL 
+ - move constraint levels in a proportion determined by their existing violations (as a measure of their influence).
 
-* ARBITRARY - accept user weights for each of the violated constraints to determine the relaxation direction.
+#### ARBITRARY 
+ - accept user weights for each of the violated constraints to determine the relaxation direction.
 
-The weights assigned may be either positive or negative.  A positive
+ - The weights assigned may be either positive or negative. A positive
 weight implies relaxation of a constraint, while a negative weight
 implies the movement of a constraint in a more restrictive direction.
 However, the final extrapolation will always be in the direction of
@@ -85,12 +91,17 @@ feasibility.  that is, the point reached by trade will always have less
 restrictive constraints than the starting point, even if all the weights
 assigned are negative.
 
-* Relax the violated constraints to their existing violations.
+#### Relax the violated constraints to their existing violations.   
 
-   
+&nbsp;
+
+### Step size   
+
  After the strategy is selected, TRADE will then ask the user for a
  percentage step size.  A default value determined from the existing
  constraint violations will be suggested.
+
+### Extrapolation   
 
  TRADE will then take a (full) step in the relaxation direction by this
  percentage.  A search is performed.  If the result is feasible, TRADE
@@ -110,6 +121,6 @@ assigned are negative.
  another search and then allow the user to refine the result by returning to
  the strategy selection phase of the process.
 
- Additional information on TRADE is available in the tutorial and demo features. 
+ Additional information on TRADE is available in the [Tutorial and Demo](/docs/Help/tutordemo.html) feature. 
 
 [Help](/docs/Help)
