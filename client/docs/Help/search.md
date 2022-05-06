@@ -1,4 +1,4 @@
-# Search
+# Search 
 
 The term "Search" is used in the sense of "Search for a solution". 
 The ODOP Search feature (**Action : Search** menu item or Search button) 
@@ -20,50 +20,58 @@ It is a "logic" method of compact implementation.  It is "robust"
 
 &nbsp;
 
-## Search algorithm settings 
-
-Adjust internal control settings with the [File : Preferences](menus.html#FilePreferences) menu item. 
+## Messages returned by Search   
 
 The search routine returns a line of text (Termination Message) 
 indicating the reason for terminating the search. 
-Two notifications are common to all search routines.
 
-*   OBJMIN - the search terminated by finding a point with an objective 
-function value less than OBJMIN.   
-*   MAXIT &nbsp; - the search terminated by exceeding the maximum number of 
-iterations.
+#### OBJMIN   
+**Search terminated when design reached feasibility (Objective value is less than OBJMIN)**   
+The search terminated by finding a design with an objective value less than OBJMIN. 
+Only constraint violations contribute to the objective value. 
+There is no optimization aspect.  
 
-Return codes unique to SEARCH are:
+#### MAXIT   
+**Search terminated when iteration count exceeded the maximum limit (MAXIT)**   
+The search terminated by exceeding the maximum number of iterations.
 
-*  DELMIN  - search terminated due to cutting step size to a value 
-smaller than DELMIN.  This usually indicates that no 
-feasible solution is available. 
+#### DELMIN   
+**Search terminated when step size reached the minimum limit (DELMIN)**   
+The search terminated due to cutting step size to a value smaller than DELMIN. 
+This usually indicates that no feasible solution is available. 
 Perhaps the use of the TRADE command would be appropriate.
 
-*  SHORT SEARCH - indicates that the search terminated after very few 
-steps (iterations) of the search algorithm. 
-The remaining constraint violations (if any) may be quite random and not the 
-result of extensive refinement by the search.
+#### SHORT SEARCH   
+**Low iteration count may produce low precision results.**   
+The search terminated terminated after very few steps (iterations) of the search algorithm. 
+As the results have not benefited from extensive refinement by the search, 
+the remaining constraint violations (if any) may be somewhat random.
 
-[File : Preferences](menus.html#FilePreferences) used by SEARCH are:
+&nbsp;
 
-* MAXIT - maximum number of search pattern moves allowed before a 
-notification is sent to the user  (default=100). 
-Each iteration requires a minimum of N+1 and a maximum of 2N+1 
-calls to the equation set routine, where N is the number of free 
-independent variables.
+## Search algorithm settings 
 
-* DEL - local exploration size, decreases as step size is cut 
-(the default of 1.0 implies a starting exploration of 5% of the parameter value)
+Adjust these internal control settings with the [File : Preferences](menus.html#FilePreferences) menu item. 
 
-* DELMIN - convergence criterion,   (default=1.0E-04)
+#### MAXIT   
+The maximum number of search pattern moves allowed before a notification is sent to the user  (default=100). 
+Each iteration requires a minimum of N+1 and a maximum of 2N+1 calls to the equation set routine, 
+where N is the number of free independent variables.   
 
-* OBJMIN - convergence criterion for minimum objective function value
-(default=5.0E-05)
+#### DEL   
+The starting value of the local exploration size. 
+DEL decreases as step size is cut. 
+The default of 1.0 implies a starting exploration of 5% of the parameter value.   
 
-* TOL - pattern break and step cut criterion.   
-If each new objective function value is not at least (TOL\*100) % 
-better than the previous one, 
+#### DELMIN   
+The step size convergence criterion (default=1.0E-04).   
+
+#### OBJMIN   
+The convergence criterion for minimum objective function value (default=5.0E-05).   
+
+#### TOL   
+The pattern break and step cut criterion. 
+If each new objective function value is not at least (TOL\*100) % better than the previous one, 
 then a pattern break or step cut occurs.  i.e.:
 if NEW\_OBJ+TOL*OLD\_OBJ < OLD_OBJ then (continue with pattern). 
 The default value is TOL=1.0E-04 (i.e. TOL=0.0001). 
@@ -75,5 +83,13 @@ The result is effectively TOL=0.0 producing a failed search.
 Values of TOL greater than 1.0E-02 may result in searches 
 that are too inaccurate to be used effectively by SEEK, and TRADE.   
  
+ **Notes:**   
+ The tweakPrefs execute script (available on the [Action : Execute](/docs/Help/menus.html#ActionExecute) menu) 
+ can be used to change a group of settings that collectively work to refine the numeric precision of search result. 
+ Specifically, after running this script, 
+ the Search process will run longer and expend more effort to refine the results by perhaps an extra significant digit.
+ 
+&nbsp;
  
  [Help](/docs/Help)
+ 

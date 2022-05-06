@@ -49,6 +49,7 @@ See Also:
  - [Feasibility](feasibility.html)   
  - [Design situations](designSituations.html)   
  - [Getting Started With the Spring Tutorial and Demo](gettingStartedSpring.html)   
+ - [Spring design technique](/docs/Help/SpringDesign/spring_oview.html#Technique)   
  - [Intro Pages Overview](/docs/About/introPagesOverview.html)   
 
 ___
