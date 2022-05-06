@@ -39,7 +39,10 @@ The search terminated by exceeding the maximum number of iterations.
 **Search terminated when step size reached the minimum limit (DELMIN)**   
 The search terminated due to cutting step size to a value smaller than DELMIN. 
 This usually indicates that no feasible solution is available. 
-Perhaps the use of the TRADE command would be appropriate.
+Perhaps the use of the TRADE command would be appropriate. 
+
+When Search terminates on the DELMIN criteria it is possible that the design is over-specified. 
+See [Design Situations](/docs/Help/designSituations.html) for additional details. 
 
 #### SHORT SEARCH   
 **Low iteration count may produce low precision results.**   
