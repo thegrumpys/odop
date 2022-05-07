@@ -1,6 +1,6 @@
 # Design Types
 
-See [Terminology](/docs/Help/terminology.html) for more detail on ODOP usage of the term "Design Types".   
+See [Terminology](/docs/Help/terminology.html#designTypes) for more detail on usage of the term "Design Types".   
 
 Currently available Design Types include full-featured apps for the design of
 helical coil springs.

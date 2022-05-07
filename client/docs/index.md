@@ -1,6 +1,9 @@
-# ODOP <br /> Open Design Optimization Platform
+# ODOP <br /> Open Design Optimization Platform 
 
-# About
+This page provides a complete list of topics available in all sections of the on-line documentation. 
+Within the **About** and **Help** sections, the entries appear in an order ranked from more general and introductory to more specific. 
+
+## About
 * [Introduction](About/Intro.html)
 * [Intro Pages Overview](About/introPagesOverview.html)
 * [Message-of-the-day](https://thegrumpys.github.io/odop/About/messageOfTheDay.html)
@@ -15,7 +18,7 @@
 * [Help topics](Help)   
 
 
-# Help
+## Help
 * [Features](Help/features.html)
 * [Introduction](Help/introduction.html)
 * [Terminology](Help/terminology.html)
@@ -31,6 +34,7 @@
 * [Trade](Help/trade.html)
 * [Reports](Help/reports.html)
 * [Printing](Help/htt.html#printing)
+* [Help lookup](Help/helpLookup.html)
 * [Hints, Tips and Tricks](Help/htt.html)
 * [AutoSave](Help/autoSave.html)
 * [Available Design Types](Help/DesignTypes)
@@ -38,7 +42,7 @@
 * [About topics](About)   
 
 
-# Design
+## Design
 * [Early Design Decisions](design/EarlyDesignDecisions.html)
 * [Ideas for a web page menu structure](design/menu.html)
 * [Ideas regarding the web user-interface for FIX](design/WebUI_for_Fix.html)
@@ -73,7 +77,7 @@
 -->  
 
 
-# Procedures
+## Procedures
 
 * [Release Process](procedures/release.html)
 * [New Design Type](procedures/NewDesignType.html)
@@ -81,5 +85,4 @@
 * [Install a new system](procedures/NewSystem.html)
 * [New database](procedures/NewDB.html)
 * [Image locations](procedures/ImageLocations.html)   
-
 

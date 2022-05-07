@@ -4,7 +4,7 @@ This entry covers the input of values into ODOP.
 Additional information on the operation of [Fix, Free](terminology.html#fix) and [constraints](terminology.html#constraints) is provided.   
 ___   
 
-Quick overview:
+## Quick overview:   
 
 ![Free independent variable value input dialog box](/docs/Help/png/ValInpDlgIndepFreeNoted.png "Free independent variable value input dialog box")   
 ![Fixed independent variable value input dialog box](/docs/Help/png/ValInpDlgIndepFixNoted.png "Fixed independent variable value input dialog box")   
@@ -14,9 +14,9 @@ Quick overview:
 
 ___   
 
-The details:
+## The details:   
 
-**Views**
+### Views   
 
 The ODOP View menu provides access to various "Views". 
 Each view is just a different way of looking at the current state of the [mathematical model](terminology.html#mathModel). 
@@ -27,7 +27,7 @@ a simplified spring design specific "[Calculator View](menus.html#ViewCalculator
 
 User inputs to Advanced View And Calculator View operate similiarly.   
 
-**Input Operations Common to Both Advanced View and Calculator View**
+### Input Operations Common to Both Advanced View and Calculator View   
 
 New values for a variable may be supplied by clicking on the desired value and directly over-writing the existing value. 
 The existing value may be edited. 
@@ -84,8 +84,7 @@ Notes:
  - Input of values less than 1.0 does not require a leading zero. 
  - A red border around an input field indicates a non-numeric or otherwise invalid value.
 
-&nbsp;   
-**Operations specific to Calculator View**  
+### Operations specific to Calculator View   
 
 When in Calculator View, select one of the white entry fields to change a value, 
 control Fix / Free status or establish or modify constraints.

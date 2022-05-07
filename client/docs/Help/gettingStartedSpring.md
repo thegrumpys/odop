@@ -64,7 +64,7 @@ starting point for new users.
 
 &nbsp;
 
-**Spring Design Process**   
+## Spring Design Process   
 
 After completing tutorial and demo sessions,
 a bit of free-form experimentation may be in order.
@@ -109,7 +109,8 @@ For the compression spring design type, those include
  Finally, try to design a spring from scratch. 
  Use the entry fields to enter constraints associated with a hypothesized design. 
  Constraint entry fields appear directly in the Advanced View. 
- In Calculator View, click on a white background entry field to change values, control Fix / Free status and establish or modify constraints. 
+ In Calculator View, click on a white background entry field to change values, 
+ control Fix / Free status and establish or modify constraints. 
  Try designing the spring in a ball  point pen, 
  or perhaps a suspension spring for a motorcycle, 
  an automobile or a railroad locomotive. 

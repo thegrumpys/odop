@@ -35,7 +35,7 @@ Seek will automatically invoke SEARCH to maximize or minimize the indicated
 variable subject to the prevailing constraints and FIXes.  SEEK assumes the
 availability of a region of feasible solutions.
 
-EXAMPLES:
+## Seek examples: 
 * SEEK  MIN  Weight
 * SEEK  MAX  Cycle\_Life
 * SEEK  MIN  Rate
@@ -44,17 +44,21 @@ EXAMPLES:
 * SEEK  MAX  Energy
 
 Seek functions by forming a "merit function" from the indicated variable
-and adding that into the "objective function" that the search process
+and adding that into the "objective value" that the search process
 normally operates on.  In order to blend these two functions in a way that
 will produce the desired results, it is necessary to have an estimate of
 the optimum of the merit function. SEEK will form this estimate by executing a
 preliminary search. 
 
+## Seek algorithm settings 
+
+Adjust internal control settings with the [File : Preferences](menus.html#FilePreferences) menu item. 
+
 The value of the internal variable MFN_WT will have some impact on the
 results produced by SEEK. 
 Refer to the documentation page on [Search](search.html) 
 for additional information on adjusting internal variables 
-with the <b>File : Preferences</b> menu item.  
+with the [File : Preferences](menus.html#FilePreferences) menu item.  
 
 &nbsp;  
 

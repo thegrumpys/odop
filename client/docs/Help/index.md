@@ -1,4 +1,8 @@
-# Help
+# Help 
+
+This page provides a list of topics available in the **Help** section of the on-line documentation. 
+The entries appear in an order ranked from more general and introductory to more specific. 
+
 * [Features](/docs/Help/features.html)
 * [Introduction](/docs/Help/introduction.html)
 * [Terminology](/docs/Help/terminology.html)
@@ -14,6 +18,7 @@
 * [Trade](/docs/Help/trade.html)
 * [Reports](/docs/Help/reports.html)
 * [Printing](/docs/Help/htt.html#printing)
+* [Help lookup](/docs/Help/helpLookup.html)
 * [Hints, Tips and Tricks](/docs/Help/htt.html)
 * [AutoSave](/docs/Help/autoSave.html)
 * [Available Design Types](/docs/Help/DesignTypes)

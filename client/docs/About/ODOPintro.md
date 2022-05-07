@@ -1,7 +1,7 @@
 # ODOP is:   
 
 
-**OPEN**   
+## OPEN   
 
 As in Open Source Software. 
 The program's source code is available to all at no cost.
@@ -12,7 +12,7 @@ and
    
 &nbsp;
 
-**DESIGN**   
+## DESIGN   
 
 The ODOP software approaches "design" from an engineering perspective.
 Specifically, this notion of design is all about selecting appropriate values 
@@ -29,7 +29,7 @@ highly constrained original design problems.
 
 &nbsp;
 
-**OPTIMIZATION**   
+## OPTIMIZATION   
 
 Once a real world system is expressed in terms of a mathematical model,
 that model may be manipulated by numerical search and mathermatical optimization techniques.
@@ -41,7 +41,7 @@ that provides the best solution available within the established constraints.
    
 &nbsp;
 
-**PLATFORM**   
+## PLATFORM   
 
 The ODOP software is based on a problem independent core ... the "platform" on which
 any number of mathematical models (a.k.a. "Design Types") can be built.
@@ -70,7 +70,7 @@ See:
 
 &nbsp;
 
-**AVAILABLE DESIGN TYPES**   
+## Available Design Types   
 
 Five [Design Types](/docs/Help/DesignTypes) are currently available.
    
@@ -93,7 +93,7 @@ that illustrates competing objectives.
 
 &nbsp;
 
-**GETTING STARTED**   
+## Getting Started   
 
 The ODOP software provides Help facility pages to help you get started. 
 To work with the Rectangular Solid design type go to: 

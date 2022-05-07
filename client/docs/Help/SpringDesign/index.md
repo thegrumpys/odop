@@ -1,5 +1,8 @@
 # Spring Design Topics
 
+This page provides a list of topics available in the **Spring Design** section of the on-line documentation. 
+The entries appear in an order ranked from more general and introductory to more specific. 
+
 * [Getting Started - Spring Tutorial and Demo](/docs/Help/gettingStartedSpring.html)   
 * [Spring Overview](spring_oview.html)   
 * [Advanced Spring Operations](advancedSpringOperations.html)   

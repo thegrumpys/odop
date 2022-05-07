@@ -4,23 +4,22 @@ You can reach the team developing the
 **O**pen **D**esign **O**ptimization **P**latform software 
 and the ODOP:Spring app.   
 
+## eMail   
 
-**eMail**    
-
-**Info@SpringDesignSoftware.org**   
+### Info@SpringDesignSoftware.org   
 
 &nbsp;   
 
-**Telephone**   
+## Telephone   
 
-**650-887-8026**   
+### 650-887-8026   
 8:00am - 5:00pm Pacific time  
 If necessary, please leave a voice message. 
 We will respond at our first possible opportunity.   
 
 &nbsp;
 
-**Reporting problems with the ODOP software**   
+## Reporting problems with the ODOP software   
 Your feedback is greatly appreciated. 
 You may use the email address and phone number above.
 Also, you may search for and review known issues on 

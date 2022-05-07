@@ -1,35 +1,36 @@
 # Terminology
 
-The following terms have special meanings used in the context of this program.
+The following terms have special meanings used in the context of this program. 
+The terms appear in an order ranked from more general and introductory to more specific. 
 
-**On this page:**  
-[MATHEMATICAL MODEL](terminology.html#mathModel)  
-[DESIGN TYPES](terminology.html#designTypes)  
-[INDEPENDENT VARIABLES](terminology.html#independentVar)  
-[DEPENDENT VARIABLES](terminology.html#dependentVar)  
-[CALCULATION INPUTS](terminology.html#calcInputs)  
-[CONSTRAINTS](terminology.html#constraints)  
-[CONSTRAINT VIOLATIONS](terminology.html#constraintViol)  
-[FUNCTION CONSTRAINTS (FDCL)](terminology.html#fdcl)  
-[FIX](terminology.html#fix)  
-[AUTOFIX](terminology.html#autoFix)  
-[FEASIBLE REGION](terminology.html#feasibleRegion)  
-[OBJECTIVE FUNCTION](terminology.html#obj)  
-[PREFERENCES](terminology.html#preferences)  
-[PROPERTIES](terminology.html#properties)  
-[EQUATION SETS](terminology.html#eqnSet)  
-[SEARCH](terminology.html#search)  
-[ODOP DESIGN LIBRARY](terminology.html#designLib)  
-[MIGRATION](terminology.html#migration)  
-[SPRING DESIGN VARIABLE NAMES](terminology.html#sdnames)  
-[FACTOR OF SAFETY](terminology.html#FactorOfSafety)  
+### On this page:   
+ - [MATHEMATICAL MODEL](terminology.html#mathModel)  
+ - [DESIGN TYPES](terminology.html#designTypes)  
+ - [INDEPENDENT VARIABLES](terminology.html#independentVar)  
+ - [DEPENDENT VARIABLES](terminology.html#dependentVar)  
+ - [CALCULATION INPUTS](terminology.html#calcInputs)  
+ - [CONSTRAINTS](terminology.html#constraints)  
+ - [CONSTRAINT VIOLATIONS](terminology.html#constraintViol)  
+ - [FUNCTION CONSTRAINTS (FDCL)](terminology.html#fdcl)  
+ - [FIX](terminology.html#fix)  
+ - [AUTOFIX](terminology.html#autoFix)  
+ - [FEASIBLE REGION](terminology.html#feasibleRegion)  
+ - [OBJECTIVE FUNCTION](terminology.html#obj)  
+ - [PREFERENCES](terminology.html#preferences)  
+ - [PROPERTIES](terminology.html#properties)  
+ - [EQUATION SETS](terminology.html#eqnSet)  
+ - [SEARCH](terminology.html#search)  
+ - [ODOP DESIGN LIBRARY](terminology.html#designLib)  
+ - [MIGRATION](terminology.html#migration)  
+ - [SPRING DESIGN VARIABLE NAMES](terminology.html#sdnames)  
+ - [FACTOR OF SAFETY](terminology.html#FactorOfSafety)  
 
 ___
 
 <a id="mathModel"></a>  
 ___
 
-**MATHEMATICAL MODEL**   
+## MATHEMATICAL MODEL   
 A mathematical model is a set of equations that describes the behavior of 
 a real world problem of interest.
 Within the context of the ODOP software, the terms "mathematical model",
@@ -40,14 +41,16 @@ For examples, see:
 * [Piston-Cylinder](/docs/Help/DesignTypes/png/PCylDiagram.png) 
 * [Rectangular Solid](/docs/Help/DesignTypes/png/RectangularSolidDiagram.png).   
 
-See "Design Types" and "Equation Set" below for more detail.
-
+See also: 
+ - [Design Types](terminology.html#designTypes)   
+ - [Equation Sets](terminology.html#eqnSet)   
+ 
 ___
 
 <a id="designTypes"></a>  
 ___
 
-**DESIGN TYPES**   
+## DESIGN TYPES   
 A Design Type is a specific design problem. 
 As noted above, each Design Type has a mathematical model of 
 some aspect of the real world at its core. 
@@ -65,7 +68,7 @@ ___
 <a id="independentVar"></a>  
 ___
 
-**INDEPENDENT VARIABLES** &nbsp;  (inputs, design parameters)   
+## INDEPENDENT VARIABLES &nbsp;  (inputs, design parameters)   
 The independent variables are the inputs of the design equations.
 They are the quantities on the right hand side of the equals sign that
 can be arbitrarily selected by the designer or search routine. 
@@ -80,7 +83,7 @@ ___
 <a id="dependentVar"></a>  
 ___
 
-**DEPENDENT VARIABLES** &nbsp;  (outputs, state variables)   
+## DEPENDENT VARIABLES &nbsp;  (outputs, state variables)   
 The dependent variables are the outputs of the design equations.
 They are the quantities on the left hand side of the equal sign.
 Frequently, dependent variables are measures of the performance of a given
@@ -97,7 +100,7 @@ ___
 <a id="calcInputs"></a>  
 ___
 
-**CALCULATION INPUTS** &nbsp;  (previously, "Constants")   
+## CALCULATION INPUTS &nbsp;  (other inputs)   
 Calculation Inputs are inputs to the design equations and are adjustable by the
 user, but are not manipulated by the search algorithm or subject to Fix or constraints. 
 Calculation Inputs frequently represent material properties or other 
@@ -108,7 +111,7 @@ ___
 <a id="constraints"></a>  
 ___
 
-**CONSTRAINTS**   
+## CONSTRAINTS   
 Constraints are one sided boundaries that represent goals for the design
 problem.  Either dependent or independent variables may be constrained to
 be greater than or less than a simple constant or a functionally
@@ -137,7 +140,7 @@ ___
 <a id="constraintViol"></a>  
 ___
 
-**CONSTRAINT VIOLATIONS**   
+## CONSTRAINT VIOLATIONS   
 A constraint violation represents the difference between the current
 value of a given variable and its corresponding constraint level.  By
 convention, negative values represent constraint satisfaction, positive
@@ -148,7 +151,7 @@ ___
 <a id="fdcl"></a>  
 ___
 
-**FUNCTION CONSTRAINTS (FDCL)**   
+## FUNCTION CONSTRAINTS (FDCL)   
 When a constraint level is determined as the value of another Independent Variable,
 Dependent Variable or Calculation Input (as opposed to being a simple constant),
 it is referred to as a "Functionally Determined Constraint Level" (FDCL).
@@ -169,7 +172,7 @@ ___
 <a id="fix"></a>  
 ___
 
-**FIX and FREE**   
+## FIX and FREE   
 The user can establish (i.e. Fix or hold) the value of any variable, independent or dependent.
 Fix status is designated by checking the checkbox immediately to the right
 of the variable's value.
@@ -209,14 +212,15 @@ ___
 <a id="autoFix"></a>  
 ___
 
-**AUTOFIX**   
+## AUTOFIX   
 
-The AutoFix feature, introduced in ODOP version 4.1, automatically applies "Fixed" status 
+The AutoFix feature automatically applies "Fixed" status 
 to variables whose values are changed by user input. 
 
 ODOP Search (invoked by the Search button or the Action : Search menu item) works to 
 hold or achieve values in Fixed status.
-Alternatively, ODOP Search will manipulate the values of variables not in Fixed status 
+In order to accomplish its mission, 
+ODOP Search will manipulate the values of variables not in Fixed status 
 (a.k.a. "Free" status) in order to achieve a feasible design.
 
 The preference value "enable_auto_fix", accessed through the File : Preferences... menu,
@@ -230,7 +234,7 @@ ___
 <a id="feasibleRegion"></a>  
 ___
 
-**FEASIBLE REGION**   
+## FEASIBLE REGION   
 A feasible region may be formed within the boundaries represented by the
 various constraints on the design problem.  If a given design satisfies
 all the constraints, it is said to be "feasible" or in the "feasible
@@ -253,7 +257,7 @@ ___
 <a id="obj"></a>  
 ___
 
-**OBJECTIVE FUNCTION**   
+## OBJECTIVE FUNCTION   
 The objective function constitutes the numerical search problem.  It is
 formed as a blend of violated constraints, dependent variable Fix 
 violations and in the case of the [SEEK](seek.html) feature, a "merit function" that
@@ -266,7 +270,9 @@ ___
 <a id="preferences"></a>  
 ___
 
-**PREFERENCES** &nbsp; (Internal Variables &nbsp; File : Preferences menu item)   
+## PREFERENCES   
+**(Internal Control Settings &nbsp; File : Preferences menu item)**   
+
 Preference settings control the operation of the program. 
 They have no direct meaning to the design problem. 
 For more specific information, refer to the documentation section
@@ -278,7 +284,9 @@ ___
 <a id="properties"></a>  
 ___
 
-**PROPERTIES** &nbsp; (File : Properties menu item)   
+## PROPERTIES   
+**(File : Properties menu item)**   
+
 It is possible to store a series of text strings with a design in order 
 to carry descriptive information. 
 The File : Properties menu is used to establish a set of label - value 
@@ -293,9 +301,9 @@ The number of labels and the text of the label are established in the design typ
 source code in the initialState.js file.
 
 See also:   
-[File : Properties](menus.html#FileProperties)   
-[View : Reports](menus.html#ViewReports)   
-[Printing](htt.html#printing)
+ - [File : Properties](menus.html#FileProperties)   
+ - [View : Reports](menus.html#ViewReports)   
+ - [Printing](htt.html#printing)
 
 
 ___
@@ -303,7 +311,7 @@ ___
 <a id="eqnSet"></a>  
 ___
 
-**EQUATION SETS**   
+## EQUATION SETS   
 The ODOP software allows for multiple design types and thus multiple sets of 
 design equations (mathematical models of a specific design problem) 
 to be concurrently available. 
@@ -330,11 +338,12 @@ ___
 <a id="search"></a>  
 ___
 
-**SEARCH**    
+## SEARCH    
 The term "Search" is used in the sense of "Search for a solution". 
 The ODOP Search feature (<b>Action : Search</b> menu item or Search button) 
 is used to find a feasible design. 
-The action of Search is conceptually similar to a manual recalculation operation in a spreadsheet program.   
+In the sense that it is a manual operation used to find a solution,
+Search is conceptually similar to a manual recalculation operation in a spreadsheet program.   
 
 The [Search](search.html) algorithm manipulates the values of independent variables 
 so as to minimize the Objective Value. 
@@ -359,20 +368,20 @@ ___
 <a id="designLib"></a>  
 ___
 
-**ODOP DESIGN LIBRARY**   
+## ODOP DESIGN LIBRARY   
 The design library is a database physically located on an Internet server,
 a.k.a. "in the cloud". 
 Design information stored in the design library does not appear on the local storage of your computer. 
 You must be logged in to an ODOP user account in order to save designs into the ODOP design library.    
 
-See: [User Accounts](/docs/About/userAccounts.html) for details on how to obtain an account.
+See: [User Accounts](/docs/About/userAccounts.html) for details on how to obtain an ODOP user account.
 
 ___
 
 <a id="migration"></a>   
 ___
 
-**MIGRATION**   
+## MIGRATION   
 The term "migration" refers to the process of upgrading designs created in a previous 
 version of the software to the format required by the current version. 
 This process changes the underlying data structures that describe the design. 
@@ -398,7 +407,7 @@ ___
 <a id="sdnames"></a>  
 ___
 
-**SPRING DESIGN VARIABLE NAMES**   
+## SPRING DESIGN VARIABLE NAMES   
 
 [Variable names illustrated on compression spring Force-Deflection diagram:](/docs/Help/png/ForceVsDeflection.png)
 ___
@@ -406,7 +415,7 @@ ___
 <a id="FactorOfSafety"></a>  
 ___
 
-**FACTOR OF SAFETY**   
+## FACTOR OF SAFETY   
 
 This term is described in detail in the spring design overview section: 
 [Factor of Safety](SpringDesign/spring_oview.html#FoS)

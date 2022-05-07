@@ -33,16 +33,19 @@ Alternatively, copy this address (URL):
 
 and paste it into the address field of a different browser window (or tab).   
   
+<!---
 Depending on current web hosting provisions, 
 there may be a delay of approximately 20 seconds the first time that the software is launched
 within any specific 30 minute period. 
+--> 
+
 While a user account is not required to access the ODOP software,
 an account with associated username and password is necessary to save designs into 
 the cloud-based ODOP "Design Library".
 See: [User Accounts](/docs/About/userAccounts.html) for details on
 how to obtain an account.   
 
-**Screen capture of the sign-in page:**   
+## Screen capture of the sign-in page:   
 ![Sign-in screen](/docs/Help/png/SignInWidgetExpanded.png "Sign-in screen")  
   
 &nbsp;

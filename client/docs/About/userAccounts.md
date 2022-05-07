@@ -44,7 +44,7 @@ your personal information will be secure and not abused.
 If you have any remaining concerns on this point, 
 using an email account different than your primary email account is a reasonable approach.
 
-**Screen capture of the sign-in page:**   
+## Screen capture of the sign-in page:   
 ![Sign-in screen](/docs/Help/png/SignInWidgetExpanded.png "Sign-in screen")    
 
 See [Password reset](/docs/Help/htt.html#passwordReset) for instructions on how to 
@@ -69,7 +69,7 @@ However, you should save frequently as once the browser window or tab is closed,
 any unsaved design in progress may be lost. 
 For more information on this point, see: [AutoSave](/docs/Help/autoSave.html).
 
-**Troubleshooting sign in issues:**
+## Troubleshooting sign in issues   
 - Be sure to enter your email address in the "Username" field of the sign-in page.   
 &nbsp;   
 
@@ -77,7 +77,7 @@ For more information on this point, see: [AutoSave](/docs/Help/autoSave.html).
 In order to sign out:
   - Use the "Sign-out" button to the left of the File menu
  
-&nbsp; 
+___ 
  
 When invoked from the ODOP Sign-In, this page opens in a new browser tab.
 Switch tabs in order to return to that Sign-In page or simply close this tab.   

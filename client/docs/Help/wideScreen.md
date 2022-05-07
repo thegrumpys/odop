@@ -34,10 +34,16 @@ should look something like:
 
 ![Side-by-side browsers](/docs/Help/png/SideBySideBrowsers.png "Side-by-side browsers")   
  
-&nbsp;
+___
 
 To continue, use your browser's **Back** button to return to the previous page now.
 
 &nbsp;
 
-[About](/docs/About)
+See also:   
+[Side-by-Side comparison of designs](/docs/Help/htt.html#sideBySideCompare)   
+
+&nbsp;
+
+[About](/docs/About)   
+[Help](/docs/Help)   

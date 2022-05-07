@@ -7,8 +7,9 @@ Also, you may wish to refer the [Terminology](terminology.html) topic as part of
 After developing an understanding of a few conceptual issues, the ODOP
 program can be very simple to use.  In particular, at any time after the
 program has been started, the state of the program represents a single, unique design. 
-The current values of the various independent variables completely specify the design. 
-The current values of the dependent variables measure the performance of the design
+The current values of the various Independent Variables and Calculation Inputs
+completely specify the design. 
+The current values of the Dependent Variables measure the performance of the design
 and thus describe its "state".  
 
 The user may enter new values into the entry fields for independent variables 
@@ -55,14 +56,13 @@ At the time that the program first initializes, the user can specify a design ty
 and then select from a list of existing designs of that type in order to begin work.
 For each design type, a default starting point named "Startup" should always be availabe.
 
-As of this writing, five design types are included with the ODOP software.
+As of this writing, five [Design Types](/docs/Help/DesignTypes/index.html) 
+are included with the ODOP software.
 The [Rectangular Solid](/docs/Help/DesignTypes/r_solid.html) design type is a small demonstration problem 
 based on a mathematical model of a rectangular solid (cube, box)
 and is intended to act as an easy to understand showcase of ODOP program capabilities. 
 It is a design situation that most people will be familiar and comfortable with.
 
-Additional information on ODOP design types is available at:
-[Design Types](/docs/Help/DesignTypes/index.html).
 An explanation of how to select a design type and open a design of that type is provided in:
 [Getting Started](gettingStarted.html). 
 

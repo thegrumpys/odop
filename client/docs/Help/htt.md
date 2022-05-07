@@ -2,34 +2,62 @@
 
 This topic covers various points that may allow a better user experience with the ODOP software.  
 
-**On this page:**  
-[Use the power of Search and Seek](htt.html#Search_Seek)  
-[File : Save As and File : Save](htt.html#fileSaveAndSaveAs)  
-[File : Import and File : Export](htt.html#fileImportAndExport)  
-[Side-by-Side comparison of designs](htt.html#sideBySideCompare)  
-[Maximizing content visible in Help](htt.html#maxVis)  
-[NaN = "Not a Number"](htt.html#nan)  
-[Browser refresh and back / forward](htt.html#browserRefresh)  
-[AutoSave Feature](htt.html#autoSave)  
-[Off-line Operation](htt.html#offlineOps)  
-[Unexpected delay when first opening the app](htt.html#delay)  
-[Bookmark the app](htt.html#bookmark)  
-[Closing or exiting the app](htt.html#shutdown)  
-[Password Reset](htt.html#passwordReset)  
-[Responsive software design](htt.html#responsiveDesign)  
-[Optimizing for small screens](htt.html#smallScreen)  
-[Printing](htt.html#printing)  
-[Design Migration](htt.html#designMigration)  
-[Extension spring catalog lookup](htt.html#e_springCatLookup)  
-[How to pronounce ODOP](htt.html#pronounceODOP)  
-[Reporting problems with the ODOP app](htt.html#reportProblems)  
+### On this page:  
+ - [How to approach a new design problem](htt.html#newDesign)  
+ - [Use the power of Search and Seek](htt.html#Search_Seek)  
+ - [File : Save As and File : Save](htt.html#fileSaveAndSaveAs)  
+ - [File : Import and File : Export](htt.html#fileImportAndExport)  
+ - [Side-by-Side comparison of designs](htt.html#sideBySideCompare)  
+ - [Maximizing content visible in Help](htt.html#maxVis)  
+ - [NaN = "Not a Number"](htt.html#nan)  
+ - [Browser refresh and back / forward](htt.html#browserRefresh)  
+ - [AutoSave Feature](htt.html#autoSave)  
+ - [Off-line Operation](htt.html#offlineOps)  
+ - [Bookmark the app](htt.html#bookmark)  
+ - [Closing or exiting the app](htt.html#shutdown)  
+ - [Password Reset](htt.html#passwordReset)  
+ - [Responsive software design](htt.html#responsiveDesign)  
+ - [Optimizing for small screens](htt.html#smallScreen)  
+ - [Printing](htt.html#printing)  
+ - [Design Migration](htt.html#designMigration)  
+ - [Extension spring catalog lookup](htt.html#e_springCatLookup)  
+ - [How to pronounce ODOP](htt.html#pronounceODOP)  
+ - [Reporting problems with the ODOP app](htt.html#reportProblems)  
+
+___
+
+<a id="newDesign"></a>  
+___
+
+## How to approach a new design problem   
+At a high level, the process is to modify an existing design to reflect the requirements of the application at hand. 
+Specifically, the user is expected to modify one of the startup designs by use of the 
+[Fix feature](terminology.html#fix), set [constraints](terminology.html#constraints) as required 
+by the application and then run [Search](search.html).   
+
+Operation of the [AutoFix feature](terminology.html#autoFix) (enabled by default) makes it a good practice to 
+run Search frequently. 
+This practice makes it easier to identify if (when!) specifying additional values has caused the design problem
+to become over-specified.   
+
+The various [tutorial and demo sessions](tutordemo.html) provide additional insights.   
+
+<!--- ToDo: create a hints article/topic for spring design.  Keep Wire_Dia free.  See guidedDesign.  etc. --> 
+
+See Also:   
+ - [Setting Values](settingValues.html)   
+ - [Feasibility](feasibility.html)   
+ - [Design situations](designSituations.html)   
+ - [Getting Started With the Spring Tutorial and Demo](gettingStartedSpring.html)   
+ - [Spring design technique](/docs/Help/SpringDesign/spring_oview.html#Technique)   
+ - [Intro Pages Overview](/docs/About/introPagesOverview.html)   
 
 ___
 
 <a id="Search_Seek"></a>  
 ___
 
-**Use the power of Search and Seek**  
+## Use the power of Search and Seek  
 
 Optimization software like ODOP offers considerable leverage over a calculator approach.
 If you find that you are repeatedly entering trial values of Independent Variables and then
@@ -38,15 +66,14 @@ it is likely that you are missing out on the power that the ODOP software has to
 You should be expressing your goals for the design by establishing the values for
 constraints and FIXes and then using the Search and Seek features.  
 
-The Tutorial and Demo features offer multiple examples of the best way to utilize the 
-Search and Seek features. 
+The Tutorial and Demo features offer multiple examples of the best way to utilize the Search and Seek features. 
 
 ___
 
 <a id="fileSaveAndSaveAs"></a>  
 ___
 
-**File : Save As** and **File : Save**  
+## File : Save As and File : Save  
 A design investigation may evolve through a sequence of preliminary or candidate designs.
 As each candidate design is established, it can be marked with a **File : Properties** comment
 and saved into the design library with **File : Save As**.
@@ -64,7 +91,7 @@ ___
 <a id="fileImportAndExport"></a>  
 ___
 
-**File : Import** and **File : Export**  
+## File : Import and File : Export  
 The ODOP app can export the state of the current design as a download into a file in the local file system.
 By default, the file is placed in the user's download folder (directory)
 with a file name extension of ".json". 
@@ -78,7 +105,7 @@ ___
 <a id="sideBySideCompare"></a>  
 ___
 
-**Side-by-Side comparison of designs**   
+## Side-by-Side comparison of designs   
 Depending on available screen size, 
 it may be possible to open two independent browser sessions or 
 two tabs in the same browser session with an ODOP design session in each.
@@ -91,15 +118,15 @@ The other browser session can continue forward with additional trial designs.
 The side-by-side aspect of the screen layout can help quickly identify the preferred design.
 
 See also:   
-[Responsive software design](htt.html#responsiveDesign)  
-[Optimizing for small screens](htt.html#smallScreen)  
+ - [Responsive software design](htt.html#responsiveDesign)  
+ - [Optimizing for small screens](htt.html#smallScreen)  
 
 ___
 
 <a id="maxVis"></a>  
 ___
 
-**Maximizing content visible in Help**   
+## Maximizing content visible in Help   
 The on-line documentation (Help) is based on a "theme" that is responsive to the available
 width of the window.
 If the window is sufficiently wide, the header and trailer information appears on the left.
@@ -113,7 +140,7 @@ ___
 <a id="nan"></a>  
 ___
 
-**NaN = "Not a Number"**   
+## NaN = "Not a Number"   
 If you see "NaN" where you expect to see a number, 
 it is likely because the software is dealing with a computational issue
 like division by zero.
@@ -128,12 +155,15 @@ ___
 <a id="browserRefresh"></a>  
 ___
 
-**Browser refresh and back / forward**   
+## Browser refresh and back / forward   
 Unfortunately, using the browser Reload a.k.a. "Refresh" function with a single page 
 web app such as ODOP will likely result in a complete reset of the main page and 
 potential loss of a user's work since the previous Save operation. 
 Similarly, use of the browser "Back" function followed by "Forward" will likely result in 
 reset of the main page.   
+
+The [AutoSave](autoSave.html) feature can partially mitigate the consequences of an unintended
+browser reset (refresh).   
 
 Note: 
 The on-line documentation pages (Help) are not subject to the same concerns about browser refresh 
@@ -144,7 +174,7 @@ ___
 <a id="autoSave"></a>  
 ___
 
-**AutoSave Feature**   
+## AutoSave Feature   
 The ODOP software offers a basic AutoSave feature.
 See [AutoSave](autoSave.html) for details.   
 
@@ -153,7 +183,7 @@ ___
 <a id="offlineOps"></a>  
 ___
 
-**Off-line Operation**   
+## Off-line Operation   
 Off-line operation is not currently supported. 
 If a design session is in progress when network connectivity is lost, 
 it is possible that design activity can continue but it will not be possible to
@@ -164,29 +194,21 @@ local storage even after a loss of network connectivity.
 
 ___
 
-<a id="delay"></a>  
-___
-
-**Unexpected delay when first opening the app**   
-Note that loading the ODOP app the first time may take 20 seconds or longer. 
-This is a technical issue related to web hosting during program development. 
-A production web hosting arrangement will not have this delay.
-
-___
-
 <a id="bookmark"></a>  
 ___
 
-**Bookmark the app**   
+## Bookmark the app   
 It is possible to save a couple clicks in opening the app.
-Bookmark (or create a favorite): https://odop.herokuapp.com/   
+Bookmark (or create a favorite): 
+
+https://odop.herokuapp.com/   
 
 ___
 
 <a id="shutdown"></a>  
 ___
 
-**Closing or exiting the app**   
+## Closing or exiting the app   
 Use  **File : Save As** or **File : Export** to preserve the current state of a design in progress. 
 Sign out by using "Sign Out" on the menu bar (positioned right of the ODOP icon and left of the File menu). 
 Finally, close the browser tab or browser window containing the ODOP app.
@@ -196,7 +218,7 @@ ___
 <a id="passwordReset"></a>  
 ___
 
-**Password reset**   
+## Password reset   
 Use your existing username (email address) and password to Sign In at:   
 [https://dev-729070.okta.com](https://dev-729070.okta.com)   
 
@@ -220,7 +242,7 @@ ___
 <a id="responsiveDesign"></a>  
 ___
 
-**Responsive software design**   
+## Responsive software design   
 As a "responsive" web app, the ODOP software will change its screen layout and 
 input behavior in response to the capabilities of the user's device. 
 Specifically, as available screen width diminishes,
@@ -237,7 +259,7 @@ ___
 <a id="smallScreen"></a>  
 ___
 
-**Optimizing for small screens**   
+## Optimizing for small screens   
 Once familiar with the ODOP screen layout and operations on a large screen, 
 two **File : Preferences** settings may be used to facilitate operation on a small screen.
 Specifically, 
@@ -251,7 +273,7 @@ ___
 <a id="printing"></a>  
 ___
 
-**Printing**   
+## Printing   
 Use the print features of the browser.  
 
 Depending on the browser and operating system, it may be possible to
@@ -271,7 +293,7 @@ ___
 <a id="designMigration"></a>  
 ___
 
-**Design Migration**   
+## Design Migration   
 The term "migration" refers to the process of upgrading designs created in a previous version of the software to the format required by the current version. 
 See: [MIGRATION](terminology.html#migration)    
 
@@ -280,20 +302,21 @@ ___
 <a id="e_springCatLookup"></a>  
 ___
 
-**Extension spring catalog lookup**   
+## Extension spring catalog lookup   
 Entries in the provided extension spring catalog (previously MS24586, now SAE-AS24586) 
 run toward the low side of the initial tension range targeted by ODOP:Spring's default constraints. 
 If experiencing difficulty in selecting springs from the supplied catalog, try setting the 
 Calculation Input named SI_Range to a value of "Special_Request".
 
-See: [Extension spring design - Initial_Tension](DesignTypes/e_spring.html#e_springIT_Range)    
+See also:   
+ - [Extension spring design - Initial_Tension](DesignTypes/e_spring.html#e_springIT_Range)    
 
 ___
 
 <a id="pronounceODOP"></a>  
 ___
 
-**How to pronounce ODOP**   
+## How to pronounce ODOP   
 The preferred pronunciation is the individual letters O-D-O-P, 
 not a single word like O-dop.
 
@@ -302,7 +325,7 @@ ___
 <a id="reportProblems"></a>  
 ___
 
-**Reporting problems with the ODOP software**   
+## Reporting problems with the ODOP software   
 Your feedback is greatly appreciated.
 You may use the email address or phone number on the [Contact Us page](/docs/About/ContactUs.html).
 Also, you may search for and review known issues on 
@@ -319,3 +342,19 @@ ___
 
 &nbsp;
  
+<!--- * begin comment *
+
+ - [Unexpected delay when first opening the app](htt.html#delay)  
+
+___
+
+<a id="delay"></a>  
+___
+
+## Unexpected delay when first opening the app   
+Note that loading the ODOP app the first time may take 20 seconds or longer. 
+This is a technical issue related to web hosting during program development. 
+A production web hosting arrangement will not have this delay.
+
+ * end comment *
+--> 

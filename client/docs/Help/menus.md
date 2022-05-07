@@ -1,43 +1,43 @@
-# ODOP Menus
+# ODOP Menus 
 
 This topic covers the ODOP menu structure. 
 
-**On this page:**  
-[ODOP logo](menus.html#ODOPlogo)  
-[Sign In...](menus.html#SignIn)  
+### On this page:   
+ * [ODOP logo](menus.html#ODOPlogo) 
+ * [Sign In...](menus.html#SignIn) 
 
-[File : Open...](menus.html#FileOpen)  
-[File : Save](menus.html#FileSave)  
-[File : Save As...](menus.html#FileSaveAs)  
-[File : Delete...](menus.html#FileDelete)  
-[File : Import...](menus.html#FileImport)  
-[File : Export](menus.html#FileExport)  
-[File : Preferences](menus.html#FilePreferences)  
-[File : Properties](menus.html#FileProperties)  
+ - [File : Open...](menus.html#FileOpen) 
+ - [File : Save](menus.html#FileSave) 
+ - [File : Save As...](menus.html#FileSaveAs) 
+ - [File : Delete...](menus.html#FileDelete) 
+ - [File : Import...](menus.html#FileImport) 
+ - [File : Export](menus.html#FileExport) 
+ - [File : Preferences](menus.html#FilePreferences) 
+ - [File : Properties](menus.html#FileProperties) 
 
-[Action : Search](menus.html#ActionSearch)  
-[Action : Seek...](menus.html#ActionSeek)  
-[Action : Trade...](menus.html#ActionTrade)  
-[Action : Select Size...](menus.html#ActionSelectSize)  
-[Action : Select Catalog...](menus.html#ActionSelectCatalog)  
-[Action : Execute...](menus.html#ActionExecute)  
+ * [Action : Search](menus.html#ActionSearch) 
+ * [Action : Seek...](menus.html#ActionSeek) 
+ * [Action : Trade...](menus.html#ActionTrade) 
+ * [Action : Select Size...](menus.html#ActionSelectSize) 
+ * [Action : Select Catalog...](menus.html#ActionSelectCatalog) 
+ * [Action : Execute...](menus.html#ActionExecute) 
 
-[View : Advanced](menus.html#ViewAdvanced)  
-[View : Calculator](menus.html#ViewCalculator)  
-[View : Reports](menus.html#ViewReports)  
+ - [View : Advanced](menus.html#ViewAdvanced) 
+ - [View : Calculator](menus.html#ViewCalculator) 
+ - [View : Reports](menus.html#ViewReports) 
 
-[Help : Message of the Day](menus.html#HelpMotD)  
-[Help : Index](menus.html#HelpIndex)  
-[Help : Demo...](menus.html#HelpDemo)  
-[Help : Tutorial...](menus.html#HelpTutorial)  
-[Help : About](menus.html#HelpAbout)  
+ * [Help : Message of the Day](menus.html#HelpMotD) 
+ * [Help : Index](menus.html#HelpIndex) 
+ * [Help : Demo...](menus.html#HelpDemo) 
+ * [Help : Tutorial...](menus.html#HelpTutorial) 
+ * [Help : About](menus.html#HelpAbout) 
 
 ___
 
 <a id="ODOPlogo"></a>  
 ___
 
-**ODOP logo**  
+## ODOP logo   
 
 The ODOP logo at the far left of the menu bar causes a reload of the app home page. 
 This action resets the app.
@@ -54,27 +54,27 @@ it is good practice to save your work (**File : Save** or **File : Export**)
 before invoking a reset of the app.  
 
 See also:   
-[AutoSave](autoSave.html)   
+ - [AutoSave](autoSave.html)   
 
 ___
 
 <a id="SignIn"></a>  
 ___
 
-**Sign In...**  
+## Sign In...   
 
 The Sign In button appears on the menu bar between the ODOP logo and the File menu.
 Use the Sign In button to create a new user account or log into an existing account.  
 
 See also:   
-[User Accounts](/docs/About/userAccounts.html)   
+ - [User Accounts](/docs/About/userAccounts.html)   
 
 ___
 
 <a id="FileOpen"></a>  
 ___
 
-**File : Open...**  
+## File : Open...   
 
 The File : Open... menu item produces a dialog box that allows the selection of design type 
 (for example, compression, extension and torsion springs) and 
@@ -90,48 +90,48 @@ The units system, for example, US Customary units (inches, pounds)
 or metric units (mm, newtons) is established by the selected starting design.
 
 See also:   
-[Default Designs](defaultDesigns.html)   
-[User Accounts](/docs/About/userAccounts.html)   
-[Units: US customary and metric](SpringDesign/unitsUSmetric.html)  
-[Import and Export](htt.html#fileImportAndExport)  
-[ODOP Design Library](terminology.html#designLib)
+ - [Default Designs](defaultDesigns.html)   
+ - [User Accounts](/docs/About/userAccounts.html)   
+ - [Units: US customary and metric](SpringDesign/unitsUSmetric.html)  
+ - [Import and Export](htt.html#fileImportAndExport)  
+ - [ODOP Design Library](terminology.html#designLib)
 
 ___
 
 <a id="FileSave"></a>  
 ___
 
-**File : Save**  
+## File : Save   
 
 The File : Save menu item updates the current design into the cloud-based ODOP Design Library. 
 It is necessary to be logged into a user account.
 If not logged in to a user account, a pop-up providing a Sign In opportunity will appear.
 
 See also:   
-[Default Designs](defaultDesigns.html)   
-[User Accounts](/docs/About/userAccounts.html)   
+ - [Default Designs](defaultDesigns.html)   
+ - [User Accounts](/docs/About/userAccounts.html)   
 
 ___
 
 <a id="FileSaveAs"></a>  
 ___
 
-**File : Save As...**  
+## File : Save As...   
 
 The File : Save As... menu item saves the current design into the cloud-based ODOP Design Library with a new name. 
 It is necessary to be logged into a user account. 
 If not logged in to a user account, a pop-up providing a Sign In opportunity will appear.
 
 See also:   
-[Default Designs](defaultDesigns.html)   
-[User Accounts](/docs/About/userAccounts.html)   
+ - [Default Designs](defaultDesigns.html)   
+ - [User Accounts](/docs/About/userAccounts.html)   
 
 ___
 
 <a id="FileDelete"></a>  
 ___
 
-**File : Delete...**  
+## File : Delete...   
 
 The File : Delete... menu item removes the selected design. 
 It is necessary to be logged into a user account. 
@@ -144,37 +144,37 @@ System provided designs are marked "[ReadOnly]".
 There is no un-delete feature.
 
 See also:   
-[Default Designs](defaultDesigns.html)   
-[User Accounts](/docs/About/userAccounts.html)   
+ - [Default Designs](defaultDesigns.html)   
+ - [User Accounts](/docs/About/userAccounts.html)   
 
 ___
 
 <a id="FileImport"></a>  
 ___
 
-**File : Import...**  
+## File : Import...   
 
 The File : Import menu item restores a previously exported design as the current design.   
 
 See also:   
-[Import and Export](htt.html#fileImportAndExport)  
-[File : Export](menus.html#FileExport)  
+ - [Import and Export](htt.html#fileImportAndExport)  
+ - [File : Export](menus.html#FileExport)  
 
 ___
 
 <a id="FileExport"></a>  
 ___
 
-**File : Export**  
+## File : Export   
 
 The File : Export menu item saves the current design as a download into a file in the local file system. 
 By default, the file is placed in the user's download folder (directory) with a file name extension of ".json". 
 Use browser settings to control the default download folder or be prompted to specify a folder every time.   
 
 See also:   
-[Import and Export](htt.html#fileImportAndExport)  
-[File : Import...](menus.html#FileImport)  
-[.json files](https://en.wikipedia.org/wiki/JSON)
+ - [Import and Export](htt.html#fileImportAndExport)  
+ - [File : Import...](menus.html#FileImport)  
+ - [.json files](https://en.wikipedia.org/wiki/JSON)
 
 
 ___
@@ -182,7 +182,7 @@ ___
 <a id="FilePreferences"></a>  
 ___
 
-**File : Preferences**  
+## File : Preferences   
 
 The File : Preferences menu item provides access to a group of values that control various aspects of 
 ODOP operation. 
@@ -190,8 +190,8 @@ Most of these values control behavior of the numerical search algorithm.
 A few control aspects of the on-screen display for Advanced View.
 
 See also:   
-[Search](search.html)   
-[Terminology - Preferences](terminology.html#preferences)
+ - [Search](search.html)   
+ - [Terminology - Preferences](terminology.html#preferences)
 
 
 ___
@@ -199,7 +199,7 @@ ___
 <a id="FileProperties"></a>  
 ___
 
-**File : Properties**  
+## File : Properties   
 
 The File : Properties menu item provides access to a group of user controlled text strings 
 (label - value pairs) that can be used to label a design.
@@ -225,9 +225,9 @@ The number of text strings and default labels for these text strings are part
 of the initialState definition for each design type.
 
 See also:   
-[View : Reports](menus.html#ViewReports)   
-[Terminology - Properties](terminology.html#properties)  
-[Printing](htt.html#printing)
+ - [View : Reports](menus.html#ViewReports)   
+ - [Terminology - Properties](terminology.html#properties)  
+ - [Printing](htt.html#printing)
 
 
 ___
@@ -235,7 +235,7 @@ ___
 <a id="ActionSearch"></a>  
 ___
 
-**Action : Search**  
+## Action : Search   
 
 The Action : Search menu item invokes the numerical search algorithm to provide ODOP's back-solving capability. 
 The Search feature gives a flexible approach to invert the dependent-independent relationships of the design equations. 
@@ -259,20 +259,20 @@ The tooltip associated with the "Status" label of multi-color Feasibility Indica
 the numeric values of the current Objective Value and OBJMIN. 
 
 See also:   
-[Search](search.html)   
-[Feasibility](feasibility.html)   
-[Feasible Region](terminology.html#feasibleRegion)  
-[Design Situations](designSituations.html)   
-[Constraints](terminology.html#constraints)   
-[FIX and FREE](terminology.html#fix)   
-[File : Preferences](menus.html#FilePreferences)   
+ - [Search](search.html)   
+ - [Feasibility](feasibility.html)   
+ - [Feasible Region](terminology.html#feasibleRegion)  
+ - [Design Situations](designSituations.html)   
+ - [Constraints](terminology.html#constraints)   
+ - [FIX and FREE](terminology.html#fix)   
+ - [File : Preferences](menus.html#FilePreferences)   
 
 ___
 
 <a id="ActionSeek"></a>  
 ___
 
-**Action : Seek...**  
+## Action : Seek...   
 
 The Action : Search menu item provides ODOP's goal seeking capability.
 The Seek feature can obtain the constrained extreme of any variable, independent or dependent.
@@ -288,10 +288,10 @@ at the upper portion of the main page (Advanced and Calculator views).
 
 
 See also:   
-[Seek](seek.html)   
-[Feasibility](feasibility.html)   
-[Feasible Region](terminology.html#feasibleRegion)  
-[Design Situations](designSituations.html)
+ - [Seek](seek.html)   
+ - [Feasibility](feasibility.html)   
+ - [Feasible Region](terminology.html#feasibleRegion)  
+ - [Design Situations](designSituations.html)
 
 
 ___
@@ -299,7 +299,7 @@ ___
 <a id="ActionTrade"></a>  
 ___
 
-**Action : Trade...**  
+## Action : Trade...   
 
 The Action : Trade menu item provides a feature to guide the restructuring of goals 
 associated with an infeasible design in a way that is most consistent with original objectives. 
@@ -317,10 +317,10 @@ the opportunity to accept that set of constraints.
 
 
 See also:   
-[Trade](trade.html)   
-[Feasibility](feasibility.html)   
-[Feasible Region](terminology.html#feasibleRegion)  
-[Design Situations](designSituations.html)
+ - [Trade](trade.html)   
+ - [Feasibility](feasibility.html)   
+ - [Feasible Region](terminology.html#feasibleRegion)  
+ - [Design Situations](designSituations.html)
 
 
 ___
@@ -328,7 +328,7 @@ ___
 <a id="ActionSelectSize"></a>  
 ___
 
-**Action : Select Size...**  
+## Action : Select Size...   
 
  The Action : Select Size menu item searches a table for standard sizes nearest
  to the current value of the designated Independent Variable.
@@ -343,7 +343,7 @@ ___
  automatically puts the selected value in Fixed status. 
 
 See also:   
-[Select Size](SpringDesign/selectSizeCatalog.html)   
+ - [Select Size](SpringDesign/selectSizeCatalog.html)   
 
 
 ___
@@ -351,7 +351,7 @@ ___
 <a id="ActionSelectCatalog"></a>  
 ___
 
-**Action : Select Catalog...**  
+## Action : Select Catalog...   
 
 The Action : Select Catalog menu item selects the closest or otherwise 
 most appropriate design from a catalog of stock designs. 
@@ -371,8 +371,8 @@ Note that it may be desirable to save (File : Save or File : Save As) the curren
 before selecting a catalog item.
 
 See also:   
-[Select Catalog](SpringDesign/selectSizeCatalog.html)   
-[Extension spring catalog lookup](htt.html#e_springCatLookup)   
+ - [Select Catalog](SpringDesign/selectSizeCatalog.html)   
+ - [Extension spring catalog lookup](htt.html#e_springCatLookup)   
 
 
 ___
@@ -380,7 +380,7 @@ ___
 <a id="ActionExecute"></a>  
 ___
 
-**Action : Execute...**  
+## Action : Execute...   
 
 The Action : Execute menu item invokes pre-programmed scripts that can perform 
 various tasks for the user. 
@@ -393,7 +393,7 @@ Specifically, after running this script, the Search process will run longer and 
 to refine the results by perhaps an extra significant digit. 
 
 See also:   
-[File : Preferences](menus.html#FilePreferences)   
+ - [File : Preferences](menus.html#FilePreferences)   
 
 
 ___
@@ -401,7 +401,7 @@ ___
 <a id="ViewAdvanced"></a>  
 ___
 
-**View : Advanced**  
+## View : Advanced   
  
 Advanced View is a design type independent display of all input and output variables.
 It provides access to all program features.
@@ -417,7 +417,7 @@ ___
 <a id="ViewCalculator"></a>  
 ___
 
-**View : Calculator**  
+## View : Calculator   
 
 Calculator View, available for spring design types, 
 provides a simplified display of major input and output variables in a compact format specific to spring design. 
@@ -440,7 +440,7 @@ ___
 <a id="ViewReports"></a>  
 ___
 
-**View : Reports**  
+## View : Reports   
 
 Each design type may (or may not) have design type specific reports available on the View menu. 
 Each of the currently available coil spring design types offers three reports.
@@ -456,9 +456,9 @@ See your browser documentation for details on how to print or save into .PDF for
 From there, the information can be included as part of a Request for Quotation or other transfer of the design information.
 
 See also:   
-[File : Properties](menus.html#FileProperties)   
-[Terminology - Properties](terminology.html#properties)  
-[Printing](htt.html#printing)
+ - [File : Properties](menus.html#FileProperties)   
+ - [Terminology - Properties](terminology.html#properties)  
+ - [Printing](htt.html#printing)
 
 
 ___
@@ -466,7 +466,7 @@ ___
 <a id="HelpMotD"></a>  
 ___
 
-**Help : Message of the Day**  
+## Help : Message of the Day   
 
 The ODOP app Message-of-the-Day provides current information on 
 recent and impending releases, planned outages, newly discovered issues and work-arounds.
@@ -480,7 +480,7 @@ ___
 <a id="HelpIndex"></a>  
 ___
 
-**Help : Index**  
+## Help : Index   
 
 The Help : Index menu item displays a list of links to the various ODOP on-line Help articles.
 Most of these articles are common to all design types.
@@ -494,7 +494,7 @@ ___
 <a id="HelpDemo"></a>  
 ___
 
-**Help : Demo...**  
+## Help : Demo...   
 
 When enabled, the Help : Demo menu item provides a selection list of design type specific 
 demonstration sessions. 
@@ -502,7 +502,7 @@ If no demonstration sessions are available for that design type, the Help : Demo
 will be disabled. 
 
 See also:   
-[Spring design demonstration sessions](tutordemo.html)   
+ - [Spring design demonstration sessions](tutordemo.html)   
 
 
 ___
@@ -510,7 +510,7 @@ ___
 <a id="HelpTutorial"></a>  
 ___
 
-**Help : Tutorial...**  
+## Help : Tutorial...   
 
 When enabled, the Help : Tutorial menu item provides a selection list of design type specific 
 tutorial sessions. 
@@ -518,7 +518,7 @@ If no tutorial sessions are available for that design type, the Help : Tutorial 
 will be disabled.
  
 See also:   
-[Spring design tutorial sessions](tutordemo.html)   
+ - [Spring design tutorial sessions](tutordemo.html)   
 
 
 ___
@@ -526,7 +526,7 @@ ___
 <a id="HelpAbout"></a>  
 ___
 
-**Help : About**  
+## Help : About   
 
 The Help : About menu item displays information about the ODOP software.
 
