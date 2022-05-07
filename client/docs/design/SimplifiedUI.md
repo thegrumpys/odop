@@ -84,7 +84,7 @@ Provide alerts for violated constraints.
 
 The graphic below shows the extension spring "Basic" View with Objective Value = 0.
 Compare with the equivalent view provided in the "Advanced" section below.  
-![Extension Spring - Basic, FEASIBLE](/docs/design/png/Basic4.png "Extension Spring - Basic, FEASIBLE")   
+![Extension Spring - Basic, FEASIBLE](/docs/design/img/Basic4.png "Extension Spring - Basic, FEASIBLE")   
 
 The graphic below shows the extension spring "Basic" View with Objective Value > OBJMIN and < 4*OBJMIN. 
 Note how violated constraints get an appropriately colored "Info" indicator in the Info column. 
@@ -92,7 +92,7 @@ This text can carry a tooltip that provides the "outside the range" details
 similar to how it is handled in the Calculator view.
 The Stress_Initial row is normally suppressed in the Basic view, 
 but because it is violated, it appears in this case.
-![Extension Spring - Basic, VIOLATIONS](/docs/design/png/Basic5.png "Extension Spring - Basic, VIOLATIONS")   
+![Extension Spring - Basic, VIOLATIONS](/docs/design/img/Basic5.png "Extension Spring - Basic, VIOLATIONS")   
 
 
 <a id="advancedUI"></a>
@@ -104,7 +104,7 @@ the ResultTable improvements of Issue 365 and
 other incremental improvements (for example, milestone 3.10)
 
 The extension spring "Advanced" view:  
-![Extension Spring - Advanced](/docs/design/png/Exten1234.png "Extension Spring - Advanced")  
+![Extension Spring - Advanced](/docs/design/img/Exten1234.png "Extension Spring - Advanced")  
 Contrast this with the "Basic" view above.
 
 <a id="originalArticle"></a>
@@ -112,7 +112,7 @@ Contrast this with the "Basic" view above.
 **Ideas for Simplified Design Check UI (Design Calculator)**
 
 The (Design Check / Design Calculator) tab and result section might look something like:   
-![Simplified Tab and Result Section](/docs/design/png/CheckTab_ResultSection.png "[Simplified Tab and Result Section")   
+![Simplified Tab and Result Section](/docs/design/img/CheckTab_ResultSection.png "[Simplified Tab and Result Section")   
 Note that the Objective Value and OBJMIN disappear.
 Report tabs (if any) would continue unchanged.   
 
@@ -123,7 +123,7 @@ As first opened...
 *  assuming the Startup entry has no FIXed variables, initially, all of the input fields are blank
 *  initially (before Check Design button is pressed), the Value fields are blank   
 
-![Simplified Variable and Empty Values Section](/docs/design/png/Variable_ValuesSection.png "Simplified Variable and Empty Values Section")   
+![Simplified Variable and Empty Values Section](/docs/design/img/Variable_ValuesSection.png "Simplified Variable and Empty Values Section")   
 
 As the user enters values in the Input fields, nothing happens.
 Any Independent or Dependent Variables that the user enters are put into FIXed status with the user specified value.
@@ -132,7 +132,7 @@ Only then is the "Value" column populated.
 The user is allowed further changes in inputs and clicks on the "Check Design" button.   
 
 The following image illustrates what things might look like after clicking the "Check Design" button.   
-![Simplified UI after Check Design](/docs/design/png/AfterCheckDesign.png "[Simplified UI after Check Design")   
+![Simplified UI after Check Design](/docs/design/img/AfterCheckDesign.png "[Simplified UI after Check Design")   
 
 &nbsp;
 

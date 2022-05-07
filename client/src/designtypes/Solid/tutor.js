@@ -154,7 +154,7 @@ export const execute = {
             title: "Page 06 of 16",
             text: (
                 <>
-                   <Image fluid src="/docs/Help/DesignTypes/png/RectangularSolidDiagram.png" alt="Rectangular Solid diagram"/>
+                   <Image fluid src="/docs/Help/DesignTypes/img/RectangularSolidDiagram.png" alt="Rectangular Solid diagram"/>
                 </>
             )
         },

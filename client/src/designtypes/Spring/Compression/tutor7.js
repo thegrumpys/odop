@@ -198,7 +198,7 @@ export const execute = {
                     SEEK  MIN  Weight
                     </p>
                     
-                    <Image fluid src="/docs/Help/png/SeekMinWeight.png" alt="SeekMinWeight"/>
+                    <Image fluid src="/docs/Help/img/SeekMinWeight.png" alt="SeekMinWeight"/>
                     
                     <br />
                 </>

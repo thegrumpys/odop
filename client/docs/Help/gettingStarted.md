@@ -23,7 +23,7 @@ Note that the [Terminology](terminology.html) page of the on-line documentation 
 helpful with some of the terms utilized here.
 
 If you haven't seen it already, the 
-[ODOP Design Process Flow Diagram](/docs/About/png/DesignProcessFlowDiagram.png)
+[ODOP Design Process Flow Diagram](/docs/About/img/DesignProcessFlowDiagram.png)
 provides an important conceptual introduction to the overall design process within ODOP.   
 
 The ODOP software expects to start from an existing design. 
@@ -55,7 +55,7 @@ select the "Solid" design type and click the "Open" button.
 
 This screen capture illustrates selecting the Rectangular **Solid** design type 
 and its default design called **Startup**.   
-![Start with Rectangular Solid](/docs/Help/png/SelectSolid.png "Start with Rectangular Solid")   
+![Start with Rectangular Solid](/docs/Help/img/SelectSolid.png "Start with Rectangular Solid")   
 
 &nbsp;
 
@@ -64,7 +64,7 @@ and its default design called **Startup**.
 Have a look at the main menu (**File &nbsp; Action &nbsp; View &nbsp; Help**) 
 highlighted inside the red oval.
 Select one of the main menu entries and a drop-down with sub-items will appear.   
-![Main Menu](/docs/Help/png/MainMenu.png "Main Menu")   
+![Main Menu](/docs/Help/img/MainMenu.png "Main Menu")   
 
 &nbsp;
 
@@ -72,26 +72,26 @@ Here is an example of how each main menu item will drop down to provide
 specific menu items.
 Note that menu entries associated with not yet implemented features are disabled (gray).
 This screen clip illustrates how to get to the index of Help pages.   
-![Help Index](/docs/Help/png/HelpIndex.png "Help Index")   
+![Help Index](/docs/Help/img/HelpIndex.png "Help Index")   
 
 &nbsp;
 
 At the upper right of the main page you see 
 an icon associated with the design type (a rectangular box in this case) and
 the name of the specific design that is currently open.
-![Design Type Icon - Design Name](/docs/Help/png/TabIconName.png "[Design Type Icon - Design Name")   
+![Design Type Icon - Design Name](/docs/Help/img/TabIconName.png "[Design Type Icon - Design Name")   
 
 &nbsp;
 
 The Result section is positioned near the top of the main page.
 This area provides feedback about the solution process.   
-![Result Section](/docs/Help/png/ResultSection.png "Result Section")   
+![Result Section](/docs/Help/img/ResultSection.png "Result Section")   
 
 &nbsp;
 
 If you hover the cursor over a heading or a variable name, 
 a tool-tip will pop up to provide more information regarding each item.   
-![Result Section ToolTip](/docs/Help/png/ResultSectionToolTip.png "Result Section ToolTip")   
+![Result Section ToolTip](/docs/Help/img/ResultSectionToolTip.png "Result Section ToolTip")   
 
 &nbsp;
 
@@ -101,21 +101,21 @@ the cursor in the field and over-writing the existing value.
 Recalculation will happen immediately.
 The Dependent Variables, constraint violations and Objective Function will 
 immediately reflect the result of the new value for that Independent Variable.   
-![Independent Variables](/docs/Help/png/Independent.png "Independent Variables")   
+![Independent Variables](/docs/Help/img/Independent.png "Independent Variables")   
 
 &nbsp;
 
 In order change the value of a Dependent Variable, it is necessary
 to FIX (see below) its value and then execute the Search function
 (Action : Search menu).   
-![Dependent Variables](/docs/Help/png/Dependent.png "Dependent Variables")   
+![Dependent Variables](/docs/Help/img/Dependent.png "Dependent Variables")   
 
 &nbsp;
 
 Calculation Inputs are quantities that can be modified by the user
 but are not subject to Constraints, FIX or manipulation by the Search process. 
 You will likely need to scroll down to see the section containing Calculation Inputs.   
-![Calculation Inputs](/docs/Help/png/CalcInput.png "Calculation Inputs")   
+![Calculation Inputs](/docs/Help/img/CalcInput.png "Calculation Inputs")   
 
 &nbsp;
 
@@ -123,7 +123,7 @@ This clip illustrates how a Calculation Input with a drop-down arrow
 can expand into a table that the user can select from.
 In this case, the user selects a material and the appropriate 
 material property values (density in this case) are provided to the calculations.   
-![Calculation Input Table](/docs/Help/png/CalcInputTable.png "Calculation Input Table")   
+![Calculation Input Table](/docs/Help/img/CalcInputTable.png "Calculation Input Table")   
 
 &nbsp;
 
@@ -136,14 +136,14 @@ The Objective Value will reflect the aggregate impact of all violated constraint
 This example illustrates the 108 inch Max limit on Length+Girth
 and the 70 pound Max limit on weight that is common to many
 carriers in the package shipping industry.   
-![Constraints](/docs/Help/png/Constraint.png "Constraints")   
+![Constraints](/docs/Help/img/Constraint.png "Constraints")   
 
 &nbsp;
 
 In order to FIX the value of an Independent Variable, put a check
 in the box immediately to the right of its value.
 Note the checkboxes highlighted by the red oval in  this example.   
-![FIX an Independent Variable](/docs/Help/png/IV_Fix.png "FIX an Independent Variable")   
+![FIX an Independent Variable](/docs/Help/img/IV_Fix.png "FIX an Independent Variable")   
 
 &nbsp;
 
@@ -153,7 +153,7 @@ This will cause both associated constraints to be checked and the
 corresponding constraint entry fields to become available for input.
 Enter the FIX value into either entry field.
 Thus, the FIX of a Dependent Variable is effectively a double-sided constraint.   
-![FIX a Dependent Variable](/docs/Help/png/DV_Fix.png "FIX a Dependent Variable")   
+![FIX a Dependent Variable](/docs/Help/img/DV_Fix.png "FIX a Dependent Variable")   
 
 &nbsp;
 
@@ -170,7 +170,7 @@ Selecting <b>Index</b> on this list will bring up a new browser tab with the
 list of available Help entries. 
 You can switch back and forth between the browser tabs.
  If time is available, read through those entries from top to bottom.   
- ![Help Index](/docs/Help/png/HelpIndex.png "Help Index")   
+ ![Help Index](/docs/Help/img/HelpIndex.png "Help Index")   
   
  On-line documentation for ODOP:Spring appears in the Spring Design topic.
 

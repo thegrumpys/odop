@@ -81,7 +81,7 @@ export const execute = {
                     Expanded descriptions are available as tooltips for many elements of the Calculator View.
                     Hover the cursor (tap on a touch screen) over headings, labels, and variable names to learn more.
                     This compression spring 
-                    &nbsp;<a href="/docs/Help/png/ForceVsDeflection.png" target="_blank" rel="noopener noreferrer">Force-Deflection diagram</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/img/ForceVsDeflection.png" target="_blank" rel="noopener noreferrer">Force-Deflection diagram</a>&nbsp; 
                     illustrates selected variable names.  
                     Additional insights are available in the  
                     &nbsp;<a href="/docs/Help" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp; 

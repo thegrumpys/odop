@@ -59,7 +59,7 @@ See [ODOP Structure](png/ODOP_StructureDiagram.png)
 for a high level overview of the ODOP program's structure as a platform.
 
 A high level overview of the ODOP Design Process Flow is available.  See: 
-[ODOP Design Process Flow Diagram](/docs/About/png/DesignProcessFlowDiagram.png)
+[ODOP Design Process Flow Diagram](/docs/About/img/DesignProcessFlowDiagram.png)
    
 A more detailed explanation of these concepts is available in the on-line documentation. 
 See: 

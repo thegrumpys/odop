@@ -6,11 +6,11 @@ ___
 
 ## Quick overview:   
 
-![Free independent variable value input dialog box](/docs/Help/png/ValInpDlgIndepFreeNoted.png "Free independent variable value input dialog box")   
-![Fixed independent variable value input dialog box](/docs/Help/png/ValInpDlgIndepFixNoted.png "Fixed independent variable value input dialog box")   
+![Free independent variable value input dialog box](/docs/Help/img/ValInpDlgIndepFreeNoted.png "Free independent variable value input dialog box")   
+![Fixed independent variable value input dialog box](/docs/Help/img/ValInpDlgIndepFixNoted.png "Fixed independent variable value input dialog box")   
 
-![Free dependent variable value input dialog box](/docs/Help/png/ValInpDlgDepFreeNoted.png "Free dependent variable value input dialog box")   
-![Fixed dependent variable value input dialog box](/docs/Help/png/ValInpDlgDepFixNoted.png "Fixed Dependent variable value input dialog box")   
+![Free dependent variable value input dialog box](/docs/Help/img/ValInpDlgDepFreeNoted.png "Free dependent variable value input dialog box")   
+![Fixed dependent variable value input dialog box](/docs/Help/img/ValInpDlgDepFixNoted.png "Fixed Dependent variable value input dialog box")   
 
 ___   
 

@@ -90,7 +90,7 @@ export const execute = {
             title: "Page 04 of 14",
             text: (
                 <>
-                   <Image fluid src="/docs/About/png/DesignProcessFlowDiagram.png" alt="DesignProcessFlowDiagram"/>
+                   <Image fluid src="/docs/About/img/DesignProcessFlowDiagram.png" alt="DesignProcessFlowDiagram"/>
                 </>
             )
         },
@@ -98,7 +98,7 @@ export const execute = {
             title: "Page 05 of 14",
             text: (
                 <>
-                   <Image fluid src="/docs/Help/png/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
+                   <Image fluid src="/docs/Help/img/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
                 </>
             )
         },

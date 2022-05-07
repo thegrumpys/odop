@@ -253,7 +253,7 @@ Search stops if the Objective Value falls below OBJMIN.
 Results of a Search are reported in the Result Section that appears 
 at the upper portion of the main page (Advanced and Calculator views).   
 
-![Result Section](/docs/Help/png/ResultSectionToolTip.png "Result Section")  
+![Result Section](/docs/Help/img/ResultSectionToolTip.png "Result Section")  
 
 The tooltip associated with the "Status" label of multi-color Feasibility Indicator provides 
 the numeric values of the current Objective Value and OBJMIN. 
@@ -284,7 +284,7 @@ Seek will prompt for the name of the varible to be investigated and the directio
 Results of a Seek are reported in the Result Section that appears 
 at the upper portion of the main page (Advanced and Calculator views).   
 
-![Result Section](/docs/Help/png/ResultSectionToolTip.png "Result Section")  
+![Result Section](/docs/Help/img/ResultSectionToolTip.png "Result Section")  
 
 
 See also:   
@@ -409,7 +409,7 @@ It provides access to all program features.
 Use the checkboxes in the variables column to control Fix / Free status.
 Use the constraints column to establish or modify Min and/or Max values of constraints on the corresponding variables.
 
-[Spring variables displayed in Advanced View](/docs/Help/png/ScrCap_3TypeNoted.png)
+[Spring variables displayed in Advanced View](/docs/Help/img/ScrCap_3TypeNoted.png)
 
 
 ___
@@ -432,7 +432,7 @@ A border on the right indicates that an upper (Max) constraint is enabled.
 A heavier border on both left and right of a numeric field indicates Fixed status.
 No border line on either left or right indicates Free status and no constraint enabled.
 
-[Spring variables displayed in Calculator View](/docs/Help/png/ScrCap_3TypeCalcNoted.png)
+[Spring variables displayed in Calculator View](/docs/Help/img/ScrCap_3TypeCalcNoted.png)
 
 
 ___
@@ -448,7 +448,7 @@ Each of the currently available coil spring design types offers three reports.
  - Report 2 has a focus on stress information
  - Report 3 is intended to be printed or saved into .PDF format so that it can be included as part of a request for quotation 
 
-![Screen capture of Report 1](/docs/Help/png/ScrCap_Report1Noted.png "Report 1")  
+![Screen capture of Report 1](/docs/Help/img/ScrCap_Report1Noted.png "Report 1")  
 
 Information entered into the File : Properties menu of coil spring design types is included as part of Report 3.
 Thus, this information can be used to support the documentation of a spring design.

@@ -23,7 +23,7 @@ the provided Startup designs are [under specified](/docs/Help/designSituations.h
 You should provide additional constraints and Fixes specific to your spring application.
 
 If you haven't seen it already, the 
-[ODOP Design Process Flow Diagram](/docs/About/png/DesignProcessFlowDiagram.png)
+[ODOP Design Process Flow Diagram](/docs/About/img/DesignProcessFlowDiagram.png)
 provides an important conceptual introduction to the overall design process within ODOP.   
 
 Before continuing with the material below, 
@@ -40,10 +40,10 @@ Tutorial sessions teach operation of the program.
 Use the **Help : Tutorial...** menu item (illustrated in the screen captures below) 
 to select the desired tutorial session.   
 
-![Help Tutorial](/docs/Help/png/HelpTutorial.png "Help Tutorial")   
+![Help Tutorial](/docs/Help/img/HelpTutorial.png "Help Tutorial")   
    
 
-![Select Spring Tutorial](/docs/Help/png/SelectSpringTutor.png "Select Spring Tutorial")   
+![Select Spring Tutorial](/docs/Help/img/SelectSpringTutor.png "Select Spring Tutorial")   
    
 The spring tutorial session named **tutorTour** is recommended as a good starting point
 for users that have not already completed the tour provided in the **Help : Getting Started** topic.   
@@ -54,10 +54,10 @@ Demo sessions illustrate problem solving techniques as well as provide
 sample solutions to several generally available reference book problems.
 Use the **Help : Demo...** menu item to select the desired demo session.   
 
-![Help Demo](/docs/Help/png/HelpDemo.png "Help Demo")   
+![Help Demo](/docs/Help/img/HelpDemo.png "Help Demo")   
    
 
-![Select Spring Demo](/docs/Help/png/SelectSpringDemo.png "[Select Spring Demo")   
+![Select Spring Demo](/docs/Help/img/SelectSpringDemo.png "[Select Spring Demo")   
    
 The spring demo sessions named **demoDesignValidation** and **demoNewDesign** are recommended as a good
 starting point for new users.   
@@ -84,7 +84,7 @@ For the compression spring design type, those include
 &nbsp;
 
  Look at reports contained in the three Report tabs.   
- ![Spring Report Tabs](/docs/Help/png/SpringReportTabs.png "Spring Report Tabs")   
+ ![Spring Report Tabs](/docs/Help/img/SpringReportTabs.png "Spring Report Tabs")   
  
 &nbsp;
 

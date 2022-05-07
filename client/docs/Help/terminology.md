@@ -38,8 +38,8 @@ Within the context of the ODOP software, the terms "mathematical model",
 Each design type has a mathematical model at its core.
 
 For examples, see:   
-* [Piston-Cylinder](/docs/Help/DesignTypes/png/PCylDiagram.png) 
-* [Rectangular Solid](/docs/Help/DesignTypes/png/RectangularSolidDiagram.png).   
+* [Piston-Cylinder](/docs/Help/DesignTypes/img/PCylDiagram.png) 
+* [Rectangular Solid](/docs/Help/DesignTypes/img/RectangularSolidDiagram.png).   
 
 See also: 
  - [Design Types](terminology.html#designTypes)   
@@ -409,7 +409,7 @@ ___
 
 ## SPRING DESIGN VARIABLE NAMES   
 
-[Variable names illustrated on compression spring Force-Deflection diagram:](/docs/Help/png/ForceVsDeflection.png)
+[Variable names illustrated on compression spring Force-Deflection diagram:](/docs/Help/img/ForceVsDeflection.png)
 ___
 
 <a id="FactorOfSafety"></a>  
