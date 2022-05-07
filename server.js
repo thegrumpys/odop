@@ -529,7 +529,7 @@ function adjustSat(sat1, sat2, score) {
     satAdjust = (parseFloat(score) / 3) * (sat1 - sat2);
     newSat = sat2 + Math.floor(satAdjust);
   }
-  return `hsl(360, ${newSat}%, 50%)`;
+  return `hsl(122, ${newSat}%, 35%)`;
 }
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
