@@ -349,7 +349,7 @@ app.post('/api/v1/usage_log', (req, res) => {
     });
 });
 
-const MAX_SUMMARY_LENGTH = 30
+const MAX_SUMMARY_LENGTH = 1000
 const SENTENCE_BOUNDARY_REGEX = /\b\.\s/gm
 const WORD_REGEX = /\b(\w*)[\W|\s|\b]?/gm
 
@@ -438,8 +438,9 @@ function createSearchResultBlurb(query, pageMatch) {
           const startOfSentence = i > 0 ? sentenceBoundaries[i - 1] + 1 : 0;
           const endOfSentence = sentenceBoundaries[i];
           lastEndOfSentence = endOfSentence;
-          parsedSentence = pageMatch.content.slice(startOfSentence, endOfSentence).trim();
+          let parsedSentence = pageMatch.content.slice(startOfSentence, endOfSentence).trim();
           searchResultText += `${parsedSentence} ... `;
+          console.log('hitLocation=',hitLocation,'i=',i,'startOfSentence=',startOfSentence,'endOfSentence=',endOfSentence,'parsedSentence=',parsedSentence,'searchResultText=',searchResultText);
           break;
         }
       }
