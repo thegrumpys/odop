@@ -9,6 +9,8 @@ If possible, each entry in the list provides a brief block of text providing a b
 for how the terms are used in the Help topic. 
 Select the blue topic link to open a new browser tab containing that on-line Help entry.
 
+&nbsp;
+
 ## Improving Help Lookup results 
 Adding control characters to lookup terms can guide the lookup to better results. 
 
@@ -24,12 +26,18 @@ For example: tors*
 ### Restrict term matching to the topic title 
 For example: title:demo   
 
+&nbsp;
+
 Notes:   
 By default, "fuzzy" matching is enabled to the level of one character. 
 Adding, removing, changing or transposing a character in the word is considered a match.   
 
-Adding quotes and operators like AND & OR will not produce the desired results. 
-To lookup a phrase, put a + at the front of each word.   
+Unlike with Google Search, adding quotes and using operators like AND & OR to combine terms 
+will not produce the desired results. 
+To lookup a phrase, put a + at the front of each word in the phrase.   
+
+After opening the desired Help topic, 
+use your browser's "Find ...", "Find on page" or "Find in page" feature to highlight the term(s) of interest.
 
 See Also: 
  - [LUNR, Search Made Simple Guide](https://lunrjs.com/guides/searching.html)   
