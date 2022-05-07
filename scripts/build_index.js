@@ -49,34 +49,21 @@ function findHtml(folder) {
 };
 
 
-function readHtml(root, file, fileId) {
+function readHtml(root, file) {
     var filename = path.join(root, file);
     var txt = fs.readFileSync(filename).toString();
     var $ = cheerio.load(txt);
-//    var title = $("title").text();
-//    if (typeof title == 'undefined') title = file;
-//    var description = $("meta[name=description]").attr("content");
-//    if (typeof description == 'undefined') description = "";
-//    var keywords = $("meta[name=keywords]").attr("content");
-//    if (typeof keywords == 'undefined') keywords = "";
-//    var content = $("body").text()
-//    if (typeof content == 'undefined') content = "";
     var title = $("h1:last").text();
     if (typeof title == 'undefined') {
         title = "";
     } else {
         $("h1:last").remove(); // Remove title's text so doesn't get added to the content's text below
     }
-    var description = "";
-    var keywords = "";
     var content = $("section:last").text();
     if (typeof content == 'undefined') content = "";
     var data = {
-        "id": fileId,
         "href": file,
         "title": title,
-        "description": description,
-        "keywords": keywords,
         "content": content,
     }
     return data;
@@ -87,8 +74,6 @@ function buildIndex(docs) {
     var idx = lunr(function () {
         this.ref('href');
         this.field('title', {boost: 10});
-        this.field('description');
-        this.field('keywords');
         this.field('content');
         this.metadataWhitelist = ['position']
         docs.forEach(function (doc) {
@@ -103,16 +88,10 @@ function buildPreviews(docs) {
     var result = [];
     for (var i = 0; i < docs.length; i++) {
         var doc = docs[i];
-//        var preview = doc["description"];
-//        if (preview == "") preview = doc["body"];
-//        if (preview.length > MAX_PREVIEW_CHARS)
-//            preview = preview.slice(0, MAX_PREVIEW_CHARS) + " ...";
-        result[doc["id"]] = {
+        result [i] = {
             "title": doc["title"],
-            "description": doc["description"],
             "content": doc["content"],
-            "href": doc["href"],
-            "id": doc["id"]
+            "href": doc["href"]
         }
     }
     return result;
@@ -127,7 +106,7 @@ function main() {
     console.log("Building index for these files:");
     for (var i = 0; i < files.length; i++) {
         console.log("    " + files[i]);
-        docs.push(readHtml(HTML_FOLDER, files[i], i));
+        docs.push(readHtml(HTML_FOLDER, files[i]));
     }
     var idx = buildIndex(docs);
     var previews = buildPreviews(docs);

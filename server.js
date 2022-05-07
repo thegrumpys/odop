@@ -349,7 +349,7 @@ app.post('/api/v1/usage_log', (req, res) => {
     });
 });
 
-const MAX_SUMMARY_LENGTH = 1000
+const MAX_WORD_NUMBER = 1000
 const SENTENCE_BOUNDARY_REGEX = /\b\.\s/gm
 const WORD_REGEX = /\b(\w*)[\W|\s|\b]?/gm
 
@@ -450,10 +450,10 @@ function createSearchResultBlurb(query, pageMatch) {
     if (pageBreakers.length > 0) {
       searchResultText = fixPageBreakers(searchResultText, pageBreakers);
     }
-    if (searchResultWords.length >= MAX_SUMMARY_LENGTH) break;
+    if (searchResultWords.length >= MAX_WORD_NUMBER) break;
   }
   let style_color = 'style="color:' + getColorForSearchResult(pageMatch.score) + '"'
-  return ellipsize(searchResultText, MAX_SUMMARY_LENGTH).replace(
+  return ellipsize(searchResultText, MAX_WORD_NUMBER).replace(
     searchQueryRegex,
     `<strong ${style_color}>$&</strong>`
   );
