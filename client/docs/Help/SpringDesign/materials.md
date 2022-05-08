@@ -5,43 +5,45 @@
 Spring wire and bar materials available in the default material table supplied with ODOP:Spring
 include:
 
-      Common Name    ASTM     FED_SPEC    Notes
-    
-    HARD_DRAWN_WIRE  A227                Class II
-    MUSIC_WIRE       A228     QQW-470
-    OIL_TEMPERED_MB  A229     QQW-428    Class II
-    CHROME_VANADIUM  A232     QQW-412
-    CHROME_SILICON   A401     QQW-412
-    SAE9250          A401     QQW-412
-    302_STAINLESS   Type302   QQW-423
-    17-7_STAINLESS   A313    (cond_CH)
-    SPRING_BRASS     B134     QQW-321
-    PHOSPHOR_BRONZE  B159     QQW-401
-    MONEL             400    (AMS7233)
-    INCONEL_X-750   SprTmp   (AMS5698)
-    BERYLLIUM-COPPER  B197    QQW-530
-    5160H            A125-52
-    5160H-CG         A125-52          centerless ground
+Common name | ASTM | Fed Spec | Notes  
+--- | --- | --- | ---  
+HARD DRAWN WIRE | A227 | &nbsp; | Class II  
+MUSIC WIRE | A228 |QQW-470 |  
+OIL TEMPERED MB | A229 | QQW-428 | Class II  
+CHROME VANADIUM | A232 | QQW-412 |  
+CHROME SILICON | A401 | QQW-412 |  
+SAE9250 | A401 | QQW-412 |  
+302 STAINLESS | Type302 | QQW-423 |  
+17-7 STAINLESS | A313 | | (cond CH)  
+SPRING BRASS | B134 | QQW-321 |  
+PHOSPHOR BRONZE | B159 | QQW-401 |  
+MONEL | 400 | (AMS7233) |  
+INCONEL X-750 | &nbsp; | (AMS5698) | SprTmpr 
+BERYLLIUM-COPPER | B197 | QQW-530 |  
+5160H | A125-52 | &nbsp; |  
+5160H-CG | A125-52 | &nbsp; | centerless ground
 
 The corresponding "long names" not currently displayed in the ODOP:Spring user interface are:
 
-    17Cr 7Ni Stainless wire: condition CH -          ASTM A-313 
-    Type 302 Stainless Steel spring wire -           ASTM A-313 
-    Type 316 Stainless Steel spring wire -           ASTM A-313
-    5160H Chromium steel:       not ground:hot wound:ASTM A-125
-    5160H Chromium steel:centerless ground:hot wound:ASTM A-125
-    Beryllium Copper -                               ASTM B-197 
-    Oil Temp Chrome Silicon spring wire -            ASTM A-401
-    Oil Temp Chrome Vanadium valve spring wire -     ASTM A-232
-    Hard Drawn MB spring wire   - Class II           ASTM A-227 
-    Inconel X-750  Spring Temper                     AMS  5698 
-    Monel  Alloy 400                                 AMS  7233 
-    Music Wire  (all coatings) -                     ASTM A-228 
-    Oil Tempered MB spring wire - Class II           ASTM A-229 
-    Phosphor Bronze spring wire -                    ASTM B-159 
-    Oil Temp Chrome Silicon valve spring wire -      ASTM A-401
-    70/30 Brass spring wire -                        ASTM B-134 
-    Ti-13V-11Cr-3Al  Beta C Titanium -               AMS  4917
+Long name | ASTM / Fed Spec  
+--- | ---  
+17Cr 7Ni Stainless wire - condition CH | ASTM A-313 
+Type 302 Stainless Steel spring wire | ASTM A-313  
+Type 316 Stainless Steel spring wire | ASTM A-313  
+5160H Chromium steel - not ground,hot wound | ASTM A-125
+5160H Chromium steel - centerless gnd,hot wound | ASTM A-125
+Beryllium Copper | ASTM B-197  
+Oil Temp Chrome Silicon spring wire | ASTM A-401 
+Oil Temp Chrome Vanadium valve spring wire | ASTM A-232  
+Hard Drawn MB spring wire - Class II | ASTM A-227  
+Inconel X-750 - Spring Temper | AMS  5698  
+Monel Alloy 400 | AMS  7233  
+Music Wire (all coatings) | ASTM A-228  
+Oil Tempered MB spring wire - Class II | ASTM A-229  
+Phosphor Bronze spring wire | ASTM B-159  
+Oil Temp Chrome Silicon valve spring wire | ASTM A-401  
+70/30 Brass spring wire | ASTM B-134  
+Ti-13V-11Cr-3Al Beta C Titanium | AMS  4917  
 
    
 By default, ODOP:Spring gets material property data from the materials table. 
@@ -96,7 +98,7 @@ Stress\_Lim\_Stat and Stress\_Lim\_Endur at each step in the Search process.
 This insures that the allowable stresses used in the factor of safety
 calculations exactly match the trial values of Wire\_Dia selected by Search.
    
-If Prop\_Calc\_Method has a value of **2 - Use Tensile & %_Tensile_...**, 
+If Prop\_Calc\_Method has a value of **2 - Use Tensile & %\_Tensile_...**, 
 the user supplied values of Tensile, %\_Tensile\_Stat and
 %\_Tensile\_Endur are used to calculate the allowable stresses
 Stress\_Lim\_Stat and Stress\_Lim\_Endur.
@@ -121,8 +123,8 @@ current values of Tensile plus
 carried over from the values established in the materials table or startup. 
 The order in which these changes are entered is significant.
 
-    CHANGE  Prop_Calc_Method  2 - Use Tensile & %_Tensile_...
-    CHANGE  Torsion_Modulus  xxxxxxxx
+    CHANGE Prop_Calc_Method 2 - Use Tensile & %_Tensile_...
+    CHANGE Torsion_Modulus  xxxxxxxx
    
 The same process applies to changing values for %\_Tensile\_Stat and %\_Tensile\_Endur.
 
@@ -132,8 +134,8 @@ Stress\_Lim\_Stat and Stress\_Lim\_Endur will continue to be based on the new
 value of %\_Tensile\_Stat and existing value of %\_Tensile\_Endur.  The order
 in which these changes are entered is significant.
 
-    CHANGE  Prop_Calc_Method  2 - Use Tensile & %_Tensile_...
-    CHANGE  %_Tensile_STAT  xxxxxxxx
+    CHANGE Prop_Calc_Method 2 - Use Tensile & %_Tensile_...
+    CHANGE %_Tensile_STAT  xxxxxxxx
 
    
  The following example illustrates how to establish values of

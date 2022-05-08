@@ -58,7 +58,7 @@ ___
 ___
 
 ## The essential challenge of spring design   
-The challenge of any design problem is to select values for those
+The challenge of any engineering design problem is to select values for those
 parameters that are under the designer's control such that the design
 produces the desired performance.
 
@@ -445,50 +445,8 @@ ___
 ___
 
 ## Materials   
-Spring wire and bar materials available in the default material table supplied 
-with ODOP:Spring include:
 
-      Common Name    ASTM     FED_SPEC    Notes
-
-    HARD_DRAWN_WIRE  A227                Class II
-    MUSIC_WIRE       A228     QQW-470
-    OIL_TEMPERED_MB  A229     QQW-428    Class II
-    CHROME_VANADIUM  A232     QQW-412
-    CHROME_SILICON   A401     QQW-412
-    SAE9250          A401     QQW-412
-    302_STAINLESS   Type302   QQW-423
-    17-7_STAINLESS   A313    (cond_CH)
-    SPRING_BRASS     B134     QQW-321
-    PHOSPHOR_BRONZE  B159     QQW-401
-    MONEL             400    (AMS7233)
-    INCONEL_X-750   SprTmp   (AMS5698)
-    BERYLLIUM-COPPER  B197    QQW-530
-    5160H            A125-52
-    5160H-CG         A125-52          centerless ground
-
-   
-By default, ODOP:Spring gets material property data from the materials table. 
-Alternate material tables may be provided to contain material
-property values that match locally available materials or individual
-experience and preferences.  Thus the currently active materials table may
-not match the default table described above. 
-Refer to the [Restrictions](/docs/Help/../About/Legal/Restrictions.html)
-section of the documentation for additional information.
-
-The way that ODOP:Spring handles material property data is dependent on the
-user specified settings of the Calculation Inputs Material\_Type and
-Prop\_Calc\_Method. 
-Note that by default, when using a material selected from the materials table,
-allowable stresses are calculated as a function of wire diameter.
-In general, the user may ignore these details and simply
-establish material property values by selecting a Material\_Type. 
-In the case that more control of material property data entering 
-the calculations is desired, the details provided in 
-[Prop_Calc_Method](/docs/Help/SpringDesign/advancedSpringOperations.html) and 
-[Materials](/docs/Help/SpringDesign/materials.html) may be useful. 
-
-Examples of these procedures are presented in tutorial section TUTOR5.
-
+Refer to: [Materials](/docs/Help/SpringDesign/materials.html)   
 ___
 
 <a id="EndTypes"></a>  
@@ -501,16 +459,16 @@ springs.  In addition, the user can define specialized end conditions.
 These end types are represented by the Calculation Input End\_Type which
 has the following possible values:
 
-          Compression           Extension
-
-    1     OPEN              1   FULL_LOOP
-    2     OPEN&GROUND       2   75%_LOOP
-    3     CLOSED            3   FULL_HOOK
-    4     CLOSED&GROUND     4   75%_HOOK
-    5     TAPERED_C&G       5   CLOSE_WOUND_COIL
-    6     PIG-TAIL
-
-    7     USER_SPECIFIED    6   USER_SPECIFIED
+ &nbsp; | Compression | &nbsp; | &nbsp; |  Extension  
+ --- | --- | --- | --- | ---  
+1 | OPEN | &nbsp; | 1 | FULL_LOOP  
+2 | OPEN&GROUND| |  2 |  75%_LOOP  
+3 | CLOSED | | 3 |  FULL_HOOK  
+4 | CLOSED&GROUND | | 4 | 75%_HOOK  
+5 | TAPERED_C&G | | 5 | CLOSE_WOUND_COIL  
+6 | PIG-TAIL | | |  
+  | | | |  
+7 | USER_SPECIFIED | | 6 | USER_SPECIFIED  
 
 For a compression spring, the end type directly impacts calculation of
 Inactive\_Coils.  L\_Solid, pitch and other variables are affected
