@@ -90,7 +90,7 @@ Frequently, dependent variables are measures of the performance of a given
 design and can be thought of as indicating the "state" of the design. 
 A [Search](terminology.html#search) is required to establish appropriate values of the
 independent variables to produce the desired value of a dependent
-variable in Fix status.  
+variable in Fix status. 
 A a dependent variable in Fix status increases the
 computational demand of the numerical search problem.
 See the [FIX](terminology.html#fix) entry below for more details.
@@ -113,7 +113,8 @@ ___
 
 ## CONSTRAINTS   
 Constraints are one sided boundaries that represent goals for the design
-problem.  Either dependent or independent variables may be constrained to
+problem. 
+Either dependent or independent variables may be constrained to
 be greater than or less than a simple constant or a functionally
 determined quantity such as a different dependent or independent
 variable or Calculation Input. 
@@ -130,7 +131,8 @@ Independent Variables to meet the specified constraint levels.
 In order to save time and provide more predictable operation,
 ODOP will stop the search process if it gets very close to a feasible design 
 but still violates one or more constraints by a fraction of a percent. 
-In this case, the design is referred to as "marginally feasible".
+In this case, the design is referred to as "feasible" or 
+"marginally feasible" as opposed to "strictly feasible".
 
 [Design Situations](designSituations.html) provides more insights on how
 constraints are used to properly specify a design problem.
@@ -142,8 +144,8 @@ ___
 
 ## CONSTRAINT VIOLATIONS   
 A constraint violation represents the difference between the current
-value of a given variable and its corresponding constraint level.  By
-convention, negative values represent constraint satisfaction, positive
+value of a given variable and its corresponding constraint level. 
+By convention, negative values represent constraint satisfaction, positive
 values represent constraint violation.
 
 ___
@@ -162,7 +164,7 @@ the user will be able to select from a list of variable names available
 to be used as constraint levels.
 The variables that can be constrained this way and the variables that are eligible
 as choices to be selected as constraints are configured in the design type's
-initialState.   
+initialState. 
 
 More specific information is available in the On-line Help section covering 
 [extension spring constraints](DesignTypes/e_spring.html#e_springConstraints).
@@ -189,7 +191,7 @@ While not a significant concern,
 this increases the computational effort required for the Search to find a solution.
 Once the appropriate Fix checkbox is checked, 
 enter a target value in either the Minimum or Maximum constraint level entry field.
-A  [Search](terminology.html#search) (Action : Search menu) is required to establish the desired values.
+A [Search](terminology.html#search) (Action : Search menu) is required to establish the desired values.
 
 Clearing the checkbox (Free status) allows the Search to alter the value of the corresponding variable
 subject to constraints, if established.
@@ -236,18 +238,20 @@ ___
 
 ## FEASIBLE REGION   
 A feasible region may be formed within the boundaries represented by the
-various constraints on the design problem.  If a given design satisfies
-all the constraints, it is said to be "feasible" or in the "feasible
-region".  If the constraint levels are set such that the constraints
+various constraints on the design problem. 
+If a given design satisfies all the constraints, it is said to be "feasible" 
+or in the "feasible region". 
+If the constraint levels are set such that the constraints
 overlap, no solution that satisfies the design equations and the
-constraints simultaneously can be found.  The search will terminate with
-multiple constraints violated.  In this case, there is no feasible
-region.
+constraints simultaneously can be found. 
+The search will terminate with multiple constraints violated. 
+In this case, there is no feasible region.
 
 When faced with the situation where no feasible solution is available,
 the designer must restructure the problem or his goals in some way to
-permit the desired solution.  Perhaps the solution is to use a stronger
-material.  This can be represented by changing a material constant and
+permit the desired solution. 
+Perhaps the solution is to use a stronger material. 
+This can be represented by changing a material constant and
 re-executing the search. 
 Perhaps use of the TRADE feature is appropriate.
 For more information, see: [Trade](/docs/Help/trade.html).
@@ -258,11 +262,12 @@ ___
 ___
 
 ## OBJECTIVE FUNCTION   
-The objective function constitutes the numerical search problem.  It is
-formed as a blend of violated constraints, dependent variable Fix 
-violations and in the case of the [SEEK](seek.html) feature, a "merit function" that
-represents the variable under investigation.  The search algorithm works
-to drive the objective function to the lowest value possible.
+The objective function constitutes the numerical search problem. 
+It is formed as a blend of violated constraints, dependent variable Fix 
+violations and in the case of the [SEEK](seek.html) feature, a "merit function" 
+that represents the variable under investigation. 
+The search algorithm works to drive the objective function to 
+the lowest value possible.
 For more detail, see the [SEARCH](terminology.html#search) entry below.
 
 ___
@@ -276,8 +281,7 @@ ___
 Preference settings control the operation of the program. 
 They have no direct meaning to the design problem. 
 For more specific information, refer to the documentation section
-(on-line Help entry) on [Search](search.html) 
-and Tutorial session tutor9.
+(on-line Help entry) on [Search](search.html) and Tutorial session tutor9.
 
 ___
 
@@ -315,19 +319,19 @@ ___
 The ODOP software allows for multiple design types and thus multiple sets of 
 design equations (mathematical models of a specific design problem) 
 to be concurrently available. 
-Currently implemented Design Types include:
+Currently implemented Design Types include: 
 * [Compression Spring](/docs/Help/DesignTypes/c_spring.html)   
 * [Extension Spring](/docs/Help/DesignTypes/e_spring.html)   
 * [Torsion Spring](/docs/Help/DesignTypes/t_spring.html)   
-* [Rectangular Solid](/docs/Help/DesignTypes/r_solid.html)
-* [Piston-Cylinder](/docs/Help/DesignTypes/pcyl.html) 
+* [Rectangular Solid](/docs/Help/DesignTypes/r_solid.html)   
+* [Piston-Cylinder](/docs/Help/DesignTypes/pcyl.html)   
 
 The simplest way to use a different design type and equation set is to select a 
 design type that uses the desired equation set at the time that the ODOP 
 software first starts. 
 A default design named "Startup" should be available for each design type.
 An explanation of how to select a design type and open a design of that type 
-is provided in: [Getting Started](gettingStarted.html).   
+is provided in: [Getting Started](gettingStarted.html). 
 
 Additional information on how to implement new ODOP design types is available
 in the [NewDesignType](/docs/procedures/NewDesignType.html) documentation.
@@ -338,12 +342,12 @@ ___
 <a id="search"></a>  
 ___
 
-## SEARCH    
+## SEARCH   
 The term "Search" is used in the sense of "Search for a solution". 
 The ODOP Search feature (<b>Action : Search</b> menu item or Search button) 
 is used to find a feasible design. 
 In the sense that it is a manual operation used to find a solution,
-Search is conceptually similar to a manual recalculation operation in a spreadsheet program.   
+Search is conceptually similar to a manual recalculation operation in a spreadsheet program. 
 
 The [Search](search.html) algorithm manipulates the values of independent variables 
 so as to minimize the Objective Value. 
@@ -351,7 +355,7 @@ Because the [OBJECTIVE FUNCTION](terminology.html#obj) is constructed as a sum o
 constraint and dependent variable Fix violations, 
 minimizing the Objective Value will minimize violations and 
 thus move in the direction of a feasible design.
-The solution provided by  Search represents the best available solution to the 
+The solution provided by Search represents the best available solution to the 
 designer's goals as expressed by constraints and Fixes. 
 If a solution that meets all of these goals, is not available, 
 the search process converges to a compromise.
@@ -360,8 +364,7 @@ Typically, this compromise violates multiple constraints.
 While the ODOP software is modular and can potentially support multiple numerical search algorithms, 
 the current ODOP software release supplies only one such numerical search algorithm.
 Additional information on the search algorithm is available in the 
-[Search](/docs/Help/search.html) Help entry.   
-
+[Search](/docs/Help/search.html) Help entry. 
 
 ___
 
@@ -372,7 +375,7 @@ ___
 The design library is a database physically located on an Internet server,
 a.k.a. "in the cloud". 
 Design information stored in the design library does not appear on the local storage of your computer. 
-You must be logged in to an ODOP user account in order to save designs into the ODOP design library.    
+You must be logged in to an ODOP user account in order to save designs into the ODOP design library. 
 
 See: [User Accounts](/docs/About/userAccounts.html) for details on how to obtain an ODOP user account.
 
@@ -385,22 +388,23 @@ ___
 The term "migration" refers to the process of upgrading designs created in a previous 
 version of the software to the format required by the current version. 
 This process changes the underlying data structures that describe the design. 
-Opening a design saved in a prior version will produce a pop-up message of the form:   
-"Migrated design from version {_previous version number_} to {_current version number_}".   
+Opening a design saved in a prior version will produce a pop-up message of the form: 
+
+"Migrated design from version {_previous version number_} to {_current version number_}". 
+
 Saving the design will eliminate the message on future open operations.
-Complete detail on the latest changes is available in GitHub.    
+Complete detail on the latest changes is available in GitHub. 
 
 The Help : About menu item lists the Design Model version for the currently open design type 
 in the form: "Design Model version   {_current version number_}".
 
 Help : About also displays the current ODOP software version in the form: 
-"Software version   {_Major.Minor.Patch_}". 
+"Software version  {_Major.Minor.Patch_}". 
 The ODOP version is independent of the version of any specific design type (a.k.a. model).
 A change in software version may or may not be associated with a change in the 
 design model version number for any design type.
 A change in the version number of any design type will usually be associated with a change in the 
-minor or major field of the ODOP software version.   
-
+minor or major field of the ODOP software version. 
 
 ___
 

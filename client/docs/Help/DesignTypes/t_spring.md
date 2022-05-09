@@ -1,11 +1,11 @@
 # Torsion Spring Design Type
 
 The Torsion Spring design type is a full-featured mathematical model enabling 
-the engineering design of helical coil torsion springs.   
+the engineering design of helical coil torsion springs. 
 
-This section presents material unique to the Torsion Spring design type.
-The more general material available at [Spring Design Topics](/docs/Help/SpringDesign)
-provides important supplemental information.   
+This section presents material unique to the Torsion Spring design type. 
+The more general material available at [Spring Design Topics](/docs/Help/SpringDesign) 
+provides important supplemental information. 
 
 ___
 
@@ -80,7 +80,6 @@ ___
  point 1 = minimum operating load &nbsp; &nbsp; point 2 = maximum operating load   
 
 &nbsp;
-   
 
 ___
 
@@ -90,12 +89,12 @@ ___
 ## Torsion spring dimensions   
 
 The following diagram may be of some assistance in interpreting the names 
-associated with various dimensions of a torsion spring.  
-   
+associated with various dimensions of a torsion spring. 
+
 ![Torsion Spring Names](/docs/Help/DesignTypes/img/TorsionNames.png "Torsion Spring Names")   
 
 &nbsp;   
-   
+
 ___
 
 <a id="t_springIV_Names"></a>  
@@ -207,7 +206,7 @@ ___
                       allowable stresses when Prop_Calc_Method is 1.
                       Otherwise is ignored.
     
-    ASTM/Fed_Spec  -  character string used only as a label to further
+    ASTM/Fed-Spec  -  character string used only as a label to further
                       identify the origin of material property data
     
     Process        -  character string used to identify the
@@ -256,16 +255,16 @@ ___
                         
     Catalog_Number   -  catalog number of the most recent catalog entry.  
 
-
 &nbsp;
+
 For additional information: 
  - [Materials](/docs/Help/SpringDesign/materials.html)   
  - [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
  - [Torsion spring end types](t_spring.html#t_springEndTypes)   
  - [Torsion spring dimensions](t_spring.html#t_springDims)  
- 
+
 &nbsp;
-   
+
 ___
 
 <a id="t_springOtherValues"></a>  
@@ -310,12 +309,12 @@ For torsion springs, the Calculation Input End_Type has the following possible v
     1    Tangent
     2    User_Specified
 
-In the current version of ODOP:Spring, no calculations depend on these End_Type settings.
-They are for display only.   
+In the current version of ODOP:Spring, no calculations depend on these End_Type settings. 
+They are for display only. 
 
-Separately, the values of Arm\_1, Arm\_2, L\_End\_1, L\_End\_2, XLen\_1 and XLen_2 are available to
+Separately, the values of Arm\_1, Arm\_2, L\_End\_1, L\_End\_2, XLen\_1 and XLen_2 are available to 
 describe end conditions. 
-This diagram  may be helpful.   
+This diagram  may be helpful. 
 
 ![Torsion Spring Names](/docs/Help/DesignTypes/img/TorsionNames.png "Torsion Spring Names")   
 
@@ -327,7 +326,6 @@ This diagram  may be helpful.
 
 
 &nbsp;
-
 
 <!---
 While single line comments work as expected, 
