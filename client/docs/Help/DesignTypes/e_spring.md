@@ -1,11 +1,11 @@
 # Extension Spring Design Type
 
 The Extension Spring design type is a full-featured mathematical model enabling 
-the engineering design of helical coil extension springs.   
+the engineering design of round wire helical coil extension springs. 
 
-This section presents material unique to the Extension Spring design type.
-The more general material available at [Spring Design Topics](/docs/Help/SpringDesign)
-provides important supplemental information.   
+This section presents material unique to the Extension Spring design type. 
+The more general material available at [Spring Design Topics](/docs/Help/SpringDesign) 
+provides important supplemental information. 
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 <a id="e_springFD_Diag"></a>  
 ___
-   
+
 ## Extension spring force-deflection diagram    
                      
     
@@ -62,7 +62,7 @@ ___
 <a id="e_springFD_Names"></a>  
 ___
 
-## Extension spring force-deflection point names    
+## Extension spring force-deflection point names 
 
  The force-deflection points and associated names are:   
 
@@ -78,9 +78,9 @@ ___
 
     max safe:          
 
- point 1 = minimum operating load;  &nbsp;  point 2 = maximum operating load
+ point 1 = minimum operating load;  &nbsp;  point 2 = maximum operating load 
 
-&nbsp;
+&nbsp; 
 
 ___
 
@@ -89,8 +89,8 @@ ___
 
 ## Extension spring dimensions   
 
-The following diagrams may be of some assistance in interpreting the various
-dimensions of an extension spring.
+The following diagrams may be of some assistance in interpreting the various 
+dimensions of an extension spring. 
 
    
               Extension Spring Dimensions   
@@ -118,14 +118,14 @@ dimensions of an extension spring.
     |<--------------------------------- L_Free ------------------------------>|
     |<-- L_End -->|<-- L_Body -->|<-- End_Extension -->|<-- L_Extended_End -->|  
       
-&nbsp;
-   
+&nbsp; 
+
 ___
 
 <a id="e_springIV_Names"></a>  
 ___
 
- ## Independent Variable names:    
+ ## Independent Variable names:  
 
     Wire_Dia     -  wire diameter
     
@@ -144,7 +144,7 @@ ___
     
     Force_2      -  load at point 2    (maximum operating load)
    
-&nbsp;
+&nbsp; 
 ___
 
 <a id="e_springDV_Names"></a>  
@@ -203,16 +203,16 @@ ___
     F1_IT_Margin    -  amount by which Force_1 exceeds Initial_Tension
 -->
                     
-&nbsp;
+&nbsp; 
 For additional information: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
-&nbsp;
-   
+&nbsp; 
+
 ___
 
 <a id="e_springCalcInputNames"></a>  
 ___
 
-## Calculation Input names:   
+## Calculation Input names: 
 
     Spring_Type      -  character string used only as label
     
@@ -276,13 +276,13 @@ ___
 <!---     Material_File -  character string containing the material table name. -->
 <!---                      It is normally established by the initialState.js file. -->
 
-&nbsp;
+&nbsp; 
 For additional information: 
  - [Materials](/docs/Help/SpringDesign/materials.html)   
  - [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
  - [Extension spring end types](e_spring.html#e_springEndTypes)   
-&nbsp;
-   
+&nbsp; 
+
 ___
 
 <a id="e_springOtherValues"></a>  
@@ -306,7 +306,7 @@ Other values calculated and displayed in the Reports include:
     torsion stress at end  - stress in hook or loop
     bending stress at end  - stress in hook or loop  (Stress_Hook)
 
-&nbsp;
+&nbsp; 
 
 ___
 
@@ -315,20 +315,20 @@ ___
 
 ## Constraints unique to extension springs:   
 
-While most extension spring constraints have constant levels,
-a few are of the "Functionally Determined Constraint Level" (FDCL) variety.
+While most extension spring constraints have constant levels, 
+a few are of the "Functionally Determined Constraint Level" (FDCL) variety. 
 As described in the [Function Constraints (FDCL)](/docs/Help/terminology.html#fdcl) section 
 of the On-line Help entry on "Terminology", 
 rather than having constraint levels that are expressed 
 as simple constants, these express a desired relationship between 
-selected variables.   
+selected variables. 
 
-In the default extension spring start point ("Startup"), Force\_1 MIN is
+In the default extension spring start point ("Startup"), Force\_1 MIN is 
 a function of Initial\_Tension. 
-The constraint relationship says that Force\_1, the force at the first
-load point, should be greater than the value of Initial\_Tension.
+The constraint relationship says that Force\_1, the force at the first 
+load point, should be greater than the value of Initial\_Tension. 
 
-&nbsp;
+&nbsp; 
 
 ___
 
@@ -337,23 +337,23 @@ ___
 
 ## Initial tension range   
 
-Manufacturing considerations require that the initial tension of an
-extension spring fall within an empirical minimum to maximum range.
+Manufacturing considerations require that the initial tension of an 
+extension spring fall within an empirical minimum to maximum range. 
 The software calculates this range and using the constraint defaults established 
 in the extension spring startup, the software will search for designs 
-that fall within this range.
+that fall within this range. 
 
 The SI_Range selection in extension spring Calculation Inputs provides 
-the terms "Readily Obtainable" and "Special Request" that
+the terms "Readily Obtainable" and "Special Request" that 
 refer to the ranges of initial stress achievable in standard practice. 
-The "Special Request" range permits a lower minimum and higher maximum values.
-Internally, the SI\_Range selection gets empirical constants SI\_Lo\_Factor and SI\_Hi\_Factor
+The "Special Request" range permits a lower minimum and higher maximum values. 
+Internally, the SI\_Range selection gets empirical constants SI\_Lo\_Factor and SI\_Hi\_Factor 
 from the material table and computes Stress\_Init\_Lo and Stress\_Init\_Hi. 
 These values then become the MIN and MAX constraint levels for Stress\_Initial 
-and thus limit Initial_Tension to the appropriate range of values.
+and thus limit Initial_Tension to the appropriate range of values. 
 
 In summary, extension springs have three "Functionally Determined Constraint Levels" (FDCL) 
-configured in the default startup design.
+configured in the default startup design. 
 
 **Constraint on: &nbsp; &nbsp; &nbsp;  Is current value of:**   
 Force\_1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MIN &nbsp; &nbsp; &nbsp; Initial\_Tension   
@@ -361,12 +361,12 @@ Stress\_Initial &nbsp; MIN &nbsp; &nbsp; &nbsp; Stress\_Init_Lo
 Stress\_Initial &nbsp; MAX &nbsp; &nbsp;&nbsp; Stress\_Init_Hi   
 
 One additional "Functionally Determined Constraint Levels" (FDCL) that can be enabled 
-by the user is:   
+by the user is: 
 
 **Constraint on: &nbsp; &nbsp; &nbsp;  Is current value of:**   
 Stress\_Hook &nbsp; MAX &nbsp; &nbsp;&nbsp; Stress\_Lim_Bend   
 
-&nbsp;
+&nbsp; 
 
 ___
 
@@ -375,22 +375,23 @@ ___
 
 ## Hook Stress    
 
-The software calculates the bending stress (Sa) and torsional stress (Sb)
-in a conventional machine hook of an extension spring.  The bending stress,
-a function of hook radius, reaches a maximum at a point (a) on the hook
-that is 90 degrees prior to the contact point of an attachment pin or other
-means of loading the spring.  The torsional stress, a function of the bend
-radius where the spring body transitions into the hook, reaches a maximum
-at a point (b).  The current version of of the software will base the torsional
-stress calculation on a bend radius of twice the wire diameter.
+The software calculates the bending stress (Sa) and torsional stress (Sb) 
+in a conventional machine hook of an extension spring. 
+The bending stress, a function of hook radius, 
+reaches a maximum at a point (a) on the hook that is 90 degrees prior to the 
+contact point of an attachment pin or other means of loading the spring. 
+The torsional stress, a function of the bend radius where the spring body 
+transitions into the hook, reaches a maximum at a point (b). 
+The current version of of the software will base the torsional 
+stress calculation on a bend radius of twice the wire diameter. 
 
-These stresses are listed in the REPORT 2 tab.  A warning message
-will be produced if either of the stresses is high enough to exceed the
-corresponding allowable stress value.  Note that the limiting stress
-component (bending stress at point (a) vs. torsional stress at point (b) )
-is a function of spring index.
+These stresses are listed in REPORT 2. 
+A warning message will be produced if either of the stresses is high enough 
+to exceed the corresponding allowable stress value. 
+Note that the limiting stress component (bending stress at point (a) versus 
+torsional stress at point (b)) is a function of spring index. 
 
-&nbsp;
+&nbsp; 
 
 ___
 
@@ -399,34 +400,36 @@ ___
 
 ## Extension spring cycle life    
 
-Hook or loop ends on an extension spring are loaded in both bending and
-torsion.  Depending on the radius of the bend that tilts the last coil
-upward to form the hook or loop, either the bending or torsional stresses
-may be the first to induce failure.  Note that fatigue failure in the end
-of an extension spring may also be induced by stress concentration caused
-by tooling marks.  Refer to the sources listed in the on-line Help
-[Spring Design References](/docs/Help/SpringDesign/references.html) entry for additional details.
+Hook or loop ends on an extension spring are loaded in both bending and torsion. 
+Depending on the radius of the bend that tilts the last coil 
+upward to form the hook or loop, either the bending or torsional stresses 
+may be the first to induce failure. 
+Note that fatigue failure in the end of an extension spring may also be induced by 
+stress concentration caused by tooling marks. 
+Refer to the sources listed in the on-line Help 
+[Spring Design References](/docs/Help/SpringDesign/references.html) 
+topic for additional details. 
 
-ODOP:Spring uses bending stresses in the calculation of FS\_Hook.   FS\_Hook is
-not constrained in the default extension spring start point ("Startup").
-In order to establish such a constraint, use the numeric entry fields.  For
-example:
+ODOP:Spring uses bending stresses in the calculation of FS\_Hook. 
+FS\_Hook is not constrained in the default extension spring start point ("Startup").
+In order to establish such a constraint, use the numeric entry fields. 
+For example: 
 
         CHANGE  FS_Hook  MIN  1.0
         CHANGE  Stress_Hook  MAX  Stress_Lim_Bend
 
-Stress\_Lim\_Bend is based on %\_Tensile\_Bend, a percentage of the selected
-material's tensile strength.  This percentage is determined based on the
-desired cycle life conditions established by Life\_Category.
+Stress\_Lim\_Bend is based on %\_Tensile\_Bend, a percentage of the selected 
+material's tensile strength. 
+This percentage is determined based on the desired cycle life conditions 
+established by Life\_Category. 
 
-   
-Torsional stresses in the end of an extension spring are calculated and
-listed with the Report 2 tab.  The Report 2 tab will flag these
-stresses if they exceed the value of Stress\_Lim\_Endur.  Note that the value
-listed for Cycle\_Life is based on stresses in the body coils; it does not
-apply to the hooks, loops or other forms of attachment.
+Torsional stresses in the end of an extension spring are calculated and 
+listed in Report 2. 
+The Report 2 tab will flag these stresses if they exceed the value of Stress\_Lim\_Endur. 
+Note that the value listed for Cycle\_Life is based on stresses in the body coils; 
+it does not apply to the hooks, loops or other forms of attachment. 
 
-&nbsp;
+&nbsp; 
 
 ___
 
@@ -436,9 +439,9 @@ ___
 ## End Types    
 
 ODOP:Spring currently implements five end types for extension springs. 
-In addition, the user can define specialized end conditions.
-These end types are represented by the Calculation Input End\_Type which
-for extension springs has the following possible values:
+In addition, the user can define specialized end conditions. 
+These end types are represented by the Calculation Input End\_Type which 
+for extension springs has the following possible values: 
 
           Extension
     
@@ -449,30 +452,31 @@ for extension springs has the following possible values:
     5   Close_Wound_Coil
     6   User_Specified
 
-For an extension spring, the end type directly impacts
-calculation of Hook\_Deflect\_All, End\_ID, Extended\_End\_ID, L\_End and
-L\_Extended\_End.  Other variables are impacted indirectly.
-   
-Full\_Loop implies a loop matching the diameter of the coil body.  The
-distance from the last body coil to the inside of each hook (loop) is equal
-to the inside diameter of the body.
+For an extension spring, the end type directly impacts 
+calculation of Hook\_Deflect\_All, End\_ID, Extended\_End\_ID, L\_End and 
+L\_Extended\_End. 
+Other variables are impacted indirectly. 
 
-75%\_Loop implies a shortened hook (loop) where the inside of the hook
-(loop) falls 75% of an inside diameter from the end of the body.  Hook
-stresses are calculated based on body diameter in the hook (loop).
-   
-When End\_Type is set to one of the standard (non User_Specified) selections, the quantities
-described above as "directly impacted" will be set by the program from
-values contained in internal tables. 
+Full\_Loop implies a loop matching the diameter of the coil body. 
+The distance from the last body coil to the inside of each hook (loop) is equal 
+to the inside diameter of the body. 
+
+75%\_Loop implies a shortened hook (loop) where the inside of the hook 
+(loop) falls 75% of an inside diameter from the end of the body. 
+Hook stresses are calculated based on body diameter in the hook (loop). 
+
+When End\_Type is set to one of the standard (non User_Specified) selections, 
+the quantities described above as "directly impacted" will be set 
+by the program from values contained in internal tables. 
 When the value of End\_Type is User\_Specified, 
-the constants described above as "directly impacted"
-may be set by the user with the numeric entry field.
-   
-More precise treatments of extension spring end types are available in the sources 
-listed in the [Spring Design References](/docs/Help/SpringDesign/references.html) section 
-of the documentation.
+the constants described above as "directly impacted" 
+may be set by the user with the numeric entry field. 
 
-&nbsp;
+More precise treatments of extension spring end types are available in the resources 
+listed in the [Spring Design References](/docs/Help/SpringDesign/references.html) section 
+of the documentation. 
+
+&nbsp; 
 
  - [Design Types](/docs/Help/DesignTypes)   
  - [Spring Design Topics](/docs/Help/SpringDesign)   

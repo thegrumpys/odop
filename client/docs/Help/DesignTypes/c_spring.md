@@ -1,11 +1,11 @@
 # Compression Spring Design Type
 
 The Compression Spring design type is a full-featured mathematical model enabling 
-the engineering design of helical coil compression springs.   
+the engineering design of round wire helical coil compression springs. 
 
-This section presents material unique to the Compression Spring design type.
-The more general material available at [Spring Design Topics](/docs/Help/SpringDesign)
-provides important supplemental information.   
+This section presents material unique to the Compression Spring design type. 
+The more general material available at [Spring Design Topics](/docs/Help/SpringDesign) 
+provides important supplemental information. 
 
 ___
 
@@ -52,15 +52,15 @@ ___
 
 &nbsp;   
 
-See also: [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png)
+See also: [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) 
 ___
 
 <a id="c_springFD_Names"></a>  
 ___
 
-## Compression spring force-deflection point names    
+## Compression spring force-deflection point names 
 
- The compression spring force-deflection points and associated names are:
+ The compression spring force-deflection points and associated names are: 
 
              length    force        outside  inside    stress      factor of
                                     diameter diameter              safety
@@ -75,7 +75,7 @@ ___
     solid:   L_Solid  Force_Solid                     Stress_Solid  FS_Solid
 
 
- point 1 = minimum operating load &nbsp; &nbsp; point 2 = maximum operating load   
+ point 1 = minimum operating load &nbsp; &nbsp; point 2 = maximum operating load 
 
 &nbsp;
    
@@ -84,7 +84,7 @@ ___
 <a id="c_springIV_Names"></a>  
 ___
 
-## Independent Variable names:    
+## Independent Variable names: 
 
     Wire_Dia     -  wire diameter
     
@@ -99,7 +99,7 @@ ___
     Force_2      -  load at point 2  (maximum operating load)
     
 &nbsp;
-   
+
 ___
 
 <a id="c_springDV_Names"></a>  
@@ -168,16 +168,16 @@ ___
     Energy       -  Change in elastic potential energy between 
                     point 1 and point 2.
 
+&nbsp; 
+For additional information: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
 &nbsp;
-For additional information: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
-&nbsp;
-   
+
 ___
 
 <a id="c_springCalcInputNames"></a>  
 ___
 
-## Calculation Input names   
+## Calculation Input names 
 
     Spring_Type   -  character string used only as a label
     
@@ -248,11 +248,11 @@ ___
 
 &nbsp;
 For additional information: 
- - [Materials](/docs/Help/SpringDesign/materials.html)   
- - [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
- - [Compression spring end types](c_spring.html#c_springEndTypes)   
-&nbsp;
-   
+ - [Materials](/docs/Help/SpringDesign/materials.html) 
+ - [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
+ - [Compression spring end types](c_spring.html#c_springEndTypes) 
+&nbsp; 
+
 ___
 
 <a id="c_springOtherValues"></a>  
@@ -292,34 +292,37 @@ ___
 
 ## Constraints unique to compression springs:    
 
-Slenderness is a compression spring's ratio of free length (L\_Free) to
-mean coil diameter (Mean\_Dia).  If this ratio exceeds 4 for a
-compression spring, that spring will have a tendency to buckle under
-load.  In that case, the spring will usually need support in the form of
-a sleeve or post.  In order to restrain the search to select designs
-that do not have a tendency to buckle, set the value of Slenderness MAX
-to a value of 4.0 or less. 
-For additional information, see: [Buckling](c_spring.html#c_springBuckling)  
+#### Slenderness 
+Slenderness is a compression spring's ratio of free length (L\_Free) to 
+mean coil diameter (Mean\_Dia). 
+If this ratio exceeds 4 for a compression spring, that spring will have a 
+tendency to buckle under load. 
+In that case, the spring will usually need support in the form of 
+a sleeve or post. 
+In order to restrain the search to select designs that do not have a tendency to buckle, 
+set the value of Slenderness MAX to a value of 4.0 or less. 
 
+For additional information, see: [Buckling](c_spring.html#c_springBuckling) 
 
-%\_Avail\_Deflect is the percentage of available deflection consumed at
-load point 2.  %\_Avail\_Deflect is usually constrained to be less than 85
-to 98 percent.  Thus, it requires the search to select designs that
-provide a small margin between load point 2 and the solid condition.
+#### %\_Avail\_Deflect 
+%\_Avail\_Deflect is the percentage of available deflection consumed at load point 2. 
+%\_Avail\_Deflect is usually constrained to be less than 85 to 98 percent. 
+Thus, it requires the search to select designs that provide a small margin 
+between load point 2 and the solid condition. 
 
-&nbsp;
+&nbsp; 
 
 ___
 
 <a id="c_springEndTypes"></a>  
 ___
 
-## End Types    
+## End Types 
 
 ODOP:Spring currently implements six spring end types for compression springs. 
-In addition, the user can define specialized end conditions.
-These end types are represented by the Calculation Input End\_Type which
-for compression springs has the following possible values:
+In addition, the user can define specialized end conditions. 
+These end types are represented by the Calculation Input End\_Type which 
+for compression springs has the following possible values: 
 
           Compression 
     
@@ -336,85 +339,89 @@ Inactive\_Coils and Add\_Coils@Solid.
 L\_Solid, Pitch and other variables are impacted indirectly. 
 
 <!--- Additional information may be found in the documentation sections for EQNSET.  -->
-   
+
 When End\_Type is set to one of the standard (non User_Specified) selections, 
 Inactive\_Coils and Add\_Coils@Solid will be set by the 
 program from values contained in internal tables. 
 When the value of End\_Type is User_Specified, 
 the user may set these values by making an entry in the corresponding 
-numeric entry field.
-   
-In order to facilitate the treatment of less common compression spring end
-types such as the "Tapered, Closed and Ground" configuration associated with hot
-wound springs, ODOP:Spring has added an extra term into the solid height
-calculation.  Add\_Coils@Solid is a constant that is normally determined by
-the value of End\_Type.  It is used to separate the
-solid height calculation from the rate equation which is dependent on the
-value of Inactive\_Coils.  Add\_Coils@Solid represents the number of wire
-diameters added into the solid height beyond Coils\_T.  For Open and Closed
-end types, it has a value of +1.0.  For Open&Ground and Closed&Ground end
-types, it has a value of 0.0.  For the Tapered\_C&G end type,
-Add\_Coils@Solid has a value of -0.5.
+numeric entry field. 
 
-Note that the Add\_Coils@Solid term is not included in Coils\_T or the wire
-length and weight calculations.  It is only an adjustment for the solid
-height calculation and is not the correct way to represent dead coils.
-   
+#### Add_Coils@Solid 
+In order to facilitate the treatment of less common compression spring end 
+types such as the "Tapered, Closed and Ground" configuration associated with hot 
+wound springs, ODOP:Spring has added an extra term into the solid height 
+calculation. 
+Add\_Coils@Solid is a constant that is normally determined by 
+the value of End\_Type. 
+It is used to separate the solid height calculation from the rate equation which 
+is dependent on the value of Inactive\_Coils. 
+Add\_Coils@Solid represents the number of wire diameters added into the solid 
+height beyond Coils\_T. 
+For Open and Closed end types, it has a value of +1.0. 
+For Open&Ground and Closed&Ground end types, it has a value of 0.0. 
+For the Tapered\_C&G end type, Add\_Coils@Solid has a value of -0.5. 
+
+Note that the Add\_Coils@Solid term is not included in Coils\_T or the wire 
+length and weight calculations. 
+It is only an adjustment for the solid height calculation and is not the 
+correct way to represent dead coils. 
+
 The Add_Coils@Solid term may be used to represent unusual end configurations. 
 For example, springs that have a different end type at each end. 
 To establish the value of Inactive\_Coils and/or Add_Coils@Solid directly, 
-first select a value of End\_Type of User_Specified.  
+first select a value of End\_Type of User_Specified. 
 
-Examples:   
+Examples:  
 To represent a spring with one end Closed 
-and with the other end Closed&Ground:
+and with the other end Closed&Ground: 
 
     CHANGE  End_Type  User_Specified
     CHANGE  Inactive_Coils   2.0
     CHANGE  Add_Coils@Solid  0.5
 
-To represent a spring with ten active coils, two dead coils and closed
-ends:
+To represent a spring with ten active coils, two dead coils and closed ends: 
 
     CHANGE  End_Type  User_Specified
     FIX Coils_T     14.0
     CHANGE  Inactive_Coils   4.0
     CHANGE  Add_Coils@Solid  1.0
 
-&nbsp;
-   
+&nbsp; 
+
 ___
 
 <a id="c_springBuckling"></a>  
 ___
 
-## Buckling    
+## Buckling 
 
-A compression spring intended for operation without lateral support
-should have a ratio of free length to coil diameter (Slenderness) less
+A compression spring intended for operation without lateral support 
+should have a ratio of free length to coil diameter (Slenderness) less 
 than approximately 4 to avoid buckling. 
-For designs with a greater Slenderness ratio, lateral support is usually
-provided by operation in a sleeve or over a post.
+For designs with a greater Slenderness ratio, lateral support is usually 
+provided by operation in a sleeve or over a post. 
 
 
                      free length          L_Free
     Slenderness = ----------------  =  -------------
                     coil diameter        Mean_Dia
 
-The constraint Slenderness MAX can be used to restrict the search to
-designs that will not tend to buckle.  Note that Slenderness is not
-constrained in the default startup design.  Thus, unless this constraint is
-established, a search may produce designs that are subject to buckling.
+The constraint Slenderness MAX can be used to restrict the search to 
+designs that will not tend to buckle. 
+Note that Slenderness is not constrained in the default startup design. 
+Thus, unless this constraint is established, 
+a search may produce designs that are subject to buckling. 
 
-The Report tabs will provide an indication as to the possibility of
-bucking for each specific design and loading condition.  Both the
-fixed-free and fixed-fixed end conditions are covered.
+The Report tabs will provide an indication as to the possibility of 
+bucking for each specific design and loading condition. 
+Both the fixed-free and fixed-fixed end conditions are covered.
 
-More precise treatments of this subject are available in the sources listed
+More precise treatments of this subject are available in the resources listed 
 in the [Spring Design References](/docs/Help/SpringDesign/references.html) section 
-of the documentation.
+of the documentation. 
 
-&nbsp;
+&nbsp; 
 
  - [Design Types](/docs/Help/DesignTypes)   
  - [Spring Design Topics](/docs/Help/SpringDesign)   

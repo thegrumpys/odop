@@ -1,7 +1,7 @@
 # Torsion Spring Design Type
 
 The Torsion Spring design type is a full-featured mathematical model enabling 
-the engineering design of helical coil torsion springs. 
+the engineering design of round wire helical coil torsion springs. 
 
 This section presents material unique to the Torsion Spring design type. 
 The more general material available at [Spring Design Topics](/docs/Help/SpringDesign) 
@@ -51,7 +51,7 @@ ___
      
                  D E F L E C T I O N
 
-&nbsp;   
+&nbsp; 
 
 ___
 
@@ -77,9 +77,9 @@ ___
     max safe:   
 
 
- point 1 = minimum operating load &nbsp; &nbsp; point 2 = maximum operating load   
+ point 1 = minimum operating load &nbsp; &nbsp; point 2 = maximum operating load 
 
-&nbsp;
+&nbsp; 
 
 ___
 
@@ -93,7 +93,7 @@ associated with various dimensions of a torsion spring.
 
 ![Torsion Spring Names](/docs/Help/DesignTypes/img/TorsionNames.png "Torsion Spring Names")   
 
-&nbsp;   
+&nbsp; 
 
 ___
 
@@ -178,8 +178,9 @@ ___
                       point 1 and point 2.
 
 &nbsp;
-For additional information: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
-&nbsp;  
+For additional information: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
+
+&nbsp; 
 
 ___
 
@@ -255,7 +256,7 @@ ___
                         
     Catalog_Number   -  catalog number of the most recent catalog entry.  
 
-&nbsp;
+&nbsp; 
 
 For additional information: 
  - [Materials](/docs/Help/SpringDesign/materials.html)   
@@ -293,7 +294,7 @@ Other values calculated and displayed in the Reports include:
     Helix Angle      -  angle, in degrees, of the spring helix relative
                         to a perpendicular to the spring axis
 
-&nbsp;
+&nbsp; 
 
 ___
 
@@ -302,7 +303,7 @@ ___
 
 ## End Types   
 
-For torsion springs, the Calculation Input End_Type has the following possible values:
+For torsion springs, the Calculation Input End_Type has the following possible values: 
 
          Torsion   
          
@@ -314,9 +315,9 @@ They are for display only.
 
 Separately, the values of Arm\_1, Arm\_2, L\_End\_1, L\_End\_2, XLen\_1 and XLen_2 are available to 
 describe end conditions. 
-This diagram  may be helpful. 
+This diagram may be helpful. 
 
-![Torsion Spring Names](/docs/Help/DesignTypes/img/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](/docs/Help/DesignTypes/img/TorsionNames.png "Torsion Spring Names")  
 
 &nbsp;
 
@@ -324,13 +325,12 @@ This diagram  may be helpful.
  - [Spring Design Topics](/docs/Help/SpringDesign)   
  - [Help](/docs/Help)   
 
-
-&nbsp;
+&nbsp; 
 
 <!---
 While single line comments work as expected, 
-the previous version of Eclipse required a multi-line comment must be the last thing in the file.
-Eclipse .md Preview suppressed display of everything after the comment header.
+the previous version of Eclipse required a multi-line comment must be the last thing in the file. 
+Eclipse .md Preview suppressed display of everything after the comment header. 
 
 The following lines are alternate syntax for in-line image links   
 See docs/procedures/ImageLocations for preferred approach on image path.   
