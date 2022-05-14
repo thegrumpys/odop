@@ -77,10 +77,11 @@
    
 ### The strategy options:
 
-#### PROPORTIONAL 
- - move constraint levels in a proportion determined by their existing violations (as a measure of their influence).
+#### Proportional 
+ - move constraint levels in a proportion determined by their existing violations 
+(as a measure of their influence).
 
-#### ARBITRARY 
+#### Arbitrary 
  - accept user weights for each of the violated constraints to determine the relaxation direction.
 
  - The weights assigned may be either positive or negative. A positive

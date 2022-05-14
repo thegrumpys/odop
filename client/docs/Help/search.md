@@ -13,8 +13,18 @@ value for each fixed dependent variable.
 
 SEARCH operates to minimize the objective value. 
 The current design is used as a starting point. 
+Because the [OBJECTIVE FUNCTION](terminology.html#obj) is constructed as a sum of 
+constraint and dependent variable Fix violations, 
+minimizing the Objective Value will minimize violations and 
+thus move in the direction of a feasible design.
+The solution provided by Search represents the best available solution to the 
+designer's goals as expressed by constraints and Fixes. 
+If a solution that meets all of these goals, is not available, 
+the search process converges to a compromise. 
+Typically, this compromise violates multiple constraints.
 
-Only one SEARCH algorithm is available in the software at this time. 
+While the ODOP software is modular and can potentially support multiple numerical search algorithms, 
+only one SEARCH algorithm is available in the software at this time. 
 It is a "logic" method of compact implementation. 
 It is "robust" (i.e. usually finds the right answer) but not always efficient. 
 
@@ -87,10 +97,13 @@ Values of TOL greater than 1.0E-02 may result in searches
 that are too inaccurate to be used effectively by SEEK, and TRADE. 
  
  **Notes:**   
- The tweakPrefs execute script (available on the [Action : Execute](/docs/Help/menus.html#ActionExecute) menu) 
- can be used to change a group of settings that collectively work to refine the numeric precision of search result. 
+ The tweakPrefs execute script 
+ (available on the [Action : Execute](/docs/Help/menus.html#ActionExecute) menu) 
+ can be used to change a group of settings that collectively work to 
+ refine the numeric precision of search result. 
  Specifically, after running this script, 
- the Search process will run longer and expend more effort to refine the results by perhaps an extra significant digit.
+ the Search process will run longer and expend more effort to refine the results 
+ by perhaps an extra significant digit. 
  
 &nbsp;
  

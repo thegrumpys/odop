@@ -1,40 +1,41 @@
 # Tutorial and Demo
 
 The ODOP tutorial / demo feature is intended to to help new users 
-get started quickly.
+get started quickly. 
 Specially constructed tutorial and demonstration "sessions" provide multiple steps, 
-where each step consists of a few paragraphs of text or embedded image positioned
-above the normal ODOP main page.
+where each step consists of a few paragraphs of text or embedded image positioned 
+above the normal ODOP main page. 
 The sessions provide input values and control of ODOP solution functions 
-such that the software operates as though it was responding to user input.
+such that the software operates as though it was responding to user input. 
 Thus, the user can step through the annotated design sessions at a desired pace 
-simply by reading and clicking the "Next" button.
-While not technically a record / playback situation, the tutorial and demo
-feature can be thought of as playing back pre-recorded design sessions.
-In fact, the underlying software is always "live" and will respond to user input
-in addition to responding to input from the tutorial / demo session.
+simply by reading and clicking the "Next" button. 
+While not technically a record / playback situation, the tutorial and demo 
+feature can be thought of as playing back pre-recorded design sessions. 
+In fact, the underlying software is always "live" and will respond to user input 
+in addition to responding to input from the tutorial / demo session. 
 
 A "Back" button is provided so that the user can step to previous pages in order 
-to re-read or refer to something that may have been missed on the first pass.
+to re-read or refer to something that may have been missed on the first pass. 
 
-Tutorial sessions teach operation of the program.
-Use the <b>Help : Tutorial...</b> menu item to select the desired tutorial session.
+Tutorial sessions teach operation of the program. 
+Use the <b>Help : Tutorial...</b> menu item to select the desired tutorial session. 
 
-Demo sessions illustrate problem solving techniques as well as provide
-sample solutions to several generally available reference book problems.
-Use the <b>Help : Demo...</b> menu item to select the desired demo session.
+Demo sessions illustrate problem solving techniques as well as provide 
+sample solutions to several generally available reference book problems. 
+Use the <b>Help : Demo...</b> menu item to select the desired demo session. 
 
-The tutorial and demo sessions need to start from a known state.
-So, if you have entered any work of value that is not yet saved,
-use the <b>File : Save</b> or <b>File : Save As</b>
-menu item to save your work before starting a session.
- 
+The tutorial and demo sessions need to start from a known state. 
+So, if you have entered any work of value that is not yet saved, 
+use the <b>File : Save</b> or <b>File : Save As</b> 
+menu item to save your work before starting a session. 
+
 See: 
 [Spring design tutorial and demo](gettingStartedSpring.html)
-for details on starting the spring design tutorial and demo sessions.   
+for details on starting the spring design tutorial and demo sessions. 
+
  &nbsp; 
-  
-### Topics covered in the various sections of the tutorial include:   
+
+### Topics covered in the various sections of the tutorial include: 
 
 Name | &nbsp; | Description  
 --- | --- | ---  
@@ -55,8 +56,8 @@ tutor9 |   | Preferences (internal variables) and Properties (notes saved with d
  under the names demo through demo(n). 
  Many of the demo sessions contain sample solutions to selected 
  reference book problems where the ODOP:Spring results are compared to 
- the reference book results in order to validate results from the program.  
- 
+ the reference book results in order to validate results from the program. 
+
 ### Demonstration examples available include:   
 
 Name | Description | &nbsp;  
@@ -81,7 +82,7 @@ demo15 | Carlson, Spring Designer's Handbook | torsion spring problem&nbsp;4
 
  \* planned  
  
- &nbsp;
+ &nbsp; 
  
- [Help](/docs/Help)
+ [Help](/docs/Help) 
  
