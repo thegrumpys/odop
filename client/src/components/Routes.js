@@ -178,7 +178,7 @@ class Routes extends Component {
               <Route path='/implicit/callback' component={LoginCallback} />
             </Security>
             <Modal show={this.state.modal}>
-                <Modal.Header><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
+                <Modal.Header closeButton><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
                 <Modal.Body>
                     <Alert variant="info">AutoSave design available. Recover the design?</Alert>
                 </Modal.Body>

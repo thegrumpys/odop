@@ -168,7 +168,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                         </InputGroup>
                         {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ?
                         <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>
-                            <Modal.Header>
+                            <Modal.Header closeButton>
                                 <Modal.Title>
                                     Functionally Determined Constraint Level (FDCL) - Set {this.props.element.name} Min Constraint
                                 </Modal.Title>

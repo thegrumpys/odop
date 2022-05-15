@@ -13,7 +13,7 @@ const LUNR_INDEX = "lunr_index.json";  // Index file
 console.log('LUNR_INDEX=',LUNR_INDEX);
 const LUNR_PAGES = "lunr_pages.json";  // Index file
 console.log('LUNR_PAGES=',LUNR_PAGES);
-
+const SENTENCE_SEPARATOR = ' <> ';
 
 function isHtml(filename) {
     lower = filename.toLowerCase();
@@ -49,34 +49,71 @@ function findHtml(folder) {
 };
 
 
-function readHtml(root, file, fileId) {
+function readHtml(root, file) {
     var filename = path.join(root, file);
     var txt = fs.readFileSync(filename).toString();
     var $ = cheerio.load(txt);
-//    var title = $("title").text();
-//    if (typeof title == 'undefined') title = file;
-//    var description = $("meta[name=description]").attr("content");
-//    if (typeof description == 'undefined') description = "";
-//    var keywords = $("meta[name=keywords]").attr("content");
-//    if (typeof keywords == 'undefined') keywords = "";
-//    var content = $("body").text()
-//    if (typeof content == 'undefined') content = "";
     var title = $("h1:last").text();
     if (typeof title == 'undefined') {
         title = "";
     } else {
         $("h1:last").remove(); // Remove title's text so doesn't get added to the content's text below
     }
-    var description = "";
-    var keywords = "";
-    var content = $("section:last").text();
-    if (typeof content == 'undefined') content = "";
+    var content = SENTENCE_SEPARATOR;
+    $("section:last").children().each(function(i,elm) {
+      if (elm.type === "text") { // Direct text
+        let line = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ');
+        if (line === '') return;
+//        console.log('0\tline=',line);
+        content += line + SENTENCE_SEPARATOR;
+      } else if (elm.type === "tag" && elm.name === "p") { // Per Sentence, split on /\b\.\s/
+          let split_text = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ').split(/\b\.\s/);
+          for (let text of split_text) {
+            if (text.trim() === '') continue;
+            let line = text.trim();
+            if (!line.endsWith('.') && !line.endsWith(':')) {
+              line += '.';
+            }
+//            console.log('1\tline=',line.trim());
+            content += line.trim() + SENTENCE_SEPARATOR;
+          }
+      } else if (elm.type === "tag" && (elm.name === "ul" || elm.name === "ol")) { // Per li (1st level)
+        $(this).children().each(function(i,elm) {
+          let line = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ').trim();
+          if (line === '') return;
+//          console.log('2\tline=',line);
+          content += line + SENTENCE_SEPARATOR;
+        })
+      } else if (elm.type === "tag" && elm.name === "pre") { // Per Code line, split on /\r?\n/
+        $(this).children().each(function(i,elm) {
+          let split_text = $(this).text().split(/\r?\n/);
+          for (let text of split_text) {
+            let line = text.replace(/\s+/g,' ').trim();
+            if (line === '') continue;
+//            console.log('3\tline=',line);
+            content += line + SENTENCE_SEPARATOR;
+          }
+        })
+      } else if (elm.type === "tag" && elm.name === "table") { // Per Row (2nd level)
+        $(this).children().each(function(i,elm) {
+          $(this).children().each(function(i,elm) {
+            let line = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ').trim();
+            if (line === '') return;
+//            console.log('4\tline=',line);
+            content += line + SENTENCE_SEPARATOR;
+          })
+        })
+      } else { // Anything else sicj as h1-hN just get its text'
+        let line = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ').trim();
+        if (line === '') return;
+//        console.log('5\tline=',line);
+        content += line + SENTENCE_SEPARATOR;
+      }
+    });
+//    console.log('content=',content);
     var data = {
-        "id": fileId,
         "href": file,
         "title": title,
-        "description": description,
-        "keywords": keywords,
         "content": content,
     }
     return data;
@@ -87,8 +124,6 @@ function buildIndex(docs) {
     var idx = lunr(function () {
         this.ref('href');
         this.field('title', {boost: 10});
-        this.field('description');
-        this.field('keywords');
         this.field('content');
         this.metadataWhitelist = ['position']
         docs.forEach(function (doc) {
@@ -103,16 +138,10 @@ function buildPreviews(docs) {
     var result = [];
     for (var i = 0; i < docs.length; i++) {
         var doc = docs[i];
-//        var preview = doc["description"];
-//        if (preview == "") preview = doc["body"];
-//        if (preview.length > MAX_PREVIEW_CHARS)
-//            preview = preview.slice(0, MAX_PREVIEW_CHARS) + " ...";
-        result[doc["id"]] = {
+        result [i] = {
             "title": doc["title"],
-            "description": doc["description"],
             "content": doc["content"],
-            "href": doc["href"],
-            "id": doc["id"]
+            "href": doc["href"]
         }
     }
     return result;
@@ -127,7 +156,7 @@ function main() {
     console.log("Building index for these files:");
     for (var i = 0; i < files.length; i++) {
         console.log("    " + files[i]);
-        docs.push(readHtml(HTML_FOLDER, files[i], i));
+        docs.push(readHtml(HTML_FOLDER, files[i]));
     }
     var idx = buildIndex(docs);
     var previews = buildPreviews(docs);

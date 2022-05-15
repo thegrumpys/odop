@@ -149,7 +149,7 @@ class ActionSelectCatalog extends Component {
                     Select Catalog&hellip;
                 </NavDropdown.Item>
                 <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>
-                    <Modal.Header>
+                    <Modal.Header closeButton>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Catalog
                         </Modal.Title>

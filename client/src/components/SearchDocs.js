@@ -13,6 +13,7 @@ class SearchDocs extends Component {
         this.onChange = this.onChange.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
         this.onButtonPress = this.onButtonPress.bind(this);
+        this.onContextHelp = this.onContextHelp.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             text: '',
@@ -68,6 +69,14 @@ class SearchDocs extends Component {
         });
     }
 
+    onContextHelp() {
+//        console.log('In SearchDocs.onContextHelp this=',this);
+        this.setState({
+            modal: !this.state.modal,
+        });
+        window.open('/docs/Help/helpLookup.html', '_blank');
+    }
+
     onCancel(event) {
 //        console.log("In SearchDocs.onCancel event=",event);
         this.setState({
@@ -85,7 +94,7 @@ class SearchDocs extends Component {
                     <Button onClick={this.onButtonPress} style={{padding: '0px 24px 16px 8px'}} disabled={this.state.text.length === 0}><i className="fas fa-search"></i></Button>
                 </InputGroup>
                 <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>'
-                    <Modal.Header>
+                    <Modal.Header closeButton>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Help lookup for terms '{this.state.query}'
                         </Modal.Title>
@@ -102,6 +111,7 @@ class SearchDocs extends Component {
                         </ul>
                     </Modal.Body>
                     <Modal.Footer>
+                        <Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
                     </Modal.Footer>
                 </Modal>

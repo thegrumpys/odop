@@ -26,7 +26,7 @@ class FileRecent extends Component {
                     Recent
                 </NavDropdown.Item>
                 <Modal show={this.state.modal} onHide={this.toggle}>
-                    <Modal.Header>
+                    <Modal.Header closeButton>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>  &nbsp; File : Recent
                         </Modal.Title>

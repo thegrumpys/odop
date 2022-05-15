@@ -233,7 +233,7 @@ class ResultTable extends Component {
                     </tbody>
                 </Table>
                 <Modal show={this.state.seek_modal} onHide={this.onSeekCancelButton}>
-                    <Modal.Header>
+                    <Modal.Header closeButton>
                         <Modal.Title>
                             Seek (optimize)
                         </Modal.Title>
