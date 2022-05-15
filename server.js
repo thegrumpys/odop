@@ -349,9 +349,7 @@ app.post('/api/v1/usage_log', (req, res) => {
     });
 });
 
-const MAX_WORD_NUMBER = 1000
-const SENTENCE_BOUNDARY_REGEX = /\b\.\s/gm
-const WORD_REGEX = /\b(\w*)[\W|\s|\b]?/gm
+const SENTENCE_SEPARATOR = ' <> ';
 
 var searchIndex = lunr.Index.load(lunr_index);
 
@@ -377,144 +375,38 @@ function getSearchResults(query) {
     let pageMatch = lunr_pages.filter((page) => page.href === hit.ref)[0];
     pageMatch.score = hit.score;
     pageMatch.matchData = hit.matchData;
-    pageMatch.blurb_content = createSearchResultBlurb(query, pageMatch);
+    pageMatch.blurb_content = createHighlightedSearchResult(query, pageMatch);
     return [pageMatch];
   });
 }
 
 function createHighlightedSearchResult(result, pageMatch) {
-//  console.log('result=',result,'pageMatch=',pageMatch);
+//  console.log('In createHighlightedSearchResult result=',result,'pageMatch=',pageMatch);
   let searchResultText = "";
-  Object.keys(result.matchData.metadata).forEach(function (term) {
-      console.log('term=',term);
-      Object.keys(result.matchData.metadata[term]).forEach(function (fieldName) {
-          console.log('fieldName=',fieldName);
-          result.matchData.metadata[term][fieldName].position.forEach((position) => {
-              console.log('position=',position);
-          });
-//          console.log('pageMatch.' + fieldName + '=',pageMatch[fieldName]);
+  let style_color = 'style="color:' + getColorForSearchResult(pageMatch.score) + '"'
+  Object.keys(pageMatch.matchData.metadata).forEach(function (term) {
+//      console.log('In createHighlightedSearchResult term=',term);
+      Object.keys(pageMatch.matchData.metadata[term]).forEach(function (fieldName) {
+//          console.log('In createHighlightedSearchResult fieldName=',fieldName);
+          if (fieldName === 'content') { // Only highlight content
+              let hit = pageMatch[fieldName];
+//              console.log('In createHighlightedSearchResult hit=',hit);
+              pageMatch.matchData.metadata[term][fieldName].position.forEach((position) => {
+                  let lio = hit.lastIndexOf(SENTENCE_SEPARATOR,position[0])+SENTENCE_SEPARATOR.length;
+                  let io = hit.indexOf(SENTENCE_SEPARATOR,position[0]);
+//                  let sentence = hit.substring(lio,io);
+//                  console.log('In createHighlightedSearchResult position=',position,'lastIndexOf=',lio,'indexOf=',io,'content=',sentence);
+                  let prefix = hit.slice(lio,position[0]);
+                  let text = hit.substr(position[0],position[1]);
+                  let suffix = hit.slice(position[0]+position[1],io);
+//                  console.log('In createHighlightedSearchResult prefix=',prefix,'text=',text,'suffix=',suffix);
+                  searchResultText += prefix + `<strong ${style_color}>` + text + '</strong>' + suffix +  ' ... ';
+              });
+          }
       });
   });
+//  console.log('In createHighlightedSearchResult searchResultText=',searchResultText);
   return searchResultText;
-}
-
-if (!String.prototype.matchAll) {
-  String.prototype.matchAll = function (regex) {
-    "use strict";
-    function ensureFlag(flags, flag) {
-      return flags.includes(flag) ? flags : flags + flag;
-    }
-    function* matchAll(str, regex) {
-      const localCopy = new RegExp(regex, ensureFlag(regex.flags, "g"));
-      let match;
-      while ((match = localCopy.exec(str))) {
-        match.index = localCopy.lastIndex - match[0].length;
-        yield match;
-      }
-    }
-    return matchAll(this, regex);
-  };
-}
-
-function createSearchResultBlurb(query, pageMatch) {
-  const searchQueryRegex = new RegExp(createQueryStringRegex(query), "gmi");
-  console.log('searchQueryRegex=',searchQueryRegex);
-  const searchQueryHits = Array.from(
-    pageMatch.content.matchAll(searchQueryRegex),
-    (m) => m.index
-  );
-  console.log('searchQueryHits=',searchQueryHits);
-  const sentenceBoundaries = Array.from(
-    pageMatch.content.matchAll(SENTENCE_BOUNDARY_REGEX),
-    (m) => m.index
-  );
-  console.log('sentenceBoundaries=',sentenceBoundaries);
-  let searchResultText = "";
-  let lastEndOfSentence = 0;
-  for (const hitLocation of searchQueryHits) {
-    if (hitLocation > lastEndOfSentence) {
-      for (let i = 0; i < sentenceBoundaries.length; i++) {
-        if (sentenceBoundaries[i] > hitLocation) {
-          const startOfSentence = i > 0 ? sentenceBoundaries[i - 1] + 1 : 0;
-          const endOfSentence = sentenceBoundaries[i];
-          lastEndOfSentence = endOfSentence;
-          let parsedSentence = pageMatch.content.slice(startOfSentence, endOfSentence).trim();
-          searchResultText += `${parsedSentence} ... `;
-          console.log('hitLocation=',hitLocation,'i=',i,'startOfSentence=',startOfSentence,'endOfSentence=',endOfSentence,'parsedSentence=',parsedSentence,'searchResultText=',searchResultText);
-          break;
-        }
-      }
-    }
-    const searchResultWords = tokenize(searchResultText);
-    const pageBreakers = searchResultWords.filter((word) => word.length > 50);
-    if (pageBreakers.length > 0) {
-      searchResultText = fixPageBreakers(searchResultText, pageBreakers);
-    }
-    if (searchResultWords.length >= MAX_WORD_NUMBER) break;
-  }
-  let style_color = 'style="color:' + getColorForSearchResult(pageMatch.score) + '"'
-  return ellipsize(searchResultText, MAX_WORD_NUMBER).replace(
-    searchQueryRegex,
-    `<strong ${style_color}>$&</strong>`
-  );
-}
-
-function createQueryStringRegex(query) {
-  const searchTerms = query.split(" ");
-  if (searchTerms.length == 1) {
-    return query;
-  }
-  query = "";
-  for (let term of searchTerms) {
-    if (term.startsWith('+') || term.startsWith('-')) term = term.slice(1); // Remove +/- prefix
-    query += `${term}|`;
-  }
-  query = query.slice(0, -1); // Remove trailing '|'
-  return `(${query})`;
-}
-
-function tokenize(input) {
-  const wordMatches = Array.from(input.matchAll(WORD_REGEX), (m) => m);
-  return wordMatches.map((m) => ({
-    word: m[0],
-    start: m.index,
-    end: m.index + m[0].length,
-    length: m[0].length,
-  }));
-}
-
-function fixPageBreakers(input, largeWords) {
-  largeWords.forEach((word) => {
-    const chunked = chunkify(word.word, 20);
-    input = input.replace(word.word, chunked);
-  });
-  return input;
-}
-
-function chunkify(input, chunkSize) {
-  let output = "";
-  let totalChunks = (input.length / chunkSize) | 0;
-  let lastChunkIsUneven = input.length % chunkSize > 0;
-  if (lastChunkIsUneven) {
-    totalChunks += 1;
-  }
-  for (let i = 0; i < totalChunks; i++) {
-    let start = i * chunkSize;
-    let end = start + chunkSize;
-    if (lastChunkIsUneven && i === totalChunks - 1) {
-      end = input.length;
-    }
-    output += input.slice(start, end) + " ";
-  }
-  return output;
-}
-
-function ellipsize(input, maxLength) {
-  const words = tokenize(input);
-  if (words.length <= maxLength) {
-    return input;
-  }
-  return input.slice(0, words[maxLength].end) + "...";
 }
 
 function getColorForSearchResult(score) {

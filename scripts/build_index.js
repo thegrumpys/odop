@@ -13,7 +13,7 @@ const LUNR_INDEX = "lunr_index.json";  // Index file
 console.log('LUNR_INDEX=',LUNR_INDEX);
 const LUNR_PAGES = "lunr_pages.json";  // Index file
 console.log('LUNR_PAGES=',LUNR_PAGES);
-
+const SENTENCE_SEPARATOR = ' <> ';
 
 function isHtml(filename) {
     lower = filename.toLowerCase();
@@ -59,13 +59,13 @@ function readHtml(root, file) {
     } else {
         $("h1:last").remove(); // Remove title's text so doesn't get added to the content's text below
     }
-    var content = ' <> ';
+    var content = SENTENCE_SEPARATOR;
     $("section:last").children().each(function(i,elm) {
       if (elm.type === "text") { // Direct text
         let line = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ');
         if (line === '') return;
 //        console.log('0\tline=',line);
-        content += line + ' <> ';
+        content += line + SENTENCE_SEPARATOR;
       } else if (elm.type === "tag" && elm.name === "p") { // Per Sentence, split on /\b\.\s/
           let split_text = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ').split(/\b\.\s/);
           for (let text of split_text) {
@@ -75,14 +75,14 @@ function readHtml(root, file) {
               line += '.';
             }
 //            console.log('1\tline=',line.trim());
-            content += line.trim() + ' <> ';
+            content += line.trim() + SENTENCE_SEPARATOR;
           }
       } else if (elm.type === "tag" && (elm.name === "ul" || elm.name === "ol")) { // Per li (1st level)
         $(this).children().each(function(i,elm) {
           let line = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ').trim();
           if (line === '') return;
 //          console.log('2\tline=',line);
-          content += line + ' <> ';
+          content += line + SENTENCE_SEPARATOR;
         })
       } else if (elm.type === "tag" && elm.name === "pre") { // Per Code line, split on /\r?\n/
         $(this).children().each(function(i,elm) {
@@ -91,7 +91,7 @@ function readHtml(root, file) {
             let line = text.replace(/\s+/g,' ').trim();
             if (line === '') continue;
 //            console.log('3\tline=',line);
-            content += line + ' <> ';
+            content += line + SENTENCE_SEPARATOR;
           }
         })
       } else if (elm.type === "tag" && elm.name === "table") { // Per Row (2nd level)
@@ -100,14 +100,14 @@ function readHtml(root, file) {
             let line = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ').trim();
             if (line === '') return;
 //            console.log('4\tline=',line);
-            content += line + ' <> ';
+            content += line + SENTENCE_SEPARATOR;
           })
         })
       } else { // Anything else sicj as h1-hN just get its text'
         let line = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ').trim();
         if (line === '') return;
 //        console.log('5\tline=',line);
-        content += line + ' <> ';
+        content += line + SENTENCE_SEPARATOR;
       }
     });
 //    console.log('content=',content);
