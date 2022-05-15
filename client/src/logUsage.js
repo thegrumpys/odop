@@ -9,7 +9,7 @@ var sequence = 0;
 function logIt(tag, action, note) {
 //  console.log('In logIt tag=',tag,'action=',action,'note=',note);
   var body = JSON.stringify({tag: tag, action: action, note: note});
-  console.log('body=',body);
+//  console.log('body=',body);
   fetch('/api/v1/usage_log', {
       method: 'POST',
       headers: {
