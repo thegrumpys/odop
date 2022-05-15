@@ -19,7 +19,7 @@ class ViewCADModel extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        logUsage('event', 'ViewCADModel', { 'event_label': 'ViewCADModel'});
+        logUsage('event', 'ViewCADModel', { event_label: 'ViewCADModel'});
     }
 
     render() {

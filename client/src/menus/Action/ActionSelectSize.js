@@ -109,7 +109,7 @@ class ActionSelectSize extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        logUsage('event', 'ActionSelectSize', { 'event_label': this.state.type + ' ' + this.state.size });
+        logUsage('event', 'ActionSelectSize', { event_label: this.state.type + ' ' + this.state.size });
         // Do select size entry
         this.props.saveAutoSave();
         var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message

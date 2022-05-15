@@ -112,7 +112,7 @@ class FileSaveAs extends Component {
                         names: names,
                     });
                 }
-                logUsage('event', 'FileSaveAs', { 'event_label': type + ' ' + name });
+                logUsage('event', 'FileSaveAs', { event_label: type + ' ' + name });
                 return res.json()
             })
             .catch(error => {

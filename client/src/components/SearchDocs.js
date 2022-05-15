@@ -42,7 +42,7 @@ class SearchDocs extends Component {
         var text = this.state.text;
         var encoded_text = encodeURIComponent(this.state.text);
 //        console.log("In SearchDocs.onButtonPress encoded_text=",encoded_text);
-        logUsage('event', 'SearchDocs', { 'event_label': this.state.text});
+        logUsage('event', 'SearchDocs', { event_label: this.state.text});
         this.setState({
             text: '',
             query: text,

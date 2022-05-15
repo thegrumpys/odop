@@ -48,7 +48,7 @@ class FileExport extends Component {
 //      console.log('In FileExport.exportDesign link=', link);
       document.body.appendChild(link);
       link.click();
-      logUsage('event', 'FileExport', { 'event_label': this.props.type + ' ' + this.props.name });
+      logUsage('event', 'FileExport', { event_label: this.props.type + ' ' + this.props.name });
   }
     
     render() {

@@ -68,7 +68,7 @@ class ActionTrade extends Component {
     strategyToggle() {
 //        console.log('In ActionTrade.strategyToggle this=',this);
 //        console.log('state=',this.state);
-        logUsage('event', 'ActionTrade', { 'event_label': 'ActionTrade'});
+        logUsage('event', 'ActionTrade', { event_label: 'ActionTrade'});
         this.props.saveAutoSave();
         var design;
         var ncode;

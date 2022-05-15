@@ -47,7 +47,7 @@ export const execute = {
             actions: [
 //                                       We have concluded that AutoSave here is not a good idea
 //                saveAutoSave(),
-                logUsage('event','welcomeAdv', { 'event_label': 'Page 01 of 04' }),
+                logUsage('event','welcomeAdv', { event_label: 'Page 01 of 04' }),
                 changeResultTerminationCondition('When finished reading all 4 pages, use the gray "Exit" button in the upper right to close the light green panel above.'),
             ]
         },
@@ -85,7 +85,7 @@ export const execute = {
                 </>
             ), 
             actions: [
-                logUsage('event','welcomeAdv', { 'event_label': 'Page 02 of 04' })
+                logUsage('event','welcomeAdv', { event_label: 'Page 02 of 04' })
             ]
         },
         {
@@ -122,7 +122,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                logUsage('event','welcomeAdv', { 'event_label': 'Page 03 of 04' })
+                logUsage('event','welcomeAdv', { event_label: 'Page 03 of 04' })
             ]
         },
         {
@@ -150,7 +150,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                logUsage('event','welcomeAdv', { 'event_label': 'Page 04 of 04' })
+                logUsage('event','welcomeAdv', { event_label: 'Page 04 of 04' })
             ]
         }
     ]

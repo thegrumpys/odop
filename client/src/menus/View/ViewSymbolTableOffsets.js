@@ -19,7 +19,7 @@ class ViewSymbolTableOffsets extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        if (this.state.modal) logUsage('event', 'ViewSymbolTableOffsets', { 'event_label': 'ViewSymbolTableOffsets'});
+        if (this.state.modal) logUsage('event', 'ViewSymbolTableOffsets', { event_label: 'ViewSymbolTableOffsets'});
     }
 
     render() {

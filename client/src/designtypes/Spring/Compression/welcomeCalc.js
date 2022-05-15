@@ -47,7 +47,7 @@ export const execute = {
             actions: [
 //                                       We have concluded that AutoSave here is not a good idea
 //                saveAutoSave(),
-                logUsage('event','welcomeCalc', { 'event_label': 'Page 01 of 04' }),
+                logUsage('event','welcomeCalc', { event_label: 'Page 01 of 04' }),
 //                                       Expect to re-enable NaN in future release
 //                                       "NaN" (Not a Number) may appear if inputs are not complete.
 //                changeSymbolValue("OD_Free", Number.NaN),
@@ -93,7 +93,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                logUsage('event','welcomeCalc', { 'event_label': 'Page 02 of 04' })
+                logUsage('event','welcomeCalc', { event_label: 'Page 02 of 04' })
             ]
         },
         {
@@ -129,7 +129,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                logUsage('event','welcomeCalc', { 'event_label': 'Page 03 of 04' })
+                logUsage('event','welcomeCalc', { event_label: 'Page 03 of 04' })
             ]
         },
         {
@@ -175,7 +175,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                logUsage('event','welcomeCalc', { 'event_label': 'Page 04 of 04' })
+                logUsage('event','welcomeCalc', { event_label: 'Page 04 of 04' })
             ]
         }
     ]

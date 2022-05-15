@@ -19,7 +19,7 @@ class ViewSymbolTable extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        if (this.state.modal) logUsage('event', 'ViewSymbolTable', { 'event_label': 'ViewSymbolTable'});
+        if (this.state.modal) logUsage('event', 'ViewSymbolTable', { event_label: 'ViewSymbolTable'});
     }
 
     render() {

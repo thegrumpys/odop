@@ -21,7 +21,7 @@ class SignOut extends Component {
       // And add the new one into the "SignOut redirect URIs" to whitelist it.
 //      this.props.oktaAuth.signOut({postSignOutRedirectUri: window.location.origin + '/'});
       this.props.oktaAuth.signOut();
-      logUsage('event', 'SignOut', { 'event_label': '' });
+      logUsage('event', 'SignOut', { event_label: '' });
     }
 
     render() {

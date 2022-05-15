@@ -11,7 +11,7 @@ class HelpIndex extends Component {
     }
 
     onHelp() {
-        logUsage('event', 'HelpIndex', { 'event_label': '/docs/Help' });
+        logUsage('event', 'HelpIndex', { event_label: '/docs/Help' });
         window.open('/docs/Help', '_blank');
     }
 

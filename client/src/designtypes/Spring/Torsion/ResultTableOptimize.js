@@ -19,7 +19,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMINWeight(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINWeight this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN Weight button' });
+        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Weight button' });
         this.props.saveAutoSave();
         this.props.seek('Weight', MIN);
         this.props.onClick(event);
@@ -27,7 +27,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMAXCycle_Life(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMAXCycle_Life this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX Cycle_Life button' });
+        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Cycle_Life button' });
         this.props.saveAutoSave();
         this.props.seek('Cycle_Life', MAX);
         this.props.onClick(event);
@@ -35,7 +35,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMINRate(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINRate this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN Rate button' });
+        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Rate button' });
         this.props.saveAutoSave();
         this.props.seek('Rate', MIN);
         this.props.onClick(event);
@@ -43,7 +43,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMAXStroke(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMAXStroke this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX Stroke button' });
+        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Stroke button' });
         this.props.saveAutoSave();
         this.props.seek('Stroke', MAX);
         this.props.onClick(event);

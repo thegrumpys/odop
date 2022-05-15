@@ -63,7 +63,7 @@ class HelpTutorial extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        logUsage('event', 'HelpTutorial', { 'event_label': this.state.execute_name });
+        logUsage('event', 'HelpTutorial', { event_label: this.state.execute_name });
         // Do execute
 //        console.log('In HelpTutorial.onExecute this.state.execute_name=',this.state.execute_name);
         var { execute } = require('../../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute

@@ -4,15 +4,16 @@ var lastName = '';
 var lastValue = '';
 var lastSuffix = '';
 var buffer = '';
+var sequence = 0;
 
 function logIt(tag, action, note) {
 //  console.log('In logIt tag=',tag,'action=',action,'note=',note);
   var body = JSON.stringify({tag: tag, action: action, note: note});
-//  console.log('body=',body);
+  console.log('body=',body);
   fetch('/api/v1/usage_log', {
       method: 'POST',
       headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json',
       },
       body: body
@@ -51,7 +52,13 @@ function flushBuffer() {
 //    console.log('In flushBuffer buffer=',buffer);
     flushValue();
     if (buffer !== '') {
-        logIt('event', 'Values', {'event_label': buffer});
+        var tag = 'event';
+        var action = 'Values';
+        var sequenced_note = {event_value: sequence++, event_label: buffer};
+        if (process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
+            window.gtag(tag, action, sequenced_note); // Output to Google Analytics
+        }
+        logIt(tag, action, sequenced_note);
         buffer = '';
     }
 }
@@ -70,10 +77,10 @@ export function logValue(name,value,suffix='',merge=true) {
 
 export function logUsage(tag, action, note) {
 //    console.log('In logUsage tag=',tag,'action=',action,'note=',note);
-    if (process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
-        window.gtag(tag, action, note); // Output to Google Analytics
-    }
-
     flushBuffer();
-    logIt(tag, action, note);
+    var sequenced_note = Object.assign({event_value: sequence++}, note);
+    if (process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
+        window.gtag(tag, action, sequenced_note); // Output to Google Analytics
+    }
+    logIt(tag, action, sequenced_note);
 }

@@ -58,7 +58,7 @@ class FilePreferences extends Component {
         this.setState({
             system_controls: initialSystemControls
         });
-        logUsage('event', 'FilePreferences', { 'event_label': 'RestoreDefaults' });
+        logUsage('event', 'FilePreferences', { event_label: 'RestoreDefaults' });
     }
     
     onApplyandClose() {
@@ -66,7 +66,7 @@ class FilePreferences extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        logUsage('event', 'FilePreferences', { 'event_label': 'ApplyandClose' });
+        logUsage('event', 'FilePreferences', { event_label: 'ApplyandClose' });
         // Make local copy and convert all string values to floating point values
         // We assume that all values are to be converted to floating point values
         var copy = Object.assign({}, this.state.system_controls);

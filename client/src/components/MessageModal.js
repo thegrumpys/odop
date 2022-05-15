@@ -46,7 +46,7 @@ export class MessageModal extends Component {
 
     onContextHelp() {
 //        console.log('In MessageModal.onContextHelp this=',this);
-        logUsage('event', 'MessageModal', { 'event_label': 'context Help button: ' + this.state.help_url });
+        logUsage('event', 'MessageModal', { event_label: 'context Help button: ' + this.state.help_url });
         this.setState({
             modal: !this.state.modal
         });

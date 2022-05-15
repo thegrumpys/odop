@@ -118,7 +118,7 @@ class ActionSelectCatalog extends Component {
             modal: !this.state.modal
         });
         // Do select catalog entry
-        logUsage('event', 'ActionSelectCatalog', { 'event_label': this.state.name + ' ' + this.state.entries[this.state.entry][0] });
+        logUsage('event', 'ActionSelectCatalog', { event_label: this.state.name + ' ' + this.state.entries[this.state.entry][0] });
         this.props.saveAutoSave();
 //        console.log('In ActionSelectCatalog.onSelect this.state.entries=',this.state.entries);
         this.state.entries[this.state.entry][2].forEach((element) => { 

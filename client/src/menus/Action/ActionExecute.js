@@ -63,7 +63,7 @@ class ActionExecute extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        logUsage('event', 'ActionExecute', { 'event_label': this.state.execute_name });
+        logUsage('event', 'ActionExecute', { event_label: this.state.execute_name });
         // Do execute
 //        console.log('In ActionExecute.onExecute this.state.execute_name=',this.state.execute_name);
         var { execute } = require('../../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute

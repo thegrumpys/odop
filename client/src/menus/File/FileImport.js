@@ -63,7 +63,7 @@ class FileImport extends Component {
         if (migrated_design.jsontype === "ODOP") {
             this.props.load({name: filename, model: migrated_design});
             this.props.deleteAutoSave();
-            logUsage('event', 'FileImport', { 'event_label': migrated_design.type + ' ' + migrated_design.name });
+            logUsage('event', 'FileImport', { event_label: migrated_design.type + ' ' + migrated_design.name });
         } else {
             displayMessage('Invalid JSON type, function ignored');
         }

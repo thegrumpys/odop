@@ -97,7 +97,7 @@ class ActionSeek extends Component {
         // Do seek
         this.props.saveAutoSave();
         this.props.seek(this.state.seek_name, this.state.seek_minmax);
-        logUsage('event', 'ActionSeek', { 'event_label': this.state.seek_minmax + ' ' + this.state.seek_name });
+        logUsage('event', 'ActionSeek', { event_label: this.state.seek_minmax + ' ' + this.state.seek_name });
     }
 
     render() {

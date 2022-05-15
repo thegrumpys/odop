@@ -125,7 +125,7 @@ class SymbolValue extends Component {
 
     onContextHelp() {
 //        console.log('In SymbolValue.onContextHelp this=',this);
-        logUsage('event', 'SymbolValue', { 'event_label': 'context Help button' });
+        logUsage('event', 'SymbolValue', { event_label: 'context Help button' });
         this.setState({
             modal: !this.state.modal
         });

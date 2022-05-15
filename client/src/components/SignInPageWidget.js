@@ -96,7 +96,7 @@ class SignInPageWidget extends Component {
         if (tokens !== undefined) {
             var user = tokens.idToken.claims.sub;
             this.props.changeUser(user);
-            logUsage('event', 'SignedIn', { 'event_label': user });
+            logUsage('event', 'SignedIn', { event_label: user });
             this.props.saveAutoSave("redirect");
             this.props.oktaAuth.handleLoginRedirect(tokens);
         }

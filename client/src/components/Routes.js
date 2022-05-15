@@ -67,7 +67,7 @@ class Routes extends Component {
       config.url.name = this.props.name; // Use model name
       config.url.execute = undefined; // Turn off execute
       this.props.history.push('/');
-      logUsage('event', 'Routes', { 'event_label': this.props.type + ' load redirect' });
+      logUsage('event', 'Routes', { event_label: this.props.type + ' load redirect' });
   }
   
   promptLoadAutoSave() {
@@ -90,7 +90,7 @@ class Routes extends Component {
       config.url.name = this.props.name; // Use model name
       config.url.execute = undefined; // Turn off execute
       this.props.history.push('/')
-      logUsage('event', 'Routes', { 'event_label': this.props.type + ' load autoSave' });
+      logUsage('event', 'Routes', { event_label: this.props.type + ' load autoSave' });
   }
   
   loadDefaultDesign() {
@@ -106,7 +106,7 @@ class Routes extends Component {
 //          console.log('In Routes.loadDefaultDesign getDesign config.url.type=',config.url.type,'config.url.name=',config.url.name);
           this.getDesign(this.props.user, config.url.type, config.url.name);
 //      }
-      logUsage('event', 'Routes', { 'event_label': this.props.type + ' load defaultDesign' });
+      logUsage('event', 'Routes', { event_label: this.props.type + ' load defaultDesign' });
   }
   
   loadInitialState(type, units) {
@@ -114,7 +114,7 @@ class Routes extends Component {
       this.props.loadInitialState(type, units);
       this.props.changeName('Startup');
       this.props.deleteAutoSave();
-      logUsage('event', 'Routes', { 'event_label': type + ' load initialState ' + units});
+      logUsage('event', 'Routes', { event_label: type + ' load initialState ' + units});
   }
   
   getDesign(user, type, name) {
@@ -141,7 +141,7 @@ class Routes extends Component {
               this.props.load({name: name, model: migrated_design});
 //              console.log('In Routes.getDesign after load');
               this.props.deleteAutoSave();
-              logUsage('event', 'Routes', { 'event_label': type + ' ' + name });
+              logUsage('event', 'Routes', { event_label: type + ' ' + name });
               if (config.url.execute !== undefined) { // Once the design is loaded then you can run the query parameter execute script
                   var { execute } = require('../designtypes/'+config.url.type+'/'+config.url.execute+'.js'); // Dynamically load execute
 //                  console.log('In Routes.loadDefaultDesign execute=',execute);

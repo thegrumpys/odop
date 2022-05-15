@@ -17,7 +17,7 @@ export default withRouter(withOktaAuth(class SignIn extends Component {
       this.props.oktaAuth.setOriginalUri();
 //      console.log('In SignIn.toggle this.props.oktaAuth.getOriginalUri=',this.props.oktaAuth.getOriginalUri());
       this.props.history.push('/login');
-      logUsage('event', 'SignIn', { 'event_label': '' });
+      logUsage('event', 'SignIn', { event_label: '' });
     }
 
     render() {

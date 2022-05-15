@@ -32,7 +32,7 @@ export var startExecute = function(prefix,execute_name,steps) {
 
 export var stopExecute = function() {
 //    console.log('In stopExecute this=',this);
-    logUsage('event', 'ExecutePanel', { 'event_label': 'stop ' + this.state.execute_name});
+    logUsage('event', 'ExecutePanel', { event_label: 'stop ' + this.state.execute_name});
     this.setState({
         execute_name: undefined, // Clear execute name
         modal: false, // Default: do not display

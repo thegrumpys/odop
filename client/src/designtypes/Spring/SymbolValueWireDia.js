@@ -121,7 +121,7 @@ class SymbolValueWireDia extends Component {
 
     onContextHelp() {
 //        console.log('In SymbolValueWireDia.onContextHelp this=',this);
-        logUsage('event', 'SymbolValueWireDia', { 'event_label': 'context Help button' });
+        logUsage('event', 'SymbolValueWireDia', { event_label: 'context Help button' });
         this.setState({
             modal: !this.state.modal
         });

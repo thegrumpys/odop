@@ -110,7 +110,7 @@ class FileOpen extends Component {
             if (migrated_design.jsontype === "ODOP") {
                 this.props.load({name: name, model: migrated_design});
                 this.props.deleteAutoSave();
-                logUsage('event', 'FileOpen', { 'event_label': type + ' ' + name });
+                logUsage('event', 'FileOpen', { event_label: type + ' ' + name });
             } else {
                 displayMessage('Invalid JSON type, function ignored');
             }
@@ -165,7 +165,7 @@ class FileOpen extends Component {
         });
         this.props.loadInitialState(this.state.type, 'US');
         this.props.deleteAutoSave();
-        logUsage('event', 'FileOpen', { 'event_label': this.state.type + ' load initialState US'});
+        logUsage('event', 'FileOpen', { event_label: this.state.type + ' load initialState US'});
     }
 
     onLoadMetricInitialState() {
@@ -175,7 +175,7 @@ class FileOpen extends Component {
         });
         this.props.loadInitialState(this.state.type, 'Metric');
         this.props.deleteAutoSave();
-        logUsage('event', 'FileOpen', { 'event_label': this.state.type + ' load initialState Metric'});
+        logUsage('event', 'FileOpen', { event_label: this.state.type + ' load initialState Metric'});
     }
 
     onLoadAutoSave() {
@@ -185,7 +185,7 @@ class FileOpen extends Component {
         });
        this.props.restoreAutoSave();
        this.props.deleteAutoSave();
-       logUsage('event', 'FileOpen', { 'event_label': this.state.type + ' load autoSave' });
+       logUsage('event', 'FileOpen', { event_label: this.state.type + ' load autoSave' });
     }
 
     onCancel() {

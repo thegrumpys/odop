@@ -17,7 +17,7 @@ class ViewSelect extends Component {
 //        console.log('In ViewSelect.onClick event.target.id=',event.target.id);
 //        this.props.parent.setKey(view);
         this.props.changeView(event.target.id);
-        logUsage('event', 'ViewSelect', { 'event_label': event.target.id});
+        logUsage('event', 'ViewSelect', { event_label: event.target.id});
     }
     
     render() {

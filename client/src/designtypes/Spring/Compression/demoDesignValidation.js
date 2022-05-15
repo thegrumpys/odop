@@ -208,7 +208,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                logUsage('event','demo', { 'event_label': 'Page 08 of 10' }),
+                logUsage('event','demo', { event_label: 'Page 08 of 10' }),
                 search()
             ]
         },

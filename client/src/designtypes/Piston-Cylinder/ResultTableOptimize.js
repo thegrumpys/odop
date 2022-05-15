@@ -19,7 +19,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMAXFORCE(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMAXFORCE this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MAX FORCE button' });
+        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX FORCE button' });
         this.props.saveAutoSave();
         this.props.seek('FORCE', MAX);
         this.props.onClick(event);
@@ -27,7 +27,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMINRADIUS(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINRADIUS this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN RADIUS button' });
+        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN RADIUS button' });
         this.props.saveAutoSave();
         this.props.seek('RADIUS', MIN);
         this.props.onClick(event);
@@ -35,7 +35,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMINPRESSURE(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINPRESSURE this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN PRESSURE button' });
+        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN PRESSURE button' });
         this.props.saveAutoSave();
         this.props.seek('PRESSURE', MIN);
         this.props.onClick(event);
@@ -43,7 +43,7 @@ export class ResultTableOptimize extends Component {
 
     onOptimizeSeekMINSTRESS(event) {
 //        console.log('In ResultTableOptimize.onOptimizeSeekMINSTRESS this=',this,'event=',event);
-        logUsage('event', 'ResultTableOptimize', { 'event_label': 'optimize Seek MIN STRESS button' });
+        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN STRESS button' });
         this.props.saveAutoSave();
         this.props.seek('STRESS', MIN);
         this.props.onClick(event);

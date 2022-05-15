@@ -49,7 +49,7 @@ class FileProperties extends Component {
     
     onRestoreDefaults() {
 //        console.log('In FileProperties.onRestoreDefaults');
-        logUsage('event', 'FileProperties', { 'event_label': 'RestoreDefaults' });
+        logUsage('event', 'FileProperties', { event_label: 'RestoreDefaults' });
         // Copy the default values into the state.labels
         var { initialState } = require('../../designtypes/'+this.props.type+'/initialState.js'); // Dynamically load initialState
         this.setState({
@@ -64,7 +64,7 @@ class FileProperties extends Component {
         this.setState({
             modal: !this.state.modal
         });
-        logUsage('event', 'FileProperties', { 'event_label': 'ApplyandClose' });
+        logUsage('event', 'FileProperties', { event_label: 'ApplyandClose' });
         // Copy the state.labels into the props.labels
         this.props.changeLabelsValue(this.state.labels);
         this.props.saveAutoSave();

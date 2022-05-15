@@ -93,7 +93,7 @@ class FileDelete extends Component {
             if (!res.ok) {
                 throw Error(res.statusText);
             }
-            logUsage('event', 'FileDelete', { 'event_label': type + ' ' + name });
+            logUsage('event', 'FileDelete', { event_label: type + ' ' + name });
             return res.json()
         })
         .catch(error => {
