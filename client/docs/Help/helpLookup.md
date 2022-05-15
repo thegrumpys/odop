@@ -1,4 +1,4 @@
-# Help Lookup   
+# Help Lookup 
 
 ODOP provides a full-text index of its on-line Help.   
 
@@ -9,7 +9,7 @@ If possible, each entry in the list provides a brief block of text providing a b
 for how the terms are used in the Help topic. 
 Select the blue topic link to open a new browser tab containing the associated on-line Help entry.
 
-&nbsp;
+&nbsp;   
 
 ## Improving Help Lookup results 
 Adding control characters to lookup terms can guide the lookup to better results. 
@@ -23,18 +23,22 @@ For example: +feasibility +status +indicator -overview
 ### Use * as a wildcard character 
 For example: tors*   
 
-### Restrict term matching to the topic title with "title:"   
+### Restrict term matching to the topic title only with "title:"   
 For example: title:demo   
+
+### Restrict term matching to the topic content only with "content:"   
+For example: content:demo   
 
 ### Fuzzy match by appending a tilde (~) and then a positive integer to a term 
 For example: saerch~1   
-Adding, removing, changing or transposing a character in the word is considered a match.   
+Adding, removing, changing or transposing one character in the word is considered a match.   
 
 &nbsp;
 
 Notes:   
-By default, the lookup will match words with a common stem.  
+By default, the lookup will match words with a common stem. 
 For example, the term "searching" will also match "searches". 
+"Feasibility" will match "feasibile". 
 
 Unlike with Google Search, adding quotes and using operators like AND & OR to combine terms 
 will not produce the desired results. 
@@ -45,7 +49,6 @@ use your browser's "Find ...", "Find on page" or "Find in page" feature to highl
 the term(s) of interest. 
 The result should look something like:   
 ![highlight](/docs/Help/img/TextHiLiteExample.png "Example of browser-based text highlighting") 
-
 
 See Also: 
  - [LUNR, Search Made Simple Guide](https://lunrjs.com/guides/searching.html)   
