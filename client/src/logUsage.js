@@ -54,7 +54,8 @@ function flushBuffer() {
     if (buffer !== '') {
         var tag = 'event';
         var action = 'Values';
-        var sequenced_note = {event_value: sequence++, event_label: buffer};
+        var sequence_number = sequence++;
+        var sequenced_note = {event_value: sequence_number.toString().padStart(8,'0')+' ', event_label: buffer};
         if (process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
             window.gtag(tag, action, sequenced_note); // Output to Google Analytics
         }
@@ -78,7 +79,8 @@ export function logValue(name,value,suffix='',merge=true) {
 export function logUsage(tag, action, note) {
 //    console.log('In logUsage tag=',tag,'action=',action,'note=',note);
     flushBuffer();
-    var sequenced_note = Object.assign({event_value: sequence++}, note);
+    var sequence_number = sequence++;
+    var sequenced_note = Object.assign({event_value: sequence_number.toString().padStart(8,'0')+' '}, note);
     if (process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
         window.gtag(tag, action, sequenced_note); // Output to Google Analytics
     }
