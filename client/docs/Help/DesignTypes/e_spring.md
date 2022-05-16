@@ -1,4 +1,4 @@
-# Extension Spring Design Type
+# Extension Spring Design Type 
 
 The Extension Spring design type is a full-featured mathematical model enabling 
 the engineering design of round wire helical coil extension springs. 
@@ -9,7 +9,7 @@ provides important supplemental information.
 
 ___
 
-### On this page:   
+### On this page: 
  - [Extension spring force-deflection diagram](e_spring.html#e_springFD_Diag)  
  - [Extension spring force-deflection point names](e_spring.html#e_springFD_Names)  
  - [Extension spring dimensions](e_spring.html#e_springDims)  
@@ -23,13 +23,13 @@ ___
  - [Extension spring cycle life](e_spring.html#e_springCycleLife)  
  - [Extension spring end types](e_spring.html#e_springEndTypes)  
 
-&nbsp;
+&nbsp; 
 ___
 
 <a id="e_springFD_Diag"></a>  
 ___
 
-## Extension spring force-deflection diagram    
+## Extension spring force-deflection diagram 
                      
     
     
@@ -55,7 +55,7 @@ ___
     
                           D E F L E C T I O N
 
-&nbsp;
+&nbsp; 
 
 ___
 
@@ -87,7 +87,7 @@ ___
 <a id="e_springDims"></a>  
 ___
 
-## Extension spring dimensions   
+## Extension spring dimensions 
 
 The following diagrams may be of some assistance in interpreting the various 
 dimensions of an extension spring. 
@@ -125,7 +125,7 @@ ___
 <a id="e_springIV_Names"></a>  
 ___
 
- ## Independent Variable names:  
+## Independent Variable names: 
 
     Wire_Dia     -  wire diameter
     
@@ -150,7 +150,7 @@ ___
 <a id="e_springDV_Names"></a>  
 ___
 
-## Dependent Variable names:    
+## Dependent Variable names: 
 
     Mean_Dia        -  mean diameter of spring coil in free condition
                         (OD_free + ID_Free)/2   
@@ -263,8 +263,8 @@ ___
     Stress_Lim_Bend  -  allowable stress limit; static application (bending)
     SI_Lo_Factor     -  used in calculation of minimum initial stress
     SI_Hi_Factor     -  used in calculation of maximum initial stress
-    End_Id           -  inside diameter of hook or loop
-    Extended_End_Id  -  inside diameter of hook or loop at other end
+    End_ID           -  inside diameter of hook or loop
+    Extended_End_ID  -  inside diameter of hook or loop at other end
     L_End            -  distance from body to inside of hook
     L_Extended_End   -  distance from body to inside of hook at other end
     Hook_Deflect_All -  number of coils allowed for hook deflection
@@ -288,7 +288,7 @@ ___
 <a id="e_springOtherValues"></a>  
 ___
 
-## Values in reports    
+## Values in reports 
 
 Other values calculated and displayed in the Reports include:   
 
@@ -313,7 +313,7 @@ ___
 <a id="e_springConstraints"></a>  
 ___
 
-## Constraints unique to extension springs:   
+## Constraints unique to extension springs: 
 
 While most extension spring constraints have constant levels, 
 a few are of the "Functionally Determined Constraint Level" (FDCL) variety. 
@@ -335,7 +335,7 @@ ___
 <a id="e_springIT_Range"></a>  
 ___
 
-## Initial tension range   
+## Initial tension range 
 
 Manufacturing considerations require that the initial tension of an 
 extension spring fall within an empirical minimum to maximum range. 
@@ -355,16 +355,18 @@ and thus limit Initial_Tension to the appropriate range of values.
 In summary, extension springs have three "Functionally Determined Constraint Levels" (FDCL) 
 configured in the default startup design. 
 
-**Constraint on: &nbsp; &nbsp; &nbsp;  Is current value of:**   
-Force\_1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MIN &nbsp; &nbsp; &nbsp; Initial\_Tension   
-Stress\_Initial &nbsp; MIN &nbsp; &nbsp; &nbsp; Stress\_Init_Lo   
-Stress\_Initial &nbsp; MAX &nbsp; &nbsp;&nbsp; Stress\_Init_Hi   
+Constraint on:  | &nbsp; | &nbsp; &nbsp; | Is current value of:  
+ ---            | ---    | ---           | ---  
+Force\_1        | MIN    | &nbsp; &nbsp; | Initial\_Tension  
+Stress\_Initial | MIN    | &nbsp; &nbsp; | Stress\_Init_Lo  
+Stress\_Initial | MAX    | &nbsp; &nbsp; | Stress\_Init_Hi  
 
-One additional "Functionally Determined Constraint Levels" (FDCL) that can be enabled 
+One additional "Functionally Determined Constraint Level" (FDCL) that can be enabled 
 by the user is: 
 
-**Constraint on: &nbsp; &nbsp; &nbsp;  Is current value of:**   
-Stress\_Hook &nbsp; MAX &nbsp; &nbsp;&nbsp; Stress\_Lim_Bend   
+Constraint on:  | &nbsp; | &nbsp; &nbsp; | Is current value of:  
+ ---            | ---    | ---           | ---  
+Stress\_Hook    | MAX    | &nbsp; &nbsp; | Stress\_Lim_Bend 
 
 &nbsp; 
 
@@ -373,7 +375,7 @@ ___
 <a id="e_springHookStress"></a>  
 ___
 
-## Hook Stress    
+## Hook Stress 
 
 The software calculates the bending stress (Sa) and torsional stress (Sb) 
 in a conventional machine hook of an extension spring. 
@@ -398,7 +400,7 @@ ___
 <a id="e_springCycleLife"></a>  
 ___
 
-## Extension spring cycle life    
+## Extension spring cycle life 
 
 Hook or loop ends on an extension spring are loaded in both bending and torsion. 
 Depending on the radius of the bend that tilts the last coil 
@@ -436,21 +438,21 @@ ___
 <a id="e_springEndTypes"></a>  
 ___
 
-## End Types    
+## End Types 
 
 ODOP:Spring currently implements five end types for extension springs. 
 In addition, the user can define specialized end conditions. 
 These end types are represented by the Calculation Input End\_Type which 
 for extension springs has the following possible values: 
 
-          Extension
-    
-    1   Full_Loop
-    2   75%_Loop
-    3   Full_Hook
-    4   75%_Hook
-    5   Close_Wound_Coil
-    6   User_Specified
+ &nbsp; | Extension  
+ --- | ---  
+ 1   | FULL_LOOP  
+ 2   |  75%_LOOP  
+ 3   | FULL_HOOK  
+ 4   |  75%_HOOK  
+ 5   | CLOSE_WOUND_COIL  
+ 6   | USER_SPECIFIED  
 
 For an extension spring, the end type directly impacts 
 calculation of Hook\_Deflect\_All, End\_ID, Extended\_End\_ID, L\_End and 
@@ -486,6 +488,5 @@ of the documentation.
 While single line comments work as expected, 
 previous version of Eclipse required a multi-line comment to be the last thing in the file.
 Eclipse .md Preview suppresses display of everything after the comment header.
-
 -->
 
