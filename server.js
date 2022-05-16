@@ -375,38 +375,58 @@ function getSearchResults(query) {
     let pageMatch = lunr_pages.filter((page) => page.href === hit.ref)[0];
     pageMatch.score = hit.score;
     pageMatch.matchData = hit.matchData;
-    pageMatch.blurb_content = createHighlightedSearchResult(query, pageMatch);
+    pageMatch.sentence_text = createSentenceSearchResult(pageMatch);
+    pageMatch.highlight_text = createHighlightSearchResult(pageMatch);
     return [pageMatch];
   });
 }
 
-function createHighlightedSearchResult(result, pageMatch) {
-//  console.log('In createHighlightedSearchResult result=',result,'pageMatch=',pageMatch);
+function createSentenceSearchResult(pageMatch) {
+//  console.log('In createSentenceSearchResult result=',result,'pageMatch=',pageMatch);
   let searchResultText = "";
   let style_color = 'style="color:' + getColorForSearchResult(pageMatch.score) + '"'
   Object.keys(pageMatch.matchData.metadata).forEach(function (term) {
-//      console.log('In createHighlightedSearchResult term=',term);
+//      console.log('In createSentenceSearchResult term=',term);
       Object.keys(pageMatch.matchData.metadata[term]).forEach(function (fieldName) {
-//          console.log('In createHighlightedSearchResult fieldName=',fieldName);
-          if (fieldName === 'content') { // Only highlight content
+//          console.log('In createSentenceSearchResult fieldName=',fieldName);
+          if (fieldName === 'sentence_text') { // Only highlight content
               let hit = pageMatch[fieldName];
-//              console.log('In createHighlightedSearchResult hit=',hit);
+//              console.log('In createSentenceSearchResult hit=',hit);
               pageMatch.matchData.metadata[term][fieldName].position.forEach((position) => {
                   let lio = hit.lastIndexOf(SENTENCE_SEPARATOR,position[0])+SENTENCE_SEPARATOR.length;
                   let io = hit.indexOf(SENTENCE_SEPARATOR,position[0]);
 //                  let sentence = hit.substring(lio,io);
-//                  console.log('In createHighlightedSearchResult position=',position,'lastIndexOf=',lio,'indexOf=',io,'content=',sentence);
+//                  console.log('In createSentenceSearchResult position=',position,'lastIndexOf=',lio,'indexOf=',io,'content=',sentence);
                   let prefix = hit.slice(lio,position[0]);
                   let text = hit.substr(position[0],position[1]);
                   let suffix = hit.slice(position[0]+position[1],io);
-//                  console.log('In createHighlightedSearchResult prefix=',prefix,'text=',text,'suffix=',suffix);
+//                  console.log('In createSentenceSearchResult prefix=',prefix,'text=',text,'suffix=',suffix);
                   searchResultText += prefix + `<strong ${style_color}>` + text + '</strong>' + suffix +  ' ... ';
               });
           }
       });
   });
-//  console.log('In createHighlightedSearchResult searchResultText=',searchResultText);
+//  console.log('In createSentenceSearchResult searchResultText=',searchResultText);
   return searchResultText;
+}
+
+function createHighlightSearchResult(pageMatch) {
+//  console.log('In createHighlightSearchResult result=',result,'pageMatch=',pageMatch);
+  let searchResultHighlights = [];
+  Object.keys(pageMatch.matchData.metadata).forEach(function (term) {
+//      console.log('In createHighlightSearchResult term=',term);
+      Object.keys(pageMatch.matchData.metadata[term]).forEach(function (fieldName) {
+//          console.log('In createHighlightSearchResult fieldName=',fieldName);
+          if (fieldName === 'highlight_text') {
+              pageMatch.matchData.metadata[term][fieldName].position.forEach((position) => {
+//                console.log('In createHighlightSearchResult position=',position);
+                searchResultHighlights.push(position);
+              });
+          }
+      });
+  });
+//  console.log('In createHighlightSearchResult searchResultHighlights=',searchResultHighlights);
+  return searchResultHighlights;
 }
 
 function getColorForSearchResult(score) {

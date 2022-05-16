@@ -53,19 +53,20 @@ function readHtml(root, file) {
     var filename = path.join(root, file);
     var txt = fs.readFileSync(filename).toString();
     var $ = cheerio.load(txt);
+    var highlight_text = $("section").text()
     var title = $("h1:last").text();
     if (typeof title == 'undefined') {
         title = "";
     } else {
-        $("h1:last").remove(); // Remove title's text so doesn't get added to the content's text below
+        $("h1:last").remove(); // Remove title's text so doesn't get added to the sentence_text's below
     }
-    var content = SENTENCE_SEPARATOR;
+    var sentence_text = SENTENCE_SEPARATOR;
     $("section:last").children().each(function(i,elm) {
       if (elm.type === "text") { // Direct text
         let line = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ');
         if (line === '') return;
 //        console.log('0\tline=',line);
-        content += line + SENTENCE_SEPARATOR;
+        sentence_text += line + SENTENCE_SEPARATOR;
       } else if (elm.type === "tag" && elm.name === "p") { // Per Sentence, split on /\b\.\s/
           let split_text = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ').split(/\b\.\s/);
           for (let text of split_text) {
@@ -75,14 +76,14 @@ function readHtml(root, file) {
               line += '.';
             }
 //            console.log('1\tline=',line.trim());
-            content += line.trim() + SENTENCE_SEPARATOR;
+            sentence_text += line.trim() + SENTENCE_SEPARATOR;
           }
       } else if (elm.type === "tag" && (elm.name === "ul" || elm.name === "ol")) { // Per li (1st level)
         $(this).children().each(function(i,elm) {
           let line = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ').trim();
           if (line === '') return;
 //          console.log('2\tline=',line);
-          content += line + SENTENCE_SEPARATOR;
+          sentence_text += line + SENTENCE_SEPARATOR;
         })
       } else if (elm.type === "tag" && elm.name === "pre") { // Per Code line, split on /\r?\n/
         $(this).children().each(function(i,elm) {
@@ -91,7 +92,7 @@ function readHtml(root, file) {
             let line = text.replace(/\s+/g,' ').trim();
             if (line === '') continue;
 //            console.log('3\tline=',line);
-            content += line + SENTENCE_SEPARATOR;
+            sentence_text += line + SENTENCE_SEPARATOR;
           }
         })
       } else if (elm.type === "tag" && elm.name === "table") { // Per Row (2nd level)
@@ -100,21 +101,22 @@ function readHtml(root, file) {
             let line = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ').trim();
             if (line === '') return;
 //            console.log('4\tline=',line);
-            content += line + SENTENCE_SEPARATOR;
+            sentence_text += line + SENTENCE_SEPARATOR;
           })
         })
       } else { // Anything else sicj as h1-hN just get its text'
         let line = $(this).text().replace(/\s+/g,' ').replace(/\r?\n/g,' ').trim();
         if (line === '') return;
 //        console.log('5\tline=',line);
-        content += line + SENTENCE_SEPARATOR;
+        sentence_text += line + SENTENCE_SEPARATOR;
       }
     });
-//    console.log('content=',content);
+//    console.log('sentence_text=',sentence_text);
     var data = {
         "href": file,
         "title": title,
-        "content": content,
+        "sentence_text": sentence_text,
+        "highlight_text": highlight_text,
     }
     return data;
 }
@@ -124,7 +126,8 @@ function buildIndex(docs) {
     var idx = lunr(function () {
         this.ref('href');
         this.field('title', {boost: 10});
-        this.field('content');
+        this.field('sentence_text');
+        this.field('highlight_text');
         this.metadataWhitelist = ['position']
         docs.forEach(function (doc) {
                 this.add(doc);
@@ -140,7 +143,8 @@ function buildPreviews(docs) {
         var doc = docs[i];
         result [i] = {
             "title": doc["title"],
-            "content": doc["content"],
+            "sentence_text": doc["sentence_text"],
+            "highlight_text": doc["highlight_text"],
             "href": doc["href"]
         }
     }
@@ -160,14 +164,6 @@ function main() {
     }
     var idx = buildIndex(docs);
     var previews = buildPreviews(docs);
-//    var js = "const LUNR_DATA = " + JSON.stringify(idx) + ";\n" + 
-//             "const PREVIEW_LOOKUP = " + JSON.stringify(previews) + ";";
-//    fs.writeFile(OUTPUT_INDEX, js, function(err) {
-//        if(err) {
-//            return console.log(err);
-//        }
-//        console.log("Index saved as " + OUTPUT_INDEX);
-//    }); 
     var index_json = JSON.stringify(idx, null, 2);
     fs.writeFile(LUNR_INDEX, index_json, function(err) {
         if(err) {
