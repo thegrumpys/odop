@@ -372,7 +372,7 @@ function searchSite(query) {
 function getSearchResults(query) {
   return searchIndex.search(query).flatMap((hit) => {
     if (hit.ref == "undefined") return [];
-    let pageMatch = lunr_pages.filter((page) => page.href === hit.ref)[0];
+    let pageMatch = JSON.parse(JSON.stringify(lunr_pages.filter((page) => page.href === hit.ref)[0]));
     pageMatch.score = hit.score;
     pageMatch.matchData = hit.matchData;
     pageMatch.sentence_text = createSentenceSearchResult(pageMatch);
@@ -406,7 +406,7 @@ function createSentenceSearchResult(pageMatch) {
           }
       });
   });
-//  console.log('In createSentenceSearchResult searchResultText=',searchResultText);
+  console.log('In createSentenceSearchResult searchResultText=',searchResultText);
   return searchResultText;
 }
 
@@ -425,7 +425,7 @@ function createHighlightSearchResult(pageMatch) {
           }
       });
   });
-//  console.log('In createHighlightSearchResult searchResultHighlights=',searchResultHighlights);
+  console.log('In createHighlightSearchResult searchResultHighlights=',searchResultHighlights);
   return searchResultHighlights;
 }
 
