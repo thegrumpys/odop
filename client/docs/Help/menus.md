@@ -274,7 +274,7 @@ ___
 
 ## Action : Seek...   
 
-The Action : Search menu item provides ODOP's goal seeking capability.
+The Action : Seek menu item provides ODOP's goal seeking capability.
 The Seek feature can obtain the constrained extreme of any variable, independent or dependent.
 
 For example in spring design, Seek can be asked to find the lightest material weight (or lowest spring rate, least solid height, greatest factor of safety, etc.) while maintaining  specified objectives for force and deflection, stress, diameters, etc.   
