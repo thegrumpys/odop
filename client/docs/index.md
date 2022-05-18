@@ -34,7 +34,7 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Trade](Help/trade.html)
 * [Reports](Help/reports.html)
 * [Printing](Help/htt.html#printing)
-* [Help lookup](Help/helpLookup.html)
+* [Help Lookup](Help/helpLookup.html)
 * [Hints, Tips and Tricks](Help/htt.html)
 * [AutoSave](Help/autoSave.html)
 * [Available Design Types](Help/DesignTypes)

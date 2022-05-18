@@ -18,7 +18,7 @@ The entries appear in an order ranked from more general and introductory to more
 * [Trade](/docs/Help/trade.html)
 * [Reports](/docs/Help/reports.html)
 * [Printing](/docs/Help/htt.html#printing)
-* [Help lookup](/docs/Help/helpLookup.html)
+* [Help Lookup](/docs/Help/helpLookup.html)
 * [Hints, Tips and Tricks](/docs/Help/htt.html)
 * [AutoSave](/docs/Help/autoSave.html)
 * [Available Design Types](/docs/Help/DesignTypes)
