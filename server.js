@@ -372,7 +372,7 @@ function searchSite(query) {
 function getSearchResults(query) {
   return searchIndex.search(query).flatMap((hit) => {
     if (hit.ref == "undefined") return [];
-    let pageMatch = JSON.parse(JSON.stringify(lunr_pages.filter((page) => page.href === hit.ref)[0]));
+    let pageMatch = JSON.parse(JSON.stringify(lunr_pages.filter((page) => page.href === hit.ref)[0])); // Make clone
     pageMatch.score = hit.score;
     pageMatch.matchData = hit.matchData;
     pageMatch.sentence_text = createSentenceSearchResult(pageMatch);
