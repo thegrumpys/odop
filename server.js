@@ -406,7 +406,7 @@ function createSentenceSearchResult(pageMatch) {
           }
       });
   });
-  console.log('In createSentenceSearchResult searchResultText=',searchResultText);
+//  console.log('In createSentenceSearchResult searchResultText=',searchResultText);
   return searchResultText;
 }
 
@@ -425,7 +425,7 @@ function createHighlightSearchResult(pageMatch) {
           }
       });
   });
-  console.log('In createHighlightSearchResult searchResultHighlights=',searchResultHighlights);
+//  console.log('In createHighlightSearchResult searchResultHighlights=',searchResultHighlights);
   return searchResultHighlights;
 }
 
