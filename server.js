@@ -383,61 +383,51 @@ function getSearchResults(query) {
 
 function createSentenceSearchResult(pageMatch) {
 //  console.log('In createSentenceSearchResult pageMatch=',pageMatch);
-  console.log('In createSentenceSearchResult pageMatch.href=',pageMatch.href);
-  let searchResultText = "";
-  let style_color = 'style="color:' + getColorForSearchResult(pageMatch.score) + '"'
-  pageMatch.sentenceData = [];
+//  console.log('In createSentenceSearchResult pageMatch.href=',pageMatch.href);
+  let sentenceData = [];
   Object.keys(pageMatch.matchData.metadata).forEach(function (term) {
-      console.log('In createSentenceSearchResult term=',term);
+//      console.log('In createSentenceSearchResult term=',term);
       Object.keys(pageMatch.matchData.metadata[term]).forEach(function (fieldName) {
           if (fieldName === 'sentence_text') { // Only highlight content
-              console.log('In createSentenceSearchResult fieldName=',fieldName);
+//              console.log('In createSentenceSearchResult fieldName=',fieldName);
               let hit = pageMatch[fieldName];
 //              console.log('In createSentenceSearchResult hit=',hit);
               pageMatch.matchData.metadata[term][fieldName].position.forEach((position) => {
-                  console.log('In createSentenceSearchResult position=',position);
+//                  console.log('In createSentenceSearchResult position=',position);
                   let lio = hit.lastIndexOf(SENTENCE_SEPARATOR,position[0])+SENTENCE_SEPARATOR.length;
-//                  let io = hit.indexOf(SENTENCE_SEPARATOR,position[0]);
-//                  let sentence = hit.substring(lio,io);
-//                  console.log('In createSentenceSearchResult position=',position,'lastIndexOf=',lio,'indexOf=',io,'content=',sentence);
-//                  let prefix = hit.slice(lio,position[0]);
-//                  let strong_prefix = `<strong ${style_color}>`;
-//                  let text = hit.substr(position[0],position[1]);
-//                  let strong_suffix = '</strong>';
-//                  let suffix = hit.slice(position[0]+position[1],io);
-//                  let ellipsis = ' ... ';
-//                  console.log('In createSentenceSearchResult prefix=',prefix,'strong_prefix=',strong_prefix,'text=',text,',strong_suffix=',strong_suffix,'suffix=',suffix,'ellipsis=',ellipsis);
-//                  searchResultText += prefix + strong_prefix + text + strong_suffix + suffix +  ellipsis;
-                  if (pageMatch.sentenceData[lio] === undefined) {
-                      pageMatch.sentenceData[lio] = Object.create({});
+                  if (sentenceData[lio] === undefined) {
+                      sentenceData[lio] = [];
                   }
-                  if (pageMatch.sentenceData[lio][term] === undefined) {
-                      pageMatch.sentenceData[lio][term] = [];
-                  }
-                  pageMatch.sentenceData[lio][term].push(position);
+                  position[0] = position[0]-lio;
+//                  console.log('In createSentenceSearchResult lio=',lio,'position=',position);
+                  sentenceData[lio].push(position);
+                  sentenceData[lio].sort((a, b) => a[0] - b[0]); // Put in position order
               });
           }
       });
   });
-//  console.log('In createSentenceSearchResult pageMatch.sentenceData=',pageMatch.sentenceData);
-  Object.keys(pageMatch.sentenceData).forEach(function (lio) {
-    console.log('In createSentenceSearchResult lio=',lio);
-    Object.keys(pageMatch.sentenceData[lio]).forEach(function (term) {
-      console.log('In createSentenceSearchResult term=',term);
-      let hit = pageMatch.sentence_text;
-      pageMatch.sentenceData[lio][term].forEach((position) => {
-        console.log('In createSentenceSearchResult position=',position);
-        let io = hit.indexOf(SENTENCE_SEPARATOR,lio);
-        let prefix = hit.slice(lio,position[0]);
-        let strong_prefix = `<strong ${style_color}>`;
-        let text = hit.substr(position[0],position[1]);
-        let strong_suffix = '</strong>';
-        let suffix = hit.slice(position[0]+position[1],io);
-        let ellipsis = ' ... ';
-        console.log('In createSentenceSearchResult prefix=',prefix,'strong_prefix=',strong_prefix,'text=',text,',strong_suffix=',strong_suffix,'suffix=',suffix,'ellipsis=',ellipsis);
-        searchResultText += prefix + strong_prefix + text + strong_suffix + suffix +  ellipsis;
-      });
+//  console.log('In createSentenceSearchResult sentenceData=',sentenceData);
+  let searchResultText = "";
+  let style_color = 'style="color:' + getColorForSearchResult(pageMatch.score) + '"'
+  let hit = pageMatch.sentence_text;
+  Object.keys(sentenceData).forEach(function (lio) {
+    let io = hit.indexOf(SENTENCE_SEPARATOR,lio);
+//    console.log('In createSentenceSearchResult lio=',lio,'io=',io);
+    let offset = 0;
+    let sentence = hit.slice(lio,io);;
+    sentenceData[lio].forEach((position) => {
+//      console.log('In createSentenceSearchResult offset=',offset,'position=',position);
+      let prefix = sentence.slice(0,offset+position[0]);
+      let strong_prefix = `<strong ${style_color}>`;
+      let text = sentence.substr(offset+position[0],position[1]);
+      let strong_suffix = '</strong>';
+      let suffix = sentence.slice(offset+position[0]+position[1]);
+//      console.log('In createSentenceSearchResult prefix=',prefix,'strong_prefix=',strong_prefix,'text=',text,',strong_suffix=',strong_suffix,'suffix=',suffix);
+      sentence = prefix + strong_prefix + text + strong_suffix + suffix;
+      offset += strong_prefix.length + strong_suffix.length;
     });
+    let ellipsis = ' ... ';
+    searchResultText += sentence + ellipsis;
   });
 
 //  console.log('In createSentenceSearchResult searchResultText=',searchResultText);
