@@ -201,7 +201,8 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.render this=',this);
         var value_class = '';
         var value_tooltip;
-        var icon_tag = '';
+        var icon_dependent_tag = '';
+        var icon_invalid_tag = '';
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
@@ -232,9 +233,26 @@ class SymbolValue extends Component {
             }
         }
         if (this.props.element.type === "equationset" && !this.props.element.input) { // Dependent Variable?
-            icon_tag = 
+            icon_dependent_tag =
                 <OverlayTrigger placement="top" overlay={<Tooltip>Dependent Variable</Tooltip>}>
-                    <i className="fas fa-asterisk fa-sm icon"></i>
+                    <i className="fas fa-asterisk fa-sm icon-dependent"></i>
+                </OverlayTrigger>;
+        }
+        if (this.props.element.format === undefined && 
+            typeof this.props.element.value === 'number' && // Only numbers, leave string and table blank
+            this.props.element.value <= this.props.element.validmin) { 
+            let validmin = this.props.element.validmin === Number.MIN_VALUE ? 'Number.MIN_VALUE' : this.props.element.validmin;
+            icon_invalid_tag =
+                <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Less than or equal to {validmin}</Tooltip>}>
+                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
+                </OverlayTrigger>;
+        } else if (this.props.element.format === undefined && 
+                   typeof this.props.element.value === 'number' &&  // Only numbers, leave string and table blank
+                   this.props.element.value > this.props.element.validmax) {
+            let validmax = this.props.element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : this.props.element.validmax;
+            icon_invalid_tag =
+                <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Greater than or equal to {validmax}</Tooltip>}>
+                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
                 </OverlayTrigger>;
         }
         value_class += "background-white "; // Always white
@@ -246,14 +264,16 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             (value_tooltip !== undefined ?
                                 <>
-                                    {icon_tag}
+                                    {icon_dependent_tag}
+                                    {icon_invalid_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                             <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                     </OverlayTrigger>
                                 </>
                             :
                                 <>
-                                    {icon_tag}
+                                    {icon_dependent_tag}
+                                    {icon_invalid_tag}
                                     <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                 </>
                             )
@@ -261,14 +281,16 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
                             (value_tooltip !== undefined ?
                                 <>
-                                    {icon_tag}
+                                    {icon_dependent_tag}
+                                    {icon_invalid_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                         <Form.Control id={'sv_'+this.props.element.name} type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                     </OverlayTrigger>
                                 </>
                             :
                                 <>
-                                    {icon_tag}
+                                    {icon_dependent_tag}
+                                    {icon_invalid_tag}
                                     <Form.Control id={'sv_'+this.props.element.name} type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                 </>
                             )
@@ -276,14 +298,16 @@ class SymbolValue extends Component {
                         { this.props.element.format === 'table' ?
                             (value_tooltip !== undefined ?
                                 <>
-                                    {icon_tag}
+                                    {icon_dependent_tag}
+                                    {icon_invalid_tag}
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                         <Form.Control id={'sv_'+this.props.element.name} type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                                     </OverlayTrigger>
                                 </>
                             :
                                 <>
-                                    {icon_tag}
+                                    {icon_dependent_tag}
+                                    {icon_invalid_tag}
                                     <Form.Control id={'sv_'+this.props.element.name} type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                                 </>
                             )
