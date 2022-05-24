@@ -1,11 +1,12 @@
-**Message-of-the-day** &nbsp; updated May 1, 2022   
+**Message-of-the-day** &nbsp; updated May 24, 2022   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
 
-[ODOP version 4.1](https://github.com/thegrumpys/odop/milestone/37?closed=1) was released January 15, 2022.  
-[ODOP version 4.2](https://github.com/thegrumpys/odop/milestone/55?closed=1) was released April 3, 2022.  
+[ODOP version 4.2.2](https://github.com/thegrumpys/odop/milestone/57?closed=1) was released May 24, 2022.  
 [ODOP version 4.2.1](https://github.com/thegrumpys/odop/milestone/56?closed=1) was released May 1, 2022.  
+[ODOP version 4.2](https://github.com/thegrumpys/odop/milestone/55?closed=1) was released April 3, 2022.  
+[ODOP version 4.1](https://github.com/thegrumpys/odop/milestone/37?closed=1) was released January 15, 2022.  
 Opening a design saved in a prior version of ODOP will produce a pop-up message.
 See: [MIGRATION](http://odop.herokuapp.com/docs/Help/terminology.html#migration). 
 Follow the links above to see change details in GitHub.  
