@@ -207,6 +207,7 @@ class SymbolValueWireDia extends Component {
         var value_class = 'text-right ';
         var value_tooltip;
         var value_fix_free_text = '';
+        var icon_invalid_tag = '';
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
             value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
@@ -246,6 +247,23 @@ class SymbolValueWireDia extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
+        if (this.props.element.format === undefined && 
+            typeof this.props.element.value === 'number' && // Only numbers, leave string and table blank
+            this.props.element.value <= this.props.element.validmin) { 
+            let validmin = this.props.element.validmin === Number.MIN_VALUE ? 'Number.MIN_VALUE' : this.props.element.validmin;
+            icon_invalid_tag =
+                <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Less than or equal to {validmin}</Tooltip>}>
+                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
+                </OverlayTrigger>;
+        } else if (this.props.element.format === undefined && 
+                   typeof this.props.element.value === 'number' &&  // Only numbers, leave string and table blank
+                   this.props.element.value > this.props.element.validmax) {
+            let validmax = this.props.element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : this.props.element.validmax;
+            icon_invalid_tag =
+                <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Greater than or equal to {validmax}</Tooltip>}>
+                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
+                </OverlayTrigger>;
+        }
         value_class += "background-white "; // Always white
 //        console.log('In SymbolValueWireDia.render value_class=',value_class);
         return (
@@ -253,11 +271,17 @@ class SymbolValueWireDia extends Component {
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
                         {(value_tooltip !== undefined ?
-                            <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
-                            </OverlayTrigger>
+                            <>
+                            {icon_invalid_tag}
+                                <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
+                                    <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
+                                </OverlayTrigger>
+                            </>
                         :
-                            <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
+                            <>
+                                {icon_invalid_tag}
+                                <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
+                            </>
                         )}
                     </InputGroup>
                 </td>
