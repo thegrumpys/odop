@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
@@ -109,11 +109,28 @@ class FormControlTypeNumber extends Component {
         if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
             value_class += ' borders-invalid';
         }
+        var icon_invalid_tag = '';
+        if (!this.props.disabledText && Number.isFinite(this.state.value) && this.state.value <= this.props.validmin) { 
+            let validmin = this.props.validmin === Number.MIN_VALUE ? 'Number.MIN_VALUE' : this.props.validmin;
+            icon_invalid_tag =
+                <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Less than or equal to {validmin}</Tooltip>}>
+                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
+                </OverlayTrigger>;
+        } else if (!this.props.disabledText && Number.isFinite(this.state.value) && this.state.value >= this.props.validmax) {
+            let validmax = this.props.element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : this.props.element.validmax;
+            icon_invalid_tag =
+                <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Greater than or equal to {validmax}</Tooltip>}>
+                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
+                </OverlayTrigger>;
+        }
         var p = Object.assign({},this.props); // clone the props
         delete p.onChangeValid; // remove special on functions
         delete p.onChangeInvalid;
         delete p.disabledText;
+        delete p.validmin;
+        delete p.validmax;
         return (<>
+            {icon_invalid_tag}
             <Form.Control type="number"
                 {...p} // Allow OverlayTrigger to pass-in other props
                 onClick={this.onClick}
@@ -131,7 +148,9 @@ FormControlTypeNumber.propTypes = {
     disabled: PropTypes.bool,
     disabledText: PropTypes.bool,
     readOnly: PropTypes.bool,
-    value: PropTypes.any,
+    value: PropTypes.number,
+    validmin: PropTypes.number,
+    validmax: PropTypes.number,
     step: PropTypes.string,
     onClick: PropTypes.func,
     onChange: PropTypes.func,
@@ -147,6 +166,8 @@ FormControlTypeNumber.defaultProps = {
     disabledText: false,
     readOnly: false,
     value: '',
+    validmin: -Number.MAX_VALUE,
+    validmax: Number.MAX_VALUE,
     step: 'any',
     onClick: (()=>{}),
     onChange: (()=>{}),
