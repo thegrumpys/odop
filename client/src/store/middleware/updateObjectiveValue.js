@@ -29,19 +29,21 @@ export function updateObjectiveValue(store, merit) {
     violated_constraint_count = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
-        vmin = element.value <= element.validmin ? 1.0 : 0.0;
-        store.dispatch(changeSymbolViolation(element.name, MIN, vmin));
-        vmax = element.value >= element.validmax ? 1.0 : 0.0;
-        store.dispatch(changeSymbolViolation(element.name, MAX, vmax));
-        if (vmin > 0.0) {
-            viol_sum = viol_sum + vmin * vmin;
-            violated_constraint_count++;
+        if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
+            vmin = element.value <= element.validmin ? 1.0 : 0.0;
+            store.dispatch(changeSymbolViolation(element.name, MIN, vmin));
+            vmax = element.value >= element.validmax ? 1.0 : 0.0;
+            store.dispatch(changeSymbolViolation(element.name, MAX, vmax));
+            if (vmin > 0.0) {
+                viol_sum = viol_sum + vmin * vmin;
+                violated_constraint_count++;
+            }
+            if (vmax > 0.0) {
+                viol_sum = viol_sum + vmax * vmax;
+                violated_constraint_count++;
+            }
+//            console.log('element=',element,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum,'violated_constraint_count=',violated_constraint_count);
         }
-        if (vmax > 0.0) {
-            viol_sum = viol_sum + vmax * vmax;
-            violated_constraint_count++;
-        }
-//        console.log('element=',element,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum,'violated_constraint_count=',violated_constraint_count);
     }
     
     // Update Objective Value
