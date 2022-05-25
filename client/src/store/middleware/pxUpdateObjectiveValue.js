@@ -17,12 +17,42 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     var vmax;
     var m_funct;
     var obj;
-    var viol_sum = 0.0;
+    var viol_sum;
+    var ip;
+    var ix;
 
     var design = store.getState(); // Re-access store to get latest element values
 //    console.log('In pxUpdateObjectiveValue design=',design);
 
-    var ip = 0;
+    viol_sum = 0.0;
+    ip = 0;
+    ix = 0;
+    for (let i = 0; i < design.model.symbol_table.length; i++) {
+        element = design.model.symbol_table[i];
+        if (element.type === "equationset" && element.input) {
+            var pp = p[ip++];
+            vmin = pp <= element.validmin ? 1.0 : 0.0;
+            vmax = pp >= element.validmax ? 1.0 : 0.0;
+        }
+        if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
+            var xx = x[ix++];
+            vmin = xx <= element.validmin ? 1.0 : 0.0;
+            vmax = xx >= element.validmax ? 1.0 : 0.0;
+        }
+        if (vmin > 0.0) {
+            viol_sum = viol_sum + vmin * vmin;
+        }
+        if (vmax > 0.0) {
+            viol_sum = viol_sum + vmax * vmax;
+        }
+//        console.log('In pxUpdateObjectiveValue element=',element,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum);
+    }
+    
+    // Update Objective Value
+    obj = viol_sum > 0 ? Number.POSITIVE_INFINITY : 0.0;
+
+    viol_sum = 0.0;
+    ip = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) {
@@ -45,7 +75,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
             }
         }
     }
-    var ix = 0;
+    ix = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
         if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
@@ -87,17 +117,20 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
             }
         }
     }
-    
-    /* Merit Function */
-    if (merit && typeof merit === 'function') {
-        m_funct = merit(p, x, design);
-    } else {
-        m_funct = 0.0;
+
+    if (obj === 0.0) {
+        /* Merit Function */
+        if (merit && typeof merit === 'function') {
+            m_funct = merit(p, x, design);
+        } else {
+            m_funct = 0.0;
+        }
+
+        // Update Objective Value
+        obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
+
+//        console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
     }
-    
-    // Update Objective Value
-    obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
-    
-//    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
+
     return obj;
 }
