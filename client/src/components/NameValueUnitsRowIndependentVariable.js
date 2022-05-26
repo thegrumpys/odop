@@ -137,13 +137,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            {value_tooltip !== undefined ?
-                                <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                    <FormControlTypeNumber id={'nvuriv_'+this.props.element.name} className={value_class} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
-                                </OverlayTrigger>
-                            :
-                                <FormControlTypeNumber id={'nvuriv_'+this.props.element.name} className={value_class} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
-                            }
+                            <FormControlTypeNumber id={'nvuriv_'+this.props.element.name} className={value_class} value={this.props.element.value} value_tooltip={value_tooltip} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>

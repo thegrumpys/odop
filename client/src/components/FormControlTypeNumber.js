@@ -127,18 +127,32 @@ class FormControlTypeNumber extends Component {
         delete p.onChangeValid; // remove special on functions
         delete p.onChangeInvalid;
         delete p.disabledText;
+        delete p.value_tooltip;
         delete p.validmin;
         delete p.validmax;
         return (<>
             {icon_invalid_tag}
-            <Form.Control type="number"
-                {...p} // Allow OverlayTrigger to pass-in other props
-                onClick={this.onClick}
-                onChange={this.onChange}
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
-                className={value_class}
-                value={this.props.disabledText ? '' : this.state.focused ? this.state.valueString : (Number.isFinite(this.state.value) ? this.state.value.toODOPPrecision() : '')} />
+            {this.props.value_tooltip !== undefined ?
+                <OverlayTrigger placement="top" overlay={<Tooltip>{this.props.value_tooltip}</Tooltip>}>
+                    <Form.Control type="number"
+                        {...p} // Allow OverlayTrigger to pass-in other props
+                        onClick={this.onClick}
+                        onChange={this.onChange}
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur}
+                        className={value_class}
+                        value={this.props.disabledText ? '' : this.state.focused ? this.state.valueString : (Number.isFinite(this.state.value) ? this.state.value.toODOPPrecision() : '')} />
+                </OverlayTrigger>
+            :
+                <Form.Control type="number"
+                    {...p} // Allow OverlayTrigger to pass-in other props
+                    onClick={this.onClick}
+                    onChange={this.onChange}
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}
+                    className={value_class}
+                    value={this.props.disabledText ? '' : this.state.focused ? this.state.valueString : (Number.isFinite(this.state.value) ? this.state.value.toODOPPrecision() : '')} />
+                }
         </>)
     }
 }

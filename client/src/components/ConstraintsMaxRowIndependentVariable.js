@@ -138,6 +138,10 @@ class ConstraintMaxRowIndependentVariable extends Component {
                 value_class += "text-strictly-feasible ";
             }
         }
+        var value_tooltip;
+        if ((this.props.element.lmax & FIXED) === 0 && this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0) {
+            value_tooltip = this.props.element.lmax & FDCL ? 'FDCL =' + this.props.element.cmaxchoices[this.props.element.cmaxchoice] : '=' + this.props.element.cmax + ' (non-FDCL)';
+        }
         return (
             <tbody>
                 <tr key={this.props.element.name}>
@@ -153,13 +157,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                     <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetFlagMaxConstrained : this.onSetFlagMaxConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            {(this.props.element.lmax & FIXED) === 0 && this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
-                                <OverlayTrigger placement="top" overlay={<Tooltip>{this.props.element.lmax & FDCL ? 'FDCL =' + this.props.element.cmaxchoices[this.props.element.cmaxchoice] : '=' + this.props.element.cmax + ' (non-FDCL)'}</Tooltip>}>
-                                    <FormControlTypeNumber id={this.props.element.name + "_cmax"} className={value_class} validmin={this.props.element.validmin} validmax={this.props.element.validmax} value={this.props.element.cmas} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} disabledText={this.props.element.lmax & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onClick={this.onClick}/>
-                                </OverlayTrigger>
-                            :
-                                <FormControlTypeNumber id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.cmax} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} disabledText={this.props.element.lmax & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onClick={this.onClick}/>
-                            }
+                            <FormControlTypeNumber id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.cmax} value_tooltip={value_tooltip} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} disabledText={this.props.element.lmax & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onClick={this.onClick}/>
                         </InputGroup>
                         {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
                         <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>

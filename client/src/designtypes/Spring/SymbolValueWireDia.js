@@ -297,21 +297,15 @@ class SymbolValueWireDia extends Component {
                                             </td>
                                             <td className="align-middle" colSpan="2">
                                                 <InputGroup>
-                                                    {(value_tooltip !== undefined ?
-                                                        (this.state.value_input ?
-                                                            <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                                                <FormControlTypeNumber id={'svwd_'+this.props.element.name} className={value_class} step="any" value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChange={this.onChange} />
-                                                            </OverlayTrigger>
-                                                        :
+                                                    {(this.state.value_input ?
+                                                        <FormControlTypeNumber id={'svwd_'+this.props.element.name} className={value_class} step="any" value={this.props.element.value} value_tooltip={value_tooltip} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChange={this.onChange} />
+                                                    :
+                                                        (value_tooltip !== undefined ?
                                                             <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                                                 <Form.Control as="select" id={'svwd_'+this.props.element.name} disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
                                                                     {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
                                                                 </Form.Control>
-                                                           </OverlayTrigger>
-                                                        )
-                                                    :
-                                                        (this.state.value_input ?
-                                                            <FormControlTypeNumber id={'svwd_'+this.props.element.name} className={value_class} step="any" value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChange={this.onChange} />
+                                                            </OverlayTrigger>
                                                         :
                                                             <Form.Control as="select" id={'svwd_'+this.props.element.name} disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
                                                                 {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}

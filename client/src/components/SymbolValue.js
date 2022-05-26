@@ -244,19 +244,10 @@ class SymbolValue extends Component {
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
-                            (value_tooltip !== undefined ?
-                                <>
-                                    {icon_dependent_tag}
-                                    <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
-                                            <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly className={value_class} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
-                                    </OverlayTrigger>
-                                </>
-                            :
-                                <>
-                                    {icon_dependent_tag}
-                                    <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly className={value_class} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
-                                </>
-                            )
+                            <>
+                                {icon_dependent_tag}
+                                <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly className={value_class} value={this.props.element.value} value_tooltip={value_tooltip} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
+                            </>
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
                             (value_tooltip !== undefined ?
