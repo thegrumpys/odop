@@ -28,6 +28,7 @@ import { invokeInit } from './invokeInit';
 import { invokeEquationSet } from './invokeEquationSet';
 import { propagate } from './propagate';
 import { updateObjectiveValue } from './updateObjectiveValue';
+import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
          restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actionCreators';
@@ -57,6 +58,7 @@ export const dispatcher = store => next => action => {
         invokeEquationSet(store);
         propagate(store);
         setSclDen(store);
+        invokeCheck(store); // NOTE: Placed before updateObjectiveValue to make sure UI gets updated after these checks
         updateObjectiveValue(store);
         break;
 
@@ -94,6 +96,7 @@ export const dispatcher = store => next => action => {
         invokeEquationSet(store);
         propagate(store);
         updateObjectiveValue(store, action.payload.merit);
+        invokeCheck(store);
         break;
     case FIX_SYMBOL_VALUE:
 //        console.log('In dispatcher.FIX_SYMBOL_VALUE action=',action);
@@ -138,6 +141,7 @@ export const dispatcher = store => next => action => {
         invokeEquationSet(store);
         propagate(store);
         updateObjectiveValue(store);
+        invokeCheck(store);
         break;
     case FREE_SYMBOL_VALUE:
 //        console.log('In dispatcher.FREE_SYMBOL_VALUE action=',action);
@@ -155,12 +159,15 @@ export const dispatcher = store => next => action => {
         invokeEquationSet(store);
         propagate(store);
         updateObjectiveValue(store);
+        invokeCheck(store);
         break;
     case CHANGE_SYMBOL_CONSTRAINT:
         updateObjectiveValue(store);
+        invokeCheck(store);
         break;
     case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS:
         updateObjectiveValue(store);
+        invokeCheck(store);
         break;
     case SET_SYMBOL_FLAG:
 //        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action);
@@ -184,6 +191,7 @@ export const dispatcher = store => next => action => {
 //            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action,'source=',source,'sink=',sink);
         }
         updateObjectiveValue(store);
+        invokeCheck(store);
         break;
     case RESET_SYMBOL_FLAG:
 //        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate action=',action);
@@ -216,6 +224,7 @@ export const dispatcher = store => next => action => {
 //            console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate source=',source,'sink=',sink);
         }
         updateObjectiveValue(store);
+        invokeCheck(store);
         break;
 
     case CHANGE_INPUT_SYMBOL_VALUES:
@@ -226,6 +235,7 @@ export const dispatcher = store => next => action => {
         invokeEquationSet(store);
         propagate(store);
         updateObjectiveValue(store, action.payload.merit);
+        invokeCheck(store);
         break;
     case RESTORE_INPUT_SYMBOL_VALUES:
         store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
@@ -233,6 +243,7 @@ export const dispatcher = store => next => action => {
         invokeEquationSet(store);
         propagate(store);
         updateObjectiveValue(store, action.payload.merit);
+        invokeCheck(store);
         break;
 
     case SEARCH:
@@ -246,6 +257,7 @@ export const dispatcher = store => next => action => {
         var termination_condition = design.model.result.termination_condition;
         updateObjectiveValue(store);
         store.dispatch(changeResultTerminationCondition(termination_condition));
+        invokeCheck(store);
         break;
 
     default:

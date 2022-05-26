@@ -109,29 +109,36 @@ class FormControlTypeNumber extends Component {
         if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
             value_class += ' borders-invalid';
         }
-        var icon_invalid_tag = '';
+        var icon_tooltip;
         if (!this.props.disabledText && Number.isFinite(this.state.value) && this.state.value <= this.props.validmin) { 
             let validmin = this.props.validmin === -Number.MAX_VALUE ? '-Number.MAX_VALUE' : this.props.validmin;
-            icon_invalid_tag =
-                <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Less than or equal to {validmin}</Tooltip>}>
-                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
-                </OverlayTrigger>;
+            icon_tooltip = 'Invalid Value - Less than or equal to ' + validmin;
         } else if (!this.props.disabledText && Number.isFinite(this.state.value) && this.state.value >= this.props.validmax) {
             let validmax = this.props.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : this.props.validmax;
-            icon_invalid_tag =
-                <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Greater than or equal to {validmax}</Tooltip>}>
-                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
-                </OverlayTrigger>;
+            icon_tooltip = 'Invalid Value - Greater than or equal to ' + validmax;
+        }
+        if (this.props.icon_tooltip !== undefined) {
+            if (icon_tooltip !== undefined) {
+                icon_tooltip += '; ' + this.props.icon_tooltip;
+            } else {
+                icon_tooltip = this.props.icon_tooltip;
+            }
         }
         var p = Object.assign({},this.props); // clone the props
         delete p.onChangeValid; // remove special on functions
         delete p.onChangeInvalid;
         delete p.disabledText;
+        delete p.icon_tooltip;
         delete p.value_tooltip;
         delete p.validmin;
         delete p.validmax;
         return (<>
-            {icon_invalid_tag}
+            {icon_tooltip !== undefined ?
+                <OverlayTrigger placement="top" overlay={<Tooltip>{icon_tooltip}</Tooltip>}>
+                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
+                </OverlayTrigger>
+            :
+            ''}
             {this.props.value_tooltip !== undefined ?
                 <OverlayTrigger placement="top" overlay={<Tooltip>{this.props.value_tooltip}</Tooltip>}>
                     <Form.Control type="number"

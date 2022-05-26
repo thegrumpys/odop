@@ -5,6 +5,7 @@ import { CONSTRAINED, FIXED } from '../store/actionTypes';
 import { fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
+import { queryAlert } from './Alerts';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -96,6 +97,12 @@ class NameValueUnitsRowDependentVariable extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
+        var icon_tooltip;
+        var messages = queryAlert(this.props.element.name);
+        if (messages.length > 0) {
+//            console.log('In NameValueUnitsRowDependentVariable.render name=',this.props.element.name,'messages=',messages);
+            icon_tooltip = messages;
+        }
 //        console.log('In NameValueUnitsRowDependentVariable.render value_class=',value_class);
         // =======================================
         // Table Row
@@ -110,7 +117,7 @@ class NameValueUnitsRowDependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <FormControlTypeNumber id={'nvurdv_'+this.props.element.name} disabled={true} className={value_class} value={this.props.element.value} value_tooltip={value_tooltip} validmin={this.props.element.validmin} validmax={this.props.element.validmax} />
+                            <FormControlTypeNumber id={'nvurdv_'+this.props.element.name} disabled={true} icon_tooltip={icon_tooltip} className={value_class} value={this.props.element.value} value_tooltip={value_tooltip} validmin={this.props.element.validmin} validmax={this.props.element.validmax} />
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>

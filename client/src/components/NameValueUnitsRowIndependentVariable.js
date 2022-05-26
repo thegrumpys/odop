@@ -6,6 +6,7 @@ import { CONSTRAINED, FIXED } from '../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
+import { queryAlert } from './Alerts';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -123,6 +124,12 @@ class NameValueUnitsRowIndependentVariable extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
+        var icon_tooltip;
+        var messages = queryAlert(this.props.element.name);
+        if (messages.length > 0) {
+//            console.log('In NameValueUnitsRowIndependentVariable.render name=',this.props.element.name,'messages=',messages);
+            icon_tooltip = messages;
+        }
 //        console.log('In NameValueUnitsRowIndependentVariable.render value_class=',value_class);
         // =======================================
         // Table Row
@@ -137,7 +144,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <FormControlTypeNumber id={'nvuriv_'+this.props.element.name} className={value_class} value={this.props.element.value} value_tooltip={value_tooltip} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
+                            <FormControlTypeNumber id={'nvuriv_'+this.props.element.name} icon_tooltip={icon_tooltip} className={value_class} value={this.props.element.value} value_tooltip={value_tooltip} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
