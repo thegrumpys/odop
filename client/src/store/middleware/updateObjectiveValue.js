@@ -69,7 +69,7 @@ export function updateObjectiveValue(store, merit) {
     }
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
-        if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
+        if (element.type === "equationset" && !element.input) {
             vmin = 0.0;
             vmax = 0.0;
             /* State variable fix levels. */
