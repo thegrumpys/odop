@@ -90,7 +90,6 @@ export function migrate(design) {
         // console.log('Convert from 4 to 5');
         design.system_controls.enable_auto_fix = 1;
         migrated_design.version = '5'; // last thing... set the migrated model version
-
     case '5':
         // Current model version
         // console.log('Convert from 5 to 6');
@@ -100,12 +99,16 @@ export function migrate(design) {
                 delete element.ioclass;
         });
         migrated_design.version = '6'; // last thing... set the migrated model version
-
     case '6':
         // Current model version
         // console.log('Convert from 6 to 7');
+        delete design.result.violated_constraint_count; // No longer needed, no need to replace or rename
+        migrated_design.version = '7'; // last thing... set the migrated model version
+    case '7':
+        // Current model version
+        // console.log('Convert from 7 to 8');
         // To be defined - presently do nothing
-        // migrated_design.version = '7'; // last thing... set the migrated model version
+        // migrated_design.version = '8'; // last thing... set the migrated model version
 
         break; // Do not copy this break
     default: // Unknown

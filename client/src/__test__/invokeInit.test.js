@@ -61,5 +61,4 @@ it('invokeInit', () => {
 
     expect(design.model.result.objective_value).toEqual(0);
     expect(design.model.result.termination_condition).toEqual("");
-    expect(design.model.result.violated_constraint_count).toEqual(0);
 });

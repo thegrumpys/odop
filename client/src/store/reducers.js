@@ -452,16 +452,6 @@ export function reducers(state, action) {
                 }
             }
         });
-    case CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT:
-        return Object.assign({}, state, {
-            model: {
-                ...state.model,
-                result: {
-                    ...state.model.result,
-                    violated_constraint_count: action.payload.violated_constraint_count
-                }
-            }
-        });
 
 // SYSTEM CONTROL
 

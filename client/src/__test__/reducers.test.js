@@ -8,7 +8,7 @@ import {
     changeSymbolValue, changeSymbolViolation, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
     changeInputSymbolValues, saveInputSymbolValues, restoreInputSymbolValues,
     changeOutputSymbolValues, saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
-    changeResultObjectiveValue, changeResultTerminationCondition, changeResultViolatedConstraintCount,
+    changeResultObjectiveValue, changeResultTerminationCondition,
     changeSystemControlsValue, changeLabelsValue, search, seek,
     saveAutoSave, restoreAutoSave, deleteAutoSave
     } from '../store/actionCreators';
@@ -587,21 +587,6 @@ it('reducers change result termination condition', () => {
 
     design = store.getState(); // after
     expect(design.model.result.termination_condition).toEqual('Test');
-});
-
-it('reducers change result violated constaint count', () => {
-    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(
-        reducers,
-        {"user": "USERID0123456789", name: "initialState", model: state});
-
-    var design = store.getState(); // before
-    expect(design.model.result.violated_constraint_count).toEqual(0);
-
-    store.dispatch(changeResultViolatedConstraintCount(3));
-
-    design = store.getState(); // after
-    expect(design.model.result.violated_constraint_count).toEqual(3);
 });
 
 //=====================================================================

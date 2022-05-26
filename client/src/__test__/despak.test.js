@@ -88,7 +88,6 @@ it('despak without merit', () => {
 
     expect(design.model.result.objective_value).toEqual(0.00005); // DESPAK DOES NOT UPDATE THE MODEL
     expect(design.model.result.termination_condition).toEqual("");
-    expect(design.model.result.violated_constraint_count).toEqual(1);
 });
 
 it('despak with merit', () => {
@@ -210,5 +209,4 @@ it('despak with merit', () => {
 
     expect(design.model.result.objective_value).toEqual(0.5605106434805028); // UPDATED BY changeSymbolConstraint ABOVE
     expect(design.model.result.termination_condition).toEqual("");
-    expect(design.model.result.violated_constraint_count).toEqual(1);
 });

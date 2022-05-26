@@ -926,11 +926,10 @@ export const initialState = {
         }
     ],
     "type": "Spring/Torsion",
-    "version": "7",
+    "version": "8",
     "result": {
         "objective_value": 0,
-        "termination_condition": "",
-        "violated_constraint_count": 0
+        "termination_condition": ""
     },
     "jsontype": "ODOP",
     "units": "US"

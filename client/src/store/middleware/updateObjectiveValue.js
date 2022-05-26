@@ -1,6 +1,6 @@
 import { MIN, MAX, CONSTRAINED, FIXED } from '../actionTypes';
 import { changeSymbolViolation,
-    changeResultObjectiveValue, changeResultViolatedConstraintCount } from '../actionCreators';
+    changeResultObjectiveValue } from '../actionCreators';
 
 // Update Violations and Objective Value
 export function updateObjectiveValue(store, merit) {
@@ -20,13 +20,11 @@ export function updateObjectiveValue(store, merit) {
     var m_funct;
     var obj;
     var viol_sum;
-    var violated_constraint_count;
 
     var design = store.getState(); // Re-access store to get latest element values
 //    console.log('In updateObjectiveValue design=',design);
 
     viol_sum = 0.0;
-    violated_constraint_count = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
         if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
@@ -36,13 +34,11 @@ export function updateObjectiveValue(store, merit) {
             store.dispatch(changeSymbolViolation(element.name, MAX, vmax));
             if (vmin > 0.0) {
                 viol_sum = viol_sum + vmin * vmin;
-                violated_constraint_count++;
             }
             if (vmax > 0.0) {
                 viol_sum = viol_sum + vmax * vmax;
-                violated_constraint_count++;
             }
-//            console.log('element=',element,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum,'violated_constraint_count=',violated_constraint_count);
+//            console.log('element=',element,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum);
         }
     }
     
@@ -139,22 +135,8 @@ export function updateObjectiveValue(store, merit) {
         obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
         store.dispatch(changeResultObjectiveValue(obj));
 
-        // Update Violated Constraint Count, which becomes Feasibility on the UI
-        design = store.getState(); // Re-access store to get latest vmin and vmax
-        violated_constraint_count = 0;
-        for (let i = 0; i < design.model.symbol_table.length; i++) {
-            element = design.model.symbol_table[i];
-            if (element.lmin & CONSTRAINED)
-                if (element.vmin > 0.0)
-                    violated_constraint_count++;
-            if (element.lmax & CONSTRAINED)
-                if (element.vmax > 0.0)
-                    violated_constraint_count++;
-        }
-        store.dispatch(changeResultViolatedConstraintCount(violated_constraint_count));
     } else { // Invalid value encountered
         store.dispatch(changeResultObjectiveValue(obj));
-        store.dispatch(changeResultViolatedConstraintCount(violated_constraint_count));
     }
     
 //    console.log('</ul><li>','End updateObjectiveValue obj=',obj,'</li>');

@@ -276,8 +276,13 @@ export function migrate(design) {
     case '7':
         // Current model version
         // console.log('Convert from 7 to 8');
+        delete design.result.violated_constraint_count; // No longer needed, no need to replace or rename
+        migrated_design.version = '8'; // last thing... set the migrated model version
+    case '8':
+        // Current model version
+        // console.log('Convert from 8 to 9');
         // To be defined - presently do nothing
-        // migrated_design.version = '8'; // last thing... set the migrated model version
+        // migrated_design.version = '9'; // last thing... set the migrated model version
 
         break; // Do not copy this break
     default: // Unknown

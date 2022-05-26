@@ -269,15 +269,6 @@ export function changeResultTerminationCondition(termination_condition) {
     }
 }
 
-export function changeResultViolatedConstraintCount(violated_constraint_count) {
-    return {
-        type: CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT,
-        payload: {
-            violated_constraint_count
-        }
-    }
-}
-
 export function changeSystemControlsValue(system_controls) {
     return {
         type: CHANGE_SYSTEM_CONTROLS_VALUE,

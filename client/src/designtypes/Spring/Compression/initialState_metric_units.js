@@ -860,11 +860,10 @@ export const initialState = {
         }
     ],
     "type": "Spring/Compression",
-    "version": "11",
+    "version": "12",
     "result": {
         "objective_value": 0,
-        "termination_condition": "",
-        "violated_constraint_count": 0
+        "termination_condition": ""
     },
     "jsontype": "ODOP",
     "units": "Metric"

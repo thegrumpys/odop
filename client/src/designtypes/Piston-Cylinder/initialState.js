@@ -93,11 +93,10 @@ export const initialState = {
         }
     ],
     "type": "Piston-Cylinder",
-    "version": "6",
+    "version": "7",
     "result": {
         "objective_value": 0,
-        "termination_condition": "",
-        "violated_constraint_count": 0
+        "termination_condition": ""
     },
     "jsontype": "ODOP",
     "units": "US"

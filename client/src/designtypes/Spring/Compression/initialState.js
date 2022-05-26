@@ -948,11 +948,10 @@ export const initialState = {
         }
 ],
     "type": "Spring/Compression",
-    "version": "11",
+    "version": "12",
     "result": {
         "objective_value": 0,
-        "termination_condition": "Use the File : Open menu item to select a different design type (Compression, Extension, Torsion) or units (US, metric).",
-        "violated_constraint_count": 0
+        "termination_condition": "Use the File : Open menu item to select a different design type (Compression, Extension, Torsion) or units (US, metric)."
     },
     "jsontype": "ODOP",
     "units": "US"
