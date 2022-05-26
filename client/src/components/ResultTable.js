@@ -27,26 +27,35 @@ class ResultTable extends Component {
 
     onSearchRequest(event) {
 //        console.log('In ResultTable.onSearchRequest this=',this,'event=',event);
-        var warnMsg = '';
-        if (this.props.objective_value <= this.props.system_controls.objmin) {
-            warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
-        }
+        var errorMsg = '';
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            warnMsg += 'No free independent variables; ';
+            errorMsg += 'No free independent variables; ';
         }
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
-            warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
+            errorMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
         }
         if (Number.isNaN(this.props.objective_value)) {
-            warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
+            errorMsg += 'Objective Value is Not a Number. Check constraint values; ';
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
             if (element.type !== undefined && element.type !== "table" && element.lmin === CONSTRAINED && element.lmax === CONSTRAINED && element.cmin > element.cmax) {
-                warnMsg += (element.name + ' constraints are inconsistent; ');
+                errorMsg += (element.name + ' constraints are inconsistent; ');
             }
         });
-        if (warnMsg !== '') {
-            displayMessage(warnMsg,'warning');
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
+                let validmin = element.validmin === -Number.MAX_VALUE ? '-Number.MAX_VALUE' : element.validmin;
+                if (element.value <= element.validmin) {
+                    errorMsg += (element.name + ' has an Invalid Value. It is less than or equal to ' + validmin + '; ');
+                }
+                let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax;
+                if (element.value >= element.validmax) {
+                    errorMsg += (element.name + ' has an Invalid Value. It is greater than or equal to ' + validmax + '; ');
+                }
+            }
+        });
+        if (errorMsg !== '') {
+            displayMessage(errorMsg, 'danger', 'Search Errors', '/docs/Help/searchErrors.html');
         } else {
             var old_objective_value = this.props.objective_value.toPrecision(4);
             this.props.saveAutoSave();
@@ -60,23 +69,35 @@ class ResultTable extends Component {
 
     onSeekRequest(event) {
 //        console.log('In ResultTable.onSeekRequest this=',this,'event=',event);
-        var warnMsg = '';
+        var errorMsg = '';
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            warnMsg += 'No free independent variables; ';
+            errorMsg += 'No free independent variables; ';
         }
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
-            warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
+            errorMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
         }
         if (Number.isNaN(this.props.objective_value)) {
-            warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
+            errorMsg += 'Objective Value is Not a Number. Check constraint values; ';
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
             if (element.type !== undefined && element.type !== "table" && element.lmin === CONSTRAINED && element.lmax === CONSTRAINED && element.cmin > element.cmax) {
-                warnMsg += (element.name + ' constraints are inconsistent; ');
+                errorMsg += (element.name + ' constraints are inconsistent; ');
             }
         });
-        if (warnMsg !== '') {
-            displayMessage(warnMsg,'warning');
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
+                let validmin = element.validmin === -Number.MAX_VALUE ? '-Number.MAX_VALUE' : element.validmin;
+                if (element.value <= element.validmin) {
+                    errorMsg += (element.name + ' has an Invalid Value. It is less than or equal to ' + validmin + '; ');
+                }
+                let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax;
+                if (element.value >= element.validmax) {
+                    errorMsg += (element.name + ' has an Invalid Value. It is greater than or equal to ' + validmax + '; ');
+                }
+            }
+        });
+        if (errorMsg !== '') {
+            displayMessage(errorMsg, 'danger', 'Search Errors', '/docs/Help/searchErrors.html');
         } else {
             var result = this.props.symbol_table.find( // Find free variable matching the current variable name
                 (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)

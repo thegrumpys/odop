@@ -5,7 +5,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     
     // Update Constraint Violations
 
-//    console.log('<li>','@@@@@ Start pxUpdateObjectiveValue','</li><ul>');
+    console.log('<li>','@@@@@ Start pxUpdateObjectiveValue','</li><ul>');
 
     /*
      * The following section of code constructs the objective function from the
@@ -19,7 +19,9 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     var obj;
     var viol_sum;
     var ip;
+    var pp;
     var ix;
+    var xx;
 
     var design = store.getState(); // Re-access store to get latest element values
 //    console.log('In pxUpdateObjectiveValue design=',design);
@@ -31,12 +33,12 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
         element = design.model.symbol_table[i];
         if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
             if (element.type === "equationset" && element.input) {
-                var pp = p[ip++];
+                pp = p[ip++];
                 vmin = pp <= element.validmin ? 1.0 : 0.0;
                 vmax = pp >= element.validmax ? 1.0 : 0.0;
             }
             if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
-                var xx = x[ix++];
+                xx = x[ix++];
                 vmin = xx <= element.validmin ? 1.0 : 0.0;
                 vmax = xx >= element.validmax ? 1.0 : 0.0;
             }
@@ -60,7 +62,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
         if (element.type === "equationset" && element.input) {
             vmin = 0.0;
             vmax = 0.0;
-            var pp = p[ip++];
+            pp = p[ip++];
             if (element.lmin & CONSTRAINED ) {
                 vmin = (-pp + element.cmin) / element.smin;
 //                console.log('<li>','p name=',element.name,' vmin=',vmin,' value=',pp,' cmin=',element.cmin,' smin=',element.smin,'</li>');
@@ -83,7 +85,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
         if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
             vmin = 0.0;
             vmax = 0.0;
-            var xx = x[ix++];
+            xx = x[ix++];
             /* State variable fix levels. */
             /*
              * The fix_wt's are automatically incorporated in the scaling denominators
@@ -130,9 +132,9 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
 
         // Update Objective Value
         obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
-
-//        console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
     }
+
+    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
 
     return obj;
 }
