@@ -55,7 +55,7 @@ class ResultTable extends Component {
             }
         });
         if (errorMsg !== '') {
-            displayMessage(errorMsg, 'danger', 'Search Errors', '/docs/Help/searchErrors.html');
+            displayMessage(errorMsg, 'danger', 'Errors', '/docs/Help/errors.html');
         } else {
             var old_objective_value = this.props.objective_value.toPrecision(4);
             this.props.saveAutoSave();
@@ -97,7 +97,7 @@ class ResultTable extends Component {
             }
         });
         if (errorMsg !== '') {
-            displayMessage(errorMsg, 'danger', 'Search Errors', '/docs/Help/searchErrors.html');
+            displayMessage(errorMsg, 'danger', 'Errors', '/docs/Help/errors.html');
         } else {
             var result = this.props.symbol_table.find( // Find free variable matching the current variable name
                 (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)

@@ -47,7 +47,7 @@ class ActionSearch extends Component {
             }
         });
         if (errorMsg !== '') {
-            displayMessage(errorMsg, 'danger', 'Search Errors', '/docs/Help/searchErrors.html');
+            displayMessage(errorMsg, 'danger', 'Errors', '/docs/Help/errors.html');
         } else {
             var old_objective_value = this.props.objective_value.toPrecision(4);
             this.props.saveAutoSave();
