@@ -20,6 +20,7 @@ import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { logValue } from '../logUsage';
 import { logUsage } from '../logUsage';
+import { queryAlert } from './Alerts';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -239,6 +240,11 @@ class SymbolValue extends Component {
         }
         value_class += "background-white "; // Always white
 //        console.log('In SymbolValue.render value_class=',value_class);
+        var messages = queryAlert(this.props.element.name);
+        if (messages.length > 0) {
+            console.log('In SymbolValue.render name=',this.props.element.name,'messages=',messages);
+            value_tooltip = messages + '; ' + value_tooltip;
+        }
         return (
             <>
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
