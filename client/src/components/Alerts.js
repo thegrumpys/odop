@@ -5,14 +5,14 @@ export var queryAlert = function(name) {
     var messages = '';
     this.state.alerts.forEach((entry) => {
         if (entry.name === name) {
-            messages += entry.message;
+            messages += entry.message + '; ';
         }
     });
     return messages;
 }
 
 export var clearAlerts = function() {
-    console.log('In clearAlerts');
+//    console.log('In clearAlerts');
     this.setState((prevState, props) => {
         return {
             alerts: []

@@ -1,7 +1,7 @@
 // Invoke Check
 export function invokeCheck(store) {
     
-    console.log('<li>','Start invokeCheck','</li><ul>');
+//    console.log('<li>','Start invokeCheck','</li><ul>');
 
     var design = store.getState();
 //    console.log('In invokeCheck design=',design);
@@ -10,5 +10,5 @@ export function invokeCheck(store) {
     var { check } = require('../../designtypes/'+design.model.type+'/check.js'); // Dynamically load eqnset
     check(store);
 
-    console.log('</ul><li>','End invokeCheck','</li>');
+//    console.log('</ul><li>','End invokeCheck','</li>');
 }
