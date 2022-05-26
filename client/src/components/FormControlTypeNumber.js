@@ -117,7 +117,7 @@ class FormControlTypeNumber extends Component {
                     <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
                 </OverlayTrigger>;
         } else if (!this.props.disabledText && Number.isFinite(this.state.value) && this.state.value >= this.props.validmax) {
-            let validmax = this.props.element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : this.props.element.validmax;
+            let validmax = this.props.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : this.props.validmax;
             icon_invalid_tag =
                 <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Greater than or equal to {validmax}</Tooltip>}>
                     <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>

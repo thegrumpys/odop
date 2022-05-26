@@ -248,18 +248,34 @@ class SymbolValueWireDia extends Component {
         }
         value_class += "background-white "; // Always white
 //        console.log('In SymbolValueWireDia.render value_class=',value_class);
+        var icon_invalid_tag = '';
+        if (this.props.element.value <= this.props.element.validmin) { 
+            let validmin = this.props.element.validmin === -Number.MAX_VALUE ? '-Number.MAX_VALUE' : this.props.element.validmin;
+            icon_invalid_tag =
+                <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Less than or equal to {validmin}</Tooltip>}>
+                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
+                </OverlayTrigger>;
+        } else if (this.props.element.value >= this.props.element.validmax) {
+            let validmax = this.props.element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : this.props.element.validmax;
+            icon_invalid_tag =
+                <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Greater than or equal to {validmax}</Tooltip>}>
+                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
+                </OverlayTrigger>;
+        }
         return (
             <>
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
                         {(value_tooltip !== undefined ?
                             <>
+                                {icon_invalid_tag}
                                 <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
                                     <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
                                 </OverlayTrigger>
                             </>
                         :
                             <>
+                                {icon_invalid_tag}
                                 <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
                             </>
                         )}
