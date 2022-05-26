@@ -5,7 +5,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     
     // Update Constraint Violations
 
-    console.log('<li>','@@@@@ Start pxUpdateObjectiveValue','</li><ul>');
+//    console.log('<li>','@@@@@ Start pxUpdateObjectiveValue','</li><ul>');
 
     /*
      * The following section of code constructs the objective function from the
@@ -134,7 +134,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
         obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
     }
 
-    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
+//    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
 
     return obj;
 }
