@@ -29,19 +29,24 @@ export var addAlert = function(alert) {
     });
 }
 
+export var getAlerts = function() {
+    return this.state.alerts;
+}
+
 export class Alerts extends Component {
     constructor(props) {
         super(props);
         queryAlert = queryAlert.bind(this); // Bind external function - no 'this'
         clearAlerts = clearAlerts.bind(this); // Bind external function - no 'this'
         addAlert = addAlert.bind(this); // Bind external function - no 'this'
+        getAlerts = getAlerts.bind(this); // Bind external function - no 'this'
         this.state = {
             alerts: []
         };
     }
 
     render() {
-        console.log('In Alerts.render this.state.alerts=',JSON.stringify(this.state.alerts));
+//        console.log('In Alerts.render this.state.alerts=',JSON.stringify(this.state.alerts));
         return '';
     }
 }

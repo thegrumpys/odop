@@ -13,7 +13,7 @@ Number.prototype.toODOPPrecision = function() {
 };
 
 function check_message(design, left, op, right) {
-  return design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision();
+  return design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
 }
 
 export function check(store) {        /*    Compression  Spring  */

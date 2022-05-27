@@ -8,7 +8,7 @@ import NameValueUnitsCalcInputTable from './NameValueUnitsCalcInputTable';
 import { connect } from 'react-redux';
 
 class DesignTable extends Component {
-    
+
     render() {
 //        console.log('In DesignTable.render this=',this);
         return (
@@ -27,7 +27,7 @@ class DesignTable extends Component {
             </>
         );
     }
-    
+
 }
 
 export default connect()(DesignTable);
