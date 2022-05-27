@@ -239,12 +239,7 @@ class SymbolValue extends Component {
                 </OverlayTrigger>;
         }
         value_class += "background-white "; // Always white
-        var icon_tooltip;
-        var messages = queryAlert(this.props.element.name);
-        if (messages.length > 0) {
-//            console.log('In SymbolValue.render name=',this.props.element.name,'messages=',messages);
-            icon_tooltip = messages;
-        }
+        var icon_alerts = queryAlert(this.props.element.name);
 //        console.log('In SymbolValue.render value_class=',value_class);
         return (
             <>
@@ -253,7 +248,7 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             <>
                                 {icon_dependent_tag}
-                                <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly icon_tooltip={icon_tooltip} className={value_class} value={this.props.element.value} value_tooltip={value_tooltip} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
+                                <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly icon_alerts={icon_alerts} className={value_class} value={this.props.element.value} value_tooltip={value_tooltip} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
                             </>
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?

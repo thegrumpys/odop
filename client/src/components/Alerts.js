@@ -2,13 +2,13 @@ import { Component } from 'react';
 
 export var queryAlert = function(name) {
 //    console.log('In queryAlert this=',this,'name=',name);
-    var messages = '';
+    var alerts = [];
     this.state.alerts.forEach((entry) => {
         if (entry.name === name) {
-            messages += entry.message + '; ';
+            alerts.push(entry);
         }
     });
-    return messages;
+    return alerts;
 }
 
 export var clearAlerts = function() {

@@ -109,32 +109,43 @@ class FormControlTypeNumber extends Component {
         if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
             value_class += ' borders-invalid';
         }
-        var icon_tooltip;
+        var validity_alert;
         if (!this.props.disabledText && Number.isFinite(this.state.value) && this.state.value <= this.props.validmin) { 
             let validmin = this.props.validmin === -Number.MAX_VALUE ? '-Number.MAX_VALUE' : this.props.validmin;
-            icon_tooltip = 'Invalid Value - Less than or equal to ' + validmin;
+            validity_alert = { message: 'Invalid Value - Less than or equal to ' + validmin };
         } else if (!this.props.disabledText && Number.isFinite(this.state.value) && this.state.value >= this.props.validmax) {
             let validmax = this.props.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : this.props.validmax;
-            icon_tooltip = 'Invalid Value - Greater than or equal to ' + validmax;
+            validity_alert = { message: 'Invalid Value - Greater than or equal to ' + validmax };
         }
-        if (this.props.icon_tooltip !== undefined) {
-            if (icon_tooltip !== undefined) {
-                icon_tooltip += '; ' + this.props.icon_tooltip;
+        var icon_alerts = this.props.icon_alerts;
+        if (icon_alerts !== undefined) {
+            if (validity_alert !== undefined) {
+                icon_alerts.unshift(validity_alert);
+            }
+        } else {
+            if (validity_alert !== undefined) {
+                icon_alerts = [validity_alert];
             } else {
-                icon_tooltip = this.props.icon_tooltip;
+                icon_alerts = [];
             }
         }
+        var icon_tooltip =
+            <>
+                <ul>
+                    {icon_alerts.map((entry, i) => {return <li key={i}>{entry.message}</li>})}
+                </ul>
+            </>;
         var p = Object.assign({},this.props); // clone the props
         delete p.onChangeValid; // remove special on functions
         delete p.onChangeInvalid;
         delete p.disabledText;
-        delete p.icon_tooltip;
+        delete p.icon_alerts;
         delete p.value_tooltip;
         delete p.validmin;
         delete p.validmax;
         return (<>
-            {icon_tooltip !== undefined ?
-                <OverlayTrigger placement="top" overlay={<Tooltip>{icon_tooltip}</Tooltip>}>
+            {icon_alerts.length > 0 ?
+                <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{icon_tooltip}</Tooltip>}>
                     <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
                 </OverlayTrigger>
             :
