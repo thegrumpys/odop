@@ -73,7 +73,6 @@ class NameValueUnitsRowCalcInput extends Component {
     render() {
 //        console.log('In NameValueUnitsRowCalcInput.render this=',this);
         var icon_alerts = queryAlert(this.props.element.name);
-        }
         // =======================================
         // Table Row
         // =======================================

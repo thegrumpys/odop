@@ -21,7 +21,7 @@ export var clearAlerts = function() {
 }
 
 export var addAlert = function(alert) {
-    console.log('In addAlert alert=',alert);
+//    console.log('In addAlert alert=',alert);
     this.setState((prevState, props) => {
         return {
             alerts: [...prevState.alerts, alert]
@@ -30,6 +30,7 @@ export var addAlert = function(alert) {
 }
 
 export var getAlerts = function() {
+//    console.log('In getAlerts');
     return this.state.alerts;
 }
 

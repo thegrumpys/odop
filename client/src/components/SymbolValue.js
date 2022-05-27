@@ -201,26 +201,26 @@ class SymbolValue extends Component {
     render() {
 //        console.log('In SymbolValue.render this=',this);
         var value_class = '';
-        var value_tooltip;
+        var value_alerts;
         var icon_dependent_tag = '';
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
-            value_tooltip = "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
+            value_alerts = [{ name: this.props.element.name, message: "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision() }];
         } else if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0)) {
             value_class += this.getValueClass();
-            value_tooltip = "FIX VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision();
+            value_alerts = [{ name: this.props.element.name, message: "FIX VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision() }];
         } else if (!this.props.element.input && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
-            value_tooltip = "FIX VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision();
+            value_alerts = [{ name: this.props.element.name, message: "FIX VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision() }];
         } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) && (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
-            value_tooltip = "CONSTRAINT VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision();
+            value_alerts = [{ name: this.props.element.name, message: "CONSTRAINT VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision() }];
         } else if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
             value_class += this.getValueClass();
-            value_tooltip = "CONSTRAINT VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision();
+            value_alerts = [{ name: this.props.element.name, message: "CONSTRAINT VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision() }];
         } else if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
             value_class += this.getValueClass();
-            value_tooltip = "CONSTRAINT VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision();
+            value_alerts = [{ name: this.props.element.name, message: "CONSTRAINT VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision() }];
         }
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
@@ -248,14 +248,14 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             <>
                                 {icon_dependent_tag}
-                                <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly icon_alerts={icon_alerts} className={value_class} value={this.props.element.value} value_tooltip={value_tooltip} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
+                                <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly icon_alerts={icon_alerts} className={value_class} value={this.props.element.value} value_alerts={value_alerts} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
                             </>
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
-                            (value_tooltip !== undefined ?
+                            (value_alerts !== undefined ?
                                 <>
                                     {icon_dependent_tag}
-                                    <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
+                                    <OverlayTrigger placement="top" overlay={<Tooltip>{value_alerts}</Tooltip>}>
                                         <Form.Control id={'sv_'+this.props.element.name} type="text" readOnly className={value_class} value={this.props.element.value} onClick={this.onContextMenu} />
                                     </OverlayTrigger>
                                 </>
@@ -267,10 +267,10 @@ class SymbolValue extends Component {
                             )
                         : ''}
                         { this.props.element.format === 'table' ?
-                            (value_tooltip !== undefined ?
+                            (value_alerts !== undefined ?
                                 <>
                                     {icon_dependent_tag}
-                                    <OverlayTrigger placement="top" overlay={<Tooltip>{value_tooltip}</Tooltip>}>
+                                    <OverlayTrigger placement="top" overlay={<Tooltip>{value_alerts}</Tooltip>}>
                                         <Form.Control id={'sv_'+this.props.element.name} type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                                     </OverlayTrigger>
                                 </>

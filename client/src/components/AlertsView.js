@@ -20,7 +20,7 @@ class AlertsView extends Component {
                     </thead>
                     <tbody>
                         {alerts.map((entry,i) => {
-                            console.log('In AlertsView.render entry=',entry,'i=',i);
+//                            console.log('In AlertsView.render entry=',entry,'i=',i);
                             return (
                                 <tr key={i}>
                                     <td>{i}</td>

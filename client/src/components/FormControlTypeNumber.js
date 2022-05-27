@@ -117,41 +117,54 @@ class FormControlTypeNumber extends Component {
             let validmax = this.props.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : this.props.validmax;
             validity_alert = { message: 'Invalid Value - Greater than or equal to ' + validmax };
         }
-        var icon_alerts = this.props.icon_alerts;
-        if (icon_alerts !== undefined) {
-            if (validity_alert !== undefined) {
-                icon_alerts.unshift(validity_alert);
+//        console.log('validity_alert=',validity_alert);
+        var icon_alerts = this.props.icon_alerts; // start with the icon alerts 
+        if (validity_alert !== undefined) {
+            if (icon_alerts !== undefined) {
+                icon_alerts.unshift(validity_alert); // add in validity alerts to the beginning
+            } else {
+                icon_alerts = [validity_alert];
             }
         } else {
-            if (validity_alert !== undefined) {
-                icon_alerts = [validity_alert];
-            } else {
+            if (icon_alerts === undefined) {
                 icon_alerts = [];
             }
         }
-        var icon_tooltip =
-            <>
-                <ul>
-                    {icon_alerts.map((entry, i) => {return <li key={i}>{entry.message}</li>})}
-                </ul>
-            </>;
+//        console.log('icon_alerts=',icon_alerts);
+        var value_alerts = this.props.value_alerts;
+        if (value_alerts !== undefined) {
+            value_alerts = [ ...icon_alerts, ...value_alerts]; // add passed-in value alerts to the end
+        } else {
+            value_alerts = icon_alerts;
+        }
+//        console.log('value_alerts=',value_alerts);
+        var value_tooltip;
+        if (value_alerts.length > 0) {
+            value_tooltip =
+                <>
+                    <ul>
+                        {value_alerts.map((entry, i) => {return <li key={i}>{entry.message}</li>})}
+                    </ul>
+                </>;
+        }
+//        console.log('value_tooltip=',value_tooltip);
         var p = Object.assign({},this.props); // clone the props
         delete p.onChangeValid; // remove special on functions
         delete p.onChangeInvalid;
         delete p.disabledText;
         delete p.icon_alerts;
-        delete p.value_tooltip;
+        delete p.value_alerts;
         delete p.validmin;
         delete p.validmax;
         return (<>
             {icon_alerts.length > 0 ?
-                <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{icon_tooltip}</Tooltip>}>
+                <OverlayTrigger placement="top" overlay={<Tooltip>Alerts Available</Tooltip>}>
                     <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
                 </OverlayTrigger>
             :
             ''}
-            {this.props.value_tooltip !== undefined ?
-                <OverlayTrigger placement="top" overlay={<Tooltip>{this.props.value_tooltip}</Tooltip>}>
+            {value_tooltip !== undefined ?
+                <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{value_tooltip}</Tooltip>}>
                     <Form.Control type="number"
                         {...p} // Allow OverlayTrigger to pass-in other props
                         onClick={this.onClick}
