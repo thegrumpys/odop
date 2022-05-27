@@ -131,18 +131,6 @@ class ConstraintsMaxRowDependentVariable extends Component {
         // =======================================
         // Constraint Maximum Column
         // =======================================
-        var value_class = '';
-        if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
-            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-                value_class += "text-not-feasible ";
-            } else if (this.props.objective_value > this.props.system_controls.objmin) {
-                value_class += "text-close-to-feasible ";
-            } else if (this.props.objective_value > 0.0) {
-                value_class += "text-feasible ";
-            } else {
-                value_class += "text-strictly-feasible ";
-            }
-        }
         var value_alerts;
         if ((this.props.element.lmax & FIXED) === 0 && this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0) {
             value_alerts = [{ name: this.props.element.name, message: this.props.element.lmax & FDCL ? 'FDCL =' + this.props.element.cmaxchoices[this.props.element.cmaxchoice] : '=' + this.props.element.cmax + ' (non-FDCL)' }];
@@ -162,7 +150,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
                                     <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetFlagMaxConstrained : this.onSetFlagMaxConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControlTypeNumber id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.cmax} value_alerts={value_alerts} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} disabledText={this.props.element.lmax & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onClick={this.onClick}/>
+                            <FormControlTypeNumber id={this.props.element.name + "_cmax"} value={this.props.element.cmax} value_alerts={value_alerts} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} disabledText={this.props.element.lmax & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onClick={this.onClick}/>
                         </InputGroup>
                         {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
                         <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>
@@ -195,7 +183,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
                                             <td>Value:&nbsp;</td>
                                             <td>
                                                 <InputGroup>
-                                                    <FormControlTypeNumber id={this.props.element.name + "_cmax"} className={value_class} value={this.props.element.cmax} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
+                                                    <FormControlTypeNumber id={this.props.element.name + "_cmax"} value={this.props.element.cmax} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
                                                     <Button variant="primary" disabled={this.state.isInvalidValue} onClick={this.onEnterButton}>Enter</Button>
                                                 </InputGroup>
                                             </td>
@@ -208,7 +196,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
                             </Modal.Footer>
                         </Modal> : ''}
                     </td>
-                    <td className={"text-right align-middle small " + value_class + (this.props.system_controls.show_violations === 0 ? "d-none" : "")} colSpan="1">
+                    <td className={"text-right align-middle small " + (this.props.system_controls.show_violations === 0 ? "d-none" : "")} colSpan="1">
                         {this.props.system_controls.show_violations === 1 && this.props.element.vmax <= 0 ?
                             ''
                             : (this.props.element.lmax & FIXED ? 
@@ -236,8 +224,7 @@ ConstraintsMaxRowDependentVariable.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-    system_controls: state.model.system_controls,
-    objective_value: state.model.result.objective_value
+    system_controls: state.model.system_controls
 });
 
 const mapDispatchToProps = {

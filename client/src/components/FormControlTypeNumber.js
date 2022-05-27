@@ -112,10 +112,10 @@ class FormControlTypeNumber extends Component {
         var validity_alert;
         if (!this.props.disabledText && Number.isFinite(this.state.value) && this.state.value <= this.props.validmin) { 
             let validmin = this.props.validmin === -Number.MAX_VALUE ? '-Number.MAX_VALUE' : this.props.validmin;
-            validity_alert = { message: 'Invalid Value - Less than or equal to ' + validmin };
+            validity_alert = { message: 'INVALID VALUE: Less than or equal to ' + validmin };
         } else if (!this.props.disabledText && Number.isFinite(this.state.value) && this.state.value >= this.props.validmax) {
             let validmax = this.props.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : this.props.validmax;
-            validity_alert = { message: 'Invalid Value - Greater than or equal to ' + validmax };
+            validity_alert = { message: 'INVALID VALUE: Greater than or equal to ' + validmax };
         }
 //        console.log('validity_alert=',validity_alert);
         var icon_alerts = this.props.icon_alerts; // start with the icon alerts 

@@ -131,18 +131,6 @@ class ConstraintsMinRowDependentVariable extends Component {
         // =======================================
         // Constraint Minimum Column
         // =======================================
-        var value_class = '';
-        if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
-            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-                value_class += "text-not-feasible ";
-            } else if (this.props.objective_value > this.props.system_controls.objmin) {
-                value_class += "text-close-to-feasible ";
-            } else if (this.props.objective_value > 0.0) {
-                value_class += "text-feasible ";
-            } else {
-                value_class += "text-strictly-feasible ";
-            }
-        }
         var value_alerts;
         if ((this.props.element.lmin & FIXED) === 0 && this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0) {
             value_alerts = [{ name: this.props.element.name, message: this.props.element.lmin & FDCL ? 'FDCL =' + this.props.element.cminchoices[this.props.element.cminchoice] : '=' + this.props.element.cmin + ' (non-FDCL)' }];
@@ -162,7 +150,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                                     <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetFlagMinConstrained : this.onSetFlagMinConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControlTypeNumber id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.cmin} value_alerts={value_alerts} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} disabledText={this.props.element.lmin & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onClick={this.onClick}/>
+                            <FormControlTypeNumber id={this.props.element.name + "_cmin"} value={this.props.element.cmin} value_alerts={value_alerts} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} disabledText={this.props.element.lmin & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onClick={this.onClick}/>
                         </InputGroup>
                         {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ?
                         <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>
@@ -195,7 +183,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                                             <td>Value:&nbsp;</td>
                                             <td>
                                                 <InputGroup>
-                                                    <FormControlTypeNumber id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.cmin} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
+                                                    <FormControlTypeNumber id={this.props.element.name + "_cmin"} value={this.props.element.cmin} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
                                                     <Button variant="primary" disabled={this.state.isInvalidValue} onClick={this.onEnterButton}>Enter</Button>
                                                 </InputGroup>
                                             </td>
@@ -208,7 +196,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                             </Modal.Footer>
                         </Modal> : ''}
                     </td>
-                    <td className={"text-right align-middle small " + value_class + (this.props.system_controls.show_violations === 0 ? "d-none" : "")} colSpan="1">
+                    <td className={"text-right align-middle small " + (this.props.system_controls.show_violations === 0 ? "d-none" : "")} colSpan="1">
                         {this.props.system_controls.show_violations === 1 && this.props.element.vmin <= 0 ?
                             ''
                             : (this.props.element.lmin & FIXED ? 
@@ -236,8 +224,7 @@ ConstraintsMinRowDependentVariable.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-    system_controls: state.model.system_controls,
-    objective_value: state.model.result.objective_value
+    system_controls: state.model.system_controls
 });
 
 const mapDispatchToProps = {

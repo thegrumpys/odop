@@ -130,7 +130,8 @@ class NameValueUnitsRowDependentVariable extends Component {
 }
 
 const mapStateToProps = state => ({
-    system_controls: state.model.system_controls
+    system_controls: state.model.system_controls,
+    objective_value: state.model.result.objective_value
 });
 
 const mapDispatchToDependentVariableProps = {
