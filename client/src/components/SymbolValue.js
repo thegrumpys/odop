@@ -201,20 +201,6 @@ class SymbolValue extends Component {
     render() {
 //        console.log('In SymbolValue.render this=',this);
         var value_class = '';
-        var icon_dependent_tag = '';
-        if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass();
-        } else if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0)) {
-            value_class += this.getValueClass();
-        } else if (!this.props.element.input && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass();
-        } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) && (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass();
-        } else if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
-            value_class += this.getValueClass();
-        } else if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
-            value_class += this.getValueClass();
-        }
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
         } else {
@@ -225,6 +211,7 @@ class SymbolValue extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
+        var icon_dependent_tag = '';
         if (this.props.element.type === "equationset" && !this.props.element.input) { // Dependent Variable?
             icon_dependent_tag =
                 <OverlayTrigger placement="top" overlay={<Tooltip>Dependent Variable</Tooltip>}>

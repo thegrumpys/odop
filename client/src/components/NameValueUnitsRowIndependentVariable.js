@@ -65,38 +65,10 @@ class NameValueUnitsRowIndependentVariable extends Component {
         logValue(this.props.element.name,'FREE','FixedFlag',false);
     }
 
-    getValueClass() {
-        var value_class = '';
-        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-            value_class += "text-not-feasible ";
-        } else if (this.props.objective_value > this.props.system_controls.objmin) {
-            value_class += "text-close-to-feasible ";
-        } else if (this.props.objective_value > 0.0) {
-            value_class += "text-feasible ";
-        } else {
-            value_class += "text-strictly-feasible ";
-        }
-//        console.log('In NameValueUnitsRowIndependentVariable.getValueClass value_class=',value_class);
-        return value_class;
-    }
-
     render() {
 //        console.log('In NameValueUnitsRowIndependentVariable.render this=',this);
         var value_class = '';
         var value_fix_free_text = '';
-        if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass();
-        } else if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0)) {
-            value_class += this.getValueClass();
-        } else if (!this.props.element.input && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass();
-        } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) && (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass();
-        } else if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
-            value_class += this.getValueClass();
-        } else if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
-            value_class += this.getValueClass();
-        }
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
             if (this.props.element.type !== "calcinput") {

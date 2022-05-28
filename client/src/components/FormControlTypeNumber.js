@@ -109,26 +109,9 @@ class FormControlTypeNumber extends Component {
         if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
             value_class += ' borders-invalid';
         }
-        var validity_alert;
-//        if (!this.props.disabledText && Number.isFinite(this.state.value) && this.state.value <= this.props.validmin) { 
-//            let validmin = this.props.validmin === -Number.MAX_VALUE ? '-Number.MAX_VALUE' : this.props.validmin;
-//            validity_alert = { message: 'INVALID VALUE: Less than or equal to ' + validmin };
-//        } else if (!this.props.disabledText && Number.isFinite(this.state.value) && this.state.value >= this.props.validmax) {
-//            let validmax = this.props.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : this.props.validmax;
-//            validity_alert = { message: 'INVALID VALUE: Greater than or equal to ' + validmax };
-//        }
-//        console.log('validity_alert=',validity_alert);
         var icon_alerts = this.props.icon_alerts; // start with the icon alerts 
-        if (validity_alert !== undefined) {
-            if (icon_alerts !== undefined) {
-                icon_alerts.unshift(validity_alert); // add in validity alerts to the beginning
-            } else {
-                icon_alerts = [validity_alert];
-            }
-        } else {
-            if (icon_alerts === undefined) {
-                icon_alerts = [];
-            }
+        if (icon_alerts === undefined) {
+          icon_alerts = [];
         }
 //        console.log('icon_alerts=',icon_alerts);
         var value_alerts = this.props.value_alerts;

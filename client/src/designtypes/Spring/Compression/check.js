@@ -24,45 +24,53 @@ export function check(store) {        /*    Compression  Spring  */
     if (design.model.symbol_table[o.L_Free].value < design.model.symbol_table[o.L_Solid].value) {
         addAlert({
             name: design.model.symbol_table[o.L_Free].name, 
-            message: check_message(design,o.L_Free,'<',o.L_Solid)
+            message: check_message(design,o.L_Free,'<',o.L_Solid),
+            severity: 'Err'
         });
         addAlert({
             name: design.model.symbol_table[o.L_Solid].name, 
-            message: check_message(design,o.L_Solid,'>=',o.L_Free)
+            message: check_message(design,o.L_Solid,'>=',o.L_Free),
+            severity: 'Err'
         });
     }
     if (design.model.symbol_table[o.L_2].value < design.model.symbol_table[o.L_Solid].value) {
         addAlert({
             name: design.model.symbol_table[o.L_2].name, 
-            message: check_message(design,o.L_2,'<',o.L_Solid)
+            message: check_message(design,o.L_2,'<',o.L_Solid),
+            severity: 'Warn'
         });
         addAlert({
             name: design.model.symbol_table[o.L_Solid].name, 
-            message: check_message(design,o.L_Solid,'>=',o.L_2)
+            message: check_message(design,o.L_Solid,'>=',o.L_2),
+            severity: 'Err'
         });
     }
     if (design.model.symbol_table[o.Coils_A].value < 1.0) {
         addAlert({
             name: design.model.symbol_table[o.Coils_A].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Coils_A].name + ' (' + design.model.symbol_table[o.Coils_A].value.toODOPPrecision() + ') < 1.0'
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Coils_A].name + ' (' + design.model.symbol_table[o.Coils_A].value.toODOPPrecision() + ') < 1.0',
+            severity: 'Warn'
         });
     }
     if (design.model.symbol_table[o.Wire_Dia].value < 0.5 * design.model.symbol_table[o.tbase010].value) {
         addAlert({
             name: design.model.symbol_table[o.Wire_Dia].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') < ' + (0.5 * design.model.symbol_table[o.tbase010].value).toODOPPrecision()
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') < ' + (0.5 * design.model.symbol_table[o.tbase010].value).toODOPPrecision(),
+            severity: 'Warn'
         });
     }
     if (design.model.symbol_table[o.Wire_Dia].value > 5.0 * design.model.symbol_table[o.tbase400].value) {
         addAlert({
             name: design.model.symbol_table[o.Wire_Dia].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') > ' + (5.0 * design.model.symbol_table[o.tbase400].value).toODOPPrecision()
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') > ' + (5.0 * design.model.symbol_table[o.tbase400].value).toODOPPrecision(),
+            severity: 'Warn'
         });
     }
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
         addAlert({
             name: design.model.symbol_table[o.Tensile].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + design.model.symbol_table[o.Tensile].value.toODOPPrecision() + ') <= ' + design.model.system_controls.smallnum.toODOPPrecision()
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + design.model.symbol_table[o.Tensile].value.toODOPPrecision() + ') <= ' + design.model.system_controls.smallnum.toODOPPrecision(),
+            severity: 'Err'
         });
     }
 

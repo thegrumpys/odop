@@ -10,32 +10,34 @@ export var commonChecks = function(store) {
 
         if (element.format === undefined && typeof element.value === 'number' && element.value <= element.validmin) { 
             let validmin = element.validmin === -Number.MAX_VALUE ? '-Number.MAX_VALUE' : element.validmin;
-            addAlert({ name: element.name, message: 'INVALID VALUE: Less than or equal to ' + validmin });
+            addAlert({ name: element.name, message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ') <= ' + validmin, severity: 'Err' });
         } else if (element.format === undefined && typeof element.value === 'number' && element.value >= element.validmax) {
             let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax;
-            addAlert({ name: element.name, message: 'INVALID VALUE: Greater than or equal to ' + validmax });
+            addAlert({ name: element.name, message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ') >- ' + validmax, severity: 'Err' });
         }
 
         if (!element.input && (element.lmin & FIXED && element.vmin > 0.0) && (element.lmax & FIXED && element.vmax > 0.0)) {
-            addAlert({ name: element.name, message: "FIX VIOLATION: Value outside the range from "+element.cmin.toODOPPrecision()+" to "+element.cmax.toODOPPrecision() });
+            addAlert({ name: element.name+'.cmin', message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(), severity: 'Info' });
+            addAlert({ name: element.name+'.cmax', message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(), severity: 'Info' });
         } else if (!element.input && (element.lmin & FIXED && element.vmin > 0.0)) {
-            addAlert({ name: element.name, message: "FIX VIOLATION: Value less than "+element.cmin.toODOPPrecision() });
+            addAlert({ name: element.name+'.cmin', message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(), severity: 'Info' });
         } else if (!element.input && (element.lmax & FIXED && element.vmax > 0.0)) {
-            addAlert({ name: element.name, message: "FIX VIOLATION: Value greater than "+element.cmax.toODOPPrecision() });
+            addAlert({ name: element.name+'.cmax', message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(), severity: 'Info'  });
         } else if ((element.lmin & CONSTRAINED && element.vmin > 0.0) && (element.lmax & CONSTRAINED && element.vmax > 0.0)) {
-            addAlert({ name: element.name, message: "CONSTRAINT VIOLATION: Value outside the range from "+element.cmin.toODOPPrecision()+" to "+element.cmax.toODOPPrecision() });
+            addAlert({ name: element.name+'.cmin', message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(), severity: 'Info' });
+            addAlert({ name: element.name+'.cmax', message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(), severity: 'Info' });
         } else if (element.lmin & CONSTRAINED && element.vmin > 0.0) {
-            addAlert({ name: element.name, message: "CONSTRAINT VIOLATION: Value less than "+element.cmin.toODOPPrecision() });
+            addAlert({ name: element.name+'.cmin', message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(), severity: 'Info' });
         } else if (element.lmax & CONSTRAINED && element.vmax > 0.0) {
-            addAlert({ name: element.name, message: "CONSTRAINT VIOLATION: Value greater than "+element.cmax.toODOPPrecision() });
+            addAlert({ name: element.name+'.cmax', message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(), severity: 'Info' });
         }
 
-        if ((element.type === "equationset" && element.input) && !(element.lmin & FIXED)) {
+        if ((element.type === 'equationset' && element.input) && !(element.lmin & FIXED)) {
             total++;
         }
     }
     if (total === 0) {
-        addAlert({ message: 'SYSTEM: No free independent variables'});
+        addAlert({ message: 'SYSTEM: No free independent variables', severity: 'Info'});
     }
 }
 
@@ -68,9 +70,13 @@ export var addAlert = function(alert) {
     });
 }
 
-export var getAlerts = function() {
+export var getAlerts = function(severity='') {
 //    console.log('In getAlerts');
-    return this.state.alerts;
+    if (severity === '') {
+        return this.state.alerts;
+    } else {
+        return this.state.alerts.filter(entry => entry.severity === severity);
+    }
 }
 
 export class Alerts extends Component {
