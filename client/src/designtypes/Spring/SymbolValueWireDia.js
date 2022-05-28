@@ -205,26 +205,19 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.render sorted_wire_dia_table=',sorted_wire_dia_table);
 
         var value_class = 'text-right ';
-        var value_alerts;
         var value_fix_free_text = '';
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
-            value_alerts = [{ name: this.props.element.name, message: "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision() }];
         } else if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0)) {
             value_class += this.getValueClass();
-            value_alerts = [{ name: this.props.element.name, message: "FIX VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision() }];
         } else if (!this.props.element.input && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
-            value_alerts = [{ name: this.props.element.name, message: "FIX VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision() }];
         } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) && (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
-            value_alerts = [{ name: this.props.element.name, message: "CONSTRAINT VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision() }];
         } else if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
             value_class += this.getValueClass();
-            value_alerts = [{ name: this.props.element.name, message: "CONSTRAINT VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision() }];
         } else if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
             value_class += this.getValueClass();
-            value_alerts = [{ name: this.props.element.name, message: "CONSTRAINT VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision() }];
         }
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
@@ -266,19 +259,10 @@ class SymbolValueWireDia extends Component {
             <>
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
-                        {(value_alerts !== undefined ?
-                            <>
-                                {icon_invalid_tag}
-                                <OverlayTrigger placement="top" overlay={<Tooltip>{value_alerts}</Tooltip>}>
-                                    <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
-                                </OverlayTrigger>
-                            </>
-                        :
-                            <>
-                                {icon_invalid_tag}
-                                <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
-                            </>
-                        )}
+                        <>
+                            {icon_invalid_tag}
+                            <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
+                        </>
                     </InputGroup>
                 </td>
                 <Modal show={this.state.modal} onHide={this.onClose}>
@@ -314,19 +298,11 @@ class SymbolValueWireDia extends Component {
                                             <td className="align-middle" colSpan="2">
                                                 <InputGroup>
                                                     {(this.state.value_input ?
-                                                        <FormControlTypeNumber id={'svwd_'+this.props.element.name} className={value_class} step="any" value={this.props.element.value} value_alerts={value_alerts} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChange={this.onChange} />
+                                                        <FormControlTypeNumber id={'svwd_'+this.props.element.name} className={value_class} step="any" value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChange={this.onChange} />
                                                     :
-                                                        (value_alerts !== undefined ?
-                                                            <OverlayTrigger placement="top" overlay={<Tooltip>{value_alerts}</Tooltip>}>
-                                                                <Form.Control as="select" id={'svwd_'+this.props.element.name} disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
-                                                                    {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
-                                                                </Form.Control>
-                                                            </OverlayTrigger>
-                                                        :
-                                                            <Form.Control as="select" id={'svwd_'+this.props.element.name} disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
-                                                                {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
-                                                            </Form.Control>
-                                                        )
+                                                        <Form.Control as="select" id={'svwd_'+this.props.element.name} disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
+                                                            {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
+                                                        </Form.Control>
                                                     )}
                                                     <InputGroup.Append>
                                                         <InputGroup.Text>

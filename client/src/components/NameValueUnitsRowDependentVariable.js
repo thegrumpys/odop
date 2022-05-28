@@ -56,26 +56,19 @@ class NameValueUnitsRowDependentVariable extends Component {
     render() {
 //        console.log('In NameValueUnitsRowDependentVariable.render this=',this);
         var value_class = '';
-        var value_alerts;
         var value_fix_free_text = '';
         if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
-            value_alerts = [{ name: this.props.element.name, message: "FIX VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision() }];
         } else if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0)) {
             value_class += this.getValueClass();
-            value_alerts = [{ name: this.props.element.name, message: "FIX VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision() }];
         } else if (!this.props.element.input && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
-            value_alerts = [{ name: this.props.element.name, message: "FIX VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision() }];
         } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) && (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
             value_class += this.getValueClass();
-            value_alerts = [{ name: this.props.element.name, message: "CONSTRAINT VIOLATION: Value outside the range from "+this.props.element.cmin.toODOPPrecision()+" to "+this.props.element.cmax.toODOPPrecision() }];
         } else if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
             value_class += this.getValueClass();
-            value_alerts = [{ name: this.props.element.name, message: "CONSTRAINT VIOLATION: Value less than "+this.props.element.cmin.toODOPPrecision() }];
         } else if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
             value_class += this.getValueClass();
-            value_alerts = [{ name: this.props.element.name, message: "CONSTRAINT VIOLATION: Value greater than "+this.props.element.cmax.toODOPPrecision() }];
         }
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
@@ -112,7 +105,7 @@ class NameValueUnitsRowDependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <FormControlTypeNumber id={'nvurdv_'+this.props.element.name} disabled={true} icon_alerts={icon_alerts} className={value_class} value={this.props.element.value} value_alerts={value_alerts} validmin={this.props.element.validmin} validmax={this.props.element.validmax} />
+                            <FormControlTypeNumber id={'nvurdv_'+this.props.element.name} disabled={true} icon_alerts={icon_alerts} className={value_class} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} />
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
