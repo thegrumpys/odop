@@ -206,19 +206,6 @@ class SymbolValueWireDia extends Component {
 
         var value_class = 'text-right ';
         var value_fix_free_text = '';
-        if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0) && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass();
-        } else if (!this.props.element.input && (this.props.element.lmin & FIXED && this.props.element.vmin > 0.0)) {
-            value_class += this.getValueClass();
-        } else if (!this.props.element.input && (this.props.element.lmax & FIXED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass();
-        } else if ((this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) && (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0)) {
-            value_class += this.getValueClass();
-        } else if (this.props.element.lmin & CONSTRAINED && this.props.element.vmin > 0.0) {
-            value_class += this.getValueClass();
-        } else if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
-            value_class += this.getValueClass();
-        }
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
             if (this.props.element.type !== "calcinput") {
