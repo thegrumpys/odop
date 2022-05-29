@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
+import { getAlertsBySeverity } from '../../../components/Alerts';
 
 export class ReportBase extends Component {
 
@@ -22,38 +23,8 @@ export class ReportBase extends Component {
         /*  Bring in life target table  */
             this.lifetarg = require('./lifetarget.json');
 
-        this.hits = 0;
+        this.hits = getAlertsBySeverity().length;
         this.errmsg = "";
-        if (this.props.symbol_table[o.L_Free].value < this.props.symbol_table[o.L_Solid].value) {
-            this.hits++;
-            this.errmsg += ": " + this.props.symbol_table[o.L_Free].name + " < " + this.props.symbol_table[o.L_Solid].name;
-        }
-        if (this.props.symbol_table[o.L_2].value < this.props.symbol_table[o.L_Solid].value) {
-            this.hits++;
-            this.errmsg += ": " + this.props.symbol_table[o.L_2].name + " < " + this.props.symbol_table[o.L_Solid].name;
-        }
-        if (this.props.symbol_table[o.ID_Free].value < 0.0) {
-            this.hits++;
-            this.errmsg += ": " + this.props.symbol_table[o.ID_Free].name + " < zero";
-        }
-        if (this.props.symbol_table[o.Coils_A].value < 1.0) {
-            this.hits++;
-            this.errmsg += ": " + this.props.symbol_table[o.Coils_A].name + " < 1.0";
-        }
-        if (this.props.symbol_table[o.Wire_Dia].value < 0.5 * this.props.symbol_table[o.tbase010].value) {
-            this.hits++;
-            this.errmsg += ": " + this.props.symbol_table[o.Wire_Dia].name + " < reasonable";
-        }
-        if (this.props.symbol_table[o.Wire_Dia].value > 5.0 * this.props.symbol_table[o.tbase400].value) {
-            this.hits++;
-            this.errmsg += ": " + this.props.symbol_table[o.Wire_Dia].name + " > reasonable";
-        }
-        if (this.props.symbol_table[o.Tensile].value <= this.props.system_controls.smallnum) {
-            this.hits++;
-            this.errmsg += ": " + this.props.symbol_table[o.Tensile].name + " < reasonable";
-        }
-        if (this.hits)
-            this.errmsg = "Warning" + this.errmsg;
         this.startpntmsg = "YOU MAY WISH TO CHOOSE A MORE REASONABLE START POINT BEFORE CONTINUING WITH SEARCH, SEEK OR TRADE.";
         this.NaNmsg = 'Any "NaN" values are "Not a Number".';
 

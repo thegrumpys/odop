@@ -96,11 +96,14 @@ export var getAlertsByName = function(name, includeViolations = false) {
 
 export var getAlertsBySeverity = function(severity='') {
 //    console.log('In getAlertsBySeverity');
+    var results;
     if (severity === '') {
-        return this.state.alerts;
+        results = this.state.alerts;
     } else {
-        return this.state.alerts.filter(entry => entry.severity === severity);
+        results = this.state.alerts.filter(entry => entry.severity === severity);
     }
+//    console.log('In getAlertsBySeverity results=',results);
+    return results;
 }
 
 export var clearAlerts = function() {

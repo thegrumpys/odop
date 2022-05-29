@@ -20,12 +20,6 @@ export class Calculator extends ReportBase {
             <Container>
                 <Row>
                     <h4>ODOP:Spring &nbsp; Compression Spring Calculator</h4>
-                    <b>
-                    {this.hits > 0 && this.errmsg}{this.hits > 0 && <br />}
-                    {this.hits > 0 && this.startpntmsg}{this.hits > 0 && <br />}
-                    </b>
-                    {this.hits > 0 && this.NaNmsg}{this.hits > 0 && <br />}
-                    {this.hits > 0 && <br />}
                 </Row>
                 <Row>
                     <ResultTable />

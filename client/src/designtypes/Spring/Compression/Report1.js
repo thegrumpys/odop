@@ -2,6 +2,7 @@ import React from 'react';
 import { ReportBase } from "./ReportBase" // import the inner non-redux-connected class
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
+import { getAlertsBySeverity } from '../../../components/Alerts';
 
 class Report1 extends ReportBase {
 
@@ -12,8 +13,14 @@ class Report1 extends ReportBase {
             <>
                 <h4>ODOP:Spring &nbsp; Compression Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></h4>
                 <br />
+                {this.hits > 0 ?
+                    <><b>Alerts:</b><ul>
+                        { getAlertsBySeverity('Err').map((entry)  => <li>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Warn').map((entry) => <li>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Info').map((entry) => <li>{entry.severity}: {entry.message}</li> ) }
+                    </ul></>
+                : '' }
                 <b>
-                {this.hits > 0 && this.errmsg}{this.hits > 0 && <br />}
                 {this.hits > 0 && this.startpntmsg}{this.hits > 0 && <br />}
                 </b>
                 {this.hits > 0 && this.NaNmsg}{this.hits > 0 && <br />}
