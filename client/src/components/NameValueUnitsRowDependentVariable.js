@@ -5,7 +5,7 @@ import { CONSTRAINED, FIXED } from '../store/actionTypes';
 import { fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
-import { queryAlert } from './Alerts';
+import { getAlertsByName } from './Alerts';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -38,24 +38,11 @@ class NameValueUnitsRowDependentVariable extends Component {
         logValue(this.props.element.name,'FREE','FixedFlag',false);
     }
 
-    getValueClass() {
-        var value_class = '';
-        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-            value_class += "text-not-feasible ";
-        } else if (this.props.objective_value > this.props.system_controls.objmin) {
-            value_class += "text-close-to-feasible ";
-        } else if (this.props.objective_value > 0.0) {
-            value_class += "text-feasible ";
-        } else {
-            value_class += "text-strictly-feasible ";
-        }
-//        console.log('In NameValueUnitsRowDependentVariable.getValueClass value_class=',value_class);
-        return value_class;
-    }
-
     render() {
 //        console.log('In NameValueUnitsRowDependentVariable.render this=',this);
-        var value_class = '';
+        var results = getAlertsByName(this.props.element.name);
+        var value_class = results.color_class;
+        var icon_alerts = results.alerts;
         var value_fix_free_text = '';
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
@@ -77,7 +64,6 @@ class NameValueUnitsRowDependentVariable extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
-        var icon_alerts = queryAlert(this.props.element.name);
 //        console.log('In NameValueUnitsRowDependentVariable.render value_class=',value_class);
         // =======================================
         // Table Row

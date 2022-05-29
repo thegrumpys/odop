@@ -6,7 +6,7 @@ import { CONSTRAINED, FIXED } from '../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
-import { queryAlert } from './Alerts';
+import { getAlertsByName } from './Alerts';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -67,7 +67,9 @@ class NameValueUnitsRowIndependentVariable extends Component {
 
     render() {
 //        console.log('In NameValueUnitsRowIndependentVariable.render this=',this);
-        var value_class = '';
+        var results = getAlertsByName(this.props.element.name);
+        var value_class = results.color_class;
+        var icon_alerts = results.alerts;
         var value_fix_free_text = '';
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
@@ -89,7 +91,6 @@ class NameValueUnitsRowIndependentVariable extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
-        var icon_alerts = queryAlert(this.props.element.name);
 //        console.log('In NameValueUnitsRowIndependentVariable.render value_class=',value_class);
         // =======================================
         // Table Row

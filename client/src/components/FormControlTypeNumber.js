@@ -125,12 +125,14 @@ class FormControlTypeNumber extends Component {
         if (value_alerts.length > 0) {
             value_tooltip =
                 <>
+                    Alerts
                     <ul>
                         {value_alerts.map((entry, i) => {return <li key={i}>{entry.message}</li>})}
                     </ul>
                 </>;
         }
 //        console.log('value_tooltip=',value_tooltip);
+
         var p = Object.assign({},this.props); // clone the props
         delete p.onChangeValid; // remove special on functions
         delete p.onChangeInvalid;
@@ -139,6 +141,7 @@ class FormControlTypeNumber extends Component {
         delete p.value_alerts;
         delete p.validmin;
         delete p.validmax;
+
         return (<>
             {icon_alerts.length > 0 ?
                 <OverlayTrigger placement="top" overlay={<Tooltip>Alerts Available</Tooltip>}>

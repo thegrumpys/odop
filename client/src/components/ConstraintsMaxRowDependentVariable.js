@@ -6,7 +6,7 @@ import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
-import { queryAlert } from './Alerts';
+import { getAlertsByName } from './Alerts';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -132,19 +132,9 @@ class ConstraintsMaxRowDependentVariable extends Component {
         // =======================================
         // Constraint Maximum Column
         // =======================================
-        var value_class = '';
-        if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
-            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-                value_class += "text-not-feasible ";
-            } else if (this.props.objective_value > this.props.system_controls.objmin) {
-                value_class += "text-close-to-feasible ";
-            } else if (this.props.objective_value > 0.0) {
-                value_class += "text-feasible ";
-            } else {
-                value_class += "text-strictly-feasible ";
-            }
-        }
-        var icon_alerts = queryAlert(this.props.element.name+'.cmax');
+        var results = getAlertsByName(this.props.element.name+'.cmax');
+        var value_class = results.color_class;
+        var icon_alerts = results.alerts;
         var value_alerts;
         if ((this.props.element.lmax & FIXED) === 0 && this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0) {
             value_alerts = [{ name: this.props.element.name, message: this.props.element.lmax & FDCL ? 'FDCL =' + this.props.element.cmaxchoices[this.props.element.cmaxchoice] : '=' + this.props.element.cmax + ' (non-FDCL)' }];

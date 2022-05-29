@@ -20,6 +20,7 @@ import NameValueUnitsRowCalcInput from '../../components/NameValueUnitsRowCalcIn
 import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 import { logValue } from '../../logUsage';
 import { logUsage } from '../../logUsage';
+import { getAlertsByName } from '../../components/Alerts';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -142,21 +143,6 @@ class SymbolValueWireDia extends Component {
         });
     }
 
-    getValueClass() {
-        var value_class = '';
-        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-            value_class += "text-not-feasible ";
-        } else if (this.props.objective_value > this.props.system_controls.objmin) {
-            value_class += "text-close-to-feasible ";
-        } else if (this.props.objective_value > 0.0) {
-            value_class += "text-feasible ";
-        } else {
-            value_class += "text-strictly-feasible ";
-        }
-//        console.log('In SymbolValueWireDia.getValueClass value_class=',value_class);
-        return value_class;
-    }
-
     render() {
 //        console.log('In SymbolValueWireDia.render this=',this);
 
@@ -204,7 +190,20 @@ class SymbolValueWireDia extends Component {
         var sorted_wire_dia_table = wire_dia_table.sort(function(a, b) { return a[0] - b[0]; }); // sort by value
 //        console.log('In SymbolValueWireDia.render sorted_wire_dia_table=',sorted_wire_dia_table);
 
-        var value_class = 'text-right ';
+        var results = getAlertsByName(this.props.element.name, true);
+        var icon_alerts = results.alerts;
+        var value_class = results.color_class + ' text-right ';
+        var value_tooltip;
+        if (icon_alerts.length > 0) {
+            value_tooltip =
+                <>
+                    Alerts
+                    <ul>
+                        {icon_alerts.map((entry, i) => {return <li key={i}>{entry.message}</li>})}
+                    </ul>
+                </>;
+        }
+//        console.log('value_tooltip=',value_tooltip);
         var value_fix_free_text = '';
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";
@@ -228,28 +227,18 @@ class SymbolValueWireDia extends Component {
         }
         value_class += "background-white "; // Always white
 //        console.log('In SymbolValueWireDia.render value_class=',value_class);
-        var icon_invalid_tag = '';
-        if (this.props.element.value <= this.props.element.validmin) { 
-            let validmin = this.props.element.validmin === -Number.MAX_VALUE ? '-Number.MAX_VALUE' : this.props.element.validmin;
-            icon_invalid_tag =
-                <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Less than or equal to {validmin}</Tooltip>}>
-                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
-                </OverlayTrigger>;
-        } else if (this.props.element.value >= this.props.element.validmax) {
-            let validmax = this.props.element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : this.props.element.validmax;
-            icon_invalid_tag =
-                <OverlayTrigger placement="top" overlay={<Tooltip>Invalid Value - Greater than or equal to {validmax}</Tooltip>}>
-                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
-                </OverlayTrigger>;
-        }
+
         return (
             <>
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
-                        <>
-                            {icon_invalid_tag}
+                        {(value_tooltip !== undefined ?
+                            <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{value_tooltip}</Tooltip>}>
+                                <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
+                            </OverlayTrigger>
+                        :
                             <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
-                        </>
+                        )}
                     </InputGroup>
                 </td>
                 <Modal show={this.state.modal} onHide={this.onClose}>

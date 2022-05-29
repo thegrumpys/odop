@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { changeSymbolValue } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
-import { queryAlert } from './Alerts';
+import { getAlertsByName } from './Alerts';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -72,7 +72,9 @@ class NameValueUnitsRowCalcInput extends Component {
     
     render() {
 //        console.log('In NameValueUnitsRowCalcInput.render this=',this);
-        var icon_alerts = queryAlert(this.props.element.name);
+        var results = getAlertsByName(this.props.element.name);
+        var value_class = results.color_class;
+        var icon_alerts = results.alerts;
         // =======================================
         // Table Row
         // =======================================
@@ -87,7 +89,7 @@ class NameValueUnitsRowCalcInput extends Component {
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
                             { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
-                                <FormControlTypeNumber id={'nvurci_'+this.props.element.name} disabled={!this.props.element.input} icon_alerts={icon_alerts} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} /> : '' }
+                                <FormControlTypeNumber id={'nvurci_'+this.props.element.name} disabled={!this.props.element.input} icon_alerts={icon_alerts} className={value_class} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} /> : '' }
                             { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
                                 <Form.Control id={'nvurci_'+this.props.element.name} type="text" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onChange} /> : '' }
                             { this.props.element.format === 'table' &&

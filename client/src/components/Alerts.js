@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED } from '../store/actionTypes';
 
 export var commonChecks = function(store) {
@@ -41,15 +42,43 @@ export var commonChecks = function(store) {
     }
 }
 
-export var queryAlert = function(name) {
-//    console.log('In queryAlert this=',this,'name=',name);
+export var getAlertsByName = function(name, includeViolations = false) {
+//    console.log('In getAlertsByName this=',this,'name=',name);
     var alerts = [];
+    var color_classes = ["text-strictly-feasible ", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
+    var max_color = 0;
     this.state.alerts.forEach((entry) => {
         if (entry.name === name) {
             alerts.push(entry);
+            if (entry.severity === 'Err') {
+                max_color = max_color > 3 ? max_color : 3;
+            } else if (entry.severity === 'Warn') {
+                max_color = max_color > 2 ? max_color : 2;
+            } else if (entry.severity === 'Info') {
+                max_color = max_color > 1 ? max_color : 1;
+            }
+        } else if (includeViolations && (entry.name === name+'.cmin' || entry.name === name+'.cmax')) {
+            alerts.push(entry);
+            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+                max_color = max_color > 3 ? max_color : 3;
+            } else if (this.props.objective_value > this.props.system_controls.objmin) {
+                max_color = max_color > 2 ? max_color : 2;
+            } else if (this.props.objective_value > 0.0) {
+                max_color = max_color > 1 ? max_color : 1;
+            }
         }
     });
-    return alerts;
+//    console.log('In getAlertsByName max_color=',max_color,'alerts=',alerts);
+    return {color_class: color_classes[max_color], alerts: alerts};
+}
+
+export var getAlertsBySeverity = function(severity='') {
+//    console.log('In getAlertsBySeverity');
+    if (severity === '') {
+        return this.state.alerts;
+    } else {
+        return this.state.alerts.filter(entry => entry.severity === severity);
+    }
 }
 
 export var clearAlerts = function() {
@@ -70,22 +99,13 @@ export var addAlert = function(alert) {
     });
 }
 
-export var getAlerts = function(severity='') {
-//    console.log('In getAlerts');
-    if (severity === '') {
-        return this.state.alerts;
-    } else {
-        return this.state.alerts.filter(entry => entry.severity === severity);
-    }
-}
-
-export class Alerts extends Component {
+class Alerts extends Component {
     constructor(props) {
         super(props);
-        queryAlert = queryAlert.bind(this); // Bind external function - no 'this'
+        getAlertsByName = getAlertsByName.bind(this); // Bind external function - no 'this'
+        getAlertsBySeverity = getAlertsBySeverity.bind(this); // Bind external function - no 'this'
         clearAlerts = clearAlerts.bind(this); // Bind external function - no 'this'
         addAlert = addAlert.bind(this); // Bind external function - no 'this'
-        getAlerts = getAlerts.bind(this); // Bind external function - no 'this'
         this.state = {
             alerts: []
         };
@@ -96,3 +116,10 @@ export class Alerts extends Component {
         return '';
     }
 }
+
+const mapStateToProps = state => ({
+    system_controls: state.model.system_controls,
+    objective_value: state.model.result.objective_value
+});
+
+export default connect(mapStateToProps)(Alerts);

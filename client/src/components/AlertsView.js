@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'react-bootstrap';
-import { getAlerts } from './Alerts';
+import { getAlertsBySeverity } from './Alerts';
 
 class AlertsView extends Component {
     render() {
@@ -18,10 +18,10 @@ class AlertsView extends Component {
                        </tr>
                     </thead>
                     <tbody>
-                        {getAlerts('Err').map((entry) => {
+                        {getAlertsBySeverity('Err').map((entry) => {
 //                            console.log('In AlertsView.render entry=',entry,'line=',line);
                             return (
-                                <tr key={line}>
+                                <tr className="text-not-feasible" key={line}>
                                     <td>{line++}</td>
                                     <td>{entry.severity}</td>
                                     <td>{entry.name}</td>
@@ -29,10 +29,10 @@ class AlertsView extends Component {
                                 </tr>
                             );
                         })}
-                        {getAlerts('Warn').map((entry) => {
+                        {getAlertsBySeverity('Warn').map((entry) => {
 //                            console.log('In AlertsView.render entry=',entry,'line=',line);
                             return (
-                                <tr key={line}>
+                                <tr className="text-close-to-feasible" key={line}>
                                     <td>{line++}</td>
                                     <td>{entry.severity}</td>
                                     <td>{entry.name}</td>
@@ -40,10 +40,10 @@ class AlertsView extends Component {
                                 </tr>
                             );
                         })}
-                        {getAlerts('Info').map((entry) => {
+                        {getAlertsBySeverity('Info').map((entry) => {
 //                            console.log('In AlertsView.render entry=',entry,'line=',line);
                             return (
-                                <tr key={line}>
+                                <tr className="text-feasible" key={line}>
                                     <td>{line++}</td>
                                     <td>{entry.severity}</td>
                                     <td>{entry.name}</td>
