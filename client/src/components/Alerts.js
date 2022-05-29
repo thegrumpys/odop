@@ -48,24 +48,46 @@ export var getAlertsByName = function(name, includeViolations = false) {
     var color_classes = ["text-strictly-feasible ", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
     var max_color = 0;
     this.state.alerts.forEach((entry) => {
-        if (entry.name === name) {
-            alerts.push(entry);
-            if (entry.severity === 'Err') {
-                max_color = max_color > 3 ? max_color : 3;
-            } else if (entry.severity === 'Warn') {
-                max_color = max_color > 2 ? max_color : 2;
-            } else if (entry.severity === 'Info') {
-                max_color = max_color > 1 ? max_color : 1;
+        var color = 0;
+        if (entry.name === name) { // Matches exactly
+            if (name.endsWith(' MIN') || name.endsWith(' MAX')) {
+                if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+                    color = 3;
+                    max_color = max_color > 3 ? max_color : 3;
+                } else if (this.props.objective_value > this.props.system_controls.objmin) {
+                    color = 2;
+                    max_color = max_color > 2 ? max_color : 2;
+                } else if (this.props.objective_value > 0.0) {
+                    color = 1;
+                    max_color = max_color > 1 ? max_color : 1;
+               }
+            } else {
+                if (entry.severity === 'Err') {
+                    color = 3;
+                    max_color = max_color > 3 ? max_color : 3;
+                } else if (entry.severity === 'Warn') {
+                    color = 2;
+                    max_color = max_color > 2 ? max_color : 2;
+                } else if (entry.severity === 'Info') {
+                    color = 1;
+                    max_color = max_color > 1 ? max_color : 1;
+                }
             }
-        } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) {
+            entry.color = color_classes[color];
             alerts.push(entry);
+        } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches prefix
             if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+                color = 3;
                 max_color = max_color > 3 ? max_color : 3;
             } else if (this.props.objective_value > this.props.system_controls.objmin) {
+                color = 2;
                 max_color = max_color > 2 ? max_color : 2;
             } else if (this.props.objective_value > 0.0) {
+                color = 1;
                 max_color = max_color > 1 ? max_color : 1;
             }
+            entry.color = color_classes[color];
+            alerts.push(entry);
         }
     });
 //    console.log('In getAlertsByName max_color=',max_color,'alerts=',alerts);
