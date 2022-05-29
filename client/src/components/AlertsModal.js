@@ -2,32 +2,50 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
 import { getAlertsBySeverity } from './Alerts';
+import { logUsage } from '../logUsage';
 
-class AlertsView extends Component {
+class AlertsModal extends Component {
   
     constructor(props) {
-//        console.log('In AlertsView.ctor'');
+//        console.log('In AlertsModal.ctor'');
         super(props);
-        this.toggle = this.toggle.bind(this);
+        this.onOpen = this.onOpen.bind(this);
+        this.onHelpButton = this.onHelpButton.bind(this);
+        this.onClose = this.onClose.bind(this);
         this.state = {
             modal: false, // Default: do not display
         };
     }
 
-    toggle(event) {
-//        console.log('In AlertsView.toggle this=',this,'event=',event);
+    onOpen(event) {
+//        console.log('In AlertsModal.onOpen this=',this,'event=',event);
+        this.setState({
+            modal: !this.state.modal
+        });
+        logUsage('event', 'AlertsModal', { event_label: 'Button' });
+    }
+    
+    onHelpButton(event) {
+//        console.log('In AlertsModal.onHelpButton this=',this,'event=',event,'event.target=',event.target,'event.target.href=',event.target.href);
+        logUsage('event', 'AlertsModal', { event_label: 'Help button: ' + event.target.href});
+        event.preventDefault();
+        window.open(event.target.href, '_blank');
+    }
+    
+    onClose(event) {
+//        console.log('In AlertsModal.onClose this=',this,'event=',event);
         this.setState({
             modal: !this.state.modal
         });
     }
     
     render() {
-//        console.log('In AlertsView.render this=',this);
+//        console.log('In AlertsModal.render this=',this);
         var line = 1;
         return (
             <>
-                <Button variant="primary" disabled={getAlertsBySeverity().length === 0} size="sm" onClick={this.toggle}>Alerts</Button>
-                <Modal show={this.state.modal} onHide={this.toggle} size="lg">
+                <Button variant="primary" disabled={getAlertsBySeverity().length === 0} size="sm" onClick={this.onOpen}>Alerts</Button>
+                <Modal show={this.state.modal} onHide={this.onClose} size="lg">
                     <Modal.Header closeButton>
                         <Modal.Title>Alerts</Modal.Title>
                     </Modal.Header>
@@ -44,7 +62,7 @@ class AlertsView extends Component {
                             </thead>
                             <tbody>
                                 {getAlertsBySeverity('Err').map((entry) => {
-//                                    console.log('In AlertsView.render entry=',entry,'line=',line);
+//                                    console.log('In AlertsModal.render entry=',entry,'line=',line);
                                     var match;
                                     if (entry.help_url !== undefined) {
                                         match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
@@ -55,12 +73,12 @@ class AlertsView extends Component {
                                             <td>{entry.severity}</td>
                                             <td>{entry.name}</td>
                                             <td>{entry.message}</td>
-                                            <td>{match !== undefined ? <a className="" href={match[2]} className="btn btn-outline-info" rel="noopener noreferrer" target="_blank">{match[1]}</a> : ''}</td>
+                                            <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
                                 })}
                                 {getAlertsBySeverity('Warn').map((entry) => {
-//                                    console.log('In AlertsView.render entry=',entry,'line=',line);
+//                                    console.log('In AlertsModal.render entry=',entry,'line=',line);
                                     var match;
                                     if (entry.help_url !== undefined) {
                                         match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
@@ -71,12 +89,12 @@ class AlertsView extends Component {
                                             <td>{entry.severity}</td>
                                             <td>{entry.name}</td>
                                             <td>{entry.message}</td>
-                                            <td>{match !== undefined ? <a href={match[2]} className="btn btn-outline-info" rel="noopener noreferrer" target="_blank">{match[1]}</a> : ''}</td>
+                                            <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
                                 })}
                                 {getAlertsBySeverity('Info').map((entry) => {
-//                                    console.log('In AlertsView.render entry=',entry,'line=',line);
+//                                    console.log('In AlertsModal.render entry=',entry,'line=',line);
                                     var match;
                                     if (entry.help_url !== undefined) {
                                         match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
@@ -87,7 +105,7 @@ class AlertsView extends Component {
                                             <td>{entry.severity}</td>
                                             <td>{entry.name}</td>
                                             <td>{entry.message}</td>
-                                            <td>{match !== undefined ? <a href={match[2]} className="btn btn-outline-info" rel="noopener noreferrer" target="_blank">{match[1]}</a> : ''}</td>
+                                            <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
                                 })}
@@ -95,7 +113,7 @@ class AlertsView extends Component {
                         </table>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" onClick={this.toggle}>Close</Button>
+                        <Button variant="primary" onClick={this.onClose}>Close</Button>
                     </Modal.Footer>
                 </Modal>
             </>
@@ -109,4 +127,4 @@ const mapStateToProps = state => ({
     system_controls: state.model.system_controls,
 });
 
-export default connect(mapStateToProps)(AlertsView);
+export default connect(mapStateToProps)(AlertsModal);

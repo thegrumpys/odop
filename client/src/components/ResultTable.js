@@ -7,7 +7,7 @@ import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, seek, saveAutoSave } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/MessageModal';
-import AlertsView from "./AlertsView"
+import AlertsModal from "./AlertsModal"
 
 class ResultTable extends Component {
     
@@ -205,7 +205,7 @@ class ResultTable extends Component {
                         </tr>
                         <tr>
                             <th width="10%" id="Message" className="text-center pb-3">
-                                <AlertsView /> &nbsp;
+                                <AlertsModal /> &nbsp;
                             </th>
                             <td className="text-left">
                                 {this.props.termination_condition !== '' ?
