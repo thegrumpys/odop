@@ -199,7 +199,7 @@ class SymbolValueWireDia extends Component {
                 <>
                     Alerts
                     <ul>
-                        {icon_alerts.map((entry, i) => {return <li key={i}>{entry.message}</li>})}
+                        {icon_alerts.map((entry, i) => {return <li key={i}>{entry.severity}: {entry.message}</li>})}
                     </ul>
                 </>;
         }

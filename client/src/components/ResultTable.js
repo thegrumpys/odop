@@ -7,6 +7,7 @@ import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, seek, saveAutoSave } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/MessageModal';
+import AlertsView from "./AlertsView"
 
 class ResultTable extends Component {
     
@@ -204,6 +205,7 @@ class ResultTable extends Component {
                         </tr>
                         <tr>
                             <th width="33%" id="Message" className="pb-3">
+                                <AlertsView /> &nbsp;
                                 <OverlayTrigger placement="top" overlay={<Tooltip>Status feedback message from solution process</Tooltip>}>
                                     <span>Message:</span>
                                 </OverlayTrigger>

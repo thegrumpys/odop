@@ -127,7 +127,7 @@ class FormControlTypeNumber extends Component {
                 <>
                     Alerts
                     <ul>
-                        {value_alerts.map((entry, i) => {return <li key={i}>{entry.message}</li>})}
+                        {value_alerts.map((entry, i) => {return <li key={i}>{entry.severity}: {entry.message}</li>})}
                     </ul>
                 </>;
         }
