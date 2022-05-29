@@ -127,7 +127,7 @@ class ConstraintMinRowIndependentVariable extends Component {
         // =======================================
         // Constraint Minimum Column
         // =======================================
-        var results = getAlertsByName(this.props.element.name+'.cmin');
+        var results = getAlertsByName(this.props.element.name+' MIN');
         var value_class = results.color_class;
         var icon_alerts = results.alerts;
         var value_alerts;

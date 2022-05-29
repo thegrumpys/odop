@@ -25,7 +25,8 @@ export function check(store) {        /*    Compression  Spring  */
         addAlert({
             name: design.model.symbol_table[o.L_Free].name, 
             message: check_message(design,o.L_Free,'<',o.L_Solid),
-            severity: 'Err'
+            severity: 'Err',
+            help_url: '[L_Free Alert](/docs/Help/alerts.html#L_Free)'
         });
         addAlert({
             name: design.model.symbol_table[o.L_Solid].name, 

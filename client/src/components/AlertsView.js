@@ -45,37 +45,49 @@ class AlertsView extends Component {
                             <tbody>
                                 {getAlertsBySeverity('Err').map((entry) => {
 //                                    console.log('In AlertsView.render entry=',entry,'line=',line);
+                                    var match;
+                                    if (entry.help_url !== undefined) {
+                                        match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
+                                    }
                                     return (
                                         <tr className="text-not-feasible" key={line}>
                                             <td>{line++}</td>
                                             <td>{entry.severity}</td>
                                             <td>{entry.name}</td>
                                             <td>{entry.message}</td>
-                                            <td><a href={entry.help_url}>{entry.help_url}</a></td>
+                                            <td>{match !== undefined ? <a className="" href={match[2]} className="btn btn-outline-info" rel="noopener noreferrer" target="_blank">{match[1]}</a> : ''}</td>
                                         </tr>
                                     );
                                 })}
                                 {getAlertsBySeverity('Warn').map((entry) => {
 //                                    console.log('In AlertsView.render entry=',entry,'line=',line);
+                                    var match;
+                                    if (entry.help_url !== undefined) {
+                                        match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
+                                    }
                                     return (
                                         <tr className="text-close-to-feasible" key={line}>
                                             <td>{line++}</td>
                                             <td>{entry.severity}</td>
                                             <td>{entry.name}</td>
                                             <td>{entry.message}</td>
-                                            <td><a href={entry.help_url}>{entry.help_url}</a></td>
+                                            <td>{match !== undefined ? <a href={match[2]} className="btn btn-outline-info" rel="noopener noreferrer" target="_blank">{match[1]}</a> : ''}</td>
                                         </tr>
                                     );
                                 })}
                                 {getAlertsBySeverity('Info').map((entry) => {
 //                                    console.log('In AlertsView.render entry=',entry,'line=',line);
+                                    var match;
+                                    if (entry.help_url !== undefined) {
+                                        match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
+                                    }
                                     return (
                                         <tr className="text-feasible" key={line}>
                                             <td>{line++}</td>
                                             <td>{entry.severity}</td>
                                             <td>{entry.name}</td>
                                             <td>{entry.message}</td>
-                                            <td><a href={entry.help_url}>{entry.help_url}</a></td>
+                                            <td>{match !== undefined ? <a href={match[2]} className="btn btn-outline-info" rel="noopener noreferrer" target="_blank">{match[1]}</a> : ''}</td>
                                         </tr>
                                     );
                                 })}

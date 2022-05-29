@@ -18,19 +18,19 @@ export var commonChecks = function(store) {
         }
 
         if (!element.input && (element.lmin & FIXED && element.vmin > 0.0) && (element.lmax & FIXED && element.vmax > 0.0)) {
-            addAlert({ name: element.name+'.cmin', message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(), severity: 'Info' });
-            addAlert({ name: element.name+'.cmax', message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(), severity: 'Info' });
+            addAlert({ name: element.name+' MIN', message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(), severity: 'Info' });
+            addAlert({ name: element.name+' MAX', message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(), severity: 'Info' });
         } else if (!element.input && (element.lmin & FIXED && element.vmin > 0.0)) {
-            addAlert({ name: element.name+'.cmin', message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(), severity: 'Info' });
+            addAlert({ name: element.name+' MIN', message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(), severity: 'Info' });
         } else if (!element.input && (element.lmax & FIXED && element.vmax > 0.0)) {
-            addAlert({ name: element.name+'.cmax', message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(), severity: 'Info'  });
+            addAlert({ name: element.name+' MAX', message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(), severity: 'Info'  });
         } else if ((element.lmin & CONSTRAINED && element.vmin > 0.0) && (element.lmax & CONSTRAINED && element.vmax > 0.0)) {
-            addAlert({ name: element.name+'.cmin', message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(), severity: 'Info' });
-            addAlert({ name: element.name+'.cmax', message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(), severity: 'Info' });
+            addAlert({ name: element.name+' MIN', message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(), severity: 'Info' });
+            addAlert({ name: element.name+' MAX', message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(), severity: 'Info' });
         } else if (element.lmin & CONSTRAINED && element.vmin > 0.0) {
-            addAlert({ name: element.name+'.cmin', message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(), severity: 'Info' });
+            addAlert({ name: element.name+' MIN', message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(), severity: 'Info' });
         } else if (element.lmax & CONSTRAINED && element.vmax > 0.0) {
-            addAlert({ name: element.name+'.cmax', message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(), severity: 'Info' });
+            addAlert({ name: element.name+' MAX', message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(), severity: 'Info' });
         }
 
         if ((element.type === 'equationset' && element.input) && !(element.lmin & FIXED)) {
@@ -57,7 +57,7 @@ export var getAlertsByName = function(name, includeViolations = false) {
             } else if (entry.severity === 'Info') {
                 max_color = max_color > 1 ? max_color : 1;
             }
-        } else if (includeViolations && (entry.name === name+'.cmin' || entry.name === name+'.cmax')) {
+        } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) {
             alerts.push(entry);
             if (this.props.objective_value > 4*this.props.system_controls.objmin) {
                 max_color = max_color > 3 ? max_color : 3;
