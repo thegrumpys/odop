@@ -81,14 +81,14 @@ class NameValueUnitsRowIndependentVariable extends Component {
                 }
             }
         } else {
-            if (this.props.element.type !== "calcinput") {
-                value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton"/> to change the value of this variable.</em></div>; // For Free
-            }
             if (this.props.element.lmin & CONSTRAINED) {
                 value_class += "borders-constrained-min ";
             }
             if (this.props.element.lmax & CONSTRAINED) {
                 value_class += "borders-constrained-max ";
+            }
+            if (this.props.element.type !== "calcinput") {
+                value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton"/> to change the value of this variable.</em></div>; // For Free
             }
         }
 //        console.log('In NameValueUnitsRowIndependentVariable.render value_class=',value_class);

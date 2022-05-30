@@ -190,54 +190,72 @@ class SymbolValueWireDia extends Component {
         var sorted_wire_dia_table = wire_dia_table.sort(function(a, b) { return a[0] - b[0]; }); // sort by value
 //        console.log('In SymbolValueWireDia.render sorted_wire_dia_table=',sorted_wire_dia_table);
 
-        var results = getAlertsByName(this.props.element.name, true);
-        var icon_alerts = results.alerts;
-        var value_class = results.color_class + ' text-right ';
-        var value_tooltip;
-        if (icon_alerts.length > 0) {
-            value_tooltip =
+        var sv_results = getAlertsByName(this.props.element.name, true);
+//        console.log('In SymbolValueWireDia.render sv_results=',sv_results);
+        var sv_icon_alerts = sv_results.alerts;
+        var sv_value_class = sv_results.color_class + ' text-right ';
+        if (this.props.element.lmin & FIXED) {
+            sv_value_class += "borders-fixed ";
+        } else {
+            if (this.props.element.lmin & CONSTRAINED) {
+                sv_value_class += "borders-constrained-min ";
+            }
+            if (this.props.element.lmax & CONSTRAINED) {
+                sv_value_class += "borders-constrained-max ";
+            }
+        }
+        sv_value_class += "background-white "; // Always white
+//        console.log('In SymbolValueWireDia.render sv_value_class=',sv_value_class);
+        var sv_value_tooltip;
+        if (sv_icon_alerts.length > 0) {
+            sv_value_tooltip =
                 <>
                     Alerts
                     <ul>
-                        {icon_alerts.map((entry, i) => {return <li key={i}>{entry.severity}: {entry.message}</li>})}
+                        {sv_icon_alerts.map((entry, i) => {return <li key={i}>{entry.severity}: {entry.message}</li>})}
                     </ul>
                 </>;
         }
-//        console.log('value_tooltip=',value_tooltip);
-        var value_fix_free_text = '';
+//        console.log('In SymbolValueWireDia.render sv_value_tooltip=',sv_value_tooltip);
+
+        var nvu_results = getAlertsByName(this.props.element.name);
+//        console.log('In SymbolValueWireDia.render nvu_results=',nvu_results);
+        var nvu_icon_alerts = nvu_results.alerts;
+        var nvu_value_class = nvu_results.color_class;
+//        console.log('In SymbolValueWireDia.render nvu_value_tooltip=',nvu_value_tooltip);
+        var nvu_value_fix_free_text = '';
         if (this.props.element.lmin & FIXED) {
-            value_class += "borders-fixed ";
+            nvu_value_class += "borders-fixed ";
             if (this.props.element.type !== "calcinput") {
                 if (this.props.element.input) { // Independent Variable?
-                  value_fix_free_text = <div className="mb-3"><em>Fixed status prevents <img src="SearchButton.png" alt="SearchButton"/> from changing the value of this variable.</em></div>; // For Fixed
+                  nvu_value_fix_free_text = <div className="mb-3"><em>Fixed status prevents <img src="SearchButton.png" alt="SearchButton"/> from changing the value of this variable.</em></div>; // For Fixed
                 } else {
-                  value_fix_free_text = <div className="mb-3"><em>Fixed status restrains the <img src="SearchButton.png" alt="SearchButton"/> result to be as close as possible to the constraint value.</em></div>; // For Fixed
+                  nvu_value_fix_free_text = <div className="mb-3"><em>Fixed status restrains the <img src="SearchButton.png" alt="SearchButton"/> result to be as close as possible to the constraint value.</em></div>; // For Fixed
                 }
             }
         } else {
-            if (this.props.element.type !== "calcinput") {
-                value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton"/> to change the value of this variable.</em></div>; // For Free
-            }
             if (this.props.element.lmin & CONSTRAINED) {
-                value_class += "borders-constrained-min ";
+                nvu_value_class += "borders-constrained-min ";
             }
             if (this.props.element.lmax & CONSTRAINED) {
-                value_class += "borders-constrained-max ";
+                nvu_value_class += "borders-constrained-max ";
+            }
+            if (this.props.element.type !== "calcinput") {
+                nvu_value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton"/> to change the value of this variable.</em></div>; // For Free
             }
         }
-        value_class += "background-white "; // Always white
-//        console.log('In SymbolValueWireDia.render value_class=',value_class);
+//        console.log('In SymbolValueWireDia.render nvu_value_class=',nvu_value_class);
 
         return (
             <>
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
-                        {(value_tooltip !== undefined ?
-                            <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{value_tooltip}</Tooltip>}>
-                                <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
+                        {(sv_value_tooltip !== undefined ?
+                            <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{sv_value_tooltip}</Tooltip>}>
+                                <Form.Control readOnly type="text" className={sv_value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
                             </OverlayTrigger>
                         :
-                            <Form.Control readOnly type="text" className={value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
+                            <Form.Control readOnly type="text" className={sv_value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
                         )}
                     </InputGroup>
                 </td>
@@ -274,15 +292,15 @@ class SymbolValueWireDia extends Component {
                                             <td className="align-middle" colSpan="2">
                                                 <InputGroup>
                                                     {(this.state.value_input ?
-                                                        <FormControlTypeNumber id={'svwd_'+this.props.element.name} className={value_class} step="any" value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChange={this.onChange} />
+                                                        <FormControlTypeNumber id={'svwd_'+this.props.element.name} icon_alerts={nvu_icon_alerts} className={nvu_value_class} step="any" value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChange={this.onChange} />
                                                     :
-                                                        <Form.Control as="select" id={'svwd_'+this.props.element.name} disabled={!this.props.element.input} className={value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
+                                                        <Form.Control as="select" id={'svwd_'+this.props.element.name} disabled={!this.props.element.input} className={nvu_value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
                                                             {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
                                                         </Form.Control>
                                                     )}
                                                     <InputGroup.Append>
                                                         <InputGroup.Text>
-                                                            <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
+                                                            <OverlayTrigger placement="top" overlay={<Tooltip>{nvu_value_fix_free_text}</Tooltip>}>
                                                                 <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
                                                             </OverlayTrigger>
                                                         </InputGroup.Text>

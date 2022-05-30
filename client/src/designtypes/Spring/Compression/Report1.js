@@ -9,15 +9,16 @@ class Report1 extends ReportBase {
     render() {
         super.render();
 //        console.log('In Report1.render this=',this);
+        var line = 1;
         return (
             <>
                 <h4>ODOP:Spring &nbsp; Compression Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></h4>
                 <br />
                 {this.hits > 0 ?
                     <><b>Alerts:</b><ul>
-                        { getAlertsBySeverity('Err').map((entry)  => <li>{entry.severity}: {entry.message}</li> ) }
-                        { getAlertsBySeverity('Warn').map((entry) => <li>{entry.severity}: {entry.message}</li> ) }
-                        { getAlertsBySeverity('Info').map((entry) => <li>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Err' ).map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Warn').map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Info').map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
                     </ul></>
                 : '' }
                 <b>

@@ -198,6 +198,8 @@ class SymbolValue extends Component {
                 value_class += "borders-constrained-max ";
             }
         }
+        value_class += "background-white "; // Always white
+//        console.log('In SymbolValue.render value_class=',value_class);
         var icon_dependent_tag = '';
         if (this.props.element.type === "equationset" && !this.props.element.input) { // Dependent Variable?
             icon_dependent_tag =
@@ -205,8 +207,6 @@ class SymbolValue extends Component {
                     <i className="fas fa-asterisk fa-sm icon-dependent"></i>
                 </OverlayTrigger>;
         }
-        value_class += "background-white "; // Always white
-//        console.log('In SymbolValue.render value_class=',value_class);
         return (
             <>
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>

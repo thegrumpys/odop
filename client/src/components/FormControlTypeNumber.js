@@ -114,31 +114,23 @@ class FormControlTypeNumber extends Component {
           icon_alerts = [];
         }
 //        console.log('icon_alerts=',icon_alerts);
-        var value_alerts = this.props.value_alerts;
-        if (value_alerts !== undefined) {
-            value_alerts = [ ...icon_alerts, ...value_alerts]; // add passed-in value alerts to the end
-        } else {
-            value_alerts = icon_alerts;
-        }
-//        console.log('value_alerts=',value_alerts);
-        var value_tooltip;
-        if (value_alerts.length > 0) {
-            value_tooltip =
+        var icon_tooltip;
+        if (icon_alerts.length > 0) {
+            icon_tooltip =
                 <>
                     Alerts
                     <ul>
-                        {value_alerts.map((entry, i) => {return <li key={i}>{entry.severity}: {entry.message}</li>})}
+                        {icon_alerts.map((entry, i) => {return <li key={i}>{entry.severity}: {entry.message}</li>})}
                     </ul>
                 </>;
         }
-//        console.log('value_tooltip=',value_tooltip);
+//        console.log('icon_tooltip=',icon_tooltip);
 
         var p = Object.assign({},this.props); // clone the props
         delete p.onChangeValid; // remove special on functions
         delete p.onChangeInvalid;
         delete p.disabledText;
         delete p.icon_alerts;
-        delete p.value_alerts;
         delete p.validmin;
         delete p.validmax;
 
@@ -149,8 +141,8 @@ class FormControlTypeNumber extends Component {
                 </OverlayTrigger>
             :
             ''}
-            {value_tooltip !== undefined ?
-                <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{value_tooltip}</Tooltip>}>
+            {icon_tooltip !== undefined ?
+                <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{icon_tooltip}</Tooltip>}>
                     <Form.Control type="number"
                         {...p} // Allow OverlayTrigger to pass-in other props
                         onClick={this.onClick}
