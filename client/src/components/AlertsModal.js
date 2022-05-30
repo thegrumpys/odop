@@ -75,11 +75,9 @@ class AlertsModal extends Component {
                                             <td>{entry.severity}</td>
                                             <td>{entry.message}</td>
                                             <td>{entry.name}</td>
-                                            <td>
                                             {entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            </td>
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
@@ -96,11 +94,9 @@ class AlertsModal extends Component {
                                             <td>{entry.severity}</td>
                                             <td>{entry.message}</td>
                                             <td>{entry.name}</td>
-                                            <td>
                                             {entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            </td>
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
@@ -117,11 +113,9 @@ class AlertsModal extends Component {
                                             <td>{entry.severity}</td>
                                             <td>{entry.message}</td>
                                             <td>{entry.name}</td>
-                                            <td>
                                             {entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            </td>
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
