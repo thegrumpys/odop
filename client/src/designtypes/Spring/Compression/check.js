@@ -33,7 +33,8 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.L_Solid],
             name: design.model.symbol_table[o.L_Solid].name, 
             message: check_message(design,o.L_Solid,'>=',o.L_Free),
-            severity: 'Err'
+            severity: 'Err',
+            duplicate: true
         });
     }
     if (design.model.symbol_table[o.L_2].value < design.model.symbol_table[o.L_Solid].value) {
@@ -47,7 +48,8 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.L_Solid],
             name: design.model.symbol_table[o.L_Solid].name, 
             message: check_message(design,o.L_Solid,'>=',o.L_2),
-            severity: 'Err'
+            severity: 'Err',
+            duplicate: true
         });
     }
     if (design.model.symbol_table[o.Coils_A].value < 1.0) {
