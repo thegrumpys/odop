@@ -5,7 +5,9 @@ This topic provides details for each of the alerts.
 ### On this page:   
  - [L_Free < L_Solid](alerts.html#L_Free)  
  - [L_2 < L_solid](alerts.html#L_2_LT_L_Solid)  
- - [PC_Avail_Deflect > 80%](alerts.html#PC_Avail_Deflect_GT_80)  
+ - [PC_Avail_Deflect @ 2 > 80%](alerts.html#PC_Avail_Deflect2_GT_80)  
+ - [PC_Avail_Deflect @ 1 < 20%](alerts.html#PC_Avail_Deflect1_LT_20)  
+ - [Padding - delete before release](alerts.html#padding)  
 
 ___
 
@@ -24,6 +26,7 @@ Increase | &nbsp; | Decrease
  &nbsp; | &nbsp; | Coils_T
 
 See also: 
+ - [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png)
  - [Compression Spring Constraints](/docs/Help/DesignTypes/c_spring.html#c_springConstraints)   
  - [Errors](errors.html)   
 
@@ -45,16 +48,58 @@ Increase | &nbsp; | Decrease
  Wire_Dia | &nbsp; | Coil_Dia  
  &nbsp; | &nbsp; | Force_2
 
+Compression spring lengths are ordered from the largest (L_Free) to L_1 to L_2 to the smallest (L_Solid). 
+The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 
+
 See also: 
  - [Compression Spring Constraints](/docs/Help/DesignTypes/c_spring.html#c_springConstraints)   
  - [Errors](errors.html)   
 
 ___
 
-<a id="PC_Avail_Deflect_GT_80"></a>  
+<a id="PC_Avail_Deflect2_GT_80"></a>  
 ___
 
-## PC_Avail_Deflect > 80% 
- ... details ... 
+## PC_Avail_Deflect @ 2 > 80% 
+ ... details ...    
+ &nbsp;   
+ ... details ...    
+ &nbsp;   
+
+___
+
+<a id="PC_Avail_Deflect1_LT_20"></a>  
+___
+
+## PC_Avail_Deflect @ 1 < 20% 
+ ... details ...    
+ &nbsp;   
+ ... details ...    
+ &nbsp;   
+
+___
+
+<a id="padding"></a>  
+___
+
+## Padding - delete before release 
+ ... details ...    
+  &nbsp;   
+ ... details ...    
+ &nbsp;   
+ ... details ...    
+ &nbsp;   
+ ... details ...    
+  &nbsp;   
+ ... details ...    
+ &nbsp;   
+ ... details ...    
+ &nbsp;   
+ ... details ...    
+  &nbsp;   
+ ... details ...    
+ &nbsp;   
+ ... details ...    
+ &nbsp;   
 
 

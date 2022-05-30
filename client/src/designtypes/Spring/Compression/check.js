@@ -88,7 +88,17 @@ export function check(store) {        /*    Compression  Spring  */
             name: design.model.symbol_table[o.PC_Avail_Deflect].name, 
             message: design.model.symbol_table[o.PC_Avail_Deflect].name + ' (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') > 80.0',
             severity: 'Info',
-            help_url: '[Details](/docs/Help/alerts.html#L_2_LT_L_Solid)'
+            help_url: '[Details](/docs/Help/alerts.html#PC_Avail_Deflect2_GT_80)'
+        });
+    }
+    var PC_Avail_Deflect1 = 100.0 * design.model.symbol_table[o.Deflect_1].value / (design.model.symbol_table[o.L_Free].value - design.model.symbol_table[o.L_Solid].value); 
+    if (PC_Avail_Deflect1 < 20.0) {
+        addAlert({
+            element: design.model.symbol_table[o.PC_Avail_Deflect],
+            name: design.model.symbol_table[o.PC_Avail_Deflect].name, 
+            message: design.model.symbol_table[o.PC_Avail_Deflect].name + ' (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') < 20.0',
+            severity: 'Info',
+            help_url: '[Details](/docs/Help/alerts.html#PC_Avail_Deflect1_LT_20)'
         });
     }
 
