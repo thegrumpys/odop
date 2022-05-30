@@ -33,6 +33,13 @@ export var commonChecks = function(store) {
             addAlert({ name: element.name+' MAX', message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(), severity: 'Info' });
         }
 
+        if ((element.lmin & FIXED) === 0 && element.cminchoices !== undefined && element.cminchoices.length > 0) {
+            value_alerts = [{ name: element.name+' MIN', message: element.lmin & FDCL ? 'FDCL =' + element.cminchoices[element.cminchoice] : '=' + element.cmin + ' (non-FDCL)', severity: 'Info' }];
+        }
+        if ((element.lmax & FIXED) === 0 && element.cmaxchoices !== undefined && element.cmaxchoices.length > 0) {
+            value_alerts = [{ name: element.name+' MAX', message: element.lmax & FDCL ? 'FDCL =' + element.cmaxchoices[element.cmaxchoice] : '=' + element.cmax + ' (non-FDCL)', severity: 'Info' }];
+        }
+
         if ((element.type === 'equationset' && element.input) && !(element.lmin & FIXED)) {
             total++;
         }

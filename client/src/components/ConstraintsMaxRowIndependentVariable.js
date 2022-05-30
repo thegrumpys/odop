@@ -130,10 +130,6 @@ class ConstraintMaxRowIndependentVariable extends Component {
         var results = getAlertsByName(this.props.element.name+' MAX');
         var value_class = results.color_class;
         var icon_alerts = results.alerts;
-        var value_alerts;
-        if ((this.props.element.lmax & FIXED) === 0 && this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0) {
-            value_alerts = [{ name: this.props.element.name, message: this.props.element.lmax & FDCL ? 'FDCL =' + this.props.element.cmaxchoices[this.props.element.cmaxchoice] : '=' + this.props.element.cmax + ' (non-FDCL)' }];
-        }
         return (
             <tbody>
                 <tr key={this.props.element.name}>
@@ -149,7 +145,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
                                     <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetFlagMaxConstrained : this.onSetFlagMaxConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControlTypeNumber id={this.props.element.name + "_cmax"} icon_alerts={icon_alerts} className={value_class} value={this.props.element.cmax} value_alerts={value_alerts} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} disabledText={this.props.element.lmax & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onClick={this.onClick}/>
+                            <FormControlTypeNumber id={this.props.element.name + "_cmax"} icon_alerts={icon_alerts} className={value_class} value={this.props.element.cmax} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmax & FIXED ? true : (this.props.element.lmax & CONSTRAINED ? false : true)} disabledText={this.props.element.lmax & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onClick={this.onClick}/>
                         </InputGroup>
                         {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
                         <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>
