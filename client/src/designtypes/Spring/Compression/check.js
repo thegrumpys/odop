@@ -82,6 +82,15 @@ export function check(store) {        /*    Compression  Spring  */
             severity: 'Err'
         });
     }
+    if (design.model.symbol_table[o.PC_Avail_Deflect].value > 80.0) {
+        addAlert({
+            element: design.model.symbol_table[o.PC_Avail_Deflect],
+            name: design.model.symbol_table[o.PC_Avail_Deflect].name, 
+            message: design.model.symbol_table[o.PC_Avail_Deflect].name + ' (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') > ' + '80.0',
+            severity: 'Info',
+            help_url: '[Details](/docs/Help/alerts.html#L_2_LT_L_Solid)'
+        });
+    }
 
 //    console.log('</ul><li>','End check','</li>');
 
