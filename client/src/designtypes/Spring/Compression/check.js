@@ -86,7 +86,7 @@ export function check(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.PC_Avail_Deflect],
             name: design.model.symbol_table[o.PC_Avail_Deflect].name, 
-            message: design.model.symbol_table[o.PC_Avail_Deflect].name + ' (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') > ' + '80.0',
+            message: design.model.symbol_table[o.PC_Avail_Deflect].name + ' (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') > 80.0',
             severity: 'Info',
             help_url: '[Details](/docs/Help/alerts.html#L_2_LT_L_Solid)'
         });
