@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
 import { getAlertsBySeverity } from './Alerts';
 import { logUsage } from '../logUsage';
+import SymbolValue from './SymbolValue';
 
 class AlertsModal extends Component {
   
@@ -55,13 +56,14 @@ class AlertsModal extends Component {
                                 <tr>
                                     <th>#</th>
                                     <th>Severity</th>
-                                    <th>Name</th>
                                     <th>Message</th>
+                                    <th>Name</th>
+                                    <th>Component</th>
                                     <th>Help URL</th>
                                </tr>
                             </thead>
                             <tbody>
-                                {getAlertsBySeverity('Err').map((entry) => {
+                                {getAlertsBySeverity('Err').map((entry, index) => {
 //                                    console.log('In AlertsModal.render entry=',entry,'line=',line);
                                     var match;
                                     if (entry.help_url !== undefined) {
@@ -71,13 +73,18 @@ class AlertsModal extends Component {
                                         <tr className="text-not-feasible" key={line}>
                                             <td>{line++}</td>
                                             <td>{entry.severity}</td>
-                                            <td>{entry.name}</td>
                                             <td>{entry.message}</td>
+                                            <td>{entry.name}</td>
+                                            <td>
+                                            {entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            </td>
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
                                 })}
-                                {getAlertsBySeverity('Warn').map((entry) => {
+                                {getAlertsBySeverity('Warn').map((entry, index) => {
 //                                    console.log('In AlertsModal.render entry=',entry,'line=',line);
                                     var match;
                                     if (entry.help_url !== undefined) {
@@ -87,13 +94,18 @@ class AlertsModal extends Component {
                                         <tr className="text-close-to-feasible" key={line}>
                                             <td>{line++}</td>
                                             <td>{entry.severity}</td>
-                                            <td>{entry.name}</td>
                                             <td>{entry.message}</td>
+                                            <td>{entry.name}</td>
+                                            <td>
+                                            {entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            </td>
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
                                 })}
-                                {getAlertsBySeverity('Info').map((entry) => {
+                                {getAlertsBySeverity('Info').map((entry, index) => {
 //                                    console.log('In AlertsModal.render entry=',entry,'line=',line);
                                     var match;
                                     if (entry.help_url !== undefined) {
@@ -103,8 +115,13 @@ class AlertsModal extends Component {
                                         <tr className="text-feasible" key={line}>
                                             <td>{line++}</td>
                                             <td>{entry.severity}</td>
-                                            <td>{entry.name}</td>
                                             <td>{entry.message}</td>
+                                            <td>{entry.name}</td>
+                                            <td>
+                                            {entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            </td>
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );

@@ -21,35 +21,6 @@ export function check(store) {        /*    Compression  Spring  */
     clearAlerts();
     commonChecks(store);
     var design = store.getState();
-    if (design.model.symbol_table[o.L_Free].value < design.model.symbol_table[o.L_Solid].value) {
-        addAlert({
-            element: design.model.symbol_table[o.L_Free],
-            name: design.model.symbol_table[o.L_Free].name, 
-            message: check_message(design,o.L_Free,'<',o.L_Solid),
-            severity: 'Err',
-            help_url: '[L_Free Alert](/docs/Help/alerts.html#L_Free)'
-        });
-        addAlert({
-            element: design.model.symbol_table[o.L_Solid],
-            name: design.model.symbol_table[o.L_Solid].name, 
-            message: check_message(design,o.L_Solid,'>=',o.L_Free),
-            severity: 'Err'
-        });
-    }
-    if (design.model.symbol_table[o.L_2].value < design.model.symbol_table[o.L_Solid].value) {
-        addAlert({
-            element: design.model.symbol_table[o.L_2],
-            name: design.model.symbol_table[o.L_2].name, 
-            message: check_message(design,o.L_2,'<',o.L_Solid),
-            severity: 'Warn'
-        });
-        addAlert({
-            element: design.model.symbol_table[o.L_Solid],
-            name: design.model.symbol_table[o.L_Solid].name, 
-            message: check_message(design,o.L_Solid,'>=',o.L_2),
-            severity: 'Err'
-        });
-    }
     if (design.model.symbol_table[o.Coils_A].value < 1.0) {
         addAlert({
             element: design.model.symbol_table[o.Coils_A],
