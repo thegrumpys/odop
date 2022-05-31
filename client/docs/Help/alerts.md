@@ -7,6 +7,7 @@ This topic provides details for each of the alerts.
  - [L_2 < L_solid](alerts.html#L_2_LT_L_Solid)  
  - [PC_Avail_Deflect @ 2 > 80%](alerts.html#PC_Avail_Deflect2_GT_80)  
  - [PC_Avail_Deflect @ 1 < 20%](alerts.html#PC_Avail_Deflect1_LT_20)  
+ - [FS_CycleLife MIN not set](alerts.html#FS_CycleLife_MIN_not_set)  
  - [Padding - delete before release](alerts.html#padding)  
 
 ___
@@ -76,6 +77,20 @@ End effects may cause inaccuracy in point 1.
  &nbsp;   
  ... details ...    
  &nbsp;   
+
+___
+
+<a id="FS_CycleLife_MIN_not_set"></a>  
+___
+
+## FS_CycleLife MIN is not set. 
+A more restrictive Life_Category has been selected but 
+the corresponding constraint on FS_CycleLife is not enabled. 
+Suggest enabling the FS_CycleLife MIN constraint. 
+
+See also: 
+ - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
+ - Tutorial session tutor4  
 
 ___
 
