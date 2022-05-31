@@ -104,7 +104,7 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Details](/docs/Help/alerts.html#PC_Avail_Deflect1_LT_20)'
         });
     }
-    if (design.model.symbol_table[o.Life_Category].value > 1 && design.model.symbol_table[o.FS_CycleLife].lmin != 'CONSTRAINED') {
+    if (design.model.symbol_table[o.Life_Category].value > 1 && design.model.symbol_table[o.FS_CycleLife].lmin !== 'CONSTRAINED') {
         addAlert({
             element: design.model.symbol_table[o.FS_CycleLife],
             name: design.model.symbol_table[o.FS_CycleLife].name, 
