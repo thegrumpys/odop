@@ -3,7 +3,7 @@
 This topic provides details for each of the alerts.
 
 ### On this page:   
- - [L_Free < L_Solid](alerts.html#L_Free)  
+ - [L_Free < L_Solid](alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](alerts.html#L_2_LT_L_Solid)  
  - [PC_Avail_Deflect @ 2 > 80%](alerts.html#PC_Avail_Deflect2_GT_80)  
  - [PC_Avail_Deflect @ 1 < 20%](alerts.html#PC_Avail_Deflect1_LT_20)  
@@ -11,7 +11,7 @@ This topic provides details for each of the alerts.
 
 ___
 
-<a id="L_Free"></a>  
+<a id="L_Free_LT_L_Solid"></a>  
 ___
 
 ## L_Free < L_Solid 
@@ -61,7 +61,7 @@ ___
 ___
 
 ## PC_Avail_Deflect @ 2 > 80% 
- ... details ...    
+Coil to coil contact may cause inaccuracy in point 2.  
  &nbsp;   
  ... details ...    
  &nbsp;   
@@ -72,7 +72,7 @@ ___
 ___
 
 ## PC_Avail_Deflect @ 1 < 20% 
- ... details ...    
+End effects may cause inaccuracy in point 1.  
  &nbsp;   
  ... details ...    
  &nbsp;   

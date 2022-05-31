@@ -27,7 +27,7 @@ export function check(store) {        /*    Compression  Spring  */
             name: design.model.symbol_table[o.L_Free].name, 
             message: check_message(design,o.L_Free,'<',o.L_Solid),
             severity: 'Err',
-            help_url: '[L_Free Alert](/docs/Help/alerts.html#L_Free)'
+            help_url: '[Details](/docs/Help/alerts.html#L_Free_LT_L_Solid)'
         });
         addAlert({
             element: design.model.symbol_table[o.L_Solid],
@@ -42,7 +42,8 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.L_2],
             name: design.model.symbol_table[o.L_2].name, 
             message: check_message(design,o.L_2,'<',o.L_Solid),
-            severity: 'Warn'
+            severity: 'Warn',
+            help_url: '[Details](/docs/Help/alerts.html#L_2_LT_L_Solid)'
         });
         addAlert({
             element: design.model.symbol_table[o.L_Solid],
@@ -87,8 +88,8 @@ export function check(store) {        /*    Compression  Spring  */
     if (design.model.symbol_table[o.PC_Avail_Deflect].value > 80.0) {
         addAlert({
             element: design.model.symbol_table[o.PC_Avail_Deflect],
-            name: design.model.symbol_table[o.PC_Avail_Deflect].name, 
-            message: design.model.symbol_table[o.PC_Avail_Deflect].name + ' (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') > 80.0',
+            name: 'PC_Avail_Deflect@2', 
+            message: 'PC_Avail_Deflect@2 (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') > 80',
             severity: 'Info',
             help_url: '[Details](/docs/Help/alerts.html#PC_Avail_Deflect2_GT_80)'
         });
@@ -97,8 +98,8 @@ export function check(store) {        /*    Compression  Spring  */
     if (PC_Avail_Deflect1 < 20.0) {
         addAlert({
             element: design.model.symbol_table[o.PC_Avail_Deflect],
-            name: design.model.symbol_table[o.PC_Avail_Deflect].name, 
-            message: design.model.symbol_table[o.PC_Avail_Deflect].name + ' (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') < 20.0',
+            name: 'PC_Avail_Deflect@1', 
+            message: 'PC_Avail_Deflect@1 (' + PC_Avail_Deflect1.toODOPPrecision() + ') < 20',
             severity: 'Info',
             help_url: '[Details](/docs/Help/alerts.html#PC_Avail_Deflect1_LT_20)'
         });
