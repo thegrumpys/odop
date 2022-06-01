@@ -52,14 +52,14 @@ class FileExport extends Component {
 
         function sort(object){
             if (object instanceof Array) {
-                console.log('array=',object);
+//                console.log('array=',object);
                 var newArray = [];
                 for (var j = 0; j < object.length; j++){
                     newArray.push(sort(object[j]));
                 }
                 return newArray;
             } else if (typeof object == "object") {
-                console.log('object=',object);
+//                console.log('object=',object);
                 var keys = Object.keys(object);
                 keys.sort();
                 var newObject = {};
