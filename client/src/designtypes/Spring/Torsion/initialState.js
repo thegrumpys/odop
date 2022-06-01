@@ -610,7 +610,7 @@ export const initialState = {
             "lmax": 0,
             "cmin": 0,
             "cmax": 0,
-            "validmin": -Number.MAX_VALUE,
+            "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
             "tooltip": "Number of coils not contributing to deflection. Depends on End_Type.",
