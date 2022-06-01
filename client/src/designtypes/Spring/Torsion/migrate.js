@@ -257,11 +257,22 @@ export function migrate(design) {
         });
         design.symbol_table[ 2].validmin = 1; // Coils_T
         design.symbol_table[ 3].validmin = -Number.MAX_VALUE; // M_1
+        design.symbol_table[ 5].validmin = -Number.MIN_VALUE; // Coil_Spacing
         design.symbol_table[10].validmin = -Number.MAX_VALUE; // Deflect_1
         design.symbol_table[18].validmin = 1; // Spring_Index
+        design.symbol_table[19].validmin = -Number.MIN_VALUE; // End_Deflect_All
         design.symbol_table[20].validmin = -Number.MAX_VALUE; // Stress_1
+        design.symbol_table[22].validmin = -Number.MIN_VALUE; // Stress_End
         design.symbol_table[25].validmin = -Number.MAX_VALUE; // Cycle_Life
+        design.symbol_table[27].validmin = -Number.MIN_VALUE; // Force_Arm_2
         design.symbol_table[28].validmin = -Number.MAX_VALUE; // Energy
+        design.symbol_table[38].validmin = -Number.MIN_VALUE; // Inactive_Coils
+        design.symbol_table[48].validmin = -Number.MIN_VALUE; // Arm_1
+        design.symbol_table[49].validmin = -Number.MIN_VALUE; // Arm_2
+        design.symbol_table[50].validmin = -Number.MIN_VALUE; // Xlen_1
+        design.symbol_table[51].validmin = -Number.MIN_VALUE; // Xlen_2
+        design.symbol_table[52].validmin = -Number.MIN_VALUE; // L_End_1
+        design.symbol_table[53].validmin = -Number.MIN_VALUE; // L_End_2
         design.symbol_table[54].validmin = -Number.MAX_VALUE; // tbase010
         design.symbol_table[55].validmin = -Number.MAX_VALUE; // tbase400
         design.symbol_table[56].validmin = -Number.MAX_VALUE; // const_term
