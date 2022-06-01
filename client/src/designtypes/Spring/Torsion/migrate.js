@@ -249,6 +249,24 @@ export function migrate(design) {
         // Current model version
         // console.log('Convert from 7 to 8');
         delete design.result.violated_constraint_count; // No longer needed, no need to replace or rename
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.format === undefined && typeof element.value === 'number') { // All symbol table numbers, skip strings and tables
+                element.validmin = 0.0;
+                element.validmax = Number.MAX_VALUE;
+            }
+        });
+        design.symbol_table[ 2].validmin = 1; // Coils_T
+        design.symbol_table[ 3].validmin = -Number.MAX_VALUE; // M_1
+        design.symbol_table[10].validmin = -Number.MAX_VALUE; // Deflect_1
+        design.symbol_table[18].validmin = 1; // Spring_Index
+        design.symbol_table[20].validmin = -Number.MAX_VALUE; // Stress_1
+        design.symbol_table[25].validmin = -Number.MAX_VALUE; // Cycle_Life
+        design.symbol_table[28].validmin = -Number.MAX_VALUE; // Energy
+        design.symbol_table[54].validmin = -Number.MAX_VALUE; // tbase010
+        design.symbol_table[55].validmin = -Number.MAX_VALUE; // tbase400
+        design.symbol_table[56].validmin = -Number.MAX_VALUE; // const_term
+        design.symbol_table[57].validmin = -Number.MAX_VALUE; // slope_term
+        design.symbol_table[58].validmin = -Number.MAX_VALUE; // tensile_010
         migrated_design.version = '8'; // last thing... set the migrated model version
     case '8':
         // Current model version
