@@ -51,9 +51,9 @@ class AlertsModal extends Component {
                         <Modal.Title>Alerts</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <table>
+                        <table className="report-table-borders">
                             <thead>
-                                <tr>
+                                <tr key="0">
                                     <th>#</th>
                                     <th>Severity</th>
                                     <th>Message</th>
@@ -70,14 +70,16 @@ class AlertsModal extends Component {
                                         match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                                     }
                                     return (
+                                        (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
                                         <tr className="text-not-feasible" key={line}>
                                             <td>{line++}</td>
                                             <td>{entry.severity}</td>
                                             <td>{entry.message}</td>
                                             <td>{entry.name}</td>
-                                            {entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element === undefined && <td></td>}
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
@@ -89,14 +91,16 @@ class AlertsModal extends Component {
                                         match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                                     }
                                     return (
+                                        (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
                                         <tr className="text-close-to-feasible" key={line}>
                                             <td>{line++}</td>
                                             <td>{entry.severity}</td>
                                             <td>{entry.message}</td>
                                             <td>{entry.name}</td>
-                                            {entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element === undefined && <td></td>}
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
@@ -108,14 +112,16 @@ class AlertsModal extends Component {
                                         match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                                     }
                                     return (
+                                        (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
                                         <tr className="text-feasible" key={line}>
                                             <td>{line++}</td>
                                             <td>{entry.severity}</td>
                                             <td>{entry.message}</td>
                                             <td>{entry.name}</td>
-                                            {entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element === undefined && <td></td>}
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );

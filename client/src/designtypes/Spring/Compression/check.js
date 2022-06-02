@@ -88,7 +88,6 @@ export function check(store) {        /*    Compression  Spring  */
     }
     if (design.model.symbol_table[o.PC_Avail_Deflect].value > 80.0) {
         addAlert({
-            element: design.model.symbol_table[o.PC_Avail_Deflect],
             name: 'PC_Avail_Deflect@2', 
             message: 'PC_Avail_Deflect@2 (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') > 80',
             severity: 'Info',
@@ -98,7 +97,6 @@ export function check(store) {        /*    Compression  Spring  */
     var PC_Avail_Deflect1 = 100.0 * design.model.symbol_table[o.Deflect_1].value / (design.model.symbol_table[o.L_Free].value - design.model.symbol_table[o.L_Solid].value); 
     if (PC_Avail_Deflect1 < 20.0) {
         addAlert({
-            element: design.model.symbol_table[o.PC_Avail_Deflect],
             name: 'PC_Avail_Deflect@1', 
             message: 'PC_Avail_Deflect@1 (' + PC_Avail_Deflect1.toODOPPrecision() + ') < 20',
             severity: 'Info',
