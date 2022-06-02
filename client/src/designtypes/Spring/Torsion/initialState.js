@@ -270,7 +270,7 @@ export const initialState = {
             "lmax": 0,
             "cmin": 1.0,
             "cmax": 360.0,
-            "validmin": 0.0,
+            "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
             "tooltip": "Angular displacement from point 1 to point 2",
