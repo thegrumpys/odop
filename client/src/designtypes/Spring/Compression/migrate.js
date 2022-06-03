@@ -339,10 +339,9 @@ export function migrate(design) {
         design.symbol_table[ 3].validmin = 1; // Coils_T
         design.symbol_table[ 4].validmin = -Number.MAX_VALUE; // Force_1
         design.symbol_table[ 9].validmin = -Number.MAX_VALUE; // Deflect_1
-        design.symbol_table[12].validmin = -Number.MAX_VALUE; // L_2
         design.symbol_table[18].validmin = 1; // Spring_Index
         design.symbol_table[20].validmin = -Number.MAX_VALUE; // Stress_1
-        design.symbol_table[26].validmin = -Number.MAX_VALUE; // Cycle_Life
+        design.symbol_table[26].validmin = -Number.MIN_VALUE; // Cycle_Life
         design.symbol_table[28].validmin = -Number.MAX_VALUE; // Energy
         design.symbol_table[45].validmin = -Number.MAX_VALUE; // Inactive_Coils
         design.symbol_table[46].validmin = -Number.MAX_VALUE; // Add_Coils@Solid
