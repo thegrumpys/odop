@@ -77,7 +77,7 @@ export function reducers(state, action) {
         }
         module = JSON.parse(JSON.stringify(module)); // Make deep clone
         state = Object.assign({}, state, { 
-            name: 'initialState',
+            name: action.payload.units === 'US' ? 'initialState' : 'initialState_metric_units',
             model: {
                 ...module.initialState,
                 system_controls: initialSystemControls
