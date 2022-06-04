@@ -135,6 +135,7 @@ export function check(store) {        /*    Compression  Spring  */
     }
     if (design.model.symbol_table[o.Force_2].value < design.model.symbol_table[o.Force_1].value) {
         addAlert({
+            element: design.model.symbol_table[o.Force_2], 
             name: design.model.symbol_table[o.Force_2].name, 
             message: check_message(design,o.Force_2,'<',o.Force_1),
             severity: 'Warn',
