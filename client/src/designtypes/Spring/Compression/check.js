@@ -59,23 +59,26 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.Coils_A],
             name: design.model.symbol_table[o.Coils_A].name, 
             message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Coils_A].name + ' (' + design.model.symbol_table[o.Coils_A].value.toODOPPrecision() + ') < 1.0',
-            severity: 'Warn'
+            severity: 'Warn', 
+            help_url: '[Details](/docs/Help/alerts.html#Coils_A_LT_1)'
         });
     }
     if (design.model.symbol_table[o.Wire_Dia].value < 0.5 * design.model.symbol_table[o.tbase010].value) {
         addAlert({
             element: design.model.symbol_table[o.Wire_Dia],
             name: design.model.symbol_table[o.Wire_Dia].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') < ' + (0.5 * design.model.symbol_table[o.tbase010].value).toODOPPrecision(),
-            severity: 'Warn'
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') < reasonable',
+            severity: 'Warn',
+            help_url: '[Details](/docs/Help/alerts.html#Wire_Dia_LT_reasonable)'
         });
     }
     if (design.model.symbol_table[o.Wire_Dia].value > 5.0 * design.model.symbol_table[o.tbase400].value) {
         addAlert({
             element: design.model.symbol_table[o.Wire_Dia],
             name: design.model.symbol_table[o.Wire_Dia].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') > ' + (5.0 * design.model.symbol_table[o.tbase400].value).toODOPPrecision(),
-            severity: 'Warn'
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') > reasonable',
+            severity: 'Warn',
+            help_url: '[Details](/docs/Help/alerts.html#Wire_Dia_GT_reasonable)'
         });
     }
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
@@ -105,11 +108,37 @@ export function check(store) {        /*    Compression  Spring  */
     }
     if (design.model.symbol_table[o.Life_Category].value > 1 && !design.model.symbol_table[o.FS_CycleLife].lmin & CONSTRAINED) {
         addAlert({
-            element: design.model.symbol_table[o.FS_CycleLife],
+            element: design.model.symbol_table[o.FS_CycleLife], 
             name: design.model.symbol_table[o.FS_CycleLife].name, 
             message: design.model.symbol_table[o.FS_CycleLife].name + ' MIN is not set.', 
-            severity: 'Warn',
+            severity: 'Warn', 
             help_url: '[Details](/docs/Help/alerts.html#FS_CycleLife_MIN_not_set)'
+        });
+    }
+    if (design.model.symbol_table[o.FS_2].lmax & CONSTRAINED && design.model.symbol_table[o.FS_2].value > design.model.symbol_table[o.FS_2].cmax) {
+        addAlert({
+            element: design.model.symbol_table[o.FS_2], 
+            name: design.model.symbol_table[o.FS_2].name, 
+            message: 'Over-design concern', 
+            severity: 'Warn', 
+            help_url: '[Details](/docs/Help/alerts.html#OverDesign)' 
+        });
+    }
+    if (design.model.symbol_table[o.Spring_Index].value < 4.0 || design.model.symbol_table[o.Spring_Index].value > 25.0) {
+        addAlert({
+            element: design.model.symbol_table[o.Spring_Index], 
+            name: design.model.symbol_table[o.Spring_Index].name, 
+            message: 'Manufacturability concern', 
+            severity: 'Warn',
+            help_url: '[Details](/docs/Help/alerts.html#SI_manufacturability)' 
+        });
+    }
+    if (design.model.symbol_table[o.Force_2].value < design.model.symbol_table[o.Force_1].value) {
+        addAlert({
+            name: design.model.symbol_table[o.Force_2].name, 
+            message: check_message(design,o.Force_2,'<',o.Force_1),
+            severity: 'Warn',
+            help_url: '[Details](/docs/Help/alerts.html#F2_LT_F1)'
         });
     }
 
