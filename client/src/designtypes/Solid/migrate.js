@@ -125,6 +125,13 @@ export function migrate(design) {
         // Current model version
         // console.log('Convert from 8 to 9');
         delete design.result.violated_constraint_count; // No longer needed, no need to replace or rename
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.format === undefined && typeof element.value === 'number') { // All symbol table numbers, skip strings and tables
+                element.validmin = 0.0;
+                element.validmax = Number.MAX_VALUE;
+            }
+        });
+//        design.symbol_table[ 3].validmin = 1; // Coils_T
         migrated_design.version = '9'; // last thing... set the migrated model version
     case '9':
         // Current model version
