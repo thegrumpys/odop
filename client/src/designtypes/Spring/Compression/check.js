@@ -133,13 +133,20 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Details](/docs/Help/alerts.html#SI_manufacturability)' 
         });
     }
-    if (design.model.symbol_table[o.Force_2].value < design.model.symbol_table[o.Force_1].value) {
+    if (design.model.symbol_table[o.Force_1].value >= design.model.symbol_table[o.Force_2].value) {
+        addAlert({
+            element: design.model.symbol_table[o.Force_1], 
+            name: design.model.symbol_table[o.Force_1].name, 
+            message: check_message(design,o.Force_1,'>=',o.Force_2),
+            severity: 'Warn',
+            help_url: '[Details](/docs/Help/alerts.html#F1_GE_F2)',
+        });
         addAlert({
             element: design.model.symbol_table[o.Force_2], 
             name: design.model.symbol_table[o.Force_2].name, 
             message: check_message(design,o.Force_2,'<',o.Force_1),
             severity: 'Warn',
-            help_url: '[Details](/docs/Help/alerts.html#F2_LT_F1)'
+            duplicate: true
         });
     }
 

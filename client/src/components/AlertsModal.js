@@ -45,7 +45,11 @@ class AlertsModal extends Component {
         var line = 1;
         return (
             <>
-                <Button variant="primary" disabled={getAlertsBySeverity().length === 0} size="sm" onClick={this.onOpen}>Alerts</Button>&nbsp;
+                <Button variant="primary" disabled={getAlertsBySeverity().length === 0} size="sm" onClick={this.onOpen}>Alerts&nbsp;
+                    <span class="badge bg-danger">
+                        {getAlertsBySeverity().length}
+                    </span>
+                </Button>&nbsp;
                 <OverlayTrigger placement="bottom" overlay={<Tooltip>
                     ALERTS are error, warning and informational messages that are produced as you change the values of your design.
                     There are error alerts for each value when it is outside its validity value range.
@@ -63,12 +67,36 @@ class AlertsModal extends Component {
                         <table className="report-table-borders">
                             <thead>
                                 <tr key="0">
-                                    <th>#</th>
-                                    <th>Severity</th>
-                                    <th>Message</th>
-                                    <th>Name</th>
-                                    <th>Component</th>
-                                    <th>Help URL</th>
+                                    <th>
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>#</Tooltip>}>
+                                            <span>#</span>
+                                        </OverlayTrigger>
+                                    </th>
+                                    <th>
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>Severity</Tooltip>}>
+                                            <span>Severity</span>
+                                        </OverlayTrigger>
+                                    </th>
+                                    <th>
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>Message</Tooltip>}>
+                                            <span>Message</span>
+                                        </OverlayTrigger>
+                                    </th>
+                                    <th>
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>Name</Tooltip>}>
+                                            <span>Name</span>
+                                        </OverlayTrigger>
+                                    </th>
+                                    <th>
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>Change Value</Tooltip>}>
+                                            <span>Value</span>
+                                        </OverlayTrigger>
+                                    </th>
+                                    <th>
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>Help</Tooltip>}>
+                                            <span>Help</span>
+                                        </OverlayTrigger>
+                                    </th>
                                </tr>
                             </thead>
                             <tbody>

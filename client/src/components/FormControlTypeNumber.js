@@ -118,9 +118,9 @@ class FormControlTypeNumber extends Component {
         if (icon_alerts.length > 0) {
             icon_tooltip =
                 <>
-                    Alerts
+                    <b>Alerts</b>
                     <ul>
-                        {icon_alerts.map((entry, i) => {return <li key={i}>{entry.severity}: {entry.message}</li>})}
+                        {icon_alerts.map((entry, i) => { return <li className={entry.color} key={i}>{entry.severity}: {entry.message}</li>})}
                     </ul>
                 </>;
         }
@@ -134,34 +134,22 @@ class FormControlTypeNumber extends Component {
         delete p.validmin;
         delete p.validmax;
 
+        var icon_class = "fas fa-exclamation-triangle icon-invalid "+value_class;
         return (<>
             {icon_alerts.length > 0 ?
-                <OverlayTrigger placement="top" overlay={<Tooltip>Alerts Available</Tooltip>}>
-                    <i className="fas fa-exclamation-triangle fa-sm icon-invalid"></i>
+                <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{icon_tooltip}</Tooltip>}>
+                    <i className={icon_class}></i>
                 </OverlayTrigger>
             :
             ''}
-            {icon_tooltip !== undefined ?
-                <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{icon_tooltip}</Tooltip>}>
-                    <Form.Control type="number"
-                        {...p} // Allow OverlayTrigger to pass-in other props
-                        onClick={this.onClick}
-                        onChange={this.onChange}
-                        onFocus={this.onFocus}
-                        onBlur={this.onBlur}
-                        className={value_class}
-                        value={this.props.disabledText ? '' : this.state.focused ? this.state.valueString : (Number.isFinite(this.state.value) ? this.state.value.toODOPPrecision() : '')} />
-                </OverlayTrigger>
-            :
-                <Form.Control type="number"
-                    {...p} // Allow OverlayTrigger to pass-in other props
-                    onClick={this.onClick}
-                    onChange={this.onChange}
-                    onFocus={this.onFocus}
-                    onBlur={this.onBlur}
-                    className={value_class}
-                    value={this.props.disabledText ? '' : this.state.focused ? this.state.valueString : (Number.isFinite(this.state.value) ? this.state.value.toODOPPrecision() : '')} />
-                }
+            <Form.Control type="number"
+                {...p} // Allow OverlayTrigger to pass-in other props
+                onClick={this.onClick}
+                onChange={this.onChange}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+                className={value_class}
+                value={this.props.disabledText ? '' : this.state.focused ? this.state.valueString : (Number.isFinite(this.state.value) ? this.state.value.toODOPPrecision() : '')} />
         </>)
     }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
 
 export var commonChecks = function(store) {
-//    console.log('In commonChecks store=',store);
+//    console.log('In Alerts.commonChecks store=',store);
     var design = store.getState();
     var total = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
@@ -11,7 +11,7 @@ export var commonChecks = function(store) {
 
         // VALUE VALIDITY CHECKS
         if (element.format === undefined && typeof element.value === 'number' && element.value <= element.validmin) { 
-            let validmin = element.validmin === -Number.MAX_VALUE ? '-Number.MAX_VALUE' : element.validmin;
+            let validmin = element.validmin === -Number.MIN_VALUE ? '-Number.MIN_VALUE' : element.validmin;
             addAlert({
                 element: element,
                 name: element.name,
@@ -113,72 +113,67 @@ export var commonChecks = function(store) {
     }
 }
 
+export var getColorNumberByNameAndSeverity = function(name, severity) {
+//    console.log('In Alerts.getColorNumberByNameAndSeverity this=',this,'name=',name,'severity=',severity);
+    var color = 1;
+    if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX'))) {
+        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+            color = 3;
+        } else if (this.props.objective_value > this.props.system_controls.objmin) {
+            color = 2;
+        } else if (this.props.objective_value > 0.0) {
+            color = 1;
+       }
+    } else {
+        if (severity === 'Err') {
+            color = 3;
+        } else if (severity === 'Warn') {
+            color = 2;
+        } else if (severity === 'Info') {
+            color = 1;
+        }
+    }
+//    console.log('In Alerts.getColorNumberByNameAndSeverity name-',name,'severity=',severity,'color=',color);
+    return color;
+}
+
 export var getAlertsByName = function(name, includeViolations = false) {
-//    console.log('In getAlertsByName this=',this,'name=',name);
+//    console.log('In Alerts.getAlertsByName this=',this,'name=',name);
     var alerts = [];
     var color_classes = ["text-strictly-feasible ", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
     var max_color = 0;
     this.state.alerts.forEach((entry) => {
         var color = 0;
         if (entry.name === name) { // Matches exactly
-            if (name.endsWith(' MIN') || name.endsWith(' MAX')) {
-                if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-                    color = 3;
-                    max_color = max_color > 3 ? max_color : 3;
-                } else if (this.props.objective_value > this.props.system_controls.objmin) {
-                    color = 2;
-                    max_color = max_color > 2 ? max_color : 2;
-                } else if (this.props.objective_value > 0.0) {
-                    color = 1;
-                    max_color = max_color > 1 ? max_color : 1;
-               }
-            } else {
-                if (entry.severity === 'Err') {
-                    color = 3;
-                    max_color = max_color > 3 ? max_color : 3;
-                } else if (entry.severity === 'Warn') {
-                    color = 2;
-                    max_color = max_color > 2 ? max_color : 2;
-                } else if (entry.severity === 'Info') {
-                    color = 1;
-                    max_color = max_color > 1 ? max_color : 1;
-                }
-            }
+            color = getColorNumberByNameAndSeverity(entry.name, entry.severity);
+            max_color = Math.max(max_color, color);
             entry.color = color_classes[color];
             alerts.push(entry);
-        } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches prefix
-            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-                color = 3;
-                max_color = max_color > 3 ? max_color : 3;
-            } else if (this.props.objective_value > this.props.system_controls.objmin) {
-                color = 2;
-                max_color = max_color > 2 ? max_color : 2;
-            } else if (this.props.objective_value > 0.0) {
-                color = 1;
-                max_color = max_color > 1 ? max_color : 1;
-            }
+        } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
+            color = getColorNumberByNameAndSeverity(entry.name, entry.severity);
+            max_color = Math.max(max_color, color);
             entry.color = color_classes[color];
             alerts.push(entry);
         }
     });
-//    console.log('In getAlertsByName max_color=',max_color,'alerts=',alerts);
+//    console.log('In Alerts.getAlertsByName max_color=',max_color,'alerts=',alerts);
     return {color_class: color_classes[max_color], alerts: alerts};
 }
 
 export var getAlertsBySeverity = function(severity='') {
-//    console.log('In getAlertsBySeverity');
+//    console.log('In Alerts.getAlertsBySeverity');
     var results;
     if (severity === '') {
         results = this.state.alerts;
     } else {
         results = this.state.alerts.filter(entry => entry.severity === severity && (entry.duplicate === undefined || entry.duplicate === false));
     }
-//    console.log('In getAlertsBySeverity results=',results);
+//    console.log('In Alerts.getAlertsBySeverity results=',results);
     return results;
 }
 
 export var clearAlerts = function() {
-//    console.log('In clearAlerts');
+//    console.log('In Alerts.clearAlerts');
     this.setState((prevState, props) => {
         return {
             alerts: []
@@ -187,7 +182,7 @@ export var clearAlerts = function() {
 }
 
 export var addAlert = function(alert) {
-//    console.log('In addAlert alert=',alert);
+//    console.log('In Alerts.addAlert alert=',alert);
     this.setState((prevState, props) => {
         return {
             alerts: [...prevState.alerts, alert]
@@ -198,6 +193,7 @@ export var addAlert = function(alert) {
 class Alerts extends Component {
     constructor(props) {
         super(props);
+        getColorNumberByNameAndSeverity = getColorNumberByNameAndSeverity.bind(this); // Bind external function - no 'this'
         getAlertsByName = getAlertsByName.bind(this); // Bind external function - no 'this'
         getAlertsBySeverity = getAlertsBySeverity.bind(this); // Bind external function - no 'this'
         clearAlerts = clearAlerts.bind(this); // Bind external function - no 'this'

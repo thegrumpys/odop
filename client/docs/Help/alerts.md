@@ -13,7 +13,7 @@ This topic provides details for each of the alerts.
  - [FS_CycleLife MIN not set](alerts.html#FS_CycleLife_MIN_not_set)  
  - [Over-design concern](alerts.html#OverDesign)  
  - [Spring Index manufacturability concern](alerts.html#SI_manufacturability)  
- - [Force_2 < Force_1](alerts.html#F2_LT_F1)  
+ - [Force_2 < Force_1](alerts.html#F1_GE_F2)  
  - [Padding - delete before release](alerts.html#padding)  
 
 ___
@@ -208,11 +208,11 @@ Check with the spring manufacturer regarding capabilities and costs.
 
 ___
 
-<a id="F2_LT_F1"></a>  
+<a id="F1_GE_F2"></a>  
 ___
 
-## Force_2 < Force_1 
-The value of Force_2 is less than the value of Force_1. 
+## Force_1 >= Force_2 
+The value of Force_1 is greater than or equal to the value of Force_2. 
 
 Compression spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Force_Solid). 
 The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 

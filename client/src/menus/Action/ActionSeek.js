@@ -41,7 +41,7 @@ class ActionSeek extends Component {
         });
         this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
-                let validmin = element.validmin === -Number.MAX_VALUE ? '-Number.MAX_VALUE' : element.validmin;
+                let validmin = element.validmin === -Number.MIN_VALUE ? '-Number.MIN_VALUE' : element.validmin;
                 if (element.value <= element.validmin) {
                     errorMsg += element.name + ' has an Invalid Value. It is less than or equal to ' + validmin + '; ';
                 }
