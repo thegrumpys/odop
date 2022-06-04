@@ -29,7 +29,7 @@ export function check(store) {
 //            name: design.model.symbol_table[o.L_Free].name, 
 //            message: check_message(design,o.L_Free,'<',o.L_Solid),
 //            severity: 'Err',
-//            help_url: '[Details](/docs/Help/alerts.html#L_Free_LT_L_Solid)'
+//            help_url: '[Help](/docs/Help/alerts.html#L_Free_LT_L_Solid)'
 //        });
 //        addAlert({
 //            element: design.model.symbol_table[o.L_Solid],

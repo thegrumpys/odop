@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
 
@@ -34,54 +34,54 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MIN',
                 message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
-                severity: 'Info'
+                severity: 'Viol'
             });
             addAlert({
                 element: element,
                 name: element.name+' MAX',
                 message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
-                severity: 'Info'
+                severity: 'Viol'
             });
         } else if (!element.input && (element.lmin & FIXED && element.vmin > 0.0)) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
                 message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(),
-                severity: 'Info'
+                severity: 'Viol'
             });
         } else if (!element.input && (element.lmax & FIXED && element.vmax > 0.0)) {
             addAlert({
                 element: element,
                 name: element.name+' MAX',
                 message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(),
-                severity: 'Info'
+                severity: 'Viol'
             });
         } else if ((element.lmin & CONSTRAINED && element.vmin > 0.0) && (element.lmax & CONSTRAINED && element.vmax > 0.0)) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
                 message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
-                severity: 'Info'
+                severity: 'Viol'
             });
             addAlert({
                 element: element,
                 name: element.name+' MAX',
                 message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
-                severity: 'Info'
+                severity: 'Viol'
             });
         } else if (element.lmin & CONSTRAINED && element.vmin > 0.0) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
                 message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(),
-                severity: 'Info'
+                severity: 'Viol'
             });
         } else if (element.lmax & CONSTRAINED && element.vmax > 0.0) {
             addAlert({
                 element: element,
                 name: element.name+' MAX',
                 message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(),
-                severity: 'Info'
+                severity: 'Viol'
             });
         }
 
@@ -115,7 +115,7 @@ export var commonChecks = function(store) {
 
 export var getColorNumberByNameAndSeverity = function(name, severity) {
 //    console.log('In Alerts.getColorNumberByNameAndSeverity this=',this,'name=',name,'severity=',severity);
-    var color = 1;
+    var color = 0;
     if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX'))) {
         if (this.props.objective_value > 4*this.props.system_controls.objmin) {
             color = 3;
@@ -135,6 +135,40 @@ export var getColorNumberByNameAndSeverity = function(name, severity) {
     }
 //    console.log('In Alerts.getColorNumberByNameAndSeverity name-',name,'severity=',severity,'color=',color);
     return color;
+}
+
+export var getFeasibilitySpanByName = function(name) {
+//    console.log('In Alerts.getColorNumberByNameAndSeverity this=',this,'name=',name,'severity=',severity);
+    const feasibility_strings = ["STRICTLY FEASIBLE", "FEASIBLE", "CLOSE TO FEASIBLE", "NOT FEASIBLE"];
+    const feasibility_classes = ["text-strictly-feasible ", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
+    var max_color = -1;
+    var feasibility_string;
+    var feasibility_class;
+    var violation_found = false;
+    this.state.alerts.forEach((entry) => {
+        var color = 0;
+        if (entry.name !== undefined && entry.name === name) { // Matches exactly
+            color = getColorNumberByNameAndSeverity(entry.name, entry.severity);
+            max_color = Math.max(max_color, color);
+            if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX'))) {
+                violation_found = true;
+            }
+//            console.log('@@@1@@@ entry=',entry,'color=',color,'max_color=',max_color,'violation_found=',violation_found);
+        } else if (entry.name !== undefined &&  (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
+            color = getColorNumberByNameAndSeverity(entry.name, entry.severity);
+            max_color = Math.max(max_color, color);
+            violation_found = true;
+//            console.log('@@@2@@@ entry=',entry,'color=',color,'max_color=',max_color,'violation_found=',violation_found);
+        }
+    });
+    if (violation_found) {
+        feasibility_string = feasibility_strings[max_color];
+        feasibility_class = feasibility_classes[max_color];
+    } else {
+        feasibility_string = "";
+        feasibility_class = "";
+    }
+    return (<span className={feasibility_class}>{feasibility_string}</span>);
 }
 
 export var getAlertsByName = function(name, includeViolations = false) {
@@ -194,6 +228,7 @@ class Alerts extends Component {
     constructor(props) {
         super(props);
         getColorNumberByNameAndSeverity = getColorNumberByNameAndSeverity.bind(this); // Bind external function - no 'this'
+        getFeasibilitySpanByName = getFeasibilitySpanByName.bind(this); // Bind external function - no 'this'
         getAlertsByName = getAlertsByName.bind(this); // Bind external function - no 'this'
         getAlertsBySeverity = getAlertsBySeverity.bind(this); // Bind external function - no 'this'
         clearAlerts = clearAlerts.bind(this); // Bind external function - no 'this'

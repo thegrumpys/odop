@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { getAlertsBySeverity } from './Alerts';
+import { getFeasibilitySpanByName } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 
@@ -46,7 +47,7 @@ class AlertsModal extends Component {
         return (
             <>
                 <Button variant="primary" disabled={getAlertsBySeverity().length === 0} size="sm" onClick={this.onOpen}>Alerts&nbsp;
-                    <span class="badge bg-danger">
+                    <span className="badge bg-danger">
                         {getAlertsBySeverity().length}
                     </span>
                 </Button>&nbsp;
@@ -84,7 +85,7 @@ class AlertsModal extends Component {
                                     </th>
                                     <th>
                                         <OverlayTrigger placement="top" overlay={<Tooltip>Name</Tooltip>}>
-                                            <span>Name</span>
+                                            <span>Name &amp;<br/>Feasiblity</span>
                                         </OverlayTrigger>
                                     </th>
                                     <th>
@@ -93,8 +94,8 @@ class AlertsModal extends Component {
                                         </OverlayTrigger>
                                     </th>
                                     <th>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>Help</Tooltip>}>
-                                            <span>Help</span>
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>Details</Tooltip>}>
+                                            <span>Details</span>
                                         </OverlayTrigger>
                                     </th>
                                </tr>
@@ -108,11 +109,11 @@ class AlertsModal extends Component {
                                     }
                                     return (
                                         (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
-                                        <tr className="text-not-feasible" key={line}>
+                                        <tr key={line}>
                                             <td>{line++}</td>
-                                            <td>{entry.severity}</td>
-                                            <td>{entry.message}</td>
-                                            <td>{entry.name}</td>
+                                            <td className="text-not-feasible">{entry.severity}</td>
+                                            <td className="text-not-feasible">{entry.message}</td>
+                                            <td>{entry.name}<br/>{getFeasibilitySpanByName(entry.name)}</td>
                                             {entry.element !== undefined && entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
@@ -129,11 +130,32 @@ class AlertsModal extends Component {
                                     }
                                     return (
                                         (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
-                                        <tr className="text-close-to-feasible" key={line}>
+                                        <tr key={line}>
                                             <td>{line++}</td>
-                                            <td>{entry.severity}</td>
-                                            <td>{entry.message}</td>
-                                            <td>{entry.name}</td>
+                                            <td className="text-close-to-feasible">{entry.severity}</td>
+                                            <td className="text-close-to-feasible">{entry.message}</td>
+                                            <td>{entry.name}<br/>{getFeasibilitySpanByName(entry.name)}</td>
+                                            {entry.element !== undefined && entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element === undefined && <td></td>}
+                                            <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
+                                        </tr>
+                                    );
+                                })}
+                                {getAlertsBySeverity('Viol').map((entry, index) => {
+//                                    console.log('In AlertsModal.render entry=',entry,'line=',line);
+                                    var match;
+                                    if (entry.help_url !== undefined) {
+                                        match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
+                                    }
+                                    return (
+                                        (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
+                                        <tr key={line}>
+                                            <td>{line++}</td>
+                                            <td className="text-feasible">{entry.severity}</td>
+                                            <td className="text-feasible">{entry.message}</td>
+                                            <td>{entry.name}<br/>{getFeasibilitySpanByName(entry.name)}</td>
                                             {entry.element !== undefined && entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
@@ -150,11 +172,11 @@ class AlertsModal extends Component {
                                     }
                                     return (
                                         (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
-                                        <tr className="text-feasible" key={line}>
+                                        <tr key={line}>
                                             <td>{line++}</td>
-                                            <td>{entry.severity}</td>
-                                            <td>{entry.message}</td>
-                                            <td>{entry.name}</td>
+                                            <td className="text-strictly-feasible">{entry.severity}</td>
+                                            <td className="text-strictly-feasible">{entry.message}</td>
+                                            <td>{entry.name}<br/>{getFeasibilitySpanByName(entry.name)}</td>
                                             {entry.element !== undefined && entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
