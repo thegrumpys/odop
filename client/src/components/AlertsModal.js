@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { getAlertsBySeverity } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
@@ -45,7 +45,12 @@ class AlertsModal extends Component {
         var line = 1;
         return (
             <>
-                <Button variant="primary" disabled={getAlertsBySeverity().length === 0} size="sm" onClick={this.onOpen}>Alerts</Button>
+                <Button variant="primary" disabled={getAlertsBySeverity().length === 0} size="sm" onClick={this.onOpen}>Alerts</Button>&nbsp;
+                <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                    ALERTS are checks that are made as you change the values of your design. 
+                    </Tooltip>}>
+                    <span><i className="fas fa-info-circle text-primary"></i></span>
+                </OverlayTrigger>
                 <Modal show={this.state.modal} onHide={this.onClose} size="lg">
                     <Modal.Header closeButton>
                         <Modal.Title>Alerts</Modal.Title>

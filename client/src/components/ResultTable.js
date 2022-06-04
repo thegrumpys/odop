@@ -196,7 +196,7 @@ class ResultTable extends Component {
                 <Table className="col-md-8" size="sm">
                     <tbody>
                         <tr>
-                            <th width="10%" id="Feasibility">
+                            <th width="15%" id="Feasibility">
                                 <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: constraints significantly violated; <br />CLOSE TO FEASIBLE: constraints slightly violated; FEASIBLE: constraints not significantly violated; STRICTLY FEASIBLE: no constraints violated</Tooltip>}>
                                     <span>Feasibility</span>
                                 </OverlayTrigger>
@@ -204,7 +204,7 @@ class ResultTable extends Component {
                             <td className={feasibility_class + " text-left"}>{feasibility_string}</td>
                         </tr>
                         <tr>
-                            <th width="10%" id="Message" className="text-center pb-3">
+                            <th width="15%" id="Message" className="text-center pb-3">
                                 <AlertsModal /> &nbsp;
                             </th>
                             <td className="text-left">
@@ -238,7 +238,7 @@ class ResultTable extends Component {
                                       SEARCH alters the values of any free independent variables to find a design that 
                                       satisfies all constraints while also achieving the desired value for each fixed dependent 
                                       variable.  Search stops when the first feasible solution is found.  The solution provided 
-                                      by Search is a solution to the designer’s goals as expressed by constraints and fixes. If 
+                                      by SEARCH is a solution to the designer’s goals as expressed by constraints and fixes. If 
                                       a solution that meets all of these goals is not available, the search process converges 
                                       to a compromise. Typically, this compromise violates multiple constraints.
                                       </Tooltip>}>
@@ -250,7 +250,7 @@ class ResultTable extends Component {
                                   <Button variant="primary" size="sm" onClick={this.onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
                                   <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                       If one feasible design exists there are likely many more available, each with varying 
-                                      advantages / disadvantages. The ODOP Seek feature provides a “goal seeking” capability 
+                                      advantages / disadvantages. SEEK provides a “goal seeking” capability 
                                       to optimize your design on the parameter that you specify. If starting with a default 
                                       design, additional constraints specific to your application are required to obtain 
                                       meaningful results.
