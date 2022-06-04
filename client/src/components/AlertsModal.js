@@ -47,7 +47,10 @@ class AlertsModal extends Component {
             <>
                 <Button variant="primary" disabled={getAlertsBySeverity().length === 0} size="sm" onClick={this.onOpen}>Alerts</Button>&nbsp;
                 <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                    ALERTS are checks that are made as you change the values of your design. 
+                    ALERTS are error, warning and informational checks that are made as you change the values of your design.
+                    There are error alerts if each value is within its validity value range.
+                    There are warning alerts if the relationship between two values is correct.
+                    There are informational alerts if each value is within its constraint value range.
                     </Tooltip>}>
                     <span><i className="fas fa-info-circle text-primary"></i></span>
                 </OverlayTrigger>
