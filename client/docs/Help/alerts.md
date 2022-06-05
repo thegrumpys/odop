@@ -1,6 +1,26 @@
 # Alerts &nbsp; 
 
-This topic provides details for each of the alerts.
+ALERTS are error, warning and informational messages that are produced as you change the values of your design. 
+Error (Err) alerts are triggered if a value is outside its valid range. 
+Warning (Warn) alerts are triggered if the relationship between two values is incorrect or invalid. 
+Violation (Viol) alerts are triggered if constraints are violated. 
+Informational alerts (Info) alerts provide insights about various aspects of system operation,
+including the configuration of Functionally Determined Constraint Levels [(FDCL)](/docs/Help/terminology.html#fdcl). 
+
+The alert presentation is sorted by severity; Err at the top, then Warn, Viol and finally, Info. 
+Each severity level has its own color: Err is red,  Warn is orange, Viol is green, and Info is black. 
+
+The Value field allows in-place adjustment of the associated variable's value and constraint levels. 
+This field operates the same as the corresponding fields on the main pages (Advanced and Calculator Views). 
+Thus, the color of the number presented in the value field tracks the color of the 
+[multi-colored Feasibility Status Indicator](/docs/Help/feasibilityIndicator.html). 
+
+In order to assure that ODOP : Spring's core solution algorithms 
+will not encounter numeric difficulty when starting from a physically unrealistic situation, 
+alerts of error (Err) severity will generaly block operation of the Search, Seek and Trade features. 
+It will be necessary to identify the source of errors and manually provide more appropriate values 
+in order to proceed with the Search, Seek and Trade features. 
+Many of the specific entries below attempt to provide specific guidance in moving to more realistic values. 
 
 ### On this page:   
  - [L_Free < L_Solid](alerts.html#L_Free_LT_L_Solid)  
@@ -52,7 +72,7 @@ where practical, change these values in the direction specified.
 Increase | &nbsp; | Decrease  
 --- | --- | ---  
  L_Free | &nbsp; | Coils_T  
- Wire_Dia | &nbsp; | Coil_Dia  
+ &nbsp; | &nbsp; | Coil_Dia  
  &nbsp; | &nbsp; | Force_2
 
 Compression spring lengths are ordered from the largest (L_Free) to L_1 to L_2 to the smallest (L_Solid). 
