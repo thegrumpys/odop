@@ -70,32 +70,55 @@ class AlertsModal extends Component {
                             <thead>
                                 <tr key="0">
                                     <th>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>#</Tooltip>}>
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>
+                                        Alert number<br/>
+                                        Alerts are sorted by Severity
+                                        </Tooltip>}>
                                             <span>#</span>
                                         </OverlayTrigger>
                                     </th>
                                     <th>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>Severity</Tooltip>}>
+                                        <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                                        <b>Error (Err):</b><br/>
+                                        value outside valid range<br/>
+                                        <b>Warning (Warn):</b><br/>
+                                        relationship between two values is incorrect or invalid<br/>
+                                        <b>Violation (Viol):</b><br/>
+                                        violated constraints<br/>
+                                        <b>Information (Info):</b><br/>
+                                        insights about aspects of system operation
+                                        </Tooltip>}>
                                             <span>Severity</span>
                                         </OverlayTrigger>
                                     </th>
                                     <th>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>Message</Tooltip>}>
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>
+                                        Summary of alert<br/>
+                                        Color tracks Severity
+                                        </Tooltip>}>
                                             <span>Message</span>
                                         </OverlayTrigger>
                                     </th>
                                     <th>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>Name</Tooltip>}>
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>
+                                        Name of associated variable & feasibility of design
+                                        
+                                        </Tooltip>}>
                                             <span>Name &amp;<br/>Feasiblity</span>
                                         </OverlayTrigger>
                                     </th>
                                     <th>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>Change Value</Tooltip>}>
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>
+                                        Use entry field below to change value of associated variable<br/>
+                                        Color below tracks design feasibility
+                                        </Tooltip>}>
                                             <span>Value</span>
                                         </OverlayTrigger>
                                     </th>
                                     <th>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>Details</Tooltip>}>
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>
+                                        Use "Help" button below to see details of a specific alert
+                                        </Tooltip>}>
                                             <span>Details</span>
                                         </OverlayTrigger>
                                     </th>
