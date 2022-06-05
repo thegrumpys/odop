@@ -44,11 +44,12 @@ class AlertsModal extends Component {
     render() {
 //        console.log('In AlertsModal.render this=',this);
         var line = 1;
+        var all_alerts = getAlertsBySeverity();
         return (
             <>
-                <Button variant="primary" disabled={getAlertsBySeverity().length === 0} size="sm" onClick={this.onOpen}>Alerts&nbsp;
+                <Button variant="primary" disabled={all_alerts.length === 0} size="sm" onClick={this.onOpen}>Alerts&nbsp;
                     <span className="badge bg-danger">
-                        {getAlertsBySeverity().length}
+                        {all_alerts.length}
                     </span>
                 </Button>&nbsp;
                 <OverlayTrigger placement="bottom" overlay={<Tooltip>
