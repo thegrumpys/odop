@@ -137,40 +137,6 @@ export var getColorNumberByNameAndSeverity = function(name, severity) {
     return color;
 }
 
-export var getFeasibilitySpanByName = function(name) {
-//    console.log('In Alerts.getColorNumberByNameAndSeverity this=',this,'name=',name,'severity=',severity);
-    const feasibility_strings = ["STRICTLY FEASIBLE", "FEASIBLE", "CLOSE TO FEASIBLE", "NOT FEASIBLE"];
-    const feasibility_classes = ["text-strictly-feasible ", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
-    var max_color = -1;
-    var feasibility_string;
-    var feasibility_class;
-    var violation_found = false;
-    this.state.alerts.forEach((entry) => {
-        var color = 0;
-        if (entry.name !== undefined && entry.name === name) { // Matches exactly
-            color = getColorNumberByNameAndSeverity(entry.name, entry.severity);
-            max_color = Math.max(max_color, color);
-            if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX'))) {
-                violation_found = true;
-            }
-//            console.log('@@@1@@@ entry=',entry,'color=',color,'max_color=',max_color,'violation_found=',violation_found);
-        } else if (entry.name !== undefined &&  (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
-            color = getColorNumberByNameAndSeverity(entry.name, entry.severity);
-            max_color = Math.max(max_color, color);
-            violation_found = true;
-//            console.log('@@@2@@@ entry=',entry,'color=',color,'max_color=',max_color,'violation_found=',violation_found);
-        }
-    });
-    if (violation_found) {
-        feasibility_string = feasibility_strings[max_color];
-        feasibility_class = feasibility_classes[max_color];
-    } else {
-        feasibility_string = "";
-        feasibility_class = "";
-    }
-    return (<span className={feasibility_class}>{feasibility_string}</span>);
-}
-
 export var getAlertsByName = function(name, includeViolations = false) {
 //    console.log('In Alerts.getAlertsByName this=',this,'name=',name);
     var alerts = [];
@@ -228,7 +194,6 @@ class Alerts extends Component {
     constructor(props) {
         super(props);
         getColorNumberByNameAndSeverity = getColorNumberByNameAndSeverity.bind(this); // Bind external function - no 'this'
-        getFeasibilitySpanByName = getFeasibilitySpanByName.bind(this); // Bind external function - no 'this'
         getAlertsByName = getAlertsByName.bind(this); // Bind external function - no 'this'
         getAlertsBySeverity = getAlertsBySeverity.bind(this); // Bind external function - no 'this'
         clearAlerts = clearAlerts.bind(this); // Bind external function - no 'this'

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { getAlertsBySeverity } from './Alerts';
-import { getFeasibilitySpanByName } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
+import FeasibilityIndicator from './FeasibilityIndicator';
 
 class AlertsModal extends Component {
   
@@ -45,6 +45,21 @@ class AlertsModal extends Component {
 //        console.log('In AlertsModal.render this=',this);
         var line = 1;
         var all_alerts = getAlertsBySeverity();
+        var feasibility_string;
+        var feasibility_class;
+        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+            feasibility_string = "NOT FEASIBLE";
+            feasibility_class = "text-not-feasible ";
+        } else if (this.props.objective_value > this.props.system_controls.objmin) {
+            feasibility_string = "CLOSE TO FEASIBLE";
+            feasibility_class = "text-close-to-feasible ";
+        } else if (this.props.objective_value > 0.0) {
+            feasibility_string = "FEASIBLE";
+            feasibility_class = "text-feasible ";
+        } else {
+            feasibility_string = "STRICTLY FEASIBLE";
+            feasibility_class = "text-strictly-feasible ";
+        }
         return (
             <>
                 <Button variant="primary" disabled={all_alerts.length === 0} size="sm" onClick={this.onOpen}>Alerts&nbsp;
@@ -62,8 +77,14 @@ class AlertsModal extends Component {
                     <span><i className="fas fa-info-circle text-primary"></i></span>
                 </OverlayTrigger>
                 <Modal show={this.state.modal} onHide={this.onClose} size="lg">
-                    <Modal.Header closeButton>
-                        <Modal.Title>Alerts</Modal.Title>
+                    <Modal.Header>
+                        <Modal.Title className="mr-auto">Alerts</Modal.Title>
+                        <span className={feasibility_class + "pt-1"}>{feasibility_string}</span>
+                        <FeasibilityIndicator />
+                        <button type="button" class="close ml-0">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Close</span>
+                        </button>
                     </Modal.Header>
                     <Modal.Body>
                         <table className="report-table-borders">
@@ -101,16 +122,16 @@ class AlertsModal extends Component {
                                     </th>
                                     <th>
                                         <OverlayTrigger placement="top" overlay={<Tooltip>
-                                        Name of associated variable & feasibility of design
+                                        Name of associated variable
                                         
                                         </Tooltip>}>
-                                            <span>Name &amp;<br/>Feasiblity</span>
+                                            <span>Name</span>
                                         </OverlayTrigger>
                                     </th>
                                     <th>
                                         <OverlayTrigger placement="top" overlay={<Tooltip>
                                         Use entry field below to change value of associated variable<br/>
-                                        Color below tracks design feasibility
+                                        Color below tracks design feasibility or message severity
                                         </Tooltip>}>
                                             <span>Value</span>
                                         </OverlayTrigger>
@@ -137,7 +158,7 @@ class AlertsModal extends Component {
                                             <td>{line++}</td>
                                             <td className="text-not-feasible">{entry.severity}</td>
                                             <td className="text-not-feasible">{entry.message}</td>
-                                            <td>{entry.name}<br/>{getFeasibilitySpanByName(entry.name)}</td>
+                                            <td>{entry.name}</td>
                                             {entry.element !== undefined && entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
@@ -158,7 +179,7 @@ class AlertsModal extends Component {
                                             <td>{line++}</td>
                                             <td className="text-close-to-feasible">{entry.severity}</td>
                                             <td className="text-close-to-feasible">{entry.message}</td>
-                                            <td>{entry.name}<br/>{getFeasibilitySpanByName(entry.name)}</td>
+                                            <td>{entry.name}</td>
                                             {entry.element !== undefined && entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
@@ -179,7 +200,7 @@ class AlertsModal extends Component {
                                             <td>{line++}</td>
                                             <td className="text-feasible">{entry.severity}</td>
                                             <td className="text-feasible">{entry.message}</td>
-                                            <td>{entry.name}<br/>{getFeasibilitySpanByName(entry.name)}</td>
+                                            <td>{entry.name}</td>
                                             {entry.element !== undefined && entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
@@ -200,7 +221,7 @@ class AlertsModal extends Component {
                                             <td>{line++}</td>
                                             <td className="text-strictly-feasible">{entry.severity}</td>
                                             <td className="text-strictly-feasible">{entry.message}</td>
-                                            <td>{entry.name}<br/>{getFeasibilitySpanByName(entry.name)}</td>
+                                            <td>{entry.name}</td>
                                             {entry.element !== undefined && entry.element.type === "equationset" && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "equationset" && !entry.element.input && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.element.type === "calcinput"   && entry.element.input  && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
@@ -225,6 +246,7 @@ class AlertsModal extends Component {
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
+    objective_value: state.model.result.objective_value,
 });
 
 export default connect(mapStateToProps)(AlertsModal);
