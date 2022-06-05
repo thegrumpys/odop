@@ -81,10 +81,10 @@ class AlertsModal extends Component {
                         <Modal.Title className="mr-auto">Alerts</Modal.Title>
                         <span className={feasibility_class + "pt-1"}>{feasibility_string}</span>
                         <FeasibilityIndicator />
-                        <button type="button" class="close ml-0">
+                        <Button type="button" className="close ml-0" onClick={this.onClose}>
                             <span aria-hidden="true">×</span>
                             <span class="sr-only">Close</span>
-                        </button>
+                        </Button>
                     </Modal.Header>
                     <Modal.Body>
                         <table className="report-table-borders">
