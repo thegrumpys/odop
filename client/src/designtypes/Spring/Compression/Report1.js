@@ -31,7 +31,7 @@ class Report1 extends ReportBase {
                         <tr>
                             <td>{this.props.symbol_table[o.Spring_Type].name}</td>
                             <td>=</td>
-                            <td className="text-right" colSpan="2">{this.props.symbol_table[o.Spring_Type].value}</td>
+                            <td className="text-left" colSpan="2">{this.props.symbol_table[o.Spring_Type].value}</td>
                             <td/>
                             <td>{this.props.symbol_table[o.Material_Type].name}</td>
                             <td>=</td>

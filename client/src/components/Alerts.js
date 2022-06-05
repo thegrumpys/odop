@@ -16,7 +16,8 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name,
                 message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ') <= ' + validmin,
-                severity: 'Err'
+                severity: 'Err',
+                help_url: '[Help](/docs/Help/alerts.html#Validity_Below)'
             });
         } else if (element.format === undefined && typeof element.value === 'number' && element.value >= element.validmax) {
             let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax;
@@ -24,7 +25,8 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name,
                 message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ') >- ' + validmax,
-                severity: 'Err'
+                severity: 'Err',
+                help_url: '[Help](/docs/Help/alerts.html#Validity_Above)'
             });
         }
 
@@ -61,27 +63,31 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MIN',
                 message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
-                severity: 'Viol'
+                severity: 'Viol',
+                help_url: '[Help](/docs/Help/alerts.html#Constraint_Inconsistency)'
             });
             addAlert({
                 element: element,
                 name: element.name+' MAX',
                 message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
-                severity: 'Viol'
+                severity: 'Viol',
+                duplicate: true
             });
         } else if (element.lmin & CONSTRAINED && element.vmin > 0.0) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
                 message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(),
-                severity: 'Viol'
+                severity: 'Viol',
+                help_url: '[Help](/docs/Help/alerts.html#MIN_Violation)'
             });
         } else if (element.lmax & CONSTRAINED && element.vmax > 0.0) {
             addAlert({
                 element: element,
                 name: element.name+' MAX',
                 message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(),
-                severity: 'Viol'
+                severity: 'Viol',
+                help_url: '[Help](/docs/Help/alerts.html#MAX_Violation)'
             });
         }
 
