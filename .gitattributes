@@ -1,0 +1,14 @@
+*.css text
+*.dist text
+*.ejs text
+*.gif binary
+.gitignore text
+*.html text
+*.ico binary
+*.js text
+*.json text
+*.md text
+*.png binary
+*.sql text
+*.ttf binary
+*.yml text
