@@ -198,7 +198,7 @@ export var getAlertsBySeverity = function(severity='') {
 //    console.log('In Alerts.getAlertsBySeverity');
     var results;
     if (severity === '') {
-        results = this.state.alerts;
+        results = this.state.alerts.filter(entry => entry.duplicate === undefined || entry.duplicate === false);
     } else {
         results = this.state.alerts.filter(entry => entry.severity === severity && (entry.duplicate === undefined || entry.duplicate === false));
     }
