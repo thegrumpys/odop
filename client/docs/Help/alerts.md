@@ -54,7 +54,7 @@ Increase | &nbsp; | Decrease
 
 See also: 
  - [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png)
- - [Compression Spring Constraints](/docs/Help/DesignTypes/c_spring.html#c_springConstraints)   
+ - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
  - [Errors](errors.html)   
 
 ___
@@ -79,7 +79,7 @@ Compression spring lengths are ordered from the largest (L_Free) to L_1 to L_2 t
 The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 
 
 See also: 
- - [Compression Spring Constraints](/docs/Help/DesignTypes/c_spring.html#c_springConstraints)   
+ - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
  - [Errors](errors.html)   
 
 ___
@@ -238,7 +238,7 @@ Compression spring forces are ordered from the smallest (free condition) to Forc
 The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 
 
 See also: 
- - [Compression Spring Constraints](/docs/Help/DesignTypes/c_spring.html#c_springConstraints)   
+ - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
  - [Errors](errors.html)   
 
 ___

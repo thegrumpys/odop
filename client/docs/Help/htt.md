@@ -311,7 +311,7 @@ If experiencing difficulty in selecting springs from the supplied catalog, try s
 Calculation Input named SI_Range to a value of "Special_Request". 
 
 See also:   
- - [Extension spring design - Initial_Tension](DesignTypes/e_spring.html#e_springIT_Range) 
+ - [Extension spring design - Initial_Tension](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springIT_Range) 
 
 ___
 

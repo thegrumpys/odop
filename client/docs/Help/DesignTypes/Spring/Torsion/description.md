@@ -10,15 +10,15 @@ provides important supplemental information.
 ___
 
 ### On this page:   
- - [Torsion spring moment-deflection diagram](t_spring.html#t_springFD_Diag)  
- - [Torsion spring moment-deflection point names](t_spring.html#t_springFD_Names)  
- - [Torsion spring dimensions](t_spring.html#t_springDims)  
- - [Independent Variable names](t_spring.html#t_springIV_Names)  
- - [Dependent Variable names](t_spring.html#t_springDV_Names)  
- - [Calculation Input names](t_spring.html#t_springCalcInputNames)  
- - [Values in reports](t_spring.html#t_springOtherValues)  
- - [Torsion spring end types](t_spring.html#t_springEndTypes)  
-<!---  - [Constraints unique to torsion springs](t_spring.html#t_springConstraints)  -->
+ - [Torsion spring moment-deflection diagram](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springFD_Diag)  
+ - [Torsion spring moment-deflection point names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springFD_Names)  
+ - [Torsion spring dimensions](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springDims)  
+ - [Independent Variable names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springIV_Names)  
+ - [Dependent Variable names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springDV_Names)  
+ - [Calculation Input names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springCalcInputNames)  
+ - [Values in reports](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springOtherValues)  
+ - [Torsion spring end types](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springEndTypes)  
+<!---  - [Constraints unique to torsion springs](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springConstraints)  -->
 
 &nbsp;
 ___
@@ -91,7 +91,7 @@ ___
 The following diagram may be of some assistance in interpreting the names 
 associated with various dimensions of a torsion spring. 
 
-![Torsion Spring Names](/docs/Help/DesignTypes/img/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](/docs/Help/DesignTypes/Spring/Torsion/img/TorsionNames.png "Torsion Spring Names")   
 
 &nbsp; 
 
@@ -261,8 +261,8 @@ ___
 For additional information: 
  - [Materials](/docs/Help/SpringDesign/materials.html)   
  - [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
- - [Torsion spring end types](t_spring.html#t_springEndTypes)   
- - [Torsion spring dimensions](t_spring.html#t_springDims)  
+ - [Torsion spring end types](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springEndTypes)   
+ - [Torsion spring dimensions](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springDims)  
 
 &nbsp;
 
@@ -317,7 +317,7 @@ Separately, the values of Arm\_1, Arm\_2, L\_End\_1, L\_End\_2, XLen\_1 and XLen
 describe end conditions. 
 This diagram may be helpful. 
 
-![Torsion Spring Names](/docs/Help/DesignTypes/img/TorsionNames.png "Torsion Spring Names")  
+![Torsion Spring Names](/docs/Help/DesignTypes/Spring/Torsion/img/TorsionNames.png "Torsion Spring Names")  
 
 &nbsp;
 
@@ -335,11 +335,11 @@ Eclipse .md Preview suppressed display of everything after the comment header.
 The following lines are alternate syntax for in-line image links   
 See docs/procedures/ImageLocations for preferred approach on image path.   
 
-![Torsion Spring Names](/docs/Help/DesignTypes/img/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](/docs/Help/DesignTypes/Spring/Torsion/img/TorsionNames.png "Torsion Spring Names")   
 
-<img src="/docs/Help/DesignTypes/img/TorsionNames.png" alt="Torsion Spring Names"/>
+<img src="/docs/Help/DesignTypes/Spring/Torsion/img/TorsionNames.png" alt="Torsion Spring Names"/>
 
-![Torsion Spring Names](https://odop.herokuapp.com/docs/Help/DesignTypes/img/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](https://odop.herokuapp.com/docs/Help/DesignTypes/Spring/Torsion/img/TorsionNames.png "Torsion Spring Names")   
 
 -->
 

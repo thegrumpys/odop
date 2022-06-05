@@ -366,7 +366,7 @@ export const execute = {
                     <p>
                     If the use of Prop_Calc_Method seems a bit unfamiliar, you may wish to
                     review the on-line documentation sections (HELP entries) on 
-                    &nbsp;<a href="/docs/Help/DesignTypes/c_spring.html" target="_blank" rel="noopener noreferrer">Compression Spring Design Type</a>, 
+                    &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">Compression Spring Design Type</a>, 
                     &nbsp;<a href="/docs/Help/SpringDesign/materials.html" target="_blank" rel="noopener noreferrer">Materials</a> and 
                     &nbsp;<a href="/docs/Help/SpringDesign/advancedSpringOperations.html" target="_blank" rel="noopener noreferrer">Advanced Spring Operations</a>.&nbsp; 
                     Also, an earlier tutorial section (tutor5) and one of the demo problems (demo4)

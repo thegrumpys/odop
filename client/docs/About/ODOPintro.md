@@ -85,11 +85,11 @@ a comprehensive introduction to coil spring design with ODOP is available at
 [Spring Design Topics](/docs/Help/SpringDesign). 
 
 ![Rectangular Solid Design Type icon](https://odop.herokuapp.com/designtypes/Solid/favicon.ico "Rectangular Solid Design Type") 
-The [Rectangular Solid](/docs/Help/DesignTypes/r_solid.html) design type is intended as an 
+The [Rectangular Solid](/docs/Help/DesignTypes/Solid/description.html) design type is intended as an 
 easy to understand demonstration problem. 
 
 ![Piston-Cylinder Design Type icon](https://odop.herokuapp.com/designtypes/Piston-Cylinder/favicon.ico "Piston-Cylinder Design Type") 
-The [Piston-Cylinder](/docs/Help/DesignTypes/pcyl.html) design type is a simple demonstration problem 
+The [Piston-Cylinder](/docs/Help/DesignTypes/Piston-Cylinder/description.html) design type is a simple demonstration problem 
 that illustrates competing objectives.
 
 &nbsp; 

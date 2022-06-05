@@ -10,15 +10,15 @@ provides important supplemental information.
 ___
 
 ### On this page:   
- - [Compression spring force-deflection diagram](c_spring.html#c_springFD_Diag)  
- - [Compression spring force-deflection point names](c_spring.html#c_springFD_Names)  
- - [Independent Variable names](c_spring.html#c_springIV_Names)  
- - [Dependent Variable names](c_spring.html#c_springDV_Names)  
- - [Calculation Input names](c_spring.html#c_springCalcInputNames)  
- - [Values in reports](c_spring.html#c_springOtherValues)  
- - [Constraints unique to compression springs](c_spring.html#c_springConstraints)  
- - [Compression spring end types](c_spring.html#c_springEndTypes)  
- - [Buckling](c_spring.html#c_springBuckling)  
+ - [Compression spring force-deflection diagram](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springFD_Diag)  
+ - [Compression spring force-deflection point names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springFD_Names)  
+ - [Independent Variable names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springIV_Names)  
+ - [Dependent Variable names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springDV_Names)  
+ - [Calculation Input names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springCalcInputNames)  
+ - [Values in reports](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springOtherValues)  
+ - [Constraints unique to compression springs](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)  
+ - [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)  
+ - [Buckling](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springBuckling)  
 
 &nbsp;
 ___
@@ -250,7 +250,7 @@ ___
 For additional information: 
  - [Materials](/docs/Help/SpringDesign/materials.html) 
  - [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
- - [Compression spring end types](c_spring.html#c_springEndTypes) 
+ - [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
 &nbsp; 
 
 ___
@@ -302,7 +302,7 @@ a sleeve or post.
 In order to restrain the search to select designs that do not have a tendency to buckle, 
 set the value of Slenderness MAX to a value of 4.0 or less. 
 
-For additional information, see: [Buckling](c_spring.html#c_springBuckling) 
+For additional information, see: [Buckling](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springBuckling) 
 
 #### %\_Avail\_Deflect 
 %\_Avail\_Deflect is the percentage of available deflection consumed at load point 2. 

@@ -10,18 +10,18 @@ provides important supplemental information.
 ___
 
 ### On this page: 
- - [Extension spring force-deflection diagram](e_spring.html#e_springFD_Diag)  
- - [Extension spring force-deflection point names](e_spring.html#e_springFD_Names)  
- - [Extension spring dimensions](e_spring.html#e_springDims)  
- - [Independent Variable names](e_spring.html#e_springIV_Names)  
- - [Dependent Variable names](e_spring.html#e_springDV_Names)  
- - [Calculation Input names](e_spring.html#e_springCalcInputNames)  
- - [Values in reports](e_spring.html#e_springOtherValues)  
- - [Constraints unique to extension springs](e_spring.html#e_springConstraints)  
- - [Initial tension range](e_spring.html#e_springIT_Range)  
- - [Hook Stress](e_spring.html#e_springHookStress)  
- - [Extension spring cycle life](e_spring.html#e_springCycleLife)  
- - [Extension spring end types](e_spring.html#e_springEndTypes)  
+ - [Extension spring force-deflection diagram](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springFD_Diag)  
+ - [Extension spring force-deflection point names](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springFD_Names)  
+ - [Extension spring dimensions](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springDims)  
+ - [Independent Variable names](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springIV_Names)  
+ - [Dependent Variable names](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springDV_Names)  
+ - [Calculation Input names](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springCalcInputNames)  
+ - [Values in reports](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springOtherValues)  
+ - [Constraints unique to extension springs](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springConstraints)  
+ - [Initial tension range](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springIT_Range)  
+ - [Hook Stress](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springHookStress)  
+ - [Extension spring cycle life](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springCycleLife)  
+ - [Extension spring end types](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springEndTypes)  
 
 &nbsp; 
 ___
@@ -280,7 +280,7 @@ ___
 For additional information: 
  - [Materials](/docs/Help/SpringDesign/materials.html)   
  - [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
- - [Extension spring end types](e_spring.html#e_springEndTypes)   
+ - [Extension spring end types](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springEndTypes)   
 &nbsp; 
 
 ___

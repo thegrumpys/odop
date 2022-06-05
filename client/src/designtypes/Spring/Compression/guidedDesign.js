@@ -93,7 +93,7 @@ export const execute = {
                     <tbody>
                         <tr>
                             <td width="60%" valign="top">
-                            <Image fluid src="/docs/Help/DesignTypes/img/SpringDesignWorkflowDiagram1.png" alt="Spring Design Workflow Diagram"/>
+                            <Image fluid src="/docs/Help/DesignTypes/Spring/img/SpringDesignWorkflowDiagram1.png" alt="Spring Design Workflow Diagram"/>
                             </td>
                             <td width="40%" valign="top">
                                 <p>
@@ -103,7 +103,7 @@ export const execute = {
                         </tr>
                         <tr>
                             <td width="60%" valign="top">
-                            <Image fluid src="/docs/Help/DesignTypes/img/SpringDesignWorkflowDiagram2.png" alt="Spring Design Workflow Diagram"/>
+                            <Image fluid src="/docs/Help/DesignTypes/Spring/img/SpringDesignWorkflowDiagram2.png" alt="Spring Design Workflow Diagram"/>
                             </td>
                             <td width="40%" valign="top">
                                 <p>
@@ -126,7 +126,7 @@ export const execute = {
                         </tr>
                         <tr>
                             <td width="60%" valign="top">
-                            <Image fluid src="/docs/Help/DesignTypes/img/SpringDesignWorkflowDiagram3.png" alt="Spring Design Workflow Diagram"/>
+                            <Image fluid src="/docs/Help/DesignTypes/Spring/img/SpringDesignWorkflowDiagram3.png" alt="Spring Design Workflow Diagram"/>
                             </td>
                             <td width="40%" valign="top">
                                 <p>
@@ -139,7 +139,7 @@ export const execute = {
                         </tr>
                         <tr>
                             <td width="60%" valign="top">
-                            <Image fluid src="/docs/Help/DesignTypes/img/SpringDesignWorkflowDiagram4.png" alt="Spring Design Workflow Diagram"/>
+                            <Image fluid src="/docs/Help/DesignTypes/Spring/img/SpringDesignWorkflowDiagram4.png" alt="Spring Design Workflow Diagram"/>
                             </td>
                             <td width="40%" valign="top">
                                 <p>

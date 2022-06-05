@@ -16,7 +16,7 @@ export const execute = {
                     
                     <p>
                     A detailed description of  
-                    <a href="/docs/Help/DesignTypes/e_spring.html" target="_blank" rel="noopener noreferrer"> extension spring names </a>
+                    <a href="/docs/Help/DesignTypes/Spring/Extension/description.html" target="_blank" rel="noopener noreferrer"> extension spring names </a>
                     is provided in the On-line Help.  
                     </p>
                     

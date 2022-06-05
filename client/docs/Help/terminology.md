@@ -40,8 +40,8 @@ Within the context of the ODOP software, the terms "mathematical model",
 Each design type has a mathematical model at its core. 
 
 For examples, see:   
-* [Piston-Cylinder](/docs/Help/DesignTypes/img/PCylDiagram.png) 
-* [Rectangular Solid](/docs/Help/DesignTypes/img/RectangularSolidDiagram.png).   
+* [Piston-Cylinder](/docs/Help/DesignTypes/Piston-Cylinder/img/PCylDiagram.png) 
+* [Rectangular Solid](/docs/Help/DesignTypes/Solid/img/RectangularSolidDiagram.png).   
 
 See also: 
  - [Design Types](terminology.html#designTypes)   
@@ -168,7 +168,7 @@ as choices to be selected as constraints are configured in the design type's
 initialState. 
 
 More specific information is available in the On-line Help section covering 
-[extension spring constraints](DesignTypes/e_spring.html#e_springConstraints). 
+[extension spring constraints](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springConstraints). 
 
 ___
 
@@ -321,11 +321,11 @@ The ODOP software allows for multiple design types and thus multiple sets of
 design equations (mathematical models of a specific design problem) 
 to be concurrently available. 
 Currently implemented Design Types include: 
-* [Compression Spring](/docs/Help/DesignTypes/c_spring.html)   
-* [Extension Spring](/docs/Help/DesignTypes/e_spring.html)   
-* [Torsion Spring](/docs/Help/DesignTypes/t_spring.html)   
-* [Rectangular Solid](/docs/Help/DesignTypes/r_solid.html)   
-* [Piston-Cylinder](/docs/Help/DesignTypes/pcyl.html)   
+* [Compression Spring](/docs/Help/DesignTypes/Spring/Compression/description.html)   
+* [Extension Spring](/docs/Help/DesignTypes/Spring/Extension/description.html)   
+* [Torsion Spring](/docs/Help/DesignTypes/Spring/Torsion/description.html)   
+* [Rectangular Solid](/docs/Help/DesignTypes/Solid/description.html)   
+* [Piston-Cylinder](/docs/Help/DesignTypes/Piston-Cylinder/description.html)   
 
 The simplest way to use a different design type and equation set is to select a 
 design type that uses the desired equation set at the time that the ODOP 
@@ -448,9 +448,9 @@ ___
 
 See also: 
  - [Terms common to all spring types](SpringDesign/spring_oview.html) 
- - [Compression spring](/docs/Help/DesignTypes/c_spring.html) 
- - [Extension spring](/docs/Help/DesignTypes/e_spring.html) 
- - [Torsion spring](/docs/Help/DesignTypes/t_spring.html) 
+ - [Compression spring](/docs/Help/DesignTypes/Spring/Compression/description.html) 
+ - [Extension spring](/docs/Help/DesignTypes/Spring/Extension/description.html) 
+ - [Torsion spring](/docs/Help/DesignTypes/Spring/Torsion/description.html) 
 
 ___
 
@@ -464,9 +464,9 @@ This term is described in detail in the spring design overview section:
 
 See also: 
  - [Terms common to all spring types](SpringDesign/spring_oview.html) 
- - [Compression spring](/docs/Help/DesignTypes/c_spring.html) 
- - [Extension spring](/docs/Help/DesignTypes/e_spring.html) 
- - [Torsion spring](/docs/Help/DesignTypes/t_spring.html) 
+ - [Compression spring](/docs/Help/DesignTypes/Spring/Compression/description.html) 
+ - [Extension spring](/docs/Help/DesignTypes/Spring/Extension/description.html) 
+ - [Torsion spring](/docs/Help/DesignTypes/Spring/Torsion/description.html) 
 
 ___
 

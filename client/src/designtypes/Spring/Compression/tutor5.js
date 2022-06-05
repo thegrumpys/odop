@@ -54,7 +54,7 @@ export const execute = {
                     The on-line documentation sections (Help entries) titled 
                     &nbsp;<a href="/docs/Help/SpringDesign" target="_blank" rel="noopener noreferrer">Spring Design</a>&nbsp; 
                     and 
-                    &nbsp;<a href="/docs/Help/DesignTypes/c_spring.html" target="_blank" rel="noopener noreferrer">Compression Spring</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">Compression Spring</a>&nbsp; 
                     provide a more detailed definition for each of the Calculation Inputs.  
                     It would make the tutorial too long (and boring !) to review each quantity here.
                     However, it is important to make sure that you understand that
@@ -242,7 +242,7 @@ export const execute = {
                     Note the "Tapered, Closed & Ground" and "Pig-tail" end types that
                     are common in hot-wound springs.
                     Refer to the discussion in the on-line documentation (Help entry) on 
-                    &nbsp;<a href="/docs/Help/DesignTypes/c_spring.html#c_springEndTypes" target="_blank" rel="noopener noreferrer">Compression Spring End Types</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes" target="_blank" rel="noopener noreferrer">Compression Spring End Types</a>&nbsp; 
                     for information on Add_Coils@Solid and the 
                     calculation of solid height for these end types.
                     </p>

@@ -141,10 +141,10 @@ export const execute = {
                     supported spring 
                     &nbsp;<a href="/docs/Help/DesignTypes" target="_blank" rel="noopener noreferrer">types</a>&nbsp; 
                     (
-                    <a href="/docs/Help/DesignTypes/c_spring.html" target="_blank" rel="noopener noreferrer">compression,</a>&nbsp; 
-                    <a href="/docs/Help/DesignTypes/e_spring.html" target="_blank" rel="noopener noreferrer">extension</a>&nbsp;
+                    <a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">compression,</a>&nbsp; 
+                    <a href="/docs/Help/DesignTypes/Spring/Extension/description.html" target="_blank" rel="noopener noreferrer">extension</a>&nbsp;
                     &  
-                    &nbsp;<a href="/docs/Help/DesignTypes/t_spring.html" target="_blank" rel="noopener noreferrer">torsion</a> 
+                    &nbsp;<a href="/docs/Help/DesignTypes/Spring/Torsion/description.html" target="_blank" rel="noopener noreferrer">torsion</a> 
                     ) and units (U.S., metric). 
                     These system-provided designs can be a starting point for new custom designs. 
                     Sign up for a free  

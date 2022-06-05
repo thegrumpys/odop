@@ -9,9 +9,9 @@ For specifics, see:
 * [Spring Materials](/docs/Help/SpringDesign/materials.html)   
 * [Select Size and Select Catalog](/docs/Help/SpringDesign/selectSizeCatalog.html)
 * [Spring Design References](/docs/Help/SpringDesign/references.html)   
-* [Compression Spring](/docs/Help/DesignTypes/c_spring.html)   
-* [Extension Spring](/docs/Help/DesignTypes/e_spring.html)   
-* [Torsion Spring](/docs/Help/DesignTypes/t_spring.html)   
+* [Compression Spring](/docs/Help/DesignTypes/Spring/Compression/description.html)   
+* [Extension Spring](/docs/Help/DesignTypes/Spring/Extension/description.html)   
+* [Torsion Spring](/docs/Help/DesignTypes/Spring/Torsion/description.html)   
 
 ___
 
@@ -332,9 +332,9 @@ ___
  The search feature will attempt to resolve the conflict.
 
 For specifics on names associated with each spring type, see:   
-* [Compression Spring](/docs/Help/DesignTypes/c_spring.html)   
-* [Extension Spring](/docs/Help/DesignTypes/e_spring.html)   
-* [Torsion Spring](/docs/Help/DesignTypes/t_spring.html)   
+* [Compression Spring](/docs/Help/DesignTypes/Spring/Compression/description.html)   
+* [Extension Spring](/docs/Help/DesignTypes/Spring/Extension/description.html)   
+* [Torsion Spring](/docs/Help/DesignTypes/Spring/Torsion/description.html)   
 
 ___
 
@@ -487,9 +487,9 @@ Other variables are impacted indirectly.
 
 More detail on how to handle end types is provided in the 
 documentation sections on the specific spring types:   
-* [Compression Spring](/docs/Help/DesignTypes/c_spring.html)   
-* [Extension Spring](/docs/Help/DesignTypes/e_spring.html)   
-* [Torsion Spring](/docs/Help/DesignTypes/t_spring.html)   
+* [Compression Spring](/docs/Help/DesignTypes/Spring/Compression/description.html)   
+* [Extension Spring](/docs/Help/DesignTypes/Spring/Extension/description.html)   
+* [Torsion Spring](/docs/Help/DesignTypes/Spring/Torsion/description.html)   
 
 Additional information on spring end types is available in the resources 
 listed in [Spring Design References](/docs/Help/SpringDesign/references.html). 

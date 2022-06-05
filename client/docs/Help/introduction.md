@@ -58,7 +58,7 @@ For each design type, a default starting point named "Startup" should always be 
 
 As of this writing, five [Design Types](/docs/Help/DesignTypes/index.html) 
 are included with the ODOP software.
-The [Rectangular Solid](/docs/Help/DesignTypes/r_solid.html) design type is a small demonstration problem 
+The [Rectangular Solid](/docs/Help/DesignTypes/Solid/description.html) design type is a small demonstration problem 
 based on a mathematical model of a rectangular solid (cube, box)
 and is intended to act as an easy to understand showcase of ODOP program capabilities. 
 It is a design situation that most people will be familiar and comfortable with.
