@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
 
@@ -63,7 +63,7 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MIN',
                 message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
-                severity: 'Viol',
+                severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Inconsistency)'
             });
             addAlert({
@@ -115,7 +115,11 @@ export var commonChecks = function(store) {
         }
     }
     if (total === 0) {
-        addAlert({ message: 'SYSTEM: No free independent variables', severity: 'Info'});
+            addAlert({
+                message: 'SYSTEM: No free independent variables', 
+                severity: 'Info',
+                help_url: '[Help](/docs/Help/alerts.html#NoFreeIV)'
+             });
     }
 }
 

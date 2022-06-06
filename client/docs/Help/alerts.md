@@ -5,7 +5,8 @@ Error (Err) alerts are triggered if a value is outside its valid range.
 Warning (Warn) alerts are triggered if the relationship between two values is incorrect or invalid. 
 Violation (Viol) alerts are triggered if constraints are violated. 
 Informational alerts (Info) alerts provide insights about various aspects of system operation,
-including the configuration of Functionally Determined Constraint Levels [(FDCL)](/docs/Help/terminology.html#fdcl). 
+including the configuration of Functionally Determined Constraint Levels 
+[(FDCL)](/docs/Help/terminology.html#fdcl). 
 
 The alert presentation is sorted by severity; Err at the top, then Warn, Viol and finally, Info. 
 Each severity level has its own color: Err is red,  Warn is orange, Viol is green, and Info is black. 
@@ -20,9 +21,18 @@ will not encounter numeric difficulty when starting from a physically unrealisti
 alerts of error (Err) severity will generaly block operation of the Search, Seek and Trade features. 
 It will be necessary to identify the source of errors and manually provide more appropriate values 
 in order to proceed with the Search, Seek and Trade features. 
-Many of the specific entries below attempt to provide specific guidance in moving to more realistic values. 
+Many of the specific entries below attempt to provide specific guidance in moving to more realistic values 
+thus resolving the alerts. 
 
 ### On this page:   
+ - [Invalid - Value less than limit](alerts.html#Validity_Below)  
+ - [Invalid - Value greater than limit](alerts.html#Validity_Above)  
+ - [Constraint inconsistency](alerts.html#Constraint_Inconsistency)  
+ - [Constraint MIN violation](alerts.html#MIN_Violation)  
+ - [Constraint MAX violation](alerts.html#MAX_Violation)  
+ - [No Free Independent Variables](alerts.html#NoFreeIV)  
+
+### On design type specific alert pages:   
  - [L_Free < L_Solid](alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](alerts.html#L_2_LT_L_Solid)  
  - [Coils_A is less than 1](alerts.html#Coils_A_LT_1)  
@@ -35,6 +45,109 @@ Many of the specific entries below attempt to provide specific guidance in movin
  - [Spring Index manufacturability concern](alerts.html#SI_manufacturability)  
  - [Force_2 < Force_1](alerts.html#F1_GE_F2)  
  - [Padding - delete before release](alerts.html#padding)  
+
+___
+
+<a id="Validity_Below"></a>  
+___
+
+## Invalid - Value less than or equal to limit 
+The value of the associated variable is less than the validmin limit defined in the design type's initialState file. 
+This condition blocks the Search, Seek and Trade features from starting. 
+
+Specific advice on how to resolve this condition is not available. 
+Look for zero or negative values. 
+Undoing or reducing the size of recent changes may be helpful. 
+
+___
+
+<a id="Validity_Above"></a>  
+___
+
+## Invalid - Value greater than limit 
+The value of the associated variable is greater than the validmax limit defined in the design type's initialState file. 
+This condition blocks the Search, Seek and Trade features from starting. 
+
+Specific advice on how to resolve this condition is not available. 
+Undoing or reducing the size of recent changes may be helpful. 
+
+___
+
+<a id="Constraint_Inconsistency"></a>  
+___
+
+## Constraint_Inconsistency 
+Constraints on the associated variable are inconsistent. 
+Specifically, the value of the MAX constraint is less than the MIN constraint; 
+the value of the MIN constraint is greater than the MIN constraint. 
+
+This situation will block the Search, Seek and Trade features.
+
+To resolve the situation, change one or both of the associated variable's constraint values. 
+Increase the MAX value and / or decrease the MIN value until there is no overlap. 
+
+___
+
+<a id="MIN_Violation"></a>  
+___
+
+## Constraint MIN violation 
+The associated variable's MIN constraint is violated. 
+
+In order to resolve this alert: 
+ - Use the Search feature (see next paragraph)  
+ - Allow smaller values of the associated variable by decreasing the MIN constraint value.  
+ - Disable the constraint  
+
+It is quite possible that the constraint violation in question was created by use of the Search feature. 
+In that case, further use of Search without introducing other changes is unlikely to be helpful. 
+The most productive course of action may be to relax other seemingly unrelated violated constraints and rerun Search. 
+The constraint(s) with the largest violations are the most leveraged and should be examined first. 
+
+See also: 
+ - [Feasibility](/docs/Help/feasibility.html)
+ - [Design situations](/docs/Help/designSituations.html)  
+ 
+___
+
+<a id="MAX_Violation"></a>  
+___
+
+## Constraint MAX violation 
+The associated variable's MAX constraint is violated. 
+
+In order to resolve this alert: 
+ - Use the Search feature (see next paragraph).  
+ - Allow larger values of the associated variable by increasing the MAX constraint value.  
+ - Disable the constraint.  
+
+It is quite possible that the constraint violation in question was created by use of the Search feature. 
+In that case, further use of Search without introducing other changes is unlikely to be helpful. 
+The most productive course of action may be to relax other violated constraints and rerun Search. 
+The constraint(s) with the largest violations are the most leveraged and should be examined first. 
+
+See also: 
+ - [Feasibility](/docs/Help/feasibility.html)
+ - [Design situations](/docs/Help/designSituations.html)  
+
+___
+
+<a id="NoFreeIV"></a>  
+___
+
+## No Free Independent Variables 
+If all Independent Variables are in Fixed status, 
+there is nothing left for Search to manipulate in order to achieve a feasible design. 
+This condition will block use of the Search, Seek and Trade features. 
+
+It is possible that operation of the [AutoFix](/docs/Help/terminology.html#autoFix) feature 
+has contributed to the situation. 
+
+In order to resolve this situation, put one or more Independent Variables in Free status.
+
+See also:  
+ - [Terminology - AutoFix](/docs/Help/terminology.html#autoFix)  
+ - [Setting Values](/docs/Help/settingValues.html)
 
 ___
 
