@@ -83,7 +83,7 @@ class AlertsModal extends Component {
                         <FeasibilityIndicator />
                         <Button type="button" className="close ml-0" onClick={this.onClose}>
                             <span aria-hidden="true">×</span>
-                            <span class="sr-only">Close</span>
+                            <span className="sr-only">Close</span>
                         </Button>
                     </Modal.Header>
                     <Modal.Body>

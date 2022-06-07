@@ -73,7 +73,7 @@ export var commonChecks = function(store) {
                 severity: 'Notice',
                 duplicate: true
             });
-        } else if (element.lmin & CONSTRAINED && element.vmin > 0.0 && this.props.objective_value > this.props.system_controls.objmin) {
+        } else if (element.lmin & CONSTRAINED && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
@@ -81,7 +81,7 @@ export var commonChecks = function(store) {
                 severity: 'Notice',
                 help_url: '[Help](/docs/Help/alerts.html#MIN_Violation)'
             });
-        } else if (element.lmax & CONSTRAINED && element.vmax > 0.0 && this.props.objective_value > this.props.system_controls.objmin) {
+        } else if (element.lmax & CONSTRAINED && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
             addAlert({
                 element: element,
                 name: element.name+' MAX',
@@ -203,7 +203,6 @@ export var addAlert = function(alert) {
 class Alerts extends Component {
     constructor(props) {
         super(props);
-        commonChecks = commonChecks.bind(this); // Bind external function - no 'this'
         getColorNumberByNameAndSeverity = getColorNumberByNameAndSeverity.bind(this); // Bind external function - no 'this'
         getAlertsByName = getAlertsByName.bind(this); // Bind external function - no 'this'
         getAlertsBySeverity = getAlertsBySeverity.bind(this); // Bind external function - no 'this'
