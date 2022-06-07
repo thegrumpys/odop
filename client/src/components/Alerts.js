@@ -36,27 +36,27 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MIN',
                 message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
-                severity: 'Viol'
+                severity: 'Notice'
             });
             addAlert({
                 element: element,
                 name: element.name+' MAX',
                 message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
-                severity: 'Viol'
+                severity: 'Notice'
             });
         } else if (!element.input && (element.lmin & FIXED && element.vmin > 0.0)) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
                 message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(),
-                severity: 'Viol'
+                severity: 'Notice'
             });
         } else if (!element.input && (element.lmax & FIXED && element.vmax > 0.0)) {
             addAlert({
                 element: element,
                 name: element.name+' MAX',
                 message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(),
-                severity: 'Viol'
+                severity: 'Notice'
             });
         } else if ((element.lmin & CONSTRAINED && element.vmin > 0.0) && (element.lmax & CONSTRAINED && element.vmax > 0.0)) {
             addAlert({
@@ -70,23 +70,23 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MAX',
                 message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
-                severity: 'Viol',
+                severity: 'Notice',
                 duplicate: true
             });
-        } else if (element.lmin & CONSTRAINED && element.vmin > 0.0) {
+        } else if (element.lmin & CONSTRAINED && element.vmin > 0.0 && this.props.objective_value > this.props.system_controls.objmin) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
                 message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(),
-                severity: 'Viol',
+                severity: 'Notice',
                 help_url: '[Help](/docs/Help/alerts.html#MIN_Violation)'
             });
-        } else if (element.lmax & CONSTRAINED && element.vmax > 0.0) {
+        } else if (element.lmax & CONSTRAINED && element.vmax > 0.0 && this.props.objective_value > this.props.system_controls.objmin) {
             addAlert({
                 element: element,
                 name: element.name+' MAX',
                 message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(),
-                severity: 'Viol',
+                severity: 'Notice',
                 help_url: '[Help](/docs/Help/alerts.html#MAX_Violation)'
             });
         }
@@ -203,6 +203,7 @@ export var addAlert = function(alert) {
 class Alerts extends Component {
     constructor(props) {
         super(props);
+        commonChecks = commonChecks.bind(this); // Bind external function - no 'this'
         getColorNumberByNameAndSeverity = getColorNumberByNameAndSeverity.bind(this); // Bind external function - no 'this'
         getAlertsByName = getAlertsByName.bind(this); // Bind external function - no 'this'
         getAlertsBySeverity = getAlertsBySeverity.bind(this); // Bind external function - no 'this'

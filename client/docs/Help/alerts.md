@@ -3,13 +3,13 @@
 ALERTS are error, warning and informational messages that are produced as you change the values of your design. 
 Error (Err) alerts are triggered if a value is outside its valid range. 
 Warning (Warn) alerts are triggered if the relationship between two values is incorrect or invalid. 
-Violation (Viol) alerts are triggered if constraints are violated. 
+Notice (Notice) alerts are triggered if constraints are significantly violated. 
 Informational alerts (Info) alerts provide insights about various aspects of system operation,
 including the configuration of Functionally Determined Constraint Levels 
 [(FDCL)](/docs/Help/terminology.html#fdcl). 
 
-The alert presentation is sorted by severity; Err at the top, then Warn, Viol and finally, Info. 
-Each severity level has its own color: Err is red,  Warn is orange, Viol is green, and Info is black. 
+The alert presentation is sorted by severity; Err at the top, then Warn, Notice and finally, Info. 
+Each severity level has its own color: Err is red,  Warn is orange, Notice is green, and Info is black. 
 
 The Value field allows in-place adjustment of the associated variable's value and constraint levels. 
 This field operates the same as the corresponding fields on the main pages (Advanced and Calculator Views). 

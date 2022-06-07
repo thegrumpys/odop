@@ -104,8 +104,8 @@ class AlertsModal extends Component {
                                         value outside valid range<br/>
                                         <b>Warning (Warn):</b><br/>
                                         relationship between two values is incorrect or invalid<br/>
-                                        <b>Violation (Viol):</b><br/>
-                                        violated constraints<br/>
+                                        <b>Notice (Notice):</b><br/>
+                                        significantly violated constraints<br/>
                                         <b>Information (Info):</b><br/>
                                         insights about aspects of system operation
                                         </Tooltip>}>
@@ -188,7 +188,7 @@ class AlertsModal extends Component {
                                         </tr>
                                     );
                                 })}
-                                {getAlertsBySeverity('Viol').map((entry, index) => {
+                                {getAlertsBySeverity('Notice').map((entry, index) => {
 //                                    console.log('In AlertsModal.render entry=',entry,'line=',line);
                                     var match;
                                     if (entry.help_url !== undefined) {
