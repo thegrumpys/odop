@@ -52,7 +52,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Material",
-            "value": 6,
+            "value": 7,
             "units": "",
             "format": "table",
             "table": "Solid/materials",

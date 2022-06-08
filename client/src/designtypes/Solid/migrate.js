@@ -132,6 +132,12 @@ export function migrate(design) {
             }
         });
 //        design.symbol_table[ 3].validmin = 1; // Coils_T
+        if (design.symbol_table[ 3].value > 5) { // Material table expansion
+            ++design.symbol_table[ 3].value;
+        };
+        if (design.symbol_table[ 3].value > 7) { // Material table expansion
+            ++design.symbol_table[ 3].value;
+        };
         migrated_design.version = '9'; // last thing... set the migrated model version
     case '9':
         // Current model version

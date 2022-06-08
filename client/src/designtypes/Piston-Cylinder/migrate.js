@@ -109,7 +109,9 @@ export function migrate(design) {
                 element.validmax = Number.MAX_VALUE;
             }
         });
-//        design.symbol_table[ 3].validmin = 1; // Coils_T
+        design.symbol_table[ 0].validmin = -Number.MAX_VALUE; // PRESSURE
+        design.symbol_table[ 3].validmin = -Number.MAX_VALUE; // FORCE
+        design.symbol_table[ 5].validmin = -Number.MAX_VALUE; // STRESS
         migrated_design.version = '7'; // last thing... set the migrated model version
     case '7':
         // Current model version
