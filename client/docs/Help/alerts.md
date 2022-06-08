@@ -30,6 +30,7 @@ thus resolving the alerts.
  - [Constraint inconsistency](alerts.html#Constraint_Inconsistency)  
  - [Constraint MIN violation](alerts.html#MIN_Violation)  
  - [Constraint MAX violation](alerts.html#MAX_Violation)  
+ - [Fix violation](alerts.html#Fix_Violation)  
  - [No Free Independent Variables](alerts.html#NoFreeIV)  
 
 ### On design type specific alert pages:   
@@ -92,7 +93,7 @@ ___
 ___
 
 ## Constraint MIN violation 
-The associated variable's MIN constraint is violated. 
+The associated variable's MIN constraint is violated by more than a trivial amount. 
 
 In order to resolve this alert: 
  - Use the Search feature (see next paragraph)  
@@ -105,6 +106,7 @@ The most productive course of action may be to relax other seemingly unrelated v
 The constraint(s) with the largest violations are the most leveraged and should be examined first. 
 
 See also: 
+ - [Constraints](/docs/Help/terminology.html#constraints)
  - [Feasibility](/docs/Help/feasibility.html)
  - [Design situations](/docs/Help/designSituations.html)  
  
@@ -114,7 +116,7 @@ ___
 ___
 
 ## Constraint MAX violation 
-The associated variable's MAX constraint is violated. 
+The associated variable's MAX constraint is violated by more than a trivial amount. 
 
 In order to resolve this alert: 
  - Use the Search feature (see next paragraph).  
@@ -127,6 +129,31 @@ The most productive course of action may be to relax other violated constraints 
 The constraint(s) with the largest violations are the most leveraged and should be examined first. 
 
 See also: 
+ - [Constraints](/docs/Help/terminology.html#constraints)
+ - [Feasibility](/docs/Help/feasibility.html)
+ - [Design situations](/docs/Help/designSituations.html)  
+
+___
+
+<a id="Fix_Violation"></a>  
+___
+
+## Fix Violation 
+The associated Dependent Variable is in Fixed status. 
+Its value differs from the target value established by the Fix by more than a trivial amount.   
+
+In order to resolve this alert: 
+ - Use the Search feature (see next paragraph).  
+ - Change the Fix target value to something more consistent with what can be achieved within the remaining constraints and Fixes.  
+ - Disable the Fix.  
+
+It is possible that the Fix violation in question was created by use of the Search feature. 
+In that case, further use of Search without introducing other changes is unlikely to be helpful. 
+The most productive course of action may be to relax unrelated violated constraints and Fixes and then rerun Search. 
+The constraint(s) with the largest violations are the most leveraged and should be examined first. 
+
+See also: 
+ - [Fix & Free](/docs/Help/terminology.html#fix)
  - [Feasibility](/docs/Help/feasibility.html)
  - [Design situations](/docs/Help/designSituations.html)  
 
@@ -143,7 +170,10 @@ This condition will block use of the Search, Seek and Trade features.
 It is possible that operation of the [AutoFix](/docs/Help/terminology.html#autoFix) feature 
 has contributed to the situation. 
 
-In order to resolve this situation, put one or more Independent Variables in Free status.
+In order to resolve this situation, put one or more Independent Variables in Free status. 
+Specifically, uncheck the checkbox that is positioned between the associated variable's 
+value and its units label. 
+When in Calculator View, first click the variable in order to open its value change dialog box. 
 
 See also:  
  - [Terminology - AutoFix](/docs/Help/terminology.html#autoFix)  

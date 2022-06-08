@@ -44,19 +44,21 @@ export var commonChecks = function(store) {
                 message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
                 severity: 'Notice'
             });
-        } else if (!element.input && (element.lmin & FIXED && element.vmin > 0.0)) {
+        } else if (!element.input && (element.lmin & FIXED && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
                 message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(),
-                severity: 'Notice'
+                severity: 'Notice',
+                help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)'
             });
-        } else if (!element.input && (element.lmax & FIXED && element.vmax > 0.0)) {
+        } else if (!element.input && (element.lmax & FIXED && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
             addAlert({
                 element: element,
                 name: element.name+' MAX',
                 message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(),
-                severity: 'Notice'
+                severity: 'Notice',
+                help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)'
             });
         } else if ((element.lmin & CONSTRAINED && element.vmin > 0.0) && (element.lmax & CONSTRAINED && element.vmax > 0.0)) {
             addAlert({
