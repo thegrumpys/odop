@@ -27,7 +27,7 @@ in order to proceed with Search, Seek and Trade.
 Where possible, the linked detailed entries (below) provide specific guidance in moving to values 
 that will resolve the alerts. 
 
-### On this page (Design type independent alerts):   
+### On this page (design type independent alerts):   
  - [Invalid - Value less than limit](alerts.html#Validity_Below)  
  - [Invalid - Value greater than limit](alerts.html#Validity_Above)  
  - [Constraint inconsistency](alerts.html#Constraint_Inconsistency)  
@@ -36,7 +36,7 @@ that will resolve the alerts.
  - [Fix violation](alerts.html#Fix_Violation)  
  - [No Free Independent Variables](alerts.html#NoFreeIV)  
 
-### On design type specific alert pages:   
+### On other pages (design type specific alerts):   
  - [L_Free < L_Solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_2_LT_L_Solid)  
  - [Coils_A is less than 1](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)  
@@ -44,11 +44,13 @@ that will resolve the alerts.
  - [Wire diameter is greater than reasonable](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_GT_reasonable)  
  - [Value of Tensile is suspect](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)  
  - [FS_CycleLife MIN not set](/docs/Help/DesignTypes/Spring/alerts.html#FS_CycleLife_MIN_not_set)  
+ - [FS_Solid < 1.0](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)  
  - [Over-design concern](/docs/Help/DesignTypes/Spring/alerts.html#OverDesign)  
  - [Spring Index manufacturability concern](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)  
  - [Force_2 < Force_1](/docs/Help/DesignTypes/Spring/Compression/alerts.html#F1_GE_F2)  
  - [%_Avail_Deflect @ 2 > 80%](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect2_GT_80)  
  - [%_Avail_Deflect @ 1 < 20%](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect1_LT_20)  
+ - [Buckling concern](/docs/Help/DesignTypes/Spring/Compression/alerts.html#buckling)  
 
 ___
 

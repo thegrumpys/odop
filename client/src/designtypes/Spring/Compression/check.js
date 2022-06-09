@@ -133,8 +133,18 @@ export function check(store) {        /*    Compression  Spring  */
             duplicate: true
         });
     }
+    if (design.model.symbol_table[o.FS_Solid].value < 1.0) {
+        addAlert({
+            element: design.model.symbol_table[o.FS_Solid], 
+            name: design.model.symbol_table[o.FS_Solid].name, 
+            message: design.model.symbol_table[o.FS_Solid].name + ' (' + design.model.symbol_table[o.FS_Solid].value.toODOPPrecision() + ') < 1.0',
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)'
+        });
+    }
     if (design.model.symbol_table[o.PC_Avail_Deflect].value > 80.0) {
         addAlert({
+            element: design.model.symbol_table[o.PC_Avail_Deflect], 
             name: design.model.symbol_table[o.PC_Avail_Deflect].name, 
             message: '%_Avail_Deflect @ 2 (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') > 80',
             severity: 'Info',
@@ -144,6 +154,7 @@ export function check(store) {        /*    Compression  Spring  */
     var PC_Avail_Deflect1 = 100.0 * design.model.symbol_table[o.Deflect_1].value / (design.model.symbol_table[o.L_Free].value - design.model.symbol_table[o.L_Solid].value); 
     if (PC_Avail_Deflect1 < 20.0) {
         addAlert({
+            element: design.model.symbol_table[o.PC_Avail_Deflect], 
             name: design.model.symbol_table[o.PC_Avail_Deflect].name, 
             message: '%_Avail_Deflect  @ 1 (' + PC_Avail_Deflect1.toODOPPrecision() + ') < 20',
             severity: 'Info',
@@ -159,6 +170,7 @@ export function check(store) {        /*    Compression  Spring  */
                        "  and a Slenderness ratio of " + design.model.symbol_table[o.Slenderness].value.toFixed(1) + ", " +
                        "this spring tends to buckle.";
             addAlert({
+                element: design.model.symbol_table[o.Slenderness], 
                 name: design.model.symbol_table[o.Slenderness].name, 
                 message: buckleMsg,
                 severity: 'Info',
@@ -171,6 +183,7 @@ export function check(store) {        /*    Compression  Spring  */
         if (deflectRatio > 1.6 / sq1) {
             buckleMsg = "Given fixed/fixed ends, this spring will also tend to buckle.";
             addAlert({
+                element: design.model.symbol_table[o.Slenderness], 
                 name: design.model.symbol_table[o.Slenderness].name, 
                 message: buckleMsg,
                 severity: 'Info',

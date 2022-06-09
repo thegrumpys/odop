@@ -6,6 +6,7 @@ Alerts specific to compression springs.
  - [L_Free < L_Solid](alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](alerts.html#L_2_LT_L_Solid)  
  - [Force_2 < Force_1](alerts.html#F1_GE_F2)  
+ - [FS_Solid < 1.0](alerts.html#FS_Solid_LT_1)  
  - [%_Avail_Deflect @ 2 > 80%](alerts.html#PC_Avail_Deflect2_GT_80)  
  - [%_Avail_Deflect @ 1 < 20%](alerts.html#PC_Avail_Deflect1_LT_20)  
  - [Buckling concern](alerts.html#buckling)  
@@ -44,7 +45,7 @@ In order to assure that
 ODOP : Spring's Search feature will not encounter numeric difficulty when starting from such a physically unrealistic situation, 
 where practical, change these values in the direction specified. 
 Increase | &nbsp; | Decrease  
---- | --- | ---  
+---     | ---    | ---  
  L_Free | &nbsp; | Coils_T  
  &nbsp; | &nbsp; | Coil_Dia  
  &nbsp; | &nbsp; | Force_2
@@ -55,6 +56,27 @@ The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflec
 See also: 
  - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
  - [Errors](errors.html)   
+
+___
+
+<a id="FS_Solid_LT_1"></a>  
+___
+
+##  FS_Solid < 1.0 
+This spring may be over-stressed if deflected to solid.
+It may 'set' as in not return to its original free length.
+
+In order to resolve this alert, 
+where practical, change these values in the direction specified. 
+Increase  | &nbsp; | Decrease  
+---       | ---    | ---  
+ Coils_T  | &nbsp; | L_Free  
+ Coil_Dia | &nbsp; | &nbsp;  
+
+In order to design a spring that is not over-stressed when deflected to the solid condition, 
+enable the FS_Solid MAX constraint, 
+set that MAX constraint to a value slightly above 1.0 
+and run the Search feature. 
 
 ___
 
