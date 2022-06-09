@@ -133,7 +133,12 @@ The spring end conditions influence buckling tendency.
 Freedom to rotate on one or both ends will increase the tendency to buckle.
 Fixed ends reduce the tendency to buckle.
 
-Increase OD_Free or reduce L_Free in order to reduce the tendency to buckle.
+Increase OD_Free or reduce L_Free in order to reduce the tendency to buckle. 
+
+In order to design a spring that does not have a tendency to buckle, 
+enable the Slenderness MAX constraint, 
+set that MAX constraint to a value close to 4.0 
+and run the Search feature. 
 
 ___
 
