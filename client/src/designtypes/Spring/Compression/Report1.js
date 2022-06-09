@@ -16,9 +16,10 @@ class Report1 extends ReportBase {
                 <br />
                 {this.hits > 0 ?
                     <><b>Alerts:</b><ul>
-                        { getAlertsBySeverity('Err' ).map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
-                        { getAlertsBySeverity('Warn').map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
-                        { getAlertsBySeverity('Info').map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Err'   ).map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Warn'  ).map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Notice').map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Info'  ).map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
                     </ul></>
                 : '' }
                 <b>
