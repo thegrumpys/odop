@@ -166,7 +166,7 @@ export function check(store) {        /*    Compression  Spring  */
             });
         }
     }
-    var sq1 = 2.0 * design.model.symbol_table[o.Slenderness].value - 8.0;
+    sq1 = 2.0 * design.model.symbol_table[o.Slenderness].value - 8.0;
     if (sq1 > design.model.system_controls.smallnum) {  /* structured to avoid div by 0 */
         if (deflectRatio > 1.6 / sq1) {
             buckleMsg = "Given fixed/fixed ends, this spring will also tend to buckle.";
