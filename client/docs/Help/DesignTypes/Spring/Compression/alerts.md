@@ -59,6 +59,21 @@ See also:
 
 ___
 
+<a id="F1_GE_F2"></a>  
+___
+
+## Force_1 >= Force_2 
+The value of Force_1 is greater than or equal to the value of Force_2. 
+
+Compression spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Force_Solid). 
+The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 
+
+See also: 
+ - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
+ - [Errors](errors.html)   
+
+___
+
 <a id="FS_Solid_LT_1"></a>  
 ___
 
@@ -123,21 +138,6 @@ than the linear behavior predicted by the equations.
  See also: 
   - [Restrictions](/docs/About/Legal/Restrictions.html)  
   - [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law)  
-
-___
-
-<a id="F1_GE_F2"></a>  
-___
-
-## Force_1 >= Force_2 
-The value of Force_1 is greater than or equal to the value of Force_2. 
-
-Compression spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Force_Solid). 
-The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 
-
-See also: 
- - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
- - [Errors](errors.html)   
 
 ___
 

@@ -3,13 +3,24 @@
 Alerts common to all round-wire coil springs 
 
 ### On this page:   
+ - [Coils_A is less than 1](alerts.html#Coils_A_LT_1)  
  - [Wire diameter is less than reasonable](alerts.html#Wire_Dia_LT_reasonable)  
  - [Wire diameter is greater than reasonable](alerts.html#Wire_Dia_GT_reasonable)  
  - [FS_CycleLife MIN not set](alerts.html#FS_CycleLife_MIN_not_set)  
  - [Over-design concern](alerts.html#OverDesign)  
  - [Spring Index manufacturability concern](alerts.html#SI_manufacturability)  
- - [Coils_A is less than 1](alerts.html#Coils_A_LT_1)  
  - [Value of Tensile is suspect](alerts.html#TensileValueSuspect)  
+
+___
+
+<a id="Coils_A_LT_1"></a>  
+___
+
+## Coils_A is less than 1 
+A warning alert is produced whenever the current design has fewer than one active coil.  
+
+This is not an error that will block operations like Search, Seek and Trade. 
+As less than one coil may not be the intent, the warning is intended to bring the situation to the designer's attention. 
 
 ___
 
@@ -98,17 +109,6 @@ Spring index less than 4 is considered "difficult to manufacture".
 Spring index greater than 25 is considered "difficult to control".  
 
 Check with the spring manufacturer regarding capabilities and costs. 
-
-___
-
-<a id="Coils_A_LT_1"></a>  
-___
-
-## Coils_A is less than 1 
-A warning alert is produced whenever the current design has fewer than one active coil.  
-
-This is not an error that will block operations like Search, Seek and Trade. 
-As less than one coil may not be the intent, the warning is intended to bring the situation to the designer's attention. 
 
 ___
 

@@ -22,6 +22,75 @@ export function check(store) {        /*    Compression  Spring  */
     clearAlerts();
     commonChecks(store);
     var design = store.getState();
+
+// Alerts common to all round-wire coil springs 
+
+    if (design.model.symbol_table[o.Coils_A].value < 1.0) {
+        addAlert({
+            element: design.model.symbol_table[o.Coils_A],
+            name: design.model.symbol_table[o.Coils_A].name, 
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Coils_A].name + ' (' + design.model.symbol_table[o.Coils_A].value.toODOPPrecision() + ') < 1.0',
+            severity: 'Warn', 
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)'
+        });
+    }
+    if (design.model.symbol_table[o.Wire_Dia].value < 0.5 * design.model.symbol_table[o.tbase010].value) {
+        addAlert({
+            element: design.model.symbol_table[o.Wire_Dia],
+            name: design.model.symbol_table[o.Wire_Dia].name, 
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') < reasonable',
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_LT_reasonable)'
+        });
+    }
+    if (design.model.symbol_table[o.Wire_Dia].value > 5.0 * design.model.symbol_table[o.tbase400].value) {
+        addAlert({
+            element: design.model.symbol_table[o.Wire_Dia],
+            name: design.model.symbol_table[o.Wire_Dia].name, 
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') > reasonable',
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_GT_reasonable)'
+        });
+    }
+    if (design.model.symbol_table[o.Life_Category].value > 1 && !design.model.symbol_table[o.FS_CycleLife].lmin & CONSTRAINED) {
+        addAlert({
+            element: design.model.symbol_table[o.FS_CycleLife], 
+            name: design.model.symbol_table[o.FS_CycleLife].name, 
+            message: design.model.symbol_table[o.FS_CycleLife].name + ' MIN is not set.', 
+            severity: 'Warn', 
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#FS_CycleLife_MIN_not_set)'
+        });
+    }
+    if (design.model.symbol_table[o.FS_2].lmax & CONSTRAINED && design.model.symbol_table[o.FS_2].value > design.model.symbol_table[o.FS_2].cmax) {
+        addAlert({
+            element: design.model.symbol_table[o.FS_2], 
+            name: design.model.symbol_table[o.FS_2].name, 
+            message: 'Over-design concern', 
+            severity: 'Warn', 
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OverDesign)' 
+        });
+    }
+    if (design.model.symbol_table[o.Spring_Index].value < 4.0 || design.model.symbol_table[o.Spring_Index].value > 25.0) {
+        addAlert({
+            element: design.model.symbol_table[o.Spring_Index], 
+            name: design.model.symbol_table[o.Spring_Index].name, 
+            message: 'Manufacturability concern', 
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)' 
+        });
+    }
+    if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
+        addAlert({
+            element: design.model.symbol_table[o.Tensile],
+            name: design.model.symbol_table[o.Tensile].name, 
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + design.model.symbol_table[o.Tensile].value.toODOPPrecision() + ') <= ' + design.model.system_controls.smallnum.toODOPPrecision(),
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)'
+        });
+    }
+
+// Alerts specific to compression springs. 
+
     if (design.model.symbol_table[o.L_Free].value < design.model.symbol_table[o.L_Solid].value) {
         addAlert({
             element: design.model.symbol_table[o.L_Free],
@@ -52,69 +121,6 @@ export function check(store) {        /*    Compression  Spring  */
             message: check_message(design,o.L_Solid,'>=',o.L_2),
             severity: 'Warn',
             duplicate: true
-        });
-    }
-    if (design.model.symbol_table[o.Coils_A].value < 1.0) {
-        addAlert({
-            element: design.model.symbol_table[o.Coils_A],
-            name: design.model.symbol_table[o.Coils_A].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Coils_A].name + ' (' + design.model.symbol_table[o.Coils_A].value.toODOPPrecision() + ') < 1.0',
-            severity: 'Warn', 
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)'
-        });
-    }
-    if (design.model.symbol_table[o.Wire_Dia].value < 0.5 * design.model.symbol_table[o.tbase010].value) {
-        addAlert({
-            element: design.model.symbol_table[o.Wire_Dia],
-            name: design.model.symbol_table[o.Wire_Dia].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') < reasonable',
-            severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_LT_reasonable)'
-        });
-    }
-    if (design.model.symbol_table[o.Wire_Dia].value > 5.0 * design.model.symbol_table[o.tbase400].value) {
-        addAlert({
-            element: design.model.symbol_table[o.Wire_Dia],
-            name: design.model.symbol_table[o.Wire_Dia].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') > reasonable',
-            severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_GT_reasonable)'
-        });
-    }
-    if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
-        addAlert({
-            element: design.model.symbol_table[o.Tensile],
-            name: design.model.symbol_table[o.Tensile].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + design.model.symbol_table[o.Tensile].value.toODOPPrecision() + ') <= ' + design.model.system_controls.smallnum.toODOPPrecision(),
-            severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)'
-        });
-    }
-    if (design.model.symbol_table[o.Life_Category].value > 1 && !design.model.symbol_table[o.FS_CycleLife].lmin & CONSTRAINED) {
-        addAlert({
-            element: design.model.symbol_table[o.FS_CycleLife], 
-            name: design.model.symbol_table[o.FS_CycleLife].name, 
-            message: design.model.symbol_table[o.FS_CycleLife].name + ' MIN is not set.', 
-            severity: 'Warn', 
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#FS_CycleLife_MIN_not_set)'
-        });
-    }
-    if (design.model.symbol_table[o.FS_2].lmax & CONSTRAINED && design.model.symbol_table[o.FS_2].value > design.model.symbol_table[o.FS_2].cmax) {
-        addAlert({
-            element: design.model.symbol_table[o.FS_2], 
-            name: design.model.symbol_table[o.FS_2].name, 
-            message: 'Over-design concern', 
-            severity: 'Warn', 
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OverDesign)' 
-        });
-    }
-    if (design.model.symbol_table[o.Spring_Index].value < 4.0 || design.model.symbol_table[o.Spring_Index].value > 25.0) {
-        addAlert({
-            element: design.model.symbol_table[o.Spring_Index], 
-            name: design.model.symbol_table[o.Spring_Index].name, 
-            message: 'Manufacturability concern', 
-            severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)' 
         });
     }
     if (design.model.symbol_table[o.Force_1].value >= design.model.symbol_table[o.Force_2].value) {
@@ -181,7 +187,7 @@ export function check(store) {        /*    Compression  Spring  */
     sq1 = 2.0 * design.model.symbol_table[o.Slenderness].value - 8.0;
     if (sq1 > design.model.system_controls.smallnum) {  /* structured to avoid div by 0 */
         if (deflectRatio > 1.6 / sq1) {
-            buckleMsg = "Given fixed/fixed ends, this spring will also tend to buckle.";
+            buckleMsg = "Given fixed/fixed ends, this spring also tends to buckle.";
             addAlert({
                 element: design.model.symbol_table[o.Slenderness], 
                 name: design.model.symbol_table[o.Slenderness].name, 
