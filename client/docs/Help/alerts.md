@@ -35,6 +35,7 @@ that will resolve the alerts.
  - [Constraint MAX violation](alerts.html#MAX_Violation)  
  - [Fix violation](alerts.html#Fix_Violation)  
  - [No Free Independent Variables](alerts.html#NoFreeIV)  
+ - [Functionally Determined Constraint Level (FDCL) is configured](alerts.html#FDCL)  
 
 ### On other pages (design type specific alerts):   
  - [L_Free < L_Solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_Free_LT_L_Solid)  
@@ -183,6 +184,18 @@ When in Calculator View, first click the variable in order to open its value cha
 See also:  
  - [Terminology - AutoFix](/docs/Help/terminology.html#autoFix)  
  - [Setting Values](/docs/Help/settingValues.html)
+
+___
+
+<a id="FDCL"></a>  
+___
+
+## Functionally Determined Constraint Level (FDCL) is configured 
+A functionally Determined Constraint Level (FDCL) is configured for this variable. 
+
+See Also:  
+ - [Terminology - Function Constraints](/docs/Help/terminology.html#fdcl)  
+ - [Constraints unique to extension springs](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springConstraints)  
 
 ___
 

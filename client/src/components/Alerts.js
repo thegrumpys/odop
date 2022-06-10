@@ -99,7 +99,8 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MIN',
                 message: element.lmin & FDCL ? 'FDCL =' + element.cminchoices[element.cminchoice] : '=' + element.cmin + ' (non-FDCL)',
-                severity: 'Info'
+                severity: 'Info',
+                help_url: '[Help](/docs/Help/alerts.html#FDCL)'
             });
         }
         if ((element.lmax & FIXED) === 0 && element.cmaxchoices !== undefined && element.cmaxchoices.length > 0) {
@@ -107,7 +108,8 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MAX',
                 message: element.lmax & FDCL ? 'FDCL =' + element.cmaxchoices[element.cmaxchoice] : '=' + element.cmax + ' (non-FDCL)',
-                severity: 'Info'
+                severity: 'Info',
+                help_url: '[Help](/docs/Help/alerts.html#FDCL)'
             });
         }
 
