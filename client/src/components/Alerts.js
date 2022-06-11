@@ -154,7 +154,7 @@ export var getColorNumberByNameAndSeverity = function(name, severity) {
 export var getAlertsByName = function(name, includeViolations = false) {
 //    console.log('In Alerts.getAlertsByName this=',this,'name=',name);
     var alerts = [];
-    var color_classes = ["text-strictly-feasible ", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
+    var color_classes = ["", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
     var max_color = 0;
     this.state.alerts.forEach((entry) => {
         var color = 0;
