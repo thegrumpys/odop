@@ -37,7 +37,6 @@ class SymbolValue extends Component {
     constructor(props) {
 //        console.log('In SymbolValue.constructor props=',props);
         super(props);
-        this.onSelect = this.onSelect.bind(this);
         this.onContextMenu = this.onContextMenu.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);
         this.onClose = this.onClose.bind(this);
@@ -99,21 +98,6 @@ class SymbolValue extends Component {
                 });
             }
         }
-    }
-
-    onSelect(event) {
-//        console.log('In SymbolValue.onSelect event.target.value=',event.target.value);
-        var selectedIndex = parseFloat(event.target.value);
-        this.props.changeSymbolValue(this.props.element.name,selectedIndex); // Update the model
-        logValue(this.props.element.name,selectedIndex,'TableSelect');
-        this.state.table[selectedIndex].forEach((value, index) => {
-//                console.log('In SymbolValue.onSelect value=',value,'index=',index);
-            if (index > 0) { // Skip the first column
-                var name = this.state.table[0][index];
-//                    console.log('In SymbolValue.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table);
-                this.props.changeSymbolValue(name,value); // Update the model
-            }
-        });
     }
 
     onContextMenu(e) {
