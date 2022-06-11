@@ -61,10 +61,12 @@ class ViewSymbolTable extends Component {
                                         <th>validmin</th>
                                         <th>cmin</th>
                                         <th>smin</th>
+                                        <th>vmin</th>
                                         <th>lmax</th>
                                         <th>validmax</th>
                                         <th>cmax</th>
                                         <th>smax</th>
+                                        <th>vmax</th>
                                         <th>oldlmin</th>
                                         <th>oldcmin</th>
                                         <th>oldlmax</th>
@@ -96,10 +98,12 @@ class ViewSymbolTable extends Component {
                                                 <td>{String(element.validmin)}</td>
                                                 <td>{String(element.cmin)}</td>
                                                 <td>{String(element.smin)}</td>
+                                                <td>{String(element.vmin)}</td>
                                                 <td>{flags[element.lmax]}</td>
                                                 <td>{String(element.validmax)}</td>
                                                 <td>{String(element.cmax)}</td>
                                                 <td>{String(element.smax)}</td>
+                                                <td>{String(element.vmax)}</td>
                                                 <td>{element.oldlmin}</td>
                                                 <td>{element.oldcmin}</td>
                                                 <td>{element.oldlmax}</td>

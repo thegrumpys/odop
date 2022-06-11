@@ -58,7 +58,7 @@ export const initialState = {
             "lmax": 0,
             "cmin": 0,
             "cmax": 40,
-            "validmin": 1.0,
+            "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
             "tooltip": "Total number of coils",
