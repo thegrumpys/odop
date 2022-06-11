@@ -13,9 +13,9 @@ Number.prototype.toODOPPrecision = function() {
     return odopValue;
 };
 
-//function check_message(design, left, op, right) {
-//  return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
-//}
+function check_message(design, left, op, right) {
+  return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
+}
 
 export function check(store) {        /*    Compression  Spring  */
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
@@ -91,6 +91,54 @@ export function check(store) {        /*    Compression  Spring  */
 
 // Alerts specific to extension springs. 
 
+    if (design.model.symbol_table[o.Force_1].value < design.model.symbol_table[o.Initial_Tension].value) {
+        addAlert({
+            element: design.model.symbol_table[o.Force_1],
+            name: design.model.symbol_table[o.Force_1].name, 
+            message: check_message(design,o.Force_1,'<',o.Initial_Tension),
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#F1_LT_IT)'
+        });
+        addAlert({
+            element: design.model.symbol_table[o.Initial_Tension],
+            name: design.model.symbol_table[o.Initial_Tension].name, 
+            message: check_message(design,o.Initial_Tension,'>=',o.Force_1),
+            severity: 'Warn',
+            duplicate: true
+        });
+    }
+    if (design.model.symbol_table[o.Stress_Initial].value < design.model.symbol_table[o.Stress_Init_Lo].value) {
+        addAlert({
+            element: design.model.symbol_table[o.Stress_Initial],
+            name: design.model.symbol_table[o.Stress_Initial].name, 
+            message: check_message(design,o.Stress_Initial,'<',o.Stress_Init_Lo),
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#SInit_LT_SInit_Lo)'
+        });
+        addAlert({
+            element: design.model.symbol_table[o.Stress_Init_Lo],
+            name: design.model.symbol_table[o.Stress_Init_Lo].name, 
+            message: check_message(design,o.Stress_Init_Lo,'>=',o.Stress_Initial),
+            severity: 'Warn',
+            duplicate: true
+        });
+    }
+    if (design.model.symbol_table[o.Stress_Initial].value > design.model.symbol_table[o.Stress_Init_Hi].value) {
+        addAlert({
+            element: design.model.symbol_table[o.Stress_Initial],
+            name: design.model.symbol_table[o.Stress_Initial].name, 
+            message: check_message(design,o.Stress_Initial,'>',o.Stress_Init_Hi),
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#SInit_GT_SInit_Hi)'
+        });
+        addAlert({
+            element: design.model.symbol_table[o.Stress_Init_Hi],
+            name: design.model.symbol_table[o.Stress_Init_Hi].name, 
+            message: check_message(design,o.Stress_Init_Hi,'<=',o.Stress_Initial),
+            severity: 'Warn',
+            duplicate: true
+        });
+    }
 
 //    console.log('</ul><li>','End check','</li>');
 
