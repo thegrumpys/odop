@@ -4,6 +4,7 @@ import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { getAlertsBySeverity } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
+import Value from './Value';
 import FeasibilityIndicator from './FeasibilityIndicator';
 
 class AlertsModal extends Component {
@@ -159,8 +160,10 @@ class AlertsModal extends Component {
                                             <td className="text-not-feasible">{entry.severity}</td>
                                             <td className="text-not-feasible">{entry.message}</td>
                                             <td>{entry.name}</td>
-                                            {entry.element !== undefined && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element === undefined && <td></td>}
+                                            {entry.element !== undefined && entry.value !== undefined && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.value === undefined && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
+                                            {entry.element === undefined && entry.value === undefined && <td></td>}
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
@@ -178,8 +181,10 @@ class AlertsModal extends Component {
                                             <td className="text-close-to-feasible">{entry.severity}</td>
                                             <td className="text-close-to-feasible">{entry.message}</td>
                                             <td>{entry.name}</td>
-                                            {entry.element !== undefined && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element === undefined && <td></td>}
+                                            {entry.element !== undefined && entry.value !== undefined && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.value === undefined && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
+                                            {entry.element === undefined && entry.value === undefined && <td></td>}
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
@@ -197,8 +202,10 @@ class AlertsModal extends Component {
                                             <td className="text-feasible">{entry.severity}</td>
                                             <td className="text-feasible">{entry.message}</td>
                                             <td>{entry.name}</td>
-                                            {entry.element !== undefined && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element === undefined && <td></td>}
+                                            {entry.element !== undefined && entry.value !== undefined && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.value === undefined && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
+                                            {entry.element === undefined && entry.value === undefined && <td></td>}
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
@@ -216,8 +223,10 @@ class AlertsModal extends Component {
                                             <td className="text-strictly-feasible">{entry.severity}</td>
                                             <td className="text-strictly-feasible">{entry.message}</td>
                                             <td>{entry.name}</td>
-                                            {entry.element !== undefined && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element === undefined && <td></td>}
+                                            {entry.element !== undefined && entry.value !== undefined && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element !== undefined && entry.value === undefined && !entry.element.hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                            {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
+                                            {entry.element === undefined && entry.value === undefined && <td></td>}
                                             <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
                                         </tr>
                                     );
