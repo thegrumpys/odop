@@ -298,10 +298,11 @@ export function migrate(design) {
         design.symbol_table[66].validmin = -Number.MAX_VALUE; // const_term
         design.symbol_table[67].validmin = -Number.MAX_VALUE; // slope_term
         design.symbol_table[68].validmin = -Number.MAX_VALUE; // tensile_010
-        migrated_design.version = '8'; // last thing... set the migrated model version
         displayMessage(
             "The Alert Facility (new in v4.3) may highlight previously unrecognized issues saved with earlier designs. See Help Alerts and/or contact technical support for details.  ...  ",
             'info');
+        design.symbol_table[35].hidden = true; // Inactive_Coils
+        migrated_design.version = '8'; // last thing... set the migrated model version
     case '8':
         // Current model version
         // console.log('Convert from 8 to 9');

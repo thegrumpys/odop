@@ -233,8 +233,6 @@ export function init(store, p, x) {
      store.dispatch(changeSymbolInput("Stress_Lim_Bend", true));
  }
 
- store.dispatch(changeSymbolHidden("Inactive_Coils", true)); // Always hide Inactive_Coils (pseudo-migration)
-
  if (et_tab[j][eto.end_type] === "User_Specified") {
      store.dispatch(changeSymbolInput("Hook_Deflect_All", true));
      store.dispatch(changeSymbolInput("End_ID", true));

@@ -31,25 +31,42 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     ix = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
-        if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
-            if (element.type === "equationset" && element.input) {
-                pp = p[ip++];
+        if (element.type === "equationset" && element.input) {
+//            console.log('element=',element,'ip=',ip,'p=',p[ip]);
+            pp = p[ip++];
+            if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
                 vmin = pp <= element.validmin ? 1.0 : 0.0;
                 vmax = pp >= element.validmax ? 1.0 : 0.0;
+            } else {
+                vmin = 0;
+                vmax = 0;
             }
-            if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
-                xx = x[ix++];
+        }
+        if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
+//            console.log('element=',element,'ix=',ix,'x=',x[ix]);
+            xx = x[ix++];
+            if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
                 vmin = xx <= element.validmin ? 1.0 : 0.0;
                 vmax = xx >= element.validmax ? 1.0 : 0.0;
+            } else {
+                vmin = 0;
+                vmax = 0;
             }
-            if (vmin > 0.0) {
-                viol_sum = viol_sum + vmin * vmin;
-            }
-            if (vmax > 0.0) {
-                viol_sum = viol_sum + vmax * vmax;
-            }
-//            console.log('In pxUpdateObjectiveValue element=',element,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum);
         }
+        if (vmin > 0.0) {
+            viol_sum = viol_sum + vmin * vmin;
+        }
+        if (vmax > 0.0) {
+            viol_sum = viol_sum + vmax * vmax;
+        }
+//        // Debugging output
+//        if (vmin > 0.0 || vmax > 0.0) {
+//            if (element.type === "equationset" && element.input) {
+//                console.log('In pxUpdateObjectiveValue element=',element,'ip=',ip,'pp=',pp,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum,'x[42]=',x[42]);
+//            } else {
+//                console.log('In pxUpdateObjectiveValue element=',element,'ix=',ix,'xx=',xx,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum,'x[42]=',x[42]);
+//            }
+//        }
     }
     
     // Update Objective Value
@@ -134,7 +151,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
         obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
     }
 
-//    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
+    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
 
     return obj;
 }

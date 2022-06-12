@@ -38,7 +38,10 @@ export function updateObjectiveValue(store, merit) {
             if (vmax > 0.0) {
                 viol_sum = viol_sum + vmax * vmax;
             }
-//            console.log('element=',element,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum);
+//            // Debugging output
+//            if (vmin > 0.0 || vmax > 0.0) {
+//                console.log('In updateObjectiveValue element=',element,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum);
+//            }
         }
     }
     
@@ -139,5 +142,5 @@ export function updateObjectiveValue(store, merit) {
         store.dispatch(changeResultObjectiveValue(obj));
     }
     
-//    console.log('</ul><li>','End updateObjectiveValue obj=',obj,'</li>');
+    console.log('</ul><li>','End updateObjectiveValue obj=',obj,'</li>');
 }
