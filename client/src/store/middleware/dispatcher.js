@@ -28,7 +28,6 @@ import { invokeInit } from './invokeInit';
 import { invokeEquationSet } from './invokeEquationSet';
 import { propagate } from './propagate';
 import { updateObjectiveValue } from './updateObjectiveValue';
-import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
          restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actionCreators';
 
@@ -90,7 +89,6 @@ export const dispatcher = store => next => action => {
                 return false;
             }
         });
-        resetCatalogSelection(store, action);
         invokeEquationSet(store);
         propagate(store);
         updateObjectiveValue(store, action.payload.merit);

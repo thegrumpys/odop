@@ -1,9 +1,8 @@
 import { CONSTRAINED } from '../../store/actionTypes';
 export const initialState = {
-    "symbol_table": [
-        {
+    "symbol_table": {
+        "PRESSURE": {
             "input": true,
-            "name": "PRESSURE",
             "value": 500,
             "units": "LB/SQ-IN",
             "lmin": 0,
@@ -15,9 +14,8 @@ export const initialState = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        "RADIUS": {
             "input": true,
-            "name": "RADIUS",
             "value": 0.4,
             "units": "INCH",
             "lmin": CONSTRAINED,
@@ -29,9 +27,8 @@ export const initialState = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        "THICKNESS": {
             "input": true,
-            "name": "THICKNESS",
             "value": 0.04,
             "units": "INCH",
             "lmin": CONSTRAINED,
@@ -43,9 +40,8 @@ export const initialState = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        "FORCE": {
             "input": false,
-            "name": "FORCE",
             "value": 0,
             "units": "LBS.",
             "lmin": CONSTRAINED,
@@ -57,9 +53,8 @@ export const initialState = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        "AREA": {
             "input": false,
-            "name": "AREA",
             "value": 0,
             "units": "SQ.-IN.",
             "lmin": 0,
@@ -71,9 +66,8 @@ export const initialState = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        "STRESS": {
             "input": false,
-            "name": "STRESS",
             "value": 0,
             "units": "PSI",
             "lmin": 0,
@@ -85,13 +79,12 @@ export const initialState = {
             "type": "equationset",
             "hidden": false
         }
-    ],
-    "labels": [
-        {
-            "name": "COMMENT",
+    },
+    "labels": {
+        "COMMENT": {
             "value": "PCYL Default startup file ..."
         }
-    ],
+    },
     "type": "Piston-Cylinder",
     "version": "6",
     "result": {

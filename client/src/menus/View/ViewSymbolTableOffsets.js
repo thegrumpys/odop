@@ -40,7 +40,7 @@ class ViewSymbolTableOffsets extends Component {
                     <Modal.Body>
                         <pre>
                         {'// Variables\n'}
-                        {this.props.symbol_table.map((element) => {return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n'})}
+                        {Object.entries(this.props.symbol_table).map((element) => {return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (ip++) + ';\n'})}
                         {'\n// Labels (Properties)\n'}
                         {this.props.labels.map((element) => {return 'export const ' + element.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_') + ' = ' + (il++) + ';\n'})}
                         </pre>
