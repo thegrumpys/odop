@@ -62,7 +62,7 @@ export const dispatcher = store => next => action => {
     case CHANGE_SYMBOL_VALUE:
 //        console.log('In dispatcher.CHANGE_SYMBOL_VALUE name=',action.payload.name,'value=',action.payload.value,'merit=',action.payload.merit);
         design = store.getState();
-        design.model.symbol_table.find((element) => {
+        Object.entries(design.model.symbol_table).find((element) => {
             if (element.name === action.payload.name) {
                 if (element.type === "calcinput") {
 //                    console.log("In dispatcher.CHANGE_SYMBOL_VALUE element=",element);
@@ -75,7 +75,7 @@ export const dispatcher = store => next => action => {
                             if (index > 0) { // Skip the first column
                                 var name = table[0][index];
 //                                console.log('In dispatcher.CHANGE_SYMBOL_VALUE value=',value,'index=',index,' name=',name);
-                                if (design.model.symbol_table.find(element2 => element2.name === name) !== undefined) {
+                                if (Object.entries(design.model.symbol_table).find(element2 => element2.name === name) !== undefined) {
 //                                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE name=',name,'value=',value);
                                     store.dispatch(changeSymbolValue(name,value));
                                 }
@@ -96,7 +96,7 @@ export const dispatcher = store => next => action => {
     case FIX_SYMBOL_VALUE:
 //        console.log('In dispatcher.FIX_SYMBOL_VALUE action=',action);
         design = store.getState();
-        design.model.symbol_table.find((element) => {
+        Object.entries(design.model.symbol_table).find((element) => {
             if (element.name === action.payload.name) {
                 if (element.lmin & FIXED) { // Is it already FIXED?
                     if (action.payload.value !== undefined) {
@@ -140,7 +140,7 @@ export const dispatcher = store => next => action => {
     case FREE_SYMBOL_VALUE:
 //        console.log('In dispatcher.FREE_SYMBOL_VALUE action=',action);
         design = store.getState();
-        design.model.symbol_table.find((element) => {
+        Object.entries(design.model.symbol_table).find((element) => {
             if (element.name === action.payload.name) {
                 if (element.lmin & FIXED) {
                     store.dispatch(restoreOutputSymbolConstraints(element.name));
@@ -163,10 +163,10 @@ export const dispatcher = store => next => action => {
     case SET_SYMBOL_FLAG:
 //        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action);
         design = store.getState();
-        sink = design.model.symbol_table.find(element => element.name === action.payload.name);
+        sink = Object.entries(design.model.symbol_table).find(element => element.name === action.payload.name);
 //        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate sink=',sink);
         if (action.payload.mask & FDCL) {
-            source = design.model.symbol_table.find(element => element.name === action.payload.source);
+            source = Object.entries(design.model.symbol_table).find(element => element.name === action.payload.source);
 //            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate source=',source);
             if (source.propagate === undefined) source.propagate = [];
             index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
@@ -186,13 +186,13 @@ export const dispatcher = store => next => action => {
     case RESET_SYMBOL_FLAG:
 //        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate action=',action);
         design = store.getState();
-        sink = design.model.symbol_table.find(element => element.name === action.payload.name);
+        sink = Object.entries(design.model.symbol_table).find(element => element.name === action.payload.name);
 //        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate sink=',sink);
         if (action.payload.mask & FDCL) {
             if (action.payload.minmax === MIN) {
-                source = design.model.symbol_table.find(element => element.name === sink.cminchoices[sink.cminchoice]);
+                source = Object.entries(design.model.symbol_table).find(element => element.name === sink.cminchoices[sink.cminchoice]);
             } else {
-                source = design.model.symbol_table.find(element => element.name === sink.cmaxchoices[sink.cmaxchoice]);
+                source = Object.entries(design.model.symbol_table).find(element => element.name === sink.cmaxchoices[sink.cmaxchoice]);
             }
 //            console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate source=',source);
             if (source !== undefined && source.propagate !== undefined) {

@@ -8,7 +8,7 @@ class NameValueUnitsHeaderCalcInput extends Component {
 //        console.log('In NameValueUnitsHeaderCalcInput.render this=',this);
         return (
             <>
-                { (this.props.symbol_table.reduce((accum,element)=>{if (element.type === "calcinput" && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
+                { (Object.entries(this.props.symbol_table).reduce((accum,element)=>{if (element.type === "calcinput" && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
                     (<thead>
                         <tr>
                             <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">

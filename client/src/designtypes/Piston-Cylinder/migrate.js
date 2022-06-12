@@ -63,7 +63,7 @@ export function migrate(design) {
         // console.log('Convert from 2 to 3');
         design.system_controls.show_units = 1; // Add show_units to system_controls
         design.system_controls.show_violations = 1; // Add show_violations to system_controls
-        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+        Object.entries(design.symbol_table).forEach((element) => { // For each Symbol Table entry
             if (element.type !== undefined && element.type === "table") {
                 element.format = "table";
                 delete element.type;
@@ -96,7 +96,7 @@ export function migrate(design) {
         // console.log('Convert from 5 to 6');
         // #589 Changes in initialState: remove ioclass; sdlimit mods to support #452
         // Remove ioclass from all Symbol Table entries
-        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+        Object.entries(design.symbol_table).forEach((element) => { // For each Symbol Table entry
                 delete element.ioclass;
         });
         migrated_design.version = '6'; // last thing... set the migrated model version

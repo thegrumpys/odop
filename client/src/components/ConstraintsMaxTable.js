@@ -14,9 +14,9 @@ class ConstraintsMaxTable extends Component {
             <>
                 <Table className="col-md-3 border border-secondary" size="sm">
                     <ConstraintsMaxHeaderIndependentVariable />
-                    {Object.entries(this.props.symbol_table).map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={index} />)}
+                    {Object.entries(Object.entries(this.props.symbol_table)).map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={index} />)}
                     <ConstraintsMaxHeaderDependentVariable />
-                    {Object.entries(this.props.symbol_table).map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={index} />)}
+                    {Object.entries(Object.entries(this.props.symbol_table)).map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={index} />)}
                 </Table>
             </>
         );

@@ -72,7 +72,7 @@ class ViewSymbolTable extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.entries(this.props.symbol_table).map((element,i) => {
+                                    {Object.entries(Object.entries(this.props.symbol_table)).map((element,i) => {
                                         return (
                                             <tr key={element.name}>
                                                 <td>{i}</td>

@@ -24,8 +24,8 @@ export function updateObjectiveValue(store, merit) {
     var design = store.getState(); // Re-access store to get latest element values
 //    console.log('In updateObjectiveValue design=',design);
 
-    for (let i = 0; i < design.model.symbol_table.length; i++) {
-        element = design.model.symbol_table[i];
+    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
+        element = Object.entries(design.model.symbol_table)[i];
         if (element.type === "equationset" && element.input) {
             vmin = 0.0;
             vmax = 0.0;
@@ -45,8 +45,8 @@ export function updateObjectiveValue(store, merit) {
             }
         }
     }
-    for (let i = 0; i < design.model.symbol_table.length; i++) {
-        element = design.model.symbol_table[i];
+    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
+        element = Object.entries(design.model.symbol_table)[i];
         if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
             vmin = 0.0;
             vmax = 0.0;
@@ -95,8 +95,8 @@ export function updateObjectiveValue(store, merit) {
         // Create p & x from symbol_table
         var p = [];
         var x = [];
-        for (let i = 0; i < design.model.symbol_table.length; i++) {
-            element = design.model.symbol_table[i];
+        for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
+            element = Object.entries(design.model.symbol_table)[i];
             if (element.type === "equationset" && element.input) {
                 p.push(element.value);
             } else {
@@ -115,8 +115,8 @@ export function updateObjectiveValue(store, merit) {
     // Update Violated Constraint Count, which becomes Feasibility on the UI
     design = store.getState(); // Re-access store to get latest vmin and vmax
     var violated_constraint_count = 0;
-    for (let i = 0; i < design.model.symbol_table.length; i++) {
-        element = design.model.symbol_table[i];
+    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
+        element = Object.entries(design.model.symbol_table)[i];
         if (element.lmin & CONSTRAINED)
             if (element.vmin > 0.0)
                 violated_constraint_count++;

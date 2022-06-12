@@ -113,7 +113,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if (element.name === action.payload.name) {
 //                        if (element.name === 'Force_2')
 //                            console.log('In reducers.CHANGE_SYMBOL_VALUE element=',element.name,' old value=',element.value,' new value=',action.payload.value);
@@ -129,7 +129,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if (element.name === action.payload.name) {
                         if (action.payload.minmax === MIN) {
                             return Object.assign({}, element, {
@@ -149,7 +149,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if (element.name === action.payload.name) {
                         if (action.payload.minmax === MIN) {
                             return Object.assign({}, element, {
@@ -172,7 +172,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     // Only do it from independent and dependent variables, but not for calculation inputs
                     if (element.type === "equationset") {
                         value = action.payload.values[i++];
@@ -202,7 +202,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if (element.name === action.payload.name) {
 //                        console.log('In reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS state=',state,'action=', action);
 //                        console.log('In reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS',
@@ -228,7 +228,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if (element.name === action.payload.name) {
 //                        console.log('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS state=',state,'action=', action);
 //                        console.log('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS',
@@ -265,7 +265,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if (element.name === action.payload.name) {
 //                        console.log('In reducers.SET_SYMBOL_FLAG state=',state,'action=', action);
                         if (action.payload.minmax === MIN) {
@@ -286,7 +286,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if (element.name === action.payload.name) {
 //                        console.log('In reducers.RESET_SYMBOL_FLAG state=',state,'action=', action);
                         if (action.payload.minmax === MIN) {
@@ -307,7 +307,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if (element.name === action.payload.name) {
     //                    console.log('In reducers.CHANGE_SYMBOL_INPUT element=',element.name,' old value=',element.input,' new value=',action.payload.value);
                         return Object.assign({}, element, {
@@ -323,7 +323,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if (element.name === action.payload.name) {
 //                        console.log('In reducers.CHANGE_SYMBOL_HIDDEN element=',element.name,' old value=',element.hidden,' new value=',action.payload.value);
                         return Object.assign({}, element, {
@@ -342,7 +342,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if (element.type === "equationset" && element.input) {
                         value = action.payload.values[i++]
                         if (value !== undefined) {
@@ -364,7 +364,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if (element.type === "equationset" && element.input) {
 //                        if (element.name === "Wire_Dia")
 //                            console.log('In reducers.SAVE_INPUT_SYMBOL_VALUES element=',element);
@@ -381,7 +381,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if (element.type === "equationset" && element.input) {
                         if (element.oldvalue !== undefined) {
 //                            if (element.name === "Wire_Dia")
@@ -410,7 +410,7 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: state.model.symbol_table.map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
                     if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
                         value = action.payload.values[i++]
                         if (value !== undefined) {

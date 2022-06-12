@@ -109,7 +109,7 @@ class SymbolValue extends Component {
 //                console.log('In SymbolValue.onSelect value=',value,'index=',index);
             if (index > 0) { // Skip the first column
                 var name = this.state.table[0][index];
-//                    console.log('In SymbolValue.onSelect name=',name,' this.props.symbol_table=',this.props.symbol_table);
+//                    console.log('In SymbolValue.onSelect name=',name,' Object.entries(this.props.symbol_table)=',Object.entries(this.props.symbol_table));
                 this.props.changeSymbolValue(name,value); // Update the model
             }
         });

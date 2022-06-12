@@ -6,10 +6,10 @@ export function propagate(store) {
 //    console.log('In propagate design=',design);
     var value;
     function nameMatch(entry) {
-      return design.model.symbol_table.find(sink => entry.name === sink.name)
+      return Object.entries(design.model.symbol_table).find(sink => entry.name === sink.name)
     }
-    for (let i = 0; i < design.model.symbol_table.length; i++) {
-        var source = design.model.symbol_table[i];
+    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
+        var source = Object.entries(design.model.symbol_table)[i];
 //        console.log('In propagate source=',source);
         value = source.value;
         if (source.propagate !== undefined) {

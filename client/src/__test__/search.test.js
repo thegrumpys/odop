@@ -45,18 +45,18 @@ it('search without merit', () => {
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.model.version).toEqual("6");
 
-    expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
-    expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(697.2108757363197);
-    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
-    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.5825642374486647);
-    expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(design.model.symbol_table[sto.THICKNESS].value).toEqual(0.05814850143495808);
-    expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE"); // x vector
-    expect(design.model.symbol_table[sto.FORCE].value).toEqual(743.3642427191874);
-    expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
-    expect(design.model.symbol_table[sto.AREA].value).toEqual(1.0661971414805103);
-    expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
-    expect(design.model.symbol_table[sto.STRESS].value).toEqual(3492.524417147412);
+    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
+    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(697.2108757363197);
+    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.5825642374486647);
+    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.05814850143495808);
+    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE"); // x vector
+    expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(743.3642427191874);
+    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(1.0661971414805103);
+    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+    expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(3492.524417147412);
 
     expect(design.model.system_controls.ioopt).toEqual(3);
     expect(design.model.system_controls.maxit).toEqual(100);
@@ -103,7 +103,7 @@ it('search with merit', () => {
 
     var SOUGHT = sto.STRESS + 1;
     var SDIR = -1; // MIN
-    var temp = design.model.symbol_table[sto.STRESS].value;
+    var temp = Object.entries(design.model.symbol_table)[sto.STRESS].value;
     var M_NUM = temp + 0.1 * SDIR * temp;
     var M_DEN = Math.abs(M_NUM) / design.model.system_controls.mfn_wt;
     if (M_DEN < design.model.system_controls.smallnum) {
@@ -119,8 +119,8 @@ it('search with merit', () => {
             var ip = 0;
             var ix = 0;
             var value;
-            for (let i = 0; i < design.model.symbol_table.length; i++) {
-                element = design.model.symbol_table[i];
+            for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
+                element = Object.entries(design.model.symbol_table)[i];
                 if (element.type === "equationset" && element.input) {
                     if (i === SOUGHT - 1) {
                         value = p[ip];
@@ -156,18 +156,18 @@ it('search with merit', () => {
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.model.version).toEqual("6");
 
-    expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
-    expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(1218.7216061774907);
-    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
-    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.5077056314821616);
-    expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(design.model.symbol_table[sto.THICKNESS].value).toEqual(0.05068299199335332);
-    expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE"); // x vector
-    expect(design.model.symbol_table[sto.FORCE].value).toEqual(986.9118066777166);
-    expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
-    expect(design.model.symbol_table[sto.AREA].value).toEqual(0.809792656235214);
-    expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
-    expect(design.model.symbol_table[sto.STRESS].value).toEqual(6104.136696847354);
+    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
+    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(1218.7216061774907);
+    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.5077056314821616);
+    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.05068299199335332);
+    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE"); // x vector
+    expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(986.9118066777166);
+    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0.809792656235214);
+    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+    expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(6104.136696847354);
 
     expect(design.model.system_controls.ioopt).toEqual(3);
     expect(design.model.system_controls.maxit).toEqual(100);

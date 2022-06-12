@@ -12,7 +12,7 @@ class NameValueUnitsCalcInputTable extends Component {
             <>
                 <Table className="col-md-6 border border-secondary" size="sm">
                     <NameValueUnitsHeaderCalcInput />
-                    {Object.entries(this.props.symbol_table).map((element,index) => element.type === "calcinput" && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
+                    {Object.entries(Object.entries(this.props.symbol_table)).map((element,index) => element.type === "calcinput" && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
                 </Table>
             </>
         );

@@ -12,7 +12,7 @@ export function setSclDen(store) {
     // Loop to create cmin and cmax arrays from symbol_table
     var cmin = [];
     var cmax = [];
-    design.model.symbol_table.forEach((element) => {
+    Object.entries(design.model.symbol_table).forEach((element) => {
         // Only do it from independent and dependent variables, but not for calculation inputs
         if (element.type === "equationset") {
             cmin.push(element.cmin);

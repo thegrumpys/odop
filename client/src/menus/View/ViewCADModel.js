@@ -25,14 +25,14 @@ class ViewCADModel extends Component {
     render() {
 //        console.log('In ViewCADModel.render this=',this);
 
-        var od_free = this.props.symbol_table[0];
+        var od_free = Object.entries(this.props.symbol_table)[0];
 //        console.log('In ViewCADModel.render OD_Free=',od_free);
-        var wire_dia = this.props.symbol_table[1];
+        var wire_dia = Object.entries(this.props.symbol_table)[1];
 //        console.log('In ViewCADModel.render Wire_Dia=',wire_dia);
-        var coils_t = this.props.symbol_table[2];
+        var coils_t = Object.entries(this.props.symbol_table)[2];
 //        console.log('In ViewCADModel.render Coils_T=',coils_t);
 
-//        var l_free = this.props.symbol_table[14];
+//        var l_free = Object.entries(this.props.symbol_table)[14];
 ////        console.log('In ViewCADModel.render L_Free=',l_free);
 //
 //        var l_free_value = l_free.value;

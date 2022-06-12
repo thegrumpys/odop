@@ -28,17 +28,17 @@ export function seek(store, action) {
     }
     if (design.model.system_controls.ioopt > 5) {
         console.log('01 SEEK:    OBJ =', design.model.result.objective_value);
-        if (design.model.result.objective_value > design.model.system_controls.objmin && design.model.symbol_table.reduce((total, element)=>{return ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) && element.lmin&FIXED ? total+1 : total+0}, 0) === 0) {
+        if (design.model.result.objective_value > design.model.system_controls.objmin && Object.entries(design.model.symbol_table).reduce((total, element)=>{return ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) && element.lmin&FIXED ? total+1 : total+0}, 0) === 0) {
             console.log('02 NOTE:  THE SEEK PROCESS MAY PRODUCE BETTER RESULTS WITH A FEASIBLE START POINT.');
         }
     }
     
     if (design.model.system_controls.ioopt > 5) {
-        console.log("02A THE NUMBER OF FIXED INDEPENDENT VARIABLES IS:", design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && element.lmin & FIXED ? total+1 : total+0}, 0));
-        console.log("02B THE NUMBER OF FREE INDEPENDENT VARIABLES IS:", design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0));
+        console.log("02A THE NUMBER OF FIXED INDEPENDENT VARIABLES IS:", Object.entries(design.model.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && element.lmin & FIXED ? total+1 : total+0}, 0));
+        console.log("02B THE NUMBER OF FREE INDEPENDENT VARIABLES IS:", Object.entries(design.model.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0));
     }
     var ncode;
-    if(design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+    if(Object.entries(design.model.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
         ncode = 'NO FREE INDEPENDENT VARIABLES';
         store.dispatch(changeResultTerminationCondition(ncode));
         return;
@@ -56,8 +56,8 @@ export function seek(store, action) {
     var element;
     var pc;
     var obj;
-    for (let i = 0; !found && i < design.model.symbol_table.length; i++) {
-        element = design.model.symbol_table[i];
+    for (let i = 0; !found && i < Object.entries(design.model.symbol_table).length; i++) {
+        element = Object.entries(design.model.symbol_table)[i];
         if (element.name.startsWith(action.payload.name)) {
             temp = element.value;
             dname = element.name;
@@ -67,7 +67,7 @@ export function seek(store, action) {
         }
     }
     M_NUM = temp + 0.1 * SDIR * temp;
-    var starting_value = design.model.symbol_table[SOUGHT - 1].value;
+    var starting_value = Object.entries(design.model.symbol_table)[SOUGHT - 1].value;
     if (design.model.system_controls.ioopt > 5) {
         console.log('03 THE CURRENT VALUE OF '+dname+' IS: '+starting_value+' '+input);
         console.log('04 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+input);
@@ -81,9 +81,9 @@ export function seek(store, action) {
 //    console.log('In seek SOUGHT=',SOUGHT,'SDIR=',SDIR,'temp=',temp,'M_NUM=',M_NUM,'M-DEN=',M_DEN);
     obj = search(store, -1.0, merit);
     design = store.getState(); // Re-access store to get latest element values
-    M_NUM = design.model.symbol_table[SOUGHT - 1].value;
+    M_NUM = Object.entries(design.model.symbol_table)[SOUGHT - 1].value;
     if (design.model.system_controls.ioopt > 5) {
-        temp = design.model.symbol_table[SOUGHT - 1].value;
+        temp = Object.entries(design.model.symbol_table)[SOUGHT - 1].value;
         console.log('06 THE CURRENT VALUE OF '+dname+' IS: '+temp+' '+input);
         console.log('07 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+input);
     }
@@ -92,8 +92,8 @@ export function seek(store, action) {
         M_DEN = 1.0;
     }
     pc = [];
-    for (let i = 0; i < design.model.symbol_table.length; i++) {
-        element = design.model.symbol_table[i];
+    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
+        element = Object.entries(design.model.symbol_table)[i];
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 pc.push(element.value);
@@ -111,7 +111,7 @@ export function seek(store, action) {
         obj = search(store, design.model.system_controls.objmin);
         design = store.getState(); // Re-access store to get latest element values
         if (design.model.system_controls.ioopt > 5) {
-            temp = design.model.symbol_table[SOUGHT - 1].value;
+            temp = Object.entries(design.model.symbol_table)[SOUGHT - 1].value;
             console.log('09 THE CURRENT VALUE OF '+dname+' IS: '+temp+' '+input);
             console.log('10 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+input);
         }
@@ -125,7 +125,7 @@ export function seek(store, action) {
     }
     obj = search(store, design.model.system_controls.objmin, merit);
     design = store.getState(); // Re-access store to get latest element values
-    var ending_value = design.model.symbol_table[SOUGHT - 1].value;
+    var ending_value = Object.entries(design.model.symbol_table)[SOUGHT - 1].value;
     if (design.model.system_controls.ioopt > 5) {
         console.log('12 RETURN ON: '+design.model.result.termination_condition+'     OBJ ='+design.model.result.objective_value);
         console.log('13 CURRENT VALUE OF '+dname+' IS '+ending_value+' '+input);
@@ -144,8 +144,8 @@ export function seek(store, action) {
         // Create p & x from symbol_table
         var p = [];
         var x = [];
-        for (let i = 0; i < design.model.symbol_table.length; i++) {
-            element = design.model.symbol_table[i];
+        for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
+            element = Object.entries(design.model.symbol_table)[i];
             if (element.type === "equationset" && element.input) {
                 p.push(element.value);
             } else {
@@ -163,8 +163,8 @@ export function seek(store, action) {
             var ip = 0;
             var ix = 0;
             var value;
-            for (let i = 0; i < design.model.symbol_table.length; i++) {
-                element = design.model.symbol_table[i];
+            for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
+                element = Object.entries(design.model.symbol_table)[i];
                 if (element.type === "equationset" && element.input) {
                     if (i === SOUGHT - 1) {
                         value = p[ip];

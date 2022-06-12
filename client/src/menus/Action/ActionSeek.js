@@ -25,16 +25,16 @@ class ActionSeek extends Component {
     onSeekRequest() {
 //       console.log('In ActionSeek.onSeekRequest this=',this);
         var warnMsg = '';
-        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+        if (Object.entries(this.props.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             warnMsg += 'No free independent variables; ';
         }
-        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
+        if (Object.entries(this.props.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
             warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
         }
         if (Number.isNaN(this.props.objective_value)) {
             warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
         }
-        this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
+        Object.entries(this.props.symbol_table).forEach((element) => { // For each Symbol Table entry
             if (element.type !== undefined && element.type !== "table" && element.lmin === CONSTRAINED && element.lmax === CONSTRAINED && element.cmin > element.cmax) {
                 warnMsg += (element.name + ' constraints are inconsistent; ');
             }
@@ -42,13 +42,13 @@ class ActionSeek extends Component {
         if (warnMsg !== '') {
             displayMessage(warnMsg,'warning');
         } else {
-            var result = this.props.symbol_table.find( // Find free variable matching the current variable name
+            var result = Object.entries(this.props.symbol_table).find( // Find free variable matching the current variable name
                 (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
             );
             if (result === undefined) { // Was matching free variable not found
                 // Set default name to the First free variable. There must be at least one
                 // This duplicates the UI render code algorithm - be careful and make them match!
-                result = this.props.symbol_table.find( // Find first free variable
+                result = Object.entries(this.props.symbol_table).find( // Find first free variable
                     (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
                 );
             }
@@ -136,7 +136,7 @@ class ActionSeek extends Component {
                                 <InputGroup.Text>Name: </InputGroup.Text>
                             </InputGroup.Prepend>
                             <Form.Control as="select" className="align-middle" onChange={this.onSeekNameSelect} value={this.state.seek_name}>
-                                {Object.entries(this.props.symbol_table).map((element, index) =>
+                                {Object.entries(Object.entries(this.props.symbol_table)).map((element, index) =>
                                     (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
                             </Form.Control>
