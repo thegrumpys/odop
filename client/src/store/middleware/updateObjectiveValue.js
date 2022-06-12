@@ -24,30 +24,19 @@ export function updateObjectiveValue(store, merit) {
     var design = store.getState(); // Re-access store to get latest element values
 //    console.log('In updateObjectiveValue design=',design);
 
-    viol_sum = 0.0;
+    // Determine if all numbers are valid (AKA no validtiy violations)
+    obj = 0.0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
         if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
-            vmin = element.value <= element.validmin ? 1.0 : 0.0;
-            store.dispatch(changeSymbolViolation(element.name, MIN, vmin));
-            vmax = element.value >= element.validmax ? 1.0 : 0.0;
-            store.dispatch(changeSymbolViolation(element.name, MAX, vmax));
-            if (vmin > 0.0) {
-                viol_sum = viol_sum + vmin * vmin;
+            if (element.value <= element.validmin || element.value >= element.validmax) {
+                obj = Number.POSITIVE_INFINITY;
+                break;
             }
-            if (vmax > 0.0) {
-                viol_sum = viol_sum + vmax * vmax;
-            }
-//            // Debugging output
-//            if (vmin > 0.0 || vmax > 0.0) {
-//                console.log('In updateObjectiveValue element=',element,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum);
-//            }
         }
     }
-    
-    // Update Objective Value
-    obj = viol_sum > 0 ? Number.POSITIVE_INFINITY : 0.0;
 
+    // Determine and publish all constraint violations
     viol_sum = 0.0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
@@ -115,7 +104,7 @@ export function updateObjectiveValue(store, merit) {
         }
     }
 
-    if (obj === 0.0) {
+    if (obj === 0.0) { // No validity violation found, publish constraint based objective value
         /* Merit Function */
         if (merit && typeof merit === 'function') {
             // Create p & x from symbol_table
@@ -138,9 +127,9 @@ export function updateObjectiveValue(store, merit) {
         obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
         store.dispatch(changeResultObjectiveValue(obj));
 
-    } else { // Invalid value encountered
+    } else { // Validity violation found, publish validity based objective value
         store.dispatch(changeResultObjectiveValue(obj));
     }
     
-    console.log('</ul><li>','End updateObjectiveValue obj=',obj,'</li>');
+//    console.log('</ul><li>','End updateObjectiveValue obj=',obj,'</li>');
 }

@@ -26,52 +26,32 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     var design = store.getState(); // Re-access store to get latest element values
 //    console.log('In pxUpdateObjectiveValue design=',design);
 
-    viol_sum = 0.0;
+    // Determine if all numbers are valid (AKA no validtiy violations)
+    obj = 0.0;
     ip = 0;
     ix = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) {
-//            console.log('element=',element,'ip=',ip,'p=',p[ip]);
             pp = p[ip++];
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
-                vmin = pp <= element.validmin ? 1.0 : 0.0;
-                vmax = pp >= element.validmax ? 1.0 : 0.0;
-            } else {
-                vmin = 0;
-                vmax = 0;
+                if (pp <= element.validmin || pp >= element.validmax) {
+                    obj = Number.POSITIVE_INFINITY;
+                    break;
+                }
             }
-        }
-        if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
-//            console.log('element=',element,'ix=',ix,'x=',x[ix]);
+        } else {
             xx = x[ix++];
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
-                vmin = xx <= element.validmin ? 1.0 : 0.0;
-                vmax = xx >= element.validmax ? 1.0 : 0.0;
-            } else {
-                vmin = 0;
-                vmax = 0;
+                if (xx <= element.validmin || xx >= element.validmax) {
+                    obj = Number.POSITIVE_INFINITY;
+                    break;
+                }
             }
         }
-        if (vmin > 0.0) {
-            viol_sum = viol_sum + vmin * vmin;
-        }
-        if (vmax > 0.0) {
-            viol_sum = viol_sum + vmax * vmax;
-        }
-//        // Debugging output
-//        if (vmin > 0.0 || vmax > 0.0) {
-//            if (element.type === "equationset" && element.input) {
-//                console.log('In pxUpdateObjectiveValue element=',element,'ip=',ip,'pp=',pp,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum,'x[42]=',x[42]);
-//            } else {
-//                console.log('In pxUpdateObjectiveValue element=',element,'ix=',ix,'xx=',xx,'vmin=',vmin,'vmax=',vmax,'viol_sum=',viol_sum,'x[42]=',x[42]);
-//            }
-//        }
     }
-    
-    // Update Objective Value
-    obj = viol_sum > 0 ? Number.POSITIVE_INFINITY : 0.0;
 
+    // Determine all constraint violations
     viol_sum = 0.0;
     ip = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
@@ -139,7 +119,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
         }
     }
 
-    if (obj === 0.0) {
+    if (obj === 0.0) { // No validity violation found, return constraint based objective value
         /* Merit Function */
         if (merit && typeof merit === 'function') {
             m_funct = merit(p, x, design);
@@ -147,11 +127,11 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
             m_funct = 0.0;
         }
 
-        // Update Objective Value
+        // Update objective value
         obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
     }
 
-    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
+//    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
 
     return obj;
 }
