@@ -351,7 +351,7 @@ export const initialState = {
         {
             "input": false,
             "name": "Stress_1",
-            "value": 2489.3,
+            "value": 24893.49,
             "units": "PSI",
             "lmin": 0,
             "lmax": 0,
@@ -449,7 +449,7 @@ export const initialState = {
         {
             "input": false,
             "name": "Cycle_Life",
-            "value": 794230.0,
+            "value": 794242.78,
             "units": "cycles",
             "lmin": 0,
             "lmax": 0,
@@ -465,7 +465,7 @@ export const initialState = {
         {
             "input": false,
             "name": "%_Safe_Deflect",
-            "value": 80.52,
+            "value": 73.1,
             "units": "%",
             "lmin": 0,
             "lmax": CONSTRAINED,
@@ -521,7 +521,7 @@ export const initialState = {
             "lmax": 0,
             "cmin": 1.0,
             "cmax": 1.5,
-            "validmin": 0.0,
+            "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
             "tooltip": "Factor of safety for Stress Initial range low point",
@@ -537,7 +537,7 @@ export const initialState = {
             "lmax": 0,
             "cmin": 1.0,
             "cmax": 1.5,
-            "validmin": 0.0,
+            "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
             "tooltip": "Factor of safety for Stress Initial range high point",
@@ -563,7 +563,7 @@ export const initialState = {
         {
             "input": false,
             "name": "Energy",
-            "value": 12.3456,
+            "value": 32.74,
             "units": "in-lb",
             "lmin": 0,
             "lmax": 0,

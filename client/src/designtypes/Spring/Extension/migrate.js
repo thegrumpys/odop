@@ -283,12 +283,14 @@ export function migrate(design) {
                 element.validmax = Number.MAX_VALUE;
             }
         });
-        design.symbol_table[ 2].validmin = 1; // Coils_T
         design.symbol_table[ 4].validmin = -Number.MIN_VALUE; // End_Extension
         design.symbol_table[11].validmin = -Number.MIN_VALUE; // Deflect_1
         design.symbol_table[17].validmin = -Number.MIN_VALUE; // L_Stroke
         design.symbol_table[19].validmin = 1; // Spring_Index
         design.symbol_table[27].validmin = -Number.MIN_VALUE; // Cycle_Life
+        design.symbol_table[32].validmin = -Number.MAX_VALUE; // FS_SI_Lo
+        design.symbol_table[33].validmin = -Number.MAX_VALUE; // FS_SI_Hi
+        design.symbol_table[34].validmin = -Number.MAX_VALUE; // F1_IT_Margin
         design.symbol_table[34].validmin = -Number.MIN_VALUE; // Energy
         design.symbol_table[42].validmin = -Number.MAX_VALUE; // Inactive_Coils
         design.symbol_table[64].validmin = -Number.MAX_VALUE; // tbase010
@@ -297,6 +299,9 @@ export function migrate(design) {
         design.symbol_table[67].validmin = -Number.MAX_VALUE; // slope_term
         design.symbol_table[68].validmin = -Number.MAX_VALUE; // tensile_010
         migrated_design.version = '8'; // last thing... set the migrated model version
+        displayMessage(
+            "The Alert Facility (new in v4.3) may highlight previously unrecognized issues saved with earlier designs. See Help Alerts and/or contact technical support for details.  ...  ",
+            'info');
     case '8':
         // Current model version
         // console.log('Convert from 8 to 9');

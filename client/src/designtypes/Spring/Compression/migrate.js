@@ -352,7 +352,7 @@ export function migrate(design) {
         design.symbol_table[53].validmin = -Number.MAX_VALUE; // tensile_010
         migrated_design.version = '12'; // last thing... set the migrated model version
         displayMessage(
-            "The new Alert Facility may highlight previously unrecognized issues saved with earlier designs. See Help Alerts and/or contact technical support for details.  ...  ",
+            "The Alert Facility (new in v4.3) may highlight previously unrecognized issues saved with earlier designs. See Help Alerts and/or contact technical support for details.  ...  ",
             'info');
     case '12':
         // Current model version
