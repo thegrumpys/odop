@@ -83,7 +83,7 @@ export function reducers(state, action) {
                 system_controls: initialSystemControls
             }
         }); // Merge initialState and initialSystemControls
-//        console.log('In reducers.LOAD_INITIAL_STATE action.payload.type=',action.payload.type,'action.payload.units=',action.payload.units,'state=',state);
+        console.log('In reducers.LOAD_INITIAL_STATE action.payload.type=',action.payload.type,'action.payload.units=',action.payload.units,'state=',state);
         return state;
     case CHANGE_NAME:
         state = Object.assign({}, {
@@ -104,7 +104,7 @@ export function reducers(state, action) {
             ...state,
             view: action.payload.view
         });
-//        console.log('In reducers.CHANGE_VIEW action.payload.view=',action.payload.view,'state=',state);
+        console.log('In reducers.CHANGE_VIEW action.payload.view=',action.payload.view,'state=',state);
         return state;
 
 // SYMBOL
@@ -410,12 +410,11 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).map(([name, element]) => {
+                    console.log('name=',name,'element=',element);
                     if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
                         value = action.payload.values[i++]
                         if (value !== undefined) {
-    //                        if (element.name === "Prop_Calc_Method")
-    //                            console.log('In reducers.CHANGE_OUTPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
                             return Object.assign({}, element, {
                                 value: value
                             });

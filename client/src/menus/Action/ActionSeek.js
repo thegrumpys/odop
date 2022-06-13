@@ -106,7 +106,7 @@ class ActionSeek extends Component {
         var ResultTableOptimize = require('../../designtypes/'+this.props.type+'/ResultTableOptimize.js'); // Dynamically load ResultTableOptimize
 
         var display_search_button;
-        if (this.props.objective_value > this.props.system_controls.objmin) {
+        if (this.props.objective_value > this.props.system_controls.objmin.value) {
             display_search_button = true;
         } else {
             display_search_button = false;

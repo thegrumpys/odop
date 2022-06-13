@@ -28,7 +28,7 @@ class ResultTable extends Component {
     onSearchRequest(event) {
 //        console.log('In ResultTable.onSearchRequest this=',this,'event=',event);
         var warnMsg = '';
-        if (this.props.objective_value <= this.props.system_controls.objmin) {
+        if (this.props.objective_value <= this.props.system_controls.objmin.value) {
             warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
         }
         if (Object.entries(this.props.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
@@ -149,11 +149,11 @@ class ResultTable extends Component {
         var feasibility_string;
         var feasibility_class;
         var display_search_button;
-        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+        if (this.props.objective_value > 4*this.props.system_controls.objmin.value) {
             feasibility_string = "NOT FEASIBLE";
             feasibility_class = "text-not-feasible ";
             display_search_button = true;
-        } else if (this.props.objective_value > this.props.system_controls.objmin) {
+        } else if (this.props.objective_value > this.props.system_controls.objmin.value) {
             feasibility_string = "CLOSE TO FEASIBLE";
             feasibility_class = "text-close-to-feasible ";
             display_search_button = true;

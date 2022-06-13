@@ -733,7 +733,7 @@ class ActionTrade extends Component {
         design = store.getState();
 
         var display_search_button;
-        if (this.props.objective_value > this.props.system_controls.objmin) {
+        if (this.props.objective_value > this.props.system_controls.objmin.value) {
             display_search_button = true;
         } else {
             display_search_button = false;

@@ -35,7 +35,7 @@ class FileProperties extends Component {
 //        console.log('In FileProperties.onChange name=', name, 'value=', value);
         // Save the value into the state.labels
         this.setState({
-            labels: this.state.labels.map((label) => {
+            labels: Object.entries(this.state.labels).map((label) => {
                 if (label.name === name) {
                     return Object.assign({}, label, {
                         value: value.replace(/["\\/]/ig, '') // replace invalid JSON characters with nothing throughout
@@ -90,13 +90,13 @@ class FileProperties extends Component {
                                 <Col className="text-right font-weight-bold">Value</Col>
                             </Row>
                             {
-                                this.state.labels.map(
-                                    (label) => {
+                                Object.entries(this.state.labels).map(
+                                    ([name,label]) => {
                                         return (
-                                            <Row key={label.name}>
-                                                <Col className="align-middle text-left">{label.name}</Col>
+                                            <Row key={name}>
+                                                <Col className="align-middle text-left">{name}</Col>
                                                 <Col className="align-middle text-left">
-                                                    <Form.Control as="textarea" className="input-group-lg" value={label.value} onChange={(event) => {this.onChange(label.name, event.target.value)}}/>
+                                                    <Form.Control as="textarea" className="input-group-lg" value={label.value} onChange={(event) => {this.onChange(name, event.target.value)}}/>
                                                 </Col>
                                             </Row>
                                         );

@@ -128,9 +128,9 @@ class ConstraintMaxRowIndependentVariable extends Component {
         // =======================================
         var value_class = '';
         if (this.props.element.lmax & CONSTRAINED && this.props.element.vmax > 0.0) {
-            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+            if (this.props.objective_value > 4*this.props.system_controls.objmin.value) {
                 value_class += "text-not-feasible ";
-            } else if (this.props.objective_value > this.props.system_controls.objmin) {
+            } else if (this.props.objective_value > this.props.system_controls.objmin.value) {
                 value_class += "text-close-to-feasible ";
             } else if (this.props.objective_value > 0.0) {
                 value_class += "text-feasible ";

@@ -17,7 +17,7 @@ class ActionSearch extends Component {
     onSearchRequest(event) {
 //        console.log('In ActionSearch.onSearchRequest this=',this,'event=',event);
         var warnMsg = '';
-        if (this.props.objective_value <= this.props.system_controls.objmin) {
+        if (this.props.objective_value <= this.props.system_controls.objmin.value) {
             warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
         }
         if (Object.entries(this.props.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
@@ -51,7 +51,7 @@ class ActionSearch extends Component {
 //        console.log('In ActionSearch.render this=',this);
 
         var display_search_button;
-        if (this.props.objective_value > this.props.system_controls.objmin) {
+        if (this.props.objective_value > this.props.system_controls.objmin.value) {
             display_search_button = true;
         } else {
             display_search_button = false;
