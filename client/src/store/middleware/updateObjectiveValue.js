@@ -24,8 +24,8 @@ export function updateObjectiveValue(store, merit) {
     var design = store.getState(); // Re-access store to get latest element values
 //    console.log('In updateObjectiveValue design=',design);
 
-    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-        element = Object.entries(design.model.symbol_table)[i];
+    Object.entries(design.model.symbol_table).forEach(([name,element]) => {
+//        console.log('In updateObjectiveValue name=',name,'element=',element);
         if (element.type === "equationset" && element.input) {
             vmin = 0.0;
             vmax = 0.0;
@@ -44,9 +44,9 @@ export function updateObjectiveValue(store, merit) {
                 viol_sum = viol_sum + vmax * vmax;
             }
         }
-    }
-    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-        element = Object.entries(design.model.symbol_table)[i];
+    });
+    Object.entries(design.model.symbol_table).forEach(([name,element]) => {
+//        console.log('In updateObjectiveValue name=',name,'element=',element);
         if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
             vmin = 0.0;
             vmax = 0.0;
@@ -88,7 +88,7 @@ export function updateObjectiveValue(store, merit) {
                 }
             }
         }
-    }
+    });
     
     /* Merit Function */
     if (merit && typeof merit === 'function') {
@@ -126,5 +126,5 @@ export function updateObjectiveValue(store, merit) {
     }
     store.dispatch(changeResultViolatedConstraintCount(violated_constraint_count));
     
-//    console.log('</ul><li>','End updateObjectiveValue','</li>');
+//    console.log('</ul><li>','End updateObjectiveValue obj=',obj,'</li>');
 }

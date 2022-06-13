@@ -45,7 +45,7 @@ export function reducers(state, action) {
     var value;
     var name;
 
-    console.warn('In reducers state=',state,'action=', action);
+//    console.warn('In reducers state=',state,'action=', action);
 //    if (action.payload === undefined || action.payload.name === undefined) {
 //        console.log('<li>','In reducers action=', action.type,'</li>');
 //    } else {
@@ -53,22 +53,18 @@ export function reducers(state, action) {
 //    }
 
     if (state.model.result !== undefined) {
-//        console.warn('In reducers CLEAR TERMINATION_CONDITION state=',state,'action=', action);
         state.model.result.termination_condition = '';
     }
 
     switch (action.type) {
     case STARTUP:
-//        console.log('In reducers.STARTUP state=',state);
         return state;
     case LOAD:
         state = Object.assign({}, state, { 
             ...action.payload.design
         });
-//        console.log('In reducers.LOAD action.payload.design=',action.payload.design,'state=',state);
         return state;
     case LOAD_INITIAL_STATE:
-//        console.log('In reducers.LOAD_INITIAL_STATE');
         var module;
         if (action.payload.units === 'US') {
             module = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState
@@ -83,28 +79,24 @@ export function reducers(state, action) {
                 system_controls: initialSystemControls
             }
         }); // Merge initialState and initialSystemControls
-        console.log('In reducers.LOAD_INITIAL_STATE action.payload.type=',action.payload.type,'action.payload.units=',action.payload.units,'state=',state);
         return state;
     case CHANGE_NAME:
         state = Object.assign({}, {
             ...state,
             name: action.payload.name
         });
-//        console.log('In reducers.CHANGE_NAME action.payload.name=',action.payload.name,'state=',state);
         return state;
     case CHANGE_USER:
         state = Object.assign({}, {
             ...state,
             user: action.payload.user
         });
-//        console.log('In reducers.CHANGE_USER action.payload.user=',action.payload.user,'state=',state);
         return state;
     case CHANGE_VIEW:
         state = Object.assign({}, {
             ...state,
             view: action.payload.view
         });
-        console.log('In reducers.CHANGE_VIEW action.payload.view=',action.payload.view,'state=',state);
         return state;
 
 // SYMBOL
@@ -113,58 +105,59 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if (element.name === action.payload.name) {
-//                        if (element.name === 'Force_2')
-//                            console.log('In reducers.CHANGE_SYMBOL_VALUE element=',element.name,' old value=',element.value,' new value=',action.payload.value);
-                        return Object.assign({}, element, {
+                        return ({ ...accum, [name]: Object.assign({}, element, {
                             value: action.payload.value
-                        });
+                        }) });
+                    } else {
+                        return ({ ...accum, [name]: element });
                     }
-                    return element;
-                })
+                }, {})
             }
         });
     case CHANGE_SYMBOL_VIOLATION:
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if (element.name === action.payload.name) {
                         if (action.payload.minmax === MIN) {
-                            return Object.assign({}, element, {
+                            return ({ ...accum, [name]: Object.assign({}, element, {
                                 vmin: action.payload.value
-                            });
+                            }) });
                         } else {
-                            return Object.assign({}, element, {
+                            return ({ ...accum, [name]: Object.assign({}, element, {
                                 vmax: action.payload.value
-                            });
+                            }) });
                         }
+                    } else {
+                        return ({ ...accum, [name]: element });
                     }
-                    return element;
-                })
+                }, {})
             }
         });
     case CHANGE_SYMBOL_CONSTRAINT:
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if (element.name === action.payload.name) {
                         if (action.payload.minmax === MIN) {
-                            return Object.assign({}, element, {
+                            return ({ ...accum, [name]: Object.assign({}, element, {
                                 cmin: action.payload.value,
                                 smin: sclden(state.model.system_controls, element.value, action.payload.value, element.sdlim, element.lmin)
-                            });
+                            }) });
                         } else {
-                            return Object.assign({}, element, {
+                            return ({ ...accum, [name]: Object.assign({}, element, {
                                 cmax: action.payload.value,
                                 smax: sclden(state.model.system_controls, element.value, action.payload.value, element.sdlim, element.lmax)
-                            });
+                            }) });
                         }
+                    } else {
+                        return ({ ...accum, [name]: element });
                     }
-                    return element;
-                })
+                }, {})
             }
         });
     case CHANGE_SYMBOL_CONSTRAINTS:
@@ -172,70 +165,57 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     // Only do it from independent and dependent variables, but not for calculation inputs
                     if (element.type === "equationset") {
                         value = action.payload.values[i++];
                         if (value !== undefined) {
                             if (action.payload.minmax === MIN) {
-                                return Object.assign({}, element, {
+                                return ({ ...accum, [name]: Object.assign({}, element, {
                                     cmin: value,
                                     smin: sclden(state.model.system_controls, element.value, value, element.sdlim, element.lmin)
-                                });
+                                }) });
                             } else {
-                                return Object.assign({}, element, {
+                                return ({ ...accum, [name]: Object.assign({}, element, {
                                     cmax: value,
                                     smax: sclden(state.model.system_controls, element.value, value, element.sdlim, element.lmax)
-                                });
+                                }) });
                             }
                         } else {
-                            return element;
+                            return ({ ...accum, [name]: element });
                         }
                     } else {
-                        return element;
+                        return ({ ...accum, [name]: element });
                     }
-                })
+                }, {})
             }
         });
     case SAVE_OUTPUT_SYMBOL_CONSTRAINTS:
-//        console.log('In reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS action=', action);
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if (element.name === action.payload.name) {
-//                        console.log('In reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS state=',state,'action=', action);
-//                        console.log('In reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS',
-//                                    'element.lmin=',element.lmin,
-//                                    'element.cmin=',element.cmin,
-//                                    'element.lmax=',element.lmax,
-//                                    'element.cmax=',element.cmax);
-                        return Object.assign({}, element, {
+                        return ({ ...accum, [name]: Object.assign({}, element, {
                             lmin: 0,
                             oldlmin: element.lmin,
                             oldcmin: element.cmin,
                             lmax: 0,
                             oldlmax: element.lmax,
                             oldcmax: element.cmax
-                        });
+                        }) });
+                    } else {
+                        return ({ ...accum, [name]: element });
                     }
-                    return element;
-                })
+                }, {})
             }
         });
     case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS:
-//        console.log('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS action=', action);
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if (element.name === action.payload.name) {
-//                        console.log('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS state=',state,'action=', action);
-//                        console.log('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS',
-//                                    'element.oldlmin=',element.oldlmin,
-//                                    'element.oldcmin=',element.oldcmin,
-//                                    'element.oldlmax=',element.oldlmax,
-//                                    'element.oldcmax=',element.oldcmax);
                         if (element.oldlmin !== undefined) { // Is there something to restore then restore them else just use the current values as-is
                             var lmin = element.oldlmin; // Get the values as locals
                             var cmin = element.oldcmin;
@@ -245,77 +225,78 @@ export function reducers(state, action) {
                             delete element.oldcmin;
                             delete element.oldlmax;
                             delete element.oldcmax;
-                            return Object.assign({}, element, { // Assign the locals
+                            return ({ ...accum, [name]: Object.assign({}, element, { // Assign the locals
                                 lmin: lmin,
                                 cmin: cmin,
                                 smin: sclden(state.model.system_controls, element.value, cmin, element.sdlim, lmin),
                                 lmax: lmax,
                                 cmax: cmax,
                                 smax: sclden(state.model.system_controls, element.value, cmax, element.sdlim, lmax)
-                            });
+                            }) });
                         } else {
                             throw new Error('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, No old value exists for restore');
                         }
+                    } else {
+                        return ({ ...accum, [name]: element });
                     }
-                    return element;
-                })
+                }, {})
             }
         });
     case SET_SYMBOL_FLAG:
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if (element.name === action.payload.name) {
-//                        console.log('In reducers.SET_SYMBOL_FLAG state=',state,'action=', action);
                         if (action.payload.minmax === MIN) {
-                            return Object.assign({}, element, {
+                            return ({ ...accum, [name]: Object.assign({}, element, {
                                 lmin: element.lmin | action.payload.mask
-                            });
+                            }) });
                         } else {
-                            return Object.assign({}, element, {
+                            return ({ ...accum, [name]: Object.assign({}, element, {
                                 lmax: element.lmax | action.payload.mask
-                            });
+                            }) });
                         }
+                    } else {
+                        return ({ ...accum, [name]: element });
                     }
-                    return element;
-                })
+                }, {})
             }
         });
     case RESET_SYMBOL_FLAG:
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if (element.name === action.payload.name) {
-//                        console.log('In reducers.RESET_SYMBOL_FLAG state=',state,'action=', action);
                         if (action.payload.minmax === MIN) {
-                            return Object.assign({}, element, {
+                            return ({ ...accum, [name]: Object.assign({}, element, {
                                 lmin: element.lmin & ~action.payload.mask
-                            });
+                            }) });
                         } else {
-                            return Object.assign({}, element, {
+                            return ({ ...accum, [name]: Object.assign({}, element, {
                                 lmax: element.lmax & ~action.payload.mask
-                            });
+                            }) });
                         }
+                    } else {
+                        return ({ ...accum, [name]: element });
                     }
-                    return element;
-                })
+                }, {})
             }
         });
     case CHANGE_SYMBOL_INPUT:
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if (element.name === action.payload.name) {
-    //                    console.log('In reducers.CHANGE_SYMBOL_INPUT element=',element.name,' old value=',element.input,' new value=',action.payload.value);
-                        return Object.assign({}, element, {
+                        return ({ ...accum, [name]: Object.assign({}, element, {
                             input: action.payload.value
-                        });
+                        }) });
+                    } else {
+                        return ({ ...accum, [name]: element });
                     }
-                    return element;
-                })
+                }, {})
             }
         });
 
@@ -323,15 +304,16 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if (element.name === action.payload.name) {
 //                        console.log('In reducers.CHANGE_SYMBOL_HIDDEN element=',element.name,' old value=',element.hidden,' new value=',action.payload.value);
-                        return Object.assign({}, element, {
+                        return ({ ...accum, [name]: Object.assign({}, element, {
                             hidden: action.payload.value
-                        });
+                        }) });
+                    } else {
+                        return ({ ...accum, [name]: element });
                     }
-                return element;
-                })
+                }, {})
             }
         });
 
@@ -342,62 +324,54 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if (element.type === "equationset" && element.input) {
                         value = action.payload.values[i++]
                         if (value !== undefined) {
-    //                        if (element.name === 'Force_2')
-    //                            console.log('In reducers.CHANGE_INPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
-                            return Object.assign({}, element, {
+                            return ({ ...accum, [name]: Object.assign({}, element, {
                                 value: value
-                            });
+                            }) });
                         } else {
-                            return element;
+                            return ({ ...accum, [name]: element });
                         }
                     } else {
-                        return element;
+                        return ({ ...accum, [name]: element });
                     }
-                })
+                }, {})
             }
         });
     case SAVE_INPUT_SYMBOL_VALUES:
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if (element.type === "equationset" && element.input) {
-//                        if (element.name === "Wire_Dia")
-//                            console.log('In reducers.SAVE_INPUT_SYMBOL_VALUES element=',element);
-                        return Object.assign({}, element, {
+                        return ({ ...accum, [name]: Object.assign({}, element, {
                             oldvalue: element.value
-                        });
+                        }) });
                     } else {
-                        return element;
+                        return ({ ...accum, [name]: element });
                     }
-                })
+                }, {})
             }
         });
     case RESTORE_INPUT_SYMBOL_VALUES:
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map((element) => {
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if (element.type === "equationset" && element.input) {
                         if (element.oldvalue !== undefined) {
-//                            if (element.name === "Wire_Dia")
-//                                console.log('In reducers.RESTORE_INPUT_SYMBOL_VALUES oldvalue==defined element=',element);
                             var value = element.oldvalue; // Get the value as local
                             delete element.oldvalue; // Delete the value
-                            return Object.assign({}, element, { // Assign the local
+                            return ({ ...accum, [name]: Object.assign({}, element, { // Assign the local
                                 value: value
-                            });
+                            }) });
                         } else {
-//                            if (element.name === "Wire_Dia")
-//                                console.log('In reducers.RESTORE_INPUT_SYMBOL_VALUES oldvalue==undefined element=',element);
-                            return element;
+                            return ({ ...accum, [name]: element });
                         }
                     } else {
-                        return element;
+                        return ({ ...accum, [name]: element });
                     }
                 })
             }
@@ -410,21 +384,20 @@ export function reducers(state, action) {
         return Object.assign({}, state, {
             model: {
                 ...state.model,
-                symbol_table: Object.entries(state.model.symbol_table).map(([name, element]) => {
-                    console.log('name=',name,'element=',element);
+                symbol_table: Object.entries(state.model.symbol_table).reduce((accum,[name,element]) => {
                     if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
                         value = action.payload.values[i++]
                         if (value !== undefined) {
-                            return Object.assign({}, element, {
+                            return ({ ...accum, [name]: Object.assign({}, element, {
                                 value: value
-                            });
+                            }) });
                         } else {
-                            return element;
+                            return ({ ...accum, [name]: element });
                         }
                     } else {
-                        return element;
+                        return ({ ...accum, [name]: element });
                     }
-                })
+                }, {})
             }
         });
 

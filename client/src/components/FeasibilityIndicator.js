@@ -24,7 +24,7 @@ class FeasibilityIndicator extends Component {
         const yOrigin = 0;
         const objective_value = this.props.objective_value;
         const objmin = this.props.system_controls.objmin.value;
-        console.log('objective_value=',objective_value,'objmin=',objmin);
+//        console.log('objective_value=',objective_value,'objmin=',objmin);
         var x;
         if (objective_value <= 0) { // Black
             x = -blackWidth/2; // Center of black

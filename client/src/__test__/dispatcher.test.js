@@ -24,32 +24,32 @@ it('middleware with startup', () => {
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].cmax).toEqual(1500);
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].smin).toEqual(undefined);
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].smax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmax).toEqual(0.5);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].smin).toEqual(undefined);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].smax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].cmin).toEqual(0.0);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].cmax).toEqual(0.05);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].smin).toEqual(undefined);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].smax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmin).toEqual(1000);
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmax).toEqual(10000);
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].smin).toEqual(undefined);
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].smax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.AREA].cmax).toEqual(10);
     expect(Object.entries(design.model.symbol_table)[sto.AREA].smin).toEqual(undefined);
     expect(Object.entries(design.model.symbol_table)[sto.AREA].smax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].cmax).toEqual(3000);
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].smin).toEqual(undefined);
@@ -59,38 +59,38 @@ it('middleware with startup', () => {
 
     var design = store.getState(); // after
 //  value=500, level=1500, sdlimit=0, status=1, stemp=1500
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].cmax).toEqual(1500);
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].smin).toEqual(1);
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].smax).toEqual(1500.0000001);
 //  value=0.4, level=0, sdlimit=0, status=1, stemp=0.4
 //  value=0.4, level=0.5, sdlimit=0, status=1, stemp=0.5
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmax).toEqual(0.5);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].smin).toEqual(0.01);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].smax).toEqual(0.5000001);
 //  value=0.04, level=0, sdlimit=0, status=1, stemp=0.04
 //  value=0.04, level=0.05, sdlimit=0, status=1, stemp=0.05
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].cmin).toEqual(0.0);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].cmax).toEqual(0.05);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].smin).toEqual(0.001);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].smax).toEqual(0.050000100000000006);
 //  value=251.32741228718348, level=1000, sdlimit=0, status=1, stemp=1000
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmin).toEqual(1000);
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmax).toEqual(10000);
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].smin).toEqual(1000.0000001);
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].smax).toEqual(10000.0000001);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.AREA].cmax).toEqual(10);
     expect(Object.entries(design.model.symbol_table)[sto.AREA].smin).toEqual(0.1);
     expect(Object.entries(design.model.symbol_table)[sto.AREA].smax).toEqual(10.0000001);
 //  value=2500, level=3000, sdlimit=0, status=1, stemp=3000
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].cmax).toEqual(3000);
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].smin).toEqual(10);
@@ -109,25 +109,25 @@ it('middleware change pressure design parameter value without startup', () => {
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(500);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(0);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(0);
 
     store.dispatch(changeSymbolValue("PRESSURE", 5000));
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(5000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(2513.2741228718348);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0.5026548245743669);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(25000);
 });
 
@@ -139,25 +139,25 @@ it('middleware change radius design parameter value without startup', () => {
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(0);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(0);
 
     store.dispatch(changeSymbolValue("RADIUS", 0.5));
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.5);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(392.6990816987241);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0.7853981633974483);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(3125);
 });
 
@@ -169,25 +169,25 @@ it('middleware change thickness design parameter value without startup', () => {
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.04);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(0);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(0);
 
     store.dispatch(changeSymbolValue("THICKNESS", 0.05));
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.05);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(251.32741228718348);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0.5026548245743669);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(2000);
 });
 //=====================================================================
@@ -202,32 +202,32 @@ it('middleware change constraints to force all violations', () => {
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].cmax).toEqual(1500);
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].smin).toEqual(undefined);
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].smax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmax).toEqual(0.5);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].smin).toEqual(undefined);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].smax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].cmin).toEqual(0.0);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].cmax).toEqual(0.05);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].smin).toEqual(undefined);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].smax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmin).toEqual(1000);
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmax).toEqual(10000);
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].smin).toEqual(undefined);
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].smax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.AREA].cmax).toEqual(10);
     expect(Object.entries(design.model.symbol_table)[sto.AREA].smin).toEqual(undefined);
     expect(Object.entries(design.model.symbol_table)[sto.AREA].smax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].cmax).toEqual(3000);
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].smin).toEqual(undefined);
@@ -288,7 +288,7 @@ it('middleware set/reset symbol flag min FDCL', () => {
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmin).toEqual(CONSTRAINED);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].propagate).toEqual(undefined);
@@ -297,18 +297,18 @@ it('middleware set/reset symbol flag min FDCL', () => {
     store.dispatch(setSymbolFlag("RADIUS", MIN, FDCL, "THICKNESS"));
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmin).toEqual(CONSTRAINED|FDCL);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].propagate.length).toEqual(1);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].propagate[0].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].propagate[0].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].propagate[0].minmax).toEqual(MIN);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cminchoice).toEqual(0);
 
     store.dispatch(resetSymbolFlag("RADIUS", MIN, FDCL));
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmin).toEqual(CONSTRAINED);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].propagate).toEqual(undefined);
@@ -328,7 +328,7 @@ it('middleware set/reset symbol flag max FDCL', () => {
     var design = store.getState(); // before
 //    console.log('In middleware set symbol flag max FDCL Object.entries(design.model.symbol_table)[sto.THICKNESS]=',Object.entries(design.model.symbol_table)[sto.THICKNESS]);
 //    console.log('In middleware set symbol flag max FDCL Object.entries(design.model.symbol_table)[sto.RADIUS]=',Object.entries(design.model.symbol_table)[sto.RADIUS]);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmax).toEqual(CONSTRAINED);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].propagate).toEqual([]); // Fudge to make work, looks like value cascades from the last test, but it should be undefined
@@ -337,18 +337,18 @@ it('middleware set/reset symbol flag max FDCL', () => {
     store.dispatch(setSymbolFlag("RADIUS", MAX, FDCL, "THICKNESS"));
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmax).toEqual(CONSTRAINED|FDCL);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].propagate.length).toEqual(1);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].propagate[0].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].propagate[0].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].propagate[0].minmax).toEqual(MAX);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmaxchoice).toEqual(0);
 
     store.dispatch(resetSymbolFlag("RADIUS", MAX, FDCL));
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmax).toEqual(CONSTRAINED);
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].propagate).toEqual(undefined);
@@ -371,17 +371,17 @@ it('middleware search1 from initial state', () => {
     store.dispatch(search());
 
     var design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(697.2108757363197);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.5825642374486647);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.05814850143495808);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(743.3642427191874);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(1.0661971414805103);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(3492.524417147412);
     expect(design.model.result.objective_value).toEqual(0.14664180506450808);
     expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 12 iterations.");
@@ -401,17 +401,17 @@ it('middleware search2: initial state w/ single SV constraint modified', () => {
     store.dispatch(search());
 
     var design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(1389.1186225065448);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4877369775989805);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.040000000000000056);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(1038.1511075527435);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0.7473451804133828);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(8469.056480847505);
     expect(design.model.result.objective_value).toEqual(0.0);
     expect(design.model.result.termination_condition).toEqual("Search terminated when design reached feasibility (Objective value is less than OBJMIN) after 7 iterations.");
@@ -432,17 +432,17 @@ it('middleware search3: initial state w/ single DP FIXed', () => {
     store.dispatch(search());
 
     var design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(972.4279315207291);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.444);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.06000128769964651);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(602.2450480774055);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0.6193210093580775);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(3597.9061295858437);
     expect(design.model.result.objective_value).toEqual(0.2379404483861806);
     expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 9 iterations.");
@@ -465,17 +465,17 @@ it('middleware search4: initial state w/ single SV FIXed', () => {
     store.dispatch(search());
 
     var design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(750.4968399919907);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.5744582590062994);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.05745198212666806);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(778.0646709106514);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(1.0367327741432661);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(3752.0821052003944);
     expect(design.model.result.objective_value).toEqual(0.10531573878305697);
     expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 15 iterations.");
@@ -497,17 +497,17 @@ it('middleware search5: initial state w/ 3 constraints modified', () => {
     store.dispatch(search());
 
     var design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(962.044187410488);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.47955021080064064);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.05993925712603883);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(695.0452267187616);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0.7224670506971189);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(3848.4668895888885);
     expect(design.model.result.objective_value).toEqual(0.2972011666058624);
     expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 8 iterations.");
@@ -529,17 +529,17 @@ it('middleware search6: initial state w/ 3 constraints modified further', () => 
     store.dispatch(search());
 
     var design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(747.1742312566108);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.6601769508494637);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.06031483281717521);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(1023.0396666167936);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(1.3692116561571288);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(4089.103647517854);
     expect(design.model.result.objective_value).toEqual(0.47279099941509317);
     expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 13 iterations.");
@@ -564,17 +564,17 @@ it('middleware search7: initial state w/ 2 constraints modified, 1 SV FIXed', ()
     store.dispatch(search());
 
     var design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(766.5319070212193);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.6599935713499682);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.06041228804212965);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(1048.9614321530885);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(1.3684511010499278);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(4187.112814828608);
     expect(design.model.result.objective_value).toEqual(0.4435936918298242);
     expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 16 iterations.");
@@ -599,17 +599,17 @@ it('middleware seek1 min stress; feasible start; no fixed', () => {
     store.dispatch(seek("STRESS", MIN));
 
     var design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(1254.3621931874964);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.5025499901050051);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.05031359856496264);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(995.2481203224017);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0.7934296216257505);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(6264.506274188985);
     expect(design.model.result.objective_value).toEqual(0.00008792761483306146);
     expect(design.model.result.termination_condition).toContain("Seek completed");
@@ -634,17 +634,17 @@ it('middleware seek2 min stress; alt start pt, opened constraints, feasible star
     store.dispatch(seek("STRESS", MIN));
 
     var design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(565.157822733626);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.7495610043125683);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.06531967146069526);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(997.5475007697938);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(1.7650777546433516);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(3242.6699011968067);
     expect(design.model.result.objective_value).toEqual(0.00003020162308916649);
     expect(design.model.result.termination_condition).toContain("Seek completed");
@@ -663,17 +663,17 @@ it('middleware seek3 min stress; infeasible start; no fixed', () => {
     store.dispatch(seek("STRESS", MIN));
 
     var design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(697.2006127120937);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.5825642374486647);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.05814850143495808);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(743.3533003120947);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(1.0661971414805103);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(3492.473006786572);
     expect(design.model.result.objective_value).toEqual(0.14664179504643934);
     expect(design.model.result.termination_condition).toContain("Seek completed");
@@ -699,17 +699,17 @@ it('middleware seek4 min pressure; alt start pt, opened constraints, feasible st
     store.dispatch(seek("PRESSURE", MIN));
 
     var design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(554.0657042936255);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.7566964996102077);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.045);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(996.6773563197182);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(1.7988432573901598);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(4658.439766589454);
     expect(design.model.result.objective_value).toEqual(0.00009076101892853454);
     expect(design.model.result.termination_condition).toContain("Seek completed");
@@ -734,17 +734,17 @@ it('middleware seek5 max force; alt start pt, opened constraints, feasible start
     store.dispatch(seek("FORCE", MAX));
 
     var design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(1507.1078497754713);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.757090147294469);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.057950575536514844);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(2713.8722061594754);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(1.8007153280793988);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(9844.738325818731);
     expect(design.model.result.objective_value).toEqual(0.00011182321308065412);
     expect(design.model.result.termination_condition).toContain("Seek completed");
@@ -778,17 +778,17 @@ it('middleware seek6 min stress; alt start pt, opened constraints, feasible star
     store.dispatch(seek("STRESS", MIN));
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(620.288526225231);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
     expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.7529224268036674);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.06530453483860871);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
     expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(1104.699321666792);
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
     expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(1.7809443105282723);
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
     expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(3575.778800340361);
     expect(design.model.result.objective_value).toEqual(0.00004903209661889629);
     expect(design.model.result.termination_condition).toContain("Seek completed");
@@ -813,42 +813,42 @@ it('middleware restore auto save', () => {
  var design = store.getState(); // after
  
 // console.log('In middleware restore auto save Object.entries(design.model.symbol_table)[sto.PRESSURE]=',Object.entries(design.model.symbol_table)[sto.PRESSURE]);
- expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
+// expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
  expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].cmin).toEqual(0);
  expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].cmax).toEqual(1500);
  expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].smin).toEqual(1);
  expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].smax).toEqual(1500.0000001);
 
 // console.log('In middleware restore auto save Object.entries(design.model.symbol_table)[sto.RADIUS]=',Object.entries(design.model.symbol_table)[sto.RADIUS]);
- expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
+// expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
  expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmin).toEqual(0.0);
  expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmax).toEqual(0.5);
  expect(Object.entries(design.model.symbol_table)[sto.RADIUS].smin).toEqual(0.01);
  expect(Object.entries(design.model.symbol_table)[sto.RADIUS].smax).toEqual(0.5000001);
 
 // console.log('In middleware restore auto save Object.entries(design.model.symbol_table)[sto.THICKNESS]=',Object.entries(design.model.symbol_table)[sto.THICKNESS]);
- expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
+// expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
  expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].cmin).toEqual(0.0);
  expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].cmax).toEqual(0.05);
  expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].smin).toEqual(0.001);
  expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].smax).toEqual(0.050000100000000006);
 
 // console.log('In middleware restore auto save Object.entries(design.model.symbol_table)[sto.FORCE]=',Object.entries(design.model.symbol_table)[sto.FORCE]);
- expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
+// expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
  expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmin).toEqual(1000);
  expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmax).toEqual(10000);
  expect(Object.entries(design.model.symbol_table)[sto.FORCE].smin).toEqual(1000.0000001);
  expect(Object.entries(design.model.symbol_table)[sto.FORCE].smax).toEqual(10000.0000001);
 
 // console.log('In middleware restore auto save Object.entries(design.model.symbol_table)[sto.AREA]=',Object.entries(design.model.symbol_table)[sto.AREA]);
- expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
+// expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
  expect(Object.entries(design.model.symbol_table)[sto.AREA].cmin).toEqual(0);
  expect(Object.entries(design.model.symbol_table)[sto.AREA].cmax).toEqual(10);
  expect(Object.entries(design.model.symbol_table)[sto.AREA].smin).toEqual(0.1);
  expect(Object.entries(design.model.symbol_table)[sto.AREA].smax).toEqual(10.0000001);
 
 // console.log('In middleware restore auto save Object.entries(design.model.symbol_table)[sto.STRESS]=',Object.entries(design.model.symbol_table)[sto.STRESS]);
- expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
+// expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
  expect(Object.entries(design.model.symbol_table)[sto.STRESS].cmin).toEqual(0);
  expect(Object.entries(design.model.symbol_table)[sto.STRESS].cmax).toEqual(3000);
  expect(Object.entries(design.model.symbol_table)[sto.STRESS].smin).toEqual(10);

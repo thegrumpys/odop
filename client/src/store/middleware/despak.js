@@ -10,8 +10,7 @@ export function despak(pc, store, merit) {
     var kd = 0;
     var p = [];
     var x = [];
-    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-        var element = Object.entries(design.model.symbol_table)[i];
+    Object.entries(design.model.symbol_table).forEach(([name,element]) => {
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 p.push(pc[kd++]);
@@ -21,7 +20,7 @@ export function despak(pc, store, merit) {
         } else {
             x.push(element.value);
         }
-    }
+    });
 
     var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
     x = eqnset(p, x);

@@ -136,6 +136,6 @@ export function migrate(design) {
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
     
-    console.log('In migrate migrated_design=',migrated_design);
+//    console.log('In migrate migrated_design=',migrated_design);
     return migrated_design;
 }
