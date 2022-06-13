@@ -17,7 +17,7 @@ class FileProperties extends Component {
         // Initialize the state.labels to the props.labels
         this.state = {
             modal: false,
-            labels: this.props.labels
+            labels: Object.entries(this.props.labels)
         };
     }
 
@@ -27,7 +27,7 @@ class FileProperties extends Component {
         // Copy the props.labels into the state.labels
         this.setState({
             modal: !this.state.modal,
-            labels: this.props.labels
+            labels: Object.entries(this.props.labels)
         });
     }
 

@@ -14,9 +14,9 @@ class ConstraintsMinTable extends Component {
             <>
                 <Table className="col-md-3 border border-secondary" size="sm">
                     <ConstraintsMinHeaderIndependentVariable />
-                    {Object.entries(Object.entries(this.props.symbol_table)).map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={index} />)}
+                    {Object.entries(this.props.symbol_table).map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={index} />)}
                     <ConstraintsMinHeaderDependentVariable />
-                    {Object.entries(Object.entries(this.props.symbol_table)).map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMinRowDependentVariable key={element.name} element={element} index={index} />)}
+                    {Object.entries(this.props.symbol_table).map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMinRowDependentVariable key={element.name} element={element} index={index} />)}
                 </Table>
             </>
         );

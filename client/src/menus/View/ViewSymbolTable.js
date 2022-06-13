@@ -26,6 +26,7 @@ class ViewSymbolTable extends Component {
 //        console.log('In ViewSymbolTable.render this.props=', this.props);
         var flags = ['','CONSTRAINED','FIXED','CONSTRAINED|FIXED','FDCL','CONSTRAINED|FDCL','FIXED|FDCL','CONSTRAINED|FIXED|FDCL']
         var yn = b => b ? 'Y' : 'N';
+        var i = 0;
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle}>
@@ -72,11 +73,11 @@ class ViewSymbolTable extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.entries(Object.entries(this.props.symbol_table)).map((element,i) => {
+                                    {Object.entries(this.props.symbol_table).map(([name,element]) => {
                                         return (
                                             <tr key={element.name}>
-                                                <td>{i}</td>
-                                                <td>{element.name}</td>
+                                                <td>{i++}</td>
+                                                <td>{name}</td>
                                                 <td>{element.value}</td>
                                                 <td>{element.oldvalue}</td>
                                                 <td>{element.units}</td>

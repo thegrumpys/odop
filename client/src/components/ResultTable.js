@@ -252,7 +252,7 @@ class ResultTable extends Component {
                                 <InputGroup.Text>Name: </InputGroup.Text>
                             </InputGroup.Prepend>
                             <Form.Control as="select" className="align-middle" onChange={this.onSeekNameSelect} value={this.state.seek_name}>
-                                {Object.entries(Object.entries(this.props.symbol_table)).map((element, index) =>
+                                {Object.entries(this.props.symbol_table).map((element, index) =>
                                     (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
                             </Form.Control>
