@@ -10,8 +10,7 @@ export function pxPropagate(p, x, store) {
     function nameMatch(entry) {
       return Object.entries(design.model.symbol_table).find(sink => entry.name === sink.name)
     }
-    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-        var source = Object.entries(design.model.symbol_table)[i];
+    Object.entries(design.model.symbol_table).forEach(([name,spurce]) => {
 //        console.log('In pxPropagate source=',source);
         if (source.type === "equationset" && source.input) {
             value = p[ip++];

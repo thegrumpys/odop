@@ -39,8 +39,7 @@ it('despak without merit', () => {
     // Compress P into PC
     var element;
     var pc = [];
-    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-        element = Object.entries(design.model.symbol_table)[i];
+    Object.entries(design.model.symbol_table).forEach(([name,element]) => {
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 pc.push(element.value);

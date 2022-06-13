@@ -95,8 +95,7 @@ export function updateObjectiveValue(store, merit) {
         // Create p & x from symbol_table
         var p = [];
         var x = [];
-        for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-            element = Object.entries(design.model.symbol_table)[i];
+        Object.entries(design.model.symbol_table).forEach(([name,element]) => {
             if (element.type === "equationset" && element.input) {
                 p.push(element.value);
             } else {
@@ -115,8 +114,7 @@ export function updateObjectiveValue(store, merit) {
     // Update Violated Constraint Count, which becomes Feasibility on the UI
     design = store.getState(); // Re-access store to get latest vmin and vmax
     var violated_constraint_count = 0;
-    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-        element = Object.entries(design.model.symbol_table)[i];
+    Object.entries(design.model.symbol_table).forEach(([name,element]) => {
         if (element.lmin & CONSTRAINED)
             if (element.vmin > 0.0)
                 violated_constraint_count++;

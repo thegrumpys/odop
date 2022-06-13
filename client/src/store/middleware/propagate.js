@@ -8,8 +8,7 @@ export function propagate(store) {
     function nameMatch(entry) {
       return Object.entries(design.model.symbol_table).find(sink => entry.name === sink.name)
     }
-    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-        var source = Object.entries(design.model.symbol_table)[i];
+    Object.entries(design.model.symbol_table).forEach(([name,source]) => {
 //        console.log('In propagate source=',source);
         value = source.value;
         if (source.propagate !== undefined) {

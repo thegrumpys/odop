@@ -92,8 +92,7 @@ export function seek(store, action) {
         M_DEN = 1.0;
     }
     pc = [];
-    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-        element = Object.entries(design.model.symbol_table)[i];
+    Object.entries(design.model.symbol_table).forEach(([name,element]) => {
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 pc.push(element.value);
@@ -144,8 +143,7 @@ export function seek(store, action) {
         // Create p & x from symbol_table
         var p = [];
         var x = [];
-        for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-            element = Object.entries(design.model.symbol_table)[i];
+        Object.entries(design.model.symbol_table).forEach(([name,element]) => {
             if (element.type === "equationset" && element.input) {
                 p.push(element.value);
             } else {
