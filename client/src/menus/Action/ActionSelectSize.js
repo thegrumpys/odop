@@ -113,7 +113,7 @@ class ActionSelectSize extends Component {
         // Do select size entry
         this.props.saveAutoSave();
         var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-        if (this.props.system_controls.enable_auto_fix) {
+        if (this.props.system_controls.enable_auto_fix.value) {
             auto_fixed = true;
             var found = Object.entries(this.props.symbol_table).find((element) => element.name === this.state.type);
 //            console.log('In ActionSelectSize.onSelect found=',found);

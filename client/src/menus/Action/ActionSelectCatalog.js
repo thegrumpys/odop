@@ -61,7 +61,7 @@ class ActionSelectCatalog extends Component {
                 }
             }
         });
-        var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt);
+        var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt.value);
         var entry = 0; // Default to first entry
         entries.forEach((element, index) => {
             if (element[0] === entry_string) {
@@ -95,7 +95,7 @@ class ActionSelectCatalog extends Component {
         Object.entries(this.props.symbol_table).forEach((element) => {
             st.push(Object.assign({},element));
         });
-        var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt);
+        var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt.value);
         var entry = 0; // Default to first entry
         this.setState({
             name: name,

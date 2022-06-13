@@ -26,7 +26,7 @@ class NameValueUnitsHeaderIndependentVariable extends Component {
                             <span>Value (&nbsp;<i className="far fa-check-square"></i>&nbsp;Fix&nbsp;-&nbsp;<i className="far fa-square"></i>&nbsp;Free&nbsp;)</span>
                         </OverlayTrigger>
                     </th>
-                    <th className={"text-left " + (this.props.system_controls.show_units ? "" : "d-none")} id="IVUnitsTitle">
+                    <th className={"text-left " + (this.props.system_controls.show_units.value ? "" : "d-none")} id="IVUnitsTitle">
                         <OverlayTrigger placement="top" overlay={<Tooltip>Units (information only)</Tooltip>}>
                             <span>Units</span>
                         </OverlayTrigger>

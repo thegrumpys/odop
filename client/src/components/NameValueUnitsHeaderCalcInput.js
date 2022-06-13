@@ -28,7 +28,7 @@ class NameValueUnitsHeaderCalcInput extends Component {
                                     <span>Value</span>
                                 </OverlayTrigger>
                             </th>
-                            <th className={"text-left " + (this.props.system_controls.show_units ? "" : "d-none")} id="CIUnitsTitle">
+                            <th className={"text-left " + (this.props.system_controls.show_units.value ? "" : "d-none")} id="CIUnitsTitle">
                                 <OverlayTrigger placement="top" overlay={<Tooltip>Units (information only)</Tooltip>}>
                                     <span>Units</span>
                                 </OverlayTrigger>

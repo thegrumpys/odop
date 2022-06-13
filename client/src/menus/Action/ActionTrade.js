@@ -77,7 +77,7 @@ class ActionTrade extends Component {
 //        this.props.search();
         design = store.getState();
         var nviol = this.commonViolationSetup();
-        if (design.model.result.objective_value <= design.model.system_controls.objmin || nviol === 0) {
+        if (design.model.result.objective_value <= design.model.system_controls.objmin.value || nviol === 0) {
             this.props.restoreInputSymbolValues();
             ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE';
             this.props.changeResultTerminationCondition(ncode);
@@ -282,19 +282,19 @@ class ActionTrade extends Component {
             let j = this.state.vflag[i];
             element = Object.entries(design.model.symbol_table)[j];
             if (this.state.ldir[i] < 0) {
-                if (temp2 > design.model.system_controls.smallnum) {
+                if (temp2 > design.model.system_controls.smallnum.value) {
                     temp = element.vmin / temp2;
                 } else {
                     temp = element.vmin;
                 }
             } else {
-                if (temp2 > design.model.system_controls.smallnum) {
+                if (temp2 > design.model.system_controls.smallnum.value) {
                     temp = element.vmax / temp2;
                 } else {
                     temp = element.vmax;
                 }
             }
-            if (temp > design.model.system_controls.smallnum && temp < smallest) {
+            if (temp > design.model.system_controls.smallnum.value && temp < smallest) {
                 smallest = temp;
             }
             if (temp > bigest) {
@@ -308,8 +308,8 @@ class ActionTrade extends Component {
         } else {
             default_est_percent = 90 * element.vmax; // 90% of vmax
         }
-        if (default_est_percent / 100.0 < design.model.system_controls.smallnum) {
-            default_est_percent = design.model.system_controls.smallnum * 100.0;
+        if (default_est_percent / 100.0 < design.model.system_controls.smallnum.value) {
+            default_est_percent = design.model.system_controls.smallnum.value * 100.0;
         }
         this.setState({
             dir: dir,
@@ -378,7 +378,7 @@ class ActionTrade extends Component {
 //        console.log('In ActionTrade.onArbitraryChangeValid isArbitraryInvalid=',isArbitraryInvalid);
         var notAllArbitraryValid = isArbitraryInvalid.reduce((previousValue,currentValue) => {return previousValue || currentValue}, false);
 //        console.log('In ActionTrade.onArbitraryChangeValid notAllNumbers=',notAllArbitraryValid);
-        var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllArbitraryValid;
+        var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum.value || notAllArbitraryValid;
 //        console.log('In ActionTrade.onArbitraryChangeValid arbitraryContinueDisabled=',arbitraryContinueDisabled);
         this.setState({
             dir: dir,
@@ -405,7 +405,7 @@ class ActionTrade extends Component {
 //        console.log('In ActionTrade.onArbitraryChangeInvalid isArbitraryInvalid=',isArbitraryInvalid);
         var notAllArbitraryValid = isArbitraryInvalid.reduce((previousValue,currentValue) => {return previousValue || currentValue}, false);
 //        console.log('In ActionTrade.onArbitraryChangeInvalid notAllNumbers=',notAllArbitraryValid);
-        var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllArbitraryValid;
+        var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum.value || notAllArbitraryValid;
 //        console.log('In ActionTrade.onArbitraryChangeInvalid arbitraryContinueDisabled=',arbitraryContinueDisabled);
         this.setState({
             isArbitraryInvalid: isArbitraryInvalid,
@@ -455,11 +455,11 @@ class ActionTrade extends Component {
             }
         }
         design = store.getState();
-        if (design.model.result.objective_value > design.model.system_controls.objmin) {
+        if (design.model.result.objective_value > design.model.system_controls.objmin.value) {
             this.props.search();
         }
         design = store.getState();
-        if (design.model.result.objective_value <= design.model.system_controls.objmin) {
+        if (design.model.result.objective_value <= design.model.system_controls.objmin.value) {
             // Feasible was found, go show Feasible Modal
             this.setState({
                 sizeModal: !this.state.sizeModal,
@@ -467,7 +467,7 @@ class ActionTrade extends Component {
             });
             return;
         } else {
-//            if (design.model.system_controls.ioopt > 1) {
+//            if (design.model.system_controls.ioopt.value > 1) {
 //                console.log('TRIAL (FULL STEP) CONSTRAINTS:');
 //                this.clister();
 //            }
@@ -488,7 +488,7 @@ class ActionTrade extends Component {
             this.props.restoreInputSymbolValues();
             this.props.search();
             design = store.getState();
-            if (design.model.result.objective_value <= design.model.system_controls.objmin) {
+            if (design.model.result.objective_value <= design.model.system_controls.objmin.value) {
                 // Feasible was found, go show Feasible Modal
                 this.setState({
                     sizeModal: !this.state.sizeModal,
@@ -508,7 +508,7 @@ class ActionTrade extends Component {
             var capb;
             var capc;
             var arg;
-//            if (design.model.system_controls.ioopt > 1) {
+//            if (design.model.system_controls.ioopt.value > 1) {
 //                console.log('TRIAL (HALF STEP) CONSTRAINTS:');
 //                this.clister();
 //            }
@@ -631,7 +631,7 @@ class ActionTrade extends Component {
 //        design = store.getState();
 //        this.props.search();
         design = store.getState(); // Re-access store to get latest element values
-        if (design.model.result.objective_value <= design.model.system_controls.objmin) {
+        if (design.model.result.objective_value <= design.model.system_controls.objmin.value) {
             ncode = 'ACCEPTED TRADE RESULT';
             this.props.changeResultTerminationCondition(ncode);
             this.setState({
@@ -837,7 +837,7 @@ class ActionTrade extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onSizeCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" disabled={this.state.isSizeInvalid || this.state.default_est_percent / 100.0 < design.model.system_controls.smallnum} onClick={this.onSizeContinue}>Continue</Button>
+                        <Button variant="primary" disabled={this.state.isSizeInvalid || this.state.default_est_percent / 100.0 < design.model.system_controls.smallnum.value} onClick={this.onSizeContinue}>Continue</Button>
                     </Modal.Footer>
                 </Modal>
                 {/*==================================================*/}
@@ -949,7 +949,7 @@ class ActionTrade extends Component {
                         element = Object.entries(design.model.symbol_table)[j];
                         if (this.state.ldir[i] < 0) {
 //                                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
-                            if (design.model.result.objective_value < design.model.system_controls.objmin) {
+                            if (design.model.result.objective_value < design.model.system_controls.objmin.value) {
                                 constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-low-danger align-middle text-right' : 'text-right';
                             } else {
                                 constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-danger align-middle text-right font-weight-bold' : 'text-right';
@@ -965,7 +965,7 @@ class ActionTrade extends Component {
                                 );
                         } else {
 //                                console.log(element.name + ' MAX ' + element.vmax * 100.0 + ' ' + element.cmax + ' ' + element.units);
-                            if (design.model.result.objective_value < design.model.system_controls.objmin) {
+                            if (design.model.result.objective_value < design.model.system_controls.objmin.value) {
                                 constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-low-danger align-middle text-right' : 'text-right';
                             } else {
                                 constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-danger align-middle text-right font-weight-bold' : 'text-right';

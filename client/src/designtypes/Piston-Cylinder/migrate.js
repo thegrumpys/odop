@@ -61,8 +61,8 @@ export function migrate(design) {
         migrated_design.version = '2'; // last thing... set the migrated model version
     case '2':
         // console.log('Convert from 2 to 3');
-        design.system_controls.show_units = 1; // Add show_units to system_controls
-        design.system_controls.show_violations = 1; // Add show_violations to system_controls
+        design.system_controls.show_units.value = 1; // Add show_units to system_controls
+        design.system_controls.show_violations.value = 1; // Add show_violations to system_controls
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
             if (element.type !== undefined && element.type === "table") {
                 element.format = "table";
@@ -88,7 +88,7 @@ export function migrate(design) {
         migrated_design.version = '4'; // last thing... set the migrated model version
     case '4':
         // console.log('Convert from 4 to 5');
-        design.system_controls.enable_auto_fix = 1;
+        design.system_controls.enable_auto_fix.value = 1;
         migrated_design.version = '5'; // last thing... set the migrated model version
     case '5':
         // Current model version

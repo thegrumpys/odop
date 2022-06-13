@@ -32,7 +32,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
     onChangeValid(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=',event.target.value);
         var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-        if (this.props.system_controls.enable_auto_fix) {
+        if (this.props.system_controls.enable_auto_fix.value) {
             auto_fixed = true;
             if (!(this.props.element.lmin & FIXED)) {
                 this.props.fixSymbolValue(this.props.element.name);
@@ -153,7 +153,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                             </InputGroup.Append>
                         </InputGroup>
                     </td>
-                    <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
+                    <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units.value ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
                 </tr>
             </tbody>
         );

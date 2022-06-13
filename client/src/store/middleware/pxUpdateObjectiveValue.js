@@ -94,7 +94,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     }
     
     // Update Objective Value
-    obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
+    obj = design.model.system_controls.viol_wt.value * viol_sum + m_funct;
     
 //    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
     return obj;

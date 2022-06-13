@@ -31,7 +31,7 @@ class ConstraintMinHeaderDependentVariable extends Component {
                             <span>Value</span>
                         </OverlayTrigger>
                     </th>
-                    <th className={"text-right " + (this.props.system_controls.show_violations > 0 ? "" : "d-none")} id="DVMinConstraintViolationTitle">
+                    <th className={"text-right " + (this.props.system_controls.show_violations.value > 0 ? "" : "d-none")} id="DVMinConstraintViolationTitle">
                         <OverlayTrigger placement="top" overlay={<Tooltip>Measure of constraint violation.<br />Set File : Preferences show_violations=2 to show both violation (+) and satisfaction (-).</Tooltip>}>
                             <span>Violation</span>
                         </OverlayTrigger>

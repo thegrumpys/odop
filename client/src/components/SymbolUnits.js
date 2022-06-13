@@ -7,7 +7,7 @@ class SymbolUnits extends Component {
 //        console.log('In SymbolUnits.render this=',this);
         return (
             <>
-                <td className={"text-nowrap align-middle " + (this.props.system_controls.show_units ? "" : "d-none") + (this.props.className !== undefined ? this.props.className : '')}>{this.props.element.units}</td>
+                <td className={"text-nowrap align-middle " + (this.props.system_controls.show_units.value ? "" : "d-none") + (this.props.className !== undefined ? this.props.className : '')}>{this.props.element.units}</td>
             </>
         );
     }

@@ -235,7 +235,7 @@ export const dispatcher = store => next => action => {
 
     case SEARCH:
         design = store.getState();
-        search(store, design.model.system_controls.objmin);
+        search(store, design.model.system_controls.objmin.value);
         break;
     case SEEK:
         seek(store, action);

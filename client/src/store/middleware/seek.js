@@ -23,17 +23,17 @@ export function seek(store, action) {
     var M_DEN;
     var M_NUM;
     var design = store.getState(); // Re-access store to get latest element values
-    if (design.model.system_controls.ioopt > 5) {
+    if (design.model.system_controls.ioopt.value > 5) {
         console.log("00 In seek", action);
     }
-    if (design.model.system_controls.ioopt > 5) {
+    if (design.model.system_controls.ioopt.value > 5) {
         console.log('01 SEEK:    OBJ =', design.model.result.objective_value);
-        if (design.model.result.objective_value > design.model.system_controls.objmin && Object.entries(design.model.symbol_table).reduce((total, element)=>{return ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) && element.lmin&FIXED ? total+1 : total+0}, 0) === 0) {
+        if (design.model.result.objective_value > design.model.system_controls.objmin.value && Object.entries(design.model.symbol_table).reduce((total, element)=>{return ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) && element.lmin&FIXED ? total+1 : total+0}, 0) === 0) {
             console.log('02 NOTE:  THE SEEK PROCESS MAY PRODUCE BETTER RESULTS WITH A FEASIBLE START POINT.');
         }
     }
     
-    if (design.model.system_controls.ioopt > 5) {
+    if (design.model.system_controls.ioopt.value > 5) {
         console.log("02A THE NUMBER OF FIXED INDEPENDENT VARIABLES IS:", Object.entries(design.model.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && element.lmin & FIXED ? total+1 : total+0}, 0));
         console.log("02B THE NUMBER OF FREE INDEPENDENT VARIABLES IS:", Object.entries(design.model.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0));
     }
@@ -68,13 +68,13 @@ export function seek(store, action) {
     }
     M_NUM = temp + 0.1 * SDIR * temp;
     var starting_value = Object.entries(design.model.symbol_table)[SOUGHT - 1].value;
-    if (design.model.system_controls.ioopt > 5) {
+    if (design.model.system_controls.ioopt.value > 5) {
         console.log('03 THE CURRENT VALUE OF '+dname+' IS: '+starting_value+' '+input);
         console.log('04 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+input);
         console.log('05 ESTIMATING VALUE OF OPTIMUM ...');
     }
-    M_DEN = Math.abs(M_NUM) / design.model.system_controls.mfn_wt;
-    if (M_DEN < design.model.system_controls.smallnum) {
+    M_DEN = Math.abs(M_NUM) / design.model.system_controls.mfn_wt.value;
+    if (M_DEN < design.model.system_controls.smallnum.value) {
         M_DEN = 1.0;
     }
     store.dispatch(saveInputSymbolValues());
@@ -82,13 +82,13 @@ export function seek(store, action) {
     obj = search(store, -1.0, merit);
     design = store.getState(); // Re-access store to get latest element values
     M_NUM = Object.entries(design.model.symbol_table)[SOUGHT - 1].value;
-    if (design.model.system_controls.ioopt > 5) {
+    if (design.model.system_controls.ioopt.value > 5) {
         temp = Object.entries(design.model.symbol_table)[SOUGHT - 1].value;
         console.log('06 THE CURRENT VALUE OF '+dname+' IS: '+temp+' '+input);
         console.log('07 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+input);
     }
-    M_DEN = Math.abs(M_NUM) / design.model.system_controls.mfn_wt;
-    if (M_DEN < design.model.system_controls.smallnum) {
+    M_DEN = Math.abs(M_NUM) / design.model.system_controls.mfn_wt.value;
+    if (M_DEN < design.model.system_controls.smallnum.value) {
         M_DEN = 1.0;
     }
     pc = [];
@@ -101,37 +101,37 @@ export function seek(store, action) {
     }
     obj = despak(pc, store);
     design = store.getState(); // Re-access store to get latest element values
-    if (obj < design.model.system_controls.objmin) {
+    if (obj < design.model.system_controls.objmin.value) {
         store.dispatch(restoreInputSymbolValues());
     } else {
-        if (design.model.system_controls.ioopt > 5) {
+        if (design.model.system_controls.ioopt.value > 5) {
             console.log('08 SEARCHING FOR A FEASIBLE START POINT ...');
         }
-        obj = search(store, design.model.system_controls.objmin);
+        obj = search(store, design.model.system_controls.objmin.value);
         design = store.getState(); // Re-access store to get latest element values
-        if (design.model.system_controls.ioopt > 5) {
+        if (design.model.system_controls.ioopt.value > 5) {
             temp = Object.entries(design.model.symbol_table)[SOUGHT - 1].value;
             console.log('09 THE CURRENT VALUE OF '+dname+' IS: '+temp+' '+input);
             console.log('10 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+input);
         }
     }
-    if (design.model.system_controls.ioopt > 5) {
+    if (design.model.system_controls.ioopt.value > 5) {
         console.log('11 SEEKING OPTIMUM '+dname+' USING ESTIMATE OF: '+M_NUM+' '+input);
     }
-    M_DEN = Math.abs(M_NUM) / design.model.system_controls.mfn_wt;
-    if (M_DEN < design.model.system_controls.smallnum) {
+    M_DEN = Math.abs(M_NUM) / design.model.system_controls.mfn_wt.value;
+    if (M_DEN < design.model.system_controls.smallnum.value) {
         M_DEN = 1.0;
     }
-    obj = search(store, design.model.system_controls.objmin, merit);
+    obj = search(store, design.model.system_controls.objmin.value, merit);
     design = store.getState(); // Re-access store to get latest element values
     var ending_value = Object.entries(design.model.symbol_table)[SOUGHT - 1].value;
-    if (design.model.system_controls.ioopt > 5) {
+    if (design.model.system_controls.ioopt.value > 5) {
         console.log('12 RETURN ON: '+design.model.result.termination_condition+'     OBJ ='+design.model.result.objective_value);
         console.log('13 CURRENT VALUE OF '+dname+' IS '+ending_value+' '+input);
     }
     var percent_improvement = Math.abs(starting_value - ending_value) / starting_value * 100.0;
 //  Check if obj is more negative than negative objmin
-    if (obj < -design.model.system_controls.objmin) {
+    if (obj < -design.model.system_controls.objmin.value) {
         ncode = 'Seek completed. ' + dname + ' ' + (starting_value.toODOPPrecision()) + ' --> ' + (ending_value.toODOPPrecision()) + ' ' + input + '; ' + (percent_improvement.toODOPPrecision()) + '% improvement. TO FURTHER IMPROVE RESULT, RE-EXECUTE SEEK';
         store.dispatch(changeResultTerminationCondition(ncode));
     } else {
@@ -139,7 +139,7 @@ export function seek(store, action) {
         store.dispatch(changeResultTerminationCondition(ncode));
     }
 
-    if (design.model.system_controls.ioopt > 5) {
+    if (design.model.system_controls.ioopt.value > 5) {
         // Create p & x from symbol_table
         var p = [];
         var x = [];
@@ -183,7 +183,7 @@ export function seek(store, action) {
                 m_funct = (-value + M_NUM) / M_DEN;
             }
         }
-//        if (design.model.system_controls.ioopt > 5) {
+//        if (design.model.system_controls.ioopt.value > 5) {
 //            console.log('15 In merit SOUGHT=',SOUGHT,'SDIR=', SDIR,'value=', value,'m_funct=', m_funct);
 //        }
         return m_funct;

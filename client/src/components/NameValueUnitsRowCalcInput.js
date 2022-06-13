@@ -99,7 +99,7 @@ class NameValueUnitsRowCalcInput extends Component {
                             }
                         </InputGroup>
                     </td>
-                    <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
+                    <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units.value ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
                 </tr>
             </tbody>
         );

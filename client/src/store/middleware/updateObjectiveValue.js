@@ -108,7 +108,7 @@ export function updateObjectiveValue(store, merit) {
     }
     
     // Update Objective Value
-    obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
+    obj = design.model.system_controls.viol_wt.value * viol_sum + m_funct;
     store.dispatch(changeResultObjectiveValue(obj));
     
     // Update Violated Constraint Count, which becomes Feasibility on the UI

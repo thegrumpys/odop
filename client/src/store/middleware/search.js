@@ -22,9 +22,9 @@ export function search(store, objmin, merit) {
     }
     
     // Do the pattern search
-    var delarg = design.model.system_controls.del;
-//    console.log('In search pc=',pc,'delarg=',delarg,'design.model.system_controls.delmin=',design.model.system_controls.delmin,'objmin=',objmin,'design.model.system_controls.maxit=',design.model.system_controls.maxit,'design.model.system_controls.tol=',design.model.system_controls.tol);
-    var ncode = patsh(pc, delarg, design.model.system_controls.delmin, objmin, design.model.system_controls.maxit, design.model.system_controls.tol, store, merit);
+    var delarg = design.model.system_controls.del.value;
+//    console.log('In search pc=',pc,'delarg=',delarg,'design.model.system_controls.delmin.value=',design.model.system_controls.delmin.value,'objmin=',objmin,'design.model.system_controls.maxit.value=',design.model.system_controls.maxit.value,'design.model.system_controls.tol.value=',design.model.system_controls.tol.value);
+    var ncode = patsh(pc, delarg, design.model.system_controls.delmin.value, objmin, design.model.system_controls.maxit.value, design.model.system_controls.tol.value, store, merit);
     
     // Expand PC back into store change actions
     var kd = 0;
