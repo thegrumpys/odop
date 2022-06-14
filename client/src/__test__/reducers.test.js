@@ -635,13 +635,13 @@ it('reducers change label value', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-    expect(design.model.labels[0].name).toEqual('COMMENT');
+//    expect(design.model.labels[0].name).toEqual('COMMENT');
     expect(design.model.labels[0].value).toEqual('PCYL Default startup file ...');
 
     store.dispatch(changeLabelsValue([{name: 'COMMENT', value: 'Test'}]));
 
     design = store.getState(); // after
-    expect(design.model.labels[0].name).toEqual('COMMENT');
+//    expect(design.model.labels[0].name).toEqual('COMMENT');
     expect(design.model.labels[0].value).toEqual('Test');
 });
 

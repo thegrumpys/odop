@@ -101,7 +101,7 @@ export function updateObjectiveValue(store, merit) {
             } else {
                 x.push(element.value);
             }
-        }
+        });
         m_funct = merit(p, x, design);
     } else {
         m_funct = 0.0;
@@ -121,7 +121,7 @@ export function updateObjectiveValue(store, merit) {
         if (element.lmax & CONSTRAINED)
             if (element.vmax > 0.0)
                 violated_constraint_count++;
-    }
+    });
     store.dispatch(changeResultViolatedConstraintCount(violated_constraint_count));
     
 //    console.log('</ul><li>','End updateObjectiveValue obj=',obj,'</li>');

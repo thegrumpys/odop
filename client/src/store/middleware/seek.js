@@ -98,7 +98,7 @@ export function seek(store, action) {
                 pc.push(element.value);
             }
         }
-    }
+    });
     obj = despak(pc, store);
     design = store.getState(); // Re-access store to get latest element values
     if (obj < design.model.system_controls.objmin.value) {
@@ -149,7 +149,7 @@ export function seek(store, action) {
             } else {
                 x.push(element.value);
             }
-        }
+        });
         console.log('14 Merit Function = ', merit(p, x, design));  // Merit Function contribution to OBJ may be negative
     }
     

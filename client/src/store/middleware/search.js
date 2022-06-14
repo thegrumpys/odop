@@ -19,7 +19,7 @@ export function search(store, objmin, merit) {
                 pc.push(element.value);
             }
         }
-    }
+    });
     
     // Do the pattern search
     var delarg = design.model.system_controls.del.value;
@@ -37,7 +37,7 @@ export function search(store, objmin, merit) {
                 p.push(element.value);
             }
         }
-    }
+    });
     store.dispatch(changeInputSymbolValues(p, merit));
     store.dispatch(changeResultTerminationCondition(ncode));
     

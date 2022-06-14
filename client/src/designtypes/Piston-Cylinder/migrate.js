@@ -103,7 +103,6 @@ export function migrate(design) {
         // Current model version
         // console.log('Convert from 6 to 7');
         // To be defined - presently do nothing
-//        ['a', 'b', 'c'].reduce((a, v) => ({ ...a, [v]: v}), {}) 
         design.symbol_table = design.symbol_table.reduce((accum,element) => {
             var name = element.name;
             delete element.name;

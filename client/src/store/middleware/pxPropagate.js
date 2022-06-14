@@ -10,7 +10,7 @@ export function pxPropagate(p, x, store) {
     function nameMatch(entry) {
       return Object.entries(design.model.symbol_table).find(sink => entry.name === sink.name)
     }
-    Object.entries(design.model.symbol_table).forEach(([name,spurce]) => {
+    Object.entries(design.model.symbol_table).forEach(([name,source]) => {
 //        console.log('In pxPropagate source=',source);
         if (source.type === "equationset" && source.input) {
             value = p[ip++];
@@ -27,6 +27,6 @@ export function pxPropagate(p, x, store) {
                  store.dispatch(changeSymbolConstraint(sink.name, entry.minmax, value));
              }
         }
-    }
+    });
 //    console.log('</ul><li>','End pxPropagate','</li>');
 }

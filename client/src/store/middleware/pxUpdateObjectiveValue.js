@@ -43,7 +43,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
                 viol_sum = viol_sum + vmax * vmax;
             }
         }
-    }
+    });
     var ix = 0;
     Object.entries(design.model.symbol_table).forEach(([name,element]) => {
         if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
@@ -84,7 +84,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
                 }
             }
         }
-    }
+    });
     
     /* Merit Function */
     if (merit && typeof merit === 'function') {

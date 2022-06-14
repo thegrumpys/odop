@@ -21,6 +21,6 @@ export function propagate(store) {
                 store.dispatch(changeSymbolConstraint(sink.name, entry.minmax, value));
             }
         }
-    }
+    });
 //    console.log('</ul><li>','End propagate','</li>');
 }

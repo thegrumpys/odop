@@ -45,7 +45,7 @@ it('despak without merit', () => {
                 pc.push(element.value);
             }
         }
-    }
+    });
     var obj = despak(pc, store);
 
     var design = store.getState(); // after

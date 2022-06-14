@@ -24,6 +24,10 @@ it('middleware with startup', () => {
         applyMiddleware(dispatcher));
 
     var design = store.getState(); // before
+    console.log('design=',design);
+    console.log('design=',Object.entries(design.model.symbol_table));
+//    console.log('@@@1 design=',Object.entries(design.model.symbol_table)[sto.PRESSURE]);
+//    console.log('@@@2 design=',Object.entries(design.model.symbol_table)[sto.PRESSURE].cmin);
 //    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].cmin).toEqual(0);
     expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].cmax).toEqual(1500);
