@@ -293,16 +293,17 @@ export function migrate(design) {
         design.symbol_table[34].validmin = -Number.MAX_VALUE; // F1_IT_Margin
         design.symbol_table[34].validmin = -Number.MIN_VALUE; // Energy
         design.symbol_table[42].validmin = -Number.MAX_VALUE; // Inactive_Coils
+        design.symbol_table[61].validmin = -Number.MIN_VALUE; // Hook_Deflect_Allow
         design.symbol_table[64].validmin = -Number.MAX_VALUE; // tbase010
         design.symbol_table[65].validmin = -Number.MAX_VALUE; // tbase400
         design.symbol_table[66].validmin = -Number.MAX_VALUE; // const_term
         design.symbol_table[67].validmin = -Number.MAX_VALUE; // slope_term
         design.symbol_table[68].validmin = -Number.MAX_VALUE; // tensile_010
-        displayMessage(
-            "The Alert Facility (new in v4.3) may highlight previously unrecognized issues saved with earlier designs. See Help Alerts and/or contact technical support for details.  ...  ",
-            'info');
         design.symbol_table[35].hidden = true; // Inactive_Coils
         migrated_design.version = '8'; // last thing... set the migrated model version
+        displayMessage(
+            "The new Alert Facility may highlight previously unrecognized issues saved with earlier designs. Enter \"Alerts\" in Help Lookup and/or contact technical support.  ...  ",
+            'info');
     case '8':
         // Current model version
         // console.log('Convert from 8 to 9');

@@ -993,7 +993,7 @@ export const initialState = {
             "lmax": 0,
             "cmin": 0,
             "cmax": 0,
-            "validmin": 0.0,
+            "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
             "tooltip": "Hook Deflection Allowance - adds to Coils_A",
