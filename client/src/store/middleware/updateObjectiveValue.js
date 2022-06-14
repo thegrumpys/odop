@@ -14,7 +14,6 @@ export function updateObjectiveValue(store, merit) {
      * constraint violations, merit function, and state variable fix violations.
      * It is not problem dependent.
      */
-    var element;
     var vmin;
     var vmax;
     var m_funct;

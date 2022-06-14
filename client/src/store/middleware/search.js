@@ -10,7 +10,6 @@ export function search(store, objmin, merit) {
     var design = store.getState();
     
     // Compress P into PC
-    var element;
     var pc = [];
     Object.entries(design.model.symbol_table).forEach(([name,element]) => {
         if (element.type === "equationset" && element.input) {
