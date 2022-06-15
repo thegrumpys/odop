@@ -941,6 +941,10 @@ class ActionTrade extends Component {
 //    }
 
     list_constraints() {
+        var design;
+        const { store } = this.context;
+        design = store.getState();
+        var values = Object.values(design.model.symbol_table);
         return (
             <Container>
                 <Row>
@@ -957,7 +961,7 @@ class ActionTrade extends Component {
                         var constraint_class;
                         const { store } = this.context;
                         design = store.getState();
-                        element = value[j];
+                        element = values[j];
                         if (this.state.ldir[i] < 0) {
 //                                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
                             if (design.model.result.objective_value < design.model.system_controls.objmin.value) {

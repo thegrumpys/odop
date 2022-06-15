@@ -93,7 +93,7 @@ class FileProperties extends Component {
                                 Object.values(this.state.labels).map(
                                     (label) => {
                                         return (
-                                            <Row key={lanel.name}>
+                                            <Row key={label.name}>
                                                 <Col className="align-middle text-left">{label.name}</Col>
                                                 <Col className="align-middle text-left">
                                                     <Form.Control as="textarea" className="input-group-lg" value={label.value} onChange={(event) => {this.onChange(label.name, event.target.value)}}/>
