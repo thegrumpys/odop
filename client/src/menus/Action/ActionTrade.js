@@ -799,7 +799,6 @@ class ActionTrade extends Component {
                             </Row>
                             {
                                 this.state.vflag.map((j,i) => {
-                                    var design;
                                     var element;
                                     var dname;
                                     const { store } = this.context;
