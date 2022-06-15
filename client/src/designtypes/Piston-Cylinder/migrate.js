@@ -105,12 +105,10 @@ export function migrate(design) {
         // To be defined - presently do nothing
         design.symbol_table = design.symbol_table.reduce((accum,element) => {
             var name = element.name;
-            delete element.name;
             return ({ ...accum, [name]: element });
         }, {});
         design.labels = design.labels.reduce((accum,element) => {
             var name = element.name;
-            delete element.name;
             return ({ ...accum, [name]: element });
         }, {});
         Object.entries(design.system_controls).forEach(([name,element]) => { // For each System Controls entry

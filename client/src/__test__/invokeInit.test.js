@@ -27,20 +27,20 @@ it('invokeInit', () => {
     var design = store.getState(); // after
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-    expect(design.model.version).toEqual("6");
+    expect(design.model.version).toEqual("7");
 
-//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(500);
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.04);
-//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE"); // x vector
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(123);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(456);
-//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(789);
+    expect(design.model.symbol_table.PRESSURE.name).toEqual("PRESSURE"); // p vector
+    expect(design.model.symbol_table.PRESSURE.value).toEqual(500);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.THICKNESS.name).toEqual("THICKNESS");
+    expect(design.model.symbol_table.THICKNESS.value).toEqual(0.04);
+    expect(design.model.symbol_table.FORCE.name).toEqual("FORCE"); // x vector
+    expect(design.model.symbol_table.FORCE.value).toEqual(123);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(456);
+    expect(design.model.symbol_table.STRESS.name).toEqual("STRESS");
+    expect(design.model.symbol_table.STRESS.value).toEqual(789);
 
     expect(design.model.system_controls.ioopt.value).toEqual(3);
     expect(design.model.system_controls.maxit.value).toEqual(100);

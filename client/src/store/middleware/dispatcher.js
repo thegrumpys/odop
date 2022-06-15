@@ -37,6 +37,7 @@ export const dispatcher = store => next => action => {
     var source;
     var sink;
     var index;
+    var element;
 
     const returnValue = next(action);
 
@@ -62,33 +63,27 @@ export const dispatcher = store => next => action => {
     case CHANGE_SYMBOL_VALUE:
 //        console.log('In dispatcher.CHANGE_SYMBOL_VALUE name=',action.payload.name,'value=',action.payload.value,'merit=',action.payload.merit);
         design = store.getState();
-        Object.entries(design.model.symbol_table).find((element) => {
-            if (element.name === action.payload.name) {
-                if (element.type === "calcinput") {
-//                    console.log("In dispatcher.CHANGE_SYMBOL_VALUE element=",element);
-                    if (element.format === 'table') {
-//                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE file = ../../designtypes/'+element.table+'.json');
-                        var table = require('../../designtypes/'+element.table+'.json'); // Dynamically load table
-                        var selectedIndex = element.value;
-//                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE table=',table,'selectedIndex=',selectedIndex);
-                        table[selectedIndex].forEach((value, index) => {
-                            if (index > 0) { // Skip the first column
-                                var name = table[0][index];
-//                                console.log('In dispatcher.CHANGE_SYMBOL_VALUE value=',value,'index=',index,' name=',name);
-                                if (Object.entries(design.model.symbol_table).find(element2 => element2.name === name) !== undefined) {
-//                                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE name=',name,'value=',value);
-                                    store.dispatch(changeSymbolValue(name,value));
-                                }
-                            }
-                        });
+        element = design.model.symbol_table[action.payload.name];
+        if (element.type === "calcinput") {
+//            console.log("In dispatcher.CHANGE_SYMBOL_VALUE element=",element);
+            if (element.format === 'table') {
+//                console.log('In dispatcher.CHANGE_SYMBOL_VALUE file = ../../designtypes/'+element.table+'.json');
+                var table = require('../../designtypes/'+element.table+'.json'); // Dynamically load table
+                var selectedIndex = element.value;
+//                console.log('In dispatcher.CHANGE_SYMBOL_VALUE table=',table,'selectedIndex=',selectedIndex);
+                table[selectedIndex].forEach((value, index) => {
+                    if (index > 0) { // Skip the first column
+                        var name = table[0][index];
+//                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE value=',value,'index=',index,' name=',name);
+                        if (Object.entries(design.model.symbol_table).find(element2 => element2.name === name) !== undefined) {
+//                            console.log('In dispatcher.CHANGE_SYMBOL_VALUE name=',name,'value=',value);
+                            store.dispatch(changeSymbolValue(name,value));
+                        }
                     }
-                    invokeInit(store);
-                }
-                return true;
-            } else {
-                return false;
+                });
             }
-        });
+            invokeInit(store);
+        }
         invokeEquationSet(store);
         propagate(store);
         updateObjectiveValue(store, action.payload.merit);
@@ -96,43 +91,35 @@ export const dispatcher = store => next => action => {
     case FIX_SYMBOL_VALUE:
 //        console.log('In dispatcher.FIX_SYMBOL_VALUE action=',action);
         design = store.getState();
-        Object.entries(design.model.symbol_table).find((element) => {
-            if (element.name === action.payload.name) {
-                if (element.lmin & FIXED) { // Is it already FIXED?
-                    if (action.payload.value !== undefined) {
-                        store.dispatch(changeSymbolValue(element.name, action.payload.value));
-                    }
-                    return true; // We're done
-                } else if (element.type === "equationset" && element.input) {
-                    // Independent
-                    store.dispatch(saveOutputSymbolConstraints(element.name));
-                    store.dispatch(setSymbolFlag(element.name, MIN, FIXED));
-                    store.dispatch(setSymbolFlag(element.name, MAX, FIXED));
-                    if (action.payload.value !== undefined) {
-                        store.dispatch(changeSymbolValue(element.name, action.payload.value));
-                    }
-                    return true; // found
-                } else if (element.type === "equationset" && !element.input) {
-                    // Dependent
-                    store.dispatch(saveOutputSymbolConstraints(element.name));
-                    store.dispatch(setSymbolFlag(element.name, MIN, FIXED|CONSTRAINED));
-                    store.dispatch(setSymbolFlag(element.name, MAX, FIXED|CONSTRAINED));
-                    if (action.payload.value !== undefined) {
-                        store.dispatch(changeSymbolConstraint(element.name, MIN, action.payload.value));
-                        store.dispatch(changeSymbolConstraint(element.name, MAX, action.payload.value));
-                    } else {
-                        store.dispatch(changeSymbolConstraint(element.name, MIN, element.value));
-                        store.dispatch(changeSymbolConstraint(element.name, MAX, element.value));
-                    }
-                    return true; // found
-                } else {
-                    // Calculation Inputs
-                    throw new Error('In dispatcher.FIX_SYMBOL_VALUE Calculation Input is Invalid');
-                }
-            } else {
-                return false; // not-found
+        element = design.model.symbol_table[action.payload.name];
+        if (element.lmin & FIXED) { // Is it already FIXED?
+            if (action.payload.value !== undefined) {
+                store.dispatch(changeSymbolValue(element.name, action.payload.value));
             }
-        });
+        } else if (element.type === "equationset" && element.input) {
+            // Independent
+            store.dispatch(saveOutputSymbolConstraints(element.name));
+            store.dispatch(setSymbolFlag(element.name, MIN, FIXED));
+            store.dispatch(setSymbolFlag(element.name, MAX, FIXED));
+            if (action.payload.value !== undefined) {
+                store.dispatch(changeSymbolValue(element.name, action.payload.value));
+            }
+        } else if (element.type === "equationset" && !element.input) {
+            // Dependent
+            store.dispatch(saveOutputSymbolConstraints(element.name));
+            store.dispatch(setSymbolFlag(element.name, MIN, FIXED|CONSTRAINED));
+            store.dispatch(setSymbolFlag(element.name, MAX, FIXED|CONSTRAINED));
+            if (action.payload.value !== undefined) {
+                store.dispatch(changeSymbolConstraint(element.name, MIN, action.payload.value));
+                store.dispatch(changeSymbolConstraint(element.name, MAX, action.payload.value));
+            } else {
+                store.dispatch(changeSymbolConstraint(element.name, MIN, element.value));
+                store.dispatch(changeSymbolConstraint(element.name, MAX, element.value));
+            }
+        } else {
+            // Calculation Inputs
+            throw new Error('In dispatcher.FIX_SYMBOL_VALUE Calculation Input is Invalid');
+        }
         invokeEquationSet(store);
         propagate(store);
         updateObjectiveValue(store);
@@ -140,16 +127,10 @@ export const dispatcher = store => next => action => {
     case FREE_SYMBOL_VALUE:
 //        console.log('In dispatcher.FREE_SYMBOL_VALUE action=',action);
         design = store.getState();
-        Object.entries(design.model.symbol_table).find((element) => {
-            if (element.name === action.payload.name) {
-                if (element.lmin & FIXED) {
-                    store.dispatch(restoreOutputSymbolConstraints(element.name));
-                }
-                return true;
-            } else {
-                return false;
-            }
-        });
+        element = design.model.symbol_table[action.payload.name];
+        if (element.lmin & FIXED) {
+            store.dispatch(restoreOutputSymbolConstraints(element.name));
+        }
         invokeEquationSet(store);
         propagate(store);
         updateObjectiveValue(store);
@@ -163,10 +144,10 @@ export const dispatcher = store => next => action => {
     case SET_SYMBOL_FLAG:
 //        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action);
         design = store.getState();
-        sink = Object.entries(design.model.symbol_table).find(element => element.name === action.payload.name);
+        sink = design.model.symbol_table[action.payload.name];
 //        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate sink=',sink);
         if (action.payload.mask & FDCL) {
-            source = Object.entries(design.model.symbol_table).find(element => element.name === action.payload.source);
+            source = design.model.symbol_table[action.payload.source];
 //            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate source=',source);
             if (source.propagate === undefined) source.propagate = [];
             index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
@@ -186,13 +167,13 @@ export const dispatcher = store => next => action => {
     case RESET_SYMBOL_FLAG:
 //        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate action=',action);
         design = store.getState();
-        sink = Object.entries(design.model.symbol_table).find(element => element.name === action.payload.name);
+        sink = design.model.symbol_table[action.payload.name];
 //        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate sink=',sink);
         if (action.payload.mask & FDCL) {
             if (action.payload.minmax === MIN) {
-                source = Object.entries(design.model.symbol_table).find(element => element.name === sink.cminchoices[sink.cminchoice]);
+                source = design.model.symbol_table[sink.cminchoices[sink.cminchoice]];
             } else {
-                source = Object.entries(design.model.symbol_table).find(element => element.name === sink.cmaxchoices[sink.cmaxchoice]);
+                source = design.model.symbol_table[sink.cmaxchoices[sink.cmaxchoice]];
             }
 //            console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate source=',source);
             if (source !== undefined && source.propagate !== undefined) {

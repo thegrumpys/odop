@@ -27,10 +27,10 @@ it('reducers without startup', () => {
 
     var design = store.getState(); // after
     expect(design.model.type).toEqual("Piston-Cylinder");
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
 });
 
 it('reducers with startup', () => {
@@ -42,20 +42,20 @@ it('reducers with startup', () => {
     var design = store.getState(); // before
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
 
     store.dispatch(startup());
 
     var design = store.getState(); // after
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
 });
 
 it('reducers load', () => {
@@ -129,18 +129,18 @@ it('reducers change symbol value', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
 
     store.dispatch(changeSymbolValue("RADIUS", 0.5));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.5);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.5);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
 });
 
 it('reducers change symbol violation min', () => {
@@ -150,14 +150,14 @@ it('reducers change symbol violation min', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].vmin).toEqual(undefined);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.vmin).toEqual(undefined);
 
     store.dispatch(changeSymbolViolation("RADIUS", MIN, -1234));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].vmin).toEqual(-1234);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.vmin).toEqual(-1234);
 });
 
 it('reducers change symbol violation max', () => {
@@ -167,14 +167,14 @@ it('reducers change symbol violation max', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].vmax).toEqual(undefined);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.vmax).toEqual(undefined);
 
     store.dispatch(changeSymbolViolation("RADIUS", MAX, 1234));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].vmax).toEqual(1234);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.vmax).toEqual(1234);
 });
 
 it('reducers change symbol constraint min', () => {
@@ -184,16 +184,16 @@ it('reducers change symbol constraint min', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmin).toEqual(0.0);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].smin).toEqual(undefined);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.cmin).toEqual(0.0);
+    expect(design.model.symbol_table.RADIUS.smin).toEqual(undefined);
 
     store.dispatch(changeSymbolConstraint("RADIUS", MIN, 0.1));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmin).toEqual(0.1);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].smin).toEqual(0.10000010000000001);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.cmin).toEqual(0.1);
+    expect(design.model.symbol_table.RADIUS.smin).toEqual(0.10000010000000001);
 });
 
 it('reducers change symbol constraint max', () => {
@@ -203,16 +203,16 @@ it('reducers change symbol constraint max', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].cmax).toEqual(0.05);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].smax).toEqual(undefined);
+    expect(design.model.symbol_table.THICKNESS.name).toEqual("THICKNESS");
+    expect(design.model.symbol_table.THICKNESS.cmax).toEqual(0.05);
+    expect(design.model.symbol_table.THICKNESS.smax).toEqual(undefined);
 
     store.dispatch(changeSymbolConstraint("THICKNESS", MAX, 0.06));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].cmax).toEqual(0.06);
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].smax).toEqual(0.0600001);
+    expect(design.model.symbol_table.THICKNESS.name).toEqual("THICKNESS");
+    expect(design.model.symbol_table.THICKNESS.cmax).toEqual(0.06);
+    expect(design.model.symbol_table.THICKNESS.smax).toEqual(0.0600001);
 });
 
 it('reducers set symbol flag min FIXED', () => {
@@ -222,14 +222,14 @@ it('reducers set symbol flag min FIXED', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmin).toEqual(CONSTRAINED);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.lmin).toEqual(CONSTRAINED);
 
     store.dispatch(setSymbolFlag("RADIUS", MIN, FIXED));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmin).toEqual(CONSTRAINED|FIXED);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.lmin).toEqual(CONSTRAINED|FIXED);
 });
 
 it('reducers reset symbol flag min CONSTRAINED', () => {
@@ -239,14 +239,14 @@ it('reducers reset symbol flag min CONSTRAINED', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmin).toEqual(CONSTRAINED);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.lmin).toEqual(CONSTRAINED);
 
     store.dispatch(resetSymbolFlag("RADIUS", MIN, CONSTRAINED));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmin).toEqual(0); // No flags
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.lmin).toEqual(0); // No flags
 });
 
 it('reducers set symbol flag min FDCL', () => {
@@ -256,18 +256,17 @@ it('reducers set symbol flag min FDCL', () => {
         {name: "initialState", model: state});
 
     var design = store.getState(); // before
-    Object.entries(design.model.symbol_table)[sto.RADIUS].cminchoices = ["THICKNESS"]; // Prepare for FDCL
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmin).toEqual(CONSTRAINED);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
+    design.model.symbol_table.RADIUS.cminchoices = ["THICKNESS"]; // Prepare for FDCL
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.lmin).toEqual(CONSTRAINED);
+    expect(design.model.symbol_table.RADIUS.cminchoices).toEqual(["THICKNESS"]);
 
     store.dispatch(setSymbolFlag("RADIUS", MIN, FDCL, "THICKNESS"));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmin).toEqual(CONSTRAINED|FDCL);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
-//    console.log('In reducers set symbol flag min FDCL Object.entries(design.model.symbol_table)[sto.RADIUS]=',Object.entries(design.model.symbol_table)[sto.RADIUS]);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.lmin).toEqual(CONSTRAINED|FDCL);
+    expect(design.model.symbol_table.RADIUS.cminchoices).toEqual(["THICKNESS"]);
 });
 
 it('reducers set symbol flag max FIXED', () => {
@@ -277,14 +276,14 @@ it('reducers set symbol flag max FIXED', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].lmax).toEqual(CONSTRAINED);
+    expect(design.model.symbol_table.THICKNESS.name).toEqual("THICKNESS");
+    expect(design.model.symbol_table.THICKNESS.lmax).toEqual(CONSTRAINED);
 
     store.dispatch(setSymbolFlag("THICKNESS", MAX, FIXED));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].lmax).toEqual(CONSTRAINED|FIXED);
+    expect(design.model.symbol_table.THICKNESS.name).toEqual("THICKNESS");
+    expect(design.model.symbol_table.THICKNESS.lmax).toEqual(CONSTRAINED|FIXED);
 });
 
 it('reducers reset symbol flag max CONSTRAINED', () => {
@@ -294,14 +293,14 @@ it('reducers reset symbol flag max CONSTRAINED', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].lmax).toEqual(CONSTRAINED);
+    expect(design.model.symbol_table.THICKNESS.name).toEqual("THICKNESS");
+    expect(design.model.symbol_table.THICKNESS.lmax).toEqual(CONSTRAINED);
 
     store.dispatch(resetSymbolFlag("THICKNESS", MAX, CONSTRAINED));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].lmax).toEqual(0); // No flags
+    expect(design.model.symbol_table.THICKNESS.name).toEqual("THICKNESS");
+    expect(design.model.symbol_table.THICKNESS.lmax).toEqual(0); // No flags
 });
 
 it('reducers set symbol flag max FDCL', () => {
@@ -311,18 +310,17 @@ it('reducers set symbol flag max FDCL', () => {
         {name: "initialState", model: state});
 
     var design = store.getState(); // before
-    Object.entries(design.model.symbol_table)[sto.RADIUS].cmaxchoices = ["THICKNESS"]; // Prepare for FDCL
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmax).toEqual(CONSTRAINED);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
+    design.model.symbol_table.RADIUS.cmaxchoices = ["THICKNESS"]; // Prepare for FDCL
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.lmax).toEqual(CONSTRAINED);
+    expect(design.model.symbol_table.RADIUS.cmaxchoices).toEqual(["THICKNESS"]);
 
     store.dispatch(setSymbolFlag("RADIUS", MAX, FDCL, "THICKNESS"));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].lmax).toEqual(CONSTRAINED|FDCL);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
-//    console.log('In reducers set symbol flag max FDCL Object.entries(design.model.symbol_table)[sto.RADIUS]=',Object.entries(design.model.symbol_table)[sto.RADIUS]);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.lmax).toEqual(CONSTRAINED|FDCL);
+    expect(design.model.symbol_table.RADIUS.cmaxchoices).toEqual(["THICKNESS"]);
 });
 
 //=====================================================================
@@ -336,35 +334,35 @@ it('reducers change input symbol values', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(500);
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.04);
-//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(0);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
-//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(0);
+    expect(design.model.symbol_table.PRESSURE.name).toEqual("PRESSURE");
+    expect(design.model.symbol_table.PRESSURE.value).toEqual(500);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.THICKNESS.name).toEqual("THICKNESS");
+    expect(design.model.symbol_table.THICKNESS.value).toEqual(0.04);
+    expect(design.model.symbol_table.FORCE.name).toEqual("FORCE");
+    expect(design.model.symbol_table.FORCE.value).toEqual(0);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
+    expect(design.model.symbol_table.STRESS.name).toEqual("STRESS");
+    expect(design.model.symbol_table.STRESS.value).toEqual(0);
 
     var p = [1,2,3];
     store.dispatch(changeInputSymbolValues(p));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(1);
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(2);
-//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(3);
-//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(0);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
-//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(0);
+    expect(design.model.symbol_table.PRESSURE.name).toEqual("PRESSURE");
+    expect(design.model.symbol_table.PRESSURE.value).toEqual(1);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(2);
+    expect(design.model.symbol_table.THICKNESS.name).toEqual("THICKNESS");
+    expect(design.model.symbol_table.THICKNESS.value).toEqual(3);
+    expect(design.model.symbol_table.FORCE.name).toEqual("FORCE");
+    expect(design.model.symbol_table.FORCE.value).toEqual(0);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
+    expect(design.model.symbol_table.STRESS.name).toEqual("STRESS");
+    expect(design.model.symbol_table.STRESS.value).toEqual(0);
 });
 
 it('reducers save input symbol values', () => {
@@ -374,15 +372,15 @@ it('reducers save input symbol values', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].oldvalue).toEqual(undefined);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.RADIUS.oldvalue).toEqual(undefined);
 
     store.dispatch(saveInputSymbolValues());
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].oldvalue).toEqual(0.4);
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.RADIUS.oldvalue).toEqual(0.4);
 });
 
 it('reducers restore input symbol values without previous save', () => {
@@ -392,15 +390,15 @@ it('reducers restore input symbol values without previous save', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].oldvalue).toEqual(undefined);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.RADIUS.oldvalue).toEqual(undefined);
 
     store.dispatch(restoreInputSymbolValues());
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4); // If there is no oldvalue then restore doesn't do anything
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].oldvalue).toEqual(undefined);
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4); // If there is no oldvalue then restore doesn't do anything
+    expect(design.model.symbol_table.RADIUS.oldvalue).toEqual(undefined);
 });
 
 it('reducers restore input symbol values with previous save', () => {
@@ -410,16 +408,16 @@ it('reducers restore input symbol values with previous save', () => {
         {name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].oldvalue).toEqual(undefined);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.RADIUS.oldvalue).toEqual(undefined);
 
     store.dispatch(saveInputSymbolValues());
     store.dispatch(restoreInputSymbolValues());
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].oldvalue).toEqual(undefined);
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.RADIUS.oldvalue).toEqual(undefined);
 });
 
 //=====================================================================
@@ -433,35 +431,35 @@ it('reducers change output symbol values', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(500);
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.04);
-//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(0);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
-//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(0);
+    expect(design.model.symbol_table.PRESSURE.name).toEqual("PRESSURE");
+    expect(design.model.symbol_table.PRESSURE.value).toEqual(500);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.THICKNESS.name).toEqual("THICKNESS");
+    expect(design.model.symbol_table.THICKNESS.value).toEqual(0.04);
+    expect(design.model.symbol_table.FORCE.name).toEqual("FORCE");
+    expect(design.model.symbol_table.FORCE.value).toEqual(0);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
+    expect(design.model.symbol_table.STRESS.name).toEqual("STRESS");
+    expect(design.model.symbol_table.STRESS.value).toEqual(0);
 
     var x = [1,2,3];
     store.dispatch(changeOutputSymbolValues(x));
 
     design = store.getState(); // after
-//    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].name).toEqual("PRESSURE");
-    expect(Object.entries(design.model.symbol_table)[sto.PRESSURE].value).toEqual(500);
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(Object.entries(design.model.symbol_table)[sto.THICKNESS].value).toEqual(0.04);
-//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].value).toEqual(1);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(2);
-//    expect(Object.entries(design.model.symbol_table)[sto.STRESS].name).toEqual("STRESS");
-    expect(Object.entries(design.model.symbol_table)[sto.STRESS].value).toEqual(3);
+    expect(design.model.symbol_table.PRESSURE.name).toEqual("PRESSURE");
+    expect(design.model.symbol_table.PRESSURE.value).toEqual(500);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.THICKNESS.name).toEqual("THICKNESS");
+    expect(design.model.symbol_table.THICKNESS.value).toEqual(0.04);
+    expect(design.model.symbol_table.FORCE.name).toEqual("FORCE");
+    expect(design.model.symbol_table.FORCE.value).toEqual(1);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(2);
+    expect(design.model.symbol_table.STRESS.name).toEqual("STRESS");
+    expect(design.model.symbol_table.STRESS.value).toEqual(3);
 });
 
 it('reducers save output symbol constraints', () => {
@@ -471,27 +469,27 @@ it('reducers save output symbol constraints', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].lmin).toEqual(1); // CONSTRAINED flag
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmin).toEqual(1000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].lmax).toEqual(0); // No flags
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmax).toEqual(10000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldlmin).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldcmin).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldlmax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldcmax).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.name).toEqual("FORCE");
+    expect(design.model.symbol_table.FORCE.lmin).toEqual(1); // CONSTRAINED flag
+    expect(design.model.symbol_table.FORCE.cmin).toEqual(1000);
+    expect(design.model.symbol_table.FORCE.lmax).toEqual(0); // No flags
+    expect(design.model.symbol_table.FORCE.cmax).toEqual(10000);
+    expect(design.model.symbol_table.FORCE.oldlmin).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldcmin).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldlmax).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldcmax).toEqual(undefined);
 
     store.dispatch(saveOutputSymbolConstraints("FORCE"));
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].lmin).toEqual(0); // CONSTRAINED flag now reset
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmin).toEqual(1000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].lmax).toEqual(0); // No flags
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmax).toEqual(10000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldlmin).toEqual(1);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldcmin).toEqual(1000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldlmax).toEqual(0);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldcmax).toEqual(10000);
+    expect(design.model.symbol_table.FORCE.lmin).toEqual(0); // CONSTRAINED flag now reset
+    expect(design.model.symbol_table.FORCE.cmin).toEqual(1000);
+    expect(design.model.symbol_table.FORCE.lmax).toEqual(0); // No flags
+    expect(design.model.symbol_table.FORCE.cmax).toEqual(10000);
+    expect(design.model.symbol_table.FORCE.oldlmin).toEqual(1);
+    expect(design.model.symbol_table.FORCE.oldcmin).toEqual(1000);
+    expect(design.model.symbol_table.FORCE.oldlmax).toEqual(0);
+    expect(design.model.symbol_table.FORCE.oldcmax).toEqual(10000);
 });
 
 it('reducers restore output symbol constraints without previous save', () => {
@@ -501,27 +499,27 @@ it('reducers restore output symbol constraints without previous save', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].lmin).toEqual(1); // CONSTRAINED flag
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmin).toEqual(1000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].lmax).toEqual(0); // No flags
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmax).toEqual(10000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldlmin).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldcmin).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldlmax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldcmax).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.name).toEqual("FORCE");
+    expect(design.model.symbol_table.FORCE.lmin).toEqual(1); // CONSTRAINED flag
+    expect(design.model.symbol_table.FORCE.cmin).toEqual(1000);
+    expect(design.model.symbol_table.FORCE.lmax).toEqual(0); // No flags
+    expect(design.model.symbol_table.FORCE.cmax).toEqual(10000);
+    expect(design.model.symbol_table.FORCE.oldlmin).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldcmin).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldlmax).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldcmax).toEqual(undefined);
 
     expect(() => {store.dispatch(restoreOutputSymbolConstraints("FORCE"))}).toThrow();
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].lmin).toEqual(1); // If there is no old lmin/cmin/lmax/cmax then restore doesn't do anything
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmin).toEqual(1000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].lmax).toEqual(0);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmax).toEqual(10000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldlmin).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldcmin).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldlmax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldcmax).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.lmin).toEqual(1); // If there is no old lmin/cmin/lmax/cmax then restore doesn't do anything
+    expect(design.model.symbol_table.FORCE.cmin).toEqual(1000);
+    expect(design.model.symbol_table.FORCE.lmax).toEqual(0);
+    expect(design.model.symbol_table.FORCE.cmax).toEqual(10000);
+    expect(design.model.symbol_table.FORCE.oldlmin).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldcmin).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldlmax).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldcmax).toEqual(undefined);
 });
 
 it('reducers restore output symbol constraints with previous save', () => {
@@ -531,28 +529,28 @@ it('reducers restore output symbol constraints with previous save', () => {
         {name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(Object.entries(design.model.symbol_table)[sto.FORCE].name).toEqual("FORCE");
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].lmin).toEqual(1); // CONSTRAINED flag
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmin).toEqual(1000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].lmax).toEqual(0); // No flags
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmax).toEqual(10000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldlmin).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldcmin).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldlmax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldcmax).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.name).toEqual("FORCE");
+    expect(design.model.symbol_table.FORCE.lmin).toEqual(1); // CONSTRAINED flag
+    expect(design.model.symbol_table.FORCE.cmin).toEqual(1000);
+    expect(design.model.symbol_table.FORCE.lmax).toEqual(0); // No flags
+    expect(design.model.symbol_table.FORCE.cmax).toEqual(10000);
+    expect(design.model.symbol_table.FORCE.oldlmin).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldcmin).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldlmax).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldcmax).toEqual(undefined);
 
     store.dispatch(saveOutputSymbolConstraints("FORCE"));
     store.dispatch(restoreOutputSymbolConstraints("FORCE"));
 
     design = store.getState(); // after
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].lmin).toEqual(1);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmin).toEqual(1000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].lmax).toEqual(0);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].cmax).toEqual(10000);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldlmin).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldcmin).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldlmax).toEqual(undefined);
-    expect(Object.entries(design.model.symbol_table)[sto.FORCE].oldcmax).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.lmin).toEqual(1);
+    expect(design.model.symbol_table.FORCE.cmin).toEqual(1000);
+    expect(design.model.symbol_table.FORCE.lmax).toEqual(0);
+    expect(design.model.symbol_table.FORCE.cmax).toEqual(10000);
+    expect(design.model.symbol_table.FORCE.oldlmin).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldcmin).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldlmax).toEqual(undefined);
+    expect(design.model.symbol_table.FORCE.oldcmax).toEqual(undefined);
 });
 
 //=====================================================================
@@ -619,7 +617,7 @@ it('reducers change system controls value', () => {
     expect(design.model.system_controls.ioopt.value).toEqual(3);
     expect(design.model.system_controls.maxit.value).toEqual(100);
 
-    var new_system_controls = Object.assign({}, initialSystemControls, {ioopt: 5}); // Make a copy with one property updated
+    var new_system_controls = Object.assign({}, initialSystemControls, {ioopt: {value: 5}}); // Make a copy with one property updated
     store.dispatch(changeSystemControlsValue(new_system_controls));
 
     design = store.getState(); // after
@@ -635,14 +633,14 @@ it('reducers change label value', () => {
         {"user": "USERID0123456789", name: "initialState", model: state});
 
     var design = store.getState(); // before
-//    expect(design.model.labels[0].name).toEqual('COMMENT');
-    expect(design.model.labels[0].value).toEqual('PCYL Default startup file ...');
+    expect(design.model.labels.COMMENT.name).toEqual('COMMENT');
+    expect(design.model.labels.COMMENT.value).toEqual('PCYL Default startup file ...');
 
-    store.dispatch(changeLabelsValue([{name: 'COMMENT', value: 'Test'}]));
+    store.dispatch(changeLabelsValue({COMMENT: {name: 'COMMENT', value: 'Test'}}));
 
     design = store.getState(); // after
-//    expect(design.model.labels[0].name).toEqual('COMMENT');
-    expect(design.model.labels[0].value).toEqual('Test');
+    expect(design.model.labels.COMMENT.name).toEqual('COMMENT');
+    expect(design.model.labels.COMMENT.value).toEqual('Test');
 });
 
 //=====================================================================
@@ -660,10 +658,10 @@ it('reducers search', () => {
 
     var design = store.getState(); // after
     expect(design.model.type).toEqual("Piston-Cylinder");
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
 });
 
 it('reducers seek stress min', () => {
@@ -677,10 +675,10 @@ it('reducers seek stress min', () => {
 
     var design = store.getState(); // after
     expect(design.model.type).toEqual("Piston-Cylinder");
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
 });
 
 it('reducers seek stress max', () => {
@@ -694,10 +692,10 @@ it('reducers seek stress max', () => {
 
     var design = store.getState(); // after
     expect(design.model.type).toEqual("Piston-Cylinder");
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
 });
 
 //=====================================================================
@@ -722,10 +720,10 @@ it('reducers save auto save', () => {
     expect(design.user).toEqual("USERID0123456789");
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
 });
 
 it('reducers restore auto save', () => {
@@ -757,10 +755,10 @@ it('reducers restore auto save', () => {
     var design = store.getState(); // after
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.name).toEqual("initialState");
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
 });
 
 it('reducers restore old auto save', () => {
@@ -797,10 +795,10 @@ it('reducers restore old auto save', () => {
     var design = store.getState(); // after
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.name).toEqual("initialState");
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
 });
 
 it('reducers delete auto save', () => {
@@ -821,9 +819,9 @@ it('reducers delete auto save', () => {
     expect(design.user).toEqual("USERID0123456789");
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-//    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].name).toEqual("RADIUS");
-    expect(Object.entries(design.model.symbol_table)[sto.RADIUS].value).toEqual(0.4);
-//    expect(Object.entries(design.model.symbol_table)[sto.AREA].name).toEqual("AREA");
-    expect(Object.entries(design.model.symbol_table)[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.4);
+    expect(design.model.symbol_table.AREA.name).toEqual("AREA");
+    expect(design.model.symbol_table.AREA.value).toEqual(0);
 
 });

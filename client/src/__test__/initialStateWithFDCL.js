@@ -1,7 +1,7 @@
 import { CONSTRAINED } from '../store/actionTypes';
 export const initialStateWithFDCL = {
-    "symbol_table": [
-        {
+    "symbol_table": {
+        "PRESSURE": {
             "input": true,
             "name": "PRESSURE",
             "value": 500,
@@ -15,7 +15,7 @@ export const initialStateWithFDCL = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        "RADIUS": {
             "input": true,
             "name": "RADIUS",
             "value": 0.4,
@@ -31,7 +31,7 @@ export const initialStateWithFDCL = {
             "cminchoices": ["THICKNESS"],
             "cmaxchoices": ["THICKNESS"]
         },
-        {
+        "THICKNESS": {
             "input": true,
             "name": "THICKNESS",
             "value": 0.04,
@@ -45,7 +45,7 @@ export const initialStateWithFDCL = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        "FORCE": {
             "input": false,
             "name": "FORCE",
             "value": 0,
@@ -59,7 +59,7 @@ export const initialStateWithFDCL = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        "AREA": {
             "input": false,
             "name": "AREA",
             "value": 0,
@@ -73,7 +73,7 @@ export const initialStateWithFDCL = {
             "type": "equationset",
             "hidden": false
         },
-        {
+        "STRESS": {
             "input": false,
             "name": "STRESS",
             "value": 0,
@@ -87,15 +87,15 @@ export const initialStateWithFDCL = {
             "type": "equationset",
             "hidden": false
         }
-    ],
-    "labels": [
-        {
+    },
+    "labels": {
+        "COMMENT": {
             "name": "COMMENT",
             "value": "PCYL Default startup file ..."
         }
-    ],
+    },
     "type": "Piston-Cylinder",
-    "version": "6",
+    "version": "7",
     "result": {
         "objective_value": 0,
         "termination_condition": "",
