@@ -59,13 +59,13 @@ export function reducers(state, action) {
 
     switch (action.type) {
     case STARTUP:
-        return state;
+        break;
     case LOAD:
         state = {
             ...state,
             ...action.payload.design
         };
-        return state;
+        break;
     case LOAD_INITIAL_STATE:
         var module;
         if (action.payload.units === 'US') {
@@ -82,25 +82,25 @@ export function reducers(state, action) {
                 system_controls: initialSystemControls
             }
         }; // Merge initialState and initialSystemControls
-        return state;
+        break;
     case CHANGE_NAME:
         state = {
             ...state,
             name: action.payload.name
         };
-        return state;
+        break;
     case CHANGE_USER:
         state = {
             ...state,
             user: action.payload.user
         };
-        return state;
+        break;
     case CHANGE_VIEW:
         state = Object.assign({}, {
             ...state,
             view: action.payload.view
         });
-        return state;
+        break;
 
 // SYMBOL
 
@@ -118,7 +118,7 @@ export function reducers(state, action) {
                 }
             }
         };
-        return state;
+        break;
     case CHANGE_SYMBOL_VIOLATION:
         state = {
             ...state,
@@ -137,7 +137,7 @@ export function reducers(state, action) {
                 }
             }
         };
-        return state;
+        break;
     case CHANGE_SYMBOL_CONSTRAINT:
         state = {
             ...state,
@@ -158,7 +158,7 @@ export function reducers(state, action) {
                 }
             }
         };
-        return state;
+        break;
     case CHANGE_SYMBOL_CONSTRAINTS:
         i=0;
         state = {
@@ -192,7 +192,7 @@ export function reducers(state, action) {
                 }, {})
             }
         };
-        return state;
+        break;
     case SAVE_OUTPUT_SYMBOL_CONSTRAINTS:
         element = state.model.symbol_table[action.payload.name];
         state = {
@@ -213,7 +213,7 @@ export function reducers(state, action) {
                 }
             }
         };
-        return state;
+        break;
     case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS:
         element = state.model.symbol_table[action.payload.name];
         if (element.oldlmin !== undefined) { // Is there something to restore then restore them else just use the current values as-is
@@ -246,7 +246,7 @@ export function reducers(state, action) {
         } else {
             throw new Error('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, No old value exists for restore');
         }
-        return state;
+        break;
     case SET_SYMBOL_FLAG:
         element = state.model.symbol_table[action.payload.name];
         state = {
@@ -266,7 +266,7 @@ export function reducers(state, action) {
                 }
             }
         };
-        return state;
+        break;
     case RESET_SYMBOL_FLAG:
         element = state.model.symbol_table[action.payload.name];
         state = {
@@ -286,7 +286,7 @@ export function reducers(state, action) {
                 }
             }
         };
-        return state;
+        break;
     case CHANGE_SYMBOL_INPUT:
         state = {
             ...state,
@@ -301,7 +301,7 @@ export function reducers(state, action) {
                 }
             }
         };
-        return state;
+        break;
     case CHANGE_SYMBOL_HIDDEN:
         state = {
             ...state,
@@ -316,7 +316,7 @@ export function reducers(state, action) {
                 }
             }
         };
-        return state;
+        break;
 
 // INPUT SYMBOL
 
@@ -343,7 +343,7 @@ export function reducers(state, action) {
                 }, {})
             }
         };
-        return state;
+        break;
     case SAVE_INPUT_SYMBOL_VALUES:
         state = {
             ...state,
@@ -361,7 +361,7 @@ export function reducers(state, action) {
                 }, {})
             }
         };
-        return state;
+        break;
     case RESTORE_INPUT_SYMBOL_VALUES:
         state = {
             ...state,
@@ -382,7 +382,7 @@ export function reducers(state, action) {
                     } else {
                         return ({ ...accum, [name]: element });
                     }
-                })
+                }, {})
             }
         };
         return state;
@@ -412,7 +412,7 @@ export function reducers(state, action) {
                 }, {})
             }
         };
-        return state;
+        break;
 
 // RESULT
 
@@ -427,7 +427,7 @@ export function reducers(state, action) {
                 }
             }
         };
-        return state;
+        break;
     case CHANGE_RESULT_TERMINATION_CONDITION:
         state = {
             ...state,
@@ -439,7 +439,7 @@ export function reducers(state, action) {
                 }
             }
         };
-        return state;
+        break;
     case CHANGE_RESULT_VIOLATED_CONSTRAINT_COUNT:
         state = {
             ...state,
@@ -451,7 +451,7 @@ export function reducers(state, action) {
                 }
             }
         };
-        return state;
+        break;
 
 // SYSTEM CONTROL
 
@@ -466,7 +466,7 @@ export function reducers(state, action) {
                 }
             }
         };
-        return state;
+        break;
 
 // LABELS
 
@@ -478,7 +478,7 @@ export function reducers(state, action) {
                 labels: action.payload.labels
             }
         }
-        return state;
+        break;
 
 // AUTO_SAVE
 
@@ -487,7 +487,7 @@ export function reducers(state, action) {
             localStorage.setItem(action.payload.name, JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
 //            console.log("In reducers.SAVE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
-        return state; // state not changed
+        break; // state not changed
     case RESTORE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
             var autosave = JSON.parse(localStorage.getItem(action.payload.name)); // get auto save file contents
@@ -511,19 +511,21 @@ export function reducers(state, action) {
             };
 //            console.log("In reducers.RESTORE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
-        return state; // state changed
+        break; // state changed
     case DELETE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
             localStorage.removeItem(action.payload.name); // remove auto save file
 //            console.log("In reducers.DELETE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
-        return state; // state not changed
+        break; // state not changed
 
     case LOG_USAGE:
         logUsage(action.payload.tag, action.payload.action, action.payload.note)
-        return state; // state not changed
+        break; // state not changed
 
     default:
-        return state;
+        break;
     }
+//    console.log('In reducers state=',state);
+    return state;
 }
