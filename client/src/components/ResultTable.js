@@ -31,16 +31,16 @@ class ResultTable extends Component {
         if (this.props.objective_value <= this.props.system_controls.objmin.value) {
             warnMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
         }
-        if (Object.entries(this.props.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+        if (Object.values(this.props.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             warnMsg += 'No free independent variables; ';
         }
-        if (Object.entries(this.props.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
+        if (Object.values(this.props.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
             warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
         }
         if (Number.isNaN(this.props.objective_value)) {
             warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
         }
-        Object.entries(this.props.symbol_table).forEach((element) => { // For each Symbol Table entry
+        Object.values(this.props.symbol_table).forEach((element) => { // For each Symbol Table entry
             if (element.type !== undefined && element.type !== "table" && element.lmin === CONSTRAINED && element.lmax === CONSTRAINED && element.cmin > element.cmax) {
                 warnMsg += (element.name + ' constraints are inconsistent; ');
             }
@@ -61,16 +61,16 @@ class ResultTable extends Component {
     onSeekRequest(event) {
 //        console.log('In ResultTable.onSeekRequest this=',this,'event=',event);
         var warnMsg = '';
-        if (Object.entries(this.props.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+        if (Object.values(this.props.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             warnMsg += 'No free independent variables; ';
         }
-        if (Object.entries(this.props.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
+        if (Object.values(this.props.symbol_table).reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
             warnMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
         }
         if (Number.isNaN(this.props.objective_value)) {
             warnMsg += 'Objective Value is Not a Number. Check constraint values; ';
         }
-        Object.entries(this.props.symbol_table).forEach((element) => { // For each Symbol Table entry
+        Object.values(this.props.symbol_table).forEach((element) => { // For each Symbol Table entry
             if (element.type !== undefined && element.type !== "table" && element.lmin === CONSTRAINED && element.lmax === CONSTRAINED && element.cmin > element.cmax) {
                 warnMsg += (element.name + ' constraints are inconsistent; ');
             }
@@ -78,13 +78,13 @@ class ResultTable extends Component {
         if (warnMsg !== '') {
             displayMessage(warnMsg,'warning');
         } else {
-            var result = Object.entries(this.props.symbol_table).find( // Find free variable matching the current variable name
+            var result = Object.values(this.props.symbol_table).find( // Find free variable matching the current variable name
                 (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
             );
             if (result === undefined) { // Was matching free variable not found
                 // Set default name to the First free variable. There must be at least one
                 // This duplicates the UI render code algorithm - be careful and make them match!
-                result = Object.entries(this.props.symbol_table).find( // Find first free variable
+                result = Object.values(this.props.symbol_table).find( // Find first free variable
                     (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
                 );
             }
@@ -252,7 +252,7 @@ class ResultTable extends Component {
                                 <InputGroup.Text>Name: </InputGroup.Text>
                             </InputGroup.Prepend>
                             <Form.Control as="select" className="align-middle" onChange={this.onSeekNameSelect} value={this.state.seek_name}>
-                                {Object.entries(this.props.symbol_table).map((element, index) =>
+                                {Object.values(this.props.symbol_table).map((element, index) =>
                                     (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
                             </Form.Control>

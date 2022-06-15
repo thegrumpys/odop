@@ -17,7 +17,7 @@ class FileProperties extends Component {
         // Initialize the state.labels to the props.labels
         this.state = {
             modal: false,
-            labels: Object.entries(this.props.labels)
+            labels: Object.values(this.props.labels)
         };
     }
 
@@ -27,7 +27,7 @@ class FileProperties extends Component {
         // Copy the props.labels into the state.labels
         this.setState({
             modal: !this.state.modal,
-            labels: Object.entries(this.props.labels)
+            labels: Object.values(this.props.labels)
         });
     }
 
@@ -35,7 +35,7 @@ class FileProperties extends Component {
 //        console.log('In FileProperties.onChange name=', name, 'value=', value);
         // Save the value into the state.labels
         this.setState({
-            labels: Object.entries(this.state.labels).map((label) => {
+            labels: Object.values(this.state.labels).map((label) => {
                 if (label.name === name) {
                     return Object.assign({}, label, {
                         value: value.replace(/["\\/]/ig, '') // replace invalid JSON characters with nothing throughout
@@ -90,13 +90,13 @@ class FileProperties extends Component {
                                 <Col className="text-right font-weight-bold">Value</Col>
                             </Row>
                             {
-                                Object.entries(this.state.labels).map(
-                                    ([name,label]) => {
+                                Object.values(this.state.labels).map(
+                                    (label) => {
                                         return (
-                                            <Row key={name}>
-                                                <Col className="align-middle text-left">{name}</Col>
+                                            <Row key={lanel.name}>
+                                                <Col className="align-middle text-left">{label.name}</Col>
                                                 <Col className="align-middle text-left">
-                                                    <Form.Control as="textarea" className="input-group-lg" value={label.value} onChange={(event) => {this.onChange(name, event.target.value)}}/>
+                                                    <Form.Control as="textarea" className="input-group-lg" value={label.value} onChange={(event) => {this.onChange(label.name, event.target.value)}}/>
                                                 </Col>
                                             </Row>
                                         );

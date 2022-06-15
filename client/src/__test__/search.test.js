@@ -119,8 +119,9 @@ it('search with merit', () => {
             var ip = 0;
             var ix = 0;
             var value;
-            for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-                [name,element] = Object.entries(design.model.symbol_table)[i];
+            var values = Object.values(design.model.symbol_table);
+            for (let i = 0; i < values.length; i++) {
+                element = values[i];
                 if (element.type === "equationset" && element.input) {
                     if (i === SOUGHT - 1) {
                         value = p[ip];

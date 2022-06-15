@@ -46,7 +46,7 @@ class ActionSelectCatalog extends Component {
         const { store } = this.context;
         // Loop to create st from symbol_table, and initialize names/name and entries/entry
         var st = [];
-        Object.entries(this.props.symbol_table).forEach((element) => {
+        Object.values(this.props.symbol_table).forEach((element) => {
             st.push(Object.assign({},element));
             if (element.name === "Catalog_Name") {
                 name = names[0]; // Default to first name
@@ -92,7 +92,7 @@ class ActionSelectCatalog extends Component {
         const { store } = this.context;
         // Loop to create p and x from symbol_table
         var st = [];
-        Object.entries(this.props.symbol_table).forEach((element) => {
+        Object.values(this.props.symbol_table).forEach((element) => {
             st.push(Object.assign({},element));
         });
         var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt.value);

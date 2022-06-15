@@ -71,7 +71,7 @@ class FilePreferences extends Component {
         // We assume that all values are to be converted to floating point values
         var copy = Object.assign({}, this.state.system_controls);
         Object.entries(copy).forEach(([key,value]) => {
-            copy[key] = parseFloat(value);
+            copy[key] = { ...value };
         });
         // Copy the updated local copy into the props.system_controls
         this.props.changeSystemControlsValue(copy);

@@ -7,10 +7,7 @@ export function pxPropagate(p, x, store) {
     var ip = 0;
     var ix = 0;
     var value;
-    function nameMatch(entry) {
-      return Object.entries(design.model.symbol_table).find(sink => entry.name === sink.name)
-    }
-    Object.entries(design.model.symbol_table).forEach(([name,source]) => {
+    Object.values(design.model.symbol_table).forEach((source) => {
 //        console.log('In pxPropagate source=',source);
         if (source.type === "equationset" && source.input) {
             value = p[ip++];
@@ -21,7 +18,7 @@ export function pxPropagate(p, x, store) {
 //             console.log('In pxPropagate source.propagate=',source.propagate);
              for (let j = 0; j < source.propagate.length; j++) {
                  var entry = source.propagate[j];
-                 var sink = nameMatch(entry);
+                 var sink = design.model.symbol_table[entry.name];
 //                 console.log('In pxPropagate source=',source,'sink=',sink);
 //                 console.log('In pxPropagate sink.name=',sink.name,'entry.minmax=',entry.minmax,'value=',value);
                  store.dispatch(changeSymbolConstraint(sink.name, entry.minmax, value));

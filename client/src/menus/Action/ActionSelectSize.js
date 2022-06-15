@@ -46,7 +46,7 @@ class ActionSelectSize extends Component {
             type = types[0]; // Default to first type
         // Loop to create st from symbol_table
         var st = [];
-        Object.entries(this.props.symbol_table).forEach((element) => {
+        Object.values(this.props.symbol_table).forEach((element) => {
             st.push(element);
         });
         var sizes = getSizeEntries(type, st);
@@ -79,7 +79,7 @@ class ActionSelectSize extends Component {
         var { getSizeEntries } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeEntries
         // Loop to create p and x from symbol_table
         var st = [];
-        Object.entries(this.props.symbol_table).forEach((element) => {
+        Object.values(this.props.symbol_table).forEach((element) => {
             st.push(element);
         });
         var sizes = getSizeEntries(type, st);
@@ -115,7 +115,7 @@ class ActionSelectSize extends Component {
         var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
         if (this.props.system_controls.enable_auto_fix.value) {
             auto_fixed = true;
-            var found = Object.entries(this.props.symbol_table).find((element) => element.name === this.state.type);
+            var found = Object.values(this.props.symbol_table).find((element) => element.name === this.state.type);
 //            console.log('In ActionSelectSize.onSelect found=',found);
             if (!(found.lmin & FIXED)) {
                 this.props.fixSymbolValue(this.state.type);

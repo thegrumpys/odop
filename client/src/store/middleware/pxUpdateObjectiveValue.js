@@ -22,7 +22,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
 //    console.log('In pxUpdateObjectiveValue design=',design);
 
     var ip = 0;
-    Object.entries(design.model.symbol_table).forEach(([name,element]) => {
+    Object.values(design.model.symbol_table).forEach((element) => {
         if (element.type === "equationset" && element.input) {
             vmin = 0.0;
             vmax = 0.0;
@@ -44,7 +44,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
         }
     });
     var ix = 0;
-    Object.entries(design.model.symbol_table).forEach(([name,element]) => {
+    Object.values(design.model.symbol_table).forEach((element) => {
         if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
             vmin = 0.0;
             vmax = 0.0;

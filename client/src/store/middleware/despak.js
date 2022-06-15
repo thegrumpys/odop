@@ -10,7 +10,7 @@ export function despak(pc, store, merit) {
     var kd = 0;
     var p = [];
     var x = [];
-    Object.entries(design.model.symbol_table).forEach(([name,element]) => {
+    Object.values(design.model.symbol_table).forEach((element) => {
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 p.push(pc[kd++]);

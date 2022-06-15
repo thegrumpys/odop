@@ -75,7 +75,7 @@ export const dispatcher = store => next => action => {
                     if (index > 0) { // Skip the first column
                         var name = table[0][index];
 //                        console.log('In dispatcher.CHANGE_SYMBOL_VALUE value=',value,'index=',index,' name=',name);
-                        if (Object.entries(design.model.symbol_table).find(element2 => element2.name === name) !== undefined) {
+                        if (Object.values(design.model.symbol_table).find(element2 => element2.name === name) !== undefined) {
 //                            console.log('In dispatcher.CHANGE_SYMBOL_VALUE name=',name,'value=',value);
                             store.dispatch(changeSymbolValue(name,value));
                         }

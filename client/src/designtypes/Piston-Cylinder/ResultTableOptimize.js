@@ -58,18 +58,18 @@ export class ResultTableOptimize extends Component {
                     <tbody>
                         <tr>
                             <td width="50%">
-                                <Button variant="primary" disabled={Object.entries(this.props.symbol_table)[sto.FORCE].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMAXFORCE}>Seek MAX FORCE</Button>
+                                <Button variant="primary" disabled={this.props.symbol_table.FORCE.lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMAXFORCE}>Seek MAX FORCE</Button>
                             </td>
                             <td width="50%">
-                                <Button variant="primary" disabled={Object.entries(this.props.symbol_table)[sto.RADIUS].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINRADIUS}>Seek MIN RADIUS</Button>
+                                <Button variant="primary" disabled={this.props.symbol_table.RADIUS.lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINRADIUS}>Seek MIN RADIUS</Button>
                             </td>
                         </tr>
                         <tr>
                             <td width="50%">
-                                <Button variant="primary" disabled={Object.entries(this.props.symbol_table)[sto.PRESSURE].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINPRESSURE}>Seek MIN PRESSURE</Button>
+                                <Button variant="primary" disabled={this.props.symbol_table.PRESSURE.lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINPRESSURE}>Seek MIN PRESSURE</Button>
                             </td>
                             <td width="50%">
-                                <Button variant="primary" disabled={Object.entries(this.props.symbol_table)[sto.STRESS].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINSTRESS}>Seek MIN STRESS</Button>
+                                <Button variant="primary" disabled={this.props.symbol_table.STRESS.lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINSTRESS}>Seek MIN STRESS</Button>
                             </td>
                         </tr>
                     </tbody>

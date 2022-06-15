@@ -37,9 +37,8 @@ it('despak without merit', () => {
     var design = store.getState(); // before
 
     // Compress P into PC
-    var element;
     var pc = [];
-    Object.entries(design.model.symbol_table).forEach(([name,element]) => {
+    Object.values(design.model.symbol_table).forEach((element) => {
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
                 pc.push(element.value);
@@ -129,8 +128,9 @@ it('despak with merit', () => {
             var ip = 0;
             var ix = 0;
             var value;
-            for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-                element = Object.entries(design.model.symbol_table)[i];
+            var values = Object.values(design.model.symbol_table);
+            for (let i = 0; i < values.length; i++) {
+                element = values[i];
                 if (element.type === "equationset" && element.input) {
                     if (i === SOUGHT - 1) {
                         value = p[ip];
@@ -158,16 +158,15 @@ it('despak with merit', () => {
     }
 
     // Compress P into PC
-    var element;
     var pc = [];
-    for (let i = 0; i < Object.entries(design.model.symbol_table).length; i++) {
-        element = Object.entries(design.model.symbol_table)[i];
+    Object.values(design.model.symbol_table).forEach((element) => {
         if (element.type === "equationset" && element.input) {
             if (!(element.lmin & FIXED)) {
+//                console.log('In search i=',i,'element=',element);
                 pc.push(element.value);
             }
         }
-    }
+    });
     var obj = despak(pc, store, merit);
 
     var design = store.getState(); // after

@@ -12,7 +12,7 @@ export function invokeInit(store) {
     var p = [];
     var x = [];
 //    console.log('In invokeInit design.model.symbol_table=',design.model.symbol_table);
-    Object.entries(design.model.symbol_table).forEach(([name,element]) => {
+    Object.values(design.model.symbol_table).forEach((element) => {
 //        console.log('In invokeInit name=',name,'element=',element);
         if (element.type === "equationset" && element.input) {
             p.push(element.value);

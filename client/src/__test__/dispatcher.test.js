@@ -593,6 +593,7 @@ it('middleware seek1 min stress; feasible start; no fixed', () => {
     store.dispatch(seek("STRESS", MIN));
 
     var design = store.getState(); // after
+    console.log('design=',design);
     expect(design.model.symbol_table.PRESSURE.name).toEqual("PRESSURE");
     expect(design.model.symbol_table.PRESSURE.value).toEqual(1254.3621931874964);
     expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
