@@ -3,8 +3,35 @@
 Alerts specific to torsion springs. 
 
 ### On this page:   
+ - [M_1 >= M_2](alerts.html#M1_GE_M2)  
  - [%_Safe_Deflect @ 2 > 80%](alerts.html#PC_Safe_Deflect2_GT_80)  
  - [%_Safe_Deflect @ 1 < 20%](alerts.html#PC_Safe_Deflect1_LT_20)  
+
+___
+
+<a id="M1_GE_M2"></a>  
+___
+
+## M_1 >= M_2 
+The moment at operating point 1 (M_1) is greater than or equal to the moment at operating point 2 (M_2). 
+
+Torsion spring moments are ordered from the smallest (free condition) to M_1 to M_2 to the largest (Max Safe). 
+The [Torsion Spring Moment - Deflection Diagram](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springFD_Diag) 
+provides more detail on this point. 
+
+Resolve this alert by reducing the value of M_1 below the value of M_2. 
+It should also be possible to 
+confirm that M_1 is in Free status, 
+confirm that the constraint Stroke MIN is enabled with a non-zero constraint level 
+and then use the Search feature. 
+
+See also: 
+<!---
+Need to add content that allows this link to be uncommented and replace the stopgap below 
+ - [Torsion Spring Constraints](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springConstraints)   
+-->
+ - [Torsion Spring](/docs/Help/DesignTypes/Spring/Torsion/description.html)   
+ - [Errors](/docs/Help/errors.html)   
 
 ___
 
@@ -48,8 +75,9 @@ Helical coil compression, extension and torsion springs that have the properties
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
 Howevever, in the real world there are limitations. 
 
-When torsion springs are deflected less than roughly 20% of maximum safe deflection 
-deflection in the ends will become a factor in the real (as opposed to theoretical) force-deflection relationship. 
+When torsion springs are deflected less than roughly 20% of maximum safe deflection, 
+various factors such as deviation from perfect coil straightness (cylindric form) and deflection in the ends 
+will become a factor in the real (as opposed to theoretical) force-deflection relationship. 
 Thus when operating within the first 20% of the available deflection expect moments to be somewhat lower 
 (or deflections to be somewhat greater) than the linear behavior predicted by the equations.  
 

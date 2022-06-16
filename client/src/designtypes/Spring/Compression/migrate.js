@@ -336,9 +336,9 @@ export function migrate(design) {
                 element.validmax = Number.MAX_VALUE;
             }
         });
-        design.symbol_table[ 3].validmin = 1; // Coils_T
         design.symbol_table[ 4].validmin = -Number.MAX_VALUE; // Force_1
         design.symbol_table[ 9].validmin = -Number.MAX_VALUE; // Deflect_1
+        design.symbol_table[13].validmin = -Number.MIN_VALUE; // L_Stroke
         design.symbol_table[18].validmin = 1; // Spring_Index
         design.symbol_table[20].validmin = -Number.MAX_VALUE; // Stress_1
         design.symbol_table[26].validmin = -Number.MIN_VALUE; // Cycle_Life

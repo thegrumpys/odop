@@ -3,9 +3,32 @@
 Alerts specific to extension springs. 
 
 ### On this page:   
+ - [Force_2 < Force_1](alerts.html#F1_GE_F2)  
  - [Force_1 < Initial_Tension](alerts.html#F1_LT_IT)  
  - [Stress_Initial < Stress_Init_Lo](alerts.html#SInit_LT_SInit_Lo)  
  - [Stress_Initial > Stress_Init_Hi](alerts.html#SInit_GT_SInit_Hi)  
+
+___
+
+<a id="F1_GE_F2"></a>  
+___
+
+## Force_1 >= Force_2 
+The force at operating point 1 (Force_1) is greater than or equal to the force at operating point 2 (Force_2). 
+
+Extension spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Max Safe). 
+The [Extension Spring Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springFD_Diag) 
+provides more detail on this point. 
+
+Resolve this alert by reducing the value of Force_1 below the value of Force_2. 
+It should also be possible to 
+confirm that Force_1 is in Free status, 
+confirm that the constraint L_Stroke MIN is enabled with a non-zero constraint level 
+and then use the Search feature. 
+
+See also: 
+ - [Extension Spring Constraints](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springConstraints)   
+ - [Errors](/docs/Help/errors.html)   
 
 ___
 

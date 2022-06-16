@@ -63,14 +63,20 @@ ___
 ___
 
 ## Force_1 >= Force_2 
-The value of Force_1 is greater than or equal to the value of Force_2. 
+The force at operating point 1 (Force_1) is greater than or equal to the force at operating point 2 (Force_2). 
 
 Compression spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Force_Solid). 
 The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 
 
+Resolve this alert by reducing the value of Force_1 below the value of Force_2. 
+It should also be possible to 
+confirm that Force_1 is in Free status, 
+confirm that the constraint L_Stroke MIN is enabled with a non-zero constraint level 
+and then use the Search feature. 
+
 See also: 
  - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
- - [Errors](errors.html)   
+ - [Errors](/docs/Help/errors.html)   
 
 ___
 

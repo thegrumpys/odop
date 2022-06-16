@@ -255,11 +255,10 @@ export function migrate(design) {
                 element.validmax = Number.MAX_VALUE;
             }
         });
-        design.symbol_table[ 2].validmin = 1; // Coils_T
         design.symbol_table[ 3].validmin = -Number.MAX_VALUE; // M_1
         design.symbol_table[ 5].validmin = -Number.MIN_VALUE; // Coil_Spacing
         design.symbol_table[10].validmin = -Number.MAX_VALUE; // Deflect_1
-        design.symbol_table[16].validmin = -Number.MAX_VALUE; // Stroke
+        design.symbol_table[16].validmin = -Number.MIN_VALUE; // Stroke
         design.symbol_table[18].validmin = 1; // Spring_Index
         design.symbol_table[19].validmin = -Number.MIN_VALUE; // End_Deflect_All
         design.symbol_table[20].validmin = -Number.MAX_VALUE; // Stress_1

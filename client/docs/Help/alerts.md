@@ -60,10 +60,14 @@ ___
 
 ## Invalid - Value less than or equal to limit 
 The value of the associated variable is less than the validmin limit defined in the design type's initialState file. 
+This means that, given the current input values (for example, a negative diameter), 
+the design is likely outside the limits of physical reality. 
+The mathematical model for this design is not valid for these inputs. 
 This condition blocks the Search, Seek and Trade features from starting. 
 
 Specific advice on how to resolve this condition is not available. 
 Look for zero or negative values. 
+Look for other messages as they might provide more specific advice. 
 Undoing or reducing the size of recent changes may be helpful. 
 
 ___
@@ -73,9 +77,13 @@ ___
 
 ## Invalid - Value greater than limit 
 The value of the associated variable is greater than the validmax limit defined in the design type's initialState file. 
+This means that, given the current input values, 
+the design is likely outside the limits of physical reality. 
+The mathematical model for this design is not valid for these inputs. 
 This condition blocks the Search, Seek and Trade features from starting. 
 
 Specific advice on how to resolve this condition is not available. 
+Look for other messages as they might provide more specific advice. 
 Undoing or reducing the size of recent changes may be helpful. 
 
 ___

@@ -91,13 +91,29 @@ export function check(store) {        /*    Compression  Spring  */
 
 // Alerts specific to torsion springs. 
 
+    if (design.model.symbol_table[o.M_1].value >= design.model.symbol_table[o.M_2].value) {
+        addAlert({
+            element: design.model.symbol_table[o.M_1], 
+            name: design.model.symbol_table[o.M_1].name, 
+            message: check_message(design,o.M_1,'>=',o.M_2),
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#M1_GE_M2)',
+        });
+        addAlert({
+            element: design.model.symbol_table[o.M_2], 
+            name: design.model.symbol_table[o.M_2].name, 
+            message: check_message(design,o.M_2,'<',o.M_1),
+            severity: 'Warn',
+            duplicate: true
+        });
+    }
     if (design.model.symbol_table[o.PC_Safe_Deflect].value > 80.0) {
         addAlert({
             element: design.model.symbol_table[o.PC_Safe_Deflect], 
             name: design.model.symbol_table[o.PC_Safe_Deflect].name + '@2', 
             message: '%_Safe_Deflect@2 (' + design.model.symbol_table[o.PC_Safe_Deflect].value.toODOPPrecision() + ') > 80',
             severity: 'Info',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/torsion/alerts.html#PC_Safe_Deflect2_GT_80)'
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#PC_Safe_Deflect2_GT_80)'
         });
     }
     var PC_Safe_Deflect1 = (design.model.symbol_table[o.Deflect_1].value / design.model.symbol_table[o.Deflect_2].value) * design.model.symbol_table[o.PC_Safe_Deflect].value; 
@@ -107,7 +123,7 @@ export function check(store) {        /*    Compression  Spring  */
             name: '%_Safe_Deflect@1', 
             message: '%_Safe_Deflect@1 (' + PC_Safe_Deflect1.toODOPPrecision() + ') < 20',
             severity: 'Info',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/torsion/alerts.html#PC_Safe_Deflect1_LT_20)'
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#PC_Safe_Deflect1_LT_20)'
         });
     }
 
