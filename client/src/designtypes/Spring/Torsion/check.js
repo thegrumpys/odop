@@ -121,7 +121,7 @@ export function check(store) {        /*    Compression  Spring  */
         addAlert({
             value: PC_Safe_Deflect1, 
             name: '%_Safe_Deflect@1', 
-            message: '%_Safe_Deflect@1 (' + PC_Safe_Deflect1.toODOPPrecision() + ') < 20',
+            message: '%_Safe_Deflect@1 (' + PC_Safe_Deflect1.toODOPPrecision() + ') < 20 - Work in Progress',
             severity: 'Info',
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#PC_Safe_Deflect1_LT_20)'
         });

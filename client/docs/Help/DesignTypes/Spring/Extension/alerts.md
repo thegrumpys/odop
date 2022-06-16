@@ -7,6 +7,7 @@ Alerts specific to extension springs.
  - [Force_1 < Initial_Tension](alerts.html#F1_LT_IT)  
  - [Stress_Initial < Stress_Init_Lo](alerts.html#SInit_LT_SInit_Lo)  
  - [Stress_Initial > Stress_Init_Hi](alerts.html#SInit_GT_SInit_Hi)  
+ - [%_Safe_Deflect @ 1 < 20%](alerts.html#PC_Safe_Deflect1_LT_20)  
 
 ___
 
@@ -109,6 +110,30 @@ the Search feature will work to generate designs that fall within the preferred 
 See also: 
  - [Initial tension range](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springIT_Range)  
  - [Terminology - Function Constraints](/docs/Help/terminology.html#fdcl)  
+
+___
+
+<a id="PC_Safe_Deflect1_LT_20"></a>  
+___
+
+## %_Safe_Deflect @ 1 < 20% 
+The first operating point (point 1) has less than 20% of maximum safe deflection. 
+This is not usually a problem. 
+However, you should be aware that end effects and other factors may cause some inaccuracy in forces and deflections for this point.  
+
+Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
+follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
+Howevever, in the real world there are limitations. 
+
+When extension springs are extended less than roughly 20% of safe deflection 
+various factors such as deviation from perfect coil straightness (cylindric form) and 
+any lack of perfect form in the ends will become a factor in the real (as opposed to theoretical) force-deflection relationship. 
+Thus when operating within the first 20% of the available deflection expect forces to be somewhat lower (or deflections to be somewhat greater)
+than the linear behavior predicted by the equations.  
+
+ See also: 
+  - [Restrictions](/docs/About/Legal/Restrictions.html)  
+  - [Hooke's law](https://en.wikipedia.org/wiki/Hooke%27s_law)  
 
 ___
 

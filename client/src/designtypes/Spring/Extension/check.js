@@ -155,6 +155,16 @@ export function check(store) {        /*    Compression  Spring  */
             duplicate: true
         });
     }
+    var PC_Safe_Deflect1 = (design.model.symbol_table[o.Deflect_1].value / design.model.symbol_table[o.Deflect_2].value) * design.model.symbol_table[o.PC_Safe_Deflect].value; 
+    if (PC_Safe_Deflect1 < 20.0) {
+        addAlert({
+            value: PC_Safe_Deflect1, 
+            name: '%_Safe_Deflect@1', 
+            message: '%_Safe_Deflect@1 (' + PC_Safe_Deflect1.toODOPPrecision() + ') < 20 - Work in progress',
+            severity: 'Info',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#PC_Safe_Deflect1_LT_20)'
+        });
+    }
 
 //    console.log('</ul><li>','End check','</li>');
 
