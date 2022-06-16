@@ -25,7 +25,7 @@ export function despak(pc, store, merit) {
     var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
     x = eqnset(p, x);
 
-    if (pxPropagate(p, x, store) {
+    if (pxPropagate(p, x, store)) {
          setSclDen(store); // Constraint changed
     }
 

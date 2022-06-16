@@ -55,7 +55,7 @@ export const dispatcher = store => next => action => {
     case RESTORE_AUTO_SAVE:
         invokeInit(store);
         invokeEquationSet(store);
-        if (propagate(store) {
+        if (propagate(store)) {
              setSclDen(store); // Constraint changed
         }
         updateObjectiveValue(store);
@@ -86,7 +86,7 @@ export const dispatcher = store => next => action => {
             invokeInit(store);
         }
         invokeEquationSet(store);
-        if (propagate(store) {
+        if (propagate(store)) {
              setSclDen(store); // Constraint changed
         }
         updateObjectiveValue(store, action.payload.merit);
@@ -124,7 +124,7 @@ export const dispatcher = store => next => action => {
             throw new Error('In dispatcher.FIX_SYMBOL_VALUE Calculation Input is Invalid');
         }
         invokeEquationSet(store);
-        if (propagate(store) {
+        if (propagate(store)) {
              setSclDen(store); // Constraint changed
         }
         updateObjectiveValue(store);
@@ -137,7 +137,7 @@ export const dispatcher = store => next => action => {
             store.dispatch(restoreOutputSymbolConstraints(element.name));
         }
         invokeEquationSet(store);
-        if (propagate(store) {
+        if (propagate(store)) {
              setSclDen(store); // Constraint changed
         }
         updateObjectiveValue(store);
@@ -211,7 +211,7 @@ export const dispatcher = store => next => action => {
         store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
         store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
         invokeEquationSet(store);
-        if (propagate(store) {
+        if (propagate(store)) {
              setSclDen(store); // Constraint changed
         }
         updateObjectiveValue(store, action.payload.merit);
@@ -220,7 +220,7 @@ export const dispatcher = store => next => action => {
         store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
         store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
         invokeEquationSet(store);
-        if (propagate(store) {
+        if (propagate(store)) {
              setSclDen(store); // Constraint changed
         }
         updateObjectiveValue(store, action.payload.merit);
