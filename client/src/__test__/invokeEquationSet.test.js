@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../designtypes/Piston-Cylinder/initialState';
-import * as sto from '../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../initialSystemControls';
 import { changeSymbolValue } from '../store/actionCreators';
 import { reducers } from '../store/reducers';

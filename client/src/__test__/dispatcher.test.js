@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../designtypes/Piston-Cylinder/initialState';
 import { initialStateWithFDCL } from './initialStateWithFDCL';
-import * as sto from '../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../initialSystemControls';
 import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
 import {
