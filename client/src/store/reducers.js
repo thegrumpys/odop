@@ -75,7 +75,7 @@ export function reducers(state, action) {
         module = JSON.parse(JSON.stringify(module)); // Make deep clone
         state = Object.assign({}, state, {
             name: 'initialState',
-            model: Object.assign({}, model.initialState, {
+            model: Object.assign({}, module.initialState, {
                 system_controls: initialSystemControls
             })
         }); // Merge initialState and initialSystemControls
