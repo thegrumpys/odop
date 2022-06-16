@@ -25,7 +25,9 @@ export function despak(pc, store, merit) {
     var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
     x = eqnset(p, x);
 
-    pxPropagate(p, x, store);
+    if (pxPropagate(p, x, store) {
+         setSclDen(store); // Constraint changed
+    }
 
     var obj = pxUpdateObjectiveValue(p, x, store, merit); // Update Objective Value
 

@@ -7,6 +7,7 @@ export function pxPropagate(p, x, store) {
     var ip = 0;
     var ix = 0;
     var value;
+    var constraintChanged = false;
     Object.values(design.model.symbol_table).forEach((source) => {
 //        console.log('In pxPropagate source=',source);
         if (source.type === "equationset" && source.input) {
@@ -22,8 +23,10 @@ export function pxPropagate(p, x, store) {
 //                 console.log('In pxPropagate source=',source,'sink=',sink);
 //                 console.log('In pxPropagate sink.name=',sink.name,'entry.minmax=',entry.minmax,'value=',value);
                  store.dispatch(changeSymbolConstraint(sink.name, entry.minmax, value));
+                constraintChanged = true;
              }
         }
     });
+    return constraintChanged;
 //    console.log('</ul><li>','End pxPropagate','</li>');
 }

@@ -5,6 +5,7 @@ export function propagate(store) {
     var design = store.getState(); // Re-access store to get latest source values
 //    console.log('In propagate design=',design);
     var value;
+    var constraintChanged = false;
     Object.values(design.model.symbol_table).forEach((source) => {
 //        console.log('In propagate source=',source);
         value = source.value;
@@ -16,8 +17,10 @@ export function propagate(store) {
 //                console.log('In propagate source=',source,'sink=',sink);
 //                console.log('In propagate sink.name=',sink.name,'entry.minmax=',entry.minmax,'value=',value);
                 store.dispatch(changeSymbolConstraint(sink.name, entry.minmax, value));
+                constraintChanged = true;
             }
         }
     });
+    return constraintChanged;
 //    console.log('</ul><li>','End propagate','</li>');
 }
