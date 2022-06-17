@@ -4,8 +4,7 @@ Alerts common to all round-wire coil springs
 
 ### On this page:   
  - [Coils_A is less than 1](alerts.html#Coils_A_LT_1)  
- - [Wire diameter is less than reasonable](alerts.html#Wire_Dia_LT_reasonable)  
- - [Wire diameter is greater than reasonable](alerts.html#Wire_Dia_GT_reasonable)  
+ - [Material properties for this Wire_Dia may not be accurate](alerts.html#MatPropAccuracy)  
  - [ID_Free < Wire_Dia](alerts.html#ID_Free_LT_Wire_Dia)  
  - [FS_CycleLife MIN not set](alerts.html#FS_CycleLife_MIN_not_set)  
  - [Over-design concern](alerts.html#OverDesign)  
@@ -25,45 +24,31 @@ As less than one coil may not be the intent, the warning is intended to bring th
 
 ___
 
-<a id="Wire_Dia_LT_reasonable"></a>  
+<a id="MatPropAccuracy"></a>  
 ___
 
-## Wire diameter is less than reasonable 
-This message is provided to warn the user that the current value for wire diameter is outside 
-the anticipated range for the selected material type. 
+## Material properties for this Wire_Dia may not be accurate. 
+This message is provided to warn the user that the current value for wire diameter is well outside 
+the anticipated range for the selected material type and
+the material properties from the internal table may not be completely accurate. 
 
-Specifically, the ODOP : Spring software uses an interpolation / extrapolation mechanism to calculate a value 
+Specifically, the ODOP : Spring software uses an interpolation / extrapolation mechanism to calculate a new value 
 of tensile strength for each new wire diameter that is evaluated. 
 The specific numbers involved change with each different material in the materials table. 
-In this case, the current value of Wire_Dia requires an extrapolation well outside the range covered by values in 
+In this case, the current value of Wire_Dia requires an extrapolation significantly outside the range covered by values in 
 the materials table. 
-Thus, the corresponding values for tensile strength may not be accurate. 
+Thus, the corresponding values for tensile strength may not be completely accurate. 
 
 If possible, select a standard wire size. 
 
- See also: 
- - [Select Size & Select Catalog](/docs/Help/SpringDesign/selectSizeCatalog.html)
-
-___
-
-<a id="Wire_Dia_GT_reasonable"></a>  
-___
-
-## Wire diameter is greater than reasonable 
-This message is provided to warn the user that the current value for wire diameter is outside 
-the anticipated range for the selected material type. 
-
-Specifically, the ODOP : Spring software uses an interpolation / extrapolation mechanism to calculate a value 
-of tensile strength for each new wire diameter that is evaluated. 
-The specific numbers involved change with each different material in the materials table. 
-In this case, the current value of Wire_Dia requires an extrapolation well outside the range covered by values in 
-the materials table. 
-Thus, the corresponding values for tensile strength may not be accurate. 
-
-If possible, select a standard wire size. 
+Alternatively, obtain the appropriate value of tensile strength for the wire material and wire diameter in use 
+and then modify the Calculation Input <b>Prop_Calc_Method</b> to a value of either 2 or 3 so that the material table is not used and 
+it is possible to enter the more accurate value of tensile strength. 
 
  See also: 
- - [Select Size & Select Catalog](/docs/Help/SpringDesign/selectSizeCatalog.html)
+ - [Select Size & Select Catalog](/docs/Help/SpringDesign/selectSizeCatalog.html)  
+ - [Spring Materials and Material Properties](/docs/Help/SpringDesign/materials.html)  
+ - [Advanced Spring Operations](/docs/Help/SpringDesign/advancedSpringOperations.html)  
 
 ___
 
