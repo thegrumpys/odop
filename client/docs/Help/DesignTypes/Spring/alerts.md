@@ -6,6 +6,7 @@ Alerts common to all round-wire coil springs
  - [Coils_A is less than 1](alerts.html#Coils_A_LT_1)  
  - [Wire diameter is less than reasonable](alerts.html#Wire_Dia_LT_reasonable)  
  - [Wire diameter is greater than reasonable](alerts.html#Wire_Dia_GT_reasonable)  
+ - [ID_Free < Wire_Dia](alerts.html#ID_Free_LT_Wire_Dia)  
  - [FS_CycleLife MIN not set](alerts.html#FS_CycleLife_MIN_not_set)  
  - [Over-design concern](alerts.html#OverDesign)  
  - [Spring Index manufacturability concern](alerts.html#SI_manufacturability)  
@@ -64,6 +65,19 @@ If possible, select a standard wire size.
  See also: 
  - [Select Size & Select Catalog](/docs/Help/SpringDesign/selectSizeCatalog.html)
 
+___
+
+<a id="ID_Free_LT_Wire_Dia"></a>  
+___
+
+## ID_Free < Wire_Dia 
+The coil inside diameter (ID_Free) is less than the wire diameter.
+
+Most spring wire is not sufficiently ductile to be wound this tight.
+
+Resolve this alert by increasing the value of OD_Free or decreasing the wire diameter. 
+Alternatively, confirm that the Spring_Index MIN constraint is enabled at a constraint level of 4 or greater 
+and run the Search feature. 
 
 ___
 

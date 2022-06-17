@@ -88,6 +88,22 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)'
         });
     }
+    if (design.model.symbol_table[o.ID_Free].value < design.model.symbol_table[o.Wire_Dia].value) {
+        addAlert({
+            element: design.model.symbol_table[o.ID_Free],
+            name: design.model.symbol_table[o.ID_Free].name, 
+            message: check_message(design,o.ID_Free,'<',o.Wire_Dia),
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#ID_Free_LT_Wire_Dia)'
+        });
+        addAlert({
+            element: design.model.symbol_table[o.Wire_Dia],
+            name: design.model.symbol_table[o.Wire_Dia].name, 
+            message: check_message(design,o.Wire_Dia,'>=',o.ID_Free),
+            severity: 'Warn',
+            duplicate: true
+        });
+    }
 
 // Alerts specific to extension springs. 
 
@@ -155,16 +171,16 @@ export function check(store) {        /*    Compression  Spring  */
             duplicate: true
         });
     }
-    var PC_Safe_Deflect1 = (design.model.symbol_table[o.Deflect_1].value / design.model.symbol_table[o.Deflect_2].value) * design.model.symbol_table[o.PC_Safe_Deflect].value; 
-    if (PC_Safe_Deflect1 < 20.0) {
-        addAlert({
-            value: PC_Safe_Deflect1, 
-            name: '%_Safe_Deflect@1', 
-            message: '%_Safe_Deflect@1 (' + PC_Safe_Deflect1.toODOPPrecision() + ') < 20 - Work in progress',
-            severity: 'Info',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#PC_Safe_Deflect1_LT_20)'
-        });
-    }
+//    var PC_Safe_Deflect1 = 100 * (design.model.symbol_table[o.Deflect_1].value / safe_travel); // safe_travel from ReportBase - save for another day
+//    if (PC_Safe_Deflect1 < 20.0) {
+//        addAlert({
+//            value: PC_Safe_Deflect1, 
+//            name: '%_Safe_Deflect@1', 
+//            message: '%_Safe_Deflect@1 (' + PC_Safe_Deflect1.toODOPPrecision() + ') < 20',
+//            severity: 'Info',
+//            help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#PC_Safe_Deflect1_LT_20)'
+//        });
+//    }
 
 //    console.log('</ul><li>','End check','</li>');
 

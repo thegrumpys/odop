@@ -88,6 +88,22 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)'
         });
     }
+    if (design.model.symbol_table[o.ID_Free].value < design.model.symbol_table[o.Wire_Dia].value) {
+        addAlert({
+            element: design.model.symbol_table[o.ID_Free],
+            name: design.model.symbol_table[o.ID_Free].name, 
+            message: check_message(design,o.ID_Free,'<',o.Wire_Dia),
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#ID_Free_LT_Wire_Dia)'
+        });
+        addAlert({
+            element: design.model.symbol_table[o.Wire_Dia],
+            name: design.model.symbol_table[o.Wire_Dia].name, 
+            message: check_message(design,o.Wire_Dia,'>=',o.ID_Free),
+            severity: 'Warn',
+            duplicate: true
+        });
+    }
 
 // Alerts specific to compression springs. 
 
