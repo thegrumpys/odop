@@ -1,0 +1,38 @@
+search(psi) { // psi: current base point
+  itno = 0
+  s_psi = calculate(psi) // AKA despak, s_psi: the functional value at the base point
+  if (s_psi < objmin) { // Are we done before we start? Leave by door #1
+    return s_psi // stop, design reached feasibility
+  }
+  do { // start searching/exploring
+    phi = psi // [1] phi: base point resulting from the current move
+    s = s_psi // s: the functional value before the move
+    (s, phi) = E(s, phi) // explore
+    itno++ // count the number of explores
+    if s < s_psi { // goto 2
+      do {
+        theta = psi // [2] theta: previous base point
+        psi = phi // psi: current base point
+        s_psi = s // s_psi: the functional value at the base point
+        if (s_psi < objmin) { // Are we done? Leave by door #1
+          return s_psi // stop, design reached feasibility
+        }
+        if (itno > maxit) { // Are we done? Leave by door #2
+          return s_psi // stop, iteration count exceeded
+        }
+        phi = 2 * phi - theta // phi: base point resulting from the current move
+        s_phi = calculate(phi) // AKA despak, s_phi: the functional value for this move
+        s = s_phi // s: the functional value before the move
+        (s, phi) = E(s, phi) // explore
+        itno++ // count the number of explores
+      } while (s < s_psi) // goto 2 else s >= s_psi goto 1
+    } else { // s >= s_psi goto 3
+      if del < delmin { // [3] Are we done? Leave by door #3
+        return s_psi // stop, step size exhausted
+      } else {
+        del = rho * del
+        // del >= delmin && s >= s_psi goto 1
+      }
+    }
+  } while (true) // goto 1
+}

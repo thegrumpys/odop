@@ -21,7 +21,7 @@ export function setSclDen(store) {
     });
 
     // Indirectly set smin/smax by changing constraints to their current values
-    // And update violations and objective value
+    // Does not update violations and objective value. It assumes they is called afterwards.
     store.dispatch(changeSymbolConstraints(cmin, MIN));
     store.dispatch(changeSymbolConstraints(cmax, MAX));
 

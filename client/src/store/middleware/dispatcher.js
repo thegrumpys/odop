@@ -55,9 +55,8 @@ export const dispatcher = store => next => action => {
     case RESTORE_AUTO_SAVE:
         invokeInit(store);
         invokeEquationSet(store);
-        if (propagate(store)) {
-             setSclDen(store); // Constraint changed
-        }
+        propagate(store);
+        setSclDen(store);
         updateObjectiveValue(store);
         break;
 
@@ -86,9 +85,7 @@ export const dispatcher = store => next => action => {
             invokeInit(store);
         }
         invokeEquationSet(store);
-        if (propagate(store)) {
-             setSclDen(store); // Constraint changed
-        }
+        propagate(store);
         updateObjectiveValue(store, action.payload.merit);
         break;
     case FIX_SYMBOL_VALUE:
@@ -124,9 +121,7 @@ export const dispatcher = store => next => action => {
             throw new Error('In dispatcher.FIX_SYMBOL_VALUE Calculation Input is Invalid');
         }
         invokeEquationSet(store);
-        if (propagate(store)) {
-             setSclDen(store); // Constraint changed
-        }
+        propagate(store);
         updateObjectiveValue(store);
         break;
     case FREE_SYMBOL_VALUE:
@@ -137,9 +132,7 @@ export const dispatcher = store => next => action => {
             store.dispatch(restoreOutputSymbolConstraints(element.name));
         }
         invokeEquationSet(store);
-        if (propagate(store)) {
-             setSclDen(store); // Constraint changed
-        }
+        propagate(store);
         updateObjectiveValue(store);
         break;
     case CHANGE_SYMBOL_CONSTRAINT:
@@ -168,7 +161,6 @@ export const dispatcher = store => next => action => {
             }
             store.dispatch(changeSymbolConstraint(sink.name, action.payload.minmax, source.value)); // Propagate now
 //            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action,'source=',source,'sink=',sink);
-            setSclDen(store);
         }
         updateObjectiveValue(store);
         break;
@@ -211,18 +203,14 @@ export const dispatcher = store => next => action => {
         store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
         store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
         invokeEquationSet(store);
-        if (propagate(store)) {
-             setSclDen(store); // Constraint changed
-        }
+        propagate(store);
         updateObjectiveValue(store, action.payload.merit);
         break;
     case RESTORE_INPUT_SYMBOL_VALUES:
         store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
         store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
         invokeEquationSet(store);
-        if (propagate(store)) {
-             setSclDen(store); // Constraint changed
-        }
+        propagate(store);
         updateObjectiveValue(store, action.payload.merit);
         break;
 
