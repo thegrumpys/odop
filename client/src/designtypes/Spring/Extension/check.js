@@ -171,6 +171,19 @@ export function check(store) {        /*    Compression  Spring  */
             duplicate: true
         });
     }
+    var wd3 = design.model.symbol_table[o.Wire_Dia].value * design.model.symbol_table[o.Wire_Dia].value * design.model.symbol_table[o.Wire_Dia].value;
+        /*  ref. pg 51 Associated Spring Design Handbook - assume C2=4; i.e. R2=twice wire dia   */
+    var sb = 1.25 * (8.0 * design.model.symbol_table[o.Mean_Dia].value * design.model.symbol_table[o.Force_2].value) / (Math.PI * wd3);
+    const Close_Wound_Coil = 5;
+    if (design.model.symbol_table[o.End_Type].value !== Close_Wound_Coil && (sb > design.model.symbol_table[o.Stress_Lim_Endur].value || design.model.symbol_table[o.Stress_Hook].value > design.model.symbol_table[o.Stress_Lim_Bend].value)) {
+        addAlert({
+            element: design.model.symbol_table[o.FS_Hook],
+            name: design.model.symbol_table[o.FS_Hook].name, 
+            message: 'Fatigue failure at end is possible. (' + design.model.symbol_table[o.Stress_Hook].name + ' = ' + design.model.symbol_table[o.Stress_Hook].value.toODOPPrecision() + ' ' + design.model.symbol_table[o.Stress_Hook].units + ')',
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#FatigueInHook)'
+        });
+    }
 //    var PC_Safe_Deflect1 = 100 * (design.model.symbol_table[o.Deflect_1].value / safe_travel); // safe_travel from ReportBase - save for another day
 //    if (PC_Safe_Deflect1 < 20.0) {
 //        addAlert({

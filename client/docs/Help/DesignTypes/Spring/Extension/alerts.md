@@ -7,6 +7,7 @@ Alerts specific to extension springs.
  - [Force_1 < Initial_Tension](alerts.html#F1_LT_IT)  
  - [Stress_Initial < Stress_Init_Lo](alerts.html#SInit_LT_SInit_Lo)  
  - [Stress_Initial > Stress_Init_Hi](alerts.html#SInit_GT_SInit_Hi)  
+ - [Fatigue failure at end is possible](alerts.html#FatigueInHook)  
  - [%_Safe_Deflect @ 1 < 20%](alerts.html#PC_Safe_Deflect1_LT_20)  
 
 ___
@@ -111,6 +112,38 @@ See also:
  - [Initial tension range](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springIT_Range)  
  - [Terminology - Function Constraints](/docs/Help/terminology.html#fdcl)  
 
+___
+
+<a id="FatigueInHook"></a>  
+___
+
+## Fatigue failure at end is possible 
+Given the selected end type, 
+
+bending stress in the hook at "point A" (Stress_Hook) exceeds the allowable bending stress (Stress_Lim_Bend) 
+
+or 
+
+torsional stress in the hook at "point B"  exceeds the allowable stress for the selected endurance (Stress_Lim_Endur).  
+
+In order to clear this alert,
+where practical, change one or more of these values in the direction specified. 
+Increase  | &nbsp; | Decrease  
+---       | ---    | ---  
+ Wire_Dia | &nbsp; | Coil_Dia  
+ FS_2     | &nbsp; | Force_2  
+ FS_Hook  | &nbsp; | L_Stroke  
+ &nbsp;   | &nbsp; | Spring_Index  
+
+Alternatively, use Advanced View to enable the minimum constraint on FS_Hook with a constraint level of 1.0 or greater 
+and then use the Search feature. 
+It will likely be necessary to clear some or most seemingly unrelated constraint violations in order to achieve 
+no violation on the FS_Hook constraint (and to achieve a design considered to be feasible). 
+
+See also:
+ - Report 2  
+ - [Extension Spring Design Type - Hook Stress](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springHookStress) 
+ 
 ___
 
 <a id="PC_Safe_Deflect1_LT_20"></a>  
