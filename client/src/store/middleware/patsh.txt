@@ -1,10 +1,7 @@
 search(psi) { // psi: current base point
   itno = 0
   s_psi = calculate(psi) // AKA despak, s_psi: the functional value at the base point
-  if (s_psi < objmin) { // Are we done before we start? Leave by door #1
-    return s_psi // stop, design reached feasibility
-  }
-  do { // start searching/exploring
+  while (s_psi >= objmin) { // start searching/exploring otherwise Leave by door #1
     phi = psi // [1] phi: base point resulting from the current move
     s = s_psi // s: the functional value before the move
     (s, phi) = E(s, phi) // explore
@@ -34,5 +31,6 @@ search(psi) { // psi: current base point
         // del >= delmin && s >= s_psi goto 1
       }
     }
-  } while (true) // goto 1
+  } // goto 1
+  return s_psi // stop, design reached feasibility
 }
