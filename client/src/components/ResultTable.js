@@ -43,18 +43,6 @@ class ResultTable extends Component {
                 errorMsg += (element.name + ' constraints are inconsistent; ');
             }
         });
-        this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
-            if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
-                let validmin = element.validmin === -Number.MIN_VALUE ? '-Number.MIN_VALUE' : element.validmin;
-                if (element.value <= element.validmin) {
-                    errorMsg += (element.name + ' has an Invalid Value. It is less than or equal to ' + validmin + '; ');
-                }
-                let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax;
-                if (element.value >= element.validmax) {
-                    errorMsg += (element.name + ' has an Invalid Value. It is greater than or equal to ' + validmax + '; ');
-                }
-            }
-        });
         if (errorMsg !== '') {
             displayMessage(errorMsg, 'danger', 'Errors', '/docs/Help/errors.html');
         } else {

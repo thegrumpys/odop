@@ -1,7 +1,7 @@
 import { CONSTRAINED, FIXED } from '../actionTypes';
 
 // Update Violations and Objective Value
-export function pxUpdateObjectiveValue(p, x, store, merit) {
+export function pxUpdateObjectiveValue(p, x, store, merit, returnInvalid = true) {
     
     // Update Constraint Violations
 
@@ -119,7 +119,10 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
         }
     }
 
-    if (obj === 0.0) { // No validity violation found, return constraint based objective value
+    if (returnInvalid && obj === Number.POSITIVE_INFINITY) { // Validity violation found, return constraint based objective value
+        ; // No-op, return POSITIVE_INFINITY
+//        console.warn('@@@ Returning invalid obj=',obj);
+    } else { // No validity violation found
         /* Merit Function */
         if (merit && typeof merit === 'function') {
             m_funct = merit(p, x, design);
@@ -129,6 +132,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
 
         // Update objective value
         obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
+//        console.log('Returning valid obj=',obj);
     }
 
 //    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');

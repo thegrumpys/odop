@@ -3,7 +3,7 @@ import { changeSymbolViolation,
     changeResultObjectiveValue } from '../actionCreators';
 
 // Update Violations and Objective Value
-export function updateObjectiveValue(store, merit) {
+export function updateObjectiveValue(store, merit, returnInvalid = true) {
     
     // Update Constraint Violations
 
@@ -104,7 +104,10 @@ export function updateObjectiveValue(store, merit) {
         }
     }
 
-    if (obj === 0.0) { // No validity violation found, publish constraint based objective value
+    if (returnInvalid && obj === Number.POSITIVE_INFINITY) { // Validity violation found, publish constraint based objective value
+        store.dispatch(changeResultObjectiveValue(obj));
+//        console.warn('@@@ Returning invalid obj=',obj);
+    } else { // No validity violation found, publish validity based objective value
         /* Merit Function */
         if (merit && typeof merit === 'function') {
             // Create p & x from symbol_table
@@ -126,9 +129,7 @@ export function updateObjectiveValue(store, merit) {
         // Update Objective Value
         obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
         store.dispatch(changeResultObjectiveValue(obj));
-
-    } else { // Validity violation found, publish validity based objective value
-        store.dispatch(changeResultObjectiveValue(obj));
+//        console.log('Returning valid obj=',obj);
     }
     
 //    console.log('</ul><li>','End updateObjectiveValue obj=',obj,'</li>');
