@@ -44,17 +44,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
 
     s_psi = despak(psi, store, merit); // AKA despak, s_psi: the functional value at the base point
 //    console.log('In patsh 1 phi=',phi,'s_phi=',s_phi);
-    if (s_psi < objmin) { // Are we done before we start? Leave by door #1
-        NCODE = 'Search terminated when design reached feasibility (Objective value is less than OBJMIN)';
-        if (itno <= 2) {
-            NCODE += '. Low iteration count may produce low precision results.';
-        } else {
-            NCODE += ' after '+itno+' iterations.';
-        }
-//        console.log('</ul><li>','@@@@@ End patsh NCODE=',NCODE,'</li>');
-        return NCODE; // stop, design reached feasibility
-    }
-    do { // start searching/exploring
+    while (s_psi >= objmin) { // start searching/exploring otherwise Leave by door #1
         var s_phi; // [1]
         var phi = []; // phi: base point resulting from the current move
         for (let i = 0; i < psi.length; i++) {
@@ -107,5 +97,13 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                 del = del / 1.9; // del >= delmin && s >= s_psi goto 1
             }
         }
-    } while(true); // goto 1
+    } // goto 1
+    NCODE = 'Search terminated when design reached feasibility (Objective value is less than OBJMIN)';
+    if (itno <= 2) {
+        NCODE += '. Low iteration count may produce low precision results.';
+    } else {
+        NCODE += ' after '+itno+' iterations.';
+    }
+//    console.log('</ul><li>','@@@@@ End patsh NCODE=',NCODE,'</li>');
+    return NCODE; // stop, design reached feasibility
 }
