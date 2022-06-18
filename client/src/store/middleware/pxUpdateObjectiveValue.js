@@ -119,10 +119,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit, returnInvalid = true)
         }
     }
 
-    if (returnInvalid && obj === Number.POSITIVE_INFINITY) { // Validity violation found, return constraint based objective value
-        ; // No-op, return POSITIVE_INFINITY
-//        console.warn('@@@ Returning invalid obj=',obj);
-    } else { // No validity violation found
+    if (obj === 0.0) { // No validity violation found, return constraint based objective value
         /* Merit Function */
         if (merit && typeof merit === 'function') {
             m_funct = merit(p, x, design);
@@ -133,6 +130,21 @@ export function pxUpdateObjectiveValue(p, x, store, merit, returnInvalid = true)
         // Update objective value
         obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
 //        console.log('Returning valid obj=',obj);
+    } else { // Validity violation found
+        if (returnInvalid) {
+//            console.warn('@@@ Returning invalid obj=',obj);
+        } else {
+            /* Merit Function */
+            if (merit && typeof merit === 'function') {
+                m_funct = merit(p, x, design);
+            } else {
+                m_funct = 0.0;
+            }
+
+            // Update objective value
+            obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
+//            console.warn('Returning invalid obj=',obj);
+        }
     }
 
 //    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
