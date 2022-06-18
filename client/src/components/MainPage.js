@@ -86,7 +86,7 @@ class MainPage extends Component {
             this.setState({
                 activeTab: this.props.view
             });
-      }
+        }
     }
 
     toggle() {

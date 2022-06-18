@@ -65,9 +65,7 @@ class AlertsModal extends Component {
         return (
             <>
                 <Button variant="primary" disabled={all_alerts.length === 0} size="sm" onClick={this.onOpen}>Alerts&nbsp;
-                    <span className="badge bg-danger">
-                        {all_alerts.length}
-                    </span>
+                    {all_alerts.length > 0 ?<span className="badge bg-danger">{all_alerts.length}</span> : ''}
                 </Button>&nbsp;
                 <OverlayTrigger placement="bottom" overlay={<Tooltip>
                     ALERTS are error, warning and informational messages that are produced as you change the values of your design.
