@@ -35,13 +35,13 @@ export var commonChecks = function(store) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
-                message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
+                message: 'INVERTED CONSTRAINT RANGE: from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision()+' for FIXED ' + element.name + ' (' + element.value.toODOPPrecision() + ')',
                 severity: 'Notice'
             });
             addAlert({
                 element: element,
                 name: element.name+' MAX',
-                message: 'FIX INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
+                message: 'INVERTED CONSTRAINT RANGE: from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision()+' for FIXED ' + element.name + ' (' + element.value.toODOPPrecision() + ')',
                 severity: 'Notice'
             });
         } else if (!element.input && (element.lmin & FIXED && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
@@ -64,14 +64,14 @@ export var commonChecks = function(store) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
-                message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
+                message: 'INVERTED CONSTRAINT RANGE: from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision()+' for ' + element.name + ' (' + element.value.toODOPPrecision() + ')',
                 severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Inconsistency)'
             });
             addAlert({
                 element: element,
                 name: element.name+' MAX',
-                message: 'CONSTRAINT INCONSISTENT: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value outside the range from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision(),
+                message: 'INVERTED CONSTRAINT RANGE: from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision()+' for ' + element.name + ' (' + element.value.toODOPPrecision() + ')',
                 severity: 'Notice',
                 duplicate: true
             });
