@@ -23,7 +23,7 @@ Resolve this alert by reducing the value of M_1 below the value of M_2.
 It should also be possible to 
 confirm that M_1 is in Free status, 
 confirm that the constraint Stroke MIN is enabled with a non-zero constraint level 
-and then use the Search feature. 
+and then use the Search feature (menu Action : Search or Search button). 
 
 See also: 
 <!---

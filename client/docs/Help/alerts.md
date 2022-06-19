@@ -1,6 +1,6 @@
 # Alerts &nbsp; 
 
-ALERTS are informational messages that are produced as you change the values of your design. 
+Alerts are informational messages that are produced as you change the values of your design. 
 Press the Alerts button on the main pages (Advanced and Calculator Views) 
 to see an alert presentation that is color coded and sorted by severity: 
 Severity | Content                                          | Color  
@@ -13,17 +13,32 @@ Severity | Content                                          | Color
 Informational alerts (Info) alerts also highlight the configuration of 
 Functionally Determined Constraint Levels [(FDCL)](/docs/Help/terminology.html#fdcl). 
 
-The Value field allows in-place adjustment of the associated variable's value and constraint levels. 
+The Value field of the Alerts presentation allows in-place adjustment of the 
+associated variable's value and constraint levels. 
 This field operates the same as the corresponding fields on the main pages (Advanced and Calculator Views). 
 Thus, where possible, the color of the number presented in the value field tracks the color of the 
 [multi-colored Feasibility Status Indicator](/docs/Help/feasibilityIndicator.html). 
 Otherwise, the field color tracks the message Severity level. 
 
-In order to assure that ODOP : Spring's core solution algorithms 
-will not encounter numeric difficulty when starting from a physically unrealistic situation, 
-alerts of error (Err) severity will generaly block operation of the Search, Seek and Trade features. 
-It will be necessary to identify the source of errors and manually provide more appropriate values 
-in order to proceed with Search, Seek and Trade. 
+Designs with values outside their valid range are likely physically impossible.
+In spring design, negative values for wire diameter, coil diameter and number of coils are obvious examples.
+Other situations, for example where an increase in wire diameter results in a negative value for coil inside diameter 
+or an increase in force at the second load point takes a compression spring below its solid condition 
+may be a bit less obvious. 
+
+If started from a design with one or more values outside their valid range 
+the Search feature may not be able to resolve the problem. 
+In this situation, Search finishes with a different design point that is also invalid and
+with a message to correct the invalid condition manually. 
+In order to proceed with a new Search, 
+it will be necessary to identify the source of invalid values and manually enter more appropriate values. 
+As zero and negative numbers are a common source of invalid values, look for those first. 
+
+In order to avoid numeric difficulty when starting from a physically unrealistic situation, 
+alerts of error (Err) severity may block operation of the Seek and Trade features. 
+In order to proceed with Seek and Trade it will be necessary to identify the source of errors 
+and manually provide more appropriate values. 
+
 Where possible, the linked detailed entries (below) provide specific guidance in moving to values 
 that will resolve the alerts. 
 
@@ -41,8 +56,6 @@ that will resolve the alerts.
  - [L_Free < L_Solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_2_LT_L_Solid)  
  - [Coils_A is less than 1](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)  
- - [Wire diameter is less than reasonable](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_LT_reasonable)  
- - [Wire diameter is greater than reasonable](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_GT_reasonable)  
  - [Value of Tensile is suspect](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)  
  - [FS_CycleLife MIN not set](/docs/Help/DesignTypes/Spring/alerts.html#FS_CycleLife_MIN_not_set)  
  - [FS_Solid < 1.0](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)  
@@ -63,7 +76,7 @@ The value of the associated variable is less than the validmin limit defined in 
 This means that, given the current input values (for example, a negative diameter), 
 the design is likely outside the limits of physical reality. 
 The mathematical model for this design is not valid for these inputs. 
-This condition blocks the Search, Seek and Trade features from starting. 
+This condition may block the Seek and Trade features from starting. 
 
 Specific advice on how to resolve this condition is not available. 
 Look for zero or negative values. 
@@ -80,7 +93,7 @@ The value of the associated variable is greater than the validmax limit defined 
 This means that, given the current input values, 
 the design is likely outside the limits of physical reality. 
 The mathematical model for this design is not valid for these inputs. 
-This condition blocks the Search, Seek and Trade features from starting. 
+This condition may block the Seek and Trade features from starting. 
 
 Specific advice on how to resolve this condition is not available. 
 Look for other messages as they might provide more specific advice. 
@@ -96,7 +109,7 @@ Constraints on the associated variable are inconsistent.
 Specifically, the value of the MAX constraint is less than the MIN constraint; 
 the value of the MIN constraint is greater than the MIN constraint. 
 
-This situation will block the Search, Seek and Trade features.
+This situation may block the Search, Seek and Trade features from starting.
 
 To resolve the situation, change one or both of the associated variable's constraint values. 
 Increase the MAX value and / or decrease the MIN value until there is no overlap. 
@@ -179,7 +192,7 @@ ___
 ## No Free Independent Variables 
 If all Independent Variables are in Fixed status, 
 there is nothing left for Search to manipulate in order to achieve a feasible design. 
-This condition will block use of the Search, Seek and Trade features. 
+This condition may block use of the Search, Seek and Trade features. 
 
 It is possible that operation of the [AutoFix](/docs/Help/terminology.html#autoFix) feature 
 has contributed to the situation. 

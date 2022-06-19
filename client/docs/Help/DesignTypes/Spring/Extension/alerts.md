@@ -26,7 +26,7 @@ Resolve this alert by reducing the value of Force_1 below the value of Force_2.
 It should also be possible to 
 confirm that Force_1 is in Free status, 
 confirm that the constraint L_Stroke MIN is enabled with a non-zero constraint level 
-and then use the Search feature. 
+and then use the Search feature (menu Action : Search or Search button). 
 
 See also: 
  - [Extension Spring Constraints](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springConstraints)   
@@ -122,7 +122,7 @@ Given the selected end type,
 
 bending stress in the hook at "point A" (Stress_Hook) exceeds the allowable bending stress (Stress_Lim_Bend) 
 
-or 
+and / or 
 
 torsional stress in the hook at "point B"  exceeds the allowable stress for the selected endurance (Stress_Lim_Endur).  
 
@@ -135,14 +135,17 @@ Increase  | &nbsp; | Decrease
  FS_Hook  | &nbsp; | L_Stroke  
  &nbsp;   | &nbsp; | Spring_Index  
 
-Alternatively, use Advanced View to enable the minimum constraint on FS_Hook with a constraint level of 1.0 or greater 
-and then use the Search feature. 
+Alternatively, use Advanced View to enable the minimum constraint on FS_Hook with a constraint level of 1.0 or greater, 
+enable the maximum constraint on Stress_Hook (defaults to the FDCL of Stress_Lim_Bend) 
+and then use the Search feature (menu Action : Search or Search button). 
 It will likely be necessary to clear some or most seemingly unrelated constraint violations in order to achieve 
-no violation on the FS_Hook constraint (and to achieve a design considered to be feasible). 
+no violation on the FS_Hook constraint (and thus achieve a design considered to be feasible). 
 
 See also:
  - Report 2  
- - [Extension Spring Design Type - Hook Stress](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springHookStress) 
+ - [Extension Spring Design Type - Hook Stress](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springHookStress)  
+ - [Extension spring cycle life](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springCycleLife)  
+ - [Terminology - Function Constraints (FDCL)](/docs/Help/terminology.html#fdcl)  
  
 ___
 

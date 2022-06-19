@@ -1,7 +1,7 @@
 # Errors &nbsp; 
 
 This topic provides details for each of the error messages that result from 
-conditions that block the Action : Search, Seek, Trade and Catalog functions. 
+conditions that may block the Action : Search, Seek, Trade and Catalog functions. 
 
 ### On this page:   
  - [Search errors](errors.html#searchErr)  

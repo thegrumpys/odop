@@ -85,10 +85,10 @@ ___
 
 ## Over-design concern 
 This design may be excessively conservative, 
-its Factor of Safety at operating point 2 exceeds the maximum constraint.  
+its Factor of Safety at operating point 2 exceeds the maximum constraint. 
 
 Suggest investigating a smaller wire diameter. 
-One approach is to run Search with Wire_Dia in Free status.
+One approach is to run Search (menu Action : Search or Search button) with Wire_Dia in Free status. 
 Later, select the nearest larger standard wire diameter.  
 
 Alternatively, increase the FS_2 MAX constraint or disable that MAX constraint. 

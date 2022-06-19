@@ -72,7 +72,7 @@ Resolve this alert by reducing the value of Force_1 below the value of Force_2.
 It should also be possible to 
 confirm that Force_1 is in Free status, 
 confirm that the constraint L_Stroke MIN is enabled with a non-zero constraint level 
-and then use the Search feature. 
+and then use the Search feature (menu Action : Search or Search button). 
 
 See also: 
  - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
@@ -97,7 +97,7 @@ Increase  | &nbsp; | Decrease
 In order to design a spring that is not over-stressed when deflected to the solid condition, 
 enable the FS_Solid MAX constraint, 
 set that MAX constraint to a value slightly above 1.0 
-and run the Search feature. 
+and run the Search feature (menu Action : Search or Search button). 
 
 ___
 
@@ -166,7 +166,7 @@ Increase OD_Free or reduce L_Free in order to reduce the tendency to buckle.
 In order to design a spring that does not have a tendency to buckle, 
 enable the Slenderness MAX constraint, 
 set that MAX constraint to a value close to 4.0 
-and run the Search feature. 
+and run the Search feature (menu Action : Search or Search button). 
 
 ___
 
