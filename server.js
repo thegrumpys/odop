@@ -331,7 +331,7 @@ app.post('/api/v1/usage_log', (req, res) => {
     var connection = startConnection();
     note = note.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
     var stmt = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address+'\',\''+note+'\')';
-//    console.log('SERVER: stmt='+stmt);
+    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After INSERT err=', err, ' rows=', rows);
         if (err) {
@@ -342,6 +342,41 @@ app.post('/api/v1/usage_log', (req, res) => {
         } else {
             var value = {};
 //            console.log('SERVER: After INSERT value=', value);
+            res.status(200).json(value);
+            connection.end();
+            console.log('SERVER: 200 - OK');
+        }
+    });
+});
+
+app.get('/api/v1/usage_log', authenticationRequired, (req, res) => {
+    var type;
+    var value;
+    var user = req.uid;
+    var type = req.params['type'];
+    var name = req.params['name'];
+    console.log('SERVER: In GET /api/v1/designtypes/'+type+'/designs/'+name+' user=',user);
+    var connection = startConnection();
+    var stmt = 'SELECT * FROM design WHERE (user = \''+user+'\' OR user IS NULL) AND type = \''+type+'\' AND name = \''+name+'\' ORDER BY user DESC';
+//    console.log('SERVER: stmt='+stmt);
+    connection.query(stmt, function(err, rows, fields) {
+//        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+        if (err) {
+            res.status(500).end();
+            connection.end();
+            console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+            throw err;
+        } else if (rows.length === 0) {
+            res.status(404).end();
+            connection.end();
+            console.log('SERVER: 404 - NOT FOUND');
+        } else {
+//            console.log('SERVER: After SELECT rows[0]=', rows[0]);
+            type = rows[0].type; // Get type from the JSON blob
+//            console.log('SERVER: After SELECT user=',user,'name=',name, 'type=',type);
+            value = JSON.parse(rows[0].value); // Get value from the JSON blob
+            value.type = type; // Insert type into blob
+//            console.log('SERVER: After SELECT value=', value);
             res.status(200).json(value);
             connection.end();
             console.log('SERVER: 200 - OK');
