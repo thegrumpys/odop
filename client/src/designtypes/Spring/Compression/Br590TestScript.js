@@ -1,204 +1,222 @@
 import React from 'react';
-import { changeLabelsValue, changeSymbolConstraint, changeSymbolValue, changeSystemControlsValue, loadInitialState, logUsage, search, setSymbolFlag } from '../../../store/actionCreators';
-import { MAX, CONSTRAINED } from '../../../store/actionTypes';
+import { changeSymbolConstraint, changeSymbolValue, changeSystemControlsValue, loadInitialState, search, setSymbolFlag } from '../../../store/actionCreators';
+import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
         {
-            title: "Session Now In Progress",
+            title: "Page 01 - Branch 590 test script",
             text: (
-                <React.Fragment>
+                <>
                     <p>
-                    This is the Branch 590 test script. 
-                    It provides multiple test cases where in ODOP:Spring v4.0.x  
-                    a search started from a valid start point will produce a not-valid result.
+                    This is the Branch 590 test script.
+                    It provides multiple test cases where in ODOP:Spring v4.0.x
+                    a search started from a valid or invalid start point will produce a valid or invalid result.
                     </p>
-                    
-                    <p>
-                    Case 1:  Negative Wire_Dia
-                    </p>
-                    
-                    <p>
-                    Click Next to: 
-                    <br />
-                     - load compression spring initialState<br /> 
-                     - change the value of Wire_Dia to 0.4 inch<br /> 
-                     - increase the default maxit to 600 
-                     </p>
-                    
-                    <p>
-                     Otherwise, click Exit to close.
-                    </p>
-                </React.Fragment>
+                </>
             )
         },
         {
-            title: "Page 02 of xxx",
+            title: "Page 02 - VALID to VALID",
             text: (
-                <React.Fragment>
+                <>
                     <p>
-                    Compression spring initialState has been loaded.
+                    Loaded Compression spring initialState.<br />
+                    Set maxit = 600<br />
+                    Set Force_2 MIN = 40.0 inches<br />
+                    Set L_Stroke MIN = 1.74 inches<br />
                     </p>
-                    
-                    <p>
-                    <b>New values:</b><br />
-                    Wire_Dia = 0.4 inch<br /> 
-                    maxit = 600<br />
-                    <br />
-                    </p>
-                    
-                    <p>
-                    Click Next for Search or Exit to close.
-                    </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("Wire_Dia", 0.4),
-                changeLabelsValue([{name: 'COMMENT', value: 'Branch 590 test script'}]),
-                changeSystemControlsValue({maxit: 600})
+                changeSystemControlsValue({maxit: 600}),
+                setSymbolFlag('Force_2', MIN, CONSTRAINED),
+                changeSymbolConstraint("Force_2", MIN, 40.0),
+                changeSymbolConstraint("L_Stroke", MIN, 1.75),
             ]
         },
         {
-            title: "Page 03 of xxx",
+            title: "Page 03 - VALID to VALID",
             text: (
-                <React.Fragment>
+                <>
                     <p>
-                    We have a solution. 
-                    Take a moment to scroll through and view the values.
+                    Search should have gotten a VALID solution.
                     </p>
-                    
-                    <p>
-                    Observe that values of Wire_Dia and other variables are negative.
-                    </p>
-                    
-                    <p>
-                    In ODOP:Spring v4.0.x additional searches do not resolve that situation.
-                    </p>
-                    
-                    <p>
-                     Click Next to move on to the next case or Exit to close.
-                    </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
-                logUsage('event','Br590TestScript', { 'event_label': 'Page 03 of xxx' }),
                 search()
             ]
         },
         {
-            title: "Page 04 of xxx",
+            title: "Page 04 - INVALID to VALID",
             text: (
-                <React.Fragment>
+                <>
+                    <p>
+                    Loaded Compression spring initialState.<br />
+                    Set maxit = 600<br />
+                    Set Force_2 MIN = 40.0 inches<br />
+                    Set L_Stroke MIN = 1.74 inches<br />
+                    Set Force_2 = 90.0 inches<br />
+                    </p>
+                </>
+            ),
+            actions: [
+                loadInitialState('Spring/Compression'),
+                changeSystemControlsValue({maxit: 600}),
+                setSymbolFlag('Force_2', MIN, CONSTRAINED),
+                changeSymbolConstraint("Force_2", MIN, 40.0),
+                changeSymbolConstraint("L_Stroke", MIN, 1.75),
+                changeSymbolValue("Force_2", 90.0),
+            ]
+        },
+        {
+            title: "Page 05 - INVALID to VALID",
+            text: (
+                <>
+                    <p>
+                     Search should have gotten a VALID solution.
+                   </p>
+                </>
+            ),
+            actions: [
+                search()
+            ]
+        },
+        {
+            title: "Page 06 - INVALID to INVALID",
+            text: (
+                <>
+                    <p>
+                    Loaded Compression spring initialState.<br />
+                    Set maxit = 600<br />
+                    Set OD_Free = -1.1 inches<br />
+                    </p>
+                </>
+            ),
+            actions: [
+                loadInitialState('Spring/Compression'),
+                changeSystemControlsValue({maxit: 600}),
+                changeSymbolValue("OD_Free", -1.1),
+            ]
+        },
+        {
+            title: "Page 07 - INVALID to INVALID",
+            text: (
+                <>
+                    <p>
+                    Search should have gotten an INVALID solution.
+                    </p>
+                </>
+            ),
+            actions: [
+                search()
+            ]
+        },
+        {
+            title: "Page 08 - INVALID to VALID to INVALID to VALID",
+            text: (
+                <>
+                    <p>
+                    Case 1:  Negative Wire_Dia
+                    </p>
+                    <p>
+                    Loaded Compression spring initialState.<br />
+                    Set maxit = 600<br />
+                    Wire_Dia = 0.4 inch<br />
+                    </p>
+                </>
+            ),
+            actions: [
+                loadInitialState('Spring/Compression'),
+                changeSystemControlsValue({maxit: 600}),
+                changeSymbolValue("Wire_Dia", 0.4),
+            ]
+        },
+        {
+            title: "Page 09 - INVALID to VALID to INVALID to VALID",
+            text: (
+                <>
+                    <p>
+                    Search should have gone from a VALID to INVALID to INVALID to VALID solution.
+                    Observe that values of Wire_Dia and other variables are negative.
+                    </p>
+                </>
+            ),
+            actions: [
+                search()
+            ]
+        },
+        {
+            title: "Page 10 - INVALID to VALID to INVALID to VALID",
+            text: (
+                <>
                     <p>
                     Case 2:  Negative Coils_A
                     </p>
-                    
                     <p>
-                    Compression spring initialState has been loaded.
+                    Loaded Compression spring initialState.<br />
+                    Set maxit = 600<br />
+                    OD_Free = 91.1 inches<br />
                     </p>
-                    
-                    <p>
-                    <b>New values:</b><br />
-                    OD_Free = 91.1 inches<br /> 
-                    <br />
-                    </p>
-                    
-                    <p>
-                    Click Next for Search or Exit to close.
-                    </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
+                changeSystemControlsValue({maxit: 600}),
                 changeSymbolValue("OD_Free", 91.1),
-                changeSystemControlsValue({maxit: 600})
             ]
         },
         {
-            title: "Page 05 of xxx",
+            title: "Page 11 - VALID to INVALID to INVALID to VALID",
             text: (
-                <React.Fragment>
+                <>
                     <p>
-                    We have a solution. 
-                    Take a moment to scroll through and view the values.
-                    </p>
-                    
-                    <p>
-                    Observe that value of Coils_A is invalid (negative).  
+                    Search should have gone from a VALID to INVALID to INVALID to VALID solution.
+                    Observe that value of Coils_A is invalid (negative).
                     Other variables are negative
                     </p>
-                    
-                    <p>
-                    In ODOP:Spring v4.0.x additional searches do not make progress towards a feasible design.  It's stuck..
-                    </p>
-                    
-                    <p>
-                     Click Next to move on to the next case or Exit to close.
-                    </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
-                logUsage('event','Br590TestScript', { 'event_label': 'Page 05 of xxx' }),
                 search()
             ]
         },
         {
-            title: "Page 06 of xxx",
+            title: "Page 12 - INVALID to VALID to INVALID to VALID",
             text: (
-                <React.Fragment>
+                <>
                     <p>
                     Case 3:  Negative ID_Free
                     </p>
-                    
                     <p>
-                    Compression spring initialState has been loaded.
-                    </p>
-                    
-                    <p>
-                    <b>New values:</b><br />
-                    OD_Free = 11.1 inches<br /> 
+                    Loaded Compression spring initialState.<br />
+                    Set maxit = 600<br />
+                    OD_Free = 11.1 inches<br />
                     Spring_Index MAX 1.6
-                    <br />
                     </p>
-                    
-                    <p>
-                    Click Next for Search or Exit to close.
-                    </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
+                changeSystemControlsValue({maxit: 600}),
                 changeSymbolValue("OD_Free", 11.1),
                 setSymbolFlag('Spring_Index', MAX, CONSTRAINED),
                 changeSymbolConstraint('Spring_Index', MAX, 1.6),
-                changeSystemControlsValue({maxit: 600})
             ]
         },
         {
-            title: "Page 07 of xxx",
+            title: "Page 14 - INVALID to VALID to INVALID to VALID",
             text: (
-                <React.Fragment>
+                <>
                     <p>
-                    We have a solution. 
-                    Take a moment to scroll through and view the values.
-                    </p>
-                    
-                    <p>
-                    Observe that value of ID_Free is invalid (negative).  
+                    Search should have gone from a VALID to INVALID to INVALID to VALID solution.
+                    Observe that value of ID_Free is invalid (negative).
                     Other variables are negative
                     </p>
-                    
-                    <p>
-                    In ODOP:Spring v4.0.x additional searches do not make progress towards a feasible design.  It's stuck..
-                    </p>
-                    
-                    <p>
-                     This was the last case. Click Exit to close.
-                    </p>
-                </React.Fragment>
+                </>
             ),
             actions: [
-                logUsage('event','Br590TestScript', { 'event_label': 'Page 07 of xxx' }),
                 search()
             ]
         }
