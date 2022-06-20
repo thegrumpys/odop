@@ -50,21 +50,28 @@ that will resolve the alerts.
  - [Constraint MAX violation](alerts.html#MAX_Violation)  
  - [Fix violation](alerts.html#Fix_Violation)  
  - [No Free Independent Variables](alerts.html#NoFreeIV)  
- - [Functionally Determined Constraint Level (FDCL) is configured](alerts.html#FDCL)  
+ - [Functionally Determined Constraint Level (FDCL) is enabled](alerts.html#FDCL)  
 
 ### On other pages (design type specific alerts):   
- - [L_Free < L_Solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_Free_LT_L_Solid)  
- - [L_2 < L_solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_2_LT_L_Solid)  
  - [Coils_A is less than 1](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)  
- - [Value of Tensile is suspect](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)  
+ - [Material properties for this Wire_Dia may not be accurate](/docs/Help/DesignTypes/Spring/alerts.html#MatPropAccuracy)  
+ - [ID_Free < Wire_Dia](/docs/Help/DesignTypes/Spring/alerts.html#ID_Free_LT_Wire_Dia)  
  - [FS_CycleLife MIN not set](/docs/Help/DesignTypes/Spring/alerts.html#FS_CycleLife_MIN_not_set)  
- - [FS_Solid < 1.0](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)  
  - [Over-design concern](/docs/Help/DesignTypes/Spring/alerts.html#OverDesign)  
  - [Spring Index manufacturability concern](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)  
+ - [Value of Tensile is suspect](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)  
+ - [L_Free < L_Solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_Free_LT_L_Solid)  
+ - [L_2 < L_solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_2_LT_L_Solid)  
  - [Force_2 < Force_1](/docs/Help/DesignTypes/Spring/Compression/alerts.html#F1_GE_F2)  
+ - [FS_Solid < 1.0](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)  
  - [%_Avail_Deflect @ 2 > 80%](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect2_GT_80)  
  - [%_Avail_Deflect @ 1 < 20%](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect1_LT_20)  
  - [Buckling concern](/docs/Help/DesignTypes/Spring/Compression/alerts.html#buckling)  
+ - [Force_1 < Initial_Tension](/docs/Help/DesignTypes/Spring/Extension/alerts.html#F1_LT_IT)  
+ - [Stress_Initial < Stress_Init_Lo](/docs/Help/DesignTypes/Spring/Extension/alerts.html#SInit_LT_SInit_Lo)  
+ - [Stress_Initial > Stress_Init_Hi](/docs/Help/DesignTypes/Spring/Extension/alerts.html#SInit_GT_SInit_Hi)  
+ - [Fatigue failure at end is possible](/docs/Help/DesignTypes/Spring/Extension/alerts.html#FatigueInHook)  
+ - [M_1 >= M_2](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#M1_GE_M2)  
 
 ___
 
@@ -211,8 +218,8 @@ ___
 <a id="FDCL"></a>  
 ___
 
-## Functionally Determined Constraint Level (FDCL) is configured 
-A functionally Determined Constraint Level (FDCL) is configured for this variable. 
+## Functionally Determined Constraint Level (FDCL) is enabled 
+This variable has a functionally Determined Constraint Level (FDCL) configured and enabled. 
 
 See Also:  
  - [Terminology - Function Constraints](/docs/Help/terminology.html#fdcl)  
