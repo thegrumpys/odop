@@ -1,11 +1,11 @@
 import { CONSTRAINED, FIXED } from '../actionTypes';
 
 // Update Violations and Objective Value
-export function pxUpdateObjectiveValue(p, x, store, merit, returnInvalid = true) {
+export function pxUpdateObjectiveValue(p, x, store, merit) {
     
     // Update Constraint Violations
 
-//    console.log('<li>','@@@@@ Start pxUpdateObjectiveValue','</li><ul>');
+//    console.log('<li>','Start pxUpdateObjectiveValue','</li><ul>');
 
     /*
      * The following section of code constructs the objective function from the
@@ -13,141 +13,140 @@ export function pxUpdateObjectiveValue(p, x, store, merit, returnInvalid = true)
      * It is not problem dependent.
      */
     var element;
-    var vmin;
-    var vmax;
+    var validity_vmin;
+    var validity_vmax;
+    var feasibility_vmin;
+    var feasibility_vmax;
     var m_funct;
     var obj;
-    var viol_sum;
-    var ip;
-    var pp;
-    var ix;
-    var xx;
+    var viol_sum = 0.0;
 
     var design = store.getState(); // Re-access store to get latest element values
-//    console.log('In pxUpdateObjectiveValue design=',design);
-
-    // Determine if all numbers are valid (AKA no validtiy violations)
-    obj = 0.0;
-    ip = 0;
-    ix = 0;
-    for (let i = 0; i < design.model.symbol_table.length; i++) {
-        element = design.model.symbol_table[i];
-        if (element.type === "equationset" && element.input) {
-            pp = p[ip++];
-            if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
-                if (pp <= element.validmin || pp >= element.validmax) {
-                    obj = Number.POSITIVE_INFINITY;
-                    break;
-                }
-            }
-        } else {
-            xx = x[ix++];
-            if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
-                if (xx <= element.validmin || xx >= element.validmax) {
-                    obj = Number.POSITIVE_INFINITY;
-                    break;
-                }
-            }
-        }
-    }
 
     // Determine all constraint violations
-    viol_sum = 0.0;
-    ip = 0;
+    var ip = 0;
+    var ix = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
-        if (element.type === "equationset" && element.input) {
-            vmin = 0.0;
-            vmax = 0.0;
-            pp = p[ip++];
-            if (element.lmin & CONSTRAINED ) {
-                vmin = (-pp + element.cmin) / element.smin;
-//                console.log('<li>','p name=',element.name,' vmin=',vmin,' value=',pp,' cmin=',element.cmin,' smin=',element.smin,'</li>');
-            }
-            if (element.lmax & CONSTRAINED ) {
-                vmax = ( pp - element.cmax) / element.smax;
-//                console.log('<li>','p name=',element.name,' vmax=',vmax,' value=',pp,' cmax=',element.cmax,' smax=',element.smax,'</li>');
-            }
-            if (vmin > 0.0) {
-                viol_sum = viol_sum + vmin * vmin;
-            }
-            if (vmax > 0.0) {
-                viol_sum = viol_sum + vmax * vmax;
-            }
-        }
-    }
-    ix = 0;
-    for (let i = 0; i < design.model.symbol_table.length; i++) {
-        element = design.model.symbol_table[i];
-        if (element.type === "equationset" && !element.input) {
-            vmin = 0.0;
-            vmax = 0.0;
-            xx = x[ix++];
-            /* State variable fix levels. */
-            /*
-             * The fix_wt's are automatically incorporated in the scaling denominators
-             * S(I+N) by the main routine.
-             * 
-             * This version reduces penalty of large fix violations.
-             */
-            if (element.lmin & FIXED) {
-                vmin = (-xx + element.cmin) / element.smin;
-                vmax = -vmin;
-                if (vmin > 1.0) {
-                    viol_sum = viol_sum + vmin;
-                } else if (vmin < -1.0) {
-                    viol_sum = viol_sum - vmin;
+        if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
+            if (element.type === "equationset" && element.input) { // Independent Variable
+                var pp = p[ip++];
+                validity_vmin = (-pp + element.validmin);
+                validity_vmax = ( pp - element.validmax);
+                if (element.lmin & CONSTRAINED) {
+                    feasibility_vmin = (-pp + element.cmin) / element.smin;
                 } else {
-                    viol_sum = viol_sum + vmin * vmin;
+                    feasibility_vmin = 0.0;
                 }
-            } else {
-                if (element.lmin & CONSTRAINED ) {
-                    vmin = (-xx + element.cmin) / element.smin;
-//                    console.log('<li>','x name=',element.name,' vmin=',vmin,' value=',xx,' cmin=',element.cmin,' smin=',element.smin,'</li>');
+                if (validity_vmin > 0.0 && feasibility_vmin > 0.0) {
+                    viol_sum = viol_sum + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);
+                } else if (validity_vmin > 0.0) {
+                    viol_sum = viol_sum + validity_vmin * validity_vmin;
+                } else if (feasibility_vmin > 0.0) {
+                    viol_sum = viol_sum + feasibility_vmin * feasibility_vmin;
                 }
-                if (element.lmax & CONSTRAINED ) {
-                    vmax = ( xx - element.cmax) / element.smax;
-//                    console.log('<li>','x name=',element.name,' vmax=',vmax,' value=',xx,' cmax=',element.cmax,' smax=',element.smax,'</li>');
+                if (element.lmax & CONSTRAINED) {
+                    feasibility_vmax = ( pp - element.cmax) / element.smax;
+                } else {
+                    feasibility_vmax = 0.0;
                 }
-                if (vmin > 0.0) {
-                    viol_sum = viol_sum + vmin * vmin;
+                if (validity_vmax > 0.0 && feasibility_vmax > 0.0) {
+                    viol_sum = viol_sum + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
+                } else if (validity_vmax > 0.0) {
+                    viol_sum = viol_sum + validity_vmax * validity_vmax;
+                } else if (feasibility_vmax > 0.0) {
+                    viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
                 }
-                if (vmax > 0.0) {
-                    viol_sum = viol_sum + vmax * vmax;
+            } else if (element.type === "equationset" && !element.input) { // Dependent Variable
+                var xx = x[ix++];
+                /* State variable fix levels. */
+                /*
+                 * The fix_wt's are automatically incorporated in the scaling denominators
+                 * S(I+N) by the main routine.
+                 * 
+                 * This version reduces penalty of large fix violations.
+                 */
+                validity_vmin = (-xx + element.validmin);
+                validity_vmax = ( xx - element.validmax);
+                if (element.lmin & FIXED) {
+                    feasibility_vmin = (-xx + element.cmin) / element.smin;
+                    if (validity_vmin > 0.0 && feasibility_vmin > 0.0) {
+                        viol_sum = viol_sum + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);
+                    } else if (validity_vmin > 0.0) {
+                        viol_sum = viol_sum + validity_vmin * validity_vmin;
+                    } else if (feasibility_vmin > 0.0) {
+                        if (feasibility_vmin > 1.0) {
+                            viol_sum = viol_sum + feasibility_vmin;
+                        } else if (feasibility_vmin < -1.0) {
+                            viol_sum = viol_sum - feasibility_vmin;
+                        } else {
+                            viol_sum = viol_sum + feasibility_vmin * feasibility_vmin;
+                        }
+                    }
+                    feasibility_vmax = -feasibility_vmin;
+                    if (validity_vmax > 0.0 && feasibility_vmax > 0.0) {
+                        viol_sum = viol_sum + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
+                    } else if (validity_vmax > 0.0) {
+                        viol_sum = viol_sum + validity_vmax * validity_vmax;
+                    } else if (feasibility_vmax > 0.0) {
+                        if (feasibility_vmax > 1.0) {
+                            viol_sum = viol_sum + feasibility_vmax;
+                        } else if (feasibility_vmax < -1.0) {
+                            viol_sum = viol_sum - feasibility_vmax;
+                        } else {
+                            viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
+                        }
+                    }
+                } else {
+                    if (element.lmin & CONSTRAINED) {
+                        feasibility_vmin = (-xx + element.cmin) / element.smin;
+                    } else {
+                        feasibility_vmin = 0.0;
+                    }
+                    if (validity_vmin > 0.0 && feasibility_vmin > 0.0) {
+                        viol_sum = viol_sum + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);
+                    } else if (validity_vmin > 0.0) {
+                        viol_sum = viol_sum + validity_vmin * validity_vmin;
+                    } else if (feasibility_vmin > 0.0) {
+                        viol_sum = viol_sum + feasibility_vmin * feasibility_vmin;
+                    }
+                    if (element.lmax & CONSTRAINED) {
+                        feasibility_vmax = ( xx - element.cmax) / element.smax;
+                    } else {
+                        feasibility_vmax = 0.0;
+                    }
+                    if (validity_vmax > 0.0 && feasibility_vmax > 0.0) {
+                        viol_sum = viol_sum + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
+                    } else if (validity_vmax > 0.0) {
+                        viol_sum = viol_sum + validity_vmax * validity_vmax;
+                    } else if (feasibility_vmax > 0.0) {
+                        viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
+                    }
+                }
+            } else if (element.type === "calcinput") { // Calculation Input
+                var ci = element.value;
+                validity_vmin = (-ci + element.validmin);
+                validity_vmax = ( ci - element.validmax);
+                if (validity_vmin > 0.0) {
+                    viol_sum = viol_sum + validity_vmin * validity_vmin;
+                }
+                if (validity_vmax > 0.0) {
+                    viol_sum = viol_sum + validity_vmax * validity_vmax;
                 }
             }
         }
     }
 
-    if (obj === 0.0) { // No validity violation found, return constraint based objective value
-        /* Merit Function */
-        if (merit && typeof merit === 'function') {
-            m_funct = merit(p, x, design);
-        } else {
-            m_funct = 0.0;
-        }
-
-        // Update objective value
-        obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
-//        console.log('Returning valid obj=',obj);
-    } else { // Validity violation found
-        if (returnInvalid) {
-//            console.warn('@@@ Returning invalid obj=',obj);
-        } else {
-            /* Merit Function */
-            if (merit && typeof merit === 'function') {
-                m_funct = merit(p, x, design);
-            } else {
-                m_funct = 0.0;
-            }
-
-            // Update objective value
-            obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
-//            console.warn('Returning invalid obj=',obj);
-        }
+    /* Merit Function */
+    if (merit && typeof merit === 'function' && (validity_vmin <= 0.0 || validity_vmax <= 0.0) ) {
+        m_funct = merit(p, x, design);
+    } else {
+        m_funct = 0.0;
     }
 
-//    console.log('</ul><li>','@@@@@ End pxUpdateObjectiveValue obj=',obj,'</li>');
+    // Update Objective Value
+    obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
 
+//    console.log('</ul><li>','End pxUpdateObjectiveValue obj=',obj,'</li>');
     return obj;
 }

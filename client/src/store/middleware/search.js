@@ -14,10 +14,12 @@ export function search(store, objmin, merit) {
     var pc = [];
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
-        if (element.type === "equationset" && element.input) {
-            if (!(element.lmin & FIXED)) {
-//                console.log('In search i=',i,'element=',element);
-                pc.push(element.value);
+        if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
+            if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
+                if (!(element.lmin & FIXED)) { // Only Free
+//                   console.log('In search i=',i,'element=',element);
+                    pc.push(element.value);
+                }
             }
         }
     }
@@ -32,11 +34,13 @@ export function search(store, objmin, merit) {
     var p = [];
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
-        if (element.type === "equationset" && element.input) {
-            if (!(element.lmin & FIXED)) {
-                p.push(pc[kd++]);
-            } else {
-                p.push(element.value);
+        if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
+            if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
+                if (!(element.lmin & FIXED)) { // Only Free
+                    p.push(pc[kd++]);
+                } else {
+                    p.push(element.value);
+                }
             }
         }
     }
