@@ -10,6 +10,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
     function patsh_explore(phi, s, del) {
 //        console.log('entering patsh_explore phi=', phi, 's=', s, 'del=', del, 'bdw=', bdw);
         var eps = [];
+        var spi;
         for (let k = 0; k < phi.length; k++) {
             eps[k] = 0.05 * phi[k];
             if (eps[k] === 0.0)
