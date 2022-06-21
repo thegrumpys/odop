@@ -398,9 +398,10 @@ function createSentenceSearchResult(pageMatch) {
                   if (sentenceData[lio] === undefined) {
                       sentenceData[lio] = [];
                   }
-                  position[0] = position[0]-lio;
+                  let position_clone = Object.assign({},position); // clone it
+                  position_clone[0] = position_clone[0]-lio;
 //                  console.log('In createSentenceSearchResult lio=',lio,'position=',position);
-                  sentenceData[lio].push(position);
+                  sentenceData[lio].push(position_clone);
                   sentenceData[lio].sort((a, b) => a[0] - b[0]); // Put in position order
               });
           }
@@ -414,7 +415,7 @@ function createSentenceSearchResult(pageMatch) {
     let io = hit.indexOf(SENTENCE_SEPARATOR,lio);
 //    console.log('In createSentenceSearchResult lio=',lio,'io=',io);
     let offset = 0;
-    let sentence = hit.slice(lio,io);;
+    let sentence = hit.slice(lio,io);
     sentenceData[lio].forEach((position) => {
 //      console.log('In createSentenceSearchResult offset=',offset,'position=',position);
       let prefix = sentence.slice(0,offset+position[0]);
