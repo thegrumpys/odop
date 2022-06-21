@@ -4,13 +4,13 @@ import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
         {
-            title: "Page 01 - Branch 590 test script",
+            title: "Branch 590 test script",
             text: (
                 <>
                     <p>
-                    This is the Branch 590 test script.
-                    It provides multiple test cases where in ODOP:Spring v4.0.x
-                    a search started from a valid or invalid start point will produce a valid or invalid result.
+                    This script provides multiple test cases exploring how Search responds to validity. 
+                    Specifically, cases where a search started from a valid or invalid start point will produce a valid or invalid result.
+                    The last three cases are examples where Search in ODOP:Spring v4.0.x and earlier would start valid but end invalid.
                     </p>
                 </>
             )
@@ -20,10 +20,16 @@ export const execute = {
             text: (
                 <>
                     <p>
+                    Conditions already established:
+                    </p>
+                    <p>
                     Loaded Compression spring initialState.<br />
                     Set maxit = 600<br />
-                    Set Force_2 MIN = 40.0 inches<br />
-                    Set L_Stroke MIN = 1.74 inches<br />
+                    Set Force_2 MIN = 40.0 pounds<br />
+                    Set L_Stroke MIN = 1.75 inches<br />
+                    </p>
+                    <p>
+                    Click Next to run Search.
                     </p>
                 </>
             ),
@@ -40,7 +46,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Search should have gotten a VALID solution.
+                    Search should have produced a VALID solution.
                     </p>
                 </>
             ),
@@ -53,11 +59,17 @@ export const execute = {
             text: (
                 <>
                     <p>
+                    Conditions already established:
+                    </p>
+                    <p>
                     Loaded Compression spring initialState.<br />
                     Set maxit = 600<br />
-                    Set Force_2 MIN = 40.0 inches<br />
-                    Set L_Stroke MIN = 1.74 inches<br />
-                    Set Force_2 = 90.0 inches<br />
+                    Set Force_2 MIN = 40.0 pounds<br />
+                    Set L_Stroke MIN = 1.75 inches<br />
+                    Set Force_2 = 90.0 pounds<br />
+                    </p>
+                    <p>
+                    Click Next to run Search.
                     </p>
                 </>
             ),
@@ -75,7 +87,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                     Search should have gotten a VALID solution.
+                     Search should have produced a VALID solution.
                    </p>
                 </>
             ),
@@ -88,9 +100,15 @@ export const execute = {
             text: (
                 <>
                     <p>
+                    Conditions already established:
+                    </p>
+                    <p>
                     Loaded Compression spring initialState.<br />
                     Set maxit = 600<br />
                     Set OD_Free = -1.1 inches<br />
+                    </p>
+                    <p>
+                    Click Next to run Search.
                     </p>
                 </>
             ),
@@ -105,7 +123,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Search should have gotten an INVALID solution.
+                    It is anticipated that Search produced an INVALID solution.
                     </p>
                 </>
             ),
@@ -118,12 +136,17 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Case 1:  Negative Wire_Dia
+                    Original Case 1:<br />
+                    Starting Search from this point in v4.0.x produced negative Wire_Dia and other variables. 
+                    Improved default constraints and sdlim values permit v4.2.2 to produce a valid and feasible result. 
                     </p>
                     <p>
                     Loaded Compression spring initialState.<br />
                     Set maxit = 600<br />
                     Wire_Dia = 0.4 inch<br />
+                    </p>
+                    <p>
+                    Click Next to run Search.
                     </p>
                 </>
             ),
@@ -138,8 +161,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Search should have gone from a VALID to INVALID to INVALID to VALID solution.
-                    Observe that values of Wire_Dia and other variables are negative.
+                    In v4.3 (post Br590) Search should have gone from a VALID to INVALID to INVALID to VALID and feasible solution.
                     </p>
                 </>
             ),
@@ -152,7 +174,9 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Case 2:  Negative Coils_A
+                    Original Case 2:<br />
+                    Starting Search from this point in v4.0.x produced negative Coils_A and other variables. 
+                    Improved default constraints and sdlim values permit v4.2.2 to produce a valid and feasible result. 
                     </p>
                     <p>
                     Loaded Compression spring initialState.<br />
@@ -172,9 +196,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Search should have gone from a VALID to INVALID to INVALID to VALID solution.
-                    Observe that value of Coils_A is invalid (negative).
-                    Other variables are negative
+                    In v4.3 (post Br590) Search should have gone from a VALID to INVALID to INVALID to VALID solution.
                     </p>
                 </>
             ),
@@ -187,7 +209,9 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Case 3:  Negative ID_Free
+                    Original Case 3:<br /> 
+                    Starting Search from this point in v4.0.x produced negative ID_Free and other variables. 
+                    Improved default constraints and sdlim values permit v4.2.2 to produce a valid and feasible result. 
                     </p>
                     <p>
                     Loaded Compression spring initialState.<br />
@@ -210,9 +234,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Search should have gone from a VALID to INVALID to INVALID to VALID solution.
-                    Observe that value of ID_Free is invalid (negative).
-                    Other variables are negative
+                    In v4.3 (post Br590) Search should have gone from a VALID to INVALID to INVALID to VALID solution.
                     </p>
                 </>
             ),
