@@ -184,6 +184,16 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#FatigueInHook)'
         });
     }
+    if (design.model.symbol_table[o.Stress_Initial].lmin & CONSTRAINED && design.model.symbol_table[o.SI_Lo_Factor].value <= 0.0 ||
+        design.model.symbol_table[o.Stress_Initial].lmax & CONSTRAINED && design.model.symbol_table[o.SI_Hi_Factor].value <= 0.0) {
+        addAlert({
+            element: design.model.symbol_table[o.Stress_Initial], 
+            name: design.model.symbol_table[o.Stress_Initial].name, 
+            message: 'Material property data not available', 
+            severity: 'Warn', 
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#NoMatProp)' 
+        });
+    }
 //    var PC_Safe_Deflect1 = 100 * (design.model.symbol_table[o.Deflect_1].value / safe_travel); // safe_travel from ReportBase - save for another day
 //    if (PC_Safe_Deflect1 < 20.0) {
 //        addAlert({

@@ -1,6 +1,7 @@
 # Errors &nbsp; 
 
-This topic provides details for each of the error messages that result from 
+This topic provides details for various messages produced by the software. 
+This includes each of the error messages that result from 
 conditions that may block the Action : Search, Seek, Trade and Catalog functions. 
 
 ### On this page:   
@@ -8,6 +9,7 @@ conditions that may block the Action : Search, Seek, Trade and Catalog functions
  - [Seek errors](errors.html#seekErr)  
  - [Trade errors](errors.html#tradeErr)  
  - [Catalog errors](errors.html#catErr)  
+ - [NaN = "Not a Number"](errors.html#NaN)
 
 ___
 
@@ -15,7 +17,9 @@ ___
 ___
 
 ## Search Errors 
- ... details ... 
+list Search blocking conditions  
+Provide links or instructions to resolve each.  
+Use AutoSave to recover before Search design 
 
 ___
 
@@ -40,6 +44,41 @@ ___
 
 ## Catalog Errors 
  ... details ... 
+
+___
+
+<a id="NaN"></a>  
+___
+
+## NaN = "Not a Number" 
+  
+See also: 
+ - [NaN = "Not a Number"](/docs/Help/htt.html#nan)  
+
+___
+
+<a id="padding"></a>  
+___
+
+##  
+  
+  &nbsp;   
+  
+ &nbsp;   
+  
+   &nbsp;   
+  
+  &nbsp;   
+   
+ &nbsp;   
+  
+ &nbsp;   
+  
+  &nbsp;   
+  
+ &nbsp;   
+  
+ &nbsp;   
 
 
 

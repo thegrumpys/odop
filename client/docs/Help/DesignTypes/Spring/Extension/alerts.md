@@ -8,6 +8,7 @@ Alerts specific to extension springs.
  - [Stress_Initial < Stress_Init_Lo](alerts.html#SInit_LT_SInit_Lo)  
  - [Stress_Initial > Stress_Init_Hi](alerts.html#SInit_GT_SInit_Hi)  
  - [Fatigue failure at end is possible](alerts.html#FatigueInHook)  
+ - [Material property data not available](alerts.html#NoMatProp)  
  - [%_Safe_Deflect @ 1 < 20%](alerts.html#PC_Safe_Deflect1_LT_20)  
 
 ___
@@ -146,7 +147,26 @@ See also:
  - [Extension Spring Design Type - Hook Stress](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springHookStress)  
  - [Extension spring cycle life](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springCycleLife)  
  - [Terminology - Function Constraints (FDCL)](/docs/Help/terminology.html#fdcl)  
+
+___
+
+<a id="NoMatProp"></a>  
+___
+
+## Material property data not available 
+The material property data SI_Lo_Factor and SI_Hi_Factor necessary to compute an appropriate range for stress induced by
+initial tension in non-ferrous materials is not in the internal material table. 
+
+In order to clear this alert: 
+ - disable constraints on Stress_Initial  
+ or
+ - in Advanced View, set the Calculation Input SI_Range to User_Specified and then supply appropriate (non-zero) values for SI_Lo_Factor and SI_Hi_Factor  
  
+It may be helpful to consult with the supplier of the non-ferrous material under consideration. 
+ 
+See also:
+ - [Extension spring initial tension range](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springIT_Range)
+
 ___
 
 <a id="PC_Safe_Deflect1_LT_20"></a>  

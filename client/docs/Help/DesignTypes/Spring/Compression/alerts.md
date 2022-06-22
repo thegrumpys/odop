@@ -30,7 +30,7 @@ Increase | &nbsp; | Decrease
 See also: 
  - [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png)
  - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
- - [Errors](errors.html)   
+ - [Errors](/docs/Help/errors.html)   
 
 ___
 
@@ -55,7 +55,7 @@ The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflec
 
 See also: 
  - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
- - [Errors](errors.html)   
+ - [Errors](/docs/Help/errors.html)   
 
 ___
 
