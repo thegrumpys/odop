@@ -31,20 +31,7 @@ export var commonChecks = function(store) {
         }
 
         // CONTRAINT CHECKS
-        if (!element.input && (element.lmin & FIXED && element.vmin > 0.0) && (element.lmax & FIXED && element.vmax > 0.0)) {
-            addAlert({
-                element: element,
-                name: element.name+' MIN',
-                message: 'INVERTED CONSTRAINT RANGE: from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision()+' for FIXED ' + element.name + ' (' + element.value.toODOPPrecision() + ')',
-                severity: 'Notice'
-            });
-            addAlert({
-                element: element,
-                name: element.name+' MAX',
-                message: 'INVERTED CONSTRAINT RANGE: from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision()+' for FIXED ' + element.name + ' (' + element.value.toODOPPrecision() + ')',
-                severity: 'Notice'
-            });
-        } else if (!element.input && (element.lmin & FIXED && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
+        if (!element.input && (element.lmin & FIXED && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
@@ -60,7 +47,7 @@ export var commonChecks = function(store) {
                 severity: 'Notice',
                 help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)'
             });
-        } else if ((element.lmin & CONSTRAINED && element.vmin > 0.0) && (element.lmax & CONSTRAINED && element.vmax > 0.0)) {
+        } else if (element.lmin === CONSTRAINED && element.lmax === CONSTRAINED && element.cmin > element.cmax) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
@@ -72,7 +59,7 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MAX',
                 message: 'INVERTED CONSTRAINT RANGE: from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision()+' for ' + element.name + ' (' + element.value.toODOPPrecision() + ')',
-                severity: 'Notice',
+                severity: 'Err',
                 duplicate: true
             });
         } else if (element.lmin & CONSTRAINED && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {

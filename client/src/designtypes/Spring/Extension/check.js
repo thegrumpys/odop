@@ -184,8 +184,8 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#FatigueInHook)'
         });
     }
-    if (design.model.symbol_table[o.Stress_Initial].lmin & CONSTRAINED && design.model.symbol_table[o.SI_Lo_Factor].value <= 0.0 ||
-        design.model.symbol_table[o.Stress_Initial].lmax & CONSTRAINED && design.model.symbol_table[o.SI_Hi_Factor].value <= 0.0) {
+    if ((design.model.symbol_table[o.Stress_Initial].lmin & CONSTRAINED && design.model.symbol_table[o.SI_Lo_Factor].value <= 0.0) ||
+        (design.model.symbol_table[o.Stress_Initial].lmax & CONSTRAINED && design.model.symbol_table[o.SI_Hi_Factor].value <= 0.0)) {
         addAlert({
             element: design.model.symbol_table[o.Stress_Initial], 
             name: design.model.symbol_table[o.Stress_Initial].name, 
