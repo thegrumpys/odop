@@ -171,19 +171,10 @@ export class Calculator extends ReportBase {
                                     % of total available deflection.
                                 </td>
                             </tr>
-                            <tr>
-                                <td colSpan="3">
-                                    {this.pcadmsg}{this.pcadmsg !== undefined && <br />}
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </Row>
                 <br />
-                <Row>
-                    {this.errmsg1}{this.errmsg1 !== undefined && <br />}
-                    {this.errmsg0}
-                </Row>
            </Container>
         );
     }

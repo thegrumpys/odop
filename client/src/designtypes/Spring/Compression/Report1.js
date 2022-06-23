@@ -22,10 +22,7 @@ class Report1 extends ReportBase {
                         { getAlertsBySeverity('Info'  ).map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
                     </ul></>
                 : '' }
-                <b>
                 {this.hits > 0 && this.startpntmsg}{this.hits > 0 && <br />}
-                </b>
-                {this.hits > 0 && this.NaNmsg}{this.hits > 0 && <br />}
                 {this.hits > 0 && <br />}
                 <table id="view1" className="report-table">
                     <tbody>
@@ -181,8 +178,7 @@ class Report1 extends ReportBase {
                 <br />
                 Deflection at load point 2 is {this.props.symbol_table[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
                 {this.pcadmsg}{this.pcadmsg !== undefined && <br />}
-                {this.errmsg1}{this.errmsg1 !== undefined && <br />}
-                {this.errmsg0}
+                <br />
             </>
         );
     }

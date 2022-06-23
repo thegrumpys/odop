@@ -25,8 +25,7 @@ export class ReportBase extends Component {
 
         this.hits = getAlertsBySeverity().length;
         this.errmsg = "";
-        this.startpntmsg = "YOU MAY WISH TO CHOOSE A MORE REASONABLE START POINT BEFORE CONTINUING WITH SEARCH, SEEK OR TRADE.";
-        this.NaNmsg = 'Any "NaN" values are "Not a Number".';
+        this.startpntmsg = "Alert details are available via the Alert button on the main page of Advanced and Calculator Views.";
 
         this.len_lbl = "Wire Length";
 
