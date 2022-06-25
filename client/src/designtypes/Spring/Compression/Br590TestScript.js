@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolConstraint, changeSymbolValue, changeSystemControlsValue, loadInitialState, search, setSymbolFlag } from '../../../store/actionCreators';
+import { changeSymbolConstraint, changeSymbolValue, changeSystemControlsValue, loadInitialState, search, resetSymbolFlag, setSymbolFlag } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -161,7 +161,7 @@ export const execute = {
                 <>
                     <p>
                     In v4.3 (post branches 590 & 569), console.log diagnostics show that
-                    Search goes from a VALID to INVALID to INVALID to VALID and feasible solution.
+                    Search goes from a INVALID to VALID to INVALID to VALID and feasible solution.
                     </p>
                 </>
             ),
@@ -201,7 +201,7 @@ export const execute = {
                 <>
                     <p>
                     In v4.3 (post branches 590 & 569), console.log diagnostics show that
-                    Search goes from a VALID to INVALID to INVALID to VALID solution. 
+                    Search goes from a INVALID to VALID to INVALID to VALID solution. 
                     </p>
                 </>
             ),
@@ -235,7 +235,9 @@ export const execute = {
                 loadInitialState('Spring/Compression'),
                 changeSystemControlsValue({maxit: 600}),
                 changeSymbolValue("OD_Free", 11.1),
+                resetSymbolFlag('Spring_Index', MIN, CONSTRAINED),
                 changeSymbolConstraint('Spring_Index', MIN, 1.0),
+                setSymbolFlag('Spring_Index', MAX, CONSTRAINED),
                 changeSymbolConstraint('Spring_Index', MAX, 1.6),
             ]
         },
@@ -245,7 +247,7 @@ export const execute = {
                 <>
                     <p>
                     In v4.3 (post branches 590 & 569), console.log diagnostics show that
-                    Search goes from a VALID to INVALID to INVALID to VALID solution.
+                    Search goes from a INVALID to VALID to INVALID to VALID solution.
                     </p>
                 </>
             ),

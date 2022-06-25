@@ -155,7 +155,7 @@ export var getAlertsByName = function(name, includeViolations = false) {
 //    console.log('In Alerts.getAlertsByName this=',this,'name=',name,'includeViolations=',includeViolations);
     var alerts = [];
     var maxColorNumber = 0;
-    getAlertsBySeverity('Err').map((entry) => {
+    getAlertsBySeverity('Err').forEach((entry) => {
         var colorNumber = 0;
         if (entry.name === name) { // Matches exactly
             colorNumber = getColorNumberByName(entry.name);
@@ -169,7 +169,7 @@ export var getAlertsByName = function(name, includeViolations = false) {
             alerts.push(entry);
         }
     });
-    getAlertsBySeverity('Warn').map((entry) => {
+    getAlertsBySeverity('Warn').forEach((entry) => {
         var colorNumber = 0;
         if (entry.name === name) { // Matches exactly
             colorNumber = getColorNumberByName(entry.name);
@@ -183,7 +183,7 @@ export var getAlertsByName = function(name, includeViolations = false) {
             alerts.push(entry);
         }
     });
-    getAlertsBySeverity('Notice').map((entry) => {
+    getAlertsBySeverity('Notice').forEach((entry) => {
         var colorNumber = 0;
         if (entry.name === name) { // Matches exactly
             colorNumber = getColorNumberByName(entry.name);
@@ -197,7 +197,7 @@ export var getAlertsByName = function(name, includeViolations = false) {
             alerts.push(entry);
         }
     });
-    getAlertsBySeverity('Info').map((entry) => {
+    getAlertsBySeverity('Info').forEach((entry) => {
         var colorNumber = 0;
         if (entry.name === name) { // Matches exactly
             colorNumber = getColorNumberByName(entry.name);
