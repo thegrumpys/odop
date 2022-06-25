@@ -31,8 +31,8 @@ export var commonChecks = function(store) {
             });
         }
 
-        // CONTRAINT CHECKS
-        if (!element.input && ((element.lmin & FIXED) && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
+        // CONSTRAINT CHECKS
+        if (element.type === "equationset" && !element.input && ((element.lmin & FIXED) && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
@@ -40,7 +40,16 @@ export var commonChecks = function(store) {
                 severity: 'Notice',
                 help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)'
             });
-        } else if (!element.input && ((element.lmax & FIXED) && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
+        } else if (element.type === "equationset" && (element.lmin & CONSTRAINED) && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
+            addAlert({
+                element: element,
+                name: element.name+' MIN',
+                message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(),
+                severity: 'Notice',
+                help_url: '[Help](/docs/Help/alerts.html#MIN_Violation)'
+            });
+        }
+        if (element.type === "equationset" && !element.input && ((element.lmax & FIXED) && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
             addAlert({
                 element: element,
                 name: element.name+' MAX',
@@ -48,7 +57,16 @@ export var commonChecks = function(store) {
                 severity: 'Notice',
                 help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)'
             });
-        } else if ((element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+        } else if (element.type === "equationset" && (element.lmax & CONSTRAINED) && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
+            addAlert({
+                element: element,
+                name: element.name+' MAX',
+                message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(),
+                severity: 'Notice',
+                help_url: '[Help](/docs/Help/alerts.html#MAX_Violation)'
+            });
+        }
+        if (element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
@@ -63,26 +81,10 @@ export var commonChecks = function(store) {
                 severity: 'Err',
                 duplicate: true
             });
-        } else if ((element.lmin & CONSTRAINED) && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
-            addAlert({
-                element: element,
-                name: element.name+' MIN',
-                message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(),
-                severity: 'Notice',
-                help_url: '[Help](/docs/Help/alerts.html#MIN_Violation)'
-            });
-        } else if ((element.lmax & CONSTRAINED) && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
-            addAlert({
-                element: element,
-                name: element.name+' MAX',
-                message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(),
-                severity: 'Notice',
-                help_url: '[Help](/docs/Help/alerts.html#MAX_Violation)'
-            });
         }
 
         // FDCL CHECKS
-        if ((element.lmin & FIXED) === 0 && element.cminchoices !== undefined && element.cminchoices.length > 0) {
+        if (element.type === "equationset" && (element.lmin & FIXED) === 0 && element.cminchoices !== undefined && element.cminchoices.length > 0) {
             if (element.lmin & CONSTRAINED) {
                 addAlert({
                     element: element,
@@ -93,7 +95,7 @@ export var commonChecks = function(store) {
                 });
             }
         }
-        if ((element.lmax & FIXED) === 0 && element.cmaxchoices !== undefined && element.cmaxchoices.length > 0) {
+        if (element.type === "equationset" && (element.lmax & FIXED) === 0 && element.cmaxchoices !== undefined && element.cmaxchoices.length > 0) {
             if (element.lmax & CONSTRAINED) {
                 addAlert({
                     element: element,
@@ -119,8 +121,8 @@ export var commonChecks = function(store) {
     }
 }
 
-export var getColorNumberByNameAndSeverity = function(name, severity = 'None') {
-//    console.log('In Alerts.getColorNumberByNameAndSeverity this=',this,'name=',name,'severity=',severity);
+export var getColorNumberByName = function(name) {
+//    console.log('In Alerts.getColorNumberByName this=',this,'name=',name);
     var colorNumber = 0;
     if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX'))) {
         if (this.props.objective_value > 4*this.props.system_controls.objmin) {
@@ -130,22 +132,22 @@ export var getColorNumberByNameAndSeverity = function(name, severity = 'None') {
         } else if (this.props.objective_value > 0.0) {
             colorNumber = 1;
        }
-    } else {
-        if (severity === 'Err') {
-            colorNumber = 3;
-        } else if (severity === 'Warn') {
-            colorNumber = 2;
-        } else if (severity === 'Info') {
-            colorNumber = 1;
-        }
     }
-//    console.log('In Alerts.getColorNumberByNameAndSeverity name-',name,'severity=',severity,'colorNumber=',colorNumber);
+//    console.log('In Alerts.getColorNumberByName name-',name,'severity=',severity,'colorNumber=',colorNumber);
     return colorNumber;
 }
 
 export var getColorClassByColorNumber = function(colorNumber) {
 //    console.log('In Alerts.getColorClassByColorNumber this=',this,'colorNumber=',colorNumber);
     var colorClasses = ["", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
+//    var colorClasses = ["text-alert-info ", "text-alert-notice ", "text-alert-warn ", "text-alert-err "];
+    return colorClasses[colorNumber];
+}
+
+export var getColorClassByColorNumber2 = function(colorNumber) {
+//    console.log('In Alerts.getColorClassByColorNumber this=',this,'colorNumber=',colorNumber);
+//    var colorClasses = ["", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
+    var colorClasses = ["", "text-alert-notice ", "text-alert-warn ", "text-alert-err "];
     return colorClasses[colorNumber];
 }
 
@@ -153,17 +155,59 @@ export var getAlertsByName = function(name, includeViolations = false) {
 //    console.log('In Alerts.getAlertsByName this=',this,'name=',name,'includeViolations=',includeViolations);
     var alerts = [];
     var maxColorNumber = 0;
-    this.state.alerts.forEach((entry) => {
+    getAlertsBySeverity('Err').map((entry) => {
         var colorNumber = 0;
         if (entry.name === name) { // Matches exactly
-            colorNumber = getColorNumberByNameAndSeverity(entry.name, entry.severity);
+            colorNumber = getColorNumberByName(entry.name);
             maxColorNumber = Math.max(maxColorNumber, colorNumber);
-            entry.color = getColorClassByColorNumber(colorNumber);
+            entry.color = getColorClassByColorNumber2(colorNumber);
             alerts.push(entry);
         } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
-            colorNumber = getColorNumberByNameAndSeverity(entry.name, entry.severity);
+            colorNumber = getColorNumberByName(entry.name);
             maxColorNumber = Math.max(maxColorNumber, colorNumber);
-            entry.color = getColorClassByColorNumber(colorNumber);
+            entry.color = getColorClassByColorNumber2(colorNumber);
+            alerts.push(entry);
+        }
+    });
+    getAlertsBySeverity('Warn').map((entry) => {
+        var colorNumber = 0;
+        if (entry.name === name) { // Matches exactly
+            colorNumber = getColorNumberByName(entry.name);
+            maxColorNumber = Math.max(maxColorNumber, colorNumber);
+            entry.color = getColorClassByColorNumber2(colorNumber);
+            alerts.push(entry);
+        } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
+            colorNumber = getColorNumberByName(entry.name);
+            maxColorNumber = Math.max(maxColorNumber, colorNumber);
+            entry.color = getColorClassByColorNumber2(colorNumber);
+            alerts.push(entry);
+        }
+    });
+    getAlertsBySeverity('Notice').map((entry) => {
+        var colorNumber = 0;
+        if (entry.name === name) { // Matches exactly
+            colorNumber = getColorNumberByName(entry.name);
+            maxColorNumber = Math.max(maxColorNumber, colorNumber);
+            entry.color = getColorClassByColorNumber2(colorNumber);
+            alerts.push(entry);
+        } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
+            colorNumber = getColorNumberByName(entry.name);
+            maxColorNumber = Math.max(maxColorNumber, colorNumber);
+            entry.color = getColorClassByColorNumber2(colorNumber);
+            alerts.push(entry);
+        }
+    });
+    getAlertsBySeverity('Info').map((entry) => {
+        var colorNumber = 0;
+        if (entry.name === name) { // Matches exactly
+            colorNumber = getColorNumberByName(entry.name);
+            maxColorNumber = Math.max(maxColorNumber, colorNumber);
+            entry.color = getColorClassByColorNumber2(colorNumber);
+            alerts.push(entry);
+        } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
+            colorNumber = getColorNumberByName(entry.name);
+            maxColorNumber = Math.max(maxColorNumber, colorNumber);
+            entry.color = getColorClassByColorNumber2(colorNumber);
             alerts.push(entry);
         }
     });
@@ -204,7 +248,7 @@ export var addAlert = function(alert) {
 class Alerts extends Component {
     constructor(props) {
         super(props);
-        getColorNumberByNameAndSeverity = getColorNumberByNameAndSeverity.bind(this); // Bind external function - no 'this'
+        getColorNumberByName = getColorNumberByName.bind(this); // Bind external function - no 'this'
         getColorClassByColorNumber = getColorClassByColorNumber.bind(this); // Bind external function - no 'this'
         getAlertsByName = getAlertsByName.bind(this); // Bind external function - no 'this'
         getAlertsBySeverity = getAlertsBySeverity.bind(this); // Bind external function - no 'this'

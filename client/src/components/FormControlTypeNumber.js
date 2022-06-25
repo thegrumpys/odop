@@ -134,7 +134,7 @@ class FormControlTypeNumber extends Component {
         delete p.validmin;
         delete p.validmax;
 
-        var icon_class = "fas fa-exclamation-triangle icon-invalid "+value_class;
+        var icon_class = "fas fa-exclamation-triangle icon-invalid ";
         return (<>
             {icon_alerts.length > 0 ?
                 <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{icon_tooltip}</Tooltip>}>

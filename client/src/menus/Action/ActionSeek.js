@@ -34,8 +34,8 @@ class ActionSeek extends Component {
         if (Number.isNaN(this.props.objective_value)) {
             errorMsg += 'Objective Value is Not a Number. Check constraint values; ';
         }
-        this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
-            if (element.type !== undefined && element.type !== "table" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
                 errorMsg += (element.name + ' constraints are inconsistent; ');
             }
         });

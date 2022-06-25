@@ -157,8 +157,8 @@ class AlertsModal extends Component {
                                         (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
                                         <tr key={line}>
                                             <td>{line++}</td>
-                                            <td className="text-not-feasible">{entry.severity}</td>
-                                            <td className="text-not-feasible">{entry.message}</td>
+                                            <td className="text-alert-err">{entry.severity}</td>
+                                            <td className="text-alert-err">{entry.message}</td>
                                             <td>{entry.name}</td>
                                             {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
@@ -179,8 +179,8 @@ class AlertsModal extends Component {
                                         (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
                                         <tr key={line}>
                                             <td>{line++}</td>
-                                            <td className="text-close-to-feasible">{entry.severity}</td>
-                                            <td className="text-close-to-feasible">{entry.message}</td>
+                                            <td className="text-alert-warn">{entry.severity}</td>
+                                            <td className="text-alert-warn">{entry.message}</td>
                                             <td>{entry.name}</td>
                                             {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
@@ -201,8 +201,8 @@ class AlertsModal extends Component {
                                         (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
                                         <tr key={line}>
                                             <td>{line++}</td>
-                                            <td className="text-feasible">{entry.severity}</td>
-                                            <td className="text-feasible">{entry.message}</td>
+                                            <td className="text-alert-notice">{entry.severity}</td>
+                                            <td className="text-alert-notice">{entry.message}</td>
                                             <td>{entry.name}</td>
                                             {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
@@ -223,8 +223,8 @@ class AlertsModal extends Component {
                                         (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
                                         <tr key={line}>
                                             <td>{line++}</td>
-                                            <td className="text-strictly-feasible">{entry.severity}</td>
-                                            <td className="text-strictly-feasible">{entry.message}</td>
+                                            <td className="text-alert-info">{entry.severity}</td>
+                                            <td className="text-alert-info">{entry.message}</td>
                                             <td>{entry.name}</td>
                                             {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                             {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
