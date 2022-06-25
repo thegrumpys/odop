@@ -73,7 +73,7 @@ class NameValueUnitsRowCalcInput extends Component {
     render() {
 //        console.log('In NameValueUnitsRowCalcInput.render this=',this);
         var results = getAlertsByName(this.props.element.name);
-        var value_class = results.color_class;
+        var value_class = results.colorClass;
         var icon_alerts = results.alerts;
         // =======================================
         // Table Row

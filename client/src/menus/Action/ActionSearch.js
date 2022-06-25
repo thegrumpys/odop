@@ -30,7 +30,7 @@ class ActionSearch extends Component {
             errorMsg += 'Objective Value is Not a Number. Check constraint values; ';
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
-            if (element.type !== undefined && element.type !== "table" && element.lmin === CONSTRAINED && element.lmax === CONSTRAINED && element.cmin > element.cmax) {
+            if (element.type !== undefined && element.type !== "table" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
                 errorMsg += element.name + ' constraints are inconsistent; ';
             }
         });

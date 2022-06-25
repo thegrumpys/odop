@@ -133,7 +133,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
         // Constraint Maximum Column
         // =======================================
         var results = getAlertsByName(this.props.element.name+' MAX');
-        var value_class = results.color_class;
+        var value_class = results.colorClass;
         var icon_alerts = results.alerts;
         return (
             <tbody>

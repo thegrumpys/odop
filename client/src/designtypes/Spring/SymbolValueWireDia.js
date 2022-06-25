@@ -193,7 +193,7 @@ class SymbolValueWireDia extends Component {
         var sv_results = getAlertsByName(this.props.element.name, true);
 //        console.log('In SymbolValueWireDia.render sv_results=',sv_results);
         var sv_icon_alerts = sv_results.alerts;
-        var sv_value_class = sv_results.color_class + ' text-right ';
+        var sv_value_class = sv_results.colorClass + ' text-right ';
         if (this.props.element.lmin & FIXED) {
             sv_value_class += "borders-fixed ";
         } else {
@@ -221,7 +221,7 @@ class SymbolValueWireDia extends Component {
         var nvu_results = getAlertsByName(this.props.element.name);
 //        console.log('In SymbolValueWireDia.render nvu_results=',nvu_results);
         var nvu_icon_alerts = nvu_results.alerts;
-        var nvu_value_class = nvu_results.color_class;
+        var nvu_value_class = nvu_results.colorClass;
 //        console.log('In SymbolValueWireDia.render nvu_value_tooltip=',nvu_value_tooltip);
         var nvu_value_fix_free_text = '';
         if (this.props.element.lmin & FIXED) {

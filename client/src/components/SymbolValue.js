@@ -170,7 +170,7 @@ class SymbolValue extends Component {
     render() {
 //        console.log('In SymbolValue.render this=',this);
         var results = getAlertsByName(this.props.element.name, true);
-        var value_class = results.color_class;
+        var value_class = results.colorClass;
         var icon_alerts = results.alerts;
         if (this.props.element.lmin & FIXED) {
             value_class += "borders-fixed ";

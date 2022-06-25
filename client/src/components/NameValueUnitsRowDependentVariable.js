@@ -41,7 +41,7 @@ class NameValueUnitsRowDependentVariable extends Component {
     render() {
 //        console.log('In NameValueUnitsRowDependentVariable.render this=',this);
         var results = getAlertsByName(this.props.element.name);
-        var value_class = results.color_class;
+        var value_class = results.colorClass;
         var icon_alerts = results.alerts;
         var value_fix_free_text = '';
         if (this.props.element.lmin & FIXED) {
