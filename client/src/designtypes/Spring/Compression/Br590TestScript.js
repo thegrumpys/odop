@@ -36,6 +36,7 @@ export const execute = {
                 loadInitialState('Spring/Compression'),
                 setSymbolFlag('Force_2', MIN, CONSTRAINED),
                 changeSymbolConstraint("Force_2", MIN, 40.0),
+                setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint("L_Stroke", MIN, 1.75),
             ]
         },
@@ -76,6 +77,7 @@ export const execute = {
                 changeSystemControlsValue({maxit: 600}),
                 setSymbolFlag('Force_2', MIN, CONSTRAINED),
                 changeSymbolConstraint("Force_2", MIN, 40.0),
+                setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint("L_Stroke", MIN, 1.75),
                 changeSymbolValue("Force_2", 90.0),
             ]
@@ -121,7 +123,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    It is anticipated that Search produced an INVALID solution.
+                    It is anticipated that Search produced an INVALID and NOT FEASIBLE solution.
                     </p>
                 </>
             ),
