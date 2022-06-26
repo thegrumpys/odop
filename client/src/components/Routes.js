@@ -184,7 +184,7 @@ class Routes extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}
-                    <Button variant="secondary" onClick={this.loadDefaultDesign}>Cancel</Button>{' '}
+                    <Button variant="secondary" onClick={this.loadDefaultDesign}>No</Button>{' '}
                     <Button variant="primary" onClick={this.loadAutoSaveDesign}>Yes</Button>
                 </Modal.Footer>
             </Modal>
