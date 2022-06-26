@@ -133,7 +133,7 @@ export var commonChecks = function(store) {
                 addAlert({
                     element: element,
                     name: element.name+' MIN',
-                    message: element.lmin & FDCL ? ('FDCL: ' + element.name+' MIN = ' + element.cminchoices[element.cminchoice]) : ('non-FDCL: ' + element.name+' MIN = ' + element.cmin),
+                    message: element.lmin & FDCL ? ('FDCL: ' + element.name+' MIN set to ' + element.cminchoices[element.cminchoice]) : ('Non-FDCL: ' + element.name+' MIN set to ' + element.cmin),
                     severity: 'Info',
                     help_url: '[Help](/docs/Help/alerts.html#FDCL)'
                 });
@@ -144,7 +144,7 @@ export var commonChecks = function(store) {
                 addAlert({
                     element: element,
                     name: element.name+' MAX',
-                    message: element.lmax & FDCL ? ('FDCL: ' + element.name+' MAX = ' + element.cmaxchoices[element.cmaxchoice]) : ('non-FDCL: ' + element.name+' MAX = ' + element.cmax),
+                    message: element.lmax & FDCL ? ('FDCL: ' + element.name+' MAX set to ' + element.cmaxchoices[element.cmaxchoice]) : ('Non-FDCL: ' + element.name+' MAX set to ' + element.cmax),
                     severity: 'Info',
                     help_url: '[Help](/docs/Help/alerts.html#FDCL)'
                 });
