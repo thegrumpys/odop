@@ -286,7 +286,8 @@ export var getAlertsBySeverity = function(severity='*') {
 }
 
 export var clearAlerts = function() {
-//    console.log('In Alerts.clearAlerts');
+//    console.log('In Alerts.clearAlerts this=',this);
+    if (this === undefined) return; // to allow test cases to run
     this.setState((prevState, props) => {
         return {
             alerts: []
@@ -295,7 +296,8 @@ export var clearAlerts = function() {
 }
 
 export var addAlert = function(alert) {
-//    console.log('In Alerts.addAlert alert=',alert);
+//    console.log('In Alerts.addAlert this-',this,'alert=',alert);
+    if (this === undefined) return; // to allow test cases to run
     this.setState((prevState, props) => {
         return {
             alerts: [...prevState.alerts, alert]

@@ -39,24 +39,24 @@ it('search without merit', () => {
     var obj = search(store, design.model.system_controls.objmin);
 
     var design = store.getState(); // after
-    expect(obj).toEqual(0.14664180506450808);
+    expect(obj).toEqual(0.14663906690756914);
 
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-    expect(design.model.version).toEqual("6");
+    expect(design.model.version).toEqual("7");
 
     expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
-    expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(697.2108757363197);
+    expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(698.3911724644562);
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
-    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.5825642374486647);
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.5819910352662816);
     expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(design.model.symbol_table[sto.THICKNESS].value).toEqual(0.05814850143495808);
+    expect(design.model.symbol_table[sto.THICKNESS].value).toEqual(0.05819919989616446);
     expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE"); // x vector
-    expect(design.model.symbol_table[sto.FORCE].value).toEqual(743.3642427191874);
+    expect(design.model.symbol_table[sto.FORCE].value).toEqual(743.1580800616207);
     expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
-    expect(design.model.symbol_table[sto.AREA].value).toEqual(1.0661971414805103);
+    expect(design.model.symbol_table[sto.AREA].value).toEqual(1.0641000478846157);
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
-    expect(design.model.symbol_table[sto.STRESS].value).toEqual(3492.524417147412);
+    expect(design.model.symbol_table[sto.STRESS].value).toEqual(3491.950080143697);
 
     expect(design.model.system_controls.ioopt).toEqual(3);
     expect(design.model.system_controls.maxit).toEqual(100);
@@ -75,8 +75,8 @@ it('search without merit', () => {
     expect(design.model.system_controls.show_units).toEqual(1);
     expect(design.model.system_controls.show_violations).toEqual(1);
 
-    expect(design.model.result.objective_value).toEqual(0.14664180506450808);
-    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 12 iterations.");
+    expect(design.model.result.objective_value).toEqual(0.14663906690756914);
+    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 73 iterations.");
 });
 
 it('search with merit', () => {
@@ -149,24 +149,24 @@ it('search with merit', () => {
     var obj = search(store, -1.0, merit);
 
     var design = store.getState(); // after
-    expect(obj).toEqual(0.01772489464482386);
+    expect(obj).toEqual(0.017720259859142693);
 
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-    expect(design.model.version).toEqual("6");
+    expect(design.model.version).toEqual("7");
 
     expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
-    expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(1218.7216061774907);
+    expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(1222.8308080751585);
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
-    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.5077056314821616);
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.5066773717514403);
     expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
-    expect(design.model.symbol_table[sto.THICKNESS].value).toEqual(0.05068299199335332);
+    expect(design.model.symbol_table[sto.THICKNESS].value).toEqual(0.05066986932733629);
     expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE"); // x vector
-    expect(design.model.symbol_table[sto.FORCE].value).toEqual(986.9118066777166);
+    expect(design.model.symbol_table[sto.FORCE].value).toEqual(986.2323925695173);
     expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
-    expect(design.model.symbol_table[sto.AREA].value).toEqual(0.809792656235214);
+    expect(design.model.symbol_table[sto.AREA].value).toEqual(0.8065158205507861);
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
-    expect(design.model.symbol_table[sto.STRESS].value).toEqual(6104.136696847354);
+    expect(design.model.symbol_table[sto.STRESS].value).toEqual(6113.89676110679);
 
     expect(design.model.system_controls.ioopt).toEqual(3);
     expect(design.model.system_controls.maxit).toEqual(100);
@@ -185,6 +185,6 @@ it('search with merit', () => {
     expect(design.model.system_controls.show_units).toEqual(1);
     expect(design.model.system_controls.show_violations).toEqual(1);
 
-    expect(design.model.result.objective_value).toEqual(0.01772489464482386);
-    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 53 iterations.");
+    expect(design.model.result.objective_value).toEqual(0.017720259859142693);
+    expect(design.model.result.termination_condition).toEqual("Search terminated when iteration count exceeded the maximum limit (MAXIT) after 103 iterations.");
 });
