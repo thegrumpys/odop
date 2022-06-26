@@ -3,24 +3,31 @@
 Alerts common to all round-wire coil springs 
 
 ### On this page:   
- - [Coils_A is less than 1](alerts.html#Coils_A_LT_1)  
+ - [Wire_Dia > ID_Free](alerts.html#Wire_Dia_GT_ID_Free)  
  - [Material properties for this Wire_Dia may not be accurate](alerts.html#MatPropAccuracy)  
- - [ID_Free < Wire_Dia](alerts.html#ID_Free_LT_Wire_Dia)  
  - [FS_CycleLife MIN not set](alerts.html#FS_CycleLife_MIN_not_set)  
  - [Over-design concern](alerts.html#OverDesign)  
+ - [Coils_A is less than 1](alerts.html#Coils_A_LT_1)  
  - [Spring Index manufacturability concern](alerts.html#SI_manufacturability)  
  - [Value of Tensile is suspect](alerts.html#TensileValueSuspect)  
 
 ___
 
-<a id="Coils_A_LT_1"></a>  
+<a id="Wire_Dia_GT_ID_Free"></a>  
 ___
 
-## Coils_A is less than 1 
-A warning alert is produced whenever the current design has fewer than one active coil.  
+## Wire_Dia > ID_Free 
+The wire diameter (Wire_Dia) is greater than the coil inside diameter (ID_Free).
 
-This is not an error that will block operations like Search, Seek and Trade. 
-As less than one coil may not be the intent, the warning is intended to bring the situation to the designer's attention. 
+Most spring wire is not sufficiently ductile to be wound this tight. 
+
+Resolve this alert by increasing the value of OD_Free or decreasing the value of Wire_Dia. 
+
+Alternatively, confirm that the Spring_Index MIN constraint is enabled at a constraint level of 4 or greater 
+and run Search (menu Action : Search or the Search button). 
+
+Before finalizing a design that has this alert outstanding, 
+check with the spring manufacturer regarding capabilities and costs. 
 
 ___
 
@@ -52,20 +59,6 @@ it is possible to enter the more accurate value of tensile strength.
 
 ___
 
-<a id="ID_Free_LT_Wire_Dia"></a>  
-___
-
-## ID_Free < Wire_Dia 
-The coil inside diameter (ID_Free) is less than the wire diameter.
-
-Most spring wire is not sufficiently ductile to be wound this tight.
-
-Resolve this alert by increasing the value of OD_Free or decreasing the wire diameter. 
-Alternatively, confirm that the Spring_Index MIN constraint is enabled at a constraint level of 4 or greater 
-and run the Search feature. 
-
-___
-
 <a id="FS_CycleLife_MIN_not_set"></a>  
 ___
 
@@ -84,18 +77,36 @@ ___
 ___
 
 ## Over-design concern 
-This design may be excessively conservative, 
-its Factor of Safety at operating point 2 exceeds the maximum constraint. 
+The term "over-design" implies that this design may be excessively conservative. 
+Its Factor of Safety at operating point 2 exceeds the maximum constraint. 
 
 Suggest investigating a smaller wire diameter. 
 One approach is to run Search (menu Action : Search or Search button) with Wire_Dia in Free status. 
-Later, select the nearest larger standard wire diameter.  
+
+Later, when ready to finalize the design, 
+investigate design variations with the nearest standard wire diameters. 
+Select and Fix the nearest smaller wire diameter.  Run Search.
+Select and Fix the nearest larger wire diameter.  Run Search.
+Compare the results. 
+It may be necessary to accept a small amount of over-design in order to utilize a standard wire diameter. 
 
 Alternatively, increase the FS_2 MAX constraint or disable that MAX constraint. 
+This will likely result in a very conservative (heavy) design.
 
 See also: 
  - [Factor of Safety section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#FoS)  
  - [Advanced Spring Operations](/docs/Help/SpringDesign/advancedSpringOperations.html)  
+
+___
+
+<a id="Coils_A_LT_1"></a>  
+___
+
+## Coils_A is less than 1 
+A warning alert is produced whenever the current design has fewer than one active coil.  
+
+This is not an error that will block operations like Search, Seek and Trade. 
+As less than one coil may not be the intent, the warning is intended to bring the situation to the designer's attention. 
 
 ___
 

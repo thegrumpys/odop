@@ -3,13 +3,35 @@
 Alerts specific to compression springs. 
 
 ### On this page:   
+ - [Force_2 < Force_1](alerts.html#F1_GE_F2)  
  - [L_Free < L_Solid](alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](alerts.html#L_2_LT_L_Solid)  
- - [Force_2 < Force_1](alerts.html#F1_GE_F2)  
  - [FS_Solid < 1.0](alerts.html#FS_Solid_LT_1)  
  - [%_Avail_Deflect @ 2 > 80%](alerts.html#PC_Avail_Deflect2_GT_80)  
  - [%_Avail_Deflect @ 1 < 20%](alerts.html#PC_Avail_Deflect1_LT_20)  
  - [Buckling concern](alerts.html#buckling)  
+
+___
+
+<a id="F1_GE_F2"></a>  
+___
+
+## Force_1 >= Force_2 
+The force (applied load) at operating point 1 (Force_1) is greater than or equal to the force at operating point 2 (Force_2). 
+
+Compression spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Force_Solid). 
+The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 
+
+Resolve this alert by reducing the value of Force_1 below the value of Force_2. 
+
+It should also be possible to 
+confirm that Force_1 is in Free status, 
+confirm that the constraint L_Stroke MIN is enabled with a non-zero constraint level 
+and then use the Search feature (menu Action : Search or Search button). 
+
+See also: 
+ - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
+ - [Errors](/docs/Help/errors.html)   
 
 ___
 
@@ -19,13 +41,15 @@ ___
 ## L_Free < L_Solid 
 In a compression spring, 
 having free length (L_Free) specified as less than the solid height (L_Solid) is an impossible condition. 
-In order to assure that
-ODOP : Spring's Search feature will not encounter numeric difficulty when starting from such a physically unrealistic situation, 
-where practical, change these values in the direction specified. 
+
+Where practical, change these values in the direction specified. 
 Increase | &nbsp; | Decrease  
---- | --- | ---  
- L_Free | &nbsp; | Wire_Dia  
- &nbsp; | &nbsp; | Coils_T
+---      | ---    | ---  
+ L_Free  | &nbsp; | Wire_Dia  
+ &nbsp;  | &nbsp; | Coils_T
+
+It may also possible to use Search (menu Action : Search or Search button) to clear this alert. 
+If not immediately successful, confirm that Wire_Dia is in Free status and try Search again. 
 
 See also: 
  - [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png)
@@ -41,38 +65,19 @@ ___
 In a compression spring, 
 having the length associated with the second operating load (L_2) as less than the solid height (L_Solid) 
 is an impossible condition. 
-In order to assure that
-ODOP : Spring's Search feature will not encounter numeric difficulty when starting from such a physically unrealistic situation, 
-where practical, change these values in the direction specified. 
+
+Where practical, change these values in the direction specified. 
 Increase | &nbsp; | Decrease  
 ---     | ---    | ---  
  L_Free | &nbsp; | Coils_T  
  &nbsp; | &nbsp; | Coil_Dia  
  &nbsp; | &nbsp; | Force_2
 
+It may also possible to use Search (menu Action : Search or Search button) to clear this alert. 
+If not immediately successful, confirm that Wire_Dia is in Free status and try Search again. 
+
 Compression spring lengths are ordered from the largest (L_Free) to L_1 to L_2 to the smallest (L_Solid). 
 The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 
-
-See also: 
- - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
- - [Errors](/docs/Help/errors.html)   
-
-___
-
-<a id="F1_GE_F2"></a>  
-___
-
-## Force_1 >= Force_2 
-The force at operating point 1 (Force_1) is greater than or equal to the force at operating point 2 (Force_2). 
-
-Compression spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Force_Solid). 
-The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 
-
-Resolve this alert by reducing the value of Force_1 below the value of Force_2. 
-It should also be possible to 
-confirm that Force_1 is in Free status, 
-confirm that the constraint L_Stroke MIN is enabled with a non-zero constraint level 
-and then use the Search feature (menu Action : Search or Search button). 
 
 See also: 
  - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   

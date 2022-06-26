@@ -25,13 +25,20 @@ export function check(store) {        /*    Compression  Spring  */
 
 // Alerts common to all round-wire coil springs 
 
-    if (design.model.symbol_table[o.Coils_A].value < 1.0) {
+    if (design.model.symbol_table[o.Wire_Dia].value > design.model.symbol_table[o.ID_Free].value) {
         addAlert({
-            element: design.model.symbol_table[o.Coils_A],
-            name: design.model.symbol_table[o.Coils_A].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Coils_A].name + ' (' + design.model.symbol_table[o.Coils_A].value.toODOPPrecision() + ') < 1.0',
+            element: design.model.symbol_table[o.Wire_Dia],
+            name: design.model.symbol_table[o.Wire_Dia].name, 
+            message: check_message(design,o.Wire_Dia,'>',o.ID_Free),
             severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)'
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_GT_ID_Free)'
+        });
+        addAlert({
+            element: design.model.symbol_table[o.ID_Free],
+            name: design.model.symbol_table[o.ID_Free].name, 
+            message: check_message(design,o.ID_Free,'<=',o.Wire_Dia),
+            severity: 'Warn',
+            duplicate: true
         });
     }
     if (design.model.symbol_table[o.Wire_Dia].value < 0.5 * design.model.symbol_table[o.tbase010].value && design.model.symbol_table[o.Prop_Calc_Method].value === 1) {
@@ -70,6 +77,15 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OverDesign)' 
         });
     }
+    if (design.model.symbol_table[o.Coils_A].value < 1.0) {
+        addAlert({
+            element: design.model.symbol_table[o.Coils_A],
+            name: design.model.symbol_table[o.Coils_A].name, 
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Coils_A].name + ' (' + design.model.symbol_table[o.Coils_A].value.toODOPPrecision() + ') < 1.0',
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)'
+        });
+    }
     if (design.model.symbol_table[o.Spring_Index].value < 4.0 || design.model.symbol_table[o.Spring_Index].value > 25.0) {
         addAlert({
             element: design.model.symbol_table[o.Spring_Index], 
@@ -86,22 +102,6 @@ export function check(store) {        /*    Compression  Spring  */
             message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + design.model.symbol_table[o.Tensile].value.toODOPPrecision() + ') <= ' + design.model.system_controls.smallnum.toODOPPrecision(),
             severity: 'Err',
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)'
-        });
-    }
-    if (design.model.symbol_table[o.ID_Free].value < design.model.symbol_table[o.Wire_Dia].value) {
-        addAlert({
-            element: design.model.symbol_table[o.ID_Free],
-            name: design.model.symbol_table[o.ID_Free].name, 
-            message: check_message(design,o.ID_Free,'<',o.Wire_Dia),
-            severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#ID_Free_LT_Wire_Dia)'
-        });
-        addAlert({
-            element: design.model.symbol_table[o.Wire_Dia],
-            name: design.model.symbol_table[o.Wire_Dia].name, 
-            message: check_message(design,o.Wire_Dia,'>=',o.ID_Free),
-            severity: 'Warn',
-            duplicate: true
         });
     }
 
