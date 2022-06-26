@@ -25,7 +25,7 @@ export var commonChecks = function(store) {
             addAlert({
                 element: element,
                 name: element.name,
-                message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ') >- ' + validmax,
+                message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ') >= ' + validmax,
                 severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Above)'
             });
@@ -37,7 +37,7 @@ export var commonChecks = function(store) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
-                message: 'INVALID VALUE: ' + element.name+' MIN' + ' (' + element.cmin.toODOPPrecision() + ') <= ' + validmin,
+                message: 'INVALID VALUE: ' + element.name+' MIN  (' + element.cmin.toODOPPrecision() + ') <= ' + validmin,
                 severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
@@ -46,7 +46,7 @@ export var commonChecks = function(store) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
-                message: 'INVALID VALUE: ' + element.name+' MIN' + ' (' + element.cmin.toODOPPrecision() + ') >- ' + validmax,
+                message: 'INVALID VALUE: ' + element.name+' MIN  (' + element.cmin.toODOPPrecision() + ') >= ' + validmax,
                 severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Above)'
             });
@@ -56,7 +56,7 @@ export var commonChecks = function(store) {
             addAlert({
                 element: element,
                 name: element.name+' MAX',
-                message: 'INVALID VALUE: ' + element.name+' MAX' + ' (' + element.cmax.toODOPPrecision() + ') <= ' + validmin,
+                message: 'INVALID VALUE: ' + element.name+' MAX  (' + element.cmax.toODOPPrecision() + ') <= ' + validmin,
                 severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
@@ -65,7 +65,7 @@ export var commonChecks = function(store) {
             addAlert({
                 element: element,
                 name: element.name+' MAX',
-                message: 'INVALID VALUE: ' + element.name+' MAX' + ' (' + element.cmax.toODOPPrecision() + ') >- ' + validmax,
+                message: 'INVALID VALUE: ' + element.name+' MAX  (' + element.cmax.toODOPPrecision() + ') >= ' + validmax,
                 severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Above)'
             });
