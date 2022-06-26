@@ -27,7 +27,7 @@ it('invokeInit', () => {
     var design = store.getState(); // after
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-    expect(design.model.version).toEqual("6");
+    expect(design.model.version).toEqual("7");
 
     expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
     expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(500);
