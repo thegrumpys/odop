@@ -11,13 +11,17 @@ export var commonChecks = function(store) {
 //        console.log('name=',element.name);
 
         // VALUE VALIDITY CHECKS
-        if (element.format === undefined && typeof element.value === 'number' && element.value <= element.validmin) { 
+        var severity = 'Err';
+        if (element.type === 'equationset' && !element.input) { // Dependent Variable?
+          severity = 'Info'; // Make Invalid Dependent Variable only Info
+        }
+        if (element.format === undefined && typeof element.value === 'number' && element.value <= element.validmin) {
             let validmin = element.validmin === -Number.MIN_VALUE ? '-Number.MIN_VALUE' : element.validmin;
             addAlert({
                 element: element,
                 name: element.name,
                 message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ') <= ' + validmin,
-                severity: 'Err',
+                severity: severity,
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Below)'
             });
         } else if (element.format === undefined && typeof element.value === 'number' && element.value >= element.validmax) {
@@ -26,13 +30,13 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name,
                 message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ') >= ' + validmax,
-                severity: 'Err',
+                severity: severity,
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Above)'
             });
         }
 
-        // CONSTRAINT VALIDITY CHECKS
-        if (element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin <= element.validmin) { 
+        // CONSTRAINT VALIDITY CHECKS (ONLY FOR INDEPENDENT AND DEPENDENT NUMERIC VARIABLES, NOT FOR CALC INPUTS)
+        if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin <= element.validmin) {
             let validmin = element.validmin === -Number.MIN_VALUE ? '-Number.MIN_VALUE' : element.validmin;
             addAlert({
                 element: element,
@@ -41,7 +45,7 @@ export var commonChecks = function(store) {
                 severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
-        } else if (element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin >= element.validmax) {
+        } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin >= element.validmax) {
             let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax;
             addAlert({
                 element: element,
@@ -51,7 +55,7 @@ export var commonChecks = function(store) {
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Above)'
             });
         }
-        if (element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax <= element.validmin) { 
+        if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax <= element.validmin) {
             let validmin = element.validmin === -Number.MIN_VALUE ? '-Number.MIN_VALUE' : element.validmin;
             addAlert({
                 element: element,
@@ -60,7 +64,7 @@ export var commonChecks = function(store) {
                 severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
-        } else if (element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax >= element.validmax) {
+        } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax >= element.validmax) {
             let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax;
             addAlert({
                 element: element,
@@ -71,7 +75,7 @@ export var commonChecks = function(store) {
             });
         }
 
-        // CONSTRAINT CHECKS
+        // CONSTRAINT CHECKS (ONLY FOR INDEPENDENT AND DEPENDENT VARIABLES, NOT FOR CALC INPUTS)
         if (element.type === "equationset" && !element.input && ((element.lmin & FIXED) && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
             addAlert({
                 element: element,
@@ -123,7 +127,7 @@ export var commonChecks = function(store) {
             });
         }
 
-        // FDCL CHECKS
+        // FDCL CHECKS(ONLY FOR INDEPENDENT AND DEPENDENT VARIABLES, NOT FOR CALC INPUTS)
         if (element.type === "equationset" && (element.lmin & FIXED) === 0 && element.cminchoices !== undefined && element.cminchoices.length > 0) {
             if (element.lmin & CONSTRAINED) {
                 addAlert({
@@ -147,14 +151,14 @@ export var commonChecks = function(store) {
             }
         }
 
-        // GENERAL CHECKS
+        // GENERAL CHECKS (ONLY INDEPENDENT VARIABLES)
         if ((element.type === 'equationset' && element.input) && !(element.lmin & FIXED)) {
             total++;
         }
     }
     if (total === 0) {
             addAlert({
-                message: 'SYSTEM: No free independent variables', 
+                message: 'SYSTEM: No free independent variables',
                 severity: 'Info',
                 help_url: '[Help](/docs/Help/alerts.html#NoFreeIV)'
              });
