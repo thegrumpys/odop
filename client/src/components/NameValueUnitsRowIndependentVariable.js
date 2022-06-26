@@ -68,11 +68,11 @@ class NameValueUnitsRowIndependentVariable extends Component {
     render() {
 //        console.log('In NameValueUnitsRowIndependentVariable.render this=',this);
         var results = getAlertsByName(this.props.element.name);
-        var value_class = results.colorClass;
+        var className = results.className;
         var icon_alerts = results.alerts;
         var value_fix_free_text = '';
         if (this.props.element.lmin & FIXED) {
-            value_class += "borders-fixed ";
+            className += "borders-fixed ";
             if (this.props.element.type !== "calcinput") {
                 if (this.props.element.input) { // Independent Variable?
                   value_fix_free_text = <div className="mb-3"><em>Fixed status prevents <img src="SearchButton.png" alt="SearchButton"/> from changing the value of this variable.</em></div>; // For Fixed
@@ -82,16 +82,16 @@ class NameValueUnitsRowIndependentVariable extends Component {
             }
         } else {
             if (this.props.element.lmin & CONSTRAINED) {
-                value_class += "borders-constrained-min ";
+                className += "borders-constrained-min ";
             }
             if (this.props.element.lmax & CONSTRAINED) {
-                value_class += "borders-constrained-max ";
+                className += "borders-constrained-max ";
             }
             if (this.props.element.type !== "calcinput") {
                 value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton"/> to change the value of this variable.</em></div>; // For Free
             }
         }
-//        console.log('In NameValueUnitsRowIndependentVariable.render value_class=',value_class);
+//        console.log('In NameValueUnitsRowIndependentVariable.render className=',className);
         // =======================================
         // Table Row
         // =======================================
@@ -105,7 +105,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <FormControlTypeNumber id={'nvuriv_'+this.props.element.name} icon_alerts={icon_alerts} className={value_class} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
+                            <FormControlTypeNumber id={'nvuriv_'+this.props.element.name} icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>

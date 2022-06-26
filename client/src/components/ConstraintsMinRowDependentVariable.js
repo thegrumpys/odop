@@ -133,7 +133,7 @@ class ConstraintsMinRowDependentVariable extends Component {
         // Constraint Minimum Column
         // =======================================
         var results = getAlertsByName(this.props.element.name+' MIN');
-        var value_class = results.colorClass;
+        var className = results.className;
         var icon_alerts = results.alerts;
         return (
             <tbody>
@@ -150,7 +150,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                                     <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetFlagMinConstrained : this.onSetFlagMinConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
-                            <FormControlTypeNumber id={this.props.element.name + "_cmin"} icon_alerts={icon_alerts} className={value_class} value={this.props.element.cmin} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} disabledText={this.props.element.lmin & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onClick={this.onClick}/>
+                            <FormControlTypeNumber id={this.props.element.name + "_cmin"} icon_alerts={icon_alerts} className={className} value={this.props.element.cmin} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} disabledText={this.props.element.lmin & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onClick={this.onClick}/>
                         </InputGroup>
                         {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ?
                         <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>
@@ -183,7 +183,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                                             <td>Value:&nbsp;</td>
                                             <td>
                                                 <InputGroup>
-                                                    <FormControlTypeNumber id={this.props.element.name + "_cmin"} className={value_class} value={this.props.element.cmin} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
+                                                    <FormControlTypeNumber id={this.props.element.name + "_cmin"} className={className} value={this.props.element.cmin} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
                                                     <Button variant="primary" disabled={this.state.isInvalidValue} onClick={this.onEnterButton}>Enter</Button>
                                                 </InputGroup>
                                             </td>
@@ -196,7 +196,7 @@ class ConstraintsMinRowDependentVariable extends Component {
                             </Modal.Footer>
                         </Modal> : ''}
                     </td>
-                    <td className={"text-right align-middle small " + value_class + (this.props.system_controls.show_violations === 0 ? "d-none" : "")} colSpan="1">
+                    <td className={"text-right align-middle small " + className + (this.props.system_controls.show_violations === 0 ? "d-none" : "")} colSpan="1">
                         {this.props.system_controls.show_violations === 1 && this.props.element.vmin <= 0 ?
                             ''
                             : (this.props.element.lmin & FIXED ? 

@@ -105,9 +105,9 @@ class FormControlTypeNumber extends Component {
 
     render() {
 //        console.log('In FormControlTypeNumber.render value=',this.state.value,'valueString=',this.state.valueString);
-        var value_class = (this.props.className !== undefined ? this.props.className : '') + ' text-right';
+        var className = (this.props.className !== undefined ? this.props.className : '') + ' text-right';
         if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
-            value_class += ' borders-invalid';
+            className += ' borders-invalid';
         }
         var icon_alerts = this.props.icon_alerts; // start with the icon alerts 
         if (icon_alerts === undefined) {
@@ -120,11 +120,11 @@ class FormControlTypeNumber extends Component {
                 <>
                     <b>Alerts</b>
                     <ul>
-                        {icon_alerts.map((entry, i) => { return <li className={entry.color} key={i}>{entry.severity}: {entry.message}</li>})}
+                        {icon_alerts.map((entry, i) => { console.log('entry=',entry); return <li className={entry.className} key={i}>{entry.severity}: {entry.message}</li>})}
                     </ul>
                 </>;
+            console.log('icon_tooltip=',icon_tooltip);
         }
-//        console.log('icon_tooltip=',icon_tooltip);
 
         var p = Object.assign({},this.props); // clone the props
         delete p.onChangeValid; // remove special on functions
@@ -148,7 +148,7 @@ class FormControlTypeNumber extends Component {
                 onChange={this.onChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
-                className={value_class}
+                className={className}
                 value={this.props.disabledText ? '' : this.state.focused ? this.state.valueString : (Number.isFinite(this.state.value) ? this.state.value.toODOPPrecision() : '')} />
         </>)
     }

@@ -161,107 +161,101 @@ export var commonChecks = function(store) {
     }
 }
 
-export var getColorNumberByName = function(name) {
-//    console.log('In Alerts.getColorNumberByName this=',this,'name=',name);
-    var colorNumber = 0;
+export var getSeverityNumberByNameAndObjValue = function(name) {
+//    console.log('In Alerts.getSeverityNumberByNameAndObjValue this=',this,'name=',name);
+    var severityNumber = 0;
     if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX'))) {
         if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-            colorNumber = 3;
+            severityNumber = 3;
         } else if (this.props.objective_value > this.props.system_controls.objmin) {
-            colorNumber = 2;
+            severityNumber = 2;
         } else if (this.props.objective_value > 0.0) {
-            colorNumber = 1;
+            severityNumber = 1;
        }
     }
-//    console.log('In Alerts.getColorNumberByName name-',name,'severity=',severity,'colorNumber=',colorNumber);
-    return colorNumber;
+//    console.log('In Alerts.getSeverityNumberByNameAndObjValue name-',name,'severity=',severity,'severityNumber=',severityNumber);
+    return severityNumber;
 }
 
-export var getColorClassByColorNumber = function(colorNumber) {
-//    console.log('In Alerts.getColorClassByColorNumber this=',this,'colorNumber=',colorNumber);
-    var colorClasses = ["", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
-//    var colorClasses = ["text-alert-info ", "text-alert-notice ", "text-alert-warn ", "text-alert-err "];
-    return colorClasses[colorNumber];
+export var getFeasibilityClassBySeverityNumber = function(severityNumber) {
+//    console.log('In Alerts.getFeasibilityClassBySeverityNumber this=',this,'severityNumber=',severityNumber);
+    var feasibilityClasses = ["", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
+    return feasibilityClasses[severityNumber];
 }
 
-export var getColorClassByColorNumber2 = function(colorNumber) {
-//    console.log('In Alerts.getColorClassByColorNumber this=',this,'colorNumber=',colorNumber);
-//    var colorClasses = ["", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
-    var colorClasses = ["", "text-alert-notice ", "text-alert-warn ", "text-alert-err "];
-    return colorClasses[colorNumber];
+export var getFontClassBySeverityNumber = function(severityNumber) {
+//    console.log('In Alerts.getFeasibilityClassBySeverityNumber this=',this,'severityNumber=',severityNumber);
+    var fontClasses = ["text-alert-info ", "text-alert-notice ", "text-alert-warn ", "text-alert-err "];
+    return fontClasses[severityNumber];
+}
+
+export var getSeverityNumberBySeverity = function(severity) {
+//    console.log('In Alerts.getSeverityNumberBySeverity this=',this,'severity=',severity);
+    var severityNumber = {'Err': 3, 'Warn': 2, 'Notice': 1, 'Info': 0};
+    return severityNumber[severity];
 }
 
 export var getAlertsByName = function(name, includeViolations = false) {
 //    console.log('In Alerts.getAlertsByName this=',this,'name=',name,'includeViolations=',includeViolations);
     var alerts = [];
-    var maxColorNumber = 0;
+    var maxSeverityNumber = 0;
     getAlertsBySeverity('Err').forEach((entry) => {
-        var colorNumber = 0;
         if (entry.name === name) { // Matches exactly
-            colorNumber = getColorNumberByName(entry.name);
-            maxColorNumber = Math.max(maxColorNumber, colorNumber);
-            entry.color = getColorClassByColorNumber2(colorNumber);
+            maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
-            colorNumber = getColorNumberByName(entry.name);
-            maxColorNumber = Math.max(maxColorNumber, colorNumber);
-            entry.color = getColorClassByColorNumber2(colorNumber);
+            maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         }
     });
     getAlertsBySeverity('Warn').forEach((entry) => {
-        var colorNumber = 0;
         if (entry.name === name) { // Matches exactly
-            colorNumber = getColorNumberByName(entry.name);
-            maxColorNumber = Math.max(maxColorNumber, colorNumber);
-            entry.color = getColorClassByColorNumber2(colorNumber);
+            maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
-            colorNumber = getColorNumberByName(entry.name);
-            maxColorNumber = Math.max(maxColorNumber, colorNumber);
-            entry.color = getColorClassByColorNumber2(colorNumber);
+            maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         }
     });
     getAlertsBySeverity('Notice').forEach((entry) => {
-        var colorNumber = 0;
         if (entry.name === name) { // Matches exactly
-            colorNumber = getColorNumberByName(entry.name);
-            maxColorNumber = Math.max(maxColorNumber, colorNumber);
-            entry.color = getColorClassByColorNumber2(colorNumber);
+            maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
-            colorNumber = getColorNumberByName(entry.name);
-            maxColorNumber = Math.max(maxColorNumber, colorNumber);
-            entry.color = getColorClassByColorNumber2(colorNumber);
+            maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         }
     });
     getAlertsBySeverity('Info').forEach((entry) => {
-        var colorNumber = 0;
         if (entry.name === name) { // Matches exactly
-            colorNumber = getColorNumberByName(entry.name);
-            maxColorNumber = Math.max(maxColorNumber, colorNumber);
-            entry.color = getColorClassByColorNumber2(colorNumber);
+            maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
-            colorNumber = getColorNumberByName(entry.name);
-            maxColorNumber = Math.max(maxColorNumber, colorNumber);
-            entry.color = getColorClassByColorNumber2(colorNumber);
+            maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         }
     });
-//    console.log('In Alerts.getAlertsByName maxColorNumber=',maxColorNumber,'alerts=',alerts);
-    return {colorClass: getColorClassByColorNumber(maxColorNumber), alerts: alerts};
+//    console.log('In Alerts.getAlertsByName maxSeverityNumber=',maxSeverityNumber,'alerts=',alerts);
+    return {className: getFeasibilityClassBySeverityNumber(maxSeverityNumber), alerts: alerts};
 }
 
-export var getAlertsBySeverity = function(severity='') {
+export var getAlertsBySeverity = function(severity='*') {
 //    console.log('In Alerts.getAlertsBySeverity');
     var results;
-    if (severity === '') {
-        results = this.state.alerts.filter(entry => entry.duplicate === undefined || entry.duplicate === false);
+    if (severity === '*') {
+        results = this.state.alerts.filter(entry => {
+//            console.log('severity=',severity,'entry=',entry);
+            var severityNumber = getSeverityNumberBySeverity(entry.severity);
+            entry.className = getFontClassBySeverityNumber(severityNumber);
+            return entry.duplicate === undefined || entry.duplicate === false
+        });
     } else {
-        results = this.state.alerts.filter(entry => entry.severity === severity && (entry.duplicate === undefined || entry.duplicate === false));
+        results = this.state.alerts.filter(entry => {
+//            console.log('severity=',severity,'entry=',entry);
+            var severityNumber = getSeverityNumberBySeverity(entry.severity);
+            entry.className = getFontClassBySeverityNumber(severityNumber);
+            return entry.severity === severity && (entry.duplicate === undefined || entry.duplicate === false)
+        });
     }
 //    console.log('In Alerts.getAlertsBySeverity results=',results);
     return results;
@@ -288,8 +282,10 @@ export var addAlert = function(alert) {
 class Alerts extends Component {
     constructor(props) {
         super(props);
-        getColorNumberByName = getColorNumberByName.bind(this); // Bind external function - no 'this'
-        getColorClassByColorNumber = getColorClassByColorNumber.bind(this); // Bind external function - no 'this'
+        getSeverityNumberByNameAndObjValue = getSeverityNumberByNameAndObjValue.bind(this); // Bind external function - no 'this'
+        getFeasibilityClassBySeverityNumber = getFeasibilityClassBySeverityNumber.bind(this); // Bind external function - no 'this'
+        getFontClassBySeverityNumber = getFontClassBySeverityNumber.bind(this); // Bind external function - no 'this'
+        getSeverityNumberBySeverity = getSeverityNumberBySeverity.bind(this); // Bind external function - no 'this'
         getAlertsByName = getAlertsByName.bind(this); // Bind external function - no 'this'
         getAlertsBySeverity = getAlertsBySeverity.bind(this); // Bind external function - no 'this'
         clearAlerts = clearAlerts.bind(this); // Bind external function - no 'this'

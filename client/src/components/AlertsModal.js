@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip, Accordion, Card } from 'react-bootstrap';
 import { getAlertsBySeverity } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
-import FeasibilityIndicator from './FeasibilityIndicator';
 import config from '../config';
 
 class AlertsModal extends Component {
@@ -47,200 +46,183 @@ class AlertsModal extends Component {
 //        console.log('In AlertsModal.render this=',this);
         var line = 1;
         var all_alerts = getAlertsBySeverity();
-        var feasibility_string;
-        var feasibility_class;
-        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-            feasibility_string = "NOT FEASIBLE";
-            feasibility_class = "text-not-feasible ";
-        } else if (this.props.objective_value > this.props.system_controls.objmin) {
-            feasibility_string = "CLOSE TO FEASIBLE";
-            feasibility_class = "text-close-to-feasible ";
-        } else if (this.props.objective_value > 0.0) {
-            feasibility_string = "FEASIBLE";
-            feasibility_class = "text-feasible ";
-        } else {
-            feasibility_string = "STRICTLY FEASIBLE";
-            feasibility_class = "text-strictly-feasible ";
-        }
         return (
             <>
-                <Button variant="primary" disabled={all_alerts.length === 0} size="sm" onClick={this.onOpen}>Alerts&nbsp;
-                    {all_alerts.length > 0 ?<span className="badge bg-danger">{all_alerts.length}</span> : ''}
-                </Button>&nbsp;
-                <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                    ALERTS are error, warning and informational messages that are produced as you change the values of your design.
-                    There are error alerts for each value when it is outside its validity value range.
-                    There are warning alerts if the relationship between two values is incorrect.
-                    There are informational alerts for each value when it is outside its constraint value range.
-                    Etc.
-                    </Tooltip>}>
-                    <span><i className="fas fa-info-circle text-primary"></i></span>
-                </OverlayTrigger>
-                <Modal show={this.state.modal} onHide={this.onClose} size="lg">
-                    <Modal.Header>
-                        <Modal.Title className="mr-auto">Alerts</Modal.Title>
-                        <span className={feasibility_class + "pt-1"}>{feasibility_string}</span>
-                        <FeasibilityIndicator />
-                        <Button type="button" className="close ml-0" onClick={this.onClose}>
-                            <span aria-hidden="true">×</span>
-                            <span className="sr-only">Close</span>
-                        </Button>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <table className="report-table-borders">
-                            <thead>
-                                <tr key="0">
-                                    <th>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>
-                                        Alert number<br/>
-                                        Alerts are sorted by Severity
-                                        </Tooltip>}>
-                                            <span>#</span>
-                                        </OverlayTrigger>
-                                    </th>
-                                    <th>
-                                        <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                        <b>Error (Err):</b><br/>
-                                        value outside valid range<br/>
-                                        <b>Warning (Warn):</b><br/>
-                                        relationship between two values is incorrect or invalid<br/>
-                                        <b>Notice (Notice):</b><br/>
-                                        significantly violated constraints<br/>
-                                        <b>Information (Info):</b><br/>
-                                        insights about aspects of system operation
-                                        </Tooltip>}>
-                                            <span>Severity</span>
-                                        </OverlayTrigger>
-                                    </th>
-                                    <th>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>
-                                        Summary of alert<br/>
-                                        Color tracks Severity
-                                        </Tooltip>}>
-                                            <span>Message</span>
-                                        </OverlayTrigger>
-                                    </th>
-                                    <th>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>
-                                        Name of associated variable
-                                        
-                                        </Tooltip>}>
-                                            <span>Name</span>
-                                        </OverlayTrigger>
-                                    </th>
-                                    <th>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>
-                                        Use entry field below to change value of associated variable<br/>
-                                        Color below tracks design feasibility or message severity
-                                        </Tooltip>}>
-                                            <span>Value</span>
-                                        </OverlayTrigger>
-                                    </th>
-                                    <th>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>
-                                        Use "Help" button below to see details of a specific alert
-                                        </Tooltip>}>
-                                            <span>Details</span>
-                                        </OverlayTrigger>
-                                    </th>
-                               </tr>
-                            </thead>
-                            <tbody>
-                                {getAlertsBySeverity('Err').map((entry, index) => {
-//                                    console.log('In AlertsModal.render entry=',entry,'line=',line);
-                                    var hidden = config.node.env !== "production" ? false : entry.element.hidden;
-                                    var match;
-                                    if (entry.help_url !== undefined) {
-                                        match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
-                                    }
-                                    return (
-                                        (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
-                                        <tr key={line}>
-                                            <td>{line++}</td>
-                                            <td className="text-alert-err">{entry.severity}</td>
-                                            <td className="text-alert-err">{entry.message}</td>
-                                            <td>{entry.name}</td>
-                                            {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
-                                            {entry.element === undefined && entry.value === undefined && <td></td>}
-                                            <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
-                                        </tr>
-                                    );
-                                })}
-                                {getAlertsBySeverity('Warn').map((entry, index) => {
-//                                    console.log('In AlertsModal.render entry=',entry,'line=',line);
-                                    var hidden = config.node.env !== "production" ? false : entry.element.hidden;
-                                    var match;
-                                    if (entry.help_url !== undefined) {
-                                        match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
-                                    }
-                                    return (
-                                        (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
-                                        <tr key={line}>
-                                            <td>{line++}</td>
-                                            <td className="text-alert-warn">{entry.severity}</td>
-                                            <td className="text-alert-warn">{entry.message}</td>
-                                            <td>{entry.name}</td>
-                                            {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
-                                            {entry.element === undefined && entry.value === undefined && <td></td>}
-                                            <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
-                                        </tr>
-                                    );
-                                })}
-                                {getAlertsBySeverity('Notice').map((entry, index) => {
-//                                    console.log('In AlertsModal.render entry=',entry,'line=',line);
-                                    var hidden = config.node.env !== "production" ? false : entry.element.hidden;
-                                    var match;
-                                    if (entry.help_url !== undefined) {
-                                        match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
-                                    }
-                                    return (
-                                        (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
-                                        <tr key={line}>
-                                            <td>{line++}</td>
-                                            <td className="text-alert-notice">{entry.severity}</td>
-                                            <td className="text-alert-notice">{entry.message}</td>
-                                            <td>{entry.name}</td>
-                                            {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
-                                            {entry.element === undefined && entry.value === undefined && <td></td>}
-                                            <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
-                                        </tr>
-                                    );
-                                })}
-                                {getAlertsBySeverity('Info').map((entry, index) => {
-//                                    console.log('In AlertsModal.render entry=',entry,'line=',line);
-                                    var hidden = config.node.env !== "production" ? false : entry.element.hidden;
-                                    var match;
-                                    if (entry.help_url !== undefined) {
-                                        match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
-                                    }
-                                    return (
-                                        (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
-                                        <tr key={line}>
-                                            <td>{line++}</td>
-                                            <td className="text-alert-info">{entry.severity}</td>
-                                            <td className="text-alert-info">{entry.message}</td>
-                                            <td>{entry.name}</td>
-                                            {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                            {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
-                                            {entry.element === undefined && entry.value === undefined && <td></td>}
-                                            <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" onClick={this.onClose}>Close</Button>
-                    </Modal.Footer>
-                </Modal>
+                <Accordion className="col-md-12 mb-3">
+                    <Card bg="light">
+                        <Card.Header>
+                            <Accordion.Toggle as={Button} variant="primary" size="sm" eventKey="0">
+                                Alerts&nbsp;{all_alerts.length > 0 ?<span className="badge bg-danger">{all_alerts.length}</span> : ''}
+                            </Accordion.Toggle>
+                            &nbsp;
+                            <OverlayTrigger placement="bottom" overlay={
+                                <Tooltip>
+                                    ALERTS are error, warning, notice and informational messages that are produced as you change the values of your design.
+                                    There are error alerts for each value when it is outside its validity value range.
+                                    There are warning alerts if the relationship between two values is incorrect.
+                                    There are notice alerts if ... 
+                                    There are informational alerts for each value when it is outside its constraint value range.
+                                    Etc.
+                                </Tooltip>
+                            }>
+                                <span><i className="fas fa-info-circle text-primary"></i></span>
+                            </OverlayTrigger>
+                        </Card.Header>
+                        <Accordion.Collapse eventKey="0">
+                            <Card.Body>
+                                <table className="col-12">
+                                    <thead>
+                                        <tr key="0">
+                                            <th>
+                                                <OverlayTrigger placement="top" overlay={<Tooltip>
+                                                Alert number<br/>
+                                                Alerts are sorted by Severity
+                                                </Tooltip>}>
+                                                    <span>#</span>
+                                                </OverlayTrigger>
+                                            </th>
+                                            <th>
+                                                <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                                                <b>Error (Err):</b><br/>
+                                                value outside valid range<br/>
+                                                <b>Warning (Warn):</b><br/>
+                                                relationship between two values is incorrect or invalid<br/>
+                                                <b>Notice (Notice):</b><br/>
+                                                significantly violated constraints<br/>
+                                                <b>Information (Info):</b><br/>
+                                                insights about aspects of system operation
+                                                </Tooltip>}>
+                                                    <span>Severity</span>
+                                                </OverlayTrigger>
+                                            </th>
+                                            <th>
+                                                <OverlayTrigger placement="top" overlay={<Tooltip>
+                                                Summary of alert<br/>
+                                                Color tracks Severity
+                                                </Tooltip>}>
+                                                            <span>Message</span>
+                                                </OverlayTrigger>
+                                            </th>
+                                            <th>
+                                                <OverlayTrigger placement="top" overlay={<Tooltip>
+                                                Name of associated variable
+                                                
+                                                </Tooltip>}>
+                                                    <span>Name</span>
+                                                </OverlayTrigger>
+                                            </th>
+                                            <th>
+                                                <OverlayTrigger placement="top" overlay={<Tooltip>
+                                                Use entry field below to change value of associated variable<br/>
+                                                Color below tracks design feasibility or message severity
+                                                </Tooltip>}>
+                                                    <span>Value</span>
+                                                </OverlayTrigger>
+                                            </th>
+                                            <th>
+                                                <OverlayTrigger placement="top" overlay={<Tooltip>
+                                                Use "Help" button below to see details of a specific alert
+                                                </Tooltip>}>
+                                                    <span>Details</span>
+                                                </OverlayTrigger>
+                                            </th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                        {getAlertsBySeverity('Err').map((entry, index) => {
+//                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
+                                            var hidden = config.node.env !== "production" ? false : entry.element.hidden;
+                                            var match;
+                                            if (entry.help_url !== undefined) {
+                                                match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
+                                            }
+                                            return (
+                                                (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
+                                                <tr key={line}>
+                                                    <td>{line++}</td>
+                                                    <td className={entry.className}>{entry.severity}</td>
+                                                    <td className={entry.className}>{entry.message}</td>
+                                                    <td>{entry.name}</td>
+                                                    {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
+                                                    {entry.element === undefined && entry.value === undefined && <td></td>}
+                                                    <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
+                                                </tr>
+                                            );
+                                        })}
+                                        {getAlertsBySeverity('Warn').map((entry, index) => {
+//                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
+                                            var hidden = config.node.env !== "production" ? false : entry.element.hidden;
+                                            var match;
+                                            if (entry.help_url !== undefined) {
+                                                match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
+                                            }
+                                            return (
+                                                (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
+                                                <tr key={line}>
+                                                    <td>{line++}</td>
+                                                    <td className={entry.className}>{entry.severity}</td>
+                                                    <td className={entry.className}>{entry.message}</td>
+                                                    <td>{entry.name}</td>
+                                                    {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
+                                                    {entry.element === undefined && entry.value === undefined && <td></td>}
+                                                    <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
+                                                </tr>
+                                            );
+                                        })}
+                                        {getAlertsBySeverity('Notice').map((entry, index) => {
+//                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
+                                            var hidden = config.node.env !== "production" ? false : entry.element.hidden;
+                                            var match;
+                                            if (entry.help_url !== undefined) {
+                                                match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
+                                            }
+                                            return (
+                                                (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
+                                                <tr key={line}>
+                                                    <td>{line++}</td>
+                                                    <td className={entry.className}>{entry.severity}</td>
+                                                    <td className={entry.className}>{entry.message}</td>
+                                                    <td>{entry.name}</td>
+                                                    {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
+                                                    {entry.element === undefined && entry.value === undefined && <td></td>}
+                                                    <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
+                                                </tr>
+                                            );
+                                        })}
+                                        {getAlertsBySeverity('Info').map((entry, index) => {
+//                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
+                                            var hidden = config.node.env !== "production" ? false : entry.element.hidden;
+                                            var match;
+                                            if (entry.help_url !== undefined) {
+                                                match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
+                                           }
+                                            return (
+                                                (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
+                                                <tr key={line}>
+                                                    <td>{line++}</td>
+                                                    <td className={entry.className}>{entry.severity}</td>
+                                                    <td className={entry.className}>{entry.message}</td>
+                                                    <td>{entry.name}</td>
+                                                    {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
+                                                    {entry.element === undefined && entry.value === undefined && <td></td>}
+                                                    <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            </Card.Body>
+                        </Accordion.Collapse>
+                    </Card>
+                </Accordion>
             </>
         );
     }

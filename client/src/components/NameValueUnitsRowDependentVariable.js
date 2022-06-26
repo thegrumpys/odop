@@ -41,11 +41,11 @@ class NameValueUnitsRowDependentVariable extends Component {
     render() {
 //        console.log('In NameValueUnitsRowDependentVariable.render this=',this);
         var results = getAlertsByName(this.props.element.name);
-        var value_class = results.colorClass;
+        var className = results.className;
         var icon_alerts = results.alerts;
         var value_fix_free_text = '';
         if (this.props.element.lmin & FIXED) {
-            value_class += "borders-fixed ";
+            className += "borders-fixed ";
             if (this.props.element.type !== "calcinput") {
                 if (this.props.element.input) { // Independent Variable?
                   value_fix_free_text = <div className="mb-3"><em>Fixed status prevents <img src="SearchButton.png" alt="SearchButton"/> from changing the value of this variable.</em></div>; // For Fixed
@@ -55,16 +55,16 @@ class NameValueUnitsRowDependentVariable extends Component {
             }
         } else {
             if (this.props.element.lmin & CONSTRAINED) {
-                value_class += "borders-constrained-min ";
+                className += "borders-constrained-min ";
             }
             if (this.props.element.lmax & CONSTRAINED) {
-                value_class += "borders-constrained-max ";
+                className += "borders-constrained-max ";
             }
             if (this.props.element.type !== "calcinput") {
                 value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton"/> to change the value of this variable.</em></div>; // For Free
             }
         }
-//        console.log('In NameValueUnitsRowDependentVariable.render value_class=',value_class);
+//        console.log('In NameValueUnitsRowDependentVariable.render className=',className);
         // =======================================
         // Table Row
         // =======================================
@@ -78,7 +78,7 @@ class NameValueUnitsRowDependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <FormControlTypeNumber id={'nvurdv_'+this.props.element.name} disabled={true} icon_alerts={icon_alerts} className={value_class} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} />
+                            <FormControlTypeNumber id={'nvurdv_'+this.props.element.name} disabled={true} icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} />
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>

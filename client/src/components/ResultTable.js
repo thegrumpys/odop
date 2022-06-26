@@ -184,28 +184,20 @@ class ResultTable extends Component {
                 <Table className="col-md-8" size="sm">
                     <tbody>
                         <tr>
-                            <th width="15%" id="Feasibility">
+                            <th width="33%" id="Feasibility">
                                 <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: constraints significantly violated; <br />CLOSE TO FEASIBLE: constraints slightly violated; FEASIBLE: constraints not significantly violated; STRICTLY FEASIBLE: no constraints violated</Tooltip>}>
                                     <span>Feasibility</span>
                                 </OverlayTrigger>
                             </th>
-                            <td className={feasibility_class + " text-left"}>{feasibility_string}</td>
+                            <td width="67%" className={feasibility_class + " text-left"}>{feasibility_string}</td>
                         </tr>
                         <tr>
-                            <th width="15%" id="Message" className="text-center pb-3">
-                                <AlertsModal /> &nbsp;
+                            <th width="33%" id="Message" className="pb-3">
+                                <OverlayTrigger placement="top" overlay={<Tooltip>Status feedback message from solution process</Tooltip>}>
+                                    <span>Message:</span>
+                                </OverlayTrigger>
                             </th>
-                            <td className="text-left">
-                                {this.props.termination_condition !== '' ?
-                                    <>
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>Status feedback message from solution process</Tooltip>}>
-                                            <span><b>Message:</b>&nbsp;</span>
-                                        </OverlayTrigger>
-                                        {this.props.termination_condition}
-                                    </>
-                                :
-                                ''}
-                            </td>
+                            <td width="67%" className="text-left">{this.props.termination_condition}</td>
                        </tr>
                     </tbody>
                 </Table>
@@ -251,6 +243,7 @@ class ResultTable extends Component {
                         </tr>
                     </tbody>
                 </Table>
+                <AlertsModal />
                 <Modal show={this.state.seek_modal} onHide={this.onSeekCancelButton}>
                     <Modal.Header closeButton>
                         <Modal.Title>

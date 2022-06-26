@@ -170,20 +170,20 @@ class SymbolValue extends Component {
     render() {
 //        console.log('In SymbolValue.render this=',this);
         var results = getAlertsByName(this.props.element.name, true);
-        var value_class = results.colorClass;
+        var className = results.className;
         var icon_alerts = results.alerts;
         if (this.props.element.lmin & FIXED) {
-            value_class += "borders-fixed ";
+            className += "borders-fixed ";
         } else {
             if (this.props.element.lmin & CONSTRAINED) {
-                value_class += "borders-constrained-min ";
+                className += "borders-constrained-min ";
             }
             if (this.props.element.lmax & CONSTRAINED) {
-                value_class += "borders-constrained-max ";
+                className += "borders-constrained-max ";
             }
         }
-        value_class += "background-white "; // Always white
-//        console.log('In SymbolValue.render value_class=',value_class);
+        className += "background-white "; // Always white
+//        console.log('In SymbolValue.render className=',className);
         var icon_dependent_tag = '';
         if (this.props.element.type === "equationset" && !this.props.element.input) { // Dependent Variable?
             icon_dependent_tag =
@@ -198,7 +198,7 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             <>
                                 {icon_dependent_tag}
-                                <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly icon_alerts={icon_alerts} className={value_class} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
+                                <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
                             </>
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
@@ -210,7 +210,7 @@ class SymbolValue extends Component {
                         { this.props.element.format === 'table' ?
                             <>
                                 {icon_dependent_tag}
-                                <Form.Control id={'sv_'+this.props.element.name} type="text" readOnly className={value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
+                                <Form.Control id={'sv_'+this.props.element.name} type="text" readOnly className={className} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                             </>
                         : ''}
                     </InputGroup>
