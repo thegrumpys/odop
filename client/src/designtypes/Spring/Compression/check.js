@@ -164,15 +164,6 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)'
         });
     }
-    if (design.model.symbol_table[o.PC_Avail_Deflect].value > 80.0) {
-        addAlert({
-            element: design.model.symbol_table[o.PC_Avail_Deflect], 
-            name: design.model.symbol_table[o.PC_Avail_Deflect].name + '@2', 
-            message: '%_Avail_Deflect@2 (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') > 80',
-            severity: 'Info',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect2_GT_80)'
-        });
-    }
     var PC_Avail_Deflect1 = 100.0 * design.model.symbol_table[o.Deflect_1].value / (design.model.symbol_table[o.L_Free].value - design.model.symbol_table[o.L_Solid].value); 
     if (PC_Avail_Deflect1 < 20.0) {
         addAlert({
@@ -181,6 +172,15 @@ export function check(store) {        /*    Compression  Spring  */
             message: '%_Avail_Deflect@1 (' + PC_Avail_Deflect1.toODOPPrecision() + ') < 20',
             severity: 'Info',
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect1_LT_20)'
+        });
+    }
+    if (design.model.symbol_table[o.PC_Avail_Deflect].value > 80.0) {
+        addAlert({
+            element: design.model.symbol_table[o.PC_Avail_Deflect], 
+            name: design.model.symbol_table[o.PC_Avail_Deflect].name + '@2', 
+            message: '%_Avail_Deflect@2 (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') > 80',
+            severity: 'Info',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect2_GT_80)'
         });
     }
     var deflectRatio = design.model.symbol_table[o.Deflect_2].value / design.model.symbol_table[o.L_Free].value;
