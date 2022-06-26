@@ -51,7 +51,7 @@ class AlertsModal extends Component {
                 <Accordion className="col-md-12 mb-3">
                     <Card bg="light">
                         <Card.Header>
-                            <Accordion.Toggle as={Button} variant="primary" size="sm" eventKey="0">
+                            <Accordion.Toggle as={Button} variant="primary" size="sm" eventKey="0" disabled={all_alerts.length === 0} >
                                 Alerts&nbsp;{all_alerts.length > 0 ?<span className="badge bg-danger">{all_alerts.length}</span> : ''}
                             </Accordion.Toggle>
                             &nbsp;
@@ -68,6 +68,7 @@ class AlertsModal extends Component {
                                 <span><i className="fas fa-info-circle text-primary"></i></span>
                             </OverlayTrigger>
                         </Card.Header>
+                        {all_alerts.length > 0 ?
                         <Accordion.Collapse eventKey="0">
                             <Card.Body>
                                 <table className="col-12">
@@ -221,6 +222,8 @@ class AlertsModal extends Component {
                                 </table>
                             </Card.Body>
                         </Accordion.Collapse>
+                        :
+                        ''}
                     </Card>
                 </Accordion>
             </>
