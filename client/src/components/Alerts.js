@@ -31,6 +31,46 @@ export var commonChecks = function(store) {
             });
         }
 
+        // CONSTRAINT VALIDITY CHECKS
+        if (element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin <= element.validmin) { 
+            let validmin = element.validmin === -Number.MIN_VALUE ? '-Number.MIN_VALUE' : element.validmin;
+            addAlert({
+                element: element,
+                name: element.name+' MIN',
+                message: 'INVALID VALUE: ' + element.name+' MIN' + ' (' + element.cmin.toODOPPrecision() + ') <= ' + validmin,
+                severity: 'Err',
+                help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
+            });
+        } else if (element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin >= element.validmax) {
+            let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax;
+            addAlert({
+                element: element,
+                name: element.name+' MIN',
+                message: 'INVALID VALUE: ' + element.name+' MIN' + ' (' + element.cmin.toODOPPrecision() + ') >- ' + validmax,
+                severity: 'Err',
+                help_url: '[Help](/docs/Help/alerts.html#Validity_Above)'
+            });
+        }
+        if (element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax <= element.validmin) { 
+            let validmin = element.validmin === -Number.MIN_VALUE ? '-Number.MIN_VALUE' : element.validmin;
+            addAlert({
+                element: element,
+                name: element.name+' MAX',
+                message: 'INVALID VALUE: ' + element.name+' MAX' + ' (' + element.cmax.toODOPPrecision() + ') <= ' + validmin,
+                severity: 'Err',
+                help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
+            });
+        } else if (element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax >= element.validmax) {
+            let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax;
+            addAlert({
+                element: element,
+                name: element.name+' MAX',
+                message: 'INVALID VALUE: ' + element.name+' MAX' + ' (' + element.cmax.toODOPPrecision() + ') >- ' + validmax,
+                severity: 'Err',
+                help_url: '[Help](/docs/Help/alerts.html#Validity_Above)'
+            });
+        }
+
         // CONSTRAINT CHECKS
         if (element.type === "equationset" && !element.input && ((element.lmin & FIXED) && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
             addAlert({
