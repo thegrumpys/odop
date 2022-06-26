@@ -120,7 +120,7 @@ class FormControlTypeNumber extends Component {
                 <>
                     <b>Alerts</b>
                     <ul>
-                        {icon_alerts.map((entry, i) => { console.log('entry=',entry); return <li className={entry.className} key={i}>{entry.severity}: {entry.message}</li>})}
+                        {icon_alerts.map((entry, i) => { return <li className={entry.className} key={i}>{entry.severity}: {entry.message}</li>})}
                     </ul>
                 </>;
 //            console.log('icon_tooltip=',icon_tooltip);
