@@ -6,8 +6,9 @@ export var displayMessage = function(message, variant = 'danger', header = '', h
 //    console.log('In displayMessage this=',this);
     this.setState( // Special form of setState using updater function
         (prevState, props) => {
+            var m;
             if (!prevState.modal) {
-                var m = <> <Alert variant={variant}> {message} </Alert> </>;
+                m = <> <Alert variant={variant}> {message} </Alert> </>;
                 return {
                     modal: true, // Display it
                     header: header, // First header wins
@@ -15,7 +16,7 @@ export var displayMessage = function(message, variant = 'danger', header = '', h
                     help_url: help_url, // Initialize Help URL
                 };
             } else {
-                var m = <> {prevState.message} <Alert variant={variant}> {message} </Alert> </>;
+                m = <> {prevState.message} <Alert variant={variant}> {message} </Alert> </>;
                 return {
                     message: m // Concatenate messages, ignore header and variant
                 };
