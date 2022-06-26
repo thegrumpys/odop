@@ -1,10 +1,23 @@
 import React from 'react';
 import { ReportBase } from "./ReportBase" // import the inner non-redux-connected class
+import { Button } from 'react-bootstrap';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
 import { getAlertsBySeverity } from '../../../components/Alerts';
 
 class Report1 extends ReportBase {
+
+    constructor(props) {
+//        console.log("In Report1.constructor props=",props);
+        super(props);
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick(event) {
+//        console.log("In Report1.onClick event=",event);
+        window.print();
+        return false;
+    }
 
     render() {
         super.render();
@@ -12,14 +25,17 @@ class Report1 extends ReportBase {
         var line = 1;
         return (
             <>
-                <h4>ODOP:Spring &nbsp; Extension Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></h4>
+                <h4 class="d-flex mt-3">
+                    <span class="mr-auto">ODOP:Spring &nbsp; Extension Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></span>
+                    <Button onClick={this.onClick}>Print</Button>
+                </h4>
                 <br />
                 {this.hits > 0 ?
                     <><b>Alerts:</b><ul>
-                        { getAlertsBySeverity('Err'   ).map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
-                        { getAlertsBySeverity('Warn'  ).map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
-                        { getAlertsBySeverity('Notice').map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
-                        { getAlertsBySeverity('Info'  ).map((entry) => <li key={line++}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Err'   ).map((entry) => <li key={line++} className={entry.className}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Warn'  ).map((entry) => <li key={line++} className={entry.className}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Notice').map((entry) => <li key={line++} className={entry.className}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity('Info'  ).map((entry) => <li key={line++} className={entry.className}>{entry.severity}: {entry.message}</li> ) }
                     </ul></>
                 : '' }
                 {this.hits > 0 && this.startpntmsg}{this.hits > 0 && <br />}

@@ -1,16 +1,32 @@
 import React from 'react';
 import { ReportBase } from "./ReportBase" // import the inner non-redux-connected class
+import { Button } from 'react-bootstrap';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
 
 class Report3 extends ReportBase {
+
+    constructor(props) {
+//        console.log("In Report3.constructor props=",props);
+        super(props);
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick(event) {
+//        console.log("In Report3.onClick event=",event);
+        window.print();
+        return false;
+    }
 
     render() {
         super.render();
 //        console.log('In Report3.render this.props=',this.props);
         return (
             <>
-                <h4>ODOP:Spring &nbsp; Compression Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></h4>
+                <h4 class="d-flex mt-3">
+                    <span class="mr-auto">ODOP:Spring &nbsp; Compression Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></span>
+                    <Button onClick={this.onClick}>Print</Button>
+                </h4>
                 <br />
                 <table id="view1" className="report-table">
                     <tbody>
