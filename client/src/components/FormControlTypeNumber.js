@@ -123,7 +123,7 @@ class FormControlTypeNumber extends Component {
                         {icon_alerts.map((entry, i) => { console.log('entry=',entry); return <li className={entry.className} key={i}>{entry.severity}: {entry.message}</li>})}
                     </ul>
                 </>;
-            console.log('icon_tooltip=',icon_tooltip);
+//            console.log('icon_tooltip=',icon_tooltip);
         }
 
         var p = Object.assign({},this.props); // clone the props

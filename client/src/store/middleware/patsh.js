@@ -8,7 +8,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
     var spi;
     var xflag = [];
     function patsh_explore(phi, s, del) {
-        console.log('entering patsh_explore phi=', phi, 's=', s, 'del=', del);
+//        console.log('entering patsh_explore phi=', phi, 's=', s, 'del=', del);
         var eps = [];
         var spi;
         for (let k = 0; k < phi.length; k++) {
@@ -31,7 +31,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                 }
             }
         }
-        console.log('exiting patsh_explore phi=', phi, 's=', s);
+//        console.log('exiting patsh_explore phi=', phi, 's=', s);
         return s;
     }
     var itno = 0;

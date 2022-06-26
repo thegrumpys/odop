@@ -190,15 +190,15 @@ export function updateObjectiveValue(store, merit) {
     obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
     store.dispatch(changeResultObjectiveValue(obj));
 
-    if (invalid === false && infeasible === false) {
-        console.log('Valid & Feasible obj=',obj);
-    } else if (invalid === false && infeasible === true) {
-        console.log('Valid & Infeasible obj=',obj);
-    } else if (invalid === true && infeasible === true) {
-        console.warn('Invalid & Infeasible obj=',obj);
-    } else {
-        console.error('@@@ Invalid & Feasible obj=',obj);
-    }
+//    if (invalid === false && infeasible === false) {
+//        console.log('Valid & Feasible obj=',obj);
+//    } else if (invalid === false && infeasible === true) {
+//        console.log('Valid & Infeasible obj=',obj);
+//    } else if (invalid === true && infeasible === true) {
+//        console.warn('Invalid & Infeasible obj=',obj);
+//    } else {
+//        console.error('@@@ Invalid & Feasible obj=',obj);
+//    }
 
 //    console.log('</ul><li>','End updateObjectiveValue obj=',obj,'</li>');
 }
