@@ -7,16 +7,17 @@ export var displayMessage = function(message, variant = 'danger', header = '', h
     this.setState( // Special form of setState using updater function
         (prevState, props) => {
             if (!prevState.modal) {
+                var m = <> <Alert variant={variant}> {message} </Alert> </>;
                 return {
                     modal: true, // Display it
                     header: header, // First header wins
-                    message: message, // Initialize message
-                    variant: variant, // Initialize variant
+                    message: m, // Initialize message
                     help_url: help_url, // Initialize Help URL
                 };
             } else {
+                var m = <> {prevState.message} <Alert variant={variant}> {message} </Alert> </>;
                 return {
-                    message: prevState.message + ' ' + message // Concatenate messages, ignore header and variant
+                    message: m // Concatenate messages, ignore header and variant
                 };
             }
         }
@@ -32,7 +33,7 @@ export class MessageModal extends Component {
         this.state = {
             modal: false, // Default: do not display
             header: '', // Default: no header
-            message: '', // Default: no message
+            message: <> </>, // Default: no message
             variant: 'danger', // Default: danger
             help_url: '', // Default: no Help URL
         };
@@ -58,7 +59,7 @@ export class MessageModal extends Component {
         return (
             <Modal show={this.state.modal} onHide={this.toggle}>
                 { this.state.header !== '' ? <Modal.Header closeButton><Modal.Title><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>&nbsp;{this.state.header}</Modal.Title></Modal.Header> : ''}
-                <Modal.Body><Alert variant={this.state.variant}>{this.state.message}</Alert></Modal.Body>
+                <Modal.Body>{this.state.message}</Modal.Body>
                 <Modal.Footer>
                     { this.state.help_url !== '' ? <Button variant="outline-info" onClick={this.onContextHelp}>Help</Button> : ''}
                     <Button variant="primary" onClick={this.toggle}>Close</Button>
