@@ -60,8 +60,8 @@ class AlertsModal extends Component {
                                     ALERTS are error, warning, notice and informational messages that are produced as you change the values of your design.
                                     There are error alerts for each value when it is outside its validity value range.
                                     There are warning alerts if the relationship between two values is incorrect.
-                                    There are notice alerts if ... 
-                                    There are informational alerts for each value when it is outside its constraint value range.
+                                    There are notice alerts if minimum or maximum constraints are violated.
+                                    There are informational alerts for other general conditions.
                                     Etc.
                                 </Tooltip>
                             }>
