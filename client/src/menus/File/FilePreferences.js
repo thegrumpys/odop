@@ -40,7 +40,7 @@ class FilePreferences extends Component {
         this.setState({
             system_controls: {
                 ...this.state.system_controls,
-                [name] : value
+                [name] : parseFloat(value),
             },
             isInvalidValue: false,
         });

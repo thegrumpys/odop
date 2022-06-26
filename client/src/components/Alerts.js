@@ -203,38 +203,58 @@ export var getAlertsByName = function(name, includeViolations = false) {
 //    console.log('In Alerts.getAlertsByName this=',this,'name=',name,'includeViolations=',includeViolations);
     var alerts = [];
     var maxSeverityNumber = 0;
-    getAlertsBySeverity('Err').forEach((entry) => {
+    this.state.alerts.filter(entry => entry.severity === 'Err').forEach((entry) => {
+        var severityNumber;
         if (entry.name === name) { // Matches exactly
+            severityNumber = getSeverityNumberBySeverity(entry.severity);
+            entry.className = getFontClassBySeverityNumber(severityNumber);
             maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
+            severityNumber = getSeverityNumberBySeverity(entry.severity);
+            entry.className = getFontClassBySeverityNumber(severityNumber);
             maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         }
     });
-    getAlertsBySeverity('Warn').forEach((entry) => {
+    this.state.alerts.filter(entry => entry.severity === 'Warn').forEach((entry) => {
+        var severityNumber;
         if (entry.name === name) { // Matches exactly
+            severityNumber = getSeverityNumberBySeverity(entry.severity);
+            entry.className = getFontClassBySeverityNumber(severityNumber);
             maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
+            severityNumber = getSeverityNumberBySeverity(entry.severity);
+            entry.className = getFontClassBySeverityNumber(severityNumber);
             maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         }
     });
-    getAlertsBySeverity('Notice').forEach((entry) => {
+    this.state.alerts.filter(entry => entry.severity === 'Notice').forEach((entry) => {
+        var severityNumber;
         if (entry.name === name) { // Matches exactly
+            severityNumber = getSeverityNumberBySeverity(entry.severity);
+            entry.className = getFontClassBySeverityNumber(severityNumber);
             maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
+            severityNumber = getSeverityNumberBySeverity(entry.severity);
+            entry.className = getFontClassBySeverityNumber(severityNumber);
             maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         }
     });
-    getAlertsBySeverity('Info').forEach((entry) => {
+    this.state.alerts.filter(entry => entry.severity === 'Info').forEach((entry) => {
+        var severityNumber;
         if (entry.name === name) { // Matches exactly
+            severityNumber = getSeverityNumberBySeverity(entry.severity);
+            entry.className = getFontClassBySeverityNumber(severityNumber);
             maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         } else if (includeViolations && (entry.name === name+' MIN' || entry.name === name+' MAX')) { // Matches name prefix
+            severityNumber = getSeverityNumberBySeverity(entry.severity);
+            entry.className = getFontClassBySeverityNumber(severityNumber);
             maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name));
             alerts.push(entry);
         }
@@ -251,14 +271,14 @@ export var getAlertsBySeverity = function(severity='*') {
 //            console.log('severity=',severity,'entry=',entry);
             var severityNumber = getSeverityNumberBySeverity(entry.severity);
             entry.className = getFontClassBySeverityNumber(severityNumber);
-            return entry.duplicate === undefined || entry.duplicate === false
+            return entry.duplicate === undefined || entry.duplicate === false;
         });
     } else {
         results = this.state.alerts.filter(entry => {
 //            console.log('severity=',severity,'entry=',entry);
             var severityNumber = getSeverityNumberBySeverity(entry.severity);
             entry.className = getFontClassBySeverityNumber(severityNumber);
-            return entry.severity === severity && (entry.duplicate === undefined || entry.duplicate === false)
+            return entry.severity === severity && (entry.duplicate === undefined || entry.duplicate === false);
         });
     }
 //    console.log('In Alerts.getAlertsBySeverity results=',results);

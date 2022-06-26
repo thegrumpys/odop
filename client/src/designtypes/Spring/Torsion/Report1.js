@@ -25,8 +25,8 @@ class Report1 extends ReportBase {
         var line = 1;
         return (
             <>
-                <h4 class="d-flex mt-3">
-                    <span class="mr-auto">ODOP:Spring &nbsp; Torsion Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></span>
+                <h4 className="d-flex mt-3">
+                    <span className="mr-auto">ODOP:Spring &nbsp; Torsion Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></span>
                     <Button onClick={this.onClick}>Print</Button>
                 </h4>
                 <br />
