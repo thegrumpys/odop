@@ -14,7 +14,7 @@ import { search } from '../store/middleware/search';
 // SYMBOL
 //=====================================================================
 
-it('reducers change symbol value', () => {
+it('reducers change symbol value 1000000x', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
         reducers,
@@ -44,7 +44,7 @@ it('reducers change symbol value', () => {
 // invokeEquationSet
 //=====================================================================
 
-it('invokeEquationSet', () => {
+it('invokeEquationSet 100000x', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(reducers, {"user": "USERID0123456789", name: "initialState", model: state});
 
@@ -106,7 +106,7 @@ it('invokeEquationSet', () => {
 // search
 //=====================================================================
 
-it('search without merit', () => {
+it('search without merit 1000x', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(reducers, {"user": "USERID0123456789", name: "initialState", model: state}, applyMiddleware(dispatcher));
 
@@ -135,24 +135,24 @@ it('search without merit', () => {
     console.log('search without merit 1000x duration=',duration);
 
     var design = store.getState(); // after
-    expect(obj).toEqual(0.14664180506450808);
+    expect(obj).toEqual(0.14663906690756914);
 
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.model.version).toEqual("7");
 
     expect(design.model.symbol_table.PRESSURE.name).toEqual("PRESSURE"); // p vector
-    expect(design.model.symbol_table.PRESSURE.value).toEqual(697.2108757363197);
+    expect(design.model.symbol_table.PRESSURE.value).toEqual(698.3911724644562);
     expect(design.model.symbol_table.RADIUS.name).toEqual("RADIUS");
-    expect(design.model.symbol_table.RADIUS.value).toEqual(0.5825642374486647);
+    expect(design.model.symbol_table.RADIUS.value).toEqual(0.5819910352662816);
     expect(design.model.symbol_table.THICKNESS.name).toEqual("THICKNESS");
-    expect(design.model.symbol_table.THICKNESS.value).toEqual(0.05814850143495808);
+    expect(design.model.symbol_table.THICKNESS.value).toEqual(0.05819919989616446);
     expect(design.model.symbol_table.FORCE.name).toEqual("FORCE"); // x vector
-    expect(design.model.symbol_table.FORCE.value).toEqual(743.3642427191874);
+    expect(design.model.symbol_table.FORCE.value).toEqual(743.1580800616207);
     expect(design.model.symbol_table.AREA.name).toEqual("AREA");
-    expect(design.model.symbol_table.AREA.value).toEqual(1.0661971414805103);
+    expect(design.model.symbol_table.AREA.value).toEqual(1.0641000478846157);
     expect(design.model.symbol_table.STRESS.name).toEqual("STRESS");
-    expect(design.model.symbol_table.STRESS.value).toEqual(3492.524417147412);
+    expect(design.model.symbol_table.STRESS.value).toEqual(3491.950080143697);
 
     expect(design.model.system_controls.ioopt.value).toEqual(3);
     expect(design.model.system_controls.maxit.value).toEqual(100);
@@ -171,7 +171,7 @@ it('search without merit', () => {
     expect(design.model.system_controls.show_units.value).toEqual(1);
     expect(design.model.system_controls.show_violations.value).toEqual(1);
 
-    expect(design.model.result.objective_value).toEqual(0.14664180506450808);
-    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN). Low iteration count may produce low precision results.");
+    expect(design.model.result.objective_value).toEqual(0.14663906690756914);
+    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN) after 16 iterations.");
     expect(design.model.result.violated_constraint_count).toEqual(4);
 });
