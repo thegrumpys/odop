@@ -57,12 +57,13 @@ class AlertsModal extends Component {
                             &nbsp;
                             <OverlayTrigger placement="bottom" overlay={
                                 <Tooltip>
-                                    ALERTS are error, warning, notice and informational messages that are produced as you change the values of your design.
-                                    There are error alerts for each value when it is outside its validity value range.
-                                    There are warning alerts if the relationship between two values is incorrect.
-                                    There are notice alerts if minimum or maximum constraints are violated.
-                                    There are informational alerts for other general conditions.
-                                    Etc.
+                                    ALERTS are error, warning, notice and informational messages produced in response to design changes.
+                                    Error alerts indicate a value outside its validity range.
+                                    Warning alerts are produced if the relationship between two values is incorrect.
+                                    Notice alerts summarize violated minimum or maximum constraints.
+                                    Informational alerts highlight other general conditions.
+                                    A red "badge" on the Alerts button indicates the total number of pending alerts.
+                                    Close the Alerts panel with a second click on the Alerts button.
                                 </Tooltip>
                             }>
                                 <span><i className="fas fa-info-circle text-primary"></i></span>
@@ -98,8 +99,8 @@ class AlertsModal extends Component {
                                             </th>
                                             <th>
                                                 <OverlayTrigger placement="top" overlay={<Tooltip>
-                                                Summary of alert<br/>
-                                                Color tracks Severity
+                                                Brief summary of alert<br/>
+                                                Font tracks Severity
                                                 </Tooltip>}>
                                                             <span>Message</span>
                                                 </OverlayTrigger>
@@ -114,8 +115,8 @@ class AlertsModal extends Component {
                                             </th>
                                             <th>
                                                 <OverlayTrigger placement="top" overlay={<Tooltip>
-                                                Use entry field below to change value of associated variable<br/>
-                                                Color below tracks design feasibility or message severity
+                                                Use entry field below to change value of the associated variable or constraint.<br/>
+                                                Where possible, the color below tracks design feasibility.
                                                 </Tooltip>}>
                                                     <span>Value</span>
                                                 </OverlayTrigger>

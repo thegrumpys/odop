@@ -2,23 +2,16 @@
 
 Alerts are informational messages that are produced as you change the values of your design. 
 Press the Alerts button on the main pages (Advanced and Calculator Views) 
-to see an alert presentation that is color coded and sorted by severity: 
-Severity | Content                                          | Color  
+to see an alert presentation that is organized by severity and (independent, dependent) variable type: 
+Severity | Content                                          | Font  
 ---      | ---                                              | ---  
- Err     | value is outside its valid range                 | red  
- Warn    | relationship between values incorrect or invalid | orange  
- Notice  | constraints that are significantly violated      | green  
- Info    | insights about aspects of system operation       | black  
+ Err     | value is outside its valid range                 | Bold  
+ Warn    | relationship between values incorrect or invalid | Bold, Italic  
+ Notice  | constraints that are significantly violated      | Standard (Roman)  
+ Info    | insights about aspects of system operation       | Italic  
 
 Informational alerts (Info) alerts also highlight the configuration of 
 Functionally Determined Constraint Levels [(FDCL)](/docs/Help/terminology.html#fdcl). 
-
-The Value field of the Alerts presentation allows in-place adjustment of the 
-associated variable's value and constraint levels. 
-This field operates the same as the corresponding fields on the main pages (Advanced and Calculator Views). 
-Thus, where possible, the color of the number presented in the value field tracks the color of the 
-[multi-colored Feasibility Status Indicator](/docs/Help/feasibilityIndicator.html). 
-Otherwise, the field color tracks the message Severity level. 
 
 Designs with values outside their valid range are likely physically impossible.
 In spring design, negative values for wire diameter, coil diameter and number of coils are obvious examples.
@@ -31,7 +24,7 @@ the Search feature may not be able to resolve the problem.
 In this situation, Search finishes with a different design point that is also invalid and
 with a message to correct the invalid condition manually. 
 In order to proceed with a new Search, 
-it will be necessary to identify the source of invalid values and manually enter more appropriate values. 
+identify the source of invalid values and manually enter more appropriate values. 
 As zero and negative numbers are a common source of invalid values, look for those first. 
 
 In order to avoid numeric difficulty when starting from a physically unrealistic situation, 
@@ -39,12 +32,21 @@ alerts of error (Err) severity may block operation of the Seek and Trade feature
 In order to proceed with Seek and Trade it will be necessary to identify the source of errors 
 and manually provide more appropriate values. 
 
+The Value field of the Alerts presentation allows in-place adjustment of the 
+associated variable's value and constraint levels. 
+Select this field to get a value change dialog box that 
+operates the same as the corresponding fields on the main pages (Advanced and Calculator Views). 
+Where possible, the color of the number presented in the value field tracks the color of the 
+[multi-colored Feasibility Status Indicator](/docs/Help/feasibilityIndicator.html). 
+
 Where possible, the linked detailed entries (below) provide specific guidance in moving to values 
 that will resolve the alerts. 
 
 ### On this page (design type independent alerts):   
  - [Invalid - Value less than limit](alerts.html#Validity_Below)  
  - [Invalid - Value greater than limit](alerts.html#Validity_Above)  
+ - [Invalid Constraint - Less than limit](alerts.html#Constraint_Below)  
+ - [Invalid Constraint - Greater than limit](alerts.html#Constraint_Above)  
  - [Constraint inconsistency](alerts.html#Constraint_Inconsistency)  
  - [Constraint MIN violation](alerts.html#MIN_Violation)  
  - [Constraint MAX violation](alerts.html#MAX_Violation)  
@@ -79,8 +81,8 @@ ___
 ___
 
 ## Invalid - Value less than or equal to limit 
-The value of the associated variable is less than the validmin limit defined in the design type's initialState file. 
-This means that, given the current input values (for example, a negative diameter), 
+The value of the associated variable is less than the validmin limit defined in the design type's initialState. 
+This means that, given the current input value (for example, a negative diameter), 
 the design is likely outside the limits of physical reality. 
 The mathematical model for this design is not valid for these inputs. 
 This condition may block the Seek and Trade features from starting. 
@@ -96,8 +98,8 @@ ___
 ___
 
 ## Invalid - Value greater than limit 
-The value of the associated variable is greater than the validmax limit defined in the design type's initialState file. 
-This means that, given the current input values, 
+The value of the associated variable is greater than the validmax limit defined in the design type's initialState. 
+This means that, given the current input value, 
 the design is likely outside the limits of physical reality. 
 The mathematical model for this design is not valid for these inputs. 
 This condition may block the Seek and Trade features from starting. 
@@ -105,6 +107,41 @@ This condition may block the Seek and Trade features from starting.
 Specific advice on how to resolve this condition is not available. 
 Look for other messages as they might provide more specific advice. 
 Undoing or reducing the size of recent changes may be helpful. 
+
+___
+
+<a id="Constraint_Below"></a>  
+___
+
+## Invalid Constraint - Less than or equal to limit 
+The value of the associated constraint is less than the validmin limit for the associated variable as defined in the design type's initialState. 
+This means that, given the current input value (for example, a MIN value that allows a negative diameter), 
+the design could be taken outside the limits of physical reality. 
+The mathematical model for this design is not valid for these inputs. 
+If it were to occur, this condition may block the Seek and Trade features from starting. 
+
+Look for zero or negative numbers in the MIN field of the associated variable. 
+Change to positive, non-zero numbers as appropriate. 
+Look for other messages as they might provide more specific advice. 
+Undoing or reducing the size of recent constraint changes may be helpful. 
+
+___
+
+<a id="Constraint_Above"></a>  
+___
+
+## Invalid Constraint - Greater than limit 
+The value of the associated variable is greater than the validmax limit for the associated variable as defined in the design type's initialState. 
+This means that, given the current input value, 
+the design is likely outside the limits of physical reality. 
+The mathematical model for this design is not valid for these inputs. 
+This condition may block the Seek and Trade features from starting. 
+
+Specific advice on how to resolve this condition is not available. 
+Look at the MAX constraint field of the associated variable. 
+Adjust it as appropriate. 
+Look for other messages as they might provide more specific advice. 
+Undoing or reducing the size of recent constraint changes may be helpful. 
 
 ___
 
@@ -139,8 +176,10 @@ In order to resolve this alert:
 
 It is quite possible that the constraint violation in question was created by use of the Search feature. 
 In that case, further use of Search without introducing other changes is unlikely to be helpful. 
-The most productive course of action may be to relax other seemingly unrelated violated constraints and rerun Search. 
-The constraint(s) with the largest violations are the most leveraged and should be examined first. 
+The most productive course of action may be to relax other, perhaps seemingly unrelated, violated constraints and rerun Search. 
+
+When Search returns a design judged to be NOT FEASIBLE, 
+constraint(s) with the largest violations are the most leveraged and should be examined first. 
 
 See also: 
  - [Constraints](/docs/Help/terminology.html#constraints)
@@ -162,8 +201,10 @@ In order to resolve this alert:
 
 It is quite possible that the constraint violation in question was created by use of the Search feature. 
 In that case, further use of Search without introducing other changes is unlikely to be helpful. 
-The most productive course of action may be to relax other violated constraints and rerun Search. 
-The constraint(s) with the largest violations are the most leveraged and should be examined first. 
+The most productive course of action may be to relax other, perhaps seemingly unrelated, violated constraints and rerun Search. 
+
+When Search returns a design judged to be NOT FEASIBLE, 
+constraint(s) with the largest violations are the most leveraged and should be examined first. 
 
 See also: 
  - [Constraints](/docs/Help/terminology.html#constraints)
@@ -186,8 +227,10 @@ In order to resolve this alert:
 
 It is possible that the Fix violation in question was created by use of the Search feature. 
 In that case, further use of Search without introducing other changes is unlikely to be helpful. 
-The most productive course of action may be to relax unrelated violated constraints and Fixes and then rerun Search. 
-The constraint(s) with the largest violations are the most leveraged and should be examined first. 
+The most productive course of action may be to relax other, perhaps seemingly unrelated, violated constraints and rerun Search. 
+
+When Search returns a design judged to be NOT FEASIBLE, 
+constraint(s) with the largest violations are the most leveraged and should be examined first. 
 
 See also: 
  - [Fix & Free](/docs/Help/terminology.html#fix)
@@ -235,20 +278,28 @@ ___
 
 ##  
   
-  &nbsp;   
+ &nbsp;   
   
  &nbsp;   
   
-   &nbsp;   
+ &nbsp;   
   
-  &nbsp;   
+ &nbsp;   
    
  &nbsp;   
   
  &nbsp;   
   
-  &nbsp;   
+ &nbsp;   
   
+ &nbsp;   
+  
+ &nbsp;   
+   
+ &nbsp;   
+  
+ &nbsp;   
+   
  &nbsp;   
   
  &nbsp;   
