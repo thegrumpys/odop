@@ -62,7 +62,6 @@ export const execute = {
                     </p>
                     <p>
                     Loaded Compression spring initialState.<br />
-                    Set maxit = 600<br />
                     Set Force_2 MIN = 40.0 pounds<br />
                     Set L_Stroke MIN = 1.75 inches<br />
                     Set Force_2 = 90.0 pounds<br />
@@ -74,7 +73,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSystemControlsValue({maxit: 600}),
                 setSymbolFlag('Force_2', MIN, CONSTRAINED),
                 changeSymbolConstraint("Force_2", MIN, 40.0),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
@@ -104,7 +102,6 @@ export const execute = {
                     </p>
                     <p>
                     Loaded Compression spring initialState.<br />
-                    Set maxit = 600<br />
                     Set OD_Free = -1.1 inches<br />
                     </p>
                     <p>
@@ -114,7 +111,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSystemControlsValue({maxit: 600}),
                 changeSymbolValue("OD_Free", -1.1),
             ]
         },
@@ -143,7 +139,6 @@ export const execute = {
                     </p>
                     <p>
                     Loaded Compression spring initialState.<br />
-                    Set maxit = 600<br />
                     Wire_Dia = 0.4 inch<br />
                     </p>
                     <p>
@@ -153,7 +148,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSystemControlsValue({maxit: 600}),
                 changeSymbolValue("Wire_Dia", 0.4),
             ]
         },
@@ -183,7 +177,6 @@ export const execute = {
                     </p>
                     <p>
                     Loaded Compression spring initialState.<br />
-                    Set maxit = 600<br />
                     OD_Free = 91.1 inches<br />
                     </p>
                     <p>
@@ -193,12 +186,11 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSystemControlsValue({maxit: 600}),
                 changeSymbolValue("OD_Free", 91.1),
             ]
         },
         {
-            title: "Page 11 - VALID to INVALID to INVALID to VALID",
+            title: "Page 11 - INVALID to VALID to INVALID to VALID",
             text: (
                 <>
                     <p>
@@ -223,7 +215,6 @@ export const execute = {
                     </p>
                     <p>
                     Loaded Compression spring initialState.<br />
-                    Set maxit = 600<br />
                     OD_Free = 11.1 inches<br />
                     Spring_Index MIN 1.0
                     Spring_Index MAX 1.6
@@ -235,7 +226,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSystemControlsValue({maxit: 600}),
                 changeSymbolValue("OD_Free", 11.1),
                 resetSymbolFlag('Spring_Index', MIN, CONSTRAINED),
                 changeSymbolConstraint('Spring_Index', MIN, 1.0),

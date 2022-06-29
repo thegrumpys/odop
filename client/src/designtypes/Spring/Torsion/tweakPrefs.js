@@ -10,7 +10,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    maxit = 190<br />
+                    maxit = 1000<br />
                     objmin = 0.000005<br />
                     delmin = 0.00001<br />
                     tol = 0.00001<br />
@@ -27,7 +27,7 @@ export const execute = {
             text: (
                 <>
                     <b>New values:</b><br />
-                    maxit = 190<br />
+                    maxit = 1000<br />
                     objmin = 0.000005<br />
                     delmin = 0.00001<br />
                     tol = 0.00001<br />
@@ -38,7 +38,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                changeSystemControlsValue({maxit: 190, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
+                changeSystemControlsValue({maxit: 1000, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
             ]
         }
     ]
