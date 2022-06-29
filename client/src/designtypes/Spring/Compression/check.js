@@ -68,7 +68,7 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#FS_CycleLife_MIN_not_set)'
         });
     }
-    if (design.model.symbol_table[o.FS_2].lmax & CONSTRAINED && design.model.symbol_table[o.FS_2].value > design.model.symbol_table[o.FS_2].cmax) {
+    if (design.model.symbol_table[o.FS_2].lmax & CONSTRAINED && design.model.symbol_table[o.FS_2].value > design.model.symbol_table[o.FS_2].cmax && design.model.result.objective_value > design.model.system_controls.objmin) {
         addAlert({
             element: design.model.symbol_table[o.FS_2], 
             name: design.model.symbol_table[o.FS_2].name, 
@@ -155,7 +155,7 @@ export function check(store) {        /*    Compression  Spring  */
             duplicate: true
         });
     }
-    if (design.model.symbol_table[o.FS_Solid].value < 1.0) {
+    if (design.model.symbol_table[o.FS_Solid].value < 1.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
         addAlert({
             element: design.model.symbol_table[o.FS_Solid], 
             name: design.model.symbol_table[o.FS_Solid].name, 
