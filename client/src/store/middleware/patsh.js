@@ -62,6 +62,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                     phi[i] = phi[i] + alpha * (phi[i] - tht[i]); // phi: base point resulting from the current move
                 }
                 if (s < objmin && s + tol * Math.abs(s_psi) < s_psi ) { // Are we done? Leave by door #1
+                    s_psi = s; // s_psi: the functional value at the base point
                     NCODE = 'Search terminated when design reached feasibility (Objective value is less than OBJMIN)';
                     if (itno <= 2) {
                         NCODE += '. Low iteration count may produce low precision results.';
@@ -71,13 +72,13 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
 //                    console.log('</ul><li>','@@@@@ End patsh NCODE=',NCODE,'</li>');
                     return NCODE; // stop, design reached feasibility
                 }
+                s_psi = s; // s_psi: the functional value at the base point
                 if (itno > maxit) { // Are we done? Leave by door #2
                     NCODE = 'Search terminated when iteration count exceeded the maximum limit (MAXIT)';
                     NCODE += ' after '+itno+' iterations.';
 //                    console.log('</ul><li>','@@@@@ End patsh NCODE=',NCODE,'</li>');
                     return NCODE;// stop, iteration count exceeded
                 }
-                s_psi = s; // s_psi: the functional value at the base point
                 s_phi = despak(phi, store, merit); // AKA despak, s_phi: the functional value for this move
 //                console.log('In patsh 2 phi=',phi,'s_phi=',s_phi);
                 s = s_phi; // s: the functional value before the move
