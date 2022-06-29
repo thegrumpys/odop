@@ -55,16 +55,16 @@ that will resolve the alerts.
  - [Functionally Determined Constraint Level (FDCL) is enabled](alerts.html#FDCL)  
 
 ### On other pages (design type specific alerts):   
- - [Coils_A is less than 1](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)  
+ - [Wire_Dia > ID_Free](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_GT_ID_Free)  
  - [Material properties for this Wire_Dia may not be accurate](/docs/Help/DesignTypes/Spring/alerts.html#MatPropAccuracy)  
- - [ID_Free < Wire_Dia](/docs/Help/DesignTypes/Spring/alerts.html#ID_Free_LT_Wire_Dia)  
  - [FS_CycleLife MIN not set](/docs/Help/DesignTypes/Spring/alerts.html#FS_CycleLife_MIN_not_set)  
  - [Over-design concern](/docs/Help/DesignTypes/Spring/alerts.html#OverDesign)  
+ - [Coils_A is less than 1](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)  
  - [Spring Index manufacturability concern](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)  
  - [Value of Tensile is suspect](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)  
+ - [Force_1 >= Force_2](/docs/Help/DesignTypes/Spring/Compression/alerts.html#F1_GE_F2)  
  - [L_Free < L_Solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_2_LT_L_Solid)  
- - [Force_2 < Force_1](/docs/Help/DesignTypes/Spring/Compression/alerts.html#F1_GE_F2)  
  - [FS_Solid < 1.0](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)  
  - [%_Avail_Deflect @ 2 > 80%](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect2_GT_80)  
  - [%_Avail_Deflect @ 1 < 20%](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect1_LT_20)  
@@ -73,6 +73,7 @@ that will resolve the alerts.
  - [Stress_Initial < Stress_Init_Lo](/docs/Help/DesignTypes/Spring/Extension/alerts.html#SInit_LT_SInit_Lo)  
  - [Stress_Initial > Stress_Init_Hi](/docs/Help/DesignTypes/Spring/Extension/alerts.html#SInit_GT_SInit_Hi)  
  - [Fatigue failure at end is possible](/docs/Help/DesignTypes/Spring/Extension/alerts.html#FatigueInHook)  
+ - [Material property data not available](/docs/Help/DesignTypes/Spring/Extension/alerts.html#NoMatProp)  
  - [M_1 >= M_2](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#M1_GE_M2)  
 
 ___

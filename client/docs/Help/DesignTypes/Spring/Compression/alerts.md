@@ -3,7 +3,7 @@
 Alerts specific to compression springs. 
 
 ### On this page:   
- - [Force_2 < Force_1](alerts.html#F1_GE_F2)  
+ - [Force_1 >= Force_2](alerts.html#F1_GE_F2)  
  - [L_Free < L_Solid](alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](alerts.html#L_2_LT_L_Solid)  
  - [FS_Solid < 1.0](alerts.html#FS_Solid_LT_1)  

@@ -3,7 +3,7 @@
 Alerts specific to extension springs. 
 
 ### On this page:   
- - [Force_2 < Force_1](alerts.html#F1_GE_F2)  
+ - [Force_1 >= Force_2](alerts.html#F1_GE_F2)  
  - [Force_1 < Initial_Tension](alerts.html#F1_LT_IT)  
  - [Stress_Initial < Stress_Init_Lo](alerts.html#SInit_LT_SInit_Lo)  
  - [Stress_Initial > Stress_Init_Hi](alerts.html#SInit_GT_SInit_Hi)  
