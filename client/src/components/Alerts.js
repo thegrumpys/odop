@@ -16,7 +16,7 @@ export var commonChecks = function(store) {
           severity = 'Info'; // Make Invalid Dependent Variable only Info
         }
         if (element.format === undefined && typeof element.value === 'number' && element.value <= element.validmin) {
-            let validmin = element.validmin === -Number.MIN_VALUE ? '-Number.MIN_VALUE' : element.validmin;
+            let validmin = element.validmin === -Number.MIN_VALUE ? ' ~0' : element.validmin;
             addAlert({
                 element: element,
                 name: element.name,
@@ -37,7 +37,7 @@ export var commonChecks = function(store) {
 
         // CONSTRAINT VALIDITY CHECKS (ONLY FOR INDEPENDENT AND DEPENDENT NUMERIC VARIABLES, NOT FOR CALC INPUTS)
         if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin <= element.validmin) {
-            let validmin = element.validmin === -Number.MIN_VALUE ? '-Number.MIN_VALUE' : element.validmin;
+            let validmin = element.validmin === -Number.MIN_VALUE ? ' ~0' : element.validmin;
             addAlert({
                 element: element,
                 name: element.name+' MIN',
@@ -56,7 +56,7 @@ export var commonChecks = function(store) {
             });
         }
         if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax <= element.validmin) {
-            let validmin = element.validmin === -Number.MIN_VALUE ? '-Number.MIN_VALUE' : element.validmin;
+            let validmin = element.validmin === -Number.MIN_VALUE ? ' ~0' : element.validmin;
             addAlert({
                 element: element,
                 name: element.name+' MAX',
