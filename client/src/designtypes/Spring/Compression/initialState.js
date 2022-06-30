@@ -150,7 +150,7 @@ export const initialState = {
             "name": "Deflect_1",
             "value": 0.04,
             "units": "inches",
-            "lmin": 0,
+            "lmin": CONSTRAINED,
             "lmax": 0,
             "cmin": 0.0,
             "cmax": 20.0,
