@@ -170,7 +170,7 @@ export const initialState = {
             "name": "Deflect_1",
             "value": 2.60,
             "units": "deg",
-            "lmin": 0,
+            "lmin": CONSTRAINED,
             "lmax": 0,
             "cmin": 0.0,
             "cmax": 200.0,
