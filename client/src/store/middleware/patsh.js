@@ -50,9 +50,11 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
         for (let i = 0; i < psi.length; i++) {
             phi[i] = psi[i];
         }
-        var s = s_psi;// s: the functional value before the move
+        var s = s_psi; // s: the functional value before the move
         s = patsh_explore(phi, s, del); // explore
-        if (s < s_psi && s + tol * Math.abs(s_psi) < s_psi) {// goto 2
+//        console.log('After patsh_explore phi=',phi,'s=',s,'itno=',itno);
+//        console.log('@@@1@@@ itno=',itno,'s=',s,'calc=',s + tol * Math.abs(s_psi),'calc2=',Math.abs((s_psi-s)/s_psi),'s_psi=',s_psi,'compare=', s + tol * Math.abs(s_psi) >= s_psi);
+        if (s < s_psi && s + tol * Math.abs(s_psi) < s_psi) { // goto 2
             do { // [2]
                 itno++; // count the number of iterations
                 var tht = [];
@@ -61,8 +63,9 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                     psi[i] = phi[i]; // psi: current base point
                     phi[i] = phi[i] + alpha * (phi[i] - tht[i]); // phi: base point resulting from the current move
                 }
-                if (s < objmin && s + tol * Math.abs(s_psi) < s_psi ) { // Are we done? Leave by door #1
-                    s_psi = s; // s_psi: the functional value at the base point
+//                console.log('@@@ itno=',itno,'s=',s,'calc=',s + tol * Math.abs(s_psi),'s_psi=',s_psi,'compare=', s + tol * Math.abs(s_psi) >= s_psi);
+                s_psi = s; // s_psi: the functional value at the base point
+                if (s_psi < objmin) { // Are we done? Leave by door #1
                     NCODE = 'Search terminated when design reached feasibility (Objective value is less than OBJMIN)';
                     if (itno <= 2) {
                         NCODE += '. Low iteration count may produce low precision results.';
@@ -72,7 +75,6 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
 //                    console.log('</ul><li>','@@@@@ End patsh NCODE=',NCODE,'</li>');
                     return NCODE; // stop, design reached feasibility
                 }
-                s_psi = s; // s_psi: the functional value at the base point
                 if (itno > maxit) { // Are we done? Leave by door #2
                     NCODE = 'Search terminated when iteration count exceeded the maximum limit (MAXIT)';
                     NCODE += ' after '+itno+' iterations.';
@@ -83,8 +85,10 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
 //                console.log('In patsh 2 phi=',phi,'s_phi=',s_phi);
                 s = s_phi; // s: the functional value before the move
                 s = patsh_explore(phi, s, del); // explore
+//                console.log('After patsh_explore phi=',phi,'s=',s,'itno=',itno);
+//                console.log('@@@2@@@ itno=',itno,'s=',s,'calc=',s + tol * Math.abs(s_psi),'calc2=',Math.abs((s_psi-s)/s_psi),'s_psi=',s_psi,'compare=', s + tol * Math.abs(s_psi) >= s_psi);
             } while (s < s_psi && s + tol * Math.abs(s_psi) < s_psi); // goto 2 else s >= s_psi goto 1
-        } else { // s >= s_psi || s + tol * Math.abs(s_psi) >= s_psi goto 3
+        } else { // s >= s_psi && s + tol * Math.abs(s_psi) >= s_psi goto 3
             if (del < delmin) { // [3] Are we done? Leave by door #3
                 NCODE = 'Search terminated when step size reached the minimum limit (DELMIN)';
                 if (itno <= 2)
@@ -95,6 +99,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                 return NCODE;// stop, step size exhausted
             } else {
                 del = del / 1.9; // del >= delmin && s >= s_psi goto 1
+//                console.log('@@@3@@@ del=',del);
             }
         }
     } // goto 1
