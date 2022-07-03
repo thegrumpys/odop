@@ -17,17 +17,8 @@ class ActionSearch extends Component {
     onSearchRequest(event) {
 //        console.log('In ActionSearch.onSearchRequest this=',this,'event=',event);
         var errorMsg = '';
-        if (this.props.objective_value <= this.props.system_controls.objmin) {
-            errorMsg += 'Objective Value less than OBJMIN. There is nothing for Search to do. Consider using Seek; ';
-        }
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             errorMsg += 'No free independent variables; ';
-        }
-        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
-            errorMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
-        }
-        if (Number.isNaN(this.props.objective_value)) {
-            errorMsg += 'Objective Value is Not a Number. Check constraint values; ';
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
