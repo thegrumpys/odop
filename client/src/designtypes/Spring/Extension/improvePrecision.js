@@ -6,12 +6,12 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Click Next to tweak these Preference values for improved Search precision.
+                    Click Next to use these Preference values for improved Search precision.
                     </p>
                     
                     <p>
                     maxit = 1000<br />
-                    objmin = 0.000005<br />
+                    objmin = 0.000001<br />
                     delmin = 0.00001<br />
                     tol = 0.00001<br />
                     smallnum = 1e-8<br />
@@ -28,7 +28,7 @@ export const execute = {
                 <>
                     <b>New values:</b><br />
                     maxit = 1000<br />
-                    objmin = 0.000005<br />
+                    objmin = 0.000001<br />
                     delmin = 0.00001<br />
                     tol = 0.00001<br />
                     smallnum = 1e-8<br />
@@ -38,7 +38,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                changeSystemControlsValue({maxit: 1000, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
+                changeSystemControlsValue({maxit: 1000, objmin: 0.000001, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
             ]
         }
     ]
