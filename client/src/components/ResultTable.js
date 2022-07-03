@@ -28,82 +28,48 @@ class ResultTable extends Component {
 
     onSearchRequest(event) {
 //        console.log('In ResultTable.onSearchRequest this=',this,'event=',event);
-        var errorMsg = '';
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            errorMsg += 'No free independent variables; ';
-        }
-        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
-            errorMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
-        }
-        if (Number.isNaN(this.props.objective_value)) {
-            errorMsg += 'Objective Value is Not a Number. Check constraint values; ';
+            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
-                errorMsg += (element.name + ' constraints are inconsistent; ');
+                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
             }
         });
-        if (errorMsg !== '') {
-            displayMessage(errorMsg, 'danger', 'Errors', '/docs/Help/errors.html');
-        } else {
-            var old_objective_value = this.props.objective_value.toPrecision(4);
-            this.props.saveAutoSave();
-            this.props.search();
-            const { store } = this.context;
-            var design = store.getState();
-            var new_objective_value = design.model.result.objective_value.toPrecision(4)
-            logUsage('event', 'ActionSearch', { event_label: 'Button ' + old_objective_value + ' --> ' + new_objective_value});
-        }
+        var old_objective_value = this.props.objective_value.toPrecision(4);
+        this.props.saveAutoSave();
+        this.props.search();
+        const { store } = this.context;
+        var design = store.getState();
+        var new_objective_value = design.model.result.objective_value.toPrecision(4)
+        logUsage('event', 'ActionSearch', { event_label: 'Button ' + old_objective_value + ' --> ' + new_objective_value});
     }
 
     onSeekRequest(event) {
 //        console.log('In ResultTable.onSeekRequest this=',this,'event=',event);
-        var errorMsg = '';
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            errorMsg += 'No free independent variables; ';
-        }
-        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && Number.isNaN(element.value) ? total+1 : total+0}, 0) !== 0) {
-            errorMsg += 'One (or more) Independent Variable(s) is (are) Not a Number; ';
-        }
-        if (Number.isNaN(this.props.objective_value)) {
-            errorMsg += 'Objective Value is Not a Number. Check constraint values; ';
+            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#seekErr');
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
-                errorMsg += (element.name + ' constraints are inconsistent; ');
+                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#seekErr');
             }
         });
-        this.props.symbol_table.forEach((element) => { // For each Symbol Table entry
-            if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
-                let validmin = element.validmin === -Number.MIN_VALUE ? '-Number.MIN_VALUE' : element.validmin;
-                if (element.value <= element.validmin) {
-                    errorMsg += (element.name + ' has an Invalid Value. It is less than or equal to ' + validmin + '; ');
-                }
-                let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax;
-                if (element.value >= element.validmax) {
-                    errorMsg += (element.name + ' has an Invalid Value. It is greater than or equal to ' + validmax + '; ');
-                }
-            }
-        });
-        if (errorMsg !== '') {
-            displayMessage(errorMsg, 'danger', 'Errors', '/docs/Help/errors.html');
-        } else {
-            var result = this.props.symbol_table.find( // Find free variable matching the current variable name
-                (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
+        var result = this.props.symbol_table.find( // Find free variable matching the current variable name
+            (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
+        );
+        if (result === undefined) { // Was matching free variable not found
+            // Set default name to the First free variable. There must be at least one
+            // This duplicates the UI render code algorithm - be careful and make them match!
+            result = this.props.symbol_table.find( // Find first free variable
+                (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
             );
-            if (result === undefined) { // Was matching free variable not found
-                // Set default name to the First free variable. There must be at least one
-                // This duplicates the UI render code algorithm - be careful and make them match!
-                result = this.props.symbol_table.find( // Find first free variable
-                    (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
-                );
-            }
-            this.setState({
-                seek_modal: !this.state.seek_modal,
-                seek_name: result.name,
-                seek_minmax: MIN,
-            });
         }
+        this.setState({
+            seek_modal: !this.state.seek_modal,
+            seek_name: result.name,
+            seek_minmax: MIN,
+        });
     }
 
     onSeekContextHelpButton(event) {

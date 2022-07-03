@@ -263,7 +263,7 @@ the design is **not** feasible.
 Specifically, the Search feature is available only when constraints are violated to the extent that 
 the Objective Value is greater than OBJMIN. 
 If desired, use the [File : Preferences](menus.html#FilePreferences) menu 
-or the tweakPrefs [execute](menus.html#ActionExecute) script to adjust the value of OBJMIN. 
+or the improvePrecision [execute](menus.html#ActionExecute) script to adjust the value of OBJMIN. 
 
 See also:   
  - [Search](search.html)   
@@ -300,7 +300,7 @@ the design **is** feasible.
 Specifically, the Seek feature is available only when no constraints are violated 
 or constraints are violated only to the extent that the Objective Value is less than OBJMIN. 
 If desired, use the [File : Preferences](menus.html#FilePreferences) menu 
-or the tweakPrefs [execute](menus.html#ActionExecute) script to adjust the value of OBJMIN. 
+or the improvePrecision [execute](menus.html#ActionExecute) script to adjust the value of OBJMIN. 
 
 The Seek feature does not operate on [Calculation Inputs](/docs/Help/terminology.html#calcInputs). 
 
@@ -336,7 +336,7 @@ The Action : Trade menu item is enabled only when the design is **not** feasible
 Specifically, the Trade feature is available when constraints are violated to the extent that 
 the Objective Value is greater than OBJMIN. 
 If desired, use the [File : Preferences](menus.html#FilePreferences) menu 
-or the tweakPrefs [execute](menus.html#ActionExecute) script to adjust the value of OBJMIN. 
+or the improvePrecision [execute](menus.html#ActionExecute) script to adjust the value of OBJMIN. 
 
 See also:   
  - [Trade](trade.html)   
@@ -408,7 +408,7 @@ various tasks for the user.
 For example, the "Welcome" scripts that run when the ODOP:Spring app is started from 
 the SpringDesignSoftware.org Getting-Started page are implemented this way. 
   
-Typically, users will see only the "tweakPrefs" script available for selection. 
+Typically, users will see only the "improvePrecision" script available for selection. 
 This script will alter a group of "preference" values to improve the precision of search results. 
 Specifically, after running this script, the Search process will run longer and expend more effort 
 to refine the results by perhaps an extra significant digit. 

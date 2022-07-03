@@ -140,7 +140,7 @@ export const execute = {
                     While not necessary for the solution of this problem, 
                     new preference values have been imposed to illustrate how it is done in a Demo session.
                     Look at the <b>File : Preferences</b> menu to see the details.
-                    The values are the same as provided by running the <b>Action : Execute : tweakPrefs</b> 
+                    The values are the same as provided by running the <b>Action : Execute : improvePrecision</b> 
                     &nbsp; menu item.
                     </p>
                     

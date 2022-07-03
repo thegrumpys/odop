@@ -52,8 +52,8 @@ export const execute = {
 
                     <p>
                     The <b>Action : Execute</b> menu provides the ability to run pre-configured command sequences.
-                    The entry named "tweakPrefs" provides an adjustment to a set of search Preferences.
-                    Running tweakPrefs will increase the precision of the search result at the expense
+                    The entry named "improvePrecision" provides an adjustment to a set of search Preferences.
+                    Running improvePrecision will increase the precision of the search result at the expense
                     of longer search run time.   
                     </p>
                     <br />

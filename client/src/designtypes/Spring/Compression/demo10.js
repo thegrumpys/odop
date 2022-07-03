@@ -256,7 +256,7 @@ export const execute = {
                     <p>
                     Separately, in the interest of obtaining a high precision result, 
                     the demo session has established the same set of search algorithm tuning parameters 
-                    that are described in the <b>Action : Execute : tweakPrefs</b> menu item.
+                    that are described in the <b>Action : Execute : improvePrecision</b> menu item.
                     </p>
                 </>
             ),

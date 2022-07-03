@@ -39,7 +39,7 @@ For example, coil spring design types utilize:
     * size.js<sup> ** </sup>
     * catalog.js<sup> ** </sup>
     * execute.js<sup> ** </sup> &nbsp;  (references exec, tutor & demo)
-        * execxx.js &nbsp; (e.g. tweakPrefs.js)
+        * execxx.js &nbsp; (e.g. improvePrecision.js)
         * tutorxx.js
         * demoxx.js
     * endtypes.json
