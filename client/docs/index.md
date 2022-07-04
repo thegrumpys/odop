@@ -33,6 +33,8 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Seek](Help/seek.html)
 * [Trade](Help/trade.html)
 * [Reports](Help/reports.html)
+* [Alerts](Help/alerts.html)
+* [Errors](Help/errors.html)
 * [Printing](Help/htt.html#printing)
 * [Help Lookup](Help/helpLookup.html)
 * [Hints, Tips and Tricks](Help/htt.html)

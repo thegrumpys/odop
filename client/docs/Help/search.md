@@ -23,6 +23,9 @@ If a solution that meets all of these goals, is not available,
 the search process converges to a compromise. 
 Typically, this compromise violates multiple constraints.
 
+Search stops when it finds the first feasible design (Objective Value less than OBJMIN). 
+In order to optimize a design, see [Seek](/docs/Help/seek.html). 
+
 While the ODOP software is modular and can potentially support multiple numerical search algorithms, 
 only one SEARCH algorithm is available in the software at this time. 
 It is a "logic" method of compact implementation. 
@@ -67,7 +70,7 @@ the remaining constraint violations (if any) may be somewhat random.
 Adjust these internal control settings with the [File : Preferences](menus.html#FilePreferences) menu item. 
 
 #### MAXIT   
-The maximum number of search pattern moves allowed before a notification is sent to the user (default=100). 
+The maximum number of search pattern moves allowed before a notification is sent to the user (default=600). 
 Each iteration requires a minimum of N+1 and a maximum of 2N+1 calls to the equation set routine, 
 where N is the number of free independent variables. 
 
@@ -80,7 +83,7 @@ The default of 1.0 implies a starting exploration of 5% of the parameter value.
 The step size convergence criterion (default=1.0E-04). 
 
 #### OBJMIN   
-The convergence criterion for minimum objective function value (default=5.0E-05). 
+The convergence criterion for minimum objective function value (default=1.0E-05). 
 
 #### TOL   
 The pattern break and step cut criterion. 
@@ -90,10 +93,9 @@ i.e.: if NEW\_OBJ+TOL*OLD\_OBJ < OLD_OBJ then (continue with pattern).
 The default value is TOL=1.0E-04 (i.e. TOL=0.0001). 
 In general, larger values of TOL will cause a shorter, less accurate search. 
 Smaller values of TOL will cause a longer search. 
-Extremely small values of TOL (significantly less than 1.0E-08) 
-risk causing the comparison to fall off the computer's word length. 
-The result is effectively TOL=0.0 producing a failed search. 
-Values of TOL greater than 1.0E-02 may result in searches 
+Values of TOL on the scale of 1.0E-08 or smaller 
+may not change the result as compared to values closer to the default. 
+Values of TOL greater than 1.0E-02 (0.01) may result in searches 
 that are too inaccurate to be used effectively by SEEK, and TRADE. 
  
  **Notes:**   

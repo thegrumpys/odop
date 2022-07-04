@@ -17,6 +17,8 @@ The entries appear in an order ranked from more general and introductory to more
 * [Seek](/docs/Help/seek.html)
 * [Trade](/docs/Help/trade.html)
 * [Reports](/docs/Help/reports.html)
+* [Alerts](/docs/Help/alerts.html)
+* [Errors](/docs/Help/errors.html)
 * [Printing](/docs/Help/htt.html#printing)
 * [Help Lookup](/docs/Help/helpLookup.html)
 * [Hints, Tips and Tricks](/docs/Help/htt.html)

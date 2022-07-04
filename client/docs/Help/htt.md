@@ -145,12 +145,16 @@ ___
 
 ## NaN = "Not a Number"   
 If you see "NaN" where you expect to see a number, 
-it is likely because the software is dealing with a computational issue like division by zero. 
+it is likely because the software has encountered a computational issue like division by zero. 
 It is possible that a single calculation problem will propagate NaN into many output values. 
 
-Report 1 of the Spring design types provides warning messages for physically unrealizable 
-spring designs that may be the source of NaN and other computational difficulty. 
-So, if you encounter NaN where you expect a numeric value, check Report 1 for additional messages. 
+The Alerts facility (Alerts button) provides warning messages for physically unrealizable 
+designs that may be the source of NaN and other computational difficulty. 
+So, if you encounter NaN where you expect a numeric value, 
+examine the Alerts for additional messages. 
+
+See Also:   
+ - [Alerts](/docs/Help/alerts.html)   
 
 ___
 
@@ -187,6 +191,7 @@ ___
 
 ## Off-line Operation 
 Off-line operation is not currently supported. 
+
 If a design session is in progress when network connectivity is lost, 
 it is possible that design activity can continue but it will not be possible to 
 save into the design library or open new designs from the library 

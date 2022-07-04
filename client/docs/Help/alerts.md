@@ -149,7 +149,7 @@ ___
 <a id="Constraint_Inconsistency"></a>  
 ___
 
-## Inverted Constraint Range / Constraint_Inconsistency 
+## Inverted Constraint Range / Constraint Inconsistency 
 Constraints on the associated variable are inconsistent. 
 Specifically, the value of the MAX constraint is less than the MIN constraint; 
 the value of the MIN constraint is greater than the MAX constraint. 
