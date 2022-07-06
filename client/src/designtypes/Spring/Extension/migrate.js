@@ -293,6 +293,10 @@ export function migrate(design) {
         design.symbol_table[34].validmin = -Number.MAX_VALUE; // F1_IT_Margin
         design.symbol_table[34].validmin = -Number.MIN_VALUE; // Energy
         design.symbol_table[42].validmin = -Number.MAX_VALUE; // Inactive_Coils
+        design.symbol_table[57].validmin = -Number.MIN_VALUE; // End_ID
+        design.symbol_table[58].validmin = -Number.MIN_VALUE; // Extended_End_ID
+        design.symbol_table[59].validmin = -Number.MIN_VALUE; // L_End
+        design.symbol_table[60].validmin = -Number.MIN_VALUE; // L_Extended_End
         design.symbol_table[61].validmin = -Number.MIN_VALUE; // Hook_Deflect_Allow
         design.symbol_table[64].validmin = -Number.MAX_VALUE; // tbase010
         design.symbol_table[65].validmin = -Number.MAX_VALUE; // tbase400
