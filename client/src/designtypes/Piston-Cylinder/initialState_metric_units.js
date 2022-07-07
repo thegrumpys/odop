@@ -111,5 +111,5 @@ export const initialState = {
         "termination_condition": ""
     },
     "jsontype": "ODOP",
-    "units": "US"
+    "units": "Metric"
 };
