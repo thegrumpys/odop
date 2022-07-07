@@ -110,6 +110,8 @@ export function migrate(design) {
             }
         });
         design.symbol_table[ 0].validmin = -Number.MAX_VALUE; // PRESSURE
+        design.symbol_table[ 1].validmin =  Number.MIN_VALUE; // RADIUS
+        design.symbol_table[ 2].validmin =  Number.MIN_VALUE; // THICKNESS
         design.symbol_table[ 3].validmin = -Number.MAX_VALUE; // FORCE
         design.symbol_table[ 5].validmin = -Number.MAX_VALUE; // STRESS
         migrated_design.version = '7'; // last thing... set the migrated model version
