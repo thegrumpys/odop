@@ -138,6 +138,7 @@ export function migrate(design) {
         if (design.symbol_table[ 3].value > 7) { // Material table expansion
             ++design.symbol_table[ 3].value;
         };
+        design.symbol_table[3].table = 'Solid/mat_us';  // Incorporate revised material file naming 
         migrated_design.version = '9'; // last thing... set the migrated model version
     case '9':
         // Current model version
