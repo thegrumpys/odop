@@ -68,7 +68,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Density",
-            "value": 0.0,
+            "value": 1.0,
             "units": "g/cm3",
             "lmin": 0,
             "lmax": 0,
