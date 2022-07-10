@@ -633,22 +633,6 @@ export const initialState = {
         },
         {
             "input": true,
-            "name": "Inactive_Coils",
-            "value": 0.0,
-            "units": "coils",
-            "lmin": 0,
-            "lmax": 0,
-            "cmin": 0,
-            "cmax": 0,
-            "validmin": -Number.MAX_VALUE,
-            "validmax": Number.MAX_VALUE,
-            "sdlim": 0.0,
-            "tooltip": "Number of coils not contributing to deflection. Depends on End_Type.",
-            "type": "calcinput",
-            "hidden": true
-        },
-        {
-            "input": true,
             "name": "Density",
             "value": 0.036,
             "units": "lb/cu-in",
