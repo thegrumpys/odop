@@ -26,7 +26,7 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 
     ks = kc + 0.615 / x[o.Spring_Index];
 
-    x[o.Coils_A] = p[o.Coils_T] + x[o.Hook_Deflect_All] - x[o.Inactive_Coils];
+    x[o.Coils_A] = p[o.Coils_T] + x[o.Hook_Deflect_All];
 
     temp = x[o.Spring_Index] * x[o.Spring_Index];
     x[o.Rate] = x[o.Hot_Factor_Kh] * x[o.Torsion_Modulus] * x[o.Mean_Dia] /
@@ -183,30 +183,7 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
     temp = Math.exp(0.105 * x[o.Spring_Index]);
     x[o.Stress_Init_Lo] = x[o.SI_Lo_Factor] / temp;
     x[o.Stress_Init_Hi] = x[o.SI_Hi_Factor] / temp;
-//
-//    if stress_init_lo ^= zero
-//       then fs_si_lo=stress_initial/stress_init_lo;
-//       else fs_si_lo=zero;
-    if (x[o.Stress_Init_Lo] !== zero) {
-        x[o.FS_SI_Lo] = x[o.Stress_Initial] / x[o.Stress_Init_Lo];
-    }
-    else {
-        x[o.FS_SI_Lo] = zero;
-    }
-    
-//    if stress_initial ^= zero
-//       then fs_si_hi=stress_init_hi/stress_initial;
-//       else fs_si_hi=zero;
-    if (x[o.Stress_Initial] !== zero) {
-        x[o.FS_SI_Hi] = x[o.Stress_Init_Hi] / x[o.Stress_Initial];
-    }
-    else {
-        x[o.FS_SI_Hi] = zero;
-    }
-    
-//    f1_it_margin= force_1-initial_tension;
-    x[o.F1_IT_Margin] = p[o.Force_1] - p[o.Initial_Tension];
- 
+
      x[o.Energy] = 0.5 * x[o.Rate] * (x[o.Deflect_2] * x[o.Deflect_2] - x[o.Deflect_1] * x[o.Deflect_1]);
     
 //    console.log('In eqnset p=',p,' x=',x);
