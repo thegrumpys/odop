@@ -11,6 +11,7 @@ This topic covers various points that may allow a better user experience with th
  - [Maximizing content visible in Help](htt.html#maxVis)  
  - [NaN = "Not a Number"](htt.html#nan)  
  - [Browser refresh and back / forward](htt.html#browserRefresh)  
+ - [AutoFix Feature](htt.html#autoFix)  
  - [AutoSave Feature](htt.html#autoSave)  
  - [Off-line Operation](htt.html#offlineOps)  
  - [Bookmark the app](htt.html#bookmark)  
@@ -177,6 +178,29 @@ and browser back / forward.
 
 ___
 
+<a id="autoFix"></a>  
+___
+
+## AutoFix Feature   
+The [AutoFix](/docs/Help/terminology.html#autoFix) feature 
+automatically sets Fixed status on variables modified by the user. 
+It is enabled by default. 
+
+The AutoFix feature may be enabled / disabled via the preference value "enable_auto_fix"
+in File : Preferences. 
+
+The AutoFix feature is helpful in that it eliminates the surprise experienced by new users 
+when Search modifies a value that they thought that had established. 
+The downside of AutoFix is that tends to create over-specified design situations 
+which can be difficult to recognize. 
+
+See Also:
+ - [Terminology AutoFix](/docs/Help/terminology.html#autoFix)  
+ - [Terminology Fix & Free](/docs/Help/terminology.html#fix)  
+ - [Design Situations](/docs/Help/designSituations.html)  
+
+___
+
 <a id="autoSave"></a>  
 ___
 
@@ -281,17 +305,19 @@ ___
 ___
 
 ## Printing 
-Use the print features of the browser. 
+The Report pages offer a **Print** button that directly invokes the printing features of your browser. 
+In order to print Advanced View main page or Calculator View main page,
+you must manually invoke the print features of your browser. 
 
 Depending on the browser and operating system, it may be possible to 
 "print" into a local .PDF file. 
-Again, depending on the operating system, browser, web page 
-(Advanced View main page or Calculator View main page versus Report pages) 
-and selected paper size, 
+Again, depending on the browser, operating system, selected paper size, and web page 
+(Advanced View main page or Calculator View main page versus Report pages), 
 it may be necessary to adjust the print scale to obtain optimum results. 
-For example, with Chromium based browsers like Google Chrome and Microsoft Chromium Edge 
+For example, with Chromium based browsers like Google Chrome and Microsoft Chromium Edge, 
 when US letter size paper is selected, 
 a print scale of 79% may produce the best results for the Advanced View main page or Calculator View main page. 
+
 In order to set print scale with Chromium Edge use the sequence: 
 Settings and more / Print / Printer = Microsoft Print to PDF / More settings / Scale (%) = 79. 
 
