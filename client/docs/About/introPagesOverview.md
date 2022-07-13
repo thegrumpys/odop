@@ -31,18 +31,18 @@ For example, see:
    + Overview of concepts
    + Search, Seek and Trade features   
 
-*  [Getting Started](/docs/Help/gettingStarted.html)  
+*  [Launching the ODOP program](/docs/Help/launchODOP.html)  
+   + Link to Utilizing Help on wide-screen monitors
+   + Link to User Accounts page
+   + Selecting a Design Type and a starting design  
+
+*  [Getting Started - less technical](/docs/Help/gettingStarted.html)  
    + Rectangular Solid design type versus Spring design types
    + Link to design process flow diagram
    + Link to launch the ODOP program
    + Tour of the ODOP main page using the Rectangular Solid design type
    + Introduction to Demo and Tutorial features
    + Link to Getting Started with the Spring Tutorial and Demo  
-
-*  [Launching the ODOP program](/docs/Help/launchODOP.html)  
-   + Link to Utilizing Help on wide-screen monitors
-   + Link to User Accounts page
-   + Selecting a Design Type and a starting design  
 
 *  [Getting Started With the Spring Tutorial and Demo](/docs/Help/gettingStartedSpring.html)  
    + Steps required to utilize the spring design Demo and Tutorial
