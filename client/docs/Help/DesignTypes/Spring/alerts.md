@@ -9,6 +9,7 @@ Alerts common to all round-wire coil springs
  - [Over-design concern](alerts.html#OverDesign)  
  - [Coils_A is less than 1](alerts.html#Coils_A_LT_1)  
  - [Spring Index manufacturability concern](alerts.html#SI_manufacturability)  
+ - [Cycle_Life calculation is not available](alerts.html#Cycle_LifeNA)  
  - [Value of Tensile is suspect](alerts.html#TensileValueSuspect)  
 
 ___
@@ -125,6 +126,25 @@ Spring index less than 4 is considered "difficult to manufacture".
 Spring index greater than 25 is considered "difficult to control".  
 
 Check with the spring manufacturer regarding capabilities and costs. 
+
+___
+
+<a id="Cycle_LifeNA"></a>  
+___
+
+##  Cycle_Life calculation is not available
+ODOP:Spring is capable of directly calculating Cycle_Life only for materials contained in the materials table. 
+The current setting of Prop_Calc_Method indicates that material properties are user supplied, 
+thus there is not enough information available to directly calculate cycle life. 
+
+The FS_CycleLife variable is the only way of gaging cycle life for user defined material properties (Prop_Calc_Method = 2 and 3). 
+
+If Cycle_Life has either MIN or MAX constraints enabled, Search will likely not be able to find a solution
+that is judged to be FEASIBLE. 
+
+See Also: 
+ - [Spring Overview - cycle life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
+ - Report 2
 
 ___
 
