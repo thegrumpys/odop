@@ -95,6 +95,25 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)' 
         });
     }
+    if (design.model.symbol_table[o.Prop_Calc_Method].value !== 1) {
+        if (design.model.symbol_table[o.Cycle_Life].lmin & CONSTRAINED || design.model.symbol_table[o.Cycle_Life].lmax & CONSTRAINED) {
+            addAlert({
+                element: design.model.symbol_table[o.Cycle_Life],
+                name: design.model.symbol_table[o.Cycle_Life].name, 
+                message: design.model.symbol_table[o.Cycle_Life].name + ' calculation not available',
+                severity: 'Warn',
+                help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA)'
+            });
+        } else {
+            addAlert({
+                element: design.model.symbol_table[o.Cycle_Life],
+                name: design.model.symbol_table[o.Cycle_Life].name, 
+                message: design.model.symbol_table[o.Cycle_Life].name + ' calculation not available',
+                severity: 'Info',
+                help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA)'
+            });
+        }
+    }
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
         addAlert({
             element: design.model.symbol_table[o.Tensile],
