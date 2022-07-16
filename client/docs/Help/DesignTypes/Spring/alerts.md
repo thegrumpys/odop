@@ -10,6 +10,7 @@ Alerts common to all round-wire coil springs
  - [Coils_A is less than 1](alerts.html#Coils_A_LT_1)  
  - [Spring Index manufacturability concern](alerts.html#SI_manufacturability)  
  - [Cycle_Life calculation is not available](alerts.html#Cycle_LifeNA)  
+ - [Cycle_Life not defined beyond yield](alerts.html#Cycle_LifeNA_FS_2)  
  - [Value of Tensile is suspect](alerts.html#TensileValueSuspect)  
 
 ___
@@ -126,7 +127,7 @@ ___
 <a id="Cycle_LifeNA"></a>  
 ___
 
-##  Cycle_Life calculation is not available
+## Cycle_Life calculation is not available 
 ODOP:Spring is capable of directly calculating Cycle_Life only for materials contained in the materials table. 
 The current setting of Prop_Calc_Method indicates that material properties are user supplied, 
 thus there is not enough information available to directly calculate cycle life. 
@@ -139,6 +140,20 @@ that is judged to be FEASIBLE.
 See Also: 
  - [Spring Overview - cycle life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
  - Report 2
+
+___
+
+<a id="Cycle_LifeNA_FS_2"></a>  
+___
+
+## Cycle_Life not defined beyond yield 
+The current design has a Factor of Safety at the second working point (FS_2) that is less than 1.0.
+This means that the current set of inputs have resulted in a stress at point 2 
+(maximum operating load) that exceeds the maximum allowable stress. 
+The wire is at or beyond its yield point. 
+In this situation, the cycle life calculation is not meaningful. 
+
+Recommendations ... 
 
 ___
 
@@ -156,6 +171,10 @@ ___
 ___
 
 ##  
+  
+  &nbsp;   
+  
+  &nbsp;   
   
   &nbsp;   
   

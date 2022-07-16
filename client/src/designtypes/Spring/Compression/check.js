@@ -114,6 +114,25 @@ export function check(store) {        /*    Compression  Spring  */
             });
         }
     }
+    if (design.model.symbol_table[o.FS_2].value <= 1.0) {
+        if (design.model.symbol_table[o.Cycle_Life].lmin & CONSTRAINED || design.model.symbol_table[o.Cycle_Life].lmax & CONSTRAINED) {
+            addAlert({
+                element: design.model.symbol_table[o.Cycle_Life],
+                name: design.model.symbol_table[o.Cycle_Life].name, 
+                message: design.model.symbol_table[o.Cycle_Life].name + ' not defined beyond yield',
+                severity: 'Warn',
+                help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA_FS_2)'
+            });
+        } else {
+            addAlert({
+                element: design.model.symbol_table[o.Cycle_Life],
+                name: design.model.symbol_table[o.Cycle_Life].name, 
+                message: design.model.symbol_table[o.Cycle_Life].name + ' not defined beyond yield',
+                severity: 'Info',
+                help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA_FS_2)'
+            });
+        }
+    }
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
         addAlert({
             element: design.model.symbol_table[o.Tensile],
