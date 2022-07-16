@@ -67,6 +67,7 @@ ___
 ## FS_CycleLife MIN is not set. 
 A more restrictive Life_Category has been selected but 
 the corresponding constraint on FS_CycleLife is not enabled. 
+
 Suggest enabling the FS_CycleLife MIN constraint. 
 
 See also: 
@@ -128,17 +129,22 @@ ___
 ___
 
 ## Cycle_Life calculation is not available 
-ODOP:Spring is capable of directly calculating Cycle_Life only for materials contained in the materials table. 
+The Cycle_Life variable (Modified Goodman calculation) is available only for materials contained in the internal materials table. 
 The current setting of Prop_Calc_Method indicates that material properties are user supplied, 
 thus there is not enough information available to directly calculate cycle life. 
 
-The FS_CycleLife variable is the only way of gaging cycle life for user defined material properties (Prop_Calc_Method = 2 and 3). 
+The FS_CycleLife variable (Soderberg calculation) remains as a way of gauging cycle life for user defined materials (Prop_Calc_Method = 2 and 3). 
 
-If Cycle_Life has either MIN or MAX constraints enabled, Search will likely not be able to find a solution
-that is judged to be FEASIBLE. 
+**Note:**   
+In this case of user supplied material properties, 
+if Cycle_Life is Fixed or has either MIN or MAX constraints enabled, 
+Search will likely not be able to find a solution that is judged to be FEASIBLE. 
+
+In order to continue with user supplied material properties,
+disable constraints on Cycle_Life and enable constraints on FS_CycleLife. 
 
 See Also: 
- - [Spring Overview - cycle life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
+ - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
  - Report 2
 
 ___
@@ -150,10 +156,24 @@ ___
 The current design has a Factor of Safety at the second working point (FS_2) that is less than 1.0.
 This means that the current set of inputs have resulted in a stress at point 2 
 (maximum operating load) that exceeds the maximum allowable stress. 
-The wire is at or beyond its yield point. 
-In this situation, the cycle life calculation is not meaningful. 
+For this design, the wire is at or perhaps even beyond its yield point. 
+In this situation, the direct cycle life calculation (Cycle_Life variable - Modified Goodman calculation) is not meaningful. 
 
-Recommendations ... 
+**Note:**   
+In this case of unrealistically high stress at point 2, 
+if Cycle_Life is Fixed or has either MIN or MAX constraints enabled, 
+Search will likely not be able to find a solution that is judged to be FEASIBLE. 
+
+**Recommendations:**   
+Change inputs such that stress at working point 2 (maximum operating load) is reduced. 
+
+Increase | &nbsp; | Decrease  
+---      | ---    | ---  
+Wire_Dia | &nbsp; | Force_2 or M_2 
+ &nbsp;  | &nbsp; | OD_Free  
+
+Perhaps the best approach is to to confirm that one or more of these variables is in Free status 
+and then run Search. 
 
 ___
 
