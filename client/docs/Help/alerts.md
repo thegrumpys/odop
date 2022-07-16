@@ -10,7 +10,7 @@ Severity | Content                                          | Font
  Notice  | constraints that are significantly violated      | Standard (Roman)  
  Info    | insights about aspects of system operation       | Italic  
 
-Informational alerts (Info) alerts also highlight the configuration of 
+Informational (Info) alerts also highlight the configuration of 
 Functionally Determined Constraint Levels [(FDCL)](/docs/Help/terminology.html#fdcl). 
 
 Designs with values outside their valid range are likely physically impossible.
@@ -61,6 +61,8 @@ that will resolve the alerts.
  - [Over-design concern](/docs/Help/DesignTypes/Spring/alerts.html#OverDesign)  
  - [Coils_A is less than 1](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)  
  - [Spring Index manufacturability concern](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)  
+ - [Cycle_Life calculation is not available](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA)  
+ - [Cycle_Life not defined beyond yield](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA_FS_2)  
  - [Value of Tensile is suspect](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)  
  - [Force_1 >= Force_2](/docs/Help/DesignTypes/Spring/Compression/alerts.html#F1_GE_F2)  
  - [L_Free < L_Solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_Free_LT_L_Solid)  

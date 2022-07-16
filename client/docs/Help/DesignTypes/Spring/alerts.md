@@ -10,6 +10,7 @@ Alerts common to all round-wire coil springs
  - [Coils_A is less than 1](alerts.html#Coils_A_LT_1)  
  - [Spring Index manufacturability concern](alerts.html#SI_manufacturability)  
  - [Cycle_Life calculation is not available](alerts.html#Cycle_LifeNA)  
+ - [Cycle_Life not defined beyond yield](alerts.html#Cycle_LifeNA_FS_2)  
  - [Value of Tensile is suspect](alerts.html#TensileValueSuspect)  
 
 ___
@@ -67,11 +68,14 @@ ___
 A more restrictive Life_Category has been selected but 
 the corresponding constraint on FS_CycleLife is not enabled. 
 
+<<<<<<< HEAD
 Selecting a Life_Category gets a corresponding value of %_Tensile_Endur from the internal material table. 
 This value is then used to calculate Stress_Lim_Endur. 
 The MIN constraint on FS_CycleLife must be enabled in order to have Search achieve designs 
 that do not exceed the designated Stress_Lim_Endur. 
 
+=======
+>>>>>>> refs/remotes/origin/703
 Suggest enabling the FS_CycleLife MIN constraint. 
 
 See also: 
@@ -132,19 +136,52 @@ ___
 <a id="Cycle_LifeNA"></a>  
 ___
 
-##  Cycle_Life calculation is not available
-ODOP:Spring is capable of directly calculating Cycle_Life only for materials contained in the materials table. 
+## Cycle_Life calculation is not available 
+The Cycle_Life variable (Modified Goodman calculation) is available only for materials contained in the internal materials table. 
 The current setting of Prop_Calc_Method indicates that material properties are user supplied, 
 thus there is not enough information available to directly calculate cycle life. 
 
-The FS_CycleLife variable is the only way of gaging cycle life for user defined material properties (Prop_Calc_Method = 2 and 3). 
+The FS_CycleLife variable (Soderberg calculation) remains as a way of gauging cycle life for user defined materials (Prop_Calc_Method = 2 and 3). 
 
-If Cycle_Life has either MIN or MAX constraints enabled, Search will likely not be able to find a solution
-that is judged to be FEASIBLE. 
+**Note:**   
+In this case of user supplied material properties, 
+if Cycle_Life is Fixed or has either MIN or MAX constraints enabled, 
+Search will likely not be able to find a solution that is judged to be FEASIBLE. 
+
+In order to continue with user supplied material properties,
+disable constraints on Cycle_Life and enable constraints on FS_CycleLife. 
 
 See Also: 
- - [Spring Overview - cycle life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
+ - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
  - Report 2
+
+___
+
+<a id="Cycle_LifeNA_FS_2"></a>  
+___
+
+## Cycle_Life not defined beyond yield 
+The current design has a Factor of Safety at the second working point (FS_2) that is less than 1.0.
+This means that the current set of inputs have resulted in a stress at point 2 
+(maximum operating load) that exceeds the maximum allowable stress. 
+For this design, the wire is at or perhaps even beyond its yield point. 
+In this situation, the direct cycle life calculation (Cycle_Life variable - Modified Goodman calculation) is not meaningful. 
+
+**Note:**   
+In this case of unrealistically high stress at point 2, 
+if Cycle_Life is Fixed or has either MIN or MAX constraints enabled, 
+Search will likely not be able to find a solution that is judged to be FEASIBLE. 
+
+**Recommendations:**   
+Change inputs such that stress at working point 2 (maximum operating load) is reduced. 
+
+Increase | &nbsp; | Decrease  
+---      | ---    | ---  
+Wire_Dia | &nbsp; | Force_2 or M_2 
+ &nbsp;  | &nbsp; | OD_Free  
+
+Perhaps the best approach is to to confirm that one or more of these variables is in Free status 
+and then run Search. 
 
 ___
 
@@ -162,6 +199,10 @@ ___
 ___
 
 ##  
+  
+  &nbsp;   
+  
+  &nbsp;   
   
   &nbsp;   
   
