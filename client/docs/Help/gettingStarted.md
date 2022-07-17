@@ -1,5 +1,12 @@
 # Getting Started   
 
+This page utilizes the Rectangular Solid demonstration case to provide a quick 
+and less technical introduction to the ODOP software. 
+For a more spring design specific introduction, see: &nbsp; 
+[Getting Started With the Spring Design Tutorial and Demo](gettingStartedSpring.html)
+
+<hr/>
+
  Getting started with any computer program, ODOP included, 
  is usually a matter of ...  Try it.  You'll like it !   
  

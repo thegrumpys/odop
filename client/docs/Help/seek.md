@@ -25,14 +25,25 @@ The search will simply stop and allow the user to examine the results.
 This is the reason why the feasible result of a search may be very close to one constraint, 
 yet very far away from others. 
 
-Seek should have a feasible design as its starting point. 
-At a minimum, it should be understood that a feasible design is available. 
+Seek will require a feasible design as its starting point. 
 In the case that a Search has terminated without finding a feasible point, 
 use of the [Trade](trade.html) feature may be appropriate. 
 
 Seek will automatically invoke SEARCH to maximize or minimize the indicated 
 variable subject to the prevailing constraints and FIXes. 
-SEEK assumes the availability of a region of feasible solutions. 
+
+When examining the results of Seek, 
+you should expect that multiple constraints are violated by a small amount. 
+In this situation, the design may be classified as "CLOSE TO FEASIBLE" or even "NOT FEASIBLE". 
+This is normal and expected. 
+The solution algorithm is finding a balance between the rewards and penalties of violating those constraints 
+
+In the world of linear programming, 
+optimal solutions are found at the intersection of constraints. 
+While ODOP deals with problems that are potentially highly non-linear, 
+many of those linear programming principles still apply. 
+You should expect the optimal solution to be at the intersection of multiple constraints. 
+Having multiple constraints violated (by a small amount) is an indicator that the solution is correct. 
 
 ## Seek examples: 
 * SEEK  MIN  Weight
