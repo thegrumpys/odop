@@ -3,7 +3,7 @@ export function getExecuteNames() {
     var result;
     if (config.node.env !== "production") {
       result = [
-          'mkStartup',
+        'mkPCylStartups'         // Script to make multiple Startup entries from Load Initial State files
       ];
     } else {
       result = [];

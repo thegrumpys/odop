@@ -3,11 +3,7 @@ export function getExecuteNames() {
     var result;
     if (config.node.env !== "production") {
       result = [
-          'mk70PoundGoldBar',
-          'mkStandardGoldBar',
-          'mkStartup',
-          'mkUSPS_MachinableParcels',
-          'mkUSPS_MaxVolume',
+          'mkSolidStartups',
       ];
     } else {
       result = [];
