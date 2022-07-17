@@ -125,10 +125,6 @@ export function init(store, p, x) {
        *  copy from end type table to Calculation Inputs  
        *  check these values.     See AS Design Hdbk. p52  
        */
-//
-//end_type        = end_name(end_type_index);
-//inactive_coils  = inact_coil_tbl(end_type_index);
-    x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
 
     //if end_type_index > c_end_num then
 //  hook_deflect_all=hda_tbl(end_type_index-c_end_num);

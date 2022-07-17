@@ -286,13 +286,9 @@ export function migrate(design) {
         design.symbol_table[ 4].validmin = -Number.MIN_VALUE; // End_Extension
         design.symbol_table[11].validmin = -Number.MIN_VALUE; // Deflect_1
         design.symbol_table[17].validmin = -Number.MIN_VALUE; // L_Stroke
-        design.symbol_table[19].validmin = 1; // Spring_Index
+        design.symbol_table[19].validmin = 1;                 // Spring_Index
         design.symbol_table[27].validmin = -Number.MIN_VALUE; // Cycle_Life
-        design.symbol_table[32].validmin = -Number.MAX_VALUE; // FS_SI_Lo
-        design.symbol_table[33].validmin = -Number.MAX_VALUE; // FS_SI_Hi
-        design.symbol_table[34].validmin = -Number.MAX_VALUE; // F1_IT_Margin
         design.symbol_table[34].validmin = -Number.MIN_VALUE; // Energy
-        design.symbol_table[42].validmin = -Number.MAX_VALUE; // Inactive_Coils
         design.symbol_table[57].validmin = -Number.MIN_VALUE; // End_ID
         design.symbol_table[58].validmin = -Number.MIN_VALUE; // Extended_End_ID
         design.symbol_table[59].validmin = -Number.MIN_VALUE; // L_End
@@ -303,7 +299,8 @@ export function migrate(design) {
         design.symbol_table[66].validmin = -Number.MAX_VALUE; // const_term
         design.symbol_table[67].validmin = -Number.MAX_VALUE; // slope_term
         design.symbol_table[68].validmin = -Number.MAX_VALUE; // tensile_010
-        design.symbol_table[35].hidden = true; // Inactive_Coils
+        design.symbol_table.splice(42,1);                     // remove (unused) Inactive_Coils
+        design.symbol_table.splice(31,3);                     // remove (unused) FS_SI_Lo, FS_SI_Hi, F1_IT_Margin
         migrated_design.version = '8'; // last thing... set the migrated model version
         displayMessage(
             "The new Alert Facility may highlight previously unrecognized issues saved with earlier designs. Enter \"Alerts\" in Help Lookup and/or contact technical support.",
