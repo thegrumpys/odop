@@ -99,7 +99,7 @@ Values of TOL greater than 1.0E-02 (0.01) may result in searches
 that are too inaccurate to be used effectively by SEEK, and TRADE. 
  
  **Notes:**   
- The improvePrecision execute script 
+ The increasePrecision execute script 
  (available on the [Action : Execute](/docs/Help/menus.html#ActionExecute) menu) 
  can be used to change a group of settings that collectively work to 
  refine the numeric precision of search result. 

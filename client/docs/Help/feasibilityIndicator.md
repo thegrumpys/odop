@@ -22,6 +22,6 @@ Because Search stops if the Objective Value falls below OBJMIN,
 results in the green zone are considered "as good as feasible" or simply just "FEASIBLE".   
  
 The value of OBJMIN may be adjusted on the <b>File : Preferences</b> menu.
-Also, OBJMIN is one of the values set by the improvePrecision script that is reached from the <b>Action : Execute</b> menu.
+Also, OBJMIN is one of the values set by the increasePrecision script that is reached from the <b>Action : Execute</b> menu.
  
  

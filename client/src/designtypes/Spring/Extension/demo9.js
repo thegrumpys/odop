@@ -140,7 +140,7 @@ export const execute = {
                     While not necessary for the solution of this problem, 
                     new preference values have been imposed to illustrate how it is done in a Demo session.
                     Look at the <b>File : Preferences</b> menu to see the details.
-                    The values are the same as provided by running the <b>Action : Execute : improvePrecision</b> 
+                    The values are the same as provided by running the <b>Action : Execute : increasePrecision</b> 
                     &nbsp; menu item.
                     </p>
                     
@@ -150,7 +150,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                changeSystemControlsValue({maxit: 190, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
+                changeSystemControlsValue({maxit: 1000, objmin: 0.000001, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
             ]
         },
         {
