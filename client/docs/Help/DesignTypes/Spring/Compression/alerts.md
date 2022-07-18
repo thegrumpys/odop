@@ -121,7 +121,11 @@ geometric imperfections such as a lack uniformity in coil pitch, minor deviation
 or failure of the ends to be precisely perpendicular to the coil axis 
 become a factor in the real (as opposed to theoretical) force-deflection relationship. 
 Beyond the 80% point, coil to coil contact will produce an increase in spring rate that continues to increase 
+<<<<<<< HEAD
 with additional deflection until the solid condition is reached. 
+=======
+with additional deflection until the solid condition is reached.
+>>>>>>> refs/remotes/origin/703
 Thus, when operating beyond 80% of the available deflection expect forces to be somewhat higher 
 (or deflections to be somewhat lower) than the linear behavior predicted by the equations. 
 
