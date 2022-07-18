@@ -143,7 +143,7 @@ The FS_CycleLife variable (Soderberg calculation) remains as a way of gauging cy
 **Note:**   
 In this case of user supplied material properties, 
 if Cycle_Life is Fixed or has either MIN or MAX constraints enabled, 
-Search will likely not be able to find a solution that is judged to be FEASIBLE. 
+Search is not likely to find a solution that is judged to be FEASIBLE. 
 
 In order to continue with user supplied material properties,
 disable constraints on Cycle_Life and enable constraints on FS_CycleLife. 
@@ -158,7 +158,10 @@ ___
 ___
 
 ## Cycle_Life not defined beyond yield 
-The current design has a Factor of Safety at the second working point (FS_2) that is less than 1.0.
+The load specified in the current design is sufficiently large to cause the wire to yield. 
+The notion of cycle life does not apply. 
+
+More specifically, the current design has a Factor of Safety at the second working point (FS_2) that is less than 1.0.
 This means that the current set of inputs have resulted in a stress at point 2 
 (maximum operating load) that exceeds the maximum allowable stress. 
 For this design, the wire is at or perhaps even beyond its yield point. 
@@ -167,7 +170,7 @@ In this situation, the direct cycle life calculation (Cycle_Life variable - Modi
 **Note:**   
 In this case of unrealistically high stress at point 2, 
 if Cycle_Life is Fixed or has either MIN or MAX constraints enabled, 
-Search will likely not be able to find a solution that is judged to be FEASIBLE. 
+Search is not likely to find a solution that is judged to be FEASIBLE. 
 
 **Recommendations:**   
 Change inputs such that stress at working point 2 (maximum operating load) is reduced. 
@@ -179,6 +182,9 @@ Wire_Dia | &nbsp; | Force_2 or M_2
 
 Perhaps the best approach is to to confirm that one or more of these variables is in Free status 
 and then run Search. 
+
+See also: 
+ - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
 
 ___
 
