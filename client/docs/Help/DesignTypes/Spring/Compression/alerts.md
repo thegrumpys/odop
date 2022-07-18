@@ -26,7 +26,7 @@ Resolve this alert by reducing the value of Force_1 below the value of Force_2.
 
 It should also be possible to 
 confirm that Force_1 is in Free status, 
-confirm that the constraint L_Stroke MIN is enabled with a non-zero constraint level 
+confirm that the constraint L_Stroke MIN is enabled with a greater-than-zero constraint level 
 and then use the Search feature (menu Action : Search or Search button). 
 
 See also: 
@@ -116,12 +116,14 @@ Helical coil compression, extension and torsion springs that have the properties
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
 Howevever, in the real world there are limitations. 
 
-When compression springs are compressed beyond roughly 80% of available deflection 
-any lack of perfect uniformity in coil pitch will become a factor in the real (as opposed to theoretical) force-deflection relationship. 
-Coil to coil contact will produce an increase in spring rate that continues to increase 
+When compression springs are compressed beyond roughly 80% of available deflection, 
+geometric imperfections such as a lack uniformity in coil pitch, minor deviation from cylindric shape 
+or failure of the ends to be precisely perpendicular to the coil axis 
+become a factor in the real (as opposed to theoretical) force-deflection relationship. 
+Beyond the 80% point, coil to coil contact will produce an increase in spring rate that continues to increase 
 with additional deflection until the solid condition is reached.
-Thus when operating beyond 80% of the available deflection expect forces to be somewhat higher (or deflections to be somewhat lower)
-than the linear behavior predicted by the equations.  
+Thus, when operating beyond 80% of the available deflection expect forces to be somewhat higher 
+(or deflections to be somewhat lower) than the linear behavior predicted by the equations. 
 
  See also: 
   - [Restrictions](/docs/About/Legal/Restrictions.html)  
@@ -140,10 +142,12 @@ follow Hooke's Law in that they provide a nominally linear relationship between 
 Howevever, in the real world there are limitations. 
 
 When compression springs are compressed less than roughly 20% of available deflection 
-any lack of perfection in the ends will become a factor in the real (as opposed to theoretical) force-deflection relationship. 
+geometric imperfections such as minor deviation from cylindric shape 
+or failure of the ends to be precisely perpendicular to the coil axis 
+become a factor in the real (as opposed to theoretical) force-deflection relationship. 
 For example, ends that are ground imperfectly perpendicular with the coil axis will decrease the apparent spring rate 
 in a way that that diminishes with additional deflection until the ends are fully seated. 
-Thus when operating within the first 20% of the available deflection expect forces to be somewhat lower (or deflections to be somewhat greater)
+Thus, when operating within the first 20% of the available deflection expect forces to be somewhat lower (or deflections to be somewhat greater)
 than the linear behavior predicted by the equations.  
 
  See also: 

@@ -68,6 +68,11 @@ ___
 A more restrictive Life_Category has been selected but 
 the corresponding constraint on FS_CycleLife is not enabled. 
 
+Selecting a Life_Category gets a corresponding value of %_Tensile_Endur from the internal material table. 
+This value is then used to calculate Stress_Lim_Endur. 
+The MIN constraint on FS_CycleLife must be enabled in order to have Search achieve designs 
+that do not exceed the designated Stress_Lim_Endur. 
+
 Suggest enabling the FS_CycleLife MIN constraint. 
 
 See also: 

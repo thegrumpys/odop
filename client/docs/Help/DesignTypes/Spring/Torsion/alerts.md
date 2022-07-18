@@ -20,9 +20,9 @@ The [Torsion Spring Moment - Deflection Diagram](/docs/Help/DesignTypes/Spring/T
 provides more detail on this point. 
 
 Resolve this alert by reducing the value of M_1 below the value of M_2. 
-It should also be possible to 
-confirm that M_1 is in Free status, 
-confirm that the constraint Stroke MIN is enabled with a non-zero constraint level 
+
+It should also be possible to confirm that M_1 is in Free status, 
+confirm that the constraint Stroke MIN is enabled with a greater-than-zero constraint level 
 and then use the Search feature (menu Action : Search or Search button). 
 
 See also: 
@@ -40,19 +40,19 @@ ___
 
 ## %_Safe_Deflect @ 2 > 80% 
 The second operating point (point 2) has more than 80% of maximum safe deflection. 
-This is not usually a problem. 
-However, you should be aware that Coil to coil contact may cause some inaccuracy in moments and deflections for this point.  
+While this is not usually a problem, 
+be aware that coil to coil contact may cause some inaccuracy in moments and deflections for this point.  
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
 Howevever, in the real world there are limitations. 
 
 When torsion springs are compressed beyond roughly 80% of safe deflection 
-any lack of perfect uniformity in coil pitch will become a factor in the real 
-(as opposed to theoretical) force-deflection relationship. 
+geometric imperfections such as a lack uniformity in coil pitch or minor deviation from cylindric shape 
+become a factor in the real (as opposed to theoretical) force-deflection relationship. 
 Coil to coil contact will produce an increase in spring rate that continues to increase 
 with additional deflection until the maximum safe operating condition is reached. 
-Thus when operating beyond 80% of the safe deflection expect forces to be somewhat higher 
+Thus, when operating beyond 80% of the safe deflection expect forces to be somewhat higher 
 (or deflections to be somewhat lower) 
 than the linear behavior predicted by the equations. 
 
