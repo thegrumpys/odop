@@ -16,6 +16,7 @@ ___
 <a id="F1_GE_F2"></a>  
 ___
 
+Alert entry #C101
 ## Force_1 >= Force_2 
 The force (applied load) at operating point 1 (Force_1) is greater than or equal to the force at operating point 2 (Force_2). 
 
@@ -38,6 +39,7 @@ ___
 <a id="L_Free_LT_L_Solid"></a>  
 ___
 
+Alert entry #C102
 ## L_Free < L_Solid 
 In a compression spring, 
 having free length (L_Free) specified as less than the solid height (L_Solid) is an impossible condition. 
@@ -61,6 +63,7 @@ ___
 <a id="L_2_LT_L_Solid"></a>  
 ___
 
+Alert entry #C103
 ## L_2 < L_Solid 
 In a compression spring, 
 having the length associated with the second operating load (L_2) as less than the solid height (L_Solid) 
@@ -88,6 +91,7 @@ ___
 <a id="FS_Solid_LT_1"></a>  
 ___
 
+Alert entry #C104
 ##  FS_Solid < 1.0 
 This spring may be over-stressed if deflected to solid.
 It may 'set' as in not return to its original free length.
@@ -109,6 +113,7 @@ ___
 <a id="PC_Avail_Deflect2_GT_80"></a>  
 ___
 
+Alert entry #C105
 ## %_Avail_Deflect @ 2 > 80% 
 Coil to coil contact may cause inaccuracy in operating point 2. 
 
@@ -134,6 +139,7 @@ ___
 <a id="PC_Avail_Deflect1_LT_20"></a>  
 ___
 
+Alert entry #C106
 ## %_Avail_Deflect @ 1 < 20% 
 End effects may cause inaccuracy in operating point 1.  
 
@@ -159,6 +165,7 @@ ___
 <a id="buckling"></a>  
 ___
 
+Alert entry #C107
 ## Buckling concern 
 A spring of these dimensions and loading has a tendency to buckle. 
 

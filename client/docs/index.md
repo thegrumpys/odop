@@ -40,7 +40,7 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Help Lookup](Help/helpLookup.html)
 * [Hints, Tips and Tricks](Help/htt.html)
 * [AutoSave](Help/autoSave.html)
-* [Available Design Types](Help/DesignTypes)
+* [Design Types](Help/DesignTypes)
 * [Spring Design](Help/SpringDesign)
 * [About topics](About)   
 

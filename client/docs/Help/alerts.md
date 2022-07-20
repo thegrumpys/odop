@@ -10,7 +10,7 @@ Severity | Content                                          | Font
  Notice  | constraints that are significantly violated      | Standard (Roman)  
  Info    | insights about aspects of system operation       | Italic  
 
-Informational alerts (Info) alerts also highlight the configuration of 
+Informational (Info) alerts also highlight the configuration of 
 Functionally Determined Constraint Levels [(FDCL)](/docs/Help/terminology.html#fdcl). 
 
 Designs with values outside their valid range are likely physically impossible.
@@ -61,6 +61,8 @@ that will resolve the alerts.
  - [Over-design concern](/docs/Help/DesignTypes/Spring/alerts.html#OverDesign)  
  - [Coils_A is less than 1](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)  
  - [Spring Index manufacturability concern](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)  
+ - [Cycle_Life calculation is not available](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA)  
+ - [Cycle_Life not defined beyond yield](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA_FS_2)  
  - [Value of Tensile is suspect](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)  
  - [Force_1 >= Force_2](/docs/Help/DesignTypes/Spring/Compression/alerts.html#F1_GE_F2)  
  - [L_Free < L_Solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_Free_LT_L_Solid)  
@@ -81,6 +83,7 @@ ___
 <a id="Validity_Below"></a>  
 ___
 
+Alert entry #ODOP01
 ## Invalid - Value less than or equal to limit 
 The value of the associated variable is less than the validmin limit defined in the design type's initialState. 
 This means that, given the current input value (for example, a negative diameter), 
@@ -98,6 +101,7 @@ ___
 <a id="Validity_Above"></a>  
 ___
 
+Alert entry #ODOP02
 ## Invalid - Value greater than limit 
 The value of the associated variable is greater than the validmax limit defined in the design type's initialState. 
 This means that, given the current input value, 
@@ -114,6 +118,7 @@ ___
 <a id="Constraint_Below"></a>  
 ___
 
+Alert entry #ODOP03
 ## Invalid Constraint - Less than or equal to limit 
 The value of the associated constraint is less than the validmin limit for the associated variable as defined in the design type's initialState. 
 This means that, given the current input value (for example, a MIN value that allows a negative diameter), 
@@ -131,6 +136,7 @@ ___
 <a id="Constraint_Above"></a>  
 ___
 
+Alert entry #ODOP04
 ## Invalid Constraint - Greater than limit 
 The value of the associated variable is greater than the validmax limit for the associated variable as defined in the design type's initialState. 
 This means that, given the current input value, 
@@ -149,6 +155,7 @@ ___
 <a id="Constraint_Inconsistency"></a>  
 ___
 
+Alert entry #ODOP05
 ## Inverted Constraint Range / Constraint Inconsistency 
 Constraints on the associated variable are inconsistent. 
 Specifically, the value of the MAX constraint is less than the MIN constraint; 
@@ -167,6 +174,7 @@ ___
 <a id="MIN_Violation"></a>  
 ___
 
+Alert entry #ODOP06
 ## Constraint MIN violation 
 The associated variable's MIN constraint is violated by more than a trivial amount. 
 
@@ -177,10 +185,21 @@ In order to resolve this alert:
 
 It is quite possible that the constraint violation in question was created by use of the Search feature. 
 In that case, further use of Search without introducing other changes is unlikely to be helpful. 
-The most productive course of action may be to relax other, perhaps seemingly unrelated, violated constraints and rerun Search. 
+The most productive course of action may be to Free one or more variables currently in Fixed status or 
+relax other, perhaps seemingly unrelated, violated constraints and then run Search again. 
 
 When Search returns a design judged to be NOT FEASIBLE, 
 constraint(s) with the largest violations are the most leveraged and should be examined first. 
+The full set of constraint violations is visible in Advanced View. 
+In Calculator View, individual constraint violations are displayed in the Value Input dialog that results when selecting 
+(clicking on) an Independent or Dependent Variable. 
+
+If Search has returned a design with violated constraints and judged to be NOT FEASIBLE, 
+it is possible that too many variables in Fixed status have caused the design to become over-specified. 
+If it it not possible to completely Free one or more variables currently in Fixed status, 
+perhaps it would be helpful to replace a Fix with MIN and MAX constraints that allow a range of flexibility. 
+Additional information on over-specified designs is available in the 
+[Design situations](/docs/Help/designSituations.html) Help entry. 
 
 See also: 
  - [Constraints](/docs/Help/terminology.html#constraints)
@@ -192,6 +211,7 @@ ___
 <a id="MAX_Violation"></a>  
 ___
 
+Alert entry #ODOP07
 ## Constraint MAX violation 
 The associated variable's MAX constraint is violated by more than a trivial amount. 
 
@@ -202,10 +222,21 @@ In order to resolve this alert:
 
 It is quite possible that the constraint violation in question was created by use of the Search feature. 
 In that case, further use of Search without introducing other changes is unlikely to be helpful. 
-The most productive course of action may be to relax other, perhaps seemingly unrelated, violated constraints and rerun Search. 
+The most productive course of action may be to Free one or more variables currently in Fixed status or 
+relax other, perhaps seemingly unrelated, violated constraints and then run Search again. 
 
 When Search returns a design judged to be NOT FEASIBLE, 
 constraint(s) with the largest violations are the most leveraged and should be examined first. 
+The full set of constraint violations is visible in Advanced View. 
+In Calculator View, individual constraint violations are displayed in the Value Input dialog that results when selecting 
+(clicking on) an Independent or Dependent Variable. 
+
+If Search has returned a design with violated constraints and judged to be NOT FEASIBLE, 
+it is possible that too many variables in Fixed status have caused the design to become over-specified. 
+If it it not possible to completely Free one or more variables currently in Fixed status, 
+perhaps it would be helpful to replace a Fix with MIN and MAX constraints that allow a range of flexibility. 
+Additional information on over-specified designs is available in the 
+[Design situations](/docs/Help/designSituations.html) Help entry. 
 
 See also: 
  - [Constraints](/docs/Help/terminology.html#constraints)
@@ -217,6 +248,7 @@ ___
 <a id="Fix_Violation"></a>  
 ___
 
+Alert entry #ODOP08
 ## Fix Violation 
 The associated Dependent Variable is in Fixed status. 
 Its value differs from the target value established by the Fix by more than a trivial amount.   
@@ -228,10 +260,21 @@ In order to resolve this alert:
 
 It is possible that the Fix violation in question was created by use of the Search feature. 
 In that case, further use of Search without introducing other changes is unlikely to be helpful. 
-The most productive course of action may be to relax other, perhaps seemingly unrelated, violated constraints and rerun Search. 
+The most productive course of action may be to Free one or more variables currently in Fixed status or 
+relax other, perhaps seemingly unrelated, violated constraints and then run Search again. 
 
 When Search returns a design judged to be NOT FEASIBLE, 
 constraint(s) with the largest violations are the most leveraged and should be examined first. 
+The full set of constraint violations is visible in Advanced View. 
+In Calculator View, individual constraint violations are displayed in the Value Input dialog that results when selecting 
+(clicking on) an Independent or Dependent Variable. 
+
+If Search has returned a design with violated constraints and judged to be NOT FEASIBLE, 
+it is possible that too many variables in Fixed status have caused the design to become over-specified. 
+If it it not possible to completely Free one or more variables currently in Fixed status, 
+perhaps it would be helpful to replace a Fix with MIN and MAX constraints that allow a range of flexibility. 
+Additional information on over-specified designs is available in the 
+[Design situations](/docs/Help/designSituations.html) Help entry. 
 
 See also: 
  - [Fix & Free](/docs/Help/terminology.html#fix)
@@ -243,6 +286,7 @@ ___
 <a id="NoFreeIV"></a>  
 ___
 
+Alert entry #ODOP09
 ## No Free Independent Variables 
 If all Independent Variables are in Fixed status, 
 there is nothing left for Search to manipulate in order to achieve a feasible design. 
@@ -265,8 +309,13 @@ ___
 <a id="FDCL"></a>  
 ___
 
+Alert entry #ODOP10
 ## Functionally Determined Constraint Level (FDCL) is enabled 
 This variable has a functionally Determined Constraint Level (FDCL) configured and enabled. 
+
+This is not an error situation. 
+Rather, this informational alert is intended to make sure that the user is aware that these FDCL type
+constraints are enabled. 
 
 See Also:  
  - [Terminology - Function Constraints](/docs/Help/terminology.html#fdcl)  
