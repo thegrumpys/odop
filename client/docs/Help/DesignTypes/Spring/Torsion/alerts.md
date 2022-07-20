@@ -12,6 +12,7 @@ ___
 <a id="M1_GE_M2"></a>  
 ___
 
+Alert entry #T301
 ## M_1 >= M_2 
 The moment at operating point 1 (M_1) is greater than or equal to the moment at operating point 2 (M_2). 
 
@@ -38,6 +39,7 @@ ___
 <a id="PC_Safe_Deflect2_GT_80"></a>  
 ___
 
+Alert entry #T302
 ## %_Safe_Deflect @ 2 > 80% 
 The second operating point (point 2) has more than 80% of maximum safe deflection. 
 While this is not usually a problem, 
@@ -65,6 +67,7 @@ ___
 <a id="PC_Safe_Deflect1_LT_20"></a>  
 ___
 
+Alert entry #T303
 ## %_Safe_Deflect @ 1 < 20% 
 
 The first operating point (point 1) has less than 20% of maximum safe deflection. 

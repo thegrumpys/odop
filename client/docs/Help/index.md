@@ -24,6 +24,6 @@ The entries appear in an order ranked from more general and introductory to more
 * [Help Lookup](/docs/Help/helpLookup.html)
 * [Hints, Tips and Tricks](/docs/Help/htt.html)
 * [AutoSave](/docs/Help/autoSave.html)
-* [Available Design Types](/docs/Help/DesignTypes)
+* [Design Types](/docs/Help/DesignTypes)
 * [Spring Design](/docs/Help/SpringDesign)
 * [About topics](/docs/About)

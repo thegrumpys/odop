@@ -71,7 +71,7 @@ See:
 
 &nbsp; 
 
-## Available Design Types   
+## Design Types   
 
 Five [Design Types](/docs/Help/DesignTypes) are currently available. 
 

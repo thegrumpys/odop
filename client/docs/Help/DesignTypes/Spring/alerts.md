@@ -18,6 +18,7 @@ ___
 <a id="Wire_Dia_GT_ID_Free"></a>  
 ___
 
+Alert entry #S51
 ## Wire_Dia > ID_Free 
 The wire diameter (Wire_Dia) is greater than the coil inside diameter (ID_Free).
 
@@ -36,6 +37,7 @@ ___
 <a id="MatPropAccuracy"></a>  
 ___
 
+Alert entry #S52
 ## Material properties for this Wire_Dia may not be accurate. 
 This message is provided to warn the user that the current value for wire diameter is well outside 
 the anticipated range for the selected material type and
@@ -64,6 +66,7 @@ ___
 <a id="FS_CycleLife_MIN_not_set"></a>  
 ___
 
+Alert entry #S53
 ## FS_CycleLife MIN is not set. 
 A more restrictive Life_Category has been selected but 
 the corresponding constraint on FS_CycleLife is not enabled. 
@@ -84,6 +87,7 @@ ___
 <a id="OverDesign"></a>  
 ___
 
+Alert entry #S54
 ## Over-design concern 
 The term "over-design" implies that this design may be excessively conservative. 
 Its Factor of Safety at operating point 2 exceeds the maximum constraint. 
@@ -110,6 +114,7 @@ ___
 <a id="Coils_A_LT_1"></a>  
 ___
 
+Alert entry #S55
 ## Coils_A is less than 1 
 A warning alert is produced whenever the current design has fewer than one active coil.  
 
@@ -121,6 +126,7 @@ ___
 <a id="SI_manufacturability"></a>  
 ___
 
+Alert entry #S56
 ## Spring Index manufacturability concern 
 Spring index less than 4 is considered "difficult to manufacture".  
 
@@ -133,6 +139,7 @@ ___
 <a id="Cycle_LifeNA"></a>  
 ___
 
+Alert entry #S57
 ## Cycle_Life calculation is not available 
 The Cycle_Life variable (Modified Goodman calculation) is available only for materials contained in the internal materials table. 
 The current setting of Prop_Calc_Method indicates that material properties are user supplied, 
@@ -157,6 +164,67 @@ ___
 <a id="Cycle_LifeNA_FS_2"></a>  
 ___
 
+Alert entry #S58
+## Cycle_Life not defined beyond yield 
+The load specified in the current design is sufficiently large to cause the wire to yield. 
+The notion of cycle life does not apply. 
+
+More specifically, the current design has a Factor of Safety at the second working point (FS_2) that is less than 1.0.
+This means that the current set of inputs have resulted in a stress at point 2 
+(maximum operating load) that exceeds the maximum allowable stress. 
+For this design, the wire is at or perhaps even beyond its yield point. 
+In this situation, the direct cycle life calculation (Cycle_Life variable - Modified Goodman calculation) is not meaningful. 
+
+**Note:**   
+In this case of unrealistically high stress at point 2, 
+if Cycle_Life is Fixed or has either MIN or MAX constraints enabled, 
+Search is not likely to find a solution that is judged to be FEASIBLE. 
+
+**Recommendations:**   
+Change inputs such that stress at working point 2 (maximum operating load) is reduced. 
+
+Increase | &nbsp; | Decrease  
+---      | ---    | ---  
+Wire_Dia | &nbsp; | Force_2 or M_2 
+ &nbsp;  | &nbsp; | OD_Free  
+
+Perhaps the best approach is to to confirm that one or more of these variables is in Free status 
+and then run Search. 
+
+See also: 
+ - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
+
+___
+
+<a id="Cycle_LifeNA"></a>  
+___
+
+Alert entry #S57
+## Cycle_Life calculation is not available 
+The Cycle_Life variable (Modified Goodman calculation) is available only for materials contained in the internal materials table. 
+The current setting of Prop_Calc_Method indicates that material properties are user supplied, 
+thus there is not enough information available to directly calculate cycle life. 
+
+The FS_CycleLife variable (Soderberg calculation) remains as a way of gauging cycle life for user defined materials (Prop_Calc_Method = 2 and 3). 
+
+**Note:**   
+In this case of user supplied material properties, 
+if Cycle_Life is Fixed or has either MIN or MAX constraints enabled, 
+Search is not likely to find a solution that is judged to be FEASIBLE. 
+
+In order to continue with user supplied material properties,
+disable constraints on Cycle_Life and enable constraints on FS_CycleLife. 
+
+See Also: 
+ - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
+ - Report 2
+
+___
+
+<a id="Cycle_LifeNA_FS_2"></a>  
+___
+
+Alert entry #S58
 ## Cycle_Life not defined beyond yield 
 The load specified in the current design is sufficiently large to cause the wire to yield. 
 The notion of cycle life does not apply. 
@@ -191,6 +259,7 @@ ___
 <a id="TensileValueSuspect"></a>  
 ___
 
+Alert entry #S59
 ## Value of Tensile is suspect 
   
 The value of Tensile strength is close to or less than zero.
@@ -229,6 +298,10 @@ ___
   
   &nbsp;   
   
+  &nbsp;   
+  
+  &nbsp;   
+
   &nbsp;   
   
   &nbsp;   
