@@ -8,7 +8,7 @@ export var commonChecks = function(store) {
     var total = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         var element = design.model.symbol_table[i];
-//        console.log('name=',element.name);
+//        console.log('name=',element.name,'element=',element);
 
         // VALUE VALIDITY CHECKS
         var severity = 'Err';

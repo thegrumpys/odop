@@ -124,6 +124,7 @@ export function freeSymbolValue(name) {
 }
 
 export function changeSymbolViolation(name, minmax, value) {
+//    console.log('In changeSymbolViolation name=',name,'minmax=',minmax,'value=',value);
     return {
         type: CHANGE_SYMBOL_VIOLATION,
         payload: {
