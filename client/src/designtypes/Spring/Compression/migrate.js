@@ -350,6 +350,22 @@ export function migrate(design) {
         design.symbol_table[51].validmin = -Number.MAX_VALUE; // const_term
         design.symbol_table[52].validmin = -Number.MAX_VALUE; // slope_term
         design.symbol_table[53].validmin = -Number.MAX_VALUE; // tensile_010
+        design.symbol_table.splice(29,0,{
+            "input": false,
+            "name": "Excess_Force",
+            "value": 0.0,
+            "units": "pounds",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0.0,
+            "cmax": 1000,
+            "validmin": -Number.MIN_VALUE,
+            "validmax": Number.MAX_VALUE,
+            "sdlim": 0.1,
+            "tooltip": "Hidden.  Provide restoring influence for case where Force_2 >> Force_Solid",
+            "type": "equationset",
+            "hidden": true
+        });
         migrated_design.version = '12'; // last thing... set the migrated model version
         displayMessage(
             "The new Alert Facility may highlight previously unrecognized issues saved with earlier designs. Enter \"Alerts\" in Help Lookup and/or contact technical support.",
