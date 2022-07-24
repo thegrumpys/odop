@@ -125,13 +125,11 @@ export function reducers(state, action) {
             }
         });
     case CHANGE_SYMBOL_VIOLATION:
-//        console.log('In reducers.CHANGE_SYMBOL_VIOLATION action=',action);
         return Object.assign({}, state, {
             model: {
                 ...state.model,
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
-//                        console.log('In reducers.CHANGE_SYMBOL_VIOLATION action=',action);
                         if (action.payload.minmax === MIN) {
                             return Object.assign({}, element, {
                                 vmin: action.payload.value

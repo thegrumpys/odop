@@ -105,6 +105,7 @@ class FormControlTypeNumber extends Component {
 
     render() {
 //        console.log('In FormControlTypeNumber.render value=',this.state.value,'valueString=',this.state.valueString);
+//        console.log('In FormControlTypeNumber.render className=',this.props.className);
         var className = (this.props.className !== undefined ? this.props.className : '') + ' text-right';
         if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
             className += ' borders-invalid';

@@ -156,7 +156,7 @@ export function updateObjectiveValue(store, merit) {
                         infeasible = true;
                     }
                 }
-                console.log('In updateObjectiveValue Dependent Variable element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
+//                console.log('In updateObjectiveValue Dependent Variable element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
             } else if (element.type === "calcinput") { // Calculation Input
                 validity_vmin = (-element.value + element.validmin);
                 validity_vmax = ( element.value - element.validmax);
@@ -171,6 +171,7 @@ export function updateObjectiveValue(store, merit) {
 //                console.log('In updateObjectiveValue Calc Input element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
             }
         }
+//        console.log('In updateObjectiveValue at end element=',element);
     }
 
     /* Merit Function */

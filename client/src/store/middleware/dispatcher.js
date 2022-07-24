@@ -58,8 +58,8 @@ export const dispatcher = store => next => action => {
         invokeEquationSet(store);
         propagate(store);
         setSclDen(store);
-        invokeCheck(store); // NOTE: Placed before updateObjectiveValue to make sure UI gets updated after these checks
         updateObjectiveValue(store);
+        invokeCheck(store);
         break;
 
     case CHANGE_SYMBOL_VALUE:
