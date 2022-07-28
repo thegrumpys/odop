@@ -161,6 +161,22 @@ export function check(store) {        /*    Compression  Spring  */
             duplicate: true
         });
     }
+    if (design.model.symbol_table[o.Force_2].value > design.model.symbol_table[o.Force_Solid].value) {
+        addAlert({
+            element: design.model.symbol_table[o.Force_2],
+            name: design.model.symbol_table[o.Force_2].name, 
+            message: check_message(design,o.Force_2,'>',o.Force_Solid),
+            severity: 'Err',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#Excess_Force)'
+        });
+        addAlert({
+            element: design.model.symbol_table[o.Force_Solid],
+            name: design.model.symbol_table[o.Force_Solid].name, 
+            message: check_message(design,o.Force_Solid,'<=',o.Force_2),
+            severity: 'Err',
+            duplicate: true
+        });
+    }
     if (design.model.symbol_table[o.L_Free].value < design.model.symbol_table[o.L_Solid].value) {
         addAlert({
             element: design.model.symbol_table[o.L_Free],
