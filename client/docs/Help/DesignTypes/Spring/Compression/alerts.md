@@ -4,6 +4,7 @@ Alerts specific to compression springs.
 
 ### On this page:   
  - [Force_1 >= Force_2](alerts.html#F1_GE_F2)  
+ - [Excess Force](alerts.html#Excess_Force)  
  - [L_Free < L_Solid](alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](alerts.html#L_2_LT_L_Solid)  
  - [FS_Solid < 1.0](alerts.html#FS_Solid_LT_1)  
@@ -36,10 +37,25 @@ See also:
 
 ___
 
-<a id="L_Free_LT_L_Solid"></a>  
+<a id="Excess_Force"></a>  
 ___
 
 Alert entry #C102
+## Excess_Force 
+  
+  Placeholder - Copy content from Branch 707  
+  
+
+___
+
+<a id="L_Free_LT_L_Solid"></a>  
+___
+
+<<<<<<< HEAD
+Alert entry #C102
+=======
+Alert entry #C103
+>>>>>>> refs/remotes/origin/703
 ## L_Free < L_Solid 
 In a compression spring, 
 having free length (L_Free) specified as less than the solid height (L_Solid) is an impossible condition. 
@@ -63,7 +79,11 @@ ___
 <a id="L_2_LT_L_Solid"></a>  
 ___
 
+<<<<<<< HEAD
 Alert entry #C103
+=======
+Alert entry #C104
+>>>>>>> refs/remotes/origin/703
 ## L_2 < L_Solid 
 In a compression spring, 
 having the length associated with the second operating load (L_2) as less than the solid height (L_Solid) 
@@ -91,7 +111,11 @@ ___
 <a id="FS_Solid_LT_1"></a>  
 ___
 
+<<<<<<< HEAD
 Alert entry #C104
+=======
+Alert entry #C105
+>>>>>>> refs/remotes/origin/703
 ##  FS_Solid < 1.0 
 This spring may be over-stressed if deflected to solid.
 It may 'set' as in not return to its original free length.
@@ -113,7 +137,11 @@ ___
 <a id="PC_Avail_Deflect2_GT_80"></a>  
 ___
 
+<<<<<<< HEAD
 Alert entry #C105
+=======
+Alert entry #C106
+>>>>>>> refs/remotes/origin/703
 ## %_Avail_Deflect @ 2 > 80% 
 Coil to coil contact may cause inaccuracy in operating point 2. 
 
@@ -139,7 +167,11 @@ ___
 <a id="PC_Avail_Deflect1_LT_20"></a>  
 ___
 
+<<<<<<< HEAD
 Alert entry #C106
+=======
+Alert entry #C107
+>>>>>>> refs/remotes/origin/703
 ## %_Avail_Deflect @ 1 < 20% 
 End effects may cause inaccuracy in operating point 1.  
 
@@ -165,7 +197,11 @@ ___
 <a id="buckling"></a>  
 ___
 
+<<<<<<< HEAD
 Alert entry #C107
+=======
+Alert entry #C108
+>>>>>>> refs/remotes/origin/703
 ## Buckling concern 
 A spring of these dimensions and loading has a tendency to buckle. 
 
