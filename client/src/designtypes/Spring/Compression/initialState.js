@@ -474,12 +474,12 @@ export const initialState = {
             "lmax": 0,
             "cmin": 0.0,
             "cmax": 1000,
-            "validmin": -Number.MIN_VALUE,
-            "validmax": Number.MAX_VALUE,
+            "validmin": -Number.MAX_VALUE,
+            "validmax": 0.0,
             "sdlim": 0.1,
-            "tooltip": "Hidden.  Provide restoring influence for case where Force_2 >> Force_Solid",
+            "tooltip": "= Force_2 - Force_Solid Provides restoring influence in Search when Force_2 is specified greater than Force_Solid",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,

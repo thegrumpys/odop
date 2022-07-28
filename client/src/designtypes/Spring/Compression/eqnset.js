@@ -63,7 +63,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 
     x[o.Force_Solid] = x[o.Rate] * (p[o.L_Free] - x[o.L_Solid]);
 
-    x[o.Excess_Force] = x[o.Force_Solid] - p[o.Force_2];
+    x[o.Excess_Force] = p[o.Force_2] - x[o.Force_Solid];
 
       s_f = ks * 8.0 * x[o.Mean_Dia] / (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] * p[o.Wire_Dia]);
 

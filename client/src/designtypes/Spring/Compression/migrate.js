@@ -359,13 +359,16 @@ export function migrate(design) {
             "lmax": 0,
             "cmin": 0.0,
             "cmax": 1000,
-            "validmin": -Number.MIN_VALUE,
-            "validmax": Number.MAX_VALUE,
+            "validmin": -Number.MAX_VALUE,
+            "validmax": 0.0,
             "sdlim": 0.1,
-            "tooltip": "Hidden.  Provide restoring influence for case where Force_2 >> Force_Solid",
+            "tooltip": "= Force_2 - Force_Solid Provides restoring influence in Search when Force_2 is specified greater than Force_Solid",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         });
+        if (design['units'] === "Metric") {
+               design.symbol_table[29].units = "newtons";
+        };
         migrated_design.version = '12'; // last thing... set the migrated model version
         displayMessage(
             "The new Alert Facility may highlight previously unrecognized issues saved with earlier designs. Enter \"Alerts\" in Help Lookup and/or contact technical support.",

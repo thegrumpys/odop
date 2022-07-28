@@ -467,6 +467,22 @@ export const initialState = {
         },
         {
             "input": false,
+            "name": "Excess_Force",
+            "value": 0.0,
+            "units": "newtons",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0.0,
+            "cmax": 1000,
+            "validmin": -Number.MAX_VALUE,
+            "validmax": 0.0,
+            "sdlim": 0.1,
+            "tooltip": "= Force_2 - Force_Solid Provides restoring influence in Search when Force_2 is specified greater than Force_Solid",
+            "type": "equationset",
+            "hidden": false
+        },
+        {
+            "input": false,
             "name": "Spring_Type",
             "value": "Compression",
             "units": "",
@@ -847,24 +863,7 @@ export const initialState = {
             "sdlim": 0.0,
             "type": "calcinput",
             "hidden": true
-        },
-        {
-            "input": false,
-            "name": "Excess_Force",
-            "value": 0.0,
-            "units": "newtons",
-            "lmin": 0,
-            "lmax": 0,
-            "cmin": 0.0,
-            "cmax": 1000,
-            "validmin": -Number.MIN_VALUE,
-            "validmax": Number.MAX_VALUE,
-            "sdlim": 0.1,
-            "tooltip": "Hidden.  Provide restoring influence for case where Force_2 >> Force_Solid",
-            "type": "equationset",
-            "hidden": true
-        }
-    ],
+        }    ],
     "labels": [
         {
             "name": "COMMENT",
