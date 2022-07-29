@@ -48,6 +48,27 @@ Alert entry #C102
 
 ___
 
+<a id="Excess_Force"></a>  
+___
+
+Alert entry #C102
+## Excess Force 
+The value of force specified at the second load point (Force_2) exceeds the amount of force necessary to drive the spring 
+to its solid condition (Force_Solid). 
+
+To resolve this alert, where practical, change these values in the direction specified. 
+Increase | &nbsp; | Decrease  
+---      | ---    | ---  
+Wire_Dia | &nbsp; | Force_2  
+ L_Free  | &nbsp; | Coils_T  
+ &nbsp;  | &nbsp; | Coil_Dia  
+ 
+Depending on the Fixes and constraints on lengths and deflections associated with the second operating point, 
+it should also be possible to confirm that Force_2 is in Free status, 
+and then use the Search feature (menu Action : Search or Search button). 
+
+___
+
 <a id="L_Free_LT_L_Solid"></a>  
 ___
 
