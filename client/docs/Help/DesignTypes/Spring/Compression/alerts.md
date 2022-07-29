@@ -41,17 +41,6 @@ ___
 ___
 
 Alert entry #C102
-## Excess_Force 
-  
-  Placeholder - Copy content from Branch 707  
-  
-
-___
-
-<a id="Excess_Force"></a>  
-___
-
-Alert entry #C102
 ## Excess Force 
 The value of force specified at the second load point (Force_2) exceeds the amount of force necessary to drive the spring 
 to its solid condition (Force_Solid). 
