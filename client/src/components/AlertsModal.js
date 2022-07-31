@@ -5,7 +5,7 @@ import { clearAlerts, getAlertsBySeverity } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
-import config from '../config';
+import Emitter from './emitter';
 
 class AlertsModal extends Component {
   
@@ -18,6 +18,22 @@ class AlertsModal extends Component {
         this.state = {
             modal: false, // Default: do not display
         };
+    }
+
+    componentDidMount() {
+        Emitter.on('clearAlerts', () => {
+//            console.log('clearAlerts');
+            this.forceUpdate();
+        });
+        Emitter.on('addAlert', (alert) => {
+//            console.log('addAlert', alert);
+            this.forceUpdate();
+        });
+    }
+
+    componentWillUnmount() {
+        Emitter.off('clearAlerts');
+        Emitter.off('addAlerts');
     }
 
     componentDidUpdate(prevProps) {

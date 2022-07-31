@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
+import Emitter from './emitter';
 
 export var commonChecks = function(store) {
 //    console.log('In Alerts.commonChecks store=',store);
@@ -296,6 +297,7 @@ export var clearAlerts = function() {
             alerts: []
         };
     });
+    Emitter.emit('clearAlerts');
 }
 
 export var addAlert = function(alert) {
@@ -306,6 +308,7 @@ export var addAlert = function(alert) {
             alerts: [...prevState.alerts, alert]
         };
     });
+    Emitter.emit('addAlert', alert);
 }
 
 class Alerts extends Component {
