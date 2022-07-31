@@ -54,9 +54,7 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
-                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
+                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring demo10'}])
             ]
         },
         {
@@ -266,7 +264,7 @@ export const execute = {
                 resetSymbolFlag('FS_2', MAX, CONSTRAINED),
                 resetSymbolFlag('FS_Solid', MIN, CONSTRAINED),
                 resetSymbolFlag('%_Avail_Deflect', MAX, CONSTRAINED),
-                changeSystemControlsValue({maxit: 190, objmin: 0.000005, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
+                changeSystemControlsValue({maxit: 1000, objmin: 0.000001, delmin: 0.00001, tol: 0.00001, smallnum: 1e-8})
             ]
         },
         {
@@ -409,7 +407,7 @@ export const execute = {
                     <p>
                     While the ambiguity over stress correction factor and end type provided a few
                     challenges in formulating this demonstration session, 
-                    the real objective of demonstrating how ODOP:Spring can handle a "design-to-stess" 
+                    the real objective of demonstrating how ODOP:Spring can handle a "design-to-stress" 
                     problem has been achieved.
                     </p>
                     
