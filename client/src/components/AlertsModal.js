@@ -5,12 +5,13 @@ import { clearAlerts, getAlertsBySeverity } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
+import config from '../config';
 import Emitter from './Emitter';
 
 class AlertsModal extends Component {
   
     constructor(props) {
-//        console.log('In AlertsModal..constructor props=',props);
+//        console.log('In AlertsModal.constructor props=',props);
         super(props);
         this.onOpen = this.onOpen.bind(this);
         this.onHelpButton = this.onHelpButton.bind(this);
@@ -159,19 +160,20 @@ class AlertsModal extends Component {
                                     <tbody>
                                         {getAlertsBySeverity('Err').map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
+                                            var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
                                             if (entry.help_url !== undefined) {
                                                 match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                                             }
                                             return (
-                                                (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
+                                                (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
                                                 <tr key={line}>
                                                     <td>{line++}</td>
                                                     <td className={entry.className}>{entry.severity}</td>
                                                     <td className={entry.className}>{entry.message}</td>
                                                     <td>{entry.name}</td>
-                                                    {entry.element !== undefined && entry.value !== undefined && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                                    {entry.element !== undefined && entry.value === undefined && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                                     {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
                                                     {entry.element === undefined && entry.value === undefined && <td></td>}
                                                     <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
@@ -180,19 +182,20 @@ class AlertsModal extends Component {
                                         })}
                                         {getAlertsBySeverity('Warn').map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
+                                            var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
                                             if (entry.help_url !== undefined) {
                                                 match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                                             }
                                             return (
-                                                (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
+                                                (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
                                                 <tr key={line}>
                                                     <td>{line++}</td>
                                                     <td className={entry.className}>{entry.severity}</td>
                                                     <td className={entry.className}>{entry.message}</td>
                                                     <td>{entry.name}</td>
-                                                    {entry.element !== undefined && entry.value !== undefined && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                                    {entry.element !== undefined && entry.value === undefined && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                                     {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
                                                     {entry.element === undefined && entry.value === undefined && <td></td>}
                                                     <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
@@ -201,19 +204,20 @@ class AlertsModal extends Component {
                                         })}
                                         {getAlertsBySeverity('Notice').map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
+                                            var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
                                             if (entry.help_url !== undefined) {
                                                 match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                                             }
                                             return (
-                                                (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
+                                                (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
                                                 <tr key={line}>
                                                     <td>{line++}</td>
                                                     <td className={entry.className}>{entry.severity}</td>
                                                     <td className={entry.className}>{entry.message}</td>
                                                     <td>{entry.name}</td>
-                                                    {entry.element !== undefined && entry.value !== undefined && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                                    {entry.element !== undefined && entry.value === undefined && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                                     {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
                                                     {entry.element === undefined && entry.value === undefined && <td></td>}
                                                     <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
@@ -222,19 +226,20 @@ class AlertsModal extends Component {
                                         })}
                                         {getAlertsBySeverity('Info').map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
+                                            var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
                                             if (entry.help_url !== undefined) {
                                                 match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                                            }
                                             return (
-                                                (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
+                                                (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
                                                 <tr key={line}>
                                                     <td>{line++}</td>
                                                     <td className={entry.className}>{entry.severity}</td>
                                                     <td className={entry.className}>{entry.message}</td>
                                                     <td>{entry.name}</td>
-                                                    {entry.element !== undefined && entry.value !== undefined && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                                                    {entry.element !== undefined && entry.value === undefined && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                                                    {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                                                     {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
                                                     {entry.element === undefined && entry.value === undefined && <td></td>}
                                                     <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={this.onHelpButton}>{match[1]}</Button> : ''}</td>
