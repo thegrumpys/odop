@@ -339,7 +339,7 @@ class Alerts extends Component {
         if (prevProps.type !== this.props.type) {
 //            console.log('In Alerts.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
 //            console.log('In Alerts.componentDidUpdate this.state.alerts=',this.state.alerts);
-//            this.setState({
+            this.setState({
                  alerts: []
             });
         }
