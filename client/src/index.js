@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Spinner } from './components/Spinner';
 import { MessageModal } from './components/MessageModal';
-import Alerts from './components/Alerts';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { dispatcher } from './store/middleware/dispatcher';
 import { reducers } from './store/reducers';
@@ -65,7 +64,6 @@ ReactDOM.render(
         <MessageModal />
         <Provider store={store}>
             <>
-                <Alerts />
                 <Router>
                     <Routes />
                 </Router>

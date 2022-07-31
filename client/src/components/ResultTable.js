@@ -7,12 +7,12 @@ import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, seek, saveAutoSave } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/MessageModal';
-import AlertsModal from "./AlertsModal"
+import Alerts from "./Alerts"
 
 class ResultTable extends Component {
     
     constructor(props) {
-//        console.log('In ResultTable.ctor'');
+//        console.log('In ResultTable.constructor props=',props);
         super(props);
         this.onSearchRequest = this.onSearchRequest.bind(this);
         this.onSeekRequest = this.onSeekRequest.bind(this);
@@ -209,7 +209,7 @@ class ResultTable extends Component {
                         </tr>
                     </tbody>
                 </Table>
-                <AlertsModal />
+                <Alerts />
                 <Modal show={this.state.seek_modal} onHide={this.onSeekCancelButton}>
                     <Modal.Header closeButton>
                         <Modal.Title>
