@@ -148,7 +148,7 @@ class AlertsModal extends Component {
                                                 match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                                             }
                                             return (
-                                                (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
+                                                (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
                                                 <tr key={line}>
                                                     <td>{line++}</td>
                                                     <td className={entry.className}>{entry.severity}</td>
@@ -169,7 +169,7 @@ class AlertsModal extends Component {
                                                 match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                                             }
                                             return (
-                                                (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
+                                                (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
                                                 <tr key={line}>
                                                     <td>{line++}</td>
                                                     <td className={entry.className}>{entry.severity}</td>
@@ -190,7 +190,7 @@ class AlertsModal extends Component {
                                                 match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                                             }
                                             return (
-                                                (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
+                                                (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
                                                 <tr key={line}>
                                                     <td>{line++}</td>
                                                     <td className={entry.className}>{entry.severity}</td>
@@ -211,7 +211,7 @@ class AlertsModal extends Component {
                                                 match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                                            }
                                             return (
-                                                (entry.element === undefined || (entry.element !== undefined && !hidden)) &&
+                                                (entry.element === undefined || (entry.element !== undefined && !entry.element.hidden)) &&
                                                 <tr key={line}>
                                                     <td>{line++}</td>
                                                     <td className={entry.className}>{entry.severity}</td>
