@@ -5,7 +5,7 @@ import { clearAlerts, getAlertsBySeverity } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
-import Emitter from './emitter';
+import Emitter from './Emitter';
 
 class AlertsModal extends Component {
   

@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
-import Emitter from './emitter';
+import Emitter from './Emitter';
 
 export var commonChecks = function(store) {
 //    console.log('In Alerts.commonChecks store=',store);
