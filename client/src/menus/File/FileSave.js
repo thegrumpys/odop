@@ -11,8 +11,8 @@ import { withRouter } from 'react-router-dom';
 class FileSave extends Component {
 
     constructor(props) {
-        super(props);
 //        console.log("In FileSave.constructor props=",props);
+        super(props);
         this.toggle = this.toggle.bind(this);
         this.onSignIn = this.onSignIn.bind(this);
         this.onCancel = this.onCancel.bind(this);

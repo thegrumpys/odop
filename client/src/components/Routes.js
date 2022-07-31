@@ -16,8 +16,8 @@ import { startExecute } from "./ExecutePanel";
 class Routes extends Component {
 
   constructor(props) {
-    super(props);
 //    console.log('In Routes.constructor props=',props);
+    super(props);
     this.loadRedirect = this.loadRedirect.bind(this);
     this.promptLoadAutoSave = this.promptLoadAutoSave.bind(this);
     this.loadAutoSaveDesign = this.loadAutoSaveDesign.bind(this);

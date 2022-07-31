@@ -27,6 +27,7 @@ export var displayMessage = function(message, variant = 'danger', header = '', h
 
 export class MessageModal extends Component {
     constructor(props) {
+//        console.log("In MessageModal.constructor props=",props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);

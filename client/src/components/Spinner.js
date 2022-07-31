@@ -10,8 +10,8 @@ export var displaySpinner = function(display) {
 
 export class Spinner extends Component {
     constructor(props) {
-        super(props);
 //        console.log('In Spinner.constructor props=',props);
+        super(props);
         displaySpinner = displaySpinner.bind(this); // Bind external function - no 'this'
         this.onNoop = this.onNoop.bind(this);
         this.state = {

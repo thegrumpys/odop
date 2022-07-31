@@ -47,8 +47,8 @@ export var stopExecute = function() {
 class ExecutePanel extends Component {
 
     constructor(props) {
-        super(props);
 //        console.log('In ExecutePanel.constructor props=',props);
+        super(props);
         this.onNext = this.onNext.bind(this);
         this.onBack = this.onBack.bind(this);
         this.onCancel = this.onCancel.bind(this);

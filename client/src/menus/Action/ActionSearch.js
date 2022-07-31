@@ -10,6 +10,7 @@ import { displayMessage } from '../../components/MessageModal';
 class ActionSearch extends Component {
 
     constructor(props) {
+//        console.log('In ActionSearch.constructor props=',props)
         super(props);
         this.onSearchRequest = this.onSearchRequest.bind(this);
     }

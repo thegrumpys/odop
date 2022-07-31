@@ -11,8 +11,8 @@ import { withRouter } from 'react-router-dom';
 class FileDelete extends Component {
 
     constructor(props) {
-        super(props);
 //        console.log("In FileDelete.constructor props=",props);
+        super(props);
         this.toggle = this.toggle.bind(this);
         this.onSelectType = this.onSelectType.bind(this);
         this.onSelectName = this.onSelectName.bind(this);
