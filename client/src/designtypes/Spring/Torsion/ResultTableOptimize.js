@@ -9,7 +9,7 @@ import * as sto from './symbol_table_offsets';
 export class ResultTableOptimize extends Component {
 
     constructor(props) {
-//        console.log('In ResultTableOptimize.ctor props=',props);
+//        console.log('In ResultTableOptimize.constructor props=',props);
         super(props);
         this.onOptimizeSeekMINWeight = this.onOptimizeSeekMINWeight.bind(this);
         this.onOptimizeSeekMAXCycle_Life = this.onOptimizeSeekMAXCycle_Life.bind(this);
