@@ -39,7 +39,7 @@ class AlertsModal extends Component {
     componentDidUpdate(prevProps) {
 //        console.log('In Alerts.componentDidUpdate this=',this,'prevProps=',prevProps);
         if (prevProps.type !== this.props.type) {
-            console.log('In Alerts.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+//            console.log('In Alerts.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
 //            console.log('In Alerts.componentDidUpdate this.state.alerts=',this.state.alerts);
             clearAlerts();
         }
