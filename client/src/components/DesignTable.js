@@ -3,6 +3,7 @@ import { Row } from 'react-bootstrap';
 import NameValueUnitsTable from './NameValueUnitsTable';
 import ConstraintsMinTable from './ConstraintsMinTable';
 import ConstraintsMaxTable from './ConstraintsMaxTable';
+import ResultTable from './ResultTable';
 import NameValueUnitsCalcInputTable from './NameValueUnitsCalcInputTable';
 import { connect } from 'react-redux';
 
@@ -12,6 +13,9 @@ class DesignTable extends Component {
 //        console.log('In DesignTable.render this=',this);
         return (
             <>
+                <Row>
+                    <ResultTable />
+                </Row>
                 <Row>
                     <NameValueUnitsTable />
                     <ConstraintsMinTable />
