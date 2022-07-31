@@ -7,7 +7,7 @@ import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, seek, saveAutoSave } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/MessageModal';
-import Alerts from "./Alerts"
+import AlertsModal from "./AlertsModal"
 
 class ResultTable extends Component {
     
@@ -209,7 +209,7 @@ class ResultTable extends Component {
                         </tr>
                     </tbody>
                 </Table>
-                <Alerts />
+                <AlertsModal />
                 <Modal show={this.state.seek_modal} onHide={this.onSeekCancelButton}>
                     <Modal.Header closeButton>
                         <Modal.Title>

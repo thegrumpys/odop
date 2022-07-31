@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { ReportBase } from "./ReportBase" // import the inner non-redux-connected class
-import ResultTable from '../../../components/ResultTable';
 import SymbolName from '../../../components/SymbolName';
 import SymbolValue from '../../../components/SymbolValue';
 import SymbolUnits from '../../../components/SymbolUnits';
@@ -18,12 +17,6 @@ export class Calculator extends ReportBase {
 //        console.log('In Calculator.render this.props=',this.props);
         return (
             <Container>
-                <Row>
-                    <h4>ODOP:Spring &nbsp; Torsion Spring Calculator</h4><br />
-                </Row>
-                <Row>
-                    <ResultTable />
-                </Row>
                 <Row>
                     <table className="report-table">
                         <tbody>

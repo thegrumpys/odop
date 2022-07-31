@@ -7,7 +7,8 @@ import {
     Tab,
     NavDropdown,
     OverlayTrigger,
-    Tooltip
+    Tooltip,
+    Row
 } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
@@ -44,6 +45,7 @@ import SearchDocs from './SearchDocs';
 import { withOktaAuth } from '@okta/okta-react';
 import { changeUser, changeView, deleteAutoSave } from '../store/actionCreators';
 import config from '../config';
+import ResultTable from './ResultTable';
 
 class MainPage extends Component {
     
@@ -190,10 +192,15 @@ class MainPage extends Component {
                 </Navbar>
                 <Container style={{backgroundColor: '#eee', paddingTop: '60px'}}>
                     <ExecutePanel />
+                    <Row>
+                        <ResultTable />
+                    </Row>
                     <Tabs defaultActiveKey={config.url.view} activeKey={this.state.activeTab}>
                         {viewNames.map((element) => {return (
                             <Tab key={element.title} eventKey={element.name}>
-                                <div id={'main_'+element.name}>{element.component}</div>
+                                <div id={'main_'+element.name}>
+                                    {element.component}
+                                </div>
                             </Tab>
                             );
                         })}
