@@ -108,17 +108,17 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Here is an example of how each main menu item will drop down to provide 
-                    specific menu items.
-                    Note that menu entries associated with not yet implemented features are disabled (gray).
-                    This screen clip illustrates how to get to the index of Help pages.   
+                    Here is an example of how each main menu item will drop down to provide specific menu items.
+                    This screen clip illustrates how to get to the index of Help pages. 
                     </p>
-                    
                     <Image fluid src="/docs/Help/img/HelpIndex.png" alt="Help Index"/>
                     
                     <p>
-                    <br />
+                    Full text search of the on-line Help is available. 
+                    Enter a search term in the Help Lookup field and click the magnifying glass icon.
+                    Enter the term "Lookup" to get details on how to form phrases and more complex queries. 
                     </p>
+                    <Image fluid src="/docs/Help/img/HelpLookup.png" alt="Help Lookup"/>
                 </>
             )
         },
