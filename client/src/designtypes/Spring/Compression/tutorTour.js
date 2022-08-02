@@ -109,16 +109,16 @@ export const execute = {
                 <>
                     <p>
                     Here is an example of how each main menu item will drop down to provide specific menu items.
-                    This screen clip illustrates how to get to the index of Help pages. 
+                    The lower red arrow in this screen clip illustrates how to get to the index of Help pages. 
                     </p>
                     <Image fluid src="/docs/Help/img/HelpIndex.png" alt="Help Index"/>
                     
                     <p>
-                    Full text search of the on-line Help is available. 
-                    Enter a search term in the Help Lookup field and click the magnifying glass icon.
+                    <br/>
+                    The upper red arrow shows how full-text search of the on-line Help is available. 
+                    Enter a search term in the Help lookup field and click the magnifying glass icon.
                     Enter the term "Lookup" to get details on how to form phrases and more complex queries. 
                     </p>
-                    <Image fluid src="/docs/Help/img/HelpLookup.png" alt="Help Lookup"/>
                 </>
             )
         },
@@ -226,7 +226,7 @@ export const execute = {
                     <p>
                     In order change the value of a Dependent Variable, it is necessary
                     to FIX its value (more about FIX coming soon) and then execute the Search feature 
-                    (<b>Action : Search</b> menu).   
+                    (Search button or <b>Action : Search</b> menu).   
                     </p>
                     
                     <Image fluid src="/docs/Help/img/DependentSpring.png" alt="Dependent Variable Entry Fields"/>
@@ -380,27 +380,20 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The quick tour of the main page is now complete.
+                    The quick tour of the Advanced View main page is now complete.
                     This is a good time good to get a better look at what is available 
                     in the on-line documentation. 
-                    Most of the entries that are available after selecting the Help : Index menu item
-                    cover the generic features and capabilities of the ODOP software.
-                    So, as you are reading, please click the Help menu above.
-                    It will drop down to provide a list of entries (topics) to choose from.
-                    Selecting <b>Index</b> on this list will bring up a new browser tab with the
-                    list of available Help entries. 
-                    You can switch back and forth between the browser tabs.
-                    </p>
-                    
-                    <p>
-                    On-line documentation specific to ODOP:Spring appears in the Spring Design topic.
+                    Selecting <b>Index</b> from the Help menu will bring up a new browser tab with the
+                    list of available Help topics. 
+                    From there, switch back and forth between the browser tabs to see both the Help content and the ODOP app.
                     </p>
                     
                     <Image fluid src="/docs/Help/img/HelpIndex.png" alt="Help Index"/>
                     
                     <p>
                     <br />
-                    After completing this tutorial session, if time is available, read through those entries from top to bottom.
+                    Topics on the Index page appear in an order ranked from more general and introductory to more specific.
+                    Spring specific details appear in the Spring Design topic at the bottom of the list.
                     </p>
                 </>
             ),
