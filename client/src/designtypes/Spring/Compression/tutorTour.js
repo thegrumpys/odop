@@ -24,7 +24,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 20",
+            title: "Page 02 of 22",
             text: (
                 <>
                     <p>
@@ -52,7 +52,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 20",
+            title: "Page 03 of 22",
             text: (
                 <>
                     <p>
@@ -77,7 +77,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 04 of 20",
+            title: "Page 04 of 22",
             text: (
                 <>
                     <p>
@@ -104,7 +104,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 05 of 20",
+            title: "Page 05 of 22",
             text: (
                 <>
                     <p>
@@ -123,7 +123,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 06 of 20",
+            title: "Page 06 of 22",
             text: (
                 <>
                     <p>
@@ -150,7 +150,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 07 of 20",
+            title: "Page 07 of 22",
             text: (
                 <>
                     <p>
@@ -173,7 +173,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 08 of 20",
+            title: "Page 08 of 22",
             text: (
                 <>
                     <p>
@@ -200,7 +200,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 09 of 20",
+            title: "Page 09 of 22",
             text: (
                 <>
                     <p>
@@ -220,7 +220,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 10 of 20",
+            title: "Page 10 of 22",
             text: (
                 <>
                     <p>
@@ -237,7 +237,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 11 of 20",
+            title: "Page 11 of 22",
             text: (
                 <>
                     <p>
@@ -257,7 +257,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 12 of 20",
+            title: "Page 12 of 22",
             text: (
                 <>
                     <p>
@@ -275,7 +275,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 13 of 20",
+            title: "Page 13 of 22",
             text: (
                 <>
                     <p>
@@ -297,7 +297,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 14 of 20",
+            title: "Page 14 of 22",
             text: (
                 <>
                     <p>
@@ -314,7 +314,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 15 of 20",
+            title: "Page 15 of 22",
             text: (
                 <>
                     <p>
@@ -334,7 +334,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 15 of 20",
+            title: "Page 16 of 22",
             text: (
                 <>
                     <p>
@@ -376,7 +376,26 @@ export const execute = {
             )
         },
         {
-            title: "Page 16 of 20",
+            title: "Page 17 of 22",
+            text: (
+                <>
+                    <p>
+                    ALERTS are error, warning, notice and informational messages produced in response to design changes.
+                    A red "badge" on the Alerts button indicates the total number of pending alerts. 
+                    </p>
+                    <Image fluid src="/docs/Help/img/AlertPanel.png" alt="Alert Panel"/>
+                    
+                    <p>
+                    <br/>
+                    Click the Alerts button to open and close the Alerts panel. 
+                    The Help button will open a new browser tab containing a more detailed explanation of each alert.
+                    Where possible, this explanation includes suggestions on how to resolve the alert. 
+                    </p>
+                </>
+            )
+        },
+        {
+            title: "Page 18 of 22",
             text: (
                 <>
                     <p>
@@ -399,7 +418,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 17 of 20",
+            title: "Page 19 of 22",
             text: (
                 <>
                     <p>
@@ -418,7 +437,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 18 of 20",
+            title: "Page 20 of 22",
             text: (
                 <>
                     <p>
@@ -436,7 +455,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 19 of 20",
+            title: "Page 21 of 22",
             text: (
                 <>
                 <Image fluid src="/docs/Help/img/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
@@ -444,7 +463,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 20 of 20 (last page)",
+            title: "Page 22 of 22 (last page)",
             text: (
                 <>
                     <p>

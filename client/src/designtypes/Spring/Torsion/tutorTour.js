@@ -24,7 +24,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 02 of 20",
+            title: "Page 02 of 22",
             text: (
                 <>
                     <p>
@@ -52,7 +52,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 03 of 20",
+            title: "Page 03 of 22",
             text: (
                 <>
                     <p>
@@ -77,7 +77,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 04 of 20",
+            title: "Page 04 of 22",
             text: (
                 <>
                     <p>
@@ -104,26 +104,26 @@ export const execute = {
             )
         },
         {
-            title: "Page 05 of 20",
+            title: "Page 05 of 22",
             text: (
                 <>
                     <p>
-                    Here is an example of how each main menu item will drop down to provide 
-                    specific menu items.
-                    Note that menu entries associated with not yet implemented features are disabled (gray).
-                    This screen clip illustrates how to get to the index of Help pages.   
+                    Here is an example of how each main menu item will drop down to provide specific menu items.
+                    The lower red arrow in this screen clip illustrates how to get to the index of Help pages. 
                     </p>
-                    
                     <Image fluid src="/docs/Help/img/HelpIndex.png" alt="Help Index"/>
                     
                     <p>
-                    <br />
+                    <br/>
+                    The upper red arrow shows how full-text search of the on-line Help is available. 
+                    Enter a search term in the Help lookup field and click the magnifying glass icon.
+                    Enter the term "Lookup" to get details on how to form phrases and more complex queries. 
                     </p>
                 </>
             )
         },
         {
-            title: "Page 06 of 20",
+            title: "Page 06 of 22",
             text: (
                 <>
                     <p>
@@ -150,7 +150,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 07 of 20",
+            title: "Page 07 of 22",
             text: (
                 <>
                     <p>
@@ -173,7 +173,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 08 of 20",
+            title: "Page 08 of 22",
             text: (
                 <>
                     <p>
@@ -200,7 +200,7 @@ export const execute = {
             ]
         },
         {
-            title: "Page 09 of 20",
+            title: "Page 09 of 22",
             text: (
                 <>
                     <p>
@@ -220,13 +220,13 @@ export const execute = {
             )
         },
         {
-            title: "Page 10 of 20",
+            title: "Page 10 of 22",
             text: (
                 <>
                     <p>
                     In order change the value of a Dependent Variable, it is necessary
                     to FIX its value (more about FIX coming soon) and then execute the Search feature 
-                    (<b>Action : Search</b> menu).   
+                    (Search button or <b>Action : Search</b> menu).   
                     </p>
                     
                     <Image fluid src="/docs/Help/img/DependentSpring.png" alt="Dependent Variable Entry Fields"/>
@@ -237,7 +237,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 11 of 20",
+            title: "Page 11 of 22",
             text: (
                 <>
                     <p>
@@ -257,7 +257,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 12 of 20",
+            title: "Page 12 of 22",
             text: (
                 <>
                     <p>
@@ -275,7 +275,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 13 of 20",
+            title: "Page 13 of 22",
             text: (
                 <>
                     <p>
@@ -297,7 +297,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 14 of 20",
+            title: "Page 14 of 22",
             text: (
                 <>
                     <p>
@@ -314,7 +314,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 15 of 20",
+            title: "Page 15 of 22",
             text: (
                 <>
                     <p>
@@ -334,7 +334,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 15 of 20",
+            title: "Page 16 of 22",
             text: (
                 <>
                     <p>
@@ -376,37 +376,49 @@ export const execute = {
             )
         },
         {
-            title: "Page 16 of 20",
+            title: "Page 17 of 22",
             text: (
                 <>
                     <p>
-                    The quick tour of the main page is now complete.
-                    This is a good time good to get a better look at what is available 
-                    in the on-line documentation. 
-                    Most of the entries that are available after selecting the Help : Index menu item
-                    cover the generic features and capabilities of the ODOP software.
-                    So, as you are reading, please click the Help menu above.
-                    It will drop down to provide a list of entries (topics) to choose from.
-                    Selecting <b>Index</b> on this list will bring up a new browser tab with the
-                    list of available Help entries. 
-                    You can switch back and forth between the browser tabs.
+                    ALERTS are error, warning, notice and informational messages produced in response to design changes.
+                    A red "badge" on the Alerts button indicates the total number of pending alerts. 
                     </p>
+                    <Image fluid src="/docs/Help/img/AlertPanel.png" alt="Alert Panel"/>
                     
                     <p>
-                    On-line documentation specific to ODOP:Spring appears in the Spring Design topic.
+                    <br/>
+                    Click the Alerts button to open and close the Alerts panel. 
+                    The Help button will open a new browser tab containing a more detailed explanation of each alert.
+                    Where possible, this explanation includes suggestions on how to resolve the alert. 
+                    </p>
+                </>
+            )
+        },
+        {
+            title: "Page 18 of 22",
+            text: (
+                <>
+                    <p>
+                    The quick tour of the Advanced View main page is now complete.
+                    This is a good time good to get a better look at what is available 
+                    in the on-line documentation. 
+                    Selecting <b>Index</b> from the Help menu will bring up a new browser tab with the
+                    list of available Help topics. 
+                    From there, switch back and forth between the browser tabs to see both the Help content and the ODOP app.
                     </p>
                     
                     <Image fluid src="/docs/Help/img/HelpIndex.png" alt="Help Index"/>
                     
                     <p>
                     <br />
-                    After completing this tutorial session, if time is available, read through those entries from top to bottom.
+                    Topics on the Index page appear in an order ranked from more general and introductory to more specific.
+                    Spring specific details appear in the Spring Design topic at the bottom of the list.
                     </p>
                 </>
             ),
         },
         {
-            title: "Page 17 of 20",
+            title: "Page 19 of 22",
             text: (
                 <>
                     <p>
@@ -425,7 +437,7 @@ export const execute = {
             ),
         },
         {
-            title: "Page 18 of 20",
+            title: "Page 20 of 22",
             text: (
                 <>
                     <p>
@@ -443,7 +455,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 19 of 20",
+            title: "Page 21 of 22",
             text: (
                 <>
                 <Image fluid src="/docs/Help/img/ForceVsDeflection.png" alt="Force vs Deflection graph"/>
@@ -451,7 +463,7 @@ export const execute = {
             )
         },
         {
-            title: "Page 20 of 20 (last page)",
+            title: "Page 22 of 22 (last page)",
             text: (
                 <>
                     <p>
