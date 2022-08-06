@@ -57,10 +57,10 @@ export class ReportBase extends Component {
 
         this.kw1 = ks;
         
-        if (this.props.symbol_table[o.Stress_1] !== 0.0)
+        if (this.props.symbol_table[o.Stress_1].value !== 0.0)
             this.fs_1 = Math.abs(this.props.symbol_table[o.Stress_Lim_Stat].value / this.props.symbol_table[o.Stress_1].value);
         else
-            this.fs_1 = 0.0;
+            this.fs_1 = Number.POSITIVE_INFINITY;
 
         this.safe_load = this.props.symbol_table[o.Stress_Lim_Stat].value / s_f;
         this.safe_load_u = this.props.symbol_table[o.Force_2].units;

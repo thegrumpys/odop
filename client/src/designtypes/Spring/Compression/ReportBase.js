@@ -108,10 +108,10 @@ export class ReportBase extends Component {
         this.kw2strs = temp * this.props.symbol_table[o.Force_Solid].value;
 
         temp = 0.7 * this.props.symbol_table[o.Tensile].value;  // allowable stress for preset
-        if (this.props.symbol_table[o.Stress_1] !== 0.0)
+        if (this.props.symbol_table[o.Stress_1].value !== 0.0)
             this.fs_1 = Math.abs(this.props.symbol_table[o.Stress_Lim_Stat].value / this.props.symbol_table[o.Stress_1].value);
         else
-            this.fs_1 = 0.0;
+            this.fs_1 = Number.POSITIVE_INFINITY;
 
         /*  unused
          *  if (this.kw2str1 !== 0.0) kw2fs_1 = Math.abs(temp / this.kw2str1);
