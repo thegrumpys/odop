@@ -168,7 +168,7 @@ export class ReportBase extends Component {
         this.safe_travel = Math.min(this.safe_load / this.props.symbol_table[o.Rate].value, def_max);
 
 //        console.log("this.props.symbol_table[o.Prop_Calc_Method].value = ", this.props.symbol_table[o.Prop_Calc_Method].value);
-        if (this.props.symbol_table[o.Prop_Calc_Method].value === 1 && this.props.symbol_table[o.Material_Type] !== 0){
+        if (this.props.symbol_table[o.Prop_Calc_Method].value === 1 && this.props.symbol_table[o.Material_Type].value !== 0){
             this.matTypeValue = this.m_tab[this.props.symbol_table[o.Material_Type].value][mo.matnam];
             this.astmFedSpecValue = this.props.symbol_table[o.ASTM_Fed_Spec].value;
             this.clWarnString = "";

@@ -103,7 +103,7 @@ class Report2 extends ReportBase {
                             <td/>
                             <td>{(0.0).toFixed(0)}</td>
                             <td>{(0.0).toFixed(1)}</td>
-                            <td>infinite</td>
+                            <td>Infinity</td>
                             <td/>
                             <td>{(0.0).toFixed(2)}</td>
                         </tr>

@@ -248,7 +248,7 @@ class Report3 extends ReportBase {
                         </tr>
                         <tr>
                             <td><b>Static F.S.</b><sup>*</sup></td>
-                            <td>infinite</td>
+                            <td>Infinity</td>
                             <td>{this.fs_1.toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.FS_2].value.toFixed(2)}</td>
                             <td>{this.props.symbol_table[o.FS_Solid].value.toFixed(2)}</td>

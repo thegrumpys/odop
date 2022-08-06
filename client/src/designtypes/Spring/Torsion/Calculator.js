@@ -67,7 +67,7 @@ export class Calculator extends ReportBase {
                                 <SymbolValue element={this.props.symbol_table[o.OD_Free]} index={o.OD_Free} />
                                 <SymbolValue element={this.props.symbol_table[o.ID_Free]} index={o.ID_Free} />
                                 <Value id="Stress_Free" value={0.0} />
-                                <td>infinite</td>
+                                <td>Infinity</td>
                             </tr>
                             <tr>
                                 <ValueName name={<b>1</b>} tooltip="Point 1 (minimum operating load)" />
