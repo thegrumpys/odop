@@ -12,8 +12,8 @@ import { withRouter } from 'react-router-dom';
 class FileOpen extends Component {
 
     constructor(props) {
-        super(props);
 //        console.log("In FileOpen .constructor props=",props);
+        super(props);
         this.toggle = this.toggle.bind(this);
         this.onLoadInitialState = this.onLoadInitialState.bind(this);
         this.onLoadMetricInitialState = this.onLoadMetricInitialState.bind(this);

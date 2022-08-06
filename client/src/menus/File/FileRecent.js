@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 class FileRecent extends Component {
 
     constructor(props) {
+//        console.log("In FileRecent .constructor props=",props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {

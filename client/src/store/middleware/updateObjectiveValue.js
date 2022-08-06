@@ -34,7 +34,6 @@ export function updateObjectiveValue(store, merit) {
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
 //        console.log('In updateObjectiveValue element=',element);
-        if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
             if (element.type === "equationset" && element.input) { // Independent Variable
                 validity_vmin = (-element.value + element.validmin);
                 validity_vmax = ( element.value - element.validmax);
@@ -72,8 +71,8 @@ export function updateObjectiveValue(store, merit) {
                     viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
                     infeasible = true;
                 }
-//                console.log('In updateObjectiveValue Independent Variable element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
-            } else if (element.type === "equationset" && !element.input) { // Dependent Variable
+//                console.log('In updateObjectiveValue IV    element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
+            } else if ((element.type === "equationset" && !element.input) || element.type === "calcinput") { // Dependent Variable
                 /* State variable fix levels. */
                 /*
                  * The fix_wt's are automatically incorporated in the scaling denominators
@@ -156,21 +155,8 @@ export function updateObjectiveValue(store, merit) {
                         infeasible = true;
                     }
                 }
-//                console.log('In updateObjectiveValue Dependent Variable element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
-            } else if (element.type === "calcinput") { // Calculation Input
-                validity_vmin = (-element.value + element.validmin);
-                validity_vmax = ( element.value - element.validmax);
-                if (validity_vmin > 0.0) {
-                    viol_sum = viol_sum + validity_vmin * validity_vmin;
-                    invalid = true;
-                }
-                if (validity_vmax > 0.0) {
-                    viol_sum = viol_sum + validity_vmax * validity_vmax;
-                    invalid = true;
-                }
-//                console.log('In updateObjectiveValue Calc Input element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
+//                console.log('In updateObjectiveValue DV/CI element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
             }
-        }
 //        console.log('In updateObjectiveValue at end element=',element);
     }
 

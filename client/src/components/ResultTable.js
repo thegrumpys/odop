@@ -12,7 +12,7 @@ import AlertsModal from "./AlertsModal"
 class ResultTable extends Component {
     
     constructor(props) {
-//        console.log('In ResultTable.ctor'');
+//        console.log('In ResultTable.constructor props=',props);
         super(props);
         this.onSearchRequest = this.onSearchRequest.bind(this);
         this.onSeekRequest = this.onSeekRequest.bind(this);

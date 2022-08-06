@@ -7,8 +7,8 @@ import config from '../../config';
 class FileExport extends Component {
 
     constructor(props) {
-        super(props);
 //        console.log("In FileSave.constructor props=",props);
+        super(props);
         this.onExport = this.onExport.bind(this);
         this.onSortedExport = this.onSortedExport.bind(this);
         this.onCancel = this.onCancel.bind(this);

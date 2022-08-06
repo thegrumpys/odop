@@ -9,6 +9,7 @@ import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 class FilePreferences extends Component {
 
     constructor(props) {
+//        console.log("In FilePreferences .constructor props=",props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.onChangeValid = this.onChangeValid.bind(this);

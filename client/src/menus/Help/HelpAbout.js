@@ -9,6 +9,7 @@ import config from '../../config';
 class HelpAbout extends Component {
 
     constructor(props) {
+//        console.log("In HelpAbout.constructor props=",props);
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {

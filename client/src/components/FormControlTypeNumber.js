@@ -114,7 +114,7 @@ class FormControlTypeNumber extends Component {
         if (icon_alerts === undefined) {
           icon_alerts = [];
         }
-//        console.log('icon_alerts=',icon_alerts);
+//        console.log('In FormControlTypeNumber.render icon_alerts=',icon_alerts);
         var icon_tooltip;
         if (icon_alerts.length > 0) {
             icon_tooltip =

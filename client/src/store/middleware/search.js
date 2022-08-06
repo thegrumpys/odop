@@ -14,14 +14,12 @@ export function search(store, objmin, merit) {
     var pc = [];
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
-        if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
             if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
                 if (!(element.lmin & FIXED)) { // Only Free
 //                   console.log('In search i=',i,'element=',element);
                     pc.push(element.value);
                 }
             }
-        }
     }
     
     // Do the pattern search
@@ -34,7 +32,6 @@ export function search(store, objmin, merit) {
     var p = [];
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
-        if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
             if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
                 if (!(element.lmin & FIXED)) { // Only Free
                     p.push(pc[kd++]);
@@ -42,7 +39,6 @@ export function search(store, objmin, merit) {
                     p.push(element.value);
                 }
             }
-        }
     }
     store.dispatch(changeInputSymbolValues(p, merit));
     store.dispatch(changeResultTerminationCondition(ncode));

@@ -6,8 +6,8 @@ import { getAlertsBySeverity } from '../../../components/Alerts';
 export class ReportBase extends Component {
 
     constructor(props) {
-        super(props);
 //        console.log('In ReportBase.constructor this=',this,'props=',props);
+        super(props);
         this.def_dia_t = this.def_dia_t.bind(this);
     }
 

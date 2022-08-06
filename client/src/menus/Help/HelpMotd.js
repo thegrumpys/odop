@@ -6,6 +6,7 @@ import { logUsage } from '../../logUsage';
 class HelpMotd extends Component {
 
     constructor(props) {
+//        console.log("In HelpMotd.constructor props=",props);
         super(props);
         this.onHelp = this.onHelp.bind(this);
     }

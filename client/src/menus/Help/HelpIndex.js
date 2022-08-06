@@ -6,6 +6,7 @@ import { logUsage } from '../../logUsage';
 class HelpIndex extends Component {
 
     constructor(props) {
+//        console.log("In HelpIndex.constructor props=",props);
         super(props);
         this.onHelp = this.onHelp.bind(this);
     }

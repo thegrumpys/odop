@@ -6,8 +6,8 @@ import { logUsage } from '../../logUsage';
 class ViewCADModel extends Component {
 
     constructor(props) {
-        super(props);
 //        console.log('In ViewCADModel.constructor props=',props);
+        super(props);
         this.toggle = this.toggle.bind(this);
         this.state = {
             modal: false

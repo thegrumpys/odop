@@ -15,6 +15,7 @@ import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 class ActionTrade extends Component {
 
     constructor(props) {
+//        console.log('In ActionTrade.constructor props=',props);
         super(props);
         
         this.strategyToggle = this.strategyToggle.bind(this);

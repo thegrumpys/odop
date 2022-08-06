@@ -7,8 +7,8 @@ import { withOktaAuth } from '@okta/okta-react';
 export default withRouter(withOktaAuth(class SignIn extends Component {
 
     constructor(props) {
-      super(props);
 //      console.log("In SignIn.constructor props=",props);
+      super(props);
       this.toggle = this.toggle.bind(this);
     }
 

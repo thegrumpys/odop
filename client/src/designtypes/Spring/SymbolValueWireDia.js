@@ -60,7 +60,7 @@ class SymbolValueWireDia extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.type !== this.props.type) {
-//        console.log('In SymbolValueWireDia.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+//            console.log('In SymbolValueWireDia.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
         }
     }
 

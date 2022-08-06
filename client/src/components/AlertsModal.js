@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, OverlayTrigger, Tooltip, Accordion, Card } from 'react-bootstrap';
-import { getAlertsBySeverity } from './Alerts';
+import { clearAlerts, getAlertsBySeverity } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
 import config from '../config';
+import Emitter from './Emitter';
 
 class AlertsModal extends Component {
   
     constructor(props) {
-//        console.log('In AlertsModal.ctor'');
+//        console.log('In AlertsModal.constructor props=',props);
         super(props);
         this.onOpen = this.onOpen.bind(this);
         this.onHelpButton = this.onHelpButton.bind(this);
@@ -18,6 +19,31 @@ class AlertsModal extends Component {
         this.state = {
             modal: false, // Default: do not display
         };
+    }
+
+    componentDidMount() {
+        Emitter.on('clearAlerts', () => {
+//            console.log('clearAlerts');
+            this.forceUpdate();
+        });
+        Emitter.on('addAlert', (alert) => {
+//            console.log('addAlert', alert);
+            this.forceUpdate();
+        });
+    }
+
+    componentWillUnmount() {
+        Emitter.off('clearAlerts');
+        Emitter.off('addAlerts');
+    }
+
+    componentDidUpdate(prevProps) {
+//        console.log('In Alerts.componentDidUpdate this=',this,'prevProps=',prevProps);
+        if (prevProps.type !== this.props.type) {
+//            console.log('In Alerts.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+//            console.log('In Alerts.componentDidUpdate this.state.alerts=',this.state.alerts);
+            clearAlerts();
+        }
     }
 
     onOpen(event) {
@@ -46,6 +72,7 @@ class AlertsModal extends Component {
 //        console.log('In AlertsModal.render this=',this);
         var line = 1;
         var all_alerts = getAlertsBySeverity();
+//        console.log('In AlertsModal.render all_alerts=',all_alerts);
         return (
             <>
                 <Accordion className="col-md-12 mb-3">
