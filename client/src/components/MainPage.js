@@ -74,7 +74,7 @@ class MainPage extends Component {
             }
         }
         if (prevProps.type !== this.props.type) {
-            console.log('In MainPage.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
+//            console.log('In MainPage.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
             var { getViewNames } = require('../designtypes/'+this.props.type+'/view.js'); // Dynamically load getViewNames
             var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
 //            console.log('In MainPage.componentDidUpdate viewNames=', viewNames);
