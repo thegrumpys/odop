@@ -5,7 +5,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     
     // Update Constraint Violations
 
-    console.log('<li>','Start pxUpdateObjectiveValue','p=',p,'x=',x,'</li><ul>');
+//    console.log('<li>','Start pxUpdateObjectiveValue','p=',p,'x=',x,'</li><ul>');
 
     /*
      * The following section of code constructs the objective function from the
@@ -70,8 +70,8 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
                     viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
                     infeasible = true;
                 }
-                console.log('In pxUpdateObjectiveValue IV    element=',element,'ip=',ip,'pp=',pp,'element.cmax=',element.cmax,'element.smax=',element.smax);
-                console.log('In pxUpdateObjectiveValue IV    element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
+//                console.log('In pxUpdateObjectiveValue IV    element=',element,'ip=',ip,'pp=',pp,'element.cmax=',element.cmax,'element.smax=',element.smax);
+//                console.log('In pxUpdateObjectiveValue IV    element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
             } else if ((element.type === "equationset" && !element.input) || element.type === "calcinput") { // Dependent Variable
                 xx = x[ix++];
                 /* State variable fix levels. */
@@ -150,8 +150,8 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
                         infeasible = true;
                     }
                 }
-                console.log('In pxUpdateObjectiveValue DV/CI element=',element,'ix=',ix,'xx=',xx,'element.cmax=',element.cmax,'element.smax=',element.smax);
-                console.log('In pxUpdateObjectiveValue DV/CI element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum);
+//                console.log('In pxUpdateObjectiveValue DV/CI element=',element,'ix=',ix,'xx=',xx,'element.cmax=',element.cmax,'element.smax=',element.smax);
+//                console.log('In pxUpdateObjectiveValue DV/CI element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum);
             }
 //        console.log('In pxUpdateObjectiveValue at end element=',element);
     }
