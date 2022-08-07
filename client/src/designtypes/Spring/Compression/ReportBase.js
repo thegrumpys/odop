@@ -86,15 +86,6 @@ export class ReportBase extends Component {
          * From: http://springipedia.com/compression-general-design.asp
          */
 
-        /* used to compute % tensile values */
-//        if (this.props.symbol_table[o.Tensile].value <= this.props.system_controls.smallnum) {
-//            return (
-//                    <>
-//                    YOU MUST SUPPLY A VALUE FOR TENSILE STRENGTH IN ORDER TO COMPLETE THESE CALCULATIONS.
-//                    </>
-//        );
-//        }
-
         this.dhat = this.props.symbol_table[o.Tensile].value / 100.0;
         var kc = (4.0 * this.props.symbol_table[o.Spring_Index].value - 1.0) / (4.0 * this.props.symbol_table[o.Spring_Index].value - 4.0);
         var ks = kc + 0.615 / this.props.symbol_table[o.Spring_Index].value;
@@ -107,13 +98,13 @@ export class ReportBase extends Component {
         this.kw2str2 = temp * this.props.symbol_table[o.Force_2].value;
         this.kw2strs = temp * this.props.symbol_table[o.Force_Solid].value;
 
-        temp = 0.7 * this.props.symbol_table[o.Tensile].value;  // allowable stress for preset
         if (this.props.symbol_table[o.Stress_1].value !== 0.0)
             this.fs_1 = Math.abs(this.props.symbol_table[o.Stress_Lim_Stat].value / this.props.symbol_table[o.Stress_1].value);
         else
             this.fs_1 = Number.POSITIVE_INFINITY;
 
         /*  unused
+         *  temp = 0.7 * this.props.symbol_table[o.Tensile].value;  // allowable stress for preset
          *  if (this.kw2str1 !== 0.0) kw2fs_1 = Math.abs(temp / this.kw2str1);
          *  else kw2fs_1 = 0.0;
          *  if (this.kw2str2 !== 0.0) kw2fs_2 = temp / this.kw2str2;
