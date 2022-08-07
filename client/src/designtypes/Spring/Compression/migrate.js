@@ -350,6 +350,9 @@ export function migrate(design) {
         design.symbol_table[51].validmin = -Number.MAX_VALUE; // const_term
         design.symbol_table[52].validmin = -Number.MAX_VALUE; // slope_term
         design.symbol_table[53].validmin = -Number.MAX_VALUE; // tensile_010
+        if (design['units'] === "Metric") {
+               design.symbol_table[29].units = "newtons";
+        };
         migrated_design.version = '12'; // last thing... set the migrated model version
         displayMessage(
             "The new Alert Facility may highlight previously unrecognized issues saved with earlier designs. Enter \"Alerts\" in Help Lookup and/or contact technical support.",

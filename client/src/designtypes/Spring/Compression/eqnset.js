@@ -10,6 +10,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
     var stress_avg;
     var stress_rng;
     var se2;
+    var deflectMax;
     
     /*  *******  DESIGN EQUATIONS  *******                  */
     x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
@@ -35,8 +36,23 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 //    console.log('x[o.Coils_A]=',x[o.Coils_A]);
 //    console.log('x[o.Rate]=',x[o.Rate]);
 
-    x[o.Deflect_1] = p[o.Force_1] / x[o.Rate];
-    x[o.Deflect_2] = p[o.Force_2] / x[o.Rate];
+    x[o.L_Solid] = p[o.Wire_Dia] * (p[o.Coils_T] + x[o.Add_Coils_Solid]);
+    deflectMax =  p[o.L_Free] - x[o.L_Solid];
+
+    if(deflectMax > zero) {
+        x[o.Deflect_1] = p[o.Force_1] / x[o.Rate];
+        x[o.Deflect_2] = p[o.Force_2] / x[o.Rate];
+        if(x[o.Deflect_1] > deflectMax) {
+               x[o.Deflect_1] = deflectMax;
+        }
+        if(x[o.Deflect_2] > deflectMax) {
+               x[o.Deflect_2] = deflectMax;
+        }
+    }
+    else {
+        x[o.Deflect_1] = deflectMax;
+        x[o.Deflect_2] = deflectMax;
+    }
 
     x[o.L_1] = p[o.L_Free] - x[o.Deflect_1];
     x[o.L_2] = p[o.L_Free] - x[o.Deflect_2];
@@ -44,8 +60,6 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
     x[o.L_Stroke] = x[o.L_1] - x[o.L_2];
 
     x[o.Slenderness] = p[o.L_Free] / x[o.Mean_Dia];
-
-    x[o.L_Solid] = p[o.Wire_Dia] * (p[o.Coils_T] + x[o.Add_Coils_Solid]);
 
     x[o.Force_Solid] = x[o.Rate] * (p[o.L_Free] - x[o.L_Solid]);
 
