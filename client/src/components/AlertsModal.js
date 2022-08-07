@@ -111,38 +111,40 @@ class AlertsModal extends Component {
                     <Card bg="light">
                         <Card.Header>
                             <table>
-                                <tr>
-                                    <td width="25%">
-                                        <Accordion.Toggle as={Button} variant="primary" size="sm" eventKey="0" disabled={all_alerts.length === 0} >
-                                            Alerts&nbsp;{all_alerts.length > 0 ?<span className="badge bg-danger">{all_alerts.length}</span> : ''}
-                                        </Accordion.Toggle>
-                                        &nbsp;
-                                        <OverlayTrigger placement="bottom" overlay={
-                                            <Tooltip>
-                                                ALERTS are error, warning, notice and informational messages produced in response to design changes.
-                                                Error alerts indicate a value outside its validity range.
-                                                Warning alerts are produced if the relationship between two values is incorrect.
-                                                Notice alerts summarize violated minimum or maximum constraints.
-                                                Informational alerts highlight other general conditions.
-                                                A red "badge" on the Alerts button indicates the total number of pending alerts.
-                                                Close the Alerts panel with a second click on the Alerts button.
-                                            </Tooltip>
-                                        }>
-                                            <span><i className="fas fa-info-circle text-primary"></i></span>
-                                        </OverlayTrigger>
-                                    </td>
-                                    <td>
-                                        <InputGroup>
-                                            <InputGroup.Text id="alertLevel" size="sm">Alert Level</InputGroup.Text>
-                                            <ButtonGroup>
-                                                <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Error")} active={this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}> Error </Button>
-                                               <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Warning")} active={this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}> Warning </Button>
-                                                <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Notice")} active={this.state.level === "Notice" || this.state.level === "Info"}> Notice </Button>
-                                                <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Info")} active={this.state.level === "Info"}> Informational</Button>
-                                            </ButtonGroup>
-                                        </InputGroup>
-                                    </td>
-                                </tr> 
+                                <tbody>
+                                    <tr>
+                                        <td width="25%">
+                                            <Accordion.Toggle as={Button} variant="primary" size="sm" eventKey="0" disabled={all_alerts.length === 0} >
+                                                Alerts&nbsp;{all_alerts.length > 0 ?<span className="badge bg-danger">{all_alerts.length}</span> : ''}
+                                            </Accordion.Toggle>
+                                            &nbsp;
+                                            <OverlayTrigger placement="bottom" overlay={
+                                                <Tooltip>
+                                                    ALERTS are error, warning, notice and informational messages produced in response to design changes.
+                                                    Error alerts indicate a value outside its validity range.
+                                                    Warning alerts are produced if the relationship between two values is incorrect.
+                                                    Notice alerts summarize violated minimum or maximum constraints.
+                                                    Informational alerts highlight other general conditions.
+                                                    A red "badge" on the Alerts button indicates the total number of pending alerts.
+                                                    Close the Alerts panel with a second click on the Alerts button.
+                                                </Tooltip>
+                                            }>
+                                                <span><i className="fas fa-info-circle text-primary"></i></span>
+                                            </OverlayTrigger>
+                                        </td>
+                                        <td>
+                                            <InputGroup>
+                                                <InputGroup.Text id="alertLevel" size="sm">Alert Level</InputGroup.Text>
+                                                <ButtonGroup>
+                                                    <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Error")} active={this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}> Error </Button>
+                                                    <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Warning")} active={this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}> Warning </Button>
+                                                    <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Notice")} active={this.state.level === "Notice" || this.state.level === "Info"}> Notice </Button>
+                                                    <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Info")} active={this.state.level === "Info"}> Informational</Button>
+                                                </ButtonGroup>
+                                            </InputGroup>
+                                        </td>
+                                    </tr> 
+                                </tbody> 
                             </table>
                         </Card.Header>
                         {all_alerts.length > 0 ?
