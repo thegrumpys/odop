@@ -134,7 +134,7 @@ class FormControlTypeNumber extends Component {
         delete p.icon_alerts;
         delete p.validmin;
         delete p.validmax;
-
+console.log('this.props=',this.props,'p=',p);
         var icon_class = "fas fa-exclamation-triangle icon-invalid ";
         return (<>
             {icon_alerts.length > 0 ?
