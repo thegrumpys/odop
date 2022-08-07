@@ -39,6 +39,9 @@ export const DELETE_AUTO_SAVE = 'DELETE_AUTO_SAVE';
 
 export const LOG_USAGE = 'LOG_USAGE';
 
+export const VALID_MIN = 'VALID_MIN';
+export const VALID_MAX = 'VALID_MAX';
+
 export const MIN = 'MIN';
 export const MAX = 'MAX';
 

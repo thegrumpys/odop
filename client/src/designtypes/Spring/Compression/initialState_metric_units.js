@@ -1,4 +1,4 @@
-import { CONSTRAINED } from '../../../store/actionTypes';
+import { CONSTRAINED, VALID_MIN } from '../../../store/actionTypes';
 export const initialState = {
     "symbol_table": [
         {
@@ -479,7 +479,8 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "= Force_2 - Force_Solid Provides restoring influence in Search when Force_2 is specified greater than Force_Solid",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "propagate": [{ name: "Force_2", minmax: VALID_MIN }]
         },
         {
             "input": false,

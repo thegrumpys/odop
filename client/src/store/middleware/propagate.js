@@ -17,8 +17,8 @@ export function propagate(store) {
             for (let j = 0; j < source.propagate.length; j++) {
                 var entry = source.propagate[j];
                 var sink = nameMatch(entry);
-//                console.log('In propagate source=',source,'sink=',sink);
-//                console.log('In propagate sink.name=',sink.name,'entry.minmax=',entry.minmax,'value=',value);
+                console.log('In propagate source=',source,'sink=',sink);
+                console.log('In propagate sink.name=',sink.name,'entry.minmax=',entry.minmax,'value=',value);
                 store.dispatch(changeSymbolConstraint(sink.name, entry.minmax, value));
             }
         }

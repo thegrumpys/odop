@@ -364,7 +364,7 @@ export function migrate(design) {
             "sdlim": 0.1,
             "tooltip": "= Force_2 - Force_Solid Provides restoring influence in Search when Force_2 is specified greater than Force_Solid",
             "type": "equationset",
-            "hidden": false
+            "hidden": true
         });
         if (design['units'] === "Metric") {
                design.symbol_table[29].units = "newtons";

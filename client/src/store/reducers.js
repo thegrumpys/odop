@@ -34,7 +34,10 @@ import { STARTUP,
 
     LOG_USAGE,
 
-    MIN } from './actionTypes';
+    VALID_MIN, VALID_MAX,
+
+    MIN, MAX,
+} from './actionTypes';
 import { sclden } from './middleware/sclden';
 import { initialSystemControls } from '../initialSystemControls';
 import { logUsage } from '../logUsage';
@@ -155,10 +158,18 @@ export function reducers(state, action) {
                                 cmin: action.payload.value,
                                 smin: sclden(state.model.system_controls, element.value, action.payload.value, element.sdlim, element.lmin)
                             });
-                        } else {
+                        } else if (action.payload.minmax === MAX) {
                             return Object.assign({}, element, {
                                 cmax: action.payload.value,
                                 smax: sclden(state.model.system_controls, element.value, action.payload.value, element.sdlim, element.lmax)
+                            });
+                        } else if (action.payload.minmax === VALID_MIN) {
+                            return Object.assign({}, element, {
+                                validmin: action.payload.value,
+                            });
+                        } else if (action.payload.minmax === VALID_MAX) {
+                            return Object.assign({}, element, {
+                                validmax: action.payload.value,
                             });
                         }
                     }
