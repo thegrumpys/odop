@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, OverlayTrigger, Tooltip, Accordion, Card } from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip, Accordion, Card, ButtonGroup, InputGroup } from 'react-bootstrap';
 import { clearAlerts, getAlertsBySeverity } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
@@ -18,6 +18,7 @@ class AlertsModal extends Component {
         this.onClose = this.onClose.bind(this);
         this.state = {
             modal: false, // Default: do not display
+            level: 'Error',
         };
     }
 
@@ -68,33 +69,81 @@ class AlertsModal extends Component {
         });
     }
     
+    setLevel(level) {
+        this.setState({
+            level: level
+        });
+    }
+    
     render() {
 //        console.log('In AlertsModal.render this=',this);
         var line = 1;
-        var all_alerts = getAlertsBySeverity();
+        var err_alerts;
+        var warning_alerts;
+        var notice_alerts;
+        var info_alerts;
+        var all_alerts = [];
+        if (this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") {
+            err_alerts = getAlertsBySeverity('Err');
+        } else {
+            err_alerts = [];
+        }
+        if (this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") {
+            warning_alerts = getAlertsBySeverity('Warning');
+        } else {
+            warning_alerts = [];
+        }
+        if (this.state.level === "Notice" || this.state.level === "Info") {
+            notice_alerts = getAlertsBySeverity('Notice');
+        } else {
+            notice_alerts = [];
+        }
+        if (this.state.level === "Info") {
+            info_alerts = getAlertsBySeverity('Info');
+        } else {
+            info_alerts = [];
+        }
+        all_alerts = all_alerts.concat(err_alerts,warning_alerts,notice_alerts,info_alerts)
 //        console.log('In AlertsModal.render all_alerts=',all_alerts);
         return (
             <>
                 <Accordion className="col-md-12 mb-3">
                     <Card bg="light">
                         <Card.Header>
-                            <Accordion.Toggle as={Button} variant="primary" size="sm" eventKey="0" disabled={all_alerts.length === 0} >
-                                Alerts&nbsp;{all_alerts.length > 0 ?<span className="badge bg-danger">{all_alerts.length}</span> : ''}
-                            </Accordion.Toggle>
-                            &nbsp;
-                            <OverlayTrigger placement="bottom" overlay={
-                                <Tooltip>
-                                    ALERTS are error, warning, notice and informational messages produced in response to design changes.
-                                    Error alerts indicate a value outside its validity range.
-                                    Warning alerts are produced if the relationship between two values is incorrect.
-                                    Notice alerts summarize violated minimum or maximum constraints.
-                                    Informational alerts highlight other general conditions.
-                                    A red "badge" on the Alerts button indicates the total number of pending alerts.
-                                    Close the Alerts panel with a second click on the Alerts button.
-                                </Tooltip>
-                            }>
-                                <span><i className="fas fa-info-circle text-primary"></i></span>
-                            </OverlayTrigger>
+                            <table>
+                                <tr>
+                                    <td width="25%">
+                                        <Accordion.Toggle as={Button} variant="primary" size="sm" eventKey="0" disabled={all_alerts.length === 0} >
+                                            Alerts&nbsp;{all_alerts.length > 0 ?<span className="badge bg-danger">{all_alerts.length}</span> : ''}
+                                        </Accordion.Toggle>
+                                        &nbsp;
+                                        <OverlayTrigger placement="bottom" overlay={
+                                            <Tooltip>
+                                                ALERTS are error, warning, notice and informational messages produced in response to design changes.
+                                                Error alerts indicate a value outside its validity range.
+                                                Warning alerts are produced if the relationship between two values is incorrect.
+                                                Notice alerts summarize violated minimum or maximum constraints.
+                                                Informational alerts highlight other general conditions.
+                                                A red "badge" on the Alerts button indicates the total number of pending alerts.
+                                                Close the Alerts panel with a second click on the Alerts button.
+                                            </Tooltip>
+                                        }>
+                                            <span><i className="fas fa-info-circle text-primary"></i></span>
+                                        </OverlayTrigger>
+                                    </td>
+                                    <td>
+                                        <InputGroup>
+                                            <InputGroup.Text id="alertLevel" size="sm">Alert Level</InputGroup.Text>
+                                            <ButtonGroup>
+                                                <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Error")} active={this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}> Error </Button>
+                                               <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Warning")} active={this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}> Warning </Button>
+                                                <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Notice")} active={this.state.level === "Notice" || this.state.level === "Info"}> Notice </Button>
+                                                <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Info")} active={this.state.level === "Info"}> Informational</Button>
+                                            </ButtonGroup>
+                                        </InputGroup>
+                                    </td>
+                                </tr> 
+                            </table>
                         </Card.Header>
                         {all_alerts.length > 0 ?
                         <Accordion.Collapse eventKey="0">
@@ -158,7 +207,8 @@ class AlertsModal extends Component {
                                        </tr>
                                     </thead>
                                     <tbody>
-                                        {getAlertsBySeverity('Err').map((entry, index) => {
+                                        {(this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") && 
+                                            err_alerts.map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
@@ -180,7 +230,8 @@ class AlertsModal extends Component {
                                                 </tr>
                                             );
                                         })}
-                                        {getAlertsBySeverity('Warn').map((entry, index) => {
+                                        {(this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") && 
+                                            warning_alerts.map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
@@ -202,7 +253,8 @@ class AlertsModal extends Component {
                                                 </tr>
                                             );
                                         })}
-                                        {getAlertsBySeverity('Notice').map((entry, index) => {
+                                        {(this.state.level === "Notice" || this.state.level === "Info") && 
+                                            notice_alerts.map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
@@ -224,7 +276,8 @@ class AlertsModal extends Component {
                                                 </tr>
                                             );
                                         })}
-                                        {getAlertsBySeverity('Info').map((entry, index) => {
+                                        {(this.state.level === "Info") && 
+                                            info_alerts.map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
