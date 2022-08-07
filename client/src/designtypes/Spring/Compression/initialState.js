@@ -479,7 +479,7 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "= Force_2 - Force_Solid Provides restoring influence in Search when Force_2 is specified greater than Force_Solid",
             "type": "equationset",
-            "hidden": true,
+            "hidden": false,
             "propagate": [{ name: "Force_2", minmax: VALID_MIN }]
         },
         {
