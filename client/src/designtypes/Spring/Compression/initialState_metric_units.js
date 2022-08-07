@@ -1,4 +1,4 @@
-import { CONSTRAINED, VALID_MIN } from '../../../store/actionTypes';
+import { CONSTRAINED, VALID_MAX } from '../../../store/actionTypes';
 export const initialState = {
     "symbol_table": [
         {
@@ -319,7 +319,8 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Load required to fully compress the spring",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "propagate": [{ name: "Force_2", minmax: VALID_MAX }]
         },
         {
             "input": false,
@@ -464,23 +465,6 @@ export const initialState = {
             "tooltip": "Change in elastic potential energy between 1 and 2",
             "type": "equationset",
             "hidden": false
-        },
-        {
-            "input": false,
-            "name": "Excess_Force",
-            "value": 0.0,
-            "units": "newtons",
-            "lmin": 0,
-            "lmax": 0,
-            "cmin": 0.0,
-            "cmax": 1000,
-            "validmin": -Number.MAX_VALUE,
-            "validmax": 0.0,
-            "sdlim": 0.1,
-            "tooltip": "= Force_2 - Force_Solid Provides restoring influence in Search when Force_2 is specified greater than Force_Solid",
-            "type": "equationset",
-            "hidden": false,
-            "propagate": [{ name: "Force_2", minmax: VALID_MIN }]
         },
         {
             "input": false,

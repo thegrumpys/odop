@@ -350,22 +350,6 @@ export function migrate(design) {
         design.symbol_table[51].validmin = -Number.MAX_VALUE; // const_term
         design.symbol_table[52].validmin = -Number.MAX_VALUE; // slope_term
         design.symbol_table[53].validmin = -Number.MAX_VALUE; // tensile_010
-        design.symbol_table.splice(29,0,{
-            "input": false,
-            "name": "Excess_Force",
-            "value": 0.0,
-            "units": "pounds",
-            "lmin": 0,
-            "lmax": 0,
-            "cmin": 0.0,
-            "cmax": 1000,
-            "validmin": -Number.MAX_VALUE,
-            "validmax": 0.0,
-            "sdlim": 0.1,
-            "tooltip": "= Force_2 - Force_Solid Provides restoring influence in Search when Force_2 is specified greater than Force_Solid",
-            "type": "equationset",
-            "hidden": false
-        });
         if (design['units'] === "Metric") {
                design.symbol_table[29].units = "newtons";
         };
