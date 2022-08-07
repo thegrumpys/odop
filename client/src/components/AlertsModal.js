@@ -136,10 +136,22 @@ class AlertsModal extends Component {
                                             <InputGroup>
                                                 <InputGroup.Text id="alertLevel" size="sm">Alert Level</InputGroup.Text>
                                                 <ButtonGroup>
-                                                    <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Error")} active={this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}> Error </Button>
-                                                    <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Warning")} active={this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}> Warning </Button>
-                                                    <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Notice")} active={this.state.level === "Notice" || this.state.level === "Info"}> Notice </Button>
-                                                    <Button variant="outline-primary" size="sm" onClick={() => this.setLevel("Info")} active={this.state.level === "Info"}> Informational</Button>
+                                                    <Button variant="outline-primary" size="sm" 
+                                                    onClick={() => this.setLevel("Error")} active={this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}>
+                                                    Error
+                                                    </Button>
+                                                    <Button variant="outline-primary" size="sm" 
+                                                    onClick={() => this.setLevel("Warning")} active={this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}>
+                                                    Warning
+                                                    </Button>
+                                                    <Button variant="outline-primary" size="sm" 
+                                                    onClick={() => this.setLevel("Notice")} active={this.state.level === "Notice" || this.state.level === "Info"}>
+                                                    Notice
+                                                    </Button>
+                                                    <Button variant="outline-primary" size="sm" 
+                                                    onClick={() => this.setLevel("Info")} active={this.state.level === "Info"}>
+                                                    Informational
+                                                    </Button>
                                                 </ButtonGroup>
                                             </InputGroup>
                                         </td>
@@ -209,8 +221,7 @@ class AlertsModal extends Component {
                                        </tr>
                                     </thead>
                                     <tbody>
-                                        {(this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") && 
-                                            err_alerts.map((entry, index) => {
+                                        {err_alerts.map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
@@ -232,8 +243,7 @@ class AlertsModal extends Component {
                                                 </tr>
                                             );
                                         })}
-                                        {(this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") && 
-                                            warning_alerts.map((entry, index) => {
+                                        {warning_alerts.map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
@@ -255,8 +265,7 @@ class AlertsModal extends Component {
                                                 </tr>
                                             );
                                         })}
-                                        {(this.state.level === "Notice" || this.state.level === "Info") && 
-                                            notice_alerts.map((entry, index) => {
+                                        {notice_alerts.map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
@@ -278,8 +287,7 @@ class AlertsModal extends Component {
                                                 </tr>
                                             );
                                         })}
-                                        {(this.state.level === "Info") && 
-                                            info_alerts.map((entry, index) => {
+                                        {info_alerts.map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
