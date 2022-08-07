@@ -89,7 +89,7 @@ class AlertsModal extends Component {
             err_alerts = [];
         }
         if (this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") {
-            warning_alerts = getAlertsBySeverity('Warning');
+            warning_alerts = getAlertsBySeverity('Warn');
         } else {
             warning_alerts = [];
         }
