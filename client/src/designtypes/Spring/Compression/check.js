@@ -145,19 +145,19 @@ export function check(store) {        /*    Compression  Spring  */
 
 // Alerts specific to compression springs. 
 
-    if (design.model.symbol_table[o.Force_1].value >= design.model.symbol_table[o.Force_2].value) {
+    if (design.model.symbol_table[o.Force_1].value > design.model.symbol_table[o.Force_2].value) {
         addAlert({
             element: design.model.symbol_table[o.Force_1], 
             name: design.model.symbol_table[o.Force_1].name, 
-            message: check_message(design,o.Force_1,'>=',o.Force_2),
-            severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#F1_GE_F2)',
+            message: check_message(design,o.Force_1,'>',o.Force_2),
+            severity: 'Err',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#F1_GT_F2)',
         });
         addAlert({
             element: design.model.symbol_table[o.Force_2], 
             name: design.model.symbol_table[o.Force_2].name, 
             message: check_message(design,o.Force_2,'<',o.Force_1),
-            severity: 'Warn',
+            severity: 'Err',
             duplicate: true
         });
     }
@@ -172,7 +172,7 @@ export function check(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.Force_Solid],
             name: design.model.symbol_table[o.Force_Solid].name, 
-            message: check_message(design,o.Force_Solid,'<=',o.Force_2),
+            message: check_message(design,o.Force_Solid,'<',o.Force_2),
             severity: 'Err',
             duplicate: true
         });
@@ -209,32 +209,13 @@ export function check(store) {        /*    Compression  Spring  */
             duplicate: true
         });
     }
-    if (design.model.symbol_table[o.FS_Solid].value < 1.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
+    if (design.model.symbol_table[o.FS_Solid].value < 1.0) {
         addAlert({
             element: design.model.symbol_table[o.FS_Solid], 
             name: design.model.symbol_table[o.FS_Solid].name, 
             message: design.model.symbol_table[o.FS_Solid].name + ' (' + design.model.symbol_table[o.FS_Solid].value.toODOPPrecision() + ') < 1.0',
             severity: 'Warn',
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)'
-        });
-    }
-    var PC_Avail_Deflect1 = 100.0 * design.model.symbol_table[o.Deflect_1].value / (design.model.symbol_table[o.L_Free].value - design.model.symbol_table[o.L_Solid].value); 
-    if (PC_Avail_Deflect1 < 20.0) {
-        addAlert({
-            value: PC_Avail_Deflect1, 
-            name: '%_Avail_Deflect@1', 
-            message: '%_Avail_Deflect@1 (' + PC_Avail_Deflect1.toODOPPrecision() + ') < 20',
-            severity: 'Info',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect1_LT_20)'
-        });
-    }
-    if (design.model.symbol_table[o.PC_Avail_Deflect].value > 80.0) {
-        addAlert({
-            element: design.model.symbol_table[o.PC_Avail_Deflect], 
-            name: design.model.symbol_table[o.PC_Avail_Deflect].name + '@2', 
-            message: '%_Avail_Deflect@2 (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') > 80',
-            severity: 'Info',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect2_GT_80)'
         });
     }
     var deflectRatio = design.model.symbol_table[o.Deflect_2].value / design.model.symbol_table[o.L_Free].value;
@@ -266,6 +247,25 @@ export function check(store) {        /*    Compression  Spring  */
                 help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#buckling)'
             });
         }
+    }
+    var PC_Avail_Deflect1 = 100.0 * design.model.symbol_table[o.Deflect_1].value / (design.model.symbol_table[o.L_Free].value - design.model.symbol_table[o.L_Solid].value); 
+    if (PC_Avail_Deflect1 < 20.0) {
+        addAlert({
+            value: PC_Avail_Deflect1, 
+            name: '%_Avail_Deflect@1', 
+            message: '%_Avail_Deflect@1 (' + PC_Avail_Deflect1.toODOPPrecision() + ') < 20',
+            severity: 'Info',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect1_LT_20)'
+        });
+    }
+    if (design.model.symbol_table[o.PC_Avail_Deflect].value > 80.0) {
+        addAlert({
+            element: design.model.symbol_table[o.PC_Avail_Deflect], 
+            name: design.model.symbol_table[o.PC_Avail_Deflect].name + '@2', 
+            message: '%_Avail_Deflect@2 (' + design.model.symbol_table[o.PC_Avail_Deflect].value.toODOPPrecision() + ') > 80',
+            severity: 'Info',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect2_GT_80)'
+        });
     }
 
 //    console.log('</ul><li>','End check','</li>');

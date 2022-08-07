@@ -3,7 +3,7 @@
 Alerts specific to compression springs. 
 
 ### On this page:   
- - [Force_1 >= Force_2](alerts.html#F1_GE_F2)  
+ - [Force_1 >= Force_2](alerts.html#F1_GT_F2)  
  - [Excess Force](alerts.html#Excess_Force)  
  - [L_Free < L_Solid](alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](alerts.html#L_2_LT_L_Solid)  
@@ -14,12 +14,12 @@ Alerts specific to compression springs.
 
 ___
 
-<a id="F1_GE_F2"></a>  
+<a id="F1_GT_F2"></a>  
 ___
 
 Alert entry #C101
-## Force_1 >= Force_2 
-The force (applied load) at operating point 1 (Force_1) is greater than or equal to the force at operating point 2 (Force_2). 
+## Force_1 > Force_2 
+The force (applied load) at operating point 1 (Force_1) is greater than the force at operating point 2 (Force_2). 
 
 Compression spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Force_Solid). 
 The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 
