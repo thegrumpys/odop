@@ -22,7 +22,11 @@ class Value extends Component {
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
                     <InputGroup>
                         {typeof this.props.value === 'number' ?
-                            <FormControlTypeNumber id={'v_'+this.props.id} disabled={true} value={this.props.value} />
+                            (this.props.value !== Number.NEGATIVE_INFINITY && this.props.value !== Number.POSITIVE_INFINITY ? 
+                                <FormControlTypeNumber id={'v_'+this.props.id} disabled={true} value={this.props.value} />
+                                :
+                                <Form.Control id={'v_'+this.props.id} type="text" disabled={true} className="text-right" value={this.props.value.toFixed()} />
+                            )
                             :
                             <Form.Control id={'v_'+this.props.id} type="text" disabled={true} className="text-right" value={this.props.value} />
                         }

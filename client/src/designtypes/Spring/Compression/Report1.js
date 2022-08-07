@@ -112,7 +112,7 @@ class Report1 extends ReportBase {
                             <td>{this.props.symbol_table[o.ID_Free].value.toFixed(4)}</td>
                             <td/>
                             <td>{(0.0).toFixed(0)}</td>
-                            <td>infinite</td>
+                            <td>Infinity</td>
                         </tr>
                         <tr>
                             <td><b>1</b></td>

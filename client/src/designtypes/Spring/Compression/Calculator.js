@@ -62,7 +62,7 @@ export class Calculator extends ReportBase {
                                 <Value id="Stress_Free" value={0.0} />
                                 <td className="align-middle">
                                     <InputGroup>
-                                        <Form.Control type="text" disabled={true} className="text-right text-muted" value={"Infinite"} />
+                                        <Form.Control type="text" disabled={true} className="text-right text-muted" value={"Infinity"} />
                                     </InputGroup>
                                 </td>
                             </tr>
