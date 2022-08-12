@@ -3,7 +3,7 @@
 Alerts specific to extension springs. 
 
 ### On this page:   
- - [Force_1 >= Force_2](alerts.html#F1_GE_F2)  
+ - [Force_1 > Force_2](alerts.html#F1_GT_F2)  
  - [Force_1 < Initial_Tension](alerts.html#F1_LT_IT)  
  - [Initial tension manufacturability concern; <br/>Stress_Initial < Stress_Init_Lo](alerts.html#SInit_LT_SInit_Lo)  
  - [Initial tension manufacturability concern; <br/>Stress_Initial > Stress_Init_Hi](alerts.html#SInit_GT_SInit_Hi)  
@@ -13,12 +13,12 @@ Alerts specific to extension springs.
 
 ___
 
-<a id="F1_GE_F2"></a>  
+<a id="F1_GT_F2"></a>  
 ___
 
 Alert entry #E201
-## Force_1 >= Force_2 
-The force at operating point 1 (Force_1) is greater than or equal to the force at operating point 2 (Force_2). 
+## Force_1 > Force_2 
+The force at operating point 1 (Force_1) is greater than the force at operating point 2 (Force_2). 
 
 Extension spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Max Safe). 
 The [Extension Spring Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springFD_Diag) 
@@ -51,9 +51,8 @@ Where practical, change these values in the direction specified:
 Increase | &nbsp; | Decrease  
 ---      | ---    | ---  
  Force_1 | &nbsp; | Initial_Tension  
- OD_Free | &nbsp; | &nbsp;  
 
-Alternatively, confirm that the Force_1 MIN constraint is set to the (FDCL) of Initial_Tension 
+Alternatively, confirm that the Force_1 MIN constraint is set to the (FDCL) value of Initial_Tension 
 and use the Search feature (menu Action : Search or Search button). 
 
 See also: 

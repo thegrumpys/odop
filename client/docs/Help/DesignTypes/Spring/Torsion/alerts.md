@@ -3,18 +3,18 @@
 Alerts specific to torsion springs. 
 
 ### On this page:   
- - [M_1 >= M_2](alerts.html#M1_GE_M2)  
+ - [M_1 > M_2](alerts.html#M1_GT_M2)  
  - [%_Safe_Deflect @ 2 > 80%](alerts.html#PC_Safe_Deflect2_GT_80)  
  - [%_Safe_Deflect @ 1 < 20%](alerts.html#PC_Safe_Deflect1_LT_20)  
 
 ___
 
-<a id="M1_GE_M2"></a>  
+<a id="M1_GT_M2"></a>  
 ___
 
 Alert entry #T301
-## M_1 >= M_2 
-The moment at operating point 1 (M_1) is greater than or equal to the moment at operating point 2 (M_2). 
+## M_1 > M_2 
+The moment at operating point 1 (M_1) is greater than the moment at operating point 2 (M_2). 
 
 Torsion spring moments are ordered from the smallest (free condition) to M_1 to M_2 to the largest (Max Safe). 
 The [Torsion Spring Moment - Deflection Diagram](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springFD_Diag) 

@@ -145,19 +145,19 @@ export function check(store) {        /*    Compression  Spring  */
 
 // Alerts specific to extension springs. 
 
-    if (design.model.symbol_table[o.Force_1].value >= design.model.symbol_table[o.Force_2].value) {
+    if (design.model.symbol_table[o.Force_1].value > design.model.symbol_table[o.Force_2].value) {
         addAlert({
             element: design.model.symbol_table[o.Force_1], 
             name: design.model.symbol_table[o.Force_1].name, 
-            message: check_message(design,o.Force_1,'>=',o.Force_2),
-            severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#F1_GE_F2)',
+            message: check_message(design,o.Force_1,'>',o.Force_2),
+            severity: 'Err',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#F1_GT_F2)',
         });
         addAlert({
             element: design.model.symbol_table[o.Force_2], 
             name: design.model.symbol_table[o.Force_2].name, 
             message: check_message(design,o.Force_2,'<',o.Force_1),
-            severity: 'Warn',
+            severity: 'Err',
             duplicate: true
         });
     }
@@ -172,7 +172,7 @@ export function check(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.Initial_Tension],
             name: design.model.symbol_table[o.Initial_Tension].name, 
-            message: check_message(design,o.Initial_Tension,'>=',o.Force_1),
+            message: check_message(design,o.Initial_Tension,'>',o.Force_1),
             severity: 'Warn',
             duplicate: true
         });

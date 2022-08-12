@@ -145,19 +145,19 @@ export function check(store) {        /*    Compression  Spring  */
 
 // Alerts specific to torsion springs. 
 
-    if (design.model.symbol_table[o.M_1].value >= design.model.symbol_table[o.M_2].value) {
+    if (design.model.symbol_table[o.M_1].value > design.model.symbol_table[o.M_2].value) {
         addAlert({
             element: design.model.symbol_table[o.M_1], 
             name: design.model.symbol_table[o.M_1].name, 
-            message: check_message(design,o.M_1,'>=',o.M_2),
-            severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#M1_GE_M2)',
+            message: check_message(design,o.M_1,'>',o.M_2),
+            severity: 'Err',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#M1_GT_M2)',
         });
         addAlert({
             element: design.model.symbol_table[o.M_2], 
             name: design.model.symbol_table[o.M_2].name, 
             message: check_message(design,o.M_2,'<',o.M_1),
-            severity: 'Warn',
+            severity: 'Err',
             duplicate: true
         });
     }
