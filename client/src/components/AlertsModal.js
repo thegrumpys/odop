@@ -1,12 +1,58 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, OverlayTrigger, Tooltip, Accordion, Card, ButtonGroup, InputGroup } from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip, Accordion, Card, ButtonGroup, InputGroup, Badge } from 'react-bootstrap';
 import { clearAlerts, getAlertsBySeverity } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
 import config from '../config';
 import Emitter from './Emitter';
+import { useState, useContext } from 'react';
+import AccordionContext from "react-bootstrap/AccordionContext";
+import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
+
+function ContextAwareAccordion({ children }) {
+    const [activeKey, setActiveKey] = useState(null)
+    console.log("In ContextAwareAccordion activeKey=",activeKey);
+    const currentEventKey = useContext(AccordionContext);
+    console.log("In ContextAwareAccordion currentEventKey=",currentEventKey);
+    return (
+        <Accordion className="col-md-12 mb-3" activeKey={activeKey} onSelect={eventKey => {
+            console.log('In ContextAwareAccordion currentEventKey=',currentEventKey,'eventKey=',eventKey);
+            if (currentEventKey !== eventKey) {
+                setActiveKey('0');
+            } else {
+                setActiveKey(null);
+            }
+         }}>
+            {children}
+        </Accordion>
+    );
+}
+
+//function ContextAwareToggle({ children, eventKey, callback }) {
+//    console.log("In ContextAwareToggle eventKey=",eventKey,'callback=',callback);
+//    const currentEventKey = useContext(AccordionContext);
+//    console.log("In ContextAwareToggle AccordionContext=",AccordionContext,"currentEventKey=",currentEventKey);
+//    const decoratedOnClick = useAccordionToggle(
+//        eventKey,
+//        () => {
+//            console.log("In ContextAwareToggle.decoratedOnClick currentEventKey=",currentEventKey,"eventKey=",eventKey);
+//            callback && currentEventKey !== eventKey && callback(eventKey)
+//        },
+//    );
+//    const isCurrentEventKey = currentEventKey === eventKey;
+//    console.log("In ContextAwareToggle isCurrentEventKey=",isCurrentEventKey);
+//    return (
+//        <button
+//            type="button"
+//            style={{ backgroundColor: isCurrentEventKey ? 'pink' : 'lavender' }}
+//            onClick={decoratedOnClick}
+//        >
+//            {children}
+//        </button>
+//    );
+//}
 
 class AlertsModal extends Component {
   
@@ -83,81 +129,52 @@ class AlertsModal extends Component {
         var notice_alerts;
         var info_alerts;
         var all_alerts = [];
-        if (this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") {
-            err_alerts = getAlertsBySeverity('Err');
-        } else {
-            err_alerts = [];
-        }
-        if (this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") {
-            warning_alerts = getAlertsBySeverity('Warn');
-        } else {
-            warning_alerts = [];
-        }
-        if (this.state.level === "Notice" || this.state.level === "Info") {
-            notice_alerts = getAlertsBySeverity('Notice');
-        } else {
-            notice_alerts = [];
-        }
-        if (this.state.level === "Info") {
-            info_alerts = getAlertsBySeverity('Info');
-        } else {
-            info_alerts = [];
-        }
+        err_alerts = getAlertsBySeverity('Err');
+        warning_alerts = getAlertsBySeverity('Warning');
+        notice_alerts = getAlertsBySeverity('Notice');
+        info_alerts = getAlertsBySeverity('Info');
         all_alerts = all_alerts.concat(err_alerts,warning_alerts,notice_alerts,info_alerts)
 //        console.log('In AlertsModal.render all_alerts=',all_alerts);
         return (
             <>
-                <Accordion className="col-md-12 mb-3">
+                <ContextAwareAccordion>
                     <Card bg="light">
                         <Card.Header>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td width="25%">
-                                            <Accordion.Toggle as={Button} variant="primary" size="sm" eventKey="0" disabled={all_alerts.length === 0} >
-                                                Alerts&nbsp;{all_alerts.length > 0 ?<span className="badge bg-danger">{all_alerts.length}</span> : ''}
-                                            </Accordion.Toggle>
-                                            &nbsp;
-                                            <OverlayTrigger placement="bottom" overlay={
-                                                <Tooltip>
-                                                    ALERTS are error, warning, notice and informational messages produced in response to design changes.
-                                                    Error alerts indicate a value outside its validity range.
-                                                    Warning alerts are produced if the relationship between two values is incorrect.
-                                                    Notice alerts summarize violated minimum or maximum constraints.
-                                                    Informational alerts highlight other general conditions.
-                                                    A red "badge" on the Alerts button indicates the total number of pending alerts.
-                                                    Close the Alerts panel with a second click on the Alerts button.
-                                                </Tooltip>
-                                            }>
-                                                <span><i className="fas fa-info-circle text-primary"></i></span>
-                                            </OverlayTrigger>
-                                        </td>
-                                        <td>
                                             <InputGroup>
-                                                <InputGroup.Text id="alertLevel" size="sm">Alert Level</InputGroup.Text>
+                                                <InputGroup.Text id="alertLevel" size="sm"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;Alerts</InputGroup.Text>
                                                 <ButtonGroup>
-                                                    <Button variant="outline-primary" size="sm" 
-                                                    onClick={() => this.setLevel("Error")} active={this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}>
-                                                    Error
-                                                    </Button>
-                                                    <Button variant="outline-primary" size="sm" 
-                                                    onClick={() => this.setLevel("Warning")} active={this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}>
-                                                    Warning
-                                                    </Button>
-                                                    <Button variant="outline-primary" size="sm" 
-                                                    onClick={() => this.setLevel("Notice")} active={this.state.level === "Notice" || this.state.level === "Info"}>
-                                                    Notice
-                                                    </Button>
-                                                    <Button variant="outline-primary" size="sm" 
-                                                    onClick={() => this.setLevel("Info")} active={this.state.level === "Info"}>
-                                                    Informational
-                                                    </Button>
+                                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0}  eventKey="0"
+                                                        onClick={() => this.setLevel("Error")} active={this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}>
+                                                        Err&nbsp;{err_alerts.length > 0 ? <Badge variant="danger">{err_alerts.length}</Badge> : ''}
+                                                    </Accordion.Toggle>
+                                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0}  eventKey="1"
+                                                        onClick={() => this.setLevel("Warning")} active={this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}>
+                                                        Warn&nbsp;{warning_alerts.length > 0 ? <Badge variant="danger">{warning_alerts.length}</Badge> : ''}
+                                                    </Accordion.Toggle>
+                                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0}  eventKey="2"
+                                                        onClick={() => this.setLevel("Notice")} active={this.state.level === "Notice" || this.state.level === "Info"}>
+                                                        Notice&nbsp;{notice_alerts.length > 0 ? <Badge variant="danger">{notice_alerts.length}</Badge> : ''}
+                                                    </Accordion.Toggle>
+                                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0}  eventKey="3"
+                                                        onClick={() => this.setLevel("Info")} active={this.state.level === "Info"}>
+                                                        Info&nbsp;{info_alerts.length > 0 ? <Badge variant="danger">{info_alerts.length}</Badge> : ''}
+                                                    </Accordion.Toggle>
                                                 </ButtonGroup>
+                                                &nbsp;
+                                                <OverlayTrigger placement="bottom" overlay={
+                                                    <Tooltip>
+                                                        ALERTS are error, warning, notice and informational messages produced in response to design changes.
+                                                        Error alerts indicate a value outside its validity range.
+                                                        Warning alerts are produced if the relationship between two values is incorrect.
+                                                        Notice alerts summarize violated minimum or maximum constraints.
+                                                        Informational alerts highlight other general conditions.
+                                                        A red "badge" on the Alerts button indicates the total number of pending alerts.
+                                                        Close the Alerts panel with a second click on the Alerts button.
+                                                    </Tooltip>
+                                                }>
+                                                    <span><i className="fas fa-info-circle text-primary mt-2"></i></span>
+                                                </OverlayTrigger>
                                             </InputGroup>
-                                        </td>
-                                    </tr> 
-                                </tbody> 
-                            </table>
                         </Card.Header>
                         {all_alerts.length > 0 ?
                         <Accordion.Collapse eventKey="0">
@@ -167,61 +184,61 @@ class AlertsModal extends Component {
                                         <tr key="0">
                                             <th>
                                                 <OverlayTrigger placement="top" overlay={<Tooltip>
-                                                Alert number<br/>
-                                                Alerts are sorted by Severity
-                                                </Tooltip>}>
+                                                        Alert number<br/>
+                                                        Alerts are sorted by Severity
+                                                    </Tooltip>}>
                                                     <span>#</span>
                                                 </OverlayTrigger>
                                             </th>
                                             <th>
                                                 <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                                <b>Error (Err):</b><br/>
-                                                value outside valid range<br/>
-                                                <b>Warning (Warn):</b><br/>
-                                                relationship between two values is incorrect or invalid<br/>
-                                                <b>Notice (Notice):</b><br/>
-                                                significantly violated constraints<br/>
-                                                <b>Information (Info):</b><br/>
-                                                insights about aspects of system operation
-                                                </Tooltip>}>
+                                                        <b>Error (Err):</b><br/>
+                                                        value outside valid range<br/>
+                                                        <b>Warning (Warn):</b><br/>
+                                                        relationship between two values is incorrect or invalid<br/>
+                                                        <b>Notice (Notice):</b><br/>
+                                                        significantly violated constraints<br/>
+                                                        <b>Information (Info):</b><br/>
+                                                        insights about aspects of system operation
+                                                    </Tooltip>}>
                                                     <span>Severity</span>
                                                 </OverlayTrigger>
                                             </th>
                                             <th>
                                                 <OverlayTrigger placement="top" overlay={<Tooltip>
-                                                Brief summary of alert<br/>
-                                                Font tracks Severity
-                                                </Tooltip>}>
+                                                        Brief summary of alert<br/>
+                                                        Font tracks Severity
+                                                    </Tooltip>}>
                                                             <span>Message</span>
                                                 </OverlayTrigger>
                                             </th>
                                             <th>
                                                 <OverlayTrigger placement="top" overlay={<Tooltip>
-                                                Name of associated variable
-                                                
-                                                </Tooltip>}>
+                                                        Name of associated variable
+                                                    </Tooltip>}>
                                                     <span>Name</span>
                                                 </OverlayTrigger>
                                             </th>
                                             <th>
                                                 <OverlayTrigger placement="top" overlay={<Tooltip>
-                                                Use entry field below to change value of the associated variable or constraint.<br/>
-                                                Where possible, the color below tracks design feasibility.
-                                                </Tooltip>}>
+                                                        Use entry field below to change value of the associated variable or constraint.<br/>
+                                                       Where possible, the color below tracks design feasibility.
+                                                    </Tooltip>}>
                                                     <span>Value</span>
                                                 </OverlayTrigger>
                                             </th>
                                             <th>
                                                 <OverlayTrigger placement="top" overlay={<Tooltip>
-                                                Use "Help" button below to see details of a specific alert
-                                                </Tooltip>}>
+                                                        Use "Help" button below to see details of a specific alert
+                                                    </Tooltip>}>
                                                     <span>Details</span>
                                                 </OverlayTrigger>
                                             </th>
                                        </tr>
                                     </thead>
                                     <tbody>
-                                        {err_alerts.map((entry, index) => {
+                                        {(this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") && 
+                                            err_alerts.map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
@@ -243,7 +260,8 @@ class AlertsModal extends Component {
                                                 </tr>
                                             );
                                         })}
-                                        {warning_alerts.map((entry, index) => {
+                                        {(this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") && 
+                                            warning_alerts.map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
@@ -265,7 +283,8 @@ class AlertsModal extends Component {
                                                 </tr>
                                             );
                                         })}
-                                        {notice_alerts.map((entry, index) => {
+                                        {(this.state.level === "Notice" || this.state.level === "Info") && 
+                                            notice_alerts.map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
@@ -287,7 +306,8 @@ class AlertsModal extends Component {
                                                 </tr>
                                             );
                                         })}
-                                        {info_alerts.map((entry, index) => {
+                                        {(this.state.level === "Info") && 
+                                            info_alerts.map((entry, index) => {
 //                                            console.log('In AlertsModal.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
@@ -316,7 +336,7 @@ class AlertsModal extends Component {
                         :
                         ''}
                     </Card>
-                </Accordion>
+                </ContextAwareAccordion>
             </>
         );
     }
