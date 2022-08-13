@@ -133,6 +133,20 @@ export function check(store) {        /*    Compression  Spring  */
             });
         }
     }
+    var hits = 0;
+    if (!design.model.symbol_table[o.Coils_A].lmin & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.Spring_Index].lmin & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.Spring_Index].lmax & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.FS_2].lmin & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.FS_2].lmax & CONSTRAINED) ++hits;
+    if (hits > 0) {
+        addAlert({
+            name: 'Default constraints', 
+            message: 'Default constraint(s) have been disabled',
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#DefaultConstraint)'
+        });
+    }
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
         addAlert({
             element: design.model.symbol_table[o.Tensile],
@@ -216,6 +230,18 @@ export function check(store) {        /*    Compression  Spring  */
             message: design.model.symbol_table[o.FS_Solid].name + ' (' + design.model.symbol_table[o.FS_Solid].value.toODOPPrecision() + ') < 1.0',
             severity: 'Warn',
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)'
+        });
+    }
+    hits = 0;
+    if (!design.model.symbol_table[o.Deflect_1].lmin & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.FS_Solid].lmin & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.PC_Avail_Deflect].lmax & CONSTRAINED) ++hits;
+    if (hits > 0) {
+        addAlert({
+            name: 'Default constraints', 
+            message: 'Default constraint(s) have been disabled',
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#C_DefaultConstraint)'
         });
     }
     var deflectRatio = design.model.symbol_table[o.Deflect_2].value / design.model.symbol_table[o.L_Free].value;

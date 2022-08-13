@@ -8,6 +8,7 @@ Alerts specific to compression springs.
  - [L_Free < L_Solid](alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](alerts.html#L_2_LT_L_Solid)  
  - [FS_Solid < 1.0](alerts.html#FS_Solid_LT_1)  
+ - [Default constraint(s) have been disabled](alerts.html#C_DefaultConstraint)  
  - [%_Avail_Deflect @ 2 > 80%](alerts.html#PC_Avail_Deflect2_GT_80)  
  - [%_Avail_Deflect @ 1 < 20%](alerts.html#PC_Avail_Deflect1_LT_20)  
  - [Buckling concern](alerts.html#buckling)  
@@ -132,10 +133,38 @@ and run the Search feature (menu Action : Search or Search button).
 
 ___
 
-<a id="PC_Avail_Deflect2_GT_80"></a>  
+<a id="C_DefaultConstraint"></a>  
 ___
 
 Alert entry #C106
+## Default constraint(s) have been disabled 
+  
+Disabling default constraints is not recommended.  
+
+The default constraints guide Search (and also the Seek and Trade features that use Search) to 
+"good" spring designs. 
+
+For example: 
+ - disabling the lower (MIN) constraint on factor of safety at solid (FS_Solid MIN) 
+allows Search to return a design that would "set" (not return to the original free length if fully deflected) 
+and declare it as "feasible". 
+ - disabling the upper (MAX) constraint on percent available deflection at operating load point 2 (%_Avail_Deflect) 
+allows Search to return a design that would deflect all the way to solid under the second operating load (Force_2) 
+and declare it as "feasible". 
+
+If a design that achieves its second operating load (Force_2) near or at the solid condition is desired, 
+change the value of the FS_2 MIN constraint to be 1.0 and the value of the 
+%_Avail_Deflect MAX constraint to be 100. 
+
+While it may be reasonable to adjust the constraint values of a default constraint, 
+disabling a default constraint entirely is not recommended. 
+
+___
+
+<a id="PC_Avail_Deflect2_GT_80"></a>  
+___
+
+Alert entry #C107
 ## %_Avail_Deflect @ 2 > 80% 
 Coil to coil contact may cause inaccuracy in operating point 2. 
 
@@ -161,7 +190,7 @@ ___
 <a id="PC_Avail_Deflect1_LT_20"></a>  
 ___
 
-Alert entry #C107
+Alert entry #C108
 ## %_Avail_Deflect @ 1 < 20% 
 End effects may cause inaccuracy in operating point 1.  
 
@@ -187,7 +216,7 @@ ___
 <a id="buckling"></a>  
 ___
 
-Alert entry #C108
+Alert entry #C109
 ## Buckling concern 
 A spring of these dimensions and loading has a tendency to buckle. 
 

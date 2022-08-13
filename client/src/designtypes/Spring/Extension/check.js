@@ -133,12 +133,26 @@ export function check(store) {        /*    Compression  Spring  */
             });
         }
     }
+    var hits = 0;
+    if (!design.model.symbol_table[o.Coils_A].lmin & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.Spring_Index].lmin & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.Spring_Index].lmax & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.FS_2].lmin & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.FS_2].lmax & CONSTRAINED) ++hits;
+    if (hits > 0) {
+        addAlert({
+            name: 'Default constraints', 
+            message: 'Default constraint(s) have been disabled',
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#DefaultConstraint)'
+        });
+    }
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
         addAlert({
             element: design.model.symbol_table[o.Tensile],
             name: design.model.symbol_table[o.Tensile].name, 
             message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + design.model.symbol_table[o.Tensile].value.toODOPPrecision() + ') <= ' + design.model.system_controls.smallnum.toODOPPrecision(),
-            severity: 'Err',
+            severity: 'Warn',
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)'
         });
     }
@@ -230,6 +244,20 @@ export function check(store) {        /*    Compression  Spring  */
             message: 'Material property data not available', 
             severity: 'Warn', 
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#NoMatProp)' 
+        });
+    }
+    hits = 0;
+    if (!design.model.symbol_table[o.Force_1].lmin & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.Stress_Initial].lmin & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.Stress_Initial].lmax & CONSTRAINED) ++hits;
+    if (!design.model.symbol_table[o.PC_Safe_Deflect].lmax & CONSTRAINED) ++hits;
+    console.log('In extension check.js - hits =', hits);
+    if (hits > 0) {
+        addAlert({
+            name: 'Default constraints', 
+            message: 'Default constraint(s) have been disabled',
+            severity: 'Warn',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#E_DefaultConstraint)'
         });
     }
 //    var PC_Safe_Deflect1 = 100 * (design.model.symbol_table[o.Deflect_1].value / safe_travel); // safe_travel from ReportBase - save for another day
