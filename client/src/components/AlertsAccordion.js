@@ -19,9 +19,11 @@ var ContextAwareAccordion = function({ children }) {
             if (activeKey === null || this.state.level !== eventKey) {
 //                console.log('In ContextAwareAccordion EXPAND');
                 setActiveKey('0');
+                this.setState({caret: <span className="pb-3 pr-1"><i className="fas fa-caret-down" /></span>});
             } else {
 //                console.log('In ContextAwareAccordion COLLAPSE');
                 setActiveKey(null);
+                this.setState({caret: <span className="pb-3 pr-1"><i className="fas fa-caret-right" /></span>});
             }
          }}>
             {children}
@@ -40,6 +42,7 @@ class AlertsAccordion extends Component {
         ContextAwareAccordion = ContextAwareAccordion.bind(this);
         this.state = {
             level: 'Error',
+            caret: <span className="pb-3 pr-1"><i className="fas fa-caret-right" /></span>,
         };
     }
 
@@ -110,7 +113,7 @@ class AlertsAccordion extends Component {
                     <Card bg="light">
                         <Card.Header>
                             <InputGroup>
-                                <InputGroup.Text id="alertLevel" size="sm">Alerts</InputGroup.Text>
+                                <InputGroup.Text id="alertLevel" size="sm">{this.state.caret}&nbsp;&nbsp;Alerts</InputGroup.Text>
                                 <ButtonGroup>
                                     <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey="Error"
                                         onClick={() => this.setLevel("Error")} active={this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}>
