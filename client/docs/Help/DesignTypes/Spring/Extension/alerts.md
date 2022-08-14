@@ -192,8 +192,9 @@ Alert entry #E207
   
 Disabling default constraints is not recommended.  
 
-The default constraints guide Search (and also the Seek and Trade features that use Search) to 
-"good" spring designs. 
+The default constraints guide Search to "good" spring designs. 
+The Seek and Trade features utilize Search internally and thus those results are also
+guided by the default constraints. 
 
 For example: 
  - disabling the lower (MIN) constraint on the first operating load (Force_1 MIN) 

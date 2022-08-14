@@ -17,6 +17,30 @@ function check_message(design, left, op, right) {
   return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
 }
 
+function add_DCD_alert(element, urlCode) {
+    var urlString;
+    switch(urlCode){
+        case "C":
+            urlString = '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#C_DefaultConstraint)'
+            break;
+        case "E":
+            urlString = '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#E_DefaultConstraint)'
+            break;
+        case "T":
+             urlString = '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#T_DefaultConstraint)'
+            break;
+        default:
+            urlString = '[Help](/docs/Help/DesignTypes/Spring/alerts.html#DefaultConstraint)'
+    }
+    addAlert({
+        element: element,
+        name: element.name, 
+        message: 'Default constraint has been disabled',
+        severity: 'Warn',
+        help_url: urlString
+    });
+}
+
 export function check(store) {        /*    Compression  Spring  */
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
     clearAlerts();
@@ -133,20 +157,11 @@ export function check(store) {        /*    Compression  Spring  */
             });
         }
     }
-    var hits = 0;
-    if (!(design.model.symbol_table[o.Coils_A].lmin & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.Spring_Index].lmin & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.Spring_Index].lmax & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.FS_2].lmin & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.FS_2].lmax & CONSTRAINED)) ++hits;
-    if (hits > 0) {
-        addAlert({
-            name: 'Default constraints', 
-            message: 'Default constraint(s) have been disabled',
-            severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#DefaultConstraint)'
-        });
-    }
+    if (!(design.model.symbol_table[o.Coils_A].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Coils_A], '');
+    if (!(design.model.symbol_table[o.Spring_Index].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], '');
+    if (!(design.model.symbol_table[o.Spring_Index].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], '');
+    if (!(design.model.symbol_table[o.FS_2].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], '');
+    if (!(design.model.symbol_table[o.FS_2].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], '');
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
         addAlert({
             element: design.model.symbol_table[o.Tensile],
@@ -232,18 +247,9 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)'
         });
     }
-    hits = 0;
-    if (!(design.model.symbol_table[o.Deflect_1].lmin & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.FS_Solid].lmin & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.PC_Avail_Deflect].lmax & CONSTRAINED)) ++hits;
-    if (hits > 0) {
-        addAlert({
-            name: 'Default constraints', 
-            message: 'Default constraint(s) have been disabled',
-            severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#C_DefaultConstraint)'
-        });
-    }
+    if (!(design.model.symbol_table[o.Deflect_1].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Deflect_1], 'C');
+    if (!(design.model.symbol_table[o.FS_Solid].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_Solid], 'C');
+    if (!(design.model.symbol_table[o.PC_Avail_Deflect].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.PC_Avail_Deflect], 'C');
     var deflectRatio = design.model.symbol_table[o.Deflect_2].value / design.model.symbol_table[o.L_Free].value;
     var sq1 = 1.4 * design.model.symbol_table[o.Slenderness].value - 4.0;
     var buckleMsg;

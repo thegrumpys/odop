@@ -4,6 +4,7 @@ Alerts specific to torsion springs.
 
 ### On this page:   
  - [M_1 > M_2](alerts.html#M1_GT_M2)  
+ - [Default constraint(s) have been disabled](alerts.html#T_DefaultConstraint)  
  - [%_Safe_Deflect @ 2 > 80%](alerts.html#PC_Safe_Deflect2_GT_80)  
  - [%_Safe_Deflect @ 1 < 20%](alerts.html#PC_Safe_Deflect1_LT_20)  
 
@@ -36,10 +37,35 @@ Need to add content that allows this link to be uncommented and replace the stop
 
 ___
 
-<a id="PC_Safe_Deflect2_GT_80"></a>  
+<a id="T_DefaultConstraint"></a>  
 ___
 
 Alert entry #T302
+## Default constraint(s) have been disabled 
+  
+Disabling default constraints is not recommended. 
+
+The default constraints guide Search to "good" spring designs. 
+The Seek and Trade features utilize Search internally and thus those results are also
+guided by the default constraints. 
+
+For example: 
+ - constraining the value of deflection at operating point 1 (Deflect_1) to be positive (greater than zero) 
+prevents Search from returning designs with negative values for moment and deflection at operating point 1. 
+ - depending on the configuration of other constraints, 
+disabling the upper (MAX) constraint on percent safe deflection at operating load point 2 (%_Safe_Deflect) 
+might allow Search to return a design where the the second operating load (Force_2) exceeds the allowable stress 
+for a static load (Stress_Lim_Stat) and declare it to be "feasible". 
+
+While it may be reasonable to adjust the constraint values of a default constraint, 
+disabling a default constraint entirely is not recommended. 
+
+___
+
+<a id="PC_Safe_Deflect2_GT_80"></a>  
+___
+
+Alert entry #T303
 ## %_Safe_Deflect @ 2 > 80% 
 The second operating point (point 2) has more than 80% of maximum safe deflection. 
 While this is not usually a problem, 
@@ -67,7 +93,7 @@ ___
 <a id="PC_Safe_Deflect1_LT_20"></a>  
 ___
 
-Alert entry #T303
+Alert entry #T304
 ## %_Safe_Deflect @ 1 < 20% 
 
 The first operating point (point 1) has less than 20% of maximum safe deflection. 

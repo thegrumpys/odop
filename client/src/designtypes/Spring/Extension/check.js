@@ -17,6 +17,30 @@ function check_message(design, left, op, right) {
   return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
 }
 
+function add_DCD_alert(element, urlCode) {
+    var urlString;
+    switch(urlCode){
+        case "C":
+            urlString = '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#C_DefaultConstraint)'
+            break;
+        case "E":
+            urlString = '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#E_DefaultConstraint)'
+            break;
+        case "T":
+             urlString = '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#T_DefaultConstraint)'
+            break;
+        default:
+            urlString = '[Help](/docs/Help/DesignTypes/Spring/alerts.html#DefaultConstraint)'
+    }
+    addAlert({
+        element: element,
+        name: element.name, 
+        message: 'Default constraint has been disabled',
+        severity: 'Warn',
+        help_url: urlString
+    });
+}
+
 export function check(store) {        /*    Compression  Spring  */
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
     clearAlerts();
@@ -133,20 +157,11 @@ export function check(store) {        /*    Compression  Spring  */
             });
         }
     }
-    var hits = 0;
-    if (!(design.model.symbol_table[o.Coils_A].lmin & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.Spring_Index].lmin & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.Spring_Index].lmax & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.FS_2].lmin & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.FS_2].lmax & CONSTRAINED)) ++hits;
-    if (hits > 0) {
-        addAlert({
-            name: 'Default constraints', 
-            message: 'Default constraint(s) have been disabled',
-            severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#DefaultConstraint)'
-        });
-    }
+    if (!(design.model.symbol_table[o.Coils_A].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Coils_A], '');
+    if (!(design.model.symbol_table[o.Spring_Index].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], '');
+    if (!(design.model.symbol_table[o.Spring_Index].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], '');
+    if (!(design.model.symbol_table[o.FS_2].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], '');
+    if (!(design.model.symbol_table[o.FS_2].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], '');
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
         addAlert({
             element: design.model.symbol_table[o.Tensile],
@@ -246,20 +261,10 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#NoMatProp)' 
         });
     }
-    hits = 0;
-    if (!(design.model.symbol_table[o.Force_1].lmin & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.Stress_Initial].lmin & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.Stress_Initial].lmax & CONSTRAINED)) ++hits;
-    if (!(design.model.symbol_table[o.PC_Safe_Deflect].lmax & CONSTRAINED)) ++hits;
-    console.log('In extension check.js - hits =', hits);
-    if (hits > 0) {
-        addAlert({
-            name: 'Default constraints', 
-            message: 'Default constraint(s) have been disabled',
-            severity: 'Warn',
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#E_DefaultConstraint)'
-        });
-    }
+    if (!(design.model.symbol_table[o.Force_1].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Force_1], 'E');
+    if (!(design.model.symbol_table[o.Stress_Initial].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Stress_Initial], 'E');
+    if (!(design.model.symbol_table[o.Stress_Initial].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Stress_Initial], 'E');
+    if (!(design.model.symbol_table[o.PC_Safe_Deflect].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.PC_Safe_Deflect], 'E');
 //    var PC_Safe_Deflect1 = 100 * (design.model.symbol_table[o.Deflect_1].value / safe_travel); // safe_travel from ReportBase - save for another day
 //    if (PC_Safe_Deflect1 < 20.0) {
 //        addAlert({
