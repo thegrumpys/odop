@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
@@ -110,39 +110,13 @@ class FormControlTypeNumber extends Component {
         if (this.state.focused && isNaN(parseFloat(this.state.valueString))) {
             className += ' borders-invalid';
         }
-        var icon_alerts = this.props.icon_alerts; // start with the icon alerts 
-        if (icon_alerts === undefined) {
-          icon_alerts = [];
-        }
-//        console.log('In FormControlTypeNumber.render icon_alerts=',icon_alerts);
-        var icon_tooltip;
-        if (icon_alerts.length > 0) {
-            icon_tooltip =
-                <>
-                    <b>Alerts</b>
-                    <ul>
-                        {icon_alerts.map((entry, i) => { return <li className={entry.className} key={i}>{entry.severity}: {entry.message}</li>})}
-                    </ul>
-                </>;
-//            console.log('icon_tooltip=',icon_tooltip);
-        }
-
         var p = Object.assign({},this.props); // clone the props
         delete p.onChangeValid; // remove special on functions
         delete p.onChangeInvalid;
         delete p.disabledText;
-        delete p.icon_alerts;
         delete p.validmin;
         delete p.validmax;
-console.log('this.props=',this.props,'p=',p);
-        var icon_class = "fas fa-exclamation-triangle icon-invalid ";
         return (<>
-            {icon_alerts.length > 0 ?
-                <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{icon_tooltip}</Tooltip>}>
-                    <i className={icon_class}></i>
-                </OverlayTrigger>
-            :
-            ''}
             <Form.Control type="number"
                 {...p} // Allow OverlayTrigger to pass-in other props
                 onClick={this.onClick}
