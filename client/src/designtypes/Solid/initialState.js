@@ -197,7 +197,7 @@ export const initialState = {
     "labels": [
         {
             "name": "COMMENT",
-            "value": "Rectangular Solid default Startup file - US units ..."
+            "value": "Rectangular Solid default start point - US units ..."
         }
     ],
     "type": "Solid",

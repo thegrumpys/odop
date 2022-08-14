@@ -15,7 +15,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Spring/Extension","US"),'}</li>
                         <li>{'changeName("Startup"),'}</li>
-                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Extension Spring default start point ..."}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Extension Spring default start point - US units ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                 </>
@@ -23,7 +23,7 @@ export const execute = {
             actions: [
                 loadInitialState("Spring/Extension","US"),
                 changeName("Startup"),
-                changeLabelsValue([{name: "COMMENT", value: "Extension Spring default start point ..."}]),
+                changeLabelsValue([{name: "COMMENT", value: "Extension Spring default start point - US units ..."}]),
                 startup(),
             ]
         }

@@ -1043,7 +1043,7 @@ export const initialState = {
     "labels": [
         {
             "name": "COMMENT",
-            "value": "Extension Spring default start point ... metric units"
+            "value": "Extension Spring default start point - Metric units ..."
         },
         {
             "name": "Contact person",

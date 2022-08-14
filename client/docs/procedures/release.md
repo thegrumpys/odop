@@ -43,9 +43,8 @@ The database names are summarized in [Procedures for creating a new JAWSDB](NewD
 1. Start server and client under your development environment. 
 If they are already started, log off of Okta and re-log into Okta to ensure the session is valid and not at risk of time-out.   
 1. Verify initial_state and migrate match: Repeat the following steps for each design type (Piston-Cylinder, Solid, Spring/Compression, Spring/Extension, and Spring/Torsion) with an impacted initialState or initialSystemControls. 
-    1. Modify File > Export to create sorted output by uncommenting sort capability.
     1. For each design type that has an impacted Initial State 
-        1. Do a File > Open > Load Initial State. Run Action > Execute > mk[x] script where x is only mkStartup & mkStartup_Metric (ignore all the other mk files), and Exit to created each [x] file. Do a File > Export and rename into the [mk\_x] JSON file.
+        1. Do a File > Open > Load Initial State. Run Action > Execute > mk[x] script where x is Startups, Startup & Startup_Metric (ignore all the other mk files), and Exit to created each [x] file. Do a File > Sorted Export and rename into the [mk\_x] JSON file.
         1. Separately do a File > Open > Startup which should migrate it followed by a File : Export and rename into a "Migrated\_x" JSON file.
         1. Compare the two JSON files to verify that initial state and migration operate exactly the same. If they don't match then repair them until they do or the changes are as intended.
     1. When done modify File > Export to recomment out sort capability.

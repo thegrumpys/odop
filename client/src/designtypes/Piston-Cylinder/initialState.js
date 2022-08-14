@@ -101,7 +101,7 @@ export const initialState = {
     "labels": [
         {
             "name": "COMMENT",
-            "value": "PCYL Default startup file - US units..."
+            "value": "PCYL default start point - US units ..."
         }
     ],
     "type": "Piston-Cylinder",

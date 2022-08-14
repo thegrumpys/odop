@@ -15,7 +15,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Spring/Torsion","Metric"),'}</li>
                         <li>{'changeName("Startup_Metric"),'}</li>
-                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Torsion Spring default start point ... metric units"}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Torsion Spring default start point - Metric units ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                 </>
@@ -23,7 +23,7 @@ export const execute = {
             actions: [
                 loadInitialState("Spring/Torsion","Metric"),
                 changeName("Startup_Metric"),
-                changeLabelsValue([{name: "COMMENT", value: "Torsion Spring default start point ... metric units"}]),
+                changeLabelsValue([{name: "COMMENT", value: "Torsion Spring default start point - Metric units ..."}]),
                 startup(),
             ]
         }

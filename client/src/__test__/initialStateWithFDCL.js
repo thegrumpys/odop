@@ -91,7 +91,7 @@ export const initialStateWithFDCL = {
     "labels": [
         {
             "name": "COMMENT",
-            "value": "PCYL Default startup file ..."
+            "value": "PCYL default start point - US units ..."
         }
     ],
     "type": "Piston-Cylinder",

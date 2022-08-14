@@ -855,7 +855,7 @@ export const initialState = {
     "labels": [
         {
             "name": "COMMENT",
-            "value": "Compression Spring default start point ..."
+            "value": "Compression Spring default start point - US units ..."
         },
         {
             "name": "Contact person",

@@ -936,7 +936,7 @@ export const initialState = {
     "labels": [
         {
             "name": "COMMENT",
-            "value": "Torsion Spring default start point"
+            "value": "Torsion Spring default start point - US units ..."
         },
         {
             "name": "Contact person",

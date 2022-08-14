@@ -15,7 +15,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Piston-Cylinder","US"),'}</li>
                         <li>{'changeName("Startup"),'}</li>
-                        <li>{'changeLabelsValue([{name: "COMMENT", value: "PCYL Default startup - US units ..."}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "PCYL default start point - US units ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                     <p>
@@ -26,7 +26,7 @@ export const execute = {
             actions: [
                 loadInitialState("Piston-Cylinder","US"),
                 changeName("Startup"),
-                changeLabelsValue([{name: "COMMENT", value: "PCYL Default startup - US units ..."}]),
+                changeLabelsValue([{name: "COMMENT", value: "PCYL default start point - US units ..."}]),
                 startup(),
             ]
         },
@@ -38,7 +38,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Piston-Cylinder","Metric"),'}</li>
                         <li>{'changeName("Startup_Metric"),'}</li>
-                        <li>{'changeLabelsValue([{name: "COMMENT", value: "PCYL Default startup - metric units ..."}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "PCYL default start point - Metric units ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                     <p>
@@ -49,7 +49,7 @@ export const execute = {
             actions: [
                 loadInitialState("Piston-Cylinder","Metric"),
                 changeName("Startup_Metric"),
-                changeLabelsValue([{name: "COMMENT", value: "PCYL Default startup - metric units ..."}]),
+                changeLabelsValue([{name: "COMMENT", value: "PCYL default start point - Metric units ..."}]),
                 startup(),
             ]
         }

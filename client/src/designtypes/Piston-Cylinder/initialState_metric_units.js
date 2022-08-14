@@ -101,7 +101,7 @@ export const initialState = {
     "labels": [
         {
             "name": "COMMENT",
-            "value": "PCYL Default startup - metric units ..."
+            "value": "PCYL default start point - Metric units ..."
         }
     ],
     "type": "Piston-Cylinder",

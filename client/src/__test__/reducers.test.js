@@ -621,7 +621,7 @@ it('reducers change label value', () => {
 
     var design = store.getState(); // before
     expect(design.model.labels[0].name).toEqual('COMMENT');
-    expect(design.model.labels[0].value).toEqual('PCYL Default startup file ...');
+    expect(design.model.labels[0].value).toEqual('PCYL default start point - US units ...');
 
     store.dispatch(changeLabelsValue([{name: 'COMMENT', value: 'Test'}]));
 

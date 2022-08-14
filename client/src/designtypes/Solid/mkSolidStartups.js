@@ -23,7 +23,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Solid","US"),'}</li>
                         <li>{'changeName("Startup"),'}</li>
-                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Rectangular Solid default Startup - US units ..."}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Rectangular Solid default start point - US units ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                     <p>
@@ -34,7 +34,7 @@ export const execute = {
             actions: [
                 loadInitialState("Solid","US"),
                 changeName("Startup"),
-                changeLabelsValue([{name: "COMMENT", value: "Rectangular Solid default Startup - US units ..."}]),
+                changeLabelsValue([{name: "COMMENT", value: "Rectangular Solid default start point - US units ..."}]),
                 startup(),
             ]
         },
@@ -46,7 +46,7 @@ export const execute = {
                     <ol>
                         <li>{'loadInitialState("Solid","Metric"),'}</li>
                         <li>{'changeName("Startup_Metric"),'}</li>
-                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Rectangular Solid default Startup - metric units ..."}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Rectangular Solid default start point - Metric units ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                     <p>
@@ -57,7 +57,7 @@ export const execute = {
             actions: [
                 loadInitialState("Solid","Metric"),
                 changeName("Startup_Metric"),
-                changeLabelsValue([{name: "COMMENT", value: "Rectangular Solid default Startup - metric units ..."}]),
+                changeLabelsValue([{name: "COMMENT", value: "Rectangular Solid default start point - Metric units ..."}]),
                 startup(),
             ]
         },
