@@ -3,6 +3,34 @@ import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
 import Emitter from './Emitter';
 
+export var check_message = function(design, left, op, right) {
+  return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
+}
+
+export var add_DCD_alert = function(element, urlCode) {
+    var urlString;
+    switch(urlCode){
+        case "C":
+            urlString = '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#C_DefaultConstraint)'
+            break;
+        case "E":
+            urlString = '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#E_DefaultConstraint)'
+            break;
+        case "T":
+            urlString = '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#T_DefaultConstraint)'
+            break;
+        default:
+            urlString = '[Help](/docs/Help/DesignTypes/Spring/alerts.html#DefaultConstraint)'
+    }
+    addAlert({
+        element: element,
+        name: element.name, 
+        message: 'Default constraint has been disabled',
+        severity: 'Warn',
+        help_url: urlString
+    });
+}
+
 export var commonChecks = function(store) {
 //    console.log('In Alerts.commonChecks store=',store);
     var design = store.getState();

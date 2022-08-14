@@ -1,6 +1,6 @@
 import * as o from './symbol_table_offsets';
 //import * as mo from '../mat_offsets';
-import { commonChecks, clearAlerts, addAlert } from '../../../components/Alerts';
+import { commonChecks, clearAlerts, addAlert, check_message, add_DCD_alert } from '../../../components/Alerts';
 import { CONSTRAINED } from '../../../store/actionTypes';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
@@ -13,14 +13,9 @@ Number.prototype.toODOPPrecision = function() {
     return odopValue;
 };
 
-function check_message(design, left, op, right) {
-  return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
-}
-
 export function check(store) {        /*    Compression  Spring  */
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
     clearAlerts();
-    commonChecks(store);
     var design = store.getState();
 
 // Alerts common to all round-wire coil springs 
@@ -59,7 +54,7 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#MatPropAccuracy)'
         });
     }
-    if (design.model.symbol_table[o.Life_Category].value > 1 && !design.model.symbol_table[o.FS_CycleLife].lmin & CONSTRAINED) {
+    if (design.model.symbol_table[o.Life_Category].value > 1 && !(design.model.symbol_table[o.FS_CycleLife].lmin & CONSTRAINED)) {
         addAlert({
             element: design.model.symbol_table[o.FS_CycleLife], 
             name: design.model.symbol_table[o.FS_CycleLife].name, 
@@ -133,6 +128,11 @@ export function check(store) {        /*    Compression  Spring  */
             });
         }
     }
+    if (!(design.model.symbol_table[o.Coils_A].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Coils_A], '');
+    if (!(design.model.symbol_table[o.Spring_Index].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], '');
+    if (!(design.model.symbol_table[o.Spring_Index].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], '');
+    if (!(design.model.symbol_table[o.FS_2].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], '');
+    if (!(design.model.symbol_table[o.FS_2].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], '');
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
         addAlert({
             element: design.model.symbol_table[o.Tensile],
@@ -218,6 +218,9 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)'
         });
     }
+    if (!(design.model.symbol_table[o.Deflect_1].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Deflect_1], 'C');
+    if (!(design.model.symbol_table[o.FS_Solid].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_Solid], 'C');
+    if (!(design.model.symbol_table[o.PC_Avail_Deflect].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.PC_Avail_Deflect], 'C');
     var deflectRatio = design.model.symbol_table[o.Deflect_2].value / design.model.symbol_table[o.L_Free].value;
     var sq1 = 1.4 * design.model.symbol_table[o.Slenderness].value - 4.0;
     var buckleMsg;
@@ -267,6 +270,8 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#PC_Avail_Deflect2_GT_80)'
         });
     }
+
+    commonChecks(store); // Now run the generic checks after the more specific checks
 
 //    console.log('</ul><li>','End check','</li>');
 

@@ -14,14 +14,9 @@ Number.prototype.toODOPPrecision = function() {
     return odopValue;
 };
 
-//function check_message(design, left, op, right) {
-//  return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
-//}
-
 export function check(store) {
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
     clearAlerts();
-    commonChecks(store);
     var design = store.getState();
     if (design.model.symbol_table[o.PRESSURE].value < 0.0) {
         addAlert({
@@ -39,6 +34,8 @@ export function check(store) {
 //            duplicate: true
 //        });
     }
+
+    commonChecks(store); // Now run the generic checks after the more specific checks
 
 //    console.log('</ul><li>','End check','</li>');
 

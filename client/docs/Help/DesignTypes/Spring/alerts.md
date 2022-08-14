@@ -11,6 +11,7 @@ Alerts common to all round-wire coil springs
  - [Spring Index manufacturability concern](alerts.html#SI_manufacturability)  
  - [Cycle_Life calculation is not available](alerts.html#Cycle_LifeNA)  
  - [Cycle_Life not defined beyond yield](alerts.html#Cycle_LifeNA_FS_2)  
+ - [Default constraint(s) have been disabled](alerts.html#DefaultConstraint)  
  - [Value of Tensile is suspect](alerts.html#TensileValueSuspect)  
 
 ___
@@ -196,10 +197,36 @@ See also:
 
 ___
 
-<a id="TensileValueSuspect"></a>  
+<a id="DefaultConstraint"></a>  
 ___
 
 Alert entry #S59
+## Default constraint(s) have been disabled 
+  
+Disabling default constraints is not recommended.  
+
+The default constraints guide Search to "good" spring designs. 
+The Seek and Trade features utilize Search internally and thus those results are also
+guided by the default constraints. 
+
+For example: 
+ - disabling the lower (MIN) constraint on factor of safety at operating load point 2 (FS_2 MIN) 
+allows Search to return a highly over-stressed design and declare it as "feasible". 
+ - disabling the upper (MAX) constraint on factor of safety at operating load point 2 (FS_2 MAX) 
+allows Search to return a highly under-stressed design and declare it as "feasible". 
+
+If a relatively heavy, low-stress design is desired (an "over-design" situation), 
+increase the value of the FS_2 MAX constraint. 
+
+While it may be reasonable to adjust the constraint values of a default constraint, 
+disabling a default  constraint entirely is not recommended. 
+
+___
+
+<a id="TensileValueSuspect"></a>  
+___
+
+Alert entry #S60
 ## Value of Tensile is suspect 
   
 The value of Tensile strength is close to or less than zero.

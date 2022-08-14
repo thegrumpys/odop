@@ -3,22 +3,23 @@
 Alerts specific to extension springs. 
 
 ### On this page:   
- - [Force_1 >= Force_2](alerts.html#F1_GE_F2)  
+ - [Force_1 > Force_2](alerts.html#F1_GT_F2)  
  - [Force_1 < Initial_Tension](alerts.html#F1_LT_IT)  
  - [Initial tension manufacturability concern; <br/>Stress_Initial < Stress_Init_Lo](alerts.html#SInit_LT_SInit_Lo)  
  - [Initial tension manufacturability concern; <br/>Stress_Initial > Stress_Init_Hi](alerts.html#SInit_GT_SInit_Hi)  
  - [Fatigue failure at end is possible](alerts.html#FatigueInHook)  
  - [Material property data not available](alerts.html#NoMatProp)  
+ - [Default constraint(s) have been disabled](alerts.html#E_DefaultConstraint)  
  - [%_Safe_Deflect @ 1 < 20%](alerts.html#PC_Safe_Deflect1_LT_20)  
 
 ___
 
-<a id="F1_GE_F2"></a>  
+<a id="F1_GT_F2"></a>  
 ___
 
 Alert entry #E201
-## Force_1 >= Force_2 
-The force at operating point 1 (Force_1) is greater than or equal to the force at operating point 2 (Force_2). 
+## Force_1 > Force_2 
+The force at operating point 1 (Force_1) is greater than the force at operating point 2 (Force_2). 
 
 Extension spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Max Safe). 
 The [Extension Spring Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springFD_Diag) 
@@ -51,9 +52,8 @@ Where practical, change these values in the direction specified:
 Increase | &nbsp; | Decrease  
 ---      | ---    | ---  
  Force_1 | &nbsp; | Initial_Tension  
- OD_Free | &nbsp; | &nbsp;  
 
-Alternatively, confirm that the Force_1 MIN constraint is set to the (FDCL) of Initial_Tension 
+Alternatively, confirm that the Force_1 MIN constraint is set to the (FDCL) value of Initial_Tension 
 and use the Search feature (menu Action : Search or Search button). 
 
 See also: 
@@ -184,10 +184,37 @@ See also:
 
 ___
 
-<a id="PC_Safe_Deflect1_LT_20"></a>  
+<a id="E_DefaultConstraint"></a>  
 ___
 
 Alert entry #E207
+## Default constraint(s) have been disabled 
+  
+Disabling default constraints is not recommended.  
+
+The default constraints guide Search to "good" spring designs. 
+The Seek and Trade features utilize Search internally and thus those results are also
+guided by the default constraints. 
+
+For example: 
+ - disabling the lower (MIN) constraint on the first operating load (Force_1 MIN) 
+allows Search to return a design that has Force_1 less than the initial tension and declare it to be "feasible". 
+This situation is ambiguous. 
+If this were to happen, calculations for L_Stroke and Cycle_Life may not be valid. 
+ - depending on the configuration of other constraints, 
+disabling the upper (MAX) constraint on percent safe deflection at operating load point 2 (%_Safe_Deflect) 
+might allow Search to return a design where the the second operating load (Force_2) exceeds the allowable stress 
+for a static load (Stress_Lim_Stat) and declare it to be "feasible". 
+
+While it may be reasonable to adjust the constraint values of a default constraint, 
+disabling a default constraint entirely is not recommended. 
+
+___
+
+<a id="PC_Safe_Deflect1_LT_20"></a>  
+___
+
+Alert entry #E208
 ## %_Safe_Deflect @ 1 < 20% 
 The first operating point (point 1) has less than 20% of maximum safe deflection. 
 This is not usually a problem. 
