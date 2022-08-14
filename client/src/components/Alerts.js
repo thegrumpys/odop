@@ -17,21 +17,32 @@ export var commonChecks = function(store) {
           severity = 'Info'; // Make Invalid Dependent Variable only Info
         }
         if (element.format === undefined && typeof element.value === 'number' && element.value <= element.validmin) {
-            let validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
-            let parenConditional = element.validmin === -Number.MIN_VALUE ? ') < ' : ') <= ';
+            let validmin;
+            if (element.validminchoice !== undefined) {
+                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
+            } else {
+                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
+            }
+            let relational = element.validmin === -Number.MIN_VALUE ? ' < ' : ' <= ';
             addAlert({
                 element: element,
                 name: element.name,
-                message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + parenConditional + validmin,
+                message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ')' + relational + validmin,
                 severity: severity,
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Below)'
             });
         } else if (element.format === undefined && typeof element.value === 'number' && element.value >= element.validmax) {
-            let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax.toODOPPrecision();
+            let validmax;
+            if (element.validmaxchoice !== undefined) {
+                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + element.validmax.toODOPPrecision() + ')';
+            } else {
+                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax.toODOPPrecision();
+            }
+            let relational = ' >= ';
             addAlert({
                 element: element,
                 name: element.name,
-                message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ') >= ' + validmax,
+                message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ')' + relational + validmax,
                 severity: severity,
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Above)'
             });
@@ -39,41 +50,63 @@ export var commonChecks = function(store) {
 
         // CONSTRAINT VALIDITY CHECKS (ONLY FOR INDEPENDENT AND DEPENDENT NUMERIC VARIABLES, NOT FOR CALC INPUTS)
         if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin <= element.validmin) {
-            let validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
-            let parenConditional = element.validmin === -Number.MIN_VALUE ? ') < ' : ') <= ';
+            let validmin;
+            if (element.validminchoice !== undefined) {
+                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
+            } else {
+                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
+            }
+            let relational = element.validmin === -Number.MIN_VALUE ? ' < ' : ' <= ';
             addAlert({
                 element: element,
                 name: element.name+' MIN',
-                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MIN  (' + element.cmin.toODOPPrecision() + parenConditional + validmin,
+                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MIN  (' + element.cmin.toODOPPrecision() + ')'+ relational + validmin,
                 severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
         } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin >= element.validmax) {
-            let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax.toODOPPrecision();
+            let validmax;
+            if (element.validmaxchoice !== undefined) {
+                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + element.validmax.toODOPPrecision() + ')';
+            } else {
+                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax.toODOPPrecision();
+            }
+            let relational = ' >= ';
             addAlert({
                 element: element,
                 name: element.name+' MIN',
-                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MIN  (' + element.cmin.toODOPPrecision() + ') >= ' + validmax,
+                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MIN  (' + element.cmin.toODOPPrecision() + ')' + relational + validmax,
                 severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Above)'
             });
         }
         if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax <= element.validmin) {
-            let validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
-            let parenConditional = element.validmin === -Number.MIN_VALUE ? ') < ' : ') <= ';
+            let validmin;
+            if (element.validminchoice !== undefined) {
+                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
+            } else {
+                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
+            }
+            let relational = element.validmin === -Number.MIN_VALUE ? ' < ' : ' <= ';
             addAlert({
                 element: element,
                 name: element.name+' MAX',
-                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MAX  (' + element.cmax.toODOPPrecision() + parenConditional + validmin,
+                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MAX  (' + element.cmax.toODOPPrecision() + ')' + relational + validmin,
                 severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
         } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax >= element.validmax) {
-            let validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax;
+            let validmax;
+            if (element.validmaxchoice !== undefined) {
+                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + element.validmax.toODOPPrecision() + ')';
+            } else {
+                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax.toODOPPrecision();
+            }
+            let relational = ' >= ';
             addAlert({
                 element: element,
                 name: element.name+' MAX',
-                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MAX  (' + element.cmax.toODOPPrecision() + ') >= ' + validmax,
+                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MAX  (' + element.cmax.toODOPPrecision() + ')' + relational + validmax,
                 severity: 'Err',
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Above)'
             });

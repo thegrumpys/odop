@@ -56,6 +56,10 @@ class ViewSymbolTable extends Component {
                                         <th>cminchoice</th>
                                         <th>cmaxchoices</th>
                                         <th>cmaxchoice</th>
+                                        <th>validminchoices</th>
+                                        <th>validminchoice</th>
+                                        <th>validmaxchoices</th>
+                                        <th>validmaxchoice</th>
                                         <th>propagate</th>
                                         <th>lmin</th>
                                         <th>validmin</th>
@@ -93,6 +97,10 @@ class ViewSymbolTable extends Component {
                                                 <td>{element.cminchoice}</td>
                                                 <td>{JSON.stringify(element.cmaxchoices)}</td>
                                                 <td>{element.cmaxchoice}</td>
+                                                <td>{JSON.stringify(element.validminchoices)}</td>
+                                                <td>{element.validminchoice}</td>
+                                                <td>{JSON.stringify(element.validmaxchoices)}</td>
+                                                <td>{element.validmaxchoice}</td>
                                                 <td>{JSON.stringify(element.propagate)}</td>
                                                 <td>{flags[element.lmin]}</td>
                                                 <td>{String(element.validmin)}</td>

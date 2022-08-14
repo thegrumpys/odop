@@ -95,7 +95,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Maximum operating load (Length L_2)",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "validmaxchoices": [ "Force_Solid" ],
+            "validmaxchoice": 0
         },
         {
             "input": false,
