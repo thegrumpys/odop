@@ -355,7 +355,7 @@ export function migrate(design) {
         };
         design.symbol_table[5].validmaxchoices = [ "Force_Solid" ]; // Force_2
         design.symbol_table[5].validmaxchoice = 0; // Force_2
-        design.symbol_table[24].propagate = [{ name: "Force_2", minmax: VALID_MAX }]; // Force_Solid
+        design.symbol_table[19].propagate = [{ name: "Force_2", minmax: VALID_MAX }]; // Force_Solid
         migrated_design.version = '12'; // last thing... set the migrated model version
         displayMessage(
             "The new Alert Facility may highlight previously unrecognized issues saved with earlier designs. Enter \"Alerts\" in Help Lookup and/or contact technical support.",
