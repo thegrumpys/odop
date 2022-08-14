@@ -185,7 +185,7 @@ it('reducers change symbol constraint min', () => {
 
     var design = store.getState(); // before
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
-    expect(design.model.symbol_table[sto.RADIUS].cmin).toEqual(0.0);
+    expect(design.model.symbol_table[sto.RADIUS].cmin).toEqual(0.04);
     expect(design.model.symbol_table[sto.RADIUS].smin).toEqual(undefined);
 
     store.dispatch(changeSymbolConstraint("RADIUS", MIN, 0.1));
@@ -602,7 +602,7 @@ it('reducers change system controls value', () => {
     var design = store.getState(); // before
     expect(design.name).toEqual('initialState');
     expect(design.model.system_controls.ioopt).toEqual(3);
-    expect(design.model.system_controls.maxit).toEqual(100);
+    expect(design.model.system_controls.maxit).toEqual(600);
 
     var new_system_controls = Object.assign({}, initialSystemControls, {ioopt: 5}); // Make a copy with one property updated
     store.dispatch(changeSystemControlsValue(new_system_controls));
@@ -610,7 +610,7 @@ it('reducers change system controls value', () => {
     design = store.getState(); // after
     expect(design.name).toEqual('initialState'); // Make sure a parent property hasn't changed
     expect(design.model.system_controls.ioopt).toEqual(5);
-    expect(design.model.system_controls.maxit).toEqual(100); // Make sure another sibling property hasn't changed
+    expect(design.model.system_controls.maxit).toEqual(600); // Make sure another sibling property hasn't changed
 });
 
 it('reducers change label value', () => {

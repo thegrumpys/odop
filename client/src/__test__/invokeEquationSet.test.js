@@ -43,7 +43,7 @@ it('invokeEquationSet', () => {
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(2500);
 
     expect(design.model.system_controls.ioopt).toEqual(3);
-    expect(design.model.system_controls.maxit).toEqual(100);
+    expect(design.model.system_controls.maxit).toEqual(600);
     expect(design.model.system_controls.weapon).toEqual(1);
     expect(design.model.system_controls.nmerit).toEqual(1);
     expect(design.model.system_controls.fix_wt).toEqual(1.5);
@@ -51,7 +51,7 @@ it('invokeEquationSet', () => {
     expect(design.model.system_controls.zero_wt).toEqual(10.0);
     expect(design.model.system_controls.viol_wt).toEqual(1.0);
     expect(design.model.system_controls.mfn_wt).toEqual(0.01);
-    expect(design.model.system_controls.objmin).toEqual(0.00005);
+    expect(design.model.system_controls.objmin).toEqual(0.00001);
     expect(design.model.system_controls.del).toEqual(1.0);
     expect(design.model.system_controls.delmin).toEqual(0.0001);
     expect(design.model.system_controls.tol).toEqual(0.0001);

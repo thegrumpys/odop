@@ -77,11 +77,14 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
    Test various input and menu functions and verify no unexpected console.log output.
    Use regular expression search: "^\s*console\." to find non-commented out console.log lines.
    Most console.log output is acceptable in 
-   client/public/dynoLoading.js.
-   client/src/store/middleware/seek.js, 
-   client/src/registerServiceWorker.js, 
-   scripts/build_index.js and 
-   server.js 
+     * client/public/dynoLoading.js.
+     * client/src/__test__/performance.test.js
+     * client/src/store/middleware/pxUpdateObjectiveValue.js
+     * client/src/store/middleware/seek.js, 
+     * client/src/store/middleware/updateObjectiveValue.js
+     * client/src/registerServiceWorker.js, 
+     * scripts/build_index.js and 
+     * server.js 
 1. Shutdown server and client under your development environment.  
 &nbsp;
 1. In server, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully. 
