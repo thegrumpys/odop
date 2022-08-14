@@ -350,9 +350,7 @@ export function migrate(design) {
         design.symbol_table[51].validmin = -Number.MAX_VALUE; // const_term
         design.symbol_table[52].validmin = -Number.MAX_VALUE; // slope_term
         design.symbol_table[53].validmin = -Number.MAX_VALUE; // tensile_010
-        if (design['units'] === "Metric") {
-               design.symbol_table[29].units = "newtons";
-        };
+
         design.symbol_table[5].validmaxchoices = [ "Force_Solid" ]; // Force_2
         design.symbol_table[5].validmaxchoice = 0; // Force_2
         design.symbol_table[19].propagate = [{ name: "Force_2", minmax: VALID_MAX }]; // Force_Solid
