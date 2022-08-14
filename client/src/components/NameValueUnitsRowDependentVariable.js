@@ -78,12 +78,7 @@ class NameValueUnitsRowDependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <OverlayTrigger placement="top" overlay={<Tooltip>
-                               To change the value of a Dependent Variable either FIX it or enable a MIN, a MAX or both constraints, and then set one or both of their values. 
-                               This allows <img src="SearchButton.png" alt="SearchButton"/> to find the Dependent Variable's value that is within this constraint range.
-                            </Tooltip>}>
-                                <FormControlTypeNumber id={'nvurdv_'+this.props.element.name} disabled={true} icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} />
-                            </OverlayTrigger>
+                            <FormControlTypeNumber id={'nvurdv_'+this.props.element.name} disabled={true} icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} />
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
