@@ -205,7 +205,7 @@ export var commonChecks = function(store) {
 export var getSeverityNumberByNameAndObjValue = function(name, severity) {
 //    console.log('In Alerts.getSeverityNumberByNameAndObjValue this=',this,'name=',name);
     var severityNumber = 0;
-    if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX')) && severity != 'Info') {
+    if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX')) && severity !== 'Info') {
         if (this.props.objective_value > 4*this.props.system_controls.objmin) {
             severityNumber = 3;
         } else if (this.props.objective_value > this.props.system_controls.objmin) {
