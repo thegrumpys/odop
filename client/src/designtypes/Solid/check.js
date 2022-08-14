@@ -21,7 +21,6 @@ Number.prototype.toODOPPrecision = function() {
 export function check(store) {
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
     clearAlerts();
-    commonChecks(store);
     var design = store.getState();
     if (design.model.symbol_table[o.Density].value <= 0.0) {
         addAlert({
@@ -39,6 +38,8 @@ export function check(store) {
 //            duplicate: true
 //        });
     }
+
+    commonChecks(store); // Now run the generic checks after the more specific checks
 
 //    console.log('</ul><li>','End check','</li>');
 

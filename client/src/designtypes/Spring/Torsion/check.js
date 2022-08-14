@@ -44,7 +44,6 @@ function add_DCD_alert(element, urlCode) {
 export function check(store) {        /*    Compression  Spring  */
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
     clearAlerts();
-    commonChecks(store);
     var design = store.getState();
 
 // Alerts common to all round-wire coil springs 
@@ -211,6 +210,8 @@ export function check(store) {        /*    Compression  Spring  */
 //            help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#PC_Safe_Deflect1_LT_20)'
 //        });
 //    }
+
+    commonChecks(store); // Now run the generic checks after the more specific checks
 
 //    console.log('</ul><li>','End check','</li>');
 
