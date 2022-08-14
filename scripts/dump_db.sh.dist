@@ -9,4 +9,4 @@ database="@@@ PUT DATABASE NAME HERE @@@"
 
 filename="${database}_$(date +%F).sql"
 
-mysqldump --user=$user --password=$password --host=$host $database --set-gtid-purged=OFF --no-tablespaces > $filename
+mysqldump --user=$user --password=$password --host=$host $database --no-tablespaces > $filename

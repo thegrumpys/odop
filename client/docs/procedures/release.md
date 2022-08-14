@@ -47,9 +47,7 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
         1. Do a File > Open > Load Initial State. Run Action > Execute > mk[x] script where x is Startups, Startup & Startup_Metric (ignore all the other mk files), and Exit to created each [x] file. Do a File > Sorted Export and rename into the [mk\_x] JSON file.
         1. Separately do a File > Open > Startup which should migrate it followed by a File : Export and rename into a "Migrated\_x" JSON file.
         1. Compare the two JSON files to verify that initial state and migration operate exactly the same. If they don't match then repair them until they do or the changes are as intended.
-    1. When done modify File > Export to recomment out sort capability.
 1. Create load.sql files: Repeat the following steps or each design type (Piston-Cylinder, Solid, Spring/Compression, Spring/Extension, and Spring/Torsion) with an impacted initialState or initialSystemControls. 
-Process "Startup_Metric" designs for the three Spring design types similarly.
     1. Do a File > Open > Load Initial State for each design type that has an impacted Initial State. It is not necessary to Load Initial Metric State, because each mk_ script loads the correct initial state file (US or Metric) when it runs. Do this FOR ALL mk* files: Run Action > Execute > mk[x] script and Exit the script to created each [x] file. Do a File > Save into the [x] file.
     1. Using MySqlDump command run the `scripts/dump_db_startup_files.sh` script to dump all newly created design files into their respective load.sql files. You might need to set a different OKTA Userid inside the WHERE clause for the Admin User who saved this file in the previous step.  
     1. Finally, manually edit and add carriage returns before each inserted VALUES section, and delete the 'id' field name and 'id' field value (it should be first in each record),and set the user field to NULL.
@@ -58,6 +56,8 @@ Process "Startup_Metric" designs for the three Spring design types similarly.
    run the configured ./scripts/load_all.sh script
    or
    manually run all affected load.sql files to create startup files for each design type in the develoment database.  
+   This sets the User field to NULL so that these files can be accessed by all development database users.
+   Optionally load the Staging database with these files too.
 &nbsp;
 1. If there are environment variable changes, update Server's .env and Client's .env with the following for development (localhost). NOTE: No entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost). Assume NODE_ENV="development" for software development environment, or "test" for test case execution environment.
     * JAWSDB\_URL - For server only
