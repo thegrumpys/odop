@@ -1,4 +1,4 @@
-import { CONSTRAINED, VALID_MAX } from '../../../store/actionTypes';
+import { CONSTRAINED, VALID_MIN } from '../../../store/actionTypes';
 export const initialState = {
     "symbol_table": [
         {
@@ -95,9 +95,7 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Maximum operating load (Length L_2)",
             "type": "equationset",
-            "hidden": false,
-            "validmaxchoices": [ "Force_Solid" ],
-            "validmaxchoice": 0
+            "hidden": false
         },
         {
             "input": false,
@@ -209,7 +207,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Spring length at load point 2",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "validmaxchoices": [ "L_Solid" ],
+            "validmaxchoice": 0
         },
         {
             "input": false,
@@ -241,7 +241,8 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Spring length when fully compressed",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "propagate": [{ name: "L_2", minmax: VALID_MIN }]
         },
         {
             "input": false,
@@ -321,8 +322,7 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Load required to fully compress the spring",
             "type": "equationset",
-            "hidden": false,
-            "propagate": [{ name: "Force_2", minmax: VALID_MAX }]
+            "hidden": false
         },
         {
             "input": false,
