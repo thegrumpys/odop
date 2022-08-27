@@ -119,19 +119,19 @@ class AlertsAccordion extends Component {
                                 <ButtonGroup>
                                     <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={ERR}
                                         onClick={() => this.setLevel(ERR)} active={this.state.level === ERR || this.state.level === WARN || this.state.level === NOTICE || this.state.level === INFO}>
-                                        Err&nbsp;{err_alerts.length > 0 ? <Badge variant="danger">{err_alerts.length}</Badge> : ''}
+                                        {ERR}&nbsp;{err_alerts.length > 0 ? <Badge variant="danger">{err_alerts.length}</Badge> : ''}
                                     </Accordion.Toggle>
                                     <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={WARN}
                                         onClick={() => this.setLevel(WARN)} active={this.state.level === WARN || this.state.level === NOTICE || this.state.level === INFO}>
-                                        Warn&nbsp;{warn_alerts.length > 0 ? <Badge variant="danger">{warn_alerts.length}</Badge> : ''}
+                                        {WARN}&nbsp;{warn_alerts.length > 0 ? <Badge variant="danger">{warn_alerts.length}</Badge> : ''}
                                     </Accordion.Toggle>
                                     <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={NOTICE}
                                         onClick={() => this.setLevel(NOTICE)} active={this.state.level === NOTICE || this.state.level === INFO}>
-                                        Notice&nbsp;{notice_alerts.length > 0 ? <Badge variant="danger">{notice_alerts.length}</Badge> : ''}
+                                        {NOTICE}&nbsp;{notice_alerts.length > 0 ? <Badge variant="danger">{notice_alerts.length}</Badge> : ''}
                                     </Accordion.Toggle>
                                     <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={INFO}
                                         onClick={() => this.setLevel(INFO)} active={this.state.level === INFO}>
-                                        Info&nbsp;{info_alerts.length > 0 ? <Badge variant="danger">{info_alerts.length}</Badge> : ''}
+                                        {INFO}&nbsp;{info_alerts.length > 0 ? <Badge variant="danger">{info_alerts.length}</Badge> : ''}
                                     </Accordion.Toggle>
                                 </ButtonGroup>
                                 <OverlayTrigger placement="bottom" overlay={
