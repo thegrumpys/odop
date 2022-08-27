@@ -76,7 +76,7 @@ export function updateObjectiveValue(store, merit) {
                 viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
                 infeasible = true;
             }
-//            console.log('In updateObjectiveValue IV    element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
+//            console.log('In updateObjectiveValue IV    element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum);
         } else if ((element.type === "equationset" && !element.input) || element.type === "calcinput") { // Dependent Variable
             /* State variable fix levels. */
             /*
@@ -96,13 +96,17 @@ export function updateObjectiveValue(store, merit) {
                 feasibility_vmin = (-element.value + element.cmin) / element.smin;
                 store.dispatch(changeSymbolViolation(element.name, MIN, feasibility_vmin));
                 if (validity_vmin > 0.0 && feasibility_vmin > 0.0) {
-                    viol_sum = viol_sum + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);
+                    var vmin_sum = feasibility_vmin + validity_vmin;
+                    if (vmin_sum > 1.0) {
+                        viol_sum = viol_sum + vmin_sum;
+                    } else {
+                        viol_sum = viol_sum + vmin_sum * vmin_sum;
+                    }
                     invalid = true; infeasible = true;
                 } else if (validity_vmin > 0.0) {
                     viol_sum = viol_sum + validity_vmin * validity_vmin;
                     invalid = true;
                 } else if (feasibility_vmin > 0.0) {
-                    infeasible = true;
                     if (feasibility_vmin > 1.0) {
                         viol_sum = viol_sum + feasibility_vmin;
                     } else if (feasibility_vmin < -1.0) {
@@ -110,17 +114,22 @@ export function updateObjectiveValue(store, merit) {
                     } else {
                         viol_sum = viol_sum + feasibility_vmin * feasibility_vmin;
                     }
+                    infeasible = true;
                 }
                 feasibility_vmax = -feasibility_vmin;
                 store.dispatch(changeSymbolViolation(element.name, MAX, feasibility_vmax))
                 if (validity_vmax > 0.0 && feasibility_vmax > 0.0) {
-                    viol_sum = viol_sum + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
+                    var vmax_sum = feasibility_vmax + validity_vmax;
+                    if (vmax_sum > 1.0) {
+                        viol_sum = viol_sum + vmax_sum;
+                    } else {
+                        viol_sum = viol_sum + vmax_sum * vmax_sum;
+                    }
                     invalid = true; infeasible = true;
                 } else if (validity_vmax > 0.0) {
                     viol_sum = viol_sum + validity_vmax * validity_vmax;
                     invalid = true;
                 } else if (feasibility_vmax > 0.0) {
-                    infeasible = true;
                     if (feasibility_vmax > 1.0) {
                         viol_sum = viol_sum + feasibility_vmax;
                     } else if (feasibility_vmax < -1.0) {
@@ -128,6 +137,7 @@ export function updateObjectiveValue(store, merit) {
                     } else {
                         viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
                     }
+                    infeasible = true;
                 }
             } else {
                 if (element.lmin & CONSTRAINED) {
@@ -165,7 +175,7 @@ export function updateObjectiveValue(store, merit) {
                     infeasible = true;
                 }
             }
-//            console.log('In updateObjectiveValue DV/CI element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
+//            console.log('In updateObjectiveValue DV/CI element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum);
         }
 //        console.log('In updateObjectiveValue at end element=',element);
     }
