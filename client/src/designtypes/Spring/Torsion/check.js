@@ -1,6 +1,6 @@
 import * as o from './symbol_table_offsets';
 //import * as mo from '../mat_offsets';
-import { commonChecks, clearAlerts, addAlert, check_message, add_DCD_alert } from '../../../components/Alerts';
+import { commonChecks, clearAlerts, addAlert, check_message, add_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
 import { CONSTRAINED } from '../../../store/actionTypes';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
@@ -25,14 +25,14 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.Wire_Dia],
             name: design.model.symbol_table[o.Wire_Dia].name, 
             message: check_message(design,o.Wire_Dia,'>',o.ID_Free),
-            severity: 'Warn',
+            severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_GT_ID_Free)'
         });
         addAlert({
             element: design.model.symbol_table[o.ID_Free],
             name: design.model.symbol_table[o.ID_Free].name, 
             message: check_message(design,o.ID_Free,'<=',o.Wire_Dia),
-            severity: 'Warn',
+            severity: WARN,
             duplicate: true
         });
     }
@@ -41,7 +41,7 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.Wire_Dia],
             name: design.model.symbol_table[o.Wire_Dia].name, 
             message: 'Material properties for this ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') may not be accurate.',
-            severity: 'Warn',
+            severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#MatPropAccuracy)'
         });
     }
@@ -50,7 +50,7 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.Wire_Dia],
             name: design.model.symbol_table[o.Wire_Dia].name, 
             message: 'Material properties for this ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') may not be accurate.',
-            severity: 'Warn',
+            severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#MatPropAccuracy)'
         });
     }
@@ -59,7 +59,7 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.FS_CycleLife], 
             name: design.model.symbol_table[o.FS_CycleLife].name, 
             message: design.model.symbol_table[o.FS_CycleLife].name + ' MIN is not set.', 
-            severity: 'Warn', 
+            severity: WARN, 
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#FS_CycleLife_MIN_not_set)'
         });
     }
@@ -68,7 +68,7 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.FS_2], 
             name: design.model.symbol_table[o.FS_2].name, 
             message: 'Over-design concern', 
-            severity: 'Warn', 
+            severity: WARN, 
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OverDesign)' 
         });
     }
@@ -77,7 +77,7 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.Coils_A],
             name: design.model.symbol_table[o.Coils_A].name, 
             message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Coils_A].name + ' (' + design.model.symbol_table[o.Coils_A].value.toODOPPrecision() + ') < 1.0',
-            severity: 'Warn', 
+            severity: WARN, 
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)'
         });
     }
@@ -86,7 +86,7 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.Spring_Index], 
             name: design.model.symbol_table[o.Spring_Index].name, 
             message: 'Manufacturability concern', 
-            severity: 'Warn',
+            severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)' 
         });
     }
@@ -96,7 +96,7 @@ export function check(store) {        /*    Compression  Spring  */
                 element: design.model.symbol_table[o.Cycle_Life],
                 name: design.model.symbol_table[o.Cycle_Life].name, 
                 message: design.model.symbol_table[o.Cycle_Life].name + ' calculation not available',
-                severity: 'Warn',
+                severity: WARN,
                 help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA)'
             });
         } else {
@@ -104,7 +104,7 @@ export function check(store) {        /*    Compression  Spring  */
                 element: design.model.symbol_table[o.Cycle_Life],
                 name: design.model.symbol_table[o.Cycle_Life].name, 
                 message: design.model.symbol_table[o.Cycle_Life].name + ' calculation not available',
-                severity: 'Info',
+                severity: INFO,
                 help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA)'
             });
         }
@@ -115,7 +115,7 @@ export function check(store) {        /*    Compression  Spring  */
                 element: design.model.symbol_table[o.Cycle_Life],
                 name: design.model.symbol_table[o.Cycle_Life].name, 
                 message: design.model.symbol_table[o.Cycle_Life].name + ' not defined beyond yield',
-                severity: 'Warn',
+                severity: WARN,
                 help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA_FS_2)'
             });
         } else {
@@ -123,7 +123,7 @@ export function check(store) {        /*    Compression  Spring  */
                 element: design.model.symbol_table[o.Cycle_Life],
                 name: design.model.symbol_table[o.Cycle_Life].name, 
                 message: design.model.symbol_table[o.Cycle_Life].name + ' not defined beyond yield',
-                severity: 'Info',
+                severity: INFO,
                 help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA_FS_2)'
             });
         }
@@ -138,7 +138,7 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.Tensile],
             name: design.model.symbol_table[o.Tensile].name, 
             message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + design.model.symbol_table[o.Tensile].value.toODOPPrecision() + ') <= ' + design.model.system_controls.smallnum.toODOPPrecision(),
-            severity: 'Warn',
+            severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)'
         });
     }
@@ -150,14 +150,14 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.M_1], 
             name: design.model.symbol_table[o.M_1].name, 
             message: check_message(design,o.M_1,'>',o.M_2),
-            severity: 'Err',
+            severity: ERR,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#M1_GT_M2)',
         });
         addAlert({
             element: design.model.symbol_table[o.M_2], 
             name: design.model.symbol_table[o.M_2].name, 
             message: check_message(design,o.M_2,'<',o.M_1),
-            severity: 'Err',
+            severity: ERR,
             duplicate: true
         });
     }
@@ -168,7 +168,7 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.PC_Safe_Deflect], 
             name: design.model.symbol_table[o.PC_Safe_Deflect].name + '@2', 
             message: '%_Safe_Deflect@2 (' + design.model.symbol_table[o.PC_Safe_Deflect].value.toODOPPrecision() + ') > 80',
-            severity: 'Info',
+            severity: INFO,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#PC_Safe_Deflect2_GT_80)'
         });
     }
@@ -178,7 +178,7 @@ export function check(store) {        /*    Compression  Spring  */
 //            value: PC_Safe_Deflect1, 
 //            name: '%_Safe_Deflect@1', 
 //            message: '%_Safe_Deflect@1 (' + PC_Safe_Deflect1.toODOPPrecision() + ') < 20 - Work in Progress',
-//            severity: 'Info',
+//            severity: INFO,
 //            help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#PC_Safe_Deflect1_LT_20)'
 //        });
 //    }

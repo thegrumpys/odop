@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
 import Emitter from './Emitter';
 
+export const ERR = 'Err';
+export const WARN = 'Warn';
+export const NOTICE = 'Notice';
+export const INFO = 'Info';
+
 export var check_message = function(design, left, op, right) {
   return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
 }
@@ -26,7 +31,7 @@ export var add_DCD_alert = function(element, urlCode) {
         element: element,
         name: element.name, 
         message: 'Default constraint has been disabled',
-        severity: 'Warn',
+        severity: WARN,
         help_url: urlString
     });
 }
@@ -40,9 +45,9 @@ export var commonChecks = function(store) {
 //        console.log('name=',element.name,'element=',element);
 
         // VALUE VALIDITY CHECKS
-        var severity = 'Err';
+        var severity = ERR;
         if (element.type === 'equationset' && !element.input) { // Dependent Variable?
-          severity = 'Info'; // Make Invalid Dependent Variable only Info
+          severity = INFO; // Make Invalid Dependent Variable only Info
         }
         if (element.format === undefined && typeof element.value === 'number' && element.value <= element.validmin) {
             let validmin;
@@ -89,7 +94,7 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MIN',
                 message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MIN  (' + element.cmin.toODOPPrecision() + ')'+ relational + validmin,
-                severity: 'Err',
+                severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
         } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin >= element.validmax) {
@@ -104,7 +109,7 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MIN',
                 message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MIN  (' + element.cmin.toODOPPrecision() + ')' + relational + validmax,
-                severity: 'Err',
+                severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Above)'
             });
         }
@@ -120,7 +125,7 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MAX',
                 message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MAX  (' + element.cmax.toODOPPrecision() + ')' + relational + validmin,
-                severity: 'Err',
+                severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
         } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax >= element.validmax) {
@@ -135,7 +140,7 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MAX',
                 message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MAX  (' + element.cmax.toODOPPrecision() + ')' + relational + validmax,
-                severity: 'Err',
+                severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Above)'
             });
         }
@@ -146,7 +151,7 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MIN',
                 message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(),
-                severity: 'Notice',
+                severity: NOTICE,
                 help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)'
             });
         } else if (element.type === "equationset" && (element.lmin & CONSTRAINED) && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
@@ -154,7 +159,7 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MIN',
                 message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(),
-                severity: 'Notice',
+                severity: NOTICE,
                 help_url: '[Help](/docs/Help/alerts.html#MIN_Violation)'
             });
         }
@@ -163,7 +168,7 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MAX',
                 message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(),
-                severity: 'Notice',
+                severity: NOTICE,
                 help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)'
             });
         } else if (element.type === "equationset" && (element.lmax & CONSTRAINED) && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
@@ -171,7 +176,7 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MAX',
                 message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(),
-                severity: 'Notice',
+                severity: NOTICE,
                 help_url: '[Help](/docs/Help/alerts.html#MAX_Violation)'
             });
         }
@@ -180,14 +185,14 @@ export var commonChecks = function(store) {
                 element: element,
                 name: element.name+' MIN',
                 message: 'INVERTED CONSTRAINT RANGE: from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision()+' for ' + element.name + ' (' + element.value.toODOPPrecision() + ')',
-                severity: 'Err',
+                severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Inconsistency)'
             });
             addAlert({
                 element: element,
                 name: element.name+' MAX',
                 message: 'INVERTED CONSTRAINT RANGE: from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision()+' for ' + element.name + ' (' + element.value.toODOPPrecision() + ')',
-                severity: 'Err',
+                severity: ERR,
                 duplicate: true
             });
         }
@@ -199,7 +204,7 @@ export var commonChecks = function(store) {
                     element: element,
                     name: element.name+' MIN',
                     message: element.lmin & FDCL ? ('FDCL: ' + element.name+' MIN set to ' + element.cminchoices[element.cminchoice]) : ('Non-FDCL: ' + element.name+' MIN set to ' + element.cmin),
-                    severity: 'Info',
+                    severity: INFO,
                     help_url: '[Help](/docs/Help/alerts.html#FDCL)'
                 });
             }
@@ -210,7 +215,7 @@ export var commonChecks = function(store) {
                     element: element,
                     name: element.name+' MAX',
                     message: element.lmax & FDCL ? ('FDCL: ' + element.name+' MAX set to ' + element.cmaxchoices[element.cmaxchoice]) : ('Non-FDCL: ' + element.name+' MAX set to ' + element.cmax),
-                    severity: 'Info',
+                    severity: INFO,
                     help_url: '[Help](/docs/Help/alerts.html#FDCL)'
                 });
             }
@@ -224,7 +229,7 @@ export var commonChecks = function(store) {
     if (total === 0) {
             addAlert({
                 message: 'SYSTEM: No free independent variables',
-                severity: 'Info',
+                severity: INFO,
                 help_url: '[Help](/docs/Help/alerts.html#NoFreeIV)'
              });
     }
@@ -233,7 +238,7 @@ export var commonChecks = function(store) {
 export var getSeverityNumberByNameAndObjValue = function(name, severity) {
 //    console.log('In Alerts.getSeverityNumberByNameAndObjValue this=',this,'name=',name);
     var severityNumber = 0;
-    if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX')) && severity !== 'Info') {
+    if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX')) && severity !== INFO) {
         if (this.props.objective_value > 4*this.props.system_controls.objmin) {
             severityNumber = 3;
         } else if (this.props.objective_value > this.props.system_controls.objmin) {
@@ -260,7 +265,7 @@ export var getFontClassBySeverityNumber = function(severityNumber) {
 
 export var getSeverityNumberBySeverity = function(severity) {
 //    console.log('In Alerts.getSeverityNumberBySeverity this=',this,'severity=',severity);
-    var severityNumber = {'Err': 3, 'Warn': 2, 'Notice': 1, 'Info': 0};
+    var severityNumber = {ERR: 3, WARN: 2, NOTICE: 1, INFO: 0};
     return severityNumber[severity];
 }
 
@@ -268,7 +273,7 @@ export var getAlertsByName = function(name, includeViolations = false) {
 //    console.log('In Alerts.getAlertsByName this=',this,'name=',name,'includeViolations=',includeViolations);
     var alerts = [];
     var maxSeverityNumber = 0;
-    this.state.alerts.filter(entry => entry.severity === 'Err').forEach((entry) => {
+    this.state.alerts.filter(entry => entry.severity === ERR).forEach((entry) => {
         var severityNumber;
         if (entry.name === name) { // Matches exactly
             severityNumber = getSeverityNumberBySeverity(entry.severity);
@@ -282,7 +287,7 @@ export var getAlertsByName = function(name, includeViolations = false) {
             alerts.push(entry);
         }
     });
-    this.state.alerts.filter(entry => entry.severity === 'Warn').forEach((entry) => {
+    this.state.alerts.filter(entry => entry.severity === WARN).forEach((entry) => {
         var severityNumber;
         if (entry.name === name) { // Matches exactly
             severityNumber = getSeverityNumberBySeverity(entry.severity);
@@ -296,7 +301,7 @@ export var getAlertsByName = function(name, includeViolations = false) {
             alerts.push(entry);
         }
     });
-    this.state.alerts.filter(entry => entry.severity === 'Notice').forEach((entry) => {
+    this.state.alerts.filter(entry => entry.severity === NOTICE).forEach((entry) => {
         var severityNumber;
         if (entry.name === name) { // Matches exactly
             severityNumber = getSeverityNumberBySeverity(entry.severity);
@@ -310,7 +315,7 @@ export var getAlertsByName = function(name, includeViolations = false) {
             alerts.push(entry);
         }
     });
-    this.state.alerts.filter(entry => entry.severity === 'Info').forEach((entry) => {
+    this.state.alerts.filter(entry => entry.severity === INFO).forEach((entry) => {
         var severityNumber;
         if (entry.name === name) { // Matches exactly
             severityNumber = getSeverityNumberBySeverity(entry.severity);

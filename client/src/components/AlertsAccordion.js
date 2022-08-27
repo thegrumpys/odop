@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, OverlayTrigger, Tooltip, Accordion, Card, ButtonGroup, InputGroup, Badge } from 'react-bootstrap';
-import { clearAlerts, getAlertsBySeverity } from './Alerts';
+import { clearAlerts, getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
@@ -41,23 +41,25 @@ class AlertsAccordion extends Component {
         this.onClose = this.onClose.bind(this);
         ContextAwareAccordion = ContextAwareAccordion.bind(this);
         this.state = {
-            level: 'Error',
+            level: ERR,
             caret: <span className="pb-3 pr-1"><i className="fas fa-caret-right" /></span>,
         };
     }
 
     componentDidMount() {
+//        console.log('In componentDidMount');
         Emitter.on('clearAlerts', () => {
-//            console.log('clearAlerts');
+//            console.log('In componentDidMount clearAlerts handler');
             this.forceUpdate();
         });
         Emitter.on('addAlert', (alert) => {
-//            console.log('addAlert', alert);
+//            console.log('In componentDidMount addAlert handler', alert);
             this.forceUpdate();
         });
     }
 
     componentWillUnmount() {
+//        console.log('In componentWillUnmount');
         Emitter.off('clearAlerts');
         Emitter.off('addAlerts');
     }
@@ -97,16 +99,16 @@ class AlertsAccordion extends Component {
 //        console.log('In AlertsAccordion.render this=',this);
         var line = 1;
         var err_alerts;
-        var warning_alerts;
+        var warn_alerts;
         var notice_alerts;
         var info_alerts;
         var all_alerts = [];
-        err_alerts = getAlertsBySeverity('Err');
-        warning_alerts = getAlertsBySeverity('Warning');
-        notice_alerts = getAlertsBySeverity('Notice');
-        info_alerts = getAlertsBySeverity('Info');
-        all_alerts = all_alerts.concat(err_alerts,warning_alerts,notice_alerts,info_alerts)
-//        console.log('In AlertsAccordion.render all_alerts=',all_alerts);
+        err_alerts = getAlertsBySeverity(ERR);
+        warn_alerts = getAlertsBySeverity(WARN);
+        notice_alerts = getAlertsBySeverity(NOTICE);
+        info_alerts = getAlertsBySeverity(INFO);
+        all_alerts = all_alerts.concat(err_alerts,warn_alerts,notice_alerts,info_alerts)
+//        console.log('In AlertsAccordion.render','err_alerts=',err_alerts,'warn_alerts=',warn_alerts,'notice_alerts=',notice_alerts,'info_alerts=',info_alerts,'all_alerts=',all_alerts);
         return (
             <>
                 <ContextAwareAccordion>
@@ -115,20 +117,20 @@ class AlertsAccordion extends Component {
                             <InputGroup>
                                 <InputGroup.Text id="alertLevel" size="sm">{this.state.caret}&nbsp;&nbsp;Alerts</InputGroup.Text>
                                 <ButtonGroup>
-                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey="Error"
-                                        onClick={() => this.setLevel("Error")} active={this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}>
+                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={ERR}
+                                        onClick={() => this.setLevel(ERR)} active={this.state.level === ERR || this.state.level === WARN || this.state.level === NOTICE || this.state.level === INFO}>
                                         Err&nbsp;{err_alerts.length > 0 ? <Badge variant="danger">{err_alerts.length}</Badge> : ''}
                                     </Accordion.Toggle>
-                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey="Warning"
-                                        onClick={() => this.setLevel("Warning")} active={this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info"}>
-                                        Warn&nbsp;{warning_alerts.length > 0 ? <Badge variant="danger">{warning_alerts.length}</Badge> : ''}
+                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={WARN}
+                                        onClick={() => this.setLevel(WARN)} active={this.state.level === WARN || this.state.level === NOTICE || this.state.level === INFO}>
+                                        Warn&nbsp;{warn_alerts.length > 0 ? <Badge variant="danger">{warn_alerts.length}</Badge> : ''}
                                     </Accordion.Toggle>
-                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey="Notice"
-                                        onClick={() => this.setLevel("Notice")} active={this.state.level === "Notice" || this.state.level === "Info"}>
+                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={NOTICE}
+                                        onClick={() => this.setLevel(NOTICE)} active={this.state.level === NOTICE || this.state.level === INFO}>
                                         Notice&nbsp;{notice_alerts.length > 0 ? <Badge variant="danger">{notice_alerts.length}</Badge> : ''}
                                     </Accordion.Toggle>
-                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey="Info"
-                                        onClick={() => this.setLevel("Info")} active={this.state.level === "Info"}>
+                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={INFO}
+                                        onClick={() => this.setLevel(INFO)} active={this.state.level === INFO}>
                                         Info&nbsp;{info_alerts.length > 0 ? <Badge variant="danger">{info_alerts.length}</Badge> : ''}
                                     </Accordion.Toggle>
                                 </ButtonGroup>
@@ -147,10 +149,10 @@ class AlertsAccordion extends Component {
                                 </OverlayTrigger>
                             </InputGroup>
                         </Card.Header>
-                        {(this.state.level === "Error" && (err_alerts.length > 0)) ||
-                         (this.state.level === "Warning" && (err_alerts.length > 0 || warning_alerts.length > 0)) ||
-                         (this.state.level === "Notice" && (err_alerts.length > 0 || warning_alerts.length > 0 || notice_alerts.length > 0)) ||
-                         (this.state.level === "Info" && (err_alerts.length > 0 || warning_alerts.length > 0 || notice_alerts.length > 0 || info_alerts.length > 0)) ?
+                        {(this.state.level === ERR && (err_alerts.length > 0)) ||
+                         (this.state.level === WARN && (err_alerts.length > 0 || warn_alerts.length > 0)) ||
+                         (this.state.level === NOTICE && (err_alerts.length > 0 || warn_alerts.length > 0 || notice_alerts.length > 0)) ||
+                         (this.state.level === INFO && (err_alerts.length > 0 || warn_alerts.length > 0 || notice_alerts.length > 0 || info_alerts.length > 0)) ?
                         <Accordion.Collapse eventKey="0">
                             <Card.Body>
                                 <table className="col-12">
@@ -211,7 +213,7 @@ class AlertsAccordion extends Component {
                                        </tr>
                                     </thead>
                                     <tbody>
-                                        {(this.state.level === "Error" || this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") &&
+                                        {(this.state.level === ERR || this.state.level === WARN || this.state.level === NOTICE || this.state.level === INFO) &&
                                             err_alerts.map((entry, index) => {
 //                                            console.log('In AlertsAccordion.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
@@ -234,8 +236,8 @@ class AlertsAccordion extends Component {
                                                 </tr>
                                             );
                                         })}
-                                        {(this.state.level === "Warning" || this.state.level === "Notice" || this.state.level === "Info") &&
-                                            warning_alerts.map((entry, index) => {
+                                        {(this.state.level === WARN || this.state.level === NOTICE || this.state.level === INFO) &&
+                                            warn_alerts.map((entry, index) => {
 //                                            console.log('In AlertsAccordion.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
                                             var match;
@@ -257,7 +259,7 @@ class AlertsAccordion extends Component {
                                                 </tr>
                                             );
                                         })}
-                                        {(this.state.level === "Notice" || this.state.level === "Info") &&
+                                        {(this.state.level === NOTICE || this.state.level === INFO) &&
                                             notice_alerts.map((entry, index) => {
 //                                            console.log('In AlertsAccordion.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;
@@ -280,7 +282,7 @@ class AlertsAccordion extends Component {
                                                 </tr>
                                             );
                                         })}
-                                        {(this.state.level === "Info") &&
+                                        {(this.state.level === INFO) &&
                                             info_alerts.map((entry, index) => {
 //                                            console.log('In AlertsAccordion.render entry=',entry,'line=',line);
                                             var hidden = config.node.env !== "production" ? false : entry.element.hidden;

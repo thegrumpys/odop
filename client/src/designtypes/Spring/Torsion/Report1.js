@@ -3,7 +3,7 @@ import { ReportBase } from "./ReportBase" // import the inner non-redux-connecte
 import { Button } from 'react-bootstrap';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
-import { getAlertsBySeverity } from '../../../components/Alerts';
+import { getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from '../../../components/Alerts';
 
 class Report1 extends ReportBase {
 
@@ -32,10 +32,10 @@ class Report1 extends ReportBase {
                 <br />
                 {this.hits > 0 ?
                     <><b>Alerts:</b><ul>
-                        { getAlertsBySeverity('Err'   ).map((entry) => <li key={line++} className={entry.className}>{entry.severity}: {entry.message}</li> ) }
-                        { getAlertsBySeverity('Warn'  ).map((entry) => <li key={line++} className={entry.className}>{entry.severity}: {entry.message}</li> ) }
-                        { getAlertsBySeverity('Notice').map((entry) => <li key={line++} className={entry.className}>{entry.severity}: {entry.message}</li> ) }
-                        { getAlertsBySeverity('Info'  ).map((entry) => <li key={line++} className={entry.className}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity(ERR   ).map((entry) => <li key={line++} className={entry.className}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity(WARN  ).map((entry) => <li key={line++} className={entry.className}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity(NOTICE).map((entry) => <li key={line++} className={entry.className}>{entry.severity}: {entry.message}</li> ) }
+                        { getAlertsBySeverity(INFO  ).map((entry) => <li key={line++} className={entry.className}>{entry.severity}: {entry.message}</li> ) }
                     </ul></>
                 : '' }
                 {this.hits > 0 && this.startpntmsg}{this.hits > 0 && <br />}
