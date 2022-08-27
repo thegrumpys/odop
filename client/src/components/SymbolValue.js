@@ -239,16 +239,17 @@ class SymbolValue extends Component {
                                     <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
                                 </>}
                         </Table>
-                        <Table size="sm" borderless>
-                        <tbody>
-                        <tr>
-                        <td>
-                        To control the value of a Dependent Variable either FIX it or enable its MIN and/or MAX constraints and then set its constraint values. 
-                        This allows <img src="SearchButton.png" alt="SearchButton"/> to find the Dependent Variable's value that is within this constraint range.
-                        </td>
-                        </tr>
-                        </tbody>
-                        </Table>
+                        {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
+                            <Table size="sm" borderless>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            To control the value of a Dependent Variable either FIX it or enable its MIN and/or MAX constraints and then set its constraint values. 
+                                            This allows <img src="SearchButton.png" alt="SearchButton"/> to find the Dependent Variable's value that is within this constraint range.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>}
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
