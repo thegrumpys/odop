@@ -1,4 +1,4 @@
-import { CONSTRAINED, VALID_MIN } from '../../../store/actionTypes';
+import { CONSTRAINED, VALID_MAX } from '../../../store/actionTypes';
 export const initialState = {
     "symbol_table": [
         {
@@ -242,7 +242,7 @@ export const initialState = {
             "tooltip": "Spring length when fully compressed",
             "type": "equationset",
             "hidden": false,
-            "propagate": [{ name: "L_2", minmax: VALID_MIN }]
+            "propagate": [{ name: "L_2", minmax: VALID_MAX }]
         },
         {
             "input": false,
