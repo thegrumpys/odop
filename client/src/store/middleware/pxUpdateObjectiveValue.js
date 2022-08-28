@@ -52,13 +52,13 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
             }
             if (validity_vmin > 0.0 && feasibility_vmin > 0.0) {
                 viol_sum = viol_sum + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);
-                invalid = true; infeasible = true;
+                invalid |= true; infeasible |= true;
             } else if (validity_vmin > 0.0) {
                 viol_sum = viol_sum + validity_vmin * validity_vmin;
-                invalid = true;
+                invalid |= true;
             } else if (feasibility_vmin > 0.0) {
                 viol_sum = viol_sum + feasibility_vmin * feasibility_vmin;
-                infeasible = true;
+                infeasible |= true;
             }
             if (element.lmax & CONSTRAINED) {
                 feasibility_vmax = ( pp - element.cmax) / element.smax;
@@ -67,16 +67,16 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
             }
             if (validity_vmax > 0.0 && feasibility_vmax > 0.0) {
                 viol_sum = viol_sum + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
-                invalid = true; infeasible = true;
+                invalid |= true; infeasible |= true;
             } else if (validity_vmax > 0.0) {
                 viol_sum = viol_sum + validity_vmax * validity_vmax;
-                invalid = true;
+                invalid |= true;
             } else if (feasibility_vmax > 0.0) {
                 viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
-                infeasible = true;
+                infeasible |= true;
             }
 //            console.log('In pxUpdateObjectiveValue IV    element=',element,'ip=',ip,'pp=',pp,'element.cmax=',element.cmax,'element.smax=',element.smax);
-//            console.log('In pxUpdateObjectiveValue IV    element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
+//            console.log('In pxUpdateObjectiveValue IV    ','pp=',pp,'element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
         } else if ((element.type === "equationset" && !element.input) || element.type === "calcinput") { // Dependent Variable
             xx = x[ix++];
             /* State variable fix levels. */
@@ -96,13 +96,17 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
             if (element.lmin & FIXED) {
                 feasibility_vmin = (-xx + element.cmin) / element.smin;
                 if (validity_vmin > 0.0 && feasibility_vmin > 0.0) {
-                    viol_sum = viol_sum + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);
-                    invalid = true; infeasible = true;
+                    var vmin_sum = feasibility_vmin + validity_vmin;
+                    if (vmin_sum > 1.0) {
+                        viol_sum = viol_sum + vmin_sum;
+                    } else {
+                        viol_sum = viol_sum + vmin_sum * vmin_sum;
+                    }
+                    invalid |= true; infeasible |= true;
                 } else if (validity_vmin > 0.0) {
                     viol_sum = viol_sum + validity_vmin * validity_vmin;
-                    invalid = true;
+                    invalid |= true;
                 } else if (feasibility_vmin > 0.0) {
-                    infeasible = true;
                     if (feasibility_vmin > 1.0) {
                         viol_sum = viol_sum + feasibility_vmin;
                     } else if (feasibility_vmin < -1.0) {
@@ -110,16 +114,21 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
                     } else {
                         viol_sum = viol_sum + feasibility_vmin * feasibility_vmin;
                     }
+                    infeasible |= true;
                 }
                 feasibility_vmax = -feasibility_vmin;
                 if (validity_vmax > 0.0 && feasibility_vmax > 0.0) {
-                    viol_sum = viol_sum + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
-                    invalid = true; infeasible = true;
+                    var vmax_sum = feasibility_vmax + validity_vmax;
+                    if (vmax_sum > 1.0) {
+                        viol_sum = viol_sum + vmax_sum;
+                    } else {
+                        viol_sum = viol_sum + vmax_sum * vmax_sum;
+                    }
+                    invalid |= true; infeasible |= true;
                 } else if (validity_vmax > 0.0) {
                     viol_sum = viol_sum + validity_vmax * validity_vmax;
-                    invalid = true;
+                    invalid |= true;
                 } else if (feasibility_vmax > 0.0) {
-                    infeasible = true;
                     if (feasibility_vmax > 1.0) {
                         viol_sum = viol_sum + feasibility_vmax;
                     } else if (feasibility_vmax < -1.0) {
@@ -127,6 +136,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
                     } else {
                         viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
                     }
+                    infeasible |= true;
                 }
             } else {
                 if (element.lmin & CONSTRAINED) {
@@ -136,13 +146,13 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
                 }
                 if (validity_vmin > 0.0 && feasibility_vmin > 0.0) {
                     viol_sum = viol_sum + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);
-                    invalid = true; infeasible = true;
+                    invalid |= true; infeasible |= true;
                 } else if (validity_vmin > 0.0) {
                     viol_sum = viol_sum + validity_vmin * validity_vmin;
-                    invalid = true;
+                    invalid |= true;
                 } else if (feasibility_vmin > 0.0) {
                     viol_sum = viol_sum + feasibility_vmin * feasibility_vmin;
-                    infeasible = true;
+                    infeasible |= true;
                 }
                 if (element.lmax & CONSTRAINED) {
                     feasibility_vmax = ( xx - element.cmax) / element.smax;
@@ -151,17 +161,17 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
                 }
                 if (validity_vmax > 0.0 && feasibility_vmax > 0.0) {
                     viol_sum = viol_sum + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
-                    invalid = true; infeasible = true;
+                    invalid |= true; infeasible |= true;
                 } else if (validity_vmax > 0.0) {
                     viol_sum = viol_sum + validity_vmax * validity_vmax;
-                    invalid = true;
+                    invalid |= true;
                 } else if (feasibility_vmax > 0.0) {
                     viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
-                    infeasible = true;
+                    infeasible |= true;
                 }
             }
 //            console.log('In pxUpdateObjectiveValue DV/CI element=',element,'ix=',ix,'xx=',xx,'element.cmax=',element.cmax,'element.smax=',element.smax);
-//            console.log('In pxUpdateObjectiveValue DV/CI element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum);
+//            console.log('In pxUpdateObjectiveValue DV/CI ','xx=',xx,'element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
         }
 //        console.log('In pxUpdateObjectiveValue at end element=',element);
     }
@@ -177,13 +187,13 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
 
     if (debug) {
-	    if (invalid === false && infeasible === false) {
+        if (!invalid && !infeasible) {
             console.log('In pxUpdateObjectiveValue Valid & Feasible obj=',obj);
-        } else if (invalid === false && infeasible === true) {
+        } else if (!invalid && infeasible) {
             console.log('In pxUpdateObjectiveValue Valid & Infeasible obj=',obj);
-        } else if (invalid === true && infeasible === true) {
+        } else if (invalid && infeasible) {
             console.warn('In pxUpdateObjectiveValue Invalid & Infeasible obj=',obj);
-        } else {
+        } else if (invalid && !infeasible) {
             console.error('@@@ In pxUpdateObjectiveValue Invalid & Feasible obj=',obj);
         }
     }

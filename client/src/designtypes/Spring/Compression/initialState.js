@@ -208,8 +208,8 @@ export const initialState = {
             "tooltip": "Spring length at load point 2",
             "type": "equationset",
             "hidden": false,
-            "validmaxchoices": [ "L_Solid" ],
-            "validmaxchoice": 0
+            "validminchoices": [ "L_Solid" ],
+            "validminchoice": 0
         },
         {
             "input": false,
