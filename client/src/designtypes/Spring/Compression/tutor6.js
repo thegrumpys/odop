@@ -75,8 +75,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
@@ -103,16 +101,15 @@ export const execute = {
                     </p>
 
                     <p>
-                    Report 1 provides a warning message.  
-                    When free length reduced to 1.713 and the load increased to 50 pounds, 
+                    The alert panel indicates that there is multiple issues with this design..  
+                    When free length is reduced to 1.713 and the load increased to 50 pounds, 
                     the current values of Wire_Dia and Coils_T 
                     (determined from the initial conditions established at the beginning of this tutorial session) 
                     produced a starting point where L_2, the length at load point 2,
                     is less than zero.  
-                    This is an impossible condition and provides a difficult start point for the search.  
-                    The message suggests that we might get better (and more reliable) performance 
-                    if we remedy the situation manually.  
-                    However in this case, we'll ignore the message and proceed with the search.
+                    This is an impossible condition and provides a difficult start point for the search. 
+                    We might get better (and more reliable) search performance if we remedy the situation manually. 
+                    However in this case, we'll ignore the alert messages and proceed with the search. 
                     </p>
                     <br />
                 </>
