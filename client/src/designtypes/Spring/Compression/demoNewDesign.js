@@ -202,7 +202,7 @@ export const execute = {
                     is produced any time that the second load uses more
                     than 80 % of available deflection.
                     </p>
-                    <p>There is no warning about buckling so that is not a concern for this design.</p>
+                    <p>There is no alert or Report 1 warning about buckling so that is not a concern for this design.</p>
                 </>
             ),
             actions: [
@@ -216,7 +216,7 @@ export const execute = {
                 <>
                     <p>
                     If you are still on a Report view,
-                    don't forget to switch back to the Advanced view (the main page).
+                    don't forget to switch back to a main page (Advanced or Calculator View). 
                     </p>
                     
                     <p>
@@ -253,7 +253,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Look for the results on the next page.
+                    Look for the search results on the next page.
                     <br /><br />
                     </p>
                     
@@ -280,8 +280,10 @@ export const execute = {
                     
                     <p>
                     This is a good time to think about saving the design for potential access in the future.
-                    Use the <b>File : Save As...</b> menu item to save the design into the Design Library.  
-                    Alternatively, it should be possibile to use the print features of the browser to
+                    Use the <b>File : Save As...</b> menu item to save the design into the Design Library. 
+                    The ODOP Design Library is "cloud", not local storage. 
+                    Alternatively, the <b>File : Export</b> menu item saves to your local Downloads folder. 
+                    Also, it should be possibile to use the print features of the browser to
                     send one or more of the Reports to a local printer or perhaps save to a .PDF file.
                     Your browser documentation should provide more details about printing.
                     </p>
@@ -305,7 +307,7 @@ export const execute = {
                 <>
                     <p>
                     If you are still on a Report view,
-                    don't forget to switch back to the Advanced view.
+                    don't forget to switch back to a main page (Advanced or Calculator View).
                     </p>
                     
                     <p>

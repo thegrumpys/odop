@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -66,8 +66,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
@@ -131,7 +129,8 @@ export const execute = {
                 <>
                     <p>
                     Now that we have expressed what we want the design to accomplish,
-                    we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
+                    we will ask the Search algorithm (Search button or <b>Action : Search</b> menu) 
+                    for a solution.
                     Specifically, Search will find values of the free Independent Variables
                     that cause the newly established Constraint to be satisfied.
                     </p>
@@ -149,21 +148,21 @@ export const execute = {
                 <>
                     <p>
                     OK, let's take a look at the results.
-                    Yes,  A feasible solution is available. Please take a moment to scroll through and view the values.
-                    Note that the OD in the free condition is far enough below .9 inches to guarantee that the OD in
-                    the solid condition is also below .9 inches.
+                    Yes,  A feasible solution is available. 
+                    Please take a moment to scroll through and view the values.
                     Look at the constraint violations to see how Search
                     really did its job and left no remaining constraint violations.
+                    Use the View menu to switch to Calculator View and Report 1 in order to 
+                    observe that the OD in the free condition is far enough below .9 inches 
+                    to guarantee that the OD in the solid condition is also below .9 inches.
                     </p>
                     <p>
-                    This can be seen more readily in Report&nbsp;1.&nbsp;  
-                    Use the View menu to switch to the report.
-                    The message: 
+                    The alert and the Report 1 message: 
                     "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
-                    is produced any time that the second load uses more
+                    are produced any time that the second load uses more
                     than 80 % of available deflection.
                     </p>
-                    <p>There is no warning about buckling so that is not a concern for this design.</p>
+                    <p>There is no alert about buckling so that is not a concern for this design.</p>
                 </>
             ),
             actions: [
@@ -176,7 +175,8 @@ export const execute = {
                 <>
                     <p>
                     If you are still in the Report view,
-                    don't forget to switch back to a view containing the main page.
+                    don't forget to switch back to a view containing a main page
+                    (Advanced or Calculator Views).
                     </p>
                     
                     <p>
@@ -234,15 +234,17 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Note the warning message on Report 1.
+                    Note the alerts and warning message in Report 1.
                     </p>
                     <p>
                     While it normally doesn't make much difference where we start a search,
                     applying a 280 pound load to a spring that was designed to support a
                     40 pound load will (mathematically) drive that spring far below its
-                    solid condition.  The search process will generally cope with such a
-                    poor starting point, but in some cases, you may wish to save a bit of
-                    time by entering  values that are a little closer to the final solution.
+                    solid condition.  
+                    The search process will generally cope with such a poor starting point,
+                    but in some cases, 
+                    you can avoid a bit of difficulty by 
+                    entering  values that produce a more realistic start point.
                     </p>
                     
                     <p>
@@ -265,12 +267,15 @@ export const execute = {
                     </p>
                     
                     <p>
-                    So far so good,  OD is less than 2.0.
+                    So far so good, 
+                    OD is less than 2.0.
                     Yes, deflection is close to 5.5 inches.
+                    By expanding the alert panel,
+                    you can see that this spring is prone to buckling. 
                     </p>
                     
                     <p>
-                    Looks fine here. It is time to move on.
+                    It is time to move on.
                     </p>
                 </>
             ),
@@ -284,7 +289,7 @@ export const execute = {
                 <>
                     <p>
                     If you are still on a Report view,
-                    use the View menu to switch back to the main page.
+                    use the View menu to switch back to a main page (Advanced or Calculator View).
                     </p>
                     
                     <p>
@@ -298,8 +303,7 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.)
+                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
         {

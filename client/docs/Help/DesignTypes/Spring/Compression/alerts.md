@@ -51,7 +51,7 @@ Increase | &nbsp; | Decrease
 ---      | ---    | ---  
 Wire_Dia | &nbsp; | Force_2  
  L_Free  | &nbsp; | Coils_T  
- &nbsp;  | &nbsp; | Coil_Dia  
+ &nbsp;  | &nbsp; | OD_Free  
  
 Depending on the Fixes and constraints on lengths and deflections associated with the second operating point, 
 it should also be possible to confirm that Force_2 is in Free status, 
@@ -93,11 +93,11 @@ having the length associated with the second operating load (L_2) as less than t
 is an impossible condition. 
 
 Where practical, change these values in the direction specified. 
-Increase | &nbsp; | Decrease  
----     | ---    | ---  
- L_Free | &nbsp; | Coils_T  
- &nbsp; | &nbsp; | Coil_Dia  
- &nbsp; | &nbsp; | Force_2
+Increase  | &nbsp; | Decrease  
+---       | ---    | ---  
+ L_Free   | &nbsp; | Coils_T  
+ Wire_Dia | &nbsp; | OD_Free  
+ &nbsp;   | &nbsp; | Force_2
 
 It may also possible to use Search (menu Action : Search or Search button) to clear this alert. 
 If not immediately successful, confirm that Wire_Dia is in Free status and try Search again. 

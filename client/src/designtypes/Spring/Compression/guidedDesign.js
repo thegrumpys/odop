@@ -195,10 +195,7 @@ export const execute = {
                             <td></td><td>deflection at first load point</td><td>Deflect_1</td><td></td>
                         </tr>
                         <tr>
-                            <td></td><td>length of stroke</td><td>L_Stroke</td><td></td>
-                        </tr>
-                        <tr>
-                            <td></td><td>inside diameter</td><td>ID_Free</td><td></td>
+                            <td></td><td>spring index</td><td>Spring_Index</td><td></td>
                         </tr>
                         <tr>
                             <td></td><td>factor of safety at second load point</td><td>FS_2</td><td></td>
@@ -293,14 +290,14 @@ export const execute = {
                     </p>
                     
                     <p>
-                    If the "Feasibility:" result of the search is "FEASIBLE" or "MARGINALLY FEASIBLE", 
+                    If the "Feasibility:" result of the search is "STRICTLY FEASIBLE" or "FEASIBLE", 
                     then the Seek feature can be used to provide an optimized result. 
                     </p>
                     
                     <p>
                     This is a good time to take a close look at existing values.
                     Scroll down to see everything.
-                    The Report tabs in the upper right offer additional information in a spring design specific format.
+                    The Reports (available on the View menu) offer additional information in a spring design specific format.
                     Again, if you want to preserve the option to easily return to this state of the design,
                     update the Comment field and use the File : Save As... menu.
                     </p>
@@ -308,7 +305,7 @@ export const execute = {
                     <p>
                     While it really doesn't make a lot of difference, 
                     if you are still viewing a Report, 
-                    you may want to switch back to the main page before using the "Next" button to proceed.
+                    you may want to switch back to a main page (Advanced or Calculator View) before using the "Next" button to proceed.
                     </p>
                 </>
             )
@@ -325,7 +322,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    <b>Invoke Seek now.</b> &nbsp; Use the Action : Seek... menu above.
+                    <b>Invoke Seek now.</b> &nbsp; Use the Seek button or the Action : Seek... menu above.
                     </p>
                     
                     <p>

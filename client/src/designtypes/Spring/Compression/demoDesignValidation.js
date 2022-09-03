@@ -200,7 +200,7 @@ export const execute = {
                     than 80 % of available deflection.
                     </p>
                     <p>
-                    There is no Report1 warning about buckling so that is not a concern for this design.
+                    There is no alert or Report1 warning about buckling so that is not a concern for this design.
                     </p>
                 </>
             ),
