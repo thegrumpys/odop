@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, logUsage, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, logUsage, setSymbolFlag, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -142,19 +142,14 @@ export const execute = {
                 changeSymbolValue("Material_Type",3),
                 changeSymbolValue("Life_Category",3),
                 changeSymbolValue("End_Type",4),
-                saveOutputSymbolConstraints('FS_CycleLife'),
                 setSymbolFlag('FS_CycleLife', MIN, CONSTRAINED),
                 changeSymbolConstraint('FS_CycleLife', MIN, 1.0),
-                saveOutputSymbolConstraints('Cycle_Life'),
                 setSymbolFlag('Cycle_Life', MIN, CONSTRAINED),
                 changeSymbolConstraint('Cycle_Life', MIN, 1000000),
-                saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 1.25),
-                saveOutputSymbolConstraints('L_Solid'),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
                 changeSymbolConstraint('L_Solid', MAX, 1.30),
-                saveOutputSymbolConstraints('L_Stroke'),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 0.65),
                 fixSymbolValue('Force_1', 30.0),
@@ -281,7 +276,7 @@ export const execute = {
                     <p>
                     This is a good time to think about saving the design for potential access in the future.
                     Use the <b>File : Save As...</b> menu item to save the design into the Design Library. 
-                    The ODOP Design Library is "cloud", not local storage. 
+                    The ODOP Design Library is "cloud", not local, storage. 
                     Alternatively, the <b>File : Export</b> menu item saves to your local Downloads folder. 
                     Also, it should be possibile to use the print features of the browser to
                     send one or more of the Reports to a local printer or perhaps save to a .PDF file.

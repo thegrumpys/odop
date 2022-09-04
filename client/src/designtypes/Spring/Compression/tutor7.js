@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
-import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search, seek } from '../../../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, changeLabelsValue, search, seek } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -89,8 +89,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
@@ -161,13 +159,10 @@ export const execute = {
             actions: [
                 fixSymbolValue('Force_1', 0.0),
                 fixSymbolValue('Force_2', 20.0),
-                saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 1.5),
-                saveOutputSymbolConstraints('L_Stroke'),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 1.0),
-                saveOutputSymbolConstraints('L_Solid'),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
                 changeSymbolConstraint('L_Solid', MAX, 1.5)
             ]
@@ -245,7 +240,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                seek("Weight", MIN),
+//                seek("Weight", MIN),
                 seek("Weight", MIN)
             ]
         },
@@ -283,7 +278,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                seek("Rate", MIN),
+//                seek("Rate", MIN),
                 seek("Rate", MIN)
             ]
         },
@@ -312,7 +307,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                seek("L_Solid", MIN),
+//                seek("L_Solid", MIN),
                 seek("L_Solid", MIN)
             ]
         },
@@ -349,12 +344,10 @@ export const execute = {
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}]),
                 fixSymbolValue('Force_1', 0.0),
                 fixSymbolValue('Force_2', 100.0),
-                saveOutputSymbolConstraints('L_Stroke'),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 2.5),
                 changeSymbolValue("Prop_Calc_Method", 3),
                 changeSymbolValue("Stress_Lim_Stat", 80000.0),
-                saveOutputSymbolConstraints('FS_2'),
                 setSymbolFlag('FS_2', MIN, CONSTRAINED),
                 changeSymbolConstraint('FS_2', MIN, 1.0)
                 ]
@@ -518,13 +511,10 @@ export const execute = {
                 loadInitialState('Spring/Compression'),
                 changeSymbolValue("L_Free", 3.0),
                 changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
-                saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 1.5),
-                saveOutputSymbolConstraints('L_Solid'),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
                 changeSymbolConstraint('L_Solid', MAX, 1.5),
-                saveOutputSymbolConstraints('L_Stroke'),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 1.0),
                 fixSymbolValue('Force_1', 0.0)
@@ -568,7 +558,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                seek("Force_2", MAX),
+//                seek("Force_2", MAX),
                 seek("Force_2", MAX)
             ]
         },

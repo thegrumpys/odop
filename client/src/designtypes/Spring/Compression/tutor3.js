@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -117,7 +117,6 @@ export const execute = {
                 </>
             ),
             actions: [
-                saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 0.9),
                 fixSymbolValue('Force_2')
@@ -224,7 +223,6 @@ export const execute = {
             actions: [
                 fixSymbolValue('Force_2', 280.0),
                 fixSymbolValue('Deflect_2', 5.5),
-                saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 2.0)
             ]

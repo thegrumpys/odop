@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, search } from '../../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, search } from '../../../store/actionCreators';
 import { MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -98,7 +98,6 @@ export const execute = {
             actions: [
                 changeSymbolValue("Material_Type",3),
                 changeSymbolValue("End_Type",4),
-                saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 1.56),
                 fixSymbolValue('Force_1', 61.8),

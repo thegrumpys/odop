@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, loadInitialState, fixSymbolValue, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, loadInitialState, fixSymbolValue, setSymbolFlag, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -116,10 +116,8 @@ export const execute = {
             ),
             actions: [
                 changeSymbolValue("Material_Type",1),
-                saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 0.920),
-                saveOutputSymbolConstraints('L_Solid'),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
                 changeSymbolConstraint('L_Solid', MAX, 1.06),
                 fixSymbolValue('L_Free', 1.713),
@@ -152,10 +150,10 @@ export const execute = {
                     In the process of moving to the next page, the tutorial will confirm that Wire_Dia is 
                     fixed at 0.120 inch and then run another search.
                     But first, we'll make a small change that will allow ODOP:Spring to
-                    consider designs with a larger factor of safety than the default established by 
+                    consider designs with a slightly larger factor of safety than the default established by 
                     this tutorial session's initial conditions: <br />
                     <br />
-                    CHANGE  FS_2  MAX  2.0
+                    CHANGE  FS_2  MAX  1.6
                     </p>
                     <br />
                 </>
@@ -199,7 +197,7 @@ export const execute = {
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.120),
-                changeSymbolConstraint('FS_2', MAX, 2.0),
+                changeSymbolConstraint('FS_2', MAX, 1.6),
                 search()
             ]
         },

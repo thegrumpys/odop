@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -67,8 +67,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
@@ -83,7 +81,6 @@ export const execute = {
                     In "Tutorial shorthand", the changes just imposed by the tutorial are:<br />
                     <br />
                         CHANGE  Cycle_Life MIN  50000<br />
-                        CHANGE  FS_2 MAX 2.0 &nbsp; &#60;--- allow more conservative designs<br/>
                         CHANGE  OD_Free MAX  2.0<br />
                         CHANGE  L_Solid MAX  1.2<br />
                         CHANGE  L_Stroke MIN 1.0<br />
@@ -111,16 +108,12 @@ export const execute = {
                 </>
             ),
             actions: [
-                saveOutputSymbolConstraints('Cycle_Life'),
                 setSymbolFlag('Cycle_Life', MIN, CONSTRAINED),
                 changeSymbolConstraint('Cycle_Life', MIN, 50000.0),
-                saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 2.0),
-                saveOutputSymbolConstraints('L_Solid'),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
                 changeSymbolConstraint('L_Solid', MAX, 1.2),
-                saveOutputSymbolConstraints('L_Stroke'),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 1.0),
                 fixSymbolValue('Force_1', 0.0),
