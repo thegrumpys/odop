@@ -16,14 +16,20 @@ var ContextAwareAccordion = function({ children }) {
     return (
         <Accordion className="col-md-12 mb-3" activeKey={activeKey} onSelect={eventKey => {
 //            console.log('In ContextAwareAccordion activeket=',activeKey,'level=',this.state.level,'eventKey=',eventKey);
-            if (activeKey === null || this.state.level !== eventKey) {
+            if (activeKey === null) { // Is it now Collapsed?
 //                console.log('In ContextAwareAccordion EXPAND');
                 setActiveKey('0');
                 this.setState({caret: <span className="pb-3 pr-1"><i className="fas fa-caret-down" /></span>});
-            } else {
-//                console.log('In ContextAwareAccordion COLLAPSE');
-                setActiveKey(null);
-                this.setState({caret: <span className="pb-3 pr-1"><i className="fas fa-caret-right" /></span>});
+             } else { // Otherwise it is already Expanded
+                if (this.state.level !== eventKey) {
+//                    console.log('In ContextAwareAccordion EXPAND');
+                    setActiveKey('0');
+                    this.setState({caret: <span className="pb-3 pr-1"><i className="fas fa-caret-down" /></span>});
+                } else {
+//                    console.log('In ContextAwareAccordion COLLAPSE');
+                    setActiveKey(null);
+                    this.setState({caret: <span className="pb-3 pr-1"><i className="fas fa-caret-right" /></span>});
+                }
             }
          }}>
             {children}
@@ -90,6 +96,7 @@ class AlertsAccordion extends Component {
     }
     
     setLevel(level) {
+        console.log('In AlertsAccordion.setLevel this=',this,'level=',level);
         this.setState({
             level: level
         });
@@ -115,8 +122,10 @@ class AlertsAccordion extends Component {
                     <Card bg="light">
                         <Card.Header>
                             <InputGroup>
-                                <InputGroup.Text id="alertLevel" size="sm">{this.state.caret}&nbsp;&nbsp;Alerts</InputGroup.Text>
                                 <ButtonGroup>
+                                    <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={this.state.level} id="alertLevel"
+                                        onClick={() => this.setLevel(this.state.level)}>{this.state.caret}&nbsp;&nbsp;Alerts
+                                    </Accordion.Toggle>
                                     <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={ERR}
                                         onClick={() => this.setLevel(ERR)} active={this.state.level === ERR || this.state.level === WARN || this.state.level === NOTICE || this.state.level === INFO}>
                                         {ERR}&nbsp;{err_alerts.length > 0 ? <Badge variant="danger">{err_alerts.length}</Badge> : ''}

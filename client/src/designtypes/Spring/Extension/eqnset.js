@@ -204,7 +204,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
     var temp;
     var idxoffset;
     var snx = [];
-    var sny = [7.0, 6.0, 5.0, 0.0]; // Powers of 10: 10,000,000, 1,000,000, 100,000, 1 cycles
+    var sny = [7.0, 6.0, 5.0, 4.0]; // Powers of 10: 10,000,000, 1,000,000, 100,000, 10,000 cycles
     var m_tab;
     var result;
 
@@ -238,11 +238,11 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
         }
     }
 
-    if (pntc < snx[0]) { // Is point before the table?
+    if (pntc < snx[0]) { // Is point after the table?
         sterm = (sny[1] - sny[0]) / (snx[1] - snx[0]);
         temp = sterm * (pntc - snx[0]) + sny[0];
         result =  Math.pow(10.0, temp);
-//        console.log('1 result=',result);
+//        console.log('After table result=',result);
         return(result);
     }
 
@@ -253,16 +253,16 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
           sterm = (sny[i] - sny[j]) / (snx[i] - snx[j]);
           temp = sterm * (pntc - snx[j]) + sny[j];
           result = Math.pow(10.0, temp);
-//          console.log('2 result=',result);
+//          console.log('Inside table result=',result);
           return result;
         }
     }
 
-    // Otherwise point is after the table
+    // Otherwise point is before the table
     sterm = (sny[3] - sny[2]) / (snx[3] - snx[2]);
     temp = sterm * (pntc - snx[3]) + sny[3];
     result =  Math.pow(10.0, temp);
-//    console.log('3 result=',result);
+//    console.log('Before table result=',result);
     return(result);
 }
     
