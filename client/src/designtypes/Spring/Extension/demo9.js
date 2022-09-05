@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, fixSymbolValue, loadInitialState, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, loadInitialState, changeLabelsValue, search } from '../../../store/actionCreators';
 import { changeSystemControlsValue } from '../../../store/actionCreators';
 export const execute = {
     "name": "demo9",
@@ -125,7 +125,6 @@ export const execute = {
             actions: [
                 changeSymbolValue("Material_Type",3),
                 changeSymbolValue("End_Type",4),
-                saveOutputSymbolConstraints('OD_Free'),
                 fixSymbolValue('OD_Free', 0.5),
                 fixSymbolValue('L_Free', 2.938),
                 fixSymbolValue('Force_2', 15.0),
