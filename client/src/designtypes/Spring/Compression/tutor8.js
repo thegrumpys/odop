@@ -94,8 +94,8 @@ export const execute = {
 
                     <p>
                     The 250 pound load has given us an unreasonable start point. 
-                    Look for warnings on Report 1 and Calculator View.
-                    In this case, we'll ignore the warning.
+                    Look at the alerts.
+                    In this case, we'll ignore the warnings and continue with a search.
                     </p>
                     
                     <p>
@@ -166,12 +166,14 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Trade needs the user to enter an exploration size.  The accuracy of this
-                    estimate is not critical.  If the number entered is too large, Trade
+                    Trade needs the user to enter an exploration size. 
+                    A default value is provided. 
+                    The accuracy of this value is not critical. 
+                    If the number entered is too large, Trade
                     will find a feasible solution, report the results and offer the
                     opportunity to start again with a smaller step.  If the estimate is too
                     small, a second or even third pass through the Trade process may be
-                    taken to refine the result.  The estimate of the appropriate step size
+                    taken to refine the result.  An appropriate exploration size
                     can be gauged by looking at the magnitude of the constraint violations.
                     The exploration size in percent should be larger than the largest
                     percentage constraint violation, perhaps even larger than the sum of
@@ -195,19 +197,19 @@ export const execute = {
                     </p>
                     
                     <p>
-                    In the interest of keeping this session short and on track,
-                    the tutorial will provide a good step size.  
-                    Enter a step size of <b>39</b> (%).
-                    Select <b>Continue</b>. 
+                    Accept the default step size and 
+                    select <b>Continue</b>. 
                     It may take several seconds to compute the result. 
                     </p>
                     
                     <p>
                     Observe that Trade predicts a feasible solution if the L_Stroke MIN constraint 
-                    is moved from 1.0 inches to something slightly less than 0.607 inches.
+                    is moved from 1.0 inches to something slightly less than 0.8 inches. 
                     </p>
                     
                     <p>
+                    In the interest of keeping this session short and on track, 
+                    we will skip the opportunity to refine the result. 
                     Select <b>Done</b>.  
                     This will exit Trade with no changes. 
                     Use the <b>Next</b> button to continue to next page of this tutorial session.
@@ -252,9 +254,9 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Enter a step size of <b>25</b> (%).
-                    Select <b>Continue</b>. 
-                    Again, it may take a few seconds for Trade to compute its results.
+                    Again, accept the default step size and 
+                    select <b>Continue</b>. 
+                    As noted previously, it may take a few seconds for Trade to compute its results.
                     </p>
                 
                     <p>
@@ -262,13 +264,13 @@ export const execute = {
                     we should be able get a better answer by repeating the Trade algorithm. 
                     <b> Accept</b> the resulting set of constraints. 
                     <b> Repeat</b> the process with the same <b>Arbitrary</b> direction, 
-                    the same weights and a step size of <b>8</b> %.
+                    the same weights and the new default step size.
                     </p>
                     
                     <p>
                     Observe that Trade predicts a feasible solution if the OD_Free MAX constraint 
                     is moved from the previous value of 2.0 inches 
-                    to a new value of approximately 3.0 inches. 
+                    to a new value of approximately 2.6 inches. 
                     </p>
                     
                     <p>
@@ -286,13 +288,14 @@ export const execute = {
                     <p>
                     <p>
                     Based on the Objective Value, it appears that moving the constraint from
-                    its original value of 2.0 inches to a new value of approximately 3.0 inches 
-                    produces a result that is is extremely close to feasibility.
+                    its original value of 2.0 inches to a new value of approximately 2.6 inches 
+                    produces a result that is is right at the edge of feasibility.
                     </p>
                     
                     Of course it is possible to combine any or all of these approaches.
                     Trade will be happy to calculate how far it is necessary to move
-                    with a combined approach ... just give more than one non-zero entry
+                    if multiple constraints are to be adjusted concurrently ... 
+                    just give more than one non-zero entry
                     when defining the weights at the beginning of Trade's process.
                     </p>
                     
@@ -300,8 +303,8 @@ export const execute = {
                     </p>
                     
                     <p>
-                    </p>
                     <br /><br />
+                    </p>
                 </>
             ),
             actions: [
