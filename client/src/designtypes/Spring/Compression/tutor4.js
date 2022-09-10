@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -79,8 +79,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
@@ -167,16 +165,12 @@ export const execute = {
             ),
             actions: [
                 changeSymbolValue("Life_Category",3),
-                saveOutputSymbolConstraints('FS_CycleLife'),
                 setSymbolFlag('FS_CycleLife', MIN, CONSTRAINED),
                 changeSymbolConstraint('FS_CycleLife', MIN, 1.0),
-                saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 1.950),
-                saveOutputSymbolConstraints('L_Solid'),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
                 changeSymbolConstraint('L_Solid', MAX, 1.2),
-                saveOutputSymbolConstraints('L_Stroke'),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 1.0),
                 fixSymbolValue('Force_1', 0.0),
@@ -337,10 +331,8 @@ export const execute = {
                 </>
             ),
             actions: [
-                saveOutputSymbolConstraints('L_Solid'),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
                 changeSymbolConstraint('L_Solid', MAX, 2.75),
-                saveOutputSymbolConstraints('FS_2'),
                 setSymbolFlag('FS_2', MAX, CONSTRAINED),
                 changeSymbolConstraint('FS_2', MAX, 1.75),
             ]

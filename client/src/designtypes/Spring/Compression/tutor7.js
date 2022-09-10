@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
-import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search, seek } from '../../../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, changeSymbolConstraint, loadInitialState, setSymbolFlag, changeLabelsValue, search, seek } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -89,8 +89,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
@@ -161,13 +159,10 @@ export const execute = {
             actions: [
                 fixSymbolValue('Force_1', 0.0),
                 fixSymbolValue('Force_2', 20.0),
-                saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 1.5),
-                saveOutputSymbolConstraints('L_Stroke'),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 1.0),
-                saveOutputSymbolConstraints('L_Solid'),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
                 changeSymbolConstraint('L_Solid', MAX, 1.5)
             ]
@@ -245,7 +240,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                seek("Weight", MIN),
+//                seek("Weight", MIN),
                 seek("Weight", MIN)
             ]
         },
@@ -261,7 +256,8 @@ export const execute = {
                     <p>
                     In general, it is the interaction of more than one constraint that 
                     limits further progress in achieving even better results.
-                    In this case the constraints on coil diameter and solid height
+                    In this case the constraints on solid height (L_Solid) and 
+                    factor of safety in the solid condition (FS_Solid) 
                     prevent further progress in reducing the spring rate.
                     If you are looking for a spring with a good cycle life 
                     or no tendency to buckle under load, 
@@ -283,7 +279,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                seek("Rate", MIN),
+//                seek("Rate", MIN),
                 seek("Rate", MIN)
             ]
         },
@@ -312,7 +308,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                seek("L_Solid", MIN),
+//                seek("L_Solid", MIN),
                 seek("L_Solid", MIN)
             ]
         },
@@ -344,17 +340,13 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}]),
                 fixSymbolValue('Force_1', 0.0),
                 fixSymbolValue('Force_2', 100.0),
-                saveOutputSymbolConstraints('L_Stroke'),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 2.5),
                 changeSymbolValue("Prop_Calc_Method", 3),
                 changeSymbolValue("Stress_Lim_Stat", 80000.0),
-                saveOutputSymbolConstraints('FS_2'),
                 setSymbolFlag('FS_2', MIN, CONSTRAINED),
                 changeSymbolConstraint('FS_2', MIN, 1.0)
                 ]
@@ -516,15 +508,10 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
-                saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 1.5),
-                saveOutputSymbolConstraints('L_Solid'),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
                 changeSymbolConstraint('L_Solid', MAX, 1.5),
-                saveOutputSymbolConstraints('L_Stroke'),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 1.0),
                 fixSymbolValue('Force_1', 0.0)
@@ -568,7 +555,7 @@ export const execute = {
                 </>
             ),
             actions: [
-                seek("Force_2", MAX),
+//                seek("Force_2", MAX),
                 seek("Force_2", MAX)
             ]
         },

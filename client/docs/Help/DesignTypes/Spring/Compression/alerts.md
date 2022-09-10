@@ -51,7 +51,7 @@ Increase | &nbsp; | Decrease
 ---      | ---    | ---  
 Wire_Dia | &nbsp; | Force_2  
  L_Free  | &nbsp; | Coils_T  
- &nbsp;  | &nbsp; | Coil_Dia  
+ &nbsp;  | &nbsp; | OD_Free  
  
 Depending on the Fixes and constraints on lengths and deflections associated with the second operating point, 
 it should also be possible to confirm that Force_2 is in Free status, 
@@ -93,11 +93,11 @@ having the length associated with the second operating load (L_2) as less than t
 is an impossible condition. 
 
 Where practical, change these values in the direction specified. 
-Increase | &nbsp; | Decrease  
----     | ---    | ---  
- L_Free | &nbsp; | Coils_T  
- &nbsp; | &nbsp; | Coil_Dia  
- &nbsp; | &nbsp; | Force_2
+Increase  | &nbsp; | Decrease  
+---       | ---    | ---  
+ L_Free   | &nbsp; | Coils_T  
+ Wire_Dia | &nbsp; | OD_Free  
+ &nbsp;   | &nbsp; | Force_2
 
 It may also possible to use Search (menu Action : Search or Search button) to clear this alert. 
 If not immediately successful, confirm that Wire_Dia is in Free status and try Search again. 
@@ -116,20 +116,22 @@ ___
 
 Alert entry #C105
 ##  FS_Solid < 1.0 
-This spring may be over-stressed if deflected to solid.
-It may 'set' as in not return to its original free length.
+This spring may be over-stressed if deflected to solid. 
+If deflected to solid, 
+it may 'set' as in not return to its original free length.
 
 In order to resolve this alert, 
 where practical, change these values in the direction specified. 
 Increase  | &nbsp; | Decrease  
 ---       | ---    | ---  
- Coils_T  | &nbsp; | L_Free  
- Coil_Dia | &nbsp; | &nbsp;  
+ OD_Free  | &nbsp; | L_Free  
+ Coils_T  | &nbsp; | Wire_Dia  
 
-In order to design a spring that is not over-stressed when deflected to the solid condition, 
-enable the FS_Solid MAX constraint, 
-set that MAX constraint to a value slightly above 1.0 
-and run the Search feature (menu Action : Search or Search button). 
+In order to design a spring that is not over-stressed when deflected to the solid condition: 
+ - confirm that the design is not over specified.  For this case, at least one of OD_Free, Wire_Dia, L_Free, and Coils_T must be in Free status and away from binding constraints. 
+ - confirm that the lower constraint on factor of safety in the solid condition (FS_Solid MIN) is enabled (it is enabled by default) 
+ - set that FS_Solid MIN constraint to a value slightly above 1.0 (perhaps 1.1; the default is 1.0) 
+ - run the Search feature (menu Action : Search or Search button). 
 
 ___
 

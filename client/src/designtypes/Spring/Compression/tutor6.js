@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, changeSymbolConstraint, loadInitialState, fixSymbolValue, setSymbolFlag, saveOutputSymbolConstraints, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSymbolValue, changeSymbolConstraint, loadInitialState, fixSymbolValue, setSymbolFlag, changeLabelsValue, search } from '../../../store/actionCreators';
 import { MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [
@@ -75,8 +75,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
@@ -103,26 +101,23 @@ export const execute = {
                     </p>
 
                     <p>
-                    Report 1 provides a warning message.  
-                    When free length reduced to 1.713 and the load increased to 50 pounds, 
+                    The alert panel indicates that there is multiple issues with this design..  
+                    When free length is reduced to 1.713 and the load increased to 50 pounds, 
                     the current values of Wire_Dia and Coils_T 
                     (determined from the initial conditions established at the beginning of this tutorial session) 
                     produced a starting point where L_2, the length at load point 2,
                     is less than zero.  
-                    This is an impossible condition and provides a difficult start point for the search.  
-                    The message suggests that we might get better (and more reliable) performance 
-                    if we remedy the situation manually.  
-                    However in this case, we'll ignore the message and proceed with the search.
+                    This is an impossible condition and provides a difficult start point for the search. 
+                    We might get better (and more reliable) search performance if we remedy the situation manually. 
+                    However in this case, we'll ignore the alert messages and proceed with the search. 
                     </p>
                     <br />
                 </>
             ),
             actions: [
                 changeSymbolValue("Material_Type",1),
-                saveOutputSymbolConstraints('OD_Free'),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 0.920),
-                saveOutputSymbolConstraints('L_Solid'),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
                 changeSymbolConstraint('L_Solid', MAX, 1.06),
                 fixSymbolValue('L_Free', 1.713),
@@ -155,10 +150,10 @@ export const execute = {
                     In the process of moving to the next page, the tutorial will confirm that Wire_Dia is 
                     fixed at 0.120 inch and then run another search.
                     But first, we'll make a small change that will allow ODOP:Spring to
-                    consider designs with a larger factor of safety than the default established by 
+                    consider designs with a slightly larger factor of safety than the default established by 
                     this tutorial session's initial conditions: <br />
                     <br />
-                    CHANGE  FS_2  MAX  2.0
+                    CHANGE  FS_2  MAX  1.6
                     </p>
                     <br />
                 </>
@@ -202,7 +197,7 @@ export const execute = {
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.120),
-                changeSymbolConstraint('FS_2', MAX, 2.0),
+                changeSymbolConstraint('FS_2', MAX, 1.6),
                 search()
             ]
         },

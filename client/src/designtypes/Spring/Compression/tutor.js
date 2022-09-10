@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
-import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, changeLabelsValue, search } from '../../../store/actionCreators';
-import { MAX } from '../../../store/actionTypes';
+import { changeSymbolValue, fixSymbolValue, loadInitialState, changeLabelsValue, search } from '../../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -25,7 +24,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    As with the other tutorial and demo sessions, 
+                    As with most of the other tutorial and demo sessions, 
                     this session needs to start from a known state.  
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
@@ -75,8 +74,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}])
             ]
         },
@@ -185,13 +182,13 @@ export const execute = {
                     
                     <p>
                     In the process of moving to the following page, the tutorial will impose a new value 
-                    for an input (Independent Variable) ... the Wire_Dia of our compression spring. 
-                    Take note of the current value of Rate or %_Avail_Deflect so that you can see the 
+                    for an input (Independent Variable) ... the free length (L_Free) of our compression spring. 
+                    Take note of the current value of %_Avail_Deflect so that you can see the 
                     impact of the change.
                     </p>
                     
                     <p>
-                    When you click on Next, the tutorial will set the value of Wire_Dia to 0.110 inches.
+                    When you click on Next, the tutorial will set the value of L_Free to 3.0 inches.
                     </p>
                 </>
             )
@@ -201,13 +198,13 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The tutorial has now entered a value of 0.110 inches for Wire_Dia. 
+                    The tutorial has now entered a value of 3.0 inches for L_Free. 
                     In the shorthand summary that will be used in the remaining tutorial 
                     and demo sessions, the action was:
                     </p>
                     
                     <p>
-                    CHANGE  Wire_Dia  0.110<br />
+                    CHANGE  L_Free  3.0<br />
                     </p>
                     
                     <p>
@@ -216,10 +213,17 @@ export const execute = {
                     The remaining Independent Variable values remain as established by the initialState
                     that was imposed at the start of this session. 
                     </p>
+                    
+                    <p>
+                    Also notice that this change to L_Free by this tutorial session did not leave it in Fixed status.
+                    By default, the ODOP AutoFix feature is enabled. 
+                    Thus, a user making a change to the value of an independent variable like OD_Free 
+                    will leave it in Fixed status. 
+                    </p>
                 </>
             ),
             actions: [
-                changeSymbolValue("Wire_Dia", 0.110)
+                changeSymbolValue("L_Free", 3.0)
             ]
         },
         {
@@ -259,23 +263,22 @@ export const execute = {
                     
                     <p>
                     If you scroll down, you can see that the
-                    design now exceeds the 98 percent MAX constraint on %_Avail_Deflect
+                    design now exceeds the MAX constraint on %_Avail_Deflect
                     (percentage of available deflection at load point 2).
                     Since a constraint is violated, this design is considered to be
                     "Not Feasible".
-                    A Search (<b>Action : Search</b> menu) will be required to
-                    find values of free (not FIXed) Independent Variables such that 
+                    A Search (Search button or <b>Action : Search</b> menu) will be required to
+                    find values of free (not Fixed) Independent Variables such that 
                     constraints are not violated.
                     </p>
                     
                     <p>
-                    Before we get into Search, let's suppose that we really don't 
-                    want the Search process to change either the 0.110 inch value for Wire_Dia that 
-                    we established earlier in this session or the 40 pound value of Force_2 that 
-                    was established by the initialState.
-                    When you click Next, the tutorial will check the appropriate FIX checkboxes 
+                    Before we get into Search, let's suppose that we really don't want 
+                    the Search process to change either the 0.1055 inch value for Wire_Dia or the 
+                    39 pound value of Force_2 that were established by default (the initialState).
+                    When you click Next, the tutorial will check the appropriate Fix checkboxes 
                     (positioned between the Value entry fields and the Units fields) 
-                    to put Wire_Dia and Force_2 into FIXed status.
+                    to put Wire_Dia and Force_2 into Fixed status.
                     </p>
                 </>
             ),
@@ -288,13 +291,14 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Now, the FIX checkboxes for Wire_Dia and Force_2 are checked.
+                    Now, the Fix checkboxes for Wire_Dia and Force_2 are checked. 
+                    Also, Fixed status is indicated by heavy borders at the right and left of the Value field. 
                     </p>
                     
                     <p>
-                    By having Wire_Dia and Force_2 in FIXed status, the search will be able to adjust
-                    only the values of OD_Free, Wire_Dia, L_Free and Coils_T to find a design that does not 
-                    exceed the 98 per cent maximum on %_Avail_Deflect.
+                    By having Wire_Dia and Force_2 in Fixed status, the search will be able to adjust
+                    only the values of OD_Free, Wire_Dia, L_Free and Coils_T to find a design that 
+                    does not exceed the maximum on %_Avail_Deflect.
                     Of course, the entire collection of Dependent Variables will respond 
                     to any changes in the Independent Variables.
                     </p>
@@ -312,9 +316,10 @@ export const execute = {
                 <>
                     <p>
                     Now that we have expressed what we want the design to accomplish,
-                    we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
+                    we will ask the Search algorithm (Search button or <b>Action : Search</b> menu) 
+                    for a solution. 
                     Specifically, Search will find values of the free Independent Variables
-                    that cause the Constraints and FIXes to be satisfied.
+                    that cause the constraints and Fixes to be satisfied.
                     </p>
 
                     <p>
@@ -338,9 +343,9 @@ export const execute = {
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
                     
                     <p>
-                    Indeed, the design now utilizes less than 98 percent of its available deflection.
-                    Also, Wire_Dia has remained at 0.110 inches 
-                    and Force_2 at 40 pounds as specified. 
+                    Indeed, the design now utilizes less than 90 percent of its available deflection.
+                    Also, Wire_Dia has remained at 0.1055 inches 
+                    and Force_2 at 39 pounds as specified. 
                     </p>
                     
                     <p>
@@ -362,17 +367,17 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The tutorial has imposed: FIX L_Stroke 1.725
+                    The tutorial has imposed: Fix L_Stroke 1.725
                     </p>
                     
                     <p>
-                    The FIX is implemented as a weighted double-sided constraint.
+                    The Fix is implemented as a weighted double-sided constraint.
                     </p>
                     
                     <p>
                     Again, a Search will be required to establish values for the free Independent Variables
-                    such that the FIXed value of L_Stroke is established while simultaneously keeping %_Avail_Deflect 
-                    below the 98 percent maximum.
+                    such that the Fixed value of L_Stroke is established while simultaneously keeping %_Avail_Deflect 
+                    below the maximum.
                     </p>
                     
                     <p>
@@ -413,13 +418,13 @@ export const execute = {
                         </li>
                         
                         <li>
-                        It is possible to FIX the value of any Variable.
+                        It is possible to Fix the value of any Variable.
                             <ul>
                                 <li>
-                                    FIXed Independent Variables are not altered by the Search process.
+                                    Fixed Independent Variables are not altered by the Search process.
                                 </li>
                                 <li>
-                                    FIXed Dependent Variables require a Search to establish their value.
+                                    Fixed Dependent Variables require a Search to establish their value.
                                 </li>
                             </ul>
                         </li>
