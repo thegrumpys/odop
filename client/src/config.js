@@ -1,6 +1,6 @@
 import runtimeEnv from '@mars/heroku-js-runtime-env';
 import queryString from 'query-string';
-require('dotenv').config();
+//require('dotenv').config();
 
 var node_env;
 var issuer;

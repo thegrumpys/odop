@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { withRouter } from 'react-router-dom';
 import { logUsage } from '../../logUsage';
 import { withOktaAuth } from '@okta/okta-react';
 
-export default withRouter(withOktaAuth(class SignIn extends Component {
+export default withOktaAuth(class SignIn extends Component {
 
     constructor(props) {
 //      console.log("In SignIn.constructor props=",props);
@@ -33,4 +32,4 @@ export default withRouter(withOktaAuth(class SignIn extends Component {
       );
     }
 
-}));
+});

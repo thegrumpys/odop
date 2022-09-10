@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import config from '../config';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withOktaAuth } from '@okta/okta-react';
 import { changeUser, saveAutoSave } from '../store/actionCreators';
@@ -126,10 +124,10 @@ const mapDispatchToProps = {
     saveAutoSave: saveAutoSave,
 };
 
-export default withRouter(withOktaAuth(
+export default withOktaAuth(
     connect(
         mapStateToProps,
         mapDispatchToProps
     )(SignInPageWidget)
-));
+);
 
