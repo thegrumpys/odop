@@ -194,9 +194,9 @@ export const execute = {
                     </p>
                     
                     <p>
-                    The Report1 message: 
+                    The "<b>%_Avail_Deflect @ 2 > 80%</b>" alert and Report 1 message: 
                     "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
-                    is produced any time that the second load uses more
+                    are produced any time that the second load uses more
                     than 80 % of available deflection.
                     </p>
                     <p>
@@ -214,7 +214,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Don't forget to switch the view back to the main page.
+                    Don't forget to switch the view back to a main page (Advanced or Calculator View).
                     <br /><br />
                     Just in case you missed them on the previous screen, you can
                     scroll down to view the values of <b>Cycle_Life, %_Avail_Deflect</b> and <b>Weight </b> 

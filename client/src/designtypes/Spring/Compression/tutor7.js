@@ -256,7 +256,8 @@ export const execute = {
                     <p>
                     In general, it is the interaction of more than one constraint that 
                     limits further progress in achieving even better results.
-                    In this case the constraints on coil diameter and solid height
+                    In this case the constraints on solid height (L_Solid) and 
+                    factor of safety in the solid condition (FS_Solid) 
                     prevent further progress in reducing the spring rate.
                     If you are looking for a spring with a good cycle life 
                     or no tendency to buckle under load, 
@@ -339,8 +340,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}]),
                 fixSymbolValue('Force_1', 0.0),
                 fixSymbolValue('Force_2', 100.0),
@@ -509,8 +508,6 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
-                changeSymbolValue("L_Free", 3.0),
-                changeSymbolConstraint('%_Avail_Deflect', MAX, 98.),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 1.5),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
