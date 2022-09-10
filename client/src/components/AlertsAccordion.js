@@ -96,7 +96,7 @@ class AlertsAccordion extends Component {
     }
     
     setLevel(level) {
-        console.log('In AlertsAccordion.setLevel this=',this,'level=',level);
+//        console.log('In AlertsAccordion.setLevel this=',this,'level=',level);
         this.setState({
             level: level
         });
