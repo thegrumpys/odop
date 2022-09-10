@@ -1,7 +1,7 @@
 import { displayMessage } from '../../../components/MessageModal';
 import { initialState } from './initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
-import { FIXED, VALID_MAX } from '../../../store/actionTypes';
+import { FIXED, VALID_MIN } from '../../../store/actionTypes';
 
 export function migrate(design) {
     /*
@@ -351,9 +351,9 @@ export function migrate(design) {
         design.symbol_table[52].validmin = -Number.MAX_VALUE; // slope_term
         design.symbol_table[53].validmin = -Number.MAX_VALUE; // tensile_010
 
-        design.symbol_table[5].validmaxchoices = [ "Force_Solid" ]; // Force_2
-        design.symbol_table[5].validmaxchoice = 0; // Force_2
-        design.symbol_table[19].propagate = [{ name: "Force_2", minmax: VALID_MAX }]; // Force_Solid
+        design.symbol_table[12].validminchoices = [ "L_Solid" ]; // L_2
+        design.symbol_table[12].validminchoice = 0; // L_2
+        design.symbol_table[14].propagate = [{ name: "L_2", minmax: VALID_MIN }]; // L_Solid
         migrated_design.version = '12'; // last thing... set the migrated model version
         displayMessage(
             "The new Alert Facility may highlight previously unrecognized issues saved with earlier designs. Enter \"Alerts\" in Help Lookup and/or contact technical support.",
