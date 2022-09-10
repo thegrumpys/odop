@@ -286,12 +286,12 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    <p>
                     Based on the Objective Value, it appears that moving the constraint from
                     its original value of 2.0 inches to a new value of approximately 2.6 inches 
                     produces a result that is is right at the edge of feasibility.
                     </p>
                     
+                    <p>
                     Of course it is possible to combine any or all of these approaches.
                     Trade will be happy to calculate how far it is necessary to move
                     if multiple constraints are to be adjusted concurrently ... 
