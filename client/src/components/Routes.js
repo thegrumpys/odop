@@ -177,7 +177,7 @@ class Routes extends Component {
               <Route path='/login' render={() => <SignInPage />} />
               <Route path='/implicit/callback' component={LoginCallback} />
             </Security>
-            <Modal show={this.state.modal}>
+            <Modal show={this.state.modal} onHide={this.loadDefaultDesign}>
                 <Modal.Header closeButton><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
                 <Modal.Body>
                     <Alert variant="info">AutoSave design available. Recover the design?</Alert>
