@@ -29,7 +29,7 @@ export class PlotValue extends Component {
     render() {
 //      console.log('In PlotValue.render this=',this);
       const { store } = this.context;
-      var design = JSON.parse(JSON.stringify(store.getState())); // local non-Redux clone
+      var design = JSON.parse(JSON.stringify(store.getState())); // local non-React clone
       const local_store = createStore(reducers, design, applyMiddleware(dispatcher));
 //      console.log('store=',store,'design=',design,'local_store=',local_store);
       var local_design = local_store.getState();
@@ -109,7 +109,7 @@ export class PlotValue extends Component {
           xxx.push(i);
           yyy.push(obj);
       }
-      local_store.dispatch(freeSymbolValue("OD_Free"));
+      local_store.dispatch(freeSymbolValue(name));
 //      console.log('In PlotValue.render xxx=',xxx,'yyy=',yyy);
       return (
         <td>
