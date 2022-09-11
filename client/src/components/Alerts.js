@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
+import { CONSTRAINED, MIN, MAX, FIXED, FDCL } from '../store/actionTypes';
 import Emitter from './Emitter';
 
 export const ERR = 'Err';
@@ -12,7 +12,14 @@ export var check_message = function(design, left, op, right) {
   return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
 }
 
-export var add_DCD_alert = function(element, minmax, urlCode) {
+export var check_DCD_alert = function(element, minmax, urlCode) {
+    if (element.lmin & FIXED) {
+        return;
+    } else if (minmax === MIN && element.lmin & CONSTRAINED) {
+        return;
+    } else if (minmax === MAX && element.lmax & CONSTRAINED) {
+        return;
+    }
     var urlString;
     switch(urlCode){
         case "C":

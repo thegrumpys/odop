@@ -1,5 +1,5 @@
 import * as o from './symbol_table_offsets';
-import { checks as commonChecks, clearAlerts, addAlert, check_message, add_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
+import { checks as commonChecks, clearAlerts, addAlert, check_message, check_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
 import { CONSTRAINED, MIN, MAX } from '../../../store/actionTypes';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
@@ -128,11 +128,11 @@ export function checks(store) {        /*    Compression  Spring  */
         }
     }
 
-    if (!(design.model.symbol_table[o.Coils_A].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Coils_A], MIN, '');
-    if (!(design.model.symbol_table[o.Spring_Index].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], MIN, '');
-    if (!(design.model.symbol_table[o.Spring_Index].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], MAX, '');
-    if (!(design.model.symbol_table[o.FS_2].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], MIN, '');
-    if (!(design.model.symbol_table[o.FS_2].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], MAX, '');
+    check_DCD_alert(design.model.symbol_table[o.Coils_A], MIN, '');
+    check_DCD_alert(design.model.symbol_table[o.Spring_Index], MIN, '');
+    check_DCD_alert(design.model.symbol_table[o.Spring_Index], MAX, '');
+    check_DCD_alert(design.model.symbol_table[o.FS_2], MIN, '');
+    check_DCD_alert(design.model.symbol_table[o.FS_2], MAX, '');
 
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
         addAlert({
@@ -234,10 +234,10 @@ export function checks(store) {        /*    Compression  Spring  */
         });
     }
 
-    if (!(design.model.symbol_table[o.Force_1].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Force_1], MIN, 'E');
-    if (!(design.model.symbol_table[o.Stress_Initial].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Stress_Initial], MIN, 'E');
-    if (!(design.model.symbol_table[o.Stress_Initial].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Stress_Initial], MAX, 'E');
-    if (!(design.model.symbol_table[o.PC_Safe_Deflect].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.PC_Safe_Deflect], MAX, 'E');
+    check_DCD_alert(design.model.symbol_table[o.Force_1], MIN, 'E');
+    check_DCD_alert(design.model.symbol_table[o.Stress_Initial], MIN, 'E');
+    check_DCD_alert(design.model.symbol_table[o.Stress_Initial], MAX, 'E');
+    check_DCD_alert(design.model.symbol_table[o.PC_Safe_Deflect], MAX, 'E');
 
 //    var PC_Safe_Deflect1 = 100 * (design.model.symbol_table[o.Deflect_1].value / safe_travel); // safe_travel from ReportBase - save for another day
 //    if (PC_Safe_Deflect1 < 20.0) {

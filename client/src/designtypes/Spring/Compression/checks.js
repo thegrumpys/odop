@@ -1,5 +1,5 @@
 import * as o from './symbol_table_offsets';
-import { checks as commonChecks, clearAlerts, addAlert, check_message, add_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
+import { checks as commonChecks, clearAlerts, addAlert, check_message, check_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
 import { CONSTRAINED, MIN, MAX } from '../../../store/actionTypes';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
@@ -128,11 +128,11 @@ export function checks(store) {        /*    Compression  Spring  */
         }
     }
 
-    if (!(design.model.symbol_table[o.Coils_A].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Coils_A], MIN, '');
-    if (!(design.model.symbol_table[o.Spring_Index].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], MIN, '');
-    if (!(design.model.symbol_table[o.Spring_Index].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], MAX, '');
-    if (!(design.model.symbol_table[o.FS_2].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], MIN, '');
-    if (!(design.model.symbol_table[o.FS_2].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], MAX, '');
+    check_DCD_alert(design.model.symbol_table[o.Coils_A], MIN, '');
+    check_DCD_alert(design.model.symbol_table[o.Spring_Index], MIN, '');
+    check_DCD_alert(design.model.symbol_table[o.Spring_Index], MAX, '');
+    check_DCD_alert(design.model.symbol_table[o.FS_2], MIN, '');
+    check_DCD_alert(design.model.symbol_table[o.FS_2], MAX, '');
 
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
         addAlert({
@@ -220,9 +220,9 @@ export function checks(store) {        /*    Compression  Spring  */
         });
     }
 
-    if (!(design.model.symbol_table[o.Deflect_1].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Deflect_1], MIN, 'C');
-    if (!(design.model.symbol_table[o.FS_Solid].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_Solid], MIN, 'C');
-    if (!(design.model.symbol_table[o.PC_Avail_Deflect].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.PC_Avail_Deflect], MAX, 'C');
+    check_DCD_alert(design.model.symbol_table[o.Deflect_1], MIN, 'C');
+    check_DCD_alert(design.model.symbol_table[o.FS_Solid], MIN, 'C');
+    check_DCD_alert(design.model.symbol_table[o.PC_Avail_Deflect], MAX, 'C');
 
     var deflectRatio = design.model.symbol_table[o.Deflect_2].value / design.model.symbol_table[o.L_Free].value;
     var sq1 = 1.4 * design.model.symbol_table[o.Slenderness].value - 4.0;
