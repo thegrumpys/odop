@@ -12,7 +12,7 @@ export var check_message = function(design, left, op, right) {
   return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
 }
 
-export var add_DCD_alert = function(element, urlCode) {
+export var add_DCD_alert = function(element, minmax, urlCode) {
     var urlString;
     switch(urlCode){
         case "C":
@@ -30,7 +30,7 @@ export var add_DCD_alert = function(element, urlCode) {
     addAlert({
         element: element,
         name: element.name, 
-        message: 'Default constraint has been disabled',
+        message: 'Default ' + minmax + ' constraint not enabled',
         severity: WARN,
         help_url: urlString
     });
