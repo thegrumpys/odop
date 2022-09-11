@@ -36,8 +36,8 @@ export var add_DCD_alert = function(element, urlCode) {
     });
 }
 
-export var commonChecks = function(store) {
-//    console.log('In Alerts.commonChecks store=',store);
+export var checks = function(store) {
+//    console.log('In Alerts.checks store=',store);
     var design = store.getState();
     var total = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {

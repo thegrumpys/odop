@@ -1,8 +1,5 @@
 import * as o from './symbol_table_offsets';
-//import * as mo from '../mat_offsets';
-//import { commonChecks, clearAlerts } from '../../components/Alerts';
-import { commonChecks, clearAlerts, addAlert, WARN } from '../../components/Alerts';
-//import { CONSTRAINED } from '../../store/actionTypes';
+import { checks as commonChecks, clearAlerts, addAlert, WARN } from '../../components/Alerts';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -14,7 +11,7 @@ Number.prototype.toODOPPrecision = function() {
     return odopValue;
 };
 
-export function check(store) {
+export function checks(store) {
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
     clearAlerts();
     var design = store.getState();
@@ -26,13 +23,6 @@ export function check(store) {
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Piston-Cylinder/alerts.html#P_LT_Zero)'
         });
-//        addAlert({
-//            element: design.model.symbol_table[o.L_Solid],
-//            name: design.model.symbol_table[o.L_Solid].name, 
-//            message: check_message(design,o.L_Solid,'>=',o.L_Free),
-//            severity: ERR,
-//            duplicate: true
-//        });
     }
 
     commonChecks(store); // Now run the generic checks after the more specific checks

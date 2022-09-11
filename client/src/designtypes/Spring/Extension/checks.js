@@ -1,6 +1,5 @@
 import * as o from './symbol_table_offsets';
-//import * as mo from '../mat_offsets';
-import { commonChecks, clearAlerts, addAlert, check_message, add_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
+import { checks as commonChecks, clearAlerts, addAlert, check_message, add_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
 import { CONSTRAINED } from '../../../store/actionTypes';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
@@ -13,7 +12,7 @@ Number.prototype.toODOPPrecision = function() {
     return odopValue;
 };
 
-export function check(store) {        /*    Compression  Spring  */
+export function checks(store) {        /*    Compression  Spring  */
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
     clearAlerts();
     var design = store.getState();
