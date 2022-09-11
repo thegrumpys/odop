@@ -33,12 +33,17 @@ class ViewObjectiveValue extends Component {
                 <th>value</th>
                 <th>cmin</th>
                 <th>cmax</th>
+                <th>sdlim</th>
                 <th>smin</th>
                 <th>smax</th>
                 <th>validity_vmin</th>
                 <th>validity_vmax</th>
                 <th>feasibility_vmin</th>
                 <th>feasibility_vmax</th>
+                <th>validity_vmin**2</th>
+                <th>validity_vmax**2</th>
+                <th>feasibility_vmin**2</th>
+                <th>feasibility_vmax**2</th>
             </tr>
         );
     }
@@ -121,12 +126,17 @@ class ViewObjectiveValue extends Component {
                 <td>{element.value}</td>
                 <td>{element.cmin}</td>
                 <td>{element.cmax}</td>
+                <td>{element.sdlim}</td>
                 <td>{element.smin}</td>
                 <td>{element.smax}</td>
                 <td>{validity_vmin}</td>
                 <td>{validity_vmax}</td>
                 <td>{feasibility_vmin}</td>
                 <td>{feasibility_vmax}</td>
+                <td>{Math.pow(validity_vmin,2)}</td>
+                <td>{Math.pow(validity_vmax,2)}</td>
+                <td>{Math.pow(feasibility_vmin,2)}</td>
+                <td>{Math.pow(feasibility_vmax,2)}</td>
             </tr>
         );
     }
