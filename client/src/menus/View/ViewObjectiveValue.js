@@ -30,25 +30,24 @@ class ViewObjectiveValue extends Component {
             <tr key="table-head-row">
                 <th>#</th>
                 <th>name</th>
+                <th>%v_vmin**2</th>
+                <th>%v_vmax**2</th>
+                <th>%f_vmin**2</th>
+                <th>%f_vmax**2</th>
                 <th>value</th>
+                <th>lmin</th>
+                <th>lmax</th>
                 <th>cmin</th>
                 <th>cmax</th>
                 <th>sdlim</th>
                 <th>smin</th>
                 <th>smax</th>
-                <th>validity_vmin</th>
-                <th>validity_vmax</th>
-                <th>feasibility_vmin</th>
-                <th>feasibility_vmax</th>
-                <th>validity_vmin**2</th>
-                <th>validity_vmax**2</th>
-                <th>feasibility_vmin**2</th>
-                <th>feasibility_vmax**2</th>
             </tr>
         );
     }
     
     renderElement(element, i) {
+        var flags = ['','CONSTRAINED','FIXED','CONSTRAINED|FIXED','FDCL','CONSTRAINED|FDCL','FIXED|FDCL','CONSTRAINED|FIXED|FDCL']
         var validity_vmin;
         var validity_vmax;
         var feasibility_vmin;
@@ -123,20 +122,18 @@ class ViewObjectiveValue extends Component {
             <tr key={element.name}>
                 <td>{i}</td>
                 <td>{element.name}</td>
+                <td>{validity_vmin !== '' && validity_vmin*validity_vmin*100/this.props.objective_value}</td>
+                <td>{validity_vmax !== '' && validity_vmax*validity_vmax*100/this.props.objective_value}</td>
+                <td>{feasibility_vmin !== '' && feasibility_vmin*feasibility_vmin*100/this.props.objective_value}</td>
+                <td>{feasibility_vmax !== '' && feasibility_vmax*feasibility_vmax*100/this.props.objective_value}</td>
                 <td>{element.value}</td>
+                <td>{flags[element.lmin]}</td>
+                <td>{flags[element.lmax]}</td>
                 <td>{element.cmin}</td>
                 <td>{element.cmax}</td>
                 <td>{element.sdlim}</td>
                 <td>{element.smin}</td>
                 <td>{element.smax}</td>
-                <td>{validity_vmin}</td>
-                <td>{validity_vmax}</td>
-                <td>{feasibility_vmin}</td>
-                <td>{feasibility_vmax}</td>
-                <td>{Math.pow(validity_vmin,2)}</td>
-                <td>{Math.pow(validity_vmax,2)}</td>
-                <td>{Math.pow(feasibility_vmin,2)}</td>
-                <td>{Math.pow(feasibility_vmax,2)}</td>
             </tr>
         );
     }
