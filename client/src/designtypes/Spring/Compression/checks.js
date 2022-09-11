@@ -1,5 +1,6 @@
 import * as o from './symbol_table_offsets';
-import { checks as commonChecks, clearAlerts, addAlert, check_message, add_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
+import { clearAlerts, addAlert, check_message, add_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
+import { checks as springChecks } from '../checks';
 import { CONSTRAINED } from '../../../store/actionTypes';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
@@ -270,7 +271,7 @@ export function checks(store) {        /*    Compression  Spring  */
         });
     }
 
-    commonChecks(store); // Now run the generic checks after the more specific checks
+    springChecks(store); // Now run the Spring checks after the more specific checks
 
 //    console.log('</ul><li>','End check','</li>');
 
