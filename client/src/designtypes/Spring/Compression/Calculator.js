@@ -3,6 +3,7 @@ import { Container, Row, InputGroup, Form } from 'react-bootstrap';
 import { ReportBase } from "./ReportBase" // import the inner non-redux-connected class
 import SymbolName from '../../../components/SymbolName';
 import SymbolValue from '../../../components/SymbolValue';
+import PlotValue from '../../../components/PlotValue';
 import SymbolUnits from '../../../components/SymbolUnits';
 import SymbolValueWireDia from '../SymbolValueWireDia';
 import ValueName from '../../../components/ValueName';
@@ -54,7 +55,7 @@ export class Calculator extends ReportBase {
                         <tbody>
                             <tr>
                                 <ValueName name={<b>Free</b>} tooltip="Free or no load point" />
-                                <SymbolValue element={this.props.symbol_table[o.L_Free]} index={o.L_Free} />
+                                <PlotValue element={this.props.symbol_table[o.L_Free]} index={o.L_Free} />
                                 <Value id="Deflection_Free" value={0.0} />
                                 <Value id="Force_Free" value={0.0} />
                                 <SymbolValue element={this.props.symbol_table[o.OD_Free]} index={o.OD_Free} />
