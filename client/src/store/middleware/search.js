@@ -14,14 +14,14 @@ export function search(store, objmin, merit) {
     var local_design = local_store.getState();
 //    console.log('In search local_store=',local_store,'local_design=',local_design);
 
-    // Compress P into PC
+    // Compress P into PC (compressed P) by skipping FIXED Independent Variables
     var element;
     var pc = [];
     for (let i = 0; i < local_design.model.symbol_table.length; i++) {
         element = local_design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-            if (!(element.lmin & FIXED)) { // Only Free
-                pc.push(element.value);
+            if (!(element.lmin & FIXED)) { // Is it not Fixed, IOW, is it Free
+                pc.push(element.value); // Insert only Free Independent Variables
             }
         }
     }
@@ -33,16 +33,16 @@ export function search(store, objmin, merit) {
 //    console.log('In search ncode=',ncode);
     local_store.dispatch(changeResultTerminationCondition(ncode));
 
-    // Expand PC back into store change actions
+    // Expand PC (compressed P) into P by re-inserting FIXED Independent Variables
     var kd = 0;
     var p = [];
     for (let i = 0; i < local_design.model.symbol_table.length; i++) {
         element = local_design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-            if (!(element.lmin & FIXED)) { // Only Free
-                p.push(pc[kd++]);
+            if (!(element.lmin & FIXED)) { // Is it not Fixed, IOW, is it Free
+                p.push(pc[kd++]); // Insert Free Independent Variables
             } else {
-                p.push(element.value);
+                p.push(element.value); // Insert Fixed Independent Variables
             }
         }
     }
