@@ -31,7 +31,6 @@ export function search(store, objmin, merit) {
 //    console.log('In search pc=',pc,'delarg=',delarg,'local_design.model.system_controls.delmin=',local_design.model.system_controls.delmin,'objmin=',objmin,'local_design.model.system_controls.maxit=',local_design.model.system_controls.maxit,'local_design.model.system_controls.tol=',local_design.model.system_controls.tol);
     var ncode = patsh(pc, delarg, local_design.model.system_controls.delmin, objmin, local_design.model.system_controls.maxit, local_design.model.system_controls.tol, local_store, merit);
 //    console.log('In search ncode=',ncode);
-    local_store.dispatch(changeResultTerminationCondition(ncode));
 
     // Expand PC (compressed P) into P by re-inserting FIXED Independent Variables
     var kd = 0;
@@ -52,6 +51,7 @@ export function search(store, objmin, merit) {
     var obj = local_design.model.result.objective_value;
 
     store.dispatch(load(local_store.getState())); // Restore the local_store as the primary store
+    store.dispatch(changeResultTerminationCondition(ncode)); // Inset NCODE message as the last update
 
 //    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
     return obj;
