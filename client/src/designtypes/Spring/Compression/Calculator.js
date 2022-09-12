@@ -55,7 +55,7 @@ export class Calculator extends ReportBase {
                         <tbody>
                             <tr>
                                 <ValueName name={<b>Free</b>} tooltip="Free or no load point" />
-                                <PlotValue element={this.props.symbol_table[o.L_Free]} index={o.L_Free} />
+                                <SymbolValue element={this.props.symbol_table[o.L_Free]} index={o.L_Free} />
                                 <Value id="Deflection_Free" value={0.0} />
                                 <Value id="Force_Free" value={0.0} />
                                 <SymbolValue element={this.props.symbol_table[o.OD_Free]} index={o.OD_Free} />
