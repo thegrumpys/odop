@@ -4,13 +4,14 @@ import { patsh } from './patsh';
 import { dispatcher } from './dispatcher';
 import { reducers } from '../reducers';
 import { createStore, applyMiddleware } from 'redux';
+//import { loggerMiddleware  } from '../../index.js';
 
 // Search
 export function search(store, objmin, merit) {
 //    console.log('Entering search store=',store,'objmin=',objmin,'merit=',merit);
 //    console.trace();
 
-    const local_store = createStore(reducers, JSON.parse(JSON.stringify(store.getState())), applyMiddleware(dispatcher));
+    const local_store = createStore(reducers, JSON.parse(JSON.stringify(store.getState())), applyMiddleware(/*loggerMiddleware, */dispatcher));
     var local_design = local_store.getState();
 //    console.log('In search local_store=',local_store,'local_design=',local_design);
 

@@ -16,20 +16,20 @@ import config from './config';
 import { Beforeunload } from 'react-beforeunload';
 import { logUsage } from './logUsage';
 
-//function loggerMiddleware({ getState }) {
+//export function loggerMiddleware({ getState }) {
 //    return next => action => {
-//      console.log('will dispatch', action);
+//        console.log('will dispatch', action);
 //
-//      // Call the next dispatch method in the middleware chain.
-//      const returnValue = next(action)
+//        // Call the next dispatch method in the middleware chain.
+//        const returnValue = next(action)
 //
-//      console.log('state after dispatch', getState());
+////        console.log('state after dispatch', getState());
 //
-//      // This will likely be the action itself, unless
-//      // a middleware further in chain changed it.
-//      return returnValue
+//        // This will likely be the action itself, unless
+//        // a middleware further in chain changed it.
+//        return returnValue;
 //    }
-//  }
+//}
 
 //console.error('In index.js ==================================================================');
 //console.log('In index.js CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'Starting on port =', process.env.PORT, 'Node version =', process.version);
@@ -38,7 +38,7 @@ import { logUsage } from './logUsage';
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
-const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
+const middleware = composeEnhancers(applyMiddleware(/*loggerMiddleware, */dispatcher));
 
 // Create a store with an empty model where type is null
 const store = createStore(reducers, {
