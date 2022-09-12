@@ -19,9 +19,9 @@ export function search(store, objmin, merit) {
     var pc = [];
     for (let i = 0; i < local_design.model.symbol_table.length; i++) {
         element = local_design.model.symbol_table[i];
-        if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-            if (!(element.lmin & FIXED)) { // Is it not Fixed, IOW, is it Free
-                pc.push(element.value); // Insert only Free Independent Variables
+        if (element.type === "equationset" && element.input) { // Is it an Independent Variable
+            if (!(element.lmin & FIXED)) { // Is it not Fixed, IOW, is it Free?
+                pc.push(element.value); // Insert only Free Independent Variable
             }
         }
     }
@@ -37,11 +37,11 @@ export function search(store, objmin, merit) {
     var p = [];
     for (let i = 0; i < local_design.model.symbol_table.length; i++) {
         element = local_design.model.symbol_table[i];
-        if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-            if (!(element.lmin & FIXED)) { // Is it not Fixed, IOW, is it Free
-                p.push(pc[kd++]); // Insert Free Independent Variables
+        if (element.type === "equationset" && element.input) { // Is it an Independent Variable
+            if (!(element.lmin & FIXED)) { // Is it not Fixed, IOW, is it Free?
+                p.push(pc[kd++]); // Insert Free Independent Variable
             } else {
-                p.push(element.value); // Insert Fixed Independent Variables
+                p.push(element.value); // Insert Fixed Independent Variable
             }
         }
     }
@@ -50,7 +50,7 @@ export function search(store, objmin, merit) {
     local_design = local_store.getState();
     var obj = local_design.model.result.objective_value;
 
-    store.dispatch(load(local_store.getState())); // Restore the local_store as the primary store
+    store.dispatch(load(local_store.getState())); // Restore the local_store to the primary store
     store.dispatch(changeResultTerminationCondition(ncode)); // Inset NCODE message as the last update
 
 //    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);

@@ -12,13 +12,13 @@ export function despak(pc, store, merit) {
     var x = [];
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         var element = design.model.symbol_table[i];
-        if (element.type === "equationset" && element.input) {
-            if (!(element.lmin & FIXED)) {
-                p.push(pc[kd++]);
+        if (element.type === "equationset" && element.input) { // Is it an Independent Variable
+            if (!(element.lmin & FIXED)) { // Is it not Fixed, IOW, is it Free?
+                p.push(pc[kd++]); // Insert Free Independent Variable
             } else {
-                p.push(element.value);
+                p.push(element.value); // Insert Fixed Independent Variable
             }
-        } else {
+        } else { // Otherwise it is a Dependent Variable and a Calc Input
             x.push(element.value);
         }
     }
