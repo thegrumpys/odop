@@ -4,7 +4,7 @@ Alerts specific to torsion springs.
 
 ### On this page:   
  - [M_1 > M_2](alerts.html#M1_GT_M2)  
- - [Default constraint(s) have been disabled](alerts.html#T_DefaultConstraint)  
+ - [Default constraint not enabled](alerts.html#T_DefaultConstraint)  
  - [%_Safe_Deflect @ 2 > 80%](alerts.html#PC_Safe_Deflect2_GT_80)  
  - [%_Safe_Deflect @ 1 < 20%](alerts.html#PC_Safe_Deflect1_LT_20)  
 
@@ -41,7 +41,7 @@ ___
 ___
 
 Alert entry #T302
-## Default constraint(s) have been disabled 
+## Default constraint not enabled 
   
 Disabling default constraints is not recommended. 
 

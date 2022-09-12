@@ -8,7 +8,7 @@ Alerts specific to compression springs.
  - [L_Free < L_Solid](alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](alerts.html#L_2_LT_L_Solid)  
  - [FS_Solid < 1.0](alerts.html#FS_Solid_LT_1)  
- - [Default constraint(s) have been disabled](alerts.html#C_DefaultConstraint)  
+ - [Default constraint not enabled](alerts.html#C_DefaultConstraint)  
  - [%_Avail_Deflect @ 2 > 80%](alerts.html#PC_Avail_Deflect2_GT_80)  
  - [%_Avail_Deflect @ 1 < 20%](alerts.html#PC_Avail_Deflect1_LT_20)  
  - [Buckling concern](alerts.html#buckling)  
@@ -139,7 +139,7 @@ ___
 ___
 
 Alert entry #C106
-## Default constraint(s) have been disabled 
+## Default constraint not enabled 
   
 Disabling default constraints is not recommended.  
 

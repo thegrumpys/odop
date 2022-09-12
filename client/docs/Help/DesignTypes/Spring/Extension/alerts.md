@@ -9,7 +9,7 @@ Alerts specific to extension springs.
  - [Initial tension manufacturability concern; <br/>Stress_Initial > Stress_Init_Hi](alerts.html#SInit_GT_SInit_Hi)  
  - [Fatigue failure at end is possible](alerts.html#FatigueInHook)  
  - [Material property data not available](alerts.html#NoMatProp)  
- - [Default constraint(s) have been disabled](alerts.html#E_DefaultConstraint)  
+ - [Default constraint not enabled](alerts.html#E_DefaultConstraint)  
  - [%_Safe_Deflect @ 1 < 20%](alerts.html#PC_Safe_Deflect1_LT_20)  
 
 ___
@@ -188,7 +188,7 @@ ___
 ___
 
 Alert entry #E207
-## Default constraint(s) have been disabled 
+## Default constraint not enabled 
   
 Disabling default constraints is not recommended.  
 

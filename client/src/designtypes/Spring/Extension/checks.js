@@ -1,7 +1,6 @@
 import * as o from './symbol_table_offsets';
-//import * as mo from '../mat_offsets';
-import { commonChecks, clearAlerts, addAlert, check_message, add_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
-import { CONSTRAINED } from '../../../store/actionTypes';
+import { checks as commonChecks, clearAlerts, addAlert, check_message, check_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
+import { CONSTRAINED, MIN, MAX } from '../../../store/actionTypes';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -13,7 +12,7 @@ Number.prototype.toODOPPrecision = function() {
     return odopValue;
 };
 
-export function check(store) {        /*    Compression  Spring  */
+export function checks(store) {        /*    Compression  Spring  */
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
     clearAlerts();
     var design = store.getState();
@@ -77,7 +76,7 @@ export function check(store) {        /*    Compression  Spring  */
             element: design.model.symbol_table[o.Coils_A],
             name: design.model.symbol_table[o.Coils_A].name, 
             message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Coils_A].name + ' (' + design.model.symbol_table[o.Coils_A].value.toODOPPrecision() + ') < 1.0',
-            severity: WARN,
+            severity: WARN, 
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)'
         });
     }
@@ -128,11 +127,13 @@ export function check(store) {        /*    Compression  Spring  */
             });
         }
     }
-    if (!(design.model.symbol_table[o.Coils_A].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Coils_A], '');
-    if (!(design.model.symbol_table[o.Spring_Index].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], '');
-    if (!(design.model.symbol_table[o.Spring_Index].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], '');
-    if (!(design.model.symbol_table[o.FS_2].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], '');
-    if (!(design.model.symbol_table[o.FS_2].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], '');
+
+    check_DCD_alert(design.model.symbol_table[o.Coils_A], MIN, '');
+    check_DCD_alert(design.model.symbol_table[o.Spring_Index], MIN, '');
+    check_DCD_alert(design.model.symbol_table[o.Spring_Index], MAX, '');
+    check_DCD_alert(design.model.symbol_table[o.FS_2], MIN, '');
+    check_DCD_alert(design.model.symbol_table[o.FS_2], MAX, '');
+
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
         addAlert({
             element: design.model.symbol_table[o.Tensile],
@@ -232,10 +233,12 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#NoMatProp)' 
         });
     }
-    if (!(design.model.symbol_table[o.Force_1].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Force_1], 'E');
-    if (!(design.model.symbol_table[o.Stress_Initial].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Stress_Initial], 'E');
-    if (!(design.model.symbol_table[o.Stress_Initial].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Stress_Initial], 'E');
-    if (!(design.model.symbol_table[o.PC_Safe_Deflect].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.PC_Safe_Deflect], 'E');
+
+    check_DCD_alert(design.model.symbol_table[o.Force_1], MIN, 'E');
+    check_DCD_alert(design.model.symbol_table[o.Stress_Initial], MIN, 'E');
+    check_DCD_alert(design.model.symbol_table[o.Stress_Initial], MAX, 'E');
+    check_DCD_alert(design.model.symbol_table[o.PC_Safe_Deflect], MAX, 'E');
+
 //    var PC_Safe_Deflect1 = 100 * (design.model.symbol_table[o.Deflect_1].value / safe_travel); // safe_travel from ReportBase - save for another day
 //    if (PC_Safe_Deflect1 < 20.0) {
 //        addAlert({

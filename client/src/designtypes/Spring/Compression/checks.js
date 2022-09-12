@@ -1,7 +1,6 @@
 import * as o from './symbol_table_offsets';
-//import * as mo from '../mat_offsets';
-import { commonChecks, clearAlerts, addAlert, check_message, add_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
-import { CONSTRAINED } from '../../../store/actionTypes';
+import { checks as commonChecks, clearAlerts, addAlert, check_message, check_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
+import { CONSTRAINED, MIN, MAX } from '../../../store/actionTypes';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -13,7 +12,7 @@ Number.prototype.toODOPPrecision = function() {
     return odopValue;
 };
 
-export function check(store) {        /*    Compression  Spring  */
+export function checks(store) {        /*    Compression  Spring  */
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
     clearAlerts();
     var design = store.getState();
@@ -128,11 +127,13 @@ export function check(store) {        /*    Compression  Spring  */
             });
         }
     }
-    if (!(design.model.symbol_table[o.Coils_A].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Coils_A], '');
-    if (!(design.model.symbol_table[o.Spring_Index].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], '');
-    if (!(design.model.symbol_table[o.Spring_Index].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Spring_Index], '');
-    if (!(design.model.symbol_table[o.FS_2].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], '');
-    if (!(design.model.symbol_table[o.FS_2].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_2], '');
+
+    check_DCD_alert(design.model.symbol_table[o.Coils_A], MIN, '');
+    check_DCD_alert(design.model.symbol_table[o.Spring_Index], MIN, '');
+    check_DCD_alert(design.model.symbol_table[o.Spring_Index], MAX, '');
+    check_DCD_alert(design.model.symbol_table[o.FS_2], MIN, '');
+    check_DCD_alert(design.model.symbol_table[o.FS_2], MAX, '');
+
     if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
         addAlert({
             element: design.model.symbol_table[o.Tensile],
@@ -218,9 +219,11 @@ export function check(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)'
         });
     }
-    if (!(design.model.symbol_table[o.Deflect_1].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.Deflect_1], 'C');
-    if (!(design.model.symbol_table[o.FS_Solid].lmin & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.FS_Solid], 'C');
-    if (!(design.model.symbol_table[o.PC_Avail_Deflect].lmax & CONSTRAINED)) add_DCD_alert(design.model.symbol_table[o.PC_Avail_Deflect], 'C');
+
+    check_DCD_alert(design.model.symbol_table[o.Deflect_1], MIN, 'C');
+    check_DCD_alert(design.model.symbol_table[o.FS_Solid], MIN, 'C');
+    check_DCD_alert(design.model.symbol_table[o.PC_Avail_Deflect], MAX, 'C');
+
     var deflectRatio = design.model.symbol_table[o.Deflect_2].value / design.model.symbol_table[o.L_Free].value;
     var sq1 = 1.4 * design.model.symbol_table[o.Slenderness].value - 4.0;
     var buckleMsg;

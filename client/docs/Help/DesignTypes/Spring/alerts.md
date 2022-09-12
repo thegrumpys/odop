@@ -11,7 +11,7 @@ Alerts common to all round-wire coil springs
  - [Spring Index manufacturability concern](alerts.html#SI_manufacturability)  
  - [Cycle_Life calculation is not available](alerts.html#Cycle_LifeNA)  
  - [Cycle_Life not defined beyond yield](alerts.html#Cycle_LifeNA_FS_2)  
- - [Default constraint(s) have been disabled](alerts.html#DefaultConstraint)  
+ - [Default constraint not enabled](alerts.html#DefaultConstraint)  
  - [Value of Tensile is suspect](alerts.html#TensileValueSuspect)  
 
 ___
@@ -201,7 +201,7 @@ ___
 ___
 
 Alert entry #S59
-## Default constraint(s) have been disabled 
+## Default constraint not enabled 
   
 Disabling default constraints is not recommended.  
 
