@@ -203,23 +203,32 @@ ___
 Alert entry #S59
 ## Default constraint not enabled 
   
-Disabling default constraints is not recommended.  
+Disabling default constraints is not recommended. 
+
+This alert is produced when constraints enabled by default are disabled. 
+Also, this alert can be produced for designs created and saved with older versions of the software. 
+Specifically, constraints on Spring_Index previously were not enabled by default. 
+If this alert is associated with Spring_Index on an older design, it may be ignored. 
+Better yet, clear the alert by enabling MIN and MAX constraints on Spring_Index. 
 
 The default constraints guide Search to "good" spring designs. 
 The Seek and Trade features utilize Search internally and thus those results are also
 guided by the default constraints. 
 
 For example: 
- - disabling the lower (MIN) constraint on factor of safety at operating load point 2 (FS_2 MIN) 
-allows Search to return a highly over-stressed design and declare it as "feasible". 
- - disabling the upper (MAX) constraint on factor of safety at operating load point 2 (FS_2 MAX) 
-allows Search to return a highly under-stressed design and declare it as "feasible". 
+ - A lower constraint on deflection at the first operating point (Deflect_1) 
+prevents Search from generating negative values for force and deflection at point 1. 
+ - Constraints on Spring_Index insure that designs produced by the software are within the range of manufacturability.
+ Consult your manufacturer regarding capabilities and costs. 
+ - Constraints on factor of safety at the second operating point (FS_2) insure that stresses are in an appropriate range.  
+ 
+    + Disabling FS_2 MIN allows Search to return a highly over-stressed design and declare it as "feasible".  
 
-If a relatively heavy, low-stress design is desired (an "over-design" situation), 
-increase the value of the FS_2 MAX constraint. 
+    + Disabling FS_2 MAX allows Search to return a under-stressed design and declare it as "feasible". 
+    If a relatively heavy, low-stress design is desired (an "over-design" situation), increase the value of the FS_2 MAX constraint. 
 
-While it may be reasonable to adjust the constraint values of a default constraint, 
-disabling a default  constraint entirely is not recommended. 
+In summary, while it may be reasonable to adjust the constraint values of a default constraint, 
+disabling a default constraint entirely is not recommended. 
 
 ___
 
