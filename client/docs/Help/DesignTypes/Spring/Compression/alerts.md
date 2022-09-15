@@ -143,11 +143,21 @@ Alert entry #C106
   
 Disabling default constraints is not recommended.  
 
+This alert is produced when constraints enabled by default are disabled. 
+Also, this alert can be produced for designs created and saved with older versions of the software. 
+Specifically, constraints on Spring_Index previously were not enabled by default. 
+If this alert is associated with Spring_Index on an older design, it may be ignored. 
+Better yet, clear the alert by enabling MIN and MAX constraints on Spring_Index. 
+
 The default constraints guide Search to "good" spring designs. 
 The Seek and Trade features utilize Search internally and thus those results are also
 guided by the default constraints. 
 
 For example: 
+ - A lower constraint on deflection at the first operating point (Deflect_1) 
+prevents Search from generating negative values for force and deflection at point 1. 
+ - Constraints on Spring_Index insure that designs produced by the software are within the range of manufacturability.
+ Consult your manufacturer regarding capabilities and costs. 
  - disabling the lower (MIN) constraint on factor of safety at solid (FS_Solid MIN) 
 allows Search to return a design that would "set" (not return to the original free length if fully deflected) 
 and declare it as "feasible". 
@@ -159,7 +169,7 @@ If a design that achieves its second operating load (Force_2) near or at the sol
 change the value of the FS_2 MIN constraint to be 1.0 and the value of the 
 %_Avail_Deflect MAX constraint to be 100. 
 
-While it may be reasonable to adjust the constraint values of a default constraint, 
+In summary, while it may be reasonable to adjust the constraint values of a default constraint, 
 disabling a default constraint entirely is not recommended. 
 
 ___

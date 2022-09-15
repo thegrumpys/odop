@@ -218,11 +218,11 @@ guided by the default constraints.
 For example: 
  - A lower constraint on deflection at the first operating point (Deflect_1) 
 prevents Search from generating negative values for force and deflection at point 1. 
- - Constraints on Spring_Index insure that designs produced by the software are within the range of manufacturability.
+ - Constraints on Spring_Index insure that designs produced by the software are within the range of manufacturability. 
  Consult your manufacturer regarding capabilities and costs. 
- - Constraints on factor of safety at the second operating point (FS_2) insure that stresses are in an appropriate range.  
+ - Constraints on factor of safety at the second operating point (FS_2) insure that stresses are in an appropriate range. 
  
-    + Disabling FS_2 MIN allows Search to return a highly over-stressed design and declare it as "feasible".  
+    + Disabling FS_2 MIN allows Search to return a highly over-stressed design and declare it as "feasible". 
 
     + Disabling FS_2 MAX allows Search to return a under-stressed design and declare it as "feasible". 
     If a relatively heavy, low-stress design is desired (an "over-design" situation), increase the value of the FS_2 MAX constraint. 

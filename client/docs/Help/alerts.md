@@ -1,8 +1,11 @@
 # Alerts &nbsp; 
 
 Alerts are informational messages that are produced as you change the values of your design. 
-Press the Alerts button on the main pages (Advanced and Calculator Views) 
-to see an alert presentation that is organized by severity and (independent, dependent) variable type: 
+ 
+![Alert panel](/docs/Help/img/AlertPanel.png "Alert panel")   
+
+Press Alert buttons on the main pages (Advanced and Calculator Views) 
+to see an alert presentation that is organized by severity: 
 Severity | Content                                          | Font  
 ---      | ---                                              | ---  
  Err     | value is outside its valid range                 | Bold  
@@ -63,8 +66,10 @@ that will resolve the alerts.
  - [Spring Index manufacturability concern](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)  
  - [Cycle_Life calculation is not available](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA)  
  - [Cycle_Life not defined beyond yield](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA_FS_2)  
+ - [Default constraint not enabled](/docs/Help/DesignTypes/Spring/alerts.html#DefaultConstraint)  
  - [Value of Tensile is suspect](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)  
  - [Force_1 >= Force_2](/docs/Help/DesignTypes/Spring/Compression/alerts.html#F1_GE_F2)  
+ - [Excess Force](/docs/Help/DesignTypes/Spring/Compression/alerts.html#Excess_Force)  
  - [L_Free < L_Solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_Free_LT_L_Solid)  
  - [L_2 < L_solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_2_LT_L_Solid)  
  - [FS_Solid < 1.0](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)  

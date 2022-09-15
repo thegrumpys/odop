@@ -42,22 +42,30 @@ ___
 
 Alert entry #T302
 ## Default constraint not enabled 
-  
+
 Disabling default constraints is not recommended. 
+
+This alert is produced when constraints enabled by default are disabled. 
+Also, this alert can be produced for designs created and saved with older versions of the software. 
+Specifically, constraints on Spring_Index previously were not enabled by default. 
+If this alert is associated with Spring_Index on an older design, it may be ignored. 
+Better yet, clear the alert by enabling MIN and MAX constraints on Spring_Index. 
 
 The default constraints guide Search to "good" spring designs. 
 The Seek and Trade features utilize Search internally and thus those results are also
 guided by the default constraints. 
 
 For example: 
- - constraining the value of deflection at operating point 1 (Deflect_1) to be positive (greater than zero) 
+ - Constraints on Spring_Index insure that designs produced by the software are within the range of manufacturability. 
+Consult your manufacturer regarding capabilities and costs. 
+ - Constraining the value of deflection at operating point 1 (Deflect_1) to be positive (greater than zero) 
 prevents Search from returning designs with negative values for moment and deflection at operating point 1. 
- - depending on the configuration of other constraints, 
+ - Depending on the configuration of other constraints, 
 disabling the upper (MAX) constraint on percent safe deflection at operating load point 2 (%_Safe_Deflect) 
-might allow Search to return a design where the the second operating load (Force_2) exceeds the allowable stress 
-for a static load (Stress_Lim_Stat) and declare it to be "feasible". 
+might allow Search to return a design where the the second operating load (M_2) exceeds the allowable bending stress 
+for a static load (Stress_Lim_Bnd_Stat) and declare it to be "feasible". 
 
-While it may be reasonable to adjust the constraint values of a default constraint, 
+In summary, while it may be reasonable to adjust the constraint values of a default constraint, 
 disabling a default constraint entirely is not recommended. 
 
 ___
@@ -72,15 +80,15 @@ While this is not usually a problem,
 be aware that coil to coil contact may cause some inaccuracy in moments and deflections for this point.  
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
-follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
+follow Hooke's Law in that they provide a nominally linear relationship between force (moment) and deflection. 
 Howevever, in the real world there are limitations. 
 
-When torsion springs are compressed beyond roughly 80% of safe deflection 
+When torsion springs are deflected beyond roughly 80% of safe deflection 
 geometric imperfections such as a lack uniformity in coil pitch or minor deviation from cylindric shape 
-become a factor in the real (as opposed to theoretical) force-deflection relationship. 
+become a factor in the real (as opposed to theoretical) moment-deflection relationship. 
 Coil to coil contact will produce an increase in spring rate that continues to increase 
 with additional deflection until the maximum safe operating condition is reached. 
-Thus, when operating beyond 80% of the safe deflection expect forces to be somewhat higher 
+Thus, when operating beyond 80% of the safe deflection, expect moments to be somewhat higher 
 (or deflections to be somewhat lower) 
 than the linear behavior predicted by the equations. 
 
