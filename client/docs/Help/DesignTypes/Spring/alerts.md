@@ -11,6 +11,7 @@ Alerts common to all round-wire coil springs
  - [Spring Index manufacturability concern](alerts.html#SI_manufacturability)  
  - [Cycle_Life calculation is not available](alerts.html#Cycle_LifeNA)  
  - [Cycle_Life not defined beyond yield](alerts.html#Cycle_LifeNA_FS_2)  
+ - [Cycle_Life value is extrapolated](alerts.html#Cycle_LifeExtrapolated)  
  - [Default constraint not enabled](alerts.html#DefaultConstraint)  
  - [Value of Tensile is suspect](alerts.html#TensileValueSuspect)  
 
@@ -197,10 +198,26 @@ See also:
 
 ___
 
-<a id="DefaultConstraint"></a>  
+<a id="Cycle_LifeExtrapolated"></a>  
 ___
 
 Alert entry #S59
+##  Cycle_Life value is extrapolated 
+  
+The built-in material table provides allowable stress information derived from published s-n (stress versus number of cycles) data 
+that covers the range from 10,000 to 10,000,000 cycles.
+In order to facilitate proper operation of the search algorithm, 
+the allowable stress data has been extrapolated outside this range and is not supported by published data.
+
+See also: 
+ - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
+
+___
+
+<a id="DefaultConstraint"></a>  
+___
+
+Alert entry #S60
 ## Default constraint not enabled 
   
 Disabling default constraints is not recommended. 

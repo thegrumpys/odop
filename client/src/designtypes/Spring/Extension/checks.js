@@ -127,6 +127,15 @@ export function checks(store) {        /*    Compression  Spring  */
             });
         }
     }
+    if (design.model.symbol_table[o.Cycle_Life].value < 1e+4 || design.model.symbol_table[o.Cycle_Life].value > 1e+7) {
+            addAlert({
+                element: design.model.symbol_table[o.Cycle_Life],
+                name: design.model.symbol_table[o.Cycle_Life].name, 
+                message: design.model.symbol_table[o.Cycle_Life].name + ' value is extrapolated',
+                severity: INFO,
+                help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeExtrapolated)'
+            });
+    }
 
     check_DCD_alert(design.model.symbol_table[o.Coils_A], MIN, '');
     check_DCD_alert(design.model.symbol_table[o.Spring_Index], MIN, '');
