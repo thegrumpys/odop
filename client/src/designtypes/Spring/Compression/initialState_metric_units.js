@@ -84,7 +84,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Force_2",
-            "value": 180.00,
+            "value": 190.00,
             "units": "newtons",
             "lmin": 0,
             "lmax": 0,
@@ -208,7 +208,7 @@ export const initialState = {
             "tooltip": "Spring length at load point 2",
             "type": "equationset",
             "hidden": false,
-            "validminchoices": [ "L_Solid" ],
+            "validminchoices": ["L_Solid"],
             "validminchoice": 0
         },
         {
@@ -850,7 +850,7 @@ export const initialState = {
             "sdlim": 0.0,
             "type": "calcinput",
             "hidden": true
-        }    ],
+        }],
     "labels": [
         {
             "name": "COMMENT",
@@ -944,7 +944,7 @@ export const initialState = {
             "name": "Vendor approval",
             "value": "__________________________ "
         },
-            {
+        {
             "name": "Vendor date",
             "value": " _______ "
         }
