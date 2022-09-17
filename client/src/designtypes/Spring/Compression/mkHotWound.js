@@ -34,7 +34,7 @@ export const execute = {
                         <li>{'changeSymbolValue("Wire_Dia", 0.625),'}</li>
                         <li>{'changeSymbolValue("L_Free", 10.0),'}</li>
                         <li>{'changeSymbolValue("Coils_T", 7.0),'}</li>
-                        <li>{'changeSymbolValue("Force_1", 100.0),'}</li>
+                        <li>{'changeSymbolValue("Force_1", 400.0),'}</li>
                         <li>{'changeSymbolValue("Force_2", 1200.0),'}</li>
                         <li>{'changeSymbolValue("Material_Type", 16),'}</li>
                         <li>{'changeSymbolValue("End_Type", 5),'}</li>
@@ -66,7 +66,7 @@ export const execute = {
                 changeSymbolValue("Wire_Dia", 0.625),
                 changeSymbolValue("L_Free", 10.0),
                 changeSymbolValue("Coils_T", 7.0),
-                changeSymbolValue("Force_1", 100.0),
+                changeSymbolValue("Force_1", 400.0),
                 changeSymbolValue("Force_2", 1200.0),
                 changeSymbolValue("Material_Type", 16),
                 changeSymbolValue("End_Type", 5),

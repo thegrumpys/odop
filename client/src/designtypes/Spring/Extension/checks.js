@@ -127,7 +127,7 @@ export function checks(store) {        /*    Compression  Spring  */
             });
         }
     }
-    if (design.model.symbol_table[o.Cycle_Life].value < 1e+4 || design.model.symbol_table[o.Cycle_Life].value > 1e+7) {
+    if ((design.model.symbol_table[o.Cycle_Life].lmin & CONSTRAINED && design.model.symbol_table[o.Cycle_Life].value < 1e+4) || (design.model.symbol_table[o.Cycle_Life].lmax & CONSTRAINED && design.model.symbol_table[o.Cycle_Life].value > 1e+7)) {
             addAlert({
                 element: design.model.symbol_table[o.Cycle_Life],
                 name: design.model.symbol_table[o.Cycle_Life].name, 
