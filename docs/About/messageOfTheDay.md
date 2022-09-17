@@ -1,14 +1,10 @@
-**Message-of-the-day** &nbsp; updated September 14, 2022   
+**Message-of-the-day** &nbsp; updated September 17, 2022   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
 
-A "preview" of the next ODOP release (version 4.3) is now available. 
-Your feedback would be greatly appreciated. 
- [Contact Us](http://odop.herokuapp.com/docs/About/ContactUs.html) for access. 
-
+[ODOP version 4.3](https://github.com/thegrumpys/odop/milestone/54?closed=1) was released September 17, 2022.  
 [ODOP version 4.2.2](https://github.com/thegrumpys/odop/milestone/57?closed=1) was released May 24, 2022.  
-[ODOP version 4.2.1](https://github.com/thegrumpys/odop/milestone/56?closed=1) was released May 1, 2022.  
 [ODOP version 4.2](https://github.com/thegrumpys/odop/milestone/55?closed=1) was released April 3, 2022.  
 [ODOP version 4.1](https://github.com/thegrumpys/odop/milestone/37?closed=1) was released January 15, 2022.  
 Opening a design saved in a prior version of ODOP will produce a pop-up message.
@@ -44,6 +40,20 @@ To return, switch tabs or simply close this tab.
  
 <!---
 Comment
+[ODOP version 4.3](https://github.com/thegrumpys/odop/milestone/54?closed=1) was released September 17, 2022.  
+[ODOP version 4.2.2](https://github.com/thegrumpys/odop/milestone/57?closed=1) was released May 24, 2022.  
+[ODOP version 4.2.1](https://github.com/thegrumpys/odop/milestone/56?closed=1) was released May 1, 2022.  
+[ODOP version 4.2](https://github.com/thegrumpys/odop/milestone/55?closed=1) was released April 3, 2022.  
+[ODOP version 4.1](https://github.com/thegrumpys/odop/milestone/37?closed=1) was released January 15, 2022.  
 [ODOP version 4.0.7](https://github.com/thegrumpys/odop/milestone/51?closed=1) was released November 12, 2021.   
+[ODOP version 4.0.6](https://github.com/thegrumpys/odop/milestone/50?closed=1) was released August 05, 2021.   
+[ODOP version 4.0.5](https://github.com/thegrumpys/odop/milestone/49?closed=1) was released June 06, 2021.   
+[ODOP version 4.0.4](https://github.com/thegrumpys/odop/milestone/48?closed=1) was released May 09, 2021.   
+[ODOP version 4.0.3](https://github.com/thegrumpys/odop/milestone/47?closed=1) was released April 25, 2021.   
+[ODOP version 4.0.2](https://github.com/thegrumpys/odop/milestone/46?closed=1) was released April 04, 2021.   
+[ODOP version 4.0.1](https://github.com/thegrumpys/odop/milestone/40?closed=1) was released March 21, 2021.   
+[ODOP version 4.0](https://github.com/thegrumpys/odop/milestone/39?closed=1) was released February 27, 2021.   
+[ODOP version 3.6](https://github.com/thegrumpys/odop/milestone/36?closed=1) was released October 31, 2020.   
+[ODOP version 3.5](https://github.com/thegrumpys/odop/milestone/33?closed=1) was released July 5, 2020.   
 -->
  
