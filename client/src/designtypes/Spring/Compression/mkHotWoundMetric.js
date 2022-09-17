@@ -36,8 +36,8 @@ export const execute = {
                         <li>{'changeSymbolValue("L_Free", 250.0),'}</li>
                         <li>{'changeSymbolValue("Wire_Dia", 16.0),'}</li>
                         <li>{'changeSymbolValue("Coils_T", 7.0),'}</li>
-                        <li>{'changeSymbolValue("Force_1", 444.8),'}</li>
-                        <li>{'changeSymbolValue("Force_2", 6000.0),'}</li>
+                        <li>{'changeSymbolValue("Force_1", 1780),'}</li>
+                        <li>{'changeSymbolValue("Force_2", 5300.0),'}</li>
                         <li>{'changeSymbolValue("Material_Type", 16),'}</li>
                         <li>{'changeSymbolValue("End_Type", 5),'}</li>
                         <li>{'changeSymbolConstraint("Force_1", MAX, 500.),'}</li>
@@ -67,8 +67,8 @@ export const execute = {
                 changeSymbolValue("Wire_Dia", 16.0),
                 changeSymbolValue("L_Free", 250.0),
                 changeSymbolValue("Coils_T", 7.0),
-                changeSymbolValue("Force_1", 444.8),
-                changeSymbolValue("Force_2", 6000.0),
+                changeSymbolValue("Force_1", 1780),
+                changeSymbolValue("Force_2", 5300.0),
                 changeSymbolValue("Material_Type", 16),
                 changeSymbolValue("End_Type", 5),
                 changeSymbolConstraint("Force_1", MAX, 500.),
