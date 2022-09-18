@@ -14,7 +14,7 @@ class FileImport extends Component {
         this.toggle = this.toggle.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
         this.onFileImport = this.onFileImport.bind(this);
-        this.onLoadEnd = this.onLoadEnd.bind(this);
+//        this.onLoadEnd = this.onLoadEnd.bind(this);
         this.onError = this.onError.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.state = {
@@ -22,7 +22,7 @@ class FileImport extends Component {
             selectedFile: null, // Initially, no file is selected
             fileReader: new FileReader(),
         };
-        this.state.fileReader.onloadend = this.onLoadEnd; // On Load End callback
+//        this.state.fileReader.onloadend = this.onLoadEnd; // On Load End callback
         this.state.fileReader.onError = this.onError; // On Error callback
     }
 
@@ -51,23 +51,23 @@ class FileImport extends Component {
         this.state.fileReader.readAsText(this.state.selectedFile); // Begin Reading Text File
     };
     
-    onLoadEnd(event) {
-//        console.log('In FileImport.onLoadEnd event.target.value=',event.target.value);
-        displaySpinner(false);
-        var design = JSON.parse(this.state.fileReader.result); // Convert file contents to JSON object
-//        console.log('In FileImport.onLoadEnd design.type=',design.type,'design.name=',design.name);
-        var path = require('path');
-        var filename = path.basename(this.state.selectedFile.name,'.json'); // Drop prefix directories and suffix extension
-        var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
-        var migrated_design = migrate(design);
-        if (migrated_design.jsontype === "ODOP") {
-            this.props.load({name: filename, model: migrated_design});
-            this.props.deleteAutoSave();
-            logUsage('event', 'FileImport', { event_label: migrated_design.type + ' ' + migrated_design.name });
-        } else {
-            displayMessage('Invalid JSON type, function ignored');
-        }
-    }
+//    onLoadEnd(event) {
+////        console.log('In FileImport.onLoadEnd event.target.value=',event.target.value);
+//        displaySpinner(false);
+//        var design = JSON.parse(this.state.fileReader.result); // Convert file contents to JSON object
+////        console.log('In FileImport.onLoadEnd design.type=',design.type,'design.name=',design.name);
+//        var path = require('path');
+//        var filename = path.basename(this.state.selectedFile.name,'.json'); // Drop prefix directories and suffix extension
+//        var { migrate } = require('../../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
+//        var migrated_design = migrate(design);
+//        if (migrated_design.jsontype === "ODOP") {
+//            this.props.load({name: filename, model: migrated_design});
+//            this.props.deleteAutoSave();
+//            logUsage('event', 'FileImport', { event_label: migrated_design.type + ' ' + migrated_design.name });
+//        } else {
+//            displayMessage('Invalid JSON type, function ignored');
+//        }
+//    }
     
     onError(e) {
 //        console.log('In FileImport.onError e=',e);

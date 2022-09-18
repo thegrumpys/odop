@@ -7,7 +7,6 @@ import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
 import { withOktaAuth } from '@okta/okta-react';
-import { withRouter } from 'react-router-dom';
 
 class FileOpen extends Component {
 
@@ -262,9 +261,9 @@ const mapDispatchToProps = {
     deleteAutoSave: deleteAutoSave
 };
 
-export default withRouter(withOktaAuth(
+export default withOktaAuth(
     connect(
         mapStateToProps,
         mapDispatchToProps
     )(FileOpen)
-));
+);

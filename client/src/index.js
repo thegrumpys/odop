@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Spinner } from './components/Spinner';
 import { MessageModal } from './components/MessageModal';
 import Alerts from './components/Alerts';
@@ -15,6 +13,7 @@ import { initialSystemControls } from './initialSystemControls';
 import config from './config';
 import { Beforeunload } from 'react-beforeunload';
 import { logUsage } from './logUsage';
+import { createRoot } from 'react-dom/client';
 
 //function loggerMiddleware({ getState }) {
 //    return next => action => {
@@ -56,7 +55,10 @@ const store = createStore(reducers, {
 
 logUsage('event', 'Index', { event_label: 'window.location.search=' + window.location.search });
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(
     <div id="root2">
         <Beforeunload onBeforeunload={(event) => {
             logUsage('event', 'BeforeUnload', { event_label: ''});
@@ -71,5 +73,5 @@ ReactDOM.render(
                 </Router>
             </>
         </Provider>
-    </div>,
-    document.getElementById('root'));
+    </div>
+);

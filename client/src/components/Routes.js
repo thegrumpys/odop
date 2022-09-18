@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, Alert } from 'react-bootstrap';
-import { Route, withRouter } from 'react-router-dom';
+import { Routes as BrowserRoutes, Route } from 'react-router-dom';
 import { Security, LoginCallback } from '@okta/okta-react';
 import config from '../config';
 import MainPage from './MainPage';
@@ -28,6 +28,9 @@ class Routes extends Component {
         this.state = {
             modal: false,
         };
+    this.restoreOriginalUri = async (_oktaAuth, originalUri) => {
+      props.history.replace(toRelativeUrl(originalUri || '/', window.location.origin));
+    };
   }
 
   componentDidMount() {
@@ -172,10 +175,13 @@ class Routes extends Component {
     return (
         <>
             <Security oktaAuth={oktaAuth}
-                      onAuthRequired={this.onAuthRequired} >
-              <Route path='/' exact={true} component={MainPage} />
-              <Route path='/login' render={() => <SignInPage />} />
-              <Route path='/implicit/callback' component={LoginCallback} />
+                      onAuthRequired={this.onAuthRequired}
+                      restoreOriginalUri={this.restoreOriginalUri} >
+              <BrowserRoutes>
+                <Route path='/' exact={true} element={<MainPage />} />
+                <Route path='/login' render={() => <SignInPage />} />
+                <Route path='/implicit/callback' element={<LoginCallback />} />
+              </BrowserRoutes>
             </Security>
             <Modal show={this.state.modal} onHide={this.loadDefaultDesign}>
                 <Modal.Header closeButton><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
@@ -208,9 +214,7 @@ const mapDispatchToProps = {
     changeName: changeName,
 };
 
-export default withRouter(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(Routes)
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Routes);

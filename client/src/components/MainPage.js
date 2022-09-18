@@ -10,7 +10,6 @@ import {
     Tooltip,
     Row
 } from 'react-bootstrap';
-import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import ExecutePanel from './ExecutePanel';
 import { connect } from 'react-redux';
@@ -105,7 +104,7 @@ class MainPage extends Component {
     }
     
     render() {
-//        console.log('In MainPage.render this=',this);
+        console.log('In MainPage.render this=',this);
         // If you're waiting to logged in then there is nothing to display OR
         // If there is no name or type then there is no model therefore there is nothing to display
         if (this.props.authState.isPending || this.props.name === null || this.props.type === null) return null;
@@ -226,9 +225,9 @@ const mapDispatchToProps = {
     deleteAutoSave: deleteAutoSave
 };
 
-export default withRouter(withOktaAuth(
+export default withOktaAuth(
     connect(
         mapStateToProps,
         mapDispatchToProps
     )(MainPage)
-));
+);
