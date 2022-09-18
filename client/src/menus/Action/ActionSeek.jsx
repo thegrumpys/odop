@@ -92,7 +92,7 @@ class ActionSeek extends Component {
     render() {
 //        console.log('In ActionSeek.render this=',this);
 
-        var ResultTableOptimize = require('../../designtypes/'+this.props.type+'/ResultTableOptimize.js'); // Dynamically load ResultTableOptimize
+        var ResultTableOptimize = require('../../designtypes/'+this.props.type+'/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
 
         var display_search_button;
         if (this.props.objective_value > this.props.system_controls.objmin) {

@@ -143,7 +143,7 @@ class ResultTable extends Component {
             display_search_button = false;
         }
 
-        var ResultTableOptimize = require('../designtypes/'+this.props.type+'/ResultTableOptimize.js'); // Dynamically load ResultTableOptimize
+        var ResultTableOptimize = require('../designtypes/'+this.props.type+'/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
 
         return (
             <>
