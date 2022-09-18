@@ -148,6 +148,7 @@ If appropriate, dump to off-line storage and re-initialize the log_Usage table.
    or
    manually run all affected load.sql files to create startup files for each design type in the affected database (for example, do this for Staging and Production).
 1. Delete any old, invalid or development-only designs if necessary.
+1. Optionally, dump and archive, then empty the usage_log table. 
 <a id="publish2Heroku"></a>
 &nbsp;
 1. **Publish to Heroku** &nbsp; Update messageOfTheDay.md to announce availability of the new version.
