@@ -147,8 +147,14 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
     } else {
         temp = 0.67 * tensile;
     }
-    pntc = stress_2 - stress_1 * ((temp - stress_2) / (temp - stress_1));
-//    console.log('pntc=',pntc);
+    const smallnum = 1.0e-7;
+    var temp_stress_1 = temp - stress_1;
+    if (temp_stress_1 < smallnum) temp_stress_1 = smallnum;
+    var temp_stress_2 = temp - stress_2;
+    if (temp_stress_2 < smallnum) temp_stress_2 = smallnum;
+    var ratio = temp_stress_2 / temp_stress_1;
+    pntc = stress_2 - stress_1 * ratio;
+//    console.log('pntc=',pntc,'stress_2=',stress_2,'stress_1=',stress_1,'ratio=',ratio,'temp=',temp);
     if (cl_idx < 5) { // Is Life Catagory Not Peened?
         j = 0;
     } else { // Else Shot Peened
