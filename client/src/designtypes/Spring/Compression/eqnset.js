@@ -147,13 +147,14 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
     } else {
         temp = 0.67 * tensile;
     }
+    const smallnum = 1.0e-7;
     var temp_stress_1 = temp - stress_1;
-    if (temp_stress_1 < 0) temp_stress_1 = 1.0e-7;
+    if (temp_stress_1 < smallnum) temp_stress_1 = smallnum;
     var temp_stress_2 = temp - stress_2;
-    if (temp_stress_2 < 0) temp_stress_2 = 1.0e-7;
-    var ratio = ((temp_stress_2) / (temp_stress_1));
+    if (temp_stress_2 < smallnum) temp_stress_2 = smallnum;
+    var ratio = temp_stress_2 / temp_stress_1;
     pntc = stress_2 - stress_1 * ratio;
-    console.log('pntc=',pntc,'stress_2=',stress_2,'stress_1=',stress_1,'ratio=',ratio,'temp=',temp);
+//    console.log('pntc=',pntc,'stress_2=',stress_2,'stress_1=',stress_1,'ratio=',ratio,'temp=',temp);
     if (cl_idx < 5) { // Is Life Catagory Not Peened?
         j = 0;
     } else { // Else Shot Peened
@@ -177,8 +178,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
         sterm = (sny[1] - sny[0]) / (snx[1] - snx[0]);
         temp = sterm * (pntc - snx[0]) + sny[0];
         result =  Math.pow(10.0, temp);
-//        result = 1.0e+07;
-        console.log('After table result=',result);
+//        console.log('After table result=',result);
         return(result);
     }
 
@@ -189,7 +189,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
           sterm = (sny[i] - sny[j]) / (snx[i] - snx[j]);
           temp = sterm * (pntc - snx[j]) + sny[j];
           result = Math.pow(10.0, temp);
-          console.log('Inside table result=',result);
+//          console.log('Inside table result=',result);
           return result;
         }
     }
@@ -198,8 +198,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
     sterm = (sny[3] - sny[2]) / (snx[3] - snx[2]);
     temp = sterm * (pntc - snx[3]) + sny[3];
     result =  Math.pow(10.0, temp);
-//    result = 1.0;
-    console.log('Before table result=',result);
+//    console.log('Before table result=',result);
     return(result);
 }
     
