@@ -225,7 +225,7 @@ class AlertsAccordion extends Component {
                                         {(this.state.level === ERR || this.state.level === WARN || this.state.level === NOTICE || this.state.level === INFO) &&
                                             err_alerts.map((entry, index) => {
 //                                            console.log('In AlertsAccordion.render entry=',entry,'line=',line);
-                                            var hidden = config.node.env !== "production" ? false : entry.element.hidden;
+                                            var hidden = config.node.env !== "production" ? false : (entry.element === undefined ? false : entry.element.hidden);
                                             var match;
                                             if (entry.help_url !== undefined) {
                                                 match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
@@ -248,7 +248,7 @@ class AlertsAccordion extends Component {
                                         {(this.state.level === WARN || this.state.level === NOTICE || this.state.level === INFO) &&
                                             warn_alerts.map((entry, index) => {
 //                                            console.log('In AlertsAccordion.render entry=',entry,'line=',line);
-                                            var hidden = config.node.env !== "production" ? false : entry.element.hidden;
+                                            var hidden = config.node.env !== "production" ? false : (entry.element === undefined ? false : entry.element.hidden);
                                             var match;
                                             if (entry.help_url !== undefined) {
                                                 match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
@@ -271,7 +271,7 @@ class AlertsAccordion extends Component {
                                         {(this.state.level === NOTICE || this.state.level === INFO) &&
                                             notice_alerts.map((entry, index) => {
 //                                            console.log('In AlertsAccordion.render entry=',entry,'line=',line);
-                                            var hidden = config.node.env !== "production" ? false : entry.element.hidden;
+                                            var hidden = config.node.env !== "production" ? false : (entry.element === undefined ? false : entry.element.hidden);
                                             var match;
                                             if (entry.help_url !== undefined) {
                                                 match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
@@ -294,7 +294,7 @@ class AlertsAccordion extends Component {
                                         {(this.state.level === INFO) &&
                                             info_alerts.map((entry, index) => {
 //                                            console.log('In AlertsAccordion.render entry=',entry,'line=',line);
-                                            var hidden = config.node.env !== "production" ? false : entry.element.hidden;
+                                            var hidden = config.node.env !== "production" ? false : (entry.element === undefined ? false : entry.element.hidden);
                                             var match;
                                             if (entry.help_url !== undefined) {
                                                 match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
