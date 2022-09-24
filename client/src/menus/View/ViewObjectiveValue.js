@@ -34,6 +34,10 @@ class ViewObjectiveValue extends Component {
                 <th>%v_vmax**2</th>
                 <th>%f_vmin**2</th>
                 <th>%f_vmax**2</th>
+                <th>v_vmin</th>
+                <th>v_vmax</th>
+                <th>f_vmin</th>
+                <th>f_vmax</th>
                 <th>value</th>
                 <th>lmin</th>
                 <th>lmax</th>
@@ -118,14 +122,19 @@ class ViewObjectiveValue extends Component {
                 feasibility_vmax = '';
             }
         }
+//        console.log('element.name=',element.name,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax);
         return (
             <tr key={element.name}>
                 <td>{i}</td>
                 <td>{element.name}</td>
-                <td>{validity_vmin !== '' && validity_vmin*validity_vmin*100/this.props.objective_value}</td>
-                <td>{validity_vmax !== '' && validity_vmax*validity_vmax*100/this.props.objective_value}</td>
-                <td>{feasibility_vmin !== '' && feasibility_vmin*feasibility_vmin*100/this.props.objective_value}</td>
-                <td>{feasibility_vmax !== '' && feasibility_vmax*feasibility_vmax*100/this.props.objective_value}</td>
+                <td>{this.props.objective_value === 0.0 ? 'NA' : validity_vmin*validity_vmin*100/this.props.objective_value}</td>
+                <td>{this.props.objective_value === 0.0 ? 'NA' : validity_vmax*validity_vmax*100/this.props.objective_value}</td>
+                <td>{this.props.objective_value === 0.0 ? 'NA' : feasibility_vmin*feasibility_vmin*100/this.props.objective_value}</td>
+                <td>{this.props.objective_value === 0.0 ? 'NA' : feasibility_vmax*feasibility_vmax*100/this.props.objective_value}</td>
+                <td>{validity_vmin}</td>
+                <td>{validity_vmax}</td>
+                <td>{feasibility_vmin}</td>
+                <td>{feasibility_vmax}</td>
                 <td>{element.value}</td>
                 <td>{flags[element.lmin]}</td>
                 <td>{flags[element.lmax]}</td>
