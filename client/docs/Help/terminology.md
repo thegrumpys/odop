@@ -463,6 +463,7 @@ This term is described in detail in the spring design overview section:
 [Factor of Safety](SpringDesign/spring_oview.html#FoS) 
 
 See also: 
+ - [Wikipedia - Factor of Safety](https://en.wikipedia.org/wiki/Factor_of_safety) 
  - [Terms common to all spring types](SpringDesign/spring_oview.html) 
  - [Compression spring](/docs/Help/DesignTypes/Spring/Compression/description.html) 
  - [Extension spring](/docs/Help/DesignTypes/Spring/Extension/description.html) 

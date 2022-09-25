@@ -116,6 +116,8 @@ ___
 
 Alert entry #C105
 ##  FS_Solid < 1.0 
+The factor of safety when compressed to solid is less than 1.0.
+
 This spring may be over-stressed if deflected to solid. 
 If deflected to solid, 
 it may 'set' as in not return to its original free length.
@@ -131,8 +133,11 @@ In order to design a spring that is not over-stressed when deflected to the soli
  - confirm that the design is not over specified.  For this case, at least one of OD_Free, Wire_Dia, L_Free, and Coils_T must be in Free status and away from binding constraints. 
  - confirm that the lower constraint on factor of safety in the solid condition (FS_Solid MIN) is enabled (it is enabled by default) 
  - set that FS_Solid MIN constraint to a value slightly above 1.0 (perhaps 1.1; the default is 1.0) 
- - run the Search feature (menu Action : Search or Search button). 
+ - run the Search feature (menu **Action : Search** or Search button). 
 
+See also: 
+ - [Factor of Safety](/docs/Help/terminology.html#FactorOfSafety)  
+ 
 ___
 
 <a id="C_DefaultConstraint"></a>  

@@ -13,6 +13,7 @@ This topic covers various points that may allow a better user experience with th
  - [Browser refresh and back / forward](htt.html#browserRefresh)  
  - [AutoFix Feature](htt.html#autoFix)  
  - [AutoSave Feature](htt.html#autoSave)  
+ - [Seek violates constraints](htt.html#SeekViol)  
  - [Off-line Operation](htt.html#offlineOps)  
  - [Bookmark the app](htt.html#bookmark)  
  - [Closing or exiting the app](htt.html#shutdown)  
@@ -110,18 +111,23 @@ ___
 ___
 
 ## Side-by-Side comparison of designs 
-Depending on available screen size, 
-it may be possible to open two independent browser sessions or 
-two tabs in the same browser session with an ODOP design session in each. 
+It is generally possible to open two tabs in the same browser session with an ODOP design session in each. 
+With a widescreen monitor, two independent browser sessions can provide a 
+non-overlapping side-by-side positioning of two separate ODOP sessions thus 
+facilitating comparison of two designs. 
 Adjustments the browser's font size or "zoom" scale may be necessary for best results. 
-A non-overlapping side-by-side positioning of the windows will then 
-facilitate comparison of two designs. 
 
-One of the two browser sessions can keep the current most desirable design. 
+One of the two ODOP sessions can be the current design.
+The other session can open a saved design or import a previously exported design for comparison.
+
+One of the two ODOP sessions can keep a current most desirable design. 
 The other browser session can continue forward with additional trial designs. 
 The side-by-side aspect of the screen layout can help quickly identify the preferred design. 
 
+The AutoSave feature can provide a before / after comparison for Search, Seek and Trade. 
+
 See also:   
+ - [Using AutoSave in before / after comparisons](/docs/Help/autoSave.html#BeforeAfter)  
  - [Responsive software design](htt.html#responsiveDesign)  
  - [Optimizing for small screens](htt.html#smallScreen)  
 
@@ -207,6 +213,29 @@ ___
 ## AutoSave Feature   
 The ODOP software offers a basic AutoSave feature. 
 See [AutoSave](autoSave.html) for details. 
+
+___
+
+<a id="SeekViol"></a>  
+___
+
+## Seek violates constraints 
+Designs created by Seek will have violated constraints.
+
+Small violations of multiple constraints is expected behavior. 
+In fact, it is an indication that Seek is operating properly and 
+leaving no "slack" remaining in any relationship that can help achieve a more favorable result. 
+
+Seek is balancing the "reward" gained by violating constraints with the penalty for violating those constraints.
+
+If the remaining constraint violations are undesired, run Search.
+Search will find a nearby feasible design.
+Yet another Seek may (or may not) find a design with slightly smaller constraint violations than the first Seek.
+
+Finally, if the remaining constraint violations are a problem, 
+try offsetting (tightening) the constraint levels by an amount similar to the violation. 
+Run Seek again. 
+The result should be close to the desired target. 
 
 ___
 
