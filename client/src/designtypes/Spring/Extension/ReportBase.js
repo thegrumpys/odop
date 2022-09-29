@@ -49,6 +49,7 @@ export class ReportBase extends Component {
         this.dhat = this.def_dia(sq1 + this.props.symbol_table[o.Deflect_2].value);
         this.od_2 = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
         this.id_2 = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
+    console.log("Deflect_2 = ", this.props.symbol_table[o.Deflect_2].value, "dhat = ", this.dhat);
 
         var kc = (4.0 * this.props.symbol_table[o.Spring_Index].value - 1.0) / (4.0 * this.props.symbol_table[o.Spring_Index].value - 4.0);
         var ks = kc + 0.615 / this.props.symbol_table[o.Spring_Index].value;
@@ -78,6 +79,10 @@ export class ReportBase extends Component {
         this.sb = 1.25 * (8.0 * this.props.symbol_table[o.Mean_Dia].value * this.props.symbol_table[o.Force_2].value) / (Math.PI * wd3);
 
         this.safe_travel = (this.safe_load - this.props.symbol_table[o.Initial_Tension].value) / this.props.symbol_table[o.Rate].value;
+        const smallnum = 1.0e-10;  // used mostly for divide-by-zero protection
+        if (this.safe_travel < smallnum) {
+            this.safe_travel = smallnum;
+        }
         this.pc_avail_deflect = 100.0 * this.props.symbol_table[o.Deflect_2].value / this.safe_travel;
         
         this.dhat = this.def_dia(sq1 + this.safe_travel);
