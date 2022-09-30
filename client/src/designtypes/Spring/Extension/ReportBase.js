@@ -49,7 +49,7 @@ export class ReportBase extends Component {
         this.dhat = this.def_dia(sq1 + this.props.symbol_table[o.Deflect_2].value);
         this.od_2 = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
         this.id_2 = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
-    console.log("Deflect_2 = ", this.props.symbol_table[o.Deflect_2].value, "dhat = ", this.dhat);
+//      console.log("sq1 = ", sq1, "Deflect_2 = ", this.props.symbol_table[o.Deflect_2].value, "dhat = ", this.dhat);
 
         var kc = (4.0 * this.props.symbol_table[o.Spring_Index].value - 1.0) / (4.0 * this.props.symbol_table[o.Spring_Index].value - 4.0);
         var ks = kc + 0.615 / this.props.symbol_table[o.Spring_Index].value;
