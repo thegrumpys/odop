@@ -89,7 +89,8 @@ export class ReportBase extends Component {
         this.dhat = this.props.symbol_table[o.Tensile].value / 100.0;
         var kc = (4.0 * this.props.symbol_table[o.Spring_Index].value - 1.0) / (4.0 * this.props.symbol_table[o.Spring_Index].value - 4.0);
         var ks = kc + 0.615 / this.props.symbol_table[o.Spring_Index].value;
-        var s_f = ks * 8.0 * this.props.symbol_table[o.Mean_Dia].value / (Math.PI * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value);
+        const smallnum = 1.0e-10;  // used mostly for divide-by-zero protection
+        var s_f = ks * 8.0 * this.props.symbol_table[o.Mean_Dia].value / (Math.PI * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value + smallnum);
 
         this.kw1 = ks;
         this.kw2 = 1.0 + 0.5 / this.props.symbol_table[o.Spring_Index].value;

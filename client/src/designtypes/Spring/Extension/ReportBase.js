@@ -13,6 +13,7 @@ export class ReportBase extends Component {
 
     render() {
 //        console.log('In ReportBase.render this=',this);
+        const smallnum = 1.0e-10;  // used mostly for divide-by-zero protection
         const Close_Wound_Coil = 5;
         /*  Bring in material properties table  */
         if (this.props.symbol_table[o.Material_File].value === "mat_metric.json")
@@ -54,7 +55,7 @@ export class ReportBase extends Component {
         var kc = (4.0 * this.props.symbol_table[o.Spring_Index].value - 1.0) / (4.0 * this.props.symbol_table[o.Spring_Index].value - 4.0);
         var ks = kc + 0.615 / this.props.symbol_table[o.Spring_Index].value;
         var wd3 = this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value;
-        var s_f = ks * 8.0 * this.props.symbol_table[o.Mean_Dia].value / (Math.PI * wd3);
+        var s_f = ks * 8.0 * this.props.symbol_table[o.Mean_Dia].value / (Math.PI * wd3 + smallnum);
 
         this.kw1 = ks;
         
@@ -79,7 +80,6 @@ export class ReportBase extends Component {
         this.sb = 1.25 * (8.0 * this.props.symbol_table[o.Mean_Dia].value * this.props.symbol_table[o.Force_2].value) / (Math.PI * wd3);
 
         this.safe_travel = (this.safe_load - this.props.symbol_table[o.Initial_Tension].value) / this.props.symbol_table[o.Rate].value;
-        const smallnum = 1.0e-10;  // used mostly for divide-by-zero protection
         if (this.safe_travel < smallnum) {
             this.safe_travel = smallnum;
         }

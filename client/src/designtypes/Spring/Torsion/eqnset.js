@@ -5,6 +5,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
 //    console.log('Entering eqnset p=',p);
     
     const zero = 0.0;
+    const smallnum = 1.0e-10;  // used mostly for divide-by-zero protection
     const Deg_Per_Turn = 360.0;
     const Deg2Rad = 2.0 * Math.PI / 360.0;
     var RateInRad, Def1InRad, Def2InRad;
@@ -19,7 +20,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     /*  *******  DESIGN EQUATIONS  *******                  */
     x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
 
-    x[o.Spring_Index] = x[o.Mean_Dia] / p[o.Wire_Dia];
+    x[o.Spring_Index] = x[o.Mean_Dia] / (p[o.Wire_Dia] + smallnum);
 
     if (x[o.Heat_Treat] === 2){     //  Stress Relieve
         kb = (4.0 * x[o.Spring_Index] - 1.0) / (4.0 * x[o.Spring_Index] - 4.0);
@@ -61,7 +62,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
 
     x[o.Stroke] = x[o.Deflect_2] - x[o.Deflect_1];
 
-      s_f = 32.0 * kb / (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] * p[o.Wire_Dia]);
+      s_f = 32.0 * kb / (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] * p[o.Wire_Dia] + smallnum);
 
     x[o.Stress_1] = s_f * p[o.M_1];
     x[o.Stress_2] = s_f * p[o.M_2];
@@ -82,7 +83,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     x[o.Stress_End] = zero;
 
       if (x[o.Prop_Calc_Method] === 1) {
-          x[o.Tensile] = x[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - x[o.const_term]) + x[o.tensile_010];
+          x[o.Tensile] = x[o.slope_term] * (Math.log10(p[o.Wire_Dia] + smallnum) - x[o.const_term]) + x[o.tensile_010];
 //          console.log("eqnset Tensile = ", x[o.Tensile]);
       }
       if (x[o.Prop_Calc_Method] <= 2) {
@@ -90,11 +91,11 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
           x[o.Stress_Lim_Bnd_Stat]  = x[o.Tensile] * x[o.PC_Ten_Bnd_Stat]  / 100.0; 
       }
 
-    if (x[o.Stress_2] > zero) {
-        x[o.FS_2] = x[o.Stress_Lim_Bnd_Stat] / x[o.Stress_2]; 
+    if (Math.abs(x[o.Stress_2]) > smallnum) {
+        x[o.FS_2] = x[o.Stress_Lim_Bnd_Stat] / Math.abs(x[o.Stress_2]); 
 //        console.log("eqnset FS_2 = ", x[o.FS_2]);
     }
-       else x[o.FS_2] = 1.0;
+       else x[o.FS_2] = x[o.Stress_Lim_Bnd_Stat] / smallnum;
 
         /*
             Soderberg triangle approach to mixed steady and

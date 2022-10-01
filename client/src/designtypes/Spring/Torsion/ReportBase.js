@@ -13,6 +13,7 @@ export class ReportBase extends Component {
 
     render() {
 //        console.log('In ReportBase.render this=',this);
+        const smallnum = 1.0e-10;  // used mostly for divide-by-zero protection
         /*  Bring in material properties table  */
         if (this.props.symbol_table[o.Material_File].value === "mat_metric.json")
             this.m_tab = require('../mat_metric.json');
@@ -74,7 +75,7 @@ export class ReportBase extends Component {
     //  console.log("this.props.symbol_table[o.Heat_Treat].value =", this.props.symbol_table[o.Heat_Treat].value);
     //  console.log("this.kb = ", this.kb);
 
-        var s_f = 32.0 * this.kb / (Math.PI * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value);
+        var s_f = 32.0 * this.kb / (Math.PI * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value + smallnum);
 
 //        if stress_1 ^= 0.0 then this.fs_1=abs(str_lim_bnd_stat/stress_1);
 //        else this.fs_1=0.0;

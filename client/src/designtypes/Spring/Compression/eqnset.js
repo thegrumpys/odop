@@ -2,7 +2,7 @@ import * as o from './offsets';
 import * as mo from '../mat_offsets';
 export function eqnset(p, x) {        /*    Compression  Spring  */
 //    console.log('<li>','@@@@@ Start eqnset p=',p,'x=',x,'</li><ul>');
-    const zero = 0.0;
+    const smallnum = 1.0e-10;  // used mostly for divide-by-zero protection
     var ks;
     var kc;
     var temp;
@@ -16,7 +16,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 
     x[o.ID_Free] = x[o.Mean_Dia] - p[o.Wire_Dia];
 
-    x[o.Spring_Index] = x[o.Mean_Dia] / p[o.Wire_Dia];
+    x[o.Spring_Index] = x[o.Mean_Dia] / (p[o.Wire_Dia] + smallnum);
 
     kc = (4.0 * x[o.Spring_Index] - 1.0) / (4.0 * x[o.Spring_Index] - 4.0);
 
@@ -49,14 +49,14 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 
     x[o.Force_Solid] = x[o.Rate] * (p[o.L_Free] - x[o.L_Solid]);
 
-      s_f = ks * 8.0 * x[o.Mean_Dia] / (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] * p[o.Wire_Dia]);
+      s_f = ks * 8.0 * x[o.Mean_Dia] / (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] * p[o.Wire_Dia] + smallnum);
 
     x[o.Stress_1] = s_f * p[o.Force_1];
     x[o.Stress_2] = s_f * p[o.Force_2];
     x[o.Stress_Solid] = s_f * x[o.Force_Solid];
 
       if (x[o.Prop_Calc_Method] === 1) {
-          x[o.Tensile] = x[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - x[o.const_term]) + x[o.tensile_010];
+          x[o.Tensile] = x[o.slope_term] * (Math.log10(p[o.Wire_Dia] + smallnum) - x[o.const_term]) + x[o.tensile_010];
 //          console.log("eqnset Tensile = ", x[o.Tensile]);
       }
       if (x[o.Prop_Calc_Method] <= 2) {
@@ -64,16 +64,16 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
           x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0; 
       }
 
-    if (x[o.Stress_2] > zero) {
-        x[o.FS_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2]; 
+    if (Math.abs(x[o.Stress_2]) > smallnum) {
+        x[o.FS_2] = x[o.Stress_Lim_Stat] / Math.abs(x[o.Stress_2]); 
 //        console.log("eqnset FS_2 = ", x[o.FS_2]);
     }
-       else x[o.FS_2] = 1.0;
+       else x[o.FS_2] = x[o.Stress_Lim_Stat] / smallnum;
 
-    if (x[o.Stress_Solid] > zero) {
-        x[o.FS_Solid] = x[o.Stress_Lim_Stat] / x[o.Stress_Solid];
+    if (Math.abs(x[o.Stress_Solid]) > smallnum) {
+        x[o.FS_Solid] = x[o.Stress_Lim_Stat] / Math.abs(x[o.Stress_Solid]);
     }
-           else x[o.FS_Solid] = 1.0;
+           else x[o.FS_Solid] = x[o.Stress_Lim_Stat] / smallnum;
 
         /*
             Soderberg triangle approach to mixed steady and

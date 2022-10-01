@@ -97,11 +97,12 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
           x[o.Stress_Lim_Bend]  = x[o.Tensile] * x[o.PC_Tensile_Bend]  / 100.0; 
       }
 
-    if (x[o.Stress_2] > zero) {
-        x[o.FS_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2]; 
+    if (Math.abs(x[o.Stress_2]) > smallnum) {
+        x[o.FS_2] = x[o.Stress_Lim_Stat] / Math.abs(x[o.Stress_2]); 
 //        console.log("eqnset FS_2 = ", x[o.FS_2]);
     }
-       else x[o.FS_2] = 1.0;
+       else x[o.FS_2] = x[o.Stress_Lim_Stat] / smallnum;
+//        console.log("eqnset FS_2 = ", x[o.FS_2]);
 
         /*
             Soderberg triangle approach to mixed steady and
