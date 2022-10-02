@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { InputGroup, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import FormControlTypeNumber from './FormControlTypeNumber';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
