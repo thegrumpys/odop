@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated September 24, 2022   
+**Message-of-the-day** &nbsp; updated October 2, 2022   
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -7,7 +7,7 @@ including recent and impending releases, planned outages, newly discovered issue
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
-[ODOP version 4.3.2](https://github.com/thegrumpys/odop/milestone/61?closed=1) | &nbsp; | September 20, 2022  
+[ODOP version 4.3.3](https://github.com/thegrumpys/odop/milestone/62?closed=1) | &nbsp; | October 2, 2022.  
 [ODOP version 4.3](https://github.com/thegrumpys/odop/milestone/54?closed=1)   | &nbsp; | September 17, 2022  
 [ODOP version 4.2.2](https://github.com/thegrumpys/odop/milestone/57?closed=1) | &nbsp; | May 24, 2022  
 [ODOP version 4.2](https://github.com/thegrumpys/odop/milestone/55?closed=1)   | &nbsp; | April 3, 2022  
