@@ -72,11 +72,13 @@ Version  | &nbsp; | Date released
 [ODOP version 4.0.4](https://github.com/thegrumpys/odop/milestone/48?closed=1) | &nbsp; | May 09, 2021   
 [ODOP version 4.0.3](https://github.com/thegrumpys/odop/milestone/47?closed=1) | &nbsp; | April 25, 2021   
 [ODOP version 4.0.2](https://github.com/thegrumpys/odop/milestone/46?closed=1) | &nbsp; | April 04, 2021   
-[ODOP version 4.0.1](https://github.com/thegrumpys/odop/milestone/40?closed=1) | &nbsp; | March 21, 2021   
-[ODOP version 4.0](https://github.com/thegrumpys/odop/milestone/39?closed=1)   | &nbsp; | February 27, 2021   
+[ODOP version 4.0](https://github.com/thegrumpys/odop/milestone/40?closed=1)   | &nbsp; | March 28, 2021   
+[ODOP version 3.8](https://github.com/thegrumpys/odop/milestone/39?closed=1)   | &nbsp; | February 28, 2021   
+[ODOP version 3.7](https://github.com/thegrumpys/odop/milestone/38?closed=1)   | &nbsp; | February 28, 2021   
 [ODOP version 3.6](https://github.com/thegrumpys/odop/milestone/36?closed=1)   | &nbsp; | October 31, 2020   
 [ODOP version 3.5](https://github.com/thegrumpys/odop/milestone/33?closed=1)   | &nbsp; | July 5, 2020   
 [ODOP version 3.4](https://github.com/thegrumpys/odop/milestone/34?closed=1)   | &nbsp; | April 19, 2020   
+[ODOP version 3.3.2](https://github.com/thegrumpys/odop/milestone/35?closed=1) | &nbsp; | February 16, 2020   
 [ODOP version 3.3](https://github.com/thegrumpys/odop/milestone/32?closed=1)   | &nbsp; | February 16, 2020   
 [ODOP version 3.2.3](https://github.com/thegrumpys/odop/milestone/31?closed=1) | &nbsp; | February 2, 2020   
 [ODOP version 3.2.2](https://github.com/thegrumpys/odop/milestone/30?closed=1) | &nbsp; | January 26, 2020   
