@@ -30,10 +30,12 @@ class ResultTable extends Component {
 //        console.log('In ResultTable.onSearchRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            return;
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
                 displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+                return;
             }
         });
         var old_objective_value = this.props.objective_value.toPrecision(4);
@@ -49,10 +51,12 @@ class ResultTable extends Component {
 //        console.log('In ResultTable.onSeekRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#seekErr');
+            return;
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
                 displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#seekErr');
+                return;
             }
         });
         var result = this.props.symbol_table.find( // Find free variable matching the current variable name
