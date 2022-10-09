@@ -220,7 +220,7 @@ export const initialState = {
             "lmax": 0,
             "cmin": 0.010,
             "cmax": 100.0,
-            "validmin": -1000.0,
+            "validmin": 0.0,
             "validmax": 1000.0,
             "sdlim": 0.01,
             "tooltip": "Length of stroke from point 1 to point 2",
