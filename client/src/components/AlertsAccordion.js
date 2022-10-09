@@ -98,14 +98,17 @@ class AlertsAccordion extends Component {
     
     onAutoFixToggle(event) {
 //        console.log('In AlertsAccordion.onAutoFixToggle this=',this,'event=',event);
-        logUsage('event', 'AlertsAccordion', { event_label: 'AutoFixToggle' });
         var copy = Object.assign({}, this.props.system_controls);
+        var label;
         if (copy.enable_auto_fix === 0.0) {
             copy.enable_auto_fix = 1.0;
+            label = "enabled";
         } else {
             copy.enable_auto_fix = 0.0;
+            label = "disabled";
         }
         this.props.changeSystemControlsValue(copy);
+        logUsage('event', 'AlertsAccordion', { event_label: 'AutoFixToggle ' + label});
     }
     
     render() {
