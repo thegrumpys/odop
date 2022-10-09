@@ -1,6 +1,8 @@
 # Terminology
 
-The following terms have special meanings used in the context of this program. 
+The 
+<a id="top"></a> 
+following terms have special meanings used in the context of this program. 
 The terms appear in an order ranked from more general and introductory to more specific. 
 
 ### On this page:   
@@ -24,6 +26,8 @@ The terms appear in an order ranked from more general and introductory to more s
  - [TRADE](terminology.html#trade)  
  - [ODOP DESIGN LIBRARY](terminology.html#designLib)  
  - [MIGRATION](terminology.html#migration)  
+ - [ALERTS](terminology.html#alerts)  
+ - [VALIDITY](terminology.html#validity)  
  - [SPRING DESIGN VARIABLE NAMES](terminology.html#sdnames)  
  - [FACTOR OF SAFETY](terminology.html#FactorOfSafety)  
 
@@ -218,7 +222,7 @@ ___
 ## AUTOFIX 
 
 The AutoFix feature automatically applies "Fixed" status 
-to variables whose values are changed by user input. 
+to Independent Variables whose values are changed by user input. 
 
 ODOP Search (invoked by the Search button or the Action : Search menu item) works to 
 hold or achieve values in Fixed status. 
@@ -226,11 +230,16 @@ In order to accomplish its mission,
 ODOP Search will manipulate the values of variables not in Fixed status 
 (a.k.a. "Free" status) in order to achieve a feasible design. 
 
-The preference value "enable_auto_fix", accessed through the File : Preferences... menu, 
-controls operation of the AutoFix feature. 
-In order to revert to the previous behavior, set the value of "enable_auto_fix" to 0. 
+AutoFix behavior is enabled by default. 
 
-See also: [terminology Fix](terminology.html#fix) 
+AutoFix may be controlled by a checkbox on the main pages (Advanced and Calculator Views) or 
+the preference value "enable_auto_fix", accessed through the **File : Preferences...** menu.  
+In order to disable AutoFix, set the value of "enable_auto_fix" to 0. 
+
+See also: 
+ - [terminology Fix](terminology.html#fix)  
+ - [SEARCH](terminology.html#search)  
+ - [PREFERENCES](terminology.html#preferences)  
 
 ___
 
@@ -409,7 +418,7 @@ Design information stored in the design library does not appear on the local sto
 You must be logged in to an ODOP user account in order to save designs into the ODOP design library. 
 
 See: [User Accounts](/docs/About/userAccounts.html) for details on how to obtain an ODOP user account. 
-
+ 
 ___
 
 <a id="migration"></a>   
@@ -439,11 +448,42 @@ minor or major field of the ODOP software version.
 
 ___
 
+<a id="alerts"></a>   
+___
+
+## ALERTS 
+Alerts are informational messages that are produced as you change the values of your design. 
+
+See also:
+ - [Alerts](/docs/Help/alerts.html)  
+
+___
+
+<a id="validity"></a>   
+___
+
+## VALIDITY 
+Designs with values outside their valid range are likely physically impossible. 
+In spring design, negative values for wire diameter, coil diameter and number of coils are obvious examples. 
+Other situations, for example where an increase in wire diameter results in a negative value for coil inside diameter 
+or where an increase in force at the second load point takes a compression spring below its solid condition 
+may be a bit less obvious. 
+
+Each design type has a starting point, a.k.a. initialState, that contains minimum and maximum valid values 
+for each variable. 
+More specifically, Independent Variables, Dependent Variables and numeric Calculation Inputs
+all have pre-assigned ValidMin and ValidMax values. 
+These validity ranges are used to generate Alerts and also guide the Search process toward valid results.
+
+See also:
+ - [Alerts](/docs/Help/alerts.html)  
+
+___
+
 <a id="sdnames"></a>  
 ___
 
 ## SPRING DESIGN VARIABLE NAMES 
-
 [Variable names illustrated on compression spring Force-Deflection diagram:](/docs/Help/img/ForceVsDeflection.png) 
 
 See also: 
@@ -458,7 +498,6 @@ ___
 ___
 
 ## FACTOR OF SAFETY   
-
 This term is described in detail in the spring design overview section: 
 [Factor of Safety](SpringDesign/spring_oview.html#FoS) 
 
@@ -473,5 +512,6 @@ ___
 
 &nbsp; 
 
-[Help](/docs/Help) 
+[Top](terminology.html#top)  
+[Help](/docs/Help)  
 
