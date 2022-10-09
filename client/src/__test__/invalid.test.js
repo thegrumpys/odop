@@ -42,7 +42,12 @@ function testValidity(title, name, value) {
                     if (element.name === name) {
                         expect(element.value).toEqual(value);
                     } else {
+//                        console.log('In invalid.test element.name=',element.name,'element.value=',element.value);
                         expect(Number.isFinite(element.value)).toBe(true);
+//                        if (element.type === "equationset" && !element.input) { // Dependent Variables
+//                            expect(element.value).toBeGreaterThan(element.validmin);
+//                            expect(element.value).toBeLessThan(element.validmax);
+//                        }
                     }
                 }
             }
@@ -65,6 +70,8 @@ for (let i = 0; i < design.model.symbol_table.length; i++) {
         testValidity('=validmax', element.name, element.validmax);
     }
 }
+
+// testValidity('=0.0', "Wire_Dia", 0.0);
 
 //it('OD_Free =validmin ', () => {
 //    var state = Object.assign({}, springCompressionInitialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
