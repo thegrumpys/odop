@@ -51,11 +51,20 @@ Increase | &nbsp; | Decrease
 ---      | ---    | ---  
 Wire_Dia | &nbsp; | Force_2  
  L_Free  | &nbsp; | Coils_T  
- &nbsp;  | &nbsp; | OD_Free  
+ FS_2 MAX<sup>*</sup>| &nbsp; | OD_Free  
  
 Depending on the Fixes and constraints on lengths and deflections associated with the second operating point, 
 it should also be possible to confirm that Force_2 is in Free status, 
 and then use the Search feature (menu Action : Search or Search button). 
+
+<sup>*</sup> There are circumstances where running a search can produce this alert.
+Specifically, if all the physical dimensions (OD_Free, Wire_Dia, L_Free & Coils_T) of a 
+conservative (heavy, low stress) design are in Fixed status, 
+in order to attempt to satisfy the default maximum constraint on factor of safety at operating point 2 (FS_2 MAX), 
+the search process may select a value of Force_2 that is larger than the force required to achieve 
+the solid condition and thus trigger this alert. 
+If a heavy, low stress design is truly desired, this alert can be resolved by increasing the FS_2 MAX constraint level
+and then running search again.
 
 ___
 
