@@ -129,7 +129,7 @@ The factor of safety when compressed to solid is less than 1.0.
 
 This spring may be over-stressed if deflected to solid. 
 If deflected to solid, 
-it may 'set' as in not return to its original free length.
+it may yield or "take a set" as in not return to its original free length.
 
 In order to resolve this alert, 
 where practical, change these values in the direction specified. 
@@ -146,6 +146,7 @@ In order to design a spring that is not over-stressed when deflected to the soli
 
 See also: 
  - [Factor of Safety](/docs/Help/terminology.html#FactorOfSafety)  
+ - [Yield](https://en.wikipedia.org/wiki/Yield_(engineering))  
  
 ___
 

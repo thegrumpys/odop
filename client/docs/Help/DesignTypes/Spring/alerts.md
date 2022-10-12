@@ -195,6 +195,7 @@ and then run Search.
 
 See also: 
  - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
+ - [Yield](https://en.wikipedia.org/wiki/Yield_(engineering))  
 
 ___
 
