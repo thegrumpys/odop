@@ -50,6 +50,12 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
 
     s_psi = despak(psi, store, merit); // AKA despak, s_psi: the functional value at the base point
 //    console.log('In patsh 1 psi=',psi,'s_psi=',s_psi);
+
+
+    var number = 1;
+    console.log(number++,psi[0],psi[1],psi[2],psi[3],s_psi);
+
+
     while (s_psi >= objmin) { // start searching/exploring otherwise Leave by door #1
         var s_phi; // [1]
         var phi = []; // phi: base point resulting from the current move
@@ -71,6 +77,11 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                 }
 //                console.log('@@@ itno=',itno,'s=',s,'calc=',s + tol * Math.abs(s_psi),'s_psi=',s_psi,'compare=', s + tol * Math.abs(s_psi) >= s_psi);
                 s_psi = s; // s_psi: the functional value at the base point
+                
+                
+                console.log(number++,psi[0],psi[1],psi[2],psi[3],s_psi);
+                
+                
                 if (s_psi < objmin) { // Are we done? Leave by door #1
                     NCODE = 'Search terminated when design reached feasibility (Objective value is less than OBJMIN)';
                     if (itno <= 2) {
