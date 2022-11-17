@@ -130,11 +130,19 @@ ___
 
 Alert entry #S56
 ## Spring Index manufacturability concern 
-Spring index less than 4 is considered "difficult to manufacture".  
+Spring_Index is the ratio: Mean_Dia / Wire_Dia. 
 
-Spring index greater than 25 is considered "difficult to control".  
+The presence of this alert indicates that the current design is outside the range 
+of constraints Spring_Index MIN to Spring_Index MAX. 
 
+Spring index less than 4 is considered "difficult to manufacture". 
+Spring index greater than 25 is considered "difficult to control". 
+
+Ideally, spring index should be in the range of 4 to 12 in order to achieve spring industry standard tolerances. 
+Reduced coiling machine speeds, specialized fixturing and other tooling may be required outside this range. 
 Check with the spring manufacturer regarding capabilities and costs. 
+
+&nbsp; 
 
 ___
 
