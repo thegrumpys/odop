@@ -485,7 +485,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Prop_Calc_Method",
-            "value": 1,
+            "value": 3,
             "units": "",
             "format": "table",
             "table": "Spring/Compression/prop_calc",
