@@ -74,6 +74,7 @@ Additional resources available on the Internet include:
  - [Wikipedia: Roark's Formulas for Stress and Strain](https://en.wikipedia.org/wiki/Roark%27s_Formulas_for_Stress_and_Strain)   
  - [Wikipedia: Goodman relation](https://en.wikipedia.org/wiki/Goodman_relation)
  - [Associated Spring - Barnes Group: Engineering Guide to Spring Design](https://asbg.com/engineering-guide-to-spring-design.aspx)   
+ - [RoyMech - Helical Spring Design](https://www.roymech.co.uk/Useful_Tables/Springs/Springs_helical.html)   
  
  
  &nbsp;
