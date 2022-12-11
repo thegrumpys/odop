@@ -58,7 +58,8 @@ class HelpAbout extends Component {
                         }
                         Model: {this.props.jsontype} {this.props.type}<br />
                         Model Units: {this.props.units}<br />
-                        Model Version: {this.props.version}
+                        Model Version: {this.props.version}<br />
+                        Model Sub-Problem: {Object.keys(this.props.subproblems).find(key => this.props.subproblems[key].mask === this.props.subproblem)}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
@@ -75,6 +76,8 @@ const mapStateToProps = state => ({
     version: state.model.version,
     jsontype: state.model.jsontype,
     units: state.model.units,
+    subproblems: state.model.subproblems,
+    subproblem: state.model.subproblem,
 });
 
 export default withOktaAuth(

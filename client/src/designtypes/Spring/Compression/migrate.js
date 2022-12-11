@@ -361,8 +361,38 @@ export function migrate(design) {
     case '12':
         // Current model version
         // console.log('Convert from 12 to 13');
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (
+                element.name === "L_Free" || // Independent Variable
+                element.name === "Force_1" || // Independent Variable
+                element.name === "Force_2" || // Independent Variable
+                element.name === "Rate" || // Dependent Variable
+                element.name === "Deflect_1" || // Dependent Variable
+                element.name === "Deflect_2" || // Dependent Variable
+                element.name === "L_1" || // Dependent Variable
+                element.name === "L_2" || // Dependent Variable
+                element.name === "L_Stroke" || // Dependent Variable
+                element.name === "Energy" || // Dependent Variable
+                element.name === "Spring_Type" // Calculation Input
+            ) {
+                element.subproblem = 3;
+            } else {
+                element.subproblem = 1;
+            }
+        });
+        design.subproblems = {
+            ALL: { mask: 1 },
+            FORCE_DEFLECTION: { mask: 2 },
+            RATE: { mask: 4 },
+        }
+        design.subproblem = 1;
+        migrated_design.version = '13'; // last thing... set the migrated model version
+
+    case '13':
+        // Current model version
+        // console.log('Convert from 13 to 14');
         // To be defined - presently do nothing
-        // migrated_design.version = '13'; // last thing... set the migrated model version
+        // migrated_design.version = '14'; // last thing... set the migrated model version
 
         break; // Do not copy this break
     default: // Unknown

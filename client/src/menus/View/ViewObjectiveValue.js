@@ -7,7 +7,7 @@ import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 class ViewObjectiveValue extends Component {
 
     constructor(props) {
-//        console.log('In ViewSymbolTable.constructor');
+//        console.log('In ViewObjectiveValue.constructor');
         super(props);
         this.toggle = this.toggle.bind(this);
         this.renderElementHeader = this.renderElementHeader.bind(this);
@@ -18,11 +18,11 @@ class ViewObjectiveValue extends Component {
     }
     
     toggle() {
-//        console.log('In ViewSymbolTable.toggle');
+//        console.log('In ViewObjectiveValue.toggle');
         this.setState({
             modal: !this.state.modal
         });
-        if (this.state.modal) logUsage('event', 'ViewSymbolTable', { event_label: 'ViewSymbolTable'});
+        if (this.state.modal) logUsage('event', 'ViewObjectiveValue', { event_label: 'ViewObjectiveValue'});
     }
     
     renderElementHeader() {
@@ -139,7 +139,7 @@ class ViewObjectiveValue extends Component {
     }
 
     render() {
-//        console.log('In ViewSymbolTable.render this.props=', this.props);
+//        console.log('In ViewObjectiveValue.render this.props=', this.props);
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle}>

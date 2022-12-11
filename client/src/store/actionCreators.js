@@ -5,6 +5,7 @@ import {
     CHANGE_NAME, 
     CHANGE_USER, 
     CHANGE_VIEW, 
+    CHANGE_SUBPROBLEM,
     
     CHANGE_SYMBOL_VALUE, 
     FIX_SYMBOL_VALUE, 
@@ -89,6 +90,15 @@ export function changeView(view) {
         type: CHANGE_VIEW,
         payload: {
             view
+        } 
+    }
+}
+
+export function changeSubProblem(mask) {
+    return {
+        type: CHANGE_SUBPROBLEM,
+        payload: {
+            mask
         } 
     }
 }

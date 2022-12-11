@@ -31,6 +31,7 @@ import ActionTrade from '../menus/Action/ActionTrade';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
+import ViewDisplaySubProblems from '../menus/View/ViewDisplaySubProblems';
 import ViewCADModel from '../menus/View/ViewCADModel';
 import ViewSelect from '../menus/View/ViewSelect';
 import ViewOffsets from '../menus/View/ViewOffsets';
@@ -158,9 +159,7 @@ class MainPage extends Component {
                                 <NavDropdown.Item disabled>
                                     Define  Sub-Problems&hellip;
                                 </NavDropdown.Item>
-                                <NavDropdown.Item disabled>
-                                    Display Sub-Problems&hellip;
-                                </NavDropdown.Item>
+                                <ViewDisplaySubProblems/>
                                 <NavDropdown.Divider />
                                 <ViewSelect viewNames={viewNames}/>
                                 <NavDropdown.Divider />

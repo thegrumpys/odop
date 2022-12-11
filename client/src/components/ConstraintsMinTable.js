@@ -14,9 +14,9 @@ class ConstraintsMinTable extends Component {
             <>
                 <Table className="col-md-3 border border-secondary" size="sm">
                     <ConstraintsMinHeaderIndependentVariable />
-                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={index} />)}
+                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && (element.subproblem & this.props.subproblem) > 0 && <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={index} />)}
                     <ConstraintsMinHeaderDependentVariable />
-                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMinRowDependentVariable key={element.name} element={element} index={index} />)}
+                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && (element.subproblem & this.props.subproblem) > 0 && <ConstraintsMinRowDependentVariable key={element.name} element={element} index={index} />)}
                 </Table>
             </>
         );
@@ -26,6 +26,7 @@ class ConstraintsMinTable extends Component {
 
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,
+    subproblem: state.model.subproblem,
 });
 
 export default connect(mapStateToProps)(ConstraintsMinTable);

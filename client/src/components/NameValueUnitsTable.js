@@ -14,9 +14,9 @@ class NameValueUnitsTable extends Component {
             <>
                 <Table className="col-md-6 border border-secondary" size="sm">
                     <NameValueUnitsHeaderIndependentVariable />
-                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
+                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden  && (element.subproblem & this.props.subproblem) > 0 && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
                     <NameValueUnitsHeaderDependentVariable />
-                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
+                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && (element.subproblem & this.props.subproblem) > 0 && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
                 </Table>
             </>
         );
@@ -26,7 +26,8 @@ class NameValueUnitsTable extends Component {
 
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,
-    system_controls: state.model.system_controls
+    system_controls: state.model.system_controls,
+    subproblem: state.model.subproblem,
 });
 
 export default connect(mapStateToProps)(NameValueUnitsTable);

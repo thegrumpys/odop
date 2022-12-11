@@ -12,7 +12,7 @@ class NameValueUnitsCalcInputTable extends Component {
             <>
                 <Table className="col-md-6 border border-secondary" size="sm">
                     <NameValueUnitsHeaderCalcInput />
-                    {this.props.symbol_table.map((element,index) => element.type === "calcinput" && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
+                    {this.props.symbol_table.map((element,index) => element.type === "calcinput" && !element.hidden && (element.subproblem & this.props.subproblem) > 0 && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
                 </Table>
             </>
         );
@@ -22,7 +22,8 @@ class NameValueUnitsCalcInputTable extends Component {
 
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,
-    system_controls: state.model.system_controls
+    system_controls: state.model.system_controls,
+    subproblem: state.model.subproblem,
 });
 
 export default connect(mapStateToProps)(NameValueUnitsCalcInputTable);

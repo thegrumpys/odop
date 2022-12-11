@@ -4,6 +4,7 @@ import { STARTUP,
     CHANGE_NAME,
     CHANGE_USER,
     CHANGE_VIEW,
+    CHANGE_SUBPROBLEM,
 
     CHANGE_SYMBOL_VALUE,
     CHANGE_SYMBOL_VIOLATION,
@@ -107,6 +108,15 @@ export function reducers(state, action) {
             view: action.payload.view
         });
 //        console.log('In reducers.CHANGE_VIEW action.payload.view=',action.payload.view,'state=',state);
+        return state;
+    case CHANGE_SUBPROBLEM:
+        state = Object.assign({}, state, {
+            model: {
+                ...state.model,
+                subproblem: action.payload.mask
+            }
+        });
+//        console.log('In reducers.CHANGE_SUBPROBLEM action.payload.mask=',action.payload.mask,'state=',state);
         return state;
 
 // SYMBOL
