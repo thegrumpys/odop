@@ -105,7 +105,7 @@ Compare the results.
 It may be necessary to accept a small amount of over-design in order to utilize a standard wire diameter. 
 
 Alternatively, increase the FS_2 MAX constraint or disable that MAX constraint. 
-This will likely result in a very conservative (heavy) design.
+This action will allow Search to produce a very conservative (heavy) design and consider it to be feasible.
 
 See also: 
  - [Factor of Safety section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#FoS)  
@@ -118,7 +118,7 @@ ___
 
 Alert entry #S55
 ## Coils_A is less than 1 
-A warning alert is produced whenever the current design has fewer than one active coil.  
+A warning alert is produced whenever the current design has less than one active coil.  
 
 This is not an error that will block operations like Search, Seek and Trade. 
 As less than one coil may not be the intent, the warning is intended to bring the situation to the designer's attention. 
@@ -139,7 +139,7 @@ Spring index less than 4 is considered "difficult to manufacture".
 Spring index greater than 25 is considered "difficult to control". 
 
 Ideally, spring index should be in the range of 4 to 12 in order to achieve spring industry standard tolerances. 
-Reduced coiling machine speeds, specialized fixturing and other tooling may be required outside this range. 
+Reduced coiling machine speeds, specialized fixtures and other tooling may be required outside this range. 
 Check with the spring manufacturer regarding capabilities and costs. 
 
 &nbsp; 
