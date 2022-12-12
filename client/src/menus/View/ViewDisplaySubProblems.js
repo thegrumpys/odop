@@ -54,6 +54,9 @@ class ViewDisplaySubProblems extends Component {
                                         <td>
                                             <Button variant="primary" onClick={() => this.changeSubProgram(key, this.props.subproblems[key].mask)}>{key}</Button>
                                         </td>
+                                        <td>
+                                            {this.props.subproblems[key].description}
+                                        </td>
                                     </tr>
                                 )}
                             </tbody>

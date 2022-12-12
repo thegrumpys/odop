@@ -56,7 +56,6 @@ export const dispatcher = store => next => action => {
     case LOAD_INITIAL_STATE:
     case RESTORE_AUTO_SAVE:
     case CHANGE_SUBPROBLEM:
-    console.log('CHANGE_SUBPROBLEM reset');
         invokeInit(store);
         invokeEquationSet(store);
         propagate(store);

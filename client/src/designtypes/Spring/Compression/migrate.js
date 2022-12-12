@@ -379,9 +379,9 @@ export function migrate(design) {
             }
         });
         design.subproblems = {
-            ALL: { mask: 1 },
-            FORCE_DEFLECTION: { mask: 2 },
-            RATE: { mask: 4 },
+            ALL: { mask: 1, description: "Entire design problem" },
+            FORCE_DEFLECTION: { mask: 2, description: "Force vs Deflection sub-problem" },
+            RATE: { mask: 4, description: "Rate calculation sub-problem" }
         }
         design.subproblem = 1;
         migrated_design.version = '13'; // last thing... set the migrated model version
