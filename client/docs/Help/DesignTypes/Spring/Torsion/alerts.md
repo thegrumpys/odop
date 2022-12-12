@@ -81,7 +81,7 @@ be aware that coil to coil contact may cause some inaccuracy in moments and defl
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
 follow Hooke's Law in that they provide a nominally linear relationship between force (moment) and deflection. 
-Howevever, in the real world there are limitations. 
+However, in the real world there are limitations. 
 
 When torsion springs are deflected beyond roughly 80% of safe deflection 
 geometric imperfections such as a lack uniformity in coil pitch or minor deviation from cylindric shape 
@@ -110,7 +110,7 @@ However, you should be aware that end effects may cause some inaccuracy in momen
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
-Howevever, in the real world there are limitations. 
+However, in the real world there are limitations. 
 
 When torsion springs are deflected less than roughly 20% of maximum safe deflection, 
 various factors such as deviation from perfect coil straightness (cylindric form) and deflection in the ends 

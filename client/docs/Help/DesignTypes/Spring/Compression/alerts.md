@@ -198,10 +198,10 @@ Coil to coil contact may cause inaccuracy in operating point 2.
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
-Howevever, in the real world there are limitations. 
+However, in the real world there are limitations. 
 
 When compression springs are compressed beyond roughly 80% of available deflection, 
-geometric imperfections such as a lack uniformity in coil pitch, minor deviation from cylindric shape 
+geometric imperfections such as a lack uniformity in coil pitch, minor deviation from cylindrical shape 
 or failure of the ends to be precisely perpendicular to the coil axis 
 become a factor in the real (as opposed to theoretical) force-deflection relationship. 
 Beyond the 80% point, coil to coil contact will produce an increase in spring rate that continues to increase 
@@ -224,7 +224,7 @@ End effects may cause inaccuracy in operating point 1.
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
-Howevever, in the real world there are limitations. 
+However, in the real world there are limitations. 
 
 When compression springs are compressed less than roughly 20% of available deflection 
 geometric imperfections such as minor deviation from cylindric shape 
