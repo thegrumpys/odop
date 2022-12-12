@@ -1,6 +1,7 @@
 import { STARTUP, 
     LOAD,
     LOAD_INITIAL_STATE,
+    CHANGE_SUBPROBLEM,
     
     CHANGE_SYMBOL_VALUE, 
     FIX_SYMBOL_VALUE, 
@@ -54,6 +55,8 @@ export const dispatcher = store => next => action => {
     case LOAD:
     case LOAD_INITIAL_STATE:
     case RESTORE_AUTO_SAVE:
+    case CHANGE_SUBPROBLEM:
+    console.log('CHANGE_SUBPROBLEM reset');
         invokeInit(store);
         invokeEquationSet(store);
         propagate(store);

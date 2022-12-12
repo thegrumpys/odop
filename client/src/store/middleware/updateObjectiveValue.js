@@ -34,6 +34,7 @@ export function updateObjectiveValue(store, merit) {
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
 //        console.log('In updateObjectiveValue element=',element);
+        if ((element.subproblem & design.model.subproblem) === 0) continue;
         if (element.type === "equationset" && element.input) { // Independent Variable
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
                 validity_vmin = (-element.value + element.validmin);

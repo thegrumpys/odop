@@ -17,7 +17,7 @@ class ActionSearch extends Component {
 
     onSearchRequest(event) {
 //        console.log('In ActionSearch.onSearchRequest this=',this,'event=',event);
-        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) && (element.subproblem & this.props.subproblem) > 0 ? total+1 : total+0}, 0) === 0) {
             displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
@@ -62,6 +62,7 @@ const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value,
+    subproblem: state.model.subproblem,
 });
 
 const mapDispatchToProps = {

@@ -35,10 +35,10 @@ export function seek(store, action) {
     
     if (design.model.system_controls.ioopt > 5) {
         console.log("02A THE NUMBER OF FIXED INDEPENDENT VARIABLES IS:", design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && element.lmin & FIXED ? total+1 : total+0}, 0));
-        console.log("02B THE NUMBER OF FREE INDEPENDENT VARIABLES IS:", design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0));
+        console.log("02B THE NUMBER OF FREE INDEPENDENT VARIABLES IS:", design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) &&  (element.subproblem & design.model.subproblem) > 0 ? total+1 : total+0}, 0));
     }
     var ncode;
-    if(design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+    if(design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) && (element.subproblem & design.model.subproblem) > 0 ? total+1 : total+0}, 0) === 0) {
         ncode = 'NO FREE INDEPENDENT VARIABLES';
         store.dispatch(changeResultTerminationCondition(ncode));
         return;
@@ -95,7 +95,7 @@ export function seek(store, action) {
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) {
-            if (!(element.lmin & FIXED)) {
+            if (!(element.lmin & FIXED) && (element.subproblem & design.model.subproblem) > 0) { // Free and Part of a Subproblem
                 pc.push(element.value);
             }
         }

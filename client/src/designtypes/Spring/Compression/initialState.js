@@ -1013,7 +1013,7 @@ export const initialState = {
     "jsontype": "ODOP",
     "units": "US",
     "subproblems": {
-        ALL: { mask: 1 },
+        ALL: { mask: 1, description: "" },
         FORCE_DEFLECTION: { mask: 2 },
         RATE: { mask: 4 }
     },

@@ -362,6 +362,7 @@ export function migrate(design) {
         // Current model version
         // console.log('Convert from 12 to 13');
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
+            element.subproblem = 1;
             if (
                 element.name === "L_Free" || // Independent Variable
                 element.name === "Force_1" || // Independent Variable
@@ -372,12 +373,9 @@ export function migrate(design) {
                 element.name === "L_1" || // Dependent Variable
                 element.name === "L_2" || // Dependent Variable
                 element.name === "L_Stroke" || // Dependent Variable
-                element.name === "Energy" || // Dependent Variable
-                element.name === "Spring_Type" // Calculation Input
+                element.name === "Energy" // Dependent Variable
             ) {
-                element.subproblem = 3;
-            } else {
-                element.subproblem = 1;
+                element.subproblem += 2;
             }
         });
         design.subproblems = {
