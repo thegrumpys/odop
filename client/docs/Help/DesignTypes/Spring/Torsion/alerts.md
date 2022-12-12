@@ -84,7 +84,7 @@ follow Hooke's Law in that they provide a nominally linear relationship between 
 However, in the real world there are limitations. 
 
 When torsion springs are deflected beyond roughly 80% of safe deflection 
-geometric imperfections such as a lack uniformity in coil pitch or minor deviation from cylindric shape 
+geometric imperfections such as a lack uniformity in coil pitch or minor deviation from cylindrical shape 
 become a factor in the real (as opposed to theoretical) moment-deflection relationship. 
 Coil to coil contact will produce an increase in spring rate that continues to increase 
 with additional deflection until the maximum safe operating condition is reached. 
@@ -113,7 +113,7 @@ follow Hooke's Law in that they provide a nominally linear relationship between 
 However, in the real world there are limitations. 
 
 When torsion springs are deflected less than roughly 20% of maximum safe deflection, 
-various factors such as deviation from perfect coil straightness (cylindric form) and deflection in the ends 
+various factors such as deviation from perfect coil straightness (cylindrical form) and deflection in the ends 
 will become a factor in the real (as opposed to theoretical) force-deflection relationship. 
 Thus when operating within the first 20% of the available deflection expect moments to be somewhat lower 
 (or deflections to be somewhat greater) than the linear behavior predicted by the equations.  

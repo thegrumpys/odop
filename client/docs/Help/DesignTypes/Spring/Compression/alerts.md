@@ -227,7 +227,7 @@ follow Hooke's Law in that they provide a nominally linear relationship between 
 However, in the real world there are limitations. 
 
 When compression springs are compressed less than roughly 20% of available deflection 
-geometric imperfections such as minor deviation from cylindric shape 
+geometric imperfections such as minor deviation from cylindrical shape 
 or failure of the ends to be precisely perpendicular to the coil axis 
 become a factor in the real (as opposed to theoretical) force-deflection relationship. 
 For example, ends that are ground imperfectly perpendicular with the coil axis will decrease the apparent spring rate 

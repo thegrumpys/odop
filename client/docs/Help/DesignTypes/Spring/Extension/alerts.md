@@ -233,7 +233,7 @@ follow Hooke's Law in that they provide a nominally linear relationship between 
 However, in the real world there are limitations. 
 
 When extension springs are extended less than roughly 20% of safe deflection 
-various factors such as deviation from perfect coil straightness (cylindric form) and 
+various factors such as deviation from perfect coil straightness (cylindrical form) and 
 any lack of perfect form in the ends will become a factor in the real (as opposed to theoretical) force-deflection relationship. 
 Thus when operating within the first 20% of the available deflection expect forces to be somewhat lower (or deflections to be somewhat greater)
 than the linear behavior predicted by the equations.  
