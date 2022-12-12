@@ -16,7 +16,7 @@ export const initialState = {
             "tooltip": "Outside diameter in free (no load) condition",
             "type": "equationset",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": true,
@@ -33,7 +33,7 @@ export const initialState = {
             "tooltip": "Wire diameter",
             "type": "equationset",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": true,
@@ -67,7 +67,7 @@ export const initialState = {
             "tooltip": "Total number of coils",
             "type": "equationset",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": true,
@@ -118,7 +118,7 @@ export const initialState = {
             "tooltip": "Average of inside and outside diameters",
             "type": "equationset",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": false,
@@ -135,7 +135,7 @@ export const initialState = {
             "tooltip": "Number of Active coils",
             "type": "equationset",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": false,
@@ -152,7 +152,7 @@ export const initialState = {
             "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
             "type": "equationset",
             "hidden": false,
-            "subproblem": 3
+            "subproblem": 7
         },
         {
             "input": false,
@@ -325,7 +325,7 @@ export const initialState = {
             "tooltip": "Ratio of mean coil diameter (Mean_Dia) to wire diameter (Wire_Dia)",
             "type": "equationset",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": false,
@@ -510,7 +510,7 @@ export const initialState = {
             "tooltip": "Compression spring design",
             "type": "calcinput",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": true,
@@ -527,7 +527,7 @@ export const initialState = {
             "tooltip": "Property Calculation Method - Controls how material properties are determined and used.  1-Use values from material table  2-Specify Tensile, %_Tensile_Stat & %_Tensile_Endur  3-Specify allowable stresses: Stress_Lim_Stat & Stress_Lim_Endur",
             "type": "calcinput",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": true,
@@ -544,7 +544,7 @@ export const initialState = {
             "tooltip": "Select wire material",
             "type": "calcinput",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": true,
@@ -640,7 +640,7 @@ export const initialState = {
             "tooltip": "Wire torsion modulus (G)",
             "type": "calcinput",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": true,
@@ -657,7 +657,7 @@ export const initialState = {
             "tooltip": "Reduction factor applied to modulus of hot-wound materials",
             "type": "calcinput",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": true,
@@ -759,7 +759,7 @@ export const initialState = {
             "tooltip": "Select end type",
             "type": "calcinput",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": true,
@@ -776,7 +776,7 @@ export const initialState = {
             "tooltip": "Number of coils not contributing to deflection. Depends on End_Type.",
             "type": "calcinput",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 5
         },
         {
             "input": true,
@@ -1013,7 +1013,7 @@ export const initialState = {
     "jsontype": "ODOP",
     "units": "US",
     "subproblems": {
-        ALL: { mask: 1, description: "Entire design problem" },
+        FULL: { mask: 1, description: "Entire design problem" },
         FORCE_DEFLECTION: { mask: 2, description: "Force vs Deflection sub-problem" },
         RATE: { mask: 4, description: "Rate calculation sub-problem" }
     },

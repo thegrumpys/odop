@@ -15,7 +15,7 @@ export function search(store, objmin, merit) {
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
             if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-                if (!(element.lmin & FIXED) && (element.subproblem & design.model.subproblem) > 0) { // Only Free and part of the sub-problem
+                if (!(element.lmin & FIXED) && (element.subproblem & design.model.subproblem)>0) { // Only Free and part of the sub-problem
 //                    console.log('In search i=',i,'element=',element);
                     pc.push(element.value);
                 }
@@ -33,7 +33,7 @@ export function search(store, objmin, merit) {
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
             if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-                if (!(element.lmin & FIXED) && (element.subproblem & design.model.subproblem) > 0) { // Only Free and part of the sub-problem
+                if (!(element.lmin & FIXED) && (element.subproblem & design.model.subproblem)>0) { // Only Free and part of the sub-problem
                     p.push(pc[kd++]);
                 } else {
                     p.push(element.value);

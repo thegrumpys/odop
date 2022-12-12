@@ -24,7 +24,7 @@ class ActionSeek extends Component {
     
     onSeekRequest() {
 //       console.log('In ActionSeek.onSeekRequest this=',this);
-        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) && (element.subproblem & this.props.subproblem) > 0 ? total+1 : total+0}, 0) === 0) {
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) && (element.subproblem & this.props.subproblem)>0 ? total+1 : total+0}, 0) === 0) {
             displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#seekErr');
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
@@ -33,13 +33,13 @@ class ActionSeek extends Component {
             }
         });
         var result = this.props.symbol_table.find( // Find free variable matching the current variable name
-            (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED) && (element.subproblem & this.props.subproblem) > 0
+            (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED) && (element.subproblem & this.props.subproblem)>0
         );
         if (result === undefined) { // Was matching free variable not found
             // Set default name to the First free variable. There must be at least one
             // This duplicates the UI render code algorithm - be careful and make them match!
             result = this.props.symbol_table.find( // Find first free variable
-                (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED) && (element.subproblem & this.props.subproblem) > 0
+                (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED) && (element.subproblem & this.props.subproblem)>0
             );
         }
         this.setState({
@@ -126,7 +126,7 @@ class ActionSeek extends Component {
                             </InputGroup.Prepend>
                             <Form.Control as="select" className="align-middle" onChange={this.onSeekNameSelect} value={this.state.seek_name}>
                                 {this.props.symbol_table.map((element, index) =>
-                                    (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED) && (element.subproblem & this.props.subproblem) > 0) ? <option key={index} value={element.name}>{element.name}</option> : ''
+                                    (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED) && (element.subproblem & this.props.subproblem)>0) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
                             </Form.Control>
                         </InputGroup>

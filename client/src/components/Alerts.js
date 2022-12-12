@@ -50,7 +50,7 @@ export var checks = function(store) {
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         var element = design.model.symbol_table[i];
 //        console.log('name=',element.name,'element=',element);
-        if ((element.subproblem & design.model.subproblem) === 0) continue;
+        if ((element.subproblem & design.model.subproblem)===0) continue;
 
         // VALUE VALIDITY CHECKS
         var severity = ERR;
@@ -230,7 +230,7 @@ export var checks = function(store) {
         }
 
         // GENERAL CHECKS (ONLY INDEPENDENT VARIABLES)
-        if ((element.type === 'equationset' && element.input) && !(element.lmin & FIXED) && (element.subproblem & design.model.subproblem) > 0) {
+        if ((element.type === 'equationset' && element.input) && !(element.lmin & FIXED) && (element.subproblem & design.model.subproblem)>0) {
             total++;
         }
     }

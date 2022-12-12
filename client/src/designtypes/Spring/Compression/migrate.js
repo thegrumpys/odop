@@ -363,8 +363,7 @@ export function migrate(design) {
         // console.log('Convert from 12 to 13');
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
             element.subproblem = 1;
-            if (
-                element.name === "L_Free" || // Independent Variable
+            if (element.name === "L_Free" || // Independent Variable
                 element.name === "Force_1" || // Independent Variable
                 element.name === "Force_2" || // Independent Variable
                 element.name === "Rate" || // Dependent Variable
@@ -373,13 +372,30 @@ export function migrate(design) {
                 element.name === "L_1" || // Dependent Variable
                 element.name === "L_2" || // Dependent Variable
                 element.name === "L_Stroke" || // Dependent Variable
-                element.name === "Energy" // Dependent Variable
-            ) {
+                element.name === "Energy") // Dependent Variable
+            {
                 element.subproblem += 2;
+            }
+            if (element.name === "OD_Free" || // Independent Variable
+                element.name === "Wire_Dia" || // Independent Variable
+                element.name === "Coils_T" || // Independent Variable
+                element.name === "Mean_Dia" || // Dependent Variable
+                element.name === "Coils_A" || // Dependent Variable
+                element.name === "Rate" || // Dependent Variable
+                element.name === "Spring_Index" || // Dependent Variable
+                element.name === "Spring_Type" || // Calculation Input
+                element.name === "Prop_Calc_Method" || // Calculation Input
+                element.name === "Material_Type" || // Calculation Input
+                element.name === "Torsion_Modulus" || // Calculation Input
+                element.name === "Hot_Factor_Kh" || // Calculation Input
+                element.name === "End_Type" || // Calculation Input
+                element.name === "Inactive_Coils") // Calculation Input
+            {
+                element.subproblem += 4;
             }
         });
         design.subproblems = {
-            ALL: { mask: 1, description: "Entire design problem" },
+            FULL: { mask: 1, description: "Entire design problem" },
             FORCE_DEFLECTION: { mask: 2, description: "Force vs Deflection sub-problem" },
             RATE: { mask: 4, description: "Rate calculation sub-problem" }
         }

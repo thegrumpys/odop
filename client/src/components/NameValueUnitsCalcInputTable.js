@@ -11,8 +11,8 @@ class NameValueUnitsCalcInputTable extends Component {
         return (
             <>
                 <Table className="col-md-6 border border-secondary" size="sm">
-                    <NameValueUnitsHeaderCalcInput />
-                    {this.props.symbol_table.map((element,index) => element.type === "calcinput" && !element.hidden && (element.subproblem & this.props.subproblem) > 0 && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
+                    {this.props.symbol_table.reduce((accum, element) => {return element.type === "calcinput" && element.input && !element.hidden && (element.subproblem & this.props.subproblem)>0 ? ++accum : accum}, 0) > 0 && <NameValueUnitsHeaderCalcInput />}
+                    {this.props.symbol_table.map((element,index) => element.type === "calcinput" && !element.hidden && (element.subproblem & this.props.subproblem)>0 && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
                 </Table>
             </>
         );

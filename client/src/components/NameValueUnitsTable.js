@@ -14,9 +14,9 @@ class NameValueUnitsTable extends Component {
             <>
                 <Table className="col-md-6 border border-secondary" size="sm">
                     <NameValueUnitsHeaderIndependentVariable />
-                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden  && (element.subproblem & this.props.subproblem) > 0 && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
+                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden  && (element.subproblem & this.props.subproblem)>0 && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
                     <NameValueUnitsHeaderDependentVariable />
-                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && (element.subproblem & this.props.subproblem) > 0 && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
+                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && (element.subproblem & this.props.subproblem)>0 && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
                 </Table>
             </>
         );

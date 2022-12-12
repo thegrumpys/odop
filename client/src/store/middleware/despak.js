@@ -13,7 +13,7 @@ export function despak(pc, store, merit) {
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         var element = design.model.symbol_table[i];
         if (element.type === "equationset" && element.input) {
-            if (!(element.lmin & FIXED) && (element.subproblem & design.model.subproblem) > 0) { // Only Free and part of the sub-problem
+            if (!(element.lmin & FIXED) && (element.subproblem & design.model.subproblem)>0) { // Only Free and part of the sub-problem
                 p.push(pc[kd++]);
             } else {
                 p.push(element.value);

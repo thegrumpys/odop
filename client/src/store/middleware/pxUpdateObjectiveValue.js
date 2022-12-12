@@ -36,7 +36,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
 //        console.log('In pxUpdateObjectiveValue element=',element);
-        if ((element.subproblem & design.model.subproblem) === 0) continue;
+        if ((element.subproblem & design.model.subproblem)===0) continue;
         if (element.type === "equationset" && element.input) { // Independent Variable
             pp = p[ip++];
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
