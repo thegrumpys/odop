@@ -3,15 +3,15 @@ export const OD_Free = 0;
 export const Wire_Dia = 1;
 export const L_Free = 2;
 export const Coils_T = 3;
-export const Force_1 = 4;
-export const Force_2 = 5;
+export const Deflect_1 = 4;
+export const Deflect_2 = 5;
 
 // Dependent Variables (input-output)
 export const Mean_Dia = 0;
 export const Coils_A = 1;
 export const Rate = 2;
-export const Deflect_1 = 3;
-export const Deflect_2 = 4;
+export const Force_1 = 3;
+export const Force_2 = 4;
 export const L_1 = 5;
 export const L_2 = 6;
 export const L_Stroke = 7;

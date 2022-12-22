@@ -35,11 +35,13 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 //    console.log('x[o.Coils_A]=',x[o.Coils_A]);
 //    console.log('x[o.Rate]=',x[o.Rate]);
 
-    x[o.Deflect_1] = p[o.Force_1] / x[o.Rate];
-    x[o.Deflect_2] = p[o.Force_2] / x[o.Rate];
+//    x[o.Deflect_1] = p[o.Force_1] / x[o.Rate];
+//    x[o.Deflect_2] = p[o.Force_2] / x[o.Rate];
+    x[o.Force_1] = p[o.Deflect_1] * x[o.Rate];
+    x[o.Force_2] = p[o.Deflect_2] * x[o.Rate];
 
-    x[o.L_1] = p[o.L_Free] - x[o.Deflect_1];
-    x[o.L_2] = p[o.L_Free] - x[o.Deflect_2];
+    x[o.L_1] = p[o.L_Free] - p[o.Deflect_1];
+    x[o.L_2] = p[o.L_Free] - p[o.Deflect_2];
 
     x[o.L_Stroke] = x[o.L_1] - x[o.L_2];
 
@@ -51,8 +53,8 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 
       s_f = ks * 8.0 * x[o.Mean_Dia] / (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] * p[o.Wire_Dia]);
 
-    x[o.Stress_1] = s_f * p[o.Force_1];
-    x[o.Stress_2] = s_f * p[o.Force_2];
+    x[o.Stress_1] = s_f * x[o.Force_1];
+    x[o.Stress_2] = s_f * x[o.Force_2];
     x[o.Stress_Solid] = s_f * x[o.Force_Solid];
 
       if (x[o.Prop_Calc_Method] === 1) {
@@ -106,15 +108,15 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
         x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * wire_len_t;
 
     if (p[o.L_Free] > x[o.L_Solid]) {
-        x[o.PC_Avail_Deflect] = 100.0 * x[o.Deflect_2] / (p[o.L_Free] - x[o.L_Solid]);
+        x[o.PC_Avail_Deflect] = 100.0 * p[o.Deflect_2] / (p[o.L_Free] - x[o.L_Solid]);
         if (p[o.L_Free] < x[o.L_Solid] + p[o.Wire_Dia]) {
-            temp = 100.0 * x[o.Deflect_2] / p[o.Wire_Dia] + 10000.0 * (x[o.L_Solid] + p[o.Wire_Dia] - p[o.L_Free]);
+            temp = 100.0 * p[o.Deflect_2] / p[o.Wire_Dia] + 10000.0 * (x[o.L_Solid] + p[o.Wire_Dia] - p[o.L_Free]);
             if (temp < x[o.PC_Avail_Deflect]) x[o.PC_Avail_Deflect] = temp;
         };
     }
-    else x[o.PC_Avail_Deflect] = 100.0 * x[o.Deflect_2] / p[o.Wire_Dia] + 10000.0 * (x[o.L_Solid] + p[o.Wire_Dia] - p[o.L_Free]);
+    else x[o.PC_Avail_Deflect] = 100.0 * p[o.Deflect_2] / p[o.Wire_Dia] + 10000.0 * (x[o.L_Solid] + p[o.Wire_Dia] - p[o.L_Free]);
  
-     x[o.Energy] = 0.5 * x[o.Rate] * (x[o.Deflect_2] * x[o.Deflect_2] - x[o.Deflect_1] * x[o.Deflect_1]);
+     x[o.Energy] = 0.5 * x[o.Rate] * (p[o.Deflect_2] * p[o.Deflect_2] - p[o.Deflect_1] * p[o.Deflect_1]);
     
 //    console.log('</ul><li>','@@@@@ End eqnset','</li>');
     return x;
