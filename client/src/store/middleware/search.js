@@ -40,6 +40,7 @@ export function search(store, objmin, merit) {
                 }
             }
     }
+//    console.log('After search p=',p);
     store.dispatch(changeInputSymbolValues(p, merit));
     store.dispatch(changeResultTerminationCondition(ncode));
     

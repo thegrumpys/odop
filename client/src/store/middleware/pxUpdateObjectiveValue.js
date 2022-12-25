@@ -35,10 +35,10 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     var infeasible = false;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
-//        console.log('In pxUpdateObjectiveValue element=',element);
-        if ((element.subproblem & design.model.subproblem)===0) continue;
         if (element.type === "equationset" && element.input) { // Independent Variable
             pp = p[ip++];
+            if ((element.subproblem & design.model.subproblem)===0) continue;
+//            console.log('In pxUpdateObjectiveValue element=',element);
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
                 validity_vmin = (-pp + element.validmin);
                 validity_vmax = ( pp - element.validmax);
@@ -80,6 +80,8 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
 //            console.log('In pxUpdateObjectiveValue IV    ','pp=',pp,'element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
         } else if ((element.type === "equationset" && !element.input) || element.type === "calcinput") { // Dependent Variable
             xx = x[ix++];
+            if ((element.subproblem & design.model.subproblem)===0) continue;
+//            console.log('In pxUpdateObjectiveValue element=',element);
             /* State variable fix levels. */
             /*
              * The fix_wt's are automatically incorporated in the scaling denominators

@@ -60,12 +60,6 @@ class ViewObjectiveValue extends Component {
                 validity_vmin = 0.0;
                 validity_vmax = 0.0;
             }
-            if (validity_vmin <= 0.0) {
-                validity_vmin = '';
-            }
-            if (validity_vmax <= 0.0) {
-                validity_vmax = '';
-            }
             if (element.lmin & CONSTRAINED) {
                 feasibility_vmin = (-element.value + element.cmin) / element.smin;
             } else {
@@ -76,12 +70,6 @@ class ViewObjectiveValue extends Component {
             } else {
                 feasibility_vmax = 0.0;
             }
-            if (feasibility_vmin <= 0.0) {
-                feasibility_vmin = '';
-            }
-            if (feasibility_vmax <= 0.0) {
-                feasibility_vmax = '';
-            }
         } else if ((element.type === "equationset" && !element.input) || element.type === "calcinput") { // Dependent Variable
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
                 validity_vmin = (-element.value + element.validmin);
@@ -89,12 +77,6 @@ class ViewObjectiveValue extends Component {
             } else {
                 validity_vmin = 0.0;
                 validity_vmax = 0.0;
-            }
-            if (validity_vmin <= 0.0) {
-                validity_vmin = '';
-            }
-            if (validity_vmax <= 0.0) {
-                validity_vmax = '';
             }
             if (element.lmin & FIXED) {
                 feasibility_vmin = (-element.value + element.cmin) / element.smin;
@@ -111,12 +93,18 @@ class ViewObjectiveValue extends Component {
                     feasibility_vmax = 0.0;
                 }
             }
-            if (feasibility_vmin <= 0.0) {
-                feasibility_vmin = '';
-            }
-            if (feasibility_vmax <= 0.0) {
-                feasibility_vmax = '';
-            }
+        }
+        if (validity_vmin <= 0.0) {
+            validity_vmin = '';
+        }
+        if (validity_vmax <= 0.0) {
+            validity_vmax = '';
+        }
+        if (feasibility_vmin <= 0.0) {
+            feasibility_vmin = '';
+        }
+        if (feasibility_vmax <= 0.0) {
+            feasibility_vmax = '';
         }
         return (
             <tr key={element.name}>
@@ -158,7 +146,7 @@ class ViewObjectiveValue extends Component {
                                     {this.renderElementHeader()}
                                 </thead>
                                 <tbody>
-                                    {this.props.symbol_table.map((element, i) => this.renderElement(element,i))}
+                                    {this.props.symbol_table.map((element, i) => (element.subproblem & this.props.subproblem)>0 && this.renderElement(element,i))}
                                 </tbody>
                             </table>
                         </pre>
@@ -175,6 +163,7 @@ class ViewObjectiveValue extends Component {
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,
     objective_value: state.model.result.objective_value,
+    subproblem: state.model.subproblem,
 });
 
 export default connect(mapStateToProps)(ViewObjectiveValue);
