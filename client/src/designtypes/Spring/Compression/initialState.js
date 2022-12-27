@@ -50,7 +50,7 @@ export const initialState = {
             "tooltip": "Length in free (no load) condition",
             "type": "equationset",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 3
         },
         {
             "input": true,
@@ -495,7 +495,7 @@ export const initialState = {
             "tooltip": "Change in elastic potential energy between 1 and 2",
             "type": "equationset",
             "hidden": false,
-            "subproblem": 1
+            "subproblem": 3
         },
         {
             "input": false,
