@@ -77,6 +77,7 @@ class ViewSymbolTable extends Component {
                                         <th>oldcmax</th>
                                         <th>sdlim</th>
                                         <th>tooltip</th>
+                                        <th>subproblem</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -118,6 +119,7 @@ class ViewSymbolTable extends Component {
                                                 <td>{element.oldcmax}</td>
                                                 <td>{element.sdlim}</td>
                                                 <td>{element.tooltip}</td>
+                                                <td>{Object.keys(this.props.subproblems).map(key => (element.subproblem & this.props.subproblems[key].mask) > 0 ? <span>{key} </span> : <span></span> )}</td>
                                             </tr>
                                         );
                                     })}
@@ -137,7 +139,8 @@ class ViewSymbolTable extends Component {
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
-    labels: state.model.labels
+    subproblems: state.model.subproblems,
+    labels: state.model.labels,
 });
 
 export default connect(mapStateToProps)(ViewSymbolTable);
