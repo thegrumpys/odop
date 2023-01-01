@@ -17,6 +17,8 @@ import {
     CHANGE_SYMBOL_INPUT, 
     CHANGE_SYMBOL_HIDDEN, 
     
+    CHANGE_SYMBOL_VALUES, 
+    
     CHANGE_INPUT_SYMBOL_VALUES, 
     SAVE_INPUT_SYMBOL_VALUES, 
     RESTORE_INPUT_SYMBOL_VALUES, 
@@ -194,6 +196,16 @@ export function changeSymbolHidden(name, value) {
         payload: {
             name,
             value
+        }
+    }
+}
+
+export function changeSymbolValues(values, merit) {
+    return {
+        type: CHANGE_SYMBOL_VALUES,
+        payload: {
+            values,
+            merit
         }
     }
 }

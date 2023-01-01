@@ -1,5 +1,5 @@
-import * as o from './offsets';
-export function eqnset(p, x) {
+import * as o from './symbol_table_offsets';
+export function eqnset(st) {
     /** ***************************************************************** */
     /*
      * EQNSET contains an equation set providing a math model of the design
@@ -17,13 +17,13 @@ export function eqnset(p, x) {
      * m_flag = 0 if call is from search, no console I/O permitted. m_flag > 0
      * if "special" call requesting direct output.
      */
-//    console.log('Entering eqnset p=',p,'x=',x);
-    x[o.AREA] = Math.PI * p[o.RADIUS] * p[o.RADIUS];
-    x[o.FORCE] = p[o.PRESSURE] * x[o.AREA];
-    x[o.STRESS] = (p[o.PRESSURE] * p[o.RADIUS]) / (2.0 * p[o.THICKNESS]);
+//    console.log('Entering eqnset st=',st);
+    st[o.AREA] = Math.PI * st[o.RADIUS] * st[o.RADIUS];
+    st[o.FORCE] = st[o.PRESSURE] * st[o.AREA];
+    st[o.STRESS] = (st[o.PRESSURE] * st[o.RADIUS]) / (2.0 * st[o.THICKNESS]);
 //    if (M_FLAG)
 //        console.log('No report available.');
-//    console.log('Exiting eqnset x=',x);
-    return x;
+//    console.log('Exiting eqnset st=',st);
+    return st;
 }
 

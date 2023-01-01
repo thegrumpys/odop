@@ -112,7 +112,7 @@ export function getCatalogEntries(name, store, st, viol_wt) {
 //    console.log('Entering getCatalogEntries name=',name,' store=',store,' st=',st,' viol_wt=',viol_wt);
     var catalog, entry;
     var result = [];
-    var p, x, offset;
+    var offset;
     var objective_value;
     var cat0, cat1, cat2, cat3;
     function findMaterialTypeIndex(element, index) {
@@ -123,19 +123,9 @@ export function getCatalogEntries(name, store, st, viol_wt) {
 //        console.log('In findEndTypeIndex element=',element,' index=',index,' element[0]=',element[0],' entry[6]=',entry[6]);
         return index > 0 && element[0] === entry[6];
     }
-    function pPush(element) {
-        if (element.type === "equationset" && element.input) {
-            p.push(element.value);
-        }
-    }
-    function xPush(element) {
+    function stPull(element) {
         if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
-            x.push(element.value)
-        }
-    }
-    function xPull(element) {
-        if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
-            element.value = x[offset++];
+            element.value = st[offset++];
         }
     }
     
@@ -175,23 +165,15 @@ export function getCatalogEntries(name, store, st, viol_wt) {
 //        console.log('In getCatalogEntries 0 st=',st);
 
         // Invoke init function
-        p = [];
-        st.forEach(pPush);
-        x = [];
-        st.forEach(xPush);
-        x = init(store, p, x);
+        st = init(store, st);
         offset = 0;
-        st.forEach(xPull);
+        st.forEach(stPull);
 //        console.log('In getCatalogEntries 1 st=',st);
         
         // Invoke eqnset function
-        p = [];
-        st.forEach(pPush);
-        x = [];
-        st.forEach(xPush);
-        x = eqnset(p, x);
+        st = eqnset(st);
         offset = 0;
-        st.forEach(xPull);
+        st.forEach(stPull);
 //        console.log('In getCatalogEntries 2 st=',st);
         
         // Invoke violations & objective value function

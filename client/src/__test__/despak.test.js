@@ -121,29 +121,20 @@ it('despak with merit', () => {
     }
     var element;
     
-    function merit(p, x, design) {
+    function merit(st, design) {
         var m_funct;
         if (SOUGHT === 0) {
             m_funct = 0.0;
         } else {
-            var ip = 0;
-            var ix = 0;
+            var ist = 0;
             var value;
             for (let i = 0; i < design.model.symbol_table.length; i++) {
                 element = design.model.symbol_table[i];
-                if (element.type === "equationset" && element.input) {
-                    if (i === SOUGHT - 1) {
-                        value = p[ip];
-                        break;
-                    }
-                    ip++;
-                } else {
-                    if (i === SOUGHT - 1) {
-                        value = x[ix];
-                        break;
-                    }
-                    ix++;
+                if (i === SOUGHT - 1) {
+                    value = st[ist];
+                    break;
                 }
+                ist++;
             }
             if (SDIR < 0) {
                 m_funct = (value - M_NUM) / M_DEN;

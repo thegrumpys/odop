@@ -183,17 +183,12 @@ export function updateObjectiveValue(store, merit) {
     /* Merit Function */
     if (merit && typeof merit === 'function' && (validity_vmin <= 0.0 || validity_vmax <= 0.0) ) {
         // Create p & x from symbol_table
-        var p = [];
-        var x = [];
+        var st = [];
         for (let i = 0; i < design.model.symbol_table.length; i++) {
             element = design.model.symbol_table[i];
-            if (element.type === "equationset" && element.input) {
-                p.push(element.value);
-            } else {
-                x.push(element.value);
-            }
+            st.push(element.value);
         }
-        m_funct = merit(p, x, design);
+        m_funct = merit(st, design);
     } else {
         m_funct = 0.0;
     }

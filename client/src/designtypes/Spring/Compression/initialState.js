@@ -484,6 +484,22 @@ export const initialState = {
         },
         {
             "input": true,
+            "name": "Rate_Calc_Method",
+            "value": 1,
+            "units": "",
+            "format": "table",
+            "table": "Spring/Compression/rate_calc",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "sdlim": 0.0,
+            "tooltip": "Rate Calculation Method - Controls how spring rate is determined and used.  1-Use Geometry  2-Use Force and Deflection",
+            "type": "calcinput",
+            "hidden": false
+        },
+        {
+            "input": true,
             "name": "Prop_Calc_Method",
             "value": 1,
             "units": "",

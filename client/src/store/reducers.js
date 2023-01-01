@@ -16,6 +16,8 @@ import { STARTUP,
     CHANGE_SYMBOL_INPUT,
     CHANGE_SYMBOL_HIDDEN,
 
+    CHANGE_SYMBOL_VALUES,
+
     CHANGE_INPUT_SYMBOL_VALUES,
     SAVE_INPUT_SYMBOL_VALUES,
     RESTORE_INPUT_SYMBOL_VALUES,
@@ -345,6 +347,28 @@ export function reducers(state, action) {
             }
         });
 
+// SYMBOLs
+
+    case CHANGE_SYMBOL_VALUES:
+        i=0;
+        return Object.assign({}, state, {
+            model: {
+                ...state.model,
+                symbol_table: state.model.symbol_table.map((element) => {
+                    value = action.payload.values[i++]
+                    if (value !== undefined && element.value !== value) {
+//                        if (element.name === 'Force_2')
+//                            console.log('In reducers.CHANGE_INPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
+                        return Object.assign({}, element, {
+                            value: value
+                        });
+                    } else {
+                        return element;
+                    }
+                })
+            }
+        });
+
 // INPUT SYMBOL
 
     case CHANGE_INPUT_SYMBOL_VALUES:
@@ -355,7 +379,7 @@ export function reducers(state, action) {
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.type === "equationset" && element.input) {
                         value = action.payload.values[i++]
-                        if (value !== undefined) {
+                        if (value !== undefined && element.value !==  value) {
     //                        if (element.name === 'Force_2')
     //                            console.log('In reducers.CHANGE_INPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
                             return Object.assign({}, element, {
@@ -423,7 +447,7 @@ export function reducers(state, action) {
                 symbol_table: state.model.symbol_table.map((element) => {
                     if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
                         value = action.payload.values[i++]
-                        if (value !== undefined) {
+                        if (value !== undefined && element.value !==  value) {
     //                        if (element.name === "Prop_Calc_Method")
     //                            console.log('In reducers.CHANGE_OUTPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
                             return Object.assign({}, element, {

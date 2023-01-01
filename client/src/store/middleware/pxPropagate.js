@@ -1,11 +1,10 @@
 import { changeSymbolConstraint } from '../actionCreators';
 
-export function pxPropagate(p, x, store) {
+export function pxPropagate(st, store) {
 //    console.log('<li>','Start pxPropagate store=',store,'</li><ul>');
     var design = store.getState(); // Re-access store to get latest source values
 //    console.log('In pxPropagate design=',design);
-    var ip = 0;
-    var ix = 0;
+    var ist = 0;
     var value;
     function nameMatch(entry) {
       return design.model.symbol_table.find(sink => entry.name === sink.name)
@@ -13,11 +12,7 @@ export function pxPropagate(p, x, store) {
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         var source = design.model.symbol_table[i];
 //        console.log('In pxPropagate source=',source);
-        if (source.type === "equationset" && source.input) {
-            value = p[ip++];
-        } else {
-            value = x[ix++];
-        }
+        value = st[ist++];
         if (source.propagate !== undefined) {
 //             console.log('In pxPropagate source.propagate=',source.propagate);
              for (let j = 0; j < source.propagate.length; j++) {

@@ -1,4 +1,4 @@
-export function init(store, p, x) {
-//    console.log('In init store=',store,'p=',p,'x=',x);
-    return x;
+export function init(store, st) {
+//    console.log('In init store=',store,'st=',st);
+    return st;
 }

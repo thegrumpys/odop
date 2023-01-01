@@ -1,4 +1,4 @@
-import { changeOutputSymbolValues } from '../actionCreators';
+import { changeSymbolValues } from '../actionCreators';
 
 // Invoke Equation Set
 export function invokeEquationSet(store) {
@@ -11,23 +11,18 @@ export function invokeEquationSet(store) {
 //    console.log('In invokeEquationSet design=',design);
     
     // Loop to create p and x from symbol_table
-    var p = [];
-    var x = [];
+    var st = [];
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
-        if (element.type === "equationset" && element.input) {
-            p.push(element.value);
-        } else {
-            x.push(element.value);
-        }
+        st.push(element.value);
     }
 
     // Compute outputs x from inputs p using equations
     var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
-    x = eqnset(p, x);
+    st = eqnset(st);
 
     // Compute and dispatch output changes
-    store.dispatch(changeOutputSymbolValues(x));
+    store.dispatch(changeSymbolValues(st));
     
 //    console.log('</ul><li>','End invokeEquationSet','</li>');
 }

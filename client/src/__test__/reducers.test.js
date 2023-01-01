@@ -6,6 +6,7 @@ import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
 import {
     startup, load, changeName, changeUser,
     changeSymbolValue, changeSymbolViolation, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
+    changeSymbolValues,
     changeInputSymbolValues, saveInputSymbolValues, restoreInputSymbolValues,
     changeOutputSymbolValues, saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
     changeResultObjectiveValue, changeResultTerminationCondition,
@@ -323,6 +324,48 @@ it('reducers set symbol flag max FDCL', () => {
     expect(design.model.symbol_table[sto.RADIUS].lmax).toEqual(CONSTRAINED|FDCL);
     expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
 //    console.log('In reducers set symbol flag max FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
+});
+
+//=====================================================================
+// SYMBOL
+//=====================================================================
+
+it('reducers change symbol values', () => {
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    const store = createStore(
+        reducers,
+        {"user": "USERID0123456789", name: "initialState", model: state});
+
+    var design = store.getState(); // before
+    expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
+    expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(500);
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
+    expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
+    expect(design.model.symbol_table[sto.THICKNESS].value).toEqual(0.04);
+    expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE");
+    expect(design.model.symbol_table[sto.FORCE].value).toEqual(0);
+    expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
+    expect(design.model.symbol_table[sto.AREA].value).toEqual(0);
+    expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
+    expect(design.model.symbol_table[sto.STRESS].value).toEqual(0);
+
+    var st = [1,2,3,4,5,6];
+    store.dispatch(changeSymbolValues(st));
+
+    design = store.getState(); // after
+    expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
+    expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(1);
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(2);
+    expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
+    expect(design.model.symbol_table[sto.THICKNESS].value).toEqual(3);
+    expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE");
+    expect(design.model.symbol_table[sto.FORCE].value).toEqual(4);
+    expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
+    expect(design.model.symbol_table[sto.AREA].value).toEqual(5);
+    expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
+    expect(design.model.symbol_table[sto.STRESS].value).toEqual(6);
 });
 
 //=====================================================================

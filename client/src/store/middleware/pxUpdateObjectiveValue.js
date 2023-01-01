@@ -1,11 +1,11 @@
 import { CONSTRAINED, FIXED } from '../actionTypes';
 
 // Update Violations and Objective Value
-export function pxUpdateObjectiveValue(p, x, store, merit) {
+export function pxUpdateObjectiveValue(st, store, merit) {
     
     // Update Constraint Violations
 
-//    console.log('<li>','Start pxUpdateObjectiveValue','p=',p,'x=',x,'</li><ul>');
+//    console.log('<li>','Start pxUpdateObjectiveValue','st=',st,'</li><ul>');
 
     /*
      * The following section of code constructs the objective function from the
@@ -27,9 +27,8 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
 
     // Determine all constraint violations
     viol_sum = 0.0;
-    var ip = 0;
+    var ist = 0;
     var pp;
-    var ix = 0;
     var xx;
     var invalid = false;
     var infeasible = false;
@@ -37,7 +36,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
         element = design.model.symbol_table[i];
 //        console.log('In pxUpdateObjectiveValue element=',element);
         if (element.type === "equationset" && element.input) { // Independent Variable
-            pp = p[ip++];
+            pp = st[ist++];
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
                 validity_vmin = (-pp + element.validmin);
                 validity_vmax = ( pp - element.validmax);
@@ -78,7 +77,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
 //            console.log('In pxUpdateObjectiveValue IV    element=',element,'ip=',ip,'pp=',pp,'element.cmax=',element.cmax,'element.smax=',element.smax);
 //            console.log('In pxUpdateObjectiveValue IV    ','pp=',pp,'element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
         } else if ((element.type === "equationset" && !element.input) || element.type === "calcinput") { // Dependent Variable
-            xx = x[ix++];
+            xx = st[ist++];
             /* State variable fix levels. */
             /*
              * The fix_wt's are automatically incorporated in the scaling denominators
@@ -178,7 +177,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
 
     /* Merit Function */
     if (merit && typeof merit === 'function' && (validity_vmin <= 0.0 || validity_vmax <= 0.0) ) {
-        m_funct = merit(p, x, design);
+        m_funct = merit(st, design);
     } else {
         m_funct = 0.0;
     }

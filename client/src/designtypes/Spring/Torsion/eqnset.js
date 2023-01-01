@@ -1,6 +1,6 @@
-import * as o from './offsets';
+import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
-export function eqnset(p, x) {        /*    Torsion  Spring  */
+export function eqnset(st) {        /*    Torsion  Spring  */
     
 //    console.log('Entering eqnset p=',p);
     
@@ -17,84 +17,84 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     var ctp1;
     
     /*  *******  DESIGN EQUATIONS  *******                  */
-    x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
+    st[o.Mean_Dia] = st[o.OD_Free] - st[o.Wire_Dia];
 
-    x[o.Spring_Index] = x[o.Mean_Dia] / p[o.Wire_Dia];
+    st[o.Spring_Index] = st[o.Mean_Dia] / st[o.Wire_Dia];
 
-    if (x[o.Heat_Treat] === 2){     //  Stress Relieve
-        kb = (4.0 * x[o.Spring_Index] - 1.0) / (4.0 * x[o.Spring_Index] - 4.0);
+    if (st[o.Heat_Treat] === 2){     //  Stress Relieve
+        kb = (4.0 * st[o.Spring_Index] - 1.0) / (4.0 * st[o.Spring_Index] - 4.0);
     }
     else {                          //  No Stress Relieve
         kb = 1.0;
     }
-//    console.log("x[o.Heat_Treat] =", x[o.Heat_Treat]);
+//    console.log("st[o.Heat_Treat] =", st[o.Heat_Treat]);
 //    console.log("kb = ", kb);
 
 //  end_deflect_all=(l_end_1+l_end_2)/(3.0*pi*mean_dia);
-    x[o.End_Deflect_All] = (x[o.L_End_1] + x[o.L_End_2]) / (3.0 * Math.PI * x[o.Mean_Dia]);
+    st[o.End_Deflect_All] = (st[o.L_End_1] + st[o.L_End_2]) / (3.0 * Math.PI * st[o.Mean_Dia]);
 
-    x[o.Coils_A] = p[o.Coils_T] + x[o.End_Deflect_All];
+    st[o.Coils_A] = st[o.Coils_T] + st[o.End_Deflect_All];
 
-    temp = p[o.Wire_Dia] * p[o.Wire_Dia];
-    x[o.Rate] = x[o.Hot_Factor_Kh] * x[o.Elastic_Modulus] * temp * temp /
-           (10.8 * x[o.Mean_Dia] * x[o.Coils_A]);
+    temp = st[o.Wire_Dia] * st[o.Wire_Dia];
+    st[o.Rate] = st[o.Hot_Factor_Kh] * st[o.Elastic_Modulus] * temp * temp /
+           (10.8 * st[o.Mean_Dia] * st[o.Coils_A]);
 //    console.log('x=',x);
-//    console.log('x[o.Spring_Index]=',x[o.Spring_Index]);
-//    console.log('x[o.Hot_Factor_Kh]=',x[o.Hot_Factor_Kh]);
-//    console.log('x[o.Elastic_Modulus]=',x[o.Elastic_Modulus]);
-//    console.log('x[o.Mean_Dia]=',x[o.Mean_Dia]);
-//    console.log('x[o.Coils_A]=',x[o.Coils_A]);
-//    console.log('x[o.Rate]=',x[o.Rate]);
+//    console.log('st[o.Spring_Index]=',st[o.Spring_Index]);
+//    console.log('st[o.Hot_Factor_Kh]=',st[o.Hot_Factor_Kh]);
+//    console.log('st[o.Elastic_Modulus]=',st[o.Elastic_Modulus]);
+//    console.log('st[o.Mean_Dia]=',st[o.Mean_Dia]);
+//    console.log('st[o.Coils_A]=',st[o.Coils_A]);
+//    console.log('st[o.Rate]=',st[o.Rate]);
 
-    x[o.Rate] = x[o.Rate] / Deg_Per_Turn;
+    st[o.Rate] = st[o.Rate] / Deg_Per_Turn;
     
-    x[o.Deflect_1] = p[o.M_1] / x[o.Rate];
-    x[o.Deflect_2] = p[o.M_2] / x[o.Rate];
+    st[o.Deflect_1] = st[o.M_1] / st[o.Rate];
+    st[o.Deflect_2] = st[o.M_2] / st[o.Rate];
 
-    x[o.ID_Free] = x[o.Mean_Dia] - p[o.Wire_Dia];
+    st[o.ID_Free] = st[o.Mean_Dia] - st[o.Wire_Dia];
 
-    ctp1 = p[o.Coils_T] + 1.0;
-    x[o.L_Body] = p[o.Wire_Dia] * ctp1 + p[o.Coil_Spacing] * p[o.Coils_T];
+    ctp1 = st[o.Coils_T] + 1.0;
+    st[o.L_Body] = st[o.Wire_Dia] * ctp1 + st[o.Coil_Spacing] * st[o.Coils_T];
 //      l_1 = max(l_body, wire_dia*(ctp1+deflect_1/deg_per_turn) );
-    x[o.L_1] = Math.max( x[o.L_Body], p[o.Wire_Dia] * (ctp1 + x[o.Deflect_1] / Deg_Per_Turn) );
-    x[o.L_2] = Math.max( x[o.L_Body], p[o.Wire_Dia] * (ctp1 + x[o.Deflect_2] / Deg_Per_Turn) );
+    st[o.L_1] = Math.max( st[o.L_Body], st[o.Wire_Dia] * (ctp1 + st[o.Deflect_1] / Deg_Per_Turn) );
+    st[o.L_2] = Math.max( st[o.L_Body], st[o.Wire_Dia] * (ctp1 + st[o.Deflect_2] / Deg_Per_Turn) );
 
-    x[o.Stroke] = x[o.Deflect_2] - x[o.Deflect_1];
+    st[o.Stroke] = st[o.Deflect_2] - st[o.Deflect_1];
 
-      s_f = 32.0 * kb / (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] * p[o.Wire_Dia]);
+      s_f = 32.0 * kb / (Math.PI * st[o.Wire_Dia] * st[o.Wire_Dia] * st[o.Wire_Dia]);
 
-    x[o.Stress_1] = s_f * p[o.M_1];
-    x[o.Stress_2] = s_f * p[o.M_2];
+    st[o.Stress_1] = s_f * st[o.M_1];
+    st[o.Stress_2] = s_f * st[o.M_2];
 
 //    if arm_2 ^= zero then force_arm_2=m_2/arm_2;
 //    else force_arm_2=zero;
-    if (x[o.Arm_2] !== zero) {
-        x[o.Force_Arm_2] = p[o.M_2] / x[o.Arm_2];
+    if (st[o.Arm_2] !== zero) {
+        st[o.Force_Arm_2] = st[o.M_2] / st[o.Arm_2];
     }
     else {
-        x[o.Force_Arm_2] = zero;
+        st[o.Force_Arm_2] = zero;
     }
     
 //    end_angle_free=deg_per_turn*(coils_t-trunc(coils_t));
-    x[o.End_Angle_Free] = Deg_Per_Turn * (p[o.Coils_T] - Math.trunc(p[o.Coils_T]));
+    st[o.End_Angle_Free] = Deg_Per_Turn * (st[o.Coils_T] - Math.trunc(st[o.Coils_T]));
 
 //    stress_end = 0.0;         /*  stresses in ends;       */
-    x[o.Stress_End] = zero;
+    st[o.Stress_End] = zero;
 
-      if (x[o.Prop_Calc_Method] === 1) {
-          x[o.Tensile] = x[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - x[o.const_term]) + x[o.tensile_010];
-//          console.log("eqnset Tensile = ", x[o.Tensile]);
+      if (st[o.Prop_Calc_Method] === 1) {
+          st[o.Tensile] = st[o.slope_term] * (Math.log10(st[o.Wire_Dia]) - st[o.const_term]) + st[o.tensile_010];
+//          console.log("eqnset Tensile = ", st[o.Tensile]);
       }
-      if (x[o.Prop_Calc_Method] <= 2) {
-          x[o.Stress_Lim_Bnd_Endur] = x[o.Tensile] * x[o.PC_Ten_Bnd_Endur] / 100.0; 
-          x[o.Stress_Lim_Bnd_Stat]  = x[o.Tensile] * x[o.PC_Ten_Bnd_Stat]  / 100.0; 
+      if (st[o.Prop_Calc_Method] <= 2) {
+          st[o.Stress_Lim_Bnd_Endur] = st[o.Tensile] * st[o.PC_Ten_Bnd_Endur] / 100.0; 
+          st[o.Stress_Lim_Bnd_Stat]  = st[o.Tensile] * st[o.PC_Ten_Bnd_Stat]  / 100.0; 
       }
 
-    if (x[o.Stress_2] > zero) {
-        x[o.FS_2] = x[o.Stress_Lim_Bnd_Stat] / x[o.Stress_2]; 
-//        console.log("eqnset FS_2 = ", x[o.FS_2]);
+    if (st[o.Stress_2] > zero) {
+        st[o.FS_2] = st[o.Stress_Lim_Bnd_Stat] / st[o.Stress_2]; 
+//        console.log("eqnset FS_2 = ", st[o.FS_2]);
     }
-       else x[o.FS_2] = 1.0;
+       else st[o.FS_2] = 1.0;
 
         /*
             Soderberg triangle approach to mixed steady and
@@ -105,43 +105,43 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
             may be overly conservative by a factor of kb or
             more.
         */
-      stress_avg = (x[o.Stress_1] + x[o.Stress_2]) / 2.0;
-      stress_rng = (x[o.Stress_2] - x[o.Stress_1]) / 2.0;
-      se2 = x[o.Stress_Lim_Bnd_Endur] / 2.0; 
-    x[o.FS_CycleLife] =  x[o.Stress_Lim_Bnd_Stat] / 
-         (kb * stress_rng * (x[o.Stress_Lim_Bnd_Stat] - se2) / se2 + stress_avg); 
+      stress_avg = (st[o.Stress_1] + st[o.Stress_2]) / 2.0;
+      stress_rng = (st[o.Stress_2] - st[o.Stress_1]) / 2.0;
+      se2 = st[o.Stress_Lim_Bnd_Endur] / 2.0; 
+    st[o.FS_CycleLife] =  st[o.Stress_Lim_Bnd_Stat] / 
+         (kb * stress_rng * (st[o.Stress_Lim_Bnd_Stat] - se2) / se2 + stress_avg); 
 
              /*  modified Goodman cycle life calculation  */
-    if (x[o.Prop_Calc_Method] === 1 && x[o.Material_Type] !== 0) {
+    if (st[o.Prop_Calc_Method] === 1 && st[o.Material_Type] !== 0) {
 //        for torsion springs: spring type (st_code) = 3 
 //        cycle_life = cl_calc(material_index,life_catagory,3,tensile,stress_1,stress_2);
-        x[o.Cycle_Life] = cl_calc(x[o.Material_Type], x[o.Life_Category], 3, x[o.Tensile], x[o.Stress_1], x[o.Stress_2]);
+        st[o.Cycle_Life] = cl_calc(st[o.Material_Type], st[o.Life_Category], 3, st[o.Tensile], st[o.Stress_1], st[o.Stress_2]);
     }
-       else x[o.Cycle_Life] = zero;   // Setting to NaN causes problems with File : Open.  See issue #232
+       else st[o.Cycle_Life] = zero;   // Setting to NaN causes problems with File : Open.  See issue #232
 
-    x[o.PC_Safe_Deflect] = 100.0 * x[o.Deflect_2] / ((x[o.Stress_Lim_Bnd_Stat] / s_f) / x[o.Rate]);
+    st[o.PC_Safe_Deflect] = 100.0 * st[o.Deflect_2] / ((st[o.Stress_Lim_Bnd_Stat] / s_f) / st[o.Rate]);
  
-    var sq1 = x[o.L_Body];
-    var sq2 = p[o.Coils_T] * Math.PI * x[o.Mean_Dia];
+    var sq1 = st[o.L_Body];
+    var sq2 = st[o.Coils_T] * Math.PI * st[o.Mean_Dia];
     var wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
 
-    x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * (wire_len_t + x[o.Xlen_1] + x[o.Xlen_2]);
+    st[o.Weight] = st[o.Density] * (Math.PI * st[o.Wire_Dia] * st[o.Wire_Dia] / 4.0) * (wire_len_t + st[o.Xlen_1] + st[o.Xlen_2]);
 
-    RateInRad = x[o.Rate] / Deg2Rad;
-    Def1InRad = x[o.Deflect_1] * Deg2Rad;
-    Def2InRad = x[o.Deflect_2] * Deg2Rad;
-    x[o.Energy] = 0.5 * RateInRad * (Def2InRad * Def2InRad - Def1InRad * Def1InRad);
+    RateInRad = st[o.Rate] / Deg2Rad;
+    Def1InRad = st[o.Deflect_1] * Deg2Rad;
+    Def2InRad = st[o.Deflect_2] * Deg2Rad;
+    st[o.Energy] = 0.5 * RateInRad * (Def2InRad * Def2InRad - Def1InRad * Def1InRad);
     
 //    console.log('Exiting eqnset p=',p,' x=',x);
-    return x;
+    return st;
     
 function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 //    console.log("In cl_calc:");
-//    console.log("Material_Index = x[o.Material_Type] = mat_idx =", mat_idx);
-//    console.log("Life_Category =  x[o.Life_Category] = cl_idx  =", cl_idx);
-//    console.log("st_code =", st_code, " x[o.Tensile] = tensile =", tensile);
-//    console.log("Stress1 = x[o.Stress_1] =", stress_1);
-//    console.log("Stress2 = x[o.Stress_2] =", stress_2);
+//    console.log("Material_Index = st[o.Material_Type] = mat_idx =", mat_idx);
+//    console.log("Life_Category =  st[o.Life_Category] = cl_idx  =", cl_idx);
+//    console.log("st_code =", st_code, " st[o.Tensile] = tensile =", tensile);
+//    console.log("Stress1 = st[o.Stress_1] =", stress_1);
+//    console.log("Stress2 = st[o.Stress_2] =", stress_2);
     
     var i;
     var j;
@@ -155,7 +155,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
     var result;
 
     /*  Bring in material properties table  */
-    if (x[o.Material_File] === "mat_metric.json") m_tab = require('../mat_metric.json');
+    if (st[o.Material_File] === "mat_metric.json") m_tab = require('../mat_metric.json');
         else m_tab = require('../mat_us.json');
 
     if (st_code === 3) { // Is it Torsion?
