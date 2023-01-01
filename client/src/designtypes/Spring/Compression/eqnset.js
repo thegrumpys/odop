@@ -25,18 +25,14 @@ export function eqnset(st) {        /*    Compression  Spring  */
     st[o.Coils_A] = st[o.Coils_T] - st[o.Inactive_Coils];
 
     temp = st[o.Spring_Index] * st[o.Spring_Index];
-    st[o.Rate] = st[o.Hot_Factor_Kh] * st[o.Torsion_Modulus] * st[o.Mean_Dia] /
-           (8.0 * st[o.Coils_A] * temp * temp);
-//    console.log('x=',x);
-//    console.log('st[o.Spring_Index]=',st[o.Spring_Index]);
-//    console.log('st[o.Hot_Factor_Kh]=',st[o.Hot_Factor_Kh]);
-//    console.log('st[o.Torsion_Modulus]=',st[o.Torsion_Modulus]);
-//    console.log('st[o.Mean_Dia]=',st[o.Mean_Dia]);
-//    console.log('st[o.Coils_A]=',st[o.Coils_A]);
-//    console.log('st[o.Rate]=',st[o.Rate]);
-
-    st[o.Deflect_1] = st[o.Force_1] / st[o.Rate];
-    st[o.Deflect_2] = st[o.Force_2] / st[o.Rate];
+    
+    if (st[o.Rate_Calc_Method === 1]) {
+        st[o.Rate] = st[o.Hot_Factor_Kh] * st[o.Torsion_Modulus] * st[o.Mean_Dia] / (8.0 * st[o.Coils_A] * temp * temp);
+        st[o.Deflect_1] = st[o.Force_1] / st[o.Rate];
+        st[o.Deflect_2] = st[o.Force_2] / st[o.Rate];
+    } else {
+        st[o.Rate] = (st[o.Force_2]-st[o.Force_1]) / (st[o.Deflect_2]-st[o.Deflect_1]);
+    }
 
     st[o.L_1] = st[o.L_Free] - st[o.Deflect_1];
     st[o.L_2] = st[o.L_Free] - st[o.Deflect_2];
