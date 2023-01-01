@@ -33,7 +33,6 @@ import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
 import ViewCADModel from '../menus/View/ViewCADModel';
 import ViewSelect from '../menus/View/ViewSelect';
-import ViewOffsets from '../menus/View/ViewOffsets';
 import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
 import ViewSymbolTable from '../menus/View/ViewSymbolTable';
 import ViewObjectiveValue from '../menus/View/ViewObjectiveValue';
@@ -164,7 +163,6 @@ class MainPage extends Component {
                                 <NavDropdown.Divider />
                                 <ViewSelect viewNames={viewNames}/>
                                 <NavDropdown.Divider />
-                                {config.node.env !== "production" && <ViewOffsets />}
                                 {config.node.env !== "production" && <ViewSymbolTableOffsets />}
                                 {config.node.env !== "production" && <ViewSymbolTable />}
                                 {config.node.env !== "production" && <ViewObjectiveValue />}
