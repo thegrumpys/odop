@@ -366,6 +366,7 @@ export function migrate(design) {
         design.symbol_table[30].name = 'Rate_Calc_Method'; // Rename it to Rate_Calc_Method
         design.symbol_table[30].table = "Spring/Compression/rate_calc";
         design.symbol_table[30].tooltip = "Rate Calculation Method - Controls how spring rate is determined and used.  1-Use Geometry  2-Use Force and Deflection";
+        design.symbol_table[30].value = 1; // Use Geometry
         migrated_design.version = '13'; // last thing... set the migrated model version
     case '13':
         // Current model version
