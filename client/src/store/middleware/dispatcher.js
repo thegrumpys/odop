@@ -8,6 +8,7 @@ import { STARTUP,
     CHANGE_SYMBOL_CONSTRAINT, 
     SET_SYMBOL_FLAG, 
     RESET_SYMBOL_FLAG, 
+    CHANGE_SYMBOL_INPUT, 
     
     CHANGE_INPUT_SYMBOL_VALUES, 
     RESTORE_INPUT_SYMBOL_VALUES, 
@@ -225,6 +226,20 @@ export const dispatcher = store => next => action => {
         }
         updateObjectiveValue(store);
         invokeCheck(store);
+        break;
+
+    case CHANGE_SYMBOL_INPUT:
+//        console.log('In dispatcher.FIX_SYMBOL_VALUE action=',action);
+        design = store.getState();
+        design.model.symbol_table.find((element) => {
+            if (element.name === action.payload.name) {
+                console.log('In dispatcher.CHANGE_SYMBOL_INPUT element=',element.name,' old value=',element.input,' new value=',action.payload.value,
+                                                                       ' lmin=',element.lmin,' old lmax=',element.lmax);
+                return true;
+            } else {
+                return false;
+            }
+        });
         break;
 
     case CHANGE_INPUT_SYMBOL_VALUES:
