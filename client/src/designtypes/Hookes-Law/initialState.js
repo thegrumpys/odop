@@ -15,7 +15,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Length in free (no load) condition",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": [o.Force_Solid, o.L_1, o.L_2]
         },
         {
             "input": true,
@@ -31,7 +33,9 @@ export const initialState = {
             "sdlim": 0.01,
             "tooltip": "Minimum operating load (Length L_1)",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": [o.Deflect_1]
         },
         {
             "input": true,
@@ -47,7 +51,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Maximum operating load (Length L_2)",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": [o.Deflect_2]
         },
         {
             "input": true,
@@ -63,7 +69,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [p.Mean_Dia, o.Coils_A, o.Spring_Index, o.Hot_Factor_Kh, o.Torsion_Modulus],
+            "sets": [o.Deflect_1, o.Deflect_2, o.Force_Solid]
         },
         {
             "input": false,
@@ -79,7 +87,9 @@ export const initialState = {
             "sdlim": 0.001,
             "tooltip": "Deflection from free to load point 1",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [o.Force_1, o.Rate],
+            "sets": [o.L_1]
         },
         {
             "input": false,
@@ -95,7 +105,9 @@ export const initialState = {
             "sdlim": 0.01,
             "tooltip": "Deflection from free to load point 2",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [o.Force_2, o.Rate],
+            "sets": [o.L_2]
         },
         {
             "input": false,
@@ -111,7 +123,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Spring length at load point 1",
             "type": "equationset",
-            "hidden": false
+            "validminchoice": 0,
+            "refs": [o.Deflect_1, o.L_Free],
+            "sets": [o.L_Stroke]
         },
         {
             "input": false,
@@ -129,7 +143,9 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "validminchoices": [ "L_Solid" ],
-            "validminchoice": 0
+            "validminchoice": 0,
+            "refs": [o.Deflect_2, o.L_Free],
+            "sets": [o.L_Stroke]
         },
         {
             "input": false,
@@ -145,7 +161,9 @@ export const initialState = {
             "sdlim": 0.01,
             "tooltip": "Length of stroke from point 1 to point 2",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [o.L_1, o.L_2],
+            "sets": []
         }
     ],
     "labels": [
