@@ -272,7 +272,7 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "propagate": [{ name: "L_2", minmax: VALID_MIN }],
-            "refs": [o.Coils_T, o.ID_Free, o.Add_Coils_Solid],
+            "refs": [o.Coils_T, o.Wire_Dia, o.Add_Coils_Solid],
             "sets": [o.Force_Solid]
         },
         {
