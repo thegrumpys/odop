@@ -48,3 +48,4 @@ export const MAX = 'MAX';
 export const CONSTRAINED = 1;
 export const FIXED = 2;
 export const FDCL = 4;
+export const INITIALIZED = 8;
