@@ -1,4 +1,5 @@
 import { CONSTRAINED, VALID_MIN } from '../../../store/actionTypes';
+import * as o from './symbol_table_offsets';
 export const initialState = {
     "symbol_table": [
         {
@@ -15,7 +16,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Outside diameter in free (no load) condition",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": [o.Mean_Dia]
         },
         {
             "input": true,
@@ -31,7 +34,9 @@ export const initialState = {
             "sdlim": 0.01,
             "tooltip": "Wire diameter",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": [o.Mean_Dia, o.Spring_Index, o.ID_Free, o.L_Solid]
         },
         {
             "input": true,
@@ -47,7 +52,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Length in free (no load) condition",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": [o.Force_Solid, o.L_1, o.L_2]
         },
         {
             "input": true,
@@ -63,7 +70,9 @@ export const initialState = {
             "sdlim": 1.0,
             "tooltip": "Total number of coils",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": [o.Coils_A, o.L_Solid]
         },
         {
             "input": true,
@@ -79,7 +88,9 @@ export const initialState = {
             "sdlim": 0.01,
             "tooltip": "Minimum operating load (Length L_1)",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": [o.Deflect_1]
         },
         {
             "input": true,
@@ -95,7 +106,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Maximum operating load (Length L_2)",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": [o.Deflect_2]
         },
         {
             "input": false,
@@ -111,7 +124,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Average of inside and outside diameters",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [o.OD_Free, o.Wire_Dia],
+            "sets": [o.Rate, o.Spring_Index, o.ID_Free]
         },
         {
             "input": false,
@@ -127,7 +142,9 @@ export const initialState = {
             "sdlim": 1.0,
             "tooltip": "Number of Active coils",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [o.Coils_T, o.Inactive_Coils],
+            "sets": [o.Rate]
         },
         {
             "input": false,
@@ -143,7 +160,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [p.Mean_Dia, o.Coils_A, o.Spring_Index, o.Hot_Factor_Kh, o.Torsion_Modulus],
+            "sets": [o.Deflect_1, o.Deflect_2, o.Force_Solid]
         },
         {
             "input": false,
@@ -159,7 +178,9 @@ export const initialState = {
             "sdlim": 0.001,
             "tooltip": "Deflection from free to load point 1",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [o.Force_1, o.Rate],
+            "sets": [o.L_1]
         },
         {
             "input": false,
@@ -175,7 +196,9 @@ export const initialState = {
             "sdlim": 0.01,
             "tooltip": "Deflection from free to load point 2",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [o.Force_2, o.Rate],
+            "sets": [o.L_2]
         },
         {
             "input": false,
@@ -191,7 +214,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Spring length at load point 1",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [o.Deflect_1, o.L_Free],
+            "sets": [o.L_Stroke]
         },
         {
             "input": false,
@@ -209,7 +234,9 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "validminchoices": [ "L_Solid" ],
-            "validminchoice": 0
+            "validminchoice": 0,
+            "refs": [o.Deflect_2, o.L_Free],
+            "sets": [o.L_Stroke]
         },
         {
             "input": false,
@@ -225,7 +252,9 @@ export const initialState = {
             "sdlim": 0.01,
             "tooltip": "Length of stroke from point 1 to point 2",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [o.L_1, o.L_2],
+            "sets": []
         },
         {
             "input": false,
@@ -242,7 +271,9 @@ export const initialState = {
             "tooltip": "Spring length when fully compressed",
             "type": "equationset",
             "hidden": false,
-            "propagate": [{ name: "L_2", minmax: VALID_MIN }]
+            "propagate": [{ name: "L_2", minmax: VALID_MIN }],
+            "refs": [o.Coils_T, o.ID_Free, o.Add_Coils_Solid],
+            "sets": [o.Force_Solid]
         },
         {
             "input": false,
@@ -258,7 +289,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Ratio of free length (L_Free) to mean diameter (Mean_Dia)",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -274,7 +307,9 @@ export const initialState = {
             "sdlim": 0.01,
             "tooltip": "Inside diameter in free (no load) condition",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -290,7 +325,9 @@ export const initialState = {
             "sdlim": 0.001,
             "tooltip": "Weight of one spring",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -306,7 +343,9 @@ export const initialState = {
             "sdlim": 1.0,
             "tooltip": "Ratio of mean coil diameter (Mean_Dia) to wire diameter (Wire_Dia)",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -322,7 +361,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Load required to fully compress the spring",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -338,7 +379,9 @@ export const initialState = {
             "sdlim": 1000.0,
             "tooltip": "Torsion stress in wire at load point 1",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -354,7 +397,9 @@ export const initialState = {
             "sdlim": 10000.0,
             "tooltip": "Torsion stress in wire at load point 2",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -370,7 +415,9 @@ export const initialState = {
             "sdlim": 1000.0,
             "tooltip": "Torsion stress in wire when spring is fully compressed",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -386,7 +433,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Factor of safety at load point 2",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -402,7 +451,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Factor of safety when the spring is fully compressed",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -418,7 +469,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Factor of safety to achieve the target cycle life category. See on-line Help.",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -434,7 +487,9 @@ export const initialState = {
             "sdlim": 10000.0,
             "tooltip": "Rough estimate of the average number of cycles to failure when cycling between point 1 and point 2. See on-line Help.",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -450,7 +505,9 @@ export const initialState = {
             "sdlim": 10.0,
             "tooltip": "Deflection of load point 2 as a percent of total available deflection",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -466,7 +523,9 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Change in elastic potential energy between 1 and 2",
             "type": "equationset",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -480,7 +539,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Compression spring design",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -496,7 +557,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Property Calculation Method - Controls how material properties are determined and used.  1-Use values from material table  2-Specify Tensile, %_Tensile_Stat & %_Tensile_Endur  3-Specify allowable stresses: Stress_Lim_Stat & Stress_Lim_Endur",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -512,7 +575,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Select wire material",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -526,7 +591,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Wire specification",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -540,7 +607,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Coil winding process temperature - Cold coiled vs. Hot wound",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -554,7 +623,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "mat_metric.json for metric units. Anything else for US IPS units",
             "type": "calcinput",
-            "hidden": true
+            "hidden": true,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -570,7 +641,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Select cycle life target. Confirm that FS_CycleLife MIN constraint is enabled to utilize the selected %_Tensile_Endur for the material.",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -586,7 +659,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Wire material density",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -602,7 +677,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Wire torsion modulus (G)",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -618,7 +695,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Reduction factor applied to modulus of hot-wound materials",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -634,7 +713,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Wire tensile strength (computed as a function of wire diameter when Prop_Calc_Method=1; See on-line Help for details)",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -650,7 +731,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Allowable percent of tensile strength for selected life cycle category",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -666,7 +749,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Allowable percent of tensile strength for static applications",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -682,7 +767,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Allowable stress for selected life cycle category",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -698,7 +785,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Allowable stress for static applications",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -714,7 +803,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Select end type",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -730,7 +821,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Number of coils not contributing to deflection. Depends on End_Type.",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -746,7 +839,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Adjusts calculation of L_Solid. Depends on End_Type. See on-line Help for details.",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -760,7 +855,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Name of the catalog from which the catalog entry was selected",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": false,
@@ -774,7 +871,9 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Catalog entry which was selected from the named catalog",
             "type": "calcinput",
-            "hidden": false
+            "hidden": false,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -789,7 +888,9 @@ export const initialState = {
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
             "type": "calcinput",
-            "hidden": true
+            "hidden": true,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -804,7 +905,9 @@ export const initialState = {
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
             "type": "calcinput",
-            "hidden": true
+            "hidden": true,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -819,7 +922,9 @@ export const initialState = {
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
             "type": "calcinput",
-            "hidden": true
+            "hidden": true,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -834,7 +939,9 @@ export const initialState = {
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
             "type": "calcinput",
-            "hidden": true
+            "hidden": true,
+            "refs": [],
+            "sets": []
         },
         {
             "input": true,
@@ -849,7 +956,9 @@ export const initialState = {
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
             "type": "calcinput",
-            "hidden": true
+            "hidden": true,
+            "refs": [],
+            "sets": []
         }
     ],
     "labels": [
