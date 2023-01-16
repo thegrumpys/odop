@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { FIXED, CONSTRAINED } from '../store/actionTypes';
+import { FIXED, CONSTRAINED, UNINITIALIZED } from '../store/actionTypes';
 import { changeSymbolValue } from '../store/actionCreators';
 import NameValueUnitsHeaderIndependentVariable from './NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
@@ -198,7 +198,7 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             <>
                                 {icon_dependent_tag}
-                                <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
+                                <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabledText={this.props.element.lmin & UNINITIALIZED ? true : false} onClick={this.onContextMenu} />
                             </>
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?

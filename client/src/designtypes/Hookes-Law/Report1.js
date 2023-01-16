@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
 import { getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from '../../components/Alerts';
+import { UNINITIALIZED } from '../../store/actionTypes';
 
 class Report1 extends ReportBase {
 
@@ -45,7 +46,7 @@ class Report1 extends ReportBase {
                         <tr>
                             <td>{this.props.symbol_table[o.Rate].name}</td>
                             <td>=</td>
-                            <td>{this.props.symbol_table[o.Rate].value.toFixed(3)}</td>
+                            <td>{(this.props.symbol_table[o.Rate].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.Rate].value.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Rate].units}</td>
                         </tr>
                     </tbody>
@@ -65,19 +66,19 @@ class Report1 extends ReportBase {
                             <td><b>Free</b></td>
                             <td>{(0.0).toFixed(2)}</td>
                             <td>{(0.0).toFixed(4)}</td>
-                            <td>{this.props.symbol_table[o.L_Free].value.toFixed(3)}</td>
+                            <td>{(this.props.symbol_table[o.L_Free].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.L_Free].value.toFixed(3)}</td>
                         </tr>
                         <tr>
                             <td><b>1</b></td>
-                            <td>{this.props.symbol_table[o.Force_1].value.toFixed(2)}</td>
-                            <td>{this.props.symbol_table[o.Deflect_1].value.toFixed(4)}</td>
-                            <td>{this.props.symbol_table[o.L_1].value.toFixed(3)}</td>
+                            <td>{(this.props.symbol_table[o.Force_1].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.Force_1].value.toFixed(2)}</td>
+                            <td>{(this.props.symbol_table[o.Deflect_1].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.Deflect_1].value.toFixed(4)}</td>
+                            <td>{(this.props.symbol_table[o.L_1].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.L_1].value.toFixed(3)}</td>
                         </tr>
                         <tr>
                             <td><b>2</b></td>
-                            <td>{this.props.symbol_table[o.Force_2].value.toFixed(2)}</td>
-                            <td>{this.props.symbol_table[o.Deflect_2].value.toFixed(4)}</td>
-                            <td>{this.props.symbol_table[o.L_2].value.toFixed(3)}</td>
+                            <td>{(this.props.symbol_table[o.Force_2].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.Force_2].value.toFixed(2)}</td>
+                            <td>{(this.props.symbol_table[o.Deflect_2].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.Deflect_2].value.toFixed(4)}</td>
+                            <td>{(this.props.symbol_table[o.L_2].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.L_2].value.toFixed(3)}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -87,7 +88,7 @@ class Report1 extends ReportBase {
                         <tr>
                             <td>{this.props.symbol_table[o.L_Stroke].name}</td>
                             <td>=</td>
-                            <td>{this.props.symbol_table[o.L_Stroke].value.toFixed(3)}</td>
+                            <td>{(this.props.symbol_table[o.L_Stroke].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.L_Stroke].value.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.L_Stroke].units}</td>
                         </tr>
                     </tbody>

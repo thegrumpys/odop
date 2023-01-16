@@ -1,4 +1,4 @@
-import { CONSTRAINED } from '../../store/actionTypes';
+import { CONSTRAINED, UNINITIALIZED } from '../../store/actionTypes';
 import * as o from './symbol_table_offsets';
 export const initialState = {
     "symbol_table": [
@@ -7,8 +7,8 @@ export const initialState = {
             "name": "L_Free",
             "value": 3.25,
             "units": "inches",
-            "lmin": 0,
-            "lmax": 0,
+            "lmin": UNINITIALIZED,
+            "lmax": UNINITIALIZED,
             "cmin": 0.1,
             "cmax": 100.0,
             "validmin": 0.0,
@@ -25,8 +25,8 @@ export const initialState = {
             "name": "Force_1",
             "value": 10.0,
             "units": "pounds",
-            "lmin": 0,
-            "lmax": 0,
+            "lmin": UNINITIALIZED,
+            "lmax": UNINITIALIZED,
             "cmin": 0,
             "cmax": 50,
             "validmin": -Number.MAX_VALUE,
@@ -43,8 +43,8 @@ export const initialState = {
             "name": "Force_2",
             "value": 39.0,
             "units": "pounds",
-            "lmin": 0,
-            "lmax": 0,
+            "lmin": UNINITIALIZED,
+            "lmax": UNINITIALIZED,
             "cmin": 0.01,
             "cmax": 1000,
             "validmin": 0.0,
@@ -61,8 +61,8 @@ export const initialState = {
             "name": "Rate",
             "value": 22.6315,
             "units": "Lb/In",
-            "lmin": 0,
-            "lmax": 0,
+            "lmin": UNINITIALIZED,
+            "lmax": UNINITIALIZED,
             "cmin": 1.0,
             "cmax": 200.0,
             "validmin": 0.0,
@@ -79,8 +79,8 @@ export const initialState = {
             "name": "Deflect_1",
             "value": 0.04,
             "units": "inches",
-            "lmin": CONSTRAINED,
-            "lmax": 0,
+            "lmin": CONSTRAINED|UNINITIALIZED,
+            "lmax": UNINITIALIZED,
             "cmin": 0.0,
             "cmax": 20.0,
             "validmin": -Number.MAX_VALUE,
@@ -97,8 +97,8 @@ export const initialState = {
             "name": "Deflect_2",
             "value": 1.7674,
             "units": "inches",
-            "lmin": 0,
-            "lmax": 0,
+            "lmin": UNINITIALIZED,
+            "lmax": UNINITIALIZED,
             "cmin": 1.0,
             "cmax": 20.0,
             "validmin": 0.0,
@@ -115,8 +115,8 @@ export const initialState = {
             "name": "L_1",
             "value": 3.2058,
             "units": "inches",
-            "lmin": 0,
-            "lmax": 0,
+            "lmin": UNINITIALIZED,
+            "lmax": UNINITIALIZED,
             "cmin": 1.0,
             "cmax": 100.0,
             "validmin": 0.0,
@@ -133,8 +133,8 @@ export const initialState = {
             "name": "L_2",
             "value": 1.4826,
             "units": "inches",
-            "lmin": 0,
-            "lmax": 0,
+            "lmin": UNINITIALIZED,
+            "lmax": UNINITIALIZED,
             "cmin": 1.0,
             "cmax": 50.0,
             "validmin": 0.0,
@@ -153,8 +153,8 @@ export const initialState = {
             "name": "L_Stroke",
             "value": 1.7233,
             "units": "inches",
-            "lmin": 0,
-            "lmax": 0,
+            "lmin": UNINITIALIZED,
+            "lmax": UNINITIALIZED,
             "cmin": 0.010,
             "cmax": 100.0,
             "validmin": -Number.MIN_VALUE,
@@ -171,98 +171,6 @@ export const initialState = {
         {
             "name": "COMMENT",
             "value": "Hooke's Law default start point - US units ..."
-        },
-        {
-            "name": "Contact person",
-            "value": ""
-        },
-        {
-            "name": "Company name",
-            "value": ""
-        },
-        {
-            "name": "Street",
-            "value": ""
-        },
-        {
-            "name": "City, State & Zip",
-            "value": ""
-        },
-        {
-            "name": "Phone & email",
-            "value": ""
-        },
-        {
-            "name": "Date",
-            "value": ""
-        },
-        {
-            "name": "Part Number",
-            "value": ""
-        },
-        {
-            "name": "Data Source",
-            "value": "print     sample      verbal"
-        },
-        {
-            "name": "Mandril",
-            "value": ""
-        },
-        {
-            "name": "Wind",
-            "value": "rh lh opt"
-        },
-        {
-            "name": "Shot peen",
-            "value": "yes no; details"
-        },
-        {
-            "name": "Stress relieve/HT",
-            "value": ""
-        },
-        {
-            "name": "Pre-set",
-            "value": "no"
-        },
-        {
-            "name": "Finish",
-            "value": ""
-        },
-        {
-            "name": "Squareness",
-            "value": ""
-        },
-        {
-            "name": "End use",
-            "value": ""
-        },
-        {
-            "name": "Fits in / Works over",
-            "value": ""
-        },
-        {
-            "name": "Operating temp",
-            "value": ""
-        },
-        {
-            "name": "Special notes & tol",
-            "value": ""
-        },
-        {
-            "name": "Customer approval",
-            "value": "__________________________ "
-        },
-        {
-            "name": "Customer date",
-            "value": " _______ "
-        },
-        {
-            "name": "Vendor approval",
-            "value": "__________________________ "
-        },
-        {
-            "name": "Vendor date",
-            "value": " _______ "
         }
     ],
     "type": "Hookes-Law",
