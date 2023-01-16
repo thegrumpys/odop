@@ -1,4 +1,5 @@
 import { CONSTRAINED } from '../../store/actionTypes';
+import * as o from './symbol_table_offsets';
 export const initialState = {
     "symbol_table": [
         {
@@ -17,7 +18,7 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "refs": [],
-            "sets": [o.Force_Solid, o.L_1, o.L_2]
+            "sets": [o.L_1, o.L_2]
         },
         {
             "input": true,
@@ -70,8 +71,8 @@ export const initialState = {
             "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
             "type": "equationset",
             "hidden": false,
-            "refs": [p.Mean_Dia, o.Coils_A, o.Spring_Index, o.Hot_Factor_Kh, o.Torsion_Modulus],
-            "sets": [o.Deflect_1, o.Deflect_2, o.Force_Solid]
+            "refs": [],
+            "sets": [o.Deflect_1, o.Deflect_2]
         },
         {
             "input": false,
