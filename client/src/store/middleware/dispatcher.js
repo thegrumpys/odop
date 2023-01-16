@@ -19,7 +19,7 @@ import { STARTUP,
     
     RESTORE_AUTO_SAVE,
     
-    MIN, MAX, FIXED, CONSTRAINED, FDCL
+    MIN, MAX, FIXED, CONSTRAINED, FDCL, UNINITIALIZED
     } from '../actionTypes';
 import { setSclDen } from './setSclDen';
 import { search } from './search';
@@ -30,7 +30,7 @@ import { propagate } from './propagate';
 import { updateObjectiveValue } from './updateObjectiveValue';
 import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
-import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
+import { changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
          restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actionCreators';
 
 export const dispatcher = store => next => action => {
@@ -86,6 +86,9 @@ export const dispatcher = store => next => action => {
                         });
                     }
                     invokeInit(store);
+                } else { // element.type === "equationset"
+                    store.dispatch(resetSymbolFlag(element.name,MIN,UNINITIALIZED));
+                    store.dispatch(resetSymbolFlag(element.name,MAX,UNINITIALIZED));
                 }
                 return true;
             } else {

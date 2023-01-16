@@ -221,10 +221,10 @@ export function reducers(state, action) {
 //                                    'element.lmax=',element.lmax,
 //                                    'element.cmax=',element.cmax);
                         return Object.assign({}, element, {
-                            lmin: 0,
+//                            lmin: 0,
                             oldlmin: element.lmin,
                             oldcmin: element.cmin,
-                            lmax: 0,
+//                            lmax: 0,
                             oldlmax: element.lmax,
                             oldcmax: element.cmax
                         });
@@ -278,15 +278,15 @@ export function reducers(state, action) {
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
 //                        console.log('In reducers.SET_SYMBOL_FLAG state=',state,'action=', action);
+                        var update;
                         if (action.payload.minmax === MIN) {
-                            return Object.assign({}, element, {
-                                lmin: element.lmin | action.payload.mask
-                            });
+                            update = {lmin: element.lmin | action.payload.mask};
                         } else {
-                            return Object.assign({}, element, {
-                                lmax: element.lmax | action.payload.mask
-                            });
+                            update = {lmax: element.lmax | action.payload.mask};
                         }
+                        var result = Object.assign({}, element, update);
+//                        console.log('In reducers.SET_SYMBOL_FLAG ','action=', action,'element=',element,'update=',update,'result=',result);
+                        return result;
                     }
                     return element;
                 })
@@ -299,15 +299,15 @@ export function reducers(state, action) {
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
 //                        console.log('In reducers.RESET_SYMBOL_FLAG state=',state,'action=', action);
+                        var update;
                         if (action.payload.minmax === MIN) {
-                            return Object.assign({}, element, {
-                                lmin: element.lmin & ~action.payload.mask
-                            });
+                            update = {lmin: element.lmin & (~action.payload.mask)};
                         } else {
-                            return Object.assign({}, element, {
-                                lmax: element.lmax & ~action.payload.mask
-                            });
+                            update = {lmax: element.lmax & (~action.payload.mask)};
                         }
+                        var result = Object.assign({}, element, update);
+//                        console.log('In reducers.RESET_SYMBOL_FLAG ','action=', action,'element=',element,'update=',update,'result=',result);
+                        return result;
                     }
                     return element;
                 })
