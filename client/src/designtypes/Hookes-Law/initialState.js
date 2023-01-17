@@ -17,8 +17,22 @@ export const initialState = {
             "tooltip": "Length in free (no load) condition",
             "type": "equationset",
             "hidden": false,
-            "refs": [],
-            "sets": [o.L_1, o.L_2]
+            "eqns": [
+                {
+                    "eqn": null, // User input
+                    "sets": [o.L_1, o.Deflect_1, o.L_2, o.Deflect_2]
+                },
+                {
+                    "refs": [o.L_1, o.Deflect_1],
+                    "eqn": (l_1, deflect_1) => {return deflect_1 + l_1},
+                    "sets": [o.Rate]
+                },
+                {
+                    "refs": [o.L_2, o.Deflect_2],
+                    "eqn": (l_2, deflect_2) => {return deflect_2 + l_2},
+                    "sets": [o.Rate]
+                }
+            ]
         },
         {
             "input": true,
@@ -35,8 +49,17 @@ export const initialState = {
             "tooltip": "Minimum operating load (Length L_1)",
             "type": "equationset",
             "hidden": false,
-            "refs": [],
-            "sets": [o.Deflect_1]
+            "eqns": [
+                {
+                    "eqn": null, // User input
+                    "sets": [o.Rate, o.Deflect_1]
+                },
+                {
+                    "refs": [o.Rate, o.Deflect_1],
+                    "eqn": (rate, deflect_1) => {return deflect_1 * rate},
+                    "sets": [o.L_1]
+                }
+            ]
         },
         {
             "input": true,
@@ -53,8 +76,17 @@ export const initialState = {
             "tooltip": "Maximum operating load (Length L_2)",
             "type": "equationset",
             "hidden": false,
-            "refs": [],
-            "sets": [o.Deflect_2]
+            "eqns": [
+                {
+                    "eqn": null, // User input
+                    "sets": [o.Rate, o.Deflect_2]
+                },
+                {
+                    "refs": [o.Rate, o.Deflect_2],
+                    "eqn": (rate, deflect_2) => {return deflect_2 * rate},
+                    "sets": [o.L_2]
+                }
+            ]
         },
         {
             "input": true,
@@ -71,8 +103,22 @@ export const initialState = {
             "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
             "type": "equationset",
             "hidden": false,
-            "refs": [],
-            "sets": [o.Deflect_1, o.Deflect_2]
+            "eqns": [
+                {
+                    "eqn": null, // User input
+                    "sets": [o.Force_1, o.Deflect_1, o.Force_2, o.Deflect_2]
+                },
+                {
+                    "refs": [o.Force_1, o.Deflect_1],
+                    "eqn": (force_1, deflect_1) => {return force_1 / deflect_1},
+                    "sets": [o.L_1]
+                },
+                {
+                    "refs": [o.Force_2, o.Deflect_2],
+                    "eqn": (force_2, deflect_2) => {return force_2 / deflect_2},
+                    "sets": [o.L_2]
+                }
+            ]
         },
         {
             "input": false,
@@ -89,8 +135,22 @@ export const initialState = {
             "tooltip": "Deflection from free to load point 1",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Force_1, o.Rate],
-            "sets": [o.L_1]
+            "eqns": [
+                {
+                    "eqn": null, // User input
+                    "sets": [o.Force_1, o.Rate, o.L_Free, o.L_1]
+                },
+                {
+                    "refs": [o.Force_1, o.Rate],
+                    "eqn": (force_1, rate) => {return force_1 / rate},
+                    "sets": [o.L_1]
+                },
+                {
+                    "refs": [o.L_Free, o.L_1],
+                    "eqn": (l_free, l_1) => {return l_free - l_1},
+                    "sets": [o.Rate]
+                }
+            ]
         },
         {
             "input": false,
@@ -107,8 +167,22 @@ export const initialState = {
             "tooltip": "Deflection from free to load point 2",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Force_2, o.Rate],
-            "sets": [o.L_2]
+            "eqns": [
+                {
+                    "eqn": null, // User input
+                    "sets": [o.Force_2, o.Rate, o.L_Free, o.L_2]
+                },
+                {
+                    "refs": [o.Force_2, o.Rate],
+                    "eqn": (force_2, rate) => {return force_2 / rate},
+                    "sets": [o.L_2]
+                },
+                {
+                    "refs": [o.L_Free, o.L_2],
+                    "eqn": (l_free, l_2) => {return l_free - l_2},
+                    "sets": [o.Rate]
+                }
+            ]
         },
         {
             "input": false,
@@ -124,9 +198,18 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Spring length at load point 1",
             "type": "equationset",
-            "validminchoice": 0,
-            "refs": [o.Deflect_1, o.L_Free],
-            "sets": [o.L_Stroke]
+            "hidden": false,
+            "eqns": [
+                {
+                    "eqn": null, // User input
+                    "sets": [o.L_Free, o.Deflect_1]
+                },
+                {
+                    "refs": [o.L_Free, o.Deflect_1],
+                    "eqn": (l_free, deflect_1) => {return l_free - deflect_1},
+                    "sets": [o.Rate]
+                }
+            ]
         },
         {
             "input": false,
@@ -143,10 +226,17 @@ export const initialState = {
             "tooltip": "Spring length at load point 2",
             "type": "equationset",
             "hidden": false,
-            "validminchoices": [ "L_Solid" ],
-            "validminchoice": 0,
-            "refs": [o.Deflect_2, o.L_Free],
-            "sets": [o.L_Stroke]
+            "eqns": [
+                {
+                    "eqn": null, // User input
+                    "sets": [o.L_Free, o.Deflect_2]
+                },
+                {
+                    "refs": [o.L_Free, o.Deflect_2],
+                    "eqn": (l_free, deflect_2) => {return l_free - deflect_2},
+                    "sets": [o.Rate]
+                }
+            ]
         },
         {
             "input": false,
@@ -163,8 +253,17 @@ export const initialState = {
             "tooltip": "Length of stroke from point 1 to point 2",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.L_1, o.L_2],
-            "sets": []
+            "eqns": [
+                {
+                    "eqn": null, // User input
+                    "sets": [o.L_1, o.L_2]
+                },
+                {
+                    "refs": [o.L_1, o.L_2],
+                    "eqn": (l_1, l_2) => {return l_1 - l_2},
+                    "sets": []
+                }
+            ]
         }
     ],
     "labels": [

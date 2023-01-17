@@ -27,6 +27,7 @@ import { seek } from './seek';
 import { invokeInit } from './invokeInit';
 import { invokeEquationSet } from './invokeEquationSet';
 import { propagate } from './propagate';
+import { cascade } from './cascade';
 import { updateObjectiveValue } from './updateObjectiveValue';
 import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
@@ -89,6 +90,7 @@ export const dispatcher = store => next => action => {
                 } else { // element.type === "equationset"
                     store.dispatch(resetSymbolFlag(element.name,MIN,UNINITIALIZED));
                     store.dispatch(resetSymbolFlag(element.name,MAX,UNINITIALIZED));
+                    cascade(store, element, true)
                 }
                 return true;
             } else {
