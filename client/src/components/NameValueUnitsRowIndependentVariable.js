@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, UNINITIALIZED } from '../store/actionTypes';
-import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../store/actionCreators';
+import { cascadeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
@@ -32,7 +32,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
 
     onChangeValid(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=',event.target.value);
-        var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
+        var auto_fixed = false; // Needed because cascadeSymbolValue resets the termination condition message
         if (this.props.system_controls.enable_auto_fix) {
             auto_fixed = true;
             if (!(this.props.element.lmin & FIXED)) {
@@ -40,7 +40,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
                 logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
             }
         }
-        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value)); // Update the model
+        this.props.cascadeSymbolValue(this.props.element.name, parseFloat(event.target.value)); // Update the model
         logValue(this.props.element.name,event.target.value);
         if (auto_fixed) {
             this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
@@ -138,7 +138,7 @@ const mapStateToProps = state => ({
     objective_value: state.model.result.objective_value});
 
 const mapDispatchToProps = {
-    changeSymbolValue: changeSymbolValue,
+    cascadeSymbolValue: cascadeSymbolValue,
     fixSymbolValue: fixSymbolValue,
     freeSymbolValue: freeSymbolValue,
     changeResultTerminationCondition: changeResultTerminationCondition

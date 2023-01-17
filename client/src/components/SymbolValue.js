@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FIXED, CONSTRAINED, UNINITIALIZED } from '../store/actionTypes';
-import { changeSymbolValue } from '../store/actionCreators';
 import NameValueUnitsHeaderIndependentVariable from './NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from './NameValueUnitsHeaderDependentVariable';
@@ -292,8 +291,4 @@ const mapStateToProps = state => ({
     objective_value: state.model.result.objective_value
 });
 
-const mapDispatchToProps = {
-    changeSymbolValue: changeSymbolValue,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SymbolValue);
+export default connect(mapStateToProps)(SymbolValue);

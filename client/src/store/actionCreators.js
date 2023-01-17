@@ -7,6 +7,7 @@ import {
     CHANGE_VIEW, 
     
     CHANGE_SYMBOL_VALUE, 
+    CASCADE_SYMBOL_VALUE, 
     FIX_SYMBOL_VALUE, 
     FREE_SYMBOL_VALUE, 
     CHANGE_SYMBOL_VIOLATION, 
@@ -96,6 +97,17 @@ export function changeView(view) {
 export function changeSymbolValue(name, value, merit) {
     return {
         type: CHANGE_SYMBOL_VALUE,
+        payload: {
+            name,
+            value,
+            merit
+        }
+    }
+}
+
+export function cascadeSymbolValue(name, value, merit) {
+    return {
+        type: CASCADE_SYMBOL_VALUE,
         payload: {
             name,
             value,

@@ -3,6 +3,7 @@ import { STARTUP,
     LOAD_INITIAL_STATE,
     
     CHANGE_SYMBOL_VALUE, 
+    CASCADE_SYMBOL_VALUE, 
     FIX_SYMBOL_VALUE, 
     FREE_SYMBOL_VALUE, 
     CHANGE_SYMBOL_CONSTRAINT, 
@@ -90,7 +91,6 @@ export const dispatcher = store => next => action => {
                 } else { // element.type === "equationset"
                     store.dispatch(resetSymbolFlag(element.name,MIN,UNINITIALIZED));
                     store.dispatch(resetSymbolFlag(element.name,MAX,UNINITIALIZED));
-                    cascade(store, element, true)
                 }
                 return true;
             } else {
@@ -102,6 +102,21 @@ export const dispatcher = store => next => action => {
         propagate(store);
         updateObjectiveValue(store, action.payload.merit);
         invokeCheck(store);
+        break;
+    case CASCADE_SYMBOL_VALUE:
+//        console.log('In dispatcher.CASCADE_SYMBOL_VALUE action=',action);
+        design = store.getState();
+        store.dispatch(changeSymbolValue(action.payload.name, action.payload.value, action.payload.merit));
+        design.model.symbol_table.find((element) => {
+            if (element.name === action.payload.name) {
+                if (element.type === "equationset") { // Independent and Dependent Variables, but not Calc Input
+                    cascade(store, element, true);
+                }
+                return true;
+            } else {
+                return false;
+            }
+        });
         break;
     case FIX_SYMBOL_VALUE:
 //        console.log('In dispatcher.FIX_SYMBOL_VALUE action=',action);

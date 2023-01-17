@@ -1,0 +1,29 @@
+export const eqn_L_Free_L_1_Deflect_1 = 0;
+export const eqn_L_Free_L_2_Deflect_2 = 1;
+export const eqn_Force_1_Rate_Deflect_1 = 2;
+export const eqn_Force_2_Rate_Deflect_2 = 3;
+export const eqn_Rate_Force_1_Deflect_1 = 4;
+export const eqn_Rate_Force_2_Deflect_2 = 5;
+export const eqn_Deflect_1_Force_1_Rate = 6;
+export const eqn_Deflect_1_L_Free_L_1 = 7;
+export const eqn_Deflect_2_Force_2_Rate = 8;
+export const eqn_Deflect_2_L_Free_L_2 = 9;
+export const eqn_L_1_L_Free_Deflect_1 = 10;
+export const eqn_L_2_L_Free_Deflect_2 = 11;
+export const eqn_L_Stroke_L_1_L_2 = 11;
+
+export const eqns = [
+    (l_1, deflect_1) => {return deflect_1 + l_1},
+    (l_2, deflect_2) => {return deflect_2 + l_2},
+    (rate, deflect_1) => {return deflect_1 * rate},
+    (rate, deflect_2) => {return deflect_2 * rate},
+    (force_1, deflect_1) => {return force_1 / deflect_1},
+    (force_2, deflect_2) => {return force_2 / deflect_2},
+    (force_1, rate) => {return force_1 / rate},
+    (l_free, l_1) => {return l_free - l_1},
+    (force_2, rate) => {return force_2 / rate},
+    (l_free, l_2) => {return l_free - l_2},
+    (l_free, deflect_1) => {return l_free - deflect_1},
+    (l_free, deflect_2) => {return l_free - deflect_2},
+    (l_1, l_2) => {return l_1 - l_2},
+]

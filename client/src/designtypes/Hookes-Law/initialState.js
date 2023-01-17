@@ -1,5 +1,6 @@
 import { CONSTRAINED, UNINITIALIZED } from '../../store/actionTypes';
 import * as o from './symbol_table_offsets';
+import * as e from './eqns';
 export const initialState = {
     "symbol_table": [
         {
@@ -24,12 +25,12 @@ export const initialState = {
                 },
                 {
                     "refs": [o.L_1, o.Deflect_1],
-                    "eqn": (l_1, deflect_1) => {return deflect_1 + l_1},
+                    "eqn": e.eqn_L_Free_L_1_Deflect_1,
                     "sets": [o.Rate]
                 },
                 {
                     "refs": [o.L_2, o.Deflect_2],
-                    "eqn": (l_2, deflect_2) => {return deflect_2 + l_2},
+                    "eqn": e.eqn_L_Free_L_2_Deflect_2,
                     "sets": [o.Rate]
                 }
             ]
@@ -56,7 +57,7 @@ export const initialState = {
                 },
                 {
                     "refs": [o.Rate, o.Deflect_1],
-                    "eqn": (rate, deflect_1) => {return deflect_1 * rate},
+                    "eqn": e.eqn_Force_1_Rate_Deflect_1,
                     "sets": [o.L_1]
                 }
             ]
@@ -83,7 +84,7 @@ export const initialState = {
                 },
                 {
                     "refs": [o.Rate, o.Deflect_2],
-                    "eqn": (rate, deflect_2) => {return deflect_2 * rate},
+                    "eqn": e.eqn_Force_2_Rate_Deflect_2,
                     "sets": [o.L_2]
                 }
             ]
@@ -110,12 +111,12 @@ export const initialState = {
                 },
                 {
                     "refs": [o.Force_1, o.Deflect_1],
-                    "eqn": (force_1, deflect_1) => {return force_1 / deflect_1},
+                    "eqn": e.eqn_Rate_Force_1_Deflect_1,
                     "sets": [o.L_1]
                 },
                 {
                     "refs": [o.Force_2, o.Deflect_2],
-                    "eqn": (force_2, deflect_2) => {return force_2 / deflect_2},
+                    "eqn": e.eqn_Rate_Force_2_Deflect_2,
                     "sets": [o.L_2]
                 }
             ]
@@ -142,12 +143,12 @@ export const initialState = {
                 },
                 {
                     "refs": [o.Force_1, o.Rate],
-                    "eqn": (force_1, rate) => {return force_1 / rate},
+                    "eqn": e.eqn_Deflect_1_Force_1_Rate,
                     "sets": [o.L_1]
                 },
                 {
                     "refs": [o.L_Free, o.L_1],
-                    "eqn": (l_free, l_1) => {return l_free - l_1},
+                    "eqn": e.eqn_Deflect_1_L_Free_L_1,
                     "sets": [o.Rate]
                 }
             ]
@@ -174,12 +175,12 @@ export const initialState = {
                 },
                 {
                     "refs": [o.Force_2, o.Rate],
-                    "eqn": (force_2, rate) => {return force_2 / rate},
+                    "eqn": e.eqn_Deflect_2_Force_2_Rate,
                     "sets": [o.L_2]
                 },
                 {
                     "refs": [o.L_Free, o.L_2],
-                    "eqn": (l_free, l_2) => {return l_free - l_2},
+                    "eqn": e.eqn_Deflect_2_L_Free_L_2,
                     "sets": [o.Rate]
                 }
             ]
@@ -206,7 +207,7 @@ export const initialState = {
                 },
                 {
                     "refs": [o.L_Free, o.Deflect_1],
-                    "eqn": (l_free, deflect_1) => {return l_free - deflect_1},
+                    "eqn": e.eqn_L_1_L_Free_Deflect_1,
                     "sets": [o.Rate]
                 }
             ]
@@ -233,7 +234,7 @@ export const initialState = {
                 },
                 {
                     "refs": [o.L_Free, o.Deflect_2],
-                    "eqn": (l_free, deflect_2) => {return l_free - deflect_2},
+                    "eqn": e.eqn_L_2_L_Free_Deflect_2,
                     "sets": [o.Rate]
                 }
             ]
@@ -260,7 +261,7 @@ export const initialState = {
                 },
                 {
                     "refs": [o.L_1, o.L_2],
-                    "eqn": (l_1, l_2) => {return l_1 - l_2},
+                    "eqn": e.eqn_L_Stroke_L_1_L_2,
                     "sets": []
                 }
             ]
