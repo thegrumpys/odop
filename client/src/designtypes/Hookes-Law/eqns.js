@@ -10,7 +10,7 @@ export const eqn_Deflect_2_Force_2_Rate = 8;
 export const eqn_Deflect_2_L_Free_L_2 = 9;
 export const eqn_L_1_L_Free_Deflect_1 = 10;
 export const eqn_L_2_L_Free_Deflect_2 = 11;
-export const eqn_L_Stroke_L_1_L_2 = 11;
+export const eqn_L_Stroke_L_1_L_2 = 12;
 
 export const eqns = [
     (l_1, deflect_1) => {return deflect_1 + l_1},

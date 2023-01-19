@@ -6,6 +6,7 @@ import { STARTUP,
     CHANGE_VIEW,
 
     CHANGE_SYMBOL_VALUE,
+    CASCADE_SYMBOL_VALUE,
     CHANGE_SYMBOL_VIOLATION,
     CHANGE_SYMBOL_CONSTRAINT,
     CHANGE_SYMBOL_CONSTRAINTS,
@@ -47,7 +48,7 @@ export function reducers(state, action) {
     var value;
     var name;
 
-//    console.warn('In reducers state=',state,'action=', action);
+    console.warn('In reducers state=',state,'action=', action);
 //    if (action.payload === undefined || action.payload.name === undefined) {
 //        console.log('<li>','In reducers action=', action.type,'</li>');
 //    } else {
@@ -112,6 +113,22 @@ export function reducers(state, action) {
 // SYMBOL
 
     case CHANGE_SYMBOL_VALUE:
+        return Object.assign({}, state, {
+            model: {
+                ...state.model,
+                symbol_table: state.model.symbol_table.map((element) => {
+                    if (element.name === action.payload.name) {
+//                        if (element.name === 'Force_2')
+//                            console.log('In reducers.CHANGE_SYMBOL_VALUE element=',element.name,' old value=',element.value,' new value=',action.payload.value);
+                        return Object.assign({}, element, {
+                            value: action.payload.value
+                        });
+                    }
+                    return element;
+                })
+            }
+        });
+    case CASCADE_SYMBOL_VALUE:
         return Object.assign({}, state, {
             model: {
                 ...state.model,

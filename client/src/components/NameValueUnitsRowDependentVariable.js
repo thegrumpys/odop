@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, UNINITIALIZED } from '../store/actionTypes';
-import { fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
+import { cascadeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
@@ -22,8 +23,34 @@ class NameValueUnitsRowDependentVariable extends Component {
     constructor(props) {
 //        console.log('In NameValueUnitsRowDependentVariable.constructor props=',props)
         super(props);
+        this.onChangeValid = this.onChangeValid.bind(this);
+        this.onChangeInvalid = this.onChangeInvalid.bind(this);
         this.onSet = this.onSet.bind(this);
         this.onReset = this.onReset.bind(this);
+    }
+
+    onChangeValid(event) {
+//        console.log('In NameValueUnitsRowDependentVariable.onChangeValid event.target.value=',event.target.value);
+        var value = parseFloat(event.target.value);
+        var auto_fixed = false; // Needed because cascadeSymbolValue resets the termination condition message
+        if (this.props.system_controls.enable_auto_fix) {
+            auto_fixed = true;
+            if (!(this.props.element.lmin & FIXED)) {
+                this.props.fixSymbolValue(this.props.element.name, value);
+                logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
+            }
+        }
+        this.props.cascadeSymbolValue(this.props.element.name, value); // Update the model
+        logValue(this.props.element.name,event.target.value);
+        if (auto_fixed) {
+            this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
+        }
+        this.props.onChangeValid(event);
+    }
+    
+    onChangeInvalid(event) {
+//        console.log('In NameValueUnitsRowDependentVariable.onChangeInvalid event.target.value=',event.target.value);
+        this.props.onChangeInvalid(event);
     }
 
     onSet() {
@@ -49,7 +76,7 @@ class NameValueUnitsRowDependentVariable extends Component {
             if (this.props.element.type !== "calcinput") {
                 if (this.props.element.input) { // Independent Variable?
                   value_fix_free_text = <div className="mb-3"><em>Fixed status prevents <img src="SearchButton.png" alt="SearchButton"/> from changing the value of this variable.</em></div>; // For Fixed
-                } else {
+                } else { // Dependent Variable?
                   value_fix_free_text = <div className="mb-3"><em>Fixed status restrains the <img src="SearchButton.png" alt="SearchButton"/> result to be as close as possible to the constraint value.</em></div>; // For Fixed
                 }
             }
@@ -78,7 +105,7 @@ class NameValueUnitsRowDependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <FormControlTypeNumber id={'nvurdv_'+this.props.element.name} disabled={true} icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabledText={this.props.element.lmin & UNINITIALIZED ? true : false} />
+                            <FormControlTypeNumber id={'nvurdv_'+this.props.element.name} icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabledText={this.props.element.lmin & UNINITIALIZED ? true : false} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
                             <InputGroup.Append>
                                 <InputGroup.Text>
                                     <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
@@ -95,14 +122,26 @@ class NameValueUnitsRowDependentVariable extends Component {
     }
 }
 
+NameValueUnitsRowDependentVariable.propTypes = {
+    onChangeValid: PropTypes.func,
+    onChangeInvalid: PropTypes.func,
+}
+
+NameValueUnitsRowDependentVariable.defaultProps = {
+    onChangeValid: (()=>{}),
+    onChangeInvalid: (()=>{}),
+}
+
 const mapStateToProps = state => ({
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value
 });
 
-const mapDispatchToDependentVariableProps = {
+const mapDispatchToProps = {
+    cascadeSymbolValue: cascadeSymbolValue,
     fixSymbolValue: fixSymbolValue,
-    freeSymbolValue: freeSymbolValue
+    freeSymbolValue: freeSymbolValue,
+    changeResultTerminationCondition: changeResultTerminationCondition
 };
 
-export default connect(mapStateToProps, mapDispatchToDependentVariableProps)(NameValueUnitsRowDependentVariable);
+export default connect(mapStateToProps, mapDispatchToProps)(NameValueUnitsRowDependentVariable);

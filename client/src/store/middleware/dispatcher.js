@@ -88,9 +88,6 @@ export const dispatcher = store => next => action => {
                         });
                     }
                     invokeInit(store);
-                } else { // element.type === "equationset"
-                    store.dispatch(resetSymbolFlag(element.name,MIN,UNINITIALIZED));
-                    store.dispatch(resetSymbolFlag(element.name,MAX,UNINITIALIZED));
                 }
                 return true;
             } else {
@@ -106,10 +103,11 @@ export const dispatcher = store => next => action => {
     case CASCADE_SYMBOL_VALUE:
 //        console.log('In dispatcher.CASCADE_SYMBOL_VALUE action=',action);
         design = store.getState();
-        store.dispatch(changeSymbolValue(action.payload.name, action.payload.value, action.payload.merit));
         design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
                 if (element.type === "equationset") { // Independent and Dependent Variables, but not Calc Input
+                    store.dispatch(resetSymbolFlag(element.name,MIN,UNINITIALIZED));
+                    store.dispatch(resetSymbolFlag(element.name,MAX,UNINITIALIZED));
                     cascade(store, element, true);
                 }
                 return true;
@@ -128,8 +126,7 @@ export const dispatcher = store => next => action => {
                         store.dispatch(changeSymbolValue(element.name, action.payload.value));
                     }
                     return true; // We're done
-                } else if (element.type === "equationset" && element.input) {
-                    // Independent
+                } else if (element.type === "equationset" && element.input) { // Independent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED));
@@ -137,8 +134,7 @@ export const dispatcher = store => next => action => {
                         store.dispatch(changeSymbolValue(element.name, action.payload.value));
                     }
                     return true; // found
-                } else if (element.type === "equationset" && !element.input) {
-                    // Dependent
+                } else if (element.type === "equationset" && !element.input) { // Dependent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED|CONSTRAINED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED|CONSTRAINED));
