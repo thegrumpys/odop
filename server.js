@@ -70,6 +70,46 @@ function startConnection() {
 // 404 - NOT FOUND, The requested resource could not be found
 // 500 - INTERNAL SERVER ERROR, Unknown server error has occurred
 
+app.get('/api/v1/db_size', authenticationRequired, (req, res) => {
+    var value;
+    var user = req.uid;
+    console.log('SERVER: In GET /api/v1/db_size user=',user);
+    var connection = startConnection();
+    var stmt = `
+SELECT NOW() AS date_time, s.schema_name AS schema_name, sp.grantee AS user, CAST(ROUND(SUM(COALESCE(t.data_length + t.index_length, 0)) / 1024 / 1024, 3) AS CHAR) AS db_size_mb, sp.has_insert AS has_insert
+FROM information_schema.schemata AS s
+INNER JOIN information_schema.tables AS t
+ON s.schema_name = t.table_schema
+INNER JOIN (
+    SELECT spi.grantee,spi.table_schema,MAX(
+        CASE
+            WHEN spi.privilege_type = 'INSERT' THEN 1
+            ELSE 0
+        END
+    ) has_insert
+    FROM information_schema.schema_privileges AS spi
+    GROUP BY spi.grantee, spi.table_schema
+) AS sp
+ON s.schema_name = sp.table_schema
+GROUP BY s.schema_name, sp.grantee, sp.has_insert`;
+//    console.log('SERVER: stmt='+stmt);
+    connection.query(stmt, function(err, rows, fields) {
+//        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+        if (err) {
+            res.status(500).end();
+            connection.end();
+            console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+            throw err;
+        } else {
+            value = rows.map((row) => {return row.db_size_mb});
+//            console.log('SERVER: After SELECT DISTINCT value=', value);
+            res.status(200).json(value);
+            connection.end();
+            console.log('SERVER: 200 - OK');
+        }
+    });
+});
+
 app.get('/api/v1/designtypes', authenticationRequired, (req, res) => {
     var value;
     var user = req.uid;
