@@ -38,9 +38,11 @@ class HelpAbout extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        Link to <a href={'/docs/About/'} target="_blank" rel="noopener noreferrer">About</a> topics
+                        Link to <a href="/docs/About/" target="_blank" rel="noopener noreferrer">About</a> topics
                         <br/>
-                        Link to <a href="https://www.springdesignsoftware.org/" target="_blank" rel="noopener noreferrer">website</a> home page
+                        Link to <a href={'/docs/Help/DesignTypes/' + this.props.type + '/description.html'} target="_blank" rel="noopener noreferrer">{this.props.type} Design Type</a> description
+                        <br/>
+                        Link to <a href="https://www.springdesignsoftware.org/" target="_blank" rel="noopener noreferrer">Spring Design Software Website</a> home page
                         <hr/>
                         This is <a href="https://en.wikipedia.org/wiki/Open-source_software" target="_blank" rel="noopener noreferrer">Open Source </a> software.
                         <br/>
