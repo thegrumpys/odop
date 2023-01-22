@@ -1,6 +1,5 @@
 import { CONSTRAINED, UNINITIALIZED } from '../../store/actionTypes';
 import * as o from './symbol_table_offsets';
-import * as e from './eqns';
 export const initialState = {
     "symbol_table": [
         {
@@ -20,18 +19,9 @@ export const initialState = {
             "hidden": false,
             "eqns": [
                 {
-                    "eqn": null, // User input
-                    "sets": [o.L_1, o.Deflect_1, o.L_2, o.Deflect_2]
-                },
-                {
-                    "refs": [o.L_1, o.Deflect_1],
-                    "eqn": e.eqn_L_Free_L_1_Deflect_1,
-                    "sets": [o.Rate]
-                },
-                {
-                    "refs": [o.L_2, o.Deflect_2],
-                    "eqn": e.eqn_L_Free_L_2_Deflect_2,
-                    "sets": [o.Rate]
+                    "refs": [],
+                    "eqn": false, // User input
+                    "sets": [o.L_1, o.L_2]
                 }
             ]
         },
@@ -52,13 +42,9 @@ export const initialState = {
             "hidden": false,
             "eqns": [
                 {
-                    "eqn": null, // User input
-                    "sets": [o.Rate, o.Deflect_1]
-                },
-                {
-                    "refs": [o.Rate, o.Deflect_1],
-                    "eqn": e.eqn_Force_1_Rate_Deflect_1,
-                    "sets": [o.L_1]
+                    "refs": [],
+                    "eqn": false, // User input
+                    "sets": [o.Deflect_1]
                 }
             ]
         },
@@ -79,13 +65,9 @@ export const initialState = {
             "hidden": false,
             "eqns": [
                 {
-                    "eqn": null, // User input
-                    "sets": [o.Rate, o.Deflect_2]
-                },
-                {
-                    "refs": [o.Rate, o.Deflect_2],
-                    "eqn": e.eqn_Force_2_Rate_Deflect_2,
-                    "sets": [o.L_2]
+                    "refs": [],
+                    "eqn": false, // User input
+                    "sets": [o.Deflect_2]
                 }
             ]
         },
@@ -106,18 +88,9 @@ export const initialState = {
             "hidden": false,
             "eqns": [
                 {
-                    "eqn": null, // User input
-                    "sets": [o.Force_1, o.Deflect_1, o.Force_2, o.Deflect_2]
-                },
-                {
-                    "refs": [o.Force_1, o.Deflect_1],
-                    "eqn": e.eqn_Rate_Force_1_Deflect_1,
-                    "sets": [o.L_1]
-                },
-                {
-                    "refs": [o.Force_2, o.Deflect_2],
-                    "eqn": e.eqn_Rate_Force_2_Deflect_2,
-                    "sets": [o.L_2]
+                    "refs": [],
+                    "eqn": false, // User input
+                    "sets": [o.Deflect_1, o.Deflect_2]
                 }
             ]
         },
@@ -138,18 +111,14 @@ export const initialState = {
             "hidden": false,
             "eqns": [
                 {
-                    "eqn": null, // User input
-                    "sets": [o.Force_1, o.Rate, o.L_Free, o.L_1]
-                },
-                {
                     "refs": [o.Force_1, o.Rate],
-                    "eqn": e.eqn_Deflect_1_Force_1_Rate,
+                    "eqn": false, // User input
                     "sets": [o.L_1]
                 },
                 {
-                    "refs": [o.L_Free, o.L_1],
-                    "eqn": e.eqn_Deflect_1_L_Free_L_1,
-                    "sets": [o.Rate]
+                    "refs": [o.Force_1, o.Rate],
+                    "eqn": true,
+                    "sets": [o.L_1]
                 }
             ]
         },
@@ -170,18 +139,14 @@ export const initialState = {
             "hidden": false,
             "eqns": [
                 {
-                    "eqn": null, // User input
-                    "sets": [o.Force_2, o.Rate, o.L_Free, o.L_2]
-                },
-                {
                     "refs": [o.Force_2, o.Rate],
-                    "eqn": e.eqn_Deflect_2_Force_2_Rate,
+                    "eqn": false, // User input
                     "sets": [o.L_2]
                 },
                 {
-                    "refs": [o.L_Free, o.L_2],
-                    "eqn": e.eqn_Deflect_2_L_Free_L_2,
-                    "sets": [o.Rate]
+                    "refs": [o.Force_2, o.Rate],
+                    "eqn": true,
+                    "sets": [o.L_2]
                 }
             ]
         },
@@ -202,13 +167,14 @@ export const initialState = {
             "hidden": false,
             "eqns": [
                 {
-                    "eqn": null, // User input
-                    "sets": [o.L_Free, o.Deflect_1]
+                    "refs": [o.L_Free, o.Deflect_1],
+                    "eqn": false, // User input
+                    "sets": [o.L_Stroke]
                 },
                 {
                     "refs": [o.L_Free, o.Deflect_1],
-                    "eqn": e.eqn_L_1_L_Free_Deflect_1,
-                    "sets": [o.Rate]
+                    "eqn": true,
+                    "sets": [o.L_Stroke]
                 }
             ]
         },
@@ -229,13 +195,14 @@ export const initialState = {
             "hidden": false,
             "eqns": [
                 {
-                    "eqn": null, // User input
-                    "sets": [o.L_Free, o.Deflect_2]
+                    "refs": [o.L_Free, o.Deflect_2],
+                    "eqn": false, // User input
+                    "sets": [o.L_Stroke]
                 },
                 {
                     "refs": [o.L_Free, o.Deflect_2],
-                    "eqn": e.eqn_L_2_L_Free_Deflect_2,
-                    "sets": [o.Rate]
+                    "eqn": true,
+                    "sets": [o.L_Stroke]
                 }
             ]
         },
@@ -256,12 +223,13 @@ export const initialState = {
             "hidden": false,
             "eqns": [
                 {
-                    "eqn": null, // User input
-                    "sets": [o.L_1, o.L_2]
+                    "refs": [o.L_1, o.L_2],
+                    "eqn": false, // User input
+                    "sets": []
                 },
                 {
                     "refs": [o.L_1, o.L_2],
-                    "eqn": e.eqn_L_Stroke_L_1_L_2,
+                    "eqn": true,
                     "sets": []
                 }
             ]

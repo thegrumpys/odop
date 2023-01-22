@@ -12,6 +12,7 @@ import {
     FREE_SYMBOL_VALUE, 
     CHANGE_SYMBOL_VIOLATION, 
     CHANGE_SYMBOL_CONSTRAINT, 
+    CASCADE_SYMBOL_CONSTRAINT, 
     CHANGE_SYMBOL_CONSTRAINTS, 
     SET_SYMBOL_FLAG, 
     RESET_SYMBOL_FLAG, 
@@ -149,6 +150,17 @@ export function changeSymbolViolation(name, minmax, value) {
 export function changeSymbolConstraint(name, minmax, value) {
     return {
         type: CHANGE_SYMBOL_CONSTRAINT,
+        payload: {
+            name,
+            minmax,
+            value
+        }
+    }
+  }
+
+export function cascadeSymbolConstraint(name, minmax, value) {
+    return {
+        type: CASCADE_SYMBOL_CONSTRAINT,
         payload: {
             name,
             minmax,

@@ -7,6 +7,7 @@ import { STARTUP,
     FIX_SYMBOL_VALUE, 
     FREE_SYMBOL_VALUE, 
     CHANGE_SYMBOL_CONSTRAINT, 
+    CASCADE_SYMBOL_CONSTRAINT,
     SET_SYMBOL_FLAG, 
     RESET_SYMBOL_FLAG, 
     
@@ -106,6 +107,7 @@ export const dispatcher = store => next => action => {
         design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
                 if (element.type === "equationset") { // Independent and Dependent Variables, but not Calc Input
+                    var obj = search(store, design.model.system_controls.objmin);
                     store.dispatch(resetSymbolFlag(element.name,MIN,UNINITIALIZED));
                     store.dispatch(resetSymbolFlag(element.name,MAX,UNINITIALIZED));
                     cascade(store, element, true);
@@ -180,6 +182,24 @@ export const dispatcher = store => next => action => {
     case CHANGE_SYMBOL_CONSTRAINT:
         updateObjectiveValue(store);
         invokeCheck(store);
+        break;
+    case CASCADE_SYMBOL_CONSTRAINT:
+//        console.log('In dispatcher.CASCADE_SYMBOL_CONSTRAINT action=',action);
+        design = store.getState();
+        design.model.symbol_table.find((element) => {
+            if (element.name === action.payload.name) {
+                if (element.type === "equationset") { // Independent and Dependent Variables, but not Calc Input
+                    var obj = search(store, design.model.system_controls.objmin);
+                    store.dispatch(resetSymbolFlag(element.name,MIN,UNINITIALIZED));
+                    store.dispatch(resetSymbolFlag(element.name,MAX,UNINITIALIZED));
+                    cascade(store, element, true);
+                    // Do SEARCH here
+                }
+                return true;
+            } else {
+                return false;
+            }
+        });
         break;
     case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS:
         updateObjectiveValue(store);

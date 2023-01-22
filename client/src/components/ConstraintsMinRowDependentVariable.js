@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
-import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
+import { changeSymbolConstraint, cascadeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
@@ -52,7 +52,7 @@ class ConstraintsMinRowDependentVariable extends Component {
     onChangeValidMinConstraint(event) {
 //        console.log("In ConstraintMinRowDependentVariable.onChangeValidMinConstraint event.target.value=", event.target.value);
         var value = parseFloat(event.target.value);
-        this.props.changeSymbolConstraint(this.props.element.name, MIN, value); // Update the model
+        this.props.cascadeSymbolConstraint(this.props.element.name, MIN, value); // Update the model
         if (this.props.element.lmin & FIXED) {
             this.props.changeSymbolConstraint(this.props.element.name, MAX, value); // Update the model
             logValue(this.props.element.name,event.target.value,'Min&MaxConstraint');
@@ -230,6 +230,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     changeSymbolConstraint: changeSymbolConstraint,
+    cascadeSymbolConstraint: cascadeSymbolConstraint,
     setSymbolFlag: setSymbolFlag,
     resetSymbolFlag: resetSymbolFlag
 };
