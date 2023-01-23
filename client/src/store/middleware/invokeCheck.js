@@ -7,7 +7,7 @@ export function invokeCheck(store) {
 //    console.log('In invokeCheck design=',design);
     
     // Check relationships among symbol tasble variables and create alerts
-    var { checks } = require('../../designtypes/'+design.model.type+'/checks.js'); // Dynamically load eqnset
+    var { checks } = require('../../designtypes/'+design.model.type+'/checks.js'); // Dynamically load checks
     checks(store);
 
 //    console.log('</ul><li>','End invokeCheck','</li>');

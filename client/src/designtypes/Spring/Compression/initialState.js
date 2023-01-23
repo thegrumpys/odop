@@ -15,7 +15,7 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Outside diameter in free (no load) condition",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -31,7 +31,7 @@ export const initialState = {
             "sdlim": 0.01,
             "tooltip": "Wire diameter",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -63,7 +63,7 @@ export const initialState = {
             "sdlim": 1.0,
             "tooltip": "Total number of coils",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -111,15 +111,15 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Average of inside and outside diameters",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
             "name": "Coils_A",
             "value": 8.0,
             "units": "coils",
-            "lmin": 0,
-            "lmax": 0,
+            "lmin": CONSTRAINED,
+            "lmax": CONSTRAINED,
             "cmin": 1.0,
             "cmax": 50.0,
             "validmin": 0.0,
@@ -127,7 +127,7 @@ export const initialState = {
             "sdlim": 1.0,
             "tooltip": "Number of Active coils",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -241,7 +241,7 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Spring length when fully compressed",
             "type": "equationset",
-            "hidden": true,
+            "hidden": false,
             "propagate": [{ name: "L_2", minmax: VALID_MIN }]
         },
         {
@@ -258,7 +258,7 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Ratio of free length (L_Free) to mean diameter (Mean_Dia)",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -274,7 +274,7 @@ export const initialState = {
             "sdlim": 0.01,
             "tooltip": "Inside diameter in free (no load) condition",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -290,15 +290,15 @@ export const initialState = {
             "sdlim": 0.001,
             "tooltip": "Weight of one spring",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
             "name": "Spring_Index",
             "value": 9.426,
             "units": "ratio",
-            "lmin": 0,
-            "lmax": 0,
+            "lmin": CONSTRAINED,
+            "lmax": CONSTRAINED,
             "cmin": 4.0,
             "cmax": 25.0,
             "validmin": 1.0,
@@ -306,7 +306,7 @@ export const initialState = {
             "sdlim": 1.0,
             "tooltip": "Ratio of mean coil diameter (Mean_Dia) to wire diameter (Wire_Dia)",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -322,7 +322,7 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Load required to fully compress the spring",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -338,7 +338,7 @@ export const initialState = {
             "sdlim": 1000.0,
             "tooltip": "Torsion stress in wire at load point 1",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -354,7 +354,7 @@ export const initialState = {
             "sdlim": 10000.0,
             "tooltip": "Torsion stress in wire at load point 2",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -370,15 +370,15 @@ export const initialState = {
             "sdlim": 1000.0,
             "tooltip": "Torsion stress in wire when spring is fully compressed",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
             "name": "FS_2",
             "value": 1.3127,
             "units": "ratio",
-            "lmin": 0,
-            "lmax": 0,
+            "lmin": CONSTRAINED,
+            "lmax": CONSTRAINED,
             "cmin": 1.02,
             "cmax": 1.5,
             "validmin": 0.0,
@@ -386,14 +386,14 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Factor of safety at load point 2",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
             "name": "FS_Solid",
             "value": 1.057,
             "units": "ratio",
-            "lmin": 0,
+            "lmin": CONSTRAINED,
             "lmax": 0,
             "cmin": 1.0,
             "cmax": 1.5,
@@ -402,7 +402,7 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Factor of safety when the spring is fully compressed",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -418,7 +418,7 @@ export const initialState = {
             "sdlim": 0.1,
             "tooltip": "Factor of safety to achieve the target cycle life category. See on-line Help.",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -434,7 +434,7 @@ export const initialState = {
             "sdlim": 10000.0,
             "tooltip": "Rough estimate of the average number of cycles to failure when cycling between point 1 and point 2. See on-line Help.",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -442,7 +442,7 @@ export const initialState = {
             "value": 80.52,
             "units": "%",
             "lmin": 0,
-            "lmax": 0,
+            "lmax": CONSTRAINED,
             "cmin": 1.0,
             "cmax": 90.0,
             "validmin": 0.0,
@@ -450,7 +450,7 @@ export const initialState = {
             "sdlim": 10.0,
             "tooltip": "Deflection of load point 2 as a percent of total available deflection",
             "type": "equationset",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -485,7 +485,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Prop_Calc_Method",
-            "value": 3,
+            "value": 1,
             "units": "",
             "format": "table",
             "table": "Spring/Compression/prop_calc",
@@ -496,7 +496,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Property Calculation Method - Controls how material properties are determined and used.  1-Use values from material table  2-Specify Tensile, %_Tensile_Stat & %_Tensile_Endur  3-Specify allowable stresses: Stress_Lim_Stat & Stress_Lim_Endur",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -512,7 +512,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Select wire material",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -526,7 +526,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Wire specification",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -540,7 +540,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Coil winding process temperature - Cold coiled vs. Hot wound",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -570,7 +570,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Select cycle life target. Confirm that FS_CycleLife MIN constraint is enabled to utilize the selected %_Tensile_Endur for the material.",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -586,7 +586,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Wire material density",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -602,7 +602,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Wire torsion modulus (G)",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -618,7 +618,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Reduction factor applied to modulus of hot-wound materials",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -634,7 +634,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Wire tensile strength (computed as a function of wire diameter when Prop_Calc_Method=1; See on-line Help for details)",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -650,7 +650,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Allowable percent of tensile strength for selected life cycle category",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -666,7 +666,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Allowable percent of tensile strength for static applications",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -682,7 +682,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Allowable stress for selected life cycle category",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -698,7 +698,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Allowable stress for static applications",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -714,7 +714,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Select end type",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -730,7 +730,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Number of coils not contributing to deflection. Depends on End_Type.",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
@@ -746,7 +746,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Adjusts calculation of L_Solid. Depends on End_Type. See on-line Help for details.",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -760,7 +760,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Name of the catalog from which the catalog entry was selected",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": false,
@@ -774,7 +774,7 @@ export const initialState = {
             "sdlim": 0.0,
             "tooltip": "Catalog entry which was selected from the named catalog",
             "type": "calcinput",
-            "hidden": true
+            "hidden": false
         },
         {
             "input": true,
