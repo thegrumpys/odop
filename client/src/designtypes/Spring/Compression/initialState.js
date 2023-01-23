@@ -70,11 +70,11 @@ export const initialState = {
             "eqns": [{
                 "refs": [],
                 "eqn": false, // User input
-                "sets": [],
+                "sets": [o.L_1, o.L_2],
             },{
                 "refs": [],
                 "eqn": true, // Compute
-                "sets": [],
+                "sets": [o.L_1, o.L_2],
             }]
         },
         {
@@ -120,11 +120,11 @@ export const initialState = {
             "eqns": [{
                 "refs": [],
                 "eqn": false, // User input
-                "sets": [],
+                "sets": [o.Deflect_1],
             },{
                 "refs": [],
                 "eqn": true, // Compute
-                "sets": [],
+                "sets": [o.Deflect_1],
             }]
         },
         {
@@ -145,11 +145,11 @@ export const initialState = {
             "eqns": [{
                 "refs": [],
                 "eqn": false, // User input
-                "sets": [],
+                "sets": [o.Deflect_2],
             },{
                 "refs": [],
                 "eqn": true, // Compute
-                "sets": [],
+                "sets": [o.Deflect_2],
             }]
         },
         {
@@ -182,8 +182,8 @@ export const initialState = {
             "name": "Coils_A",
             "value": 8.0,
             "units": "coils",
-            "lmin": CONSTRAINED,
-            "lmax": CONSTRAINED,
+            "lmin": CONSTRAINED|UNINITIALIZED,
+            "lmax": CONSTRAINED|UNINITIALIZED,
             "cmin": 1.0,
             "cmax": 50.0,
             "validmin": 0.0,
@@ -220,11 +220,11 @@ export const initialState = {
             "eqns": [{
                 "refs": [],
                 "eqn": false, // User input
-                "sets": [],
+                "sets": [o.Deflect_1, o.Deflect_2],
             },{
                 "refs": [],
                 "eqn": true, // Compute
-                "sets": [],
+                "sets": [o.Deflect_1, o.Deflect_2],
             }]
         },
         {
@@ -243,13 +243,13 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [],
+                "refs": [o.Force_1, o.Rate],
                 "eqn": false, // User input
-                "sets": [],
+                "sets": [o.L_1],
             },{
-                "refs": [],
+                "refs": [o.Force_1, o.Rate],
                 "eqn": true, // Compute
-                "sets": [],
+                "sets": [o.L_1],
             }]
         },
         {
@@ -268,13 +268,13 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [],
+                "refs": [o.Force_2, o.Rate],
                 "eqn": false, // User input
-                "sets": [],
+                "sets": [o.L_2],
             },{
-                "refs": [],
+                "refs": [o.Force_2, o.Rate],
                 "eqn": true, // Compute
-                "sets": [],
+                "sets": [o.L_2],
             }]
         },
         {
@@ -293,13 +293,13 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [],
+                "refs": [o.Deflect_1, o.L_Free],
                 "eqn": false, // User input
-                "sets": [],
+                "sets": [o.L_Stroke],
             },{
-                "refs": [],
+                "refs": [o.Deflect_1, o.L_Free],
                 "eqn": true, // Compute
-                "sets": [],
+                "sets": [o.L_Stroke],
             }]
         },
         {
@@ -320,13 +320,13 @@ export const initialState = {
             "validminchoices": [ "L_Solid" ],
             "validminchoice": 0,
             "eqns": [{
-                "refs": [],
+                "refs": [o.Deflect_2, o.L_Free],
                 "eqn": false, // User input
-                "sets": [],
+                "sets": [o.L_Stroke],
             },{
-                "refs": [],
+                "refs": [o.Deflect_2, o.L_Free],
                 "eqn": true, // Compute
-                "sets": [],
+                "sets": [o.L_Stroke],
             }]
         },
         {
@@ -345,11 +345,11 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [],
+                "refs": [o.L_1, o.L_2],
                 "eqn": false, // User input
                 "sets": [],
             },{
-                "refs": [],
+                "refs": [o.L_1, o.L_2],
                 "eqn": true, // Compute
                 "sets": [],
             }]
