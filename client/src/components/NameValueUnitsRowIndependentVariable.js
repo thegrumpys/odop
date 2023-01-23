@@ -76,7 +76,7 @@ class NameValueUnitsRowIndependentVariable extends Component {
             if (this.props.element.type !== "calcinput") {
                 if (this.props.element.input) { // Independent Variable?
                   value_fix_free_text = <div className="mb-3"><em>Fixed status prevents <img src="SearchButton.png" alt="SearchButton"/> from changing the value of this variable.</em></div>; // For Fixed
-                } else {
+                } else { // Dependent Variable?
                   value_fix_free_text = <div className="mb-3"><em>Fixed status restrains the <img src="SearchButton.png" alt="SearchButton"/> result to be as close as possible to the constraint value.</em></div>; // For Fixed
                 }
             }
@@ -133,9 +133,9 @@ NameValueUnitsRowIndependentVariable.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-    type: state.model.type,
     system_controls: state.model.system_controls,
-    objective_value: state.model.result.objective_value});
+    objective_value: state.model.result.objective_value
+});
 
 const mapDispatchToProps = {
     changeSymbolValue: changeSymbolValue,

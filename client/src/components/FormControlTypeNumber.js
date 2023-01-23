@@ -33,15 +33,13 @@ class FormControlTypeNumber extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (Number.isFinite(this.props.value) && prevProps.value !== this.props.value) {
-//            console.log('In FormControlTypeNumber.componentDidUpdate prevProps.value=',prevProps.value,'props.value=',this.props.value,'value=',this.state.value,'valueString=',this.state.valueString);
-            if (this.props.value !== this.state.value) { // Only update our internal state value if they differ leaving the valueString unchanged.
-                var value = parseFloat(this.props.value);
-                this.setState({
-                    value: value,
-                    valueString: value.toString(), // Update the display
-                });
-            }
+        if (Number.isFinite(this.props.value) && (prevProps.value !== this.props.value || this.props.value !== this.state.value)) {
+//            console.log('In FormControlTypeNumber.componentDidUpdate','prevProps.value=',prevProps.value,'props.value=',this.props.value,'value=',this.state.value,'valueString=',this.state.valueString,'id=',this.props.id);
+            var value = parseFloat(this.props.value);
+            this.setState({
+                value: value,
+                valueString: value.toString(), // Update the display
+            });
         }
     }
 

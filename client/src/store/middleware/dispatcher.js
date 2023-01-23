@@ -108,8 +108,7 @@ export const dispatcher = store => next => action => {
                         store.dispatch(changeSymbolValue(element.name, action.payload.value));
                     }
                     return true; // We're done
-                } else if (element.type === "equationset" && element.input) {
-                    // Independent
+                } else if (element.type === "equationset" && element.input) { // Independent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED));
@@ -117,8 +116,7 @@ export const dispatcher = store => next => action => {
                         store.dispatch(changeSymbolValue(element.name, action.payload.value));
                     }
                     return true; // found
-                } else if (element.type === "equationset" && !element.input) {
-                    // Dependent
+                } else if (element.type === "equationset" && !element.input) { // Dependent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED|CONSTRAINED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED|CONSTRAINED));

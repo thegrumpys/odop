@@ -1,8 +1,8 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
+import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { FIXED, CONSTRAINED } from '../store/actionTypes';
-import { changeSymbolValue } from '../store/actionCreators';
+import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
 import NameValueUnitsHeaderIndependentVariable from './NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from './NameValueUnitsHeaderDependentVariable';
@@ -21,6 +21,8 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { logValue } from '../logUsage';
 import { logUsage } from '../logUsage';
 import { getAlertsByName } from './Alerts';
+import { search, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../store/actionCreators';
+import { displayMessage } from '../components/MessageModal';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -40,6 +42,8 @@ class SymbolValue extends Component {
         this.onContextMenu = this.onContextMenu.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.onReset = this.onReset.bind(this);
+        this.onSearch = this.onSearch.bind(this);
         this.onChangeValidValue = this.onChangeValidValue.bind(this);
         this.onChangeInvalidValue = this.onChangeInvalidValue.bind(this);
         this.onChangeValidMinConstraint = this.onChangeValidMinConstraint.bind(this);
@@ -52,6 +56,7 @@ class SymbolValue extends Component {
                 isInvalidValue: false,
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
+                error: '',
             };
         } else if (this.props.element.format === 'table') {
 //            console.log('In SymbolValue.constructor file= ../designtypes/'+this.props.element.table+'.json');
@@ -63,6 +68,7 @@ class SymbolValue extends Component {
                 isInvalidValue: false,
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
+                error: '',
             };
         } else {
             this.state = {
@@ -70,6 +76,7 @@ class SymbolValue extends Component {
                 isInvalidValue: false,
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
+                error: '',
             };
         }
     }
@@ -105,6 +112,9 @@ class SymbolValue extends Component {
         e.preventDefault();
         this.setState({
             modal: true,
+            element: this.props.element,
+            error: '',
+            modified: false,
         });
     }
 
@@ -112,22 +122,86 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.onContextHelp this=',this);
         logUsage('event', 'SymbolValue', { event_label: 'context Help button' });
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
+            modified: false,
         });
         window.open('/docs/Help/settingValues.html', '_blank');
     }
 
     onClose() {
-//        console.log('In SymbolValue.onCancel this=',this);
+//        console.log('In SymbolValue.onClose this=',this);
         this.setState({
             modal: false,
+            modified: false,
         });
+    }
+
+    onReset() {
+//        console.log('In SymbolValue.onReset this=',this);
+        this.props.changeSymbolValue(this.state.element.name, this.state.element.value); // Reset the value back to what it was
+        if (this.state.element.lmin & FIXED) {
+            this.props.setSymbolFlag(this.state.element.name, MIN, FIXED);
+        } else {
+            this.props.resetSymbolFlag(this.state.element.name, MIN, FIXED);
+        }
+        if (this.state.element.lmax & FIXED) {
+            this.props.setSymbolFlag(this.state.element.name, MAX, FIXED);
+        } else {
+            this.props.resetSymbolFlag(this.state.element.name, MAX, FIXED);
+        }
+        this.props.changeSymbolConstraint(this.state.element.name, MIN, this.state.element.cmin);
+        this.props.changeSymbolConstraint(this.state.element.name, MAX, this.state.element.cmin);
+        if (this.state.element.lmin & CONSTRAINED) {
+            this.props.setSymbolFlag(this.state.element.name, MIN, CONSTRAINED);
+        } else {
+            this.props.resetSymbolFlag(this.state.element.name, MIN, CONSTRAINED);
+        }
+        if (this.state.element.lmax & CONSTRAINED) {
+            this.props.setSymbolFlag(this.state.element.name, MAX, CONSTRAINED);
+        } else {
+            this.props.resetSymbolFlag(this.state.element.name, MAX, CONSTRAINED);
+        }
+        this.setState({
+            modified: false,
+        });
+    }
+
+    onSearch() {
+//        console.log('In SymbolValue.onSearch this=',this);
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+        }
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            }
+        });
+        var old_objective_value = this.props.objective_value.toPrecision(4);
+        this.props.saveAutoSave();
+        this.props.search();
+        const { store } = this.context;
+        var design = store.getState();
+        var new_objective_value = design.model.result.objective_value.toPrecision(4)
+        logUsage('event', 'ActionSearch', { event_label: 'Button ' + old_objective_value + ' --> ' + new_objective_value});
+//        console.log('In SymbolValue.onSearch','old_objective_value=',old_objective_value,'new_objective_value=',new_objective_value);
+
+        if (design.model.result.objective_value < this.props.system_controls.objmin) {
+            this.setState({
+                modal: false,
+                modified: false,
+            });
+        } else {
+            this.setState({
+                error: 'Search returned not feasible',
+            });
+        }
     }
 
     onChangeValidValue(event) {
 //        console.log('In SymbolValue.onChangeValidValue this=',this);
         this.setState({
             isInvalidValue: false,
+            modified: true,
         });
         logValue(this.props.element.name,event.target.value);
     }
@@ -136,6 +210,7 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.onChangeInvalidValue this=',this);
         this.setState({
             isInvalidValue: true,
+            modified: true,
         });
     }
 
@@ -143,6 +218,7 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.onChangeValidMinConstraint this=',this);
         this.setState({
             isInvalidMinConstraint: false,
+            modified: true,
         });
     }
 
@@ -150,6 +226,7 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.onChangeInvalidMinConstraint this=',this);
         this.setState({
             isInvalidMinConstraint: true,
+            modified: true,
         });
     }
 
@@ -157,6 +234,7 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.onChangeValidMaxConstraint this=',this);
         this.setState({
             isInvalidMaxConstraint: false,
+            modified: true,
         });
     }
 
@@ -164,6 +242,7 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.onChangeInvalidMaxConstraint this=',this);
         this.setState({
             isInvalidMaxConstraint: true,
+            modified: true,
         });
     }
 
@@ -215,13 +294,14 @@ class SymbolValue extends Component {
                         : ''}
                     </InputGroup>
                 </td>
-                <Modal show={this.state.modal} onHide={this.onClose}>
+                <Modal show={this.state.modal} onHide={this.props.system_controls.enable_auto_search && this.state.modified ? this.onReset : this.onClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>
                         {this.props.element.type === "equationset" && (this.props.element.input ? 'Independent Variable' : 'Dependent Variable')} Value Input
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                        {this.state.error !== '' ? <Alert variant="danger"> {this.state.error} </Alert> : ''}
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
@@ -276,9 +356,9 @@ class SymbolValue extends Component {
                         </Table>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}
-                        &nbsp;
-                        <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
+                        <><Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}&nbsp;</>
+                        {this.props.system_controls.enable_auto_search && this.state.modified ? <><Button variant="secondary" onClick={this.onReset}>Reset</Button>&nbsp;</> : ''}
+                        <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.props.system_controls.enable_auto_search ? this.onSearch : this.onClose}>{this.props.system_controls.enable_auto_search && this.props.objective_value >= this.props.system_controls.objmin ? <><b>Search</b> (solve)</> : 'Close'}</Button>
                     </Modal.Footer>
                 </Modal>
             </>
@@ -286,14 +366,24 @@ class SymbolValue extends Component {
     }
 }
 
+SymbolValue.contextTypes = {
+    store: PropTypes.object
+};
+
 const mapStateToProps = state => ({
     type: state.model.type,
+    symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value
 });
 
 const mapDispatchToProps = {
+    search: search,
+    saveAutoSave: saveAutoSave,
     changeSymbolValue: changeSymbolValue,
+    setSymbolFlag: setSymbolFlag,
+    resetSymbolFlag: resetSymbolFlag,
+    changeSymbolConstraint: changeSymbolConstraint,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SymbolValue);
