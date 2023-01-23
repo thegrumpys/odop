@@ -26,7 +26,7 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   node_env = process.env.REACT_APP_NODE_ENV || process.env.NODE_ENV;
   issuer = process.env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
   clientId = process.env.REACT_APP_CLIENT_ID || '{clientId}';
-  env_types = process.env.REACT_APP_DESIGN_TYPES || '["Piston-Cylinder","Solid","Spring/Compression","Spring/Extension","Spring/Torsion"]';
+  env_types = process.env.REACT_APP_DESIGN_TYPES || '["Hookes-Law", Piston-Cylinder","Solid","Spring/Compression","Spring/Extension","Spring/Torsion"]';
   env_types = JSON.parse(env_types);
   env_type = process.env.REACT_APP_DESIGN_TYPE || 'Spring/Compression';
   env_name = process.env.REACT_APP_DESIGN_NAME || 'Startup';
@@ -47,7 +47,7 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   node_env = env.REACT_APP_NODE_ENV || env.NODE_ENV;
   issuer = env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
   clientId = env.REACT_APP_CLIENT_ID || '{clientId}';
-  env_types =  env.REACT_APP_DESIGN_XXXX || '["Piston-Cylinder","Solid","Spring/Compression","Spring/Extension","Spring/Torsion"]';
+  env_types =  env.REACT_APP_DESIGN_TYPES || '["Hookes-Law","Piston-Cylinder","Solid","Spring/Compression","Spring/Extension","Spring/Torsion"]';
   env_types = JSON.parse(env_types);
   env_type = env.REACT_APP_DESIGN_TYPE || 'Spring/Compression';
   env_name = env.REACT_APP_DESIGN_NAME || 'Startup';

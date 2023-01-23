@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
-import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
+import { changeSymbolConstraint, cascadeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
@@ -58,7 +58,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
         } else {
             logValue(this.props.element.name,event.target.value,'MaxConstraint');
         }
-        this.props.changeSymbolConstraint(this.props.element.name, MAX, value); // Update the model
+        this.props.cascadeSymbolConstraint(this.props.element.name, MAX, value); // Update the model
         this.props.onChangeValid();
     }
 
@@ -230,6 +230,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     changeSymbolConstraint: changeSymbolConstraint,
+    cascadeSymbolConstraint: cascadeSymbolConstraint,
     setSymbolFlag: setSymbolFlag,
     resetSymbolFlag: resetSymbolFlag
 };

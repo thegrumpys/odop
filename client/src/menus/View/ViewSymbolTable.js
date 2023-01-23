@@ -24,7 +24,12 @@ class ViewSymbolTable extends Component {
 
     render() {
 //        console.log('In ViewSymbolTable.render this.props=', this.props);
-        var flags = ['','CONSTRAINED','FIXED','CONSTRAINED|FIXED','FDCL','CONSTRAINED|FDCL','FIXED|FDCL','CONSTRAINED|FIXED|FDCL']
+        var flags = [
+            '','CONSTRAINED','FIXED','CONSTRAINED|FIXED',
+            'FDCL','CONSTRAINED|FDCL','FIXED|FDCL','CONSTRAINED|FIXED|FDCL',
+            'UNINITIALIZED','CONSTRAINED|UNINITIALIZED','FIXED|UNINITIALIZED','CONSTRAINED|FIXED|UNINITIALIZED',
+            'FDCL|UNINITIALIZED','CONSTRAINED|FDCL|UNINITIALIZED','FIXED|FDCL|UNINITIALIZED','CONSTRAINED|FIXED|FDCL|UNINITIALIZED'
+        ]
         var yn = b => b ? 'Y' : 'N';
         return (
             <>
