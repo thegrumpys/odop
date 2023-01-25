@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { FIXED, CONSTRAINED } from '../../store/actionTypes';
-import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../../store/actionCreators';
+import { FIXED, CONSTRAINED, UNINITIALIZED } from '../../store/actionTypes';
+import { cascadeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../../store/actionCreators';
 import * as mo from './mat_offsets';
 import NameValueUnitsHeaderIndependentVariable from '../../components/NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from '../../components/NameValueUnitsHeaderDependentVariable';
@@ -66,7 +66,7 @@ class SymbolValueWireDia extends Component {
 
     onChange(event) {
 //        console.log('In SymbolValueWireDia.onChange event.target.value=',event.target.value);
-        var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
+        var auto_fixed = false; // Needed because cascadeSymbolValue resets the termination condition message
         if (this.props.system_controls.enable_auto_fix) {
             auto_fixed = true;
             if (!(this.props.element.lmin & FIXED)) {
@@ -74,7 +74,7 @@ class SymbolValueWireDia extends Component {
                 logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
             }
         }
-        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
+        this.props.cascadeSymbolValue(this.props.element.name, parseFloat(event.target.value));
         logValue(this.props.element.name,event.target.value,'Value');
         if (auto_fixed) {
             this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
@@ -83,7 +83,7 @@ class SymbolValueWireDia extends Component {
 
     onSelect(event) {
 //        console.log('In SymbolValueWireDia.onSelect event.target.value=',event.target.value);
-        var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
+        var auto_fixed = false; // Needed because cascadeSymbolValue resets the termination condition message
         if (this.props.system_controls.enable_auto_fix && !(this.props.element.lmin & FIXED)) {
             auto_fixed = true;
             if (!(this.props.element.lmin & FIXED)) {
@@ -93,7 +93,7 @@ class SymbolValueWireDia extends Component {
         }
         var wire_dia = parseFloat(event.target.value);
 //        console.log('In SymbolValueWireDia.onSelect wire_dia=',wire_dia);
-        this.props.changeSymbolValue(this.props.element.name,wire_dia);
+        this.props.cascadeSymbolValue(this.props.element.name,wire_dia);
         logValue(this.props.element.name,wire_dia,'TableValue');
         if (auto_fixed) {
             this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
@@ -252,10 +252,10 @@ class SymbolValueWireDia extends Component {
                     <InputGroup>
                         {(sv_value_tooltip !== undefined ?
                             <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">{sv_value_tooltip}</Tooltip>}>
-                                <Form.Control readOnly type="text" className={sv_value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
+                                <Form.Control readOnly type="text" className={sv_value_class} value={this.props.element.lmin & UNINITIALIZED ? '' : (default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value)} onClick={this.onContextMenu} />
                             </OverlayTrigger>
                         :
-                            <Form.Control readOnly type="text" className={sv_value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
+                            <Form.Control readOnly type="text" className={sv_value_class} value={this.props.element.lmin & UNINITIALIZED ? '' : (default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value)} onClick={this.onContextMenu} />
                         )}
                     </InputGroup>
                 </td>
@@ -292,9 +292,9 @@ class SymbolValueWireDia extends Component {
                                             <td className="align-middle" colSpan="2">
                                                 <InputGroup>
                                                     {(this.state.value_input ?
-                                                        <FormControlTypeNumber id={'svwd_'+this.props.element.name} icon_alerts={nvu_icon_alerts} className={nvu_value_class} step="any" value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChange={this.onChange} />
+                                                        <FormControlTypeNumber id={'svwd_'+this.props.element.name} icon_alerts={nvu_icon_alerts} className={nvu_value_class} step="any" value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabledText={this.props.element.lmin & UNINITIALIZED ? true : false} onChange={this.onChange} />
                                                     :
-                                                        <Form.Control as="select" id={'svwd_'+this.props.element.name} disabled={!this.props.element.input} className={nvu_value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
+                                                        <Form.Control as="select" id={'svwd_'+this.props.element.name} disabled={!this.props.element.input} className={nvu_value_class} value={(default_value === undefined ? this.props.element.value : default_value[0])} onChange={this.onSelect} >
                                                             {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
                                                         </Form.Control>
                                                     )}
@@ -366,7 +366,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    changeSymbolValue: changeSymbolValue,
+    cascadeSymbolValue: cascadeSymbolValue,
     fixSymbolValue: fixSymbolValue,
     freeSymbolValue: freeSymbolValue,
     changeResultTerminationCondition: changeResultTerminationCondition
