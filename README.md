@@ -3,8 +3,10 @@
 ODOP provides features and capabilities to facilitate the analysis and optimal design 
 of a broad range of problems that have a mathematical model available.   
 
+[SpringDesignSoftware.org](https://springdesignsoftware.org) provides the best introduction to the spring design app.
+
 Read [About ODOP](https://odop.herokuapp.com/docs/About), including the Introduction, Requirements, Getting Started and Contact Us pages. 
-More detail is available in the [On-line Help](https://odop.herokuapp.com/docs/Help) facility and [SpringDesignSoftware.org](https://springdesignsoftware.org).   
+More detail is available in the [On-line Help](https://odop.herokuapp.com/docs/Help) facility.   
 
 **Currently available apps include:**
 
