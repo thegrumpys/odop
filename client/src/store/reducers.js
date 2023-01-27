@@ -67,7 +67,7 @@ export function reducers(state, action) {
         state = Object.assign({}, state, { 
             ...action.payload.design
         });
-//        console.log('In reducers.LOAD action.payload.design=',action.payload.design,'state=',state);
+ //      console.log('In reducers.LOAD action.payload.design=',action.payload.design,'state=',state);
         return state;
     case LOAD_INITIAL_STATE:
 //        console.log('In reducers.LOAD_INITIAL_STATE');
@@ -104,7 +104,7 @@ export function reducers(state, action) {
     case CHANGE_VIEW:
         state = Object.assign({}, {
             ...state,
-            view: action.payload.view
+        //    view: action.payload.view
         });
 //        console.log('In reducers.CHANGE_VIEW action.payload.view=',action.payload.view,'state=',state);
         return state;

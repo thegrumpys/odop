@@ -122,7 +122,7 @@ class ResultTable extends Component {
 //          < OBJMIN        FEASIBLE                Green (or cyan)  #28a745
 //          < 4x OBJMIN     CLOSE TO FEASIBLE       Orange           #fd7e14
 //          > 4x OBJMIN     NOT FEASIBLE            Red              #dc3545
-        var feasibility_string;
+      var feasibility_string;
         var feasibility_class;
         var display_search_button;
         if (this.props.objective_value > 4*this.props.system_controls.objmin) {
@@ -226,9 +226,7 @@ class ResultTable extends Component {
                                 <Button variant="outline-secondary" onClick={() => this.onSeekMinMaxSelect(MAX)} active={this.state.seek_minmax === MAX}> Max </Button>
                             </ButtonGroup>
                             &nbsp;
-                            <InputGroup.Prepend>
                                 <InputGroup.Text>Name: </InputGroup.Text>
-                            </InputGroup.Prepend>
                             <Form.Control as="select" className="align-middle" onChange={this.onSeekNameSelect} value={this.state.seek_name}>
                                 {this.props.symbol_table.map((element, index) =>
                                     (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''

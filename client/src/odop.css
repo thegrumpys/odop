@@ -1,3 +1,24 @@
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+.input-group-text {
+    padding-top: 0;
+    padding-bottom: 0.75rem;
+}
+
+.modal-header .btn-close {
+    border: none;
+    background: white;
+    padding: 0.5rem;
+    outline: none;
+}
+
+.modal-header .btn-close:before {
+    content: '×';
+    font-size: 1.75rem;
+    align-items: center;
+    display: flex;
+    height: 10px;
+
+}

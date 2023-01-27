@@ -28,9 +28,6 @@ class Routes extends Component {
         this.state = {
             modal: false,
         };
-    this.restoreOriginalUri = async (_oktaAuth, originalUri) => {
-      props.history.replace(toRelativeUrl(originalUri || '/', window.location.origin));
-    };
   }
 
   componentDidMount() {
@@ -123,11 +120,7 @@ class Routes extends Component {
   getDesign(user, type, name) {
 //      console.log('In Routes.getDesign user=',user,'type=',type,'name=',name);
       displaySpinner(true);
-      fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
-          headers: {
-              Authorization: 'Bearer ' + user
-          }
-      })
+      fetch(`/designtypes/${encodeURIComponent(type)}/designs/${encodeURIComponent(name)}.json`)
       .then(res => {
           displaySpinner(false);
           if (!res.ok) {
@@ -171,18 +164,13 @@ class Routes extends Component {
 
   render() {
 //    console.log('In Routes.render this=',this);
-    const oktaAuth = new OktaAuth({...config.oidc});
     return (
         <>
-            <Security oktaAuth={oktaAuth}
-                      onAuthRequired={this.onAuthRequired}
-                      restoreOriginalUri={this.restoreOriginalUri} >
               <BrowserRoutes>
                 <Route path='/' exact={true} element={<MainPage />} />
                 <Route path='/login' render={() => <SignInPage />} />
                 <Route path='/implicit/callback' element={<LoginCallback />} />
               </BrowserRoutes>
-            </Security>
             <Modal show={this.state.modal} onHide={this.loadDefaultDesign}>
                 <Modal.Header closeButton><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
                 <Modal.Body>
@@ -203,15 +191,15 @@ const mapStateToProps = state => ({
     user: state.user,
     name: state.name,
     view: state.view,
-    type: state.model.type,
+    type: 'Spring/Compression',
 });
 
 const mapDispatchToProps = {
-    load: load,
-    loadInitialState: loadInitialState,
-    restoreAutoSave: restoreAutoSave,
-    deleteAutoSave: deleteAutoSave,
-    changeName: changeName,
+    load,
+    loadInitialState,
+    restoreAutoSave,
+    deleteAutoSave,
+    changeName,
 };
 
 export default connect(

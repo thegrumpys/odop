@@ -96,10 +96,10 @@ class FileImport extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form.File custom>
-                            <Form.File.Input accept=".json" onChange={this.onFileChange} />
-                            <Form.File.Label data-browse="Select File">{this.state.selectedFile == null ? 'No File Selected' : this.state.selectedFile.name}</Form.File.Label>
-                        </Form.File>
+                        {/*<Form.File custom>*/}
+                        {/*    <Form.File.Input accept=".json" onChange={this.onFileChange} />*/}
+                        {/*    <Form.File.Label data-browse="Select File">{this.state.selectedFile == null ? 'No File Selected' : this.state.selectedFile.name}</Form.File.Label>*/}
+                        {/*</Form.File>*/}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}

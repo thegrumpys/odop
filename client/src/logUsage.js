@@ -77,10 +77,10 @@ export function logValue(name,value,suffix='',merge=true) {
 
 export function logUsage(tag, action, note) {
 //    console.log('In logUsage tag=',tag,'action=',action,'note=',note);
-    flushBuffer();
-    var sequenced_note = Object.assign({event_value: sequence++}, note);
-    if (process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
-        window.gtag(tag, action, sequenced_note); // Output to Google Analytics
-    }
-    logIt(tag, action, sequenced_note);
+//     flushBuffer();
+//     var sequenced_note = Object.assign({event_value: sequence++}, note);
+//     if (process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
+//         window.gtag(tag, action, sequenced_note); // Output to Google Analytics
+//     }
+//     logIt(tag, action, sequenced_note);
 }

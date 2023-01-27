@@ -21,7 +21,6 @@
     "url": "https://github.com/thegrumpys/odop/issues"
   },
   "homepage": "https://odop.heroku.com/",
-  "proxy": "http://localhost:5000",
   "browserslist": [
     ">0.2%",
     "not dead",

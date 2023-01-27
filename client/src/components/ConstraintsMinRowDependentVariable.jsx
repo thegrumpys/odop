@@ -145,11 +145,9 @@ class ConstraintsMinRowDependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <InputGroup.Prepend>
                                 <InputGroup.Text>
-                                    <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetFlagMinConstrained : this.onSetFlagMinConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
+                                    <Form.Check className='form-check' type="checkbox" aria-label="Checkbox for minimum value" checked={this.props.element.lmin & CONSTRAINED} onChange={this.props.element.lmin & CONSTRAINED ? this.onResetFlagMinConstrained : this.onSetFlagMinConstrained} disabled={this.props.element.lmin & FIXED ? true : false} />
                                 </InputGroup.Text>
-                            </InputGroup.Prepend>
                             <FormControlTypeNumber id={this.props.element.name + "_cmin"} icon_alerts={icon_alerts} className={className} value={this.props.element.cmin} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmin & FIXED || this.props.element.lmin & CONSTRAINED ? false : true} disabledText={this.props.element.lmin & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onClick={this.onClick}/>
                         </InputGroup>
                         {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ?

@@ -145,11 +145,9 @@ class ConstraintsMaxRowDependentVariable extends Component {
                     </td>
                     <td className="align-middle" colSpan="2">
                         <InputGroup>
-                            <InputGroup.Prepend>
                                 <InputGroup.Text>
-                                    <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetFlagMaxConstrained : this.onSetFlagMaxConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
+                                    <Form.Check className='form-check' type="checkbox" aria-label="Checkbox for maximum value" checked={this.props.element.lmax & CONSTRAINED} onChange={this.props.element.lmax & CONSTRAINED ? this.onResetFlagMaxConstrained : this.onSetFlagMaxConstrained} disabled={this.props.element.lmax & FIXED ? true : false} />
                                 </InputGroup.Text>
-                            </InputGroup.Prepend>
                             <FormControlTypeNumber id={this.props.element.name + "_cmax"} icon_alerts={icon_alerts} className={className} value={this.props.element.cmax} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmax & FIXED || this.props.element.lmax & CONSTRAINED ? false : true} disabledText={this.props.element.lmax & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onClick={this.onClick}/>
                         </InputGroup>
                         {this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0 ?
