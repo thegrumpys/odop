@@ -3,7 +3,6 @@ import { ReportBase } from "./ReportBase" // import the inner non-redux-connecte
 import { Button } from 'react-bootstrap';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
-import { UNINITIALIZED } from '../../store/actionTypes';
 
 class Report3 extends ReportBase {
 
@@ -36,7 +35,7 @@ class Report3 extends ReportBase {
                         <tr>
                             <td>{this.props.symbol_table[o.Rate].name}</td>
                             <td>=</td>
-                            <td>{(this.props.symbol_table[o.Rate].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.Rate].value.toFixed(3)}</td>
+                            <td>{this.props.symbol_table[o.Rate].value.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Rate].units}</td>
                         </tr>
                     </tbody>
@@ -56,22 +55,22 @@ class Report3 extends ReportBase {
                         <tr>
                             <td><b>Force</b></td>
                             <td>{(0.0).toFixed(2)}</td>
-                            <td>{(this.props.symbol_table[o.Force_1].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.Force_1].value.toFixed(2)}</td>
-                            <td>{(this.props.symbol_table[o.Force_2].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.Force_2].value.toFixed(2)}</td>
+                            <td>{this.props.symbol_table[o.Force_1].value.toFixed(2)}</td>
+                            <td>{this.props.symbol_table[o.Force_2].value.toFixed(2)}</td>
                             <td className="text-left" colSpan="2">{this.props.symbol_table[o.Force_1].units}</td>
                         </tr>
                         <tr>
                             <td><b>Deflection</b></td>
                             <td>{(0.0).toFixed(3)}</td>
-                            <td>{(this.props.symbol_table[o.Deflect_1].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.Deflect_1].value.toFixed(3)}</td>
-                            <td>{(this.props.symbol_table[o.Deflect_2].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.Deflect_2].value.toFixed(3)}</td>
+                            <td>{this.props.symbol_table[o.Deflect_1].value.toFixed(3)}</td>
+                            <td>{this.props.symbol_table[o.Deflect_2].value.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.Deflect_2].units}</td>
                         </tr>
                         <tr>
                             <td><b>Length</b></td>
-                            <td>{(this.props.symbol_table[o.L_Free].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.L_Free].value.toFixed(3)}</td>
-                            <td>{(this.props.symbol_table[o.L_1].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.L_1].value.toFixed(3)}</td>
-                            <td>{(this.props.symbol_table[o.L_2].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.L_2].value.toFixed(3)}</td>
+                            <td>{this.props.symbol_table[o.L_Free].value.toFixed(3)}</td>
+                            <td>{this.props.symbol_table[o.L_1].value.toFixed(3)}</td>
+                            <td>{this.props.symbol_table[o.L_2].value.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.L_1].units}</td>
                         </tr>
                     </tbody>
@@ -82,7 +81,7 @@ class Report3 extends ReportBase {
                         <tr>
                             <td>{this.props.symbol_table[o.L_Stroke].name}</td>
                             <td>=</td>
-                            <td>{(this.props.symbol_table[o.L_Stroke].lmin & UNINITIALIZED) ? '?' : this.props.symbol_table[o.L_Stroke].value.toFixed(3)}</td>
+                            <td>{this.props.symbol_table[o.L_Stroke].value.toFixed(3)}</td>
                             <td className="text-left">{this.props.symbol_table[o.L_Stroke].units}</td>
                         </tr>
                     </tbody>
