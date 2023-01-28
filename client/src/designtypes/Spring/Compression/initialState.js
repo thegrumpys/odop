@@ -71,10 +71,8 @@ export const initialState = {
             "tooltip": "Total number of coils",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [],
-                "sets": [o.Coils_A, o.L_Solid, o.Weight],
-            }]
+            "refs": [],
+            "sets": [o.Coils_A, o.L_Solid, o.Weight],
         },
         {
             "input": true,
