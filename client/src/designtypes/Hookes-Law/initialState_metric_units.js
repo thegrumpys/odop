@@ -50,7 +50,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": false,
+            "input": true,
             "name": "Rate",
             "value": 4.758667,
             "units": "N/mm",
