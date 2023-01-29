@@ -17,8 +17,13 @@ export const initialState = {
             "tooltip": "Outside diameter in free (no load) condition",
             "type": "equationset",
             "hidden": false,
-            "refs": [],
-            "sets": [o.Mean_Dia],
+            "eqns": [{
+                "refs": [],
+                "sets": [o.Mean_Dia],
+            },{
+                "refs": [o.Wire_Dia, o.Mean_Dia],
+                "sets": [],
+            }]
         },
         {
             "input": true,
@@ -35,8 +40,16 @@ export const initialState = {
             "tooltip": "Wire diameter",
             "type": "equationset",
             "hidden": false,
-            "refs": [],
-            "sets": [o.Mean_Dia, o.Spring_Index, o.ID_Free, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect],
+            "eqns": [{
+                "refs": [],
+                "sets": [o.Mean_Dia, o.Spring_Index, o.ID_Free, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect],
+            },{
+                "refs": [o.OD_Free, o.Mean_Dia],
+                "sets": [o.Spring_Index, o.ID_Free, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect],
+            },{
+                "refs": [o.ID_Free, o.Mean_Dia],
+                "sets": [o.Spring_Index, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect],
+            }]
         },
         {
             "input": true,
@@ -53,8 +66,13 @@ export const initialState = {
             "tooltip": "Length in free (no load) condition",
             "type": "equationset",
             "hidden": false,
-            "refs": [],
-            "sets": [o.L_1, o.L_2, o.Force_Solid, o.Weight, o.PC_Avail_Deflect, o.Slenderness],
+            "eqns": [{
+                "refs": [],
+                "sets": [o.L_1, o.L_2, o.Force_Solid, o.Weight, o.PC_Avail_Deflect, o.Slenderness],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": true,
@@ -71,8 +89,13 @@ export const initialState = {
             "tooltip": "Total number of coils",
             "type": "equationset",
             "hidden": false,
-            "refs": [],
-            "sets": [o.Coils_A, o.L_Solid, o.Weight],
+            "eqns": [{
+                "refs": [],
+                "sets": [o.Coils_A, o.L_Solid, o.Weight],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": true,
@@ -89,8 +112,13 @@ export const initialState = {
             "tooltip": "Minimum operating load (Length L_1)",
             "type": "equationset",
             "hidden": false,
-            "refs": [],
-            "sets": [o.Deflect_1, o.Stress_1],
+            "eqns": [{
+                "refs": [],
+                "sets": [o.Deflect_1, o.Stress_1],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": true,
@@ -107,8 +135,13 @@ export const initialState = {
             "tooltip": "Maximum operating load (Length L_2)",
             "type": "equationset",
             "hidden": false,
-            "refs": [],
-            "sets": [o.Deflect_2, o.Stress_2],
+            "eqns": [{
+                "refs": [],
+                "sets": [o.Deflect_2, o.Stress_2],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -125,8 +158,13 @@ export const initialState = {
             "tooltip": "Average of inside and outside diameters",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.OD_Free, o.Wire_Dia],
-            "sets": [o.ID_Free, o.Rate, o.Spring_Index, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.Slenderness],
+            "eqns": [{
+                "refs": [o.OD_Free, o.Wire_Dia],
+                "sets": [o.ID_Free, o.Rate, o.Spring_Index, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.Slenderness],
+            },{
+                "refs": [o.ID_Free, o.Wire_Dia],
+                "sets": [o.Rate, o.Spring_Index, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.Slenderness],
+            }]
         },
         {
             "input": false,
@@ -143,8 +181,13 @@ export const initialState = {
             "tooltip": "Number of Active coils",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Coils_T],
-            "sets": [o.Rate],
+            "eqns": [{
+                "refs": [o.Coils_T],
+                "sets": [o.Rate],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -161,8 +204,13 @@ export const initialState = {
             "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Spring_Index, o.Coils_A],
-            "sets": [o.Deflect_1, o.Deflect_2],
+            "eqns": [{
+                "refs": [o.Spring_Index, o.Coils_A],
+                "sets": [o.Deflect_1, o.Deflect_2],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -179,8 +227,13 @@ export const initialState = {
             "tooltip": "Deflection from free to load point 1",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Force_1, o.Rate],
-            "sets": [o.L_1, o.Energy],
+            "eqns": [{
+                "refs": [o.Force_1, o.Rate],
+                "sets": [o.L_1, o.Energy],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -197,8 +250,13 @@ export const initialState = {
             "tooltip": "Deflection from free to load point 2",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Force_2, o.Rate],
-            "sets": [o.L_2, o.Energy, o.PC_Avail_Deflect],
+            "eqns": [{
+                "refs": [o.Force_2, o.Rate],
+                "sets": [o.L_2, o.Energy, o.PC_Avail_Deflect],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -215,8 +273,13 @@ export const initialState = {
             "tooltip": "Spring length at load point 1",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Deflect_1, o.L_Free],
-            "sets": [o.L_Stroke],
+            "eqns": [{
+                "refs": [o.Deflect_1, o.L_Free],
+                "sets": [o.L_Stroke],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -235,8 +298,13 @@ export const initialState = {
             "hidden": false,
             "validminchoices": [ "L_Solid" ],
             "validminchoice": 0,
-            "refs": [o.Deflect_2, o.L_Free],
-            "sets": [o.L_Stroke],
+            "eqns": [{
+                "refs": [o.Deflect_2, o.L_Free],
+                "sets": [o.L_Stroke],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -253,8 +321,13 @@ export const initialState = {
             "tooltip": "Length of stroke from point 1 to point 2",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.L_1, o.L_2],
-            "sets": [],
+            "eqns": [{
+                "refs": [o.L_1, o.L_2],
+                "sets": [],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -272,8 +345,13 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "propagate": [{ name: "L_2", minmax: VALID_MIN }],
-            "refs": [o.Coils_T, o.Wire_Dia],
-            "sets": [o.Force_Solid, o.PC_Avail_Deflect],
+            "eqns": [{
+                "refs": [o.Coils_T, o.Wire_Dia],
+                "sets": [o.Force_Solid, o.PC_Avail_Deflect],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -290,8 +368,13 @@ export const initialState = {
             "tooltip": "Ratio of free length (L_Free) to mean diameter (Mean_Dia)",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Mean_Dia, o.L_Free],
-            "sets": [],
+            "eqns": [{
+                "refs": [o.Mean_Dia, o.L_Free],
+                "sets": [],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -308,8 +391,13 @@ export const initialState = {
             "tooltip": "Inside diameter in free (no load) condition",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Mean_Dia, o.Mean_Dia],
-            "sets": [],
+            "eqns": [{
+                "refs": [o.Wire_Dia, o.Mean_Dia],
+                "sets": [],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -326,8 +414,13 @@ export const initialState = {
             "tooltip": "Weight of one spring",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Mean_Dia, o.Coils_T, o.Wire_Dia, o.L_Free],
-            "sets": [],
+            "eqns": [{
+                "refs": [o.Mean_Dia, o.Coils_T, o.Wire_Dia, o.L_Free],
+                "sets": [],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -344,8 +437,13 @@ export const initialState = {
             "tooltip": "Ratio of mean coil diameter (Mean_Dia) to wire diameter (Wire_Dia)",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Wire_Dia, o.Mean_Dia],
-            "sets": [o.Stress_1, o.Stress_2, o.Stress_Solid, o.FS_CycleLife, o.Rate],
+            "eqns": [{
+                "refs": [o.Wire_Dia, o.Mean_Dia],
+                "sets": [o.Stress_1, o.Stress_2, o.Stress_Solid, o.FS_CycleLife, o.Rate],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -362,8 +460,13 @@ export const initialState = {
             "tooltip": "Load required to fully compress the spring",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Rate, o.L_Free, o.L_Solid],
-            "sets": [o.Stress_Solid],
+            "eqns": [{
+                "refs": [o.Rate, o.L_Free, o.L_Solid],
+                "sets": [o.Stress_Solid],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -380,8 +483,13 @@ export const initialState = {
             "tooltip": "Torsion stress in wire at load point 1",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_1, o.Spring_Index],
-            "sets": [/*o.FS_1, */o.FS_CycleLife, o.Cycle_Life],
+            "eqns": [{
+                "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_1, o.Spring_Index],
+                "sets": [/*o.FS_1, */o.FS_CycleLife, o.Cycle_Life],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -398,8 +506,13 @@ export const initialState = {
             "tooltip": "Torsion stress in wire at load point 2",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_2, o.Spring_Index],
-            "sets": [o.FS_2, o.FS_CycleLife, o.Cycle_Life],
+            "eqns": [{
+                "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_2, o.Spring_Index],
+                "sets": [o.FS_2, o.FS_CycleLife, o.Cycle_Life],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -416,8 +529,13 @@ export const initialState = {
             "tooltip": "Torsion stress in wire when spring is fully compressed",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_Solid, o.Spring_Index],
-            "sets": [o.FS_Solid],
+            "eqns": [{
+                "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_Solid, o.Spring_Index],
+                "sets": [o.FS_Solid],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -434,8 +552,13 @@ export const initialState = {
             "tooltip": "Factor of safety at load point 2",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Stress_2],
-            "sets": [],
+            "eqns": [{
+                "refs": [o.Stress_2],
+                "sets": [],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -452,8 +575,13 @@ export const initialState = {
             "tooltip": "Factor of safety when the spring is fully compressed",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Stress_Solid],
-            "sets": [],
+            "eqns": [{
+                "refs": [o.Stress_Solid],
+                "sets": [],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -470,8 +598,13 @@ export const initialState = {
             "tooltip": "Factor of safety to achieve the target cycle life category. See on-line Help.",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Stress_1, o.Stress_2, o.Spring_Index],
-            "sets": [],
+            "eqns": [{
+                "refs": [o.Stress_1, o.Stress_2, o.Spring_Index],
+                "sets": [],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -488,8 +621,13 @@ export const initialState = {
             "tooltip": "Rough estimate of the average number of cycles to failure when cycling between point 1 and point 2. See on-line Help.",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Stress_1, o.Stress_2],
-            "sets": [],
+            "eqns": [{
+                "refs": [o.Stress_1, o.Stress_2],
+                "sets": [],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -506,8 +644,13 @@ export const initialState = {
             "tooltip": "Deflection of load point 2 as a percent of total available deflection",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Deflect_2, o.L_Solid, o.L_Free, o.Wire_Dia],
-            "sets": [],
+            "eqns": [{
+                "refs": [o.Deflect_2, o.L_Solid, o.L_Free, o.Wire_Dia],
+                "sets": [],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
@@ -524,8 +667,13 @@ export const initialState = {
             "tooltip": "Change in elastic potential energy between 1 and 2",
             "type": "equationset",
             "hidden": false,
-            "refs": [o.Rate, o.Deflect_1, o.Deflect_2],
-            "sets": [],
+            "eqns": [{
+                "refs": [o.Rate, o.Deflect_1, o.Deflect_2],
+                "sets": [],
+            },{
+                "refs": [],
+                "sets": [],
+            }]
         },
         {
             "input": false,
