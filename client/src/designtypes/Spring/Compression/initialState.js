@@ -18,10 +18,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [],
-                "sets": [o.Mean_Dia],
+                "refs": [], // Independent
+                "sets": [o.Mean_Dia], // eqnset
             },{
-                "refs": [o.Wire_Dia, o.Mean_Dia],
+                "refs": [o.Wire_Dia, o.Mean_Dia], // Inverse x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
                 "sets": [],
             }]
         },
@@ -41,14 +41,17 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [],
-                "sets": [o.Mean_Dia, o.Spring_Index, o.ID_Free, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect],
+                "refs": [], // Independent
+                "sets": [o.Mean_Dia, o.Spring_Index, o.ID_Free, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect], // eqnset
             },{
-                "refs": [o.OD_Free, o.Mean_Dia],
+                "refs": [o.OD_Free, o.Mean_Dia], // Inverse x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
                 "sets": [o.Spring_Index, o.ID_Free, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect],
             },{
-                "refs": [o.ID_Free, o.Mean_Dia],
+                "refs": [o.ID_Free, o.Mean_Dia], // Inverse x[o.ID_Free] = x[o.Mean_Dia] - p[o.Wire_Dia];
                 "sets": [o.Spring_Index, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect],
+            },{
+                "refs": [o.Spring_Index, o.Mean_Dia], // Inverse x[o.Spring_Index] = x[o.Mean_Dia] / p[o.Wire_Dia];
+                "sets": [o.ID_Free, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect],
             }]
         },
         {
@@ -67,10 +70,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [],
-                "sets": [o.L_1, o.L_2, o.Force_Solid, o.Weight, o.PC_Avail_Deflect, o.Slenderness],
+                "refs": [], // Independent
+                "sets": [o.L_1, o.L_2, o.Force_Solid, o.Weight, o.PC_Avail_Deflect, o.Slenderness], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -90,11 +93,11 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [],
-                "sets": [o.Coils_A, o.L_Solid, o.Weight],
+                "refs": [], // Independent
+                "sets": [o.Coils_A, o.L_Solid, o.Weight], // eqnset
             },{
-                "refs": [],
-                "sets": [],
+                "refs": [o.Coils_A], // Inverse x[o.Coils_A] = p[o.Coils_T] - x[o.Inactive_Coils];
+                "sets": [o.L_Solid, o.Weight],
             }]
         },
         {
@@ -113,10 +116,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [],
-                "sets": [o.Deflect_1, o.Stress_1],
+                "refs": [], // Independent
+                "sets": [o.Deflect_1, o.Stress_1], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -136,10 +139,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [],
-                "sets": [o.Deflect_2, o.Stress_2],
+                "refs": [], // Independent
+                "sets": [o.Deflect_2, o.Stress_2], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -158,12 +161,16 @@ export const initialState = {
             "tooltip": "Average of inside and outside diameters",
             "type": "equationset",
             "hidden": false,
+             
             "eqns": [{
-                "refs": [o.OD_Free, o.Wire_Dia],
-                "sets": [o.ID_Free, o.Rate, o.Spring_Index, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.Slenderness],
+                "refs": [o.OD_Free, o.Wire_Dia], // Dependent: x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
+                "sets": [o.ID_Free, o.Rate, o.Spring_Index, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.Slenderness], // eqnset
             },{
-                "refs": [o.ID_Free, o.Wire_Dia],
+                "refs": [o.ID_Free, o.Wire_Dia], // Inverse x[o.ID_Free] = x[o.Mean_Dia] - p[o.Wire_Dia];
                 "sets": [o.Rate, o.Spring_Index, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.Slenderness],
+            },{
+                "refs": [o.Spring_Index, o.Wire_Dia], // Inverse x[o.Spring_Index] = x[o.Mean_Dia] / p[o.Wire_Dia];
+                "sets": [o.ID_Free, o.Rate, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.Slenderness],
             }]
         },
         {
@@ -182,10 +189,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Coils_T],
-                "sets": [o.Rate],
+                "refs": [o.Coils_T], // Dependent
+                "sets": [o.Rate], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -205,10 +212,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Spring_Index, o.Coils_A],
-                "sets": [o.Deflect_1, o.Deflect_2],
+                "refs": [o.Spring_Index, o.Coils_A, o.Mean_Dia], // Dependent temp = x[o.Spring_Index] * x[o.Spring_Index]; x[o.Rate] = x[o.Hot_Factor_Kh] * x[o.Torsion_Modulus] * x[o.Mean_Dia] / (8.0 * x[o.Coils_A] * temp * temp);
+                "sets": [o.Deflect_1, o.Deflect_2], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -228,10 +235,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Force_1, o.Rate],
-                "sets": [o.L_1, o.Energy],
+                "refs": [o.Force_1, o.Rate], // Dependent
+                "sets": [o.L_1, o.Energy], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -251,10 +258,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Force_2, o.Rate],
-                "sets": [o.L_2, o.Energy, o.PC_Avail_Deflect],
+                "refs": [o.Force_2, o.Rate], // Dependent
+                "sets": [o.L_2, o.Energy, o.PC_Avail_Deflect], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -274,10 +281,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Deflect_1, o.L_Free],
-                "sets": [o.L_Stroke],
+                "refs": [o.Deflect_1, o.L_Free], // Dependent
+                "sets": [o.L_Stroke], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -299,10 +306,10 @@ export const initialState = {
             "validminchoices": [ "L_Solid" ],
             "validminchoice": 0,
             "eqns": [{
-                "refs": [o.Deflect_2, o.L_Free],
-                "sets": [o.L_Stroke],
+                "refs": [o.Deflect_2, o.L_Free], // Dependent
+                "sets": [o.L_Stroke], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -322,10 +329,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.L_1, o.L_2],
-                "sets": [],
+                "refs": [o.L_1, o.L_2], // Dependent
+                "sets": [], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -346,10 +353,10 @@ export const initialState = {
             "hidden": false,
             "propagate": [{ name: "L_2", minmax: VALID_MIN }],
             "eqns": [{
-                "refs": [o.Coils_T, o.Wire_Dia],
-                "sets": [o.Force_Solid, o.PC_Avail_Deflect],
+                "refs": [o.Coils_T, o.Wire_Dia], // Dependent
+                "sets": [o.Force_Solid, o.PC_Avail_Deflect], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -369,10 +376,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Mean_Dia, o.L_Free],
-                "sets": [],
+                "refs": [o.Mean_Dia, o.L_Free], // Dependent
+                "sets": [], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -392,10 +399,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Wire_Dia, o.Mean_Dia],
-                "sets": [],
+                "refs": [o.Wire_Dia, o.Mean_Dia], // Dependent x[o.ID_Free] = x[o.Mean_Dia] - p[o.Wire_Dia];
+                "sets": [], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -415,10 +422,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Mean_Dia, o.Coils_T, o.Wire_Dia, o.L_Free],
-                "sets": [],
+                "refs": [o.Mean_Dia, o.Coils_T, o.Wire_Dia, o.L_Free], // Dependent
+                "sets": [], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -438,10 +445,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Wire_Dia, o.Mean_Dia],
-                "sets": [o.Stress_1, o.Stress_2, o.Stress_Solid, o.FS_CycleLife, o.Rate],
+                "refs": [o.Wire_Dia, o.Mean_Dia], // Dependent x[o.Spring_Index] = x[o.Mean_Dia] / p[o.Wire_Dia];
+                "sets": [o.Stress_1, o.Stress_2, o.Stress_Solid, o.FS_CycleLife, o.Rate], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -461,10 +468,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Rate, o.L_Free, o.L_Solid],
-                "sets": [o.Stress_Solid],
+                "refs": [o.Rate, o.L_Free, o.L_Solid], // Dependent
+                "sets": [o.Stress_Solid], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -484,10 +491,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_1, o.Spring_Index],
-                "sets": [/*o.FS_1, */o.FS_CycleLife, o.Cycle_Life],
+                "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_1, o.Spring_Index], // Dependent
+                "sets": [/*o.FS_1, */o.FS_CycleLife, o.Cycle_Life], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -507,10 +514,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_2, o.Spring_Index],
-                "sets": [o.FS_2, o.FS_CycleLife, o.Cycle_Life],
+                "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_2, o.Spring_Index], // Dependent
+                "sets": [o.FS_2, o.FS_CycleLife, o.Cycle_Life], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -530,10 +537,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_Solid, o.Spring_Index],
-                "sets": [o.FS_Solid],
+                "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_Solid, o.Spring_Index], // Dependent
+                "sets": [o.FS_Solid], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -553,10 +560,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Stress_2],
-                "sets": [],
+                "refs": [o.Stress_2], // Dependent
+                "sets": [], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -576,10 +583,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Stress_Solid],
-                "sets": [],
+                "refs": [o.Stress_Solid], // Dependent
+                "sets": [], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -599,10 +606,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Stress_1, o.Stress_2, o.Spring_Index],
-                "sets": [],
+                "refs": [o.Stress_1, o.Stress_2, o.Spring_Index], // Dependent
+                "sets": [], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -622,10 +629,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Stress_1, o.Stress_2],
-                "sets": [],
+                "refs": [o.Stress_1, o.Stress_2], // Dependent
+                "sets": [], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -645,10 +652,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Deflect_2, o.L_Solid, o.L_Free, o.Wire_Dia],
-                "sets": [],
+                "refs": [o.Deflect_2, o.L_Solid, o.L_Free, o.Wire_Dia], // Dependent
+                "sets": [], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
@@ -668,10 +675,10 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "eqns": [{
-                "refs": [o.Rate, o.Deflect_1, o.Deflect_2],
-                "sets": [],
+                "refs": [o.Rate, o.Deflect_1, o.Deflect_2], // Dependent
+                "sets": [], // eqnset
             },{
-                "refs": [],
+                "refs": [], // Inverse
                 "sets": [],
             }]
         },
