@@ -21,8 +21,9 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { logValue } from '../logUsage';
 import { logUsage } from '../logUsage';
 import { getAlertsByName } from './Alerts';
-import { search, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../store/actionCreators';
+import { search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../store/actionCreators';
 import { displayMessage } from '../components/MessageModal';
+import FeasibilityIndicator from './FeasibilityIndicator';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -44,12 +45,8 @@ class SymbolValue extends Component {
         this.onClose = this.onClose.bind(this);
         this.onReset = this.onReset.bind(this);
         this.onSearchRequest = this.onSearchRequest.bind(this);
-        this.onSeekRequest = this.onSeekRequest.bind(this);
-        this.onSeekContextHelpButton = this.onSeekContextHelpButton.bind(this);
-        this.onSeekCancelButton = this.onSeekCancelButton.bind(this);
-        this.onSeekMinMaxSelect = this.onSeekMinMaxSelect.bind(this);
-        this.onSeekNameSelect = this.onSeekNameSelect.bind(this);
-        this.onSeekButton = this.onSeekButton.bind(this);
+        this.onSeekMinRequest = this.onSeekMinRequest.bind(this);
+        this.onSeekMaxRequest = this.onSeekMaxRequest.bind(this);
         this.onChangeValidValue = this.onChangeValidValue.bind(this);
         this.onChangeInvalidValue = this.onChangeInvalidValue.bind(this);
         this.onChangeValidMinConstraint = this.onChangeValidMinConstraint.bind(this);
@@ -117,10 +114,12 @@ class SymbolValue extends Component {
 //        console.log('In ResultTable.onSearchRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            return;
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
                 displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+                return;
             }
         });
         var old_objective_value = this.props.objective_value.toPrecision(4);
@@ -132,71 +131,46 @@ class SymbolValue extends Component {
         logUsage('event', 'ActionSearch', { event_label: 'Button ' + old_objective_value + ' --> ' + new_objective_value});
     }
 
-    onSeekRequest(event) {
-//        console.log('In ResultTable.onSeekRequest this=',this,'event=',event);
+    onSeekMinRequest(event) {
+//        console.log('In ResultTable.onSeekMinRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#seekErr');
+            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            return;
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
-                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#seekErr');
+                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+                return;
             }
         });
-        var result = this.props.symbol_table.find( // Find free variable matching the current variable name
-            (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
-        );
-        if (result === undefined) { // Was matching free variable not found
-            // Set default name to the First free variable. There must be at least one
-            // This duplicates the UI render code algorithm - be careful and make them match!
-            result = this.props.symbol_table.find( // Find first free variable
-                (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
-            );
-        }
         this.setState({
-            seek_modal: !this.state.seek_modal,
-            seek_name: result.name,
-            seek_minmax: MIN,
-        });
-    }
-
-    onSeekContextHelpButton(event) {
-//        console.log('In ResultTable.onSeekContextHelpButton this=',this,'event=',event);
-        this.setState({
-            seek_modal: !this.state.seek_modal,
-        });
-        window.open('/docs/Help/seek.html', '_blank');
-    }
-
-    onSeekCancelButton(event) {
-//        console.log('In ResultTable.onSeekCancelButton this=',this,'event=',event);
-        this.setState({
-            seek_modal: !this.state.seek_modal,
-        });
-    }
-
-    onSeekMinMaxSelect(seek_minmax) {
-//        console.log('In ResultTable.onSeekMinMaxSelect this=',this,'seek_minmax=',seek_minmax);
-        this.setState({
-            seek_minmax: seek_minmax
-        });
-    }
-
-    onSeekNameSelect(event) {
-//        console.log('In ResultTable.onSeekNameSelect this=',this,'event=',event);
-        this.setState({
-            seek_name: event.target.value 
-        });
-    }
-    
-    onSeekButton(event) {
-//        console.log('In ResultTable.onSeekButton this=',this,'event=',event);
-        this.setState({
-            seek_modal: !this.state.seek_modal
+            modal: !this.state.modal
         });
         // Do seek
         this.props.saveAutoSave();
-        this.props.seek(this.state.seek_name, this.state.seek_minmax);
-        logUsage('event', 'ActionSeek', { event_label: 'Button ' + this.state.seek_minmax + ' ' + this.state.seek_name });
+        this.props.seek(this.props.element.name, MIN);
+        logUsage('event', 'ActionSeek', { event_label: 'Button MIN ' + this.state.seek_name });
+    }
+
+    onSeekMaxRequest(event) {
+//        console.log('In ResultTable.onSeekMaxRequest this=',this,'event=',event);
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            return;
+        }
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+                return;
+            }
+        });
+        this.setState({
+            modal: !this.state.modal
+        });
+        // Do seek
+        this.props.saveAutoSave();
+        this.props.seek(this.props.element.name, MAX);
+        logUsage('event', 'ActionSeek', { event_label: 'Button MAX ' + this.state.seek_name });
     }
 
     onContextMenu(e) {
@@ -374,8 +348,6 @@ class SymbolValue extends Component {
             display_search_button = false;
         }
 
-        var ResultTableOptimize = require('../designtypes/'+this.props.type+'/ResultTableOptimize.js'); // Dynamically load ResultTableOptimize
-
         return (
             <>
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
@@ -407,6 +379,18 @@ class SymbolValue extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                        <Table borderless className="border border-secondary pb-5" size="sm" style={{backgroundColor: '#eee'}}>
+                            <tbody>
+                                <tr>
+                                    <td className="text-center" id="ObjectiveValue">
+                                        <OverlayTrigger placement="bottom" overlay={<Tooltip>Search works to minimize Objective Value.<br />Objective Value = {this.props.objective_value.toFixed(7)}<br />Search stops if Objective Value falls below<br />OBJMIN = {this.props.system_controls.objmin.toFixed(7)}</Tooltip>}>
+                                            <b>Stgatus</b>
+                                        </OverlayTrigger>
+                                        <FeasibilityIndicator />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </Table>
                         {this.state.error !== '' ? <Alert variant="danger"> {this.state.error} </Alert> : ''}
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
@@ -464,13 +448,18 @@ class SymbolValue extends Component {
                     <Modal.Footer>
                         <><Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}&nbsp;</>
                         {this.state.modified ? <><Button variant="secondary" onClick={this.onReset}>Reset</Button>&nbsp;</> : ''}
-                        {this.state.modified ? <><Button variant="secondary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>&nbsp;</> : ''}
                         {display_search_button ? 
-                            <Button variant="primary" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>
+                            <>
+                                <Button variant="secondary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
+                                <Button variant="primary" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>
+                            </>
                         :
-                            <Button variant="primary" onClick={this.onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>
+                            <>
+                                <Button variant="secondary" onClick={this.onSeekMinRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MIN {this.props.element.name}</Button>
+                                <Button variant="secondary" onClick={this.onSeekMaxRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MAX {this.props.element.name}</Button>
+                                <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
+                            </>
                         }
-
                     </Modal.Footer>
                 </Modal>
             </>
@@ -491,6 +480,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     search: search,
+    seek: seek,
     saveAutoSave: saveAutoSave,
     changeSymbolValue: changeSymbolValue,
     setSymbolFlag: setSymbolFlag,
