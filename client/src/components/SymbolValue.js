@@ -128,7 +128,7 @@ class SymbolValue extends Component {
         const { store } = this.context;
         var design = store.getState();
         var new_objective_value = design.model.result.objective_value.toPrecision(4)
-        logUsage('event', 'ActionSearch', { event_label: 'Button ' + old_objective_value + ' --> ' + new_objective_value});
+        logUsage('event', 'ActionSearch', { event_label: 'Element ' + this.props.element.name + ' ' + old_objective_value + ' --> ' + new_objective_value});
         if (new_objective_value <= this.props.system_controls.objmin) {
             this.setState({
                 modal: !this.state.modal
@@ -154,7 +154,7 @@ class SymbolValue extends Component {
         // Do seek
         this.props.saveAutoSave();
         this.props.seek(this.props.element.name, MIN);
-        logUsage('event', 'ActionSeek', { event_label: 'Button MIN ' + this.state.seek_name });
+        logUsage('event', 'ActionSeek', { event_label: 'Element ' + this.props.element.name + ' MIN'});
     }
 
     onSeekMaxRequest(event) {
@@ -175,7 +175,7 @@ class SymbolValue extends Component {
         // Do seek
         this.props.saveAutoSave();
         this.props.seek(this.props.element.name, MAX);
-        logUsage('event', 'ActionSeek', { event_label: 'Button MAX ' + this.state.seek_name });
+        logUsage('event', 'ActionSeek', { event_label: 'Element ' + this.props.element.name + ' MAX'});
     }
 
     onContextMenu(e) {

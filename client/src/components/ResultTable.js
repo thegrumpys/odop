@@ -155,7 +155,19 @@ class ResultTable extends Component {
                                     <span>Feasibility</span>
                                 </OverlayTrigger>
                             </th>
-                            <td width="67%" className={feasibility_class + " text-left"}>{feasibility_string}</td>
+                            <td width="67%" className={feasibility_class + " text-left"}>
+                                {feasibility_string}
+                                {feasibility_string === 'NOT FEASIBLE' ?
+                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                                        This design may be over-specified. 
+                                        See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.
+                                        </Tooltip>}>
+                                        <span>&nbsp;<i className="fas fa-info-circle text-primary"></i></span>
+                                    </OverlayTrigger>
+                                :
+                                    ''
+                                }
+                            </td>
                         </tr>
                         <tr>
                             <th width="33%" id="Message" className="pb-3">
@@ -179,32 +191,32 @@ class ResultTable extends Component {
                         </tr>
                         <tr>
                             {display_search_button ? 
-                              <td align="center">
-                                  <Button variant="primary" size="sm" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
-                                  <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                      SEARCH alters the values of any free independent variables to find a design that 
-                                      satisfies all constraints while also achieving the desired value for each fixed dependent 
-                                      variable.  Search stops when the first feasible solution is found.  The solution provided 
-                                      by SEARCH is a solution to the designer’s goals as expressed by constraints and fixes. If 
-                                      a solution that meets all of these goals is not available, the search process converges 
-                                      to a compromise. Typically, this compromise violates multiple constraints.
-                                      </Tooltip>}>
-                                      <span><i className="fas fa-info-circle text-primary"></i></span>
-                                  </OverlayTrigger>
+                                <td align="center">
+                                    <Button variant="primary" size="sm" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
+                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                                        SEARCH alters the values of any free independent variables to find a design that 
+                                        satisfies all constraints while also achieving the desired value for each fixed dependent 
+                                        variable.  Search stops when the first feasible solution is found.  The solution provided 
+                                        by SEARCH is a solution to the designer’s goals as expressed by constraints and fixes. If 
+                                        a solution that meets all of these goals is not available, the search process converges 
+                                        to a compromise. Typically, this compromise violates multiple constraints.
+                                        </Tooltip>}>
+                                        <span><i className="fas fa-info-circle text-primary"></i></span>
+                                      </OverlayTrigger>
                               </td>
                             :
-                              <td align="center">
-                                  <Button variant="primary" size="sm" onClick={this.onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
-                                  <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                      If one feasible design exists there are likely many more available, each with varying 
-                                      advantages / disadvantages. SEEK provides a “goal seeking” capability 
-                                      to optimize your design on the parameter that you specify. If starting with a default 
-                                      design, additional constraints specific to your application are required to obtain 
-                                      meaningful results.
-                                      </Tooltip>}>
-                                      <span><i className="fas fa-info-circle text-primary"></i></span>
-                                  </OverlayTrigger>
-                              </td>
+                                <td align="center">
+                                    <Button variant="primary" size="sm" onClick={this.onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
+                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                                        If one feasible design exists there are likely many more available, each with varying 
+                                        advantages / disadvantages. SEEK provides a “goal seeking” capability 
+                                        to optimize your design on the parameter that you specify. If starting with a default 
+                                        design, additional constraints specific to your application are required to obtain 
+                                        meaningful results.
+                                        </Tooltip>}>
+                                        <span><i className="fas fa-info-circle text-primary"></i></span>
+                                    </OverlayTrigger>
+                                </td>
                             }
                         </tr>
                     </tbody>
