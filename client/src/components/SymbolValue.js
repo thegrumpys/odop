@@ -129,6 +129,11 @@ class SymbolValue extends Component {
         var design = store.getState();
         var new_objective_value = design.model.result.objective_value.toPrecision(4)
         logUsage('event', 'ActionSearch', { event_label: 'Button ' + old_objective_value + ' --> ' + new_objective_value});
+        if (new_objective_value <= this.props.system_controls.objmin) {
+            this.setState({
+                modal: !this.state.modal
+            });
+        }
     }
 
     onSeekMinRequest(event) {
@@ -337,15 +342,22 @@ class SymbolValue extends Component {
                 </OverlayTrigger>;
         }
 
-        var display_search_button;
-        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-            display_search_button = true;
-        } else if (this.props.objective_value > this.props.system_controls.objmin) {
-            display_search_button = true;
-        } else if (this.props.objective_value > 0.0) {
-            display_search_button = false;
-        } else {
-            display_search_button = false;
+        var display_search_button = false;
+        var display_seek_button = false;
+        if (this.props.element.type === 'equationset') {
+            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+                display_search_button = true;
+                display_seek_button = false;
+            } else if (this.props.objective_value > this.props.system_controls.objmin) {
+                display_search_button = true;
+                display_seek_button = false;
+            } else if (this.props.objective_value > 0.0) {
+                display_search_button = false;
+                display_seek_button = true;
+            } else {
+                display_search_button = false;
+                display_seek_button = true;
+            }
         }
 
         return (
@@ -379,18 +391,22 @@ class SymbolValue extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Table borderless className="border border-secondary pb-5" size="sm" style={{backgroundColor: '#eee'}}>
-                            <tbody>
-                                <tr>
-                                    <td className="text-center" id="ObjectiveValue">
-                                        <OverlayTrigger placement="bottom" overlay={<Tooltip>Search works to minimize Objective Value.<br />Objective Value = {this.props.objective_value.toFixed(7)}<br />Search stops if Objective Value falls below<br />OBJMIN = {this.props.system_controls.objmin.toFixed(7)}</Tooltip>}>
-                                            <b>Status</b>
-                                        </OverlayTrigger>
-                                        <FeasibilityIndicator />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </Table>
+                        {display_search_button === true || display_seek_button === true ?
+                            <Table borderless className="border border-secondary pb-5" size="sm" style={{backgroundColor: '#eee'}}>
+                                <tbody>
+                                    <tr>
+                                        <td className="text-center" id="ObjectiveValue">
+                                            <OverlayTrigger placement="bottom" overlay={<Tooltip>Search works to minimize Objective Value.<br />Objective Value = {this.props.objective_value.toFixed(7)}<br />Search stops if Objective Value falls below<br />OBJMIN = {this.props.system_controls.objmin.toFixed(7)}</Tooltip>}>
+                                                <b>Status</b>
+                                            </OverlayTrigger>
+                                            <FeasibilityIndicator />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        :
+                            ''
+                        }
                         {this.state.error !== '' ? <Alert variant="danger"> {this.state.error} </Alert> : ''}
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
@@ -420,30 +436,26 @@ class SymbolValue extends Component {
                                     </tr>
                                 </tbody>
                             </Table>}
-                        <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
-                            {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                                <>
-                                    <ConstraintsMinHeaderIndependentVariable />
-                                    <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} />
-                                </>}
-                            {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                                <>
-                                    <ConstraintsMinHeaderDependentVariable />
-                                    <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} />
-                                </>}
-                        </Table>
-                        <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
-                            {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                                <>
-                                    <ConstraintsMaxHeaderIndependentVariable />
-                                    <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} />
-                                </>}
-                            {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                                <>
-                                    <ConstraintsMaxHeaderDependentVariable />
-                                    <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} />
-                                </>}
-                        </Table>
+                        {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
+                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                                <ConstraintsMinHeaderIndependentVariable />
+                                <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} />
+                            </Table>}
+                        {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
+                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                                <ConstraintsMinHeaderDependentVariable />
+                                <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} />
+                            </Table>}
+                        {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
+                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                                <ConstraintsMaxHeaderIndependentVariable />
+                                <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} />
+                            </Table>}
+                        {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
+                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                                <ConstraintsMaxHeaderDependentVariable />
+                                <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} />
+                            </Table>}
                     </Modal.Body>
                     <Modal.Footer>
                         <><Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}&nbsp;</>
@@ -454,11 +466,16 @@ class SymbolValue extends Component {
                                 <Button variant="primary" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>
                             </>
                         :
+                            ''
+                        }
+                        {display_seek_button ? 
                             <>
                                 <Button variant="secondary" onClick={this.onSeekMinRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MIN {this.props.element.name}</Button>
                                 <Button variant="secondary" onClick={this.onSeekMaxRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MAX {this.props.element.name}</Button>
                                 <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                             </>
+                        :
+                            ''
                         }
                     </Modal.Footer>
                 </Modal>
