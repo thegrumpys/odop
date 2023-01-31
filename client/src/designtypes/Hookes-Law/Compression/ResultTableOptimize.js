@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { MIN, FIXED } from '../../store/actionTypes';
-import { seek, saveAutoSave } from '../../store/actionCreators';
-import { logUsage } from '../../logUsage';
+import { MIN, FIXED } from '../../../store/actionTypes';
+import { seek, saveAutoSave } from '../../../store/actionCreators';
+import { logUsage } from '../../../logUsage';
 import * as sto from './symbol_table_offsets';
 
 export class ResultTableOptimize extends Component {

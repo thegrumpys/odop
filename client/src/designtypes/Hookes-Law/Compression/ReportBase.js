@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { getAlertsBySeverity } from '../../components/Alerts';
+import { getAlertsBySeverity } from '../../../components/Alerts';
 
 export class ReportBase extends Component {
 

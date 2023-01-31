@@ -1,9 +1,9 @@
-import config from '../../config';
+import config from '../../../config';
 export function getExecuteNames() {
     var result;
     if (config.node.env !== "production") {
       result = [
-        'mkHookesLawStartups'         // Script to make multiple Startup entries from Load Initial State files
+        'mkStartups'         // Script to make multiple Startup entries from Load Initial State files
       ];
     } else {
       result = [];

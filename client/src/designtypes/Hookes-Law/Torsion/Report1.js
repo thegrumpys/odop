@@ -3,7 +3,7 @@ import { ReportBase } from "./ReportBase" // import the inner non-redux-connecte
 import { Button } from 'react-bootstrap';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
-import { getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from '../../components/Alerts';
+import { getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from '../../../components/Alerts';
 
 class Report1 extends ReportBase {
 
@@ -26,7 +26,7 @@ class Report1 extends ReportBase {
         return (
             <>
                 <h4 className="d-flex mt-3">
-                    <span className="mr-auto">ODOP:Spring &nbsp; Hooke's Law Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></span>
+                    <span className="mr-auto">ODOP &nbsp; Torsion Hooke's Law Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></span>
                     <Button onClick={this.onClick}>Print</Button>
                 </h4>
                 <br />

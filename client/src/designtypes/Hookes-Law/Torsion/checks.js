@@ -1,6 +1,6 @@
 import * as o from './symbol_table_offsets';
-import { checks as commonChecks, clearAlerts, addAlert, check_message, check_DCD_alert, ERR } from '../../components/Alerts';
-import { MIN } from '../../store/actionTypes';
+import { checks as commonChecks, clearAlerts, addAlert, check_message, check_DCD_alert, ERR } from '../../../components/Alerts';
+import { MIN } from '../../../store/actionTypes';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -12,12 +12,12 @@ Number.prototype.toODOPPrecision = function() {
     return odopValue;
 };
 
-export function checks(store) {        /*    Compression  Spring  */
+export function checks(store) {        /*    Torsion  Spring  */
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
     clearAlerts();
     var design = store.getState();
 
-// Alerts specific to compression springs. 
+// Alerts specific to Torsion springs. 
 
     if (design.model.symbol_table[o.Force_1].value > design.model.symbol_table[o.Force_2].value) {
         addAlert({
@@ -25,7 +25,7 @@ export function checks(store) {        /*    Compression  Spring  */
             name: design.model.symbol_table[o.Force_1].name, 
             message: check_message(design,o.Force_1,'>',o.Force_2),
             severity: ERR,
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#F1_GT_F2)',
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#F1_GT_F2)',
         });
         addAlert({
             element: design.model.symbol_table[o.Force_2], 

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { ReportBase } from "./ReportBase" // import the inner non-redux-connected class
-import SymbolName from '../../components/SymbolName';
-import SymbolValue from '../../components/SymbolValue';
-import SymbolUnits from '../../components/SymbolUnits';
-import ValueName from '../../components/ValueName';
-import Value from '../../components/Value';
+import SymbolName from '../../../components/SymbolName';
+import SymbolValue from '../../../components/SymbolValue';
+import SymbolUnits from '../../../components/SymbolUnits';
+import ValueName from '../../../components/ValueName';
+import Value from '../../../components/Value';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
 

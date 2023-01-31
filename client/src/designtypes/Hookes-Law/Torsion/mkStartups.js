@@ -4,7 +4,7 @@ import {
     changeName,
     changeLabelsValue,
     startup,
-} from '../../store/actionCreators';
+} from '../../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -13,9 +13,9 @@ export const execute = {
                 <>
                     <p>Setting the following symbol table actions:</p>
                     <ol>
-                        <li>{'loadInitialState("Hookes-Law","US"),'}</li>
+                        <li>{'loadInitialState("Hookes-Law/Torsion","US"),'}</li>
                         <li>{'changeName("Startup"),'}</li>
-                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Hooks Law default start point - US units ..."}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Torsion Hookes Law default start point - US units ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                     <p>
@@ -24,9 +24,9 @@ export const execute = {
                 </>
             ),
             actions: [
-                loadInitialState("Hookes-Law","US"),
+                loadInitialState("Hookes-Law/Torsion","US"),
                 changeName("Startup"),
-                changeLabelsValue([{name: "COMMENT", value: "Hookes Law default start point - US units ..."}]),
+                changeLabelsValue([{name: "COMMENT", value: "Torsion Hookes Law default start point - US units ..."}]),
                 startup(),
             ]
         },
@@ -36,9 +36,9 @@ export const execute = {
                 <>
                     <p>Setting the following symbol table actions:</p>
                     <ol>
-                        <li>{'loadInitialState("Hookes-Law","Metric"),'}</li>
+                        <li>{'loadInitialState("Hookes-Law/Torsion","Metric"),'}</li>
                         <li>{'changeName("Startup_Metric"),'}</li>
-                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Hookes Law default start point - Metric units ..."}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Torsion Hookes Law default start point - Metric units ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                     <p>
@@ -47,9 +47,9 @@ export const execute = {
                 </>
             ),
             actions: [
-                loadInitialState("Hookes-Law","Metric"),
+                loadInitialState("Hookes-Law/Torsion","Metric"),
                 changeName("Startup_Metric"),
-                changeLabelsValue([{name: "COMMENT", value: "Hookes Law default start point - Metric units ..."}]),
+                changeLabelsValue([{name: "COMMENT", value: "Torsion Hookes Law default start point - Metric units ..."}]),
                 startup(),
             ]
         }

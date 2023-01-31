@@ -9,7 +9,11 @@ database="@@@ PUT DATABASE NAME HERE @@@"
 # Test
 # Development
 
-mysqldump --user=$user --password=$password --host=$host $database design --complete-insert --no-create-info --compact --no-tablespaces --where="(user='00u1itcx44XGp65ln357' AND type='Hookes-Law' AND name='Startup') OR (user='00u1itcx44XGp65ln357' AND type='Hookes-Law' AND name='Startup_Metric')" > designtypes/Hookes-Law/load.sql
+mysqldump --user=$user --password=$password --host=$host $database design --complete-insert --no-create-info --compact --no-tablespaces --where="(user='00u1itcx44XGp65ln357' AND type='Hookes-Law/Compression' AND name='Startup') OR (user='00u1itcx44XGp65ln357' AND type='Hookes-Law/Compression' AND name='Startup_Metric')" > designtypes/Hookes-Law/load.sql
+
+mysqldump --user=$user --password=$password --host=$host $database design --complete-insert --no-create-info --compact --no-tablespaces --where="(user='00u1itcx44XGp65ln357' AND type='Hookes-Law/Extension' AND name='Startup') OR (user='00u1itcx44XGp65ln357' AND type='Hookes-Law/Extension' AND name='Startup_Metric')" > designtypes/Hookes-Law/load.sql
+
+mysqldump --user=$user --password=$password --host=$host $database design --complete-insert --no-create-info --compact --no-tablespaces --where="(user='00u1itcx44XGp65ln357' AND type='Hookes-Law/Torsion' AND name='Startup') OR (user='00u1itcx44XGp65ln357' AND type='Hookes-Law/Torsion' AND name='Startup_Metric')" > designtypes/Hookes-Law/load.sql
 
 mysqldump --user=$user --password=$password --host=$host $database design --complete-insert --no-create-info --compact --no-tablespaces --where="(user='00u1itcx44XGp65ln357' AND type='Piston-Cylinder' AND name='Startup') OR (user='00u1itcx44XGp65ln357' AND type='Piston-Cylinder' AND name='Startup_Metric')" > designtypes/Piston-Cylinder/load.sql
 

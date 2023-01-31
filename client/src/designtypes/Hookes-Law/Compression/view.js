@@ -1,5 +1,5 @@
 import React from 'react';
-import DesignTable from "../../components/DesignTable"
+import DesignTable from "../../../components/DesignTable"
 import Calculator from "./Calculator"
 import Report1 from "./Report1"
 import Report3 from "./Report3"
