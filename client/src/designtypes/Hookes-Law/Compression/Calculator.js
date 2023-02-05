@@ -10,19 +10,33 @@ import Value from '../../../components/Value';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
 
+/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
+Number.prototype.toODOPPrecision = function() {
+    var value = this.valueOf();
+    var odopValue;
+    if (value < 10000.0 || value >= 1000000.0)
+         odopValue = value.toPrecision(4);
+    else odopValue = value.toFixed(0);
+    return odopValue;
+};
+
 function CustomTooltip({ payload, label, active }) {
 //    console.log('In Calculator.CustomTooltip payload=',payload,'label=',label,'active=',active);
     if (active) {
         return (
             <div>
                 <b>{`${payload[0].payload.title}`}</b><br/>
-                {`Force: ${payload[0].payload.force}`}<br/>
-                {`Deflection: ${payload[0].payload.deflection}`}<br/>
-                {`Length: ${payload[0].payload.length}`}
+                {`Force: ${payload[0].payload.force.toODOPPrecision()}`}<br/>
+                {`Deflection: ${payload[0].payload.deflection.toODOPPrecision()}`}<br/>
+                {`Length: ${payload[0].payload.length.toODOPPrecision()}`}
             </div>
         );
     }
     return null;
+}
+
+const formatXAxis = (tickItem) => {
+    return tickItem.toODOPPrecision();
 }
 
 export class Calculator extends ReportBase {
@@ -85,31 +99,25 @@ export class Calculator extends ReportBase {
                     </table>
                 </Row>
                 <br />
-                <Row className="justify-content-lg-center">
-                    <Col lg="6"><h2>Force-Deflection Analysis</h2></Col>
-                </Row>
                 <Row>
-                    <LineChart width={912}
-                               height={912}
-                               data={data}
-                               margin={{ top: 50, right: 50, bottom: 50, left: 50 }}>
-                        <CartesianGrid stroke="#f5f5f5" strokeDasharray="3 3" />
-                        <XAxis xAxisId={0} dataKey="deflection" type="number"><Label value="Deflection" offset={10} position="left" /></XAxis>
-                        <XAxis xAxisId={1} dataKey="length" type="number" reversed="true"><Label value="Length" offset={10} position="left" /></XAxis>
-                        <YAxis dataKey="force" type="number" domain={[0, dataMax => (Math.round(dataMax))]}><Label value="Force" angle={-90} position="left" /></YAxis>
-                        <Tooltip content={<CustomTooltip />}/>
-                        <Line type="linear" dataKey="force" stroke="#2b3f79" strokeWidth="3"/>
-                        <ReferenceLine x={data[1].deflection} stroke="red" label="Deflect_1" strokeDasharray="3 3" />
-                        <ReferenceLine y={data[1].force} stroke="red" label="Force_1" strokeDasharray="3 3" />
-                        <ReferenceLine x={data[2].deflection} stroke="red" label="Deflect_2" strokeDasharray="3 3" />
-                        <ReferenceLine y={data[2].force} stroke="red" label="Force_2" strokeDasharray="3 3" />
-                    </LineChart>
-                </Row>
-                <Row className="justify-content-lg-left">
-                    <span style={{color: '#d6361c'}}>Red Line: User specified Force - Deflection</span>
-                </Row>
-                <Row className="justify-content-lg-left">
-                    <span style={{color: '#2b3f79'}}>Blue Line: Rate as determined by OD_Free, Wire_Dia, Coils_T, and Torsion_Modulus</span>
+                    <Col>
+                        <h4>Force-Deflection Graph</h4>
+                        <LineChart width={600}
+                                   height={600}
+                                   data={data}
+                                   margin={{ top: 10, right: 50, bottom: 10, left: 50 }}>
+                            <CartesianGrid stroke="#f5f5f5" strokeDasharray="3 3" />
+                            <XAxis xAxisId={0} dataKey="deflection" type="number" domain={['dataMin', 'dataMax']} interval="preserveStartEnd" tickFormatter={formatXAxis}><Label value="Deflection" offset={30} position="left" /></XAxis>
+                            <XAxis xAxisId={1} dataKey="length" type="number" reversed={true} domain={['dataMin', 'dataMax']} interval="preserveStartEnd" tickFormatter={formatXAxis}><Label value="Length" offset={30} position="left" /></XAxis>
+                            <YAxis dataKey="force" type="number" ><Label value="Force" angle={-90} position="left" /></YAxis>
+                            <Tooltip content={<CustomTooltip />}/>
+                            <Line type="linear" dataKey="force" stroke="#2b3f79" strokeWidth="3"/>
+                            <ReferenceLine x={data[1].deflection} stroke="red" label="Deflect_1" strokeDasharray="3 3" />
+                            <ReferenceLine y={data[1].force} stroke="red" label="Force_1" strokeDasharray="3 3" />
+                            <ReferenceLine x={data[2].deflection} stroke="red" label="Deflect_2" strokeDasharray="3 3" />
+                            <ReferenceLine y={data[2].force} stroke="red" label="Force_2" strokeDasharray="3 3" />
+                        </LineChart>
+                    </Col>
                 </Row>
            </Container>
         );
