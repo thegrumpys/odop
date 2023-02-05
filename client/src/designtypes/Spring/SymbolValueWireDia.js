@@ -74,7 +74,8 @@ class SymbolValueWireDia extends Component {
                 logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
             }
         }
-        this.props.cascadeSymbolValue(this.props.element.name, parseFloat(event.target.value));
+        var result = this.props.cascadeSymbolValue(this.props.element.name, parseFloat(event.target.value));
+//        console.log('In SymbolValueWireDia.onChange After cascadeSymbolValue','resulkt=',result);
         logValue(this.props.element.name,event.target.value,'Value');
         if (auto_fixed) {
             this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
@@ -93,7 +94,8 @@ class SymbolValueWireDia extends Component {
         }
         var wire_dia = parseFloat(event.target.value);
 //        console.log('In SymbolValueWireDia.onSelect wire_dia=',wire_dia);
-        this.props.cascadeSymbolValue(this.props.element.name,wire_dia);
+        var result = this.props.cascadeSymbolValue(this.props.element.name,wire_dia);
+//        console.log('In SymbolValueWireDia.onSelect After cascadeSymbolValue','resulkt=',result);
         logValue(this.props.element.name,wire_dia,'TableValue');
         if (auto_fixed) {
             this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');

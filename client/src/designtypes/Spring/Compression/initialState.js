@@ -17,13 +17,8 @@ export const initialState = {
             "tooltip": "Outside diameter in free (no load) condition",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [], // Independent
-                "sets": [o.Mean_Dia], // eqnset
-            },{
-                "refs": [o.Wire_Dia, o.Mean_Dia], // Inverse x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
-                "sets": [],
-            }]
+            "refs": [], // Independent
+            "sets": [o.Mean_Dia]
         },
         {
             "input": true,
@@ -40,19 +35,8 @@ export const initialState = {
             "tooltip": "Wire diameter",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [], // Independent
-                "sets": [o.Mean_Dia, o.Spring_Index, o.ID_Free, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect], // eqnset
-            },{
-                "refs": [o.OD_Free, o.Mean_Dia], // Inverse x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
-                "sets": [o.Spring_Index, o.ID_Free, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect],
-            },{
-                "refs": [o.ID_Free, o.Mean_Dia], // Inverse x[o.ID_Free] = x[o.Mean_Dia] - p[o.Wire_Dia];
-                "sets": [o.Spring_Index, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect],
-            },{
-                "refs": [o.Spring_Index, o.Mean_Dia], // Inverse x[o.Spring_Index] = x[o.Mean_Dia] / p[o.Wire_Dia];
-                "sets": [o.ID_Free, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect],
-            }]
+            "refs": [], // Independent
+            "sets": [o.Mean_Dia, o.Spring_Index, o.ID_Free, o.L_Solid, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.PC_Avail_Deflect]
         },
         {
             "input": true,
@@ -69,13 +53,8 @@ export const initialState = {
             "tooltip": "Length in free (no load) condition",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [], // Independent
-                "sets": [o.L_1, o.L_2, o.Force_Solid, o.Weight, o.PC_Avail_Deflect, o.Slenderness], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [], // Independent
+            "sets": [o.L_1, o.L_2, o.Force_Solid, o.Weight, o.PC_Avail_Deflect, o.Slenderness]
         },
         {
             "input": true,
@@ -92,13 +71,8 @@ export const initialState = {
             "tooltip": "Total number of coils",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [], // Independent
-                "sets": [o.Coils_A, o.L_Solid, o.Weight], // eqnset
-            },{
-                "refs": [o.Coils_A], // Inverse x[o.Coils_A] = p[o.Coils_T] - x[o.Inactive_Coils];
-                "sets": [o.L_Solid, o.Weight],
-            }]
+            "refs": [], // Independent
+            "sets": [o.Coils_A, o.L_Solid, o.Weight]
         },
         {
             "input": true,
@@ -115,13 +89,8 @@ export const initialState = {
             "tooltip": "Minimum operating load (Length L_1)",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [], // Independent
-                "sets": [o.Deflect_1, o.Stress_1], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [], // Independent
+            "sets": [o.Deflect_1, o.Stress_1]
         },
         {
             "input": true,
@@ -138,13 +107,8 @@ export const initialState = {
             "tooltip": "Maximum operating load (Length L_2)",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [], // Independent
-                "sets": [o.Deflect_2, o.Stress_2], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [], // Independent
+            "sets": [o.Deflect_2, o.Stress_2]
         },
         {
             "input": false,
@@ -161,17 +125,8 @@ export const initialState = {
             "tooltip": "Average of inside and outside diameters",
             "type": "equationset",
             "hidden": false,
-             
-            "eqns": [{
-                "refs": [o.OD_Free, o.Wire_Dia], // Dependent: x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
-                "sets": [o.ID_Free, o.Rate, o.Spring_Index, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.Slenderness], // eqnset
-            },{
-                "refs": [o.ID_Free, o.Wire_Dia], // Inverse x[o.ID_Free] = x[o.Mean_Dia] - p[o.Wire_Dia];
-                "sets": [o.Rate, o.Spring_Index, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.Slenderness],
-            },{
-                "refs": [o.Spring_Index, o.Wire_Dia], // Inverse x[o.Spring_Index] = x[o.Mean_Dia] / p[o.Wire_Dia];
-                "sets": [o.ID_Free, o.Rate, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.Slenderness],
-            }]
+            "refs": [o.OD_Free, o.Wire_Dia], // Dependent: x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
+            "sets": [o.ID_Free, o.Rate, o.Spring_Index, o.Stress_1, o.Stress_2, o.Stress_Solid, o.Weight, o.Slenderness]
         },
         {
             "input": false,
@@ -188,13 +143,8 @@ export const initialState = {
             "tooltip": "Number of Active coils",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Coils_T], // Dependent
-                "sets": [o.Rate], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Coils_T], // Dependent
+            "sets": [o.Rate]
         },
         {
             "input": false,
@@ -211,13 +161,8 @@ export const initialState = {
             "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Spring_Index, o.Coils_A, o.Mean_Dia], // Dependent temp = x[o.Spring_Index] * x[o.Spring_Index]; x[o.Rate] = x[o.Hot_Factor_Kh] * x[o.Torsion_Modulus] * x[o.Mean_Dia] / (8.0 * x[o.Coils_A] * temp * temp);
-                "sets": [o.Deflect_1, o.Deflect_2], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Spring_Index, o.Coils_A, o.Mean_Dia], // Dependent temp = x[o.Spring_Index] * x[o.Spring_Index]; x[o.Rate] = x[o.Hot_Factor_Kh] * x[o.Torsion_Modulus] * x[o.Mean_Dia] / (8.0 * x[o.Coils_A] * temp * temp);
+            "sets": [o.Deflect_1, o.Deflect_2]
         },
         {
             "input": false,
@@ -234,13 +179,8 @@ export const initialState = {
             "tooltip": "Deflection from free to load point 1",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Force_1, o.Rate], // Dependent
-                "sets": [o.L_1, o.Energy], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Force_1, o.Rate], // Dependent
+            "sets": [o.L_1, o.Energy]
         },
         {
             "input": false,
@@ -257,13 +197,8 @@ export const initialState = {
             "tooltip": "Deflection from free to load point 2",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Force_2, o.Rate], // Dependent
-                "sets": [o.L_2, o.Energy, o.PC_Avail_Deflect], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Force_2, o.Rate], // Dependent
+            "sets": [o.L_2, o.Energy, o.PC_Avail_Deflect]
         },
         {
             "input": false,
@@ -280,13 +215,8 @@ export const initialState = {
             "tooltip": "Spring length at load point 1",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Deflect_1, o.L_Free], // Dependent
-                "sets": [o.L_Stroke], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Deflect_1, o.L_Free], // Dependent
+            "sets": [o.L_Stroke]
         },
         {
             "input": false,
@@ -305,13 +235,8 @@ export const initialState = {
             "hidden": false,
             "validminchoices": [ "L_Solid" ],
             "validminchoice": 0,
-            "eqns": [{
-                "refs": [o.Deflect_2, o.L_Free], // Dependent
-                "sets": [o.L_Stroke], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Deflect_2, o.L_Free], // Dependent
+            "sets": [o.L_Stroke]
         },
         {
             "input": false,
@@ -328,13 +253,8 @@ export const initialState = {
             "tooltip": "Length of stroke from point 1 to point 2",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.L_1, o.L_2], // Dependent
-                "sets": [], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.L_1, o.L_2], // Dependent
+            "sets": []
         },
         {
             "input": false,
@@ -352,13 +272,8 @@ export const initialState = {
             "type": "equationset",
             "hidden": false,
             "propagate": [{ name: "L_2", minmax: VALID_MIN }],
-            "eqns": [{
-                "refs": [o.Coils_T, o.Wire_Dia], // Dependent
-                "sets": [o.Force_Solid, o.PC_Avail_Deflect], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Coils_T, o.Wire_Dia], // Dependent
+            "sets": [o.Force_Solid, o.PC_Avail_Deflect]
         },
         {
             "input": false,
@@ -375,13 +290,8 @@ export const initialState = {
             "tooltip": "Ratio of free length (L_Free) to mean diameter (Mean_Dia)",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Mean_Dia, o.L_Free], // Dependent
-                "sets": [], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Mean_Dia, o.L_Free], // Dependent
+            "sets": []
         },
         {
             "input": false,
@@ -398,13 +308,8 @@ export const initialState = {
             "tooltip": "Inside diameter in free (no load) condition",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Wire_Dia, o.Mean_Dia], // Dependent x[o.ID_Free] = x[o.Mean_Dia] - p[o.Wire_Dia];
-                "sets": [], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Wire_Dia, o.Mean_Dia], // Dependent x[o.ID_Free] = x[o.Mean_Dia] - p[o.Wire_Dia];
+            "sets": []
         },
         {
             "input": false,
@@ -421,13 +326,8 @@ export const initialState = {
             "tooltip": "Weight of one spring",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Mean_Dia, o.Coils_T, o.Wire_Dia, o.L_Free], // Dependent
-                "sets": [], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Mean_Dia, o.Coils_T, o.Wire_Dia, o.L_Free], // Dependent
+            "sets": []
         },
         {
             "input": false,
@@ -444,13 +344,8 @@ export const initialState = {
             "tooltip": "Ratio of mean coil diameter (Mean_Dia) to wire diameter (Wire_Dia)",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Wire_Dia, o.Mean_Dia], // Dependent x[o.Spring_Index] = x[o.Mean_Dia] / p[o.Wire_Dia];
-                "sets": [o.Stress_1, o.Stress_2, o.Stress_Solid, o.FS_CycleLife, o.Rate], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Wire_Dia, o.Mean_Dia], // Dependent x[o.Spring_Index] = x[o.Mean_Dia] / p[o.Wire_Dia];
+            "sets": [o.Stress_1, o.Stress_2, o.Stress_Solid, o.FS_CycleLife, o.Rate]
         },
         {
             "input": false,
@@ -467,13 +362,8 @@ export const initialState = {
             "tooltip": "Load required to fully compress the spring",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Rate, o.L_Free, o.L_Solid], // Dependent
-                "sets": [o.Stress_Solid], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Rate, o.L_Free, o.L_Solid], // Dependent
+            "sets": [o.Stress_Solid]
         },
         {
             "input": false,
@@ -490,13 +380,8 @@ export const initialState = {
             "tooltip": "Torsion stress in wire at load point 1",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_1, o.Spring_Index], // Dependent
-                "sets": [/*o.FS_1, */o.FS_CycleLife, o.Cycle_Life], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_1, o.Spring_Index], // Dependent
+            "sets": [/*o.FS_1, */o.FS_CycleLife, o.Cycle_Life]
         },
         {
             "input": false,
@@ -513,13 +398,8 @@ export const initialState = {
             "tooltip": "Torsion stress in wire at load point 2",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_2, o.Spring_Index], // Dependent
-                "sets": [o.FS_2, o.FS_CycleLife, o.Cycle_Life], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_2, o.Spring_Index], // Dependent
+            "sets": [o.FS_2, o.FS_CycleLife, o.Cycle_Life]
         },
         {
             "input": false,
@@ -536,13 +416,8 @@ export const initialState = {
             "tooltip": "Torsion stress in wire when spring is fully compressed",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_Solid, o.Spring_Index], // Dependent
-                "sets": [o.FS_Solid], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Wire_Dia, o.Mean_Dia, o.Force_Solid, o.Spring_Index], // Dependent
+            "sets": [o.FS_Solid]
         },
         {
             "input": false,
@@ -559,13 +434,8 @@ export const initialState = {
             "tooltip": "Factor of safety at load point 2",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Stress_2], // Dependent
-                "sets": [], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Stress_2], // Dependent
+            "sets": []
         },
         {
             "input": false,
@@ -582,13 +452,8 @@ export const initialState = {
             "tooltip": "Factor of safety when the spring is fully compressed",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Stress_Solid], // Dependent
-                "sets": [], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Stress_Solid], // Dependent
+            "sets": []
         },
         {
             "input": false,
@@ -605,13 +470,8 @@ export const initialState = {
             "tooltip": "Factor of safety to achieve the target cycle life category. See on-line Help.",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Stress_1, o.Stress_2, o.Spring_Index], // Dependent
-                "sets": [], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Stress_1, o.Stress_2, o.Spring_Index], // Dependent
+            "sets": []
         },
         {
             "input": false,
@@ -628,13 +488,8 @@ export const initialState = {
             "tooltip": "Rough estimate of the average number of cycles to failure when cycling between point 1 and point 2. See on-line Help.",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Stress_1, o.Stress_2], // Dependent
-                "sets": [], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Stress_1, o.Stress_2], // Dependent
+            "sets": []
         },
         {
             "input": false,
@@ -651,13 +506,8 @@ export const initialState = {
             "tooltip": "Deflection of load point 2 as a percent of total available deflection",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Deflect_2, o.L_Solid, o.L_Free, o.Wire_Dia], // Dependent
-                "sets": [], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Deflect_2, o.L_Solid, o.L_Free, o.Wire_Dia], // Dependent
+            "sets": []
         },
         {
             "input": false,
@@ -674,13 +524,8 @@ export const initialState = {
             "tooltip": "Change in elastic potential energy between 1 and 2",
             "type": "equationset",
             "hidden": false,
-            "eqns": [{
-                "refs": [o.Rate, o.Deflect_1, o.Deflect_2], // Dependent
-                "sets": [], // eqnset
-            },{
-                "refs": [], // Inverse
-                "sets": [],
-            }]
+            "refs": [o.Rate, o.Deflect_1, o.Deflect_2], // Dependent
+            "sets": []
         },
         {
             "input": false,

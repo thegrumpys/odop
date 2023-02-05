@@ -39,7 +39,8 @@ class NameValueUnitsRowIndependentVariable extends Component {
                 logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
             }
         }
-        this.props.cascadeSymbolValue(this.props.element.name, parseFloat(event.target.value)); // Update the model
+        var result = this.props.cascadeSymbolValue(this.props.element.name, parseFloat(event.target.value)); // Update the model
+//        console.log('In NameValueUnitsRowIndependentVariable.onChangeValid After cascadeSymbolValue','resulkt=',result);
         logValue(this.props.element.name,event.target.value);
         if (auto_fixed) {
             this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
