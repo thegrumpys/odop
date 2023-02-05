@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { ReportBase } from "./ReportBase" // import the inner non-redux-connected class
-import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, Label, ReferenceLine } from 'recharts';
+import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, Label, ReferenceLine, ErrorBar } from 'recharts';
 import SymbolName from '../../../components/SymbolName';
 import SymbolValue from '../../../components/SymbolValue';
 import SymbolUnits from '../../../components/SymbolUnits';
@@ -9,6 +9,7 @@ import ValueName from '../../../components/ValueName';
 import Value from '../../../components/Value';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
+import { CONSTRAINED } from '../../../store/actionTypes';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -45,9 +46,30 @@ export class Calculator extends ReportBase {
         super.render();
 //        console.log('In Calculator.render this=',this);
         var data = [];
-        data.push({ title: 'Free position', force: 0.0, deflection: 0.0, length: this.props.symbol_table[o.L_Free].value });
-        data.push({ title: 'Position 1', force: this.props.symbol_table[o.Force_1].value, deflection: this.props.symbol_table[o.Deflect_1].value, length: this.props.symbol_table[o.L_1].value });
-        data.push({ title: 'Position 2', force: this.props.symbol_table[o.Force_2].value, deflection: this.props.symbol_table[o.Deflect_2].value, length: this.props.symbol_table[o.L_2].value });
+        data.push({ 
+            title: 'Free position', 
+            force: 0.0, 
+            deflection: 0.0, 
+            length: this.props.symbol_table[o.L_Free].value,
+            force_min_max: 0.0,
+            deflect_min_max: 0.0
+             });
+        data.push({ 
+            title: 'Position 1', 
+            force: this.props.symbol_table[o.Force_1].value, 
+            deflection: this.props.symbol_table[o.Deflect_1].value, 
+            length: this.props.symbol_table[o.L_1].value,
+            force_min_max: [this.props.symbol_table[o.Force_1].value-this.props.symbol_table[o.Force_1].cmin, this.props.symbol_table[o.Force_1].cmax-this.props.symbol_table[o.Force_1].value],
+            deflect_min_max: [this.props.symbol_table[o.Deflect_1].value-this.props.symbol_table[o.Deflect_1].cmin, this.props.symbol_table[o.Deflect_1].cmax-this.props.symbol_table[o.Deflect_1].value],
+             });
+        data.push({ 
+            title: 'Position 2', 
+            force: this.props.symbol_table[o.Force_2].value, 
+            deflection: this.props.symbol_table[o.Deflect_2].value, 
+            length: this.props.symbol_table[o.L_2].value,
+            force_min_max: [this.props.symbol_table[o.Force_2].value-this.props.symbol_table[o.Force_2].cmin, this.props.symbol_table[o.Force_2].cmax-this.props.symbol_table[o.Force_2].value],
+            deflect_min_max: [this.props.symbol_table[o.Deflect_2].value-this.props.symbol_table[o.Deflect_2].cmin, this.props.symbol_table[o.Deflect_2].cmax-this.props.symbol_table[o.Deflect_2].value],
+             });
         return (
             <Container>
                 <Row>
@@ -111,7 +133,10 @@ export class Calculator extends ReportBase {
                             <XAxis xAxisId={1} dataKey="length" type="number" reversed={true} domain={['dataMin', 'dataMax']} interval="preserveStartEnd" tickFormatter={formatXAxis}><Label value="Length" offset={30} position="left" /></XAxis>
                             <YAxis dataKey="force" type="number" ><Label value="Force" angle={-90} position="left" /></YAxis>
                             <Tooltip content={<CustomTooltip />}/>
-                            <Line type="linear" dataKey="force" stroke="#2b3f79" strokeWidth="3"/>
+                            <Line type="linear" dataKey="force" stroke="#2b3f79" strokeWidth="3">
+                                <ErrorBar dataKey="force_min_max" layout="vertical" stroke="#ff3f79" strokeWidth="3"/>
+                                <ErrorBar dataKey="deflect_min_max" layout="horizontal" stroke="#2b3fff" strokeWidth="3"/>
+                            </Line>
                             <ReferenceLine x={data[1].deflection} stroke="red" label="Deflect_1" strokeDasharray="3 3" />
                             <ReferenceLine y={data[1].force} stroke="red" label="Force_1" strokeDasharray="3 3" />
                             <ReferenceLine x={data[2].deflection} stroke="red" label="Deflect_2" strokeDasharray="3 3" />
