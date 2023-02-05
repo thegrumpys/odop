@@ -39,6 +39,7 @@
     "react-redux": "^5.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^2.0.5",
+    "recharts": "^2.2.0",
     "redux": "^4.0.5",
     "source-map-explorer": "^2.5.1",
     "typescript": "^3.9.7"

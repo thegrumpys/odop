@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { ReportBase } from "./ReportBase" // import the inner non-redux-connected class
+import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, Label, ReferenceLine } from 'recharts';
 import SymbolName from '../../../components/SymbolName';
 import SymbolValue from '../../../components/SymbolValue';
 import SymbolUnits from '../../../components/SymbolUnits';
@@ -9,11 +10,30 @@ import Value from '../../../components/Value';
 import * as o from './symbol_table_offsets';
 import { connect } from 'react-redux';
 
+function CustomTooltip({ payload, label, active }) {
+//    console.log('In Calculator.CustomTooltip payload=',payload,'label=',label,'active=',active);
+    if (active) {
+        return (
+            <div>
+                <b>{`${payload[0].payload.title}`}</b><br/>
+                {`Force: ${payload[0].payload.force}`}<br/>
+                {`Deflection: ${payload[0].payload.deflection}`}<br/>
+                {`Length: ${payload[0].payload.length}`}
+            </div>
+        );
+    }
+    return null;
+}
+
 export class Calculator extends ReportBase {
 
     render() {
         super.render();
 //        console.log('In Calculator.render this=',this);
+        var data = [];
+        data.push({ title: 'Free position', force: 0.0, deflection: 0.0, length: this.props.symbol_table[o.L_Free].value });
+        data.push({ title: 'Position 1', force: this.props.symbol_table[o.Force_1].value, deflection: this.props.symbol_table[o.Deflect_1].value, length: this.props.symbol_table[o.L_1].value });
+        data.push({ title: 'Position 2', force: this.props.symbol_table[o.Force_2].value, deflection: this.props.symbol_table[o.Deflect_2].value, length: this.props.symbol_table[o.L_2].value });
         return (
             <Container>
                 <Row>
@@ -65,6 +85,32 @@ export class Calculator extends ReportBase {
                     </table>
                 </Row>
                 <br />
+                <Row className="justify-content-lg-center">
+                    <Col lg="6"><h2>Force-Deflection Analysis</h2></Col>
+                </Row>
+                <Row>
+                    <LineChart width={912}
+                               height={912}
+                               data={data}
+                               margin={{ top: 50, right: 50, bottom: 50, left: 50 }}>
+                        <CartesianGrid stroke="#f5f5f5" strokeDasharray="3 3" />
+                        <XAxis xAxisId={0} dataKey="deflection" type="number"><Label value="Deflection" offset={10} position="left" /></XAxis>
+                        <XAxis xAxisId={1} dataKey="length" type="number" reversed="true"><Label value="Length" offset={10} position="left" /></XAxis>
+                        <YAxis dataKey="force" type="number" domain={[0, dataMax => (Math.round(dataMax))]}><Label value="Force" angle={-90} position="left" /></YAxis>
+                        <Tooltip content={<CustomTooltip />}/>
+                        <Line type="linear" dataKey="force" stroke="#2b3f79" strokeWidth="3"/>
+                        <ReferenceLine x={data[1].deflection} stroke="red" label="Deflect_1" strokeDasharray="3 3" />
+                        <ReferenceLine y={data[1].force} stroke="red" label="Force_1" strokeDasharray="3 3" />
+                        <ReferenceLine x={data[2].deflection} stroke="red" label="Deflect_2" strokeDasharray="3 3" />
+                        <ReferenceLine y={data[2].force} stroke="red" label="Force_2" strokeDasharray="3 3" />
+                    </LineChart>
+                </Row>
+                <Row className="justify-content-lg-left">
+                    <span style={{color: '#d6361c'}}>Red Line: User specified Force - Deflection</span>
+                </Row>
+                <Row className="justify-content-lg-left">
+                    <span style={{color: '#2b3f79'}}>Blue Line: Rate as determined by OD_Free, Wire_Dia, Coils_T, and Torsion_Modulus</span>
+                </Row>
            </Container>
         );
     }
