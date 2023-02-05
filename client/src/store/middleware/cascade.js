@@ -42,6 +42,7 @@ export function cascade(store, element, user_input) {
             if (total_count-initialized_count < 1) { // Overspecified
                 console.error('In cascade SKIP EXECUTE - OVERSPECIFIED','element.name=',element.name);
             } else if (total_count-initialized_count === 1) { // Execute this equation
+                console.log('In cascade RESET UNINITIALIZED','element.name=',element.name,'user_input=',user_input,'uninitialized_element.name=',uninitialized_element.name);
                 store.dispatch(resetSymbolFlag(uninitialized_element.name,MIN,UNINITIALIZED));
                 store.dispatch(resetSymbolFlag(uninitialized_element.name,MAX,UNINITIALIZED));
                 element.sets.forEach((set, set_index) => {
@@ -55,7 +56,7 @@ export function cascade(store, element, user_input) {
         }
 //        console.log('In cascade design=',design);
     } else {
-        console.log('In cascade SKIP ELEMENT - ALREADY INITIALIZED','element.name=',element.name);
+        console.log('In cascade SKIP ELEMENT - NOT USER INPUT OR ALREADY INITIALIZED','element.name=',element.name);
     }
     console.log('</ul><li>','End cascade','</li>');
 }
