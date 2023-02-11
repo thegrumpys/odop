@@ -54,7 +54,7 @@ export var checks = function(store) {
         // VALUE VALIDITY CHECKS
         var severity = ERR;
         if (element.type === 'equationset' && !element.input) { // Dependent Variable?
-          severity = INFO; // Make Invalid Dependent Variable only Info
+          severity = WARN; // Make Invalid Dependent Variable only Info
         }
         if (element.format === undefined && typeof element.value === 'number' && element.value <= element.validmin) {
             let validmin;

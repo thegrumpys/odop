@@ -39,8 +39,8 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
         if (element.type === "equationset" && element.input) { // Independent Variable
             pp = p[ip++];
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
-                validity_vmin = (-pp + element.validmin);
-                validity_vmax = ( pp - element.validmax);
+                validity_vmin = (-pp + element.validmin) / element.smin;
+                validity_vmax = ( pp - element.validmax) / element.smax;
             } else {
                 validity_vmin = 0.0;
                 validity_vmax = 0.0;
@@ -77,7 +77,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
             }
 //            console.log('In pxUpdateObjectiveValue IV    element=',element,'ip=',ip,'pp=',pp,'element.cmax=',element.cmax,'element.smax=',element.smax);
 //            console.log('In pxUpdateObjectiveValue IV    ','pp=',pp,'element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
-        } else if ((element.type === "equationset" && !element.input) || element.type === "calcinput") { // Dependent Variable
+        } else if (element.type === "equationset" && !element.input) { // Dependent Variable
             xx = x[ix++];
             /* State variable fix levels. */
             /*
@@ -87,8 +87,8 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
              * This version reduces penalty of large fix violations.
              */
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
-                validity_vmin = (-xx + element.validmin);
-                validity_vmax = ( xx - element.validmax);
+                validity_vmin = (-xx + element.validmin) / element.smin;
+                validity_vmax = ( xx - element.validmax) / element.smax;
             } else {
                 validity_vmin = 0.0;
                 validity_vmax = 0.0;
