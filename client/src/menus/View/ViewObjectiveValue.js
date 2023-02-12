@@ -80,11 +80,16 @@ class ViewObjectiveValue extends Component {
                 viol_sum.value = viol_sum.value + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);
                 invalid |= true; infeasible |= true;
             } else if (validity_vmin > 0.0) {
+                feasibility_vmin = 0.0;
                 viol_sum.value = viol_sum.value + validity_vmin * validity_vmin;
                 invalid |= true;
             } else if (feasibility_vmin > 0.0) {
+                validity_vmin = 0.0;
                 viol_sum.value = viol_sum.value + feasibility_vmin * feasibility_vmin;
                 infeasible |= true;
+            } else {
+                feasibility_vmin = 0.0;
+                validity_vmin = 0.0;
             }
             if (element.lmax & CONSTRAINED) {
                 feasibility_vmax = ( element.value - element.cmax) / element.smax;
@@ -95,11 +100,16 @@ class ViewObjectiveValue extends Component {
                 viol_sum.value = viol_sum.value + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
                 invalid |= true; infeasible |= true;
             } else if (validity_vmax > 0.0) {
+                feasibility_vmax = 0.0;
                 viol_sum.value = viol_sum.value + validity_vmax * validity_vmax;
                 invalid |= true;
             } else if (feasibility_vmax > 0.0) {
+                validity_vmax = 0.0;
                 viol_sum.value = viol_sum.value + feasibility_vmax * feasibility_vmax;
                 infeasible |= true;
+            } else {
+                feasibility_vmax = 0.0;
+                validity_vmax = 0.0;
             }
 //            console.log('In ViewObjectiveValue.renderElement IV    element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum.value=',viol_sum.value,'invalid=',invalid,'infeasible=',infeasible);
         } else if (element.type === "equationset" && !element.input) { // Dependent Variable
@@ -128,9 +138,11 @@ class ViewObjectiveValue extends Component {
                     }
                     invalid |= true; infeasible |= true;
                 } else if (validity_vmin > 0.0) {
+                    feasibility_vmin = 0.0;
                     viol_sum.value = viol_sum.value + validity_vmin * validity_vmin;
                     invalid |= true;
                 } else if (feasibility_vmin > 0.0) {
+                    validity_vmin = 0.0;
                     if (feasibility_vmin > 1.0) {
                         viol_sum.value = viol_sum.value + feasibility_vmin;
                     } else if (feasibility_vmin < -1.0) {
@@ -139,6 +151,9 @@ class ViewObjectiveValue extends Component {
                         viol_sum.value = viol_sum.value + feasibility_vmin * feasibility_vmin;
                     }
                     infeasible |= true;
+                } else {
+                    feasibility_vmin = 0.0;
+                    validity_vmin = 0.0;
                 }
                 feasibility_vmax = -feasibility_vmin;
                 if (validity_vmax > 0.0 && feasibility_vmax > 0.0) {
@@ -150,9 +165,11 @@ class ViewObjectiveValue extends Component {
                     }
                     invalid |= true; infeasible |= true;
                 } else if (validity_vmax > 0.0) {
+                    feasibility_vmax = 0.0;
                     viol_sum.value = viol_sum.value + validity_vmax * validity_vmax;
                     invalid |= true;
                 } else if (feasibility_vmax > 0.0) {
+                    validity_vmax = 0.0;
                     if (feasibility_vmax > 1.0) {
                         viol_sum.value = viol_sum.value + feasibility_vmax;
                     } else if (feasibility_vmax < -1.0) {
@@ -161,6 +178,9 @@ class ViewObjectiveValue extends Component {
                         viol_sum.value = viol_sum.value + feasibility_vmax * feasibility_vmax;
                     }
                     infeasible |= true;
+                } else {
+                    feasibility_vmax = 0.0;
+                    validity_vmax = 0.0;
                 }
             } else {
                 if (element.lmin & CONSTRAINED) {
@@ -169,14 +189,19 @@ class ViewObjectiveValue extends Component {
                     feasibility_vmin = 0.0;
                 }
                 if (validity_vmin > 0.0 && feasibility_vmin > 0.0) {
-                    viol_sum.value = viol_sum.value + (feasibility_vmin * validity_vmin) + (feasibility_vmin * validity_vmin);;
+                    viol_sum.value = viol_sum.value + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);;
                     invalid |= true; infeasible |= true;
                 } else if (validity_vmin > 0.0) {
+                    feasibility_vmin = 0.0;
                     viol_sum.value = viol_sum.value + validity_vmin * validity_vmin;
                     invalid |= true;
                 } else if (feasibility_vmin > 0.0) {
+                    validity_vmin = 0.0;
                     viol_sum.value = viol_sum.value + feasibility_vmin * feasibility_vmin;
                     infeasible |= true;
+                } else {
+                    feasibility_vmin = 0.0;
+                    validity_vmin = 0.0;
                 }
                 if (element.lmax & CONSTRAINED) {
                     feasibility_vmax = ( element.value - element.cmax) / element.smax;
@@ -184,14 +209,19 @@ class ViewObjectiveValue extends Component {
                     feasibility_vmax = 0.0;
                 }
                 if (validity_vmax > 0.0 && feasibility_vmax > 0.0) {
-                    viol_sum.value = viol_sum.value + (feasibility_vmax * validity_vmax) + (feasibility_vmax * validity_vmax);
+                    viol_sum.value = viol_sum.value + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
                     invalid |= true; infeasible |= true;
                 } else if (validity_vmax > 0.0) {
+                    feasibility_vmax = 0.0;
                     viol_sum.value = viol_sum.value + validity_vmax * validity_vmax;
                     invalid |= true;
                 } else if (feasibility_vmax > 0.0) {
+                    validity_vmax = 0.0;
                     viol_sum.value = viol_sum.value + feasibility_vmax * feasibility_vmax;
                     infeasible |= true;
+                } else {
+                    feasibility_vmax = 0.0;
+                    validity_vmax = 0.0;
                 }
             }
 //            console.log('In ViewObjectiveValue.renderElement DV/CI element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum.value=',viol_sum.value,'invalid=',invalid,'infeasible=',infeasible);
@@ -200,6 +230,8 @@ class ViewObjectiveValue extends Component {
             validity_vmax = 0.0;
             feasibility_vmin = 0.0;
             feasibility_vmax = 0.0;
+            invalid = false;
+            infeasible = false;
         }
         return (
             <tr key={element.name}>
@@ -208,8 +240,8 @@ class ViewObjectiveValue extends Component {
                 <td>{viol_sum.value}</td>
                 <td>{invalid ? 'true' : ''}</td>
                 <td>{infeasible ? 'true' : ''}</td>
-                <td>{(this.props.objective_value === 0.0 && feasibility_vmin <= 0.0 && validity_vmin <= 0.0) ? '' : (feasibility_vmin+validity_vmin)*(feasibility_vmin+validity_vmin)*100/this.props.objective_value}</td>
-                <td>{(this.props.objective_value === 0.0 && feasibility_vmax <= 0.0 && validity_vmax <= 0.0) ? '' : (feasibility_vmax+validity_vmax)*(feasibility_vmax+validity_vmax)*100/this.props.objective_value}</td>
+                <td>{(this.props.objective_value === 0.0 || (feasibility_vmin <= 0.0 && validity_vmin <= 0.0)) ? '' : (feasibility_vmin+validity_vmin)*(feasibility_vmin+validity_vmin)*100/this.props.objective_value}</td>
+                <td>{(this.props.objective_value === 0.0 || (feasibility_vmax <= 0.0 && validity_vmax <= 0.0)) ? '' : (feasibility_vmax+validity_vmax)*(feasibility_vmax+validity_vmax)*100/this.props.objective_value}</td>
                 <td>{validity_vmin <= 0.0 ? '' : validity_vmin}</td>
                 <td>{validity_vmax <= 0.0 ? '' : validity_vmax}</td>
                 <td>{feasibility_vmin <= 0.0 ? '' : feasibility_vmin}</td>

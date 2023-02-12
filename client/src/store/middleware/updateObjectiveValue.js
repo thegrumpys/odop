@@ -76,7 +76,7 @@ export function updateObjectiveValue(store, merit) {
                 viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
                 infeasible |= true;
             }
-//            console.log('In updateObjectiveValue IV    element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
+            if (debug) console.log('In updateObjectiveValue IV element.name=',element.name,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
         } else if (element.type === "equationset" && !element.input) { // Dependent Variable
             /* State variable fix levels. */
             /*
@@ -175,7 +175,7 @@ export function updateObjectiveValue(store, merit) {
                     infeasible |= true;
                 }
             }
-//            console.log('In updateObjectiveValue DV/CI element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
+            if (debug) console.log('In updateObjectiveValue DV element.name=',element.name,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
         }
 //        console.log('In updateObjectiveValue at end element=',element);
     }
@@ -203,7 +203,7 @@ export function updateObjectiveValue(store, merit) {
     store.dispatch(changeResultObjectiveValue(obj));
 
     if (debug) {
-	    if (!invalid && !infeasible) {
+	        if (!invalid && !infeasible) {
             console.log('In updateObjectiveValue Valid & Feasible obj=',obj);
         } else if (!invalid && infeasible) {
             console.log('In updateObjectiveValue Valid & Infeasible obj=',obj);
