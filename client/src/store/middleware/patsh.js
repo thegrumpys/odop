@@ -10,7 +10,7 @@ import { despak } from './despak';
  */
 export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
     var debug = false;
-    var debug_explore = true;
+    var debug_explore = false;
     if (debug) console.log('<li>','@@@@@ Start patsh psi=',psi,'del=',del,'delmin=',delmin,'objmin=',objmin,'maxit=',maxit,'tol=',tol,'store=',store,'merit=',merit,'</li><ul>');
     var s_psi;
     var NCODE;
@@ -47,7 +47,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                 }
             }
         }
-        if (debug_explore) console.log('In patsh_explore 3','phi=',phi,'s=',s);
+        if (debug_explore) console.log('In patsh_explore 3','phi=',phi,'s=',s,'\n');
         return s;
     }
 
