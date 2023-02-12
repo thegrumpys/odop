@@ -40,10 +40,10 @@ class ViewObjectiveValue extends Component {
                 <th>feasibility_vmin</th>
                 <th>feasibility_vmax</th>
                 <th>value</th>
-                <th>lmin</th>
-                <th>lmax</th>
                 <th>validmin</th>
                 <th>validmax</th>
+                <th>lmin</th>
+                <th>lmax</th>
                 <th>cmin</th>
                 <th>cmax</th>
                 <th>vmin</th>
@@ -247,10 +247,10 @@ class ViewObjectiveValue extends Component {
                 <td>{feasibility_vmin <= 0.0 ? '' : feasibility_vmin}</td>
                 <td>{feasibility_vmax <= 0.0 ? '' : feasibility_vmax}</td>
                 <td>{element.value}</td>
-                <td>{element.lmin !== undefined ? flags[element.lmin] : ''}</td>
-                <td>{element.lmin !== undefined ? flags[element.lmax] : ''}</td>
                 <td>{element.lmin !== undefined ? element.validmin : ''}</td>
                 <td>{element.lmin !== undefined ? element.validmax : ''}</td>
+                <td>{element.lmin !== undefined ? flags[element.lmin] : ''}</td>
+                <td>{element.lmin !== undefined ? flags[element.lmax] : ''}</td>
                 <td>{element.lmin !== undefined ? element.cmin : ''}</td>
                 <td>{element.lmin !== undefined ? element.cmax : ''}</td>
                 <td>{element.lmin !== undefined ? element.vmin : ''}</td>
