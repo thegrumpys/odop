@@ -31,7 +31,7 @@ class ViewSymbolTable extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     SymbolTable
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} onHide={this.toggle} size="lg">
+                <Modal show={this.state.modal} onHide={this.toggle} size="xl">
                     <Modal.Header closeButton>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : SymbolTable

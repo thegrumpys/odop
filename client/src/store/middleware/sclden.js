@@ -4,8 +4,7 @@ export function sclden(system_controls, value, level, sdlimit, flags) {
     var result;
     if (flags & FIXED) {
         result = (1.0 / system_controls.fix_wt) * Math.abs(level) + system_controls.smallnum;
-        }
-    else {
+    } else {
         result = (1.0 / system_controls.con_wt) * Math.abs(level) + system_controls.smallnum;
     }
     if (result < sdlimit) {

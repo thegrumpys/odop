@@ -748,7 +748,7 @@ class ActionTrade extends Component {
                 {/*==================================================*/}
                 {/*=====================strategy=====================*/}
                 {/*==================================================*/}
-                <Modal show={this.state.strategyModal} size="lg" onHide={this.onStrategyDone}>
+                <Modal show={this.state.strategyModal} size="xl" onHide={this.onStrategyDone}>
                     <Modal.Header closeButton>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Trade : Strategy

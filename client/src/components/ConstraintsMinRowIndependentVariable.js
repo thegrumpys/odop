@@ -148,7 +148,7 @@ class ConstraintMinRowIndependentVariable extends Component {
                             <FormControlTypeNumber id={this.props.element.name + "_cmin"} icon_alerts={icon_alerts} className={className} value={this.props.element.cmin} validmin={this.props.element.validmin} validmax={this.props.element.validmax} disabled={this.props.element.lmin & FIXED ? true : (this.props.element.lmin & CONSTRAINED ? false : true)} disabledText={this.props.element.lmin & CONSTRAINED ? false : true} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onClick={this.onClick}/>
                         </InputGroup>
                         {this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0 ?
-                        <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>
+                        <Modal show={this.state.modal} size="xl" onHide={this.onCancel}>
                             <Modal.Header closeButton>
                                 <Modal.Title>
                                     Functionally Determined Constraint Level (FDCL) - Set {this.props.element.name} Min Constraint

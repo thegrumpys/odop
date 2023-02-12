@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
 import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 
-class ViewObjectiveValue extends Component {
+class ViewSearch extends Component {
 
     constructor(props) {
-//        console.log('In ViewObjectiveValue.constructor');
+//        console.log('In ViewSearch.constructor');
         super(props);
         this.toggle = this.toggle.bind(this);
         this.renderElementHeader = this.renderElementHeader.bind(this);
@@ -18,19 +18,19 @@ class ViewObjectiveValue extends Component {
     }
     
     toggle() {
-//        console.log('In ViewObjectiveValue.toggle');
+//        console.log('In ViewSearch.toggle');
         this.setState({
             modal: !this.state.modal
         });
-        if (this.state.modal) logUsage('event', 'ViewObjectiveValue', { event_label: 'ViewObjectiveValue'});
+        if (this.state.modal) logUsage('event', 'ViewSearch', { event_label: 'ViewSearch'});
     }
-    
+
     renderElementHeader() {
         return (
             <tr key="table-head-row">
                 <th>#</th>
                 <th>name</th>
-                <th>viol_sum</th>
+                <th>shared</th>
                 <th>invalid</th>
                 <th>infeasible</th>
                 <th>%vf_vmin**2</th>
@@ -55,7 +55,7 @@ class ViewObjectiveValue extends Component {
         );
     }
     
-    renderElement(viol_sum, element, i) {
+    renderElement(shared, element, i) {
         var flags = ['','CONSTRAINED','FIXED','CONSTRAINED|FIXED','FDCL','CONSTRAINED|FDCL','FIXED|FDCL','CONSTRAINED|FIXED|FDCL']
         var validity_vmin;
         var validity_vmax;
@@ -77,15 +77,15 @@ class ViewObjectiveValue extends Component {
                 feasibility_vmin = 0.0;
             }
             if (validity_vmin > 0.0 && feasibility_vmin > 0.0) {
-                viol_sum.value = viol_sum.value + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);
+                shared.value = shared.value + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);
                 invalid |= true; infeasible |= true;
             } else if (validity_vmin > 0.0) {
                 feasibility_vmin = 0.0;
-                viol_sum.value = viol_sum.value + validity_vmin * validity_vmin;
+                shared.value = shared.value + validity_vmin * validity_vmin;
                 invalid |= true;
             } else if (feasibility_vmin > 0.0) {
                 validity_vmin = 0.0;
-                viol_sum.value = viol_sum.value + feasibility_vmin * feasibility_vmin;
+                shared.value = shared.value + feasibility_vmin * feasibility_vmin;
                 infeasible |= true;
             } else {
                 feasibility_vmin = 0.0;
@@ -97,21 +97,21 @@ class ViewObjectiveValue extends Component {
                 feasibility_vmax = 0.0;
             }
             if (validity_vmax > 0.0 && feasibility_vmax > 0.0) {
-                viol_sum.value = viol_sum.value + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
+                shared.value = shared.value + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
                 invalid |= true; infeasible |= true;
             } else if (validity_vmax > 0.0) {
                 feasibility_vmax = 0.0;
-                viol_sum.value = viol_sum.value + validity_vmax * validity_vmax;
+                shared.value = shared.value + validity_vmax * validity_vmax;
                 invalid |= true;
             } else if (feasibility_vmax > 0.0) {
                 validity_vmax = 0.0;
-                viol_sum.value = viol_sum.value + feasibility_vmax * feasibility_vmax;
+                shared.value = shared.value + feasibility_vmax * feasibility_vmax;
                 infeasible |= true;
             } else {
                 feasibility_vmax = 0.0;
                 validity_vmax = 0.0;
             }
-//            console.log('In ViewObjectiveValue.renderElement IV    element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum.value=',viol_sum.value,'invalid=',invalid,'infeasible=',infeasible);
+//            console.log('In ViewSearch.renderElement IV    element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'shared.value=',shared.value,'invalid=',invalid,'infeasible=',infeasible);
         } else if (element.type === "equationset" && !element.input) { // Dependent Variable
             /* State variable fix levels. */
             /*
@@ -132,23 +132,23 @@ class ViewObjectiveValue extends Component {
                 if (validity_vmin > 0.0 && feasibility_vmin > 0.0) {
                     var vmin_sum = feasibility_vmin + validity_vmin;
                     if (vmin_sum > 1.0) {
-                        viol_sum.value = viol_sum.value + vmin_sum;
+                        shared.value = shared.value + vmin_sum;
                     } else {
-                        viol_sum.value = viol_sum.value + vmin_sum * vmin_sum;
+                        shared.value = shared.value + vmin_sum * vmin_sum;
                     }
                     invalid |= true; infeasible |= true;
                 } else if (validity_vmin > 0.0) {
                     feasibility_vmin = 0.0;
-                    viol_sum.value = viol_sum.value + validity_vmin * validity_vmin;
+                    shared.value = shared.value + validity_vmin * validity_vmin;
                     invalid |= true;
                 } else if (feasibility_vmin > 0.0) {
                     validity_vmin = 0.0;
                     if (feasibility_vmin > 1.0) {
-                        viol_sum.value = viol_sum.value + feasibility_vmin;
+                        shared.value = shared.value + feasibility_vmin;
                     } else if (feasibility_vmin < -1.0) {
-                        viol_sum.value = viol_sum.value - feasibility_vmin;
+                        shared.value = shared.value - feasibility_vmin;
                     } else {
-                        viol_sum.value = viol_sum.value + feasibility_vmin * feasibility_vmin;
+                        shared.value = shared.value + feasibility_vmin * feasibility_vmin;
                     }
                     infeasible |= true;
                 } else {
@@ -159,23 +159,23 @@ class ViewObjectiveValue extends Component {
                 if (validity_vmax > 0.0 && feasibility_vmax > 0.0) {
                     var vmax_sum = feasibility_vmax + validity_vmax;
                     if (vmax_sum > 1.0) {
-                        viol_sum.value = viol_sum.value + vmax_sum;
+                        shared.value = shared.value + vmax_sum;
                     } else {
-                        viol_sum.value = viol_sum.value + vmax_sum * vmax_sum;
+                        shared.value = shared.value + vmax_sum * vmax_sum;
                     }
                     invalid |= true; infeasible |= true;
                 } else if (validity_vmax > 0.0) {
                     feasibility_vmax = 0.0;
-                    viol_sum.value = viol_sum.value + validity_vmax * validity_vmax;
+                    shared.value = shared.value + validity_vmax * validity_vmax;
                     invalid |= true;
                 } else if (feasibility_vmax > 0.0) {
                     validity_vmax = 0.0;
                     if (feasibility_vmax > 1.0) {
-                        viol_sum.value = viol_sum.value + feasibility_vmax;
+                        shared.value = shared.value + feasibility_vmax;
                     } else if (feasibility_vmax < -1.0) {
-                        viol_sum.value = viol_sum.value - feasibility_vmax;
+                        shared.value = shared.value - feasibility_vmax;
                     } else {
-                        viol_sum.value = viol_sum.value + feasibility_vmax * feasibility_vmax;
+                        shared.value = shared.value + feasibility_vmax * feasibility_vmax;
                     }
                     infeasible |= true;
                 } else {
@@ -189,15 +189,15 @@ class ViewObjectiveValue extends Component {
                     feasibility_vmin = 0.0;
                 }
                 if (validity_vmin > 0.0 && feasibility_vmin > 0.0) {
-                    viol_sum.value = viol_sum.value + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);;
+                    shared.value = shared.value + (feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin);;
                     invalid |= true; infeasible |= true;
                 } else if (validity_vmin > 0.0) {
                     feasibility_vmin = 0.0;
-                    viol_sum.value = viol_sum.value + validity_vmin * validity_vmin;
+                    shared.value = shared.value + validity_vmin * validity_vmin;
                     invalid |= true;
                 } else if (feasibility_vmin > 0.0) {
                     validity_vmin = 0.0;
-                    viol_sum.value = viol_sum.value + feasibility_vmin * feasibility_vmin;
+                    shared.value = shared.value + feasibility_vmin * feasibility_vmin;
                     infeasible |= true;
                 } else {
                     feasibility_vmin = 0.0;
@@ -209,22 +209,22 @@ class ViewObjectiveValue extends Component {
                     feasibility_vmax = 0.0;
                 }
                 if (validity_vmax > 0.0 && feasibility_vmax > 0.0) {
-                    viol_sum.value = viol_sum.value + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
+                    shared.value = shared.value + (feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax);
                     invalid |= true; infeasible |= true;
                 } else if (validity_vmax > 0.0) {
                     feasibility_vmax = 0.0;
-                    viol_sum.value = viol_sum.value + validity_vmax * validity_vmax;
+                    shared.value = shared.value + validity_vmax * validity_vmax;
                     invalid |= true;
                 } else if (feasibility_vmax > 0.0) {
                     validity_vmax = 0.0;
-                    viol_sum.value = viol_sum.value + feasibility_vmax * feasibility_vmax;
+                    shared.value = shared.value + feasibility_vmax * feasibility_vmax;
                     infeasible |= true;
                 } else {
                     feasibility_vmax = 0.0;
                     validity_vmax = 0.0;
                 }
             }
-//            console.log('In ViewObjectiveValue.renderElement DV/CI element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum.value=',viol_sum.value,'invalid=',invalid,'infeasible=',infeasible);
+//            console.log('In ViewSearch.renderElement DV/CI element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'shared.value=',shared.value,'invalid=',invalid,'infeasible=',infeasible);
         } else { // Calculation Input
             validity_vmin = 0.0;
             validity_vmax = 0.0;
@@ -237,7 +237,7 @@ class ViewObjectiveValue extends Component {
             <tr key={element.name}>
                 <td>{i}</td>
                 <td>{element.name}</td>
-                <td>{viol_sum.value}</td>
+                <td>{shared.value}</td>
                 <td>{invalid ? 'true' : ''}</td>
                 <td>{infeasible ? 'true' : ''}</td>
                 <td>{(this.props.objective_value === 0.0 || (feasibility_vmin <= 0.0 && validity_vmin <= 0.0)) ? '' : (feasibility_vmin+validity_vmin)*(feasibility_vmin+validity_vmin)*100/this.props.objective_value}</td>
@@ -263,17 +263,17 @@ class ViewObjectiveValue extends Component {
     }
 
     render() {
-//        console.log('In ViewObjectiveValue.render this.props=', this.props);
-        var viol_sum = {value: 0.0};
+//        console.log('In ViewSearch.render this.props=', this.props);
+        var shared = {value: 0.0};
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle}>
-                    ObjectiveValue
+                    Search
                 </NavDropdown.Item>
                 <Modal show={this.state.modal} onHide={this.toggle} size="xl">
                     <Modal.Header closeButton>
                         <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : ObjectiveValue = {this.props.objective_value}
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : Search
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -283,7 +283,7 @@ class ViewObjectiveValue extends Component {
                                     {this.renderElementHeader()}
                                 </thead>
                                 <tbody>
-                                    {this.props.symbol_table.map((element, i) => this.renderElement(viol_sum,element,i))}
+                                    {this.props.symbol_table.map((element, i) => this.renderElement(shared,element,i))}
                                 </tbody>
                             </table>
                         </pre>
@@ -302,4 +302,4 @@ const mapStateToProps = state => ({
     objective_value: state.model.result.objective_value,
 });
 
-export default connect(mapStateToProps)(ViewObjectiveValue);
+export default connect(mapStateToProps)(ViewSearch);

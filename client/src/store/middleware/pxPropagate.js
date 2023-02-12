@@ -7,9 +7,11 @@ export function pxPropagate(p, x, store) {
     var ip = 0;
     var ix = 0;
     var value;
+
     function nameMatch(entry) {
       return design.model.symbol_table.find(sink => entry.name === sink.name)
     }
+
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         var source = design.model.symbol_table[i];
 //        console.log('In pxPropagate source=',source);
