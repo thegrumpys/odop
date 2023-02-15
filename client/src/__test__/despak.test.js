@@ -47,7 +47,12 @@ it('despak without merit', () => {
             }
         }
     }
-    var obj = despak(pc, store);
+
+    var { eqnset } = require('../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
+    var { pxPropagate } = require('../store/middleware/pxPropagate.js'); // Dynamically load eqnset
+    var { pxUpdateObjectiveValue } = require('../store/middleware/pxUpdateObjectiveValue.js'); // Dynamically load eqnset
+
+    var obj = despak(pc, eqnset, pxPropagate, pxUpdateObjectiveValue, store);
 
     var design = store.getState(); // after
     expect(obj).toEqual(0.5605106434805028);
@@ -168,7 +173,12 @@ it('despak with merit', () => {
             }
         }
     }
-    var obj = despak(pc, store, merit);
+
+    var { eqnset } = require('../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
+    var { pxPropagate } = require('../store/middleware/pxPropagate.js'); // Dynamically load eqnset
+    var { pxUpdateObjectiveValue } = require('../store/middleware/pxUpdateObjectiveValue.js'); // Dynamically load eqnset
+
+    var obj = despak(pc, eqnset, pxPropagate, pxUpdateObjectiveValue, store, merit);
 
     var design = store.getState(); // after
     expect(obj).toEqual(0.5616217545916139);

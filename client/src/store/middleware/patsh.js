@@ -8,7 +8,7 @@ import { despak } from './despak';
  * 3. The algorithm demands a minimum improvement of s in each iteration compared to a externally specified tolerance value.
  * 4. The algorithm's explore function alternates the sign of delta for each psi[k] for each successive exploration 
  */
-export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
+export function patsh(psi, del, delmin, objmin, maxit, tol, eqnset, propagate, objvalue, store, merit) {
     var debug = false;
     var debug_explore = false;
     if (debug) console.log('<li>','@@@@@ Start patsh psi=',psi,'del=',del,'delmin=',delmin,'objmin=',objmin,'maxit=',maxit,'tol=',tol,'store=',store,'merit=',merit,'</li><ul>');
@@ -31,14 +31,14 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                 eps[k] = 0.05;
             }
             phi[k] = phi[k] + eps[k] * del * xflag[k];
-            s_phi = despak(phi, store, merit);
+            s_phi = despak(phi, eqnset, propagate, objvalue, store, merit);
             if (debug_explore) console.log('In patsh_explore 1','k=',k,'phi=',phi,'s_phi=',s_phi);
             if (s_phi < s) {
                 s = s_phi;
             } else {
                 xflag[k] = -xflag[k];
                 phi[k] = phi[k] + 2.0 * eps[k] * del * xflag[k];
-                s_phi = despak(phi, store, merit);
+                s_phi = despak(phi, eqnset, propagate, objvalue, store, merit);
                 if (debug_explore) console.log('In patsh_explore 2','k=',k,'phi=',phi,'s_phi=',s_phi);
                 if (s_phi < s) {
                     s = s_phi;
@@ -51,7 +51,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
         return s;
     }
 
-    s_psi = despak(psi, store, merit); // AKA despak, s_psi: the functional value at the base point
+    s_psi = despak(psi, eqnset, propagate, objvalue, store, merit); // AKA despak, s_psi: the functional value at the base point
     if (debug) console.log('In patsh 1','psi=',psi,'s_psi=',s_psi);
     while (s_psi >= objmin) { // start searching/exploring otherwise Leave by door #1
         var s_phi; // [1]
@@ -90,7 +90,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                     if (debug) console.log('</ul><li>','@@@@@ End patsh','NCODE=',NCODE,'</li>');
                     return NCODE;// stop, iteration count exceeded
                 }
-                s_phi = despak(phi, store, merit); // AKA despak, s_phi: the functional value for this move
+                s_phi = despak(phi, eqnset, propagate, objvalue, store, merit); // AKA despak, s_phi: the functional value for this move
                 if (debug) console.log('In patsh 2','phi=',phi,'s_phi=',s_phi);
                 s = s_phi; // s: the functional value before the move
                 s = patsh_explore(phi, s, del); // explore

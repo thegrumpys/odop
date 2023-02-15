@@ -23,9 +23,13 @@ export function search(store, objmin, merit) {
     }
     
     // Do the pattern search
+    var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
+    var { pxPropagate } = require('./pxPropagate.js'); // Dynamically load eqnset
+    var { pxUpdateObjectiveValue } = require('./pxUpdateObjectiveValue.js'); // Dynamically load eqnset
+//    console.log('eqnset=',eqnset,'pxPropagate=',pxPropagate,'pxUpdateObjectiveValue=',pxUpdateObjectiveValue);
     var delarg = design.model.system_controls.del;
 //    console.log('In search pc=',pc,'delarg=',delarg,'design.model.system_controls.delmin=',design.model.system_controls.delmin,'objmin=',objmin,'design.model.system_controls.maxit=',design.model.system_controls.maxit,'design.model.system_controls.tol=',design.model.system_controls.tol);
-    var ncode = patsh(pc, delarg, design.model.system_controls.delmin, objmin, design.model.system_controls.maxit, design.model.system_controls.tol, store, merit);
+    var ncode = patsh(pc, delarg, design.model.system_controls.delmin, objmin, design.model.system_controls.maxit, design.model.system_controls.tol, eqnset, pxPropagate, pxUpdateObjectiveValue, store, merit);
     
     // Expand PC back into store change actions
     var kd = 0;

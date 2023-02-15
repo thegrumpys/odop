@@ -100,7 +100,10 @@ export function seek(store, action) {
             }
         }
     }
-    obj = despak(pc, store);
+    var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
+    var { pxPropagate } = require('./pxPropagate.js'); // Dynamically load eqnset
+    var { pxUpdateObjectiveValue } = require('./pxUpdateObjectiveValue.js'); // Dynamically load eqnset
+    obj = despak(pc, eqnset, pxPropagate, pxUpdateObjectiveValue, store);
     design = store.getState(); // Re-access store to get latest element values
     if (obj < design.model.system_controls.objmin) {
         store.dispatch(restoreInputSymbolValues());

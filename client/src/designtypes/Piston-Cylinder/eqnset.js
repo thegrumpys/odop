@@ -26,4 +26,3 @@ export function eqnset(p, x) {
 //    console.log('Exiting eqnset x=',x);
     return x;
 }
-
