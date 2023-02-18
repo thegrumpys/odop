@@ -20,15 +20,18 @@ var ContextAwareAccordion = function({ children }) {
 //                console.log('In ContextAwareAccordion EXPAND');
                 setActiveKey('0');
                 this.setState({caret: <span className="pb-3 pr-1"><i className="fas fa-caret-down" /></span>});
+                logUsage('event', 'AlertsAccordion', { event_label: 'Level ' + this.state.level + '->' + eventKey + ' expand'});
              } else { // Otherwise it is already Expanded
                 if (this.state.level !== eventKey) {
 //                    console.log('In ContextAwareAccordion EXPAND');
                     setActiveKey('0');
                     this.setState({caret: <span className="pb-3 pr-1"><i className="fas fa-caret-down" /></span>});
+                    logUsage('event', 'AlertsAccordion', { event_label: 'Level ' + this.state.level + '->' + eventKey + ' expand'});
                 } else {
 //                    console.log('In ContextAwareAccordion COLLAPSE');
                     setActiveKey(null);
                     this.setState({caret: <span className="pb-3 pr-1"><i className="fas fa-caret-right" /></span>});
+                    logUsage('event', 'AlertsAccordion', { event_label: 'Level ' + this.state.level + '->' + eventKey + ' collapse'});
                 }
             }
          }}>
@@ -42,9 +45,7 @@ class AlertsAccordion extends Component {
     constructor(props) {
 //        console.log('In AlertsAccordion.constructor props=',props);
         super(props);
-        this.onOpen = this.onOpen.bind(this);
         this.onHelpButton = this.onHelpButton.bind(this);
-        this.onClose = this.onClose.bind(this);
         ContextAwareAccordion = ContextAwareAccordion.bind(this);
         this.state = {
             level: ERR,
@@ -79,20 +80,11 @@ class AlertsAccordion extends Component {
         }
     }
 
-    onOpen(event) {
-//        console.log('In AlertsAccordion.onOpen this=',this,'event=',event);
-        logUsage('event', 'AlertsAccordion', { event_label: 'Button' });
-    }
-    
     onHelpButton(event) {
 //        console.log('In AlertsAccordion.onHelpButton this=',this,'event=',event,'event.target=',event.target,'event.target.href=',event.target.href);
         logUsage('event', 'AlertsAccordion', { event_label: 'Help button: ' + event.target.href});
         event.preventDefault();
         window.open(event.target.href, '_blank');
-    }
-    
-    onClose(event) {
-//        console.log('In AlertsAccordion.onClose this=',this,'event=',event);
     }
     
     setLevel(level) {
