@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
-import { initialState } from '../designtypes/Piston-Cylinder/initialState';
-import * as sto from '../designtypes/Piston-Cylinder/symbol_table_offsets';
-import { initialSystemControls } from '../initialSystemControls';
-import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../store/actionTypes';
+import { initialState } from '../../designtypes/Piston-Cylinder/initialState';
+import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
+import { initialSystemControls } from '../../initialSystemControls';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../store/actionTypes';
 import {
     startup, load, changeName, changeUser,
     changeSymbolValue, changeSymbolViolation, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
@@ -11,9 +11,9 @@ import {
     changeResultObjectiveValue, changeResultTerminationCondition,
     changeSystemControlsValue, changeLabelsValue, search, seek,
     saveAutoSave, restoreAutoSave, deleteAutoSave
-    } from '../store/actionCreators';
-import { reducers } from '../store/reducers';
-import { dispatcher } from '../store/middleware/dispatcher';
+    } from '../../store/actionCreators';
+import { reducers } from '../../store/reducers';
+import { dispatcher } from '../../store/middleware/dispatcher';
 
 //=====================================================================
 // STARTUP

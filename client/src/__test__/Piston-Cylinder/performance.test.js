@@ -1,15 +1,15 @@
 import { createStore, applyMiddleware } from 'redux';
-import { initialState } from '../designtypes/Piston-Cylinder/initialState';
-import * as sto from '../designtypes/Piston-Cylinder/symbol_table_offsets';
-import { initialSystemControls } from '../initialSystemControls';
-import { changeSymbolValue, changeResultObjectiveValue } from '../store/actionCreators';
-import { reducers } from '../store/reducers';
-import { dispatcher } from '../store/middleware/dispatcher';
-import { invokeInit } from '../store/middleware/invokeInit';
-import { invokeEquationSet } from '../store/middleware/invokeEquationSet';
-import { setSclDen } from '../store/middleware/setSclDen';
-import { updateObjectiveValue } from '../store/middleware/updateObjectiveValue';
-import { search } from '../store/middleware/search';
+import { initialState } from '../../designtypes/Piston-Cylinder/initialState';
+import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
+import { initialSystemControls } from '../../initialSystemControls';
+import { changeSymbolValue, changeResultObjectiveValue } from '../../store/actionCreators';
+import { reducers } from '../../store/reducers';
+import { dispatcher } from '../../store/middleware/dispatcher';
+import { invokeInit } from '../../store/middleware/invokeInit';
+import { invokeEquationSet } from '../../store/middleware/invokeEquationSet';
+import { setSclDen } from '../../store/middleware/setSclDen';
+import { updateObjectiveValue } from '../../store/middleware/updateObjectiveValue';
+import { search } from '../../store/middleware/search';
 
 //=====================================================================
 // SYMBOL
