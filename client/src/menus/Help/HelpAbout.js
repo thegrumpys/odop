@@ -5,6 +5,8 @@ import { version } from '../../version';
 import { logUsage } from '../../logUsage';
 import { withOktaAuth } from '@okta/okta-react';
 import config from '../../config';
+import { displayMessage } from '../../components/MessageModal';
+import { displaySpinner } from '../../components/Spinner';
 
 class HelpAbout extends Component {
 
@@ -12,9 +14,17 @@ class HelpAbout extends Component {
 //        console.log("In HelpAbout.constructor props=",props);
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.getDBSize = this.getDBSize.bind(this);
         this.state = {
-            modal: false
+            modal: false,
+            sizes: '',
+            size: ''
         };
+    }
+
+    componentDidMount() {
+//        console.log('In HelpAbout.componentDidMount this=',this);
+        this.getDBSize(this.props.user);
     }
 
     toggle() {
@@ -22,6 +32,40 @@ class HelpAbout extends Component {
             modal: !this.state.modal
         });
         if (this.state.modal) logUsage('event', 'HelpAbout', { event_label: 'HelpAbout'});
+    }
+
+    getDBSize(user) {
+//        console.log('In HelpAbout.getSize');
+        displaySpinner(true);
+        fetch('/api/v1/db_size', {
+            headers: {
+                Authorization: 'Bearer ' + this.props.user
+            }
+        })
+        .then(res => {
+            displaySpinner(false);
+            if (!res.ok) {
+                throw Error(res.statusText);
+            }
+            logUsage('event', 'HelpAbout', { event_label: 'getDBSize'});
+            return res.json()
+        })
+        .then(sizes => {
+//            console.log('In HelpAbout.getSize sizes=',sizes);
+            this.setState({
+                sizes: sizes
+            });
+            var size = '';
+            if (this.state.sizes.length > 0)
+                size = this.state.sizes[0]; // Default to first name
+//            console.log('In HelpAbout.getSize size=',size);
+            this.setState({ 
+                size: size
+            });
+        })
+        .catch(error => {
+            displayMessage('GET of DB Size failed with message: \''+error.message+'\'');
+        });
     }
 
     render() {
@@ -58,7 +102,8 @@ class HelpAbout extends Component {
                         }
                         Model: {this.props.jsontype} {this.props.type}<br />
                         Model Units: {this.props.units}<br />
-                        Model Version: {this.props.version}
+                        Model Version: {this.props.version}<br />
+                        {config.node.env !== "production" && <span>DB Size: {this.state.size} MB</span>}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
