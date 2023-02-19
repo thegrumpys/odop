@@ -174,7 +174,7 @@ class ResultTable extends Component {
                 <Table className="col-md-4" size="sm">
                     <tbody>
                         <tr>
-                            <td className="text-center" id="ObjectiveValue">
+                            <td className="text-left" id="ObjectiveValue">
                                 <OverlayTrigger placement="bottom" overlay={<Tooltip>Search works to minimize Objective Value.<br />Objective Value = {this.props.objective_value.toFixed(7)}<br />Search stops if Objective Value falls below<br />OBJMIN = {this.props.system_controls.objmin.toFixed(7)}</Tooltip>}>
                                     <b>Status</b>
                                 </OverlayTrigger>
@@ -183,7 +183,8 @@ class ResultTable extends Component {
                         </tr>
                         <tr>
                             {display_search_button ? 
-                              <td align="center">
+                              <td align="text-left">
+                                  <b className="pr-5">Action</b>
                                   <Button variant="primary" size="sm" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
                                   <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                       SEARCH alters the values of any free independent variables to find a design that 
@@ -197,7 +198,8 @@ class ResultTable extends Component {
                                   </OverlayTrigger>
                               </td>
                             :
-                              <td align="center">
+                              <td align="text-left">
+                                  <b className="pr-5">Action</b>
                                   <Button variant="primary" size="sm" onClick={this.onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
                                   <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                       If one feasible design exists there are likely many more available, each with varying 

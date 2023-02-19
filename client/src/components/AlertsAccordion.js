@@ -8,6 +8,7 @@ import Value from './Value';
 import config from '../config';
 import Emitter from './Emitter';
 import { useState } from 'react';
+import { changeSystemControlsValue } from '../store/actionCreators';
 
 var ContextAwareAccordion = function({ children }) {
 //    console.log('In ContextAwareAccordion state=',this.state);
@@ -46,6 +47,7 @@ class AlertsAccordion extends Component {
 //        console.log('In AlertsAccordion.constructor props=',props);
         super(props);
         this.onHelpButton = this.onHelpButton.bind(this);
+        this.onAutoFixToggle = this.onAutoFixToggle.bind(this);
         ContextAwareAccordion = ContextAwareAccordion.bind(this);
         this.state = {
             level: ERR,
@@ -94,6 +96,21 @@ class AlertsAccordion extends Component {
         });
     }
     
+    onAutoFixToggle(event) {
+//        console.log('In AlertsAccordion.onAutoFixToggle this=',this,'event=',event);
+        var copy = Object.assign({}, this.props.system_controls);
+        var label;
+        if (copy.enable_auto_fix === 0.0) {
+            copy.enable_auto_fix = 1.0;
+            label = "enabled";
+        } else {
+            copy.enable_auto_fix = 0.0;
+            label = "disabled";
+        }
+        this.props.changeSystemControlsValue(copy);
+        logUsage('event', 'AlertsAccordion', { event_label: 'AutoFixToggle ' + label});
+    }
+    
     render() {
 //        console.log('In AlertsAccordion.render this=',this);
         var line = 1;
@@ -113,10 +130,11 @@ class AlertsAccordion extends Component {
                 <ContextAwareAccordion>
                     <Card bg="light">
                         <Card.Header>
-                            <InputGroup>
+                            <InputGroup as="span">
+                                <InputGroup.Text>Alerts</InputGroup.Text>
                                 <ButtonGroup>
                                     <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={this.state.level} id="alertLevel"
-                                        onClick={() => this.setLevel(this.state.level)}>{this.state.caret}&nbsp;&nbsp;Alerts
+                                        onClick={() => this.setLevel(this.state.level)}>{this.state.caret}
                                     </Accordion.Toggle>
                                     <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={ERR}
                                         onClick={() => this.setLevel(ERR)} active={this.state.level === ERR || this.state.level === WARN || this.state.level === NOTICE || this.state.level === INFO}>
@@ -144,8 +162,16 @@ class AlertsAccordion extends Component {
                                         Informational alerts highlight other general conditions.
                                         A red "badge" on each Alert button indicates the total number of alerts of this type.
                                         Close the Alerts panel by a second click on the same Alerts button.
-                                    </Tooltip>
-                                }>
+                                    </Tooltip>}>
+                                    <span className="text-primary pl-2 pt-2"><i className="fas fa-info-circle"></i></span>
+                                </OverlayTrigger>
+                                <InputGroup.Text className="ml-auto">Auto Fix</InputGroup.Text>
+                                <InputGroup.Checkbox aria-label="Checkbox for enabling Auto Fix" onChange={this.onAutoFixToggle} checked={this.props.enable_auto_fix}/>
+                                <OverlayTrigger placement="bottom" overlay={
+                                    <Tooltip>
+                                        When checked, sets "Fixed" status of Independent Variables whose values are changed by user input.
+                                        The behavior is the same as the File : Preferences enable_auto_fix value.
+                                    </Tooltip>}>
                                     <span className="text-primary pl-2 pt-2"><i className="fas fa-info-circle"></i></span>
                                 </OverlayTrigger>
                             </InputGroup>
@@ -323,7 +349,12 @@ class AlertsAccordion extends Component {
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
+    enable_auto_fix: state.model.system_controls.enable_auto_fix,
     objective_value: state.model.result.objective_value,
 });
 
-export default connect(mapStateToProps)(AlertsAccordion);
+const mapDispatchToProps = {
+    changeSystemControlsValue: changeSystemControlsValue,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AlertsAccordion);
