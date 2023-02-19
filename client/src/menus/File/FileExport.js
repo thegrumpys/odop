@@ -11,6 +11,7 @@ class FileExport extends Component {
         super(props);
         this.onExport = this.onExport.bind(this);
         this.onSortedExport = this.onSortedExport.bind(this);
+        this.onCSVExport = this.onCSVExport.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
@@ -20,11 +21,11 @@ class FileExport extends Component {
     export(model, name, type) {
 //        console.log('In FileExport.export model=',model);
         const url = window.URL.createObjectURL(new Blob([JSON.stringify(model, null, 2)]));
-//        console.log('In FileExport.export url=', url);
+//        console.log('In FileExport.export','url=', url);
         const link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', name + '.' + type);
-//        console.log('In FileExport.exportDesign link=', link);
+//        console.log('In FileExport.export','link=', link);
         document.body.appendChild(link);
         link.click();
     }
@@ -80,6 +81,51 @@ class FileExport extends Component {
         });
     }
     
+    exportCSV(model, name, type) {
+        console.log('In FileExport.exportCSV','model=',model,'name=',name,'type=',type);
+        const url = window.URL.createObjectURL(new Blob([JSON.stringify(model, null, 2)]));
+        console.log('In FileExport.exportCSV','url=', url);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', name + '.' + type);
+        console.log('In FileExport.exportCSV','link=', link);
+        document.body.appendChild(link);
+        link.click();
+    }
+
+    onCSVExport() {
+        console.log('In FileExport.onCSVExport');
+
+        function sort(object){
+            if (object instanceof Array) {
+                console.log('In FileExport.onCSVExport','array=',object);
+                var newArray = [];
+                for (var j = 0; j < object.length; j++){
+                    newArray.push(sort(object[j]));
+                }
+                return newArray;
+            } else if (typeof object == "object") {
+                console.log('In FileExport.onCSVExport','object=',object);
+                var keys = Object.keys(object);
+                keys.sort();
+                var newObject = {};
+                for (var i = 0; i < keys.length; i++){
+                    newObject[keys[i]] = sort(object[keys[i]])
+                }
+                return newObject;
+            } else {
+                return object;
+            }
+        }
+
+        var model = sort(this.props.state);
+        this.exportCSV(model, 'CSV_' + this.props.name, 'json');
+        logUsage('event', 'FileExport', { event_label: 'SORTED ' + this.props.type + ' ' + this.props.name });
+        this.setState({
+            modal: !this.state.modal,
+        });
+    }
+    
     onCancel() {
 //        console.log('In FileExport.onCancel');
         this.setState({
@@ -102,7 +148,8 @@ class FileExport extends Component {
                     </Modal.Header>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button variant="info" onClick={this.onSortedExport}>Sorted Export</Button>
+                        <Button variant="info" onClick={this.onCSVExport}>CSV Export</Button>{' '}
+                        <Button variant="info" onClick={this.onSortedExport}>Sorted Export</Button>{' '}
                         <Button variant="primary" onClick={this.onExport}>Export</Button>
                     </Modal.Footer>
                 </Modal>
