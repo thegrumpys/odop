@@ -182,7 +182,12 @@ class SymbolValue extends Component {
                 className += "borders-constrained-max ";
             }
         }
-        className += "background-white "; // Always white
+        var disabled = false;
+        if (this.props.element.type === "calcinput" && !this.props.element.input) { // Disable any calcinput that's an output'
+            disabled = true;
+        } else {
+            className += "background-white "; // Set rest to white background
+        }
 //        console.log('In SymbolValue.render className=',className);
         var icon_dependent_tag = '';
         if (this.props.element.type === "equationset" && !this.props.element.input) { // Dependent Variable?
@@ -198,19 +203,19 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             <>
                                 {icon_dependent_tag}
-                                <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
+                                <FormControlTypeNumber id={'sv_'+this.props.element.name} disabled={disabled} readOnly icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
                             </>
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
                             <>
                                 {icon_dependent_tag}
-                                <Form.Control id={'sv_'+this.props.element.name} type="text" readOnly value={this.props.element.value} onClick={this.onContextMenu} />
+                                <Form.Control id={'sv_'+this.props.element.name} type="text" disabled={disabled} readOnly value={this.props.element.value} onClick={this.onContextMenu} />
                             </>
                         : ''}
                         { this.props.element.format === 'table' ?
                             <>
                                 {icon_dependent_tag}
-                                <Form.Control id={'sv_'+this.props.element.name} type="text" readOnly className={className} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
+                                <Form.Control id={'sv_'+this.props.element.name} type="text" disabled={disabled} readOnly className={className} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                             </>
                         : ''}
                     </InputGroup>
