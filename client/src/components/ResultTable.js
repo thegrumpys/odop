@@ -23,6 +23,8 @@ class ResultTable extends Component {
         this.onSeekButton = this.onSeekButton.bind(this);
         this.state = {
             seek_modal: false, // Default: do not display optimize modal
+            seek_name: null,
+            seek_minmax: MIN,
         };
     }
 
@@ -72,7 +74,6 @@ class ResultTable extends Component {
         this.setState({
             seek_modal: !this.state.seek_modal,
             seek_name: result.name,
-            seek_minmax: MIN,
         });
     }
 
