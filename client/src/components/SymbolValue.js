@@ -221,7 +221,7 @@ class SymbolValue extends Component {
             this.props.resetSymbolFlag(this.state.element.name, MAX, FIXED);
         }
         this.props.changeSymbolConstraint(this.state.element.name, MIN, this.state.element.cmin);
-        this.props.changeSymbolConstraint(this.state.element.name, MAX, this.state.element.cmin);
+        this.props.changeSymbolConstraint(this.state.element.name, MAX, this.state.element.cmax);
         if (this.state.element.lmin & CONSTRAINED) {
             this.props.setSymbolFlag(this.state.element.name, MIN, CONSTRAINED);
         } else {
@@ -236,37 +236,6 @@ class SymbolValue extends Component {
             modified: false,
         });
     }
-
-//    onSearch() {
-////        console.log('In SymbolValue.onSearch this=',this);
-//        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-//            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
-//        }
-//        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
-//            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
-//                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
-//            }
-//        });
-//        var old_objective_value = this.props.objective_value.toPrecision(4);
-//        this.props.saveAutoSave();
-//        this.props.search();
-//        const { store } = this.context;
-//        var design = store.getState();
-//        var new_objective_value = design.model.result.objective_value.toPrecision(4)
-//        logUsage('event', 'ActionSearch', { event_label: 'Button ' + old_objective_value + ' --> ' + new_objective_value});
-////        console.log('In SymbolValue.onSearch','old_objective_value=',old_objective_value,'new_objective_value=',new_objective_value);
-//
-//        if (design.model.result.objective_value < this.props.system_controls.objmin) {
-//            this.setState({
-//                modal: false,
-//                modified: false,
-//            });
-//        } else {
-//            this.setState({
-//                error: 'Search returned not feasible',
-//            });
-//        }
-//    }
 
     onChangeValidValue(event) {
 //        console.log('In SymbolValue.onChangeValidValue this=',this);
