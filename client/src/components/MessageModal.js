@@ -23,6 +23,7 @@ export var displayMessage = function(message, variant = 'danger', header = '', h
             }
         }
     );
+    logUsage('event', 'DisplayMessage', { event_label: 'message: ' + message + ', variant: ' + variant});
 }
 
 export class MessageModal extends Component {
