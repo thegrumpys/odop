@@ -221,10 +221,10 @@ export function reducers(state, action) {
 //                                    'element.lmax=',element.lmax,
 //                                    'element.cmax=',element.cmax);
                         return Object.assign({}, element, {
-//                            lmin: 0,
+                            lmin: 0,
                             oldlmin: element.lmin,
                             oldcmin: element.cmin,
-//                            lmax: 0,
+                            lmax: 0,
                             oldlmax: element.lmax,
                             oldcmax: element.cmax
                         });
