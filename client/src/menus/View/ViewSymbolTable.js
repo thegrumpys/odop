@@ -31,7 +31,7 @@ class ViewSymbolTable extends Component {
                 <NavDropdown.Item onClick={this.toggle}>
                     SymbolTable
                 </NavDropdown.Item>
-                <Modal show={this.state.modal} onHide={this.toggle} size="lg">
+                <Modal show={this.state.modal} onHide={this.toggle} size="xl">
                     <Modal.Header closeButton>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : SymbolTable
@@ -61,21 +61,21 @@ class ViewSymbolTable extends Component {
                                         <th>validmaxchoices</th>
                                         <th>validmaxchoice</th>
                                         <th>propagate</th>
-                                        <th>lmin</th>
                                         <th>validmin</th>
-                                        <th>cmin</th>
-                                        <th>smin</th>
-                                        <th>vmin</th>
-                                        <th>lmax</th>
                                         <th>validmax</th>
+                                        <th>lmin</th>
+                                        <th>lmax</th>
+                                        <th>cmin</th>
                                         <th>cmax</th>
-                                        <th>smax</th>
+                                        <th>vmin</th>
                                         <th>vmax</th>
-                                        <th>oldlmin</th>
-                                        <th>oldcmin</th>
-                                        <th>oldlmax</th>
-                                        <th>oldcmax</th>
                                         <th>sdlim</th>
+                                        <th>smin</th>
+                                        <th>smax</th>
+                                        <th>oldlmin</th>
+                                        <th>oldlmax</th>
+                                        <th>oldcmin</th>
+                                        <th>oldcmax</th>
                                         <th>tooltip</th>
                                     </tr>
                                 </thead>
@@ -102,21 +102,21 @@ class ViewSymbolTable extends Component {
                                                 <td>{JSON.stringify(element.validmaxchoices)}</td>
                                                 <td>{element.validmaxchoice}</td>
                                                 <td>{JSON.stringify(element.propagate)}</td>
-                                                <td>{flags[element.lmin]}</td>
                                                 <td>{String(element.validmin)}</td>
-                                                <td>{String(element.cmin)}</td>
-                                                <td>{String(element.smin)}</td>
-                                                <td>{String(element.vmin)}</td>
-                                                <td>{flags[element.lmax]}</td>
                                                 <td>{String(element.validmax)}</td>
+                                                <td>{flags[element.lmin]}</td>
+                                                <td>{flags[element.lmax]}</td>
+                                                <td>{String(element.cmin)}</td>
                                                 <td>{String(element.cmax)}</td>
-                                                <td>{String(element.smax)}</td>
+                                                <td>{String(element.vmin)}</td>
                                                 <td>{String(element.vmax)}</td>
-                                                <td>{element.oldlmin}</td>
-                                                <td>{element.oldcmin}</td>
-                                                <td>{element.oldlmax}</td>
-                                                <td>{element.oldcmax}</td>
                                                 <td>{element.sdlim}</td>
+                                                <td>{String(element.smin)}</td>
+                                                <td>{String(element.smax)}</td>
+                                                <td>{element.oldlmin}</td>
+                                                <td>{element.oldlmax}</td>
+                                                <td>{element.oldcmin}</td>
+                                                <td>{element.oldcmax}</td>
                                                 <td>{element.tooltip}</td>
                                             </tr>
                                         );

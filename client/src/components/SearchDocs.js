@@ -93,7 +93,7 @@ class SearchDocs extends Component {
                     <Form.Control type="text" value={this.state.text} placeholder="Help lookup" onChange={this.onChange} onKeyPress={this.onKeyPress} />
                     <Button onClick={this.onButtonPress} style={{padding: '0px 24px 16px 8px'}} disabled={this.state.text.length === 0}><i className="fas fa-search"></i></Button>
                 </InputGroup>
-                <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>'
+                <Modal show={this.state.modal} size="xl" onHide={this.onCancel}>'
                     <Modal.Header closeButton>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Help lookup for terms '{this.state.query}'
