@@ -342,19 +342,29 @@ class SymbolValue extends Component {
                 </OverlayTrigger>;
         }
 
+        var feasibility_string;
+        var feasibility_class;
         var display_search_button = false;
         var display_seek_button = false;
         if (this.props.element.type === 'equationset') {
             if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+                feasibility_string = "NOT FEASIBLE";
+                feasibility_class = "text-not-feasible ";
                 display_search_button = true;
                 display_seek_button = false;
             } else if (this.props.objective_value > this.props.system_controls.objmin) {
+                feasibility_string = "CLOSE TO FEASIBLE";
+                feasibility_class = "text-close-to-feasible ";
                 display_search_button = true;
                 display_seek_button = false;
             } else if (this.props.objective_value > 0.0) {
+                feasibility_string = "FEASIBLE";
+                feasibility_class = "text-feasible ";
                 display_search_button = false;
                 display_seek_button = true;
             } else {
+                feasibility_string = "STRICTLY FEASIBLE";
+                feasibility_class = "text-strictly-feasible ";
                 display_search_button = false;
                 display_seek_button = true;
             }
@@ -392,8 +402,13 @@ class SymbolValue extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         {display_search_button === true || display_seek_button === true ?
-                            <Table borderless className="border border-secondary pb-5" size="sm" style={{backgroundColor: '#eee'}}>
+                            <Table borderless className="bg-white pb-5" size="sm">
                                 <tbody>
+                                    <tr>
+                                        <td className={feasibility_class + " text-center"}>
+                                            {feasibility_string}
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td className="text-center" id="ObjectiveValue">
                                             <OverlayTrigger placement="bottom" overlay={<Tooltip>Search works to minimize Objective Value.<br />Objective Value = {this.props.objective_value.toFixed(7)}<br />Search stops if Objective Value falls below<br />OBJMIN = {this.props.system_controls.objmin.toFixed(7)}</Tooltip>}>
