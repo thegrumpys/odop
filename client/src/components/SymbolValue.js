@@ -18,7 +18,6 @@ import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVari
 import NameValueUnitsHeaderCalcInput from './NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 import FormControlTypeNumber from './FormControlTypeNumber';
-import { logValue } from '../logUsage';
 import { logUsage } from '../logUsage';
 import { getAlertsByName } from './Alerts';
 import { search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../store/actionCreators';
@@ -43,7 +42,7 @@ class SymbolValue extends Component {
         this.onContextMenu = this.onContextMenu.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);
         this.onClose = this.onClose.bind(this);
-        this.onReset = this.onReset.bind(this);
+        this.onResetButton = this.onResetButton.bind(this);
         this.onSearchRequest = this.onSearchRequest.bind(this);
         this.onSeekMinRequest = this.onSeekMinRequest.bind(this);
         this.onSeekMaxRequest = this.onSeekMaxRequest.bind(this);
@@ -53,6 +52,7 @@ class SymbolValue extends Component {
         this.onChangeInvalidMinConstraint = this.onChangeInvalidMinConstraint.bind(this);
         this.onChangeValidMaxConstraint = this.onChangeValidMaxConstraint.bind(this);
         this.onChangeInvalidMaxConstraint = this.onChangeInvalidMaxConstraint.bind(this);
+        this.onModifiedFlag = this.onModifiedFlag.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
                 modal: false,
@@ -73,7 +73,7 @@ class SymbolValue extends Component {
                 isInvalidMaxConstraint: false,
                 error: '',
             };
-        } else {
+        } else { // String
             this.state = {
                 modal: false,
                 isInvalidValue: false,
@@ -110,74 +110,6 @@ class SymbolValue extends Component {
         }
     }
 
-    onSearchRequest(event) {
-//        console.log('In ResultTable.onSearchRequest this=',this,'event=',event);
-        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
-            return;
-        }
-        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
-            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
-                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
-                return;
-            }
-        });
-        var old_objective_value = this.props.objective_value.toPrecision(4);
-        this.props.saveAutoSave();
-        this.props.search();
-        const { store } = this.context;
-        var design = store.getState();
-        var new_objective_value = design.model.result.objective_value.toPrecision(4)
-        logUsage('event', 'ActionSearch', { event_label: 'Element ' + this.props.element.name + ' ' + old_objective_value + ' --> ' + new_objective_value});
-        if (new_objective_value <= this.props.system_controls.objmin) {
-            this.setState({
-                modal: !this.state.modal
-            });
-        }
-    }
-
-    onSeekMinRequest(event) {
-//        console.log('In ResultTable.onSeekMinRequest this=',this,'event=',event);
-        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
-            return;
-        }
-        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
-            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
-                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
-                return;
-            }
-        });
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Do seek
-        this.props.saveAutoSave();
-        this.props.seek(this.props.element.name, MIN);
-        logUsage('event', 'ActionSeek', { event_label: 'Element ' + this.props.element.name + ' MIN'});
-    }
-
-    onSeekMaxRequest(event) {
-//        console.log('In ResultTable.onSeekMaxRequest this=',this,'event=',event);
-        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
-            return;
-        }
-        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
-            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
-                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
-                return;
-            }
-        });
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Do seek
-        this.props.saveAutoSave();
-        this.props.seek(this.props.element.name, MAX);
-        logUsage('event', 'ActionSeek', { event_label: 'Element ' + this.props.element.name + ' MAX'});
-    }
-
     onContextMenu(e) {
 //        console.log('In SymbolValue.onContextMenu this=',this,'e=',e);
         e.preventDefault();
@@ -207,8 +139,8 @@ class SymbolValue extends Component {
         });
     }
 
-    onReset() {
-//        console.log('In SymbolValue.onReset this=',this);
+    onResetButton() {
+//        console.log('In SymbolValue.onResetButton this=',this);
         this.props.changeSymbolValue(this.state.element.name, this.state.element.value); // Reset the value back to what it was
         if (this.state.element.lmin & FIXED) {
             this.props.setSymbolFlag(this.state.element.name, MIN, FIXED);
@@ -243,10 +175,9 @@ class SymbolValue extends Component {
             isInvalidValue: false,
             modified: true,
         });
-        logValue(this.props.element.name,event.target.value);
     }
 
-    onChangeInvalidValue() {
+    onChangeInvalidValue(event) {
 //        console.log('In SymbolValue.onChangeInvalidValue this=',this);
         this.setState({
             isInvalidValue: true,
@@ -254,7 +185,7 @@ class SymbolValue extends Component {
         });
     }
 
-    onChangeValidMinConstraint() {
+    onChangeValidMinConstraint(event) {
 //        console.log('In SymbolValue.onChangeValidMinConstraint this=',this);
         this.setState({
             isInvalidMinConstraint: false,
@@ -262,7 +193,7 @@ class SymbolValue extends Component {
         });
     }
 
-    onChangeInvalidMinConstraint() {
+    onChangeInvalidMinConstraint(event) {
 //        console.log('In SymbolValue.onChangeInvalidMinConstraint this=',this);
         this.setState({
             isInvalidMinConstraint: true,
@@ -270,7 +201,7 @@ class SymbolValue extends Component {
         });
     }
 
-    onChangeValidMaxConstraint() {
+    onChangeValidMaxConstraint(event) {
 //        console.log('In SymbolValue.onChangeValidMaxConstraint this=',this);
         this.setState({
             isInvalidMaxConstraint: false,
@@ -278,10 +209,17 @@ class SymbolValue extends Component {
         });
     }
 
-    onChangeInvalidMaxConstraint() {
+    onChangeInvalidMaxConstraint(event) {
 //        console.log('In SymbolValue.onChangeInvalidMaxConstraint this=',this);
         this.setState({
             isInvalidMaxConstraint: true,
+            modified: true,
+        });
+    }
+
+    onModifiedFlag(event) {
+//        console.log('In SymbolValue.onModifiedFlag this=',this);
+        this.setState({
             modified: true,
         });
     }
@@ -363,7 +301,7 @@ class SymbolValue extends Component {
                         : ''}
                     </InputGroup>
                 </td>
-                <Modal show={this.state.modal} onHide={this.props.system_controls.enable_auto_search && this.state.modified ? this.onReset : this.onClose}>
+                <Modal show={this.state.modal} onHide={this.state.modified ? this.onResetButton : this.onClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>
                         {this.props.element.type === "equationset" && (this.props.element.input ? 'Independent Variable' : 'Dependent Variable')} Value Input
@@ -396,12 +334,12 @@ class SymbolValue extends Component {
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderIndependentVariable />
-                                    <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
+                                    <NameValueUnitsRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                                 </>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderDependentVariable />
-                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} toolTip="Change value by enabling Fixed status and changing the constraint value, or by enabling one or both contraints and changing the corresponding value(s)" />
+                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} toolTip="Change value by enabling Fixed status and changing the constraint value, or by enabling one or both contraints and changing the corresponding value(s)" />
                                 </>}
                             {this.props.element.type === "calcinput" && !this.props.element.hidden &&
                                 <>
@@ -423,27 +361,27 @@ class SymbolValue extends Component {
                         {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                             <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                 <ConstraintsMinHeaderIndependentVariable />
-                                <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} />
+                                <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                             </Table>}
                         {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                             <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                 <ConstraintsMinHeaderDependentVariable />
-                                <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} />
+                                <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                             </Table>}
                         {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                             <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                 <ConstraintsMaxHeaderIndependentVariable />
-                                <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} />
+                                <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                             </Table>}
                         {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                             <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                 <ConstraintsMaxHeaderDependentVariable />
-                                <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} />
+                                <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                             </Table>}
                     </Modal.Body>
                     <Modal.Footer>
                         <><Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}&nbsp;</>
-                        {this.state.modified ? <><Button variant="secondary" onClick={this.onReset}>Reset</Button>&nbsp;</> : ''}
+                        {this.state.modified ? <><Button variant="secondary" onClick={this.onResetButton}>Reset</Button>&nbsp;</> : ''}
                         {display_search_button ? 
                             <>
                                 <Button variant="secondary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>

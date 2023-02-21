@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table } from 'react-bootstrap';
+import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { FIXED, CONSTRAINED } from '../../store/actionTypes';
-import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../../store/actionCreators';
+import { MIN, MAX, FIXED, CONSTRAINED } from '../../store/actionTypes';
+import { fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../../store/actionCreators';
 import * as mo from './mat_offsets';
 import NameValueUnitsHeaderIndependentVariable from '../../components/NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from '../../components/NameValueUnitsHeaderDependentVariable';
@@ -21,6 +21,9 @@ import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 import { logValue } from '../../logUsage';
 import { logUsage } from '../../logUsage';
 import { getAlertsByName } from '../../components/Alerts';
+import { search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../../store/actionCreators';
+import { displayMessage } from '../../components/MessageModal';
+import FeasibilityIndicator from '../../components/FeasibilityIndicator';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -45,14 +48,23 @@ class SymbolValueWireDia extends Component {
         this.onContextHelp = this.onContextHelp.bind(this);
         this.onClose = this.onClose.bind(this);
         this.onRadio = this.onRadio.bind(this);
+        this.onModifiedFlag = this.onModifiedFlag.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
                 modal: false,
+                isInvalidValue: false,
+                isInvalidMinConstraint: false,
+                isInvalidMaxConstraint: false,
+                error: '',
                 value_input: false,
             };
-        } else {
+        } else { // Table or String
             this.state = {
                 modal: false,
+                isInvalidValue: false,
+                isInvalidMinConstraint: false,
+                isInvalidMaxConstraint: false,
+                error: '',
                 value_input: false,
             };
         }
@@ -117,6 +129,9 @@ class SymbolValueWireDia extends Component {
         e.preventDefault();
         this.setState({
             modal: true,
+            element: this.props.element,
+            error: '',
+            modified: false,
         });
     }
 
@@ -124,7 +139,8 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.onContextHelp this=',this);
         logUsage('event', 'SymbolValueWireDia', { event_label: 'context Help button' });
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
+            modified: false,
         });
         window.open('/docs/Help/settingValues.html', '_blank');
     }
@@ -133,6 +149,7 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.onClose this=',this);
         this.setState({
             modal: false,
+            modified: false,
         });
     }
 
@@ -140,6 +157,91 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.onRadio this=',this);
         this.setState({
             value_input: !this.state.value_input,
+        });
+    }
+
+    onResetButton() {
+//        console.log('In SymbolValue.onResetButton this=',this);
+        this.props.changeSymbolValue(this.state.element.name, this.state.element.value); // Reset the value back to what it was
+        if (this.state.element.lmin & FIXED) {
+            this.props.setSymbolFlag(this.state.element.name, MIN, FIXED);
+        } else {
+            this.props.resetSymbolFlag(this.state.element.name, MIN, FIXED);
+        }
+        if (this.state.element.lmax & FIXED) {
+            this.props.setSymbolFlag(this.state.element.name, MAX, FIXED);
+        } else {
+            this.props.resetSymbolFlag(this.state.element.name, MAX, FIXED);
+        }
+        this.props.changeSymbolConstraint(this.state.element.name, MIN, this.state.element.cmin);
+        this.props.changeSymbolConstraint(this.state.element.name, MAX, this.state.element.cmax);
+        if (this.state.element.lmin & CONSTRAINED) {
+            this.props.setSymbolFlag(this.state.element.name, MIN, CONSTRAINED);
+        } else {
+            this.props.resetSymbolFlag(this.state.element.name, MIN, CONSTRAINED);
+        }
+        if (this.state.element.lmax & CONSTRAINED) {
+            this.props.setSymbolFlag(this.state.element.name, MAX, CONSTRAINED);
+        } else {
+            this.props.resetSymbolFlag(this.state.element.name, MAX, CONSTRAINED);
+        }
+        this.setState({
+            modified: false,
+        });
+    }
+
+    onChangeValidValue(event) {
+//        console.log('In SymbolValueWireDia.onChangeValidValue this=',this);
+        this.setState({
+            isInvalidValue: false,
+            modified: true,
+        });
+    }
+
+    onChangeInvalidValue(event) {
+//        console.log('In SymbolValueWireDia.onChangeInvalidValue this=',this);
+        this.setState({
+            isInvalidValue: true,
+            modified: true,
+        });
+    }
+
+    onChangeValidMinConstraint(event) {
+//        console.log('In SymbolValueWireDia.onChangeValidMinConstraint this=',this);
+        this.setState({
+            isInvalidMinConstraint: false,
+            modified: true,
+        });
+    }
+
+    onChangeInvalidMinConstraint(event) {
+//        console.log('In SymbolValueWireDia.onChangeInvalidMinConstraint this=',this);
+        this.setState({
+            isInvalidMinConstraint: true,
+            modified: true,
+        });
+    }
+
+    onChangeValidMaxConstraint(event) {
+//        console.log('In SymbolValueWireDia.onChangeValidMaxConstraint this=',this);
+        this.setState({
+            isInvalidMaxConstraint: false,
+            modified: true,
+        });
+    }
+
+    onChangeInvalidMaxConstraint(event) {
+//        console.log('In SymbolValueWireDia.onChangeInvalidMaxConstraint this=',this);
+        this.setState({
+            isInvalidMaxConstraint: true,
+            modified: true,
+        });
+    }
+
+    onModifiedFlag(event) {
+//        console.log('In SymbolValueWireDia.onModifiedFlag this=',this);
+        this.setState({
+            modified: true,
         });
     }
 
@@ -246,6 +348,34 @@ class SymbolValueWireDia extends Component {
         }
 //        console.log('In SymbolValueWireDia.render nvu_value_class=',nvu_value_class);
 
+        var feasibility_string;
+        var feasibility_class;
+        var display_search_button = false;
+        var display_seek_button = false;
+        if (this.props.element.type === 'equationset') {
+            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+                feasibility_string = "NOT FEASIBLE";
+                feasibility_class = "text-not-feasible ";
+                display_search_button = true;
+                display_seek_button = false;
+            } else if (this.props.objective_value > this.props.system_controls.objmin) {
+                feasibility_string = "CLOSE TO FEASIBLE";
+                feasibility_class = "text-close-to-feasible ";
+                display_search_button = true;
+                display_seek_button = false;
+            } else if (this.props.objective_value > 0.0) {
+                feasibility_string = "FEASIBLE";
+                feasibility_class = "text-feasible ";
+                display_search_button = false;
+                display_seek_button = true;
+            } else {
+                feasibility_string = "STRICTLY FEASIBLE";
+                feasibility_class = "text-strictly-feasible ";
+                display_search_button = false;
+                display_seek_button = true;
+            }
+        }
+
         return (
             <>
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
@@ -266,6 +396,28 @@ class SymbolValueWireDia extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                        {display_search_button === true || display_seek_button === true ?
+                            <Table borderless className="bg-white pb-5" size="sm">
+                                <tbody>
+                                    <tr>
+                                        <td className={feasibility_class + " text-center"}>
+                                            {feasibility_string}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="text-center" id="ObjectiveValue">
+                                            <OverlayTrigger placement="bottom" overlay={<Tooltip>Search works to minimize Objective Value.<br />Objective Value = {this.props.objective_value.toFixed(7)}<br />Search stops if Objective Value falls below<br />OBJMIN = {this.props.system_controls.objmin.toFixed(7)}</Tooltip>}>
+                                                <b>Status</b>
+                                            </OverlayTrigger>
+                                            <FeasibilityIndicator />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        :
+                            ''
+                        }
+                        {this.state.error !== '' ? <Alert variant="danger"> {this.state.error} </Alert> : ''}
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
@@ -314,7 +466,7 @@ class SymbolValueWireDia extends Component {
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderDependentVariable />
-                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                                 </>}
                             {this.props.element.type === "calcinput" && !this.props.element.hidden &&
                                 <>
@@ -326,31 +478,47 @@ class SymbolValueWireDia extends Component {
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <ConstraintsMinHeaderIndependentVariable />
-                                    <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                                 </>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <ConstraintsMinHeaderDependentVariable />
-                                    <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                                 </>}
                         </Table>
                         <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <ConstraintsMaxHeaderIndependentVariable />
-                                    <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                                 </>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <ConstraintsMaxHeaderDependentVariable />
-                                    <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} />
+                                    <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                                 </>}
                         </Table>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}
-                        &nbsp;
-                        <Button variant="primary" onClick={this.onClose}>Close</Button>
+                        <><Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}&nbsp;</>
+                        {this.state.modified ? <><Button variant="secondary" onClick={this.onResetButton}>Reset</Button>&nbsp;</> : ''}
+                        {display_search_button ? 
+                            <>
+                                <Button variant="secondary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
+                                <Button variant="primary" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>
+                            </>
+                        :
+                            ''
+                        }
+                        {display_seek_button ? 
+                            <>
+                                {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMinRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MIN {this.props.element.name}</Button>}
+                                {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMaxRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MAX {this.props.element.name}</Button>}
+                                <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
+                            </>
+                        :
+                            ''
+                        }
                     </Modal.Footer>
                 </Modal>
             </>
@@ -366,7 +534,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+    search: search,
+    seek: seek,
+    saveAutoSave: saveAutoSave,
     changeSymbolValue: changeSymbolValue,
+    setSymbolFlag: setSymbolFlag,
+    resetSymbolFlag: resetSymbolFlag,
+    changeSymbolConstraint: changeSymbolConstraint,
     fixSymbolValue: fixSymbolValue,
     freeSymbolValue: freeSymbolValue,
     changeResultTerminationCondition: changeResultTerminationCondition

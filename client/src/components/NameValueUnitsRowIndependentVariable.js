@@ -53,16 +53,18 @@ class NameValueUnitsRowIndependentVariable extends Component {
         this.props.onChangeInvalid(event);
     }
 
-    onSet() {
+    onSet(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onSet');
         this.props.fixSymbolValue(this.props.element.name);
         logValue(this.props.element.name,'FIXED','FixedFlag',false);
+        this.props.onSet(event);
     }
 
-    onReset() {
+    onReset(event) {
 //        console.log('In NameValueUnitsRowIndependentVariable.onReset');
         this.props.freeSymbolValue(this.props.element.name);
         logValue(this.props.element.name,'FREE','FixedFlag',false);
+        this.props.onReset(event);
     }
 
     render() {
@@ -125,11 +127,15 @@ class NameValueUnitsRowIndependentVariable extends Component {
 NameValueUnitsRowIndependentVariable.propTypes = {
     onChangeValid: PropTypes.func,
     onChangeInvalid: PropTypes.func,
+    onSet: PropTypes.func,
+    onReset: PropTypes.func,
 }
 
 NameValueUnitsRowIndependentVariable.defaultProps = {
     onChangeValid: (()=>{}),
     onChangeInvalid: (()=>{}),
+    onSet: (()=>{}),
+    onReset: (()=>{}),
 }
 
 const mapStateToProps = state => ({
