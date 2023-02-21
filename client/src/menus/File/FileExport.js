@@ -81,31 +81,35 @@ class FileExport extends Component {
         });
     }
     
-    exportCSV(model, name, type) {
-        console.log('In FileExport.exportCSV','model=',model,'name=',name,'type=',type);
-        const url = window.URL.createObjectURL(new Blob([JSON.stringify(model, null, 2)]));
-        console.log('In FileExport.exportCSV','url=', url);
+    exportCSV(symbol_table, name, type) {
+//        console.log('In FileExport.exportCSV','symbol_table=',symbol_table,'name=',name,'type=',type);
+        const url = window.URL.createObjectURL(new Blob(Object.keys(symbol_table).map(key => 
+            symbol_table[key].name+"\t"+
+            symbol_table[key].value+"\t"+
+            symbol_table[key].units+
+            "\n")));
+//        console.log('In FileExport.exportCSV','url=', url);
         const link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', name + '.' + type);
-        console.log('In FileExport.exportCSV','link=', link);
+//        console.log('In FileExport.exportCSV','link=', link);
         document.body.appendChild(link);
         link.click();
     }
 
     onCSVExport() {
-        console.log('In FileExport.onCSVExport');
+//        console.log('In FileExport.onCSVExport');
 
         function sort(object){
             if (object instanceof Array) {
-                console.log('In FileExport.onCSVExport','array=',object);
+//                console.log('In FileExport.onCSVExport','array=',object);
                 var newArray = [];
                 for (var j = 0; j < object.length; j++){
                     newArray.push(sort(object[j]));
                 }
                 return newArray;
             } else if (typeof object == "object") {
-                console.log('In FileExport.onCSVExport','object=',object);
+//                console.log('In FileExport.onCSVExport','object=',object);
                 var keys = Object.keys(object);
                 keys.sort();
                 var newObject = {};
@@ -118,9 +122,21 @@ class FileExport extends Component {
             }
         }
 
-        var model = sort(this.props.state);
-        this.exportCSV(model, 'CSV_' + this.props.name, 'json');
-        logUsage('event', 'FileExport', { event_label: 'SORTED ' + this.props.type + ' ' + this.props.name });
+        // Create object with symbol table name properties
+        // Convert % to PC and convert all non-alphanumeric characters to _.
+        // Ignore hidden objects
+        var newObject = {};
+        for (var j = 0; j < this.props.state.symbol_table.length; j++){
+            var entry = this.props.state.symbol_table[j];
+            entry.name = entry.name.replace('%','PC').replace(/[^a-zA-Z0-9]/g,'_');
+            if (entry.hidden === false) {
+                newObject[entry.name] = entry;
+            }
+        }
+//        console.log('newObject=',newObject);
+        var symbol_table = sort(newObject);
+        this.exportCSV(symbol_table, 'CSV_' + this.props.name, 'csv');
+        logUsage('event', 'FileExport', { event_label: 'CSV ' + this.props.type + ' ' + this.props.name });
         this.setState({
             modal: !this.state.modal,
         });
