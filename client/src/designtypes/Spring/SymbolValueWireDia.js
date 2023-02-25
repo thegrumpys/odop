@@ -22,7 +22,6 @@ import { logValue } from '../../logUsage';
 import { logUsage } from '../../logUsage';
 import { getAlertsByName } from '../../components/Alerts';
 import { search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../../store/actionCreators';
-import { displayMessage } from '../../components/MessageModal';
 import FeasibilityIndicator from '../../components/FeasibilityIndicator';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
@@ -392,7 +391,7 @@ class SymbolValueWireDia extends Component {
                 <Modal show={this.state.modal} onHide={this.onClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>
-                        {this.props.element.type === "equationset" && (this.props.element.input ? 'Independent Variable' : 'Dependent Variable')} Value Input
+                        Edit {this.props.element.type === "equationset" ? (this.props.element.input ? 'Independent Variable' : 'Dependent Variable') : "Calculation Input"} {this.props.element.name}
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -402,6 +401,16 @@ class SymbolValueWireDia extends Component {
                                     <tr>
                                         <td className={feasibility_class + " text-center"}>
                                             {feasibility_string}
+                                            {feasibility_string === 'NOT FEASIBLE' && this.props.search_completed ?
+                                                <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                                                    This design may be over-specified. 
+                                                    See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.
+                                                    </Tooltip>}>
+                                                    <span>&nbsp;<i className="fas fa-info-circle text-primary"></i></span>
+                                                </OverlayTrigger>
+                                            :
+                                                ''
+                                            }
                                         </td>
                                     </tr>
                                     <tr>
@@ -504,8 +513,8 @@ class SymbolValueWireDia extends Component {
                         {this.state.modified ? <><Button variant="secondary" onClick={this.onResetButton}>Reset</Button>&nbsp;</> : ''}
                         {display_search_button ? 
                             <>
-                                <Button variant="secondary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
-                                <Button variant="primary" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>
+                                <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>
+                                <Button variant={this.props.search_completed ? "primary" : "secondary"} disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                             </>
                         :
                             ''
@@ -530,7 +539,8 @@ const mapStateToProps = state => ({
     type: state.model.type,
     symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
-    objective_value: state.model.result.objective_value
+    objective_value: state.model.result.objective_value,
+    search_completed: state.model.result.search_completed,
 });
 
 const mapDispatchToProps = {

@@ -1,5 +1,5 @@
 import { FIXED } from '../actionTypes';
-import { changeInputSymbolValues, changeResultTerminationCondition } from '../actionCreators';
+import { changeInputSymbolValues, changeResultTerminationCondition, changeResultSearchCompleted } from '../actionCreators';
 import { patsh } from './patsh';
 
 // Search
@@ -41,7 +41,8 @@ export function search(store, objmin, merit) {
             }
     }
     store.dispatch(changeInputSymbolValues(p, merit));
-    store.dispatch(changeResultTerminationCondition(ncode, true));
+    store.dispatch(changeResultTerminationCondition(ncode));
+    store.dispatch(changeResultSearchCompleted(true));
     
     design = store.getState();
     var obj = design.model.result.objective_value;

@@ -192,7 +192,7 @@ class ResultTable extends Component {
                         <tr>
                             {display_search_button ? 
                                 <td align="center">
-                                    <Button variant="primary" size="sm" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
+                                    <Button variant="primary" size="sm" onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>&nbsp;
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                         SEARCH alters the values of any free independent variables to find a design that 
                                         satisfies all constraints while also achieving the desired value for each fixed dependent 
@@ -206,7 +206,7 @@ class ResultTable extends Component {
                               </td>
                             :
                                 <td align="center">
-                                    <Button variant="primary" size="sm" onClick={this.onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
+                                    <Button variant="primary" size="sm" onClick={this.onSeekRequest}><b>Seek</b> (optimize)</Button>&nbsp;
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                         If one feasible design exists there are likely many more available, each with varying 
                                         advantages / disadvantages. SEEK provides a “goal seeking” capability 

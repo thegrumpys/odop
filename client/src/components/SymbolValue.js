@@ -129,11 +129,11 @@ class SymbolValue extends Component {
         var design = store.getState();
         var new_objective_value = design.model.result.objective_value.toPrecision(4)
         logUsage('event', 'ActionSearch', { event_label: 'Element ' + this.props.element.name + ' ' + old_objective_value + ' --> ' + new_objective_value});
-        if (new_objective_value <= this.props.system_controls.objmin) {
-            this.setState({
-                modal: !this.state.modal
-            });
-        }
+//        if (new_objective_value <= this.props.system_controls.objmin) {
+//            this.setState({
+//                modal: !this.state.modal
+//            });
+//        }
     }
 
     onSeekMinRequest(event) {
@@ -148,10 +148,10 @@ class SymbolValue extends Component {
                 return;
             }
         });
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Do seek
+//        this.setState({
+//            modal: !this.state.modal
+//        });
+//        // Do seek
         this.props.saveAutoSave();
         this.props.seek(this.props.element.name, MIN);
         logUsage('event', 'ActionSeek', { event_label: 'Element ' + this.props.element.name + ' MIN'});
@@ -169,10 +169,10 @@ class SymbolValue extends Component {
                 return;
             }
         });
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Do seek
+//        this.setState({
+//            modal: !this.state.modal
+//        });
+//        // Do seek
         this.props.saveAutoSave();
         this.props.seek(this.props.element.name, MAX);
         logUsage('event', 'ActionSeek', { event_label: 'Element ' + this.props.element.name + ' MAX'});
@@ -344,6 +344,7 @@ class SymbolValue extends Component {
                 display_seek_button = true;
             }
         }
+//        console.log('feasibility_string=',feasibility_string,'feasibility_class=',feasibility_class,'display_search_button=',display_search_button,'display_seek_button=',display_seek_button);
 
         return (
             <>
@@ -372,7 +373,7 @@ class SymbolValue extends Component {
                 <Modal show={this.state.modal} onHide={this.state.modified ? this.onResetButton : this.onClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>
-                        {this.props.element.type === "equationset" && (this.props.element.input ? 'Independent Variable' : 'Dependent Variable')} Value Input
+                        Edit {this.props.element.type === "equationset" ? (this.props.element.input ? 'Independent Variable' : 'Dependent Variable') : "Calculation Input"} {this.props.element.name}
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -382,6 +383,16 @@ class SymbolValue extends Component {
                                     <tr>
                                         <td className={feasibility_class + " text-center"}>
                                             {feasibility_string}
+                                            {feasibility_string === 'NOT FEASIBLE' && this.props.search_completed ?
+                                                <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                                                    This design may be over-specified. 
+                                                    See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.
+                                                    </Tooltip>}>
+                                                    <span>&nbsp;<i className="fas fa-info-circle text-primary"></i></span>
+                                                </OverlayTrigger>
+                                            :
+                                                ''
+                                            }
                                         </td>
                                     </tr>
                                     <tr>
@@ -452,20 +463,19 @@ class SymbolValue extends Component {
                         {this.state.modified ? <><Button variant="secondary" onClick={this.onResetButton}>Reset</Button>&nbsp;</> : ''}
                         {display_search_button ? 
                             <>
-                                <Button variant="secondary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
-                                <Button variant="primary" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>
+                                <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>
+                                <Button variant={this.props.search_completed ? "primary" : "secondary"} disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                             </>
                         :
-                            ''
-                        }
-                        {display_seek_button ? 
-                            <>
-                                {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMinRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MIN {this.props.element.name}</Button>}
-                                {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMaxRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MAX {this.props.element.name}</Button>}
-                                <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
-                            </>
-                        :
-                            ''
+                            (display_seek_button ? 
+                                <>
+                                    {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMinRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MIN {this.props.element.name}</Button>}
+                                    {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMaxRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MAX {this.props.element.name}</Button>}
+                                    <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
+                                </>
+                            :
+                                    <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
+                            )
                         }
                     </Modal.Footer>
                 </Modal>
@@ -482,7 +492,8 @@ const mapStateToProps = state => ({
     type: state.model.type,
     symbol_table: state.model.symbol_table,
     system_controls: state.model.system_controls,
-    objective_value: state.model.result.objective_value
+    objective_value: state.model.result.objective_value,
+    search_completed: state.model.result.search_completed,
 });
 
 const mapDispatchToProps = {

@@ -1,6 +1,6 @@
 import { MIN, MAX, CONSTRAINED, FIXED } from '../actionTypes';
 import { changeSymbolViolation,
-    changeResultObjectiveValue } from '../actionCreators';
+    changeResultObjectiveValue, changeResultSearchCompleted } from '../actionCreators';
 
 // Update Violations and Objective Value
 export function updateObjectiveValue(store, merit) {
@@ -201,6 +201,7 @@ export function updateObjectiveValue(store, merit) {
     // Update Objective Value
     obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
     store.dispatch(changeResultObjectiveValue(obj));
+    store.dispatch(changeResultSearchCompleted(false));
 
     if (debug) {
 	    if (!invalid && !infeasible) {

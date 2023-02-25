@@ -24,6 +24,7 @@ import { STARTUP,
 
     CHANGE_RESULT_OBJECTIVE_VALUE,
     CHANGE_RESULT_TERMINATION_CONDITION,
+    CHANGE_RESULT_SEARCH_COMPLETED,
 
     CHANGE_SYSTEM_CONTROLS_VALUE,
     CHANGE_LABELS_VALUE,
@@ -452,13 +453,22 @@ export function reducers(state, action) {
             }
         });
     case CHANGE_RESULT_TERMINATION_CONDITION:
-//        console.log('$$$$$ CHANGE_RESULT_TERMINATION_CONDITION $$$$$ action.payload.termination_condition=',action.payload.termination_condition);
         return Object.assign({}, state, {
             model: {
                 ...state.model,
                 result: {
                     ...state.model.result,
-                    termination_condition: action.payload.termination_condition,
+                    termination_condition: action.payload.termination_condition
+                }
+            }
+        });
+
+    case CHANGE_RESULT_SEARCH_COMPLETED:
+        return Object.assign({}, state, {
+            model: {
+                ...state.model,
+                result: {
+                    ...state.model.result,
                     search_completed: action.payload.search_completed
                 }
             }
