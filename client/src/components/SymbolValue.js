@@ -423,7 +423,7 @@ class SymbolValue extends Component {
                             {this.props.element.type === "calcinput" && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderCalcInput />
-                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} />
+                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} onChange={this.onModifiedFlag} onSelect={this.onModifiedFlag} />
                                 </>}
                         </Table>
                         {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
