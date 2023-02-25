@@ -110,6 +110,74 @@ class SymbolValue extends Component {
         }
     }
 
+    onSearchRequest(event) {
+//        console.log('In ResultTable.onSearchRequest this=',this,'event=',event);
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            return;
+        }
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+                return;
+            }
+        });
+        var old_objective_value = this.props.objective_value.toPrecision(4);
+        this.props.saveAutoSave();
+        this.props.search();
+        const { store } = this.context;
+        var design = store.getState();
+        var new_objective_value = design.model.result.objective_value.toPrecision(4)
+        logUsage('event', 'ActionSearch', { event_label: 'Element ' + this.props.element.name + ' ' + old_objective_value + ' --> ' + new_objective_value});
+        if (new_objective_value <= this.props.system_controls.objmin) {
+            this.setState({
+                modal: !this.state.modal
+            });
+        }
+    }
+
+    onSeekMinRequest(event) {
+//        console.log('In ResultTable.onSeekMinRequest this=',this,'event=',event);
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            return;
+        }
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+                return;
+            }
+        });
+        this.setState({
+            modal: !this.state.modal
+        });
+        // Do seek
+        this.props.saveAutoSave();
+        this.props.seek(this.props.element.name, MIN);
+        logUsage('event', 'ActionSeek', { event_label: 'Element ' + this.props.element.name + ' MIN'});
+    }
+
+    onSeekMaxRequest(event) {
+//        console.log('In ResultTable.onSeekMaxRequest this=',this,'event=',event);
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            return;
+        }
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+                return;
+            }
+        });
+        this.setState({
+            modal: !this.state.modal
+        });
+        // Do seek
+        this.props.saveAutoSave();
+        this.props.seek(this.props.element.name, MAX);
+        logUsage('event', 'ActionSeek', { event_label: 'Element ' + this.props.element.name + ' MAX'});
+    }
+
     onContextMenu(e) {
 //        console.log('In SymbolValue.onContextMenu this=',this,'e=',e);
         e.preventDefault();

@@ -157,7 +157,7 @@ class ResultTable extends Component {
                             </th>
                             <td width="67%" className={feasibility_class + " text-left"}>
                                 {feasibility_string}
-                                {feasibility_string === 'NOT FEASIBLE' ?
+                                {feasibility_string === 'NOT FEASIBLE' && this.props.search_completed ?
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                         This design may be over-specified. 
                                         See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.
@@ -269,6 +269,7 @@ const mapStateToProps = state => ({
     system_controls: state.model.system_controls,
     objective_value: state.model.result.objective_value,
     termination_condition: state.model.result.termination_condition,
+    search_completed: state.model.result.search_completed,
 });
 
 const mapDispatchToProps = {

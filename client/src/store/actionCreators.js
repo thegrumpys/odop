@@ -259,11 +259,12 @@ export function changeResultObjectiveValue(objective_value) {
     }
 }
 
-export function changeResultTerminationCondition(termination_condition) {
+export function changeResultTerminationCondition(termination_condition, search_completed=false) {
     return {
         type: CHANGE_RESULT_TERMINATION_CONDITION,
         payload: {
-            termination_condition
+            termination_condition,
+            search_completed
         }
     }
 }

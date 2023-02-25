@@ -41,7 +41,7 @@ export function search(store, objmin, merit) {
             }
     }
     store.dispatch(changeInputSymbolValues(p, merit));
-    store.dispatch(changeResultTerminationCondition(ncode));
+    store.dispatch(changeResultTerminationCondition(ncode, true));
     
     design = store.getState();
     var obj = design.model.result.objective_value;
