@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -22,6 +23,7 @@ import { logValue } from '../../logUsage';
 import { logUsage } from '../../logUsage';
 import { getAlertsByName } from '../../components/Alerts';
 import { search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../../store/actionCreators';
+import { displayMessage } from '../../components/MessageModal';
 import FeasibilityIndicator from '../../components/FeasibilityIndicator';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
@@ -39,14 +41,24 @@ class SymbolValueWireDia extends Component {
     constructor(props) {
 //        console.log('In SymbolValueWireDia.constructor props=',props);
         super(props);
-        this.onChange = this.onChange.bind(this);
+        this.onRadio = this.onRadio.bind(this);
         this.onSelect = this.onSelect.bind(this);
+        this.onChangeValid = this.onChangeValid.bind(this);
         this.onSet = this.onSet.bind(this);
         this.onReset = this.onReset.bind(this);
         this.onContextMenu = this.onContextMenu.bind(this);
         this.onContextHelp = this.onContextHelp.bind(this);
         this.onClose = this.onClose.bind(this);
-        this.onRadio = this.onRadio.bind(this);
+        this.onResetButton = this.onResetButton.bind(this);
+        this.onSearchRequest = this.onSearchRequest.bind(this);
+        this.onSeekMinRequest = this.onSeekMinRequest.bind(this);
+        this.onSeekMaxRequest = this.onSeekMaxRequest.bind(this);
+        this.onChangeValidValue = this.onChangeValidValue.bind(this);
+        this.onChangeInvalidValue = this.onChangeInvalidValue.bind(this);
+        this.onChangeValidMinConstraint = this.onChangeValidMinConstraint.bind(this);
+        this.onChangeInvalidMinConstraint = this.onChangeInvalidMinConstraint.bind(this);
+        this.onChangeValidMaxConstraint = this.onChangeValidMaxConstraint.bind(this);
+        this.onChangeInvalidMaxConstraint = this.onChangeInvalidMaxConstraint.bind(this);
         this.onModifiedFlag = this.onModifiedFlag.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
@@ -75,21 +87,11 @@ class SymbolValueWireDia extends Component {
         }
     }
 
-    onChange(event) {
-//        console.log('In SymbolValueWireDia.onChange event.target.value=',event.target.value);
-        var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-        if (this.props.system_controls.enable_auto_fix) {
-            auto_fixed = true;
-            if (!(this.props.element.lmin & FIXED)) {
-                this.props.fixSymbolValue(this.props.element.name);
-                logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
-            }
-        }
-        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value));
-        logValue(this.props.element.name,event.target.value,'Value');
-        if (auto_fixed) {
-            this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
-        }
+    onRadio() {
+//        console.log('In SymbolValueWireDia.onRadio this=',this);
+        this.setState({
+            value_input: !this.state.value_input,
+        });
     }
 
     onSelect(event) {
@@ -111,16 +113,109 @@ class SymbolValueWireDia extends Component {
         }
     }
 
-    onSet() {
+    onChangeValid(event) {
+//        console.log('In SymbolValueWireDia.onChangeValid event.target.value=',event.target.value);
+        var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
+        if (this.props.system_controls.enable_auto_fix) {
+            auto_fixed = true;
+            if (!(this.props.element.lmin & FIXED)) {
+                this.props.fixSymbolValue(this.props.element.name);
+                logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
+            }
+        }
+        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value)); // Update the model
+        logValue(this.props.element.name,event.target.value,'NumericValue');
+        if (auto_fixed) {
+            this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
+        }
+        this.onChangeValidValue(event);
+    }
+    
+    onChangeInvalid(event) {
+//        console.log('In SymbolValueWireDia.onChangeInvalid event.target.value=',event.target.value);
+        this.onChangeInvalidValue(event);
+    }
+
+    onSet(event) {
 //        console.log('In SymbolValueWireDia.onSet');
         this.props.fixSymbolValue(this.props.element.name);
         logValue(this.props.element.name,'FIXED','FixedFlag',false);
+        this.onModifiedFlag(event);
     }
 
-    onReset() {
+    onReset(event) {
 //        console.log('In SymbolValueWireDia.onReset');
         this.props.freeSymbolValue(this.props.element.name);
         logValue(this.props.element.name,'FREE','FixedFlag',false);
+        this.onModifiedFlag(event);
+    }
+
+    onSearchRequest(event) {
+//        console.log('In SymbolValueWireDia.onSearchRequest this=',this,'event=',event);
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            return;
+        }
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+                return;
+            }
+        });
+        var old_objective_value = this.props.objective_value.toPrecision(4);
+        this.props.saveAutoSave();
+        this.props.search();
+        const { store } = this.context;
+        var design = store.getState();
+        var new_objective_value = design.model.result.objective_value.toPrecision(4)
+        logUsage('event', 'ActionSearch', { event_label: 'Element ' + this.props.element.name + ' ' + old_objective_value + ' --> ' + new_objective_value});
+//        if (new_objective_value <= this.props.system_controls.objmin) {
+//            this.setState({
+//                modal: !this.state.modal
+//            });
+//        }
+    }
+
+    onSeekMinRequest(event) {
+//        console.log('In SymbolValueWireDia.onSeekMinRequest this=',this,'event=',event);
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            return;
+        }
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+                return;
+            }
+        });
+//        this.setState({
+//            modal: !this.state.modal
+//        });
+//        // Do seek
+        this.props.saveAutoSave();
+        this.props.seek(this.props.element.name, MIN);
+        logUsage('event', 'ActionSeek', { event_label: 'Element ' + this.props.element.name + ' MIN'});
+    }
+
+    onSeekMaxRequest(event) {
+//        console.log('In SymbolValueWireDia.onSeekMaxRequest this=',this,'event=',event);
+        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            return;
+        }
+        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+            if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+                return;
+            }
+        });
+//        this.setState({
+//            modal: !this.state.modal
+//        });
+//        // Do seek
+        this.props.saveAutoSave();
+        this.props.seek(this.props.element.name, MAX);
+        logUsage('event', 'ActionSeek', { event_label: 'Element ' + this.props.element.name + ' MAX'});
     }
 
     onContextMenu(e) {
@@ -152,15 +247,8 @@ class SymbolValueWireDia extends Component {
         });
     }
 
-    onRadio() {
-//        console.log('In SymbolValueWireDia.onRadio this=',this);
-        this.setState({
-            value_input: !this.state.value_input,
-        });
-    }
-
     onResetButton() {
-//        console.log('In SymbolValue.onResetButton this=',this);
+//        console.log('In SymbolValueWireDia.onResetButton this=',this);
         this.props.changeSymbolValue(this.state.element.name, this.state.element.value); // Reset the value back to what it was
         if (this.state.element.lmin & FIXED) {
             this.props.setSymbolFlag(this.state.element.name, MIN, FIXED);
@@ -292,9 +380,8 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.render sorted_wire_dia_table=',sorted_wire_dia_table);
 
         var sv_results = getAlertsByName(this.props.element.name, true);
-//        console.log('In SymbolValueWireDia.render sv_results=',sv_results);
+        var sv_value_class = sv_results.className;
         var sv_icon_alerts = sv_results.alerts;
-        var sv_value_class = sv_results.className + ' text-right ';
         if (this.props.element.lmin & FIXED) {
             sv_value_class += "borders-fixed ";
         } else {
@@ -453,7 +540,7 @@ class SymbolValueWireDia extends Component {
                                             <td className="align-middle" colSpan="2">
                                                 <InputGroup>
                                                     {(this.state.value_input ?
-                                                        <FormControlTypeNumber id={'svwd_'+this.props.element.name} icon_alerts={nvu_icon_alerts} className={nvu_value_class} step="any" value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChange={this.onChange} />
+                                                        <FormControlTypeNumber id={'svwd_'+this.props.element.name} icon_alerts={nvu_icon_alerts} className={nvu_value_class} step="any" value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChange={this.onChangeValid} />
                                                     :
                                                         <Form.Control as="select" id={'svwd_'+this.props.element.name} disabled={!this.props.element.input} className={nvu_value_class} value={default_value === undefined ? this.props.element.value : default_value[0]} onChange={this.onSelect} >
                                                             {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
@@ -480,33 +567,40 @@ class SymbolValueWireDia extends Component {
                             {this.props.element.type === "calcinput" && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderCalcInput />
-                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} />
+                                    <NameValueUnitsRowCalcInput key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} onChange={this.onModifiedFlag} onSelect={this.onModifiedFlag} />
                                 </>}
                         </Table>
-                        <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                        {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
+                            <Table size="sm" borderless>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            To control the value of a Dependent Variable either FIX it or enable its MIN and/or MAX constraints and then set its constraint values. 
+                                            This allows <img src="SearchButton.png" alt="SearchButton"/> to find the Dependent Variable's value that is within this constraint range.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>}
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                                <>
+                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                     <ConstraintsMinHeaderIndependentVariable />
                                     <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
-                                </>}
+                            </Table>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                                <>
+                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                     <ConstraintsMinHeaderDependentVariable />
                                     <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
-                                </>}
-                        </Table>
-                        <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                            </Table>}
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                                <>
+                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                     <ConstraintsMaxHeaderIndependentVariable />
                                     <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
-                                </>}
+                            </Table>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                                <>
+                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                     <ConstraintsMaxHeaderDependentVariable />
                                     <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
-                                </>}
-                        </Table>
+                            </Table>}
                     </Modal.Body>
                     <Modal.Footer>
                         <><Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}&nbsp;</>
@@ -517,16 +611,15 @@ class SymbolValueWireDia extends Component {
                                 <Button variant={this.props.search_completed ? "primary" : "secondary"} disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                             </>
                         :
-                            ''
-                        }
-                        {display_seek_button ? 
-                            <>
-                                {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMinRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MIN {this.props.element.name}</Button>}
-                                {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMaxRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MAX {this.props.element.name}</Button>}
-                                <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
-                            </>
-                        :
-                            ''
+                            (display_seek_button ? 
+                                <>
+                                    {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMinRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MIN {this.props.element.name}</Button>}
+                                    {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMaxRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MAX {this.props.element.name}</Button>}
+                                    <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
+                                </>
+                            :
+                                    <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
+                            )
                         }
                     </Modal.Footer>
                 </Modal>
@@ -534,6 +627,10 @@ class SymbolValueWireDia extends Component {
         );
     }
 }
+
+SymbolValueWireDia.contextTypes = {
+    store: PropTypes.object
+};
 
 const mapStateToProps = state => ({
     type: state.model.type,

@@ -111,7 +111,7 @@ class SymbolValue extends Component {
     }
 
     onSearchRequest(event) {
-//        console.log('In ResultTable.onSearchRequest this=',this,'event=',event);
+//        console.log('In SymbolValue.onSearchRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
             return;
@@ -137,7 +137,7 @@ class SymbolValue extends Component {
     }
 
     onSeekMinRequest(event) {
-//        console.log('In ResultTable.onSeekMinRequest this=',this,'event=',event);
+//        console.log('In SymbolValue.onSeekMinRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
             return;
@@ -158,7 +158,7 @@ class SymbolValue extends Component {
     }
 
     onSeekMaxRequest(event) {
-//        console.log('In ResultTable.onSeekMaxRequest this=',this,'event=',event);
+//        console.log('In SymbolValue.onSeekMaxRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
             return;
@@ -294,21 +294,21 @@ class SymbolValue extends Component {
 
     render() {
 //        console.log('In SymbolValue.render this=',this);
-        var results = getAlertsByName(this.props.element.name, true);
-        var className = results.className;
-        var icon_alerts = results.alerts;
+        var sv_results = getAlertsByName(this.props.element.name, true);
+        var sv_value_class = sv_results.className;
+        var sv_icon_alerts = sv_results.alerts;
         if (this.props.element.lmin & FIXED) {
-            className += "borders-fixed ";
+            sv_value_class += "borders-fixed ";
         } else {
             if (this.props.element.lmin & CONSTRAINED) {
-                className += "borders-constrained-min ";
+                sv_value_class += "borders-constrained-min ";
             }
             if (this.props.element.lmax & CONSTRAINED) {
-                className += "borders-constrained-max ";
+                sv_value_class += "borders-constrained-max ";
             }
         }
-        className += "background-white "; // Always white
-//        console.log('In SymbolValue.render className=',className);
+        sv_value_class += "background-white "; // Always white
+//        console.log('In SymbolValue.render sv_value_class=',sv_value_class);
         var icon_dependent_tag = '';
         if (this.props.element.type === "equationset" && !this.props.element.input) { // Dependent Variable?
             icon_dependent_tag =
@@ -353,7 +353,7 @@ class SymbolValue extends Component {
                         { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
                             <>
                                 {icon_dependent_tag}
-                                <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
+                                <FormControlTypeNumber id={'sv_'+this.props.element.name} readOnly icon_alerts={sv_icon_alerts} className={sv_value_class} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onClick={this.onContextMenu} />
                             </>
                         : ''}
                         { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
@@ -365,12 +365,12 @@ class SymbolValue extends Component {
                         { this.props.element.format === 'table' ?
                             <>
                                 {icon_dependent_tag}
-                                <Form.Control id={'sv_'+this.props.element.name} type="text" readOnly className={className} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
+                                <Form.Control id={'sv_'+this.props.element.name} type="text" readOnly className={sv_value_class} value={this.state.table[this.props.element.value][0]} onClick={this.onContextMenu} />
                             </>
                         : ''}
                     </InputGroup>
                 </td>
-                <Modal show={this.state.modal} onHide={this.state.modified ? this.onResetButton : this.onClose}>
+                <Modal show={this.state.modal} onHide={this.onClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>
                         Edit {this.props.element.type === "equationset" ? (this.props.element.input ? 'Independent Variable' : 'Dependent Variable') : "Calculation Input"} {this.props.element.name}
@@ -418,7 +418,7 @@ class SymbolValue extends Component {
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderDependentVariable />
-                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} toolTip="Change value by enabling Fixed status and changing the constraint value, or by enabling one or both contraints and changing the corresponding value(s)" />
+                                    <NameValueUnitsRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidValue} onChangeInvalid={this.onChangeInvalidValue} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                                 </>}
                             {this.props.element.type === "calcinput" && !this.props.element.hidden &&
                                 <>
