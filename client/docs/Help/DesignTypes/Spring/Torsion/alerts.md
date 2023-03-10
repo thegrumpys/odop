@@ -76,21 +76,29 @@ ___
 Alert entry #T303
 ## %_Safe_Deflect @ 2 > 80% 
 The second operating point (point 2) has more than 80% of maximum safe deflection. 
-While this is not usually a problem, 
-be aware that coil to coil contact may cause some inaccuracy in moments and deflections for this point.  
+There may be some inaccuracy in moments and deflections for this point. 
+
+**Even if the application requires that this design operate outside the range of 20% to 80% of
+available deflection, the inspection (acceptance) criteria should be specified within this range.** 
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
 follow Hooke's Law in that they provide a nominally linear relationship between force (moment) and deflection. 
 However, in the real world there are limitations. 
 
 When torsion springs are deflected beyond roughly 80% of safe deflection 
-geometric imperfections such as a lack uniformity in coil pitch or minor deviation from cylindrical shape 
-become a factor in the real (as opposed to theoretical) moment-deflection relationship. 
+geometric imperfections such as 
+a lack uniformity in coil pitch, 
+minor deviation from cylindrical shape 
+and deflection in the ends 
+become factors in the real (as opposed to theoretical) moment-deflection relationship. 
 Coil to coil contact will produce an increase in spring rate that continues to increase 
 with additional deflection until the maximum safe operating condition is reached. 
 Thus, when operating beyond 80% of the safe deflection, expect moments to be somewhat higher 
 (or deflections to be somewhat lower) 
 than the linear behavior predicted by the equations. 
+
+Specifying a small value for Coil_Spacing (available on Advanced View) can serve to reduce the
+influence of coil to coil contact.
 
  See also: 
   - [Restrictions](/docs/About/Legal/Restrictions.html)  
@@ -105,8 +113,10 @@ Alert entry #T304
 ## %_Safe_Deflect @ 1 < 20% 
 
 The first operating point (point 1) has less than 20% of maximum safe deflection. 
-This is not usually a problem. 
-However, you should be aware that end effects may cause some inaccuracy in moments and deflections for this point.  
+There may be some some inaccuracy in moment and deflection for this point.  
+
+**Even if the application requires that this design operate outside the range of 20% to 80% of
+available deflection, the inspection (acceptance) criteria should be specified within this range.** 
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
