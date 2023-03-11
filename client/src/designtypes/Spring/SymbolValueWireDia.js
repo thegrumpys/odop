@@ -231,7 +231,7 @@ class SymbolValueWireDia extends Component {
 
     onContextHelp() {
 //        console.log('In SymbolValueWireDia.onContextHelp this=',this);
-        logUsage('event', 'SymbolValueWireDia', { event_label: 'context Help button' });
+        logUsage('event', 'SymbolValueWireDia', { event_label: 'Context Help button' });
         this.setState({
             modal: !this.state.modal,
             modified: false,
@@ -249,6 +249,7 @@ class SymbolValueWireDia extends Component {
 
     onResetButton() {
 //        console.log('In SymbolValueWireDia.onResetButton this=',this);
+        logUsage('event', 'SymbolValueWireDia', { event_label: 'Reset button' });
         this.props.changeSymbolValue(this.state.element.name, this.state.element.value); // Reset the value back to what it was
         if (this.state.element.lmin & FIXED) {
             this.props.setSymbolFlag(this.state.element.name, MIN, FIXED);
