@@ -56,7 +56,9 @@ class ViewObjectiveValue extends Component {
     }
     
     renderElement(viol_sum, element, i) {
-        var flags = ['','CONSTRAINED','FIXED','CONSTRAINED|FIXED','FDCL','CONSTRAINED|FDCL','FIXED|FDCL','CONSTRAINED|FIXED|FDCL']
+        var flags = [
+            '','CONSTRAINED','FIXED','CONSTRAINED|FIXED',
+            'FDCL','CONSTRAINED|FDCL','FIXED|FDCL','CONSTRAINED|FIXED|FDCL']
         var validity_vmin;
         var validity_vmax;
         var feasibility_vmin;

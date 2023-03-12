@@ -1,5 +1,5 @@
 import { FIXED } from '../actionTypes';
-import { changeInputSymbolValues, changeResultTerminationCondition } from '../actionCreators';
+import { changeInputSymbolValues, changeResultTerminationCondition, changeResultSearchCompleted } from '../actionCreators';
 import { patsh } from './patsh';
 
 // Search
@@ -41,6 +41,7 @@ export function search(store, objmin, merit) {
             }
     }
     store.dispatch(changeInputSymbolValues(p, merit));
+    store.dispatch(changeResultSearchCompleted(true));
     store.dispatch(changeResultTerminationCondition(ncode));
     
     design = store.getState();

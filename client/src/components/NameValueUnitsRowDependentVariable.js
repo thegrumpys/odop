@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -26,16 +27,18 @@ class NameValueUnitsRowDependentVariable extends Component {
         this.onReset = this.onReset.bind(this);
     }
 
-    onSet() {
+    onSet(event) {
 //        console.log('In NameValueUnitsRowDependentVariable.onSet');
         this.props.fixSymbolValue(this.props.element.name);
         logValue(this.props.element.name,'FIXED','FixedFlag',false);
+        this.props.onSet(event);
     }
 
-    onReset() {
+    onReset(event) {
 //        console.log('In NameValueUnitsRowDependentVariable.onReset');
         this.props.freeSymbolValue(this.props.element.name);
         logValue(this.props.element.name,'FREE','FixedFlag',false);
+        this.props.onReset(event);
     }
 
     render() {
@@ -93,6 +96,16 @@ class NameValueUnitsRowDependentVariable extends Component {
             </tbody>
         );
     }
+}
+
+NameValueUnitsRowDependentVariable.propTypes = {
+    onSet: PropTypes.func,
+    onReset: PropTypes.func,
+}
+
+NameValueUnitsRowDependentVariable.defaultProps = {
+    onSet: (()=>{}),
+    onReset: (()=>{}),
 }
 
 const mapStateToProps = state => ({

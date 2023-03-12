@@ -72,4 +72,5 @@ ReactDOM.render(
             </>
         </Provider>
     </div>,
-    document.getElementById('root'));
+    document.getElementById('root')
+);

@@ -42,11 +42,13 @@ class ConstraintsMinRowDependentVariable extends Component {
     onSetFlagMinConstrained(event) {
         this.props.setSymbolFlag(this.props.element.name, MIN, CONSTRAINED);
         logValue(this.props.element.name,'Enabled','MinConstraintFlag',false);
+        this.props.onSet(event);
     }
 
     onResetFlagMinConstrained(event) {
         this.props.resetSymbolFlag(this.props.element.name, MIN, CONSTRAINED);
         logValue(this.props.element.name,'Disabled','MinConstraintFlag',false);
+        this.props.onReset(event);
     }
 
     onChangeValidMinConstraint(event) {
@@ -215,12 +217,16 @@ ConstraintsMinRowDependentVariable.propTypes = {
     element: PropTypes.object,
     onChangeValid: PropTypes.func,
     onChangeInvalid: PropTypes.func,
+    onSet: PropTypes.func,
+    onReset: PropTypes.func,
 }
 
 ConstraintsMinRowDependentVariable.defaultProps = {
     element: null,
     onChangeValid: (()=>{}),
     onChangeInvalid: (()=>{}),
+    onSet: (()=>{}),
+    onReset: (()=>{}),
 }
 
 const mapStateToProps = state => ({

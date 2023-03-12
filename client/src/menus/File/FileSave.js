@@ -112,7 +112,7 @@ class FileSave extends Component {
                 return res.json()
             })
             .catch(error => {
-                displayMessage(method+' of \''+name+'\' \''+type+'\' design failed with message: \''+error.message+'\'');
+                displayMessage('GET of \''+name+'\' design failed for type \''+type+'\' with message: \''+error.message+'\'');
             });
         })
         .catch(error => {

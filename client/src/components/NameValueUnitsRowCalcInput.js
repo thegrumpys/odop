@@ -64,11 +64,19 @@ class NameValueUnitsRowCalcInput extends Component {
         this.props.onChangeInvalid(event);
     }
     
+    onChange(event) {
+//        console.log('In NameValueUnitsRowCalcInput.onChange event.target.value=',event.target.value);
+        this.props.changeSymbolValue(this.props.element.name, event.target.value); // Update the model
+        logValue(this.props.element.name,event.target.value);
+        this.props.onChange(event);
+    }
+    
     onSelect(event) {
 //        console.log('In NameValueUnitsRowCalcInput.onSelect event.target.value=',event.target.value);
         var selectedIndex = parseFloat(event.target.value);
         this.props.changeSymbolValue(this.props.element.name,selectedIndex);
         logValue(this.props.element.name,selectedIndex,'TableIndex');
+        this.props.onSelect(event);
     }
     
     render() {
@@ -114,11 +122,15 @@ class NameValueUnitsRowCalcInput extends Component {
 NameValueUnitsRowCalcInput.propTypes = {
     onChangeValid: PropTypes.func,
     onChangeInvalid: PropTypes.func,
+    onChange: PropTypes.func,
+    onSelect: PropTypes.func,
 }
 
 NameValueUnitsRowCalcInput.defaultProps = {
     onChangeValid: (()=>{}),
     onChangeInvalid: (()=>{}),
+    onChange: (()=>{}),
+    onSelect: (()=>{}),
 }
 
 const mapStateToProps = state => ({

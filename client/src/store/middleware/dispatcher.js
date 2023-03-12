@@ -12,6 +12,8 @@ import { STARTUP,
     CHANGE_INPUT_SYMBOL_VALUES, 
     RESTORE_INPUT_SYMBOL_VALUES, 
     
+    CHANGE_SYSTEM_CONTROLS_VALUE,
+
     RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, 
     
     SEARCH, 
@@ -104,10 +106,11 @@ export const dispatcher = store => next => action => {
         design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
                 if (element.lmin & FIXED) { // Is it already FIXED?
-                    store.dispatch(restoreOutputSymbolConstraints(element.name)); // Auto free it
-                }
-                if (element.type === "equationset" && element.input) {
-                    // Independent
+                    if (action.payload.value !== undefined) {
+                        store.dispatch(changeSymbolValue(element.name, action.payload.value));
+                    }
+                    return true; // We're done
+                } else if (element.type === "equationset" && element.input) { // Independent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED));
@@ -115,8 +118,7 @@ export const dispatcher = store => next => action => {
                         store.dispatch(changeSymbolValue(element.name, action.payload.value));
                     }
                     return true; // found
-                } else if (element.type === "equationset" && !element.input) {
-                    // Dependent
+                } else if (element.type === "equationset" && !element.input) { // Dependent
                     store.dispatch(saveOutputSymbolConstraints(element.name));
                     store.dispatch(setSymbolFlag(element.name, MIN, FIXED|CONSTRAINED));
                     store.dispatch(setSymbolFlag(element.name, MAX, FIXED|CONSTRAINED));
@@ -226,16 +228,10 @@ export const dispatcher = store => next => action => {
         break;
 
     case CHANGE_INPUT_SYMBOL_VALUES:
+    case RESTORE_INPUT_SYMBOL_VALUES:
+    case CHANGE_SYSTEM_CONTROLS_VALUE:
 //        console.log('In dispatcher.CHANGE_INPUT_SYMBOL_VALUES values=',action.payload.values,'merit=',action.payload.merit);
         // DO NOT INVOKE invokeInit(store) BECAUSE OF RECURSION
-        store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
-        store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
-        invokeEquationSet(store);
-        propagate(store);
-        updateObjectiveValue(store, action.payload.merit);
-        invokeCheck(store);
-        break;
-    case RESTORE_INPUT_SYMBOL_VALUES:
         store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
         store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
         invokeEquationSet(store);

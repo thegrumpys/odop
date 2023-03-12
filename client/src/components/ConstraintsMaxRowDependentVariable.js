@@ -42,11 +42,13 @@ class ConstraintsMaxRowDependentVariable extends Component {
     onSetFlagMaxConstrained(event) {
         this.props.setSymbolFlag(this.props.element.name, MAX, CONSTRAINED);
         logValue(this.props.element.name,'Enabled','MaxConstraintFlag',false);
+        this.props.onSet(event);
     }
 
     onResetFlagMaxConstrained(event) {
         this.props.resetSymbolFlag(this.props.element.name, MAX, CONSTRAINED);
         logValue(this.props.element.name,'Disabled','MaxConstraintFlag',false);
+        this.props.onReset(event);
     }
 
     onChangeValidMaxConstraint(event) {
@@ -215,12 +217,16 @@ ConstraintsMaxRowDependentVariable.propTypes = {
     element: PropTypes.object,
     onChangeValid: PropTypes.func,
     onChangeInvalid: PropTypes.func,
+    onSet: PropTypes.func,
+    onReset: PropTypes.func,
 }
 
 ConstraintsMaxRowDependentVariable.defaultProps = {
     element: null,
     onChangeValid: (()=>{}),
     onChangeInvalid: (()=>{}),
+    onSet: (()=>{}),
+    onReset: (()=>{}),
 }
 
 const mapStateToProps = state => ({

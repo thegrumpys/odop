@@ -27,6 +27,7 @@ import {
     
     CHANGE_RESULT_OBJECTIVE_VALUE, 
     CHANGE_RESULT_TERMINATION_CONDITION, 
+    CHANGE_RESULT_SEARCH_COMPLETED, 
     
     CHANGE_SYSTEM_CONTROLS_VALUE, 
     CHANGE_LABELS_VALUE, 
@@ -264,6 +265,15 @@ export function changeResultTerminationCondition(termination_condition) {
         type: CHANGE_RESULT_TERMINATION_CONDITION,
         payload: {
             termination_condition
+        }
+    }
+}
+
+export function changeResultSearchCompleted(search_completed=false) {
+    return {
+        type: CHANGE_RESULT_SEARCH_COMPLETED,
+        payload: {
+            search_completed
         }
     }
 }

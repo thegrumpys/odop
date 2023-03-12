@@ -24,6 +24,7 @@ import { STARTUP,
 
     CHANGE_RESULT_OBJECTIVE_VALUE,
     CHANGE_RESULT_TERMINATION_CONDITION,
+    CHANGE_RESULT_SEARCH_COMPLETED,
 
     CHANGE_SYSTEM_CONTROLS_VALUE,
     CHANGE_LABELS_VALUE,
@@ -278,15 +279,15 @@ export function reducers(state, action) {
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
 //                        console.log('In reducers.SET_SYMBOL_FLAG state=',state,'action=', action);
+                        var update;
                         if (action.payload.minmax === MIN) {
-                            return Object.assign({}, element, {
-                                lmin: element.lmin | action.payload.mask
-                            });
+                            update = {lmin: element.lmin | action.payload.mask};
                         } else {
-                            return Object.assign({}, element, {
-                                lmax: element.lmax | action.payload.mask
-                            });
+                            update = {lmax: element.lmax | action.payload.mask};
                         }
+                        var result = Object.assign({}, element, update);
+//                        console.log('In reducers.SET_SYMBOL_FLAG ','action=', action,'element=',element,'update=',update,'result=',result);
+                        return result;
                     }
                     return element;
                 })
@@ -299,15 +300,15 @@ export function reducers(state, action) {
                 symbol_table: state.model.symbol_table.map((element) => {
                     if (element.name === action.payload.name) {
 //                        console.log('In reducers.RESET_SYMBOL_FLAG state=',state,'action=', action);
+                        var update;
                         if (action.payload.minmax === MIN) {
-                            return Object.assign({}, element, {
-                                lmin: element.lmin & ~action.payload.mask
-                            });
+                            update = {lmin: element.lmin & (~action.payload.mask)};
                         } else {
-                            return Object.assign({}, element, {
-                                lmax: element.lmax & ~action.payload.mask
-                            });
+                            update = {lmax: element.lmax & (~action.payload.mask)};
                         }
+                        var result = Object.assign({}, element, update);
+//                        console.log('In reducers.RESET_SYMBOL_FLAG ','action=', action,'element=',element,'update=',update,'result=',result);
+                        return result;
                     }
                     return element;
                 })
@@ -452,13 +453,23 @@ export function reducers(state, action) {
             }
         });
     case CHANGE_RESULT_TERMINATION_CONDITION:
-//        console.log('$$$$$ CHANGE_RESULT_TERMINATION_CONDITION $$$$$ action.payload.termination_condition=',action.payload.termination_condition);
         return Object.assign({}, state, {
             model: {
                 ...state.model,
                 result: {
                     ...state.model.result,
                     termination_condition: action.payload.termination_condition
+                }
+            }
+        });
+
+    case CHANGE_RESULT_SEARCH_COMPLETED:
+        return Object.assign({}, state, {
+            model: {
+                ...state.model,
+                result: {
+                    ...state.model.result,
+                    search_completed: action.payload.search_completed
                 }
             }
         });
