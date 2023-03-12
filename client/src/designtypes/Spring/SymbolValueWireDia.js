@@ -22,7 +22,7 @@ import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 import { logValue } from '../../logUsage';
 import { logUsage } from '../../logUsage';
 import { getAlertsByName } from '../../components/Alerts';
-import { search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../../store/actionCreators';
+import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../../store/actionCreators';
 import { displayMessage } from '../../components/MessageModal';
 import FeasibilityIndicator from '../../components/FeasibilityIndicator';
 
@@ -221,9 +221,12 @@ class SymbolValueWireDia extends Component {
     onContextMenu(e) {
 //        console.log('In SymbolValueWireDia.onContextMenu this=',this,'e=',e);
         e.preventDefault();
+        const { store } = this.context;
+        var design = store.getState();
+        var reset = JSON.stringify(design);
         this.setState({
             modal: true,
-            element: this.props.element,
+            reset: reset,
             error: '',
             modified: false,
         });
@@ -250,29 +253,8 @@ class SymbolValueWireDia extends Component {
     onResetButton() {
 //        console.log('In SymbolValueWireDia.onResetButton this=',this);
         logUsage('event', 'SymbolValueWireDia', { event_label: 'Reset button' });
-        this.props.changeSymbolValue(this.state.element.name, this.state.element.value); // Reset the value back to what it was
-        if (this.state.element.lmin & FIXED) {
-            this.props.setSymbolFlag(this.state.element.name, MIN, FIXED);
-        } else {
-            this.props.resetSymbolFlag(this.state.element.name, MIN, FIXED);
-        }
-        if (this.state.element.lmax & FIXED) {
-            this.props.setSymbolFlag(this.state.element.name, MAX, FIXED);
-        } else {
-            this.props.resetSymbolFlag(this.state.element.name, MAX, FIXED);
-        }
-        this.props.changeSymbolConstraint(this.state.element.name, MIN, this.state.element.cmin);
-        this.props.changeSymbolConstraint(this.state.element.name, MAX, this.state.element.cmax);
-        if (this.state.element.lmin & CONSTRAINED) {
-            this.props.setSymbolFlag(this.state.element.name, MIN, CONSTRAINED);
-        } else {
-            this.props.resetSymbolFlag(this.state.element.name, MIN, CONSTRAINED);
-        }
-        if (this.state.element.lmax & CONSTRAINED) {
-            this.props.setSymbolFlag(this.state.element.name, MAX, CONSTRAINED);
-        } else {
-            this.props.resetSymbolFlag(this.state.element.name, MAX, CONSTRAINED);
-        }
+        const { store } = this.context;
+        store.dispatch(load(JSON.parse(this.state.reset)));
         this.setState({
             modified: false,
         });
@@ -381,7 +363,7 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.render sorted_wire_dia_table=',sorted_wire_dia_table);
 
         var sv_results = getAlertsByName(this.props.element.name, true);
-        var sv_value_class = sv_results.className;
+        var sv_value_class = sv_results.className + ' text-right ';
         var sv_icon_alerts = sv_results.alerts;
         if (this.props.element.lmin & FIXED) {
             sv_value_class += "borders-fixed ";
@@ -642,6 +624,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+    load: load,
     search: search,
     seek: seek,
     saveAutoSave: saveAutoSave,
