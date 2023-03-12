@@ -67,7 +67,7 @@ class SymbolValueWireDia extends Component {
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
                 error: '',
-                value_input: false,
+                value_input: true,
             };
         } else { // Table or String
             this.state = {
@@ -76,7 +76,7 @@ class SymbolValueWireDia extends Component {
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
                 error: '',
-                value_input: false,
+                value_input: true,
             };
         }
     }
@@ -392,7 +392,7 @@ class SymbolValueWireDia extends Component {
         var nvu_results = getAlertsByName(this.props.element.name);
 //        console.log('In SymbolValueWireDia.render nvu_results=',nvu_results);
         var nvu_icon_alerts = nvu_results.alerts;
-        var nvu_value_class = nvu_results.className;
+        var nvu_value_class = nvu_results.className + ' text-right ';
 //        console.log('In SymbolValueWireDia.render nvu_value_tooltip=',nvu_value_tooltip);
         var nvu_value_fix_free_text = '';
         if (this.props.element.lmin & FIXED) {
@@ -444,6 +444,7 @@ class SymbolValueWireDia extends Component {
                 display_seek_button = true;
             }
         }
+//        console.log('feasibility_string=',feasibility_string,'feasibility_class=',feasibility_class,'display_search_button=',display_search_button,'display_seek_button=',display_seek_button);
 
         return (
             <>
@@ -565,39 +566,39 @@ class SymbolValueWireDia extends Component {
                                 </tbody>
                             </Table>}
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                                <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                     <ConstraintsMinHeaderIndependentVariable />
                                     <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
-                            </Table>}
+                                </Table>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                                <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                     <ConstraintsMinHeaderDependentVariable />
                                     <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
-                            </Table>}
+                                </Table>}
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                                <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                     <ConstraintsMaxHeaderIndependentVariable />
                                     <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
-                            </Table>}
+                                </Table>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                                <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                     <ConstraintsMaxHeaderDependentVariable />
                                     <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
-                            </Table>}
+                                </Table>}
                     </Modal.Body>
                     <Modal.Footer>
                         <><Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}&nbsp;</>
                         {this.state.modified ? <><Button variant="secondary" onClick={this.onResetButton}>Reset</Button>&nbsp;</> : ''}
                         {display_search_button ? 
                             <>
-                                <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>
+                                {((!this.state.value_input) || (this.props.element.lmin & FIXED)) ? '' : <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>}
                                 <Button variant={this.props.search_completed ? "primary" : "secondary"} disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                             </>
                         :
                             (display_seek_button ? 
                                 <>
-                                    {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMinRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MIN {this.props.element.name}</Button>}
-                                    {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMaxRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MAX {this.props.element.name}</Button>}
+                                    {((!this.state.value_input) || (this.props.element.lmin & FIXED)) ? '' : <Button variant="secondary" onClick={this.onSeekMinRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MIN {this.props.element.name}</Button>}
+                                    {((!this.state.value_input) || (this.props.element.lmin & FIXED)) ? '' : <Button variant="secondary" onClick={this.onSeekMaxRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MAX {this.props.element.name}</Button>}
                                     <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                                 </>
                             :

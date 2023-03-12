@@ -446,7 +446,7 @@ class SymbolValue extends Component {
                         {this.state.modified ? <><Button variant="secondary" onClick={this.onResetButton}>Reset</Button>&nbsp;</> : ''}
                         {display_search_button ? 
                             <>
-                                <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>
+                                {this.props.element.lmin & FIXED ? '' : <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>}
                                 <Button variant={this.props.search_completed ? "primary" : "secondary"} disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                             </>
                         :
