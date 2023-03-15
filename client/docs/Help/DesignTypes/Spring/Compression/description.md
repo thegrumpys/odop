@@ -61,21 +61,14 @@ ___
 ## Compression spring force-deflection point names 
 
  The compression spring force-deflection points and associated names are: 
+ &nbsp;           | length  | force       | outside diameter | inside diameter | stress       | factor of safety 
+ ---              | ---     | ---         | ---              |  ---            | ---          |  ---             
+**free:**         | L_Free  |             | OD_Free          | ID_Free         |              |                  
+**point&nbsp;1:** | L_1     | Force_1     |                  |                 | Stress_1     |                  
+**point&nbsp;2:** | L_2     | Force_2     |                  |                 | Stress_2     | FS_2             
+**solid:**        | L_Solid | Force_Solid |                  |                 | Stress_Solid | FS_Solid         
 
-             length    force        outside  inside    stress      factor of
-                                    diameter diameter              safety
-             ______    ______       ________ ________  ______      ________
-    
-    free:    L_Free                 OD_Free  ID_Free
-    
-    point 1: L_1      Force_1                         Stress_1
-    
-    point 2: L_2      Force_2                         Stress_2      FS_2
-    
-    solid:   L_Solid  Force_Solid                     Stress_Solid  FS_Solid
-
-
- point 1 = minimum operating load &nbsp; &nbsp; point 2 = maximum operating load 
+**point 1** = minimum operating load &nbsp; &nbsp; **point 2** = maximum operating load 
 
 &nbsp;
    
@@ -86,18 +79,15 @@ ___
 
 ## Independent Variable names: 
 
-    Wire_Dia     -  wire diameter
-    
-    OD_Free      -  outside diameter in the free condition
-    
-    Coils_T      -  total number of coils, including inactive coils
-    
-    L_Free       -  free length
-    
-    Force_1      -  load at point 1  (minimum operating load)
-    
-    Force_2      -  load at point 2  (maximum operating load)
-    
+Name     | &nbsp; | Description  
+ ---     | ---    | ---         
+Wire_Dia |        | wire diameter 
+OD_Free  |        | outside diameter in the free condition 
+Coils_T  |        | total number of coils, including inactive coils 
+L_Free   |        | free length 
+Force_1  |        | load at point 1  (minimum operating load) 
+Force_2  |        | load at point 2  (maximum operating load) 
+
 &nbsp;
 
 ___
@@ -107,70 +97,33 @@ ___
 
 ## Dependent Variable names:   
 
-    Mean_Dia     -  mean diameter of spring coil in free condition
-                     (OD_Free + ID_Free)/2
-                     
-    Coils_A      -  number of active coils (turns)
-    
-    Rate         -  spring constant - force per unit deflection
-    
-    Deflect_1    -  deflection at Force_1
-    
-    Deflect_2    -  deflection at Force_2
-    
-    L_1          -  spring length at minimum operating load  (Force_1)
-    
-    L_2          -  spring length at maximum operating load  (Force_2)
-    
-    L_Stroke     -  net deflection between point 1 and point 2
-    
-    L_Solid      -  solid height
-    
-    Slenderness  -  ratio of L_Free to Mean_Dia.  The "form factor"
-                    that governs a spring's tendency to buckle
-                    
-    ID_Free      -  inside  diameter in free condition
-    
-    Weight       -  weight of spring; wire density * wire volume
-    
-    Spring_Index  -  spring index;  the ratio Mean_Dia/Wire_Dia
-    
-    Force_Solid  -  force produced in solid condition
-    
-    Stress_1     -  torsional stress at point 1
-    
-    Stress_2     -  torsional stress at point 2
-    
-    Stress_Solid -  torsional stress in the solid condition
-    
-    FS_2         -  static factor of safety at point 2
-                    This is the ratio of allowable stress at point 2
-                    to the calculated stress induced by the load at
-                    point 2  (Stress_Lim_Stat/Stress_2).
-                    
-    FS_Solid     -  static factor of safety at solid condition
-                     (Stress_Lim_Stat/Stress_Solid)
-                     
-    FS_CycleLife -  factor of safety based on the Soderberg endurance
-                    limit calculation.  This figure uses the allowable
-                    endurance stress (Stress_Lim_Endur) to include
-                    fatigue considerations. Refer to additional 
-                    discussion in the Cycle_Life topic.
-                    
-    Cycle_Life   -  expected cycle life based on a calculation
-                    using the "modified Goodman method".  This value is
-                    approximate.  Refer to additional discussion in the
-                    Cycle_Life topic.
-                    
-    %_Avail_Deflect - the percentage of available deflection consumed at
-                    load point 2.
-                    
-    Energy       -  Change in elastic potential energy between 
-                    point 1 and point 2.
+Name         | &nbsp; | Description  
+ ---         | ---    | ---         
+Mean_Dia     |        | mean diameter of spring coil in free condition (OD_Free + ID_Free)/2 
+Coils_A      |        | number of active coils (turns) 
+Rate         |        | spring constant - force per unit deflection 
+Deflect_1    |        | deflection at Force_1 
+Deflect_2    |        | deflection at Force_2 
+L_1          |        | spring length at minimum operating load  (Force_1) 
+L_2          |        | spring length at maximum operating load  (Force_2) 
+L_Stroke     |        | net deflection between point 1 and point 2 
+L_Solid      |        | solid height 
+Slenderness  |        | ratio of L_Free to Mean_Dia.  The "form factor" that governs a spring's tendency to buckle 
+ID_Free      |        | inside  diameter in free condition 
+Weight       |        | weight of spring; wire density * wire volume 
+Spring_Index |        | spring index;  the ratio Mean_Dia/Wire_Dia 
+Force_Solid  |        | force produced in solid condition 
+Stress_1     |        | torsional stress at point 1 
+Stress_2     |        | torsional stress at point 2 
+Stress_Solid |        | torsional stress in the solid condition 
+FS_2         |        | static factor of safety at point 2.  This is the ratio of allowable stress to the calculated stress induced by the load at point 2  (Stress_Lim_Stat/Stress_2). 
+FS_Solid     |        | static factor of safety at solid condition  (Stress_Lim_Stat/Stress_Solid) 
+FS_CycleLife |        | factor of safety based on the Soderberg endurance limit calculation.  This figure uses the allowable endurance stress (Stress_Lim_Endur) to include fatigue considerations. Refer to additional discussion in the [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
+Cycle_Life   |        | expected cycle life based on a calculation using the "modified Goodman method".  This value is approximate.  Refer to additional discussion in the  [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
+%_Avail_Deflect |     | the percentage of available deflection consumed at load point 2. 
+Energy       |        | change in elastic potential energy between point 1 and point 2. 
 
 &nbsp; 
-For additional information: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
-&nbsp;
 
 ___
 
