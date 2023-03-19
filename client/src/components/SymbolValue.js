@@ -113,7 +113,7 @@ class SymbolValue extends Component {
     onSearchRequest(event) {
 //        console.log('In SymbolValue.onSearchRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            displayMessage('Search cannot continue because there are no free indepoendent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
             return;
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
@@ -139,7 +139,7 @@ class SymbolValue extends Component {
     onSeekMinRequest(event) {
 //        console.log('In SymbolValue.onSeekMinRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            displayMessage('Seek cannot continue, because there are no free indepoendent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
             return;
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
