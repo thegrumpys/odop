@@ -84,8 +84,8 @@ class FileExport extends Component {
     exportCSV(symbol_table, name, type) {
 //        console.log('In FileExport.exportCSV','symbol_table=',symbol_table,'name=',name,'type=',type);
         const url = window.URL.createObjectURL(new Blob(Object.keys(symbol_table).map(key => 
-            symbol_table[key].name+"\t"+
-            symbol_table[key].value+"\t"+
+            symbol_table[key].name+","+
+            symbol_table[key].value+","+
             symbol_table[key].units+
             "\n")));
 //        console.log('In FileExport.exportCSV','url=', url);
