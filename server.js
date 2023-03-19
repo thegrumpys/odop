@@ -43,24 +43,10 @@ app.use(function (req, res, next) {
     next();
 });
 
-function writeLog(ip_address, note) {
-    var connection = startConnection();
-    var stmt = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address+'\',\''+note+'\')';
-//    console.log('SERVER: stmt='+stmt);
-    connection.query(stmt, function(err, rows, fields) {
-//      console.log('SERVER: After INSERT err=', err, ' rows=', rows);
-        connection.end();
-    });
-}
-
 // Check for nasty input
 app.use((req, res, next) => {
     var found = req.originalUrl.match(/\/\?\d+=/); // Example '/?5129='
     if (found) {
-        console.log('SERVER: Ignoring input req.method=', req.method,'req.originalUrl=', req.originalUrl,'req.params=', req.params,'req.ip=',req.ip);
-        var ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-        var note = JSON.stringify({tag: 'event', action: 'NastyInput', note: { event_label: '' }});
-        writeLog(res, ip_address, note);
         res.status(500).end();
     } else {
         next();
@@ -386,11 +372,30 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (r
 });
 
 app.post('/api/v1/usage_log', (req, res) => {
-    var ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    var note = JSON.stringify(req.body); // Convert blob to string
-    note = note.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
+    var ip_address;
+    var note;
+    ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 //    console.log('SERVER: In POST /api/v1/usage_log ip_address='+ip_address+' req.body=',req.body);
-    writeLog(ip_address, note);
+    note = JSON.stringify(req.body); // Convert blob to string
+    var connection = startConnection();
+    note = note.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
+    var stmt = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address+'\',\''+note+'\')';
+//    console.log('SERVER: stmt='+stmt);
+    connection.query(stmt, function(err, rows, fields) {
+//        console.log('SERVER: After INSERT err=', err, ' rows=', rows);
+        if (err) {
+            res.status(500).end();
+            connection.end();
+            console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+            throw err;
+        } else {
+            var value = {};
+//            console.log('SERVER: After INSERT value=', value);
+            res.status(200).json(value);
+            connection.end();
+            console.log('SERVER: 200 - OK');
+        }
+    });
 });
 
 const SENTENCE_SEPARATOR = ' <> ';
