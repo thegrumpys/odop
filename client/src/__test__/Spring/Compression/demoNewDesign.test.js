@@ -12,6 +12,8 @@ import { reducers } from '../../../store/reducers';
 import { dispatcher } from '../../../store/middleware/dispatcher';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 
+// This is a mapping of the demoNewDesign execute file to an equivalent test case file
+
 it('demoNewDesign', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     const store = createStore(
