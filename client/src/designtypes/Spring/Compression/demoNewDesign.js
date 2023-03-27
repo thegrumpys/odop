@@ -235,7 +235,10 @@ export const execute = {
                     to move to the next page.
                     </p>
                 </>
-            )
+            ),
+            actions: [
+                fixSymbolValue('Wire_Dia', 0.135)
+            ]
         },
         {
             title: "Page 11 of 14",
@@ -257,8 +260,6 @@ export const execute = {
                     </p>
                 </>
             ),
-            actions: [
-            ]
         },
         {
             title: "Page 12 of 14",
