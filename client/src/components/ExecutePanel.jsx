@@ -4,7 +4,9 @@ import { Alert, Button, Container, Row } from 'react-bootstrap';
 import { load } from '../store/actionCreators';
 import { connect } from 'react-redux';
 import { changeResultTerminationCondition } from '../store/actionCreators';
+import { actionDumper } from '../store/actionDumper';
 import { logUsage } from '../logUsage';
+import config from '../config';
 
 export var startExecute = function(prefix,execute_name,steps) {
 //    console.log('In startExecute prefix=',prefix,'execute_name=',execute_name,'steps=',steps);
@@ -22,9 +24,23 @@ export var startExecute = function(prefix,execute_name,steps) {
             step: 0,
             title: steps[0].title,
             text: steps[0].text, // Default: first text
+            testGenerate: config.node.env !== "production" ? true : false,
         });
+        if (this.state.testGenerate) console.log('@@@ START EXECUTE @@@');
+        if (this.state.testGenerate) console.log('// ' + this.state.title);
         if (steps[0].actions !== undefined) {
             steps[0].actions.forEach((action) => { store.dispatch(action); })
+            if (this.state.testGenerate) {
+                steps[0].actions.forEach((action) => {
+                    var dump = actionDumper(action);
+                    if (dump !== undefined) {
+                        console.log('store.dispatch(',dump,');');
+                    }
+                }); // Generate test
+                design = store.getState();
+                console.log('design = store.getState();');
+                console.log('expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
+            }
         }
         window.scrollTo(0, 0);
     }
@@ -42,6 +58,7 @@ export var stopExecute = function() {
         title: '',
         text: '',  // Default: no text
     });
+    console.log('@@@ STOP EXECUTE @@@');
 }
 
 class ExecutePanel extends Component {
@@ -110,8 +127,20 @@ class ExecutePanel extends Component {
                 title: this.state.steps[next].title,
                 text: this.state.steps[next].text
             });
+            if (this.state.testGenerate) console.log('// ' + this.state.title);
             if (this.state.steps[next].actions !== undefined) {
-                this.state.steps[next].actions.forEach((action) => { store.dispatch(action); })
+                this.state.steps[next].actions.forEach((action) => { store.dispatch(action); });
+                if (this.state.testGenerate) {
+                    this.state.steps[next].actions.forEach((action) => {
+                        var dump = actionDumper(action);
+                        if (dump !== undefined) {
+                            console.log('store.dispatch(',dump,');');
+                        }
+                    }); // Generate test
+                    design = store.getState();
+                    console.log('design = store.getState();');
+                    console.log('expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
+                }
             }
        } else {
             this.setState({
@@ -131,6 +160,7 @@ class ExecutePanel extends Component {
         if (prev < 0) prev = 0; // Stop going backwards if it is on the first step
         // Put steps[prev].state into current store state - that is, time travel back
         const { store } = this.context;
+        var design = store.getState();
 //        console.log('In ExecutePanel.onBack this.state.steps=',this.state.steps);
 //        console.log('In ExecutePanel.onBack JSON.parse(this.state.steps[prev].state)=',JSON.parse(this.state.steps[prev].state));
         store.dispatch(load(JSON.parse(this.state.steps[prev].state)));
@@ -139,8 +169,20 @@ class ExecutePanel extends Component {
             title: this.state.steps[prev].title,
             text: this.state.steps[prev].text
         });
+        if (this.state.testGenerate) console.log('// ' + this.state.title);
         if (this.state.steps[prev].actions !== undefined) {
-            this.state.steps[prev].actions.forEach((action) => { store.dispatch(action); })
+            this.state.steps[prev].actions.forEach((action) => { store.dispatch(action); });
+            if (this.state.testGenerate) {
+                this.state.steps[prev].actions.forEach((action) => {
+                    var dump = actionDumper(action);
+                    if (dump !== undefined) {
+                        console.log('store.dispatch(',dump,');');
+                    }
+                }); // Generate test
+                design = store.getState();
+                console.log('design = store.getState();');
+                console.log('expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
+            }
         }
     }
     
