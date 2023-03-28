@@ -14,7 +14,10 @@ export var startExecute = function(prefix,execute_name,steps) {
         const { store } = this.context;
         var design = store.getState();
         steps = Object.assign([...steps], {0: Object.assign({}, steps[0], {state: JSON.stringify(design)})});
-//        console.log('In ExecutePanel.onNext steps=',steps);
+        var title = steps[0].title;
+        var text = steps[0].text;
+        var testGenerate = config.node.env !== "production" ? true : false;
+//        console.log('In ExecutePanel.onNext','title=',title,'steps=',steps);
         this.setState({
             execute_name: execute_name,
             modal: true, // Default: do display
@@ -22,25 +25,27 @@ export var startExecute = function(prefix,execute_name,steps) {
             // Put current store state into steps[0].state - remember this for "back" time travel
             steps: steps,
             step: 0,
-            title: steps[0].title,
-            text: steps[0].text, // Default: first text
-            testGenerate: config.node.env !== "production" ? true : false,
+            title: title,
+            text: text, // Default: first text
+            testGenerate: testGenerate,
         });
-        if (this.state.testGenerate) console.log('@@@ START EXECUTE @@@');
-        if (this.state.testGenerate) console.log('// ' + this.state.title);
+        if (testGenerate) console.log('@@@ START EXECUTE @@@');
+        if (testGenerate) console.log('\n// title: "' + title + '"');
         if (steps[0].actions !== undefined) {
             steps[0].actions.forEach((action) => { store.dispatch(action); })
-            if (this.state.testGenerate) {
+            if (testGenerate) {
                 steps[0].actions.forEach((action) => {
                     var dump = actionDumper(action);
                     if (dump !== undefined) {
-                        console.log('store.dispatch(',dump,');');
+                        console.log('store.dispatch('+dump+');');
                     }
                 }); // Generate test
                 design = store.getState();
-                console.log('design = store.getState();');
+                console.log('\ndesign = store.getState();');
                 console.log('expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
             }
+        } else {
+            if (testGenerate) console.log('// No-op');
         }
         window.scrollTo(0, 0);
     }
@@ -119,30 +124,34 @@ class ExecutePanel extends Component {
             const { store } = this.context;
             var design = store.getState();
             var steps = Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: JSON.stringify(design)})});
-//            console.log('In ExecutePanel.onNext steps=',steps);
+            var title = steps[next].title;
+            var text = steps[next].text;
+//            console.log('In ExecutePanel.onNext','title=',title,'steps=',steps);
             this.setState({
                 // Put current store state into steps[next].state - remember this for "back" time travel
                 steps: steps,
                 step: next,
-                title: this.state.steps[next].title,
-                text: this.state.steps[next].text
+                title: title,
+                text: text,
             });
-            if (this.state.testGenerate) console.log('// ' + this.state.title);
-            if (this.state.steps[next].actions !== undefined) {
-                this.state.steps[next].actions.forEach((action) => { store.dispatch(action); });
+            if (this.state.testGenerate) console.log('\n// title: "' + title + '"');
+            if (steps[next].actions !== undefined) {
+                steps[next].actions.forEach((action) => { store.dispatch(action); });
                 if (this.state.testGenerate) {
-                    this.state.steps[next].actions.forEach((action) => {
+                    steps[next].actions.forEach((action) => {
                         var dump = actionDumper(action);
                         if (dump !== undefined) {
-                            console.log('store.dispatch(',dump,');');
+                            console.log('store.dispatch('+dump+');');
                         }
                     }); // Generate test
                     design = store.getState();
-                    console.log('design = store.getState();');
+                    console.log('\ndesign = store.getState();');
                     console.log('expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
                 }
+            } else {
+                if (this.state.testGenerate) console.log('// No-op');
             }
-       } else {
+       } else { // Not more steps
             this.setState({
                 modal: !this.state.modal,
                 prefix: '',
@@ -161,28 +170,33 @@ class ExecutePanel extends Component {
         // Put steps[prev].state into current store state - that is, time travel back
         const { store } = this.context;
         var design = store.getState();
-//        console.log('In ExecutePanel.onBack this.state.steps=',this.state.steps);
-//        console.log('In ExecutePanel.onBack JSON.parse(this.state.steps[prev].state)=',JSON.parse(this.state.steps[prev].state));
-        store.dispatch(load(JSON.parse(this.state.steps[prev].state)));
+        var steps = Object.assign([...this.state.steps]);
+        var title = steps[prev].title;
+        var text = steps[prev].text;
+//        console.log('In ExecutePanel.onBack','title=',title,'steps=',steps);
+//        console.log('In ExecutePanel.onBack JSON.parse(steps[prev].state)=',JSON.parse(steps[prev].state));
+        store.dispatch(load(JSON.parse(steps[prev].state)));
         this.setState({
             step: prev,
-            title: this.state.steps[prev].title,
-            text: this.state.steps[prev].text
+            title: title,
+            text: text
         });
-        if (this.state.testGenerate) console.log('// ' + this.state.title);
-        if (this.state.steps[prev].actions !== undefined) {
-            this.state.steps[prev].actions.forEach((action) => { store.dispatch(action); });
+        if (this.state.testGenerate) console.log('\n// title: "' + title + '"');
+        if (steps[prev].actions !== undefined) {
+            steps[prev].actions.forEach((action) => { store.dispatch(action); });
             if (this.state.testGenerate) {
-                this.state.steps[prev].actions.forEach((action) => {
+                steps[prev].actions.forEach((action) => {
                     var dump = actionDumper(action);
                     if (dump !== undefined) {
-                        console.log('store.dispatch(',dump,');');
+                        console.log('store.dispatch('+dump+');');
                     }
                 }); // Generate test
                 design = store.getState();
-                console.log('design = store.getState();');
+                console.log('\ndesign = store.getState();');
                 console.log('expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
             }
+        } else {
+            if (this.state.testGenerate) console.log('// No-op');
         }
     }
     
