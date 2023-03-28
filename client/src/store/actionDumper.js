@@ -76,24 +76,24 @@ export function actionDumper(action) {
         result = 'freeSymbolValue('+JSON.stringify(action.payload.name)+')';
         break;
     case CHANGE_SYMBOL_VIOLATION:
-        result = 'changeSymbolViolation('+JSON.stringify(action.payload.name)+','+(action.payload.minmax = MIN ? 'MIN':'MAX')+','+action.payload.value+');'
+        result = 'changeSymbolViolation('+JSON.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+','+action.payload.value+')'
         break;
     case CHANGE_SYMBOL_CONSTRAINT:
-        result = 'changeSymbolConstraint('+JSON.stringify(action.payload.name)+','+(action.payload.minmax = MIN ? 'MIN':'MAX')+','+action.payload.value+');'
+        result = 'changeSymbolConstraint('+JSON.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+','+action.payload.value+')'
         break;
     case CHANGE_SYMBOL_CONSTRAINTS:
         break;
     case SET_SYMBOL_FLAG:
-        result = 'setSymbolFlag('+JSON.stringify(action.payload.name)+','+(action.payload.minmax = MIN ? 'MIN':'MAX')+','+flags[action.payload.mask]+(action.payload.source === undefined ? '' : +action.payload.source)+');'
+        result = 'setSymbolFlag('+JSON.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+','+flags[action.payload.mask]+(action.payload.source === undefined ? '' : +action.payload.source)+')'
         break;
     case RESET_SYMBOL_FLAG:
-        result = 'resetSymbolFlag('+JSON.stringify(action.payload.name)+','+(action.payload.minmax = MIN ? 'MIN':'MAX')+','+flags[action.payload.mask]+');'
+        result = 'resetSymbolFlag('+JSON.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+','+flags[action.payload.mask]+')'
         break;
     case CHANGE_SYMBOL_INPUT:
-        result = 'changeSymbolInput('+JSON.stringify(action.payload.name)+','+flags[action.payload.value]+');'
+        result = 'changeSymbolInput('+JSON.stringify(action.payload.name)+','+flags[action.payload.value]+')'
         break;
     case CHANGE_SYMBOL_HIDDEN:
-        result = 'changeSymbolHidden('+JSON.stringify(action.payload.name)+','+flags[action.payload.value]+');'
+        result = 'changeSymbolHidden('+JSON.stringify(action.payload.name)+','+flags[action.payload.value]+')'
         break;
     case CHANGE_INPUT_SYMBOL_VALUES:
         break;
