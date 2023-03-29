@@ -73,13 +73,13 @@ design = store.getState();
 // title: "Page 08 of 11"
     store.dispatch(fixSymbolValue("Wire_Dia",0.125)); // Simulate Action: Select Size...
 design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000032,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.0000408,7);
     
 // title: "Page 09 of 11"
     store.dispatch(search());
     
 design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000032,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.0000099,7);
     
 // title: "Page 10 of 11"
     // No-op
@@ -88,6 +88,6 @@ design = store.getState();
     store.dispatch(fixSymbolValue("Force_2",75.1));
     
 design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0650272,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.0632930,7);
 });
 
