@@ -29,23 +29,25 @@ export var startExecute = function(prefix,execute_name,steps) {
             text: text, // Default: first text
             testGenerate: testGenerate,
         });
-        if (testGenerate) console.log('@@@ START EXECUTE @@@');
-        if (testGenerate) console.log('\n// title: "' + title + '"');
+        if (testGenerate) console.log('    @@@ START EXECUTE @@@');
+        if (testGenerate) console.log('    // RegEx: Find: ExecutePanel\\.jsx:\\d+\\s Replace with: <nothing>');
+        if (testGenerate) console.log('    // RegEx: Find: ^.*\\[Violation\\].*\\s$ Replace with: <nothing>');
+        if (testGenerate) console.log('    // title: "' + title + '"');
         if (steps[0].actions !== undefined) {
             steps[0].actions.forEach((action) => { store.dispatch(action); })
             if (testGenerate) {
                 steps[0].actions.forEach((action) => {
                     var dump = actionDumper(action);
                     if (dump !== undefined) {
-                        console.log('store.dispatch('+dump+');');
+                        console.log('    store.dispatch('+dump+');');
                     }
                 }); // Generate test
                 design = store.getState();
-                console.log('\ndesign = store.getState();');
-                console.log('expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
+                console.log('\n    design = store.getState();');
+                console.log('    expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
             }
         } else {
-            if (testGenerate) console.log('// No-op');
+            if (testGenerate) console.log('    // No-op');
         }
         window.scrollTo(0, 0);
     }
@@ -63,7 +65,7 @@ export var stopExecute = function() {
         title: '',
         text: '',  // Default: no text
     });
-    console.log('@@@ STOP EXECUTE @@@');
+    console.log('    @@@ STOP EXECUTE @@@');
 }
 
 class ExecutePanel extends Component {
@@ -134,22 +136,22 @@ class ExecutePanel extends Component {
                 title: title,
                 text: text,
             });
-            if (this.state.testGenerate) console.log('\n// title: "' + title + '"');
+            if (this.state.testGenerate) console.log('\n    // title: "' + title + '"');
             if (steps[next].actions !== undefined) {
                 steps[next].actions.forEach((action) => { store.dispatch(action); });
                 if (this.state.testGenerate) {
                     steps[next].actions.forEach((action) => {
                         var dump = actionDumper(action);
                         if (dump !== undefined) {
-                            console.log('store.dispatch('+dump+');');
+                            console.log('    store.dispatch('+dump+');');
                         }
                     }); // Generate test
                     design = store.getState();
-                    console.log('\ndesign = store.getState();');
-                    console.log('expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
+                    console.log('\n    design = store.getState();');
+                    console.log('    expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
                 }
             } else {
-                if (this.state.testGenerate) console.log('// No-op');
+                if (this.state.testGenerate) console.log('    // No-op');
             }
        } else { // Not more steps
             this.setState({
@@ -181,22 +183,22 @@ class ExecutePanel extends Component {
             title: title,
             text: text
         });
-        if (this.state.testGenerate) console.log('\n// title: "' + title + '"');
+        if (this.state.testGenerate) console.log('\n    // title: "' + title + '"');
         if (steps[prev].actions !== undefined) {
             steps[prev].actions.forEach((action) => { store.dispatch(action); });
             if (this.state.testGenerate) {
                 steps[prev].actions.forEach((action) => {
                     var dump = actionDumper(action);
                     if (dump !== undefined) {
-                        console.log('store.dispatch('+dump+');');
+                        console.log('    store.dispatch('+dump+');');
                     }
                 }); // Generate test
                 design = store.getState();
-                console.log('\ndesign = store.getState();');
-                console.log('expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
+                console.log('\n    design = store.getState();');
+                console.log('    expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
             }
         } else {
-            if (this.state.testGenerate) console.log('// No-op');
+            if (this.state.testGenerate) console.log('    // No-op');
         }
     }
     

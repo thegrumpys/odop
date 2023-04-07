@@ -13,6 +13,10 @@ import { dispatcher } from '../../../store/middleware/dispatcher';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 
 // This is a mapping of the demoNewDesign execute file to an equivalent test case file
+// 1. Regular Expression for finding/deleting execution Function name & Line number strings from all lines
+//    Find: ^ExecutePanel\.jsx:\d+\s Replace with: <nothing>
+// 2. Regular Expression for finding/deleting all Violation lines
+//    Find: ^.*\[Violation\].*\s$ Replace with: <nothing>
 
 it('demoNewDesign', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
@@ -25,11 +29,13 @@ it('demoNewDesign', () => {
     design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
+    // RegEx: Find: ExecutePanel\.jsx:\d+\s Replace with: <nothing>
+    // RegEx: Find: ^.*\[Violation\].*\s$ Replace with: <nothing>
     // title: "Session Now In Progress"
     // No-op
 
     // title: "Page 02 of 14"
-    store.dispatch(loadInitialState("Spring/Compression", "US"));
+    store.dispatch(loadInitialState("Spring/Compression","US"));
     store.dispatch(changeLabelsValue([{"name":"COMMENT","value":"Compression Spring demoNewDesign"}]));
 
     design = store.getState();
