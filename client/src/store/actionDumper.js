@@ -114,6 +114,7 @@ export function actionDumper(action) {
     case CHANGE_RESULT_SEARCH_COMPLETED:
         break;
     case CHANGE_SYSTEM_CONTROLS_VALUE:
+        result = 'changeSystemControlsValue('+JSON.stringify(action.payload.system_controls)+')';
         break;
     case CHANGE_LABELS_VALUE:
         result = 'changeLabelsValue('+JSON.stringify(action.payload.labels)+')';
@@ -122,6 +123,7 @@ export function actionDumper(action) {
         result = 'search()';
         break;
     case SEEK:
+        result = 'seek('+JSON.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+')';
         break;
     case SAVE_AUTO_SAVE:
         break;
