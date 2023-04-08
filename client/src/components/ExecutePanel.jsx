@@ -7,8 +7,7 @@ import { changeResultTerminationCondition } from '../store/actionCreators';
 import { actionDumper } from '../store/actionDumper';
 import { logUsage } from '../logUsage';
 import config from '../config';
-import { outputClear } from '../menus/View/ViewExecuteToTest';
-import { outputLine } from '../menus/View/ViewExecuteToTest';
+import { outputStart, outputLine, outputStop } from '../menus/View/ViewExecuteToTest';
 
 export var startExecute = function(prefix,execute_name,steps) {
 //    console.log('In startExecute prefix=',prefix,'execute_name=',execute_name,'steps=',steps);
@@ -31,7 +30,7 @@ export var startExecute = function(prefix,execute_name,steps) {
             text: text, // Default: first text
             testGenerate: testGenerate,
         });
-        if (testGenerate) outputClear('    // Execute File: ' + execute_name);
+        if (testGenerate) outputStart(execute_name);
         if (testGenerate) outputLine('    // title: "' + title + '"');
         if (steps[0].actions !== undefined) {
             steps[0].actions.forEach((action) => { store.dispatch(action); })
@@ -65,6 +64,7 @@ export var stopExecute = function() {
         title: '',
         text: '',  // Default: no text
     });
+    outputStop();
 }
 
 class ExecutePanel extends Component {
