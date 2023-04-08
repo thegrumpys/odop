@@ -18,6 +18,7 @@ it('demoNewDesign', () => {
     var design = store.getState(); // before
     design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
+
     // Execute File: demoNewDesign
     // title: "Session Now In Progress"
     // No-op
