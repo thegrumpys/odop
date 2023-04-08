@@ -37,6 +37,7 @@ import ViewOffsets from '../menus/View/ViewOffsets';
 import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
 import ViewSymbolTable from '../menus/View/ViewSymbolTable';
 import ViewObjectiveValue from '../menus/View/ViewObjectiveValue';
+import ViewExecuteToTest from '../menus/View/ViewExecuteToTest';
 import HelpMotd from '../menus/Help/HelpMotd';
 import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
@@ -168,6 +169,7 @@ class MainPage extends Component {
                                 {config.node.env !== "production" && <ViewSymbolTableOffsets />}
                                 {config.node.env !== "production" && <ViewSymbolTable />}
                                 {config.node.env !== "production" && <ViewObjectiveValue />}
+                                {config.node.env !== "production" && <ViewExecuteToTest />}
                             </NavDropdown>
                             <NavDropdown title="Help">
                                 <HelpMotd />
