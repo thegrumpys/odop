@@ -29,8 +29,7 @@ it('demoNewDesign', () => {
     design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
-    // RegEx: Find: ExecutePanel\.jsx:\d+\s Replace with: <nothing>
-    // RegEx: Find: ^.*\[Violation\].*\s$ Replace with: <nothing>
+    // Execute File: demoNewDesign
     // title: "Session Now In Progress"
     // No-op
 

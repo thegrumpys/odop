@@ -11,7 +11,7 @@ import { outputClear } from '../menus/View/ViewExecuteToTest';
 import { outputLine } from '../menus/View/ViewExecuteToTest';
 
 export var startExecute = function(prefix,execute_name,steps) {
-    console.log('In startExecute prefix=',prefix,'execute_name=',execute_name,'steps=',steps);
+//    console.log('In startExecute prefix=',prefix,'execute_name=',execute_name,'steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
         const { store } = this.context;
         var design = store.getState();

@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
 
 export var outputClear = function(line) {
-    console.log('In outputClear','line=',line);
-    console.log('In outputClear','this=',this);
+//    console.log('In outputClear','line=',line);
+//    console.log('In outputClear','this=',this);
     this.setState( // Special form of setState using updater function
         (prevState, props) => {
-    console.log('In outputClear','prevState=',prevState,'props=',props);
+//    console.log('In outputClear','prevState=',prevState,'props=',props);
             var l;
             l = <>{line}<br /></>;
             return {
@@ -19,11 +19,11 @@ export var outputClear = function(line) {
 }
 
 export var outputLine = function(line) {
-    console.log('In outputLine','line=',line);
-    console.log('In outputLine','this=',this);
+//    console.log('In outputLine','line=',line);
+//    console.log('In outputLine','this=',this);
     this.setState( // Special form of setState using updater function
         (prevState, props) => {
-    console.log('In outputLine','prevState=',prevState,'props=',props);
+//    console.log('In outputLine','prevState=',prevState,'props=',props);
             var l;
             if (prevState.lines === undefined) {
                 l = <>{line}<br /></>;
@@ -43,7 +43,7 @@ export var outputLine = function(line) {
 class ViewExecuteToTest extends Component {
 
     constructor(props) {
-        console.log('In ViewExecuteToTest.constructor props=',props)
+//        console.log('In ViewExecuteToTest.constructor props=',props)
         super(props);
         this.toggle = this.toggle.bind(this);
         outputClear = outputClear.bind(this); // Bind external function - no 'this'
@@ -54,7 +54,7 @@ class ViewExecuteToTest extends Component {
     }
     
     toggle() {
-        console.log('In ViewExecuteToTest.toggle');
+//        console.log('In ViewExecuteToTest.toggle');
         this.setState({
             modal: !this.state.modal
         });
@@ -62,7 +62,7 @@ class ViewExecuteToTest extends Component {
     }
 
     render() {
-        console.log('In ViewExecuteToTest.render this=',this);
+//        console.log('In ViewExecuteToTest.render this=',this);
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle}>
