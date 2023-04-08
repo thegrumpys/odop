@@ -1,10 +1,18 @@
 import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
-import '../../../store/actionCreators';
+import { loadInitialState,
+         changeLabelsValue,
+         changeSymbolValue,
+         setSymbolFlag,
+         changeSymbolConstraint,
+         fixSymbolValue,
+         search,
+         changeSystemControlsValue,
+         seek } from '../../../store/actionCreators';
 import { reducers } from '../../../store/reducers';
 import { dispatcher } from '../../../store/middleware/dispatcher';
-import '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 
 // This is a mapping of the demoNewDesign execute file to an equivalent test case file
 
