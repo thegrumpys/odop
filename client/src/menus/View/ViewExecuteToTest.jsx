@@ -5,6 +5,7 @@ import { logUsage } from '../../logUsage';
 
 export var outputStart = function(execute_name) {
 //    console.log('In outputStart','execute_name=',execute_name);
+    if (this === undefined) return;
     this.setState( // Special form of setState using updater function
         (prevState, props) => {
             var line = '    // Execute File: ' + execute_name;
@@ -19,6 +20,7 @@ export var outputStart = function(execute_name) {
 
 export var outputLine = function(line) {
 //    console.log('In outputLine','line=',line);
+    if (this === undefined) return;
     this.setState( // Special form of setState using updater function
         (prevState, props) => {
             var l = <>{prevState.lines}{line}<br /></>;
@@ -31,6 +33,7 @@ export var outputLine = function(line) {
 
 export var outputStop = function() {
 //    console.log('In outputStop','this=',this);
+    if (this === undefined) return;
     this.setState( // Special form of setState using updater function
         (prevState, props) => {
             var l = <>{prevState.lines}</>;

@@ -64,7 +64,7 @@ export var stopExecute = function() {
         title: '',
         text: '',  // Default: no text
     });
-    outputStop();
+    if (this.state.testGenerate) outputStop();
 }
 
 class ExecutePanel extends Component {
