@@ -55,6 +55,7 @@ class ViewExecuteToTest extends Component {
         outputStop = outputStop.bind(this); // Bind external function - no 'this'
         this.state = {
             modal: false,
+            lines: null,
         };
     }
     
@@ -75,16 +76,18 @@ import { loadInitialState,
          changeLabelsValue,
          changeSymbolValue,
          setSymbolFlag,
+         resetSymbolFlag,
          changeSymbolConstraint,
          fixSymbolValue,
+         freeSymbolValue,
          search,
          changeSystemControlsValue,
          seek } from '../../../store/actionCreators';
 import { reducers } from '../../../store/reducers';
 import { dispatcher } from '../../../store/middleware/dispatcher';
-import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 
-// This is a mapping of the demoNewDesign execute file to an equivalent test case file
+// This is a mapping of the ${this.state.execute_name} execute file to an equivalent test case file
 
 it('${this.state.execute_name}', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
@@ -113,15 +116,21 @@ it('${this.state.execute_name}', () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <pre>
-                        {pre_lines}
-                        </pre>
-                        <pre>
-                        {this.state.lines}
-                        </pre>
-                        <pre>
-                        {post_lines}
-                        </pre>
+                        {this.state.lines !== null ? 
+                            <>
+                                <pre>
+                                {pre_lines}
+                                </pre>
+                                <pre>
+                                {this.state.lines}
+                                </pre>
+                                <pre>
+                                {post_lines}
+                                </pre>
+                            </>
+                        :
+                            'No lines. Select the View menu before running the execute file'
+                        }
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={this.toggle}>Close</Button>
