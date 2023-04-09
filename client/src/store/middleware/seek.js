@@ -1,4 +1,4 @@
-import { MAX, FIXED } from '../actionTypes';
+import { MAX, FIXED, CONSTRAINED } from '../actionTypes';
 import { saveInputSymbolValues, restoreInputSymbolValues, changeResultTerminationCondition } from '../actionCreators';
 import { search } from './search';
 import { despak } from './despak';
@@ -51,8 +51,8 @@ export function seek(store, action) {
     }
     var found = false;
     var temp;
-    var dname;
-    var input;
+    var name;
+    var units;
     var element;
     var pc;
     var obj;
@@ -60,8 +60,8 @@ export function seek(store, action) {
         element = design.model.symbol_table[i];
         if (element.name.startsWith(action.payload.name)) {
             temp = element.value;
-            dname = element.name;
-            input = element.units;
+            name = element.name;
+            units = element.units;
             SOUGHT = i + 1; // Skip 0 value which is special
             found = true;
         }
@@ -69,8 +69,8 @@ export function seek(store, action) {
     M_NUM = temp + 0.1 * SDIR * temp;
     var starting_value = design.model.symbol_table[SOUGHT - 1].value;
     if (design.model.system_controls.ioopt > 5) {
-        console.log('03 THE CURRENT VALUE OF '+dname+' IS: '+starting_value+' '+input);
-        console.log('04 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+input);
+        console.log('03 THE CURRENT VALUE OF '+name+' IS: '+starting_value+' '+units);
+        console.log('04 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+units);
         console.log('05 ESTIMATING VALUE OF OPTIMUM ...');
     }
     M_DEN = Math.abs(M_NUM) / design.model.system_controls.mfn_wt;
@@ -84,8 +84,8 @@ export function seek(store, action) {
     M_NUM = design.model.symbol_table[SOUGHT - 1].value;
     if (design.model.system_controls.ioopt > 5) {
         temp = design.model.symbol_table[SOUGHT - 1].value;
-        console.log('06 THE CURRENT VALUE OF '+dname+' IS: '+temp+' '+input);
-        console.log('07 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+input);
+        console.log('06 THE CURRENT VALUE OF '+name+' IS: '+temp+' '+units);
+        console.log('07 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+units);
     }
     M_DEN = Math.abs(M_NUM) / design.model.system_controls.mfn_wt;
     if (M_DEN < design.model.system_controls.smallnum) {
@@ -112,12 +112,12 @@ export function seek(store, action) {
         design = store.getState(); // Re-access store to get latest element values
         if (design.model.system_controls.ioopt > 5) {
             temp = design.model.symbol_table[SOUGHT - 1].value;
-            console.log('09 THE CURRENT VALUE OF '+dname+' IS: '+temp+' '+input);
-            console.log('10 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+input);
+            console.log('09 THE CURRENT VALUE OF '+name+' IS: '+temp+' '+units);
+            console.log('10 THE CURRENT ESTIMATED OPTIMUM IS: '+M_NUM+' '+units);
         }
     }
     if (design.model.system_controls.ioopt > 5) {
-        console.log('11 SEEKING OPTIMUM '+dname+' USING ESTIMATE OF: '+M_NUM+' '+input);
+        console.log('11 SEEKING OPTIMUM '+name+' USING ESTIMATE OF: '+M_NUM+' '+units);
     }
     M_DEN = Math.abs(M_NUM) / design.model.system_controls.mfn_wt;
     if (M_DEN < design.model.system_controls.smallnum) {
@@ -128,17 +128,24 @@ export function seek(store, action) {
     var ending_value = design.model.symbol_table[SOUGHT - 1].value;
     if (design.model.system_controls.ioopt > 5) {
         console.log('12 RETURN ON: '+design.model.result.termination_condition+'     OBJ ='+design.model.result.objective_value);
-        console.log('13 CURRENT VALUE OF '+dname+' IS '+ending_value+' '+input);
+        console.log('13 CURRENT VALUE OF '+name+' IS '+ending_value+' '+units);
     }
     var percent_improvement = Math.abs(starting_value - ending_value) / starting_value * 100.0;
+    ncode = 'Seek completed. ' + name + ' ' + (starting_value.toODOPPrecision()) + ' --> ' + (ending_value.toODOPPrecision()) + ' ' + units + '; ' + (percent_improvement.toODOPPrecision()) + '% improvement.';
+    if (element.lmin & CONSTRAINED && SDIR === -1) {
+        if (ending_value < element.cmin) {
+            ncode += ' The MIN constraint on '+name+' is limiting further progress. You may want to relax or disable this constraint and then run Seek again.'
+        }
+    } else if (element.lmax & CONSTRAINED && SDIR === +1) {
+        if (ending_value > element.cmax) {
+            ncode += ' The MAX constraint on '+name+' is limiting further progress. You may want to relax or disable this constraint and then run Seek again.'
+        }
+    }
 //  Check if obj is more negative than negative objmin
     if (obj < -design.model.system_controls.objmin) {
-        ncode = 'Seek completed. ' + dname + ' ' + (starting_value.toODOPPrecision()) + ' --> ' + (ending_value.toODOPPrecision()) + ' ' + input + '; ' + (percent_improvement.toODOPPrecision()) + '% improvement. TO FURTHER IMPROVE RESULT, RE-EXECUTE SEEK';
-        store.dispatch(changeResultTerminationCondition(ncode));
-    } else {
-        ncode = 'Seek completed. ' + dname + ' ' + (starting_value.toODOPPrecision()) + ' --> ' + (ending_value.toODOPPrecision()) + ' ' + input + '; ' + (percent_improvement.toODOPPrecision()) + '% improvement.';
-        store.dispatch(changeResultTerminationCondition(ncode));
+        ncode += ' To further improve result, re-execute Seek.';
     }
+    store.dispatch(changeResultTerminationCondition(ncode));
 
     if (design.model.system_controls.ioopt > 5) {
         // Create p & x from symbol_table
