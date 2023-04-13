@@ -187,9 +187,8 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Now it is time for a bit of audience participation.
-                    Since the ODOP demo feature is not yet capable of directly controlling menus,
-                    you need to go to the <b>Action : Select Size...</b> menu item
+                    This is an opportunity for you to go to 
+                    the <b>Action : Select Size...</b> menu item
                     to chose the nearest standard wire diameter.
                     </p>
                     
@@ -206,6 +205,7 @@ export const execute = {
                 </>
             ),
             actions: [
+                fixSymbolValue('Wire_Dia', 0.125)
             ]
         },
         {
