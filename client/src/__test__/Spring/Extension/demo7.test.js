@@ -14,7 +14,7 @@ import { loadInitialState,
          seek } from '../../../store/actionCreators';
 import { reducers } from '../../../store/reducers';
 import { dispatcher } from '../../../store/middleware/dispatcher';
-import { MIN, MAX, CONSTRAINED, FDCL } from '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 
 // This is a mapping of the demo7 execute file to an equivalent test case file
 
@@ -74,7 +74,6 @@ it('demo7', () => {
     expect(design.model.result.objective_value).toBeCloseTo(2.3801981,7);
 
     // title: "Page 07 of 11"
-    store.dispatch(changeSystemControlsValue({"maxit":190}));
     store.dispatch(search());
 
     design = store.getState();
