@@ -5,17 +5,21 @@ import { loadInitialState,
          changeLabelsValue,
          changeSymbolValue,
          setSymbolFlag,
+         resetSymbolFlag,
          changeSymbolConstraint,
          fixSymbolValue,
-         search } from '../../../store/actionCreators';
+         freeSymbolValue,
+         search,
+         changeSystemControlsValue,
+         seek } from '../../../store/actionCreators';
 import { reducers } from '../../../store/reducers';
 import { dispatcher } from '../../../store/middleware/dispatcher';
-import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 
 // This is a mapping of the demo1 execute file to an equivalent test case file
 
 it('demo1', () => {
-    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     const store = createStore(
         reducers,
         {"user": "USERID0123456789", name: "initialState", model: state},
@@ -25,28 +29,24 @@ it('demo1', () => {
     design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
-    // title: "Session Now In Progress",
+    // Execute File: demo1
+    // title: "Session Now In Progress"
     // No-op
 
-    store.dispatch( loadInitialState("Spring/Compression","US") );
-    store.dispatch( changeLabelsValue([{"name":"COMMENT","value":"Compression Spring demo1"}]) );
-    design = store.getState();
-    expect(design.model.result.objective_value).toEqual(0.0);
-    
-// title: "Page 02 of 11"
+    // title: "Page 02 of 11"
     store.dispatch(loadInitialState("Spring/Compression","US"));
     store.dispatch(changeLabelsValue([{"name":"COMMENT","value":"Compression Spring demo1"}]));
-    
-design = store.getState();
+
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000000,7);
-    
-// title: "Page 03 of 11"
+
+    // title: "Page 03 of 11"
     // No-op
-    
-// title: "Page 04 of 11"
+
+    // title: "Page 04 of 11"
     // No-op
-    
-// title: "Page 05 of 11"
+
+    // title: "Page 05 of 11"
     store.dispatch(fixSymbolValue("OD_Free",0.925));
     store.dispatch(fixSymbolValue("L_Free",1.713));
     store.dispatch(fixSymbolValue("Force_2",50));
@@ -54,40 +54,40 @@ design = store.getState();
     store.dispatch(setSymbolFlag("L_Solid",MAX,CONSTRAINED));
     store.dispatch(changeSymbolConstraint("L_Solid",MAX,1.06));
     store.dispatch(changeSymbolValue("Material_Type",3));
-    
-design = store.getState();
+
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(2.7011747,7);
-    
-// title: "Page 06 of 11"
+
+    // title: "Page 06 of 11"
     store.dispatch(changeSymbolConstraint("FS_2",MAX,2));
-    
-design = store.getState();
+
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(2.7011747,7);
-    
-// title: "Page 07 of 11"
+
+    // title: "Page 07 of 11"
     store.dispatch(search());
-    
-design = store.getState();
+
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000032,7);
-    
-// title: "Page 08 of 11"
-    store.dispatch(fixSymbolValue("Wire_Dia",0.125)); // Simulate Action: Select Size...
-design = store.getState();
+
+    // title: "Page 08 of 11"
+    store.dispatch(fixSymbolValue("Wire_Dia",0.125));
+
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000408,7);
-    
-// title: "Page 09 of 11"
+
+    // title: "Page 09 of 11"
     store.dispatch(search());
-    
-design = store.getState();
+
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000099,7);
-    
-// title: "Page 10 of 11"
+
+    // title: "Page 10 of 11"
     // No-op
-    
-// title: "Page 11 of 11 (last page)"
+
+    // title: "Page 11 of 11 (last page)"
     store.dispatch(fixSymbolValue("Force_2",75.1));
-    
-design = store.getState();
+
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0632930,7);
 });
-

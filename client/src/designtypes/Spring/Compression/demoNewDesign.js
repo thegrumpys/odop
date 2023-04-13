@@ -125,7 +125,7 @@ export const execute = {
                     </p>
                     CHANGE  Material_Type OIL_TEMPERED_MB<br />
                     CHANGE  Life_Category 1 Million cycles - Not peened<br />
-                    CHANGE  FS_CycleLife 1.0<br />
+                    CHANGE  FS_CycleLife MIN 1.0<br />
                     CHANGE  Cycle_Life  MIN  1000000<br />
                     CHANGE  OD_Free   MAX  1.25<br />
                     CHANGE  L_Solid   MAX  1.30<br />
@@ -223,10 +223,9 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Now to illustrate this, it is time for a bit of audience participation.
-                    Since the ODOP demo feature is not yet capable of directly controlling menus,
+                    This is an opportunity for you to 
                     go to the <b>Action : Select Size...</b> menu item
-                    to chose the nearest standard wire diameter.
+                    and see how to chose the nearest standard wire diameter.
                     <br /><br />
                     In Demo / Tutorial speak:<br />
                     Select  Size  Wire_Dia  0.135<br />
