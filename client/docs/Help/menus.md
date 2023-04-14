@@ -360,13 +360,15 @@ ___
  "Fixed" status.  The user should then execute a Search to obtain 
  corresponding values for the other Independent Variables. 
   
- In spring design Calculator view, selecting a new value of Wire_Dia automatically 
+ If the currently active design type does not provide a standard size table,
+ The Action : Select Size ... menu item will be disabled.
+ 
+ In ODOP:Spring, selecting a new value of Wire_Dia automatically 
  incorporates selection from the appropriate (US, metric) standard size table and 
  automatically puts the selected value in Fixed status. 
 
 See also:   
- - [Select Size](SpringDesign/selectSizeCatalog.html)   
-
+ - [Spring Design - Select Wire Size](SpringDesign/selectSizeCatalog.html)   
 
 ___
 
@@ -377,23 +379,27 @@ ___
 
 The Action : Select Catalog menu item selects the closest or otherwise 
 most appropriate design from a catalog of stock designs. 
+
+Once the user picks the desired catalog from a drop-down list, 
+a selection list containing the "closest" four entries from that catalog appears. 
+These designs are ranked based on their Objective Value. 
+Thus ODOP chooses from the catalog based on how well the 
+catalog design meets the user's objectives (as expressed by Fixes and constraints) 
+as opposed to simply choosing designs physically similar to the target design. 
+  
+ If the currently active design type does not provide at least one catalog,
+ The Action : Select Catalog ... menu item will be disabled.
+
 The stock spring catalogs currently supplied with ODOP:Spring include 
 generic compression and extension spring catalogs plus 
 U.S. Military Standard 24585 (SAE-AS24585) for compression springs 
 and MS24586 (SAE-AS24586) for extension springs. 
 
-Once the user picks the desired catalog from a drop-down list, 
-a selection list containing the "closest" four springs from that catalog appears. 
-These designs are ranked based on their Objective Value. 
-Thus ODOP:Spring is choosing from the catalog based on how well the 
-stock spring designs meet the user's objectives (as expressed by Fixes and constraints) 
-as opposed to simply choosing designs physically similar to the target design. 
-
-Note that it may be desirable to save (File : Save or File : Save As) the current design 
-before selecting a catalog item. 
+Note that it may be desirable to save (File : Save, File : Save As or File : Export) 
+the current design before selecting a catalog entry. 
 
 See also:   
- - [Select Catalog](SpringDesign/selectSizeCatalog.html)   
+ - [Spring Design - Select Catalog Entry](SpringDesign/selectSizeCatalog.html)   
  - [Extension spring catalog lookup](htt.html#e_springCatLookup)   
 
 ___

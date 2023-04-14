@@ -30,6 +30,9 @@ Input or edit values for a Dependent Variable - Free example
 Input or edit values for a Dependent Variable - Fixed example 
 ![Fixed dependent variable value input dialog box](/docs/Help/img/ValInpDlgDepFixNoted.png "Fixed Dependent variable value input dialog box")   
 
+See also:
+* [Selecting a Standard Wire Size in Calculator View](SpringDesign/selectSizeCatalog.html#calcView)  
+
 ___
 
 <a id="details"></a>  
@@ -120,7 +123,7 @@ control Fix / Free status or establish or modify constraints.
 See the annotated images in the "Quick overview" section above. 
 Fields with an asterisk in the upper left are Dependent Variables. 
  
-Fields with a light gray background are calculated results and cannot be directly changed. 
+When in Calculator View, fields with a light gray background are calculated results and cannot be directly changed. 
 
 ___
 
@@ -129,6 +132,7 @@ ___
 
 Related topics:
 
+* [Selecting a Standard Wire Size in Calculator View](SpringDesign/selectSizeCatalog.html#calcView)  
 * [Terminology - index to all terms](terminology.html) 
 * ["Fix" and "Free" terms](terminology.html#fix) 
 * ["AutoFix" term](terminology.html#autoFix) 
