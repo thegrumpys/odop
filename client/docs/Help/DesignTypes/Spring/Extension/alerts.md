@@ -225,8 +225,10 @@ ___
 Alert entry #E208
 ## %_Safe_Deflect @ 1 < 20% 
 The first operating point (point 1) has less than 20% of maximum safe deflection. 
-This is not usually a problem. 
-However, you should be aware that end effects and other factors may cause some inaccuracy in forces and deflections for this point.  
+End effects and other factors may cause some inaccuracy in forces and deflections for this point.  
+
+**Even if the application requires that this design operate outside the range of 20% to 80% of
+available deflection, the inspection (acceptance) criteria should be specified within this range.** 
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 

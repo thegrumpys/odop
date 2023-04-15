@@ -3,17 +3,40 @@
 This entry covers the input of values into ODOP. 
 Additional information on the operation of [Fix, Free](terminology.html#fix) and [constraints](terminology.html#constraints) is provided. 
 
-___   
+### On this page:   
+ - [Quick overview](settingValues.html#quikov)  
+ - [The details](settingValues.html#details)  
+ - [Views](settingValues.html#details)  
+ - [Input Operations Common to Both Advanced View and Calculator View](settingValues.html#commonOps)  
+ - [Operations specific to Calculator View](settingValues.html#calcViewOps)  
+ - [Related topics](settingValues.html#relTopics)  
+
+___
+
+<a id="quikov"></a>  
+___
 
 ## Quick overview:   
 
+Input or edit values for an Independent Variable - Free example 
 ![Free independent variable value input dialog box](/docs/Help/img/ValInpDlgIndepFreeNoted.png "Free independent variable value input dialog box")   
+
+Input or edit values for an Independent Variable - Fixed example 
 ![Fixed independent variable value input dialog box](/docs/Help/img/ValInpDlgIndepFixNoted.png "Fixed independent variable value input dialog box")   
 
+Input or edit values for a Dependent Variable - Free example 
 ![Free dependent variable value input dialog box](/docs/Help/img/ValInpDlgDepFreeNoted.png "Free dependent variable value input dialog box")   
+
+Input or edit values for a Dependent Variable - Fixed example 
 ![Fixed dependent variable value input dialog box](/docs/Help/img/ValInpDlgDepFixNoted.png "Fixed Dependent variable value input dialog box")   
 
-___   
+See also:
+* [Selecting a Standard Wire Size in Calculator View](SpringDesign/selectSizeCatalog.html#calcView)  
+
+___
+
+<a id="details"></a>  
+___
 
 ## The details:   
 
@@ -27,6 +50,10 @@ The ODOP spring design types also provide output-only "[Reports](menus.html#View
 a simplified spring design specific "[Calculator View](menus.html#ViewCalculator)" that accepts inputs. 
 
 User inputs to Advanced View And Calculator View operate similiarly. 
+___
+
+<a id="commonOps"></a>  
+___
 
 ### Input Operations Common to Both Advanced View and Calculator View   
 
@@ -75,14 +102,19 @@ _[AutoFix](terminology.html#autoFix)_
 The AutoFix feature automatically applies Fixed status to variables whose values are changed by user input.
 AutoFix behavior may be controlled in the File : Properties menu. 
 Set the value of enable_auto_fix to 1 to enable AutoFix behavior. 
-Set the value of enable_auto_fix to 0 to disable AutoFix behavior.
+Set the value of enable_auto_fix to 0 to disable AutoFix behavior. 
  
 &nbsp;   
 Notes:   
- - Do not leave a value field blank. See also: [Not a Number](htt.html#nan) 
+ - A red border around an input field indicates a non-numeric or otherwise invalid value. 
+ - The user interface should make it impossible to leave an Independent Variable value field blank. See also: [Not a Number](htt.html#nan) 
  - Input of values in scientific notation, for example: 1.234e5, is supported. 
  - Input of values less than 1.0 does not require a leading zero. 
- - A red border around an input field indicates a non-numeric or otherwise invalid value. 
+ 
+___
+
+<a id="calcViewOps"></a>  
+___
 
 ### Operations specific to Calculator View   
 
@@ -91,25 +123,35 @@ control Fix / Free status or establish or modify constraints.
 See the annotated images in the "Quick overview" section above. 
 Fields with an asterisk in the upper left are Dependent Variables. 
  
-Fields with a light gray background are calculated results and cannot be directly changed. 
+When in Calculator View, fields with a light gray background are calculated results and cannot be directly changed. 
 
-___   
+___
 
+<a id="relTopics"></a>  
+___
 
 Related topics:
 
-* [Terminology - index to all terms](terminology.html)
-* ["Fix" and "Free" terms](terminology.html#fix)
-* ["AutoFix" term](terminology.html#autoFix)
-* ["Search" term](terminology.html#search)
-* [Design Situations](designSituations.html)
-* [Default Designs](defaultDesigns.html)
-* [Feasibility](feasibility.html)
-* [Search](search.html)
-* [Seek](seek.html)
-* [Trade](trade.html)
-* [Hints, Tips and Tricks](/docs/Help/htt.html)   
+* [Selecting a Standard Wire Size in Calculator View](SpringDesign/selectSizeCatalog.html#calcView)  
+* [Terminology - index to all terms](terminology.html) 
+* ["Fix" and "Free" terms](terminology.html#fix) 
+* ["AutoFix" term](terminology.html#autoFix) 
+* ["Search" term](terminology.html#search) 
+* [Design Situations](designSituations.html) 
+* [Default Designs](defaultDesigns.html) 
+* [Feasibility](feasibility.html) 
+* [Search](search.html) 
+* [Seek](seek.html) 
+* [Trade](trade.html) 
+* [Hints, Tips and Tricks](/docs/Help/htt.html)  
 
 &nbsp;   
 
 [Help](/docs/Help) 
+
+&nbsp;   
+
+&nbsp;   
+
+&nbsp;   
+

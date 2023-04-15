@@ -127,9 +127,16 @@ Alert entry #C105
 ##  FS_Solid < 1.0 
 The factor of safety when compressed to solid is less than 1.0.
 
-This spring may be over-stressed if deflected to solid. 
+This design may be over-stressed if deflected to solid. 
 If deflected to solid, 
-it may yield or "take a set" as in not return to its original free length.
+it may yield or "take a set" as in not return to its original free length. 
+
+The current release of the ODOP:Spring app does not support the design of compression springs intended for "pre-set". 
+Springs intended for pre-set are wound with a free length that is somewhat longer than intended. 
+A secondary operation deflects the spring into a solid condition where it will yield, taking a permanent "set", 
+just enough to achieve the desired final free length. 
+This operation creates favorable stresses within the cross-section of the spring wire, 
+improving performance of the spring at the cost of the pre-set operation. 
 
 In order to resolve this alert, 
 where practical, change these values in the direction specified. 
@@ -196,6 +203,9 @@ Alert entry #C107
 ## %_Avail_Deflect @ 2 > 80% 
 Coil to coil contact may cause inaccuracy in operating point 2. 
 
+**Even if the application requires that this design operate outside the range of 20% to 80% of
+available deflection, the inspection (acceptance) criteria should be specified within this range.** 
+
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
 However, in the real world there are limitations. 
@@ -206,8 +216,9 @@ or failure of the ends to be precisely perpendicular to the coil axis
 become a factor in the real (as opposed to theoretical) force-deflection relationship. 
 Beyond the 80% point, coil to coil contact will produce an increase in spring rate that continues to increase 
 with additional deflection until the solid condition is reached. 
-Thus, when operating beyond 80% of the available deflection expect forces to be somewhat higher 
-(or deflections to be somewhat lower) than the linear behavior predicted by the equations. 
+Thus, when operating beyond 80% of the available deflection, 
+expect forces to be somewhat higher (or deflections to be somewhat lower) 
+than the linear behavior predicted by the equations. 
 
  See also: 
   - [Restrictions](/docs/About/Legal/Restrictions.html)  
@@ -221,6 +232,9 @@ ___
 Alert entry #C108
 ## %_Avail_Deflect @ 1 < 20% 
 End effects may cause inaccuracy in operating point 1.  
+
+**Even if the application requires that this design operate outside the range of 20% to 80% of
+available deflection, the inspection (acceptance) criteria should be specified within this range.** 
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
