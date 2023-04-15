@@ -183,15 +183,13 @@ class MainPage extends Component {
                             <Nav.Item>
                                 <SearchDocs />
                             </Nav.Item>
-                            <Nav.Item>
-                                <div>
-                                    <a href={"/docs/Help/DesignTypes/"+this.props.type+"/description.html"} target="_blank" rel="noopener noreferrer">
-                                        <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}. Select icon for full description.</Tooltip>}>
-                                            <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
-                                        </OverlayTrigger>
-                                    </a>
-                                    &nbsp;{this.props.name}
-                                </div>
+                            <Nav.Item className="d-flex align-items-center">
+                                <a href={"/docs/Help/DesignTypes/"+this.props.type+"/description.html"} target="_blank" rel="noopener noreferrer">
+                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}. Select icon for full description.</Tooltip>}>
+                                        <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
+                                    </OverlayTrigger>
+                                </a>
+                                &nbsp;{this.props.name}
                             </Nav.Item>
                         </Nav>
                     </Navbar.Collapse>
