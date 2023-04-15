@@ -184,12 +184,14 @@ class MainPage extends Component {
                                 <SearchDocs />
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link className={classnames({ active: this.state.activeTab === "Advanced" })} onClick={() => { this.setView("Advanced"); }}>
-                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}</Tooltip>}>
-                                        <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
-                                    </OverlayTrigger>
+                                <div>
+                                    <a href={"/docs/Help/DesignTypes/"+this.props.type+"/description.html"} target="_blank" rel="noopener noreferrer">
+                                        <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}. Select icon for full description.</Tooltip>}>
+                                            <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
+                                        </OverlayTrigger>
+                                    </a>
                                     &nbsp;{this.props.name}
-                                </Nav.Link>
+                                </div>
                             </Nav.Item>
                         </Nav>
                     </Navbar.Collapse>
