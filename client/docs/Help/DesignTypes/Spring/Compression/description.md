@@ -138,9 +138,9 @@ Name           | &nbsp; | Description
  ---           | ---    | ---         
 Spring_Type    |        | character string used only as a label 
 Prop_Calc_Method |      | Property Calculation Method controls how material properties and allowable stresses are determined. See also: [Materials](/docs/Help/SpringDesign/materials.html). 
-&nbsp;           |      | 1 - indicates values come from materials table; allowable stresses will be calculated as a function of Wire_Dia. 
-&nbsp;           |      | 2 - indicates tensile and allowable % are supplied by the user; allowable stresses are calculated. 
-&nbsp;           |      | 3 - indicates allowable stresses are supplied directly by the user. 
+&nbsp;           |      | **1** - indicates values come from materials table; allowable stresses will be calculated as a function of Wire_Dia. 
+&nbsp;           |      | **2** - indicates tensile and allowable % are supplied by the user; allowable stresses are calculated. 
+&nbsp;           |      | **3** - indicates allowable stresses are supplied directly by the user. 
 Material_Type  |        | selects an entry in the material table. Is used to determine allowable stresses when Prop_Calc_Method is 1. Otherwise is ignored. 
 ASTM/Fed-Spec  |        | character string used only as a label to further identify the origin of material property data 
 Process        |        | character string used to identify the manufacturing process.  It is normally controlled by the material selected from the material table. Values are usually Cold_Coiled or Hot_Wound. See also: Hot_Factor_Kh (below). 
@@ -350,5 +350,6 @@ of the documentation.
 
  - [Design Types](/docs/Help/DesignTypes)   
  - [Spring Design Topics](/docs/Help/SpringDesign)   
+ - [Restrictions](/docs/About/Legal/Restrictions.html)   
  - [Help](/docs/Help)   
 

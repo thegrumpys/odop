@@ -425,6 +425,7 @@ of the documentation.
 
  - [Design Types](/docs/Help/DesignTypes)   
  - [Spring Design Topics](/docs/Help/SpringDesign)   
+ - [Restrictions](/docs/About/Legal/Restrictions.html)   
  - [Help](/docs/Help)   
 
 <!---
