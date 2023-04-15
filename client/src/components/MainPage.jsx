@@ -11,7 +11,6 @@ import {
     Row
 } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
-import classnames from 'classnames';
 import ExecutePanel from './ExecutePanel';
 import { connect } from 'react-redux';
 import SignIn from '../menus/Session/SignIn';
