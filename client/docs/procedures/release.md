@@ -151,7 +151,9 @@ If appropriate, dump to off-line storage and re-initialize the log_Usage table.
 1. Optionally, dump and archive, then empty the usage_log table. 
 <a id="publish2Heroku"></a>
 &nbsp;
-1. **Publish to Heroku** &nbsp; Update messageOfTheDay.md to announce availability of the new version.
+1. **Publish to Heroku** &nbsp; If production, update messageOfTheDay.md to announce availability of the new version.
+To do this do the following: Create issue branch, update MOTD file, check-in change to branch and iterate if necessary, then when all is ready merge branch into master.
+Note: Merging will publish the MOTD externally/publically.
 1. Do a pull as required to get latest version on all systems.
 1. If not logged into Heroku, login in using the command line "heroku login" which in turn brings up the Heroku website login page in your browser.
 1. Shutdown server and client under your development environment.

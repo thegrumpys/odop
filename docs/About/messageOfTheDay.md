@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated October 3, 2022 
+**Message-of-the-day** &nbsp; updated April 16, 2023 
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -7,7 +7,7 @@ including recent and impending releases, planned outages, newly discovered issue
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
-[ODOP version 4.3.3](https://github.com/thegrumpys/odop/milestone/62?closed=1) | &nbsp; | October 2, 2022.  
+[ODOP version 4.4](https://github.com/thegrumpys/odop/milestone/64?closed=1) | &nbsp; | April 16, 2023.  
 
 Follow the link above to see change details in GitHub.  
 
@@ -54,6 +54,7 @@ Follow the links below to see change details in GitHub.
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
+[ODOP version 4.4](https://github.com/thegrumpys/odop/milestone/64?closed=1) | &nbsp; | April 16, 2023.  
 [ODOP version 4.3.3](https://github.com/thegrumpys/odop/milestone/62?closed=1) | &nbsp; | October 2, 2022   
 [ODOP version 4.3.2](https://github.com/thegrumpys/odop/milestone/61?closed=1) | &nbsp; | September 20, 2022   
 [ODOP version 4.3.1](https://github.com/thegrumpys/odop/milestone/60?closed=1) | &nbsp; | September 20, 2022   
@@ -86,7 +87,7 @@ Version  | &nbsp; | Date released
 
 <!---
 Comment
-A "preview" of the next ODOP release (version 4.3) is now available. 
+A "preview" of the next ODOP release (version 4.4) is now available. 
 Your feedback would be greatly appreciated. 
  [Contact Us](http://odop.herokuapp.com/docs/About/ContactUs.html) for access. 
 -->
