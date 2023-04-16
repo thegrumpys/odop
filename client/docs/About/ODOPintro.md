@@ -32,7 +32,7 @@ highly constrained original design problems.
 ## OPTIMIZATION   
 
 Once a real world system is expressed in terms of a mathematical model, 
-that model may be manipulated by numerical search and mathermatical optimization techniques. 
+that model may be manipulated by numerical search and mathematical optimization techniques. 
 The process is sometimes referred to as "goal seeking". 
 If a designer's goals are expressed in terms of one-sided constraints 
 or two-sided "FIXes", the software can search for and find a "feasible" solution, if one exists. 
