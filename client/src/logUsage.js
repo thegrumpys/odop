@@ -27,7 +27,7 @@ function logIt(tag, action, note) {
   })
   .catch(error => {
 //      console.log('error=',error);
-      displayMessage('POST of usage_log of note \''+note+'\' failed with message: \''+error.message+'\'');
+      displayMessage('POST of usage_log of note \''+JSON.stringify(note)+'\' failed with message: \''+error.message+'\'');
   });
 }
 
