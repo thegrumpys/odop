@@ -600,7 +600,7 @@ class SymbolValueWireDia extends Component {
                             <>
                                 {(this.props.element.lmin & FIXED && free_variables.length > 0) ? 
                                         <OverlayTrigger placement="top" overlay={<Tooltip>
-                                        This variable, {this.props.element.name}, is Fixed. Press this <img src="SearchButton.png" alt="SearchButton"/> button to find a feasible solution. Only the values of Free variables, {free_variables} may change.
+                                        The Independent Variable {this.props.element.name} is Fixed. Search manipulates only the values of Free Independent Variables. Press this <img src="SearchButton.png" alt="SearchButton"/> button to alter the values, {free_variables} to locate a feasible solution (if available).
                                         </Tooltip>}>
                                             <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>
                                         </OverlayTrigger>
