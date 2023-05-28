@@ -332,6 +332,12 @@ class SymbolValue extends Component {
                 display_seek_button = true;
             }
         }
+        var free_variables = '';
+        this.props.symbol_table.forEach((element) => {
+            if (element.type === 'equationset' && element.input && !(element.lmin & FIXED)) {
+                free_variables += element.name + ', ';
+            }
+        });
 //        console.log('feasibility_string=',feasibility_string,'feasibility_class=',feasibility_class,'display_search_button=',display_search_button,'display_seek_button=',display_seek_button);
 
         return (
@@ -451,7 +457,14 @@ class SymbolValue extends Component {
                         {this.state.modified ? <><Button variant="secondary" onClick={this.onResetButton}>Reset</Button>&nbsp;</> : ''}
                         {display_search_button ? 
                             <>
-                                {this.props.element.lmin & FIXED ? '' : <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>}
+                                {this.props.element.lmin & FIXED && free_variables.length > 0 ? 
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>
+                                        The Independent Variable {this.props.element.name} is Fixed. Search manipulates only the values of Free Independent Variables. Press this <img src="SearchButton.png" alt="SearchButton"/> button to alter the values, {free_variables} to locate a feasible solution (if available).
+                                        </Tooltip>}>
+                                            <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>
+                                        </OverlayTrigger>
+                                    :
+                                        <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>}
                                 <Button variant={this.props.search_completed ? "primary" : "secondary"} disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                             </>
                         :
