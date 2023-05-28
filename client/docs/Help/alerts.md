@@ -306,6 +306,8 @@ value and its units label.
 When in Calculator View, first click the variable in order to open its value change dialog box. 
 
 See also:  
+ - [Terminology - Fix and Free](/docs/Help/terminology.html#fix)  
+ - [Terminology - Independent Variables](/docs/Help/terminology.html#independentVar)  
  - [Terminology - AutoFix](/docs/Help/terminology.html#autoFix)  
  - [Setting Values](/docs/Help/settingValues.html)
 

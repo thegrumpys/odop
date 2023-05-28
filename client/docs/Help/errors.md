@@ -47,9 +47,11 @@ Conditions that block the operation of Search include:
  - [No free independent variables](/docs/Help/alerts.html#NoFreeIV) 
  - [Constraints are inconsistent](/docs/Help/alerts.html#Constraint_Inconsistency) 
 
+Follow the link above that corresponds to the message blocking Search.
+
+#### Invalid Values
 While usually a situation of having started with invalid values,
 it is possible for Search to return a design that contains invalid values. 
-In this case, use the Alerts button to get more information. 
 The Help links provided in the Alerts panel may provide specific recommendations to help clear the condition. 
 In some cases it may be necessary to identify which input(s) are responsible for the invalid values and then
 manually adjust the value of those inputs so as to clear the invalid condition. 
@@ -59,6 +61,7 @@ Use the AutoSave feature to recover a design as it existed before a Search.
 See Also: 
  - [AutoSave](/docs/Help/autoSave.html) 
  - [Alerts](/docs/Help/alerts.html) 
+ - [Setting Values](/docs/Help/settingValues.html)
 
 ___
 
@@ -70,11 +73,14 @@ ___
  - [No free independent variables](/docs/Help/alerts.html#NoFreeIV) 
  - [Constraints are inconsistent](/docs/Help/alerts.html#Constraint_Inconsistency) 
 
+Follow the link above that corresponds to the message blocking Search.
+
 Use the AutoSave feature to recover a design as it existed before a Seek. 
 
 See Also: 
  - [AutoSave](/docs/Help/autoSave.html) 
  - [Alerts](/docs/Help/alerts.html) 
+ - [Setting Values](/docs/Help/settingValues.html)
 
 ___
 

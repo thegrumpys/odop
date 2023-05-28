@@ -47,7 +47,6 @@ class HelpAbout extends Component {
             if (!res.ok) {
                 throw Error(res.statusText);
             }
-            logUsage('event', 'HelpAbout', { event_label: 'getDBSize'});
             return res.json()
         })
         .then(sizes => {
@@ -62,6 +61,7 @@ class HelpAbout extends Component {
             this.setState({ 
                 size: size
             });
+            logUsage('event', 'HelpAbout', { event_label: 'getDBSize: ' + size});
         })
         .catch(error => {
             displayMessage('GET of DB Size failed with message: \''+error.message+'\'');

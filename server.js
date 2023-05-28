@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
 
 // Check for nasty input
 app.use((req, res, next) => {
-    var found = req.originalUrl.match(/\/\?\d+=/); // Example '/?5129='
+    var found = req.originalUrl.match(/\/\?\d+/); // Example '/?5129='
     if (found) {
         res.status(500).end();
     } else {
