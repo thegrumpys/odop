@@ -457,7 +457,7 @@ class SymbolValue extends Component {
                         {this.state.modified ? <><Button variant="secondary" onClick={this.onResetButton}>Reset</Button>&nbsp;</> : ''}
                         {display_search_button ? 
                             <>
-                                {this.props.element.lmin & FIXED && free_variables.length > 0 ? 
+                                {this.props.element.type === "equationset" && this.props.element.input && this.props.element.lmin & FIXED && free_variables.length > 0 ? 
                                         <OverlayTrigger placement="top" overlay={<Tooltip>
                                         The Independent Variable {this.props.element.name} is Fixed. Search manipulates only the values of Free Independent Variables. Press this <img src="SearchButton.png" alt="SearchButton"/> button to alter the values, {free_variables} to locate a feasible solution (if available).
                                         </Tooltip>}>
