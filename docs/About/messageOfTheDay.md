@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated April 16, 2023 
+**Message-of-the-day** &nbsp; updated June 4, 2023 
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -7,24 +7,23 @@ including recent and impending releases, planned outages, newly discovered issue
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
-[ODOP version 4.4](https://github.com/thegrumpys/odop/milestone/64?closed=1) | &nbsp; | April 16, 2023.  
+[ODOP version 4.4.1](https://github.com/thegrumpys/odop/milestone/65?closed=1) | &nbsp; | June 4, 2023.  
 
 Follow the link above to see change details in GitHub.  
 
-Opening a design saved in a prior version of ODOP will produce a pop-up message.
-See: [MIGRATION](http://odop.herokuapp.com/docs/Help/terminology.html#migration). 
-
 ODOP is [Experimental Software](http://odop.herokuapp.com/docs/About/experimental.html).  
 
-To establish a free account, see: [User Accounts](http://odop.herokuapp.com/docs/About/userAccounts.html). 
-With the recent changes in [Calculator View](http://odop.herokuapp.com/docs/Help/menus.html#ViewCalculator), 
-browser requirements have changed. 
+The ODOP app operates on a broad range of hardware and operating systems. 
 For details, see: [Requirements](http://odop.herokuapp.com/docs/About/requirements.html) 
-and [AutoFix](http://odop.herokuapp.com/docs/Help/terminology.html#autoFix). 
+
+To establish a free account, see: [User Accounts](http://odop.herokuapp.com/docs/About/userAccounts.html). 
 
 Evaluators and new users should be sure to see the [About](http://odop.herokuapp.com/docs/About) section 
 of the on-line documentation early in the learning process. 
 Also, a short [Getting Started with ODOP](https://www.youtube.com/watch?v=JS-8Z1Ct0aI) video is available.
+
+Returning users should note that opening a design saved in a prior version of ODOP will produce a pop-up message.
+See: [MIGRATION](http://odop.herokuapp.com/docs/Help/terminology.html#migration). 
 
 Thank you for your interest in the **O**pen **D**esign **O**ptimization **P**latform software and the ODOP:Spring app. 
 Your success and feedback are important to us. 
@@ -54,7 +53,8 @@ Follow the links below to see change details in GitHub.
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
-[ODOP version 4.4](https://github.com/thegrumpys/odop/milestone/64?closed=1) | &nbsp; | April 16, 2023.  
+[ODOP version 4.4.1](https://github.com/thegrumpys/odop/milestone/65?closed=1) | &nbsp; | June 4, 2023.  
+[ODOP version 4.4](https://github.com/thegrumpys/odop/milestone/64?closed=1)   | &nbsp; | April 16, 2023.  
 [ODOP version 4.3.3](https://github.com/thegrumpys/odop/milestone/62?closed=1) | &nbsp; | October 2, 2022   
 [ODOP version 4.3.2](https://github.com/thegrumpys/odop/milestone/61?closed=1) | &nbsp; | September 20, 2022   
 [ODOP version 4.3.1](https://github.com/thegrumpys/odop/milestone/60?closed=1) | &nbsp; | September 20, 2022   
@@ -90,5 +90,6 @@ Comment
 A "preview" of the next ODOP release (version 4.4) is now available. 
 Your feedback would be greatly appreciated. 
  [Contact Us](http://odop.herokuapp.com/docs/About/ContactUs.html) for access. 
--->
+ See: [AutoFix](http://odop.herokuapp.com/docs/Help/terminology.html#autoFix). 
+ -->
  
