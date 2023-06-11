@@ -77,7 +77,7 @@ and provide the opportunity to recover it.
 Selecting "Yes" will recover the AutoSave design. 
 Selecting "No" will load the default design. 
 
-If the app is started directly from odop.herokuapp.com without parameters as part of the URL, 
+If the app is started directly from odop.springdesignsoftware.org without parameters as part of the URL, 
 the default is Compression spring, US Customary units and Advanced View. 
 If the app is started from SpringDesignSoftware.org, 
 the default is the spring type, units and View that are selected there. 
@@ -92,7 +92,7 @@ ___
 The AutoSave feature can provide a before / after comparison for Search, Seek and Trade. 
 After completing a one of those operations, open a new browser tab (or window). 
 Launch another instance of the app in that new tab (or window) by copy and paste of 
-the address line (https://odop.herokuapp.com) from the first tab (or window). 
+the address line (https://odop.springdesignsoftware.org) from the first tab (or window). 
 Respond "Yes" to the prompt to recover AutoSave data in that tab (or window). 
 This will display the state of the design before the Search, Seek or Trade operation. 
 Switch between the two tabs (windows) to compare. 

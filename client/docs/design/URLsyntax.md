@@ -18,8 +18,8 @@ to be installed and properly configured on the local computer.
 Target System | Base URL
 ---|---
 Development environment | http://localhost:3000/
-Staging system | https://odop-staging.herokuapp.com/
-Production system | https://odop.herokuapp.com/
+Staging system | https://odop-staging.springdesignsoftware.org/
+Production system | https://odop.springdesignsoftware.org/
 
 
 **Question mark symbol**  
@@ -95,15 +95,15 @@ Examples:
 
 URL|type|name|execute|View
 ---|---|---|---|---
-https://odop-staging.herokuapp.com/?view=Advanced&execute=welcomeAdv | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | welcomeAdv | Advanced
-https://odop-staging.herokuapp.com/?view=Calculator&execute=welcomeCalc | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | welcomeCalc | Calculator
-https://odop-staging.herokuapp.com/?view=Calculator&execute=demo | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | demo | Calculator
-https://odop-staging.herokuapp.com/?name=Startup&view=Calculator&execute=demo | REACT_APP_DESIGN_TYPE = Compression | Startup | demo | Calculator
-https://odop-staging.herokuapp.com/?type=Spring%2FCompression&view=Calculator&execute=demo | Spring/Compression | REACT_APP_DESIGN_NAME = StartUp | demo | Calculator
-https://odop-staging.herokuapp.com/?type=Spring%2FCompression&name=Startup&view=Calculator&execute=demo |  Spring/Compression | Startup | demo | Calculator
-https://odop-staging.herokuapp.com/?type=Spring%2FExtension&view=Calculator&execute=demo6 | Spring/Extension | REACT_APP_DESIGN_NAME = StartUp | demo6 | Calculator
-https://odop-staging.herokuapp.com/?type=Spring%2FExtension&name=Startup&view=Calculator&execute=demo6 | Spring/Extension | Startup | demo6 | Calculator
-https://odop-staging.herokuapp.com/?type=Spring%2FTorsion&view=Calculator&execute=demo14 | Spring/Torsion | REACT_APP_DESIGN_NAME = StartUp | demo14 | Calculator
-https://odop-staging.herokuapp.com/?type=Spring%2FTorsion&name=Startup&view=Calculator&execute=demo14 | Spring/Torsion | Startup | demo14 | Calculator
-https://odop-staging.herokuapp.com/?prompt | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | {File : Open} | Advanced
+https://odop-staging.springdesignsoftware.org/?view=Advanced&execute=welcomeAdv | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | welcomeAdv | Advanced
+https://odop-staging.springdesignsoftware.org/?view=Calculator&execute=welcomeCalc | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | welcomeCalc | Calculator
+https://odop-staging.springdesignsoftware.org/?view=Calculator&execute=demo | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | demo | Calculator
+https://odop-staging.springdesignsoftware.org/?name=Startup&view=Calculator&execute=demo | REACT_APP_DESIGN_TYPE = Compression | Startup | demo | Calculator
+https://odop-staging.springdesignsoftware.org/?type=Spring%2FCompression&view=Calculator&execute=demo | Spring/Compression | REACT_APP_DESIGN_NAME = StartUp | demo | Calculator
+https://odop-staging.springdesignsoftware.org/?type=Spring%2FCompression&name=Startup&view=Calculator&execute=demo |  Spring/Compression | Startup | demo | Calculator
+https://odop-staging.springdesignsoftware.org/?type=Spring%2FExtension&view=Calculator&execute=demo6 | Spring/Extension | REACT_APP_DESIGN_NAME = StartUp | demo6 | Calculator
+https://odop-staging.springdesignsoftware.org/?type=Spring%2FExtension&name=Startup&view=Calculator&execute=demo6 | Spring/Extension | Startup | demo6 | Calculator
+https://odop-staging.springdesignsoftware.org/?type=Spring%2FTorsion&view=Calculator&execute=demo14 | Spring/Torsion | REACT_APP_DESIGN_NAME = StartUp | demo14 | Calculator
+https://odop-staging.springdesignsoftware.org/?type=Spring%2FTorsion&name=Startup&view=Calculator&execute=demo14 | Spring/Torsion | Startup | demo14 | Calculator
+https://odop-staging.springdesignsoftware.org/?prompt | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | {File : Open} | Advanced
 

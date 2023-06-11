@@ -25,11 +25,11 @@ Spring design users are expected to launch ODOP:Spring from the
 In order to start the ODOP software in **this browser window** (or tab), 
 follow this link:   
 
-[Launch ODOP](https://odop.herokuapp.com) 
+[Launch ODOP](https://odop.springdesignsoftware.org) 
   
 Alternatively, copy this address (URL):   
 
-**https://odop.herokuapp.com**
+**https://odop.springdesignsoftware.org**
 
 and paste it into the address field of a different browser window (or tab).   
   

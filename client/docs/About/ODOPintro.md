@@ -75,20 +75,20 @@ See:
 
 Five [Design Types](/docs/Help/DesignTypes) are currently available. 
 
-![Compression Spring Design Type icon](https://odop.herokuapp.com/designtypes/Spring/Compression/favicon.ico "Compression Spring Design Type") 
-![Extension Spring Design Type icon](https://odop.herokuapp.com/designtypes/Spring/Extension/favicon.ico "Extension Spring Design Type") 
-![Torsion Spring Design Type icon](https://odop.herokuapp.com/designtypes/Spring/Torsion/favicon.ico "Torsion Spring Design Type") 
+![Compression Spring Design Type icon](https://odop.springdesignsoftware.org/designtypes/Spring/Compression/favicon.ico "Compression Spring Design Type") 
+![Extension Spring Design Type icon](https://odop.springdesignsoftware.org/designtypes/Spring/Extension/favicon.ico "Extension Spring Design Type") 
+![Torsion Spring Design Type icon](https://odop.springdesignsoftware.org/designtypes/Spring/Torsion/favicon.ico "Torsion Spring Design Type") 
 The **Compression, Extension and Torsion Spring** design types are full-featured apps 
 enabling the engineering design of helical coil springs. 
 While best saved for a time after your initial introduction to ODOP is complete, 
 a comprehensive introduction to coil spring design with ODOP is available at 
 [Spring Design Topics](/docs/Help/SpringDesign). 
 
-![Rectangular Solid Design Type icon](https://odop.herokuapp.com/designtypes/Solid/favicon.ico "Rectangular Solid Design Type") 
+![Rectangular Solid Design Type icon](https://odop.springdesignsoftware.org/designtypes/Solid/favicon.ico "Rectangular Solid Design Type") 
 The [Rectangular Solid](/docs/Help/DesignTypes/Solid/description.html) design type is intended as an 
 easy to understand demonstration problem. 
 
-![Piston-Cylinder Design Type icon](https://odop.herokuapp.com/designtypes/Piston-Cylinder/favicon.ico "Piston-Cylinder Design Type") 
+![Piston-Cylinder Design Type icon](https://odop.springdesignsoftware.org/designtypes/Piston-Cylinder/favicon.ico "Piston-Cylinder Design Type") 
 The [Piston-Cylinder](/docs/Help/DesignTypes/Piston-Cylinder/description.html) design type is a simple demonstration problem 
 that illustrates competing objectives.
 

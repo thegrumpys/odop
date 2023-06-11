@@ -264,7 +264,7 @@ See docs/procedures/ImageLocations for preferred approach on image path.
 
 <img src="/docs/Help/DesignTypes/Spring/Torsion/img/TorsionNames.png" alt="Torsion Spring Names"/>
 
-![Torsion Spring Names](https://odop.herokuapp.com/docs/Help/DesignTypes/Spring/Torsion/img/TorsionNames.png "Torsion Spring Names")   
+![Torsion Spring Names](https://odop.springdesignsoftware.org/docs/Help/DesignTypes/Spring/Torsion/img/TorsionNames.png "Torsion Spring Names")   
 
 -->
 

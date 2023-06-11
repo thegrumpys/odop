@@ -1,6 +1,6 @@
 # Privacy Notice
 
-This privacy notice discloses the privacy practices for the odop.herokuapp.com website. 
+This privacy notice discloses the privacy practices for the odop.springdesignsoftware.org website. 
 This privacy notice applies solely to information collected by this website. 
 It will notify you of the following:   
 * What personally identifiable information is collected from you through the website, how it is used and with whom it may be shared.
@@ -9,7 +9,7 @@ It will notify you of the following:
 * How you can correct any inaccuracies in the information.   
    
 ## Features provided by Okta   
-Identity, authentication and authorization features (username and password) of odop.herokuapp.com are 
+Identity, authentication and authorization features (username and password) of odop.springdesignsoftware.org are 
 based on capabilities provided by [Okta.com](https://www.okta.com/).
 The privacy notice for features provided by Okta is available at: [Okta privacy policy](https://www.okta.com/privacy-policy/).  
 
@@ -22,7 +22,7 @@ The privacy notice for features provided by Capterra are available at:
  - [Gartner / Capterra Permission Based Marketing Policy](https://digital-markets.gartner.com/Permission-Based-Marketing-Policy) 
  - [Gartner / Capterra Digital Markets Software Vendor Privacy Notice](https://www.gartner.com/en/digital-markets/privacy-policy). 
 
-The remainder of this page applies to odop.herokuapp.com features unrelated to Okta and Gartner / Capterra.
+The remainder of this page applies to odop.springdesignsoftware.org features unrelated to Okta and Gartner / Capterra.
    
 ## Information Collection, Use, and Sharing   
 We are the sole owners of the information collected on this site. 
@@ -59,7 +59,7 @@ A "cookie" is a piece of data stored on a site visitor's local storage to help i
 For instance, by using a cookie to identify you, you would not have to log in a password more than once, thereby saving time and effort. 
 Cookies can also enable a site to track and target the interests of its users to enhance the experience on the site. 
 
-The odop.herokuapp.com website does not use cookies. 
+The odop.springdesignsoftware.org website does not use cookies. 
 However, some of our business partners 
 (for example: Okta, Heroku, JawsDB, GitHub Pages, Gartner / Capterra and Google Analytics) 
 may use cookies related to our site.

@@ -173,7 +173,7 @@ git push heroku[-staging] +HEAD:master
 &nbsp;   
 1. If maintenance mode was previously enabled, disable maintenance mode:  
 heroku maintenance:off -a odop
-1. Confirm that the http://odop-staging.herokuapp.com or http://odop.herokuapp.com website is operational and that version Major.Minor.Patch displays.
+1. Confirm that the http://odop-staging.springdesignsoftware.org or http://odop.springdesignsoftware.org website is operational and that version Major.Minor.Patch displays.
 1. Confirm that the https://odop.springdesignsoftware.org/docs website is operational and that documentation displays.
 
 &nbsp;
