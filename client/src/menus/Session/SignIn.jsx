@@ -26,7 +26,7 @@ export default withRouter(withOktaAuth(class SignIn extends Component {
         <>
             <OverlayTrigger placement="bottom" overlay={<Tooltip>Sign in to save private designs.<br/>See About : User Accounts.</Tooltip>}>
                 <Button variant="light" onClick={this.toggle}>
-                    Sign In&hellip;
+                    Sign&nbsp;In&hellip;
                 </Button>
             </OverlayTrigger>
         </>
