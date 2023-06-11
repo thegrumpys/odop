@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated June 4, 2023 
+**Message-of-the-day** &nbsp; updated June 11, 2023 
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -11,26 +11,26 @@ Version  | &nbsp; | Date released
 
 Follow the link above to see change details in GitHub.  
 
-ODOP is [Experimental Software](http://odop.herokuapp.com/docs/About/experimental.html).  
+ODOP is [Experimental Software](http://odop.springdesignsoftware.org/docs/About/experimental.html).  
 
 The ODOP app operates on a broad range of hardware and operating systems. 
-For details, see: [Requirements](http://odop.herokuapp.com/docs/About/requirements.html) 
+For details, see: [Requirements](http://odop.springdesignsoftware.org/docs/About/requirements.html) 
 
-To establish a free account, see: [User Accounts](http://odop.herokuapp.com/docs/About/userAccounts.html). 
+To establish a free account, see: [User Accounts](http://odop.springdesignsoftware.org/docs/About/userAccounts.html). 
 
-Evaluators and new users should be sure to see the [About](http://odop.herokuapp.com/docs/About) section 
+Evaluators and new users should be sure to see the [About](http://odop.springdesignsoftware.org/docs/About) section 
 of the on-line documentation early in the learning process. 
 Also, a short [Getting Started with ODOP](https://www.youtube.com/watch?v=JS-8Z1Ct0aI) video is available.
 
 Returning users should note that opening a design saved in a prior version of ODOP will produce a pop-up message.
-See: [MIGRATION](http://odop.herokuapp.com/docs/Help/terminology.html#migration). 
+See: [MIGRATION](http://odop.springdesignsoftware.org/docs/Help/terminology.html#migration). 
 
 Thank you for your interest in the **O**pen **D**esign **O**ptimization **P**latform software and the ODOP:Spring app. 
 Your success and feedback are important to us. 
 Please do not hesitate to let us know if we may be able to provide assistance. 
 If you are interested, 
 a free over-the-phone walk through of the app including assistance with your first spring design can be arranged. 
-[Contact Us](http://odop.herokuapp.com/docs/About/ContactUs.html).   
+[Contact Us](http://odop.springdesignsoftware.org/docs/About/ContactUs.html).   
 
 ___
 
@@ -89,7 +89,7 @@ Version  | &nbsp; | Date released
 Comment
 A "preview" of the next ODOP release (version 4.4) is now available. 
 Your feedback would be greatly appreciated. 
- [Contact Us](http://odop.herokuapp.com/docs/About/ContactUs.html) for access. 
- See: [AutoFix](http://odop.herokuapp.com/docs/Help/terminology.html#autoFix). 
+ [Contact Us](http://odop.springdesignsoftware.org/docs/About/ContactUs.html) for access. 
+ See: [AutoFix](http://odop.springdesignsoftware.org/docs/Help/terminology.html#autoFix). 
  -->
  
