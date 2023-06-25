@@ -190,11 +190,12 @@ ___
 Alert entry #E207
 ## Default constraint not enabled 
   
-Disabling default constraints is not recommended.  
+Disabling default constraints is not recommended. 
+Adjust the constraint value instead. 
 
 This alert is produced when constraints enabled by default are disabled. 
-Also, this alert can be produced for designs created and saved with older versions of the software. 
-Specifically, constraints on Spring_Index previously were not enabled by default. 
+This alert can be also be produced for designs created and saved with older versions of the software. 
+Specifically, constraints on Spring_Index were not enabled by default in older designs. 
 If this alert is associated with Spring_Index on an older design, it may be ignored. 
 Better yet, clear the alert by enabling MIN and MAX constraints on Spring_Index. 
 
@@ -204,7 +205,7 @@ guided by the default constraints.
 
 For example: 
  - Constraints on Spring_Index insure that designs produced by the software are within the range of manufacturability.
- Consult your manufacturer regarding capabilities and costs. 
+ For custom springs, consult your manufacturer regarding capabilities and costs. 
  - Disabling the lower (MIN) constraint on the first operating load (Force_1 MIN) 
 allows Search to return a design that has Force_1 less than the initial tension and declare it to be "feasible". 
 This situation is ambiguous. 

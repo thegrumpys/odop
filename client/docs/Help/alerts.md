@@ -163,10 +163,9 @@ ___
 Alert entry #ODOP05
 ## Inverted Constraint Range / Constraint Inconsistency 
 Constraints on the associated variable are inconsistent. 
-Specifically, the value of the MAX constraint is less than the MIN constraint; 
-the value of the MIN constraint is greater than the MAX constraint. 
+Specifically, the MAX constraint value is less than the MIN constraint value. 
 
-This situation may block the Search, Seek and Trade features from starting.
+This inconsistency may block the Search, Seek and Trade features from starting.
 
 To resolve the situation, change one or both of the associated variable's constraint values. 
 Increase the MAX value and / or decrease the MIN value until there is no overlap. 

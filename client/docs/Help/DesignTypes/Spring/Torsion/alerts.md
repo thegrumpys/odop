@@ -44,10 +44,11 @@ Alert entry #T302
 ## Default constraint not enabled 
 
 Disabling default constraints is not recommended. 
+Adjust the constraint value instead. 
 
 This alert is produced when constraints enabled by default are disabled. 
-Also, this alert can be produced for designs created and saved with older versions of the software. 
-Specifically, constraints on Spring_Index previously were not enabled by default. 
+This alert can be also be produced for designs created and saved with older versions of the software. 
+Specifically, constraints on Spring_Index were not enabled by default in older designs. 
 If this alert is associated with Spring_Index on an older design, it may be ignored. 
 Better yet, clear the alert by enabling MIN and MAX constraints on Spring_Index. 
 
@@ -57,7 +58,7 @@ guided by the default constraints.
 
 For example: 
  - Constraints on Spring_Index insure that designs produced by the software are within the range of manufacturability. 
-Consult your manufacturer regarding capabilities and costs. 
+For custom springs, consult your manufacturer regarding capabilities and costs. 
  - Constraining the value of deflection at operating point 1 (Deflect_1) to be positive (greater than zero) 
 prevents Search from returning designs with negative values for moment and deflection at operating point 1. 
  - Depending on the configuration of other constraints, 
@@ -91,7 +92,7 @@ a lack uniformity in coil pitch,
 minor deviation from cylindrical shape 
 and deflection in the ends 
 become factors in the real (as opposed to theoretical) moment-deflection relationship. 
-Coil to coil contact will produce an increase in spring rate that continues to increase 
+Depending on Coil_Spacing, coil to coil contact may produce an increase in spring rate that continues to increase 
 with additional deflection until the maximum safe operating condition is reached. 
 Thus, when operating beyond 80% of the safe deflection, expect moments to be somewhat higher 
 (or deflections to be somewhat lower) 

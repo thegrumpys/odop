@@ -30,7 +30,7 @@ Resolve this alert by reducing the value of Force_1 below the value of Force_2.
 It should also be possible to 
 confirm that Force_1 is in Free status, 
 confirm that the constraint L_Stroke MIN is enabled with a greater-than-zero constraint level 
-and then use the Search feature (menu Action : Search or Search button). 
+and then use the Search feature (menu **Action : Search** or Search button). 
 
 See also: 
  - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
@@ -55,7 +55,7 @@ Wire_Dia | &nbsp; | Force_2
  
 Depending on the Fixes and constraints on lengths and deflections associated with the second operating point, 
 it should also be possible to confirm that Force_2 is in Free status, 
-and then use the Search feature (menu Action : Search or Search button). 
+and then use the Search feature (menu **Action : Search** or Search button). 
 
 <sup>*</sup> There are circumstances where running a search can produce this alert.
 Specifically, if all the physical dimensions (OD_Free, Wire_Dia, L_Free & Coils_T) of a 
@@ -82,7 +82,7 @@ Increase | &nbsp; | Decrease
  L_Free  | &nbsp; | Wire_Dia  
  &nbsp;  | &nbsp; | Coils_T
 
-It may also possible to use Search (menu Action : Search or Search button) to clear this alert. 
+It may also possible to use Search (menu **Action : Search** or Search button) to clear this alert. 
 If not immediately successful, confirm that Wire_Dia is in Free status and try Search again. 
 
 See also: 
@@ -108,7 +108,7 @@ Increase  | &nbsp; | Decrease
  Wire_Dia | &nbsp; | OD_Free  
  &nbsp;   | &nbsp; | Force_2
 
-It may also possible to use Search (menu Action : Search or Search button) to clear this alert. 
+It may also possible to use Search (menu **Action : Search** or Search button) to clear this alert. 
 If not immediately successful, confirm that Wire_Dia is in Free status and try Search again. 
 
 Compression spring lengths are ordered from the largest (L_Free) to L_1 to L_2 to the smallest (L_Solid). 
@@ -163,11 +163,12 @@ ___
 Alert entry #C106
 ## Default constraint not enabled 
   
-Disabling default constraints is not recommended.  
+Disabling default constraints is not recommended. 
+Adjust the constraint value instead. 
 
 This alert is produced when constraints enabled by default are disabled. 
-Also, this alert can be produced for designs created and saved with older versions of the software. 
-Specifically, constraints on Spring_Index previously were not enabled by default. 
+This alert can be also be produced for designs created and saved with older versions of the software.
+Specifically, constraints on Spring_Index were not enabled by default in older designs. 
 If this alert is associated with Spring_Index on an older design, it may be ignored. 
 Better yet, clear the alert by enabling MIN and MAX constraints on Spring_Index. 
 
@@ -179,7 +180,7 @@ For example:
  - A lower constraint on deflection at the first operating point (Deflect_1) 
 prevents Search from generating negative values for force and deflection at point 1. 
  - Constraints on Spring_Index insure that designs produced by the software are within the range of manufacturability.
- Consult your manufacturer regarding capabilities and costs. 
+For custom springs, consult your manufacturer regarding capabilities and costs. 
  - disabling the lower (MIN) constraint on factor of safety at solid (FS_Solid MIN) 
 allows Search to return a design that would "set" (not return to the original free length if fully deflected) 
 and declare it as "feasible". 
@@ -275,7 +276,7 @@ Increase OD_Free or reduce L_Free in order to reduce the tendency to buckle.
 In order to design a spring that does not have a tendency to buckle, 
 enable the Slenderness MAX constraint, 
 set that MAX constraint to a value close to 4.0 
-and run the Search feature (menu Action : Search or Search button). 
+and run the Search feature (menu **Action : Search** or Search button). 
 
 ___
 

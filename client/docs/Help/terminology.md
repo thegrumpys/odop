@@ -75,12 +75,19 @@ ___
 ___
 
 ## INDEPENDENT VARIABLES &nbsp; (inputs, design parameters) 
-The independent variables are the inputs of the design equations. 
+The independent variables are the **inputs** of the design equations. 
 They are the quantities on the right hand side of the equals sign that 
-can be arbitrarily selected by the designer or search routine. 
-Once values are selected for each independent variable, 
-the design is completely determined. 
-For independent variables, a Fix status reduces the computational demand 
+can be arbitrarily selected by the designer or search algorithm. 
+Once values are selected for all independent variables, 
+the design is completely determined.  
+
+In engineering design optimization, 
+independent variables are the quantities that are changed by the designer in order to optimize the design. 
+Dependent variables are the quantities that are affected by the independent variables. 
+The goal of optimization is to find the optimal values of the independent variables that 
+result in the best performance of the dependent variables
+
+For independent variables, a Fixed status reduces the computational demand 
 of the numerical search problem. 
 See the [Fix](terminology.html#fix) entry below for more details. 
 
@@ -90,15 +97,21 @@ ___
 ___
 
 ## DEPENDENT VARIABLES &nbsp; (outputs, state variables) 
-The dependent variables are the outputs of the design equations. 
+The dependent variables are the **outputs** of the design equations. 
 They are the quantities on the left hand side of the equal sign. 
 Frequently, dependent variables are measures of the performance of a given 
 design and can be thought of as indicating the "state" of the design. 
 A [Search](terminology.html#search) is required to establish appropriate values of the 
-independent variables to produce the desired value of a dependent 
-variable in Fix status. 
-A a dependent variable in Fix status increases the 
-computational demand of the numerical search problem. 
+independent variables to produce the desired values of dependent variables. 
+The desired values are expressed by constraints and Fixed status.  
+
+In engineering design optimization, 
+dependent variables are the quantities that are affected by the independent variables. 
+The goal of optimization is to find the optimal values of the independent variables that 
+result in the best performance of the dependent variables .
+
+A dependent variable in Fixed status increases the computational demand 
+of the numerical search problem. 
 See the [FIX](terminology.html#fix) entry below for more details. 
 
 ___

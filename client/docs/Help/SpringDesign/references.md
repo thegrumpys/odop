@@ -1,4 +1,6 @@
-# Spring Design References
+# References
+
+## Spring Design References
 
  There are many excellent sources of information on spring design.  Several
  on the following list were consulted in the development of the ODOP:Spring
@@ -73,8 +75,10 @@ Additional resources available on the Internet include:
  - [Wikipedia: Coil spring](https://en.wikipedia.org/wiki/Coil_spring)   
  - [Wikipedia: Roark's Formulas for Stress and Strain](https://en.wikipedia.org/wiki/Roark%27s_Formulas_for_Stress_and_Strain)   
  - [Wikipedia: Goodman relation](https://en.wikipedia.org/wiki/Goodman_relation)
+ - [Mechanical Springs (Wahl)](https://babel.hathitrust.org/cgi/pt?id=uc1.$b76475)
  - [Associated Spring - Barnes Group: Engineering Guide to Spring Design](https://asbg.com/engineering-guide-to-spring-design.aspx)   
  - [RoyMech - Helical Spring Design](https://www.roymech.co.uk/Useful_Tables/Springs/Springs_helical.html)   
+ - [Spring Designer's Handbook (Carlson)](https://automaterials.files.wordpress.com/2018/09/spring-designers-handbook-harold-carlson-0824766237.pdf)
  
  
  &nbsp;
@@ -87,6 +91,27 @@ Additional resources available on the Internet include:
     Oak Brook, Illinois  60523
     telephone: 630-495-8588
    
+
+&nbsp;
+
+
+## Design Optimization References
+
+    Algorithms for Optimization
+    Mykel J. Kochenderfer and Tim A. Wheeler 
+    520 pp., 8 x 9 in, 237 color illus.
+    ISBN: 9780262039420
+    Publisher: The MIT Press; March 2019
+
+&nbsp;
+
+Additional resources available on the Internet include:   
+
+ - [Wikipedia: Design optimization](https://en.wikipedia.org/wiki/Design_optimization)  
+ - [Wikipedia: Pattern Search](https://en.wikipedia.org/wiki/Pattern_search_(optimization))  
+ - [Engineering Design Optimization (Martins, Ning)](https://mdobook.github.io)  
+ - [Algorithms for Optimization (Kochenderfer, Wheeler)](https://mitpress.mit.edu/9780262039420/algorithms-for-optimization/)  
+
 &nbsp;
 
 [Spring Design Topics](/docs/Help/SpringDesign)   

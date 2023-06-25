@@ -411,6 +411,10 @@ ___
  Factor of Safety may be interpreted as: 
 "How much better this design is than it HAS to be." 
 
+In other words, 
+the Factor of Safety is a measure of how much stronger a system is than 
+it needs to be for an intended load.
+
 **Example:**   
 A design with a factor of safety of 2.0 has stresses that are half of the 
 allowable stresses and thus "it is twice as good as it HAS to be". 
