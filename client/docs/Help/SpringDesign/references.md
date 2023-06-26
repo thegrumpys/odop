@@ -67,19 +67,6 @@
     Published by Society of Automotive Engineers  (1990)
     ISBN 10: 0898837774  ISBN 13: 9780898837773
 
-&nbsp;
-
-Additional resources available on the Internet include:   
-
- - [Wikipedia: Spring (device)](https://en.wikipedia.org/wiki/Spring_(device))   
- - [Wikipedia: Coil spring](https://en.wikipedia.org/wiki/Coil_spring)   
- - [Wikipedia: Roark's Formulas for Stress and Strain](https://en.wikipedia.org/wiki/Roark%27s_Formulas_for_Stress_and_Strain)   
- - [Wikipedia: Goodman relation](https://en.wikipedia.org/wiki/Goodman_relation)
- - [Mechanical Springs (Wahl)](https://babel.hathitrust.org/cgi/pt?id=uc1.$b76475)
- - [Associated Spring - Barnes Group: Engineering Guide to Spring Design](https://asbg.com/engineering-guide-to-spring-design.aspx)   
- - [RoyMech - Helical Spring Design](https://www.roymech.co.uk/Useful_Tables/Springs/Springs_helical.html)   
- - [Spring Designer's Handbook (Carlson)](https://automaterials.files.wordpress.com/2018/09/spring-designers-handbook-harold-carlson-0824766237.pdf)
- 
  
  &nbsp;
 
@@ -91,6 +78,21 @@ Additional resources available on the Internet include:
     Oak Brook, Illinois  60523
     telephone: 630-495-8588
    
+&nbsp;
+
+Additional spring design resources available on the Internet include:   
+
+ - [Wikipedia: Spring (device)](https://en.wikipedia.org/wiki/Spring_(device))   
+ - [Wikipedia: Coil spring](https://en.wikipedia.org/wiki/Coil_spring)   
+ - [Wikipedia: Roark's Formulas for Stress and Strain](https://en.wikipedia.org/wiki/Roark%27s_Formulas_for_Stress_and_Strain)   
+ - [Wikipedia: Goodman relation](https://en.wikipedia.org/wiki/Goodman_relation)
+ - [Mechanical Springs (Wahl)](https://babel.hathitrust.org/cgi/pt?id=uc1.$b76475)
+ - [Associated Spring - Barnes Group: Engineering Guide to Spring Design](https://asbg.com/engineering-guide-to-spring-design.aspx)   
+ - [RoyMech - Helical Spring Design](https://www.roymech.co.uk/Useful_Tables/Springs/Springs_helical.html)   
+ - [Spring Designer's Handbook (Carlson)](https://automaterials.files.wordpress.com/2018/09/spring-designers-handbook-harold-carlson-0824766237.pdf)   
+ - [Spring Designer's Handbook (Carlson) at Scribd](https://www.scribd.com/document/536964361/Spring-Designers-Handbook-Harold-Carlson-0824766237)   
+ - [Handbook of Spring Design (SMI 1991)](https://vdocuments.mx/spring-design-handbook-565573b111cd9.html)   
+ - [Handbook of Spring Design (SMI 2002)](https://pdfcoffee.com/qdownload/smi-handbook-of-spring-designpdf-5-pdf-free.html)   
 
 &nbsp;
 
@@ -105,7 +107,7 @@ Additional resources available on the Internet include:
 
 &nbsp;
 
-Additional resources available on the Internet include:   
+Additional design optimization resources available on the Internet include:   
 
  - [Wikipedia: Design optimization](https://en.wikipedia.org/wiki/Design_optimization)  
  - [Wikipedia: Pattern Search](https://en.wikipedia.org/wiki/Pattern_search_(optimization))  
