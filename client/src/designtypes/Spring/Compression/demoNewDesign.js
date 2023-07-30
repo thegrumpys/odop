@@ -351,7 +351,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    Select (click on) the <b>Exit</b> button to end this tutorial session.
+                    Select (click on) the <b>Close</b> button to end this tutorial session.
                     </p>
                     <br />
                 </>

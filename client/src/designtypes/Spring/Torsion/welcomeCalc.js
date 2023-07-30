@@ -40,7 +40,7 @@ export const execute = {
 
                     <p>
                     Push the blue "Next" button in the upper right to show the next page of instructions, hints and tips. 
-                    Push the darker gray "Exit" button to close (hide) this light green panel. 
+                    Push the darker gray "Close" button to close (hide) this light green panel. 
                     </p>
                 </>
             ),
@@ -56,7 +56,7 @@ export const execute = {
 //                changeSymbolValue("Coils_T", Number.NaN),
 //                changeSymbolValue("Force_1", Number.NaN),
 //                changeSymbolValue("Force_2", Number.NaN),
-                changeResultTerminationCondition('When finished reading all four of the Welcome pages above, use the gray "Exit" button in the upper right to close the light green panel.'),
+                changeResultTerminationCondition('When finished reading all four of the Welcome pages above, use the gray "Close" button in the upper right to close the light green panel.'),
             ]
         },
         {
@@ -165,7 +165,7 @@ export const execute = {
                    </p>
                     
                     <p>
-                    Push the gray "Exit" button in the upper right to close this light green panel.
+                    Push the gray "Close" button in the upper right to close this light green panel.
                    </p>
                     
                     <p>

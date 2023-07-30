@@ -34,7 +34,7 @@ export const execute = {
                     smallnum = 1e-8<br />
                     <br />
                     Reset original values with <b>File : Preferences</b> Restore Defaults<br />
-                    Click Exit to close.
+                    Click Close to end.
                 </>
             ),
             actions: [

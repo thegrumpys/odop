@@ -27,6 +27,7 @@ class Routes extends Component {
     this.onAuthRequired = this.onAuthRequired.bind(this);
         this.state = {
             modal: false,
+            show_welcome: true,
         };
   }
 
@@ -74,7 +75,9 @@ class Routes extends Component {
 //      console.log('In Routes.promptLoadAutoSave this=',this);
       this.setState({
           modal: true,
+          show_welcome: false,
       });
+      logUsage('event', 'Routes', { event_label: 'type: ' + this.props.type + ' prompt autoSave' });
   }
   
   loadAutoSaveDesign() {
@@ -99,13 +102,10 @@ class Routes extends Component {
       this.setState({
           modal: false,
       });
-//      if (config.url.type === config.env.type && config.url.name === config.env.name) { // If defaults used then just load initial state
-//          console.log('In Routes.loadDefaultDesign loadInitialState config.env.type=',config.env.type,'config.env.units=',config.env.units);
-//          this.loadInitialState(config.env.type,config.env.units);
-//      } else {
-//          console.log('In Routes.loadDefaultDesign getDesign config.url.type=',config.url.type,'config.url.name=',config.url.name);
-          this.getDesign(this.props.user, config.url.type, config.url.name);
-//      }
+      if (!this.state.show_welcome) {
+        config.url.execute = undefined; // Turn off execute
+      }
+      this.getDesign(this.props.user, config.url.type, config.url.name);
       logUsage('event', 'Routes', { event_label: 'type: ' + this.props.type + ' load defaultDesign' });
   }
   

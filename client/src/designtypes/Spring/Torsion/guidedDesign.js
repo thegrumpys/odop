@@ -570,7 +570,7 @@ export const execute = {
                     <br />
                     
                     <p>
-                    When ready, use the "Exit" button to resume regular (non-tutorial) operation of the program 
+                    When ready, use the "Close" button to resume regular (non-tutorial) operation of the program 
                     with the existing design.
                     </p>
                 </>

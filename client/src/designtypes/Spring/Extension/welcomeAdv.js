@@ -40,7 +40,7 @@ export const execute = {
 
                     <p>
                     Push the blue "Next" button in the upper right to show the next page of instructions, hints and tips. 
-                    Push the darker gray "Exit" button to close (hide) this light green panel. 
+                    Push the darker gray "Close" button to close (hide) this light green panel. 
                     </p>
                 </>
             ),
@@ -48,7 +48,7 @@ export const execute = {
 //                                       We have concluded that AutoSave here is not a good idea
 //                saveAutoSave(),
                 logUsage('event','welcomeAdv', { event_label: 'Page 01 of 04' }),
-                changeResultTerminationCondition('When finished reading all 4 pages, use the gray "Exit" button in the upper right to close the light green panel above.'),
+                changeResultTerminationCondition('When finished reading all 4 pages, use the gray "Close" button in the upper right to close the light green panel above.'),
             ]
         },
         {
@@ -140,7 +140,7 @@ export const execute = {
                    </p>
                     
                     <p>
-                    Push the gray "Exit" button in the upper right to close this light green panel.
+                    Push the gray "Close" button in the upper right to close this light green panel.
                    </p>
                     
                     <p>

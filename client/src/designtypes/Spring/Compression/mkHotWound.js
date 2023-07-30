@@ -54,7 +54,7 @@ export const execute = {
                     make the value of the user field in the design table null.
                     </p>
                     <p>
-                    When ready, use the "Exit" button to resume regular operation of the program.
+                    When ready, use the "Close" button to resume regular operation of the program.
                     </p>
                 </>
             ),
