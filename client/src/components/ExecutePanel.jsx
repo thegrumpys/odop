@@ -213,7 +213,7 @@ class ExecutePanel extends Component {
                         <div className="col-7 text-left align-middle">
                             <Button className="float-right ml-1" variant="primary" onClick={this.onNext} disabled={this.state.steps[this.state.step+1] === undefined}>Next</Button>
                             <Button className="float-right ml-1" variant="secondary" onClick={this.onBack} disabled={this.state.step === 0}>Back</Button>
-                            <Button className="float-right ml-1" variant="secondary" onClick={this.onCancel}>Exit</Button>
+                            <Button className="float-right ml-1" variant="secondary" onClick={this.onCancel}>Close</Button>
                         </div>
                         <hr/>
                     </Row>
