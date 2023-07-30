@@ -361,8 +361,14 @@ export function migrate(design) {
     case '12':
         // Current model version
         // console.log('Convert from 12 to 13');
+        design.result.design_valid = true;
+        migrated_design.version = '13'; // last thing... set the migrated model version
+
+    case '13':
+        // Current model version
+        // console.log('Convert from 13 to 14');
         // To be defined - presently do nothing
-        // migrated_design.version = '13'; // last thing... set the migrated model version
+        // migrated_design.version = '14'; // last thing... set the migrated model version
 
         break; // Do not copy this break
     default: // Unknown

@@ -130,7 +130,12 @@ class ResultTable extends Component {
         var feasibility_string;
         var feasibility_class;
         var display_search_button;
-        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+//        console.log('this.props.objective_value=',this.props.objective_value,'this.props.design_valid=',this.props.design_valid);
+        if (this.props.design_valid === false) {
+            feasibility_string = "INVALID DESIGN";
+            feasibility_class = " ";
+            display_search_button = true;
+        } else if (this.props.objective_value > 4*this.props.system_controls.objmin) {
             feasibility_string = "NOT FEASIBLE";
             feasibility_class = "text-not-feasible ";
             display_search_button = true;
@@ -277,6 +282,7 @@ const mapStateToProps = state => ({
     objective_value: state.model.result.objective_value,
     termination_condition: state.model.result.termination_condition,
     search_completed: state.model.result.search_completed,
+    design_valid: state.model.result.design_valid,
 });
 
 const mapDispatchToProps = {

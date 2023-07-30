@@ -28,6 +28,7 @@ import {
     CHANGE_RESULT_OBJECTIVE_VALUE, 
     CHANGE_RESULT_TERMINATION_CONDITION, 
     CHANGE_RESULT_SEARCH_COMPLETED, 
+    CHANGE_RESULT_DESIGN_VALID, 
     
     CHANGE_SYSTEM_CONTROLS_VALUE, 
     CHANGE_LABELS_VALUE, 
@@ -274,6 +275,15 @@ export function changeResultSearchCompleted(search_completed=false) {
         type: CHANGE_RESULT_SEARCH_COMPLETED,
         payload: {
             search_completed
+        }
+    }
+}
+
+export function changeResultDesignValid(design_valid=true) {
+    return {
+        type: CHANGE_RESULT_DESIGN_VALID,
+        payload: {
+            design_valid
         }
     }
 }

@@ -25,6 +25,7 @@ import { STARTUP,
     CHANGE_RESULT_OBJECTIVE_VALUE,
     CHANGE_RESULT_TERMINATION_CONDITION,
     CHANGE_RESULT_SEARCH_COMPLETED,
+    CHANGE_RESULT_DESIGN_VALID,
 
     CHANGE_SYSTEM_CONTROLS_VALUE,
     CHANGE_LABELS_VALUE,
@@ -470,6 +471,17 @@ export function reducers(state, action) {
                 result: {
                     ...state.model.result,
                     search_completed: action.payload.search_completed
+                }
+            }
+        });
+
+    case CHANGE_RESULT_DESIGN_VALID:
+        return Object.assign({}, state, {
+            model: {
+                ...state.model,
+                result: {
+                    ...state.model.result,
+                    design_valid: action.payload.design_valid
                 }
             }
         });

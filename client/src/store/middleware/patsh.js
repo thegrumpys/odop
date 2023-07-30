@@ -72,7 +72,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
 //                console.log('@@@ itno=',itno,'s=',s,'calc=',s + tol * Math.abs(s_psi),'s_psi=',s_psi,'compare=', s + tol * Math.abs(s_psi) >= s_psi);
                 s_psi = s; // s_psi: the functional value at the base point
                 if (s_psi < objmin) { // Are we done? Leave by door #1
-                    NCODE = 'Search terminated when design reached feasibility (Objective value is less than OBJMIN)';
+                    NCODE = 'Search terminated (Objective value is less than OBJMIN)';
                     if (itno <= 2) {
                         NCODE += '. Low iteration count may produce low precision results.';
                     } else {
@@ -109,7 +109,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
             }
         }
     } // goto 1
-    NCODE = 'Search terminated when design reached feasibility (Objective value is less than OBJMIN)';
+    NCODE = 'Search terminated (Objective value is less than OBJMIN)';
     if (itno <= 2) {
         NCODE += '. Low iteration count may produce low precision results.';
     } else {
