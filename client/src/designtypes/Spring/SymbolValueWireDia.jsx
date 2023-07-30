@@ -599,13 +599,16 @@ class SymbolValueWireDia extends Component {
                         {display_search_button ? 
                             <>
                                 {(this.props.element.lmin & FIXED && free_variables.length > 0) ? 
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>
-                                        The Independent Variable {this.props.element.name} is Fixed. Search manipulates only the values of Free Independent Variables. Press this <img src="SearchButton.png" alt="SearchButton"/> button to alter the values, {free_variables} to locate a feasible solution (if available).
-                                        </Tooltip>}>
-                                            <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>
-                                        </OverlayTrigger>
+                                    (this.props.search_completed ?
+                                        <Button variant="secondary" onClick={this.onSearchRequest} disabled><b>Search</b> (solve)</Button>
                                     :
-                                        <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>}
+                                        <OverlayTrigger placement="top" overlay={<Tooltip>
+                                            The Independent Variable {this.props.element.name} is Fixed. Search manipulates only the values of Free Independent Variables. Press this <img src="SearchButton.png" alt="SearchButton"/> button to alter the values, {free_variables} to locate a feasible solution (if available).
+                                            </Tooltip>}>
+                                            <Button variant="primary" onClick={this.onSearchRequest}><b>Search</b> (solve)</Button>
+                                        </OverlayTrigger>)
+                                :
+                                    <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>}
                                 <Button variant={this.props.search_completed ? "primary" : "secondary"} disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                             </>
                         :
