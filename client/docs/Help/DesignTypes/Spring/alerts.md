@@ -24,12 +24,13 @@ Alert entry #S51
 ## Wire_Dia > ID_Free 
 The wire diameter (Wire_Dia) is greater than the coil inside diameter (ID_Free).
 
-Most spring wire is not sufficiently ductile to be wound this tight. 
+Most spring wire is not sufficiently ductile to be wound this tightly. 
 
-Resolve this alert by increasing the value of OD_Free or decreasing the value of Wire_Dia. 
+Resolve this alert by increasing the value of the variable controlling coil diameter
+(OD_Free, Mean_Dia or ID_Free) or decreasing the value of Wire_Dia. 
 
 Alternatively, confirm that the Spring_Index MIN constraint is enabled at a constraint level of 4 or greater 
-and run Search (menu Action : Search or the Search button). 
+and run Search (menu **Action : Search** or the Search button). 
 
 Before finalizing a design that has this alert outstanding, 
 check with the spring manufacturer regarding capabilities and costs. 
@@ -91,16 +92,16 @@ ___
 
 Alert entry #S54
 ## Over-design concern 
-The term "over-design" implies that this design may be excessively conservative. 
-Its Factor of Safety at operating point 2 exceeds the maximum constraint. 
+The term "over-design" implies that this design may be too conservative. 
+Its Factor of Safety at operating point 2 exceeds the maximum constraint (FS_2 MAX). 
 
-Suggest investigating a smaller wire diameter. 
-One approach is to run Search (menu Action : Search or Search button) with Wire_Dia in Free status. 
+Try investigating a smaller wire diameter. 
+One approach is to run Search (menu **Action : Search** or Search button) with Wire_Dia in Free status. 
 
 Later, when ready to finalize the design, 
 investigate design variations with the nearest standard wire diameters. 
-Select and Fix the nearest smaller wire diameter.  Run Search.
-Select and Fix the nearest larger wire diameter.  Run Search.
+Select and Fix the nearest smaller standard wire diameter.  Run Search.
+Select and Fix the nearest larger standard wire diameter.  Run Search.
 Compare the results. 
 It may be necessary to accept a small amount of over-design in order to utilize a standard wire diameter. 
 
@@ -130,17 +131,33 @@ ___
 
 Alert entry #S56
 ## Spring Index manufacturability concern 
-Spring_Index is the ratio: Mean_Dia / Wire_Dia. 
+Spring_Index is the ratio of Mean Diameter to Wire Diameter. 
+Specifically: Mean_Dia / Wire_Dia. 
 
 The presence of this alert indicates that the current design is outside the range 
 of constraints Spring_Index MIN to Spring_Index MAX. 
+This design may be difficult to manufacture. 
 
 Spring index less than 4 is considered "difficult to manufacture". 
 Spring index greater than 25 is considered "difficult to control". 
 
-Ideally, spring index should be in the range of 4 to 12 in order to achieve spring industry standard tolerances. 
+Ideally, spring index should be in the range of 6 to 12 in order to easily achieve spring industry standard tolerances. 
 Reduced coiling machine speeds, specialized fixtures and other tooling may be required outside this range. 
-Check with the spring manufacturer regarding capabilities and costs. 
+For custom springs, check with the spring manufacturer regarding capabilities and costs. 
+
+The value of Mean_Dia can be controlled in the Advanced View and appears in Report 3. 
+
+**To resolve this alert:**  
+ - If Spring_Index is less than Spring_Index MIN: decrease Wire_Dia or 
+increase the variable controlling coil diameter (OD_Free, Mean_Dia or ID_Free).  
+
+ - If Spring_Index is greater than Spring_Index MAX: increase Wire_Dia or 
+decrease the variable controlling coil diameter (OD_Free, Mean_Dia or ID_Free).  
+
+Alternatively, confirm that either (or both) Wire_Dia and
+the variable controlling coil diameter (OD_Free, Mean_Dia or ID_Free) 
+are in Free status and (re-)run Search. 
+
 
 &nbsp; 
 
@@ -230,10 +247,11 @@ Alert entry #S60
 ## Default constraint not enabled 
   
 Disabling default constraints is not recommended. 
+Adjust the constraint value instead. 
 
 This alert is produced when constraints enabled by default are disabled. 
-Also, this alert can be produced for designs created and saved with older versions of the software. 
-Specifically, constraints on Spring_Index previously were not enabled by default. 
+This alert can be also be produced for designs created and saved with older versions of the software. 
+Specifically, constraints on Spring_Index were not enabled by default in older designs. 
 If this alert is associated with Spring_Index on an older design, it may be ignored. 
 Better yet, clear the alert by enabling MIN and MAX constraints on Spring_Index. 
 
@@ -245,7 +263,7 @@ For example:
  - A lower constraint on deflection at the first operating point (Deflect_1) 
 prevents Search from generating negative values for force and deflection at point 1. 
  - Constraints on Spring_Index insure that designs produced by the software are within the range of manufacturability. 
- Consult your manufacturer regarding capabilities and costs. 
+ For custom springs, consult your manufacturer regarding capabilities and costs. 
  - Constraints on factor of safety at the second operating point (FS_2) insure that stresses are in an appropriate range. 
  
     + Disabling FS_2 MIN allows Search to return a highly over-stressed design and declare it as "feasible". 
@@ -261,7 +279,7 @@ ___
 <a id="TensileValueSuspect"></a>  
 ___
 
-Alert entry #S60
+Alert entry #S61
 ## Value of Tensile is suspect 
   
 The value of Tensile strength is close to or less than zero.
