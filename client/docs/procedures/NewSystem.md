@@ -11,5 +11,4 @@ Installing a new ODOP system starts with:
 * GitHub
 * Heroku ?
 * MySQL database ?
-Simple change
 
