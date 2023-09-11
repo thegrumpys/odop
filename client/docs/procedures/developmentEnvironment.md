@@ -1,11 +1,11 @@
 # Development Environment
 
-The following steps set up a MS Windows programming development environment with the necessary tools to edit, compile and debug the ODOP software.
+The following steps set up a MS Windows programming development environment with the necessary tools to communicate, share screens, edit and control source code, compile, run and debug the ODOP software.
 
-Source control
-Web access to the [GitHub repository](https://github.com/thegrumpys/odop).
+Source control:  
+Web access to the [GitHub repository](https://github.com/thegrumpys/odop).  
+
 _____
-
 
 Starting with fresh Windows install
 
@@ -13,11 +13,11 @@ Install Zoom from https://zoom.us
 
 
 Slack can be used without an install.
-https://app.slack.com/
+https://app.slack.com/  
 
+_____
 
-NVM
-***
+### NVM
 
 https://github.com/coreybutler/nvm-windows/releases
 
@@ -40,13 +40,11 @@ nvm install 18
 nvm use 14
 node -v
 
+_____
 
+### GIT
 
-
-GIT
-***
-Go to:
-https://git-scm.com/download/win
+Go to: https://git-scm.com/download/win
 Download (Git-2.42.0.2-64-bit.exe)
 Execute
 Accept all defaults
@@ -54,11 +52,10 @@ Install
 Finish
 Test by opening new command window and entering "git"
 
+_____
 
+### Eclipse  
 
-
-Eclipse
-*******
 https://www.eclipse.org/downloads/packages/
 Download installer
 Execute installer
@@ -101,9 +98,9 @@ Enter passphrase when requested,
 add to the Eclipse secure store, setting up a master password (and challenge questions)
 Verify change successfully pushed.
 
+_____
 
-Preparing for Development 
-*************************
+### Preparing for Development  
 
 cd git\odop
 npm install
@@ -125,32 +122,34 @@ For client:
 Copy .env.dist contents into .env file
 Replace @@@ lines with password info (or copy from previous instance).
 
+_____
 
+### Development startup in server window  
 
-
-Development startup in server window
-************************************
 npm run harp-compile
 npm run server
 Acknowlege Windows Firewall pop-up  (one-time only)
 
+_____
 
-Development startup in client window
-************************************
-
-
-
-
-
-Heroku
-******
+### Development startup in client window  
 
 
 
 
 
-MySQL
-*****
+_____
+
+### Heroku  
+
+
+
+
+
+_____
+
+### MySQL  
+
 
 
 
