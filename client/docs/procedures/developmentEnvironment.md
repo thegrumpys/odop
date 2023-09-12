@@ -12,9 +12,8 @@ Starting with fresh Windows install
 Install Zoom from https://zoom.us
 
 
-Slack can be used without an install.
-https://app.slack.com/  
-There is no problem being logged in to Slack concurrently on multiple computers.
+Slack can be used without an install: https://app.slack.com/  
+There is no problem being logged in to Slack on multiple computers concurrently.
 
 _____
 
@@ -60,7 +59,7 @@ _____
 https://www.eclipse.org/downloads/packages/  
 Download installer  
 Execute installer  
-Choose Eclipse IDE for Enterprise Java and Web Developers  
+Choose: Eclipse IDE for Enterprise Java and Web Developers  
 Install  
 Launch Eclipse  
 
@@ -111,25 +110,31 @@ In Eclipse, in root directory for the server, create .env file
 In Eclipse Project Explorer panel, 
 select vertical 3 dot icon, select Filters and Customization...  
 uncheck the .* resource entry, click OK to show .env.dist file  
-Copy .env.dist contents into .env file  
-Replace @@@ lines with password info (or copy from previous instance).  
+Copy .env.dist contents into .env file and replace @@@ lines with password info  
+or  
+copy from previous instance.  
 
 #### For client:  
-Copy .env.dist contents into .env file  
-Replace @@@ lines with password info (or copy from previous instance).  
+In Eclipse, in client directory,  
+Copy .env.dist contents into .env file and 
+replace @@@ lines with password info.  
+or  
+copy entire .env file from a previous instance.  
 
 _____
 
-### Development startup in server window  
+### Development startup in server command window  
 
-npm run harp-compile
-npm run server
-Acknowledge Windows Firewall pop-up  (one-time only)
+cd git\odop  
+npm run harp-compile  
+npm run server  
+Acknowledge Windows Firewall pop-up  (one-time only)  
 
 _____
 
-### Development startup in client window  
+### Development startup in client command window  
 
+cd git\odop\client  
 npm start
 
 
