@@ -75,14 +75,14 @@ Finish
 
 Create new public / private encryption key or 
 copy .ssh directory from old computer to new computer  
-This includes id_rsa and id_rsa.pub files.  
-No need to copy known_hosts or other files.  
+This includes `id_rsa` and `id_rsa.pub` files.  
+No need to copy `known_hosts` or other files.  
 
 Go to Git Repositories tab in Eclipse  
 Right-click ODOP; Select Properties  
 at bottom, Modify remote origin url property  
-  from: https://github.com/thegrumpys/odop.git  
-  to: git@github.com:thegrumpys/odop.git 
+**from:** https://github.com/thegrumpys/odop.git  
+**to:** git@github.com:thegrumpys/odop.git 
 
 File; New; Project ...; General - Project  
 Enter project name ODOP  
@@ -98,6 +98,10 @@ Verify change successfully pushed.
 _____
 
 ### Preparing for Development  
+
+<!---
+What ever happened to the npm init ?  
+-->
 
 cd git\odop  
 npm install  
@@ -126,7 +130,7 @@ _____
 ### Development startup in server command window  
 
 cd git\odop  
-npm run harp-compile  
+npm run harp-compile  (first time and after every doc change)
 npm run server  
 Acknowledge Windows Firewall pop-up  (one-time only)  
 
@@ -143,6 +147,7 @@ _____
 
 ### Heroku  
 
+Download CLI tools
 
 
 
@@ -151,12 +156,23 @@ _____
 
 ### MySQL  
 
+Download administrative GUI utility MySQL Workbench:
+https://dev.mysql.com/downloads/workbench/
 
 
 
+_____
 
+### Okta  
 
+SpringDesignSoftware.org-dev-729070  
 
+Org URL: https://dev-729070.okta.com  
 
+_____
+
+### Release Procedure
+
+See [Release Procedure](release.html)
 
 
